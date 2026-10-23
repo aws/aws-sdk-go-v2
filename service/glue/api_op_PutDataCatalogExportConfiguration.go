@@ -5,7 +5,9 @@ package glue
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/glue/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/glue/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -46,6 +48,26 @@ type PutDataCatalogExportConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutDataCatalogExportConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutDataCatalogExportConfigurationInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutDataCatalogExportConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.PutDataCatalogExportConfigurationInput_ClientToken, *v.ClientToken)
+	}
+	if v.EncryptionConfiguration != nil {
+		s.WriteStruct(schemas.PutDataCatalogExportConfigurationInput_EncryptionConfiguration)
+		v.EncryptionConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ExportSetting != "" {
+		s.WriteString(schemas.PutDataCatalogExportConfigurationInput_ExportSetting, string(v.ExportSetting))
+	}
+}
+
 // The export configuration returned by the PutDataCatalogExportConfiguration
 // operation.
 type PutDataCatalogExportConfigurationOutput struct {
@@ -62,13 +84,44 @@ type PutDataCatalogExportConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutDataCatalogExportConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutDataCatalogExportConfigurationOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutDataCatalogExportConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EncryptionConfiguration != nil {
+		s.WriteStruct(schemas.PutDataCatalogExportConfigurationOutput_EncryptionConfiguration)
+		v.EncryptionConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ExportSetting != "" {
+		s.WriteString(schemas.PutDataCatalogExportConfigurationOutput_ExportSetting, string(v.ExportSetting))
+	}
+}
+func (v *PutDataCatalogExportConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PutDataCatalogExportConfigurationOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PutDataCatalogExportConfigurationOutput_EncryptionConfiguration:
+			v.EncryptionConfiguration = &types.ExportEncryptionConfiguration{}
+			return v.EncryptionConfiguration.Deserialize(d)
+		case schemas.PutDataCatalogExportConfigurationOutput_ExportSetting:
+			var ev string
+			if err := d.ReadString(schemas.PutDataCatalogExportConfigurationOutput_ExportSetting, &ev); err != nil {
+				return err
+			}
+			v.ExportSetting = types.ExportSetting(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPutDataCatalogExportConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpPutDataCatalogExportConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutDataCatalogExportConfiguration, schemas.PutDataCatalogExportConfigurationInput, schemas.PutDataCatalogExportConfigurationOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpPutDataCatalogExportConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutDataCatalogExportConfiguration, schemas.PutDataCatalogExportConfigurationInput, schemas.PutDataCatalogExportConfigurationOutput), output: &PutDataCatalogExportConfigurationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

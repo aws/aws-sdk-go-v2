@@ -5,7 +5,9 @@ package mediaconvert
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/mediaconvert/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/mediaconvert/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -118,6 +120,55 @@ type CreateJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateJobRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccelerationSettings != nil {
+		s.WriteStruct(schemas.CreateJobRequest_AccelerationSettings)
+		v.AccelerationSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.BillingTagsSource != "" {
+		s.WriteString(schemas.CreateJobRequest_BillingTagsSource, string(v.BillingTagsSource))
+	}
+	if v.ClientRequestToken != nil {
+		s.WriteString(schemas.CreateJobRequest_ClientRequestToken, *v.ClientRequestToken)
+	}
+	serialize__listOfHopDestination(s, schemas.CreateJobRequest_HopDestinations, v.HopDestinations)
+	if v.JobEngineVersion != nil {
+		s.WriteString(schemas.CreateJobRequest_JobEngineVersion, *v.JobEngineVersion)
+	}
+	if v.JobTemplate != nil {
+		s.WriteString(schemas.CreateJobRequest_JobTemplate, *v.JobTemplate)
+	}
+	if v.Priority != nil {
+		s.WriteInt32(schemas.CreateJobRequest_Priority, *v.Priority)
+	}
+	if v.Queue != nil {
+		s.WriteString(schemas.CreateJobRequest_Queue, *v.Queue)
+	}
+	if v.Role != nil {
+		s.WriteString(schemas.CreateJobRequest_Role, *v.Role)
+	}
+	if v.Settings != nil {
+		s.WriteStruct(schemas.CreateJobRequest_Settings)
+		v.Settings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SimulateReservedQueue != "" {
+		s.WriteString(schemas.CreateJobRequest_SimulateReservedQueue, string(v.SimulateReservedQueue))
+	}
+	if v.StatusUpdateInterval != "" {
+		s.WriteString(schemas.CreateJobRequest_StatusUpdateInterval, string(v.StatusUpdateInterval))
+	}
+	serialize__mapOf__string(s, schemas.CreateJobRequest_Tags, v.Tags)
+	serialize__mapOf__string(s, schemas.CreateJobRequest_UserMetadata, v.UserMetadata)
+}
+
 type CreateJobOutput struct {
 
 	// Each job converts an input file into an output file or files. For more
@@ -131,13 +182,34 @@ type CreateJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateJobOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateJobResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Job != nil {
+		s.WriteStruct(schemas.CreateJobResponse_Job)
+		v.Job.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateJobResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateJobResponse_Job:
+			v.Job = &types.Job{}
+			return v.Job.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateJob, schemas.CreateJobRequest, schemas.CreateJobResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateJob, schemas.CreateJobRequest, schemas.CreateJobResponse), output: &CreateJobOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -7,6 +7,40 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/healthlake/types"
 )
 
+func ExampleAgentOutputMessageStream_outputUsage() {
+	var union types.AgentOutputMessageStream
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.AgentOutputMessageStreamMemberEndOfOutputEvent:
+		_ = v.Value // Value is types.EndOfOutputEvent
+
+	case *types.AgentOutputMessageStreamMemberErrorEvent:
+		_ = v.Value // Value is types.ErrorEvent
+
+	case *types.AgentOutputMessageStreamMemberHeartbeatEvent:
+		_ = v.Value // Value is types.HeartbeatEvent
+
+	case *types.AgentOutputMessageStreamMemberProgressEvent:
+		_ = v.Value // Value is types.ProgressEvent
+
+	case *types.AgentOutputMessageStreamMemberTextMessageEvent:
+		_ = v.Value // Value is types.TextMessageEvent
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.ErrorEvent
+var _ *types.TextMessageEvent
+var _ *types.HeartbeatEvent
+var _ *types.EndOfOutputEvent
+var _ *types.ProgressEvent
+
 func ExampleCreateDataTransformationProfileSource_outputUsage() {
 	var union types.CreateDataTransformationProfileSource
 	// type switches can be used to check the union value

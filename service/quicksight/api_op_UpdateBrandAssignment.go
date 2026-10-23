@@ -4,6 +4,8 @@ package quicksight
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/quicksight/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -38,6 +40,21 @@ type UpdateBrandAssignmentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateBrandAssignmentInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateBrandAssignmentRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateBrandAssignmentInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AwsAccountId != nil {
+		s.WriteString(schemas.UpdateBrandAssignmentRequest_AwsAccountId, *v.AwsAccountId)
+	}
+	if v.BrandArn != nil {
+		s.WriteString(schemas.UpdateBrandAssignmentRequest_BrandArn, *v.BrandArn)
+	}
+}
+
 type UpdateBrandAssignmentOutput struct {
 
 	// The Amazon Resource Name (ARN) of the brand.
@@ -52,13 +69,38 @@ type UpdateBrandAssignmentOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateBrandAssignmentOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateBrandAssignmentResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateBrandAssignmentOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BrandArn != nil {
+		s.WriteString(schemas.UpdateBrandAssignmentResponse_BrandArn, *v.BrandArn)
+	}
+	if v.RequestId != nil {
+		s.WriteString(schemas.UpdateBrandAssignmentResponse_RequestId, *v.RequestId)
+	}
+}
+func (v *UpdateBrandAssignmentOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateBrandAssignmentResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateBrandAssignmentResponse_BrandArn:
+			v.BrandArn = new(string)
+			return d.ReadString(schemas.UpdateBrandAssignmentResponse_BrandArn, v.BrandArn)
+		case schemas.UpdateBrandAssignmentResponse_RequestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.UpdateBrandAssignmentResponse_RequestId, v.RequestId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateBrandAssignmentMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateBrandAssignment{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateBrandAssignment, schemas.UpdateBrandAssignmentRequest, schemas.UpdateBrandAssignmentResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateBrandAssignment{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateBrandAssignment, schemas.UpdateBrandAssignmentRequest, schemas.UpdateBrandAssignmentResponse), output: &UpdateBrandAssignmentOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -22,8 +22,9 @@ var Json10QueryCompatible = smithy.NewServiceSchema(_Json10QueryCompatible, "209
 var ItemNotFound = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "aws.protocoltests.json",
 	Name:      "ItemNotFound",
-}, smithy.ShapeTypeStructure, 0, &smithytraits.AWSQueryError{ErrorCode: "aws.protocolstests.json#ItemNotFound",
-	StatusCode: 404})
+}, smithy.ShapeTypeStructure, 0, &smithytraits.Error{Type: "client"},
+	&smithytraits.AWSQueryError{ErrorCode: "aws.protocolstests.json#ItemNotFound",
+		StatusCode: 404})
 
 var GetItemInput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "aws.protocoltests.json",

@@ -4,7 +4,9 @@ package elasticsearchservice
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/elasticsearchservice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/elasticsearchservice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -36,6 +38,18 @@ type DeleteOutboundCrossClusterSearchConnectionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteOutboundCrossClusterSearchConnectionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteOutboundCrossClusterSearchConnectionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteOutboundCrossClusterSearchConnectionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CrossClusterSearchConnectionId != nil {
+		s.WriteString(schemas.DeleteOutboundCrossClusterSearchConnectionRequest_CrossClusterSearchConnectionId, *v.CrossClusterSearchConnectionId)
+	}
+}
+
 // The result of a DeleteOutboundCrossClusterSearchConnection operation. Contains details of deleted outbound connection.
 type DeleteOutboundCrossClusterSearchConnectionOutput struct {
 
@@ -48,13 +62,34 @@ type DeleteOutboundCrossClusterSearchConnectionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteOutboundCrossClusterSearchConnectionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteOutboundCrossClusterSearchConnectionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteOutboundCrossClusterSearchConnectionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CrossClusterSearchConnection != nil {
+		s.WriteStruct(schemas.DeleteOutboundCrossClusterSearchConnectionResponse_CrossClusterSearchConnection)
+		v.CrossClusterSearchConnection.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DeleteOutboundCrossClusterSearchConnectionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteOutboundCrossClusterSearchConnectionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteOutboundCrossClusterSearchConnectionResponse_CrossClusterSearchConnection:
+			v.CrossClusterSearchConnection = &types.OutboundCrossClusterSearchConnection{}
+			return v.CrossClusterSearchConnection.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteOutboundCrossClusterSearchConnectionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteOutboundCrossClusterSearchConnection{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteOutboundCrossClusterSearchConnection, schemas.DeleteOutboundCrossClusterSearchConnectionRequest, schemas.DeleteOutboundCrossClusterSearchConnectionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteOutboundCrossClusterSearchConnection{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteOutboundCrossClusterSearchConnection, schemas.DeleteOutboundCrossClusterSearchConnectionRequest, schemas.DeleteOutboundCrossClusterSearchConnectionResponse), output: &DeleteOutboundCrossClusterSearchConnectionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

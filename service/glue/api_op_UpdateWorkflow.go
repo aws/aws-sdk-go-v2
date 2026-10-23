@@ -4,6 +4,8 @@ package glue
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/glue/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -50,6 +52,25 @@ type UpdateWorkflowInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateWorkflowInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateWorkflowRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateWorkflowInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeWorkflowRunProperties(s, schemas.UpdateWorkflowRequest_DefaultRunProperties, v.DefaultRunProperties)
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateWorkflowRequest_Description, *v.Description)
+	}
+	if v.MaxConcurrentRuns != nil {
+		s.WriteInt32(schemas.UpdateWorkflowRequest_MaxConcurrentRuns, *v.MaxConcurrentRuns)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateWorkflowRequest_Name, *v.Name)
+	}
+}
+
 type UpdateWorkflowOutput struct {
 
 	// The name of the workflow which was specified in input.
@@ -61,13 +82,32 @@ type UpdateWorkflowOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateWorkflowOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateWorkflowResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateWorkflowOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateWorkflowResponse_Name, *v.Name)
+	}
+}
+func (v *UpdateWorkflowOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateWorkflowResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateWorkflowResponse_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.UpdateWorkflowResponse_Name, v.Name)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateWorkflowMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateWorkflow{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateWorkflow, schemas.UpdateWorkflowRequest, schemas.UpdateWorkflowResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateWorkflow{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateWorkflow, schemas.UpdateWorkflowRequest, schemas.UpdateWorkflowResponse), output: &UpdateWorkflowOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package lambda
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/lambda/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lambda/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -45,6 +47,31 @@ type UpdateCodeSigningConfigInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateCodeSigningConfigInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateCodeSigningConfigRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateCodeSigningConfigInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AllowedPublishers != nil {
+		s.WriteStruct(schemas.UpdateCodeSigningConfigRequest_AllowedPublishers)
+		v.AllowedPublishers.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CodeSigningConfigArn != nil {
+		s.WriteString(schemas.UpdateCodeSigningConfigRequest_CodeSigningConfigArn, *v.CodeSigningConfigArn)
+	}
+	if v.CodeSigningPolicies != nil {
+		s.WriteStruct(schemas.UpdateCodeSigningConfigRequest_CodeSigningPolicies)
+		v.CodeSigningPolicies.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateCodeSigningConfigRequest_Description, *v.Description)
+	}
+}
+
 type UpdateCodeSigningConfigOutput struct {
 
 	// The code signing configuration
@@ -58,13 +85,34 @@ type UpdateCodeSigningConfigOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateCodeSigningConfigOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateCodeSigningConfigResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateCodeSigningConfigOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CodeSigningConfig != nil {
+		s.WriteStruct(schemas.UpdateCodeSigningConfigResponse_CodeSigningConfig)
+		v.CodeSigningConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateCodeSigningConfigOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateCodeSigningConfigResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateCodeSigningConfigResponse_CodeSigningConfig:
+			v.CodeSigningConfig = &types.CodeSigningConfig{}
+			return v.CodeSigningConfig.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateCodeSigningConfigMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateCodeSigningConfig{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateCodeSigningConfig, schemas.UpdateCodeSigningConfigRequest, schemas.UpdateCodeSigningConfigResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateCodeSigningConfig{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateCodeSigningConfig, schemas.UpdateCodeSigningConfigRequest, schemas.UpdateCodeSigningConfigResponse), output: &UpdateCodeSigningConfigOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

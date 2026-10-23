@@ -4,7 +4,9 @@ package budgets
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/budgets/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/budgets/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -53,6 +55,31 @@ type DeleteSubscriberInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteSubscriberInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteSubscriberRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteSubscriberInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountId != nil {
+		s.WriteString(schemas.DeleteSubscriberRequest_AccountId, *v.AccountId)
+	}
+	if v.BudgetName != nil {
+		s.WriteString(schemas.DeleteSubscriberRequest_BudgetName, *v.BudgetName)
+	}
+	if v.Notification != nil {
+		s.WriteStruct(schemas.DeleteSubscriberRequest_Notification)
+		v.Notification.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Subscriber != nil {
+		s.WriteStruct(schemas.DeleteSubscriberRequest_Subscriber)
+		v.Subscriber.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 // Response of DeleteSubscriber
 type DeleteSubscriberOutput struct {
 	// Metadata pertaining to the operation's result.
@@ -61,13 +88,26 @@ type DeleteSubscriberOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteSubscriberOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteSubscriberResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteSubscriberOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteSubscriberOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteSubscriberResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteSubscriberMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteSubscriber{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteSubscriber, schemas.DeleteSubscriberRequest, schemas.DeleteSubscriberResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeleteSubscriber{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteSubscriber, schemas.DeleteSubscriberRequest, schemas.DeleteSubscriberResponse), output: &DeleteSubscriberOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

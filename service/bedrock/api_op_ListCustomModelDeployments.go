@@ -5,7 +5,9 @@ package bedrock
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/bedrock/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrock/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -78,6 +80,42 @@ type ListCustomModelDeploymentsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListCustomModelDeploymentsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListCustomModelDeploymentsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListCustomModelDeploymentsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreatedAfter != nil {
+		s.WriteTime(schemas.ListCustomModelDeploymentsRequest_createdAfter, *v.CreatedAfter)
+	}
+	if v.CreatedBefore != nil {
+		s.WriteTime(schemas.ListCustomModelDeploymentsRequest_createdBefore, *v.CreatedBefore)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListCustomModelDeploymentsRequest_maxResults, *v.MaxResults)
+	}
+	if v.ModelArnEquals != nil {
+		s.WriteString(schemas.ListCustomModelDeploymentsRequest_modelArnEquals, *v.ModelArnEquals)
+	}
+	if v.NameContains != nil {
+		s.WriteString(schemas.ListCustomModelDeploymentsRequest_nameContains, *v.NameContains)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListCustomModelDeploymentsRequest_nextToken, *v.NextToken)
+	}
+	if v.SortBy != "" {
+		s.WriteString(schemas.ListCustomModelDeploymentsRequest_sortBy, string(v.SortBy))
+	}
+	if v.SortOrder != "" {
+		s.WriteString(schemas.ListCustomModelDeploymentsRequest_sortOrder, string(v.SortOrder))
+	}
+	if v.StatusEquals != "" {
+		s.WriteString(schemas.ListCustomModelDeploymentsRequest_statusEquals, string(v.StatusEquals))
+	}
+}
+
 type ListCustomModelDeploymentsOutput struct {
 
 	// A list of custom model deployment summaries.
@@ -93,13 +131,35 @@ type ListCustomModelDeploymentsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListCustomModelDeploymentsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListCustomModelDeploymentsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListCustomModelDeploymentsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeCustomModelDeploymentSummaryList(s, schemas.ListCustomModelDeploymentsResponse_modelDeploymentSummaries, v.ModelDeploymentSummaries)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListCustomModelDeploymentsResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListCustomModelDeploymentsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListCustomModelDeploymentsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListCustomModelDeploymentsResponse_modelDeploymentSummaries:
+			return deserializeCustomModelDeploymentSummaryList(d, schemas.ListCustomModelDeploymentsResponse_modelDeploymentSummaries, &v.ModelDeploymentSummaries)
+		case schemas.ListCustomModelDeploymentsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListCustomModelDeploymentsResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListCustomModelDeploymentsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListCustomModelDeployments{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListCustomModelDeployments, schemas.ListCustomModelDeploymentsRequest, schemas.ListCustomModelDeploymentsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListCustomModelDeployments{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListCustomModelDeployments, schemas.ListCustomModelDeploymentsRequest, schemas.ListCustomModelDeploymentsResponse), output: &ListCustomModelDeploymentsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

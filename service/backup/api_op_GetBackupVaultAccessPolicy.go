@@ -4,6 +4,8 @@ package backup
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/backup/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -36,6 +38,18 @@ type GetBackupVaultAccessPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetBackupVaultAccessPolicyInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetBackupVaultAccessPolicyInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetBackupVaultAccessPolicyInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BackupVaultName != nil {
+		s.WriteString(schemas.GetBackupVaultAccessPolicyInput_BackupVaultName, *v.BackupVaultName)
+	}
+}
+
 type GetBackupVaultAccessPolicyOutput struct {
 
 	// An Amazon Resource Name (ARN) that uniquely identifies a backup vault; for
@@ -56,13 +70,44 @@ type GetBackupVaultAccessPolicyOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetBackupVaultAccessPolicyOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetBackupVaultAccessPolicyOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetBackupVaultAccessPolicyOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BackupVaultArn != nil {
+		s.WriteString(schemas.GetBackupVaultAccessPolicyOutput_BackupVaultArn, *v.BackupVaultArn)
+	}
+	if v.BackupVaultName != nil {
+		s.WriteString(schemas.GetBackupVaultAccessPolicyOutput_BackupVaultName, *v.BackupVaultName)
+	}
+	if v.Policy != nil {
+		s.WriteString(schemas.GetBackupVaultAccessPolicyOutput_Policy, *v.Policy)
+	}
+}
+func (v *GetBackupVaultAccessPolicyOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetBackupVaultAccessPolicyOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetBackupVaultAccessPolicyOutput_BackupVaultArn:
+			v.BackupVaultArn = new(string)
+			return d.ReadString(schemas.GetBackupVaultAccessPolicyOutput_BackupVaultArn, v.BackupVaultArn)
+		case schemas.GetBackupVaultAccessPolicyOutput_BackupVaultName:
+			v.BackupVaultName = new(string)
+			return d.ReadString(schemas.GetBackupVaultAccessPolicyOutput_BackupVaultName, v.BackupVaultName)
+		case schemas.GetBackupVaultAccessPolicyOutput_Policy:
+			v.Policy = new(string)
+			return d.ReadString(schemas.GetBackupVaultAccessPolicyOutput_Policy, v.Policy)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetBackupVaultAccessPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetBackupVaultAccessPolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetBackupVaultAccessPolicy, schemas.GetBackupVaultAccessPolicyInput, schemas.GetBackupVaultAccessPolicyOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetBackupVaultAccessPolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetBackupVaultAccessPolicy, schemas.GetBackupVaultAccessPolicyInput, schemas.GetBackupVaultAccessPolicyOutput), output: &GetBackupVaultAccessPolicyOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

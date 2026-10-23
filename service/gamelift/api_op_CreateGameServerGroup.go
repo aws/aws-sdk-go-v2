@@ -172,9 +172,9 @@ type CreateGameServerGroupInput struct {
 	// running might be terminated during a scale-down event, causing players to be
 	// dropped from the game. Protected instances cannot be terminated while there are
 	// active game servers running except in the event of a forced game server group
-	// deletion (see ). An exception to this is with Spot Instances, which can be
-	// terminated by Amazon Web Services regardless of protection status. This property
-	// is set to NO_PROTECTION by default.
+	// deletion. An exception to this is with Spot Instances, which can be terminated
+	// by Amazon Web Services regardless of protection status. This property is set to
+	// NO_PROTECTION by default.
 	GameServerProtectionPolicy types.GameServerProtectionPolicy
 
 	// A list of labels to assign to the new game server group resource. Tags are

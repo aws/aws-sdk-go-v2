@@ -4,6 +4,8 @@ package ssm
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/ssm/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -80,6 +82,22 @@ type LabelParameterVersionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *LabelParameterVersionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LabelParameterVersionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *LabelParameterVersionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeParameterLabelList(s, schemas.LabelParameterVersionRequest_Labels, v.Labels)
+	if v.Name != nil {
+		s.WriteString(schemas.LabelParameterVersionRequest_Name, *v.Name)
+	}
+	if v.ParameterVersion != nil {
+		s.WriteInt64(schemas.LabelParameterVersionRequest_ParameterVersion, *v.ParameterVersion)
+	}
+}
+
 type LabelParameterVersionOutput struct {
 
 	// The label doesn't meet the requirements. For information about parameter label
@@ -97,13 +115,34 @@ type LabelParameterVersionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *LabelParameterVersionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LabelParameterVersionResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *LabelParameterVersionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeParameterLabelList(s, schemas.LabelParameterVersionResult_InvalidLabels, v.InvalidLabels)
+	if v.ParameterVersion != 0 {
+		s.WriteInt64(schemas.LabelParameterVersionResult_ParameterVersion, v.ParameterVersion)
+	}
+}
+func (v *LabelParameterVersionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LabelParameterVersionResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LabelParameterVersionResult_InvalidLabels:
+			return deserializeParameterLabelList(d, schemas.LabelParameterVersionResult_InvalidLabels, &v.InvalidLabels)
+		case schemas.LabelParameterVersionResult_ParameterVersion:
+			return d.ReadInt64(schemas.LabelParameterVersionResult_ParameterVersion, &v.ParameterVersion)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationLabelParameterVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpLabelParameterVersion{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.LabelParameterVersion, schemas.LabelParameterVersionRequest, schemas.LabelParameterVersionResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpLabelParameterVersion{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.LabelParameterVersion, schemas.LabelParameterVersionRequest, schemas.LabelParameterVersionResult), output: &LabelParameterVersionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package kafka
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/kafka/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/kafka/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,21 @@ type DeleteTopicInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteTopicInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteTopicRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteTopicInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClusterArn != nil {
+		s.WriteString(schemas.DeleteTopicRequest_ClusterArn, *v.ClusterArn)
+	}
+	if v.TopicName != nil {
+		s.WriteString(schemas.DeleteTopicRequest_TopicName, *v.TopicName)
+	}
+}
+
 type DeleteTopicOutput struct {
 
 	// The status of the topic deletion.
@@ -56,13 +73,48 @@ type DeleteTopicOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteTopicOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteTopicResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteTopicOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Status != "" {
+		s.WriteString(schemas.DeleteTopicResponse_Status, string(v.Status))
+	}
+	if v.TopicArn != nil {
+		s.WriteString(schemas.DeleteTopicResponse_TopicArn, *v.TopicArn)
+	}
+	if v.TopicName != nil {
+		s.WriteString(schemas.DeleteTopicResponse_TopicName, *v.TopicName)
+	}
+}
+func (v *DeleteTopicOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteTopicResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteTopicResponse_Status:
+			var ev string
+			if err := d.ReadString(schemas.DeleteTopicResponse_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.TopicState(ev)
+			return nil
+		case schemas.DeleteTopicResponse_TopicArn:
+			v.TopicArn = new(string)
+			return d.ReadString(schemas.DeleteTopicResponse_TopicArn, v.TopicArn)
+		case schemas.DeleteTopicResponse_TopicName:
+			v.TopicName = new(string)
+			return d.ReadString(schemas.DeleteTopicResponse_TopicName, v.TopicName)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteTopicMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteTopic{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteTopic, schemas.DeleteTopicRequest, schemas.DeleteTopicResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteTopic{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteTopic, schemas.DeleteTopicRequest, schemas.DeleteTopicResponse), output: &DeleteTopicOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

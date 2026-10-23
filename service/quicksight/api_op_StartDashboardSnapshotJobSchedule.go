@@ -4,6 +4,8 @@ package quicksight
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/quicksight/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -55,6 +57,24 @@ type StartDashboardSnapshotJobScheduleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartDashboardSnapshotJobScheduleInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartDashboardSnapshotJobScheduleRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartDashboardSnapshotJobScheduleInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AwsAccountId != nil {
+		s.WriteString(schemas.StartDashboardSnapshotJobScheduleRequest_AwsAccountId, *v.AwsAccountId)
+	}
+	if v.DashboardId != nil {
+		s.WriteString(schemas.StartDashboardSnapshotJobScheduleRequest_DashboardId, *v.DashboardId)
+	}
+	if v.ScheduleId != nil {
+		s.WriteString(schemas.StartDashboardSnapshotJobScheduleRequest_ScheduleId, *v.ScheduleId)
+	}
+}
+
 type StartDashboardSnapshotJobScheduleOutput struct {
 
 	//  The Amazon Web Services request ID for this operation.
@@ -69,13 +89,37 @@ type StartDashboardSnapshotJobScheduleOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartDashboardSnapshotJobScheduleOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartDashboardSnapshotJobScheduleResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartDashboardSnapshotJobScheduleOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RequestId != nil {
+		s.WriteString(schemas.StartDashboardSnapshotJobScheduleResponse_RequestId, *v.RequestId)
+	}
+	if v.Status != 0 {
+		s.WriteInt32(schemas.StartDashboardSnapshotJobScheduleResponse_Status, v.Status)
+	}
+}
+func (v *StartDashboardSnapshotJobScheduleOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartDashboardSnapshotJobScheduleResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartDashboardSnapshotJobScheduleResponse_RequestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.StartDashboardSnapshotJobScheduleResponse_RequestId, v.RequestId)
+		case schemas.StartDashboardSnapshotJobScheduleResponse_Status:
+			return d.ReadInt32(schemas.StartDashboardSnapshotJobScheduleResponse_Status, &v.Status)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartDashboardSnapshotJobScheduleMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpStartDashboardSnapshotJobSchedule{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartDashboardSnapshotJobSchedule, schemas.StartDashboardSnapshotJobScheduleRequest, schemas.StartDashboardSnapshotJobScheduleResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStartDashboardSnapshotJobSchedule{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartDashboardSnapshotJobSchedule, schemas.StartDashboardSnapshotJobScheduleRequest, schemas.StartDashboardSnapshotJobScheduleResponse), output: &StartDashboardSnapshotJobScheduleOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

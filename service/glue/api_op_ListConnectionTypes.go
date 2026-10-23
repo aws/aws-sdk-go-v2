@@ -5,7 +5,9 @@ package glue
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/glue/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/glue/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -43,6 +45,21 @@ type ListConnectionTypesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListConnectionTypesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListConnectionTypesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListConnectionTypesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListConnectionTypesRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListConnectionTypesRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListConnectionTypesOutput struct {
 
 	// A list of ConnectionTypeBrief objects containing brief information about the
@@ -58,13 +75,35 @@ type ListConnectionTypesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListConnectionTypesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListConnectionTypesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListConnectionTypesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeConnectionTypeList(s, schemas.ListConnectionTypesResponse_ConnectionTypes, v.ConnectionTypes)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListConnectionTypesResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListConnectionTypesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListConnectionTypesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListConnectionTypesResponse_ConnectionTypes:
+			return deserializeConnectionTypeList(d, schemas.ListConnectionTypesResponse_ConnectionTypes, &v.ConnectionTypes)
+		case schemas.ListConnectionTypesResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListConnectionTypesResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListConnectionTypesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListConnectionTypes{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListConnectionTypes, schemas.ListConnectionTypesRequest, schemas.ListConnectionTypesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListConnectionTypes{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListConnectionTypes, schemas.ListConnectionTypesRequest, schemas.ListConnectionTypesResponse), output: &ListConnectionTypesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

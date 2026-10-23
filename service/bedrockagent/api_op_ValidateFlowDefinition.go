@@ -4,7 +4,9 @@ package bedrockagent
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/bedrockagent/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagent/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -34,6 +36,20 @@ type ValidateFlowDefinitionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ValidateFlowDefinitionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ValidateFlowDefinitionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ValidateFlowDefinitionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Definition != nil {
+		s.WriteStruct(schemas.ValidateFlowDefinitionRequest_definition)
+		v.Definition.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type ValidateFlowDefinitionOutput struct {
 
 	// Contains an array of objects, each of which contains an error identified by
@@ -48,13 +64,29 @@ type ValidateFlowDefinitionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ValidateFlowDefinitionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ValidateFlowDefinitionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ValidateFlowDefinitionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeFlowValidations(s, schemas.ValidateFlowDefinitionResponse_validations, v.Validations)
+}
+func (v *ValidateFlowDefinitionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ValidateFlowDefinitionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ValidateFlowDefinitionResponse_validations:
+			return deserializeFlowValidations(d, schemas.ValidateFlowDefinitionResponse_validations, &v.Validations)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationValidateFlowDefinitionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpValidateFlowDefinition{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ValidateFlowDefinition, schemas.ValidateFlowDefinitionRequest, schemas.ValidateFlowDefinitionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpValidateFlowDefinition{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ValidateFlowDefinition, schemas.ValidateFlowDefinitionRequest, schemas.ValidateFlowDefinitionResponse), output: &ValidateFlowDefinitionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

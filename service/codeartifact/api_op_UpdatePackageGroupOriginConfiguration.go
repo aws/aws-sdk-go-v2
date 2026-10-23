@@ -4,7 +4,9 @@ package codeartifact
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/codeartifact/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/codeartifact/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -64,6 +66,27 @@ type UpdatePackageGroupOriginConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdatePackageGroupOriginConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdatePackageGroupOriginConfigurationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdatePackageGroupOriginConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializePackageGroupAllowedRepositoryList(s, schemas.UpdatePackageGroupOriginConfigurationRequest_addAllowedRepositories, v.AddAllowedRepositories)
+	if v.Domain != nil {
+		s.WriteString(schemas.UpdatePackageGroupOriginConfigurationRequest_domain, *v.Domain)
+	}
+	if v.DomainOwner != nil {
+		s.WriteString(schemas.UpdatePackageGroupOriginConfigurationRequest_domainOwner, *v.DomainOwner)
+	}
+	if v.PackageGroup != nil {
+		s.WriteString(schemas.UpdatePackageGroupOriginConfigurationRequest_packageGroup, *v.PackageGroup)
+	}
+	serializePackageGroupAllowedRepositoryList(s, schemas.UpdatePackageGroupOriginConfigurationRequest_removeAllowedRepositories, v.RemoveAllowedRepositories)
+	serializeOriginRestrictions(s, schemas.UpdatePackageGroupOriginConfigurationRequest_restrictions, v.Restrictions)
+}
+
 type UpdatePackageGroupOriginConfigurationOutput struct {
 
 	// Information about the updated allowed repositories after processing the request.
@@ -78,13 +101,37 @@ type UpdatePackageGroupOriginConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdatePackageGroupOriginConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdatePackageGroupOriginConfigurationResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdatePackageGroupOriginConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializePackageGroupAllowedRepositoryUpdates(s, schemas.UpdatePackageGroupOriginConfigurationResult_allowedRepositoryUpdates, v.AllowedRepositoryUpdates)
+	if v.PackageGroup != nil {
+		s.WriteStruct(schemas.UpdatePackageGroupOriginConfigurationResult_packageGroup)
+		v.PackageGroup.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdatePackageGroupOriginConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdatePackageGroupOriginConfigurationResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdatePackageGroupOriginConfigurationResult_allowedRepositoryUpdates:
+			return deserializePackageGroupAllowedRepositoryUpdates(d, schemas.UpdatePackageGroupOriginConfigurationResult_allowedRepositoryUpdates, &v.AllowedRepositoryUpdates)
+		case schemas.UpdatePackageGroupOriginConfigurationResult_packageGroup:
+			v.PackageGroup = &types.PackageGroupDescription{}
+			return v.PackageGroup.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdatePackageGroupOriginConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdatePackageGroupOriginConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdatePackageGroupOriginConfiguration, schemas.UpdatePackageGroupOriginConfigurationRequest, schemas.UpdatePackageGroupOriginConfigurationResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdatePackageGroupOriginConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdatePackageGroupOriginConfiguration, schemas.UpdatePackageGroupOriginConfigurationRequest, schemas.UpdatePackageGroupOriginConfigurationResult), output: &UpdatePackageGroupOriginConfigurationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

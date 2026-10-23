@@ -4,7 +4,9 @@ package odb
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/odb/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/odb/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -35,6 +37,18 @@ type ShrinkAutonomousDatabaseInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ShrinkAutonomousDatabaseInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ShrinkAutonomousDatabaseInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ShrinkAutonomousDatabaseInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AutonomousDatabaseId != nil {
+		s.WriteString(schemas.ShrinkAutonomousDatabaseInput_autonomousDatabaseId, *v.AutonomousDatabaseId)
+	}
+}
+
 type ShrinkAutonomousDatabaseOutput struct {
 
 	// The unique identifier of the Autonomous Database that was shrunk.
@@ -58,13 +72,54 @@ type ShrinkAutonomousDatabaseOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ShrinkAutonomousDatabaseOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ShrinkAutonomousDatabaseOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ShrinkAutonomousDatabaseOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AutonomousDatabaseId != nil {
+		s.WriteString(schemas.ShrinkAutonomousDatabaseOutput_autonomousDatabaseId, *v.AutonomousDatabaseId)
+	}
+	if v.DisplayName != nil {
+		s.WriteString(schemas.ShrinkAutonomousDatabaseOutput_displayName, *v.DisplayName)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.ShrinkAutonomousDatabaseOutput_status, string(v.Status))
+	}
+	if v.StatusReason != nil {
+		s.WriteString(schemas.ShrinkAutonomousDatabaseOutput_statusReason, *v.StatusReason)
+	}
+}
+func (v *ShrinkAutonomousDatabaseOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ShrinkAutonomousDatabaseOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ShrinkAutonomousDatabaseOutput_autonomousDatabaseId:
+			v.AutonomousDatabaseId = new(string)
+			return d.ReadString(schemas.ShrinkAutonomousDatabaseOutput_autonomousDatabaseId, v.AutonomousDatabaseId)
+		case schemas.ShrinkAutonomousDatabaseOutput_displayName:
+			v.DisplayName = new(string)
+			return d.ReadString(schemas.ShrinkAutonomousDatabaseOutput_displayName, v.DisplayName)
+		case schemas.ShrinkAutonomousDatabaseOutput_status:
+			var ev string
+			if err := d.ReadString(schemas.ShrinkAutonomousDatabaseOutput_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.AutonomousDatabaseResourceStatus(ev)
+			return nil
+		case schemas.ShrinkAutonomousDatabaseOutput_statusReason:
+			v.StatusReason = new(string)
+			return d.ReadString(schemas.ShrinkAutonomousDatabaseOutput_statusReason, v.StatusReason)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationShrinkAutonomousDatabaseMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpShrinkAutonomousDatabase{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ShrinkAutonomousDatabase, schemas.ShrinkAutonomousDatabaseInput, schemas.ShrinkAutonomousDatabaseOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpShrinkAutonomousDatabase{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ShrinkAutonomousDatabase, schemas.ShrinkAutonomousDatabaseInput, schemas.ShrinkAutonomousDatabaseOutput), output: &ShrinkAutonomousDatabaseOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,6 +4,8 @@ package bedrock
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/bedrock/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -37,6 +39,18 @@ type DeleteImportedModelInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteImportedModelInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteImportedModelRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteImportedModelInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ModelIdentifier != nil {
+		s.WriteString(schemas.DeleteImportedModelRequest_modelIdentifier, *v.ModelIdentifier)
+	}
+}
+
 type DeleteImportedModelOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -44,13 +58,26 @@ type DeleteImportedModelOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteImportedModelOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteImportedModelResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteImportedModelOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteImportedModelOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteImportedModelResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteImportedModelMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteImportedModel{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteImportedModel, schemas.DeleteImportedModelRequest, schemas.DeleteImportedModelResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteImportedModel{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteImportedModel, schemas.DeleteImportedModelRequest, schemas.DeleteImportedModelResponse), output: &DeleteImportedModelOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

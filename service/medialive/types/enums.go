@@ -1300,6 +1300,7 @@ const (
 	CloudWatchAlarmTemplateTargetResourceTypeMediaconnectFlow                 CloudWatchAlarmTemplateTargetResourceType = "MEDIACONNECT_FLOW"
 	CloudWatchAlarmTemplateTargetResourceTypeS3Bucket                         CloudWatchAlarmTemplateTargetResourceType = "S3_BUCKET"
 	CloudWatchAlarmTemplateTargetResourceTypeMediatailorPlaybackConfiguration CloudWatchAlarmTemplateTargetResourceType = "MEDIATAILOR_PLAYBACK_CONFIGURATION"
+	CloudWatchAlarmTemplateTargetResourceTypeElementalInferenceFeed           CloudWatchAlarmTemplateTargetResourceType = "ELEMENTAL_INFERENCE_FEED"
 )
 
 // Values returns all known values for CloudWatchAlarmTemplateTargetResourceType.
@@ -1318,6 +1319,7 @@ func (CloudWatchAlarmTemplateTargetResourceType) Values() []CloudWatchAlarmTempl
 		"MEDIACONNECT_FLOW",
 		"S3_BUCKET",
 		"MEDIATAILOR_PLAYBACK_CONFIGURATION",
+		"ELEMENTAL_INFERENCE_FEED",
 	}
 }
 

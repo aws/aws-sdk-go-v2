@@ -345,6 +345,25 @@ func (ReviewSourceId) Values() []ReviewSourceId {
 	}
 }
 
+type SaasQuickLaunchStatus string
+
+// Enum values for SaasQuickLaunchStatus
+const (
+	SaasQuickLaunchStatusEnabled  SaasQuickLaunchStatus = "ENABLED"
+	SaasQuickLaunchStatusDisabled SaasQuickLaunchStatus = "DISABLED"
+)
+
+// Values returns all known values for SaasQuickLaunchStatus. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (SaasQuickLaunchStatus) Values() []SaasQuickLaunchStatus {
+	return []SaasQuickLaunchStatus{
+		"ENABLED",
+		"DISABLED",
+	}
+}
+
 type SearchFacetType string
 
 // Enum values for SearchFacetType

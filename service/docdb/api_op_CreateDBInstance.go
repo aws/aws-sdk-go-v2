@@ -77,8 +77,8 @@ type CreateDBInstanceInput struct {
 	//
 	// For more information, see [Updating Your Amazon DocumentDB TLS Certificates] and [Encrypting Data in Transit] in the Amazon DocumentDB Developer Guide.
 	//
-	// [Updating Your Amazon DocumentDB TLS Certificates]: https://docs.aws.amazon.com/documentdb/latest/developerguide/ca_cert_rotation.html
-	// [Encrypting Data in Transit]: https://docs.aws.amazon.com/documentdb/latest/developerguide/security.encryption.ssl.html
+	// [Updating Your Amazon DocumentDB TLS Certificates]: https://docs.aws.amazon.com/documentdb/latest/devguide/ca_cert_rotation.html
+	// [Encrypting Data in Transit]: https://docs.aws.amazon.com/documentdb/latest/devguide/security.encryption.ssl.html
 	CACertificateIdentifier *string
 
 	// A value that indicates whether to copy tags from the DB instance to snapshots
@@ -88,7 +88,7 @@ type CreateDBInstanceInput struct {
 	// A value that indicates whether to enable Performance Insights for the DB
 	// Instance. For more information, see [Using Amazon Performance Insights].
 	//
-	// [Using Amazon Performance Insights]: https://docs.aws.amazon.com/documentdb/latest/developerguide/performance-insights.html
+	// [Using Amazon Performance Insights]: https://docs.aws.amazon.com/documentdb/latest/devguide/performance-insights.html
 	EnablePerformanceInsights *bool
 
 	// The KMS key identifier for encryption of Performance Insights data.

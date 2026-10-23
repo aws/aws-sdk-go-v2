@@ -4,7 +4,9 @@ package mediaconnect
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/mediaconnect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/mediaconnect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -140,6 +142,90 @@ type UpdateFlowSourceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateFlowSourceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateFlowSourceRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateFlowSourceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Decryption != nil {
+		s.WriteStruct(schemas.UpdateFlowSourceRequest_Decryption)
+		v.Decryption.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateFlowSourceRequest_Description, *v.Description)
+	}
+	if v.EntitlementArn != nil {
+		s.WriteString(schemas.UpdateFlowSourceRequest_EntitlementArn, *v.EntitlementArn)
+	}
+	if v.FlowArn != nil {
+		s.WriteString(schemas.UpdateFlowSourceRequest_FlowArn, *v.FlowArn)
+	}
+	if v.GatewayBridgeSource != nil {
+		s.WriteStruct(schemas.UpdateFlowSourceRequest_GatewayBridgeSource)
+		v.GatewayBridgeSource.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.IngestPort != nil {
+		s.WriteInt32(schemas.UpdateFlowSourceRequest_IngestPort, *v.IngestPort)
+	}
+	if v.MaxBitrate != nil {
+		s.WriteInt32(schemas.UpdateFlowSourceRequest_MaxBitrate, *v.MaxBitrate)
+	}
+	if v.MaxLatency != nil {
+		s.WriteInt32(schemas.UpdateFlowSourceRequest_MaxLatency, *v.MaxLatency)
+	}
+	if v.MaxSyncBuffer != nil {
+		s.WriteInt32(schemas.UpdateFlowSourceRequest_MaxSyncBuffer, *v.MaxSyncBuffer)
+	}
+	serialize__listOfMediaStreamSourceConfigurationRequest(s, schemas.UpdateFlowSourceRequest_MediaStreamSourceConfigurations, v.MediaStreamSourceConfigurations)
+	if v.MinLatency != nil {
+		s.WriteInt32(schemas.UpdateFlowSourceRequest_MinLatency, *v.MinLatency)
+	}
+	if v.NdiSourceSettings != nil {
+		s.WriteStruct(schemas.UpdateFlowSourceRequest_NdiSourceSettings)
+		v.NdiSourceSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Protocol != "" {
+		s.WriteString(schemas.UpdateFlowSourceRequest_Protocol, string(v.Protocol))
+	}
+	if v.RouterIntegrationState != "" {
+		s.WriteString(schemas.UpdateFlowSourceRequest_RouterIntegrationState, string(v.RouterIntegrationState))
+	}
+	if v.RouterIntegrationTransitDecryption != nil {
+		s.WriteStruct(schemas.UpdateFlowSourceRequest_RouterIntegrationTransitDecryption)
+		v.RouterIntegrationTransitDecryption.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SenderControlPort != nil {
+		s.WriteInt32(schemas.UpdateFlowSourceRequest_SenderControlPort, *v.SenderControlPort)
+	}
+	if v.SenderIpAddress != nil {
+		s.WriteString(schemas.UpdateFlowSourceRequest_SenderIpAddress, *v.SenderIpAddress)
+	}
+	if v.SourceArn != nil {
+		s.WriteString(schemas.UpdateFlowSourceRequest_SourceArn, *v.SourceArn)
+	}
+	if v.SourceListenerAddress != nil {
+		s.WriteString(schemas.UpdateFlowSourceRequest_SourceListenerAddress, *v.SourceListenerAddress)
+	}
+	if v.SourceListenerPort != nil {
+		s.WriteInt32(schemas.UpdateFlowSourceRequest_SourceListenerPort, *v.SourceListenerPort)
+	}
+	if v.StreamId != nil {
+		s.WriteString(schemas.UpdateFlowSourceRequest_StreamId, *v.StreamId)
+	}
+	if v.VpcInterfaceName != nil {
+		s.WriteString(schemas.UpdateFlowSourceRequest_VpcInterfaceName, *v.VpcInterfaceName)
+	}
+	if v.WhitelistCidr != nil {
+		s.WriteString(schemas.UpdateFlowSourceRequest_WhitelistCidr, *v.WhitelistCidr)
+	}
+}
+
 type UpdateFlowSourceOutput struct {
 
 	// The ARN of the flow that you updated.
@@ -154,13 +240,40 @@ type UpdateFlowSourceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateFlowSourceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateFlowSourceResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateFlowSourceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FlowArn != nil {
+		s.WriteString(schemas.UpdateFlowSourceResponse_FlowArn, *v.FlowArn)
+	}
+	if v.Source != nil {
+		s.WriteStruct(schemas.UpdateFlowSourceResponse_Source)
+		v.Source.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateFlowSourceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateFlowSourceResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateFlowSourceResponse_FlowArn:
+			v.FlowArn = new(string)
+			return d.ReadString(schemas.UpdateFlowSourceResponse_FlowArn, v.FlowArn)
+		case schemas.UpdateFlowSourceResponse_Source:
+			v.Source = &types.Source{}
+			return v.Source.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateFlowSourceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateFlowSource{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateFlowSource, schemas.UpdateFlowSourceRequest, schemas.UpdateFlowSourceResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateFlowSource{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateFlowSource, schemas.UpdateFlowSourceRequest, schemas.UpdateFlowSourceResponse), output: &UpdateFlowSourceOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

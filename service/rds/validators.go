@@ -150,6 +150,26 @@ func (m *validateOpBacktrackDBCluster) HandleInitialize(ctx context.Context, in 
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCancelDBCapacityReservation struct {
+}
+
+func (*validateOpCancelDBCapacityReservation) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCancelDBCapacityReservation) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CancelDBCapacityReservationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCancelDBCapacityReservationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCancelExportTask struct {
 }
 
@@ -305,6 +325,26 @@ func (m *validateOpCreateCustomDBEngineVersion) HandleInitialize(ctx context.Con
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpCreateCustomDBEngineVersionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpCreateDBCapacityReservation struct {
+}
+
+func (*validateOpCreateDBCapacityReservation) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateDBCapacityReservation) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateDBCapacityReservationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateDBCapacityReservationInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1125,6 +1165,26 @@ func (m *validateOpDescribeCertificates) HandleInitialize(ctx context.Context, i
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDescribeCertificatesInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDescribeDBCapacityReservations struct {
+}
+
+func (*validateOpDescribeDBCapacityReservations) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeDBCapacityReservations) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeDBCapacityReservationsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeDBCapacityReservationsInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -2145,6 +2205,26 @@ func (m *validateOpModifyCustomDBEngineVersion) HandleInitialize(ctx context.Con
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpModifyCustomDBEngineVersionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpModifyDBCapacityReservation struct {
+}
+
+func (*validateOpModifyDBCapacityReservation) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpModifyDBCapacityReservation) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ModifyDBCapacityReservationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpModifyDBCapacityReservationInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -3218,6 +3298,10 @@ func addOpBacktrackDBClusterValidationMiddleware(stack *middleware.Stack) error 
 	return stack.Initialize.Add(&validateOpBacktrackDBCluster{}, middleware.After)
 }
 
+func addOpCancelDBCapacityReservationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCancelDBCapacityReservation{}, middleware.After)
+}
+
 func addOpCancelExportTaskValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCancelExportTask{}, middleware.After)
 }
@@ -3248,6 +3332,10 @@ func addOpCreateBlueGreenDeploymentValidationMiddleware(stack *middleware.Stack)
 
 func addOpCreateCustomDBEngineVersionValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateCustomDBEngineVersion{}, middleware.After)
+}
+
+func addOpCreateDBCapacityReservationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateDBCapacityReservation{}, middleware.After)
 }
 
 func addOpCreateDBClusterEndpointValidationMiddleware(stack *middleware.Stack) error {
@@ -3412,6 +3500,10 @@ func addOpDescribeBlueGreenDeploymentsValidationMiddleware(stack *middleware.Sta
 
 func addOpDescribeCertificatesValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeCertificates{}, middleware.After)
+}
+
+func addOpDescribeDBCapacityReservationsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeDBCapacityReservations{}, middleware.After)
 }
 
 func addOpDescribeDBClusterAutomatedBackupsValidationMiddleware(stack *middleware.Stack) error {
@@ -3616,6 +3708,10 @@ func addOpModifyCurrentDBClusterCapacityValidationMiddleware(stack *middleware.S
 
 func addOpModifyCustomDBEngineVersionValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpModifyCustomDBEngineVersion{}, middleware.After)
+}
+
+func addOpModifyDBCapacityReservationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpModifyDBCapacityReservation{}, middleware.After)
 }
 
 func addOpModifyDBClusterEndpointValidationMiddleware(stack *middleware.Stack) error {
@@ -4024,6 +4120,38 @@ func validateRecommendedActionUpdateList(v []types.RecommendedActionUpdate) erro
 	}
 }
 
+func validateTargetResourceConfiguration(v *types.TargetResourceConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TargetResourceConfiguration"}
+	if v.SourceArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SourceArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateTargetResourceConfigurationList(v []types.TargetResourceConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TargetResourceConfigurationList"}
+	for i := range v {
+		if err := validateTargetResourceConfiguration(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpAddRoleToDBClusterInput(v *AddRoleToDBClusterInput) error {
 	if v == nil {
 		return nil
@@ -4145,6 +4273,21 @@ func validateOpBacktrackDBClusterInput(v *BacktrackDBClusterInput) error {
 	}
 	if v.BacktrackTo == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("BacktrackTo"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCancelDBCapacityReservationInput(v *CancelDBCapacityReservationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CancelDBCapacityReservationInput"}
+	if v.DBCapacityReservationIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DBCapacityReservationIdentifier"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -4278,6 +4421,11 @@ func validateOpCreateBlueGreenDeploymentInput(v *CreateBlueGreenDeploymentInput)
 	if v.Source == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Source"))
 	}
+	if v.TargetResourceConfigurations != nil {
+		if err := validateTargetResourceConfigurationList(v.TargetResourceConfigurations); err != nil {
+			invalidParams.AddNested("TargetResourceConfigurations", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -4295,6 +4443,33 @@ func validateOpCreateCustomDBEngineVersionInput(v *CreateCustomDBEngineVersionIn
 	}
 	if v.EngineVersion == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("EngineVersion"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateDBCapacityReservationInput(v *CreateDBCapacityReservationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateDBCapacityReservationInput"}
+	if v.DBCapacityReservationName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DBCapacityReservationName"))
+	}
+	if v.DBInstanceClass == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DBInstanceClass"))
+	}
+	if v.Engine == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Engine"))
+	}
+	if v.CapacityPerAvailabilityZone == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CapacityPerAvailabilityZone"))
+	}
+	if v.AvailabilityZones == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AvailabilityZones"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -5018,6 +5193,23 @@ func validateOpDescribeCertificatesInput(v *DescribeCertificatesInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DescribeCertificatesInput"}
+	if v.Filters != nil {
+		if err := validateFilterList(v.Filters); err != nil {
+			invalidParams.AddNested("Filters", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDescribeDBCapacityReservationsInput(v *DescribeDBCapacityReservationsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeDBCapacityReservationsInput"}
 	if v.Filters != nil {
 		if err := validateFilterList(v.Filters); err != nil {
 			invalidParams.AddNested("Filters", err.(smithy.InvalidParamsError))
@@ -5911,6 +6103,21 @@ func validateOpModifyCustomDBEngineVersionInput(v *ModifyCustomDBEngineVersionIn
 	}
 	if v.EngineVersion == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("EngineVersion"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpModifyDBCapacityReservationInput(v *ModifyDBCapacityReservationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ModifyDBCapacityReservationInput"}
+	if v.DBCapacityReservationIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DBCapacityReservationIdentifier"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

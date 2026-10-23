@@ -4,7 +4,9 @@ package guardduty
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/guardduty/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/guardduty/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -49,6 +51,23 @@ type UpdateCustomDetectionRuleOrgConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateCustomDetectionRuleOrgConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateCustomDetectionRuleOrgConfigurationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateCustomDetectionRuleOrgConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDetectionRuleAccountIds(s, schemas.UpdateCustomDetectionRuleOrgConfigurationRequest_ExcludeAccountIds, v.ExcludeAccountIds)
+	serializeDetectionRuleAccountIds(s, schemas.UpdateCustomDetectionRuleOrgConfigurationRequest_IncludeAccountIds, v.IncludeAccountIds)
+	if v.Mode != "" {
+		s.WriteString(schemas.UpdateCustomDetectionRuleOrgConfigurationRequest_Mode, string(v.Mode))
+	}
+	if v.RuleId != nil {
+		s.WriteString(schemas.UpdateCustomDetectionRuleOrgConfigurationRequest_RuleId, *v.RuleId)
+	}
+}
+
 type UpdateCustomDetectionRuleOrgConfigurationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -56,13 +75,26 @@ type UpdateCustomDetectionRuleOrgConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateCustomDetectionRuleOrgConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateCustomDetectionRuleOrgConfigurationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateCustomDetectionRuleOrgConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *UpdateCustomDetectionRuleOrgConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateCustomDetectionRuleOrgConfigurationResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateCustomDetectionRuleOrgConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateCustomDetectionRuleOrgConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateCustomDetectionRuleOrgConfiguration, schemas.UpdateCustomDetectionRuleOrgConfigurationRequest, schemas.UpdateCustomDetectionRuleOrgConfigurationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateCustomDetectionRuleOrgConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateCustomDetectionRuleOrgConfiguration, schemas.UpdateCustomDetectionRuleOrgConfigurationRequest, schemas.UpdateCustomDetectionRuleOrgConfigurationResponse), output: &UpdateCustomDetectionRuleOrgConfigurationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -285,6 +285,24 @@ var _ *types.ConsolidatedPolicyCustom
 var _ *types.ConsolidatedPolicyList
 var _ *types.ConsolidatedPolicyAggregation
 
+func ExampleDatabricksConnectionType_outputUsage() {
+	var union types.DatabricksConnectionType
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.DatabricksConnectionTypeMemberDeltaSharing:
+		_ = v.Value // Value is types.DatabricksDeltaSharingConnection
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.DatabricksDeltaSharingConnection
+
 func ExampleIntermediateTableAnalysisRulePolicy_outputUsage() {
 	var union types.IntermediateTableAnalysisRulePolicy
 	// type switches can be used to check the union value
@@ -780,6 +798,9 @@ func ExampleTableReference_outputUsage() {
 	case *types.TableReferenceMemberAthena:
 		_ = v.Value // Value is types.AthenaTableReference
 
+	case *types.TableReferenceMemberDatabricks:
+		_ = v.Value // Value is types.DatabricksTableReference
+
 	case *types.TableReferenceMemberGlue:
 		_ = v.Value // Value is types.GlueTableReference
 
@@ -796,6 +817,7 @@ func ExampleTableReference_outputUsage() {
 }
 
 var _ *types.GlueTableReference
+var _ *types.DatabricksTableReference
 var _ *types.SnowflakeTableReference
 var _ *types.AthenaTableReference
 

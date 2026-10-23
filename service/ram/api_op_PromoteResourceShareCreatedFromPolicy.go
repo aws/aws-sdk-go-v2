@@ -4,6 +4,8 @@ package ram
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/ram/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -50,6 +52,18 @@ type PromoteResourceShareCreatedFromPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PromoteResourceShareCreatedFromPolicyInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PromoteResourceShareCreatedFromPolicyRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PromoteResourceShareCreatedFromPolicyInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ResourceShareArn != nil {
+		s.WriteString(schemas.PromoteResourceShareCreatedFromPolicyRequest_resourceShareArn, *v.ResourceShareArn)
+	}
+}
+
 type PromoteResourceShareCreatedFromPolicyOutput struct {
 
 	// A return value of true indicates that the request succeeded. A value of false
@@ -62,13 +76,32 @@ type PromoteResourceShareCreatedFromPolicyOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PromoteResourceShareCreatedFromPolicyOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PromoteResourceShareCreatedFromPolicyResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PromoteResourceShareCreatedFromPolicyOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ReturnValue != nil {
+		s.WriteBool(schemas.PromoteResourceShareCreatedFromPolicyResponse_returnValue, *v.ReturnValue)
+	}
+}
+func (v *PromoteResourceShareCreatedFromPolicyOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PromoteResourceShareCreatedFromPolicyResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PromoteResourceShareCreatedFromPolicyResponse_returnValue:
+			v.ReturnValue = new(bool)
+			return d.ReadBool(schemas.PromoteResourceShareCreatedFromPolicyResponse_returnValue, v.ReturnValue)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPromoteResourceShareCreatedFromPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpPromoteResourceShareCreatedFromPolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PromoteResourceShareCreatedFromPolicy, schemas.PromoteResourceShareCreatedFromPolicyRequest, schemas.PromoteResourceShareCreatedFromPolicyResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpPromoteResourceShareCreatedFromPolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PromoteResourceShareCreatedFromPolicy, schemas.PromoteResourceShareCreatedFromPolicyRequest, schemas.PromoteResourceShareCreatedFromPolicyResponse), output: &PromoteResourceShareCreatedFromPolicyOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

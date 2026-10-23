@@ -4,6 +4,8 @@ package apigatewayv2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/apigatewayv2/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -50,6 +52,30 @@ type UpdateApiMappingInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateApiMappingInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateApiMappingRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateApiMappingInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApiId != nil {
+		s.WriteString(schemas.UpdateApiMappingRequest_ApiId, *v.ApiId)
+	}
+	if v.ApiMappingId != nil {
+		s.WriteString(schemas.UpdateApiMappingRequest_ApiMappingId, *v.ApiMappingId)
+	}
+	if v.ApiMappingKey != nil {
+		s.WriteString(schemas.UpdateApiMappingRequest_ApiMappingKey, *v.ApiMappingKey)
+	}
+	if v.DomainName != nil {
+		s.WriteString(schemas.UpdateApiMappingRequest_DomainName, *v.DomainName)
+	}
+	if v.Stage != nil {
+		s.WriteString(schemas.UpdateApiMappingRequest_Stage, *v.Stage)
+	}
+}
+
 type UpdateApiMappingOutput struct {
 
 	// The API identifier.
@@ -70,13 +96,50 @@ type UpdateApiMappingOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateApiMappingOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateApiMappingResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateApiMappingOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApiId != nil {
+		s.WriteString(schemas.UpdateApiMappingResponse_ApiId, *v.ApiId)
+	}
+	if v.ApiMappingId != nil {
+		s.WriteString(schemas.UpdateApiMappingResponse_ApiMappingId, *v.ApiMappingId)
+	}
+	if v.ApiMappingKey != nil {
+		s.WriteString(schemas.UpdateApiMappingResponse_ApiMappingKey, *v.ApiMappingKey)
+	}
+	if v.Stage != nil {
+		s.WriteString(schemas.UpdateApiMappingResponse_Stage, *v.Stage)
+	}
+}
+func (v *UpdateApiMappingOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateApiMappingResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateApiMappingResponse_ApiId:
+			v.ApiId = new(string)
+			return d.ReadString(schemas.UpdateApiMappingResponse_ApiId, v.ApiId)
+		case schemas.UpdateApiMappingResponse_ApiMappingId:
+			v.ApiMappingId = new(string)
+			return d.ReadString(schemas.UpdateApiMappingResponse_ApiMappingId, v.ApiMappingId)
+		case schemas.UpdateApiMappingResponse_ApiMappingKey:
+			v.ApiMappingKey = new(string)
+			return d.ReadString(schemas.UpdateApiMappingResponse_ApiMappingKey, v.ApiMappingKey)
+		case schemas.UpdateApiMappingResponse_Stage:
+			v.Stage = new(string)
+			return d.ReadString(schemas.UpdateApiMappingResponse_Stage, v.Stage)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateApiMappingMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateApiMapping{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateApiMapping, schemas.UpdateApiMappingRequest, schemas.UpdateApiMappingResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateApiMapping{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateApiMapping, schemas.UpdateApiMappingRequest, schemas.UpdateApiMappingResponse), output: &UpdateApiMappingOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

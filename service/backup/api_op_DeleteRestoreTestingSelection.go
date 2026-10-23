@@ -4,6 +4,8 @@ package backup
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/backup/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -42,6 +44,21 @@ type DeleteRestoreTestingSelectionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteRestoreTestingSelectionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteRestoreTestingSelectionInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteRestoreTestingSelectionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RestoreTestingPlanName != nil {
+		s.WriteString(schemas.DeleteRestoreTestingSelectionInput_RestoreTestingPlanName, *v.RestoreTestingPlanName)
+	}
+	if v.RestoreTestingSelectionName != nil {
+		s.WriteString(schemas.DeleteRestoreTestingSelectionInput_RestoreTestingSelectionName, *v.RestoreTestingSelectionName)
+	}
+}
+
 type DeleteRestoreTestingSelectionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -49,13 +66,26 @@ type DeleteRestoreTestingSelectionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteRestoreTestingSelectionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteRestoreTestingSelectionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteRestoreTestingSelectionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteRestoreTestingSelectionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteRestoreTestingSelection{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteRestoreTestingSelection, schemas.DeleteRestoreTestingSelectionInput, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteRestoreTestingSelection{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteRestoreTestingSelection, schemas.DeleteRestoreTestingSelectionInput, nil), output: &DeleteRestoreTestingSelectionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

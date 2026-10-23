@@ -5,6 +5,8 @@ package glue
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/glue/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -44,6 +46,22 @@ type ListDevEndpointsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListDevEndpointsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListDevEndpointsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListDevEndpointsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListDevEndpointsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListDevEndpointsRequest_NextToken, *v.NextToken)
+	}
+	serializeTagsMap(s, schemas.ListDevEndpointsRequest_Tags, v.Tags)
+}
+
 type ListDevEndpointsOutput struct {
 
 	// The names of all the DevEndpoint s in the account, or the DevEndpoint s with the
@@ -60,13 +78,35 @@ type ListDevEndpointsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListDevEndpointsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListDevEndpointsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListDevEndpointsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDevEndpointNameList(s, schemas.ListDevEndpointsResponse_DevEndpointNames, v.DevEndpointNames)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListDevEndpointsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListDevEndpointsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListDevEndpointsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListDevEndpointsResponse_DevEndpointNames:
+			return deserializeDevEndpointNameList(d, schemas.ListDevEndpointsResponse_DevEndpointNames, &v.DevEndpointNames)
+		case schemas.ListDevEndpointsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListDevEndpointsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListDevEndpointsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListDevEndpoints{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDevEndpoints, schemas.ListDevEndpointsRequest, schemas.ListDevEndpointsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListDevEndpoints{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDevEndpoints, schemas.ListDevEndpointsRequest, schemas.ListDevEndpointsResponse), output: &ListDevEndpointsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

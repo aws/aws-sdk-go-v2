@@ -4,7 +4,9 @@ package docdbelastic
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/docdbelastic/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/docdbelastic/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -72,6 +74,61 @@ type RestoreClusterFromSnapshotInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RestoreClusterFromSnapshotInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RestoreClusterFromSnapshotInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RestoreClusterFromSnapshotInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClusterName != nil {
+		s.WriteString(schemas.RestoreClusterFromSnapshotInput_clusterName, *v.ClusterName)
+	}
+	if v.KmsKeyId != nil {
+		s.WriteString(schemas.RestoreClusterFromSnapshotInput_kmsKeyId, *v.KmsKeyId)
+	}
+	if v.ShardCapacity != nil {
+		s.WriteInt32(schemas.RestoreClusterFromSnapshotInput_shardCapacity, *v.ShardCapacity)
+	}
+	if v.ShardInstanceCount != nil {
+		s.WriteInt32(schemas.RestoreClusterFromSnapshotInput_shardInstanceCount, *v.ShardInstanceCount)
+	}
+	if v.SnapshotArn != nil {
+		s.WriteString(schemas.RestoreClusterFromSnapshotInput_snapshotArn, *v.SnapshotArn)
+	}
+	serializeStringList(s, schemas.RestoreClusterFromSnapshotInput_subnetIds, v.SubnetIds)
+	serializeTagMap(s, schemas.RestoreClusterFromSnapshotInput_tags, v.Tags)
+	serializeStringList(s, schemas.RestoreClusterFromSnapshotInput_vpcSecurityGroupIds, v.VpcSecurityGroupIds)
+}
+func (v *RestoreClusterFromSnapshotInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RestoreClusterFromSnapshotInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RestoreClusterFromSnapshotInput_clusterName:
+			v.ClusterName = new(string)
+			return d.ReadString(schemas.RestoreClusterFromSnapshotInput_clusterName, v.ClusterName)
+		case schemas.RestoreClusterFromSnapshotInput_kmsKeyId:
+			v.KmsKeyId = new(string)
+			return d.ReadString(schemas.RestoreClusterFromSnapshotInput_kmsKeyId, v.KmsKeyId)
+		case schemas.RestoreClusterFromSnapshotInput_shardCapacity:
+			v.ShardCapacity = new(int32)
+			return d.ReadInt32(schemas.RestoreClusterFromSnapshotInput_shardCapacity, v.ShardCapacity)
+		case schemas.RestoreClusterFromSnapshotInput_shardInstanceCount:
+			v.ShardInstanceCount = new(int32)
+			return d.ReadInt32(schemas.RestoreClusterFromSnapshotInput_shardInstanceCount, v.ShardInstanceCount)
+		case schemas.RestoreClusterFromSnapshotInput_snapshotArn:
+			v.SnapshotArn = new(string)
+			return d.ReadString(schemas.RestoreClusterFromSnapshotInput_snapshotArn, v.SnapshotArn)
+		case schemas.RestoreClusterFromSnapshotInput_subnetIds:
+			return deserializeStringList(d, schemas.RestoreClusterFromSnapshotInput_subnetIds, &v.SubnetIds)
+		case schemas.RestoreClusterFromSnapshotInput_tags:
+			return deserializeTagMap(d, schemas.RestoreClusterFromSnapshotInput_tags, &v.Tags)
+		case schemas.RestoreClusterFromSnapshotInput_vpcSecurityGroupIds:
+			return deserializeStringList(d, schemas.RestoreClusterFromSnapshotInput_vpcSecurityGroupIds, &v.VpcSecurityGroupIds)
+		}
+		return nil
+	})
+}
+
 type RestoreClusterFromSnapshotOutput struct {
 
 	// Returns information about a the restored elastic cluster.
@@ -85,13 +142,34 @@ type RestoreClusterFromSnapshotOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RestoreClusterFromSnapshotOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RestoreClusterFromSnapshotOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RestoreClusterFromSnapshotOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Cluster != nil {
+		s.WriteStruct(schemas.RestoreClusterFromSnapshotOutput_cluster)
+		v.Cluster.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *RestoreClusterFromSnapshotOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RestoreClusterFromSnapshotOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RestoreClusterFromSnapshotOutput_cluster:
+			v.Cluster = &types.Cluster{}
+			return v.Cluster.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationRestoreClusterFromSnapshotMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpRestoreClusterFromSnapshot{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RestoreClusterFromSnapshot, schemas.RestoreClusterFromSnapshotInput, schemas.RestoreClusterFromSnapshotOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpRestoreClusterFromSnapshot{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RestoreClusterFromSnapshot, schemas.RestoreClusterFromSnapshotInput, schemas.RestoreClusterFromSnapshotOutput), output: &RestoreClusterFromSnapshotOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

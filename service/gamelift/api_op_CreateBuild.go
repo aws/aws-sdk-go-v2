@@ -114,7 +114,7 @@ type CreateBuildInput struct {
 	StorageLocation *types.S3Location
 
 	// A list of labels to assign to the new build resource. Tags are developer
-	// defined key-value pairs. Tagging Amazon Web Services resources are useful for
+	// defined key-value pairs. Tagging Amazon Web Services resources is useful for
 	// resource management, access management and cost allocation. For more
 	// information, see [Tagging Amazon Web Services Resources]in the Amazon Web Services General Reference. Once the
 	// resource is created, you can use [TagResource], [UntagResource], and [ListTagsForResource] to add, remove, and view tags. The
@@ -163,7 +163,7 @@ func (v *CreateBuildInput) SerializeMembers(s smithy.ShapeSerializer) {
 
 type CreateBuildOutput struct {
 
-	// The newly created build resource, including a unique build IDs and status.
+	// The newly created build resource, including a unique build ID and status.
 	Build *types.Build
 
 	// Amazon S3 location for your game build file, including bucket name and key.

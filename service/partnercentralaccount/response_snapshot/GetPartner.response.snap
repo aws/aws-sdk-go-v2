@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: PartnerCentralAccount.GetPartner
+
+{"Arn":"__Arn__","AwsTrainingCertificationEmailDomains":[{"DomainName":"__DomainName__","RegisteredAt":"2000-01-01T00:00:00Z"},{"DomainName":"__DomainName__","RegisteredAt":"2000-01-01T00:00:00Z"}],"Catalog":"__Catalog__","CreatedAt":"2000-01-01T00:00:00Z","Id":"__Id__","LegalName":"__LegalName__","Profile":{"Description":"__Description__","DisplayName":"__DisplayName__","Headquarters":{"CountryCode":"__CountryCode__","SubdivisionCode":"__SubdivisionCode__"},"IndustrySegments":["AGRICULTURE_MINING","AGRICULTURE_MINING"],"LocalizedContents":[{"Description":"__Description__","DisplayName":"__DisplayName__","Locale":"__Locale__","LogoUrl":"__LogoUrl__","WebsiteUrl":"__WebsiteUrl__"},{"Description":"__Description__","DisplayName":"__DisplayName__","Locale":"__Locale__","LogoUrl":"__LogoUrl__","WebsiteUrl":"__WebsiteUrl__"}],"LogoUrl":"__LogoUrl__","PrimarySolutionType":"SOFTWARE_PRODUCTS","ProfileId":"__ProfileId__","TranslationSourceLocale":"__TranslationSourceLocale__","WebsiteUrl":"__WebsiteUrl__"}}

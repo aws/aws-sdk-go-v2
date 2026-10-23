@@ -4,7 +4,9 @@ package wafregional
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/wafregional/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/wafregional/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -55,6 +57,18 @@ type GetChangeTokenStatusInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetChangeTokenStatusInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetChangeTokenStatusRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetChangeTokenStatusInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ChangeToken != nil {
+		s.WriteString(schemas.GetChangeTokenStatusRequest_ChangeToken, *v.ChangeToken)
+	}
+}
+
 type GetChangeTokenStatusOutput struct {
 
 	// The status of the change token.
@@ -66,13 +80,36 @@ type GetChangeTokenStatusOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetChangeTokenStatusOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetChangeTokenStatusResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetChangeTokenStatusOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ChangeTokenStatus != "" {
+		s.WriteString(schemas.GetChangeTokenStatusResponse_ChangeTokenStatus, string(v.ChangeTokenStatus))
+	}
+}
+func (v *GetChangeTokenStatusOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetChangeTokenStatusResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetChangeTokenStatusResponse_ChangeTokenStatus:
+			var ev string
+			if err := d.ReadString(schemas.GetChangeTokenStatusResponse_ChangeTokenStatus, &ev); err != nil {
+				return err
+			}
+			v.ChangeTokenStatus = types.ChangeTokenStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetChangeTokenStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetChangeTokenStatus{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetChangeTokenStatus, schemas.GetChangeTokenStatusRequest, schemas.GetChangeTokenStatusResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetChangeTokenStatus{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetChangeTokenStatus, schemas.GetChangeTokenStatusRequest, schemas.GetChangeTokenStatusResponse), output: &GetChangeTokenStatusOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

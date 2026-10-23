@@ -4,7 +4,9 @@ package customerprofiles
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/customerprofiles/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/customerprofiles/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,19 @@ type DetectProfileObjectTypeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DetectProfileObjectTypeInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DetectProfileObjectTypeRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DetectProfileObjectTypeInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DomainName != nil {
+		s.WriteString(schemas.DetectProfileObjectTypeRequest_DomainName, *v.DomainName)
+	}
+	serializeObjects(s, schemas.DetectProfileObjectTypeRequest_Objects, v.Objects)
+}
+
 type DetectProfileObjectTypeOutput struct {
 
 	// Detected ProfileObjectType mappings from given objects. A maximum of one
@@ -51,13 +66,29 @@ type DetectProfileObjectTypeOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DetectProfileObjectTypeOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DetectProfileObjectTypeResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DetectProfileObjectTypeOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDetectedProfileObjectTypes(s, schemas.DetectProfileObjectTypeResponse_DetectedProfileObjectTypes, v.DetectedProfileObjectTypes)
+}
+func (v *DetectProfileObjectTypeOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DetectProfileObjectTypeResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DetectProfileObjectTypeResponse_DetectedProfileObjectTypes:
+			return deserializeDetectedProfileObjectTypes(d, schemas.DetectProfileObjectTypeResponse_DetectedProfileObjectTypes, &v.DetectedProfileObjectTypes)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDetectProfileObjectTypeMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDetectProfileObjectType{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DetectProfileObjectType, schemas.DetectProfileObjectTypeRequest, schemas.DetectProfileObjectTypeResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDetectProfileObjectType{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DetectProfileObjectType, schemas.DetectProfileObjectTypeRequest, schemas.DetectProfileObjectTypeResponse), output: &DetectProfileObjectTypeOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

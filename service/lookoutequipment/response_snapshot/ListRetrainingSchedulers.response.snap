@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: AWSLookoutEquipmentFrontendService.ListRetrainingSchedulers
+
+{"NextToken":"__NextToken__","RetrainingSchedulerSummaries":[{"LookbackWindow":"__LookbackWindow__","ModelArn":"__ModelArn__","ModelName":"__ModelName__","RetrainingFrequency":"__RetrainingFrequency__","RetrainingStartDate":946684800,"Status":"PENDING"},{"LookbackWindow":"__LookbackWindow__","ModelArn":"__ModelArn__","ModelName":"__ModelName__","RetrainingFrequency":"__RetrainingFrequency__","RetrainingStartDate":946684800,"Status":"PENDING"}]}

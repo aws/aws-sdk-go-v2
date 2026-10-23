@@ -5,7 +5,9 @@ package ssm
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/ssm/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ssm/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -52,6 +54,24 @@ type ListComplianceItemsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListComplianceItemsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListComplianceItemsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListComplianceItemsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeComplianceStringFilterList(s, schemas.ListComplianceItemsRequest_Filters, v.Filters)
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListComplianceItemsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListComplianceItemsRequest_NextToken, *v.NextToken)
+	}
+	serializeComplianceResourceIdList(s, schemas.ListComplianceItemsRequest_ResourceIds, v.ResourceIds)
+	serializeComplianceResourceTypeList(s, schemas.ListComplianceItemsRequest_ResourceTypes, v.ResourceTypes)
+}
+
 type ListComplianceItemsOutput struct {
 
 	// A list of compliance information for the specified resource ID.
@@ -67,13 +87,35 @@ type ListComplianceItemsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListComplianceItemsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListComplianceItemsResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListComplianceItemsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeComplianceItemList(s, schemas.ListComplianceItemsResult_ComplianceItems, v.ComplianceItems)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListComplianceItemsResult_NextToken, *v.NextToken)
+	}
+}
+func (v *ListComplianceItemsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListComplianceItemsResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListComplianceItemsResult_ComplianceItems:
+			return deserializeComplianceItemList(d, schemas.ListComplianceItemsResult_ComplianceItems, &v.ComplianceItems)
+		case schemas.ListComplianceItemsResult_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListComplianceItemsResult_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListComplianceItemsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListComplianceItems{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListComplianceItems, schemas.ListComplianceItemsRequest, schemas.ListComplianceItemsResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListComplianceItems{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListComplianceItems, schemas.ListComplianceItemsRequest, schemas.ListComplianceItemsResult), output: &ListComplianceItemsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

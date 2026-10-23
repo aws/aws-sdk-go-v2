@@ -50,6 +50,44 @@ func (CentralizationFailureReason) Values() []CentralizationFailureReason {
 	}
 }
 
+type ContextGraphStatus string
+
+// Enum values for ContextGraphStatus
+const (
+	ContextGraphStatusHealthy      ContextGraphStatus = "Healthy"
+	ContextGraphStatusUnhealthy    ContextGraphStatus = "Unhealthy"
+	ContextGraphStatusProvisioning ContextGraphStatus = "Provisioning"
+)
+
+// Values returns all known values for ContextGraphStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ContextGraphStatus) Values() []ContextGraphStatus {
+	return []ContextGraphStatus{
+		"Healthy",
+		"Unhealthy",
+		"Provisioning",
+	}
+}
+
+type DeletionProtection string
+
+// Enum values for DeletionProtection
+const (
+	DeletionProtectionEnabled DeletionProtection = "ENABLED"
+)
+
+// Values returns all known values for DeletionProtection. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (DeletionProtection) Values() []DeletionProtection {
+	return []DeletionProtection{
+		"ENABLED",
+	}
+}
+
 type DestinationType string
 
 // Enum values for DestinationType
@@ -318,6 +356,7 @@ const (
 	ResourceTypeAwsBedrockAgentcoreGateway          ResourceType = "AWS::BedrockAgentCore::Gateway"
 	ResourceTypeAwsBedrockAgentcoreMemory           ResourceType = "AWS::BedrockAgentCore::Memory"
 	ResourceTypeAwsBedrockAgentcoreWorkloadIdentity ResourceType = "AWS::BedrockAgentCore::WorkloadIdentity"
+	ResourceTypeAwsBedrockAgentcorePaymentManager   ResourceType = "AWS::BedrockAgentCore::PaymentManager"
 	ResourceTypeAwsSecurityHub                      ResourceType = "AWS::SecurityHub::Hub"
 	ResourceTypeAwsCloudfrontDistribution           ResourceType = "AWS::CloudFront::Distribution"
 	ResourceTypeAwsSecurityHubHubv2                 ResourceType = "AWS::SecurityHub::HubV2"
@@ -325,6 +364,7 @@ const (
 	ResourceTypeAwsMskCluster                       ResourceType = "AWS::MSK::Cluster"
 	ResourceTypeAwsS3Bucket                         ResourceType = "AWS::S3::Bucket"
 	ResourceTypeAwsBedrockKnowledgebase             ResourceType = "AWS::Bedrock::KnowledgeBase"
+	ResourceTypeAwsXrayTransactionSearchConfig      ResourceType = "AWS::XRay::TransactionSearchConfig"
 )
 
 // Values returns all known values for ResourceType. Note that this can be
@@ -347,6 +387,7 @@ func (ResourceType) Values() []ResourceType {
 		"AWS::BedrockAgentCore::Gateway",
 		"AWS::BedrockAgentCore::Memory",
 		"AWS::BedrockAgentCore::WorkloadIdentity",
+		"AWS::BedrockAgentCore::PaymentManager",
 		"AWS::SecurityHub::Hub",
 		"AWS::CloudFront::Distribution",
 		"AWS::SecurityHub::HubV2",
@@ -354,6 +395,7 @@ func (ResourceType) Values() []ResourceType {
 		"AWS::MSK::Cluster",
 		"AWS::S3::Bucket",
 		"AWS::Bedrock::KnowledgeBase",
+		"AWS::XRay::TransactionSearchConfig",
 	}
 }
 
@@ -609,9 +651,10 @@ type TelemetryType string
 
 // Enum values for TelemetryType
 const (
-	TelemetryTypeLogs    TelemetryType = "Logs"
-	TelemetryTypeMetrics TelemetryType = "Metrics"
-	TelemetryTypeTraces  TelemetryType = "Traces"
+	TelemetryTypeLogs     TelemetryType = "Logs"
+	TelemetryTypeMetrics  TelemetryType = "Metrics"
+	TelemetryTypeTraces   TelemetryType = "Traces"
+	TelemetryTypeInsights TelemetryType = "Insights"
 )
 
 // Values returns all known values for TelemetryType. Note that this can be
@@ -623,6 +666,7 @@ func (TelemetryType) Values() []TelemetryType {
 		"Logs",
 		"Metrics",
 		"Traces",
+		"Insights",
 	}
 }
 

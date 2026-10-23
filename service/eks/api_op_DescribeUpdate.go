@@ -5,7 +5,9 @@ package eks
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/eks/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/eks/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithytime "github.com/aws/smithy-go/time"
 	smithywaiter "github.com/aws/smithy-go/waiter"
@@ -61,6 +63,30 @@ type DescribeUpdateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeUpdateInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeUpdateRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeUpdateInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AddonName != nil {
+		s.WriteString(schemas.DescribeUpdateRequest_addonName, *v.AddonName)
+	}
+	if v.CapabilityName != nil {
+		s.WriteString(schemas.DescribeUpdateRequest_capabilityName, *v.CapabilityName)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.DescribeUpdateRequest_name, *v.Name)
+	}
+	if v.NodegroupName != nil {
+		s.WriteString(schemas.DescribeUpdateRequest_nodegroupName, *v.NodegroupName)
+	}
+	if v.UpdateId != nil {
+		s.WriteString(schemas.DescribeUpdateRequest_updateId, *v.UpdateId)
+	}
+}
+
 type DescribeUpdateOutput struct {
 
 	// The full description of the specified update.
@@ -72,13 +98,34 @@ type DescribeUpdateOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeUpdateOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeUpdateResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeUpdateOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Update != nil {
+		s.WriteStruct(schemas.DescribeUpdateResponse_update)
+		v.Update.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DescribeUpdateOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeUpdateResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeUpdateResponse_update:
+			v.Update = &types.Update{}
+			return v.Update.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeUpdateMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeUpdate{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeUpdate, schemas.DescribeUpdateRequest, schemas.DescribeUpdateResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeUpdate{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeUpdate, schemas.DescribeUpdateRequest, schemas.DescribeUpdateResponse), output: &DescribeUpdateOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

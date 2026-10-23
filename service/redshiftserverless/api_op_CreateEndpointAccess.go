@@ -4,7 +4,9 @@ package redshiftserverless
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/redshiftserverless/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/redshiftserverless/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -55,6 +57,26 @@ type CreateEndpointAccessInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateEndpointAccessInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateEndpointAccessRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateEndpointAccessInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EndpointName != nil {
+		s.WriteString(schemas.CreateEndpointAccessRequest_endpointName, *v.EndpointName)
+	}
+	if v.OwnerAccount != nil {
+		s.WriteString(schemas.CreateEndpointAccessRequest_ownerAccount, *v.OwnerAccount)
+	}
+	serializeSubnetIdList(s, schemas.CreateEndpointAccessRequest_subnetIds, v.SubnetIds)
+	serializeVpcSecurityGroupIdList(s, schemas.CreateEndpointAccessRequest_vpcSecurityGroupIds, v.VpcSecurityGroupIds)
+	if v.WorkgroupName != nil {
+		s.WriteString(schemas.CreateEndpointAccessRequest_workgroupName, *v.WorkgroupName)
+	}
+}
+
 type CreateEndpointAccessOutput struct {
 
 	// The created VPC endpoint.
@@ -66,13 +88,34 @@ type CreateEndpointAccessOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateEndpointAccessOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateEndpointAccessResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateEndpointAccessOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Endpoint != nil {
+		s.WriteStruct(schemas.CreateEndpointAccessResponse_endpoint)
+		v.Endpoint.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateEndpointAccessOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateEndpointAccessResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateEndpointAccessResponse_endpoint:
+			v.Endpoint = &types.EndpointAccess{}
+			return v.Endpoint.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateEndpointAccessMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateEndpointAccess{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateEndpointAccess, schemas.CreateEndpointAccessRequest, schemas.CreateEndpointAccessResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateEndpointAccess{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateEndpointAccess, schemas.CreateEndpointAccessRequest, schemas.CreateEndpointAccessResponse), output: &CreateEndpointAccessOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

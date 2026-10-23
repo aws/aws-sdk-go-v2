@@ -273,6 +273,8 @@ func TestCheckResponseSnapshot_CreateOutpost(t *testing.T) {
 			},
 			SiteArn:               ptr.String("__SiteArn__"),
 			SupportedHardwareType: types.SupportedHardwareType("RACK"),
+			Generation:            types.OutpostGeneration("GENERATION_2"),
+			RackScalingType:       types.RackScalingType("SINGLE_RACK"),
 		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("CreateOutpost.response")
@@ -1169,6 +1171,7 @@ func TestCheckResponseSnapshot_GetCatalogItem(t *testing.T) {
 				types.SupportedStorageEnum("EBS"),
 				types.SupportedStorageEnum("EBS"),
 			},
+			RackScalingType: types.RackScalingType("SINGLE_RACK"),
 		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("GetCatalogItem.response")
@@ -1333,6 +1336,8 @@ func TestCheckResponseSnapshot_GetOutpost(t *testing.T) {
 			},
 			SiteArn:               ptr.String("__SiteArn__"),
 			SupportedHardwareType: types.SupportedHardwareType("RACK"),
+			Generation:            types.OutpostGeneration("GENERATION_2"),
+			RackScalingType:       types.RackScalingType("SINGLE_RACK"),
 		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("GetOutpost.response")
@@ -2428,6 +2433,7 @@ func TestCheckResponseSnapshot_ListCatalogItems(t *testing.T) {
 					types.SupportedStorageEnum("EBS"),
 					types.SupportedStorageEnum("EBS"),
 				},
+				RackScalingType: types.RackScalingType("SINGLE_RACK"),
 			},
 			{
 				CatalogItemId: ptr.String("__CatalogItemId__"),
@@ -2454,6 +2460,7 @@ func TestCheckResponseSnapshot_ListCatalogItems(t *testing.T) {
 					types.SupportedStorageEnum("EBS"),
 					types.SupportedStorageEnum("EBS"),
 				},
+				RackScalingType: types.RackScalingType("SINGLE_RACK"),
 			},
 		},
 		NextToken: ptr.String("__NextToken__"),
@@ -2616,6 +2623,8 @@ func TestCheckResponseSnapshot_ListOutposts(t *testing.T) {
 				},
 				SiteArn:               ptr.String("__SiteArn__"),
 				SupportedHardwareType: types.SupportedHardwareType("RACK"),
+				Generation:            types.OutpostGeneration("GENERATION_2"),
+				RackScalingType:       types.RackScalingType("SINGLE_RACK"),
 			},
 			{
 				OutpostId:          ptr.String("__OutpostId__"),
@@ -2632,6 +2641,8 @@ func TestCheckResponseSnapshot_ListOutposts(t *testing.T) {
 				},
 				SiteArn:               ptr.String("__SiteArn__"),
 				SupportedHardwareType: types.SupportedHardwareType("RACK"),
+				Generation:            types.OutpostGeneration("GENERATION_2"),
+				RackScalingType:       types.RackScalingType("SINGLE_RACK"),
 			},
 		},
 		NextToken: ptr.String("__NextToken__"),
@@ -3948,6 +3959,8 @@ func TestCheckResponseSnapshot_UpdateOutpost(t *testing.T) {
 			},
 			SiteArn:               ptr.String("__SiteArn__"),
 			SupportedHardwareType: types.SupportedHardwareType("RACK"),
+			Generation:            types.OutpostGeneration("GENERATION_2"),
+			RackScalingType:       types.RackScalingType("SINGLE_RACK"),
 		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("UpdateOutpost.response")

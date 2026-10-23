@@ -5,7 +5,9 @@ package appconfig
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/appconfig/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/appconfig/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -46,6 +48,27 @@ type ListConfigurationProfilesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListConfigurationProfilesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListConfigurationProfilesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListConfigurationProfilesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationId != nil {
+		s.WriteString(schemas.ListConfigurationProfilesRequest_ApplicationId, *v.ApplicationId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListConfigurationProfilesRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListConfigurationProfilesRequest_NextToken, *v.NextToken)
+	}
+	if v.Type != nil {
+		s.WriteString(schemas.ListConfigurationProfilesRequest_Type, *v.Type)
+	}
+}
+
 type ListConfigurationProfilesOutput struct {
 
 	// The elements from this collection.
@@ -61,13 +84,35 @@ type ListConfigurationProfilesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListConfigurationProfilesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ConfigurationProfiles)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListConfigurationProfilesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeConfigurationProfileSummaryList(s, schemas.ConfigurationProfiles_Items, v.Items)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ConfigurationProfiles_NextToken, *v.NextToken)
+	}
+}
+func (v *ListConfigurationProfilesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ConfigurationProfiles, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ConfigurationProfiles_Items:
+			return deserializeConfigurationProfileSummaryList(d, schemas.ConfigurationProfiles_Items, &v.Items)
+		case schemas.ConfigurationProfiles_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ConfigurationProfiles_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListConfigurationProfilesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListConfigurationProfiles{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListConfigurationProfiles, schemas.ListConfigurationProfilesRequest, schemas.ConfigurationProfiles)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListConfigurationProfiles{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListConfigurationProfiles, schemas.ListConfigurationProfilesRequest, schemas.ConfigurationProfiles), output: &ListConfigurationProfilesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

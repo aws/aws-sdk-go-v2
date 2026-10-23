@@ -4,6 +4,8 @@ package glue
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/glue/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -38,6 +40,18 @@ type DeleteConnectionTypeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteConnectionTypeInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteConnectionTypeRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteConnectionTypeInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConnectionType != nil {
+		s.WriteString(schemas.DeleteConnectionTypeRequest_ConnectionType, *v.ConnectionType)
+	}
+}
+
 type DeleteConnectionTypeOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -45,13 +59,26 @@ type DeleteConnectionTypeOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteConnectionTypeOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteConnectionTypeResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteConnectionTypeOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteConnectionTypeOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteConnectionTypeResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteConnectionTypeMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteConnectionType{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteConnectionType, schemas.DeleteConnectionTypeRequest, schemas.DeleteConnectionTypeResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeleteConnectionType{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteConnectionType, schemas.DeleteConnectionTypeRequest, schemas.DeleteConnectionTypeResponse), output: &DeleteConnectionTypeOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

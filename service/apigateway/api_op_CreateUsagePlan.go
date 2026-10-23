@@ -4,7 +4,9 @@ package apigateway
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/apigateway/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/apigateway/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -55,6 +57,33 @@ type CreateUsagePlanInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateUsagePlanInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateUsagePlanRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateUsagePlanInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeListOfApiStage(s, schemas.CreateUsagePlanRequest_apiStages, v.ApiStages)
+	if v.Description != nil {
+		s.WriteString(schemas.CreateUsagePlanRequest_description, *v.Description)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateUsagePlanRequest_name, *v.Name)
+	}
+	if v.Quota != nil {
+		s.WriteStruct(schemas.CreateUsagePlanRequest_quota)
+		v.Quota.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeMapOfStringToString(s, schemas.CreateUsagePlanRequest_tags, v.Tags)
+	if v.Throttle != nil {
+		s.WriteStruct(schemas.CreateUsagePlanRequest_throttle)
+		v.Throttle.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 // Represents a usage plan used to specify who can assess associated API stages.
 // Optionally, target request rate and quota limits can be set. In some cases
 // clients can exceed the targets that you set. Don’t rely on usage plans to
@@ -96,13 +125,72 @@ type CreateUsagePlanOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateUsagePlanOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UsagePlan)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateUsagePlanOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeListOfApiStage(s, schemas.UsagePlan_apiStages, v.ApiStages)
+	if v.Description != nil {
+		s.WriteString(schemas.UsagePlan_description, *v.Description)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.UsagePlan_id, *v.Id)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.UsagePlan_name, *v.Name)
+	}
+	if v.ProductCode != nil {
+		s.WriteString(schemas.UsagePlan_productCode, *v.ProductCode)
+	}
+	if v.Quota != nil {
+		s.WriteStruct(schemas.UsagePlan_quota)
+		v.Quota.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeMapOfStringToString(s, schemas.UsagePlan_tags, v.Tags)
+	if v.Throttle != nil {
+		s.WriteStruct(schemas.UsagePlan_throttle)
+		v.Throttle.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateUsagePlanOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UsagePlan, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UsagePlan_apiStages:
+			return deserializeListOfApiStage(d, schemas.UsagePlan_apiStages, &v.ApiStages)
+		case schemas.UsagePlan_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.UsagePlan_description, v.Description)
+		case schemas.UsagePlan_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.UsagePlan_id, v.Id)
+		case schemas.UsagePlan_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.UsagePlan_name, v.Name)
+		case schemas.UsagePlan_productCode:
+			v.ProductCode = new(string)
+			return d.ReadString(schemas.UsagePlan_productCode, v.ProductCode)
+		case schemas.UsagePlan_quota:
+			v.Quota = &types.QuotaSettings{}
+			return v.Quota.Deserialize(d)
+		case schemas.UsagePlan_tags:
+			return deserializeMapOfStringToString(d, schemas.UsagePlan_tags, &v.Tags)
+		case schemas.UsagePlan_throttle:
+			v.Throttle = &types.ThrottleSettings{}
+			return v.Throttle.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateUsagePlanMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateUsagePlan{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateUsagePlan, schemas.CreateUsagePlanRequest, schemas.UsagePlan)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateUsagePlan{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateUsagePlan, schemas.CreateUsagePlanRequest, schemas.UsagePlan), output: &CreateUsagePlanOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

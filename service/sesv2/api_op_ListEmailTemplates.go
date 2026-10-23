@@ -5,7 +5,9 @@ package sesv2
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/sesv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sesv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -50,6 +52,21 @@ type ListEmailTemplatesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListEmailTemplatesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListEmailTemplatesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListEmailTemplatesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListEmailTemplatesRequest_NextToken, *v.NextToken)
+	}
+	if v.PageSize != nil {
+		s.WriteInt32(schemas.ListEmailTemplatesRequest_PageSize, *v.PageSize)
+	}
+}
+
 // The following elements are returned by the service.
 type ListEmailTemplatesOutput struct {
 
@@ -68,13 +85,35 @@ type ListEmailTemplatesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListEmailTemplatesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListEmailTemplatesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListEmailTemplatesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListEmailTemplatesResponse_NextToken, *v.NextToken)
+	}
+	serializeEmailTemplateMetadataList(s, schemas.ListEmailTemplatesResponse_TemplatesMetadata, v.TemplatesMetadata)
+}
+func (v *ListEmailTemplatesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListEmailTemplatesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListEmailTemplatesResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListEmailTemplatesResponse_NextToken, v.NextToken)
+		case schemas.ListEmailTemplatesResponse_TemplatesMetadata:
+			return deserializeEmailTemplateMetadataList(d, schemas.ListEmailTemplatesResponse_TemplatesMetadata, &v.TemplatesMetadata)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListEmailTemplatesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListEmailTemplates{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListEmailTemplates, schemas.ListEmailTemplatesRequest, schemas.ListEmailTemplatesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListEmailTemplates{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListEmailTemplates, schemas.ListEmailTemplatesRequest, schemas.ListEmailTemplatesResponse), output: &ListEmailTemplatesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

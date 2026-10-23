@@ -5,7 +5,9 @@ package backup
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/backup/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/backup/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -73,6 +75,36 @@ type ListIndexedRecoveryPointsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListIndexedRecoveryPointsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListIndexedRecoveryPointsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListIndexedRecoveryPointsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreatedAfter != nil {
+		s.WriteTime(schemas.ListIndexedRecoveryPointsInput_CreatedAfter, *v.CreatedAfter)
+	}
+	if v.CreatedBefore != nil {
+		s.WriteTime(schemas.ListIndexedRecoveryPointsInput_CreatedBefore, *v.CreatedBefore)
+	}
+	if v.IndexStatus != "" {
+		s.WriteString(schemas.ListIndexedRecoveryPointsInput_IndexStatus, string(v.IndexStatus))
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListIndexedRecoveryPointsInput_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListIndexedRecoveryPointsInput_NextToken, *v.NextToken)
+	}
+	if v.ResourceType != nil {
+		s.WriteString(schemas.ListIndexedRecoveryPointsInput_ResourceType, *v.ResourceType)
+	}
+	if v.SourceResourceArn != nil {
+		s.WriteString(schemas.ListIndexedRecoveryPointsInput_SourceResourceArn, *v.SourceResourceArn)
+	}
+}
+
 type ListIndexedRecoveryPointsOutput struct {
 
 	// This is a list of recovery points that have an associated index, belonging to
@@ -92,13 +124,35 @@ type ListIndexedRecoveryPointsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListIndexedRecoveryPointsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListIndexedRecoveryPointsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListIndexedRecoveryPointsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeIndexedRecoveryPointList(s, schemas.ListIndexedRecoveryPointsOutput_IndexedRecoveryPoints, v.IndexedRecoveryPoints)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListIndexedRecoveryPointsOutput_NextToken, *v.NextToken)
+	}
+}
+func (v *ListIndexedRecoveryPointsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListIndexedRecoveryPointsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListIndexedRecoveryPointsOutput_IndexedRecoveryPoints:
+			return deserializeIndexedRecoveryPointList(d, schemas.ListIndexedRecoveryPointsOutput_IndexedRecoveryPoints, &v.IndexedRecoveryPoints)
+		case schemas.ListIndexedRecoveryPointsOutput_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListIndexedRecoveryPointsOutput_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListIndexedRecoveryPointsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListIndexedRecoveryPoints{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListIndexedRecoveryPoints, schemas.ListIndexedRecoveryPointsInput, schemas.ListIndexedRecoveryPointsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListIndexedRecoveryPoints{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListIndexedRecoveryPoints, schemas.ListIndexedRecoveryPointsInput, schemas.ListIndexedRecoveryPointsOutput), output: &ListIndexedRecoveryPointsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

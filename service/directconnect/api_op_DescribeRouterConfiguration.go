@@ -4,7 +4,9 @@ package directconnect
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/directconnect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/directconnect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,21 @@ type DescribeRouterConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeRouterConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeRouterConfigurationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeRouterConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RouterTypeIdentifier != nil {
+		s.WriteString(schemas.DescribeRouterConfigurationRequest_routerTypeIdentifier, *v.RouterTypeIdentifier)
+	}
+	if v.VirtualInterfaceId != nil {
+		s.WriteString(schemas.DescribeRouterConfigurationRequest_virtualInterfaceId, *v.VirtualInterfaceId)
+	}
+}
+
 type DescribeRouterConfigurationOutput struct {
 
 	// The customer router configuration.
@@ -59,13 +76,52 @@ type DescribeRouterConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeRouterConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeRouterConfigurationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeRouterConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CustomerRouterConfig != nil {
+		s.WriteString(schemas.DescribeRouterConfigurationResponse_customerRouterConfig, *v.CustomerRouterConfig)
+	}
+	if v.Router != nil {
+		s.WriteStruct(schemas.DescribeRouterConfigurationResponse_router)
+		v.Router.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.VirtualInterfaceId != nil {
+		s.WriteString(schemas.DescribeRouterConfigurationResponse_virtualInterfaceId, *v.VirtualInterfaceId)
+	}
+	if v.VirtualInterfaceName != nil {
+		s.WriteString(schemas.DescribeRouterConfigurationResponse_virtualInterfaceName, *v.VirtualInterfaceName)
+	}
+}
+func (v *DescribeRouterConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeRouterConfigurationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeRouterConfigurationResponse_customerRouterConfig:
+			v.CustomerRouterConfig = new(string)
+			return d.ReadString(schemas.DescribeRouterConfigurationResponse_customerRouterConfig, v.CustomerRouterConfig)
+		case schemas.DescribeRouterConfigurationResponse_router:
+			v.Router = &types.RouterType{}
+			return v.Router.Deserialize(d)
+		case schemas.DescribeRouterConfigurationResponse_virtualInterfaceId:
+			v.VirtualInterfaceId = new(string)
+			return d.ReadString(schemas.DescribeRouterConfigurationResponse_virtualInterfaceId, v.VirtualInterfaceId)
+		case schemas.DescribeRouterConfigurationResponse_virtualInterfaceName:
+			v.VirtualInterfaceName = new(string)
+			return d.ReadString(schemas.DescribeRouterConfigurationResponse_virtualInterfaceName, v.VirtualInterfaceName)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeRouterConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeRouterConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeRouterConfiguration, schemas.DescribeRouterConfigurationRequest, schemas.DescribeRouterConfigurationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeRouterConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeRouterConfiguration, schemas.DescribeRouterConfigurationRequest, schemas.DescribeRouterConfigurationResponse), output: &DescribeRouterConfigurationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

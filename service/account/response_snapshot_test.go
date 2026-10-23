@@ -270,6 +270,7 @@ func TestCheckResponseSnapshot_GetContactInformation(t *testing.T) {
 			CompanyName:      ptr.String("__CompanyName__"),
 			WebsiteUrl:       ptr.String("__WebsiteUrl__"),
 		},
+		VerificationStatus: types.PhoneNumberVerificationStatus("PENDING"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("GetContactInformation.response")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -508,6 +509,29 @@ func TestCheckResponseSnapshot_PutContactInformation(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_SendPhoneNumberVerification(t *testing.T) {
+	want := &SendPhoneNumberVerificationOutput{
+		Status: types.PhoneNumberVerificationStatus("PENDING"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("SendPhoneNumberVerification.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.SendPhoneNumberVerification(context.Background(), &SendPhoneNumberVerificationInput{
+		AccountId: ptr.String("__AccountId__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "SendPhoneNumberVerification.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_StartPrimaryEmailUpdate(t *testing.T) {
 	want := &StartPrimaryEmailUpdateOutput{
 		Status: types.PrimaryEmailUpdateStatus("PENDING"),
@@ -529,6 +553,30 @@ func TestCheckResponseSnapshot_StartPrimaryEmailUpdate(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "StartPrimaryEmailUpdate.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_VerifyPhoneNumber(t *testing.T) {
+	want := &VerifyPhoneNumberOutput{
+		Status: types.PhoneNumberVerificationStatus("PENDING"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("VerifyPhoneNumber.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.VerifyPhoneNumber(context.Background(), &VerifyPhoneNumberInput{
+		AccountId: ptr.String("__AccountId__"),
+		Otp:       ptr.String("__Otp__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "VerifyPhoneNumber.response", err)
 	}
 }
 

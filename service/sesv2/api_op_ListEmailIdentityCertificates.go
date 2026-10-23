@@ -5,7 +5,9 @@ package sesv2
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/sesv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sesv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -57,6 +59,24 @@ type ListEmailIdentityCertificatesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListEmailIdentityCertificatesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListEmailIdentityCertificatesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListEmailIdentityCertificatesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EmailIdentity != nil {
+		s.WriteString(schemas.ListEmailIdentityCertificatesRequest_EmailIdentity, *v.EmailIdentity)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListEmailIdentityCertificatesRequest_NextToken, *v.NextToken)
+	}
+	if v.PageSize != nil {
+		s.WriteInt32(schemas.ListEmailIdentityCertificatesRequest_PageSize, *v.PageSize)
+	}
+}
+
 // Information about the S/MIME certificates that are associated with an email
 // identity.
 type ListEmailIdentityCertificatesOutput struct {
@@ -77,13 +97,35 @@ type ListEmailIdentityCertificatesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListEmailIdentityCertificatesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListEmailIdentityCertificatesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListEmailIdentityCertificatesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeIdentityCertificateList(s, schemas.ListEmailIdentityCertificatesResponse_Certificates, v.Certificates)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListEmailIdentityCertificatesResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListEmailIdentityCertificatesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListEmailIdentityCertificatesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListEmailIdentityCertificatesResponse_Certificates:
+			return deserializeIdentityCertificateList(d, schemas.ListEmailIdentityCertificatesResponse_Certificates, &v.Certificates)
+		case schemas.ListEmailIdentityCertificatesResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListEmailIdentityCertificatesResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListEmailIdentityCertificatesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListEmailIdentityCertificates{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListEmailIdentityCertificates, schemas.ListEmailIdentityCertificatesRequest, schemas.ListEmailIdentityCertificatesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListEmailIdentityCertificates{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListEmailIdentityCertificates, schemas.ListEmailIdentityCertificatesRequest, schemas.ListEmailIdentityCertificatesResponse), output: &ListEmailIdentityCertificatesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

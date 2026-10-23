@@ -5,7 +5,9 @@ package securityhub
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/securityhub/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/securityhub/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -38,6 +40,21 @@ type ListAggregatorsV2Input struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAggregatorsV2Input) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAggregatorsV2Request)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAggregatorsV2Input) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListAggregatorsV2Request_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAggregatorsV2Request_NextToken, *v.NextToken)
+	}
+}
+
 type ListAggregatorsV2Output struct {
 
 	// An array of aggregators.
@@ -53,13 +70,35 @@ type ListAggregatorsV2Output struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAggregatorsV2Output) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAggregatorsV2Response)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAggregatorsV2Output) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAggregatorV2List(s, schemas.ListAggregatorsV2Response_AggregatorsV2, v.AggregatorsV2)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAggregatorsV2Response_NextToken, *v.NextToken)
+	}
+}
+func (v *ListAggregatorsV2Output) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListAggregatorsV2Response, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListAggregatorsV2Response_AggregatorsV2:
+			return deserializeAggregatorV2List(d, schemas.ListAggregatorsV2Response_AggregatorsV2, &v.AggregatorsV2)
+		case schemas.ListAggregatorsV2Response_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListAggregatorsV2Response_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListAggregatorsV2Middlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListAggregatorsV2{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAggregatorsV2, schemas.ListAggregatorsV2Request, schemas.ListAggregatorsV2Response)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListAggregatorsV2{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAggregatorsV2, schemas.ListAggregatorsV2Request, schemas.ListAggregatorsV2Response), output: &ListAggregatorsV2Output{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package apigateway
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/apigateway/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/apigateway/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -52,6 +54,25 @@ type CreateDomainNameAccessAssociationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateDomainNameAccessAssociationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateDomainNameAccessAssociationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateDomainNameAccessAssociationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccessAssociationSource != nil {
+		s.WriteString(schemas.CreateDomainNameAccessAssociationRequest_accessAssociationSource, *v.AccessAssociationSource)
+	}
+	if v.AccessAssociationSourceType != "" {
+		s.WriteString(schemas.CreateDomainNameAccessAssociationRequest_accessAssociationSourceType, string(v.AccessAssociationSourceType))
+	}
+	if v.DomainNameArn != nil {
+		s.WriteString(schemas.CreateDomainNameAccessAssociationRequest_domainNameArn, *v.DomainNameArn)
+	}
+	serializeMapOfStringToString(s, schemas.CreateDomainNameAccessAssociationRequest_tags, v.Tags)
+}
+
 // Represents a domain name access association between an access association
 // source and a private custom domain name. With a domain name access association,
 // an access association source can invoke a private custom domain name while
@@ -80,13 +101,57 @@ type CreateDomainNameAccessAssociationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateDomainNameAccessAssociationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DomainNameAccessAssociation)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateDomainNameAccessAssociationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccessAssociationSource != nil {
+		s.WriteString(schemas.DomainNameAccessAssociation_accessAssociationSource, *v.AccessAssociationSource)
+	}
+	if v.AccessAssociationSourceType != "" {
+		s.WriteString(schemas.DomainNameAccessAssociation_accessAssociationSourceType, string(v.AccessAssociationSourceType))
+	}
+	if v.DomainNameAccessAssociationArn != nil {
+		s.WriteString(schemas.DomainNameAccessAssociation_domainNameAccessAssociationArn, *v.DomainNameAccessAssociationArn)
+	}
+	if v.DomainNameArn != nil {
+		s.WriteString(schemas.DomainNameAccessAssociation_domainNameArn, *v.DomainNameArn)
+	}
+	serializeMapOfStringToString(s, schemas.DomainNameAccessAssociation_tags, v.Tags)
+}
+func (v *CreateDomainNameAccessAssociationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DomainNameAccessAssociation, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DomainNameAccessAssociation_accessAssociationSource:
+			v.AccessAssociationSource = new(string)
+			return d.ReadString(schemas.DomainNameAccessAssociation_accessAssociationSource, v.AccessAssociationSource)
+		case schemas.DomainNameAccessAssociation_accessAssociationSourceType:
+			var ev string
+			if err := d.ReadString(schemas.DomainNameAccessAssociation_accessAssociationSourceType, &ev); err != nil {
+				return err
+			}
+			v.AccessAssociationSourceType = types.AccessAssociationSourceType(ev)
+			return nil
+		case schemas.DomainNameAccessAssociation_domainNameAccessAssociationArn:
+			v.DomainNameAccessAssociationArn = new(string)
+			return d.ReadString(schemas.DomainNameAccessAssociation_domainNameAccessAssociationArn, v.DomainNameAccessAssociationArn)
+		case schemas.DomainNameAccessAssociation_domainNameArn:
+			v.DomainNameArn = new(string)
+			return d.ReadString(schemas.DomainNameAccessAssociation_domainNameArn, v.DomainNameArn)
+		case schemas.DomainNameAccessAssociation_tags:
+			return deserializeMapOfStringToString(d, schemas.DomainNameAccessAssociation_tags, &v.Tags)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateDomainNameAccessAssociationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateDomainNameAccessAssociation{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateDomainNameAccessAssociation, schemas.CreateDomainNameAccessAssociationRequest, schemas.DomainNameAccessAssociation)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateDomainNameAccessAssociation{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateDomainNameAccessAssociation, schemas.CreateDomainNameAccessAssociationRequest, schemas.DomainNameAccessAssociation), output: &CreateDomainNameAccessAssociationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

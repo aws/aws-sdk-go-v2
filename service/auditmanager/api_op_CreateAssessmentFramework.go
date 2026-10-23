@@ -4,7 +4,9 @@ package auditmanager
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/auditmanager/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/auditmanager/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -52,6 +54,26 @@ type CreateAssessmentFrameworkInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateAssessmentFrameworkInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateAssessmentFrameworkRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateAssessmentFrameworkInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ComplianceType != nil {
+		s.WriteString(schemas.CreateAssessmentFrameworkRequest_complianceType, *v.ComplianceType)
+	}
+	serializeCreateAssessmentFrameworkControlSets(s, schemas.CreateAssessmentFrameworkRequest_controlSets, v.ControlSets)
+	if v.Description != nil {
+		s.WriteString(schemas.CreateAssessmentFrameworkRequest_description, *v.Description)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateAssessmentFrameworkRequest_name, *v.Name)
+	}
+	serializeTagMap(s, schemas.CreateAssessmentFrameworkRequest_tags, v.Tags)
+}
+
 type CreateAssessmentFrameworkOutput struct {
 
 	//  The new framework object that the CreateAssessmentFramework API returned.
@@ -63,13 +85,34 @@ type CreateAssessmentFrameworkOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateAssessmentFrameworkOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateAssessmentFrameworkResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateAssessmentFrameworkOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Framework != nil {
+		s.WriteStruct(schemas.CreateAssessmentFrameworkResponse_framework)
+		v.Framework.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateAssessmentFrameworkOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateAssessmentFrameworkResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateAssessmentFrameworkResponse_framework:
+			v.Framework = &types.Framework{}
+			return v.Framework.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateAssessmentFrameworkMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateAssessmentFramework{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateAssessmentFramework, schemas.CreateAssessmentFrameworkRequest, schemas.CreateAssessmentFrameworkResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateAssessmentFramework{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateAssessmentFramework, schemas.CreateAssessmentFrameworkRequest, schemas.CreateAssessmentFrameworkResponse), output: &CreateAssessmentFrameworkOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

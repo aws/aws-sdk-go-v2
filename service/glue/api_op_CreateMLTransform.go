@@ -4,7 +4,9 @@ package glue
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/glue/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/glue/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -162,6 +164,54 @@ type CreateMLTransformInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateMLTransformInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateMLTransformRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateMLTransformInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.CreateMLTransformRequest_Description, *v.Description)
+	}
+	if v.GlueVersion != nil {
+		s.WriteString(schemas.CreateMLTransformRequest_GlueVersion, *v.GlueVersion)
+	}
+	serializeGlueTables(s, schemas.CreateMLTransformRequest_InputRecordTables, v.InputRecordTables)
+	if v.MaxCapacity != nil {
+		s.WriteFloat64(schemas.CreateMLTransformRequest_MaxCapacity, *v.MaxCapacity)
+	}
+	if v.MaxRetries != nil {
+		s.WriteInt32(schemas.CreateMLTransformRequest_MaxRetries, *v.MaxRetries)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateMLTransformRequest_Name, *v.Name)
+	}
+	if v.NumberOfWorkers != nil {
+		s.WriteInt32(schemas.CreateMLTransformRequest_NumberOfWorkers, *v.NumberOfWorkers)
+	}
+	if v.Parameters != nil {
+		s.WriteStruct(schemas.CreateMLTransformRequest_Parameters)
+		v.Parameters.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Role != nil {
+		s.WriteString(schemas.CreateMLTransformRequest_Role, *v.Role)
+	}
+	serializeTagsMap(s, schemas.CreateMLTransformRequest_Tags, v.Tags)
+	if v.Timeout != nil {
+		s.WriteInt32(schemas.CreateMLTransformRequest_Timeout, *v.Timeout)
+	}
+	if v.TransformEncryption != nil {
+		s.WriteStruct(schemas.CreateMLTransformRequest_TransformEncryption)
+		v.TransformEncryption.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.WorkerType != "" {
+		s.WriteString(schemas.CreateMLTransformRequest_WorkerType, string(v.WorkerType))
+	}
+}
+
 type CreateMLTransformOutput struct {
 
 	// A unique identifier that is generated for the transform.
@@ -173,13 +223,32 @@ type CreateMLTransformOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateMLTransformOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateMLTransformResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateMLTransformOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TransformId != nil {
+		s.WriteString(schemas.CreateMLTransformResponse_TransformId, *v.TransformId)
+	}
+}
+func (v *CreateMLTransformOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateMLTransformResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateMLTransformResponse_TransformId:
+			v.TransformId = new(string)
+			return d.ReadString(schemas.CreateMLTransformResponse_TransformId, v.TransformId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateMLTransformMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateMLTransform{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateMLTransform, schemas.CreateMLTransformRequest, schemas.CreateMLTransformResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateMLTransform{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateMLTransform, schemas.CreateMLTransformRequest, schemas.CreateMLTransformResponse), output: &CreateMLTransformOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

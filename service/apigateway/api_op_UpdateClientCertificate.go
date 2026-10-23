@@ -4,7 +4,9 @@ package apigateway
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/apigateway/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/apigateway/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -41,6 +43,19 @@ type UpdateClientCertificateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateClientCertificateInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateClientCertificateRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateClientCertificateInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientCertificateId != nil {
+		s.WriteString(schemas.UpdateClientCertificateRequest_clientCertificateId, *v.ClientCertificateId)
+	}
+	serializeListOfPatchOperation(s, schemas.UpdateClientCertificateRequest_patchOperations, v.PatchOperations)
+}
+
 // Represents a client certificate used to configure client-side SSL
 // authentication while sending requests to the integration endpoint.
 type UpdateClientCertificateOutput struct {
@@ -70,13 +85,59 @@ type UpdateClientCertificateOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateClientCertificateOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ClientCertificate)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateClientCertificateOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientCertificateId != nil {
+		s.WriteString(schemas.ClientCertificate_clientCertificateId, *v.ClientCertificateId)
+	}
+	if v.CreatedDate != nil {
+		s.WriteTime(schemas.ClientCertificate_createdDate, *v.CreatedDate)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.ClientCertificate_description, *v.Description)
+	}
+	if v.ExpirationDate != nil {
+		s.WriteTime(schemas.ClientCertificate_expirationDate, *v.ExpirationDate)
+	}
+	if v.PemEncodedCertificate != nil {
+		s.WriteString(schemas.ClientCertificate_pemEncodedCertificate, *v.PemEncodedCertificate)
+	}
+	serializeMapOfStringToString(s, schemas.ClientCertificate_tags, v.Tags)
+}
+func (v *UpdateClientCertificateOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ClientCertificate, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ClientCertificate_clientCertificateId:
+			v.ClientCertificateId = new(string)
+			return d.ReadString(schemas.ClientCertificate_clientCertificateId, v.ClientCertificateId)
+		case schemas.ClientCertificate_createdDate:
+			v.CreatedDate = new(time.Time)
+			return d.ReadTime(schemas.ClientCertificate_createdDate, v.CreatedDate)
+		case schemas.ClientCertificate_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.ClientCertificate_description, v.Description)
+		case schemas.ClientCertificate_expirationDate:
+			v.ExpirationDate = new(time.Time)
+			return d.ReadTime(schemas.ClientCertificate_expirationDate, v.ExpirationDate)
+		case schemas.ClientCertificate_pemEncodedCertificate:
+			v.PemEncodedCertificate = new(string)
+			return d.ReadString(schemas.ClientCertificate_pemEncodedCertificate, v.PemEncodedCertificate)
+		case schemas.ClientCertificate_tags:
+			return deserializeMapOfStringToString(d, schemas.ClientCertificate_tags, &v.Tags)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateClientCertificateMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateClientCertificate{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateClientCertificate, schemas.UpdateClientCertificateRequest, schemas.ClientCertificate)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateClientCertificate{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateClientCertificate, schemas.UpdateClientCertificateRequest, schemas.ClientCertificate), output: &UpdateClientCertificateOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

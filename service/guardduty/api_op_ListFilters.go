@@ -5,6 +5,8 @@ package guardduty
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/guardduty/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -49,6 +51,24 @@ type ListFiltersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListFiltersInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListFiltersRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListFiltersInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DetectorId != nil {
+		s.WriteString(schemas.ListFiltersRequest_DetectorId, *v.DetectorId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListFiltersRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListFiltersRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListFiltersOutput struct {
 
 	// A list of filter names.
@@ -66,13 +86,35 @@ type ListFiltersOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListFiltersOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListFiltersResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListFiltersOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeFilterNames(s, schemas.ListFiltersResponse_FilterNames, v.FilterNames)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListFiltersResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListFiltersOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListFiltersResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListFiltersResponse_FilterNames:
+			return deserializeFilterNames(d, schemas.ListFiltersResponse_FilterNames, &v.FilterNames)
+		case schemas.ListFiltersResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListFiltersResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListFiltersMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListFilters{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListFilters, schemas.ListFiltersRequest, schemas.ListFiltersResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListFilters{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListFilters, schemas.ListFiltersRequest, schemas.ListFiltersResponse), output: &ListFiltersOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

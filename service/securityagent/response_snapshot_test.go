@@ -393,8 +393,48 @@ func TestCheckResponseSnapshot_BatchDeletePentests(t *testing.T) {
 					types.SkillType("FINDING_PERSONALIZATION"),
 				},
 				MaxTaskHours: ptr.Float64(1.0),
-				CreatedAt:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-				UpdatedAt:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				ReportDestination: &types.ReportDestination{
+					IntegrationId: ptr.String("__IntegrationId__"),
+					ContainerId:   ptr.String("__ContainerId__"),
+					ParentId:      ptr.String("__ParentId__"),
+					DocumentId:    ptr.String("__DocumentId__"),
+				},
+				ReportFilters: &types.ReportFilters{
+					RiskLevels: []types.RiskLevel{
+						types.RiskLevel("UNKNOWN"),
+						types.RiskLevel("UNKNOWN"),
+					},
+					ConfidenceLevels: []types.ConfidenceLevel{
+						types.ConfidenceLevel("FALSE_POSITIVE"),
+						types.ConfidenceLevel("FALSE_POSITIVE"),
+					},
+					Statuses: []types.FindingStatus{
+						types.FindingStatus("ACTIVE"),
+						types.FindingStatus("ACTIVE"),
+					},
+					RiskTypes: []types.RiskType{
+						types.RiskType("CROSS_SITE_SCRIPTING"),
+						types.RiskType("CROSS_SITE_SCRIPTING"),
+					},
+					FindingTypes: []string{
+						"__Member__",
+						"__Member__",
+					},
+					TaskStatuses: []types.TaskExecutionStatus{
+						types.TaskExecutionStatus("IN_PROGRESS"),
+						types.TaskExecutionStatus("IN_PROGRESS"),
+					},
+					AnnotationNotes:  ptr.Bool(true),
+					ComplianceReport: ptr.Bool(true),
+				},
+				CicdConfiguration: &types.CiCdConfiguration{
+					Enabled: ptr.Bool(true),
+				},
+				TestScope: &types.TestScope{
+					Type: types.TestScopeType("WEB_APP"),
+				},
+				CreatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				UpdatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			},
 			{
 				PentestId:    ptr.String("__PentestId__"),
@@ -541,8 +581,48 @@ func TestCheckResponseSnapshot_BatchDeletePentests(t *testing.T) {
 					types.SkillType("FINDING_PERSONALIZATION"),
 				},
 				MaxTaskHours: ptr.Float64(1.0),
-				CreatedAt:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-				UpdatedAt:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				ReportDestination: &types.ReportDestination{
+					IntegrationId: ptr.String("__IntegrationId__"),
+					ContainerId:   ptr.String("__ContainerId__"),
+					ParentId:      ptr.String("__ParentId__"),
+					DocumentId:    ptr.String("__DocumentId__"),
+				},
+				ReportFilters: &types.ReportFilters{
+					RiskLevels: []types.RiskLevel{
+						types.RiskLevel("UNKNOWN"),
+						types.RiskLevel("UNKNOWN"),
+					},
+					ConfidenceLevels: []types.ConfidenceLevel{
+						types.ConfidenceLevel("FALSE_POSITIVE"),
+						types.ConfidenceLevel("FALSE_POSITIVE"),
+					},
+					Statuses: []types.FindingStatus{
+						types.FindingStatus("ACTIVE"),
+						types.FindingStatus("ACTIVE"),
+					},
+					RiskTypes: []types.RiskType{
+						types.RiskType("CROSS_SITE_SCRIPTING"),
+						types.RiskType("CROSS_SITE_SCRIPTING"),
+					},
+					FindingTypes: []string{
+						"__Member__",
+						"__Member__",
+					},
+					TaskStatuses: []types.TaskExecutionStatus{
+						types.TaskExecutionStatus("IN_PROGRESS"),
+						types.TaskExecutionStatus("IN_PROGRESS"),
+					},
+					AnnotationNotes:  ptr.Bool(true),
+					ComplianceReport: ptr.Bool(true),
+				},
+				CicdConfiguration: &types.CiCdConfiguration{
+					Enabled: ptr.Bool(true),
+				},
+				TestScope: &types.TestScope{
+					Type: types.TestScopeType("WEB_APP"),
+				},
+				CreatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				UpdatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			},
 		},
 		Failed: []types.DeletePentestFailure{
@@ -658,6 +738,116 @@ func TestCheckResponseSnapshot_BatchDeleteThreatModels(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "BatchDeleteThreatModels.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_BatchDisassociateFindingIssue(t *testing.T) {
+	want := &BatchDisassociateFindingIssueOutput{
+		Errors: []types.BatchDisassociateFindingIssueError{
+			{
+				FindingId: ptr.String("__FindingId__"),
+				Code:      types.ErrorCode("CLIENT_ERROR"),
+				Message:   ptr.String("__Message__"),
+			},
+			{
+				FindingId: ptr.String("__FindingId__"),
+				Code:      types.ErrorCode("CLIENT_ERROR"),
+				Message:   ptr.String("__Message__"),
+			},
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("BatchDisassociateFindingIssue.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.BatchDisassociateFindingIssue(context.Background(), &BatchDisassociateFindingIssueInput{
+		AgentSpaceId:    ptr.String("__AgentSpaceId__"),
+		PentestJobId:    ptr.String("__PentestJobId__"),
+		CodeReviewJobId: ptr.String("__CodeReviewJobId__"),
+		FindingIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "BatchDisassociateFindingIssue.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_BatchExportFindings(t *testing.T) {
+	want := &BatchExportFindingsOutput{
+		Results: []types.BatchExportFindingResult{
+			{
+				FindingId: ptr.String("__FindingId__"),
+				LinkedIssue: &types.LinkedIssue{
+					Provider:      types.Provider("GITHUB"),
+					IntegrationId: ptr.String("__IntegrationId__"),
+					ProjectKey:    ptr.String("__ProjectKey__"),
+					IssueKey:      ptr.String("__IssueKey__"),
+					IssueId:       ptr.String("__IssueId__"),
+					IssueUrl:      ptr.String("__IssueUrl__"),
+					SiteUrl:       ptr.String("__SiteUrl__"),
+				},
+			},
+			{
+				FindingId: ptr.String("__FindingId__"),
+				LinkedIssue: &types.LinkedIssue{
+					Provider:      types.Provider("GITHUB"),
+					IntegrationId: ptr.String("__IntegrationId__"),
+					ProjectKey:    ptr.String("__ProjectKey__"),
+					IssueKey:      ptr.String("__IssueKey__"),
+					IssueId:       ptr.String("__IssueId__"),
+					IssueUrl:      ptr.String("__IssueUrl__"),
+					SiteUrl:       ptr.String("__SiteUrl__"),
+				},
+			},
+		},
+		Errors: []types.BatchExportFindingError{
+			{
+				FindingId: ptr.String("__FindingId__"),
+				Code:      types.ErrorCode("CLIENT_ERROR"),
+				Message:   ptr.String("__Message__"),
+			},
+			{
+				FindingId: ptr.String("__FindingId__"),
+				Code:      types.ErrorCode("CLIENT_ERROR"),
+				Message:   ptr.String("__Message__"),
+			},
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("BatchExportFindings.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.BatchExportFindings(context.Background(), &BatchExportFindingsInput{
+		AgentSpaceId:    ptr.String("__AgentSpaceId__"),
+		PentestJobId:    ptr.String("__PentestJobId__"),
+		CodeReviewJobId: ptr.String("__CodeReviewJobId__"),
+		IssueDestination: &types.IssueDestination{
+			IntegrationId: ptr.String("__IntegrationId__"),
+			ProjectKey:    ptr.String("__ProjectKey__"),
+		},
+		FindingIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "BatchExportFindings.response", err)
 	}
 }
 
@@ -1030,8 +1220,14 @@ func TestCheckResponseSnapshot_BatchGetCodeReviewJobs(t *testing.T) {
 				},
 				CodeRemediationStrategy: types.CodeRemediationStrategy("AUTOMATIC"),
 				MaxTaskHours:            ptr.Float64(1.0),
-				CreatedAt:               ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-				UpdatedAt:               ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				ReportDestination: &types.ReportDestination{
+					IntegrationId: ptr.String("__IntegrationId__"),
+					ContainerId:   ptr.String("__ContainerId__"),
+					ParentId:      ptr.String("__ParentId__"),
+					DocumentId:    ptr.String("__DocumentId__"),
+				},
+				CreatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				UpdatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			},
 			{
 				CodeReviewJobId: ptr.String("__CodeReviewJobId__"),
@@ -1114,8 +1310,14 @@ func TestCheckResponseSnapshot_BatchGetCodeReviewJobs(t *testing.T) {
 				},
 				CodeRemediationStrategy: types.CodeRemediationStrategy("AUTOMATIC"),
 				MaxTaskHours:            ptr.Float64(1.0),
-				CreatedAt:               ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-				UpdatedAt:               ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				ReportDestination: &types.ReportDestination{
+					IntegrationId: ptr.String("__IntegrationId__"),
+					ContainerId:   ptr.String("__ContainerId__"),
+					ParentId:      ptr.String("__ParentId__"),
+					DocumentId:    ptr.String("__DocumentId__"),
+				},
+				CreatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				UpdatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			},
 		},
 		NotFound: []string{
@@ -1251,8 +1453,42 @@ func TestCheckResponseSnapshot_BatchGetCodeReviews(t *testing.T) {
 				CodeRemediationStrategy: types.CodeRemediationStrategy("AUTOMATIC"),
 				ValidationMode:          types.ValidationMode("DISABLED"),
 				MaxTaskHours:            ptr.Float64(1.0),
-				CreatedAt:               ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-				UpdatedAt:               ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				ReportDestination: &types.ReportDestination{
+					IntegrationId: ptr.String("__IntegrationId__"),
+					ContainerId:   ptr.String("__ContainerId__"),
+					ParentId:      ptr.String("__ParentId__"),
+					DocumentId:    ptr.String("__DocumentId__"),
+				},
+				ReportFilters: &types.ReportFilters{
+					RiskLevels: []types.RiskLevel{
+						types.RiskLevel("UNKNOWN"),
+						types.RiskLevel("UNKNOWN"),
+					},
+					ConfidenceLevels: []types.ConfidenceLevel{
+						types.ConfidenceLevel("FALSE_POSITIVE"),
+						types.ConfidenceLevel("FALSE_POSITIVE"),
+					},
+					Statuses: []types.FindingStatus{
+						types.FindingStatus("ACTIVE"),
+						types.FindingStatus("ACTIVE"),
+					},
+					RiskTypes: []types.RiskType{
+						types.RiskType("CROSS_SITE_SCRIPTING"),
+						types.RiskType("CROSS_SITE_SCRIPTING"),
+					},
+					FindingTypes: []string{
+						"__Member__",
+						"__Member__",
+					},
+					TaskStatuses: []types.TaskExecutionStatus{
+						types.TaskExecutionStatus("IN_PROGRESS"),
+						types.TaskExecutionStatus("IN_PROGRESS"),
+					},
+					AnnotationNotes:  ptr.Bool(true),
+					ComplianceReport: ptr.Bool(true),
+				},
+				CreatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				UpdatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			},
 			{
 				CodeReviewId: ptr.String("__CodeReviewId__"),
@@ -1356,8 +1592,42 @@ func TestCheckResponseSnapshot_BatchGetCodeReviews(t *testing.T) {
 				CodeRemediationStrategy: types.CodeRemediationStrategy("AUTOMATIC"),
 				ValidationMode:          types.ValidationMode("DISABLED"),
 				MaxTaskHours:            ptr.Float64(1.0),
-				CreatedAt:               ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-				UpdatedAt:               ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				ReportDestination: &types.ReportDestination{
+					IntegrationId: ptr.String("__IntegrationId__"),
+					ContainerId:   ptr.String("__ContainerId__"),
+					ParentId:      ptr.String("__ParentId__"),
+					DocumentId:    ptr.String("__DocumentId__"),
+				},
+				ReportFilters: &types.ReportFilters{
+					RiskLevels: []types.RiskLevel{
+						types.RiskLevel("UNKNOWN"),
+						types.RiskLevel("UNKNOWN"),
+					},
+					ConfidenceLevels: []types.ConfidenceLevel{
+						types.ConfidenceLevel("FALSE_POSITIVE"),
+						types.ConfidenceLevel("FALSE_POSITIVE"),
+					},
+					Statuses: []types.FindingStatus{
+						types.FindingStatus("ACTIVE"),
+						types.FindingStatus("ACTIVE"),
+					},
+					RiskTypes: []types.RiskType{
+						types.RiskType("CROSS_SITE_SCRIPTING"),
+						types.RiskType("CROSS_SITE_SCRIPTING"),
+					},
+					FindingTypes: []string{
+						"__Member__",
+						"__Member__",
+					},
+					TaskStatuses: []types.TaskExecutionStatus{
+						types.TaskExecutionStatus("IN_PROGRESS"),
+						types.TaskExecutionStatus("IN_PROGRESS"),
+					},
+					AnnotationNotes:  ptr.Bool(true),
+					ComplianceReport: ptr.Bool(true),
+				},
+				CreatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				UpdatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			},
 		},
 		NotFound: []string{
@@ -1409,6 +1679,7 @@ func TestCheckResponseSnapshot_BatchGetFindings(t *testing.T) {
 				Confidence:       types.ConfidenceLevel("FALSE_POSITIVE"),
 				ValidationStatus: types.ValidationStatus("CONFIRMED"),
 				AttackScript:     ptr.String("__AttackScript__"),
+				RemediationCode:  ptr.String("__RemediationCode__"),
 				CodeRemediationTask: &types.CodeRemediationTask{
 					Status:       types.CodeRemediationTaskStatus("IN_PROGRESS"),
 					StatusReason: ptr.String("__StatusReason__"),
@@ -1462,8 +1733,17 @@ func TestCheckResponseSnapshot_BatchGetFindings(t *testing.T) {
 					"__Member__",
 				},
 				OriginalFindingId: ptr.String("__OriginalFindingId__"),
-				CreatedAt:         ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-				UpdatedAt:         ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				LinkedIssue: &types.LinkedIssue{
+					Provider:      types.Provider("GITHUB"),
+					IntegrationId: ptr.String("__IntegrationId__"),
+					ProjectKey:    ptr.String("__ProjectKey__"),
+					IssueKey:      ptr.String("__IssueKey__"),
+					IssueId:       ptr.String("__IssueId__"),
+					IssueUrl:      ptr.String("__IssueUrl__"),
+					SiteUrl:       ptr.String("__SiteUrl__"),
+				},
+				CreatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				UpdatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			},
 			{
 				FindingId:        ptr.String("__FindingId__"),
@@ -1483,6 +1763,7 @@ func TestCheckResponseSnapshot_BatchGetFindings(t *testing.T) {
 				Confidence:       types.ConfidenceLevel("FALSE_POSITIVE"),
 				ValidationStatus: types.ValidationStatus("CONFIRMED"),
 				AttackScript:     ptr.String("__AttackScript__"),
+				RemediationCode:  ptr.String("__RemediationCode__"),
 				CodeRemediationTask: &types.CodeRemediationTask{
 					Status:       types.CodeRemediationTaskStatus("IN_PROGRESS"),
 					StatusReason: ptr.String("__StatusReason__"),
@@ -1536,8 +1817,17 @@ func TestCheckResponseSnapshot_BatchGetFindings(t *testing.T) {
 					"__Member__",
 				},
 				OriginalFindingId: ptr.String("__OriginalFindingId__"),
-				CreatedAt:         ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-				UpdatedAt:         ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				LinkedIssue: &types.LinkedIssue{
+					Provider:      types.Provider("GITHUB"),
+					IntegrationId: ptr.String("__IntegrationId__"),
+					ProjectKey:    ptr.String("__ProjectKey__"),
+					IssueKey:      ptr.String("__IssueKey__"),
+					IssueId:       ptr.String("__IssueId__"),
+					IssueUrl:      ptr.String("__IssueUrl__"),
+					SiteUrl:       ptr.String("__SiteUrl__"),
+				},
+				CreatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				UpdatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			},
 		},
 		NotFound: []string{
@@ -1865,6 +2155,39 @@ func TestCheckResponseSnapshot_BatchGetPentestJobs(t *testing.T) {
 					"__Member__",
 					"__Member__",
 				},
+				ReportDestination: &types.ReportDestination{
+					IntegrationId: ptr.String("__IntegrationId__"),
+					ContainerId:   ptr.String("__ContainerId__"),
+					ParentId:      ptr.String("__ParentId__"),
+					DocumentId:    ptr.String("__DocumentId__"),
+				},
+				ReportUrl: ptr.String("__ReportUrl__"),
+				ScopeResult: &types.ScopeResult{
+					Decision: types.ScopeDecision("IN_SCOPE"),
+					Reason:   ptr.String("__Reason__"),
+				},
+				ScopeChanges: []types.ScopeChange{
+					{
+						IntegrationId:      ptr.String("__IntegrationId__"),
+						ProviderResourceId: ptr.String("__ProviderResourceId__"),
+						BaseCommitSha:      ptr.String("__BaseCommitSha__"),
+						HeadCommitSha:      ptr.String("__HeadCommitSha__"),
+						TriggerRunId:       ptr.String("__TriggerRunId__"),
+					},
+					{
+						IntegrationId:      ptr.String("__IntegrationId__"),
+						ProviderResourceId: ptr.String("__ProviderResourceId__"),
+						BaseCommitSha:      ptr.String("__BaseCommitSha__"),
+						HeadCommitSha:      ptr.String("__HeadCommitSha__"),
+						TriggerRunId:       ptr.String("__TriggerRunId__"),
+					},
+				},
+				CicdConfiguration: &types.CiCdConfiguration{
+					Enabled: ptr.Bool(true),
+				},
+				TestScope: &types.TestScope{
+					Type: types.TestScopeType("WEB_APP"),
+				},
 				CreatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 				UpdatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			},
@@ -2064,6 +2387,39 @@ func TestCheckResponseSnapshot_BatchGetPentestJobs(t *testing.T) {
 					"__Member__",
 					"__Member__",
 				},
+				ReportDestination: &types.ReportDestination{
+					IntegrationId: ptr.String("__IntegrationId__"),
+					ContainerId:   ptr.String("__ContainerId__"),
+					ParentId:      ptr.String("__ParentId__"),
+					DocumentId:    ptr.String("__DocumentId__"),
+				},
+				ReportUrl: ptr.String("__ReportUrl__"),
+				ScopeResult: &types.ScopeResult{
+					Decision: types.ScopeDecision("IN_SCOPE"),
+					Reason:   ptr.String("__Reason__"),
+				},
+				ScopeChanges: []types.ScopeChange{
+					{
+						IntegrationId:      ptr.String("__IntegrationId__"),
+						ProviderResourceId: ptr.String("__ProviderResourceId__"),
+						BaseCommitSha:      ptr.String("__BaseCommitSha__"),
+						HeadCommitSha:      ptr.String("__HeadCommitSha__"),
+						TriggerRunId:       ptr.String("__TriggerRunId__"),
+					},
+					{
+						IntegrationId:      ptr.String("__IntegrationId__"),
+						ProviderResourceId: ptr.String("__ProviderResourceId__"),
+						BaseCommitSha:      ptr.String("__BaseCommitSha__"),
+						HeadCommitSha:      ptr.String("__HeadCommitSha__"),
+						TriggerRunId:       ptr.String("__TriggerRunId__"),
+					},
+				},
+				CicdConfiguration: &types.CiCdConfiguration{
+					Enabled: ptr.Bool(true),
+				},
+				TestScope: &types.TestScope{
+					Type: types.TestScopeType("WEB_APP"),
+				},
 				CreatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 				UpdatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			},
@@ -2244,8 +2600,48 @@ func TestCheckResponseSnapshot_BatchGetPentests(t *testing.T) {
 					types.SkillType("FINDING_PERSONALIZATION"),
 				},
 				MaxTaskHours: ptr.Float64(1.0),
-				CreatedAt:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-				UpdatedAt:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				ReportDestination: &types.ReportDestination{
+					IntegrationId: ptr.String("__IntegrationId__"),
+					ContainerId:   ptr.String("__ContainerId__"),
+					ParentId:      ptr.String("__ParentId__"),
+					DocumentId:    ptr.String("__DocumentId__"),
+				},
+				ReportFilters: &types.ReportFilters{
+					RiskLevels: []types.RiskLevel{
+						types.RiskLevel("UNKNOWN"),
+						types.RiskLevel("UNKNOWN"),
+					},
+					ConfidenceLevels: []types.ConfidenceLevel{
+						types.ConfidenceLevel("FALSE_POSITIVE"),
+						types.ConfidenceLevel("FALSE_POSITIVE"),
+					},
+					Statuses: []types.FindingStatus{
+						types.FindingStatus("ACTIVE"),
+						types.FindingStatus("ACTIVE"),
+					},
+					RiskTypes: []types.RiskType{
+						types.RiskType("CROSS_SITE_SCRIPTING"),
+						types.RiskType("CROSS_SITE_SCRIPTING"),
+					},
+					FindingTypes: []string{
+						"__Member__",
+						"__Member__",
+					},
+					TaskStatuses: []types.TaskExecutionStatus{
+						types.TaskExecutionStatus("IN_PROGRESS"),
+						types.TaskExecutionStatus("IN_PROGRESS"),
+					},
+					AnnotationNotes:  ptr.Bool(true),
+					ComplianceReport: ptr.Bool(true),
+				},
+				CicdConfiguration: &types.CiCdConfiguration{
+					Enabled: ptr.Bool(true),
+				},
+				TestScope: &types.TestScope{
+					Type: types.TestScopeType("WEB_APP"),
+				},
+				CreatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				UpdatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			},
 			{
 				PentestId:    ptr.String("__PentestId__"),
@@ -2392,8 +2788,48 @@ func TestCheckResponseSnapshot_BatchGetPentests(t *testing.T) {
 					types.SkillType("FINDING_PERSONALIZATION"),
 				},
 				MaxTaskHours: ptr.Float64(1.0),
-				CreatedAt:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-				UpdatedAt:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				ReportDestination: &types.ReportDestination{
+					IntegrationId: ptr.String("__IntegrationId__"),
+					ContainerId:   ptr.String("__ContainerId__"),
+					ParentId:      ptr.String("__ParentId__"),
+					DocumentId:    ptr.String("__DocumentId__"),
+				},
+				ReportFilters: &types.ReportFilters{
+					RiskLevels: []types.RiskLevel{
+						types.RiskLevel("UNKNOWN"),
+						types.RiskLevel("UNKNOWN"),
+					},
+					ConfidenceLevels: []types.ConfidenceLevel{
+						types.ConfidenceLevel("FALSE_POSITIVE"),
+						types.ConfidenceLevel("FALSE_POSITIVE"),
+					},
+					Statuses: []types.FindingStatus{
+						types.FindingStatus("ACTIVE"),
+						types.FindingStatus("ACTIVE"),
+					},
+					RiskTypes: []types.RiskType{
+						types.RiskType("CROSS_SITE_SCRIPTING"),
+						types.RiskType("CROSS_SITE_SCRIPTING"),
+					},
+					FindingTypes: []string{
+						"__Member__",
+						"__Member__",
+					},
+					TaskStatuses: []types.TaskExecutionStatus{
+						types.TaskExecutionStatus("IN_PROGRESS"),
+						types.TaskExecutionStatus("IN_PROGRESS"),
+					},
+					AnnotationNotes:  ptr.Bool(true),
+					ComplianceReport: ptr.Bool(true),
+				},
+				CicdConfiguration: &types.CiCdConfiguration{
+					Enabled: ptr.Bool(true),
+				},
+				TestScope: &types.TestScope{
+					Type: types.TestScopeType("WEB_APP"),
+				},
+				CreatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				UpdatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			},
 		},
 		NotFound: []string{
@@ -2697,6 +3133,12 @@ func TestCheckResponseSnapshot_BatchGetThreatModelJobs(t *testing.T) {
 					Message: ptr.String("__Message__"),
 				},
 				SystemOverview: ptr.String("__SystemOverview__"),
+				ReportDestination: &types.ReportDestination{
+					IntegrationId: ptr.String("__IntegrationId__"),
+					ContainerId:   ptr.String("__ContainerId__"),
+					ParentId:      ptr.String("__ParentId__"),
+					DocumentId:    ptr.String("__DocumentId__"),
+				},
 			},
 			{
 				ThreatModelJobId:   ptr.String("__ThreatModelJobId__"),
@@ -2769,6 +3211,12 @@ func TestCheckResponseSnapshot_BatchGetThreatModelJobs(t *testing.T) {
 					Message: ptr.String("__Message__"),
 				},
 				SystemOverview: ptr.String("__SystemOverview__"),
+				ReportDestination: &types.ReportDestination{
+					IntegrationId: ptr.String("__IntegrationId__"),
+					ContainerId:   ptr.String("__ContainerId__"),
+					ParentId:      ptr.String("__ParentId__"),
+					DocumentId:    ptr.String("__DocumentId__"),
+				},
 			},
 		},
 		NotFound: []string{
@@ -2920,6 +3368,12 @@ func TestCheckResponseSnapshot_BatchGetThreatModels(t *testing.T) {
 					LogGroup:  ptr.String("__LogGroup__"),
 					LogStream: ptr.String("__LogStream__"),
 				},
+				ReportDestination: &types.ReportDestination{
+					IntegrationId: ptr.String("__IntegrationId__"),
+					ContainerId:   ptr.String("__ContainerId__"),
+					ParentId:      ptr.String("__ParentId__"),
+					DocumentId:    ptr.String("__DocumentId__"),
+				},
 				CreatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 				UpdatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			},
@@ -3040,6 +3494,12 @@ func TestCheckResponseSnapshot_BatchGetThreatModels(t *testing.T) {
 				LogConfig: &types.CloudWatchLog{
 					LogGroup:  ptr.String("__LogGroup__"),
 					LogStream: ptr.String("__LogStream__"),
+				},
+				ReportDestination: &types.ReportDestination{
+					IntegrationId: ptr.String("__IntegrationId__"),
+					ContainerId:   ptr.String("__ContainerId__"),
+					ParentId:      ptr.String("__ParentId__"),
+					DocumentId:    ptr.String("__DocumentId__"),
 				},
 				CreatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 				UpdatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
@@ -3523,6 +3983,40 @@ func TestCheckResponseSnapshot_CreateCodeReview(t *testing.T) {
 		CodeRemediationStrategy: types.CodeRemediationStrategy("AUTOMATIC"),
 		ValidationMode:          types.ValidationMode("DISABLED"),
 		MaxTaskHours:            ptr.Float64(1.0),
+		ReportDestination: &types.ReportDestination{
+			IntegrationId: ptr.String("__IntegrationId__"),
+			ContainerId:   ptr.String("__ContainerId__"),
+			ParentId:      ptr.String("__ParentId__"),
+			DocumentId:    ptr.String("__DocumentId__"),
+		},
+		ReportFilters: &types.ReportFilters{
+			RiskLevels: []types.RiskLevel{
+				types.RiskLevel("UNKNOWN"),
+				types.RiskLevel("UNKNOWN"),
+			},
+			ConfidenceLevels: []types.ConfidenceLevel{
+				types.ConfidenceLevel("FALSE_POSITIVE"),
+				types.ConfidenceLevel("FALSE_POSITIVE"),
+			},
+			Statuses: []types.FindingStatus{
+				types.FindingStatus("ACTIVE"),
+				types.FindingStatus("ACTIVE"),
+			},
+			RiskTypes: []types.RiskType{
+				types.RiskType("CROSS_SITE_SCRIPTING"),
+				types.RiskType("CROSS_SITE_SCRIPTING"),
+			},
+			FindingTypes: []string{
+				"__Member__",
+				"__Member__",
+			},
+			TaskStatuses: []types.TaskExecutionStatus{
+				types.TaskExecutionStatus("IN_PROGRESS"),
+				types.TaskExecutionStatus("IN_PROGRESS"),
+			},
+			AnnotationNotes:  ptr.Bool(true),
+			ComplianceReport: ptr.Bool(true),
+		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("CreateCodeReview.response")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -3633,6 +4127,40 @@ func TestCheckResponseSnapshot_CreateCodeReview(t *testing.T) {
 		CodeRemediationStrategy: types.CodeRemediationStrategy("AUTOMATIC"),
 		ValidationMode:          types.ValidationMode("DISABLED"),
 		MaxTaskHours:            ptr.Float64(1.0),
+		ReportDestination: &types.ReportDestination{
+			IntegrationId: ptr.String("__IntegrationId__"),
+			ContainerId:   ptr.String("__ContainerId__"),
+			ParentId:      ptr.String("__ParentId__"),
+			DocumentId:    ptr.String("__DocumentId__"),
+		},
+		ReportFilters: &types.ReportFilters{
+			RiskLevels: []types.RiskLevel{
+				types.RiskLevel("UNKNOWN"),
+				types.RiskLevel("UNKNOWN"),
+			},
+			ConfidenceLevels: []types.ConfidenceLevel{
+				types.ConfidenceLevel("FALSE_POSITIVE"),
+				types.ConfidenceLevel("FALSE_POSITIVE"),
+			},
+			Statuses: []types.FindingStatus{
+				types.FindingStatus("ACTIVE"),
+				types.FindingStatus("ACTIVE"),
+			},
+			RiskTypes: []types.RiskType{
+				types.RiskType("CROSS_SITE_SCRIPTING"),
+				types.RiskType("CROSS_SITE_SCRIPTING"),
+			},
+			FindingTypes: []string{
+				"__Member__",
+				"__Member__",
+			},
+			TaskStatuses: []types.TaskExecutionStatus{
+				types.TaskExecutionStatus("IN_PROGRESS"),
+				types.TaskExecutionStatus("IN_PROGRESS"),
+			},
+			AnnotationNotes:  ptr.Bool(true),
+			ComplianceReport: ptr.Bool(true),
+		},
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -3815,6 +4343,46 @@ func TestCheckResponseSnapshot_CreatePentest(t *testing.T) {
 			LogStream: ptr.String("__LogStream__"),
 		},
 		AgentSpaceId: ptr.String("__AgentSpaceId__"),
+		ReportDestination: &types.ReportDestination{
+			IntegrationId: ptr.String("__IntegrationId__"),
+			ContainerId:   ptr.String("__ContainerId__"),
+			ParentId:      ptr.String("__ParentId__"),
+			DocumentId:    ptr.String("__DocumentId__"),
+		},
+		ReportFilters: &types.ReportFilters{
+			RiskLevels: []types.RiskLevel{
+				types.RiskLevel("UNKNOWN"),
+				types.RiskLevel("UNKNOWN"),
+			},
+			ConfidenceLevels: []types.ConfidenceLevel{
+				types.ConfidenceLevel("FALSE_POSITIVE"),
+				types.ConfidenceLevel("FALSE_POSITIVE"),
+			},
+			Statuses: []types.FindingStatus{
+				types.FindingStatus("ACTIVE"),
+				types.FindingStatus("ACTIVE"),
+			},
+			RiskTypes: []types.RiskType{
+				types.RiskType("CROSS_SITE_SCRIPTING"),
+				types.RiskType("CROSS_SITE_SCRIPTING"),
+			},
+			FindingTypes: []string{
+				"__Member__",
+				"__Member__",
+			},
+			TaskStatuses: []types.TaskExecutionStatus{
+				types.TaskExecutionStatus("IN_PROGRESS"),
+				types.TaskExecutionStatus("IN_PROGRESS"),
+			},
+			AnnotationNotes:  ptr.Bool(true),
+			ComplianceReport: ptr.Bool(true),
+		},
+		CicdConfiguration: &types.CiCdConfiguration{
+			Enabled: ptr.Bool(true),
+		},
+		TestScope: &types.TestScope{
+			Type: types.TestScopeType("WEB_APP"),
+		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("CreatePentest.response")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -3967,6 +4535,46 @@ func TestCheckResponseSnapshot_CreatePentest(t *testing.T) {
 			types.SkillType("FINDING_PERSONALIZATION"),
 		},
 		MaxTaskHours: ptr.Float64(1.0),
+		ReportDestination: &types.ReportDestination{
+			IntegrationId: ptr.String("__IntegrationId__"),
+			ContainerId:   ptr.String("__ContainerId__"),
+			ParentId:      ptr.String("__ParentId__"),
+			DocumentId:    ptr.String("__DocumentId__"),
+		},
+		ReportFilters: &types.ReportFilters{
+			RiskLevels: []types.RiskLevel{
+				types.RiskLevel("UNKNOWN"),
+				types.RiskLevel("UNKNOWN"),
+			},
+			ConfidenceLevels: []types.ConfidenceLevel{
+				types.ConfidenceLevel("FALSE_POSITIVE"),
+				types.ConfidenceLevel("FALSE_POSITIVE"),
+			},
+			Statuses: []types.FindingStatus{
+				types.FindingStatus("ACTIVE"),
+				types.FindingStatus("ACTIVE"),
+			},
+			RiskTypes: []types.RiskType{
+				types.RiskType("CROSS_SITE_SCRIPTING"),
+				types.RiskType("CROSS_SITE_SCRIPTING"),
+			},
+			FindingTypes: []string{
+				"__Member__",
+				"__Member__",
+			},
+			TaskStatuses: []types.TaskExecutionStatus{
+				types.TaskExecutionStatus("IN_PROGRESS"),
+				types.TaskExecutionStatus("IN_PROGRESS"),
+			},
+			AnnotationNotes:  ptr.Bool(true),
+			ComplianceReport: ptr.Bool(true),
+		},
+		CicdConfiguration: &types.CiCdConfiguration{
+			Enabled: ptr.Bool(true),
+		},
+		TestScope: &types.TestScope{
+			Type: types.TestScopeType("WEB_APP"),
+		},
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -4334,6 +4942,12 @@ func TestCheckResponseSnapshot_CreateThreatModel(t *testing.T) {
 		},
 		CreatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 		UpdatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		ReportDestination: &types.ReportDestination{
+			IntegrationId: ptr.String("__IntegrationId__"),
+			ContainerId:   ptr.String("__ContainerId__"),
+			ParentId:      ptr.String("__ParentId__"),
+			DocumentId:    ptr.String("__DocumentId__"),
+		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("CreateThreatModel.response")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -4771,6 +5385,8 @@ func TestCheckResponseSnapshot_GetIntegration(t *testing.T) {
 		DisplayName:           ptr.String("__DisplayName__"),
 		KmsKeyId:              ptr.String("__KmsKeyId__"),
 		TargetUrl:             ptr.String("__TargetUrl__"),
+		SiteUrl:               ptr.String("__SiteUrl__"),
+		WebhookUrl:            ptr.String("__WebhookUrl__"),
 		PrivateConnectionName: ptr.String("__PrivateConnectionName__"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("GetIntegration.response")
@@ -4876,13 +5492,58 @@ func TestCheckResponseSnapshot_InitiateProviderRegistration(t *testing.T) {
 	}
 	svc := serdeRespClient(status, header, body)
 	got, err := svc.InitiateProviderRegistration(context.Background(), &InitiateProviderRegistrationInput{
-		Provider: types.Provider("GITHUB"),
+		Provider:         types.Provider("GITHUB"),
+		TargetUrl:        ptr.String("__TargetUrl__"),
+		OrganizationName: ptr.String("__OrganizationName__"),
+		ClientId:         ptr.String("__ClientId__"),
+		ClientSecret:     ptr.String("__ClientSecret__"),
 	})
 	if err != nil {
 		t.Fatal(err)
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "InitiateProviderRegistration.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_ListActorMessages(t *testing.T) {
+	want := &ListActorMessagesOutput{
+		Messages: []types.ActorMessage{
+			{
+				Sender:     ptr.String("__Sender__"),
+				Subject:    ptr.String("__Subject__"),
+				Body:       ptr.String("__Body__"),
+				ReceivedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+			{
+				Sender:     ptr.String("__Sender__"),
+				Subject:    ptr.String("__Subject__"),
+				Body:       ptr.String("__Body__"),
+				ReceivedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("ListActorMessages.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.ListActorMessages(context.Background(), &ListActorMessagesInput{
+		MaxResults:      ptr.Int32(1),
+		NextToken:       ptr.String("__NextToken__"),
+		AgentSpaceId:    ptr.String("__AgentSpaceId__"),
+		PentestId:       ptr.String("__PentestId__"),
+		ActorIdentifier: ptr.String("__ActorIdentifier__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "ListActorMessages.response", err)
 	}
 }
 
@@ -5264,6 +5925,56 @@ func TestCheckResponseSnapshot_ListIntegratedResources(t *testing.T) {
 				},
 				Capabilities: &types.ProviderResourceCapabilitiesMemberGithub{
 					Value: types.GitHubResourceCapabilities{
+						TriggerFilterGroups: []types.TriggerFilterGroup{
+							{
+								Events: []types.TriggerEvent{
+									types.TriggerEvent("PULL_REQUEST_READY_FOR_REVIEW"),
+									types.TriggerEvent("PULL_REQUEST_READY_FOR_REVIEW"),
+								},
+								Filters: []types.TriggerFilter{
+									{
+										Type: types.TriggerFilterType("TARGET_BRANCH"),
+										Patterns: []string{
+											"__Member__",
+											"__Member__",
+										},
+										MatchMode: types.TriggerFilterMatchMode("INCLUDE"),
+									},
+									{
+										Type: types.TriggerFilterType("TARGET_BRANCH"),
+										Patterns: []string{
+											"__Member__",
+											"__Member__",
+										},
+										MatchMode: types.TriggerFilterMatchMode("INCLUDE"),
+									},
+								},
+							},
+							{
+								Events: []types.TriggerEvent{
+									types.TriggerEvent("PULL_REQUEST_READY_FOR_REVIEW"),
+									types.TriggerEvent("PULL_REQUEST_READY_FOR_REVIEW"),
+								},
+								Filters: []types.TriggerFilter{
+									{
+										Type: types.TriggerFilterType("TARGET_BRANCH"),
+										Patterns: []string{
+											"__Member__",
+											"__Member__",
+										},
+										MatchMode: types.TriggerFilterMatchMode("INCLUDE"),
+									},
+									{
+										Type: types.TriggerFilterType("TARGET_BRANCH"),
+										Patterns: []string{
+											"__Member__",
+											"__Member__",
+										},
+										MatchMode: types.TriggerFilterMatchMode("INCLUDE"),
+									},
+								},
+							},
+						},
 						LeaveComments: ptr.Bool(true),
 						RemediateCode: ptr.Bool(true),
 					},
@@ -5281,6 +5992,56 @@ func TestCheckResponseSnapshot_ListIntegratedResources(t *testing.T) {
 				},
 				Capabilities: &types.ProviderResourceCapabilitiesMemberGithub{
 					Value: types.GitHubResourceCapabilities{
+						TriggerFilterGroups: []types.TriggerFilterGroup{
+							{
+								Events: []types.TriggerEvent{
+									types.TriggerEvent("PULL_REQUEST_READY_FOR_REVIEW"),
+									types.TriggerEvent("PULL_REQUEST_READY_FOR_REVIEW"),
+								},
+								Filters: []types.TriggerFilter{
+									{
+										Type: types.TriggerFilterType("TARGET_BRANCH"),
+										Patterns: []string{
+											"__Member__",
+											"__Member__",
+										},
+										MatchMode: types.TriggerFilterMatchMode("INCLUDE"),
+									},
+									{
+										Type: types.TriggerFilterType("TARGET_BRANCH"),
+										Patterns: []string{
+											"__Member__",
+											"__Member__",
+										},
+										MatchMode: types.TriggerFilterMatchMode("INCLUDE"),
+									},
+								},
+							},
+							{
+								Events: []types.TriggerEvent{
+									types.TriggerEvent("PULL_REQUEST_READY_FOR_REVIEW"),
+									types.TriggerEvent("PULL_REQUEST_READY_FOR_REVIEW"),
+								},
+								Filters: []types.TriggerFilter{
+									{
+										Type: types.TriggerFilterType("TARGET_BRANCH"),
+										Patterns: []string{
+											"__Member__",
+											"__Member__",
+										},
+										MatchMode: types.TriggerFilterMatchMode("INCLUDE"),
+									},
+									{
+										Type: types.TriggerFilterType("TARGET_BRANCH"),
+										Patterns: []string{
+											"__Member__",
+											"__Member__",
+										},
+										MatchMode: types.TriggerFilterMatchMode("INCLUDE"),
+									},
+								},
+							},
+						},
 						LeaveComments: ptr.Bool(true),
 						RemediateCode: ptr.Bool(true),
 					},
@@ -5322,6 +6083,7 @@ func TestCheckResponseSnapshot_ListIntegrations(t *testing.T) {
 				ProviderType:          types.ProviderType("SOURCE_CODE"),
 				DisplayName:           ptr.String("__DisplayName__"),
 				TargetUrl:             ptr.String("__TargetUrl__"),
+				WebhookUrl:            ptr.String("__WebhookUrl__"),
 				PrivateConnectionName: ptr.String("__PrivateConnectionName__"),
 			},
 			{
@@ -5331,6 +6093,7 @@ func TestCheckResponseSnapshot_ListIntegrations(t *testing.T) {
 				ProviderType:          types.ProviderType("SOURCE_CODE"),
 				DisplayName:           ptr.String("__DisplayName__"),
 				TargetUrl:             ptr.String("__TargetUrl__"),
+				WebhookUrl:            ptr.String("__WebhookUrl__"),
 				PrivateConnectionName: ptr.String("__PrivateConnectionName__"),
 			},
 		},
@@ -5494,6 +6257,8 @@ func TestCheckResponseSnapshot_ListPentestJobsForPentest(t *testing.T) {
 				Status:       types.JobStatus("IN_PROGRESS"),
 				CreatedAt:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 				UpdatedAt:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				JobType:      types.JobType("FULL"),
+				ReportUrl:    ptr.String("__ReportUrl__"),
 			},
 			{
 				PentestJobId: ptr.String("__PentestJobId__"),
@@ -5502,6 +6267,8 @@ func TestCheckResponseSnapshot_ListPentestJobsForPentest(t *testing.T) {
 				Status:       types.JobStatus("IN_PROGRESS"),
 				CreatedAt:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 				UpdatedAt:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				JobType:      types.JobType("FULL"),
+				ReportUrl:    ptr.String("__ReportUrl__"),
 			},
 		},
 		NextToken: ptr.String("__NextToken__"),
@@ -5519,6 +6286,7 @@ func TestCheckResponseSnapshot_ListPentestJobsForPentest(t *testing.T) {
 		PentestId:    ptr.String("__PentestId__"),
 		AgentSpaceId: ptr.String("__AgentSpaceId__"),
 		NextToken:    ptr.String("__NextToken__"),
+		JobType:      types.JobType("FULL"),
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -6058,6 +6826,22 @@ func TestCheckResponseSnapshot_StartPentestJob(t *testing.T) {
 			"__Member__",
 			"__Member__",
 		},
+		ScopeChanges: []types.ScopeChange{
+			{
+				IntegrationId:      ptr.String("__IntegrationId__"),
+				ProviderResourceId: ptr.String("__ProviderResourceId__"),
+				BaseCommitSha:      ptr.String("__BaseCommitSha__"),
+				HeadCommitSha:      ptr.String("__HeadCommitSha__"),
+				TriggerRunId:       ptr.String("__TriggerRunId__"),
+			},
+			{
+				IntegrationId:      ptr.String("__IntegrationId__"),
+				ProviderResourceId: ptr.String("__ProviderResourceId__"),
+				BaseCommitSha:      ptr.String("__BaseCommitSha__"),
+				HeadCommitSha:      ptr.String("__HeadCommitSha__"),
+				TriggerRunId:       ptr.String("__TriggerRunId__"),
+			},
+		},
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -6479,6 +7263,40 @@ func TestCheckResponseSnapshot_UpdateCodeReview(t *testing.T) {
 		CodeRemediationStrategy: types.CodeRemediationStrategy("AUTOMATIC"),
 		ValidationMode:          types.ValidationMode("DISABLED"),
 		MaxTaskHours:            ptr.Float64(1.0),
+		ReportDestination: &types.ReportDestination{
+			IntegrationId: ptr.String("__IntegrationId__"),
+			ContainerId:   ptr.String("__ContainerId__"),
+			ParentId:      ptr.String("__ParentId__"),
+			DocumentId:    ptr.String("__DocumentId__"),
+		},
+		ReportFilters: &types.ReportFilters{
+			RiskLevels: []types.RiskLevel{
+				types.RiskLevel("UNKNOWN"),
+				types.RiskLevel("UNKNOWN"),
+			},
+			ConfidenceLevels: []types.ConfidenceLevel{
+				types.ConfidenceLevel("FALSE_POSITIVE"),
+				types.ConfidenceLevel("FALSE_POSITIVE"),
+			},
+			Statuses: []types.FindingStatus{
+				types.FindingStatus("ACTIVE"),
+				types.FindingStatus("ACTIVE"),
+			},
+			RiskTypes: []types.RiskType{
+				types.RiskType("CROSS_SITE_SCRIPTING"),
+				types.RiskType("CROSS_SITE_SCRIPTING"),
+			},
+			FindingTypes: []string{
+				"__Member__",
+				"__Member__",
+			},
+			TaskStatuses: []types.TaskExecutionStatus{
+				types.TaskExecutionStatus("IN_PROGRESS"),
+				types.TaskExecutionStatus("IN_PROGRESS"),
+			},
+			AnnotationNotes:  ptr.Bool(true),
+			ComplianceReport: ptr.Bool(true),
+		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("UpdateCodeReview.response")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -6590,6 +7408,40 @@ func TestCheckResponseSnapshot_UpdateCodeReview(t *testing.T) {
 		CodeRemediationStrategy: types.CodeRemediationStrategy("AUTOMATIC"),
 		ValidationMode:          types.ValidationMode("DISABLED"),
 		MaxTaskHours:            ptr.Float64(1.0),
+		ReportDestination: &types.ReportDestination{
+			IntegrationId: ptr.String("__IntegrationId__"),
+			ContainerId:   ptr.String("__ContainerId__"),
+			ParentId:      ptr.String("__ParentId__"),
+			DocumentId:    ptr.String("__DocumentId__"),
+		},
+		ReportFilters: &types.ReportFilters{
+			RiskLevels: []types.RiskLevel{
+				types.RiskLevel("UNKNOWN"),
+				types.RiskLevel("UNKNOWN"),
+			},
+			ConfidenceLevels: []types.ConfidenceLevel{
+				types.ConfidenceLevel("FALSE_POSITIVE"),
+				types.ConfidenceLevel("FALSE_POSITIVE"),
+			},
+			Statuses: []types.FindingStatus{
+				types.FindingStatus("ACTIVE"),
+				types.FindingStatus("ACTIVE"),
+			},
+			RiskTypes: []types.RiskType{
+				types.RiskType("CROSS_SITE_SCRIPTING"),
+				types.RiskType("CROSS_SITE_SCRIPTING"),
+			},
+			FindingTypes: []string{
+				"__Member__",
+				"__Member__",
+			},
+			TaskStatuses: []types.TaskExecutionStatus{
+				types.TaskExecutionStatus("IN_PROGRESS"),
+				types.TaskExecutionStatus("IN_PROGRESS"),
+			},
+			AnnotationNotes:  ptr.Bool(true),
+			ComplianceReport: ptr.Bool(true),
+		},
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -6653,6 +7505,56 @@ func TestCheckResponseSnapshot_UpdateIntegratedResources(t *testing.T) {
 				},
 				Capabilities: &types.ProviderResourceCapabilitiesMemberGithub{
 					Value: types.GitHubResourceCapabilities{
+						TriggerFilterGroups: []types.TriggerFilterGroup{
+							{
+								Events: []types.TriggerEvent{
+									types.TriggerEvent("PULL_REQUEST_READY_FOR_REVIEW"),
+									types.TriggerEvent("PULL_REQUEST_READY_FOR_REVIEW"),
+								},
+								Filters: []types.TriggerFilter{
+									{
+										Type: types.TriggerFilterType("TARGET_BRANCH"),
+										Patterns: []string{
+											"__Member__",
+											"__Member__",
+										},
+										MatchMode: types.TriggerFilterMatchMode("INCLUDE"),
+									},
+									{
+										Type: types.TriggerFilterType("TARGET_BRANCH"),
+										Patterns: []string{
+											"__Member__",
+											"__Member__",
+										},
+										MatchMode: types.TriggerFilterMatchMode("INCLUDE"),
+									},
+								},
+							},
+							{
+								Events: []types.TriggerEvent{
+									types.TriggerEvent("PULL_REQUEST_READY_FOR_REVIEW"),
+									types.TriggerEvent("PULL_REQUEST_READY_FOR_REVIEW"),
+								},
+								Filters: []types.TriggerFilter{
+									{
+										Type: types.TriggerFilterType("TARGET_BRANCH"),
+										Patterns: []string{
+											"__Member__",
+											"__Member__",
+										},
+										MatchMode: types.TriggerFilterMatchMode("INCLUDE"),
+									},
+									{
+										Type: types.TriggerFilterType("TARGET_BRANCH"),
+										Patterns: []string{
+											"__Member__",
+											"__Member__",
+										},
+										MatchMode: types.TriggerFilterMatchMode("INCLUDE"),
+									},
+								},
+							},
+						},
 						LeaveComments: ptr.Bool(true),
 						RemediateCode: ptr.Bool(true),
 					},
@@ -6667,6 +7569,56 @@ func TestCheckResponseSnapshot_UpdateIntegratedResources(t *testing.T) {
 				},
 				Capabilities: &types.ProviderResourceCapabilitiesMemberGithub{
 					Value: types.GitHubResourceCapabilities{
+						TriggerFilterGroups: []types.TriggerFilterGroup{
+							{
+								Events: []types.TriggerEvent{
+									types.TriggerEvent("PULL_REQUEST_READY_FOR_REVIEW"),
+									types.TriggerEvent("PULL_REQUEST_READY_FOR_REVIEW"),
+								},
+								Filters: []types.TriggerFilter{
+									{
+										Type: types.TriggerFilterType("TARGET_BRANCH"),
+										Patterns: []string{
+											"__Member__",
+											"__Member__",
+										},
+										MatchMode: types.TriggerFilterMatchMode("INCLUDE"),
+									},
+									{
+										Type: types.TriggerFilterType("TARGET_BRANCH"),
+										Patterns: []string{
+											"__Member__",
+											"__Member__",
+										},
+										MatchMode: types.TriggerFilterMatchMode("INCLUDE"),
+									},
+								},
+							},
+							{
+								Events: []types.TriggerEvent{
+									types.TriggerEvent("PULL_REQUEST_READY_FOR_REVIEW"),
+									types.TriggerEvent("PULL_REQUEST_READY_FOR_REVIEW"),
+								},
+								Filters: []types.TriggerFilter{
+									{
+										Type: types.TriggerFilterType("TARGET_BRANCH"),
+										Patterns: []string{
+											"__Member__",
+											"__Member__",
+										},
+										MatchMode: types.TriggerFilterMatchMode("INCLUDE"),
+									},
+									{
+										Type: types.TriggerFilterType("TARGET_BRANCH"),
+										Patterns: []string{
+											"__Member__",
+											"__Member__",
+										},
+										MatchMode: types.TriggerFilterMatchMode("INCLUDE"),
+									},
+								},
+							},
+						},
 						LeaveComments: ptr.Bool(true),
 						RemediateCode: ptr.Bool(true),
 					},
@@ -6679,6 +7631,32 @@ func TestCheckResponseSnapshot_UpdateIntegratedResources(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "UpdateIntegratedResources.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_UpdateIntegration(t *testing.T) {
+	want := &UpdateIntegrationOutput{
+		IntegrationId: ptr.String("__IntegrationId__"),
+		WebhookUrl:    ptr.String("__WebhookUrl__"),
+		Secret:        ptr.String("__Secret__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("UpdateIntegration.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.UpdateIntegration(context.Background(), &UpdateIntegrationInput{
+		IntegrationId: ptr.String("__IntegrationId__"),
+		WebhookAction: types.WebhookAction("CREATE_IF_ABSENT"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "UpdateIntegration.response", err)
 	}
 }
 
@@ -6788,6 +7766,46 @@ func TestCheckResponseSnapshot_UpdatePentest(t *testing.T) {
 			LogStream: ptr.String("__LogStream__"),
 		},
 		AgentSpaceId: ptr.String("__AgentSpaceId__"),
+		ReportDestination: &types.ReportDestination{
+			IntegrationId: ptr.String("__IntegrationId__"),
+			ContainerId:   ptr.String("__ContainerId__"),
+			ParentId:      ptr.String("__ParentId__"),
+			DocumentId:    ptr.String("__DocumentId__"),
+		},
+		ReportFilters: &types.ReportFilters{
+			RiskLevels: []types.RiskLevel{
+				types.RiskLevel("UNKNOWN"),
+				types.RiskLevel("UNKNOWN"),
+			},
+			ConfidenceLevels: []types.ConfidenceLevel{
+				types.ConfidenceLevel("FALSE_POSITIVE"),
+				types.ConfidenceLevel("FALSE_POSITIVE"),
+			},
+			Statuses: []types.FindingStatus{
+				types.FindingStatus("ACTIVE"),
+				types.FindingStatus("ACTIVE"),
+			},
+			RiskTypes: []types.RiskType{
+				types.RiskType("CROSS_SITE_SCRIPTING"),
+				types.RiskType("CROSS_SITE_SCRIPTING"),
+			},
+			FindingTypes: []string{
+				"__Member__",
+				"__Member__",
+			},
+			TaskStatuses: []types.TaskExecutionStatus{
+				types.TaskExecutionStatus("IN_PROGRESS"),
+				types.TaskExecutionStatus("IN_PROGRESS"),
+			},
+			AnnotationNotes:  ptr.Bool(true),
+			ComplianceReport: ptr.Bool(true),
+		},
+		CicdConfiguration: &types.CiCdConfiguration{
+			Enabled: ptr.Bool(true),
+		},
+		TestScope: &types.TestScope{
+			Type: types.TestScopeType("WEB_APP"),
+		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("UpdatePentest.response")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -6941,6 +7959,46 @@ func TestCheckResponseSnapshot_UpdatePentest(t *testing.T) {
 			types.SkillType("FINDING_PERSONALIZATION"),
 		},
 		MaxTaskHours: ptr.Float64(1.0),
+		ReportDestination: &types.ReportDestination{
+			IntegrationId: ptr.String("__IntegrationId__"),
+			ContainerId:   ptr.String("__ContainerId__"),
+			ParentId:      ptr.String("__ParentId__"),
+			DocumentId:    ptr.String("__DocumentId__"),
+		},
+		ReportFilters: &types.ReportFilters{
+			RiskLevels: []types.RiskLevel{
+				types.RiskLevel("UNKNOWN"),
+				types.RiskLevel("UNKNOWN"),
+			},
+			ConfidenceLevels: []types.ConfidenceLevel{
+				types.ConfidenceLevel("FALSE_POSITIVE"),
+				types.ConfidenceLevel("FALSE_POSITIVE"),
+			},
+			Statuses: []types.FindingStatus{
+				types.FindingStatus("ACTIVE"),
+				types.FindingStatus("ACTIVE"),
+			},
+			RiskTypes: []types.RiskType{
+				types.RiskType("CROSS_SITE_SCRIPTING"),
+				types.RiskType("CROSS_SITE_SCRIPTING"),
+			},
+			FindingTypes: []string{
+				"__Member__",
+				"__Member__",
+			},
+			TaskStatuses: []types.TaskExecutionStatus{
+				types.TaskExecutionStatus("IN_PROGRESS"),
+				types.TaskExecutionStatus("IN_PROGRESS"),
+			},
+			AnnotationNotes:  ptr.Bool(true),
+			ComplianceReport: ptr.Bool(true),
+		},
+		CicdConfiguration: &types.CiCdConfiguration{
+			Enabled: ptr.Bool(true),
+		},
+		TestScope: &types.TestScope{
+			Type: types.TestScopeType("WEB_APP"),
+		},
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -7276,6 +8334,12 @@ func TestCheckResponseSnapshot_UpdateThreatModel(t *testing.T) {
 		},
 		CreatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 		UpdatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		ReportDestination: &types.ReportDestination{
+			IntegrationId: ptr.String("__IntegrationId__"),
+			ContainerId:   ptr.String("__ContainerId__"),
+			ParentId:      ptr.String("__ParentId__"),
+			DocumentId:    ptr.String("__DocumentId__"),
+		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("UpdateThreatModel.response")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -7402,6 +8466,12 @@ func TestCheckResponseSnapshot_UpdateThreatModel(t *testing.T) {
 		LogConfig: &types.CloudWatchLog{
 			LogGroup:  ptr.String("__LogGroup__"),
 			LogStream: ptr.String("__LogStream__"),
+		},
+		ReportDestination: &types.ReportDestination{
+			IntegrationId: ptr.String("__IntegrationId__"),
+			ContainerId:   ptr.String("__ContainerId__"),
+			ParentId:      ptr.String("__ParentId__"),
+			DocumentId:    ptr.String("__DocumentId__"),
 		},
 	})
 	if err != nil {

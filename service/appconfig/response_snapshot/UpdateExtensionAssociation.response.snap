@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"Arn":"__Arn__","ExtensionArn":"__ExtensionArn__","ExtensionVersionNumber":1,"Id":"__Id__","Parameters":{"key0":"__Value__"},"ResourceArn":"__ResourceArn__"}

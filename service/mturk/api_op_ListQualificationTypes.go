@@ -5,7 +5,9 @@ package mturk
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/mturk/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/mturk/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -57,6 +59,30 @@ type ListQualificationTypesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListQualificationTypesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListQualificationTypesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListQualificationTypesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListQualificationTypesRequest_MaxResults, *v.MaxResults)
+	}
+	if v.MustBeOwnedByCaller != nil {
+		s.WriteBool(schemas.ListQualificationTypesRequest_MustBeOwnedByCaller, *v.MustBeOwnedByCaller)
+	}
+	if v.MustBeRequestable != nil {
+		s.WriteBool(schemas.ListQualificationTypesRequest_MustBeRequestable, *v.MustBeRequestable)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListQualificationTypesRequest_NextToken, *v.NextToken)
+	}
+	if v.Query != nil {
+		s.WriteString(schemas.ListQualificationTypesRequest_Query, *v.Query)
+	}
+}
+
 type ListQualificationTypesOutput struct {
 
 	// If the previous response was incomplete (because there is more data to
@@ -77,13 +103,41 @@ type ListQualificationTypesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListQualificationTypesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListQualificationTypesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListQualificationTypesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListQualificationTypesResponse_NextToken, *v.NextToken)
+	}
+	if v.NumResults != nil {
+		s.WriteInt32(schemas.ListQualificationTypesResponse_NumResults, *v.NumResults)
+	}
+	serializeQualificationTypeList(s, schemas.ListQualificationTypesResponse_QualificationTypes, v.QualificationTypes)
+}
+func (v *ListQualificationTypesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListQualificationTypesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListQualificationTypesResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListQualificationTypesResponse_NextToken, v.NextToken)
+		case schemas.ListQualificationTypesResponse_NumResults:
+			v.NumResults = new(int32)
+			return d.ReadInt32(schemas.ListQualificationTypesResponse_NumResults, v.NumResults)
+		case schemas.ListQualificationTypesResponse_QualificationTypes:
+			return deserializeQualificationTypeList(d, schemas.ListQualificationTypesResponse_QualificationTypes, &v.QualificationTypes)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListQualificationTypesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListQualificationTypes{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListQualificationTypes, schemas.ListQualificationTypesRequest, schemas.ListQualificationTypesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListQualificationTypes{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListQualificationTypes, schemas.ListQualificationTypesRequest, schemas.ListQualificationTypesResponse), output: &ListQualificationTypesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

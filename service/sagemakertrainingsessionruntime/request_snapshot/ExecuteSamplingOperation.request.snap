@@ -1,0 +1,5 @@
+POST /v1/training-sessions/__TrainingSessionName__/sampling-operations
+
+Content-Type: application/json
+
+{"operationConfig":{"sample":{"includePromptLogprobs":true,"modelPackageArn":"__ModelPackageArn__","numSamples":1,"prompt":{"chunks":[{"tokens":[1,1],"type":"encoded_text"},{"tokens":[1,1],"type":"encoded_text"}]},"samplingParams":{"maxTokens":1,"seed":1,"stop":["__Member__","__Member__"],"temperature":1,"topK":1,"topP":1},"topkPromptLogprobs":1}}}

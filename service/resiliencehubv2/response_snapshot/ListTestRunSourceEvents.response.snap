@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"nextToken":"__NextToken__","testRunSourceEvents":[{"detail":{"alarmStateChange":{"previousState":"OK","reason":"__Reason__","state":"OK"}},"eventType":"ALARM","sourceArn":"__SourceArn__","timestamp":946684800},{"detail":{"alarmStateChange":{"previousState":"OK","reason":"__Reason__","state":"OK"}},"eventType":"ALARM","sourceArn":"__SourceArn__","timestamp":946684800}]}

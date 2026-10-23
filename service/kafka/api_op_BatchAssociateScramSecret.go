@@ -4,7 +4,9 @@ package kafka
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/kafka/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/kafka/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -40,6 +42,19 @@ type BatchAssociateScramSecretInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchAssociateScramSecretInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchAssociateScramSecretRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchAssociateScramSecretInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClusterArn != nil {
+		s.WriteString(schemas.BatchAssociateScramSecretRequest_ClusterArn, *v.ClusterArn)
+	}
+	serialize__listOf__string(s, schemas.BatchAssociateScramSecretRequest_SecretArnList, v.SecretArnList)
+}
+
 type BatchAssociateScramSecretOutput struct {
 
 	// The Amazon Resource Name (ARN) of the cluster.
@@ -54,13 +69,35 @@ type BatchAssociateScramSecretOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchAssociateScramSecretOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchAssociateScramSecretResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchAssociateScramSecretOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClusterArn != nil {
+		s.WriteString(schemas.BatchAssociateScramSecretResponse_ClusterArn, *v.ClusterArn)
+	}
+	serialize__listOfUnprocessedScramSecret(s, schemas.BatchAssociateScramSecretResponse_UnprocessedScramSecrets, v.UnprocessedScramSecrets)
+}
+func (v *BatchAssociateScramSecretOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchAssociateScramSecretResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchAssociateScramSecretResponse_ClusterArn:
+			v.ClusterArn = new(string)
+			return d.ReadString(schemas.BatchAssociateScramSecretResponse_ClusterArn, v.ClusterArn)
+		case schemas.BatchAssociateScramSecretResponse_UnprocessedScramSecrets:
+			return deserialize__listOfUnprocessedScramSecret(d, schemas.BatchAssociateScramSecretResponse_UnprocessedScramSecrets, &v.UnprocessedScramSecrets)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationBatchAssociateScramSecretMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpBatchAssociateScramSecret{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchAssociateScramSecret, schemas.BatchAssociateScramSecretRequest, schemas.BatchAssociateScramSecretResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpBatchAssociateScramSecret{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchAssociateScramSecret, schemas.BatchAssociateScramSecretRequest, schemas.BatchAssociateScramSecretResponse), output: &BatchAssociateScramSecretOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

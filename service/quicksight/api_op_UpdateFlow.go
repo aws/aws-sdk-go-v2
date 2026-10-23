@@ -6,6 +6,9 @@ import (
 	"context"
 	"fmt"
 	"github.com/aws/aws-sdk-go-v2/service/quicksight/document"
+	"github.com/aws/aws-sdk-go-v2/service/quicksight/schemas"
+	smithy "github.com/aws/smithy-go"
+	smithydocument "github.com/aws/smithy-go/document"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -62,6 +65,33 @@ type UpdateFlowInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateFlowInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateFlowRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateFlowInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AwsAccountId != nil {
+		s.WriteString(schemas.UpdateFlowRequest_AwsAccountId, *v.AwsAccountId)
+	}
+	if v.ClientToken != nil {
+		s.WriteString(schemas.UpdateFlowRequest_ClientToken, *v.ClientToken)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateFlowRequest_Description, *v.Description)
+	}
+	if v.FlowDefinition != nil {
+		s.WriteDocument(schemas.UpdateFlowRequest_FlowDefinition, &smithydocument.Opaque{Value: v.FlowDefinition})
+	}
+	if v.FlowId != nil {
+		s.WriteString(schemas.UpdateFlowRequest_FlowId, *v.FlowId)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateFlowRequest_Name, *v.Name)
+	}
+}
+
 type UpdateFlowOutput struct {
 
 	// The Amazon Resource Name (ARN) of the flow.
@@ -86,13 +116,49 @@ type UpdateFlowOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateFlowOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateFlowResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateFlowOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.UpdateFlowResponse_Arn, *v.Arn)
+	}
+	if v.FlowId != nil {
+		s.WriteString(schemas.UpdateFlowResponse_FlowId, *v.FlowId)
+	}
+	if v.RequestId != nil {
+		s.WriteString(schemas.UpdateFlowResponse_RequestId, *v.RequestId)
+	}
+	if v.Status != 0 {
+		s.WriteInt32(schemas.UpdateFlowResponse_Status, v.Status)
+	}
+}
+func (v *UpdateFlowOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateFlowResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateFlowResponse_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.UpdateFlowResponse_Arn, v.Arn)
+		case schemas.UpdateFlowResponse_FlowId:
+			v.FlowId = new(string)
+			return d.ReadString(schemas.UpdateFlowResponse_FlowId, v.FlowId)
+		case schemas.UpdateFlowResponse_RequestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.UpdateFlowResponse_RequestId, v.RequestId)
+		case schemas.UpdateFlowResponse_Status:
+			return d.ReadInt32(schemas.UpdateFlowResponse_Status, &v.Status)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateFlowMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateFlow{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateFlow, schemas.UpdateFlowRequest, schemas.UpdateFlowResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateFlow{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateFlow, schemas.UpdateFlowRequest, schemas.UpdateFlowResponse), output: &UpdateFlowOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,6 +4,8 @@ package securityhub
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/securityhub/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -38,6 +40,18 @@ type GetFindingAggregatorInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetFindingAggregatorInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetFindingAggregatorRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetFindingAggregatorInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FindingAggregatorArn != nil {
+		s.WriteString(schemas.GetFindingAggregatorRequest_FindingAggregatorArn, *v.FindingAggregatorArn)
+	}
+}
+
 type GetFindingAggregatorOutput struct {
 
 	// The home Region. Findings generated in linked Regions are replicated and sent
@@ -60,13 +74,47 @@ type GetFindingAggregatorOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetFindingAggregatorOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetFindingAggregatorResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetFindingAggregatorOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FindingAggregationRegion != nil {
+		s.WriteString(schemas.GetFindingAggregatorResponse_FindingAggregationRegion, *v.FindingAggregationRegion)
+	}
+	if v.FindingAggregatorArn != nil {
+		s.WriteString(schemas.GetFindingAggregatorResponse_FindingAggregatorArn, *v.FindingAggregatorArn)
+	}
+	if v.RegionLinkingMode != nil {
+		s.WriteString(schemas.GetFindingAggregatorResponse_RegionLinkingMode, *v.RegionLinkingMode)
+	}
+	serializeStringList(s, schemas.GetFindingAggregatorResponse_Regions, v.Regions)
+}
+func (v *GetFindingAggregatorOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetFindingAggregatorResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetFindingAggregatorResponse_FindingAggregationRegion:
+			v.FindingAggregationRegion = new(string)
+			return d.ReadString(schemas.GetFindingAggregatorResponse_FindingAggregationRegion, v.FindingAggregationRegion)
+		case schemas.GetFindingAggregatorResponse_FindingAggregatorArn:
+			v.FindingAggregatorArn = new(string)
+			return d.ReadString(schemas.GetFindingAggregatorResponse_FindingAggregatorArn, v.FindingAggregatorArn)
+		case schemas.GetFindingAggregatorResponse_RegionLinkingMode:
+			v.RegionLinkingMode = new(string)
+			return d.ReadString(schemas.GetFindingAggregatorResponse_RegionLinkingMode, v.RegionLinkingMode)
+		case schemas.GetFindingAggregatorResponse_Regions:
+			return deserializeStringList(d, schemas.GetFindingAggregatorResponse_Regions, &v.Regions)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetFindingAggregatorMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetFindingAggregator{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetFindingAggregator, schemas.GetFindingAggregatorRequest, schemas.GetFindingAggregatorResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetFindingAggregator{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetFindingAggregator, schemas.GetFindingAggregatorRequest, schemas.GetFindingAggregatorResponse), output: &GetFindingAggregatorOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

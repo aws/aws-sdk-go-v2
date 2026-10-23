@@ -4,7 +4,9 @@ package appsync
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/appsync/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/appsync/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -47,6 +49,25 @@ type CreateDomainNameInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateDomainNameInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateDomainNameRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateDomainNameInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CertificateArn != nil {
+		s.WriteString(schemas.CreateDomainNameRequest_certificateArn, *v.CertificateArn)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreateDomainNameRequest_description, *v.Description)
+	}
+	if v.DomainName != nil {
+		s.WriteString(schemas.CreateDomainNameRequest_domainName, *v.DomainName)
+	}
+	serializeTagMap(s, schemas.CreateDomainNameRequest_tags, v.Tags)
+}
+
 type CreateDomainNameOutput struct {
 
 	// The configuration for the DomainName .
@@ -58,13 +79,34 @@ type CreateDomainNameOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateDomainNameOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateDomainNameResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateDomainNameOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DomainNameConfig != nil {
+		s.WriteStruct(schemas.CreateDomainNameResponse_domainNameConfig)
+		v.DomainNameConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateDomainNameOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateDomainNameResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateDomainNameResponse_domainNameConfig:
+			v.DomainNameConfig = &types.DomainNameConfig{}
+			return v.DomainNameConfig.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateDomainNameMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateDomainName{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateDomainName, schemas.CreateDomainNameRequest, schemas.CreateDomainNameResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateDomainName{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateDomainName, schemas.CreateDomainNameRequest, schemas.CreateDomainNameResponse), output: &CreateDomainNameOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

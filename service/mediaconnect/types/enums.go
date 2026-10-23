@@ -908,6 +908,8 @@ const (
 	RouterInputTierInput100 RouterInputTier = "INPUT_100"
 	RouterInputTierInput50  RouterInputTier = "INPUT_50"
 	RouterInputTierInput20  RouterInputTier = "INPUT_20"
+	RouterInputTierInput500 RouterInputTier = "INPUT_500"
+	RouterInputTierInput250 RouterInputTier = "INPUT_250"
 )
 
 // Values returns all known values for RouterInputTier. Note that this can be
@@ -919,6 +921,8 @@ func (RouterInputTier) Values() []RouterInputTier {
 		"INPUT_100",
 		"INPUT_50",
 		"INPUT_20",
+		"INPUT_500",
+		"INPUT_250",
 	}
 }
 
@@ -1021,6 +1025,7 @@ const (
 	RouterOutputProtocolRist        RouterOutputProtocol = "RIST"
 	RouterOutputProtocolSrtCaller   RouterOutputProtocol = "SRT_CALLER"
 	RouterOutputProtocolSrtListener RouterOutputProtocol = "SRT_LISTENER"
+	RouterOutputProtocolRtmpPush    RouterOutputProtocol = "RTMP_PUSH"
 )
 
 // Values returns all known values for RouterOutputProtocol. Note that this can be
@@ -1033,6 +1038,7 @@ func (RouterOutputProtocol) Values() []RouterOutputProtocol {
 		"RIST",
 		"SRT_CALLER",
 		"SRT_LISTENER",
+		"RTMP_PUSH",
 	}
 }
 
@@ -1099,6 +1105,8 @@ const (
 	RouterOutputTierOutput100 RouterOutputTier = "OUTPUT_100"
 	RouterOutputTierOutput50  RouterOutputTier = "OUTPUT_50"
 	RouterOutputTierOutput20  RouterOutputTier = "OUTPUT_20"
+	RouterOutputTierOutput500 RouterOutputTier = "OUTPUT_500"
+	RouterOutputTierOutput250 RouterOutputTier = "OUTPUT_250"
 )
 
 // Values returns all known values for RouterOutputTier. Note that this can be
@@ -1110,6 +1118,8 @@ func (RouterOutputTier) Values() []RouterOutputTier {
 		"OUTPUT_100",
 		"OUTPUT_50",
 		"OUTPUT_20",
+		"OUTPUT_500",
+		"OUTPUT_250",
 	}
 }
 
@@ -1290,5 +1300,148 @@ func (ThumbnailState) Values() []ThumbnailState {
 	return []ThumbnailState{
 		"ENABLED",
 		"DISABLED",
+	}
+}
+
+type TlsEncryptionType string
+
+// Enum values for TlsEncryptionType
+const (
+	TlsEncryptionTypePublic TlsEncryptionType = "PUBLIC"
+)
+
+// Values returns all known values for TlsEncryptionType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (TlsEncryptionType) Values() []TlsEncryptionType {
+	return []TlsEncryptionType{
+		"PUBLIC",
+	}
+}
+
+type VideoColorimetry string
+
+// Enum values for VideoColorimetry
+const (
+	VideoColorimetryBt709       VideoColorimetry = "BT709"
+	VideoColorimetryBt470m      VideoColorimetry = "BT470M"
+	VideoColorimetryBt470bg     VideoColorimetry = "BT470BG"
+	VideoColorimetryBt601       VideoColorimetry = "BT601"
+	VideoColorimetrySmpte240m   VideoColorimetry = "SMPTE240M"
+	VideoColorimetryGenericFilm VideoColorimetry = "GENERIC_FILM"
+	VideoColorimetryBt2020      VideoColorimetry = "BT2020"
+	VideoColorimetrySmpte428    VideoColorimetry = "SMPTE428"
+	VideoColorimetrySmpte431    VideoColorimetry = "SMPTE431"
+	VideoColorimetrySmpte432    VideoColorimetry = "SMPTE432"
+)
+
+// Values returns all known values for VideoColorimetry. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (VideoColorimetry) Values() []VideoColorimetry {
+	return []VideoColorimetry{
+		"BT709",
+		"BT470M",
+		"BT470BG",
+		"BT601",
+		"SMPTE240M",
+		"GENERIC_FILM",
+		"BT2020",
+		"SMPTE428",
+		"SMPTE431",
+		"SMPTE432",
+	}
+}
+
+type VideoMatrixCoefficients string
+
+// Enum values for VideoMatrixCoefficients
+const (
+	VideoMatrixCoefficientsIdentity               VideoMatrixCoefficients = "IDENTITY"
+	VideoMatrixCoefficientsBt709                  VideoMatrixCoefficients = "BT709"
+	VideoMatrixCoefficientsFcc                    VideoMatrixCoefficients = "FCC"
+	VideoMatrixCoefficientsBt470bg                VideoMatrixCoefficients = "BT470BG"
+	VideoMatrixCoefficientsBt601                  VideoMatrixCoefficients = "BT601"
+	VideoMatrixCoefficientsSmpte240m              VideoMatrixCoefficients = "SMPTE240M"
+	VideoMatrixCoefficientsYcgco                  VideoMatrixCoefficients = "YCGCO"
+	VideoMatrixCoefficientsBt2020Ncl              VideoMatrixCoefficients = "BT2020_NCL"
+	VideoMatrixCoefficientsBt2020Cl               VideoMatrixCoefficients = "BT2020_CL"
+	VideoMatrixCoefficientsSmpte2085              VideoMatrixCoefficients = "SMPTE2085"
+	VideoMatrixCoefficientsChromaticityDerivedNcl VideoMatrixCoefficients = "CHROMATICITY_DERIVED_NCL"
+	VideoMatrixCoefficientsChromaticityDerivedCl  VideoMatrixCoefficients = "CHROMATICITY_DERIVED_CL"
+	VideoMatrixCoefficientsBt2100Ictcp            VideoMatrixCoefficients = "BT2100_ICTCP"
+	VideoMatrixCoefficientsIptC2                  VideoMatrixCoefficients = "IPT_C2"
+)
+
+// Values returns all known values for VideoMatrixCoefficients. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (VideoMatrixCoefficients) Values() []VideoMatrixCoefficients {
+	return []VideoMatrixCoefficients{
+		"IDENTITY",
+		"BT709",
+		"FCC",
+		"BT470BG",
+		"BT601",
+		"SMPTE240M",
+		"YCGCO",
+		"BT2020_NCL",
+		"BT2020_CL",
+		"SMPTE2085",
+		"CHROMATICITY_DERIVED_NCL",
+		"CHROMATICITY_DERIVED_CL",
+		"BT2100_ICTCP",
+		"IPT_C2",
+	}
+}
+
+type VideoTransferCharacteristics string
+
+// Enum values for VideoTransferCharacteristics
+const (
+	VideoTransferCharacteristicsBt709      VideoTransferCharacteristics = "BT709"
+	VideoTransferCharacteristicsBt470m     VideoTransferCharacteristics = "BT470M"
+	VideoTransferCharacteristicsBt470bg    VideoTransferCharacteristics = "BT470BG"
+	VideoTransferCharacteristicsBt601      VideoTransferCharacteristics = "BT601"
+	VideoTransferCharacteristicsSmpte240m  VideoTransferCharacteristics = "SMPTE240M"
+	VideoTransferCharacteristicsLinear     VideoTransferCharacteristics = "LINEAR"
+	VideoTransferCharacteristicsLog100     VideoTransferCharacteristics = "LOG100"
+	VideoTransferCharacteristicsLog316     VideoTransferCharacteristics = "LOG316"
+	VideoTransferCharacteristicsIec6196624 VideoTransferCharacteristics = "IEC61966_2_4"
+	VideoTransferCharacteristicsBt1361Ecg  VideoTransferCharacteristics = "BT1361_ECG"
+	VideoTransferCharacteristicsIec6196621 VideoTransferCharacteristics = "IEC61966_2_1"
+	VideoTransferCharacteristicsBt202010   VideoTransferCharacteristics = "BT2020_10"
+	VideoTransferCharacteristicsBt202012   VideoTransferCharacteristics = "BT2020_12"
+	VideoTransferCharacteristicsBt2100Pq   VideoTransferCharacteristics = "BT2100_PQ"
+	VideoTransferCharacteristicsSmpte428   VideoTransferCharacteristics = "SMPTE428"
+	VideoTransferCharacteristicsBt2100Hlg  VideoTransferCharacteristics = "BT2100_HLG"
+)
+
+// Values returns all known values for VideoTransferCharacteristics. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (VideoTransferCharacteristics) Values() []VideoTransferCharacteristics {
+	return []VideoTransferCharacteristics{
+		"BT709",
+		"BT470M",
+		"BT470BG",
+		"BT601",
+		"SMPTE240M",
+		"LINEAR",
+		"LOG100",
+		"LOG316",
+		"IEC61966_2_4",
+		"BT1361_ECG",
+		"IEC61966_2_1",
+		"BT2020_10",
+		"BT2020_12",
+		"BT2100_PQ",
+		"SMPTE428",
+		"BT2100_HLG",
 	}
 }

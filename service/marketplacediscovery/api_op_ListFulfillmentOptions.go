@@ -34,6 +34,12 @@ type ListFulfillmentOptionsInput struct {
 	// This member is required.
 	ProductId *string
 
+	// A BCP 47 language tag or comma-separated priority list specifying the preferred
+	// locale for response content. See Locale for supported values, constraints,
+	// fallback behavior, and the default locale. If omitted, the service returns
+	// content in the default locale.
+	Locale *string
+
 	// The maximum number of results that are returned per call. You can use nextToken
 	// to get more results.
 	MaxResults *int32
@@ -52,6 +58,61 @@ type ListFulfillmentOptionsOutput struct {
 	//
 	// This member is required.
 	FulfillmentOptions []types.FulfillmentOption
+
+	// A BCP 47 language tag or comma-separated priority list of language tags that
+	// specifies the preferred locale for response content. The field accepts a maximum
+	// of two language tags.
+	//
+	// The service resolves a locale string to the nearest supported locale. If no
+	// supported locale matches, the service applies the fallback behavior described
+	// below.
+	//
+	//   - Preferred locale (first tag) – The locale you want the service to return
+	//   content in.
+	//
+	//   - Fallback locale (optional, second tag) – The service default locale ( en-US
+	//   or en ). The service returns content in this locale when translated content
+	//   for the preferred locale is unavailable.
+	//
+	// The field is optional. If omitted or null, the service returns content in the
+	// default locale ( en-US ).
+	//
+	// Supported locales:
+	//
+	//   - en-US – English (service default, also resolves from en )
+	//
+	//   - fr – French
+	//
+	//   - es – Spanish
+	//
+	//   - ko – Korean
+	//
+	//   - ja – Japanese
+	//
+	// Fallback behavior:
+	//
+	//   - If translated content for the preferred locale is unavailable, the service
+	//   returns content in the default locale.
+	//
+	//   - If the preferred locale is not supported and no fallback is provided, the
+	//   service returns a ValidationException .
+	//
+	//   - If you provide an unsupported locale with the default locale as fallback
+	//   (for example, xx, en-US ), the service returns content in the default locale.
+	//
+	// Response locale field (Get APIs): The locale field in Get API responses
+	// indicates the locale of the returned content. You can use this field to
+	// determine whether the response contains content in the requested locale or the
+	// default locale.
+	//
+	// Examples:
+	//
+	//   - fr – Request French content. If unavailable, falls back to en-US .
+	//
+	//   - fr, en-US – Request French content with explicit fallback to English.
+	//
+	//   - en-US – Request content in the default locale.
+	Locale *string
 
 	// If nextToken is returned, there are more results available. Make the call again
 	// using the returned token to retrieve the next page.

@@ -1784,9 +1784,10 @@ func TestCheckRequestSnapshot_DeleteResourceDataSync(t *testing.T) {
 
 func TestCheckRequestSnapshot_DeleteResourcePolicy(t *testing.T) {
 	input := &DeleteResourcePolicyInput{
-		ResourceArn: ptr.String("__ResourceArn__"),
-		PolicyId:    ptr.String("__PolicyId__"),
-		PolicyHash:  ptr.String("__PolicyHash__"),
+		ResourceArn:  ptr.String("__ResourceArn__"),
+		PolicyId:     ptr.String("__PolicyId__"),
+		PolicyHash:   ptr.String("__PolicyHash__"),
+		DeletionMode: types.DeletionMode("RemoveSharing"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -9412,9 +9413,10 @@ func TestUpdateRequestSnapshot_DeleteResourceDataSync(t *testing.T) {
 
 func TestUpdateRequestSnapshot_DeleteResourcePolicy(t *testing.T) {
 	input := &DeleteResourcePolicyInput{
-		ResourceArn: ptr.String("__ResourceArn__"),
-		PolicyId:    ptr.String("__PolicyId__"),
-		PolicyHash:  ptr.String("__PolicyHash__"),
+		ResourceArn:  ptr.String("__ResourceArn__"),
+		PolicyId:     ptr.String("__PolicyId__"),
+		PolicyHash:   ptr.String("__PolicyHash__"),
+		DeletionMode: types.DeletionMode("RemoveSharing"),
 	}
 	body := &bytes.Buffer{}
 	method := ""

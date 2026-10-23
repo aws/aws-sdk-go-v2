@@ -60,6 +60,7 @@ const (
 	AgentRuntimeEndpointStatusUpdateFailed AgentRuntimeEndpointStatus = "UPDATE_FAILED"
 	AgentRuntimeEndpointStatusReady        AgentRuntimeEndpointStatus = "READY"
 	AgentRuntimeEndpointStatusDeleting     AgentRuntimeEndpointStatus = "DELETING"
+	AgentRuntimeEndpointStatusDeleteFailed AgentRuntimeEndpointStatus = "DELETE_FAILED"
 )
 
 // Values returns all known values for AgentRuntimeEndpointStatus. Note that this
@@ -74,6 +75,7 @@ func (AgentRuntimeEndpointStatus) Values() []AgentRuntimeEndpointStatus {
 		"UPDATE_FAILED",
 		"READY",
 		"DELETING",
+		"DELETE_FAILED",
 	}
 }
 
@@ -87,6 +89,7 @@ const (
 	AgentRuntimeStatusUpdateFailed AgentRuntimeStatus = "UPDATE_FAILED"
 	AgentRuntimeStatusReady        AgentRuntimeStatus = "READY"
 	AgentRuntimeStatusDeleting     AgentRuntimeStatus = "DELETING"
+	AgentRuntimeStatusDeleteFailed AgentRuntimeStatus = "DELETE_FAILED"
 )
 
 // Values returns all known values for AgentRuntimeStatus. Note that this can be
@@ -101,6 +104,7 @@ func (AgentRuntimeStatus) Values() []AgentRuntimeStatus {
 		"UPDATE_FAILED",
 		"READY",
 		"DELETING",
+		"DELETE_FAILED",
 	}
 }
 
@@ -308,6 +312,25 @@ func (CapacityReservationPreference) Values() []CapacityReservationPreference {
 	}
 }
 
+type CircuitBreakerMode string
+
+// Enum values for CircuitBreakerMode
+const (
+	CircuitBreakerModeEnabled  CircuitBreakerMode = "ENABLED"
+	CircuitBreakerModeDisabled CircuitBreakerMode = "DISABLED"
+)
+
+// Values returns all known values for CircuitBreakerMode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (CircuitBreakerMode) Values() []CircuitBreakerMode {
+	return []CircuitBreakerMode{
+		"ENABLED",
+		"DISABLED",
+	}
+}
+
 type ClaimMatchOperatorType string
 
 // Enum values for ClaimMatchOperatorType
@@ -419,6 +442,25 @@ func (CodeInterpreterStatus) Values() []CodeInterpreterStatus {
 		"DELETING",
 		"DELETE_FAILED",
 		"DELETED",
+	}
+}
+
+type CoinbaseCdpSecret string
+
+// Enum values for CoinbaseCdpSecret
+const (
+	CoinbaseCdpSecretApiKey       CoinbaseCdpSecret = "API_KEY"
+	CoinbaseCdpSecretWalletSecret CoinbaseCdpSecret = "WALLET_SECRET"
+)
+
+// Values returns all known values for CoinbaseCdpSecret. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (CoinbaseCdpSecret) Values() []CoinbaseCdpSecret {
+	return []CoinbaseCdpSecret{
+		"API_KEY",
+		"WALLET_SECRET",
 	}
 }
 
@@ -909,6 +951,36 @@ func (ExtractionType) Values() []ExtractionType {
 	}
 }
 
+type FallbackError string
+
+// Enum values for FallbackError
+const (
+	// The gateway could not establish a connection to the destination (connection
+	// refused/reset, or connection timeout) — the attempt never reached the provider.
+	// Feeds the circuit breaker.
+	FallbackErrorConnectionError FallbackError = "CONNECTION_ERROR"
+	// The destination accepted the connection but did not return the first response
+	// byte within firstByteTimeoutMilliseconds; the attempt is abandoned before any
+	// byte reaches the client. Feeds the circuit breaker.
+	FallbackErrorFirstByteTimeout FallbackError = "FIRST_BYTE_TIMEOUT"
+	// Gateway-side: the target could not be routed to (target missing, or it does not
+	// support the request's API path). Deterministic — advances the chain but does NOT
+	// feed the breaker.
+	FallbackErrorUnroutable FallbackError = "UNROUTABLE"
+)
+
+// Values returns all known values for FallbackError. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (FallbackError) Values() []FallbackError {
+	return []FallbackError{
+		"CONNECTION_ERROR",
+		"FIRST_BYTE_TIMEOUT",
+		"UNROUTABLE",
+	}
+}
+
 type FilterOperator string
 
 // Enum values for FilterOperator
@@ -1150,6 +1222,27 @@ func (HarnessEndpointStatus) Values() []HarnessEndpointStatus {
 	}
 }
 
+type HarnessHookFailureMode string
+
+// Enum values for HarnessHookFailureMode
+const (
+	// Specifies that the current action continues when the hook target fails.
+	HarnessHookFailureModeAllow HarnessHookFailureMode = "allow"
+	// Specifies that the service denies the current action when the hook target fails.
+	HarnessHookFailureModeDeny HarnessHookFailureMode = "deny"
+)
+
+// Values returns all known values for HarnessHookFailureMode. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (HarnessHookFailureMode) Values() []HarnessHookFailureMode {
+	return []HarnessHookFailureMode{
+		"allow",
+		"deny",
+	}
+}
+
 type HarnessManagedMemoryStrategyType string
 
 // Enum values for HarnessManagedMemoryStrategyType
@@ -1360,6 +1453,25 @@ func (ListingMode) Values() []ListingMode {
 	return []ListingMode{
 		"DEFAULT",
 		"DYNAMIC",
+	}
+}
+
+type MatchOperator string
+
+// Enum values for MatchOperator
+const (
+	MatchOperatorStringEquals MatchOperator = "StringEquals"
+	MatchOperatorStringLike   MatchOperator = "StringLike"
+)
+
+// Values returns all known values for MatchOperator. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (MatchOperator) Values() []MatchOperator {
+	return []MatchOperator{
+		"StringEquals",
+		"StringLike",
 	}
 }
 
@@ -1981,6 +2093,23 @@ func (Provider) Values() []Provider {
 		"DeepEval",
 		"AutoEval",
 		"Custom",
+	}
+}
+
+type RecordExpiryAction string
+
+// Enum values for RecordExpiryAction
+const (
+	RecordExpiryActionRemove RecordExpiryAction = "REMOVE"
+)
+
+// Values returns all known values for RecordExpiryAction. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (RecordExpiryAction) Values() []RecordExpiryAction {
+	return []RecordExpiryAction{
+		"REMOVE",
 	}
 }
 

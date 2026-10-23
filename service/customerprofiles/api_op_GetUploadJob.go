@@ -4,7 +4,9 @@ package customerprofiles
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/customerprofiles/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/customerprofiles/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -38,6 +40,21 @@ type GetUploadJobInput struct {
 	JobId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetUploadJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetUploadJobRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetUploadJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DomainName != nil {
+		s.WriteString(schemas.GetUploadJobRequest_DomainName, *v.DomainName)
+	}
+	if v.JobId != nil {
+		s.WriteString(schemas.GetUploadJobRequest_JobId, *v.JobId)
+	}
 }
 
 type GetUploadJobOutput struct {
@@ -104,13 +121,93 @@ type GetUploadJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetUploadJobOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetUploadJobResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetUploadJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CompletedAt != nil {
+		s.WriteTime(schemas.GetUploadJobResponse_CompletedAt, *v.CompletedAt)
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.GetUploadJobResponse_CreatedAt, *v.CreatedAt)
+	}
+	if v.DataExpiry != nil {
+		s.WriteInt32(schemas.GetUploadJobResponse_DataExpiry, *v.DataExpiry)
+	}
+	if v.DisplayName != nil {
+		s.WriteString(schemas.GetUploadJobResponse_DisplayName, *v.DisplayName)
+	}
+	serializeFieldMap(s, schemas.GetUploadJobResponse_Fields, v.Fields)
+	if v.JobId != nil {
+		s.WriteString(schemas.GetUploadJobResponse_JobId, *v.JobId)
+	}
+	if v.ResultsSummary != nil {
+		s.WriteStruct(schemas.GetUploadJobResponse_ResultsSummary)
+		v.ResultsSummary.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.GetUploadJobResponse_Status, string(v.Status))
+	}
+	if v.StatusReason != "" {
+		s.WriteString(schemas.GetUploadJobResponse_StatusReason, string(v.StatusReason))
+	}
+	if v.UniqueKey != nil {
+		s.WriteString(schemas.GetUploadJobResponse_UniqueKey, *v.UniqueKey)
+	}
+}
+func (v *GetUploadJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetUploadJobResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetUploadJobResponse_CompletedAt:
+			v.CompletedAt = new(time.Time)
+			return d.ReadTime(schemas.GetUploadJobResponse_CompletedAt, v.CompletedAt)
+		case schemas.GetUploadJobResponse_CreatedAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.GetUploadJobResponse_CreatedAt, v.CreatedAt)
+		case schemas.GetUploadJobResponse_DataExpiry:
+			v.DataExpiry = new(int32)
+			return d.ReadInt32(schemas.GetUploadJobResponse_DataExpiry, v.DataExpiry)
+		case schemas.GetUploadJobResponse_DisplayName:
+			v.DisplayName = new(string)
+			return d.ReadString(schemas.GetUploadJobResponse_DisplayName, v.DisplayName)
+		case schemas.GetUploadJobResponse_Fields:
+			return deserializeFieldMap(d, schemas.GetUploadJobResponse_Fields, &v.Fields)
+		case schemas.GetUploadJobResponse_JobId:
+			v.JobId = new(string)
+			return d.ReadString(schemas.GetUploadJobResponse_JobId, v.JobId)
+		case schemas.GetUploadJobResponse_ResultsSummary:
+			v.ResultsSummary = &types.ResultsSummary{}
+			return v.ResultsSummary.Deserialize(d)
+		case schemas.GetUploadJobResponse_Status:
+			var ev string
+			if err := d.ReadString(schemas.GetUploadJobResponse_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.UploadJobStatus(ev)
+			return nil
+		case schemas.GetUploadJobResponse_StatusReason:
+			var ev string
+			if err := d.ReadString(schemas.GetUploadJobResponse_StatusReason, &ev); err != nil {
+				return err
+			}
+			v.StatusReason = types.StatusReason(ev)
+			return nil
+		case schemas.GetUploadJobResponse_UniqueKey:
+			v.UniqueKey = new(string)
+			return d.ReadString(schemas.GetUploadJobResponse_UniqueKey, v.UniqueKey)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetUploadJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetUploadJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetUploadJob, schemas.GetUploadJobRequest, schemas.GetUploadJobResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetUploadJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetUploadJob, schemas.GetUploadJobRequest, schemas.GetUploadJobResponse), output: &GetUploadJobOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

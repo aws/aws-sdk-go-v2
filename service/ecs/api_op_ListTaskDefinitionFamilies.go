@@ -5,7 +5,9 @@ package ecs
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/ecs/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ecs/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -69,6 +71,27 @@ type ListTaskDefinitionFamiliesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListTaskDefinitionFamiliesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListTaskDefinitionFamiliesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListTaskDefinitionFamiliesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FamilyPrefix != nil {
+		s.WriteString(schemas.ListTaskDefinitionFamiliesRequest_familyPrefix, *v.FamilyPrefix)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListTaskDefinitionFamiliesRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListTaskDefinitionFamiliesRequest_nextToken, *v.NextToken)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.ListTaskDefinitionFamiliesRequest_status, string(v.Status))
+	}
+}
+
 type ListTaskDefinitionFamiliesOutput struct {
 
 	// The list of task definition family names that match the
@@ -87,13 +110,35 @@ type ListTaskDefinitionFamiliesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListTaskDefinitionFamiliesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListTaskDefinitionFamiliesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListTaskDefinitionFamiliesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeStringList(s, schemas.ListTaskDefinitionFamiliesResponse_families, v.Families)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListTaskDefinitionFamiliesResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListTaskDefinitionFamiliesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListTaskDefinitionFamiliesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListTaskDefinitionFamiliesResponse_families:
+			return deserializeStringList(d, schemas.ListTaskDefinitionFamiliesResponse_families, &v.Families)
+		case schemas.ListTaskDefinitionFamiliesResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListTaskDefinitionFamiliesResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListTaskDefinitionFamiliesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListTaskDefinitionFamilies{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListTaskDefinitionFamilies, schemas.ListTaskDefinitionFamiliesRequest, schemas.ListTaskDefinitionFamiliesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListTaskDefinitionFamilies{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListTaskDefinitionFamilies, schemas.ListTaskDefinitionFamiliesRequest, schemas.ListTaskDefinitionFamiliesResponse), output: &ListTaskDefinitionFamiliesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

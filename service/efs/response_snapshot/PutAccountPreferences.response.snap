@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"ResourceIdPreference":{"ResourceIdType":"LONG_ID","Resources":["FILE_SYSTEM","FILE_SYSTEM"]}}

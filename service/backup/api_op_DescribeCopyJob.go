@@ -4,7 +4,9 @@ package backup
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/backup/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/backup/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -34,6 +36,18 @@ type DescribeCopyJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeCopyJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeCopyJobInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeCopyJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CopyJobId != nil {
+		s.WriteString(schemas.DescribeCopyJobInput_CopyJobId, *v.CopyJobId)
+	}
+}
+
 type DescribeCopyJobOutput struct {
 
 	// Contains detailed information about a copy job.
@@ -45,13 +59,34 @@ type DescribeCopyJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeCopyJobOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeCopyJobOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeCopyJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CopyJob != nil {
+		s.WriteStruct(schemas.DescribeCopyJobOutput_CopyJob)
+		v.CopyJob.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DescribeCopyJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeCopyJobOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeCopyJobOutput_CopyJob:
+			v.CopyJob = &types.CopyJob{}
+			return v.CopyJob.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeCopyJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeCopyJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeCopyJob, schemas.DescribeCopyJobInput, schemas.DescribeCopyJobOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeCopyJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeCopyJob, schemas.DescribeCopyJobInput, schemas.DescribeCopyJobOutput), output: &DescribeCopyJobOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

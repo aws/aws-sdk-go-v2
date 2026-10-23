@@ -5,7 +5,9 @@ package devicefarm
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/devicefarm/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/devicefarm/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -36,6 +38,21 @@ type ListTestGridProjectsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListTestGridProjectsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListTestGridProjectsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListTestGridProjectsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResult != nil {
+		s.WriteInt32(schemas.ListTestGridProjectsRequest_maxResult, *v.MaxResult)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListTestGridProjectsRequest_nextToken, *v.NextToken)
+	}
+}
+
 type ListTestGridProjectsOutput struct {
 
 	// Used for pagination. Pass into ListTestGridProjects to get more results in a paginated request.
@@ -50,13 +67,35 @@ type ListTestGridProjectsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListTestGridProjectsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListTestGridProjectsResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListTestGridProjectsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListTestGridProjectsResult_nextToken, *v.NextToken)
+	}
+	serializeTestGridProjects(s, schemas.ListTestGridProjectsResult_testGridProjects, v.TestGridProjects)
+}
+func (v *ListTestGridProjectsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListTestGridProjectsResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListTestGridProjectsResult_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListTestGridProjectsResult_nextToken, v.NextToken)
+		case schemas.ListTestGridProjectsResult_testGridProjects:
+			return deserializeTestGridProjects(d, schemas.ListTestGridProjectsResult_testGridProjects, &v.TestGridProjects)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListTestGridProjectsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListTestGridProjects{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListTestGridProjects, schemas.ListTestGridProjectsRequest, schemas.ListTestGridProjectsResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListTestGridProjects{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListTestGridProjects, schemas.ListTestGridProjectsRequest, schemas.ListTestGridProjectsResult), output: &ListTestGridProjectsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

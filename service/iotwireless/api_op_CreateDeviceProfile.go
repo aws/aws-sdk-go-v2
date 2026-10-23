@@ -5,7 +5,9 @@ package iotwireless
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/iotwireless/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotwireless/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -56,6 +58,32 @@ type CreateDeviceProfileInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateDeviceProfileInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateDeviceProfileRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateDeviceProfileInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientRequestToken != nil {
+		s.WriteString(schemas.CreateDeviceProfileRequest_ClientRequestToken, *v.ClientRequestToken)
+	}
+	if v.LoRaWAN != nil {
+		s.WriteStruct(schemas.CreateDeviceProfileRequest_LoRaWAN)
+		v.LoRaWAN.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateDeviceProfileRequest_Name, *v.Name)
+	}
+	if v.Sidewalk != nil {
+		s.WriteStruct(schemas.CreateDeviceProfileRequest_Sidewalk)
+		v.Sidewalk.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeTagList(s, schemas.CreateDeviceProfileRequest_Tags, v.Tags)
+}
+
 type CreateDeviceProfileOutput struct {
 
 	// The Amazon Resource Name of the new resource.
@@ -70,13 +98,38 @@ type CreateDeviceProfileOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateDeviceProfileOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateDeviceProfileResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateDeviceProfileOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.CreateDeviceProfileResponse_Arn, *v.Arn)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.CreateDeviceProfileResponse_Id, *v.Id)
+	}
+}
+func (v *CreateDeviceProfileOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateDeviceProfileResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateDeviceProfileResponse_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.CreateDeviceProfileResponse_Arn, v.Arn)
+		case schemas.CreateDeviceProfileResponse_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.CreateDeviceProfileResponse_Id, v.Id)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateDeviceProfileMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateDeviceProfile{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateDeviceProfile, schemas.CreateDeviceProfileRequest, schemas.CreateDeviceProfileResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateDeviceProfile{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateDeviceProfile, schemas.CreateDeviceProfileRequest, schemas.CreateDeviceProfileResponse), output: &CreateDeviceProfileOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

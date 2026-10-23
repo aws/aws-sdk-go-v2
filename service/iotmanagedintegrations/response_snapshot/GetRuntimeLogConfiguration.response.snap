@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"ManagedThingId":"__ManagedThingId__","RuntimeLogConfigurations":{"DeleteLocalStoreAfterUpload":true,"LocalStoreFileRotationMaxBytes":1,"LocalStoreFileRotationMaxFiles":1,"LocalStoreLocation":"__LocalStoreLocation__","LogFlushLevel":"DEBUG","LogLevel":"DEBUG","UploadLog":true,"UploadPeriodMinutes":1}}

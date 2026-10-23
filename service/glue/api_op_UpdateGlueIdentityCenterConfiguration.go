@@ -4,6 +4,8 @@ package glue
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/glue/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -38,6 +40,19 @@ type UpdateGlueIdentityCenterConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateGlueIdentityCenterConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateGlueIdentityCenterConfigurationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateGlueIdentityCenterConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeIdentityCenterScopesList(s, schemas.UpdateGlueIdentityCenterConfigurationRequest_Scopes, v.Scopes)
+	if v.UserBackgroundSessionsEnabled != nil {
+		s.WriteBool(schemas.UpdateGlueIdentityCenterConfigurationRequest_UserBackgroundSessionsEnabled, *v.UserBackgroundSessionsEnabled)
+	}
+}
+
 // Response from updating an existing Glue Identity Center configuration.
 type UpdateGlueIdentityCenterConfigurationOutput struct {
 	// Metadata pertaining to the operation's result.
@@ -46,13 +61,26 @@ type UpdateGlueIdentityCenterConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateGlueIdentityCenterConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateGlueIdentityCenterConfigurationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateGlueIdentityCenterConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *UpdateGlueIdentityCenterConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateGlueIdentityCenterConfigurationResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateGlueIdentityCenterConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateGlueIdentityCenterConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateGlueIdentityCenterConfiguration, schemas.UpdateGlueIdentityCenterConfigurationRequest, schemas.UpdateGlueIdentityCenterConfigurationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateGlueIdentityCenterConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateGlueIdentityCenterConfiguration, schemas.UpdateGlueIdentityCenterConfigurationRequest, schemas.UpdateGlueIdentityCenterConfigurationResponse), output: &UpdateGlueIdentityCenterConfigurationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"nextToken":"__NextToken__","reportGenerationResults":[{"assessmentId":"__AssessmentId__","createdAt":946684800,"reportOutput":{"s3ReportOutput":{"s3ObjectKey":"__S3ObjectKey__"}},"reportType":"FAILURE_MODE","serviceArn":"__ServiceArn__","status":"PENDING","testRunId":"__TestRunId__","testTemplateArn":"__TestTemplateArn__"},{"assessmentId":"__AssessmentId__","createdAt":946684800,"reportOutput":{"s3ReportOutput":{"s3ObjectKey":"__S3ObjectKey__"}},"reportType":"FAILURE_MODE","serviceArn":"__ServiceArn__","status":"PENDING","testRunId":"__TestRunId__","testTemplateArn":"__TestTemplateArn__"}]}

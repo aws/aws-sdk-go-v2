@@ -4,6 +4,8 @@ package customerprofiles
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/customerprofiles/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -53,6 +55,25 @@ type CreateEventStreamInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateEventStreamInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateEventStreamRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateEventStreamInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DomainName != nil {
+		s.WriteString(schemas.CreateEventStreamRequest_DomainName, *v.DomainName)
+	}
+	if v.EventStreamName != nil {
+		s.WriteString(schemas.CreateEventStreamRequest_EventStreamName, *v.EventStreamName)
+	}
+	serializeTagMap(s, schemas.CreateEventStreamRequest_Tags, v.Tags)
+	if v.Uri != nil {
+		s.WriteString(schemas.CreateEventStreamRequest_Uri, *v.Uri)
+	}
+}
+
 type CreateEventStreamOutput struct {
 
 	// A unique identifier for the event stream.
@@ -69,13 +90,35 @@ type CreateEventStreamOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateEventStreamOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateEventStreamResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateEventStreamOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EventStreamArn != nil {
+		s.WriteString(schemas.CreateEventStreamResponse_EventStreamArn, *v.EventStreamArn)
+	}
+	serializeTagMap(s, schemas.CreateEventStreamResponse_Tags, v.Tags)
+}
+func (v *CreateEventStreamOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateEventStreamResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateEventStreamResponse_EventStreamArn:
+			v.EventStreamArn = new(string)
+			return d.ReadString(schemas.CreateEventStreamResponse_EventStreamArn, v.EventStreamArn)
+		case schemas.CreateEventStreamResponse_Tags:
+			return deserializeTagMap(d, schemas.CreateEventStreamResponse_Tags, &v.Tags)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateEventStreamMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateEventStream{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateEventStream, schemas.CreateEventStreamRequest, schemas.CreateEventStreamResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateEventStream{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateEventStream, schemas.CreateEventStreamRequest, schemas.CreateEventStreamResponse), output: &CreateEventStreamOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

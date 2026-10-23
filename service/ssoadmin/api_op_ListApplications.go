@@ -5,7 +5,9 @@ package ssoadmin
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/ssoadmin/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ssoadmin/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -60,6 +62,29 @@ type ListApplicationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListApplicationsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListApplicationsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListApplicationsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Filter != nil {
+		s.WriteStruct(schemas.ListApplicationsRequest_Filter)
+		v.Filter.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.InstanceArn != nil {
+		s.WriteString(schemas.ListApplicationsRequest_InstanceArn, *v.InstanceArn)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListApplicationsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListApplicationsRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListApplicationsOutput struct {
 
 	// Retrieves all applications associated with the instance.
@@ -78,13 +103,35 @@ type ListApplicationsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListApplicationsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListApplicationsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListApplicationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeApplicationList(s, schemas.ListApplicationsResponse_Applications, v.Applications)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListApplicationsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListApplicationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListApplicationsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListApplicationsResponse_Applications:
+			return deserializeApplicationList(d, schemas.ListApplicationsResponse_Applications, &v.Applications)
+		case schemas.ListApplicationsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListApplicationsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListApplicationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListApplications{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListApplications, schemas.ListApplicationsRequest, schemas.ListApplicationsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListApplications{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListApplications, schemas.ListApplicationsRequest, schemas.ListApplicationsResponse), output: &ListApplicationsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

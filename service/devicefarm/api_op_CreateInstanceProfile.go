@@ -4,7 +4,9 @@ package devicefarm
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/devicefarm/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/devicefarm/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -52,6 +54,28 @@ type CreateInstanceProfileInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateInstanceProfileInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateInstanceProfileRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateInstanceProfileInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.CreateInstanceProfileRequest_description, *v.Description)
+	}
+	serializePackageIds(s, schemas.CreateInstanceProfileRequest_excludeAppPackagesFromCleanup, v.ExcludeAppPackagesFromCleanup)
+	if v.Name != nil {
+		s.WriteString(schemas.CreateInstanceProfileRequest_name, *v.Name)
+	}
+	if v.PackageCleanup != nil {
+		s.WriteBool(schemas.CreateInstanceProfileRequest_packageCleanup, *v.PackageCleanup)
+	}
+	if v.RebootAfterUse != nil {
+		s.WriteBool(schemas.CreateInstanceProfileRequest_rebootAfterUse, *v.RebootAfterUse)
+	}
+}
+
 type CreateInstanceProfileOutput struct {
 
 	// An object that contains information about your instance profile.
@@ -63,13 +87,34 @@ type CreateInstanceProfileOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateInstanceProfileOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateInstanceProfileResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateInstanceProfileOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InstanceProfile != nil {
+		s.WriteStruct(schemas.CreateInstanceProfileResult_instanceProfile)
+		v.InstanceProfile.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateInstanceProfileOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateInstanceProfileResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateInstanceProfileResult_instanceProfile:
+			v.InstanceProfile = &types.InstanceProfile{}
+			return v.InstanceProfile.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateInstanceProfileMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateInstanceProfile{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateInstanceProfile, schemas.CreateInstanceProfileRequest, schemas.CreateInstanceProfileResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateInstanceProfile{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateInstanceProfile, schemas.CreateInstanceProfileRequest, schemas.CreateInstanceProfileResult), output: &CreateInstanceProfileOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

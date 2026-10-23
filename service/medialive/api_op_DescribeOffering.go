@@ -4,7 +4,9 @@ package medialive
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/medialive/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/medialive/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -33,6 +35,18 @@ type DescribeOfferingInput struct {
 	OfferingId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DescribeOfferingInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeOfferingRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeOfferingInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.OfferingId != nil {
+		s.WriteString(schemas.DescribeOfferingRequest_OfferingId, *v.OfferingId)
+	}
 }
 
 // Placeholder documentation for DescribeOfferingResponse
@@ -79,13 +93,102 @@ type DescribeOfferingOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeOfferingOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeOfferingResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeOfferingOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.DescribeOfferingResponse_Arn, *v.Arn)
+	}
+	if v.CurrencyCode != nil {
+		s.WriteString(schemas.DescribeOfferingResponse_CurrencyCode, *v.CurrencyCode)
+	}
+	if v.Duration != nil {
+		s.WriteInt32(schemas.DescribeOfferingResponse_Duration, *v.Duration)
+	}
+	if v.DurationUnits != "" {
+		s.WriteString(schemas.DescribeOfferingResponse_DurationUnits, string(v.DurationUnits))
+	}
+	if v.FixedPrice != nil {
+		s.WriteFloat64(schemas.DescribeOfferingResponse_FixedPrice, *v.FixedPrice)
+	}
+	if v.OfferingDescription != nil {
+		s.WriteString(schemas.DescribeOfferingResponse_OfferingDescription, *v.OfferingDescription)
+	}
+	if v.OfferingId != nil {
+		s.WriteString(schemas.DescribeOfferingResponse_OfferingId, *v.OfferingId)
+	}
+	if v.OfferingType != "" {
+		s.WriteString(schemas.DescribeOfferingResponse_OfferingType, string(v.OfferingType))
+	}
+	if v.Region != nil {
+		s.WriteString(schemas.DescribeOfferingResponse_Region, *v.Region)
+	}
+	if v.ResourceSpecification != nil {
+		s.WriteStruct(schemas.DescribeOfferingResponse_ResourceSpecification)
+		v.ResourceSpecification.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.UsagePrice != nil {
+		s.WriteFloat64(schemas.DescribeOfferingResponse_UsagePrice, *v.UsagePrice)
+	}
+}
+func (v *DescribeOfferingOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeOfferingResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeOfferingResponse_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.DescribeOfferingResponse_Arn, v.Arn)
+		case schemas.DescribeOfferingResponse_CurrencyCode:
+			v.CurrencyCode = new(string)
+			return d.ReadString(schemas.DescribeOfferingResponse_CurrencyCode, v.CurrencyCode)
+		case schemas.DescribeOfferingResponse_Duration:
+			v.Duration = new(int32)
+			return d.ReadInt32(schemas.DescribeOfferingResponse_Duration, v.Duration)
+		case schemas.DescribeOfferingResponse_DurationUnits:
+			var ev string
+			if err := d.ReadString(schemas.DescribeOfferingResponse_DurationUnits, &ev); err != nil {
+				return err
+			}
+			v.DurationUnits = types.OfferingDurationUnits(ev)
+			return nil
+		case schemas.DescribeOfferingResponse_FixedPrice:
+			v.FixedPrice = new(float64)
+			return d.ReadFloat64(schemas.DescribeOfferingResponse_FixedPrice, v.FixedPrice)
+		case schemas.DescribeOfferingResponse_OfferingDescription:
+			v.OfferingDescription = new(string)
+			return d.ReadString(schemas.DescribeOfferingResponse_OfferingDescription, v.OfferingDescription)
+		case schemas.DescribeOfferingResponse_OfferingId:
+			v.OfferingId = new(string)
+			return d.ReadString(schemas.DescribeOfferingResponse_OfferingId, v.OfferingId)
+		case schemas.DescribeOfferingResponse_OfferingType:
+			var ev string
+			if err := d.ReadString(schemas.DescribeOfferingResponse_OfferingType, &ev); err != nil {
+				return err
+			}
+			v.OfferingType = types.OfferingType(ev)
+			return nil
+		case schemas.DescribeOfferingResponse_Region:
+			v.Region = new(string)
+			return d.ReadString(schemas.DescribeOfferingResponse_Region, v.Region)
+		case schemas.DescribeOfferingResponse_ResourceSpecification:
+			v.ResourceSpecification = &types.ReservationResourceSpecification{}
+			return v.ResourceSpecification.Deserialize(d)
+		case schemas.DescribeOfferingResponse_UsagePrice:
+			v.UsagePrice = new(float64)
+			return d.ReadFloat64(schemas.DescribeOfferingResponse_UsagePrice, v.UsagePrice)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeOfferingMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeOffering{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeOffering, schemas.DescribeOfferingRequest, schemas.DescribeOfferingResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeOffering{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeOffering, schemas.DescribeOfferingRequest, schemas.DescribeOfferingResponse), output: &DescribeOfferingOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

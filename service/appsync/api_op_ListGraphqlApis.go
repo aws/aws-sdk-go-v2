@@ -5,7 +5,9 @@ package appsync
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/appsync/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/appsync/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -44,6 +46,27 @@ type ListGraphqlApisInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListGraphqlApisInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListGraphqlApisRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListGraphqlApisInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApiType != "" {
+		s.WriteString(schemas.ListGraphqlApisRequest_apiType, string(v.ApiType))
+	}
+	if v.MaxResults != 0 {
+		s.WriteInt32(schemas.ListGraphqlApisRequest_maxResults, v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListGraphqlApisRequest_nextToken, *v.NextToken)
+	}
+	if v.Owner != "" {
+		s.WriteString(schemas.ListGraphqlApisRequest_owner, string(v.Owner))
+	}
+}
+
 type ListGraphqlApisOutput struct {
 
 	// The GraphqlApi objects.
@@ -59,13 +82,35 @@ type ListGraphqlApisOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListGraphqlApisOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListGraphqlApisResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListGraphqlApisOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeGraphqlApis(s, schemas.ListGraphqlApisResponse_graphqlApis, v.GraphqlApis)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListGraphqlApisResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListGraphqlApisOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListGraphqlApisResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListGraphqlApisResponse_graphqlApis:
+			return deserializeGraphqlApis(d, schemas.ListGraphqlApisResponse_graphqlApis, &v.GraphqlApis)
+		case schemas.ListGraphqlApisResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListGraphqlApisResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListGraphqlApisMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListGraphqlApis{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListGraphqlApis, schemas.ListGraphqlApisRequest, schemas.ListGraphqlApisResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListGraphqlApis{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListGraphqlApis, schemas.ListGraphqlApisRequest, schemas.ListGraphqlApisResponse), output: &ListGraphqlApisOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

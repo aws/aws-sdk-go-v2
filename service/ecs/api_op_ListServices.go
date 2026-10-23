@@ -5,7 +5,9 @@ package ecs
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/ecs/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ecs/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -63,6 +65,33 @@ type ListServicesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListServicesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListServicesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListServicesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Cluster != nil {
+		s.WriteString(schemas.ListServicesRequest_cluster, *v.Cluster)
+	}
+	if v.LaunchType != "" {
+		s.WriteString(schemas.ListServicesRequest_launchType, string(v.LaunchType))
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListServicesRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListServicesRequest_nextToken, *v.NextToken)
+	}
+	if v.ResourceManagementType != "" {
+		s.WriteString(schemas.ListServicesRequest_resourceManagementType, string(v.ResourceManagementType))
+	}
+	if v.SchedulingStrategy != "" {
+		s.WriteString(schemas.ListServicesRequest_schedulingStrategy, string(v.SchedulingStrategy))
+	}
+}
+
 type ListServicesOutput struct {
 
 	// The nextToken value to include in a future ListServices request. When the
@@ -81,13 +110,35 @@ type ListServicesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListServicesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListServicesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListServicesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListServicesResponse_nextToken, *v.NextToken)
+	}
+	serializeStringList(s, schemas.ListServicesResponse_serviceArns, v.ServiceArns)
+}
+func (v *ListServicesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListServicesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListServicesResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListServicesResponse_nextToken, v.NextToken)
+		case schemas.ListServicesResponse_serviceArns:
+			return deserializeStringList(d, schemas.ListServicesResponse_serviceArns, &v.ServiceArns)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListServicesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListServices{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListServices, schemas.ListServicesRequest, schemas.ListServicesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListServices{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListServices, schemas.ListServicesRequest, schemas.ListServicesResponse), output: &ListServicesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

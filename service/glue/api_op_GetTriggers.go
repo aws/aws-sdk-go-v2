@@ -5,7 +5,9 @@ package glue
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/glue/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/glue/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -40,6 +42,24 @@ type GetTriggersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetTriggersInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetTriggersRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetTriggersInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DependentJobName != nil {
+		s.WriteString(schemas.GetTriggersRequest_DependentJobName, *v.DependentJobName)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.GetTriggersRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetTriggersRequest_NextToken, *v.NextToken)
+	}
+}
+
 type GetTriggersOutput struct {
 
 	// A continuation token, if not all the requested triggers have yet been returned.
@@ -54,13 +74,35 @@ type GetTriggersOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetTriggersOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetTriggersResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetTriggersOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetTriggersResponse_NextToken, *v.NextToken)
+	}
+	serializeTriggerList(s, schemas.GetTriggersResponse_Triggers, v.Triggers)
+}
+func (v *GetTriggersOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetTriggersResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetTriggersResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.GetTriggersResponse_NextToken, v.NextToken)
+		case schemas.GetTriggersResponse_Triggers:
+			return deserializeTriggerList(d, schemas.GetTriggersResponse_Triggers, &v.Triggers)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetTriggersMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetTriggers{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetTriggers, schemas.GetTriggersRequest, schemas.GetTriggersResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetTriggers{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetTriggers, schemas.GetTriggersRequest, schemas.GetTriggersResponse), output: &GetTriggersOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

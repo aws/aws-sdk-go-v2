@@ -4,7 +4,9 @@ package glue
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/glue/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/glue/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -46,6 +48,26 @@ type TestConnectionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *TestConnectionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TestConnectionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TestConnectionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CatalogId != nil {
+		s.WriteString(schemas.TestConnectionRequest_CatalogId, *v.CatalogId)
+	}
+	if v.ConnectionName != nil {
+		s.WriteString(schemas.TestConnectionRequest_ConnectionName, *v.ConnectionName)
+	}
+	if v.TestConnectionInput != nil {
+		s.WriteStruct(schemas.TestConnectionRequest_TestConnectionInput)
+		v.TestConnectionInput.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type TestConnectionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -53,13 +75,26 @@ type TestConnectionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *TestConnectionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TestConnectionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TestConnectionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *TestConnectionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TestConnectionResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationTestConnectionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpTestConnection{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.TestConnection, schemas.TestConnectionRequest, schemas.TestConnectionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpTestConnection{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.TestConnection, schemas.TestConnectionRequest, schemas.TestConnectionResponse), output: &TestConnectionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"ancestorDomainUnitIds":["__Member__","__Member__"],"createdAt":946684800,"createdBy":"__CreatedBy__","description":"__Description__","domainId":"__DomainId__","id":"__Id__","name":"__Name__","owners":[{"user":{"userId":"__UserId__"}},{"user":{"userId":"__UserId__"}}],"parentDomainUnitId":"__ParentDomainUnitId__"}

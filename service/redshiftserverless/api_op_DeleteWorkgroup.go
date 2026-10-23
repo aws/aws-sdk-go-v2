@@ -4,7 +4,9 @@ package redshiftserverless
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/redshiftserverless/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/redshiftserverless/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -34,6 +36,18 @@ type DeleteWorkgroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteWorkgroupInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteWorkgroupRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteWorkgroupInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.WorkgroupName != nil {
+		s.WriteString(schemas.DeleteWorkgroupRequest_workgroupName, *v.WorkgroupName)
+	}
+}
+
 type DeleteWorkgroupOutput struct {
 
 	// The deleted workgroup object.
@@ -47,13 +61,34 @@ type DeleteWorkgroupOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteWorkgroupOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteWorkgroupResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteWorkgroupOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Workgroup != nil {
+		s.WriteStruct(schemas.DeleteWorkgroupResponse_workgroup)
+		v.Workgroup.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DeleteWorkgroupOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteWorkgroupResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteWorkgroupResponse_workgroup:
+			v.Workgroup = &types.Workgroup{}
+			return v.Workgroup.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteWorkgroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteWorkgroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteWorkgroup, schemas.DeleteWorkgroupRequest, schemas.DeleteWorkgroupResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeleteWorkgroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteWorkgroup, schemas.DeleteWorkgroupRequest, schemas.DeleteWorkgroupResponse), output: &DeleteWorkgroupOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

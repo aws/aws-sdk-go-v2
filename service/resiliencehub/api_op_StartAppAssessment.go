@@ -5,7 +5,9 @@ package resiliencehub
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/resiliencehub/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/resiliencehub/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -59,6 +61,49 @@ type StartAppAssessmentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartAppAssessmentInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartAppAssessmentRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartAppAssessmentInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AppArn != nil {
+		s.WriteString(schemas.StartAppAssessmentRequest_appArn, *v.AppArn)
+	}
+	if v.AppVersion != nil {
+		s.WriteString(schemas.StartAppAssessmentRequest_appVersion, *v.AppVersion)
+	}
+	if v.AssessmentName != nil {
+		s.WriteString(schemas.StartAppAssessmentRequest_assessmentName, *v.AssessmentName)
+	}
+	if v.ClientToken != nil {
+		s.WriteString(schemas.StartAppAssessmentRequest_clientToken, *v.ClientToken)
+	}
+	serializeTagMap(s, schemas.StartAppAssessmentRequest_tags, v.Tags)
+}
+func (v *StartAppAssessmentInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartAppAssessmentRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartAppAssessmentRequest_appArn:
+			v.AppArn = new(string)
+			return d.ReadString(schemas.StartAppAssessmentRequest_appArn, v.AppArn)
+		case schemas.StartAppAssessmentRequest_appVersion:
+			v.AppVersion = new(string)
+			return d.ReadString(schemas.StartAppAssessmentRequest_appVersion, v.AppVersion)
+		case schemas.StartAppAssessmentRequest_assessmentName:
+			v.AssessmentName = new(string)
+			return d.ReadString(schemas.StartAppAssessmentRequest_assessmentName, v.AssessmentName)
+		case schemas.StartAppAssessmentRequest_clientToken:
+			v.ClientToken = new(string)
+			return d.ReadString(schemas.StartAppAssessmentRequest_clientToken, v.ClientToken)
+		case schemas.StartAppAssessmentRequest_tags:
+			return deserializeTagMap(d, schemas.StartAppAssessmentRequest_tags, &v.Tags)
+		}
+		return nil
+	})
+}
+
 type StartAppAssessmentOutput struct {
 
 	// The assessment created.
@@ -72,13 +117,34 @@ type StartAppAssessmentOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartAppAssessmentOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartAppAssessmentResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartAppAssessmentOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Assessment != nil {
+		s.WriteStruct(schemas.StartAppAssessmentResponse_assessment)
+		v.Assessment.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *StartAppAssessmentOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartAppAssessmentResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartAppAssessmentResponse_assessment:
+			v.Assessment = &types.AppAssessment{}
+			return v.Assessment.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartAppAssessmentMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpStartAppAssessment{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartAppAssessment, schemas.StartAppAssessmentRequest, schemas.StartAppAssessmentResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStartAppAssessment{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartAppAssessment, schemas.StartAppAssessmentRequest, schemas.StartAppAssessmentResponse), output: &StartAppAssessmentOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

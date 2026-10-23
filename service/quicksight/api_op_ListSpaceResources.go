@@ -4,7 +4,9 @@ package quicksight
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/quicksight/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/quicksight/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,21 @@ type ListSpaceResourcesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListSpaceResourcesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListSpaceResourcesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListSpaceResourcesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AwsAccountId != nil {
+		s.WriteString(schemas.ListSpaceResourcesRequest_AwsAccountId, *v.AwsAccountId)
+	}
+	if v.SpaceId != nil {
+		s.WriteString(schemas.ListSpaceResourcesRequest_SpaceId, *v.SpaceId)
+	}
+}
+
 type ListSpaceResourcesOutput struct {
 
 	// The ID of the space.
@@ -63,13 +80,47 @@ type ListSpaceResourcesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListSpaceResourcesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListSpaceResourcesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListSpaceResourcesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RequestId != nil {
+		s.WriteString(schemas.ListSpaceResourcesResponse_RequestId, *v.RequestId)
+	}
+	serializeSpaceResourceSummaries(s, schemas.ListSpaceResourcesResponse_SpaceResources, v.SpaceResources)
+	if v.SpaceArn != nil {
+		s.WriteString(schemas.ListSpaceResourcesResponse_spaceArn, *v.SpaceArn)
+	}
+	if v.SpaceId != nil {
+		s.WriteString(schemas.ListSpaceResourcesResponse_spaceId, *v.SpaceId)
+	}
+}
+func (v *ListSpaceResourcesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListSpaceResourcesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListSpaceResourcesResponse_RequestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.ListSpaceResourcesResponse_RequestId, v.RequestId)
+		case schemas.ListSpaceResourcesResponse_SpaceResources:
+			return deserializeSpaceResourceSummaries(d, schemas.ListSpaceResourcesResponse_SpaceResources, &v.SpaceResources)
+		case schemas.ListSpaceResourcesResponse_spaceArn:
+			v.SpaceArn = new(string)
+			return d.ReadString(schemas.ListSpaceResourcesResponse_spaceArn, v.SpaceArn)
+		case schemas.ListSpaceResourcesResponse_spaceId:
+			v.SpaceId = new(string)
+			return d.ReadString(schemas.ListSpaceResourcesResponse_spaceId, v.SpaceId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListSpaceResourcesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListSpaceResources{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListSpaceResources, schemas.ListSpaceResourcesRequest, schemas.ListSpaceResourcesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListSpaceResources{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListSpaceResources, schemas.ListSpaceResourcesRequest, schemas.ListSpaceResourcesResponse), output: &ListSpaceResourcesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

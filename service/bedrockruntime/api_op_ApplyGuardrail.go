@@ -4,7 +4,9 @@ package bedrockruntime
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/bedrockruntime/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockruntime/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -64,6 +66,28 @@ type ApplyGuardrailInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ApplyGuardrailInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ApplyGuardrailRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ApplyGuardrailInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeGuardrailContentBlockList(s, schemas.ApplyGuardrailRequest_content, v.Content)
+	if v.GuardrailIdentifier != nil {
+		s.WriteString(schemas.ApplyGuardrailRequest_guardrailIdentifier, *v.GuardrailIdentifier)
+	}
+	if v.GuardrailVersion != nil {
+		s.WriteString(schemas.ApplyGuardrailRequest_guardrailVersion, *v.GuardrailVersion)
+	}
+	if v.OutputScope != "" {
+		s.WriteString(schemas.ApplyGuardrailRequest_outputScope, string(v.OutputScope))
+	}
+	if v.Source != "" {
+		s.WriteString(schemas.ApplyGuardrailRequest_source, string(v.Source))
+	}
+}
+
 type ApplyGuardrailOutput struct {
 
 	// The action taken in the response from the guardrail.
@@ -98,13 +122,64 @@ type ApplyGuardrailOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ApplyGuardrailOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ApplyGuardrailResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ApplyGuardrailOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Action != "" {
+		s.WriteString(schemas.ApplyGuardrailResponse_action, string(v.Action))
+	}
+	if v.ActionReason != nil {
+		s.WriteString(schemas.ApplyGuardrailResponse_actionReason, *v.ActionReason)
+	}
+	serializeGuardrailAssessmentList(s, schemas.ApplyGuardrailResponse_assessments, v.Assessments)
+	if v.GuardrailCoverage != nil {
+		s.WriteStruct(schemas.ApplyGuardrailResponse_guardrailCoverage)
+		v.GuardrailCoverage.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeGuardrailOutputContentList(s, schemas.ApplyGuardrailResponse_outputs, v.Outputs)
+	if v.Usage != nil {
+		s.WriteStruct(schemas.ApplyGuardrailResponse_usage)
+		v.Usage.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *ApplyGuardrailOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ApplyGuardrailResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ApplyGuardrailResponse_action:
+			var ev string
+			if err := d.ReadString(schemas.ApplyGuardrailResponse_action, &ev); err != nil {
+				return err
+			}
+			v.Action = types.GuardrailAction(ev)
+			return nil
+		case schemas.ApplyGuardrailResponse_actionReason:
+			v.ActionReason = new(string)
+			return d.ReadString(schemas.ApplyGuardrailResponse_actionReason, v.ActionReason)
+		case schemas.ApplyGuardrailResponse_assessments:
+			return deserializeGuardrailAssessmentList(d, schemas.ApplyGuardrailResponse_assessments, &v.Assessments)
+		case schemas.ApplyGuardrailResponse_guardrailCoverage:
+			v.GuardrailCoverage = &types.GuardrailCoverage{}
+			return v.GuardrailCoverage.Deserialize(d)
+		case schemas.ApplyGuardrailResponse_outputs:
+			return deserializeGuardrailOutputContentList(d, schemas.ApplyGuardrailResponse_outputs, &v.Outputs)
+		case schemas.ApplyGuardrailResponse_usage:
+			v.Usage = &types.GuardrailUsage{}
+			return v.Usage.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationApplyGuardrailMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpApplyGuardrail{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ApplyGuardrail, schemas.ApplyGuardrailRequest, schemas.ApplyGuardrailResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpApplyGuardrail{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ApplyGuardrail, schemas.ApplyGuardrailRequest, schemas.ApplyGuardrailResponse), output: &ApplyGuardrailOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

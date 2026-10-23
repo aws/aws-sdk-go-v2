@@ -5,7 +5,9 @@ package quicksight
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/quicksight/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/quicksight/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -50,6 +52,30 @@ type ListIAMPolicyAssignmentsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListIAMPolicyAssignmentsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListIAMPolicyAssignmentsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListIAMPolicyAssignmentsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AssignmentStatus != "" {
+		s.WriteString(schemas.ListIAMPolicyAssignmentsRequest_AssignmentStatus, string(v.AssignmentStatus))
+	}
+	if v.AwsAccountId != nil {
+		s.WriteString(schemas.ListIAMPolicyAssignmentsRequest_AwsAccountId, *v.AwsAccountId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListIAMPolicyAssignmentsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.Namespace != nil {
+		s.WriteString(schemas.ListIAMPolicyAssignmentsRequest_Namespace, *v.Namespace)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListIAMPolicyAssignmentsRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListIAMPolicyAssignmentsOutput struct {
 
 	// Information describing the IAM policy assignments.
@@ -70,13 +96,46 @@ type ListIAMPolicyAssignmentsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListIAMPolicyAssignmentsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListIAMPolicyAssignmentsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListIAMPolicyAssignmentsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeIAMPolicyAssignmentSummaryList(s, schemas.ListIAMPolicyAssignmentsResponse_IAMPolicyAssignments, v.IAMPolicyAssignments)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListIAMPolicyAssignmentsResponse_NextToken, *v.NextToken)
+	}
+	if v.RequestId != nil {
+		s.WriteString(schemas.ListIAMPolicyAssignmentsResponse_RequestId, *v.RequestId)
+	}
+	if v.Status != 0 {
+		s.WriteInt32(schemas.ListIAMPolicyAssignmentsResponse_Status, v.Status)
+	}
+}
+func (v *ListIAMPolicyAssignmentsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListIAMPolicyAssignmentsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListIAMPolicyAssignmentsResponse_IAMPolicyAssignments:
+			return deserializeIAMPolicyAssignmentSummaryList(d, schemas.ListIAMPolicyAssignmentsResponse_IAMPolicyAssignments, &v.IAMPolicyAssignments)
+		case schemas.ListIAMPolicyAssignmentsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListIAMPolicyAssignmentsResponse_NextToken, v.NextToken)
+		case schemas.ListIAMPolicyAssignmentsResponse_RequestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.ListIAMPolicyAssignmentsResponse_RequestId, v.RequestId)
+		case schemas.ListIAMPolicyAssignmentsResponse_Status:
+			return d.ReadInt32(schemas.ListIAMPolicyAssignmentsResponse_Status, &v.Status)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListIAMPolicyAssignmentsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListIAMPolicyAssignments{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListIAMPolicyAssignments, schemas.ListIAMPolicyAssignmentsRequest, schemas.ListIAMPolicyAssignmentsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListIAMPolicyAssignments{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListIAMPolicyAssignments, schemas.ListIAMPolicyAssignmentsRequest, schemas.ListIAMPolicyAssignmentsResponse), output: &ListIAMPolicyAssignmentsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

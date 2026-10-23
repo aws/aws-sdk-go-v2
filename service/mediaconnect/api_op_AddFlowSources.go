@@ -4,7 +4,9 @@ package mediaconnect
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/mediaconnect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/mediaconnect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,19 @@ type AddFlowSourcesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AddFlowSourcesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AddFlowSourcesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AddFlowSourcesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FlowArn != nil {
+		s.WriteString(schemas.AddFlowSourcesRequest_FlowArn, *v.FlowArn)
+	}
+	serialize__listOfSetSourceRequest(s, schemas.AddFlowSourcesRequest_Sources, v.Sources)
+}
+
 type AddFlowSourcesOutput struct {
 
 	//  The ARN of the flow that these sources were added to.
@@ -53,13 +68,35 @@ type AddFlowSourcesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AddFlowSourcesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AddFlowSourcesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AddFlowSourcesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FlowArn != nil {
+		s.WriteString(schemas.AddFlowSourcesResponse_FlowArn, *v.FlowArn)
+	}
+	serialize__listOfSource(s, schemas.AddFlowSourcesResponse_Sources, v.Sources)
+}
+func (v *AddFlowSourcesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AddFlowSourcesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AddFlowSourcesResponse_FlowArn:
+			v.FlowArn = new(string)
+			return d.ReadString(schemas.AddFlowSourcesResponse_FlowArn, v.FlowArn)
+		case schemas.AddFlowSourcesResponse_Sources:
+			return deserialize__listOfSource(d, schemas.AddFlowSourcesResponse_Sources, &v.Sources)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationAddFlowSourcesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpAddFlowSources{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AddFlowSources, schemas.AddFlowSourcesRequest, schemas.AddFlowSourcesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpAddFlowSources{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AddFlowSources, schemas.AddFlowSourcesRequest, schemas.AddFlowSourcesResponse), output: &AddFlowSourcesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

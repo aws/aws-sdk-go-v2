@@ -4,6 +4,8 @@ package glue
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/glue/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -55,6 +57,23 @@ type CreateCustomEntityTypeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateCustomEntityTypeInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateCustomEntityTypeRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateCustomEntityTypeInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeContextWords(s, schemas.CreateCustomEntityTypeRequest_ContextWords, v.ContextWords)
+	if v.Name != nil {
+		s.WriteString(schemas.CreateCustomEntityTypeRequest_Name, *v.Name)
+	}
+	if v.RegexString != nil {
+		s.WriteString(schemas.CreateCustomEntityTypeRequest_RegexString, *v.RegexString)
+	}
+	serializeTagsMap(s, schemas.CreateCustomEntityTypeRequest_Tags, v.Tags)
+}
+
 type CreateCustomEntityTypeOutput struct {
 
 	// The name of the custom pattern you created.
@@ -66,13 +85,32 @@ type CreateCustomEntityTypeOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateCustomEntityTypeOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateCustomEntityTypeResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateCustomEntityTypeOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.CreateCustomEntityTypeResponse_Name, *v.Name)
+	}
+}
+func (v *CreateCustomEntityTypeOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateCustomEntityTypeResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateCustomEntityTypeResponse_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.CreateCustomEntityTypeResponse_Name, v.Name)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateCustomEntityTypeMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateCustomEntityType{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateCustomEntityType, schemas.CreateCustomEntityTypeRequest, schemas.CreateCustomEntityTypeResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateCustomEntityType{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateCustomEntityType, schemas.CreateCustomEntityTypeRequest, schemas.CreateCustomEntityTypeResponse), output: &CreateCustomEntityTypeOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

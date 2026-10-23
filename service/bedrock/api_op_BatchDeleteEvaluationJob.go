@@ -4,7 +4,9 @@ package bedrock
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/bedrock/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrock/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -37,6 +39,16 @@ type BatchDeleteEvaluationJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchDeleteEvaluationJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchDeleteEvaluationJobRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchDeleteEvaluationJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeEvaluationJobIdentifiers(s, schemas.BatchDeleteEvaluationJobRequest_jobIdentifiers, v.JobIdentifiers)
+}
+
 type BatchDeleteEvaluationJobOutput struct {
 
 	// A JSON object containing the HTTP status codes and the ARNs of evaluation jobs
@@ -56,13 +68,32 @@ type BatchDeleteEvaluationJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchDeleteEvaluationJobOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchDeleteEvaluationJobResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchDeleteEvaluationJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeBatchDeleteEvaluationJobErrors(s, schemas.BatchDeleteEvaluationJobResponse_errors, v.Errors)
+	serializeBatchDeleteEvaluationJobItems(s, schemas.BatchDeleteEvaluationJobResponse_evaluationJobs, v.EvaluationJobs)
+}
+func (v *BatchDeleteEvaluationJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchDeleteEvaluationJobResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchDeleteEvaluationJobResponse_errors:
+			return deserializeBatchDeleteEvaluationJobErrors(d, schemas.BatchDeleteEvaluationJobResponse_errors, &v.Errors)
+		case schemas.BatchDeleteEvaluationJobResponse_evaluationJobs:
+			return deserializeBatchDeleteEvaluationJobItems(d, schemas.BatchDeleteEvaluationJobResponse_evaluationJobs, &v.EvaluationJobs)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationBatchDeleteEvaluationJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpBatchDeleteEvaluationJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchDeleteEvaluationJob, schemas.BatchDeleteEvaluationJobRequest, schemas.BatchDeleteEvaluationJobResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpBatchDeleteEvaluationJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchDeleteEvaluationJob, schemas.BatchDeleteEvaluationJobRequest, schemas.BatchDeleteEvaluationJobResponse), output: &BatchDeleteEvaluationJobOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

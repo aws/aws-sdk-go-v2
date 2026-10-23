@@ -5,7 +5,9 @@ package chatbot
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/chatbot/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/chatbot/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -40,6 +42,21 @@ type ListMicrosoftTeamsConfiguredTeamsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListMicrosoftTeamsConfiguredTeamsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListMicrosoftTeamsConfiguredTeamsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListMicrosoftTeamsConfiguredTeamsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListMicrosoftTeamsConfiguredTeamsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListMicrosoftTeamsConfiguredTeamsRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListMicrosoftTeamsConfiguredTeamsOutput struct {
 
 	// A list of teams in Microsoft Teams that are configured with AWS Chatbot.
@@ -56,13 +73,35 @@ type ListMicrosoftTeamsConfiguredTeamsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListMicrosoftTeamsConfiguredTeamsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListMicrosoftTeamsConfiguredTeamsResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListMicrosoftTeamsConfiguredTeamsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeConfiguredTeamsList(s, schemas.ListMicrosoftTeamsConfiguredTeamsResult_ConfiguredTeams, v.ConfiguredTeams)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListMicrosoftTeamsConfiguredTeamsResult_NextToken, *v.NextToken)
+	}
+}
+func (v *ListMicrosoftTeamsConfiguredTeamsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListMicrosoftTeamsConfiguredTeamsResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListMicrosoftTeamsConfiguredTeamsResult_ConfiguredTeams:
+			return deserializeConfiguredTeamsList(d, schemas.ListMicrosoftTeamsConfiguredTeamsResult_ConfiguredTeams, &v.ConfiguredTeams)
+		case schemas.ListMicrosoftTeamsConfiguredTeamsResult_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListMicrosoftTeamsConfiguredTeamsResult_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListMicrosoftTeamsConfiguredTeamsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListMicrosoftTeamsConfiguredTeams{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListMicrosoftTeamsConfiguredTeams, schemas.ListMicrosoftTeamsConfiguredTeamsRequest, schemas.ListMicrosoftTeamsConfiguredTeamsResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListMicrosoftTeamsConfiguredTeams{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListMicrosoftTeamsConfiguredTeams, schemas.ListMicrosoftTeamsConfiguredTeamsRequest, schemas.ListMicrosoftTeamsConfiguredTeamsResult), output: &ListMicrosoftTeamsConfiguredTeamsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -425,6 +425,27 @@ func (ExtractionMode) Values() []ExtractionMode {
 	}
 }
 
+type FindingTargetType string
+
+// Enum values for FindingTargetType
+const (
+	FindingTargetTypeSpanId   FindingTargetType = "SPAN_ID"
+	FindingTargetTypeTraceId  FindingTargetType = "TRACE_ID"
+	FindingTargetTypeSpanName FindingTargetType = "SPAN_NAME"
+)
+
+// Values returns all known values for FindingTargetType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (FindingTargetType) Values() []FindingTargetType {
+	return []FindingTargetType{
+		"SPAN_ID",
+		"TRACE_ID",
+		"SPAN_NAME",
+	}
+}
+
 type HarnessBedrockApiFormat string
 
 // Enum values for HarnessBedrockApiFormat
@@ -468,6 +489,48 @@ func (HarnessConversationRole) Values() []HarnessConversationRole {
 	}
 }
 
+type HarnessHookDecision string
+
+// Enum values for HarnessHookDecision
+const (
+	HarnessHookDecisionAllow HarnessHookDecision = "allow"
+	HarnessHookDecisionDeny  HarnessHookDecision = "deny"
+)
+
+// Values returns all known values for HarnessHookDecision. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (HarnessHookDecision) Values() []HarnessHookDecision {
+	return []HarnessHookDecision{
+		"allow",
+		"deny",
+	}
+}
+
+type HarnessHookEventType string
+
+// Enum values for HarnessHookEventType
+const (
+	HarnessHookEventTypeBeforeToolCall   HarnessHookEventType = "before_tool_call"
+	HarnessHookEventTypeAfterToolCall    HarnessHookEventType = "after_tool_call"
+	HarnessHookEventTypeBeforeInvocation HarnessHookEventType = "before_invocation"
+	HarnessHookEventTypeAfterInvocation  HarnessHookEventType = "after_invocation"
+)
+
+// Values returns all known values for HarnessHookEventType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (HarnessHookEventType) Values() []HarnessHookEventType {
+	return []HarnessHookEventType{
+		"before_tool_call",
+		"after_tool_call",
+		"before_invocation",
+		"after_invocation",
+	}
+}
+
 type HarnessOpenAiApiFormat string
 
 // Enum values for HarnessOpenAiApiFormat
@@ -507,6 +570,7 @@ const (
 	HarnessStopReasonMaxIterationsExceeded      HarnessStopReason = "max_iterations_exceeded"
 	HarnessStopReasonMaxOutputTokensExceeded    HarnessStopReason = "max_output_tokens_exceeded"
 	HarnessStopReasonTimeoutExceeded            HarnessStopReason = "timeout_exceeded"
+	HarnessStopReasonHookStopped                HarnessStopReason = "hook_stopped"
 )
 
 // Values returns all known values for HarnessStopReason. Note that this can be
@@ -529,6 +593,7 @@ func (HarnessStopReason) Values() []HarnessStopReason {
 		"max_iterations_exceeded",
 		"max_output_tokens_exceeded",
 		"timeout_exceeded",
+		"hook_stopped",
 	}
 }
 
@@ -677,6 +742,23 @@ func (InsightsFailureCategory) Values() []InsightsFailureCategory {
 		"coding-use-case-specific-failure-types-category-edge-case-oversights",
 		"coding-use-case-specific-failure-types-category-dependency-issues",
 		"other",
+	}
+}
+
+type InsightType string
+
+// Enum values for InsightType
+const (
+	InsightTypeFailure InsightType = "FAILURE"
+)
+
+// Values returns all known values for InsightType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (InsightType) Values() []InsightType {
+	return []InsightType{
+		"FAILURE",
 	}
 }
 
@@ -1042,6 +1124,23 @@ func (RecommendationType) Values() []RecommendationType {
 	return []RecommendationType{
 		"SYSTEM_PROMPT_RECOMMENDATION",
 		"TOOL_DESCRIPTION_RECOMMENDATION",
+	}
+}
+
+type RecordExpiryAction string
+
+// Enum values for RecordExpiryAction
+const (
+	RecordExpiryActionRemove RecordExpiryAction = "REMOVE"
+)
+
+// Values returns all known values for RecordExpiryAction. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (RecordExpiryAction) Values() []RecordExpiryAction {
+	return []RecordExpiryAction{
+		"REMOVE",
 	}
 }
 

@@ -4,7 +4,9 @@ package guardduty
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/guardduty/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/guardduty/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -48,6 +50,24 @@ type GetFindingsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetFindingsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetFindingsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetFindingsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DetectorId != nil {
+		s.WriteString(schemas.GetFindingsRequest_DetectorId, *v.DetectorId)
+	}
+	serializeFindingIds(s, schemas.GetFindingsRequest_FindingIds, v.FindingIds)
+	if v.SortCriteria != nil {
+		s.WriteStruct(schemas.GetFindingsRequest_SortCriteria)
+		v.SortCriteria.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type GetFindingsOutput struct {
 
 	// A list of findings.
@@ -61,13 +81,29 @@ type GetFindingsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetFindingsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetFindingsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetFindingsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeFindings(s, schemas.GetFindingsResponse_Findings, v.Findings)
+}
+func (v *GetFindingsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetFindingsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetFindingsResponse_Findings:
+			return deserializeFindings(d, schemas.GetFindingsResponse_Findings, &v.Findings)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetFindingsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetFindings{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetFindings, schemas.GetFindingsRequest, schemas.GetFindingsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetFindings{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetFindings, schemas.GetFindingsRequest, schemas.GetFindingsResponse), output: &GetFindingsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package support
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/support/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/support/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -71,6 +73,22 @@ type DescribeServicesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeServicesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeServicesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeServicesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DryRun != nil {
+		s.WriteBool(schemas.DescribeServicesRequest_dryRun, *v.DryRun)
+	}
+	if v.Language != nil {
+		s.WriteString(schemas.DescribeServicesRequest_language, *v.Language)
+	}
+	serializeServiceCodeList(s, schemas.DescribeServicesRequest_serviceCodeList, v.ServiceCodeList)
+}
+
 // The list of Amazon Web Services services returned by the DescribeServices operation.
 type DescribeServicesOutput struct {
 
@@ -83,13 +101,29 @@ type DescribeServicesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeServicesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeServicesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeServicesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeServiceList(s, schemas.DescribeServicesResponse_services, v.Services)
+}
+func (v *DescribeServicesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeServicesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeServicesResponse_services:
+			return deserializeServiceList(d, schemas.DescribeServicesResponse_services, &v.Services)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeServicesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeServices{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeServices, schemas.DescribeServicesRequest, schemas.DescribeServicesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeServices{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeServices, schemas.DescribeServicesRequest, schemas.DescribeServicesResponse), output: &DescribeServicesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

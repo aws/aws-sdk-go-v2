@@ -4,7 +4,9 @@ package inspector2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/inspector2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/inspector2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -47,6 +49,24 @@ type ListCodeSecurityScanConfigurationAssociationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListCodeSecurityScanConfigurationAssociationsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListCodeSecurityScanConfigurationAssociationsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListCodeSecurityScanConfigurationAssociationsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListCodeSecurityScanConfigurationAssociationsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListCodeSecurityScanConfigurationAssociationsRequest_nextToken, *v.NextToken)
+	}
+	if v.ScanConfigurationArn != nil {
+		s.WriteString(schemas.ListCodeSecurityScanConfigurationAssociationsRequest_scanConfigurationArn, *v.ScanConfigurationArn)
+	}
+}
+
 type ListCodeSecurityScanConfigurationAssociationsOutput struct {
 
 	// A list of associations between code repositories and scan configurations.
@@ -64,13 +84,35 @@ type ListCodeSecurityScanConfigurationAssociationsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListCodeSecurityScanConfigurationAssociationsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListCodeSecurityScanConfigurationAssociationsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListCodeSecurityScanConfigurationAssociationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeCodeSecurityScanConfigurationAssociationSummaries(s, schemas.ListCodeSecurityScanConfigurationAssociationsResponse_associations, v.Associations)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListCodeSecurityScanConfigurationAssociationsResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListCodeSecurityScanConfigurationAssociationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListCodeSecurityScanConfigurationAssociationsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListCodeSecurityScanConfigurationAssociationsResponse_associations:
+			return deserializeCodeSecurityScanConfigurationAssociationSummaries(d, schemas.ListCodeSecurityScanConfigurationAssociationsResponse_associations, &v.Associations)
+		case schemas.ListCodeSecurityScanConfigurationAssociationsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListCodeSecurityScanConfigurationAssociationsResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListCodeSecurityScanConfigurationAssociationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListCodeSecurityScanConfigurationAssociations{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListCodeSecurityScanConfigurationAssociations, schemas.ListCodeSecurityScanConfigurationAssociationsRequest, schemas.ListCodeSecurityScanConfigurationAssociationsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListCodeSecurityScanConfigurationAssociations{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListCodeSecurityScanConfigurationAssociations, schemas.ListCodeSecurityScanConfigurationAssociationsRequest, schemas.ListCodeSecurityScanConfigurationAssociationsResponse), output: &ListCodeSecurityScanConfigurationAssociationsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

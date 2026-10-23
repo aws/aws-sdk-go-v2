@@ -4,6 +4,8 @@ package quicksight
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/quicksight/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -38,6 +40,21 @@ type DeleteKnowledgeBaseInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteKnowledgeBaseInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteKnowledgeBaseRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteKnowledgeBaseInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AwsAccountId != nil {
+		s.WriteString(schemas.DeleteKnowledgeBaseRequest_AwsAccountId, *v.AwsAccountId)
+	}
+	if v.KnowledgeBaseId != nil {
+		s.WriteString(schemas.DeleteKnowledgeBaseRequest_KnowledgeBaseId, *v.KnowledgeBaseId)
+	}
+}
+
 type DeleteKnowledgeBaseOutput struct {
 
 	// The ARN of the deleted knowledge base.
@@ -62,13 +79,50 @@ type DeleteKnowledgeBaseOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteKnowledgeBaseOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteKnowledgeBaseResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteKnowledgeBaseOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.KnowledgeBaseArn != nil {
+		s.WriteString(schemas.DeleteKnowledgeBaseResponse_KnowledgeBaseArn, *v.KnowledgeBaseArn)
+	}
+	if v.KnowledgeBaseId != nil {
+		s.WriteString(schemas.DeleteKnowledgeBaseResponse_KnowledgeBaseId, *v.KnowledgeBaseId)
+	}
+	if v.RequestId != nil {
+		s.WriteString(schemas.DeleteKnowledgeBaseResponse_RequestId, *v.RequestId)
+	}
+	if v.Status != nil {
+		s.WriteInt32(schemas.DeleteKnowledgeBaseResponse_Status, *v.Status)
+	}
+}
+func (v *DeleteKnowledgeBaseOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteKnowledgeBaseResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteKnowledgeBaseResponse_KnowledgeBaseArn:
+			v.KnowledgeBaseArn = new(string)
+			return d.ReadString(schemas.DeleteKnowledgeBaseResponse_KnowledgeBaseArn, v.KnowledgeBaseArn)
+		case schemas.DeleteKnowledgeBaseResponse_KnowledgeBaseId:
+			v.KnowledgeBaseId = new(string)
+			return d.ReadString(schemas.DeleteKnowledgeBaseResponse_KnowledgeBaseId, v.KnowledgeBaseId)
+		case schemas.DeleteKnowledgeBaseResponse_RequestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.DeleteKnowledgeBaseResponse_RequestId, v.RequestId)
+		case schemas.DeleteKnowledgeBaseResponse_Status:
+			v.Status = new(int32)
+			return d.ReadInt32(schemas.DeleteKnowledgeBaseResponse_Status, v.Status)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteKnowledgeBaseMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteKnowledgeBase{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteKnowledgeBase, schemas.DeleteKnowledgeBaseRequest, schemas.DeleteKnowledgeBaseResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteKnowledgeBase{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteKnowledgeBase, schemas.DeleteKnowledgeBaseRequest, schemas.DeleteKnowledgeBaseResponse), output: &DeleteKnowledgeBaseOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

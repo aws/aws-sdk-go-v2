@@ -4,7 +4,9 @@ package quicksight
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/quicksight/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/quicksight/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -56,6 +58,27 @@ type CreateGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateGroupInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateGroupRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AwsAccountId != nil {
+		s.WriteString(schemas.CreateGroupRequest_AwsAccountId, *v.AwsAccountId)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreateGroupRequest_Description, *v.Description)
+	}
+	if v.GroupName != nil {
+		s.WriteString(schemas.CreateGroupRequest_GroupName, *v.GroupName)
+	}
+	if v.Namespace != nil {
+		s.WriteString(schemas.CreateGroupRequest_Namespace, *v.Namespace)
+	}
+}
+
 // The response object for this operation.
 type CreateGroupOutput struct {
 
@@ -74,13 +97,45 @@ type CreateGroupOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateGroupOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateGroupResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateGroupOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Group != nil {
+		s.WriteStruct(schemas.CreateGroupResponse_Group)
+		v.Group.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RequestId != nil {
+		s.WriteString(schemas.CreateGroupResponse_RequestId, *v.RequestId)
+	}
+	if v.Status != 0 {
+		s.WriteInt32(schemas.CreateGroupResponse_Status, v.Status)
+	}
+}
+func (v *CreateGroupOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateGroupResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateGroupResponse_Group:
+			v.Group = &types.Group{}
+			return v.Group.Deserialize(d)
+		case schemas.CreateGroupResponse_RequestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.CreateGroupResponse_RequestId, v.RequestId)
+		case schemas.CreateGroupResponse_Status:
+			return d.ReadInt32(schemas.CreateGroupResponse_Status, &v.Status)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateGroup, schemas.CreateGroupRequest, schemas.CreateGroupResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateGroup, schemas.CreateGroupRequest, schemas.CreateGroupResponse), output: &CreateGroupOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

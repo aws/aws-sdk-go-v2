@@ -1,0 +1,3 @@
+GET /resource-sync-statuses?deploymentIdentifier=__DeploymentIdentifier__&maxResults=1&nextToken=__NextToken__&synchronizationStatus=IN_SYNC
+
+

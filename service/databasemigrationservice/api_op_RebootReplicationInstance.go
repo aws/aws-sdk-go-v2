@@ -4,7 +4,9 @@ package databasemigrationservice
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/databasemigrationservice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/databasemigrationservice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -47,6 +49,24 @@ type RebootReplicationInstanceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RebootReplicationInstanceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RebootReplicationInstanceMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RebootReplicationInstanceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ForceFailover != nil {
+		s.WriteBool(schemas.RebootReplicationInstanceMessage_ForceFailover, *v.ForceFailover)
+	}
+	if v.ForcePlannedFailover != nil {
+		s.WriteBool(schemas.RebootReplicationInstanceMessage_ForcePlannedFailover, *v.ForcePlannedFailover)
+	}
+	if v.ReplicationInstanceArn != nil {
+		s.WriteString(schemas.RebootReplicationInstanceMessage_ReplicationInstanceArn, *v.ReplicationInstanceArn)
+	}
+}
+
 type RebootReplicationInstanceOutput struct {
 
 	// The replication instance that is being rebooted.
@@ -58,13 +78,34 @@ type RebootReplicationInstanceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RebootReplicationInstanceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RebootReplicationInstanceResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RebootReplicationInstanceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ReplicationInstance != nil {
+		s.WriteStruct(schemas.RebootReplicationInstanceResponse_ReplicationInstance)
+		v.ReplicationInstance.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *RebootReplicationInstanceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RebootReplicationInstanceResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RebootReplicationInstanceResponse_ReplicationInstance:
+			v.ReplicationInstance = &types.ReplicationInstance{}
+			return v.ReplicationInstance.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationRebootReplicationInstanceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpRebootReplicationInstance{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RebootReplicationInstance, schemas.RebootReplicationInstanceMessage, schemas.RebootReplicationInstanceResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpRebootReplicationInstance{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RebootReplicationInstance, schemas.RebootReplicationInstanceMessage, schemas.RebootReplicationInstanceResponse), output: &RebootReplicationInstanceOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

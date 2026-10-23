@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: AmazonElasticVMwareService.DeleteEnvironmentConnector
+
+{"connector":{"applianceFqdn":"__ApplianceFqdn__","checks":[{"impairedSince":946684800,"lastCheckAttempt":946684800,"result":"PASSED","type":"KEY_REUSE"},{"impairedSince":946684800,"lastCheckAttempt":946684800,"result":"PASSED","type":"KEY_REUSE"}],"connectorId":"__ConnectorId__","createdAt":946684800,"environmentId":"__EnvironmentId__","modifiedAt":946684800,"secretArn":"__SecretArn__","state":"CREATING","stateDetails":"__StateDetails__","status":"PASSED","type":"OPERATIONS_MANAGER"},"environmentSummary":{"createdAt":946684800,"environmentArn":"__EnvironmentArn__","environmentId":"__EnvironmentId__","environmentName":"__EnvironmentName__","environmentState":"CREATING","environmentStatus":"PASSED","modifiedAt":946684800,"vcfVersion":"VCF-5.2.1"}}

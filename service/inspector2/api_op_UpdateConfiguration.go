@@ -4,7 +4,9 @@ package inspector2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/inspector2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/inspector2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -56,6 +58,52 @@ type UpdateConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateConfigurationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountId != nil {
+		s.WriteString(schemas.UpdateConfigurationRequest_accountId, *v.AccountId)
+	}
+	if v.Ec2Configuration != nil {
+		s.WriteStruct(schemas.UpdateConfigurationRequest_ec2Configuration)
+		v.Ec2Configuration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.EcrConfiguration != nil {
+		s.WriteStruct(schemas.UpdateConfigurationRequest_ecrConfiguration)
+		v.EcrConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.UpdateConfigurationInheritance != nil {
+		s.WriteStruct(schemas.UpdateConfigurationRequest_updateConfigurationInheritance)
+		v.UpdateConfigurationInheritance.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateConfigurationInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateConfigurationRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateConfigurationRequest_accountId:
+			v.AccountId = new(string)
+			return d.ReadString(schemas.UpdateConfigurationRequest_accountId, v.AccountId)
+		case schemas.UpdateConfigurationRequest_ec2Configuration:
+			v.Ec2Configuration = &types.Ec2Configuration{}
+			return v.Ec2Configuration.Deserialize(d)
+		case schemas.UpdateConfigurationRequest_ecrConfiguration:
+			v.EcrConfiguration = &types.EcrConfiguration{}
+			return v.EcrConfiguration.Deserialize(d)
+		case schemas.UpdateConfigurationRequest_updateConfigurationInheritance:
+			v.UpdateConfigurationInheritance = &types.UpdateConfigurationInheritance{}
+			return v.UpdateConfigurationInheritance.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 type UpdateConfigurationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -63,13 +111,26 @@ type UpdateConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateConfigurationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *UpdateConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateConfigurationResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateConfiguration, schemas.UpdateConfigurationRequest, schemas.UpdateConfigurationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateConfiguration, schemas.UpdateConfigurationRequest, schemas.UpdateConfigurationResponse), output: &UpdateConfigurationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

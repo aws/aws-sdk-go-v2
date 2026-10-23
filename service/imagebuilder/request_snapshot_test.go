@@ -401,6 +401,7 @@ func TestCheckRequestSnapshot_CreateContainerRecipe(t *testing.T) {
 		},
 		KmsKeyId:    ptr.String("__KmsKeyId__"),
 		ClientToken: ptr.String("__ClientToken__"),
+		DryRun:      true,
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -647,6 +648,7 @@ func TestCheckRequestSnapshot_CreateDistributionConfiguration(t *testing.T) {
 			"key0": "__Value__",
 		},
 		ClientToken: ptr.String("__ClientToken__"),
+		DryRun:      true,
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -856,6 +858,7 @@ func TestCheckRequestSnapshot_CreateImagePipeline(t *testing.T) {
 			ImageLogGroupName:    ptr.String("__ImageLogGroupName__"),
 			PipelineLogGroupName: ptr.String("__PipelineLogGroupName__"),
 		},
+		DryRun: true,
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -976,6 +979,7 @@ func TestCheckRequestSnapshot_CreateImageRecipe(t *testing.T) {
 			"__Member__",
 		},
 		ClientToken: ptr.String("__ClientToken__"),
+		DryRun:      true,
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -1020,9 +1024,10 @@ func TestCheckRequestSnapshot_CreateInfrastructureConfiguration(t *testing.T) {
 				S3KeyPrefix:  ptr.String("__S3KeyPrefix__"),
 			},
 		},
-		KeyPair:                    ptr.String("__KeyPair__"),
-		TerminateInstanceOnFailure: ptr.Bool(true),
-		SnsTopicArn:                ptr.String("__SnsTopicArn__"),
+		KeyPair:                       ptr.String("__KeyPair__"),
+		TerminateInstanceOnFailure:    ptr.Bool(true),
+		TerminateInstanceOnCompletion: ptr.Bool(true),
+		SnsTopicArn:                   ptr.String("__SnsTopicArn__"),
 		ResourceTags: map[string]string{
 			"key0": "__Value__",
 		},
@@ -1039,7 +1044,14 @@ func TestCheckRequestSnapshot_CreateInfrastructureConfiguration(t *testing.T) {
 			HostId:               ptr.String("__HostId__"),
 			HostResourceGroupArn: ptr.String("__HostResourceGroupArn__"),
 		},
+		ParentInstance: &types.ParentInstanceConfiguration{
+			AutoScalingGroup: &types.AutoScalingGroupConfiguration{
+				Name:                       ptr.String("__Name__"),
+				CapacityWaitTimeoutSeconds: ptr.Int32(1),
+			},
+		},
 		ClientToken: ptr.String("__ClientToken__"),
+		DryRun:      true,
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -1170,6 +1182,7 @@ func TestCheckRequestSnapshot_CreateLifecyclePolicy(t *testing.T) {
 			"key0": "__Value__",
 		},
 		ClientToken: ptr.String("__ClientToken__"),
+		DryRun:      true,
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -3625,9 +3638,10 @@ func TestCheckRequestSnapshot_UpdateInfrastructureConfiguration(t *testing.T) {
 				S3KeyPrefix:  ptr.String("__S3KeyPrefix__"),
 			},
 		},
-		KeyPair:                    ptr.String("__KeyPair__"),
-		TerminateInstanceOnFailure: ptr.Bool(true),
-		SnsTopicArn:                ptr.String("__SnsTopicArn__"),
+		KeyPair:                       ptr.String("__KeyPair__"),
+		TerminateInstanceOnFailure:    ptr.Bool(true),
+		TerminateInstanceOnCompletion: ptr.Bool(true),
+		SnsTopicArn:                   ptr.String("__SnsTopicArn__"),
 		ResourceTags: map[string]string{
 			"key0": "__Value__",
 		},
@@ -3640,6 +3654,12 @@ func TestCheckRequestSnapshot_UpdateInfrastructureConfiguration(t *testing.T) {
 			Tenancy:              types.TenancyType("default"),
 			HostId:               ptr.String("__HostId__"),
 			HostResourceGroupArn: ptr.String("__HostResourceGroupArn__"),
+		},
+		ParentInstance: &types.ParentInstanceConfiguration{
+			AutoScalingGroup: &types.AutoScalingGroupConfiguration{
+				Name:                       ptr.String("__Name__"),
+				CapacityWaitTimeoutSeconds: ptr.Int32(1),
+			},
 		},
 		ClientToken: ptr.String("__ClientToken__"),
 	}
@@ -3987,6 +4007,7 @@ func TestUpdateRequestSnapshot_CreateContainerRecipe(t *testing.T) {
 		},
 		KmsKeyId:    ptr.String("__KmsKeyId__"),
 		ClientToken: ptr.String("__ClientToken__"),
+		DryRun:      true,
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -4233,6 +4254,7 @@ func TestUpdateRequestSnapshot_CreateDistributionConfiguration(t *testing.T) {
 			"key0": "__Value__",
 		},
 		ClientToken: ptr.String("__ClientToken__"),
+		DryRun:      true,
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -4442,6 +4464,7 @@ func TestUpdateRequestSnapshot_CreateImagePipeline(t *testing.T) {
 			ImageLogGroupName:    ptr.String("__ImageLogGroupName__"),
 			PipelineLogGroupName: ptr.String("__PipelineLogGroupName__"),
 		},
+		DryRun: true,
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -4562,6 +4585,7 @@ func TestUpdateRequestSnapshot_CreateImageRecipe(t *testing.T) {
 			"__Member__",
 		},
 		ClientToken: ptr.String("__ClientToken__"),
+		DryRun:      true,
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -4606,9 +4630,10 @@ func TestUpdateRequestSnapshot_CreateInfrastructureConfiguration(t *testing.T) {
 				S3KeyPrefix:  ptr.String("__S3KeyPrefix__"),
 			},
 		},
-		KeyPair:                    ptr.String("__KeyPair__"),
-		TerminateInstanceOnFailure: ptr.Bool(true),
-		SnsTopicArn:                ptr.String("__SnsTopicArn__"),
+		KeyPair:                       ptr.String("__KeyPair__"),
+		TerminateInstanceOnFailure:    ptr.Bool(true),
+		TerminateInstanceOnCompletion: ptr.Bool(true),
+		SnsTopicArn:                   ptr.String("__SnsTopicArn__"),
 		ResourceTags: map[string]string{
 			"key0": "__Value__",
 		},
@@ -4625,7 +4650,14 @@ func TestUpdateRequestSnapshot_CreateInfrastructureConfiguration(t *testing.T) {
 			HostId:               ptr.String("__HostId__"),
 			HostResourceGroupArn: ptr.String("__HostResourceGroupArn__"),
 		},
+		ParentInstance: &types.ParentInstanceConfiguration{
+			AutoScalingGroup: &types.AutoScalingGroupConfiguration{
+				Name:                       ptr.String("__Name__"),
+				CapacityWaitTimeoutSeconds: ptr.Int32(1),
+			},
+		},
 		ClientToken: ptr.String("__ClientToken__"),
+		DryRun:      true,
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -4756,6 +4788,7 @@ func TestUpdateRequestSnapshot_CreateLifecyclePolicy(t *testing.T) {
 			"key0": "__Value__",
 		},
 		ClientToken: ptr.String("__ClientToken__"),
+		DryRun:      true,
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -7211,9 +7244,10 @@ func TestUpdateRequestSnapshot_UpdateInfrastructureConfiguration(t *testing.T) {
 				S3KeyPrefix:  ptr.String("__S3KeyPrefix__"),
 			},
 		},
-		KeyPair:                    ptr.String("__KeyPair__"),
-		TerminateInstanceOnFailure: ptr.Bool(true),
-		SnsTopicArn:                ptr.String("__SnsTopicArn__"),
+		KeyPair:                       ptr.String("__KeyPair__"),
+		TerminateInstanceOnFailure:    ptr.Bool(true),
+		TerminateInstanceOnCompletion: ptr.Bool(true),
+		SnsTopicArn:                   ptr.String("__SnsTopicArn__"),
 		ResourceTags: map[string]string{
 			"key0": "__Value__",
 		},
@@ -7226,6 +7260,12 @@ func TestUpdateRequestSnapshot_UpdateInfrastructureConfiguration(t *testing.T) {
 			Tenancy:              types.TenancyType("default"),
 			HostId:               ptr.String("__HostId__"),
 			HostResourceGroupArn: ptr.String("__HostResourceGroupArn__"),
+		},
+		ParentInstance: &types.ParentInstanceConfiguration{
+			AutoScalingGroup: &types.AutoScalingGroupConfiguration{
+				Name:                       ptr.String("__Name__"),
+				CapacityWaitTimeoutSeconds: ptr.Int32(1),
+			},
 		},
 		ClientToken: ptr.String("__ClientToken__"),
 	}

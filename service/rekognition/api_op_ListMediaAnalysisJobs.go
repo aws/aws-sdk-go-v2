@@ -5,12 +5,22 @@ package rekognition
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/rekognition/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/rekognition/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
+// Service availability notice: Streaming Video and Bulk Image Analysis is no
+// longer available to new customers. For more information, see [Rekognition feature availability changes].
+//
+// This change does not impact the availability of other Amazon Rekognition
+// features.
+//
 // Returns a list of media analysis jobs. Results are sorted by CreationTimestamp
 // in descending order.
+//
+// [Rekognition feature availability changes]: https://docs.aws.amazon.com/rekognition/latest/dg/rekognition-availability-changes.html
 func (c *Client) ListMediaAnalysisJobs(ctx context.Context, params *ListMediaAnalysisJobsInput, optFns ...func(*Options)) (*ListMediaAnalysisJobsOutput, error) {
 	if params == nil {
 		params = &ListMediaAnalysisJobsInput{}
@@ -39,6 +49,21 @@ type ListMediaAnalysisJobsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListMediaAnalysisJobsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListMediaAnalysisJobsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListMediaAnalysisJobsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListMediaAnalysisJobsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListMediaAnalysisJobsRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListMediaAnalysisJobsOutput struct {
 
 	// Contains a list of all media analysis jobs.
@@ -55,13 +80,35 @@ type ListMediaAnalysisJobsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListMediaAnalysisJobsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListMediaAnalysisJobsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListMediaAnalysisJobsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeMediaAnalysisJobDescriptions(s, schemas.ListMediaAnalysisJobsResponse_MediaAnalysisJobs, v.MediaAnalysisJobs)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListMediaAnalysisJobsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListMediaAnalysisJobsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListMediaAnalysisJobsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListMediaAnalysisJobsResponse_MediaAnalysisJobs:
+			return deserializeMediaAnalysisJobDescriptions(d, schemas.ListMediaAnalysisJobsResponse_MediaAnalysisJobs, &v.MediaAnalysisJobs)
+		case schemas.ListMediaAnalysisJobsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListMediaAnalysisJobsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListMediaAnalysisJobsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListMediaAnalysisJobs{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListMediaAnalysisJobs, schemas.ListMediaAnalysisJobsRequest, schemas.ListMediaAnalysisJobsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListMediaAnalysisJobs{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListMediaAnalysisJobs, schemas.ListMediaAnalysisJobsRequest, schemas.ListMediaAnalysisJobsResponse), output: &ListMediaAnalysisJobsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

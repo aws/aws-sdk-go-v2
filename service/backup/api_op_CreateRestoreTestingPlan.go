@@ -4,7 +4,9 @@ package backup
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/backup/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/backup/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -53,6 +55,24 @@ type CreateRestoreTestingPlanInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateRestoreTestingPlanInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateRestoreTestingPlanInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateRestoreTestingPlanInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreatorRequestId != nil {
+		s.WriteString(schemas.CreateRestoreTestingPlanInput_CreatorRequestId, *v.CreatorRequestId)
+	}
+	if v.RestoreTestingPlan != nil {
+		s.WriteStruct(schemas.CreateRestoreTestingPlanInput_RestoreTestingPlan)
+		v.RestoreTestingPlan.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeSensitiveStringMap(s, schemas.CreateRestoreTestingPlanInput_Tags, v.Tags)
+}
+
 type CreateRestoreTestingPlanOutput struct {
 
 	// The date and time a restore testing plan was created, in Unix format and
@@ -83,13 +103,44 @@ type CreateRestoreTestingPlanOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateRestoreTestingPlanOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateRestoreTestingPlanOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateRestoreTestingPlanOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.CreateRestoreTestingPlanOutput_CreationTime, *v.CreationTime)
+	}
+	if v.RestoreTestingPlanArn != nil {
+		s.WriteString(schemas.CreateRestoreTestingPlanOutput_RestoreTestingPlanArn, *v.RestoreTestingPlanArn)
+	}
+	if v.RestoreTestingPlanName != nil {
+		s.WriteString(schemas.CreateRestoreTestingPlanOutput_RestoreTestingPlanName, *v.RestoreTestingPlanName)
+	}
+}
+func (v *CreateRestoreTestingPlanOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateRestoreTestingPlanOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateRestoreTestingPlanOutput_CreationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.CreateRestoreTestingPlanOutput_CreationTime, v.CreationTime)
+		case schemas.CreateRestoreTestingPlanOutput_RestoreTestingPlanArn:
+			v.RestoreTestingPlanArn = new(string)
+			return d.ReadString(schemas.CreateRestoreTestingPlanOutput_RestoreTestingPlanArn, v.RestoreTestingPlanArn)
+		case schemas.CreateRestoreTestingPlanOutput_RestoreTestingPlanName:
+			v.RestoreTestingPlanName = new(string)
+			return d.ReadString(schemas.CreateRestoreTestingPlanOutput_RestoreTestingPlanName, v.RestoreTestingPlanName)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateRestoreTestingPlanMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateRestoreTestingPlan{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateRestoreTestingPlan, schemas.CreateRestoreTestingPlanInput, schemas.CreateRestoreTestingPlanOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateRestoreTestingPlan{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateRestoreTestingPlan, schemas.CreateRestoreTestingPlanInput, schemas.CreateRestoreTestingPlanOutput), output: &CreateRestoreTestingPlanOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

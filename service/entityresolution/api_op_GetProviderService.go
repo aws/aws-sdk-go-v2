@@ -5,7 +5,11 @@ package entityresolution
 import (
 	"context"
 	"github.com/aws/aws-sdk-go-v2/service/entityresolution/document"
+	internaldocument "github.com/aws/aws-sdk-go-v2/service/entityresolution/internal/document"
+	"github.com/aws/aws-sdk-go-v2/service/entityresolution/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/entityresolution/types"
+	smithy "github.com/aws/smithy-go"
+	smithydocument "github.com/aws/smithy-go/document"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +43,21 @@ type GetProviderServiceInput struct {
 	ProviderServiceName *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetProviderServiceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetProviderServiceInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetProviderServiceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ProviderName != nil {
+		s.WriteString(schemas.GetProviderServiceInput_providerName, *v.ProviderName)
+	}
+	if v.ProviderServiceName != nil {
+		s.WriteString(schemas.GetProviderServiceInput_providerServiceName, *v.ProviderServiceName)
+	}
 }
 
 type GetProviderServiceOutput struct {
@@ -110,13 +129,129 @@ type GetProviderServiceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetProviderServiceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetProviderServiceOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetProviderServiceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AnonymizedOutput != nil {
+		s.WriteBool(schemas.GetProviderServiceOutput_anonymizedOutput, *v.AnonymizedOutput)
+	}
+	if v.ProviderComponentSchema != nil {
+		s.WriteStruct(schemas.GetProviderServiceOutput_providerComponentSchema)
+		v.ProviderComponentSchema.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ProviderConfigurationDefinition != nil {
+		s.WriteDocument(schemas.GetProviderServiceOutput_providerConfigurationDefinition, &smithydocument.Opaque{Value: v.ProviderConfigurationDefinition})
+	}
+	serializeProviderEndpointConfiguration(s, schemas.GetProviderServiceOutput_providerEndpointConfiguration, v.ProviderEndpointConfiguration)
+	if v.ProviderEntityOutputDefinition != nil {
+		s.WriteDocument(schemas.GetProviderServiceOutput_providerEntityOutputDefinition, &smithydocument.Opaque{Value: v.ProviderEntityOutputDefinition})
+	}
+	if v.ProviderIdNameSpaceConfiguration != nil {
+		s.WriteStruct(schemas.GetProviderServiceOutput_providerIdNameSpaceConfiguration)
+		v.ProviderIdNameSpaceConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ProviderIntermediateDataAccessConfiguration != nil {
+		s.WriteStruct(schemas.GetProviderServiceOutput_providerIntermediateDataAccessConfiguration)
+		v.ProviderIntermediateDataAccessConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ProviderJobConfiguration != nil {
+		s.WriteDocument(schemas.GetProviderServiceOutput_providerJobConfiguration, &smithydocument.Opaque{Value: v.ProviderJobConfiguration})
+	}
+	if v.ProviderName != nil {
+		s.WriteString(schemas.GetProviderServiceOutput_providerName, *v.ProviderName)
+	}
+	if v.ProviderServiceArn != nil {
+		s.WriteString(schemas.GetProviderServiceOutput_providerServiceArn, *v.ProviderServiceArn)
+	}
+	if v.ProviderServiceDisplayName != nil {
+		s.WriteString(schemas.GetProviderServiceOutput_providerServiceDisplayName, *v.ProviderServiceDisplayName)
+	}
+	if v.ProviderServiceName != nil {
+		s.WriteString(schemas.GetProviderServiceOutput_providerServiceName, *v.ProviderServiceName)
+	}
+	if v.ProviderServiceType != "" {
+		s.WriteString(schemas.GetProviderServiceOutput_providerServiceType, string(v.ProviderServiceType))
+	}
+}
+func (v *GetProviderServiceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetProviderServiceOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetProviderServiceOutput_anonymizedOutput:
+			v.AnonymizedOutput = new(bool)
+			return d.ReadBool(schemas.GetProviderServiceOutput_anonymizedOutput, v.AnonymizedOutput)
+		case schemas.GetProviderServiceOutput_providerComponentSchema:
+			v.ProviderComponentSchema = &types.ProviderComponentSchema{}
+			return v.ProviderComponentSchema.Deserialize(d)
+		case schemas.GetProviderServiceOutput_providerConfigurationDefinition:
+			var dv smithydocument.Value
+			if err := d.ReadDocument(schemas.GetProviderServiceOutput_providerConfigurationDefinition, &dv); err != nil {
+				return err
+			}
+			if ov, ok := dv.(smithydocument.Opaque); ok {
+				v.ProviderConfigurationDefinition = internaldocument.NewDocumentUnmarshaler(ov.Value)
+			}
+			return nil
+		case schemas.GetProviderServiceOutput_providerEndpointConfiguration:
+			return deserializeProviderEndpointConfiguration(d, schemas.GetProviderServiceOutput_providerEndpointConfiguration, &v.ProviderEndpointConfiguration)
+		case schemas.GetProviderServiceOutput_providerEntityOutputDefinition:
+			var dv smithydocument.Value
+			if err := d.ReadDocument(schemas.GetProviderServiceOutput_providerEntityOutputDefinition, &dv); err != nil {
+				return err
+			}
+			if ov, ok := dv.(smithydocument.Opaque); ok {
+				v.ProviderEntityOutputDefinition = internaldocument.NewDocumentUnmarshaler(ov.Value)
+			}
+			return nil
+		case schemas.GetProviderServiceOutput_providerIdNameSpaceConfiguration:
+			v.ProviderIdNameSpaceConfiguration = &types.ProviderIdNameSpaceConfiguration{}
+			return v.ProviderIdNameSpaceConfiguration.Deserialize(d)
+		case schemas.GetProviderServiceOutput_providerIntermediateDataAccessConfiguration:
+			v.ProviderIntermediateDataAccessConfiguration = &types.ProviderIntermediateDataAccessConfiguration{}
+			return v.ProviderIntermediateDataAccessConfiguration.Deserialize(d)
+		case schemas.GetProviderServiceOutput_providerJobConfiguration:
+			var dv smithydocument.Value
+			if err := d.ReadDocument(schemas.GetProviderServiceOutput_providerJobConfiguration, &dv); err != nil {
+				return err
+			}
+			if ov, ok := dv.(smithydocument.Opaque); ok {
+				v.ProviderJobConfiguration = internaldocument.NewDocumentUnmarshaler(ov.Value)
+			}
+			return nil
+		case schemas.GetProviderServiceOutput_providerName:
+			v.ProviderName = new(string)
+			return d.ReadString(schemas.GetProviderServiceOutput_providerName, v.ProviderName)
+		case schemas.GetProviderServiceOutput_providerServiceArn:
+			v.ProviderServiceArn = new(string)
+			return d.ReadString(schemas.GetProviderServiceOutput_providerServiceArn, v.ProviderServiceArn)
+		case schemas.GetProviderServiceOutput_providerServiceDisplayName:
+			v.ProviderServiceDisplayName = new(string)
+			return d.ReadString(schemas.GetProviderServiceOutput_providerServiceDisplayName, v.ProviderServiceDisplayName)
+		case schemas.GetProviderServiceOutput_providerServiceName:
+			v.ProviderServiceName = new(string)
+			return d.ReadString(schemas.GetProviderServiceOutput_providerServiceName, v.ProviderServiceName)
+		case schemas.GetProviderServiceOutput_providerServiceType:
+			var ev string
+			if err := d.ReadString(schemas.GetProviderServiceOutput_providerServiceType, &ev); err != nil {
+				return err
+			}
+			v.ProviderServiceType = types.ServiceType(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetProviderServiceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetProviderService{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetProviderService, schemas.GetProviderServiceInput, schemas.GetProviderServiceOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetProviderService{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetProviderService, schemas.GetProviderServiceInput, schemas.GetProviderServiceOutput), output: &GetProviderServiceOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -5,7 +5,9 @@ package secretsmanager
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/secretsmanager/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/secretsmanager/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -220,6 +222,41 @@ type CreateSecretInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateSecretInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateSecretRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateSecretInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAddReplicaRegionListType(s, schemas.CreateSecretRequest_AddReplicaRegions, v.AddReplicaRegions)
+	if v.ClientRequestToken != nil {
+		s.WriteString(schemas.CreateSecretRequest_ClientRequestToken, *v.ClientRequestToken)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreateSecretRequest_Description, *v.Description)
+	}
+	if v.ForceOverwriteReplicaSecret != false {
+		s.WriteBool(schemas.CreateSecretRequest_ForceOverwriteReplicaSecret, v.ForceOverwriteReplicaSecret)
+	}
+	if v.KmsKeyId != nil {
+		s.WriteString(schemas.CreateSecretRequest_KmsKeyId, *v.KmsKeyId)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateSecretRequest_Name, *v.Name)
+	}
+	if v.SecretBinary != nil {
+		s.WriteBlob(schemas.CreateSecretRequest_SecretBinary, v.SecretBinary)
+	}
+	if v.SecretString != nil {
+		s.WriteString(schemas.CreateSecretRequest_SecretString, *v.SecretString)
+	}
+	serializeTagListType(s, schemas.CreateSecretRequest_Tags, v.Tags)
+	if v.Type != nil {
+		s.WriteString(schemas.CreateSecretRequest_Type, *v.Type)
+	}
+}
+
 type CreateSecretOutput struct {
 
 	// The ARN of the new secret. The ARN includes the name of the secret followed by
@@ -250,13 +287,47 @@ type CreateSecretOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateSecretOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateSecretResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateSecretOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ARN != nil {
+		s.WriteString(schemas.CreateSecretResponse_ARN, *v.ARN)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateSecretResponse_Name, *v.Name)
+	}
+	serializeReplicationStatusListType(s, schemas.CreateSecretResponse_ReplicationStatus, v.ReplicationStatus)
+	if v.VersionId != nil {
+		s.WriteString(schemas.CreateSecretResponse_VersionId, *v.VersionId)
+	}
+}
+func (v *CreateSecretOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateSecretResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateSecretResponse_ARN:
+			v.ARN = new(string)
+			return d.ReadString(schemas.CreateSecretResponse_ARN, v.ARN)
+		case schemas.CreateSecretResponse_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.CreateSecretResponse_Name, v.Name)
+		case schemas.CreateSecretResponse_ReplicationStatus:
+			return deserializeReplicationStatusListType(d, schemas.CreateSecretResponse_ReplicationStatus, &v.ReplicationStatus)
+		case schemas.CreateSecretResponse_VersionId:
+			v.VersionId = new(string)
+			return d.ReadString(schemas.CreateSecretResponse_VersionId, v.VersionId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateSecretMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateSecret{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateSecret, schemas.CreateSecretRequest, schemas.CreateSecretResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateSecret{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateSecret, schemas.CreateSecretRequest, schemas.CreateSecretResponse), output: &CreateSecretOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

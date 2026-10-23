@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"NextToken":"__NextToken__","RestoreTestingSelections":[{"CreationTime":946684800,"IamRoleArn":"__IamRoleArn__","ProtectedResourceType":"__ProtectedResourceType__","RestoreTestingPlanName":"__RestoreTestingPlanName__","RestoreTestingSelectionName":"__RestoreTestingSelectionName__","ValidationWindowHours":1},{"CreationTime":946684800,"IamRoleArn":"__IamRoleArn__","ProtectedResourceType":"__ProtectedResourceType__","RestoreTestingPlanName":"__RestoreTestingPlanName__","RestoreTestingSelectionName":"__RestoreTestingSelectionName__","ValidationWindowHours":1}]}

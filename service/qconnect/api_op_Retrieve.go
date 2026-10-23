@@ -73,6 +73,13 @@ type RetrieveOutput struct {
 	// This member is required.
 	Results []types.RetrieveResult
 
+	// The per-association errors returned when one or more knowledge base
+	// associations fail during a Retrieve operation that spans multiple assistant
+	// associations. The overall operation still succeeds and returns the results from
+	// the associations that were queried successfully. This list contains one entry
+	// for each association that failed, up to a maximum of five.
+	Errors []types.RetrieveError
+
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 
@@ -86,11 +93,14 @@ func (v *RetrieveOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *RetrieveOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeRetrieveErrorList(s, schemas.RetrieveResponse_errors, v.Errors)
 	serializeRetrieveResultList(s, schemas.RetrieveResponse_results, v.Results)
 }
 func (v *RetrieveOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.RetrieveResponse, func(s *smithy.Schema) error {
 		switch s {
+		case schemas.RetrieveResponse_errors:
+			return deserializeRetrieveErrorList(d, schemas.RetrieveResponse_errors, &v.Errors)
 		case schemas.RetrieveResponse_results:
 			return deserializeRetrieveResultList(d, schemas.RetrieveResponse_results, &v.Results)
 		}

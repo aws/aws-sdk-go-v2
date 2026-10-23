@@ -3111,13 +3111,32 @@ func (v *PinVerificationAttributesMemberVisaPin) Deserialize(d smithy.ShapeDeser
 //
 // The following types satisfy this interface:
 //
+//	ReEncryptionAttributesMemberAsymmetric
 //	ReEncryptionAttributesMemberDukpt
 //	ReEncryptionAttributesMemberSymmetric
 type ReEncryptionAttributes interface {
 	isReEncryptionAttributes()
 }
 
-// Parameters that are required to encrypt plaintext data using DUKPT.
+// Specifies the parameters required to encrypt data using an asymmetric key pair.
+// You must specify a PaddingType .
+type ReEncryptionAttributesMemberAsymmetric struct {
+	Value AsymmetricEncryptionAttributes
+
+	noSmithyDocumentSerde
+}
+
+func (*ReEncryptionAttributesMemberAsymmetric) isReEncryptionAttributes() {}
+func (v *ReEncryptionAttributesMemberAsymmetric) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ReEncryptionAttributes_Asymmetric)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *ReEncryptionAttributesMemberAsymmetric) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
+
+// Specifies the parameters required to encrypt data using DUKPT.
 type ReEncryptionAttributesMemberDukpt struct {
 	Value DukptEncryptionAttributes
 
@@ -3134,7 +3153,7 @@ func (v *ReEncryptionAttributesMemberDukpt) Deserialize(d smithy.ShapeDeserializ
 	return v.Value.Deserialize(d)
 }
 
-// Parameters that are required to encrypt data using symmetric keys.
+// Specifies the parameters required to encrypt data using symmetric keys.
 type ReEncryptionAttributesMemberSymmetric struct {
 	Value SymmetricEncryptionAttributes
 

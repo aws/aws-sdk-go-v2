@@ -5,7 +5,9 @@ package devopsagent
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/devopsagent/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/devopsagent/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -48,6 +50,27 @@ type ListAssetVersionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAssetVersionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAssetVersionsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAssetVersionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AgentSpaceId != nil {
+		s.WriteString(schemas.ListAssetVersionsRequest_agentSpaceId, *v.AgentSpaceId)
+	}
+	if v.AssetId != nil {
+		s.WriteString(schemas.ListAssetVersionsRequest_assetId, *v.AssetId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListAssetVersionsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAssetVersionsRequest_nextToken, *v.NextToken)
+	}
+}
+
 // Response structure for listing asset versions
 type ListAssetVersionsOutput struct {
 
@@ -66,13 +89,35 @@ type ListAssetVersionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAssetVersionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAssetVersionsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAssetVersionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAssetVersionMetadataList(s, schemas.ListAssetVersionsResponse_items, v.Items)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAssetVersionsResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListAssetVersionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListAssetVersionsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListAssetVersionsResponse_items:
+			return deserializeAssetVersionMetadataList(d, schemas.ListAssetVersionsResponse_items, &v.Items)
+		case schemas.ListAssetVersionsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListAssetVersionsResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListAssetVersionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListAssetVersions{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAssetVersions, schemas.ListAssetVersionsRequest, schemas.ListAssetVersionsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListAssetVersions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAssetVersions, schemas.ListAssetVersionsRequest, schemas.ListAssetVersionsResponse), output: &ListAssetVersionsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

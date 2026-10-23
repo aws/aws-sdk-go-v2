@@ -4,6 +4,8 @@ package bedrock
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/bedrock/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -37,6 +39,18 @@ type DeleteProvisionedModelThroughputInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteProvisionedModelThroughputInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteProvisionedModelThroughputRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteProvisionedModelThroughputInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ProvisionedModelId != nil {
+		s.WriteString(schemas.DeleteProvisionedModelThroughputRequest_provisionedModelId, *v.ProvisionedModelId)
+	}
+}
+
 type DeleteProvisionedModelThroughputOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -44,13 +58,26 @@ type DeleteProvisionedModelThroughputOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteProvisionedModelThroughputOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteProvisionedModelThroughputResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteProvisionedModelThroughputOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteProvisionedModelThroughputOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteProvisionedModelThroughputResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteProvisionedModelThroughputMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteProvisionedModelThroughput{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteProvisionedModelThroughput, schemas.DeleteProvisionedModelThroughputRequest, schemas.DeleteProvisionedModelThroughputResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteProvisionedModelThroughput{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteProvisionedModelThroughput, schemas.DeleteProvisionedModelThroughputRequest, schemas.DeleteProvisionedModelThroughputResponse), output: &DeleteProvisionedModelThroughputOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

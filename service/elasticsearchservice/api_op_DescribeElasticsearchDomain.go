@@ -4,7 +4,9 @@ package elasticsearchservice
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/elasticsearchservice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/elasticsearchservice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -36,6 +38,18 @@ type DescribeElasticsearchDomainInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeElasticsearchDomainInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeElasticsearchDomainRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeElasticsearchDomainInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DomainName != nil {
+		s.WriteString(schemas.DescribeElasticsearchDomainRequest_DomainName, *v.DomainName)
+	}
+}
+
 // The result of a DescribeElasticsearchDomain request. Contains the status of the
 // domain specified in the request.
 type DescribeElasticsearchDomainOutput struct {
@@ -51,13 +65,34 @@ type DescribeElasticsearchDomainOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeElasticsearchDomainOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeElasticsearchDomainResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeElasticsearchDomainOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DomainStatus != nil {
+		s.WriteStruct(schemas.DescribeElasticsearchDomainResponse_DomainStatus)
+		v.DomainStatus.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DescribeElasticsearchDomainOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeElasticsearchDomainResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeElasticsearchDomainResponse_DomainStatus:
+			v.DomainStatus = &types.ElasticsearchDomainStatus{}
+			return v.DomainStatus.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeElasticsearchDomainMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeElasticsearchDomain{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeElasticsearchDomain, schemas.DescribeElasticsearchDomainRequest, schemas.DescribeElasticsearchDomainResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeElasticsearchDomain{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeElasticsearchDomain, schemas.DescribeElasticsearchDomainRequest, schemas.DescribeElasticsearchDomainResponse), output: &DescribeElasticsearchDomainOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

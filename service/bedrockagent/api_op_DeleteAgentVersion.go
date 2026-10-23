@@ -4,7 +4,9 @@ package bedrockagent
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/bedrockagent/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagent/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -44,6 +46,24 @@ type DeleteAgentVersionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteAgentVersionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteAgentVersionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteAgentVersionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AgentId != nil {
+		s.WriteString(schemas.DeleteAgentVersionRequest_agentId, *v.AgentId)
+	}
+	if v.AgentVersion != nil {
+		s.WriteString(schemas.DeleteAgentVersionRequest_agentVersion, *v.AgentVersion)
+	}
+	if v.SkipResourceInUseCheck != false {
+		s.WriteBool(schemas.DeleteAgentVersionRequest_skipResourceInUseCheck, v.SkipResourceInUseCheck)
+	}
+}
+
 type DeleteAgentVersionOutput struct {
 
 	// The unique identifier of the agent that the version belongs to.
@@ -67,13 +87,48 @@ type DeleteAgentVersionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteAgentVersionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteAgentVersionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteAgentVersionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AgentId != nil {
+		s.WriteString(schemas.DeleteAgentVersionResponse_agentId, *v.AgentId)
+	}
+	if v.AgentStatus != "" {
+		s.WriteString(schemas.DeleteAgentVersionResponse_agentStatus, string(v.AgentStatus))
+	}
+	if v.AgentVersion != nil {
+		s.WriteString(schemas.DeleteAgentVersionResponse_agentVersion, *v.AgentVersion)
+	}
+}
+func (v *DeleteAgentVersionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteAgentVersionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteAgentVersionResponse_agentId:
+			v.AgentId = new(string)
+			return d.ReadString(schemas.DeleteAgentVersionResponse_agentId, v.AgentId)
+		case schemas.DeleteAgentVersionResponse_agentStatus:
+			var ev string
+			if err := d.ReadString(schemas.DeleteAgentVersionResponse_agentStatus, &ev); err != nil {
+				return err
+			}
+			v.AgentStatus = types.AgentStatus(ev)
+			return nil
+		case schemas.DeleteAgentVersionResponse_agentVersion:
+			v.AgentVersion = new(string)
+			return d.ReadString(schemas.DeleteAgentVersionResponse_agentVersion, v.AgentVersion)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteAgentVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteAgentVersion{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteAgentVersion, schemas.DeleteAgentVersionRequest, schemas.DeleteAgentVersionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteAgentVersion{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteAgentVersion, schemas.DeleteAgentVersionRequest, schemas.DeleteAgentVersionResponse), output: &DeleteAgentVersionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

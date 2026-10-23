@@ -4,7 +4,9 @@ package ecr
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/ecr/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ecr/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -29,6 +31,15 @@ type DescribeRegistryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeRegistryInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeRegistryRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeRegistryInput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+
 type DescribeRegistryOutput struct {
 
 	// The registry ID associated with the request.
@@ -43,13 +54,40 @@ type DescribeRegistryOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeRegistryOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeRegistryResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeRegistryOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RegistryId != nil {
+		s.WriteString(schemas.DescribeRegistryResponse_registryId, *v.RegistryId)
+	}
+	if v.ReplicationConfiguration != nil {
+		s.WriteStruct(schemas.DescribeRegistryResponse_replicationConfiguration)
+		v.ReplicationConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DescribeRegistryOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeRegistryResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeRegistryResponse_registryId:
+			v.RegistryId = new(string)
+			return d.ReadString(schemas.DescribeRegistryResponse_registryId, v.RegistryId)
+		case schemas.DescribeRegistryResponse_replicationConfiguration:
+			v.ReplicationConfiguration = &types.ReplicationConfiguration{}
+			return v.ReplicationConfiguration.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeRegistryMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeRegistry{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeRegistry, schemas.DescribeRegistryRequest, schemas.DescribeRegistryResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeRegistry{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeRegistry, schemas.DescribeRegistryRequest, schemas.DescribeRegistryResponse), output: &DescribeRegistryOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

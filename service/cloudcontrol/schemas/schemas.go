@@ -57,7 +57,8 @@ var CloudApiService = smithy.NewServiceSchema(_CloudApiService, "2021-09-30")
 var AlreadyExistsException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloudcontrol",
 	Name:      "AlreadyExistsException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400},
 	&smithytraits.AWSQueryError{ErrorCode: "AlreadyExistsException",
 		StatusCode: 400})
 var AlreadyExistsException_Message *smithy.Schema
@@ -70,7 +71,8 @@ var _ClientToken = smithy.NewSchema(smithy.ShapeID{
 var ClientTokenConflictException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloudcontrol",
 	Name:      "ClientTokenConflictException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 409},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 409},
 	&smithytraits.AWSQueryError{ErrorCode: "ClientTokenConflictException",
 		StatusCode: 409})
 var ClientTokenConflictException_Message *smithy.Schema
@@ -78,7 +80,8 @@ var ClientTokenConflictException_Message *smithy.Schema
 var ConcurrentModificationException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloudcontrol",
 	Name:      "ConcurrentModificationException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 500},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
+	&smithytraits.HTTPError{Code: 500},
 	&smithytraits.AWSQueryError{ErrorCode: "ConcurrentModificationException",
 		StatusCode: 500})
 var ConcurrentModificationException_Message *smithy.Schema
@@ -86,7 +89,8 @@ var ConcurrentModificationException_Message *smithy.Schema
 var ConcurrentOperationException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloudcontrol",
 	Name:      "ConcurrentOperationException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 409},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 409},
 	&smithytraits.AWSQueryError{ErrorCode: "ConcurrentOperationException",
 		StatusCode: 409})
 var ConcurrentOperationException_Message *smithy.Schema
@@ -99,7 +103,8 @@ var _ErrorMessage = smithy.NewSchema(smithy.ShapeID{
 var GeneralServiceException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloudcontrol",
 	Name:      "GeneralServiceException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400},
 	&smithytraits.AWSQueryError{ErrorCode: "GeneralServiceException",
 		StatusCode: 400})
 var GeneralServiceException_Message *smithy.Schema
@@ -112,7 +117,8 @@ var _HandlerErrorCode = smithy.NewSchema(smithy.ShapeID{
 var HandlerFailureException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloudcontrol",
 	Name:      "HandlerFailureException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 502},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
+	&smithytraits.HTTPError{Code: 502},
 	&smithytraits.AWSQueryError{ErrorCode: "HandlerFailureException",
 		StatusCode: 502})
 var HandlerFailureException_Message *smithy.Schema
@@ -120,7 +126,8 @@ var HandlerFailureException_Message *smithy.Schema
 var HandlerInternalFailureException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloudcontrol",
 	Name:      "HandlerInternalFailureException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 502},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
+	&smithytraits.HTTPError{Code: 502},
 	&smithytraits.AWSQueryError{ErrorCode: "HandlerInternalFailureException",
 		StatusCode: 502})
 var HandlerInternalFailureException_Message *smithy.Schema
@@ -184,7 +191,8 @@ var _Identifier = smithy.NewSchema(smithy.ShapeID{
 var InvalidCredentialsException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloudcontrol",
 	Name:      "InvalidCredentialsException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 401},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 401},
 	&smithytraits.AWSQueryError{ErrorCode: "InvalidCredentialsException",
 		StatusCode: 401})
 var InvalidCredentialsException_Message *smithy.Schema
@@ -192,7 +200,8 @@ var InvalidCredentialsException_Message *smithy.Schema
 var InvalidRequestException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloudcontrol",
 	Name:      "InvalidRequestException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400},
 	&smithytraits.AWSQueryError{ErrorCode: "InvalidRequestException",
 		StatusCode: 400})
 var InvalidRequestException_Message *smithy.Schema
@@ -205,7 +214,8 @@ var _MaxResults = smithy.NewSchema(smithy.ShapeID{
 var NetworkFailureException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloudcontrol",
 	Name:      "NetworkFailureException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 502},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
+	&smithytraits.HTTPError{Code: 502},
 	&smithytraits.AWSQueryError{ErrorCode: "NetworkFailureException",
 		StatusCode: 502})
 var NetworkFailureException_Message *smithy.Schema
@@ -218,7 +228,8 @@ var _NextToken = smithy.NewSchema(smithy.ShapeID{
 var NotStabilizedException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloudcontrol",
 	Name:      "NotStabilizedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400},
 	&smithytraits.AWSQueryError{ErrorCode: "NotStabilizedException",
 		StatusCode: 400})
 var NotStabilizedException_Message *smithy.Schema
@@ -226,7 +237,8 @@ var NotStabilizedException_Message *smithy.Schema
 var NotUpdatableException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloudcontrol",
 	Name:      "NotUpdatableException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400},
 	&smithytraits.AWSQueryError{ErrorCode: "NotUpdatableException",
 		StatusCode: 400})
 var NotUpdatableException_Message *smithy.Schema
@@ -261,7 +273,8 @@ var _PatchDocument = smithy.NewSchema(smithy.ShapeID{
 var PrivateTypeException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloudcontrol",
 	Name:      "PrivateTypeException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400},
 	&smithytraits.AWSQueryError{ErrorCode: "PrivateTypeException",
 		StatusCode: 400})
 var PrivateTypeException_Message *smithy.Schema
@@ -305,7 +318,8 @@ var _RequestToken = smithy.NewSchema(smithy.ShapeID{
 var RequestTokenNotFoundException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloudcontrol",
 	Name:      "RequestTokenNotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 404},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 404},
 	&smithytraits.AWSQueryError{ErrorCode: "RequestTokenNotFoundException",
 		StatusCode: 404})
 var RequestTokenNotFoundException_Message *smithy.Schema
@@ -313,7 +327,8 @@ var RequestTokenNotFoundException_Message *smithy.Schema
 var ResourceConflictException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloudcontrol",
 	Name:      "ResourceConflictException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 409},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 409},
 	&smithytraits.AWSQueryError{ErrorCode: "ResourceConflictException",
 		StatusCode: 409})
 var ResourceConflictException_Message *smithy.Schema
@@ -335,7 +350,8 @@ var _ResourceDescriptions_member *smithy.Schema
 var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloudcontrol",
 	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 404},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 404},
 	&smithytraits.AWSQueryError{ErrorCode: "ResourceNotFoundException",
 		StatusCode: 404})
 var ResourceNotFoundException_Message *smithy.Schema
@@ -362,7 +378,8 @@ var _RoleArn = smithy.NewSchema(smithy.ShapeID{
 var ServiceInternalErrorException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloudcontrol",
 	Name:      "ServiceInternalErrorException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 502},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
+	&smithytraits.HTTPError{Code: 502},
 	&smithytraits.AWSQueryError{ErrorCode: "ServiceInternalErrorException",
 		StatusCode: 502})
 var ServiceInternalErrorException_Message *smithy.Schema
@@ -370,7 +387,8 @@ var ServiceInternalErrorException_Message *smithy.Schema
 var ServiceLimitExceededException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloudcontrol",
 	Name:      "ServiceLimitExceededException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400},
 	&smithytraits.AWSQueryError{ErrorCode: "ServiceLimitExceededException",
 		StatusCode: 400})
 var ServiceLimitExceededException_Message *smithy.Schema
@@ -383,7 +401,8 @@ var _StatusMessage = smithy.NewSchema(smithy.ShapeID{
 var ThrottlingException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloudcontrol",
 	Name:      "ThrottlingException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 429},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 429},
 	&smithytraits.AWSQueryError{ErrorCode: "ThrottlingException",
 		StatusCode: 429})
 var ThrottlingException_Message *smithy.Schema
@@ -401,7 +420,8 @@ var _TypeName = smithy.NewSchema(smithy.ShapeID{
 var TypeNotFoundException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloudcontrol",
 	Name:      "TypeNotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 404},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 404},
 	&smithytraits.AWSQueryError{ErrorCode: "TypeNotFoundException",
 		StatusCode: 404})
 var TypeNotFoundException_Message *smithy.Schema
@@ -414,7 +434,8 @@ var _TypeVersionId = smithy.NewSchema(smithy.ShapeID{
 var UnsupportedActionException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloudcontrol",
 	Name:      "UnsupportedActionException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 405},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 405},
 	&smithytraits.AWSQueryError{ErrorCode: "UnsupportedActionException",
 		StatusCode: 405})
 var UnsupportedActionException_Message *smithy.Schema

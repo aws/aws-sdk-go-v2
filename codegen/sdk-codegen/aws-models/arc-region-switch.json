@@ -378,6 +378,9 @@
                     "target": "com.amazonaws.arcregionswitch#ListRoute53HealthChecksInRegion"
                 },
                 {
+                    "target": "com.amazonaws.arcregionswitch#ListServiceQuotaWarnings"
+                },
+                {
                     "target": "com.amazonaws.arcregionswitch#StartPlanExecution"
                 },
                 {
@@ -1838,6 +1841,13 @@
                         "aws.cloudformation#cfnMutability": "full"
                     }
                 },
+                "serviceQuotaChecksEnabled": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "aws.cloudformation#cfnMutability": "full",
+                        "smithy.api#documentation": "<p>Specifies whether to enable service quota checks for the Region switch plan.</p>"
+                    }
+                },
                 "name": {
                     "target": "com.amazonaws.arcregionswitch#PlanName",
                     "traits": {
@@ -2153,6 +2163,12 @@
                         "smithy.api#default": "sampledMaxInLast24Hours",
                         "smithy.api#documentation": "<p>The monitoring approach that you specify EC2 Auto Scaling groups for the configuration.</p>"
                     }
+                },
+                "waitELBTargetGroupHealthy": {
+                    "target": "com.amazonaws.arcregionswitch#WaitELBTargetGroupHealthy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If enabled, the step completes only after each attached ELB target group reports a healthy target count that matches the group's new desired capacity calculated in the step.</p>"
+                    }
                 }
             },
             "traits": {
@@ -2233,6 +2249,12 @@
                     "traits": {
                         "smithy.api#default": "sampledMaxInLast24Hours",
                         "smithy.api#documentation": "<p>The monitoring approach specified for the configuration, for example, <code>Most_Recent</code>.</p>"
+                    }
+                },
+                "waitELBTargetGroupHealthy": {
+                    "target": "com.amazonaws.arcregionswitch#WaitELBTargetGroupHealthy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If enabled, the step completes only after each attached ELB target group reports a healthy target count that matches the service's new desired task count calculated in the step.</p>"
                     }
                 }
             },
@@ -2656,6 +2678,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>An Amazon RDS switchover read replica execution block.</p>"
                     }
+                },
+                "ssmSendCommandConfig": {
+                    "target": "com.amazonaws.arcregionswitch#SsmSendCommandConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies an AWS Systems Manager <code>SendCommand</code> execution block.</p>"
+                    }
                 }
             },
             "traits": {
@@ -2771,6 +2799,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "RdsSwitchoverReadReplica"
+                    }
+                },
+                "SSM_SEND_COMMAND": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SSMSendCommand"
                     }
                 }
             }
@@ -3712,14 +3746,14 @@
                     "target": "com.amazonaws.arcregionswitch#GlobalAuroraDefaultBehavior",
                     "traits": {
                         "smithy.api#default": "switchoverOnly",
-                        "smithy.api#documentation": "<p>The behavior for a global database, that is, only allow switchover or also allow failover.</p>",
+                        "smithy.api#documentation": "<p>The default behavior for the Aurora global database execution block. Valid values:</p> <ul> <li> <p> <code>switchoverOnly</code> - Calls <code>SwitchoverGlobalCluster</code> for a zero-data-loss switchover during graceful execution.</p> </li> <li> <p> <code>failover</code> - Calls <code>FailoverGlobalCluster</code> with <code>AllowDataLoss</code> set to <code>true</code>. This operation might cause data loss, including during graceful execution.</p> </li> </ul>",
                         "smithy.api#required": {}
                     }
                 },
                 "ungraceful": {
                     "target": "com.amazonaws.arcregionswitch#GlobalAuroraUngraceful",
                     "traits": {
-                        "smithy.api#documentation": "<p>The settings for ungraceful execution.</p>"
+                        "smithy.api#documentation": "<p>The behavior to use when the plan runs in ungraceful mode. If you omit this value, Region switch uses the value of <code>behavior</code>.</p>"
                     }
                 },
                 "globalClusterIdentifier": {
@@ -3764,12 +3798,12 @@
                 "ungraceful": {
                     "target": "com.amazonaws.arcregionswitch#GlobalAuroraUngracefulBehavior",
                     "traits": {
-                        "smithy.api#documentation": "<p>The settings for ungraceful execution.</p>"
+                        "smithy.api#documentation": "<p>The ungraceful behavior. The only valid value is <code>failover</code>, which calls <code>FailoverGlobalCluster</code> with <code>AllowDataLoss</code> set to <code>true</code> and might cause data loss.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Configuration for handling failures when performing operations on Aurora global databases.</p>"
+                "smithy.api#documentation": "<p>Configuration for an Aurora global database execution block in ungraceful mode.</p>"
             }
         },
         "com.amazonaws.arcregionswitch#GlobalAuroraUngracefulBehavior": {
@@ -4002,6 +4036,16 @@
                 }
             }
         },
+        "com.amazonaws.arcregionswitch#LambdaPayload": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 786432
+                },
+                "smithy.api#sensitive": {}
+            }
+        },
         "com.amazonaws.arcregionswitch#LambdaUngraceful": {
             "type": "structure",
             "members": {
@@ -4047,6 +4091,12 @@
                     "target": "com.amazonaws.arcregionswitch#LambdaArn",
                     "traits": {
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Lambda function.</p>"
+                    }
+                },
+                "payload": {
+                    "target": "com.amazonaws.arcregionswitch#LambdaPayload",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The JSON payload to send to the Lambda function invocation. If you don't specify a payload, Region switch invokes the function with only the execution metadata.</p> <p>If you provide a JSON object, Region switch merges execution metadata keys (<code>InvokedBy</code>, <code>PlanArn</code>, <code>ExecutionId</code>, <code>StepName</code>) into the top level. If one of your keys has the same name as a metadata key, your key takes precedence.</p> <p>If you provide any other JSON type (string, number, boolean, or array), Region switch forwards it to the Lambda function unchanged, without adding metadata.</p>"
                     }
                 }
             },
@@ -4627,6 +4677,83 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.arcregionswitch#ListServiceQuotaWarnings": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.arcregionswitch#ListServiceQuotaWarningsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.arcregionswitch#ListServiceQuotaWarningsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.arcregionswitch#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.arcregionswitch#InternalServerException"
+                }
+            ],
+            "traits": {
+                "aws.iam#iamAction": {
+                    "documentation": "Grants permission to list service quota warnings for a plan in a specific AWS Region using the Region switch Regional data plane"
+                },
+                "smithy.api#documentation": "<p>Lists the service quota warnings for the plans that you can access. Region switch creates a warning when the applied quota value in one Region of a plan is lower than the value required for the matching resource in another Region or account in the plan.</p> <p>Returns the warnings for the plans that you own and for plans that are shared with your account through Resource Access Manager (RAM). To return warnings for specific plans, provide a list of plan Amazon Resource Names (ARNs). Region switch ignores any plan ARN that you can't access. If you don't provide any plan ARNs, Region switch returns the warnings for all of your accessible plans.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults",
+                    "items": "serviceQuotaWarningSummaries"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.arcregionswitch#ListServiceQuotaWarningsRequest": {
+            "type": "structure",
+            "members": {
+                "planArns": {
+                    "target": "com.amazonaws.arcregionswitch#PlanArnList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Names (ARNs) of the plans to return service quota warnings for. You can specify up to 100 plan ARNs. Region switch ignores any plan ARN that you can't access. If you omit this parameter, Region switch returns the warnings for all of your accessible plans.</p>"
+                    }
+                },
+                "maxResults": {
+                    "target": "com.amazonaws.arcregionswitch#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to return with this call. Valid values are <code>1</code> to <code>100</code>. If you don't specify a value, the operation returns up to the maximum number of results.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.arcregionswitch#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies that you want to receive the next page of results. Valid only if you received a <code>nextToken</code> response in the previous request. If you did, it indicates that more output is available. Set this parameter to the value provided by the previous call's <code>nextToken</code> response to request the next page of results.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.arcregionswitch#ListServiceQuotaWarningsResponse": {
+            "type": "structure",
+            "members": {
+                "serviceQuotaWarningSummaries": {
+                    "target": "com.amazonaws.arcregionswitch#ServiceQuotaWarningSummaryList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The service quota warnings for the plans that you can access.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.arcregionswitch#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A pagination token. A response may contain no results while still including a <code>nextToken</code>. Continue paginating until <code>nextToken</code> is null to retrieve all results.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.arcregionswitch#ListTagsForResource": {
             "type": "operation",
             "input": {
@@ -4922,6 +5049,13 @@
                         "smithy.api#documentation": "<p>The report configuration for a plan.</p>"
                     }
                 },
+                "serviceQuotaChecksEnabled": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "aws.cloudformation#cfnMutability": "full",
+                        "smithy.api#documentation": "<p>Indicates whether service quota checks are enabled for the Region switch plan. When enabled, Region switch compares the applied service quota values across the plan's Amazon Web Services Regions and creates a warning when a quota in one Region is lower than the value required for the matching resource in another Region. Service quota checks are advisory and don't prevent you from creating, evaluating, or executing a plan.</p>"
+                    }
+                },
                 "name": {
                     "target": "com.amazonaws.arcregionswitch#PlanName",
                     "traits": {
@@ -4984,6 +5118,17 @@
             "type": "string",
             "traits": {
                 "smithy.api#pattern": "^arn:aws[a-zA-Z-]*:arc-region-switch::[0-9]{12}:plan/([a-zA-Z0-9](?:[a-zA-Z0-9-]{0,30}[a-zA-Z0-9])?):([a-z0-9]{6})$"
+            }
+        },
+        "com.amazonaws.arcregionswitch#PlanArnList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.arcregionswitch#PlanArn"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "max": 100
+                }
             }
         },
         "com.amazonaws.arcregionswitch#PlanList": {
@@ -5276,6 +5421,22 @@
                 "smithy.api#documentation": "<p>A map of Region to Neptune database cluster ARN for Neptune global database configuration.</p>",
                 "smithy.api#length": {
                     "min": 2,
+                    "max": 2
+                }
+            }
+        },
+        "com.amazonaws.arcregionswitch#RegionSsmDocumentMap": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.arcregionswitch#Region"
+            },
+            "value": {
+                "target": "com.amazonaws.arcregionswitch#SsmDocumentConfig"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The Systems Manager document and target configuration for each Amazon Web Services Region that the configuration applies to.</p>",
+                "smithy.api#length": {
+                    "min": 1,
                     "max": 2
                 }
             }
@@ -5839,6 +6000,386 @@
                 "smithy.api#length": {
                     "min": 2,
                     "max": 2
+                }
+            }
+        },
+        "com.amazonaws.arcregionswitch#ServiceQuotaWarningStatus": {
+            "type": "enum",
+            "members": {
+                "PENDING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "pending"
+                    }
+                },
+                "DENIED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "denied"
+                    }
+                },
+                "INSUFFICIENT_PERMISSIONS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "insufficientPermissions"
+                    }
+                },
+                "MAX_REGION_SWITCH_REQUESTS_EXCEEDED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "maxRegionSwitchRequestsExceeded"
+                    }
+                },
+                "MAX_ACCOUNT_REQUESTS_EXCEEDED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "maxAccountRequestsExceeded"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The status of a service quota warning. Valid values:</p> <p> <code>pending</code> - Region switch submitted a quota increase request that is still open.</p> <p> <code>denied</code> - The quota increase request was denied.</p> <p> <code>insufficientPermissions</code> - The plan's execution role is missing a permission that service quota checks require.</p> <p> <code>maxRegionSwitchRequestsExceeded</code> - Region switch reached its limit on the number of open quota increase requests.</p> <p> <code>maxAccountRequestsExceeded</code> - The account reached the maximum number of open quota increase requests.</p>"
+            }
+        },
+        "com.amazonaws.arcregionswitch#ServiceQuotaWarningSummary": {
+            "type": "structure",
+            "members": {
+                "accountId": {
+                    "target": "com.amazonaws.arcregionswitch#AccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services account ID that owns the plan that the warning applies to.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "quotaRegion": {
+                    "target": "com.amazonaws.arcregionswitch#Region",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services Region that the quota applies to.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "serviceCode": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The service code of the service that the quota belongs to, as defined in Service Quotas. For example, <code>ec2</code>.</p>"
+                    }
+                },
+                "quotaCode": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The quota code of the quota that the warning applies to, as defined in Service Quotas.</p>"
+                    }
+                },
+                "quotaName": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the quota that the warning applies to, as defined in Service Quotas.</p>"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.arcregionswitch#ServiceQuotaWarningStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the service quota warning.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "planArn": {
+                    "target": "com.amazonaws.arcregionswitch#PlanArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the plan that the warning applies to.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "requestId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the quota increase request that Region switch submitted, if it submitted one for this quota.</p>"
+                    }
+                },
+                "caseId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the support case associated with the quota increase request, if Region switch submitted one for this quota.</p>"
+                    }
+                },
+                "warningMessage": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A message that describes the service quota warning.</p>"
+                    }
+                },
+                "lastCheckedAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time (UTC) when Region switch last checked this quota.</p>"
+                    }
+                },
+                "warningCreatedAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time (UTC) when Region switch created this warning.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A service quota warning for a plan. Region switch creates a warning when the applied quota value in one Region of a plan is lower than the value for the matching resource in another Region or account in the plan, or when it can't complete a service quota check.</p>"
+            }
+        },
+        "com.amazonaws.arcregionswitch#ServiceQuotaWarningSummaryList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.arcregionswitch#ServiceQuotaWarningSummary"
+            }
+        },
+        "com.amazonaws.arcregionswitch#SsmDocumentArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Systems Manager document to run.</p>",
+                "smithy.api#length": {
+                    "min": 20,
+                    "max": 256
+                },
+                "smithy.api#pattern": "^arn:[a-z0-9\\-]+:ssm:[a-z0-9\\-]+:([0-9]{12})?:document/[a-zA-Z0-9_.\\-]+$"
+            }
+        },
+        "com.amazonaws.arcregionswitch#SsmDocumentConfig": {
+            "type": "structure",
+            "members": {
+                "crossAccountRole": {
+                    "target": "com.amazonaws.arcregionswitch#IamRoleArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The cross-account role for the configuration.</p>"
+                    }
+                },
+                "externalId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The external ID (secret key) for the configuration.</p>"
+                    }
+                },
+                "documentArn": {
+                    "target": "com.amazonaws.arcregionswitch#SsmDocumentArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Systems Manager document to run.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "targets": {
+                    "target": "com.amazonaws.arcregionswitch#SsmTargetList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The target filters that Systems Manager resolves to managed nodes when the command runs. To target specific managed nodes, use the <code>InstanceIds</code> key. You can specify up to five target filters.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "parameters": {
+                    "target": "com.amazonaws.arcregionswitch#SsmDocumentParameters",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The parameters that are passed to this Region's Systems Manager document. You set parameters for each document, so each Region can run its document with its own parameters.</p>"
+                    }
+                },
+                "documentVersion": {
+                    "target": "com.amazonaws.arcregionswitch#SsmDocumentVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version of the Systems Manager document to run for this Region. When you omit it, Systems Manager runs the document's default version.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The Systems Manager document to run and the managed nodes to target for a single Amazon Web Services Region.</p>"
+            }
+        },
+        "com.amazonaws.arcregionswitch#SsmDocumentParameters": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.arcregionswitch#SsmParameterKey"
+            },
+            "value": {
+                "target": "com.amazonaws.arcregionswitch#SsmParameterValues"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The parameters passed to the Systems Manager document.</p>",
+                "smithy.api#length": {
+                    "max": 30
+                }
+            }
+        },
+        "com.amazonaws.arcregionswitch#SsmDocumentVersion": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "<p>The version of the Systems Manager document to run.</p>",
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 8
+                },
+                "smithy.api#pattern": "^([$]LATEST|[$]DEFAULT|[1-9][0-9]*)$"
+            }
+        },
+        "com.amazonaws.arcregionswitch#SsmParameterKey": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "<p>The name of a Systems Manager document parameter.</p>",
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 255
+                }
+            }
+        },
+        "com.amazonaws.arcregionswitch#SsmParameterValue": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "<p>A single value supplied for a Systems Manager document parameter.</p>",
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 65535
+                },
+                "smithy.api#pattern": "^.{1,65535}$"
+            }
+        },
+        "com.amazonaws.arcregionswitch#SsmParameterValues": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.arcregionswitch#SsmParameterValue"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The values supplied for a single Systems Manager document parameter.</p>",
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 50
+                }
+            }
+        },
+        "com.amazonaws.arcregionswitch#SsmSendCommandConfiguration": {
+            "type": "structure",
+            "members": {
+                "timeoutMinutes": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#default": 60,
+                        "smithy.api#documentation": "<p>The timeout value specified for the configuration.</p>",
+                        "smithy.api#range": {
+                            "min": 1
+                        }
+                    }
+                },
+                "regionDocuments": {
+                    "target": "com.amazonaws.arcregionswitch#RegionSsmDocumentMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Systems Manager document and target configuration for each Amazon Web Services Region in the plan. Provide an entry for each Amazon Web Services Region that you want the command to run in.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "retryIntervalMinutes": {
+                    "target": "smithy.api#Float",
+                    "traits": {
+                        "smithy.api#documentation": "<p>How often, in minutes, Region switch retries the command if it returns a failure.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ungraceful": {
+                    "target": "com.amazonaws.arcregionswitch#SsmSendCommandUngraceful",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the settings that determine how the execution block behaves when the plan runs ungracefully, such as whether to skip the command.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Configuration for an AWS Systems Manager <code>SendCommand</code> execution block in a Region switch plan. This execution block runs a Systems Manager document on the managed nodes that you target in each Amazon Web Services Region of the plan.</p>"
+            }
+        },
+        "com.amazonaws.arcregionswitch#SsmSendCommandUngraceful": {
+            "type": "structure",
+            "members": {
+                "behavior": {
+                    "target": "com.amazonaws.arcregionswitch#SsmSendCommandUngracefulBehavior",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether to skip running this command during an ungraceful execution. Set to <code>skip</code> to skip the command.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The ungraceful execution settings for an AWS Systems Manager <code>SendCommand</code> execution block.</p>"
+            }
+        },
+        "com.amazonaws.arcregionswitch#SsmSendCommandUngracefulBehavior": {
+            "type": "enum",
+            "members": {
+                "SKIP": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "skip"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The ungraceful behavior for an AWS Systems Manager <code>SendCommand</code> execution block, which must be set to <code>skip</code>.</p>"
+            }
+        },
+        "com.amazonaws.arcregionswitch#SsmTarget": {
+            "type": "structure",
+            "members": {
+                "key": {
+                    "target": "com.amazonaws.arcregionswitch#SsmTargetKey",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The target key, such as <code>tag:Environment</code> or <code>InstanceIds</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "values": {
+                    "target": "com.amazonaws.arcregionswitch#SsmTargetValueList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The values matched by this target key. Multiple values combine with a logical OR.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A single <code>SendCommand</code> target filter, consisting of a target key and the values matched by that key.</p>"
+            }
+        },
+        "com.amazonaws.arcregionswitch#SsmTargetKey": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "<p>A target key used to select managed nodes, such as <code>tag:Environment</code> or <code>InstanceIds</code>.</p>",
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 163
+                },
+                "smithy.api#pattern": "^[\\p{L}\\p{Z}\\p{N}_.:/=\\-@]*$"
+            }
+        },
+        "com.amazonaws.arcregionswitch#SsmTargetList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.arcregionswitch#SsmTarget"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The target filters passed to <code>SendCommand</code>. You can specify up to five filters.</p>",
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 5
+                }
+            }
+        },
+        "com.amazonaws.arcregionswitch#SsmTargetValue": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "<p>A single value matched by a target key.</p>",
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
+                }
+            }
+        },
+        "com.amazonaws.arcregionswitch#SsmTargetValueList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.arcregionswitch#SsmTargetValue"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The values matched by a single target key.</p>",
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 50
                 }
             }
         },
@@ -6641,6 +7182,13 @@
                         "aws.cloudformation#cfnMutability": "full",
                         "smithy.api#documentation": "<p>The updated report configuration for the plan.</p>"
                     }
+                },
+                "serviceQuotaChecksEnabled": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "aws.cloudformation#cfnMutability": "full",
+                        "smithy.api#documentation": "<p>Specifies whether service quota checks are enabled for the Region switch plan.</p>"
+                    }
                 }
             },
             "traits": {
@@ -6659,6 +7207,23 @@
             },
             "traits": {
                 "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.arcregionswitch#WaitELBTargetGroupHealthy": {
+            "type": "enum",
+            "members": {
+                "ENABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "enabled"
+                    }
+                },
+                "DISABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "disabled"
+                    }
+                }
             }
         },
         "com.amazonaws.arcregionswitch#Workflow": {

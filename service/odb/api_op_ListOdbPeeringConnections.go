@@ -5,7 +5,9 @@ package odb
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/odb/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/odb/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -48,6 +50,24 @@ type ListOdbPeeringConnectionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListOdbPeeringConnectionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListOdbPeeringConnectionsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListOdbPeeringConnectionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListOdbPeeringConnectionsInput_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListOdbPeeringConnectionsInput_nextToken, *v.NextToken)
+	}
+	if v.OdbNetworkId != nil {
+		s.WriteString(schemas.ListOdbPeeringConnectionsInput_odbNetworkId, *v.OdbNetworkId)
+	}
+}
+
 type ListOdbPeeringConnectionsOutput struct {
 
 	// The list of ODB peering connections.
@@ -64,13 +84,35 @@ type ListOdbPeeringConnectionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListOdbPeeringConnectionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListOdbPeeringConnectionsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListOdbPeeringConnectionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListOdbPeeringConnectionsOutput_nextToken, *v.NextToken)
+	}
+	serializeOdbPeeringConnectionList(s, schemas.ListOdbPeeringConnectionsOutput_odbPeeringConnections, v.OdbPeeringConnections)
+}
+func (v *ListOdbPeeringConnectionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListOdbPeeringConnectionsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListOdbPeeringConnectionsOutput_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListOdbPeeringConnectionsOutput_nextToken, v.NextToken)
+		case schemas.ListOdbPeeringConnectionsOutput_odbPeeringConnections:
+			return deserializeOdbPeeringConnectionList(d, schemas.ListOdbPeeringConnectionsOutput_odbPeeringConnections, &v.OdbPeeringConnections)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListOdbPeeringConnectionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpListOdbPeeringConnections{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListOdbPeeringConnections, schemas.ListOdbPeeringConnectionsInput, schemas.ListOdbPeeringConnectionsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpListOdbPeeringConnections{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListOdbPeeringConnections, schemas.ListOdbPeeringConnectionsInput, schemas.ListOdbPeeringConnectionsOutput), output: &ListOdbPeeringConnectionsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

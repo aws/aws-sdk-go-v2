@@ -1,6 +1,7 @@
-POST /
+POST /service/AWSMPCommerceService_v20200301/operation/ListAgreementCancellationRequests
 
-Content-Type: application/x-amz-json-1.0
-X-Amz-Target: AWSMPCommerceService_v20200301.ListAgreementCancellationRequests
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"agreementId":"__AgreementId__","agreementType":"__AgreementType__","catalog":"__Catalog__","maxResults":1,"nextToken":"__NextToken__","partyType":"__PartyType__","status":"PENDING_APPROVAL"}
+¿kagreementIdo__AgreementId__magreementTypeq__AgreementType__gcatalogk__Catalog__jmaxResultsinextTokenm__NextToken__ipartyTypem__PartyType__fstatuspPENDING_APPROVALÿ

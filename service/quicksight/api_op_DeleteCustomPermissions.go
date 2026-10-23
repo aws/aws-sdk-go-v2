@@ -4,6 +4,8 @@ package quicksight
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/quicksight/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,21 @@ type DeleteCustomPermissionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteCustomPermissionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteCustomPermissionsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteCustomPermissionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AwsAccountId != nil {
+		s.WriteString(schemas.DeleteCustomPermissionsRequest_AwsAccountId, *v.AwsAccountId)
+	}
+	if v.CustomPermissionsName != nil {
+		s.WriteString(schemas.DeleteCustomPermissionsRequest_CustomPermissionsName, *v.CustomPermissionsName)
+	}
+}
+
 type DeleteCustomPermissionsOutput struct {
 
 	// The Amazon Resource Name (ARN) of the custom permissions profile.
@@ -56,13 +73,43 @@ type DeleteCustomPermissionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteCustomPermissionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteCustomPermissionsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteCustomPermissionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.DeleteCustomPermissionsResponse_Arn, *v.Arn)
+	}
+	if v.RequestId != nil {
+		s.WriteString(schemas.DeleteCustomPermissionsResponse_RequestId, *v.RequestId)
+	}
+	if v.Status != 0 {
+		s.WriteInt32(schemas.DeleteCustomPermissionsResponse_Status, v.Status)
+	}
+}
+func (v *DeleteCustomPermissionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteCustomPermissionsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteCustomPermissionsResponse_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.DeleteCustomPermissionsResponse_Arn, v.Arn)
+		case schemas.DeleteCustomPermissionsResponse_RequestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.DeleteCustomPermissionsResponse_RequestId, v.RequestId)
+		case schemas.DeleteCustomPermissionsResponse_Status:
+			return d.ReadInt32(schemas.DeleteCustomPermissionsResponse_Status, &v.Status)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteCustomPermissionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteCustomPermissions{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteCustomPermissions, schemas.DeleteCustomPermissionsRequest, schemas.DeleteCustomPermissionsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteCustomPermissions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteCustomPermissions, schemas.DeleteCustomPermissionsRequest, schemas.DeleteCustomPermissionsResponse), output: &DeleteCustomPermissionsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

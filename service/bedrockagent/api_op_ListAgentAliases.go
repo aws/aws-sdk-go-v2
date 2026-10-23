@@ -5,7 +5,9 @@ package bedrockagent
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/bedrockagent/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagent/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -46,6 +48,24 @@ type ListAgentAliasesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAgentAliasesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAgentAliasesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAgentAliasesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AgentId != nil {
+		s.WriteString(schemas.ListAgentAliasesRequest_agentId, *v.AgentId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListAgentAliasesRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAgentAliasesRequest_nextToken, *v.NextToken)
+	}
+}
+
 type ListAgentAliasesOutput struct {
 
 	// A list of objects, each of which contains information about an alias of the
@@ -65,13 +85,35 @@ type ListAgentAliasesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAgentAliasesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAgentAliasesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAgentAliasesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAgentAliasSummaries(s, schemas.ListAgentAliasesResponse_agentAliasSummaries, v.AgentAliasSummaries)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAgentAliasesResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListAgentAliasesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListAgentAliasesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListAgentAliasesResponse_agentAliasSummaries:
+			return deserializeAgentAliasSummaries(d, schemas.ListAgentAliasesResponse_agentAliasSummaries, &v.AgentAliasSummaries)
+		case schemas.ListAgentAliasesResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListAgentAliasesResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListAgentAliasesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListAgentAliases{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAgentAliases, schemas.ListAgentAliasesRequest, schemas.ListAgentAliasesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListAgentAliases{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAgentAliases, schemas.ListAgentAliasesRequest, schemas.ListAgentAliasesResponse), output: &ListAgentAliasesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

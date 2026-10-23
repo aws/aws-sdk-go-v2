@@ -5,7 +5,9 @@ package imagebuilder
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/imagebuilder/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/imagebuilder/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -28,8 +30,10 @@ func (c *Client) CreateInfrastructureConfiguration(ctx context.Context, params *
 
 type CreateInfrastructureConfigurationInput struct {
 
-	// Unique, case-sensitive identifier you provide to ensure idempotency of the
-	// request. For more information, see [Ensuring idempotency]in the Amazon EC2 API Reference.
+	// A unique, case-sensitive identifier you provide to ensure that the operation
+	// runs no more than one time. If you retry a request with the same client token,
+	// Image Builder returns the original response without running the operation again.
+	// For more information, see [Ensuring idempotency]in the Amazon EC2 API Reference.
 	//
 	// [Ensuring idempotency]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
 	//
@@ -37,12 +41,16 @@ type CreateInfrastructureConfigurationInput struct {
 	ClientToken *string
 
 	// The instance profile to associate with the instance used to customize your
-	// Amazon EC2 AMI.
+	// Amazon EC2 AMI. The instance profile must exist in your account.
 	//
 	// This member is required.
 	InstanceProfileName *string
 
-	// The name of the infrastructure configuration.
+	// The name of the infrastructure configuration. Infrastructure configuration
+	// names must be unique to your account in each Amazon Web Services Region. Image
+	// Builder generates the infrastructure configuration ARN from a normalized form of
+	// the name, so names that differ only in case, spaces, or underscores count as the
+	// same name.
 	//
 	// This member is required.
 	Name *string
@@ -50,56 +58,160 @@ type CreateInfrastructureConfigurationInput struct {
 	// The description of the infrastructure configuration.
 	Description *string
 
-	// The instance metadata options that you can set for the HTTP requests that
-	// pipeline builds use to launch EC2 build and test instances.
+	// Validates the required permissions and request parameters without performing
+	// the operation. If validation succeeds, the operation returns a
+	// DryRunOperationException error response.
+	DryRun bool
+
+	// The instance metadata service (IMDS) settings that Image Builder applies to the
+	// EC2 build and test instances it launches during image creation. If you don't set
+	// these options, the EC2 launch defaults for the instance apply. For more
+	// information about instance metadata options, see one of the following links:
+	//
+	// [Configure the instance metadata options]
+	//   - in the Amazon EC2 User Guide for Linux instances.
+	//
+	// [Configure the instance metadata options]
+	//   - in the Amazon EC2 Windows Guide for Windows instances.
+	//
+	// [Configure the instance metadata options]: https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/configuring-instance-metadata-options.html
 	InstanceMetadataOptions *types.InstanceMetadataOptions
 
 	// The instance types of the infrastructure configuration. You can specify one or
-	// more instance types to use for this build. The service will pick one of these
-	// instance types based on availability.
+	// more instance types to use for this build. Image Builder picks one of these
+	// instance types based on availability. If you don't specify instance types, Image
+	// Builder selects compatible instance types automatically. If you specify a
+	// Dedicated Host, Image Builder uses only instance types that the host supports.
 	InstanceTypes []string
 
 	// The key pair of the infrastructure configuration. You can use this to log on to
 	// and debug the instance used to create your image.
 	KeyPair *string
 
-	// The logging configuration of the infrastructure configuration.
+	// The logging configuration of the infrastructure configuration. When you
+	// configure S3 logs, Image Builder writes logs from the build and test process to
+	// the specified bucket under the key prefix.
 	Logging *types.Logging
 
-	// The instance placement settings that define where the instances that are
-	// launched from your image will run.
+	// The Amazon EC2 Auto Scaling group that Image Builder takes the build instance
+	// from, instead of launching a new instance. This applies only to the build phase.
+	//
+	// To use this feature, the execution role for the build must have permissions to
+	// describe the Auto Scaling group, tag the instance while it's still in the group,
+	// and detach it from the group. For more information, see [Build on an instance from an Auto Scaling group]in the EC2 Image
+	// Builder User Guide.
+	//
+	// [Build on an instance from an Auto Scaling group]: https://docs.aws.amazon.com/imagebuilder/latest/userguide/infra-config-parent-instance.html
+	ParentInstance *types.ParentInstanceConfiguration
+
+	// The instance placement settings that define where the build and test instances
+	// that Image Builder launches during image creation run. These settings don't
+	// affect instances that you launch from the output image.
 	Placement *types.Placement
 
 	// The metadata tags to assign to the Amazon EC2 instance that Image Builder
-	// launches during the build process. Tags are formatted as key value pairs.
+	// launches during the build process. Tags are formatted as key value pairs. Tag
+	// keys can't begin with aws: or match one of the following reserved keys:
+	// CreatedBy , Ec2ImageBuilderArn , Name , or Tags .
 	ResourceTags map[string]string
 
 	// The security group IDs to associate with the instance used to customize your
 	// Amazon EC2 AMI.
 	SecurityGroupIds []string
 
-	// The Amazon Resource Name (ARN) for the SNS topic to which we send image build
-	// event notifications.
+	// The Amazon Resource Name (ARN) of the SNS topic to which Image Builder sends
+	// image build event notifications. Specify a standard topic. Image Builder doesn't
+	// support FIFO topics. Image Builder validates the topic when you create or update
+	// the configuration. You must have permission to publish to the topic.
 	//
-	// EC2 Image Builder is unable to send notifications to SNS topics that are
-	// encrypted using keys from other accounts. The key that is used to encrypt the
-	// SNS topic must reside in the account that the Image Builder service runs under.
+	// EC2 Image Builder can't send notifications to SNS topics that are encrypted
+	// using keys from other accounts. If your SNS topic is encrypted, the key must be
+	// owned by the same account that owns your Image Builder resources.
 	SnsTopicArn *string
 
 	// The subnet ID in which to place the instance used to customize your Amazon EC2
-	// AMI.
+	// AMI. If you specify subnetId , you must also specify one or more security group
+	// IDs in securityGroupIds . Otherwise, the request fails.
 	SubnetId *string
 
 	// The metadata tags to assign to the infrastructure configuration resource that
 	// Image Builder creates as output. Tags are formatted as key value pairs.
 	Tags map[string]string
 
-	// The terminate instance on failure setting of the infrastructure configuration.
-	// Set to false if you want Image Builder to retain the instance used to configure
-	// your AMI if the build or test phase of your workflow fails.
+	// Specifies whether Image Builder terminates build and test instances when image
+	// creation ends without a failure (success, cancellation, or expiration). Defaults
+	// to true .
+	TerminateInstanceOnCompletion *bool
+
+	// Specifies whether to terminate the instance on failure. Set to false if you
+	// want Image Builder to retain the instance used to configure your AMI if the
+	// build or test phase of your workflow fails. Defaults to true .
 	TerminateInstanceOnFailure *bool
 
 	noSmithyDocumentSerde
+}
+
+func (v *CreateInfrastructureConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateInfrastructureConfigurationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateInfrastructureConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateInfrastructureConfigurationRequest_clientToken, *v.ClientToken)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreateInfrastructureConfigurationRequest_description, *v.Description)
+	}
+	if v.DryRun != false {
+		s.WriteBool(schemas.CreateInfrastructureConfigurationRequest_dryRun, v.DryRun)
+	}
+	if v.InstanceMetadataOptions != nil {
+		s.WriteStruct(schemas.CreateInfrastructureConfigurationRequest_instanceMetadataOptions)
+		v.InstanceMetadataOptions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.InstanceProfileName != nil {
+		s.WriteString(schemas.CreateInfrastructureConfigurationRequest_instanceProfileName, *v.InstanceProfileName)
+	}
+	serializeInstanceTypeList(s, schemas.CreateInfrastructureConfigurationRequest_instanceTypes, v.InstanceTypes)
+	if v.KeyPair != nil {
+		s.WriteString(schemas.CreateInfrastructureConfigurationRequest_keyPair, *v.KeyPair)
+	}
+	if v.Logging != nil {
+		s.WriteStruct(schemas.CreateInfrastructureConfigurationRequest_logging)
+		v.Logging.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateInfrastructureConfigurationRequest_name, *v.Name)
+	}
+	if v.ParentInstance != nil {
+		s.WriteStruct(schemas.CreateInfrastructureConfigurationRequest_parentInstance)
+		v.ParentInstance.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Placement != nil {
+		s.WriteStruct(schemas.CreateInfrastructureConfigurationRequest_placement)
+		v.Placement.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeResourceTagMap(s, schemas.CreateInfrastructureConfigurationRequest_resourceTags, v.ResourceTags)
+	serializeSecurityGroupIds(s, schemas.CreateInfrastructureConfigurationRequest_securityGroupIds, v.SecurityGroupIds)
+	if v.SnsTopicArn != nil {
+		s.WriteString(schemas.CreateInfrastructureConfigurationRequest_snsTopicArn, *v.SnsTopicArn)
+	}
+	if v.SubnetId != nil {
+		s.WriteString(schemas.CreateInfrastructureConfigurationRequest_subnetId, *v.SubnetId)
+	}
+	serializeTagMap(s, schemas.CreateInfrastructureConfigurationRequest_tags, v.Tags)
+	if v.TerminateInstanceOnCompletion != nil {
+		s.WriteBool(schemas.CreateInfrastructureConfigurationRequest_terminateInstanceOnCompletion, *v.TerminateInstanceOnCompletion)
+	}
+	if v.TerminateInstanceOnFailure != nil {
+		s.WriteBool(schemas.CreateInfrastructureConfigurationRequest_terminateInstanceOnFailure, *v.TerminateInstanceOnFailure)
+	}
 }
 
 type CreateInfrastructureConfigurationOutput struct {
@@ -120,13 +232,44 @@ type CreateInfrastructureConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateInfrastructureConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateInfrastructureConfigurationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateInfrastructureConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateInfrastructureConfigurationResponse_clientToken, *v.ClientToken)
+	}
+	if v.InfrastructureConfigurationArn != nil {
+		s.WriteString(schemas.CreateInfrastructureConfigurationResponse_infrastructureConfigurationArn, *v.InfrastructureConfigurationArn)
+	}
+	if v.RequestId != nil {
+		s.WriteString(schemas.CreateInfrastructureConfigurationResponse_requestId, *v.RequestId)
+	}
+}
+func (v *CreateInfrastructureConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateInfrastructureConfigurationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateInfrastructureConfigurationResponse_clientToken:
+			v.ClientToken = new(string)
+			return d.ReadString(schemas.CreateInfrastructureConfigurationResponse_clientToken, v.ClientToken)
+		case schemas.CreateInfrastructureConfigurationResponse_infrastructureConfigurationArn:
+			v.InfrastructureConfigurationArn = new(string)
+			return d.ReadString(schemas.CreateInfrastructureConfigurationResponse_infrastructureConfigurationArn, v.InfrastructureConfigurationArn)
+		case schemas.CreateInfrastructureConfigurationResponse_requestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.CreateInfrastructureConfigurationResponse_requestId, v.RequestId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateInfrastructureConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateInfrastructureConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateInfrastructureConfiguration, schemas.CreateInfrastructureConfigurationRequest, schemas.CreateInfrastructureConfigurationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateInfrastructureConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateInfrastructureConfiguration, schemas.CreateInfrastructureConfigurationRequest, schemas.CreateInfrastructureConfigurationResponse), output: &CreateInfrastructureConfigurationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -97,7 +97,7 @@ type CreateEventBusInput struct {
 	//
 	// For more information, see [Configuring logs for event buses] in the EventBridge User Guide.
 	//
-	// [Configuring logs for event buses]: https://docs.aws.amazon.com/eb-event-bus-logs.html
+	// [Configuring logs for event buses]: https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-event-bus-logs.html
 	LogConfig *types.LogConfig
 
 	// Tags to associate with the event bus.
@@ -166,7 +166,7 @@ type CreateEventBusOutput struct {
 	//
 	// For more information, see [Configuring logs for event buses] in the EventBridge User Guide.
 	//
-	// [Configuring logs for event buses]: https://docs.aws.amazon.com/eb-event-bus-logs.html
+	// [Configuring logs for event buses]: https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-event-bus-logs.html
 	LogConfig *types.LogConfig
 
 	// Metadata pertaining to the operation's result.

@@ -4,7 +4,9 @@ package auditmanager
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/auditmanager/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/auditmanager/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,15 @@ type DeregisterAccountInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeregisterAccountInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeregisterAccountRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeregisterAccountInput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+
 type DeregisterAccountOutput struct {
 
 	//  The registration status of the account.
@@ -50,13 +61,36 @@ type DeregisterAccountOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeregisterAccountOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeregisterAccountResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeregisterAccountOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Status != "" {
+		s.WriteString(schemas.DeregisterAccountResponse_status, string(v.Status))
+	}
+}
+func (v *DeregisterAccountOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeregisterAccountResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeregisterAccountResponse_status:
+			var ev string
+			if err := d.ReadString(schemas.DeregisterAccountResponse_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.AccountStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeregisterAccountMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeregisterAccount{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeregisterAccount, schemas.DeregisterAccountRequest, schemas.DeregisterAccountResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeregisterAccount{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeregisterAccount, schemas.DeregisterAccountRequest, schemas.DeregisterAccountResponse), output: &DeregisterAccountOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

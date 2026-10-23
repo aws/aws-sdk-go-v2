@@ -4,6 +4,8 @@ package sesv2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/sesv2/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -40,6 +42,21 @@ type PutConfigurationSetSendingOptionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutConfigurationSetSendingOptionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutConfigurationSetSendingOptionsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutConfigurationSetSendingOptionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConfigurationSetName != nil {
+		s.WriteString(schemas.PutConfigurationSetSendingOptionsRequest_ConfigurationSetName, *v.ConfigurationSetName)
+	}
+	if v.SendingEnabled != false {
+		s.WriteBool(schemas.PutConfigurationSetSendingOptionsRequest_SendingEnabled, v.SendingEnabled)
+	}
+}
+
 // An HTTP 200 response if the request succeeds, or an error message if the
 // request fails.
 type PutConfigurationSetSendingOptionsOutput struct {
@@ -49,13 +66,26 @@ type PutConfigurationSetSendingOptionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutConfigurationSetSendingOptionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutConfigurationSetSendingOptionsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutConfigurationSetSendingOptionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *PutConfigurationSetSendingOptionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PutConfigurationSetSendingOptionsResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPutConfigurationSetSendingOptionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpPutConfigurationSetSendingOptions{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutConfigurationSetSendingOptions, schemas.PutConfigurationSetSendingOptionsRequest, schemas.PutConfigurationSetSendingOptionsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpPutConfigurationSetSendingOptions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutConfigurationSetSendingOptions, schemas.PutConfigurationSetSendingOptionsRequest, schemas.PutConfigurationSetSendingOptionsResponse), output: &PutConfigurationSetSendingOptionsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

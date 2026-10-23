@@ -4,6 +4,8 @@ package bcmpricingcalculator
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/bcmpricingcalculator/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -33,6 +35,18 @@ type DeleteBillEstimateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteBillEstimateInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteBillEstimateRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteBillEstimateInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Identifier != nil {
+		s.WriteString(schemas.DeleteBillEstimateRequest_identifier, *v.Identifier)
+	}
+}
+
 type DeleteBillEstimateOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -40,13 +54,26 @@ type DeleteBillEstimateOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteBillEstimateOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteBillEstimateResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteBillEstimateOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteBillEstimateOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteBillEstimateResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteBillEstimateMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpDeleteBillEstimate{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteBillEstimate, schemas.DeleteBillEstimateRequest, schemas.DeleteBillEstimateResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpDeleteBillEstimate{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteBillEstimate, schemas.DeleteBillEstimateRequest, schemas.DeleteBillEstimateResponse), output: &DeleteBillEstimateOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

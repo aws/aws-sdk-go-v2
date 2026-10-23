@@ -4,7 +4,9 @@ package quicksight
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/quicksight/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/quicksight/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -62,6 +64,40 @@ type UpdateDataSourceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateDataSourceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateDataSourceRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateDataSourceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AwsAccountId != nil {
+		s.WriteString(schemas.UpdateDataSourceRequest_AwsAccountId, *v.AwsAccountId)
+	}
+	if v.Credentials != nil {
+		s.WriteStruct(schemas.UpdateDataSourceRequest_Credentials)
+		v.Credentials.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DataSourceId != nil {
+		s.WriteString(schemas.UpdateDataSourceRequest_DataSourceId, *v.DataSourceId)
+	}
+	serializeDataSourceParameters(s, schemas.UpdateDataSourceRequest_DataSourceParameters, v.DataSourceParameters)
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateDataSourceRequest_Name, *v.Name)
+	}
+	if v.SslProperties != nil {
+		s.WriteStruct(schemas.UpdateDataSourceRequest_SslProperties)
+		v.SslProperties.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.VpcConnectionProperties != nil {
+		s.WriteStruct(schemas.UpdateDataSourceRequest_VpcConnectionProperties)
+		v.VpcConnectionProperties.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type UpdateDataSourceOutput struct {
 
 	// The Amazon Resource Name (ARN) of the data source.
@@ -86,13 +122,59 @@ type UpdateDataSourceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateDataSourceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateDataSourceResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateDataSourceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.UpdateDataSourceResponse_Arn, *v.Arn)
+	}
+	if v.DataSourceId != nil {
+		s.WriteString(schemas.UpdateDataSourceResponse_DataSourceId, *v.DataSourceId)
+	}
+	if v.RequestId != nil {
+		s.WriteString(schemas.UpdateDataSourceResponse_RequestId, *v.RequestId)
+	}
+	if v.Status != 0 {
+		s.WriteInt32(schemas.UpdateDataSourceResponse_Status, v.Status)
+	}
+	if v.UpdateStatus != "" {
+		s.WriteString(schemas.UpdateDataSourceResponse_UpdateStatus, string(v.UpdateStatus))
+	}
+}
+func (v *UpdateDataSourceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateDataSourceResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateDataSourceResponse_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.UpdateDataSourceResponse_Arn, v.Arn)
+		case schemas.UpdateDataSourceResponse_DataSourceId:
+			v.DataSourceId = new(string)
+			return d.ReadString(schemas.UpdateDataSourceResponse_DataSourceId, v.DataSourceId)
+		case schemas.UpdateDataSourceResponse_RequestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.UpdateDataSourceResponse_RequestId, v.RequestId)
+		case schemas.UpdateDataSourceResponse_Status:
+			return d.ReadInt32(schemas.UpdateDataSourceResponse_Status, &v.Status)
+		case schemas.UpdateDataSourceResponse_UpdateStatus:
+			var ev string
+			if err := d.ReadString(schemas.UpdateDataSourceResponse_UpdateStatus, &ev); err != nil {
+				return err
+			}
+			v.UpdateStatus = types.ResourceStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateDataSourceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateDataSource{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateDataSource, schemas.UpdateDataSourceRequest, schemas.UpdateDataSourceResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateDataSource{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateDataSource, schemas.UpdateDataSourceRequest, schemas.UpdateDataSourceResponse), output: &UpdateDataSourceOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

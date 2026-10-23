@@ -4,6 +4,8 @@ package apigatewayv2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/apigatewayv2/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -38,6 +40,21 @@ type PublishPortalInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PublishPortalInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PublishPortalRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PublishPortalInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.PublishPortalRequest_Description, *v.Description)
+	}
+	if v.PortalId != nil {
+		s.WriteString(schemas.PublishPortalRequest_PortalId, *v.PortalId)
+	}
+}
+
 type PublishPortalOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -45,13 +62,26 @@ type PublishPortalOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PublishPortalOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PublishPortalResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PublishPortalOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *PublishPortalOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PublishPortalResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPublishPortalMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpPublishPortal{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PublishPortal, schemas.PublishPortalRequest, schemas.PublishPortalResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpPublishPortal{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PublishPortal, schemas.PublishPortalRequest, schemas.PublishPortalResponse), output: &PublishPortalOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

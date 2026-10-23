@@ -39,11 +39,14 @@ import (
 //
 // [NETWORK_SECURITY_DIRECTOR_POLICY]
 //
+// [GUARDDUTY_POLICY]
+//
 // You can only call this operation from the management account or a member
 // account that is a delegated administrator.
 //
 // [BEDROCK_POLICY]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_bedrock.html
 // [NETWORK_SECURITY_DIRECTOR_POLICY]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_network_security_director.html
+// [GUARDDUTY_POLICY]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_guardduty.html
 // [UPGRADE_ROLLOUT_POLICY]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_upgrade_rollout.html
 // [BACKUP_POLICY]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_backup.html
 // [CHATBOT_POLICY]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_chatbot.html

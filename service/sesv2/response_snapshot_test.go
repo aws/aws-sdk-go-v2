@@ -806,6 +806,10 @@ func TestCheckResponseSnapshot_CreateExportJob(t *testing.T) {
 						"__Member__",
 						"__Member__",
 					},
+					TenantName: []string{
+						"__Member__",
+						"__Member__",
+					},
 					LastDeliveryEvent: []types.DeliveryEventType{
 						types.DeliveryEventType("SEND"),
 						types.DeliveryEventType("SEND"),
@@ -829,6 +833,10 @@ func TestCheckResponseSnapshot_CreateExportJob(t *testing.T) {
 						"__Member__",
 					},
 					Isp: []string{
+						"__Member__",
+						"__Member__",
+					},
+					TenantName: []string{
 						"__Member__",
 						"__Member__",
 					},
@@ -2349,6 +2357,10 @@ func TestCheckResponseSnapshot_GetExportJob(t *testing.T) {
 						"__Member__",
 						"__Member__",
 					},
+					TenantName: []string{
+						"__Member__",
+						"__Member__",
+					},
 					LastDeliveryEvent: []types.DeliveryEventType{
 						types.DeliveryEventType("SEND"),
 						types.DeliveryEventType("SEND"),
@@ -2372,6 +2384,10 @@ func TestCheckResponseSnapshot_GetExportJob(t *testing.T) {
 						"__Member__",
 					},
 					Isp: []string{
+						"__Member__",
+						"__Member__",
+					},
+					TenantName: []string{
 						"__Member__",
 						"__Member__",
 					},
@@ -2742,6 +2758,9 @@ func TestCheckResponseSnapshot_ListConfigurationSets(t *testing.T) {
 	}
 	svc := serdeRespClient(status, header, body)
 	got, err := svc.ListConfigurationSets(context.Background(), &ListConfigurationSetsInput{
+		Filter: map[string]string{
+			"key0": "__Value__",
+		},
 		NextToken: ptr.String("__NextToken__"),
 		PageSize:  ptr.Int32(1),
 	})
@@ -3081,6 +3100,9 @@ func TestCheckResponseSnapshot_ListEmailIdentities(t *testing.T) {
 	}
 	svc := serdeRespClient(status, header, body)
 	got, err := svc.ListEmailIdentities(context.Background(), &ListEmailIdentitiesInput{
+		Filter: map[string]string{
+			"key0": "__Value__",
+		},
 		NextToken: ptr.String("__NextToken__"),
 		PageSize:  ptr.Int32(1),
 	})
@@ -3584,12 +3606,14 @@ func TestCheckResponseSnapshot_ListTenants(t *testing.T) {
 				TenantId:         ptr.String("__TenantId__"),
 				TenantArn:        ptr.String("__TenantArn__"),
 				CreatedTimestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				SendingStatus:    types.SendingStatus("ENABLED"),
 			},
 			{
 				TenantName:       ptr.String("__TenantName__"),
 				TenantId:         ptr.String("__TenantId__"),
 				TenantArn:        ptr.String("__TenantArn__"),
 				CreatedTimestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				SendingStatus:    types.SendingStatus("ENABLED"),
 			},
 		},
 		NextToken: ptr.String("__NextToken__"),
@@ -3603,6 +3627,9 @@ func TestCheckResponseSnapshot_ListTenants(t *testing.T) {
 	}
 	svc := serdeRespClient(status, header, body)
 	got, err := svc.ListTenants(context.Background(), &ListTenantsInput{
+		Filter: map[string]string{
+			"key0": "__Value__",
+		},
 		NextToken: ptr.String("__NextToken__"),
 		PageSize:  ptr.Int32(1),
 	})

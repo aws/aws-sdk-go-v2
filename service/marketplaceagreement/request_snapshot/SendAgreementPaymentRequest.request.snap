@@ -1,6 +1,7 @@
-POST /
+POST /service/AWSMPCommerceService_v20200301/operation/SendAgreementPaymentRequest
 
-Content-Type: application/x-amz-json-1.0
-X-Amz-Target: AWSMPCommerceService_v20200301.SendAgreementPaymentRequest
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"agreementId":"__AgreementId__","chargeAmount":"__ChargeAmount__","clientToken":"__ClientToken__","description":"__Description__","name":"__Name__","termId":"__TermId__"}
+¿kagreementIdo__AgreementId__lchargeAmountp__ChargeAmount__kclientTokeno__ClientToken__kdescriptiono__Description__dnameh__Name__ftermIdj__TermId__ÿ

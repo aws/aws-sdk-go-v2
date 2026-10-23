@@ -5,7 +5,9 @@ package eks
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/eks/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/eks/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -135,6 +137,39 @@ type CreateCapabilityInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateCapabilityInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateCapabilityRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateCapabilityInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CapabilityName != nil {
+		s.WriteString(schemas.CreateCapabilityRequest_capabilityName, *v.CapabilityName)
+	}
+	if v.ClientRequestToken != nil {
+		s.WriteString(schemas.CreateCapabilityRequest_clientRequestToken, *v.ClientRequestToken)
+	}
+	if v.ClusterName != nil {
+		s.WriteString(schemas.CreateCapabilityRequest_clusterName, *v.ClusterName)
+	}
+	if v.Configuration != nil {
+		s.WriteStruct(schemas.CreateCapabilityRequest_configuration)
+		v.Configuration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DeletePropagationPolicy != "" {
+		s.WriteString(schemas.CreateCapabilityRequest_deletePropagationPolicy, string(v.DeletePropagationPolicy))
+	}
+	if v.RoleArn != nil {
+		s.WriteString(schemas.CreateCapabilityRequest_roleArn, *v.RoleArn)
+	}
+	serializeTagMap(s, schemas.CreateCapabilityRequest_tags, v.Tags)
+	if v.Type != "" {
+		s.WriteString(schemas.CreateCapabilityRequest_type, string(v.Type))
+	}
+}
+
 type CreateCapabilityOutput struct {
 
 	// An object containing information about the newly created capability, including
@@ -147,13 +182,34 @@ type CreateCapabilityOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateCapabilityOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateCapabilityResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateCapabilityOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Capability != nil {
+		s.WriteStruct(schemas.CreateCapabilityResponse_capability)
+		v.Capability.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateCapabilityOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateCapabilityResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateCapabilityResponse_capability:
+			v.Capability = &types.Capability{}
+			return v.Capability.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateCapabilityMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateCapability{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateCapability, schemas.CreateCapabilityRequest, schemas.CreateCapabilityResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateCapability{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateCapability, schemas.CreateCapabilityRequest, schemas.CreateCapabilityResponse), output: &CreateCapabilityOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package sesv2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/sesv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sesv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -40,6 +42,18 @@ type GetMessageInsightsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetMessageInsightsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetMessageInsightsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetMessageInsightsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MessageId != nil {
+		s.WriteString(schemas.GetMessageInsightsRequest_MessageId, *v.MessageId)
+	}
+}
+
 // Information about a message.
 type GetMessageInsightsOutput struct {
 
@@ -67,13 +81,50 @@ type GetMessageInsightsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetMessageInsightsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetMessageInsightsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetMessageInsightsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeMessageTagList(s, schemas.GetMessageInsightsResponse_EmailTags, v.EmailTags)
+	if v.FromEmailAddress != nil {
+		s.WriteString(schemas.GetMessageInsightsResponse_FromEmailAddress, *v.FromEmailAddress)
+	}
+	serializeEmailInsightsList(s, schemas.GetMessageInsightsResponse_Insights, v.Insights)
+	if v.MessageId != nil {
+		s.WriteString(schemas.GetMessageInsightsResponse_MessageId, *v.MessageId)
+	}
+	if v.Subject != nil {
+		s.WriteString(schemas.GetMessageInsightsResponse_Subject, *v.Subject)
+	}
+}
+func (v *GetMessageInsightsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetMessageInsightsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetMessageInsightsResponse_EmailTags:
+			return deserializeMessageTagList(d, schemas.GetMessageInsightsResponse_EmailTags, &v.EmailTags)
+		case schemas.GetMessageInsightsResponse_FromEmailAddress:
+			v.FromEmailAddress = new(string)
+			return d.ReadString(schemas.GetMessageInsightsResponse_FromEmailAddress, v.FromEmailAddress)
+		case schemas.GetMessageInsightsResponse_Insights:
+			return deserializeEmailInsightsList(d, schemas.GetMessageInsightsResponse_Insights, &v.Insights)
+		case schemas.GetMessageInsightsResponse_MessageId:
+			v.MessageId = new(string)
+			return d.ReadString(schemas.GetMessageInsightsResponse_MessageId, v.MessageId)
+		case schemas.GetMessageInsightsResponse_Subject:
+			v.Subject = new(string)
+			return d.ReadString(schemas.GetMessageInsightsResponse_Subject, v.Subject)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetMessageInsightsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetMessageInsights{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetMessageInsights, schemas.GetMessageInsightsRequest, schemas.GetMessageInsightsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetMessageInsights{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetMessageInsights, schemas.GetMessageInsightsRequest, schemas.GetMessageInsightsResponse), output: &GetMessageInsightsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

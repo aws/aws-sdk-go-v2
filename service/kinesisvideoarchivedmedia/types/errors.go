@@ -4,6 +4,7 @@ package types
 
 import (
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/kinesisvideoarchivedmedia/schemas"
 	smithy "github.com/aws/smithy-go"
 )
 
@@ -35,6 +36,27 @@ func (e *ClientLimitExceededException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ClientLimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *ClientLimitExceededException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ClientLimitExceededException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ClientLimitExceededException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.ClientLimitExceededException_Message, *v.Message)
+	}
+}
+func (v *ClientLimitExceededException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ClientLimitExceededException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ClientLimitExceededException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ClientLimitExceededException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // A specified parameter exceeds its restrictions, is not supported, or can't be
 // used.
@@ -62,6 +84,27 @@ func (e *InvalidArgumentException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InvalidArgumentException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *InvalidArgumentException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InvalidArgumentException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InvalidArgumentException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.InvalidArgumentException_Message, *v.Message)
+	}
+}
+func (v *InvalidArgumentException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InvalidArgumentException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InvalidArgumentException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.InvalidArgumentException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The codec private data in at least one of the tracks of the video stream is not
 // valid for this operation.
@@ -89,6 +132,27 @@ func (e *InvalidCodecPrivateDataException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InvalidCodecPrivateDataException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *InvalidCodecPrivateDataException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InvalidCodecPrivateDataException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InvalidCodecPrivateDataException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.InvalidCodecPrivateDataException_Message, *v.Message)
+	}
+}
+func (v *InvalidCodecPrivateDataException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InvalidCodecPrivateDataException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InvalidCodecPrivateDataException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.InvalidCodecPrivateDataException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // One or more frames in the requested clip could not be parsed based on the
 // specified codec.
@@ -116,6 +180,27 @@ func (e *InvalidMediaFrameException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InvalidMediaFrameException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *InvalidMediaFrameException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InvalidMediaFrameException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InvalidMediaFrameException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.InvalidMediaFrameException_Message, *v.Message)
+	}
+}
+func (v *InvalidMediaFrameException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InvalidMediaFrameException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InvalidMediaFrameException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.InvalidMediaFrameException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // No codec private data was found in at least one of tracks of the video stream.
 type MissingCodecPrivateDataException struct {
@@ -142,6 +227,27 @@ func (e *MissingCodecPrivateDataException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *MissingCodecPrivateDataException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *MissingCodecPrivateDataException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MissingCodecPrivateDataException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MissingCodecPrivateDataException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.MissingCodecPrivateDataException_Message, *v.Message)
+	}
+}
+func (v *MissingCodecPrivateDataException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MissingCodecPrivateDataException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MissingCodecPrivateDataException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.MissingCodecPrivateDataException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // GetImages was requested for a stream that does not retain data (that is, has a
 // DataRetentionInHours of 0).
@@ -169,6 +275,27 @@ func (e *NoDataRetentionException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *NoDataRetentionException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *NoDataRetentionException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.NoDataRetentionException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *NoDataRetentionException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.NoDataRetentionException_Message, *v.Message)
+	}
+}
+func (v *NoDataRetentionException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.NoDataRetentionException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.NoDataRetentionException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.NoDataRetentionException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // Status Code: 403, The caller is not authorized to perform an operation on the
 // given stream, or the token has expired.
@@ -196,6 +323,27 @@ func (e *NotAuthorizedException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *NotAuthorizedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *NotAuthorizedException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.NotAuthorizedException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *NotAuthorizedException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.NotAuthorizedException_Message, *v.Message)
+	}
+}
+func (v *NotAuthorizedException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.NotAuthorizedException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.NotAuthorizedException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.NotAuthorizedException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // GetImages will throw this error when Kinesis Video Streams can't find the
 // stream that you specified.
@@ -229,6 +377,27 @@ func (e *ResourceNotFoundException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *ResourceNotFoundException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ResourceNotFoundException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ResourceNotFoundException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.ResourceNotFoundException_Message, *v.Message)
+	}
+}
+func (v *ResourceNotFoundException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ResourceNotFoundException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ResourceNotFoundException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ResourceNotFoundException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The type of the media (for example, h.264 or h.265 video or ACC or G.711 audio)
 // could not be determined from the codec IDs of the tracks in the first fragment
@@ -259,4 +428,25 @@ func (e *UnsupportedStreamMediaTypeException) ErrorCode() string {
 }
 func (e *UnsupportedStreamMediaTypeException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
+}
+func (v *UnsupportedStreamMediaTypeException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UnsupportedStreamMediaTypeException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UnsupportedStreamMediaTypeException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.UnsupportedStreamMediaTypeException_Message, *v.Message)
+	}
+}
+func (v *UnsupportedStreamMediaTypeException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UnsupportedStreamMediaTypeException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UnsupportedStreamMediaTypeException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.UnsupportedStreamMediaTypeException_Message, v.Message)
+		}
+		return nil
+	})
 }

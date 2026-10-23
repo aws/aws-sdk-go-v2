@@ -4,7 +4,9 @@ package sesv2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/sesv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sesv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -66,6 +68,24 @@ type UpdateReputationEntityCustomerManagedStatusInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateReputationEntityCustomerManagedStatusInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateReputationEntityCustomerManagedStatusRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateReputationEntityCustomerManagedStatusInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ReputationEntityReference != nil {
+		s.WriteString(schemas.UpdateReputationEntityCustomerManagedStatusRequest_ReputationEntityReference, *v.ReputationEntityReference)
+	}
+	if v.ReputationEntityType != "" {
+		s.WriteString(schemas.UpdateReputationEntityCustomerManagedStatusRequest_ReputationEntityType, string(v.ReputationEntityType))
+	}
+	if v.SendingStatus != "" {
+		s.WriteString(schemas.UpdateReputationEntityCustomerManagedStatusRequest_SendingStatus, string(v.SendingStatus))
+	}
+}
+
 // If the action is successful, the service sends back an HTTP 200 response with
 // an empty HTTP body.
 type UpdateReputationEntityCustomerManagedStatusOutput struct {
@@ -75,13 +95,26 @@ type UpdateReputationEntityCustomerManagedStatusOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateReputationEntityCustomerManagedStatusOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateReputationEntityCustomerManagedStatusResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateReputationEntityCustomerManagedStatusOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *UpdateReputationEntityCustomerManagedStatusOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateReputationEntityCustomerManagedStatusResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateReputationEntityCustomerManagedStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateReputationEntityCustomerManagedStatus{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateReputationEntityCustomerManagedStatus, schemas.UpdateReputationEntityCustomerManagedStatusRequest, schemas.UpdateReputationEntityCustomerManagedStatusResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateReputationEntityCustomerManagedStatus{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateReputationEntityCustomerManagedStatus, schemas.UpdateReputationEntityCustomerManagedStatusRequest, schemas.UpdateReputationEntityCustomerManagedStatusResponse), output: &UpdateReputationEntityCustomerManagedStatusOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

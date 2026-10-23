@@ -143,7 +143,7 @@ var Textract = smithy.NewServiceSchema(_Textract, "2018-06-27")
 var AccessDeniedException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.textract",
 	Name:      "AccessDeniedException",
-}, smithy.ShapeTypeStructure, 2)
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"})
 var AccessDeniedException_Message *smithy.Schema
 
 var AccessDeniedException_Code *smithy.Schema
@@ -313,7 +313,7 @@ var AutoUpdate_DISABLED *smithy.Schema
 var BadDocumentException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.textract",
 	Name:      "BadDocumentException",
-}, smithy.ShapeTypeStructure, 2)
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"})
 var BadDocumentException_Message *smithy.Schema
 
 var BadDocumentException_Code *smithy.Schema
@@ -430,7 +430,7 @@ var _ClientRequestToken = smithy.NewSchema(smithy.ShapeID{
 var ConflictException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.textract",
 	Name:      "ConflictException",
-}, smithy.ShapeTypeStructure, 2)
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"})
 var ConflictException_Message *smithy.Schema
 
 var ConflictException_Code *smithy.Schema
@@ -513,7 +513,7 @@ var _DocumentPages_member *smithy.Schema
 var DocumentTooLargeException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.textract",
 	Name:      "DocumentTooLargeException",
-}, smithy.ShapeTypeStructure, 2)
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"})
 var DocumentTooLargeException_Message *smithy.Schema
 
 var DocumentTooLargeException_Code *smithy.Schema
@@ -747,7 +747,8 @@ var _HumanLoopName = smithy.NewSchema(smithy.ShapeID{
 var HumanLoopQuotaExceededException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.textract",
 	Name:      "HumanLoopQuotaExceededException",
-}, smithy.ShapeTypeStructure, 5, &smithytraits.HTTPError{Code: 402})
+}, smithy.ShapeTypeStructure, 5, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 402})
 var HumanLoopQuotaExceededException_ResourceType *smithy.Schema
 
 var HumanLoopQuotaExceededException_QuotaCode *smithy.Schema
@@ -761,7 +762,7 @@ var HumanLoopQuotaExceededException_Code *smithy.Schema
 var IdempotentParameterMismatchException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.textract",
 	Name:      "IdempotentParameterMismatchException",
-}, smithy.ShapeTypeStructure, 2)
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"})
 var IdempotentParameterMismatchException_Message *smithy.Schema
 
 var IdempotentParameterMismatchException_Code *smithy.Schema
@@ -810,7 +811,7 @@ var _ImageBlob = smithy.NewSchema(smithy.ShapeID{
 var InternalServerError = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.textract",
 	Name:      "InternalServerError",
-}, smithy.ShapeTypeStructure, 2)
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "server"})
 var InternalServerError_Message *smithy.Schema
 
 var InternalServerError_Code *smithy.Schema
@@ -818,7 +819,7 @@ var InternalServerError_Code *smithy.Schema
 var InvalidJobIdException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.textract",
 	Name:      "InvalidJobIdException",
-}, smithy.ShapeTypeStructure, 2)
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"})
 var InvalidJobIdException_Message *smithy.Schema
 
 var InvalidJobIdException_Code *smithy.Schema
@@ -826,7 +827,7 @@ var InvalidJobIdException_Code *smithy.Schema
 var InvalidKMSKeyException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.textract",
 	Name:      "InvalidKMSKeyException",
-}, smithy.ShapeTypeStructure, 2)
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"})
 var InvalidKMSKeyException_Message *smithy.Schema
 
 var InvalidKMSKeyException_Code *smithy.Schema
@@ -834,7 +835,7 @@ var InvalidKMSKeyException_Code *smithy.Schema
 var InvalidParameterException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.textract",
 	Name:      "InvalidParameterException",
-}, smithy.ShapeTypeStructure, 2)
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"})
 var InvalidParameterException_Message *smithy.Schema
 
 var InvalidParameterException_Code *smithy.Schema
@@ -842,7 +843,7 @@ var InvalidParameterException_Code *smithy.Schema
 var InvalidS3ObjectException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.textract",
 	Name:      "InvalidS3ObjectException",
-}, smithy.ShapeTypeStructure, 2)
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"})
 var InvalidS3ObjectException_Message *smithy.Schema
 
 var InvalidS3ObjectException_Code *smithy.Schema
@@ -943,7 +944,7 @@ var LendingSummary_UndetectedDocumentTypes *smithy.Schema
 var LimitExceededException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.textract",
 	Name:      "LimitExceededException",
-}, smithy.ShapeTypeStructure, 2)
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"})
 var LimitExceededException_Message *smithy.Schema
 
 var LimitExceededException_Code *smithy.Schema
@@ -1069,7 +1070,7 @@ var _PredictionList_member *smithy.Schema
 var ProvisionedThroughputExceededException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.textract",
 	Name:      "ProvisionedThroughputExceededException",
-}, smithy.ShapeTypeStructure, 2)
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"})
 var ProvisionedThroughputExceededException_Message *smithy.Schema
 
 var ProvisionedThroughputExceededException_Code *smithy.Schema
@@ -1151,7 +1152,7 @@ var RelationshipType_TABLE_FOOTER *smithy.Schema
 var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.textract",
 	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 2)
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"})
 var ResourceNotFoundException_Message *smithy.Schema
 
 var ResourceNotFoundException_Code *smithy.Schema
@@ -1197,7 +1198,7 @@ var SelectionStatus_NOT_SELECTED *smithy.Schema
 var ServiceQuotaExceededException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.textract",
 	Name:      "ServiceQuotaExceededException",
-}, smithy.ShapeTypeStructure, 2)
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"})
 var ServiceQuotaExceededException_Message *smithy.Schema
 
 var ServiceQuotaExceededException_Code *smithy.Schema
@@ -1291,7 +1292,7 @@ var TextType_PRINTED *smithy.Schema
 var ThrottlingException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.textract",
 	Name:      "ThrottlingException",
-}, smithy.ShapeTypeStructure, 2)
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "server"})
 var ThrottlingException_Message *smithy.Schema
 
 var ThrottlingException_Code *smithy.Schema
@@ -1322,7 +1323,7 @@ var _UndetectedSignatureList_member *smithy.Schema
 var UnsupportedDocumentException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.textract",
 	Name:      "UnsupportedDocumentException",
-}, smithy.ShapeTypeStructure, 2)
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"})
 var UnsupportedDocumentException_Message *smithy.Schema
 
 var UnsupportedDocumentException_Code *smithy.Schema
@@ -1330,7 +1331,7 @@ var UnsupportedDocumentException_Code *smithy.Schema
 var ValidationException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.textract",
 	Name:      "ValidationException",
-}, smithy.ShapeTypeStructure, 2)
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"})
 var ValidationException_Message *smithy.Schema
 
 var ValidationException_Code *smithy.Schema

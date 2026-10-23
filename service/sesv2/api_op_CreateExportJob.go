@@ -4,11 +4,20 @@ package sesv2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/sesv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sesv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
 // Creates an export job for a data source and destination.
+//
+// Export jobs run asynchronously. This operation returns a JobId . Call
+// GetExportJob with that ID until JobStatus is COMPLETED , FAILED , or CANCELLED .
+// When the status is COMPLETED , download the export file from the pre-signed URL
+// in ExportDestination.S3Url . When the status is FAILED , see FailureInfo . To
+// store a copy in your own bucket, upload the downloaded file to your bucket. Do
+// not include S3Url in the request.
 //
 // You can execute this operation no more than once per second.
 func (c *Client) CreateExportJob(ctx context.Context, params *CreateExportJobInput, optFns ...func(*Options)) (*CreateExportJobOutput, error) {
@@ -35,12 +44,33 @@ type CreateExportJobInput struct {
 	// This member is required.
 	ExportDataSource *types.ExportDataSource
 
-	// The destination for the export job.
+	// The destination for the export job. Specify only DataFormat . Do not include
+	// S3Url in this request. SES writes the export file to a location that it manages
+	// and returns the download URL in GetExportJob .
 	//
 	// This member is required.
 	ExportDestination *types.ExportDestination
 
 	noSmithyDocumentSerde
+}
+
+func (v *CreateExportJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateExportJobRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateExportJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ExportDataSource != nil {
+		s.WriteStruct(schemas.CreateExportJobRequest_ExportDataSource)
+		v.ExportDataSource.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ExportDestination != nil {
+		s.WriteStruct(schemas.CreateExportJobRequest_ExportDestination)
+		v.ExportDestination.SerializeMembers(s)
+		s.CloseStruct()
+	}
 }
 
 // An HTTP 200 response if the request succeeds, or an error message if the
@@ -56,13 +86,32 @@ type CreateExportJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateExportJobOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateExportJobResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateExportJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.JobId != nil {
+		s.WriteString(schemas.CreateExportJobResponse_JobId, *v.JobId)
+	}
+}
+func (v *CreateExportJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateExportJobResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateExportJobResponse_JobId:
+			v.JobId = new(string)
+			return d.ReadString(schemas.CreateExportJobResponse_JobId, v.JobId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateExportJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateExportJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateExportJob, schemas.CreateExportJobRequest, schemas.CreateExportJobResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateExportJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateExportJob, schemas.CreateExportJobRequest, schemas.CreateExportJobResponse), output: &CreateExportJobOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

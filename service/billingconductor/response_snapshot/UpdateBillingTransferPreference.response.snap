@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"AutoBillingTransferBillingGroupCreation":{"Enabled":true,"PricingPlanArn":"__PricingPlanArn__"},"LastModifiedTime":1,"ResponsibilityTransferArn":"__ResponsibilityTransferArn__"}

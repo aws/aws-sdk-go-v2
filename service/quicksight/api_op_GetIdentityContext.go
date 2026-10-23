@@ -4,7 +4,9 @@ package quicksight
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/quicksight/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/quicksight/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -130,6 +132,28 @@ type GetIdentityContextInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetIdentityContextInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetIdentityContextRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetIdentityContextInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AwsAccountId != nil {
+		s.WriteString(schemas.GetIdentityContextRequest_AwsAccountId, *v.AwsAccountId)
+	}
+	if v.ContextRegion != nil {
+		s.WriteString(schemas.GetIdentityContextRequest_ContextRegion, *v.ContextRegion)
+	}
+	if v.Namespace != nil {
+		s.WriteString(schemas.GetIdentityContextRequest_Namespace, *v.Namespace)
+	}
+	if v.SessionExpiresAt != nil {
+		s.WriteTime(schemas.GetIdentityContextRequest_SessionExpiresAt, *v.SessionExpiresAt)
+	}
+	serializeUserIdentifier(s, schemas.GetIdentityContextRequest_UserIdentifier, v.UserIdentifier)
+}
+
 type GetIdentityContextOutput struct {
 
 	// The Amazon Web Services request ID for this operation.
@@ -155,13 +179,44 @@ type GetIdentityContextOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetIdentityContextOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetIdentityContextResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetIdentityContextOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Context != nil {
+		s.WriteString(schemas.GetIdentityContextResponse_Context, *v.Context)
+	}
+	if v.RequestId != nil {
+		s.WriteString(schemas.GetIdentityContextResponse_RequestId, *v.RequestId)
+	}
+	if v.Status != nil {
+		s.WriteInt32(schemas.GetIdentityContextResponse_Status, *v.Status)
+	}
+}
+func (v *GetIdentityContextOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetIdentityContextResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetIdentityContextResponse_Context:
+			v.Context = new(string)
+			return d.ReadString(schemas.GetIdentityContextResponse_Context, v.Context)
+		case schemas.GetIdentityContextResponse_RequestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.GetIdentityContextResponse_RequestId, v.RequestId)
+		case schemas.GetIdentityContextResponse_Status:
+			v.Status = new(int32)
+			return d.ReadInt32(schemas.GetIdentityContextResponse_Status, v.Status)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetIdentityContextMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetIdentityContext{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetIdentityContext, schemas.GetIdentityContextRequest, schemas.GetIdentityContextResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetIdentityContext{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetIdentityContext, schemas.GetIdentityContextRequest, schemas.GetIdentityContextResponse), output: &GetIdentityContextOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

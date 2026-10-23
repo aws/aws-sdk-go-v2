@@ -4,6 +4,8 @@ package quicksight
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/quicksight/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -60,6 +62,21 @@ type UpdatePublicSharingSettingsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdatePublicSharingSettingsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdatePublicSharingSettingsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdatePublicSharingSettingsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AwsAccountId != nil {
+		s.WriteString(schemas.UpdatePublicSharingSettingsRequest_AwsAccountId, *v.AwsAccountId)
+	}
+	if v.PublicSharingEnabled != false {
+		s.WriteBool(schemas.UpdatePublicSharingSettingsRequest_PublicSharingEnabled, v.PublicSharingEnabled)
+	}
+}
+
 type UpdatePublicSharingSettingsOutput struct {
 
 	// The Amazon Web Services request ID for this operation.
@@ -74,13 +91,37 @@ type UpdatePublicSharingSettingsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdatePublicSharingSettingsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdatePublicSharingSettingsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdatePublicSharingSettingsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RequestId != nil {
+		s.WriteString(schemas.UpdatePublicSharingSettingsResponse_RequestId, *v.RequestId)
+	}
+	if v.Status != 0 {
+		s.WriteInt32(schemas.UpdatePublicSharingSettingsResponse_Status, v.Status)
+	}
+}
+func (v *UpdatePublicSharingSettingsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdatePublicSharingSettingsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdatePublicSharingSettingsResponse_RequestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.UpdatePublicSharingSettingsResponse_RequestId, v.RequestId)
+		case schemas.UpdatePublicSharingSettingsResponse_Status:
+			return d.ReadInt32(schemas.UpdatePublicSharingSettingsResponse_Status, &v.Status)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdatePublicSharingSettingsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdatePublicSharingSettings{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdatePublicSharingSettings, schemas.UpdatePublicSharingSettingsRequest, schemas.UpdatePublicSharingSettingsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdatePublicSharingSettings{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdatePublicSharingSettings, schemas.UpdatePublicSharingSettingsRequest, schemas.UpdatePublicSharingSettingsResponse), output: &UpdatePublicSharingSettingsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

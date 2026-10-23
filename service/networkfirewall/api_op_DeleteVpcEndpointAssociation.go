@@ -4,7 +4,9 @@ package networkfirewall
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/networkfirewall/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/networkfirewall/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -42,6 +44,18 @@ type DeleteVpcEndpointAssociationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteVpcEndpointAssociationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteVpcEndpointAssociationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteVpcEndpointAssociationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.VpcEndpointAssociationArn != nil {
+		s.WriteString(schemas.DeleteVpcEndpointAssociationRequest_VpcEndpointAssociationArn, *v.VpcEndpointAssociationArn)
+	}
+}
+
 type DeleteVpcEndpointAssociationOutput struct {
 
 	// The configuration settings for the VPC endpoint association. These settings
@@ -58,13 +72,42 @@ type DeleteVpcEndpointAssociationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteVpcEndpointAssociationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteVpcEndpointAssociationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteVpcEndpointAssociationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.VpcEndpointAssociation != nil {
+		s.WriteStruct(schemas.DeleteVpcEndpointAssociationResponse_VpcEndpointAssociation)
+		v.VpcEndpointAssociation.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.VpcEndpointAssociationStatus != nil {
+		s.WriteStruct(schemas.DeleteVpcEndpointAssociationResponse_VpcEndpointAssociationStatus)
+		v.VpcEndpointAssociationStatus.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DeleteVpcEndpointAssociationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteVpcEndpointAssociationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteVpcEndpointAssociationResponse_VpcEndpointAssociation:
+			v.VpcEndpointAssociation = &types.VpcEndpointAssociation{}
+			return v.VpcEndpointAssociation.Deserialize(d)
+		case schemas.DeleteVpcEndpointAssociationResponse_VpcEndpointAssociationStatus:
+			v.VpcEndpointAssociationStatus = &types.VpcEndpointAssociationStatus{}
+			return v.VpcEndpointAssociationStatus.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteVpcEndpointAssociationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpDeleteVpcEndpointAssociation{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteVpcEndpointAssociation, schemas.DeleteVpcEndpointAssociationRequest, schemas.DeleteVpcEndpointAssociationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpDeleteVpcEndpointAssociation{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteVpcEndpointAssociation, schemas.DeleteVpcEndpointAssociationRequest, schemas.DeleteVpcEndpointAssociationResponse), output: &DeleteVpcEndpointAssociationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

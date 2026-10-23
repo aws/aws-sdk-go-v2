@@ -4,7 +4,9 @@ package quicksight
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/quicksight/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/quicksight/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -37,6 +39,18 @@ type DescribeAccountSubscriptionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeAccountSubscriptionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeAccountSubscriptionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeAccountSubscriptionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AwsAccountId != nil {
+		s.WriteString(schemas.DescribeAccountSubscriptionRequest_AwsAccountId, *v.AwsAccountId)
+	}
+}
+
 type DescribeAccountSubscriptionOutput struct {
 
 	// A structure that contains the following elements:
@@ -65,13 +79,45 @@ type DescribeAccountSubscriptionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeAccountSubscriptionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeAccountSubscriptionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeAccountSubscriptionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountInfo != nil {
+		s.WriteStruct(schemas.DescribeAccountSubscriptionResponse_AccountInfo)
+		v.AccountInfo.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RequestId != nil {
+		s.WriteString(schemas.DescribeAccountSubscriptionResponse_RequestId, *v.RequestId)
+	}
+	if v.Status != 0 {
+		s.WriteInt32(schemas.DescribeAccountSubscriptionResponse_Status, v.Status)
+	}
+}
+func (v *DescribeAccountSubscriptionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeAccountSubscriptionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeAccountSubscriptionResponse_AccountInfo:
+			v.AccountInfo = &types.AccountInfo{}
+			return v.AccountInfo.Deserialize(d)
+		case schemas.DescribeAccountSubscriptionResponse_RequestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.DescribeAccountSubscriptionResponse_RequestId, v.RequestId)
+		case schemas.DescribeAccountSubscriptionResponse_Status:
+			return d.ReadInt32(schemas.DescribeAccountSubscriptionResponse_Status, &v.Status)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeAccountSubscriptionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeAccountSubscription{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeAccountSubscription, schemas.DescribeAccountSubscriptionRequest, schemas.DescribeAccountSubscriptionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeAccountSubscription{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeAccountSubscription, schemas.DescribeAccountSubscriptionRequest, schemas.DescribeAccountSubscriptionResponse), output: &DescribeAccountSubscriptionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

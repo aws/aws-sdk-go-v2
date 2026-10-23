@@ -5,7 +5,9 @@ package ram
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/ram/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ram/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -59,6 +61,31 @@ type ListSourceAssociationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListSourceAssociationsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListSourceAssociationsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListSourceAssociationsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AssociationStatus != "" {
+		s.WriteString(schemas.ListSourceAssociationsRequest_associationStatus, string(v.AssociationStatus))
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListSourceAssociationsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListSourceAssociationsRequest_nextToken, *v.NextToken)
+	}
+	serializeResourceShareArnList(s, schemas.ListSourceAssociationsRequest_resourceShareArns, v.ResourceShareArns)
+	if v.SourceId != nil {
+		s.WriteString(schemas.ListSourceAssociationsRequest_sourceId, *v.SourceId)
+	}
+	if v.SourceType != nil {
+		s.WriteString(schemas.ListSourceAssociationsRequest_sourceType, *v.SourceType)
+	}
+}
+
 type ListSourceAssociationsOutput struct {
 
 	// The pagination token to use to retrieve the next page of results. This value is
@@ -74,13 +101,35 @@ type ListSourceAssociationsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListSourceAssociationsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListSourceAssociationsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListSourceAssociationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListSourceAssociationsResponse_nextToken, *v.NextToken)
+	}
+	serializeAssociatedSourceList(s, schemas.ListSourceAssociationsResponse_sourceAssociations, v.SourceAssociations)
+}
+func (v *ListSourceAssociationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListSourceAssociationsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListSourceAssociationsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListSourceAssociationsResponse_nextToken, v.NextToken)
+		case schemas.ListSourceAssociationsResponse_sourceAssociations:
+			return deserializeAssociatedSourceList(d, schemas.ListSourceAssociationsResponse_sourceAssociations, &v.SourceAssociations)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListSourceAssociationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListSourceAssociations{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListSourceAssociations, schemas.ListSourceAssociationsRequest, schemas.ListSourceAssociationsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListSourceAssociations{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListSourceAssociations, schemas.ListSourceAssociationsRequest, schemas.ListSourceAssociationsResponse), output: &ListSourceAssociationsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

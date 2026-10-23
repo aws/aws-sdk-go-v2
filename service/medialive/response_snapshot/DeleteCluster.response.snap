@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"arn":"__Arn__","channelIds":["__Member__","__Member__"],"clusterType":"ON_PREMISES","id":"__Id__","instanceRoleArn":"__InstanceRoleArn__","name":"__Name__","networkSettings":{"defaultRoute":"__DefaultRoute__","interfaceMappings":[{"logicalInterfaceName":"__LogicalInterfaceName__","networkId":"__NetworkId__"},{"logicalInterfaceName":"__LogicalInterfaceName__","networkId":"__NetworkId__"}]},"state":"CREATING"}

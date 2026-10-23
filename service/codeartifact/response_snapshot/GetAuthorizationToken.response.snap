@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"authorizationToken":"__AuthorizationToken__","expiration":946684800}

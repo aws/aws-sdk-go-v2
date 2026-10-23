@@ -65,6 +65,9 @@ func ExampleExecutionBlockConfiguration_outputUsage() {
 	case *types.ExecutionBlockConfigurationMemberRoute53HealthCheckConfig:
 		_ = v.Value // Value is types.Route53HealthCheckConfiguration
 
+	case *types.ExecutionBlockConfigurationMemberSsmSendCommandConfig:
+		_ = v.Value // Value is types.SsmSendCommandConfiguration
+
 	case *types.UnknownUnionMember:
 		fmt.Println("unknown tag:", v.Tag)
 
@@ -83,6 +86,7 @@ var _ *types.ExecutionApprovalConfiguration
 var _ *types.LambdaEventSourceMappingConfiguration
 var _ *types.EksResourceScalingConfiguration
 var _ *types.RegionSwitchPlanConfiguration
+var _ *types.SsmSendCommandConfiguration
 var _ *types.AuroraProvisionedScalingConfiguration
 var _ *types.CustomActionLambdaConfiguration
 var _ *types.GlobalAuroraConfiguration

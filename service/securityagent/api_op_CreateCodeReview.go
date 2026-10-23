@@ -56,6 +56,12 @@ type CreateCodeReviewInput struct {
 	// no budget cap.
 	MaxTaskHours *float64
 
+	// The destination for publishing scan reports to an integrated document provider.
+	ReportDestination *types.ReportDestination
+
+	// The report-generation filters applied when the report is exported.
+	ReportFilters *types.ReportFilters
+
 	// The IAM service role to use for the code review.
 	ServiceRole *string
 
@@ -92,6 +98,12 @@ type CreateCodeReviewOutput struct {
 	// The maximum number of billable task hours configured for jobs started from this
 	// code review. Null if no budget cap is set.
 	MaxTaskHours *float64
+
+	// The destination for publishing scan reports to an integrated document provider.
+	ReportDestination *types.ReportDestination
+
+	// The report-generation filters applied when the report is exported.
+	ReportFilters *types.ReportFilters
 
 	// The IAM service role used for the code review.
 	ServiceRole *string

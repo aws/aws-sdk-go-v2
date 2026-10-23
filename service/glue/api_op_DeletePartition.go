@@ -4,6 +4,8 @@ package glue
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/glue/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -47,6 +49,25 @@ type DeletePartitionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeletePartitionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeletePartitionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeletePartitionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CatalogId != nil {
+		s.WriteString(schemas.DeletePartitionRequest_CatalogId, *v.CatalogId)
+	}
+	if v.DatabaseName != nil {
+		s.WriteString(schemas.DeletePartitionRequest_DatabaseName, *v.DatabaseName)
+	}
+	serializeValueStringList(s, schemas.DeletePartitionRequest_PartitionValues, v.PartitionValues)
+	if v.TableName != nil {
+		s.WriteString(schemas.DeletePartitionRequest_TableName, *v.TableName)
+	}
+}
+
 type DeletePartitionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -54,13 +75,26 @@ type DeletePartitionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeletePartitionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeletePartitionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeletePartitionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeletePartitionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeletePartitionResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeletePartitionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeletePartition{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeletePartition, schemas.DeletePartitionRequest, schemas.DeletePartitionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeletePartition{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeletePartition, schemas.DeletePartitionRequest, schemas.DeletePartitionResponse), output: &DeletePartitionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

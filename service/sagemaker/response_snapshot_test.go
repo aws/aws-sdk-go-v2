@@ -200,6 +200,34 @@ func TestCheckResponseSnapshot_AssociateTrialComponent(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_AttachClusterNodeNetworkInterface(t *testing.T) {
+	want := &AttachClusterNodeNetworkInterfaceOutput{
+		ClusterArn:         ptr.String("__ClusterArn__"),
+		NodeId:             ptr.String("__NodeId__"),
+		NetworkInterfaceId: ptr.String("__NetworkInterfaceId__"),
+		AttachmentId:       ptr.String("__AttachmentId__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("AttachClusterNodeNetworkInterface.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.AttachClusterNodeNetworkInterface(context.Background(), &AttachClusterNodeNetworkInterfaceInput{
+		ClusterName:        ptr.String("__ClusterName__"),
+		NodeId:             ptr.String("__NodeId__"),
+		NetworkInterfaceId: ptr.String("__NetworkInterfaceId__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "AttachClusterNodeNetworkInterface.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_AttachClusterNodeVolume(t *testing.T) {
 	want := &AttachClusterNodeVolumeOutput{
 		ClusterArn: ptr.String("__ClusterArn__"),
@@ -2592,6 +2620,12 @@ func TestCheckResponseSnapshot_CreateCluster(t *testing.T) {
 			},
 			Slurm: &types.ClusterOrchestratorSlurmConfig{
 				SlurmConfigStrategy: types.ClusterSlurmConfigStrategy("Overwrite"),
+				AccountingDatabase: &types.ClusterAccountingDatabase{
+					Endpoint:  ptr.String("__Endpoint__"),
+					Port:      ptr.Int32(1),
+					Name:      ptr.String("__Name__"),
+					SecretArn: ptr.String("__SecretArn__"),
+				},
 			},
 		},
 		NodeRecovery: types.ClusterNodeRecovery("Automatic"),
@@ -9378,6 +9412,65 @@ func TestCheckResponseSnapshot_CreateTrainingPlan(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_CreateTrainingSession(t *testing.T) {
+	want := &CreateTrainingSessionOutput{
+		TrainingSessionArn: ptr.String("__TrainingSessionArn__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("CreateTrainingSession.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.CreateTrainingSession(context.Background(), &CreateTrainingSessionInput{
+		TrainingSessionName:  ptr.String("__TrainingSessionName__"),
+		ModelPackageGroupArn: ptr.String("__ModelPackageGroupArn__"),
+		LoraConfig: &types.LoraConfig{
+			Rank:  ptr.Int32(1),
+			Alpha: ptr.Int32(1),
+		},
+		RoleArn: ptr.String("__RoleArn__"),
+		VpcConfig: &types.VpcConfig{
+			SecurityGroupIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			Subnets: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+		ModelConfig: &types.TrainingSessionModelConfig{
+			BaseModelArn: ptr.String("__BaseModelArn__"),
+			AcceptEula:   ptr.Bool(true),
+		},
+		OutputConfig: &types.TrainingSessionOutputConfig{
+			S3Location: &types.TrainingSessionS3Location{
+				Path:      ptr.String("__Path__"),
+				KmsKeyArn: ptr.String("__KmsKeyArn__"),
+			},
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "CreateTrainingSession.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_CreateTransformJob(t *testing.T) {
 	want := &CreateTransformJobOutput{
 		TransformJobArn: ptr.String("__TransformJobArn__"),
@@ -11285,6 +11378,27 @@ func TestCheckResponseSnapshot_DeleteTrainingJob(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "DeleteTrainingJob.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_DeleteTrainingSession(t *testing.T) {
+	want := &DeleteTrainingSessionOutput{}
+	status, header, body, err := serdeRespReadSnapshot("DeleteTrainingSession.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.DeleteTrainingSession(context.Background(), &DeleteTrainingSessionInput{
+		TrainingSessionName: ptr.String("__TrainingSessionName__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "DeleteTrainingSession.response", err)
 	}
 }
 
@@ -13861,6 +13975,12 @@ func TestCheckResponseSnapshot_DescribeCluster(t *testing.T) {
 			},
 			Slurm: &types.ClusterOrchestratorSlurmConfig{
 				SlurmConfigStrategy: types.ClusterSlurmConfigStrategy("Overwrite"),
+				AccountingDatabase: &types.ClusterAccountingDatabase{
+					Endpoint:  ptr.String("__Endpoint__"),
+					Port:      ptr.Int32(1),
+					Name:      ptr.String("__Name__"),
+					SecretArn: ptr.String("__SecretArn__"),
+				},
 			},
 		},
 		TieredStorageConfig: &types.ClusterTieredStorageConfig{
@@ -22256,6 +22376,79 @@ func TestCheckResponseSnapshot_DescribeTrainingPlanExtensionHistory(t *testing.T
 	}
 }
 
+func TestCheckResponseSnapshot_DescribeTrainingSession(t *testing.T) {
+	want := &DescribeTrainingSessionOutput{
+		TrainingSessionDetail: &types.TrainingSessionDetail{
+			TrainingSessionArn:         ptr.String("__TrainingSessionArn__"),
+			TrainingSessionName:        ptr.String("__TrainingSessionName__"),
+			TrainingSessionStatus:      types.TrainingSessionStatus("Created"),
+			ModelPackageGroupArn:       ptr.String("__ModelPackageGroupArn__"),
+			CreationTime:               ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			LastModifiedTime:           ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			EndTime:                    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			ErrorDetails:               ptr.String("__ErrorDetails__"),
+			LastReceivedSequenceNumber: ptr.Int32(1),
+			BillableTokenUsage: &types.BillableTokenUsage{
+				PrefillTokenCount:  ptr.Int64(1),
+				SampleTokenCount:   ptr.Int64(1),
+				TrainingTokenCount: ptr.Int64(1),
+			},
+			VpcConfig: &types.VpcConfig{
+				SecurityGroupIds: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Subnets: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			RoleArn: ptr.String("__RoleArn__"),
+			LoraConfig: &types.LoraConfig{
+				Rank:  ptr.Int32(1),
+				Alpha: ptr.Int32(1),
+			},
+			ModelConfig: &types.TrainingSessionModelConfig{
+				BaseModelArn: ptr.String("__BaseModelArn__"),
+				AcceptEula:   ptr.Bool(true),
+			},
+			OutputConfig: &types.TrainingSessionOutputConfig{
+				S3Location: &types.TrainingSessionS3Location{
+					Path:      ptr.String("__Path__"),
+					KmsKeyArn: ptr.String("__KmsKeyArn__"),
+				},
+			},
+			Tags: []types.Tag{
+				{
+					Key:   ptr.String("__Key__"),
+					Value: ptr.String("__Value__"),
+				},
+				{
+					Key:   ptr.String("__Key__"),
+					Value: ptr.String("__Value__"),
+				},
+			},
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("DescribeTrainingSession.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.DescribeTrainingSession(context.Background(), &DescribeTrainingSessionInput{
+		TrainingSessionName: ptr.String("__TrainingSessionName__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "DescribeTrainingSession.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_DescribeTransformJob(t *testing.T) {
 	want := &DescribeTransformJobOutput{
 		TransformJobName:        ptr.String("__TransformJobName__"),
@@ -27558,6 +27751,12 @@ func TestCheckResponseSnapshot_ListPipelineExecutionSteps(t *testing.T) {
 						StepName:    ptr.String("__StepName__"),
 						LogFilePath: ptr.String("__LogFilePath__"),
 					},
+					EMRServerless: &types.EMRServerlessStepMetadata{
+						ApplicationId: ptr.String("__ApplicationId__"),
+						JobRunId:      ptr.String("__JobRunId__"),
+						JobRunName:    ptr.String("__JobRunName__"),
+						LogFilePath:   ptr.String("__LogFilePath__"),
+					},
 					QualityCheck: &types.QualityCheckStepMetadata{
 						CheckType:                            ptr.String("__CheckType__"),
 						BaselineUsedForDriftCheckStatistics:  ptr.String("__BaselineUsedForDriftCheckStatistics__"),
@@ -27631,10 +27830,53 @@ func TestCheckResponseSnapshot_ListPipelineExecutionSteps(t *testing.T) {
 					Job: &types.JobStepMetadata{
 						Arn: ptr.String("__Arn__"),
 					},
+					Athena: &types.AthenaStepMetadata{
+						QueryExecutionId: ptr.String("__QueryExecutionId__"),
+						S3OutputLocation: ptr.String("__S3OutputLocation__"),
+					},
+					Cleanup: &types.CleanupStepMetadata{
+						CleanedSteps: []string{
+							"__Member__",
+							"__Member__",
+						},
+						FailedSteps: []types.CleanupFailure{
+							{
+								StepName:     ptr.String("__StepName__"),
+								ErrorCode:    types.CleanupFailureErrorCode("ClientError"),
+								ErrorMessage: ptr.String("__ErrorMessage__"),
+							},
+							{
+								StepName:     ptr.String("__StepName__"),
+								ErrorCode:    types.CleanupFailureErrorCode("ClientError"),
+								ErrorMessage: ptr.String("__ErrorMessage__"),
+							},
+						},
+						SkippedSteps: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					ForEach: &types.ForEachStepMetadata{
+						Status:             types.ForEachStatus("Succeeded"),
+						InputItemCount:     ptr.Int32(1),
+						TotalStepCount:     ptr.Int32(1),
+						SucceededStepCount: ptr.Int32(1),
+						FailedStepCount:    ptr.Int32(1),
+						StoppedStepCount:   ptr.Int32(1),
+						Selector: &types.ForEachSelectorResult{
+							StepName: ptr.String("__StepName__"),
+							Index:    ptr.Int32(1),
+						},
+					},
 				},
 				AttemptCount: ptr.Int32(1),
 				SelectiveExecutionResult: &types.SelectiveExecutionResult{
 					SourcePipelineExecutionArn: ptr.String("__SourcePipelineExecutionArn__"),
+				},
+				IterationContext: &types.IterationContext{
+					ParentStepName: ptr.String("__ParentStepName__"),
+					Index:          ptr.Int32(1),
+					Item:           ptr.String("__Item__"),
 				},
 			},
 			{
@@ -27703,6 +27945,12 @@ func TestCheckResponseSnapshot_ListPipelineExecutionSteps(t *testing.T) {
 						StepName:    ptr.String("__StepName__"),
 						LogFilePath: ptr.String("__LogFilePath__"),
 					},
+					EMRServerless: &types.EMRServerlessStepMetadata{
+						ApplicationId: ptr.String("__ApplicationId__"),
+						JobRunId:      ptr.String("__JobRunId__"),
+						JobRunName:    ptr.String("__JobRunName__"),
+						LogFilePath:   ptr.String("__LogFilePath__"),
+					},
 					QualityCheck: &types.QualityCheckStepMetadata{
 						CheckType:                            ptr.String("__CheckType__"),
 						BaselineUsedForDriftCheckStatistics:  ptr.String("__BaselineUsedForDriftCheckStatistics__"),
@@ -27776,10 +28024,53 @@ func TestCheckResponseSnapshot_ListPipelineExecutionSteps(t *testing.T) {
 					Job: &types.JobStepMetadata{
 						Arn: ptr.String("__Arn__"),
 					},
+					Athena: &types.AthenaStepMetadata{
+						QueryExecutionId: ptr.String("__QueryExecutionId__"),
+						S3OutputLocation: ptr.String("__S3OutputLocation__"),
+					},
+					Cleanup: &types.CleanupStepMetadata{
+						CleanedSteps: []string{
+							"__Member__",
+							"__Member__",
+						},
+						FailedSteps: []types.CleanupFailure{
+							{
+								StepName:     ptr.String("__StepName__"),
+								ErrorCode:    types.CleanupFailureErrorCode("ClientError"),
+								ErrorMessage: ptr.String("__ErrorMessage__"),
+							},
+							{
+								StepName:     ptr.String("__StepName__"),
+								ErrorCode:    types.CleanupFailureErrorCode("ClientError"),
+								ErrorMessage: ptr.String("__ErrorMessage__"),
+							},
+						},
+						SkippedSteps: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					ForEach: &types.ForEachStepMetadata{
+						Status:             types.ForEachStatus("Succeeded"),
+						InputItemCount:     ptr.Int32(1),
+						TotalStepCount:     ptr.Int32(1),
+						SucceededStepCount: ptr.Int32(1),
+						FailedStepCount:    ptr.Int32(1),
+						StoppedStepCount:   ptr.Int32(1),
+						Selector: &types.ForEachSelectorResult{
+							StepName: ptr.String("__StepName__"),
+							Index:    ptr.Int32(1),
+						},
+					},
 				},
 				AttemptCount: ptr.Int32(1),
 				SelectiveExecutionResult: &types.SelectiveExecutionResult{
 					SourcePipelineExecutionArn: ptr.String("__SourcePipelineExecutionArn__"),
+				},
+				IterationContext: &types.IterationContext{
+					ParentStepName: ptr.String("__ParentStepName__"),
+					Index:          ptr.Int32(1),
+					Item:           ptr.String("__Item__"),
 				},
 			},
 		},
@@ -28662,6 +28953,48 @@ func TestCheckResponseSnapshot_ListTrainingPlans(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "ListTrainingPlans.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_ListTrainingSessions(t *testing.T) {
+	want := &ListTrainingSessionsOutput{
+		NextToken: ptr.String("__NextToken__"),
+		TrainingSessionSummaries: []types.TrainingSessionSummary{
+			{
+				TrainingSessionArn:    ptr.String("__TrainingSessionArn__"),
+				TrainingSessionStatus: types.TrainingSessionStatus("Created"),
+				CreationTime:          ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				LastModifiedTime:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+			{
+				TrainingSessionArn:    ptr.String("__TrainingSessionArn__"),
+				TrainingSessionStatus: types.TrainingSessionStatus("Created"),
+				CreationTime:          ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				LastModifiedTime:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("ListTrainingSessions.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.ListTrainingSessions(context.Background(), &ListTrainingSessionsInput{
+		NextToken:          ptr.String("__NextToken__"),
+		MaxResults:         ptr.Int32(1),
+		CreationTimeAfter:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		CreationTimeBefore: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		NameContains:       ptr.String("__NameContains__"),
+		StatusEquals:       types.TrainingSessionStatus("Created"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "ListTrainingSessions.response", err)
 	}
 }
 
@@ -34589,6 +34922,50 @@ func TestCheckResponseSnapshot_Search(t *testing.T) {
 						},
 					},
 				},
+				HubContent: &types.HubContent{
+					HubContentName:               ptr.String("__HubContentName__"),
+					HubContentArn:                ptr.String("__HubContentArn__"),
+					HubContentVersion:            ptr.String("__HubContentVersion__"),
+					HubContentType:               types.HubContentType("Model"),
+					DocumentSchemaVersion:        ptr.String("__DocumentSchemaVersion__"),
+					HubName:                      ptr.String("__HubName__"),
+					HubArn:                       ptr.String("__HubArn__"),
+					HubContentDisplayName:        ptr.String("__HubContentDisplayName__"),
+					HubContentDescription:        ptr.String("__HubContentDescription__"),
+					HubContentMarkdown:           ptr.String("__HubContentMarkdown__"),
+					HubContentDocument:           ptr.String("__HubContentDocument__"),
+					SageMakerPublicHubContentArn: ptr.String("__SageMakerPublicHubContentArn__"),
+					ReferenceMinVersion:          ptr.String("__ReferenceMinVersion__"),
+					SupportStatus:                types.HubContentSupportStatus("Supported"),
+					HubContentSearchKeywords: []string{
+						"__Member__",
+						"__Member__",
+					},
+					HubContentDependencies: []types.HubContentDependency{
+						{
+							DependencyOriginPath: ptr.String("__DependencyOriginPath__"),
+							DependencyCopyPath:   ptr.String("__DependencyCopyPath__"),
+						},
+						{
+							DependencyOriginPath: ptr.String("__DependencyOriginPath__"),
+							DependencyCopyPath:   ptr.String("__DependencyCopyPath__"),
+						},
+					},
+					HubContentStatus: types.HubContentStatus("Available"),
+					FailureReason:    ptr.String("__FailureReason__"),
+					CreationTime:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					LastModifiedTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					Tags: []types.Tag{
+						{
+							Key:   ptr.String("__Key__"),
+							Value: ptr.String("__Value__"),
+						},
+						{
+							Key:   ptr.String("__Key__"),
+							Value: ptr.String("__Value__"),
+						},
+					},
+				},
 			},
 			{
 				TrainingJob: &types.TrainingJob{
@@ -39743,6 +40120,50 @@ func TestCheckResponseSnapshot_Search(t *testing.T) {
 						},
 					},
 				},
+				HubContent: &types.HubContent{
+					HubContentName:               ptr.String("__HubContentName__"),
+					HubContentArn:                ptr.String("__HubContentArn__"),
+					HubContentVersion:            ptr.String("__HubContentVersion__"),
+					HubContentType:               types.HubContentType("Model"),
+					DocumentSchemaVersion:        ptr.String("__DocumentSchemaVersion__"),
+					HubName:                      ptr.String("__HubName__"),
+					HubArn:                       ptr.String("__HubArn__"),
+					HubContentDisplayName:        ptr.String("__HubContentDisplayName__"),
+					HubContentDescription:        ptr.String("__HubContentDescription__"),
+					HubContentMarkdown:           ptr.String("__HubContentMarkdown__"),
+					HubContentDocument:           ptr.String("__HubContentDocument__"),
+					SageMakerPublicHubContentArn: ptr.String("__SageMakerPublicHubContentArn__"),
+					ReferenceMinVersion:          ptr.String("__ReferenceMinVersion__"),
+					SupportStatus:                types.HubContentSupportStatus("Supported"),
+					HubContentSearchKeywords: []string{
+						"__Member__",
+						"__Member__",
+					},
+					HubContentDependencies: []types.HubContentDependency{
+						{
+							DependencyOriginPath: ptr.String("__DependencyOriginPath__"),
+							DependencyCopyPath:   ptr.String("__DependencyCopyPath__"),
+						},
+						{
+							DependencyOriginPath: ptr.String("__DependencyOriginPath__"),
+							DependencyCopyPath:   ptr.String("__DependencyCopyPath__"),
+						},
+					},
+					HubContentStatus: types.HubContentStatus("Available"),
+					FailureReason:    ptr.String("__FailureReason__"),
+					CreationTime:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					LastModifiedTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					Tags: []types.Tag{
+						{
+							Key:   ptr.String("__Key__"),
+							Value: ptr.String("__Value__"),
+						},
+						{
+							Key:   ptr.String("__Key__"),
+							Value: ptr.String("__Value__"),
+						},
+					},
+				},
 			},
 		},
 		NextToken: ptr.String("__NextToken__"),
@@ -40690,6 +41111,27 @@ func TestCheckResponseSnapshot_StopTrainingJob(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_StopTrainingSession(t *testing.T) {
+	want := &StopTrainingSessionOutput{}
+	status, header, body, err := serdeRespReadSnapshot("StopTrainingSession.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.StopTrainingSession(context.Background(), &StopTrainingSessionInput{
+		TrainingSessionName: ptr.String("__TrainingSessionName__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "StopTrainingSession.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_StopTransformJob(t *testing.T) {
 	want := &StopTransformJobOutput{}
 	status, header, body, err := serdeRespReadSnapshot("StopTransformJob.response")
@@ -41306,6 +41748,12 @@ func TestCheckResponseSnapshot_UpdateCluster(t *testing.T) {
 			},
 			Slurm: &types.ClusterOrchestratorSlurmConfig{
 				SlurmConfigStrategy: types.ClusterSlurmConfigStrategy("Overwrite"),
+				AccountingDatabase: &types.ClusterAccountingDatabase{
+					Endpoint:  ptr.String("__Endpoint__"),
+					Port:      ptr.Int32(1),
+					Name:      ptr.String("__Name__"),
+					SecretArn: ptr.String("__SecretArn__"),
+				},
 			},
 		},
 	})

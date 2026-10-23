@@ -4,7 +4,9 @@ package pcs
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/pcs/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/pcs/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -42,6 +44,21 @@ type RegisterComputeNodeGroupInstanceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RegisterComputeNodeGroupInstanceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RegisterComputeNodeGroupInstanceRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RegisterComputeNodeGroupInstanceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BootstrapId != nil {
+		s.WriteString(schemas.RegisterComputeNodeGroupInstanceRequest_bootstrapId, *v.BootstrapId)
+	}
+	if v.ClusterIdentifier != nil {
+		s.WriteString(schemas.RegisterComputeNodeGroupInstanceRequest_clusterIdentifier, *v.ClusterIdentifier)
+	}
+}
+
 type RegisterComputeNodeGroupInstanceOutput struct {
 
 	// The list of endpoints available for interaction with the scheduler.
@@ -73,19 +90,83 @@ type RegisterComputeNodeGroupInstanceOutput struct {
 	// run when a compute node finishes bootstrapping or becomes ready to accept jobs.
 	NodeLifecycleActions *types.NodeLifecycleActions
 
+	// The scheduler version that the cluster is running. A compute node uses this
+	// value to run the matching scheduler version.
+	SchedulerVersion *string
+
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 
 	noSmithyDocumentSerde
 }
 
+func (v *RegisterComputeNodeGroupInstanceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RegisterComputeNodeGroupInstanceResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RegisterComputeNodeGroupInstanceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClusterName != nil {
+		s.WriteString(schemas.RegisterComputeNodeGroupInstanceResponse_clusterName, *v.ClusterName)
+	}
+	if v.ComputeNodeGroupId != nil {
+		s.WriteString(schemas.RegisterComputeNodeGroupInstanceResponse_computeNodeGroupId, *v.ComputeNodeGroupId)
+	}
+	if v.ComputeNodeGroupName != nil {
+		s.WriteString(schemas.RegisterComputeNodeGroupInstanceResponse_computeNodeGroupName, *v.ComputeNodeGroupName)
+	}
+	serializeEndpoints(s, schemas.RegisterComputeNodeGroupInstanceResponse_endpoints, v.Endpoints)
+	if v.NodeID != nil {
+		s.WriteString(schemas.RegisterComputeNodeGroupInstanceResponse_nodeID, *v.NodeID)
+	}
+	if v.NodeLifecycleActions != nil {
+		s.WriteStruct(schemas.RegisterComputeNodeGroupInstanceResponse_nodeLifecycleActions)
+		v.NodeLifecycleActions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SchedulerVersion != nil {
+		s.WriteString(schemas.RegisterComputeNodeGroupInstanceResponse_schedulerVersion, *v.SchedulerVersion)
+	}
+	if v.SharedSecret != nil {
+		s.WriteString(schemas.RegisterComputeNodeGroupInstanceResponse_sharedSecret, *v.SharedSecret)
+	}
+}
+func (v *RegisterComputeNodeGroupInstanceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RegisterComputeNodeGroupInstanceResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RegisterComputeNodeGroupInstanceResponse_clusterName:
+			v.ClusterName = new(string)
+			return d.ReadString(schemas.RegisterComputeNodeGroupInstanceResponse_clusterName, v.ClusterName)
+		case schemas.RegisterComputeNodeGroupInstanceResponse_computeNodeGroupId:
+			v.ComputeNodeGroupId = new(string)
+			return d.ReadString(schemas.RegisterComputeNodeGroupInstanceResponse_computeNodeGroupId, v.ComputeNodeGroupId)
+		case schemas.RegisterComputeNodeGroupInstanceResponse_computeNodeGroupName:
+			v.ComputeNodeGroupName = new(string)
+			return d.ReadString(schemas.RegisterComputeNodeGroupInstanceResponse_computeNodeGroupName, v.ComputeNodeGroupName)
+		case schemas.RegisterComputeNodeGroupInstanceResponse_endpoints:
+			return deserializeEndpoints(d, schemas.RegisterComputeNodeGroupInstanceResponse_endpoints, &v.Endpoints)
+		case schemas.RegisterComputeNodeGroupInstanceResponse_nodeID:
+			v.NodeID = new(string)
+			return d.ReadString(schemas.RegisterComputeNodeGroupInstanceResponse_nodeID, v.NodeID)
+		case schemas.RegisterComputeNodeGroupInstanceResponse_nodeLifecycleActions:
+			v.NodeLifecycleActions = &types.NodeLifecycleActions{}
+			return v.NodeLifecycleActions.Deserialize(d)
+		case schemas.RegisterComputeNodeGroupInstanceResponse_schedulerVersion:
+			v.SchedulerVersion = new(string)
+			return d.ReadString(schemas.RegisterComputeNodeGroupInstanceResponse_schedulerVersion, v.SchedulerVersion)
+		case schemas.RegisterComputeNodeGroupInstanceResponse_sharedSecret:
+			v.SharedSecret = new(string)
+			return d.ReadString(schemas.RegisterComputeNodeGroupInstanceResponse_sharedSecret, v.SharedSecret)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationRegisterComputeNodeGroupInstanceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpRegisterComputeNodeGroupInstance{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RegisterComputeNodeGroupInstance, schemas.RegisterComputeNodeGroupInstanceRequest, schemas.RegisterComputeNodeGroupInstanceResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpRegisterComputeNodeGroupInstance{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RegisterComputeNodeGroupInstance, schemas.RegisterComputeNodeGroupInstanceRequest, schemas.RegisterComputeNodeGroupInstanceResponse), output: &RegisterComputeNodeGroupInstanceOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

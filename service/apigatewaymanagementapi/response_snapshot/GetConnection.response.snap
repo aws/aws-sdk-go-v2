@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"connectedAt":"2000-01-01T00:00:00Z","identity":{"sourceIp":"__SourceIp__","userAgent":"__UserAgent__"},"lastActiveAt":"2000-01-01T00:00:00Z"}

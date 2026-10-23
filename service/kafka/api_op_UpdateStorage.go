@@ -4,7 +4,9 @@ package kafka
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/kafka/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/kafka/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -51,6 +53,32 @@ type UpdateStorageInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateStorageInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateStorageRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateStorageInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClusterArn != nil {
+		s.WriteString(schemas.UpdateStorageRequest_ClusterArn, *v.ClusterArn)
+	}
+	if v.CurrentVersion != nil {
+		s.WriteString(schemas.UpdateStorageRequest_CurrentVersion, *v.CurrentVersion)
+	}
+	if v.ProvisionedThroughput != nil {
+		s.WriteStruct(schemas.UpdateStorageRequest_ProvisionedThroughput)
+		v.ProvisionedThroughput.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.StorageMode != "" {
+		s.WriteString(schemas.UpdateStorageRequest_StorageMode, string(v.StorageMode))
+	}
+	if v.VolumeSizeGB != nil {
+		s.WriteInt32(schemas.UpdateStorageRequest_VolumeSizeGB, *v.VolumeSizeGB)
+	}
+}
+
 type UpdateStorageOutput struct {
 
 	// The Amazon Resource Name (ARN) of the cluster.
@@ -65,13 +93,38 @@ type UpdateStorageOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateStorageOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateStorageResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateStorageOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClusterArn != nil {
+		s.WriteString(schemas.UpdateStorageResponse_ClusterArn, *v.ClusterArn)
+	}
+	if v.ClusterOperationArn != nil {
+		s.WriteString(schemas.UpdateStorageResponse_ClusterOperationArn, *v.ClusterOperationArn)
+	}
+}
+func (v *UpdateStorageOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateStorageResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateStorageResponse_ClusterArn:
+			v.ClusterArn = new(string)
+			return d.ReadString(schemas.UpdateStorageResponse_ClusterArn, v.ClusterArn)
+		case schemas.UpdateStorageResponse_ClusterOperationArn:
+			v.ClusterOperationArn = new(string)
+			return d.ReadString(schemas.UpdateStorageResponse_ClusterOperationArn, v.ClusterOperationArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateStorageMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateStorage{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateStorage, schemas.UpdateStorageRequest, schemas.UpdateStorageResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateStorage{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateStorage, schemas.UpdateStorageRequest, schemas.UpdateStorageResponse), output: &UpdateStorageOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

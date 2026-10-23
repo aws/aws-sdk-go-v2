@@ -4,7 +4,9 @@ package sagemakerfeaturestoreruntime
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/sagemakerfeaturestoreruntime/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemakerfeaturestoreruntime/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -48,6 +50,21 @@ type BatchWriteRecordInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchWriteRecordInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchWriteRecordRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchWriteRecordInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeBatchWriteRecordEntries(s, schemas.BatchWriteRecordRequest_Entries, v.Entries)
+	if v.TtlDuration != nil {
+		s.WriteStruct(schemas.BatchWriteRecordRequest_TtlDuration)
+		v.TtlDuration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type BatchWriteRecordOutput struct {
 
 	// A list of errors that occurred when writing records in the batch.
@@ -66,13 +83,32 @@ type BatchWriteRecordOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchWriteRecordOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchWriteRecordResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchWriteRecordOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeBatchWriteRecordErrors(s, schemas.BatchWriteRecordResponse_Errors, v.Errors)
+	serializeUnprocessedBatchWriteRecordEntries(s, schemas.BatchWriteRecordResponse_UnprocessedEntries, v.UnprocessedEntries)
+}
+func (v *BatchWriteRecordOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchWriteRecordResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchWriteRecordResponse_Errors:
+			return deserializeBatchWriteRecordErrors(d, schemas.BatchWriteRecordResponse_Errors, &v.Errors)
+		case schemas.BatchWriteRecordResponse_UnprocessedEntries:
+			return deserializeUnprocessedBatchWriteRecordEntries(d, schemas.BatchWriteRecordResponse_UnprocessedEntries, &v.UnprocessedEntries)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationBatchWriteRecordMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpBatchWriteRecord{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchWriteRecord, schemas.BatchWriteRecordRequest, schemas.BatchWriteRecordResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpBatchWriteRecord{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchWriteRecord, schemas.BatchWriteRecordRequest, schemas.BatchWriteRecordResponse), output: &BatchWriteRecordOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

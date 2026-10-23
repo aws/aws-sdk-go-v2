@@ -1,0 +1,5 @@
+400
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: RekognitionService.StartMediaAnalysisJob
+
+{"__type":"InvalidManifestException","Code":"InvalidManifestException","Logref":"__Logref__","Message":"__Message__"}

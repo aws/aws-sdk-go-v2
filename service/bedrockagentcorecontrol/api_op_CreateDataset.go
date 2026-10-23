@@ -5,7 +5,9 @@ package bedrockagentcorecontrol
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -68,6 +70,32 @@ type CreateDatasetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateDatasetInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateDatasetRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateDatasetInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateDatasetRequest_clientToken, *v.ClientToken)
+	}
+	if v.DatasetName != nil {
+		s.WriteString(schemas.CreateDatasetRequest_datasetName, *v.DatasetName)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreateDatasetRequest_description, *v.Description)
+	}
+	if v.KmsKeyArn != nil {
+		s.WriteString(schemas.CreateDatasetRequest_kmsKeyArn, *v.KmsKeyArn)
+	}
+	if v.SchemaType != "" {
+		s.WriteString(schemas.CreateDatasetRequest_schemaType, string(v.SchemaType))
+	}
+	serializeDataSourceType(s, schemas.CreateDatasetRequest_source, v.Source)
+	serializeTagsMap(s, schemas.CreateDatasetRequest_tags, v.Tags)
+}
+
 type CreateDatasetOutput struct {
 
 	//  The timestamp when the dataset was created.
@@ -97,13 +125,54 @@ type CreateDatasetOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateDatasetOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateDatasetResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateDatasetOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.CreateDatasetResponse_createdAt, *v.CreatedAt)
+	}
+	if v.DatasetArn != nil {
+		s.WriteString(schemas.CreateDatasetResponse_datasetArn, *v.DatasetArn)
+	}
+	if v.DatasetId != nil {
+		s.WriteString(schemas.CreateDatasetResponse_datasetId, *v.DatasetId)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.CreateDatasetResponse_status, string(v.Status))
+	}
+}
+func (v *CreateDatasetOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateDatasetResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateDatasetResponse_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.CreateDatasetResponse_createdAt, v.CreatedAt)
+		case schemas.CreateDatasetResponse_datasetArn:
+			v.DatasetArn = new(string)
+			return d.ReadString(schemas.CreateDatasetResponse_datasetArn, v.DatasetArn)
+		case schemas.CreateDatasetResponse_datasetId:
+			v.DatasetId = new(string)
+			return d.ReadString(schemas.CreateDatasetResponse_datasetId, v.DatasetId)
+		case schemas.CreateDatasetResponse_status:
+			var ev string
+			if err := d.ReadString(schemas.CreateDatasetResponse_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.DatasetStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateDatasetMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateDataset{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateDataset, schemas.CreateDatasetRequest, schemas.CreateDatasetResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateDataset{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateDataset, schemas.CreateDatasetRequest, schemas.CreateDatasetResponse), output: &CreateDatasetOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

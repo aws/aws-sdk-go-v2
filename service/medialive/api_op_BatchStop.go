@@ -4,7 +4,9 @@ package medialive
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/medialive/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/medialive/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -36,6 +38,17 @@ type BatchStopInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchStopInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchStopRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchStopInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serialize__listOf__string(s, schemas.BatchStopRequest_ChannelIds, v.ChannelIds)
+	serialize__listOf__string(s, schemas.BatchStopRequest_MultiplexIds, v.MultiplexIds)
+}
+
 // Placeholder documentation for BatchStopResponse
 type BatchStopOutput struct {
 
@@ -51,13 +64,32 @@ type BatchStopOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchStopOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchStopResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchStopOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serialize__listOfBatchFailedResultModel(s, schemas.BatchStopResponse_Failed, v.Failed)
+	serialize__listOfBatchSuccessfulResultModel(s, schemas.BatchStopResponse_Successful, v.Successful)
+}
+func (v *BatchStopOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchStopResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchStopResponse_Failed:
+			return deserialize__listOfBatchFailedResultModel(d, schemas.BatchStopResponse_Failed, &v.Failed)
+		case schemas.BatchStopResponse_Successful:
+			return deserialize__listOfBatchSuccessfulResultModel(d, schemas.BatchStopResponse_Successful, &v.Successful)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationBatchStopMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpBatchStop{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchStop, schemas.BatchStopRequest, schemas.BatchStopResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpBatchStop{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchStop, schemas.BatchStopRequest, schemas.BatchStopResponse), output: &BatchStopOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

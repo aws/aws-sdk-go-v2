@@ -4,6 +4,8 @@ package mediaconnect
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/mediaconnect/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -43,6 +45,21 @@ type RemoveFlowVpcInterfaceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RemoveFlowVpcInterfaceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RemoveFlowVpcInterfaceRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RemoveFlowVpcInterfaceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FlowArn != nil {
+		s.WriteString(schemas.RemoveFlowVpcInterfaceRequest_FlowArn, *v.FlowArn)
+	}
+	if v.VpcInterfaceName != nil {
+		s.WriteString(schemas.RemoveFlowVpcInterfaceRequest_VpcInterfaceName, *v.VpcInterfaceName)
+	}
+}
+
 type RemoveFlowVpcInterfaceOutput struct {
 
 	//  The ARN of the flow that is associated with the VPC interface you removed.
@@ -61,13 +78,41 @@ type RemoveFlowVpcInterfaceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RemoveFlowVpcInterfaceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RemoveFlowVpcInterfaceResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RemoveFlowVpcInterfaceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FlowArn != nil {
+		s.WriteString(schemas.RemoveFlowVpcInterfaceResponse_FlowArn, *v.FlowArn)
+	}
+	serialize__listOfString(s, schemas.RemoveFlowVpcInterfaceResponse_NonDeletedNetworkInterfaceIds, v.NonDeletedNetworkInterfaceIds)
+	if v.VpcInterfaceName != nil {
+		s.WriteString(schemas.RemoveFlowVpcInterfaceResponse_VpcInterfaceName, *v.VpcInterfaceName)
+	}
+}
+func (v *RemoveFlowVpcInterfaceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RemoveFlowVpcInterfaceResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RemoveFlowVpcInterfaceResponse_FlowArn:
+			v.FlowArn = new(string)
+			return d.ReadString(schemas.RemoveFlowVpcInterfaceResponse_FlowArn, v.FlowArn)
+		case schemas.RemoveFlowVpcInterfaceResponse_NonDeletedNetworkInterfaceIds:
+			return deserialize__listOfString(d, schemas.RemoveFlowVpcInterfaceResponse_NonDeletedNetworkInterfaceIds, &v.NonDeletedNetworkInterfaceIds)
+		case schemas.RemoveFlowVpcInterfaceResponse_VpcInterfaceName:
+			v.VpcInterfaceName = new(string)
+			return d.ReadString(schemas.RemoveFlowVpcInterfaceResponse_VpcInterfaceName, v.VpcInterfaceName)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationRemoveFlowVpcInterfaceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpRemoveFlowVpcInterface{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RemoveFlowVpcInterface, schemas.RemoveFlowVpcInterfaceRequest, schemas.RemoveFlowVpcInterfaceResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpRemoveFlowVpcInterface{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RemoveFlowVpcInterface, schemas.RemoveFlowVpcInterfaceRequest, schemas.RemoveFlowVpcInterfaceResponse), output: &RemoveFlowVpcInterfaceOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

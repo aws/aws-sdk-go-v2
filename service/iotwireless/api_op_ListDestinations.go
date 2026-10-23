@@ -5,7 +5,9 @@ package iotwireless
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/iotwireless/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotwireless/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -37,6 +39,21 @@ type ListDestinationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListDestinationsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListDestinationsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListDestinationsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != 0 {
+		s.WriteInt32(schemas.ListDestinationsRequest_MaxResults, v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListDestinationsRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListDestinationsOutput struct {
 
 	// The list of destinations.
@@ -52,13 +69,35 @@ type ListDestinationsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListDestinationsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListDestinationsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListDestinationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDestinationList(s, schemas.ListDestinationsResponse_DestinationList, v.DestinationList)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListDestinationsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListDestinationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListDestinationsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListDestinationsResponse_DestinationList:
+			return deserializeDestinationList(d, schemas.ListDestinationsResponse_DestinationList, &v.DestinationList)
+		case schemas.ListDestinationsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListDestinationsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListDestinationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListDestinations{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDestinations, schemas.ListDestinationsRequest, schemas.ListDestinationsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListDestinations{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDestinations, schemas.ListDestinationsRequest, schemas.ListDestinationsResponse), output: &ListDestinationsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

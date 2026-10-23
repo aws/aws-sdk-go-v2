@@ -4,7 +4,9 @@ package ram
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/ram/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ram/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -92,6 +94,24 @@ type DisassociateResourceShareInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DisassociateResourceShareInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DisassociateResourceShareRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DisassociateResourceShareInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.DisassociateResourceShareRequest_clientToken, *v.ClientToken)
+	}
+	serializePrincipalArnOrIdList(s, schemas.DisassociateResourceShareRequest_principals, v.Principals)
+	serializeResourceArnList(s, schemas.DisassociateResourceShareRequest_resourceArns, v.ResourceArns)
+	if v.ResourceShareArn != nil {
+		s.WriteString(schemas.DisassociateResourceShareRequest_resourceShareArn, *v.ResourceShareArn)
+	}
+	serializeSourceArnOrAccountList(s, schemas.DisassociateResourceShareRequest_sources, v.Sources)
+}
+
 type DisassociateResourceShareOutput struct {
 
 	// The idempotency identifier associated with this request. If you want to repeat
@@ -110,13 +130,35 @@ type DisassociateResourceShareOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DisassociateResourceShareOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DisassociateResourceShareResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DisassociateResourceShareOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.DisassociateResourceShareResponse_clientToken, *v.ClientToken)
+	}
+	serializeResourceShareAssociationList(s, schemas.DisassociateResourceShareResponse_resourceShareAssociations, v.ResourceShareAssociations)
+}
+func (v *DisassociateResourceShareOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DisassociateResourceShareResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DisassociateResourceShareResponse_clientToken:
+			v.ClientToken = new(string)
+			return d.ReadString(schemas.DisassociateResourceShareResponse_clientToken, v.ClientToken)
+		case schemas.DisassociateResourceShareResponse_resourceShareAssociations:
+			return deserializeResourceShareAssociationList(d, schemas.DisassociateResourceShareResponse_resourceShareAssociations, &v.ResourceShareAssociations)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDisassociateResourceShareMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDisassociateResourceShare{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisassociateResourceShare, schemas.DisassociateResourceShareRequest, schemas.DisassociateResourceShareResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDisassociateResourceShare{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisassociateResourceShare, schemas.DisassociateResourceShareRequest, schemas.DisassociateResourceShareResponse), output: &DisassociateResourceShareOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package costexplorer
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/costexplorer/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/costexplorer/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -123,6 +125,37 @@ type GetUsageForecastInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetUsageForecastInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetUsageForecastRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetUsageForecastInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BillingViewArn != nil {
+		s.WriteString(schemas.GetUsageForecastRequest_BillingViewArn, *v.BillingViewArn)
+	}
+	if v.Filter != nil {
+		s.WriteStruct(schemas.GetUsageForecastRequest_Filter)
+		v.Filter.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Granularity != "" {
+		s.WriteString(schemas.GetUsageForecastRequest_Granularity, string(v.Granularity))
+	}
+	if v.Metric != "" {
+		s.WriteString(schemas.GetUsageForecastRequest_Metric, string(v.Metric))
+	}
+	if v.PredictionIntervalLevel != nil {
+		s.WriteInt32(schemas.GetUsageForecastRequest_PredictionIntervalLevel, *v.PredictionIntervalLevel)
+	}
+	if v.TimePeriod != nil {
+		s.WriteStruct(schemas.GetUsageForecastRequest_TimePeriod)
+		v.TimePeriod.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type GetUsageForecastOutput struct {
 
 	// The forecasts for your query, in order. For DAILY forecasts, this is a list of
@@ -138,13 +171,37 @@ type GetUsageForecastOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetUsageForecastOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetUsageForecastResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetUsageForecastOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeForecastResultsByTime(s, schemas.GetUsageForecastResponse_ForecastResultsByTime, v.ForecastResultsByTime)
+	if v.Total != nil {
+		s.WriteStruct(schemas.GetUsageForecastResponse_Total)
+		v.Total.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetUsageForecastOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetUsageForecastResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetUsageForecastResponse_ForecastResultsByTime:
+			return deserializeForecastResultsByTime(d, schemas.GetUsageForecastResponse_ForecastResultsByTime, &v.ForecastResultsByTime)
+		case schemas.GetUsageForecastResponse_Total:
+			v.Total = &types.MetricValue{}
+			return v.Total.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetUsageForecastMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetUsageForecast{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetUsageForecast, schemas.GetUsageForecastRequest, schemas.GetUsageForecastResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetUsageForecast{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetUsageForecast, schemas.GetUsageForecastRequest, schemas.GetUsageForecastResponse), output: &GetUsageForecastOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

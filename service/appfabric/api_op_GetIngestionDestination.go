@@ -4,7 +4,9 @@ package appfabric
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/appfabric/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/appfabric/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -47,6 +49,24 @@ type GetIngestionDestinationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetIngestionDestinationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetIngestionDestinationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetIngestionDestinationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AppBundleIdentifier != nil {
+		s.WriteString(schemas.GetIngestionDestinationRequest_appBundleIdentifier, *v.AppBundleIdentifier)
+	}
+	if v.IngestionDestinationIdentifier != nil {
+		s.WriteString(schemas.GetIngestionDestinationRequest_ingestionDestinationIdentifier, *v.IngestionDestinationIdentifier)
+	}
+	if v.IngestionIdentifier != nil {
+		s.WriteString(schemas.GetIngestionDestinationRequest_ingestionIdentifier, *v.IngestionIdentifier)
+	}
+}
+
 type GetIngestionDestinationOutput struct {
 
 	// Contains information about an ingestion destination.
@@ -60,13 +80,34 @@ type GetIngestionDestinationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetIngestionDestinationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetIngestionDestinationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetIngestionDestinationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IngestionDestination != nil {
+		s.WriteStruct(schemas.GetIngestionDestinationResponse_ingestionDestination)
+		v.IngestionDestination.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetIngestionDestinationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetIngestionDestinationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetIngestionDestinationResponse_ingestionDestination:
+			v.IngestionDestination = &types.IngestionDestination{}
+			return v.IngestionDestination.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetIngestionDestinationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetIngestionDestination{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetIngestionDestination, schemas.GetIngestionDestinationRequest, schemas.GetIngestionDestinationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetIngestionDestination{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetIngestionDestination, schemas.GetIngestionDestinationRequest, schemas.GetIngestionDestinationResponse), output: &GetIngestionDestinationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

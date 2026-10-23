@@ -4,6 +4,8 @@ package mq
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/mq/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -33,6 +35,18 @@ type DeleteBrokerInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteBrokerInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteBrokerRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteBrokerInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BrokerId != nil {
+		s.WriteString(schemas.DeleteBrokerRequest_BrokerId, *v.BrokerId)
+	}
+}
+
 type DeleteBrokerOutput struct {
 
 	// The unique ID that Amazon MQ generates for the broker.
@@ -44,13 +58,32 @@ type DeleteBrokerOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteBrokerOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteBrokerResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteBrokerOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BrokerId != nil {
+		s.WriteString(schemas.DeleteBrokerResponse_BrokerId, *v.BrokerId)
+	}
+}
+func (v *DeleteBrokerOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteBrokerResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteBrokerResponse_BrokerId:
+			v.BrokerId = new(string)
+			return d.ReadString(schemas.DeleteBrokerResponse_BrokerId, v.BrokerId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteBrokerMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteBroker{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteBroker, schemas.DeleteBrokerRequest, schemas.DeleteBrokerResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteBroker{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteBroker, schemas.DeleteBrokerRequest, schemas.DeleteBrokerResponse), output: &DeleteBrokerOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

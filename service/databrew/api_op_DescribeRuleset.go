@@ -4,7 +4,9 @@ package databrew
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/databrew/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/databrew/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -33,6 +35,18 @@ type DescribeRulesetInput struct {
 	Name *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DescribeRulesetInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeRulesetRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeRulesetInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.DescribeRulesetRequest_Name, *v.Name)
+	}
 }
 
 type DescribeRulesetOutput struct {
@@ -77,13 +91,80 @@ type DescribeRulesetOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeRulesetOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeRulesetResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeRulesetOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreateDate != nil {
+		s.WriteTime(schemas.DescribeRulesetResponse_CreateDate, *v.CreateDate)
+	}
+	if v.CreatedBy != nil {
+		s.WriteString(schemas.DescribeRulesetResponse_CreatedBy, *v.CreatedBy)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.DescribeRulesetResponse_Description, *v.Description)
+	}
+	if v.LastModifiedBy != nil {
+		s.WriteString(schemas.DescribeRulesetResponse_LastModifiedBy, *v.LastModifiedBy)
+	}
+	if v.LastModifiedDate != nil {
+		s.WriteTime(schemas.DescribeRulesetResponse_LastModifiedDate, *v.LastModifiedDate)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.DescribeRulesetResponse_Name, *v.Name)
+	}
+	if v.ResourceArn != nil {
+		s.WriteString(schemas.DescribeRulesetResponse_ResourceArn, *v.ResourceArn)
+	}
+	serializeRuleList(s, schemas.DescribeRulesetResponse_Rules, v.Rules)
+	serializeTagMap(s, schemas.DescribeRulesetResponse_Tags, v.Tags)
+	if v.TargetArn != nil {
+		s.WriteString(schemas.DescribeRulesetResponse_TargetArn, *v.TargetArn)
+	}
+}
+func (v *DescribeRulesetOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeRulesetResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeRulesetResponse_CreateDate:
+			v.CreateDate = new(time.Time)
+			return d.ReadTime(schemas.DescribeRulesetResponse_CreateDate, v.CreateDate)
+		case schemas.DescribeRulesetResponse_CreatedBy:
+			v.CreatedBy = new(string)
+			return d.ReadString(schemas.DescribeRulesetResponse_CreatedBy, v.CreatedBy)
+		case schemas.DescribeRulesetResponse_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.DescribeRulesetResponse_Description, v.Description)
+		case schemas.DescribeRulesetResponse_LastModifiedBy:
+			v.LastModifiedBy = new(string)
+			return d.ReadString(schemas.DescribeRulesetResponse_LastModifiedBy, v.LastModifiedBy)
+		case schemas.DescribeRulesetResponse_LastModifiedDate:
+			v.LastModifiedDate = new(time.Time)
+			return d.ReadTime(schemas.DescribeRulesetResponse_LastModifiedDate, v.LastModifiedDate)
+		case schemas.DescribeRulesetResponse_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.DescribeRulesetResponse_Name, v.Name)
+		case schemas.DescribeRulesetResponse_ResourceArn:
+			v.ResourceArn = new(string)
+			return d.ReadString(schemas.DescribeRulesetResponse_ResourceArn, v.ResourceArn)
+		case schemas.DescribeRulesetResponse_Rules:
+			return deserializeRuleList(d, schemas.DescribeRulesetResponse_Rules, &v.Rules)
+		case schemas.DescribeRulesetResponse_Tags:
+			return deserializeTagMap(d, schemas.DescribeRulesetResponse_Tags, &v.Tags)
+		case schemas.DescribeRulesetResponse_TargetArn:
+			v.TargetArn = new(string)
+			return d.ReadString(schemas.DescribeRulesetResponse_TargetArn, v.TargetArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeRulesetMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeRuleset{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeRuleset, schemas.DescribeRulesetRequest, schemas.DescribeRulesetResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeRuleset{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeRuleset, schemas.DescribeRulesetRequest, schemas.DescribeRulesetResponse), output: &DescribeRulesetOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

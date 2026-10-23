@@ -69,6 +69,9 @@ type AgenticRetrieveStreamInput struct {
 	// Policy configuration for guardrails and content filtering.
 	PolicyConfiguration *types.AgenticRetrievePolicyConfiguration
 
+	// A retrieval instruction to apply to this request.
+	RetrievalInstructionConfiguration *types.AgenticRetrieveInstructionConfiguration
+
 	// Contains information about the user making the request. This is used for access
 	// control filtering to ensure that retrieval results only include documents the
 	// user is authorized to access.
@@ -104,6 +107,11 @@ func (v *AgenticRetrieveStreamInput) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.PolicyConfiguration != nil {
 		s.WriteStruct(schemas.AgenticRetrieveStreamRequest_policyConfiguration)
 		v.PolicyConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RetrievalInstructionConfiguration != nil {
+		s.WriteStruct(schemas.AgenticRetrieveStreamRequest_retrievalInstructionConfiguration)
+		v.RetrievalInstructionConfiguration.SerializeMembers(s)
 		s.CloseStruct()
 	}
 	serializeAgenticRetrievers(s, schemas.AgenticRetrieveStreamRequest_retrievers, v.Retrievers)

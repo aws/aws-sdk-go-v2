@@ -4,7 +4,9 @@ package glue
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/glue/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/glue/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -33,6 +35,18 @@ type DeleteIntegrationInput struct {
 	IntegrationIdentifier *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DeleteIntegrationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteIntegrationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteIntegrationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IntegrationIdentifier != nil {
+		s.WriteString(schemas.DeleteIntegrationRequest_IntegrationIdentifier, *v.IntegrationIdentifier)
+	}
 }
 
 type DeleteIntegrationOutput struct {
@@ -108,13 +122,93 @@ type DeleteIntegrationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteIntegrationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteIntegrationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteIntegrationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeIntegrationAdditionalEncryptionContextMap(s, schemas.DeleteIntegrationResponse_AdditionalEncryptionContext, v.AdditionalEncryptionContext)
+	if v.CreateTime != nil {
+		s.WriteTime(schemas.DeleteIntegrationResponse_CreateTime, *v.CreateTime)
+	}
+	if v.DataFilter != nil {
+		s.WriteString(schemas.DeleteIntegrationResponse_DataFilter, *v.DataFilter)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.DeleteIntegrationResponse_Description, *v.Description)
+	}
+	serializeIntegrationErrorList(s, schemas.DeleteIntegrationResponse_Errors, v.Errors)
+	if v.IntegrationArn != nil {
+		s.WriteString(schemas.DeleteIntegrationResponse_IntegrationArn, *v.IntegrationArn)
+	}
+	if v.IntegrationName != nil {
+		s.WriteString(schemas.DeleteIntegrationResponse_IntegrationName, *v.IntegrationName)
+	}
+	if v.KmsKeyId != nil {
+		s.WriteString(schemas.DeleteIntegrationResponse_KmsKeyId, *v.KmsKeyId)
+	}
+	if v.SourceArn != nil {
+		s.WriteString(schemas.DeleteIntegrationResponse_SourceArn, *v.SourceArn)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.DeleteIntegrationResponse_Status, string(v.Status))
+	}
+	serializeIntegrationTagsList(s, schemas.DeleteIntegrationResponse_Tags, v.Tags)
+	if v.TargetArn != nil {
+		s.WriteString(schemas.DeleteIntegrationResponse_TargetArn, *v.TargetArn)
+	}
+}
+func (v *DeleteIntegrationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteIntegrationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteIntegrationResponse_AdditionalEncryptionContext:
+			return deserializeIntegrationAdditionalEncryptionContextMap(d, schemas.DeleteIntegrationResponse_AdditionalEncryptionContext, &v.AdditionalEncryptionContext)
+		case schemas.DeleteIntegrationResponse_CreateTime:
+			v.CreateTime = new(time.Time)
+			return d.ReadTime(schemas.DeleteIntegrationResponse_CreateTime, v.CreateTime)
+		case schemas.DeleteIntegrationResponse_DataFilter:
+			v.DataFilter = new(string)
+			return d.ReadString(schemas.DeleteIntegrationResponse_DataFilter, v.DataFilter)
+		case schemas.DeleteIntegrationResponse_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.DeleteIntegrationResponse_Description, v.Description)
+		case schemas.DeleteIntegrationResponse_Errors:
+			return deserializeIntegrationErrorList(d, schemas.DeleteIntegrationResponse_Errors, &v.Errors)
+		case schemas.DeleteIntegrationResponse_IntegrationArn:
+			v.IntegrationArn = new(string)
+			return d.ReadString(schemas.DeleteIntegrationResponse_IntegrationArn, v.IntegrationArn)
+		case schemas.DeleteIntegrationResponse_IntegrationName:
+			v.IntegrationName = new(string)
+			return d.ReadString(schemas.DeleteIntegrationResponse_IntegrationName, v.IntegrationName)
+		case schemas.DeleteIntegrationResponse_KmsKeyId:
+			v.KmsKeyId = new(string)
+			return d.ReadString(schemas.DeleteIntegrationResponse_KmsKeyId, v.KmsKeyId)
+		case schemas.DeleteIntegrationResponse_SourceArn:
+			v.SourceArn = new(string)
+			return d.ReadString(schemas.DeleteIntegrationResponse_SourceArn, v.SourceArn)
+		case schemas.DeleteIntegrationResponse_Status:
+			var ev string
+			if err := d.ReadString(schemas.DeleteIntegrationResponse_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.IntegrationStatus(ev)
+			return nil
+		case schemas.DeleteIntegrationResponse_Tags:
+			return deserializeIntegrationTagsList(d, schemas.DeleteIntegrationResponse_Tags, &v.Tags)
+		case schemas.DeleteIntegrationResponse_TargetArn:
+			v.TargetArn = new(string)
+			return d.ReadString(schemas.DeleteIntegrationResponse_TargetArn, v.TargetArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteIntegrationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteIntegration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteIntegration, schemas.DeleteIntegrationRequest, schemas.DeleteIntegrationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeleteIntegration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteIntegration, schemas.DeleteIntegrationRequest, schemas.DeleteIntegrationResponse), output: &DeleteIntegrationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

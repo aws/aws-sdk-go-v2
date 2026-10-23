@@ -5,7 +5,9 @@ package odb
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/odb/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/odb/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -44,6 +46,24 @@ type ListAutonomousDatabasePeersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAutonomousDatabasePeersInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAutonomousDatabasePeersInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAutonomousDatabasePeersInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AutonomousDatabaseId != nil {
+		s.WriteString(schemas.ListAutonomousDatabasePeersInput_autonomousDatabaseId, *v.AutonomousDatabaseId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListAutonomousDatabasePeersInput_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAutonomousDatabasePeersInput_nextToken, *v.NextToken)
+	}
+}
+
 type ListAutonomousDatabasePeersOutput struct {
 
 	// The list of peer databases for the Autonomous Database.
@@ -61,13 +81,35 @@ type ListAutonomousDatabasePeersOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAutonomousDatabasePeersOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAutonomousDatabasePeersOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAutonomousDatabasePeersOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAutonomousDatabasePeerList(s, schemas.ListAutonomousDatabasePeersOutput_autonomousDatabasePeers, v.AutonomousDatabasePeers)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAutonomousDatabasePeersOutput_nextToken, *v.NextToken)
+	}
+}
+func (v *ListAutonomousDatabasePeersOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListAutonomousDatabasePeersOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListAutonomousDatabasePeersOutput_autonomousDatabasePeers:
+			return deserializeAutonomousDatabasePeerList(d, schemas.ListAutonomousDatabasePeersOutput_autonomousDatabasePeers, &v.AutonomousDatabasePeers)
+		case schemas.ListAutonomousDatabasePeersOutput_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListAutonomousDatabasePeersOutput_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListAutonomousDatabasePeersMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpListAutonomousDatabasePeers{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAutonomousDatabasePeers, schemas.ListAutonomousDatabasePeersInput, schemas.ListAutonomousDatabasePeersOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpListAutonomousDatabasePeers{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAutonomousDatabasePeers, schemas.ListAutonomousDatabasePeersInput, schemas.ListAutonomousDatabasePeersOutput), output: &ListAutonomousDatabasePeersOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

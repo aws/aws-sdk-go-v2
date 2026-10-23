@@ -881,20 +881,21 @@ type StackAttribute string
 
 // Enum values for StackAttribute
 const (
-	StackAttributeStorageConnectors           StackAttribute = "STORAGE_CONNECTORS"
-	StackAttributeStorageConnectorHomefolders StackAttribute = "STORAGE_CONNECTOR_HOMEFOLDERS"
-	StackAttributeStorageConnectorGoogleDrive StackAttribute = "STORAGE_CONNECTOR_GOOGLE_DRIVE"
-	StackAttributeStorageConnectorOneDrive    StackAttribute = "STORAGE_CONNECTOR_ONE_DRIVE"
-	StackAttributeRedirectUrl                 StackAttribute = "REDIRECT_URL"
-	StackAttributeFeedbackUrl                 StackAttribute = "FEEDBACK_URL"
-	StackAttributeThemeName                   StackAttribute = "THEME_NAME"
-	StackAttributeUserSettings                StackAttribute = "USER_SETTINGS"
-	StackAttributeEmbedHostDomains            StackAttribute = "EMBED_HOST_DOMAINS"
-	StackAttributeIamRoleArn                  StackAttribute = "IAM_ROLE_ARN"
-	StackAttributeAccessEndpoints             StackAttribute = "ACCESS_ENDPOINTS"
-	StackAttributeStreamingExperienceSettings StackAttribute = "STREAMING_EXPERIENCE_SETTINGS"
-	StackAttributeContentRedirection          StackAttribute = "CONTENT_REDIRECTION"
-	StackAttributeAgentAccessConfig           StackAttribute = "AGENT_ACCESS_CONFIG"
+	StackAttributeStorageConnectors              StackAttribute = "STORAGE_CONNECTORS"
+	StackAttributeStorageConnectorHomefolders    StackAttribute = "STORAGE_CONNECTOR_HOMEFOLDERS"
+	StackAttributeStorageConnectorGoogleDrive    StackAttribute = "STORAGE_CONNECTOR_GOOGLE_DRIVE"
+	StackAttributeStorageConnectorOneDrive       StackAttribute = "STORAGE_CONNECTOR_ONE_DRIVE"
+	StackAttributeRedirectUrl                    StackAttribute = "REDIRECT_URL"
+	StackAttributeFeedbackUrl                    StackAttribute = "FEEDBACK_URL"
+	StackAttributeThemeName                      StackAttribute = "THEME_NAME"
+	StackAttributeUserSettings                   StackAttribute = "USER_SETTINGS"
+	StackAttributeEmbedHostDomains               StackAttribute = "EMBED_HOST_DOMAINS"
+	StackAttributeIamRoleArn                     StackAttribute = "IAM_ROLE_ARN"
+	StackAttributeAccessEndpoints                StackAttribute = "ACCESS_ENDPOINTS"
+	StackAttributeStreamingExperienceSettings    StackAttribute = "STREAMING_EXPERIENCE_SETTINGS"
+	StackAttributeContentRedirection             StackAttribute = "CONTENT_REDIRECTION"
+	StackAttributeAgentAccessConfig              StackAttribute = "AGENT_ACCESS_CONFIG"
+	StackAttributeStorageConnectorAuthentication StackAttribute = "STORAGE_CONNECTOR_AUTHENTICATION"
 )
 
 // Values returns all known values for StackAttribute. Note that this can be
@@ -917,6 +918,7 @@ func (StackAttribute) Values() []StackAttribute {
 		"STREAMING_EXPERIENCE_SETTINGS",
 		"CONTENT_REDIRECTION",
 		"AGENT_ACCESS_CONFIG",
+		"STORAGE_CONNECTOR_AUTHENTICATION",
 	}
 }
 
@@ -936,6 +938,26 @@ func (StackErrorCode) Values() []StackErrorCode {
 	return []StackErrorCode{
 		"STORAGE_CONNECTOR_ERROR",
 		"INTERNAL_SERVICE_ERROR",
+	}
+}
+
+type StorageConnectorAuthentication string
+
+// Enum values for StorageConnectorAuthentication
+const (
+	StorageConnectorAuthenticationForceReauthentication StorageConnectorAuthentication = "FORCE_REAUTHENTICATION"
+	StorageConnectorAuthenticationReuseCredentials      StorageConnectorAuthentication = "REUSE_CREDENTIALS"
+)
+
+// Values returns all known values for StorageConnectorAuthentication. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (StorageConnectorAuthentication) Values() []StorageConnectorAuthentication {
+	return []StorageConnectorAuthentication{
+		"FORCE_REAUTHENTICATION",
+		"REUSE_CREDENTIALS",
 	}
 }
 

@@ -4,6 +4,8 @@ package customerprofiles
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/customerprofiles/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -38,6 +40,21 @@ type StartUploadJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartUploadJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartUploadJobRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartUploadJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DomainName != nil {
+		s.WriteString(schemas.StartUploadJobRequest_DomainName, *v.DomainName)
+	}
+	if v.JobId != nil {
+		s.WriteString(schemas.StartUploadJobRequest_JobId, *v.JobId)
+	}
+}
+
 type StartUploadJobOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -45,13 +62,26 @@ type StartUploadJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartUploadJobOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartUploadJobResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartUploadJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *StartUploadJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartUploadJobResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartUploadJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpStartUploadJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartUploadJob, schemas.StartUploadJobRequest, schemas.StartUploadJobResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStartUploadJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartUploadJob, schemas.StartUploadJobRequest, schemas.StartUploadJobResponse), output: &StartUploadJobOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

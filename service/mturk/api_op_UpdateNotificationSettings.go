@@ -4,7 +4,9 @@ package mturk
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/mturk/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/mturk/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -54,6 +56,26 @@ type UpdateNotificationSettingsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateNotificationSettingsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateNotificationSettingsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateNotificationSettingsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Active != nil {
+		s.WriteBool(schemas.UpdateNotificationSettingsRequest_Active, *v.Active)
+	}
+	if v.HITTypeId != nil {
+		s.WriteString(schemas.UpdateNotificationSettingsRequest_HITTypeId, *v.HITTypeId)
+	}
+	if v.Notification != nil {
+		s.WriteStruct(schemas.UpdateNotificationSettingsRequest_Notification)
+		v.Notification.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type UpdateNotificationSettingsOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -61,13 +83,26 @@ type UpdateNotificationSettingsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateNotificationSettingsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateNotificationSettingsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateNotificationSettingsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *UpdateNotificationSettingsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateNotificationSettingsResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateNotificationSettingsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateNotificationSettings{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateNotificationSettings, schemas.UpdateNotificationSettingsRequest, schemas.UpdateNotificationSettingsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateNotificationSettings{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateNotificationSettings, schemas.UpdateNotificationSettingsRequest, schemas.UpdateNotificationSettingsResponse), output: &UpdateNotificationSettingsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

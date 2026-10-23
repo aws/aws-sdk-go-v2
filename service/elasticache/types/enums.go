@@ -145,6 +145,25 @@ func (ClusterMode) Values() []ClusterMode {
 	}
 }
 
+type ConnectionType string
+
+// Enum values for ConnectionType
+const (
+	ConnectionTypeVpc    ConnectionType = "vpc"
+	ConnectionTypePublic ConnectionType = "public"
+)
+
+// Values returns all known values for ConnectionType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ConnectionType) Values() []ConnectionType {
+	return []ConnectionType{
+		"vpc",
+		"public",
+	}
+}
+
 type DataStorageUnit string
 
 // Enum values for DataStorageUnit
@@ -606,6 +625,25 @@ func (StorageEncryptionType) Values() []StorageEncryptionType {
 		"none",
 		"sse-elasticache",
 		"sse-kms",
+	}
+}
+
+type TlsMode string
+
+// Enum values for TlsMode
+const (
+	TlsModeNone     TlsMode = "none"
+	TlsModeVerifyCa TlsMode = "verify-ca"
+)
+
+// Values returns all known values for TlsMode. Note that this can be expanded in
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (TlsMode) Values() []TlsMode {
+	return []TlsMode{
+		"none",
+		"verify-ca",
 	}
 }
 

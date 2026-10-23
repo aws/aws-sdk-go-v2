@@ -4,6 +4,8 @@ package lambdamicrovms
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/lambdamicrovms/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -34,6 +36,18 @@ type ResumeMicrovmInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ResumeMicrovmInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ResumeMicrovmRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ResumeMicrovmInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MicrovmIdentifier != nil {
+		s.WriteString(schemas.ResumeMicrovmRequest_microvmIdentifier, *v.MicrovmIdentifier)
+	}
+}
+
 type ResumeMicrovmOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -41,13 +55,26 @@ type ResumeMicrovmOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ResumeMicrovmOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ResumeMicrovmResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ResumeMicrovmOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *ResumeMicrovmOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ResumeMicrovmResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationResumeMicrovmMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpResumeMicrovm{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ResumeMicrovm, schemas.ResumeMicrovmRequest, schemas.ResumeMicrovmResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpResumeMicrovm{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ResumeMicrovm, schemas.ResumeMicrovmRequest, schemas.ResumeMicrovmResponse), output: &ResumeMicrovmOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

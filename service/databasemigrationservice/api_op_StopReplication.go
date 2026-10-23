@@ -4,7 +4,9 @@ package databasemigrationservice
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/databasemigrationservice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/databasemigrationservice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -36,6 +38,18 @@ type StopReplicationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StopReplicationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StopReplicationMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StopReplicationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ReplicationConfigArn != nil {
+		s.WriteString(schemas.StopReplicationMessage_ReplicationConfigArn, *v.ReplicationConfigArn)
+	}
+}
+
 type StopReplicationOutput struct {
 
 	// The replication that DMS stopped.
@@ -47,13 +61,34 @@ type StopReplicationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StopReplicationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StopReplicationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StopReplicationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Replication != nil {
+		s.WriteStruct(schemas.StopReplicationResponse_Replication)
+		v.Replication.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *StopReplicationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StopReplicationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StopReplicationResponse_Replication:
+			v.Replication = &types.Replication{}
+			return v.Replication.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStopReplicationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStopReplication{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StopReplication, schemas.StopReplicationMessage, schemas.StopReplicationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpStopReplication{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StopReplication, schemas.StopReplicationMessage, schemas.StopReplicationResponse), output: &StopReplicationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package odb
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/odb/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/odb/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -34,6 +36,18 @@ type GetCloudVmClusterInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetCloudVmClusterInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetCloudVmClusterInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetCloudVmClusterInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CloudVmClusterId != nil {
+		s.WriteString(schemas.GetCloudVmClusterInput_cloudVmClusterId, *v.CloudVmClusterId)
+	}
+}
+
 type GetCloudVmClusterOutput struct {
 
 	// The VM cluster.
@@ -45,13 +59,34 @@ type GetCloudVmClusterOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetCloudVmClusterOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetCloudVmClusterOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetCloudVmClusterOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CloudVmCluster != nil {
+		s.WriteStruct(schemas.GetCloudVmClusterOutput_cloudVmCluster)
+		v.CloudVmCluster.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetCloudVmClusterOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetCloudVmClusterOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetCloudVmClusterOutput_cloudVmCluster:
+			v.CloudVmCluster = &types.CloudVmCluster{}
+			return v.CloudVmCluster.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetCloudVmClusterMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpGetCloudVmCluster{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetCloudVmCluster, schemas.GetCloudVmClusterInput, schemas.GetCloudVmClusterOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpGetCloudVmCluster{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetCloudVmCluster, schemas.GetCloudVmClusterInput, schemas.GetCloudVmClusterOutput), output: &GetCloudVmClusterOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

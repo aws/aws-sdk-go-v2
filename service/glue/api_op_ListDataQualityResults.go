@@ -5,7 +5,9 @@ package glue
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/glue/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/glue/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,26 @@ type ListDataQualityResultsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListDataQualityResultsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListDataQualityResultsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListDataQualityResultsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Filter != nil {
+		s.WriteStruct(schemas.ListDataQualityResultsRequest_Filter)
+		v.Filter.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListDataQualityResultsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListDataQualityResultsRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListDataQualityResultsOutput struct {
 
 	// A list of DataQualityResultDescription objects.
@@ -55,13 +77,35 @@ type ListDataQualityResultsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListDataQualityResultsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListDataQualityResultsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListDataQualityResultsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListDataQualityResultsResponse_NextToken, *v.NextToken)
+	}
+	serializeDataQualityResultDescriptionList(s, schemas.ListDataQualityResultsResponse_Results, v.Results)
+}
+func (v *ListDataQualityResultsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListDataQualityResultsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListDataQualityResultsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListDataQualityResultsResponse_NextToken, v.NextToken)
+		case schemas.ListDataQualityResultsResponse_Results:
+			return deserializeDataQualityResultDescriptionList(d, schemas.ListDataQualityResultsResponse_Results, &v.Results)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListDataQualityResultsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListDataQualityResults{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDataQualityResults, schemas.ListDataQualityResultsRequest, schemas.ListDataQualityResultsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListDataQualityResults{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDataQualityResults, schemas.ListDataQualityResultsRequest, schemas.ListDataQualityResultsResponse), output: &ListDataQualityResultsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

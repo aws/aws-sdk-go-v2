@@ -4,7 +4,9 @@ package ram
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/ram/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ram/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -52,6 +54,21 @@ type RejectResourceShareInvitationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RejectResourceShareInvitationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RejectResourceShareInvitationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RejectResourceShareInvitationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.RejectResourceShareInvitationRequest_clientToken, *v.ClientToken)
+	}
+	if v.ResourceShareInvitationArn != nil {
+		s.WriteString(schemas.RejectResourceShareInvitationRequest_resourceShareInvitationArn, *v.ResourceShareInvitationArn)
+	}
+}
+
 type RejectResourceShareInvitationOutput struct {
 
 	// The idempotency identifier associated with this request. If you want to repeat
@@ -69,13 +86,40 @@ type RejectResourceShareInvitationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RejectResourceShareInvitationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RejectResourceShareInvitationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RejectResourceShareInvitationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.RejectResourceShareInvitationResponse_clientToken, *v.ClientToken)
+	}
+	if v.ResourceShareInvitation != nil {
+		s.WriteStruct(schemas.RejectResourceShareInvitationResponse_resourceShareInvitation)
+		v.ResourceShareInvitation.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *RejectResourceShareInvitationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RejectResourceShareInvitationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RejectResourceShareInvitationResponse_clientToken:
+			v.ClientToken = new(string)
+			return d.ReadString(schemas.RejectResourceShareInvitationResponse_clientToken, v.ClientToken)
+		case schemas.RejectResourceShareInvitationResponse_resourceShareInvitation:
+			v.ResourceShareInvitation = &types.ResourceShareInvitation{}
+			return v.ResourceShareInvitation.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationRejectResourceShareInvitationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpRejectResourceShareInvitation{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RejectResourceShareInvitation, schemas.RejectResourceShareInvitationRequest, schemas.RejectResourceShareInvitationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpRejectResourceShareInvitation{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RejectResourceShareInvitation, schemas.RejectResourceShareInvitationRequest, schemas.RejectResourceShareInvitationResponse), output: &RejectResourceShareInvitationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

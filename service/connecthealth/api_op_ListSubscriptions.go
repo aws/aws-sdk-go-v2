@@ -5,7 +5,9 @@ package connecthealth
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/connecthealth/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connecthealth/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -41,6 +43,24 @@ type ListSubscriptionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListSubscriptionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListSubscriptionsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListSubscriptionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DomainId != nil {
+		s.WriteString(schemas.ListSubscriptionsInput_domainId, *v.DomainId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListSubscriptionsInput_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListSubscriptionsInput_nextToken, *v.NextToken)
+	}
+}
+
 type ListSubscriptionsOutput struct {
 
 	// List of Subscriptions.
@@ -57,13 +77,35 @@ type ListSubscriptionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListSubscriptionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListSubscriptionsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListSubscriptionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListSubscriptionsOutput_nextToken, *v.NextToken)
+	}
+	serializeSubscriptionList(s, schemas.ListSubscriptionsOutput_subscriptions, v.Subscriptions)
+}
+func (v *ListSubscriptionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListSubscriptionsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListSubscriptionsOutput_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListSubscriptionsOutput_nextToken, v.NextToken)
+		case schemas.ListSubscriptionsOutput_subscriptions:
+			return deserializeSubscriptionList(d, schemas.ListSubscriptionsOutput_subscriptions, &v.Subscriptions)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListSubscriptionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListSubscriptions{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListSubscriptions, schemas.ListSubscriptionsInput, schemas.ListSubscriptionsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListSubscriptions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListSubscriptions, schemas.ListSubscriptionsInput, schemas.ListSubscriptionsOutput), output: &ListSubscriptionsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

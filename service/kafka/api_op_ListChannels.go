@@ -4,7 +4,9 @@ package kafka
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/kafka/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/kafka/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -45,6 +47,27 @@ type ListChannelsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListChannelsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListChannelsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListChannelsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClusterArn != nil {
+		s.WriteString(schemas.ListChannelsRequest_ClusterArn, *v.ClusterArn)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListChannelsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListChannelsRequest_NextToken, *v.NextToken)
+	}
+	if v.TopicNameFilter != nil {
+		s.WriteString(schemas.ListChannelsRequest_TopicNameFilter, *v.TopicNameFilter)
+	}
+}
+
 // Returns the list of channels in the cluster.
 type ListChannelsOutput struct {
 
@@ -62,13 +85,35 @@ type ListChannelsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListChannelsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListChannelsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListChannelsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serialize__listOfChannelInfo(s, schemas.ListChannelsResponse_Channels, v.Channels)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListChannelsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListChannelsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListChannelsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListChannelsResponse_Channels:
+			return deserialize__listOfChannelInfo(d, schemas.ListChannelsResponse_Channels, &v.Channels)
+		case schemas.ListChannelsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListChannelsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListChannelsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListChannels{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListChannels, schemas.ListChannelsRequest, schemas.ListChannelsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListChannels{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListChannels, schemas.ListChannelsRequest, schemas.ListChannelsResponse), output: &ListChannelsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package odb
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/odb/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/odb/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -34,6 +36,18 @@ type StartAutonomousDatabaseInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartAutonomousDatabaseInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartAutonomousDatabaseInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartAutonomousDatabaseInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AutonomousDatabaseId != nil {
+		s.WriteString(schemas.StartAutonomousDatabaseInput_autonomousDatabaseId, *v.AutonomousDatabaseId)
+	}
+}
+
 type StartAutonomousDatabaseOutput struct {
 
 	// The unique identifier of the Autonomous Database that was started.
@@ -57,13 +71,54 @@ type StartAutonomousDatabaseOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartAutonomousDatabaseOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartAutonomousDatabaseOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartAutonomousDatabaseOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AutonomousDatabaseId != nil {
+		s.WriteString(schemas.StartAutonomousDatabaseOutput_autonomousDatabaseId, *v.AutonomousDatabaseId)
+	}
+	if v.DisplayName != nil {
+		s.WriteString(schemas.StartAutonomousDatabaseOutput_displayName, *v.DisplayName)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.StartAutonomousDatabaseOutput_status, string(v.Status))
+	}
+	if v.StatusReason != nil {
+		s.WriteString(schemas.StartAutonomousDatabaseOutput_statusReason, *v.StatusReason)
+	}
+}
+func (v *StartAutonomousDatabaseOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartAutonomousDatabaseOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartAutonomousDatabaseOutput_autonomousDatabaseId:
+			v.AutonomousDatabaseId = new(string)
+			return d.ReadString(schemas.StartAutonomousDatabaseOutput_autonomousDatabaseId, v.AutonomousDatabaseId)
+		case schemas.StartAutonomousDatabaseOutput_displayName:
+			v.DisplayName = new(string)
+			return d.ReadString(schemas.StartAutonomousDatabaseOutput_displayName, v.DisplayName)
+		case schemas.StartAutonomousDatabaseOutput_status:
+			var ev string
+			if err := d.ReadString(schemas.StartAutonomousDatabaseOutput_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.AutonomousDatabaseResourceStatus(ev)
+			return nil
+		case schemas.StartAutonomousDatabaseOutput_statusReason:
+			v.StatusReason = new(string)
+			return d.ReadString(schemas.StartAutonomousDatabaseOutput_statusReason, v.StatusReason)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartAutonomousDatabaseMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpStartAutonomousDatabase{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartAutonomousDatabase, schemas.StartAutonomousDatabaseInput, schemas.StartAutonomousDatabaseOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpStartAutonomousDatabase{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartAutonomousDatabase, schemas.StartAutonomousDatabaseInput, schemas.StartAutonomousDatabaseOutput), output: &StartAutonomousDatabaseOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

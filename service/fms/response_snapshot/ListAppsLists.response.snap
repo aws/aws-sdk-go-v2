@@ -1,5 +1,6 @@
 200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: AWSFMS_20180101.ListAppsLists
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"AppsLists":[{"AppsList":[{"AppName":"__AppName__","Port":1,"Protocol":"__Protocol__"},{"AppName":"__AppName__","Port":1,"Protocol":"__Protocol__"}],"ListArn":"__ListArn__","ListId":"__ListId__","ListName":"__ListName__"},{"AppsList":[{"AppName":"__AppName__","Port":1,"Protocol":"__Protocol__"},{"AppName":"__AppName__","Port":1,"Protocol":"__Protocol__"}],"ListArn":"__ListArn__","ListId":"__ListId__","ListName":"__ListName__"}],"NextToken":"__NextToken__"}
+¿iAppsListsŸ¿hAppsListŸ¿gAppNamek__AppName__dPorthProtocoll__Protocol__ÿ¿gAppNamek__AppName__dPorthProtocoll__Protocol__ÿÿgListArnk__ListArn__fListIdj__ListId__hListNamel__ListName__ÿ¿hAppsListŸ¿gAppNamek__AppName__dPorthProtocoll__Protocol__ÿ¿gAppNamek__AppName__dPorthProtocoll__Protocol__ÿÿgListArnk__ListArn__fListIdj__ListId__hListNamel__ListName__ÿÿiNextTokenm__NextToken__ÿ

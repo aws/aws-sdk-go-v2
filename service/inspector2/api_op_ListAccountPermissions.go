@@ -5,7 +5,9 @@ package inspector2
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/inspector2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/inspector2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -49,6 +51,44 @@ type ListAccountPermissionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAccountPermissionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAccountPermissionsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAccountPermissionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListAccountPermissionsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAccountPermissionsRequest_nextToken, *v.NextToken)
+	}
+	if v.Service != "" {
+		s.WriteString(schemas.ListAccountPermissionsRequest_service, string(v.Service))
+	}
+}
+func (v *ListAccountPermissionsInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListAccountPermissionsRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListAccountPermissionsRequest_maxResults:
+			v.MaxResults = new(int32)
+			return d.ReadInt32(schemas.ListAccountPermissionsRequest_maxResults, v.MaxResults)
+		case schemas.ListAccountPermissionsRequest_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListAccountPermissionsRequest_nextToken, v.NextToken)
+		case schemas.ListAccountPermissionsRequest_service:
+			var ev string
+			if err := d.ReadString(schemas.ListAccountPermissionsRequest_service, &ev); err != nil {
+				return err
+			}
+			v.Service = types.Service(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 type ListAccountPermissionsOutput struct {
 
 	// Contains details on the permissions an account has to configure Amazon
@@ -69,13 +109,35 @@ type ListAccountPermissionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAccountPermissionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAccountPermissionsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAccountPermissionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAccountPermissionsResponse_nextToken, *v.NextToken)
+	}
+	serializePermissions(s, schemas.ListAccountPermissionsResponse_permissions, v.Permissions)
+}
+func (v *ListAccountPermissionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListAccountPermissionsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListAccountPermissionsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListAccountPermissionsResponse_nextToken, v.NextToken)
+		case schemas.ListAccountPermissionsResponse_permissions:
+			return deserializePermissions(d, schemas.ListAccountPermissionsResponse_permissions, &v.Permissions)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListAccountPermissionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListAccountPermissions{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAccountPermissions, schemas.ListAccountPermissionsRequest, schemas.ListAccountPermissionsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListAccountPermissions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAccountPermissions, schemas.ListAccountPermissionsRequest, schemas.ListAccountPermissionsResponse), output: &ListAccountPermissionsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

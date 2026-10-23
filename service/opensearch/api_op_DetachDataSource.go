@@ -4,6 +4,8 @@ package opensearch
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/opensearch/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -47,6 +49,21 @@ type DetachDataSourceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DetachDataSourceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DetachDataSourceRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DetachDataSourceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DataSourceArn != nil {
+		s.WriteString(schemas.DetachDataSourceRequest_dataSourceArn, *v.DataSourceArn)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.DetachDataSourceRequest_id, *v.Id)
+	}
+}
+
 type DetachDataSourceOutput struct {
 
 	// The Amazon Resource Name (ARN) of the domain. See [Identifiers for IAM Entities] in Using Amazon Web Services
@@ -70,13 +87,44 @@ type DetachDataSourceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DetachDataSourceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DetachDataSourceResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DetachDataSourceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.DetachDataSourceResponse_arn, *v.Arn)
+	}
+	if v.DataSourceArn != nil {
+		s.WriteString(schemas.DetachDataSourceResponse_dataSourceArn, *v.DataSourceArn)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.DetachDataSourceResponse_id, *v.Id)
+	}
+}
+func (v *DetachDataSourceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DetachDataSourceResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DetachDataSourceResponse_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.DetachDataSourceResponse_arn, v.Arn)
+		case schemas.DetachDataSourceResponse_dataSourceArn:
+			v.DataSourceArn = new(string)
+			return d.ReadString(schemas.DetachDataSourceResponse_dataSourceArn, v.DataSourceArn)
+		case schemas.DetachDataSourceResponse_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.DetachDataSourceResponse_id, v.Id)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDetachDataSourceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDetachDataSource{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DetachDataSource, schemas.DetachDataSourceRequest, schemas.DetachDataSourceResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDetachDataSource{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DetachDataSource, schemas.DetachDataSourceRequest, schemas.DetachDataSourceResponse), output: &DetachDataSourceOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

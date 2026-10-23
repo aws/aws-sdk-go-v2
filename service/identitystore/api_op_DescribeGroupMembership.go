@@ -4,7 +4,9 @@ package identitystore
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/identitystore/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/identitystore/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -35,15 +37,38 @@ type DescribeGroupMembershipInput struct {
 
 	// The globally unique identifier for the identity store.
 	//
+	// You can specify the identity store by ID or by Amazon Resource Name (ARN). For
+	// example, identity store ID d-1234567890 or identity store ARN
+	// arn:aws:identitystore::111122223333:identitystore/d-1234567890 .
+	//
 	// This member is required.
 	IdentityStoreId *string
 
 	// The identifier for a GroupMembership in an identity store.
 	//
+	// You can specify the group membership by ID or by Amazon Resource Name (ARN).
+	// For example, membership ID a1b2c3d4-5678-90ab-cdef-EXAMPLE33333 or membership
+	// ARN arn:aws:identitystore:::membership/a1b2c3d4-5678-90ab-cdef-EXAMPLE33333 .
+	//
 	// This member is required.
 	MembershipId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DescribeGroupMembershipInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeGroupMembershipRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeGroupMembershipInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IdentityStoreId != nil {
+		s.WriteString(schemas.DescribeGroupMembershipRequest_IdentityStoreId, *v.IdentityStoreId)
+	}
+	if v.MembershipId != nil {
+		s.WriteString(schemas.DescribeGroupMembershipRequest_MembershipId, *v.MembershipId)
+	}
 }
 
 type DescribeGroupMembershipOutput struct {
@@ -62,6 +87,13 @@ type DescribeGroupMembershipOutput struct {
 	//
 	// This member is required.
 	MemberId types.MemberId
+
+	// The Amazon Resource Name (ARN) of the group membership in the identity store.
+	// For example,
+	// arn:aws:identitystore:::membership/a1b2c3d4-5678-90ab-cdef-EXAMPLE33333 .
+	//
+	// This member is required.
+	MembershipArn *string
 
 	// The identifier for a GroupMembership in an identity store.
 	//
@@ -86,13 +118,77 @@ type DescribeGroupMembershipOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeGroupMembershipOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeGroupMembershipResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeGroupMembershipOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.DescribeGroupMembershipResponse_CreatedAt, *v.CreatedAt)
+	}
+	if v.CreatedBy != nil {
+		s.WriteString(schemas.DescribeGroupMembershipResponse_CreatedBy, *v.CreatedBy)
+	}
+	if v.GroupId != nil {
+		s.WriteString(schemas.DescribeGroupMembershipResponse_GroupId, *v.GroupId)
+	}
+	if v.IdentityStoreId != nil {
+		s.WriteString(schemas.DescribeGroupMembershipResponse_IdentityStoreId, *v.IdentityStoreId)
+	}
+	serializeMemberId(s, schemas.DescribeGroupMembershipResponse_MemberId, v.MemberId)
+	if v.MembershipArn != nil {
+		s.WriteString(schemas.DescribeGroupMembershipResponse_MembershipArn, *v.MembershipArn)
+	}
+	if v.MembershipId != nil {
+		s.WriteString(schemas.DescribeGroupMembershipResponse_MembershipId, *v.MembershipId)
+	}
+	if v.UpdatedAt != nil {
+		s.WriteTime(schemas.DescribeGroupMembershipResponse_UpdatedAt, *v.UpdatedAt)
+	}
+	if v.UpdatedBy != nil {
+		s.WriteString(schemas.DescribeGroupMembershipResponse_UpdatedBy, *v.UpdatedBy)
+	}
+}
+func (v *DescribeGroupMembershipOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeGroupMembershipResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeGroupMembershipResponse_CreatedAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.DescribeGroupMembershipResponse_CreatedAt, v.CreatedAt)
+		case schemas.DescribeGroupMembershipResponse_CreatedBy:
+			v.CreatedBy = new(string)
+			return d.ReadString(schemas.DescribeGroupMembershipResponse_CreatedBy, v.CreatedBy)
+		case schemas.DescribeGroupMembershipResponse_GroupId:
+			v.GroupId = new(string)
+			return d.ReadString(schemas.DescribeGroupMembershipResponse_GroupId, v.GroupId)
+		case schemas.DescribeGroupMembershipResponse_IdentityStoreId:
+			v.IdentityStoreId = new(string)
+			return d.ReadString(schemas.DescribeGroupMembershipResponse_IdentityStoreId, v.IdentityStoreId)
+		case schemas.DescribeGroupMembershipResponse_MemberId:
+			return deserializeMemberId(d, schemas.DescribeGroupMembershipResponse_MemberId, &v.MemberId)
+		case schemas.DescribeGroupMembershipResponse_MembershipArn:
+			v.MembershipArn = new(string)
+			return d.ReadString(schemas.DescribeGroupMembershipResponse_MembershipArn, v.MembershipArn)
+		case schemas.DescribeGroupMembershipResponse_MembershipId:
+			v.MembershipId = new(string)
+			return d.ReadString(schemas.DescribeGroupMembershipResponse_MembershipId, v.MembershipId)
+		case schemas.DescribeGroupMembershipResponse_UpdatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.DescribeGroupMembershipResponse_UpdatedAt, v.UpdatedAt)
+		case schemas.DescribeGroupMembershipResponse_UpdatedBy:
+			v.UpdatedBy = new(string)
+			return d.ReadString(schemas.DescribeGroupMembershipResponse_UpdatedBy, v.UpdatedBy)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeGroupMembershipMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeGroupMembership{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeGroupMembership, schemas.DescribeGroupMembershipRequest, schemas.DescribeGroupMembershipResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeGroupMembership{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeGroupMembership, schemas.DescribeGroupMembershipRequest, schemas.DescribeGroupMembershipResponse), output: &DescribeGroupMembershipOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

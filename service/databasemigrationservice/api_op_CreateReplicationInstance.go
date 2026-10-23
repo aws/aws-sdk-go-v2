@@ -4,7 +4,9 @@ package databasemigrationservice
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/databasemigrationservice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/databasemigrationservice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -162,6 +164,64 @@ type CreateReplicationInstanceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateReplicationInstanceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateReplicationInstanceMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateReplicationInstanceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AllocatedStorage != nil {
+		s.WriteInt32(schemas.CreateReplicationInstanceMessage_AllocatedStorage, *v.AllocatedStorage)
+	}
+	if v.AutoMinorVersionUpgrade != nil {
+		s.WriteBool(schemas.CreateReplicationInstanceMessage_AutoMinorVersionUpgrade, *v.AutoMinorVersionUpgrade)
+	}
+	if v.AvailabilityZone != nil {
+		s.WriteString(schemas.CreateReplicationInstanceMessage_AvailabilityZone, *v.AvailabilityZone)
+	}
+	if v.DnsNameServers != nil {
+		s.WriteString(schemas.CreateReplicationInstanceMessage_DnsNameServers, *v.DnsNameServers)
+	}
+	if v.EngineVersion != nil {
+		s.WriteString(schemas.CreateReplicationInstanceMessage_EngineVersion, *v.EngineVersion)
+	}
+	if v.KerberosAuthenticationSettings != nil {
+		s.WriteStruct(schemas.CreateReplicationInstanceMessage_KerberosAuthenticationSettings)
+		v.KerberosAuthenticationSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.KmsKeyId != nil {
+		s.WriteString(schemas.CreateReplicationInstanceMessage_KmsKeyId, *v.KmsKeyId)
+	}
+	if v.MultiAZ != nil {
+		s.WriteBool(schemas.CreateReplicationInstanceMessage_MultiAZ, *v.MultiAZ)
+	}
+	if v.NetworkType != nil {
+		s.WriteString(schemas.CreateReplicationInstanceMessage_NetworkType, *v.NetworkType)
+	}
+	if v.PreferredMaintenanceWindow != nil {
+		s.WriteString(schemas.CreateReplicationInstanceMessage_PreferredMaintenanceWindow, *v.PreferredMaintenanceWindow)
+	}
+	if v.PubliclyAccessible != nil {
+		s.WriteBool(schemas.CreateReplicationInstanceMessage_PubliclyAccessible, *v.PubliclyAccessible)
+	}
+	if v.ReplicationInstanceClass != nil {
+		s.WriteString(schemas.CreateReplicationInstanceMessage_ReplicationInstanceClass, *v.ReplicationInstanceClass)
+	}
+	if v.ReplicationInstanceIdentifier != nil {
+		s.WriteString(schemas.CreateReplicationInstanceMessage_ReplicationInstanceIdentifier, *v.ReplicationInstanceIdentifier)
+	}
+	if v.ReplicationSubnetGroupIdentifier != nil {
+		s.WriteString(schemas.CreateReplicationInstanceMessage_ReplicationSubnetGroupIdentifier, *v.ReplicationSubnetGroupIdentifier)
+	}
+	if v.ResourceIdentifier != nil {
+		s.WriteString(schemas.CreateReplicationInstanceMessage_ResourceIdentifier, *v.ResourceIdentifier)
+	}
+	serializeTagList(s, schemas.CreateReplicationInstanceMessage_Tags, v.Tags)
+	serializeVpcSecurityGroupIdList(s, schemas.CreateReplicationInstanceMessage_VpcSecurityGroupIds, v.VpcSecurityGroupIds)
+}
+
 type CreateReplicationInstanceOutput struct {
 
 	// The replication instance that was created.
@@ -173,13 +233,34 @@ type CreateReplicationInstanceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateReplicationInstanceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateReplicationInstanceResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateReplicationInstanceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ReplicationInstance != nil {
+		s.WriteStruct(schemas.CreateReplicationInstanceResponse_ReplicationInstance)
+		v.ReplicationInstance.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateReplicationInstanceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateReplicationInstanceResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateReplicationInstanceResponse_ReplicationInstance:
+			v.ReplicationInstance = &types.ReplicationInstance{}
+			return v.ReplicationInstance.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateReplicationInstanceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateReplicationInstance{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateReplicationInstance, schemas.CreateReplicationInstanceMessage, schemas.CreateReplicationInstanceResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateReplicationInstance{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateReplicationInstance, schemas.CreateReplicationInstanceMessage, schemas.CreateReplicationInstanceResponse), output: &CreateReplicationInstanceOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

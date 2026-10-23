@@ -789,6 +789,57 @@ func TestCheckResponseSnapshot_GetResourcePolicy(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_ListBillingViewSegments(t *testing.T) {
+	want := &ListBillingViewSegmentsOutput{
+		Items: []types.BillingViewSegmentsListElement{
+			{
+				Domain: types.BillingDomain("BILLABLE"),
+				TimeRange: &types.BillingViewSegmentTimeRange{
+					BeginDateInclusive: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					EndDateExclusive:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				},
+				BillingTransferAccountId:     ptr.String("__BillingTransferAccountId__"),
+				ManagementAccountId:          ptr.String("__ManagementAccountId__"),
+				BillingGroupPrimaryAccountId: ptr.String("__BillingGroupPrimaryAccountId__"),
+			},
+			{
+				Domain: types.BillingDomain("BILLABLE"),
+				TimeRange: &types.BillingViewSegmentTimeRange{
+					BeginDateInclusive: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					EndDateExclusive:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				},
+				BillingTransferAccountId:     ptr.String("__BillingTransferAccountId__"),
+				ManagementAccountId:          ptr.String("__ManagementAccountId__"),
+				BillingGroupPrimaryAccountId: ptr.String("__BillingGroupPrimaryAccountId__"),
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("ListBillingViewSegments.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.ListBillingViewSegments(context.Background(), &ListBillingViewSegmentsInput{
+		TimeRange: &types.BillingViewSegmentTimeRange{
+			BeginDateInclusive: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			EndDateExclusive:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		},
+		Arn:        ptr.String("__Arn__"),
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "ListBillingViewSegments.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_ListBillingViews(t *testing.T) {
 	want := &ListBillingViewsOutput{
 		BillingViews: []types.BillingViewListElement{
@@ -866,6 +917,173 @@ func TestCheckResponseSnapshot_ListBillingViews(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "ListBillingViews.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_ListBusinessSupportAccountCharges(t *testing.T) {
+	want := &ListBusinessSupportAccountChargesOutput{
+		BillingMonth:              ptr.String("__BillingMonth__"),
+		IsEstimated:               ptr.Bool(true),
+		TotalSupportCharge:        ptr.String("__TotalSupportCharge__"),
+		TotalSupportEligibleSpend: ptr.String("__TotalSupportEligibleSpend__"),
+		AccountCount:              ptr.Int32(1),
+		AccountCharges: []types.BusinessSupportAccountCharge{
+			{
+				AccountId:       ptr.String("__AccountId__"),
+				SupportPlanName: ptr.String("__SupportPlanName__"),
+				TotalCharge:     ptr.String("__TotalCharge__"),
+				TotalUsageBasis: ptr.String("__TotalUsageBasis__"),
+				TierCharges: []types.BusinessSupportTierCharge{
+					{
+						TierDescription:       ptr.String("__TierDescription__"),
+						TierRate:              ptr.String("__TierRate__"),
+						UsageSlice:            ptr.String("__UsageSlice__"),
+						TierCharge:            ptr.String("__TierCharge__"),
+						ChargePeriodStartDate: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+						ChargePeriodEndDate:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					},
+					{
+						TierDescription:       ptr.String("__TierDescription__"),
+						TierRate:              ptr.String("__TierRate__"),
+						UsageSlice:            ptr.String("__UsageSlice__"),
+						TierCharge:            ptr.String("__TierCharge__"),
+						ChargePeriodStartDate: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+						ChargePeriodEndDate:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					},
+				},
+				SupportDiscount: &types.BusinessSupportDiscount{
+					DiscountAmount:     ptr.String("__DiscountAmount__"),
+					DiscountPercentage: ptr.String("__DiscountPercentage__"),
+					DiscountType:       ptr.String("__DiscountType__"),
+					DiscountSource:     ptr.String("__DiscountSource__"),
+				},
+				SupportEligibleSpendByService: []types.BusinessSupportServiceSpend{
+					{
+						ContributingService: ptr.String("__ContributingService__"),
+						ItemType:            ptr.String("__ItemType__"),
+						Description:         ptr.String("__Description__"),
+						ChargeAmount:        ptr.String("__ChargeAmount__"),
+						Currency:            ptr.String("__Currency__"),
+					},
+					{
+						ContributingService: ptr.String("__ContributingService__"),
+						ItemType:            ptr.String("__ItemType__"),
+						Description:         ptr.String("__Description__"),
+						ChargeAmount:        ptr.String("__ChargeAmount__"),
+						Currency:            ptr.String("__Currency__"),
+					},
+				},
+			},
+			{
+				AccountId:       ptr.String("__AccountId__"),
+				SupportPlanName: ptr.String("__SupportPlanName__"),
+				TotalCharge:     ptr.String("__TotalCharge__"),
+				TotalUsageBasis: ptr.String("__TotalUsageBasis__"),
+				TierCharges: []types.BusinessSupportTierCharge{
+					{
+						TierDescription:       ptr.String("__TierDescription__"),
+						TierRate:              ptr.String("__TierRate__"),
+						UsageSlice:            ptr.String("__UsageSlice__"),
+						TierCharge:            ptr.String("__TierCharge__"),
+						ChargePeriodStartDate: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+						ChargePeriodEndDate:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					},
+					{
+						TierDescription:       ptr.String("__TierDescription__"),
+						TierRate:              ptr.String("__TierRate__"),
+						UsageSlice:            ptr.String("__UsageSlice__"),
+						TierCharge:            ptr.String("__TierCharge__"),
+						ChargePeriodStartDate: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+						ChargePeriodEndDate:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					},
+				},
+				SupportDiscount: &types.BusinessSupportDiscount{
+					DiscountAmount:     ptr.String("__DiscountAmount__"),
+					DiscountPercentage: ptr.String("__DiscountPercentage__"),
+					DiscountType:       ptr.String("__DiscountType__"),
+					DiscountSource:     ptr.String("__DiscountSource__"),
+				},
+				SupportEligibleSpendByService: []types.BusinessSupportServiceSpend{
+					{
+						ContributingService: ptr.String("__ContributingService__"),
+						ItemType:            ptr.String("__ItemType__"),
+						Description:         ptr.String("__Description__"),
+						ChargeAmount:        ptr.String("__ChargeAmount__"),
+						Currency:            ptr.String("__Currency__"),
+					},
+					{
+						ContributingService: ptr.String("__ContributingService__"),
+						ItemType:            ptr.String("__ItemType__"),
+						Description:         ptr.String("__Description__"),
+						ChargeAmount:        ptr.String("__ChargeAmount__"),
+						Currency:            ptr.String("__Currency__"),
+					},
+				},
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("ListBusinessSupportAccountCharges.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.ListBusinessSupportAccountCharges(context.Background(), &ListBusinessSupportAccountChargesInput{
+		BillingMonth: ptr.String("__BillingMonth__"),
+		AccountId:    ptr.String("__AccountId__"),
+		MaxResults:   ptr.Int32(1),
+		NextToken:    ptr.String("__NextToken__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "ListBusinessSupportAccountCharges.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_ListBusinessSupportSubscriptionHistory(t *testing.T) {
+	want := &ListBusinessSupportSubscriptionHistoryOutput{
+		SubscriptionContracts: []types.BusinessSupportSubscriptionContract{
+			{
+				AccountId:         ptr.String("__AccountId__"),
+				PlanName:          ptr.String("__PlanName__"),
+				ContractStartDate: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				ContractEndDate:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+			{
+				AccountId:         ptr.String("__AccountId__"),
+				PlanName:          ptr.String("__PlanName__"),
+				ContractStartDate: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				ContractEndDate:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("ListBusinessSupportSubscriptionHistory.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.ListBusinessSupportSubscriptionHistory(context.Background(), &ListBusinessSupportSubscriptionHistoryInput{
+		BillingMonth: ptr.String("__BillingMonth__"),
+		AccountId:    ptr.String("__AccountId__"),
+		StartDate:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		EndDate:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		MaxResults:   ptr.Int32(1),
+		NextToken:    ptr.String("__NextToken__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "ListBusinessSupportSubscriptionHistory.response", err)
 	}
 }
 

@@ -9,6 +9,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/wellarchitected/types"
 	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
+	"github.com/aws/smithy-go/ptr"
 )
 
 // Lists recommendation items for a specific recommendation. Recommendation items
@@ -66,6 +67,10 @@ func (v *ListAgentRecommendationItemsInput) SerializeMembers(s smithy.ShapeSeria
 	if v.Type != "" {
 		s.WriteString(schemas.ListAgentRecommendationItemsRequest_type, string(v.Type))
 	}
+}
+func (in *ListAgentRecommendationItemsInput) bindEndpointParams(p *EndpointParameters) {
+
+	p.SubServiceType = ptr.String("AGENT")
 }
 
 type ListAgentRecommendationItemsOutput struct {

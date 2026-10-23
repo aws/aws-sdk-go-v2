@@ -5,7 +5,9 @@ package medialive
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/medialive/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/medialive/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithytime "github.com/aws/smithy-go/time"
 	smithywaiter "github.com/aws/smithy-go/waiter"
@@ -37,6 +39,18 @@ type GetSignalMapInput struct {
 	Identifier *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetSignalMapInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetSignalMapRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetSignalMapInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Identifier != nil {
+		s.WriteString(schemas.GetSignalMapRequest_Identifier, *v.Identifier)
+	}
 }
 
 // Placeholder documentation for GetSignalMapResponse
@@ -106,13 +120,127 @@ type GetSignalMapOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetSignalMapOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetSignalMapResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetSignalMapOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.GetSignalMapResponse_Arn, *v.Arn)
+	}
+	serialize__listOf__stringMin7Max11PatternAws097(s, schemas.GetSignalMapResponse_CloudWatchAlarmTemplateGroupIds, v.CloudWatchAlarmTemplateGroupIds)
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.GetSignalMapResponse_CreatedAt, *v.CreatedAt)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.GetSignalMapResponse_Description, *v.Description)
+	}
+	if v.DiscoveryEntryPointArn != nil {
+		s.WriteString(schemas.GetSignalMapResponse_DiscoveryEntryPointArn, *v.DiscoveryEntryPointArn)
+	}
+	if v.ErrorMessage != nil {
+		s.WriteString(schemas.GetSignalMapResponse_ErrorMessage, *v.ErrorMessage)
+	}
+	serialize__listOf__stringMin7Max11PatternAws097(s, schemas.GetSignalMapResponse_EventBridgeRuleTemplateGroupIds, v.EventBridgeRuleTemplateGroupIds)
+	serializeFailedMediaResourceMap(s, schemas.GetSignalMapResponse_FailedMediaResourceMap, v.FailedMediaResourceMap)
+	if v.Id != nil {
+		s.WriteString(schemas.GetSignalMapResponse_Id, *v.Id)
+	}
+	if v.LastDiscoveredAt != nil {
+		s.WriteTime(schemas.GetSignalMapResponse_LastDiscoveredAt, *v.LastDiscoveredAt)
+	}
+	if v.LastSuccessfulMonitorDeployment != nil {
+		s.WriteStruct(schemas.GetSignalMapResponse_LastSuccessfulMonitorDeployment)
+		v.LastSuccessfulMonitorDeployment.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeMediaResourceMap(s, schemas.GetSignalMapResponse_MediaResourceMap, v.MediaResourceMap)
+	if v.ModifiedAt != nil {
+		s.WriteTime(schemas.GetSignalMapResponse_ModifiedAt, *v.ModifiedAt)
+	}
+	if v.MonitorChangesPendingDeployment != nil {
+		s.WriteBool(schemas.GetSignalMapResponse_MonitorChangesPendingDeployment, *v.MonitorChangesPendingDeployment)
+	}
+	if v.MonitorDeployment != nil {
+		s.WriteStruct(schemas.GetSignalMapResponse_MonitorDeployment)
+		v.MonitorDeployment.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.GetSignalMapResponse_Name, *v.Name)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.GetSignalMapResponse_Status, string(v.Status))
+	}
+	serializeTagMap(s, schemas.GetSignalMapResponse_Tags, v.Tags)
+}
+func (v *GetSignalMapOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetSignalMapResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetSignalMapResponse_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.GetSignalMapResponse_Arn, v.Arn)
+		case schemas.GetSignalMapResponse_CloudWatchAlarmTemplateGroupIds:
+			return deserialize__listOf__stringMin7Max11PatternAws097(d, schemas.GetSignalMapResponse_CloudWatchAlarmTemplateGroupIds, &v.CloudWatchAlarmTemplateGroupIds)
+		case schemas.GetSignalMapResponse_CreatedAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.GetSignalMapResponse_CreatedAt, v.CreatedAt)
+		case schemas.GetSignalMapResponse_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.GetSignalMapResponse_Description, v.Description)
+		case schemas.GetSignalMapResponse_DiscoveryEntryPointArn:
+			v.DiscoveryEntryPointArn = new(string)
+			return d.ReadString(schemas.GetSignalMapResponse_DiscoveryEntryPointArn, v.DiscoveryEntryPointArn)
+		case schemas.GetSignalMapResponse_ErrorMessage:
+			v.ErrorMessage = new(string)
+			return d.ReadString(schemas.GetSignalMapResponse_ErrorMessage, v.ErrorMessage)
+		case schemas.GetSignalMapResponse_EventBridgeRuleTemplateGroupIds:
+			return deserialize__listOf__stringMin7Max11PatternAws097(d, schemas.GetSignalMapResponse_EventBridgeRuleTemplateGroupIds, &v.EventBridgeRuleTemplateGroupIds)
+		case schemas.GetSignalMapResponse_FailedMediaResourceMap:
+			return deserializeFailedMediaResourceMap(d, schemas.GetSignalMapResponse_FailedMediaResourceMap, &v.FailedMediaResourceMap)
+		case schemas.GetSignalMapResponse_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.GetSignalMapResponse_Id, v.Id)
+		case schemas.GetSignalMapResponse_LastDiscoveredAt:
+			v.LastDiscoveredAt = new(time.Time)
+			return d.ReadTime(schemas.GetSignalMapResponse_LastDiscoveredAt, v.LastDiscoveredAt)
+		case schemas.GetSignalMapResponse_LastSuccessfulMonitorDeployment:
+			v.LastSuccessfulMonitorDeployment = &types.SuccessfulMonitorDeployment{}
+			return v.LastSuccessfulMonitorDeployment.Deserialize(d)
+		case schemas.GetSignalMapResponse_MediaResourceMap:
+			return deserializeMediaResourceMap(d, schemas.GetSignalMapResponse_MediaResourceMap, &v.MediaResourceMap)
+		case schemas.GetSignalMapResponse_ModifiedAt:
+			v.ModifiedAt = new(time.Time)
+			return d.ReadTime(schemas.GetSignalMapResponse_ModifiedAt, v.ModifiedAt)
+		case schemas.GetSignalMapResponse_MonitorChangesPendingDeployment:
+			v.MonitorChangesPendingDeployment = new(bool)
+			return d.ReadBool(schemas.GetSignalMapResponse_MonitorChangesPendingDeployment, v.MonitorChangesPendingDeployment)
+		case schemas.GetSignalMapResponse_MonitorDeployment:
+			v.MonitorDeployment = &types.MonitorDeployment{}
+			return v.MonitorDeployment.Deserialize(d)
+		case schemas.GetSignalMapResponse_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.GetSignalMapResponse_Name, v.Name)
+		case schemas.GetSignalMapResponse_Status:
+			var ev string
+			if err := d.ReadString(schemas.GetSignalMapResponse_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.SignalMapStatus(ev)
+			return nil
+		case schemas.GetSignalMapResponse_Tags:
+			return deserializeTagMap(d, schemas.GetSignalMapResponse_Tags, &v.Tags)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetSignalMapMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetSignalMap{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetSignalMap, schemas.GetSignalMapRequest, schemas.GetSignalMapResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetSignalMap{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetSignalMap, schemas.GetSignalMapRequest, schemas.GetSignalMapResponse), output: &GetSignalMapOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

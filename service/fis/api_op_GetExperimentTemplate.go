@@ -4,7 +4,9 @@ package fis
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/fis/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/fis/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -34,6 +36,18 @@ type GetExperimentTemplateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetExperimentTemplateInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetExperimentTemplateRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetExperimentTemplateInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Id != nil {
+		s.WriteString(schemas.GetExperimentTemplateRequest_id, *v.Id)
+	}
+}
+
 type GetExperimentTemplateOutput struct {
 
 	// Information about the experiment template.
@@ -45,13 +59,34 @@ type GetExperimentTemplateOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetExperimentTemplateOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetExperimentTemplateResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetExperimentTemplateOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ExperimentTemplate != nil {
+		s.WriteStruct(schemas.GetExperimentTemplateResponse_experimentTemplate)
+		v.ExperimentTemplate.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetExperimentTemplateOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetExperimentTemplateResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetExperimentTemplateResponse_experimentTemplate:
+			v.ExperimentTemplate = &types.ExperimentTemplate{}
+			return v.ExperimentTemplate.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetExperimentTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetExperimentTemplate{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetExperimentTemplate, schemas.GetExperimentTemplateRequest, schemas.GetExperimentTemplateResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetExperimentTemplate{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetExperimentTemplate, schemas.GetExperimentTemplateRequest, schemas.GetExperimentTemplateResponse), output: &GetExperimentTemplateOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

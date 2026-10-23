@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"versions":[{"expirationDate":"2000-01-01T00:00:00Z","version":"__Version__"},{"expirationDate":"2000-01-01T00:00:00Z","version":"__Version__"}]}

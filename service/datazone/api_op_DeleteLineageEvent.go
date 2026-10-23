@@ -4,7 +4,9 @@ package datazone
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/datazone/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/datazone/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,21 @@ type DeleteLineageEventInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteLineageEventInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteLineageEventInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteLineageEventInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DomainIdentifier != nil {
+		s.WriteString(schemas.DeleteLineageEventInput_domainIdentifier, *v.DomainIdentifier)
+	}
+	if v.Identifier != nil {
+		s.WriteString(schemas.DeleteLineageEventInput_identifier, *v.Identifier)
+	}
+}
+
 type DeleteLineageEventOutput struct {
 
 	// The ID of the domain.
@@ -56,13 +73,48 @@ type DeleteLineageEventOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteLineageEventOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteLineageEventOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteLineageEventOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DomainId != nil {
+		s.WriteString(schemas.DeleteLineageEventOutput_domainId, *v.DomainId)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.DeleteLineageEventOutput_id, *v.Id)
+	}
+	if v.ProcessingStatus != "" {
+		s.WriteString(schemas.DeleteLineageEventOutput_processingStatus, string(v.ProcessingStatus))
+	}
+}
+func (v *DeleteLineageEventOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteLineageEventOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteLineageEventOutput_domainId:
+			v.DomainId = new(string)
+			return d.ReadString(schemas.DeleteLineageEventOutput_domainId, v.DomainId)
+		case schemas.DeleteLineageEventOutput_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.DeleteLineageEventOutput_id, v.Id)
+		case schemas.DeleteLineageEventOutput_processingStatus:
+			var ev string
+			if err := d.ReadString(schemas.DeleteLineageEventOutput_processingStatus, &ev); err != nil {
+				return err
+			}
+			v.ProcessingStatus = types.LineageEventProcessingStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteLineageEventMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteLineageEvent{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteLineageEvent, schemas.DeleteLineageEventInput, schemas.DeleteLineageEventOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteLineageEvent{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteLineageEvent, schemas.DeleteLineageEventInput, schemas.DeleteLineageEventOutput), output: &DeleteLineageEventOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

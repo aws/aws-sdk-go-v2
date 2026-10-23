@@ -228,7 +228,7 @@
                 "EncryptionConfiguration": {
                     "target": "com.amazonaws.kinesis#ChannelEncryptionConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>The server-side encryption configuration for the channel.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Web Services KMS key configuration that Amazon Kinesis Data Streams uses to encrypt data delivered to the channel's destination.</p>"
                     }
                 },
                 "LoggingConfiguration": {
@@ -323,7 +323,7 @@
                 "CloudWatchLogs": {
                     "target": "com.amazonaws.kinesis#CloudWatchLogsUpdateInput",
                     "traits": {
-                        "smithy.api#documentation": "<p>The updated Amazon CloudWatch Logs settings for the channel.</p>",
+                        "smithy.api#documentation": "<p>The updated Amazon CloudWatch Logs settings, including whether logging is enabled and the target log group and log stream.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -1079,13 +1079,13 @@
                 "S3DestinationConfiguration": {
                     "target": "com.amazonaws.kinesis#S3DestinationConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>The configuration for delivery to a general purpose Amazon S3 bucket. You must specify either <code>S3DestinationConfiguration</code> or <code>S3TablesDestinationConfiguration</code>, but not both.</p>"
+                        "smithy.api#documentation": "<p>The configuration for delivery to a general purpose Amazon S3 bucket. Specify this parameter when <code>S3TablesDestinationConfiguration</code> is not specified.</p>"
                     }
                 },
                 "S3TablesDestinationConfiguration": {
                     "target": "com.amazonaws.kinesis#S3TablesDestinationConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>The configuration for delivery to streaming tables on Apache Iceberg in Amazon S3 Tables. You must specify either <code>S3DestinationConfiguration</code> or <code>S3TablesDestinationConfiguration</code>, but not both.</p>"
+                        "smithy.api#documentation": "<p>The configuration for delivery to streaming tables on Apache Iceberg in Amazon S3 Tables. Specify this parameter when <code>S3DestinationConfiguration</code> is not specified.</p>"
                     }
                 },
                 "EncryptionConfiguration": {
@@ -1117,7 +1117,7 @@
                 "ChannelDescription": {
                     "target": "com.amazonaws.kinesis#ChannelDescription",
                     "traits": {
-                        "smithy.api#documentation": "<p>The configuration and current status of the channel.</p>",
+                        "smithy.api#documentation": "<p>The configuration and current status of the channel, including its ARN, destination configuration, and lifecycle state. Immediately after creation, the state is <code>CREATING</code>.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -1195,6 +1195,12 @@
                     "target": "com.amazonaws.kinesis#MaxRecordSizeInKiB",
                     "traits": {
                         "smithy.api#documentation": "<p>The maximum record size of a single record in kibibyte (KiB) that you can write to, and read from a stream.</p>"
+                    }
+                },
+                "RecordDistributionStrategy": {
+                    "target": "com.amazonaws.kinesis#RecordDistributionStrategy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The record distribution strategy for the stream, which determines how Amazon Kinesis\n            Data Streams distributes records across shards. Specify one of the following\n            values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>AUTO</code> – Amazon Kinesis Data Streams distributes records evenly\n                    across shards and ignores any partition key and <code>ExplicitHashKey</code>\n                    that producers supply. Use this value for stateless workloads that do not\n                    require partition-key ordering.</p>\n            </li>\n            <li>\n               <p>\n                  <code>USER_PARTITION_KEY</code> – Producers must supply a partition key, which\n                    Amazon Kinesis Data Streams uses to determine shard placement. This is the\n                    default.</p>\n            </li>\n         </ul>\n         <p>The record distribution strategy is only supported for streams that use the on-demand\n            capacity mode. If you do not specify this parameter, the stream uses\n            <code>USER_PARTITION_KEY</code>.</p>"
                     }
                 }
             },
@@ -1343,7 +1349,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes the specified channel. Deleting a channel stops delivery from the source stream to the destination. Data already delivered to the destination is not deleted.</p>\n         <p>A stream cannot be deleted while it has active channels. To delete the stream, first delete all channels attached to it. To find them, use <a>ListChannels</a> with a stream filter.</p>\n         <p>This operation has a call limit of 5 transactions per second (TPS) for each Amazon Web Services account. Exceeding 5 TPS results in a <code>LimitExceededException</code>.</p>",
+                "smithy.api#documentation": "<p>Deletes the specified channel. Deleting a channel stops delivery from the source stream to the destination. Data already delivered to the destination is not deleted.</p>\n         <p>A stream cannot be deleted while it has active channels. Use <a>ListChannels</a> with a stream filter to find the channels attached to a stream before deleting it.</p>\n         <p>This operation has a call limit of 5 transactions per second (TPS) for each Amazon Web Services account. Exceeding 5 TPS results in a <code>LimitExceededException</code>.</p>",
                 "smithy.api#examples": [
                     {
                         "title": "To delete a channel",
@@ -1793,7 +1799,7 @@
                 "ChannelDescription": {
                     "target": "com.amazonaws.kinesis#ChannelDescription",
                     "traits": {
-                        "smithy.api#documentation": "<p>The configuration and current status of the channel.</p>",
+                        "smithy.api#documentation": "<p>The configuration and current status of the channel, including its ARN, source stream, destination configuration, and lifecycle state.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -3167,6 +3173,9 @@
                 },
                 {
                     "target": "com.amazonaws.kinesis#UpdateStreamMode"
+                },
+                {
+                    "target": "com.amazonaws.kinesis#UpdateStreamRecordDistributionStrategy"
                 },
                 {
                     "target": "com.amazonaws.kinesis#UpdateStreamWarmThroughput"
@@ -13488,7 +13497,7 @@
                 "NextToken": {
                     "target": "com.amazonaws.kinesis#NextToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>The pagination token returned by a previous call. Specify this token to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.</p>"
+                        "smithy.api#documentation": "<p>The pagination token returned by a previous call. Specify this token to retrieve the next page of results.</p>"
                     }
                 }
             },
@@ -14535,8 +14544,7 @@
                 "PartitionKey": {
                     "target": "com.amazonaws.kinesis#PartitionKey",
                     "traits": {
-                        "smithy.api#documentation": "<p>Determines which shard in the stream the data record is assigned to. Partition keys\n            are Unicode strings with a maximum length limit of 256 characters for each key. Amazon\n            Kinesis Data Streams uses the partition key as input to a hash function that maps the\n            partition key and associated data to a specific shard. Specifically, an MD5 hash\n            function is used to map partition keys to 128-bit integer values and to map associated\n            data records to shards. As a result of this hashing mechanism, all data records with the\n            same partition key map to the same shard within the stream.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>Determines which shard in the stream the data record is assigned to. Partition keys\n            are Unicode strings with a maximum length limit of 256 characters for each key. Amazon\n            Kinesis Data Streams uses the partition key as input to a hash function that maps the\n            partition key and associated data to a specific shard. Specifically, an MD5 hash\n            function is used to map partition keys to 128-bit integer values and to map associated\n            data records to shards. As a result of this hashing mechanism, all data records with the\n            same partition key map to the same shard within the stream.</p>\n         <p>If the stream uses the <code>USER_PARTITION_KEY</code> record distribution strategy\n            (the default), a partition key is required. If the stream uses the <code>AUTO</code>\n            record distribution strategy, the partition key is optional and any value you provide is\n            ignored, along with any <code>ExplicitHashKey</code> you provide. In that case, Amazon\n            Kinesis Data Streams distributes the record across shards using service-managed\n            algorithms. For more information, see\n            <code>UpdateStreamRecordDistributionStrategy</code>.</p>"
                     }
                 },
                 "ExplicitHashKey": {
@@ -14758,8 +14766,7 @@
                 "PartitionKey": {
                     "target": "com.amazonaws.kinesis#PartitionKey",
                     "traits": {
-                        "smithy.api#documentation": "<p>Determines which shard in the stream the data record is assigned to. Partition keys\n            are Unicode strings with a maximum length limit of 256 characters for each key. Amazon\n            Kinesis Data Streams uses the partition key as input to a hash function that maps the\n            partition key and associated data to a specific shard. Specifically, an MD5 hash\n            function is used to map partition keys to 128-bit integer values and to map associated\n            data records to shards. As a result of this hashing mechanism, all data records with the\n            same partition key map to the same shard within the stream.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>Determines which shard in the stream the data record is assigned to. Partition keys\n            are Unicode strings with a maximum length limit of 256 characters for each key. Amazon\n            Kinesis Data Streams uses the partition key as input to a hash function that maps the\n            partition key and associated data to a specific shard. Specifically, an MD5 hash\n            function is used to map partition keys to 128-bit integer values and to map associated\n            data records to shards. As a result of this hashing mechanism, all data records with the\n            same partition key map to the same shard within the stream.</p>\n         <p>If the stream uses the <code>USER_PARTITION_KEY</code> record distribution strategy\n            (the default), a partition key is required for each record. If the stream uses the\n            <code>AUTO</code> record distribution strategy, the partition key is optional and any\n            value you provide is ignored, along with any <code>ExplicitHashKey</code> you provide.\n            In that case, Amazon Kinesis Data Streams distributes records across shards using\n            service-managed algorithms. For more information, see\n            <code>UpdateStreamRecordDistributionStrategy</code>.</p>"
                     }
                 }
             },
@@ -14917,8 +14924,7 @@
                 "PartitionKey": {
                     "target": "com.amazonaws.kinesis#PartitionKey",
                     "traits": {
-                        "smithy.api#documentation": "<p>Identifies which shard in the stream the data record is assigned to.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>Identifies which shard in the stream the data record is assigned to.</p>\n         <p>For a stream that uses the <code>AUTO</code> record distribution strategy, this value\n            is not returned if the producer did not provide a partition key when writing the record.\n            If the producer provided a partition key, the original value is returned even though it\n            was not used to determine shard placement.</p>"
                     }
                 },
                 "EncryptionType": {
@@ -14945,12 +14951,29 @@
                 "GSRSchemaARN": {
                     "target": "com.amazonaws.kinesis#GSRSchemaARN",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Amazon Web Services Glue Schema Registry schema used to validate records. Required when the channel destination is a streaming table (Amazon S3 Tables), for both the <code>JSON</code> and <code>GSR_JSON</code> record formats.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Amazon Web Services Glue Schema Registry schema used to validate records. Required when the channel destination is a streaming table.</p>"
                     }
                 }
             },
             "traits": {
                 "smithy.api#documentation": "<p>Specifies the format of records read from the source stream.</p>"
+            }
+        },
+        "com.amazonaws.kinesis#RecordDistributionStrategy": {
+            "type": "enum",
+            "members": {
+                "AUTO": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AUTO"
+                    }
+                },
+                "USER_PARTITION_KEY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "USER_PARTITION_KEY"
+                    }
+                }
             }
         },
         "com.amazonaws.kinesis#RecordFormatType": {
@@ -15230,7 +15253,7 @@
                 "DataFreshnessInSeconds": {
                     "target": "com.amazonaws.kinesis#DataFreshnessInSeconds",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum age, in seconds, of undelivered data. Valid range is 300 to 900 seconds (5 to 15 minutes). The default value is 300 seconds.</p>"
+                        "smithy.api#documentation": "<p>The maximum age, in seconds, of undelivered data before the channel delivers it to the destination. The default value is 300 seconds.</p>"
                     }
                 },
                 "DeadLetterQueueS3Configuration": {
@@ -15286,7 +15309,7 @@
                 "DataFreshnessInSeconds": {
                     "target": "com.amazonaws.kinesis#DataFreshnessInSeconds",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum age, in seconds, of undelivered data. Valid range is 300 to 900 seconds (5 to 15 minutes).</p>",
+                        "smithy.api#documentation": "<p>The maximum age, in seconds, of undelivered data before the channel delivers it to the destination.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -15364,7 +15387,7 @@
                 "StorageClass": {
                     "target": "com.amazonaws.kinesis#S3StorageClass",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon S3 storage class for delivered objects. Valid values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>STANDARD</code> - Default storage class for frequently accessed data. (default)</p>\n            </li>\n            <li>\n               <p>\n                  <code>INTELLIGENT_TIERING</code> - Automatically moves objects to the most cost-effective access tier based on usage patterns.</p>\n            </li>\n            <li>\n               <p>\n                  <code>GLACIER_IR</code> - Low-cost storage for rarely accessed data that requires millisecond retrieval.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The Amazon S3 storage class for delivered objects. Valid values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>STANDARD</code> - The default storage class, for frequently accessed data.</p>\n            </li>\n            <li>\n               <p>\n                  <code>INTELLIGENT_TIERING</code> - Automatically moves objects to the most cost-effective access tier based on usage patterns.</p>\n            </li>\n            <li>\n               <p>\n                  <code>GLACIER_IR</code> - Low-cost storage for rarely accessed data that requires millisecond retrieval.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "CompressionType": {
@@ -15462,7 +15485,7 @@
                 "DataFreshnessInSeconds": {
                     "target": "com.amazonaws.kinesis#DataFreshnessInSeconds",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum age, in seconds, of undelivered data. Valid range is 300 to 900 seconds (5 to 15 minutes). The default value is 300 seconds.</p>"
+                        "smithy.api#documentation": "<p>The maximum age, in seconds, of undelivered data before the channel delivers it to the destination. The default value is 300 seconds.</p>"
                     }
                 },
                 "DeadLetterQueueS3Configuration": {
@@ -15519,7 +15542,7 @@
                 "DataFreshnessInSeconds": {
                     "target": "com.amazonaws.kinesis#DataFreshnessInSeconds",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum age, in seconds, of undelivered data. Valid range is 300 to 900 seconds (5 to 15 minutes).</p>",
+                        "smithy.api#documentation": "<p>The maximum age, in seconds, of undelivered data before the channel delivers it to the destination.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -16249,6 +16272,12 @@
                     "target": "com.amazonaws.kinesis#ChannelCountObject",
                     "traits": {
                         "smithy.api#documentation": "<p>The number of channels associated with the stream.</p>"
+                    }
+                },
+                "RecordDistributionStrategy": {
+                    "target": "com.amazonaws.kinesis#RecordDistributionStrategy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The record distribution strategy that the stream currently uses. A value of\n            <code>AUTO</code> indicates that Amazon Kinesis Data Streams distributes records across\n            shards using service-managed algorithms. A value of <code>USER_PARTITION_KEY</code>\n            indicates that shard placement is determined by the partition key that producers supply.\n            This field is only present for streams that use the on-demand capacity mode.</p>"
                     }
                 }
             },
@@ -16999,13 +17028,13 @@
                 "S3DestinationConfiguration": {
                     "target": "com.amazonaws.kinesis#S3DestinationUpdateInput",
                     "traits": {
-                        "smithy.api#documentation": "<p>The updated configuration for a general purpose Amazon S3 destination. Only <code>DataFreshnessInSeconds</code> can be updated.</p>"
+                        "smithy.api#documentation": "<p>The updated configuration for a general purpose Amazon S3 destination. Specify this parameter when the channel delivers to a general purpose Amazon S3 bucket. Only <code>DataFreshnessInSeconds</code> can be updated.</p>"
                     }
                 },
                 "S3TablesDestinationConfiguration": {
                     "target": "com.amazonaws.kinesis#S3TablesDestinationUpdateInput",
                     "traits": {
-                        "smithy.api#documentation": "<p>The updated configuration for a streaming table destination. Only <code>DataFreshnessInSeconds</code> can be updated.</p>"
+                        "smithy.api#documentation": "<p>The updated configuration for a streaming table destination. Specify this parameter when the channel delivers to streaming tables on Apache Iceberg in Amazon S3 Tables. Only <code>DataFreshnessInSeconds</code> can be updated.</p>"
                     }
                 },
                 "LoggingConfiguration": {
@@ -17025,7 +17054,7 @@
                 "ChannelDescription": {
                     "target": "com.amazonaws.kinesis#ChannelDescription",
                     "traits": {
-                        "smithy.api#documentation": "<p>The configuration and current status of the updated channel.</p>",
+                        "smithy.api#documentation": "<p>The configuration and current status of the channel after the update, including its ARN, destination configuration, and lifecycle state. Immediately after the request, the state is <code>UPDATING</code>.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -17286,6 +17315,77 @@
                     "target": "com.amazonaws.kinesis#NaturalIntegerObject",
                     "traits": {
                         "smithy.api#documentation": "<p>The target warm throughput in MB/s that the stream should be scaled to handle. This represents the throughput capacity that will be immediately available for write operations. This field is only valid when the stream mode is being updated to on-demand.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.kinesis#UpdateStreamRecordDistributionStrategy": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.kinesis#UpdateStreamRecordDistributionStrategyInput"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.kinesis#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.kinesis#InvalidArgumentException"
+                },
+                {
+                    "target": "com.amazonaws.kinesis#LimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.kinesis#ResourceInUseException"
+                },
+                {
+                    "target": "com.amazonaws.kinesis#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.kinesis#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates the record distribution strategy for the specified Amazon Kinesis Data Streams\n            on-demand data stream. The record distribution strategy determines how Amazon Kinesis\n            Data Streams distributes records across the shards in a stream.</p>\n         <note>\n            <p>You must specify the stream using the <code>StreamARN</code> parameter.</p>\n         </note>\n         <p>The record distribution strategy is a stream-level setting. You can switch between the\n            following strategies at any time, and the change takes effect immediately without\n            downtime, data loss, or disruption to producer or consumer applications:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>AUTO</code> – Amazon Kinesis Data Streams distributes records evenly\n                    across shards using service-managed algorithms, and ignores any partition key\n                    and <code>ExplicitHashKey</code> that a producer provides. Use this strategy for\n                    stateless workloads that do not require partition-key ordering.</p>\n            </li>\n            <li>\n               <p>\n                  <code>USER_PARTITION_KEY</code> – Producers must provide a partition key, and\n                    Amazon Kinesis Data Streams uses the partition key to determine shard placement.\n                    Records that share a partition key are sent to the same shard. This is the\n                    default strategy.</p>\n            </li>\n         </ul>\n         <p>This operation is only supported for data streams that use the on-demand capacity\n            mode. Provisioned capacity mode streams do not support the record distribution strategy\n            setting. Attempting to set <code>AUTO</code> on a provisioned stream results in an\n            <code>InvalidArgumentException</code>.</p>\n         <p>New records that arrive after the change are distributed according to the new\n            strategy. Records already in the stream keep their original shard assignments and are\n            not redistributed.</p>",
+                "smithy.rules#staticContextParams": {
+                    "OperationType": {
+                        "value": "control"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.kinesis#UpdateStreamRecordDistributionStrategyInput": {
+            "type": "structure",
+            "members": {
+                "StreamARN": {
+                    "target": "com.amazonaws.kinesis#StreamARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the stream to update.</p>",
+                        "smithy.api#required": {},
+                        "smithy.rules#contextParam": {
+                            "name": "StreamARN"
+                        }
+                    }
+                },
+                "StreamId": {
+                    "target": "com.amazonaws.kinesis#StreamId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Not Implemented. Reserved for future use.</p>",
+                        "smithy.rules#contextParam": {
+                            "name": "StreamId"
+                        }
+                    }
+                },
+                "RecordDistributionStrategy": {
+                    "target": "com.amazonaws.kinesis#RecordDistributionStrategy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The record distribution strategy to apply to the stream. Specify one of the following\n            values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>AUTO</code> – Amazon Kinesis Data Streams distributes records evenly\n                    across shards and ignores any partition key and <code>ExplicitHashKey</code>\n                    that producers supply.</p>\n            </li>\n            <li>\n               <p>\n                  <code>USER_PARTITION_KEY</code> – Producers must supply a partition key, which\n                    Amazon Kinesis Data Streams uses to determine shard placement. This is the\n                    default.</p>\n            </li>\n         </ul>",
+                        "smithy.api#required": {}
                     }
                 }
             },

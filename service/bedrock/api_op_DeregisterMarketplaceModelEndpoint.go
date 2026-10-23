@@ -4,6 +4,8 @@ package bedrock
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/bedrock/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -35,6 +37,18 @@ type DeregisterMarketplaceModelEndpointInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeregisterMarketplaceModelEndpointInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeregisterMarketplaceModelEndpointRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeregisterMarketplaceModelEndpointInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EndpointArn != nil {
+		s.WriteString(schemas.DeregisterMarketplaceModelEndpointRequest_endpointArn, *v.EndpointArn)
+	}
+}
+
 type DeregisterMarketplaceModelEndpointOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -42,13 +56,26 @@ type DeregisterMarketplaceModelEndpointOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeregisterMarketplaceModelEndpointOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeregisterMarketplaceModelEndpointResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeregisterMarketplaceModelEndpointOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeregisterMarketplaceModelEndpointOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeregisterMarketplaceModelEndpointResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeregisterMarketplaceModelEndpointMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeregisterMarketplaceModelEndpoint{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeregisterMarketplaceModelEndpoint, schemas.DeregisterMarketplaceModelEndpointRequest, schemas.DeregisterMarketplaceModelEndpointResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeregisterMarketplaceModelEndpoint{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeregisterMarketplaceModelEndpoint, schemas.DeregisterMarketplaceModelEndpointRequest, schemas.DeregisterMarketplaceModelEndpointResponse), output: &DeregisterMarketplaceModelEndpointOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

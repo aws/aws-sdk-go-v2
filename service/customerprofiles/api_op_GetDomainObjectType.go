@@ -4,7 +4,9 @@ package customerprofiles
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/customerprofiles/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/customerprofiles/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -40,6 +42,21 @@ type GetDomainObjectTypeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetDomainObjectTypeInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetDomainObjectTypeRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetDomainObjectTypeInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DomainName != nil {
+		s.WriteString(schemas.GetDomainObjectTypeRequest_DomainName, *v.DomainName)
+	}
+	if v.ObjectTypeName != nil {
+		s.WriteString(schemas.GetDomainObjectTypeRequest_ObjectTypeName, *v.ObjectTypeName)
+	}
+}
+
 type GetDomainObjectTypeOutput struct {
 
 	// The unique name of the domain object type.
@@ -72,13 +89,62 @@ type GetDomainObjectTypeOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetDomainObjectTypeOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetDomainObjectTypeResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetDomainObjectTypeOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.GetDomainObjectTypeResponse_CreatedAt, *v.CreatedAt)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.GetDomainObjectTypeResponse_Description, *v.Description)
+	}
+	if v.EncryptionKey != nil {
+		s.WriteString(schemas.GetDomainObjectTypeResponse_EncryptionKey, *v.EncryptionKey)
+	}
+	serializeDomainObjectTypeFields(s, schemas.GetDomainObjectTypeResponse_Fields, v.Fields)
+	if v.LastUpdatedAt != nil {
+		s.WriteTime(schemas.GetDomainObjectTypeResponse_LastUpdatedAt, *v.LastUpdatedAt)
+	}
+	if v.ObjectTypeName != nil {
+		s.WriteString(schemas.GetDomainObjectTypeResponse_ObjectTypeName, *v.ObjectTypeName)
+	}
+	serializeTagMap(s, schemas.GetDomainObjectTypeResponse_Tags, v.Tags)
+}
+func (v *GetDomainObjectTypeOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetDomainObjectTypeResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetDomainObjectTypeResponse_CreatedAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.GetDomainObjectTypeResponse_CreatedAt, v.CreatedAt)
+		case schemas.GetDomainObjectTypeResponse_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.GetDomainObjectTypeResponse_Description, v.Description)
+		case schemas.GetDomainObjectTypeResponse_EncryptionKey:
+			v.EncryptionKey = new(string)
+			return d.ReadString(schemas.GetDomainObjectTypeResponse_EncryptionKey, v.EncryptionKey)
+		case schemas.GetDomainObjectTypeResponse_Fields:
+			return deserializeDomainObjectTypeFields(d, schemas.GetDomainObjectTypeResponse_Fields, &v.Fields)
+		case schemas.GetDomainObjectTypeResponse_LastUpdatedAt:
+			v.LastUpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.GetDomainObjectTypeResponse_LastUpdatedAt, v.LastUpdatedAt)
+		case schemas.GetDomainObjectTypeResponse_ObjectTypeName:
+			v.ObjectTypeName = new(string)
+			return d.ReadString(schemas.GetDomainObjectTypeResponse_ObjectTypeName, v.ObjectTypeName)
+		case schemas.GetDomainObjectTypeResponse_Tags:
+			return deserializeTagMap(d, schemas.GetDomainObjectTypeResponse_Tags, &v.Tags)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetDomainObjectTypeMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetDomainObjectType{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetDomainObjectType, schemas.GetDomainObjectTypeRequest, schemas.GetDomainObjectTypeResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetDomainObjectType{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetDomainObjectType, schemas.GetDomainObjectTypeRequest, schemas.GetDomainObjectTypeResponse), output: &GetDomainObjectTypeOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -1,3 +1,79 @@
+# v1.172.0 (2026-10-22)
+
+* **Feature**: Add support for large worker types in AWS Glue
+* **Bug Fix**: Update smithy-go to v1.28.6
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.171.1 (2026-10-19)
+
+* **Bug Fix**: Allow lists with null values to deserialize into its zero value instead of failing
+
+# v1.171.0 (2026-10-13)
+
+* **Feature**: Amazon Glue releasing support for adding custom namespace for S3 Tables in Glue zero-ETL integration
+
+# v1.170.0 (2026-10-12)
+
+* **Feature**: Adds new AWS Glue Data Quality APIs to retrieve and list data quality evaluation results. The new GetDataQualityResultV2, BatchGetDataQualityResultV2, and ListDataQualityResultsV2 operations return data quality results published from any supported data processing engine.
+
+# v1.169.1 (2026-10-09.2)
+
+* **Dependency Update**: Update to smithy-go v1.28.5.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.169.0 (2026-10-08)
+
+* **Feature**: Enable schema-based (de)serialization for this service.
+* **Feature**: Introduced GetSystemLogsForJobRun and GetSystemLogsForSession APIs, enabling account admins to retrieve system-space logs for FGAC-enabled Glue jobs and sessions.
+* **Dependency Update**: Update to smithy-go v1.28.4.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.168.0 (2026-10-06)
+
+* **Feature**: Enable schema-based (de)serialization for this service.
+
+# v1.167.0 (2026-10-02)
+
+* **Feature**: Added refresh token grant type to Glue Connection supported OAuth 2.0 grant types
+* **Feature**: Enable schema-based (de)serialization for this service.
+
+# v1.166.0 (2026-09-30)
+
+* **Feature**: Enable Catalog ID for crawler, column statistics and materialized views.
+* **Feature**: Enable schema-based (de)serialization for this service.
+
+# v1.165.0 (2026-09-29)
+
+* **Feature**: Add support for Glue system-managed materialized views.
+* **Feature**: Enable schema-based (de)serialization for this service.
+
+# v1.164.0 (2026-09-25)
+
+* **Feature**: Enable schema-based (de)serialization for this service.
+* **Feature**: add support for table level federation
+
+# v1.163.0 (2026-09-24)
+
+* **Feature**: Enable schema-based (de)serialization for this service.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.162.0 (2026-09-22)
+
+* **Feature**: Adding two new fields for Glue Materialized Views feature - (1) SubObjectsStatistics and (2) SparkPipelineInfo.
+* **Feature**: Enable schema-based (de)serialization for this service.
+
+# v1.161.0 (2026-09-21)
+
+* **Feature**: Enable schema-based (de)serialization for this service.
+
+# v1.160.0 (2026-09-18)
+
+* **Feature**: Introducing AWS Glue Data Quality advanced rule recommendations for faster recommendations. This capability uses Amazon Athena to analyze a sample of table data and Amazon Bedrock to recommend DQDL rules.
+
+# v1.159.0 (2026-09-14)
+
+* **Feature**: Amazon Glue releasing the new API ListIntegrationTableProperties and adding IntegrationArn to TargetTableConfig
+
 # v1.158.0 (2026-09-09)
 
 * **Feature**: Stop registering the `retry.MetricsHeader` middleware in generated clients. The `Amz-Sdk-Request` header is now set by the retry middleware itself.

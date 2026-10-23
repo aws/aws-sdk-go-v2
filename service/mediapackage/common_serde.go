@@ -122,6 +122,13 @@ func deserialize__listOf__PeriodTriggersElement(d smithy.ShapeDeserializer, s *s
 	*v = make([]types.PeriodTriggersElement, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.PeriodTriggersElement
+			*v = append(*v, zero)
+			return nil
+		}
 
 		if err := d.ReadString(s.ListMember(), &vv); err != nil {
 			return err
@@ -136,6 +143,13 @@ func deserialize__listOf__string(d smithy.ShapeDeserializer, s *smithy.Schema, v
 	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			*v = append(*v, zero)
+			return nil
+		}
 
 		if err := d.ReadString(s.ListMember(), &vv); err != nil {
 			return err
@@ -150,6 +164,14 @@ func deserialize__listOfChannel(d smithy.ShapeDeserializer, s *smithy.Schema, v 
 	*v = make([]types.Channel, 0)
 	var vv types.Channel
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.Channel
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = types.Channel{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -164,6 +186,14 @@ func deserialize__listOfHarvestJob(d smithy.ShapeDeserializer, s *smithy.Schema,
 	*v = make([]types.HarvestJob, 0)
 	var vv types.HarvestJob
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.HarvestJob
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = types.HarvestJob{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -178,6 +208,14 @@ func deserialize__listOfHlsManifest(d smithy.ShapeDeserializer, s *smithy.Schema
 	*v = make([]types.HlsManifest, 0)
 	var vv types.HlsManifest
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.HlsManifest
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = types.HlsManifest{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -192,6 +230,14 @@ func deserialize__listOfHlsManifestCreateOrUpdateParameters(d smithy.ShapeDeseri
 	*v = make([]types.HlsManifestCreateOrUpdateParameters, 0)
 	var vv types.HlsManifestCreateOrUpdateParameters
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.HlsManifestCreateOrUpdateParameters
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = types.HlsManifestCreateOrUpdateParameters{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -206,6 +252,14 @@ func deserialize__listOfIngestEndpoint(d smithy.ShapeDeserializer, s *smithy.Sch
 	*v = make([]types.IngestEndpoint, 0)
 	var vv types.IngestEndpoint
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.IngestEndpoint
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = types.IngestEndpoint{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -220,6 +274,14 @@ func deserialize__listOfOriginEndpoint(d smithy.ShapeDeserializer, s *smithy.Sch
 	*v = make([]types.OriginEndpoint, 0)
 	var vv types.OriginEndpoint
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.OriginEndpoint
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = types.OriginEndpoint{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -234,6 +296,13 @@ func deserializeAdTriggers(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]ty
 	*v = make([]types.AdTriggersElement, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.AdTriggersElement
+			*v = append(*v, zero)
+			return nil
+		}
 
 		if err := d.ReadString(s.ListMember(), &vv); err != nil {
 			return err
@@ -272,6 +341,13 @@ func deserialize__mapOf__string(d smithy.ShapeDeserializer, s *smithy.Schema, v 
 	*v = make(map[string]string)
 	var vv string
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			(*v)[k] = zero
+			return nil
+		}
 
 		if err := d.ReadString(s.MapValue(), &vv); err != nil {
 			return err
@@ -286,6 +362,13 @@ func deserializeTags(d smithy.ShapeDeserializer, s *smithy.Schema, v *map[string
 	*v = make(map[string]string)
 	var vv string
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			(*v)[k] = zero
+			return nil
+		}
 
 		if err := d.ReadString(s.MapValue(), &vv); err != nil {
 			return err

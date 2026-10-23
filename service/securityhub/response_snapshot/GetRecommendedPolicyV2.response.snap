@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"Error":{"Code":"__Code__","Message":"__Message__"},"NextToken":"__NextToken__","RecommendationSteps":[{"UnusedPermissions":{"ExistingPolicy":"__ExistingPolicy__","ExistingPolicyId":"__ExistingPolicyId__","PolicyUpdatedAt":"2000-01-01T00:00:00Z","RecommendedAction":"__RecommendedAction__","RecommendedPolicy":"__RecommendedPolicy__"}},{"UnusedPermissions":{"ExistingPolicy":"__ExistingPolicy__","ExistingPolicyId":"__ExistingPolicyId__","PolicyUpdatedAt":"2000-01-01T00:00:00Z","RecommendedAction":"__RecommendedAction__","RecommendedPolicy":"__RecommendedPolicy__"}}],"RecommendationType":"UNUSED_PERMISSION_RECOMMENDATION","ResourceArn":"__ResourceArn__","Status":"IN_PROGRESS"}

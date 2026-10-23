@@ -4,7 +4,9 @@ package costexplorer
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/costexplorer/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/costexplorer/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -41,6 +43,18 @@ type StartCostAllocationTagBackfillInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartCostAllocationTagBackfillInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartCostAllocationTagBackfillRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartCostAllocationTagBackfillInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BackfillFrom != nil {
+		s.WriteString(schemas.StartCostAllocationTagBackfillRequest_BackfillFrom, *v.BackfillFrom)
+	}
+}
+
 type StartCostAllocationTagBackfillOutput struct {
 
 	//  An object containing detailed metadata of your new backfill request.
@@ -52,13 +66,34 @@ type StartCostAllocationTagBackfillOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartCostAllocationTagBackfillOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartCostAllocationTagBackfillResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartCostAllocationTagBackfillOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BackfillRequest != nil {
+		s.WriteStruct(schemas.StartCostAllocationTagBackfillResponse_BackfillRequest)
+		v.BackfillRequest.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *StartCostAllocationTagBackfillOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartCostAllocationTagBackfillResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartCostAllocationTagBackfillResponse_BackfillRequest:
+			v.BackfillRequest = &types.CostAllocationTagBackfillRequest{}
+			return v.BackfillRequest.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartCostAllocationTagBackfillMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStartCostAllocationTagBackfill{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartCostAllocationTagBackfill, schemas.StartCostAllocationTagBackfillRequest, schemas.StartCostAllocationTagBackfillResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpStartCostAllocationTagBackfill{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartCostAllocationTagBackfill, schemas.StartCostAllocationTagBackfillRequest, schemas.StartCostAllocationTagBackfillResponse), output: &StartCostAllocationTagBackfillOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package medialive
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/medialive/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/medialive/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -33,6 +35,18 @@ type DescribeReservationInput struct {
 	ReservationId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DescribeReservationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeReservationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeReservationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ReservationId != nil {
+		s.WriteString(schemas.DescribeReservationRequest_ReservationId, *v.ReservationId)
+	}
 }
 
 // Placeholder documentation for DescribeReservationResponse
@@ -104,13 +118,153 @@ type DescribeReservationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeReservationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeReservationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeReservationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.DescribeReservationResponse_Arn, *v.Arn)
+	}
+	if v.Count != nil {
+		s.WriteInt32(schemas.DescribeReservationResponse_Count, *v.Count)
+	}
+	if v.CurrencyCode != nil {
+		s.WriteString(schemas.DescribeReservationResponse_CurrencyCode, *v.CurrencyCode)
+	}
+	if v.Duration != nil {
+		s.WriteInt32(schemas.DescribeReservationResponse_Duration, *v.Duration)
+	}
+	if v.DurationUnits != "" {
+		s.WriteString(schemas.DescribeReservationResponse_DurationUnits, string(v.DurationUnits))
+	}
+	if v.End != nil {
+		s.WriteString(schemas.DescribeReservationResponse_End, *v.End)
+	}
+	if v.FixedPrice != nil {
+		s.WriteFloat64(schemas.DescribeReservationResponse_FixedPrice, *v.FixedPrice)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.DescribeReservationResponse_Name, *v.Name)
+	}
+	if v.OfferingDescription != nil {
+		s.WriteString(schemas.DescribeReservationResponse_OfferingDescription, *v.OfferingDescription)
+	}
+	if v.OfferingId != nil {
+		s.WriteString(schemas.DescribeReservationResponse_OfferingId, *v.OfferingId)
+	}
+	if v.OfferingType != "" {
+		s.WriteString(schemas.DescribeReservationResponse_OfferingType, string(v.OfferingType))
+	}
+	if v.Region != nil {
+		s.WriteString(schemas.DescribeReservationResponse_Region, *v.Region)
+	}
+	if v.RenewalSettings != nil {
+		s.WriteStruct(schemas.DescribeReservationResponse_RenewalSettings)
+		v.RenewalSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ReservationId != nil {
+		s.WriteString(schemas.DescribeReservationResponse_ReservationId, *v.ReservationId)
+	}
+	if v.ResourceSpecification != nil {
+		s.WriteStruct(schemas.DescribeReservationResponse_ResourceSpecification)
+		v.ResourceSpecification.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Start != nil {
+		s.WriteString(schemas.DescribeReservationResponse_Start, *v.Start)
+	}
+	if v.State != "" {
+		s.WriteString(schemas.DescribeReservationResponse_State, string(v.State))
+	}
+	serializeTags(s, schemas.DescribeReservationResponse_Tags, v.Tags)
+	if v.UsagePrice != nil {
+		s.WriteFloat64(schemas.DescribeReservationResponse_UsagePrice, *v.UsagePrice)
+	}
+}
+func (v *DescribeReservationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeReservationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeReservationResponse_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.DescribeReservationResponse_Arn, v.Arn)
+		case schemas.DescribeReservationResponse_Count:
+			v.Count = new(int32)
+			return d.ReadInt32(schemas.DescribeReservationResponse_Count, v.Count)
+		case schemas.DescribeReservationResponse_CurrencyCode:
+			v.CurrencyCode = new(string)
+			return d.ReadString(schemas.DescribeReservationResponse_CurrencyCode, v.CurrencyCode)
+		case schemas.DescribeReservationResponse_Duration:
+			v.Duration = new(int32)
+			return d.ReadInt32(schemas.DescribeReservationResponse_Duration, v.Duration)
+		case schemas.DescribeReservationResponse_DurationUnits:
+			var ev string
+			if err := d.ReadString(schemas.DescribeReservationResponse_DurationUnits, &ev); err != nil {
+				return err
+			}
+			v.DurationUnits = types.OfferingDurationUnits(ev)
+			return nil
+		case schemas.DescribeReservationResponse_End:
+			v.End = new(string)
+			return d.ReadString(schemas.DescribeReservationResponse_End, v.End)
+		case schemas.DescribeReservationResponse_FixedPrice:
+			v.FixedPrice = new(float64)
+			return d.ReadFloat64(schemas.DescribeReservationResponse_FixedPrice, v.FixedPrice)
+		case schemas.DescribeReservationResponse_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.DescribeReservationResponse_Name, v.Name)
+		case schemas.DescribeReservationResponse_OfferingDescription:
+			v.OfferingDescription = new(string)
+			return d.ReadString(schemas.DescribeReservationResponse_OfferingDescription, v.OfferingDescription)
+		case schemas.DescribeReservationResponse_OfferingId:
+			v.OfferingId = new(string)
+			return d.ReadString(schemas.DescribeReservationResponse_OfferingId, v.OfferingId)
+		case schemas.DescribeReservationResponse_OfferingType:
+			var ev string
+			if err := d.ReadString(schemas.DescribeReservationResponse_OfferingType, &ev); err != nil {
+				return err
+			}
+			v.OfferingType = types.OfferingType(ev)
+			return nil
+		case schemas.DescribeReservationResponse_Region:
+			v.Region = new(string)
+			return d.ReadString(schemas.DescribeReservationResponse_Region, v.Region)
+		case schemas.DescribeReservationResponse_RenewalSettings:
+			v.RenewalSettings = &types.RenewalSettings{}
+			return v.RenewalSettings.Deserialize(d)
+		case schemas.DescribeReservationResponse_ReservationId:
+			v.ReservationId = new(string)
+			return d.ReadString(schemas.DescribeReservationResponse_ReservationId, v.ReservationId)
+		case schemas.DescribeReservationResponse_ResourceSpecification:
+			v.ResourceSpecification = &types.ReservationResourceSpecification{}
+			return v.ResourceSpecification.Deserialize(d)
+		case schemas.DescribeReservationResponse_Start:
+			v.Start = new(string)
+			return d.ReadString(schemas.DescribeReservationResponse_Start, v.Start)
+		case schemas.DescribeReservationResponse_State:
+			var ev string
+			if err := d.ReadString(schemas.DescribeReservationResponse_State, &ev); err != nil {
+				return err
+			}
+			v.State = types.ReservationState(ev)
+			return nil
+		case schemas.DescribeReservationResponse_Tags:
+			return deserializeTags(d, schemas.DescribeReservationResponse_Tags, &v.Tags)
+		case schemas.DescribeReservationResponse_UsagePrice:
+			v.UsagePrice = new(float64)
+			return d.ReadFloat64(schemas.DescribeReservationResponse_UsagePrice, v.UsagePrice)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeReservationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeReservation{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeReservation, schemas.DescribeReservationRequest, schemas.DescribeReservationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeReservation{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeReservation, schemas.DescribeReservationRequest, schemas.DescribeReservationResponse), output: &DescribeReservationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

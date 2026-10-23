@@ -4,7 +4,9 @@ package quicksight
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/quicksight/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/quicksight/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -42,6 +44,21 @@ type DescribeAnalysisPermissionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeAnalysisPermissionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeAnalysisPermissionsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeAnalysisPermissionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AnalysisId != nil {
+		s.WriteString(schemas.DescribeAnalysisPermissionsRequest_AnalysisId, *v.AnalysisId)
+	}
+	if v.AwsAccountId != nil {
+		s.WriteString(schemas.DescribeAnalysisPermissionsRequest_AwsAccountId, *v.AwsAccountId)
+	}
+}
+
 type DescribeAnalysisPermissionsOutput struct {
 
 	// The Amazon Resource Name (ARN) of the analysis whose permissions you're
@@ -67,13 +84,52 @@ type DescribeAnalysisPermissionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeAnalysisPermissionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeAnalysisPermissionsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeAnalysisPermissionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AnalysisArn != nil {
+		s.WriteString(schemas.DescribeAnalysisPermissionsResponse_AnalysisArn, *v.AnalysisArn)
+	}
+	if v.AnalysisId != nil {
+		s.WriteString(schemas.DescribeAnalysisPermissionsResponse_AnalysisId, *v.AnalysisId)
+	}
+	serializeUpdateResourcePermissionList(s, schemas.DescribeAnalysisPermissionsResponse_Permissions, v.Permissions)
+	if v.RequestId != nil {
+		s.WriteString(schemas.DescribeAnalysisPermissionsResponse_RequestId, *v.RequestId)
+	}
+	if v.Status != 0 {
+		s.WriteInt32(schemas.DescribeAnalysisPermissionsResponse_Status, v.Status)
+	}
+}
+func (v *DescribeAnalysisPermissionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeAnalysisPermissionsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeAnalysisPermissionsResponse_AnalysisArn:
+			v.AnalysisArn = new(string)
+			return d.ReadString(schemas.DescribeAnalysisPermissionsResponse_AnalysisArn, v.AnalysisArn)
+		case schemas.DescribeAnalysisPermissionsResponse_AnalysisId:
+			v.AnalysisId = new(string)
+			return d.ReadString(schemas.DescribeAnalysisPermissionsResponse_AnalysisId, v.AnalysisId)
+		case schemas.DescribeAnalysisPermissionsResponse_Permissions:
+			return deserializeUpdateResourcePermissionList(d, schemas.DescribeAnalysisPermissionsResponse_Permissions, &v.Permissions)
+		case schemas.DescribeAnalysisPermissionsResponse_RequestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.DescribeAnalysisPermissionsResponse_RequestId, v.RequestId)
+		case schemas.DescribeAnalysisPermissionsResponse_Status:
+			return d.ReadInt32(schemas.DescribeAnalysisPermissionsResponse_Status, &v.Status)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeAnalysisPermissionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeAnalysisPermissions{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeAnalysisPermissions, schemas.DescribeAnalysisPermissionsRequest, schemas.DescribeAnalysisPermissionsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeAnalysisPermissions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeAnalysisPermissions, schemas.DescribeAnalysisPermissionsRequest, schemas.DescribeAnalysisPermissionsResponse), output: &DescribeAnalysisPermissionsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

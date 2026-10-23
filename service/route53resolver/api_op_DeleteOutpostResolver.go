@@ -11,6 +11,11 @@ import (
 )
 
 // Deletes a Resolver on the Outpost.
+//
+// This operation applies to first-generation Outposts only. On second-generation
+// Outposts, Resolver is managed automatically by Amazon Web Services and can't be
+// deleted directly. To opt out of Resolver on second-generation Outposts, contact
+// Amazon Web Services Support.
 func (c *Client) DeleteOutpostResolver(ctx context.Context, params *DeleteOutpostResolverInput, optFns ...func(*Options)) (*DeleteOutpostResolverOutput, error) {
 	if params == nil {
 		params = &DeleteOutpostResolverInput{}

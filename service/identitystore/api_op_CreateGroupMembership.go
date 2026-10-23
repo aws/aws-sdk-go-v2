@@ -4,7 +4,9 @@ package identitystore
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/identitystore/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/identitystore/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -29,10 +31,18 @@ type CreateGroupMembershipInput struct {
 
 	// The identifier for a group in the identity store.
 	//
+	// You can specify the group by ID or by Amazon Resource Name (ARN). For example,
+	// group ID a1b2c3d4-5678-90ab-cdef-EXAMPLE22222 or group ARN
+	// arn:aws:identitystore:::group/a1b2c3d4-5678-90ab-cdef-EXAMPLE22222 .
+	//
 	// This member is required.
 	GroupId *string
 
 	// The globally unique identifier for the identity store.
+	//
+	// You can specify the identity store by ID or by Amazon Resource Name (ARN). For
+	// example, identity store ID d-1234567890 or identity store ARN
+	// arn:aws:identitystore::111122223333:identitystore/d-1234567890 .
 	//
 	// This member is required.
 	IdentityStoreId *string
@@ -47,12 +57,35 @@ type CreateGroupMembershipInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateGroupMembershipInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateGroupMembershipRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateGroupMembershipInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GroupId != nil {
+		s.WriteString(schemas.CreateGroupMembershipRequest_GroupId, *v.GroupId)
+	}
+	if v.IdentityStoreId != nil {
+		s.WriteString(schemas.CreateGroupMembershipRequest_IdentityStoreId, *v.IdentityStoreId)
+	}
+	serializeMemberId(s, schemas.CreateGroupMembershipRequest_MemberId, v.MemberId)
+}
+
 type CreateGroupMembershipOutput struct {
 
 	// The globally unique identifier for the identity store.
 	//
 	// This member is required.
 	IdentityStoreId *string
+
+	// The Amazon Resource Name (ARN) of the newly created group membership in the
+	// identity store. For example,
+	// arn:aws:identitystore:::membership/a1b2c3d4-5678-90ab-cdef-EXAMPLE33333 .
+	//
+	// This member is required.
+	MembershipArn *string
 
 	// The identifier for a newly created GroupMembership in an identity store.
 	//
@@ -65,13 +98,44 @@ type CreateGroupMembershipOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateGroupMembershipOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateGroupMembershipResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateGroupMembershipOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IdentityStoreId != nil {
+		s.WriteString(schemas.CreateGroupMembershipResponse_IdentityStoreId, *v.IdentityStoreId)
+	}
+	if v.MembershipArn != nil {
+		s.WriteString(schemas.CreateGroupMembershipResponse_MembershipArn, *v.MembershipArn)
+	}
+	if v.MembershipId != nil {
+		s.WriteString(schemas.CreateGroupMembershipResponse_MembershipId, *v.MembershipId)
+	}
+}
+func (v *CreateGroupMembershipOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateGroupMembershipResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateGroupMembershipResponse_IdentityStoreId:
+			v.IdentityStoreId = new(string)
+			return d.ReadString(schemas.CreateGroupMembershipResponse_IdentityStoreId, v.IdentityStoreId)
+		case schemas.CreateGroupMembershipResponse_MembershipArn:
+			v.MembershipArn = new(string)
+			return d.ReadString(schemas.CreateGroupMembershipResponse_MembershipArn, v.MembershipArn)
+		case schemas.CreateGroupMembershipResponse_MembershipId:
+			v.MembershipId = new(string)
+			return d.ReadString(schemas.CreateGroupMembershipResponse_MembershipId, v.MembershipId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateGroupMembershipMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateGroupMembership{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateGroupMembership, schemas.CreateGroupMembershipRequest, schemas.CreateGroupMembershipResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateGroupMembership{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateGroupMembership, schemas.CreateGroupMembershipRequest, schemas.CreateGroupMembershipResponse), output: &CreateGroupMembershipOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package appsync
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/appsync/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/appsync/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -34,6 +36,18 @@ type GetApiAssociationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetApiAssociationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetApiAssociationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetApiAssociationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DomainName != nil {
+		s.WriteString(schemas.GetApiAssociationRequest_domainName, *v.DomainName)
+	}
+}
+
 type GetApiAssociationOutput struct {
 
 	// The ApiAssociation object.
@@ -45,13 +59,34 @@ type GetApiAssociationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetApiAssociationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetApiAssociationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetApiAssociationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApiAssociation != nil {
+		s.WriteStruct(schemas.GetApiAssociationResponse_apiAssociation)
+		v.ApiAssociation.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetApiAssociationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetApiAssociationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetApiAssociationResponse_apiAssociation:
+			v.ApiAssociation = &types.ApiAssociation{}
+			return v.ApiAssociation.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetApiAssociationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetApiAssociation{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetApiAssociation, schemas.GetApiAssociationRequest, schemas.GetApiAssociationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetApiAssociation{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetApiAssociation, schemas.GetApiAssociationRequest, schemas.GetApiAssociationResponse), output: &GetApiAssociationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

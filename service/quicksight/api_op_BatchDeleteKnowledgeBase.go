@@ -4,7 +4,9 @@ package quicksight
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/quicksight/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/quicksight/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,19 @@ type BatchDeleteKnowledgeBaseInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchDeleteKnowledgeBaseInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchDeleteKnowledgeBaseRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchDeleteKnowledgeBaseInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AwsAccountId != nil {
+		s.WriteString(schemas.BatchDeleteKnowledgeBaseRequest_AwsAccountId, *v.AwsAccountId)
+	}
+	serializeBatchDeleteKnowledgeBaseRequestKnowledgeBaseIdsList(s, schemas.BatchDeleteKnowledgeBaseRequest_KnowledgeBaseIds, v.KnowledgeBaseIds)
+}
+
 type BatchDeleteKnowledgeBaseOutput struct {
 
 	// A list of knowledge bases that were successfully deleted.
@@ -63,13 +78,44 @@ type BatchDeleteKnowledgeBaseOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchDeleteKnowledgeBaseOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchDeleteKnowledgeBaseResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchDeleteKnowledgeBaseOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeBatchDeleteKnowledgeBaseSuccessList(s, schemas.BatchDeleteKnowledgeBaseResponse_Deleted, v.Deleted)
+	serializeBatchDeleteKnowledgeBaseFailureList(s, schemas.BatchDeleteKnowledgeBaseResponse_Errors, v.Errors)
+	if v.RequestId != nil {
+		s.WriteString(schemas.BatchDeleteKnowledgeBaseResponse_RequestId, *v.RequestId)
+	}
+	if v.Status != nil {
+		s.WriteInt32(schemas.BatchDeleteKnowledgeBaseResponse_Status, *v.Status)
+	}
+}
+func (v *BatchDeleteKnowledgeBaseOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchDeleteKnowledgeBaseResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchDeleteKnowledgeBaseResponse_Deleted:
+			return deserializeBatchDeleteKnowledgeBaseSuccessList(d, schemas.BatchDeleteKnowledgeBaseResponse_Deleted, &v.Deleted)
+		case schemas.BatchDeleteKnowledgeBaseResponse_Errors:
+			return deserializeBatchDeleteKnowledgeBaseFailureList(d, schemas.BatchDeleteKnowledgeBaseResponse_Errors, &v.Errors)
+		case schemas.BatchDeleteKnowledgeBaseResponse_RequestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.BatchDeleteKnowledgeBaseResponse_RequestId, v.RequestId)
+		case schemas.BatchDeleteKnowledgeBaseResponse_Status:
+			v.Status = new(int32)
+			return d.ReadInt32(schemas.BatchDeleteKnowledgeBaseResponse_Status, v.Status)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationBatchDeleteKnowledgeBaseMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpBatchDeleteKnowledgeBase{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchDeleteKnowledgeBase, schemas.BatchDeleteKnowledgeBaseRequest, schemas.BatchDeleteKnowledgeBaseResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpBatchDeleteKnowledgeBase{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchDeleteKnowledgeBase, schemas.BatchDeleteKnowledgeBaseRequest, schemas.BatchDeleteKnowledgeBaseResponse), output: &BatchDeleteKnowledgeBaseOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

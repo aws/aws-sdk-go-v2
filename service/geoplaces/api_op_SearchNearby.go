@@ -4,7 +4,9 @@ package geoplaces
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/geoplaces/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/geoplaces/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -98,6 +100,43 @@ type SearchNearbyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SearchNearbyInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SearchNearbyRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SearchNearbyInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeSearchNearbyAdditionalFeatureList(s, schemas.SearchNearbyRequest_AdditionalFeatures, v.AdditionalFeatures)
+	if v.Filter != nil {
+		s.WriteStruct(schemas.SearchNearbyRequest_Filter)
+		v.Filter.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.IntendedUse != "" {
+		s.WriteString(schemas.SearchNearbyRequest_IntendedUse, string(v.IntendedUse))
+	}
+	if v.Key != nil {
+		s.WriteString(schemas.SearchNearbyRequest_Key, *v.Key)
+	}
+	if v.Language != nil {
+		s.WriteString(schemas.SearchNearbyRequest_Language, *v.Language)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.SearchNearbyRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.SearchNearbyRequest_NextToken, *v.NextToken)
+	}
+	if v.PoliticalView != nil {
+		s.WriteString(schemas.SearchNearbyRequest_PoliticalView, *v.PoliticalView)
+	}
+	serializePosition(s, schemas.SearchNearbyRequest_QueryPosition, v.QueryPosition)
+	if v.QueryRadius != nil {
+		s.WriteInt64(schemas.SearchNearbyRequest_QueryRadius, *v.QueryRadius)
+	}
+}
+
 type SearchNearbyOutput struct {
 
 	// The pricing bucket for which the query is charged at.
@@ -122,13 +161,41 @@ type SearchNearbyOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SearchNearbyOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SearchNearbyResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SearchNearbyOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.SearchNearbyResponse_NextToken, *v.NextToken)
+	}
+	if v.PricingBucket != nil {
+		s.WriteString(schemas.SearchNearbyResponse_PricingBucket, *v.PricingBucket)
+	}
+	serializeSearchNearbyResultItemList(s, schemas.SearchNearbyResponse_ResultItems, v.ResultItems)
+}
+func (v *SearchNearbyOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SearchNearbyResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SearchNearbyResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.SearchNearbyResponse_NextToken, v.NextToken)
+		case schemas.SearchNearbyResponse_PricingBucket:
+			v.PricingBucket = new(string)
+			return d.ReadString(schemas.SearchNearbyResponse_PricingBucket, v.PricingBucket)
+		case schemas.SearchNearbyResponse_ResultItems:
+			return deserializeSearchNearbyResultItemList(d, schemas.SearchNearbyResponse_ResultItems, &v.ResultItems)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationSearchNearbyMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpSearchNearby{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SearchNearby, schemas.SearchNearbyRequest, schemas.SearchNearbyResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpSearchNearby{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SearchNearby, schemas.SearchNearbyRequest, schemas.SearchNearbyResponse), output: &SearchNearbyOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

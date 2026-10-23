@@ -5,7 +5,9 @@ package bedrockagent
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/bedrockagent/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagent/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -56,6 +58,29 @@ type CreateAgentAliasInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateAgentAliasInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateAgentAliasRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateAgentAliasInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AgentAliasName != nil {
+		s.WriteString(schemas.CreateAgentAliasRequest_agentAliasName, *v.AgentAliasName)
+	}
+	if v.AgentId != nil {
+		s.WriteString(schemas.CreateAgentAliasRequest_agentId, *v.AgentId)
+	}
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateAgentAliasRequest_clientToken, *v.ClientToken)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreateAgentAliasRequest_description, *v.Description)
+	}
+	serializeAgentAliasRoutingConfiguration(s, schemas.CreateAgentAliasRequest_routingConfiguration, v.RoutingConfiguration)
+	serializeTagsMap(s, schemas.CreateAgentAliasRequest_tags, v.Tags)
+}
+
 type CreateAgentAliasOutput struct {
 
 	// Contains details about the alias that was created.
@@ -69,13 +94,34 @@ type CreateAgentAliasOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateAgentAliasOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateAgentAliasResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateAgentAliasOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AgentAlias != nil {
+		s.WriteStruct(schemas.CreateAgentAliasResponse_agentAlias)
+		v.AgentAlias.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateAgentAliasOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateAgentAliasResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateAgentAliasResponse_agentAlias:
+			v.AgentAlias = &types.AgentAlias{}
+			return v.AgentAlias.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateAgentAliasMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateAgentAlias{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateAgentAlias, schemas.CreateAgentAliasRequest, schemas.CreateAgentAliasResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateAgentAlias{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateAgentAlias, schemas.CreateAgentAliasRequest, schemas.CreateAgentAliasResponse), output: &CreateAgentAliasOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

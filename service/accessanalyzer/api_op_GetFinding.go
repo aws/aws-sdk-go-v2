@@ -4,7 +4,9 @@ package accessanalyzer
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/accessanalyzer/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/accessanalyzer/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -48,6 +50,34 @@ type GetFindingInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetFindingInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetFindingRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetFindingInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AnalyzerArn != nil {
+		s.WriteString(schemas.GetFindingRequest_analyzerArn, *v.AnalyzerArn)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.GetFindingRequest_id, *v.Id)
+	}
+}
+func (v *GetFindingInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetFindingRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetFindingRequest_analyzerArn:
+			v.AnalyzerArn = new(string)
+			return d.ReadString(schemas.GetFindingRequest_analyzerArn, v.AnalyzerArn)
+		case schemas.GetFindingRequest_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.GetFindingRequest_id, v.Id)
+		}
+		return nil
+	})
+}
+
 // The response to the request.
 type GetFindingOutput struct {
 
@@ -60,13 +90,34 @@ type GetFindingOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetFindingOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetFindingResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetFindingOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Finding != nil {
+		s.WriteStruct(schemas.GetFindingResponse_finding)
+		v.Finding.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetFindingOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetFindingResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetFindingResponse_finding:
+			v.Finding = &types.Finding{}
+			return v.Finding.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetFindingMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetFinding{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetFinding, schemas.GetFindingRequest, schemas.GetFindingResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetFinding{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetFinding, schemas.GetFindingRequest, schemas.GetFindingResponse), output: &GetFindingOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package redshiftserverless
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/redshiftserverless/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/redshiftserverless/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -35,6 +37,18 @@ type GetReservationOfferingInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetReservationOfferingInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetReservationOfferingRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetReservationOfferingInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.OfferingId != nil {
+		s.WriteString(schemas.GetReservationOfferingRequest_offeringId, *v.OfferingId)
+	}
+}
+
 type GetReservationOfferingOutput struct {
 
 	// The returned reservation offering. The offering determines the payment schedule
@@ -49,13 +63,34 @@ type GetReservationOfferingOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetReservationOfferingOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetReservationOfferingResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetReservationOfferingOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ReservationOffering != nil {
+		s.WriteStruct(schemas.GetReservationOfferingResponse_reservationOffering)
+		v.ReservationOffering.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetReservationOfferingOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetReservationOfferingResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetReservationOfferingResponse_reservationOffering:
+			v.ReservationOffering = &types.ReservationOffering{}
+			return v.ReservationOffering.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetReservationOfferingMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetReservationOffering{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetReservationOffering, schemas.GetReservationOfferingRequest, schemas.GetReservationOfferingResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetReservationOffering{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetReservationOffering, schemas.GetReservationOfferingRequest, schemas.GetReservationOfferingResponse), output: &GetReservationOfferingOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

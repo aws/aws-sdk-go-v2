@@ -109,9 +109,11 @@ func serdeRespClient(status int, header http.Header, body []byte) *Client {
 }
 func TestCheckResponseSnapshot_CreateNetworkConnector(t *testing.T) {
 	want := &CreateNetworkConnectorOutput{
-		Arn:  ptr.String("__Arn__"),
-		Name: ptr.String("__Name__"),
-		Id:   ptr.String("__Id__"),
+		Arn:        ptr.String("__Arn__"),
+		Name:       ptr.String("__Name__"),
+		Id:         ptr.String("__Id__"),
+		VersionArn: ptr.String("__VersionArn__"),
+		Version:    ptr.Int64(1),
 		Configuration: &types.NetworkConnectorConfigurationMemberVpcEgressConfiguration{
 			Value: types.NetworkConnectorVpcEgressConfiguration{
 				SubnetIds: []string{
@@ -175,9 +177,11 @@ func TestCheckResponseSnapshot_CreateNetworkConnector(t *testing.T) {
 
 func TestCheckResponseSnapshot_DeleteNetworkConnector(t *testing.T) {
 	want := &DeleteNetworkConnectorOutput{
-		Arn:  ptr.String("__Arn__"),
-		Name: ptr.String("__Name__"),
-		Id:   ptr.String("__Id__"),
+		Arn:        ptr.String("__Arn__"),
+		Name:       ptr.String("__Name__"),
+		Id:         ptr.String("__Id__"),
+		VersionArn: ptr.String("__VersionArn__"),
+		Version:    ptr.Int64(1),
 		Configuration: &types.NetworkConnectorConfigurationMemberVpcEgressConfiguration{
 			Value: types.NetworkConnectorVpcEgressConfiguration{
 				SubnetIds: []string{
@@ -219,10 +223,13 @@ func TestCheckResponseSnapshot_DeleteNetworkConnector(t *testing.T) {
 
 func TestCheckResponseSnapshot_GetNetworkConnector(t *testing.T) {
 	want := &GetNetworkConnectorOutput{
-		Arn:     ptr.String("__Arn__"),
-		Name:    ptr.String("__Name__"),
-		Id:      ptr.String("__Id__"),
-		Version: ptr.Int64(1),
+		Arn:              ptr.String("__Arn__"),
+		Name:             ptr.String("__Name__"),
+		Id:               ptr.String("__Id__"),
+		VersionArn:       ptr.String("__VersionArn__"),
+		Version:          ptr.Int64(1),
+		LatestVersionArn: ptr.String("__LatestVersionArn__"),
+		LatestVersion:    ptr.Int64(1),
 		Configuration: &types.NetworkConnectorConfigurationMemberVpcEgressConfiguration{
 			Value: types.NetworkConnectorVpcEgressConfiguration{
 				SubnetIds: []string{
@@ -268,24 +275,78 @@ func TestCheckResponseSnapshot_GetNetworkConnector(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_ListNetworkConnectorVersions(t *testing.T) {
+	want := &ListNetworkConnectorVersionsOutput{
+		NetworkConnectorVersions: []types.NetworkConnectorVersionSummary{
+			{
+				Arn:             ptr.String("__Arn__"),
+				VersionArn:      ptr.String("__VersionArn__"),
+				Name:            ptr.String("__Name__"),
+				Id:              ptr.String("__Id__"),
+				Version:         ptr.Int64(1),
+				State:           types.NetworkConnectorState("PENDING"),
+				StateReason:     ptr.String("__StateReason__"),
+				StateReasonCode: types.NetworkConnectorStateReasonCode("DisallowedByVpcEncryptionControl"),
+				LastModified:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+			{
+				Arn:             ptr.String("__Arn__"),
+				VersionArn:      ptr.String("__VersionArn__"),
+				Name:            ptr.String("__Name__"),
+				Id:              ptr.String("__Id__"),
+				Version:         ptr.Int64(1),
+				State:           types.NetworkConnectorState("PENDING"),
+				StateReason:     ptr.String("__StateReason__"),
+				StateReasonCode: types.NetworkConnectorStateReasonCode("DisallowedByVpcEncryptionControl"),
+				LastModified:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+		},
+		NextMarker: ptr.String("__NextMarker__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("ListNetworkConnectorVersions.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.ListNetworkConnectorVersions(context.Background(), &ListNetworkConnectorVersionsInput{
+		Identifier: ptr.String("__Identifier__"),
+		State:      types.NetworkConnectorState("PENDING"),
+		Marker:     ptr.String("__Marker__"),
+		MaxItems:   ptr.Int32(1),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "ListNetworkConnectorVersions.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_ListNetworkConnectors(t *testing.T) {
 	want := &ListNetworkConnectorsOutput{
 		NetworkConnectors: []types.NetworkConnectorSummary{
 			{
-				Arn:          ptr.String("__Arn__"),
-				Name:         ptr.String("__Name__"),
-				Id:           ptr.String("__Id__"),
-				Type:         types.NetworkConnectorType("VPC_EGRESS"),
-				State:        types.NetworkConnectorState("PENDING"),
-				LastModified: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				Arn:              ptr.String("__Arn__"),
+				Name:             ptr.String("__Name__"),
+				Id:               ptr.String("__Id__"),
+				Type:             types.NetworkConnectorType("VPC_EGRESS"),
+				State:            types.NetworkConnectorState("PENDING"),
+				LastModified:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				LatestVersionArn: ptr.String("__LatestVersionArn__"),
+				LatestVersion:    ptr.Int64(1),
 			},
 			{
-				Arn:          ptr.String("__Arn__"),
-				Name:         ptr.String("__Name__"),
-				Id:           ptr.String("__Id__"),
-				Type:         types.NetworkConnectorType("VPC_EGRESS"),
-				State:        types.NetworkConnectorState("PENDING"),
-				LastModified: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				Arn:              ptr.String("__Arn__"),
+				Name:             ptr.String("__Name__"),
+				Id:               ptr.String("__Id__"),
+				Type:             types.NetworkConnectorType("VPC_EGRESS"),
+				State:            types.NetworkConnectorState("PENDING"),
+				LastModified:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				LatestVersionArn: ptr.String("__LatestVersionArn__"),
+				LatestVersion:    ptr.Int64(1),
 			},
 		},
 		NextMarker: ptr.String("__NextMarker__"),
@@ -316,6 +377,8 @@ func TestCheckResponseSnapshot_UpdateNetworkConnector(t *testing.T) {
 		Arn:          ptr.String("__Arn__"),
 		Name:         ptr.String("__Name__"),
 		Id:           ptr.String("__Id__"),
+		VersionArn:   ptr.String("__VersionArn__"),
+		Version:      ptr.Int64(1),
 		OperatorRole: ptr.String("__OperatorRole__"),
 		Configuration: &types.NetworkConnectorConfigurationMemberVpcEgressConfiguration{
 			Value: types.NetworkConnectorVpcEgressConfiguration{

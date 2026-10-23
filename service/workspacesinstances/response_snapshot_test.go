@@ -811,6 +811,38 @@ func TestCheckResponseSnapshot_ListWorkspaceInstances(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_ModifyVolume(t *testing.T) {
+	want := &ModifyVolumeOutput{
+		VolumeId:         ptr.String("__VolumeId__"),
+		TargetSize:       ptr.Int32(1),
+		TargetVolumeType: types.VolumeTypeEnum("standard"),
+		TargetIops:       ptr.Int32(1),
+		TargetThroughput: ptr.Int32(1),
+	}
+	status, header, body, err := serdeRespReadSnapshot("ModifyVolume.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.ModifyVolume(context.Background(), &ModifyVolumeInput{
+		VolumeId:    ptr.String("__VolumeId__"),
+		SizeInGB:    ptr.Int32(1),
+		VolumeType:  types.VolumeTypeEnum("standard"),
+		Iops:        ptr.Int32(1),
+		Throughput:  ptr.Int32(1),
+		ClientToken: ptr.String("__ClientToken__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "ModifyVolume.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_TagResource(t *testing.T) {
 	want := &TagResourceOutput{}
 	status, header, body, err := serdeRespReadSnapshot("TagResource.response")
@@ -1126,5 +1158,39 @@ func TestCheckResponseSnapshot_Error_ValidationException(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("error response snapshot mismatch for %s: %v", "ValidationException.error", err)
+	}
+}
+
+func TestCheckResponseSnapshot_Error_VolumeModificationRateExceededException(t *testing.T) {
+	want := &types.VolumeModificationRateExceededException{
+		Message:      ptr.String("__Message__"),
+		ResourceId:   ptr.String("__ResourceId__"),
+		ResourceType: ptr.String("__ResourceType__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("VolumeModificationRateExceededException.error")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	_, opErr := svc.ModifyVolume(context.Background(), &ModifyVolumeInput{
+		VolumeId:    ptr.String("__VolumeId__"),
+		SizeInGB:    ptr.Int32(1),
+		VolumeType:  types.VolumeTypeEnum("standard"),
+		Iops:        ptr.Int32(1),
+		Throughput:  ptr.Int32(1),
+		ClientToken: ptr.String("__ClientToken__"),
+	})
+	if opErr == nil {
+		t.Fatal("expected error, got nil")
+	}
+	var got *types.VolumeModificationRateExceededException
+	if !errors.As(opErr, &got) {
+		t.Fatalf("expected types.VolumeModificationRateExceededException, got %v", opErr)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("error response snapshot mismatch for %s: %v", "VolumeModificationRateExceededException.error", err)
 	}
 }

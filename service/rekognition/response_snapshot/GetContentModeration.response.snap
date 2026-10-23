@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: RekognitionService.GetContentModeration
+
+{"GetRequestMetadata":{"AggregateBy":"TIMESTAMPS","SortBy":"NAME"},"JobId":"__JobId__","JobStatus":"IN_PROGRESS","JobTag":"__JobTag__","ModerationLabels":[{"ContentTypes":[{"Confidence":1,"Name":"__Name__"},{"Confidence":1,"Name":"__Name__"}],"DurationMillis":1,"EndTimestampMillis":1,"ModerationLabel":{"Confidence":1,"Name":"__Name__","ParentName":"__ParentName__","TaxonomyLevel":1},"StartTimestampMillis":1,"Timestamp":1},{"ContentTypes":[{"Confidence":1,"Name":"__Name__"},{"Confidence":1,"Name":"__Name__"}],"DurationMillis":1,"EndTimestampMillis":1,"ModerationLabel":{"Confidence":1,"Name":"__Name__","ParentName":"__ParentName__","TaxonomyLevel":1},"StartTimestampMillis":1,"Timestamp":1}],"ModerationModelVersion":"__ModerationModelVersion__","NextToken":"__NextToken__","StatusMessage":"__StatusMessage__","Video":{"S3Object":{"Bucket":"__Bucket__","Name":"__Name__","Version":"__Version__"}},"VideoMetadata":{"Codec":"__Codec__","ColorRange":"FULL","DurationMillis":1,"Format":"__Format__","FrameHeight":1,"FrameRate":1,"FrameWidth":1}}

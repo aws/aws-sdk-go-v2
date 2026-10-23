@@ -4,6 +4,8 @@ package databasemigrationservice
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/databasemigrationservice/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -41,6 +43,18 @@ type DeleteFleetAdvisorCollectorInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteFleetAdvisorCollectorInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteCollectorRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteFleetAdvisorCollectorInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CollectorReferencedId != nil {
+		s.WriteString(schemas.DeleteCollectorRequest_CollectorReferencedId, *v.CollectorReferencedId)
+	}
+}
+
 type DeleteFleetAdvisorCollectorOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -48,13 +62,26 @@ type DeleteFleetAdvisorCollectorOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteFleetAdvisorCollectorOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteFleetAdvisorCollectorOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteFleetAdvisorCollectorOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteFleetAdvisorCollectorMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteFleetAdvisorCollector{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteFleetAdvisorCollector, schemas.DeleteCollectorRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeleteFleetAdvisorCollector{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteFleetAdvisorCollector, schemas.DeleteCollectorRequest, nil), output: &DeleteFleetAdvisorCollectorOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

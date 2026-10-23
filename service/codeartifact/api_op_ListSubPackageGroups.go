@@ -5,7 +5,9 @@ package codeartifact
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/codeartifact/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/codeartifact/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -56,6 +58,30 @@ type ListSubPackageGroupsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListSubPackageGroupsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListSubPackageGroupsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListSubPackageGroupsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Domain != nil {
+		s.WriteString(schemas.ListSubPackageGroupsRequest_domain, *v.Domain)
+	}
+	if v.DomainOwner != nil {
+		s.WriteString(schemas.ListSubPackageGroupsRequest_domainOwner, *v.DomainOwner)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListSubPackageGroupsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListSubPackageGroupsRequest_nextToken, *v.NextToken)
+	}
+	if v.PackageGroup != nil {
+		s.WriteString(schemas.ListSubPackageGroupsRequest_packageGroup, *v.PackageGroup)
+	}
+}
+
 type ListSubPackageGroupsOutput struct {
 
 	//  If there are additional results, this is the token for the next set of
@@ -71,13 +97,35 @@ type ListSubPackageGroupsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListSubPackageGroupsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListSubPackageGroupsResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListSubPackageGroupsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListSubPackageGroupsResult_nextToken, *v.NextToken)
+	}
+	serializePackageGroupSummaryList(s, schemas.ListSubPackageGroupsResult_packageGroups, v.PackageGroups)
+}
+func (v *ListSubPackageGroupsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListSubPackageGroupsResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListSubPackageGroupsResult_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListSubPackageGroupsResult_nextToken, v.NextToken)
+		case schemas.ListSubPackageGroupsResult_packageGroups:
+			return deserializePackageGroupSummaryList(d, schemas.ListSubPackageGroupsResult_packageGroups, &v.PackageGroups)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListSubPackageGroupsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListSubPackageGroups{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListSubPackageGroups, schemas.ListSubPackageGroupsRequest, schemas.ListSubPackageGroupsResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListSubPackageGroups{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListSubPackageGroups, schemas.ListSubPackageGroupsRequest, schemas.ListSubPackageGroupsResult), output: &ListSubPackageGroupsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

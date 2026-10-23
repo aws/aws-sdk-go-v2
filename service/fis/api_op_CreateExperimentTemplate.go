@@ -5,7 +5,9 @@ package fis
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/fis/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/fis/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -90,6 +92,43 @@ type CreateExperimentTemplateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateExperimentTemplateInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateExperimentTemplateRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateExperimentTemplateInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeCreateExperimentTemplateActionInputMap(s, schemas.CreateExperimentTemplateRequest_actions, v.Actions)
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateExperimentTemplateRequest_clientToken, *v.ClientToken)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreateExperimentTemplateRequest_description, *v.Description)
+	}
+	if v.ExperimentOptions != nil {
+		s.WriteStruct(schemas.CreateExperimentTemplateRequest_experimentOptions)
+		v.ExperimentOptions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ExperimentReportConfiguration != nil {
+		s.WriteStruct(schemas.CreateExperimentTemplateRequest_experimentReportConfiguration)
+		v.ExperimentReportConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.LogConfiguration != nil {
+		s.WriteStruct(schemas.CreateExperimentTemplateRequest_logConfiguration)
+		v.LogConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RoleArn != nil {
+		s.WriteString(schemas.CreateExperimentTemplateRequest_roleArn, *v.RoleArn)
+	}
+	serializeCreateExperimentTemplateStopConditionInputList(s, schemas.CreateExperimentTemplateRequest_stopConditions, v.StopConditions)
+	serializeTagMap(s, schemas.CreateExperimentTemplateRequest_tags, v.Tags)
+	serializeCreateExperimentTemplateTargetInputMap(s, schemas.CreateExperimentTemplateRequest_targets, v.Targets)
+}
+
 type CreateExperimentTemplateOutput struct {
 
 	// Information about the experiment template.
@@ -101,13 +140,34 @@ type CreateExperimentTemplateOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateExperimentTemplateOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateExperimentTemplateResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateExperimentTemplateOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ExperimentTemplate != nil {
+		s.WriteStruct(schemas.CreateExperimentTemplateResponse_experimentTemplate)
+		v.ExperimentTemplate.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateExperimentTemplateOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateExperimentTemplateResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateExperimentTemplateResponse_experimentTemplate:
+			v.ExperimentTemplate = &types.ExperimentTemplate{}
+			return v.ExperimentTemplate.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateExperimentTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateExperimentTemplate{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateExperimentTemplate, schemas.CreateExperimentTemplateRequest, schemas.CreateExperimentTemplateResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateExperimentTemplate{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateExperimentTemplate, schemas.CreateExperimentTemplateRequest, schemas.CreateExperimentTemplateResponse), output: &CreateExperimentTemplateOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -10,6 +10,7 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/agentregistrycontrol/document"
 	"github.com/aws/aws-sdk-go-v2/service/agentregistrycontrol/types"
 	smithyendpoints "github.com/aws/smithy-go/endpoints"
 	"github.com/aws/smithy-go/middleware"
@@ -285,6 +286,19 @@ func TestCheckRequestSnapshot_CreateRegistry(t *testing.T) {
 			AutoApprovalRules: []types.AutoApprovalRule{
 				types.AutoApprovalRule("APPROVE_ALL"),
 				types.AutoApprovalRule("APPROVE_ALL"),
+			},
+		},
+		CustomMetadataSchemaConfiguration: &types.CustomMetadataSchemaConfiguration{
+			DefaultSchema: ptr.String("__DefaultSchema__"),
+			RecordTypeSchemaOverrides: []types.RecordTypeSchemaOverride{
+				{
+					RecordType: types.RecordType("MCP"),
+					Schema:     ptr.String("__Schema__"),
+				},
+				{
+					RecordType: types.RecordType("MCP"),
+					Schema:     ptr.String("__Schema__"),
+				},
 			},
 		},
 		AutoDetectionConfiguration: &types.AutoDetectionConfiguration{
@@ -708,6 +722,7 @@ func TestCheckRequestSnapshot_CreateRegistryRecord(t *testing.T) {
 				},
 			},
 		},
+		CustomMetadata: document.NewLazyDocument("__Document__"),
 		Tags: map[string]string{
 			"key0": "__Value__",
 		},
@@ -1131,6 +1146,21 @@ func TestCheckRequestSnapshot_UpdateRegistry(t *testing.T) {
 				},
 			},
 		},
+		CustomMetadataSchemaConfiguration: &types.UpdatedCustomMetadataSchemaConfiguration{
+			OptionalValue: &types.CustomMetadataSchemaConfiguration{
+				DefaultSchema: ptr.String("__DefaultSchema__"),
+				RecordTypeSchemaOverrides: []types.RecordTypeSchemaOverride{
+					{
+						RecordType: types.RecordType("MCP"),
+						Schema:     ptr.String("__Schema__"),
+					},
+					{
+						RecordType: types.RecordType("MCP"),
+						Schema:     ptr.String("__Schema__"),
+					},
+				},
+			},
+		},
 		AutoDetectionConfiguration: &types.UpdatedAutoDetectionConfiguration{
 			OptionalValue: &types.AutoDetectionConfiguration{
 				Scope:   types.AutoDetectionScope("ORGANIZATION"),
@@ -1251,7 +1281,10 @@ func TestCheckRequestSnapshot_UpdateRegistryRecord(t *testing.T) {
 				},
 			},
 		},
-		RecordVersion:          ptr.String("__RecordVersion__"),
+		RecordVersion: ptr.String("__RecordVersion__"),
+		CustomMetadata: &types.UpdatedCustomMetadataMap{
+			OptionalValue: document.NewLazyDocument("__Document__"),
+		},
 		TriggerSynchronization: ptr.Bool(true),
 		Provenance: []types.Provenance{
 			{
@@ -1404,6 +1437,19 @@ func TestUpdateRequestSnapshot_CreateRegistry(t *testing.T) {
 			AutoApprovalRules: []types.AutoApprovalRule{
 				types.AutoApprovalRule("APPROVE_ALL"),
 				types.AutoApprovalRule("APPROVE_ALL"),
+			},
+		},
+		CustomMetadataSchemaConfiguration: &types.CustomMetadataSchemaConfiguration{
+			DefaultSchema: ptr.String("__DefaultSchema__"),
+			RecordTypeSchemaOverrides: []types.RecordTypeSchemaOverride{
+				{
+					RecordType: types.RecordType("MCP"),
+					Schema:     ptr.String("__Schema__"),
+				},
+				{
+					RecordType: types.RecordType("MCP"),
+					Schema:     ptr.String("__Schema__"),
+				},
 			},
 		},
 		AutoDetectionConfiguration: &types.AutoDetectionConfiguration{
@@ -1827,6 +1873,7 @@ func TestUpdateRequestSnapshot_CreateRegistryRecord(t *testing.T) {
 				},
 			},
 		},
+		CustomMetadata: document.NewLazyDocument("__Document__"),
 		Tags: map[string]string{
 			"key0": "__Value__",
 		},
@@ -2250,6 +2297,21 @@ func TestUpdateRequestSnapshot_UpdateRegistry(t *testing.T) {
 				},
 			},
 		},
+		CustomMetadataSchemaConfiguration: &types.UpdatedCustomMetadataSchemaConfiguration{
+			OptionalValue: &types.CustomMetadataSchemaConfiguration{
+				DefaultSchema: ptr.String("__DefaultSchema__"),
+				RecordTypeSchemaOverrides: []types.RecordTypeSchemaOverride{
+					{
+						RecordType: types.RecordType("MCP"),
+						Schema:     ptr.String("__Schema__"),
+					},
+					{
+						RecordType: types.RecordType("MCP"),
+						Schema:     ptr.String("__Schema__"),
+					},
+				},
+			},
+		},
 		AutoDetectionConfiguration: &types.UpdatedAutoDetectionConfiguration{
 			OptionalValue: &types.AutoDetectionConfiguration{
 				Scope:   types.AutoDetectionScope("ORGANIZATION"),
@@ -2370,7 +2432,10 @@ func TestUpdateRequestSnapshot_UpdateRegistryRecord(t *testing.T) {
 				},
 			},
 		},
-		RecordVersion:          ptr.String("__RecordVersion__"),
+		RecordVersion: ptr.String("__RecordVersion__"),
+		CustomMetadata: &types.UpdatedCustomMetadataMap{
+			OptionalValue: document.NewLazyDocument("__Document__"),
+		},
 		TriggerSynchronization: ptr.Bool(true),
 		Provenance: []types.Provenance{
 			{

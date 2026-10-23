@@ -4,7 +4,9 @@ package inspector2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/inspector2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/inspector2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -41,6 +43,22 @@ type UpdateConnectorInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateConnectorInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateConnectorRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateConnectorInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConnectorArn != nil {
+		s.WriteString(schemas.UpdateConnectorRequest_connectorArn, *v.ConnectorArn)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateConnectorRequest_description, *v.Description)
+	}
+	serializeProviderDetailUpdate(s, schemas.UpdateConnectorRequest_providerDetail, v.ProviderDetail)
+}
+
 type UpdateConnectorOutput struct {
 
 	// The Amazon Resource Name (ARN) of the updated connector.
@@ -52,13 +70,32 @@ type UpdateConnectorOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateConnectorOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateConnectorResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateConnectorOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConnectorArn != nil {
+		s.WriteString(schemas.UpdateConnectorResponse_connectorArn, *v.ConnectorArn)
+	}
+}
+func (v *UpdateConnectorOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateConnectorResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateConnectorResponse_connectorArn:
+			v.ConnectorArn = new(string)
+			return d.ReadString(schemas.UpdateConnectorResponse_connectorArn, v.ConnectorArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateConnectorMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateConnector{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateConnector, schemas.UpdateConnectorRequest, schemas.UpdateConnectorResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateConnector{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateConnector, schemas.UpdateConnectorRequest, schemas.UpdateConnectorResponse), output: &UpdateConnectorOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

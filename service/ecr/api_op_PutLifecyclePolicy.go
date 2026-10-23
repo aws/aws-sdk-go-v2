@@ -4,6 +4,8 @@ package ecr
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/ecr/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -46,6 +48,24 @@ type PutLifecyclePolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutLifecyclePolicyInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutLifecyclePolicyRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutLifecyclePolicyInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LifecyclePolicyText != nil {
+		s.WriteString(schemas.PutLifecyclePolicyRequest_lifecyclePolicyText, *v.LifecyclePolicyText)
+	}
+	if v.RegistryId != nil {
+		s.WriteString(schemas.PutLifecyclePolicyRequest_registryId, *v.RegistryId)
+	}
+	if v.RepositoryName != nil {
+		s.WriteString(schemas.PutLifecyclePolicyRequest_repositoryName, *v.RepositoryName)
+	}
+}
+
 type PutLifecyclePolicyOutput struct {
 
 	// The JSON repository policy text.
@@ -63,13 +83,44 @@ type PutLifecyclePolicyOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutLifecyclePolicyOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutLifecyclePolicyResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutLifecyclePolicyOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LifecyclePolicyText != nil {
+		s.WriteString(schemas.PutLifecyclePolicyResponse_lifecyclePolicyText, *v.LifecyclePolicyText)
+	}
+	if v.RegistryId != nil {
+		s.WriteString(schemas.PutLifecyclePolicyResponse_registryId, *v.RegistryId)
+	}
+	if v.RepositoryName != nil {
+		s.WriteString(schemas.PutLifecyclePolicyResponse_repositoryName, *v.RepositoryName)
+	}
+}
+func (v *PutLifecyclePolicyOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PutLifecyclePolicyResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PutLifecyclePolicyResponse_lifecyclePolicyText:
+			v.LifecyclePolicyText = new(string)
+			return d.ReadString(schemas.PutLifecyclePolicyResponse_lifecyclePolicyText, v.LifecyclePolicyText)
+		case schemas.PutLifecyclePolicyResponse_registryId:
+			v.RegistryId = new(string)
+			return d.ReadString(schemas.PutLifecyclePolicyResponse_registryId, v.RegistryId)
+		case schemas.PutLifecyclePolicyResponse_repositoryName:
+			v.RepositoryName = new(string)
+			return d.ReadString(schemas.PutLifecyclePolicyResponse_repositoryName, v.RepositoryName)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPutLifecyclePolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpPutLifecyclePolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutLifecyclePolicy, schemas.PutLifecyclePolicyRequest, schemas.PutLifecyclePolicyResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpPutLifecyclePolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutLifecyclePolicy, schemas.PutLifecyclePolicyRequest, schemas.PutLifecyclePolicyResponse), output: &PutLifecyclePolicyOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

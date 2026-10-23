@@ -5,6 +5,8 @@ package elementalinference
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/elementalinference/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -47,6 +49,24 @@ type DisassociateFeedInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DisassociateFeedInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DisassociateFeedRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DisassociateFeedInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AssociatedResourceName != nil {
+		s.WriteString(schemas.DisassociateFeedRequest_associatedResourceName, *v.AssociatedResourceName)
+	}
+	if v.DryRun != false {
+		s.WriteBool(schemas.DisassociateFeedRequest_dryRun, v.DryRun)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.DisassociateFeedRequest_id, *v.Id)
+	}
+}
+
 type DisassociateFeedOutput struct {
 
 	// The ARN of the feed.
@@ -65,13 +85,38 @@ type DisassociateFeedOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DisassociateFeedOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DisassociateFeedResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DisassociateFeedOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.DisassociateFeedResponse_arn, *v.Arn)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.DisassociateFeedResponse_id, *v.Id)
+	}
+}
+func (v *DisassociateFeedOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DisassociateFeedResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DisassociateFeedResponse_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.DisassociateFeedResponse_arn, v.Arn)
+		case schemas.DisassociateFeedResponse_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.DisassociateFeedResponse_id, v.Id)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDisassociateFeedMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDisassociateFeed{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisassociateFeed, schemas.DisassociateFeedRequest, schemas.DisassociateFeedResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDisassociateFeed{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisassociateFeed, schemas.DisassociateFeedRequest, schemas.DisassociateFeedResponse), output: &DisassociateFeedOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

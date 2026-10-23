@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"amplifyFeatureFlags":"__AmplifyFeatureFlags__","amplifyMetaConfig":"__AmplifyMetaConfig__","appId":"__AppId__","appName":"__AppName__","backendEnvironmentList":["__Member__","__Member__"],"backendEnvironmentName":"__BackendEnvironmentName__","error":"__Error__"}

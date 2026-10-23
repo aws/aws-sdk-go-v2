@@ -4,7 +4,9 @@ package bedrockagent
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/bedrockagent/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagent/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,21 @@ type DeleteAgentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteAgentInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteAgentRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteAgentInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AgentId != nil {
+		s.WriteString(schemas.DeleteAgentRequest_agentId, *v.AgentId)
+	}
+	if v.SkipResourceInUseCheck != false {
+		s.WriteBool(schemas.DeleteAgentRequest_skipResourceInUseCheck, v.SkipResourceInUseCheck)
+	}
+}
+
 type DeleteAgentOutput struct {
 
 	// The unique identifier of the agent that was deleted.
@@ -57,13 +74,42 @@ type DeleteAgentOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteAgentOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteAgentResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteAgentOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AgentId != nil {
+		s.WriteString(schemas.DeleteAgentResponse_agentId, *v.AgentId)
+	}
+	if v.AgentStatus != "" {
+		s.WriteString(schemas.DeleteAgentResponse_agentStatus, string(v.AgentStatus))
+	}
+}
+func (v *DeleteAgentOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteAgentResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteAgentResponse_agentId:
+			v.AgentId = new(string)
+			return d.ReadString(schemas.DeleteAgentResponse_agentId, v.AgentId)
+		case schemas.DeleteAgentResponse_agentStatus:
+			var ev string
+			if err := d.ReadString(schemas.DeleteAgentResponse_agentStatus, &ev); err != nil {
+				return err
+			}
+			v.AgentStatus = types.AgentStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteAgentMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteAgent{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteAgent, schemas.DeleteAgentRequest, schemas.DeleteAgentResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteAgent{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteAgent, schemas.DeleteAgentRequest, schemas.DeleteAgentResponse), output: &DeleteAgentOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

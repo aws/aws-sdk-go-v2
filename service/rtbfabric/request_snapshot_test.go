@@ -617,7 +617,8 @@ func TestCheckRequestSnapshot_CreateResponderGateway(t *testing.T) {
 		Tags: map[string]string{
 			"key0": "__Value__",
 		},
-		GatewayType: types.GatewayType("EXTERNAL"),
+		GatewayType:         types.GatewayType("EXTERNAL"),
+		ClientRoutingPolicy: types.ClientRoutingPolicy("AVAILABILITY_ZONE_AFFINITY"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -1496,9 +1497,10 @@ func TestCheckRequestSnapshot_UpdateResponderGateway(t *testing.T) {
 				},
 			},
 		},
-		ClientToken: ptr.String("__ClientToken__"),
-		GatewayId:   ptr.String("__GatewayId__"),
-		Description: ptr.String("__Description__"),
+		ClientToken:         ptr.String("__ClientToken__"),
+		GatewayId:           ptr.String("__GatewayId__"),
+		Description:         ptr.String("__Description__"),
+		ClientRoutingPolicy: types.ClientRoutingPolicy("AVAILABILITY_ZONE_AFFINITY"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -1934,7 +1936,8 @@ func TestUpdateRequestSnapshot_CreateResponderGateway(t *testing.T) {
 		Tags: map[string]string{
 			"key0": "__Value__",
 		},
-		GatewayType: types.GatewayType("EXTERNAL"),
+		GatewayType:         types.GatewayType("EXTERNAL"),
+		ClientRoutingPolicy: types.ClientRoutingPolicy("AVAILABILITY_ZONE_AFFINITY"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -2813,9 +2816,10 @@ func TestUpdateRequestSnapshot_UpdateResponderGateway(t *testing.T) {
 				},
 			},
 		},
-		ClientToken: ptr.String("__ClientToken__"),
-		GatewayId:   ptr.String("__GatewayId__"),
-		Description: ptr.String("__Description__"),
+		ClientToken:         ptr.String("__ClientToken__"),
+		GatewayId:           ptr.String("__GatewayId__"),
+		Description:         ptr.String("__Description__"),
+		ClientRoutingPolicy: types.ClientRoutingPolicy("AVAILABILITY_ZONE_AFFINITY"),
 	}
 	body := &bytes.Buffer{}
 	method := ""

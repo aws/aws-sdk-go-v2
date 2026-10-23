@@ -5,7 +5,9 @@ package ecs
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/ecs/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ecs/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -72,6 +74,33 @@ type ListAccountSettingsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAccountSettingsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAccountSettingsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAccountSettingsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EffectiveSettings != false {
+		s.WriteBool(schemas.ListAccountSettingsRequest_effectiveSettings, v.EffectiveSettings)
+	}
+	if v.MaxResults != 0 {
+		s.WriteInt32(schemas.ListAccountSettingsRequest_maxResults, v.MaxResults)
+	}
+	if v.Name != "" {
+		s.WriteString(schemas.ListAccountSettingsRequest_name, string(v.Name))
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAccountSettingsRequest_nextToken, *v.NextToken)
+	}
+	if v.PrincipalArn != nil {
+		s.WriteString(schemas.ListAccountSettingsRequest_principalArn, *v.PrincipalArn)
+	}
+	if v.Value != nil {
+		s.WriteString(schemas.ListAccountSettingsRequest_value, *v.Value)
+	}
+}
+
 type ListAccountSettingsOutput struct {
 
 	// The nextToken value to include in a future ListAccountSettings request. When
@@ -89,13 +118,35 @@ type ListAccountSettingsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAccountSettingsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAccountSettingsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAccountSettingsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAccountSettingsResponse_nextToken, *v.NextToken)
+	}
+	serializeSettings(s, schemas.ListAccountSettingsResponse_settings, v.Settings)
+}
+func (v *ListAccountSettingsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListAccountSettingsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListAccountSettingsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListAccountSettingsResponse_nextToken, v.NextToken)
+		case schemas.ListAccountSettingsResponse_settings:
+			return deserializeSettings(d, schemas.ListAccountSettingsResponse_settings, &v.Settings)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListAccountSettingsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListAccountSettings{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAccountSettings, schemas.ListAccountSettingsRequest, schemas.ListAccountSettingsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListAccountSettings{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAccountSettings, schemas.ListAccountSettingsRequest, schemas.ListAccountSettingsResponse), output: &ListAccountSettingsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

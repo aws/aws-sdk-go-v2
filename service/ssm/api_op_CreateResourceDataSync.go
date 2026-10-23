@@ -4,7 +4,9 @@ package ssm
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/ssm/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ssm/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -78,6 +80,31 @@ type CreateResourceDataSyncInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateResourceDataSyncInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateResourceDataSyncRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateResourceDataSyncInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.S3Destination != nil {
+		s.WriteStruct(schemas.CreateResourceDataSyncRequest_S3Destination)
+		v.S3Destination.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SyncName != nil {
+		s.WriteString(schemas.CreateResourceDataSyncRequest_SyncName, *v.SyncName)
+	}
+	if v.SyncSource != nil {
+		s.WriteStruct(schemas.CreateResourceDataSyncRequest_SyncSource)
+		v.SyncSource.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SyncType != nil {
+		s.WriteString(schemas.CreateResourceDataSyncRequest_SyncType, *v.SyncType)
+	}
+}
+
 type CreateResourceDataSyncOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -85,13 +112,26 @@ type CreateResourceDataSyncOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateResourceDataSyncOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateResourceDataSyncResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateResourceDataSyncOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *CreateResourceDataSyncOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateResourceDataSyncResult, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateResourceDataSyncMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateResourceDataSync{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateResourceDataSync, schemas.CreateResourceDataSyncRequest, schemas.CreateResourceDataSyncResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateResourceDataSync{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateResourceDataSync, schemas.CreateResourceDataSyncRequest, schemas.CreateResourceDataSyncResult), output: &CreateResourceDataSyncOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

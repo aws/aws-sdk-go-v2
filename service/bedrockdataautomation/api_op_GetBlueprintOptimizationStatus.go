@@ -4,7 +4,9 @@ package bedrockdataautomation
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/bedrockdataautomation/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockdataautomation/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -35,6 +37,18 @@ type GetBlueprintOptimizationStatusInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetBlueprintOptimizationStatusInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetBlueprintOptimizationStatusRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetBlueprintOptimizationStatusInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InvocationArn != nil {
+		s.WriteString(schemas.GetBlueprintOptimizationStatusRequest_invocationArn, *v.InvocationArn)
+	}
+}
+
 // Response of GetBlueprintOptimizationStatus API.
 type GetBlueprintOptimizationStatusOutput struct {
 
@@ -56,13 +70,56 @@ type GetBlueprintOptimizationStatusOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetBlueprintOptimizationStatusOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetBlueprintOptimizationStatusResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetBlueprintOptimizationStatusOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ErrorMessage != nil {
+		s.WriteString(schemas.GetBlueprintOptimizationStatusResponse_errorMessage, *v.ErrorMessage)
+	}
+	if v.ErrorType != nil {
+		s.WriteString(schemas.GetBlueprintOptimizationStatusResponse_errorType, *v.ErrorType)
+	}
+	if v.OutputConfiguration != nil {
+		s.WriteStruct(schemas.GetBlueprintOptimizationStatusResponse_outputConfiguration)
+		v.OutputConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.GetBlueprintOptimizationStatusResponse_status, string(v.Status))
+	}
+}
+func (v *GetBlueprintOptimizationStatusOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetBlueprintOptimizationStatusResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetBlueprintOptimizationStatusResponse_errorMessage:
+			v.ErrorMessage = new(string)
+			return d.ReadString(schemas.GetBlueprintOptimizationStatusResponse_errorMessage, v.ErrorMessage)
+		case schemas.GetBlueprintOptimizationStatusResponse_errorType:
+			v.ErrorType = new(string)
+			return d.ReadString(schemas.GetBlueprintOptimizationStatusResponse_errorType, v.ErrorType)
+		case schemas.GetBlueprintOptimizationStatusResponse_outputConfiguration:
+			v.OutputConfiguration = &types.BlueprintOptimizationOutputConfiguration{}
+			return v.OutputConfiguration.Deserialize(d)
+		case schemas.GetBlueprintOptimizationStatusResponse_status:
+			var ev string
+			if err := d.ReadString(schemas.GetBlueprintOptimizationStatusResponse_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.BlueprintOptimizationJobStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetBlueprintOptimizationStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetBlueprintOptimizationStatus{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetBlueprintOptimizationStatus, schemas.GetBlueprintOptimizationStatusRequest, schemas.GetBlueprintOptimizationStatusResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetBlueprintOptimizationStatus{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetBlueprintOptimizationStatus, schemas.GetBlueprintOptimizationStatusRequest, schemas.GetBlueprintOptimizationStatusResponse), output: &GetBlueprintOptimizationStatusOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

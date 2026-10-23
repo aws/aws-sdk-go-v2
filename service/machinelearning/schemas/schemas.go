@@ -467,7 +467,8 @@ var _floatLabel = smithy.NewSchema(smithy.ShapeID{
 var IdempotentParameterMismatchException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.machinelearning",
 	Name:      "IdempotentParameterMismatchException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var IdempotentParameterMismatchException_message *smithy.Schema
 
 var IdempotentParameterMismatchException_code *smithy.Schema
@@ -480,7 +481,8 @@ var _IntegerType = smithy.NewSchema(smithy.ShapeID{
 var InternalServerException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.machinelearning",
 	Name:      "InternalServerException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.HTTPError{Code: 500})
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "server"},
+	&smithytraits.HTTPError{Code: 500})
 var InternalServerException_message *smithy.Schema
 
 var InternalServerException_code *smithy.Schema
@@ -488,7 +490,8 @@ var InternalServerException_code *smithy.Schema
 var InvalidInputException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.machinelearning",
 	Name:      "InvalidInputException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var InvalidInputException_message *smithy.Schema
 
 var InvalidInputException_code *smithy.Schema
@@ -496,7 +499,7 @@ var InvalidInputException_code *smithy.Schema
 var InvalidTagException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.machinelearning",
 	Name:      "InvalidTagException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var InvalidTagException_message *smithy.Schema
 
 var _Label = smithy.NewSchema(smithy.ShapeID{
@@ -507,7 +510,8 @@ var _Label = smithy.NewSchema(smithy.ShapeID{
 var LimitExceededException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.machinelearning",
 	Name:      "LimitExceededException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.HTTPError{Code: 417})
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 417})
 var LimitExceededException_message *smithy.Schema
 
 var LimitExceededException_code *smithy.Schema
@@ -653,7 +657,8 @@ var Prediction_details *smithy.Schema
 var PredictorNotMountedException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.machinelearning",
 	Name:      "PredictorNotMountedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var PredictorNotMountedException_message *smithy.Schema
 
 var _PresignedS3Url = smithy.NewSchema(smithy.ShapeID{
@@ -853,7 +858,8 @@ var _RedshiftSelectSqlQuery = smithy.NewSchema(smithy.ShapeID{
 var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.machinelearning",
 	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.HTTPError{Code: 404})
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 404})
 var ResourceNotFoundException_message *smithy.Schema
 
 var ResourceNotFoundException_code *smithy.Schema
@@ -945,7 +951,7 @@ var _TagKeyList_member *smithy.Schema
 var TagLimitExceededException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.machinelearning",
 	Name:      "TagLimitExceededException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var TagLimitExceededException_message *smithy.Schema
 
 var _TagList = smithy.NewSchema(smithy.ShapeID{

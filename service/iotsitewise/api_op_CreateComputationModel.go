@@ -5,7 +5,9 @@ package iotsitewise
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/iotsitewise/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotsitewise/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -62,6 +64,31 @@ type CreateComputationModelInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateComputationModelInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateComputationModelRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateComputationModelInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateComputationModelRequest_clientToken, *v.ClientToken)
+	}
+	if v.ComputationModelConfiguration != nil {
+		s.WriteStruct(schemas.CreateComputationModelRequest_computationModelConfiguration)
+		v.ComputationModelConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeComputationModelDataBinding(s, schemas.CreateComputationModelRequest_computationModelDataBinding, v.ComputationModelDataBinding)
+	if v.ComputationModelDescription != nil {
+		s.WriteString(schemas.CreateComputationModelRequest_computationModelDescription, *v.ComputationModelDescription)
+	}
+	if v.ComputationModelName != nil {
+		s.WriteString(schemas.CreateComputationModelRequest_computationModelName, *v.ComputationModelName)
+	}
+	serializeTagMap(s, schemas.CreateComputationModelRequest_tags, v.Tags)
+}
+
 type CreateComputationModelOutput struct {
 
 	// The [ARN] of the computation model, which has the following format.
@@ -90,13 +117,46 @@ type CreateComputationModelOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateComputationModelOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateComputationModelResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateComputationModelOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ComputationModelArn != nil {
+		s.WriteString(schemas.CreateComputationModelResponse_computationModelArn, *v.ComputationModelArn)
+	}
+	if v.ComputationModelId != nil {
+		s.WriteString(schemas.CreateComputationModelResponse_computationModelId, *v.ComputationModelId)
+	}
+	if v.ComputationModelStatus != nil {
+		s.WriteStruct(schemas.CreateComputationModelResponse_computationModelStatus)
+		v.ComputationModelStatus.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateComputationModelOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateComputationModelResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateComputationModelResponse_computationModelArn:
+			v.ComputationModelArn = new(string)
+			return d.ReadString(schemas.CreateComputationModelResponse_computationModelArn, v.ComputationModelArn)
+		case schemas.CreateComputationModelResponse_computationModelId:
+			v.ComputationModelId = new(string)
+			return d.ReadString(schemas.CreateComputationModelResponse_computationModelId, v.ComputationModelId)
+		case schemas.CreateComputationModelResponse_computationModelStatus:
+			v.ComputationModelStatus = &types.ComputationModelStatus{}
+			return v.ComputationModelStatus.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateComputationModelMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateComputationModel{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateComputationModel, schemas.CreateComputationModelRequest, schemas.CreateComputationModelResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateComputationModel{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateComputationModel, schemas.CreateComputationModelRequest, schemas.CreateComputationModelResponse), output: &CreateComputationModelOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

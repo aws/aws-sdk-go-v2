@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AmazonEC2ContainerRegistry_V20150921.BatchGetImage
+
+{"failures":[{"failureCode":"InvalidImageDigest","failureReason":"__FailureReason__","imageId":{"imageDigest":"__ImageDigest__","imageTag":"__ImageTag__"}},{"failureCode":"InvalidImageDigest","failureReason":"__FailureReason__","imageId":{"imageDigest":"__ImageDigest__","imageTag":"__ImageTag__"}}],"images":[{"imageId":{"imageDigest":"__ImageDigest__","imageTag":"__ImageTag__"},"imageManifest":"__ImageManifest__","imageManifestMediaType":"__ImageManifestMediaType__","registryId":"__RegistryId__","repositoryName":"__RepositoryName__"},{"imageId":{"imageDigest":"__ImageDigest__","imageTag":"__ImageTag__"},"imageManifest":"__ImageManifest__","imageManifestMediaType":"__ImageManifestMediaType__","registryId":"__RegistryId__","repositoryName":"__RepositoryName__"}]}

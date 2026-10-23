@@ -4,6 +4,8 @@ package mturk
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/mturk/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -62,6 +64,24 @@ type ApproveAssignmentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ApproveAssignmentInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ApproveAssignmentRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ApproveAssignmentInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AssignmentId != nil {
+		s.WriteString(schemas.ApproveAssignmentRequest_AssignmentId, *v.AssignmentId)
+	}
+	if v.OverrideRejection != nil {
+		s.WriteBool(schemas.ApproveAssignmentRequest_OverrideRejection, *v.OverrideRejection)
+	}
+	if v.RequesterFeedback != nil {
+		s.WriteString(schemas.ApproveAssignmentRequest_RequesterFeedback, *v.RequesterFeedback)
+	}
+}
+
 type ApproveAssignmentOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -69,13 +89,26 @@ type ApproveAssignmentOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ApproveAssignmentOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ApproveAssignmentResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ApproveAssignmentOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *ApproveAssignmentOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ApproveAssignmentResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationApproveAssignmentMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpApproveAssignment{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ApproveAssignment, schemas.ApproveAssignmentRequest, schemas.ApproveAssignmentResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpApproveAssignment{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ApproveAssignment, schemas.ApproveAssignmentRequest, schemas.ApproveAssignmentResponse), output: &ApproveAssignmentOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4811,6 +4811,26 @@
                 "smithy.api#documentation": "<p>The data storage format for Athena query results.</p>"
             }
         },
+        "com.amazonaws.sagemaker#AthenaStepMetadata": {
+            "type": "structure",
+            "members": {
+                "QueryExecutionId": {
+                    "target": "com.amazonaws.sagemaker#String256",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the Amazon Athena query execution that was run by this step execution.</p>"
+                    }
+                },
+                "S3OutputLocation": {
+                    "target": "com.amazonaws.sagemaker#String1024",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon S3 location of the Amazon Athena query results. This is the effective output location reported by <code>GetQueryExecution</code> for the query. This value can be absent when the query uses Athena managed query results.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The query execution identifier and the result output location for the Amazon Athena query that an Athena step runs.</p>"
+            }
+        },
         "com.amazonaws.sagemaker#AthenaWorkGroup": {
             "type": "string",
             "traits": {
@@ -4820,6 +4840,98 @@
                     "max": 128
                 },
                 "smithy.api#pattern": "^[a-zA-Z0-9._-]+$"
+            }
+        },
+        "com.amazonaws.sagemaker#AttachClusterNodeNetworkInterface": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.sagemaker#AttachClusterNodeNetworkInterfaceRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.sagemaker#AttachClusterNodeNetworkInterfaceResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.sagemaker#ResourceLimitExceeded"
+                },
+                {
+                    "target": "com.amazonaws.sagemaker#ResourceNotFound"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p> Attaches an elastic network interface (ENI) to a node in a HyperPod cluster. </p> <p> To use this operation, you must have the <code>sagemaker:AttachClusterNodeNetworkInterface</code> permission. </p>"
+            }
+        },
+        "com.amazonaws.sagemaker#AttachClusterNodeNetworkInterfaceRequest": {
+            "type": "structure",
+            "members": {
+                "ClusterName": {
+                    "target": "com.amazonaws.sagemaker#ClusterNameOrArn",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p> The name or Amazon Resource Name (ARN) of the SageMaker HyperPod cluster that contains the target node. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "NodeId": {
+                    "target": "com.amazonaws.sagemaker#ClusterNodeId",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p> The unique identifier of the cluster node to which you want to attach the network interface. The node must belong to your specified HyperPod cluster and cannot be part of a Restricted Instance Group (RIG). </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "NetworkInterfaceId": {
+                    "target": "com.amazonaws.sagemaker#ClusterNetworkInterfaceId",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p> The unique identifier of the elastic network interface (ENI) to attach. </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.sagemaker#AttachClusterNodeNetworkInterfaceResponse": {
+            "type": "structure",
+            "members": {
+                "ClusterArn": {
+                    "target": "com.amazonaws.sagemaker#ClusterArn",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p> The Amazon Resource Name (ARN) of your SageMaker HyperPod cluster where the network interface attachment operation was performed. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "NodeId": {
+                    "target": "com.amazonaws.sagemaker#ClusterNodeId",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p> The unique identifier of the cluster node where your network interface was attached. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "NetworkInterfaceId": {
+                    "target": "com.amazonaws.sagemaker#ClusterNetworkInterfaceId",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p> The unique identifier of the elastic network interface (ENI) that was attached. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "AttachmentId": {
+                    "target": "com.amazonaws.sagemaker#ClusterNetworkInterfaceAttachmentId",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p> The unique identifier of the network interface attachment. Use this value to reference or detach the network interface later. </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.sagemaker#AttachClusterNodeVolume": {
@@ -6778,6 +6890,16 @@
                 "smithy.api#documentation": "<p>Identifies the foundation model that was used as the starting point for model customization.</p>"
             }
         },
+        "com.amazonaws.sagemaker#BaseModelArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 2048
+                },
+                "smithy.api#pattern": "^(arn:[a-z0-9-.]{1,63}:sagemaker:[a-zA-Z0-9]+(?:-[a-zA-Z0-9]+)+:([0-9]{12}|aws):hub-content/)[a-zA-Z0-9](-*[a-zA-Z0-9]){0,62}/Model/[a-zA-Z0-9](-*[a-zA-Z0-9]){0,63}(/[0-9]{1,4}\\.[0-9]{1,4}\\.[0-9]{1,4})?$"
+            }
+        },
         "com.amazonaws.sagemaker#BaseModelName": {
             "type": "string",
             "traits": {
@@ -7955,6 +8077,32 @@
                 "smithy.api#range": {
                     "min": 0
                 }
+            }
+        },
+        "com.amazonaws.sagemaker#BillableTokenUsage": {
+            "type": "structure",
+            "members": {
+                "PrefillTokenCount": {
+                    "target": "com.amazonaws.sagemaker#JavaLong",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of prefill tokens consumed.</p>"
+                    }
+                },
+                "SampleTokenCount": {
+                    "target": "com.amazonaws.sagemaker#JavaLong",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of sample tokens consumed.</p>"
+                    }
+                },
+                "TrainingTokenCount": {
+                    "target": "com.amazonaws.sagemaker#JavaLong",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of training tokens consumed.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The billable token usage for a training session, broken down by operation type.</p>"
             }
         },
         "com.amazonaws.sagemaker#BlockedReason": {
@@ -9968,6 +10116,102 @@
                 }
             }
         },
+        "com.amazonaws.sagemaker#CleanupFailure": {
+            "type": "structure",
+            "members": {
+                "StepName": {
+                    "target": "com.amazonaws.sagemaker#String256",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the upstream step whose Amazon S3 output resources the Cleanup step could not delete.</p>"
+                    }
+                },
+                "ErrorCode": {
+                    "target": "com.amazonaws.sagemaker#CleanupFailureErrorCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The error code that identifies why the Cleanup step could not delete the output resources associated with the upstream step.</p>"
+                    }
+                },
+                "ErrorMessage": {
+                    "target": "com.amazonaws.sagemaker#String2048",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A message describing why the Cleanup step could not delete the output resources associated with the upstream step.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The Amazon S3 output resources associated with an upstream step that the Cleanup step could not delete.</p>"
+            }
+        },
+        "com.amazonaws.sagemaker#CleanupFailureErrorCode": {
+            "type": "enum",
+            "members": {
+                "CLIENT_ERROR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ClientError"
+                    }
+                },
+                "INTERNAL_FAILURE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "InternalFailure"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The type of error that prevented the Cleanup step from deleting output resources. Valid values are:</p> <ul> <li> <p> <code>ClientError</code> indicates that the failure was caused by the request.</p> </li> <li> <p> <code>InternalFailure</code> indicates that the failure was caused by an internal error.</p> </li> </ul>"
+            }
+        },
+        "com.amazonaws.sagemaker#CleanupFailureList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.sagemaker#CleanupFailure"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 100
+                }
+            }
+        },
+        "com.amazonaws.sagemaker#CleanupStepMetadata": {
+            "type": "structure",
+            "members": {
+                "CleanedSteps": {
+                    "target": "com.amazonaws.sagemaker#CleanupStepNameList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The names of upstream steps whose Amazon S3 output resources the Cleanup step deleted successfully.</p>"
+                    }
+                },
+                "FailedSteps": {
+                    "target": "com.amazonaws.sagemaker#CleanupFailureList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The upstream steps whose Amazon S3 output resources the Cleanup step could not delete.</p>"
+                    }
+                },
+                "SkippedSteps": {
+                    "target": "com.amazonaws.sagemaker#CleanupStepNameList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The names of upstream steps that the Cleanup step skipped. The Cleanup step skips a step when the output properties needed to locate its resources are unavailable.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The cleanup outcomes for Amazon S3 output resources associated with upstream steps.</p>"
+            }
+        },
+        "com.amazonaws.sagemaker#CleanupStepNameList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.sagemaker#String256"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 100
+                }
+            }
+        },
         "com.amazonaws.sagemaker#ClientId": {
             "type": "string",
             "traits": {
@@ -9997,6 +10241,79 @@
                     "max": 36
                 },
                 "smithy.api#pattern": "^[a-zA-Z0-9-]+$"
+            }
+        },
+        "com.amazonaws.sagemaker#ClusterAccountingDatabase": {
+            "type": "structure",
+            "members": {
+                "Endpoint": {
+                    "target": "com.amazonaws.sagemaker#ClusterAccountingDatabaseEndpoint",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The hostname or endpoint of the accounting database, such as the endpoint of an Amazon RDS for MySQL or Aurora MySQL database. The database must be reachable from the subnets and security groups that you configure for the cluster.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Port": {
+                    "target": "com.amazonaws.sagemaker#ClusterAccountingDatabasePort",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The port that the accounting database listens on. The default is <code>3306</code>.</p>"
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.sagemaker#ClusterAccountingDatabaseName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the database schema that stores the Slurm accounting data. The default is <code>slurm_acct_db_</code> followed by the cluster ID from the cluster ARN, for example <code>slurm_acct_db_a1b2c3d4e5f6</code>.</p>"
+                    }
+                },
+                "SecretArn": {
+                    "target": "com.amazonaws.sagemaker#ClusterAccountingDatabaseSecretArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Amazon Web Services Secrets Manager secret that contains the user name and password for the accounting database. The database user must be able to create the schema and to read from and write to it.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The external MySQL-compatible database that the Slurm accounting daemon (<code>slurmdbd</code>) connects to for a SageMaker HyperPod cluster. You provide the database credentials in an Amazon Web Services Secrets Manager secret instead of in the request.</p>"
+            }
+        },
+        "com.amazonaws.sagemaker#ClusterAccountingDatabaseEndpoint": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 255
+                },
+                "smithy.api#pattern": "^(?=.{1,255}$)([a-zA-Z0-9]([a-zA-Z0-9\\-]{0,61}[a-zA-Z0-9])?)(\\.[a-zA-Z0-9]([a-zA-Z0-9\\-]{0,61}[a-zA-Z0-9])?)*$"
+            }
+        },
+        "com.amazonaws.sagemaker#ClusterAccountingDatabaseName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 64
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9$_]+$"
+            }
+        },
+        "com.amazonaws.sagemaker#ClusterAccountingDatabasePort": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 65535
+                }
+            }
+        },
+        "com.amazonaws.sagemaker#ClusterAccountingDatabaseSecretArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 20,
+                    "max": 2048
+                },
+                "smithy.api#pattern": "^arn:aws[a-z\\-]*:secretsmanager:[a-z0-9\\-]*:[0-9]{12}:secret:.+$"
             }
         },
         "com.amazonaws.sagemaker#ClusterArn": {
@@ -10190,7 +10507,7 @@
         "com.amazonaws.sagemaker#ClusterAvailabilityZoneId": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "^[a-z]{3}\\d-az\\d$"
+                "smithy.api#pattern": "^[a-z]{3,5}\\d-az\\d$"
             }
         },
         "com.amazonaws.sagemaker#ClusterAvailabilityZones": {
@@ -12428,6 +12745,18 @@
                     "traits": {
                         "smithy.api#enumValue": "ml.g7.48xlarge"
                     }
+                },
+                "ML_C8A_16XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.c8a.16xlarge"
+                    }
+                },
+                "ML_M8A_16XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.m8a.16xlarge"
+                    }
                 }
             }
         },
@@ -12805,6 +13134,16 @@
                 "smithy.api#documentation": "<p>The network interface configuration for a Amazon SageMaker HyperPod cluster instance group.</p>"
             }
         },
+        "com.amazonaws.sagemaker#ClusterNetworkInterfaceAttachmentId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 28
+                },
+                "smithy.api#pattern": "^eni-attach-[0-9a-f]{8}(?:[0-9a-f]{9})?$"
+            }
+        },
         "com.amazonaws.sagemaker#ClusterNetworkInterfaceDetails": {
             "type": "structure",
             "members": {
@@ -12817,6 +13156,16 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>The network interface configuration details for a Amazon SageMaker HyperPod cluster instance group.</p>"
+            }
+        },
+        "com.amazonaws.sagemaker#ClusterNetworkInterfaceId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 21
+                },
+                "smithy.api#pattern": "^eni-[0-9a-f]{8}(?:[0-9a-f]{9})?$"
             }
         },
         "com.amazonaws.sagemaker#ClusterNodeDetails": {
@@ -13196,6 +13545,12 @@
                     "target": "com.amazonaws.sagemaker#ClusterSlurmConfigStrategy",
                     "traits": {
                         "smithy.api#documentation": "<p>The strategy for managing partitions for the Slurm configuration. Valid values are <code>Managed</code>, <code>Overwrite</code>, and <code>Merge</code>.</p>"
+                    }
+                },
+                "AccountingDatabase": {
+                    "target": "com.amazonaws.sagemaker#ClusterAccountingDatabase",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The external database that stores the Slurm accounting data for the cluster, such as job history, associations, and usage. When you omit this field, Slurm accounting uses a database on the cluster's controller node.</p> <note> <p>This field is only supported for clusters using <code>Continuous</code> as the <code>NodeProvisioningMode</code>.</p> </note>"
                     }
                 }
             },
@@ -16341,7 +16696,7 @@
                     "target": "com.amazonaws.sagemaker#EntityName",
                     "traits": {
                         "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>Name for the cluster policy.</p>",
+                        "smithy.api#documentation": "<p>The name for the cluster policy. The name must be unique within the SageMaker AI HyperPod cluster specified by <code>ClusterArn</code>. You can use the same name in other clusters within a Region or across Regions.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -16587,7 +16942,7 @@
                     "target": "com.amazonaws.sagemaker#EntityName",
                     "traits": {
                         "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>Name to the compute allocation definition.</p>",
+                        "smithy.api#documentation": "<p>The name of the compute allocation definition. The name must be unique within the SageMaker AI HyperPod cluster specified by <code>ClusterArn</code>. You can use the same name in other clusters within a Region or across Regions.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -21514,6 +21869,112 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.sagemaker#CreateTrainingSession": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.sagemaker#CreateTrainingSessionRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.sagemaker#CreateTrainingSessionResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.sagemaker#ResourceInUse"
+                },
+                {
+                    "target": "com.amazonaws.sagemaker#ResourceLimitExceeded"
+                },
+                {
+                    "target": "com.amazonaws.sagemaker#ResourceNotFound"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates a training session in Amazon SageMaker. A training session provisions compute resources for fine-tuning a foundation model using Low-Rank Adaptation (LoRA). After the session is created, you can submit training operations and sample inference requests through the Amazon SageMaker Training Session Runtime API.</p> <p>The following operations are related to <code>CreateTrainingSession</code>:</p> <ul> <li> <p> <code>DescribeTrainingSession</code> </p> </li> <li> <p> <code>ListTrainingSessions</code> </p> </li> <li> <p> <code>StopTrainingSession</code> </p> </li> <li> <p> <code>DeleteTrainingSession</code> </p> </li> </ul>"
+            }
+        },
+        "com.amazonaws.sagemaker#CreateTrainingSessionRequest": {
+            "type": "structure",
+            "members": {
+                "TrainingSessionName": {
+                    "target": "com.amazonaws.sagemaker#TrainingSessionName",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The name of the training session.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ModelPackageGroupArn": {
+                    "target": "com.amazonaws.sagemaker#ModelPackageGroupArn",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the model package group where checkpoints and fine-tuned model artifacts are published.</p>"
+                    }
+                },
+                "LoraConfig": {
+                    "target": "com.amazonaws.sagemaker#LoraConfig",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The Low-Rank Adaptation (LoRA) configuration for the training session, including the rank and alpha parameters.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "RoleArn": {
+                    "target": "com.amazonaws.sagemaker#RoleArn",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM role that Amazon SageMaker assumes to access resources on your behalf. The role must have permissions to access the output S3 path and model package group.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "VpcConfig": {
+                    "target": "com.amazonaws.sagemaker#VpcConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Virtual Private Cloud (VPC) configuration for the training session. Specify subnets and security groups to run the training session in your VPC.</p>"
+                    }
+                },
+                "ModelConfig": {
+                    "target": "com.amazonaws.sagemaker#TrainingSessionModelConfig",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The configuration for the base model, including the model ARN and end-user license agreement (EULA) acceptance.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "OutputConfig": {
+                    "target": "com.amazonaws.sagemaker#TrainingSessionOutputConfig",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The output configuration for the training session, including the S3 location and optional encryption settings.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.sagemaker#TagList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of key-value pairs to apply to the training session as tags. For more information, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html\">Tagging Amazon Web Services Resources</a>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.sagemaker#CreateTrainingSessionResponse": {
+            "type": "structure",
+            "members": {
+                "TrainingSessionArn": {
+                    "target": "com.amazonaws.sagemaker#TrainingSessionArn",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the training session.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.sagemaker#CreateTransformJob": {
             "type": "operation",
             "input": {
@@ -22307,6 +22768,16 @@
                 "smithy.api#documentation": "<p>Details about the POSIX identity that is used for file system operations.</p>"
             }
         },
+        "com.amazonaws.sagemaker#CustomerKmsKeyArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 2048
+                },
+                "smithy.api#pattern": "^arn:aws[a-z\\-]*:kms:[a-z0-9\\-]+:[0-9]{12}:key/(mrk-)?[a-f0-9\\-]+$"
+            }
+        },
         "com.amazonaws.sagemaker#CustomerMetadataKey": {
             "type": "string",
             "traits": {
@@ -22728,6 +23199,55 @@
                     "max": 255
                 },
                 "smithy.api#pattern": "^[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\t]*$"
+            }
+        },
+        "com.amazonaws.sagemaker#DatabaseConfigurationMetadata": {
+            "type": "structure",
+            "members": {
+                "RollbackStatus": {
+                    "target": "com.amazonaws.sagemaker#DatabaseConfigurationRollbackStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Whether HyperPod restored the previous accounting database configuration after the change failed. Valid values:</p> <ul> <li> <p> <code>NotApplicable</code>: The change failed before HyperPod modified the cluster, for example because the database could not be reached or rejected the credentials, so there was nothing to restore.</p> </li> <li> <p> <code>Reverted</code>: The change failed after it was applied, and HyperPod restored the previous configuration. The cluster continues to use the previous accounting database.</p> </li> <li> <p> <code>RevertFailed</code>: The change failed and HyperPod could not restore the previous configuration, so Slurm accounting on the cluster might not be working.</p> </li> </ul> <p>This field is omitted when the change succeeds.</p>"
+                    }
+                },
+                "Advisory": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Additional information about a change that succeeded, such as an action to take on the cluster.</p>"
+                    }
+                },
+                "FailureMessage": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An error message describing why the accounting database change failed, and how to resolve it.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Metadata information about a change to the external Slurm accounting database of a HyperPod cluster.</p>"
+            }
+        },
+        "com.amazonaws.sagemaker#DatabaseConfigurationRollbackStatus": {
+            "type": "enum",
+            "members": {
+                "NOT_APPLICABLE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NotApplicable"
+                    }
+                },
+                "REVERTED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Reverted"
+                    }
+                },
+                "REVERT_FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RevertFailed"
+                    }
+                }
             }
         },
         "com.amazonaws.sagemaker#DatasetDefinition": {
@@ -25349,6 +25869,46 @@
             },
             "traits": {
                 "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.sagemaker#DeleteTrainingSession": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.sagemaker#DeleteTrainingSessionRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.sagemaker#DeleteTrainingSessionResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.sagemaker#ResourceNotFound"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes a training session. You must stop a running session before deleting it. Use the <code>StopTrainingSession</code> operation to stop the session first.</p> <p>The following operations are related to <code>DeleteTrainingSession</code>:</p> <ul> <li> <p> <code>CreateTrainingSession</code> </p> </li> <li> <p> <code>DescribeTrainingSession</code> </p> </li> <li> <p> <code>StopTrainingSession</code> </p> </li> </ul>"
+            }
+        },
+        "com.amazonaws.sagemaker#DeleteTrainingSessionRequest": {
+            "type": "structure",
+            "members": {
+                "TrainingSessionName": {
+                    "target": "com.amazonaws.sagemaker#TrainingSessionName",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The name of the training session to delete.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.sagemaker#DeleteTrainingSessionResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.sagemaker#DeleteTrial": {
@@ -35065,7 +35625,7 @@
             "type": "structure",
             "members": {
                 "TrainingPlanName": {
-                    "target": "com.amazonaws.sagemaker#TrainingPlanName",
+                    "target": "com.amazonaws.sagemaker#TrainingPlanNameOrArn",
                     "traits": {
                         "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name of the training plan to describe.</p>",
@@ -35192,6 +35752,56 @@
                     "target": "com.amazonaws.sagemaker#ReservedCapacitySummaries",
                     "traits": {
                         "smithy.api#documentation": "<p>The list of Reserved Capacity providing the underlying compute resources of the plan. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.sagemaker#DescribeTrainingSession": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.sagemaker#DescribeTrainingSessionRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.sagemaker#DescribeTrainingSessionResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.sagemaker#ResourceNotFound"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves detailed information about a training session, including its current status, model configuration, Low-Rank Adaptation (LoRA) parameters, and timestamps.</p> <p>The following operations are related to <code>DescribeTrainingSession</code>:</p> <ul> <li> <p> <code>CreateTrainingSession</code> </p> </li> <li> <p> <code>ListTrainingSessions</code> </p> </li> <li> <p> <code>StopTrainingSession</code> </p> </li> <li> <p> <code>DeleteTrainingSession</code> </p> </li> </ul>",
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.sagemaker#DescribeTrainingSessionRequest": {
+            "type": "structure",
+            "members": {
+                "TrainingSessionName": {
+                    "target": "com.amazonaws.sagemaker#TrainingSessionName",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The name of the training session to describe.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.sagemaker#DescribeTrainingSessionResponse": {
+            "type": "structure",
+            "members": {
+                "TrainingSessionDetail": {
+                    "target": "com.amazonaws.sagemaker#TrainingSessionDetail",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The detailed information about the training session.</p>",
+                        "smithy.api#required": {}
                     }
                 }
             },
@@ -37187,6 +37797,58 @@
                 "smithy.api#documentation": "<p>The settings for assigning a custom Amazon EFS file system to a user profile or space for an Amazon SageMaker AI Domain.</p>"
             }
         },
+        "com.amazonaws.sagemaker#EMRServerlessApplicationId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 64
+                },
+                "smithy.api#pattern": "[0-9a-z]+"
+            }
+        },
+        "com.amazonaws.sagemaker#EMRServerlessJobRunId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 64
+                },
+                "smithy.api#pattern": "[0-9a-z]+"
+            }
+        },
+        "com.amazonaws.sagemaker#EMRServerlessStepMetadata": {
+            "type": "structure",
+            "members": {
+                "ApplicationId": {
+                    "target": "com.amazonaws.sagemaker#EMRServerlessApplicationId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the Amazon EMR Serverless application.</p>"
+                    }
+                },
+                "JobRunId": {
+                    "target": "com.amazonaws.sagemaker#EMRServerlessJobRunId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the Amazon EMR Serverless job run.</p>"
+                    }
+                },
+                "JobRunName": {
+                    "target": "com.amazonaws.sagemaker#String256",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the Amazon EMR Serverless job run.</p>"
+                    }
+                },
+                "LogFilePath": {
+                    "target": "com.amazonaws.sagemaker#String1024",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The path to the log file for the Amazon EMR Serverless job run.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The configurations and outcomes of an Amazon EMR Serverless step execution.</p>"
+            }
+        },
         "com.amazonaws.sagemaker#EMRStepMetadata": {
             "type": "structure",
             "members": {
@@ -38875,6 +39537,18 @@
                     "target": "com.amazonaws.sagemaker#InstanceMetadata",
                     "traits": {
                         "smithy.api#documentation": "<p>Metadata specific to instance-level events.</p>"
+                    }
+                },
+                "DatabaseConfiguration": {
+                    "target": "com.amazonaws.sagemaker#DatabaseConfigurationMetadata",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Metadata specific to events about the external Slurm accounting database of the cluster.</p>"
+                    }
+                },
+                "SlurmHealth": {
+                    "target": "com.amazonaws.sagemaker#SlurmHealthMetadata",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Metadata specific to events about the health of the Slurm components on the controller node of the cluster.</p>"
                     }
                 }
             },
@@ -40569,6 +41243,102 @@
                 "smithy.api#pattern": "^[\\t\\n\\r -\\uD7FF\\uE000-\\uFFFD]*$"
             }
         },
+        "com.amazonaws.sagemaker#ForEachSelectorResult": {
+            "type": "structure",
+            "members": {
+                "StepName": {
+                    "target": "com.amazonaws.sagemaker#String256",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the step associated with the iteration.</p>"
+                    }
+                },
+                "Index": {
+                    "target": "com.amazonaws.sagemaker#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The index of the iteration within the ForEach step.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The result of the selector that identifies an iteration of a ForEach step.</p>"
+            }
+        },
+        "com.amazonaws.sagemaker#ForEachStatus": {
+            "type": "enum",
+            "members": {
+                "SUCCEEDED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Succeeded"
+                    }
+                },
+                "FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Failed"
+                    }
+                },
+                "STOPPED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Stopped"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The status of a ForEach step execution. Valid values are:</p> <ul> <li> <p> <code>Succeeded</code> indicates that the ForEach step execution completed successfully.</p> </li> <li> <p> <code>Failed</code> indicates that the ForEach step execution failed.</p> </li> <li> <p> <code>Stopped</code> indicates that the ForEach step execution was stopped.</p> </li> </ul>"
+            }
+        },
+        "com.amazonaws.sagemaker#ForEachStepMetadata": {
+            "type": "structure",
+            "members": {
+                "Status": {
+                    "target": "com.amazonaws.sagemaker#ForEachStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the ForEach step execution.</p>"
+                    }
+                },
+                "InputItemCount": {
+                    "target": "com.amazonaws.sagemaker#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of input items that the ForEach step iterates over.</p>"
+                    }
+                },
+                "TotalStepCount": {
+                    "target": "com.amazonaws.sagemaker#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The total number of steps generated across all iterations of the ForEach step.</p>"
+                    }
+                },
+                "SucceededStepCount": {
+                    "target": "com.amazonaws.sagemaker#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of iteration steps that completed successfully.</p>"
+                    }
+                },
+                "FailedStepCount": {
+                    "target": "com.amazonaws.sagemaker#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of iteration steps that failed.</p>"
+                    }
+                },
+                "StoppedStepCount": {
+                    "target": "com.amazonaws.sagemaker#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of iteration steps that were stopped.</p>"
+                    }
+                },
+                "Selector": {
+                    "target": "com.amazonaws.sagemaker#ForEachSelectorResult",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Identifies the body step and iteration selected within the ForEach step.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The status, the iteration-step counts, and the selector information for a ForEach step execution.</p>"
+            }
+        },
         "com.amazonaws.sagemaker#ForecastFrequency": {
             "type": "string",
             "traits": {
@@ -41332,6 +42102,159 @@
                     "max": 255
                 },
                 "smithy.api#pattern": ".*"
+            }
+        },
+        "com.amazonaws.sagemaker#HubContent": {
+            "type": "structure",
+            "members": {
+                "HubContentName": {
+                    "target": "com.amazonaws.sagemaker#HubContentName",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The name of the hub content.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "HubContentArn": {
+                    "target": "com.amazonaws.sagemaker#HubContentArn",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the hub content.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "HubContentVersion": {
+                    "target": "com.amazonaws.sagemaker#HubContentVersion",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The version of the hub content.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "HubContentType": {
+                    "target": "com.amazonaws.sagemaker#HubContentType",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The type of hub content.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "DocumentSchemaVersion": {
+                    "target": "com.amazonaws.sagemaker#DocumentSchemaVersion",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The document schema version for the hub content.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "HubName": {
+                    "target": "com.amazonaws.sagemaker#HubName",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The name of the hub that contains the content.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "HubArn": {
+                    "target": "com.amazonaws.sagemaker#HubArn",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the hub that contains the content.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "HubContentDisplayName": {
+                    "target": "com.amazonaws.sagemaker#HubContentDisplayName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The display name of the hub content.</p>"
+                    }
+                },
+                "HubContentDescription": {
+                    "target": "com.amazonaws.sagemaker#HubContentDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A description of the hub content.</p>"
+                    }
+                },
+                "HubContentMarkdown": {
+                    "target": "com.amazonaws.sagemaker#HubContentMarkdown",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A string that provides a description of the hub content. This string can include links, tables, and standard markdown formatting.</p>"
+                    }
+                },
+                "HubContentDocument": {
+                    "target": "com.amazonaws.sagemaker#HubContentDocument",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The hub content document that describes information about the hub content such as type, associated containers, scripts, and more.</p>"
+                    }
+                },
+                "SageMakerPublicHubContentArn": {
+                    "target": "com.amazonaws.sagemaker#SageMakerPublicHubContentArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the public hub content.</p>"
+                    }
+                },
+                "ReferenceMinVersion": {
+                    "target": "com.amazonaws.sagemaker#ReferenceMinVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The minimum version of the hub content.</p>"
+                    }
+                },
+                "SupportStatus": {
+                    "target": "com.amazonaws.sagemaker#HubContentSupportStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The support status of the hub content.</p>"
+                    }
+                },
+                "HubContentSearchKeywords": {
+                    "target": "com.amazonaws.sagemaker#HubContentSearchKeywordList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The searchable keywords for the hub content.</p>"
+                    }
+                },
+                "HubContentDependencies": {
+                    "target": "com.amazonaws.sagemaker#HubContentDependencyList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The location of any dependencies that the hub content has, such as scripts, model artifacts, datasets, or notebooks.</p>"
+                    }
+                },
+                "HubContentStatus": {
+                    "target": "com.amazonaws.sagemaker#HubContentStatus",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The status of the hub content.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "FailureReason": {
+                    "target": "com.amazonaws.sagemaker#FailureReason",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The failure reason if importing hub content failed.</p>"
+                    }
+                },
+                "CreationTime": {
+                    "target": "com.amazonaws.sagemaker#Timestamp",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The date and time that hub content was created.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "LastModifiedTime": {
+                    "target": "com.amazonaws.sagemaker#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The last modified time of the hub content.</p>"
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.sagemaker#TagList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Any tags associated with the hub content.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains information about a hub content resource, including its name, version, type, associated documents, dependencies, and status, as returned by a search result.</p>"
             }
         },
         "com.amazonaws.sagemaker#HubContentArn": {
@@ -47342,6 +48265,41 @@
                     "max": 256
                 }
             }
+        },
+        "com.amazonaws.sagemaker#IterationContext": {
+            "type": "structure",
+            "members": {
+                "ParentStepName": {
+                    "target": "com.amazonaws.sagemaker#String256",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the ForEach step that generated this iteration.</p>"
+                    }
+                },
+                "Index": {
+                    "target": "com.amazonaws.sagemaker#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The index of the iteration within the ForEach step.</p>"
+                    }
+                },
+                "Item": {
+                    "target": "com.amazonaws.sagemaker#String12800",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The input item that is being processed in this iteration.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The context for an iteration of a ForEach step.</p>"
+            }
+        },
+        "com.amazonaws.sagemaker#JavaBoolean": {
+            "type": "boolean"
+        },
+        "com.amazonaws.sagemaker#JavaInteger": {
+            "type": "integer"
+        },
+        "com.amazonaws.sagemaker#JavaLong": {
+            "type": "long"
         },
         "com.amazonaws.sagemaker#Job": {
             "type": "structure",
@@ -57194,6 +58152,90 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.sagemaker#ListTrainingSessions": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.sagemaker#ListTrainingSessionsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.sagemaker#ListTrainingSessionsResponse"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Lists training sessions in your account. You can filter results by creation time, name, and status. The operation paginates results. To retrieve additional results, use the <code>NextToken</code> parameter.</p> <p>The following operations are related to <code>ListTrainingSessions</code>:</p> <ul> <li> <p> <code>CreateTrainingSession</code> </p> </li> <li> <p> <code>DescribeTrainingSession</code> </p> </li> </ul>",
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "TrainingSessionSummaries",
+                    "pageSize": "MaxResults"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.sagemaker#ListTrainingSessionsRequest": {
+            "type": "structure",
+            "members": {
+                "NextToken": {
+                    "target": "com.amazonaws.sagemaker#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If the response was truncated, use the token returned in the previous response to retrieve the next page of results.</p>"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.sagemaker#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of training sessions to return in the response.</p>"
+                    }
+                },
+                "CreationTimeAfter": {
+                    "target": "com.amazonaws.sagemaker#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A filter that returns only training sessions created after the specified time.</p>"
+                    }
+                },
+                "CreationTimeBefore": {
+                    "target": "com.amazonaws.sagemaker#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A filter that returns only training sessions created before the specified time.</p>"
+                    }
+                },
+                "NameContains": {
+                    "target": "com.amazonaws.sagemaker#NameContains",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A string in the training session name to filter results. Only sessions whose name contains the specified string are returned.</p>"
+                    }
+                },
+                "StatusEquals": {
+                    "target": "com.amazonaws.sagemaker#TrainingSessionStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A filter that returns only training sessions with the specified status.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.sagemaker#ListTrainingSessionsResponse": {
+            "type": "structure",
+            "members": {
+                "NextToken": {
+                    "target": "com.amazonaws.sagemaker#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If the response is truncated, this token retrieves the next set of results.</p>"
+                    }
+                },
+                "TrainingSessionSummaries": {
+                    "target": "com.amazonaws.sagemaker#TrainingSessionSummaries",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>An array of <code>TrainingSessionSummary</code> objects that provide summary information about the training sessions.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.sagemaker#ListTransformJobs": {
             "type": "operation",
             "input": {
@@ -57878,6 +58920,38 @@
                     "max": 2048
                 },
                 "smithy.api#pattern": "^(https|s3)://([^/]+)/?(.*)$"
+            }
+        },
+        "com.amazonaws.sagemaker#LoraAlpha": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1
+                }
+            }
+        },
+        "com.amazonaws.sagemaker#LoraConfig": {
+            "type": "structure",
+            "members": {
+                "Rank": {
+                    "target": "com.amazonaws.sagemaker#Rank",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The rank of the Low-Rank Adaptation (LoRA) adapter matrices.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Alpha": {
+                    "target": "com.amazonaws.sagemaker#LoraAlpha",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The Low-Rank Adaptation (LoRA) scaling factor.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The Low-Rank Adaptation (LoRA) configuration for a training session, including the rank and alpha parameters.</p>"
             }
         },
         "com.amazonaws.sagemaker#MIGProfileType": {
@@ -65478,6 +66552,16 @@
                 }
             }
         },
+        "com.amazonaws.sagemaker#OutputS3Path": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1024
+                },
+                "smithy.api#pattern": "^(https|s3)://([^/]+)/?(.*)$"
+            }
+        },
         "com.amazonaws.sagemaker#OwnershipSettings": {
             "type": "structure",
             "members": {
@@ -66483,6 +67567,13 @@
                     "traits": {
                         "smithy.api#enumValue": "Succeeded"
                     }
+                },
+                "COMPLETED_WITH_FAILURES": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pipeline completed all reachable work after one or more steps failed. Every failed step was handled by a scheduled downstream step whose trigger is <code>Failed</code> or <code>Any</code>.</p>",
+                        "smithy.api#enumValue": "CompletedWithFailures"
+                    }
                 }
             }
         },
@@ -66553,6 +67644,12 @@
                     "target": "com.amazonaws.sagemaker#SelectiveExecutionResult",
                     "traits": {
                         "smithy.api#documentation": "<p>The ARN from an execution of the current pipeline from which results are reused for this step.</p>"
+                    }
+                },
+                "IterationContext": {
+                    "target": "com.amazonaws.sagemaker#IterationContext",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The context for the iteration of a ForEach step that generated this step execution.</p>"
                     }
                 }
             },
@@ -66635,6 +67732,12 @@
                         "smithy.api#documentation": "<p>The configurations and outcomes of an Amazon EMR step execution.</p>"
                     }
                 },
+                "EMRServerless": {
+                    "target": "com.amazonaws.sagemaker#EMRServerlessStepMetadata",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configurations and outcomes of an Amazon EMR Serverless step execution.</p>"
+                    }
+                },
                 "QualityCheck": {
                     "target": "com.amazonaws.sagemaker#QualityCheckStepMetadata",
                     "traits": {
@@ -66711,6 +67814,24 @@
                     "target": "com.amazonaws.sagemaker#JobStepMetadata",
                     "traits": {
                         "smithy.api#documentation": "<p>The metadata for a SageMaker job used in a pipeline execution step.</p>"
+                    }
+                },
+                "Athena": {
+                    "target": "com.amazonaws.sagemaker#AthenaStepMetadata",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The metadata for the Athena step execution.</p>"
+                    }
+                },
+                "Cleanup": {
+                    "target": "com.amazonaws.sagemaker#CleanupStepMetadata",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The metadata for the cleanup step execution.</p>"
+                    }
+                },
+                "ForEach": {
+                    "target": "com.amazonaws.sagemaker#ForEachStepMetadata",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The metadata for the ForEach step execution.</p>"
                     }
                 }
             },
@@ -68272,6 +69393,450 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "ml.g7.48xlarge"
+                    }
+                },
+                "ML_R6I_LARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.r6i.large"
+                    }
+                },
+                "ML_R6I_XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.r6i.xlarge"
+                    }
+                },
+                "ML_R6I_2XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.r6i.2xlarge"
+                    }
+                },
+                "ML_R6I_4XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.r6i.4xlarge"
+                    }
+                },
+                "ML_R6I_8XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.r6i.8xlarge"
+                    }
+                },
+                "ML_R6I_12XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.r6i.12xlarge"
+                    }
+                },
+                "ML_R6I_16XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.r6i.16xlarge"
+                    }
+                },
+                "ML_R6I_24XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.r6i.24xlarge"
+                    }
+                },
+                "ML_R6I_32XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.r6i.32xlarge"
+                    }
+                },
+                "ML_M8I_LARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.m8i.large"
+                    }
+                },
+                "ML_M8I_XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.m8i.xlarge"
+                    }
+                },
+                "ML_M8I_2XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.m8i.2xlarge"
+                    }
+                },
+                "ML_M8I_4XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.m8i.4xlarge"
+                    }
+                },
+                "ML_M8I_8XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.m8i.8xlarge"
+                    }
+                },
+                "ML_M8I_12XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.m8i.12xlarge"
+                    }
+                },
+                "ML_M8I_16XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.m8i.16xlarge"
+                    }
+                },
+                "ML_M8I_24XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.m8i.24xlarge"
+                    }
+                },
+                "ML_M8I_32XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.m8i.32xlarge"
+                    }
+                },
+                "ML_M8I_48XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.m8i.48xlarge"
+                    }
+                },
+                "ML_M8I_96XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.m8i.96xlarge"
+                    }
+                },
+                "ML_C8I_XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.c8i.xlarge"
+                    }
+                },
+                "ML_C8I_2XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.c8i.2xlarge"
+                    }
+                },
+                "ML_C8I_4XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.c8i.4xlarge"
+                    }
+                },
+                "ML_C8I_8XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.c8i.8xlarge"
+                    }
+                },
+                "ML_C8I_12XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.c8i.12xlarge"
+                    }
+                },
+                "ML_C8I_16XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.c8i.16xlarge"
+                    }
+                },
+                "ML_C8I_24XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.c8i.24xlarge"
+                    }
+                },
+                "ML_C8I_32XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.c8i.32xlarge"
+                    }
+                },
+                "ML_C8I_48XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.c8i.48xlarge"
+                    }
+                },
+                "ML_C8I_96XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.c8i.96xlarge"
+                    }
+                },
+                "ML_R8I_LARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.r8i.large"
+                    }
+                },
+                "ML_R8I_XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.r8i.xlarge"
+                    }
+                },
+                "ML_R8I_2XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.r8i.2xlarge"
+                    }
+                },
+                "ML_R8I_4XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.r8i.4xlarge"
+                    }
+                },
+                "ML_R8I_8XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.r8i.8xlarge"
+                    }
+                },
+                "ML_R8I_12XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.r8i.12xlarge"
+                    }
+                },
+                "ML_R8I_16XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.r8i.16xlarge"
+                    }
+                },
+                "ML_R8I_24XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.r8i.24xlarge"
+                    }
+                },
+                "ML_R8I_32XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.r8i.32xlarge"
+                    }
+                },
+                "ML_R8I_48XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.r8i.48xlarge"
+                    }
+                },
+                "ML_R8I_96XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.r8i.96xlarge"
+                    }
+                },
+                "ML_M7I_FLEX_LARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.m7i-flex.large"
+                    }
+                },
+                "ML_M7I_FLEX_XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.m7i-flex.xlarge"
+                    }
+                },
+                "ML_M7I_FLEX_2XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.m7i-flex.2xlarge"
+                    }
+                },
+                "ML_M7I_FLEX_4XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.m7i-flex.4xlarge"
+                    }
+                },
+                "ML_M7I_FLEX_8XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.m7i-flex.8xlarge"
+                    }
+                },
+                "ML_M7I_FLEX_12XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.m7i-flex.12xlarge"
+                    }
+                },
+                "ML_M7I_FLEX_16XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.m7i-flex.16xlarge"
+                    }
+                },
+                "ML_C7I_FLEX_XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.c7i-flex.xlarge"
+                    }
+                },
+                "ML_C7I_FLEX_2XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.c7i-flex.2xlarge"
+                    }
+                },
+                "ML_C7I_FLEX_4XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.c7i-flex.4xlarge"
+                    }
+                },
+                "ML_C7I_FLEX_8XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.c7i-flex.8xlarge"
+                    }
+                },
+                "ML_C7I_FLEX_12XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.c7i-flex.12xlarge"
+                    }
+                },
+                "ML_C7I_FLEX_16XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.c7i-flex.16xlarge"
+                    }
+                },
+                "ML_M8I_FLEX_LARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.m8i-flex.large"
+                    }
+                },
+                "ML_M8I_FLEX_XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.m8i-flex.xlarge"
+                    }
+                },
+                "ML_M8I_FLEX_2XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.m8i-flex.2xlarge"
+                    }
+                },
+                "ML_M8I_FLEX_4XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.m8i-flex.4xlarge"
+                    }
+                },
+                "ML_M8I_FLEX_8XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.m8i-flex.8xlarge"
+                    }
+                },
+                "ML_M8I_FLEX_12XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.m8i-flex.12xlarge"
+                    }
+                },
+                "ML_M8I_FLEX_16XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.m8i-flex.16xlarge"
+                    }
+                },
+                "ML_C8I_FLEX_XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.c8i-flex.xlarge"
+                    }
+                },
+                "ML_C8I_FLEX_2XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.c8i-flex.2xlarge"
+                    }
+                },
+                "ML_C8I_FLEX_4XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.c8i-flex.4xlarge"
+                    }
+                },
+                "ML_C8I_FLEX_8XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.c8i-flex.8xlarge"
+                    }
+                },
+                "ML_C8I_FLEX_12XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.c8i-flex.12xlarge"
+                    }
+                },
+                "ML_C8I_FLEX_16XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.c8i-flex.16xlarge"
+                    }
+                },
+                "ML_R8I_FLEX_LARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.r8i-flex.large"
+                    }
+                },
+                "ML_R8I_FLEX_XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.r8i-flex.xlarge"
+                    }
+                },
+                "ML_R8I_FLEX_2XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.r8i-flex.2xlarge"
+                    }
+                },
+                "ML_R8I_FLEX_4XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.r8i-flex.4xlarge"
+                    }
+                },
+                "ML_R8I_FLEX_8XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.r8i-flex.8xlarge"
+                    }
+                },
+                "ML_R8I_FLEX_12XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.r8i-flex.12xlarge"
+                    }
+                },
+                "ML_R8I_FLEX_16XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.r8i-flex.16xlarge"
                     }
                 }
             }
@@ -72211,6 +73776,15 @@
                 }
             }
         },
+        "com.amazonaws.sagemaker#Rank": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 256
+                }
+            }
+        },
         "com.amazonaws.sagemaker#RealTimeInferenceConfig": {
             "type": "structure",
             "members": {
@@ -74333,6 +75907,12 @@
                     "traits": {
                         "smithy.api#enumValue": "Job"
                     }
+                },
+                "HUB_CONTENT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "HubContent"
+                    }
                 }
             }
         },
@@ -74984,6 +76564,9 @@
                     "target": "com.amazonaws.sagemaker#AssociateTrialComponent"
                 },
                 {
+                    "target": "com.amazonaws.sagemaker#AttachClusterNodeNetworkInterface"
+                },
+                {
                     "target": "com.amazonaws.sagemaker#AttachClusterNodeVolume"
                 },
                 {
@@ -75200,6 +76783,9 @@
                     "target": "com.amazonaws.sagemaker#CreateTrainingPlan"
                 },
                 {
+                    "target": "com.amazonaws.sagemaker#CreateTrainingSession"
+                },
+                {
                     "target": "com.amazonaws.sagemaker#CreateTransformJob"
                 },
                 {
@@ -75387,6 +76973,9 @@
                 },
                 {
                     "target": "com.amazonaws.sagemaker#DeleteTrainingJob"
+                },
+                {
+                    "target": "com.amazonaws.sagemaker#DeleteTrainingSession"
                 },
                 {
                     "target": "com.amazonaws.sagemaker#DeleteTrial"
@@ -75615,6 +77204,9 @@
                 },
                 {
                     "target": "com.amazonaws.sagemaker#DescribeTrainingPlanExtensionHistory"
+                },
+                {
+                    "target": "com.amazonaws.sagemaker#DescribeTrainingSession"
                 },
                 {
                     "target": "com.amazonaws.sagemaker#DescribeTransformJob"
@@ -75920,6 +77512,9 @@
                     "target": "com.amazonaws.sagemaker#ListTrainingPlans"
                 },
                 {
+                    "target": "com.amazonaws.sagemaker#ListTrainingSessions"
+                },
+                {
                     "target": "com.amazonaws.sagemaker#ListTransformJobs"
                 },
                 {
@@ -76044,6 +77639,9 @@
                 },
                 {
                     "target": "com.amazonaws.sagemaker#StopTrainingJob"
+                },
+                {
+                    "target": "com.amazonaws.sagemaker#StopTrainingSession"
                 },
                 {
                     "target": "com.amazonaws.sagemaker#StopTransformJob"
@@ -77944,6 +79542,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The properties of a job.</p>"
                     }
+                },
+                "HubContent": {
+                    "target": "com.amazonaws.sagemaker#HubContent",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The properties of a hub content resource.</p>"
+                    }
                 }
             },
             "traits": {
@@ -78921,6 +80525,87 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "None"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.sagemaker#SlurmHealthComponent": {
+            "type": "enum",
+            "members": {
+                "SLURMDBD": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Slurmdbd"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.sagemaker#SlurmHealthMetadata": {
+            "type": "structure",
+            "members": {
+                "Component": {
+                    "target": "com.amazonaws.sagemaker#SlurmHealthComponent",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The Slurm component that the health information describes. The valid value is <code>Slurmdbd</code>, the Slurm accounting daemon.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.sagemaker#SlurmHealthStatus",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The health of the component. Valid values are <code>Healthy</code> and <code>Unhealthy</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Reason": {
+                    "target": "com.amazonaws.sagemaker#SlurmHealthReason",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The reason the component is unhealthy. Valid values:</p> <ul> <li> <p> <code>DaemonDown</code>: The daemon is not running, so job accounting records are not being written.</p> </li> <li> <p> <code>DaemonDisabled</code>: The daemon is running and its accounting database is responding, but the daemon is not enabled to start automatically. Job accounting stops the next time the controller node restarts.</p> </li> <li> <p> <code>DbUnreachable</code>: The daemon is running, but its accounting database did not respond. Job accounting records might not be written.</p> </li> </ul> <p>This field is omitted when the component is healthy.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Metadata information about the health of a Slurm component on the controller node of a HyperPod cluster.</p>"
+            }
+        },
+        "com.amazonaws.sagemaker#SlurmHealthReason": {
+            "type": "enum",
+            "members": {
+                "DAEMON_DOWN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DaemonDown"
+                    }
+                },
+                "DAEMON_DISABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DaemonDisabled"
+                    }
+                },
+                "DB_UNREACHABLE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DbUnreachable"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.sagemaker#SlurmHealthStatus": {
+            "type": "enum",
+            "members": {
+                "HEALTHY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Healthy"
+                    }
+                },
+                "UNHEALTHY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Unhealthy"
                     }
                 }
             }
@@ -81179,6 +82864,46 @@
                 "smithy.api#input": {}
             }
         },
+        "com.amazonaws.sagemaker#StopTrainingSession": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.sagemaker#StopTrainingSessionRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.sagemaker#StopTrainingSessionResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.sagemaker#ResourceNotFound"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Stops a running training session and sets the session status to <code>Stopping</code>. After the session stops, the status changes to <code>Stopped</code>. To delete a stopped session, use the <code>DeleteTrainingSession</code> operation.</p> <p>The following operations are related to <code>StopTrainingSession</code>:</p> <ul> <li> <p> <code>CreateTrainingSession</code> </p> </li> <li> <p> <code>DescribeTrainingSession</code> </p> </li> <li> <p> <code>DeleteTrainingSession</code> </p> </li> </ul>"
+            }
+        },
+        "com.amazonaws.sagemaker#StopTrainingSessionRequest": {
+            "type": "structure",
+            "members": {
+                "TrainingSessionName": {
+                    "target": "com.amazonaws.sagemaker#TrainingSessionName",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The name of the training session to stop.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.sagemaker#StopTrainingSessionResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.sagemaker#StopTransformJob": {
             "type": "operation",
             "input": {
@@ -81282,6 +83007,15 @@
                 "smithy.api#length": {
                     "min": 0,
                     "max": 128
+                }
+            }
+        },
+        "com.amazonaws.sagemaker#String12800": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 12800
                 }
             }
         },
@@ -84221,6 +85955,450 @@
                     "traits": {
                         "smithy.api#enumValue": "ml.g7.48xlarge"
                     }
+                },
+                "ML_R6I_LARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.r6i.large"
+                    }
+                },
+                "ML_R6I_XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.r6i.xlarge"
+                    }
+                },
+                "ML_R6I_2XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.r6i.2xlarge"
+                    }
+                },
+                "ML_R6I_4XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.r6i.4xlarge"
+                    }
+                },
+                "ML_R6I_8XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.r6i.8xlarge"
+                    }
+                },
+                "ML_R6I_12XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.r6i.12xlarge"
+                    }
+                },
+                "ML_R6I_16XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.r6i.16xlarge"
+                    }
+                },
+                "ML_R6I_24XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.r6i.24xlarge"
+                    }
+                },
+                "ML_R6I_32XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.r6i.32xlarge"
+                    }
+                },
+                "ML_M8I_LARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.m8i.large"
+                    }
+                },
+                "ML_M8I_XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.m8i.xlarge"
+                    }
+                },
+                "ML_M8I_2XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.m8i.2xlarge"
+                    }
+                },
+                "ML_M8I_4XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.m8i.4xlarge"
+                    }
+                },
+                "ML_M8I_8XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.m8i.8xlarge"
+                    }
+                },
+                "ML_M8I_12XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.m8i.12xlarge"
+                    }
+                },
+                "ML_M8I_16XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.m8i.16xlarge"
+                    }
+                },
+                "ML_M8I_24XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.m8i.24xlarge"
+                    }
+                },
+                "ML_M8I_32XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.m8i.32xlarge"
+                    }
+                },
+                "ML_M8I_48XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.m8i.48xlarge"
+                    }
+                },
+                "ML_M8I_96XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.m8i.96xlarge"
+                    }
+                },
+                "ML_C8I_XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.c8i.xlarge"
+                    }
+                },
+                "ML_C8I_2XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.c8i.2xlarge"
+                    }
+                },
+                "ML_C8I_4XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.c8i.4xlarge"
+                    }
+                },
+                "ML_C8I_8XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.c8i.8xlarge"
+                    }
+                },
+                "ML_C8I_12XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.c8i.12xlarge"
+                    }
+                },
+                "ML_C8I_16XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.c8i.16xlarge"
+                    }
+                },
+                "ML_C8I_24XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.c8i.24xlarge"
+                    }
+                },
+                "ML_C8I_32XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.c8i.32xlarge"
+                    }
+                },
+                "ML_C8I_48XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.c8i.48xlarge"
+                    }
+                },
+                "ML_C8I_96XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.c8i.96xlarge"
+                    }
+                },
+                "ML_R8I_LARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.r8i.large"
+                    }
+                },
+                "ML_R8I_XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.r8i.xlarge"
+                    }
+                },
+                "ML_R8I_2XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.r8i.2xlarge"
+                    }
+                },
+                "ML_R8I_4XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.r8i.4xlarge"
+                    }
+                },
+                "ML_R8I_8XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.r8i.8xlarge"
+                    }
+                },
+                "ML_R8I_12XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.r8i.12xlarge"
+                    }
+                },
+                "ML_R8I_16XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.r8i.16xlarge"
+                    }
+                },
+                "ML_R8I_24XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.r8i.24xlarge"
+                    }
+                },
+                "ML_R8I_32XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.r8i.32xlarge"
+                    }
+                },
+                "ML_R8I_48XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.r8i.48xlarge"
+                    }
+                },
+                "ML_R8I_96XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.r8i.96xlarge"
+                    }
+                },
+                "ML_M7I_FLEX_LARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.m7i-flex.large"
+                    }
+                },
+                "ML_M7I_FLEX_XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.m7i-flex.xlarge"
+                    }
+                },
+                "ML_M7I_FLEX_2XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.m7i-flex.2xlarge"
+                    }
+                },
+                "ML_M7I_FLEX_4XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.m7i-flex.4xlarge"
+                    }
+                },
+                "ML_M7I_FLEX_8XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.m7i-flex.8xlarge"
+                    }
+                },
+                "ML_M7I_FLEX_12XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.m7i-flex.12xlarge"
+                    }
+                },
+                "ML_M7I_FLEX_16XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.m7i-flex.16xlarge"
+                    }
+                },
+                "ML_C7I_FLEX_XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.c7i-flex.xlarge"
+                    }
+                },
+                "ML_C7I_FLEX_2XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.c7i-flex.2xlarge"
+                    }
+                },
+                "ML_C7I_FLEX_4XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.c7i-flex.4xlarge"
+                    }
+                },
+                "ML_C7I_FLEX_8XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.c7i-flex.8xlarge"
+                    }
+                },
+                "ML_C7I_FLEX_12XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.c7i-flex.12xlarge"
+                    }
+                },
+                "ML_C7I_FLEX_16XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.c7i-flex.16xlarge"
+                    }
+                },
+                "ML_M8I_FLEX_LARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.m8i-flex.large"
+                    }
+                },
+                "ML_M8I_FLEX_XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.m8i-flex.xlarge"
+                    }
+                },
+                "ML_M8I_FLEX_2XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.m8i-flex.2xlarge"
+                    }
+                },
+                "ML_M8I_FLEX_4XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.m8i-flex.4xlarge"
+                    }
+                },
+                "ML_M8I_FLEX_8XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.m8i-flex.8xlarge"
+                    }
+                },
+                "ML_M8I_FLEX_12XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.m8i-flex.12xlarge"
+                    }
+                },
+                "ML_M8I_FLEX_16XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.m8i-flex.16xlarge"
+                    }
+                },
+                "ML_C8I_FLEX_XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.c8i-flex.xlarge"
+                    }
+                },
+                "ML_C8I_FLEX_2XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.c8i-flex.2xlarge"
+                    }
+                },
+                "ML_C8I_FLEX_4XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.c8i-flex.4xlarge"
+                    }
+                },
+                "ML_C8I_FLEX_8XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.c8i-flex.8xlarge"
+                    }
+                },
+                "ML_C8I_FLEX_12XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.c8i-flex.12xlarge"
+                    }
+                },
+                "ML_C8I_FLEX_16XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.c8i-flex.16xlarge"
+                    }
+                },
+                "ML_R8I_FLEX_LARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.r8i-flex.large"
+                    }
+                },
+                "ML_R8I_FLEX_XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.r8i-flex.xlarge"
+                    }
+                },
+                "ML_R8I_FLEX_2XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.r8i-flex.2xlarge"
+                    }
+                },
+                "ML_R8I_FLEX_4XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.r8i-flex.4xlarge"
+                    }
+                },
+                "ML_R8I_FLEX_8XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.r8i-flex.8xlarge"
+                    }
+                },
+                "ML_R8I_FLEX_12XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.r8i-flex.12xlarge"
+                    }
+                },
+                "ML_R8I_FLEX_16XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.r8i-flex.16xlarge"
+                    }
                 }
             }
         },
@@ -85040,6 +87218,17 @@
                 "smithy.api#pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9]){0,63}$"
             }
         },
+        "com.amazonaws.sagemaker#TrainingPlanNameOrArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "A training plan name, or the ARN of a training plan.",
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 2048
+                },
+                "smithy.api#pattern": "^(arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:training-plan/)?[a-zA-Z0-9](-*[a-zA-Z0-9]){0,63}$"
+            }
+        },
         "com.amazonaws.sagemaker#TrainingPlanOffering": {
             "type": "structure",
             "members": {
@@ -85400,6 +87589,316 @@
                     "max": 2048
                 },
                 "smithy.api#pattern": "^arn:[\\p{Alnum}\\-]+:lambda:[\\p{Alnum}\\-]+:[0-9]{12}:function:"
+            }
+        },
+        "com.amazonaws.sagemaker#TrainingSessionArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 256
+                },
+                "smithy.api#pattern": "^arn:(aws[a-z\\-]*):sagemaker:[a-z0-9\\-]+:[0-9]{12}:training-session/[a-zA-Z0-9](-*[a-zA-Z0-9]){0,62}$"
+            }
+        },
+        "com.amazonaws.sagemaker#TrainingSessionDetail": {
+            "type": "structure",
+            "members": {
+                "TrainingSessionArn": {
+                    "target": "com.amazonaws.sagemaker#TrainingSessionArn",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the training session.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "TrainingSessionName": {
+                    "target": "com.amazonaws.sagemaker#TrainingSessionName",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The name of the training session.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "TrainingSessionStatus": {
+                    "target": "com.amazonaws.sagemaker#TrainingSessionStatus",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The current status of the training session.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ModelPackageGroupArn": {
+                    "target": "com.amazonaws.sagemaker#ModelPackageGroupArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the model package group where checkpoints are published.</p>"
+                    }
+                },
+                "CreationTime": {
+                    "target": "com.amazonaws.sagemaker#Timestamp",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The date and time that the training session was created.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "LastModifiedTime": {
+                    "target": "com.amazonaws.sagemaker#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time that the training session was last modified.</p>"
+                    }
+                },
+                "EndTime": {
+                    "target": "com.amazonaws.sagemaker#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time that the training session ended.</p>"
+                    }
+                },
+                "ErrorDetails": {
+                    "target": "com.amazonaws.sagemaker#FailureReason",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If the training session failed or is blocked, detailed error information.</p>"
+                    }
+                },
+                "LastReceivedSequenceNumber": {
+                    "target": "com.amazonaws.sagemaker#JavaInteger",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The sequence number of the last training operation received by the session.</p>"
+                    }
+                },
+                "BillableTokenUsage": {
+                    "target": "com.amazonaws.sagemaker#BillableTokenUsage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The billable token usage for the training session.</p>"
+                    }
+                },
+                "VpcConfig": {
+                    "target": "com.amazonaws.sagemaker#VpcConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Virtual Private Cloud (VPC) configuration for the training session.</p>"
+                    }
+                },
+                "RoleArn": {
+                    "target": "com.amazonaws.sagemaker#RoleArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM role associated with the training session.</p>"
+                    }
+                },
+                "LoraConfig": {
+                    "target": "com.amazonaws.sagemaker#LoraConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Low-Rank Adaptation (LoRA) configuration for the training session.</p>"
+                    }
+                },
+                "ModelConfig": {
+                    "target": "com.amazonaws.sagemaker#TrainingSessionModelConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration for the base model.</p>"
+                    }
+                },
+                "OutputConfig": {
+                    "target": "com.amazonaws.sagemaker#TrainingSessionOutputConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The output configuration for the training session.</p>"
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.sagemaker#TagList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags associated with the training session.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains detailed information about a training session.</p>"
+            }
+        },
+        "com.amazonaws.sagemaker#TrainingSessionModelConfig": {
+            "type": "structure",
+            "members": {
+                "BaseModelArn": {
+                    "target": "com.amazonaws.sagemaker#BaseModelArn",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the base foundation model from SageMaker Hub.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "AcceptEula": {
+                    "target": "com.amazonaws.sagemaker#JavaBoolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether you accept the end-user license agreement (EULA) for gated models.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The configuration for the base model used in a training session.</p>"
+            }
+        },
+        "com.amazonaws.sagemaker#TrainingSessionName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 63
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9]){0,62}$"
+            }
+        },
+        "com.amazonaws.sagemaker#TrainingSessionOutputConfig": {
+            "type": "structure",
+            "members": {
+                "S3Location": {
+                    "target": "com.amazonaws.sagemaker#TrainingSessionS3Location",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The Amazon S3 location where training session outputs, including checkpoints and model artifacts, are stored.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The output configuration for a training session, including the Amazon S3 location for checkpoints and model artifacts, and optional encryption settings.</p>"
+            }
+        },
+        "com.amazonaws.sagemaker#TrainingSessionS3Location": {
+            "type": "structure",
+            "members": {
+                "Path": {
+                    "target": "com.amazonaws.sagemaker#OutputS3Path",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The Amazon S3 path where training session outputs are stored.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "KmsKeyArn": {
+                    "target": "com.amazonaws.sagemaker#CustomerKmsKeyArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the KMS key used to encrypt output data. If not specified, the default Amazon S3 encryption is used.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies the Amazon S3 path and optional encryption settings for training session output data, including checkpoints, model artifacts, and invocation results.</p>"
+            }
+        },
+        "com.amazonaws.sagemaker#TrainingSessionStatus": {
+            "type": "enum",
+            "members": {
+                "CREATED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Created"
+                    }
+                },
+                "BLOCKED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Blocked"
+                    }
+                },
+                "RUNNING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Running"
+                    }
+                },
+                "FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Failed"
+                    }
+                },
+                "SCHEDULED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Scheduled"
+                    }
+                },
+                "STOPPING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Stopping"
+                    }
+                },
+                "STOPPED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Stopped"
+                    }
+                },
+                "EXPIRED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Expired"
+                    }
+                },
+                "DELETING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Deleting"
+                    }
+                },
+                "DELETION_FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DeletionFailed"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The status of a training session.</p>"
+            }
+        },
+        "com.amazonaws.sagemaker#TrainingSessionSummaries": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.sagemaker#TrainingSessionSummary"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 100
+                }
+            }
+        },
+        "com.amazonaws.sagemaker#TrainingSessionSummary": {
+            "type": "structure",
+            "members": {
+                "TrainingSessionArn": {
+                    "target": "com.amazonaws.sagemaker#TrainingSessionArn",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the training session.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "TrainingSessionStatus": {
+                    "target": "com.amazonaws.sagemaker#TrainingSessionStatus",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The current status of the training session.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "CreationTime": {
+                    "target": "com.amazonaws.sagemaker#Timestamp",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The date and time that the training session was created.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "LastModifiedTime": {
+                    "target": "com.amazonaws.sagemaker#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time that the training session was last modified.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains summary information about a training session.</p>"
             }
         },
         "com.amazonaws.sagemaker#TrainingSpecification": {

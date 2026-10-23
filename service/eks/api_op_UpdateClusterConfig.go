@@ -5,7 +5,9 @@ package eks
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/eks/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/eks/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -162,6 +164,89 @@ type UpdateClusterConfigInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateClusterConfigInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateClusterConfigRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateClusterConfigInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccessConfig != nil {
+		s.WriteStruct(schemas.UpdateClusterConfigRequest_accessConfig)
+		v.AccessConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ClientRequestToken != nil {
+		s.WriteString(schemas.UpdateClusterConfigRequest_clientRequestToken, *v.ClientRequestToken)
+	}
+	if v.ComputeConfig != nil {
+		s.WriteStruct(schemas.UpdateClusterConfigRequest_computeConfig)
+		v.ComputeConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ControlPlaneScalingConfig != nil {
+		s.WriteStruct(schemas.UpdateClusterConfigRequest_controlPlaneScalingConfig)
+		v.ControlPlaneScalingConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DeletionProtection != nil {
+		s.WriteBool(schemas.UpdateClusterConfigRequest_deletionProtection, *v.DeletionProtection)
+	}
+	if v.KubeApiServerConfig != nil {
+		s.WriteStruct(schemas.UpdateClusterConfigRequest_kubeApiServerConfig)
+		v.KubeApiServerConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.KubeControllerManagerConfig != nil {
+		s.WriteStruct(schemas.UpdateClusterConfigRequest_kubeControllerManagerConfig)
+		v.KubeControllerManagerConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.KubeSchedulerConfig != nil {
+		s.WriteStruct(schemas.UpdateClusterConfigRequest_kubeSchedulerConfig)
+		v.KubeSchedulerConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.KubernetesNetworkConfig != nil {
+		s.WriteStruct(schemas.UpdateClusterConfigRequest_kubernetesNetworkConfig)
+		v.KubernetesNetworkConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Logging != nil {
+		s.WriteStruct(schemas.UpdateClusterConfigRequest_logging)
+		v.Logging.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateClusterConfigRequest_name, *v.Name)
+	}
+	if v.RemoteNetworkConfig != nil {
+		s.WriteStruct(schemas.UpdateClusterConfigRequest_remoteNetworkConfig)
+		v.RemoteNetworkConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ResourcesVpcConfig != nil {
+		s.WriteStruct(schemas.UpdateClusterConfigRequest_resourcesVpcConfig)
+		v.ResourcesVpcConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.StorageConfig != nil {
+		s.WriteStruct(schemas.UpdateClusterConfigRequest_storageConfig)
+		v.StorageConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.UpgradePolicy != nil {
+		s.WriteStruct(schemas.UpdateClusterConfigRequest_upgradePolicy)
+		v.UpgradePolicy.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ZonalShiftConfig != nil {
+		s.WriteStruct(schemas.UpdateClusterConfigRequest_zonalShiftConfig)
+		v.ZonalShiftConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type UpdateClusterConfigOutput struct {
 
 	// An object representing an asynchronous update.
@@ -173,13 +258,34 @@ type UpdateClusterConfigOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateClusterConfigOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateClusterConfigResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateClusterConfigOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Update != nil {
+		s.WriteStruct(schemas.UpdateClusterConfigResponse_update)
+		v.Update.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateClusterConfigOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateClusterConfigResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateClusterConfigResponse_update:
+			v.Update = &types.Update{}
+			return v.Update.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateClusterConfigMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateClusterConfig{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateClusterConfig, schemas.UpdateClusterConfigRequest, schemas.UpdateClusterConfigResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateClusterConfig{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateClusterConfig, schemas.UpdateClusterConfigRequest, schemas.UpdateClusterConfigResponse), output: &UpdateClusterConfigOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

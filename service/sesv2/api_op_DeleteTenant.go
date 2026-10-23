@@ -4,6 +4,8 @@ package sesv2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/sesv2/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -37,6 +39,18 @@ type DeleteTenantInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteTenantInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteTenantRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteTenantInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TenantName != nil {
+		s.WriteString(schemas.DeleteTenantRequest_TenantName, *v.TenantName)
+	}
+}
+
 // If the action is successful, the service sends back an HTTP 200 response with
 // an empty HTTP body.
 type DeleteTenantOutput struct {
@@ -46,13 +60,26 @@ type DeleteTenantOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteTenantOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteTenantResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteTenantOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteTenantOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteTenantResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteTenantMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteTenant{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteTenant, schemas.DeleteTenantRequest, schemas.DeleteTenantResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteTenant{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteTenant, schemas.DeleteTenantRequest, schemas.DeleteTenantResponse), output: &DeleteTenantOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

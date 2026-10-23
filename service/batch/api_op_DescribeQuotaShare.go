@@ -4,7 +4,9 @@ package batch
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/batch/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/batch/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -32,6 +34,18 @@ type DescribeQuotaShareInput struct {
 	QuotaShareArn *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DescribeQuotaShareInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeQuotaShareRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeQuotaShareInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.QuotaShareArn != nil {
+		s.WriteString(schemas.DescribeQuotaShareRequest_quotaShareArn, *v.QuotaShareArn)
+	}
 }
 
 type DescribeQuotaShareOutput struct {
@@ -71,13 +85,86 @@ type DescribeQuotaShareOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeQuotaShareOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeQuotaShareResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeQuotaShareOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeQuotaShareCapacityLimits(s, schemas.DescribeQuotaShareResponse_capacityLimits, v.CapacityLimits)
+	if v.JobQueueArn != nil {
+		s.WriteString(schemas.DescribeQuotaShareResponse_jobQueueArn, *v.JobQueueArn)
+	}
+	if v.PreemptionConfiguration != nil {
+		s.WriteStruct(schemas.DescribeQuotaShareResponse_preemptionConfiguration)
+		v.PreemptionConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.QuotaShareArn != nil {
+		s.WriteString(schemas.DescribeQuotaShareResponse_quotaShareArn, *v.QuotaShareArn)
+	}
+	if v.QuotaShareName != nil {
+		s.WriteString(schemas.DescribeQuotaShareResponse_quotaShareName, *v.QuotaShareName)
+	}
+	if v.ResourceSharingConfiguration != nil {
+		s.WriteStruct(schemas.DescribeQuotaShareResponse_resourceSharingConfiguration)
+		v.ResourceSharingConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.State != "" {
+		s.WriteString(schemas.DescribeQuotaShareResponse_state, string(v.State))
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.DescribeQuotaShareResponse_status, string(v.Status))
+	}
+	serializeTagrisTagsMap(s, schemas.DescribeQuotaShareResponse_tags, v.Tags)
+}
+func (v *DescribeQuotaShareOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeQuotaShareResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeQuotaShareResponse_capacityLimits:
+			return deserializeQuotaShareCapacityLimits(d, schemas.DescribeQuotaShareResponse_capacityLimits, &v.CapacityLimits)
+		case schemas.DescribeQuotaShareResponse_jobQueueArn:
+			v.JobQueueArn = new(string)
+			return d.ReadString(schemas.DescribeQuotaShareResponse_jobQueueArn, v.JobQueueArn)
+		case schemas.DescribeQuotaShareResponse_preemptionConfiguration:
+			v.PreemptionConfiguration = &types.QuotaSharePreemptionConfiguration{}
+			return v.PreemptionConfiguration.Deserialize(d)
+		case schemas.DescribeQuotaShareResponse_quotaShareArn:
+			v.QuotaShareArn = new(string)
+			return d.ReadString(schemas.DescribeQuotaShareResponse_quotaShareArn, v.QuotaShareArn)
+		case schemas.DescribeQuotaShareResponse_quotaShareName:
+			v.QuotaShareName = new(string)
+			return d.ReadString(schemas.DescribeQuotaShareResponse_quotaShareName, v.QuotaShareName)
+		case schemas.DescribeQuotaShareResponse_resourceSharingConfiguration:
+			v.ResourceSharingConfiguration = &types.QuotaShareResourceSharingConfiguration{}
+			return v.ResourceSharingConfiguration.Deserialize(d)
+		case schemas.DescribeQuotaShareResponse_state:
+			var ev string
+			if err := d.ReadString(schemas.DescribeQuotaShareResponse_state, &ev); err != nil {
+				return err
+			}
+			v.State = types.QuotaShareState(ev)
+			return nil
+		case schemas.DescribeQuotaShareResponse_status:
+			var ev string
+			if err := d.ReadString(schemas.DescribeQuotaShareResponse_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.QuotaShareStatus(ev)
+			return nil
+		case schemas.DescribeQuotaShareResponse_tags:
+			return deserializeTagrisTagsMap(d, schemas.DescribeQuotaShareResponse_tags, &v.Tags)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeQuotaShareMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeQuotaShare{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeQuotaShare, schemas.DescribeQuotaShareRequest, schemas.DescribeQuotaShareResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeQuotaShare{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeQuotaShare, schemas.DescribeQuotaShareRequest, schemas.DescribeQuotaShareResponse), output: &DescribeQuotaShareOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

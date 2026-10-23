@@ -4,7 +4,9 @@ package customerprofiles
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/customerprofiles/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/customerprofiles/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -50,6 +52,32 @@ type UpdateCalculatedAttributeDefinitionInput struct {
 	DisplayName *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *UpdateCalculatedAttributeDefinitionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateCalculatedAttributeDefinitionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateCalculatedAttributeDefinitionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CalculatedAttributeName != nil {
+		s.WriteString(schemas.UpdateCalculatedAttributeDefinitionRequest_CalculatedAttributeName, *v.CalculatedAttributeName)
+	}
+	if v.Conditions != nil {
+		s.WriteStruct(schemas.UpdateCalculatedAttributeDefinitionRequest_Conditions)
+		v.Conditions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateCalculatedAttributeDefinitionRequest_Description, *v.Description)
+	}
+	if v.DisplayName != nil {
+		s.WriteString(schemas.UpdateCalculatedAttributeDefinitionRequest_DisplayName, *v.DisplayName)
+	}
+	if v.DomainName != nil {
+		s.WriteString(schemas.UpdateCalculatedAttributeDefinitionRequest_DomainName, *v.DomainName)
+	}
 }
 
 type UpdateCalculatedAttributeDefinitionOutput struct {
@@ -102,13 +130,109 @@ type UpdateCalculatedAttributeDefinitionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateCalculatedAttributeDefinitionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateCalculatedAttributeDefinitionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateCalculatedAttributeDefinitionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AttributeDetails != nil {
+		s.WriteStruct(schemas.UpdateCalculatedAttributeDefinitionResponse_AttributeDetails)
+		v.AttributeDetails.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CalculatedAttributeName != nil {
+		s.WriteString(schemas.UpdateCalculatedAttributeDefinitionResponse_CalculatedAttributeName, *v.CalculatedAttributeName)
+	}
+	if v.Conditions != nil {
+		s.WriteStruct(schemas.UpdateCalculatedAttributeDefinitionResponse_Conditions)
+		v.Conditions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.UpdateCalculatedAttributeDefinitionResponse_CreatedAt, *v.CreatedAt)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateCalculatedAttributeDefinitionResponse_Description, *v.Description)
+	}
+	if v.DisplayName != nil {
+		s.WriteString(schemas.UpdateCalculatedAttributeDefinitionResponse_DisplayName, *v.DisplayName)
+	}
+	if v.LastUpdatedAt != nil {
+		s.WriteTime(schemas.UpdateCalculatedAttributeDefinitionResponse_LastUpdatedAt, *v.LastUpdatedAt)
+	}
+	if v.Readiness != nil {
+		s.WriteStruct(schemas.UpdateCalculatedAttributeDefinitionResponse_Readiness)
+		v.Readiness.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Statistic != "" {
+		s.WriteString(schemas.UpdateCalculatedAttributeDefinitionResponse_Statistic, string(v.Statistic))
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.UpdateCalculatedAttributeDefinitionResponse_Status, string(v.Status))
+	}
+	serializeTagMap(s, schemas.UpdateCalculatedAttributeDefinitionResponse_Tags, v.Tags)
+	if v.UseHistoricalData != nil {
+		s.WriteBool(schemas.UpdateCalculatedAttributeDefinitionResponse_UseHistoricalData, *v.UseHistoricalData)
+	}
+}
+func (v *UpdateCalculatedAttributeDefinitionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateCalculatedAttributeDefinitionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateCalculatedAttributeDefinitionResponse_AttributeDetails:
+			v.AttributeDetails = &types.AttributeDetails{}
+			return v.AttributeDetails.Deserialize(d)
+		case schemas.UpdateCalculatedAttributeDefinitionResponse_CalculatedAttributeName:
+			v.CalculatedAttributeName = new(string)
+			return d.ReadString(schemas.UpdateCalculatedAttributeDefinitionResponse_CalculatedAttributeName, v.CalculatedAttributeName)
+		case schemas.UpdateCalculatedAttributeDefinitionResponse_Conditions:
+			v.Conditions = &types.Conditions{}
+			return v.Conditions.Deserialize(d)
+		case schemas.UpdateCalculatedAttributeDefinitionResponse_CreatedAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.UpdateCalculatedAttributeDefinitionResponse_CreatedAt, v.CreatedAt)
+		case schemas.UpdateCalculatedAttributeDefinitionResponse_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.UpdateCalculatedAttributeDefinitionResponse_Description, v.Description)
+		case schemas.UpdateCalculatedAttributeDefinitionResponse_DisplayName:
+			v.DisplayName = new(string)
+			return d.ReadString(schemas.UpdateCalculatedAttributeDefinitionResponse_DisplayName, v.DisplayName)
+		case schemas.UpdateCalculatedAttributeDefinitionResponse_LastUpdatedAt:
+			v.LastUpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.UpdateCalculatedAttributeDefinitionResponse_LastUpdatedAt, v.LastUpdatedAt)
+		case schemas.UpdateCalculatedAttributeDefinitionResponse_Readiness:
+			v.Readiness = &types.Readiness{}
+			return v.Readiness.Deserialize(d)
+		case schemas.UpdateCalculatedAttributeDefinitionResponse_Statistic:
+			var ev string
+			if err := d.ReadString(schemas.UpdateCalculatedAttributeDefinitionResponse_Statistic, &ev); err != nil {
+				return err
+			}
+			v.Statistic = types.Statistic(ev)
+			return nil
+		case schemas.UpdateCalculatedAttributeDefinitionResponse_Status:
+			var ev string
+			if err := d.ReadString(schemas.UpdateCalculatedAttributeDefinitionResponse_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.ReadinessStatus(ev)
+			return nil
+		case schemas.UpdateCalculatedAttributeDefinitionResponse_Tags:
+			return deserializeTagMap(d, schemas.UpdateCalculatedAttributeDefinitionResponse_Tags, &v.Tags)
+		case schemas.UpdateCalculatedAttributeDefinitionResponse_UseHistoricalData:
+			v.UseHistoricalData = new(bool)
+			return d.ReadBool(schemas.UpdateCalculatedAttributeDefinitionResponse_UseHistoricalData, v.UseHistoricalData)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateCalculatedAttributeDefinitionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateCalculatedAttributeDefinition{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateCalculatedAttributeDefinition, schemas.UpdateCalculatedAttributeDefinitionRequest, schemas.UpdateCalculatedAttributeDefinitionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateCalculatedAttributeDefinition{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateCalculatedAttributeDefinition, schemas.UpdateCalculatedAttributeDefinitionRequest, schemas.UpdateCalculatedAttributeDefinitionResponse), output: &UpdateCalculatedAttributeDefinitionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

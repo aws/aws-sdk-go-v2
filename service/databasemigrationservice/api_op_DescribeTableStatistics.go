@@ -5,7 +5,9 @@ package databasemigrationservice
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/databasemigrationservice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/databasemigrationservice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -62,6 +64,25 @@ type DescribeTableStatisticsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeTableStatisticsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeTableStatisticsMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeTableStatisticsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeFilterList(s, schemas.DescribeTableStatisticsMessage_Filters, v.Filters)
+	if v.Marker != nil {
+		s.WriteString(schemas.DescribeTableStatisticsMessage_Marker, *v.Marker)
+	}
+	if v.MaxRecords != nil {
+		s.WriteInt32(schemas.DescribeTableStatisticsMessage_MaxRecords, *v.MaxRecords)
+	}
+	if v.ReplicationTaskArn != nil {
+		s.WriteString(schemas.DescribeTableStatisticsMessage_ReplicationTaskArn, *v.ReplicationTaskArn)
+	}
+}
+
 type DescribeTableStatisticsOutput struct {
 
 	//  An optional pagination token provided by a previous request. If this parameter
@@ -81,13 +102,41 @@ type DescribeTableStatisticsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeTableStatisticsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeTableStatisticsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeTableStatisticsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Marker != nil {
+		s.WriteString(schemas.DescribeTableStatisticsResponse_Marker, *v.Marker)
+	}
+	if v.ReplicationTaskArn != nil {
+		s.WriteString(schemas.DescribeTableStatisticsResponse_ReplicationTaskArn, *v.ReplicationTaskArn)
+	}
+	serializeTableStatisticsList(s, schemas.DescribeTableStatisticsResponse_TableStatistics, v.TableStatistics)
+}
+func (v *DescribeTableStatisticsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeTableStatisticsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeTableStatisticsResponse_Marker:
+			v.Marker = new(string)
+			return d.ReadString(schemas.DescribeTableStatisticsResponse_Marker, v.Marker)
+		case schemas.DescribeTableStatisticsResponse_ReplicationTaskArn:
+			v.ReplicationTaskArn = new(string)
+			return d.ReadString(schemas.DescribeTableStatisticsResponse_ReplicationTaskArn, v.ReplicationTaskArn)
+		case schemas.DescribeTableStatisticsResponse_TableStatistics:
+			return deserializeTableStatisticsList(d, schemas.DescribeTableStatisticsResponse_TableStatistics, &v.TableStatistics)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeTableStatisticsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeTableStatistics{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeTableStatistics, schemas.DescribeTableStatisticsMessage, schemas.DescribeTableStatisticsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeTableStatistics{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeTableStatistics, schemas.DescribeTableStatisticsMessage, schemas.DescribeTableStatisticsResponse), output: &DescribeTableStatisticsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

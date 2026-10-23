@@ -290,6 +290,24 @@ func (ContainerFleetStatus) Values() []ContainerFleetStatus {
 	}
 }
 
+type ContainerGroupDefinitionRemoveAttribute string
+
+// Enum values for ContainerGroupDefinitionRemoveAttribute
+const (
+	ContainerGroupDefinitionRemoveAttributeTotalVcpuLimit ContainerGroupDefinitionRemoveAttribute = "TOTAL_VCPU_LIMIT"
+)
+
+// Values returns all known values for ContainerGroupDefinitionRemoveAttribute.
+// Note that this can be expanded in the future, and so it is only as up to date as
+// the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ContainerGroupDefinitionRemoveAttribute) Values() []ContainerGroupDefinitionRemoveAttribute {
+	return []ContainerGroupDefinitionRemoveAttribute{
+		"TOTAL_VCPU_LIMIT",
+	}
+}
+
 type ContainerGroupDefinitionStatus string
 
 // Enum values for ContainerGroupDefinitionStatus
@@ -950,23 +968,36 @@ const (
 	EC2InstanceTypeC8aLarge      EC2InstanceType = "c8a.large"
 	EC2InstanceTypeC8aXlarge     EC2InstanceType = "c8a.xlarge"
 	EC2InstanceTypeC8a2xlarge    EC2InstanceType = "c8a.2xlarge"
+	EC2InstanceTypeC8a4xlarge    EC2InstanceType = "c8a.4xlarge"
+	EC2InstanceTypeC8a8xlarge    EC2InstanceType = "c8a.8xlarge"
 	EC2InstanceTypeC8iLarge      EC2InstanceType = "c8i.large"
 	EC2InstanceTypeC8iXlarge     EC2InstanceType = "c8i.xlarge"
 	EC2InstanceTypeC8i2xlarge    EC2InstanceType = "c8i.2xlarge"
+	EC2InstanceTypeC8i4xlarge    EC2InstanceType = "c8i.4xlarge"
+	EC2InstanceTypeC8i8xlarge    EC2InstanceType = "c8i.8xlarge"
 	EC2InstanceTypeC9gMedium     EC2InstanceType = "c9g.medium"
 	EC2InstanceTypeC9gLarge      EC2InstanceType = "c9g.large"
 	EC2InstanceTypeC9gXlarge     EC2InstanceType = "c9g.xlarge"
 	EC2InstanceTypeC9g2xlarge    EC2InstanceType = "c9g.2xlarge"
+	EC2InstanceTypeC9g4xlarge    EC2InstanceType = "c9g.4xlarge"
+	EC2InstanceTypeC9g8xlarge    EC2InstanceType = "c9g.8xlarge"
 	EC2InstanceTypeM8aMedium     EC2InstanceType = "m8a.medium"
 	EC2InstanceTypeM8aLarge      EC2InstanceType = "m8a.large"
 	EC2InstanceTypeM8aXlarge     EC2InstanceType = "m8a.xlarge"
 	EC2InstanceTypeM8a2xlarge    EC2InstanceType = "m8a.2xlarge"
+	EC2InstanceTypeM8a4xlarge    EC2InstanceType = "m8a.4xlarge"
+	EC2InstanceTypeM8a8xlarge    EC2InstanceType = "m8a.8xlarge"
 	EC2InstanceTypeM8iLarge      EC2InstanceType = "m8i.large"
 	EC2InstanceTypeM8iXlarge     EC2InstanceType = "m8i.xlarge"
 	EC2InstanceTypeM8i2xlarge    EC2InstanceType = "m8i.2xlarge"
+	EC2InstanceTypeM8i4xlarge    EC2InstanceType = "m8i.4xlarge"
+	EC2InstanceTypeM8i8xlarge    EC2InstanceType = "m8i.8xlarge"
+	EC2InstanceTypeM9gMedium     EC2InstanceType = "m9g.medium"
 	EC2InstanceTypeM9gLarge      EC2InstanceType = "m9g.large"
 	EC2InstanceTypeM9gXlarge     EC2InstanceType = "m9g.xlarge"
 	EC2InstanceTypeM9g2xlarge    EC2InstanceType = "m9g.2xlarge"
+	EC2InstanceTypeM9g4xlarge    EC2InstanceType = "m9g.4xlarge"
+	EC2InstanceTypeM9g8xlarge    EC2InstanceType = "m9g.8xlarge"
 )
 
 // Values returns all known values for EC2InstanceType. Note that this can be
@@ -1484,23 +1515,36 @@ func (EC2InstanceType) Values() []EC2InstanceType {
 		"c8a.large",
 		"c8a.xlarge",
 		"c8a.2xlarge",
+		"c8a.4xlarge",
+		"c8a.8xlarge",
 		"c8i.large",
 		"c8i.xlarge",
 		"c8i.2xlarge",
+		"c8i.4xlarge",
+		"c8i.8xlarge",
 		"c9g.medium",
 		"c9g.large",
 		"c9g.xlarge",
 		"c9g.2xlarge",
+		"c9g.4xlarge",
+		"c9g.8xlarge",
 		"m8a.medium",
 		"m8a.large",
 		"m8a.xlarge",
 		"m8a.2xlarge",
+		"m8a.4xlarge",
+		"m8a.8xlarge",
 		"m8i.large",
 		"m8i.xlarge",
 		"m8i.2xlarge",
+		"m8i.4xlarge",
+		"m8i.8xlarge",
+		"m9g.medium",
 		"m9g.large",
 		"m9g.xlarge",
 		"m9g.2xlarge",
+		"m9g.4xlarge",
+		"m9g.8xlarge",
 	}
 }
 

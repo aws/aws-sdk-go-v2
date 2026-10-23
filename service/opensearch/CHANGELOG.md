@@ -1,3 +1,43 @@
+# v1.86.1 (2026-10-22)
+
+* **Bug Fix**: Update smithy-go to v1.28.6
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.86.0 (2026-10-19)
+
+* **Feature**: Amazon OpenSearch Service adds a new TLS security policy to support FIPS policy and post-quantum cryptography
+* **Bug Fix**: Allow lists with null values to deserialize into its zero value instead of failing
+
+# v1.85.1 (2026-10-09.2)
+
+* **Dependency Update**: Update to smithy-go v1.28.5.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.85.0 (2026-10-08)
+
+* **Feature**: Enable schema-based (de)serialization for this service.
+* **Feature**: This release adds a new EncryptionMode option (DISK or NATIVE) to EncryptionAtRestOptions for the CreateDomain and UpdateDomainConfig operations, enabling selection of engine-native index-level encryption on supported Amazon OpenSearch Service domains.
+* **Dependency Update**: Update to smithy-go v1.28.4.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.84.0 (2026-10-06)
+
+* **Feature**: Enable schema-based (de)serialization for this service.
+
+# v1.83.0 (2026-09-29)
+
+* **Feature**: Amazon OpenSearch Service now supports advisory pre-validations for domain config changes. Non-critical checks now surface as warnings you can acknowledge (via the new AcceptedWarnings parameter) and proceed, instead of hard-blocking. Severity is reported in change-progress and dry-run results.
+* **Feature**: Enable schema-based (de)serialization for this service.
+
+# v1.82.0 (2026-09-24)
+
+* **Feature**: Enable schema-based (de)serialization for this service.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.81.0 (2026-09-21)
+
+* **Feature**: Enable schema-based (de)serialization for this service.
+
 # v1.80.0 (2026-09-09)
 
 * **Feature**: Stop registering the `retry.MetricsHeader` middleware in generated clients. The `Amz-Sdk-Request` header is now set by the retry middleware itself.

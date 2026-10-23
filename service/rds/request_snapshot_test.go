@@ -396,6 +396,33 @@ func TestCheckRequestSnapshot_BacktrackDBCluster(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_CancelDBCapacityReservation(t *testing.T) {
+	input := &CancelDBCapacityReservationInput{
+		DBCapacityReservationIdentifier: ptr.String("__DBCapacityReservationIdentifier__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.CancelDBCapacityReservation(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CancelDBCapacityReservation"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_CancelExportTask(t *testing.T) {
 	input := &CancelExportTaskInput{
 		ExportTaskIdentifier: ptr.String("__ExportTaskIdentifier__"),
@@ -654,6 +681,16 @@ func TestCheckRequestSnapshot_CreateBlueGreenDeployment(t *testing.T) {
 		TargetStorageType:          ptr.String("__TargetStorageType__"),
 		TargetAllocatedStorage:     ptr.Int32(1),
 		TargetStorageThroughput:    ptr.Int32(1),
+		TargetResourceConfigurations: []types.TargetResourceConfiguration{
+			{
+				SourceArn:      ptr.String("__SourceArn__"),
+				TargetKmsKeyId: ptr.String("__TargetKmsKeyId__"),
+			},
+			{
+				SourceArn:      ptr.String("__SourceArn__"),
+				TargetKmsKeyId: ptr.String("__TargetKmsKeyId__"),
+			},
+		},
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -724,6 +761,54 @@ func TestCheckRequestSnapshot_CreateCustomDBEngineVersion(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateCustomDBEngineVersion"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_CreateDBCapacityReservation(t *testing.T) {
+	input := &CreateDBCapacityReservationInput{
+		DBCapacityReservationName:   ptr.String("__DBCapacityReservationName__"),
+		DBInstanceClass:             ptr.String("__DBInstanceClass__"),
+		Engine:                      ptr.String("__Engine__"),
+		CapacityPerAvailabilityZone: ptr.Int32(1),
+		AvailabilityZones: []string{
+			"__Member__",
+			"__Member__",
+		},
+		EndDate:            ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		StartDate:          ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		CommitmentDuration: ptr.Int64(1),
+		LicenseModel:       ptr.String("__LicenseModel__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.CreateDBCapacityReservation(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateDBCapacityReservation"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -1151,7 +1236,8 @@ func TestCheckRequestSnapshot_CreateDBInstance(t *testing.T) {
 				},
 			},
 		},
-		MasterUserAuthenticationType: types.MasterUserAuthenticationType("password"),
+		DBCapacityReservationIdentifier: ptr.String("__DBCapacityReservationIdentifier__"),
+		MasterUserAuthenticationType:    types.MasterUserAuthenticationType("password"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -1298,8 +1384,9 @@ func TestCheckRequestSnapshot_CreateDBInstanceReadReplica(t *testing.T) {
 				},
 			},
 		},
-		SourceRegion:      ptr.String("__SourceRegion__"),
-		destinationRegion: ptr.String("__destinationRegion__"),
+		DBCapacityReservationIdentifier: ptr.String("__DBCapacityReservationIdentifier__"),
+		SourceRegion:                    ptr.String("__SourceRegion__"),
+		destinationRegion:               ptr.String("__destinationRegion__"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -2589,6 +2676,51 @@ func TestCheckRequestSnapshot_DescribeCertificates(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DescribeCertificates"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_DescribeDBCapacityReservations(t *testing.T) {
+	input := &DescribeDBCapacityReservationsInput{
+		DBCapacityReservationIdentifier: ptr.String("__DBCapacityReservationIdentifier__"),
+		Marker:                          ptr.String("__Marker__"),
+		MaxRecords:                      ptr.Int32(1),
+		Filters: []types.Filter{
+			{
+				Name: ptr.String("__Name__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Name: ptr.String("__Name__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DescribeDBCapacityReservations(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DescribeDBCapacityReservations"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -4872,6 +5004,36 @@ func TestCheckRequestSnapshot_ModifyCustomDBEngineVersion(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_ModifyDBCapacityReservation(t *testing.T) {
+	input := &ModifyDBCapacityReservationInput{
+		DBCapacityReservationIdentifier: ptr.String("__DBCapacityReservationIdentifier__"),
+		CapacityPerAvailabilityZone:     ptr.Int32(1),
+		EndDateType:                     types.EndDateType("unlimited"),
+		EndDate:                         ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ModifyDBCapacityReservation(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ModifyDBCapacityReservation"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_ModifyDBCluster(t *testing.T) {
 	input := &ModifyDBClusterInput{
 		DBClusterIdentifier:         ptr.String("__DBClusterIdentifier__"),
@@ -5212,6 +5374,7 @@ func TestCheckRequestSnapshot_ModifyDBInstance(t *testing.T) {
 				SetForDelete:        ptr.Bool(true),
 			},
 		},
+		DBCapacityReservationIdentifier: ptr.String("__DBCapacityReservationIdentifier__"),
 		TagSpecifications: []types.TagSpecification{
 			{
 				ResourceType: ptr.String("__ResourceType__"),
@@ -6816,20 +6979,21 @@ func TestCheckRequestSnapshot_RestoreDBInstanceFromDBSnapshot(t *testing.T) {
 				Value: ptr.String("__Value__"),
 			},
 		},
-		UseDefaultProcessorFeatures: ptr.Bool(true),
-		DBParameterGroupName:        ptr.String("__DBParameterGroupName__"),
-		DeletionProtection:          ptr.Bool(true),
-		EnableCustomerOwnedIp:       ptr.Bool(true),
-		NetworkType:                 ptr.String("__NetworkType__"),
-		BackupTarget:                ptr.String("__BackupTarget__"),
-		CustomIamInstanceProfile:    ptr.String("__CustomIamInstanceProfile__"),
-		AllocatedStorage:            ptr.Int32(1),
-		DBClusterSnapshotIdentifier: ptr.String("__DBClusterSnapshotIdentifier__"),
-		BackupRetentionPeriod:       ptr.Int32(1),
-		PreferredBackupWindow:       ptr.String("__PreferredBackupWindow__"),
-		DedicatedLogVolume:          ptr.Bool(true),
-		CACertificateIdentifier:     ptr.String("__CACertificateIdentifier__"),
-		EngineLifecycleSupport:      ptr.String("__EngineLifecycleSupport__"),
+		UseDefaultProcessorFeatures:     ptr.Bool(true),
+		DBParameterGroupName:            ptr.String("__DBParameterGroupName__"),
+		DeletionProtection:              ptr.Bool(true),
+		EnableCustomerOwnedIp:           ptr.Bool(true),
+		NetworkType:                     ptr.String("__NetworkType__"),
+		BackupTarget:                    ptr.String("__BackupTarget__"),
+		CustomIamInstanceProfile:        ptr.String("__CustomIamInstanceProfile__"),
+		AllocatedStorage:                ptr.Int32(1),
+		DBClusterSnapshotIdentifier:     ptr.String("__DBClusterSnapshotIdentifier__"),
+		BackupRetentionPeriod:           ptr.Int32(1),
+		PreferredBackupWindow:           ptr.String("__PreferredBackupWindow__"),
+		DBCapacityReservationIdentifier: ptr.String("__DBCapacityReservationIdentifier__"),
+		DedicatedLogVolume:              ptr.Bool(true),
+		CACertificateIdentifier:         ptr.String("__CACertificateIdentifier__"),
+		EngineLifecycleSupport:          ptr.String("__EngineLifecycleSupport__"),
 		AdditionalStorageVolumes: []types.AdditionalStorageVolume{
 			{
 				VolumeName:          ptr.String("__VolumeName__"),
@@ -6974,15 +7138,16 @@ func TestCheckRequestSnapshot_RestoreDBInstanceFromS3(t *testing.T) {
 				Value: ptr.String("__Value__"),
 			},
 		},
-		UseDefaultProcessorFeatures: ptr.Bool(true),
-		DeletionProtection:          ptr.Bool(true),
-		MaxAllocatedStorage:         ptr.Int32(1),
-		NetworkType:                 ptr.String("__NetworkType__"),
-		ManageMasterUserPassword:    ptr.Bool(true),
-		MasterUserSecretKmsKeyId:    ptr.String("__MasterUserSecretKmsKeyId__"),
-		DedicatedLogVolume:          ptr.Bool(true),
-		CACertificateIdentifier:     ptr.String("__CACertificateIdentifier__"),
-		EngineLifecycleSupport:      ptr.String("__EngineLifecycleSupport__"),
+		UseDefaultProcessorFeatures:     ptr.Bool(true),
+		DeletionProtection:              ptr.Bool(true),
+		MaxAllocatedStorage:             ptr.Int32(1),
+		NetworkType:                     ptr.String("__NetworkType__"),
+		ManageMasterUserPassword:        ptr.Bool(true),
+		MasterUserSecretKmsKeyId:        ptr.String("__MasterUserSecretKmsKeyId__"),
+		DBCapacityReservationIdentifier: ptr.String("__DBCapacityReservationIdentifier__"),
+		DedicatedLogVolume:              ptr.Bool(true),
+		CACertificateIdentifier:         ptr.String("__CACertificateIdentifier__"),
+		EngineLifecycleSupport:          ptr.String("__EngineLifecycleSupport__"),
 		AdditionalStorageVolumes: []types.AdditionalStorageVolume{
 			{
 				VolumeName:          ptr.String("__VolumeName__"),
@@ -7127,6 +7292,7 @@ func TestCheckRequestSnapshot_RestoreDBInstanceToPointInTime(t *testing.T) {
 		AllocatedStorage:                    ptr.Int32(1),
 		BackupRetentionPeriod:               ptr.Int32(1),
 		PreferredBackupWindow:               ptr.String("__PreferredBackupWindow__"),
+		DBCapacityReservationIdentifier:     ptr.String("__DBCapacityReservationIdentifier__"),
 		DedicatedLogVolume:                  ptr.Bool(true),
 		CACertificateIdentifier:             ptr.String("__CACertificateIdentifier__"),
 		EngineLifecycleSupport:              ptr.String("__EngineLifecycleSupport__"),
@@ -7293,7 +7459,8 @@ func TestCheckRequestSnapshot_StartDBCluster(t *testing.T) {
 
 func TestCheckRequestSnapshot_StartDBInstance(t *testing.T) {
 	input := &StartDBInstanceInput{
-		DBInstanceIdentifier: ptr.String("__DBInstanceIdentifier__"),
+		DBInstanceIdentifier:            ptr.String("__DBInstanceIdentifier__"),
+		DBCapacityReservationIdentifier: ptr.String("__DBCapacityReservationIdentifier__"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -7451,8 +7618,9 @@ func TestCheckRequestSnapshot_StopDBCluster(t *testing.T) {
 
 func TestCheckRequestSnapshot_StopDBInstance(t *testing.T) {
 	input := &StopDBInstanceInput{
-		DBInstanceIdentifier: ptr.String("__DBInstanceIdentifier__"),
-		DBSnapshotIdentifier: ptr.String("__DBSnapshotIdentifier__"),
+		DBInstanceIdentifier:            ptr.String("__DBInstanceIdentifier__"),
+		DBSnapshotIdentifier:            ptr.String("__DBSnapshotIdentifier__"),
+		DetachFromDBCapacityReservation: ptr.Bool(true),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -7799,6 +7967,33 @@ func TestUpdateRequestSnapshot_BacktrackDBCluster(t *testing.T) {
 	}
 }
 
+func TestUpdateRequestSnapshot_CancelDBCapacityReservation(t *testing.T) {
+	input := &CancelDBCapacityReservationInput{
+		DBCapacityReservationIdentifier: ptr.String("__DBCapacityReservationIdentifier__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.CancelDBCapacityReservation(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CancelDBCapacityReservation"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_CancelExportTask(t *testing.T) {
 	input := &CancelExportTaskInput{
 		ExportTaskIdentifier: ptr.String("__ExportTaskIdentifier__"),
@@ -8057,6 +8252,16 @@ func TestUpdateRequestSnapshot_CreateBlueGreenDeployment(t *testing.T) {
 		TargetStorageType:          ptr.String("__TargetStorageType__"),
 		TargetAllocatedStorage:     ptr.Int32(1),
 		TargetStorageThroughput:    ptr.Int32(1),
+		TargetResourceConfigurations: []types.TargetResourceConfiguration{
+			{
+				SourceArn:      ptr.String("__SourceArn__"),
+				TargetKmsKeyId: ptr.String("__TargetKmsKeyId__"),
+			},
+			{
+				SourceArn:      ptr.String("__SourceArn__"),
+				TargetKmsKeyId: ptr.String("__TargetKmsKeyId__"),
+			},
+		},
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -8127,6 +8332,54 @@ func TestUpdateRequestSnapshot_CreateCustomDBEngineVersion(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateCustomDBEngineVersion"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_CreateDBCapacityReservation(t *testing.T) {
+	input := &CreateDBCapacityReservationInput{
+		DBCapacityReservationName:   ptr.String("__DBCapacityReservationName__"),
+		DBInstanceClass:             ptr.String("__DBInstanceClass__"),
+		Engine:                      ptr.String("__Engine__"),
+		CapacityPerAvailabilityZone: ptr.Int32(1),
+		AvailabilityZones: []string{
+			"__Member__",
+			"__Member__",
+		},
+		EndDate:            ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		StartDate:          ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		CommitmentDuration: ptr.Int64(1),
+		LicenseModel:       ptr.String("__LicenseModel__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.CreateDBCapacityReservation(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateDBCapacityReservation"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -8554,7 +8807,8 @@ func TestUpdateRequestSnapshot_CreateDBInstance(t *testing.T) {
 				},
 			},
 		},
-		MasterUserAuthenticationType: types.MasterUserAuthenticationType("password"),
+		DBCapacityReservationIdentifier: ptr.String("__DBCapacityReservationIdentifier__"),
+		MasterUserAuthenticationType:    types.MasterUserAuthenticationType("password"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -8701,8 +8955,9 @@ func TestUpdateRequestSnapshot_CreateDBInstanceReadReplica(t *testing.T) {
 				},
 			},
 		},
-		SourceRegion:      ptr.String("__SourceRegion__"),
-		destinationRegion: ptr.String("__destinationRegion__"),
+		DBCapacityReservationIdentifier: ptr.String("__DBCapacityReservationIdentifier__"),
+		SourceRegion:                    ptr.String("__SourceRegion__"),
+		destinationRegion:               ptr.String("__destinationRegion__"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -9992,6 +10247,51 @@ func TestUpdateRequestSnapshot_DescribeCertificates(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DescribeCertificates"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_DescribeDBCapacityReservations(t *testing.T) {
+	input := &DescribeDBCapacityReservationsInput{
+		DBCapacityReservationIdentifier: ptr.String("__DBCapacityReservationIdentifier__"),
+		Marker:                          ptr.String("__Marker__"),
+		MaxRecords:                      ptr.Int32(1),
+		Filters: []types.Filter{
+			{
+				Name: ptr.String("__Name__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Name: ptr.String("__Name__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DescribeDBCapacityReservations(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DescribeDBCapacityReservations"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -12275,6 +12575,36 @@ func TestUpdateRequestSnapshot_ModifyCustomDBEngineVersion(t *testing.T) {
 	}
 }
 
+func TestUpdateRequestSnapshot_ModifyDBCapacityReservation(t *testing.T) {
+	input := &ModifyDBCapacityReservationInput{
+		DBCapacityReservationIdentifier: ptr.String("__DBCapacityReservationIdentifier__"),
+		CapacityPerAvailabilityZone:     ptr.Int32(1),
+		EndDateType:                     types.EndDateType("unlimited"),
+		EndDate:                         ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ModifyDBCapacityReservation(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ModifyDBCapacityReservation"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_ModifyDBCluster(t *testing.T) {
 	input := &ModifyDBClusterInput{
 		DBClusterIdentifier:         ptr.String("__DBClusterIdentifier__"),
@@ -12615,6 +12945,7 @@ func TestUpdateRequestSnapshot_ModifyDBInstance(t *testing.T) {
 				SetForDelete:        ptr.Bool(true),
 			},
 		},
+		DBCapacityReservationIdentifier: ptr.String("__DBCapacityReservationIdentifier__"),
 		TagSpecifications: []types.TagSpecification{
 			{
 				ResourceType: ptr.String("__ResourceType__"),
@@ -14219,20 +14550,21 @@ func TestUpdateRequestSnapshot_RestoreDBInstanceFromDBSnapshot(t *testing.T) {
 				Value: ptr.String("__Value__"),
 			},
 		},
-		UseDefaultProcessorFeatures: ptr.Bool(true),
-		DBParameterGroupName:        ptr.String("__DBParameterGroupName__"),
-		DeletionProtection:          ptr.Bool(true),
-		EnableCustomerOwnedIp:       ptr.Bool(true),
-		NetworkType:                 ptr.String("__NetworkType__"),
-		BackupTarget:                ptr.String("__BackupTarget__"),
-		CustomIamInstanceProfile:    ptr.String("__CustomIamInstanceProfile__"),
-		AllocatedStorage:            ptr.Int32(1),
-		DBClusterSnapshotIdentifier: ptr.String("__DBClusterSnapshotIdentifier__"),
-		BackupRetentionPeriod:       ptr.Int32(1),
-		PreferredBackupWindow:       ptr.String("__PreferredBackupWindow__"),
-		DedicatedLogVolume:          ptr.Bool(true),
-		CACertificateIdentifier:     ptr.String("__CACertificateIdentifier__"),
-		EngineLifecycleSupport:      ptr.String("__EngineLifecycleSupport__"),
+		UseDefaultProcessorFeatures:     ptr.Bool(true),
+		DBParameterGroupName:            ptr.String("__DBParameterGroupName__"),
+		DeletionProtection:              ptr.Bool(true),
+		EnableCustomerOwnedIp:           ptr.Bool(true),
+		NetworkType:                     ptr.String("__NetworkType__"),
+		BackupTarget:                    ptr.String("__BackupTarget__"),
+		CustomIamInstanceProfile:        ptr.String("__CustomIamInstanceProfile__"),
+		AllocatedStorage:                ptr.Int32(1),
+		DBClusterSnapshotIdentifier:     ptr.String("__DBClusterSnapshotIdentifier__"),
+		BackupRetentionPeriod:           ptr.Int32(1),
+		PreferredBackupWindow:           ptr.String("__PreferredBackupWindow__"),
+		DBCapacityReservationIdentifier: ptr.String("__DBCapacityReservationIdentifier__"),
+		DedicatedLogVolume:              ptr.Bool(true),
+		CACertificateIdentifier:         ptr.String("__CACertificateIdentifier__"),
+		EngineLifecycleSupport:          ptr.String("__EngineLifecycleSupport__"),
 		AdditionalStorageVolumes: []types.AdditionalStorageVolume{
 			{
 				VolumeName:          ptr.String("__VolumeName__"),
@@ -14377,15 +14709,16 @@ func TestUpdateRequestSnapshot_RestoreDBInstanceFromS3(t *testing.T) {
 				Value: ptr.String("__Value__"),
 			},
 		},
-		UseDefaultProcessorFeatures: ptr.Bool(true),
-		DeletionProtection:          ptr.Bool(true),
-		MaxAllocatedStorage:         ptr.Int32(1),
-		NetworkType:                 ptr.String("__NetworkType__"),
-		ManageMasterUserPassword:    ptr.Bool(true),
-		MasterUserSecretKmsKeyId:    ptr.String("__MasterUserSecretKmsKeyId__"),
-		DedicatedLogVolume:          ptr.Bool(true),
-		CACertificateIdentifier:     ptr.String("__CACertificateIdentifier__"),
-		EngineLifecycleSupport:      ptr.String("__EngineLifecycleSupport__"),
+		UseDefaultProcessorFeatures:     ptr.Bool(true),
+		DeletionProtection:              ptr.Bool(true),
+		MaxAllocatedStorage:             ptr.Int32(1),
+		NetworkType:                     ptr.String("__NetworkType__"),
+		ManageMasterUserPassword:        ptr.Bool(true),
+		MasterUserSecretKmsKeyId:        ptr.String("__MasterUserSecretKmsKeyId__"),
+		DBCapacityReservationIdentifier: ptr.String("__DBCapacityReservationIdentifier__"),
+		DedicatedLogVolume:              ptr.Bool(true),
+		CACertificateIdentifier:         ptr.String("__CACertificateIdentifier__"),
+		EngineLifecycleSupport:          ptr.String("__EngineLifecycleSupport__"),
 		AdditionalStorageVolumes: []types.AdditionalStorageVolume{
 			{
 				VolumeName:          ptr.String("__VolumeName__"),
@@ -14530,6 +14863,7 @@ func TestUpdateRequestSnapshot_RestoreDBInstanceToPointInTime(t *testing.T) {
 		AllocatedStorage:                    ptr.Int32(1),
 		BackupRetentionPeriod:               ptr.Int32(1),
 		PreferredBackupWindow:               ptr.String("__PreferredBackupWindow__"),
+		DBCapacityReservationIdentifier:     ptr.String("__DBCapacityReservationIdentifier__"),
 		DedicatedLogVolume:                  ptr.Bool(true),
 		CACertificateIdentifier:             ptr.String("__CACertificateIdentifier__"),
 		EngineLifecycleSupport:              ptr.String("__EngineLifecycleSupport__"),
@@ -14696,7 +15030,8 @@ func TestUpdateRequestSnapshot_StartDBCluster(t *testing.T) {
 
 func TestUpdateRequestSnapshot_StartDBInstance(t *testing.T) {
 	input := &StartDBInstanceInput{
-		DBInstanceIdentifier: ptr.String("__DBInstanceIdentifier__"),
+		DBInstanceIdentifier:            ptr.String("__DBInstanceIdentifier__"),
+		DBCapacityReservationIdentifier: ptr.String("__DBCapacityReservationIdentifier__"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -14854,8 +15189,9 @@ func TestUpdateRequestSnapshot_StopDBCluster(t *testing.T) {
 
 func TestUpdateRequestSnapshot_StopDBInstance(t *testing.T) {
 	input := &StopDBInstanceInput{
-		DBInstanceIdentifier: ptr.String("__DBInstanceIdentifier__"),
-		DBSnapshotIdentifier: ptr.String("__DBSnapshotIdentifier__"),
+		DBInstanceIdentifier:            ptr.String("__DBInstanceIdentifier__"),
+		DBSnapshotIdentifier:            ptr.String("__DBSnapshotIdentifier__"),
+		DetachFromDBCapacityReservation: ptr.Bool(true),
 	}
 	body := &bytes.Buffer{}
 	method := ""

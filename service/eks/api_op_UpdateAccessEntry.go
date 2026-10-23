@@ -5,7 +5,9 @@ package eks
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/eks/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/eks/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -73,6 +75,28 @@ type UpdateAccessEntryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateAccessEntryInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateAccessEntryRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateAccessEntryInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientRequestToken != nil {
+		s.WriteString(schemas.UpdateAccessEntryRequest_clientRequestToken, *v.ClientRequestToken)
+	}
+	if v.ClusterName != nil {
+		s.WriteString(schemas.UpdateAccessEntryRequest_clusterName, *v.ClusterName)
+	}
+	serializeStringList(s, schemas.UpdateAccessEntryRequest_kubernetesGroups, v.KubernetesGroups)
+	if v.PrincipalArn != nil {
+		s.WriteString(schemas.UpdateAccessEntryRequest_principalArn, *v.PrincipalArn)
+	}
+	if v.Username != nil {
+		s.WriteString(schemas.UpdateAccessEntryRequest_username, *v.Username)
+	}
+}
+
 type UpdateAccessEntryOutput struct {
 
 	// The ARN of the IAM principal for the AccessEntry .
@@ -84,13 +108,34 @@ type UpdateAccessEntryOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateAccessEntryOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateAccessEntryResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateAccessEntryOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccessEntry != nil {
+		s.WriteStruct(schemas.UpdateAccessEntryResponse_accessEntry)
+		v.AccessEntry.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateAccessEntryOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateAccessEntryResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateAccessEntryResponse_accessEntry:
+			v.AccessEntry = &types.AccessEntry{}
+			return v.AccessEntry.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateAccessEntryMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateAccessEntry{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateAccessEntry, schemas.UpdateAccessEntryRequest, schemas.UpdateAccessEntryResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateAccessEntry{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateAccessEntry, schemas.UpdateAccessEntryRequest, schemas.UpdateAccessEntryResponse), output: &UpdateAccessEntryOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

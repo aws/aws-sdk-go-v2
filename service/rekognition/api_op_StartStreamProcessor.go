@@ -4,10 +4,18 @@ package rekognition
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/rekognition/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/rekognition/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
+// Service availability notice: Streaming Video and Bulk Image Analysis is no
+// longer available to new customers. For more information, see [Rekognition feature availability changes].
+//
+// This change does not impact the availability of other Amazon Rekognition
+// features.
+//
 // Starts processing a stream processor. You create a stream processor by calling CreateStreamProcessor
 // . To tell StartStreamProcessor which stream processor to start, use the value
 // of the Name field specified in the call to CreateStreamProcessor .
@@ -15,6 +23,8 @@ import (
 // If you are using a label detection stream processor to detect labels, you need
 // to provide a Start selector and a Stop selector to determine the length of the
 // stream processing time.
+//
+// [Rekognition feature availability changes]: https://docs.aws.amazon.com/rekognition/latest/dg/rekognition-availability-changes.html
 func (c *Client) StartStreamProcessor(ctx context.Context, params *StartStreamProcessorInput, optFns ...func(*Options)) (*StartStreamProcessorOutput, error) {
 	if params == nil {
 		params = &StartStreamProcessorInput{}
@@ -58,6 +68,28 @@ type StartStreamProcessorInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartStreamProcessorInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartStreamProcessorRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartStreamProcessorInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.StartStreamProcessorRequest_Name, *v.Name)
+	}
+	if v.StartSelector != nil {
+		s.WriteStruct(schemas.StartStreamProcessorRequest_StartSelector)
+		v.StartSelector.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.StopSelector != nil {
+		s.WriteStruct(schemas.StartStreamProcessorRequest_StopSelector)
+		v.StopSelector.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type StartStreamProcessorOutput struct {
 
 	//  A unique identifier for the stream processing session.
@@ -69,13 +101,32 @@ type StartStreamProcessorOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartStreamProcessorOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartStreamProcessorResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartStreamProcessorOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SessionId != nil {
+		s.WriteString(schemas.StartStreamProcessorResponse_SessionId, *v.SessionId)
+	}
+}
+func (v *StartStreamProcessorOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartStreamProcessorResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartStreamProcessorResponse_SessionId:
+			v.SessionId = new(string)
+			return d.ReadString(schemas.StartStreamProcessorResponse_SessionId, v.SessionId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartStreamProcessorMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStartStreamProcessor{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartStreamProcessor, schemas.StartStreamProcessorRequest, schemas.StartStreamProcessorResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpStartStreamProcessor{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartStreamProcessor, schemas.StartStreamProcessorRequest, schemas.StartStreamProcessorResponse), output: &StartStreamProcessorOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

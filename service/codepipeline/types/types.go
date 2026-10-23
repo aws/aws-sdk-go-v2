@@ -3984,7 +3984,7 @@ type PipelineDeclaration struct {
 	// default mode is SUPERSEDED.
 	ExecutionMode ExecutionMode
 
-	// CodePipeline provides the following pipeline types, which differ in
+	//  CodePipeline provides the following pipeline types, which differ in
 	// characteristics and price, so that you can tailor your pipeline features and
 	// cost to the needs of your applications.
 	//
@@ -4563,7 +4563,7 @@ type PipelineSummary struct {
 	// The name of the pipeline.
 	Name *string
 
-	// CodePipeline provides the following pipeline types, which differ in
+	//  CodePipeline provides the following pipeline types, which differ in
 	// characteristics and price, so that you can tailor your pipeline features and
 	// cost to the needs of your applications.
 	//

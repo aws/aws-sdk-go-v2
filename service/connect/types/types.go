@@ -1051,6 +1051,51 @@ func (v *AgentStatusSummary) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
+// Information about an AI agent that a security profile allows access to for
+// Agent-to-Agent authorization.
+type AIAgent struct {
+
+	// The Amazon Resource Name (ARN) of the AI agent.
+	Arn *string
+
+	// The type of the AI agent. The valid value is THIRD_PARTY .
+	Type AIAgentType
+
+	noSmithyDocumentSerde
+}
+
+func (v *AIAgent) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AIAgent)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AIAgent) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.AIAgent_Arn, *v.Arn)
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.AIAgent_Type, string(v.Type))
+	}
+}
+func (v *AIAgent) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AIAgent, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AIAgent_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.AIAgent_Arn, v.Arn)
+		case schemas.AIAgent_Type:
+			var ev string
+			if err := d.ReadString(schemas.AIAgent_Type, &ev); err != nil {
+				return err
+			}
+			v.Type = AIAgentType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Information of the AI agent involved in the contact.
 type AiAgentInfo struct {
 
@@ -1627,6 +1672,63 @@ func (v *Application) Deserialize(d smithy.ShapeDeserializer) error {
 			}
 			v.Type = ApplicationType(ev)
 			return nil
+		}
+		return nil
+	})
+}
+
+// Contains an approximate count of the resources of a given type that are not yet
+// in sync in a Region, along with the time the count was last calculated.
+type ApproximateDriftedResourceCount struct {
+
+	// The approximate number of resources of the requested type that are not yet in
+	// sync in the Region. A value of zero means the resources are in sync.
+	//
+	// This member is required.
+	Count *int64
+
+	// The Amazon Web Services Region that the count applies to.
+	//
+	// This member is required.
+	Region *string
+
+	// The time, in Unix epoch time, when the count was last calculated.
+	//
+	// This member is required.
+	Timestamp *time.Time
+
+	noSmithyDocumentSerde
+}
+
+func (v *ApproximateDriftedResourceCount) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ApproximateDriftedResourceCount)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ApproximateDriftedResourceCount) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Count != nil {
+		s.WriteInt64(schemas.ApproximateDriftedResourceCount_Count, *v.Count)
+	}
+	if v.Region != nil {
+		s.WriteString(schemas.ApproximateDriftedResourceCount_Region, *v.Region)
+	}
+	if v.Timestamp != nil {
+		s.WriteTime(schemas.ApproximateDriftedResourceCount_Timestamp, *v.Timestamp)
+	}
+}
+func (v *ApproximateDriftedResourceCount) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ApproximateDriftedResourceCount, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ApproximateDriftedResourceCount_Count:
+			v.Count = new(int64)
+			return d.ReadInt64(schemas.ApproximateDriftedResourceCount_Count, v.Count)
+		case schemas.ApproximateDriftedResourceCount_Region:
+			v.Region = new(string)
+			return d.ReadString(schemas.ApproximateDriftedResourceCount_Region, v.Region)
+		case schemas.ApproximateDriftedResourceCount_Timestamp:
+			v.Timestamp = new(time.Time)
+			return d.ReadTime(schemas.ApproximateDriftedResourceCount_Timestamp, v.Timestamp)
 		}
 		return nil
 	})
@@ -4389,6 +4491,49 @@ func (v *Condition) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
+// The credentials that a chat participant uses to connect to the Connect Customer
+// Participant Service.
+type ConnectionCredentials struct {
+
+	// The connection token used by the chat participant to call the Connect Customer
+	// Participant Service.
+	ConnectionToken *string
+
+	// The expiration of the token. It's specified in ISO 8601 format:
+	// yyyy-MM-ddThh:mm:ss.SSSZ. For example, 2019-11-08T02:41:28.172Z.
+	Expiry *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *ConnectionCredentials) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ConnectionCredentials)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ConnectionCredentials) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConnectionToken != nil {
+		s.WriteString(schemas.ConnectionCredentials_ConnectionToken, *v.ConnectionToken)
+	}
+	if v.Expiry != nil {
+		s.WriteString(schemas.ConnectionCredentials_Expiry, *v.Expiry)
+	}
+}
+func (v *ConnectionCredentials) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ConnectionCredentials, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ConnectionCredentials_ConnectionToken:
+			v.ConnectionToken = new(string)
+			return d.ReadString(schemas.ConnectionCredentials_ConnectionToken, v.ConnectionToken)
+		case schemas.ConnectionCredentials_Expiry:
+			v.Expiry = new(string)
+			return d.ReadString(schemas.ConnectionCredentials_Expiry, v.Expiry)
+		}
+		return nil
+	})
+}
+
 // Information required to join the call.
 type ConnectionData struct {
 
@@ -4988,6 +5133,91 @@ func (v *ContactAnalysis) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.ContactAnalysis_Transcript:
 			v.Transcript = &Transcript{}
 			return v.Transcript.Deserialize(d)
+		}
+		return nil
+	})
+}
+
+// Information about a reference when the referenceType is CONTACT_ANALYSIS .
+// Otherwise, null.
+type ContactAnalysisReference struct {
+
+	// The analytics mode of the contact analysis.
+	AnalyticsMode AnalyticsMode
+
+	// The Amazon Resource Name (ARN) of the contact analysis reference.
+	Arn *string
+
+	// Indicates whether sensitive data has been redacted from the contact analysis.
+	IsRedacted *bool
+
+	// Identifier of the contact analysis reference.
+	Name *string
+
+	// Status of the contact analysis reference type.
+	Status ReferenceStatus
+
+	// The location path of the contact analysis reference.
+	Value *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *ContactAnalysisReference) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ContactAnalysisReference)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ContactAnalysisReference) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AnalyticsMode != "" {
+		s.WriteString(schemas.ContactAnalysisReference_AnalyticsMode, string(v.AnalyticsMode))
+	}
+	if v.Arn != nil {
+		s.WriteString(schemas.ContactAnalysisReference_Arn, *v.Arn)
+	}
+	if v.IsRedacted != nil {
+		s.WriteBool(schemas.ContactAnalysisReference_IsRedacted, *v.IsRedacted)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.ContactAnalysisReference_Name, *v.Name)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.ContactAnalysisReference_Status, string(v.Status))
+	}
+	if v.Value != nil {
+		s.WriteString(schemas.ContactAnalysisReference_Value, *v.Value)
+	}
+}
+func (v *ContactAnalysisReference) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ContactAnalysisReference, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ContactAnalysisReference_AnalyticsMode:
+			var ev string
+			if err := d.ReadString(schemas.ContactAnalysisReference_AnalyticsMode, &ev); err != nil {
+				return err
+			}
+			v.AnalyticsMode = AnalyticsMode(ev)
+			return nil
+		case schemas.ContactAnalysisReference_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.ContactAnalysisReference_Arn, v.Arn)
+		case schemas.ContactAnalysisReference_IsRedacted:
+			v.IsRedacted = new(bool)
+			return d.ReadBool(schemas.ContactAnalysisReference_IsRedacted, v.IsRedacted)
+		case schemas.ContactAnalysisReference_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.ContactAnalysisReference_Name, v.Name)
+		case schemas.ContactAnalysisReference_Status:
+			var ev string
+			if err := d.ReadString(schemas.ContactAnalysisReference_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = ReferenceStatus(ev)
+			return nil
+		case schemas.ContactAnalysisReference_Value:
+			v.Value = new(string)
+			return d.ReadString(schemas.ContactAnalysisReference_Value, v.Value)
 		}
 		return nil
 	})
@@ -5660,6 +5890,185 @@ func (v *ContactFlow) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.ContactFlow_VersionDescription:
 			v.VersionDescription = new(string)
 			return d.ReadString(schemas.ContactFlow_VersionDescription, v.VersionDescription)
+		}
+		return nil
+	})
+}
+
+// Contains information about a flow alias.
+type ContactFlowAliasInfo struct {
+
+	// The identifier of the alias.
+	AliasId *string
+
+	// The Amazon Resource Name (ARN) of the flow.
+	ContactFlowArn *string
+
+	// The identifier of the flow.
+	ContactFlowId *string
+
+	// The description of the alias.
+	Description *string
+
+	// The Amazon Web Services Region where this resource was last modified.
+	LastModifiedRegion *string
+
+	// The timestamp when this resource was last modified.
+	LastModifiedTime *time.Time
+
+	// The name of the alias.
+	Name *string
+
+	// The version of the flow.
+	Version *int64
+
+	noSmithyDocumentSerde
+}
+
+func (v *ContactFlowAliasInfo) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ContactFlowAliasInfo)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ContactFlowAliasInfo) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AliasId != nil {
+		s.WriteString(schemas.ContactFlowAliasInfo_AliasId, *v.AliasId)
+	}
+	if v.ContactFlowArn != nil {
+		s.WriteString(schemas.ContactFlowAliasInfo_ContactFlowArn, *v.ContactFlowArn)
+	}
+	if v.ContactFlowId != nil {
+		s.WriteString(schemas.ContactFlowAliasInfo_ContactFlowId, *v.ContactFlowId)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.ContactFlowAliasInfo_Description, *v.Description)
+	}
+	if v.LastModifiedRegion != nil {
+		s.WriteString(schemas.ContactFlowAliasInfo_LastModifiedRegion, *v.LastModifiedRegion)
+	}
+	if v.LastModifiedTime != nil {
+		s.WriteTime(schemas.ContactFlowAliasInfo_LastModifiedTime, *v.LastModifiedTime)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.ContactFlowAliasInfo_Name, *v.Name)
+	}
+	if v.Version != nil {
+		s.WriteInt64(schemas.ContactFlowAliasInfo_Version, *v.Version)
+	}
+}
+func (v *ContactFlowAliasInfo) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ContactFlowAliasInfo, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ContactFlowAliasInfo_AliasId:
+			v.AliasId = new(string)
+			return d.ReadString(schemas.ContactFlowAliasInfo_AliasId, v.AliasId)
+		case schemas.ContactFlowAliasInfo_ContactFlowArn:
+			v.ContactFlowArn = new(string)
+			return d.ReadString(schemas.ContactFlowAliasInfo_ContactFlowArn, v.ContactFlowArn)
+		case schemas.ContactFlowAliasInfo_ContactFlowId:
+			v.ContactFlowId = new(string)
+			return d.ReadString(schemas.ContactFlowAliasInfo_ContactFlowId, v.ContactFlowId)
+		case schemas.ContactFlowAliasInfo_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.ContactFlowAliasInfo_Description, v.Description)
+		case schemas.ContactFlowAliasInfo_LastModifiedRegion:
+			v.LastModifiedRegion = new(string)
+			return d.ReadString(schemas.ContactFlowAliasInfo_LastModifiedRegion, v.LastModifiedRegion)
+		case schemas.ContactFlowAliasInfo_LastModifiedTime:
+			v.LastModifiedTime = new(time.Time)
+			return d.ReadTime(schemas.ContactFlowAliasInfo_LastModifiedTime, v.LastModifiedTime)
+		case schemas.ContactFlowAliasInfo_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.ContactFlowAliasInfo_Name, v.Name)
+		case schemas.ContactFlowAliasInfo_Version:
+			v.Version = new(int64)
+			return d.ReadInt64(schemas.ContactFlowAliasInfo_Version, v.Version)
+		}
+		return nil
+	})
+}
+
+// Contains summary information about a flow alias.
+type ContactFlowAliasSummary struct {
+
+	// The description of the alias.
+	AliasDescription *string
+
+	// The identifier of the alias.
+	AliasId *string
+
+	// The name of the alias.
+	AliasName *string
+
+	// The Amazon Resource Name (ARN) of the flow alias.
+	Arn *string
+
+	// The Amazon Web Services Region where this resource was last modified.
+	LastModifiedRegion *string
+
+	// The timestamp when this resource was last modified.
+	LastModifiedTime *time.Time
+
+	// The version of the flow.
+	Version *int64
+
+	noSmithyDocumentSerde
+}
+
+func (v *ContactFlowAliasSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ContactFlowAliasSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ContactFlowAliasSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AliasDescription != nil {
+		s.WriteString(schemas.ContactFlowAliasSummary_AliasDescription, *v.AliasDescription)
+	}
+	if v.AliasId != nil {
+		s.WriteString(schemas.ContactFlowAliasSummary_AliasId, *v.AliasId)
+	}
+	if v.AliasName != nil {
+		s.WriteString(schemas.ContactFlowAliasSummary_AliasName, *v.AliasName)
+	}
+	if v.Arn != nil {
+		s.WriteString(schemas.ContactFlowAliasSummary_Arn, *v.Arn)
+	}
+	if v.LastModifiedRegion != nil {
+		s.WriteString(schemas.ContactFlowAliasSummary_LastModifiedRegion, *v.LastModifiedRegion)
+	}
+	if v.LastModifiedTime != nil {
+		s.WriteTime(schemas.ContactFlowAliasSummary_LastModifiedTime, *v.LastModifiedTime)
+	}
+	if v.Version != nil {
+		s.WriteInt64(schemas.ContactFlowAliasSummary_Version, *v.Version)
+	}
+}
+func (v *ContactFlowAliasSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ContactFlowAliasSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ContactFlowAliasSummary_AliasDescription:
+			v.AliasDescription = new(string)
+			return d.ReadString(schemas.ContactFlowAliasSummary_AliasDescription, v.AliasDescription)
+		case schemas.ContactFlowAliasSummary_AliasId:
+			v.AliasId = new(string)
+			return d.ReadString(schemas.ContactFlowAliasSummary_AliasId, v.AliasId)
+		case schemas.ContactFlowAliasSummary_AliasName:
+			v.AliasName = new(string)
+			return d.ReadString(schemas.ContactFlowAliasSummary_AliasName, v.AliasName)
+		case schemas.ContactFlowAliasSummary_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.ContactFlowAliasSummary_Arn, v.Arn)
+		case schemas.ContactFlowAliasSummary_LastModifiedRegion:
+			v.LastModifiedRegion = new(string)
+			return d.ReadString(schemas.ContactFlowAliasSummary_LastModifiedRegion, v.LastModifiedRegion)
+		case schemas.ContactFlowAliasSummary_LastModifiedTime:
+			v.LastModifiedTime = new(time.Time)
+			return d.ReadTime(schemas.ContactFlowAliasSummary_LastModifiedTime, v.LastModifiedTime)
+		case schemas.ContactFlowAliasSummary_Version:
+			v.Version = new(int64)
+			return d.ReadInt64(schemas.ContactFlowAliasSummary_Version, v.Version)
 		}
 		return nil
 	})
@@ -6568,8 +6977,14 @@ func (v *ContactFlowTypeCondition) Deserialize(d smithy.ShapeDeserializer) error
 // A summary of a flow version's metadata.
 type ContactFlowVersionSummary struct {
 
-	// The Amazon Resource Name (ARN) of the view version.
+	// The Amazon Resource Name (ARN) of the flow version.
 	Arn *string
+
+	// The Amazon Web Services Region where this resource was last modified.
+	LastModifiedRegion *string
+
+	// The timestamp when this resource was last modified.
+	LastModifiedTime *time.Time
 
 	// The identifier of the flow version.
 	Version *int64
@@ -6590,6 +7005,12 @@ func (v *ContactFlowVersionSummary) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Arn != nil {
 		s.WriteString(schemas.ContactFlowVersionSummary_Arn, *v.Arn)
 	}
+	if v.LastModifiedRegion != nil {
+		s.WriteString(schemas.ContactFlowVersionSummary_LastModifiedRegion, *v.LastModifiedRegion)
+	}
+	if v.LastModifiedTime != nil {
+		s.WriteTime(schemas.ContactFlowVersionSummary_LastModifiedTime, *v.LastModifiedTime)
+	}
 	if v.Version != nil {
 		s.WriteInt64(schemas.ContactFlowVersionSummary_Version, *v.Version)
 	}
@@ -6603,6 +7024,12 @@ func (v *ContactFlowVersionSummary) Deserialize(d smithy.ShapeDeserializer) erro
 		case schemas.ContactFlowVersionSummary_Arn:
 			v.Arn = new(string)
 			return d.ReadString(schemas.ContactFlowVersionSummary_Arn, v.Arn)
+		case schemas.ContactFlowVersionSummary_LastModifiedRegion:
+			v.LastModifiedRegion = new(string)
+			return d.ReadString(schemas.ContactFlowVersionSummary_LastModifiedRegion, v.LastModifiedRegion)
+		case schemas.ContactFlowVersionSummary_LastModifiedTime:
+			v.LastModifiedTime = new(time.Time)
+			return d.ReadTime(schemas.ContactFlowVersionSummary_LastModifiedTime, v.LastModifiedTime)
 		case schemas.ContactFlowVersionSummary_Version:
 			v.Version = new(int64)
 			return d.ReadInt64(schemas.ContactFlowVersionSummary_Version, v.Version)
@@ -26653,6 +27080,7 @@ func (v *Reference) Deserialize(d smithy.ShapeDeserializer) error {
 // The following types satisfy this interface:
 //
 //	ReferenceSummaryMemberAttachment
+//	ReferenceSummaryMemberContactAnalysis
 //	ReferenceSummaryMemberDate
 //	ReferenceSummaryMemberEmail
 //	ReferenceSummaryMemberEmailMessage
@@ -26681,6 +27109,24 @@ func (v *ReferenceSummaryMemberAttachment) Serialize(s smithy.ShapeSerializer) {
 	s.CloseStruct()
 }
 func (v *ReferenceSummaryMemberAttachment) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
+
+// Information about a reference when the referenceType is CONTACT_ANALYSIS .
+// Otherwise, null.
+type ReferenceSummaryMemberContactAnalysis struct {
+	Value ContactAnalysisReference
+
+	noSmithyDocumentSerde
+}
+
+func (*ReferenceSummaryMemberContactAnalysis) isReferenceSummary() {}
+func (v *ReferenceSummaryMemberContactAnalysis) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ReferenceSummary_ContactAnalysis)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *ReferenceSummaryMemberContactAnalysis) Deserialize(d smithy.ShapeDeserializer) error {
 	return v.Value.Deserialize(d)
 }
 
@@ -26904,6 +27350,111 @@ func (v *ReplicationConfiguration) Deserialize(d smithy.ShapeDeserializer) error
 	})
 }
 
+// Contains information about a resource that could not be replicated across the
+// Regions of a Global Resiliency deployment, including the reason and any action
+// required to resolve it.
+type ReplicationFinding struct {
+
+	// The Amazon Resource Name (ARN) of the resource that the finding is for.
+	//
+	// This member is required.
+	Arn *string
+
+	// The identifier of the resource that the finding is for.
+	//
+	// This member is required.
+	Id *string
+
+	// The type of resource that the finding is for, such as QUEUE or ROUTING_PROFILE .
+	//
+	// This member is required.
+	ResourceType *string
+
+	// A human-readable description of the finding and the action, if any, required to
+	// resolve it.
+	Message *string
+
+	// The name of the resource that the finding is for.
+	Name *string
+
+	// The replication operation that produced the finding, such as a create, update,
+	// or delete of the resource.
+	Operation *string
+
+	// A stable code that identifies the class of the finding. Use this code to look
+	// up the recommended steps to resolve the finding.
+	ReferenceCode *string
+
+	// The Amazon Web Services Region that the finding was detected in.
+	Region *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *ReplicationFinding) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ReplicationFinding)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ReplicationFinding) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.ReplicationFinding_Arn, *v.Arn)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.ReplicationFinding_Id, *v.Id)
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.ReplicationFinding_Message, *v.Message)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.ReplicationFinding_Name, *v.Name)
+	}
+	if v.Operation != nil {
+		s.WriteString(schemas.ReplicationFinding_Operation, *v.Operation)
+	}
+	if v.ReferenceCode != nil {
+		s.WriteString(schemas.ReplicationFinding_ReferenceCode, *v.ReferenceCode)
+	}
+	if v.Region != nil {
+		s.WriteString(schemas.ReplicationFinding_Region, *v.Region)
+	}
+	if v.ResourceType != nil {
+		s.WriteString(schemas.ReplicationFinding_ResourceType, *v.ResourceType)
+	}
+}
+func (v *ReplicationFinding) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ReplicationFinding, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ReplicationFinding_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.ReplicationFinding_Arn, v.Arn)
+		case schemas.ReplicationFinding_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.ReplicationFinding_Id, v.Id)
+		case schemas.ReplicationFinding_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ReplicationFinding_Message, v.Message)
+		case schemas.ReplicationFinding_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.ReplicationFinding_Name, v.Name)
+		case schemas.ReplicationFinding_Operation:
+			v.Operation = new(string)
+			return d.ReadString(schemas.ReplicationFinding_Operation, v.Operation)
+		case schemas.ReplicationFinding_ReferenceCode:
+			v.ReferenceCode = new(string)
+			return d.ReadString(schemas.ReplicationFinding_ReferenceCode, v.ReferenceCode)
+		case schemas.ReplicationFinding_Region:
+			v.Region = new(string)
+			return d.ReadString(schemas.ReplicationFinding_Region, v.Region)
+		case schemas.ReplicationFinding_ResourceType:
+			v.ResourceType = new(string)
+			return d.ReadString(schemas.ReplicationFinding_ResourceType, v.ResourceType)
+		}
+		return nil
+	})
+}
+
 // Status information about the replication process, where you use the [ReplicateInstance] API to
 // create a replica of your Connect Customer instance in another Amazon Web
 // Services Region. For more information, see [Set up Connect Customer Global Resiliency]in the Connect Customer
@@ -26994,6 +27545,52 @@ func (v *RequiredFieldInfo) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.RequiredFieldInfo_Id:
 			v.Id = &TaskTemplateFieldIdentifier{}
 			return v.Id.Deserialize(d)
+		}
+		return nil
+	})
+}
+
+// Indicates whether a resource type is being replicated and kept in sync in a
+// specific Amazon Web Services Region of a Global Resiliency deployment.
+type ResourceReplicationStatus struct {
+
+	// The Amazon Web Services Region that the replication status applies to.
+	//
+	// This member is required.
+	Region *string
+
+	// The replication status of the resource type in the Region, such as ENABLED ,
+	// BLOCKED , or DISABLED .
+	//
+	// This member is required.
+	Status *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *ResourceReplicationStatus) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ResourceReplicationStatus)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ResourceReplicationStatus) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Region != nil {
+		s.WriteString(schemas.ResourceReplicationStatus_Region, *v.Region)
+	}
+	if v.Status != nil {
+		s.WriteString(schemas.ResourceReplicationStatus_Status, *v.Status)
+	}
+}
+func (v *ResourceReplicationStatus) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ResourceReplicationStatus, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ResourceReplicationStatus_Region:
+			v.Region = new(string)
+			return d.ReadString(schemas.ResourceReplicationStatus_Region, v.Region)
+		case schemas.ResourceReplicationStatus_Status:
+			v.Status = new(string)
+			return d.ReadString(schemas.ResourceReplicationStatus_Status, v.Status)
 		}
 		return nil
 	})
@@ -28086,6 +28683,16 @@ type RuleAction struct {
 	// Information about the extract information action.
 	ExtractInformationAction *ExtractInformationActionDefinition
 
+	// Information about the send in-app notification action.
+	//
+	// Supported only for TriggerEventSource values: OnPostCallAnalysisAvailable |
+	// OnRealTimeCallAnalysisAvailable | OnRealTimeChatAnalysisAvailable |
+	// OnPostChatAnalysisAvailable | OnAfterCallWorkAvailable |
+	// OnAfterChatWorkAvailable | OnEmailAnalysisAvailable | OnContactEvaluationSubmit
+	// | OnCaseCreate | OnCaseUpdate | OnSlaBreach | OnSchedulePublish |
+	// OnScheduleUpdate | OnScheduleTimeOffRequestActivity
+	SendInAppNotificationAction *SendInAppNotificationActionDefinition
+
 	// Information about the send notification action.
 	//
 	// Supported only for TriggerEventSource values: OnPostCallAnalysisAvailable |
@@ -28149,6 +28756,11 @@ func (v *RuleAction) SerializeMembers(s smithy.ShapeSerializer) {
 		v.ExtractInformationAction.SerializeMembers(s)
 		s.CloseStruct()
 	}
+	if v.SendInAppNotificationAction != nil {
+		s.WriteStruct(schemas.RuleAction_SendInAppNotificationAction)
+		v.SendInAppNotificationAction.SerializeMembers(s)
+		s.CloseStruct()
+	}
 	if v.SendNotificationAction != nil {
 		s.WriteStruct(schemas.RuleAction_SendNotificationAction)
 		v.SendNotificationAction.SerializeMembers(s)
@@ -28198,6 +28810,9 @@ func (v *RuleAction) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.RuleAction_ExtractInformationAction:
 			v.ExtractInformationAction = &ExtractInformationActionDefinition{}
 			return v.ExtractInformationAction.Deserialize(d)
+		case schemas.RuleAction_SendInAppNotificationAction:
+			v.SendInAppNotificationAction = &SendInAppNotificationActionDefinition{}
+			return v.SendInAppNotificationAction.Deserialize(d)
 		case schemas.RuleAction_SendNotificationAction:
 			v.SendNotificationAction = &SendNotificationActionDefinition{}
 			return v.SendNotificationAction.Deserialize(d)
@@ -29576,6 +30191,9 @@ type SecurityProfile struct {
 	// example, { "Tags": {"key1":"value1", "key2":"value2"} }.
 	Tags map[string]string
 
+	// The type of the security profile: AWS_MANAGED or CUSTOMER_MANAGED .
+	Type SecurityProfileType
+
 	noSmithyDocumentSerde
 }
 
@@ -29619,6 +30237,9 @@ func (v *SecurityProfile) SerializeMembers(s smithy.ShapeSerializer) {
 	}
 	serializeTagRestrictedResourceList(s, schemas.SecurityProfile_TagRestrictedResources, v.TagRestrictedResources)
 	serializeTagMap(s, schemas.SecurityProfile_Tags, v.Tags)
+	if v.Type != "" {
+		s.WriteString(schemas.SecurityProfile_Type, string(v.Type))
+	}
 }
 func (v *SecurityProfile) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.SecurityProfile, func(s *smithy.Schema) error {
@@ -29658,6 +30279,13 @@ func (v *SecurityProfile) Deserialize(d smithy.ShapeDeserializer) error {
 			return deserializeTagRestrictedResourceList(d, schemas.SecurityProfile_TagRestrictedResources, &v.TagRestrictedResources)
 		case schemas.SecurityProfile_Tags:
 			return deserializeTagMap(d, schemas.SecurityProfile_Tags, &v.Tags)
+		case schemas.SecurityProfile_Type:
+			var ev string
+			if err := d.ReadString(schemas.SecurityProfile_Type, &ev); err != nil {
+				return err
+			}
+			v.Type = SecurityProfileType(ev)
+			return nil
 		}
 		return nil
 	})
@@ -29765,6 +30393,9 @@ type SecurityProfileSearchSummary struct {
 	// example, { "Tags": {"key1":"value1", "key2":"value2"} }.
 	Tags map[string]string
 
+	// The type of the security profile: AWS_MANAGED or CUSTOMER_MANAGED .
+	Type SecurityProfileType
+
 	noSmithyDocumentSerde
 }
 
@@ -29791,6 +30422,9 @@ func (v *SecurityProfileSearchSummary) SerializeMembers(s smithy.ShapeSerializer
 		s.WriteString(schemas.SecurityProfileSearchSummary_SecurityProfileName, *v.SecurityProfileName)
 	}
 	serializeTagMap(s, schemas.SecurityProfileSearchSummary_Tags, v.Tags)
+	if v.Type != "" {
+		s.WriteString(schemas.SecurityProfileSearchSummary_Type, string(v.Type))
+	}
 }
 func (v *SecurityProfileSearchSummary) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.SecurityProfileSearchSummary, func(s *smithy.Schema) error {
@@ -29812,6 +30446,13 @@ func (v *SecurityProfileSearchSummary) Deserialize(d smithy.ShapeDeserializer) e
 			return d.ReadString(schemas.SecurityProfileSearchSummary_SecurityProfileName, v.SecurityProfileName)
 		case schemas.SecurityProfileSearchSummary_Tags:
 			return deserializeTagMap(d, schemas.SecurityProfileSearchSummary_Tags, &v.Tags)
+		case schemas.SecurityProfileSearchSummary_Type:
+			var ev string
+			if err := d.ReadString(schemas.SecurityProfileSearchSummary_Type, &ev); err != nil {
+				return err
+			}
+			v.Type = SecurityProfileType(ev)
+			return nil
 		}
 		return nil
 	})
@@ -29873,6 +30514,9 @@ type SecurityProfileSummary struct {
 	// The name of the security profile.
 	Name *string
 
+	// The type of the security profile: AWS_MANAGED or CUSTOMER_MANAGED .
+	Type SecurityProfileType
+
 	noSmithyDocumentSerde
 }
 
@@ -29898,6 +30542,9 @@ func (v *SecurityProfileSummary) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.SecurityProfileSummary_Name, *v.Name)
 	}
+	if v.Type != "" {
+		s.WriteString(schemas.SecurityProfileSummary_Type, string(v.Type))
+	}
 }
 func (v *SecurityProfileSummary) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.SecurityProfileSummary, func(s *smithy.Schema) error {
@@ -29917,6 +30564,13 @@ func (v *SecurityProfileSummary) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.SecurityProfileSummary_Name:
 			v.Name = new(string)
 			return d.ReadString(schemas.SecurityProfileSummary_Name, v.Name)
+		case schemas.SecurityProfileSummary_Type:
+			var ev string
+			if err := d.ReadString(schemas.SecurityProfileSummary_Type, &ev); err != nil {
+				return err
+			}
+			v.Type = SecurityProfileType(ev)
+			return nil
 		}
 		return nil
 	})
@@ -29981,6 +30635,76 @@ func (v *SegmentAttributeValue) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.SegmentAttributeValue_ValueString:
 			v.ValueString = new(string)
 			return d.ReadString(schemas.SegmentAttributeValue_ValueString, v.ValueString)
+		}
+		return nil
+	})
+}
+
+// Information about the send in-app notification action.
+type SendInAppNotificationActionDefinition struct {
+
+	// Notification content. Supports variable injection. For more information, see [JSONPath reference]
+	// in the Connect Customer Administrators Guide.
+	//
+	// [JSONPath reference]: https://docs.aws.amazon.com/connect/latest/adminguide/contact-lens-variable-injection.html
+	//
+	// This member is required.
+	Content map[string]string
+
+	// Notification recipient.
+	//
+	// This member is required.
+	Recipient *NotificationRecipientType
+
+	// Recipients to exclude from notification.
+	Exclusion *NotificationRecipientType
+
+	// Notification priority.
+	Priority ConfigurableNotificationPriority
+
+	noSmithyDocumentSerde
+}
+
+func (v *SendInAppNotificationActionDefinition) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SendInAppNotificationActionDefinition)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SendInAppNotificationActionDefinition) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeNotificationContent(s, schemas.SendInAppNotificationActionDefinition_Content, v.Content)
+	if v.Exclusion != nil {
+		s.WriteStruct(schemas.SendInAppNotificationActionDefinition_Exclusion)
+		v.Exclusion.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Priority != "" {
+		s.WriteString(schemas.SendInAppNotificationActionDefinition_Priority, string(v.Priority))
+	}
+	if v.Recipient != nil {
+		s.WriteStruct(schemas.SendInAppNotificationActionDefinition_Recipient)
+		v.Recipient.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *SendInAppNotificationActionDefinition) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SendInAppNotificationActionDefinition, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SendInAppNotificationActionDefinition_Content:
+			return deserializeNotificationContent(d, schemas.SendInAppNotificationActionDefinition_Content, &v.Content)
+		case schemas.SendInAppNotificationActionDefinition_Exclusion:
+			v.Exclusion = &NotificationRecipientType{}
+			return v.Exclusion.Deserialize(d)
+		case schemas.SendInAppNotificationActionDefinition_Priority:
+			var ev string
+			if err := d.ReadString(schemas.SendInAppNotificationActionDefinition_Priority, &ev); err != nil {
+				return err
+			}
+			v.Priority = ConfigurableNotificationPriority(ev)
+			return nil
+		case schemas.SendInAppNotificationActionDefinition_Recipient:
+			v.Recipient = &NotificationRecipientType{}
+			return v.Recipient.Deserialize(d)
 		}
 		return nil
 	})
@@ -35011,6 +35735,48 @@ func (v *WebNotificationSource) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.WebNotificationSource_SourceCampaign:
 			v.SourceCampaign = &SourceCampaign{}
 			return v.SourceCampaign.Deserialize(d)
+		}
+		return nil
+	})
+}
+
+// The websocket that a chat participant uses to receive messages and events for
+// the chat.
+type Websocket struct {
+
+	// The expiration of the websocket URL. It's specified in ISO 8601 format:
+	// yyyy-MM-ddThh:mm:ss.SSSZ. For example, 2019-11-08T02:41:28.172Z.
+	ConnectionExpiry *string
+
+	// The URL of the websocket.
+	Url *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *Websocket) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Websocket)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Websocket) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConnectionExpiry != nil {
+		s.WriteString(schemas.Websocket_ConnectionExpiry, *v.ConnectionExpiry)
+	}
+	if v.Url != nil {
+		s.WriteString(schemas.Websocket_Url, *v.Url)
+	}
+}
+func (v *Websocket) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Websocket, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Websocket_ConnectionExpiry:
+			v.ConnectionExpiry = new(string)
+			return d.ReadString(schemas.Websocket_ConnectionExpiry, v.ConnectionExpiry)
+		case schemas.Websocket_Url:
+			v.Url = new(string)
+			return d.ReadString(schemas.Websocket_Url, v.Url)
 		}
 		return nil
 	})

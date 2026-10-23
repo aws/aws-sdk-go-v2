@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"LastBackupTime":946684800,"LastBackupVaultArn":"__LastBackupVaultArn__","LastRecoveryPointArn":"__LastRecoveryPointArn__","LatestRestoreExecutionTimeMinutes":1,"LatestRestoreJobCreationDate":946684800,"LatestRestoreRecoveryPointCreationDate":946684800,"ResourceArn":"__ResourceArn__","ResourceName":"__ResourceName__","ResourceType":"__ResourceType__"}

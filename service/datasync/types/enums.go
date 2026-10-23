@@ -347,6 +347,7 @@ const (
 	NfsVersionNfs3      NfsVersion = "NFS3"
 	NfsVersionNfs40     NfsVersion = "NFS4_0"
 	NfsVersionNfs41     NfsVersion = "NFS4_1"
+	NfsVersionNfs42     NfsVersion = "NFS4_2"
 )
 
 // Values returns all known values for NfsVersion. Note that this can be expanded
@@ -359,6 +360,26 @@ func (NfsVersion) Values() []NfsVersion {
 		"NFS3",
 		"NFS4_0",
 		"NFS4_1",
+		"NFS4_2",
+	}
+}
+
+type ObjectMetadata string
+
+// Enum values for ObjectMetadata
+const (
+	ObjectMetadataPreserve ObjectMetadata = "PRESERVE"
+	ObjectMetadataNone     ObjectMetadata = "NONE"
+)
+
+// Values returns all known values for ObjectMetadata. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ObjectMetadata) Values() []ObjectMetadata {
+	return []ObjectMetadata{
+		"PRESERVE",
+		"NONE",
 	}
 }
 

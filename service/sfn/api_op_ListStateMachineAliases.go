@@ -4,7 +4,9 @@ package sfn
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/sfn/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sfn/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -76,6 +78,24 @@ type ListStateMachineAliasesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListStateMachineAliasesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListStateMachineAliasesInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListStateMachineAliasesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != 0 {
+		s.WriteInt32(schemas.ListStateMachineAliasesInput_maxResults, v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListStateMachineAliasesInput_nextToken, *v.NextToken)
+	}
+	if v.StateMachineArn != nil {
+		s.WriteString(schemas.ListStateMachineAliasesInput_stateMachineArn, *v.StateMachineArn)
+	}
+}
+
 type ListStateMachineAliasesOutput struct {
 
 	// Aliases for the state machine.
@@ -96,13 +116,35 @@ type ListStateMachineAliasesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListStateMachineAliasesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListStateMachineAliasesOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListStateMachineAliasesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListStateMachineAliasesOutput_nextToken, *v.NextToken)
+	}
+	serializeStateMachineAliasList(s, schemas.ListStateMachineAliasesOutput_stateMachineAliases, v.StateMachineAliases)
+}
+func (v *ListStateMachineAliasesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListStateMachineAliasesOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListStateMachineAliasesOutput_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListStateMachineAliasesOutput_nextToken, v.NextToken)
+		case schemas.ListStateMachineAliasesOutput_stateMachineAliases:
+			return deserializeStateMachineAliasList(d, schemas.ListStateMachineAliasesOutput_stateMachineAliases, &v.StateMachineAliases)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListStateMachineAliasesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpListStateMachineAliases{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListStateMachineAliases, schemas.ListStateMachineAliasesInput, schemas.ListStateMachineAliasesOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpListStateMachineAliases{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListStateMachineAliases, schemas.ListStateMachineAliasesInput, schemas.ListStateMachineAliasesOutput), output: &ListStateMachineAliasesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

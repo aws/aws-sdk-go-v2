@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: DeviceFarm_20150623.ListInstanceProfiles
+
+{"instanceProfiles":[{"arn":"__Arn__","description":"__Description__","excludeAppPackagesFromCleanup":["__Member__","__Member__"],"name":"__Name__","packageCleanup":true,"rebootAfterUse":true},{"arn":"__Arn__","description":"__Description__","excludeAppPackagesFromCleanup":["__Member__","__Member__"],"name":"__Name__","packageCleanup":true,"rebootAfterUse":true}],"nextToken":"__NextToken__"}

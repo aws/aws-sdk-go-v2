@@ -5,7 +5,9 @@ package bedrockagent
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/bedrockagent/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagent/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -134,6 +136,40 @@ type CreateAgentActionGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateAgentActionGroupInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateAgentActionGroupRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateAgentActionGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeActionGroupExecutor(s, schemas.CreateAgentActionGroupRequest_actionGroupExecutor, v.ActionGroupExecutor)
+	if v.ActionGroupName != nil {
+		s.WriteString(schemas.CreateAgentActionGroupRequest_actionGroupName, *v.ActionGroupName)
+	}
+	if v.ActionGroupState != "" {
+		s.WriteString(schemas.CreateAgentActionGroupRequest_actionGroupState, string(v.ActionGroupState))
+	}
+	if v.AgentId != nil {
+		s.WriteString(schemas.CreateAgentActionGroupRequest_agentId, *v.AgentId)
+	}
+	if v.AgentVersion != nil {
+		s.WriteString(schemas.CreateAgentActionGroupRequest_agentVersion, *v.AgentVersion)
+	}
+	serializeAPISchema(s, schemas.CreateAgentActionGroupRequest_apiSchema, v.ApiSchema)
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateAgentActionGroupRequest_clientToken, *v.ClientToken)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreateAgentActionGroupRequest_description, *v.Description)
+	}
+	serializeFunctionSchema(s, schemas.CreateAgentActionGroupRequest_functionSchema, v.FunctionSchema)
+	if v.ParentActionGroupSignature != "" {
+		s.WriteString(schemas.CreateAgentActionGroupRequest_parentActionGroupSignature, string(v.ParentActionGroupSignature))
+	}
+	serializeActionGroupSignatureParams(s, schemas.CreateAgentActionGroupRequest_parentActionGroupSignatureParams, v.ParentActionGroupSignatureParams)
+}
+
 type CreateAgentActionGroupOutput struct {
 
 	// Contains details about the action group that was created.
@@ -147,13 +183,34 @@ type CreateAgentActionGroupOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateAgentActionGroupOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateAgentActionGroupResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateAgentActionGroupOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AgentActionGroup != nil {
+		s.WriteStruct(schemas.CreateAgentActionGroupResponse_agentActionGroup)
+		v.AgentActionGroup.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateAgentActionGroupOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateAgentActionGroupResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateAgentActionGroupResponse_agentActionGroup:
+			v.AgentActionGroup = &types.AgentActionGroup{}
+			return v.AgentActionGroup.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateAgentActionGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateAgentActionGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateAgentActionGroup, schemas.CreateAgentActionGroupRequest, schemas.CreateAgentActionGroupResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateAgentActionGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateAgentActionGroup, schemas.CreateAgentActionGroupRequest, schemas.CreateAgentActionGroupResponse), output: &CreateAgentActionGroupOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

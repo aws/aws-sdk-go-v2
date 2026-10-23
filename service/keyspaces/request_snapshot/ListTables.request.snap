@@ -1,6 +1,7 @@
-POST /
+POST /service/KeyspacesService/operation/ListTables
 
-Content-Type: application/x-amz-json-1.0
-X-Amz-Target: KeyspacesService.ListTables
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"keyspaceName":"__KeyspaceName__","maxResults":1,"nextToken":"__NextToken__"}
+¿lkeyspaceNamep__KeyspaceName__jmaxResultsinextTokenm__NextToken__ÿ

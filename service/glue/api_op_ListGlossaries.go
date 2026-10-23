@@ -5,7 +5,9 @@ package glue
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/glue/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/glue/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -36,6 +38,21 @@ type ListGlossariesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListGlossariesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListGlossariesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListGlossariesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListGlossariesRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListGlossariesRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListGlossariesOutput struct {
 
 	// The list of glossary items.
@@ -50,13 +67,35 @@ type ListGlossariesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListGlossariesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListGlossariesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListGlossariesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeGlossaryItemList(s, schemas.ListGlossariesResponse_Items, v.Items)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListGlossariesResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListGlossariesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListGlossariesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListGlossariesResponse_Items:
+			return deserializeGlossaryItemList(d, schemas.ListGlossariesResponse_Items, &v.Items)
+		case schemas.ListGlossariesResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListGlossariesResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListGlossariesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListGlossaries{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListGlossaries, schemas.ListGlossariesRequest, schemas.ListGlossariesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListGlossaries{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListGlossaries, schemas.ListGlossariesRequest, schemas.ListGlossariesResponse), output: &ListGlossariesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

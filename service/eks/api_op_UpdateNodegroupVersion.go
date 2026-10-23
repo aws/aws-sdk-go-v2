@@ -5,7 +5,9 @@ package eks
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/eks/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/eks/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -116,6 +118,38 @@ type UpdateNodegroupVersionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateNodegroupVersionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateNodegroupVersionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateNodegroupVersionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientRequestToken != nil {
+		s.WriteString(schemas.UpdateNodegroupVersionRequest_clientRequestToken, *v.ClientRequestToken)
+	}
+	if v.ClusterName != nil {
+		s.WriteString(schemas.UpdateNodegroupVersionRequest_clusterName, *v.ClusterName)
+	}
+	if v.Force != false {
+		s.WriteBool(schemas.UpdateNodegroupVersionRequest_force, v.Force)
+	}
+	if v.LaunchTemplate != nil {
+		s.WriteStruct(schemas.UpdateNodegroupVersionRequest_launchTemplate)
+		v.LaunchTemplate.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.NodegroupName != nil {
+		s.WriteString(schemas.UpdateNodegroupVersionRequest_nodegroupName, *v.NodegroupName)
+	}
+	if v.ReleaseVersion != nil {
+		s.WriteString(schemas.UpdateNodegroupVersionRequest_releaseVersion, *v.ReleaseVersion)
+	}
+	if v.Version != nil {
+		s.WriteString(schemas.UpdateNodegroupVersionRequest_version, *v.Version)
+	}
+}
+
 type UpdateNodegroupVersionOutput struct {
 
 	// An object representing an asynchronous update.
@@ -127,13 +161,34 @@ type UpdateNodegroupVersionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateNodegroupVersionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateNodegroupVersionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateNodegroupVersionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Update != nil {
+		s.WriteStruct(schemas.UpdateNodegroupVersionResponse_update)
+		v.Update.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateNodegroupVersionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateNodegroupVersionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateNodegroupVersionResponse_update:
+			v.Update = &types.Update{}
+			return v.Update.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateNodegroupVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateNodegroupVersion{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateNodegroupVersion, schemas.UpdateNodegroupVersionRequest, schemas.UpdateNodegroupVersionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateNodegroupVersion{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateNodegroupVersion, schemas.UpdateNodegroupVersionRequest, schemas.UpdateNodegroupVersionResponse), output: &UpdateNodegroupVersionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -123,7 +123,8 @@ var AWSMPSeymour = smithy.NewServiceSchema(_AWSMPSeymour, "2018-09-17")
 var AccessDeniedException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.marketplacecatalog",
 	Name:      "AccessDeniedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 403})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 403})
 var AccessDeniedException_Message *smithy.Schema
 
 var AmiProductEntityIdFilter = smithy.NewSchema(smithy.ShapeID{
@@ -788,7 +789,7 @@ var _EntityRequestList_member *smithy.Schema
 var EntitySummary = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.marketplacecatalog",
 	Name:      "EntitySummary",
-}, smithy.ShapeTypeStructure, 14)
+}, smithy.ShapeTypeStructure, 15)
 var EntitySummary_Name *smithy.Schema
 
 var EntitySummary_EntityType *smithy.Schema
@@ -817,6 +818,8 @@ var EntitySummary_MachineLearningProductSummary *smithy.Schema
 
 var EntitySummary_OfferSetSummary *smithy.Schema
 
+var EntitySummary_ExpressPrivateOfferConfigurationSummary *smithy.Schema
+
 var _EntitySummaryList = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.marketplacecatalog",
 	Name:      "EntitySummaryList",
@@ -831,7 +834,7 @@ var _EntityType = smithy.NewSchema(smithy.ShapeID{
 var EntityTypeFilters = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.marketplacecatalog",
 	Name:      "EntityTypeFilters",
-}, smithy.ShapeTypeUnion, 8)
+}, smithy.ShapeTypeUnion, 9)
 var EntityTypeFilters_DataProductFilters *smithy.Schema
 
 var EntityTypeFilters_SaaSProductFilters *smithy.Schema
@@ -848,10 +851,12 @@ var EntityTypeFilters_MachineLearningProductFilters *smithy.Schema
 
 var EntityTypeFilters_OfferSetFilters *smithy.Schema
 
+var EntityTypeFilters_ExpressPrivateOfferConfigurationFilters *smithy.Schema
+
 var EntityTypeSort = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.marketplacecatalog",
 	Name:      "EntityTypeSort",
-}, smithy.ShapeTypeUnion, 8)
+}, smithy.ShapeTypeUnion, 9)
 var EntityTypeSort_DataProductSort *smithy.Schema
 
 var EntityTypeSort_SaaSProductSort *smithy.Schema
@@ -867,6 +872,8 @@ var EntityTypeSort_ResaleAuthorizationSort *smithy.Schema
 var EntityTypeSort_MachineLearningProductSort *smithy.Schema
 
 var EntityTypeSort_OfferSetSort *smithy.Schema
+
+var EntityTypeSort_ExpressPrivateOfferConfigurationSort *smithy.Schema
 
 var _ErrorCode = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.marketplacecatalog",
@@ -923,6 +930,98 @@ var _ExceptionMessageContent = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.marketplacecatalog",
 	Name:      "ExceptionMessageContent",
 }, smithy.ShapeTypeString, 0)
+
+var ExpressPrivateOfferConfigurationEntityIdFilter = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.marketplacecatalog",
+	Name:      "ExpressPrivateOfferConfigurationEntityIdFilter",
+}, smithy.ShapeTypeStructure, 1)
+var ExpressPrivateOfferConfigurationEntityIdFilter_ValueList *smithy.Schema
+
+var _ExpressPrivateOfferConfigurationEntityIdFilterValueList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.marketplacecatalog",
+	Name:      "ExpressPrivateOfferConfigurationEntityIdFilterValueList",
+}, smithy.ShapeTypeList, 1)
+var _ExpressPrivateOfferConfigurationEntityIdFilterValueList_member *smithy.Schema
+
+var _ExpressPrivateOfferConfigurationEntityIdString = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.marketplacecatalog",
+	Name:      "ExpressPrivateOfferConfigurationEntityIdString",
+}, smithy.ShapeTypeString, 0)
+
+var ExpressPrivateOfferConfigurationFilters = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.marketplacecatalog",
+	Name:      "ExpressPrivateOfferConfigurationFilters",
+}, smithy.ShapeTypeStructure, 3)
+var ExpressPrivateOfferConfigurationFilters_EntityId *smithy.Schema
+
+var ExpressPrivateOfferConfigurationFilters_ProductId *smithy.Schema
+
+var ExpressPrivateOfferConfigurationFilters_State *smithy.Schema
+
+var ExpressPrivateOfferConfigurationProductIdFilter = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.marketplacecatalog",
+	Name:      "ExpressPrivateOfferConfigurationProductIdFilter",
+}, smithy.ShapeTypeStructure, 1)
+var ExpressPrivateOfferConfigurationProductIdFilter_ValueList *smithy.Schema
+
+var _ExpressPrivateOfferConfigurationProductIdFilterValueList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.marketplacecatalog",
+	Name:      "ExpressPrivateOfferConfigurationProductIdFilterValueList",
+}, smithy.ShapeTypeList, 1)
+var _ExpressPrivateOfferConfigurationProductIdFilterValueList_member *smithy.Schema
+
+var _ExpressPrivateOfferConfigurationProductIdString = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.marketplacecatalog",
+	Name:      "ExpressPrivateOfferConfigurationProductIdString",
+}, smithy.ShapeTypeString, 0)
+
+var ExpressPrivateOfferConfigurationSort = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.marketplacecatalog",
+	Name:      "ExpressPrivateOfferConfigurationSort",
+}, smithy.ShapeTypeStructure, 2)
+var ExpressPrivateOfferConfigurationSort_SortBy *smithy.Schema
+
+var ExpressPrivateOfferConfigurationSort_SortOrder *smithy.Schema
+
+var ExpressPrivateOfferConfigurationSortBy = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.marketplacecatalog",
+	Name:      "ExpressPrivateOfferConfigurationSortBy",
+}, smithy.ShapeTypeEnum, 4)
+var ExpressPrivateOfferConfigurationSortBy_EntityId *smithy.Schema
+
+var ExpressPrivateOfferConfigurationSortBy_LastModifiedDate *smithy.Schema
+
+var ExpressPrivateOfferConfigurationSortBy_ProductId *smithy.Schema
+
+var ExpressPrivateOfferConfigurationSortBy_State *smithy.Schema
+
+var ExpressPrivateOfferConfigurationStateFilter = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.marketplacecatalog",
+	Name:      "ExpressPrivateOfferConfigurationStateFilter",
+}, smithy.ShapeTypeStructure, 1)
+var ExpressPrivateOfferConfigurationStateFilter_ValueList *smithy.Schema
+
+var _ExpressPrivateOfferConfigurationStateFilterValueList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.marketplacecatalog",
+	Name:      "ExpressPrivateOfferConfigurationStateFilterValueList",
+}, smithy.ShapeTypeList, 1)
+var _ExpressPrivateOfferConfigurationStateFilterValueList_member *smithy.Schema
+
+var ExpressPrivateOfferConfigurationStateString = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.marketplacecatalog",
+	Name:      "ExpressPrivateOfferConfigurationStateString",
+}, smithy.ShapeTypeEnum, 2)
+var ExpressPrivateOfferConfigurationStateString_ACTIVE *smithy.Schema
+
+var ExpressPrivateOfferConfigurationStateString_INACTIVE *smithy.Schema
+
+var ExpressPrivateOfferConfigurationSummary = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.marketplacecatalog",
+	Name:      "ExpressPrivateOfferConfigurationSummary",
+}, smithy.ShapeTypeStructure, 2)
+var ExpressPrivateOfferConfigurationSummary_ProductId *smithy.Schema
+
+var ExpressPrivateOfferConfigurationSummary_State *smithy.Schema
 
 var FailureCode = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.marketplacecatalog",
@@ -998,7 +1097,8 @@ var Intent_APPLY *smithy.Schema
 var InternalServiceException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.marketplacecatalog",
 	Name:      "InternalServiceException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 500})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
+	&smithytraits.HTTPError{Code: 500})
 var InternalServiceException_Message *smithy.Schema
 
 var _Json = smithy.NewSchema(smithy.ShapeID{
@@ -1757,7 +1857,7 @@ var _ResaleAuthorizationEntityIdString = smithy.NewSchema(smithy.ShapeID{
 var ResaleAuthorizationFilters = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.marketplacecatalog",
 	Name:      "ResaleAuthorizationFilters",
-}, smithy.ShapeTypeStructure, 14)
+}, smithy.ShapeTypeStructure, 16)
 var ResaleAuthorizationFilters_EntityId *smithy.Schema
 
 var ResaleAuthorizationFilters_Name *smithy.Schema
@@ -1785,6 +1885,27 @@ var ResaleAuthorizationFilters_OfferExtendedStatus *smithy.Schema
 var ResaleAuthorizationFilters_LastModifiedDate *smithy.Schema
 
 var ResaleAuthorizationFilters_ResellerRole *smithy.Schema
+
+var ResaleAuthorizationFilters_SourceAuthorization *smithy.Schema
+
+var ResaleAuthorizationFilters_IssuerAccountId *smithy.Schema
+
+var ResaleAuthorizationIssuerAccountIdFilter = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.marketplacecatalog",
+	Name:      "ResaleAuthorizationIssuerAccountIdFilter",
+}, smithy.ShapeTypeStructure, 1)
+var ResaleAuthorizationIssuerAccountIdFilter_ValueList *smithy.Schema
+
+var _ResaleAuthorizationIssuerAccountIdFilterValueList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.marketplacecatalog",
+	Name:      "ResaleAuthorizationIssuerAccountIdFilterValueList",
+}, smithy.ShapeTypeList, 1)
+var _ResaleAuthorizationIssuerAccountIdFilterValueList_member *smithy.Schema
+
+var _ResaleAuthorizationIssuerAccountIdString = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.marketplacecatalog",
+	Name:      "ResaleAuthorizationIssuerAccountIdString",
+}, smithy.ShapeTypeString, 0)
 
 var ResaleAuthorizationLastModifiedDateFilter = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.marketplacecatalog",
@@ -2016,7 +2137,7 @@ var ResaleAuthorizationSort_SortOrder *smithy.Schema
 var ResaleAuthorizationSortBy = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.marketplacecatalog",
 	Name:      "ResaleAuthorizationSortBy",
-}, smithy.ShapeTypeEnum, 13)
+}, smithy.ShapeTypeEnum, 16)
 var ResaleAuthorizationSortBy_EntityId *smithy.Schema
 
 var ResaleAuthorizationSortBy_Name *smithy.Schema
@@ -2043,6 +2164,29 @@ var ResaleAuthorizationSortBy_AvailabilityEndDate *smithy.Schema
 
 var ResaleAuthorizationSortBy_LastModifiedDate *smithy.Schema
 
+var ResaleAuthorizationSortBy_ResellerRole *smithy.Schema
+
+var ResaleAuthorizationSortBy_SourceAuthorization *smithy.Schema
+
+var ResaleAuthorizationSortBy_IssuerAccountId *smithy.Schema
+
+var ResaleAuthorizationSourceAuthorizationFilter = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.marketplacecatalog",
+	Name:      "ResaleAuthorizationSourceAuthorizationFilter",
+}, smithy.ShapeTypeStructure, 1)
+var ResaleAuthorizationSourceAuthorizationFilter_ValueList *smithy.Schema
+
+var _ResaleAuthorizationSourceAuthorizationFilterValueList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.marketplacecatalog",
+	Name:      "ResaleAuthorizationSourceAuthorizationFilterValueList",
+}, smithy.ShapeTypeList, 1)
+var _ResaleAuthorizationSourceAuthorizationFilterValueList_member *smithy.Schema
+
+var _ResaleAuthorizationSourceAuthorizationString = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.marketplacecatalog",
+	Name:      "ResaleAuthorizationSourceAuthorizationString",
+}, smithy.ShapeTypeString, 0)
+
 var ResaleAuthorizationStatusFilter = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.marketplacecatalog",
 	Name:      "ResaleAuthorizationStatusFilter",
@@ -2068,7 +2212,7 @@ var ResaleAuthorizationStatusString_Restricted *smithy.Schema
 var ResaleAuthorizationSummary = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.marketplacecatalog",
 	Name:      "ResaleAuthorizationSummary",
-}, smithy.ShapeTypeStructure, 12)
+}, smithy.ShapeTypeStructure, 14)
 var ResaleAuthorizationSummary_Name *smithy.Schema
 
 var ResaleAuthorizationSummary_ProductId *smithy.Schema
@@ -2093,6 +2237,10 @@ var ResaleAuthorizationSummary_AvailabilityEndDate *smithy.Schema
 
 var ResaleAuthorizationSummary_ResellerRole *smithy.Schema
 
+var ResaleAuthorizationSummary_SourceAuthorization *smithy.Schema
+
+var ResaleAuthorizationSummary_IssuerAccountId *smithy.Schema
+
 var _ResourceARN = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.marketplacecatalog",
 	Name:      "ResourceARN",
@@ -2112,19 +2260,22 @@ var _ResourceIdList_member *smithy.Schema
 var ResourceInUseException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.marketplacecatalog",
 	Name:      "ResourceInUseException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 423})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 423})
 var ResourceInUseException_Message *smithy.Schema
 
 var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.marketplacecatalog",
 	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 404})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 404})
 var ResourceNotFoundException_Message *smithy.Schema
 
 var ResourceNotSupportedException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.marketplacecatalog",
 	Name:      "ResourceNotSupportedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 415})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 415})
 var ResourceNotSupportedException_Message *smithy.Schema
 
 var _ResourcePolicyJson = smithy.NewSchema(smithy.ShapeID{
@@ -2261,7 +2412,8 @@ var _ScopeValue = smithy.NewSchema(smithy.ShapeID{
 var ServiceQuotaExceededException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.marketplacecatalog",
 	Name:      "ServiceQuotaExceededException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 402})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 402})
 var ServiceQuotaExceededException_Message *smithy.Schema
 
 var Sort = smithy.NewSchema(smithy.ShapeID{
@@ -2318,13 +2470,15 @@ var _TagValue = smithy.NewSchema(smithy.ShapeID{
 var ThrottlingException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.marketplacecatalog",
 	Name:      "ThrottlingException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 429})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 429})
 var ThrottlingException_Message *smithy.Schema
 
 var ValidationException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.marketplacecatalog",
 	Name:      "ValidationException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.HTTPError{Code: 422})
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 422})
 var ValidationException_Message *smithy.Schema
 
 var ValidationException_ValidationExceptionFieldList *smithy.Schema
@@ -3110,6 +3264,10 @@ func init() {
 
 	ResaleAuthorizationSummary_ResellerRole = ResaleAuthorizationSummary.AddMember("ResellerRole", ResaleAuthorizationResellerRoleString)
 
+	ResaleAuthorizationSummary_SourceAuthorization = ResaleAuthorizationSummary.AddMember("SourceAuthorization", _ResaleAuthorizationSourceAuthorizationString)
+
+	ResaleAuthorizationSummary_IssuerAccountId = ResaleAuthorizationSummary.AddMember("IssuerAccountId", _ResaleAuthorizationIssuerAccountIdString)
+
 	MachineLearningProductVisibilityString_Limited = MachineLearningProductVisibilityString.AddMember("Limited", smithyprelude.Unit)
 
 	MachineLearningProductVisibilityString_Public = MachineLearningProductVisibilityString.AddMember("Public", smithyprelude.Unit)
@@ -3138,6 +3296,14 @@ func init() {
 
 	OfferSetSummary_SolutionId = OfferSetSummary.AddMember("SolutionId", _OfferSetSolutionIdString)
 
+	ExpressPrivateOfferConfigurationStateString_ACTIVE = ExpressPrivateOfferConfigurationStateString.AddMember("ACTIVE", smithyprelude.Unit)
+
+	ExpressPrivateOfferConfigurationStateString_INACTIVE = ExpressPrivateOfferConfigurationStateString.AddMember("INACTIVE", smithyprelude.Unit)
+
+	ExpressPrivateOfferConfigurationSummary_ProductId = ExpressPrivateOfferConfigurationSummary.AddMember("ProductId", _ExpressPrivateOfferConfigurationProductIdString)
+
+	ExpressPrivateOfferConfigurationSummary_State = ExpressPrivateOfferConfigurationSummary.AddMember("State", ExpressPrivateOfferConfigurationStateString)
+
 	EntitySummary_Name = EntitySummary.AddMember("Name", _EntityNameString)
 
 	EntitySummary_EntityType = EntitySummary.AddMember("EntityType", _EntityType)
@@ -3165,6 +3331,8 @@ func init() {
 	EntitySummary_MachineLearningProductSummary = EntitySummary.AddMember("MachineLearningProductSummary", MachineLearningProductSummary)
 
 	EntitySummary_OfferSetSummary = EntitySummary.AddMember("OfferSetSummary", OfferSetSummary)
+
+	EntitySummary_ExpressPrivateOfferConfigurationSummary = EntitySummary.AddMember("ExpressPrivateOfferConfigurationSummary", ExpressPrivateOfferConfigurationSummary)
 
 	_EntitySummaryList_member = _EntitySummaryList.AddMember("member", EntitySummary)
 
@@ -3370,6 +3538,14 @@ func init() {
 
 	ResaleAuthorizationResellerRoleFilter_ValueList = ResaleAuthorizationResellerRoleFilter.AddMember("ValueList", _ResaleAuthorizationResellerRoleFilterValueList)
 
+	_ResaleAuthorizationSourceAuthorizationFilterValueList_member = _ResaleAuthorizationSourceAuthorizationFilterValueList.AddMember("member", _ResaleAuthorizationSourceAuthorizationString)
+
+	ResaleAuthorizationSourceAuthorizationFilter_ValueList = ResaleAuthorizationSourceAuthorizationFilter.AddMember("ValueList", _ResaleAuthorizationSourceAuthorizationFilterValueList)
+
+	_ResaleAuthorizationIssuerAccountIdFilterValueList_member = _ResaleAuthorizationIssuerAccountIdFilterValueList.AddMember("member", _ResaleAuthorizationIssuerAccountIdString)
+
+	ResaleAuthorizationIssuerAccountIdFilter_ValueList = ResaleAuthorizationIssuerAccountIdFilter.AddMember("ValueList", _ResaleAuthorizationIssuerAccountIdFilterValueList)
+
 	ResaleAuthorizationFilters_EntityId = ResaleAuthorizationFilters.AddMember("EntityId", ResaleAuthorizationEntityIdFilter)
 
 	ResaleAuthorizationFilters_Name = ResaleAuthorizationFilters.AddMember("Name", ResaleAuthorizationNameFilter)
@@ -3397,6 +3573,10 @@ func init() {
 	ResaleAuthorizationFilters_LastModifiedDate = ResaleAuthorizationFilters.AddMember("LastModifiedDate", ResaleAuthorizationLastModifiedDateFilter)
 
 	ResaleAuthorizationFilters_ResellerRole = ResaleAuthorizationFilters.AddMember("ResellerRole", ResaleAuthorizationResellerRoleFilter)
+
+	ResaleAuthorizationFilters_SourceAuthorization = ResaleAuthorizationFilters.AddMember("SourceAuthorization", ResaleAuthorizationSourceAuthorizationFilter)
+
+	ResaleAuthorizationFilters_IssuerAccountId = ResaleAuthorizationFilters.AddMember("IssuerAccountId", ResaleAuthorizationIssuerAccountIdFilter)
 
 	_MachineLearningProductEntityIdFilterValueList_member = _MachineLearningProductEntityIdFilterValueList.AddMember("member", _MachineLearningProductEntityIdString)
 
@@ -3472,6 +3652,24 @@ func init() {
 
 	OfferSetFilters_LastModifiedDate = OfferSetFilters.AddMember("LastModifiedDate", OfferSetLastModifiedDateFilter)
 
+	_ExpressPrivateOfferConfigurationEntityIdFilterValueList_member = _ExpressPrivateOfferConfigurationEntityIdFilterValueList.AddMember("member", _ExpressPrivateOfferConfigurationEntityIdString)
+
+	ExpressPrivateOfferConfigurationEntityIdFilter_ValueList = ExpressPrivateOfferConfigurationEntityIdFilter.AddMember("ValueList", _ExpressPrivateOfferConfigurationEntityIdFilterValueList)
+
+	_ExpressPrivateOfferConfigurationProductIdFilterValueList_member = _ExpressPrivateOfferConfigurationProductIdFilterValueList.AddMember("member", _ExpressPrivateOfferConfigurationProductIdString)
+
+	ExpressPrivateOfferConfigurationProductIdFilter_ValueList = ExpressPrivateOfferConfigurationProductIdFilter.AddMember("ValueList", _ExpressPrivateOfferConfigurationProductIdFilterValueList)
+
+	_ExpressPrivateOfferConfigurationStateFilterValueList_member = _ExpressPrivateOfferConfigurationStateFilterValueList.AddMember("member", ExpressPrivateOfferConfigurationStateString)
+
+	ExpressPrivateOfferConfigurationStateFilter_ValueList = ExpressPrivateOfferConfigurationStateFilter.AddMember("ValueList", _ExpressPrivateOfferConfigurationStateFilterValueList)
+
+	ExpressPrivateOfferConfigurationFilters_EntityId = ExpressPrivateOfferConfigurationFilters.AddMember("EntityId", ExpressPrivateOfferConfigurationEntityIdFilter)
+
+	ExpressPrivateOfferConfigurationFilters_ProductId = ExpressPrivateOfferConfigurationFilters.AddMember("ProductId", ExpressPrivateOfferConfigurationProductIdFilter)
+
+	ExpressPrivateOfferConfigurationFilters_State = ExpressPrivateOfferConfigurationFilters.AddMember("State", ExpressPrivateOfferConfigurationStateFilter)
+
 	EntityTypeFilters_DataProductFilters = EntityTypeFilters.AddMember("DataProductFilters", DataProductFilters)
 
 	EntityTypeFilters_SaaSProductFilters = EntityTypeFilters.AddMember("SaaSProductFilters", SaaSProductFilters)
@@ -3487,6 +3685,8 @@ func init() {
 	EntityTypeFilters_MachineLearningProductFilters = EntityTypeFilters.AddMember("MachineLearningProductFilters", MachineLearningProductFilters)
 
 	EntityTypeFilters_OfferSetFilters = EntityTypeFilters.AddMember("OfferSetFilters", OfferSetFilters)
+
+	EntityTypeFilters_ExpressPrivateOfferConfigurationFilters = EntityTypeFilters.AddMember("ExpressPrivateOfferConfigurationFilters", ExpressPrivateOfferConfigurationFilters)
 
 	SaaSProductSortBy_EntityId = SaaSProductSortBy.AddMember("EntityId", smithyprelude.Unit)
 
@@ -3560,6 +3760,12 @@ func init() {
 
 	ResaleAuthorizationSortBy_LastModifiedDate = ResaleAuthorizationSortBy.AddMember("LastModifiedDate", smithyprelude.Unit)
 
+	ResaleAuthorizationSortBy_ResellerRole = ResaleAuthorizationSortBy.AddMember("ResellerRole", smithyprelude.Unit)
+
+	ResaleAuthorizationSortBy_SourceAuthorization = ResaleAuthorizationSortBy.AddMember("SourceAuthorization", smithyprelude.Unit)
+
+	ResaleAuthorizationSortBy_IssuerAccountId = ResaleAuthorizationSortBy.AddMember("IssuerAccountId", smithyprelude.Unit)
+
 	ResaleAuthorizationSort_SortBy = ResaleAuthorizationSort.AddMember("SortBy", ResaleAuthorizationSortBy)
 
 	ResaleAuthorizationSort_SortOrder = ResaleAuthorizationSort.AddMember("SortOrder", SortOrder)
@@ -3592,6 +3798,18 @@ func init() {
 
 	OfferSetSort_SortOrder = OfferSetSort.AddMember("SortOrder", SortOrder)
 
+	ExpressPrivateOfferConfigurationSortBy_EntityId = ExpressPrivateOfferConfigurationSortBy.AddMember("EntityId", smithyprelude.Unit)
+
+	ExpressPrivateOfferConfigurationSortBy_LastModifiedDate = ExpressPrivateOfferConfigurationSortBy.AddMember("LastModifiedDate", smithyprelude.Unit)
+
+	ExpressPrivateOfferConfigurationSortBy_ProductId = ExpressPrivateOfferConfigurationSortBy.AddMember("ProductId", smithyprelude.Unit)
+
+	ExpressPrivateOfferConfigurationSortBy_State = ExpressPrivateOfferConfigurationSortBy.AddMember("State", smithyprelude.Unit)
+
+	ExpressPrivateOfferConfigurationSort_SortBy = ExpressPrivateOfferConfigurationSort.AddMember("SortBy", ExpressPrivateOfferConfigurationSortBy)
+
+	ExpressPrivateOfferConfigurationSort_SortOrder = ExpressPrivateOfferConfigurationSort.AddMember("SortOrder", SortOrder)
+
 	EntityTypeSort_DataProductSort = EntityTypeSort.AddMember("DataProductSort", DataProductSort)
 
 	EntityTypeSort_SaaSProductSort = EntityTypeSort.AddMember("SaaSProductSort", SaaSProductSort)
@@ -3607,6 +3825,8 @@ func init() {
 	EntityTypeSort_MachineLearningProductSort = EntityTypeSort.AddMember("MachineLearningProductSort", MachineLearningProductSort)
 
 	EntityTypeSort_OfferSetSort = EntityTypeSort.AddMember("OfferSetSort", OfferSetSort)
+
+	EntityTypeSort_ExpressPrivateOfferConfigurationSort = EntityTypeSort.AddMember("ExpressPrivateOfferConfigurationSort", ExpressPrivateOfferConfigurationSort)
 
 	_Errors_key = _Errors.AddMember("key", _EntityId)
 

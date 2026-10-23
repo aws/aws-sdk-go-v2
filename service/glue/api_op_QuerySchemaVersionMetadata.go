@@ -4,7 +4,9 @@ package glue
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/glue/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/glue/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -50,6 +52,35 @@ type QuerySchemaVersionMetadataInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *QuerySchemaVersionMetadataInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.QuerySchemaVersionMetadataInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *QuerySchemaVersionMetadataInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.QuerySchemaVersionMetadataInput_MaxResults, *v.MaxResults)
+	}
+	serializeMetadataList(s, schemas.QuerySchemaVersionMetadataInput_MetadataList, v.MetadataList)
+	if v.NextToken != nil {
+		s.WriteString(schemas.QuerySchemaVersionMetadataInput_NextToken, *v.NextToken)
+	}
+	if v.SchemaId != nil {
+		s.WriteStruct(schemas.QuerySchemaVersionMetadataInput_SchemaId)
+		v.SchemaId.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SchemaVersionId != nil {
+		s.WriteString(schemas.QuerySchemaVersionMetadataInput_SchemaVersionId, *v.SchemaVersionId)
+	}
+	if v.SchemaVersionNumber != nil {
+		s.WriteStruct(schemas.QuerySchemaVersionMetadataInput_SchemaVersionNumber)
+		v.SchemaVersionNumber.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type QuerySchemaVersionMetadataOutput struct {
 
 	// A map of a metadata key and associated values.
@@ -68,13 +99,41 @@ type QuerySchemaVersionMetadataOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *QuerySchemaVersionMetadataOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.QuerySchemaVersionMetadataResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *QuerySchemaVersionMetadataOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeMetadataInfoMap(s, schemas.QuerySchemaVersionMetadataResponse_MetadataInfoMap, v.MetadataInfoMap)
+	if v.NextToken != nil {
+		s.WriteString(schemas.QuerySchemaVersionMetadataResponse_NextToken, *v.NextToken)
+	}
+	if v.SchemaVersionId != nil {
+		s.WriteString(schemas.QuerySchemaVersionMetadataResponse_SchemaVersionId, *v.SchemaVersionId)
+	}
+}
+func (v *QuerySchemaVersionMetadataOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.QuerySchemaVersionMetadataResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.QuerySchemaVersionMetadataResponse_MetadataInfoMap:
+			return deserializeMetadataInfoMap(d, schemas.QuerySchemaVersionMetadataResponse_MetadataInfoMap, &v.MetadataInfoMap)
+		case schemas.QuerySchemaVersionMetadataResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.QuerySchemaVersionMetadataResponse_NextToken, v.NextToken)
+		case schemas.QuerySchemaVersionMetadataResponse_SchemaVersionId:
+			v.SchemaVersionId = new(string)
+			return d.ReadString(schemas.QuerySchemaVersionMetadataResponse_SchemaVersionId, v.SchemaVersionId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationQuerySchemaVersionMetadataMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpQuerySchemaVersionMetadata{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.QuerySchemaVersionMetadata, schemas.QuerySchemaVersionMetadataInput, schemas.QuerySchemaVersionMetadataResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpQuerySchemaVersionMetadata{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.QuerySchemaVersionMetadata, schemas.QuerySchemaVersionMetadataInput, schemas.QuerySchemaVersionMetadataResponse), output: &QuerySchemaVersionMetadataOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

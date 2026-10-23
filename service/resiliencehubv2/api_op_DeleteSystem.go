@@ -4,6 +4,8 @@ package resiliencehubv2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/resiliencehubv2/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -33,6 +35,18 @@ type DeleteSystemInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteSystemInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteSystemRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteSystemInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SystemArn != nil {
+		s.WriteString(schemas.DeleteSystemRequest_systemArn, *v.SystemArn)
+	}
+}
+
 type DeleteSystemOutput struct {
 
 	// ARN identifier.
@@ -46,13 +60,32 @@ type DeleteSystemOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteSystemOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteSystemResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteSystemOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SystemArn != nil {
+		s.WriteString(schemas.DeleteSystemResponse_systemArn, *v.SystemArn)
+	}
+}
+func (v *DeleteSystemOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteSystemResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteSystemResponse_systemArn:
+			v.SystemArn = new(string)
+			return d.ReadString(schemas.DeleteSystemResponse_systemArn, v.SystemArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteSystemMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteSystem{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteSystem, schemas.DeleteSystemRequest, schemas.DeleteSystemResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteSystem{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteSystem, schemas.DeleteSystemRequest, schemas.DeleteSystemResponse), output: &DeleteSystemOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

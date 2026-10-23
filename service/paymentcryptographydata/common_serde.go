@@ -343,6 +343,12 @@ func serializePinVerificationAttributes(s smithy.ShapeSerializer, schema *smithy
 
 func serializeReEncryptionAttributes(s smithy.ShapeSerializer, schema *smithy.Schema, v types.ReEncryptionAttributes) {
 	switch vv := v.(type) {
+	case *types.ReEncryptionAttributesMemberAsymmetric:
+		s.WriteUnion(schema, schemas.ReEncryptionAttributes_Asymmetric)
+		s.WriteStruct(schemas.ReEncryptionAttributes_Asymmetric)
+		vv.Value.SerializeMembers(s)
+		s.CloseStruct()
+		s.CloseUnion()
 	case *types.ReEncryptionAttributesMemberDukpt:
 		s.WriteUnion(schema, schemas.ReEncryptionAttributes_Dukpt)
 		s.WriteStruct(schemas.ReEncryptionAttributes_Dukpt)
@@ -753,6 +759,10 @@ func deserializePinVerificationAttributes(d smithy.ShapeDeserializer, s *smithy.
 func deserializeReEncryptionAttributes(d smithy.ShapeDeserializer, s *smithy.Schema, v *types.ReEncryptionAttributes) error {
 	return smithy.ReadUnion(d, s, func(ms *smithy.Schema) error {
 		switch ms {
+		case schemas.ReEncryptionAttributes_Asymmetric:
+			vv := &types.ReEncryptionAttributesMemberAsymmetric{}
+			*v = vv
+			return vv.Deserialize(d)
 		case schemas.ReEncryptionAttributes_Dukpt:
 			vv := &types.ReEncryptionAttributesMemberDukpt{}
 			*v = vv
@@ -875,6 +885,14 @@ func deserializeValidationExceptionFieldList(d smithy.ShapeDeserializer, s *smit
 	*v = make([]types.ValidationExceptionField, 0)
 	var vv types.ValidationExceptionField
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.ValidationExceptionField
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = types.ValidationExceptionField{}
 		if err := vv.Deserialize(d); err != nil {
 			return err

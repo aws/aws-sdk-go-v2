@@ -4,7 +4,9 @@ package applicationinsights
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/applicationinsights/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/applicationinsights/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -38,6 +40,21 @@ type DescribeProblemInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeProblemInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeProblemRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeProblemInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountId != nil {
+		s.WriteString(schemas.DescribeProblemRequest_AccountId, *v.AccountId)
+	}
+	if v.ProblemId != nil {
+		s.WriteString(schemas.DescribeProblemRequest_ProblemId, *v.ProblemId)
+	}
+}
+
 type DescribeProblemOutput struct {
 
 	// Information about the problem.
@@ -52,13 +69,40 @@ type DescribeProblemOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeProblemOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeProblemResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeProblemOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Problem != nil {
+		s.WriteStruct(schemas.DescribeProblemResponse_Problem)
+		v.Problem.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SNSNotificationArn != nil {
+		s.WriteString(schemas.DescribeProblemResponse_SNSNotificationArn, *v.SNSNotificationArn)
+	}
+}
+func (v *DescribeProblemOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeProblemResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeProblemResponse_Problem:
+			v.Problem = &types.Problem{}
+			return v.Problem.Deserialize(d)
+		case schemas.DescribeProblemResponse_SNSNotificationArn:
+			v.SNSNotificationArn = new(string)
+			return d.ReadString(schemas.DescribeProblemResponse_SNSNotificationArn, v.SNSNotificationArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeProblemMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpDescribeProblem{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeProblem, schemas.DescribeProblemRequest, schemas.DescribeProblemResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpDescribeProblem{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeProblem, schemas.DescribeProblemRequest, schemas.DescribeProblemResponse), output: &DescribeProblemOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

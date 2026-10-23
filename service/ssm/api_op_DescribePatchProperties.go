@@ -5,7 +5,9 @@ package ssm
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/ssm/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ssm/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -82,6 +84,30 @@ type DescribePatchPropertiesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribePatchPropertiesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribePatchPropertiesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribePatchPropertiesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.DescribePatchPropertiesRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribePatchPropertiesRequest_NextToken, *v.NextToken)
+	}
+	if v.OperatingSystem != "" {
+		s.WriteString(schemas.DescribePatchPropertiesRequest_OperatingSystem, string(v.OperatingSystem))
+	}
+	if v.PatchSet != "" {
+		s.WriteString(schemas.DescribePatchPropertiesRequest_PatchSet, string(v.PatchSet))
+	}
+	if v.Property != "" {
+		s.WriteString(schemas.DescribePatchPropertiesRequest_Property, string(v.Property))
+	}
+}
+
 type DescribePatchPropertiesOutput struct {
 
 	// The token for the next set of items to return. (You use this token in the next
@@ -97,13 +123,35 @@ type DescribePatchPropertiesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribePatchPropertiesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribePatchPropertiesResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribePatchPropertiesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribePatchPropertiesResult_NextToken, *v.NextToken)
+	}
+	serializePatchPropertiesList(s, schemas.DescribePatchPropertiesResult_Properties, v.Properties)
+}
+func (v *DescribePatchPropertiesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribePatchPropertiesResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribePatchPropertiesResult_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.DescribePatchPropertiesResult_NextToken, v.NextToken)
+		case schemas.DescribePatchPropertiesResult_Properties:
+			return deserializePatchPropertiesList(d, schemas.DescribePatchPropertiesResult_Properties, &v.Properties)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribePatchPropertiesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribePatchProperties{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribePatchProperties, schemas.DescribePatchPropertiesRequest, schemas.DescribePatchPropertiesResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribePatchProperties{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribePatchProperties, schemas.DescribePatchPropertiesRequest, schemas.DescribePatchPropertiesResult), output: &DescribePatchPropertiesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

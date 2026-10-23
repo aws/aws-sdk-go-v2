@@ -4,6 +4,8 @@ package mediaconnect
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/mediaconnect/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -33,6 +35,18 @@ type DeleteBridgeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteBridgeInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteBridgeRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteBridgeInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BridgeArn != nil {
+		s.WriteString(schemas.DeleteBridgeRequest_BridgeArn, *v.BridgeArn)
+	}
+}
+
 type DeleteBridgeOutput struct {
 
 	//  The ARN of the deleted bridge.
@@ -44,13 +58,32 @@ type DeleteBridgeOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteBridgeOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteBridgeResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteBridgeOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BridgeArn != nil {
+		s.WriteString(schemas.DeleteBridgeResponse_BridgeArn, *v.BridgeArn)
+	}
+}
+func (v *DeleteBridgeOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteBridgeResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteBridgeResponse_BridgeArn:
+			v.BridgeArn = new(string)
+			return d.ReadString(schemas.DeleteBridgeResponse_BridgeArn, v.BridgeArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteBridgeMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteBridge{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteBridge, schemas.DeleteBridgeRequest, schemas.DeleteBridgeResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteBridge{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteBridge, schemas.DeleteBridgeRequest, schemas.DeleteBridgeResponse), output: &DeleteBridgeOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

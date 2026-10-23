@@ -4,7 +4,9 @@ package quicksight
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/quicksight/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/quicksight/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -48,6 +50,28 @@ type UpdateLimitsProfileInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateLimitsProfileInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateLimitsProfileRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateLimitsProfileInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountId != nil {
+		s.WriteString(schemas.UpdateLimitsProfileRequest_accountId, *v.AccountId)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateLimitsProfileRequest_description, *v.Description)
+	}
+	if v.ProfileId != nil {
+		s.WriteString(schemas.UpdateLimitsProfileRequest_profileId, *v.ProfileId)
+	}
+	if v.ProfileName != nil {
+		s.WriteString(schemas.UpdateLimitsProfileRequest_profileName, *v.ProfileName)
+	}
+	serializeResourceLimitsMap(s, schemas.UpdateLimitsProfileRequest_resourceLimits, v.ResourceLimits)
+}
+
 type UpdateLimitsProfileOutput struct {
 
 	// The Amazon Resource Name (ARN) of the updated limits profile.
@@ -61,13 +85,32 @@ type UpdateLimitsProfileOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateLimitsProfileOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateLimitsProfileResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateLimitsProfileOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.UpdateLimitsProfileResponse_arn, *v.Arn)
+	}
+}
+func (v *UpdateLimitsProfileOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateLimitsProfileResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateLimitsProfileResponse_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.UpdateLimitsProfileResponse_arn, v.Arn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateLimitsProfileMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateLimitsProfile{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateLimitsProfile, schemas.UpdateLimitsProfileRequest, schemas.UpdateLimitsProfileResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateLimitsProfile{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateLimitsProfile, schemas.UpdateLimitsProfileRequest, schemas.UpdateLimitsProfileResponse), output: &UpdateLimitsProfileOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -5,7 +5,9 @@ package resiliencehub
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/resiliencehub/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/resiliencehub/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -78,6 +80,70 @@ type ListAppsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAppsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAppsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAppsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AppArn != nil {
+		s.WriteString(schemas.ListAppsRequest_appArn, *v.AppArn)
+	}
+	if v.AwsApplicationArn != nil {
+		s.WriteString(schemas.ListAppsRequest_awsApplicationArn, *v.AwsApplicationArn)
+	}
+	if v.FromLastAssessmentTime != nil {
+		s.WriteTime(schemas.ListAppsRequest_fromLastAssessmentTime, *v.FromLastAssessmentTime)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListAppsRequest_maxResults, *v.MaxResults)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.ListAppsRequest_name, *v.Name)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAppsRequest_nextToken, *v.NextToken)
+	}
+	if v.ReverseOrder != nil {
+		s.WriteBool(schemas.ListAppsRequest_reverseOrder, *v.ReverseOrder)
+	}
+	if v.ToLastAssessmentTime != nil {
+		s.WriteTime(schemas.ListAppsRequest_toLastAssessmentTime, *v.ToLastAssessmentTime)
+	}
+}
+func (v *ListAppsInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListAppsRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListAppsRequest_appArn:
+			v.AppArn = new(string)
+			return d.ReadString(schemas.ListAppsRequest_appArn, v.AppArn)
+		case schemas.ListAppsRequest_awsApplicationArn:
+			v.AwsApplicationArn = new(string)
+			return d.ReadString(schemas.ListAppsRequest_awsApplicationArn, v.AwsApplicationArn)
+		case schemas.ListAppsRequest_fromLastAssessmentTime:
+			v.FromLastAssessmentTime = new(time.Time)
+			return d.ReadTime(schemas.ListAppsRequest_fromLastAssessmentTime, v.FromLastAssessmentTime)
+		case schemas.ListAppsRequest_maxResults:
+			v.MaxResults = new(int32)
+			return d.ReadInt32(schemas.ListAppsRequest_maxResults, v.MaxResults)
+		case schemas.ListAppsRequest_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.ListAppsRequest_name, v.Name)
+		case schemas.ListAppsRequest_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListAppsRequest_nextToken, v.NextToken)
+		case schemas.ListAppsRequest_reverseOrder:
+			v.ReverseOrder = new(bool)
+			return d.ReadBool(schemas.ListAppsRequest_reverseOrder, v.ReverseOrder)
+		case schemas.ListAppsRequest_toLastAssessmentTime:
+			v.ToLastAssessmentTime = new(time.Time)
+			return d.ReadTime(schemas.ListAppsRequest_toLastAssessmentTime, v.ToLastAssessmentTime)
+		}
+		return nil
+	})
+}
+
 type ListAppsOutput struct {
 
 	// Summaries for the Resilience Hub application.
@@ -94,13 +160,35 @@ type ListAppsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAppsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAppsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAppsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAppSummaryList(s, schemas.ListAppsResponse_appSummaries, v.AppSummaries)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAppsResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListAppsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListAppsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListAppsResponse_appSummaries:
+			return deserializeAppSummaryList(d, schemas.ListAppsResponse_appSummaries, &v.AppSummaries)
+		case schemas.ListAppsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListAppsResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListAppsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListApps{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListApps, schemas.ListAppsRequest, schemas.ListAppsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListApps{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListApps, schemas.ListAppsRequest, schemas.ListAppsResponse), output: &ListAppsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

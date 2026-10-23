@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: OvertureService.CreateResiliencyGroup
+
+{"resiliencyGroup":{"ownerAccount":"__OwnerAccount__","resiliencyGroupArn":"__ResiliencyGroupArn__","resiliencyGroupId":"__ResiliencyGroupId__","resiliencyGroupName":"__ResiliencyGroupName__","resiliencyGroupType":"Managed","state":"pending","tags":[{"key":"__Key__","value":"__Value__"},{"key":"__Key__","value":"__Value__"}]}}

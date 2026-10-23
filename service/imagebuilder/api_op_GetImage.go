@@ -4,11 +4,13 @@ package imagebuilder
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/imagebuilder/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/imagebuilder/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
-// Gets an image.
+// Retrieves an image.
 func (c *Client) GetImage(ctx context.Context, params *GetImageInput, optFns ...func(*Options)) (*GetImageOutput, error) {
 	if params == nil {
 		params = &GetImageInput{}
@@ -26,7 +28,13 @@ func (c *Client) GetImage(ctx context.Context, params *GetImageInput, optFns ...
 
 type GetImageInput struct {
 
-	// The Amazon Resource Name (ARN) of the image that you want to get.
+	// The Amazon Resource Name (ARN) of the image that you want to get. You can
+	// specify a full build version ARN, or a version ARN with or without wildcards (
+	// x.x.x , 1.x.x , or 1.0.x ). A version or wildcard ARN resolves to the latest
+	// matching build version that has reached AVAILABLE status. Builds that were
+	// later deprecated, disabled, or deleted don't resolve. To get an image in any
+	// other state, such as a failed or in-progress build, specify the full build
+	// version ARN.
 	//
 	// This member is required.
 	ImageBuildVersionArn *string
@@ -34,12 +42,26 @@ type GetImageInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetImageInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetImageRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetImageInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ImageBuildVersionArn != nil {
+		s.WriteString(schemas.GetImageRequest_imageBuildVersionArn, *v.ImageBuildVersionArn)
+	}
+}
+
 type GetImageOutput struct {
 
 	// The image object.
 	Image *types.Image
 
-	// The resource ARNs with different wildcard variations of semantic versioning.
+	// A set of wildcard version ARNs that always reference the latest version of the
+	// resource. ARNs are included for the latest version overall, and for the latest
+	// versions within the same major, minor, and patch levels.
 	LatestVersionReferences *types.LatestVersionReferences
 
 	// The request ID that uniquely identifies this request.
@@ -51,13 +73,48 @@ type GetImageOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetImageOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetImageResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetImageOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Image != nil {
+		s.WriteStruct(schemas.GetImageResponse_image)
+		v.Image.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.LatestVersionReferences != nil {
+		s.WriteStruct(schemas.GetImageResponse_latestVersionReferences)
+		v.LatestVersionReferences.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RequestId != nil {
+		s.WriteString(schemas.GetImageResponse_requestId, *v.RequestId)
+	}
+}
+func (v *GetImageOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetImageResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetImageResponse_image:
+			v.Image = &types.Image{}
+			return v.Image.Deserialize(d)
+		case schemas.GetImageResponse_latestVersionReferences:
+			v.LatestVersionReferences = &types.LatestVersionReferences{}
+			return v.LatestVersionReferences.Deserialize(d)
+		case schemas.GetImageResponse_requestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.GetImageResponse_requestId, v.RequestId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetImageMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetImage{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetImage, schemas.GetImageRequest, schemas.GetImageResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetImage{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetImage, schemas.GetImageRequest, schemas.GetImageResponse), output: &GetImageOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

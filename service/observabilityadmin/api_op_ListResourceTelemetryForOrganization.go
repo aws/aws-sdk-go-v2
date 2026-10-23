@@ -51,8 +51,20 @@ type ListResourceTelemetryForOrganizationInput struct {
 	ResourceTags map[string]string
 
 	//  A list of resource types used to filter resources in the organization. If this
-	// parameter is provided, the resources will be returned in the same order used in
-	// the request.
+	// parameter is provided, the service returns the resources in the same order as
+	// specified in the request. Currently supported resource types for discovery are:
+	//
+	//   - AWS::EC2::Instance
+	//
+	//   - AWS::EC2::VPC
+	//
+	//   - AWS::Lambda::Function
+	//
+	//   - AWS::EKS::Cluster
+	//
+	//   - AWS::WAFv2::WebACL
+	//
+	//   - AWS::ElasticLoadBalancingV2::LoadBalancer (Network Load Balancers only)
 	ResourceTypes []types.ResourceType
 
 	//  A key-value pair to filter resources in the organization based on the

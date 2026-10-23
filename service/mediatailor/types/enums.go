@@ -112,6 +112,7 @@ const (
 	AdsInteractionExcludeEventTypeInterstitialVodFailure                       AdsInteractionExcludeEventType = "INTERSTITIAL_VOD_FAILURE"
 	AdsInteractionExcludeEventTypePreAdsRequestHookError                       AdsInteractionExcludeEventType = "PRE_ADS_REQUEST_HOOK_ERROR"
 	AdsInteractionExcludeEventTypePreAdsRequestFunctionError                   AdsInteractionExcludeEventType = "PRE_ADS_REQUEST_FUNCTION_ERROR"
+	AdsInteractionExcludeEventTypeBeaconReceived                               AdsInteractionExcludeEventType = "BEACON_RECEIVED"
 	AdsInteractionExcludeEventTypePostAdsResponseHookError                     AdsInteractionExcludeEventType = "POST_ADS_RESPONSE_HOOK_ERROR"
 	AdsInteractionExcludeEventTypePostAdsResponseFunctionError                 AdsInteractionExcludeEventType = "POST_ADS_RESPONSE_FUNCTION_ERROR"
 	AdsInteractionExcludeEventTypePreManifestInsertionHookError                AdsInteractionExcludeEventType = "PRE_MANIFEST_INSERTION_HOOK_ERROR"
@@ -168,6 +169,7 @@ func (AdsInteractionExcludeEventType) Values() []AdsInteractionExcludeEventType 
 		"INTERSTITIAL_VOD_FAILURE",
 		"PRE_ADS_REQUEST_HOOK_ERROR",
 		"PRE_ADS_REQUEST_FUNCTION_ERROR",
+		"BEACON_RECEIVED",
 		"POST_ADS_RESPONSE_HOOK_ERROR",
 		"POST_ADS_RESPONSE_FUNCTION_ERROR",
 		"PRE_MANIFEST_INSERTION_HOOK_ERROR",
@@ -253,6 +255,29 @@ func (ApsRegion) Values() []ApsRegion {
 	}
 }
 
+type BeaconEventType string
+
+// Enum values for BeaconEventType
+const (
+	BeaconEventTypeMute   BeaconEventType = "MUTE"
+	BeaconEventTypeUnmute BeaconEventType = "UNMUTE"
+	BeaconEventTypePause  BeaconEventType = "PAUSE"
+	BeaconEventTypeSkip   BeaconEventType = "SKIP"
+)
+
+// Values returns all known values for BeaconEventType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (BeaconEventType) Values() []BeaconEventType {
+	return []BeaconEventType{
+		"MUTE",
+		"UNMUTE",
+		"PAUSE",
+		"SKIP",
+	}
+}
+
 type ChannelState string
 
 // Enum values for ChannelState
@@ -269,6 +294,28 @@ func (ChannelState) Values() []ChannelState {
 	return []ChannelState{
 		"RUNNING",
 		"STOPPED",
+	}
+}
+
+type ClientSideBeaconingMode string
+
+// Enum values for ClientSideBeaconingMode
+const (
+	// Tracking response returned unmodified.
+	ClientSideBeaconingModeDisabled ClientSideBeaconingMode = "DISABLED"
+	// EMT beacon URLs added alongside the ad server's. Effective default when
+	// BeaconingConfiguration is absent.
+	ClientSideBeaconingModeInsights ClientSideBeaconingMode = "INSIGHTS"
+)
+
+// Values returns all known values for ClientSideBeaconingMode. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ClientSideBeaconingMode) Values() []ClientSideBeaconingMode {
+	return []ClientSideBeaconingMode{
+		"DISABLED",
+		"INSIGHTS",
 	}
 }
 

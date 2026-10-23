@@ -4,7 +4,9 @@ package databrew
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/databrew/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/databrew/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -48,6 +50,23 @@ type CreateRecipeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateRecipeInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateRecipeRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateRecipeInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.CreateRecipeRequest_Description, *v.Description)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateRecipeRequest_Name, *v.Name)
+	}
+	serializeRecipeStepList(s, schemas.CreateRecipeRequest_Steps, v.Steps)
+	serializeTagMap(s, schemas.CreateRecipeRequest_Tags, v.Tags)
+}
+
 type CreateRecipeOutput struct {
 
 	// The name of the recipe that you created.
@@ -61,13 +80,32 @@ type CreateRecipeOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateRecipeOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateRecipeResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateRecipeOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.CreateRecipeResponse_Name, *v.Name)
+	}
+}
+func (v *CreateRecipeOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateRecipeResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateRecipeResponse_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.CreateRecipeResponse_Name, v.Name)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateRecipeMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateRecipe{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateRecipe, schemas.CreateRecipeRequest, schemas.CreateRecipeResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateRecipe{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateRecipe, schemas.CreateRecipeRequest, schemas.CreateRecipeResponse), output: &CreateRecipeOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

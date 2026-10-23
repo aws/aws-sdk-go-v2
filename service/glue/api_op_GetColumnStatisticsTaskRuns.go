@@ -5,7 +5,9 @@ package glue
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/glue/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/glue/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -37,6 +39,10 @@ type GetColumnStatisticsTaskRunsInput struct {
 	// This member is required.
 	TableName *string
 
+	// The ID of the Data Catalog where the table resides. If none is supplied, the
+	// Amazon Web Services account ID is used by default.
+	CatalogID *string
+
 	// The maximum size of the response.
 	MaxResults *int32
 
@@ -44,6 +50,30 @@ type GetColumnStatisticsTaskRunsInput struct {
 	NextToken *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetColumnStatisticsTaskRunsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetColumnStatisticsTaskRunsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetColumnStatisticsTaskRunsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CatalogID != nil {
+		s.WriteString(schemas.GetColumnStatisticsTaskRunsRequest_CatalogID, *v.CatalogID)
+	}
+	if v.DatabaseName != nil {
+		s.WriteString(schemas.GetColumnStatisticsTaskRunsRequest_DatabaseName, *v.DatabaseName)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.GetColumnStatisticsTaskRunsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetColumnStatisticsTaskRunsRequest_NextToken, *v.NextToken)
+	}
+	if v.TableName != nil {
+		s.WriteString(schemas.GetColumnStatisticsTaskRunsRequest_TableName, *v.TableName)
+	}
 }
 
 type GetColumnStatisticsTaskRunsOutput struct {
@@ -60,13 +90,35 @@ type GetColumnStatisticsTaskRunsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetColumnStatisticsTaskRunsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetColumnStatisticsTaskRunsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetColumnStatisticsTaskRunsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeColumnStatisticsTaskRunsList(s, schemas.GetColumnStatisticsTaskRunsResponse_ColumnStatisticsTaskRuns, v.ColumnStatisticsTaskRuns)
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetColumnStatisticsTaskRunsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *GetColumnStatisticsTaskRunsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetColumnStatisticsTaskRunsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetColumnStatisticsTaskRunsResponse_ColumnStatisticsTaskRuns:
+			return deserializeColumnStatisticsTaskRunsList(d, schemas.GetColumnStatisticsTaskRunsResponse_ColumnStatisticsTaskRuns, &v.ColumnStatisticsTaskRuns)
+		case schemas.GetColumnStatisticsTaskRunsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.GetColumnStatisticsTaskRunsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetColumnStatisticsTaskRunsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetColumnStatisticsTaskRuns{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetColumnStatisticsTaskRuns, schemas.GetColumnStatisticsTaskRunsRequest, schemas.GetColumnStatisticsTaskRunsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetColumnStatisticsTaskRuns{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetColumnStatisticsTaskRuns, schemas.GetColumnStatisticsTaskRunsRequest, schemas.GetColumnStatisticsTaskRunsResponse), output: &GetColumnStatisticsTaskRunsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

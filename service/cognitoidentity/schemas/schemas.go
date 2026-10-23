@@ -202,7 +202,8 @@ var _CognitoIdentityProviderTokenCheck = smithy.NewSchema(smithy.ShapeID{
 var ConcurrentModificationException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cognitoidentity",
 	Name:      "ConcurrentModificationException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var ConcurrentModificationException_message *smithy.Schema
 
 var Credentials = smithy.NewSchema(smithy.ShapeID{
@@ -230,7 +231,8 @@ var _DeveloperProviderName = smithy.NewSchema(smithy.ShapeID{
 var DeveloperUserAlreadyRegisteredException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cognitoidentity",
 	Name:      "DeveloperUserAlreadyRegisteredException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var DeveloperUserAlreadyRegisteredException_message *smithy.Schema
 
 var _DeveloperUserIdentifier = smithy.NewSchema(smithy.ShapeID{
@@ -255,7 +257,8 @@ var ErrorCode_INTERNAL_SERVER_ERROR *smithy.Schema
 var ExternalServiceException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cognitoidentity",
 	Name:      "ExternalServiceException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var ExternalServiceException_message *smithy.Schema
 
 var _HideDisabled = smithy.NewSchema(smithy.ShapeID{
@@ -361,25 +364,28 @@ var _IdentityProviderToken = smithy.NewSchema(smithy.ShapeID{
 var InternalErrorException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cognitoidentity",
 	Name:      "InternalErrorException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"})
 var InternalErrorException_message *smithy.Schema
 
 var InvalidIdentityPoolConfigurationException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cognitoidentity",
 	Name:      "InvalidIdentityPoolConfigurationException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var InvalidIdentityPoolConfigurationException_message *smithy.Schema
 
 var InvalidParameterException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cognitoidentity",
 	Name:      "InvalidParameterException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var InvalidParameterException_message *smithy.Schema
 
 var LimitExceededException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cognitoidentity",
 	Name:      "LimitExceededException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var LimitExceededException_message *smithy.Schema
 
 var _LoginsList = smithy.NewSchema(smithy.ShapeID{
@@ -429,7 +435,8 @@ var _MappingRulesList_member *smithy.Schema
 var NotAuthorizedException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cognitoidentity",
 	Name:      "NotAuthorizedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 403})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 403})
 var NotAuthorizedException_message *smithy.Schema
 
 var _OIDCProviderList = smithy.NewSchema(smithy.ShapeID{
@@ -474,13 +481,15 @@ var _QueryLimit = smithy.NewSchema(smithy.ShapeID{
 var ResourceConflictException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cognitoidentity",
 	Name:      "ResourceConflictException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 409})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 409})
 var ResourceConflictException_message *smithy.Schema
 
 var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cognitoidentity",
 	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 404})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 404})
 var ResourceNotFoundException_message *smithy.Schema
 
 var RoleMapping = smithy.NewSchema(smithy.ShapeID{
@@ -567,7 +576,8 @@ var _TokenDuration = smithy.NewSchema(smithy.ShapeID{
 var TooManyRequestsException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cognitoidentity",
 	Name:      "TooManyRequestsException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 429})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 429})
 var TooManyRequestsException_message *smithy.Schema
 
 var UnprocessedIdentityId = smithy.NewSchema(smithy.ShapeID{

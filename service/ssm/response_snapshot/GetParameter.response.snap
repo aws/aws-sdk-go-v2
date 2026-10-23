@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AmazonSSM.GetParameter
+
+{"Parameter":{"ARN":"__ARN__","DataType":"__DataType__","LastModifiedDate":946684800,"Name":"__Name__","Selector":"__Selector__","SourceResult":"__SourceResult__","Type":"String","Value":"__Value__","Version":1}}

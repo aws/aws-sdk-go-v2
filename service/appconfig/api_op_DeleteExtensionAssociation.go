@@ -4,6 +4,8 @@ package appconfig
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/appconfig/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -34,6 +36,18 @@ type DeleteExtensionAssociationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteExtensionAssociationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteExtensionAssociationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteExtensionAssociationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ExtensionAssociationId != nil {
+		s.WriteString(schemas.DeleteExtensionAssociationRequest_ExtensionAssociationId, *v.ExtensionAssociationId)
+	}
+}
+
 type DeleteExtensionAssociationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -41,13 +55,26 @@ type DeleteExtensionAssociationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteExtensionAssociationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteExtensionAssociationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteExtensionAssociationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteExtensionAssociationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteExtensionAssociation{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteExtensionAssociation, schemas.DeleteExtensionAssociationRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteExtensionAssociation{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteExtensionAssociation, schemas.DeleteExtensionAssociationRequest, nil), output: &DeleteExtensionAssociationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

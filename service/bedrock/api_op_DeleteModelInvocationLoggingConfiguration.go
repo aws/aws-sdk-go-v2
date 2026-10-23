@@ -4,6 +4,8 @@ package bedrock
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/bedrock/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -27,6 +29,15 @@ type DeleteModelInvocationLoggingConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteModelInvocationLoggingConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteModelInvocationLoggingConfigurationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteModelInvocationLoggingConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+
 type DeleteModelInvocationLoggingConfigurationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -34,13 +45,26 @@ type DeleteModelInvocationLoggingConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteModelInvocationLoggingConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteModelInvocationLoggingConfigurationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteModelInvocationLoggingConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteModelInvocationLoggingConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteModelInvocationLoggingConfigurationResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteModelInvocationLoggingConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteModelInvocationLoggingConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteModelInvocationLoggingConfiguration, schemas.DeleteModelInvocationLoggingConfigurationRequest, schemas.DeleteModelInvocationLoggingConfigurationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteModelInvocationLoggingConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteModelInvocationLoggingConfiguration, schemas.DeleteModelInvocationLoggingConfigurationRequest, schemas.DeleteModelInvocationLoggingConfigurationResponse), output: &DeleteModelInvocationLoggingConfigurationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

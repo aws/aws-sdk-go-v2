@@ -1,5 +1,6 @@
 200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: PerformanceInsightsv20180227.ListPerformanceAnalysisReportRecommendations
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"NextToken":"__NextToken__","Recommendations":[{"RecommendationDescription":"__RecommendationDescription__","RecommendationDetails":"__RecommendationDetails__","RecommendationId":"__RecommendationId__"},{"RecommendationDescription":"__RecommendationDescription__","RecommendationDetails":"__RecommendationDetails__","RecommendationId":"__RecommendationId__"}]}
+¿iNextTokenm__NextToken__oRecommendationsŸ¿xRecommendationDescriptionx__RecommendationDescription__uRecommendationDetailsx__RecommendationDetails__pRecommendationIdt__RecommendationId__ÿ¿xRecommendationDescriptionx__RecommendationDescription__uRecommendationDetailsx__RecommendationDetails__pRecommendationIdt__RecommendationId__ÿÿÿ

@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: AWSStepFunctions.TestState
+
+{"cause":"__Cause__","error":"__Error__","inspectionData":{"afterArguments":"__AfterArguments__","afterInputPath":"__AfterInputPath__","afterItemBatcher":"__AfterItemBatcher__","afterItemSelector":"__AfterItemSelector__","afterItemsPath":"__AfterItemsPath__","afterItemsPointer":"__AfterItemsPointer__","afterParameters":"__AfterParameters__","afterResultPath":"__AfterResultPath__","afterResultSelector":"__AfterResultSelector__","errorDetails":{"catchIndex":1,"retryBackoffIntervalSeconds":1,"retryIndex":1},"input":"__Input__","maxConcurrency":1,"request":{"body":"__Body__","headers":"__Headers__","method":"__Method__","protocol":"__Protocol__","url":"__Url__"},"response":{"body":"__Body__","headers":"__Headers__","protocol":"__Protocol__","statusCode":"__StatusCode__","statusMessage":"__StatusMessage__"},"result":"__Result__","toleratedFailureCount":1,"toleratedFailurePercentage":1,"variables":"__Variables__"},"nextState":"__NextState__","output":"__Output__","status":"SUCCEEDED"}

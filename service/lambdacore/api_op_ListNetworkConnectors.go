@@ -5,7 +5,9 @@ package lambdacore
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/lambdacore/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lambdacore/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -47,6 +49,24 @@ type ListNetworkConnectorsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListNetworkConnectorsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListNetworkConnectorsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListNetworkConnectorsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Marker != nil {
+		s.WriteString(schemas.ListNetworkConnectorsRequest_Marker, *v.Marker)
+	}
+	if v.MaxItems != nil {
+		s.WriteInt32(schemas.ListNetworkConnectorsRequest_MaxItems, *v.MaxItems)
+	}
+	if v.State != "" {
+		s.WriteString(schemas.ListNetworkConnectorsRequest_State, string(v.State))
+	}
+}
+
 type ListNetworkConnectorsOutput struct {
 
 	// A list of network connector summaries for the current page of results.
@@ -64,13 +84,35 @@ type ListNetworkConnectorsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListNetworkConnectorsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListNetworkConnectorsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListNetworkConnectorsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeNetworkConnectorsList(s, schemas.ListNetworkConnectorsResponse_NetworkConnectors, v.NetworkConnectors)
+	if v.NextMarker != nil {
+		s.WriteString(schemas.ListNetworkConnectorsResponse_NextMarker, *v.NextMarker)
+	}
+}
+func (v *ListNetworkConnectorsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListNetworkConnectorsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListNetworkConnectorsResponse_NetworkConnectors:
+			return deserializeNetworkConnectorsList(d, schemas.ListNetworkConnectorsResponse_NetworkConnectors, &v.NetworkConnectors)
+		case schemas.ListNetworkConnectorsResponse_NextMarker:
+			v.NextMarker = new(string)
+			return d.ReadString(schemas.ListNetworkConnectorsResponse_NextMarker, v.NextMarker)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListNetworkConnectorsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListNetworkConnectors{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListNetworkConnectors, schemas.ListNetworkConnectorsRequest, schemas.ListNetworkConnectorsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListNetworkConnectors{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListNetworkConnectors, schemas.ListNetworkConnectorsRequest, schemas.ListNetworkConnectorsResponse), output: &ListNetworkConnectorsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

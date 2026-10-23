@@ -4,7 +4,9 @@ package apigatewayv2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/apigatewayv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/apigatewayv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -41,6 +43,24 @@ type GetDeploymentsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetDeploymentsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetDeploymentsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetDeploymentsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApiId != nil {
+		s.WriteString(schemas.GetDeploymentsRequest_ApiId, *v.ApiId)
+	}
+	if v.MaxResults != nil {
+		s.WriteString(schemas.GetDeploymentsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetDeploymentsRequest_NextToken, *v.NextToken)
+	}
+}
+
 type GetDeploymentsOutput struct {
 
 	// The elements from this collection.
@@ -56,13 +76,35 @@ type GetDeploymentsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetDeploymentsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetDeploymentsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetDeploymentsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serialize__listOfDeployment(s, schemas.GetDeploymentsResponse_Items, v.Items)
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetDeploymentsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *GetDeploymentsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetDeploymentsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetDeploymentsResponse_Items:
+			return deserialize__listOfDeployment(d, schemas.GetDeploymentsResponse_Items, &v.Items)
+		case schemas.GetDeploymentsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.GetDeploymentsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetDeploymentsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetDeployments{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetDeployments, schemas.GetDeploymentsRequest, schemas.GetDeploymentsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetDeployments{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetDeployments, schemas.GetDeploymentsRequest, schemas.GetDeploymentsResponse), output: &GetDeploymentsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -5,6 +5,8 @@ package healthlake
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/healthlake/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -38,6 +40,18 @@ type DeleteDataTransformationProfileInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteDataTransformationProfileInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteDataTransformationProfileRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteDataTransformationProfileInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ProfileId != nil {
+		s.WriteString(schemas.DeleteDataTransformationProfileRequest_ProfileId, *v.ProfileId)
+	}
+}
+
 // The response from the DeleteDataTransformationProfile operation.
 type DeleteDataTransformationProfileOutput struct {
 
@@ -60,13 +74,44 @@ type DeleteDataTransformationProfileOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteDataTransformationProfileOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteDataTransformationProfileResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteDataTransformationProfileOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DeletionTime != nil {
+		s.WriteTime(schemas.DeleteDataTransformationProfileResponse_DeletionTime, *v.DeletionTime)
+	}
+	if v.ProfileId != nil {
+		s.WriteString(schemas.DeleteDataTransformationProfileResponse_ProfileId, *v.ProfileId)
+	}
+	if v.ProfileName != nil {
+		s.WriteString(schemas.DeleteDataTransformationProfileResponse_ProfileName, *v.ProfileName)
+	}
+}
+func (v *DeleteDataTransformationProfileOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteDataTransformationProfileResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteDataTransformationProfileResponse_DeletionTime:
+			v.DeletionTime = new(time.Time)
+			return d.ReadTime(schemas.DeleteDataTransformationProfileResponse_DeletionTime, v.DeletionTime)
+		case schemas.DeleteDataTransformationProfileResponse_ProfileId:
+			v.ProfileId = new(string)
+			return d.ReadString(schemas.DeleteDataTransformationProfileResponse_ProfileId, v.ProfileId)
+		case schemas.DeleteDataTransformationProfileResponse_ProfileName:
+			v.ProfileName = new(string)
+			return d.ReadString(schemas.DeleteDataTransformationProfileResponse_ProfileName, v.ProfileName)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteDataTransformationProfileMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpDeleteDataTransformationProfile{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteDataTransformationProfile, schemas.DeleteDataTransformationProfileRequest, schemas.DeleteDataTransformationProfileResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpDeleteDataTransformationProfile{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteDataTransformationProfile, schemas.DeleteDataTransformationProfileRequest, schemas.DeleteDataTransformationProfileResponse), output: &DeleteDataTransformationProfileOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

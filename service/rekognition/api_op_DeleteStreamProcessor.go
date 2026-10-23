@@ -4,13 +4,23 @@ package rekognition
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/rekognition/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
+// Service availability notice: Streaming Video and Bulk Image Analysis is no
+// longer available to new customers. For more information, see [Rekognition feature availability changes].
+//
+// This change does not impact the availability of other Amazon Rekognition
+// features.
+//
 // Deletes the stream processor identified by Name . You assign the value for Name
 // when you create the stream processor with CreateStreamProcessor. You might not be able to use the
 // same name for a stream processor for a few seconds after calling
 // DeleteStreamProcessor .
+//
+// [Rekognition feature availability changes]: https://docs.aws.amazon.com/rekognition/latest/dg/rekognition-availability-changes.html
 func (c *Client) DeleteStreamProcessor(ctx context.Context, params *DeleteStreamProcessorInput, optFns ...func(*Options)) (*DeleteStreamProcessorOutput, error) {
 	if params == nil {
 		params = &DeleteStreamProcessorInput{}
@@ -36,6 +46,18 @@ type DeleteStreamProcessorInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteStreamProcessorInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteStreamProcessorRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteStreamProcessorInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.DeleteStreamProcessorRequest_Name, *v.Name)
+	}
+}
+
 type DeleteStreamProcessorOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -43,13 +65,26 @@ type DeleteStreamProcessorOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteStreamProcessorOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteStreamProcessorResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteStreamProcessorOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteStreamProcessorOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteStreamProcessorResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteStreamProcessorMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteStreamProcessor{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteStreamProcessor, schemas.DeleteStreamProcessorRequest, schemas.DeleteStreamProcessorResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeleteStreamProcessor{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteStreamProcessor, schemas.DeleteStreamProcessorRequest, schemas.DeleteStreamProcessorResponse), output: &DeleteStreamProcessorOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,6 +4,8 @@ package customerprofiles
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/customerprofiles/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -38,6 +40,21 @@ type DeleteProfileInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteProfileInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteProfileRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteProfileInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DomainName != nil {
+		s.WriteString(schemas.DeleteProfileRequest_DomainName, *v.DomainName)
+	}
+	if v.ProfileId != nil {
+		s.WriteString(schemas.DeleteProfileRequest_ProfileId, *v.ProfileId)
+	}
+}
+
 type DeleteProfileOutput struct {
 
 	// A message that indicates the delete request is done.
@@ -49,13 +66,32 @@ type DeleteProfileOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteProfileOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteProfileResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteProfileOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.DeleteProfileResponse_Message, *v.Message)
+	}
+}
+func (v *DeleteProfileOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteProfileResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteProfileResponse_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.DeleteProfileResponse_Message, v.Message)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteProfileMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteProfile{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteProfile, schemas.DeleteProfileRequest, schemas.DeleteProfileResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteProfile{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteProfile, schemas.DeleteProfileRequest, schemas.DeleteProfileResponse), output: &DeleteProfileOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

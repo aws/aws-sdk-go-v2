@@ -5,7 +5,9 @@ package glue
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/glue/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/glue/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -47,6 +49,27 @@ type ListIterableFormsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListIterableFormsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListIterableFormsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListIterableFormsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AssetIdentifier != nil {
+		s.WriteString(schemas.ListIterableFormsRequest_AssetIdentifier, *v.AssetIdentifier)
+	}
+	if v.IterableFormName != nil {
+		s.WriteString(schemas.ListIterableFormsRequest_IterableFormName, *v.IterableFormName)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListIterableFormsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListIterableFormsRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListIterableFormsOutput struct {
 
 	// The list of iterable form items.
@@ -61,13 +84,35 @@ type ListIterableFormsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListIterableFormsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListIterableFormsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListIterableFormsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeIterableFormListItemList(s, schemas.ListIterableFormsResponse_Items, v.Items)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListIterableFormsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListIterableFormsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListIterableFormsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListIterableFormsResponse_Items:
+			return deserializeIterableFormListItemList(d, schemas.ListIterableFormsResponse_Items, &v.Items)
+		case schemas.ListIterableFormsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListIterableFormsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListIterableFormsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListIterableForms{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListIterableForms, schemas.ListIterableFormsRequest, schemas.ListIterableFormsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListIterableForms{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListIterableForms, schemas.ListIterableFormsRequest, schemas.ListIterableFormsResponse), output: &ListIterableFormsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

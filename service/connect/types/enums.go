@@ -33,6 +33,7 @@ const (
 	ActionTypeEndAssociatedTasks       ActionType = "END_ASSOCIATED_TASKS"
 	ActionTypeSubmitAutoEvaluation     ActionType = "SUBMIT_AUTO_EVALUATION"
 	ActionTypeExtractInformation       ActionType = "EXTRACT_INFORMATION"
+	ActionTypeSendInAppNotification    ActionType = "SEND_IN_APP_NOTIFICATION"
 )
 
 // Values returns all known values for ActionType. Note that this can be expanded
@@ -51,6 +52,7 @@ func (ActionType) Values() []ActionType {
 		"END_ASSOCIATED_TASKS",
 		"SUBMIT_AUTO_EVALUATION",
 		"EXTRACT_INFORMATION",
+		"SEND_IN_APP_NOTIFICATION",
 	}
 }
 
@@ -110,6 +112,23 @@ func (AgentStatusType) Values() []AgentStatusType {
 		"ROUTABLE",
 		"CUSTOM",
 		"OFFLINE",
+	}
+}
+
+type AIAgentType string
+
+// Enum values for AIAgentType
+const (
+	AIAgentTypeThirdParty AIAgentType = "THIRD_PARTY"
+)
+
+// Values returns all known values for AIAgentType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AIAgentType) Values() []AIAgentType {
+	return []AIAgentType{
+		"THIRD_PARTY",
 	}
 }
 
@@ -539,6 +558,29 @@ func (ConfigurableNotificationPriority) Values() []ConfigurableNotificationPrior
 	}
 }
 
+type ConnectionType string
+
+// Enum values for ConnectionType
+const (
+	ConnectionTypeWebsocket             ConnectionType = "WEBSOCKET"
+	ConnectionTypeConnectionCredentials ConnectionType = "CONNECTION_CREDENTIALS"
+	ConnectionTypeAuthenticationSession ConnectionType = "AUTHENTICATION_SESSION"
+	ConnectionTypeWebrtcConnection      ConnectionType = "WEBRTC_CONNECTION"
+)
+
+// Values returns all known values for ConnectionType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ConnectionType) Values() []ConnectionType {
+	return []ConnectionType{
+		"WEBSOCKET",
+		"CONNECTION_CREDENTIALS",
+		"AUTHENTICATION_SESSION",
+		"WEBRTC_CONNECTION",
+	}
+}
+
 type ContactEvaluationAttributeComparisonType string
 
 // Enum values for ContactEvaluationAttributeComparisonType
@@ -880,6 +922,25 @@ func (ContactState) Values() []ContactState {
 		"ERROR",
 		"ENDED",
 		"REJECTED",
+	}
+}
+
+type ContentDisposition string
+
+// Enum values for ContentDisposition
+const (
+	ContentDispositionInline     ContentDisposition = "INLINE"
+	ContentDispositionAttachment ContentDisposition = "ATTACHMENT"
+)
+
+// Values returns all known values for ContentDisposition. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ContentDisposition) Values() []ContentDisposition {
+	return []ContentDisposition{
+		"INLINE",
+		"ATTACHMENT",
 	}
 }
 
@@ -1824,6 +1885,7 @@ const (
 	FileStatusTypeRejected   FileStatusType = "REJECTED"
 	FileStatusTypeProcessing FileStatusType = "PROCESSING"
 	FileStatusTypeFailed     FileStatusType = "FAILED"
+	FileStatusTypeDrafting   FileStatusType = "DRAFTING"
 )
 
 // Values returns all known values for FileStatusType. Note that this can be
@@ -1836,6 +1898,7 @@ func (FileStatusType) Values() []FileStatusType {
 		"REJECTED",
 		"PROCESSING",
 		"FAILED",
+		"DRAFTING",
 	}
 }
 
@@ -2118,6 +2181,7 @@ const (
 	InstanceAttributeTypeUseCustomTtsVoices        InstanceAttributeType = "USE_CUSTOM_TTS_VOICES"
 	InstanceAttributeTypeEarlyMedia                InstanceAttributeType = "EARLY_MEDIA"
 	InstanceAttributeTypeMultiPartyConference      InstanceAttributeType = "MULTI_PARTY_CONFERENCE"
+	InstanceAttributeTypeAutoMuteAgentOnHold       InstanceAttributeType = "AUTO_MUTE_AGENT_ON_HOLD"
 	InstanceAttributeTypeHighVolumeOutbound        InstanceAttributeType = "HIGH_VOLUME_OUTBOUND"
 	InstanceAttributeTypeEnhancedContactMonitoring InstanceAttributeType = "ENHANCED_CONTACT_MONITORING"
 	InstanceAttributeTypeEnhancedChatMonitoring    InstanceAttributeType = "ENHANCED_CHAT_MONITORING"
@@ -2139,6 +2203,7 @@ func (InstanceAttributeType) Values() []InstanceAttributeType {
 		"USE_CUSTOM_TTS_VOICES",
 		"EARLY_MEDIA",
 		"MULTI_PARTY_CONFERENCE",
+		"AUTO_MUTE_AGENT_ON_HOLD",
 		"HIGH_VOLUME_OUTBOUND",
 		"ENHANCED_CONTACT_MONITORING",
 		"ENHANCED_CHAT_MONITORING",
@@ -4383,6 +4448,25 @@ func (SearchContactsTimeRangeType) Values() []SearchContactsTimeRangeType {
 		"CONNECTED_TO_AGENT_TIMESTAMP",
 		"DISCONNECT_TIMESTAMP",
 		"ENQUEUE_TIMESTAMP",
+	}
+}
+
+type SecurityProfileType string
+
+// Enum values for SecurityProfileType
+const (
+	SecurityProfileTypeAwsManaged      SecurityProfileType = "AWS_MANAGED"
+	SecurityProfileTypeCustomerManaged SecurityProfileType = "CUSTOMER_MANAGED"
+)
+
+// Values returns all known values for SecurityProfileType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (SecurityProfileType) Values() []SecurityProfileType {
+	return []SecurityProfileType{
+		"AWS_MANAGED",
+		"CUSTOMER_MANAGED",
 	}
 }
 

@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"data":"YmxvYg==","dataType":"VIDEO-MP4","endTime":{"offsetInNanos":1,"timeInSeconds":1},"nextToken":"__NextToken__","startTime":{"offsetInNanos":1,"timeInSeconds":1}}

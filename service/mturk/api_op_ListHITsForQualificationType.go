@@ -5,7 +5,9 @@ package mturk
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/mturk/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/mturk/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -45,6 +47,24 @@ type ListHITsForQualificationTypeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListHITsForQualificationTypeInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListHITsForQualificationTypeRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListHITsForQualificationTypeInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListHITsForQualificationTypeRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListHITsForQualificationTypeRequest_NextToken, *v.NextToken)
+	}
+	if v.QualificationTypeId != nil {
+		s.WriteString(schemas.ListHITsForQualificationTypeRequest_QualificationTypeId, *v.QualificationTypeId)
+	}
+}
+
 type ListHITsForQualificationTypeOutput struct {
 
 	//  The list of HIT elements returned by the query.
@@ -65,13 +85,41 @@ type ListHITsForQualificationTypeOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListHITsForQualificationTypeOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListHITsForQualificationTypeResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListHITsForQualificationTypeOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeHITList(s, schemas.ListHITsForQualificationTypeResponse_HITs, v.HITs)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListHITsForQualificationTypeResponse_NextToken, *v.NextToken)
+	}
+	if v.NumResults != nil {
+		s.WriteInt32(schemas.ListHITsForQualificationTypeResponse_NumResults, *v.NumResults)
+	}
+}
+func (v *ListHITsForQualificationTypeOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListHITsForQualificationTypeResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListHITsForQualificationTypeResponse_HITs:
+			return deserializeHITList(d, schemas.ListHITsForQualificationTypeResponse_HITs, &v.HITs)
+		case schemas.ListHITsForQualificationTypeResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListHITsForQualificationTypeResponse_NextToken, v.NextToken)
+		case schemas.ListHITsForQualificationTypeResponse_NumResults:
+			v.NumResults = new(int32)
+			return d.ReadInt32(schemas.ListHITsForQualificationTypeResponse_NumResults, v.NumResults)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListHITsForQualificationTypeMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListHITsForQualificationType{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListHITsForQualificationType, schemas.ListHITsForQualificationTypeRequest, schemas.ListHITsForQualificationTypeResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListHITsForQualificationType{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListHITsForQualificationType, schemas.ListHITsForQualificationTypeRequest, schemas.ListHITsForQualificationTypeResponse), output: &ListHITsForQualificationTypeOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

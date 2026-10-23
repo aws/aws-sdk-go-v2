@@ -4,7 +4,9 @@ package odb
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/odb/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/odb/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -49,6 +51,24 @@ type AssociateIamRoleToResourceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssociateIamRoleToResourceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssociateIamRoleToResourceInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssociateIamRoleToResourceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AwsIntegration != "" {
+		s.WriteString(schemas.AssociateIamRoleToResourceInput_awsIntegration, string(v.AwsIntegration))
+	}
+	if v.IamRoleArn != nil {
+		s.WriteString(schemas.AssociateIamRoleToResourceInput_iamRoleArn, *v.IamRoleArn)
+	}
+	if v.ResourceArn != nil {
+		s.WriteString(schemas.AssociateIamRoleToResourceInput_resourceArn, *v.ResourceArn)
+	}
+}
+
 type AssociateIamRoleToResourceOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -56,13 +76,26 @@ type AssociateIamRoleToResourceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssociateIamRoleToResourceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssociateIamRoleToResourceOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssociateIamRoleToResourceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *AssociateIamRoleToResourceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AssociateIamRoleToResourceOutput, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationAssociateIamRoleToResourceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpAssociateIamRoleToResource{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociateIamRoleToResource, schemas.AssociateIamRoleToResourceInput, schemas.AssociateIamRoleToResourceOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpAssociateIamRoleToResource{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociateIamRoleToResource, schemas.AssociateIamRoleToResourceInput, schemas.AssociateIamRoleToResourceOutput), output: &AssociateIamRoleToResourceOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

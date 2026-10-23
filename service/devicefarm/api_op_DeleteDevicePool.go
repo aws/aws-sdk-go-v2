@@ -4,6 +4,8 @@ package devicefarm
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/devicefarm/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -36,6 +38,18 @@ type DeleteDevicePoolInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteDevicePoolInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteDevicePoolRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteDevicePoolInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.DeleteDevicePoolRequest_arn, *v.Arn)
+	}
+}
+
 // Represents the result of a delete device pool request.
 type DeleteDevicePoolOutput struct {
 	// Metadata pertaining to the operation's result.
@@ -44,13 +58,26 @@ type DeleteDevicePoolOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteDevicePoolOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteDevicePoolResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteDevicePoolOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteDevicePoolOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteDevicePoolResult, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteDevicePoolMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteDevicePool{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteDevicePool, schemas.DeleteDevicePoolRequest, schemas.DeleteDevicePoolResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeleteDevicePool{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteDevicePool, schemas.DeleteDevicePoolRequest, schemas.DeleteDevicePoolResult), output: &DeleteDevicePoolOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

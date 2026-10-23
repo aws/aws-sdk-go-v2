@@ -5,10 +5,15 @@ package imagebuilder
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/imagebuilder/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
-// Cancel a specific image lifecycle policy runtime instance.
+// Cancels a lifecycle execution – a single run of lifecycle actions that a
+// lifecycle policy or a StartResourceStateUpdaterequest started. You can only cancel an execution that
+// hasn't reached a terminal state. Cancellation is asynchronous and doesn't undo
+// completed lifecycle actions.
 func (c *Client) CancelLifecycleExecution(ctx context.Context, params *CancelLifecycleExecutionInput, optFns ...func(*Options)) (*CancelLifecycleExecutionOutput, error) {
 	if params == nil {
 		params = &CancelLifecycleExecutionInput{}
@@ -26,8 +31,10 @@ func (c *Client) CancelLifecycleExecution(ctx context.Context, params *CancelLif
 
 type CancelLifecycleExecutionInput struct {
 
-	// Unique, case-sensitive identifier you provide to ensure idempotency of the
-	// request. For more information, see [Ensuring idempotency]in the Amazon EC2 API Reference.
+	// A unique, case-sensitive identifier you provide to ensure that the operation
+	// runs no more than one time. If you retry a request with the same client token,
+	// Image Builder returns the original response without running the operation again.
+	// For more information, see [Ensuring idempotency]in the Amazon EC2 API Reference.
 	//
 	// [Ensuring idempotency]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
 	//
@@ -42,10 +49,25 @@ type CancelLifecycleExecutionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CancelLifecycleExecutionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CancelLifecycleExecutionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CancelLifecycleExecutionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CancelLifecycleExecutionRequest_clientToken, *v.ClientToken)
+	}
+	if v.LifecycleExecutionId != nil {
+		s.WriteString(schemas.CancelLifecycleExecutionRequest_lifecycleExecutionId, *v.LifecycleExecutionId)
+	}
+}
+
 type CancelLifecycleExecutionOutput struct {
 
-	// The unique identifier for the image lifecycle runtime instance that was
-	// canceled.
+	// The unique identifier of the lifecycle execution that the cancellation request
+	// applies to. The cancellation completes asynchronously.
 	LifecycleExecutionId *string
 
 	// Metadata pertaining to the operation's result.
@@ -54,13 +76,32 @@ type CancelLifecycleExecutionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CancelLifecycleExecutionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CancelLifecycleExecutionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CancelLifecycleExecutionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LifecycleExecutionId != nil {
+		s.WriteString(schemas.CancelLifecycleExecutionResponse_lifecycleExecutionId, *v.LifecycleExecutionId)
+	}
+}
+func (v *CancelLifecycleExecutionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CancelLifecycleExecutionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CancelLifecycleExecutionResponse_lifecycleExecutionId:
+			v.LifecycleExecutionId = new(string)
+			return d.ReadString(schemas.CancelLifecycleExecutionResponse_lifecycleExecutionId, v.LifecycleExecutionId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCancelLifecycleExecutionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCancelLifecycleExecution{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CancelLifecycleExecution, schemas.CancelLifecycleExecutionRequest, schemas.CancelLifecycleExecutionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCancelLifecycleExecution{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CancelLifecycleExecution, schemas.CancelLifecycleExecutionRequest, schemas.CancelLifecycleExecutionResponse), output: &CancelLifecycleExecutionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

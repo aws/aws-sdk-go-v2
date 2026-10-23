@@ -4,7 +4,9 @@ package databasemigrationservice
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/databasemigrationservice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/databasemigrationservice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -76,6 +78,27 @@ type StartMetadataModelExportAsScriptInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartMetadataModelExportAsScriptInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartMetadataModelExportAsScriptMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartMetadataModelExportAsScriptInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FileName != nil {
+		s.WriteString(schemas.StartMetadataModelExportAsScriptMessage_FileName, *v.FileName)
+	}
+	if v.MigrationProjectIdentifier != nil {
+		s.WriteString(schemas.StartMetadataModelExportAsScriptMessage_MigrationProjectIdentifier, *v.MigrationProjectIdentifier)
+	}
+	if v.Origin != "" {
+		s.WriteString(schemas.StartMetadataModelExportAsScriptMessage_Origin, string(v.Origin))
+	}
+	if v.SelectionRules != nil {
+		s.WriteString(schemas.StartMetadataModelExportAsScriptMessage_SelectionRules, *v.SelectionRules)
+	}
+}
+
 type StartMetadataModelExportAsScriptOutput struct {
 
 	// The identifier for the export request.
@@ -87,13 +110,32 @@ type StartMetadataModelExportAsScriptOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartMetadataModelExportAsScriptOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartMetadataModelExportAsScriptResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartMetadataModelExportAsScriptOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RequestIdentifier != nil {
+		s.WriteString(schemas.StartMetadataModelExportAsScriptResponse_RequestIdentifier, *v.RequestIdentifier)
+	}
+}
+func (v *StartMetadataModelExportAsScriptOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartMetadataModelExportAsScriptResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartMetadataModelExportAsScriptResponse_RequestIdentifier:
+			v.RequestIdentifier = new(string)
+			return d.ReadString(schemas.StartMetadataModelExportAsScriptResponse_RequestIdentifier, v.RequestIdentifier)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartMetadataModelExportAsScriptMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStartMetadataModelExportAsScript{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartMetadataModelExportAsScript, schemas.StartMetadataModelExportAsScriptMessage, schemas.StartMetadataModelExportAsScriptResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpStartMetadataModelExportAsScript{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartMetadataModelExportAsScript, schemas.StartMetadataModelExportAsScriptMessage, schemas.StartMetadataModelExportAsScriptResponse), output: &StartMetadataModelExportAsScriptOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

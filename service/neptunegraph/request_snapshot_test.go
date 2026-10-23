@@ -844,8 +844,9 @@ func TestCheckRequestSnapshot_ListGraphSnapshots(t *testing.T) {
 
 func TestCheckRequestSnapshot_ListImportTasks(t *testing.T) {
 	input := &ListImportTasksInput{
-		NextToken:  ptr.String("__NextToken__"),
-		MaxResults: ptr.Int32(1),
+		GraphIdentifier: ptr.String("__GraphIdentifier__"),
+		NextToken:       ptr.String("__NextToken__"),
+		MaxResults:      ptr.Int32(1),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -1900,8 +1901,9 @@ func TestUpdateRequestSnapshot_ListGraphSnapshots(t *testing.T) {
 
 func TestUpdateRequestSnapshot_ListImportTasks(t *testing.T) {
 	input := &ListImportTasksInput{
-		NextToken:  ptr.String("__NextToken__"),
-		MaxResults: ptr.Int32(1),
+		GraphIdentifier: ptr.String("__GraphIdentifier__"),
+		NextToken:       ptr.String("__NextToken__"),
+		MaxResults:      ptr.Int32(1),
 	}
 	body := &bytes.Buffer{}
 	method := ""

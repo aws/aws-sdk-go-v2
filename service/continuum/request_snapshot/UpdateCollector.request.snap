@@ -1,0 +1,5 @@
+PATCH /collectors/__CollectorId__
+
+Content-Type: application/json
+
+{"k8ClusterRole":{"set":{"externalId":"__ExternalId__","roleArn":"__RoleArn__"}},"name":"__Name__"}

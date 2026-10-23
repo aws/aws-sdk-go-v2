@@ -5,7 +5,9 @@ package bedrockagentcorecontrol
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -66,6 +68,29 @@ type CreateGatewayRateLimitInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateGatewayRateLimitInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateGatewayRateLimitRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateGatewayRateLimitInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateGatewayRateLimitRequest_clientToken, *v.ClientToken)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreateGatewayRateLimitRequest_description, *v.Description)
+	}
+	serializeDimensionKeys(s, schemas.CreateGatewayRateLimitRequest_dimensionKeys, v.DimensionKeys)
+	serializeLimitEntries(s, schemas.CreateGatewayRateLimitRequest_entries, v.Entries)
+	if v.GatewayIdentifier != nil {
+		s.WriteString(schemas.CreateGatewayRateLimitRequest_gatewayIdentifier, *v.GatewayIdentifier)
+	}
+	if v.RateLimitId != nil {
+		s.WriteString(schemas.CreateGatewayRateLimitRequest_rateLimitId, *v.RateLimitId)
+	}
+}
+
 // Shared fields for GatewayRateLimit responses.
 type CreateGatewayRateLimitOutput struct {
 
@@ -114,13 +139,72 @@ type CreateGatewayRateLimitOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateGatewayRateLimitOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateGatewayRateLimitResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateGatewayRateLimitOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.CreateGatewayRateLimitResponse_createdAt, *v.CreatedAt)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreateGatewayRateLimitResponse_description, *v.Description)
+	}
+	serializeDimensionKeys(s, schemas.CreateGatewayRateLimitResponse_dimensionKeys, v.DimensionKeys)
+	serializeLimitEntries(s, schemas.CreateGatewayRateLimitResponse_entries, v.Entries)
+	if v.GatewayIdentifier != nil {
+		s.WriteString(schemas.CreateGatewayRateLimitResponse_gatewayIdentifier, *v.GatewayIdentifier)
+	}
+	if v.RateLimitId != nil {
+		s.WriteString(schemas.CreateGatewayRateLimitResponse_rateLimitId, *v.RateLimitId)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.CreateGatewayRateLimitResponse_status, string(v.Status))
+	}
+	if v.UpdatedAt != nil {
+		s.WriteTime(schemas.CreateGatewayRateLimitResponse_updatedAt, *v.UpdatedAt)
+	}
+}
+func (v *CreateGatewayRateLimitOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateGatewayRateLimitResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateGatewayRateLimitResponse_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.CreateGatewayRateLimitResponse_createdAt, v.CreatedAt)
+		case schemas.CreateGatewayRateLimitResponse_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.CreateGatewayRateLimitResponse_description, v.Description)
+		case schemas.CreateGatewayRateLimitResponse_dimensionKeys:
+			return deserializeDimensionKeys(d, schemas.CreateGatewayRateLimitResponse_dimensionKeys, &v.DimensionKeys)
+		case schemas.CreateGatewayRateLimitResponse_entries:
+			return deserializeLimitEntries(d, schemas.CreateGatewayRateLimitResponse_entries, &v.Entries)
+		case schemas.CreateGatewayRateLimitResponse_gatewayIdentifier:
+			v.GatewayIdentifier = new(string)
+			return d.ReadString(schemas.CreateGatewayRateLimitResponse_gatewayIdentifier, v.GatewayIdentifier)
+		case schemas.CreateGatewayRateLimitResponse_rateLimitId:
+			v.RateLimitId = new(string)
+			return d.ReadString(schemas.CreateGatewayRateLimitResponse_rateLimitId, v.RateLimitId)
+		case schemas.CreateGatewayRateLimitResponse_status:
+			var ev string
+			if err := d.ReadString(schemas.CreateGatewayRateLimitResponse_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.GatewayRateLimitStatus(ev)
+			return nil
+		case schemas.CreateGatewayRateLimitResponse_updatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.CreateGatewayRateLimitResponse_updatedAt, v.UpdatedAt)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateGatewayRateLimitMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateGatewayRateLimit{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateGatewayRateLimit, schemas.CreateGatewayRateLimitRequest, schemas.CreateGatewayRateLimitResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateGatewayRateLimit{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateGatewayRateLimit, schemas.CreateGatewayRateLimitRequest, schemas.CreateGatewayRateLimitResponse), output: &CreateGatewayRateLimitOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

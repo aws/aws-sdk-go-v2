@@ -5,7 +5,9 @@ package backup
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/backup/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/backup/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -72,6 +74,31 @@ type CreateLogicallyAirGappedBackupVaultInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateLogicallyAirGappedBackupVaultInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateLogicallyAirGappedBackupVaultInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateLogicallyAirGappedBackupVaultInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BackupVaultName != nil {
+		s.WriteString(schemas.CreateLogicallyAirGappedBackupVaultInput_BackupVaultName, *v.BackupVaultName)
+	}
+	serializeTags(s, schemas.CreateLogicallyAirGappedBackupVaultInput_BackupVaultTags, v.BackupVaultTags)
+	if v.CreatorRequestId != nil {
+		s.WriteString(schemas.CreateLogicallyAirGappedBackupVaultInput_CreatorRequestId, *v.CreatorRequestId)
+	}
+	if v.EncryptionKeyArn != nil {
+		s.WriteString(schemas.CreateLogicallyAirGappedBackupVaultInput_EncryptionKeyArn, *v.EncryptionKeyArn)
+	}
+	if v.MaxRetentionDays != nil {
+		s.WriteInt64(schemas.CreateLogicallyAirGappedBackupVaultInput_MaxRetentionDays, *v.MaxRetentionDays)
+	}
+	if v.MinRetentionDays != nil {
+		s.WriteInt64(schemas.CreateLogicallyAirGappedBackupVaultInput_MinRetentionDays, *v.MinRetentionDays)
+	}
+}
+
 type CreateLogicallyAirGappedBackupVaultOutput struct {
 
 	// The ARN (Amazon Resource Name) of the vault.
@@ -98,13 +125,54 @@ type CreateLogicallyAirGappedBackupVaultOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateLogicallyAirGappedBackupVaultOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateLogicallyAirGappedBackupVaultOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateLogicallyAirGappedBackupVaultOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BackupVaultArn != nil {
+		s.WriteString(schemas.CreateLogicallyAirGappedBackupVaultOutput_BackupVaultArn, *v.BackupVaultArn)
+	}
+	if v.BackupVaultName != nil {
+		s.WriteString(schemas.CreateLogicallyAirGappedBackupVaultOutput_BackupVaultName, *v.BackupVaultName)
+	}
+	if v.CreationDate != nil {
+		s.WriteTime(schemas.CreateLogicallyAirGappedBackupVaultOutput_CreationDate, *v.CreationDate)
+	}
+	if v.VaultState != "" {
+		s.WriteString(schemas.CreateLogicallyAirGappedBackupVaultOutput_VaultState, string(v.VaultState))
+	}
+}
+func (v *CreateLogicallyAirGappedBackupVaultOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateLogicallyAirGappedBackupVaultOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateLogicallyAirGappedBackupVaultOutput_BackupVaultArn:
+			v.BackupVaultArn = new(string)
+			return d.ReadString(schemas.CreateLogicallyAirGappedBackupVaultOutput_BackupVaultArn, v.BackupVaultArn)
+		case schemas.CreateLogicallyAirGappedBackupVaultOutput_BackupVaultName:
+			v.BackupVaultName = new(string)
+			return d.ReadString(schemas.CreateLogicallyAirGappedBackupVaultOutput_BackupVaultName, v.BackupVaultName)
+		case schemas.CreateLogicallyAirGappedBackupVaultOutput_CreationDate:
+			v.CreationDate = new(time.Time)
+			return d.ReadTime(schemas.CreateLogicallyAirGappedBackupVaultOutput_CreationDate, v.CreationDate)
+		case schemas.CreateLogicallyAirGappedBackupVaultOutput_VaultState:
+			var ev string
+			if err := d.ReadString(schemas.CreateLogicallyAirGappedBackupVaultOutput_VaultState, &ev); err != nil {
+				return err
+			}
+			v.VaultState = types.VaultState(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateLogicallyAirGappedBackupVaultMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateLogicallyAirGappedBackupVault{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateLogicallyAirGappedBackupVault, schemas.CreateLogicallyAirGappedBackupVaultInput, schemas.CreateLogicallyAirGappedBackupVaultOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateLogicallyAirGappedBackupVault{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateLogicallyAirGappedBackupVault, schemas.CreateLogicallyAirGappedBackupVaultInput, schemas.CreateLogicallyAirGappedBackupVaultOutput), output: &CreateLogicallyAirGappedBackupVaultOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

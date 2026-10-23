@@ -190,6 +190,9 @@ func TestCheckResponseSnapshot_BatchCreateMemoryRecords(t *testing.T) {
 			},
 		},
 		ClientToken: ptr.String("__ClientToken__"),
+		RecordExpirySpecification: &types.RecordExpirySpecificationMemberRecordExpiryDurationDays{
+			Value: 1,
+		},
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -351,6 +354,9 @@ func TestCheckResponseSnapshot_BatchUpdateMemoryRecords(t *testing.T) {
 					},
 				},
 			},
+		},
+		RecordExpirySpecification: &types.RecordExpirySpecificationMemberRecordExpiryDurationDays{
+			Value: 1,
 		},
 	})
 	if err != nil {
@@ -885,10 +891,11 @@ func TestCheckResponseSnapshot_Evaluate(t *testing.T) {
 	want := &EvaluateOutput{
 		EvaluationResults: []types.EvaluationResultContent{
 			{
-				EvaluatorArn:  ptr.String("__EvaluatorArn__"),
-				EvaluatorId:   ptr.String("__EvaluatorId__"),
-				EvaluatorName: ptr.String("__EvaluatorName__"),
-				Explanation:   ptr.String("__Explanation__"),
+				EvaluatorArn:            ptr.String("__EvaluatorArn__"),
+				EvaluatorId:             ptr.String("__EvaluatorId__"),
+				EvaluatorName:           ptr.String("__EvaluatorName__"),
+				EvaluationDimensionName: ptr.String("__EvaluationDimensionName__"),
+				Explanation:             ptr.String("__Explanation__"),
 				Context: &types.ContextMemberSpanContext{
 					Value: types.SpanContext{
 						SessionId: ptr.String("__SessionId__"),
@@ -911,10 +918,11 @@ func TestCheckResponseSnapshot_Evaluate(t *testing.T) {
 				},
 			},
 			{
-				EvaluatorArn:  ptr.String("__EvaluatorArn__"),
-				EvaluatorId:   ptr.String("__EvaluatorId__"),
-				EvaluatorName: ptr.String("__EvaluatorName__"),
-				Explanation:   ptr.String("__Explanation__"),
+				EvaluatorArn:            ptr.String("__EvaluatorArn__"),
+				EvaluatorId:             ptr.String("__EvaluatorId__"),
+				EvaluatorName:           ptr.String("__EvaluatorName__"),
+				EvaluationDimensionName: ptr.String("__EvaluationDimensionName__"),
+				Explanation:             ptr.String("__Explanation__"),
 				Context: &types.ContextMemberSpanContext{
 					Value: types.SpanContext{
 						SessionId: ptr.String("__SessionId__"),
@@ -1250,6 +1258,22 @@ func TestCheckResponseSnapshot_GetBatchEvaluation(t *testing.T) {
 						StartTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 						EndTime:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 					},
+					SessionTraceIds: []types.SessionTraceIds{
+						{
+							SessionId: ptr.String("__SessionId__"),
+							TraceIds: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+						{
+							SessionId: ptr.String("__SessionId__"),
+							TraceIds: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+					},
 				},
 			},
 		},
@@ -1269,7 +1293,8 @@ func TestCheckResponseSnapshot_GetBatchEvaluation(t *testing.T) {
 			NumberOfSessionsIgnored:    ptr.Int32(1),
 			EvaluatorSummaries: []types.EvaluatorSummary{
 				{
-					EvaluatorId: ptr.String("__EvaluatorId__"),
+					EvaluatorId:             ptr.String("__EvaluatorId__"),
+					EvaluationDimensionName: ptr.String("__EvaluationDimensionName__"),
 					Statistics: &types.EvaluatorStatistics{
 						AverageScore: ptr.Float64(1.0),
 					},
@@ -1277,12 +1302,309 @@ func TestCheckResponseSnapshot_GetBatchEvaluation(t *testing.T) {
 					TotalFailed:    ptr.Int32(1),
 				},
 				{
-					EvaluatorId: ptr.String("__EvaluatorId__"),
+					EvaluatorId:             ptr.String("__EvaluatorId__"),
+					EvaluationDimensionName: ptr.String("__EvaluationDimensionName__"),
 					Statistics: &types.EvaluatorStatistics{
 						AverageScore: ptr.Float64(1.0),
 					},
 					TotalEvaluated: ptr.Int32(1),
 					TotalFailed:    ptr.Int32(1),
+				},
+			},
+		},
+		InsightResults: []types.InsightResult{
+			{
+				Type:                 types.InsightType("FAILURE"),
+				Name:                 ptr.String("__Name__"),
+				Description:          ptr.String("__Description__"),
+				CreatedAt:            ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				AffectedSessionCount: ptr.Int32(1),
+				SampleSessions: []types.SampleSession{
+					{
+						SessionId:  ptr.String("__SessionId__"),
+						LastSeenAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+						Findings: []types.SessionFinding{
+							{
+								TargetId:    ptr.String("__TargetId__"),
+								TargetType:  types.FindingTargetType("SPAN_ID"),
+								Description: ptr.String("__Description__"),
+								Category:    ptr.String("__Category__"),
+								Confidence:  ptr.Float64(1.0),
+							},
+							{
+								TargetId:    ptr.String("__TargetId__"),
+								TargetType:  types.FindingTargetType("SPAN_ID"),
+								Description: ptr.String("__Description__"),
+								Category:    ptr.String("__Category__"),
+								Confidence:  ptr.Float64(1.0),
+							},
+						},
+					},
+					{
+						SessionId:  ptr.String("__SessionId__"),
+						LastSeenAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+						Findings: []types.SessionFinding{
+							{
+								TargetId:    ptr.String("__TargetId__"),
+								TargetType:  types.FindingTargetType("SPAN_ID"),
+								Description: ptr.String("__Description__"),
+								Category:    ptr.String("__Category__"),
+								Confidence:  ptr.Float64(1.0),
+							},
+							{
+								TargetId:    ptr.String("__TargetId__"),
+								TargetType:  types.FindingTargetType("SPAN_ID"),
+								Description: ptr.String("__Description__"),
+								Category:    ptr.String("__Category__"),
+								Confidence:  ptr.Float64(1.0),
+							},
+						},
+					},
+				},
+				RootCauses: []types.InsightRootCause{
+					{
+						Name:                 ptr.String("__Name__"),
+						Explanation:          ptr.String("__Explanation__"),
+						AffectedSessionCount: ptr.Int32(1),
+						SuggestedFix:         ptr.String("__SuggestedFix__"),
+						SampleSessions: []types.SampleSession{
+							{
+								SessionId:  ptr.String("__SessionId__"),
+								LastSeenAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+								Findings: []types.SessionFinding{
+									{
+										TargetId:    ptr.String("__TargetId__"),
+										TargetType:  types.FindingTargetType("SPAN_ID"),
+										Description: ptr.String("__Description__"),
+										Category:    ptr.String("__Category__"),
+										Confidence:  ptr.Float64(1.0),
+									},
+									{
+										TargetId:    ptr.String("__TargetId__"),
+										TargetType:  types.FindingTargetType("SPAN_ID"),
+										Description: ptr.String("__Description__"),
+										Category:    ptr.String("__Category__"),
+										Confidence:  ptr.Float64(1.0),
+									},
+								},
+							},
+							{
+								SessionId:  ptr.String("__SessionId__"),
+								LastSeenAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+								Findings: []types.SessionFinding{
+									{
+										TargetId:    ptr.String("__TargetId__"),
+										TargetType:  types.FindingTargetType("SPAN_ID"),
+										Description: ptr.String("__Description__"),
+										Category:    ptr.String("__Category__"),
+										Confidence:  ptr.Float64(1.0),
+									},
+									{
+										TargetId:    ptr.String("__TargetId__"),
+										TargetType:  types.FindingTargetType("SPAN_ID"),
+										Description: ptr.String("__Description__"),
+										Category:    ptr.String("__Category__"),
+										Confidence:  ptr.Float64(1.0),
+									},
+								},
+							},
+						},
+					},
+					{
+						Name:                 ptr.String("__Name__"),
+						Explanation:          ptr.String("__Explanation__"),
+						AffectedSessionCount: ptr.Int32(1),
+						SuggestedFix:         ptr.String("__SuggestedFix__"),
+						SampleSessions: []types.SampleSession{
+							{
+								SessionId:  ptr.String("__SessionId__"),
+								LastSeenAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+								Findings: []types.SessionFinding{
+									{
+										TargetId:    ptr.String("__TargetId__"),
+										TargetType:  types.FindingTargetType("SPAN_ID"),
+										Description: ptr.String("__Description__"),
+										Category:    ptr.String("__Category__"),
+										Confidence:  ptr.Float64(1.0),
+									},
+									{
+										TargetId:    ptr.String("__TargetId__"),
+										TargetType:  types.FindingTargetType("SPAN_ID"),
+										Description: ptr.String("__Description__"),
+										Category:    ptr.String("__Category__"),
+										Confidence:  ptr.Float64(1.0),
+									},
+								},
+							},
+							{
+								SessionId:  ptr.String("__SessionId__"),
+								LastSeenAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+								Findings: []types.SessionFinding{
+									{
+										TargetId:    ptr.String("__TargetId__"),
+										TargetType:  types.FindingTargetType("SPAN_ID"),
+										Description: ptr.String("__Description__"),
+										Category:    ptr.String("__Category__"),
+										Confidence:  ptr.Float64(1.0),
+									},
+									{
+										TargetId:    ptr.String("__TargetId__"),
+										TargetType:  types.FindingTargetType("SPAN_ID"),
+										Description: ptr.String("__Description__"),
+										Category:    ptr.String("__Category__"),
+										Confidence:  ptr.Float64(1.0),
+									},
+								},
+							},
+						},
+					},
+				},
+			},
+			{
+				Type:                 types.InsightType("FAILURE"),
+				Name:                 ptr.String("__Name__"),
+				Description:          ptr.String("__Description__"),
+				CreatedAt:            ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				AffectedSessionCount: ptr.Int32(1),
+				SampleSessions: []types.SampleSession{
+					{
+						SessionId:  ptr.String("__SessionId__"),
+						LastSeenAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+						Findings: []types.SessionFinding{
+							{
+								TargetId:    ptr.String("__TargetId__"),
+								TargetType:  types.FindingTargetType("SPAN_ID"),
+								Description: ptr.String("__Description__"),
+								Category:    ptr.String("__Category__"),
+								Confidence:  ptr.Float64(1.0),
+							},
+							{
+								TargetId:    ptr.String("__TargetId__"),
+								TargetType:  types.FindingTargetType("SPAN_ID"),
+								Description: ptr.String("__Description__"),
+								Category:    ptr.String("__Category__"),
+								Confidence:  ptr.Float64(1.0),
+							},
+						},
+					},
+					{
+						SessionId:  ptr.String("__SessionId__"),
+						LastSeenAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+						Findings: []types.SessionFinding{
+							{
+								TargetId:    ptr.String("__TargetId__"),
+								TargetType:  types.FindingTargetType("SPAN_ID"),
+								Description: ptr.String("__Description__"),
+								Category:    ptr.String("__Category__"),
+								Confidence:  ptr.Float64(1.0),
+							},
+							{
+								TargetId:    ptr.String("__TargetId__"),
+								TargetType:  types.FindingTargetType("SPAN_ID"),
+								Description: ptr.String("__Description__"),
+								Category:    ptr.String("__Category__"),
+								Confidence:  ptr.Float64(1.0),
+							},
+						},
+					},
+				},
+				RootCauses: []types.InsightRootCause{
+					{
+						Name:                 ptr.String("__Name__"),
+						Explanation:          ptr.String("__Explanation__"),
+						AffectedSessionCount: ptr.Int32(1),
+						SuggestedFix:         ptr.String("__SuggestedFix__"),
+						SampleSessions: []types.SampleSession{
+							{
+								SessionId:  ptr.String("__SessionId__"),
+								LastSeenAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+								Findings: []types.SessionFinding{
+									{
+										TargetId:    ptr.String("__TargetId__"),
+										TargetType:  types.FindingTargetType("SPAN_ID"),
+										Description: ptr.String("__Description__"),
+										Category:    ptr.String("__Category__"),
+										Confidence:  ptr.Float64(1.0),
+									},
+									{
+										TargetId:    ptr.String("__TargetId__"),
+										TargetType:  types.FindingTargetType("SPAN_ID"),
+										Description: ptr.String("__Description__"),
+										Category:    ptr.String("__Category__"),
+										Confidence:  ptr.Float64(1.0),
+									},
+								},
+							},
+							{
+								SessionId:  ptr.String("__SessionId__"),
+								LastSeenAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+								Findings: []types.SessionFinding{
+									{
+										TargetId:    ptr.String("__TargetId__"),
+										TargetType:  types.FindingTargetType("SPAN_ID"),
+										Description: ptr.String("__Description__"),
+										Category:    ptr.String("__Category__"),
+										Confidence:  ptr.Float64(1.0),
+									},
+									{
+										TargetId:    ptr.String("__TargetId__"),
+										TargetType:  types.FindingTargetType("SPAN_ID"),
+										Description: ptr.String("__Description__"),
+										Category:    ptr.String("__Category__"),
+										Confidence:  ptr.Float64(1.0),
+									},
+								},
+							},
+						},
+					},
+					{
+						Name:                 ptr.String("__Name__"),
+						Explanation:          ptr.String("__Explanation__"),
+						AffectedSessionCount: ptr.Int32(1),
+						SuggestedFix:         ptr.String("__SuggestedFix__"),
+						SampleSessions: []types.SampleSession{
+							{
+								SessionId:  ptr.String("__SessionId__"),
+								LastSeenAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+								Findings: []types.SessionFinding{
+									{
+										TargetId:    ptr.String("__TargetId__"),
+										TargetType:  types.FindingTargetType("SPAN_ID"),
+										Description: ptr.String("__Description__"),
+										Category:    ptr.String("__Category__"),
+										Confidence:  ptr.Float64(1.0),
+									},
+									{
+										TargetId:    ptr.String("__TargetId__"),
+										TargetType:  types.FindingTargetType("SPAN_ID"),
+										Description: ptr.String("__Description__"),
+										Category:    ptr.String("__Category__"),
+										Confidence:  ptr.Float64(1.0),
+									},
+								},
+							},
+							{
+								SessionId:  ptr.String("__SessionId__"),
+								LastSeenAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+								Findings: []types.SessionFinding{
+									{
+										TargetId:    ptr.String("__TargetId__"),
+										TargetType:  types.FindingTargetType("SPAN_ID"),
+										Description: ptr.String("__Description__"),
+										Category:    ptr.String("__Category__"),
+										Confidence:  ptr.Float64(1.0),
+									},
+									{
+										TargetId:    ptr.String("__TargetId__"),
+										TargetType:  types.FindingTargetType("SPAN_ID"),
+										Description: ptr.String("__Description__"),
+										Category:    ptr.String("__Category__"),
+										Confidence:  ptr.Float64(1.0),
+									},
+								},
+							},
+						},
+					},
 				},
 			},
 		},
@@ -2459,11 +2781,13 @@ func TestCheckResponseSnapshot_GetMemoryRecord(t *testing.T) {
 				"__Member__",
 			},
 			CreatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			Timestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			Metadata: map[string]types.MemoryRecordMetadataValue{
 				"key0": &types.MemoryRecordMetadataValueMemberStringValue{
 					Value: "__MemoryRecordMetadataValueMemberStringValue__",
 				},
 			},
+			ExpiresAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("GetMemoryRecord.response")
@@ -3141,7 +3465,8 @@ func TestCheckResponseSnapshot_ListBatchEvaluations(t *testing.T) {
 					NumberOfSessionsIgnored:    ptr.Int32(1),
 					EvaluatorSummaries: []types.EvaluatorSummary{
 						{
-							EvaluatorId: ptr.String("__EvaluatorId__"),
+							EvaluatorId:             ptr.String("__EvaluatorId__"),
+							EvaluationDimensionName: ptr.String("__EvaluationDimensionName__"),
 							Statistics: &types.EvaluatorStatistics{
 								AverageScore: ptr.Float64(1.0),
 							},
@@ -3149,7 +3474,8 @@ func TestCheckResponseSnapshot_ListBatchEvaluations(t *testing.T) {
 							TotalFailed:    ptr.Int32(1),
 						},
 						{
-							EvaluatorId: ptr.String("__EvaluatorId__"),
+							EvaluatorId:             ptr.String("__EvaluatorId__"),
+							EvaluationDimensionName: ptr.String("__EvaluationDimensionName__"),
 							Statistics: &types.EvaluatorStatistics{
 								AverageScore: ptr.Float64(1.0),
 							},
@@ -3196,7 +3522,8 @@ func TestCheckResponseSnapshot_ListBatchEvaluations(t *testing.T) {
 					NumberOfSessionsIgnored:    ptr.Int32(1),
 					EvaluatorSummaries: []types.EvaluatorSummary{
 						{
-							EvaluatorId: ptr.String("__EvaluatorId__"),
+							EvaluatorId:             ptr.String("__EvaluatorId__"),
+							EvaluationDimensionName: ptr.String("__EvaluationDimensionName__"),
 							Statistics: &types.EvaluatorStatistics{
 								AverageScore: ptr.Float64(1.0),
 							},
@@ -3204,7 +3531,8 @@ func TestCheckResponseSnapshot_ListBatchEvaluations(t *testing.T) {
 							TotalFailed:    ptr.Int32(1),
 						},
 						{
-							EvaluatorId: ptr.String("__EvaluatorId__"),
+							EvaluatorId:             ptr.String("__EvaluatorId__"),
+							EvaluationDimensionName: ptr.String("__EvaluationDimensionName__"),
 							Statistics: &types.EvaluatorStatistics{
 								AverageScore: ptr.Float64(1.0),
 							},
@@ -3547,6 +3875,7 @@ func TestCheckResponseSnapshot_ListMemoryRecords(t *testing.T) {
 				},
 				CreatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 				Score:     ptr.Float64(1.0),
+				Timestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 				Metadata: map[string]types.MemoryRecordMetadataValue{
 					"key0": &types.MemoryRecordMetadataValueMemberStringValue{
 						Value: "__MemoryRecordMetadataValueMemberStringValue__",
@@ -3565,6 +3894,7 @@ func TestCheckResponseSnapshot_ListMemoryRecords(t *testing.T) {
 				},
 				CreatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 				Score:     ptr.Float64(1.0),
+				Timestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 				Metadata: map[string]types.MemoryRecordMetadataValue{
 					"key0": &types.MemoryRecordMetadataValueMemberStringValue{
 						Value: "__MemoryRecordMetadataValueMemberStringValue__",
@@ -3869,6 +4199,7 @@ func TestCheckResponseSnapshot_RetrieveMemoryRecords(t *testing.T) {
 				},
 				CreatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 				Score:     ptr.Float64(1.0),
+				Timestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 				Metadata: map[string]types.MemoryRecordMetadataValue{
 					"key0": &types.MemoryRecordMetadataValueMemberStringValue{
 						Value: "__MemoryRecordMetadataValueMemberStringValue__",
@@ -3887,6 +4218,7 @@ func TestCheckResponseSnapshot_RetrieveMemoryRecords(t *testing.T) {
 				},
 				CreatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 				Score:     ptr.Float64(1.0),
+				Timestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 				Metadata: map[string]types.MemoryRecordMetadataValue{
 					"key0": &types.MemoryRecordMetadataValueMemberStringValue{
 						Value: "__MemoryRecordMetadataValueMemberStringValue__",
@@ -4178,6 +4510,22 @@ func TestCheckResponseSnapshot_StartBatchEvaluation(t *testing.T) {
 					TimeRange: &types.SessionFilterConfig{
 						StartTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 						EndTime:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					},
+					SessionTraceIds: []types.SessionTraceIds{
+						{
+							SessionId: ptr.String("__SessionId__"),
+							TraceIds: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+						{
+							SessionId: ptr.String("__SessionId__"),
+							TraceIds: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
 					},
 				},
 			},
@@ -4899,6 +5247,9 @@ func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 			},
 		},
 		ClientToken: ptr.String("__ClientToken__"),
+		RecordExpirySpecification: &types.RecordExpirySpecificationMemberRecordExpiryDurationDays{
+			Value: 1,
+		},
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
@@ -5222,6 +5573,9 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 			},
 		},
 		ClientToken: ptr.String("__ClientToken__"),
+		RecordExpirySpecification: &types.RecordExpirySpecificationMemberRecordExpiryDurationDays{
+			Value: 1,
+		},
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
@@ -5379,6 +5733,9 @@ func TestCheckResponseSnapshot_Error_ServiceException(t *testing.T) {
 			},
 		},
 		ClientToken: ptr.String("__ClientToken__"),
+		RecordExpirySpecification: &types.RecordExpirySpecificationMemberRecordExpiryDurationDays{
+			Value: 1,
+		},
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
@@ -5443,6 +5800,9 @@ func TestCheckResponseSnapshot_Error_ServiceQuotaExceededException(t *testing.T)
 			},
 		},
 		ClientToken: ptr.String("__ClientToken__"),
+		RecordExpirySpecification: &types.RecordExpirySpecificationMemberRecordExpiryDurationDays{
+			Value: 1,
+		},
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
@@ -5560,6 +5920,9 @@ func TestCheckResponseSnapshot_Error_ThrottledException(t *testing.T) {
 			},
 		},
 		ClientToken: ptr.String("__ClientToken__"),
+		RecordExpirySpecification: &types.RecordExpirySpecificationMemberRecordExpiryDurationDays{
+			Value: 1,
+		},
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
@@ -5695,6 +6058,9 @@ func TestCheckResponseSnapshot_Error_ValidationException(t *testing.T) {
 			},
 		},
 		ClientToken: ptr.String("__ClientToken__"),
+		RecordExpirySpecification: &types.RecordExpirySpecificationMemberRecordExpiryDurationDays{
+			Value: 1,
+		},
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")

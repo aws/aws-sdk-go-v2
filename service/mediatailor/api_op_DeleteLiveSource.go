@@ -4,6 +4,8 @@ package mediatailor
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/mediatailor/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -38,6 +40,34 @@ type DeleteLiveSourceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteLiveSourceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteLiveSourceRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteLiveSourceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LiveSourceName != nil {
+		s.WriteString(schemas.DeleteLiveSourceRequest_LiveSourceName, *v.LiveSourceName)
+	}
+	if v.SourceLocationName != nil {
+		s.WriteString(schemas.DeleteLiveSourceRequest_SourceLocationName, *v.SourceLocationName)
+	}
+}
+func (v *DeleteLiveSourceInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteLiveSourceRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteLiveSourceRequest_LiveSourceName:
+			v.LiveSourceName = new(string)
+			return d.ReadString(schemas.DeleteLiveSourceRequest_LiveSourceName, v.LiveSourceName)
+		case schemas.DeleteLiveSourceRequest_SourceLocationName:
+			v.SourceLocationName = new(string)
+			return d.ReadString(schemas.DeleteLiveSourceRequest_SourceLocationName, v.SourceLocationName)
+		}
+		return nil
+	})
+}
+
 type DeleteLiveSourceOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -45,13 +75,26 @@ type DeleteLiveSourceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteLiveSourceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteLiveSourceResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteLiveSourceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteLiveSourceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteLiveSourceResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteLiveSourceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteLiveSource{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteLiveSource, schemas.DeleteLiveSourceRequest, schemas.DeleteLiveSourceResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteLiveSource{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteLiveSource, schemas.DeleteLiveSourceRequest, schemas.DeleteLiveSourceResponse), output: &DeleteLiveSourceOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

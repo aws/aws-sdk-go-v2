@@ -2685,6 +2685,21 @@ func validateConversationContext(v *types.ConversationContext) error {
 	}
 }
 
+func validateDelegateAgentConfiguration(v *types.DelegateAgentConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DelegateAgentConfiguration"}
+	if v.AgentTarget == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AgentTarget"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateEmailGenerativeAnswerAIAgentConfiguration(v *types.EmailGenerativeAnswerAIAgentConfiguration) error {
 	if v == nil {
 		return nil
@@ -3089,6 +3104,21 @@ func validateGuardrailWordsConfig(v []types.GuardrailWordConfig) error {
 	}
 }
 
+func validateHandoffAgentConfiguration(v *types.HandoffAgentConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "HandoffAgentConfiguration"}
+	if v.AgentTarget == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AgentTarget"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateHierarchicalChunkingConfiguration(v *types.HierarchicalChunkingConfiguration) error {
 	if v == nil {
 		return nil
@@ -3388,17 +3418,60 @@ func validateMessageTemplateSourceConfiguration(v types.MessageTemplateSourceCon
 	}
 }
 
+func validateMultiAgentConfiguration(v types.MultiAgentConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "MultiAgentConfiguration"}
+	switch uv := v.(type) {
+	case *types.MultiAgentConfigurationMemberDelegateAgentConfiguration:
+		if err := validateDelegateAgentConfiguration(&uv.Value); err != nil {
+			invalidParams.AddNested("[delegateAgentConfiguration]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.MultiAgentConfigurationMemberHandoffAgentConfiguration:
+		if err := validateHandoffAgentConfiguration(&uv.Value); err != nil {
+			invalidParams.AddNested("[handoffAgentConfiguration]", err.(smithy.InvalidParamsError))
+		}
+
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateMultiAgentConfigurationList(v []types.MultiAgentConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "MultiAgentConfigurationList"}
+	for i := range v {
+		if err := validateMultiAgentConfiguration(v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOrchestrationAIAgentConfiguration(v *types.OrchestrationAIAgentConfiguration) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "OrchestrationAIAgentConfiguration"}
-	if v.OrchestrationAIPromptId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("OrchestrationAIPromptId"))
-	}
 	if v.ToolConfigurations != nil {
 		if err := validateToolConfigurationList(v.ToolConfigurations); err != nil {
 			invalidParams.AddNested("ToolConfigurations", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.MultiAgentConfigurations != nil {
+		if err := validateMultiAgentConfigurationList(v.MultiAgentConfigurations); err != nil {
+			invalidParams.AddNested("MultiAgentConfigurations", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

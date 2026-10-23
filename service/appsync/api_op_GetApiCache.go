@@ -4,7 +4,9 @@ package appsync
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/appsync/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/appsync/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -35,6 +37,18 @@ type GetApiCacheInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetApiCacheInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetApiCacheRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetApiCacheInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApiId != nil {
+		s.WriteString(schemas.GetApiCacheRequest_apiId, *v.ApiId)
+	}
+}
+
 // Represents the output of a GetApiCache operation.
 type GetApiCacheOutput struct {
 
@@ -47,13 +61,34 @@ type GetApiCacheOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetApiCacheOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetApiCacheResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetApiCacheOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApiCache != nil {
+		s.WriteStruct(schemas.GetApiCacheResponse_apiCache)
+		v.ApiCache.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetApiCacheOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetApiCacheResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetApiCacheResponse_apiCache:
+			v.ApiCache = &types.ApiCache{}
+			return v.ApiCache.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetApiCacheMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetApiCache{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetApiCache, schemas.GetApiCacheRequest, schemas.GetApiCacheResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetApiCache{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetApiCache, schemas.GetApiCacheRequest, schemas.GetApiCacheResponse), output: &GetApiCacheOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

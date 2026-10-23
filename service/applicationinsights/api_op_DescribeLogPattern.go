@@ -4,7 +4,9 @@ package applicationinsights
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/applicationinsights/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/applicationinsights/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -47,6 +49,27 @@ type DescribeLogPatternInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeLogPatternInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeLogPatternRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeLogPatternInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountId != nil {
+		s.WriteString(schemas.DescribeLogPatternRequest_AccountId, *v.AccountId)
+	}
+	if v.PatternName != nil {
+		s.WriteString(schemas.DescribeLogPatternRequest_PatternName, *v.PatternName)
+	}
+	if v.PatternSetName != nil {
+		s.WriteString(schemas.DescribeLogPatternRequest_PatternSetName, *v.PatternSetName)
+	}
+	if v.ResourceGroupName != nil {
+		s.WriteString(schemas.DescribeLogPatternRequest_ResourceGroupName, *v.ResourceGroupName)
+	}
+}
+
 type DescribeLogPatternOutput struct {
 
 	// The Amazon Web Services account ID for the resource group owner.
@@ -64,13 +87,46 @@ type DescribeLogPatternOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeLogPatternOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeLogPatternResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeLogPatternOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountId != nil {
+		s.WriteString(schemas.DescribeLogPatternResponse_AccountId, *v.AccountId)
+	}
+	if v.LogPattern != nil {
+		s.WriteStruct(schemas.DescribeLogPatternResponse_LogPattern)
+		v.LogPattern.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ResourceGroupName != nil {
+		s.WriteString(schemas.DescribeLogPatternResponse_ResourceGroupName, *v.ResourceGroupName)
+	}
+}
+func (v *DescribeLogPatternOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeLogPatternResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeLogPatternResponse_AccountId:
+			v.AccountId = new(string)
+			return d.ReadString(schemas.DescribeLogPatternResponse_AccountId, v.AccountId)
+		case schemas.DescribeLogPatternResponse_LogPattern:
+			v.LogPattern = &types.LogPattern{}
+			return v.LogPattern.Deserialize(d)
+		case schemas.DescribeLogPatternResponse_ResourceGroupName:
+			v.ResourceGroupName = new(string)
+			return d.ReadString(schemas.DescribeLogPatternResponse_ResourceGroupName, v.ResourceGroupName)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeLogPatternMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpDescribeLogPattern{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeLogPattern, schemas.DescribeLogPatternRequest, schemas.DescribeLogPatternResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpDescribeLogPattern{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeLogPattern, schemas.DescribeLogPatternRequest, schemas.DescribeLogPatternResponse), output: &DescribeLogPatternOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

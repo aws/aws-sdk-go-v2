@@ -4,7 +4,9 @@ package devicefarm
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/devicefarm/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/devicefarm/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -36,6 +38,18 @@ type ListOfferingPromotionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListOfferingPromotionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListOfferingPromotionsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListOfferingPromotionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListOfferingPromotionsRequest_nextToken, *v.NextToken)
+	}
+}
+
 type ListOfferingPromotionsOutput struct {
 
 	// An identifier to be used in the next call to this operation, to return the next
@@ -51,13 +65,35 @@ type ListOfferingPromotionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListOfferingPromotionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListOfferingPromotionsResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListOfferingPromotionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListOfferingPromotionsResult_nextToken, *v.NextToken)
+	}
+	serializeOfferingPromotions(s, schemas.ListOfferingPromotionsResult_offeringPromotions, v.OfferingPromotions)
+}
+func (v *ListOfferingPromotionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListOfferingPromotionsResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListOfferingPromotionsResult_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListOfferingPromotionsResult_nextToken, v.NextToken)
+		case schemas.ListOfferingPromotionsResult_offeringPromotions:
+			return deserializeOfferingPromotions(d, schemas.ListOfferingPromotionsResult_offeringPromotions, &v.OfferingPromotions)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListOfferingPromotionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListOfferingPromotions{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListOfferingPromotions, schemas.ListOfferingPromotionsRequest, schemas.ListOfferingPromotionsResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListOfferingPromotions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListOfferingPromotions, schemas.ListOfferingPromotionsRequest, schemas.ListOfferingPromotionsResult), output: &ListOfferingPromotionsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -5,7 +5,9 @@ package lookoutequipment
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/lookoutequipment/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lookoutequipment/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -66,6 +68,42 @@ type ListModelVersionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListModelVersionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListModelVersionsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListModelVersionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreatedAtEndTime != nil {
+		s.WriteTime(schemas.ListModelVersionsRequest_CreatedAtEndTime, *v.CreatedAtEndTime)
+	}
+	if v.CreatedAtStartTime != nil {
+		s.WriteTime(schemas.ListModelVersionsRequest_CreatedAtStartTime, *v.CreatedAtStartTime)
+	}
+	if v.MaxModelVersion != nil {
+		s.WriteInt64(schemas.ListModelVersionsRequest_MaxModelVersion, *v.MaxModelVersion)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListModelVersionsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.MinModelVersion != nil {
+		s.WriteInt64(schemas.ListModelVersionsRequest_MinModelVersion, *v.MinModelVersion)
+	}
+	if v.ModelName != nil {
+		s.WriteString(schemas.ListModelVersionsRequest_ModelName, *v.ModelName)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListModelVersionsRequest_NextToken, *v.NextToken)
+	}
+	if v.SourceType != "" {
+		s.WriteString(schemas.ListModelVersionsRequest_SourceType, string(v.SourceType))
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.ListModelVersionsRequest_Status, string(v.Status))
+	}
+}
+
 type ListModelVersionsOutput struct {
 
 	// Provides information on the specified model version, including the created
@@ -88,13 +126,35 @@ type ListModelVersionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListModelVersionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListModelVersionsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListModelVersionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeModelVersionSummaries(s, schemas.ListModelVersionsResponse_ModelVersionSummaries, v.ModelVersionSummaries)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListModelVersionsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListModelVersionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListModelVersionsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListModelVersionsResponse_ModelVersionSummaries:
+			return deserializeModelVersionSummaries(d, schemas.ListModelVersionsResponse_ModelVersionSummaries, &v.ModelVersionSummaries)
+		case schemas.ListModelVersionsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListModelVersionsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListModelVersionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpListModelVersions{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListModelVersions, schemas.ListModelVersionsRequest, schemas.ListModelVersionsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpListModelVersions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListModelVersions, schemas.ListModelVersionsRequest, schemas.ListModelVersionsResponse), output: &ListModelVersionsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package databasemigrationservice
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/databasemigrationservice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/databasemigrationservice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -78,6 +80,27 @@ type StartMetadataModelImportInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartMetadataModelImportInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartMetadataModelImportMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartMetadataModelImportInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MigrationProjectIdentifier != nil {
+		s.WriteString(schemas.StartMetadataModelImportMessage_MigrationProjectIdentifier, *v.MigrationProjectIdentifier)
+	}
+	if v.Origin != "" {
+		s.WriteString(schemas.StartMetadataModelImportMessage_Origin, string(v.Origin))
+	}
+	if v.Refresh != false {
+		s.WriteBool(schemas.StartMetadataModelImportMessage_Refresh, v.Refresh)
+	}
+	if v.SelectionRules != nil {
+		s.WriteString(schemas.StartMetadataModelImportMessage_SelectionRules, *v.SelectionRules)
+	}
+}
+
 type StartMetadataModelImportOutput struct {
 
 	// The identifier for the import request.
@@ -89,13 +112,32 @@ type StartMetadataModelImportOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartMetadataModelImportOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartMetadataModelImportResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartMetadataModelImportOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RequestIdentifier != nil {
+		s.WriteString(schemas.StartMetadataModelImportResponse_RequestIdentifier, *v.RequestIdentifier)
+	}
+}
+func (v *StartMetadataModelImportOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartMetadataModelImportResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartMetadataModelImportResponse_RequestIdentifier:
+			v.RequestIdentifier = new(string)
+			return d.ReadString(schemas.StartMetadataModelImportResponse_RequestIdentifier, v.RequestIdentifier)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartMetadataModelImportMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStartMetadataModelImport{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartMetadataModelImport, schemas.StartMetadataModelImportMessage, schemas.StartMetadataModelImportResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpStartMetadataModelImport{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartMetadataModelImport, schemas.StartMetadataModelImportMessage, schemas.StartMetadataModelImportResponse), output: &StartMetadataModelImportOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

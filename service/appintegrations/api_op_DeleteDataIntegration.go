@@ -4,6 +4,8 @@ package appintegrations
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/appintegrations/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -41,6 +43,18 @@ type DeleteDataIntegrationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteDataIntegrationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteDataIntegrationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteDataIntegrationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DataIntegrationIdentifier != nil {
+		s.WriteString(schemas.DeleteDataIntegrationRequest_DataIntegrationIdentifier, *v.DataIntegrationIdentifier)
+	}
+}
+
 type DeleteDataIntegrationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -48,13 +62,26 @@ type DeleteDataIntegrationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteDataIntegrationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteDataIntegrationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteDataIntegrationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteDataIntegrationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteDataIntegrationResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteDataIntegrationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteDataIntegration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteDataIntegration, schemas.DeleteDataIntegrationRequest, schemas.DeleteDataIntegrationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteDataIntegration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteDataIntegration, schemas.DeleteDataIntegrationRequest, schemas.DeleteDataIntegrationResponse), output: &DeleteDataIntegrationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

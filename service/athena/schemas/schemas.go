@@ -5,6 +5,7 @@ package schemas
 import (
 	smithy "github.com/aws/smithy-go"
 	smithyprelude "github.com/aws/smithy-go/prelude"
+	smithytraits "github.com/aws/smithy-go/traits"
 )
 
 var BatchGetNamedQuery = smithy.NewSchema(smithy.ShapeID{
@@ -1074,13 +1075,13 @@ var _Integer = smithy.NewSchema(smithy.ShapeID{
 var InternalServerException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.athena",
 	Name:      "InternalServerException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"})
 var InternalServerException_Message *smithy.Schema
 
 var InvalidRequestException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.athena",
 	Name:      "InvalidRequestException",
-}, smithy.ShapeTypeStructure, 2)
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"})
 var InvalidRequestException_AthenaErrorCode *smithy.Schema
 
 var InvalidRequestException_Message *smithy.Schema
@@ -1254,7 +1255,7 @@ var _MaxWorkGroupsCount = smithy.NewSchema(smithy.ShapeID{
 var MetadataException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.athena",
 	Name:      "MetadataException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var MetadataException_Message *smithy.Schema
 
 var MonitoringConfiguration = smithy.NewSchema(smithy.ShapeID{
@@ -1639,7 +1640,7 @@ var _QueryString = smithy.NewSchema(smithy.ShapeID{
 var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.athena",
 	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 2)
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"})
 var ResourceNotFoundException_Message *smithy.Schema
 
 var ResourceNotFoundException_ResourceName *smithy.Schema
@@ -1761,7 +1762,7 @@ var _S3Uri = smithy.NewSchema(smithy.ShapeID{
 var SessionAlreadyExistsException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.athena",
 	Name:      "SessionAlreadyExistsException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var SessionAlreadyExistsException_Message *smithy.Schema
 
 var SessionConfiguration = smithy.NewSchema(smithy.ShapeID{
@@ -1970,7 +1971,7 @@ var _Token = smithy.NewSchema(smithy.ShapeID{
 var TooManyRequestsException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.athena",
 	Name:      "TooManyRequestsException",
-}, smithy.ShapeTypeStructure, 2)
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"})
 var TooManyRequestsException_Message *smithy.Schema
 
 var TooManyRequestsException_Reason *smithy.Schema

@@ -5,7 +5,9 @@ package lookoutequipment
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/lookoutequipment/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lookoutequipment/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -48,6 +50,30 @@ type ListModelsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListModelsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListModelsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListModelsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DatasetNameBeginsWith != nil {
+		s.WriteString(schemas.ListModelsRequest_DatasetNameBeginsWith, *v.DatasetNameBeginsWith)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListModelsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.ModelNameBeginsWith != nil {
+		s.WriteString(schemas.ListModelsRequest_ModelNameBeginsWith, *v.ModelNameBeginsWith)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListModelsRequest_NextToken, *v.NextToken)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.ListModelsRequest_Status, string(v.Status))
+	}
+}
+
 type ListModelsOutput struct {
 
 	// Provides information on the specified model, including created time, model and
@@ -64,13 +90,35 @@ type ListModelsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListModelsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListModelsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListModelsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeModelSummaries(s, schemas.ListModelsResponse_ModelSummaries, v.ModelSummaries)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListModelsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListModelsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListModelsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListModelsResponse_ModelSummaries:
+			return deserializeModelSummaries(d, schemas.ListModelsResponse_ModelSummaries, &v.ModelSummaries)
+		case schemas.ListModelsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListModelsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListModelsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpListModels{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListModels, schemas.ListModelsRequest, schemas.ListModelsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpListModels{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListModels, schemas.ListModelsRequest, schemas.ListModelsResponse), output: &ListModelsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

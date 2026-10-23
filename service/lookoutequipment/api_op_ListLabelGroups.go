@@ -5,7 +5,9 @@ package lookoutequipment
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/lookoutequipment/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lookoutequipment/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -40,6 +42,24 @@ type ListLabelGroupsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListLabelGroupsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListLabelGroupsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListLabelGroupsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LabelGroupNameBeginsWith != nil {
+		s.WriteString(schemas.ListLabelGroupsRequest_LabelGroupNameBeginsWith, *v.LabelGroupNameBeginsWith)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListLabelGroupsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListLabelGroupsRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListLabelGroupsOutput struct {
 
 	//  A summary of the label groups.
@@ -55,13 +75,35 @@ type ListLabelGroupsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListLabelGroupsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListLabelGroupsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListLabelGroupsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeLabelGroupSummaries(s, schemas.ListLabelGroupsResponse_LabelGroupSummaries, v.LabelGroupSummaries)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListLabelGroupsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListLabelGroupsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListLabelGroupsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListLabelGroupsResponse_LabelGroupSummaries:
+			return deserializeLabelGroupSummaries(d, schemas.ListLabelGroupsResponse_LabelGroupSummaries, &v.LabelGroupSummaries)
+		case schemas.ListLabelGroupsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListLabelGroupsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListLabelGroupsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpListLabelGroups{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListLabelGroups, schemas.ListLabelGroupsRequest, schemas.ListLabelGroupsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpListLabelGroups{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListLabelGroups, schemas.ListLabelGroupsRequest, schemas.ListLabelGroupsResponse), output: &ListLabelGroupsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

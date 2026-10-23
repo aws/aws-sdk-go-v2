@@ -7,8 +7,9 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
-// Deletes and recreates all of the AWS resources (for example: the Auto Scaling
-// group, load balancer, etc.) for a specified environment and forces a restart.
+// Deletes and recreates all of the Amazon Web Services resources (for example:
+// the Auto Scaling group, load balancer, etc.) for a specified environment and
+// forces a restart.
 func (c *Client) RebuildEnvironment(ctx context.Context, params *RebuildEnvironmentInput, optFns ...func(*Options)) (*RebuildEnvironmentOutput, error) {
 	if params == nil {
 		params = &RebuildEnvironmentInput{}
@@ -29,15 +30,14 @@ type RebuildEnvironmentInput struct {
 	// The ID of the environment to rebuild.
 	//
 	// Condition: You must specify either this or an EnvironmentName, or both. If you
-	// do not specify either, AWS Elastic Beanstalk returns MissingRequiredParameter
+	// do not specify either, Elastic Beanstalk returns MissingRequiredParameter
 	// error.
 	EnvironmentId *string
 
 	// The name of the environment to rebuild.
 	//
 	// Condition: You must specify either this or an EnvironmentId, or both. If you do
-	// not specify either, AWS Elastic Beanstalk returns MissingRequiredParameter
-	// error.
+	// not specify either, Elastic Beanstalk returns MissingRequiredParameter error.
 	EnvironmentName *string
 
 	noSmithyDocumentSerde

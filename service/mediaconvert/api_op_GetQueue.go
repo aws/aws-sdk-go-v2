@@ -4,7 +4,9 @@ package mediaconvert
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/mediaconvert/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/mediaconvert/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -34,6 +36,18 @@ type GetQueueInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetQueueInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetQueueRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetQueueInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.GetQueueRequest_Name, *v.Name)
+	}
+}
+
 type GetQueueOutput struct {
 
 	// You can use queues to manage the resources that are available to your AWS
@@ -49,13 +63,34 @@ type GetQueueOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetQueueOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetQueueResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetQueueOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Queue != nil {
+		s.WriteStruct(schemas.GetQueueResponse_Queue)
+		v.Queue.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetQueueOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetQueueResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetQueueResponse_Queue:
+			v.Queue = &types.Queue{}
+			return v.Queue.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetQueueMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetQueue{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetQueue, schemas.GetQueueRequest, schemas.GetQueueResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetQueue{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetQueue, schemas.GetQueueRequest, schemas.GetQueueResponse), output: &GetQueueOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

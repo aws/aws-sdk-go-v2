@@ -5,7 +5,9 @@ package mwaaserverless
 import (
 	"context"
 	"github.com/aws/aws-sdk-go-v2/service/mwaaserverless/document"
+	"github.com/aws/aws-sdk-go-v2/service/mwaaserverless/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/mwaaserverless/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -41,6 +43,21 @@ type GetWorkflowRunInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetWorkflowRunInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetWorkflowRunRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetWorkflowRunInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RunId != nil {
+		s.WriteString(schemas.GetWorkflowRunRequest_RunId, *v.RunId)
+	}
+	if v.WorkflowArn != nil {
+		s.WriteString(schemas.GetWorkflowRunRequest_WorkflowArn, *v.WorkflowArn)
+	}
+}
+
 type GetWorkflowRunOutput struct {
 
 	// Parameters that were overridden for this specific workflow run.
@@ -69,13 +86,65 @@ type GetWorkflowRunOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetWorkflowRunOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetWorkflowRunResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetWorkflowRunOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeObjectMap(s, schemas.GetWorkflowRunResponse_OverrideParameters, v.OverrideParameters)
+	if v.RunDetail != nil {
+		s.WriteStruct(schemas.GetWorkflowRunResponse_RunDetail)
+		v.RunDetail.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RunId != nil {
+		s.WriteString(schemas.GetWorkflowRunResponse_RunId, *v.RunId)
+	}
+	if v.RunType != "" {
+		s.WriteString(schemas.GetWorkflowRunResponse_RunType, string(v.RunType))
+	}
+	if v.WorkflowArn != nil {
+		s.WriteString(schemas.GetWorkflowRunResponse_WorkflowArn, *v.WorkflowArn)
+	}
+	if v.WorkflowVersion != nil {
+		s.WriteString(schemas.GetWorkflowRunResponse_WorkflowVersion, *v.WorkflowVersion)
+	}
+}
+func (v *GetWorkflowRunOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetWorkflowRunResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetWorkflowRunResponse_OverrideParameters:
+			return deserializeObjectMap(d, schemas.GetWorkflowRunResponse_OverrideParameters, &v.OverrideParameters)
+		case schemas.GetWorkflowRunResponse_RunDetail:
+			v.RunDetail = &types.WorkflowRunDetail{}
+			return v.RunDetail.Deserialize(d)
+		case schemas.GetWorkflowRunResponse_RunId:
+			v.RunId = new(string)
+			return d.ReadString(schemas.GetWorkflowRunResponse_RunId, v.RunId)
+		case schemas.GetWorkflowRunResponse_RunType:
+			var ev string
+			if err := d.ReadString(schemas.GetWorkflowRunResponse_RunType, &ev); err != nil {
+				return err
+			}
+			v.RunType = types.RunType(ev)
+			return nil
+		case schemas.GetWorkflowRunResponse_WorkflowArn:
+			v.WorkflowArn = new(string)
+			return d.ReadString(schemas.GetWorkflowRunResponse_WorkflowArn, v.WorkflowArn)
+		case schemas.GetWorkflowRunResponse_WorkflowVersion:
+			v.WorkflowVersion = new(string)
+			return d.ReadString(schemas.GetWorkflowRunResponse_WorkflowVersion, v.WorkflowVersion)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetWorkflowRunMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpGetWorkflowRun{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetWorkflowRun, schemas.GetWorkflowRunRequest, schemas.GetWorkflowRunResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpGetWorkflowRun{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetWorkflowRun, schemas.GetWorkflowRunRequest, schemas.GetWorkflowRunResponse), output: &GetWorkflowRunOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

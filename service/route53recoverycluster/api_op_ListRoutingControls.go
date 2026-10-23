@@ -5,7 +5,9 @@ package route53recoverycluster
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/route53recoverycluster/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/route53recoverycluster/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -70,6 +72,24 @@ type ListRoutingControlsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListRoutingControlsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListRoutingControlsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListRoutingControlsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ControlPanelArn != nil {
+		s.WriteString(schemas.ListRoutingControlsRequest_ControlPanelArn, *v.ControlPanelArn)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListRoutingControlsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListRoutingControlsRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListRoutingControlsOutput struct {
 
 	// The list of routing controls.
@@ -87,13 +107,35 @@ type ListRoutingControlsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListRoutingControlsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListRoutingControlsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListRoutingControlsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListRoutingControlsResponse_NextToken, *v.NextToken)
+	}
+	serializeRoutingControls(s, schemas.ListRoutingControlsResponse_RoutingControls, v.RoutingControls)
+}
+func (v *ListRoutingControlsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListRoutingControlsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListRoutingControlsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListRoutingControlsResponse_NextToken, v.NextToken)
+		case schemas.ListRoutingControlsResponse_RoutingControls:
+			return deserializeRoutingControls(d, schemas.ListRoutingControlsResponse_RoutingControls, &v.RoutingControls)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListRoutingControlsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpListRoutingControls{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListRoutingControls, schemas.ListRoutingControlsRequest, schemas.ListRoutingControlsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpListRoutingControls{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListRoutingControls, schemas.ListRoutingControlsRequest, schemas.ListRoutingControlsResponse), output: &ListRoutingControlsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

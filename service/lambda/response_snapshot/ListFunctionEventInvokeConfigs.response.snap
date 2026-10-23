@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"FunctionEventInvokeConfigs":[{"DestinationConfig":{"OnFailure":{"Destination":"__Destination__"},"OnSuccess":{"Destination":"__Destination__"}},"FunctionArn":"__FunctionArn__","LastModified":946684800,"MaximumEventAgeInSeconds":1,"MaximumRetryAttempts":1},{"DestinationConfig":{"OnFailure":{"Destination":"__Destination__"},"OnSuccess":{"Destination":"__Destination__"}},"FunctionArn":"__FunctionArn__","LastModified":946684800,"MaximumEventAgeInSeconds":1,"MaximumRetryAttempts":1}],"NextMarker":"__NextMarker__"}

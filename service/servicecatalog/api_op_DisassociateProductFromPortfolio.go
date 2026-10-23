@@ -4,6 +4,8 @@ package servicecatalog
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/servicecatalog/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -47,6 +49,24 @@ type DisassociateProductFromPortfolioInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DisassociateProductFromPortfolioInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DisassociateProductFromPortfolioInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DisassociateProductFromPortfolioInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AcceptLanguage != nil {
+		s.WriteString(schemas.DisassociateProductFromPortfolioInput_AcceptLanguage, *v.AcceptLanguage)
+	}
+	if v.PortfolioId != nil {
+		s.WriteString(schemas.DisassociateProductFromPortfolioInput_PortfolioId, *v.PortfolioId)
+	}
+	if v.ProductId != nil {
+		s.WriteString(schemas.DisassociateProductFromPortfolioInput_ProductId, *v.ProductId)
+	}
+}
+
 type DisassociateProductFromPortfolioOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -54,13 +74,26 @@ type DisassociateProductFromPortfolioOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DisassociateProductFromPortfolioOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DisassociateProductFromPortfolioOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DisassociateProductFromPortfolioOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DisassociateProductFromPortfolioOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DisassociateProductFromPortfolioOutput, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDisassociateProductFromPortfolioMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDisassociateProductFromPortfolio{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisassociateProductFromPortfolio, schemas.DisassociateProductFromPortfolioInput, schemas.DisassociateProductFromPortfolioOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDisassociateProductFromPortfolio{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisassociateProductFromPortfolio, schemas.DisassociateProductFromPortfolioInput, schemas.DisassociateProductFromPortfolioOutput), output: &DisassociateProductFromPortfolioOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -5,7 +5,9 @@ package secretsmanager
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/secretsmanager/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/secretsmanager/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -148,6 +150,36 @@ type RotateSecretInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RotateSecretInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RotateSecretRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RotateSecretInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientRequestToken != nil {
+		s.WriteString(schemas.RotateSecretRequest_ClientRequestToken, *v.ClientRequestToken)
+	}
+	serializeExternalSecretRotationMetadataType(s, schemas.RotateSecretRequest_ExternalSecretRotationMetadata, v.ExternalSecretRotationMetadata)
+	if v.ExternalSecretRotationRoleArn != nil {
+		s.WriteString(schemas.RotateSecretRequest_ExternalSecretRotationRoleArn, *v.ExternalSecretRotationRoleArn)
+	}
+	if v.RotateImmediately != nil {
+		s.WriteBool(schemas.RotateSecretRequest_RotateImmediately, *v.RotateImmediately)
+	}
+	if v.RotationLambdaARN != nil {
+		s.WriteString(schemas.RotateSecretRequest_RotationLambdaARN, *v.RotationLambdaARN)
+	}
+	if v.RotationRules != nil {
+		s.WriteStruct(schemas.RotateSecretRequest_RotationRules)
+		v.RotationRules.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SecretId != nil {
+		s.WriteString(schemas.RotateSecretRequest_SecretId, *v.SecretId)
+	}
+}
+
 type RotateSecretOutput struct {
 
 	// The ARN of the secret.
@@ -165,13 +197,44 @@ type RotateSecretOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RotateSecretOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RotateSecretResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RotateSecretOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ARN != nil {
+		s.WriteString(schemas.RotateSecretResponse_ARN, *v.ARN)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.RotateSecretResponse_Name, *v.Name)
+	}
+	if v.VersionId != nil {
+		s.WriteString(schemas.RotateSecretResponse_VersionId, *v.VersionId)
+	}
+}
+func (v *RotateSecretOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RotateSecretResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RotateSecretResponse_ARN:
+			v.ARN = new(string)
+			return d.ReadString(schemas.RotateSecretResponse_ARN, v.ARN)
+		case schemas.RotateSecretResponse_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.RotateSecretResponse_Name, v.Name)
+		case schemas.RotateSecretResponse_VersionId:
+			v.VersionId = new(string)
+			return d.ReadString(schemas.RotateSecretResponse_VersionId, v.VersionId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationRotateSecretMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpRotateSecret{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RotateSecret, schemas.RotateSecretRequest, schemas.RotateSecretResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpRotateSecret{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RotateSecret, schemas.RotateSecretRequest, schemas.RotateSecretResponse), output: &RotateSecretOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package mediaconnect
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/mediaconnect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/mediaconnect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -73,6 +75,46 @@ type UpdateFlowInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateFlowInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateFlowRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateFlowInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EncodingConfig != nil {
+		s.WriteStruct(schemas.UpdateFlowRequest_EncodingConfig)
+		v.EncodingConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.FlowArn != nil {
+		s.WriteString(schemas.UpdateFlowRequest_FlowArn, *v.FlowArn)
+	}
+	if v.FlowSize != "" {
+		s.WriteString(schemas.UpdateFlowRequest_FlowSize, string(v.FlowSize))
+	}
+	if v.Maintenance != nil {
+		s.WriteStruct(schemas.UpdateFlowRequest_Maintenance)
+		v.Maintenance.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.NdiConfig != nil {
+		s.WriteStruct(schemas.UpdateFlowRequest_NdiConfig)
+		v.NdiConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SourceFailoverConfig != nil {
+		s.WriteStruct(schemas.UpdateFlowRequest_SourceFailoverConfig)
+		v.SourceFailoverConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SourceMonitoringConfig != nil {
+		s.WriteStruct(schemas.UpdateFlowRequest_SourceMonitoringConfig)
+		v.SourceMonitoringConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type UpdateFlowOutput struct {
 
 	//  The updated flow.
@@ -84,13 +126,34 @@ type UpdateFlowOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateFlowOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateFlowResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateFlowOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Flow != nil {
+		s.WriteStruct(schemas.UpdateFlowResponse_Flow)
+		v.Flow.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateFlowOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateFlowResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateFlowResponse_Flow:
+			v.Flow = &types.Flow{}
+			return v.Flow.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateFlowMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateFlow{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateFlow, schemas.UpdateFlowRequest, schemas.UpdateFlowResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateFlow{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateFlow, schemas.UpdateFlowRequest, schemas.UpdateFlowResponse), output: &UpdateFlowOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

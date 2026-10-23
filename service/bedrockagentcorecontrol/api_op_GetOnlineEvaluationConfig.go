@@ -4,7 +4,9 @@ package bedrockagentcorecontrol
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -35,6 +37,18 @@ type GetOnlineEvaluationConfigInput struct {
 	OnlineEvaluationConfigId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetOnlineEvaluationConfigInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetOnlineEvaluationConfigRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetOnlineEvaluationConfigInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.OnlineEvaluationConfigId != nil {
+		s.WriteString(schemas.GetOnlineEvaluationConfigRequest_onlineEvaluationConfigId, *v.OnlineEvaluationConfigId)
+	}
 }
 
 type GetOnlineEvaluationConfigOutput struct {
@@ -115,13 +129,127 @@ type GetOnlineEvaluationConfigOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetOnlineEvaluationConfigOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetOnlineEvaluationConfigResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetOnlineEvaluationConfigOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClusteringConfig != nil {
+		s.WriteStruct(schemas.GetOnlineEvaluationConfigResponse_clusteringConfig)
+		v.ClusteringConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.GetOnlineEvaluationConfigResponse_createdAt, *v.CreatedAt)
+	}
+	serializeDataSourceConfig(s, schemas.GetOnlineEvaluationConfigResponse_dataSourceConfig, v.DataSourceConfig)
+	if v.Description != nil {
+		s.WriteString(schemas.GetOnlineEvaluationConfigResponse_description, *v.Description)
+	}
+	if v.EvaluationExecutionRoleArn != nil {
+		s.WriteString(schemas.GetOnlineEvaluationConfigResponse_evaluationExecutionRoleArn, *v.EvaluationExecutionRoleArn)
+	}
+	serializeEvaluatorList(s, schemas.GetOnlineEvaluationConfigResponse_evaluators, v.Evaluators)
+	if v.ExecutionStatus != "" {
+		s.WriteString(schemas.GetOnlineEvaluationConfigResponse_executionStatus, string(v.ExecutionStatus))
+	}
+	if v.FailureReason != nil {
+		s.WriteString(schemas.GetOnlineEvaluationConfigResponse_failureReason, *v.FailureReason)
+	}
+	serializeInsightList(s, schemas.GetOnlineEvaluationConfigResponse_insights, v.Insights)
+	if v.OnlineEvaluationConfigArn != nil {
+		s.WriteString(schemas.GetOnlineEvaluationConfigResponse_onlineEvaluationConfigArn, *v.OnlineEvaluationConfigArn)
+	}
+	if v.OnlineEvaluationConfigId != nil {
+		s.WriteString(schemas.GetOnlineEvaluationConfigResponse_onlineEvaluationConfigId, *v.OnlineEvaluationConfigId)
+	}
+	if v.OnlineEvaluationConfigName != nil {
+		s.WriteString(schemas.GetOnlineEvaluationConfigResponse_onlineEvaluationConfigName, *v.OnlineEvaluationConfigName)
+	}
+	if v.OutputConfig != nil {
+		s.WriteStruct(schemas.GetOnlineEvaluationConfigResponse_outputConfig)
+		v.OutputConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Rule != nil {
+		s.WriteStruct(schemas.GetOnlineEvaluationConfigResponse_rule)
+		v.Rule.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.GetOnlineEvaluationConfigResponse_status, string(v.Status))
+	}
+	if v.UpdatedAt != nil {
+		s.WriteTime(schemas.GetOnlineEvaluationConfigResponse_updatedAt, *v.UpdatedAt)
+	}
+}
+func (v *GetOnlineEvaluationConfigOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetOnlineEvaluationConfigResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetOnlineEvaluationConfigResponse_clusteringConfig:
+			v.ClusteringConfig = &types.ClusteringConfig{}
+			return v.ClusteringConfig.Deserialize(d)
+		case schemas.GetOnlineEvaluationConfigResponse_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.GetOnlineEvaluationConfigResponse_createdAt, v.CreatedAt)
+		case schemas.GetOnlineEvaluationConfigResponse_dataSourceConfig:
+			return deserializeDataSourceConfig(d, schemas.GetOnlineEvaluationConfigResponse_dataSourceConfig, &v.DataSourceConfig)
+		case schemas.GetOnlineEvaluationConfigResponse_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.GetOnlineEvaluationConfigResponse_description, v.Description)
+		case schemas.GetOnlineEvaluationConfigResponse_evaluationExecutionRoleArn:
+			v.EvaluationExecutionRoleArn = new(string)
+			return d.ReadString(schemas.GetOnlineEvaluationConfigResponse_evaluationExecutionRoleArn, v.EvaluationExecutionRoleArn)
+		case schemas.GetOnlineEvaluationConfigResponse_evaluators:
+			return deserializeEvaluatorList(d, schemas.GetOnlineEvaluationConfigResponse_evaluators, &v.Evaluators)
+		case schemas.GetOnlineEvaluationConfigResponse_executionStatus:
+			var ev string
+			if err := d.ReadString(schemas.GetOnlineEvaluationConfigResponse_executionStatus, &ev); err != nil {
+				return err
+			}
+			v.ExecutionStatus = types.OnlineEvaluationExecutionStatus(ev)
+			return nil
+		case schemas.GetOnlineEvaluationConfigResponse_failureReason:
+			v.FailureReason = new(string)
+			return d.ReadString(schemas.GetOnlineEvaluationConfigResponse_failureReason, v.FailureReason)
+		case schemas.GetOnlineEvaluationConfigResponse_insights:
+			return deserializeInsightList(d, schemas.GetOnlineEvaluationConfigResponse_insights, &v.Insights)
+		case schemas.GetOnlineEvaluationConfigResponse_onlineEvaluationConfigArn:
+			v.OnlineEvaluationConfigArn = new(string)
+			return d.ReadString(schemas.GetOnlineEvaluationConfigResponse_onlineEvaluationConfigArn, v.OnlineEvaluationConfigArn)
+		case schemas.GetOnlineEvaluationConfigResponse_onlineEvaluationConfigId:
+			v.OnlineEvaluationConfigId = new(string)
+			return d.ReadString(schemas.GetOnlineEvaluationConfigResponse_onlineEvaluationConfigId, v.OnlineEvaluationConfigId)
+		case schemas.GetOnlineEvaluationConfigResponse_onlineEvaluationConfigName:
+			v.OnlineEvaluationConfigName = new(string)
+			return d.ReadString(schemas.GetOnlineEvaluationConfigResponse_onlineEvaluationConfigName, v.OnlineEvaluationConfigName)
+		case schemas.GetOnlineEvaluationConfigResponse_outputConfig:
+			v.OutputConfig = &types.OutputConfig{}
+			return v.OutputConfig.Deserialize(d)
+		case schemas.GetOnlineEvaluationConfigResponse_rule:
+			v.Rule = &types.Rule{}
+			return v.Rule.Deserialize(d)
+		case schemas.GetOnlineEvaluationConfigResponse_status:
+			var ev string
+			if err := d.ReadString(schemas.GetOnlineEvaluationConfigResponse_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.OnlineEvaluationConfigStatus(ev)
+			return nil
+		case schemas.GetOnlineEvaluationConfigResponse_updatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.GetOnlineEvaluationConfigResponse_updatedAt, v.UpdatedAt)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetOnlineEvaluationConfigMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetOnlineEvaluationConfig{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetOnlineEvaluationConfig, schemas.GetOnlineEvaluationConfigRequest, schemas.GetOnlineEvaluationConfigResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetOnlineEvaluationConfig{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetOnlineEvaluationConfig, schemas.GetOnlineEvaluationConfigRequest, schemas.GetOnlineEvaluationConfigResponse), output: &GetOnlineEvaluationConfigOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

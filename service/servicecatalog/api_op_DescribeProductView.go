@@ -4,7 +4,9 @@ package servicecatalog
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/servicecatalog/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/servicecatalog/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -41,6 +43,21 @@ type DescribeProductViewInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeProductViewInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeProductViewInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeProductViewInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AcceptLanguage != nil {
+		s.WriteString(schemas.DescribeProductViewInput_AcceptLanguage, *v.AcceptLanguage)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.DescribeProductViewInput_Id, *v.Id)
+	}
+}
+
 type DescribeProductViewOutput struct {
 
 	// Summary information about the product.
@@ -55,13 +72,37 @@ type DescribeProductViewOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeProductViewOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeProductViewOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeProductViewOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ProductViewSummary != nil {
+		s.WriteStruct(schemas.DescribeProductViewOutput_ProductViewSummary)
+		v.ProductViewSummary.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeProvisioningArtifacts(s, schemas.DescribeProductViewOutput_ProvisioningArtifacts, v.ProvisioningArtifacts)
+}
+func (v *DescribeProductViewOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeProductViewOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeProductViewOutput_ProductViewSummary:
+			v.ProductViewSummary = &types.ProductViewSummary{}
+			return v.ProductViewSummary.Deserialize(d)
+		case schemas.DescribeProductViewOutput_ProvisioningArtifacts:
+			return deserializeProvisioningArtifacts(d, schemas.DescribeProductViewOutput_ProvisioningArtifacts, &v.ProvisioningArtifacts)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeProductViewMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeProductView{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeProductView, schemas.DescribeProductViewInput, schemas.DescribeProductViewOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeProductView{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeProductView, schemas.DescribeProductViewInput, schemas.DescribeProductViewOutput), output: &DescribeProductViewOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

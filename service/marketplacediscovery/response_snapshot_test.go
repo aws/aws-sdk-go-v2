@@ -109,6 +109,7 @@ func serdeRespClient(status int, header http.Header, body []byte) *Client {
 }
 func TestCheckResponseSnapshot_GetListing(t *testing.T) {
 	want := &GetListingOutput{
+		Locale: ptr.String("__Locale__"),
 		AssociatedEntities: []types.ListingAssociatedEntity{
 			{
 				Product: &types.ProductInformation{
@@ -298,6 +299,7 @@ func TestCheckResponseSnapshot_GetListing(t *testing.T) {
 	}
 	svc := serdeRespClient(status, header, body)
 	got, err := svc.GetListing(context.Background(), &GetListingInput{
+		Locale:    ptr.String("__Locale__"),
 		ListingId: ptr.String("__ListingId__"),
 	})
 	if err != nil {
@@ -310,6 +312,7 @@ func TestCheckResponseSnapshot_GetListing(t *testing.T) {
 
 func TestCheckResponseSnapshot_GetOffer(t *testing.T) {
 	want := &GetOfferOutput{
+		Locale:            ptr.String("__Locale__"),
 		OfferId:           ptr.String("__OfferId__"),
 		Catalog:           ptr.String("__Catalog__"),
 		OfferName:         ptr.String("__OfferName__"),
@@ -381,6 +384,7 @@ func TestCheckResponseSnapshot_GetOffer(t *testing.T) {
 	}
 	svc := serdeRespClient(status, header, body)
 	got, err := svc.GetOffer(context.Background(), &GetOfferInput{
+		Locale:  ptr.String("__Locale__"),
 		OfferId: ptr.String("__OfferId__"),
 	})
 	if err != nil {
@@ -393,6 +397,7 @@ func TestCheckResponseSnapshot_GetOffer(t *testing.T) {
 
 func TestCheckResponseSnapshot_GetOfferSet(t *testing.T) {
 	want := &GetOfferSetOutput{
+		Locale:            ptr.String("__Locale__"),
 		OfferSetId:        ptr.String("__OfferSetId__"),
 		Catalog:           ptr.String("__Catalog__"),
 		OfferSetName:      ptr.String("__OfferSetName__"),
@@ -461,6 +466,7 @@ func TestCheckResponseSnapshot_GetOfferSet(t *testing.T) {
 	}
 	svc := serdeRespClient(status, header, body)
 	got, err := svc.GetOfferSet(context.Background(), &GetOfferSetInput{
+		Locale:     ptr.String("__Locale__"),
 		OfferSetId: ptr.String("__OfferSetId__"),
 	})
 	if err != nil {
@@ -473,6 +479,7 @@ func TestCheckResponseSnapshot_GetOfferSet(t *testing.T) {
 
 func TestCheckResponseSnapshot_GetOfferTerms(t *testing.T) {
 	want := &GetOfferTermsOutput{
+		Locale: ptr.String("__Locale__"),
 		OfferTerms: []types.OfferTerm{
 			&types.OfferTermMemberByolPricingTerm{
 				Value: types.ByolPricingTerm{
@@ -498,6 +505,7 @@ func TestCheckResponseSnapshot_GetOfferTerms(t *testing.T) {
 	}
 	svc := serdeRespClient(status, header, body)
 	got, err := svc.GetOfferTerms(context.Background(), &GetOfferTermsInput{
+		Locale:     ptr.String("__Locale__"),
 		OfferId:    ptr.String("__OfferId__"),
 		MaxResults: ptr.Int32(1),
 		NextToken:  ptr.String("__NextToken__"),
@@ -512,6 +520,7 @@ func TestCheckResponseSnapshot_GetOfferTerms(t *testing.T) {
 
 func TestCheckResponseSnapshot_GetProduct(t *testing.T) {
 	want := &GetProductOutput{
+		Locale:      ptr.String("__Locale__"),
 		ProductId:   ptr.String("__ProductId__"),
 		Catalog:     ptr.String("__Catalog__"),
 		ProductName: ptr.String("__ProductName__"),
@@ -589,6 +598,7 @@ func TestCheckResponseSnapshot_GetProduct(t *testing.T) {
 				Value:          ptr.String("__Value__"),
 			},
 		},
+		ListingId: ptr.String("__ListingId__"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("GetProduct.response")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -599,6 +609,7 @@ func TestCheckResponseSnapshot_GetProduct(t *testing.T) {
 	}
 	svc := serdeRespClient(status, header, body)
 	got, err := svc.GetProduct(context.Background(), &GetProductInput{
+		Locale:    ptr.String("__Locale__"),
 		ProductId: ptr.String("__ProductId__"),
 	})
 	if err != nil {
@@ -611,6 +622,7 @@ func TestCheckResponseSnapshot_GetProduct(t *testing.T) {
 
 func TestCheckResponseSnapshot_ListFulfillmentOptions(t *testing.T) {
 	want := &ListFulfillmentOptionsOutput{
+		Locale: ptr.String("__Locale__"),
 		FulfillmentOptions: []types.FulfillmentOption{
 			&types.FulfillmentOptionMemberAmazonMachineImageFulfillmentOption{
 				Value: types.AmazonMachineImageFulfillmentOption{
@@ -633,9 +645,41 @@ func TestCheckResponseSnapshot_ListFulfillmentOptions(t *testing.T) {
 					},
 					Recommendation: &types.AmazonMachineImageRecommendation{
 						InstanceType: ptr.String("__InstanceType__"),
+						SecurityGroups: []types.AmazonMachineImageSecurityGroup{
+							{
+								Protocol: ptr.String("__Protocol__"),
+								FromPort: ptr.Int32(1),
+								ToPort:   ptr.Int32(1),
+								CidrIpAddresses: []string{
+									"__Member__",
+									"__Member__",
+								},
+							},
+							{
+								Protocol: ptr.String("__Protocol__"),
+								FromPort: ptr.Int32(1),
+								ToPort:   ptr.Int32(1),
+								CidrIpAddresses: []string{
+									"__Member__",
+									"__Member__",
+								},
+							},
+						},
 					},
 					ReleaseNotes:      ptr.String("__ReleaseNotes__"),
 					UsageInstructions: ptr.String("__UsageInstructions__"),
+					AvailableFromTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					AccessUrlTemplate: ptr.String("__AccessUrlTemplate__"),
+					Architecture:      ptr.String("__Architecture__"),
+					AmiAlias:          ptr.String("__AmiAlias__"),
+					EbsVolume: &types.AmazonMachineImageEbsVolume{
+						VolumeTypes: []string{
+							"__Member__",
+							"__Member__",
+						},
+						Iops: ptr.Int32(1),
+					},
+					ShortDescription: ptr.String("__ShortDescription__"),
 				},
 			},
 			&types.FulfillmentOptionMemberAmazonMachineImageFulfillmentOption{
@@ -659,9 +703,41 @@ func TestCheckResponseSnapshot_ListFulfillmentOptions(t *testing.T) {
 					},
 					Recommendation: &types.AmazonMachineImageRecommendation{
 						InstanceType: ptr.String("__InstanceType__"),
+						SecurityGroups: []types.AmazonMachineImageSecurityGroup{
+							{
+								Protocol: ptr.String("__Protocol__"),
+								FromPort: ptr.Int32(1),
+								ToPort:   ptr.Int32(1),
+								CidrIpAddresses: []string{
+									"__Member__",
+									"__Member__",
+								},
+							},
+							{
+								Protocol: ptr.String("__Protocol__"),
+								FromPort: ptr.Int32(1),
+								ToPort:   ptr.Int32(1),
+								CidrIpAddresses: []string{
+									"__Member__",
+									"__Member__",
+								},
+							},
+						},
 					},
 					ReleaseNotes:      ptr.String("__ReleaseNotes__"),
 					UsageInstructions: ptr.String("__UsageInstructions__"),
+					AvailableFromTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					AccessUrlTemplate: ptr.String("__AccessUrlTemplate__"),
+					Architecture:      ptr.String("__Architecture__"),
+					AmiAlias:          ptr.String("__AmiAlias__"),
+					EbsVolume: &types.AmazonMachineImageEbsVolume{
+						VolumeTypes: []string{
+							"__Member__",
+							"__Member__",
+						},
+						Iops: ptr.Int32(1),
+					},
+					ShortDescription: ptr.String("__ShortDescription__"),
 				},
 			},
 		},
@@ -676,6 +752,7 @@ func TestCheckResponseSnapshot_ListFulfillmentOptions(t *testing.T) {
 	}
 	svc := serdeRespClient(status, header, body)
 	got, err := svc.ListFulfillmentOptions(context.Background(), &ListFulfillmentOptionsInput{
+		Locale:     ptr.String("__Locale__"),
 		ProductId:  ptr.String("__ProductId__"),
 		MaxResults: ptr.Int32(1),
 		NextToken:  ptr.String("__NextToken__"),
@@ -851,6 +928,7 @@ func TestCheckResponseSnapshot_ListPurchaseOptions(t *testing.T) {
 	}
 	svc := serdeRespClient(status, header, body)
 	got, err := svc.ListPurchaseOptions(context.Background(), &ListPurchaseOptionsInput{
+		Locale: ptr.String("__Locale__"),
 		Filters: []types.PurchaseOptionFilter{
 			{
 				FilterType: types.PurchaseOptionFilterType("PRODUCT_ID"),
@@ -908,6 +986,7 @@ func TestCheckResponseSnapshot_SearchFacets(t *testing.T) {
 	}
 	svc := serdeRespClient(status, header, body)
 	got, err := svc.SearchFacets(context.Background(), &SearchFacetsInput{
+		Locale:     ptr.String("__Locale__"),
 		SearchText: ptr.String("__SearchText__"),
 		Filters: []types.SearchFilter{
 			{
@@ -1157,6 +1236,7 @@ func TestCheckResponseSnapshot_SearchListings(t *testing.T) {
 	}
 	svc := serdeRespClient(status, header, body)
 	got, err := svc.SearchListings(context.Background(), &SearchListingsInput{
+		Locale:     ptr.String("__Locale__"),
 		SearchText: ptr.String("__SearchText__"),
 		Filters: []types.SearchFilter{
 			{
@@ -1200,6 +1280,7 @@ func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 	}
 	svc := serdeRespClient(status, header, body)
 	_, opErr := svc.GetListing(context.Background(), &GetListingInput{
+		Locale:    ptr.String("__Locale__"),
 		ListingId: ptr.String("__ListingId__"),
 	})
 	if opErr == nil {
@@ -1227,6 +1308,7 @@ func TestCheckResponseSnapshot_Error_InternalServerException(t *testing.T) {
 	}
 	svc := serdeRespClient(status, header, body)
 	_, opErr := svc.GetListing(context.Background(), &GetListingInput{
+		Locale:    ptr.String("__Locale__"),
 		ListingId: ptr.String("__ListingId__"),
 	})
 	if opErr == nil {
@@ -1254,6 +1336,7 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 	}
 	svc := serdeRespClient(status, header, body)
 	_, opErr := svc.GetListing(context.Background(), &GetListingInput{
+		Locale:    ptr.String("__Locale__"),
 		ListingId: ptr.String("__ListingId__"),
 	})
 	if opErr == nil {
@@ -1281,6 +1364,7 @@ func TestCheckResponseSnapshot_Error_ThrottlingException(t *testing.T) {
 	}
 	svc := serdeRespClient(status, header, body)
 	_, opErr := svc.GetListing(context.Background(), &GetListingInput{
+		Locale:    ptr.String("__Locale__"),
 		ListingId: ptr.String("__ListingId__"),
 	})
 	if opErr == nil {
@@ -1309,6 +1393,7 @@ func TestCheckResponseSnapshot_Error_ValidationException(t *testing.T) {
 	}
 	svc := serdeRespClient(status, header, body)
 	_, opErr := svc.GetListing(context.Background(), &GetListingInput{
+		Locale:    ptr.String("__Locale__"),
 		ListingId: ptr.String("__ListingId__"),
 	})
 	if opErr == nil {

@@ -4,7 +4,9 @@ package backup
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/backup/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/backup/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -33,6 +35,18 @@ type DescribeScanJobInput struct {
 	ScanJobId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DescribeScanJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeScanJobInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeScanJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ScanJobId != nil {
+		s.WriteString(schemas.DescribeScanJobInput_ScanJobId, *v.ScanJobId)
+	}
 }
 
 type DescribeScanJobOutput struct {
@@ -165,13 +179,178 @@ type DescribeScanJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeScanJobOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeScanJobOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeScanJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountId != nil {
+		s.WriteString(schemas.DescribeScanJobOutput_AccountId, *v.AccountId)
+	}
+	if v.BackupVaultArn != nil {
+		s.WriteString(schemas.DescribeScanJobOutput_BackupVaultArn, *v.BackupVaultArn)
+	}
+	if v.BackupVaultName != nil {
+		s.WriteString(schemas.DescribeScanJobOutput_BackupVaultName, *v.BackupVaultName)
+	}
+	if v.CompletionDate != nil {
+		s.WriteTime(schemas.DescribeScanJobOutput_CompletionDate, *v.CompletionDate)
+	}
+	if v.ContinuousScanEndTime != nil {
+		s.WriteTime(schemas.DescribeScanJobOutput_ContinuousScanEndTime, *v.ContinuousScanEndTime)
+	}
+	if v.ContinuousScanStartTime != nil {
+		s.WriteTime(schemas.DescribeScanJobOutput_ContinuousScanStartTime, *v.ContinuousScanStartTime)
+	}
+	if v.CreatedBy != nil {
+		s.WriteStruct(schemas.DescribeScanJobOutput_CreatedBy)
+		v.CreatedBy.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CreationDate != nil {
+		s.WriteTime(schemas.DescribeScanJobOutput_CreationDate, *v.CreationDate)
+	}
+	if v.IamRoleArn != nil {
+		s.WriteString(schemas.DescribeScanJobOutput_IamRoleArn, *v.IamRoleArn)
+	}
+	if v.MalwareScanner != "" {
+		s.WriteString(schemas.DescribeScanJobOutput_MalwareScanner, string(v.MalwareScanner))
+	}
+	if v.RecoveryPointArn != nil {
+		s.WriteString(schemas.DescribeScanJobOutput_RecoveryPointArn, *v.RecoveryPointArn)
+	}
+	if v.ResourceArn != nil {
+		s.WriteString(schemas.DescribeScanJobOutput_ResourceArn, *v.ResourceArn)
+	}
+	if v.ResourceName != nil {
+		s.WriteString(schemas.DescribeScanJobOutput_ResourceName, *v.ResourceName)
+	}
+	if v.ResourceType != "" {
+		s.WriteString(schemas.DescribeScanJobOutput_ResourceType, string(v.ResourceType))
+	}
+	if v.ScanBaseRecoveryPointArn != nil {
+		s.WriteString(schemas.DescribeScanJobOutput_ScanBaseRecoveryPointArn, *v.ScanBaseRecoveryPointArn)
+	}
+	if v.ScanId != nil {
+		s.WriteString(schemas.DescribeScanJobOutput_ScanId, *v.ScanId)
+	}
+	if v.ScanJobId != nil {
+		s.WriteString(schemas.DescribeScanJobOutput_ScanJobId, *v.ScanJobId)
+	}
+	if v.ScanMode != "" {
+		s.WriteString(schemas.DescribeScanJobOutput_ScanMode, string(v.ScanMode))
+	}
+	if v.ScanResult != nil {
+		s.WriteStruct(schemas.DescribeScanJobOutput_ScanResult)
+		v.ScanResult.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ScannerRoleArn != nil {
+		s.WriteString(schemas.DescribeScanJobOutput_ScannerRoleArn, *v.ScannerRoleArn)
+	}
+	if v.State != "" {
+		s.WriteString(schemas.DescribeScanJobOutput_State, string(v.State))
+	}
+	if v.StatusMessage != nil {
+		s.WriteString(schemas.DescribeScanJobOutput_StatusMessage, *v.StatusMessage)
+	}
+}
+func (v *DescribeScanJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeScanJobOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeScanJobOutput_AccountId:
+			v.AccountId = new(string)
+			return d.ReadString(schemas.DescribeScanJobOutput_AccountId, v.AccountId)
+		case schemas.DescribeScanJobOutput_BackupVaultArn:
+			v.BackupVaultArn = new(string)
+			return d.ReadString(schemas.DescribeScanJobOutput_BackupVaultArn, v.BackupVaultArn)
+		case schemas.DescribeScanJobOutput_BackupVaultName:
+			v.BackupVaultName = new(string)
+			return d.ReadString(schemas.DescribeScanJobOutput_BackupVaultName, v.BackupVaultName)
+		case schemas.DescribeScanJobOutput_CompletionDate:
+			v.CompletionDate = new(time.Time)
+			return d.ReadTime(schemas.DescribeScanJobOutput_CompletionDate, v.CompletionDate)
+		case schemas.DescribeScanJobOutput_ContinuousScanEndTime:
+			v.ContinuousScanEndTime = new(time.Time)
+			return d.ReadTime(schemas.DescribeScanJobOutput_ContinuousScanEndTime, v.ContinuousScanEndTime)
+		case schemas.DescribeScanJobOutput_ContinuousScanStartTime:
+			v.ContinuousScanStartTime = new(time.Time)
+			return d.ReadTime(schemas.DescribeScanJobOutput_ContinuousScanStartTime, v.ContinuousScanStartTime)
+		case schemas.DescribeScanJobOutput_CreatedBy:
+			v.CreatedBy = &types.ScanJobCreator{}
+			return v.CreatedBy.Deserialize(d)
+		case schemas.DescribeScanJobOutput_CreationDate:
+			v.CreationDate = new(time.Time)
+			return d.ReadTime(schemas.DescribeScanJobOutput_CreationDate, v.CreationDate)
+		case schemas.DescribeScanJobOutput_IamRoleArn:
+			v.IamRoleArn = new(string)
+			return d.ReadString(schemas.DescribeScanJobOutput_IamRoleArn, v.IamRoleArn)
+		case schemas.DescribeScanJobOutput_MalwareScanner:
+			var ev string
+			if err := d.ReadString(schemas.DescribeScanJobOutput_MalwareScanner, &ev); err != nil {
+				return err
+			}
+			v.MalwareScanner = types.MalwareScanner(ev)
+			return nil
+		case schemas.DescribeScanJobOutput_RecoveryPointArn:
+			v.RecoveryPointArn = new(string)
+			return d.ReadString(schemas.DescribeScanJobOutput_RecoveryPointArn, v.RecoveryPointArn)
+		case schemas.DescribeScanJobOutput_ResourceArn:
+			v.ResourceArn = new(string)
+			return d.ReadString(schemas.DescribeScanJobOutput_ResourceArn, v.ResourceArn)
+		case schemas.DescribeScanJobOutput_ResourceName:
+			v.ResourceName = new(string)
+			return d.ReadString(schemas.DescribeScanJobOutput_ResourceName, v.ResourceName)
+		case schemas.DescribeScanJobOutput_ResourceType:
+			var ev string
+			if err := d.ReadString(schemas.DescribeScanJobOutput_ResourceType, &ev); err != nil {
+				return err
+			}
+			v.ResourceType = types.ScanResourceType(ev)
+			return nil
+		case schemas.DescribeScanJobOutput_ScanBaseRecoveryPointArn:
+			v.ScanBaseRecoveryPointArn = new(string)
+			return d.ReadString(schemas.DescribeScanJobOutput_ScanBaseRecoveryPointArn, v.ScanBaseRecoveryPointArn)
+		case schemas.DescribeScanJobOutput_ScanId:
+			v.ScanId = new(string)
+			return d.ReadString(schemas.DescribeScanJobOutput_ScanId, v.ScanId)
+		case schemas.DescribeScanJobOutput_ScanJobId:
+			v.ScanJobId = new(string)
+			return d.ReadString(schemas.DescribeScanJobOutput_ScanJobId, v.ScanJobId)
+		case schemas.DescribeScanJobOutput_ScanMode:
+			var ev string
+			if err := d.ReadString(schemas.DescribeScanJobOutput_ScanMode, &ev); err != nil {
+				return err
+			}
+			v.ScanMode = types.ScanMode(ev)
+			return nil
+		case schemas.DescribeScanJobOutput_ScanResult:
+			v.ScanResult = &types.ScanResultInfo{}
+			return v.ScanResult.Deserialize(d)
+		case schemas.DescribeScanJobOutput_ScannerRoleArn:
+			v.ScannerRoleArn = new(string)
+			return d.ReadString(schemas.DescribeScanJobOutput_ScannerRoleArn, v.ScannerRoleArn)
+		case schemas.DescribeScanJobOutput_State:
+			var ev string
+			if err := d.ReadString(schemas.DescribeScanJobOutput_State, &ev); err != nil {
+				return err
+			}
+			v.State = types.ScanState(ev)
+			return nil
+		case schemas.DescribeScanJobOutput_StatusMessage:
+			v.StatusMessage = new(string)
+			return d.ReadString(schemas.DescribeScanJobOutput_StatusMessage, v.StatusMessage)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeScanJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeScanJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeScanJob, schemas.DescribeScanJobInput, schemas.DescribeScanJobOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeScanJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeScanJob, schemas.DescribeScanJobInput, schemas.DescribeScanJobOutput), output: &DescribeScanJobOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

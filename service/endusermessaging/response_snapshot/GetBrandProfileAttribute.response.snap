@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"attributeName":"__AttributeName__","attributeType":"TEXT","attributeValue":"__AttributeValue__","category":"__Category__","createdAt":946684800,"description":"__Description__","mediaContentType":"__MediaContentType__","mediaDownloadUrl":"__MediaDownloadUrl__","mediaSizeBytes":1,"updatedAt":946684800}

@@ -11,11 +11,14 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
-// Search available phone numbers from aggregator inventory, optionally filtered
-// by pattern. If NumberPreference is omitted, returns unfiltered available
-// numbers. Returns empty list (not an exception) when no numbers match.
-// ResourceNotFoundException is thrown only for invalid RegistrationId (campaign
-// not found).
+// Retrieves a list of phone numbers that are available to request, based on the
+// country, capabilities, and number type that you specify. You can optionally
+// provide a number preference to return only numbers that match a specific digit
+// pattern.
+//
+// If no numbers match your search, this operation returns an empty list rather
+// than an error. This operation currently supports only TEN_DLC number types in
+// the US .
 func (c *Client) ListAvailablePhoneNumbers(ctx context.Context, params *ListAvailablePhoneNumbersInput, optFns ...func(*Options)) (*ListAvailablePhoneNumbersOutput, error) {
 	if params == nil {
 		params = &ListAvailablePhoneNumbersInput{}
@@ -58,8 +61,10 @@ type ListAvailablePhoneNumbersInput struct {
 	// The token returned from a previous request to retrieve the next page of results.
 	NextToken *string
 
-	// Optional. If omitted, returns unfiltered available numbers. Max 1 element for
-	// List API.
+	// An optional selection preference used to return only phone numbers that match a
+	// specific digit pattern, such as numbers that start with, end with, or contain a
+	// particular sequence. You can specify at most one preference. Number preferences
+	// apply only to TEN_DLC numbers in the US .
 	NumberPreference []types.NumberPreferenceItem
 
 	// The registration associated with the request. A registration is required for

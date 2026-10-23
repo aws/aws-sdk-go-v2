@@ -4,7 +4,9 @@ package bcmpricingcalculator
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/bcmpricingcalculator/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bcmpricingcalculator/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -33,6 +35,18 @@ type GetWorkloadEstimateInput struct {
 	Identifier *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetWorkloadEstimateInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetWorkloadEstimateRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetWorkloadEstimateInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Identifier != nil {
+		s.WriteString(schemas.GetWorkloadEstimateRequest_identifier, *v.Identifier)
+	}
 }
 
 // Mixin for common fields returned by CRUD APIs
@@ -76,13 +90,98 @@ type GetWorkloadEstimateOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetWorkloadEstimateOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetWorkloadEstimateResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetWorkloadEstimateOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CostCurrency != "" {
+		s.WriteString(schemas.GetWorkloadEstimateResponse_costCurrency, string(v.CostCurrency))
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.GetWorkloadEstimateResponse_createdAt, *v.CreatedAt)
+	}
+	if v.ExpiresAt != nil {
+		s.WriteTime(schemas.GetWorkloadEstimateResponse_expiresAt, *v.ExpiresAt)
+	}
+	if v.FailureMessage != nil {
+		s.WriteString(schemas.GetWorkloadEstimateResponse_failureMessage, *v.FailureMessage)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.GetWorkloadEstimateResponse_id, *v.Id)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.GetWorkloadEstimateResponse_name, *v.Name)
+	}
+	if v.RateTimestamp != nil {
+		s.WriteTime(schemas.GetWorkloadEstimateResponse_rateTimestamp, *v.RateTimestamp)
+	}
+	if v.RateType != "" {
+		s.WriteString(schemas.GetWorkloadEstimateResponse_rateType, string(v.RateType))
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.GetWorkloadEstimateResponse_status, string(v.Status))
+	}
+	if v.TotalCost != nil {
+		s.WriteFloat64(schemas.GetWorkloadEstimateResponse_totalCost, *v.TotalCost)
+	}
+}
+func (v *GetWorkloadEstimateOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetWorkloadEstimateResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetWorkloadEstimateResponse_costCurrency:
+			var ev string
+			if err := d.ReadString(schemas.GetWorkloadEstimateResponse_costCurrency, &ev); err != nil {
+				return err
+			}
+			v.CostCurrency = types.CurrencyCode(ev)
+			return nil
+		case schemas.GetWorkloadEstimateResponse_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.GetWorkloadEstimateResponse_createdAt, v.CreatedAt)
+		case schemas.GetWorkloadEstimateResponse_expiresAt:
+			v.ExpiresAt = new(time.Time)
+			return d.ReadTime(schemas.GetWorkloadEstimateResponse_expiresAt, v.ExpiresAt)
+		case schemas.GetWorkloadEstimateResponse_failureMessage:
+			v.FailureMessage = new(string)
+			return d.ReadString(schemas.GetWorkloadEstimateResponse_failureMessage, v.FailureMessage)
+		case schemas.GetWorkloadEstimateResponse_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.GetWorkloadEstimateResponse_id, v.Id)
+		case schemas.GetWorkloadEstimateResponse_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.GetWorkloadEstimateResponse_name, v.Name)
+		case schemas.GetWorkloadEstimateResponse_rateTimestamp:
+			v.RateTimestamp = new(time.Time)
+			return d.ReadTime(schemas.GetWorkloadEstimateResponse_rateTimestamp, v.RateTimestamp)
+		case schemas.GetWorkloadEstimateResponse_rateType:
+			var ev string
+			if err := d.ReadString(schemas.GetWorkloadEstimateResponse_rateType, &ev); err != nil {
+				return err
+			}
+			v.RateType = types.WorkloadEstimateRateType(ev)
+			return nil
+		case schemas.GetWorkloadEstimateResponse_status:
+			var ev string
+			if err := d.ReadString(schemas.GetWorkloadEstimateResponse_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.WorkloadEstimateStatus(ev)
+			return nil
+		case schemas.GetWorkloadEstimateResponse_totalCost:
+			v.TotalCost = new(float64)
+			return d.ReadFloat64(schemas.GetWorkloadEstimateResponse_totalCost, v.TotalCost)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetWorkloadEstimateMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpGetWorkloadEstimate{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetWorkloadEstimate, schemas.GetWorkloadEstimateRequest, schemas.GetWorkloadEstimateResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpGetWorkloadEstimate{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetWorkloadEstimate, schemas.GetWorkloadEstimateRequest, schemas.GetWorkloadEstimateResponse), output: &GetWorkloadEstimateOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

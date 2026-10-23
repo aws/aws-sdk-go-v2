@@ -44,11 +44,6 @@ type ReplicateInstanceInput struct {
 	// This member is required.
 	InstanceId *string
 
-	// The alias for the replicated instance. The ReplicaAlias must be unique.
-	//
-	// This member is required.
-	ReplicaAlias *string
-
 	// The Amazon Web Services Region where to replicate the Connect Customer instance.
 	//
 	// This member is required.
@@ -60,6 +55,9 @@ type ReplicateInstanceInput struct {
 	//
 	// [Making retries safe with idempotent APIs]: https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/
 	ClientToken *string
+
+	// The alias for the replicated instance. The ReplicaAlias must be unique.
+	ReplicaAlias *string
 
 	noSmithyDocumentSerde
 }

@@ -4,7 +4,9 @@ package medialive
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/medialive/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/medialive/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -45,6 +47,24 @@ type UpdateNodeStateInput struct {
 	State types.UpdateNodeStateShape
 
 	noSmithyDocumentSerde
+}
+
+func (v *UpdateNodeStateInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateNodeStateRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateNodeStateInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClusterId != nil {
+		s.WriteString(schemas.UpdateNodeStateRequest_ClusterId, *v.ClusterId)
+	}
+	if v.NodeId != nil {
+		s.WriteString(schemas.UpdateNodeStateRequest_NodeId, *v.NodeId)
+	}
+	if v.State != "" {
+		s.WriteString(schemas.UpdateNodeStateRequest_State, string(v.State))
+	}
 }
 
 // Placeholder documentation for UpdateNodeStateResponse
@@ -94,13 +114,95 @@ type UpdateNodeStateOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateNodeStateOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateNodeStateResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateNodeStateOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.UpdateNodeStateResponse_Arn, *v.Arn)
+	}
+	serialize__listOf__string(s, schemas.UpdateNodeStateResponse_ChannelPlacementGroups, v.ChannelPlacementGroups)
+	if v.ClusterId != nil {
+		s.WriteString(schemas.UpdateNodeStateResponse_ClusterId, *v.ClusterId)
+	}
+	if v.ConnectionState != "" {
+		s.WriteString(schemas.UpdateNodeStateResponse_ConnectionState, string(v.ConnectionState))
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.UpdateNodeStateResponse_Id, *v.Id)
+	}
+	if v.InstanceArn != nil {
+		s.WriteString(schemas.UpdateNodeStateResponse_InstanceArn, *v.InstanceArn)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateNodeStateResponse_Name, *v.Name)
+	}
+	serialize__listOfNodeInterfaceMapping(s, schemas.UpdateNodeStateResponse_NodeInterfaceMappings, v.NodeInterfaceMappings)
+	if v.Role != "" {
+		s.WriteString(schemas.UpdateNodeStateResponse_Role, string(v.Role))
+	}
+	serializeSdiSourceMappings(s, schemas.UpdateNodeStateResponse_SdiSourceMappings, v.SdiSourceMappings)
+	if v.State != "" {
+		s.WriteString(schemas.UpdateNodeStateResponse_State, string(v.State))
+	}
+}
+func (v *UpdateNodeStateOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateNodeStateResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateNodeStateResponse_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.UpdateNodeStateResponse_Arn, v.Arn)
+		case schemas.UpdateNodeStateResponse_ChannelPlacementGroups:
+			return deserialize__listOf__string(d, schemas.UpdateNodeStateResponse_ChannelPlacementGroups, &v.ChannelPlacementGroups)
+		case schemas.UpdateNodeStateResponse_ClusterId:
+			v.ClusterId = new(string)
+			return d.ReadString(schemas.UpdateNodeStateResponse_ClusterId, v.ClusterId)
+		case schemas.UpdateNodeStateResponse_ConnectionState:
+			var ev string
+			if err := d.ReadString(schemas.UpdateNodeStateResponse_ConnectionState, &ev); err != nil {
+				return err
+			}
+			v.ConnectionState = types.NodeConnectionState(ev)
+			return nil
+		case schemas.UpdateNodeStateResponse_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.UpdateNodeStateResponse_Id, v.Id)
+		case schemas.UpdateNodeStateResponse_InstanceArn:
+			v.InstanceArn = new(string)
+			return d.ReadString(schemas.UpdateNodeStateResponse_InstanceArn, v.InstanceArn)
+		case schemas.UpdateNodeStateResponse_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.UpdateNodeStateResponse_Name, v.Name)
+		case schemas.UpdateNodeStateResponse_NodeInterfaceMappings:
+			return deserialize__listOfNodeInterfaceMapping(d, schemas.UpdateNodeStateResponse_NodeInterfaceMappings, &v.NodeInterfaceMappings)
+		case schemas.UpdateNodeStateResponse_Role:
+			var ev string
+			if err := d.ReadString(schemas.UpdateNodeStateResponse_Role, &ev); err != nil {
+				return err
+			}
+			v.Role = types.NodeRole(ev)
+			return nil
+		case schemas.UpdateNodeStateResponse_SdiSourceMappings:
+			return deserializeSdiSourceMappings(d, schemas.UpdateNodeStateResponse_SdiSourceMappings, &v.SdiSourceMappings)
+		case schemas.UpdateNodeStateResponse_State:
+			var ev string
+			if err := d.ReadString(schemas.UpdateNodeStateResponse_State, &ev); err != nil {
+				return err
+			}
+			v.State = types.NodeState(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateNodeStateMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateNodeState{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateNodeState, schemas.UpdateNodeStateRequest, schemas.UpdateNodeStateResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateNodeState{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateNodeState, schemas.UpdateNodeStateRequest, schemas.UpdateNodeStateResponse), output: &UpdateNodeStateOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

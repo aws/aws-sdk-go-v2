@@ -4,7 +4,9 @@ package datazone
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/datazone/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/datazone/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -39,6 +41,21 @@ type CancelSubscriptionInput struct {
 	Identifier *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *CancelSubscriptionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CancelSubscriptionInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CancelSubscriptionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DomainIdentifier != nil {
+		s.WriteString(schemas.CancelSubscriptionInput_domainIdentifier, *v.DomainIdentifier)
+	}
+	if v.Identifier != nil {
+		s.WriteString(schemas.CancelSubscriptionInput_identifier, *v.Identifier)
+	}
 }
 
 type CancelSubscriptionOutput struct {
@@ -103,13 +120,95 @@ type CancelSubscriptionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CancelSubscriptionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CancelSubscriptionOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CancelSubscriptionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.CancelSubscriptionOutput_createdAt, *v.CreatedAt)
+	}
+	if v.CreatedBy != nil {
+		s.WriteString(schemas.CancelSubscriptionOutput_createdBy, *v.CreatedBy)
+	}
+	if v.DomainId != nil {
+		s.WriteString(schemas.CancelSubscriptionOutput_domainId, *v.DomainId)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.CancelSubscriptionOutput_id, *v.Id)
+	}
+	if v.RetainPermissions != nil {
+		s.WriteBool(schemas.CancelSubscriptionOutput_retainPermissions, *v.RetainPermissions)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.CancelSubscriptionOutput_status, string(v.Status))
+	}
+	if v.SubscribedListing != nil {
+		s.WriteStruct(schemas.CancelSubscriptionOutput_subscribedListing)
+		v.SubscribedListing.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeSubscribedPrincipal(s, schemas.CancelSubscriptionOutput_subscribedPrincipal, v.SubscribedPrincipal)
+	if v.SubscriptionRequestId != nil {
+		s.WriteString(schemas.CancelSubscriptionOutput_subscriptionRequestId, *v.SubscriptionRequestId)
+	}
+	if v.UpdatedAt != nil {
+		s.WriteTime(schemas.CancelSubscriptionOutput_updatedAt, *v.UpdatedAt)
+	}
+	if v.UpdatedBy != nil {
+		s.WriteString(schemas.CancelSubscriptionOutput_updatedBy, *v.UpdatedBy)
+	}
+}
+func (v *CancelSubscriptionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CancelSubscriptionOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CancelSubscriptionOutput_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.CancelSubscriptionOutput_createdAt, v.CreatedAt)
+		case schemas.CancelSubscriptionOutput_createdBy:
+			v.CreatedBy = new(string)
+			return d.ReadString(schemas.CancelSubscriptionOutput_createdBy, v.CreatedBy)
+		case schemas.CancelSubscriptionOutput_domainId:
+			v.DomainId = new(string)
+			return d.ReadString(schemas.CancelSubscriptionOutput_domainId, v.DomainId)
+		case schemas.CancelSubscriptionOutput_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.CancelSubscriptionOutput_id, v.Id)
+		case schemas.CancelSubscriptionOutput_retainPermissions:
+			v.RetainPermissions = new(bool)
+			return d.ReadBool(schemas.CancelSubscriptionOutput_retainPermissions, v.RetainPermissions)
+		case schemas.CancelSubscriptionOutput_status:
+			var ev string
+			if err := d.ReadString(schemas.CancelSubscriptionOutput_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.SubscriptionStatus(ev)
+			return nil
+		case schemas.CancelSubscriptionOutput_subscribedListing:
+			v.SubscribedListing = &types.SubscribedListing{}
+			return v.SubscribedListing.Deserialize(d)
+		case schemas.CancelSubscriptionOutput_subscribedPrincipal:
+			return deserializeSubscribedPrincipal(d, schemas.CancelSubscriptionOutput_subscribedPrincipal, &v.SubscribedPrincipal)
+		case schemas.CancelSubscriptionOutput_subscriptionRequestId:
+			v.SubscriptionRequestId = new(string)
+			return d.ReadString(schemas.CancelSubscriptionOutput_subscriptionRequestId, v.SubscriptionRequestId)
+		case schemas.CancelSubscriptionOutput_updatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.CancelSubscriptionOutput_updatedAt, v.UpdatedAt)
+		case schemas.CancelSubscriptionOutput_updatedBy:
+			v.UpdatedBy = new(string)
+			return d.ReadString(schemas.CancelSubscriptionOutput_updatedBy, v.UpdatedBy)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCancelSubscriptionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCancelSubscription{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CancelSubscription, schemas.CancelSubscriptionInput, schemas.CancelSubscriptionOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCancelSubscription{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CancelSubscription, schemas.CancelSubscriptionInput, schemas.CancelSubscriptionOutput), output: &CancelSubscriptionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

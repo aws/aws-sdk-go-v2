@@ -50,6 +50,26 @@ func (m *validateOpAssumeDecoratedRoleWithSAML) HandleInitialize(ctx context.Con
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpAttachRLSPolicy struct {
+}
+
+func (*validateOpAttachRLSPolicy) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpAttachRLSPolicy) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*AttachRLSPolicyInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpAttachRLSPolicyInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpBatchGrantPermissions struct {
 }
 
@@ -230,6 +250,26 @@ func (m *validateOpCreateLFTag) HandleInitialize(ctx context.Context, in middlew
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateRLSPolicy struct {
+}
+
+func (*validateOpCreateRLSPolicy) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateRLSPolicy) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateRLSPolicyInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateRLSPolicyInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeleteLakeFormationOptIn struct {
 }
 
@@ -310,6 +350,26 @@ func (m *validateOpDeleteObjectsOnCancel) HandleInitialize(ctx context.Context, 
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDeleteRLSPolicy struct {
+}
+
+func (*validateOpDeleteRLSPolicy) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteRLSPolicy) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteRLSPolicyInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteRLSPolicyInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeregisterResource struct {
 }
 
@@ -365,6 +425,26 @@ func (m *validateOpDescribeTransaction) HandleInitialize(ctx context.Context, in
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDescribeTransactionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDetachRLSPolicy struct {
+}
+
+func (*validateOpDetachRLSPolicy) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDetachRLSPolicy) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DetachRLSPolicyInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDetachRLSPolicyInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -505,6 +585,26 @@ func (m *validateOpGetResourceLFTags) HandleInitialize(ctx context.Context, in m
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpGetResourceLFTagsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetRLSPolicy struct {
+}
+
+func (*validateOpGetRLSPolicy) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetRLSPolicy) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetRLSPolicyInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetRLSPolicyInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -685,6 +785,26 @@ func (m *validateOpListPermissions) HandleInitialize(ctx context.Context, in mid
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpListPermissionsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListRLSPolicyAttachments struct {
+}
+
+func (*validateOpListRLSPolicyAttachments) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListRLSPolicyAttachments) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListRLSPolicyAttachmentsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListRLSPolicyAttachmentsInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -950,6 +1070,26 @@ func (m *validateOpUpdateResource) HandleInitialize(ctx context.Context, in midd
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateRLSPolicy struct {
+}
+
+func (*validateOpUpdateRLSPolicy) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateRLSPolicy) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateRLSPolicyInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateRLSPolicyInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateTableObjects struct {
 }
 
@@ -998,6 +1138,10 @@ func addOpAssumeDecoratedRoleWithSAMLValidationMiddleware(stack *middleware.Stac
 	return stack.Initialize.Add(&validateOpAssumeDecoratedRoleWithSAML{}, middleware.After)
 }
 
+func addOpAttachRLSPolicyValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpAttachRLSPolicy{}, middleware.After)
+}
+
 func addOpBatchGrantPermissionsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpBatchGrantPermissions{}, middleware.After)
 }
@@ -1034,6 +1178,10 @@ func addOpCreateLFTagValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateLFTag{}, middleware.After)
 }
 
+func addOpCreateRLSPolicyValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateRLSPolicy{}, middleware.After)
+}
+
 func addOpDeleteLakeFormationOptInValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteLakeFormationOptIn{}, middleware.After)
 }
@@ -1050,6 +1198,10 @@ func addOpDeleteObjectsOnCancelValidationMiddleware(stack *middleware.Stack) err
 	return stack.Initialize.Add(&validateOpDeleteObjectsOnCancel{}, middleware.After)
 }
 
+func addOpDeleteRLSPolicyValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteRLSPolicy{}, middleware.After)
+}
+
 func addOpDeregisterResourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeregisterResource{}, middleware.After)
 }
@@ -1060,6 +1212,10 @@ func addOpDescribeResourceValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpDescribeTransactionValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeTransaction{}, middleware.After)
+}
+
+func addOpDetachRLSPolicyValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDetachRLSPolicy{}, middleware.After)
 }
 
 func addOpGetDataCellsFilterValidationMiddleware(stack *middleware.Stack) error {
@@ -1088,6 +1244,10 @@ func addOpGetQueryStatisticsValidationMiddleware(stack *middleware.Stack) error 
 
 func addOpGetResourceLFTagsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetResourceLFTags{}, middleware.After)
+}
+
+func addOpGetRLSPolicyValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetRLSPolicy{}, middleware.After)
 }
 
 func addOpGetTableObjectsValidationMiddleware(stack *middleware.Stack) error {
@@ -1124,6 +1284,10 @@ func addOpListLakeFormationOptInsValidationMiddleware(stack *middleware.Stack) e
 
 func addOpListPermissionsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListPermissions{}, middleware.After)
+}
+
+func addOpListRLSPolicyAttachmentsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListRLSPolicyAttachments{}, middleware.After)
 }
 
 func addOpListTableStorageOptimizersValidationMiddleware(stack *middleware.Stack) error {
@@ -1176,6 +1340,10 @@ func addOpUpdateLFTagValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpUpdateResourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateResource{}, middleware.After)
+}
+
+func addOpUpdateRLSPolicyValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateRLSPolicy{}, middleware.After)
 }
 
 func addOpUpdateTableObjectsValidationMiddleware(stack *middleware.Stack) error {
@@ -1231,6 +1399,38 @@ func validateBatchPermissionsRequestEntryList(v []types.BatchPermissionsRequestE
 	invalidParams := smithy.InvalidParamsError{Context: "BatchPermissionsRequestEntryList"}
 	for i := range v {
 		if err := validateBatchPermissionsRequestEntry(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateColumn(v *types.Column) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "Column"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateColumnList(v []types.Column) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ColumnList"}
+	for i := range v {
+		if err := validateColumn(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -1572,6 +1772,26 @@ func validateResource(v *types.Resource) error {
 			invalidParams.AddNested("LFTagExpression", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.RLSPolicy != nil {
+		if err := validateRLSPolicyResource(v.RLSPolicy); err != nil {
+			invalidParams.AddNested("RLSPolicy", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateRLSPolicyResource(v *types.RLSPolicyResource) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RLSPolicyResource"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -1766,6 +1986,28 @@ func validateOpAssumeDecoratedRoleWithSAMLInput(v *AssumeDecoratedRoleWithSAMLIn
 	}
 }
 
+func validateOpAttachRLSPolicyInput(v *AttachRLSPolicyInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AttachRLSPolicyInput"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Resource == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Resource"))
+	} else if v.Resource != nil {
+		if err := validateResource(v.Resource); err != nil {
+			invalidParams.AddNested("Resource", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpBatchGrantPermissionsInput(v *BatchGrantPermissionsInput) error {
 	if v == nil {
 		return nil
@@ -1937,6 +2179,31 @@ func validateOpCreateLFTagInput(v *CreateLFTagInput) error {
 	}
 }
 
+func validateOpCreateRLSPolicyInput(v *CreateRLSPolicyInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateRLSPolicyInput"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.AttachmentColumns == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AttachmentColumns"))
+	} else if v.AttachmentColumns != nil {
+		if err := validateColumnList(v.AttachmentColumns); err != nil {
+			invalidParams.AddNested("AttachmentColumns", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.FilterExpression == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FilterExpression"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDeleteLakeFormationOptInInput(v *DeleteLakeFormationOptInInput) error {
 	if v == nil {
 		return nil
@@ -2017,6 +2284,21 @@ func validateOpDeleteObjectsOnCancelInput(v *DeleteObjectsOnCancelInput) error {
 	}
 }
 
+func validateOpDeleteRLSPolicyInput(v *DeleteRLSPolicyInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteRLSPolicyInput"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDeregisterResourceInput(v *DeregisterResourceInput) error {
 	if v == nil {
 		return nil
@@ -2054,6 +2336,28 @@ func validateOpDescribeTransactionInput(v *DescribeTransactionInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "DescribeTransactionInput"}
 	if v.TransactionId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TransactionId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDetachRLSPolicyInput(v *DetachRLSPolicyInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DetachRLSPolicyInput"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Resource == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Resource"))
+	} else if v.Resource != nil {
+		if err := validateResource(v.Resource); err != nil {
+			invalidParams.AddNested("Resource", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2172,6 +2476,21 @@ func validateOpGetResourceLFTagsInput(v *GetResourceLFTagsInput) error {
 		if err := validateResource(v.Resource); err != nil {
 			invalidParams.AddNested("Resource", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetRLSPolicyInput(v *GetRLSPolicyInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetRLSPolicyInput"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2332,6 +2651,23 @@ func validateOpListPermissionsInput(v *ListPermissionsInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ListPermissionsInput"}
+	if v.Resource != nil {
+		if err := validateResource(v.Resource); err != nil {
+			invalidParams.AddNested("Resource", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListRLSPolicyAttachmentsInput(v *ListRLSPolicyAttachmentsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListRLSPolicyAttachmentsInput"}
 	if v.Resource != nil {
 		if err := validateResource(v.Resource); err != nil {
 			invalidParams.AddNested("Resource", err.(smithy.InvalidParamsError))
@@ -2591,6 +2927,21 @@ func validateOpUpdateResourceInput(v *UpdateResourceInput) error {
 	}
 	if v.ResourceArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateRLSPolicyInput(v *UpdateRLSPolicyInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateRLSPolicyInput"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

@@ -4,7 +4,9 @@ package bedrockagentcorecontrol
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -38,6 +40,21 @@ type GetGatewayRuleInput struct {
 	RuleId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetGatewayRuleInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetGatewayRuleRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetGatewayRuleInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GatewayIdentifier != nil {
+		s.WriteString(schemas.GetGatewayRuleRequest_gatewayIdentifier, *v.GatewayIdentifier)
+	}
+	if v.RuleId != nil {
+		s.WriteString(schemas.GetGatewayRuleRequest_ruleId, *v.RuleId)
+	}
 }
 
 // Create response excludes updatedAt (redundant on create). Get/Update responses
@@ -93,13 +110,86 @@ type GetGatewayRuleOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetGatewayRuleOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetGatewayRuleResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetGatewayRuleOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeActions(s, schemas.GetGatewayRuleResponse_actions, v.Actions)
+	serializeConditions(s, schemas.GetGatewayRuleResponse_conditions, v.Conditions)
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.GetGatewayRuleResponse_createdAt, *v.CreatedAt)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.GetGatewayRuleResponse_description, *v.Description)
+	}
+	if v.GatewayArn != nil {
+		s.WriteString(schemas.GetGatewayRuleResponse_gatewayArn, *v.GatewayArn)
+	}
+	if v.Priority != nil {
+		s.WriteInt32(schemas.GetGatewayRuleResponse_priority, *v.Priority)
+	}
+	if v.RuleId != nil {
+		s.WriteString(schemas.GetGatewayRuleResponse_ruleId, *v.RuleId)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.GetGatewayRuleResponse_status, string(v.Status))
+	}
+	if v.System != nil {
+		s.WriteStruct(schemas.GetGatewayRuleResponse_system)
+		v.System.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.UpdatedAt != nil {
+		s.WriteTime(schemas.GetGatewayRuleResponse_updatedAt, *v.UpdatedAt)
+	}
+}
+func (v *GetGatewayRuleOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetGatewayRuleResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetGatewayRuleResponse_actions:
+			return deserializeActions(d, schemas.GetGatewayRuleResponse_actions, &v.Actions)
+		case schemas.GetGatewayRuleResponse_conditions:
+			return deserializeConditions(d, schemas.GetGatewayRuleResponse_conditions, &v.Conditions)
+		case schemas.GetGatewayRuleResponse_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.GetGatewayRuleResponse_createdAt, v.CreatedAt)
+		case schemas.GetGatewayRuleResponse_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.GetGatewayRuleResponse_description, v.Description)
+		case schemas.GetGatewayRuleResponse_gatewayArn:
+			v.GatewayArn = new(string)
+			return d.ReadString(schemas.GetGatewayRuleResponse_gatewayArn, v.GatewayArn)
+		case schemas.GetGatewayRuleResponse_priority:
+			v.Priority = new(int32)
+			return d.ReadInt32(schemas.GetGatewayRuleResponse_priority, v.Priority)
+		case schemas.GetGatewayRuleResponse_ruleId:
+			v.RuleId = new(string)
+			return d.ReadString(schemas.GetGatewayRuleResponse_ruleId, v.RuleId)
+		case schemas.GetGatewayRuleResponse_status:
+			var ev string
+			if err := d.ReadString(schemas.GetGatewayRuleResponse_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.GatewayRuleStatus(ev)
+			return nil
+		case schemas.GetGatewayRuleResponse_system:
+			v.System = &types.SystemManagedBlock{}
+			return v.System.Deserialize(d)
+		case schemas.GetGatewayRuleResponse_updatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.GetGatewayRuleResponse_updatedAt, v.UpdatedAt)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetGatewayRuleMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetGatewayRule{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetGatewayRule, schemas.GetGatewayRuleRequest, schemas.GetGatewayRuleResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetGatewayRule{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetGatewayRule, schemas.GetGatewayRuleRequest, schemas.GetGatewayRuleResponse), output: &GetGatewayRuleOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

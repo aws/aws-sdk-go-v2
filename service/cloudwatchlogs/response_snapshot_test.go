@@ -1222,6 +1222,10 @@ func TestCheckResponseSnapshot_DescribeDeliveries(t *testing.T) {
 	got, err := svc.DescribeDeliveries(context.Background(), &DescribeDeliveriesInput{
 		NextToken: ptr.String("__NextToken__"),
 		Limit:     ptr.Int32(1),
+		DeliverySourceNames: []string{
+			"__Member__",
+			"__Member__",
+		},
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -1242,6 +1246,7 @@ func TestCheckResponseSnapshot_DescribeDeliveryDestinations(t *testing.T) {
 				DeliveryDestinationConfiguration: &types.DeliveryDestinationConfiguration{
 					DestinationResourceArn: ptr.String("__DestinationResourceArn__"),
 				},
+				RoleArn: ptr.String("__RoleArn__"),
 				Tags: map[string]string{
 					"key0": "__Value__",
 				},
@@ -1254,6 +1259,7 @@ func TestCheckResponseSnapshot_DescribeDeliveryDestinations(t *testing.T) {
 				DeliveryDestinationConfiguration: &types.DeliveryDestinationConfiguration{
 					DestinationResourceArn: ptr.String("__DestinationResourceArn__"),
 				},
+				RoleArn: ptr.String("__RoleArn__"),
 				Tags: map[string]string{
 					"key0": "__Value__",
 				},
@@ -1272,6 +1278,10 @@ func TestCheckResponseSnapshot_DescribeDeliveryDestinations(t *testing.T) {
 	got, err := svc.DescribeDeliveryDestinations(context.Background(), &DescribeDeliveryDestinationsInput{
 		NextToken: ptr.String("__NextToken__"),
 		Limit:     ptr.Int32(1),
+		Names: []string{
+			"__Member__",
+			"__Member__",
+		},
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -1334,6 +1344,10 @@ func TestCheckResponseSnapshot_DescribeDeliverySources(t *testing.T) {
 	got, err := svc.DescribeDeliverySources(context.Background(), &DescribeDeliverySourcesInput{
 		NextToken: ptr.String("__NextToken__"),
 		Limit:     ptr.Int32(1),
+		ResourceArns: []string{
+			"__Member__",
+			"__Member__",
+		},
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -2333,6 +2347,7 @@ func TestCheckResponseSnapshot_GetDeliveryDestination(t *testing.T) {
 			DeliveryDestinationConfiguration: &types.DeliveryDestinationConfiguration{
 				DestinationResourceArn: ptr.String("__DestinationResourceArn__"),
 			},
+			RoleArn: ptr.String("__RoleArn__"),
 			Tags: map[string]string{
 				"key0": "__Value__",
 			},
@@ -4071,6 +4086,7 @@ func TestCheckResponseSnapshot_PutDeliveryDestination(t *testing.T) {
 			DeliveryDestinationConfiguration: &types.DeliveryDestinationConfiguration{
 				DestinationResourceArn: ptr.String("__DestinationResourceArn__"),
 			},
+			RoleArn: ptr.String("__RoleArn__"),
 			Tags: map[string]string{
 				"key0": "__Value__",
 			},
@@ -4091,6 +4107,7 @@ func TestCheckResponseSnapshot_PutDeliveryDestination(t *testing.T) {
 			DestinationResourceArn: ptr.String("__DestinationResourceArn__"),
 		},
 		DeliveryDestinationType: types.DeliveryDestinationType("S3"),
+		RoleArn:                 ptr.String("__RoleArn__"),
 		Tags: map[string]string{
 			"key0": "__Value__",
 		},

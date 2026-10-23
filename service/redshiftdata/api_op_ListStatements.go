@@ -5,7 +5,9 @@ package redshiftdata
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/redshiftdata/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/redshiftdata/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -99,6 +101,39 @@ type ListStatementsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListStatementsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListStatementsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListStatementsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClusterIdentifier != nil {
+		s.WriteString(schemas.ListStatementsRequest_ClusterIdentifier, *v.ClusterIdentifier)
+	}
+	if v.Database != nil {
+		s.WriteString(schemas.ListStatementsRequest_Database, *v.Database)
+	}
+	if v.MaxResults != 0 {
+		s.WriteInt32(schemas.ListStatementsRequest_MaxResults, v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListStatementsRequest_NextToken, *v.NextToken)
+	}
+	if v.RoleLevel != nil {
+		s.WriteBool(schemas.ListStatementsRequest_RoleLevel, *v.RoleLevel)
+	}
+	if v.StatementName != nil {
+		s.WriteString(schemas.ListStatementsRequest_StatementName, *v.StatementName)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.ListStatementsRequest_Status, string(v.Status))
+	}
+	if v.WorkgroupName != nil {
+		s.WriteString(schemas.ListStatementsRequest_WorkgroupName, *v.WorkgroupName)
+	}
+}
+
 type ListStatementsOutput struct {
 
 	// The SQL statements.
@@ -119,13 +154,35 @@ type ListStatementsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListStatementsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListStatementsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListStatementsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListStatementsResponse_NextToken, *v.NextToken)
+	}
+	serializeStatementList(s, schemas.ListStatementsResponse_Statements, v.Statements)
+}
+func (v *ListStatementsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListStatementsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListStatementsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListStatementsResponse_NextToken, v.NextToken)
+		case schemas.ListStatementsResponse_Statements:
+			return deserializeStatementList(d, schemas.ListStatementsResponse_Statements, &v.Statements)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListStatementsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListStatements{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListStatements, schemas.ListStatementsRequest, schemas.ListStatementsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListStatements{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListStatements, schemas.ListStatementsRequest, schemas.ListStatementsResponse), output: &ListStatementsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

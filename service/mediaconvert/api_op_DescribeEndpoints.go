@@ -5,7 +5,9 @@ package mediaconvert
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/mediaconvert/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/mediaconvert/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -54,6 +56,24 @@ type DescribeEndpointsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeEndpointsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeEndpointsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeEndpointsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.DescribeEndpointsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.Mode != "" {
+		s.WriteString(schemas.DescribeEndpointsRequest_Mode, string(v.Mode))
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeEndpointsRequest_NextToken, *v.NextToken)
+	}
+}
+
 type DescribeEndpointsOutput struct {
 
 	// List of endpoints
@@ -68,13 +88,35 @@ type DescribeEndpointsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeEndpointsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeEndpointsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeEndpointsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serialize__listOfEndpoint(s, schemas.DescribeEndpointsResponse_Endpoints, v.Endpoints)
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeEndpointsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *DescribeEndpointsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeEndpointsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeEndpointsResponse_Endpoints:
+			return deserialize__listOfEndpoint(d, schemas.DescribeEndpointsResponse_Endpoints, &v.Endpoints)
+		case schemas.DescribeEndpointsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.DescribeEndpointsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeEndpointsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeEndpoints{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeEndpoints, schemas.DescribeEndpointsRequest, schemas.DescribeEndpointsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeEndpoints{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeEndpoints, schemas.DescribeEndpointsRequest, schemas.DescribeEndpointsResponse), output: &DescribeEndpointsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

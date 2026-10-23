@@ -5,7 +5,9 @@ package cleanroomsml
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/cleanroomsml/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cleanroomsml/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -37,6 +39,21 @@ type ListConfiguredModelAlgorithmsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListConfiguredModelAlgorithmsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListConfiguredModelAlgorithmsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListConfiguredModelAlgorithmsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListConfiguredModelAlgorithmsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListConfiguredModelAlgorithmsRequest_nextToken, *v.NextToken)
+	}
+}
+
 type ListConfiguredModelAlgorithmsOutput struct {
 
 	// The list of configured model algorithms.
@@ -53,13 +70,35 @@ type ListConfiguredModelAlgorithmsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListConfiguredModelAlgorithmsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListConfiguredModelAlgorithmsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListConfiguredModelAlgorithmsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeConfiguredModelAlgorithmList(s, schemas.ListConfiguredModelAlgorithmsResponse_configuredModelAlgorithms, v.ConfiguredModelAlgorithms)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListConfiguredModelAlgorithmsResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListConfiguredModelAlgorithmsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListConfiguredModelAlgorithmsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListConfiguredModelAlgorithmsResponse_configuredModelAlgorithms:
+			return deserializeConfiguredModelAlgorithmList(d, schemas.ListConfiguredModelAlgorithmsResponse_configuredModelAlgorithms, &v.ConfiguredModelAlgorithms)
+		case schemas.ListConfiguredModelAlgorithmsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListConfiguredModelAlgorithmsResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListConfiguredModelAlgorithmsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListConfiguredModelAlgorithms{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListConfiguredModelAlgorithms, schemas.ListConfiguredModelAlgorithmsRequest, schemas.ListConfiguredModelAlgorithmsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListConfiguredModelAlgorithms{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListConfiguredModelAlgorithms, schemas.ListConfiguredModelAlgorithmsRequest, schemas.ListConfiguredModelAlgorithmsResponse), output: &ListConfiguredModelAlgorithmsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

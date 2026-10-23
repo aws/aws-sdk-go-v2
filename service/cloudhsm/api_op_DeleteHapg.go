@@ -4,6 +4,8 @@ package cloudhsm
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/cloudhsm/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -48,6 +50,18 @@ type DeleteHapgInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteHapgInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteHapgRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteHapgInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.HapgArn != nil {
+		s.WriteString(schemas.DeleteHapgRequest_HapgArn, *v.HapgArn)
+	}
+}
+
 // Contains the output of the DeleteHapg action.
 type DeleteHapgOutput struct {
 
@@ -62,13 +76,32 @@ type DeleteHapgOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteHapgOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteHapgResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteHapgOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Status != nil {
+		s.WriteString(schemas.DeleteHapgResponse_Status, *v.Status)
+	}
+}
+func (v *DeleteHapgOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteHapgResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteHapgResponse_Status:
+			v.Status = new(string)
+			return d.ReadString(schemas.DeleteHapgResponse_Status, v.Status)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteHapgMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteHapg{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteHapg, schemas.DeleteHapgRequest, schemas.DeleteHapgResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeleteHapg{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteHapg, schemas.DeleteHapgRequest, schemas.DeleteHapgResponse), output: &DeleteHapgOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

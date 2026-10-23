@@ -20,7 +20,7 @@ import (
 // If successful, this operation removes the placement request from the queue and
 // moves the GameSessionPlacement to CANCELLED status.
 //
-// This operation results in an InvalidRequestExecption (400) error if a game
+// This operation results in an InvalidRequestException (400) error if a game
 // session has already been created for this placement. You can clean up an
 // unneeded game session by calling [TerminateGameSession].
 //

@@ -5,7 +5,9 @@ package medialive
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/medialive/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/medialive/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -47,6 +49,27 @@ type ListMultiplexAlertsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListMultiplexAlertsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListMultiplexAlertsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListMultiplexAlertsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListMultiplexAlertsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.MultiplexId != nil {
+		s.WriteString(schemas.ListMultiplexAlertsRequest_MultiplexId, *v.MultiplexId)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListMultiplexAlertsRequest_NextToken, *v.NextToken)
+	}
+	if v.StateFilter != nil {
+		s.WriteString(schemas.ListMultiplexAlertsRequest_StateFilter, *v.StateFilter)
+	}
+}
+
 // Placeholder documentation for ListMultiplexAlertsResponse
 type ListMultiplexAlertsOutput struct {
 
@@ -62,13 +85,35 @@ type ListMultiplexAlertsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListMultiplexAlertsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListMultiplexAlertsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListMultiplexAlertsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serialize__listOfMultiplexAlert(s, schemas.ListMultiplexAlertsResponse_Alerts, v.Alerts)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListMultiplexAlertsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListMultiplexAlertsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListMultiplexAlertsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListMultiplexAlertsResponse_Alerts:
+			return deserialize__listOfMultiplexAlert(d, schemas.ListMultiplexAlertsResponse_Alerts, &v.Alerts)
+		case schemas.ListMultiplexAlertsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListMultiplexAlertsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListMultiplexAlertsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListMultiplexAlerts{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListMultiplexAlerts, schemas.ListMultiplexAlertsRequest, schemas.ListMultiplexAlertsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListMultiplexAlerts{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListMultiplexAlerts, schemas.ListMultiplexAlertsRequest, schemas.ListMultiplexAlertsResponse), output: &ListMultiplexAlertsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

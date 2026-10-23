@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWS242ServiceCatalogService.ListPortfoliosForProduct
+
+{"NextPageToken":"__NextPageToken__","PortfolioDetails":[{"ARN":"__ARN__","CreatedTime":946684800,"Description":"__Description__","DisplayName":"__DisplayName__","Id":"__Id__","ProviderName":"__ProviderName__"},{"ARN":"__ARN__","CreatedTime":946684800,"Description":"__Description__","DisplayName":"__DisplayName__","Id":"__Id__","ProviderName":"__ProviderName__"}]}

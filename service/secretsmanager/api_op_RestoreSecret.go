@@ -4,6 +4,8 @@ package secretsmanager
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/secretsmanager/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -50,6 +52,18 @@ type RestoreSecretInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RestoreSecretInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RestoreSecretRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RestoreSecretInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SecretId != nil {
+		s.WriteString(schemas.RestoreSecretRequest_SecretId, *v.SecretId)
+	}
+}
+
 type RestoreSecretOutput struct {
 
 	// The ARN of the secret that was restored.
@@ -64,13 +78,38 @@ type RestoreSecretOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RestoreSecretOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RestoreSecretResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RestoreSecretOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ARN != nil {
+		s.WriteString(schemas.RestoreSecretResponse_ARN, *v.ARN)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.RestoreSecretResponse_Name, *v.Name)
+	}
+}
+func (v *RestoreSecretOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RestoreSecretResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RestoreSecretResponse_ARN:
+			v.ARN = new(string)
+			return d.ReadString(schemas.RestoreSecretResponse_ARN, v.ARN)
+		case schemas.RestoreSecretResponse_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.RestoreSecretResponse_Name, v.Name)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationRestoreSecretMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpRestoreSecret{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RestoreSecret, schemas.RestoreSecretRequest, schemas.RestoreSecretResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpRestoreSecret{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RestoreSecret, schemas.RestoreSecretRequest, schemas.RestoreSecretResponse), output: &RestoreSecretOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

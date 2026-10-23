@@ -4,7 +4,9 @@ package kinesis
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/kinesis/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/kinesis/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"github.com/aws/smithy-go/ptr"
 	"time"
@@ -125,6 +127,38 @@ type GetShardIteratorInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetShardIteratorInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetShardIteratorInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetShardIteratorInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DryRun != nil {
+		s.WriteBool(schemas.GetShardIteratorInput_DryRun, *v.DryRun)
+	}
+	if v.ShardId != nil {
+		s.WriteString(schemas.GetShardIteratorInput_ShardId, *v.ShardId)
+	}
+	if v.ShardIteratorType != "" {
+		s.WriteString(schemas.GetShardIteratorInput_ShardIteratorType, string(v.ShardIteratorType))
+	}
+	if v.StartingSequenceNumber != nil {
+		s.WriteString(schemas.GetShardIteratorInput_StartingSequenceNumber, *v.StartingSequenceNumber)
+	}
+	if v.StreamARN != nil {
+		s.WriteString(schemas.GetShardIteratorInput_StreamARN, *v.StreamARN)
+	}
+	if v.StreamId != nil {
+		s.WriteString(schemas.GetShardIteratorInput_StreamId, *v.StreamId)
+	}
+	if v.StreamName != nil {
+		s.WriteString(schemas.GetShardIteratorInput_StreamName, *v.StreamName)
+	}
+	if v.Timestamp != nil {
+		s.WriteTime(schemas.GetShardIteratorInput_Timestamp, *v.Timestamp)
+	}
+}
 func (in *GetShardIteratorInput) bindEndpointParams(p *EndpointParameters) {
 
 	p.StreamARN = in.StreamARN
@@ -146,13 +180,32 @@ type GetShardIteratorOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetShardIteratorOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetShardIteratorOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetShardIteratorOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ShardIterator != nil {
+		s.WriteString(schemas.GetShardIteratorOutput_ShardIterator, *v.ShardIterator)
+	}
+}
+func (v *GetShardIteratorOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetShardIteratorOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetShardIteratorOutput_ShardIterator:
+			v.ShardIterator = new(string)
+			return d.ReadString(schemas.GetShardIteratorOutput_ShardIterator, v.ShardIterator)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetShardIteratorMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetShardIterator{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetShardIterator, schemas.GetShardIteratorInput, schemas.GetShardIteratorOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetShardIterator{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetShardIterator, schemas.GetShardIteratorInput, schemas.GetShardIteratorOutput), output: &GetShardIteratorOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

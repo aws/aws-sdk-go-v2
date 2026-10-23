@@ -5,7 +5,9 @@ package bedrockagent
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/bedrockagent/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagent/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -47,6 +49,27 @@ type ListAgentCollaboratorsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAgentCollaboratorsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAgentCollaboratorsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAgentCollaboratorsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AgentId != nil {
+		s.WriteString(schemas.ListAgentCollaboratorsRequest_agentId, *v.AgentId)
+	}
+	if v.AgentVersion != nil {
+		s.WriteString(schemas.ListAgentCollaboratorsRequest_agentVersion, *v.AgentVersion)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListAgentCollaboratorsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAgentCollaboratorsRequest_nextToken, *v.NextToken)
+	}
+}
+
 type ListAgentCollaboratorsOutput struct {
 
 	// A list of collaborator summaries.
@@ -64,13 +87,35 @@ type ListAgentCollaboratorsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAgentCollaboratorsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAgentCollaboratorsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAgentCollaboratorsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAgentCollaboratorSummaries(s, schemas.ListAgentCollaboratorsResponse_agentCollaboratorSummaries, v.AgentCollaboratorSummaries)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAgentCollaboratorsResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListAgentCollaboratorsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListAgentCollaboratorsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListAgentCollaboratorsResponse_agentCollaboratorSummaries:
+			return deserializeAgentCollaboratorSummaries(d, schemas.ListAgentCollaboratorsResponse_agentCollaboratorSummaries, &v.AgentCollaboratorSummaries)
+		case schemas.ListAgentCollaboratorsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListAgentCollaboratorsResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListAgentCollaboratorsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListAgentCollaborators{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAgentCollaborators, schemas.ListAgentCollaboratorsRequest, schemas.ListAgentCollaboratorsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListAgentCollaborators{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAgentCollaborators, schemas.ListAgentCollaboratorsRequest, schemas.ListAgentCollaboratorsResponse), output: &ListAgentCollaboratorsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

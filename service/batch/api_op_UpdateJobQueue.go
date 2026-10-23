@@ -4,7 +4,9 @@ package batch
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/batch/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/batch/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -79,6 +81,30 @@ type UpdateJobQueueInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateJobQueueInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateJobQueueRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateJobQueueInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeComputeEnvironmentOrders(s, schemas.UpdateJobQueueRequest_computeEnvironmentOrder, v.ComputeEnvironmentOrder)
+	if v.JobQueue != nil {
+		s.WriteString(schemas.UpdateJobQueueRequest_jobQueue, *v.JobQueue)
+	}
+	serializeJobStateTimeLimitActions(s, schemas.UpdateJobQueueRequest_jobStateTimeLimitActions, v.JobStateTimeLimitActions)
+	if v.Priority != nil {
+		s.WriteInt32(schemas.UpdateJobQueueRequest_priority, *v.Priority)
+	}
+	if v.SchedulingPolicyArn != nil {
+		s.WriteString(schemas.UpdateJobQueueRequest_schedulingPolicyArn, *v.SchedulingPolicyArn)
+	}
+	serializeServiceEnvironmentOrders(s, schemas.UpdateJobQueueRequest_serviceEnvironmentOrder, v.ServiceEnvironmentOrder)
+	if v.State != "" {
+		s.WriteString(schemas.UpdateJobQueueRequest_state, string(v.State))
+	}
+}
+
 type UpdateJobQueueOutput struct {
 
 	// The Amazon Resource Name (ARN) of the job queue.
@@ -93,13 +119,38 @@ type UpdateJobQueueOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateJobQueueOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateJobQueueResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateJobQueueOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.JobQueueArn != nil {
+		s.WriteString(schemas.UpdateJobQueueResponse_jobQueueArn, *v.JobQueueArn)
+	}
+	if v.JobQueueName != nil {
+		s.WriteString(schemas.UpdateJobQueueResponse_jobQueueName, *v.JobQueueName)
+	}
+}
+func (v *UpdateJobQueueOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateJobQueueResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateJobQueueResponse_jobQueueArn:
+			v.JobQueueArn = new(string)
+			return d.ReadString(schemas.UpdateJobQueueResponse_jobQueueArn, v.JobQueueArn)
+		case schemas.UpdateJobQueueResponse_jobQueueName:
+			v.JobQueueName = new(string)
+			return d.ReadString(schemas.UpdateJobQueueResponse_jobQueueName, v.JobQueueName)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateJobQueueMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateJobQueue{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateJobQueue, schemas.UpdateJobQueueRequest, schemas.UpdateJobQueueResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateJobQueue{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateJobQueue, schemas.UpdateJobQueueRequest, schemas.UpdateJobQueueResponse), output: &UpdateJobQueueOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

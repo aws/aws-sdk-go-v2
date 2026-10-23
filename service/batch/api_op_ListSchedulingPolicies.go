@@ -5,7 +5,9 @@ package batch
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/batch/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/batch/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -50,6 +52,21 @@ type ListSchedulingPoliciesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListSchedulingPoliciesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListSchedulingPoliciesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListSchedulingPoliciesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListSchedulingPoliciesRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListSchedulingPoliciesRequest_nextToken, *v.NextToken)
+	}
+}
+
 type ListSchedulingPoliciesOutput struct {
 
 	// The nextToken value to include in a future ListSchedulingPolicies request. When
@@ -67,13 +84,35 @@ type ListSchedulingPoliciesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListSchedulingPoliciesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListSchedulingPoliciesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListSchedulingPoliciesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListSchedulingPoliciesResponse_nextToken, *v.NextToken)
+	}
+	serializeSchedulingPolicyListingDetailList(s, schemas.ListSchedulingPoliciesResponse_schedulingPolicies, v.SchedulingPolicies)
+}
+func (v *ListSchedulingPoliciesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListSchedulingPoliciesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListSchedulingPoliciesResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListSchedulingPoliciesResponse_nextToken, v.NextToken)
+		case schemas.ListSchedulingPoliciesResponse_schedulingPolicies:
+			return deserializeSchedulingPolicyListingDetailList(d, schemas.ListSchedulingPoliciesResponse_schedulingPolicies, &v.SchedulingPolicies)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListSchedulingPoliciesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListSchedulingPolicies{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListSchedulingPolicies, schemas.ListSchedulingPoliciesRequest, schemas.ListSchedulingPoliciesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListSchedulingPolicies{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListSchedulingPolicies, schemas.ListSchedulingPoliciesRequest, schemas.ListSchedulingPoliciesResponse), output: &ListSchedulingPoliciesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

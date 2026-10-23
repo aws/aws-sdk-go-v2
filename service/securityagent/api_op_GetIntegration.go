@@ -67,10 +67,17 @@ type GetIntegrationOutput struct {
 	// instance over private networking, if one is configured.
 	PrivateConnectionName *string
 
+	// The Atlassian Cloud site URL for Atlassian integrations.
+	SiteUrl *string
+
 	// The HTTPS URL of the customer self-hosted instance, such as a GitHub Enterprise
 	// Server or self-managed GitLab instance. This value is absent for SaaS
 	// integrations.
 	TargetUrl *string
+
+	// The payload URL of the integration's webhook, once it has been created. The
+	// signing secret is never returned on a read.
+	WebhookUrl *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

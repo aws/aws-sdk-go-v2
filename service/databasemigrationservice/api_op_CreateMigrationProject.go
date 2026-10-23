@@ -4,7 +4,9 @@ package databasemigrationservice
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/databasemigrationservice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/databasemigrationservice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -81,6 +83,35 @@ type CreateMigrationProjectInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateMigrationProjectInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateMigrationProjectMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateMigrationProjectInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.CreateMigrationProjectMessage_Description, *v.Description)
+	}
+	if v.InstanceProfileIdentifier != nil {
+		s.WriteString(schemas.CreateMigrationProjectMessage_InstanceProfileIdentifier, *v.InstanceProfileIdentifier)
+	}
+	if v.MigrationProjectName != nil {
+		s.WriteString(schemas.CreateMigrationProjectMessage_MigrationProjectName, *v.MigrationProjectName)
+	}
+	if v.SchemaConversionApplicationAttributes != nil {
+		s.WriteStruct(schemas.CreateMigrationProjectMessage_SchemaConversionApplicationAttributes)
+		v.SchemaConversionApplicationAttributes.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeDataProviderDescriptorDefinitionList(s, schemas.CreateMigrationProjectMessage_SourceDataProviderDescriptors, v.SourceDataProviderDescriptors)
+	serializeTagList(s, schemas.CreateMigrationProjectMessage_Tags, v.Tags)
+	serializeDataProviderDescriptorDefinitionList(s, schemas.CreateMigrationProjectMessage_TargetDataProviderDescriptors, v.TargetDataProviderDescriptors)
+	if v.TransformationRules != nil {
+		s.WriteString(schemas.CreateMigrationProjectMessage_TransformationRules, *v.TransformationRules)
+	}
+}
+
 type CreateMigrationProjectOutput struct {
 
 	// The migration project that was created.
@@ -92,13 +123,34 @@ type CreateMigrationProjectOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateMigrationProjectOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateMigrationProjectResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateMigrationProjectOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MigrationProject != nil {
+		s.WriteStruct(schemas.CreateMigrationProjectResponse_MigrationProject)
+		v.MigrationProject.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateMigrationProjectOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateMigrationProjectResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateMigrationProjectResponse_MigrationProject:
+			v.MigrationProject = &types.MigrationProject{}
+			return v.MigrationProject.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateMigrationProjectMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateMigrationProject{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateMigrationProject, schemas.CreateMigrationProjectMessage, schemas.CreateMigrationProjectResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateMigrationProject{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateMigrationProject, schemas.CreateMigrationProjectMessage, schemas.CreateMigrationProjectResponse), output: &CreateMigrationProjectOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

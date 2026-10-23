@@ -4,7 +4,9 @@ package medialive
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/medialive/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/medialive/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -44,6 +46,20 @@ type UpdateInputSecurityGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateInputSecurityGroupInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateInputSecurityGroupRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateInputSecurityGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InputSecurityGroupId != nil {
+		s.WriteString(schemas.UpdateInputSecurityGroupRequest_InputSecurityGroupId, *v.InputSecurityGroupId)
+	}
+	serializeTags(s, schemas.UpdateInputSecurityGroupRequest_Tags, v.Tags)
+	serialize__listOfInputWhitelistRuleCidr(s, schemas.UpdateInputSecurityGroupRequest_WhitelistRules, v.WhitelistRules)
+}
+
 // Placeholder documentation for UpdateInputSecurityGroupResponse
 type UpdateInputSecurityGroupOutput struct {
 
@@ -56,13 +72,34 @@ type UpdateInputSecurityGroupOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateInputSecurityGroupOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateInputSecurityGroupResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateInputSecurityGroupOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SecurityGroup != nil {
+		s.WriteStruct(schemas.UpdateInputSecurityGroupResponse_SecurityGroup)
+		v.SecurityGroup.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateInputSecurityGroupOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateInputSecurityGroupResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateInputSecurityGroupResponse_SecurityGroup:
+			v.SecurityGroup = &types.InputSecurityGroup{}
+			return v.SecurityGroup.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateInputSecurityGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateInputSecurityGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateInputSecurityGroup, schemas.UpdateInputSecurityGroupRequest, schemas.UpdateInputSecurityGroupResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateInputSecurityGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateInputSecurityGroup, schemas.UpdateInputSecurityGroupRequest, schemas.UpdateInputSecurityGroupResponse), output: &UpdateInputSecurityGroupOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

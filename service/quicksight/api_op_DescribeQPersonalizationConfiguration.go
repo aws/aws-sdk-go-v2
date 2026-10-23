@@ -4,7 +4,9 @@ package quicksight
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/quicksight/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/quicksight/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -35,6 +37,18 @@ type DescribeQPersonalizationConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeQPersonalizationConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeQPersonalizationConfigurationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeQPersonalizationConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AwsAccountId != nil {
+		s.WriteString(schemas.DescribeQPersonalizationConfigurationRequest_AwsAccountId, *v.AwsAccountId)
+	}
+}
+
 type DescribeQPersonalizationConfigurationOutput struct {
 
 	// A value that indicates whether personalization is enabled or not.
@@ -52,13 +66,47 @@ type DescribeQPersonalizationConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeQPersonalizationConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeQPersonalizationConfigurationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeQPersonalizationConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PersonalizationMode != "" {
+		s.WriteString(schemas.DescribeQPersonalizationConfigurationResponse_PersonalizationMode, string(v.PersonalizationMode))
+	}
+	if v.RequestId != nil {
+		s.WriteString(schemas.DescribeQPersonalizationConfigurationResponse_RequestId, *v.RequestId)
+	}
+	if v.Status != 0 {
+		s.WriteInt32(schemas.DescribeQPersonalizationConfigurationResponse_Status, v.Status)
+	}
+}
+func (v *DescribeQPersonalizationConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeQPersonalizationConfigurationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeQPersonalizationConfigurationResponse_PersonalizationMode:
+			var ev string
+			if err := d.ReadString(schemas.DescribeQPersonalizationConfigurationResponse_PersonalizationMode, &ev); err != nil {
+				return err
+			}
+			v.PersonalizationMode = types.PersonalizationMode(ev)
+			return nil
+		case schemas.DescribeQPersonalizationConfigurationResponse_RequestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.DescribeQPersonalizationConfigurationResponse_RequestId, v.RequestId)
+		case schemas.DescribeQPersonalizationConfigurationResponse_Status:
+			return d.ReadInt32(schemas.DescribeQPersonalizationConfigurationResponse_Status, &v.Status)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeQPersonalizationConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeQPersonalizationConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeQPersonalizationConfiguration, schemas.DescribeQPersonalizationConfigurationRequest, schemas.DescribeQPersonalizationConfigurationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeQPersonalizationConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeQPersonalizationConfiguration, schemas.DescribeQPersonalizationConfigurationRequest, schemas.DescribeQPersonalizationConfigurationResponse), output: &DescribeQPersonalizationConfigurationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: VerifiedPermissions.IsAuthorizedWithToken
+
+{"decision":"ALLOW","determiningPolicies":[{"policyId":"__PolicyId__"},{"policyId":"__PolicyId__"}],"errors":[{"errorDescription":"__ErrorDescription__"},{"errorDescription":"__ErrorDescription__"}],"principal":{"entityId":"__EntityId__","entityType":"__EntityType__"}}

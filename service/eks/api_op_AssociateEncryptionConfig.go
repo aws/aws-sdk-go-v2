@@ -5,7 +5,9 @@ package eks
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/eks/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/eks/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -48,6 +50,22 @@ type AssociateEncryptionConfigInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssociateEncryptionConfigInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssociateEncryptionConfigRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssociateEncryptionConfigInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientRequestToken != nil {
+		s.WriteString(schemas.AssociateEncryptionConfigRequest_clientRequestToken, *v.ClientRequestToken)
+	}
+	if v.ClusterName != nil {
+		s.WriteString(schemas.AssociateEncryptionConfigRequest_clusterName, *v.ClusterName)
+	}
+	serializeEncryptionConfigList(s, schemas.AssociateEncryptionConfigRequest_encryptionConfig, v.EncryptionConfig)
+}
+
 type AssociateEncryptionConfigOutput struct {
 
 	// An object representing an asynchronous update.
@@ -59,13 +77,34 @@ type AssociateEncryptionConfigOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssociateEncryptionConfigOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssociateEncryptionConfigResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssociateEncryptionConfigOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Update != nil {
+		s.WriteStruct(schemas.AssociateEncryptionConfigResponse_update)
+		v.Update.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *AssociateEncryptionConfigOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AssociateEncryptionConfigResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AssociateEncryptionConfigResponse_update:
+			v.Update = &types.Update{}
+			return v.Update.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationAssociateEncryptionConfigMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpAssociateEncryptionConfig{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociateEncryptionConfig, schemas.AssociateEncryptionConfigRequest, schemas.AssociateEncryptionConfigResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpAssociateEncryptionConfig{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociateEncryptionConfig, schemas.AssociateEncryptionConfigRequest, schemas.AssociateEncryptionConfigResponse), output: &AssociateEncryptionConfigOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

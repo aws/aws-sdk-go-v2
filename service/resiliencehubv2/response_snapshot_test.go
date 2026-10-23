@@ -204,7 +204,9 @@ func TestCheckResponseSnapshot_CreatePolicy(t *testing.T) {
 			DataRecovery: &types.DataRecoveryTargets{
 				TimeBetweenBackupsInMinutes: ptr.Int32(1),
 			},
-			KmsKeyId: ptr.String("__KmsKeyId__"),
+			SharingEnabled: ptr.Bool(true),
+			OrganizationId: ptr.String("__OrganizationId__"),
+			KmsKeyId:       ptr.String("__KmsKeyId__"),
 			Tags: map[string]string{
 				"key0": "__Value__",
 			},
@@ -240,7 +242,8 @@ func TestCheckResponseSnapshot_CreatePolicy(t *testing.T) {
 		DataRecovery: &types.DataRecoveryTargets{
 			TimeBetweenBackupsInMinutes: ptr.Int32(1),
 		},
-		KmsKeyId: ptr.String("__KmsKeyId__"),
+		SharingEnabled: ptr.Bool(true),
+		KmsKeyId:       ptr.String("__KmsKeyId__"),
 		Tags: map[string]string{
 			"key0": "__Value__",
 		},
@@ -425,8 +428,17 @@ func TestCheckResponseSnapshot_CreateService(t *testing.T) {
 			OrganizationId:        ptr.String("__OrganizationId__"),
 			OuId:                  ptr.String("__OuId__"),
 			AccountId:             ptr.String("__AccountId__"),
-			CreatedAt:             ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-			UpdatedAt:             ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			DevOpsAgentConfiguration: &types.DevOpsAgentConfigurationView{
+				AgentSpaceArn:  ptr.String("__AgentSpaceArn__"),
+				AgentSpaceId:   ptr.String("__AgentSpaceId__"),
+				Region:         ptr.String("__Region__"),
+				Status:         types.DevOpsAgentConnectionStatus("CONNECTING"),
+				OperatorAppUrl: ptr.String("__OperatorAppUrl__"),
+				ConnectedAt:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				StatusReason:   ptr.String("__StatusReason__"),
+			},
+			CreatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			UpdatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("CreateService.response")
@@ -494,6 +506,9 @@ func TestCheckResponseSnapshot_CreateService(t *testing.T) {
 			},
 		},
 		KmsKeyId: ptr.String("__KmsKeyId__"),
+		DevOpsAgentConfiguration: &types.DevOpsAgentConfiguration{
+			AgentSpaceArn: ptr.String("__AgentSpaceArn__"),
+		},
 		Tags: map[string]string{
 			"key0": "__Value__",
 		},
@@ -1000,6 +1015,43 @@ func TestCheckResponseSnapshot_DeleteUserJourney(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_GetDependencyInsights(t *testing.T) {
+	want := &GetDependencyInsightsOutput{
+		Overview: ptr.String("__Overview__"),
+		Insights: []types.DependencyInsight{
+			{
+				Category:    types.InsightsCategory("CROSS_REGION"),
+				Description: ptr.String("__Description__"),
+			},
+			{
+				Category:    types.InsightsCategory("CROSS_REGION"),
+				Description: ptr.String("__Description__"),
+			},
+		},
+		Status:       types.DependencyInsightsStatus("IN_PROGRESS"),
+		CreatedAt:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		ErrorCode:    types.DependencyInsightsErrorCode("INSUFFICIENT_DATA"),
+		ErrorMessage: ptr.String("__ErrorMessage__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("GetDependencyInsights.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.GetDependencyInsights(context.Background(), &GetDependencyInsightsInput{
+		ServiceArn: ptr.String("__ServiceArn__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "GetDependencyInsights.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_GetFailureModeFinding(t *testing.T) {
 	want := &GetFailureModeFindingOutput{
 		Finding: &types.Finding{
@@ -1058,7 +1110,8 @@ func TestCheckResponseSnapshot_GetFailureModeFinding(t *testing.T) {
 					},
 				},
 			},
-			UpdatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			UpdatedAt:             ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			InvestigationDeepLink: ptr.String("__InvestigationDeepLink__"),
 		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("GetFailureModeFinding.response")
@@ -1103,7 +1156,9 @@ func TestCheckResponseSnapshot_GetPolicy(t *testing.T) {
 			DataRecovery: &types.DataRecoveryTargets{
 				TimeBetweenBackupsInMinutes: ptr.Int32(1),
 			},
-			KmsKeyId: ptr.String("__KmsKeyId__"),
+			SharingEnabled: ptr.Bool(true),
+			OrganizationId: ptr.String("__OrganizationId__"),
+			KmsKeyId:       ptr.String("__KmsKeyId__"),
 			Tags: map[string]string{
 				"key0": "__Value__",
 			},
@@ -1264,8 +1319,17 @@ func TestCheckResponseSnapshot_GetService(t *testing.T) {
 			OrganizationId:        ptr.String("__OrganizationId__"),
 			OuId:                  ptr.String("__OuId__"),
 			AccountId:             ptr.String("__AccountId__"),
-			CreatedAt:             ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-			UpdatedAt:             ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			DevOpsAgentConfiguration: &types.DevOpsAgentConfigurationView{
+				AgentSpaceArn:  ptr.String("__AgentSpaceArn__"),
+				AgentSpaceId:   ptr.String("__AgentSpaceId__"),
+				Region:         ptr.String("__Region__"),
+				Status:         types.DevOpsAgentConnectionStatus("CONNECTING"),
+				OperatorAppUrl: ptr.String("__OperatorAppUrl__"),
+				ConnectedAt:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				StatusReason:   ptr.String("__StatusReason__"),
+			},
+			CreatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			UpdatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("GetService.response")
@@ -1504,6 +1568,13 @@ func TestCheckResponseSnapshot_GetTestRun(t *testing.T) {
 				"__Member__",
 			},
 			AccountTargeting: types.AccountTargeting("SINGLE_ACCOUNT"),
+			DevOpsAgentInvestigation: &types.DevOpsAgentInvestigation{
+				Verdict:    types.DevOpsAgentVerdict("PASS"),
+				Confidence: types.DevOpsAgentConfidence("HIGH"),
+				DeepLink:   ptr.String("__DeepLink__"),
+				Status:     types.DevOpsAgentInvestigationStatus("PENDING"),
+				Summary:    ptr.String("__Summary__"),
+			},
 		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("GetTestRun.response")
@@ -1747,8 +1818,17 @@ func TestCheckResponseSnapshot_ImportApp(t *testing.T) {
 			OrganizationId:        ptr.String("__OrganizationId__"),
 			OuId:                  ptr.String("__OuId__"),
 			AccountId:             ptr.String("__AccountId__"),
-			CreatedAt:             ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-			UpdatedAt:             ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			DevOpsAgentConfiguration: &types.DevOpsAgentConfigurationView{
+				AgentSpaceArn:  ptr.String("__AgentSpaceArn__"),
+				AgentSpaceId:   ptr.String("__AgentSpaceId__"),
+				Region:         ptr.String("__Region__"),
+				Status:         types.DevOpsAgentConnectionStatus("CONNECTING"),
+				OperatorAppUrl: ptr.String("__OperatorAppUrl__"),
+				ConnectedAt:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				StatusReason:   ptr.String("__StatusReason__"),
+			},
+			CreatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			UpdatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("ImportApp.response")
@@ -1817,7 +1897,9 @@ func TestCheckResponseSnapshot_ImportPolicy(t *testing.T) {
 			DataRecovery: &types.DataRecoveryTargets{
 				TimeBetweenBackupsInMinutes: ptr.Int32(1),
 			},
-			KmsKeyId: ptr.String("__KmsKeyId__"),
+			SharingEnabled: ptr.Bool(true),
+			OrganizationId: ptr.String("__OrganizationId__"),
+			KmsKeyId:       ptr.String("__KmsKeyId__"),
 			Tags: map[string]string{
 				"key0": "__Value__",
 			},
@@ -2072,26 +2154,28 @@ func TestCheckResponseSnapshot_ListFailureModeFindings(t *testing.T) {
 	want := &ListFailureModeFindingsOutput{
 		FindingsSummary: []types.FindingSummary{
 			{
-				ServiceArn:      ptr.String("__ServiceArn__"),
-				FindingId:       ptr.String("__FindingId__"),
-				Name:            ptr.String("__Name__"),
-				Description:     ptr.String("__Description__"),
-				FailureCategory: types.FailureCategory("SHARED_FATE"),
-				Severity:        types.FindingSeverity("LOW"),
-				Status:          types.FindingStatus("OPEN"),
-				PolicyComponent: types.PolicyComponent("AVAILABILITY_SLO"),
-				UpdatedAt:       ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				ServiceArn:            ptr.String("__ServiceArn__"),
+				FindingId:             ptr.String("__FindingId__"),
+				Name:                  ptr.String("__Name__"),
+				Description:           ptr.String("__Description__"),
+				FailureCategory:       types.FailureCategory("SHARED_FATE"),
+				Severity:              types.FindingSeverity("LOW"),
+				Status:                types.FindingStatus("OPEN"),
+				PolicyComponent:       types.PolicyComponent("AVAILABILITY_SLO"),
+				UpdatedAt:             ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				InvestigationDeepLink: ptr.String("__InvestigationDeepLink__"),
 			},
 			{
-				ServiceArn:      ptr.String("__ServiceArn__"),
-				FindingId:       ptr.String("__FindingId__"),
-				Name:            ptr.String("__Name__"),
-				Description:     ptr.String("__Description__"),
-				FailureCategory: types.FailureCategory("SHARED_FATE"),
-				Severity:        types.FindingSeverity("LOW"),
-				Status:          types.FindingStatus("OPEN"),
-				PolicyComponent: types.PolicyComponent("AVAILABILITY_SLO"),
-				UpdatedAt:       ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				ServiceArn:            ptr.String("__ServiceArn__"),
+				FindingId:             ptr.String("__FindingId__"),
+				Name:                  ptr.String("__Name__"),
+				Description:           ptr.String("__Description__"),
+				FailureCategory:       types.FailureCategory("SHARED_FATE"),
+				Severity:              types.FindingSeverity("LOW"),
+				Status:                types.FindingStatus("OPEN"),
+				PolicyComponent:       types.PolicyComponent("AVAILABILITY_SLO"),
+				UpdatedAt:             ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				InvestigationDeepLink: ptr.String("__InvestigationDeepLink__"),
 			},
 		},
 		NextToken: ptr.String("__NextToken__"),
@@ -2150,6 +2234,29 @@ func TestCheckResponseSnapshot_ListInputSources(t *testing.T) {
 						"__Member__",
 						"__Member__",
 					},
+					LabelSelector: &types.EksLabelSelector{
+						MatchLabels: map[string]string{
+							"key0": "__Value__",
+						},
+						MatchExpressions: []types.EksLabelSelectorRequirement{
+							{
+								Key:      ptr.String("__Key__"),
+								Operator: types.EksLabelSelectorOperator("IN"),
+								Values: []string{
+									"__Member__",
+									"__Member__",
+								},
+							},
+							{
+								Key:      ptr.String("__Key__"),
+								Operator: types.EksLabelSelectorOperator("IN"),
+								Values: []string{
+									"__Member__",
+									"__Member__",
+								},
+							},
+						},
+					},
 				},
 				DesignFileS3Url: ptr.String("__DesignFileS3Url__"),
 				CreatedAt:       ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
@@ -2180,6 +2287,29 @@ func TestCheckResponseSnapshot_ListInputSources(t *testing.T) {
 					Namespaces: []string{
 						"__Member__",
 						"__Member__",
+					},
+					LabelSelector: &types.EksLabelSelector{
+						MatchLabels: map[string]string{
+							"key0": "__Value__",
+						},
+						MatchExpressions: []types.EksLabelSelectorRequirement{
+							{
+								Key:      ptr.String("__Key__"),
+								Operator: types.EksLabelSelectorOperator("IN"),
+								Values: []string{
+									"__Member__",
+									"__Member__",
+								},
+							},
+							{
+								Key:      ptr.String("__Key__"),
+								Operator: types.EksLabelSelectorOperator("IN"),
+								Values: []string{
+									"__Member__",
+									"__Member__",
+								},
+							},
+						},
 					},
 				},
 				DesignFileS3Url: ptr.String("__DesignFileS3Url__"),
@@ -2232,6 +2362,8 @@ func TestCheckResponseSnapshot_ListPolicies(t *testing.T) {
 				DataRecovery: &types.DataRecoveryTargets{
 					TimeBetweenBackupsInMinutes: ptr.Int32(1),
 				},
+				SharingEnabled:         ptr.Bool(true),
+				OrganizationId:         ptr.String("__OrganizationId__"),
 				AssociatedServiceCount: ptr.Int32(1),
 				CreatedAt:              ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 				UpdatedAt:              ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
@@ -2255,6 +2387,8 @@ func TestCheckResponseSnapshot_ListPolicies(t *testing.T) {
 				DataRecovery: &types.DataRecoveryTargets{
 					TimeBetweenBackupsInMinutes: ptr.Int32(1),
 				},
+				SharingEnabled:         ptr.Bool(true),
+				OrganizationId:         ptr.String("__OrganizationId__"),
 				AssociatedServiceCount: ptr.Int32(1),
 				CreatedAt:              ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 				UpdatedAt:              ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
@@ -2271,6 +2405,7 @@ func TestCheckResponseSnapshot_ListPolicies(t *testing.T) {
 	}
 	svc := serdeRespClient(status, header, body)
 	got, err := svc.ListPolicies(context.Background(), &ListPoliciesInput{
+		AccountId:  ptr.String("__AccountId__"),
 		MaxResults: ptr.Int32(1),
 		NextToken:  ptr.String("__NextToken__"),
 	})
@@ -2279,6 +2414,83 @@ func TestCheckResponseSnapshot_ListPolicies(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "ListPolicies.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_ListPolicyEvents(t *testing.T) {
+	want := &ListPolicyEventsOutput{
+		Events: []types.PolicyEvent{
+			{
+				EventId:   ptr.String("__EventId__"),
+				Timestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				EventType: types.PolicyEventType("POLICY_ATTACHED_TO_SERVICE"),
+				PolicyArn: ptr.String("__PolicyArn__"),
+				Actor: &types.EventActor{
+					Type:        types.ActorType("USER"),
+					PrincipalId: ptr.String("__PrincipalId__"),
+					AccountId:   ptr.String("__AccountId__"),
+					UserName:    ptr.String("__UserName__"),
+				},
+				EventDetails: &types.PolicyEventDetails{
+					Title:       ptr.String("__Title__"),
+					Description: ptr.String("__Description__"),
+					EventMetadata: &types.PolicyEventMetadataMemberPolicyAttachedToService{
+						Value: types.PolicyAttachedToServiceMetadata{
+							ServiceArn: ptr.String("__ServiceArn__"),
+							AccountId:  ptr.String("__AccountId__"),
+						},
+					},
+				},
+			},
+			{
+				EventId:   ptr.String("__EventId__"),
+				Timestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				EventType: types.PolicyEventType("POLICY_ATTACHED_TO_SERVICE"),
+				PolicyArn: ptr.String("__PolicyArn__"),
+				Actor: &types.EventActor{
+					Type:        types.ActorType("USER"),
+					PrincipalId: ptr.String("__PrincipalId__"),
+					AccountId:   ptr.String("__AccountId__"),
+					UserName:    ptr.String("__UserName__"),
+				},
+				EventDetails: &types.PolicyEventDetails{
+					Title:       ptr.String("__Title__"),
+					Description: ptr.String("__Description__"),
+					EventMetadata: &types.PolicyEventMetadataMemberPolicyAttachedToService{
+						Value: types.PolicyAttachedToServiceMetadata{
+							ServiceArn: ptr.String("__ServiceArn__"),
+							AccountId:  ptr.String("__AccountId__"),
+						},
+					},
+				},
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("ListPolicyEvents.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.ListPolicyEvents(context.Background(), &ListPolicyEventsInput{
+		PolicyArn: ptr.String("__PolicyArn__"),
+		EventTypes: []types.PolicyEventType{
+			types.PolicyEventType("POLICY_ATTACHED_TO_SERVICE"),
+			types.PolicyEventType("POLICY_ATTACHED_TO_SERVICE"),
+		},
+		StartTime:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		EndTime:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "ListPolicyEvents.response", err)
 	}
 }
 
@@ -2392,10 +2604,14 @@ func TestCheckResponseSnapshot_ListResources(t *testing.T) {
 					Type:       types.InputSourceType("CFN_STACK"),
 				},
 				Resource: &types.Resource{
-					Identifier:   ptr.String("__Identifier__"),
-					AwsRegion:    ptr.String("__AwsRegion__"),
-					AwsAccountId: ptr.String("__AwsAccountId__"),
-					ResourceType: ptr.String("__ResourceType__"),
+					Identifier:             ptr.String("__Identifier__"),
+					AwsRegion:              ptr.String("__AwsRegion__"),
+					AwsAccountId:           ptr.String("__AwsAccountId__"),
+					ResourceType:           ptr.String("__ResourceType__"),
+					AvailabilityZoneId:     ptr.String("__AvailabilityZoneId__"),
+					AvailabilityZoneName:   ptr.String("__AvailabilityZoneName__"),
+					ContainmentParentId:    ptr.String("__ContainmentParentId__"),
+					LogicalResourceGroupId: ptr.String("__LogicalResourceGroupId__"),
 				},
 			},
 			{
@@ -2405,10 +2621,14 @@ func TestCheckResponseSnapshot_ListResources(t *testing.T) {
 					Type:       types.InputSourceType("CFN_STACK"),
 				},
 				Resource: &types.Resource{
-					Identifier:   ptr.String("__Identifier__"),
-					AwsRegion:    ptr.String("__AwsRegion__"),
-					AwsAccountId: ptr.String("__AwsAccountId__"),
-					ResourceType: ptr.String("__ResourceType__"),
+					Identifier:             ptr.String("__Identifier__"),
+					AwsRegion:              ptr.String("__AwsRegion__"),
+					AwsAccountId:           ptr.String("__AwsAccountId__"),
+					ResourceType:           ptr.String("__ResourceType__"),
+					AvailabilityZoneId:     ptr.String("__AvailabilityZoneId__"),
+					AvailabilityZoneName:   ptr.String("__AvailabilityZoneName__"),
+					ContainmentParentId:    ptr.String("__ContainmentParentId__"),
+					LogicalResourceGroupId: ptr.String("__LogicalResourceGroupId__"),
 				},
 			},
 		},
@@ -2655,6 +2875,8 @@ func TestCheckResponseSnapshot_ListServices(t *testing.T) {
 				},
 				PolicyArn:             ptr.String("__PolicyArn__"),
 				AssessmentStatus:      types.AssessmentStatus("NOT_STARTED"),
+				DevOpsAgentStatus:     types.DevOpsAgentConnectionStatus("CONNECTING"),
+				DevOpsAgentSpaceArn:   ptr.String("__DevOpsAgentSpaceArn__"),
 				OpenFindingsCount:     ptr.Int32(1),
 				ResolvedFindingsCount: ptr.Int32(1),
 				DependencyDiscovery: &types.DependencyDiscoveryConfig{
@@ -2702,6 +2924,8 @@ func TestCheckResponseSnapshot_ListServices(t *testing.T) {
 				},
 				PolicyArn:             ptr.String("__PolicyArn__"),
 				AssessmentStatus:      types.AssessmentStatus("NOT_STARTED"),
+				DevOpsAgentStatus:     types.DevOpsAgentConnectionStatus("CONNECTING"),
+				DevOpsAgentSpaceArn:   ptr.String("__DevOpsAgentSpaceArn__"),
 				OpenFindingsCount:     ptr.Int32(1),
 				ResolvedFindingsCount: ptr.Int32(1),
 				DependencyDiscovery: &types.DependencyDiscoveryConfig{
@@ -2896,6 +3120,60 @@ func TestCheckResponseSnapshot_ListTagsForResource(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_ListTestRunDependencies(t *testing.T) {
+	want := &ListTestRunDependenciesOutput{
+		Dependencies: []types.TestRunDependencySummary{
+			{
+				DependencyId:   ptr.String("__DependencyId__"),
+				DependencyName: ptr.String("__DependencyName__"),
+				DnsName:        ptr.String("__DnsName__"),
+				Criticality:    types.DependencyCriticality("HARD"),
+				Source:         types.TestRunDependencySource("DISCOVERED"),
+				Location:       ptr.String("__Location__"),
+				SourceRegions: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Provider: ptr.String("__Provider__"),
+			},
+			{
+				DependencyId:   ptr.String("__DependencyId__"),
+				DependencyName: ptr.String("__DependencyName__"),
+				DnsName:        ptr.String("__DnsName__"),
+				Criticality:    types.DependencyCriticality("HARD"),
+				Source:         types.TestRunDependencySource("DISCOVERED"),
+				Location:       ptr.String("__Location__"),
+				SourceRegions: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Provider: ptr.String("__Provider__"),
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("ListTestRunDependencies.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.ListTestRunDependencies(context.Background(), &ListTestRunDependenciesInput{
+		TestRunId:  ptr.String("__TestRunId__"),
+		ServiceArn: ptr.String("__ServiceArn__"),
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "ListTestRunDependencies.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_ListTestRunEvents(t *testing.T) {
 	want := &ListTestRunEventsOutput{
 		Events: []types.TestRunEvent{
@@ -2941,6 +3219,59 @@ func TestCheckResponseSnapshot_ListTestRunEvents(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "ListTestRunEvents.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_ListTestRunSourceEvents(t *testing.T) {
+	want := &ListTestRunSourceEventsOutput{
+		TestRunSourceEvents: []types.TestRunSourceEvent{
+			{
+				Timestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				SourceArn: ptr.String("__SourceArn__"),
+				EventType: types.TestRunSourceEventType("ALARM"),
+				Detail: &types.TestRunSourceEventDetailMemberAlarmStateChange{
+					Value: types.AlarmStateChangeDetail{
+						State:         types.AlarmState("OK"),
+						PreviousState: types.AlarmState("OK"),
+						Reason:        ptr.String("__Reason__"),
+					},
+				},
+			},
+			{
+				Timestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				SourceArn: ptr.String("__SourceArn__"),
+				EventType: types.TestRunSourceEventType("ALARM"),
+				Detail: &types.TestRunSourceEventDetailMemberAlarmStateChange{
+					Value: types.AlarmStateChangeDetail{
+						State:         types.AlarmState("OK"),
+						PreviousState: types.AlarmState("OK"),
+						Reason:        ptr.String("__Reason__"),
+					},
+				},
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("ListTestRunSourceEvents.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.ListTestRunSourceEvents(context.Background(), &ListTestRunSourceEventsInput{
+		TestRunId:  ptr.String("__TestRunId__"),
+		ServiceArn: ptr.String("__ServiceArn__"),
+		SourceArn:  ptr.String("__SourceArn__"),
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "ListTestRunSourceEvents.response", err)
 	}
 }
 
@@ -3236,6 +3567,30 @@ func TestCheckResponseSnapshot_PutTestSources(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_StartDependencyInsights(t *testing.T) {
+	want := &StartDependencyInsightsOutput{
+		Status: types.DependencyInsightsStatus("IN_PROGRESS"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("StartDependencyInsights.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.StartDependencyInsights(context.Background(), &StartDependencyInsightsInput{
+		ServiceArn:  ptr.String("__ServiceArn__"),
+		ClientToken: ptr.String("__ClientToken__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "StartDependencyInsights.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_StartFailureModeAssessment(t *testing.T) {
 	want := &StartFailureModeAssessmentOutput{
 		AssessmentId:     ptr.String("__AssessmentId__"),
@@ -3488,7 +3843,8 @@ func TestCheckResponseSnapshot_UpdateFailureModeFinding(t *testing.T) {
 					},
 				},
 			},
-			UpdatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			UpdatedAt:             ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			InvestigationDeepLink: ptr.String("__InvestigationDeepLink__"),
 		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("UpdateFailureModeFinding.response")
@@ -3535,7 +3891,9 @@ func TestCheckResponseSnapshot_UpdatePolicy(t *testing.T) {
 			DataRecovery: &types.DataRecoveryTargets{
 				TimeBetweenBackupsInMinutes: ptr.Int32(1),
 			},
-			KmsKeyId: ptr.String("__KmsKeyId__"),
+			SharingEnabled: ptr.Bool(true),
+			OrganizationId: ptr.String("__OrganizationId__"),
+			KmsKeyId:       ptr.String("__KmsKeyId__"),
 			Tags: map[string]string{
 				"key0": "__Value__",
 			},
@@ -3571,6 +3929,7 @@ func TestCheckResponseSnapshot_UpdatePolicy(t *testing.T) {
 		DataRecovery: &types.DataRecoveryTargets{
 			TimeBetweenBackupsInMinutes: ptr.Int32(1),
 		},
+		SharingEnabled: ptr.Bool(true),
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -3713,8 +4072,17 @@ func TestCheckResponseSnapshot_UpdateService(t *testing.T) {
 			OrganizationId:        ptr.String("__OrganizationId__"),
 			OuId:                  ptr.String("__OuId__"),
 			AccountId:             ptr.String("__AccountId__"),
-			CreatedAt:             ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-			UpdatedAt:             ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			DevOpsAgentConfiguration: &types.DevOpsAgentConfigurationView{
+				AgentSpaceArn:  ptr.String("__AgentSpaceArn__"),
+				AgentSpaceId:   ptr.String("__AgentSpaceId__"),
+				Region:         ptr.String("__Region__"),
+				Status:         types.DevOpsAgentConnectionStatus("CONNECTING"),
+				OperatorAppUrl: ptr.String("__OperatorAppUrl__"),
+				ConnectedAt:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				StatusReason:   ptr.String("__StatusReason__"),
+			},
+			CreatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			UpdatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("UpdateService.response")
@@ -3780,6 +4148,9 @@ func TestCheckResponseSnapshot_UpdateService(t *testing.T) {
 					},
 				},
 			},
+		},
+		DevOpsAgentConfiguration: &types.DevOpsAgentConfiguration{
+			AgentSpaceArn: ptr.String("__AgentSpaceArn__"),
 		},
 	})
 	if err != nil {

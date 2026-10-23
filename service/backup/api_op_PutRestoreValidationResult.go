@@ -4,7 +4,9 @@ package backup
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/backup/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/backup/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -45,6 +47,24 @@ type PutRestoreValidationResultInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutRestoreValidationResultInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutRestoreValidationResultInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutRestoreValidationResultInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RestoreJobId != nil {
+		s.WriteString(schemas.PutRestoreValidationResultInput_RestoreJobId, *v.RestoreJobId)
+	}
+	if v.ValidationStatus != "" {
+		s.WriteString(schemas.PutRestoreValidationResultInput_ValidationStatus, string(v.ValidationStatus))
+	}
+	if v.ValidationStatusMessage != nil {
+		s.WriteString(schemas.PutRestoreValidationResultInput_ValidationStatusMessage, *v.ValidationStatusMessage)
+	}
+}
+
 type PutRestoreValidationResultOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -52,13 +72,26 @@ type PutRestoreValidationResultOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutRestoreValidationResultOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutRestoreValidationResultOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *PutRestoreValidationResultOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPutRestoreValidationResultMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpPutRestoreValidationResult{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutRestoreValidationResult, schemas.PutRestoreValidationResultInput, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpPutRestoreValidationResult{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutRestoreValidationResult, schemas.PutRestoreValidationResultInput, nil), output: &PutRestoreValidationResultOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

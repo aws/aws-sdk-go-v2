@@ -1,3 +1,42 @@
+# v1.0.0-preview.47 (2026-10-22)
+
+* **Bug Fix**: Update smithy-go to v1.28.6
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.0.0-preview.46 (2026-10-21)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.0.0-preview.45 (2026-10-19)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.0.0-preview.44 (2026-10-09.2)
+
+* **Dependency Update**: Update to smithy-go v1.28.5.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.0.0-preview.43 (2026-10-08)
+
+* **Dependency Update**: Update to smithy-go v1.28.4.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.0.0-preview.42 (2026-10-06)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.0.0-preview.41 (2026-09-24)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.0.0-preview.40 (2026-09-15)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.0.0-preview.39 (2026-09-14)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.0.0-preview.38 (2026-09-09)
 
 * **Dependency Update**: Updated to the latest SDK module versions

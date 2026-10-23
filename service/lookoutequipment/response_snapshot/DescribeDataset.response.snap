@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: AWSLookoutEquipmentFrontendService.DescribeDataset
+
+{"CreatedAt":946684800,"DataEndTime":946684800,"DataQualitySummary":{"DuplicateTimestamps":{"TotalNumberOfDuplicateTimestamps":1},"InsufficientSensorData":{"MissingCompleteSensorData":{"AffectedSensorCount":1},"SensorsWithShortDateRange":{"AffectedSensorCount":1}},"InvalidSensorData":{"AffectedSensorCount":1,"TotalNumberOfInvalidValues":1},"MissingSensorData":{"AffectedSensorCount":1,"TotalNumberOfMissingValues":1},"UnsupportedTimestamps":{"TotalNumberOfUnsupportedTimestamps":1}},"DataStartTime":946684800,"DatasetArn":"__DatasetArn__","DatasetName":"__DatasetName__","IngestedFilesSummary":{"DiscardedFiles":[{"Bucket":"__Bucket__","Key":"__Key__"},{"Bucket":"__Bucket__","Key":"__Key__"}],"IngestedNumberOfFiles":1,"TotalNumberOfFiles":1},"IngestionInputConfiguration":{"S3InputConfiguration":{"Bucket":"__Bucket__","KeyPattern":"__KeyPattern__","Prefix":"__Prefix__"}},"LastUpdatedAt":946684800,"RoleArn":"__RoleArn__","Schema":"__Schema__","ServerSideKmsKeyId":"__ServerSideKmsKeyId__","SourceDatasetArn":"__SourceDatasetArn__","Status":"CREATED"}

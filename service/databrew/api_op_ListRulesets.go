@@ -5,7 +5,9 @@ package databrew
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/databrew/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/databrew/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -44,6 +46,24 @@ type ListRulesetsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListRulesetsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListRulesetsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListRulesetsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListRulesetsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListRulesetsRequest_NextToken, *v.NextToken)
+	}
+	if v.TargetArn != nil {
+		s.WriteString(schemas.ListRulesetsRequest_TargetArn, *v.TargetArn)
+	}
+}
+
 type ListRulesetsOutput struct {
 
 	// A list of RulesetItem. RulesetItem contains meta data of a ruleset.
@@ -61,13 +81,35 @@ type ListRulesetsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListRulesetsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListRulesetsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListRulesetsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListRulesetsResponse_NextToken, *v.NextToken)
+	}
+	serializeRulesetItemList(s, schemas.ListRulesetsResponse_Rulesets, v.Rulesets)
+}
+func (v *ListRulesetsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListRulesetsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListRulesetsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListRulesetsResponse_NextToken, v.NextToken)
+		case schemas.ListRulesetsResponse_Rulesets:
+			return deserializeRulesetItemList(d, schemas.ListRulesetsResponse_Rulesets, &v.Rulesets)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListRulesetsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListRulesets{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListRulesets, schemas.ListRulesetsRequest, schemas.ListRulesetsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListRulesets{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListRulesets, schemas.ListRulesetsRequest, schemas.ListRulesetsResponse), output: &ListRulesetsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

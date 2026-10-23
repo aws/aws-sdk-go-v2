@@ -4,6 +4,8 @@ package auditmanager
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/auditmanager/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,18 @@ type DeleteControlInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteControlInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteControlRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteControlInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ControlId != nil {
+		s.WriteString(schemas.DeleteControlRequest_controlId, *v.ControlId)
+	}
+}
+
 type DeleteControlOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -46,13 +60,26 @@ type DeleteControlOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteControlOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteControlResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteControlOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteControlOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteControlResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteControlMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteControl{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteControl, schemas.DeleteControlRequest, schemas.DeleteControlResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteControl{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteControl, schemas.DeleteControlRequest, schemas.DeleteControlResponse), output: &DeleteControlOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSWAF_20150824.ListXssMatchSets
+
+{"NextMarker":"__NextMarker__","XssMatchSets":[{"Name":"__Name__","XssMatchSetId":"__XssMatchSetId__"},{"Name":"__Name__","XssMatchSetId":"__XssMatchSetId__"}]}

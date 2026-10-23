@@ -1216,6 +1216,9 @@ func TestCheckResponseSnapshot_CreateImportedImage(t *testing.T) {
 			ImageSharedWithOthers:      types.ImageSharedWithOthers("TRUE"),
 			ManagedSoftwareIncluded:    ptr.Bool(true),
 			ImageType:                  types.ImageType("CUSTOM"),
+			ImageSoftwareMetadata: &types.ImageSoftwareMetadata{
+				NvidiaGridDriverVersion: ptr.String("__NvidiaGridDriverVersion__"),
+			},
 		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("CreateImportedImage.response")
@@ -1380,6 +1383,7 @@ func TestCheckResponseSnapshot_CreateStack(t *testing.T) {
 				ScreenImageFormat:        types.ScreenImageFormat("PNG"),
 				UserControlMode:          types.UserControlMode("VIEW_ONLY"),
 			},
+			StorageConnectorAuthentication: types.StorageConnectorAuthentication("FORCE_REAUTHENTICATION"),
 		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("CreateStack.response")
@@ -1488,6 +1492,7 @@ func TestCheckResponseSnapshot_CreateStack(t *testing.T) {
 			ScreenImageFormat:        types.ScreenImageFormat("PNG"),
 			UserControlMode:          types.UserControlMode("VIEW_ONLY"),
 		},
+		StorageConnectorAuthentication: types.StorageConnectorAuthentication("FORCE_REAUTHENTICATION"),
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -1690,6 +1695,9 @@ func TestCheckResponseSnapshot_CreateUpdatedImage(t *testing.T) {
 			ImageSharedWithOthers:      types.ImageSharedWithOthers("TRUE"),
 			ManagedSoftwareIncluded:    ptr.Bool(true),
 			ImageType:                  types.ImageType("CUSTOM"),
+			ImageSoftwareMetadata: &types.ImageSoftwareMetadata{
+				NvidiaGridDriverVersion: ptr.String("__NvidiaGridDriverVersion__"),
+			},
 		},
 		CanUpdateImage: ptr.Bool(true),
 	}
@@ -1996,6 +2004,9 @@ func TestCheckResponseSnapshot_DeleteImage(t *testing.T) {
 			ImageSharedWithOthers:      types.ImageSharedWithOthers("TRUE"),
 			ManagedSoftwareIncluded:    ptr.Bool(true),
 			ImageType:                  types.ImageType("CUSTOM"),
+			ImageSoftwareMetadata: &types.ImageSoftwareMetadata{
+				NvidiaGridDriverVersion: ptr.String("__NvidiaGridDriverVersion__"),
+			},
 		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("DeleteImage.response")
@@ -3263,6 +3274,9 @@ func TestCheckResponseSnapshot_DescribeImages(t *testing.T) {
 				ImageSharedWithOthers:      types.ImageSharedWithOthers("TRUE"),
 				ManagedSoftwareIncluded:    ptr.Bool(true),
 				ImageType:                  types.ImageType("CUSTOM"),
+				ImageSoftwareMetadata: &types.ImageSoftwareMetadata{
+					NvidiaGridDriverVersion: ptr.String("__NvidiaGridDriverVersion__"),
+				},
 			},
 			{
 				Name:                  ptr.String("__Name__"),
@@ -3365,6 +3379,9 @@ func TestCheckResponseSnapshot_DescribeImages(t *testing.T) {
 				ImageSharedWithOthers:      types.ImageSharedWithOthers("TRUE"),
 				ManagedSoftwareIncluded:    ptr.Bool(true),
 				ImageType:                  types.ImageType("CUSTOM"),
+				ImageSoftwareMetadata: &types.ImageSoftwareMetadata{
+					NvidiaGridDriverVersion: ptr.String("__NvidiaGridDriverVersion__"),
+				},
 			},
 		},
 		NextToken: ptr.String("__NextToken__"),
@@ -3638,6 +3655,7 @@ func TestCheckResponseSnapshot_DescribeStacks(t *testing.T) {
 					ScreenImageFormat:        types.ScreenImageFormat("PNG"),
 					UserControlMode:          types.UserControlMode("VIEW_ONLY"),
 				},
+				StorageConnectorAuthentication: types.StorageConnectorAuthentication("FORCE_REAUTHENTICATION"),
 			},
 			{
 				Arn:         ptr.String("__Arn__"),
@@ -3747,6 +3765,7 @@ func TestCheckResponseSnapshot_DescribeStacks(t *testing.T) {
 					ScreenImageFormat:        types.ScreenImageFormat("PNG"),
 					UserControlMode:          types.UserControlMode("VIEW_ONLY"),
 				},
+				StorageConnectorAuthentication: types.StorageConnectorAuthentication("FORCE_REAUTHENTICATION"),
 			},
 		},
 		NextToken: ptr.String("__NextToken__"),
@@ -5384,6 +5403,7 @@ func TestCheckResponseSnapshot_UpdateStack(t *testing.T) {
 				ScreenImageFormat:        types.ScreenImageFormat("PNG"),
 				UserControlMode:          types.UserControlMode("VIEW_ONLY"),
 			},
+			StorageConnectorAuthentication: types.StorageConnectorAuthentication("FORCE_REAUTHENTICATION"),
 		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("UpdateStack.response")
@@ -5494,6 +5514,7 @@ func TestCheckResponseSnapshot_UpdateStack(t *testing.T) {
 			ScreenImageFormat:        types.ScreenImageFormat("PNG"),
 			UserControlMode:          types.UserControlMode("VIEW_ONLY"),
 		},
+		StorageConnectorAuthentication: types.StorageConnectorAuthentication("FORCE_REAUTHENTICATION"),
 	})
 	if err != nil {
 		t.Fatal(err)

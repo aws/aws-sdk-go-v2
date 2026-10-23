@@ -4,7 +4,9 @@ package glue
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/glue/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/glue/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -34,6 +36,18 @@ type GetAssetInput struct {
 	Identifier *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetAssetInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetAssetInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetAssetInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Identifier != nil {
+		s.WriteString(schemas.GetAssetInput_Identifier, *v.Identifier)
+	}
 }
 
 // The asset metadata returned by the GetAsset operation.
@@ -81,13 +95,74 @@ type GetAssetOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetAssetOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetAssetOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetAssetOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AssetTypeId != nil {
+		s.WriteString(schemas.GetAssetOutput_AssetTypeId, *v.AssetTypeId)
+	}
+	serializeAssetFormMap(s, schemas.GetAssetOutput_Attachments, v.Attachments)
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.GetAssetOutput_CreatedAt, *v.CreatedAt)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.GetAssetOutput_Description, *v.Description)
+	}
+	serializeAssetFormMap(s, schemas.GetAssetOutput_Forms, v.Forms)
+	serializeGlossaryTermIdList(s, schemas.GetAssetOutput_GlossaryTerms, v.GlossaryTerms)
+	if v.Id != nil {
+		s.WriteString(schemas.GetAssetOutput_Id, *v.Id)
+	}
+	serializeIterableFormMap(s, schemas.GetAssetOutput_IterableForms, v.IterableForms)
+	if v.Name != nil {
+		s.WriteString(schemas.GetAssetOutput_Name, *v.Name)
+	}
+	if v.UpdatedAt != nil {
+		s.WriteTime(schemas.GetAssetOutput_UpdatedAt, *v.UpdatedAt)
+	}
+}
+func (v *GetAssetOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetAssetOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetAssetOutput_AssetTypeId:
+			v.AssetTypeId = new(string)
+			return d.ReadString(schemas.GetAssetOutput_AssetTypeId, v.AssetTypeId)
+		case schemas.GetAssetOutput_Attachments:
+			return deserializeAssetFormMap(d, schemas.GetAssetOutput_Attachments, &v.Attachments)
+		case schemas.GetAssetOutput_CreatedAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.GetAssetOutput_CreatedAt, v.CreatedAt)
+		case schemas.GetAssetOutput_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.GetAssetOutput_Description, v.Description)
+		case schemas.GetAssetOutput_Forms:
+			return deserializeAssetFormMap(d, schemas.GetAssetOutput_Forms, &v.Forms)
+		case schemas.GetAssetOutput_GlossaryTerms:
+			return deserializeGlossaryTermIdList(d, schemas.GetAssetOutput_GlossaryTerms, &v.GlossaryTerms)
+		case schemas.GetAssetOutput_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.GetAssetOutput_Id, v.Id)
+		case schemas.GetAssetOutput_IterableForms:
+			return deserializeIterableFormMap(d, schemas.GetAssetOutput_IterableForms, &v.IterableForms)
+		case schemas.GetAssetOutput_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.GetAssetOutput_Name, v.Name)
+		case schemas.GetAssetOutput_UpdatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.GetAssetOutput_UpdatedAt, v.UpdatedAt)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetAssetMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetAsset{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAsset, schemas.GetAssetInput, schemas.GetAssetOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetAsset{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAsset, schemas.GetAssetInput, schemas.GetAssetOutput), output: &GetAssetOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

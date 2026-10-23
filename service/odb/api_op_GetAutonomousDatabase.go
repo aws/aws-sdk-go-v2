@@ -4,7 +4,9 @@ package odb
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/odb/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/odb/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -34,6 +36,18 @@ type GetAutonomousDatabaseInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetAutonomousDatabaseInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetAutonomousDatabaseInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetAutonomousDatabaseInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AutonomousDatabaseId != nil {
+		s.WriteString(schemas.GetAutonomousDatabaseInput_autonomousDatabaseId, *v.AutonomousDatabaseId)
+	}
+}
+
 type GetAutonomousDatabaseOutput struct {
 
 	// The details of the requested Autonomous Database.
@@ -47,13 +61,34 @@ type GetAutonomousDatabaseOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetAutonomousDatabaseOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetAutonomousDatabaseOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetAutonomousDatabaseOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AutonomousDatabase != nil {
+		s.WriteStruct(schemas.GetAutonomousDatabaseOutput_autonomousDatabase)
+		v.AutonomousDatabase.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetAutonomousDatabaseOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetAutonomousDatabaseOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetAutonomousDatabaseOutput_autonomousDatabase:
+			v.AutonomousDatabase = &types.AutonomousDatabase{}
+			return v.AutonomousDatabase.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetAutonomousDatabaseMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpGetAutonomousDatabase{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAutonomousDatabase, schemas.GetAutonomousDatabaseInput, schemas.GetAutonomousDatabaseOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpGetAutonomousDatabase{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAutonomousDatabase, schemas.GetAutonomousDatabaseInput, schemas.GetAutonomousDatabaseOutput), output: &GetAutonomousDatabaseOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,6 +4,8 @@ package resiliencehubv2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/resiliencehubv2/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -43,6 +45,22 @@ type CreateServiceFunctionResourcesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateServiceFunctionResourcesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateServiceFunctionResourcesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateServiceFunctionResourcesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeResourceList(s, schemas.CreateServiceFunctionResourcesRequest_resources, v.Resources)
+	if v.ServiceArn != nil {
+		s.WriteString(schemas.CreateServiceFunctionResourcesRequest_serviceArn, *v.ServiceArn)
+	}
+	if v.ServiceFunctionId != nil {
+		s.WriteString(schemas.CreateServiceFunctionResourcesRequest_serviceFunctionId, *v.ServiceFunctionId)
+	}
+}
+
 type CreateServiceFunctionResourcesOutput struct {
 
 	// The list of resources that were associated.
@@ -60,13 +78,41 @@ type CreateServiceFunctionResourcesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateServiceFunctionResourcesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateServiceFunctionResourcesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateServiceFunctionResourcesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeResourceList(s, schemas.CreateServiceFunctionResourcesResponse_resources, v.Resources)
+	if v.ServiceArn != nil {
+		s.WriteString(schemas.CreateServiceFunctionResourcesResponse_serviceArn, *v.ServiceArn)
+	}
+	if v.ServiceFunctionId != nil {
+		s.WriteString(schemas.CreateServiceFunctionResourcesResponse_serviceFunctionId, *v.ServiceFunctionId)
+	}
+}
+func (v *CreateServiceFunctionResourcesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateServiceFunctionResourcesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateServiceFunctionResourcesResponse_resources:
+			return deserializeResourceList(d, schemas.CreateServiceFunctionResourcesResponse_resources, &v.Resources)
+		case schemas.CreateServiceFunctionResourcesResponse_serviceArn:
+			v.ServiceArn = new(string)
+			return d.ReadString(schemas.CreateServiceFunctionResourcesResponse_serviceArn, v.ServiceArn)
+		case schemas.CreateServiceFunctionResourcesResponse_serviceFunctionId:
+			v.ServiceFunctionId = new(string)
+			return d.ReadString(schemas.CreateServiceFunctionResourcesResponse_serviceFunctionId, v.ServiceFunctionId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateServiceFunctionResourcesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateServiceFunctionResources{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateServiceFunctionResources, schemas.CreateServiceFunctionResourcesRequest, schemas.CreateServiceFunctionResourcesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateServiceFunctionResources{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateServiceFunctionResources, schemas.CreateServiceFunctionResourcesRequest, schemas.CreateServiceFunctionResourcesResponse), output: &CreateServiceFunctionResourcesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -5,6 +5,8 @@ package devopsagent
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/devopsagent/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -42,6 +44,21 @@ type DisassociateServiceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DisassociateServiceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DisassociateServiceInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DisassociateServiceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AgentSpaceId != nil {
+		s.WriteString(schemas.DisassociateServiceInput_agentSpaceId, *v.AgentSpaceId)
+	}
+	if v.AssociationId != nil {
+		s.WriteString(schemas.DisassociateServiceInput_associationId, *v.AssociationId)
+	}
+}
+
 // Empty output for successful service disassociation.
 type DisassociateServiceOutput struct {
 	// Metadata pertaining to the operation's result.
@@ -50,13 +67,26 @@ type DisassociateServiceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DisassociateServiceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DisassociateServiceOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DisassociateServiceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DisassociateServiceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DisassociateServiceOutput, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDisassociateServiceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDisassociateService{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisassociateService, schemas.DisassociateServiceInput, schemas.DisassociateServiceOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDisassociateService{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisassociateService, schemas.DisassociateServiceInput, schemas.DisassociateServiceOutput), output: &DisassociateServiceOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

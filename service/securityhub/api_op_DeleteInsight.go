@@ -4,6 +4,8 @@ package securityhub
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/securityhub/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -33,6 +35,18 @@ type DeleteInsightInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteInsightInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteInsightRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteInsightInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InsightArn != nil {
+		s.WriteString(schemas.DeleteInsightRequest_InsightArn, *v.InsightArn)
+	}
+}
+
 type DeleteInsightOutput struct {
 
 	// The ARN of the insight that was deleted.
@@ -46,13 +60,32 @@ type DeleteInsightOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteInsightOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteInsightResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteInsightOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InsightArn != nil {
+		s.WriteString(schemas.DeleteInsightResponse_InsightArn, *v.InsightArn)
+	}
+}
+func (v *DeleteInsightOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteInsightResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteInsightResponse_InsightArn:
+			v.InsightArn = new(string)
+			return d.ReadString(schemas.DeleteInsightResponse_InsightArn, v.InsightArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteInsightMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteInsight{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteInsight, schemas.DeleteInsightRequest, schemas.DeleteInsightResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteInsight{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteInsight, schemas.DeleteInsightRequest, schemas.DeleteInsightResponse), output: &DeleteInsightOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

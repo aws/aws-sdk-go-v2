@@ -1590,6 +1590,26 @@ func (m *validateOpListLimits) HandleInitialize(ctx context.Context, in middlewa
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpListMemberships struct {
+}
+
+func (*validateOpListMemberships) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListMemberships) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListMembershipsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListMembershipsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListMeteredProducts struct {
 }
 
@@ -2766,6 +2786,10 @@ func addOpListLimitsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListLimits{}, middleware.After)
 }
 
+func addOpListMembershipsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListMemberships{}, middleware.After)
+}
+
 func addOpListMeteredProductsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListMeteredProducts{}, middleware.After)
 }
@@ -3741,6 +3765,38 @@ func validateFleetConfiguration(v types.FleetConfiguration) error {
 	}
 }
 
+func validateFleetSoftwareAddOn(v *types.FleetSoftwareAddOn) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "FleetSoftwareAddOn"}
+	if len(v.Name) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateFleetSoftwareAddOns(v []types.FleetSoftwareAddOn) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "FleetSoftwareAddOns"}
+	for i := range v {
+		if err := validateFleetSoftwareAddOn(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateHostConfiguration(v *types.HostConfiguration) error {
 	if v == nil {
 		return nil
@@ -4233,6 +4289,11 @@ func validateServiceManagedEc2InstanceCapabilities(v *types.ServiceManagedEc2Ins
 	if v.CustomAttributes != nil {
 		if err := validateCustomFleetAttributeCapabilities(v.CustomAttributes); err != nil {
 			invalidParams.AddNested("CustomAttributes", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.SoftwareAddOns != nil {
+		if err := validateFleetSoftwareAddOns(v.SoftwareAddOns); err != nil {
+			invalidParams.AddNested("SoftwareAddOns", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -6099,6 +6160,21 @@ func validateOpListLimitsInput(v *ListLimitsInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "ListLimitsInput"}
 	if v.FarmId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("FarmId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListMembershipsInput(v *ListMembershipsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListMembershipsInput"}
+	if v.PrincipalId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PrincipalId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

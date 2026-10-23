@@ -5,7 +5,9 @@ package glue
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/glue/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/glue/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -61,6 +63,31 @@ type PutAssetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutAssetInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutAssetRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutAssetInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AssetTypeId != nil {
+		s.WriteString(schemas.PutAssetRequest_AssetTypeId, *v.AssetTypeId)
+	}
+	if v.ClientToken != nil {
+		s.WriteString(schemas.PutAssetRequest_ClientToken, *v.ClientToken)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.PutAssetRequest_Description, *v.Description)
+	}
+	serializeAssetFormMap(s, schemas.PutAssetRequest_Forms, v.Forms)
+	if v.Identifier != nil {
+		s.WriteString(schemas.PutAssetRequest_Identifier, *v.Identifier)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.PutAssetRequest_Name, *v.Name)
+	}
+}
+
 type PutAssetOutput struct {
 
 	// The unique identifier of the asset.
@@ -88,13 +115,53 @@ type PutAssetOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutAssetOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutAssetResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutAssetOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.PutAssetResponse_CreatedAt, *v.CreatedAt)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.PutAssetResponse_Description, *v.Description)
+	}
+	serializeAssetFormMap(s, schemas.PutAssetResponse_Forms, v.Forms)
+	if v.Id != nil {
+		s.WriteString(schemas.PutAssetResponse_Id, *v.Id)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.PutAssetResponse_Name, *v.Name)
+	}
+}
+func (v *PutAssetOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PutAssetResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PutAssetResponse_CreatedAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.PutAssetResponse_CreatedAt, v.CreatedAt)
+		case schemas.PutAssetResponse_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.PutAssetResponse_Description, v.Description)
+		case schemas.PutAssetResponse_Forms:
+			return deserializeAssetFormMap(d, schemas.PutAssetResponse_Forms, &v.Forms)
+		case schemas.PutAssetResponse_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.PutAssetResponse_Id, v.Id)
+		case schemas.PutAssetResponse_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.PutAssetResponse_Name, v.Name)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPutAssetMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpPutAsset{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutAsset, schemas.PutAssetRequest, schemas.PutAssetResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpPutAsset{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutAsset, schemas.PutAssetRequest, schemas.PutAssetResponse), output: &PutAssetOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

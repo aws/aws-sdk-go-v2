@@ -4,7 +4,9 @@ package mediaconnect
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/mediaconnect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/mediaconnect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -56,10 +58,55 @@ type UpdateRouterOutputInput struct {
 	// can take inputs from any Region.
 	RoutingScope types.RoutingScope
 
-	// The updated tier level for the router output.
+	// The updated tier level for the router output. The tier sets the maximum
+	// bitrate, in Mbps, for the router output. Valid values include the following:
+	//
+	//   - OUTPUT_20 – 20 Mbps
+	//
+	//   - OUTPUT_50 – 50 Mbps
+	//
+	//   - OUTPUT_100 – 100 Mbps
+	//
+	//   - OUTPUT_250 – 250 Mbps
+	//
+	//   - OUTPUT_500 – 500 Mbps
+	//
+	// The 250 Mbps and 500 Mbps tiers are high-bitrate tiers that support TR-07 (JPEG
+	// XS) workflows.
 	Tier types.RouterOutputTier
 
 	noSmithyDocumentSerde
+}
+
+func (v *UpdateRouterOutputInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateRouterOutputRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateRouterOutputInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.UpdateRouterOutputRequest_Arn, *v.Arn)
+	}
+	serializeRouterOutputConfiguration(s, schemas.UpdateRouterOutputRequest_Configuration, v.Configuration)
+	if v.FabricConfiguration != nil {
+		s.WriteStruct(schemas.UpdateRouterOutputRequest_FabricConfiguration)
+		v.FabricConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeMaintenanceConfiguration(s, schemas.UpdateRouterOutputRequest_MaintenanceConfiguration, v.MaintenanceConfiguration)
+	if v.MaximumBitrate != nil {
+		s.WriteInt64(schemas.UpdateRouterOutputRequest_MaximumBitrate, *v.MaximumBitrate)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateRouterOutputRequest_Name, *v.Name)
+	}
+	if v.RoutingScope != "" {
+		s.WriteString(schemas.UpdateRouterOutputRequest_RoutingScope, string(v.RoutingScope))
+	}
+	if v.Tier != "" {
+		s.WriteString(schemas.UpdateRouterOutputRequest_Tier, string(v.Tier))
+	}
 }
 
 type UpdateRouterOutputOutput struct {
@@ -75,13 +122,34 @@ type UpdateRouterOutputOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateRouterOutputOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateRouterOutputResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateRouterOutputOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RouterOutput != nil {
+		s.WriteStruct(schemas.UpdateRouterOutputResponse_RouterOutput)
+		v.RouterOutput.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateRouterOutputOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateRouterOutputResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateRouterOutputResponse_RouterOutput:
+			v.RouterOutput = &types.RouterOutput{}
+			return v.RouterOutput.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateRouterOutputMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateRouterOutput{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateRouterOutput, schemas.UpdateRouterOutputRequest, schemas.UpdateRouterOutputResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateRouterOutput{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateRouterOutput, schemas.UpdateRouterOutputRequest, schemas.UpdateRouterOutputResponse), output: &UpdateRouterOutputOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

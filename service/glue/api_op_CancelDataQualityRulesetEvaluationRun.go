@@ -4,6 +4,8 @@ package glue
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/glue/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -33,6 +35,18 @@ type CancelDataQualityRulesetEvaluationRunInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CancelDataQualityRulesetEvaluationRunInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CancelDataQualityRulesetEvaluationRunRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CancelDataQualityRulesetEvaluationRunInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RunId != nil {
+		s.WriteString(schemas.CancelDataQualityRulesetEvaluationRunRequest_RunId, *v.RunId)
+	}
+}
+
 type CancelDataQualityRulesetEvaluationRunOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -40,13 +54,26 @@ type CancelDataQualityRulesetEvaluationRunOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CancelDataQualityRulesetEvaluationRunOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CancelDataQualityRulesetEvaluationRunResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CancelDataQualityRulesetEvaluationRunOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *CancelDataQualityRulesetEvaluationRunOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CancelDataQualityRulesetEvaluationRunResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCancelDataQualityRulesetEvaluationRunMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCancelDataQualityRulesetEvaluationRun{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CancelDataQualityRulesetEvaluationRun, schemas.CancelDataQualityRulesetEvaluationRunRequest, schemas.CancelDataQualityRulesetEvaluationRunResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCancelDataQualityRulesetEvaluationRun{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CancelDataQualityRulesetEvaluationRun, schemas.CancelDataQualityRulesetEvaluationRunRequest, schemas.CancelDataQualityRulesetEvaluationRunResponse), output: &CancelDataQualityRulesetEvaluationRunOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

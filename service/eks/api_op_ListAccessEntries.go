@@ -5,6 +5,8 @@ package eks
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/eks/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -56,6 +58,27 @@ type ListAccessEntriesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAccessEntriesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAccessEntriesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAccessEntriesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AssociatedPolicyArn != nil {
+		s.WriteString(schemas.ListAccessEntriesRequest_associatedPolicyArn, *v.AssociatedPolicyArn)
+	}
+	if v.ClusterName != nil {
+		s.WriteString(schemas.ListAccessEntriesRequest_clusterName, *v.ClusterName)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListAccessEntriesRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAccessEntriesRequest_nextToken, *v.NextToken)
+	}
+}
+
 type ListAccessEntriesOutput struct {
 
 	// The list of access entries that exist for the cluster.
@@ -76,13 +99,35 @@ type ListAccessEntriesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAccessEntriesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAccessEntriesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAccessEntriesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeStringList(s, schemas.ListAccessEntriesResponse_accessEntries, v.AccessEntries)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAccessEntriesResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListAccessEntriesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListAccessEntriesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListAccessEntriesResponse_accessEntries:
+			return deserializeStringList(d, schemas.ListAccessEntriesResponse_accessEntries, &v.AccessEntries)
+		case schemas.ListAccessEntriesResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListAccessEntriesResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListAccessEntriesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListAccessEntries{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAccessEntries, schemas.ListAccessEntriesRequest, schemas.ListAccessEntriesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListAccessEntries{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAccessEntries, schemas.ListAccessEntriesRequest, schemas.ListAccessEntriesResponse), output: &ListAccessEntriesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

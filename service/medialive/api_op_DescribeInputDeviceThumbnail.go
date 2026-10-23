@@ -4,7 +4,9 @@ package medialive
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/medialive/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/medialive/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"io"
 	"time"
@@ -42,6 +44,21 @@ type DescribeInputDeviceThumbnailInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeInputDeviceThumbnailInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeInputDeviceThumbnailRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeInputDeviceThumbnailInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Accept != "" {
+		s.WriteString(schemas.DescribeInputDeviceThumbnailRequest_Accept, string(v.Accept))
+	}
+	if v.InputDeviceId != nil {
+		s.WriteString(schemas.DescribeInputDeviceThumbnailRequest_InputDeviceId, *v.InputDeviceId)
+	}
+}
+
 // Placeholder documentation for DescribeInputDeviceThumbnailResponse
 type DescribeInputDeviceThumbnailOutput struct {
 
@@ -67,13 +84,62 @@ type DescribeInputDeviceThumbnailOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeInputDeviceThumbnailOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeInputDeviceThumbnailResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeInputDeviceThumbnailOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ContentLength != nil {
+		s.WriteInt64(schemas.DescribeInputDeviceThumbnailResponse_ContentLength, *v.ContentLength)
+	}
+	if v.ContentType != "" {
+		s.WriteString(schemas.DescribeInputDeviceThumbnailResponse_ContentType, string(v.ContentType))
+	}
+	if v.ETag != nil {
+		s.WriteString(schemas.DescribeInputDeviceThumbnailResponse_ETag, *v.ETag)
+	}
+	if v.LastModified != nil {
+		s.WriteTime(schemas.DescribeInputDeviceThumbnailResponse_LastModified, *v.LastModified)
+	}
+}
+func (v *DescribeInputDeviceThumbnailOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeInputDeviceThumbnailResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeInputDeviceThumbnailResponse_ContentLength:
+			v.ContentLength = new(int64)
+			return d.ReadInt64(schemas.DescribeInputDeviceThumbnailResponse_ContentLength, v.ContentLength)
+		case schemas.DescribeInputDeviceThumbnailResponse_ContentType:
+			var ev string
+			if err := d.ReadString(schemas.DescribeInputDeviceThumbnailResponse_ContentType, &ev); err != nil {
+				return err
+			}
+			v.ContentType = types.ContentType(ev)
+			return nil
+		case schemas.DescribeInputDeviceThumbnailResponse_ETag:
+			v.ETag = new(string)
+			return d.ReadString(schemas.DescribeInputDeviceThumbnailResponse_ETag, v.ETag)
+		case schemas.DescribeInputDeviceThumbnailResponse_LastModified:
+			v.LastModified = new(time.Time)
+			return d.ReadTime(schemas.DescribeInputDeviceThumbnailResponse_LastModified, v.LastModified)
+		}
+		return nil
+	})
+}
+func (v *DescribeInputDeviceThumbnailOutput) GetPayloadStream() io.Reader { return v.Body }
+
+var _ smithy.StreamingInput = (*DescribeInputDeviceThumbnailOutput)(nil)
+
+func (v *DescribeInputDeviceThumbnailOutput) SetPayloadStream(r io.ReadCloser) { v.Body = r }
+
+var _ smithy.StreamingOutput = (*DescribeInputDeviceThumbnailOutput)(nil)
+
 func (c *Client) addOperationDescribeInputDeviceThumbnailMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeInputDeviceThumbnail{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeInputDeviceThumbnail, schemas.DescribeInputDeviceThumbnailRequest, schemas.DescribeInputDeviceThumbnailResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeInputDeviceThumbnail{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeInputDeviceThumbnail, schemas.DescribeInputDeviceThumbnailRequest, schemas.DescribeInputDeviceThumbnailResponse), output: &DescribeInputDeviceThumbnailOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

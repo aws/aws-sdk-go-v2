@@ -4,6 +4,8 @@ package accessanalyzer
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/accessanalyzer/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -35,6 +37,28 @@ type CancelPolicyGenerationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CancelPolicyGenerationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CancelPolicyGenerationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CancelPolicyGenerationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.JobId != nil {
+		s.WriteString(schemas.CancelPolicyGenerationRequest_jobId, *v.JobId)
+	}
+}
+func (v *CancelPolicyGenerationInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CancelPolicyGenerationRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CancelPolicyGenerationRequest_jobId:
+			v.JobId = new(string)
+			return d.ReadString(schemas.CancelPolicyGenerationRequest_jobId, v.JobId)
+		}
+		return nil
+	})
+}
+
 type CancelPolicyGenerationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -42,13 +66,26 @@ type CancelPolicyGenerationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CancelPolicyGenerationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CancelPolicyGenerationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CancelPolicyGenerationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *CancelPolicyGenerationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CancelPolicyGenerationResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCancelPolicyGenerationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCancelPolicyGeneration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CancelPolicyGeneration, schemas.CancelPolicyGenerationRequest, schemas.CancelPolicyGenerationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCancelPolicyGeneration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CancelPolicyGeneration, schemas.CancelPolicyGenerationRequest, schemas.CancelPolicyGenerationResponse), output: &CancelPolicyGenerationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

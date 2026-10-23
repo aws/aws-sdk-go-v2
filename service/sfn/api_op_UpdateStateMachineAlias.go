@@ -4,7 +4,9 @@ package sfn
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/sfn/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sfn/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -69,6 +71,22 @@ type UpdateStateMachineAliasInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateStateMachineAliasInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateStateMachineAliasInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateStateMachineAliasInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateStateMachineAliasInput_description, *v.Description)
+	}
+	serializeRoutingConfigurationList(s, schemas.UpdateStateMachineAliasInput_routingConfiguration, v.RoutingConfiguration)
+	if v.StateMachineAliasArn != nil {
+		s.WriteString(schemas.UpdateStateMachineAliasInput_stateMachineAliasArn, *v.StateMachineAliasArn)
+	}
+}
+
 type UpdateStateMachineAliasOutput struct {
 
 	// The date and time the state machine alias was updated.
@@ -82,13 +100,32 @@ type UpdateStateMachineAliasOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateStateMachineAliasOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateStateMachineAliasOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateStateMachineAliasOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.UpdateDate != nil {
+		s.WriteTime(schemas.UpdateStateMachineAliasOutput_updateDate, *v.UpdateDate)
+	}
+}
+func (v *UpdateStateMachineAliasOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateStateMachineAliasOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateStateMachineAliasOutput_updateDate:
+			v.UpdateDate = new(time.Time)
+			return d.ReadTime(schemas.UpdateStateMachineAliasOutput_updateDate, v.UpdateDate)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateStateMachineAliasMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpUpdateStateMachineAlias{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateStateMachineAlias, schemas.UpdateStateMachineAliasInput, schemas.UpdateStateMachineAliasOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpUpdateStateMachineAlias{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateStateMachineAlias, schemas.UpdateStateMachineAliasInput, schemas.UpdateStateMachineAliasOutput), output: &UpdateStateMachineAliasOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

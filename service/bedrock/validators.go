@@ -3830,6 +3830,26 @@ func validateGuardrailContextualGroundingPolicyConfig(v *types.GuardrailContextu
 			invalidParams.AddNested("FiltersConfig", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.TierConfig != nil {
+		if err := validateGuardrailContextualGroundingTierConfig(v.TierConfig); err != nil {
+			invalidParams.AddNested("TierConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateGuardrailContextualGroundingTierConfig(v *types.GuardrailContextualGroundingTierConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GuardrailContextualGroundingTierConfig"}
+	if len(v.TierName) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("TierName"))
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {

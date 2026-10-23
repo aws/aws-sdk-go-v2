@@ -4,7 +4,9 @@ package mediatailor
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/mediatailor/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/mediatailor/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -53,6 +55,50 @@ type UpdateChannelInput struct {
 	TimeShiftConfiguration *types.TimeShiftConfiguration
 
 	noSmithyDocumentSerde
+}
+
+func (v *UpdateChannelInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateChannelRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateChannelInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAudiences(s, schemas.UpdateChannelRequest_Audiences, v.Audiences)
+	if v.ChannelName != nil {
+		s.WriteString(schemas.UpdateChannelRequest_ChannelName, *v.ChannelName)
+	}
+	if v.FillerSlate != nil {
+		s.WriteStruct(schemas.UpdateChannelRequest_FillerSlate)
+		v.FillerSlate.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeRequestOutputs(s, schemas.UpdateChannelRequest_Outputs, v.Outputs)
+	if v.TimeShiftConfiguration != nil {
+		s.WriteStruct(schemas.UpdateChannelRequest_TimeShiftConfiguration)
+		v.TimeShiftConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateChannelInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateChannelRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateChannelRequest_Audiences:
+			return deserializeAudiences(d, schemas.UpdateChannelRequest_Audiences, &v.Audiences)
+		case schemas.UpdateChannelRequest_ChannelName:
+			v.ChannelName = new(string)
+			return d.ReadString(schemas.UpdateChannelRequest_ChannelName, v.ChannelName)
+		case schemas.UpdateChannelRequest_FillerSlate:
+			v.FillerSlate = &types.SlateSource{}
+			return v.FillerSlate.Deserialize(d)
+		case schemas.UpdateChannelRequest_Outputs:
+			return deserializeRequestOutputs(d, schemas.UpdateChannelRequest_Outputs, &v.Outputs)
+		case schemas.UpdateChannelRequest_TimeShiftConfiguration:
+			v.TimeShiftConfiguration = &types.TimeShiftConfiguration{}
+			return v.TimeShiftConfiguration.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 type UpdateChannelOutput struct {
@@ -111,13 +157,97 @@ type UpdateChannelOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateChannelOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateChannelResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateChannelOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.UpdateChannelResponse_Arn, *v.Arn)
+	}
+	serializeAudiences(s, schemas.UpdateChannelResponse_Audiences, v.Audiences)
+	if v.ChannelName != nil {
+		s.WriteString(schemas.UpdateChannelResponse_ChannelName, *v.ChannelName)
+	}
+	if v.ChannelState != "" {
+		s.WriteString(schemas.UpdateChannelResponse_ChannelState, string(v.ChannelState))
+	}
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.UpdateChannelResponse_CreationTime, *v.CreationTime)
+	}
+	if v.FillerSlate != nil {
+		s.WriteStruct(schemas.UpdateChannelResponse_FillerSlate)
+		v.FillerSlate.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.LastModifiedTime != nil {
+		s.WriteTime(schemas.UpdateChannelResponse_LastModifiedTime, *v.LastModifiedTime)
+	}
+	serializeResponseOutputs(s, schemas.UpdateChannelResponse_Outputs, v.Outputs)
+	if v.PlaybackMode != nil {
+		s.WriteString(schemas.UpdateChannelResponse_PlaybackMode, *v.PlaybackMode)
+	}
+	serialize__mapOf__string(s, schemas.UpdateChannelResponse_Tags, v.Tags)
+	if v.Tier != nil {
+		s.WriteString(schemas.UpdateChannelResponse_Tier, *v.Tier)
+	}
+	if v.TimeShiftConfiguration != nil {
+		s.WriteStruct(schemas.UpdateChannelResponse_TimeShiftConfiguration)
+		v.TimeShiftConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateChannelOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateChannelResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateChannelResponse_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.UpdateChannelResponse_Arn, v.Arn)
+		case schemas.UpdateChannelResponse_Audiences:
+			return deserializeAudiences(d, schemas.UpdateChannelResponse_Audiences, &v.Audiences)
+		case schemas.UpdateChannelResponse_ChannelName:
+			v.ChannelName = new(string)
+			return d.ReadString(schemas.UpdateChannelResponse_ChannelName, v.ChannelName)
+		case schemas.UpdateChannelResponse_ChannelState:
+			var ev string
+			if err := d.ReadString(schemas.UpdateChannelResponse_ChannelState, &ev); err != nil {
+				return err
+			}
+			v.ChannelState = types.ChannelState(ev)
+			return nil
+		case schemas.UpdateChannelResponse_CreationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.UpdateChannelResponse_CreationTime, v.CreationTime)
+		case schemas.UpdateChannelResponse_FillerSlate:
+			v.FillerSlate = &types.SlateSource{}
+			return v.FillerSlate.Deserialize(d)
+		case schemas.UpdateChannelResponse_LastModifiedTime:
+			v.LastModifiedTime = new(time.Time)
+			return d.ReadTime(schemas.UpdateChannelResponse_LastModifiedTime, v.LastModifiedTime)
+		case schemas.UpdateChannelResponse_Outputs:
+			return deserializeResponseOutputs(d, schemas.UpdateChannelResponse_Outputs, &v.Outputs)
+		case schemas.UpdateChannelResponse_PlaybackMode:
+			v.PlaybackMode = new(string)
+			return d.ReadString(schemas.UpdateChannelResponse_PlaybackMode, v.PlaybackMode)
+		case schemas.UpdateChannelResponse_Tags:
+			return deserialize__mapOf__string(d, schemas.UpdateChannelResponse_Tags, &v.Tags)
+		case schemas.UpdateChannelResponse_Tier:
+			v.Tier = new(string)
+			return d.ReadString(schemas.UpdateChannelResponse_Tier, v.Tier)
+		case schemas.UpdateChannelResponse_TimeShiftConfiguration:
+			v.TimeShiftConfiguration = &types.TimeShiftConfiguration{}
+			return v.TimeShiftConfiguration.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateChannelMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateChannel{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateChannel, schemas.UpdateChannelRequest, schemas.UpdateChannelResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateChannel{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateChannel, schemas.UpdateChannelRequest, schemas.UpdateChannelResponse), output: &UpdateChannelOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

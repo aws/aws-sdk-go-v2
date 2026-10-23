@@ -5,7 +5,9 @@ package appintegrations
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/appintegrations/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/appintegrations/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -58,6 +60,34 @@ type CreateDataIntegrationAssociationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateDataIntegrationAssociationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateDataIntegrationAssociationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateDataIntegrationAssociationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeClientAssociationMetadata(s, schemas.CreateDataIntegrationAssociationRequest_ClientAssociationMetadata, v.ClientAssociationMetadata)
+	if v.ClientId != nil {
+		s.WriteString(schemas.CreateDataIntegrationAssociationRequest_ClientId, *v.ClientId)
+	}
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateDataIntegrationAssociationRequest_ClientToken, *v.ClientToken)
+	}
+	if v.DataIntegrationIdentifier != nil {
+		s.WriteString(schemas.CreateDataIntegrationAssociationRequest_DataIntegrationIdentifier, *v.DataIntegrationIdentifier)
+	}
+	if v.DestinationURI != nil {
+		s.WriteString(schemas.CreateDataIntegrationAssociationRequest_DestinationURI, *v.DestinationURI)
+	}
+	if v.ExecutionConfiguration != nil {
+		s.WriteStruct(schemas.CreateDataIntegrationAssociationRequest_ExecutionConfiguration)
+		v.ExecutionConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeObjectConfiguration(s, schemas.CreateDataIntegrationAssociationRequest_ObjectConfiguration, v.ObjectConfiguration)
+}
+
 type CreateDataIntegrationAssociationOutput struct {
 
 	// The Amazon Resource Name (ARN) for the DataIntegration.
@@ -72,13 +102,38 @@ type CreateDataIntegrationAssociationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateDataIntegrationAssociationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateDataIntegrationAssociationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateDataIntegrationAssociationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DataIntegrationArn != nil {
+		s.WriteString(schemas.CreateDataIntegrationAssociationResponse_DataIntegrationArn, *v.DataIntegrationArn)
+	}
+	if v.DataIntegrationAssociationId != nil {
+		s.WriteString(schemas.CreateDataIntegrationAssociationResponse_DataIntegrationAssociationId, *v.DataIntegrationAssociationId)
+	}
+}
+func (v *CreateDataIntegrationAssociationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateDataIntegrationAssociationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateDataIntegrationAssociationResponse_DataIntegrationArn:
+			v.DataIntegrationArn = new(string)
+			return d.ReadString(schemas.CreateDataIntegrationAssociationResponse_DataIntegrationArn, v.DataIntegrationArn)
+		case schemas.CreateDataIntegrationAssociationResponse_DataIntegrationAssociationId:
+			v.DataIntegrationAssociationId = new(string)
+			return d.ReadString(schemas.CreateDataIntegrationAssociationResponse_DataIntegrationAssociationId, v.DataIntegrationAssociationId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateDataIntegrationAssociationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateDataIntegrationAssociation{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateDataIntegrationAssociation, schemas.CreateDataIntegrationAssociationRequest, schemas.CreateDataIntegrationAssociationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateDataIntegrationAssociation{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateDataIntegrationAssociation, schemas.CreateDataIntegrationAssociationRequest, schemas.CreateDataIntegrationAssociationResponse), output: &CreateDataIntegrationAssociationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

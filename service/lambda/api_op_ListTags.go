@@ -4,6 +4,8 @@ package lambda
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/lambda/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -37,6 +39,18 @@ type ListTagsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListTagsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListTagsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListTagsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Resource != nil {
+		s.WriteString(schemas.ListTagsRequest_Resource, *v.Resource)
+	}
+}
+
 type ListTagsOutput struct {
 
 	// The function's tags.
@@ -48,13 +62,29 @@ type ListTagsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListTagsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListTagsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListTagsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeTags(s, schemas.ListTagsResponse_Tags, v.Tags)
+}
+func (v *ListTagsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListTagsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListTagsResponse_Tags:
+			return deserializeTags(d, schemas.ListTagsResponse_Tags, &v.Tags)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListTagsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListTags{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListTags, schemas.ListTagsRequest, schemas.ListTagsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListTags{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListTags, schemas.ListTagsRequest, schemas.ListTagsResponse), output: &ListTagsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

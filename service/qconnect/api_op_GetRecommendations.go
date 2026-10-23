@@ -12,8 +12,8 @@ import (
 
 // This API will be discontinued starting June 1, 2024. To receive generative
 // responses after March 1, 2024, you will need to create a new Assistant in the
-// Amazon Connect console and integrate the Amazon Q in Connect JavaScript library
-// (amazon-q-connectjs) into your applications.
+// Connect Customer console and integrate the Amazon Q in Connect JavaScript
+// library (amazon-q-connectjs) into your applications.
 //
 // Retrieves recommendations for the specified session. To avoid retrieving the
 // same recommendations in subsequent calls, use [NotifyRecommendationsReceived]. This API supports long-polling

@@ -5,7 +5,9 @@ package bedrock
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/bedrock/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrock/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -60,6 +62,28 @@ type CreateModelCopyJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateModelCopyJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateModelCopyJobRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateModelCopyJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientRequestToken != nil {
+		s.WriteString(schemas.CreateModelCopyJobRequest_clientRequestToken, *v.ClientRequestToken)
+	}
+	if v.ModelKmsKeyId != nil {
+		s.WriteString(schemas.CreateModelCopyJobRequest_modelKmsKeyId, *v.ModelKmsKeyId)
+	}
+	if v.SourceModelArn != nil {
+		s.WriteString(schemas.CreateModelCopyJobRequest_sourceModelArn, *v.SourceModelArn)
+	}
+	if v.TargetModelName != nil {
+		s.WriteString(schemas.CreateModelCopyJobRequest_targetModelName, *v.TargetModelName)
+	}
+	serializeTagList(s, schemas.CreateModelCopyJobRequest_targetModelTags, v.TargetModelTags)
+}
+
 type CreateModelCopyJobOutput struct {
 
 	// The Amazon Resource Name (ARN) of the model copy job.
@@ -73,13 +97,32 @@ type CreateModelCopyJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateModelCopyJobOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateModelCopyJobResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateModelCopyJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.JobArn != nil {
+		s.WriteString(schemas.CreateModelCopyJobResponse_jobArn, *v.JobArn)
+	}
+}
+func (v *CreateModelCopyJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateModelCopyJobResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateModelCopyJobResponse_jobArn:
+			v.JobArn = new(string)
+			return d.ReadString(schemas.CreateModelCopyJobResponse_jobArn, v.JobArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateModelCopyJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateModelCopyJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateModelCopyJob, schemas.CreateModelCopyJobRequest, schemas.CreateModelCopyJobResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateModelCopyJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateModelCopyJob, schemas.CreateModelCopyJobRequest, schemas.CreateModelCopyJobResponse), output: &CreateModelCopyJobOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

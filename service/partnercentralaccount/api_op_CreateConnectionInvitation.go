@@ -5,7 +5,9 @@ package partnercentralaccount
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/partnercentralaccount/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/partnercentralaccount/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -67,6 +69,36 @@ type CreateConnectionInvitationInput struct {
 	ReceiverIdentifier *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *CreateConnectionInvitationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateConnectionInvitationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateConnectionInvitationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Catalog != nil {
+		s.WriteString(schemas.CreateConnectionInvitationRequest_Catalog, *v.Catalog)
+	}
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateConnectionInvitationRequest_ClientToken, *v.ClientToken)
+	}
+	if v.ConnectionType != "" {
+		s.WriteString(schemas.CreateConnectionInvitationRequest_ConnectionType, string(v.ConnectionType))
+	}
+	if v.Email != nil {
+		s.WriteString(schemas.CreateConnectionInvitationRequest_Email, *v.Email)
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.CreateConnectionInvitationRequest_Message, *v.Message)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateConnectionInvitationRequest_Name, *v.Name)
+	}
+	if v.ReceiverIdentifier != nil {
+		s.WriteString(schemas.CreateConnectionInvitationRequest_ReceiverIdentifier, *v.ReceiverIdentifier)
+	}
 }
 
 type CreateConnectionInvitationOutput struct {
@@ -144,13 +176,122 @@ type CreateConnectionInvitationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateConnectionInvitationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateConnectionInvitationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateConnectionInvitationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.CreateConnectionInvitationResponse_Arn, *v.Arn)
+	}
+	if v.Catalog != nil {
+		s.WriteString(schemas.CreateConnectionInvitationResponse_Catalog, *v.Catalog)
+	}
+	if v.ConnectionId != nil {
+		s.WriteString(schemas.CreateConnectionInvitationResponse_ConnectionId, *v.ConnectionId)
+	}
+	if v.ConnectionType != "" {
+		s.WriteString(schemas.CreateConnectionInvitationResponse_ConnectionType, string(v.ConnectionType))
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.CreateConnectionInvitationResponse_CreatedAt, *v.CreatedAt)
+	}
+	if v.ExpiresAt != nil {
+		s.WriteTime(schemas.CreateConnectionInvitationResponse_ExpiresAt, *v.ExpiresAt)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.CreateConnectionInvitationResponse_Id, *v.Id)
+	}
+	if v.InvitationMessage != nil {
+		s.WriteString(schemas.CreateConnectionInvitationResponse_InvitationMessage, *v.InvitationMessage)
+	}
+	if v.InviterEmail != nil {
+		s.WriteString(schemas.CreateConnectionInvitationResponse_InviterEmail, *v.InviterEmail)
+	}
+	if v.InviterName != nil {
+		s.WriteString(schemas.CreateConnectionInvitationResponse_InviterName, *v.InviterName)
+	}
+	if v.OtherParticipantIdentifier != nil {
+		s.WriteString(schemas.CreateConnectionInvitationResponse_OtherParticipantIdentifier, *v.OtherParticipantIdentifier)
+	}
+	if v.ParticipantType != "" {
+		s.WriteString(schemas.CreateConnectionInvitationResponse_ParticipantType, string(v.ParticipantType))
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.CreateConnectionInvitationResponse_Status, string(v.Status))
+	}
+	if v.UpdatedAt != nil {
+		s.WriteTime(schemas.CreateConnectionInvitationResponse_UpdatedAt, *v.UpdatedAt)
+	}
+}
+func (v *CreateConnectionInvitationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateConnectionInvitationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateConnectionInvitationResponse_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.CreateConnectionInvitationResponse_Arn, v.Arn)
+		case schemas.CreateConnectionInvitationResponse_Catalog:
+			v.Catalog = new(string)
+			return d.ReadString(schemas.CreateConnectionInvitationResponse_Catalog, v.Catalog)
+		case schemas.CreateConnectionInvitationResponse_ConnectionId:
+			v.ConnectionId = new(string)
+			return d.ReadString(schemas.CreateConnectionInvitationResponse_ConnectionId, v.ConnectionId)
+		case schemas.CreateConnectionInvitationResponse_ConnectionType:
+			var ev string
+			if err := d.ReadString(schemas.CreateConnectionInvitationResponse_ConnectionType, &ev); err != nil {
+				return err
+			}
+			v.ConnectionType = types.ConnectionType(ev)
+			return nil
+		case schemas.CreateConnectionInvitationResponse_CreatedAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.CreateConnectionInvitationResponse_CreatedAt, v.CreatedAt)
+		case schemas.CreateConnectionInvitationResponse_ExpiresAt:
+			v.ExpiresAt = new(time.Time)
+			return d.ReadTime(schemas.CreateConnectionInvitationResponse_ExpiresAt, v.ExpiresAt)
+		case schemas.CreateConnectionInvitationResponse_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.CreateConnectionInvitationResponse_Id, v.Id)
+		case schemas.CreateConnectionInvitationResponse_InvitationMessage:
+			v.InvitationMessage = new(string)
+			return d.ReadString(schemas.CreateConnectionInvitationResponse_InvitationMessage, v.InvitationMessage)
+		case schemas.CreateConnectionInvitationResponse_InviterEmail:
+			v.InviterEmail = new(string)
+			return d.ReadString(schemas.CreateConnectionInvitationResponse_InviterEmail, v.InviterEmail)
+		case schemas.CreateConnectionInvitationResponse_InviterName:
+			v.InviterName = new(string)
+			return d.ReadString(schemas.CreateConnectionInvitationResponse_InviterName, v.InviterName)
+		case schemas.CreateConnectionInvitationResponse_OtherParticipantIdentifier:
+			v.OtherParticipantIdentifier = new(string)
+			return d.ReadString(schemas.CreateConnectionInvitationResponse_OtherParticipantIdentifier, v.OtherParticipantIdentifier)
+		case schemas.CreateConnectionInvitationResponse_ParticipantType:
+			var ev string
+			if err := d.ReadString(schemas.CreateConnectionInvitationResponse_ParticipantType, &ev); err != nil {
+				return err
+			}
+			v.ParticipantType = types.ParticipantType(ev)
+			return nil
+		case schemas.CreateConnectionInvitationResponse_Status:
+			var ev string
+			if err := d.ReadString(schemas.CreateConnectionInvitationResponse_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.InvitationStatus(ev)
+			return nil
+		case schemas.CreateConnectionInvitationResponse_UpdatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.CreateConnectionInvitationResponse_UpdatedAt, v.UpdatedAt)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateConnectionInvitationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpCreateConnectionInvitation{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateConnectionInvitation, schemas.CreateConnectionInvitationRequest, schemas.CreateConnectionInvitationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpCreateConnectionInvitation{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateConnectionInvitation, schemas.CreateConnectionInvitationRequest, schemas.CreateConnectionInvitationResponse), output: &CreateConnectionInvitationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

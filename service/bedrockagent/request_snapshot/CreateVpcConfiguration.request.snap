@@ -1,0 +1,5 @@
+POST /knowledgebases/__KnowledgeBaseId__/vpcconfigurations/
+
+Content-Type: application/json
+
+{"clientToken":"__ClientToken__","description":"__Description__","hostHeader":"__HostHeader__","name":"__Name__","port":1,"protocol":"HTTP","resolutionMode":"PUBLIC","resourceTarget":"__ResourceTarget__","subnetIds":["__Member__","__Member__"],"tlsServerName":"__TlsServerName__","vpcId":"__VpcId__"}

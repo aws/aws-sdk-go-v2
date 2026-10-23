@@ -4,7 +4,9 @@ package glue
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/glue/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/glue/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -42,6 +44,27 @@ type DescribeInboundIntegrationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeInboundIntegrationsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeInboundIntegrationsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeInboundIntegrationsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IntegrationArn != nil {
+		s.WriteString(schemas.DescribeInboundIntegrationsRequest_IntegrationArn, *v.IntegrationArn)
+	}
+	if v.Marker != nil {
+		s.WriteString(schemas.DescribeInboundIntegrationsRequest_Marker, *v.Marker)
+	}
+	if v.MaxRecords != nil {
+		s.WriteInt32(schemas.DescribeInboundIntegrationsRequest_MaxRecords, *v.MaxRecords)
+	}
+	if v.TargetArn != nil {
+		s.WriteString(schemas.DescribeInboundIntegrationsRequest_TargetArn, *v.TargetArn)
+	}
+}
+
 type DescribeInboundIntegrationsOutput struct {
 
 	// A list of inbound integrations.
@@ -57,13 +80,35 @@ type DescribeInboundIntegrationsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeInboundIntegrationsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeInboundIntegrationsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeInboundIntegrationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeInboundIntegrationsList(s, schemas.DescribeInboundIntegrationsResponse_InboundIntegrations, v.InboundIntegrations)
+	if v.Marker != nil {
+		s.WriteString(schemas.DescribeInboundIntegrationsResponse_Marker, *v.Marker)
+	}
+}
+func (v *DescribeInboundIntegrationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeInboundIntegrationsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeInboundIntegrationsResponse_InboundIntegrations:
+			return deserializeInboundIntegrationsList(d, schemas.DescribeInboundIntegrationsResponse_InboundIntegrations, &v.InboundIntegrations)
+		case schemas.DescribeInboundIntegrationsResponse_Marker:
+			v.Marker = new(string)
+			return d.ReadString(schemas.DescribeInboundIntegrationsResponse_Marker, v.Marker)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeInboundIntegrationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeInboundIntegrations{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeInboundIntegrations, schemas.DescribeInboundIntegrationsRequest, schemas.DescribeInboundIntegrationsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeInboundIntegrations{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeInboundIntegrations, schemas.DescribeInboundIntegrationsRequest, schemas.DescribeInboundIntegrationsResponse), output: &DescribeInboundIntegrationsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

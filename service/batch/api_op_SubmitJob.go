@@ -4,7 +4,9 @@ package batch
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/batch/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/batch/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -162,6 +164,76 @@ type SubmitJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SubmitJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SubmitJobRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SubmitJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ArrayProperties != nil {
+		s.WriteStruct(schemas.SubmitJobRequest_arrayProperties)
+		v.ArrayProperties.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ConsumableResourcePropertiesOverride != nil {
+		s.WriteStruct(schemas.SubmitJobRequest_consumableResourcePropertiesOverride)
+		v.ConsumableResourcePropertiesOverride.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ContainerOverrides != nil {
+		s.WriteStruct(schemas.SubmitJobRequest_containerOverrides)
+		v.ContainerOverrides.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeJobDependencyList(s, schemas.SubmitJobRequest_dependsOn, v.DependsOn)
+	if v.EcsPropertiesOverride != nil {
+		s.WriteStruct(schemas.SubmitJobRequest_ecsPropertiesOverride)
+		v.EcsPropertiesOverride.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.EksPropertiesOverride != nil {
+		s.WriteStruct(schemas.SubmitJobRequest_eksPropertiesOverride)
+		v.EksPropertiesOverride.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.JobDefinition != nil {
+		s.WriteString(schemas.SubmitJobRequest_jobDefinition, *v.JobDefinition)
+	}
+	if v.JobName != nil {
+		s.WriteString(schemas.SubmitJobRequest_jobName, *v.JobName)
+	}
+	if v.JobQueue != nil {
+		s.WriteString(schemas.SubmitJobRequest_jobQueue, *v.JobQueue)
+	}
+	if v.NodeOverrides != nil {
+		s.WriteStruct(schemas.SubmitJobRequest_nodeOverrides)
+		v.NodeOverrides.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeParametersMap(s, schemas.SubmitJobRequest_parameters, v.Parameters)
+	if v.PropagateTags != nil {
+		s.WriteBool(schemas.SubmitJobRequest_propagateTags, *v.PropagateTags)
+	}
+	if v.RetryStrategy != nil {
+		s.WriteStruct(schemas.SubmitJobRequest_retryStrategy)
+		v.RetryStrategy.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SchedulingPriorityOverride != nil {
+		s.WriteInt32(schemas.SubmitJobRequest_schedulingPriorityOverride, *v.SchedulingPriorityOverride)
+	}
+	if v.ShareIdentifier != nil {
+		s.WriteString(schemas.SubmitJobRequest_shareIdentifier, *v.ShareIdentifier)
+	}
+	serializeTagrisTagsMap(s, schemas.SubmitJobRequest_tags, v.Tags)
+	if v.Timeout != nil {
+		s.WriteStruct(schemas.SubmitJobRequest_timeout)
+		v.Timeout.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type SubmitJobOutput struct {
 
 	// The unique identifier for the job.
@@ -183,13 +255,44 @@ type SubmitJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SubmitJobOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SubmitJobResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SubmitJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.JobArn != nil {
+		s.WriteString(schemas.SubmitJobResponse_jobArn, *v.JobArn)
+	}
+	if v.JobId != nil {
+		s.WriteString(schemas.SubmitJobResponse_jobId, *v.JobId)
+	}
+	if v.JobName != nil {
+		s.WriteString(schemas.SubmitJobResponse_jobName, *v.JobName)
+	}
+}
+func (v *SubmitJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SubmitJobResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SubmitJobResponse_jobArn:
+			v.JobArn = new(string)
+			return d.ReadString(schemas.SubmitJobResponse_jobArn, v.JobArn)
+		case schemas.SubmitJobResponse_jobId:
+			v.JobId = new(string)
+			return d.ReadString(schemas.SubmitJobResponse_jobId, v.JobId)
+		case schemas.SubmitJobResponse_jobName:
+			v.JobName = new(string)
+			return d.ReadString(schemas.SubmitJobResponse_jobName, v.JobName)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationSubmitJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpSubmitJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SubmitJob, schemas.SubmitJobRequest, schemas.SubmitJobResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpSubmitJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SubmitJob, schemas.SubmitJobRequest, schemas.SubmitJobResponse), output: &SubmitJobOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

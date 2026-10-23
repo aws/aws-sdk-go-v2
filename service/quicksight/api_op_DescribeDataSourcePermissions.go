@@ -4,7 +4,9 @@ package quicksight
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/quicksight/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/quicksight/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -40,6 +42,21 @@ type DescribeDataSourcePermissionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeDataSourcePermissionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeDataSourcePermissionsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeDataSourcePermissionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AwsAccountId != nil {
+		s.WriteString(schemas.DescribeDataSourcePermissionsRequest_AwsAccountId, *v.AwsAccountId)
+	}
+	if v.DataSourceId != nil {
+		s.WriteString(schemas.DescribeDataSourcePermissionsRequest_DataSourceId, *v.DataSourceId)
+	}
+}
+
 type DescribeDataSourcePermissionsOutput struct {
 
 	// The Amazon Resource Name (ARN) of the data source.
@@ -64,13 +81,52 @@ type DescribeDataSourcePermissionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeDataSourcePermissionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeDataSourcePermissionsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeDataSourcePermissionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DataSourceArn != nil {
+		s.WriteString(schemas.DescribeDataSourcePermissionsResponse_DataSourceArn, *v.DataSourceArn)
+	}
+	if v.DataSourceId != nil {
+		s.WriteString(schemas.DescribeDataSourcePermissionsResponse_DataSourceId, *v.DataSourceId)
+	}
+	serializeResourcePermissionList(s, schemas.DescribeDataSourcePermissionsResponse_Permissions, v.Permissions)
+	if v.RequestId != nil {
+		s.WriteString(schemas.DescribeDataSourcePermissionsResponse_RequestId, *v.RequestId)
+	}
+	if v.Status != 0 {
+		s.WriteInt32(schemas.DescribeDataSourcePermissionsResponse_Status, v.Status)
+	}
+}
+func (v *DescribeDataSourcePermissionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeDataSourcePermissionsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeDataSourcePermissionsResponse_DataSourceArn:
+			v.DataSourceArn = new(string)
+			return d.ReadString(schemas.DescribeDataSourcePermissionsResponse_DataSourceArn, v.DataSourceArn)
+		case schemas.DescribeDataSourcePermissionsResponse_DataSourceId:
+			v.DataSourceId = new(string)
+			return d.ReadString(schemas.DescribeDataSourcePermissionsResponse_DataSourceId, v.DataSourceId)
+		case schemas.DescribeDataSourcePermissionsResponse_Permissions:
+			return deserializeResourcePermissionList(d, schemas.DescribeDataSourcePermissionsResponse_Permissions, &v.Permissions)
+		case schemas.DescribeDataSourcePermissionsResponse_RequestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.DescribeDataSourcePermissionsResponse_RequestId, v.RequestId)
+		case schemas.DescribeDataSourcePermissionsResponse_Status:
+			return d.ReadInt32(schemas.DescribeDataSourcePermissionsResponse_Status, &v.Status)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeDataSourcePermissionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeDataSourcePermissions{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeDataSourcePermissions, schemas.DescribeDataSourcePermissionsRequest, schemas.DescribeDataSourcePermissionsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeDataSourcePermissions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeDataSourcePermissions, schemas.DescribeDataSourcePermissionsRequest, schemas.DescribeDataSourcePermissionsResponse), output: &DescribeDataSourcePermissionsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

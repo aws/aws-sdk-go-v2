@@ -4,6 +4,8 @@ package customerprofiles
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/customerprofiles/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -38,6 +40,21 @@ type DeleteRecommenderFilterInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteRecommenderFilterInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteRecommenderFilterRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteRecommenderFilterInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DomainName != nil {
+		s.WriteString(schemas.DeleteRecommenderFilterRequest_DomainName, *v.DomainName)
+	}
+	if v.RecommenderFilterName != nil {
+		s.WriteString(schemas.DeleteRecommenderFilterRequest_RecommenderFilterName, *v.RecommenderFilterName)
+	}
+}
+
 type DeleteRecommenderFilterOutput struct {
 
 	// A message that indicates the delete request is done.
@@ -51,13 +68,32 @@ type DeleteRecommenderFilterOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteRecommenderFilterOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteRecommenderFilterResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteRecommenderFilterOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.DeleteRecommenderFilterResponse_Message, *v.Message)
+	}
+}
+func (v *DeleteRecommenderFilterOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteRecommenderFilterResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteRecommenderFilterResponse_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.DeleteRecommenderFilterResponse_Message, v.Message)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteRecommenderFilterMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteRecommenderFilter{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteRecommenderFilter, schemas.DeleteRecommenderFilterRequest, schemas.DeleteRecommenderFilterResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteRecommenderFilter{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteRecommenderFilter, schemas.DeleteRecommenderFilterRequest, schemas.DeleteRecommenderFilterResponse), output: &DeleteRecommenderFilterOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

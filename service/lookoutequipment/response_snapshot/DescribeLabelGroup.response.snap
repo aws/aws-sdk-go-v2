@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: AWSLookoutEquipmentFrontendService.DescribeLabelGroup
+
+{"CreatedAt":946684800,"FaultCodes":["__Member__","__Member__"],"LabelGroupArn":"__LabelGroupArn__","LabelGroupName":"__LabelGroupName__","UpdatedAt":946684800}

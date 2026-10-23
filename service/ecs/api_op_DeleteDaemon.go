@@ -4,7 +4,9 @@ package ecs
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/ecs/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ecs/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -42,6 +44,18 @@ type DeleteDaemonInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteDaemonInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteDaemonRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteDaemonInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DaemonArn != nil {
+		s.WriteString(schemas.DeleteDaemonRequest_daemonArn, *v.DaemonArn)
+	}
+}
+
 type DeleteDaemonOutput struct {
 
 	// The Unix timestamp for the time when the daemon was created.
@@ -68,13 +82,60 @@ type DeleteDaemonOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteDaemonOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteDaemonResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteDaemonOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.DeleteDaemonResponse_createdAt, *v.CreatedAt)
+	}
+	if v.DaemonArn != nil {
+		s.WriteString(schemas.DeleteDaemonResponse_daemonArn, *v.DaemonArn)
+	}
+	if v.DeploymentArn != nil {
+		s.WriteString(schemas.DeleteDaemonResponse_deploymentArn, *v.DeploymentArn)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.DeleteDaemonResponse_status, string(v.Status))
+	}
+	if v.UpdatedAt != nil {
+		s.WriteTime(schemas.DeleteDaemonResponse_updatedAt, *v.UpdatedAt)
+	}
+}
+func (v *DeleteDaemonOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteDaemonResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteDaemonResponse_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.DeleteDaemonResponse_createdAt, v.CreatedAt)
+		case schemas.DeleteDaemonResponse_daemonArn:
+			v.DaemonArn = new(string)
+			return d.ReadString(schemas.DeleteDaemonResponse_daemonArn, v.DaemonArn)
+		case schemas.DeleteDaemonResponse_deploymentArn:
+			v.DeploymentArn = new(string)
+			return d.ReadString(schemas.DeleteDaemonResponse_deploymentArn, v.DeploymentArn)
+		case schemas.DeleteDaemonResponse_status:
+			var ev string
+			if err := d.ReadString(schemas.DeleteDaemonResponse_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.DaemonStatus(ev)
+			return nil
+		case schemas.DeleteDaemonResponse_updatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.DeleteDaemonResponse_updatedAt, v.UpdatedAt)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteDaemonMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteDaemon{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteDaemon, schemas.DeleteDaemonRequest, schemas.DeleteDaemonResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeleteDaemon{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteDaemon, schemas.DeleteDaemonRequest, schemas.DeleteDaemonResponse), output: &DeleteDaemonOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

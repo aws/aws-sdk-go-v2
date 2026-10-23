@@ -4,6 +4,8 @@ package backup
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/backup/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -53,6 +55,18 @@ type StopBackupJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StopBackupJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StopBackupJobInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StopBackupJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BackupJobId != nil {
+		s.WriteString(schemas.StopBackupJobInput_BackupJobId, *v.BackupJobId)
+	}
+}
+
 type StopBackupJobOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -60,13 +74,26 @@ type StopBackupJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StopBackupJobOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StopBackupJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *StopBackupJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStopBackupJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpStopBackupJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StopBackupJob, schemas.StopBackupJobInput, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStopBackupJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StopBackupJob, schemas.StopBackupJobInput, nil), output: &StopBackupJobOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

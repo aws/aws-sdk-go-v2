@@ -4,7 +4,9 @@ package networkfirewall
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/networkfirewall/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/networkfirewall/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -38,12 +40,19 @@ type DescribeFlowOperationInput struct {
 	// This member is required.
 	FlowOperationId *string
 
-	// The ID of the Availability Zone where the firewall is located. For example,
+	// The name of the Availability Zone where the firewall is located. For example,
 	// us-east-2a .
 	//
 	// Defines the scope a flow operation. You can use up to 20 filters to configure a
 	// single flow operation.
 	AvailabilityZone *string
+
+	// The ID of the Availability Zone where the firewall is located. For example,
+	// use2-az1 . Availability Zone IDs are the same in every Amazon Web Services
+	// account, so use this parameter when you coordinate resources across accounts.
+	// Specify either AvailabilityZone or AvailabilityZoneId , not both. If you specify
+	// both, the request fails.
+	AvailabilityZoneId *string
 
 	// The Amazon Resource Name (ARN) of a VPC endpoint association.
 	VpcEndpointAssociationArn *string
@@ -54,14 +63,45 @@ type DescribeFlowOperationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeFlowOperationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeFlowOperationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeFlowOperationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AvailabilityZone != nil {
+		s.WriteString(schemas.DescribeFlowOperationRequest_AvailabilityZone, *v.AvailabilityZone)
+	}
+	if v.AvailabilityZoneId != nil {
+		s.WriteString(schemas.DescribeFlowOperationRequest_AvailabilityZoneId, *v.AvailabilityZoneId)
+	}
+	if v.FirewallArn != nil {
+		s.WriteString(schemas.DescribeFlowOperationRequest_FirewallArn, *v.FirewallArn)
+	}
+	if v.FlowOperationId != nil {
+		s.WriteString(schemas.DescribeFlowOperationRequest_FlowOperationId, *v.FlowOperationId)
+	}
+	if v.VpcEndpointAssociationArn != nil {
+		s.WriteString(schemas.DescribeFlowOperationRequest_VpcEndpointAssociationArn, *v.VpcEndpointAssociationArn)
+	}
+	if v.VpcEndpointId != nil {
+		s.WriteString(schemas.DescribeFlowOperationRequest_VpcEndpointId, *v.VpcEndpointId)
+	}
+}
+
 type DescribeFlowOperationOutput struct {
 
-	// The ID of the Availability Zone where the firewall is located. For example,
+	// The name of the Availability Zone where the firewall is located. For example,
 	// us-east-2a .
 	//
 	// Defines the scope a flow operation. You can use up to 20 filters to configure a
 	// single flow operation.
 	AvailabilityZone *string
+
+	// The ID of the Availability Zone where the firewall is located. For example,
+	// use2-az1 .
+	AvailabilityZoneId *string
 
 	// The Amazon Resource Name (ARN) of the firewall.
 	FirewallArn *string
@@ -106,13 +146,102 @@ type DescribeFlowOperationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeFlowOperationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeFlowOperationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeFlowOperationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AvailabilityZone != nil {
+		s.WriteString(schemas.DescribeFlowOperationResponse_AvailabilityZone, *v.AvailabilityZone)
+	}
+	if v.AvailabilityZoneId != nil {
+		s.WriteString(schemas.DescribeFlowOperationResponse_AvailabilityZoneId, *v.AvailabilityZoneId)
+	}
+	if v.FirewallArn != nil {
+		s.WriteString(schemas.DescribeFlowOperationResponse_FirewallArn, *v.FirewallArn)
+	}
+	if v.FlowOperation != nil {
+		s.WriteStruct(schemas.DescribeFlowOperationResponse_FlowOperation)
+		v.FlowOperation.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.FlowOperationId != nil {
+		s.WriteString(schemas.DescribeFlowOperationResponse_FlowOperationId, *v.FlowOperationId)
+	}
+	if v.FlowOperationStatus != "" {
+		s.WriteString(schemas.DescribeFlowOperationResponse_FlowOperationStatus, string(v.FlowOperationStatus))
+	}
+	if v.FlowOperationType != "" {
+		s.WriteString(schemas.DescribeFlowOperationResponse_FlowOperationType, string(v.FlowOperationType))
+	}
+	if v.FlowRequestTimestamp != nil {
+		s.WriteTime(schemas.DescribeFlowOperationResponse_FlowRequestTimestamp, *v.FlowRequestTimestamp)
+	}
+	if v.StatusMessage != nil {
+		s.WriteString(schemas.DescribeFlowOperationResponse_StatusMessage, *v.StatusMessage)
+	}
+	if v.VpcEndpointAssociationArn != nil {
+		s.WriteString(schemas.DescribeFlowOperationResponse_VpcEndpointAssociationArn, *v.VpcEndpointAssociationArn)
+	}
+	if v.VpcEndpointId != nil {
+		s.WriteString(schemas.DescribeFlowOperationResponse_VpcEndpointId, *v.VpcEndpointId)
+	}
+}
+func (v *DescribeFlowOperationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeFlowOperationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeFlowOperationResponse_AvailabilityZone:
+			v.AvailabilityZone = new(string)
+			return d.ReadString(schemas.DescribeFlowOperationResponse_AvailabilityZone, v.AvailabilityZone)
+		case schemas.DescribeFlowOperationResponse_AvailabilityZoneId:
+			v.AvailabilityZoneId = new(string)
+			return d.ReadString(schemas.DescribeFlowOperationResponse_AvailabilityZoneId, v.AvailabilityZoneId)
+		case schemas.DescribeFlowOperationResponse_FirewallArn:
+			v.FirewallArn = new(string)
+			return d.ReadString(schemas.DescribeFlowOperationResponse_FirewallArn, v.FirewallArn)
+		case schemas.DescribeFlowOperationResponse_FlowOperation:
+			v.FlowOperation = &types.FlowOperation{}
+			return v.FlowOperation.Deserialize(d)
+		case schemas.DescribeFlowOperationResponse_FlowOperationId:
+			v.FlowOperationId = new(string)
+			return d.ReadString(schemas.DescribeFlowOperationResponse_FlowOperationId, v.FlowOperationId)
+		case schemas.DescribeFlowOperationResponse_FlowOperationStatus:
+			var ev string
+			if err := d.ReadString(schemas.DescribeFlowOperationResponse_FlowOperationStatus, &ev); err != nil {
+				return err
+			}
+			v.FlowOperationStatus = types.FlowOperationStatus(ev)
+			return nil
+		case schemas.DescribeFlowOperationResponse_FlowOperationType:
+			var ev string
+			if err := d.ReadString(schemas.DescribeFlowOperationResponse_FlowOperationType, &ev); err != nil {
+				return err
+			}
+			v.FlowOperationType = types.FlowOperationType(ev)
+			return nil
+		case schemas.DescribeFlowOperationResponse_FlowRequestTimestamp:
+			v.FlowRequestTimestamp = new(time.Time)
+			return d.ReadTime(schemas.DescribeFlowOperationResponse_FlowRequestTimestamp, v.FlowRequestTimestamp)
+		case schemas.DescribeFlowOperationResponse_StatusMessage:
+			v.StatusMessage = new(string)
+			return d.ReadString(schemas.DescribeFlowOperationResponse_StatusMessage, v.StatusMessage)
+		case schemas.DescribeFlowOperationResponse_VpcEndpointAssociationArn:
+			v.VpcEndpointAssociationArn = new(string)
+			return d.ReadString(schemas.DescribeFlowOperationResponse_VpcEndpointAssociationArn, v.VpcEndpointAssociationArn)
+		case schemas.DescribeFlowOperationResponse_VpcEndpointId:
+			v.VpcEndpointId = new(string)
+			return d.ReadString(schemas.DescribeFlowOperationResponse_VpcEndpointId, v.VpcEndpointId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeFlowOperationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpDescribeFlowOperation{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeFlowOperation, schemas.DescribeFlowOperationRequest, schemas.DescribeFlowOperationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpDescribeFlowOperation{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeFlowOperation, schemas.DescribeFlowOperationRequest, schemas.DescribeFlowOperationResponse), output: &DescribeFlowOperationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -5,7 +5,9 @@ package mq
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/mq/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/mq/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -197,6 +199,83 @@ type CreateBrokerInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateBrokerInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateBrokerRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateBrokerInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AuthenticationStrategy != "" {
+		s.WriteString(schemas.CreateBrokerRequest_AuthenticationStrategy, string(v.AuthenticationStrategy))
+	}
+	if v.AutoMinorVersionUpgrade != nil {
+		s.WriteBool(schemas.CreateBrokerRequest_AutoMinorVersionUpgrade, *v.AutoMinorVersionUpgrade)
+	}
+	if v.BrokerName != nil {
+		s.WriteString(schemas.CreateBrokerRequest_BrokerName, *v.BrokerName)
+	}
+	if v.Configuration != nil {
+		s.WriteStruct(schemas.CreateBrokerRequest_Configuration)
+		v.Configuration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CreatorRequestId != nil {
+		s.WriteString(schemas.CreateBrokerRequest_CreatorRequestId, *v.CreatorRequestId)
+	}
+	if v.DataReplicationMode != "" {
+		s.WriteString(schemas.CreateBrokerRequest_DataReplicationMode, string(v.DataReplicationMode))
+	}
+	if v.DataReplicationPrimaryBrokerArn != nil {
+		s.WriteString(schemas.CreateBrokerRequest_DataReplicationPrimaryBrokerArn, *v.DataReplicationPrimaryBrokerArn)
+	}
+	if v.DeploymentMode != "" {
+		s.WriteString(schemas.CreateBrokerRequest_DeploymentMode, string(v.DeploymentMode))
+	}
+	if v.EncryptionOptions != nil {
+		s.WriteStruct(schemas.CreateBrokerRequest_EncryptionOptions)
+		v.EncryptionOptions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.EngineType != "" {
+		s.WriteString(schemas.CreateBrokerRequest_EngineType, string(v.EngineType))
+	}
+	if v.EngineVersion != nil {
+		s.WriteString(schemas.CreateBrokerRequest_EngineVersion, *v.EngineVersion)
+	}
+	if v.HostInstanceType != nil {
+		s.WriteString(schemas.CreateBrokerRequest_HostInstanceType, *v.HostInstanceType)
+	}
+	if v.LdapServerMetadata != nil {
+		s.WriteStruct(schemas.CreateBrokerRequest_LdapServerMetadata)
+		v.LdapServerMetadata.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Logs != nil {
+		s.WriteStruct(schemas.CreateBrokerRequest_Logs)
+		v.Logs.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MaintenanceWindowStartTime != nil {
+		s.WriteStruct(schemas.CreateBrokerRequest_MaintenanceWindowStartTime)
+		v.MaintenanceWindowStartTime.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.PubliclyAccessible != nil {
+		s.WriteBool(schemas.CreateBrokerRequest_PubliclyAccessible, *v.PubliclyAccessible)
+	}
+	serialize__listOf__string(s, schemas.CreateBrokerRequest_SecurityGroups, v.SecurityGroups)
+	if v.StorageSize != nil {
+		s.WriteInt32(schemas.CreateBrokerRequest_StorageSize, *v.StorageSize)
+	}
+	if v.StorageType != "" {
+		s.WriteString(schemas.CreateBrokerRequest_StorageType, string(v.StorageType))
+	}
+	serialize__listOf__string(s, schemas.CreateBrokerRequest_SubnetIds, v.SubnetIds)
+	serialize__mapOf__string(s, schemas.CreateBrokerRequest_Tags, v.Tags)
+	serialize__listOfUser(s, schemas.CreateBrokerRequest_Users, v.Users)
+}
+
 type CreateBrokerOutput struct {
 
 	// The broker's Amazon Resource Name (ARN).
@@ -211,13 +290,38 @@ type CreateBrokerOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateBrokerOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateBrokerResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateBrokerOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BrokerArn != nil {
+		s.WriteString(schemas.CreateBrokerResponse_BrokerArn, *v.BrokerArn)
+	}
+	if v.BrokerId != nil {
+		s.WriteString(schemas.CreateBrokerResponse_BrokerId, *v.BrokerId)
+	}
+}
+func (v *CreateBrokerOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateBrokerResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateBrokerResponse_BrokerArn:
+			v.BrokerArn = new(string)
+			return d.ReadString(schemas.CreateBrokerResponse_BrokerArn, v.BrokerArn)
+		case schemas.CreateBrokerResponse_BrokerId:
+			v.BrokerId = new(string)
+			return d.ReadString(schemas.CreateBrokerResponse_BrokerId, v.BrokerId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateBrokerMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateBroker{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateBroker, schemas.CreateBrokerRequest, schemas.CreateBrokerResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateBroker{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateBroker, schemas.CreateBrokerRequest, schemas.CreateBrokerResponse), output: &CreateBrokerOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package billing
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/billing/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/billing/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -47,6 +49,29 @@ type UpdateBillingViewInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateBillingViewInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateBillingViewRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateBillingViewInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.UpdateBillingViewRequest_arn, *v.Arn)
+	}
+	if v.DataFilterExpression != nil {
+		s.WriteStruct(schemas.UpdateBillingViewRequest_dataFilterExpression)
+		v.DataFilterExpression.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateBillingViewRequest_description, *v.Description)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateBillingViewRequest_name, *v.Name)
+	}
+}
+
 type UpdateBillingViewOutput struct {
 
 	//  The Amazon Resource Name (ARN) that can be used to uniquely identify the
@@ -64,13 +89,38 @@ type UpdateBillingViewOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateBillingViewOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateBillingViewResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateBillingViewOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.UpdateBillingViewResponse_arn, *v.Arn)
+	}
+	if v.UpdatedAt != nil {
+		s.WriteTime(schemas.UpdateBillingViewResponse_updatedAt, *v.UpdatedAt)
+	}
+}
+func (v *UpdateBillingViewOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateBillingViewResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateBillingViewResponse_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.UpdateBillingViewResponse_arn, v.Arn)
+		case schemas.UpdateBillingViewResponse_updatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.UpdateBillingViewResponse_updatedAt, v.UpdatedAt)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateBillingViewMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpUpdateBillingView{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateBillingView, schemas.UpdateBillingViewRequest, schemas.UpdateBillingViewResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpUpdateBillingView{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateBillingView, schemas.UpdateBillingViewRequest, schemas.UpdateBillingViewResponse), output: &UpdateBillingViewOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

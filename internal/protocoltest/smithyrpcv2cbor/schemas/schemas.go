@@ -88,7 +88,7 @@ var RpcV2Protocol = smithy.NewServiceSchema(_RpcV2Protocol, "2020-07-14")
 var ValidationException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "smithy.framework",
 	Name:      "ValidationException",
-}, smithy.ShapeTypeStructure, 2)
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"})
 var ValidationException_message *smithy.Schema
 
 var ValidationException_fieldList *smithy.Schema
@@ -305,7 +305,7 @@ var ClientOptionalDefaults_member *smithy.Schema
 var ComplexError = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "smithy.protocoltests.rpcv2Cbor",
 	Name:      "ComplexError",
-}, smithy.ShapeTypeStructure, 2)
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"})
 var ComplexError_TopLevel *smithy.Schema
 
 var ComplexError_Nested *smithy.Schema
@@ -409,7 +409,7 @@ var _DenseStructMap_value *smithy.Schema
 var InvalidGreeting = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "smithy.protocoltests.rpcv2Cbor",
 	Name:      "InvalidGreeting",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var InvalidGreeting_Message *smithy.Schema
 
 var RecursiveShapesInputOutputNested1 = smithy.NewSchema(smithy.ShapeID{

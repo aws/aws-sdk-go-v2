@@ -5,7 +5,9 @@ package sesv2
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/sesv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sesv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -52,6 +54,22 @@ type ListReputationEntitiesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListReputationEntitiesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListReputationEntitiesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListReputationEntitiesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeReputationEntityFilter(s, schemas.ListReputationEntitiesRequest_Filter, v.Filter)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListReputationEntitiesRequest_NextToken, *v.NextToken)
+	}
+	if v.PageSize != nil {
+		s.WriteInt32(schemas.ListReputationEntitiesRequest_PageSize, *v.PageSize)
+	}
+}
+
 // A list of reputation entities in your account.
 type ListReputationEntitiesOutput struct {
 
@@ -70,13 +88,35 @@ type ListReputationEntitiesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListReputationEntitiesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListReputationEntitiesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListReputationEntitiesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListReputationEntitiesResponse_NextToken, *v.NextToken)
+	}
+	serializeReputationEntitiesList(s, schemas.ListReputationEntitiesResponse_ReputationEntities, v.ReputationEntities)
+}
+func (v *ListReputationEntitiesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListReputationEntitiesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListReputationEntitiesResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListReputationEntitiesResponse_NextToken, v.NextToken)
+		case schemas.ListReputationEntitiesResponse_ReputationEntities:
+			return deserializeReputationEntitiesList(d, schemas.ListReputationEntitiesResponse_ReputationEntities, &v.ReputationEntities)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListReputationEntitiesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListReputationEntities{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListReputationEntities, schemas.ListReputationEntitiesRequest, schemas.ListReputationEntitiesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListReputationEntities{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListReputationEntities, schemas.ListReputationEntitiesRequest, schemas.ListReputationEntitiesResponse), output: &ListReputationEntitiesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -287,6 +287,13 @@ func deserializeAttendeeIdList(d smithy.ShapeDeserializer, s *smithy.Schema, v *
 	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			*v = append(*v, zero)
+			return nil
+		}
 
 		if err := d.ReadString(s.ListMember(), &vv); err != nil {
 			return err
@@ -301,6 +308,13 @@ func deserializeCategoryNameList(d smithy.ShapeDeserializer, s *smithy.Schema, v
 	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			*v = append(*v, zero)
+			return nil
+		}
 
 		if err := d.ReadString(s.ListMember(), &vv); err != nil {
 			return err
@@ -315,6 +329,14 @@ func deserializeChannelDefinitions(d smithy.ShapeDeserializer, s *smithy.Schema,
 	*v = make([]types.ChannelDefinition, 0)
 	var vv types.ChannelDefinition
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.ChannelDefinition
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = types.ChannelDefinition{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -329,6 +351,14 @@ func deserializeConcatenationSinkList(d smithy.ShapeDeserializer, s *smithy.Sche
 	*v = make([]types.ConcatenationSink, 0)
 	var vv types.ConcatenationSink
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.ConcatenationSink
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = types.ConcatenationSink{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -343,6 +373,14 @@ func deserializeConcatenationSourceList(d smithy.ShapeDeserializer, s *smithy.Sc
 	*v = make([]types.ConcatenationSource, 0)
 	var vv types.ConcatenationSource
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.ConcatenationSource
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = types.ConcatenationSource{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -357,6 +395,13 @@ func deserializeExternalUserIdList(d smithy.ShapeDeserializer, s *smithy.Schema,
 	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			*v = append(*v, zero)
+			return nil
+		}
 
 		if err := d.ReadString(s.ListMember(), &vv); err != nil {
 			return err
@@ -371,6 +416,13 @@ func deserializeKeywordMatchWordList(d smithy.ShapeDeserializer, s *smithy.Schem
 	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			*v = append(*v, zero)
+			return nil
+		}
 
 		if err := d.ReadString(s.ListMember(), &vv); err != nil {
 			return err
@@ -385,6 +437,14 @@ func deserializeKinesisVideoStreamPoolSummaryList(d smithy.ShapeDeserializer, s 
 	*v = make([]types.KinesisVideoStreamPoolSummary, 0)
 	var vv types.KinesisVideoStreamPoolSummary
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.KinesisVideoStreamPoolSummary
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = types.KinesisVideoStreamPoolSummary{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -399,6 +459,14 @@ func deserializeLiveConnectorSinkList(d smithy.ShapeDeserializer, s *smithy.Sche
 	*v = make([]types.LiveConnectorSinkConfiguration, 0)
 	var vv types.LiveConnectorSinkConfiguration
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.LiveConnectorSinkConfiguration
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = types.LiveConnectorSinkConfiguration{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -413,6 +481,14 @@ func deserializeLiveConnectorSourceList(d smithy.ShapeDeserializer, s *smithy.Sc
 	*v = make([]types.LiveConnectorSourceConfiguration, 0)
 	var vv types.LiveConnectorSourceConfiguration
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.LiveConnectorSourceConfiguration
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = types.LiveConnectorSourceConfiguration{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -427,6 +503,14 @@ func deserializeMediaCapturePipelineSummaryList(d smithy.ShapeDeserializer, s *s
 	*v = make([]types.MediaCapturePipelineSummary, 0)
 	var vv types.MediaCapturePipelineSummary
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.MediaCapturePipelineSummary
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = types.MediaCapturePipelineSummary{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -441,6 +525,14 @@ func deserializeMediaInsightsPipelineConfigurationElements(d smithy.ShapeDeseria
 	*v = make([]types.MediaInsightsPipelineConfigurationElement, 0)
 	var vv types.MediaInsightsPipelineConfigurationElement
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.MediaInsightsPipelineConfigurationElement
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = types.MediaInsightsPipelineConfigurationElement{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -455,6 +547,14 @@ func deserializeMediaInsightsPipelineConfigurationSummaryList(d smithy.ShapeDese
 	*v = make([]types.MediaInsightsPipelineConfigurationSummary, 0)
 	var vv types.MediaInsightsPipelineConfigurationSummary
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.MediaInsightsPipelineConfigurationSummary
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = types.MediaInsightsPipelineConfigurationSummary{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -469,6 +569,14 @@ func deserializeMediaInsightsPipelineElementStatuses(d smithy.ShapeDeserializer,
 	*v = make([]types.MediaInsightsPipelineElementStatus, 0)
 	var vv types.MediaInsightsPipelineElementStatus
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.MediaInsightsPipelineElementStatus
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = types.MediaInsightsPipelineElementStatus{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -483,6 +591,14 @@ func deserializeMediaPipelineList(d smithy.ShapeDeserializer, s *smithy.Schema, 
 	*v = make([]types.MediaPipelineSummary, 0)
 	var vv types.MediaPipelineSummary
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.MediaPipelineSummary
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = types.MediaPipelineSummary{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -497,6 +613,14 @@ func deserializeMediaStreamSinkList(d smithy.ShapeDeserializer, s *smithy.Schema
 	*v = make([]types.MediaStreamSink, 0)
 	var vv types.MediaStreamSink
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.MediaStreamSink
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = types.MediaStreamSink{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -511,6 +635,14 @@ func deserializeMediaStreamSourceList(d smithy.ShapeDeserializer, s *smithy.Sche
 	*v = make([]types.MediaStreamSource, 0)
 	var vv types.MediaStreamSource
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.MediaStreamSource
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = types.MediaStreamSource{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -525,6 +657,14 @@ func deserializeRealTimeAlertRuleList(d smithy.ShapeDeserializer, s *smithy.Sche
 	*v = make([]types.RealTimeAlertRule, 0)
 	var vv types.RealTimeAlertRule
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.RealTimeAlertRule
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = types.RealTimeAlertRule{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -539,6 +679,14 @@ func deserializeRecordingStreamList(d smithy.ShapeDeserializer, s *smithy.Schema
 	*v = make([]types.RecordingStreamConfiguration, 0)
 	var vv types.RecordingStreamConfiguration
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.RecordingStreamConfiguration
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = types.RecordingStreamConfiguration{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -553,6 +701,14 @@ func deserializeStreams(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types
 	*v = make([]types.StreamConfiguration, 0)
 	var vv types.StreamConfiguration
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.StreamConfiguration
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = types.StreamConfiguration{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -567,6 +723,13 @@ func deserializeTagKeyList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]st
 	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			*v = append(*v, zero)
+			return nil
+		}
 
 		if err := d.ReadString(s.ListMember(), &vv); err != nil {
 			return err
@@ -581,6 +744,14 @@ func deserializeTagList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types
 	*v = make([]types.Tag, 0)
 	var vv types.Tag
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.Tag
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = types.Tag{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -607,6 +778,13 @@ func deserializeMediaInsightsRuntimeMetadata(d smithy.ShapeDeserializer, s *smit
 	*v = make(map[string]string)
 	var vv string
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			(*v)[k] = zero
+			return nil
+		}
 
 		if err := d.ReadString(s.MapValue(), &vv); err != nil {
 			return err

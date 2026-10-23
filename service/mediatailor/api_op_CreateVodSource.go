@@ -4,7 +4,9 @@ package mediatailor
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/mediatailor/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/mediatailor/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -52,6 +54,40 @@ type CreateVodSourceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateVodSourceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateVodSourceRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateVodSourceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeHttpPackageConfigurations(s, schemas.CreateVodSourceRequest_HttpPackageConfigurations, v.HttpPackageConfigurations)
+	if v.SourceLocationName != nil {
+		s.WriteString(schemas.CreateVodSourceRequest_SourceLocationName, *v.SourceLocationName)
+	}
+	serialize__mapOf__string(s, schemas.CreateVodSourceRequest_Tags, v.Tags)
+	if v.VodSourceName != nil {
+		s.WriteString(schemas.CreateVodSourceRequest_VodSourceName, *v.VodSourceName)
+	}
+}
+func (v *CreateVodSourceInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateVodSourceRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateVodSourceRequest_HttpPackageConfigurations:
+			return deserializeHttpPackageConfigurations(d, schemas.CreateVodSourceRequest_HttpPackageConfigurations, &v.HttpPackageConfigurations)
+		case schemas.CreateVodSourceRequest_SourceLocationName:
+			v.SourceLocationName = new(string)
+			return d.ReadString(schemas.CreateVodSourceRequest_SourceLocationName, v.SourceLocationName)
+		case schemas.CreateVodSourceRequest_Tags:
+			return deserialize__mapOf__string(d, schemas.CreateVodSourceRequest_Tags, &v.Tags)
+		case schemas.CreateVodSourceRequest_VodSourceName:
+			v.VodSourceName = new(string)
+			return d.ReadString(schemas.CreateVodSourceRequest_VodSourceName, v.VodSourceName)
+		}
+		return nil
+	})
+}
+
 type CreateVodSourceOutput struct {
 
 	// The ARN to assign to this VOD source.
@@ -85,13 +121,62 @@ type CreateVodSourceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateVodSourceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateVodSourceResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateVodSourceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.CreateVodSourceResponse_Arn, *v.Arn)
+	}
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.CreateVodSourceResponse_CreationTime, *v.CreationTime)
+	}
+	serializeHttpPackageConfigurations(s, schemas.CreateVodSourceResponse_HttpPackageConfigurations, v.HttpPackageConfigurations)
+	if v.LastModifiedTime != nil {
+		s.WriteTime(schemas.CreateVodSourceResponse_LastModifiedTime, *v.LastModifiedTime)
+	}
+	if v.SourceLocationName != nil {
+		s.WriteString(schemas.CreateVodSourceResponse_SourceLocationName, *v.SourceLocationName)
+	}
+	serialize__mapOf__string(s, schemas.CreateVodSourceResponse_Tags, v.Tags)
+	if v.VodSourceName != nil {
+		s.WriteString(schemas.CreateVodSourceResponse_VodSourceName, *v.VodSourceName)
+	}
+}
+func (v *CreateVodSourceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateVodSourceResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateVodSourceResponse_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.CreateVodSourceResponse_Arn, v.Arn)
+		case schemas.CreateVodSourceResponse_CreationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.CreateVodSourceResponse_CreationTime, v.CreationTime)
+		case schemas.CreateVodSourceResponse_HttpPackageConfigurations:
+			return deserializeHttpPackageConfigurations(d, schemas.CreateVodSourceResponse_HttpPackageConfigurations, &v.HttpPackageConfigurations)
+		case schemas.CreateVodSourceResponse_LastModifiedTime:
+			v.LastModifiedTime = new(time.Time)
+			return d.ReadTime(schemas.CreateVodSourceResponse_LastModifiedTime, v.LastModifiedTime)
+		case schemas.CreateVodSourceResponse_SourceLocationName:
+			v.SourceLocationName = new(string)
+			return d.ReadString(schemas.CreateVodSourceResponse_SourceLocationName, v.SourceLocationName)
+		case schemas.CreateVodSourceResponse_Tags:
+			return deserialize__mapOf__string(d, schemas.CreateVodSourceResponse_Tags, &v.Tags)
+		case schemas.CreateVodSourceResponse_VodSourceName:
+			v.VodSourceName = new(string)
+			return d.ReadString(schemas.CreateVodSourceResponse_VodSourceName, v.VodSourceName)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateVodSourceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateVodSource{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateVodSource, schemas.CreateVodSourceRequest, schemas.CreateVodSourceResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateVodSource{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateVodSource, schemas.CreateVodSourceRequest, schemas.CreateVodSourceResponse), output: &CreateVodSourceOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

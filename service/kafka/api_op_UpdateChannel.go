@@ -4,7 +4,9 @@ package kafka
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/kafka/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/kafka/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -51,6 +53,31 @@ type UpdateChannelInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateChannelInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateChannelRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateChannelInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ChannelArn != nil {
+		s.WriteString(schemas.UpdateChannelRequest_ChannelArn, *v.ChannelArn)
+	}
+	if v.ClusterArn != nil {
+		s.WriteString(schemas.UpdateChannelRequest_ClusterArn, *v.ClusterArn)
+	}
+	if v.IcebergDestinationUpdate != nil {
+		s.WriteStruct(schemas.UpdateChannelRequest_IcebergDestinationUpdate)
+		v.IcebergDestinationUpdate.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.S3DestinationUpdate != nil {
+		s.WriteStruct(schemas.UpdateChannelRequest_S3DestinationUpdate)
+		v.S3DestinationUpdate.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 // Returns the channel ARN and the cluster-operation ARN that tracks the
 // asynchronous update.
 type UpdateChannelOutput struct {
@@ -69,13 +96,38 @@ type UpdateChannelOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateChannelOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateChannelResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateChannelOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ChannelArn != nil {
+		s.WriteString(schemas.UpdateChannelResponse_ChannelArn, *v.ChannelArn)
+	}
+	if v.ClusterOperationArn != nil {
+		s.WriteString(schemas.UpdateChannelResponse_ClusterOperationArn, *v.ClusterOperationArn)
+	}
+}
+func (v *UpdateChannelOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateChannelResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateChannelResponse_ChannelArn:
+			v.ChannelArn = new(string)
+			return d.ReadString(schemas.UpdateChannelResponse_ChannelArn, v.ChannelArn)
+		case schemas.UpdateChannelResponse_ClusterOperationArn:
+			v.ClusterOperationArn = new(string)
+			return d.ReadString(schemas.UpdateChannelResponse_ClusterOperationArn, v.ClusterOperationArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateChannelMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateChannel{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateChannel, schemas.UpdateChannelRequest, schemas.UpdateChannelResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateChannel{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateChannel, schemas.UpdateChannelRequest, schemas.UpdateChannelResponse), output: &UpdateChannelOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

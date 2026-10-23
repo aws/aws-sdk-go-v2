@@ -1121,6 +1121,7 @@ func TestUpdateResponseSnapshot_CreateConfiguredTable(t *testing.T) {
 					DatabaseName: ptr.String("__DatabaseName__"),
 				},
 			},
+			TableType:  types.TableReferenceType("GLUE"),
 			CreateTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			UpdateTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			AnalysisRuleTypes: []types.ConfiguredTableAnalysisRuleType{
@@ -2839,6 +2840,7 @@ func TestUpdateResponseSnapshot_GetConfiguredTable(t *testing.T) {
 					DatabaseName: ptr.String("__DatabaseName__"),
 				},
 			},
+			TableType:  types.TableReferenceType("GLUE"),
 			CreateTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			UpdateTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			AnalysisRuleTypes: []types.ConfiguredTableAnalysisRuleType{
@@ -4736,6 +4738,7 @@ func TestUpdateResponseSnapshot_ListConfiguredTables(t *testing.T) {
 				Id:         ptr.String("__Id__"),
 				Arn:        ptr.String("__Arn__"),
 				Name:       ptr.String("__Name__"),
+				TableType:  types.TableReferenceType("GLUE"),
 				CreateTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 				UpdateTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 				AnalysisRuleTypes: []types.ConfiguredTableAnalysisRuleType{
@@ -4752,6 +4755,7 @@ func TestUpdateResponseSnapshot_ListConfiguredTables(t *testing.T) {
 				Id:         ptr.String("__Id__"),
 				Arn:        ptr.String("__Arn__"),
 				Name:       ptr.String("__Name__"),
+				TableType:  types.TableReferenceType("GLUE"),
 				CreateTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 				UpdateTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 				AnalysisRuleTypes: []types.ConfiguredTableAnalysisRuleType{
@@ -6329,6 +6333,7 @@ func TestUpdateResponseSnapshot_UpdateConfiguredTable(t *testing.T) {
 					DatabaseName: ptr.String("__DatabaseName__"),
 				},
 			},
+			TableType:  types.TableReferenceType("GLUE"),
 			CreateTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			UpdateTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			AnalysisRuleTypes: []types.ConfiguredTableAnalysisRuleType{

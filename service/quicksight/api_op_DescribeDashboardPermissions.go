@@ -4,7 +4,9 @@ package quicksight
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/quicksight/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/quicksight/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -40,6 +42,21 @@ type DescribeDashboardPermissionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeDashboardPermissionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeDashboardPermissionsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeDashboardPermissionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AwsAccountId != nil {
+		s.WriteString(schemas.DescribeDashboardPermissionsRequest_AwsAccountId, *v.AwsAccountId)
+	}
+	if v.DashboardId != nil {
+		s.WriteString(schemas.DescribeDashboardPermissionsRequest_DashboardId, *v.DashboardId)
+	}
+}
+
 type DescribeDashboardPermissionsOutput struct {
 
 	// The Amazon Resource Name (ARN) of the dashboard.
@@ -71,13 +88,60 @@ type DescribeDashboardPermissionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeDashboardPermissionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeDashboardPermissionsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeDashboardPermissionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DashboardArn != nil {
+		s.WriteString(schemas.DescribeDashboardPermissionsResponse_DashboardArn, *v.DashboardArn)
+	}
+	if v.DashboardId != nil {
+		s.WriteString(schemas.DescribeDashboardPermissionsResponse_DashboardId, *v.DashboardId)
+	}
+	if v.LinkSharingConfiguration != nil {
+		s.WriteStruct(schemas.DescribeDashboardPermissionsResponse_LinkSharingConfiguration)
+		v.LinkSharingConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeUpdateResourcePermissionList(s, schemas.DescribeDashboardPermissionsResponse_Permissions, v.Permissions)
+	if v.RequestId != nil {
+		s.WriteString(schemas.DescribeDashboardPermissionsResponse_RequestId, *v.RequestId)
+	}
+	if v.Status != 0 {
+		s.WriteInt32(schemas.DescribeDashboardPermissionsResponse_Status, v.Status)
+	}
+}
+func (v *DescribeDashboardPermissionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeDashboardPermissionsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeDashboardPermissionsResponse_DashboardArn:
+			v.DashboardArn = new(string)
+			return d.ReadString(schemas.DescribeDashboardPermissionsResponse_DashboardArn, v.DashboardArn)
+		case schemas.DescribeDashboardPermissionsResponse_DashboardId:
+			v.DashboardId = new(string)
+			return d.ReadString(schemas.DescribeDashboardPermissionsResponse_DashboardId, v.DashboardId)
+		case schemas.DescribeDashboardPermissionsResponse_LinkSharingConfiguration:
+			v.LinkSharingConfiguration = &types.LinkSharingConfiguration{}
+			return v.LinkSharingConfiguration.Deserialize(d)
+		case schemas.DescribeDashboardPermissionsResponse_Permissions:
+			return deserializeUpdateResourcePermissionList(d, schemas.DescribeDashboardPermissionsResponse_Permissions, &v.Permissions)
+		case schemas.DescribeDashboardPermissionsResponse_RequestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.DescribeDashboardPermissionsResponse_RequestId, v.RequestId)
+		case schemas.DescribeDashboardPermissionsResponse_Status:
+			return d.ReadInt32(schemas.DescribeDashboardPermissionsResponse_Status, &v.Status)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeDashboardPermissionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeDashboardPermissions{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeDashboardPermissions, schemas.DescribeDashboardPermissionsRequest, schemas.DescribeDashboardPermissionsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeDashboardPermissions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeDashboardPermissions, schemas.DescribeDashboardPermissionsRequest, schemas.DescribeDashboardPermissionsResponse), output: &DescribeDashboardPermissionsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

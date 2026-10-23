@@ -4,7 +4,9 @@ package amplifybackend
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/amplifybackend/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/amplifybackend/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -45,6 +47,24 @@ type GetBackendAuthInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetBackendAuthInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetBackendAuthRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetBackendAuthInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AppId != nil {
+		s.WriteString(schemas.GetBackendAuthRequest_AppId, *v.AppId)
+	}
+	if v.BackendEnvironmentName != nil {
+		s.WriteString(schemas.GetBackendAuthRequest_BackendEnvironmentName, *v.BackendEnvironmentName)
+	}
+	if v.ResourceName != nil {
+		s.WriteString(schemas.GetBackendAuthRequest_ResourceName, *v.ResourceName)
+	}
+}
+
 type GetBackendAuthOutput struct {
 
 	// The app ID.
@@ -69,13 +89,58 @@ type GetBackendAuthOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetBackendAuthOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetBackendAuthResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetBackendAuthOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AppId != nil {
+		s.WriteString(schemas.GetBackendAuthResponse_AppId, *v.AppId)
+	}
+	if v.BackendEnvironmentName != nil {
+		s.WriteString(schemas.GetBackendAuthResponse_BackendEnvironmentName, *v.BackendEnvironmentName)
+	}
+	if v.Error != nil {
+		s.WriteString(schemas.GetBackendAuthResponse_Error, *v.Error)
+	}
+	if v.ResourceConfig != nil {
+		s.WriteStruct(schemas.GetBackendAuthResponse_ResourceConfig)
+		v.ResourceConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ResourceName != nil {
+		s.WriteString(schemas.GetBackendAuthResponse_ResourceName, *v.ResourceName)
+	}
+}
+func (v *GetBackendAuthOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetBackendAuthResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetBackendAuthResponse_AppId:
+			v.AppId = new(string)
+			return d.ReadString(schemas.GetBackendAuthResponse_AppId, v.AppId)
+		case schemas.GetBackendAuthResponse_BackendEnvironmentName:
+			v.BackendEnvironmentName = new(string)
+			return d.ReadString(schemas.GetBackendAuthResponse_BackendEnvironmentName, v.BackendEnvironmentName)
+		case schemas.GetBackendAuthResponse_Error:
+			v.Error = new(string)
+			return d.ReadString(schemas.GetBackendAuthResponse_Error, v.Error)
+		case schemas.GetBackendAuthResponse_ResourceConfig:
+			v.ResourceConfig = &types.CreateBackendAuthResourceConfig{}
+			return v.ResourceConfig.Deserialize(d)
+		case schemas.GetBackendAuthResponse_ResourceName:
+			v.ResourceName = new(string)
+			return d.ReadString(schemas.GetBackendAuthResponse_ResourceName, v.ResourceName)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetBackendAuthMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetBackendAuth{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetBackendAuth, schemas.GetBackendAuthRequest, schemas.GetBackendAuthResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetBackendAuth{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetBackendAuth, schemas.GetBackendAuthRequest, schemas.GetBackendAuthResponse), output: &GetBackendAuthOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

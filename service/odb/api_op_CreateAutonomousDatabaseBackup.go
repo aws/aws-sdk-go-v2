@@ -5,7 +5,9 @@ package odb
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/odb/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/odb/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -48,6 +50,28 @@ type CreateAutonomousDatabaseBackupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateAutonomousDatabaseBackupInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateAutonomousDatabaseBackupInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateAutonomousDatabaseBackupInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AutonomousDatabaseId != nil {
+		s.WriteString(schemas.CreateAutonomousDatabaseBackupInput_autonomousDatabaseId, *v.AutonomousDatabaseId)
+	}
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateAutonomousDatabaseBackupInput_clientToken, *v.ClientToken)
+	}
+	if v.DisplayName != nil {
+		s.WriteString(schemas.CreateAutonomousDatabaseBackupInput_displayName, *v.DisplayName)
+	}
+	if v.RetentionPeriodInDays != nil {
+		s.WriteInt32(schemas.CreateAutonomousDatabaseBackupInput_retentionPeriodInDays, *v.RetentionPeriodInDays)
+	}
+	serializeRequestTagMap(s, schemas.CreateAutonomousDatabaseBackupInput_tags, v.Tags)
+}
+
 type CreateAutonomousDatabaseBackupOutput struct {
 
 	// The unique identifier of the Autonomous Database backup that was created.
@@ -71,13 +95,54 @@ type CreateAutonomousDatabaseBackupOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateAutonomousDatabaseBackupOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateAutonomousDatabaseBackupOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateAutonomousDatabaseBackupOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AutonomousDatabaseBackupId != nil {
+		s.WriteString(schemas.CreateAutonomousDatabaseBackupOutput_autonomousDatabaseBackupId, *v.AutonomousDatabaseBackupId)
+	}
+	if v.DisplayName != nil {
+		s.WriteString(schemas.CreateAutonomousDatabaseBackupOutput_displayName, *v.DisplayName)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.CreateAutonomousDatabaseBackupOutput_status, string(v.Status))
+	}
+	if v.StatusReason != nil {
+		s.WriteString(schemas.CreateAutonomousDatabaseBackupOutput_statusReason, *v.StatusReason)
+	}
+}
+func (v *CreateAutonomousDatabaseBackupOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateAutonomousDatabaseBackupOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateAutonomousDatabaseBackupOutput_autonomousDatabaseBackupId:
+			v.AutonomousDatabaseBackupId = new(string)
+			return d.ReadString(schemas.CreateAutonomousDatabaseBackupOutput_autonomousDatabaseBackupId, v.AutonomousDatabaseBackupId)
+		case schemas.CreateAutonomousDatabaseBackupOutput_displayName:
+			v.DisplayName = new(string)
+			return d.ReadString(schemas.CreateAutonomousDatabaseBackupOutput_displayName, v.DisplayName)
+		case schemas.CreateAutonomousDatabaseBackupOutput_status:
+			var ev string
+			if err := d.ReadString(schemas.CreateAutonomousDatabaseBackupOutput_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.ResourceStatus(ev)
+			return nil
+		case schemas.CreateAutonomousDatabaseBackupOutput_statusReason:
+			v.StatusReason = new(string)
+			return d.ReadString(schemas.CreateAutonomousDatabaseBackupOutput_statusReason, v.StatusReason)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateAutonomousDatabaseBackupMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpCreateAutonomousDatabaseBackup{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateAutonomousDatabaseBackup, schemas.CreateAutonomousDatabaseBackupInput, schemas.CreateAutonomousDatabaseBackupOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpCreateAutonomousDatabaseBackup{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateAutonomousDatabaseBackup, schemas.CreateAutonomousDatabaseBackupInput, schemas.CreateAutonomousDatabaseBackupOutput), output: &CreateAutonomousDatabaseBackupOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

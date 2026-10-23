@@ -4,6 +4,8 @@ package customerprofiles
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/customerprofiles/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -34,6 +36,18 @@ type DeleteDomainInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteDomainInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteDomainRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteDomainInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DomainName != nil {
+		s.WriteString(schemas.DeleteDomainRequest_DomainName, *v.DomainName)
+	}
+}
+
 type DeleteDomainOutput struct {
 
 	// A message that indicates the delete request is done.
@@ -47,13 +61,32 @@ type DeleteDomainOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteDomainOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteDomainResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteDomainOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.DeleteDomainResponse_Message, *v.Message)
+	}
+}
+func (v *DeleteDomainOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteDomainResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteDomainResponse_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.DeleteDomainResponse_Message, v.Message)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteDomainMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteDomain{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteDomain, schemas.DeleteDomainRequest, schemas.DeleteDomainResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteDomain{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteDomain, schemas.DeleteDomainRequest, schemas.DeleteDomainResponse), output: &DeleteDomainOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

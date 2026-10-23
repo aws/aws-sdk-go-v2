@@ -4,7 +4,9 @@ package quicksight
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/quicksight/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/quicksight/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -41,6 +43,21 @@ type UpdateQuickSightQSearchConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateQuickSightQSearchConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateQuickSightQSearchConfigurationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateQuickSightQSearchConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AwsAccountId != nil {
+		s.WriteString(schemas.UpdateQuickSightQSearchConfigurationRequest_AwsAccountId, *v.AwsAccountId)
+	}
+	if v.QSearchStatus != "" {
+		s.WriteString(schemas.UpdateQuickSightQSearchConfigurationRequest_QSearchStatus, string(v.QSearchStatus))
+	}
+}
+
 type UpdateQuickSightQSearchConfigurationOutput struct {
 
 	// The status of the Quick Sight Q Search configuration.
@@ -58,13 +75,47 @@ type UpdateQuickSightQSearchConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateQuickSightQSearchConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateQuickSightQSearchConfigurationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateQuickSightQSearchConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.QSearchStatus != "" {
+		s.WriteString(schemas.UpdateQuickSightQSearchConfigurationResponse_QSearchStatus, string(v.QSearchStatus))
+	}
+	if v.RequestId != nil {
+		s.WriteString(schemas.UpdateQuickSightQSearchConfigurationResponse_RequestId, *v.RequestId)
+	}
+	if v.Status != 0 {
+		s.WriteInt32(schemas.UpdateQuickSightQSearchConfigurationResponse_Status, v.Status)
+	}
+}
+func (v *UpdateQuickSightQSearchConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateQuickSightQSearchConfigurationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateQuickSightQSearchConfigurationResponse_QSearchStatus:
+			var ev string
+			if err := d.ReadString(schemas.UpdateQuickSightQSearchConfigurationResponse_QSearchStatus, &ev); err != nil {
+				return err
+			}
+			v.QSearchStatus = types.QSearchStatus(ev)
+			return nil
+		case schemas.UpdateQuickSightQSearchConfigurationResponse_RequestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.UpdateQuickSightQSearchConfigurationResponse_RequestId, v.RequestId)
+		case schemas.UpdateQuickSightQSearchConfigurationResponse_Status:
+			return d.ReadInt32(schemas.UpdateQuickSightQSearchConfigurationResponse_Status, &v.Status)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateQuickSightQSearchConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateQuickSightQSearchConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateQuickSightQSearchConfiguration, schemas.UpdateQuickSightQSearchConfigurationRequest, schemas.UpdateQuickSightQSearchConfigurationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateQuickSightQSearchConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateQuickSightQSearchConfiguration, schemas.UpdateQuickSightQSearchConfigurationRequest, schemas.UpdateQuickSightQSearchConfigurationResponse), output: &UpdateQuickSightQSearchConfigurationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package bedrock
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/bedrock/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrock/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -36,6 +38,18 @@ type GetInferenceProfileInput struct {
 	InferenceProfileIdentifier *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetInferenceProfileInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetInferenceProfileRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetInferenceProfileInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InferenceProfileIdentifier != nil {
+		s.WriteString(schemas.GetInferenceProfileRequest_inferenceProfileIdentifier, *v.InferenceProfileIdentifier)
+	}
 }
 
 type GetInferenceProfileOutput struct {
@@ -93,13 +107,85 @@ type GetInferenceProfileOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetInferenceProfileOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetInferenceProfileResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetInferenceProfileOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.GetInferenceProfileResponse_createdAt, *v.CreatedAt)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.GetInferenceProfileResponse_description, *v.Description)
+	}
+	if v.InferenceProfileArn != nil {
+		s.WriteString(schemas.GetInferenceProfileResponse_inferenceProfileArn, *v.InferenceProfileArn)
+	}
+	if v.InferenceProfileId != nil {
+		s.WriteString(schemas.GetInferenceProfileResponse_inferenceProfileId, *v.InferenceProfileId)
+	}
+	if v.InferenceProfileName != nil {
+		s.WriteString(schemas.GetInferenceProfileResponse_inferenceProfileName, *v.InferenceProfileName)
+	}
+	serializeInferenceProfileModels(s, schemas.GetInferenceProfileResponse_models, v.Models)
+	if v.Status != "" {
+		s.WriteString(schemas.GetInferenceProfileResponse_status, string(v.Status))
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.GetInferenceProfileResponse_type, string(v.Type))
+	}
+	if v.UpdatedAt != nil {
+		s.WriteTime(schemas.GetInferenceProfileResponse_updatedAt, *v.UpdatedAt)
+	}
+}
+func (v *GetInferenceProfileOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetInferenceProfileResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetInferenceProfileResponse_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.GetInferenceProfileResponse_createdAt, v.CreatedAt)
+		case schemas.GetInferenceProfileResponse_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.GetInferenceProfileResponse_description, v.Description)
+		case schemas.GetInferenceProfileResponse_inferenceProfileArn:
+			v.InferenceProfileArn = new(string)
+			return d.ReadString(schemas.GetInferenceProfileResponse_inferenceProfileArn, v.InferenceProfileArn)
+		case schemas.GetInferenceProfileResponse_inferenceProfileId:
+			v.InferenceProfileId = new(string)
+			return d.ReadString(schemas.GetInferenceProfileResponse_inferenceProfileId, v.InferenceProfileId)
+		case schemas.GetInferenceProfileResponse_inferenceProfileName:
+			v.InferenceProfileName = new(string)
+			return d.ReadString(schemas.GetInferenceProfileResponse_inferenceProfileName, v.InferenceProfileName)
+		case schemas.GetInferenceProfileResponse_models:
+			return deserializeInferenceProfileModels(d, schemas.GetInferenceProfileResponse_models, &v.Models)
+		case schemas.GetInferenceProfileResponse_status:
+			var ev string
+			if err := d.ReadString(schemas.GetInferenceProfileResponse_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.InferenceProfileStatus(ev)
+			return nil
+		case schemas.GetInferenceProfileResponse_type:
+			var ev string
+			if err := d.ReadString(schemas.GetInferenceProfileResponse_type, &ev); err != nil {
+				return err
+			}
+			v.Type = types.InferenceProfileType(ev)
+			return nil
+		case schemas.GetInferenceProfileResponse_updatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.GetInferenceProfileResponse_updatedAt, v.UpdatedAt)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetInferenceProfileMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetInferenceProfile{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetInferenceProfile, schemas.GetInferenceProfileRequest, schemas.GetInferenceProfileResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetInferenceProfile{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetInferenceProfile, schemas.GetInferenceProfileRequest, schemas.GetInferenceProfileResponse), output: &GetInferenceProfileOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

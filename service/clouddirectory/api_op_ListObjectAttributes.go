@@ -5,7 +5,9 @@ package clouddirectory
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/clouddirectory/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/clouddirectory/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -56,6 +58,37 @@ type ListObjectAttributesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListObjectAttributesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListObjectAttributesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListObjectAttributesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConsistencyLevel != "" {
+		s.WriteString(schemas.ListObjectAttributesRequest_ConsistencyLevel, string(v.ConsistencyLevel))
+	}
+	if v.DirectoryArn != nil {
+		s.WriteString(schemas.ListObjectAttributesRequest_DirectoryArn, *v.DirectoryArn)
+	}
+	if v.FacetFilter != nil {
+		s.WriteStruct(schemas.ListObjectAttributesRequest_FacetFilter)
+		v.FacetFilter.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListObjectAttributesRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListObjectAttributesRequest_NextToken, *v.NextToken)
+	}
+	if v.ObjectReference != nil {
+		s.WriteStruct(schemas.ListObjectAttributesRequest_ObjectReference)
+		v.ObjectReference.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type ListObjectAttributesOutput struct {
 
 	// Attributes map that is associated with the object. AttributeArn is the key, and
@@ -71,13 +104,35 @@ type ListObjectAttributesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListObjectAttributesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListObjectAttributesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListObjectAttributesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAttributeKeyAndValueList(s, schemas.ListObjectAttributesResponse_Attributes, v.Attributes)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListObjectAttributesResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListObjectAttributesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListObjectAttributesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListObjectAttributesResponse_Attributes:
+			return deserializeAttributeKeyAndValueList(d, schemas.ListObjectAttributesResponse_Attributes, &v.Attributes)
+		case schemas.ListObjectAttributesResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListObjectAttributesResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListObjectAttributesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListObjectAttributes{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListObjectAttributes, schemas.ListObjectAttributesRequest, schemas.ListObjectAttributesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListObjectAttributes{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListObjectAttributes, schemas.ListObjectAttributesRequest, schemas.ListObjectAttributesResponse), output: &ListObjectAttributesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

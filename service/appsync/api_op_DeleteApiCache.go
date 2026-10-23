@@ -4,6 +4,8 @@ package appsync
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/appsync/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -34,6 +36,18 @@ type DeleteApiCacheInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteApiCacheInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteApiCacheRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteApiCacheInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApiId != nil {
+		s.WriteString(schemas.DeleteApiCacheRequest_apiId, *v.ApiId)
+	}
+}
+
 // Represents the output of a DeleteApiCache operation.
 type DeleteApiCacheOutput struct {
 	// Metadata pertaining to the operation's result.
@@ -42,13 +56,26 @@ type DeleteApiCacheOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteApiCacheOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteApiCacheResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteApiCacheOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteApiCacheOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteApiCacheResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteApiCacheMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteApiCache{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteApiCache, schemas.DeleteApiCacheRequest, schemas.DeleteApiCacheResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteApiCache{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteApiCache, schemas.DeleteApiCacheRequest, schemas.DeleteApiCacheResponse), output: &DeleteApiCacheOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

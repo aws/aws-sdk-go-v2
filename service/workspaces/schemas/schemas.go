@@ -473,7 +473,7 @@ var WorkspacesService = smithy.NewServiceSchema(_WorkspacesService, "2015-04-08"
 var AccessDeniedException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.workspaces",
 	Name:      "AccessDeniedException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var AccessDeniedException_message *smithy.Schema
 
 var AccessEndpoint = smithy.NewSchema(smithy.ShapeID{
@@ -678,7 +678,7 @@ var _ApplicationList_member *smithy.Schema
 var ApplicationNotSupportedException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.workspaces",
 	Name:      "ApplicationNotSupportedException",
-}, smithy.ShapeTypeStructure, 0)
+}, smithy.ShapeTypeStructure, 0, &smithytraits.Error{Type: "client"})
 
 var ApplicationResourceAssociation = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.workspaces",
@@ -1000,7 +1000,7 @@ var _ClientUrl = smithy.NewSchema(smithy.ShapeID{
 var Compute = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.workspaces",
 	Name:      "Compute",
-}, smithy.ShapeTypeEnum, 23)
+}, smithy.ShapeTypeEnum, 27)
 var Compute_VALUE *smithy.Schema
 
 var Compute_STANDARD *smithy.Schema
@@ -1047,6 +1047,14 @@ var Compute_GRAPHICS_G6F_4XLARGE *smithy.Schema
 
 var Compute_GRAPHICS_GR6F_4XLARGE *smithy.Schema
 
+var Compute_GRAPHICS_G7_2XLARGE *smithy.Schema
+
+var Compute_GRAPHICS_G7_4XLARGE *smithy.Schema
+
+var Compute_GRAPHICS_G7_8XLARGE *smithy.Schema
+
+var Compute_GRAPHICS_G7_12XLARGE *smithy.Schema
+
 var _ComputeList = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.workspaces",
 	Name:      "ComputeList",
@@ -1056,7 +1064,7 @@ var _ComputeList_member *smithy.Schema
 var ComputeNotCompatibleException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.workspaces",
 	Name:      "ComputeNotCompatibleException",
-}, smithy.ShapeTypeStructure, 0)
+}, smithy.ShapeTypeStructure, 0, &smithytraits.Error{Type: "client"})
 
 var _ComputerName = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.workspaces",
@@ -1072,7 +1080,7 @@ var ComputeType_Name *smithy.Schema
 var ConflictException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.workspaces",
 	Name:      "ConflictException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var ConflictException_message *smithy.Schema
 
 var ConnectClientAddIn = smithy.NewSchema(smithy.ShapeID{
@@ -1691,12 +1699,14 @@ var _ImageBuildVersionArn = smithy.NewSchema(smithy.ShapeID{
 var ImageComputeType = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.workspaces",
 	Name:      "ImageComputeType",
-}, smithy.ShapeTypeEnum, 3)
+}, smithy.ShapeTypeEnum, 4)
 var ImageComputeType_BASE *smithy.Schema
 
 var ImageComputeType_GRAPHICS_G4DN *smithy.Schema
 
 var ImageComputeType_GRAPHICS_G6 *smithy.Schema
+
+var ImageComputeType_GRAPHICS_G7 *smithy.Schema
 
 var _ImageErrorMessage = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.workspaces",
@@ -1757,10 +1767,18 @@ var ImageType_OWNED *smithy.Schema
 
 var ImageType_SHARED *smithy.Schema
 
+var ImageValidationMode = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.workspaces",
+	Name:      "ImageValidationMode",
+}, smithy.ShapeTypeEnum, 2)
+var ImageValidationMode_CUSTOMER_MANAGED *smithy.Schema
+
+var ImageValidationMode_SERVICE_MANAGED *smithy.Schema
+
 var IncompatibleApplicationsException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.workspaces",
 	Name:      "IncompatibleApplicationsException",
-}, smithy.ShapeTypeStructure, 0)
+}, smithy.ShapeTypeStructure, 0, &smithytraits.Error{Type: "client"})
 
 var _InfrastructureConfigurationArn = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.workspaces",
@@ -1770,7 +1788,7 @@ var _InfrastructureConfigurationArn = smithy.NewSchema(smithy.ShapeID{
 var InternalServerException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.workspaces",
 	Name:      "InternalServerException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var InternalServerException_message *smithy.Schema
 
 var InternetFallbackProtocol = smithy.NewSchema(smithy.ShapeID{
@@ -1788,19 +1806,19 @@ var _InternetFallbackProtocolList_member *smithy.Schema
 var InvalidParameterCombinationException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.workspaces",
 	Name:      "InvalidParameterCombinationException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var InvalidParameterCombinationException_message *smithy.Schema
 
 var InvalidParameterValuesException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.workspaces",
 	Name:      "InvalidParameterValuesException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var InvalidParameterValuesException_message *smithy.Schema
 
 var InvalidResourceStateException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.workspaces",
 	Name:      "InvalidResourceStateException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var InvalidResourceStateException_message *smithy.Schema
 
 var _Ios2XLogo = smithy.NewSchema(smithy.ShapeID{
@@ -2088,7 +2106,7 @@ var _OperatingSystemNameList_member *smithy.Schema
 var OperatingSystemNotCompatibleException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.workspaces",
 	Name:      "OperatingSystemNotCompatibleException",
-}, smithy.ShapeTypeStructure, 0)
+}, smithy.ShapeTypeStructure, 0, &smithytraits.Error{Type: "client"})
 
 var OperatingSystemType = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.workspaces",
@@ -2101,13 +2119,13 @@ var OperatingSystemType_LINUX *smithy.Schema
 var OperationInProgressException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.workspaces",
 	Name:      "OperationInProgressException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var OperationInProgressException_message *smithy.Schema
 
 var OperationNotSupportedException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.workspaces",
 	Name:      "OperationNotSupportedException",
-}, smithy.ShapeTypeStructure, 2)
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"})
 var OperationNotSupportedException_message *smithy.Schema
 
 var OperationNotSupportedException_reason *smithy.Schema
@@ -2239,19 +2257,19 @@ var _RelatedWorkspaces_member *smithy.Schema
 var ResourceAlreadyExistsException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.workspaces",
 	Name:      "ResourceAlreadyExistsException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var ResourceAlreadyExistsException_message *smithy.Schema
 
 var ResourceAssociatedException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.workspaces",
 	Name:      "ResourceAssociatedException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var ResourceAssociatedException_message *smithy.Schema
 
 var ResourceCreationFailedException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.workspaces",
 	Name:      "ResourceCreationFailedException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var ResourceCreationFailedException_message *smithy.Schema
 
 var _ResourceIdList = smithy.NewSchema(smithy.ShapeID{
@@ -2263,7 +2281,7 @@ var _ResourceIdList_member *smithy.Schema
 var ResourceInUseException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.workspaces",
 	Name:      "ResourceInUseException",
-}, smithy.ShapeTypeStructure, 2)
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"})
 var ResourceInUseException_message *smithy.Schema
 
 var ResourceInUseException_ResourceId *smithy.Schema
@@ -2271,13 +2289,13 @@ var ResourceInUseException_ResourceId *smithy.Schema
 var ResourceLimitExceededException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.workspaces",
 	Name:      "ResourceLimitExceededException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var ResourceLimitExceededException_message *smithy.Schema
 
 var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.workspaces",
 	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 2)
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"})
 var ResourceNotFoundException_message *smithy.Schema
 
 var ResourceNotFoundException_ResourceId *smithy.Schema
@@ -2285,7 +2303,7 @@ var ResourceNotFoundException_ResourceId *smithy.Schema
 var ResourceUnavailableException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.workspaces",
 	Name:      "ResourceUnavailableException",
-}, smithy.ShapeTypeStructure, 2)
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"})
 var ResourceUnavailableException_message *smithy.Schema
 
 var ResourceUnavailableException_ResourceId *smithy.Schema
@@ -2608,13 +2626,13 @@ var _Timestamp = smithy.NewSchema(smithy.ShapeID{
 var UnsupportedNetworkConfigurationException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.workspaces",
 	Name:      "UnsupportedNetworkConfigurationException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var UnsupportedNetworkConfigurationException_message *smithy.Schema
 
 var UnsupportedWorkspaceConfigurationException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.workspaces",
 	Name:      "UnsupportedWorkspaceConfigurationException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var UnsupportedWorkspaceConfigurationException_message *smithy.Schema
 
 var _UpdateDescription = smithy.NewSchema(smithy.ShapeID{
@@ -2695,7 +2713,7 @@ var _UserVolumeSizeGib = smithy.NewSchema(smithy.ShapeID{
 var ValidationException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.workspaces",
 	Name:      "ValidationException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var ValidationException_message *smithy.Schema
 
 var _VolumeEncryptionKey = smithy.NewSchema(smithy.ShapeID{
@@ -3348,7 +3366,7 @@ var _WorkspaceResourceAssociationList_member *smithy.Schema
 var WorkspacesDefaultRoleNotFoundException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.workspaces",
 	Name:      "WorkspacesDefaultRoleNotFoundException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var WorkspacesDefaultRoleNotFoundException_message *smithy.Schema
 
 var WorkspacesIpGroup = smithy.NewSchema(smithy.ShapeID{
@@ -4569,7 +4587,7 @@ var ImportClientBrandingResult_DeviceTypeWeb *smithy.Schema
 var ImportCustomWorkspaceImageRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.workspaces",
 	Name:      "ImportCustomWorkspaceImageRequest",
-}, smithy.ShapeTypeStructure, 9)
+}, smithy.ShapeTypeStructure, 10)
 var ImportCustomWorkspaceImageRequest_ImageName *smithy.Schema
 
 var ImportCustomWorkspaceImageRequest_ImageDescription *smithy.Schema
@@ -4587,6 +4605,8 @@ var ImportCustomWorkspaceImageRequest_Platform *smithy.Schema
 var ImportCustomWorkspaceImageRequest_OsVersion *smithy.Schema
 
 var ImportCustomWorkspaceImageRequest_Tags *smithy.Schema
+
+var ImportCustomWorkspaceImageRequest_ImageValidationMode *smithy.Schema
 
 var ImportCustomWorkspaceImageResult = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.workspaces",
@@ -5334,6 +5354,14 @@ func init() {
 
 	Compute_GRAPHICS_GR6F_4XLARGE = Compute.AddMember("GRAPHICS_GR6F_4XLARGE", smithyprelude.Unit)
 
+	Compute_GRAPHICS_G7_2XLARGE = Compute.AddMember("GRAPHICS_G7_2XLARGE", smithyprelude.Unit)
+
+	Compute_GRAPHICS_G7_4XLARGE = Compute.AddMember("GRAPHICS_G7_4XLARGE", smithyprelude.Unit)
+
+	Compute_GRAPHICS_G7_8XLARGE = Compute.AddMember("GRAPHICS_G7_8XLARGE", smithyprelude.Unit)
+
+	Compute_GRAPHICS_G7_12XLARGE = Compute.AddMember("GRAPHICS_G7_12XLARGE", smithyprelude.Unit)
+
 	ComputeType_Name = ComputeType.AddMember("Name", Compute)
 
 	WorkspaceBundleState_AVAILABLE = WorkspaceBundleState.AddMember("AVAILABLE", smithyprelude.Unit)
@@ -6076,6 +6104,8 @@ func init() {
 
 	ImageComputeType_GRAPHICS_G6 = ImageComputeType.AddMember("GRAPHICS_G6", smithyprelude.Unit)
 
+	ImageComputeType_GRAPHICS_G7 = ImageComputeType.AddMember("GRAPHICS_G7", smithyprelude.Unit)
+
 	ImagePermission_SharedAccountId = ImagePermission.AddMember("SharedAccountId", _AwsAccount)
 
 	_ImagePermissions_member = _ImagePermissions.AddMember("member", ImagePermission)
@@ -6105,6 +6135,10 @@ func init() {
 	ImageType_OWNED = ImageType.AddMember("OWNED", smithyprelude.Unit)
 
 	ImageType_SHARED = ImageType.AddMember("SHARED", smithyprelude.Unit)
+
+	ImageValidationMode_CUSTOMER_MANAGED = ImageValidationMode.AddMember("CUSTOMER_MANAGED", smithyprelude.Unit)
+
+	ImageValidationMode_SERVICE_MANAGED = ImageValidationMode.AddMember("SERVICE_MANAGED", smithyprelude.Unit)
 
 	InternalServerException_message = InternalServerException.AddMember("message", _ExceptionMessage)
 
@@ -7189,6 +7223,8 @@ func init() {
 	ImportCustomWorkspaceImageRequest_OsVersion = ImportCustomWorkspaceImageRequest.AddMember("OsVersion", OSVersion)
 
 	ImportCustomWorkspaceImageRequest_Tags = ImportCustomWorkspaceImageRequest.AddMember("Tags", _TagList)
+
+	ImportCustomWorkspaceImageRequest_ImageValidationMode = ImportCustomWorkspaceImageRequest.AddMember("ImageValidationMode", ImageValidationMode)
 
 	ImportCustomWorkspaceImageResult_ImageId = ImportCustomWorkspaceImageResult.AddMember("ImageId", _WorkspaceImageId)
 

@@ -4,6 +4,8 @@ package quicksight
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/quicksight/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -38,6 +40,21 @@ type DeleteSpaceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteSpaceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteSpaceRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteSpaceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AwsAccountId != nil {
+		s.WriteString(schemas.DeleteSpaceRequest_AwsAccountId, *v.AwsAccountId)
+	}
+	if v.SpaceId != nil {
+		s.WriteString(schemas.DeleteSpaceRequest_SpaceId, *v.SpaceId)
+	}
+}
+
 type DeleteSpaceOutput struct {
 
 	// The ID of the space.
@@ -57,13 +74,44 @@ type DeleteSpaceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteSpaceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteSpaceResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteSpaceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RequestId != nil {
+		s.WriteString(schemas.DeleteSpaceResponse_RequestId, *v.RequestId)
+	}
+	if v.SpaceArn != nil {
+		s.WriteString(schemas.DeleteSpaceResponse_spaceArn, *v.SpaceArn)
+	}
+	if v.SpaceId != nil {
+		s.WriteString(schemas.DeleteSpaceResponse_spaceId, *v.SpaceId)
+	}
+}
+func (v *DeleteSpaceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteSpaceResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteSpaceResponse_RequestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.DeleteSpaceResponse_RequestId, v.RequestId)
+		case schemas.DeleteSpaceResponse_spaceArn:
+			v.SpaceArn = new(string)
+			return d.ReadString(schemas.DeleteSpaceResponse_spaceArn, v.SpaceArn)
+		case schemas.DeleteSpaceResponse_spaceId:
+			v.SpaceId = new(string)
+			return d.ReadString(schemas.DeleteSpaceResponse_spaceId, v.SpaceId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteSpaceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteSpace{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteSpace, schemas.DeleteSpaceRequest, schemas.DeleteSpaceResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteSpace{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteSpace, schemas.DeleteSpaceRequest, schemas.DeleteSpaceResponse), output: &DeleteSpaceOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

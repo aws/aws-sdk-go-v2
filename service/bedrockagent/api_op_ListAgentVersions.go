@@ -5,7 +5,9 @@ package bedrockagent
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/bedrockagent/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagent/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -46,6 +48,24 @@ type ListAgentVersionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAgentVersionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAgentVersionsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAgentVersionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AgentId != nil {
+		s.WriteString(schemas.ListAgentVersionsRequest_agentId, *v.AgentId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListAgentVersionsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAgentVersionsRequest_nextToken, *v.NextToken)
+	}
+}
+
 type ListAgentVersionsOutput struct {
 
 	// A list of objects, each of which contains information about a version of the
@@ -65,13 +85,35 @@ type ListAgentVersionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAgentVersionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAgentVersionsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAgentVersionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAgentVersionSummaries(s, schemas.ListAgentVersionsResponse_agentVersionSummaries, v.AgentVersionSummaries)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAgentVersionsResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListAgentVersionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListAgentVersionsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListAgentVersionsResponse_agentVersionSummaries:
+			return deserializeAgentVersionSummaries(d, schemas.ListAgentVersionsResponse_agentVersionSummaries, &v.AgentVersionSummaries)
+		case schemas.ListAgentVersionsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListAgentVersionsResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListAgentVersionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListAgentVersions{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAgentVersions, schemas.ListAgentVersionsRequest, schemas.ListAgentVersionsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListAgentVersions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAgentVersions, schemas.ListAgentVersionsRequest, schemas.ListAgentVersionsResponse), output: &ListAgentVersionsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -5,7 +5,9 @@ package redshiftserverless
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/redshiftserverless/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/redshiftserverless/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -56,6 +58,36 @@ type ListSnapshotsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListSnapshotsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListSnapshotsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListSnapshotsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EndTime != nil {
+		s.WriteTime(schemas.ListSnapshotsRequest_endTime, *v.EndTime)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListSnapshotsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NamespaceArn != nil {
+		s.WriteString(schemas.ListSnapshotsRequest_namespaceArn, *v.NamespaceArn)
+	}
+	if v.NamespaceName != nil {
+		s.WriteString(schemas.ListSnapshotsRequest_namespaceName, *v.NamespaceName)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListSnapshotsRequest_nextToken, *v.NextToken)
+	}
+	if v.OwnerAccount != nil {
+		s.WriteString(schemas.ListSnapshotsRequest_ownerAccount, *v.OwnerAccount)
+	}
+	if v.StartTime != nil {
+		s.WriteTime(schemas.ListSnapshotsRequest_startTime, *v.StartTime)
+	}
+}
+
 type ListSnapshotsOutput struct {
 
 	// If nextToken is returned, there are more results available. The value of
@@ -72,13 +104,35 @@ type ListSnapshotsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListSnapshotsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListSnapshotsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListSnapshotsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListSnapshotsResponse_nextToken, *v.NextToken)
+	}
+	serializeSnapshotList(s, schemas.ListSnapshotsResponse_snapshots, v.Snapshots)
+}
+func (v *ListSnapshotsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListSnapshotsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListSnapshotsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListSnapshotsResponse_nextToken, v.NextToken)
+		case schemas.ListSnapshotsResponse_snapshots:
+			return deserializeSnapshotList(d, schemas.ListSnapshotsResponse_snapshots, &v.Snapshots)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListSnapshotsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListSnapshots{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListSnapshots, schemas.ListSnapshotsRequest, schemas.ListSnapshotsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListSnapshots{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListSnapshots, schemas.ListSnapshotsRequest, schemas.ListSnapshotsResponse), output: &ListSnapshotsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

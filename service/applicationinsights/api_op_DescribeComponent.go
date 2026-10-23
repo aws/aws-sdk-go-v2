@@ -4,7 +4,9 @@ package applicationinsights
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/applicationinsights/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/applicationinsights/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -43,6 +45,24 @@ type DescribeComponentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeComponentInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeComponentRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeComponentInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountId != nil {
+		s.WriteString(schemas.DescribeComponentRequest_AccountId, *v.AccountId)
+	}
+	if v.ComponentName != nil {
+		s.WriteString(schemas.DescribeComponentRequest_ComponentName, *v.ComponentName)
+	}
+	if v.ResourceGroupName != nil {
+		s.WriteString(schemas.DescribeComponentRequest_ResourceGroupName, *v.ResourceGroupName)
+	}
+}
+
 type DescribeComponentOutput struct {
 
 	// Describes a standalone resource or similarly grouped resources that the
@@ -58,13 +78,37 @@ type DescribeComponentOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeComponentOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeComponentResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeComponentOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationComponent != nil {
+		s.WriteStruct(schemas.DescribeComponentResponse_ApplicationComponent)
+		v.ApplicationComponent.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeResourceList(s, schemas.DescribeComponentResponse_ResourceList, v.ResourceList)
+}
+func (v *DescribeComponentOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeComponentResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeComponentResponse_ApplicationComponent:
+			v.ApplicationComponent = &types.ApplicationComponent{}
+			return v.ApplicationComponent.Deserialize(d)
+		case schemas.DescribeComponentResponse_ResourceList:
+			return deserializeResourceList(d, schemas.DescribeComponentResponse_ResourceList, &v.ResourceList)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeComponentMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpDescribeComponent{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeComponent, schemas.DescribeComponentRequest, schemas.DescribeComponentResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpDescribeComponent{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeComponent, schemas.DescribeComponentRequest, schemas.DescribeComponentResponse), output: &DescribeComponentOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

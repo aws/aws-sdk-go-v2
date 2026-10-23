@@ -5,7 +5,9 @@ package glue
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/glue/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/glue/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -36,6 +38,21 @@ type GetCrawlersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetCrawlersInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetCrawlersRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetCrawlersInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.GetCrawlersRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetCrawlersRequest_NextToken, *v.NextToken)
+	}
+}
+
 type GetCrawlersOutput struct {
 
 	// A list of crawler metadata.
@@ -51,13 +68,35 @@ type GetCrawlersOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetCrawlersOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetCrawlersResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetCrawlersOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeCrawlerList(s, schemas.GetCrawlersResponse_Crawlers, v.Crawlers)
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetCrawlersResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *GetCrawlersOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetCrawlersResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetCrawlersResponse_Crawlers:
+			return deserializeCrawlerList(d, schemas.GetCrawlersResponse_Crawlers, &v.Crawlers)
+		case schemas.GetCrawlersResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.GetCrawlersResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetCrawlersMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetCrawlers{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetCrawlers, schemas.GetCrawlersRequest, schemas.GetCrawlersResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetCrawlers{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetCrawlers, schemas.GetCrawlersRequest, schemas.GetCrawlersResponse), output: &GetCrawlersOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

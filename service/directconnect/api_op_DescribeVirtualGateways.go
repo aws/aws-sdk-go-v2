@@ -4,7 +4,9 @@ package directconnect
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/directconnect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/directconnect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -36,6 +38,22 @@ type DescribeVirtualGatewaysInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeVirtualGatewaysInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeVirtualGatewaysInput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DescribeVirtualGatewaysInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
+
 type DescribeVirtualGatewaysOutput struct {
 
 	// The virtual private gateways.
@@ -47,13 +65,29 @@ type DescribeVirtualGatewaysOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeVirtualGatewaysOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.VirtualGateways)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeVirtualGatewaysOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeVirtualGatewayList(s, schemas.VirtualGateways_virtualGateways, v.VirtualGateways)
+}
+func (v *DescribeVirtualGatewaysOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.VirtualGateways, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.VirtualGateways_virtualGateways:
+			return deserializeVirtualGatewayList(d, schemas.VirtualGateways_virtualGateways, &v.VirtualGateways)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeVirtualGatewaysMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeVirtualGateways{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeVirtualGateways, nil, schemas.VirtualGateways)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeVirtualGateways{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeVirtualGateways, nil, schemas.VirtualGateways), output: &DescribeVirtualGatewaysOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

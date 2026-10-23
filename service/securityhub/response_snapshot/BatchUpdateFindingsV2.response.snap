@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"ProcessedFindings":[{"FindingIdentifier":{"CloudAccountUid":"__CloudAccountUid__","FindingInfoUid":"__FindingInfoUid__","MetadataProductUid":"__MetadataProductUid__"},"MetadataUid":"__MetadataUid__"},{"FindingIdentifier":{"CloudAccountUid":"__CloudAccountUid__","FindingInfoUid":"__FindingInfoUid__","MetadataProductUid":"__MetadataProductUid__"},"MetadataUid":"__MetadataUid__"}],"UnprocessedFindings":[{"ErrorCode":"ResourceNotFoundException","ErrorMessage":"__ErrorMessage__","FindingIdentifier":{"CloudAccountUid":"__CloudAccountUid__","FindingInfoUid":"__FindingInfoUid__","MetadataProductUid":"__MetadataProductUid__"},"MetadataUid":"__MetadataUid__"},{"ErrorCode":"ResourceNotFoundException","ErrorMessage":"__ErrorMessage__","FindingIdentifier":{"CloudAccountUid":"__CloudAccountUid__","FindingInfoUid":"__FindingInfoUid__","MetadataProductUid":"__MetadataProductUid__"},"MetadataUid":"__MetadataUid__"}]}

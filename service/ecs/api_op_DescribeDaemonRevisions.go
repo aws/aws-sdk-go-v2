@@ -4,7 +4,9 @@ package ecs
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/ecs/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ecs/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,16 @@ type DescribeDaemonRevisionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeDaemonRevisionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeDaemonRevisionsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeDaemonRevisionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeStringList(s, schemas.DescribeDaemonRevisionsRequest_daemonRevisionArns, v.DaemonRevisionArns)
+}
+
 type DescribeDaemonRevisionsOutput struct {
 
 	// The list of daemon revisions.
@@ -53,13 +65,32 @@ type DescribeDaemonRevisionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeDaemonRevisionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeDaemonRevisionsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeDaemonRevisionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDaemonRevisions(s, schemas.DescribeDaemonRevisionsResponse_daemonRevisions, v.DaemonRevisions)
+	serializeFailures(s, schemas.DescribeDaemonRevisionsResponse_failures, v.Failures)
+}
+func (v *DescribeDaemonRevisionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeDaemonRevisionsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeDaemonRevisionsResponse_daemonRevisions:
+			return deserializeDaemonRevisions(d, schemas.DescribeDaemonRevisionsResponse_daemonRevisions, &v.DaemonRevisions)
+		case schemas.DescribeDaemonRevisionsResponse_failures:
+			return deserializeFailures(d, schemas.DescribeDaemonRevisionsResponse_failures, &v.Failures)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeDaemonRevisionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeDaemonRevisions{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeDaemonRevisions, schemas.DescribeDaemonRevisionsRequest, schemas.DescribeDaemonRevisionsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeDaemonRevisions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeDaemonRevisions, schemas.DescribeDaemonRevisionsRequest, schemas.DescribeDaemonRevisionsResponse), output: &DescribeDaemonRevisionsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

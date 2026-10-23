@@ -4,7 +4,9 @@ package kafka
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/kafka/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/kafka/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -33,6 +35,18 @@ type DescribeReplicatorInput struct {
 	ReplicatorArn *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DescribeReplicatorInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeReplicatorRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeReplicatorInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ReplicatorArn != nil {
+		s.WriteString(schemas.DescribeReplicatorRequest_ReplicatorArn, *v.ReplicatorArn)
+	}
 }
 
 type DescribeReplicatorOutput struct {
@@ -88,13 +102,109 @@ type DescribeReplicatorOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeReplicatorOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeReplicatorResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeReplicatorOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.DescribeReplicatorResponse_CreationTime, *v.CreationTime)
+	}
+	if v.CurrentVersion != nil {
+		s.WriteString(schemas.DescribeReplicatorResponse_CurrentVersion, *v.CurrentVersion)
+	}
+	if v.IsReplicatorReference != nil {
+		s.WriteBool(schemas.DescribeReplicatorResponse_IsReplicatorReference, *v.IsReplicatorReference)
+	}
+	serialize__listOfKafkaClusterDescription(s, schemas.DescribeReplicatorResponse_KafkaClusters, v.KafkaClusters)
+	if v.LogDelivery != nil {
+		s.WriteStruct(schemas.DescribeReplicatorResponse_LogDelivery)
+		v.LogDelivery.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serialize__listOfReplicationInfoDescription(s, schemas.DescribeReplicatorResponse_ReplicationInfoList, v.ReplicationInfoList)
+	if v.ReplicatorArn != nil {
+		s.WriteString(schemas.DescribeReplicatorResponse_ReplicatorArn, *v.ReplicatorArn)
+	}
+	if v.ReplicatorDescription != nil {
+		s.WriteString(schemas.DescribeReplicatorResponse_ReplicatorDescription, *v.ReplicatorDescription)
+	}
+	if v.ReplicatorName != nil {
+		s.WriteString(schemas.DescribeReplicatorResponse_ReplicatorName, *v.ReplicatorName)
+	}
+	if v.ReplicatorResourceArn != nil {
+		s.WriteString(schemas.DescribeReplicatorResponse_ReplicatorResourceArn, *v.ReplicatorResourceArn)
+	}
+	if v.ReplicatorState != "" {
+		s.WriteString(schemas.DescribeReplicatorResponse_ReplicatorState, string(v.ReplicatorState))
+	}
+	if v.ServiceExecutionRoleArn != nil {
+		s.WriteString(schemas.DescribeReplicatorResponse_ServiceExecutionRoleArn, *v.ServiceExecutionRoleArn)
+	}
+	if v.StateInfo != nil {
+		s.WriteStruct(schemas.DescribeReplicatorResponse_StateInfo)
+		v.StateInfo.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serialize__mapOf__string(s, schemas.DescribeReplicatorResponse_Tags, v.Tags)
+}
+func (v *DescribeReplicatorOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeReplicatorResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeReplicatorResponse_CreationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.DescribeReplicatorResponse_CreationTime, v.CreationTime)
+		case schemas.DescribeReplicatorResponse_CurrentVersion:
+			v.CurrentVersion = new(string)
+			return d.ReadString(schemas.DescribeReplicatorResponse_CurrentVersion, v.CurrentVersion)
+		case schemas.DescribeReplicatorResponse_IsReplicatorReference:
+			v.IsReplicatorReference = new(bool)
+			return d.ReadBool(schemas.DescribeReplicatorResponse_IsReplicatorReference, v.IsReplicatorReference)
+		case schemas.DescribeReplicatorResponse_KafkaClusters:
+			return deserialize__listOfKafkaClusterDescription(d, schemas.DescribeReplicatorResponse_KafkaClusters, &v.KafkaClusters)
+		case schemas.DescribeReplicatorResponse_LogDelivery:
+			v.LogDelivery = &types.LogDelivery{}
+			return v.LogDelivery.Deserialize(d)
+		case schemas.DescribeReplicatorResponse_ReplicationInfoList:
+			return deserialize__listOfReplicationInfoDescription(d, schemas.DescribeReplicatorResponse_ReplicationInfoList, &v.ReplicationInfoList)
+		case schemas.DescribeReplicatorResponse_ReplicatorArn:
+			v.ReplicatorArn = new(string)
+			return d.ReadString(schemas.DescribeReplicatorResponse_ReplicatorArn, v.ReplicatorArn)
+		case schemas.DescribeReplicatorResponse_ReplicatorDescription:
+			v.ReplicatorDescription = new(string)
+			return d.ReadString(schemas.DescribeReplicatorResponse_ReplicatorDescription, v.ReplicatorDescription)
+		case schemas.DescribeReplicatorResponse_ReplicatorName:
+			v.ReplicatorName = new(string)
+			return d.ReadString(schemas.DescribeReplicatorResponse_ReplicatorName, v.ReplicatorName)
+		case schemas.DescribeReplicatorResponse_ReplicatorResourceArn:
+			v.ReplicatorResourceArn = new(string)
+			return d.ReadString(schemas.DescribeReplicatorResponse_ReplicatorResourceArn, v.ReplicatorResourceArn)
+		case schemas.DescribeReplicatorResponse_ReplicatorState:
+			var ev string
+			if err := d.ReadString(schemas.DescribeReplicatorResponse_ReplicatorState, &ev); err != nil {
+				return err
+			}
+			v.ReplicatorState = types.ReplicatorState(ev)
+			return nil
+		case schemas.DescribeReplicatorResponse_ServiceExecutionRoleArn:
+			v.ServiceExecutionRoleArn = new(string)
+			return d.ReadString(schemas.DescribeReplicatorResponse_ServiceExecutionRoleArn, v.ServiceExecutionRoleArn)
+		case schemas.DescribeReplicatorResponse_StateInfo:
+			v.StateInfo = &types.ReplicationStateInfo{}
+			return v.StateInfo.Deserialize(d)
+		case schemas.DescribeReplicatorResponse_Tags:
+			return deserialize__mapOf__string(d, schemas.DescribeReplicatorResponse_Tags, &v.Tags)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeReplicatorMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeReplicator{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeReplicator, schemas.DescribeReplicatorRequest, schemas.DescribeReplicatorResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeReplicator{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeReplicator, schemas.DescribeReplicatorRequest, schemas.DescribeReplicatorResponse), output: &DescribeReplicatorOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

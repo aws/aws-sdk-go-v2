@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"data":"__Data__","resourceArn":"__ResourceArn__","url":"__Url__"}

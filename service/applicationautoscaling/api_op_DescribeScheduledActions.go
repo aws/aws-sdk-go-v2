@@ -5,7 +5,9 @@ package applicationautoscaling
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/applicationautoscaling/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/applicationautoscaling/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -217,6 +219,31 @@ type DescribeScheduledActionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeScheduledActionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeScheduledActionsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeScheduledActionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.DescribeScheduledActionsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeScheduledActionsRequest_NextToken, *v.NextToken)
+	}
+	if v.ResourceId != nil {
+		s.WriteString(schemas.DescribeScheduledActionsRequest_ResourceId, *v.ResourceId)
+	}
+	if v.ScalableDimension != "" {
+		s.WriteString(schemas.DescribeScheduledActionsRequest_ScalableDimension, string(v.ScalableDimension))
+	}
+	serializeResourceIdsMaxLen1600(s, schemas.DescribeScheduledActionsRequest_ScheduledActionNames, v.ScheduledActionNames)
+	if v.ServiceNamespace != "" {
+		s.WriteString(schemas.DescribeScheduledActionsRequest_ServiceNamespace, string(v.ServiceNamespace))
+	}
+}
+
 type DescribeScheduledActionsOutput struct {
 
 	// The token required to get the next set of results. This value is null if there
@@ -232,13 +259,35 @@ type DescribeScheduledActionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeScheduledActionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeScheduledActionsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeScheduledActionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeScheduledActionsResponse_NextToken, *v.NextToken)
+	}
+	serializeScheduledActions(s, schemas.DescribeScheduledActionsResponse_ScheduledActions, v.ScheduledActions)
+}
+func (v *DescribeScheduledActionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeScheduledActionsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeScheduledActionsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.DescribeScheduledActionsResponse_NextToken, v.NextToken)
+		case schemas.DescribeScheduledActionsResponse_ScheduledActions:
+			return deserializeScheduledActions(d, schemas.DescribeScheduledActionsResponse_ScheduledActions, &v.ScheduledActions)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeScheduledActionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeScheduledActions{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeScheduledActions, schemas.DescribeScheduledActionsRequest, schemas.DescribeScheduledActionsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeScheduledActions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeScheduledActions, schemas.DescribeScheduledActionsRequest, schemas.DescribeScheduledActionsResponse), output: &DescribeScheduledActionsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

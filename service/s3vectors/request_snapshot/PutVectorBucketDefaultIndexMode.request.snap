@@ -1,0 +1,5 @@
+POST /PutVectorBucketDefaultIndexMode
+
+Content-Type: application/json
+
+{"defaultIndexMode":"CLASSIC","vectorBucketArn":"__VectorBucketArn__","vectorBucketName":"__VectorBucketName__"}

@@ -5,7 +5,9 @@ package devopsguru
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/devopsguru/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/devopsguru/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -36,6 +38,18 @@ type GetCostEstimationInput struct {
 	NextToken *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetCostEstimationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetCostEstimationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetCostEstimationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetCostEstimationRequest_NextToken, *v.NextToken)
+	}
 }
 
 type GetCostEstimationOutput struct {
@@ -70,13 +84,66 @@ type GetCostEstimationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetCostEstimationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetCostEstimationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetCostEstimationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeServiceResourceCosts(s, schemas.GetCostEstimationResponse_Costs, v.Costs)
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetCostEstimationResponse_NextToken, *v.NextToken)
+	}
+	if v.ResourceCollection != nil {
+		s.WriteStruct(schemas.GetCostEstimationResponse_ResourceCollection)
+		v.ResourceCollection.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.GetCostEstimationResponse_Status, string(v.Status))
+	}
+	if v.TimeRange != nil {
+		s.WriteStruct(schemas.GetCostEstimationResponse_TimeRange)
+		v.TimeRange.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TotalCost != 0 {
+		s.WriteFloat64(schemas.GetCostEstimationResponse_TotalCost, v.TotalCost)
+	}
+}
+func (v *GetCostEstimationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetCostEstimationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetCostEstimationResponse_Costs:
+			return deserializeServiceResourceCosts(d, schemas.GetCostEstimationResponse_Costs, &v.Costs)
+		case schemas.GetCostEstimationResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.GetCostEstimationResponse_NextToken, v.NextToken)
+		case schemas.GetCostEstimationResponse_ResourceCollection:
+			v.ResourceCollection = &types.CostEstimationResourceCollectionFilter{}
+			return v.ResourceCollection.Deserialize(d)
+		case schemas.GetCostEstimationResponse_Status:
+			var ev string
+			if err := d.ReadString(schemas.GetCostEstimationResponse_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.CostEstimationStatus(ev)
+			return nil
+		case schemas.GetCostEstimationResponse_TimeRange:
+			v.TimeRange = &types.CostEstimationTimeRange{}
+			return v.TimeRange.Deserialize(d)
+		case schemas.GetCostEstimationResponse_TotalCost:
+			return d.ReadFloat64(schemas.GetCostEstimationResponse_TotalCost, &v.TotalCost)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetCostEstimationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetCostEstimation{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetCostEstimation, schemas.GetCostEstimationRequest, schemas.GetCostEstimationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetCostEstimation{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetCostEstimation, schemas.GetCostEstimationRequest, schemas.GetCostEstimationResponse), output: &GetCostEstimationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package quicksight
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/quicksight/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/quicksight/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -55,6 +57,28 @@ type CreateLimitsProfileInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateLimitsProfileInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateLimitsProfileRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateLimitsProfileInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountId != nil {
+		s.WriteString(schemas.CreateLimitsProfileRequest_accountId, *v.AccountId)
+	}
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateLimitsProfileRequest_clientToken, *v.ClientToken)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreateLimitsProfileRequest_description, *v.Description)
+	}
+	if v.ProfileName != nil {
+		s.WriteString(schemas.CreateLimitsProfileRequest_profileName, *v.ProfileName)
+	}
+	serializeCreateLimitsProfileRequestResourceLimitsMap(s, schemas.CreateLimitsProfileRequest_resourceLimits, v.ResourceLimits)
+}
+
 type CreateLimitsProfileOutput struct {
 
 	// The Amazon Resource Name (ARN) of the created limits profile.
@@ -73,13 +97,38 @@ type CreateLimitsProfileOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateLimitsProfileOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateLimitsProfileResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateLimitsProfileOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.CreateLimitsProfileResponse_arn, *v.Arn)
+	}
+	if v.ProfileId != nil {
+		s.WriteString(schemas.CreateLimitsProfileResponse_profileId, *v.ProfileId)
+	}
+}
+func (v *CreateLimitsProfileOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateLimitsProfileResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateLimitsProfileResponse_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.CreateLimitsProfileResponse_arn, v.Arn)
+		case schemas.CreateLimitsProfileResponse_profileId:
+			v.ProfileId = new(string)
+			return d.ReadString(schemas.CreateLimitsProfileResponse_profileId, v.ProfileId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateLimitsProfileMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateLimitsProfile{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateLimitsProfile, schemas.CreateLimitsProfileRequest, schemas.CreateLimitsProfileResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateLimitsProfile{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateLimitsProfile, schemas.CreateLimitsProfileRequest, schemas.CreateLimitsProfileResponse), output: &CreateLimitsProfileOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

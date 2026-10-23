@@ -5,7 +5,9 @@ package costoptimizationhub
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/costoptimizationhub/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/costoptimizationhub/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -46,6 +48,34 @@ type ListRecommendationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListRecommendationsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListRecommendationsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListRecommendationsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Filter != nil {
+		s.WriteStruct(schemas.ListRecommendationsRequest_filter)
+		v.Filter.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.IncludeAllRecommendations != false {
+		s.WriteBool(schemas.ListRecommendationsRequest_includeAllRecommendations, v.IncludeAllRecommendations)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListRecommendationsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListRecommendationsRequest_nextToken, *v.NextToken)
+	}
+	if v.OrderBy != nil {
+		s.WriteStruct(schemas.ListRecommendationsRequest_orderBy)
+		v.OrderBy.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type ListRecommendationsOutput struct {
 
 	// List of all savings recommendations.
@@ -60,13 +90,35 @@ type ListRecommendationsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListRecommendationsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListRecommendationsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListRecommendationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeRecommendationList(s, schemas.ListRecommendationsResponse_items, v.Items)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListRecommendationsResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListRecommendationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListRecommendationsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListRecommendationsResponse_items:
+			return deserializeRecommendationList(d, schemas.ListRecommendationsResponse_items, &v.Items)
+		case schemas.ListRecommendationsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListRecommendationsResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListRecommendationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpListRecommendations{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListRecommendations, schemas.ListRecommendationsRequest, schemas.ListRecommendationsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpListRecommendations{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListRecommendations, schemas.ListRecommendationsRequest, schemas.ListRecommendationsResponse), output: &ListRecommendationsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

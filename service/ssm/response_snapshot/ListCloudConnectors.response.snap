@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AmazonSSM.ListCloudConnectors
+
+{"CloudConnectors":[{"CloudConnectorId":"__CloudConnectorId__","CreatedAt":946684800,"Description":"__Description__","DisplayName":"__DisplayName__","RoleArn":"__RoleArn__","UpdatedAt":946684800},{"CloudConnectorId":"__CloudConnectorId__","CreatedAt":946684800,"Description":"__Description__","DisplayName":"__DisplayName__","RoleArn":"__RoleArn__","UpdatedAt":946684800}],"NextToken":"__NextToken__"}

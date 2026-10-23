@@ -5,7 +5,9 @@ package directoryservicedata
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/directoryservicedata/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/directoryservicedata/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -59,6 +61,27 @@ type ListUsersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListUsersInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListUsersRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListUsersInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DirectoryId != nil {
+		s.WriteString(schemas.ListUsersRequest_DirectoryId, *v.DirectoryId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListUsersRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListUsersRequest_NextToken, *v.NextToken)
+	}
+	if v.Realm != nil {
+		s.WriteString(schemas.ListUsersRequest_Realm, *v.Realm)
+	}
+}
+
 type ListUsersOutput struct {
 
 	//  The identifier (ID) of the directory that's associated with the user.
@@ -80,13 +103,47 @@ type ListUsersOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListUsersOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListUsersResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListUsersOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DirectoryId != nil {
+		s.WriteString(schemas.ListUsersResult_DirectoryId, *v.DirectoryId)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListUsersResult_NextToken, *v.NextToken)
+	}
+	if v.Realm != nil {
+		s.WriteString(schemas.ListUsersResult_Realm, *v.Realm)
+	}
+	serializeUserSummaryList(s, schemas.ListUsersResult_Users, v.Users)
+}
+func (v *ListUsersOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListUsersResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListUsersResult_DirectoryId:
+			v.DirectoryId = new(string)
+			return d.ReadString(schemas.ListUsersResult_DirectoryId, v.DirectoryId)
+		case schemas.ListUsersResult_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListUsersResult_NextToken, v.NextToken)
+		case schemas.ListUsersResult_Realm:
+			v.Realm = new(string)
+			return d.ReadString(schemas.ListUsersResult_Realm, v.Realm)
+		case schemas.ListUsersResult_Users:
+			return deserializeUserSummaryList(d, schemas.ListUsersResult_Users, &v.Users)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListUsersMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListUsers{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListUsers, schemas.ListUsersRequest, schemas.ListUsersResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListUsers{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListUsers, schemas.ListUsersRequest, schemas.ListUsersResult), output: &ListUsersOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

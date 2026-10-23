@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: IotThingsGraphFrontEndService.UndeploySystemInstance
+
+{"summary":{"arn":"__Arn__","createdAt":946684800,"greengrassGroupId":"__GreengrassGroupId__","greengrassGroupName":"__GreengrassGroupName__","greengrassGroupVersionId":"__GreengrassGroupVersionId__","id":"__Id__","status":"NOT_DEPLOYED","target":"GREENGRASS","updatedAt":946684800}}

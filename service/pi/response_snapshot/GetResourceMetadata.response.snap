@@ -1,5 +1,6 @@
 200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: PerformanceInsightsv20180227.GetResourceMetadata
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"Features":{"key0":{"Status":"ENABLED"}},"Identifier":"__Identifier__"}
+¿hFeatures¿dkey0¿fStatusgENABLEDÿÿjIdentifiern__Identifier__ÿ

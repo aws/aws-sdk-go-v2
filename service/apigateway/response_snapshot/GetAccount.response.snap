@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"apiKeyVersion":"__ApiKeyVersion__","cloudwatchRoleArn":"__CloudwatchRoleArn__","features":["__Member__","__Member__"],"throttleSettings":{"burstLimit":1,"rateLimit":1}}

@@ -4,6 +4,8 @@ package quicksight
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/quicksight/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -38,6 +40,21 @@ type DeleteLimitsProfileInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteLimitsProfileInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteLimitsProfileRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteLimitsProfileInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountId != nil {
+		s.WriteString(schemas.DeleteLimitsProfileRequest_accountId, *v.AccountId)
+	}
+	if v.ProfileId != nil {
+		s.WriteString(schemas.DeleteLimitsProfileRequest_profileId, *v.ProfileId)
+	}
+}
+
 type DeleteLimitsProfileOutput struct {
 
 	// The Amazon Resource Name (ARN) of the deleted limits profile.
@@ -51,13 +68,32 @@ type DeleteLimitsProfileOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteLimitsProfileOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteLimitsProfileResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteLimitsProfileOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.DeleteLimitsProfileResponse_arn, *v.Arn)
+	}
+}
+func (v *DeleteLimitsProfileOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteLimitsProfileResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteLimitsProfileResponse_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.DeleteLimitsProfileResponse_arn, v.Arn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteLimitsProfileMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteLimitsProfile{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteLimitsProfile, schemas.DeleteLimitsProfileRequest, schemas.DeleteLimitsProfileResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteLimitsProfile{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteLimitsProfile, schemas.DeleteLimitsProfileRequest, schemas.DeleteLimitsProfileResponse), output: &DeleteLimitsProfileOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

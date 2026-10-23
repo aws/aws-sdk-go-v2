@@ -5,7 +5,9 @@ package medialive
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/medialive/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/medialive/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -63,6 +65,32 @@ type CreateEventBridgeRuleTemplateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateEventBridgeRuleTemplateInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateEventBridgeRuleTemplateRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateEventBridgeRuleTemplateInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.CreateEventBridgeRuleTemplateRequest_Description, *v.Description)
+	}
+	serialize__listOfEventBridgeRuleTemplateTarget(s, schemas.CreateEventBridgeRuleTemplateRequest_EventTargets, v.EventTargets)
+	if v.EventType != "" {
+		s.WriteString(schemas.CreateEventBridgeRuleTemplateRequest_EventType, string(v.EventType))
+	}
+	if v.GroupIdentifier != nil {
+		s.WriteString(schemas.CreateEventBridgeRuleTemplateRequest_GroupIdentifier, *v.GroupIdentifier)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateEventBridgeRuleTemplateRequest_Name, *v.Name)
+	}
+	if v.RequestId != nil {
+		s.WriteString(schemas.CreateEventBridgeRuleTemplateRequest_RequestId, *v.RequestId)
+	}
+	serializeTagMap(s, schemas.CreateEventBridgeRuleTemplateRequest_Tags, v.Tags)
+}
+
 // Placeholder documentation for CreateEventBridgeRuleTemplateResponse
 type CreateEventBridgeRuleTemplateOutput struct {
 
@@ -105,13 +133,84 @@ type CreateEventBridgeRuleTemplateOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateEventBridgeRuleTemplateOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateEventBridgeRuleTemplateResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateEventBridgeRuleTemplateOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.CreateEventBridgeRuleTemplateResponse_Arn, *v.Arn)
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.CreateEventBridgeRuleTemplateResponse_CreatedAt, *v.CreatedAt)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreateEventBridgeRuleTemplateResponse_Description, *v.Description)
+	}
+	serialize__listOfEventBridgeRuleTemplateTarget(s, schemas.CreateEventBridgeRuleTemplateResponse_EventTargets, v.EventTargets)
+	if v.EventType != "" {
+		s.WriteString(schemas.CreateEventBridgeRuleTemplateResponse_EventType, string(v.EventType))
+	}
+	if v.GroupId != nil {
+		s.WriteString(schemas.CreateEventBridgeRuleTemplateResponse_GroupId, *v.GroupId)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.CreateEventBridgeRuleTemplateResponse_Id, *v.Id)
+	}
+	if v.ModifiedAt != nil {
+		s.WriteTime(schemas.CreateEventBridgeRuleTemplateResponse_ModifiedAt, *v.ModifiedAt)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateEventBridgeRuleTemplateResponse_Name, *v.Name)
+	}
+	serializeTagMap(s, schemas.CreateEventBridgeRuleTemplateResponse_Tags, v.Tags)
+}
+func (v *CreateEventBridgeRuleTemplateOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateEventBridgeRuleTemplateResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateEventBridgeRuleTemplateResponse_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.CreateEventBridgeRuleTemplateResponse_Arn, v.Arn)
+		case schemas.CreateEventBridgeRuleTemplateResponse_CreatedAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.CreateEventBridgeRuleTemplateResponse_CreatedAt, v.CreatedAt)
+		case schemas.CreateEventBridgeRuleTemplateResponse_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.CreateEventBridgeRuleTemplateResponse_Description, v.Description)
+		case schemas.CreateEventBridgeRuleTemplateResponse_EventTargets:
+			return deserialize__listOfEventBridgeRuleTemplateTarget(d, schemas.CreateEventBridgeRuleTemplateResponse_EventTargets, &v.EventTargets)
+		case schemas.CreateEventBridgeRuleTemplateResponse_EventType:
+			var ev string
+			if err := d.ReadString(schemas.CreateEventBridgeRuleTemplateResponse_EventType, &ev); err != nil {
+				return err
+			}
+			v.EventType = types.EventBridgeRuleTemplateEventType(ev)
+			return nil
+		case schemas.CreateEventBridgeRuleTemplateResponse_GroupId:
+			v.GroupId = new(string)
+			return d.ReadString(schemas.CreateEventBridgeRuleTemplateResponse_GroupId, v.GroupId)
+		case schemas.CreateEventBridgeRuleTemplateResponse_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.CreateEventBridgeRuleTemplateResponse_Id, v.Id)
+		case schemas.CreateEventBridgeRuleTemplateResponse_ModifiedAt:
+			v.ModifiedAt = new(time.Time)
+			return d.ReadTime(schemas.CreateEventBridgeRuleTemplateResponse_ModifiedAt, v.ModifiedAt)
+		case schemas.CreateEventBridgeRuleTemplateResponse_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.CreateEventBridgeRuleTemplateResponse_Name, v.Name)
+		case schemas.CreateEventBridgeRuleTemplateResponse_Tags:
+			return deserializeTagMap(d, schemas.CreateEventBridgeRuleTemplateResponse_Tags, &v.Tags)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateEventBridgeRuleTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateEventBridgeRuleTemplate{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateEventBridgeRuleTemplate, schemas.CreateEventBridgeRuleTemplateRequest, schemas.CreateEventBridgeRuleTemplateResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateEventBridgeRuleTemplate{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateEventBridgeRuleTemplate, schemas.CreateEventBridgeRuleTemplateRequest, schemas.CreateEventBridgeRuleTemplateResponse), output: &CreateEventBridgeRuleTemplateOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -2,4 +2,4 @@ POST /2026-02-05/getOffer
 
 Content-Type: application/json
 
-{"offerId":"__OfferId__"}
+{"locale":"__Locale__","offerId":"__OfferId__"}

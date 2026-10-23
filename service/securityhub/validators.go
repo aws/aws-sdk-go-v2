@@ -290,6 +290,26 @@ func (m *validateOpBatchUpdateStandardsControlAssociations) HandleInitialize(ctx
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCancelExportJobV2 struct {
+}
+
+func (*validateOpCancelExportJobV2) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCancelExportJobV2) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CancelExportJobV2Input)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCancelExportJobV2Input(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateActionTarget struct {
 }
 
@@ -1030,6 +1050,26 @@ func (m *validateOpGetConnectorV2) HandleInitialize(ctx context.Context, in midd
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetExportJobV2 struct {
+}
+
+func (*validateOpGetExportJobV2) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetExportJobV2) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetExportJobV2Input)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetExportJobV2Input(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetFindingAggregator struct {
 }
 
@@ -1170,6 +1210,26 @@ func (m *validateOpGetRecommendedPolicyV2) HandleInitialize(ctx context.Context,
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetRemediationsV2 struct {
+}
+
+func (*validateOpGetRemediationsV2) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetRemediationsV2) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetRemediationsV2Input)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetRemediationsV2Input(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetResourcesStatisticsV2 struct {
 }
 
@@ -1245,6 +1305,26 @@ func (m *validateOpInviteMembers) HandleInitialize(ctx context.Context, in middl
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpInviteMembersInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListExposuresByRemediationV2 struct {
+}
+
+func (*validateOpListExposuresByRemediationV2) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListExposuresByRemediationV2) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListExposuresByRemediationV2Input)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListExposuresByRemediationV2Input(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1345,6 +1425,26 @@ func (m *validateOpStartConfigurationPolicyDisassociation) HandleInitialize(ctx 
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpStartConfigurationPolicyDisassociationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpStartExportJobV2 struct {
+}
+
+func (*validateOpStartExportJobV2) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpStartExportJobV2) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*StartExportJobV2Input)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpStartExportJobV2Input(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1686,6 +1786,10 @@ func addOpBatchUpdateStandardsControlAssociationsValidationMiddleware(stack *mid
 	return stack.Initialize.Add(&validateOpBatchUpdateStandardsControlAssociations{}, middleware.After)
 }
 
+func addOpCancelExportJobV2ValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCancelExportJobV2{}, middleware.After)
+}
+
 func addOpCreateActionTargetValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateActionTarget{}, middleware.After)
 }
@@ -1834,6 +1938,10 @@ func addOpGetConnectorV2ValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetConnectorV2{}, middleware.After)
 }
 
+func addOpGetExportJobV2ValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetExportJobV2{}, middleware.After)
+}
+
 func addOpGetFindingAggregatorValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetFindingAggregator{}, middleware.After)
 }
@@ -1862,6 +1970,10 @@ func addOpGetRecommendedPolicyV2ValidationMiddleware(stack *middleware.Stack) er
 	return stack.Initialize.Add(&validateOpGetRecommendedPolicyV2{}, middleware.After)
 }
 
+func addOpGetRemediationsV2ValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetRemediationsV2{}, middleware.After)
+}
+
 func addOpGetResourcesStatisticsV2ValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetResourcesStatisticsV2{}, middleware.After)
 }
@@ -1876,6 +1988,10 @@ func addOpGetSecurityControlDefinitionValidationMiddleware(stack *middleware.Sta
 
 func addOpInviteMembersValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpInviteMembers{}, middleware.After)
+}
+
+func addOpListExposuresByRemediationV2ValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListExposuresByRemediationV2{}, middleware.After)
 }
 
 func addOpListStandardsControlAssociationsValidationMiddleware(stack *middleware.Stack) error {
@@ -1896,6 +2012,10 @@ func addOpStartConfigurationPolicyAssociationValidationMiddleware(stack *middlew
 
 func addOpStartConfigurationPolicyDisassociationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpStartConfigurationPolicyDisassociation{}, middleware.After)
+}
+
+func addOpStartExportJobV2ValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpStartExportJobV2{}, middleware.After)
 }
 
 func addOpTagResourceValidationMiddleware(stack *middleware.Stack) error {
@@ -2045,6 +2165,11 @@ func validateAutomationRulesActionV2(v *types.AutomationRulesActionV2) error {
 	if len(v.Type) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("Type"))
 	}
+	if v.ResourceFieldsUpdate != nil {
+		if err := validateAutomationRulesResourceFieldsUpdateV2(v.ResourceFieldsUpdate); err != nil {
+			invalidParams.AddNested("ResourceFieldsUpdate", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -2066,6 +2191,21 @@ func validateAutomationRulesFindingFieldsUpdate(v *types.AutomationRulesFindingF
 		if err := validateRelatedFindingList(v.RelatedFindings); err != nil {
 			invalidParams.AddNested("RelatedFindings", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAutomationRulesResourceFieldsUpdateV2(v *types.AutomationRulesResourceFieldsUpdateV2) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AutomationRulesResourceFieldsUpdateV2"}
+	if len(v.Criticality) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Criticality"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2324,6 +2464,44 @@ func validateCspmProviderUpdateConfiguration(v types.CspmProviderUpdateConfigura
 	}
 }
 
+func validateExportDestination(v types.ExportDestination) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ExportDestination"}
+	switch uv := v.(type) {
+	case *types.ExportDestinationMemberS3:
+		if err := validateS3ExportDestination(&uv.Value); err != nil {
+			invalidParams.AddNested("[S3]", err.(smithy.InvalidParamsError))
+		}
+
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateExportOutput(v types.ExportOutput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ExportOutput"}
+	switch uv := v.(type) {
+	case *types.ExportOutputMemberFindings:
+		if err := validateFindingsOutput(&uv.Value); err != nil {
+			invalidParams.AddNested("[Findings]", err.(smithy.InvalidParamsError))
+		}
+
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateFindingProviderFields(v *types.FindingProviderFields) error {
 	if v == nil {
 		return nil
@@ -2333,6 +2511,21 @@ func validateFindingProviderFields(v *types.FindingProviderFields) error {
 		if err := validateRelatedFindingList(v.RelatedFindings); err != nil {
 			invalidParams.AddNested("RelatedFindings", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateFindingsOutput(v *types.FindingsOutput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "FindingsOutput"}
+	if len(v.Format) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Format"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2627,6 +2820,111 @@ func validateRelatedFindingList(v []types.RelatedFinding) error {
 	}
 }
 
+func validateRemediationCompositeFilter(v *types.RemediationCompositeFilter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RemediationCompositeFilter"}
+	if v.StringFilters != nil {
+		if err := validateRemediationStringFilterList(v.StringFilters); err != nil {
+			invalidParams.AddNested("StringFilters", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateRemediationCompositeFilterList(v []types.RemediationCompositeFilter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RemediationCompositeFilterList"}
+	for i := range v {
+		if err := validateRemediationCompositeFilter(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateRemediationFilters(v *types.RemediationFilters) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RemediationFilters"}
+	if v.CompositeFilters != nil {
+		if err := validateRemediationCompositeFilterList(v.CompositeFilters); err != nil {
+			invalidParams.AddNested("CompositeFilters", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateRemediationStringFilter(v *types.RemediationStringFilter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RemediationStringFilter"}
+	if len(v.FieldName) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("FieldName"))
+	}
+	if v.Filter == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Filter"))
+	} else if v.Filter != nil {
+		if err := validateRemediationStringFilterCondition(v.Filter); err != nil {
+			invalidParams.AddNested("Filter", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateRemediationStringFilterCondition(v *types.RemediationStringFilterCondition) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RemediationStringFilterCondition"}
+	if v.Value == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Value"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateRemediationStringFilterList(v []types.RemediationStringFilter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RemediationStringFilterList"}
+	for i := range v {
+		if err := validateRemediationStringFilter(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateResource(v *types.Resource) error {
 	if v == nil {
 		return nil
@@ -2686,6 +2984,24 @@ func validateResourceList(v []types.Resource) error {
 		if err := validateResource(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateS3ExportDestination(v *types.S3ExportDestination) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "S3ExportDestination"}
+	if v.BucketArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BucketArn"))
+	}
+	if v.KmsKeyArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("KmsKeyArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3250,6 +3566,21 @@ func validateOpBatchUpdateStandardsControlAssociationsInput(v *BatchUpdateStanda
 		if err := validateStandardsControlAssociationUpdates(v.StandardsControlAssociationUpdates); err != nil {
 			invalidParams.AddNested("StandardsControlAssociationUpdates", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCancelExportJobV2Input(v *CancelExportJobV2Input) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CancelExportJobV2Input"}
+	if v.ExportJobId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ExportJobId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3885,6 +4216,21 @@ func validateOpGetConnectorV2Input(v *GetConnectorV2Input) error {
 	}
 }
 
+func validateOpGetExportJobV2Input(v *GetExportJobV2Input) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetExportJobV2Input"}
+	if v.ExportJobId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ExportJobId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpGetFindingAggregatorInput(v *GetFindingAggregatorInput) error {
 	if v == nil {
 		return nil
@@ -4001,6 +4347,23 @@ func validateOpGetRecommendedPolicyV2Input(v *GetRecommendedPolicyV2Input) error
 	}
 }
 
+func validateOpGetRemediationsV2Input(v *GetRemediationsV2Input) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetRemediationsV2Input"}
+	if v.Filters != nil {
+		if err := validateRemediationFilters(v.Filters); err != nil {
+			invalidParams.AddNested("Filters", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpGetResourcesStatisticsV2Input(v *GetResourcesStatisticsV2Input) error {
 	if v == nil {
 		return nil
@@ -4060,6 +4423,21 @@ func validateOpInviteMembersInput(v *InviteMembersInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "InviteMembersInput"}
 	if v.AccountIds == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AccountIds"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListExposuresByRemediationV2Input(v *ListExposuresByRemediationV2Input) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListExposuresByRemediationV2Input"}
+	if v.TargetUid == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TargetUid"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -4141,6 +4519,32 @@ func validateOpStartConfigurationPolicyDisassociationInput(v *StartConfiguration
 	invalidParams := smithy.InvalidParamsError{Context: "StartConfigurationPolicyDisassociationInput"}
 	if v.ConfigurationPolicyIdentifier == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ConfigurationPolicyIdentifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpStartExportJobV2Input(v *StartExportJobV2Input) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StartExportJobV2Input"}
+	if v.Destination == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Destination"))
+	} else if v.Destination != nil {
+		if err := validateExportDestination(v.Destination); err != nil {
+			invalidParams.AddNested("Destination", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.OutputConfiguration == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("OutputConfiguration"))
+	} else if v.OutputConfiguration != nil {
+		if err := validateExportOutput(v.OutputConfiguration); err != nil {
+			invalidParams.AddNested("OutputConfiguration", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

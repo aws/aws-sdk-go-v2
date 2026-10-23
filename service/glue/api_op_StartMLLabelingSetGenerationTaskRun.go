@@ -4,6 +4,8 @@ package glue
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/glue/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -56,6 +58,21 @@ type StartMLLabelingSetGenerationTaskRunInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartMLLabelingSetGenerationTaskRunInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartMLLabelingSetGenerationTaskRunRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartMLLabelingSetGenerationTaskRunInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.OutputS3Path != nil {
+		s.WriteString(schemas.StartMLLabelingSetGenerationTaskRunRequest_OutputS3Path, *v.OutputS3Path)
+	}
+	if v.TransformId != nil {
+		s.WriteString(schemas.StartMLLabelingSetGenerationTaskRunRequest_TransformId, *v.TransformId)
+	}
+}
+
 type StartMLLabelingSetGenerationTaskRunOutput struct {
 
 	// The unique run identifier that is associated with this task run.
@@ -67,13 +84,32 @@ type StartMLLabelingSetGenerationTaskRunOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartMLLabelingSetGenerationTaskRunOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartMLLabelingSetGenerationTaskRunResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartMLLabelingSetGenerationTaskRunOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TaskRunId != nil {
+		s.WriteString(schemas.StartMLLabelingSetGenerationTaskRunResponse_TaskRunId, *v.TaskRunId)
+	}
+}
+func (v *StartMLLabelingSetGenerationTaskRunOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartMLLabelingSetGenerationTaskRunResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartMLLabelingSetGenerationTaskRunResponse_TaskRunId:
+			v.TaskRunId = new(string)
+			return d.ReadString(schemas.StartMLLabelingSetGenerationTaskRunResponse_TaskRunId, v.TaskRunId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartMLLabelingSetGenerationTaskRunMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStartMLLabelingSetGenerationTaskRun{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartMLLabelingSetGenerationTaskRun, schemas.StartMLLabelingSetGenerationTaskRunRequest, schemas.StartMLLabelingSetGenerationTaskRunResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpStartMLLabelingSetGenerationTaskRun{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartMLLabelingSetGenerationTaskRun, schemas.StartMLLabelingSetGenerationTaskRunRequest, schemas.StartMLLabelingSetGenerationTaskRunResponse), output: &StartMLLabelingSetGenerationTaskRunOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

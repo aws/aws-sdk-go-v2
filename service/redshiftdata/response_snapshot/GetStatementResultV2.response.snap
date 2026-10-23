@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: RedshiftData.GetStatementResultV2
+
+{"ColumnMetadata":[{"columnDefault":"__ColumnDefault__","isCaseSensitive":true,"isCurrency":true,"isSigned":true,"label":"__Label__","length":1,"name":"__Name__","nullable":1,"precision":1,"scale":1,"schemaName":"__SchemaName__","tableName":"__TableName__","typeName":"__TypeName__"},{"columnDefault":"__ColumnDefault__","isCaseSensitive":true,"isCurrency":true,"isSigned":true,"label":"__Label__","length":1,"name":"__Name__","nullable":1,"precision":1,"scale":1,"schemaName":"__SchemaName__","tableName":"__TableName__","typeName":"__TypeName__"}],"NextToken":"__NextToken__","Records":[{"CSVRecords":"__QueryRecordsMemberCSVRecords__"},{"CSVRecords":"__QueryRecordsMemberCSVRecords__"}],"ResultFormat":"JSON","TotalNumRows":1}

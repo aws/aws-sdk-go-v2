@@ -5,7 +5,9 @@ package devicefarm
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/devicefarm/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/devicefarm/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -45,6 +47,21 @@ type ListUniqueProblemsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListUniqueProblemsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListUniqueProblemsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListUniqueProblemsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.ListUniqueProblemsRequest_arn, *v.Arn)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListUniqueProblemsRequest_nextToken, *v.NextToken)
+	}
+}
+
 // Represents the result of a list unique problems request.
 type ListUniqueProblemsOutput struct {
 
@@ -78,13 +95,35 @@ type ListUniqueProblemsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListUniqueProblemsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListUniqueProblemsResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListUniqueProblemsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListUniqueProblemsResult_nextToken, *v.NextToken)
+	}
+	serializeUniqueProblemsByExecutionResultMap(s, schemas.ListUniqueProblemsResult_uniqueProblems, v.UniqueProblems)
+}
+func (v *ListUniqueProblemsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListUniqueProblemsResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListUniqueProblemsResult_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListUniqueProblemsResult_nextToken, v.NextToken)
+		case schemas.ListUniqueProblemsResult_uniqueProblems:
+			return deserializeUniqueProblemsByExecutionResultMap(d, schemas.ListUniqueProblemsResult_uniqueProblems, &v.UniqueProblems)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListUniqueProblemsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListUniqueProblems{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListUniqueProblems, schemas.ListUniqueProblemsRequest, schemas.ListUniqueProblemsResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListUniqueProblems{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListUniqueProblems, schemas.ListUniqueProblemsRequest, schemas.ListUniqueProblemsResult), output: &ListUniqueProblemsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

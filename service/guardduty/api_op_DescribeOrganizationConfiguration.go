@@ -5,7 +5,9 @@ package guardduty
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/guardduty/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/guardduty/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -56,6 +58,24 @@ type DescribeOrganizationConfigurationInput struct {
 	NextToken *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DescribeOrganizationConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeOrganizationConfigurationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeOrganizationConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DetectorId != nil {
+		s.WriteString(schemas.DescribeOrganizationConfigurationRequest_DetectorId, *v.DetectorId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.DescribeOrganizationConfigurationRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeOrganizationConfigurationRequest_NextToken, *v.NextToken)
+	}
 }
 
 type DescribeOrganizationConfigurationOutput struct {
@@ -117,13 +137,65 @@ type DescribeOrganizationConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeOrganizationConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeOrganizationConfigurationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeOrganizationConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AutoEnable != nil {
+		s.WriteBool(schemas.DescribeOrganizationConfigurationResponse_AutoEnable, *v.AutoEnable)
+	}
+	if v.AutoEnableOrganizationMembers != "" {
+		s.WriteString(schemas.DescribeOrganizationConfigurationResponse_AutoEnableOrganizationMembers, string(v.AutoEnableOrganizationMembers))
+	}
+	if v.DataSources != nil {
+		s.WriteStruct(schemas.DescribeOrganizationConfigurationResponse_DataSources)
+		v.DataSources.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeOrganizationFeaturesConfigurationsResults(s, schemas.DescribeOrganizationConfigurationResponse_Features, v.Features)
+	if v.MemberAccountLimitReached != nil {
+		s.WriteBool(schemas.DescribeOrganizationConfigurationResponse_MemberAccountLimitReached, *v.MemberAccountLimitReached)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeOrganizationConfigurationResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *DescribeOrganizationConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeOrganizationConfigurationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeOrganizationConfigurationResponse_AutoEnable:
+			v.AutoEnable = new(bool)
+			return d.ReadBool(schemas.DescribeOrganizationConfigurationResponse_AutoEnable, v.AutoEnable)
+		case schemas.DescribeOrganizationConfigurationResponse_AutoEnableOrganizationMembers:
+			var ev string
+			if err := d.ReadString(schemas.DescribeOrganizationConfigurationResponse_AutoEnableOrganizationMembers, &ev); err != nil {
+				return err
+			}
+			v.AutoEnableOrganizationMembers = types.AutoEnableMembers(ev)
+			return nil
+		case schemas.DescribeOrganizationConfigurationResponse_DataSources:
+			v.DataSources = &types.OrganizationDataSourceConfigurationsResult{}
+			return v.DataSources.Deserialize(d)
+		case schemas.DescribeOrganizationConfigurationResponse_Features:
+			return deserializeOrganizationFeaturesConfigurationsResults(d, schemas.DescribeOrganizationConfigurationResponse_Features, &v.Features)
+		case schemas.DescribeOrganizationConfigurationResponse_MemberAccountLimitReached:
+			v.MemberAccountLimitReached = new(bool)
+			return d.ReadBool(schemas.DescribeOrganizationConfigurationResponse_MemberAccountLimitReached, v.MemberAccountLimitReached)
+		case schemas.DescribeOrganizationConfigurationResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.DescribeOrganizationConfigurationResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeOrganizationConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeOrganizationConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeOrganizationConfiguration, schemas.DescribeOrganizationConfigurationRequest, schemas.DescribeOrganizationConfigurationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeOrganizationConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeOrganizationConfiguration, schemas.DescribeOrganizationConfigurationRequest, schemas.DescribeOrganizationConfigurationResponse), output: &DescribeOrganizationConfigurationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

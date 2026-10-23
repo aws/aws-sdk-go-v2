@@ -4,7 +4,9 @@ package apigatewayv2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/apigatewayv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/apigatewayv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -42,6 +44,24 @@ type GetRoutingRuleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetRoutingRuleInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetRoutingRuleRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetRoutingRuleInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DomainName != nil {
+		s.WriteString(schemas.GetRoutingRuleRequest_DomainName, *v.DomainName)
+	}
+	if v.DomainNameId != nil {
+		s.WriteString(schemas.GetRoutingRuleRequest_DomainNameId, *v.DomainNameId)
+	}
+	if v.RoutingRuleId != nil {
+		s.WriteString(schemas.GetRoutingRuleRequest_RoutingRuleId, *v.RoutingRuleId)
+	}
+}
+
 type GetRoutingRuleOutput struct {
 
 	// The resulting action based on matching a routing rules condition. Only
@@ -67,13 +87,50 @@ type GetRoutingRuleOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetRoutingRuleOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetRoutingRuleResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetRoutingRuleOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serialize__listOfRoutingRuleAction(s, schemas.GetRoutingRuleResponse_Actions, v.Actions)
+	serialize__listOfRoutingRuleCondition(s, schemas.GetRoutingRuleResponse_Conditions, v.Conditions)
+	if v.Priority != nil {
+		s.WriteInt32(schemas.GetRoutingRuleResponse_Priority, *v.Priority)
+	}
+	if v.RoutingRuleArn != nil {
+		s.WriteString(schemas.GetRoutingRuleResponse_RoutingRuleArn, *v.RoutingRuleArn)
+	}
+	if v.RoutingRuleId != nil {
+		s.WriteString(schemas.GetRoutingRuleResponse_RoutingRuleId, *v.RoutingRuleId)
+	}
+}
+func (v *GetRoutingRuleOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetRoutingRuleResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetRoutingRuleResponse_Actions:
+			return deserialize__listOfRoutingRuleAction(d, schemas.GetRoutingRuleResponse_Actions, &v.Actions)
+		case schemas.GetRoutingRuleResponse_Conditions:
+			return deserialize__listOfRoutingRuleCondition(d, schemas.GetRoutingRuleResponse_Conditions, &v.Conditions)
+		case schemas.GetRoutingRuleResponse_Priority:
+			v.Priority = new(int32)
+			return d.ReadInt32(schemas.GetRoutingRuleResponse_Priority, v.Priority)
+		case schemas.GetRoutingRuleResponse_RoutingRuleArn:
+			v.RoutingRuleArn = new(string)
+			return d.ReadString(schemas.GetRoutingRuleResponse_RoutingRuleArn, v.RoutingRuleArn)
+		case schemas.GetRoutingRuleResponse_RoutingRuleId:
+			v.RoutingRuleId = new(string)
+			return d.ReadString(schemas.GetRoutingRuleResponse_RoutingRuleId, v.RoutingRuleId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetRoutingRuleMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetRoutingRule{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetRoutingRule, schemas.GetRoutingRuleRequest, schemas.GetRoutingRuleResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetRoutingRule{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetRoutingRule, schemas.GetRoutingRuleRequest, schemas.GetRoutingRuleResponse), output: &GetRoutingRuleOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

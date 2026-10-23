@@ -5,7 +5,9 @@ package devopsagent
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/devopsagent/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/devopsagent/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -34,7 +36,25 @@ type GetAgentSpaceInput struct {
 	// This member is required.
 	AgentSpaceId *string
 
+	// How much data to include in the response.
+	IncludedData types.IncludedData
+
 	noSmithyDocumentSerde
+}
+
+func (v *GetAgentSpaceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetAgentSpaceInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetAgentSpaceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AgentSpaceId != nil {
+		s.WriteString(schemas.GetAgentSpaceInput_agentSpaceId, *v.AgentSpaceId)
+	}
+	if v.IncludedData != "" {
+		s.WriteString(schemas.GetAgentSpaceInput_includedData, string(v.IncludedData))
+	}
 }
 
 // Output containing the requested AgentSpace details.
@@ -55,13 +75,37 @@ type GetAgentSpaceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetAgentSpaceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetAgentSpaceOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetAgentSpaceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AgentSpace != nil {
+		s.WriteStruct(schemas.GetAgentSpaceOutput_agentSpace)
+		v.AgentSpace.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeTags(s, schemas.GetAgentSpaceOutput_tags, v.Tags)
+}
+func (v *GetAgentSpaceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetAgentSpaceOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetAgentSpaceOutput_agentSpace:
+			v.AgentSpace = &types.AgentSpace{}
+			return v.AgentSpace.Deserialize(d)
+		case schemas.GetAgentSpaceOutput_tags:
+			return deserializeTags(d, schemas.GetAgentSpaceOutput_tags, &v.Tags)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetAgentSpaceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetAgentSpace{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAgentSpace, schemas.GetAgentSpaceInput, schemas.GetAgentSpaceOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetAgentSpace{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAgentSpace, schemas.GetAgentSpaceInput, schemas.GetAgentSpaceOutput), output: &GetAgentSpaceOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

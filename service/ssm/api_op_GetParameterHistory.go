@@ -5,7 +5,9 @@ package ssm
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/ssm/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ssm/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -59,6 +61,27 @@ type GetParameterHistoryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetParameterHistoryInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetParameterHistoryRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetParameterHistoryInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.GetParameterHistoryRequest_MaxResults, *v.MaxResults)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.GetParameterHistoryRequest_Name, *v.Name)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetParameterHistoryRequest_NextToken, *v.NextToken)
+	}
+	if v.WithDecryption != nil {
+		s.WriteBool(schemas.GetParameterHistoryRequest_WithDecryption, *v.WithDecryption)
+	}
+}
+
 type GetParameterHistoryOutput struct {
 
 	// The token to use when requesting the next set of items. If there are no
@@ -74,13 +97,35 @@ type GetParameterHistoryOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetParameterHistoryOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetParameterHistoryResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetParameterHistoryOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetParameterHistoryResult_NextToken, *v.NextToken)
+	}
+	serializeParameterHistoryList(s, schemas.GetParameterHistoryResult_Parameters, v.Parameters)
+}
+func (v *GetParameterHistoryOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetParameterHistoryResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetParameterHistoryResult_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.GetParameterHistoryResult_NextToken, v.NextToken)
+		case schemas.GetParameterHistoryResult_Parameters:
+			return deserializeParameterHistoryList(d, schemas.GetParameterHistoryResult_Parameters, &v.Parameters)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetParameterHistoryMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetParameterHistory{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetParameterHistory, schemas.GetParameterHistoryRequest, schemas.GetParameterHistoryResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetParameterHistory{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetParameterHistory, schemas.GetParameterHistoryRequest, schemas.GetParameterHistoryResult), output: &GetParameterHistoryOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

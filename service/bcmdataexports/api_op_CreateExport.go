@@ -4,7 +4,9 @@ package bcmdataexports
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/bcmdataexports/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bcmdataexports/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -58,6 +60,21 @@ type CreateExportInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateExportInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateExportRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateExportInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Export != nil {
+		s.WriteStruct(schemas.CreateExportRequest_Export)
+		v.Export.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeResourceTagList(s, schemas.CreateExportRequest_ResourceTags, v.ResourceTags)
+}
+
 type CreateExportOutput struct {
 
 	// The Amazon Resource Name (ARN) for this export.
@@ -69,13 +86,32 @@ type CreateExportOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateExportOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateExportResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateExportOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ExportArn != nil {
+		s.WriteString(schemas.CreateExportResponse_ExportArn, *v.ExportArn)
+	}
+}
+func (v *CreateExportOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateExportResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateExportResponse_ExportArn:
+			v.ExportArn = new(string)
+			return d.ReadString(schemas.CreateExportResponse_ExportArn, v.ExportArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateExportMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateExport{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateExport, schemas.CreateExportRequest, schemas.CreateExportResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateExport{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateExport, schemas.CreateExportRequest, schemas.CreateExportResponse), output: &CreateExportOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

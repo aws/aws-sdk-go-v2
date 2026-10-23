@@ -4,7 +4,9 @@ package glue
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/glue/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/glue/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -58,6 +60,23 @@ type RegisterSchemaVersionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RegisterSchemaVersionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RegisterSchemaVersionInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RegisterSchemaVersionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SchemaDefinition != nil {
+		s.WriteString(schemas.RegisterSchemaVersionInput_SchemaDefinition, *v.SchemaDefinition)
+	}
+	if v.SchemaId != nil {
+		s.WriteStruct(schemas.RegisterSchemaVersionInput_SchemaId)
+		v.SchemaId.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type RegisterSchemaVersionOutput struct {
 
 	// The unique ID that represents the version of this schema.
@@ -76,13 +95,48 @@ type RegisterSchemaVersionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RegisterSchemaVersionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RegisterSchemaVersionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RegisterSchemaVersionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SchemaVersionId != nil {
+		s.WriteString(schemas.RegisterSchemaVersionResponse_SchemaVersionId, *v.SchemaVersionId)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.RegisterSchemaVersionResponse_Status, string(v.Status))
+	}
+	if v.VersionNumber != nil {
+		s.WriteInt64(schemas.RegisterSchemaVersionResponse_VersionNumber, *v.VersionNumber)
+	}
+}
+func (v *RegisterSchemaVersionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RegisterSchemaVersionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RegisterSchemaVersionResponse_SchemaVersionId:
+			v.SchemaVersionId = new(string)
+			return d.ReadString(schemas.RegisterSchemaVersionResponse_SchemaVersionId, v.SchemaVersionId)
+		case schemas.RegisterSchemaVersionResponse_Status:
+			var ev string
+			if err := d.ReadString(schemas.RegisterSchemaVersionResponse_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.SchemaVersionStatus(ev)
+			return nil
+		case schemas.RegisterSchemaVersionResponse_VersionNumber:
+			v.VersionNumber = new(int64)
+			return d.ReadInt64(schemas.RegisterSchemaVersionResponse_VersionNumber, v.VersionNumber)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationRegisterSchemaVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpRegisterSchemaVersion{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RegisterSchemaVersion, schemas.RegisterSchemaVersionInput, schemas.RegisterSchemaVersionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpRegisterSchemaVersion{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RegisterSchemaVersion, schemas.RegisterSchemaVersionInput, schemas.RegisterSchemaVersionResponse), output: &RegisterSchemaVersionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

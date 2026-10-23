@@ -4,7 +4,9 @@ package mediaconnect
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/mediaconnect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/mediaconnect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -50,6 +52,20 @@ type CreateGatewayInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateGatewayInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateGatewayRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateGatewayInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serialize__listOfString(s, schemas.CreateGatewayRequest_EgressCidrBlocks, v.EgressCidrBlocks)
+	if v.Name != nil {
+		s.WriteString(schemas.CreateGatewayRequest_Name, *v.Name)
+	}
+	serialize__listOfGatewayNetwork(s, schemas.CreateGatewayRequest_Networks, v.Networks)
+}
+
 type CreateGatewayOutput struct {
 
 	//  The gateway that you created.
@@ -61,13 +77,34 @@ type CreateGatewayOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateGatewayOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateGatewayResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateGatewayOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Gateway != nil {
+		s.WriteStruct(schemas.CreateGatewayResponse_Gateway)
+		v.Gateway.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateGatewayOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateGatewayResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateGatewayResponse_Gateway:
+			v.Gateway = &types.Gateway{}
+			return v.Gateway.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateGatewayMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateGateway{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateGateway, schemas.CreateGatewayRequest, schemas.CreateGatewayResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateGateway{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateGateway, schemas.CreateGatewayRequest, schemas.CreateGatewayResponse), output: &CreateGatewayOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package apigateway
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/apigateway/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/apigateway/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -45,6 +47,22 @@ type UpdateResourceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateResourceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateResourceRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateResourceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeListOfPatchOperation(s, schemas.UpdateResourceRequest_patchOperations, v.PatchOperations)
+	if v.ResourceId != nil {
+		s.WriteString(schemas.UpdateResourceRequest_resourceId, *v.ResourceId)
+	}
+	if v.RestApiId != nil {
+		s.WriteString(schemas.UpdateResourceRequest_restApiId, *v.RestApiId)
+	}
+}
+
 // Represents an API resource.
 type UpdateResourceOutput struct {
 
@@ -69,13 +87,53 @@ type UpdateResourceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateResourceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Resource)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateResourceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Id != nil {
+		s.WriteString(schemas.Resource_id, *v.Id)
+	}
+	if v.ParentId != nil {
+		s.WriteString(schemas.Resource_parentId, *v.ParentId)
+	}
+	if v.Path != nil {
+		s.WriteString(schemas.Resource_path, *v.Path)
+	}
+	if v.PathPart != nil {
+		s.WriteString(schemas.Resource_pathPart, *v.PathPart)
+	}
+	serializeMapOfMethod(s, schemas.Resource_resourceMethods, v.ResourceMethods)
+}
+func (v *UpdateResourceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Resource, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Resource_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.Resource_id, v.Id)
+		case schemas.Resource_parentId:
+			v.ParentId = new(string)
+			return d.ReadString(schemas.Resource_parentId, v.ParentId)
+		case schemas.Resource_path:
+			v.Path = new(string)
+			return d.ReadString(schemas.Resource_path, v.Path)
+		case schemas.Resource_pathPart:
+			v.PathPart = new(string)
+			return d.ReadString(schemas.Resource_pathPart, v.PathPart)
+		case schemas.Resource_resourceMethods:
+			return deserializeMapOfMethod(d, schemas.Resource_resourceMethods, &v.ResourceMethods)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateResourceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateResource{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateResource, schemas.UpdateResourceRequest, schemas.Resource)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateResource{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateResource, schemas.UpdateResourceRequest, schemas.Resource), output: &UpdateResourceOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

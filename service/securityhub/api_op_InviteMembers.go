@@ -4,7 +4,9 @@ package securityhub
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/securityhub/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/securityhub/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -52,6 +54,16 @@ type InviteMembersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *InviteMembersInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InviteMembersRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InviteMembersInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAccountIdList(s, schemas.InviteMembersRequest_AccountIds, v.AccountIds)
+}
+
 type InviteMembersOutput struct {
 
 	// The list of Amazon Web Services accounts that could not be processed. For each
@@ -64,13 +76,29 @@ type InviteMembersOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *InviteMembersOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InviteMembersResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InviteMembersOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeResultList(s, schemas.InviteMembersResponse_UnprocessedAccounts, v.UnprocessedAccounts)
+}
+func (v *InviteMembersOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InviteMembersResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InviteMembersResponse_UnprocessedAccounts:
+			return deserializeResultList(d, schemas.InviteMembersResponse_UnprocessedAccounts, &v.UnprocessedAccounts)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationInviteMembersMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpInviteMembers{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.InviteMembers, schemas.InviteMembersRequest, schemas.InviteMembersResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpInviteMembers{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.InviteMembers, schemas.InviteMembersRequest, schemas.InviteMembersResponse), output: &InviteMembersOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,6 +4,7 @@ package types
 
 import (
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/mediaconnect/schemas"
 	smithy "github.com/aws/smithy-go"
 )
 
@@ -34,6 +35,27 @@ func (e *AddFlowOutputs420Exception) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *AddFlowOutputs420Exception) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *AddFlowOutputs420Exception) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AddFlowOutputs420Exception)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AddFlowOutputs420Exception) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.AddFlowOutputs420Exception_Message, *v.Message)
+	}
+}
+func (v *AddFlowOutputs420Exception) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AddFlowOutputs420Exception, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AddFlowOutputs420Exception_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.AddFlowOutputs420Exception_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // This exception is thrown if the request contains a semantic error. The precise
 // meaning depends on the API, and is documented in the error message.
@@ -61,6 +83,27 @@ func (e *BadRequestException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *BadRequestException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *BadRequestException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BadRequestException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BadRequestException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.BadRequestException_Message, *v.Message)
+	}
+}
+func (v *BadRequestException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BadRequestException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BadRequestException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.BadRequestException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The requested operation would cause a conflict with the current state of a
 // service resource associated with the request. Resolve the conflict before
@@ -89,6 +132,27 @@ func (e *ConflictException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ConflictException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *ConflictException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ConflictException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ConflictException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.ConflictException_Message, *v.Message)
+	}
+}
+func (v *ConflictException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ConflictException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ConflictException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ConflictException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // Exception raised by Elemental MediaConnect when creating the bridge. See the
 // error message for the operation for more information on the cause of this
@@ -117,6 +181,27 @@ func (e *CreateBridge420Exception) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *CreateBridge420Exception) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *CreateBridge420Exception) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateBridge420Exception)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateBridge420Exception) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.CreateBridge420Exception_Message, *v.Message)
+	}
+}
+func (v *CreateBridge420Exception) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateBridge420Exception, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateBridge420Exception_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.CreateBridge420Exception_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // Exception raised by Elemental MediaConnect when creating the flow. See the
 // error message for the operation for more information on the cause of this
@@ -145,6 +230,27 @@ func (e *CreateFlow420Exception) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *CreateFlow420Exception) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *CreateFlow420Exception) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateFlow420Exception)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateFlow420Exception) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.CreateFlow420Exception_Message, *v.Message)
+	}
+}
+func (v *CreateFlow420Exception) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateFlow420Exception, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateFlow420Exception_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.CreateFlow420Exception_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // Exception raised by Elemental MediaConnect when creating the gateway. See the
 // error message for the operation for more information on the cause of this
@@ -173,6 +279,27 @@ func (e *CreateGateway420Exception) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *CreateGateway420Exception) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *CreateGateway420Exception) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateGateway420Exception)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateGateway420Exception) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.CreateGateway420Exception_Message, *v.Message)
+	}
+}
+func (v *CreateGateway420Exception) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateGateway420Exception, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateGateway420Exception_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.CreateGateway420Exception_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // You do not have sufficient access to perform this action.
 type ForbiddenException struct {
@@ -199,6 +326,27 @@ func (e *ForbiddenException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ForbiddenException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *ForbiddenException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ForbiddenException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ForbiddenException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.ForbiddenException_Message, *v.Message)
+	}
+}
+func (v *ForbiddenException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ForbiddenException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ForbiddenException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ForbiddenException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // Exception raised by Elemental MediaConnect when granting the entitlement. See
 // the error message for the operation for more information on the cause of this
@@ -227,6 +375,27 @@ func (e *GrantFlowEntitlements420Exception) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *GrantFlowEntitlements420Exception) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *GrantFlowEntitlements420Exception) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GrantFlowEntitlements420Exception)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GrantFlowEntitlements420Exception) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.GrantFlowEntitlements420Exception_Message, *v.Message)
+	}
+}
+func (v *GrantFlowEntitlements420Exception) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GrantFlowEntitlements420Exception, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GrantFlowEntitlements420Exception_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.GrantFlowEntitlements420Exception_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The server encountered an internal error and is unable to complete the request.
 type InternalServerErrorException struct {
@@ -253,6 +422,27 @@ func (e *InternalServerErrorException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InternalServerErrorException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
+func (v *InternalServerErrorException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InternalServerErrorException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InternalServerErrorException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.InternalServerErrorException_Message, *v.Message)
+	}
+}
+func (v *InternalServerErrorException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InternalServerErrorException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InternalServerErrorException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.InternalServerErrorException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // One or more of the resources in the request does not exist in the system.
 type NotFoundException struct {
@@ -279,6 +469,27 @@ func (e *NotFoundException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *NotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *NotFoundException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.NotFoundException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *NotFoundException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.NotFoundException_Message, *v.Message)
+	}
+}
+func (v *NotFoundException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.NotFoundException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.NotFoundException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.NotFoundException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The request to create a new router input would exceed the service quotas for
 // the account.
@@ -307,6 +518,27 @@ func (e *RouterInputServiceQuotaExceededException) ErrorCode() string {
 }
 func (e *RouterInputServiceQuotaExceededException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
+}
+func (v *RouterInputServiceQuotaExceededException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RouterInputServiceQuotaExceededException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RouterInputServiceQuotaExceededException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.RouterInputServiceQuotaExceededException_Message, *v.Message)
+	}
+}
+func (v *RouterInputServiceQuotaExceededException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RouterInputServiceQuotaExceededException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RouterInputServiceQuotaExceededException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.RouterInputServiceQuotaExceededException_Message, v.Message)
+		}
+		return nil
+	})
 }
 
 // The request to create a new router network interface would exceed the service
@@ -337,6 +569,27 @@ func (e *RouterNetworkInterfaceServiceQuotaExceededException) ErrorCode() string
 func (e *RouterNetworkInterfaceServiceQuotaExceededException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
+func (v *RouterNetworkInterfaceServiceQuotaExceededException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RouterNetworkInterfaceServiceQuotaExceededException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RouterNetworkInterfaceServiceQuotaExceededException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.RouterNetworkInterfaceServiceQuotaExceededException_Message, *v.Message)
+	}
+}
+func (v *RouterNetworkInterfaceServiceQuotaExceededException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RouterNetworkInterfaceServiceQuotaExceededException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RouterNetworkInterfaceServiceQuotaExceededException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.RouterNetworkInterfaceServiceQuotaExceededException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The request to create a new router output would exceed the service quotas
 // (limits) set for the account.
@@ -366,6 +619,27 @@ func (e *RouterOutputServiceQuotaExceededException) ErrorCode() string {
 func (e *RouterOutputServiceQuotaExceededException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
+func (v *RouterOutputServiceQuotaExceededException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RouterOutputServiceQuotaExceededException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RouterOutputServiceQuotaExceededException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.RouterOutputServiceQuotaExceededException_Message, *v.Message)
+	}
+}
+func (v *RouterOutputServiceQuotaExceededException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RouterOutputServiceQuotaExceededException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RouterOutputServiceQuotaExceededException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.RouterOutputServiceQuotaExceededException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The service is currently unavailable or busy.
 type ServiceUnavailableException struct {
@@ -392,6 +666,27 @@ func (e *ServiceUnavailableException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ServiceUnavailableException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
+func (v *ServiceUnavailableException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ServiceUnavailableException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ServiceUnavailableException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.ServiceUnavailableException_Message, *v.Message)
+	}
+}
+func (v *ServiceUnavailableException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ServiceUnavailableException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ServiceUnavailableException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ServiceUnavailableException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The request was denied due to request throttling.
 type TooManyRequestsException struct {
@@ -418,3 +713,24 @@ func (e *TooManyRequestsException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *TooManyRequestsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *TooManyRequestsException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TooManyRequestsException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TooManyRequestsException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.TooManyRequestsException_Message, *v.Message)
+	}
+}
+func (v *TooManyRequestsException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TooManyRequestsException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TooManyRequestsException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.TooManyRequestsException_Message, v.Message)
+		}
+		return nil
+	})
+}

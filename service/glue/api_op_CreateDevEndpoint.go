@@ -4,7 +4,9 @@ package glue
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/glue/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/glue/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -136,6 +138,52 @@ type CreateDevEndpointInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateDevEndpointInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateDevEndpointRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateDevEndpointInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeMapValue(s, schemas.CreateDevEndpointRequest_Arguments, v.Arguments)
+	if v.EndpointName != nil {
+		s.WriteString(schemas.CreateDevEndpointRequest_EndpointName, *v.EndpointName)
+	}
+	if v.ExtraJarsS3Path != nil {
+		s.WriteString(schemas.CreateDevEndpointRequest_ExtraJarsS3Path, *v.ExtraJarsS3Path)
+	}
+	if v.ExtraPythonLibsS3Path != nil {
+		s.WriteString(schemas.CreateDevEndpointRequest_ExtraPythonLibsS3Path, *v.ExtraPythonLibsS3Path)
+	}
+	if v.GlueVersion != nil {
+		s.WriteString(schemas.CreateDevEndpointRequest_GlueVersion, *v.GlueVersion)
+	}
+	if v.NumberOfNodes != 0 {
+		s.WriteInt32(schemas.CreateDevEndpointRequest_NumberOfNodes, v.NumberOfNodes)
+	}
+	if v.NumberOfWorkers != nil {
+		s.WriteInt32(schemas.CreateDevEndpointRequest_NumberOfWorkers, *v.NumberOfWorkers)
+	}
+	if v.PublicKey != nil {
+		s.WriteString(schemas.CreateDevEndpointRequest_PublicKey, *v.PublicKey)
+	}
+	serializePublicKeysList(s, schemas.CreateDevEndpointRequest_PublicKeys, v.PublicKeys)
+	if v.RoleArn != nil {
+		s.WriteString(schemas.CreateDevEndpointRequest_RoleArn, *v.RoleArn)
+	}
+	if v.SecurityConfiguration != nil {
+		s.WriteString(schemas.CreateDevEndpointRequest_SecurityConfiguration, *v.SecurityConfiguration)
+	}
+	serializeStringList(s, schemas.CreateDevEndpointRequest_SecurityGroupIds, v.SecurityGroupIds)
+	if v.SubnetId != nil {
+		s.WriteString(schemas.CreateDevEndpointRequest_SubnetId, *v.SubnetId)
+	}
+	serializeTagsMap(s, schemas.CreateDevEndpointRequest_Tags, v.Tags)
+	if v.WorkerType != "" {
+		s.WriteString(schemas.CreateDevEndpointRequest_WorkerType, string(v.WorkerType))
+	}
+}
+
 type CreateDevEndpointOutput struct {
 
 	// The map of arguments used to configure this DevEndpoint .
@@ -221,13 +269,136 @@ type CreateDevEndpointOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateDevEndpointOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateDevEndpointResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateDevEndpointOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeMapValue(s, schemas.CreateDevEndpointResponse_Arguments, v.Arguments)
+	if v.AvailabilityZone != nil {
+		s.WriteString(schemas.CreateDevEndpointResponse_AvailabilityZone, *v.AvailabilityZone)
+	}
+	if v.CreatedTimestamp != nil {
+		s.WriteTime(schemas.CreateDevEndpointResponse_CreatedTimestamp, *v.CreatedTimestamp)
+	}
+	if v.EndpointName != nil {
+		s.WriteString(schemas.CreateDevEndpointResponse_EndpointName, *v.EndpointName)
+	}
+	if v.ExtraJarsS3Path != nil {
+		s.WriteString(schemas.CreateDevEndpointResponse_ExtraJarsS3Path, *v.ExtraJarsS3Path)
+	}
+	if v.ExtraPythonLibsS3Path != nil {
+		s.WriteString(schemas.CreateDevEndpointResponse_ExtraPythonLibsS3Path, *v.ExtraPythonLibsS3Path)
+	}
+	if v.FailureReason != nil {
+		s.WriteString(schemas.CreateDevEndpointResponse_FailureReason, *v.FailureReason)
+	}
+	if v.GlueVersion != nil {
+		s.WriteString(schemas.CreateDevEndpointResponse_GlueVersion, *v.GlueVersion)
+	}
+	if v.NumberOfNodes != 0 {
+		s.WriteInt32(schemas.CreateDevEndpointResponse_NumberOfNodes, v.NumberOfNodes)
+	}
+	if v.NumberOfWorkers != nil {
+		s.WriteInt32(schemas.CreateDevEndpointResponse_NumberOfWorkers, *v.NumberOfWorkers)
+	}
+	if v.RoleArn != nil {
+		s.WriteString(schemas.CreateDevEndpointResponse_RoleArn, *v.RoleArn)
+	}
+	if v.SecurityConfiguration != nil {
+		s.WriteString(schemas.CreateDevEndpointResponse_SecurityConfiguration, *v.SecurityConfiguration)
+	}
+	serializeStringList(s, schemas.CreateDevEndpointResponse_SecurityGroupIds, v.SecurityGroupIds)
+	if v.Status != nil {
+		s.WriteString(schemas.CreateDevEndpointResponse_Status, *v.Status)
+	}
+	if v.SubnetId != nil {
+		s.WriteString(schemas.CreateDevEndpointResponse_SubnetId, *v.SubnetId)
+	}
+	if v.VpcId != nil {
+		s.WriteString(schemas.CreateDevEndpointResponse_VpcId, *v.VpcId)
+	}
+	if v.WorkerType != "" {
+		s.WriteString(schemas.CreateDevEndpointResponse_WorkerType, string(v.WorkerType))
+	}
+	if v.YarnEndpointAddress != nil {
+		s.WriteString(schemas.CreateDevEndpointResponse_YarnEndpointAddress, *v.YarnEndpointAddress)
+	}
+	if v.ZeppelinRemoteSparkInterpreterPort != 0 {
+		s.WriteInt32(schemas.CreateDevEndpointResponse_ZeppelinRemoteSparkInterpreterPort, v.ZeppelinRemoteSparkInterpreterPort)
+	}
+}
+func (v *CreateDevEndpointOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateDevEndpointResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateDevEndpointResponse_Arguments:
+			return deserializeMapValue(d, schemas.CreateDevEndpointResponse_Arguments, &v.Arguments)
+		case schemas.CreateDevEndpointResponse_AvailabilityZone:
+			v.AvailabilityZone = new(string)
+			return d.ReadString(schemas.CreateDevEndpointResponse_AvailabilityZone, v.AvailabilityZone)
+		case schemas.CreateDevEndpointResponse_CreatedTimestamp:
+			v.CreatedTimestamp = new(time.Time)
+			return d.ReadTime(schemas.CreateDevEndpointResponse_CreatedTimestamp, v.CreatedTimestamp)
+		case schemas.CreateDevEndpointResponse_EndpointName:
+			v.EndpointName = new(string)
+			return d.ReadString(schemas.CreateDevEndpointResponse_EndpointName, v.EndpointName)
+		case schemas.CreateDevEndpointResponse_ExtraJarsS3Path:
+			v.ExtraJarsS3Path = new(string)
+			return d.ReadString(schemas.CreateDevEndpointResponse_ExtraJarsS3Path, v.ExtraJarsS3Path)
+		case schemas.CreateDevEndpointResponse_ExtraPythonLibsS3Path:
+			v.ExtraPythonLibsS3Path = new(string)
+			return d.ReadString(schemas.CreateDevEndpointResponse_ExtraPythonLibsS3Path, v.ExtraPythonLibsS3Path)
+		case schemas.CreateDevEndpointResponse_FailureReason:
+			v.FailureReason = new(string)
+			return d.ReadString(schemas.CreateDevEndpointResponse_FailureReason, v.FailureReason)
+		case schemas.CreateDevEndpointResponse_GlueVersion:
+			v.GlueVersion = new(string)
+			return d.ReadString(schemas.CreateDevEndpointResponse_GlueVersion, v.GlueVersion)
+		case schemas.CreateDevEndpointResponse_NumberOfNodes:
+			return d.ReadInt32(schemas.CreateDevEndpointResponse_NumberOfNodes, &v.NumberOfNodes)
+		case schemas.CreateDevEndpointResponse_NumberOfWorkers:
+			v.NumberOfWorkers = new(int32)
+			return d.ReadInt32(schemas.CreateDevEndpointResponse_NumberOfWorkers, v.NumberOfWorkers)
+		case schemas.CreateDevEndpointResponse_RoleArn:
+			v.RoleArn = new(string)
+			return d.ReadString(schemas.CreateDevEndpointResponse_RoleArn, v.RoleArn)
+		case schemas.CreateDevEndpointResponse_SecurityConfiguration:
+			v.SecurityConfiguration = new(string)
+			return d.ReadString(schemas.CreateDevEndpointResponse_SecurityConfiguration, v.SecurityConfiguration)
+		case schemas.CreateDevEndpointResponse_SecurityGroupIds:
+			return deserializeStringList(d, schemas.CreateDevEndpointResponse_SecurityGroupIds, &v.SecurityGroupIds)
+		case schemas.CreateDevEndpointResponse_Status:
+			v.Status = new(string)
+			return d.ReadString(schemas.CreateDevEndpointResponse_Status, v.Status)
+		case schemas.CreateDevEndpointResponse_SubnetId:
+			v.SubnetId = new(string)
+			return d.ReadString(schemas.CreateDevEndpointResponse_SubnetId, v.SubnetId)
+		case schemas.CreateDevEndpointResponse_VpcId:
+			v.VpcId = new(string)
+			return d.ReadString(schemas.CreateDevEndpointResponse_VpcId, v.VpcId)
+		case schemas.CreateDevEndpointResponse_WorkerType:
+			var ev string
+			if err := d.ReadString(schemas.CreateDevEndpointResponse_WorkerType, &ev); err != nil {
+				return err
+			}
+			v.WorkerType = types.WorkerType(ev)
+			return nil
+		case schemas.CreateDevEndpointResponse_YarnEndpointAddress:
+			v.YarnEndpointAddress = new(string)
+			return d.ReadString(schemas.CreateDevEndpointResponse_YarnEndpointAddress, v.YarnEndpointAddress)
+		case schemas.CreateDevEndpointResponse_ZeppelinRemoteSparkInterpreterPort:
+			return d.ReadInt32(schemas.CreateDevEndpointResponse_ZeppelinRemoteSparkInterpreterPort, &v.ZeppelinRemoteSparkInterpreterPort)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateDevEndpointMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateDevEndpoint{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateDevEndpoint, schemas.CreateDevEndpointRequest, schemas.CreateDevEndpointResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateDevEndpoint{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateDevEndpoint, schemas.CreateDevEndpointRequest, schemas.CreateDevEndpointResponse), output: &CreateDevEndpointOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

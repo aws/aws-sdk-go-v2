@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"members":[{"designation":"PROJECT_OWNER","memberDetails":{"user":{"userId":"__UserId__"}},"userCreatedDesignationId":"__UserCreatedDesignationId__"},{"designation":"PROJECT_OWNER","memberDetails":{"user":{"userId":"__UserId__"}},"userCreatedDesignationId":"__UserCreatedDesignationId__"}],"nextToken":"__NextToken__"}

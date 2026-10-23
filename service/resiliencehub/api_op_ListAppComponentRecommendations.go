@@ -5,7 +5,9 @@ package resiliencehub
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/resiliencehub/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/resiliencehub/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -47,6 +49,40 @@ type ListAppComponentRecommendationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAppComponentRecommendationsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAppComponentRecommendationsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAppComponentRecommendationsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AssessmentArn != nil {
+		s.WriteString(schemas.ListAppComponentRecommendationsRequest_assessmentArn, *v.AssessmentArn)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListAppComponentRecommendationsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAppComponentRecommendationsRequest_nextToken, *v.NextToken)
+	}
+}
+func (v *ListAppComponentRecommendationsInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListAppComponentRecommendationsRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListAppComponentRecommendationsRequest_assessmentArn:
+			v.AssessmentArn = new(string)
+			return d.ReadString(schemas.ListAppComponentRecommendationsRequest_assessmentArn, v.AssessmentArn)
+		case schemas.ListAppComponentRecommendationsRequest_maxResults:
+			v.MaxResults = new(int32)
+			return d.ReadInt32(schemas.ListAppComponentRecommendationsRequest_maxResults, v.MaxResults)
+		case schemas.ListAppComponentRecommendationsRequest_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListAppComponentRecommendationsRequest_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
+
 type ListAppComponentRecommendationsOutput struct {
 
 	// The recommendations for an Resilience Hub Application Component, returned as an
@@ -65,13 +101,35 @@ type ListAppComponentRecommendationsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAppComponentRecommendationsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAppComponentRecommendationsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAppComponentRecommendationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeComponentRecommendationList(s, schemas.ListAppComponentRecommendationsResponse_componentRecommendations, v.ComponentRecommendations)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAppComponentRecommendationsResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListAppComponentRecommendationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListAppComponentRecommendationsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListAppComponentRecommendationsResponse_componentRecommendations:
+			return deserializeComponentRecommendationList(d, schemas.ListAppComponentRecommendationsResponse_componentRecommendations, &v.ComponentRecommendations)
+		case schemas.ListAppComponentRecommendationsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListAppComponentRecommendationsResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListAppComponentRecommendationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListAppComponentRecommendations{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAppComponentRecommendations, schemas.ListAppComponentRecommendationsRequest, schemas.ListAppComponentRecommendationsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListAppComponentRecommendations{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAppComponentRecommendations, schemas.ListAppComponentRecommendationsRequest, schemas.ListAppComponentRecommendationsResponse), output: &ListAppComponentRecommendationsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package customerprofiles
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/customerprofiles/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/customerprofiles/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -40,6 +42,21 @@ type GetRecommenderSchemaInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetRecommenderSchemaInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetRecommenderSchemaRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetRecommenderSchemaInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DomainName != nil {
+		s.WriteString(schemas.GetRecommenderSchemaRequest_DomainName, *v.DomainName)
+	}
+	if v.RecommenderSchemaName != nil {
+		s.WriteString(schemas.GetRecommenderSchemaRequest_RecommenderSchemaName, *v.RecommenderSchemaName)
+	}
+}
+
 type GetRecommenderSchemaOutput struct {
 
 	// The timestamp of when the recommender schema was created.
@@ -68,13 +85,51 @@ type GetRecommenderSchemaOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetRecommenderSchemaOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetRecommenderSchemaResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetRecommenderSchemaOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.GetRecommenderSchemaResponse_CreatedAt, *v.CreatedAt)
+	}
+	serializeRecommenderSchemaFields(s, schemas.GetRecommenderSchemaResponse_Fields, v.Fields)
+	if v.RecommenderSchemaName != nil {
+		s.WriteString(schemas.GetRecommenderSchemaResponse_RecommenderSchemaName, *v.RecommenderSchemaName)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.GetRecommenderSchemaResponse_Status, string(v.Status))
+	}
+}
+func (v *GetRecommenderSchemaOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetRecommenderSchemaResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetRecommenderSchemaResponse_CreatedAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.GetRecommenderSchemaResponse_CreatedAt, v.CreatedAt)
+		case schemas.GetRecommenderSchemaResponse_Fields:
+			return deserializeRecommenderSchemaFields(d, schemas.GetRecommenderSchemaResponse_Fields, &v.Fields)
+		case schemas.GetRecommenderSchemaResponse_RecommenderSchemaName:
+			v.RecommenderSchemaName = new(string)
+			return d.ReadString(schemas.GetRecommenderSchemaResponse_RecommenderSchemaName, v.RecommenderSchemaName)
+		case schemas.GetRecommenderSchemaResponse_Status:
+			var ev string
+			if err := d.ReadString(schemas.GetRecommenderSchemaResponse_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.RecommenderSchemaStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetRecommenderSchemaMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetRecommenderSchema{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetRecommenderSchema, schemas.GetRecommenderSchemaRequest, schemas.GetRecommenderSchemaResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetRecommenderSchema{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetRecommenderSchema, schemas.GetRecommenderSchemaRequest, schemas.GetRecommenderSchemaResponse), output: &GetRecommenderSchemaOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

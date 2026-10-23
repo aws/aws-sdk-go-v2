@@ -5,7 +5,9 @@ package ssm
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/ssm/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ssm/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -55,6 +57,23 @@ type ListDocumentsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListDocumentsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListDocumentsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListDocumentsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDocumentFilterList(s, schemas.ListDocumentsRequest_DocumentFilterList, v.DocumentFilterList)
+	serializeDocumentKeyValuesFilterList(s, schemas.ListDocumentsRequest_Filters, v.Filters)
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListDocumentsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListDocumentsRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListDocumentsOutput struct {
 
 	// The names of the SSM documents.
@@ -70,13 +89,35 @@ type ListDocumentsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListDocumentsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListDocumentsResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListDocumentsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDocumentIdentifierList(s, schemas.ListDocumentsResult_DocumentIdentifiers, v.DocumentIdentifiers)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListDocumentsResult_NextToken, *v.NextToken)
+	}
+}
+func (v *ListDocumentsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListDocumentsResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListDocumentsResult_DocumentIdentifiers:
+			return deserializeDocumentIdentifierList(d, schemas.ListDocumentsResult_DocumentIdentifiers, &v.DocumentIdentifiers)
+		case schemas.ListDocumentsResult_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListDocumentsResult_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListDocumentsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListDocuments{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDocuments, schemas.ListDocumentsRequest, schemas.ListDocumentsResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListDocuments{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDocuments, schemas.ListDocumentsRequest, schemas.ListDocumentsResult), output: &ListDocumentsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -1139,6 +1139,37 @@ func TestCheckRequestSnapshot_CreateDataSource(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_CreateDesignation(t *testing.T) {
+	input := &CreateDesignationInput{
+		DomainIdentifier:   ptr.String("__DomainIdentifier__"),
+		Name:               ptr.String("__Name__"),
+		Description:        ptr.String("__Description__"),
+		Policy:             ptr.String("__Policy__"),
+		DeletionProtection: ptr.Bool(true),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.CreateDesignation(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateDesignation"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_CreateDomain(t *testing.T) {
 	input := &CreateDomainInput{
 		Name:        ptr.String("__Name__"),
@@ -1327,6 +1358,7 @@ func TestCheckRequestSnapshot_CreateEnvironmentBlueprint(t *testing.T) {
 				IsUpdateSupported: ptr.Bool(true),
 			},
 		},
+		BlueprintCategory: types.BlueprintCategory("TOOLING"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -1575,6 +1607,7 @@ func TestCheckRequestSnapshot_CreateNotebook(t *testing.T) {
 		OwningProjectIdentifier: ptr.String("__OwningProjectIdentifier__"),
 		Name:                    ptr.String("__Name__"),
 		Description:             ptr.String("__Description__"),
+		Type:                    types.NotebookType("DATA"),
 		Metadata: map[string]string{
 			"key0": "__Value__",
 		},
@@ -1667,13 +1700,15 @@ func TestCheckRequestSnapshot_CreateProject(t *testing.T) {
 				Member: &types.MemberMemberUserIdentifier{
 					Value: "__MemberMemberUserIdentifier__",
 				},
-				Designation: types.UserDesignation("PROJECT_OWNER"),
+				Designation:              types.UserDesignation("PROJECT_OWNER"),
+				UserCreatedDesignationId: ptr.String("__UserCreatedDesignationId__"),
 			},
 			{
 				Member: &types.MemberMemberUserIdentifier{
 					Value: "__MemberMemberUserIdentifier__",
 				},
-				Designation: types.UserDesignation("PROJECT_OWNER"),
+				Designation:              types.UserDesignation("PROJECT_OWNER"),
+				UserCreatedDesignationId: ptr.String("__UserCreatedDesignationId__"),
 			},
 		},
 	}
@@ -1707,7 +1742,8 @@ func TestCheckRequestSnapshot_CreateProjectMembership(t *testing.T) {
 		Member: &types.MemberMemberUserIdentifier{
 			Value: "__MemberMemberUserIdentifier__",
 		},
-		Designation: types.UserDesignation("PROJECT_OWNER"),
+		Designation:              types.UserDesignation("PROJECT_OWNER"),
+		UserCreatedDesignationId: ptr.String("__UserCreatedDesignationId__"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -2387,6 +2423,34 @@ func TestCheckRequestSnapshot_DeleteDataSource(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteDataSource"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_DeleteDesignation(t *testing.T) {
+	input := &DeleteDesignationInput{
+		DomainIdentifier: ptr.String("__DomainIdentifier__"),
+		Identifier:       ptr.String("__Identifier__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DeleteDesignation(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteDesignation"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -3304,6 +3368,34 @@ func TestCheckRequestSnapshot_GetDataSourceRun(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetDataSourceRun"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_GetDesignation(t *testing.T) {
+	input := &GetDesignationInput{
+		DomainIdentifier: ptr.String("__DomainIdentifier__"),
+		Identifier:       ptr.String("__Identifier__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.GetDesignation(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetDesignation"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -4444,6 +4536,35 @@ func TestCheckRequestSnapshot_ListDataSources(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_ListDesignations(t *testing.T) {
+	input := &ListDesignationsInput{
+		DomainIdentifier: ptr.String("__DomainIdentifier__"),
+		NextToken:        ptr.String("__NextToken__"),
+		MaxResults:       ptr.Int32(1),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListDesignations(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListDesignations"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_ListDomains(t *testing.T) {
 	input := &ListDomainsInput{
 		Status:     types.DomainStatus("CREATING"),
@@ -4868,6 +4989,7 @@ func TestCheckRequestSnapshot_ListNotebooks(t *testing.T) {
 		SortOrder:               types.SortOrder("ASCENDING"),
 		SortBy:                  types.SortKey("CREATED_AT"),
 		Status:                  types.NotebookStatus("ACTIVE"),
+		Type:                    types.NotebookType("DATA"),
 		NextToken:               ptr.String("__NextToken__"),
 	}
 	body := &bytes.Buffer{}
@@ -6074,6 +6196,7 @@ func TestCheckRequestSnapshot_StartNotebookImport(t *testing.T) {
 		},
 		Name:        ptr.String("__Name__"),
 		Description: ptr.String("__Description__"),
+		Type:        types.NotebookType("DATA"),
 		ClientToken: ptr.String("__ClientToken__"),
 	}
 	body := &bytes.Buffer{}
@@ -6123,6 +6246,12 @@ func TestCheckRequestSnapshot_StartNotebookRun(t *testing.T) {
 		},
 		TimeoutConfiguration: &types.TimeoutConfig{
 			RunTimeoutInMinutes: ptr.Int32(1),
+		},
+		NotificationConfiguration: &types.NotificationConfig{
+			NotifyOn: []types.NotifyOnState{
+				types.NotifyOnState("SUCCEEDED"),
+				types.NotifyOnState("SUCCEEDED"),
+			},
 		},
 		TriggerSource: &types.TriggerSource{
 			Type: types.TriggerSourceType("MANUAL"),
@@ -6528,6 +6657,38 @@ func TestCheckRequestSnapshot_UpdateDataSource(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_UpdateDesignation(t *testing.T) {
+	input := &UpdateDesignationInput{
+		DomainIdentifier:   ptr.String("__DomainIdentifier__"),
+		Identifier:         ptr.String("__Identifier__"),
+		Name:               ptr.String("__Name__"),
+		Description:        ptr.String("__Description__"),
+		Policy:             ptr.String("__Policy__"),
+		DeletionProtection: ptr.Bool(true),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.UpdateDesignation(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateDesignation"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_UpdateDomain(t *testing.T) {
 	input := &UpdateDomainInput{
 		Identifier:  ptr.String("__Identifier__"),
@@ -6707,6 +6868,7 @@ func TestCheckRequestSnapshot_UpdateEnvironmentBlueprint(t *testing.T) {
 				IsUpdateSupported: ptr.Bool(true),
 			},
 		},
+		BlueprintCategory: types.BlueprintCategory("TOOLING"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -6888,6 +7050,7 @@ func TestCheckRequestSnapshot_UpdateNotebook(t *testing.T) {
 			{},
 			{},
 		},
+		Type: types.NotebookType("DATA"),
 		Metadata: map[string]string{
 			"key0": "__Value__",
 		},
@@ -8327,6 +8490,37 @@ func TestUpdateRequestSnapshot_CreateDataSource(t *testing.T) {
 	}
 }
 
+func TestUpdateRequestSnapshot_CreateDesignation(t *testing.T) {
+	input := &CreateDesignationInput{
+		DomainIdentifier:   ptr.String("__DomainIdentifier__"),
+		Name:               ptr.String("__Name__"),
+		Description:        ptr.String("__Description__"),
+		Policy:             ptr.String("__Policy__"),
+		DeletionProtection: ptr.Bool(true),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.CreateDesignation(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateDesignation"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_CreateDomain(t *testing.T) {
 	input := &CreateDomainInput{
 		Name:        ptr.String("__Name__"),
@@ -8515,6 +8709,7 @@ func TestUpdateRequestSnapshot_CreateEnvironmentBlueprint(t *testing.T) {
 				IsUpdateSupported: ptr.Bool(true),
 			},
 		},
+		BlueprintCategory: types.BlueprintCategory("TOOLING"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -8763,6 +8958,7 @@ func TestUpdateRequestSnapshot_CreateNotebook(t *testing.T) {
 		OwningProjectIdentifier: ptr.String("__OwningProjectIdentifier__"),
 		Name:                    ptr.String("__Name__"),
 		Description:             ptr.String("__Description__"),
+		Type:                    types.NotebookType("DATA"),
 		Metadata: map[string]string{
 			"key0": "__Value__",
 		},
@@ -8855,13 +9051,15 @@ func TestUpdateRequestSnapshot_CreateProject(t *testing.T) {
 				Member: &types.MemberMemberUserIdentifier{
 					Value: "__MemberMemberUserIdentifier__",
 				},
-				Designation: types.UserDesignation("PROJECT_OWNER"),
+				Designation:              types.UserDesignation("PROJECT_OWNER"),
+				UserCreatedDesignationId: ptr.String("__UserCreatedDesignationId__"),
 			},
 			{
 				Member: &types.MemberMemberUserIdentifier{
 					Value: "__MemberMemberUserIdentifier__",
 				},
-				Designation: types.UserDesignation("PROJECT_OWNER"),
+				Designation:              types.UserDesignation("PROJECT_OWNER"),
+				UserCreatedDesignationId: ptr.String("__UserCreatedDesignationId__"),
 			},
 		},
 	}
@@ -8895,7 +9093,8 @@ func TestUpdateRequestSnapshot_CreateProjectMembership(t *testing.T) {
 		Member: &types.MemberMemberUserIdentifier{
 			Value: "__MemberMemberUserIdentifier__",
 		},
-		Designation: types.UserDesignation("PROJECT_OWNER"),
+		Designation:              types.UserDesignation("PROJECT_OWNER"),
+		UserCreatedDesignationId: ptr.String("__UserCreatedDesignationId__"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -9575,6 +9774,34 @@ func TestUpdateRequestSnapshot_DeleteDataSource(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteDataSource"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_DeleteDesignation(t *testing.T) {
+	input := &DeleteDesignationInput{
+		DomainIdentifier: ptr.String("__DomainIdentifier__"),
+		Identifier:       ptr.String("__Identifier__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DeleteDesignation(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteDesignation"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -10492,6 +10719,34 @@ func TestUpdateRequestSnapshot_GetDataSourceRun(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetDataSourceRun"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_GetDesignation(t *testing.T) {
+	input := &GetDesignationInput{
+		DomainIdentifier: ptr.String("__DomainIdentifier__"),
+		Identifier:       ptr.String("__Identifier__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.GetDesignation(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetDesignation"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -11632,6 +11887,35 @@ func TestUpdateRequestSnapshot_ListDataSources(t *testing.T) {
 	}
 }
 
+func TestUpdateRequestSnapshot_ListDesignations(t *testing.T) {
+	input := &ListDesignationsInput{
+		DomainIdentifier: ptr.String("__DomainIdentifier__"),
+		NextToken:        ptr.String("__NextToken__"),
+		MaxResults:       ptr.Int32(1),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListDesignations(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListDesignations"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_ListDomains(t *testing.T) {
 	input := &ListDomainsInput{
 		Status:     types.DomainStatus("CREATING"),
@@ -12056,6 +12340,7 @@ func TestUpdateRequestSnapshot_ListNotebooks(t *testing.T) {
 		SortOrder:               types.SortOrder("ASCENDING"),
 		SortBy:                  types.SortKey("CREATED_AT"),
 		Status:                  types.NotebookStatus("ACTIVE"),
+		Type:                    types.NotebookType("DATA"),
 		NextToken:               ptr.String("__NextToken__"),
 	}
 	body := &bytes.Buffer{}
@@ -13262,6 +13547,7 @@ func TestUpdateRequestSnapshot_StartNotebookImport(t *testing.T) {
 		},
 		Name:        ptr.String("__Name__"),
 		Description: ptr.String("__Description__"),
+		Type:        types.NotebookType("DATA"),
 		ClientToken: ptr.String("__ClientToken__"),
 	}
 	body := &bytes.Buffer{}
@@ -13311,6 +13597,12 @@ func TestUpdateRequestSnapshot_StartNotebookRun(t *testing.T) {
 		},
 		TimeoutConfiguration: &types.TimeoutConfig{
 			RunTimeoutInMinutes: ptr.Int32(1),
+		},
+		NotificationConfiguration: &types.NotificationConfig{
+			NotifyOn: []types.NotifyOnState{
+				types.NotifyOnState("SUCCEEDED"),
+				types.NotifyOnState("SUCCEEDED"),
+			},
 		},
 		TriggerSource: &types.TriggerSource{
 			Type: types.TriggerSourceType("MANUAL"),
@@ -13716,6 +14008,38 @@ func TestUpdateRequestSnapshot_UpdateDataSource(t *testing.T) {
 	}
 }
 
+func TestUpdateRequestSnapshot_UpdateDesignation(t *testing.T) {
+	input := &UpdateDesignationInput{
+		DomainIdentifier:   ptr.String("__DomainIdentifier__"),
+		Identifier:         ptr.String("__Identifier__"),
+		Name:               ptr.String("__Name__"),
+		Description:        ptr.String("__Description__"),
+		Policy:             ptr.String("__Policy__"),
+		DeletionProtection: ptr.Bool(true),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.UpdateDesignation(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateDesignation"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_UpdateDomain(t *testing.T) {
 	input := &UpdateDomainInput{
 		Identifier:  ptr.String("__Identifier__"),
@@ -13895,6 +14219,7 @@ func TestUpdateRequestSnapshot_UpdateEnvironmentBlueprint(t *testing.T) {
 				IsUpdateSupported: ptr.Bool(true),
 			},
 		},
+		BlueprintCategory: types.BlueprintCategory("TOOLING"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -14076,6 +14401,7 @@ func TestUpdateRequestSnapshot_UpdateNotebook(t *testing.T) {
 			{},
 			{},
 		},
+		Type: types.NotebookType("DATA"),
 		Metadata: map[string]string{
 			"key0": "__Value__",
 		},

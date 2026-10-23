@@ -75,7 +75,9 @@ blob StreamingPayload
 
 @error("client")
 @httpError(404)
-structure ResourceNotFound {}
+structure ResourceNotFound {
+    message: String,
+}
 
 // Event stream (caller-owned) operation: the response body backs an event
 // stream reader and must NOT be closed on the success path.

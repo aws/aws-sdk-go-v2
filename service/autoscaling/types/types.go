@@ -37,6 +37,46 @@ type AcceleratorTotalMemoryMiBRequest struct {
 	noSmithyDocumentSerde
 }
 
+//	Describes an account setting for Amazon EC2 Auto Scaling. Account settings
+//
+// control how certain features behave for your account. Some settings can be
+// enforced after a specified date, meaning that after the enforcement date, you
+// can no longer modify the setting.
+type AccountSetting struct {
+
+	//  The default value of the account setting before the enforcement date. Valid
+	// values are enabled and disabled. This parameter is only returned for settings
+	// with hard or flexible enforcement types.
+	DefaultValue *string
+
+	//  The value that will be enforced after the enforcement date. Valid values are
+	// enabled and disabled. This parameter is only returned for settings with hard or
+	// flexible enforcement types.
+	EnforcedValue *string
+
+	//  The date when the account setting will be enforced. After this date, for
+	// settings with hard enforcement type, you can no longer modify the setting value.
+	// This parameter is only returned for settings with hard or flexible enforcement
+	// types.
+	EnforcementDate *time.Time
+
+	//  The type of enforcement for the account setting. Valid values include: hard
+	// (the setting has a hard enforcement date after which the setting will be
+	// enforced and cannot be modified), flexible (the setting has a flexible
+	// enforcement where you can always modify the setting value), and none (the
+	// setting has no enforcement and can always be modified).
+	EnforcementType *string
+
+	//  The name of the account setting. Each account setting has a unique name that
+	// identifies the specific feature it controls.
+	Name *string
+
+	//  The current value of the account setting.
+	Value *string
+
+	noSmithyDocumentSerde
+}
+
 // Describes scaling activity, which is a long-running process that represents a
 // change to your Auto Scaling group, such as changing its size or replacing an
 // instance.

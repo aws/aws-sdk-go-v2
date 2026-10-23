@@ -4,7 +4,9 @@ package ssm
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/ssm/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ssm/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -39,6 +41,18 @@ type GetPatchBaselineInput struct {
 	BaselineId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetPatchBaselineInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetPatchBaselineRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetPatchBaselineInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BaselineId != nil {
+		s.WriteString(schemas.GetPatchBaselineRequest_BaselineId, *v.BaselineId)
+	}
 }
 
 type GetPatchBaselineOutput struct {
@@ -108,13 +122,130 @@ type GetPatchBaselineOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetPatchBaselineOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetPatchBaselineResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetPatchBaselineOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApprovalRules != nil {
+		s.WriteStruct(schemas.GetPatchBaselineResult_ApprovalRules)
+		v.ApprovalRules.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializePatchIdList(s, schemas.GetPatchBaselineResult_ApprovedPatches, v.ApprovedPatches)
+	if v.ApprovedPatchesComplianceLevel != "" {
+		s.WriteString(schemas.GetPatchBaselineResult_ApprovedPatchesComplianceLevel, string(v.ApprovedPatchesComplianceLevel))
+	}
+	if v.ApprovedPatchesEnableNonSecurity != nil {
+		s.WriteBool(schemas.GetPatchBaselineResult_ApprovedPatchesEnableNonSecurity, *v.ApprovedPatchesEnableNonSecurity)
+	}
+	if v.AvailableSecurityUpdatesComplianceStatus != "" {
+		s.WriteString(schemas.GetPatchBaselineResult_AvailableSecurityUpdatesComplianceStatus, string(v.AvailableSecurityUpdatesComplianceStatus))
+	}
+	if v.BaselineId != nil {
+		s.WriteString(schemas.GetPatchBaselineResult_BaselineId, *v.BaselineId)
+	}
+	if v.CreatedDate != nil {
+		s.WriteTime(schemas.GetPatchBaselineResult_CreatedDate, *v.CreatedDate)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.GetPatchBaselineResult_Description, *v.Description)
+	}
+	if v.GlobalFilters != nil {
+		s.WriteStruct(schemas.GetPatchBaselineResult_GlobalFilters)
+		v.GlobalFilters.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ModifiedDate != nil {
+		s.WriteTime(schemas.GetPatchBaselineResult_ModifiedDate, *v.ModifiedDate)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.GetPatchBaselineResult_Name, *v.Name)
+	}
+	if v.OperatingSystem != "" {
+		s.WriteString(schemas.GetPatchBaselineResult_OperatingSystem, string(v.OperatingSystem))
+	}
+	serializePatchGroupList(s, schemas.GetPatchBaselineResult_PatchGroups, v.PatchGroups)
+	serializePatchIdList(s, schemas.GetPatchBaselineResult_RejectedPatches, v.RejectedPatches)
+	if v.RejectedPatchesAction != "" {
+		s.WriteString(schemas.GetPatchBaselineResult_RejectedPatchesAction, string(v.RejectedPatchesAction))
+	}
+	serializePatchSourceList(s, schemas.GetPatchBaselineResult_Sources, v.Sources)
+}
+func (v *GetPatchBaselineOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetPatchBaselineResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetPatchBaselineResult_ApprovalRules:
+			v.ApprovalRules = &types.PatchRuleGroup{}
+			return v.ApprovalRules.Deserialize(d)
+		case schemas.GetPatchBaselineResult_ApprovedPatches:
+			return deserializePatchIdList(d, schemas.GetPatchBaselineResult_ApprovedPatches, &v.ApprovedPatches)
+		case schemas.GetPatchBaselineResult_ApprovedPatchesComplianceLevel:
+			var ev string
+			if err := d.ReadString(schemas.GetPatchBaselineResult_ApprovedPatchesComplianceLevel, &ev); err != nil {
+				return err
+			}
+			v.ApprovedPatchesComplianceLevel = types.PatchComplianceLevel(ev)
+			return nil
+		case schemas.GetPatchBaselineResult_ApprovedPatchesEnableNonSecurity:
+			v.ApprovedPatchesEnableNonSecurity = new(bool)
+			return d.ReadBool(schemas.GetPatchBaselineResult_ApprovedPatchesEnableNonSecurity, v.ApprovedPatchesEnableNonSecurity)
+		case schemas.GetPatchBaselineResult_AvailableSecurityUpdatesComplianceStatus:
+			var ev string
+			if err := d.ReadString(schemas.GetPatchBaselineResult_AvailableSecurityUpdatesComplianceStatus, &ev); err != nil {
+				return err
+			}
+			v.AvailableSecurityUpdatesComplianceStatus = types.PatchComplianceStatus(ev)
+			return nil
+		case schemas.GetPatchBaselineResult_BaselineId:
+			v.BaselineId = new(string)
+			return d.ReadString(schemas.GetPatchBaselineResult_BaselineId, v.BaselineId)
+		case schemas.GetPatchBaselineResult_CreatedDate:
+			v.CreatedDate = new(time.Time)
+			return d.ReadTime(schemas.GetPatchBaselineResult_CreatedDate, v.CreatedDate)
+		case schemas.GetPatchBaselineResult_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.GetPatchBaselineResult_Description, v.Description)
+		case schemas.GetPatchBaselineResult_GlobalFilters:
+			v.GlobalFilters = &types.PatchFilterGroup{}
+			return v.GlobalFilters.Deserialize(d)
+		case schemas.GetPatchBaselineResult_ModifiedDate:
+			v.ModifiedDate = new(time.Time)
+			return d.ReadTime(schemas.GetPatchBaselineResult_ModifiedDate, v.ModifiedDate)
+		case schemas.GetPatchBaselineResult_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.GetPatchBaselineResult_Name, v.Name)
+		case schemas.GetPatchBaselineResult_OperatingSystem:
+			var ev string
+			if err := d.ReadString(schemas.GetPatchBaselineResult_OperatingSystem, &ev); err != nil {
+				return err
+			}
+			v.OperatingSystem = types.OperatingSystem(ev)
+			return nil
+		case schemas.GetPatchBaselineResult_PatchGroups:
+			return deserializePatchGroupList(d, schemas.GetPatchBaselineResult_PatchGroups, &v.PatchGroups)
+		case schemas.GetPatchBaselineResult_RejectedPatches:
+			return deserializePatchIdList(d, schemas.GetPatchBaselineResult_RejectedPatches, &v.RejectedPatches)
+		case schemas.GetPatchBaselineResult_RejectedPatchesAction:
+			var ev string
+			if err := d.ReadString(schemas.GetPatchBaselineResult_RejectedPatchesAction, &ev); err != nil {
+				return err
+			}
+			v.RejectedPatchesAction = types.PatchAction(ev)
+			return nil
+		case schemas.GetPatchBaselineResult_Sources:
+			return deserializePatchSourceList(d, schemas.GetPatchBaselineResult_Sources, &v.Sources)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetPatchBaselineMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetPatchBaseline{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetPatchBaseline, schemas.GetPatchBaselineRequest, schemas.GetPatchBaselineResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetPatchBaseline{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetPatchBaseline, schemas.GetPatchBaselineRequest, schemas.GetPatchBaselineResult), output: &GetPatchBaselineOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

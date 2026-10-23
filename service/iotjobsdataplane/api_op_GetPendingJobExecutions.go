@@ -4,7 +4,9 @@ package iotjobsdataplane
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/iotjobsdataplane/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotjobsdataplane/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -38,6 +40,18 @@ type GetPendingJobExecutionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetPendingJobExecutionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetPendingJobExecutionsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetPendingJobExecutionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ThingName != nil {
+		s.WriteString(schemas.GetPendingJobExecutionsRequest_thingName, *v.ThingName)
+	}
+}
+
 type GetPendingJobExecutionsOutput struct {
 
 	// A list of JobExecutionSummary objects with status IN_PROGRESS.
@@ -52,13 +66,32 @@ type GetPendingJobExecutionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetPendingJobExecutionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetPendingJobExecutionsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetPendingJobExecutionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeJobExecutionSummaryList(s, schemas.GetPendingJobExecutionsResponse_inProgressJobs, v.InProgressJobs)
+	serializeJobExecutionSummaryList(s, schemas.GetPendingJobExecutionsResponse_queuedJobs, v.QueuedJobs)
+}
+func (v *GetPendingJobExecutionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetPendingJobExecutionsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetPendingJobExecutionsResponse_inProgressJobs:
+			return deserializeJobExecutionSummaryList(d, schemas.GetPendingJobExecutionsResponse_inProgressJobs, &v.InProgressJobs)
+		case schemas.GetPendingJobExecutionsResponse_queuedJobs:
+			return deserializeJobExecutionSummaryList(d, schemas.GetPendingJobExecutionsResponse_queuedJobs, &v.QueuedJobs)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetPendingJobExecutionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetPendingJobExecutions{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetPendingJobExecutions, schemas.GetPendingJobExecutionsRequest, schemas.GetPendingJobExecutionsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetPendingJobExecutions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetPendingJobExecutions, schemas.GetPendingJobExecutionsRequest, schemas.GetPendingJobExecutionsResponse), output: &GetPendingJobExecutionsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

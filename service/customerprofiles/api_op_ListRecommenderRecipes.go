@@ -5,7 +5,9 @@ package customerprofiles
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/customerprofiles/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/customerprofiles/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,21 @@ type ListRecommenderRecipesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListRecommenderRecipesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListRecommenderRecipesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListRecommenderRecipesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListRecommenderRecipesRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListRecommenderRecipesRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListRecommenderRecipesOutput struct {
 
 	// A token to retrieve the next page of results. Null if there are no more results
@@ -54,13 +71,35 @@ type ListRecommenderRecipesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListRecommenderRecipesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListRecommenderRecipesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListRecommenderRecipesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListRecommenderRecipesResponse_NextToken, *v.NextToken)
+	}
+	serializeRecommenderRecipesList(s, schemas.ListRecommenderRecipesResponse_RecommenderRecipes, v.RecommenderRecipes)
+}
+func (v *ListRecommenderRecipesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListRecommenderRecipesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListRecommenderRecipesResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListRecommenderRecipesResponse_NextToken, v.NextToken)
+		case schemas.ListRecommenderRecipesResponse_RecommenderRecipes:
+			return deserializeRecommenderRecipesList(d, schemas.ListRecommenderRecipesResponse_RecommenderRecipes, &v.RecommenderRecipes)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListRecommenderRecipesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListRecommenderRecipes{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListRecommenderRecipes, schemas.ListRecommenderRecipesRequest, schemas.ListRecommenderRecipesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListRecommenderRecipes{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListRecommenderRecipes, schemas.ListRecommenderRecipesRequest, schemas.ListRecommenderRecipesResponse), output: &ListRecommenderRecipesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

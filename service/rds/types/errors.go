@@ -335,6 +335,92 @@ func (e *CustomDBEngineVersionQuotaExceededFault) ErrorFault() smithy.ErrorFault
 	return smithy.FaultClient
 }
 
+// You already have a DB capacity reservation with the given name. Choose a
+// different name for the new reservation, or use the existing reservation.
+type DBCapacityReservationAlreadyExistsFault struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *DBCapacityReservationAlreadyExistsFault) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *DBCapacityReservationAlreadyExistsFault) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *DBCapacityReservationAlreadyExistsFault) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "DBCapacityReservationAlreadyExists"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *DBCapacityReservationAlreadyExistsFault) ErrorFault() smithy.ErrorFault {
+	return smithy.FaultClient
+}
+
+// DBCapacityReservationIdentifier doesn't refer to an existing DB capacity
+// reservation.
+type DBCapacityReservationNotFoundFault struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *DBCapacityReservationNotFoundFault) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *DBCapacityReservationNotFoundFault) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *DBCapacityReservationNotFoundFault) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "DBCapacityReservationNotFound"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *DBCapacityReservationNotFoundFault) ErrorFault() smithy.ErrorFault {
+	return smithy.FaultClient
+}
+
+// The specified configuration isn't supported for DB capacity reservations.
+type DBCapacityReservationUnsupportedFault struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *DBCapacityReservationUnsupportedFault) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *DBCapacityReservationUnsupportedFault) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *DBCapacityReservationUnsupportedFault) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "DBCapacityReservationUnsupported"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *DBCapacityReservationUnsupportedFault) ErrorFault() smithy.ErrorFault {
+	return smithy.FaultClient
+}
+
 // The user already has a DB cluster with the given identifier.
 type DBClusterAlreadyExistsFault struct {
 	Message *string
@@ -2316,6 +2402,34 @@ func (e *InvalidCustomDBEngineVersionStateFault) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InvalidCustomDBEngineVersionStateFault) ErrorFault() smithy.ErrorFault {
+	return smithy.FaultClient
+}
+
+// The DB capacity reservation isn't in a valid state.
+type InvalidDBCapacityReservationStateFault struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *InvalidDBCapacityReservationStateFault) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *InvalidDBCapacityReservationStateFault) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *InvalidDBCapacityReservationStateFault) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "InvalidDBCapacityReservationState"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *InvalidDBCapacityReservationStateFault) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
 

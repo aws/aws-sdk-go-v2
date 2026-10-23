@@ -4,6 +4,8 @@ package kinesisvideo
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/kinesisvideo/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -43,6 +45,22 @@ type UntagStreamInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UntagStreamInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UntagStreamInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UntagStreamInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.StreamARN != nil {
+		s.WriteString(schemas.UntagStreamInput_StreamARN, *v.StreamARN)
+	}
+	if v.StreamName != nil {
+		s.WriteString(schemas.UntagStreamInput_StreamName, *v.StreamName)
+	}
+	serializeTagKeyList(s, schemas.UntagStreamInput_TagKeyList, v.TagKeyList)
+}
+
 type UntagStreamOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -50,13 +68,26 @@ type UntagStreamOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UntagStreamOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UntagStreamOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UntagStreamOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *UntagStreamOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UntagStreamOutput, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUntagStreamMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUntagStream{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UntagStream, schemas.UntagStreamInput, schemas.UntagStreamOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUntagStream{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UntagStream, schemas.UntagStreamInput, schemas.UntagStreamOutput), output: &UntagStreamOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

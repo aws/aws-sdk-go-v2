@@ -4,7 +4,9 @@ package quicksight
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/quicksight/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/quicksight/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -81,6 +83,46 @@ type CreateDataSourceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateDataSourceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateDataSourceRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateDataSourceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AwsAccountId != nil {
+		s.WriteString(schemas.CreateDataSourceRequest_AwsAccountId, *v.AwsAccountId)
+	}
+	if v.Credentials != nil {
+		s.WriteStruct(schemas.CreateDataSourceRequest_Credentials)
+		v.Credentials.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DataSourceId != nil {
+		s.WriteString(schemas.CreateDataSourceRequest_DataSourceId, *v.DataSourceId)
+	}
+	serializeDataSourceParameters(s, schemas.CreateDataSourceRequest_DataSourceParameters, v.DataSourceParameters)
+	serializeFolderArnList(s, schemas.CreateDataSourceRequest_FolderArns, v.FolderArns)
+	if v.Name != nil {
+		s.WriteString(schemas.CreateDataSourceRequest_Name, *v.Name)
+	}
+	serializeResourcePermissionList(s, schemas.CreateDataSourceRequest_Permissions, v.Permissions)
+	if v.SslProperties != nil {
+		s.WriteStruct(schemas.CreateDataSourceRequest_SslProperties)
+		v.SslProperties.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeTagList(s, schemas.CreateDataSourceRequest_Tags, v.Tags)
+	if v.Type != "" {
+		s.WriteString(schemas.CreateDataSourceRequest_Type, string(v.Type))
+	}
+	if v.VpcConnectionProperties != nil {
+		s.WriteStruct(schemas.CreateDataSourceRequest_VpcConnectionProperties)
+		v.VpcConnectionProperties.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type CreateDataSourceOutput struct {
 
 	// The Amazon Resource Name (ARN) of the data source.
@@ -105,13 +147,59 @@ type CreateDataSourceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateDataSourceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateDataSourceResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateDataSourceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.CreateDataSourceResponse_Arn, *v.Arn)
+	}
+	if v.CreationStatus != "" {
+		s.WriteString(schemas.CreateDataSourceResponse_CreationStatus, string(v.CreationStatus))
+	}
+	if v.DataSourceId != nil {
+		s.WriteString(schemas.CreateDataSourceResponse_DataSourceId, *v.DataSourceId)
+	}
+	if v.RequestId != nil {
+		s.WriteString(schemas.CreateDataSourceResponse_RequestId, *v.RequestId)
+	}
+	if v.Status != 0 {
+		s.WriteInt32(schemas.CreateDataSourceResponse_Status, v.Status)
+	}
+}
+func (v *CreateDataSourceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateDataSourceResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateDataSourceResponse_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.CreateDataSourceResponse_Arn, v.Arn)
+		case schemas.CreateDataSourceResponse_CreationStatus:
+			var ev string
+			if err := d.ReadString(schemas.CreateDataSourceResponse_CreationStatus, &ev); err != nil {
+				return err
+			}
+			v.CreationStatus = types.ResourceStatus(ev)
+			return nil
+		case schemas.CreateDataSourceResponse_DataSourceId:
+			v.DataSourceId = new(string)
+			return d.ReadString(schemas.CreateDataSourceResponse_DataSourceId, v.DataSourceId)
+		case schemas.CreateDataSourceResponse_RequestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.CreateDataSourceResponse_RequestId, v.RequestId)
+		case schemas.CreateDataSourceResponse_Status:
+			return d.ReadInt32(schemas.CreateDataSourceResponse_Status, &v.Status)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateDataSourceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateDataSource{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateDataSource, schemas.CreateDataSourceRequest, schemas.CreateDataSourceResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateDataSource{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateDataSource, schemas.CreateDataSourceRequest, schemas.CreateDataSourceResponse), output: &CreateDataSourceOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

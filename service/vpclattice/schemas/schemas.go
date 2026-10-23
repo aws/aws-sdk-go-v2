@@ -529,7 +529,8 @@ var MercuryControlPlane = smithy.NewServiceSchema(_MercuryControlPlane, "2022-11
 var AccessDeniedException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.vpclattice",
 	Name:      "AccessDeniedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 403})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 403})
 var AccessDeniedException_message *smithy.Schema
 
 var _AccessLogDestinationArn = smithy.NewSchema(smithy.ShapeID{
@@ -619,6 +620,23 @@ var _CertificateArn = smithy.NewSchema(smithy.ShapeID{
 	Name:      "CertificateArn",
 }, smithy.ShapeTypeString, 0)
 
+var _CidrRange = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.vpclattice",
+	Name:      "CidrRange",
+}, smithy.ShapeTypeString, 0)
+
+var _CidrRangeList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.vpclattice",
+	Name:      "CidrRangeList",
+}, smithy.ShapeTypeList, 1)
+var _CidrRangeList_member *smithy.Schema
+
+var CidrResource = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.vpclattice",
+	Name:      "CidrResource",
+}, smithy.ShapeTypeStructure, 1)
+var CidrResource_cidrRanges *smithy.Schema
+
 var _ClientToken = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.vpclattice",
 	Name:      "ClientToken",
@@ -627,7 +645,8 @@ var _ClientToken = smithy.NewSchema(smithy.ShapeID{
 var ConflictException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.vpclattice",
 	Name:      "ConflictException",
-}, smithy.ShapeTypeStructure, 3, &smithytraits.HTTPError{Code: 409})
+}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 409})
 var ConflictException_message *smithy.Schema
 
 var ConflictException_resourceId *smithy.Schema
@@ -859,7 +878,8 @@ var _IdleTimeoutSeconds = smithy.NewSchema(smithy.ShapeID{
 var InternalServerException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.vpclattice",
 	Name:      "InternalServerException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.HTTPError{Code: 500})
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "server"},
+	&smithytraits.HTTPError{Code: 500})
 var InternalServerException_message *smithy.Schema
 
 var InternalServerException_retryAfterSeconds *smithy.Schema
@@ -981,6 +1001,34 @@ var PathMatchType_exact *smithy.Schema
 
 var PathMatchType_prefix *smithy.Schema
 
+var PayerResponsibilityEntry = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.vpclattice",
+	Name:      "PayerResponsibilityEntry",
+}, smithy.ShapeTypeStructure, 2)
+var PayerResponsibilityEntry_scope *smithy.Schema
+
+var PayerResponsibilityEntry_payerResponsibilityType *smithy.Schema
+
+var _PayerResponsibilityList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.vpclattice",
+	Name:      "PayerResponsibilityList",
+}, smithy.ShapeTypeList, 1)
+var _PayerResponsibilityList_member *smithy.Schema
+
+var PayerResponsibilityPayer = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.vpclattice",
+	Name:      "PayerResponsibilityPayer",
+}, smithy.ShapeTypeEnum, 2)
+var PayerResponsibilityPayer_VpcEndpointAccount *smithy.Schema
+
+var PayerResponsibilityPayer_ResourceGatewayAccount *smithy.Schema
+
+var PayerResponsibilityScope = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.vpclattice",
+	Name:      "PayerResponsibilityScope",
+}, smithy.ShapeTypeEnum, 1)
+var PayerResponsibilityScope_ResourceGatewayCharges *smithy.Schema
+
 var _PolicyString = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.vpclattice",
 	Name:      "PolicyString",
@@ -1021,8 +1069,10 @@ var _PrivateDnsSpecifiedDomainsList_member *smithy.Schema
 var ProtocolType = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.vpclattice",
 	Name:      "ProtocolType",
-}, smithy.ShapeTypeEnum, 1)
+}, smithy.ShapeTypeEnum, 2)
 var ProtocolType_TCP *smithy.Schema
+
+var ProtocolType_TCP_UDP *smithy.Schema
 
 var _ResourceArn = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.vpclattice",
@@ -1042,12 +1092,14 @@ var _ResourceConfigurationArn = smithy.NewSchema(smithy.ShapeID{
 var ResourceConfigurationDefinition = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.vpclattice",
 	Name:      "ResourceConfigurationDefinition",
-}, smithy.ShapeTypeUnion, 3)
+}, smithy.ShapeTypeUnion, 4)
 var ResourceConfigurationDefinition_dnsResource *smithy.Schema
 
 var ResourceConfigurationDefinition_ipResource *smithy.Schema
 
 var ResourceConfigurationDefinition_arnResource *smithy.Schema
+
+var ResourceConfigurationDefinition_cidrResource *smithy.Schema
 
 var _ResourceConfigurationId = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.vpclattice",
@@ -1113,7 +1165,7 @@ var _ResourceConfigurationSummaryList_member *smithy.Schema
 var ResourceConfigurationType = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.vpclattice",
 	Name:      "ResourceConfigurationType",
-}, smithy.ShapeTypeEnum, 4)
+}, smithy.ShapeTypeEnum, 5)
 var ResourceConfigurationType_GROUP *smithy.Schema
 
 var ResourceConfigurationType_CHILD *smithy.Schema
@@ -1121,6 +1173,8 @@ var ResourceConfigurationType_CHILD *smithy.Schema
 var ResourceConfigurationType_SINGLE *smithy.Schema
 
 var ResourceConfigurationType_ARN *smithy.Schema
+
+var ResourceConfigurationType_CIDR *smithy.Schema
 
 var _ResourceEndpointAssociationArn = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.vpclattice",
@@ -1146,7 +1200,7 @@ var _ResourceEndpointAssociationList_member *smithy.Schema
 var ResourceEndpointAssociationSummary = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.vpclattice",
 	Name:      "ResourceEndpointAssociationSummary",
-}, smithy.ShapeTypeStructure, 9)
+}, smithy.ShapeTypeStructure, 10)
 var ResourceEndpointAssociationSummary_id *smithy.Schema
 
 var ResourceEndpointAssociationSummary_arn *smithy.Schema
@@ -1164,6 +1218,8 @@ var ResourceEndpointAssociationSummary_vpcEndpointOwner *smithy.Schema
 var ResourceEndpointAssociationSummary_createdBy *smithy.Schema
 
 var ResourceEndpointAssociationSummary_createdAt *smithy.Schema
+
+var ResourceEndpointAssociationSummary_payerResponsibility *smithy.Schema
 
 var _ResourceGatewayArn = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.vpclattice",
@@ -1242,7 +1298,8 @@ var _ResourceIdentifier = smithy.NewSchema(smithy.ShapeID{
 var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.vpclattice",
 	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 3, &smithytraits.HTTPError{Code: 404})
+}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 404})
 var ResourceNotFoundException_message *smithy.Schema
 
 var ResourceNotFoundException_resourceId *smithy.Schema
@@ -1678,7 +1735,8 @@ var _ServiceNetworkVpcEndpointAssociationList_member *smithy.Schema
 var ServiceQuotaExceededException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.vpclattice",
 	Name:      "ServiceQuotaExceededException",
-}, smithy.ShapeTypeStructure, 5, &smithytraits.HTTPError{Code: 402})
+}, smithy.ShapeTypeStructure, 5, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 402})
 var ServiceQuotaExceededException_message *smithy.Schema
 
 var ServiceQuotaExceededException_resourceId *smithy.Schema
@@ -1912,7 +1970,8 @@ var _TargetSummaryList_member *smithy.Schema
 var ThrottlingException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.vpclattice",
 	Name:      "ThrottlingException",
-}, smithy.ShapeTypeStructure, 4, &smithytraits.HTTPError{Code: 429})
+}, smithy.ShapeTypeStructure, 4, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 429})
 var ThrottlingException_message *smithy.Schema
 
 var ThrottlingException_serviceCode *smithy.Schema
@@ -1942,7 +2001,8 @@ var _UnhealthyThresholdCount = smithy.NewSchema(smithy.ShapeID{
 var ValidationException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.vpclattice",
 	Name:      "ValidationException",
-}, smithy.ShapeTypeStructure, 3, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var ValidationException_message *smithy.Schema
 
 var ValidationException_reason *smithy.Schema
@@ -3795,6 +3855,10 @@ func init() {
 
 	ArnResource_arn = ArnResource.AddMember("arn", _WildcardArn)
 
+	_CidrRangeList_member = _CidrRangeList.AddMember("member", _CidrRange)
+
+	CidrResource_cidrRanges = CidrResource.AddMember("cidrRanges", _CidrRangeList)
+
 	ConflictException_message = ConflictException.AddMember("message", smithyprelude.String)
 
 	ConflictException_resourceId = ConflictException.AddMember("resourceId", smithyprelude.String)
@@ -3923,15 +3987,31 @@ func init() {
 
 	_ListenerSummaryList_member = _ListenerSummaryList.AddMember("member", ListenerSummary)
 
+	PayerResponsibilityScope_ResourceGatewayCharges = PayerResponsibilityScope.AddMember("ResourceGatewayCharges", smithyprelude.Unit)
+
+	PayerResponsibilityPayer_VpcEndpointAccount = PayerResponsibilityPayer.AddMember("VpcEndpointAccount", smithyprelude.Unit)
+
+	PayerResponsibilityPayer_ResourceGatewayAccount = PayerResponsibilityPayer.AddMember("ResourceGatewayAccount", smithyprelude.Unit)
+
+	PayerResponsibilityEntry_scope = PayerResponsibilityEntry.AddMember("scope", PayerResponsibilityScope)
+
+	PayerResponsibilityEntry_payerResponsibilityType = PayerResponsibilityEntry.AddMember("payerResponsibilityType", PayerResponsibilityPayer)
+
+	_PayerResponsibilityList_member = _PayerResponsibilityList.AddMember("member", PayerResponsibilityEntry)
+
 	_PortRangeList_member = _PortRangeList.AddMember("member", _PortRange)
 
 	ProtocolType_TCP = ProtocolType.AddMember("TCP", smithyprelude.Unit)
+
+	ProtocolType_TCP_UDP = ProtocolType.AddMember("TCP_UDP", smithyprelude.Unit)
 
 	ResourceConfigurationDefinition_dnsResource = ResourceConfigurationDefinition.AddMember("dnsResource", DnsResource)
 
 	ResourceConfigurationDefinition_ipResource = ResourceConfigurationDefinition.AddMember("ipResource", IpResource)
 
 	ResourceConfigurationDefinition_arnResource = ResourceConfigurationDefinition.AddMember("arnResource", ArnResource)
+
+	ResourceConfigurationDefinition_cidrResource = ResourceConfigurationDefinition.AddMember("cidrResource", CidrResource)
 
 	ResourceConfigurationType_GROUP = ResourceConfigurationType.AddMember("GROUP", smithyprelude.Unit)
 
@@ -3940,6 +4020,8 @@ func init() {
 	ResourceConfigurationType_SINGLE = ResourceConfigurationType.AddMember("SINGLE", smithyprelude.Unit)
 
 	ResourceConfigurationType_ARN = ResourceConfigurationType.AddMember("ARN", smithyprelude.Unit)
+
+	ResourceConfigurationType_CIDR = ResourceConfigurationType.AddMember("CIDR", smithyprelude.Unit)
 
 	ResourceConfigurationSummary_id = ResourceConfigurationSummary.AddMember("id", _ResourceConfigurationId)
 
@@ -3986,6 +4068,8 @@ func init() {
 	ResourceEndpointAssociationSummary_createdBy = ResourceEndpointAssociationSummary.AddMember("createdBy", _AccountId)
 
 	ResourceEndpointAssociationSummary_createdAt = ResourceEndpointAssociationSummary.AddMember("createdAt", _Timestamp)
+
+	ResourceEndpointAssociationSummary_payerResponsibility = ResourceEndpointAssociationSummary.AddMember("payerResponsibility", _PayerResponsibilityList)
 
 	_ResourceEndpointAssociationList_member = _ResourceEndpointAssociationList.AddMember("member", ResourceEndpointAssociationSummary)
 

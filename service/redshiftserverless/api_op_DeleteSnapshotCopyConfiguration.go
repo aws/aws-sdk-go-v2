@@ -4,7 +4,9 @@ package redshiftserverless
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/redshiftserverless/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/redshiftserverless/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -34,6 +36,18 @@ type DeleteSnapshotCopyConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteSnapshotCopyConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteSnapshotCopyConfigurationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteSnapshotCopyConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SnapshotCopyConfigurationId != nil {
+		s.WriteString(schemas.DeleteSnapshotCopyConfigurationRequest_snapshotCopyConfigurationId, *v.SnapshotCopyConfigurationId)
+	}
+}
+
 type DeleteSnapshotCopyConfigurationOutput struct {
 
 	// The deleted snapshot copy configuration object.
@@ -47,13 +61,34 @@ type DeleteSnapshotCopyConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteSnapshotCopyConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteSnapshotCopyConfigurationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteSnapshotCopyConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SnapshotCopyConfiguration != nil {
+		s.WriteStruct(schemas.DeleteSnapshotCopyConfigurationResponse_snapshotCopyConfiguration)
+		v.SnapshotCopyConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DeleteSnapshotCopyConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteSnapshotCopyConfigurationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteSnapshotCopyConfigurationResponse_snapshotCopyConfiguration:
+			v.SnapshotCopyConfiguration = &types.SnapshotCopyConfiguration{}
+			return v.SnapshotCopyConfiguration.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteSnapshotCopyConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteSnapshotCopyConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteSnapshotCopyConfiguration, schemas.DeleteSnapshotCopyConfigurationRequest, schemas.DeleteSnapshotCopyConfigurationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeleteSnapshotCopyConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteSnapshotCopyConfiguration, schemas.DeleteSnapshotCopyConfigurationRequest, schemas.DeleteSnapshotCopyConfigurationResponse), output: &DeleteSnapshotCopyConfigurationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

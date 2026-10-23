@@ -4,6 +4,8 @@ package quicksight
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/quicksight/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -40,6 +42,21 @@ type DeleteTopicV2Input struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteTopicV2Input) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteTopicV2Request)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteTopicV2Input) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AwsAccountId != nil {
+		s.WriteString(schemas.DeleteTopicV2Request_AwsAccountId, *v.AwsAccountId)
+	}
+	if v.TopicId != nil {
+		s.WriteString(schemas.DeleteTopicV2Request_TopicId, *v.TopicId)
+	}
+}
+
 type DeleteTopicV2Output struct {
 
 	// The Amazon Resource Name (ARN) of the topic.
@@ -61,13 +78,49 @@ type DeleteTopicV2Output struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteTopicV2Output) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteTopicV2Response)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteTopicV2Output) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.DeleteTopicV2Response_Arn, *v.Arn)
+	}
+	if v.RequestId != nil {
+		s.WriteString(schemas.DeleteTopicV2Response_RequestId, *v.RequestId)
+	}
+	if v.Status != 0 {
+		s.WriteInt32(schemas.DeleteTopicV2Response_Status, v.Status)
+	}
+	if v.TopicId != nil {
+		s.WriteString(schemas.DeleteTopicV2Response_TopicId, *v.TopicId)
+	}
+}
+func (v *DeleteTopicV2Output) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteTopicV2Response, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteTopicV2Response_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.DeleteTopicV2Response_Arn, v.Arn)
+		case schemas.DeleteTopicV2Response_RequestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.DeleteTopicV2Response_RequestId, v.RequestId)
+		case schemas.DeleteTopicV2Response_Status:
+			return d.ReadInt32(schemas.DeleteTopicV2Response_Status, &v.Status)
+		case schemas.DeleteTopicV2Response_TopicId:
+			v.TopicId = new(string)
+			return d.ReadString(schemas.DeleteTopicV2Response_TopicId, v.TopicId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteTopicV2Middlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteTopicV2{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteTopicV2, schemas.DeleteTopicV2Request, schemas.DeleteTopicV2Response)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteTopicV2{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteTopicV2, schemas.DeleteTopicV2Request, schemas.DeleteTopicV2Response), output: &DeleteTopicV2Output{}}, middleware.After); err != nil {
 		return err
 	}
 

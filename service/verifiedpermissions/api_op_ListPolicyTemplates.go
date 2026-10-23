@@ -5,7 +5,9 @@ package verifiedpermissions
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/verifiedpermissions/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/verifiedpermissions/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -66,6 +68,24 @@ type ListPolicyTemplatesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListPolicyTemplatesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListPolicyTemplatesInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListPolicyTemplatesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListPolicyTemplatesInput_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListPolicyTemplatesInput_nextToken, *v.NextToken)
+	}
+	if v.PolicyStoreId != nil {
+		s.WriteString(schemas.ListPolicyTemplatesInput_policyStoreId, *v.PolicyStoreId)
+	}
+}
+
 type ListPolicyTemplatesOutput struct {
 
 	// The list of the policy templates in the specified policy store.
@@ -86,13 +106,35 @@ type ListPolicyTemplatesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListPolicyTemplatesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListPolicyTemplatesOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListPolicyTemplatesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListPolicyTemplatesOutput_nextToken, *v.NextToken)
+	}
+	serializePolicyTemplatesList(s, schemas.ListPolicyTemplatesOutput_policyTemplates, v.PolicyTemplates)
+}
+func (v *ListPolicyTemplatesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListPolicyTemplatesOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListPolicyTemplatesOutput_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListPolicyTemplatesOutput_nextToken, v.NextToken)
+		case schemas.ListPolicyTemplatesOutput_policyTemplates:
+			return deserializePolicyTemplatesList(d, schemas.ListPolicyTemplatesOutput_policyTemplates, &v.PolicyTemplates)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListPolicyTemplatesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpListPolicyTemplates{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListPolicyTemplates, schemas.ListPolicyTemplatesInput, schemas.ListPolicyTemplatesOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpListPolicyTemplates{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListPolicyTemplates, schemas.ListPolicyTemplatesInput, schemas.ListPolicyTemplatesOutput), output: &ListPolicyTemplatesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,6 +4,8 @@ package apigateway
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/apigateway/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -34,6 +36,18 @@ type DeleteClientCertificateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteClientCertificateInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteClientCertificateRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteClientCertificateInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientCertificateId != nil {
+		s.WriteString(schemas.DeleteClientCertificateRequest_clientCertificateId, *v.ClientCertificateId)
+	}
+}
+
 type DeleteClientCertificateOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -41,13 +55,26 @@ type DeleteClientCertificateOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteClientCertificateOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteClientCertificateOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteClientCertificateOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteClientCertificateMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteClientCertificate{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteClientCertificate, schemas.DeleteClientCertificateRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteClientCertificate{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteClientCertificate, schemas.DeleteClientCertificateRequest, nil), output: &DeleteClientCertificateOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

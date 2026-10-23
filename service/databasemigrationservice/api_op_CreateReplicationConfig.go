@@ -4,7 +4,9 @@ package databasemigrationservice
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/databasemigrationservice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/databasemigrationservice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -107,6 +109,45 @@ type CreateReplicationConfigInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateReplicationConfigInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateReplicationConfigMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateReplicationConfigInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ComputeConfig != nil {
+		s.WriteStruct(schemas.CreateReplicationConfigMessage_ComputeConfig)
+		v.ComputeConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ReplicationConfigIdentifier != nil {
+		s.WriteString(schemas.CreateReplicationConfigMessage_ReplicationConfigIdentifier, *v.ReplicationConfigIdentifier)
+	}
+	if v.ReplicationSettings != nil {
+		s.WriteString(schemas.CreateReplicationConfigMessage_ReplicationSettings, *v.ReplicationSettings)
+	}
+	if v.ReplicationType != "" {
+		s.WriteString(schemas.CreateReplicationConfigMessage_ReplicationType, string(v.ReplicationType))
+	}
+	if v.ResourceIdentifier != nil {
+		s.WriteString(schemas.CreateReplicationConfigMessage_ResourceIdentifier, *v.ResourceIdentifier)
+	}
+	if v.SourceEndpointArn != nil {
+		s.WriteString(schemas.CreateReplicationConfigMessage_SourceEndpointArn, *v.SourceEndpointArn)
+	}
+	if v.SupplementalSettings != nil {
+		s.WriteString(schemas.CreateReplicationConfigMessage_SupplementalSettings, *v.SupplementalSettings)
+	}
+	if v.TableMappings != nil {
+		s.WriteString(schemas.CreateReplicationConfigMessage_TableMappings, *v.TableMappings)
+	}
+	serializeTagList(s, schemas.CreateReplicationConfigMessage_Tags, v.Tags)
+	if v.TargetEndpointArn != nil {
+		s.WriteString(schemas.CreateReplicationConfigMessage_TargetEndpointArn, *v.TargetEndpointArn)
+	}
+}
+
 type CreateReplicationConfigOutput struct {
 
 	// Configuration parameters returned from the DMS Serverless replication after it
@@ -119,13 +160,34 @@ type CreateReplicationConfigOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateReplicationConfigOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateReplicationConfigResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateReplicationConfigOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ReplicationConfig != nil {
+		s.WriteStruct(schemas.CreateReplicationConfigResponse_ReplicationConfig)
+		v.ReplicationConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateReplicationConfigOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateReplicationConfigResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateReplicationConfigResponse_ReplicationConfig:
+			v.ReplicationConfig = &types.ReplicationConfig{}
+			return v.ReplicationConfig.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateReplicationConfigMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateReplicationConfig{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateReplicationConfig, schemas.CreateReplicationConfigMessage, schemas.CreateReplicationConfigResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateReplicationConfig{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateReplicationConfig, schemas.CreateReplicationConfigMessage, schemas.CreateReplicationConfigResponse), output: &CreateReplicationConfigOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

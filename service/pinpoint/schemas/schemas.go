@@ -1484,7 +1484,8 @@ var AttributeType_BETWEEN *smithy.Schema
 var BadRequestException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.pinpoint",
 	Name:      "BadRequestException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var BadRequestException_Message *smithy.Schema
 
 var BadRequestException_RequestID *smithy.Schema
@@ -1862,7 +1863,8 @@ var ConditionalSplitActivity_TrueActivity *smithy.Schema
 var ConflictException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.pinpoint",
 	Name:      "ConflictException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.HTTPError{Code: 409})
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 409})
 var ConflictException_Message *smithy.Schema
 
 var ConflictException_RequestID *smithy.Schema
@@ -2562,7 +2564,8 @@ var FilterType_ENDPOINT *smithy.Schema
 var ForbiddenException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.pinpoint",
 	Name:      "ForbiddenException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.HTTPError{Code: 403})
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 403})
 var ForbiddenException_Message *smithy.Schema
 
 var ForbiddenException_RequestID *smithy.Schema
@@ -2924,7 +2927,8 @@ var Include_NONE *smithy.Schema
 var InternalServerErrorException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.pinpoint",
 	Name:      "InternalServerErrorException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.HTTPError{Code: 500})
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "server"},
+	&smithytraits.HTTPError{Code: 500})
 var InternalServerErrorException_Message *smithy.Schema
 
 var InternalServerErrorException_RequestID *smithy.Schema
@@ -3678,7 +3682,8 @@ var MessageType_PROMOTIONAL *smithy.Schema
 var MethodNotAllowedException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.pinpoint",
 	Name:      "MethodNotAllowedException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.HTTPError{Code: 405})
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 405})
 var MethodNotAllowedException_Message *smithy.Schema
 
 var MethodNotAllowedException_RequestID *smithy.Schema
@@ -3720,7 +3725,8 @@ var MultiConditionalSplitActivity_EvaluationWaitTime *smithy.Schema
 var NotFoundException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.pinpoint",
 	Name:      "NotFoundException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.HTTPError{Code: 404})
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 404})
 var NotFoundException_Message *smithy.Schema
 
 var NotFoundException_RequestID *smithy.Schema
@@ -3806,7 +3812,8 @@ var OverrideButtonConfiguration_Link *smithy.Schema
 var PayloadTooLargeException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.pinpoint",
 	Name:      "PayloadTooLargeException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.HTTPError{Code: 413})
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 413})
 var PayloadTooLargeException_Message *smithy.Schema
 
 var PayloadTooLargeException_RequestID *smithy.Schema
@@ -4526,7 +4533,8 @@ var TemplateVersionsResponse_RequestID *smithy.Schema
 var TooManyRequestsException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.pinpoint",
 	Name:      "TooManyRequestsException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.HTTPError{Code: 429})
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 429})
 var TooManyRequestsException_Message *smithy.Schema
 
 var TooManyRequestsException_RequestID *smithy.Schema

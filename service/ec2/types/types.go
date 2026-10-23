@@ -698,6 +698,39 @@ type AnalysisSecurityGroupRule struct {
 	noSmithyDocumentSerde
 }
 
+// Describes an entry in a transit gateway policy table.
+type AnalysisTransitGatewayPolicyTableEntry struct {
+
+	// The destination CIDR block. If this value is not present, the entry matches any
+	// destination address.
+	DestinationCidr *string
+
+	// The destination port range. If this value is not present, the entry matches any
+	// destination port.
+	DestinationPortRange *PortRange
+
+	// The protocol number. A value of -1 means that the entry matches all protocols.
+	Protocol *string
+
+	// The rule number for the policy table entry. Entries are evaluated in ascending
+	// order of rule number.
+	RuleNumber *int32
+
+	// The source CIDR block. If this value is not present, the entry matches any
+	// source address.
+	SourceCidr *string
+
+	// The source port range. If this value is not present, the entry matches any
+	// source port.
+	SourcePortRange *PortRange
+
+	// The ID of the transit gateway route table to which the entry routes matching
+	// traffic.
+	TargetRouteTableId *string
+
+	noSmithyDocumentSerde
+}
+
 // Describes the application-level health status for an instance.
 type ApplicationStatus struct {
 
@@ -2166,6 +2199,23 @@ type CapacityManagerTagDimension struct {
 // Describes a Capacity Reservation.
 type CapacityReservation struct {
 
+	// The configuration that the Capacity Reservation will have after the requested
+	// adjustment is applied.
+	AdjustmentDetails *CapacityReservationAdjustmentDetails
+
+	// The status of the most recent modification to the Capacity Reservation. A
+	// Capacity Reservation can have one of the following adjustment statuses:
+	//
+	//   - requested - The modification was requested and is being processed.
+	//
+	//   - applied - The modification was applied to the Capacity Reservation.
+	//
+	//   - rejected - The modification was not applied and the Capacity Reservation
+	//   keeps its existing configuration.
+	//
+	// This field is not returned if the Capacity Reservation has never been modified.
+	AdjustmentStatus CapacityReservationAdjustmentStatus
+
 	// The Availability Zone in which the capacity is reserved.
 	AvailabilityZone *string
 
@@ -2264,6 +2314,22 @@ type CapacityReservation struct {
 	//  Information about the interruption configuration and association with the
 	// source reservation for interruptible Capacity Reservations.
 	InterruptionInfo *InterruptionInfo
+
+	// Only supported for UltraServers.
+	//
+	// Indicates whether you can launch instances into the Capacity Reservation. A
+	// Capacity Reservation can have the following launch statuses:
+	//
+	//   - launchable - You can launch instances into the Capacity Reservation.
+	//
+	//   - unlaunchable - You can't launch instances into the Capacity Reservation. For
+	//   example, the Capacity Reservation is not active.
+	LaunchStatus CapacityReservationLaunchStatus
+
+	// The start date that you originally requested for the Capacity Reservation, in
+	// the ISO8601 format in the UTC time zone ( YYYY-MM-DDThh:mm:ss.sssZ ). This value
+	// doesn't change when you push out the start date.
+	OriginalStartDate *time.Time
 
 	// The Amazon Resource Name (ARN) of the Outpost on which the Capacity Reservation
 	// was created.
@@ -2364,6 +2430,37 @@ type CapacityReservation struct {
 	noSmithyDocumentSerde
 }
 
+// Describes the configuration that a Capacity Reservation will have after a
+// pending adjustment is applied.
+type CapacityReservationAdjustmentDetails struct {
+
+	// The commitment duration, in seconds, that the Capacity Reservation will have
+	// after the adjustment.
+	CommitmentDuration *int64
+
+	// The date and time at which the commitment duration will expire after the
+	// adjustment.
+	CommitmentEndDate *time.Time
+
+	// The end date that the Capacity Reservation will have after the adjustment.
+	EndDate *time.Time
+
+	// Indicates the way in which the Capacity Reservation will end after the
+	// adjustment. Possible values are:
+	//
+	//   - unlimited - The Capacity Reservation remains active until you explicitly
+	//   cancel it.
+	//
+	//   - limited - The Capacity Reservation expires automatically at the date and
+	//   time given by endDate .
+	EndDateType *string
+
+	// The start date that the Capacity Reservation will have after the adjustment.
+	StartDate *time.Time
+
+	noSmithyDocumentSerde
+}
+
 // Information about a request to assign billing of the unused capacity of a
 // Capacity Reservation.
 type CapacityReservationBillingRequest struct {
@@ -2430,6 +2527,11 @@ type CapacityReservationCancellationQuote struct {
 
 // Information about your commitment for a future-dated Capacity Reservation.
 type CapacityReservationCommitmentInfo struct {
+
+	// The commitment duration, in seconds, for the future-dated Capacity Reservation.
+	// This is the minimum duration for which you commit to having the Capacity
+	// Reservation in the active state in your account after it has been delivered.
+	CommitmentDuration *int64
 
 	// The date and time at which the commitment duration expires, in the ISO8601
 	// format in the UTC time zone ( YYYY-MM-DDThh:mm:ss.sssZ ). You can't decrease the
@@ -2592,6 +2694,45 @@ type CapacityReservationInfo struct {
 
 	// The tenancy of the Capacity Reservation.
 	Tenancy CapacityReservationTenancy
+
+	noSmithyDocumentSerde
+}
+
+// Describes a Capacity Reservation modification quote, which provides the terms
+// for changing the start date or the commitment of a future-dated Capacity
+// Reservation.
+type CapacityReservationModificationQuote struct {
+
+	// The ID of the Capacity Reservation associated with the modification quote.
+	CapacityReservationId *string
+
+	// The ID of the modification quote.
+	CapacityReservationModificationQuoteId *string
+
+	// The date and time at which the modification quote was created.
+	CreateTime *time.Time
+
+	// The configuration that the Capacity Reservation has at the time the quote was
+	// generated.
+	CurrentConfiguration *ModificationQuoteCurrentConfiguration
+
+	// The date and time at which the modification quote expires.
+	ExpirationTime *time.Time
+
+	// The terms of the modification, including the configuration that the Capacity
+	// Reservation will have if you accept them by using ModifyCapacityReservation .
+	ModificationTerms *ModificationTerms
+
+	// The state of the modification quote itself. Possible values are:
+	//
+	//   - active - The quote can still be used.
+	//
+	//   - expired - The quote can no longer be used. A quote becomes expired at its
+	//   expirationTime .
+	QuoteState CapacityReservationModificationQuoteState
+
+	// The tags assigned to the modification quote.
+	Tags []Tag
 
 	noSmithyDocumentSerde
 }
@@ -3123,6 +3264,10 @@ type ClientVpnAuthorizationRuleStatus struct {
 // Describes a client connection.
 type ClientVpnConnection struct {
 
+	// The date and time the authorization policy was last evaluated for the client
+	// connection, if applicable.
+	AuthorizationPolicyLastEvaluatedTime *string
+
 	// The IP address of the client.
 	ClientIp *string
 
@@ -3241,6 +3386,10 @@ type ClientVpnEndpoint struct {
 
 	// A brief description of the endpoint.
 	Description *string
+
+	// The device trust providers configured for the Client VPN endpoint, if
+	// applicable.
+	DevicePostureOptions *DevicePostureResponseOptions
 
 	// Indicates whether the client VPN session is disconnected after the maximum
 	// sessionTimeoutHours is reached. If true , users are prompted to reconnect client
@@ -3399,6 +3548,50 @@ type ClientVpnRouteStatus struct {
 	noSmithyDocumentSerde
 }
 
+// Information about a device trust provider configured for a Client VPN endpoint.
+type ClientVpnTrustProvider struct {
+
+	// The URL of the public signing key that is used to verify the identity token
+	// issued by the device trust provider.
+	PublicSigningKeyUrl *string
+
+	// The tenant ID associated with your device trust provider account.
+	TenantId *string
+
+	// The type of the device trust provider. Possible values include:
+	//
+	//   - crowdstrike - CrowdStrike device trust provider.
+	//
+	//   - jamf - Jamf device trust provider.
+	//
+	//   - jumpcloud - JumpCloud device trust provider.
+	TrustProviderType ClientVpnDeviceTrustProviderType
+
+	noSmithyDocumentSerde
+}
+
+// Describes a device trust provider to configure for a Client VPN endpoint.
+type ClientVpnTrustProviderRequest struct {
+
+	// The URL of the public signing key that is used to verify the identity token
+	// issued by the device trust provider.
+	PublicSigningKeyUrl *string
+
+	// The tenant ID associated with your device trust provider account.
+	TenantId *string
+
+	// The type of the device trust provider. Possible values include:
+	//
+	//   - crowdstrike - CrowdStrike device trust provider.
+	//
+	//   - jamf - Jamf device trust provider.
+	//
+	//   - jumpcloud - JumpCloud device trust provider.
+	TrustProviderType ClientVpnDeviceTrustProviderType
+
+	noSmithyDocumentSerde
+}
+
 // Options for sending VPN tunnel logs to CloudWatch.
 type CloudWatchLogOptions struct {
 
@@ -3535,6 +3728,10 @@ type ConnectionLogOptions struct {
 	// Indicates whether connection logging is enabled.
 	Enabled *bool
 
+	// Specifies whether to include the authorization policy evaluation context in the
+	// connection logs for the Client VPN endpoint.
+	IncludeAuthorizationPolicyContext *bool
+
 	noSmithyDocumentSerde
 }
 
@@ -3553,6 +3750,10 @@ type ConnectionLogResponseOptions struct {
 	// Indicates whether client connection logging is enabled for the Client VPN
 	// endpoint.
 	Enabled *bool
+
+	// Specifies whether the authorization policy evaluation context is included in
+	// the connection logs for the Client VPN endpoint.
+	IncludeAuthorizationPolicyContext *bool
 
 	noSmithyDocumentSerde
 }
@@ -4713,6 +4914,31 @@ type DeviceOptions struct {
 
 	// The ID of the tenant application with the device-identity provider.
 	TenantId *string
+
+	noSmithyDocumentSerde
+}
+
+// Describes the device posture options for a Client VPN endpoint. Device posture
+// options specify the device trust providers that the endpoint uses to evaluate
+// the security posture of connecting devices.
+type DevicePostureOptions struct {
+
+	// Indicates whether device posture evaluation is enabled for the Client VPN
+	// endpoint. Specify false to disable device posture, which clears the configured
+	// device trust providers.
+	Enabled *bool
+
+	// The device trust providers to configure for the Client VPN endpoint.
+	TrustProviders []ClientVpnTrustProviderRequest
+
+	noSmithyDocumentSerde
+}
+
+// Information about the device posture options for a Client VPN endpoint.
+type DevicePostureResponseOptions struct {
+
+	// The device trust providers configured for the Client VPN endpoint.
+	TrustProviders []ClientVpnTrustProvider
 
 	noSmithyDocumentSerde
 }
@@ -6142,6 +6368,12 @@ type Explanation struct {
 
 	// The transit gateway attachment.
 	TransitGatewayAttachment *AnalysisComponent
+
+	// The transit gateway policy table.
+	TransitGatewayPolicyTable *AnalysisComponent
+
+	// The transit gateway policy table entry.
+	TransitGatewayPolicyTableEntry *AnalysisTransitGatewayPolicyTableEntry
 
 	// The transit gateway route table.
 	TransitGatewayRouteTable *AnalysisComponent
@@ -11296,7 +11528,7 @@ type InstanceStateChange struct {
 }
 
 // Describes the status of an instance, including system status, instance status,
-// attached EBS status, and application status.
+// attached EBS status, application status, and performance status.
 type InstanceStatus struct {
 
 	// Reports the application-level health status for the instance.
@@ -11331,6 +11563,11 @@ type InstanceStatus struct {
 
 	// The Amazon Resource Name (ARN) of the Outpost.
 	OutpostArn *string
+
+	// Reports the performance-related health status for the instance. This
+	// information is returned only when performance status checks are enabled for the
+	// instance.
+	PerformanceStatus *PerformanceStatusSummary
 
 	// Reports impaired functionality that stems from issues related to the systems
 	// that support an instance, such as hardware failures and network connectivity
@@ -16132,6 +16369,57 @@ type MetricValue struct {
 	noSmithyDocumentSerde
 }
 
+// Describes the configuration that a Capacity Reservation has at the time a
+// modification quote is generated.
+type ModificationQuoteCurrentConfiguration struct {
+
+	// The number of instances in the Capacity Reservation.
+	InstanceCount *int32
+
+	// The start date that the Capacity Reservation was originally requested with.
+	// This value does not change when you push out the start date.
+	OriginalStartDate *time.Time
+
+	// The current state of the Capacity Reservation.
+	ReservationState *string
+
+	// The start date that the Capacity Reservation has before the quoted modification
+	// is applied.
+	StartDate *time.Time
+
+	noSmithyDocumentSerde
+}
+
+// Describes the changes that a Capacity Reservation modification quote will apply
+// to a Capacity Reservation.
+type ModificationReservationUpdate struct {
+
+	// The commitment duration, in seconds, that the Capacity Reservation will have
+	// after the modification.
+	NewCommitmentDuration *int32
+
+	// The date and time at which the commitment duration will expire after the
+	// modification, in the ISO8601 format in the UTC time zone (
+	// YYYY-MM-DDThh:mm:ss.sssZ ).
+	NewCommitmentEndDate *time.Time
+
+	// The start date that the Capacity Reservation will have after the modification,
+	// in the ISO8601 format in the UTC time zone ( YYYY-MM-DDThh:mm:ss.sssZ ).
+	NewStartDate *time.Time
+
+	noSmithyDocumentSerde
+}
+
+// Describes the terms of a Capacity Reservation modification quote.
+type ModificationTerms struct {
+
+	// The changes that will be applied to the Capacity Reservation if you accept the
+	// modification terms.
+	ReservationUpdate *ModificationReservationUpdate
+
+	noSmithyDocumentSerde
+}
+
 // The transit gateway options.
 type ModifyTransitGatewayOptions struct {
 
@@ -17899,6 +18187,9 @@ type PathComponent struct {
 	// The transit gateway.
 	TransitGateway *AnalysisComponent
 
+	// The entry in a transit gateway policy table.
+	TransitGatewayPolicyTableEntry *AnalysisTransitGatewayPolicyTableEntry
+
 	// The route in a transit gateway route table.
 	TransitGatewayRouteTableRoute *TransitGatewayRouteTableRoute
 
@@ -18164,6 +18455,22 @@ type PerformanceFactorReferenceRequest struct {
 	// [RequestSpotFleet]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_RequestSpotFleet
 	// [ModifyFleet]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_ModifyFleet
 	InstanceFamily *string
+
+	noSmithyDocumentSerde
+}
+
+// Provides a summary of the performance status check results for an instance.
+type PerformanceStatusSummary struct {
+
+	// The date and time when the performance status became impaired.
+	ImpairedSince *time.Time
+
+	// The recommended action to remediate the impaired instance, if one is available.
+	// This value is returned only when the instance is impaired.
+	Remediation *string
+
+	// The current status.
+	Status SummaryStatus
 
 	noSmithyDocumentSerde
 }
@@ -24232,6 +24539,10 @@ type TransitGatewayAttachment struct {
 	// The creation time.
 	CreationTime *time.Time
 
+	// The state of NAT gateway support for the attachment. Only the owner of the
+	// transit gateway receives this parameter.
+	NatGatewaySupport TransitGatewayAttachmentNatGatewaySupportState
+
 	// The ID of the resource.
 	ResourceId *string
 
@@ -24736,6 +25047,57 @@ type TransitGatewayMulticastRegisteredGroupSources struct {
 
 	// The ID of the transit gateway multicast domain.
 	TransitGatewayMulticastDomainId *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains information about a NAT gateway rule for a transit gateway attachment,
+// including the rule number, the source CIDR block, the translated CIDR block, and
+// the state of the rule.
+type TransitGatewayNatRule struct {
+
+	// The IPv4 CIDR block of the source addresses to translate.
+	MatchSourceCidr *string
+
+	// The IPv4 CIDR block that the transit gateway translates the source addresses to.
+	NatCidr *string
+
+	// The rule number.
+	RuleNumber *int32
+
+	// The state of the NAT gateway rule. The possible values are:
+	//
+	//   - pending - The transit gateway is applying a change to the rule.
+	//
+	//   - activated - The rule is in effect because NAT gateway support is enabled for
+	//   the attachment.
+	//
+	//   - deactivated - The rule isn't in effect because NAT gateway support is
+	//   disabled for the attachment.
+	State TransitGatewayNatRuleState
+
+	noSmithyDocumentSerde
+}
+
+// Describes a NAT gateway rule to apply to a transit gateway attachment. A NAT
+// gateway rule translates source addresses in the MatchSourceCidr range to the
+// corresponding addresses in the NatCidr range.
+type TransitGatewayNatRuleRequest struct {
+
+	// The IPv4 CIDR block of the source addresses to translate. The CIDR block can't
+	// overlap the multicast range ( 224.0.0.0/4 ) or the link-local range (
+	// 169.254.0.0/16 ).
+	MatchSourceCidr *string
+
+	// The IPv4 CIDR block to translate the source addresses to. The CIDR block must
+	// be in a private (RFC 1918) or shared address space (RFC 6598) range, and must
+	// have the same prefix length as MatchSourceCidr . The CIDR blocks in the rules
+	// for an attachment can't overlap each other.
+	NatCidr *string
+
+	// The rule number. Valid values are 1 to 32766. Each rule number must be unique
+	// within the request.
+	RuleNumber *int32
 
 	noSmithyDocumentSerde
 }
@@ -27064,8 +27426,8 @@ type VpcEndpoint struct {
 	// Reason for the failure.
 	FailureReason *string
 
-	// (Interface endpoint) Information about the security groups that are associated
-	// with the network interface.
+	// (Interface, Resource, ServiceNetwork, and Tunnel endpoints only) Information
+	// about the security groups that are associated with the network interface.
 	Groups []SecurityGroupIdentifier
 
 	// The IP address type for the endpoint.
@@ -27080,7 +27442,8 @@ type VpcEndpoint struct {
 	// The last error that occurred for endpoint.
 	LastError *LastError
 
-	// (Interface endpoint) The network interfaces for the endpoint.
+	// (Interface, Gateway Load Balancer endpoints, Resource, ServiceNetwork, and
+	// Tunnel endpoints only) The network interfaces for the endpoint.
 	NetworkInterfaceIds []string
 
 	// The ID of the Amazon Web Services account that owns the endpoint.
@@ -27117,7 +27480,8 @@ type VpcEndpoint struct {
 	// The state of the endpoint.
 	State State
 
-	// (Interface endpoint) The subnets for the endpoint.
+	// (Interface, Gateway Load Balancer endpoints, Resource, ServiceNetwork, and
+	// Tunnel endpoints only) The subnets for the endpoint.
 	SubnetIds []string
 
 	// The tags assigned to the endpoint.
@@ -27127,6 +27491,11 @@ type VpcEndpoint struct {
 	VpcEndpointId *string
 
 	// The type of endpoint.
+	//
+	// For more information about the types of VPC endpoints, see [VPC endpoints] in the Amazon Web
+	// Services PrivateLink User Guide.
+	//
+	// [VPC endpoints]: https://docs.aws.amazon.com/vpc/latest/privatelink/concepts.html#concepts-vpc-endpoints
 	VpcEndpointType VpcEndpointType
 
 	// The ID of the VPC to which the endpoint is associated.

@@ -4,7 +4,9 @@ package ecs
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/ecs/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ecs/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -56,6 +58,29 @@ type UpdateTaskSetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateTaskSetInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateTaskSetRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateTaskSetInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Cluster != nil {
+		s.WriteString(schemas.UpdateTaskSetRequest_cluster, *v.Cluster)
+	}
+	if v.Scale != nil {
+		s.WriteStruct(schemas.UpdateTaskSetRequest_scale)
+		v.Scale.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Service != nil {
+		s.WriteString(schemas.UpdateTaskSetRequest_service, *v.Service)
+	}
+	if v.TaskSet != nil {
+		s.WriteString(schemas.UpdateTaskSetRequest_taskSet, *v.TaskSet)
+	}
+}
+
 type UpdateTaskSetOutput struct {
 
 	// Details about the task set.
@@ -67,13 +92,34 @@ type UpdateTaskSetOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateTaskSetOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateTaskSetResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateTaskSetOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TaskSet != nil {
+		s.WriteStruct(schemas.UpdateTaskSetResponse_taskSet)
+		v.TaskSet.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateTaskSetOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateTaskSetResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateTaskSetResponse_taskSet:
+			v.TaskSet = &types.TaskSet{}
+			return v.TaskSet.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateTaskSetMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateTaskSet{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateTaskSet, schemas.UpdateTaskSetRequest, schemas.UpdateTaskSetResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateTaskSet{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateTaskSet, schemas.UpdateTaskSetRequest, schemas.UpdateTaskSetResponse), output: &UpdateTaskSetOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

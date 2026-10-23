@@ -5,7 +5,9 @@ package codeartifact
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/codeartifact/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/codeartifact/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -58,6 +60,33 @@ type ListRepositoriesInDomainInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListRepositoriesInDomainInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListRepositoriesInDomainRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListRepositoriesInDomainInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AdministratorAccount != nil {
+		s.WriteString(schemas.ListRepositoriesInDomainRequest_administratorAccount, *v.AdministratorAccount)
+	}
+	if v.Domain != nil {
+		s.WriteString(schemas.ListRepositoriesInDomainRequest_domain, *v.Domain)
+	}
+	if v.DomainOwner != nil {
+		s.WriteString(schemas.ListRepositoriesInDomainRequest_domainOwner, *v.DomainOwner)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListRepositoriesInDomainRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListRepositoriesInDomainRequest_nextToken, *v.NextToken)
+	}
+	if v.RepositoryPrefix != nil {
+		s.WriteString(schemas.ListRepositoriesInDomainRequest_repositoryPrefix, *v.RepositoryPrefix)
+	}
+}
+
 type ListRepositoriesInDomainOutput struct {
 
 	//  If there are additional results, this is the token for the next set of
@@ -73,13 +102,35 @@ type ListRepositoriesInDomainOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListRepositoriesInDomainOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListRepositoriesInDomainResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListRepositoriesInDomainOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListRepositoriesInDomainResult_nextToken, *v.NextToken)
+	}
+	serializeRepositorySummaryList(s, schemas.ListRepositoriesInDomainResult_repositories, v.Repositories)
+}
+func (v *ListRepositoriesInDomainOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListRepositoriesInDomainResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListRepositoriesInDomainResult_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListRepositoriesInDomainResult_nextToken, v.NextToken)
+		case schemas.ListRepositoriesInDomainResult_repositories:
+			return deserializeRepositorySummaryList(d, schemas.ListRepositoriesInDomainResult_repositories, &v.Repositories)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListRepositoriesInDomainMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListRepositoriesInDomain{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListRepositoriesInDomain, schemas.ListRepositoriesInDomainRequest, schemas.ListRepositoriesInDomainResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListRepositoriesInDomain{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListRepositoriesInDomain, schemas.ListRepositoriesInDomainRequest, schemas.ListRepositoriesInDomainResult), output: &ListRepositoriesInDomainOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

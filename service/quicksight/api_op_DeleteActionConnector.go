@@ -4,6 +4,8 @@ package quicksight
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/quicksight/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -41,6 +43,21 @@ type DeleteActionConnectorInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteActionConnectorInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteActionConnectorRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteActionConnectorInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ActionConnectorId != nil {
+		s.WriteString(schemas.DeleteActionConnectorRequest_ActionConnectorId, *v.ActionConnectorId)
+	}
+	if v.AwsAccountId != nil {
+		s.WriteString(schemas.DeleteActionConnectorRequest_AwsAccountId, *v.AwsAccountId)
+	}
+}
+
 type DeleteActionConnectorOutput struct {
 
 	// The unique identifier of the deleted action connector.
@@ -61,13 +78,49 @@ type DeleteActionConnectorOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteActionConnectorOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteActionConnectorResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteActionConnectorOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ActionConnectorId != nil {
+		s.WriteString(schemas.DeleteActionConnectorResponse_ActionConnectorId, *v.ActionConnectorId)
+	}
+	if v.Arn != nil {
+		s.WriteString(schemas.DeleteActionConnectorResponse_Arn, *v.Arn)
+	}
+	if v.RequestId != nil {
+		s.WriteString(schemas.DeleteActionConnectorResponse_RequestId, *v.RequestId)
+	}
+	if v.Status != 0 {
+		s.WriteInt32(schemas.DeleteActionConnectorResponse_Status, v.Status)
+	}
+}
+func (v *DeleteActionConnectorOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteActionConnectorResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteActionConnectorResponse_ActionConnectorId:
+			v.ActionConnectorId = new(string)
+			return d.ReadString(schemas.DeleteActionConnectorResponse_ActionConnectorId, v.ActionConnectorId)
+		case schemas.DeleteActionConnectorResponse_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.DeleteActionConnectorResponse_Arn, v.Arn)
+		case schemas.DeleteActionConnectorResponse_RequestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.DeleteActionConnectorResponse_RequestId, v.RequestId)
+		case schemas.DeleteActionConnectorResponse_Status:
+			return d.ReadInt32(schemas.DeleteActionConnectorResponse_Status, &v.Status)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteActionConnectorMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteActionConnector{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteActionConnector, schemas.DeleteActionConnectorRequest, schemas.DeleteActionConnectorResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteActionConnector{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteActionConnector, schemas.DeleteActionConnectorRequest, schemas.DeleteActionConnectorResponse), output: &DeleteActionConnectorOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

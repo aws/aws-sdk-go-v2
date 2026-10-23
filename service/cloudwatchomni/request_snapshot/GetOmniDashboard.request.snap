@@ -1,0 +1,7 @@
+POST /service/CloudWatchOmniFrontend/operation/GetOmniDashboard
+
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
+
+¿kdashboardIdo__DashboardId__gspaceIdk__SpaceId__ÿ

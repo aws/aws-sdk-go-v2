@@ -109,6 +109,28 @@ func ExampleAuthorizerConfiguration_outputUsage() {
 
 var _ *types.CustomJWTAuthorizerConfiguration
 
+func ExampleCertificateConfiguration_outputUsage() {
+	var union types.CertificateConfiguration
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.CertificateConfigurationMemberS3:
+		_ = v.Value // Value is types.S3CertificateConfiguration
+
+	case *types.CertificateConfigurationMemberSecretsManager:
+		_ = v.Value // Value is types.SecretsManagerCertificateConfiguration
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.SecretsManagerCertificateConfiguration
+var _ *types.S3CertificateConfiguration
+
 func ExampleCertificateLocation_outputUsage() {
 	var union types.CertificateLocation
 	// type switches can be used to check the union value
@@ -207,6 +229,9 @@ func ExampleCondition_outputUsage() {
 	var union types.Condition
 	// type switches can be used to check the union value
 	switch v := union.(type) {
+	case *types.ConditionMemberMatchModels:
+		_ = v.Value // Value is types.MatchModels
+
 	case *types.ConditionMemberMatchPaths:
 		_ = v.Value // Value is types.MatchPaths
 
@@ -222,6 +247,7 @@ func ExampleCondition_outputUsage() {
 	}
 }
 
+var _ *types.MatchModels
 var _ *types.MatchPaths
 var _ *types.MatchPrincipals
 
@@ -308,6 +334,24 @@ func ExampleCredentialProvider_outputUsage() {
 var _ *types.IamCredentialProvider
 var _ *types.GatewayApiKeyCredentialProvider
 var _ *types.OAuthCredentialProvider
+
+func ExampleCredentialRotationConfig_outputUsage() {
+	var union types.CredentialRotationConfig
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.CredentialRotationConfigMemberCoinbaseCDP:
+		_ = v.Value // Value is types.CoinbaseCdpRotationTargets
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.CoinbaseCdpRotationTargets
 
 func ExampleCredentialsProviderConfiguration_outputUsage() {
 	var union types.CredentialsProviderConfiguration
@@ -551,6 +595,28 @@ func ExampleDataSourceType_outputUsage() {
 
 var _ *types.InlineExamplesSource
 var _ *types.S3Source
+
+func ExampleDimensionRatingScale_outputUsage() {
+	var union types.DimensionRatingScale
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.DimensionRatingScaleMemberCategorical:
+		_ = v.Value // Value is []types.CategoricalScaleDefinition
+
+	case *types.DimensionRatingScaleMemberNumerical:
+		_ = v.Value // Value is []types.NumericalScaleDefinition
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ []types.CategoricalScaleDefinition
+var _ []types.NumericalScaleDefinition
 
 func ExampleEvaluatorConfig_outputUsage() {
 	var union types.EvaluatorConfig
@@ -806,6 +872,62 @@ func ExampleHarnessGatewayOutboundAuth_outputUsage() {
 
 var _ *types.Unit
 var _ *types.OAuthCredentialProvider
+
+func ExampleHarnessHook_outputUsage() {
+	var union types.HarnessHook
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.HarnessHookMemberAfterInvocation:
+		_ = v.Value // Value is types.HarnessAfterInvocationHook
+
+	case *types.HarnessHookMemberAfterToolCall:
+		_ = v.Value // Value is types.HarnessAfterToolCallHook
+
+	case *types.HarnessHookMemberBeforeInvocation:
+		_ = v.Value // Value is types.HarnessBeforeInvocationHook
+
+	case *types.HarnessHookMemberBeforeToolCall:
+		_ = v.Value // Value is types.HarnessBeforeToolCallHook
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.HarnessAfterToolCallHook
+var _ *types.HarnessAfterInvocationHook
+var _ *types.HarnessBeforeInvocationHook
+var _ *types.HarnessBeforeToolCallHook
+
+func ExampleHarnessHookTarget_outputUsage() {
+	var union types.HarnessHookTarget
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.HarnessHookTargetMemberEventBridge:
+		_ = v.Value // Value is types.HarnessHookEventBridgeTarget
+
+	case *types.HarnessHookTargetMemberLambda:
+		_ = v.Value // Value is types.HarnessHookLambdaTarget
+
+	case *types.HarnessHookTargetMemberSns:
+		_ = v.Value // Value is types.HarnessHookSnsTarget
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.HarnessHookSnsTarget
+var _ *types.HarnessHookEventBridgeTarget
+var _ *types.HarnessHookLambdaTarget
 
 func ExampleHarnessMemoryConfiguration_outputUsage() {
 	var union types.HarnessMemoryConfiguration
@@ -1477,6 +1599,9 @@ func ExampleRatingScale_outputUsage() {
 	case *types.RatingScaleMemberCategorical:
 		_ = v.Value // Value is []types.CategoricalScaleDefinition
 
+	case *types.RatingScaleMemberMultiDimensional:
+		_ = v.Value // Value is []types.EvaluationDimension
+
 	case *types.RatingScaleMemberNumerical:
 		_ = v.Value // Value is []types.NumericalScaleDefinition
 
@@ -1491,6 +1616,29 @@ func ExampleRatingScale_outputUsage() {
 
 var _ []types.CategoricalScaleDefinition
 var _ []types.NumericalScaleDefinition
+var _ []types.EvaluationDimension
+
+func ExampleRecordExpirySpecification_outputUsage() {
+	var union types.RecordExpirySpecification
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.RecordExpirySpecificationMemberAction:
+		_ = v.Value // Value is types.RecordExpiryAction
+
+	case *types.RecordExpirySpecificationMemberRecordExpiryDurationDays:
+		_ = v.Value // Value is int32
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *int32
+var _ types.RecordExpiryAction
 
 func ExampleReflectionConfiguration_outputUsage() {
 	var union types.ReflectionConfiguration

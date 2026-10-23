@@ -4,7 +4,9 @@ package databasemigrationservice
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/databasemigrationservice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/databasemigrationservice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -64,6 +66,24 @@ type DescribeMetadataModelInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeMetadataModelInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeMetadataModelMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeMetadataModelInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MigrationProjectIdentifier != nil {
+		s.WriteString(schemas.DescribeMetadataModelMessage_MigrationProjectIdentifier, *v.MigrationProjectIdentifier)
+	}
+	if v.Origin != "" {
+		s.WriteString(schemas.DescribeMetadataModelMessage_Origin, string(v.Origin))
+	}
+	if v.SelectionRules != nil {
+		s.WriteString(schemas.DescribeMetadataModelMessage_SelectionRules, *v.SelectionRules)
+	}
+}
+
 type DescribeMetadataModelOutput struct {
 
 	// The SQL text of the metadata model. This field might not be populated for some
@@ -87,13 +107,47 @@ type DescribeMetadataModelOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeMetadataModelOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeMetadataModelResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeMetadataModelOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Definition != nil {
+		s.WriteString(schemas.DescribeMetadataModelResponse_Definition, *v.Definition)
+	}
+	if v.MetadataModelName != nil {
+		s.WriteString(schemas.DescribeMetadataModelResponse_MetadataModelName, *v.MetadataModelName)
+	}
+	if v.MetadataModelType != nil {
+		s.WriteString(schemas.DescribeMetadataModelResponse_MetadataModelType, *v.MetadataModelType)
+	}
+	serializeMetadataModelReferenceList(s, schemas.DescribeMetadataModelResponse_TargetMetadataModels, v.TargetMetadataModels)
+}
+func (v *DescribeMetadataModelOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeMetadataModelResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeMetadataModelResponse_Definition:
+			v.Definition = new(string)
+			return d.ReadString(schemas.DescribeMetadataModelResponse_Definition, v.Definition)
+		case schemas.DescribeMetadataModelResponse_MetadataModelName:
+			v.MetadataModelName = new(string)
+			return d.ReadString(schemas.DescribeMetadataModelResponse_MetadataModelName, v.MetadataModelName)
+		case schemas.DescribeMetadataModelResponse_MetadataModelType:
+			v.MetadataModelType = new(string)
+			return d.ReadString(schemas.DescribeMetadataModelResponse_MetadataModelType, v.MetadataModelType)
+		case schemas.DescribeMetadataModelResponse_TargetMetadataModels:
+			return deserializeMetadataModelReferenceList(d, schemas.DescribeMetadataModelResponse_TargetMetadataModels, &v.TargetMetadataModels)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeMetadataModelMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeMetadataModel{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeMetadataModel, schemas.DescribeMetadataModelMessage, schemas.DescribeMetadataModelResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeMetadataModel{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeMetadataModel, schemas.DescribeMetadataModelMessage, schemas.DescribeMetadataModelResponse), output: &DescribeMetadataModelOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

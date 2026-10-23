@@ -106,8 +106,43 @@ func (v *CreateIngestConfigurationInput) SerializeMembers(s smithy.ShapeSerializ
 
 type CreateIngestConfigurationOutput struct {
 
+	// See [Access-Control-Allow-Origin] in the MDN Web Docs.
+	//
+	// [Access-Control-Allow-Origin]: https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Access-Control-Allow-Origin
+	AccessControlAllowOrigin *string
+
+	// See [Access-Control-Expose-Headers] in the MDN Web Docs.
+	//
+	// [Access-Control-Expose-Headers]: https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Access-Control-Expose-Headers
+	AccessControlExposeHeaders *string
+
+	// See [Cache-Control] in the MDN Web Docs.
+	//
+	// [Cache-Control]: https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Cache-Control
+	CacheControl *string
+
+	// See [Content-Security-Policy] in the MDN Web Docs.
+	//
+	// [Content-Security-Policy]: https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Content-Security-Policy
+	ContentSecurityPolicy *string
+
 	// The IngestConfiguration that was created.
 	IngestConfiguration *types.IngestConfiguration
+
+	// See [Strict-Transport-Security] in the MDN Web Docs.
+	//
+	// [Strict-Transport-Security]: https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Strict-Transport-Security
+	StrictTransportSecurity *string
+
+	// See [X-Content-Type-Options] in the MDN Web Docs.
+	//
+	// [X-Content-Type-Options]: https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/X-Content-Type-Options
+	XContentTypeOptions *string
+
+	// See [X-Frame-Options] in the MDN Web Docs.
+	//
+	// [X-Frame-Options]: https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/X-Frame-Options
+	XFrameOptions *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -122,18 +157,60 @@ func (v *CreateIngestConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CreateIngestConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccessControlAllowOrigin != nil {
+		s.WriteString(schemas.CreateIngestConfigurationResponse_accessControlAllowOrigin, *v.AccessControlAllowOrigin)
+	}
+	if v.AccessControlExposeHeaders != nil {
+		s.WriteString(schemas.CreateIngestConfigurationResponse_accessControlExposeHeaders, *v.AccessControlExposeHeaders)
+	}
+	if v.CacheControl != nil {
+		s.WriteString(schemas.CreateIngestConfigurationResponse_cacheControl, *v.CacheControl)
+	}
+	if v.ContentSecurityPolicy != nil {
+		s.WriteString(schemas.CreateIngestConfigurationResponse_contentSecurityPolicy, *v.ContentSecurityPolicy)
+	}
 	if v.IngestConfiguration != nil {
 		s.WriteStruct(schemas.CreateIngestConfigurationResponse_ingestConfiguration)
 		v.IngestConfiguration.SerializeMembers(s)
 		s.CloseStruct()
 	}
+	if v.StrictTransportSecurity != nil {
+		s.WriteString(schemas.CreateIngestConfigurationResponse_strictTransportSecurity, *v.StrictTransportSecurity)
+	}
+	if v.XContentTypeOptions != nil {
+		s.WriteString(schemas.CreateIngestConfigurationResponse_xContentTypeOptions, *v.XContentTypeOptions)
+	}
+	if v.XFrameOptions != nil {
+		s.WriteString(schemas.CreateIngestConfigurationResponse_xFrameOptions, *v.XFrameOptions)
+	}
 }
 func (v *CreateIngestConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CreateIngestConfigurationResponse, func(s *smithy.Schema) error {
 		switch s {
+		case schemas.CreateIngestConfigurationResponse_accessControlAllowOrigin:
+			v.AccessControlAllowOrigin = new(string)
+			return d.ReadString(schemas.CreateIngestConfigurationResponse_accessControlAllowOrigin, v.AccessControlAllowOrigin)
+		case schemas.CreateIngestConfigurationResponse_accessControlExposeHeaders:
+			v.AccessControlExposeHeaders = new(string)
+			return d.ReadString(schemas.CreateIngestConfigurationResponse_accessControlExposeHeaders, v.AccessControlExposeHeaders)
+		case schemas.CreateIngestConfigurationResponse_cacheControl:
+			v.CacheControl = new(string)
+			return d.ReadString(schemas.CreateIngestConfigurationResponse_cacheControl, v.CacheControl)
+		case schemas.CreateIngestConfigurationResponse_contentSecurityPolicy:
+			v.ContentSecurityPolicy = new(string)
+			return d.ReadString(schemas.CreateIngestConfigurationResponse_contentSecurityPolicy, v.ContentSecurityPolicy)
 		case schemas.CreateIngestConfigurationResponse_ingestConfiguration:
 			v.IngestConfiguration = &types.IngestConfiguration{}
 			return v.IngestConfiguration.Deserialize(d)
+		case schemas.CreateIngestConfigurationResponse_strictTransportSecurity:
+			v.StrictTransportSecurity = new(string)
+			return d.ReadString(schemas.CreateIngestConfigurationResponse_strictTransportSecurity, v.StrictTransportSecurity)
+		case schemas.CreateIngestConfigurationResponse_xContentTypeOptions:
+			v.XContentTypeOptions = new(string)
+			return d.ReadString(schemas.CreateIngestConfigurationResponse_xContentTypeOptions, v.XContentTypeOptions)
+		case schemas.CreateIngestConfigurationResponse_xFrameOptions:
+			v.XFrameOptions = new(string)
+			return d.ReadString(schemas.CreateIngestConfigurationResponse_xFrameOptions, v.XFrameOptions)
 		}
 		return nil
 	})

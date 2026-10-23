@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"kmsConfiguration":{"keyType":"CustomerManagedKey","kmsKeyArn":"__KmsKeyArn__"},"lastModifiedDate":946684800,"tokenVaultId":"__TokenVaultId__"}

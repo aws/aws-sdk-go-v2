@@ -4,7 +4,9 @@ package medialive
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/medialive/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/medialive/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -33,6 +35,18 @@ type DescribeInputSecurityGroupInput struct {
 	InputSecurityGroupId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DescribeInputSecurityGroupInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeInputSecurityGroupRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeInputSecurityGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InputSecurityGroupId != nil {
+		s.WriteString(schemas.DescribeInputSecurityGroupRequest_InputSecurityGroupId, *v.InputSecurityGroupId)
+	}
 }
 
 // Placeholder documentation for DescribeInputSecurityGroupResponse
@@ -66,13 +80,60 @@ type DescribeInputSecurityGroupOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeInputSecurityGroupOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeInputSecurityGroupResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeInputSecurityGroupOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.DescribeInputSecurityGroupResponse_Arn, *v.Arn)
+	}
+	serialize__listOf__string(s, schemas.DescribeInputSecurityGroupResponse_Channels, v.Channels)
+	if v.Id != nil {
+		s.WriteString(schemas.DescribeInputSecurityGroupResponse_Id, *v.Id)
+	}
+	serialize__listOf__string(s, schemas.DescribeInputSecurityGroupResponse_Inputs, v.Inputs)
+	if v.State != "" {
+		s.WriteString(schemas.DescribeInputSecurityGroupResponse_State, string(v.State))
+	}
+	serializeTags(s, schemas.DescribeInputSecurityGroupResponse_Tags, v.Tags)
+	serialize__listOfInputWhitelistRule(s, schemas.DescribeInputSecurityGroupResponse_WhitelistRules, v.WhitelistRules)
+}
+func (v *DescribeInputSecurityGroupOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeInputSecurityGroupResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeInputSecurityGroupResponse_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.DescribeInputSecurityGroupResponse_Arn, v.Arn)
+		case schemas.DescribeInputSecurityGroupResponse_Channels:
+			return deserialize__listOf__string(d, schemas.DescribeInputSecurityGroupResponse_Channels, &v.Channels)
+		case schemas.DescribeInputSecurityGroupResponse_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.DescribeInputSecurityGroupResponse_Id, v.Id)
+		case schemas.DescribeInputSecurityGroupResponse_Inputs:
+			return deserialize__listOf__string(d, schemas.DescribeInputSecurityGroupResponse_Inputs, &v.Inputs)
+		case schemas.DescribeInputSecurityGroupResponse_State:
+			var ev string
+			if err := d.ReadString(schemas.DescribeInputSecurityGroupResponse_State, &ev); err != nil {
+				return err
+			}
+			v.State = types.InputSecurityGroupState(ev)
+			return nil
+		case schemas.DescribeInputSecurityGroupResponse_Tags:
+			return deserializeTags(d, schemas.DescribeInputSecurityGroupResponse_Tags, &v.Tags)
+		case schemas.DescribeInputSecurityGroupResponse_WhitelistRules:
+			return deserialize__listOfInputWhitelistRule(d, schemas.DescribeInputSecurityGroupResponse_WhitelistRules, &v.WhitelistRules)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeInputSecurityGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeInputSecurityGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeInputSecurityGroup, schemas.DescribeInputSecurityGroupRequest, schemas.DescribeInputSecurityGroupResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeInputSecurityGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeInputSecurityGroup, schemas.DescribeInputSecurityGroupRequest, schemas.DescribeInputSecurityGroupResponse), output: &DescribeInputSecurityGroupOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

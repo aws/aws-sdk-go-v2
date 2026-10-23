@@ -1098,6 +1098,33 @@ func (e *InvalidVPCNetworkStateFault) ErrorCode() string {
 }
 func (e *InvalidVPCNetworkStateFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// The migration is not healthy. Check the events for this serverless cache for
+// more details. For CompleteMigration , set Force to true to bypass this check.
+type MigrationHealthFault struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *MigrationHealthFault) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *MigrationHealthFault) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *MigrationHealthFault) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "MigrationHealthFault"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *MigrationHealthFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
 // The node group specified by the NodeGroupId parameter could not be found.
 // Please verify that the node group exists and that you spelled the NodeGroupId
 // value correctly.
@@ -1483,6 +1510,35 @@ func (e *ServerlessCacheAlreadyExistsFault) ErrorCode() string {
 }
 func (e *ServerlessCacheAlreadyExistsFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// A migration is already in progress for this serverless cache. You cannot start
+// another migration until the current one completes.
+type ServerlessCacheAlreadyUnderMigrationFault struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *ServerlessCacheAlreadyUnderMigrationFault) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *ServerlessCacheAlreadyUnderMigrationFault) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *ServerlessCacheAlreadyUnderMigrationFault) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "ServerlessCacheAlreadyUnderMigrationFault"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *ServerlessCacheAlreadyUnderMigrationFault) ErrorFault() smithy.ErrorFault {
+	return smithy.FaultClient
+}
+
 // The serverless cache was not found or does not exist.
 type ServerlessCacheNotFoundFault struct {
 	Message *string
@@ -1508,6 +1564,34 @@ func (e *ServerlessCacheNotFoundFault) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ServerlessCacheNotFoundFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// The serverless cache is not currently under migration.
+type ServerlessCacheNotUnderMigrationFault struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *ServerlessCacheNotUnderMigrationFault) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *ServerlessCacheNotUnderMigrationFault) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *ServerlessCacheNotUnderMigrationFault) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "ServerlessCacheNotUnderMigrationFault"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *ServerlessCacheNotUnderMigrationFault) ErrorFault() smithy.ErrorFault {
+	return smithy.FaultClient
+}
 
 // The number of serverless caches exceeds the customer quota.
 type ServerlessCacheQuotaForCustomerExceededFault struct {

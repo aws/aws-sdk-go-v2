@@ -1801,6 +1801,42 @@ func TestCheckResponseSnapshot_CreateDataSource(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_CreateDesignation(t *testing.T) {
+	want := &CreateDesignationOutput{
+		DomainId:           ptr.String("__DomainId__"),
+		Id:                 ptr.String("__Id__"),
+		Name:               ptr.String("__Name__"),
+		Description:        ptr.String("__Description__"),
+		DesignationType:    types.DesignationType("MANAGED"),
+		Policy:             ptr.String("__Policy__"),
+		DeletionProtection: ptr.Bool(true),
+		CreatedBy:          ptr.String("__CreatedBy__"),
+		CreatedAt:          ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		LastUpdatedAt:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+	}
+	status, header, body, err := serdeRespReadSnapshot("CreateDesignation.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.CreateDesignation(context.Background(), &CreateDesignationInput{
+		DomainIdentifier:   ptr.String("__DomainIdentifier__"),
+		Name:               ptr.String("__Name__"),
+		Description:        ptr.String("__Description__"),
+		Policy:             ptr.String("__Policy__"),
+		DeletionProtection: ptr.Bool(true),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "CreateDesignation.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_CreateDomain(t *testing.T) {
 	want := &CreateDomainOutput{
 		Id:               ptr.String("__Id__"),
@@ -2137,8 +2173,9 @@ func TestCheckResponseSnapshot_CreateEnvironmentBlueprint(t *testing.T) {
 			"__Member__",
 			"__Member__",
 		},
-		CreatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-		UpdatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		BlueprintCategory: types.BlueprintCategory("TOOLING"),
+		CreatedAt:         ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		UpdatedAt:         ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 	}
 	status, header, body, err := serdeRespReadSnapshot("CreateEnvironmentBlueprint.response")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -2177,6 +2214,7 @@ func TestCheckResponseSnapshot_CreateEnvironmentBlueprint(t *testing.T) {
 				IsUpdateSupported: ptr.Bool(true),
 			},
 		},
+		BlueprintCategory: types.BlueprintCategory("TOOLING"),
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -2463,6 +2501,7 @@ func TestCheckResponseSnapshot_CreateNotebook(t *testing.T) {
 			{},
 		},
 		Status:        types.NotebookStatus("ACTIVE"),
+		Type:          types.NotebookType("DATA"),
 		Description:   ptr.String("__Description__"),
 		CreatedAt:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 		CreatedBy:     ptr.String("__CreatedBy__"),
@@ -2511,6 +2550,7 @@ func TestCheckResponseSnapshot_CreateNotebook(t *testing.T) {
 		OwningProjectIdentifier: ptr.String("__OwningProjectIdentifier__"),
 		Name:                    ptr.String("__Name__"),
 		Description:             ptr.String("__Description__"),
+		Type:                    types.NotebookType("DATA"),
 		Metadata: map[string]string{
 			"key0": "__Value__",
 		},
@@ -2690,13 +2730,15 @@ func TestCheckResponseSnapshot_CreateProject(t *testing.T) {
 				Member: &types.MemberMemberUserIdentifier{
 					Value: "__MemberMemberUserIdentifier__",
 				},
-				Designation: types.UserDesignation("PROJECT_OWNER"),
+				Designation:              types.UserDesignation("PROJECT_OWNER"),
+				UserCreatedDesignationId: ptr.String("__UserCreatedDesignationId__"),
 			},
 			{
 				Member: &types.MemberMemberUserIdentifier{
 					Value: "__MemberMemberUserIdentifier__",
 				},
-				Designation: types.UserDesignation("PROJECT_OWNER"),
+				Designation:              types.UserDesignation("PROJECT_OWNER"),
+				UserCreatedDesignationId: ptr.String("__UserCreatedDesignationId__"),
 			},
 		},
 	})
@@ -2724,7 +2766,8 @@ func TestCheckResponseSnapshot_CreateProjectMembership(t *testing.T) {
 		Member: &types.MemberMemberUserIdentifier{
 			Value: "__MemberMemberUserIdentifier__",
 		},
-		Designation: types.UserDesignation("PROJECT_OWNER"),
+		Designation:              types.UserDesignation("PROJECT_OWNER"),
+		UserCreatedDesignationId: ptr.String("__UserCreatedDesignationId__"),
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -3814,6 +3857,28 @@ func TestCheckResponseSnapshot_DeleteDataSource(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "DeleteDataSource.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_DeleteDesignation(t *testing.T) {
+	want := &DeleteDesignationOutput{}
+	status, header, body, err := serdeRespReadSnapshot("DeleteDesignation.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.DeleteDesignation(context.Background(), &DeleteDesignationInput{
+		DomainIdentifier: ptr.String("__DomainIdentifier__"),
+		Identifier:       ptr.String("__Identifier__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "DeleteDesignation.response", err)
 	}
 }
 
@@ -5166,6 +5231,39 @@ func TestCheckResponseSnapshot_GetDataSourceRun(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_GetDesignation(t *testing.T) {
+	want := &GetDesignationOutput{
+		DomainId:           ptr.String("__DomainId__"),
+		Id:                 ptr.String("__Id__"),
+		Name:               ptr.String("__Name__"),
+		Description:        ptr.String("__Description__"),
+		DesignationType:    types.DesignationType("MANAGED"),
+		Policy:             ptr.String("__Policy__"),
+		DeletionProtection: ptr.Bool(true),
+		CreatedBy:          ptr.String("__CreatedBy__"),
+		CreatedAt:          ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		LastUpdatedAt:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+	}
+	status, header, body, err := serdeRespReadSnapshot("GetDesignation.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.GetDesignation(context.Background(), &GetDesignationInput{
+		DomainIdentifier: ptr.String("__DomainIdentifier__"),
+		Identifier:       ptr.String("__Identifier__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "GetDesignation.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_GetDomain(t *testing.T) {
 	want := &GetDomainOutput{
 		Id:               ptr.String("__Id__"),
@@ -5469,8 +5567,9 @@ func TestCheckResponseSnapshot_GetEnvironmentBlueprint(t *testing.T) {
 			"__Member__",
 			"__Member__",
 		},
-		CreatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-		UpdatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		BlueprintCategory: types.BlueprintCategory("TOOLING"),
+		CreatedAt:         ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		UpdatedAt:         ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 	}
 	status, header, body, err := serdeRespReadSnapshot("GetEnvironmentBlueprint.response")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -6133,6 +6232,7 @@ func TestCheckResponseSnapshot_GetNotebook(t *testing.T) {
 			{},
 		},
 		Status:        types.NotebookStatus("ACTIVE"),
+		Type:          types.NotebookType("DATA"),
 		Description:   ptr.String("__Description__"),
 		CreatedAt:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 		CreatedBy:     ptr.String("__CreatedBy__"),
@@ -6275,6 +6375,12 @@ func TestCheckResponseSnapshot_GetNotebookRun(t *testing.T) {
 		StorageConfiguration: &types.StorageConfig{
 			ProjectS3Path: ptr.String("__ProjectS3Path__"),
 			KmsKeyArn:     ptr.String("__KmsKeyArn__"),
+		},
+		NotificationConfiguration: &types.NotificationConfig{
+			NotifyOn: []types.NotifyOnState{
+				types.NotifyOnState("SUCCEEDED"),
+				types.NotifyOnState("SUCCEEDED"),
+			},
 		},
 		TriggerSource: &types.TriggerSource{
 			Type: types.TriggerSourceType("MANUAL"),
@@ -7996,6 +8102,55 @@ func TestCheckResponseSnapshot_ListDataSources(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_ListDesignations(t *testing.T) {
+	want := &ListDesignationsOutput{
+		Items: []types.DesignationSummary{
+			{
+				DomainId:           ptr.String("__DomainId__"),
+				Id:                 ptr.String("__Id__"),
+				Name:               ptr.String("__Name__"),
+				Description:        ptr.String("__Description__"),
+				DesignationType:    types.DesignationType("MANAGED"),
+				DeletionProtection: ptr.Bool(true),
+				CreatedBy:          ptr.String("__CreatedBy__"),
+				CreatedAt:          ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				UpdatedAt:          ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+			{
+				DomainId:           ptr.String("__DomainId__"),
+				Id:                 ptr.String("__Id__"),
+				Name:               ptr.String("__Name__"),
+				Description:        ptr.String("__Description__"),
+				DesignationType:    types.DesignationType("MANAGED"),
+				DeletionProtection: ptr.Bool(true),
+				CreatedBy:          ptr.String("__CreatedBy__"),
+				CreatedAt:          ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				UpdatedAt:          ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("ListDesignations.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.ListDesignations(context.Background(), &ListDesignationsInput{
+		DomainIdentifier: ptr.String("__DomainIdentifier__"),
+		NextToken:        ptr.String("__NextToken__"),
+		MaxResults:       ptr.Int32(1),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "ListDesignations.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_ListDomainUnitsForParent(t *testing.T) {
 	want := &ListDomainUnitsForParentOutput{
 		Items: []types.DomainUnitSummary{
@@ -8332,8 +8487,9 @@ func TestCheckResponseSnapshot_ListEnvironmentBlueprints(t *testing.T) {
 						TemplateUrl: ptr.String("__TemplateUrl__"),
 					},
 				},
-				CreatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-				UpdatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				CreatedAt:         ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				UpdatedAt:         ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				BlueprintCategory: types.BlueprintCategory("TOOLING"),
 			},
 			{
 				Id:          ptr.String("__Id__"),
@@ -8345,8 +8501,9 @@ func TestCheckResponseSnapshot_ListEnvironmentBlueprints(t *testing.T) {
 						TemplateUrl: ptr.String("__TemplateUrl__"),
 					},
 				},
-				CreatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-				UpdatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				CreatedAt:         ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				UpdatedAt:         ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				BlueprintCategory: types.BlueprintCategory("TOOLING"),
 			},
 		},
 		NextToken: ptr.String("__NextToken__"),
@@ -8871,6 +9028,7 @@ func TestCheckResponseSnapshot_ListNotebooks(t *testing.T) {
 				OwningProjectId: ptr.String("__OwningProjectId__"),
 				DomainId:        ptr.String("__DomainId__"),
 				Status:          types.NotebookStatus("ACTIVE"),
+				Type:            types.NotebookType("DATA"),
 				Description:     ptr.String("__Description__"),
 				CreatedAt:       ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 				CreatedBy:       ptr.String("__CreatedBy__"),
@@ -8883,6 +9041,7 @@ func TestCheckResponseSnapshot_ListNotebooks(t *testing.T) {
 				OwningProjectId: ptr.String("__OwningProjectId__"),
 				DomainId:        ptr.String("__DomainId__"),
 				Status:          types.NotebookStatus("ACTIVE"),
+				Type:            types.NotebookType("DATA"),
 				Description:     ptr.String("__Description__"),
 				CreatedAt:       ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 				CreatedBy:       ptr.String("__CreatedBy__"),
@@ -8907,6 +9066,7 @@ func TestCheckResponseSnapshot_ListNotebooks(t *testing.T) {
 		SortOrder:               types.SortOrder("ASCENDING"),
 		SortBy:                  types.SortKey("CREATED_AT"),
 		Status:                  types.NotebookStatus("ACTIVE"),
+		Type:                    types.NotebookType("DATA"),
 		NextToken:               ptr.String("__NextToken__"),
 	})
 	if err != nil {
@@ -9067,7 +9227,8 @@ func TestCheckResponseSnapshot_ListProjectMemberships(t *testing.T) {
 						UserId: ptr.String("__UserId__"),
 					},
 				},
-				Designation: types.UserDesignation("PROJECT_OWNER"),
+				Designation:              types.UserDesignation("PROJECT_OWNER"),
+				UserCreatedDesignationId: ptr.String("__UserCreatedDesignationId__"),
 			},
 			{
 				MemberDetails: &types.MemberDetailsMemberUser{
@@ -9075,7 +9236,8 @@ func TestCheckResponseSnapshot_ListProjectMemberships(t *testing.T) {
 						UserId: ptr.String("__UserId__"),
 					},
 				},
-				Designation: types.UserDesignation("PROJECT_OWNER"),
+				Designation:              types.UserDesignation("PROJECT_OWNER"),
+				UserCreatedDesignationId: ptr.String("__UserCreatedDesignationId__"),
 			},
 		},
 		NextToken: ptr.String("__NextToken__"),
@@ -11743,6 +11905,7 @@ func TestCheckResponseSnapshot_StartNotebookImport(t *testing.T) {
 		OwningProjectId: ptr.String("__OwningProjectId__"),
 		Name:            ptr.String("__Name__"),
 		Description:     ptr.String("__Description__"),
+		Type:            types.NotebookType("DATA"),
 		SourceLocation: &types.SourceLocationMemberS3{
 			Value: "__SourceLocationMemberS3__",
 		},
@@ -11765,6 +11928,7 @@ func TestCheckResponseSnapshot_StartNotebookImport(t *testing.T) {
 		},
 		Name:        ptr.String("__Name__"),
 		Description: ptr.String("__Description__"),
+		Type:        types.NotebookType("DATA"),
 		ClientToken: ptr.String("__ClientToken__"),
 	})
 	if err != nil {
@@ -11823,6 +11987,12 @@ func TestCheckResponseSnapshot_StartNotebookRun(t *testing.T) {
 			ProjectS3Path: ptr.String("__ProjectS3Path__"),
 			KmsKeyArn:     ptr.String("__KmsKeyArn__"),
 		},
+		NotificationConfiguration: &types.NotificationConfig{
+			NotifyOn: []types.NotifyOnState{
+				types.NotifyOnState("SUCCEEDED"),
+				types.NotifyOnState("SUCCEEDED"),
+			},
+		},
 		TriggerSource: &types.TriggerSource{
 			Type: types.TriggerSourceType("MANUAL"),
 			Name: ptr.String("__Name__"),
@@ -11868,6 +12038,12 @@ func TestCheckResponseSnapshot_StartNotebookRun(t *testing.T) {
 		},
 		TimeoutConfiguration: &types.TimeoutConfig{
 			RunTimeoutInMinutes: ptr.Int32(1),
+		},
+		NotificationConfiguration: &types.NotificationConfig{
+			NotifyOn: []types.NotifyOnState{
+				types.NotifyOnState("SUCCEEDED"),
+				types.NotifyOnState("SUCCEEDED"),
+			},
 		},
 		TriggerSource: &types.TriggerSource{
 			Type: types.TriggerSourceType("MANUAL"),
@@ -12597,6 +12773,43 @@ func TestCheckResponseSnapshot_UpdateDataSource(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_UpdateDesignation(t *testing.T) {
+	want := &UpdateDesignationOutput{
+		DomainId:           ptr.String("__DomainId__"),
+		Id:                 ptr.String("__Id__"),
+		Name:               ptr.String("__Name__"),
+		Description:        ptr.String("__Description__"),
+		DesignationType:    types.DesignationType("MANAGED"),
+		Policy:             ptr.String("__Policy__"),
+		DeletionProtection: ptr.Bool(true),
+		CreatedBy:          ptr.String("__CreatedBy__"),
+		CreatedAt:          ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		LastUpdatedAt:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+	}
+	status, header, body, err := serdeRespReadSnapshot("UpdateDesignation.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.UpdateDesignation(context.Background(), &UpdateDesignationInput{
+		DomainIdentifier:   ptr.String("__DomainIdentifier__"),
+		Identifier:         ptr.String("__Identifier__"),
+		Name:               ptr.String("__Name__"),
+		Description:        ptr.String("__Description__"),
+		Policy:             ptr.String("__Policy__"),
+		DeletionProtection: ptr.Bool(true),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "UpdateDesignation.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_UpdateDomain(t *testing.T) {
 	want := &UpdateDomainOutput{
 		Id:               ptr.String("__Id__"),
@@ -12915,8 +13128,9 @@ func TestCheckResponseSnapshot_UpdateEnvironmentBlueprint(t *testing.T) {
 			"__Member__",
 			"__Member__",
 		},
-		CreatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-		UpdatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		BlueprintCategory: types.BlueprintCategory("TOOLING"),
+		CreatedAt:         ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		UpdatedAt:         ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 	}
 	status, header, body, err := serdeRespReadSnapshot("UpdateEnvironmentBlueprint.response")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -12955,6 +13169,7 @@ func TestCheckResponseSnapshot_UpdateEnvironmentBlueprint(t *testing.T) {
 				IsUpdateSupported: ptr.Bool(true),
 			},
 		},
+		BlueprintCategory: types.BlueprintCategory("TOOLING"),
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -13169,6 +13384,7 @@ func TestCheckResponseSnapshot_UpdateNotebook(t *testing.T) {
 			{},
 		},
 		Status:        types.NotebookStatus("ACTIVE"),
+		Type:          types.NotebookType("DATA"),
 		Description:   ptr.String("__Description__"),
 		CreatedAt:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 		CreatedBy:     ptr.String("__CreatedBy__"),
@@ -13222,6 +13438,7 @@ func TestCheckResponseSnapshot_UpdateNotebook(t *testing.T) {
 			{},
 			{},
 		},
+		Type: types.NotebookType("DATA"),
 		Metadata: map[string]string{
 			"key0": "__Value__",
 		},

@@ -333,7 +333,8 @@ var OutpostsOlafService = smithy.NewServiceSchema(_OutpostsOlafService, "2019-12
 var AccessDeniedException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.outposts",
 	Name:      "AccessDeniedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 403})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 403})
 var AccessDeniedException_Message *smithy.Schema
 
 var _AccountId = smithy.NewSchema(smithy.ShapeID{
@@ -695,7 +696,7 @@ var CapacityTaskSummary_LastModifiedDate *smithy.Schema
 var CatalogItem = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.outposts",
 	Name:      "CatalogItem",
-}, smithy.ShapeTypeStructure, 7)
+}, smithy.ShapeTypeStructure, 8)
 var CatalogItem_CatalogItemId *smithy.Schema
 
 var CatalogItem_ItemStatus *smithy.Schema
@@ -709,6 +710,8 @@ var CatalogItem_WeightLbs *smithy.Schema
 var CatalogItem_SupportedUplinkGbps *smithy.Schema
 
 var CatalogItem_SupportedStorage *smithy.Schema
+
+var CatalogItem_RackScalingType *smithy.Schema
 
 var CatalogItemClass = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.outposts",
@@ -799,7 +802,8 @@ var ComputeAttributes_MaxVcpus *smithy.Schema
 var ConflictException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.outposts",
 	Name:      "ConflictException",
-}, smithy.ShapeTypeStructure, 3, &smithytraits.HTTPError{Code: 409})
+}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 409})
 var ConflictException_Message *smithy.Schema
 
 var ConflictException_ResourceId *smithy.Schema
@@ -1049,7 +1053,8 @@ var _InstanceTypeName = smithy.NewSchema(smithy.ShapeID{
 var InternalServerException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.outposts",
 	Name:      "InternalServerException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 500})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
+	&smithytraits.HTTPError{Code: 500})
 var InternalServerException_Message *smithy.Schema
 
 var _ISO8601Timestamp = smithy.NewSchema(smithy.ShapeID{
@@ -1220,7 +1225,8 @@ var _NetworkPerformance = smithy.NewSchema(smithy.ShapeID{
 var NotFoundException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.outposts",
 	Name:      "NotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 404})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 404})
 var NotFoundException_Message *smithy.Schema
 
 var _NullableDouble = smithy.NewSchema(smithy.ShapeID{
@@ -1430,7 +1436,7 @@ var OrderType_REPLACEMENT *smithy.Schema
 var Outpost = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.outposts",
 	Name:      "Outpost",
-}, smithy.ShapeTypeStructure, 12)
+}, smithy.ShapeTypeStructure, 14)
 var Outpost_OutpostId *smithy.Schema
 
 var Outpost_OwnerId *smithy.Schema
@@ -1454,6 +1460,10 @@ var Outpost_Tags *smithy.Schema
 var Outpost_SiteArn *smithy.Schema
 
 var Outpost_SupportedHardwareType *smithy.Schema
+
+var Outpost_Generation *smithy.Schema
+
+var Outpost_RackScalingType *smithy.Schema
 
 var _OutpostArn = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.outposts",
@@ -1725,12 +1735,14 @@ var _QuoteConstraintList_member *smithy.Schema
 var QuoteConstraintType = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.outposts",
 	Name:      "QuoteConstraintType",
-}, smithy.ShapeTypeEnum, 3)
+}, smithy.ShapeTypeEnum, 4)
 var QuoteConstraintType_RACK_MAXIMUM *smithy.Schema
 
 var QuoteConstraintType_RACK_MAX_POWER_KVA *smithy.Schema
 
 var QuoteConstraintType_RACK_MAX_WEIGHT_LBS *smithy.Schema
+
+var QuoteConstraintType_RACK_SPACE_CONSTRAINED *smithy.Schema
 
 var _QuoteDescription = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.outposts",
@@ -1898,6 +1910,14 @@ var RackPhysicalProperties_OpticalStandard *smithy.Schema
 
 var RackPhysicalProperties_MaximumSupportedWeightLbs *smithy.Schema
 
+var RackScalingType = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.outposts",
+	Name:      "RackScalingType",
+}, smithy.ShapeTypeEnum, 2)
+var RackScalingType_SINGLE_RACK *smithy.Schema
+
+var RackScalingType_MULTI_RACK *smithy.Schema
+
 var RackSpecificationDetails = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.outposts",
 	Name:      "RackSpecificationDetails",
@@ -1975,7 +1995,8 @@ var ServerSpecificationDetails_EC2Capacities *smithy.Schema
 var ServiceQuotaExceededException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.outposts",
 	Name:      "ServiceQuotaExceededException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 402})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 402})
 var ServiceQuotaExceededException_Message *smithy.Schema
 
 var ShipmentCarrier = smithy.NewSchema(smithy.ShapeID{
@@ -2288,7 +2309,8 @@ var _ValidateOnly = smithy.NewSchema(smithy.ShapeID{
 var ValidationException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.outposts",
 	Name:      "ValidationException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var ValidationException_Message *smithy.Schema
 
 var _VCPUCount = smithy.NewSchema(smithy.ShapeID{
@@ -3425,6 +3447,10 @@ func init() {
 
 	_SupportedStorageList_member = _SupportedStorageList.AddMember("member", SupportedStorageEnum)
 
+	RackScalingType_SINGLE_RACK = RackScalingType.AddMember("SINGLE_RACK", smithyprelude.Unit)
+
+	RackScalingType_MULTI_RACK = RackScalingType.AddMember("MULTI_RACK", smithyprelude.Unit)
+
 	CatalogItem_CatalogItemId = CatalogItem.AddMember("CatalogItemId", _SkuCode)
 
 	CatalogItem_ItemStatus = CatalogItem.AddMember("ItemStatus", CatalogItemStatus)
@@ -3438,6 +3464,8 @@ func init() {
 	CatalogItem_SupportedUplinkGbps = CatalogItem.AddMember("SupportedUplinkGbps", _SupportedUplinkGbpsListDefinition)
 
 	CatalogItem_SupportedStorage = CatalogItem.AddMember("SupportedStorage", _SupportedStorageList)
+
+	CatalogItem_RackScalingType = CatalogItem.AddMember("RackScalingType", RackScalingType)
 
 	CatalogItemClass_RACK = CatalogItemClass.AddMember("RACK", smithyprelude.Unit)
 
@@ -3803,6 +3831,10 @@ func init() {
 
 	Outpost_SupportedHardwareType = Outpost.AddMember("SupportedHardwareType", SupportedHardwareType)
 
+	Outpost_Generation = Outpost.AddMember("Generation", OutpostGeneration)
+
+	Outpost_RackScalingType = Outpost.AddMember("RackScalingType", RackScalingType)
+
 	_OutpostInstanceTypeList_member = _OutpostInstanceTypeList.AddMember("member", _OutpostInstanceType)
 
 	_outpostListDefinition_member = _outpostListDefinition.AddMember("member", Outpost)
@@ -3892,6 +3924,8 @@ func init() {
 	QuoteConstraintType_RACK_MAX_POWER_KVA = QuoteConstraintType.AddMember("RACK_MAX_POWER_KVA", smithyprelude.Unit)
 
 	QuoteConstraintType_RACK_MAX_WEIGHT_LBS = QuoteConstraintType.AddMember("RACK_MAX_WEIGHT_LBS", smithyprelude.Unit)
+
+	QuoteConstraintType_RACK_SPACE_CONSTRAINED = QuoteConstraintType.AddMember("RACK_SPACE_CONSTRAINED", smithyprelude.Unit)
 
 	QuoteConstraint_QuoteConstraintType = QuoteConstraint.AddMember("QuoteConstraintType", QuoteConstraintType)
 

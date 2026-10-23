@@ -4,7 +4,9 @@ package ssm
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/ssm/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ssm/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -57,6 +59,19 @@ type CreateAssociationBatchInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateAssociationBatchInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateAssociationBatchRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateAssociationBatchInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AssociationDispatchAssumeRole != nil {
+		s.WriteString(schemas.CreateAssociationBatchRequest_AssociationDispatchAssumeRole, *v.AssociationDispatchAssumeRole)
+	}
+	serializeCreateAssociationBatchRequestEntries(s, schemas.CreateAssociationBatchRequest_Entries, v.Entries)
+}
+
 type CreateAssociationBatchOutput struct {
 
 	// Information about the associations that failed.
@@ -71,13 +86,32 @@ type CreateAssociationBatchOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateAssociationBatchOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateAssociationBatchResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateAssociationBatchOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeFailedCreateAssociationList(s, schemas.CreateAssociationBatchResult_Failed, v.Failed)
+	serializeAssociationDescriptionList(s, schemas.CreateAssociationBatchResult_Successful, v.Successful)
+}
+func (v *CreateAssociationBatchOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateAssociationBatchResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateAssociationBatchResult_Failed:
+			return deserializeFailedCreateAssociationList(d, schemas.CreateAssociationBatchResult_Failed, &v.Failed)
+		case schemas.CreateAssociationBatchResult_Successful:
+			return deserializeAssociationDescriptionList(d, schemas.CreateAssociationBatchResult_Successful, &v.Successful)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateAssociationBatchMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateAssociationBatch{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateAssociationBatch, schemas.CreateAssociationBatchRequest, schemas.CreateAssociationBatchResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateAssociationBatch{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateAssociationBatch, schemas.CreateAssociationBatchRequest, schemas.CreateAssociationBatchResult), output: &CreateAssociationBatchOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

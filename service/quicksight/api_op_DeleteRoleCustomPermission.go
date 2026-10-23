@@ -4,7 +4,9 @@ package quicksight
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/quicksight/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/quicksight/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -46,6 +48,24 @@ type DeleteRoleCustomPermissionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteRoleCustomPermissionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteRoleCustomPermissionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteRoleCustomPermissionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AwsAccountId != nil {
+		s.WriteString(schemas.DeleteRoleCustomPermissionRequest_AwsAccountId, *v.AwsAccountId)
+	}
+	if v.Namespace != nil {
+		s.WriteString(schemas.DeleteRoleCustomPermissionRequest_Namespace, *v.Namespace)
+	}
+	if v.Role != "" {
+		s.WriteString(schemas.DeleteRoleCustomPermissionRequest_Role, string(v.Role))
+	}
+}
+
 type DeleteRoleCustomPermissionOutput struct {
 
 	// The Amazon Web Services request ID for this operation.
@@ -60,13 +80,37 @@ type DeleteRoleCustomPermissionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteRoleCustomPermissionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteRoleCustomPermissionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteRoleCustomPermissionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RequestId != nil {
+		s.WriteString(schemas.DeleteRoleCustomPermissionResponse_RequestId, *v.RequestId)
+	}
+	if v.Status != 0 {
+		s.WriteInt32(schemas.DeleteRoleCustomPermissionResponse_Status, v.Status)
+	}
+}
+func (v *DeleteRoleCustomPermissionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteRoleCustomPermissionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteRoleCustomPermissionResponse_RequestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.DeleteRoleCustomPermissionResponse_RequestId, v.RequestId)
+		case schemas.DeleteRoleCustomPermissionResponse_Status:
+			return d.ReadInt32(schemas.DeleteRoleCustomPermissionResponse_Status, &v.Status)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteRoleCustomPermissionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteRoleCustomPermission{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteRoleCustomPermission, schemas.DeleteRoleCustomPermissionRequest, schemas.DeleteRoleCustomPermissionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteRoleCustomPermission{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteRoleCustomPermission, schemas.DeleteRoleCustomPermissionRequest, schemas.DeleteRoleCustomPermissionResponse), output: &DeleteRoleCustomPermissionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

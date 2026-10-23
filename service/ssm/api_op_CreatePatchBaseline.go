@@ -5,7 +5,9 @@ package ssm
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/ssm/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ssm/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -147,6 +149,53 @@ type CreatePatchBaselineInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreatePatchBaselineInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreatePatchBaselineRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreatePatchBaselineInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApprovalRules != nil {
+		s.WriteStruct(schemas.CreatePatchBaselineRequest_ApprovalRules)
+		v.ApprovalRules.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializePatchIdList(s, schemas.CreatePatchBaselineRequest_ApprovedPatches, v.ApprovedPatches)
+	if v.ApprovedPatchesComplianceLevel != "" {
+		s.WriteString(schemas.CreatePatchBaselineRequest_ApprovedPatchesComplianceLevel, string(v.ApprovedPatchesComplianceLevel))
+	}
+	if v.ApprovedPatchesEnableNonSecurity != nil {
+		s.WriteBool(schemas.CreatePatchBaselineRequest_ApprovedPatchesEnableNonSecurity, *v.ApprovedPatchesEnableNonSecurity)
+	}
+	if v.AvailableSecurityUpdatesComplianceStatus != "" {
+		s.WriteString(schemas.CreatePatchBaselineRequest_AvailableSecurityUpdatesComplianceStatus, string(v.AvailableSecurityUpdatesComplianceStatus))
+	}
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreatePatchBaselineRequest_ClientToken, *v.ClientToken)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreatePatchBaselineRequest_Description, *v.Description)
+	}
+	if v.GlobalFilters != nil {
+		s.WriteStruct(schemas.CreatePatchBaselineRequest_GlobalFilters)
+		v.GlobalFilters.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreatePatchBaselineRequest_Name, *v.Name)
+	}
+	if v.OperatingSystem != "" {
+		s.WriteString(schemas.CreatePatchBaselineRequest_OperatingSystem, string(v.OperatingSystem))
+	}
+	serializePatchIdList(s, schemas.CreatePatchBaselineRequest_RejectedPatches, v.RejectedPatches)
+	if v.RejectedPatchesAction != "" {
+		s.WriteString(schemas.CreatePatchBaselineRequest_RejectedPatchesAction, string(v.RejectedPatchesAction))
+	}
+	serializePatchSourceList(s, schemas.CreatePatchBaselineRequest_Sources, v.Sources)
+	serializeTagList(s, schemas.CreatePatchBaselineRequest_Tags, v.Tags)
+}
+
 type CreatePatchBaselineOutput struct {
 
 	// The ID of the created patch baseline.
@@ -158,13 +207,32 @@ type CreatePatchBaselineOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreatePatchBaselineOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreatePatchBaselineResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreatePatchBaselineOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BaselineId != nil {
+		s.WriteString(schemas.CreatePatchBaselineResult_BaselineId, *v.BaselineId)
+	}
+}
+func (v *CreatePatchBaselineOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreatePatchBaselineResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreatePatchBaselineResult_BaselineId:
+			v.BaselineId = new(string)
+			return d.ReadString(schemas.CreatePatchBaselineResult_BaselineId, v.BaselineId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreatePatchBaselineMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreatePatchBaseline{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreatePatchBaseline, schemas.CreatePatchBaselineRequest, schemas.CreatePatchBaselineResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreatePatchBaseline{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreatePatchBaseline, schemas.CreatePatchBaselineRequest, schemas.CreatePatchBaselineResult), output: &CreatePatchBaselineOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

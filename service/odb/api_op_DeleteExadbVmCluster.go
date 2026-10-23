@@ -4,6 +4,8 @@ package odb
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/odb/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -33,6 +35,18 @@ type DeleteExadbVmClusterInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteExadbVmClusterInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteExadbVmClusterInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteExadbVmClusterInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ExadbVmClusterId != nil {
+		s.WriteString(schemas.DeleteExadbVmClusterInput_exadbVmClusterId, *v.ExadbVmClusterId)
+	}
+}
+
 type DeleteExadbVmClusterOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -40,13 +54,26 @@ type DeleteExadbVmClusterOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteExadbVmClusterOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteExadbVmClusterOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteExadbVmClusterOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteExadbVmClusterOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteExadbVmClusterOutput, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteExadbVmClusterMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpDeleteExadbVmCluster{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteExadbVmCluster, schemas.DeleteExadbVmClusterInput, schemas.DeleteExadbVmClusterOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpDeleteExadbVmCluster{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteExadbVmCluster, schemas.DeleteExadbVmClusterInput, schemas.DeleteExadbVmClusterOutput), output: &DeleteExadbVmClusterOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

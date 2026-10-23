@@ -247,6 +247,9 @@ func TestCheckRequestSnapshot_BatchCreateMemoryRecords(t *testing.T) {
 			},
 		},
 		ClientToken: ptr.String("__ClientToken__"),
+		RecordExpirySpecification: &types.RecordExpirySpecificationMemberRecordExpiryDurationDays{
+			Value: 1,
+		},
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -354,6 +357,9 @@ func TestCheckRequestSnapshot_BatchUpdateMemoryRecords(t *testing.T) {
 					},
 				},
 			},
+		},
+		RecordExpirySpecification: &types.RecordExpirySpecificationMemberRecordExpiryDurationDays{
+			Value: 1,
 		},
 	}
 	body := &bytes.Buffer{}
@@ -2239,6 +2245,22 @@ func TestCheckRequestSnapshot_StartBatchEvaluation(t *testing.T) {
 						StartTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 						EndTime:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 					},
+					SessionTraceIds: []types.SessionTraceIds{
+						{
+							SessionId: ptr.String("__SessionId__"),
+							TraceIds: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+						{
+							SessionId: ptr.String("__SessionId__"),
+							TraceIds: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+					},
 				},
 			},
 		},
@@ -2936,6 +2958,9 @@ func TestUpdateRequestSnapshot_BatchCreateMemoryRecords(t *testing.T) {
 			},
 		},
 		ClientToken: ptr.String("__ClientToken__"),
+		RecordExpirySpecification: &types.RecordExpirySpecificationMemberRecordExpiryDurationDays{
+			Value: 1,
+		},
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -3043,6 +3068,9 @@ func TestUpdateRequestSnapshot_BatchUpdateMemoryRecords(t *testing.T) {
 					},
 				},
 			},
+		},
+		RecordExpirySpecification: &types.RecordExpirySpecificationMemberRecordExpiryDurationDays{
+			Value: 1,
 		},
 	}
 	body := &bytes.Buffer{}
@@ -4927,6 +4955,22 @@ func TestUpdateRequestSnapshot_StartBatchEvaluation(t *testing.T) {
 					TimeRange: &types.SessionFilterConfig{
 						StartTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 						EndTime:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					},
+					SessionTraceIds: []types.SessionTraceIds{
+						{
+							SessionId: ptr.String("__SessionId__"),
+							TraceIds: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+						{
+							SessionId: ptr.String("__SessionId__"),
+							TraceIds: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
 					},
 				},
 			},

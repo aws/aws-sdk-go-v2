@@ -4,7 +4,9 @@ package bedrockagent
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/bedrockagent/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagent/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -49,6 +51,22 @@ type GetKnowledgeBaseDocumentsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetKnowledgeBaseDocumentsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetKnowledgeBaseDocumentsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetKnowledgeBaseDocumentsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DataSourceId != nil {
+		s.WriteString(schemas.GetKnowledgeBaseDocumentsRequest_dataSourceId, *v.DataSourceId)
+	}
+	serializeDocumentIdentifiers(s, schemas.GetKnowledgeBaseDocumentsRequest_documentIdentifiers, v.DocumentIdentifiers)
+	if v.KnowledgeBaseId != nil {
+		s.WriteString(schemas.GetKnowledgeBaseDocumentsRequest_knowledgeBaseId, *v.KnowledgeBaseId)
+	}
+}
+
 type GetKnowledgeBaseDocumentsOutput struct {
 
 	// A list of objects, each of which contains information about the documents that
@@ -61,13 +79,29 @@ type GetKnowledgeBaseDocumentsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetKnowledgeBaseDocumentsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetKnowledgeBaseDocumentsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetKnowledgeBaseDocumentsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeKnowledgeBaseDocumentDetails(s, schemas.GetKnowledgeBaseDocumentsResponse_documentDetails, v.DocumentDetails)
+}
+func (v *GetKnowledgeBaseDocumentsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetKnowledgeBaseDocumentsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetKnowledgeBaseDocumentsResponse_documentDetails:
+			return deserializeKnowledgeBaseDocumentDetails(d, schemas.GetKnowledgeBaseDocumentsResponse_documentDetails, &v.DocumentDetails)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetKnowledgeBaseDocumentsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetKnowledgeBaseDocuments{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetKnowledgeBaseDocuments, schemas.GetKnowledgeBaseDocumentsRequest, schemas.GetKnowledgeBaseDocumentsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetKnowledgeBaseDocuments{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetKnowledgeBaseDocuments, schemas.GetKnowledgeBaseDocumentsRequest, schemas.GetKnowledgeBaseDocumentsResponse), output: &GetKnowledgeBaseDocumentsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

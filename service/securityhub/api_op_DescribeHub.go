@@ -4,7 +4,9 @@ package securityhub
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/securityhub/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/securityhub/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -31,6 +33,18 @@ type DescribeHubInput struct {
 	HubArn *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DescribeHubInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeHubRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeHubInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.HubArn != nil {
+		s.WriteString(schemas.DescribeHubRequest_HubArn, *v.HubArn)
+	}
 }
 
 type DescribeHubOutput struct {
@@ -78,13 +92,54 @@ type DescribeHubOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeHubOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeHubResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeHubOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AutoEnableControls != nil {
+		s.WriteBool(schemas.DescribeHubResponse_AutoEnableControls, *v.AutoEnableControls)
+	}
+	if v.ControlFindingGenerator != "" {
+		s.WriteString(schemas.DescribeHubResponse_ControlFindingGenerator, string(v.ControlFindingGenerator))
+	}
+	if v.HubArn != nil {
+		s.WriteString(schemas.DescribeHubResponse_HubArn, *v.HubArn)
+	}
+	if v.SubscribedAt != nil {
+		s.WriteString(schemas.DescribeHubResponse_SubscribedAt, *v.SubscribedAt)
+	}
+}
+func (v *DescribeHubOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeHubResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeHubResponse_AutoEnableControls:
+			v.AutoEnableControls = new(bool)
+			return d.ReadBool(schemas.DescribeHubResponse_AutoEnableControls, v.AutoEnableControls)
+		case schemas.DescribeHubResponse_ControlFindingGenerator:
+			var ev string
+			if err := d.ReadString(schemas.DescribeHubResponse_ControlFindingGenerator, &ev); err != nil {
+				return err
+			}
+			v.ControlFindingGenerator = types.ControlFindingGenerator(ev)
+			return nil
+		case schemas.DescribeHubResponse_HubArn:
+			v.HubArn = new(string)
+			return d.ReadString(schemas.DescribeHubResponse_HubArn, v.HubArn)
+		case schemas.DescribeHubResponse_SubscribedAt:
+			v.SubscribedAt = new(string)
+			return d.ReadString(schemas.DescribeHubResponse_SubscribedAt, v.SubscribedAt)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeHubMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeHub{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeHub, schemas.DescribeHubRequest, schemas.DescribeHubResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeHub{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeHub, schemas.DescribeHubRequest, schemas.DescribeHubResponse), output: &DescribeHubOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

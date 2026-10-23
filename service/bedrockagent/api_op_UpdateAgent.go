@@ -4,7 +4,9 @@ package bedrockagent
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/bedrockagent/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagent/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -118,6 +120,65 @@ type UpdateAgentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateAgentInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateAgentRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateAgentInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AgentCollaboration != "" {
+		s.WriteString(schemas.UpdateAgentRequest_agentCollaboration, string(v.AgentCollaboration))
+	}
+	if v.AgentId != nil {
+		s.WriteString(schemas.UpdateAgentRequest_agentId, *v.AgentId)
+	}
+	if v.AgentName != nil {
+		s.WriteString(schemas.UpdateAgentRequest_agentName, *v.AgentName)
+	}
+	if v.AgentResourceRoleArn != nil {
+		s.WriteString(schemas.UpdateAgentRequest_agentResourceRoleArn, *v.AgentResourceRoleArn)
+	}
+	if v.CustomOrchestration != nil {
+		s.WriteStruct(schemas.UpdateAgentRequest_customOrchestration)
+		v.CustomOrchestration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CustomerEncryptionKeyArn != nil {
+		s.WriteString(schemas.UpdateAgentRequest_customerEncryptionKeyArn, *v.CustomerEncryptionKeyArn)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateAgentRequest_description, *v.Description)
+	}
+	if v.FoundationModel != nil {
+		s.WriteString(schemas.UpdateAgentRequest_foundationModel, *v.FoundationModel)
+	}
+	if v.GuardrailConfiguration != nil {
+		s.WriteStruct(schemas.UpdateAgentRequest_guardrailConfiguration)
+		v.GuardrailConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.IdleSessionTTLInSeconds != nil {
+		s.WriteInt32(schemas.UpdateAgentRequest_idleSessionTTLInSeconds, *v.IdleSessionTTLInSeconds)
+	}
+	if v.Instruction != nil {
+		s.WriteString(schemas.UpdateAgentRequest_instruction, *v.Instruction)
+	}
+	if v.MemoryConfiguration != nil {
+		s.WriteStruct(schemas.UpdateAgentRequest_memoryConfiguration)
+		v.MemoryConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.OrchestrationType != "" {
+		s.WriteString(schemas.UpdateAgentRequest_orchestrationType, string(v.OrchestrationType))
+	}
+	if v.PromptOverrideConfiguration != nil {
+		s.WriteStruct(schemas.UpdateAgentRequest_promptOverrideConfiguration)
+		v.PromptOverrideConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type UpdateAgentOutput struct {
 
 	// Contains details about the agent that was updated.
@@ -131,13 +192,34 @@ type UpdateAgentOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateAgentOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateAgentResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateAgentOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Agent != nil {
+		s.WriteStruct(schemas.UpdateAgentResponse_agent)
+		v.Agent.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateAgentOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateAgentResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateAgentResponse_agent:
+			v.Agent = &types.Agent{}
+			return v.Agent.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateAgentMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateAgent{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateAgent, schemas.UpdateAgentRequest, schemas.UpdateAgentResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateAgent{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateAgent, schemas.UpdateAgentRequest, schemas.UpdateAgentResponse), output: &UpdateAgentOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

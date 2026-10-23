@@ -4,7 +4,9 @@ package datazone
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/datazone/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/datazone/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -71,6 +73,38 @@ type PutEnvironmentBlueprintConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutEnvironmentBlueprintConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutEnvironmentBlueprintConfigurationInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutEnvironmentBlueprintConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AllowUserProvidedConfigurations != nil {
+		s.WriteBool(schemas.PutEnvironmentBlueprintConfigurationInput_allowUserProvidedConfigurations, *v.AllowUserProvidedConfigurations)
+	}
+	if v.DomainIdentifier != nil {
+		s.WriteString(schemas.PutEnvironmentBlueprintConfigurationInput_domainIdentifier, *v.DomainIdentifier)
+	}
+	serializeEnabledRegionList(s, schemas.PutEnvironmentBlueprintConfigurationInput_enabledRegions, v.EnabledRegions)
+	if v.EnvironmentBlueprintIdentifier != nil {
+		s.WriteString(schemas.PutEnvironmentBlueprintConfigurationInput_environmentBlueprintIdentifier, *v.EnvironmentBlueprintIdentifier)
+	}
+	if v.EnvironmentRolePermissionBoundary != nil {
+		s.WriteString(schemas.PutEnvironmentBlueprintConfigurationInput_environmentRolePermissionBoundary, *v.EnvironmentRolePermissionBoundary)
+	}
+	serializeGlobalParameterMap(s, schemas.PutEnvironmentBlueprintConfigurationInput_globalParameters, v.GlobalParameters)
+	if v.ManageAccessRoleArn != nil {
+		s.WriteString(schemas.PutEnvironmentBlueprintConfigurationInput_manageAccessRoleArn, *v.ManageAccessRoleArn)
+	}
+	serializeProvisioningConfigurationList(s, schemas.PutEnvironmentBlueprintConfigurationInput_provisioningConfigurations, v.ProvisioningConfigurations)
+	if v.ProvisioningRoleArn != nil {
+		s.WriteString(schemas.PutEnvironmentBlueprintConfigurationInput_provisioningRoleArn, *v.ProvisioningRoleArn)
+	}
+	serializeRegionalParameterMap(s, schemas.PutEnvironmentBlueprintConfigurationInput_regionalParameters, v.RegionalParameters)
+	serializePutResourceConfigurations(s, schemas.PutEnvironmentBlueprintConfigurationInput_resourceConfigurations, v.ResourceConfigurations)
+}
+
 type PutEnvironmentBlueprintConfigurationOutput struct {
 
 	// The identifier of the Amazon DataZone domain.
@@ -120,13 +154,86 @@ type PutEnvironmentBlueprintConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutEnvironmentBlueprintConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutEnvironmentBlueprintConfigurationOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutEnvironmentBlueprintConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AllowUserProvidedConfigurations != nil {
+		s.WriteBool(schemas.PutEnvironmentBlueprintConfigurationOutput_allowUserProvidedConfigurations, *v.AllowUserProvidedConfigurations)
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.PutEnvironmentBlueprintConfigurationOutput_createdAt, *v.CreatedAt)
+	}
+	if v.DomainId != nil {
+		s.WriteString(schemas.PutEnvironmentBlueprintConfigurationOutput_domainId, *v.DomainId)
+	}
+	serializeEnabledRegionList(s, schemas.PutEnvironmentBlueprintConfigurationOutput_enabledRegions, v.EnabledRegions)
+	if v.EnvironmentBlueprintId != nil {
+		s.WriteString(schemas.PutEnvironmentBlueprintConfigurationOutput_environmentBlueprintId, *v.EnvironmentBlueprintId)
+	}
+	if v.EnvironmentRolePermissionBoundary != nil {
+		s.WriteString(schemas.PutEnvironmentBlueprintConfigurationOutput_environmentRolePermissionBoundary, *v.EnvironmentRolePermissionBoundary)
+	}
+	if v.ManageAccessRoleArn != nil {
+		s.WriteString(schemas.PutEnvironmentBlueprintConfigurationOutput_manageAccessRoleArn, *v.ManageAccessRoleArn)
+	}
+	serializeProvisioningConfigurationList(s, schemas.PutEnvironmentBlueprintConfigurationOutput_provisioningConfigurations, v.ProvisioningConfigurations)
+	if v.ProvisioningRoleArn != nil {
+		s.WriteString(schemas.PutEnvironmentBlueprintConfigurationOutput_provisioningRoleArn, *v.ProvisioningRoleArn)
+	}
+	serializeRegionalParameterMap(s, schemas.PutEnvironmentBlueprintConfigurationOutput_regionalParameters, v.RegionalParameters)
+	serializeResourceConfigurations(s, schemas.PutEnvironmentBlueprintConfigurationOutput_resourceConfigurations, v.ResourceConfigurations)
+	if v.UpdatedAt != nil {
+		s.WriteTime(schemas.PutEnvironmentBlueprintConfigurationOutput_updatedAt, *v.UpdatedAt)
+	}
+}
+func (v *PutEnvironmentBlueprintConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PutEnvironmentBlueprintConfigurationOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PutEnvironmentBlueprintConfigurationOutput_allowUserProvidedConfigurations:
+			v.AllowUserProvidedConfigurations = new(bool)
+			return d.ReadBool(schemas.PutEnvironmentBlueprintConfigurationOutput_allowUserProvidedConfigurations, v.AllowUserProvidedConfigurations)
+		case schemas.PutEnvironmentBlueprintConfigurationOutput_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.PutEnvironmentBlueprintConfigurationOutput_createdAt, v.CreatedAt)
+		case schemas.PutEnvironmentBlueprintConfigurationOutput_domainId:
+			v.DomainId = new(string)
+			return d.ReadString(schemas.PutEnvironmentBlueprintConfigurationOutput_domainId, v.DomainId)
+		case schemas.PutEnvironmentBlueprintConfigurationOutput_enabledRegions:
+			return deserializeEnabledRegionList(d, schemas.PutEnvironmentBlueprintConfigurationOutput_enabledRegions, &v.EnabledRegions)
+		case schemas.PutEnvironmentBlueprintConfigurationOutput_environmentBlueprintId:
+			v.EnvironmentBlueprintId = new(string)
+			return d.ReadString(schemas.PutEnvironmentBlueprintConfigurationOutput_environmentBlueprintId, v.EnvironmentBlueprintId)
+		case schemas.PutEnvironmentBlueprintConfigurationOutput_environmentRolePermissionBoundary:
+			v.EnvironmentRolePermissionBoundary = new(string)
+			return d.ReadString(schemas.PutEnvironmentBlueprintConfigurationOutput_environmentRolePermissionBoundary, v.EnvironmentRolePermissionBoundary)
+		case schemas.PutEnvironmentBlueprintConfigurationOutput_manageAccessRoleArn:
+			v.ManageAccessRoleArn = new(string)
+			return d.ReadString(schemas.PutEnvironmentBlueprintConfigurationOutput_manageAccessRoleArn, v.ManageAccessRoleArn)
+		case schemas.PutEnvironmentBlueprintConfigurationOutput_provisioningConfigurations:
+			return deserializeProvisioningConfigurationList(d, schemas.PutEnvironmentBlueprintConfigurationOutput_provisioningConfigurations, &v.ProvisioningConfigurations)
+		case schemas.PutEnvironmentBlueprintConfigurationOutput_provisioningRoleArn:
+			v.ProvisioningRoleArn = new(string)
+			return d.ReadString(schemas.PutEnvironmentBlueprintConfigurationOutput_provisioningRoleArn, v.ProvisioningRoleArn)
+		case schemas.PutEnvironmentBlueprintConfigurationOutput_regionalParameters:
+			return deserializeRegionalParameterMap(d, schemas.PutEnvironmentBlueprintConfigurationOutput_regionalParameters, &v.RegionalParameters)
+		case schemas.PutEnvironmentBlueprintConfigurationOutput_resourceConfigurations:
+			return deserializeResourceConfigurations(d, schemas.PutEnvironmentBlueprintConfigurationOutput_resourceConfigurations, &v.ResourceConfigurations)
+		case schemas.PutEnvironmentBlueprintConfigurationOutput_updatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.PutEnvironmentBlueprintConfigurationOutput_updatedAt, v.UpdatedAt)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPutEnvironmentBlueprintConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpPutEnvironmentBlueprintConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutEnvironmentBlueprintConfiguration, schemas.PutEnvironmentBlueprintConfigurationInput, schemas.PutEnvironmentBlueprintConfigurationOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpPutEnvironmentBlueprintConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutEnvironmentBlueprintConfiguration, schemas.PutEnvironmentBlueprintConfigurationInput, schemas.PutEnvironmentBlueprintConfigurationOutput), output: &PutEnvironmentBlueprintConfigurationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

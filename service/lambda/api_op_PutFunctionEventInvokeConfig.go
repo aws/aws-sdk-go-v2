@@ -4,7 +4,9 @@ package lambda
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/lambda/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lambda/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -95,6 +97,32 @@ type PutFunctionEventInvokeConfigInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutFunctionEventInvokeConfigInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutFunctionEventInvokeConfigRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutFunctionEventInvokeConfigInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DestinationConfig != nil {
+		s.WriteStruct(schemas.PutFunctionEventInvokeConfigRequest_DestinationConfig)
+		v.DestinationConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.FunctionName != nil {
+		s.WriteString(schemas.PutFunctionEventInvokeConfigRequest_FunctionName, *v.FunctionName)
+	}
+	if v.MaximumEventAgeInSeconds != nil {
+		s.WriteInt32(schemas.PutFunctionEventInvokeConfigRequest_MaximumEventAgeInSeconds, *v.MaximumEventAgeInSeconds)
+	}
+	if v.MaximumRetryAttempts != nil {
+		s.WriteInt32(schemas.PutFunctionEventInvokeConfigRequest_MaximumRetryAttempts, *v.MaximumRetryAttempts)
+	}
+	if v.Qualifier != nil {
+		s.WriteString(schemas.PutFunctionEventInvokeConfigRequest_Qualifier, *v.Qualifier)
+	}
+}
+
 type PutFunctionEventInvokeConfigOutput struct {
 
 	// A destination for events after they have been sent to a function for processing.
@@ -133,13 +161,58 @@ type PutFunctionEventInvokeConfigOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutFunctionEventInvokeConfigOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.FunctionEventInvokeConfig)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutFunctionEventInvokeConfigOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DestinationConfig != nil {
+		s.WriteStruct(schemas.FunctionEventInvokeConfig_DestinationConfig)
+		v.DestinationConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.FunctionArn != nil {
+		s.WriteString(schemas.FunctionEventInvokeConfig_FunctionArn, *v.FunctionArn)
+	}
+	if v.LastModified != nil {
+		s.WriteTime(schemas.FunctionEventInvokeConfig_LastModified, *v.LastModified)
+	}
+	if v.MaximumEventAgeInSeconds != nil {
+		s.WriteInt32(schemas.FunctionEventInvokeConfig_MaximumEventAgeInSeconds, *v.MaximumEventAgeInSeconds)
+	}
+	if v.MaximumRetryAttempts != nil {
+		s.WriteInt32(schemas.FunctionEventInvokeConfig_MaximumRetryAttempts, *v.MaximumRetryAttempts)
+	}
+}
+func (v *PutFunctionEventInvokeConfigOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.FunctionEventInvokeConfig, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.FunctionEventInvokeConfig_DestinationConfig:
+			v.DestinationConfig = &types.DestinationConfig{}
+			return v.DestinationConfig.Deserialize(d)
+		case schemas.FunctionEventInvokeConfig_FunctionArn:
+			v.FunctionArn = new(string)
+			return d.ReadString(schemas.FunctionEventInvokeConfig_FunctionArn, v.FunctionArn)
+		case schemas.FunctionEventInvokeConfig_LastModified:
+			v.LastModified = new(time.Time)
+			return d.ReadTime(schemas.FunctionEventInvokeConfig_LastModified, v.LastModified)
+		case schemas.FunctionEventInvokeConfig_MaximumEventAgeInSeconds:
+			v.MaximumEventAgeInSeconds = new(int32)
+			return d.ReadInt32(schemas.FunctionEventInvokeConfig_MaximumEventAgeInSeconds, v.MaximumEventAgeInSeconds)
+		case schemas.FunctionEventInvokeConfig_MaximumRetryAttempts:
+			v.MaximumRetryAttempts = new(int32)
+			return d.ReadInt32(schemas.FunctionEventInvokeConfig_MaximumRetryAttempts, v.MaximumRetryAttempts)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPutFunctionEventInvokeConfigMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpPutFunctionEventInvokeConfig{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutFunctionEventInvokeConfig, schemas.PutFunctionEventInvokeConfigRequest, schemas.FunctionEventInvokeConfig)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpPutFunctionEventInvokeConfig{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutFunctionEventInvokeConfig, schemas.PutFunctionEventInvokeConfigRequest, schemas.FunctionEventInvokeConfig), output: &PutFunctionEventInvokeConfigOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

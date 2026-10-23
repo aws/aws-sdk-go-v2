@@ -5,7 +5,9 @@ package quicksight
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/quicksight/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/quicksight/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -46,6 +48,24 @@ type ListAssetBundleExportJobsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAssetBundleExportJobsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAssetBundleExportJobsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAssetBundleExportJobsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AwsAccountId != nil {
+		s.WriteString(schemas.ListAssetBundleExportJobsRequest_AwsAccountId, *v.AwsAccountId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListAssetBundleExportJobsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAssetBundleExportJobsRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListAssetBundleExportJobsOutput struct {
 
 	// A list of export job summaries.
@@ -66,13 +86,46 @@ type ListAssetBundleExportJobsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAssetBundleExportJobsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAssetBundleExportJobsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAssetBundleExportJobsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAssetBundleExportJobSummaryList(s, schemas.ListAssetBundleExportJobsResponse_AssetBundleExportJobSummaryList, v.AssetBundleExportJobSummaryList)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAssetBundleExportJobsResponse_NextToken, *v.NextToken)
+	}
+	if v.RequestId != nil {
+		s.WriteString(schemas.ListAssetBundleExportJobsResponse_RequestId, *v.RequestId)
+	}
+	if v.Status != 0 {
+		s.WriteInt32(schemas.ListAssetBundleExportJobsResponse_Status, v.Status)
+	}
+}
+func (v *ListAssetBundleExportJobsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListAssetBundleExportJobsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListAssetBundleExportJobsResponse_AssetBundleExportJobSummaryList:
+			return deserializeAssetBundleExportJobSummaryList(d, schemas.ListAssetBundleExportJobsResponse_AssetBundleExportJobSummaryList, &v.AssetBundleExportJobSummaryList)
+		case schemas.ListAssetBundleExportJobsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListAssetBundleExportJobsResponse_NextToken, v.NextToken)
+		case schemas.ListAssetBundleExportJobsResponse_RequestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.ListAssetBundleExportJobsResponse_RequestId, v.RequestId)
+		case schemas.ListAssetBundleExportJobsResponse_Status:
+			return d.ReadInt32(schemas.ListAssetBundleExportJobsResponse_Status, &v.Status)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListAssetBundleExportJobsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListAssetBundleExportJobs{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAssetBundleExportJobs, schemas.ListAssetBundleExportJobsRequest, schemas.ListAssetBundleExportJobsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListAssetBundleExportJobs{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAssetBundleExportJobs, schemas.ListAssetBundleExportJobsRequest, schemas.ListAssetBundleExportJobsResponse), output: &ListAssetBundleExportJobsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

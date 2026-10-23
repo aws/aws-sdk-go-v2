@@ -5,7 +5,9 @@ package accessanalyzer
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/accessanalyzer/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/accessanalyzer/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -50,6 +52,27 @@ type GetFindingV2Input struct {
 	NextToken *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetFindingV2Input) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetFindingV2Request)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetFindingV2Input) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AnalyzerArn != nil {
+		s.WriteString(schemas.GetFindingV2Request_analyzerArn, *v.AnalyzerArn)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.GetFindingV2Request_id, *v.Id)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.GetFindingV2Request_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetFindingV2Request_nextToken, *v.NextToken)
+	}
 }
 
 type GetFindingV2Output struct {
@@ -117,13 +140,107 @@ type GetFindingV2Output struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetFindingV2Output) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetFindingV2Response)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetFindingV2Output) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AnalyzedAt != nil {
+		s.WriteTime(schemas.GetFindingV2Response_analyzedAt, *v.AnalyzedAt)
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.GetFindingV2Response_createdAt, *v.CreatedAt)
+	}
+	if v.Error != nil {
+		s.WriteString(schemas.GetFindingV2Response_error, *v.Error)
+	}
+	serializeFindingDetailsList(s, schemas.GetFindingV2Response_findingDetails, v.FindingDetails)
+	if v.FindingType != "" {
+		s.WriteString(schemas.GetFindingV2Response_findingType, string(v.FindingType))
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.GetFindingV2Response_id, *v.Id)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetFindingV2Response_nextToken, *v.NextToken)
+	}
+	if v.Resource != nil {
+		s.WriteString(schemas.GetFindingV2Response_resource, *v.Resource)
+	}
+	if v.ResourceOwnerAccount != nil {
+		s.WriteString(schemas.GetFindingV2Response_resourceOwnerAccount, *v.ResourceOwnerAccount)
+	}
+	if v.ResourceType != "" {
+		s.WriteString(schemas.GetFindingV2Response_resourceType, string(v.ResourceType))
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.GetFindingV2Response_status, string(v.Status))
+	}
+	if v.UpdatedAt != nil {
+		s.WriteTime(schemas.GetFindingV2Response_updatedAt, *v.UpdatedAt)
+	}
+}
+func (v *GetFindingV2Output) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetFindingV2Response, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetFindingV2Response_analyzedAt:
+			v.AnalyzedAt = new(time.Time)
+			return d.ReadTime(schemas.GetFindingV2Response_analyzedAt, v.AnalyzedAt)
+		case schemas.GetFindingV2Response_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.GetFindingV2Response_createdAt, v.CreatedAt)
+		case schemas.GetFindingV2Response_error:
+			v.Error = new(string)
+			return d.ReadString(schemas.GetFindingV2Response_error, v.Error)
+		case schemas.GetFindingV2Response_findingDetails:
+			return deserializeFindingDetailsList(d, schemas.GetFindingV2Response_findingDetails, &v.FindingDetails)
+		case schemas.GetFindingV2Response_findingType:
+			var ev string
+			if err := d.ReadString(schemas.GetFindingV2Response_findingType, &ev); err != nil {
+				return err
+			}
+			v.FindingType = types.FindingType(ev)
+			return nil
+		case schemas.GetFindingV2Response_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.GetFindingV2Response_id, v.Id)
+		case schemas.GetFindingV2Response_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.GetFindingV2Response_nextToken, v.NextToken)
+		case schemas.GetFindingV2Response_resource:
+			v.Resource = new(string)
+			return d.ReadString(schemas.GetFindingV2Response_resource, v.Resource)
+		case schemas.GetFindingV2Response_resourceOwnerAccount:
+			v.ResourceOwnerAccount = new(string)
+			return d.ReadString(schemas.GetFindingV2Response_resourceOwnerAccount, v.ResourceOwnerAccount)
+		case schemas.GetFindingV2Response_resourceType:
+			var ev string
+			if err := d.ReadString(schemas.GetFindingV2Response_resourceType, &ev); err != nil {
+				return err
+			}
+			v.ResourceType = types.ResourceType(ev)
+			return nil
+		case schemas.GetFindingV2Response_status:
+			var ev string
+			if err := d.ReadString(schemas.GetFindingV2Response_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.FindingStatus(ev)
+			return nil
+		case schemas.GetFindingV2Response_updatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.GetFindingV2Response_updatedAt, v.UpdatedAt)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetFindingV2Middlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetFindingV2{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetFindingV2, schemas.GetFindingV2Request, schemas.GetFindingV2Response)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetFindingV2{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetFindingV2, schemas.GetFindingV2Request, schemas.GetFindingV2Response), output: &GetFindingV2Output{}}, middleware.After); err != nil {
 		return err
 	}
 

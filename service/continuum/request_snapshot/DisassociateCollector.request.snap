@@ -1,0 +1,5 @@
+POST /environments/__EnvironmentId__/collectors/disassociate
+
+Content-Type: application/json
+
+{"collectorArn":"__CollectorArn__"}

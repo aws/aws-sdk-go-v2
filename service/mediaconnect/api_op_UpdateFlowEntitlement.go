@@ -4,7 +4,9 @@ package mediaconnect
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/mediaconnect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/mediaconnect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -62,6 +64,33 @@ type UpdateFlowEntitlementInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateFlowEntitlementInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateFlowEntitlementRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateFlowEntitlementInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateFlowEntitlementRequest_Description, *v.Description)
+	}
+	if v.Encryption != nil {
+		s.WriteStruct(schemas.UpdateFlowEntitlementRequest_Encryption)
+		v.Encryption.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.EntitlementArn != nil {
+		s.WriteString(schemas.UpdateFlowEntitlementRequest_EntitlementArn, *v.EntitlementArn)
+	}
+	if v.EntitlementStatus != "" {
+		s.WriteString(schemas.UpdateFlowEntitlementRequest_EntitlementStatus, string(v.EntitlementStatus))
+	}
+	if v.FlowArn != nil {
+		s.WriteString(schemas.UpdateFlowEntitlementRequest_FlowArn, *v.FlowArn)
+	}
+	serialize__listOfString(s, schemas.UpdateFlowEntitlementRequest_Subscribers, v.Subscribers)
+}
+
 type UpdateFlowEntitlementOutput struct {
 
 	//  The new configuration of the entitlement that you updated.
@@ -76,13 +105,40 @@ type UpdateFlowEntitlementOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateFlowEntitlementOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateFlowEntitlementResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateFlowEntitlementOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Entitlement != nil {
+		s.WriteStruct(schemas.UpdateFlowEntitlementResponse_Entitlement)
+		v.Entitlement.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.FlowArn != nil {
+		s.WriteString(schemas.UpdateFlowEntitlementResponse_FlowArn, *v.FlowArn)
+	}
+}
+func (v *UpdateFlowEntitlementOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateFlowEntitlementResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateFlowEntitlementResponse_Entitlement:
+			v.Entitlement = &types.Entitlement{}
+			return v.Entitlement.Deserialize(d)
+		case schemas.UpdateFlowEntitlementResponse_FlowArn:
+			v.FlowArn = new(string)
+			return d.ReadString(schemas.UpdateFlowEntitlementResponse_FlowArn, v.FlowArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateFlowEntitlementMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateFlowEntitlement{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateFlowEntitlement, schemas.UpdateFlowEntitlementRequest, schemas.UpdateFlowEntitlementResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateFlowEntitlement{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateFlowEntitlement, schemas.UpdateFlowEntitlementRequest, schemas.UpdateFlowEntitlementResponse), output: &UpdateFlowEntitlementOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

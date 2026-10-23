@@ -4,6 +4,8 @@ package sfn
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/sfn/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -49,6 +51,24 @@ type StopExecutionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StopExecutionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StopExecutionInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StopExecutionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Cause != nil {
+		s.WriteString(schemas.StopExecutionInput_cause, *v.Cause)
+	}
+	if v.Error != nil {
+		s.WriteString(schemas.StopExecutionInput_error, *v.Error)
+	}
+	if v.ExecutionArn != nil {
+		s.WriteString(schemas.StopExecutionInput_executionArn, *v.ExecutionArn)
+	}
+}
+
 type StopExecutionOutput struct {
 
 	// The date the execution is stopped.
@@ -62,13 +82,32 @@ type StopExecutionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StopExecutionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StopExecutionOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StopExecutionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.StopDate != nil {
+		s.WriteTime(schemas.StopExecutionOutput_stopDate, *v.StopDate)
+	}
+}
+func (v *StopExecutionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StopExecutionOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StopExecutionOutput_stopDate:
+			v.StopDate = new(time.Time)
+			return d.ReadTime(schemas.StopExecutionOutput_stopDate, v.StopDate)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStopExecutionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpStopExecution{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StopExecution, schemas.StopExecutionInput, schemas.StopExecutionOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpStopExecution{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StopExecution, schemas.StopExecutionInput, schemas.StopExecutionOutput), output: &StopExecutionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

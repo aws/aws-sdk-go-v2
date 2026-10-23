@@ -5,7 +5,9 @@ package kafka
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/kafka/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/kafka/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -46,6 +48,27 @@ type ListClustersV2Input struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListClustersV2Input) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListClustersV2Request)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListClustersV2Input) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClusterNameFilter != nil {
+		s.WriteString(schemas.ListClustersV2Request_ClusterNameFilter, *v.ClusterNameFilter)
+	}
+	if v.ClusterTypeFilter != nil {
+		s.WriteString(schemas.ListClustersV2Request_ClusterTypeFilter, *v.ClusterTypeFilter)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListClustersV2Request_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListClustersV2Request_NextToken, *v.NextToken)
+	}
+}
+
 type ListClustersV2Output struct {
 
 	// Information on each of the MSK clusters in the response.
@@ -62,13 +85,35 @@ type ListClustersV2Output struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListClustersV2Output) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListClustersV2Response)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListClustersV2Output) SerializeMembers(s smithy.ShapeSerializer) {
+	serialize__listOfCluster(s, schemas.ListClustersV2Response_ClusterInfoList, v.ClusterInfoList)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListClustersV2Response_NextToken, *v.NextToken)
+	}
+}
+func (v *ListClustersV2Output) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListClustersV2Response, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListClustersV2Response_ClusterInfoList:
+			return deserialize__listOfCluster(d, schemas.ListClustersV2Response_ClusterInfoList, &v.ClusterInfoList)
+		case schemas.ListClustersV2Response_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListClustersV2Response_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListClustersV2Middlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListClustersV2{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListClustersV2, schemas.ListClustersV2Request, schemas.ListClustersV2Response)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListClustersV2{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListClustersV2, schemas.ListClustersV2Request, schemas.ListClustersV2Response), output: &ListClustersV2Output{}}, middleware.After); err != nil {
 		return err
 	}
 

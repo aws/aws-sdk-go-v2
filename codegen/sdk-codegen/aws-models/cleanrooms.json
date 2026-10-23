@@ -5676,6 +5676,12 @@
                         "smithy.api#required": {}
                     }
                 },
+                "tableType": {
+                    "target": "com.amazonaws.cleanrooms#TableReferenceType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Type of the Configured Table DataSource, example: Glue, Snowflake, Athena, Databricks</p>"
+                    }
+                },
                 "createTime": {
                     "target": "smithy.api#Timestamp",
                     "traits": {
@@ -6376,6 +6382,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The name of the configured table.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "tableType": {
+                    "target": "com.amazonaws.cleanrooms#TableReferenceType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Type of the Configured Table DataSource, example: Glue, Snowflake, Athena, Databricks</p>"
                     }
                 },
                 "createTime": {
@@ -8236,6 +8248,108 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>The settings for client-side encryption for cryptographic computing.</p>"
+            }
+        },
+        "com.amazonaws.cleanrooms#DatabricksConnectionType": {
+            "type": "union",
+            "members": {
+                "deltaSharing": {
+                    "target": "com.amazonaws.cleanrooms#DatabricksDeltaSharingConnection",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Details about Connector for Databricks</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Type of the connector to be used for connecting to Databricks. Supported connector: Delta Sharing</p>"
+            }
+        },
+        "com.amazonaws.cleanrooms#DatabricksDeltaSharingConnection": {
+            "type": "structure",
+            "members": {
+                "deltaShareEndpoint": {
+                    "target": "com.amazonaws.cleanrooms#DatabricksEndpointUrl",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The base URL of a Delta Sharing server that hosts shared datasets.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "shareName": {
+                    "target": "com.amazonaws.cleanrooms#DatabricksObject",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Name of the Share used for OpenSharing (Delta Sharing) the Databricks Table.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Details about Delta Sharing Connector for Databricks</p>"
+            }
+        },
+        "com.amazonaws.cleanrooms#DatabricksEndpointUrl": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 10,
+                    "max": 1024
+                },
+                "smithy.api#pattern": "^https://(?:[a-zA-Z0-9.-]+\\.cloud\\.databricks\\.com/api/2\\.0/delta-sharing|[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}\\.opensharing\\.[a-z0-9-]+\\.cloud\\.databricks\\.com/api/2\\.0/opensharing)/metastores/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}/recipients/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
+            }
+        },
+        "com.amazonaws.cleanrooms#DatabricksObject": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 255
+                },
+                "smithy.api#pattern": "^[\\p{L}\\p{M}\\p{N}\\p{Pc}\\p{Pd}]+$"
+            }
+        },
+        "com.amazonaws.cleanrooms#DatabricksTableReference": {
+            "type": "structure",
+            "members": {
+                "schemaName": {
+                    "target": "com.amazonaws.cleanrooms#DatabricksObject",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Name of the Schema within Databricks.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "tableName": {
+                    "target": "com.amazonaws.cleanrooms#DatabricksObject",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Name of the Table within Databricks.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "workspaceUrl": {
+                    "target": "com.amazonaws.cleanrooms#DatabricksWorkspaceUrl",
+                    "traits": {
+                        "smithy.api#documentation": "<p>URL for the Databricks Workspace.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "connectionType": {
+                    "target": "com.amazonaws.cleanrooms#DatabricksConnectionType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Type of the connector to be used for connecting to Databricks. Supported connector: Delta Sharing</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p> A reference to a table within Databricks.</p>"
+            }
+        },
+        "com.amazonaws.cleanrooms#DatabricksWorkspaceUrl": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 10,
+                    "max": 256
+                },
+                "smithy.api#pattern": "^https://[a-zA-Z0-9.-]+\\.cloud\\.databricks\\.com/?$"
             }
         },
         "com.amazonaws.cleanrooms#DeleteAnalysisTemplate": {
@@ -20511,10 +20625,45 @@
                     "traits": {
                         "smithy.api#documentation": "<p> If present, a reference to the Athena table referred to by this table reference.</p>"
                     }
+                },
+                "databricks": {
+                    "target": "com.amazonaws.cleanrooms#DatabricksTableReference",
+                    "traits": {
+                        "smithy.api#documentation": "<p> If present, a reference to the Databricks table referred to by this table reference.</p>"
+                    }
                 }
             },
             "traits": {
                 "smithy.api#documentation": "<p>A pointer to the dataset that underlies this table.</p>"
+            }
+        },
+        "com.amazonaws.cleanrooms#TableReferenceType": {
+            "type": "enum",
+            "members": {
+                "GLUE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "GLUE"
+                    }
+                },
+                "SNOWFLAKE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SNOWFLAKE"
+                    }
+                },
+                "ATHENA": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ATHENA"
+                    }
+                },
+                "DATABRICKS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DATABRICKS"
+                    }
+                }
             }
         },
         "com.amazonaws.cleanrooms#TagKey": {

@@ -325,6 +325,7 @@ func TestCheckRequestSnapshot_ContinueUpdateRollback(t *testing.T) {
 			"__Member__",
 		},
 		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+		ForceRollback:      ptr.Bool(true),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -3631,6 +3632,7 @@ func TestUpdateRequestSnapshot_ContinueUpdateRollback(t *testing.T) {
 			"__Member__",
 		},
 		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+		ForceRollback:      ptr.Bool(true),
 	}
 	body := &bytes.Buffer{}
 	method := ""

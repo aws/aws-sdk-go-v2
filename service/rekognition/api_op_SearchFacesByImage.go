@@ -4,7 +4,9 @@ package rekognition
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/rekognition/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/rekognition/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -109,6 +111,32 @@ type SearchFacesByImageInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SearchFacesByImageInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SearchFacesByImageRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SearchFacesByImageInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CollectionId != nil {
+		s.WriteString(schemas.SearchFacesByImageRequest_CollectionId, *v.CollectionId)
+	}
+	if v.FaceMatchThreshold != nil {
+		s.WriteFloat32(schemas.SearchFacesByImageRequest_FaceMatchThreshold, *v.FaceMatchThreshold)
+	}
+	if v.Image != nil {
+		s.WriteStruct(schemas.SearchFacesByImageRequest_Image)
+		v.Image.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MaxFaces != nil {
+		s.WriteInt32(schemas.SearchFacesByImageRequest_MaxFaces, *v.MaxFaces)
+	}
+	if v.QualityFilter != "" {
+		s.WriteString(schemas.SearchFacesByImageRequest_QualityFilter, string(v.QualityFilter))
+	}
+}
+
 type SearchFacesByImageOutput struct {
 
 	// An array of faces that match the input face, along with the confidence in the
@@ -132,13 +160,49 @@ type SearchFacesByImageOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SearchFacesByImageOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SearchFacesByImageResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SearchFacesByImageOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeFaceMatchList(s, schemas.SearchFacesByImageResponse_FaceMatches, v.FaceMatches)
+	if v.FaceModelVersion != nil {
+		s.WriteString(schemas.SearchFacesByImageResponse_FaceModelVersion, *v.FaceModelVersion)
+	}
+	if v.SearchedFaceBoundingBox != nil {
+		s.WriteStruct(schemas.SearchFacesByImageResponse_SearchedFaceBoundingBox)
+		v.SearchedFaceBoundingBox.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SearchedFaceConfidence != nil {
+		s.WriteFloat32(schemas.SearchFacesByImageResponse_SearchedFaceConfidence, *v.SearchedFaceConfidence)
+	}
+}
+func (v *SearchFacesByImageOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SearchFacesByImageResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SearchFacesByImageResponse_FaceMatches:
+			return deserializeFaceMatchList(d, schemas.SearchFacesByImageResponse_FaceMatches, &v.FaceMatches)
+		case schemas.SearchFacesByImageResponse_FaceModelVersion:
+			v.FaceModelVersion = new(string)
+			return d.ReadString(schemas.SearchFacesByImageResponse_FaceModelVersion, v.FaceModelVersion)
+		case schemas.SearchFacesByImageResponse_SearchedFaceBoundingBox:
+			v.SearchedFaceBoundingBox = &types.BoundingBox{}
+			return v.SearchedFaceBoundingBox.Deserialize(d)
+		case schemas.SearchFacesByImageResponse_SearchedFaceConfidence:
+			v.SearchedFaceConfidence = new(float32)
+			return d.ReadFloat32(schemas.SearchFacesByImageResponse_SearchedFaceConfidence, v.SearchedFaceConfidence)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationSearchFacesByImageMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpSearchFacesByImage{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SearchFacesByImage, schemas.SearchFacesByImageRequest, schemas.SearchFacesByImageResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpSearchFacesByImage{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SearchFacesByImage, schemas.SearchFacesByImageRequest, schemas.SearchFacesByImageResponse), output: &SearchFacesByImageOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

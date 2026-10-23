@@ -87,15 +87,17 @@ func (v *BillingRecord) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
-// Customer's consent for the owner change request.
+//	The maximum amount that you agree to pay for an operation, and the currency
+//
+// for that amount.
 type Consent struct {
 
-	//  Currency for the MaxPrice .
+	//  The currency for the MaxPrice .
 	//
 	// This member is required.
 	Currency *string
 
-	//  Maximum amount the customer agreed to accept.
+	//  The maximum amount that you agree to accept.
 	//
 	// This member is required.
 	MaxPrice float64
@@ -336,12 +338,10 @@ type DnssecKey struct {
 	// [IANA]: https://www.iana.org/assignments/ds-rr-types/ds-rr-types.xhtml
 	DigestType *int32
 
-	// Defines the type of key. It can be either a KSK (key-signing-key, value 257) or
-	// ZSK (zone-signing-key, value 256). Using KSK is always encouraged. Only use ZSK
-	// if your DNS provider isn't Route 53 and you don’t have KSK available.
+	// The DNSKEY flags that indicate the key type. This field is deprecated; the
+	// DnssecKey response no longer returns the flags.
 	//
-	// If you have KSK and ZSK keys, always use KSK to create a delegations signer
-	// (DS) record. If you have ZSK keys only – use ZSK to create a DS record.
+	// Deprecated: The DnssecKey response no longer returns the flags.
 	Flags *int32
 
 	//  An ID assigned to each DS record created by [AssociateDelegationSignerToDomain].
@@ -352,8 +352,10 @@ type DnssecKey struct {
 	//  A numeric identification of the DNSKEY record referred to by this DS record.
 	KeyTag *int32
 
-	// The base64-encoded public key part of the key pair that is passed to the
-	// registry .
+	// The base64-encoded public key of the key pair. This field is deprecated; the
+	// DnssecKey response no longer returns the public key.
+	//
+	// Deprecated: The DnssecKey response no longer returns the public key.
 	PublicKey *string
 
 	noSmithyDocumentSerde
@@ -475,13 +477,13 @@ func (v *DnssecSigningAttributes) Deserialize(d smithy.ShapeDeserializer) error 
 	})
 }
 
-// Information about the domain price associated with a TLD.
+// Information about the prices associated with a TLD or a domain name.
 type DomainPrice struct {
 
 	// The price for changing domain ownership.
 	ChangeOwnershipPrice *PriceWithCurrency
 
-	// The name of the TLD for which the prices apply.
+	// The TLD or domain name that the prices apply to.
 	Name *string
 
 	// The price for domain registration with Route 53.
@@ -564,7 +566,8 @@ func (v *DomainPrice) Deserialize(d smithy.ShapeDeserializer) error {
 // Information about one suggested domain name.
 type DomainSuggestion struct {
 
-	// Whether the domain name is available for registering.
+	// Specifies whether the domain name is available for registering. This element is
+	// populated only if you specified true for OnlyAvailable in the request.
 	//
 	// You can register only the domains that are designated as AVAILABLE .
 	//
@@ -596,6 +599,11 @@ type DomainSuggestion struct {
 	// A suggested domain name.
 	DomainName *string
 
+	// The price to register the suggested domain name, in the currency that Currency
+	// specifies. This element is populated only if you specified true for
+	// OnlyAvailable in the request.
+	Price *PriceWithCurrency
+
 	noSmithyDocumentSerde
 }
 
@@ -612,6 +620,11 @@ func (v *DomainSuggestion) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.DomainName != nil {
 		s.WriteString(schemas.DomainSuggestion_DomainName, *v.DomainName)
 	}
+	if v.Price != nil {
+		s.WriteStruct(schemas.DomainSuggestion_Price)
+		v.Price.SerializeMembers(s)
+		s.CloseStruct()
+	}
 }
 func (v *DomainSuggestion) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DomainSuggestion, func(s *smithy.Schema) error {
@@ -622,6 +635,9 @@ func (v *DomainSuggestion) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.DomainSuggestion_DomainName:
 			v.DomainName = new(string)
 			return d.ReadString(schemas.DomainSuggestion_DomainName, v.DomainName)
+		case schemas.DomainSuggestion_Price:
+			v.Price = &PriceWithCurrency{}
+			return v.Price.Deserialize(d)
 		}
 		return nil
 	})
@@ -701,9 +717,14 @@ type DomainTransferability struct {
 	//
 	// UNTRANSFERRABLE The domain name can't be transferred to Route 53.
 	//
-	// DONT_KNOW The TLD registry didn't respond in time or didn't provide a
-	// definitive answer about domain transferability, which can occur due to registry
-	// maintenance or temporary delays.
+	// DONT_KNOW The TLD registry didn't reply with a definitive answer about whether
+	// the domain name can be transferred. Route 53 can return this response for a
+	// variety of reasons, for example, the registry is performing maintenance. Try
+	// again later.
+	//
+	// PENDING The TLD registry didn't return a response in the expected amount of
+	// time. When the response is delayed, it usually takes just a few extra seconds.
+	// You can resubmit the request immediately.
 	//
 	// DOMAIN_IN_OWN_ACCOUNT The domain already exists in the current Amazon Web
 	// Services account.
@@ -1498,6 +1519,12 @@ type PriceWithCurrency struct {
 	// This member is required.
 	Price float64
 
+	// Indicates whether the domain has standard or premium pricing. A value of
+	// STANDARD means the domain is priced at the regular rate for its TLD. A value of
+	// REGISTRY_PREMIUM means the domain has registry premium pricing, which may be
+	// different than the standard rate.
+	PriceType PriceType
+
 	noSmithyDocumentSerde
 }
 
@@ -1512,6 +1539,9 @@ func (v *PriceWithCurrency) SerializeMembers(s smithy.ShapeSerializer) {
 		s.WriteString(schemas.PriceWithCurrency_Currency, *v.Currency)
 	}
 	s.WriteFloat64(schemas.PriceWithCurrency_Price, v.Price)
+	if v.PriceType != "" {
+		s.WriteString(schemas.PriceWithCurrency_PriceType, string(v.PriceType))
+	}
 }
 func (v *PriceWithCurrency) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.PriceWithCurrency, func(s *smithy.Schema) error {
@@ -1521,6 +1551,13 @@ func (v *PriceWithCurrency) Deserialize(d smithy.ShapeDeserializer) error {
 			return d.ReadString(schemas.PriceWithCurrency_Currency, v.Currency)
 		case schemas.PriceWithCurrency_Price:
 			return d.ReadFloat64(schemas.PriceWithCurrency_Price, &v.Price)
+		case schemas.PriceWithCurrency_PriceType:
+			var ev string
+			if err := d.ReadString(schemas.PriceWithCurrency_PriceType, &ev); err != nil {
+				return err
+			}
+			v.PriceType = PriceType(ev)
+			return nil
 		}
 		return nil
 	})

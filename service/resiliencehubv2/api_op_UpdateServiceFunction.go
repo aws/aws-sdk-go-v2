@@ -4,7 +4,9 @@ package resiliencehubv2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/resiliencehubv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/resiliencehubv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -48,6 +50,30 @@ type UpdateServiceFunctionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateServiceFunctionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateServiceFunctionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateServiceFunctionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Criticality != "" {
+		s.WriteString(schemas.UpdateServiceFunctionRequest_criticality, string(v.Criticality))
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateServiceFunctionRequest_description, *v.Description)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateServiceFunctionRequest_name, *v.Name)
+	}
+	if v.ServiceArn != nil {
+		s.WriteString(schemas.UpdateServiceFunctionRequest_serviceArn, *v.ServiceArn)
+	}
+	if v.ServiceFunctionId != nil {
+		s.WriteString(schemas.UpdateServiceFunctionRequest_serviceFunctionId, *v.ServiceFunctionId)
+	}
+}
+
 type UpdateServiceFunctionOutput struct {
 
 	// The updated service function.
@@ -61,13 +87,34 @@ type UpdateServiceFunctionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateServiceFunctionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateServiceFunctionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateServiceFunctionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ServiceFunction != nil {
+		s.WriteStruct(schemas.UpdateServiceFunctionResponse_serviceFunction)
+		v.ServiceFunction.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateServiceFunctionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateServiceFunctionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateServiceFunctionResponse_serviceFunction:
+			v.ServiceFunction = &types.ServiceFunction{}
+			return v.ServiceFunction.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateServiceFunctionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateServiceFunction{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateServiceFunction, schemas.UpdateServiceFunctionRequest, schemas.UpdateServiceFunctionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateServiceFunction{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateServiceFunction, schemas.UpdateServiceFunctionRequest, schemas.UpdateServiceFunctionResponse), output: &UpdateServiceFunctionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

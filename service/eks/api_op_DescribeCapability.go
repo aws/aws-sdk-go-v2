@@ -4,7 +4,9 @@ package eks
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/eks/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/eks/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -42,6 +44,21 @@ type DescribeCapabilityInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeCapabilityInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeCapabilityRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeCapabilityInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CapabilityName != nil {
+		s.WriteString(schemas.DescribeCapabilityRequest_capabilityName, *v.CapabilityName)
+	}
+	if v.ClusterName != nil {
+		s.WriteString(schemas.DescribeCapabilityRequest_clusterName, *v.ClusterName)
+	}
+}
+
 type DescribeCapabilityOutput struct {
 
 	// An object containing detailed information about the capability, including its
@@ -55,13 +72,34 @@ type DescribeCapabilityOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeCapabilityOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeCapabilityResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeCapabilityOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Capability != nil {
+		s.WriteStruct(schemas.DescribeCapabilityResponse_capability)
+		v.Capability.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DescribeCapabilityOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeCapabilityResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeCapabilityResponse_capability:
+			v.Capability = &types.Capability{}
+			return v.Capability.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeCapabilityMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeCapability{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeCapability, schemas.DescribeCapabilityRequest, schemas.DescribeCapabilityResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeCapability{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeCapability, schemas.DescribeCapabilityRequest, schemas.DescribeCapabilityResponse), output: &DescribeCapabilityOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

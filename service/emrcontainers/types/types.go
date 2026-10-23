@@ -60,7 +60,7 @@ type AuthorizationConfiguration struct {
 	// Encryption-related configuration input for the security configuration.
 	EncryptionConfiguration *EncryptionConfiguration
 
-	// Lake Formation related configuration inputs for the security configuration.
+	//  Lake Formation related configuration inputs for the security configuration.
 	LakeFormationConfiguration *LakeFormationConfiguration
 
 	noSmithyDocumentSerde
@@ -2113,12 +2113,12 @@ type TLSCertificateConfiguration struct {
 	// The TLS certificate type. Acceptable values: PEM or Custom .
 	CertificateProviderType CertificateProviderType
 
-	// Secrets Manager ARN that contains the private TLS certificate contents, used
+	//  Secrets Manager ARN that contains the private TLS certificate contents, used
 	// for communication between the user job and the system job.
 	PrivateCertificateSecretArn *string
 
-	// Secrets Manager ARN that contains the public TLS certificate contents, used for
-	// communication between the user job and the system job.
+	//  Secrets Manager ARN that contains the public TLS certificate contents, used
+	// for communication between the user job and the system job.
 	PublicCertificateSecretArn *string
 
 	noSmithyDocumentSerde

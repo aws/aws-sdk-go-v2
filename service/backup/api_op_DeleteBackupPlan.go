@@ -4,6 +4,8 @@ package backup
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/backup/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -36,6 +38,18 @@ type DeleteBackupPlanInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteBackupPlanInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteBackupPlanInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteBackupPlanInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BackupPlanId != nil {
+		s.WriteString(schemas.DeleteBackupPlanInput_BackupPlanId, *v.BackupPlanId)
+	}
+}
+
 type DeleteBackupPlanOutput struct {
 
 	// An Amazon Resource Name (ARN) that uniquely identifies a backup plan; for
@@ -62,13 +76,50 @@ type DeleteBackupPlanOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteBackupPlanOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteBackupPlanOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteBackupPlanOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BackupPlanArn != nil {
+		s.WriteString(schemas.DeleteBackupPlanOutput_BackupPlanArn, *v.BackupPlanArn)
+	}
+	if v.BackupPlanId != nil {
+		s.WriteString(schemas.DeleteBackupPlanOutput_BackupPlanId, *v.BackupPlanId)
+	}
+	if v.DeletionDate != nil {
+		s.WriteTime(schemas.DeleteBackupPlanOutput_DeletionDate, *v.DeletionDate)
+	}
+	if v.VersionId != nil {
+		s.WriteString(schemas.DeleteBackupPlanOutput_VersionId, *v.VersionId)
+	}
+}
+func (v *DeleteBackupPlanOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteBackupPlanOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteBackupPlanOutput_BackupPlanArn:
+			v.BackupPlanArn = new(string)
+			return d.ReadString(schemas.DeleteBackupPlanOutput_BackupPlanArn, v.BackupPlanArn)
+		case schemas.DeleteBackupPlanOutput_BackupPlanId:
+			v.BackupPlanId = new(string)
+			return d.ReadString(schemas.DeleteBackupPlanOutput_BackupPlanId, v.BackupPlanId)
+		case schemas.DeleteBackupPlanOutput_DeletionDate:
+			v.DeletionDate = new(time.Time)
+			return d.ReadTime(schemas.DeleteBackupPlanOutput_DeletionDate, v.DeletionDate)
+		case schemas.DeleteBackupPlanOutput_VersionId:
+			v.VersionId = new(string)
+			return d.ReadString(schemas.DeleteBackupPlanOutput_VersionId, v.VersionId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteBackupPlanMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteBackupPlan{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteBackupPlan, schemas.DeleteBackupPlanInput, schemas.DeleteBackupPlanOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteBackupPlan{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteBackupPlan, schemas.DeleteBackupPlanInput, schemas.DeleteBackupPlanOutput), output: &DeleteBackupPlanOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

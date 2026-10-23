@@ -4,7 +4,9 @@ package amplifybackend
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/amplifybackend/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/amplifybackend/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -48,6 +50,29 @@ type UpdateBackendAPIInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateBackendAPIInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateBackendAPIRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateBackendAPIInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AppId != nil {
+		s.WriteString(schemas.UpdateBackendAPIRequest_AppId, *v.AppId)
+	}
+	if v.BackendEnvironmentName != nil {
+		s.WriteString(schemas.UpdateBackendAPIRequest_BackendEnvironmentName, *v.BackendEnvironmentName)
+	}
+	if v.ResourceConfig != nil {
+		s.WriteStruct(schemas.UpdateBackendAPIRequest_ResourceConfig)
+		v.ResourceConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ResourceName != nil {
+		s.WriteString(schemas.UpdateBackendAPIRequest_ResourceName, *v.ResourceName)
+	}
+}
+
 type UpdateBackendAPIOutput struct {
 
 	// The app ID.
@@ -74,13 +99,62 @@ type UpdateBackendAPIOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateBackendAPIOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateBackendAPIResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateBackendAPIOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AppId != nil {
+		s.WriteString(schemas.UpdateBackendAPIResponse_AppId, *v.AppId)
+	}
+	if v.BackendEnvironmentName != nil {
+		s.WriteString(schemas.UpdateBackendAPIResponse_BackendEnvironmentName, *v.BackendEnvironmentName)
+	}
+	if v.Error != nil {
+		s.WriteString(schemas.UpdateBackendAPIResponse_Error, *v.Error)
+	}
+	if v.JobId != nil {
+		s.WriteString(schemas.UpdateBackendAPIResponse_JobId, *v.JobId)
+	}
+	if v.Operation != nil {
+		s.WriteString(schemas.UpdateBackendAPIResponse_Operation, *v.Operation)
+	}
+	if v.Status != nil {
+		s.WriteString(schemas.UpdateBackendAPIResponse_Status, *v.Status)
+	}
+}
+func (v *UpdateBackendAPIOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateBackendAPIResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateBackendAPIResponse_AppId:
+			v.AppId = new(string)
+			return d.ReadString(schemas.UpdateBackendAPIResponse_AppId, v.AppId)
+		case schemas.UpdateBackendAPIResponse_BackendEnvironmentName:
+			v.BackendEnvironmentName = new(string)
+			return d.ReadString(schemas.UpdateBackendAPIResponse_BackendEnvironmentName, v.BackendEnvironmentName)
+		case schemas.UpdateBackendAPIResponse_Error:
+			v.Error = new(string)
+			return d.ReadString(schemas.UpdateBackendAPIResponse_Error, v.Error)
+		case schemas.UpdateBackendAPIResponse_JobId:
+			v.JobId = new(string)
+			return d.ReadString(schemas.UpdateBackendAPIResponse_JobId, v.JobId)
+		case schemas.UpdateBackendAPIResponse_Operation:
+			v.Operation = new(string)
+			return d.ReadString(schemas.UpdateBackendAPIResponse_Operation, v.Operation)
+		case schemas.UpdateBackendAPIResponse_Status:
+			v.Status = new(string)
+			return d.ReadString(schemas.UpdateBackendAPIResponse_Status, v.Status)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateBackendAPIMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateBackendAPI{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateBackendAPI, schemas.UpdateBackendAPIRequest, schemas.UpdateBackendAPIResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateBackendAPI{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateBackendAPI, schemas.UpdateBackendAPIRequest, schemas.UpdateBackendAPIResponse), output: &UpdateBackendAPIOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package glue
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/glue/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/glue/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -44,6 +46,24 @@ type CreateCatalogInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateCatalogInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateCatalogRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateCatalogInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CatalogInput != nil {
+		s.WriteStruct(schemas.CreateCatalogRequest_CatalogInput)
+		v.CatalogInput.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateCatalogRequest_Name, *v.Name)
+	}
+	serializeTagsMap(s, schemas.CreateCatalogRequest_Tags, v.Tags)
+}
+
 type CreateCatalogOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -51,13 +71,26 @@ type CreateCatalogOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateCatalogOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateCatalogResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateCatalogOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *CreateCatalogOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateCatalogResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateCatalogMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateCatalog{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateCatalog, schemas.CreateCatalogRequest, schemas.CreateCatalogResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateCatalog{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateCatalog, schemas.CreateCatalogRequest, schemas.CreateCatalogResponse), output: &CreateCatalogOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

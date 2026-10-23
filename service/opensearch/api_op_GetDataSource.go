@@ -4,7 +4,9 @@ package opensearch
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/opensearch/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/opensearch/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -40,6 +42,21 @@ type GetDataSourceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetDataSourceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetDataSourceRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetDataSourceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DomainName != nil {
+		s.WriteString(schemas.GetDataSourceRequest_DomainName, *v.DomainName)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.GetDataSourceRequest_Name, *v.Name)
+	}
+}
+
 // The result of a GetDataSource operation.
 type GetDataSourceOutput struct {
 
@@ -61,13 +78,51 @@ type GetDataSourceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetDataSourceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetDataSourceResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetDataSourceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDataSourceType(s, schemas.GetDataSourceResponse_DataSourceType, v.DataSourceType)
+	if v.Description != nil {
+		s.WriteString(schemas.GetDataSourceResponse_Description, *v.Description)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.GetDataSourceResponse_Name, *v.Name)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.GetDataSourceResponse_Status, string(v.Status))
+	}
+}
+func (v *GetDataSourceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetDataSourceResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetDataSourceResponse_DataSourceType:
+			return deserializeDataSourceType(d, schemas.GetDataSourceResponse_DataSourceType, &v.DataSourceType)
+		case schemas.GetDataSourceResponse_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.GetDataSourceResponse_Description, v.Description)
+		case schemas.GetDataSourceResponse_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.GetDataSourceResponse_Name, v.Name)
+		case schemas.GetDataSourceResponse_Status:
+			var ev string
+			if err := d.ReadString(schemas.GetDataSourceResponse_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.DataSourceStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetDataSourceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetDataSource{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetDataSource, schemas.GetDataSourceRequest, schemas.GetDataSourceResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetDataSource{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetDataSource, schemas.GetDataSourceRequest, schemas.GetDataSourceResponse), output: &GetDataSourceOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

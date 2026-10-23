@@ -131,6 +131,30 @@ type ChannelListConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+// The configuration that controls the content key period timing information that
+// MediaPackage signals to your DRM key provider.
+type ContentKeyPeriodConfiguration struct {
+
+	// Specifies what timing information MediaPackage signals in the ContentKeyPeriod
+	// to your DRM key provider. If you don't specify a value, the default is
+	// INDEX_ONLY . Signaling start and end times ( START_END_ONLY or
+	// INDEX_WITH_START_END ) also requires key rotation to be enabled.
+	//
+	// The allowed values are:
+	//
+	//   - INDEX_ONLY - Signals only the content key index. This is the default and
+	//   matches the current behavior. It's supported for both SPEKE Version 2.0 and 2.1.
+	//
+	//   - START_END_ONLY - Signals only the start and end times the key is used for.
+	//   Requires SpekeVersion V2_1 .
+	//
+	//   - INDEX_WITH_START_END - Signals both the content key index and the start and
+	//   end times the key is used for. Requires SpekeVersion V2_1 .
+	ContentKeyPeriodTiming ContentKeyPeriodTiming
+
+	noSmithyDocumentSerde
+}
+
 // Create a DASH manifest configuration.
 type CreateDashManifestConfiguration struct {
 
@@ -749,6 +773,16 @@ type FilterConfiguration struct {
 	// identical manifest filter query parameter for this manifest's endpoint URL.
 	ManifestFilter *string
 
+	// Optionally pin this manifest to a single multiview combination, so that players
+	// request it without an aws.multiview query parameter. When you pin a
+	// combination, note that you cannot use the aws.multiview query parameter for
+	// this manifest's endpoint URL, even when that parameter requests the same
+	// combination.
+	//
+	// This setting is valid only on an origin endpoint whose channel has an InputType
+	// of MULTIVIEW .
+	Multiview *MultiviewFilterConfiguration
+
 	// Optionally specify the start time for all of your manifest egress requests.
 	// When you include start time, note that you cannot use start time query
 	// parameters for this manifest's endpoint URL.
@@ -1325,6 +1359,32 @@ type MultiviewConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+// The multiview combination for a pinned manifest. MediaPackage serves the
+// manifest with this layout and these sources, so players request it without an
+// aws.multiview query parameter.
+//
+// If a request for a pinned manifest also includes an aws.multiview query
+// parameter, MediaPackage rejects the request, even when that parameter requests
+// the same combination.
+type MultiviewFilterConfiguration struct {
+
+	// The layout that MediaPackage uses to composite the tiles into a single output.
+	// This layout must be one of the AvailableLayouts of the channel that this origin
+	// endpoint is on.
+	//
+	// This member is required.
+	Layout MultiviewLayoutType
+
+	// The source channels to composite, in tile order. Each channel must be one of
+	// the AvailableSources of the channel that this origin endpoint is on, and the
+	// number of channels must equal the number of tiles in Layout .
+	//
+	// This member is required.
+	Sources []string
+
+	noSmithyDocumentSerde
+}
+
 // The configuration of the origin endpoint.
 type OriginEndpointListConfiguration struct {
 
@@ -1625,6 +1685,30 @@ type SpekeKeyProvider struct {
 	// Certificate Manager to add content key encryption to this endpoint. For this
 	// feature to work, your DRM key provider must support content key encryption.
 	CertificateArn *string
+
+	// The configuration that controls whether MediaPackage signals the start and end
+	// times a content key is used for, in the ContentKeyPeriod sent to your DRM key
+	// provider. Signaling this timing is supported only when key rotation is enabled (
+	// KeyRotationIntervalSeconds is set to a non-zero value) and SpekeVersion is V2_1
+	// . You can update these settings on an existing origin endpoint.
+	ContentKeyPeriodConfiguration *ContentKeyPeriodConfiguration
+
+	// Specifies the SPEKE version used with your DRM key provider. If you don't
+	// specify a value, the default is V2_0 .
+	//
+	// The allowed values are:
+	//
+	//   - V2_0 - Follows the SPEKE Version 2.0 contract and signals only the content
+	//   key index in key requests. This is the default.
+	//
+	//   - V2_1 - Follows the SPEKE Version 2.1 contract and additionally supports
+	//   signaling the start and end times a content key is used for, using
+	//   ContentKeyPeriodConfiguration .
+	//
+	// For more information, see [SPEKE Version 2.0 payload].
+	//
+	// [SPEKE Version 2.0 payload]: https://docs.aws.amazon.com/speke/latest/documentation/standard-payload-components-v2.html
+	SpekeVersion SpekeVersion
 
 	noSmithyDocumentSerde
 }

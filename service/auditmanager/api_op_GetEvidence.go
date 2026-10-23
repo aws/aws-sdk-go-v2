@@ -4,7 +4,9 @@ package auditmanager
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/auditmanager/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/auditmanager/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -49,6 +51,27 @@ type GetEvidenceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetEvidenceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetEvidenceRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetEvidenceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AssessmentId != nil {
+		s.WriteString(schemas.GetEvidenceRequest_assessmentId, *v.AssessmentId)
+	}
+	if v.ControlSetId != nil {
+		s.WriteString(schemas.GetEvidenceRequest_controlSetId, *v.ControlSetId)
+	}
+	if v.EvidenceFolderId != nil {
+		s.WriteString(schemas.GetEvidenceRequest_evidenceFolderId, *v.EvidenceFolderId)
+	}
+	if v.EvidenceId != nil {
+		s.WriteString(schemas.GetEvidenceRequest_evidenceId, *v.EvidenceId)
+	}
+}
+
 type GetEvidenceOutput struct {
 
 	//  The evidence that the GetEvidence API returned.
@@ -60,13 +83,34 @@ type GetEvidenceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetEvidenceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetEvidenceResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetEvidenceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Evidence != nil {
+		s.WriteStruct(schemas.GetEvidenceResponse_evidence)
+		v.Evidence.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetEvidenceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetEvidenceResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetEvidenceResponse_evidence:
+			v.Evidence = &types.Evidence{}
+			return v.Evidence.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetEvidenceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetEvidence{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetEvidence, schemas.GetEvidenceRequest, schemas.GetEvidenceResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetEvidence{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetEvidence, schemas.GetEvidenceRequest, schemas.GetEvidenceResponse), output: &GetEvidenceOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

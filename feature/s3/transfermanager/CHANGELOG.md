@@ -1,3 +1,62 @@
+# v0.4.19 (2026-10-22)
+
+* **Bug Fix**: Update smithy-go to v1.28.6
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v0.4.18 (2026-10-21)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v0.4.17 (2026-10-19)
+
+* **Bug Fix**: Fix the concurrent reader panic when buffer len is smaller than capacity
+
+# v0.4.16 (2026-10-09.2)
+
+* **Dependency Update**: Update to smithy-go v1.28.5.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v0.4.15 (2026-10-08)
+
+* **Dependency Update**: Update to smithy-go v1.28.4.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v0.4.14 (2026-10-06)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v0.4.13 (2026-10-01)
+
+* No change notes available for this release.
+
+# v0.4.12 (2026-09-30)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v0.4.11 (2026-09-28)
+
+* **Bug Fix**: Add reassembly check for GetObject parts mode so mismatch between response part range and calculated position will throw error
+
+# v0.4.10 (2026-09-24)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v0.4.9 (2026-09-23)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v0.4.8 (2026-09-21)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v0.4.7 (2026-09-14)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v0.4.6 (2026-09-11)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v0.4.5 (2026-09-09)
 
 * **Bug Fix**: Fix potential deadlock in GetObject calls.

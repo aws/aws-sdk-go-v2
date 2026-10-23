@@ -4,7 +4,9 @@ package iotwireless
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/iotwireless/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotwireless/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -36,6 +38,21 @@ type ListPartnerAccountsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListPartnerAccountsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListPartnerAccountsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListPartnerAccountsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != 0 {
+		s.WriteInt32(schemas.ListPartnerAccountsRequest_MaxResults, v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListPartnerAccountsRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListPartnerAccountsOutput struct {
 
 	// The token to use to get the next set of results, or null if there are no
@@ -51,13 +68,35 @@ type ListPartnerAccountsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListPartnerAccountsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListPartnerAccountsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListPartnerAccountsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListPartnerAccountsResponse_NextToken, *v.NextToken)
+	}
+	serializeSidewalkAccountList(s, schemas.ListPartnerAccountsResponse_Sidewalk, v.Sidewalk)
+}
+func (v *ListPartnerAccountsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListPartnerAccountsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListPartnerAccountsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListPartnerAccountsResponse_NextToken, v.NextToken)
+		case schemas.ListPartnerAccountsResponse_Sidewalk:
+			return deserializeSidewalkAccountList(d, schemas.ListPartnerAccountsResponse_Sidewalk, &v.Sidewalk)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListPartnerAccountsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListPartnerAccounts{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListPartnerAccounts, schemas.ListPartnerAccountsRequest, schemas.ListPartnerAccountsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListPartnerAccounts{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListPartnerAccounts, schemas.ListPartnerAccountsRequest, schemas.ListPartnerAccountsResponse), output: &ListPartnerAccountsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

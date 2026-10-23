@@ -4,7 +4,9 @@ package backupsearch
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/backupsearch/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/backupsearch/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -57,6 +59,26 @@ type StartSearchResultExportJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartSearchResultExportJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartSearchResultExportJobInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartSearchResultExportJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.StartSearchResultExportJobInput_ClientToken, *v.ClientToken)
+	}
+	serializeExportSpecification(s, schemas.StartSearchResultExportJobInput_ExportSpecification, v.ExportSpecification)
+	if v.RoleArn != nil {
+		s.WriteString(schemas.StartSearchResultExportJobInput_RoleArn, *v.RoleArn)
+	}
+	if v.SearchJobIdentifier != nil {
+		s.WriteString(schemas.StartSearchResultExportJobInput_SearchJobIdentifier, *v.SearchJobIdentifier)
+	}
+	serializeTagMap(s, schemas.StartSearchResultExportJobInput_Tags, v.Tags)
+}
+
 type StartSearchResultExportJobOutput struct {
 
 	// This is the unique identifier that specifies the new export job.
@@ -74,13 +96,38 @@ type StartSearchResultExportJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartSearchResultExportJobOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartSearchResultExportJobOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartSearchResultExportJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ExportJobArn != nil {
+		s.WriteString(schemas.StartSearchResultExportJobOutput_ExportJobArn, *v.ExportJobArn)
+	}
+	if v.ExportJobIdentifier != nil {
+		s.WriteString(schemas.StartSearchResultExportJobOutput_ExportJobIdentifier, *v.ExportJobIdentifier)
+	}
+}
+func (v *StartSearchResultExportJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartSearchResultExportJobOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartSearchResultExportJobOutput_ExportJobArn:
+			v.ExportJobArn = new(string)
+			return d.ReadString(schemas.StartSearchResultExportJobOutput_ExportJobArn, v.ExportJobArn)
+		case schemas.StartSearchResultExportJobOutput_ExportJobIdentifier:
+			v.ExportJobIdentifier = new(string)
+			return d.ReadString(schemas.StartSearchResultExportJobOutput_ExportJobIdentifier, v.ExportJobIdentifier)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartSearchResultExportJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpStartSearchResultExportJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartSearchResultExportJob, schemas.StartSearchResultExportJobInput, schemas.StartSearchResultExportJobOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStartSearchResultExportJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartSearchResultExportJob, schemas.StartSearchResultExportJobInput, schemas.StartSearchResultExportJobOutput), output: &StartSearchResultExportJobOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

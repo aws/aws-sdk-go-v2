@@ -5,7 +5,9 @@ package batch
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/batch/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/batch/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -55,6 +57,24 @@ type ListQuotaSharesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListQuotaSharesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListQuotaSharesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListQuotaSharesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.JobQueue != nil {
+		s.WriteString(schemas.ListQuotaSharesRequest_jobQueue, *v.JobQueue)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListQuotaSharesRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListQuotaSharesRequest_nextToken, *v.NextToken)
+	}
+}
+
 type ListQuotaSharesOutput struct {
 
 	// The nextToken value to include in a future ListQuotaShares request. When the
@@ -72,13 +92,35 @@ type ListQuotaSharesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListQuotaSharesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListQuotaSharesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListQuotaSharesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListQuotaSharesResponse_nextToken, *v.NextToken)
+	}
+	serializeQuotaShareList(s, schemas.ListQuotaSharesResponse_quotaShares, v.QuotaShares)
+}
+func (v *ListQuotaSharesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListQuotaSharesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListQuotaSharesResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListQuotaSharesResponse_nextToken, v.NextToken)
+		case schemas.ListQuotaSharesResponse_quotaShares:
+			return deserializeQuotaShareList(d, schemas.ListQuotaSharesResponse_quotaShares, &v.QuotaShares)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListQuotaSharesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListQuotaShares{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListQuotaShares, schemas.ListQuotaSharesRequest, schemas.ListQuotaSharesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListQuotaShares{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListQuotaShares, schemas.ListQuotaSharesRequest, schemas.ListQuotaSharesResponse), output: &ListQuotaSharesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

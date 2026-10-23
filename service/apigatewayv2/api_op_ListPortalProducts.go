@@ -4,7 +4,9 @@ package apigatewayv2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/apigatewayv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/apigatewayv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,24 @@ type ListPortalProductsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListPortalProductsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListPortalProductsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListPortalProductsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteString(schemas.ListPortalProductsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListPortalProductsRequest_NextToken, *v.NextToken)
+	}
+	if v.ResourceOwner != nil {
+		s.WriteString(schemas.ListPortalProductsRequest_ResourceOwner, *v.ResourceOwner)
+	}
+}
+
 type ListPortalProductsOutput struct {
 
 	// The elements from this collection.
@@ -54,13 +74,35 @@ type ListPortalProductsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListPortalProductsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListPortalProductsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListPortalProductsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serialize__listOfPortalProductSummary(s, schemas.ListPortalProductsResponse_Items, v.Items)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListPortalProductsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListPortalProductsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListPortalProductsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListPortalProductsResponse_Items:
+			return deserialize__listOfPortalProductSummary(d, schemas.ListPortalProductsResponse_Items, &v.Items)
+		case schemas.ListPortalProductsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListPortalProductsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListPortalProductsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListPortalProducts{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListPortalProducts, schemas.ListPortalProductsRequest, schemas.ListPortalProductsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListPortalProducts{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListPortalProducts, schemas.ListPortalProductsRequest, schemas.ListPortalProductsResponse), output: &ListPortalProductsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

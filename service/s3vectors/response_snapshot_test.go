@@ -293,6 +293,7 @@ func TestCheckResponseSnapshot_GetIndex(t *testing.T) {
 				SseType:   types.SseType("AES256"),
 				KmsKeyArn: ptr.String("__KmsKeyArn__"),
 			},
+			IndexMode: types.IndexMode("CLASSIC"),
 		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("GetIndex.response")
@@ -326,6 +327,7 @@ func TestCheckResponseSnapshot_GetVectorBucket(t *testing.T) {
 				SseType:   types.SseType("AES256"),
 				KmsKeyArn: ptr.String("__KmsKeyArn__"),
 			},
+			DefaultIndexMode: types.IndexMode("CLASSIC"),
 		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("GetVectorBucket.response")
@@ -580,6 +582,29 @@ func TestCheckResponseSnapshot_ListVectors(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_PutVectorBucketDefaultIndexMode(t *testing.T) {
+	want := &PutVectorBucketDefaultIndexModeOutput{}
+	status, header, body, err := serdeRespReadSnapshot("PutVectorBucketDefaultIndexMode.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.PutVectorBucketDefaultIndexMode(context.Background(), &PutVectorBucketDefaultIndexModeInput{
+		VectorBucketName: ptr.String("__VectorBucketName__"),
+		VectorBucketArn:  ptr.String("__VectorBucketArn__"),
+		DefaultIndexMode: types.IndexMode("CLASSIC"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "PutVectorBucketDefaultIndexMode.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_PutVectorBucketPolicy(t *testing.T) {
 	want := &PutVectorBucketPolicyOutput{}
 	status, header, body, err := serdeRespReadSnapshot("PutVectorBucketPolicy.response")
@@ -685,6 +710,7 @@ func TestCheckResponseSnapshot_QueryVectors(t *testing.T) {
 			},
 		},
 		Filter:         document.NewLazyDocument("__Document__"),
+		QueryMode:      types.IndexMode("CLASSIC"),
 		ReturnMetadata: true,
 		ReturnDistance: true,
 		NextToken:      ptr.String("__NextToken__"),
@@ -743,6 +769,30 @@ func TestCheckResponseSnapshot_UntagResource(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "UntagResource.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_UpdateIndexMode(t *testing.T) {
+	want := &UpdateIndexModeOutput{}
+	status, header, body, err := serdeRespReadSnapshot("UpdateIndexMode.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.UpdateIndexMode(context.Background(), &UpdateIndexModeInput{
+		VectorBucketName: ptr.String("__VectorBucketName__"),
+		IndexName:        ptr.String("__IndexName__"),
+		IndexArn:         ptr.String("__IndexArn__"),
+		IndexMode:        types.IndexMode("CLASSIC"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "UpdateIndexMode.response", err)
 	}
 }
 

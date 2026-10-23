@@ -214,6 +214,45 @@ func (v *AccountTakeoverRiskConfigurationType) Deserialize(d smithy.ShapeDeseria
 	})
 }
 
+// The configuration for a single authentication context class reference (ACR)
+// level in a user pool. Each entry in an AcrConfiguration map associates a level (
+// Level1 through Level4 ) with this configuration, which provides the custom name
+// that Amazon Cognito reports for that level in the acr token claim.
+type AcrLevelConfigType struct {
+
+	// The custom name for this authentication context class reference (ACR) level.
+	// This value is the URI that Amazon Cognito reports in the acr token claim when a
+	// user meets this level. The name must be unique across all levels in the user
+	// pool, including default names.
+	//
+	// This member is required.
+	AcrValue *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *AcrLevelConfigType) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AcrLevelConfigType)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AcrLevelConfigType) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AcrValue != nil {
+		s.WriteString(schemas.AcrLevelConfigType_AcrValue, *v.AcrValue)
+	}
+}
+func (v *AcrLevelConfigType) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AcrLevelConfigType, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AcrLevelConfigType_AcrValue:
+			v.AcrValue = new(string)
+			return d.ReadString(schemas.AcrLevelConfigType_AcrValue, v.AcrValue)
+		}
+		return nil
+	})
+}
+
 // The settings for administrator creation of users in a user pool. Contains
 // settings for allowing user sign-up, customizing invitation messages to new
 // users, and the amount of time before temporary passwords expire.
@@ -2566,6 +2605,13 @@ func (v *HttpHeader) Deserialize(d smithy.ShapeDeserializer) error {
 // trust relationship between the IdP and your user pool.
 type IdentityProviderType struct {
 
+	// A mapping between the authentication context class reference (ACR) levels of
+	// your user pool and the ACR values of the external OpenID Connect (OIDC) identity
+	// provider (IdP), so that your application gets a consistent step-up experience
+	// regardless of which IdP authenticated the user. The map is keyed by level, from
+	// Level1 through Level4 .
+	AcrMapping map[string]string
+
 	// A mapping of IdP attributes to standard and custom user pool attributes.
 	AttributeMapping map[string]string
 
@@ -2702,6 +2748,7 @@ func (v *IdentityProviderType) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *IdentityProviderType) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAcrMappingType(s, schemas.IdentityProviderType_AcrMapping, v.AcrMapping)
 	serializeAttributeMappingType(s, schemas.IdentityProviderType_AttributeMapping, v.AttributeMapping)
 	if v.CreationDate != nil {
 		s.WriteTime(schemas.IdentityProviderType_CreationDate, *v.CreationDate)
@@ -2724,6 +2771,8 @@ func (v *IdentityProviderType) SerializeMembers(s smithy.ShapeSerializer) {
 func (v *IdentityProviderType) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.IdentityProviderType, func(s *smithy.Schema) error {
 		switch s {
+		case schemas.IdentityProviderType_AcrMapping:
+			return deserializeAcrMappingType(d, schemas.IdentityProviderType_AcrMapping, &v.AcrMapping)
 		case schemas.IdentityProviderType_AttributeMapping:
 			return deserializeAttributeMappingType(d, schemas.IdentityProviderType_AttributeMapping, &v.AttributeMapping)
 		case schemas.IdentityProviderType_CreationDate:
@@ -6510,6 +6559,16 @@ type UserPoolType struct {
 	// SMS is preferred through email.
 	AccountRecoverySetting *AccountRecoverySettingType
 
+	// The names of the authentication context class reference (ACR) levels for the
+	// user pool. Amazon Cognito always returns the effective configuration, with
+	// default names merged in for any level that you haven't customized.
+	//
+	// Configuring custom ACR level names requires the Essentials or Plus feature
+	// plan. To activate this setting, your user pool must be in the [Essentials tier]or higher.
+	//
+	// [Essentials tier]: https://docs.aws.amazon.com/cognito/latest/developerguide/feature-plans-features-essentials.html
+	AcrConfiguration map[string]AcrLevelConfigType
+
 	// The configuration for AdminCreateUser requests.
 	AdminCreateUserConfig *AdminCreateUserConfigType
 
@@ -6726,6 +6785,7 @@ func (v *UserPoolType) SerializeMembers(s smithy.ShapeSerializer) {
 		v.AccountRecoverySetting.SerializeMembers(s)
 		s.CloseStruct()
 	}
+	serializeAcrConfigurationType(s, schemas.UserPoolType_AcrConfiguration, v.AcrConfiguration)
 	if v.AdminCreateUserConfig != nil {
 		s.WriteStruct(schemas.UserPoolType_AdminCreateUserConfig)
 		v.AdminCreateUserConfig.SerializeMembers(s)
@@ -6852,6 +6912,8 @@ func (v *UserPoolType) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.UserPoolType_AccountRecoverySetting:
 			v.AccountRecoverySetting = &AccountRecoverySettingType{}
 			return v.AccountRecoverySetting.Deserialize(d)
+		case schemas.UserPoolType_AcrConfiguration:
+			return deserializeAcrConfigurationType(d, schemas.UserPoolType_AcrConfiguration, &v.AcrConfiguration)
 		case schemas.UserPoolType_AdminCreateUserConfig:
 			v.AdminCreateUserConfig = &AdminCreateUserConfigType{}
 			return v.AdminCreateUserConfig.Deserialize(d)

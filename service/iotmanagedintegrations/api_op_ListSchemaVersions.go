@@ -5,7 +5,9 @@ package iotmanagedintegrations
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/iotmanagedintegrations/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotmanagedintegrations/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -53,6 +55,36 @@ type ListSchemaVersionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListSchemaVersionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListSchemaVersionsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListSchemaVersionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListSchemaVersionsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.Namespace != nil {
+		s.WriteString(schemas.ListSchemaVersionsRequest_Namespace, *v.Namespace)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListSchemaVersionsRequest_NextToken, *v.NextToken)
+	}
+	if v.SchemaId != nil {
+		s.WriteString(schemas.ListSchemaVersionsRequest_SchemaId, *v.SchemaId)
+	}
+	if v.SemanticVersion != nil {
+		s.WriteString(schemas.ListSchemaVersionsRequest_SemanticVersion, *v.SemanticVersion)
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.ListSchemaVersionsRequest_Type, string(v.Type))
+	}
+	if v.Visibility != "" {
+		s.WriteString(schemas.ListSchemaVersionsRequest_Visibility, string(v.Visibility))
+	}
+}
+
 type ListSchemaVersionsOutput struct {
 
 	// The list of schema versions.
@@ -67,13 +99,35 @@ type ListSchemaVersionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListSchemaVersionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListSchemaVersionsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListSchemaVersionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeSchemaVersionList(s, schemas.ListSchemaVersionsResponse_Items, v.Items)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListSchemaVersionsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListSchemaVersionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListSchemaVersionsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListSchemaVersionsResponse_Items:
+			return deserializeSchemaVersionList(d, schemas.ListSchemaVersionsResponse_Items, &v.Items)
+		case schemas.ListSchemaVersionsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListSchemaVersionsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListSchemaVersionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListSchemaVersions{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListSchemaVersions, schemas.ListSchemaVersionsRequest, schemas.ListSchemaVersionsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListSchemaVersions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListSchemaVersions, schemas.ListSchemaVersionsRequest, schemas.ListSchemaVersionsResponse), output: &ListSchemaVersionsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

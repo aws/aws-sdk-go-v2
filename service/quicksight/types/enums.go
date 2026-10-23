@@ -3219,6 +3219,26 @@ func (GroupFilterOperator) Values() []GroupFilterOperator {
 	}
 }
 
+type HierarchyFilterMatchOperator string
+
+// Enum values for HierarchyFilterMatchOperator
+const (
+	HierarchyFilterMatchOperatorInclude HierarchyFilterMatchOperator = "INCLUDE"
+	HierarchyFilterMatchOperatorExclude HierarchyFilterMatchOperator = "EXCLUDE"
+)
+
+// Values returns all known values for HierarchyFilterMatchOperator. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (HierarchyFilterMatchOperator) Values() []HierarchyFilterMatchOperator {
+	return []HierarchyFilterMatchOperator{
+		"INCLUDE",
+		"EXCLUDE",
+	}
+}
+
 type HistogramBinType string
 
 // Enum values for HistogramBinType

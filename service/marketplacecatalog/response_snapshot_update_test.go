@@ -633,6 +633,8 @@ func TestUpdateResponseSnapshot_ListEntities(t *testing.T) {
 					CreatedDate:           ptr.String("__CreatedDate__"),
 					AvailabilityEndDate:   ptr.String("__AvailabilityEndDate__"),
 					ResellerRole:          types.ResaleAuthorizationResellerRoleString("ChannelPartner"),
+					SourceAuthorization:   ptr.String("__SourceAuthorization__"),
+					IssuerAccountId:       ptr.String("__IssuerAccountId__"),
 				},
 				MachineLearningProductSummary: &types.MachineLearningProductSummary{
 					ProductTitle: ptr.String("__ProductTitle__"),
@@ -647,6 +649,10 @@ func TestUpdateResponseSnapshot_ListEntities(t *testing.T) {
 						"__Member__",
 					},
 					SolutionId: ptr.String("__SolutionId__"),
+				},
+				ExpressPrivateOfferConfigurationSummary: &types.ExpressPrivateOfferConfigurationSummary{
+					ProductId: ptr.String("__ProductId__"),
+					State:     types.ExpressPrivateOfferConfigurationStateString("ACTIVE"),
 				},
 			},
 			{
@@ -705,6 +711,8 @@ func TestUpdateResponseSnapshot_ListEntities(t *testing.T) {
 					CreatedDate:           ptr.String("__CreatedDate__"),
 					AvailabilityEndDate:   ptr.String("__AvailabilityEndDate__"),
 					ResellerRole:          types.ResaleAuthorizationResellerRoleString("ChannelPartner"),
+					SourceAuthorization:   ptr.String("__SourceAuthorization__"),
+					IssuerAccountId:       ptr.String("__IssuerAccountId__"),
 				},
 				MachineLearningProductSummary: &types.MachineLearningProductSummary{
 					ProductTitle: ptr.String("__ProductTitle__"),
@@ -719,6 +727,10 @@ func TestUpdateResponseSnapshot_ListEntities(t *testing.T) {
 						"__Member__",
 					},
 					SolutionId: ptr.String("__SolutionId__"),
+				},
+				ExpressPrivateOfferConfigurationSummary: &types.ExpressPrivateOfferConfigurationSummary{
+					ProductId: ptr.String("__ProductId__"),
+					State:     types.ExpressPrivateOfferConfigurationStateString("ACTIVE"),
 				},
 			},
 		},

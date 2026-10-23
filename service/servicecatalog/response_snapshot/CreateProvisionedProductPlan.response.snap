@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWS242ServiceCatalogService.CreateProvisionedProductPlan
+
+{"PlanId":"__PlanId__","PlanName":"__PlanName__","ProvisionProductId":"__ProvisionProductId__","ProvisionedProductName":"__ProvisionedProductName__","ProvisioningArtifactId":"__ProvisioningArtifactId__"}

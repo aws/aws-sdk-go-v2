@@ -404,15 +404,13 @@ tasks.register("generate-smithy-build") {
             "com.amazonaws.directoryservicedata#",
             "com.amazonaws.docdbelastic#",
         )
-        val w15_restJson1 = listOf( // 25 svcs
+        val w15_restJson1 = listOf( // 23 svcs
             "com.amazonaws.ebs#",
             "com.amazonaws.efs#",
             "com.amazonaws.eksauth#",
             "com.amazonaws.elementalinference#",
             "com.amazonaws.emrserverless#",
             "com.amazonaws.entityresolution#",
-            "com.amazonaws.finspace#",
-            "com.amazonaws.finspacedata#",
             "com.amazonaws.gameliftstreams#",
             "com.amazonaws.geomaps#",
             "com.amazonaws.geoplaces#",
@@ -485,7 +483,7 @@ tasks.register("generate-smithy-build") {
             "com.amazonaws.sagemakergeospatial#",
             "com.amazonaws.sagemakerjobruntime#",
         )
-        val w18_restJson1 = listOf( // 25 svcs
+        val w18_restJson1 = listOf( // 24 svcs
             "com.amazonaws.sagemakerruntime#",
             "com.amazonaws.sagemakerruntimehttp2#",
             "com.amazonaws.savingsplans#",
@@ -506,7 +504,6 @@ tasks.register("generate-smithy-build") {
             "com.amazonaws.supportauthz#",
             "com.amazonaws.sustainability#",
             "com.amazonaws.synthetics#",
-            "com.amazonaws.tnb#",
             "com.amazonaws.trustedadvisor#",
             "com.amazonaws.uxc#",
             "com.amazonaws.wickr#",
@@ -545,22 +542,28 @@ tasks.register("generate-smithy-build") {
             "com.amazonaws.s3#",
         )
 
+        val w99_deprecated = listOf( // 3 svcs
+            "com.amazonaws.finspace#",
+            "com.amazonaws.finspacedata#",
+            "com.amazonaws.tnb#",
+        )
+
         @OptIn(ExperimentalStdlibApi::class)
         val useLegacySerdeServices = buildList {
             //addAll(w03_awsJson)
             //addAll(w04_awsJson)
             //addAll(w05_awsJson)
-            addAll(w06_awsJson)
-            addAll(w07_awsJson)
-            addAll(w08_awsJson)
+            //addAll(w06_awsJson)
+            //addAll(w07_awsJson)
+            //addAll(w08_awsJson)
 
             //addAll(w09_restJson1)
             //addAll(w10_restJson1)
             //addAll(w11_restJson1)
-            addAll(w12_restJson1)
-            addAll(w13_restJson1)
-            addAll(w14_restJson1)
-            addAll(w15_restJson1)
+            //addAll(w12_restJson1)
+            //addAll(w13_restJson1)
+            //addAll(w14_restJson1)
+            //addAll(w15_restJson1)
             addAll(w16_restJson1)
             addAll(w17_restJson1)
             addAll(w18_restJson1)
@@ -572,6 +575,8 @@ tasks.register("generate-smithy-build") {
             addAll(w22_restXml)
 
             addAll(w23_s3)
+
+            addAll(w99_deprecated)
         }
 
         fileTree(models).filter { it.isFile }.files.forEach eachFile@{ file ->

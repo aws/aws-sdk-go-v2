@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: AmazonTimestreamInfluxDB.DeleteDbBackup
+
+{"allocatedStorage":1,"arn":"__Arn__","clusterConfiguration":{"dedicatedCompactor":true,"ingestQueryInstances":1,"queryOnlyInstances":1},"createdAt":"2000-01-01T00:00:00Z","dbInstanceType":"db.influx.medium","dbParameterGroupId":"__DbParameterGroupId__","dbResourceId":"__DbResourceId__","dbStorageType":"InfluxIOIncludedT1","deploymentType":"SINGLE_AZ","engineType":"INFLUXDB_V2","expiresAfter":"__ExpiresAfter__","failoverMode":"AUTOMATIC","id":"__Id__","influxAuthParametersSecretArn":"__InfluxAuthParametersSecretArn__","kmsKeyId":"__KmsKeyId__","logDeliveryConfiguration":{"s3Configuration":{"bucketName":"__BucketName__","enabled":true}},"maintenanceSchedule":{"preferredMaintenanceWindow":"__PreferredMaintenanceWindow__","timezone":"__Timezone__"},"name":"__Name__","networkType":"IPV4","port":1,"publiclyAccessible":true,"status":"IN_PROGRESS","type":"HOURLY","vpcSecurityGroupIds":["__Member__","__Member__"],"vpcSubnetIds":["__Member__","__Member__"]}

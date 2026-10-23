@@ -4,7 +4,9 @@ package bedrock
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/bedrock/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrock/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -32,6 +34,18 @@ type GetFoundationModelAvailabilityInput struct {
 	ModelId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetFoundationModelAvailabilityInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetFoundationModelAvailabilityRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetFoundationModelAvailabilityInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ModelId != nil {
+		s.WriteString(schemas.GetFoundationModelAvailabilityRequest_modelId, *v.ModelId)
+	}
 }
 
 type GetFoundationModelAvailabilityOutput struct {
@@ -67,13 +81,70 @@ type GetFoundationModelAvailabilityOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetFoundationModelAvailabilityOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetFoundationModelAvailabilityResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetFoundationModelAvailabilityOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AgreementAvailability != nil {
+		s.WriteStruct(schemas.GetFoundationModelAvailabilityResponse_agreementAvailability)
+		v.AgreementAvailability.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.AuthorizationStatus != "" {
+		s.WriteString(schemas.GetFoundationModelAvailabilityResponse_authorizationStatus, string(v.AuthorizationStatus))
+	}
+	if v.EntitlementAvailability != "" {
+		s.WriteString(schemas.GetFoundationModelAvailabilityResponse_entitlementAvailability, string(v.EntitlementAvailability))
+	}
+	if v.ModelId != nil {
+		s.WriteString(schemas.GetFoundationModelAvailabilityResponse_modelId, *v.ModelId)
+	}
+	if v.RegionAvailability != "" {
+		s.WriteString(schemas.GetFoundationModelAvailabilityResponse_regionAvailability, string(v.RegionAvailability))
+	}
+}
+func (v *GetFoundationModelAvailabilityOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetFoundationModelAvailabilityResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetFoundationModelAvailabilityResponse_agreementAvailability:
+			v.AgreementAvailability = &types.AgreementAvailability{}
+			return v.AgreementAvailability.Deserialize(d)
+		case schemas.GetFoundationModelAvailabilityResponse_authorizationStatus:
+			var ev string
+			if err := d.ReadString(schemas.GetFoundationModelAvailabilityResponse_authorizationStatus, &ev); err != nil {
+				return err
+			}
+			v.AuthorizationStatus = types.AuthorizationStatus(ev)
+			return nil
+		case schemas.GetFoundationModelAvailabilityResponse_entitlementAvailability:
+			var ev string
+			if err := d.ReadString(schemas.GetFoundationModelAvailabilityResponse_entitlementAvailability, &ev); err != nil {
+				return err
+			}
+			v.EntitlementAvailability = types.EntitlementAvailability(ev)
+			return nil
+		case schemas.GetFoundationModelAvailabilityResponse_modelId:
+			v.ModelId = new(string)
+			return d.ReadString(schemas.GetFoundationModelAvailabilityResponse_modelId, v.ModelId)
+		case schemas.GetFoundationModelAvailabilityResponse_regionAvailability:
+			var ev string
+			if err := d.ReadString(schemas.GetFoundationModelAvailabilityResponse_regionAvailability, &ev); err != nil {
+				return err
+			}
+			v.RegionAvailability = types.RegionAvailability(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetFoundationModelAvailabilityMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetFoundationModelAvailability{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetFoundationModelAvailability, schemas.GetFoundationModelAvailabilityRequest, schemas.GetFoundationModelAvailabilityResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetFoundationModelAvailability{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetFoundationModelAvailability, schemas.GetFoundationModelAvailabilityRequest, schemas.GetFoundationModelAvailabilityResponse), output: &GetFoundationModelAvailabilityOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

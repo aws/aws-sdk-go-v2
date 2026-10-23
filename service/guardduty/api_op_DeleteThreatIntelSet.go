@@ -4,6 +4,8 @@ package guardduty
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/guardduty/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -43,6 +45,21 @@ type DeleteThreatIntelSetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteThreatIntelSetInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteThreatIntelSetRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteThreatIntelSetInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DetectorId != nil {
+		s.WriteString(schemas.DeleteThreatIntelSetRequest_DetectorId, *v.DetectorId)
+	}
+	if v.ThreatIntelSetId != nil {
+		s.WriteString(schemas.DeleteThreatIntelSetRequest_ThreatIntelSetId, *v.ThreatIntelSetId)
+	}
+}
+
 type DeleteThreatIntelSetOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -50,13 +67,26 @@ type DeleteThreatIntelSetOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteThreatIntelSetOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteThreatIntelSetResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteThreatIntelSetOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteThreatIntelSetOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteThreatIntelSetResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteThreatIntelSetMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteThreatIntelSet{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteThreatIntelSet, schemas.DeleteThreatIntelSetRequest, schemas.DeleteThreatIntelSetResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteThreatIntelSet{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteThreatIntelSet, schemas.DeleteThreatIntelSetRequest, schemas.DeleteThreatIntelSetResponse), output: &DeleteThreatIntelSetOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package glue
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/glue/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/glue/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -41,6 +43,22 @@ type BatchGetBlueprintsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchGetBlueprintsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchGetBlueprintsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchGetBlueprintsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IncludeBlueprint != nil {
+		s.WriteBool(schemas.BatchGetBlueprintsRequest_IncludeBlueprint, *v.IncludeBlueprint)
+	}
+	if v.IncludeParameterSpec != nil {
+		s.WriteBool(schemas.BatchGetBlueprintsRequest_IncludeParameterSpec, *v.IncludeParameterSpec)
+	}
+	serializeBatchGetBlueprintNames(s, schemas.BatchGetBlueprintsRequest_Names, v.Names)
+}
+
 type BatchGetBlueprintsOutput struct {
 
 	// Returns a list of blueprint as a Blueprints object.
@@ -55,13 +73,32 @@ type BatchGetBlueprintsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchGetBlueprintsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchGetBlueprintsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchGetBlueprintsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeBlueprints(s, schemas.BatchGetBlueprintsResponse_Blueprints, v.Blueprints)
+	serializeBlueprintNames(s, schemas.BatchGetBlueprintsResponse_MissingBlueprints, v.MissingBlueprints)
+}
+func (v *BatchGetBlueprintsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchGetBlueprintsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchGetBlueprintsResponse_Blueprints:
+			return deserializeBlueprints(d, schemas.BatchGetBlueprintsResponse_Blueprints, &v.Blueprints)
+		case schemas.BatchGetBlueprintsResponse_MissingBlueprints:
+			return deserializeBlueprintNames(d, schemas.BatchGetBlueprintsResponse_MissingBlueprints, &v.MissingBlueprints)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationBatchGetBlueprintsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpBatchGetBlueprints{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchGetBlueprints, schemas.BatchGetBlueprintsRequest, schemas.BatchGetBlueprintsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpBatchGetBlueprints{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchGetBlueprints, schemas.BatchGetBlueprintsRequest, schemas.BatchGetBlueprintsResponse), output: &BatchGetBlueprintsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

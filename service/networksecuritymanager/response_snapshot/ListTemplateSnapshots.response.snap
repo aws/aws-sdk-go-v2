@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"nextToken":"__NextToken__","snapshots":[{"firewallType":"WAF","hasPublishedVersion":true,"status":"DRAFT","templateArn":"__TemplateArn__","templateId":"__TemplateId__","templateName":"__TemplateName__","updatedAt":"2000-01-01T00:00:00Z","version":"__Version__"},{"firewallType":"WAF","hasPublishedVersion":true,"status":"DRAFT","templateArn":"__TemplateArn__","templateId":"__TemplateId__","templateName":"__TemplateName__","updatedAt":"2000-01-01T00:00:00Z","version":"__Version__"}]}

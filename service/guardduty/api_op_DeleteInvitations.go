@@ -4,7 +4,9 @@ package guardduty
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/guardduty/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/guardduty/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -36,6 +38,16 @@ type DeleteInvitationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteInvitationsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteInvitationsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteInvitationsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAccountIds(s, schemas.DeleteInvitationsRequest_AccountIds, v.AccountIds)
+}
+
 type DeleteInvitationsOutput struct {
 
 	// A list of objects that contain the unprocessed account and a result string that
@@ -50,13 +62,29 @@ type DeleteInvitationsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteInvitationsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteInvitationsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteInvitationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeUnprocessedAccounts(s, schemas.DeleteInvitationsResponse_UnprocessedAccounts, v.UnprocessedAccounts)
+}
+func (v *DeleteInvitationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteInvitationsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteInvitationsResponse_UnprocessedAccounts:
+			return deserializeUnprocessedAccounts(d, schemas.DeleteInvitationsResponse_UnprocessedAccounts, &v.UnprocessedAccounts)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteInvitationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteInvitations{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteInvitations, schemas.DeleteInvitationsRequest, schemas.DeleteInvitationsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteInvitations{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteInvitations, schemas.DeleteInvitationsRequest, schemas.DeleteInvitationsResponse), output: &DeleteInvitationsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -1,6 +1,7 @@
-POST /
+POST /service/AWSMPCommerceService_v20200301/operation/UpdatePurchaseOrders
 
-Content-Type: application/x-amz-json-1.0
-X-Amz-Target: AWSMPCommerceService_v20200301.UpdatePurchaseOrders
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"purchaseOrders":[{"agreementId":"__AgreementId__","chargeId":"__ChargeId__","chargeRevision":1,"purchaseOrderReference":"__PurchaseOrderReference__"},{"agreementId":"__AgreementId__","chargeId":"__ChargeId__","chargeRevision":1,"purchaseOrderReference":"__PurchaseOrderReference__"}]}
+¿npurchaseOrdersŸ¿kagreementIdo__AgreementId__hchargeIdl__ChargeId__nchargeRevisionvpurchaseOrderReferencex__PurchaseOrderReference__ÿ¿kagreementIdo__AgreementId__hchargeIdl__ChargeId__nchargeRevisionvpurchaseOrderReferencex__PurchaseOrderReference__ÿÿÿ

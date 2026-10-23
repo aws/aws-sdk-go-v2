@@ -4,6 +4,8 @@ package glue
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/glue/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -33,6 +35,18 @@ type GetTagsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetTagsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetTagsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetTagsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ResourceArn != nil {
+		s.WriteString(schemas.GetTagsRequest_ResourceArn, *v.ResourceArn)
+	}
+}
+
 type GetTagsOutput struct {
 
 	// The requested tags.
@@ -44,13 +58,29 @@ type GetTagsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetTagsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetTagsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetTagsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeTagsMap(s, schemas.GetTagsResponse_Tags, v.Tags)
+}
+func (v *GetTagsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetTagsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetTagsResponse_Tags:
+			return deserializeTagsMap(d, schemas.GetTagsResponse_Tags, &v.Tags)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetTagsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetTags{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetTags, schemas.GetTagsRequest, schemas.GetTagsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetTags{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetTags, schemas.GetTagsRequest, schemas.GetTagsResponse), output: &GetTagsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

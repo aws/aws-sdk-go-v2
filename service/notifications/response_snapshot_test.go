@@ -142,6 +142,7 @@ func TestCheckResponseSnapshot_AssociateManagedNotificationAccountContact(t *tes
 	got, err := svc.AssociateManagedNotificationAccountContact(context.Background(), &AssociateManagedNotificationAccountContactInput{
 		ContactIdentifier:                   types.AccountContactType("ACCOUNT_PRIMARY"),
 		ManagedNotificationConfigurationArn: ptr.String("__ManagedNotificationConfigurationArn__"),
+		IsSensitiveEventsSubscribed:         ptr.Bool(true),
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -164,6 +165,7 @@ func TestCheckResponseSnapshot_AssociateManagedNotificationAdditionalChannel(t *
 	got, err := svc.AssociateManagedNotificationAdditionalChannel(context.Background(), &AssociateManagedNotificationAdditionalChannelInput{
 		ChannelArn:                          ptr.String("__ChannelArn__"),
 		ManagedNotificationConfigurationArn: ptr.String("__ManagedNotificationConfigurationArn__"),
+		IsSensitiveEventsSubscribed:         ptr.Bool(true),
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -510,6 +512,7 @@ func TestCheckResponseSnapshot_GetManagedNotificationChildEvent(t *testing.T) {
 				Headline:            ptr.String("__Headline__"),
 				ParagraphSummary:    ptr.String("__ParagraphSummary__"),
 				CompleteDescription: ptr.String("__CompleteDescription__"),
+				MarkupDescription:   ptr.String("__MarkupDescription__"),
 				Dimensions: []types.Dimension{
 					{
 						Name:  ptr.String("__Name__"),
@@ -612,6 +615,7 @@ func TestCheckResponseSnapshot_GetManagedNotificationEvent(t *testing.T) {
 				Headline:            ptr.String("__Headline__"),
 				ParagraphSummary:    ptr.String("__ParagraphSummary__"),
 				CompleteDescription: ptr.String("__CompleteDescription__"),
+				MarkupDescription:   ptr.String("__MarkupDescription__"),
 				Dimensions: []types.Dimension{
 					{
 						Name:  ptr.String("__Name__"),
@@ -696,6 +700,18 @@ func TestCheckResponseSnapshot_GetManagedNotificationEvent(t *testing.T) {
 				},
 			},
 			OrganizationalUnitId: ptr.String("__OrganizationalUnitId__"),
+			Attachments: []types.NotificationEventAttachment{
+				{
+					DisplayName:           ptr.String("__DisplayName__"),
+					AttachmentDownloadUrl: ptr.String("__AttachmentDownloadUrl__"),
+					ContentType:           ptr.String("__ContentType__"),
+				},
+				{
+					DisplayName:           ptr.String("__DisplayName__"),
+					AttachmentDownloadUrl: ptr.String("__AttachmentDownloadUrl__"),
+					ContentType:           ptr.String("__ContentType__"),
+				},
+			},
 		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("GetManagedNotificationEvent.response")
@@ -788,6 +804,7 @@ func TestCheckResponseSnapshot_GetNotificationEvent(t *testing.T) {
 				Headline:            ptr.String("__Headline__"),
 				ParagraphSummary:    ptr.String("__ParagraphSummary__"),
 				CompleteDescription: ptr.String("__CompleteDescription__"),
+				MarkupDescription:   ptr.String("__MarkupDescription__"),
 				Dimensions: []types.Dimension{
 					{
 						Name:  ptr.String("__Name__"),
@@ -1037,14 +1054,16 @@ func TestCheckResponseSnapshot_ListManagedNotificationChannelAssociations(t *tes
 		NextToken: ptr.String("__NextToken__"),
 		ChannelAssociations: []types.ManagedNotificationChannelAssociationSummary{
 			{
-				ChannelIdentifier: ptr.String("__ChannelIdentifier__"),
-				ChannelType:       types.ChannelType("MOBILE"),
-				OverrideOption:    types.ChannelAssociationOverrideOption("ENABLED"),
+				ChannelIdentifier:           ptr.String("__ChannelIdentifier__"),
+				ChannelType:                 types.ChannelType("MOBILE"),
+				OverrideOption:              types.ChannelAssociationOverrideOption("ENABLED"),
+				IsSensitiveEventsSubscribed: ptr.Bool(true),
 			},
 			{
-				ChannelIdentifier: ptr.String("__ChannelIdentifier__"),
-				ChannelType:       types.ChannelType("MOBILE"),
-				OverrideOption:    types.ChannelAssociationOverrideOption("ENABLED"),
+				ChannelIdentifier:           ptr.String("__ChannelIdentifier__"),
+				ChannelType:                 types.ChannelType("MOBILE"),
+				OverrideOption:              types.ChannelAssociationOverrideOption("ENABLED"),
+				IsSensitiveEventsSubscribed: ptr.Bool(true),
 			},
 		},
 	}
@@ -1379,14 +1398,15 @@ func TestCheckResponseSnapshot_ListManagedNotificationEvents(t *testing.T) {
 	}
 	svc := serdeRespClient(status, header, body)
 	got, err := svc.ListManagedNotificationEvents(context.Background(), &ListManagedNotificationEventsInput{
-		StartTime:            ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-		EndTime:              ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-		Locale:               types.LocaleCode("de_DE"),
-		Source:               ptr.String("__Source__"),
-		MaxResults:           ptr.Int32(1),
-		NextToken:            ptr.String("__NextToken__"),
-		OrganizationalUnitId: ptr.String("__OrganizationalUnitId__"),
-		RelatedAccount:       ptr.String("__RelatedAccount__"),
+		StartTime:              ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		EndTime:                ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		Locale:                 types.LocaleCode("de_DE"),
+		Source:                 ptr.String("__Source__"),
+		MaxResults:             ptr.Int32(1),
+		NextToken:              ptr.String("__NextToken__"),
+		OrganizationalUnitId:   ptr.String("__OrganizationalUnitId__"),
+		RelatedAccount:         ptr.String("__RelatedAccount__"),
+		IncludeSensitiveEvents: ptr.Bool(true),
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -1883,6 +1903,29 @@ func TestCheckResponseSnapshot_UpdateEventRule(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "UpdateEventRule.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_UpdateManagedNotificationChannelAssociation(t *testing.T) {
+	want := &UpdateManagedNotificationChannelAssociationOutput{}
+	status, header, body, err := serdeRespReadSnapshot("UpdateManagedNotificationChannelAssociation.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.UpdateManagedNotificationChannelAssociation(context.Background(), &UpdateManagedNotificationChannelAssociationInput{
+		ManagedNotificationConfigurationArn: ptr.String("__ManagedNotificationConfigurationArn__"),
+		ChannelIdentifier:                   ptr.String("__ChannelIdentifier__"),
+		IsSensitiveEventsSubscribed:         ptr.Bool(true),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "UpdateManagedNotificationChannelAssociation.response", err)
 	}
 }
 

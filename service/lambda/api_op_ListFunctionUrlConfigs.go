@@ -5,7 +5,9 @@ package lambda
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/lambda/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lambda/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -55,6 +57,24 @@ type ListFunctionUrlConfigsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListFunctionUrlConfigsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListFunctionUrlConfigsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListFunctionUrlConfigsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FunctionName != nil {
+		s.WriteString(schemas.ListFunctionUrlConfigsRequest_FunctionName, *v.FunctionName)
+	}
+	if v.Marker != nil {
+		s.WriteString(schemas.ListFunctionUrlConfigsRequest_Marker, *v.Marker)
+	}
+	if v.MaxItems != nil {
+		s.WriteInt32(schemas.ListFunctionUrlConfigsRequest_MaxItems, *v.MaxItems)
+	}
+}
+
 type ListFunctionUrlConfigsOutput struct {
 
 	// A list of function URL configurations.
@@ -71,13 +91,35 @@ type ListFunctionUrlConfigsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListFunctionUrlConfigsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListFunctionUrlConfigsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListFunctionUrlConfigsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeFunctionUrlConfigList(s, schemas.ListFunctionUrlConfigsResponse_FunctionUrlConfigs, v.FunctionUrlConfigs)
+	if v.NextMarker != nil {
+		s.WriteString(schemas.ListFunctionUrlConfigsResponse_NextMarker, *v.NextMarker)
+	}
+}
+func (v *ListFunctionUrlConfigsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListFunctionUrlConfigsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListFunctionUrlConfigsResponse_FunctionUrlConfigs:
+			return deserializeFunctionUrlConfigList(d, schemas.ListFunctionUrlConfigsResponse_FunctionUrlConfigs, &v.FunctionUrlConfigs)
+		case schemas.ListFunctionUrlConfigsResponse_NextMarker:
+			v.NextMarker = new(string)
+			return d.ReadString(schemas.ListFunctionUrlConfigsResponse_NextMarker, v.NextMarker)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListFunctionUrlConfigsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListFunctionUrlConfigs{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListFunctionUrlConfigs, schemas.ListFunctionUrlConfigsRequest, schemas.ListFunctionUrlConfigsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListFunctionUrlConfigs{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListFunctionUrlConfigs, schemas.ListFunctionUrlConfigsRequest, schemas.ListFunctionUrlConfigsResponse), output: &ListFunctionUrlConfigsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

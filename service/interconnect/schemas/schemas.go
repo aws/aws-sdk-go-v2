@@ -83,7 +83,8 @@ var Interconnect = smithy.NewServiceSchema(_Interconnect, "2022-07-26")
 var AccessDeniedException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.interconnect",
 	Name:      "AccessDeniedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 403})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 403})
 var AccessDeniedException_message *smithy.Schema
 
 var _ActivationKey = smithy.NewSchema(smithy.ShapeID{
@@ -307,19 +308,22 @@ var EnvironmentState_UNAVAILABLE *smithy.Schema
 var InterconnectClientException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.interconnect",
 	Name:      "InterconnectClientException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var InterconnectClientException_message *smithy.Schema
 
 var InterconnectServerException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.interconnect",
 	Name:      "InterconnectServerException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 500})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
+	&smithytraits.HTTPError{Code: 500})
 var InterconnectServerException_message *smithy.Schema
 
 var InterconnectValidationException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.interconnect",
 	Name:      "InterconnectValidationException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var InterconnectValidationException_message *smithy.Schema
 
 var _LastMileProvider = smithy.NewSchema(smithy.ShapeID{
@@ -382,13 +386,15 @@ var _RemoteOwnerAccount = smithy.NewSchema(smithy.ShapeID{
 var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.interconnect",
 	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 404})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 404})
 var ResourceNotFoundException_message *smithy.Schema
 
 var ServiceQuotaExceededException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.interconnect",
 	Name:      "ServiceQuotaExceededException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 402})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 402})
 var ServiceQuotaExceededException_message *smithy.Schema
 
 var _TagKey = smithy.NewSchema(smithy.ShapeID{
@@ -418,7 +424,8 @@ var _TagValue = smithy.NewSchema(smithy.ShapeID{
 var ThrottlingException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.interconnect",
 	Name:      "ThrottlingException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 429})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 429})
 var ThrottlingException_message *smithy.Schema
 
 var AcceptConnectionProposalRequest = smithy.NewSchema(smithy.ShapeID{

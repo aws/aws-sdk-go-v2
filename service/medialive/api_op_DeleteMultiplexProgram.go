@@ -4,7 +4,9 @@ package medialive
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/medialive/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/medialive/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -40,6 +42,21 @@ type DeleteMultiplexProgramInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteMultiplexProgramInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteMultiplexProgramRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteMultiplexProgramInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MultiplexId != nil {
+		s.WriteString(schemas.DeleteMultiplexProgramRequest_MultiplexId, *v.MultiplexId)
+	}
+	if v.ProgramName != nil {
+		s.WriteString(schemas.DeleteMultiplexProgramRequest_ProgramName, *v.ProgramName)
+	}
+}
+
 // Placeholder documentation for DeleteMultiplexProgramResponse
 type DeleteMultiplexProgramOutput struct {
 
@@ -67,13 +84,57 @@ type DeleteMultiplexProgramOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteMultiplexProgramOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteMultiplexProgramResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteMultiplexProgramOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ChannelId != nil {
+		s.WriteString(schemas.DeleteMultiplexProgramResponse_ChannelId, *v.ChannelId)
+	}
+	if v.MultiplexProgramSettings != nil {
+		s.WriteStruct(schemas.DeleteMultiplexProgramResponse_MultiplexProgramSettings)
+		v.MultiplexProgramSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.PacketIdentifiersMap != nil {
+		s.WriteStruct(schemas.DeleteMultiplexProgramResponse_PacketIdentifiersMap)
+		v.PacketIdentifiersMap.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serialize__listOfMultiplexProgramPipelineDetail(s, schemas.DeleteMultiplexProgramResponse_PipelineDetails, v.PipelineDetails)
+	if v.ProgramName != nil {
+		s.WriteString(schemas.DeleteMultiplexProgramResponse_ProgramName, *v.ProgramName)
+	}
+}
+func (v *DeleteMultiplexProgramOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteMultiplexProgramResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteMultiplexProgramResponse_ChannelId:
+			v.ChannelId = new(string)
+			return d.ReadString(schemas.DeleteMultiplexProgramResponse_ChannelId, v.ChannelId)
+		case schemas.DeleteMultiplexProgramResponse_MultiplexProgramSettings:
+			v.MultiplexProgramSettings = &types.MultiplexProgramSettings{}
+			return v.MultiplexProgramSettings.Deserialize(d)
+		case schemas.DeleteMultiplexProgramResponse_PacketIdentifiersMap:
+			v.PacketIdentifiersMap = &types.MultiplexProgramPacketIdentifiersMap{}
+			return v.PacketIdentifiersMap.Deserialize(d)
+		case schemas.DeleteMultiplexProgramResponse_PipelineDetails:
+			return deserialize__listOfMultiplexProgramPipelineDetail(d, schemas.DeleteMultiplexProgramResponse_PipelineDetails, &v.PipelineDetails)
+		case schemas.DeleteMultiplexProgramResponse_ProgramName:
+			v.ProgramName = new(string)
+			return d.ReadString(schemas.DeleteMultiplexProgramResponse_ProgramName, v.ProgramName)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteMultiplexProgramMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteMultiplexProgram{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteMultiplexProgram, schemas.DeleteMultiplexProgramRequest, schemas.DeleteMultiplexProgramResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteMultiplexProgram{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteMultiplexProgram, schemas.DeleteMultiplexProgramRequest, schemas.DeleteMultiplexProgramResponse), output: &DeleteMultiplexProgramOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package securityhub
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/securityhub/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/securityhub/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -51,6 +53,26 @@ type CreateInsightInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateInsightInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateInsightRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateInsightInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Filters != nil {
+		s.WriteStruct(schemas.CreateInsightRequest_Filters)
+		v.Filters.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.GroupByAttribute != nil {
+		s.WriteString(schemas.CreateInsightRequest_GroupByAttribute, *v.GroupByAttribute)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateInsightRequest_Name, *v.Name)
+	}
+}
+
 type CreateInsightOutput struct {
 
 	// The ARN of the insight created.
@@ -64,13 +86,32 @@ type CreateInsightOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateInsightOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateInsightResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateInsightOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InsightArn != nil {
+		s.WriteString(schemas.CreateInsightResponse_InsightArn, *v.InsightArn)
+	}
+}
+func (v *CreateInsightOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateInsightResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateInsightResponse_InsightArn:
+			v.InsightArn = new(string)
+			return d.ReadString(schemas.CreateInsightResponse_InsightArn, v.InsightArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateInsightMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateInsight{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateInsight, schemas.CreateInsightRequest, schemas.CreateInsightResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateInsight{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateInsight, schemas.CreateInsightRequest, schemas.CreateInsightResponse), output: &CreateInsightOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

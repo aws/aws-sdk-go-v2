@@ -4,7 +4,9 @@ package odb
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/odb/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/odb/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -35,6 +37,18 @@ type GetAutonomousDatabaseBackupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetAutonomousDatabaseBackupInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetAutonomousDatabaseBackupInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetAutonomousDatabaseBackupInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AutonomousDatabaseBackupId != nil {
+		s.WriteString(schemas.GetAutonomousDatabaseBackupInput_autonomousDatabaseBackupId, *v.AutonomousDatabaseBackupId)
+	}
+}
+
 type GetAutonomousDatabaseBackupOutput struct {
 
 	// The details of the requested Autonomous Database backup.
@@ -46,13 +60,34 @@ type GetAutonomousDatabaseBackupOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetAutonomousDatabaseBackupOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetAutonomousDatabaseBackupOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetAutonomousDatabaseBackupOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AutonomousDatabaseBackup != nil {
+		s.WriteStruct(schemas.GetAutonomousDatabaseBackupOutput_autonomousDatabaseBackup)
+		v.AutonomousDatabaseBackup.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetAutonomousDatabaseBackupOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetAutonomousDatabaseBackupOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetAutonomousDatabaseBackupOutput_autonomousDatabaseBackup:
+			v.AutonomousDatabaseBackup = &types.AutonomousDatabaseBackup{}
+			return v.AutonomousDatabaseBackup.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetAutonomousDatabaseBackupMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpGetAutonomousDatabaseBackup{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAutonomousDatabaseBackup, schemas.GetAutonomousDatabaseBackupInput, schemas.GetAutonomousDatabaseBackupOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpGetAutonomousDatabaseBackup{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAutonomousDatabaseBackup, schemas.GetAutonomousDatabaseBackupInput, schemas.GetAutonomousDatabaseBackupOutput), output: &GetAutonomousDatabaseBackupOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

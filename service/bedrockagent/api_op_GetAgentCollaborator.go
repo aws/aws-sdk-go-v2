@@ -4,7 +4,9 @@ package bedrockagent
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/bedrockagent/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagent/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -44,6 +46,24 @@ type GetAgentCollaboratorInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetAgentCollaboratorInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetAgentCollaboratorRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetAgentCollaboratorInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AgentId != nil {
+		s.WriteString(schemas.GetAgentCollaboratorRequest_agentId, *v.AgentId)
+	}
+	if v.AgentVersion != nil {
+		s.WriteString(schemas.GetAgentCollaboratorRequest_agentVersion, *v.AgentVersion)
+	}
+	if v.CollaboratorId != nil {
+		s.WriteString(schemas.GetAgentCollaboratorRequest_collaboratorId, *v.CollaboratorId)
+	}
+}
+
 type GetAgentCollaboratorOutput struct {
 
 	// Details about the collaborator.
@@ -57,13 +77,34 @@ type GetAgentCollaboratorOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetAgentCollaboratorOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetAgentCollaboratorResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetAgentCollaboratorOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AgentCollaborator != nil {
+		s.WriteStruct(schemas.GetAgentCollaboratorResponse_agentCollaborator)
+		v.AgentCollaborator.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetAgentCollaboratorOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetAgentCollaboratorResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetAgentCollaboratorResponse_agentCollaborator:
+			v.AgentCollaborator = &types.AgentCollaborator{}
+			return v.AgentCollaborator.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetAgentCollaboratorMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetAgentCollaborator{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAgentCollaborator, schemas.GetAgentCollaboratorRequest, schemas.GetAgentCollaboratorResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetAgentCollaborator{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAgentCollaborator, schemas.GetAgentCollaboratorRequest, schemas.GetAgentCollaboratorResponse), output: &GetAgentCollaboratorOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

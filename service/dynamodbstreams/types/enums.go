@@ -67,6 +67,7 @@ const (
 	ShardIteratorTypeLatest              ShardIteratorType = "LATEST"
 	ShardIteratorTypeAtSequenceNumber    ShardIteratorType = "AT_SEQUENCE_NUMBER"
 	ShardIteratorTypeAfterSequenceNumber ShardIteratorType = "AFTER_SEQUENCE_NUMBER"
+	ShardIteratorTypeAtTimestamp         ShardIteratorType = "AT_TIMESTAMP"
 )
 
 // Values returns all known values for ShardIteratorType. Note that this can be
@@ -79,6 +80,7 @@ func (ShardIteratorType) Values() []ShardIteratorType {
 		"LATEST",
 		"AT_SEQUENCE_NUMBER",
 		"AFTER_SEQUENCE_NUMBER",
+		"AT_TIMESTAMP",
 	}
 }
 

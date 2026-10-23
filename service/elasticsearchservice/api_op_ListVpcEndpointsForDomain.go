@@ -4,7 +4,9 @@ package elasticsearchservice
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/elasticsearchservice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/elasticsearchservice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -40,6 +42,21 @@ type ListVpcEndpointsForDomainInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListVpcEndpointsForDomainInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListVpcEndpointsForDomainRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListVpcEndpointsForDomainInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DomainName != nil {
+		s.WriteString(schemas.ListVpcEndpointsForDomainRequest_DomainName, *v.DomainName)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListVpcEndpointsForDomainRequest_NextToken, *v.NextToken)
+	}
+}
+
 // Container for response parameters to the ListVpcEndpointsForDomain operation. Returns a list containing
 // summarized details of the VPC endpoints.
 type ListVpcEndpointsForDomainOutput struct {
@@ -60,13 +77,35 @@ type ListVpcEndpointsForDomainOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListVpcEndpointsForDomainOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListVpcEndpointsForDomainResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListVpcEndpointsForDomainOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListVpcEndpointsForDomainResponse_NextToken, *v.NextToken)
+	}
+	serializeVpcEndpointSummaryList(s, schemas.ListVpcEndpointsForDomainResponse_VpcEndpointSummaryList, v.VpcEndpointSummaryList)
+}
+func (v *ListVpcEndpointsForDomainOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListVpcEndpointsForDomainResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListVpcEndpointsForDomainResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListVpcEndpointsForDomainResponse_NextToken, v.NextToken)
+		case schemas.ListVpcEndpointsForDomainResponse_VpcEndpointSummaryList:
+			return deserializeVpcEndpointSummaryList(d, schemas.ListVpcEndpointsForDomainResponse_VpcEndpointSummaryList, &v.VpcEndpointSummaryList)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListVpcEndpointsForDomainMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListVpcEndpointsForDomain{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListVpcEndpointsForDomain, schemas.ListVpcEndpointsForDomainRequest, schemas.ListVpcEndpointsForDomainResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListVpcEndpointsForDomain{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListVpcEndpointsForDomain, schemas.ListVpcEndpointsForDomainRequest, schemas.ListVpcEndpointsForDomainResponse), output: &ListVpcEndpointsForDomainOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

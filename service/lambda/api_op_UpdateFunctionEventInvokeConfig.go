@@ -4,7 +4,9 @@ package lambda
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/lambda/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lambda/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -77,6 +79,32 @@ type UpdateFunctionEventInvokeConfigInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateFunctionEventInvokeConfigInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateFunctionEventInvokeConfigRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateFunctionEventInvokeConfigInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DestinationConfig != nil {
+		s.WriteStruct(schemas.UpdateFunctionEventInvokeConfigRequest_DestinationConfig)
+		v.DestinationConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.FunctionName != nil {
+		s.WriteString(schemas.UpdateFunctionEventInvokeConfigRequest_FunctionName, *v.FunctionName)
+	}
+	if v.MaximumEventAgeInSeconds != nil {
+		s.WriteInt32(schemas.UpdateFunctionEventInvokeConfigRequest_MaximumEventAgeInSeconds, *v.MaximumEventAgeInSeconds)
+	}
+	if v.MaximumRetryAttempts != nil {
+		s.WriteInt32(schemas.UpdateFunctionEventInvokeConfigRequest_MaximumRetryAttempts, *v.MaximumRetryAttempts)
+	}
+	if v.Qualifier != nil {
+		s.WriteString(schemas.UpdateFunctionEventInvokeConfigRequest_Qualifier, *v.Qualifier)
+	}
+}
+
 type UpdateFunctionEventInvokeConfigOutput struct {
 
 	// A destination for events after they have been sent to a function for processing.
@@ -115,13 +143,58 @@ type UpdateFunctionEventInvokeConfigOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateFunctionEventInvokeConfigOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.FunctionEventInvokeConfig)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateFunctionEventInvokeConfigOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DestinationConfig != nil {
+		s.WriteStruct(schemas.FunctionEventInvokeConfig_DestinationConfig)
+		v.DestinationConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.FunctionArn != nil {
+		s.WriteString(schemas.FunctionEventInvokeConfig_FunctionArn, *v.FunctionArn)
+	}
+	if v.LastModified != nil {
+		s.WriteTime(schemas.FunctionEventInvokeConfig_LastModified, *v.LastModified)
+	}
+	if v.MaximumEventAgeInSeconds != nil {
+		s.WriteInt32(schemas.FunctionEventInvokeConfig_MaximumEventAgeInSeconds, *v.MaximumEventAgeInSeconds)
+	}
+	if v.MaximumRetryAttempts != nil {
+		s.WriteInt32(schemas.FunctionEventInvokeConfig_MaximumRetryAttempts, *v.MaximumRetryAttempts)
+	}
+}
+func (v *UpdateFunctionEventInvokeConfigOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.FunctionEventInvokeConfig, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.FunctionEventInvokeConfig_DestinationConfig:
+			v.DestinationConfig = &types.DestinationConfig{}
+			return v.DestinationConfig.Deserialize(d)
+		case schemas.FunctionEventInvokeConfig_FunctionArn:
+			v.FunctionArn = new(string)
+			return d.ReadString(schemas.FunctionEventInvokeConfig_FunctionArn, v.FunctionArn)
+		case schemas.FunctionEventInvokeConfig_LastModified:
+			v.LastModified = new(time.Time)
+			return d.ReadTime(schemas.FunctionEventInvokeConfig_LastModified, v.LastModified)
+		case schemas.FunctionEventInvokeConfig_MaximumEventAgeInSeconds:
+			v.MaximumEventAgeInSeconds = new(int32)
+			return d.ReadInt32(schemas.FunctionEventInvokeConfig_MaximumEventAgeInSeconds, v.MaximumEventAgeInSeconds)
+		case schemas.FunctionEventInvokeConfig_MaximumRetryAttempts:
+			v.MaximumRetryAttempts = new(int32)
+			return d.ReadInt32(schemas.FunctionEventInvokeConfig_MaximumRetryAttempts, v.MaximumRetryAttempts)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateFunctionEventInvokeConfigMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateFunctionEventInvokeConfig{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateFunctionEventInvokeConfig, schemas.UpdateFunctionEventInvokeConfigRequest, schemas.FunctionEventInvokeConfig)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateFunctionEventInvokeConfig{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateFunctionEventInvokeConfig, schemas.UpdateFunctionEventInvokeConfigRequest, schemas.FunctionEventInvokeConfig), output: &UpdateFunctionEventInvokeConfigOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

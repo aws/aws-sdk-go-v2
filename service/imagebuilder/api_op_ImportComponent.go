@@ -5,11 +5,15 @@ package imagebuilder
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/imagebuilder/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/imagebuilder/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
-// Imports a component and transforms its data into a component document.
+// Imports a component and transforms its data into a component document. For the
+// SHELL format, Image Builder wraps your script in a component document with a
+// single step that runs the script.
 func (c *Client) ImportComponent(ctx context.Context, params *ImportComponentInput, optFns ...func(*Options)) (*ImportComponentOutput, error) {
 	if params == nil {
 		params = &ImportComponentInput{}
@@ -27,8 +31,10 @@ func (c *Client) ImportComponent(ctx context.Context, params *ImportComponentInp
 
 type ImportComponentInput struct {
 
-	// Unique, case-sensitive identifier you provide to ensure idempotency of the
-	// request. For more information, see [Ensuring idempotency]in the Amazon EC2 API Reference.
+	// A unique, case-sensitive identifier you provide to ensure that the operation
+	// runs no more than one time. If you retry a request with the same client token,
+	// Image Builder returns the original response without running the operation again.
+	// For more information, see [Ensuring idempotency]in the Amazon EC2 API Reference.
 	//
 	// [Ensuring idempotency]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
 	//
@@ -40,7 +46,13 @@ type ImportComponentInput struct {
 	// This member is required.
 	Format types.ComponentFormat
 
-	// The name of the component.
+	// The name of the component. Image Builder generates the component ARN from a
+	// normalized form of the name, so names that differ only in case, spaces, or
+	// underscores count as the same name. If a component with the same name and
+	// semantic version already exists in your account in the same Amazon Web Services
+	// Region, the request creates a new build version for it. If the content is also
+	// identical to the latest build version, the request fails because the component
+	// already exists.
 	//
 	// This member is required.
 	Name *string
@@ -56,10 +68,13 @@ type ImportComponentInput struct {
 	// The semantic version has four nodes: ../. You can assign values for the first
 	// three, and can filter on all of them.
 	//
-	// Filtering: With semantic versioning, you have the flexibility to use wildcards
-	// (x) to specify the most recent versions or nodes when selecting the base image
-	// or components for your recipe. When you use a wildcard in any node, all nodes to
-	// the right of the first wildcard must also be wildcards.
+	// Assignment: For the first three nodes, you can assign any positive integer
+	// value, including zero. The upper limit is 2^30-1, or 1073741823, for each node.
+	// Image Builder automatically assigns the build number to the fourth node.
+	//
+	// Patterns: You can use any numeric pattern that adheres to the assignment
+	// requirements for the nodes that you can assign. For example, you might choose a
+	// software version pattern, such as 1.0.0, or a date, such as 2021.01.01.
 	//
 	// This member is required.
 	SemanticVersion *string
@@ -75,16 +90,19 @@ type ImportComponentInput struct {
 	// other versions of the component.
 	ChangeDescription *string
 
-	// The data of the component. Used to specify the data inline. Either data or uri
-	// can be used to specify the data within the component.
+	// The data of the component. For the SHELL format, this is the plain script
+	// content. You must specify exactly one of the data or uri properties. For
+	// scripts that exceed the inline length constraint, use the uri property.
 	Data *string
 
 	// The description of the component. Describes the contents of the component.
 	Description *string
 
-	// The Amazon Resource Name (ARN) that uniquely identifies the KMS key used to
-	// encrypt this component. This can be either the Key ARN or the Alias ARN. For
-	// more information, see [Key identifiers (KeyId)]in the Key Management Service Developer Guide.
+	// The Amazon Resource Name (ARN) of the KMS key that is used to encrypt this
+	// component. This can be either the Key ARN or the Alias ARN. For more
+	// information, see [Key identifiers (KeyId)]in the Key Management Service Developer Guide. If you don't
+	// specify a key, Image Builder encrypts the component data with a KMS key that
+	// Image Builder owns.
 	//
 	// [Key identifiers (KeyId)]: https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#key-id-key-ARN
 	KmsKeyId *string
@@ -92,13 +110,56 @@ type ImportComponentInput struct {
 	// The tags of the component.
 	Tags map[string]string
 
-	// The uri of the component. Must be an Amazon S3 URL and the requester must have
-	// permission to access the Amazon S3 bucket. If you use Amazon S3, you can specify
-	// component content up to your service quota. Either data or uri can be used to
-	// specify the data within the component.
+	// The uri of the component. Must be an Amazon S3 URL and you must have permission
+	// to access the Amazon S3 bucket. If you use Amazon S3, you can specify component
+	// content up to your service quota. Either data or uri can be used to specify the
+	// data within the component.
 	Uri *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ImportComponentInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ImportComponentRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ImportComponentInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ChangeDescription != nil {
+		s.WriteString(schemas.ImportComponentRequest_changeDescription, *v.ChangeDescription)
+	}
+	if v.ClientToken != nil {
+		s.WriteString(schemas.ImportComponentRequest_clientToken, *v.ClientToken)
+	}
+	if v.Data != nil {
+		s.WriteString(schemas.ImportComponentRequest_data, *v.Data)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.ImportComponentRequest_description, *v.Description)
+	}
+	if v.Format != "" {
+		s.WriteString(schemas.ImportComponentRequest_format, string(v.Format))
+	}
+	if v.KmsKeyId != nil {
+		s.WriteString(schemas.ImportComponentRequest_kmsKeyId, *v.KmsKeyId)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.ImportComponentRequest_name, *v.Name)
+	}
+	if v.Platform != "" {
+		s.WriteString(schemas.ImportComponentRequest_platform, string(v.Platform))
+	}
+	if v.SemanticVersion != nil {
+		s.WriteString(schemas.ImportComponentRequest_semanticVersion, *v.SemanticVersion)
+	}
+	serializeTagMap(s, schemas.ImportComponentRequest_tags, v.Tags)
+	if v.Type != "" {
+		s.WriteString(schemas.ImportComponentRequest_type, string(v.Type))
+	}
+	if v.Uri != nil {
+		s.WriteString(schemas.ImportComponentRequest_uri, *v.Uri)
+	}
 }
 
 type ImportComponentOutput struct {
@@ -118,13 +179,44 @@ type ImportComponentOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ImportComponentOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ImportComponentResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ImportComponentOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.ImportComponentResponse_clientToken, *v.ClientToken)
+	}
+	if v.ComponentBuildVersionArn != nil {
+		s.WriteString(schemas.ImportComponentResponse_componentBuildVersionArn, *v.ComponentBuildVersionArn)
+	}
+	if v.RequestId != nil {
+		s.WriteString(schemas.ImportComponentResponse_requestId, *v.RequestId)
+	}
+}
+func (v *ImportComponentOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ImportComponentResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ImportComponentResponse_clientToken:
+			v.ClientToken = new(string)
+			return d.ReadString(schemas.ImportComponentResponse_clientToken, v.ClientToken)
+		case schemas.ImportComponentResponse_componentBuildVersionArn:
+			v.ComponentBuildVersionArn = new(string)
+			return d.ReadString(schemas.ImportComponentResponse_componentBuildVersionArn, v.ComponentBuildVersionArn)
+		case schemas.ImportComponentResponse_requestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.ImportComponentResponse_requestId, v.RequestId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationImportComponentMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpImportComponent{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ImportComponent, schemas.ImportComponentRequest, schemas.ImportComponentResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpImportComponent{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ImportComponent, schemas.ImportComponentRequest, schemas.ImportComponentResponse), output: &ImportComponentOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

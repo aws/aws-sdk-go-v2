@@ -22,9 +22,9 @@ import (
 // parameter group and associated settings to take effect, you must then reboot the
 // instances in the cluster without failover. For more information, see [Modifying Amazon DocumentDB Cluster Parameter Groups].
 //
-// [create a new parameter group]: https://docs.aws.amazon.com/documentdb/latest/developerguide/cluster_parameter_group-create.html
-// [Modifying Amazon DocumentDB Cluster Parameter Groups]: https://docs.aws.amazon.com/documentdb/latest/developerguide/cluster_parameter_group-modify.html
-// [copy an existing parameter group]: https://docs.aws.amazon.com/documentdb/latest/developerguide/cluster_parameter_group-copy.html
+// [create a new parameter group]: https://docs.aws.amazon.com/documentdb/latest/devguide/cluster_parameter_group-create.html
+// [Modifying Amazon DocumentDB Cluster Parameter Groups]: https://docs.aws.amazon.com/documentdb/latest/devguide/cluster_parameter_group-modify.html
+// [copy an existing parameter group]: https://docs.aws.amazon.com/documentdb/latest/devguide/cluster_parameter_group-copy.html
 func (c *Client) CreateDBClusterParameterGroup(ctx context.Context, params *CreateDBClusterParameterGroupInput, optFns ...func(*Options)) (*CreateDBClusterParameterGroupOutput, error) {
 	if params == nil {
 		params = &CreateDBClusterParameterGroupInput{}

@@ -5,7 +5,9 @@ package resiliencehubv2
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/resiliencehubv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/resiliencehubv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -41,6 +43,24 @@ type ListServiceTopologyEdgesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListServiceTopologyEdgesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListServiceTopologyEdgesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListServiceTopologyEdgesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListServiceTopologyEdgesRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListServiceTopologyEdgesRequest_nextToken, *v.NextToken)
+	}
+	if v.ServiceArn != nil {
+		s.WriteString(schemas.ListServiceTopologyEdgesRequest_serviceArn, *v.ServiceArn)
+	}
+}
+
 type ListServiceTopologyEdgesOutput struct {
 
 	// Pagination token.
@@ -55,13 +75,35 @@ type ListServiceTopologyEdgesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListServiceTopologyEdgesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListServiceTopologyEdgesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListServiceTopologyEdgesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListServiceTopologyEdgesResponse_nextToken, *v.NextToken)
+	}
+	serializeServiceTopologyEdgeSummaryList(s, schemas.ListServiceTopologyEdgesResponse_serviceTopologyEdgeSummaries, v.ServiceTopologyEdgeSummaries)
+}
+func (v *ListServiceTopologyEdgesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListServiceTopologyEdgesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListServiceTopologyEdgesResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListServiceTopologyEdgesResponse_nextToken, v.NextToken)
+		case schemas.ListServiceTopologyEdgesResponse_serviceTopologyEdgeSummaries:
+			return deserializeServiceTopologyEdgeSummaryList(d, schemas.ListServiceTopologyEdgesResponse_serviceTopologyEdgeSummaries, &v.ServiceTopologyEdgeSummaries)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListServiceTopologyEdgesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListServiceTopologyEdges{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListServiceTopologyEdges, schemas.ListServiceTopologyEdgesRequest, schemas.ListServiceTopologyEdgesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListServiceTopologyEdges{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListServiceTopologyEdges, schemas.ListServiceTopologyEdgesRequest, schemas.ListServiceTopologyEdgesResponse), output: &ListServiceTopologyEdgesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

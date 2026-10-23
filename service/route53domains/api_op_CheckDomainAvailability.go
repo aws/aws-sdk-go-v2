@@ -111,6 +111,14 @@ type CheckDomainAvailabilityOutput struct {
 	// UNAVAILABLE_RESTRICTED The domain name is forbidden.
 	Availability types.DomainAvailability
 
+	// The price to register the domain name, in the currency that Currency specifies.
+	// If the domain has registry premium pricing, this price is different from the
+	// standard rate for the TLD that ListPrices returns. Use PriceType to determine
+	// which rate applies.
+	//
+	// This element is returned only when Availability is AVAILABLE .
+	Price *types.PriceWithCurrency
+
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 
@@ -127,6 +135,11 @@ func (v *CheckDomainAvailabilityOutput) SerializeMembers(s smithy.ShapeSerialize
 	if v.Availability != "" {
 		s.WriteString(schemas.CheckDomainAvailabilityResponse_Availability, string(v.Availability))
 	}
+	if v.Price != nil {
+		s.WriteStruct(schemas.CheckDomainAvailabilityResponse_Price)
+		v.Price.SerializeMembers(s)
+		s.CloseStruct()
+	}
 }
 func (v *CheckDomainAvailabilityOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CheckDomainAvailabilityResponse, func(s *smithy.Schema) error {
@@ -138,6 +151,9 @@ func (v *CheckDomainAvailabilityOutput) Deserialize(d smithy.ShapeDeserializer) 
 			}
 			v.Availability = types.DomainAvailability(ev)
 			return nil
+		case schemas.CheckDomainAvailabilityResponse_Price:
+			v.Price = &types.PriceWithCurrency{}
+			return v.Price.Deserialize(d)
 		}
 		return nil
 	})

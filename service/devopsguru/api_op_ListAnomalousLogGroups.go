@@ -5,7 +5,9 @@ package devopsguru
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/devopsguru/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/devopsguru/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -43,6 +45,24 @@ type ListAnomalousLogGroupsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAnomalousLogGroupsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAnomalousLogGroupsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAnomalousLogGroupsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InsightId != nil {
+		s.WriteString(schemas.ListAnomalousLogGroupsRequest_InsightId, *v.InsightId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListAnomalousLogGroupsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAnomalousLogGroupsRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListAnomalousLogGroupsOutput struct {
 
 	//  The list of Amazon CloudWatch log groups that are related to an insight.
@@ -65,13 +85,41 @@ type ListAnomalousLogGroupsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAnomalousLogGroupsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAnomalousLogGroupsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAnomalousLogGroupsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAnomalousLogGroups(s, schemas.ListAnomalousLogGroupsResponse_AnomalousLogGroups, v.AnomalousLogGroups)
+	if v.InsightId != nil {
+		s.WriteString(schemas.ListAnomalousLogGroupsResponse_InsightId, *v.InsightId)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAnomalousLogGroupsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListAnomalousLogGroupsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListAnomalousLogGroupsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListAnomalousLogGroupsResponse_AnomalousLogGroups:
+			return deserializeAnomalousLogGroups(d, schemas.ListAnomalousLogGroupsResponse_AnomalousLogGroups, &v.AnomalousLogGroups)
+		case schemas.ListAnomalousLogGroupsResponse_InsightId:
+			v.InsightId = new(string)
+			return d.ReadString(schemas.ListAnomalousLogGroupsResponse_InsightId, v.InsightId)
+		case schemas.ListAnomalousLogGroupsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListAnomalousLogGroupsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListAnomalousLogGroupsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListAnomalousLogGroups{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAnomalousLogGroups, schemas.ListAnomalousLogGroupsRequest, schemas.ListAnomalousLogGroupsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListAnomalousLogGroups{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAnomalousLogGroups, schemas.ListAnomalousLogGroupsRequest, schemas.ListAnomalousLogGroupsResponse), output: &ListAnomalousLogGroupsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -338,12 +338,71 @@ func TestKeyAnd(t *testing.T) {
 			},
 		},
 		{
+			name:  "multi-attribute key and",
+			input: Key("foo").Equal(Value(5)).And(Key("bar").Equal(Value("baz"))).And(Key("qux").BeginsWith("corge")),
+			expectedNode: exprNode{
+				children: []exprNode{
+					{
+						children: []exprNode{
+							{
+								names:   []string{"foo"},
+								fmtExpr: "$n",
+							},
+							{
+								values: []types.AttributeValue{
+									&types.AttributeValueMemberN{Value: "5"},
+								},
+								fmtExpr: "$v",
+							},
+						},
+						fmtExpr: "$c = $c",
+					},
+					{
+						children: []exprNode{
+							{
+								names:   []string{"bar"},
+								fmtExpr: "$n",
+							},
+							{
+								values: []types.AttributeValue{
+									&types.AttributeValueMemberS{Value: "baz"},
+								},
+								fmtExpr: "$v",
+							},
+						},
+						fmtExpr: "$c = $c",
+					},
+					{
+						children: []exprNode{
+							{
+								names:   []string{"qux"},
+								fmtExpr: "$n",
+							},
+							{
+								values: []types.AttributeValue{
+									&types.AttributeValueMemberS{Value: "corge"},
+								},
+								fmtExpr: "$v",
+							},
+						},
+						fmtExpr: "begins_with ($c, $c)",
+					},
+				},
+				fmtExpr: "($c) AND ($c) AND ($c)",
+			},
+		},
+		{
+			name:  "multi-attribute non terminal condition is not equal",
+			input: Key("foo").Equal(Value(5)).And(Key("bar").BeginsWith("baz")).And(Key("qux").Equal(Value("corge"))),
+			err:   invalidKeyConditionFormat,
+		},
+		{
 			name:  "first condition is not equal",
 			input: Key("foo").LessThan(Value(5)).And(Key("bar").BeginsWith("baz")),
 			err:   invalidKeyConditionFormat,
 		},
 		{
-			name:  "more then one condition on key",
+			name:  "nested key conditions",
 			input: Key("foo").Equal(Value(5)).And(Key("bar").Equal(Value(1)).And(Key("baz").BeginsWith("yar"))),
 			err:   invalidKeyConditionFormat,
 		},
@@ -440,6 +499,103 @@ func TestKeyConditionBuildChildNodes(t *testing.T) {
 				if e, a := c.expected, actual; !reflect.DeepEqual(a, e) {
 					t.Errorf("expect %#v, got %#v", e, a)
 				}
+			}
+		})
+	}
+}
+
+func TestKeyAndMultiAttributeBuild(t *testing.T) {
+	eq := func(name string) KeyConditionBuilder { return Key(name).Equal(Value("v")) }
+	gt := Key("sk4").GreaterThan(Value(1))
+
+	cases := map[string]struct {
+		input        KeyConditionBuilder
+		expectedExpr string
+		expectedLen  int
+		err          keyCondErrorMode
+	}{
+		"variadic three conditions": {
+			input:        KeyAnd(eq("pk1"), eq("pk2"), gt),
+			expectedExpr: "(#0 = :0) AND (#1 = :1) AND (#2 > :2)",
+			expectedLen:  3,
+		},
+		"variadic all equality": {
+			input:        KeyAnd(eq("pk1"), eq("pk2"), eq("sk1")),
+			expectedExpr: "(#0 = :0) AND (#1 = :1) AND (#2 = :2)",
+			expectedLen:  3,
+		},
+		"four partition keys and four sort keys": {
+			input: KeyAnd(
+				eq("pk1"), eq("pk2"), eq("pk3"), eq("pk4"),
+				eq("sk1"), eq("sk2"), eq("sk3"), gt,
+			),
+			expectedExpr: "(#0 = :0) AND (#1 = :1) AND (#2 = :2) AND (#3 = :3) AND (#4 = :4) AND (#5 = :5) AND (#6 = :6) AND (#7 > :7)",
+			expectedLen:  8,
+		},
+		"chained and": {
+			input:        eq("pk1").And(eq("pk2")).And(eq("sk1")).And(gt),
+			expectedExpr: "(#0 = :0) AND (#1 = :1) AND (#2 = :2) AND (#3 > :3)",
+			expectedLen:  4,
+		},
+		"variadic with leading and": {
+			input:        KeyAnd(KeyAnd(eq("pk1"), eq("pk2")), gt),
+			expectedExpr: "(#0 = :0) AND (#1 = :1) AND (#2 > :2)",
+			expectedLen:  3,
+		},
+		"no conditions": {
+			input: KeyAnd(),
+			err:   invalidKeyConditionFormat,
+		},
+		"single condition": {
+			input: KeyAnd(eq("pk1")),
+			err:   invalidKeyConditionFormat,
+		},
+		"single and condition": {
+			input: KeyAnd(KeyAnd(eq("pk1"), eq("pk2"))),
+			err:   invalidKeyConditionFormat,
+		},
+		"non terminal condition is not equal": {
+			input: KeyAnd(eq("pk1"), gt, eq("sk1")),
+			err:   invalidKeyConditionFormat,
+		},
+		"leading and with non equal last becomes non terminal": {
+			input: KeyAnd(KeyAnd(eq("pk1"), gt), eq("sk1")),
+			err:   invalidKeyConditionFormat,
+		},
+		"last condition is and": {
+			input: KeyAnd(eq("pk1"), KeyAnd(eq("pk2"), eq("sk1"))),
+			err:   invalidKeyConditionFormat,
+		},
+		"non leading and": {
+			input: KeyAnd(eq("pk1"), KeyAnd(eq("pk2"), eq("sk1")), gt),
+			err:   invalidKeyConditionFormat,
+		},
+	}
+
+	for name, c := range cases {
+		t.Run(name, func(t *testing.T) {
+			expr, err := NewBuilder().WithKeyCondition(c.input).Build()
+			if c.err != noKeyConditionError {
+				if err == nil {
+					t.Fatalf("expect error %q, got no error", c.err)
+				}
+				if e, a := string(c.err), err.Error(); !strings.Contains(a, e) {
+					t.Errorf("expect %q error message to be in %q", e, a)
+				}
+				return
+			}
+			if err != nil {
+				t.Fatalf("expect no error, got unexpected Error %q", err)
+			}
+
+			if e, a := c.expectedExpr, *expr.KeyCondition(); e != a {
+				t.Errorf("expect %q, got %q", e, a)
+			}
+			if e, a := c.expectedLen, len(expr.Names()); e != a {
+				t.Errorf("expect %d names, got %d", e, a)
+			}
+			if e, a := c.expectedLen, len(expr.Values()); e != a {
+				t.Errorf("expect %d values, got %d", e, a)
 			}
 		})
 	}

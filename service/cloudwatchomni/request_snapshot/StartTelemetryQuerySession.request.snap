@@ -1,0 +1,7 @@
+POST /service/CloudWatchOmniFrontend/operation/StartTelemetryQuerySession
+
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
+
+¿ksessionNameo__SessionName__ÿ

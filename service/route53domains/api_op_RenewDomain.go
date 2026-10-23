@@ -5,6 +5,7 @@ package route53domains
 import (
 	"context"
 	"github.com/aws/aws-sdk-go-v2/service/route53domains/schemas"
+	"github.com/aws/aws-sdk-go-v2/service/route53domains/types"
 	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
@@ -48,6 +49,12 @@ type RenewDomainInput struct {
 	// This member is required.
 	DomainName *string
 
+	// Specifies the maximum price that you agree to pay to renew the domain name.
+	// This element is required if the domain has registry premium pricing, and
+	// optional if the domain is priced at the standard rate for its TLD. If you
+	// include it and the renewal price is more than MaxPrice , the request fails.
+	Consent *types.Consent
+
 	// The number of years that you want to renew the domain for. The maximum number
 	// of years depends on the top-level domain. For the range of valid values for your
 	// domain, see [Domains that You Can Register with Amazon Route 53]in the Amazon Route 53 Developer Guide.
@@ -67,6 +74,11 @@ func (v *RenewDomainInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *RenewDomainInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Consent != nil {
+		s.WriteStruct(schemas.RenewDomainRequest_Consent)
+		v.Consent.SerializeMembers(s)
+		s.CloseStruct()
+	}
 	s.WriteInt32(schemas.RenewDomainRequest_CurrentExpiryYear, v.CurrentExpiryYear)
 	if v.DomainName != nil {
 		s.WriteString(schemas.RenewDomainRequest_DomainName, *v.DomainName)

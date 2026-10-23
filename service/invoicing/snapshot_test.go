@@ -194,6 +194,30 @@ func TestCheckSnapshot_ListProcurementPortalPreferences(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_ListProcurementPortals(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListProcurementPortals(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListProcurementPortals")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListProcurementPortalSuppliers(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListProcurementPortalSuppliers(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListProcurementPortalSuppliers")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_ListTagsForResource(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListTagsForResource(context.Background(), nil, func(o *Options) {
@@ -414,6 +438,30 @@ func TestUpdateSnapshot_ListProcurementPortalPreferences(t *testing.T) {
 	_, err := svc.ListProcurementPortalPreferences(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ListProcurementPortalPreferences")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListProcurementPortals(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListProcurementPortals(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListProcurementPortals")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListProcurementPortalSuppliers(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListProcurementPortalSuppliers(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListProcurementPortalSuppliers")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

@@ -70,6 +70,9 @@
                     "target": "com.amazonaws.health#DescribeHealthServiceStatusForOrganization"
                 },
                 {
+                    "target": "com.amazonaws.health#DescribeServiceLifecycle"
+                },
+                {
                     "target": "com.amazonaws.health#DisableHealthServiceAccessForOrganization"
                 },
                 {
@@ -90,6 +93,7 @@
                 "aws.protocols#awsJson1_1": {},
                 "smithy.api#documentation": "<fullname>Health</fullname>\n         <p>The Health API provides access to the Health information that appears in the\n            <a href=\"https://health.aws.amazon.com/health/home\">Health Dashboard</a>. You can use\n         the API operations to get information about events that might affect your Amazon Web Services services and resources.</p>\n         <p>You must have a Business, Enterprise On-Ramp, or Enterprise Support plan from <a href=\"http://aws.amazon.com/premiumsupport/\">Amazon Web Services Support</a> to use the Health API. If you call the Health API from an\n            Amazon Web Services account that doesn't have a Business, Enterprise On-Ramp, or Enterprise Support plan, you receive a\n            <code>SubscriptionRequiredException</code> error.</p>\n         <p>For API access, you need an access key ID and a secret access key. Use temporary\n         credentials instead of long-term access keys when possible. Temporary credentials include\n         an access key ID, a secret access key, and a security token that indicates when the\n         credentials expire. For more information, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-access-keys-best-practices.html\">Best practices for managing\n            Amazon Web Services access keys</a> in the <i>Amazon Web Services General Reference</i>.</p>\n         <p>You can use the Health endpoint health.us-east-1.amazonaws.com (HTTPS) to call the\n         Health API operations. Health supports a multi-Region application architecture\n         and has two regional endpoints in an active-passive configuration. You can use the high\n         availability endpoint example to determine which Amazon Web Services Region is active, so that you can\n         get the latest information from the API. For more information, see <a href=\"https://docs.aws.amazon.com/health/latest/ug/health-api.html\">Accessing the Health\n            API</a> in the <i>Health User Guide</i>.</p>\n         <p>For authentication of requests, Health uses the <a href=\"https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html\">Signature Version 4 Signing\n            Process</a>.</p>\n         <p>If your Amazon Web Services account is part of Organizations, you can use the Health organizational\n         view feature. This feature provides a centralized view of Health events across all\n         accounts in your organization. You can aggregate Health events in real time to\n         identify accounts in your organization that are affected by an operational event or get\n         notified of security vulnerabilities. Use the organizational view API operations to enable\n         this feature and return event information. For more information, see <a href=\"https://docs.aws.amazon.com/health/latest/ug/aggregate-events.html\">Aggregating\n            Health events</a> in the <i>Health User Guide</i>.</p>\n         <note>\n            <p>When you use the Health API operations to return Health events, see the\n            following recommendations:</p>\n            <ul>\n               <li>\n                  <p>Use the <a href=\"https://docs.aws.amazon.com/health/latest/APIReference/API_Event.html#AWSHealth-Type-Event-eventScopeCode\">eventScopeCode</a> parameter to specify whether to return Health\n                  events that are public or account-specific.</p>\n               </li>\n               <li>\n                  <p>Use pagination to view all events from the response. For example, if you call\n                  the <code>DescribeEventsForOrganization</code> operation to get all events in your\n                  organization, you might receive several page results. Specify the\n                     <code>nextToken</code> in the next request to return more results.</p>\n               </li>\n            </ul>\n         </note>",
                 "smithy.api#title": "AWS Health APIs and Notifications",
+                "smithy.protocols#rpcv2Cbor": {},
                 "smithy.rules#endpointBdd": {
                     "version": "1.1",
                     "parameters": {
@@ -2806,6 +2810,135 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.health#DescribeServiceLifecycle": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.health#DescribeServiceLifecycleRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.health#DescribeServiceLifecycleResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.health#InvalidPaginationToken"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns lifecycle information for Amazon Web Services services, including end-of-life dates, version recommendations, and lifecycle events.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To retrieve service lifecycle information",
+                        "documentation": "The following example returns service lifecycle information, including support milestones and lifecycle events for each service version.",
+                        "input": {
+                            "maxResults": 5
+                        },
+                        "output": {
+                            "serviceLifecycles": [
+                                {
+                                    "service": "BEDROCK",
+                                    "version": "ai21.jamba-1-5-large-v1:0",
+                                    "title": "AI21 Labs Jamba 1.5 Large",
+                                    "lifecycleEvents": [
+                                        {
+                                            "lifecycleEventType": "STANDARD_SUPPORT_END",
+                                            "date": "2026-05-26T00:00:00Z",
+                                            "regions": [
+                                                "all"
+                                            ],
+                                            "impactRisks": [
+                                                "END_OF_SUPPORT"
+                                            ],
+                                            "description": "Model enters Legacy state — no longer actively maintained. Public extended access (pricing may increase) starts 2026-08-26"
+                                        },
+                                        {
+                                            "lifecycleEventType": "EXTENDED_SUPPORT_END",
+                                            "date": "2026-11-26T00:00:00Z",
+                                            "regions": [
+                                                "all"
+                                            ],
+                                            "impactRisks": [
+                                                "AVAILABILITY"
+                                            ],
+                                            "description": "Model is no longer available for inference"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "service": "BEDROCK",
+                                    "version": "amazon.nova-2-lite-v1:0",
+                                    "title": "Amazon Nova 2 Lite",
+                                    "lifecycleEvents": [
+                                        {
+                                            "lifecycleEventType": "SUPPORTED",
+                                            "date": "2025-12-02T00:00:00Z",
+                                            "regions": [
+                                                "all"
+                                            ],
+                                            "impactRisks": [],
+                                            "description": "Amazon Nova 2 Lite available on Amazon Bedrock"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "nextToken": "AQICAHjDhCYeYPq-zXMzcdNOIWJQKCUN1s1J84fdK4ztGn9uoAExampleTokenExampleTokenExampleToken"
+                        }
+                    }
+                ],
+                "smithy.api#idempotent": {},
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "items": "serviceLifecycles",
+                    "pageSize": "maxResults"
+                }
+            }
+        },
+        "com.amazonaws.health#DescribeServiceLifecycleRequest": {
+            "type": "structure",
+            "members": {
+                "filter": {
+                    "target": "com.amazonaws.health#ServiceLifecycleFilter",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Values to narrow the results returned.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.health#nextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If the results of a search are large, only a portion of the\nresults are returned, and a <code>nextToken</code> pagination token is returned in the response. To\nretrieve the next batch of results, reissue the search request and include the returned token.\nWhen all results have been returned, the response does not contain a pagination token value.</p>"
+                    }
+                },
+                "maxResults": {
+                    "target": "com.amazonaws.health#LifecycleMaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of items to return in one batch, between 1 and 20, inclusive.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.health#DescribeServiceLifecycleResponse": {
+            "type": "structure",
+            "members": {
+                "serviceLifecycles": {
+                    "target": "com.amazonaws.health#ServiceLifecycleList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of service lifecycle entries matching the filter criteria.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.health#nextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If the results of a search are large, only a portion of the\nresults are returned, and a <code>nextToken</code> pagination token is returned in the response. To\nretrieve the next batch of results, reissue the search request and include the returned token.\nWhen all results have been returned, the response does not contain a pagination token value.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.health#DisableHealthServiceAccessForOrganization": {
             "type": "operation",
             "input": {
@@ -3528,6 +3661,12 @@
                 }
             }
         },
+        "com.amazonaws.health#ImpactRiskList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.health#string"
+            }
+        },
         "com.amazonaws.health#InvalidPaginationToken": {
             "type": "structure",
             "members": {
@@ -3538,6 +3677,59 @@
             "traits": {
                 "smithy.api#documentation": "<p>The specified pagination token (<code>nextToken</code>) is not valid.</p>",
                 "smithy.api#error": "client"
+            }
+        },
+        "com.amazonaws.health#LifecycleEvent": {
+            "type": "structure",
+            "members": {
+                "lifecycleEventType": {
+                    "target": "com.amazonaws.health#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of lifecycle event (for example, end-of-support, end-of-life).</p>"
+                    }
+                },
+                "date": {
+                    "target": "com.amazonaws.health#timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date of the lifecycle event.</p>"
+                    }
+                },
+                "regions": {
+                    "target": "com.amazonaws.health#regionList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services Regions affected by this lifecycle event.</p>"
+                    }
+                },
+                "impactRisks": {
+                    "target": "com.amazonaws.health#ImpactRiskList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The potential impact risks associated with this lifecycle event.</p>"
+                    }
+                },
+                "description": {
+                    "target": "com.amazonaws.health#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A description of the lifecycle event.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A lifecycle event for an Amazon Web Services service version, such as end-of-support or end-of-life.</p>"
+            }
+        },
+        "com.amazonaws.health#LifecycleEventList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.health#LifecycleEvent"
+            }
+        },
+        "com.amazonaws.health#LifecycleMaxResults": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 20
+                }
             }
         },
         "com.amazonaws.health#OrganizationAccountIdsList": {
@@ -3890,6 +4082,64 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.health#OrganizationEvent"
+            }
+        },
+        "com.amazonaws.health#ServiceLifecycle": {
+            "type": "structure",
+            "members": {
+                "service": {
+                    "target": "com.amazonaws.health#service",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the Amazon Web Services service.</p>"
+                    }
+                },
+                "version": {
+                    "target": "com.amazonaws.health#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version of the service.</p>"
+                    }
+                },
+                "title": {
+                    "target": "com.amazonaws.health#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A human-readable title for the lifecycle entry.</p>"
+                    }
+                },
+                "recommendedVersion": {
+                    "target": "com.amazonaws.health#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The recommended version to upgrade to.</p>"
+                    }
+                },
+                "lifecycleEvents": {
+                    "target": "com.amazonaws.health#LifecycleEventList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of lifecycle events for this service version.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains lifecycle information for an Amazon Web Services service version, including lifecycle events and version recommendations.</p>"
+            }
+        },
+        "com.amazonaws.health#ServiceLifecycleFilter": {
+            "type": "structure",
+            "members": {
+                "service": {
+                    "target": "com.amazonaws.health#service",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services service name to filter by.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A filter for narrowing down service lifecycle results.</p>"
+            }
+        },
+        "com.amazonaws.health#ServiceLifecycleList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.health#ServiceLifecycle"
             }
         },
         "com.amazonaws.health#UnsupportedLocale": {

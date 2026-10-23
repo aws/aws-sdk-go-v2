@@ -4,7 +4,9 @@ package medialive
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/medialive/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/medialive/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -33,6 +35,18 @@ type DescribeNetworkInput struct {
 	NetworkId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DescribeNetworkInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeNetworkRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeNetworkInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NetworkId != nil {
+		s.WriteString(schemas.DescribeNetworkRequest_NetworkId, *v.NetworkId)
+	}
 }
 
 // Placeholder documentation for DescribeNetworkResponse
@@ -72,13 +86,63 @@ type DescribeNetworkOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeNetworkOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeNetworkResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeNetworkOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.DescribeNetworkResponse_Arn, *v.Arn)
+	}
+	serialize__listOf__string(s, schemas.DescribeNetworkResponse_AssociatedClusterIds, v.AssociatedClusterIds)
+	if v.Id != nil {
+		s.WriteString(schemas.DescribeNetworkResponse_Id, *v.Id)
+	}
+	serialize__listOfIpPool(s, schemas.DescribeNetworkResponse_IpPools, v.IpPools)
+	if v.Name != nil {
+		s.WriteString(schemas.DescribeNetworkResponse_Name, *v.Name)
+	}
+	serialize__listOfRoute(s, schemas.DescribeNetworkResponse_Routes, v.Routes)
+	if v.State != "" {
+		s.WriteString(schemas.DescribeNetworkResponse_State, string(v.State))
+	}
+}
+func (v *DescribeNetworkOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeNetworkResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeNetworkResponse_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.DescribeNetworkResponse_Arn, v.Arn)
+		case schemas.DescribeNetworkResponse_AssociatedClusterIds:
+			return deserialize__listOf__string(d, schemas.DescribeNetworkResponse_AssociatedClusterIds, &v.AssociatedClusterIds)
+		case schemas.DescribeNetworkResponse_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.DescribeNetworkResponse_Id, v.Id)
+		case schemas.DescribeNetworkResponse_IpPools:
+			return deserialize__listOfIpPool(d, schemas.DescribeNetworkResponse_IpPools, &v.IpPools)
+		case schemas.DescribeNetworkResponse_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.DescribeNetworkResponse_Name, v.Name)
+		case schemas.DescribeNetworkResponse_Routes:
+			return deserialize__listOfRoute(d, schemas.DescribeNetworkResponse_Routes, &v.Routes)
+		case schemas.DescribeNetworkResponse_State:
+			var ev string
+			if err := d.ReadString(schemas.DescribeNetworkResponse_State, &ev); err != nil {
+				return err
+			}
+			v.State = types.NetworkState(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeNetworkMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeNetwork{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeNetwork, schemas.DescribeNetworkRequest, schemas.DescribeNetworkResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeNetwork{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeNetwork, schemas.DescribeNetworkRequest, schemas.DescribeNetworkResponse), output: &DescribeNetworkOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package sfn
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/sfn/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sfn/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -85,6 +87,24 @@ type CreateActivityInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateActivityInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateActivityInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateActivityInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EncryptionConfiguration != nil {
+		s.WriteStruct(schemas.CreateActivityInput_encryptionConfiguration)
+		v.EncryptionConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateActivityInput_name, *v.Name)
+	}
+	serializeTagList(s, schemas.CreateActivityInput_tags, v.Tags)
+}
+
 type CreateActivityOutput struct {
 
 	// The Amazon Resource Name (ARN) that identifies the created activity.
@@ -103,13 +123,38 @@ type CreateActivityOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateActivityOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateActivityOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateActivityOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ActivityArn != nil {
+		s.WriteString(schemas.CreateActivityOutput_activityArn, *v.ActivityArn)
+	}
+	if v.CreationDate != nil {
+		s.WriteTime(schemas.CreateActivityOutput_creationDate, *v.CreationDate)
+	}
+}
+func (v *CreateActivityOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateActivityOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateActivityOutput_activityArn:
+			v.ActivityArn = new(string)
+			return d.ReadString(schemas.CreateActivityOutput_activityArn, v.ActivityArn)
+		case schemas.CreateActivityOutput_creationDate:
+			v.CreationDate = new(time.Time)
+			return d.ReadTime(schemas.CreateActivityOutput_creationDate, v.CreationDate)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateActivityMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpCreateActivity{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateActivity, schemas.CreateActivityInput, schemas.CreateActivityOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpCreateActivity{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateActivity, schemas.CreateActivityInput, schemas.CreateActivityOutput), output: &CreateActivityOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

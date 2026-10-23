@@ -5,8 +5,10 @@ package dynamodb
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/dynamodb/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/dynamodb/types"
 	internalEndpointDiscovery "github.com/aws/aws-sdk-go-v2/service/internal/endpoint-discovery"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -133,6 +135,24 @@ type TransactWriteItemsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *TransactWriteItemsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TransactWriteItemsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TransactWriteItemsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientRequestToken != nil {
+		s.WriteString(schemas.TransactWriteItemsInput_ClientRequestToken, *v.ClientRequestToken)
+	}
+	if v.ReturnConsumedCapacity != "" {
+		s.WriteString(schemas.TransactWriteItemsInput_ReturnConsumedCapacity, string(v.ReturnConsumedCapacity))
+	}
+	if v.ReturnItemCollectionMetrics != "" {
+		s.WriteString(schemas.TransactWriteItemsInput_ReturnItemCollectionMetrics, string(v.ReturnItemCollectionMetrics))
+	}
+	serializeTransactWriteItemList(s, schemas.TransactWriteItemsInput_TransactItems, v.TransactItems)
+}
 func (in *TransactWriteItemsInput) bindEndpointParams(p *EndpointParameters) {
 	func() {
 		v1 := in.TransactItems
@@ -209,13 +229,32 @@ type TransactWriteItemsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *TransactWriteItemsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TransactWriteItemsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TransactWriteItemsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeConsumedCapacityMultiple(s, schemas.TransactWriteItemsOutput_ConsumedCapacity, v.ConsumedCapacity)
+	serializeItemCollectionMetricsPerTable(s, schemas.TransactWriteItemsOutput_ItemCollectionMetrics, v.ItemCollectionMetrics)
+}
+func (v *TransactWriteItemsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TransactWriteItemsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TransactWriteItemsOutput_ConsumedCapacity:
+			return deserializeConsumedCapacityMultiple(d, schemas.TransactWriteItemsOutput_ConsumedCapacity, &v.ConsumedCapacity)
+		case schemas.TransactWriteItemsOutput_ItemCollectionMetrics:
+			return deserializeItemCollectionMetricsPerTable(d, schemas.TransactWriteItemsOutput_ItemCollectionMetrics, &v.ItemCollectionMetrics)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationTransactWriteItemsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpTransactWriteItems{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.TransactWriteItems, schemas.TransactWriteItemsInput, schemas.TransactWriteItemsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpTransactWriteItems{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.TransactWriteItems, schemas.TransactWriteItemsInput, schemas.TransactWriteItemsOutput), output: &TransactWriteItemsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

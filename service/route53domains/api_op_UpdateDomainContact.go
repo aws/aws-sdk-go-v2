@@ -46,8 +46,8 @@ type UpdateDomainContactInput struct {
 	// Provides detailed contact information.
 	BillingContact *types.ContactDetail
 
-	//  Customer's consent for the owner change request. Required if the domain is not
-	// free (consent price is more than $0.00).
+	//  The maximum amount that you agree to pay for the owner change. Required if the
+	// domain is not free (consent price is more than USD $0.00).
 	Consent *types.Consent
 
 	// Provides detailed contact information.

@@ -4,6 +4,8 @@ package apigateway
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/apigateway/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -46,6 +48,24 @@ type GetBasePathMappingInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetBasePathMappingInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetBasePathMappingRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetBasePathMappingInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BasePath != nil {
+		s.WriteString(schemas.GetBasePathMappingRequest_basePath, *v.BasePath)
+	}
+	if v.DomainName != nil {
+		s.WriteString(schemas.GetBasePathMappingRequest_domainName, *v.DomainName)
+	}
+	if v.DomainNameId != nil {
+		s.WriteString(schemas.GetBasePathMappingRequest_domainNameId, *v.DomainNameId)
+	}
+}
+
 // Represents the base path that callers of the API must provide as part of the
 // URL after the domain name.
 type GetBasePathMappingOutput struct {
@@ -66,13 +86,44 @@ type GetBasePathMappingOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetBasePathMappingOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BasePathMapping)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetBasePathMappingOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BasePath != nil {
+		s.WriteString(schemas.BasePathMapping_basePath, *v.BasePath)
+	}
+	if v.RestApiId != nil {
+		s.WriteString(schemas.BasePathMapping_restApiId, *v.RestApiId)
+	}
+	if v.Stage != nil {
+		s.WriteString(schemas.BasePathMapping_stage, *v.Stage)
+	}
+}
+func (v *GetBasePathMappingOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BasePathMapping, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BasePathMapping_basePath:
+			v.BasePath = new(string)
+			return d.ReadString(schemas.BasePathMapping_basePath, v.BasePath)
+		case schemas.BasePathMapping_restApiId:
+			v.RestApiId = new(string)
+			return d.ReadString(schemas.BasePathMapping_restApiId, v.RestApiId)
+		case schemas.BasePathMapping_stage:
+			v.Stage = new(string)
+			return d.ReadString(schemas.BasePathMapping_stage, v.Stage)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetBasePathMappingMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetBasePathMapping{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetBasePathMapping, schemas.GetBasePathMappingRequest, schemas.BasePathMapping)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetBasePathMapping{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetBasePathMapping, schemas.GetBasePathMappingRequest, schemas.BasePathMapping), output: &GetBasePathMappingOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,13 +4,23 @@ package rekognition
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/rekognition/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/rekognition/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
 
+// Service availability notice: Streaming Video and Bulk Image Analysis is no
+// longer available to new customers. For more information, see [Rekognition feature availability changes].
+//
+// This change does not impact the availability of other Amazon Rekognition
+// features.
+//
 // Retrieves the results for a given media analysis job. Takes a JobId returned by
 // StartMediaAnalysisJob.
+//
+// [Rekognition feature availability changes]: https://docs.aws.amazon.com/rekognition/latest/dg/rekognition-availability-changes.html
 func (c *Client) GetMediaAnalysisJob(ctx context.Context, params *GetMediaAnalysisJobInput, optFns ...func(*Options)) (*GetMediaAnalysisJobOutput, error) {
 	if params == nil {
 		params = &GetMediaAnalysisJobInput{}
@@ -35,6 +45,18 @@ type GetMediaAnalysisJobInput struct {
 	JobId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetMediaAnalysisJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetMediaAnalysisJobRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetMediaAnalysisJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.JobId != nil {
+		s.WriteString(schemas.GetMediaAnalysisJobRequest_JobId, *v.JobId)
+	}
 }
 
 type GetMediaAnalysisJobOutput struct {
@@ -94,13 +116,114 @@ type GetMediaAnalysisJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetMediaAnalysisJobOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetMediaAnalysisJobResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetMediaAnalysisJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CompletionTimestamp != nil {
+		s.WriteTime(schemas.GetMediaAnalysisJobResponse_CompletionTimestamp, *v.CompletionTimestamp)
+	}
+	if v.CreationTimestamp != nil {
+		s.WriteTime(schemas.GetMediaAnalysisJobResponse_CreationTimestamp, *v.CreationTimestamp)
+	}
+	if v.FailureDetails != nil {
+		s.WriteStruct(schemas.GetMediaAnalysisJobResponse_FailureDetails)
+		v.FailureDetails.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Input != nil {
+		s.WriteStruct(schemas.GetMediaAnalysisJobResponse_Input)
+		v.Input.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.JobId != nil {
+		s.WriteString(schemas.GetMediaAnalysisJobResponse_JobId, *v.JobId)
+	}
+	if v.JobName != nil {
+		s.WriteString(schemas.GetMediaAnalysisJobResponse_JobName, *v.JobName)
+	}
+	if v.KmsKeyId != nil {
+		s.WriteString(schemas.GetMediaAnalysisJobResponse_KmsKeyId, *v.KmsKeyId)
+	}
+	if v.ManifestSummary != nil {
+		s.WriteStruct(schemas.GetMediaAnalysisJobResponse_ManifestSummary)
+		v.ManifestSummary.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.OperationsConfig != nil {
+		s.WriteStruct(schemas.GetMediaAnalysisJobResponse_OperationsConfig)
+		v.OperationsConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.OutputConfig != nil {
+		s.WriteStruct(schemas.GetMediaAnalysisJobResponse_OutputConfig)
+		v.OutputConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Results != nil {
+		s.WriteStruct(schemas.GetMediaAnalysisJobResponse_Results)
+		v.Results.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.GetMediaAnalysisJobResponse_Status, string(v.Status))
+	}
+}
+func (v *GetMediaAnalysisJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetMediaAnalysisJobResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetMediaAnalysisJobResponse_CompletionTimestamp:
+			v.CompletionTimestamp = new(time.Time)
+			return d.ReadTime(schemas.GetMediaAnalysisJobResponse_CompletionTimestamp, v.CompletionTimestamp)
+		case schemas.GetMediaAnalysisJobResponse_CreationTimestamp:
+			v.CreationTimestamp = new(time.Time)
+			return d.ReadTime(schemas.GetMediaAnalysisJobResponse_CreationTimestamp, v.CreationTimestamp)
+		case schemas.GetMediaAnalysisJobResponse_FailureDetails:
+			v.FailureDetails = &types.MediaAnalysisJobFailureDetails{}
+			return v.FailureDetails.Deserialize(d)
+		case schemas.GetMediaAnalysisJobResponse_Input:
+			v.Input = &types.MediaAnalysisInput{}
+			return v.Input.Deserialize(d)
+		case schemas.GetMediaAnalysisJobResponse_JobId:
+			v.JobId = new(string)
+			return d.ReadString(schemas.GetMediaAnalysisJobResponse_JobId, v.JobId)
+		case schemas.GetMediaAnalysisJobResponse_JobName:
+			v.JobName = new(string)
+			return d.ReadString(schemas.GetMediaAnalysisJobResponse_JobName, v.JobName)
+		case schemas.GetMediaAnalysisJobResponse_KmsKeyId:
+			v.KmsKeyId = new(string)
+			return d.ReadString(schemas.GetMediaAnalysisJobResponse_KmsKeyId, v.KmsKeyId)
+		case schemas.GetMediaAnalysisJobResponse_ManifestSummary:
+			v.ManifestSummary = &types.MediaAnalysisManifestSummary{}
+			return v.ManifestSummary.Deserialize(d)
+		case schemas.GetMediaAnalysisJobResponse_OperationsConfig:
+			v.OperationsConfig = &types.MediaAnalysisOperationsConfig{}
+			return v.OperationsConfig.Deserialize(d)
+		case schemas.GetMediaAnalysisJobResponse_OutputConfig:
+			v.OutputConfig = &types.MediaAnalysisOutputConfig{}
+			return v.OutputConfig.Deserialize(d)
+		case schemas.GetMediaAnalysisJobResponse_Results:
+			v.Results = &types.MediaAnalysisResults{}
+			return v.Results.Deserialize(d)
+		case schemas.GetMediaAnalysisJobResponse_Status:
+			var ev string
+			if err := d.ReadString(schemas.GetMediaAnalysisJobResponse_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.MediaAnalysisJobStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetMediaAnalysisJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetMediaAnalysisJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetMediaAnalysisJob, schemas.GetMediaAnalysisJobRequest, schemas.GetMediaAnalysisJobResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetMediaAnalysisJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetMediaAnalysisJob, schemas.GetMediaAnalysisJobRequest, schemas.GetMediaAnalysisJobResponse), output: &GetMediaAnalysisJobOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

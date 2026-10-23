@@ -1,3 +1,56 @@
+# v1.101.1 (2026-10-22)
+
+* **Bug Fix**: Update smithy-go to v1.28.6
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.101.0 (2026-10-19)
+
+* **Feature**: Adding a new Expected Bucket Owner optional field for GuardDuty publishing destination APIs
+* **Bug Fix**: Fix deserialization failure when `Observations.Text` lists contains a null value.
+
+# v1.100.0 (2026-10-14)
+
+* **Feature**: Releasing support for Custom Detection Rule Runtime Monitoring
+
+# v1.99.1 (2026-10-09.2)
+
+* **Dependency Update**: Update to smithy-go v1.28.5.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.99.0 (2026-10-08)
+
+* **Feature**: Added support for GuardDuty RDS Data Activity Monitoring
+* **Feature**: Enable schema-based (de)serialization for this service.
+* **Dependency Update**: Update to smithy-go v1.28.4.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.98.0 (2026-10-06)
+
+* **Feature**: Enable schema-based (de)serialization for this service.
+
+# v1.97.0 (2026-09-30)
+
+* **Feature**: Enable schema-based (de)serialization for this service.
+* **Feature**: GuardDuty AWS Organizations policy integration. GetDetector and GetMemberDetectors now show whether a GuardDuty policy manages a feature.
+
+# v1.96.0 (2026-09-28)
+
+* **Feature**: Adding awsServiceName field to GuardDuty Findings
+* **Feature**: Enable schema-based (de)serialization for this service.
+
+# v1.95.0 (2026-09-24)
+
+* **Feature**: Enable schema-based (de)serialization for this service.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.94.0 (2026-09-21)
+
+* **Feature**: Enable schema-based (de)serialization for this service.
+
+# v1.93.0 (2026-09-17)
+
+* **Feature**: This change surfaces AI Protection resources on existing public IAM attack sequences. Customers will now see which model was accessed and whether a guardrail intervened as part of the credential-compromise sequence.
+
 # v1.92.0 (2026-09-09)
 
 * **Feature**: Stop registering the `retry.MetricsHeader` middleware in generated clients. The `Amz-Sdk-Request` header is now set by the retry middleware itself.

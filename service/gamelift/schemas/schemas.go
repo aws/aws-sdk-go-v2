@@ -898,7 +898,7 @@ var ComputeType_ANYWHERE *smithy.Schema
 var ConflictException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.gamelift",
 	Name:      "ConflictException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var ConflictException_Message *smithy.Schema
 
 var ConnectionPortRange = smithy.NewSchema(smithy.ShapeID{
@@ -1151,6 +1151,18 @@ var _ContainerGroupDefinitionNameOrArn = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.gamelift",
 	Name:      "ContainerGroupDefinitionNameOrArn",
 }, smithy.ShapeTypeString, 0)
+
+var ContainerGroupDefinitionRemoveAttribute = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.gamelift",
+	Name:      "ContainerGroupDefinitionRemoveAttribute",
+}, smithy.ShapeTypeEnum, 1)
+var ContainerGroupDefinitionRemoveAttribute_TOTAL_VCPU_LIMIT *smithy.Schema
+
+var _ContainerGroupDefinitionRemoveAttributeList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.gamelift",
+	Name:      "ContainerGroupDefinitionRemoveAttributeList",
+}, smithy.ShapeTypeList, 1)
+var _ContainerGroupDefinitionRemoveAttributeList_member *smithy.Schema
 
 var ContainerGroupDefinitionStatus = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.gamelift",
@@ -1475,7 +1487,7 @@ var _EC2InstanceLimitList_member *smithy.Schema
 var EC2InstanceType = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.gamelift",
 	Name:      "EC2InstanceType",
-}, smithy.ShapeTypeEnum, 526)
+}, smithy.ShapeTypeEnum, 539)
 var EC2InstanceType_t2_micro *smithy.Schema
 
 var EC2InstanceType_t2_small *smithy.Schema
@@ -2494,11 +2506,19 @@ var EC2InstanceType_c8a_xlarge *smithy.Schema
 
 var EC2InstanceType_c8a_2xlarge *smithy.Schema
 
+var EC2InstanceType_c8a_4xlarge *smithy.Schema
+
+var EC2InstanceType_c8a_8xlarge *smithy.Schema
+
 var EC2InstanceType_c8i_large *smithy.Schema
 
 var EC2InstanceType_c8i_xlarge *smithy.Schema
 
 var EC2InstanceType_c8i_2xlarge *smithy.Schema
+
+var EC2InstanceType_c8i_4xlarge *smithy.Schema
+
+var EC2InstanceType_c8i_8xlarge *smithy.Schema
 
 var EC2InstanceType_c9g_medium *smithy.Schema
 
@@ -2508,6 +2528,10 @@ var EC2InstanceType_c9g_xlarge *smithy.Schema
 
 var EC2InstanceType_c9g_2xlarge *smithy.Schema
 
+var EC2InstanceType_c9g_4xlarge *smithy.Schema
+
+var EC2InstanceType_c9g_8xlarge *smithy.Schema
+
 var EC2InstanceType_m8a_medium *smithy.Schema
 
 var EC2InstanceType_m8a_large *smithy.Schema
@@ -2516,17 +2540,31 @@ var EC2InstanceType_m8a_xlarge *smithy.Schema
 
 var EC2InstanceType_m8a_2xlarge *smithy.Schema
 
+var EC2InstanceType_m8a_4xlarge *smithy.Schema
+
+var EC2InstanceType_m8a_8xlarge *smithy.Schema
+
 var EC2InstanceType_m8i_large *smithy.Schema
 
 var EC2InstanceType_m8i_xlarge *smithy.Schema
 
 var EC2InstanceType_m8i_2xlarge *smithy.Schema
 
+var EC2InstanceType_m8i_4xlarge *smithy.Schema
+
+var EC2InstanceType_m8i_8xlarge *smithy.Schema
+
+var EC2InstanceType_m9g_medium *smithy.Schema
+
 var EC2InstanceType_m9g_large *smithy.Schema
 
 var EC2InstanceType_m9g_xlarge *smithy.Schema
 
 var EC2InstanceType_m9g_2xlarge *smithy.Schema
+
+var EC2InstanceType_m9g_4xlarge *smithy.Schema
+
+var EC2InstanceType_m9g_8xlarge *smithy.Schema
 
 var Event = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.gamelift",
@@ -2804,7 +2842,7 @@ var FleetCapacity_ManagedCapacityConfiguration *smithy.Schema
 var FleetCapacityExceededException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.gamelift",
 	Name:      "FleetCapacityExceededException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var FleetCapacityExceededException_Message *smithy.Schema
 
 var _FleetCapacityList = smithy.NewSchema(smithy.ShapeID{
@@ -3013,7 +3051,7 @@ var _GameServerConnectionInfo = smithy.NewSchema(smithy.ShapeID{
 var GameServerContainerDefinition = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.gamelift",
 	Name:      "GameServerContainerDefinition",
-}, smithy.ShapeTypeStructure, 9)
+}, smithy.ShapeTypeStructure, 10)
 var GameServerContainerDefinition_ContainerName *smithy.Schema
 
 var GameServerContainerDefinition_DependsOn *smithy.Schema
@@ -3032,10 +3070,12 @@ var GameServerContainerDefinition_ServerSdkVersion *smithy.Schema
 
 var GameServerContainerDefinition_LinuxCapabilities *smithy.Schema
 
+var GameServerContainerDefinition_Vcpu *smithy.Schema
+
 var GameServerContainerDefinitionInput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.gamelift",
 	Name:      "GameServerContainerDefinitionInput",
-}, smithy.ShapeTypeStructure, 8)
+}, smithy.ShapeTypeStructure, 9)
 var GameServerContainerDefinitionInput_ContainerName *smithy.Schema
 
 var GameServerContainerDefinitionInput_DependsOn *smithy.Schema
@@ -3051,6 +3091,8 @@ var GameServerContainerDefinitionInput_PortConfiguration *smithy.Schema
 var GameServerContainerDefinitionInput_ServerSdkVersion *smithy.Schema
 
 var GameServerContainerDefinitionInput_LinuxCapabilities *smithy.Schema
+
+var GameServerContainerDefinitionInput_Vcpu *smithy.Schema
 
 var GameServerContainerGroupCounts = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.gamelift",
@@ -3528,7 +3570,7 @@ var _GameSessionDetailList_member *smithy.Schema
 var GameSessionFullException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.gamelift",
 	Name:      "GameSessionFullException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var GameSessionFullException_Message *smithy.Schema
 
 var _GameSessionList = smithy.NewSchema(smithy.ShapeID{
@@ -3688,7 +3730,7 @@ var _IamRoleArn = smithy.NewSchema(smithy.ShapeID{
 var IdempotentParameterMismatchException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.gamelift",
 	Name:      "IdempotentParameterMismatchException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var IdempotentParameterMismatchException_Message *smithy.Schema
 
 var _IdStringModel = smithy.NewSchema(smithy.ShapeID{
@@ -3801,25 +3843,25 @@ var _Integer = smithy.NewSchema(smithy.ShapeID{
 var InternalServiceException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.gamelift",
 	Name:      "InternalServiceException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"})
 var InternalServiceException_Message *smithy.Schema
 
 var InvalidFleetStatusException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.gamelift",
 	Name:      "InvalidFleetStatusException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var InvalidFleetStatusException_Message *smithy.Schema
 
 var InvalidGameSessionStatusException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.gamelift",
 	Name:      "InvalidGameSessionStatusException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var InvalidGameSessionStatusException_Message *smithy.Schema
 
 var InvalidRequestException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.gamelift",
 	Name:      "InvalidRequestException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var InvalidRequestException_Message *smithy.Schema
 
 var _IpAddress = smithy.NewSchema(smithy.ShapeID{
@@ -3909,7 +3951,7 @@ var _LaunchTemplateVersion = smithy.NewSchema(smithy.ShapeID{
 var LimitExceededException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.gamelift",
 	Name:      "LimitExceededException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var LimitExceededException_Message *smithy.Schema
 
 var LinuxCapabilities = smithy.NewSchema(smithy.ShapeID{
@@ -4462,13 +4504,13 @@ var _NonZeroAndMaxString = smithy.NewSchema(smithy.ShapeID{
 var NotFoundException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.gamelift",
 	Name:      "NotFoundException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var NotFoundException_Message *smithy.Schema
 
 var NotReadyException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.gamelift",
 	Name:      "NotReadyException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var NotReadyException_Message *smithy.Schema
 
 var OperatingSystem = smithy.NewSchema(smithy.ShapeID{
@@ -4490,7 +4532,7 @@ var OperatingSystem_WINDOWS_2022 *smithy.Schema
 var OutOfCapacityException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.gamelift",
 	Name:      "OutOfCapacityException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var OutOfCapacityException_Message *smithy.Schema
 
 var PingBeacon = smithy.NewSchema(smithy.ShapeID{
@@ -5119,7 +5161,7 @@ var Tag_Value *smithy.Schema
 var TaggingFailedException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.gamelift",
 	Name:      "TaggingFailedException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var TaggingFailedException_Message *smithy.Schema
 
 var _TagKey = smithy.NewSchema(smithy.ShapeID{
@@ -5159,7 +5201,7 @@ var TargetTrackingConfiguration_TargetValue *smithy.Schema
 var TerminalRoutingStrategyException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.gamelift",
 	Name:      "TerminalRoutingStrategyException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var TerminalRoutingStrategyException_Message *smithy.Schema
 
 var TerminationMode = smithy.NewSchema(smithy.ShapeID{
@@ -5186,13 +5228,13 @@ var UDPEndpoint_Port *smithy.Schema
 var UnauthorizedException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.gamelift",
 	Name:      "UnauthorizedException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var UnauthorizedException_Message *smithy.Schema
 
 var UnsupportedRegionException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.gamelift",
 	Name:      "UnsupportedRegionException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var UnsupportedRegionException_Message *smithy.Schema
 
 var VpcPeeringAuthorization = smithy.NewSchema(smithy.ShapeID{
@@ -7226,7 +7268,7 @@ var UpdateContainerFleetOutput_ContainerFleet *smithy.Schema
 var UpdateContainerGroupDefinitionInput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.gamelift",
 	Name:      "UpdateContainerGroupDefinitionInput",
-}, smithy.ShapeTypeStructure, 8)
+}, smithy.ShapeTypeStructure, 9)
 var UpdateContainerGroupDefinitionInput_Name *smithy.Schema
 
 var UpdateContainerGroupDefinitionInput_GameServerContainerDefinition *smithy.Schema
@@ -7242,6 +7284,8 @@ var UpdateContainerGroupDefinitionInput_VersionDescription *smithy.Schema
 var UpdateContainerGroupDefinitionInput_SourceVersionNumber *smithy.Schema
 
 var UpdateContainerGroupDefinitionInput_OperatingSystem *smithy.Schema
+
+var UpdateContainerGroupDefinitionInput_RemoveAttributes *smithy.Schema
 
 var UpdateContainerGroupDefinitionOutput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.gamelift",
@@ -8644,11 +8688,19 @@ func init() {
 
 	EC2InstanceType_c8a_2xlarge = EC2InstanceType.AddMember("c8a_2xlarge", smithyprelude.Unit)
 
+	EC2InstanceType_c8a_4xlarge = EC2InstanceType.AddMember("c8a_4xlarge", smithyprelude.Unit)
+
+	EC2InstanceType_c8a_8xlarge = EC2InstanceType.AddMember("c8a_8xlarge", smithyprelude.Unit)
+
 	EC2InstanceType_c8i_large = EC2InstanceType.AddMember("c8i_large", smithyprelude.Unit)
 
 	EC2InstanceType_c8i_xlarge = EC2InstanceType.AddMember("c8i_xlarge", smithyprelude.Unit)
 
 	EC2InstanceType_c8i_2xlarge = EC2InstanceType.AddMember("c8i_2xlarge", smithyprelude.Unit)
+
+	EC2InstanceType_c8i_4xlarge = EC2InstanceType.AddMember("c8i_4xlarge", smithyprelude.Unit)
+
+	EC2InstanceType_c8i_8xlarge = EC2InstanceType.AddMember("c8i_8xlarge", smithyprelude.Unit)
 
 	EC2InstanceType_c9g_medium = EC2InstanceType.AddMember("c9g_medium", smithyprelude.Unit)
 
@@ -8658,6 +8710,10 @@ func init() {
 
 	EC2InstanceType_c9g_2xlarge = EC2InstanceType.AddMember("c9g_2xlarge", smithyprelude.Unit)
 
+	EC2InstanceType_c9g_4xlarge = EC2InstanceType.AddMember("c9g_4xlarge", smithyprelude.Unit)
+
+	EC2InstanceType_c9g_8xlarge = EC2InstanceType.AddMember("c9g_8xlarge", smithyprelude.Unit)
+
 	EC2InstanceType_m8a_medium = EC2InstanceType.AddMember("m8a_medium", smithyprelude.Unit)
 
 	EC2InstanceType_m8a_large = EC2InstanceType.AddMember("m8a_large", smithyprelude.Unit)
@@ -8666,17 +8722,31 @@ func init() {
 
 	EC2InstanceType_m8a_2xlarge = EC2InstanceType.AddMember("m8a_2xlarge", smithyprelude.Unit)
 
+	EC2InstanceType_m8a_4xlarge = EC2InstanceType.AddMember("m8a_4xlarge", smithyprelude.Unit)
+
+	EC2InstanceType_m8a_8xlarge = EC2InstanceType.AddMember("m8a_8xlarge", smithyprelude.Unit)
+
 	EC2InstanceType_m8i_large = EC2InstanceType.AddMember("m8i_large", smithyprelude.Unit)
 
 	EC2InstanceType_m8i_xlarge = EC2InstanceType.AddMember("m8i_xlarge", smithyprelude.Unit)
 
 	EC2InstanceType_m8i_2xlarge = EC2InstanceType.AddMember("m8i_2xlarge", smithyprelude.Unit)
 
+	EC2InstanceType_m8i_4xlarge = EC2InstanceType.AddMember("m8i_4xlarge", smithyprelude.Unit)
+
+	EC2InstanceType_m8i_8xlarge = EC2InstanceType.AddMember("m8i_8xlarge", smithyprelude.Unit)
+
+	EC2InstanceType_m9g_medium = EC2InstanceType.AddMember("m9g_medium", smithyprelude.Unit)
+
 	EC2InstanceType_m9g_large = EC2InstanceType.AddMember("m9g_large", smithyprelude.Unit)
 
 	EC2InstanceType_m9g_xlarge = EC2InstanceType.AddMember("m9g_xlarge", smithyprelude.Unit)
 
 	EC2InstanceType_m9g_2xlarge = EC2InstanceType.AddMember("m9g_2xlarge", smithyprelude.Unit)
+
+	EC2InstanceType_m9g_4xlarge = EC2InstanceType.AddMember("m9g_4xlarge", smithyprelude.Unit)
+
+	EC2InstanceType_m9g_8xlarge = EC2InstanceType.AddMember("m9g_8xlarge", smithyprelude.Unit)
 
 	ContainerAttribute_ContainerName = ContainerAttribute.AddMember("ContainerName", _NonZeroAnd128MaxAsciiString)
 
@@ -9018,6 +9088,8 @@ func init() {
 
 	GameServerContainerDefinition_LinuxCapabilities = GameServerContainerDefinition.AddMember("LinuxCapabilities", LinuxCapabilities)
 
+	GameServerContainerDefinition_Vcpu = GameServerContainerDefinition.AddMember("Vcpu", _ContainerVcpu)
+
 	ContainerHealthCheck_Command = ContainerHealthCheck.AddMember("Command", _ContainerCommandStringList)
 
 	ContainerHealthCheck_Interval = ContainerHealthCheck.AddMember("Interval", _ContainerHealthCheckInterval)
@@ -9087,6 +9159,10 @@ func init() {
 	ContainerGroupDefinition_StatusReason = ContainerGroupDefinition.AddMember("StatusReason", _NonZeroAndMaxString)
 
 	_ContainerGroupDefinitionList_member = _ContainerGroupDefinitionList.AddMember("member", ContainerGroupDefinition)
+
+	ContainerGroupDefinitionRemoveAttribute_TOTAL_VCPU_LIMIT = ContainerGroupDefinitionRemoveAttribute.AddMember("TOTAL_VCPU_LIMIT", smithyprelude.Unit)
+
+	_ContainerGroupDefinitionRemoveAttributeList_member = _ContainerGroupDefinitionRemoveAttributeList.AddMember("member", ContainerGroupDefinitionRemoveAttribute)
 
 	ContainerPortMapping_ContainerPort = ContainerPortMapping.AddMember("ContainerPort", _PortNumber)
 
@@ -9531,6 +9607,8 @@ func init() {
 	GameServerContainerDefinitionInput_ServerSdkVersion = GameServerContainerDefinitionInput.AddMember("ServerSdkVersion", _ServerSdkVersion)
 
 	GameServerContainerDefinitionInput_LinuxCapabilities = GameServerContainerDefinitionInput.AddMember("LinuxCapabilities", LinuxCapabilities)
+
+	GameServerContainerDefinitionInput_Vcpu = GameServerContainerDefinitionInput.AddMember("Vcpu", _ContainerVcpu)
 
 	GameServerGroupInstanceType_c4_large = GameServerGroupInstanceType.AddMember("c4_large", smithyprelude.Unit)
 
@@ -11593,6 +11671,8 @@ func init() {
 	UpdateContainerGroupDefinitionInput_SourceVersionNumber = UpdateContainerGroupDefinitionInput.AddMember("SourceVersionNumber", _PositiveInteger)
 
 	UpdateContainerGroupDefinitionInput_OperatingSystem = UpdateContainerGroupDefinitionInput.AddMember("OperatingSystem", ContainerOperatingSystem)
+
+	UpdateContainerGroupDefinitionInput_RemoveAttributes = UpdateContainerGroupDefinitionInput.AddMember("RemoveAttributes", _ContainerGroupDefinitionRemoveAttributeList)
 
 	UpdateContainerGroupDefinitionOutput_ContainerGroupDefinition = UpdateContainerGroupDefinitionOutput.AddMember("ContainerGroupDefinition", ContainerGroupDefinition)
 

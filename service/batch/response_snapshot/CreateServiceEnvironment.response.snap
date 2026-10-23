@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"serviceEnvironmentArn":"__ServiceEnvironmentArn__","serviceEnvironmentName":"__ServiceEnvironmentName__"}

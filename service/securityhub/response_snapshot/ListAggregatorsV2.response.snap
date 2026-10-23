@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"AggregatorsV2":[{"AggregatorV2Arn":"__AggregatorV2Arn__"},{"AggregatorV2Arn":"__AggregatorV2Arn__"}],"NextToken":"__NextToken__"}

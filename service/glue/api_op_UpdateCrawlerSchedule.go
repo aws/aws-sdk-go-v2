@@ -4,6 +4,8 @@ package glue
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/glue/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,21 @@ type UpdateCrawlerScheduleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateCrawlerScheduleInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateCrawlerScheduleRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateCrawlerScheduleInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CrawlerName != nil {
+		s.WriteString(schemas.UpdateCrawlerScheduleRequest_CrawlerName, *v.CrawlerName)
+	}
+	if v.Schedule != nil {
+		s.WriteString(schemas.UpdateCrawlerScheduleRequest_Schedule, *v.Schedule)
+	}
+}
+
 type UpdateCrawlerScheduleOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -46,13 +63,26 @@ type UpdateCrawlerScheduleOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateCrawlerScheduleOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateCrawlerScheduleResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateCrawlerScheduleOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *UpdateCrawlerScheduleOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateCrawlerScheduleResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateCrawlerScheduleMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateCrawlerSchedule{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateCrawlerSchedule, schemas.UpdateCrawlerScheduleRequest, schemas.UpdateCrawlerScheduleResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateCrawlerSchedule{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateCrawlerSchedule, schemas.UpdateCrawlerScheduleRequest, schemas.UpdateCrawlerScheduleResponse), output: &UpdateCrawlerScheduleOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

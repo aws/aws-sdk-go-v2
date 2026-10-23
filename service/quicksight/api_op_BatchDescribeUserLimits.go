@@ -4,7 +4,9 @@ package quicksight
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/quicksight/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/quicksight/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -44,6 +46,20 @@ type BatchDescribeUserLimitsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchDescribeUserLimitsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchDescribeUserLimitsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchDescribeUserLimitsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountId != nil {
+		s.WriteString(schemas.BatchDescribeUserLimitsRequest_accountId, *v.AccountId)
+	}
+	serializeResourceTypeList(s, schemas.BatchDescribeUserLimitsRequest_resourceTypes, v.ResourceTypes)
+	serializeBatchDescribeUserLimitsRequestUsersList(s, schemas.BatchDescribeUserLimitsRequest_users, v.Users)
+}
+
 type BatchDescribeUserLimitsOutput struct {
 
 	// A list of errors for users whose limits could not be described.
@@ -63,13 +79,32 @@ type BatchDescribeUserLimitsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchDescribeUserLimitsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchDescribeUserLimitsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchDescribeUserLimitsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeBatchDescribeUserLimitsErrorList(s, schemas.BatchDescribeUserLimitsResponse_errors, v.Errors)
+	serializeUserLimitsList(s, schemas.BatchDescribeUserLimitsResponse_userLimits, v.UserLimits)
+}
+func (v *BatchDescribeUserLimitsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchDescribeUserLimitsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchDescribeUserLimitsResponse_errors:
+			return deserializeBatchDescribeUserLimitsErrorList(d, schemas.BatchDescribeUserLimitsResponse_errors, &v.Errors)
+		case schemas.BatchDescribeUserLimitsResponse_userLimits:
+			return deserializeUserLimitsList(d, schemas.BatchDescribeUserLimitsResponse_userLimits, &v.UserLimits)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationBatchDescribeUserLimitsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpBatchDescribeUserLimits{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchDescribeUserLimits, schemas.BatchDescribeUserLimitsRequest, schemas.BatchDescribeUserLimitsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpBatchDescribeUserLimits{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchDescribeUserLimits, schemas.BatchDescribeUserLimitsRequest, schemas.BatchDescribeUserLimitsResponse), output: &BatchDescribeUserLimitsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

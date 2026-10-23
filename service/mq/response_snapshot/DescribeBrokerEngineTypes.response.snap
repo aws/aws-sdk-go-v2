@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"brokerEngineTypes":[{"engineType":"ACTIVEMQ","engineVersions":[{"name":"__Name__"},{"name":"__Name__"}]},{"engineType":"ACTIVEMQ","engineVersions":[{"name":"__Name__"},{"name":"__Name__"}]}],"maxResults":1,"nextToken":"__NextToken__"}

@@ -1692,6 +1692,37 @@ func TestCheckRequestSnapshot_CreateContactFlow(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_CreateContactFlowAlias(t *testing.T) {
+	input := &CreateContactFlowAliasInput{
+		InstanceId:         ptr.String("__InstanceId__"),
+		Description:        ptr.String("__Description__"),
+		ContactFlowId:      ptr.String("__ContactFlowId__"),
+		ContactFlowVersion: ptr.Int64(1),
+		AliasName:          ptr.String("__AliasName__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.CreateContactFlowAlias(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateContactFlowAlias"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_CreateContactFlowModule(t *testing.T) {
 	input := &CreateContactFlowModuleInput{
 		InstanceId:  ptr.String("__InstanceId__"),
@@ -3512,6 +3543,30 @@ func TestCheckRequestSnapshot_CreateRule(t *testing.T) {
 						},
 					},
 				},
+				SendInAppNotificationAction: &types.SendInAppNotificationActionDefinition{
+					Content: map[string]string{
+						"key0": "__Value__",
+					},
+					Recipient: &types.NotificationRecipientType{
+						UserTags: map[string]string{
+							"key0": "__Value__",
+						},
+						UserIds: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					Exclusion: &types.NotificationRecipientType{
+						UserTags: map[string]string{
+							"key0": "__Value__",
+						},
+						UserIds: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					Priority: types.ConfigurableNotificationPriority("HIGH"),
+				},
 			},
 			{
 				ActionType: types.ActionType("CREATE_TASK"),
@@ -3639,6 +3694,30 @@ func TestCheckRequestSnapshot_CreateRule(t *testing.T) {
 						},
 					},
 				},
+				SendInAppNotificationAction: &types.SendInAppNotificationActionDefinition{
+					Content: map[string]string{
+						"key0": "__Value__",
+					},
+					Recipient: &types.NotificationRecipientType{
+						UserTags: map[string]string{
+							"key0": "__Value__",
+						},
+						UserIds: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					Exclusion: &types.NotificationRecipientType{
+						UserTags: map[string]string{
+							"key0": "__Value__",
+						},
+						UserIds: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					Priority: types.ConfigurableNotificationPriority("HIGH"),
+				},
 			},
 		},
 		PublishStatus: types.RulePublishStatus("DRAFT"),
@@ -3738,6 +3817,16 @@ func TestCheckRequestSnapshot_CreateSecurityProfile(t *testing.T) {
 			{
 				Type:         types.FlowModuleType("MCP"),
 				FlowModuleId: ptr.String("__FlowModuleId__"),
+			},
+		},
+		AllowedAIAgents: []types.AIAgent{
+			{
+				Arn:  ptr.String("__Arn__"),
+				Type: types.AIAgentType("THIRD_PARTY"),
+			},
+			{
+				Arn:  ptr.String("__Arn__"),
+				Type: types.AIAgentType("THIRD_PARTY"),
 			},
 		},
 		GranularAccessControlConfiguration: &types.GranularAccessControlConfiguration{
@@ -4556,6 +4645,35 @@ func TestCheckRequestSnapshot_DeleteContactFlow(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteContactFlow"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_DeleteContactFlowAlias(t *testing.T) {
+	input := &DeleteContactFlowAliasInput{
+		InstanceId:    ptr.String("__InstanceId__"),
+		ContactFlowId: ptr.String("__ContactFlowId__"),
+		AliasId:       ptr.String("__AliasId__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DeleteContactFlowAlias(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteContactFlowAlias"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -5742,6 +5860,35 @@ func TestCheckRequestSnapshot_DescribeContactFlow(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DescribeContactFlow"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_DescribeContactFlowAlias(t *testing.T) {
+	input := &DescribeContactFlowAliasInput{
+		InstanceId:    ptr.String("__InstanceId__"),
+		ContactFlowId: ptr.String("__ContactFlowId__"),
+		AliasId:       ptr.String("__AliasId__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DescribeContactFlowAlias(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DescribeContactFlowAlias"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -7269,6 +7416,7 @@ func TestCheckRequestSnapshot_GetAttachedFile(t *testing.T) {
 		FileId:                ptr.String("__FileId__"),
 		UrlExpiryInSeconds:    ptr.Int32(1),
 		AssociatedResourceArn: ptr.String("__AssociatedResourceArn__"),
+		UrlContentDisposition: types.ContentDisposition("INLINE"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -8319,6 +8467,36 @@ func TestCheckRequestSnapshot_ListContactEvaluations(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListContactEvaluations"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_ListContactFlowAliases(t *testing.T) {
+	input := &ListContactFlowAliasesInput{
+		InstanceId:    ptr.String("__InstanceId__"),
+		ContactFlowId: ptr.String("__ContactFlowId__"),
+		NextToken:     ptr.String("__NextToken__"),
+		MaxResults:    ptr.Int32(1),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListContactFlowAliases(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListContactFlowAliases"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -9470,6 +9648,36 @@ func TestCheckRequestSnapshot_ListRealtimeContactAnalysisSegmentsV2(t *testing.T
 	}
 }
 
+func TestCheckRequestSnapshot_ListReplicationFindings(t *testing.T) {
+	input := &ListReplicationFindingsInput{
+		InstanceId:   ptr.String("__InstanceId__"),
+		ResourceType: ptr.String("__ResourceType__"),
+		MaxResults:   ptr.Int32(1),
+		NextToken:    ptr.String("__NextToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListReplicationFindings(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListReplicationFindings"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_ListRoutingProfileManualAssignmentQueues(t *testing.T) {
 	input := &ListRoutingProfileManualAssignmentQueuesInput{
 		InstanceId:       ptr.String("__InstanceId__"),
@@ -9615,6 +9823,36 @@ func TestCheckRequestSnapshot_ListSecurityKeys(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListSecurityKeys"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_ListSecurityProfileAIAgents(t *testing.T) {
+	input := &ListSecurityProfileAIAgentsInput{
+		SecurityProfileId: ptr.String("__SecurityProfileId__"),
+		InstanceId:        ptr.String("__InstanceId__"),
+		NextToken:         ptr.String("__NextToken__"),
+		MaxResults:        ptr.Int32(1),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListSecurityProfileAIAgents(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListSecurityProfileAIAgents"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -13460,6 +13698,13 @@ func TestCheckRequestSnapshot_StartChatContact(t *testing.T) {
 			types.DisconnectOnCustomerExitParticipantType("AGENT"),
 			types.DisconnectOnCustomerExitParticipantType("AGENT"),
 		},
+		ConnectionTypes: []types.ConnectionType{
+			types.ConnectionType("WEBSOCKET"),
+			types.ConnectionType("WEBSOCKET"),
+		},
+		ChatStreamingConfiguration: &types.ChatStreamingConfiguration{
+			StreamingEndpointArn: ptr.String("__StreamingEndpointArn__"),
+		},
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -14850,6 +15095,38 @@ func TestCheckRequestSnapshot_UpdateContactEvaluation(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateContactEvaluation"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_UpdateContactFlowAlias(t *testing.T) {
+	input := &UpdateContactFlowAliasInput{
+		InstanceId:         ptr.String("__InstanceId__"),
+		ContactFlowId:      ptr.String("__ContactFlowId__"),
+		AliasId:            ptr.String("__AliasId__"),
+		Name:               ptr.String("__Name__"),
+		Description:        ptr.String("__Description__"),
+		ContactFlowVersion: ptr.Int64(1),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.UpdateContactFlowAlias(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateContactFlowAlias"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -17293,6 +17570,30 @@ func TestCheckRequestSnapshot_UpdateRule(t *testing.T) {
 						},
 					},
 				},
+				SendInAppNotificationAction: &types.SendInAppNotificationActionDefinition{
+					Content: map[string]string{
+						"key0": "__Value__",
+					},
+					Recipient: &types.NotificationRecipientType{
+						UserTags: map[string]string{
+							"key0": "__Value__",
+						},
+						UserIds: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					Exclusion: &types.NotificationRecipientType{
+						UserTags: map[string]string{
+							"key0": "__Value__",
+						},
+						UserIds: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					Priority: types.ConfigurableNotificationPriority("HIGH"),
+				},
 			},
 			{
 				ActionType: types.ActionType("CREATE_TASK"),
@@ -17420,6 +17721,30 @@ func TestCheckRequestSnapshot_UpdateRule(t *testing.T) {
 						},
 					},
 				},
+				SendInAppNotificationAction: &types.SendInAppNotificationActionDefinition{
+					Content: map[string]string{
+						"key0": "__Value__",
+					},
+					Recipient: &types.NotificationRecipientType{
+						UserTags: map[string]string{
+							"key0": "__Value__",
+						},
+						UserIds: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					Exclusion: &types.NotificationRecipientType{
+						UserTags: map[string]string{
+							"key0": "__Value__",
+						},
+						UserIds: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					Priority: types.ConfigurableNotificationPriority("HIGH"),
+				},
 			},
 		},
 		PublishStatus: types.RulePublishStatus("DRAFT"),
@@ -17512,6 +17837,16 @@ func TestCheckRequestSnapshot_UpdateSecurityProfile(t *testing.T) {
 			{
 				Type:         types.FlowModuleType("MCP"),
 				FlowModuleId: ptr.String("__FlowModuleId__"),
+			},
+		},
+		AllowedAIAgents: []types.AIAgent{
+			{
+				Arn:  ptr.String("__Arn__"),
+				Type: types.AIAgentType("THIRD_PARTY"),
+			},
+			{
+				Arn:  ptr.String("__Arn__"),
+				Type: types.AIAgentType("THIRD_PARTY"),
 			},
 		},
 		GranularAccessControlConfiguration: &types.GranularAccessControlConfiguration{
@@ -19933,6 +20268,37 @@ func TestUpdateRequestSnapshot_CreateContactFlow(t *testing.T) {
 	}
 }
 
+func TestUpdateRequestSnapshot_CreateContactFlowAlias(t *testing.T) {
+	input := &CreateContactFlowAliasInput{
+		InstanceId:         ptr.String("__InstanceId__"),
+		Description:        ptr.String("__Description__"),
+		ContactFlowId:      ptr.String("__ContactFlowId__"),
+		ContactFlowVersion: ptr.Int64(1),
+		AliasName:          ptr.String("__AliasName__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.CreateContactFlowAlias(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateContactFlowAlias"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_CreateContactFlowModule(t *testing.T) {
 	input := &CreateContactFlowModuleInput{
 		InstanceId:  ptr.String("__InstanceId__"),
@@ -21753,6 +22119,30 @@ func TestUpdateRequestSnapshot_CreateRule(t *testing.T) {
 						},
 					},
 				},
+				SendInAppNotificationAction: &types.SendInAppNotificationActionDefinition{
+					Content: map[string]string{
+						"key0": "__Value__",
+					},
+					Recipient: &types.NotificationRecipientType{
+						UserTags: map[string]string{
+							"key0": "__Value__",
+						},
+						UserIds: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					Exclusion: &types.NotificationRecipientType{
+						UserTags: map[string]string{
+							"key0": "__Value__",
+						},
+						UserIds: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					Priority: types.ConfigurableNotificationPriority("HIGH"),
+				},
 			},
 			{
 				ActionType: types.ActionType("CREATE_TASK"),
@@ -21880,6 +22270,30 @@ func TestUpdateRequestSnapshot_CreateRule(t *testing.T) {
 						},
 					},
 				},
+				SendInAppNotificationAction: &types.SendInAppNotificationActionDefinition{
+					Content: map[string]string{
+						"key0": "__Value__",
+					},
+					Recipient: &types.NotificationRecipientType{
+						UserTags: map[string]string{
+							"key0": "__Value__",
+						},
+						UserIds: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					Exclusion: &types.NotificationRecipientType{
+						UserTags: map[string]string{
+							"key0": "__Value__",
+						},
+						UserIds: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					Priority: types.ConfigurableNotificationPriority("HIGH"),
+				},
 			},
 		},
 		PublishStatus: types.RulePublishStatus("DRAFT"),
@@ -21979,6 +22393,16 @@ func TestUpdateRequestSnapshot_CreateSecurityProfile(t *testing.T) {
 			{
 				Type:         types.FlowModuleType("MCP"),
 				FlowModuleId: ptr.String("__FlowModuleId__"),
+			},
+		},
+		AllowedAIAgents: []types.AIAgent{
+			{
+				Arn:  ptr.String("__Arn__"),
+				Type: types.AIAgentType("THIRD_PARTY"),
+			},
+			{
+				Arn:  ptr.String("__Arn__"),
+				Type: types.AIAgentType("THIRD_PARTY"),
 			},
 		},
 		GranularAccessControlConfiguration: &types.GranularAccessControlConfiguration{
@@ -22797,6 +23221,35 @@ func TestUpdateRequestSnapshot_DeleteContactFlow(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteContactFlow"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_DeleteContactFlowAlias(t *testing.T) {
+	input := &DeleteContactFlowAliasInput{
+		InstanceId:    ptr.String("__InstanceId__"),
+		ContactFlowId: ptr.String("__ContactFlowId__"),
+		AliasId:       ptr.String("__AliasId__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DeleteContactFlowAlias(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteContactFlowAlias"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -23983,6 +24436,35 @@ func TestUpdateRequestSnapshot_DescribeContactFlow(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DescribeContactFlow"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_DescribeContactFlowAlias(t *testing.T) {
+	input := &DescribeContactFlowAliasInput{
+		InstanceId:    ptr.String("__InstanceId__"),
+		ContactFlowId: ptr.String("__ContactFlowId__"),
+		AliasId:       ptr.String("__AliasId__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DescribeContactFlowAlias(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DescribeContactFlowAlias"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -25510,6 +25992,7 @@ func TestUpdateRequestSnapshot_GetAttachedFile(t *testing.T) {
 		FileId:                ptr.String("__FileId__"),
 		UrlExpiryInSeconds:    ptr.Int32(1),
 		AssociatedResourceArn: ptr.String("__AssociatedResourceArn__"),
+		UrlContentDisposition: types.ContentDisposition("INLINE"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -26560,6 +27043,36 @@ func TestUpdateRequestSnapshot_ListContactEvaluations(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListContactEvaluations"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_ListContactFlowAliases(t *testing.T) {
+	input := &ListContactFlowAliasesInput{
+		InstanceId:    ptr.String("__InstanceId__"),
+		ContactFlowId: ptr.String("__ContactFlowId__"),
+		NextToken:     ptr.String("__NextToken__"),
+		MaxResults:    ptr.Int32(1),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListContactFlowAliases(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListContactFlowAliases"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -27711,6 +28224,36 @@ func TestUpdateRequestSnapshot_ListRealtimeContactAnalysisSegmentsV2(t *testing.
 	}
 }
 
+func TestUpdateRequestSnapshot_ListReplicationFindings(t *testing.T) {
+	input := &ListReplicationFindingsInput{
+		InstanceId:   ptr.String("__InstanceId__"),
+		ResourceType: ptr.String("__ResourceType__"),
+		MaxResults:   ptr.Int32(1),
+		NextToken:    ptr.String("__NextToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListReplicationFindings(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListReplicationFindings"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_ListRoutingProfileManualAssignmentQueues(t *testing.T) {
 	input := &ListRoutingProfileManualAssignmentQueuesInput{
 		InstanceId:       ptr.String("__InstanceId__"),
@@ -27856,6 +28399,36 @@ func TestUpdateRequestSnapshot_ListSecurityKeys(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListSecurityKeys"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_ListSecurityProfileAIAgents(t *testing.T) {
+	input := &ListSecurityProfileAIAgentsInput{
+		SecurityProfileId: ptr.String("__SecurityProfileId__"),
+		InstanceId:        ptr.String("__InstanceId__"),
+		NextToken:         ptr.String("__NextToken__"),
+		MaxResults:        ptr.Int32(1),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListSecurityProfileAIAgents(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListSecurityProfileAIAgents"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -31701,6 +32274,13 @@ func TestUpdateRequestSnapshot_StartChatContact(t *testing.T) {
 			types.DisconnectOnCustomerExitParticipantType("AGENT"),
 			types.DisconnectOnCustomerExitParticipantType("AGENT"),
 		},
+		ConnectionTypes: []types.ConnectionType{
+			types.ConnectionType("WEBSOCKET"),
+			types.ConnectionType("WEBSOCKET"),
+		},
+		ChatStreamingConfiguration: &types.ChatStreamingConfiguration{
+			StreamingEndpointArn: ptr.String("__StreamingEndpointArn__"),
+		},
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -33091,6 +33671,38 @@ func TestUpdateRequestSnapshot_UpdateContactEvaluation(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateContactEvaluation"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_UpdateContactFlowAlias(t *testing.T) {
+	input := &UpdateContactFlowAliasInput{
+		InstanceId:         ptr.String("__InstanceId__"),
+		ContactFlowId:      ptr.String("__ContactFlowId__"),
+		AliasId:            ptr.String("__AliasId__"),
+		Name:               ptr.String("__Name__"),
+		Description:        ptr.String("__Description__"),
+		ContactFlowVersion: ptr.Int64(1),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.UpdateContactFlowAlias(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateContactFlowAlias"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -35534,6 +36146,30 @@ func TestUpdateRequestSnapshot_UpdateRule(t *testing.T) {
 						},
 					},
 				},
+				SendInAppNotificationAction: &types.SendInAppNotificationActionDefinition{
+					Content: map[string]string{
+						"key0": "__Value__",
+					},
+					Recipient: &types.NotificationRecipientType{
+						UserTags: map[string]string{
+							"key0": "__Value__",
+						},
+						UserIds: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					Exclusion: &types.NotificationRecipientType{
+						UserTags: map[string]string{
+							"key0": "__Value__",
+						},
+						UserIds: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					Priority: types.ConfigurableNotificationPriority("HIGH"),
+				},
 			},
 			{
 				ActionType: types.ActionType("CREATE_TASK"),
@@ -35661,6 +36297,30 @@ func TestUpdateRequestSnapshot_UpdateRule(t *testing.T) {
 						},
 					},
 				},
+				SendInAppNotificationAction: &types.SendInAppNotificationActionDefinition{
+					Content: map[string]string{
+						"key0": "__Value__",
+					},
+					Recipient: &types.NotificationRecipientType{
+						UserTags: map[string]string{
+							"key0": "__Value__",
+						},
+						UserIds: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					Exclusion: &types.NotificationRecipientType{
+						UserTags: map[string]string{
+							"key0": "__Value__",
+						},
+						UserIds: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					Priority: types.ConfigurableNotificationPriority("HIGH"),
+				},
 			},
 		},
 		PublishStatus: types.RulePublishStatus("DRAFT"),
@@ -35753,6 +36413,16 @@ func TestUpdateRequestSnapshot_UpdateSecurityProfile(t *testing.T) {
 			{
 				Type:         types.FlowModuleType("MCP"),
 				FlowModuleId: ptr.String("__FlowModuleId__"),
+			},
+		},
+		AllowedAIAgents: []types.AIAgent{
+			{
+				Arn:  ptr.String("__Arn__"),
+				Type: types.AIAgentType("THIRD_PARTY"),
+			},
+			{
+				Arn:  ptr.String("__Arn__"),
+				Type: types.AIAgentType("THIRD_PARTY"),
 			},
 		},
 		GranularAccessControlConfiguration: &types.GranularAccessControlConfiguration{

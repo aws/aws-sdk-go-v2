@@ -4,6 +4,8 @@ package apigateway
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/apigateway/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -68,6 +70,36 @@ type TestInvokeMethodInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *TestInvokeMethodInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TestInvokeMethodRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TestInvokeMethodInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Body != nil {
+		s.WriteString(schemas.TestInvokeMethodRequest_body, *v.Body)
+	}
+	if v.ClientCertificateId != nil {
+		s.WriteString(schemas.TestInvokeMethodRequest_clientCertificateId, *v.ClientCertificateId)
+	}
+	serializeMapOfStringToString(s, schemas.TestInvokeMethodRequest_headers, v.Headers)
+	if v.HttpMethod != nil {
+		s.WriteString(schemas.TestInvokeMethodRequest_httpMethod, *v.HttpMethod)
+	}
+	serializeMapOfStringToList(s, schemas.TestInvokeMethodRequest_multiValueHeaders, v.MultiValueHeaders)
+	if v.PathWithQueryString != nil {
+		s.WriteString(schemas.TestInvokeMethodRequest_pathWithQueryString, *v.PathWithQueryString)
+	}
+	if v.ResourceId != nil {
+		s.WriteString(schemas.TestInvokeMethodRequest_resourceId, *v.ResourceId)
+	}
+	if v.RestApiId != nil {
+		s.WriteString(schemas.TestInvokeMethodRequest_restApiId, *v.RestApiId)
+	}
+	serializeMapOfStringToString(s, schemas.TestInvokeMethodRequest_stageVariables, v.StageVariables)
+}
+
 // Represents the response of the test invoke request in the HTTP method.
 type TestInvokeMethodOutput struct {
 
@@ -95,13 +127,54 @@ type TestInvokeMethodOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *TestInvokeMethodOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TestInvokeMethodResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TestInvokeMethodOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Body != nil {
+		s.WriteString(schemas.TestInvokeMethodResponse_body, *v.Body)
+	}
+	serializeMapOfStringToString(s, schemas.TestInvokeMethodResponse_headers, v.Headers)
+	if v.Latency != 0 {
+		s.WriteInt64(schemas.TestInvokeMethodResponse_latency, v.Latency)
+	}
+	if v.Log != nil {
+		s.WriteString(schemas.TestInvokeMethodResponse_log, *v.Log)
+	}
+	serializeMapOfStringToList(s, schemas.TestInvokeMethodResponse_multiValueHeaders, v.MultiValueHeaders)
+	if v.Status != 0 {
+		s.WriteInt32(schemas.TestInvokeMethodResponse_status, v.Status)
+	}
+}
+func (v *TestInvokeMethodOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TestInvokeMethodResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TestInvokeMethodResponse_body:
+			v.Body = new(string)
+			return d.ReadString(schemas.TestInvokeMethodResponse_body, v.Body)
+		case schemas.TestInvokeMethodResponse_headers:
+			return deserializeMapOfStringToString(d, schemas.TestInvokeMethodResponse_headers, &v.Headers)
+		case schemas.TestInvokeMethodResponse_latency:
+			return d.ReadInt64(schemas.TestInvokeMethodResponse_latency, &v.Latency)
+		case schemas.TestInvokeMethodResponse_log:
+			v.Log = new(string)
+			return d.ReadString(schemas.TestInvokeMethodResponse_log, v.Log)
+		case schemas.TestInvokeMethodResponse_multiValueHeaders:
+			return deserializeMapOfStringToList(d, schemas.TestInvokeMethodResponse_multiValueHeaders, &v.MultiValueHeaders)
+		case schemas.TestInvokeMethodResponse_status:
+			return d.ReadInt32(schemas.TestInvokeMethodResponse_status, &v.Status)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationTestInvokeMethodMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpTestInvokeMethod{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.TestInvokeMethod, schemas.TestInvokeMethodRequest, schemas.TestInvokeMethodResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpTestInvokeMethod{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.TestInvokeMethod, schemas.TestInvokeMethodRequest, schemas.TestInvokeMethodResponse), output: &TestInvokeMethodOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

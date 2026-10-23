@@ -4,7 +4,9 @@ package appintegrations
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/appintegrations/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/appintegrations/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -47,6 +49,26 @@ type UpdateDataIntegrationAssociationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateDataIntegrationAssociationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateDataIntegrationAssociationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateDataIntegrationAssociationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DataIntegrationAssociationIdentifier != nil {
+		s.WriteString(schemas.UpdateDataIntegrationAssociationRequest_DataIntegrationAssociationIdentifier, *v.DataIntegrationAssociationIdentifier)
+	}
+	if v.DataIntegrationIdentifier != nil {
+		s.WriteString(schemas.UpdateDataIntegrationAssociationRequest_DataIntegrationIdentifier, *v.DataIntegrationIdentifier)
+	}
+	if v.ExecutionConfiguration != nil {
+		s.WriteStruct(schemas.UpdateDataIntegrationAssociationRequest_ExecutionConfiguration)
+		v.ExecutionConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type UpdateDataIntegrationAssociationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -54,13 +76,26 @@ type UpdateDataIntegrationAssociationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateDataIntegrationAssociationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateDataIntegrationAssociationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateDataIntegrationAssociationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *UpdateDataIntegrationAssociationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateDataIntegrationAssociationResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateDataIntegrationAssociationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateDataIntegrationAssociation{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateDataIntegrationAssociation, schemas.UpdateDataIntegrationAssociationRequest, schemas.UpdateDataIntegrationAssociationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateDataIntegrationAssociation{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateDataIntegrationAssociation, schemas.UpdateDataIntegrationAssociationRequest, schemas.UpdateDataIntegrationAssociationResponse), output: &UpdateDataIntegrationAssociationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

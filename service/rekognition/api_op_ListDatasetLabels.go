@@ -5,7 +5,9 @@ package rekognition
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/rekognition/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/rekognition/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -54,6 +56,24 @@ type ListDatasetLabelsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListDatasetLabelsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListDatasetLabelsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListDatasetLabelsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DatasetArn != nil {
+		s.WriteString(schemas.ListDatasetLabelsRequest_DatasetArn, *v.DatasetArn)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListDatasetLabelsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListDatasetLabelsRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListDatasetLabelsOutput struct {
 
 	//  A list of the labels in the dataset.
@@ -70,13 +90,35 @@ type ListDatasetLabelsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListDatasetLabelsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListDatasetLabelsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListDatasetLabelsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDatasetLabelDescriptions(s, schemas.ListDatasetLabelsResponse_DatasetLabelDescriptions, v.DatasetLabelDescriptions)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListDatasetLabelsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListDatasetLabelsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListDatasetLabelsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListDatasetLabelsResponse_DatasetLabelDescriptions:
+			return deserializeDatasetLabelDescriptions(d, schemas.ListDatasetLabelsResponse_DatasetLabelDescriptions, &v.DatasetLabelDescriptions)
+		case schemas.ListDatasetLabelsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListDatasetLabelsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListDatasetLabelsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListDatasetLabels{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDatasetLabels, schemas.ListDatasetLabelsRequest, schemas.ListDatasetLabelsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListDatasetLabels{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDatasetLabels, schemas.ListDatasetLabelsRequest, schemas.ListDatasetLabelsResponse), output: &ListDatasetLabelsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

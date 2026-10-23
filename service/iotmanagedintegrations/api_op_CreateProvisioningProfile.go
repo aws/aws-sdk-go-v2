@@ -5,7 +5,9 @@ package iotmanagedintegrations
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/iotmanagedintegrations/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotmanagedintegrations/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -57,6 +59,31 @@ type CreateProvisioningProfileInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateProvisioningProfileInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateProvisioningProfileRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateProvisioningProfileInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CaCertificate != nil {
+		s.WriteString(schemas.CreateProvisioningProfileRequest_CaCertificate, *v.CaCertificate)
+	}
+	if v.ClaimCertificate != nil {
+		s.WriteString(schemas.CreateProvisioningProfileRequest_ClaimCertificate, *v.ClaimCertificate)
+	}
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateProvisioningProfileRequest_ClientToken, *v.ClientToken)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateProvisioningProfileRequest_Name, *v.Name)
+	}
+	if v.ProvisioningType != "" {
+		s.WriteString(schemas.CreateProvisioningProfileRequest_ProvisioningType, string(v.ProvisioningType))
+	}
+	serializeTagsMap(s, schemas.CreateProvisioningProfileRequest_Tags, v.Tags)
+}
+
 type CreateProvisioningProfileOutput struct {
 
 	// The Amazon Resource Name (ARN) of the provisioning profile.
@@ -89,13 +116,76 @@ type CreateProvisioningProfileOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateProvisioningProfileOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateProvisioningProfileResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateProvisioningProfileOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.CreateProvisioningProfileResponse_Arn, *v.Arn)
+	}
+	if v.ClaimCertificate != nil {
+		s.WriteString(schemas.CreateProvisioningProfileResponse_ClaimCertificate, *v.ClaimCertificate)
+	}
+	if v.ClaimCertificatePrivateKey != nil {
+		s.WriteString(schemas.CreateProvisioningProfileResponse_ClaimCertificatePrivateKey, *v.ClaimCertificatePrivateKey)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.CreateProvisioningProfileResponse_Id, *v.Id)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateProvisioningProfileResponse_Name, *v.Name)
+	}
+	if v.ProvisioningType != "" {
+		s.WriteString(schemas.CreateProvisioningProfileResponse_ProvisioningType, string(v.ProvisioningType))
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.CreateProvisioningProfileResponse_Status, string(v.Status))
+	}
+}
+func (v *CreateProvisioningProfileOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateProvisioningProfileResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateProvisioningProfileResponse_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.CreateProvisioningProfileResponse_Arn, v.Arn)
+		case schemas.CreateProvisioningProfileResponse_ClaimCertificate:
+			v.ClaimCertificate = new(string)
+			return d.ReadString(schemas.CreateProvisioningProfileResponse_ClaimCertificate, v.ClaimCertificate)
+		case schemas.CreateProvisioningProfileResponse_ClaimCertificatePrivateKey:
+			v.ClaimCertificatePrivateKey = new(string)
+			return d.ReadString(schemas.CreateProvisioningProfileResponse_ClaimCertificatePrivateKey, v.ClaimCertificatePrivateKey)
+		case schemas.CreateProvisioningProfileResponse_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.CreateProvisioningProfileResponse_Id, v.Id)
+		case schemas.CreateProvisioningProfileResponse_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.CreateProvisioningProfileResponse_Name, v.Name)
+		case schemas.CreateProvisioningProfileResponse_ProvisioningType:
+			var ev string
+			if err := d.ReadString(schemas.CreateProvisioningProfileResponse_ProvisioningType, &ev); err != nil {
+				return err
+			}
+			v.ProvisioningType = types.ProvisioningType(ev)
+			return nil
+		case schemas.CreateProvisioningProfileResponse_Status:
+			var ev string
+			if err := d.ReadString(schemas.CreateProvisioningProfileResponse_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.ProvisioningProfileStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateProvisioningProfileMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateProvisioningProfile{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateProvisioningProfile, schemas.CreateProvisioningProfileRequest, schemas.CreateProvisioningProfileResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateProvisioningProfile{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateProvisioningProfile, schemas.CreateProvisioningProfileRequest, schemas.CreateProvisioningProfileResponse), output: &CreateProvisioningProfileOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -5,7 +5,9 @@ package databasemigrationservice
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/databasemigrationservice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/databasemigrationservice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -75,6 +77,30 @@ type DescribeMetadataModelChildrenInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeMetadataModelChildrenInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeMetadataModelChildrenMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeMetadataModelChildrenInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Marker != nil {
+		s.WriteString(schemas.DescribeMetadataModelChildrenMessage_Marker, *v.Marker)
+	}
+	if v.MaxRecords != nil {
+		s.WriteInt32(schemas.DescribeMetadataModelChildrenMessage_MaxRecords, *v.MaxRecords)
+	}
+	if v.MigrationProjectIdentifier != nil {
+		s.WriteString(schemas.DescribeMetadataModelChildrenMessage_MigrationProjectIdentifier, *v.MigrationProjectIdentifier)
+	}
+	if v.Origin != "" {
+		s.WriteString(schemas.DescribeMetadataModelChildrenMessage_Origin, string(v.Origin))
+	}
+	if v.SelectionRules != nil {
+		s.WriteString(schemas.DescribeMetadataModelChildrenMessage_SelectionRules, *v.SelectionRules)
+	}
+}
+
 type DescribeMetadataModelChildrenOutput struct {
 
 	// Specifies the unique pagination token that makes it possible to display the
@@ -91,13 +117,35 @@ type DescribeMetadataModelChildrenOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeMetadataModelChildrenOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeMetadataModelChildrenResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeMetadataModelChildrenOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Marker != nil {
+		s.WriteString(schemas.DescribeMetadataModelChildrenResponse_Marker, *v.Marker)
+	}
+	serializeMetadataModelReferenceList(s, schemas.DescribeMetadataModelChildrenResponse_MetadataModelChildren, v.MetadataModelChildren)
+}
+func (v *DescribeMetadataModelChildrenOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeMetadataModelChildrenResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeMetadataModelChildrenResponse_Marker:
+			v.Marker = new(string)
+			return d.ReadString(schemas.DescribeMetadataModelChildrenResponse_Marker, v.Marker)
+		case schemas.DescribeMetadataModelChildrenResponse_MetadataModelChildren:
+			return deserializeMetadataModelReferenceList(d, schemas.DescribeMetadataModelChildrenResponse_MetadataModelChildren, &v.MetadataModelChildren)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeMetadataModelChildrenMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeMetadataModelChildren{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeMetadataModelChildren, schemas.DescribeMetadataModelChildrenMessage, schemas.DescribeMetadataModelChildrenResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeMetadataModelChildren{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeMetadataModelChildren, schemas.DescribeMetadataModelChildrenMessage, schemas.DescribeMetadataModelChildrenResponse), output: &DescribeMetadataModelChildrenOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

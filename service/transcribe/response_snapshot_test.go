@@ -261,6 +261,12 @@ func TestCheckResponseSnapshot_CreateLanguageModel(t *testing.T) {
 			TuningDataS3Uri:   ptr.String("__TuningDataS3Uri__"),
 			DataAccessRoleArn: ptr.String("__DataAccessRoleArn__"),
 		},
+		EncryptionConfiguration: &types.EncryptionConfiguration{
+			KMSEncryptionContext: map[string]string{
+				"key0": "__Value__",
+			},
+			KMSKey: ptr.String("__KMSKey__"),
+		},
 		Tags: []types.Tag{
 			{
 				Key:   ptr.String("__Key__"),
@@ -354,6 +360,12 @@ func TestCheckResponseSnapshot_CreateVocabulary(t *testing.T) {
 			},
 		},
 		DataAccessRoleArn: ptr.String("__DataAccessRoleArn__"),
+		EncryptionConfiguration: &types.EncryptionConfiguration{
+			KMSEncryptionContext: map[string]string{
+				"key0": "__Value__",
+			},
+			KMSKey: ptr.String("__KMSKey__"),
+		},
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -396,6 +408,12 @@ func TestCheckResponseSnapshot_CreateVocabularyFilter(t *testing.T) {
 			},
 		},
 		DataAccessRoleArn: ptr.String("__DataAccessRoleArn__"),
+		EncryptionConfiguration: &types.EncryptionConfiguration{
+			KMSEncryptionContext: map[string]string{
+				"key0": "__Value__",
+			},
+			KMSKey: ptr.String("__KMSKey__"),
+		},
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -609,6 +627,12 @@ func TestCheckResponseSnapshot_DescribeLanguageModel(t *testing.T) {
 				S3Uri:             ptr.String("__S3Uri__"),
 				TuningDataS3Uri:   ptr.String("__TuningDataS3Uri__"),
 				DataAccessRoleArn: ptr.String("__DataAccessRoleArn__"),
+			},
+			EncryptionConfiguration: &types.EncryptionConfiguration{
+				KMSEncryptionContext: map[string]string{
+					"key0": "__Value__",
+				},
+				KMSKey: ptr.String("__KMSKey__"),
 			},
 		},
 	}
@@ -1100,12 +1124,19 @@ func TestCheckResponseSnapshot_GetTranscriptionJob(t *testing.T) {
 
 func TestCheckResponseSnapshot_GetVocabulary(t *testing.T) {
 	want := &GetVocabularyOutput{
-		VocabularyName:   ptr.String("__VocabularyName__"),
-		LanguageCode:     types.LanguageCode("af-ZA"),
-		VocabularyState:  types.VocabularyState("PENDING"),
-		LastModifiedTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-		FailureReason:    ptr.String("__FailureReason__"),
-		DownloadUri:      ptr.String("__DownloadUri__"),
+		VocabularyName:    ptr.String("__VocabularyName__"),
+		LanguageCode:      types.LanguageCode("af-ZA"),
+		VocabularyState:   types.VocabularyState("PENDING"),
+		LastModifiedTime:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		FailureReason:     ptr.String("__FailureReason__"),
+		DownloadUri:       ptr.String("__DownloadUri__"),
+		DataAccessRoleArn: ptr.String("__DataAccessRoleArn__"),
+		EncryptionConfiguration: &types.EncryptionConfiguration{
+			KMSEncryptionContext: map[string]string{
+				"key0": "__Value__",
+			},
+			KMSKey: ptr.String("__KMSKey__"),
+		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("GetVocabulary.response")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -1132,6 +1163,13 @@ func TestCheckResponseSnapshot_GetVocabularyFilter(t *testing.T) {
 		LanguageCode:         types.LanguageCode("af-ZA"),
 		LastModifiedTime:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 		DownloadUri:          ptr.String("__DownloadUri__"),
+		DataAccessRoleArn:    ptr.String("__DataAccessRoleArn__"),
+		EncryptionConfiguration: &types.EncryptionConfiguration{
+			KMSEncryptionContext: map[string]string{
+				"key0": "__Value__",
+			},
+			KMSKey: ptr.String("__KMSKey__"),
+		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("GetVocabularyFilter.response")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -1379,6 +1417,12 @@ func TestCheckResponseSnapshot_ListLanguageModels(t *testing.T) {
 					TuningDataS3Uri:   ptr.String("__TuningDataS3Uri__"),
 					DataAccessRoleArn: ptr.String("__DataAccessRoleArn__"),
 				},
+				EncryptionConfiguration: &types.EncryptionConfiguration{
+					KMSEncryptionContext: map[string]string{
+						"key0": "__Value__",
+					},
+					KMSKey: ptr.String("__KMSKey__"),
+				},
 			},
 			{
 				ModelName:           ptr.String("__ModelName__"),
@@ -1393,6 +1437,12 @@ func TestCheckResponseSnapshot_ListLanguageModels(t *testing.T) {
 					S3Uri:             ptr.String("__S3Uri__"),
 					TuningDataS3Uri:   ptr.String("__TuningDataS3Uri__"),
 					DataAccessRoleArn: ptr.String("__DataAccessRoleArn__"),
+				},
+				EncryptionConfiguration: &types.EncryptionConfiguration{
+					KMSEncryptionContext: map[string]string{
+						"key0": "__Value__",
+					},
+					KMSKey: ptr.String("__KMSKey__"),
 				},
 			},
 		},
@@ -2549,6 +2599,38 @@ func TestCheckResponseSnapshot_UpdateCallAnalyticsCategory(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_UpdateLanguageModel(t *testing.T) {
+	want := &UpdateLanguageModelOutput{
+		ModelName:        ptr.String("__ModelName__"),
+		ModelStatus:      types.ModelStatus("IN_PROGRESS"),
+		LastModifiedTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+	}
+	status, header, body, err := serdeRespReadSnapshot("UpdateLanguageModel.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.UpdateLanguageModel(context.Background(), &UpdateLanguageModelInput{
+		ModelName:         ptr.String("__ModelName__"),
+		DataAccessRoleArn: ptr.String("__DataAccessRoleArn__"),
+		EncryptionConfiguration: &types.EncryptionConfiguration{
+			KMSEncryptionContext: map[string]string{
+				"key0": "__Value__",
+			},
+			KMSKey: ptr.String("__KMSKey__"),
+		},
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "UpdateLanguageModel.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_UpdateMedicalVocabulary(t *testing.T) {
 	want := &UpdateMedicalVocabularyOutput{
 		VocabularyName:   ptr.String("__VocabularyName__"),
@@ -2601,6 +2683,12 @@ func TestCheckResponseSnapshot_UpdateVocabulary(t *testing.T) {
 		},
 		VocabularyFileUri: ptr.String("__VocabularyFileUri__"),
 		DataAccessRoleArn: ptr.String("__DataAccessRoleArn__"),
+		EncryptionConfiguration: &types.EncryptionConfiguration{
+			KMSEncryptionContext: map[string]string{
+				"key0": "__Value__",
+			},
+			KMSKey: ptr.String("__KMSKey__"),
+		},
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -2632,6 +2720,12 @@ func TestCheckResponseSnapshot_UpdateVocabularyFilter(t *testing.T) {
 		},
 		VocabularyFilterFileUri: ptr.String("__VocabularyFilterFileUri__"),
 		DataAccessRoleArn:       ptr.String("__DataAccessRoleArn__"),
+		EncryptionConfiguration: &types.EncryptionConfiguration{
+			KMSEncryptionContext: map[string]string{
+				"key0": "__Value__",
+			},
+			KMSKey: ptr.String("__KMSKey__"),
+		},
 	})
 	if err != nil {
 		t.Fatal(err)

@@ -4,7 +4,9 @@ package costexplorer
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/costexplorer/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/costexplorer/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -36,6 +38,18 @@ type GetSavingsPlanPurchaseRecommendationDetailsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetSavingsPlanPurchaseRecommendationDetailsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetSavingsPlanPurchaseRecommendationDetailsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetSavingsPlanPurchaseRecommendationDetailsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RecommendationDetailId != nil {
+		s.WriteString(schemas.GetSavingsPlanPurchaseRecommendationDetailsRequest_RecommendationDetailId, *v.RecommendationDetailId)
+	}
+}
+
 type GetSavingsPlanPurchaseRecommendationDetailsOutput struct {
 
 	// Contains detailed information about a specific Savings Plan recommendation.
@@ -50,13 +64,40 @@ type GetSavingsPlanPurchaseRecommendationDetailsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetSavingsPlanPurchaseRecommendationDetailsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetSavingsPlanPurchaseRecommendationDetailsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetSavingsPlanPurchaseRecommendationDetailsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RecommendationDetailData != nil {
+		s.WriteStruct(schemas.GetSavingsPlanPurchaseRecommendationDetailsResponse_RecommendationDetailData)
+		v.RecommendationDetailData.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RecommendationDetailId != nil {
+		s.WriteString(schemas.GetSavingsPlanPurchaseRecommendationDetailsResponse_RecommendationDetailId, *v.RecommendationDetailId)
+	}
+}
+func (v *GetSavingsPlanPurchaseRecommendationDetailsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetSavingsPlanPurchaseRecommendationDetailsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetSavingsPlanPurchaseRecommendationDetailsResponse_RecommendationDetailData:
+			v.RecommendationDetailData = &types.RecommendationDetailData{}
+			return v.RecommendationDetailData.Deserialize(d)
+		case schemas.GetSavingsPlanPurchaseRecommendationDetailsResponse_RecommendationDetailId:
+			v.RecommendationDetailId = new(string)
+			return d.ReadString(schemas.GetSavingsPlanPurchaseRecommendationDetailsResponse_RecommendationDetailId, v.RecommendationDetailId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetSavingsPlanPurchaseRecommendationDetailsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetSavingsPlanPurchaseRecommendationDetails{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetSavingsPlanPurchaseRecommendationDetails, schemas.GetSavingsPlanPurchaseRecommendationDetailsRequest, schemas.GetSavingsPlanPurchaseRecommendationDetailsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetSavingsPlanPurchaseRecommendationDetails{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetSavingsPlanPurchaseRecommendationDetails, schemas.GetSavingsPlanPurchaseRecommendationDetailsRequest, schemas.GetSavingsPlanPurchaseRecommendationDetailsResponse), output: &GetSavingsPlanPurchaseRecommendationDetailsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -134,6 +134,30 @@ func TestCheckSnapshot_BatchDeleteThreatModels(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_BatchDisassociateFindingIssue(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.BatchDisassociateFindingIssue(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "BatchDisassociateFindingIssue")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_BatchExportFindings(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.BatchExportFindings(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "BatchExportFindings")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_BatchGetAgentSpaces(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.BatchGetAgentSpaces(context.Background(), nil, func(o *Options) {
@@ -638,6 +662,18 @@ func TestCheckSnapshot_InitiateProviderRegistration(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_ListActorMessages(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListActorMessages(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListActorMessages")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_ListAgentSpaces(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListAgentSpaces(context.Background(), nil, func(o *Options) {
@@ -1082,6 +1118,18 @@ func TestCheckSnapshot_UpdateIntegratedResources(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_UpdateIntegration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateIntegration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateIntegration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_UpdatePentest(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.UpdatePentest(context.Background(), nil, func(o *Options) {
@@ -1230,6 +1278,30 @@ func TestUpdateSnapshot_BatchDeleteThreatModels(t *testing.T) {
 	_, err := svc.BatchDeleteThreatModels(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "BatchDeleteThreatModels")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_BatchDisassociateFindingIssue(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.BatchDisassociateFindingIssue(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "BatchDisassociateFindingIssue")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_BatchExportFindings(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.BatchExportFindings(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "BatchExportFindings")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1741,6 +1813,18 @@ func TestUpdateSnapshot_InitiateProviderRegistration(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_ListActorMessages(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListActorMessages(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListActorMessages")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_ListAgentSpaces(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListAgentSpaces(context.Background(), nil, func(o *Options) {
@@ -2178,6 +2262,18 @@ func TestUpdateSnapshot_UpdateIntegratedResources(t *testing.T) {
 	_, err := svc.UpdateIntegratedResources(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "UpdateIntegratedResources")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateIntegration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateIntegration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateIntegration")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

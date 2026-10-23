@@ -4,7 +4,9 @@ package ssm
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/ssm/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ssm/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -41,6 +43,19 @@ type PutInventoryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutInventoryInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutInventoryRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutInventoryInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InstanceId != nil {
+		s.WriteString(schemas.PutInventoryRequest_InstanceId, *v.InstanceId)
+	}
+	serializeInventoryItemList(s, schemas.PutInventoryRequest_Items, v.Items)
+}
+
 type PutInventoryOutput struct {
 
 	// Information about the request.
@@ -52,13 +67,32 @@ type PutInventoryOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutInventoryOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutInventoryResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutInventoryOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.PutInventoryResult_Message, *v.Message)
+	}
+}
+func (v *PutInventoryOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PutInventoryResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PutInventoryResult_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.PutInventoryResult_Message, v.Message)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPutInventoryMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpPutInventory{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutInventory, schemas.PutInventoryRequest, schemas.PutInventoryResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpPutInventory{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutInventory, schemas.PutInventoryRequest, schemas.PutInventoryResult), output: &PutInventoryOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

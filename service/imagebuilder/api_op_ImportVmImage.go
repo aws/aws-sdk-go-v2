@@ -5,18 +5,21 @@ package imagebuilder
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/imagebuilder/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/imagebuilder/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
-// When you export your virtual machine (VM) from its virtualization environment,
-// that process creates a set of one or more disk container files that act as
-// snapshots of your VM’s environment, settings, and data. The Amazon EC2 API [ImportImage]
-// action uses those files to import your VM and create an AMI. To import using the
-// CLI command, see [import-image]
+// Creates an Image Builder image resource from an Amazon EC2 VM import task. The
+// response returns as soon as Image Builder creates the image resource in the
+// PENDING state. Image Builder then monitors the import task asynchronously. When
+// the task completes, Image Builder records the AMI that it produced as the new
+// image's output resource and marks the image AVAILABLE . You can then use the
+// imported image as the base image for your recipes.
 //
-// You can reference the task ID from the VM import to pull in the AMI that the
-// import created as the base image for your Image Builder recipe.
+// To create the VM import task, use the Amazon EC2 API [ImportImage] operation, or the [import-image] CLI
+// command.
 //
 // [ImportImage]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_ImportImage.html
 // [import-image]: https://docs.aws.amazon.com/cli/latest/reference/ec2/import-image.html
@@ -37,15 +40,21 @@ func (c *Client) ImportVmImage(ctx context.Context, params *ImportVmImageInput, 
 
 type ImportVmImageInput struct {
 
-	// Unique, case-sensitive identifier you provide to ensure idempotency of the
-	// request. For more information, see [Ensuring idempotency]in the Amazon EC2 API Reference.
+	// A unique, case-sensitive identifier you provide to ensure that the operation
+	// runs no more than one time. If you retry a request with the same client token,
+	// Image Builder returns the original response without running the operation again.
+	// For more information, see [Ensuring idempotency]in the Amazon EC2 API Reference.
 	//
 	// [Ensuring idempotency]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
 	//
 	// This member is required.
 	ClientToken *string
 
-	// The name of the base image that is created by the import process.
+	// The name of the base image that is created by the import process. Image Builder
+	// generates the image ARN from a normalized form of the name, so names that differ
+	// only in case, spaces, or underscores count as the same name. If an image with
+	// the same name and semantic version already exists in your account in the same
+	// Amazon Web Services Region, the import creates a new build version for it.
 	//
 	// This member is required.
 	Name *string
@@ -61,9 +70,9 @@ type ImportVmImageInput struct {
 	// The semantic version has four nodes: ../. You can assign values for the first
 	// three, and can filter on all of them.
 	//
-	// Assignment: For the first three nodes you can assign any positive integer
-	// value, including zero, with an upper limit of 2^30-1, or 1073741823 for each
-	// node. Image Builder automatically assigns the build number to the fourth node.
+	// Assignment: For the first three nodes, you can assign any positive integer
+	// value, including zero. The upper limit is 2^30-1, or 1073741823, for each node.
+	// Image Builder automatically assigns the build number to the fourth node.
 	//
 	// Patterns: You can use any numeric pattern that adheres to the assignment
 	// requirements for the nodes that you can assign. For example, you might choose a
@@ -73,8 +82,9 @@ type ImportVmImageInput struct {
 	SemanticVersion *string
 
 	// The importTaskId (API) or ImportTaskId (CLI) from the Amazon EC2 VM import
-	// process. Image Builder retrieves information from the import process to pull in
-	// the AMI that is created from the VM source as the base image for your recipe.
+	// process. The import task doesn't need to be complete when you call ImportVmImage
+	// - Image Builder monitors the task and finishes creating the image when the task
+	// completes.
 	//
 	// This member is required.
 	VmImportTaskId *string
@@ -82,7 +92,9 @@ type ImportVmImageInput struct {
 	// The description for the base image that is created by the import process.
 	Description *string
 
-	// Define logging configuration for the image build process.
+	// The CloudWatch Logs log group where Image Builder sends the import logs. For
+	// ImportVmImage, the log group name must be within the /aws/imagebuilder/
+	// namespace.
 	LoggingConfiguration *types.ImageLoggingConfiguration
 
 	// The operating system version for the imported VM.
@@ -94,13 +106,50 @@ type ImportVmImageInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ImportVmImageInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ImportVmImageRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ImportVmImageInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.ImportVmImageRequest_clientToken, *v.ClientToken)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.ImportVmImageRequest_description, *v.Description)
+	}
+	if v.LoggingConfiguration != nil {
+		s.WriteStruct(schemas.ImportVmImageRequest_loggingConfiguration)
+		v.LoggingConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.ImportVmImageRequest_name, *v.Name)
+	}
+	if v.OsVersion != nil {
+		s.WriteString(schemas.ImportVmImageRequest_osVersion, *v.OsVersion)
+	}
+	if v.Platform != "" {
+		s.WriteString(schemas.ImportVmImageRequest_platform, string(v.Platform))
+	}
+	if v.SemanticVersion != nil {
+		s.WriteString(schemas.ImportVmImageRequest_semanticVersion, *v.SemanticVersion)
+	}
+	serializeTagMap(s, schemas.ImportVmImageRequest_tags, v.Tags)
+	if v.VmImportTaskId != nil {
+		s.WriteString(schemas.ImportVmImageRequest_vmImportTaskId, *v.VmImportTaskId)
+	}
+}
+
 type ImportVmImageOutput struct {
 
 	// The client token that uniquely identifies the request.
 	ClientToken *string
 
-	// The Amazon Resource Name (ARN) of the AMI that was created during the VM import
-	// process. This AMI is used as the base image for the recipe that imported the VM.
+	// The Amazon Resource Name (ARN) of the Image Builder image resource that this
+	// request created. Image Builder records the AMI from the VM import task in the
+	// image's output resources after the task completes.
 	ImageArn *string
 
 	// The request ID that uniquely identifies this request.
@@ -112,13 +161,44 @@ type ImportVmImageOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ImportVmImageOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ImportVmImageResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ImportVmImageOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.ImportVmImageResponse_clientToken, *v.ClientToken)
+	}
+	if v.ImageArn != nil {
+		s.WriteString(schemas.ImportVmImageResponse_imageArn, *v.ImageArn)
+	}
+	if v.RequestId != nil {
+		s.WriteString(schemas.ImportVmImageResponse_requestId, *v.RequestId)
+	}
+}
+func (v *ImportVmImageOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ImportVmImageResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ImportVmImageResponse_clientToken:
+			v.ClientToken = new(string)
+			return d.ReadString(schemas.ImportVmImageResponse_clientToken, v.ClientToken)
+		case schemas.ImportVmImageResponse_imageArn:
+			v.ImageArn = new(string)
+			return d.ReadString(schemas.ImportVmImageResponse_imageArn, v.ImageArn)
+		case schemas.ImportVmImageResponse_requestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.ImportVmImageResponse_requestId, v.RequestId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationImportVmImageMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpImportVmImage{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ImportVmImage, schemas.ImportVmImageRequest, schemas.ImportVmImageResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpImportVmImage{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ImportVmImage, schemas.ImportVmImageRequest, schemas.ImportVmImageResponse), output: &ImportVmImageOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

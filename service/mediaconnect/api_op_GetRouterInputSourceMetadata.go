@@ -4,7 +4,9 @@ package mediaconnect
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/mediaconnect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/mediaconnect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -35,6 +37,18 @@ type GetRouterInputSourceMetadataInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetRouterInputSourceMetadataInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetRouterInputSourceMetadataRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetRouterInputSourceMetadataInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.GetRouterInputSourceMetadataRequest_Arn, *v.Arn)
+	}
+}
+
 type GetRouterInputSourceMetadataOutput struct {
 
 	// The Amazon Resource Name (ARN) of the router input.
@@ -59,13 +73,46 @@ type GetRouterInputSourceMetadataOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetRouterInputSourceMetadataOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetRouterInputSourceMetadataResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetRouterInputSourceMetadataOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.GetRouterInputSourceMetadataResponse_Arn, *v.Arn)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.GetRouterInputSourceMetadataResponse_Name, *v.Name)
+	}
+	if v.SourceMetadataDetails != nil {
+		s.WriteStruct(schemas.GetRouterInputSourceMetadataResponse_SourceMetadataDetails)
+		v.SourceMetadataDetails.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetRouterInputSourceMetadataOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetRouterInputSourceMetadataResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetRouterInputSourceMetadataResponse_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.GetRouterInputSourceMetadataResponse_Arn, v.Arn)
+		case schemas.GetRouterInputSourceMetadataResponse_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.GetRouterInputSourceMetadataResponse_Name, v.Name)
+		case schemas.GetRouterInputSourceMetadataResponse_SourceMetadataDetails:
+			v.SourceMetadataDetails = &types.RouterInputSourceMetadataDetails{}
+			return v.SourceMetadataDetails.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetRouterInputSourceMetadataMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetRouterInputSourceMetadata{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetRouterInputSourceMetadata, schemas.GetRouterInputSourceMetadataRequest, schemas.GetRouterInputSourceMetadataResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetRouterInputSourceMetadata{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetRouterInputSourceMetadata, schemas.GetRouterInputSourceMetadataRequest, schemas.GetRouterInputSourceMetadataResponse), output: &GetRouterInputSourceMetadataOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

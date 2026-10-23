@@ -4,7 +4,9 @@ package bedrockagentcore
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcore/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcore/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -58,6 +60,21 @@ type EvaluateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *EvaluateInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EvaluateRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EvaluateInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeEvaluationInput(s, schemas.EvaluateRequest_evaluationInput, v.EvaluationInput)
+	serializeEvaluationReferenceInputs(s, schemas.EvaluateRequest_evaluationReferenceInputs, v.EvaluationReferenceInputs)
+	serializeEvaluationTarget(s, schemas.EvaluateRequest_evaluationTarget, v.EvaluationTarget)
+	if v.EvaluatorId != nil {
+		s.WriteString(schemas.EvaluateRequest_evaluatorId, *v.EvaluatorId)
+	}
+}
+
 type EvaluateOutput struct {
 
 	//  The detailed evaluation results containing scores, explanations, and metadata.
@@ -74,13 +91,29 @@ type EvaluateOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *EvaluateOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EvaluateResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EvaluateOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeEvaluationResults(s, schemas.EvaluateResponse_evaluationResults, v.EvaluationResults)
+}
+func (v *EvaluateOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EvaluateResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EvaluateResponse_evaluationResults:
+			return deserializeEvaluationResults(d, schemas.EvaluateResponse_evaluationResults, &v.EvaluationResults)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationEvaluateMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpEvaluate{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.Evaluate, schemas.EvaluateRequest, schemas.EvaluateResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpEvaluate{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.Evaluate, schemas.EvaluateRequest, schemas.EvaluateResponse), output: &EvaluateOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

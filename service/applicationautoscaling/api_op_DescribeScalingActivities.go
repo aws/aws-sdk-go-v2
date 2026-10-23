@@ -5,7 +5,9 @@ package applicationautoscaling
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/applicationautoscaling/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/applicationautoscaling/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -223,6 +225,33 @@ type DescribeScalingActivitiesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeScalingActivitiesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeScalingActivitiesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeScalingActivitiesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IncludeNotScaledActivities != nil {
+		s.WriteBool(schemas.DescribeScalingActivitiesRequest_IncludeNotScaledActivities, *v.IncludeNotScaledActivities)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.DescribeScalingActivitiesRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeScalingActivitiesRequest_NextToken, *v.NextToken)
+	}
+	if v.ResourceId != nil {
+		s.WriteString(schemas.DescribeScalingActivitiesRequest_ResourceId, *v.ResourceId)
+	}
+	if v.ScalableDimension != "" {
+		s.WriteString(schemas.DescribeScalingActivitiesRequest_ScalableDimension, string(v.ScalableDimension))
+	}
+	if v.ServiceNamespace != "" {
+		s.WriteString(schemas.DescribeScalingActivitiesRequest_ServiceNamespace, string(v.ServiceNamespace))
+	}
+}
+
 type DescribeScalingActivitiesOutput struct {
 
 	// The token required to get the next set of results. This value is null if there
@@ -238,13 +267,35 @@ type DescribeScalingActivitiesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeScalingActivitiesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeScalingActivitiesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeScalingActivitiesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeScalingActivitiesResponse_NextToken, *v.NextToken)
+	}
+	serializeScalingActivities(s, schemas.DescribeScalingActivitiesResponse_ScalingActivities, v.ScalingActivities)
+}
+func (v *DescribeScalingActivitiesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeScalingActivitiesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeScalingActivitiesResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.DescribeScalingActivitiesResponse_NextToken, v.NextToken)
+		case schemas.DescribeScalingActivitiesResponse_ScalingActivities:
+			return deserializeScalingActivities(d, schemas.DescribeScalingActivitiesResponse_ScalingActivities, &v.ScalingActivities)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeScalingActivitiesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeScalingActivities{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeScalingActivities, schemas.DescribeScalingActivitiesRequest, schemas.DescribeScalingActivitiesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeScalingActivities{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeScalingActivities, schemas.DescribeScalingActivitiesRequest, schemas.DescribeScalingActivitiesResponse), output: &DescribeScalingActivitiesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

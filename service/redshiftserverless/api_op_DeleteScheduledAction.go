@@ -4,7 +4,9 @@ package redshiftserverless
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/redshiftserverless/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/redshiftserverless/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -34,6 +36,18 @@ type DeleteScheduledActionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteScheduledActionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteScheduledActionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteScheduledActionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ScheduledActionName != nil {
+		s.WriteString(schemas.DeleteScheduledActionRequest_scheduledActionName, *v.ScheduledActionName)
+	}
+}
+
 type DeleteScheduledActionOutput struct {
 
 	// The deleted scheduled action object.
@@ -45,13 +59,34 @@ type DeleteScheduledActionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteScheduledActionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteScheduledActionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteScheduledActionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ScheduledAction != nil {
+		s.WriteStruct(schemas.DeleteScheduledActionResponse_scheduledAction)
+		v.ScheduledAction.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DeleteScheduledActionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteScheduledActionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteScheduledActionResponse_scheduledAction:
+			v.ScheduledAction = &types.ScheduledActionResponse{}
+			return v.ScheduledAction.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteScheduledActionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteScheduledAction{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteScheduledAction, schemas.DeleteScheduledActionRequest, schemas.DeleteScheduledActionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeleteScheduledAction{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteScheduledAction, schemas.DeleteScheduledActionRequest, schemas.DeleteScheduledActionResponse), output: &DeleteScheduledActionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

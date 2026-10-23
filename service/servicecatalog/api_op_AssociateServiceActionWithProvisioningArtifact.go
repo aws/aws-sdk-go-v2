@@ -5,6 +5,8 @@ package servicecatalog
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/servicecatalog/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -56,6 +58,30 @@ type AssociateServiceActionWithProvisioningArtifactInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssociateServiceActionWithProvisioningArtifactInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssociateServiceActionWithProvisioningArtifactInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssociateServiceActionWithProvisioningArtifactInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AcceptLanguage != nil {
+		s.WriteString(schemas.AssociateServiceActionWithProvisioningArtifactInput_AcceptLanguage, *v.AcceptLanguage)
+	}
+	if v.IdempotencyToken != nil {
+		s.WriteString(schemas.AssociateServiceActionWithProvisioningArtifactInput_IdempotencyToken, *v.IdempotencyToken)
+	}
+	if v.ProductId != nil {
+		s.WriteString(schemas.AssociateServiceActionWithProvisioningArtifactInput_ProductId, *v.ProductId)
+	}
+	if v.ProvisioningArtifactId != nil {
+		s.WriteString(schemas.AssociateServiceActionWithProvisioningArtifactInput_ProvisioningArtifactId, *v.ProvisioningArtifactId)
+	}
+	if v.ServiceActionId != nil {
+		s.WriteString(schemas.AssociateServiceActionWithProvisioningArtifactInput_ServiceActionId, *v.ServiceActionId)
+	}
+}
+
 type AssociateServiceActionWithProvisioningArtifactOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -63,13 +89,26 @@ type AssociateServiceActionWithProvisioningArtifactOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssociateServiceActionWithProvisioningArtifactOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssociateServiceActionWithProvisioningArtifactOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssociateServiceActionWithProvisioningArtifactOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *AssociateServiceActionWithProvisioningArtifactOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AssociateServiceActionWithProvisioningArtifactOutput, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationAssociateServiceActionWithProvisioningArtifactMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpAssociateServiceActionWithProvisioningArtifact{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociateServiceActionWithProvisioningArtifact, schemas.AssociateServiceActionWithProvisioningArtifactInput, schemas.AssociateServiceActionWithProvisioningArtifactOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpAssociateServiceActionWithProvisioningArtifact{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociateServiceActionWithProvisioningArtifact, schemas.AssociateServiceActionWithProvisioningArtifactInput, schemas.AssociateServiceActionWithProvisioningArtifactOutput), output: &AssociateServiceActionWithProvisioningArtifactOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

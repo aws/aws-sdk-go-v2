@@ -4,7 +4,9 @@ package odb
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/odb/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/odb/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -34,6 +36,18 @@ type GetExascaleDbStorageVaultInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetExascaleDbStorageVaultInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetExascaleDbStorageVaultInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetExascaleDbStorageVaultInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ExascaleDbStorageVaultId != nil {
+		s.WriteString(schemas.GetExascaleDbStorageVaultInput_exascaleDbStorageVaultId, *v.ExascaleDbStorageVaultId)
+	}
+}
+
 type GetExascaleDbStorageVaultOutput struct {
 
 	// The Exascale storage vault.
@@ -47,13 +61,34 @@ type GetExascaleDbStorageVaultOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetExascaleDbStorageVaultOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetExascaleDbStorageVaultOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetExascaleDbStorageVaultOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ExascaleDbStorageVault != nil {
+		s.WriteStruct(schemas.GetExascaleDbStorageVaultOutput_exascaleDbStorageVault)
+		v.ExascaleDbStorageVault.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetExascaleDbStorageVaultOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetExascaleDbStorageVaultOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetExascaleDbStorageVaultOutput_exascaleDbStorageVault:
+			v.ExascaleDbStorageVault = &types.ExascaleDbStorageVault{}
+			return v.ExascaleDbStorageVault.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetExascaleDbStorageVaultMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpGetExascaleDbStorageVault{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetExascaleDbStorageVault, schemas.GetExascaleDbStorageVaultInput, schemas.GetExascaleDbStorageVaultOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpGetExascaleDbStorageVault{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetExascaleDbStorageVault, schemas.GetExascaleDbStorageVaultInput, schemas.GetExascaleDbStorageVaultOutput), output: &GetExascaleDbStorageVaultOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

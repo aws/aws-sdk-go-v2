@@ -4,7 +4,9 @@ package quicksight
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/quicksight/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/quicksight/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -53,6 +55,32 @@ type CreateCustomPermissionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateCustomPermissionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateCustomPermissionsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateCustomPermissionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AwsAccountId != nil {
+		s.WriteString(schemas.CreateCustomPermissionsRequest_AwsAccountId, *v.AwsAccountId)
+	}
+	if v.Capabilities != nil {
+		s.WriteStruct(schemas.CreateCustomPermissionsRequest_Capabilities)
+		v.Capabilities.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CustomPermissionsName != nil {
+		s.WriteString(schemas.CreateCustomPermissionsRequest_CustomPermissionsName, *v.CustomPermissionsName)
+	}
+	if v.Governance != nil {
+		s.WriteStruct(schemas.CreateCustomPermissionsRequest_Governance)
+		v.Governance.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeTagList(s, schemas.CreateCustomPermissionsRequest_Tags, v.Tags)
+}
+
 type CreateCustomPermissionsOutput struct {
 
 	// The Amazon Resource Name (ARN) of the custom permissions profile.
@@ -70,13 +98,43 @@ type CreateCustomPermissionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateCustomPermissionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateCustomPermissionsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateCustomPermissionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.CreateCustomPermissionsResponse_Arn, *v.Arn)
+	}
+	if v.RequestId != nil {
+		s.WriteString(schemas.CreateCustomPermissionsResponse_RequestId, *v.RequestId)
+	}
+	if v.Status != 0 {
+		s.WriteInt32(schemas.CreateCustomPermissionsResponse_Status, v.Status)
+	}
+}
+func (v *CreateCustomPermissionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateCustomPermissionsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateCustomPermissionsResponse_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.CreateCustomPermissionsResponse_Arn, v.Arn)
+		case schemas.CreateCustomPermissionsResponse_RequestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.CreateCustomPermissionsResponse_RequestId, v.RequestId)
+		case schemas.CreateCustomPermissionsResponse_Status:
+			return d.ReadInt32(schemas.CreateCustomPermissionsResponse_Status, &v.Status)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateCustomPermissionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateCustomPermissions{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateCustomPermissions, schemas.CreateCustomPermissionsRequest, schemas.CreateCustomPermissionsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateCustomPermissions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateCustomPermissions, schemas.CreateCustomPermissionsRequest, schemas.CreateCustomPermissionsResponse), output: &CreateCustomPermissionsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

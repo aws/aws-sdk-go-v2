@@ -4,6 +4,8 @@ package apigatewayv2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/apigatewayv2/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -38,6 +40,21 @@ type DeleteProductPageInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteProductPageInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteProductPageRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteProductPageInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PortalProductId != nil {
+		s.WriteString(schemas.DeleteProductPageRequest_PortalProductId, *v.PortalProductId)
+	}
+	if v.ProductPageId != nil {
+		s.WriteString(schemas.DeleteProductPageRequest_ProductPageId, *v.ProductPageId)
+	}
+}
+
 type DeleteProductPageOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -45,13 +62,26 @@ type DeleteProductPageOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteProductPageOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteProductPageOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteProductPageOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteProductPageMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteProductPage{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteProductPage, schemas.DeleteProductPageRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteProductPage{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteProductPage, schemas.DeleteProductPageRequest, nil), output: &DeleteProductPageOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

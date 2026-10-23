@@ -914,6 +914,11 @@ func validateExecutionBlockConfiguration(v types.ExecutionBlockConfiguration) er
 			invalidParams.AddNested("[route53HealthCheckConfig]", err.(smithy.InvalidParamsError))
 		}
 
+	case *types.ExecutionBlockConfigurationMemberSsmSendCommandConfig:
+		if err := validateSsmSendCommandConfiguration(&uv.Value); err != nil {
+			invalidParams.AddNested("[ssmSendCommandConfig]", err.(smithy.InvalidParamsError))
+		}
+
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1173,6 +1178,24 @@ func validateRegionEventSourceMappingMap(v map[string]types.EventSourceMapping) 
 	}
 }
 
+func validateRegionSsmDocumentMap(v map[string]types.SsmDocumentConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RegionSsmDocumentMap"}
+	for key := range v {
+		value := v[key]
+		if err := validateSsmDocumentConfig(&value); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%q]", key), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateRegionSwitchPlanConfiguration(v *types.RegionSwitchPlanConfiguration) error {
 	if v == nil {
 		return nil
@@ -1198,6 +1221,85 @@ func validateRoute53HealthCheckConfiguration(v *types.Route53HealthCheckConfigur
 	}
 	if v.RecordName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RecordName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateSsmDocumentConfig(v *types.SsmDocumentConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SsmDocumentConfig"}
+	if v.DocumentArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DocumentArn"))
+	}
+	if v.Targets == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Targets"))
+	} else if v.Targets != nil {
+		if err := validateSsmTargetList(v.Targets); err != nil {
+			invalidParams.AddNested("Targets", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateSsmSendCommandConfiguration(v *types.SsmSendCommandConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SsmSendCommandConfiguration"}
+	if v.RegionDocuments == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RegionDocuments"))
+	} else if v.RegionDocuments != nil {
+		if err := validateRegionSsmDocumentMap(v.RegionDocuments); err != nil {
+			invalidParams.AddNested("RegionDocuments", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.RetryIntervalMinutes == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RetryIntervalMinutes"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateSsmTarget(v *types.SsmTarget) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SsmTarget"}
+	if v.Key == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Key"))
+	}
+	if v.Values == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Values"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateSsmTargetList(v []types.SsmTarget) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SsmTargetList"}
+	for i := range v {
+		if err := validateSsmTarget(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

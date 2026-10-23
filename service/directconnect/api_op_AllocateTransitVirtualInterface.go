@@ -4,7 +4,9 @@ package directconnect
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/directconnect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/directconnect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -54,6 +56,26 @@ type AllocateTransitVirtualInterfaceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AllocateTransitVirtualInterfaceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AllocateTransitVirtualInterfaceRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AllocateTransitVirtualInterfaceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConnectionId != nil {
+		s.WriteString(schemas.AllocateTransitVirtualInterfaceRequest_connectionId, *v.ConnectionId)
+	}
+	if v.NewTransitVirtualInterfaceAllocation != nil {
+		s.WriteStruct(schemas.AllocateTransitVirtualInterfaceRequest_newTransitVirtualInterfaceAllocation)
+		v.NewTransitVirtualInterfaceAllocation.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.OwnerAccount != nil {
+		s.WriteString(schemas.AllocateTransitVirtualInterfaceRequest_ownerAccount, *v.OwnerAccount)
+	}
+}
+
 type AllocateTransitVirtualInterfaceOutput struct {
 
 	// Information about the transit virtual interface.
@@ -65,13 +87,34 @@ type AllocateTransitVirtualInterfaceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AllocateTransitVirtualInterfaceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AllocateTransitVirtualInterfaceResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AllocateTransitVirtualInterfaceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.VirtualInterface != nil {
+		s.WriteStruct(schemas.AllocateTransitVirtualInterfaceResult_virtualInterface)
+		v.VirtualInterface.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *AllocateTransitVirtualInterfaceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AllocateTransitVirtualInterfaceResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AllocateTransitVirtualInterfaceResult_virtualInterface:
+			v.VirtualInterface = &types.VirtualInterface{}
+			return v.VirtualInterface.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationAllocateTransitVirtualInterfaceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpAllocateTransitVirtualInterface{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AllocateTransitVirtualInterface, schemas.AllocateTransitVirtualInterfaceRequest, schemas.AllocateTransitVirtualInterfaceResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpAllocateTransitVirtualInterface{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AllocateTransitVirtualInterface, schemas.AllocateTransitVirtualInterfaceRequest, schemas.AllocateTransitVirtualInterfaceResult), output: &AllocateTransitVirtualInterfaceOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

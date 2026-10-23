@@ -4,6 +4,8 @@ package identitystore
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/identitystore/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -27,6 +29,10 @@ type CreateGroupInput struct {
 
 	// The globally unique identifier for the identity store.
 	//
+	// You can specify the identity store by ID or by Amazon Resource Name (ARN). For
+	// example, identity store ID d-1234567890 or identity store ARN
+	// arn:aws:identitystore::111122223333:identitystore/d-1234567890 .
+	//
 	// This member is required.
 	IdentityStoreId *string
 
@@ -41,7 +47,32 @@ type CreateGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateGroupInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateGroupRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.CreateGroupRequest_Description, *v.Description)
+	}
+	if v.DisplayName != nil {
+		s.WriteString(schemas.CreateGroupRequest_DisplayName, *v.DisplayName)
+	}
+	if v.IdentityStoreId != nil {
+		s.WriteString(schemas.CreateGroupRequest_IdentityStoreId, *v.IdentityStoreId)
+	}
+}
+
 type CreateGroupOutput struct {
+
+	// The Amazon Resource Name (ARN) of the newly created group in the identity
+	// store. For example,
+	// arn:aws:identitystore:::group/a1b2c3d4-5678-90ab-cdef-EXAMPLE22222 .
+	//
+	// This member is required.
+	GroupArn *string
 
 	// The identifier of the newly created group in the identity store.
 	//
@@ -53,19 +84,61 @@ type CreateGroupOutput struct {
 	// This member is required.
 	IdentityStoreId *string
 
+	// The revision of the newly created group in the identity store.
+	//
+	// This member is required.
+	Revision *string
+
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 
 	noSmithyDocumentSerde
 }
 
+func (v *CreateGroupOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateGroupResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateGroupOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GroupArn != nil {
+		s.WriteString(schemas.CreateGroupResponse_GroupArn, *v.GroupArn)
+	}
+	if v.GroupId != nil {
+		s.WriteString(schemas.CreateGroupResponse_GroupId, *v.GroupId)
+	}
+	if v.IdentityStoreId != nil {
+		s.WriteString(schemas.CreateGroupResponse_IdentityStoreId, *v.IdentityStoreId)
+	}
+	if v.Revision != nil {
+		s.WriteString(schemas.CreateGroupResponse_Revision, *v.Revision)
+	}
+}
+func (v *CreateGroupOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateGroupResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateGroupResponse_GroupArn:
+			v.GroupArn = new(string)
+			return d.ReadString(schemas.CreateGroupResponse_GroupArn, v.GroupArn)
+		case schemas.CreateGroupResponse_GroupId:
+			v.GroupId = new(string)
+			return d.ReadString(schemas.CreateGroupResponse_GroupId, v.GroupId)
+		case schemas.CreateGroupResponse_IdentityStoreId:
+			v.IdentityStoreId = new(string)
+			return d.ReadString(schemas.CreateGroupResponse_IdentityStoreId, v.IdentityStoreId)
+		case schemas.CreateGroupResponse_Revision:
+			v.Revision = new(string)
+			return d.ReadString(schemas.CreateGroupResponse_Revision, v.Revision)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateGroup, schemas.CreateGroupRequest, schemas.CreateGroupResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateGroup, schemas.CreateGroupRequest, schemas.CreateGroupResponse), output: &CreateGroupOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

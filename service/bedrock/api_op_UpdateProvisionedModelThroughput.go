@@ -4,6 +4,8 @@ package bedrock
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/bedrock/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -53,6 +55,24 @@ type UpdateProvisionedModelThroughputInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateProvisionedModelThroughputInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateProvisionedModelThroughputRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateProvisionedModelThroughputInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DesiredModelId != nil {
+		s.WriteString(schemas.UpdateProvisionedModelThroughputRequest_desiredModelId, *v.DesiredModelId)
+	}
+	if v.DesiredProvisionedModelName != nil {
+		s.WriteString(schemas.UpdateProvisionedModelThroughputRequest_desiredProvisionedModelName, *v.DesiredProvisionedModelName)
+	}
+	if v.ProvisionedModelId != nil {
+		s.WriteString(schemas.UpdateProvisionedModelThroughputRequest_provisionedModelId, *v.ProvisionedModelId)
+	}
+}
+
 type UpdateProvisionedModelThroughputOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -60,13 +80,26 @@ type UpdateProvisionedModelThroughputOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateProvisionedModelThroughputOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateProvisionedModelThroughputResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateProvisionedModelThroughputOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *UpdateProvisionedModelThroughputOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateProvisionedModelThroughputResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateProvisionedModelThroughputMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateProvisionedModelThroughput{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateProvisionedModelThroughput, schemas.UpdateProvisionedModelThroughputRequest, schemas.UpdateProvisionedModelThroughputResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateProvisionedModelThroughput{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateProvisionedModelThroughput, schemas.UpdateProvisionedModelThroughputRequest, schemas.UpdateProvisionedModelThroughputResponse), output: &UpdateProvisionedModelThroughputOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

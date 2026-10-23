@@ -4,7 +4,9 @@ package glue
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/glue/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/glue/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -40,6 +42,24 @@ type GetBlueprintInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetBlueprintInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetBlueprintRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetBlueprintInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IncludeBlueprint != nil {
+		s.WriteBool(schemas.GetBlueprintRequest_IncludeBlueprint, *v.IncludeBlueprint)
+	}
+	if v.IncludeParameterSpec != nil {
+		s.WriteBool(schemas.GetBlueprintRequest_IncludeParameterSpec, *v.IncludeParameterSpec)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.GetBlueprintRequest_Name, *v.Name)
+	}
+}
+
 type GetBlueprintOutput struct {
 
 	// Returns a Blueprint object.
@@ -51,13 +71,34 @@ type GetBlueprintOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetBlueprintOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetBlueprintResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetBlueprintOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Blueprint != nil {
+		s.WriteStruct(schemas.GetBlueprintResponse_Blueprint)
+		v.Blueprint.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetBlueprintOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetBlueprintResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetBlueprintResponse_Blueprint:
+			v.Blueprint = &types.Blueprint{}
+			return v.Blueprint.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetBlueprintMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetBlueprint{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetBlueprint, schemas.GetBlueprintRequest, schemas.GetBlueprintResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetBlueprint{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetBlueprint, schemas.GetBlueprintRequest, schemas.GetBlueprintResponse), output: &GetBlueprintOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

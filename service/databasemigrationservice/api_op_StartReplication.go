@@ -4,7 +4,9 @@ package databasemigrationservice
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/databasemigrationservice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/databasemigrationservice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -105,6 +107,33 @@ type StartReplicationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartReplicationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartReplicationMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartReplicationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CdcStartPosition != nil {
+		s.WriteString(schemas.StartReplicationMessage_CdcStartPosition, *v.CdcStartPosition)
+	}
+	if v.CdcStartTime != nil {
+		s.WriteTime(schemas.StartReplicationMessage_CdcStartTime, *v.CdcStartTime)
+	}
+	if v.CdcStopPosition != nil {
+		s.WriteString(schemas.StartReplicationMessage_CdcStopPosition, *v.CdcStopPosition)
+	}
+	if v.PremigrationAssessmentSettings != nil {
+		s.WriteString(schemas.StartReplicationMessage_PremigrationAssessmentSettings, *v.PremigrationAssessmentSettings)
+	}
+	if v.ReplicationConfigArn != nil {
+		s.WriteString(schemas.StartReplicationMessage_ReplicationConfigArn, *v.ReplicationConfigArn)
+	}
+	if v.StartReplicationType != nil {
+		s.WriteString(schemas.StartReplicationMessage_StartReplicationType, *v.StartReplicationType)
+	}
+}
+
 type StartReplicationOutput struct {
 
 	// The replication that DMS started.
@@ -116,13 +145,34 @@ type StartReplicationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartReplicationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartReplicationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartReplicationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Replication != nil {
+		s.WriteStruct(schemas.StartReplicationResponse_Replication)
+		v.Replication.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *StartReplicationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartReplicationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartReplicationResponse_Replication:
+			v.Replication = &types.Replication{}
+			return v.Replication.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartReplicationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStartReplication{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartReplication, schemas.StartReplicationMessage, schemas.StartReplicationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpStartReplication{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartReplication, schemas.StartReplicationMessage, schemas.StartReplicationResponse), output: &StartReplicationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -210,6 +210,12 @@ func (m *deserializeOpEventStreamStartConversation) HandleDeserialize(
 			return out, md, fmt.Errorf("serialize initial request: %w", err)
 		}
 	}
+	if m.options.Protocol.HasInitialEventMessage() {
+		if err = m.options.Protocol.DeserializeInitialResponse(schemas.StartConversationResponse, resp.Body, output); err != nil {
+			_ = resp.Body.Close()
+			return out, md, fmt.Errorf("deserialize initial response: %w", err)
+		}
+	}
 	eventReader := newStartConversationResponseEventStreamReader(
 		smithyhttp.NewEventStreamReader(m.options.Protocol, schemas.StartConversationResponseEventStream, TypeRegistry, resp.Body),
 	)
@@ -218,11 +224,6 @@ func (m *deserializeOpEventStreamStartConversation) HandleDeserialize(
 			_ = eventReader.Close()
 		}
 	}()
-	if m.options.Protocol.HasInitialEventMessage() {
-		if err = m.options.Protocol.DeserializeInitialResponse(schemas.StartConversationResponse, resp.Body, output); err != nil {
-			return out, md, fmt.Errorf("deserialize initial response: %w", err)
-		}
-	}
 
 	output.eventStream = NewStartConversationEventStream(func(stream *StartConversationEventStream) {
 		stream.Writer = eventWriter

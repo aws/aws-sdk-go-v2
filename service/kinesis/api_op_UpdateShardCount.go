@@ -4,7 +4,9 @@ package kinesis
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/kinesis/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/kinesis/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"github.com/aws/smithy-go/ptr"
 )
@@ -109,6 +111,29 @@ type UpdateShardCountInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateShardCountInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateShardCountInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateShardCountInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ScalingType != "" {
+		s.WriteString(schemas.UpdateShardCountInput_ScalingType, string(v.ScalingType))
+	}
+	if v.StreamARN != nil {
+		s.WriteString(schemas.UpdateShardCountInput_StreamARN, *v.StreamARN)
+	}
+	if v.StreamId != nil {
+		s.WriteString(schemas.UpdateShardCountInput_StreamId, *v.StreamId)
+	}
+	if v.StreamName != nil {
+		s.WriteString(schemas.UpdateShardCountInput_StreamName, *v.StreamName)
+	}
+	if v.TargetShardCount != nil {
+		s.WriteInt32(schemas.UpdateShardCountInput_TargetShardCount, *v.TargetShardCount)
+	}
+}
 func (in *UpdateShardCountInput) bindEndpointParams(p *EndpointParameters) {
 
 	p.StreamARN = in.StreamARN
@@ -136,13 +161,50 @@ type UpdateShardCountOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateShardCountOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateShardCountOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateShardCountOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CurrentShardCount != nil {
+		s.WriteInt32(schemas.UpdateShardCountOutput_CurrentShardCount, *v.CurrentShardCount)
+	}
+	if v.StreamARN != nil {
+		s.WriteString(schemas.UpdateShardCountOutput_StreamARN, *v.StreamARN)
+	}
+	if v.StreamName != nil {
+		s.WriteString(schemas.UpdateShardCountOutput_StreamName, *v.StreamName)
+	}
+	if v.TargetShardCount != nil {
+		s.WriteInt32(schemas.UpdateShardCountOutput_TargetShardCount, *v.TargetShardCount)
+	}
+}
+func (v *UpdateShardCountOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateShardCountOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateShardCountOutput_CurrentShardCount:
+			v.CurrentShardCount = new(int32)
+			return d.ReadInt32(schemas.UpdateShardCountOutput_CurrentShardCount, v.CurrentShardCount)
+		case schemas.UpdateShardCountOutput_StreamARN:
+			v.StreamARN = new(string)
+			return d.ReadString(schemas.UpdateShardCountOutput_StreamARN, v.StreamARN)
+		case schemas.UpdateShardCountOutput_StreamName:
+			v.StreamName = new(string)
+			return d.ReadString(schemas.UpdateShardCountOutput_StreamName, v.StreamName)
+		case schemas.UpdateShardCountOutput_TargetShardCount:
+			v.TargetShardCount = new(int32)
+			return d.ReadInt32(schemas.UpdateShardCountOutput_TargetShardCount, v.TargetShardCount)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateShardCountMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateShardCount{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateShardCount, schemas.UpdateShardCountInput, schemas.UpdateShardCountOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateShardCount{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateShardCount, schemas.UpdateShardCountInput, schemas.UpdateShardCountOutput), output: &UpdateShardCountOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

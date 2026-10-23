@@ -620,6 +620,10 @@ type CatalogItem struct {
 	//  Information about the power draw of an item.
 	PowerKva *float32
 
+	// The rack scaling type supported by the catalog item. Valid values are
+	// SINGLE_RACK and MULTI_RACK .
+	RackScalingType RackScalingType
+
 	//  The supported storage options for the catalog item.
 	SupportedStorage []SupportedStorageEnum
 
@@ -649,6 +653,9 @@ func (v *CatalogItem) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.PowerKva != nil {
 		s.WriteFloat32(schemas.CatalogItem_PowerKva, *v.PowerKva)
 	}
+	if v.RackScalingType != "" {
+		s.WriteString(schemas.CatalogItem_RackScalingType, string(v.RackScalingType))
+	}
 	serializeSupportedStorageList(s, schemas.CatalogItem_SupportedStorage, v.SupportedStorage)
 	serializeSupportedUplinkGbpsListDefinition(s, schemas.CatalogItem_SupportedUplinkGbps, v.SupportedUplinkGbps)
 	if v.WeightLbs != nil {
@@ -673,6 +680,13 @@ func (v *CatalogItem) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.CatalogItem_PowerKva:
 			v.PowerKva = new(float32)
 			return d.ReadFloat32(schemas.CatalogItem_PowerKva, v.PowerKva)
+		case schemas.CatalogItem_RackScalingType:
+			var ev string
+			if err := d.ReadString(schemas.CatalogItem_RackScalingType, &ev); err != nil {
+				return err
+			}
+			v.RackScalingType = RackScalingType(ev)
+			return nil
 		case schemas.CatalogItem_SupportedStorage:
 			return deserializeSupportedStorageList(d, schemas.CatalogItem_SupportedStorage, &v.SupportedStorage)
 		case schemas.CatalogItem_SupportedUplinkGbps:
@@ -1676,6 +1690,10 @@ type Outpost struct {
 	// The description of the Outpost.
 	Description *string
 
+	// The Outpost generation. Valid values are GENERATION_1 for first-generation rack
+	// deployments and GENERATION_2 for second-generation rack deployments.
+	Generation OutpostGeneration
+
 	// The life cycle status.
 	LifeCycleStatus *string
 
@@ -1690,6 +1708,10 @@ type Outpost struct {
 
 	// The Amazon Web Services account ID of the Outpost owner.
 	OwnerId *string
+
+	// The rack scaling type. Valid values are SINGLE_RACK for single-rack Outposts
+	// and MULTI_RACK for multi-rack Outposts that can expand across multiple racks.
+	RackScalingType RackScalingType
 
 	// The Amazon Resource Name (ARN) of the site.
 	SiteArn *string
@@ -1722,6 +1744,9 @@ func (v *Outpost) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Description != nil {
 		s.WriteString(schemas.Outpost_Description, *v.Description)
 	}
+	if v.Generation != "" {
+		s.WriteString(schemas.Outpost_Generation, string(v.Generation))
+	}
 	if v.LifeCycleStatus != nil {
 		s.WriteString(schemas.Outpost_LifeCycleStatus, *v.LifeCycleStatus)
 	}
@@ -1736,6 +1761,9 @@ func (v *Outpost) SerializeMembers(s smithy.ShapeSerializer) {
 	}
 	if v.OwnerId != nil {
 		s.WriteString(schemas.Outpost_OwnerId, *v.OwnerId)
+	}
+	if v.RackScalingType != "" {
+		s.WriteString(schemas.Outpost_RackScalingType, string(v.RackScalingType))
 	}
 	if v.SiteArn != nil {
 		s.WriteString(schemas.Outpost_SiteArn, *v.SiteArn)
@@ -1760,6 +1788,13 @@ func (v *Outpost) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.Outpost_Description:
 			v.Description = new(string)
 			return d.ReadString(schemas.Outpost_Description, v.Description)
+		case schemas.Outpost_Generation:
+			var ev string
+			if err := d.ReadString(schemas.Outpost_Generation, &ev); err != nil {
+				return err
+			}
+			v.Generation = OutpostGeneration(ev)
+			return nil
 		case schemas.Outpost_LifeCycleStatus:
 			v.LifeCycleStatus = new(string)
 			return d.ReadString(schemas.Outpost_LifeCycleStatus, v.LifeCycleStatus)
@@ -1775,6 +1810,13 @@ func (v *Outpost) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.Outpost_OwnerId:
 			v.OwnerId = new(string)
 			return d.ReadString(schemas.Outpost_OwnerId, v.OwnerId)
+		case schemas.Outpost_RackScalingType:
+			var ev string
+			if err := d.ReadString(schemas.Outpost_RackScalingType, &ev); err != nil {
+				return err
+			}
+			v.RackScalingType = RackScalingType(ev)
+			return nil
 		case schemas.Outpost_SiteArn:
 			v.SiteArn = new(string)
 			return d.ReadString(schemas.Outpost_SiteArn, v.SiteArn)
@@ -2129,8 +2171,8 @@ func (v *QuoteCapacity) Deserialize(d smithy.ShapeDeserializer) error {
 // A physical constraint for a quote.
 type QuoteConstraint struct {
 
-	// The type of constraint. Valid values are RACK_MAXIMUM , RACK_MAX_POWER_KVA , and
-	// RACK_MAX_WEIGHT_LBS .
+	// The type of constraint. Valid values are RACK_MAXIMUM , RACK_MAX_POWER_KVA ,
+	// RACK_MAX_WEIGHT_LBS , and RACK_SPACE_CONSTRAINED .
 	QuoteConstraintType QuoteConstraintType
 
 	// The value of the constraint.

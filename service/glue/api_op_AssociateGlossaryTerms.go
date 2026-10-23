@@ -5,6 +5,8 @@ package glue
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/glue/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -52,6 +54,28 @@ type AssociateGlossaryTermsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssociateGlossaryTermsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssociateGlossaryTermsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssociateGlossaryTermsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AssetIdentifier != nil {
+		s.WriteString(schemas.AssociateGlossaryTermsRequest_AssetIdentifier, *v.AssetIdentifier)
+	}
+	if v.ClientToken != nil {
+		s.WriteString(schemas.AssociateGlossaryTermsRequest_ClientToken, *v.ClientToken)
+	}
+	serializeGlossaryTermIdList(s, schemas.AssociateGlossaryTermsRequest_GlossaryTermIdentifiers, v.GlossaryTermIdentifiers)
+	if v.ItemIdentifier != nil {
+		s.WriteString(schemas.AssociateGlossaryTermsRequest_ItemIdentifier, *v.ItemIdentifier)
+	}
+	if v.IterableFormName != nil {
+		s.WriteString(schemas.AssociateGlossaryTermsRequest_IterableFormName, *v.IterableFormName)
+	}
+}
+
 type AssociateGlossaryTermsOutput struct {
 
 	// The unique identifier of the asset.
@@ -72,13 +96,47 @@ type AssociateGlossaryTermsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssociateGlossaryTermsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssociateGlossaryTermsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssociateGlossaryTermsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AssetIdentifier != nil {
+		s.WriteString(schemas.AssociateGlossaryTermsResponse_AssetIdentifier, *v.AssetIdentifier)
+	}
+	serializeGlossaryTermIdList(s, schemas.AssociateGlossaryTermsResponse_GlossaryTerms, v.GlossaryTerms)
+	if v.ItemIdentifier != nil {
+		s.WriteString(schemas.AssociateGlossaryTermsResponse_ItemIdentifier, *v.ItemIdentifier)
+	}
+	if v.IterableFormName != nil {
+		s.WriteString(schemas.AssociateGlossaryTermsResponse_IterableFormName, *v.IterableFormName)
+	}
+}
+func (v *AssociateGlossaryTermsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AssociateGlossaryTermsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AssociateGlossaryTermsResponse_AssetIdentifier:
+			v.AssetIdentifier = new(string)
+			return d.ReadString(schemas.AssociateGlossaryTermsResponse_AssetIdentifier, v.AssetIdentifier)
+		case schemas.AssociateGlossaryTermsResponse_GlossaryTerms:
+			return deserializeGlossaryTermIdList(d, schemas.AssociateGlossaryTermsResponse_GlossaryTerms, &v.GlossaryTerms)
+		case schemas.AssociateGlossaryTermsResponse_ItemIdentifier:
+			v.ItemIdentifier = new(string)
+			return d.ReadString(schemas.AssociateGlossaryTermsResponse_ItemIdentifier, v.ItemIdentifier)
+		case schemas.AssociateGlossaryTermsResponse_IterableFormName:
+			v.IterableFormName = new(string)
+			return d.ReadString(schemas.AssociateGlossaryTermsResponse_IterableFormName, v.IterableFormName)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationAssociateGlossaryTermsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpAssociateGlossaryTerms{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociateGlossaryTerms, schemas.AssociateGlossaryTermsRequest, schemas.AssociateGlossaryTermsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpAssociateGlossaryTerms{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociateGlossaryTerms, schemas.AssociateGlossaryTermsRequest, schemas.AssociateGlossaryTermsResponse), output: &AssociateGlossaryTermsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

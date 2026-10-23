@@ -42,12 +42,18 @@ import (
 //     definitions, excluding the definition to remove. If the container group has only
 //     one support container definition, provide an empty set.
 //
+//   - Remove the total vCPU limit from a game server container group so that its
+//     containers can use up to the instance's available vCPU. Set RemoveAttributes
+//     to TOTAL_VCPU_LIMIT . The game server container must have a Vcpu value,
+//     because a game server container group needs either a total vCPU limit or a game
+//     server Vcpu value.
+//
 // Results:
 //
 // If successful, this operation returns the complete properties of the new
 // container group definition version.
 //
-// If the container group definition version is used in an active fleets, the
+// If the container group definition version is used in an active fleet, the
 // update automatically initiates a new fleet deployment of the new version. You
 // can track a fleet's deployments using [ListFleetDeployments].
 //
@@ -92,6 +98,13 @@ type UpdateContainerGroupDefinitionInput struct {
 	// [Amazon Linux 2 FAQs]: http://aws.amazon.com/amazon-linux-2/faqs/
 	OperatingSystem types.ContainerOperatingSystem
 
+	// If set, this update removes the container group's total vCPU limit, and the
+	// group's containers can use up to the instance's available vCPU. You can't remove
+	// the total vCPU limit from a per-instance container group. A game server
+	// container group needs either a total vCPU limit or a Vcpu value for the game
+	// server container. You can't set TotalVcpuLimit in the same request.
+	RemoveAttributes []types.ContainerGroupDefinitionRemoveAttribute
+
 	// The container group definition version to update. The new version starts with
 	// values from the source version, and then updates values included in this
 	// request.
@@ -109,9 +122,20 @@ type UpdateContainerGroupDefinitionInput struct {
 	TotalMemoryLimitMebibytes *int32
 
 	// The maximum amount of vCPU units to allocate to the container group (1 vCPU is
-	// equal to 1024 CPU units). All containers in the group share this memory. If you
-	// specify vCPU limits for individual containers, the total value must be equal to
-	// or greater than the sum of the CPU limits for all containers in the group.
+	// equal to 1024 CPU units). All containers in the group share these resources. If
+	// you set vCPU reservations for individual containers, the total value must be
+	// equal to or greater than the sum of the Vcpu values for all containers in the
+	// group.
+	//
+	// For a game server container group, Amazon GameLift Servers requires either a
+	// total vCPU limit or a Vcpu value for the game server container. If the
+	// container group has a total vCPU limit, Amazon GameLift Servers uses this value
+	// to calculate how many game server container groups fit on an instance. If the
+	// container group doesn't have a total vCPU limit, its containers can use up to
+	// the instance's available vCPU, and Amazon GameLift Servers uses the sum of the
+	// containers' Vcpu values to calculate how many game server container groups fit
+	// on an instance. To remove the total vCPU limit, omit this parameter and set
+	// RemoveAttributes to TOTAL_VCPU_LIMIT .
 	TotalVcpuLimit *float64
 
 	// A description for this update to the container group definition.
@@ -138,6 +162,7 @@ func (v *UpdateContainerGroupDefinitionInput) SerializeMembers(s smithy.ShapeSer
 	if v.OperatingSystem != "" {
 		s.WriteString(schemas.UpdateContainerGroupDefinitionInput_OperatingSystem, string(v.OperatingSystem))
 	}
+	serializeContainerGroupDefinitionRemoveAttributeList(s, schemas.UpdateContainerGroupDefinitionInput_RemoveAttributes, v.RemoveAttributes)
 	if v.SourceVersionNumber != nil {
 		s.WriteInt32(schemas.UpdateContainerGroupDefinitionInput_SourceVersionNumber, *v.SourceVersionNumber)
 	}

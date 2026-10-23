@@ -4,6 +4,8 @@ package mediaconnect
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/mediaconnect/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -41,6 +43,21 @@ type RemoveFlowSourceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RemoveFlowSourceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RemoveFlowSourceRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RemoveFlowSourceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FlowArn != nil {
+		s.WriteString(schemas.RemoveFlowSourceRequest_FlowArn, *v.FlowArn)
+	}
+	if v.SourceArn != nil {
+		s.WriteString(schemas.RemoveFlowSourceRequest_SourceArn, *v.SourceArn)
+	}
+}
+
 type RemoveFlowSourceOutput struct {
 
 	//  The ARN of the flow that the source was removed from.
@@ -55,13 +72,38 @@ type RemoveFlowSourceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RemoveFlowSourceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RemoveFlowSourceResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RemoveFlowSourceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FlowArn != nil {
+		s.WriteString(schemas.RemoveFlowSourceResponse_FlowArn, *v.FlowArn)
+	}
+	if v.SourceArn != nil {
+		s.WriteString(schemas.RemoveFlowSourceResponse_SourceArn, *v.SourceArn)
+	}
+}
+func (v *RemoveFlowSourceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RemoveFlowSourceResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RemoveFlowSourceResponse_FlowArn:
+			v.FlowArn = new(string)
+			return d.ReadString(schemas.RemoveFlowSourceResponse_FlowArn, v.FlowArn)
+		case schemas.RemoveFlowSourceResponse_SourceArn:
+			v.SourceArn = new(string)
+			return d.ReadString(schemas.RemoveFlowSourceResponse_SourceArn, v.SourceArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationRemoveFlowSourceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpRemoveFlowSource{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RemoveFlowSource, schemas.RemoveFlowSourceRequest, schemas.RemoveFlowSourceResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpRemoveFlowSource{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RemoveFlowSource, schemas.RemoveFlowSourceRequest, schemas.RemoveFlowSourceResponse), output: &RemoveFlowSourceOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package sesv2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/sesv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sesv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -65,6 +67,31 @@ type PutAccountDetailsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutAccountDetailsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutAccountDetailsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutAccountDetailsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAdditionalContactEmailAddresses(s, schemas.PutAccountDetailsRequest_AdditionalContactEmailAddresses, v.AdditionalContactEmailAddresses)
+	if v.ContactLanguage != "" {
+		s.WriteString(schemas.PutAccountDetailsRequest_ContactLanguage, string(v.ContactLanguage))
+	}
+	if v.MailType != "" {
+		s.WriteString(schemas.PutAccountDetailsRequest_MailType, string(v.MailType))
+	}
+	if v.ProductionAccessEnabled != nil {
+		s.WriteBool(schemas.PutAccountDetailsRequest_ProductionAccessEnabled, *v.ProductionAccessEnabled)
+	}
+	if v.UseCaseDescription != nil {
+		s.WriteString(schemas.PutAccountDetailsRequest_UseCaseDescription, *v.UseCaseDescription)
+	}
+	if v.WebsiteURL != nil {
+		s.WriteString(schemas.PutAccountDetailsRequest_WebsiteURL, *v.WebsiteURL)
+	}
+}
+
 // An HTTP 200 response if the request succeeds, or an error message if the
 // request fails.
 type PutAccountDetailsOutput struct {
@@ -74,13 +101,26 @@ type PutAccountDetailsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutAccountDetailsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutAccountDetailsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutAccountDetailsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *PutAccountDetailsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PutAccountDetailsResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPutAccountDetailsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpPutAccountDetails{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutAccountDetails, schemas.PutAccountDetailsRequest, schemas.PutAccountDetailsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpPutAccountDetails{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutAccountDetails, schemas.PutAccountDetailsRequest, schemas.PutAccountDetailsResponse), output: &PutAccountDetailsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

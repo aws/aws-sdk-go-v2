@@ -5,7 +5,9 @@ package efs
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/efs/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/efs/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -56,6 +58,24 @@ type DescribeTagsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeTagsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeTagsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeTagsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FileSystemId != nil {
+		s.WriteString(schemas.DescribeTagsRequest_FileSystemId, *v.FileSystemId)
+	}
+	if v.Marker != nil {
+		s.WriteString(schemas.DescribeTagsRequest_Marker, *v.Marker)
+	}
+	if v.MaxItems != nil {
+		s.WriteInt32(schemas.DescribeTagsRequest_MaxItems, *v.MaxItems)
+	}
+}
+
 type DescribeTagsOutput struct {
 
 	// Returns tags associated with the file system as an array of Tag objects.
@@ -77,13 +97,41 @@ type DescribeTagsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeTagsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeTagsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeTagsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Marker != nil {
+		s.WriteString(schemas.DescribeTagsResponse_Marker, *v.Marker)
+	}
+	if v.NextMarker != nil {
+		s.WriteString(schemas.DescribeTagsResponse_NextMarker, *v.NextMarker)
+	}
+	serializeTags(s, schemas.DescribeTagsResponse_Tags, v.Tags)
+}
+func (v *DescribeTagsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeTagsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeTagsResponse_Marker:
+			v.Marker = new(string)
+			return d.ReadString(schemas.DescribeTagsResponse_Marker, v.Marker)
+		case schemas.DescribeTagsResponse_NextMarker:
+			v.NextMarker = new(string)
+			return d.ReadString(schemas.DescribeTagsResponse_NextMarker, v.NextMarker)
+		case schemas.DescribeTagsResponse_Tags:
+			return deserializeTags(d, schemas.DescribeTagsResponse_Tags, &v.Tags)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeTagsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeTags{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeTags, schemas.DescribeTagsRequest, schemas.DescribeTagsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeTags{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeTags, schemas.DescribeTagsRequest, schemas.DescribeTagsResponse), output: &DescribeTagsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

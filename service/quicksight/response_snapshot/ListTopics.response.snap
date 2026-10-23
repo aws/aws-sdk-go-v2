@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"NextToken":"__NextToken__","RequestId":"__RequestId__","Status":200,"TopicsSummaries":[{"Arn":"__Arn__","Name":"__Name__","TopicId":"__TopicId__","UserExperienceVersion":"LEGACY"},{"Arn":"__Arn__","Name":"__Name__","TopicId":"__TopicId__","UserExperienceVersion":"LEGACY"}]}

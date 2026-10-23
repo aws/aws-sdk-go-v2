@@ -4,6 +4,8 @@ package ssmcontacts
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/ssmcontacts/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -32,6 +34,18 @@ type DescribePageInput struct {
 	PageId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DescribePageInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribePageRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribePageInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PageId != nil {
+		s.WriteString(schemas.DescribePageRequest_PageId, *v.PageId)
+	}
 }
 
 type DescribePageOutput struct {
@@ -94,13 +108,98 @@ type DescribePageOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribePageOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribePageResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribePageOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ContactArn != nil {
+		s.WriteString(schemas.DescribePageResult_ContactArn, *v.ContactArn)
+	}
+	if v.Content != nil {
+		s.WriteString(schemas.DescribePageResult_Content, *v.Content)
+	}
+	if v.DeliveryTime != nil {
+		s.WriteTime(schemas.DescribePageResult_DeliveryTime, *v.DeliveryTime)
+	}
+	if v.EngagementArn != nil {
+		s.WriteString(schemas.DescribePageResult_EngagementArn, *v.EngagementArn)
+	}
+	if v.IncidentId != nil {
+		s.WriteString(schemas.DescribePageResult_IncidentId, *v.IncidentId)
+	}
+	if v.PageArn != nil {
+		s.WriteString(schemas.DescribePageResult_PageArn, *v.PageArn)
+	}
+	if v.PublicContent != nil {
+		s.WriteString(schemas.DescribePageResult_PublicContent, *v.PublicContent)
+	}
+	if v.PublicSubject != nil {
+		s.WriteString(schemas.DescribePageResult_PublicSubject, *v.PublicSubject)
+	}
+	if v.ReadTime != nil {
+		s.WriteTime(schemas.DescribePageResult_ReadTime, *v.ReadTime)
+	}
+	if v.Sender != nil {
+		s.WriteString(schemas.DescribePageResult_Sender, *v.Sender)
+	}
+	if v.SentTime != nil {
+		s.WriteTime(schemas.DescribePageResult_SentTime, *v.SentTime)
+	}
+	if v.Subject != nil {
+		s.WriteString(schemas.DescribePageResult_Subject, *v.Subject)
+	}
+}
+func (v *DescribePageOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribePageResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribePageResult_ContactArn:
+			v.ContactArn = new(string)
+			return d.ReadString(schemas.DescribePageResult_ContactArn, v.ContactArn)
+		case schemas.DescribePageResult_Content:
+			v.Content = new(string)
+			return d.ReadString(schemas.DescribePageResult_Content, v.Content)
+		case schemas.DescribePageResult_DeliveryTime:
+			v.DeliveryTime = new(time.Time)
+			return d.ReadTime(schemas.DescribePageResult_DeliveryTime, v.DeliveryTime)
+		case schemas.DescribePageResult_EngagementArn:
+			v.EngagementArn = new(string)
+			return d.ReadString(schemas.DescribePageResult_EngagementArn, v.EngagementArn)
+		case schemas.DescribePageResult_IncidentId:
+			v.IncidentId = new(string)
+			return d.ReadString(schemas.DescribePageResult_IncidentId, v.IncidentId)
+		case schemas.DescribePageResult_PageArn:
+			v.PageArn = new(string)
+			return d.ReadString(schemas.DescribePageResult_PageArn, v.PageArn)
+		case schemas.DescribePageResult_PublicContent:
+			v.PublicContent = new(string)
+			return d.ReadString(schemas.DescribePageResult_PublicContent, v.PublicContent)
+		case schemas.DescribePageResult_PublicSubject:
+			v.PublicSubject = new(string)
+			return d.ReadString(schemas.DescribePageResult_PublicSubject, v.PublicSubject)
+		case schemas.DescribePageResult_ReadTime:
+			v.ReadTime = new(time.Time)
+			return d.ReadTime(schemas.DescribePageResult_ReadTime, v.ReadTime)
+		case schemas.DescribePageResult_Sender:
+			v.Sender = new(string)
+			return d.ReadString(schemas.DescribePageResult_Sender, v.Sender)
+		case schemas.DescribePageResult_SentTime:
+			v.SentTime = new(time.Time)
+			return d.ReadTime(schemas.DescribePageResult_SentTime, v.SentTime)
+		case schemas.DescribePageResult_Subject:
+			v.Subject = new(string)
+			return d.ReadString(schemas.DescribePageResult_Subject, v.Subject)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribePageMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribePage{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribePage, schemas.DescribePageRequest, schemas.DescribePageResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribePage{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribePage, schemas.DescribePageRequest, schemas.DescribePageResult), output: &DescribePageOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

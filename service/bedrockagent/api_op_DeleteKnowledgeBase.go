@@ -4,7 +4,9 @@ package bedrockagent
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/bedrockagent/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagent/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -38,6 +40,18 @@ type DeleteKnowledgeBaseInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteKnowledgeBaseInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteKnowledgeBaseRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteKnowledgeBaseInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.KnowledgeBaseId != nil {
+		s.WriteString(schemas.DeleteKnowledgeBaseRequest_knowledgeBaseId, *v.KnowledgeBaseId)
+	}
+}
+
 type DeleteKnowledgeBaseOutput struct {
 
 	// The unique identifier of the knowledge base that was deleted.
@@ -56,13 +70,42 @@ type DeleteKnowledgeBaseOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteKnowledgeBaseOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteKnowledgeBaseResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteKnowledgeBaseOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.KnowledgeBaseId != nil {
+		s.WriteString(schemas.DeleteKnowledgeBaseResponse_knowledgeBaseId, *v.KnowledgeBaseId)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.DeleteKnowledgeBaseResponse_status, string(v.Status))
+	}
+}
+func (v *DeleteKnowledgeBaseOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteKnowledgeBaseResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteKnowledgeBaseResponse_knowledgeBaseId:
+			v.KnowledgeBaseId = new(string)
+			return d.ReadString(schemas.DeleteKnowledgeBaseResponse_knowledgeBaseId, v.KnowledgeBaseId)
+		case schemas.DeleteKnowledgeBaseResponse_status:
+			var ev string
+			if err := d.ReadString(schemas.DeleteKnowledgeBaseResponse_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.KnowledgeBaseStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteKnowledgeBaseMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteKnowledgeBase{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteKnowledgeBase, schemas.DeleteKnowledgeBaseRequest, schemas.DeleteKnowledgeBaseResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteKnowledgeBase{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteKnowledgeBase, schemas.DeleteKnowledgeBaseRequest, schemas.DeleteKnowledgeBaseResponse), output: &DeleteKnowledgeBaseOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

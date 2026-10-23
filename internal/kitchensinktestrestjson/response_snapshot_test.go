@@ -178,7 +178,9 @@ func TestCheckResponseSnapshot_SubscribeEvents(t *testing.T) {
 }
 
 func TestCheckResponseSnapshot_Error_ResourceNotFound(t *testing.T) {
-	want := &types.ResourceNotFound{}
+	want := &types.ResourceNotFound{
+		Message: ptr.String("__Message__"),
+	}
 	status, header, body, err := serdeRespReadSnapshot("ResourceNotFound.error")
 	if errors.Is(err, fs.ErrNotExist) {
 		t.Skip("no response snapshot fixture")

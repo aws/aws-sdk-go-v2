@@ -1,3 +1,50 @@
+# v1.82.0 (2026-10-22)
+
+* **Feature**: Enable schema-based (de)serialization for this service.
+* **Bug Fix**: Update smithy-go to v1.28.6
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.81.0 (2026-10-21)
+
+* **Feature**: Added custom designations support with new CRUD APIs. The designation field in project membership and policy grant APIs supports a new enum for custom designations. These APIs also support a new field for custom designation id.
+* **Feature**: Enable schema-based (de)serialization for this service.
+
+# v1.80.0 (2026-10-20)
+
+* **Feature**: Enable schema-based (de)serialization for this service.
+
+# v1.79.0 (2026-10-19)
+
+* **Feature**: Adds SDK and CLI support for the Iceberg REST catalog connection types already available in Amazon SageMaker Unified Studio - ICEBERGRESTCATALOG, SNOWFLAKEICEBERGRESTCATALOG, and DATABRICKSICEBERGRESTCATALOG.
+
+# v1.78.1 (2026-10-09.2)
+
+* **Dependency Update**: Update to smithy-go v1.28.5.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.78.0 (2026-10-08)
+
+* **Feature**: Adds support for multi-file notebook import. StartNotebookImport now accepts an s3Files source location with an ordered list of Amazon S3 objects, creating one notebook cell per file, plus a type field to create either a DATA or SQL notebook.
+* **Dependency Update**: Update to smithy-go v1.28.4.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.77.1 (2026-10-06)
+
+* No change notes available for this release.
+
+# v1.77.0 (2026-09-30)
+
+* **Feature**: Support for setting notebook run notification configurations
+
+# v1.76.0 (2026-09-24)
+
+* **Feature**: Amazon DataZone now supports the TOOLING blueprint category on CreateEnvironmentBlueprint, UpdateEnvironmentBlueprint, GetEnvironmentBlueprint, and ListEnvironmentBlueprints, for custom tooling blueprints. CreateConnection now accepts roleArn in iamProperties.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.75.0 (2026-09-18)
+
+* **Feature**: Adds support for specifying Notebook type
+
 # v1.74.0 (2026-09-09)
 
 * **Feature**: Stop registering the `retry.MetricsHeader` middleware in generated clients. The `Amz-Sdk-Request` header is now set by the retry middleware itself.

@@ -5,7 +5,9 @@ package elasticsearchservice
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/elasticsearchservice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/elasticsearchservice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -43,6 +45,24 @@ type DescribeReservedElasticsearchInstanceOfferingsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeReservedElasticsearchInstanceOfferingsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeReservedElasticsearchInstanceOfferingsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeReservedElasticsearchInstanceOfferingsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != 0 {
+		s.WriteInt32(schemas.DescribeReservedElasticsearchInstanceOfferingsRequest_MaxResults, v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeReservedElasticsearchInstanceOfferingsRequest_NextToken, *v.NextToken)
+	}
+	if v.ReservedElasticsearchInstanceOfferingId != nil {
+		s.WriteString(schemas.DescribeReservedElasticsearchInstanceOfferingsRequest_ReservedElasticsearchInstanceOfferingId, *v.ReservedElasticsearchInstanceOfferingId)
+	}
+}
+
 // Container for results from DescribeReservedElasticsearchInstanceOfferings
 type DescribeReservedElasticsearchInstanceOfferingsOutput struct {
 
@@ -58,13 +78,35 @@ type DescribeReservedElasticsearchInstanceOfferingsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeReservedElasticsearchInstanceOfferingsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeReservedElasticsearchInstanceOfferingsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeReservedElasticsearchInstanceOfferingsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeReservedElasticsearchInstanceOfferingsResponse_NextToken, *v.NextToken)
+	}
+	serializeReservedElasticsearchInstanceOfferingList(s, schemas.DescribeReservedElasticsearchInstanceOfferingsResponse_ReservedElasticsearchInstanceOfferings, v.ReservedElasticsearchInstanceOfferings)
+}
+func (v *DescribeReservedElasticsearchInstanceOfferingsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeReservedElasticsearchInstanceOfferingsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeReservedElasticsearchInstanceOfferingsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.DescribeReservedElasticsearchInstanceOfferingsResponse_NextToken, v.NextToken)
+		case schemas.DescribeReservedElasticsearchInstanceOfferingsResponse_ReservedElasticsearchInstanceOfferings:
+			return deserializeReservedElasticsearchInstanceOfferingList(d, schemas.DescribeReservedElasticsearchInstanceOfferingsResponse_ReservedElasticsearchInstanceOfferings, &v.ReservedElasticsearchInstanceOfferings)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeReservedElasticsearchInstanceOfferingsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeReservedElasticsearchInstanceOfferings{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeReservedElasticsearchInstanceOfferings, schemas.DescribeReservedElasticsearchInstanceOfferingsRequest, schemas.DescribeReservedElasticsearchInstanceOfferingsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeReservedElasticsearchInstanceOfferings{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeReservedElasticsearchInstanceOfferings, schemas.DescribeReservedElasticsearchInstanceOfferingsRequest, schemas.DescribeReservedElasticsearchInstanceOfferingsResponse), output: &DescribeReservedElasticsearchInstanceOfferingsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,6 +4,8 @@ package kinesis
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/kinesis/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"github.com/aws/smithy-go/ptr"
 )
@@ -12,9 +14,8 @@ import (
 // source stream to the destination. Data already delivered to the destination is
 // not deleted.
 //
-// A stream cannot be deleted while it has active channels. To delete the stream,
-// first delete all channels attached to it. To find them, use ListChannelswith a stream
-// filter.
+// A stream cannot be deleted while it has active channels. Use ListChannels with a stream
+// filter to find the channels attached to a stream before deleting it.
 //
 // This operation has a call limit of 5 transactions per second (TPS) for each
 // Amazon Web Services account. Exceeding 5 TPS results in a LimitExceededException
@@ -44,6 +45,17 @@ type DeleteChannelInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteChannelInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteChannelInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteChannelInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ChannelARN != nil {
+		s.WriteString(schemas.DeleteChannelInput_ChannelARN, *v.ChannelARN)
+	}
+}
 func (in *DeleteChannelInput) bindEndpointParams(p *EndpointParameters) {
 
 	p.ChannelARN = in.ChannelARN
@@ -57,13 +69,26 @@ type DeleteChannelOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteChannelOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteChannelOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteChannelOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteChannelMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteChannel{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteChannel, schemas.DeleteChannelInput, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeleteChannel{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteChannel, schemas.DeleteChannelInput, nil), output: &DeleteChannelOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

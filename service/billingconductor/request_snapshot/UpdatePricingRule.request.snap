@@ -2,4 +2,4 @@ PUT /update-pricing-rule
 
 Content-Type: application/json
 
-{"Arn":"__Arn__","Description":"__Description__","ModifierPercentage":1,"Name":"__Name__","Tiering":{"FreeTier":{"Activated":true}},"Type":"MARKUP"}
+{"Arn":"__Arn__","Description":"__Description__","ModifierPercentage":1,"Name":"__Name__","Tiering":{"CustomTiers":[{"BeginRangeInclusive":1,"EndRangeExclusive":1,"RateValue":1},{"BeginRangeInclusive":1,"EndRangeExclusive":1,"RateValue":1}],"FreeTier":{"Activated":true}},"Type":"MARKUP"}

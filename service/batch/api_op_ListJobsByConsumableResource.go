@@ -5,7 +5,9 @@ package batch
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/batch/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/batch/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -70,6 +72,25 @@ type ListJobsByConsumableResourceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListJobsByConsumableResourceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListJobsByConsumableResourceRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListJobsByConsumableResourceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConsumableResource != nil {
+		s.WriteString(schemas.ListJobsByConsumableResourceRequest_consumableResource, *v.ConsumableResource)
+	}
+	serializeListJobsByConsumableResourceFilterList(s, schemas.ListJobsByConsumableResourceRequest_filters, v.Filters)
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListJobsByConsumableResourceRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListJobsByConsumableResourceRequest_nextToken, *v.NextToken)
+	}
+}
+
 type ListJobsByConsumableResourceOutput struct {
 
 	// The list of jobs that require the specified consumable resources.
@@ -89,13 +110,35 @@ type ListJobsByConsumableResourceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListJobsByConsumableResourceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListJobsByConsumableResourceResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListJobsByConsumableResourceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeListJobsByConsumableResourceSummaryList(s, schemas.ListJobsByConsumableResourceResponse_jobs, v.Jobs)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListJobsByConsumableResourceResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListJobsByConsumableResourceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListJobsByConsumableResourceResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListJobsByConsumableResourceResponse_jobs:
+			return deserializeListJobsByConsumableResourceSummaryList(d, schemas.ListJobsByConsumableResourceResponse_jobs, &v.Jobs)
+		case schemas.ListJobsByConsumableResourceResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListJobsByConsumableResourceResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListJobsByConsumableResourceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListJobsByConsumableResource{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListJobsByConsumableResource, schemas.ListJobsByConsumableResourceRequest, schemas.ListJobsByConsumableResourceResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListJobsByConsumableResource{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListJobsByConsumableResource, schemas.ListJobsByConsumableResourceRequest, schemas.ListJobsByConsumableResourceResponse), output: &ListJobsByConsumableResourceOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -5,7 +5,9 @@ package ssm
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/ssm/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ssm/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -47,6 +49,25 @@ type DescribeSessionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeSessionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeSessionsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeSessionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeSessionFilterList(s, schemas.DescribeSessionsRequest_Filters, v.Filters)
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.DescribeSessionsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeSessionsRequest_NextToken, *v.NextToken)
+	}
+	if v.State != "" {
+		s.WriteString(schemas.DescribeSessionsRequest_State, string(v.State))
+	}
+}
+
 type DescribeSessionsOutput struct {
 
 	// The token for the next set of items to return. (You received this token from a
@@ -62,13 +83,35 @@ type DescribeSessionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeSessionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeSessionsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeSessionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeSessionsResponse_NextToken, *v.NextToken)
+	}
+	serializeSessionList(s, schemas.DescribeSessionsResponse_Sessions, v.Sessions)
+}
+func (v *DescribeSessionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeSessionsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeSessionsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.DescribeSessionsResponse_NextToken, v.NextToken)
+		case schemas.DescribeSessionsResponse_Sessions:
+			return deserializeSessionList(d, schemas.DescribeSessionsResponse_Sessions, &v.Sessions)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeSessionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeSessions{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeSessions, schemas.DescribeSessionsRequest, schemas.DescribeSessionsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeSessions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeSessions, schemas.DescribeSessionsRequest, schemas.DescribeSessionsResponse), output: &DescribeSessionsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

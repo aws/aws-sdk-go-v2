@@ -4,6 +4,8 @@ package mq
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/mq/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -39,6 +41,21 @@ type DescribeConfigurationRevisionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeConfigurationRevisionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeConfigurationRevisionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeConfigurationRevisionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConfigurationId != nil {
+		s.WriteString(schemas.DescribeConfigurationRevisionRequest_ConfigurationId, *v.ConfigurationId)
+	}
+	if v.ConfigurationRevision != nil {
+		s.WriteString(schemas.DescribeConfigurationRevisionRequest_ConfigurationRevision, *v.ConfigurationRevision)
+	}
+}
+
 type DescribeConfigurationRevisionOutput struct {
 
 	// Required. The unique ID that Amazon MQ generates for the configuration.
@@ -60,13 +77,50 @@ type DescribeConfigurationRevisionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeConfigurationRevisionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeConfigurationRevisionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeConfigurationRevisionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConfigurationId != nil {
+		s.WriteString(schemas.DescribeConfigurationRevisionResponse_ConfigurationId, *v.ConfigurationId)
+	}
+	if v.Created != nil {
+		s.WriteTime(schemas.DescribeConfigurationRevisionResponse_Created, *v.Created)
+	}
+	if v.Data != nil {
+		s.WriteString(schemas.DescribeConfigurationRevisionResponse_Data, *v.Data)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.DescribeConfigurationRevisionResponse_Description, *v.Description)
+	}
+}
+func (v *DescribeConfigurationRevisionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeConfigurationRevisionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeConfigurationRevisionResponse_ConfigurationId:
+			v.ConfigurationId = new(string)
+			return d.ReadString(schemas.DescribeConfigurationRevisionResponse_ConfigurationId, v.ConfigurationId)
+		case schemas.DescribeConfigurationRevisionResponse_Created:
+			v.Created = new(time.Time)
+			return d.ReadTime(schemas.DescribeConfigurationRevisionResponse_Created, v.Created)
+		case schemas.DescribeConfigurationRevisionResponse_Data:
+			v.Data = new(string)
+			return d.ReadString(schemas.DescribeConfigurationRevisionResponse_Data, v.Data)
+		case schemas.DescribeConfigurationRevisionResponse_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.DescribeConfigurationRevisionResponse_Description, v.Description)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeConfigurationRevisionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeConfigurationRevision{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeConfigurationRevision, schemas.DescribeConfigurationRevisionRequest, schemas.DescribeConfigurationRevisionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeConfigurationRevision{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeConfigurationRevision, schemas.DescribeConfigurationRevisionRequest, schemas.DescribeConfigurationRevisionResponse), output: &DescribeConfigurationRevisionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

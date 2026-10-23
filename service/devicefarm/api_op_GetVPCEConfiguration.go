@@ -4,7 +4,9 @@ package devicefarm
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/devicefarm/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/devicefarm/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -36,6 +38,18 @@ type GetVPCEConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetVPCEConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetVPCEConfigurationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetVPCEConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.GetVPCEConfigurationRequest_arn, *v.Arn)
+	}
+}
+
 type GetVPCEConfigurationOutput struct {
 
 	// An object that contains information about your VPC endpoint configuration.
@@ -47,13 +61,34 @@ type GetVPCEConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetVPCEConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetVPCEConfigurationResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetVPCEConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.VpceConfiguration != nil {
+		s.WriteStruct(schemas.GetVPCEConfigurationResult_vpceConfiguration)
+		v.VpceConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetVPCEConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetVPCEConfigurationResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetVPCEConfigurationResult_vpceConfiguration:
+			v.VpceConfiguration = &types.VPCEConfiguration{}
+			return v.VpceConfiguration.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetVPCEConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetVPCEConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetVPCEConfiguration, schemas.GetVPCEConfigurationRequest, schemas.GetVPCEConfigurationResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetVPCEConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetVPCEConfiguration, schemas.GetVPCEConfigurationRequest, schemas.GetVPCEConfigurationResult), output: &GetVPCEConfigurationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

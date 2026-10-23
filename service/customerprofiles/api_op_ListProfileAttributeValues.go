@@ -4,7 +4,9 @@ package customerprofiles
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/customerprofiles/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/customerprofiles/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,21 @@ type ListProfileAttributeValuesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListProfileAttributeValuesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ProfileAttributeValuesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListProfileAttributeValuesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AttributeName != nil {
+		s.WriteString(schemas.ProfileAttributeValuesRequest_AttributeName, *v.AttributeName)
+	}
+	if v.DomainName != nil {
+		s.WriteString(schemas.ProfileAttributeValuesRequest_DomainName, *v.DomainName)
+	}
+}
+
 type ListProfileAttributeValuesOutput struct {
 
 	// The attribute name.
@@ -59,13 +76,46 @@ type ListProfileAttributeValuesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListProfileAttributeValuesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ProfileAttributeValuesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListProfileAttributeValuesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AttributeName != nil {
+		s.WriteString(schemas.ProfileAttributeValuesResponse_AttributeName, *v.AttributeName)
+	}
+	if v.DomainName != nil {
+		s.WriteString(schemas.ProfileAttributeValuesResponse_DomainName, *v.DomainName)
+	}
+	serializeAttributeValueItemList(s, schemas.ProfileAttributeValuesResponse_Items, v.Items)
+	if v.StatusCode != 0 {
+		s.WriteInt32(schemas.ProfileAttributeValuesResponse_StatusCode, v.StatusCode)
+	}
+}
+func (v *ListProfileAttributeValuesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ProfileAttributeValuesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ProfileAttributeValuesResponse_AttributeName:
+			v.AttributeName = new(string)
+			return d.ReadString(schemas.ProfileAttributeValuesResponse_AttributeName, v.AttributeName)
+		case schemas.ProfileAttributeValuesResponse_DomainName:
+			v.DomainName = new(string)
+			return d.ReadString(schemas.ProfileAttributeValuesResponse_DomainName, v.DomainName)
+		case schemas.ProfileAttributeValuesResponse_Items:
+			return deserializeAttributeValueItemList(d, schemas.ProfileAttributeValuesResponse_Items, &v.Items)
+		case schemas.ProfileAttributeValuesResponse_StatusCode:
+			return d.ReadInt32(schemas.ProfileAttributeValuesResponse_StatusCode, &v.StatusCode)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListProfileAttributeValuesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListProfileAttributeValues{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListProfileAttributeValues, schemas.ProfileAttributeValuesRequest, schemas.ProfileAttributeValuesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListProfileAttributeValues{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListProfileAttributeValues, schemas.ProfileAttributeValuesRequest, schemas.ProfileAttributeValuesResponse), output: &ListProfileAttributeValuesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

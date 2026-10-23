@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"actionName":"__ActionName__","error":{"errorCode":"INVALID_ACTION_TARGET","errorMessage":"__ErrorMessage__"},"operations":[{"updateOutputStatus":{"outputName":"__OutputName__","status":"ENABLED"}},{"updateOutputStatus":{"outputName":"__OutputName__","status":"ENABLED"}}],"startConfiguration":{"fixedModeScheduleActionStartSettings":{"scheduledAt":946684800}},"status":"PENDING"}

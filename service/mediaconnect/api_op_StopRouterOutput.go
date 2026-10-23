@@ -4,7 +4,9 @@ package mediaconnect
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/mediaconnect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/mediaconnect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -34,6 +36,18 @@ type StopRouterOutputInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StopRouterOutputInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StopRouterOutputRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StopRouterOutputInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.StopRouterOutputRequest_Arn, *v.Arn)
+	}
+}
+
 type StopRouterOutputOutput struct {
 
 	// The ARN of the router output that was stopped.
@@ -57,13 +71,48 @@ type StopRouterOutputOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StopRouterOutputOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StopRouterOutputResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StopRouterOutputOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.StopRouterOutputResponse_Arn, *v.Arn)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.StopRouterOutputResponse_Name, *v.Name)
+	}
+	if v.State != "" {
+		s.WriteString(schemas.StopRouterOutputResponse_State, string(v.State))
+	}
+}
+func (v *StopRouterOutputOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StopRouterOutputResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StopRouterOutputResponse_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.StopRouterOutputResponse_Arn, v.Arn)
+		case schemas.StopRouterOutputResponse_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.StopRouterOutputResponse_Name, v.Name)
+		case schemas.StopRouterOutputResponse_State:
+			var ev string
+			if err := d.ReadString(schemas.StopRouterOutputResponse_State, &ev); err != nil {
+				return err
+			}
+			v.State = types.RouterOutputState(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStopRouterOutputMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpStopRouterOutput{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StopRouterOutput, schemas.StopRouterOutputRequest, schemas.StopRouterOutputResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStopRouterOutput{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StopRouterOutput, schemas.StopRouterOutputRequest, schemas.StopRouterOutputResponse), output: &StopRouterOutputOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

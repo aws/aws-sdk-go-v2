@@ -4,7 +4,9 @@ package apigateway
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/apigateway/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/apigateway/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -77,6 +79,46 @@ type CreateStageInput struct {
 	Variables map[string]string
 
 	noSmithyDocumentSerde
+}
+
+func (v *CreateStageInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateStageRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateStageInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CacheClusterEnabled != false {
+		s.WriteBool(schemas.CreateStageRequest_cacheClusterEnabled, v.CacheClusterEnabled)
+	}
+	if v.CacheClusterSize != "" {
+		s.WriteString(schemas.CreateStageRequest_cacheClusterSize, string(v.CacheClusterSize))
+	}
+	if v.CanarySettings != nil {
+		s.WriteStruct(schemas.CreateStageRequest_canarySettings)
+		v.CanarySettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DeploymentId != nil {
+		s.WriteString(schemas.CreateStageRequest_deploymentId, *v.DeploymentId)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreateStageRequest_description, *v.Description)
+	}
+	if v.DocumentationVersion != nil {
+		s.WriteString(schemas.CreateStageRequest_documentationVersion, *v.DocumentationVersion)
+	}
+	if v.RestApiId != nil {
+		s.WriteString(schemas.CreateStageRequest_restApiId, *v.RestApiId)
+	}
+	if v.StageName != nil {
+		s.WriteString(schemas.CreateStageRequest_stageName, *v.StageName)
+	}
+	serializeMapOfStringToString(s, schemas.CreateStageRequest_tags, v.Tags)
+	if v.TracingEnabled != false {
+		s.WriteBool(schemas.CreateStageRequest_tracingEnabled, v.TracingEnabled)
+	}
+	serializeMapOfStringToString(s, schemas.CreateStageRequest_variables, v.Variables)
 }
 
 // Represents a unique identifier for a version of a deployed RestApi that is
@@ -152,13 +194,129 @@ type CreateStageOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateStageOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Stage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateStageOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccessLogSettings != nil {
+		s.WriteStruct(schemas.Stage_accessLogSettings)
+		v.AccessLogSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CacheClusterEnabled != false {
+		s.WriteBool(schemas.Stage_cacheClusterEnabled, v.CacheClusterEnabled)
+	}
+	if v.CacheClusterSize != "" {
+		s.WriteString(schemas.Stage_cacheClusterSize, string(v.CacheClusterSize))
+	}
+	if v.CacheClusterStatus != "" {
+		s.WriteString(schemas.Stage_cacheClusterStatus, string(v.CacheClusterStatus))
+	}
+	if v.CanarySettings != nil {
+		s.WriteStruct(schemas.Stage_canarySettings)
+		v.CanarySettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ClientCertificateId != nil {
+		s.WriteString(schemas.Stage_clientCertificateId, *v.ClientCertificateId)
+	}
+	if v.CreatedDate != nil {
+		s.WriteTime(schemas.Stage_createdDate, *v.CreatedDate)
+	}
+	if v.DeploymentId != nil {
+		s.WriteString(schemas.Stage_deploymentId, *v.DeploymentId)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.Stage_description, *v.Description)
+	}
+	if v.DocumentationVersion != nil {
+		s.WriteString(schemas.Stage_documentationVersion, *v.DocumentationVersion)
+	}
+	if v.LastUpdatedDate != nil {
+		s.WriteTime(schemas.Stage_lastUpdatedDate, *v.LastUpdatedDate)
+	}
+	serializeMapOfMethodSettings(s, schemas.Stage_methodSettings, v.MethodSettings)
+	if v.StageName != nil {
+		s.WriteString(schemas.Stage_stageName, *v.StageName)
+	}
+	serializeMapOfStringToString(s, schemas.Stage_tags, v.Tags)
+	if v.TracingEnabled != false {
+		s.WriteBool(schemas.Stage_tracingEnabled, v.TracingEnabled)
+	}
+	serializeMapOfStringToString(s, schemas.Stage_variables, v.Variables)
+	if v.WebAclArn != nil {
+		s.WriteString(schemas.Stage_webAclArn, *v.WebAclArn)
+	}
+}
+func (v *CreateStageOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Stage, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Stage_accessLogSettings:
+			v.AccessLogSettings = &types.AccessLogSettings{}
+			return v.AccessLogSettings.Deserialize(d)
+		case schemas.Stage_cacheClusterEnabled:
+			return d.ReadBool(schemas.Stage_cacheClusterEnabled, &v.CacheClusterEnabled)
+		case schemas.Stage_cacheClusterSize:
+			var ev string
+			if err := d.ReadString(schemas.Stage_cacheClusterSize, &ev); err != nil {
+				return err
+			}
+			v.CacheClusterSize = types.CacheClusterSize(ev)
+			return nil
+		case schemas.Stage_cacheClusterStatus:
+			var ev string
+			if err := d.ReadString(schemas.Stage_cacheClusterStatus, &ev); err != nil {
+				return err
+			}
+			v.CacheClusterStatus = types.CacheClusterStatus(ev)
+			return nil
+		case schemas.Stage_canarySettings:
+			v.CanarySettings = &types.CanarySettings{}
+			return v.CanarySettings.Deserialize(d)
+		case schemas.Stage_clientCertificateId:
+			v.ClientCertificateId = new(string)
+			return d.ReadString(schemas.Stage_clientCertificateId, v.ClientCertificateId)
+		case schemas.Stage_createdDate:
+			v.CreatedDate = new(time.Time)
+			return d.ReadTime(schemas.Stage_createdDate, v.CreatedDate)
+		case schemas.Stage_deploymentId:
+			v.DeploymentId = new(string)
+			return d.ReadString(schemas.Stage_deploymentId, v.DeploymentId)
+		case schemas.Stage_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.Stage_description, v.Description)
+		case schemas.Stage_documentationVersion:
+			v.DocumentationVersion = new(string)
+			return d.ReadString(schemas.Stage_documentationVersion, v.DocumentationVersion)
+		case schemas.Stage_lastUpdatedDate:
+			v.LastUpdatedDate = new(time.Time)
+			return d.ReadTime(schemas.Stage_lastUpdatedDate, v.LastUpdatedDate)
+		case schemas.Stage_methodSettings:
+			return deserializeMapOfMethodSettings(d, schemas.Stage_methodSettings, &v.MethodSettings)
+		case schemas.Stage_stageName:
+			v.StageName = new(string)
+			return d.ReadString(schemas.Stage_stageName, v.StageName)
+		case schemas.Stage_tags:
+			return deserializeMapOfStringToString(d, schemas.Stage_tags, &v.Tags)
+		case schemas.Stage_tracingEnabled:
+			return d.ReadBool(schemas.Stage_tracingEnabled, &v.TracingEnabled)
+		case schemas.Stage_variables:
+			return deserializeMapOfStringToString(d, schemas.Stage_variables, &v.Variables)
+		case schemas.Stage_webAclArn:
+			v.WebAclArn = new(string)
+			return d.ReadString(schemas.Stage_webAclArn, v.WebAclArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateStageMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateStage{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateStage, schemas.CreateStageRequest, schemas.Stage)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateStage{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateStage, schemas.CreateStageRequest, schemas.Stage), output: &CreateStageOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -5,7 +5,9 @@ package redshiftserverless
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/redshiftserverless/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/redshiftserverless/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -53,6 +55,33 @@ type ListRecoveryPointsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListRecoveryPointsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListRecoveryPointsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListRecoveryPointsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EndTime != nil {
+		s.WriteTime(schemas.ListRecoveryPointsRequest_endTime, *v.EndTime)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListRecoveryPointsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NamespaceArn != nil {
+		s.WriteString(schemas.ListRecoveryPointsRequest_namespaceArn, *v.NamespaceArn)
+	}
+	if v.NamespaceName != nil {
+		s.WriteString(schemas.ListRecoveryPointsRequest_namespaceName, *v.NamespaceName)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListRecoveryPointsRequest_nextToken, *v.NextToken)
+	}
+	if v.StartTime != nil {
+		s.WriteTime(schemas.ListRecoveryPointsRequest_startTime, *v.StartTime)
+	}
+}
+
 type ListRecoveryPointsOutput struct {
 
 	// If nextToken is returned, there are more results available. The value of
@@ -69,13 +98,35 @@ type ListRecoveryPointsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListRecoveryPointsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListRecoveryPointsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListRecoveryPointsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListRecoveryPointsResponse_nextToken, *v.NextToken)
+	}
+	serializeRecoveryPointList(s, schemas.ListRecoveryPointsResponse_recoveryPoints, v.RecoveryPoints)
+}
+func (v *ListRecoveryPointsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListRecoveryPointsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListRecoveryPointsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListRecoveryPointsResponse_nextToken, v.NextToken)
+		case schemas.ListRecoveryPointsResponse_recoveryPoints:
+			return deserializeRecoveryPointList(d, schemas.ListRecoveryPointsResponse_recoveryPoints, &v.RecoveryPoints)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListRecoveryPointsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListRecoveryPoints{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListRecoveryPoints, schemas.ListRecoveryPointsRequest, schemas.ListRecoveryPointsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListRecoveryPoints{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListRecoveryPoints, schemas.ListRecoveryPointsRequest, schemas.ListRecoveryPointsResponse), output: &ListRecoveryPointsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

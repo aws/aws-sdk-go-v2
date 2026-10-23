@@ -4,6 +4,7 @@ package types
 
 import (
 	smithydocument "github.com/aws/smithy-go/document"
+	"time"
 )
 
 // Condition that matches based on the specific WAF action taken on the request.
@@ -113,6 +114,11 @@ type CentralizationRuleSource struct {
 	// specified using organization id, accounts or organizational unit ids.
 	Scope *string
 
+	// Configuration that enables centralization of the context graph for the selected
+	// sources. Including this configuration in a rule's source opts the rule into
+	// centralizing the context graph for the selected sources.
+	SourceContextGraphConfiguration *SourceContextGraphConfiguration
+
 	// Log specific configuration for centralization source log groups.
 	SourceLogsConfiguration *SourceLogsConfiguration
 
@@ -124,6 +130,12 @@ type CentralizationRuleSource struct {
 
 // A summary of a centralization rule's key properties and status.
 type CentralizationRuleSummary struct {
+
+	// The status of context graph centralization for this rule. Returns Provisioning
+	// while the context graph is being set up, Healthy once it is active, or Unhealthy
+	// if provisioning failed. This status is independent of the overall RuleHealth
+	// for log delivery.
+	ContextGraphStatus ContextGraphStatus
 
 	// The Amazon Web Services region where the organization centralization rule was
 	// created.
@@ -217,6 +229,29 @@ type ConfigurationSummary struct {
 	noSmithyDocumentSerde
 }
 
+// Contains summary information about a dataset integration, including its ARN,
+// associated IAM role, and creation and update timestamps, as returned by
+// ListDatasetIntegrations .
+type DatasetIntegrationSummary struct {
+
+	// The Amazon Resource Name (ARN) of the dataset integration.
+	//
+	// This member is required.
+	Arn *string
+
+	// The timestamp when the dataset integration was created.
+	CreatedAt *time.Time
+
+	// The Amazon Resource Name (ARN) of the IAM role associated with the dataset
+	// integration.
+	RoleArn *string
+
+	// The timestamp when the dataset integration was last updated.
+	UpdatedAt *time.Time
+
+	noSmithyDocumentSerde
+}
+
 // Information about a data source associated with the telemetry pipeline. For
 // CloudWatch Logs sources, this includes both a name and type extracted from the
 // log event metadata. For third-party sources (such as S3), this includes only a
@@ -244,6 +279,22 @@ type DestinationLogsConfiguration struct {
 	// Configuration defining the backup region and an optional KMS key for the backup
 	// destination.
 	BackupConfiguration *LogsBackupConfiguration
+
+	// Specifies whether this centralization rule enables deletion protection on the
+	// destination log groups that it creates. If you don't specify this setting, the
+	// rule doesn't enable deletion protection on the log groups that it creates. If
+	// you specify a backup Region in BackupConfiguration , the setting also applies to
+	// the log groups that the rule creates in the backup Region.
+	//
+	// When you set this to ENABLED , the rule enables deletion protection only on log
+	// groups that it creates after you enable the setting. It does not add deletion
+	// protection to log groups the rule created before you enabled the setting.
+	//
+	// If you remove this setting from the rule or delete the rule, deletion
+	// protection stays enabled on log groups that already have it. To delete one of
+	// these log groups, first disable deletion protection on the log group in the
+	// destination account.
+	LogGroupDeletionProtection DeletionProtection
 
 	// Configuration that specifies a naming pattern for destination log groups
 	// created during centralization. The pattern supports static text and dynamic
@@ -367,7 +418,8 @@ type LabelNameCondition struct {
 
 // The configuration parameters for log delivery, including logType settings.
 // Applies to resource types that support configurable log delivery, such as Amazon
-// Bedrock Knowledge Bases and Elastic Load Balancing Application Load Balancers.
+// Bedrock Knowledge Bases, Amazon Bedrock AgentCore payment managers, and Elastic
+// Load Balancing Application Load Balancers.
 type LogDeliveryParameters struct {
 
 	// The types of logs to collect from the resource.
@@ -596,6 +648,13 @@ type Source struct {
 	noSmithyDocumentSerde
 }
 
+// Configuration that enables centralization of the context graph for the selected
+// sources. Including this configuration in a rule's source opts the rule into
+// centralizing the context graph for the selected sources.
+type SourceContextGraphConfiguration struct {
+	noSmithyDocumentSerde
+}
+
 // Configuration for selecting and handling source log groups for centralization.
 type SourceLogsConfiguration struct {
 
@@ -723,8 +782,9 @@ type TelemetryDestinationConfiguration struct {
 	KmsKeyArn *string
 
 	// The configuration parameters for log delivery when the resource type supports
-	// configurable log types, such as Amazon Bedrock Knowledge Bases or Elastic Load
-	// Balancing Application Load Balancers.
+	// configurable log types, such as Amazon Bedrock Knowledge Bases, Amazon Bedrock
+	// AgentCore payment managers, or Elastic Load Balancing Application Load
+	// Balancers.
 	LogDeliveryParameters *LogDeliveryParameters
 
 	//  Configuration parameters specific to MSK monitoring when MSK is the resource
@@ -889,7 +949,8 @@ type TelemetryRule struct {
 
 	//  The type of Amazon Web Services resource to configure telemetry for (for
 	// example, AWS::EC2::VPC , AWS::EKS::Cluster ,
-	// AWS::ElasticLoadBalancingV2::LoadBalancer , or AWS::Bedrock::KnowledgeBase ).
+	// AWS::ElasticLoadBalancingV2::LoadBalancer , AWS::Bedrock::KnowledgeBase ,
+	// AWS::BedrockAgentCore::PaymentManager , or AWS::XRay::TransactionSearchConfig ).
 	ResourceType ResourceType
 
 	//  The organizational scope to which the rule applies, specified using accounts

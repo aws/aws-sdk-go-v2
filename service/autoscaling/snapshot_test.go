@@ -302,6 +302,18 @@ func TestCheckSnapshot_DescribeAccountLimits(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DescribeAccountSettings(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeAccountSettings(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DescribeAccountSettings")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DescribeAdjustmentTypes(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DescribeAdjustmentTypes(context.Background(), nil, func(o *Options) {
@@ -667,6 +679,18 @@ func TestCheckSnapshot_LaunchInstances(t *testing.T) {
 	_, err := svc.LaunchInstances(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "LaunchInstances")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_PutAccountSetting(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.PutAccountSetting(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "PutAccountSetting")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1093,6 +1117,18 @@ func TestUpdateSnapshot_DescribeAccountLimits(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_DescribeAccountSettings(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeAccountSettings(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DescribeAccountSettings")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_DescribeAdjustmentTypes(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DescribeAdjustmentTypes(context.Background(), nil, func(o *Options) {
@@ -1458,6 +1494,18 @@ func TestUpdateSnapshot_LaunchInstances(t *testing.T) {
 	_, err := svc.LaunchInstances(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "LaunchInstances")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_PutAccountSetting(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.PutAccountSetting(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "PutAccountSetting")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

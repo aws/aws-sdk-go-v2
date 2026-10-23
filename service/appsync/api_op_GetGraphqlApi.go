@@ -4,7 +4,9 @@ package appsync
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/appsync/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/appsync/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -34,6 +36,18 @@ type GetGraphqlApiInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetGraphqlApiInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetGraphqlApiRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetGraphqlApiInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApiId != nil {
+		s.WriteString(schemas.GetGraphqlApiRequest_apiId, *v.ApiId)
+	}
+}
+
 type GetGraphqlApiOutput struct {
 
 	// The GraphqlApi object.
@@ -45,13 +59,34 @@ type GetGraphqlApiOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetGraphqlApiOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetGraphqlApiResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetGraphqlApiOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GraphqlApi != nil {
+		s.WriteStruct(schemas.GetGraphqlApiResponse_graphqlApi)
+		v.GraphqlApi.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetGraphqlApiOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetGraphqlApiResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetGraphqlApiResponse_graphqlApi:
+			v.GraphqlApi = &types.GraphqlApi{}
+			return v.GraphqlApi.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetGraphqlApiMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetGraphqlApi{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetGraphqlApi, schemas.GetGraphqlApiRequest, schemas.GetGraphqlApiResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetGraphqlApi{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetGraphqlApi, schemas.GetGraphqlApiRequest, schemas.GetGraphqlApiResponse), output: &GetGraphqlApiOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

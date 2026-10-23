@@ -4,7 +4,9 @@ package glue
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/glue/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/glue/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -41,6 +43,23 @@ type UpdateJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateJobRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.JobName != nil {
+		s.WriteString(schemas.UpdateJobRequest_JobName, *v.JobName)
+	}
+	if v.JobUpdate != nil {
+		s.WriteStruct(schemas.UpdateJobRequest_JobUpdate)
+		v.JobUpdate.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type UpdateJobOutput struct {
 
 	// Returns the name of the updated job definition.
@@ -52,13 +71,32 @@ type UpdateJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateJobOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateJobResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.JobName != nil {
+		s.WriteString(schemas.UpdateJobResponse_JobName, *v.JobName)
+	}
+}
+func (v *UpdateJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateJobResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateJobResponse_JobName:
+			v.JobName = new(string)
+			return d.ReadString(schemas.UpdateJobResponse_JobName, v.JobName)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateJob, schemas.UpdateJobRequest, schemas.UpdateJobResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateJob, schemas.UpdateJobRequest, schemas.UpdateJobResponse), output: &UpdateJobOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,11 +4,13 @@ package imagebuilder
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/imagebuilder/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/imagebuilder/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
-// Get a workflow resource object.
+// Retrieves a workflow resource object.
 func (c *Client) GetWorkflow(ctx context.Context, params *GetWorkflowInput, optFns ...func(*Options)) (*GetWorkflowOutput, error) {
 	if params == nil {
 		params = &GetWorkflowInput{}
@@ -27,6 +29,9 @@ func (c *Client) GetWorkflow(ctx context.Context, params *GetWorkflowInput, optF
 type GetWorkflowInput struct {
 
 	// The Amazon Resource Name (ARN) of the workflow resource that you want to get.
+	// You can specify a build version ARN, or a version ARN with or without wildcards
+	// ( x ) in its version segments. Image Builder resolves version and wildcard ARNs
+	// to the most recent matching build version.
 	//
 	// This member is required.
 	WorkflowBuildVersionArn *string
@@ -34,9 +39,23 @@ type GetWorkflowInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetWorkflowInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetWorkflowRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetWorkflowInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.WorkflowBuildVersionArn != nil {
+		s.WriteString(schemas.GetWorkflowRequest_workflowBuildVersionArn, *v.WorkflowBuildVersionArn)
+	}
+}
+
 type GetWorkflowOutput struct {
 
-	// The resource ARNs with different wildcard variations of semantic versioning.
+	// A set of wildcard version ARNs that always reference the latest version of the
+	// resource. ARNs are included for the latest version overall, and for the latest
+	// versions within the same major, minor, and patch levels.
 	LatestVersionReferences *types.LatestVersionReferences
 
 	// The workflow resource specified in the request.
@@ -48,13 +67,42 @@ type GetWorkflowOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetWorkflowOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetWorkflowResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetWorkflowOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LatestVersionReferences != nil {
+		s.WriteStruct(schemas.GetWorkflowResponse_latestVersionReferences)
+		v.LatestVersionReferences.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Workflow != nil {
+		s.WriteStruct(schemas.GetWorkflowResponse_workflow)
+		v.Workflow.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetWorkflowOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetWorkflowResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetWorkflowResponse_latestVersionReferences:
+			v.LatestVersionReferences = &types.LatestVersionReferences{}
+			return v.LatestVersionReferences.Deserialize(d)
+		case schemas.GetWorkflowResponse_workflow:
+			v.Workflow = &types.Workflow{}
+			return v.Workflow.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetWorkflowMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetWorkflow{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetWorkflow, schemas.GetWorkflowRequest, schemas.GetWorkflowResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetWorkflow{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetWorkflow, schemas.GetWorkflowRequest, schemas.GetWorkflowResponse), output: &GetWorkflowOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

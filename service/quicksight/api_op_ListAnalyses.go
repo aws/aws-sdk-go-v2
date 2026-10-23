@@ -5,7 +5,9 @@ package quicksight
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/quicksight/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/quicksight/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -42,6 +44,24 @@ type ListAnalysesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAnalysesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAnalysesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAnalysesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AwsAccountId != nil {
+		s.WriteString(schemas.ListAnalysesRequest_AwsAccountId, *v.AwsAccountId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListAnalysesRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAnalysesRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListAnalysesOutput struct {
 
 	// Metadata describing each of the analyses that are listed.
@@ -62,13 +82,46 @@ type ListAnalysesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAnalysesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAnalysesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAnalysesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAnalysisSummaryList(s, schemas.ListAnalysesResponse_AnalysisSummaryList, v.AnalysisSummaryList)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAnalysesResponse_NextToken, *v.NextToken)
+	}
+	if v.RequestId != nil {
+		s.WriteString(schemas.ListAnalysesResponse_RequestId, *v.RequestId)
+	}
+	if v.Status != 0 {
+		s.WriteInt32(schemas.ListAnalysesResponse_Status, v.Status)
+	}
+}
+func (v *ListAnalysesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListAnalysesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListAnalysesResponse_AnalysisSummaryList:
+			return deserializeAnalysisSummaryList(d, schemas.ListAnalysesResponse_AnalysisSummaryList, &v.AnalysisSummaryList)
+		case schemas.ListAnalysesResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListAnalysesResponse_NextToken, v.NextToken)
+		case schemas.ListAnalysesResponse_RequestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.ListAnalysesResponse_RequestId, v.RequestId)
+		case schemas.ListAnalysesResponse_Status:
+			return d.ReadInt32(schemas.ListAnalysesResponse_Status, &v.Status)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListAnalysesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListAnalyses{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAnalyses, schemas.ListAnalysesRequest, schemas.ListAnalysesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListAnalyses{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAnalyses, schemas.ListAnalysesRequest, schemas.ListAnalysesResponse), output: &ListAnalysesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

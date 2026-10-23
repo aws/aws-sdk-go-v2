@@ -4,6 +4,8 @@ package kafka
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/kafka/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -40,6 +42,21 @@ type DeleteChannelInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteChannelInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteChannelRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteChannelInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ChannelArn != nil {
+		s.WriteString(schemas.DeleteChannelRequest_ChannelArn, *v.ChannelArn)
+	}
+	if v.ClusterArn != nil {
+		s.WriteString(schemas.DeleteChannelRequest_ClusterArn, *v.ClusterArn)
+	}
+}
+
 // Returns the channel ARN and the cluster-operation ARN that tracks the
 // asynchronous delete.
 type DeleteChannelOutput struct {
@@ -58,13 +75,38 @@ type DeleteChannelOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteChannelOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteChannelResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteChannelOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ChannelArn != nil {
+		s.WriteString(schemas.DeleteChannelResponse_ChannelArn, *v.ChannelArn)
+	}
+	if v.ClusterOperationArn != nil {
+		s.WriteString(schemas.DeleteChannelResponse_ClusterOperationArn, *v.ClusterOperationArn)
+	}
+}
+func (v *DeleteChannelOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteChannelResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteChannelResponse_ChannelArn:
+			v.ChannelArn = new(string)
+			return d.ReadString(schemas.DeleteChannelResponse_ChannelArn, v.ChannelArn)
+		case schemas.DeleteChannelResponse_ClusterOperationArn:
+			v.ClusterOperationArn = new(string)
+			return d.ReadString(schemas.DeleteChannelResponse_ClusterOperationArn, v.ClusterOperationArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteChannelMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteChannel{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteChannel, schemas.DeleteChannelRequest, schemas.DeleteChannelResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteChannel{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteChannel, schemas.DeleteChannelRequest, schemas.DeleteChannelResponse), output: &DeleteChannelOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

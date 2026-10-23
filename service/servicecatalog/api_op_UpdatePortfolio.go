@@ -4,7 +4,9 @@ package servicecatalog
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/servicecatalog/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/servicecatalog/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -58,6 +60,32 @@ type UpdatePortfolioInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdatePortfolioInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdatePortfolioInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdatePortfolioInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AcceptLanguage != nil {
+		s.WriteString(schemas.UpdatePortfolioInput_AcceptLanguage, *v.AcceptLanguage)
+	}
+	serializeAddTags(s, schemas.UpdatePortfolioInput_AddTags, v.AddTags)
+	if v.Description != nil {
+		s.WriteString(schemas.UpdatePortfolioInput_Description, *v.Description)
+	}
+	if v.DisplayName != nil {
+		s.WriteString(schemas.UpdatePortfolioInput_DisplayName, *v.DisplayName)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.UpdatePortfolioInput_Id, *v.Id)
+	}
+	if v.ProviderName != nil {
+		s.WriteString(schemas.UpdatePortfolioInput_ProviderName, *v.ProviderName)
+	}
+	serializeTagKeys(s, schemas.UpdatePortfolioInput_RemoveTags, v.RemoveTags)
+}
+
 type UpdatePortfolioOutput struct {
 
 	// Information about the portfolio.
@@ -72,13 +100,37 @@ type UpdatePortfolioOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdatePortfolioOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdatePortfolioOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdatePortfolioOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PortfolioDetail != nil {
+		s.WriteStruct(schemas.UpdatePortfolioOutput_PortfolioDetail)
+		v.PortfolioDetail.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeTags(s, schemas.UpdatePortfolioOutput_Tags, v.Tags)
+}
+func (v *UpdatePortfolioOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdatePortfolioOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdatePortfolioOutput_PortfolioDetail:
+			v.PortfolioDetail = &types.PortfolioDetail{}
+			return v.PortfolioDetail.Deserialize(d)
+		case schemas.UpdatePortfolioOutput_Tags:
+			return deserializeTags(d, schemas.UpdatePortfolioOutput_Tags, &v.Tags)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdatePortfolioMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdatePortfolio{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdatePortfolio, schemas.UpdatePortfolioInput, schemas.UpdatePortfolioOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdatePortfolio{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdatePortfolio, schemas.UpdatePortfolioInput, schemas.UpdatePortfolioOutput), output: &UpdatePortfolioOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

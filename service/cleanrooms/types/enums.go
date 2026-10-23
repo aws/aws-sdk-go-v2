@@ -1680,6 +1680,29 @@ func (SyntheticDataColumnType) Values() []SyntheticDataColumnType {
 	}
 }
 
+type TableReferenceType string
+
+// Enum values for TableReferenceType
+const (
+	TableReferenceTypeGlue       TableReferenceType = "GLUE"
+	TableReferenceTypeSnowflake  TableReferenceType = "SNOWFLAKE"
+	TableReferenceTypeAthena     TableReferenceType = "ATHENA"
+	TableReferenceTypeDatabricks TableReferenceType = "DATABRICKS"
+)
+
+// Values returns all known values for TableReferenceType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (TableReferenceType) Values() []TableReferenceType {
+	return []TableReferenceType{
+		"GLUE",
+		"SNOWFLAKE",
+		"ATHENA",
+		"DATABRICKS",
+	}
+}
+
 type TargetProtectedJobStatus string
 
 // Enum values for TargetProtectedJobStatus

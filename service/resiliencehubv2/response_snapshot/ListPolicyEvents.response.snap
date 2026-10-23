@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"events":[{"actor":{"accountId":"__AccountId__","principalId":"__PrincipalId__","type":"USER","userName":"__UserName__"},"eventDetails":{"description":"__Description__","eventMetadata":{"policyAttachedToService":{"accountId":"__AccountId__","serviceArn":"__ServiceArn__"}},"title":"__Title__"},"eventId":"__EventId__","eventType":"POLICY_ATTACHED_TO_SERVICE","policyArn":"__PolicyArn__","timestamp":946684800},{"actor":{"accountId":"__AccountId__","principalId":"__PrincipalId__","type":"USER","userName":"__UserName__"},"eventDetails":{"description":"__Description__","eventMetadata":{"policyAttachedToService":{"accountId":"__AccountId__","serviceArn":"__ServiceArn__"}},"title":"__Title__"},"eventId":"__EventId__","eventType":"POLICY_ATTACHED_TO_SERVICE","policyArn":"__PolicyArn__","timestamp":946684800}],"nextToken":"__NextToken__"}

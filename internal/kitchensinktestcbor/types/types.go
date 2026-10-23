@@ -3,7 +3,65 @@
 package types
 
 import (
+	"github.com/aws/aws-sdk-go-v2/internal/kitchensinktestcbor/schemas"
+	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 )
+
+type ListValueStruct struct {
+	Name *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *ListValueStruct) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListValueStruct)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListValueStruct) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.ListValueStruct_name, *v.Name)
+	}
+}
+func (v *ListValueStruct) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListValueStruct, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListValueStruct_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.ListValueStruct_name, v.Name)
+		}
+		return nil
+	})
+}
+
+type MapValueStruct struct {
+	Name *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *MapValueStruct) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MapValueStruct)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MapValueStruct) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.MapValueStruct_name, *v.Name)
+	}
+}
+func (v *MapValueStruct) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MapValueStruct, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MapValueStruct_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.MapValueStruct_name, v.Name)
+		}
+		return nil
+	})
+}
 
 type noSmithyDocumentSerde = smithydocument.NoSerde

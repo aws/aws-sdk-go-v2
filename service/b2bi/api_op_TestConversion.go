@@ -4,7 +4,9 @@ package b2bi
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/b2bi/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/b2bi/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -42,6 +44,25 @@ type TestConversionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *TestConversionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TestConversionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TestConversionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Source != nil {
+		s.WriteStruct(schemas.TestConversionRequest_source)
+		v.Source.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Target != nil {
+		s.WriteStruct(schemas.TestConversionRequest_target)
+		v.Target.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type TestConversionOutput struct {
 
 	// Returns the converted file content.
@@ -63,13 +84,35 @@ type TestConversionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *TestConversionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TestConversionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TestConversionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConvertedFileContent != nil {
+		s.WriteString(schemas.TestConversionResponse_convertedFileContent, *v.ConvertedFileContent)
+	}
+	serializeValidationMessages(s, schemas.TestConversionResponse_validationMessages, v.ValidationMessages)
+}
+func (v *TestConversionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TestConversionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TestConversionResponse_convertedFileContent:
+			v.ConvertedFileContent = new(string)
+			return d.ReadString(schemas.TestConversionResponse_convertedFileContent, v.ConvertedFileContent)
+		case schemas.TestConversionResponse_validationMessages:
+			return deserializeValidationMessages(d, schemas.TestConversionResponse_validationMessages, &v.ValidationMessages)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationTestConversionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpTestConversion{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.TestConversion, schemas.TestConversionRequest, schemas.TestConversionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpTestConversion{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.TestConversion, schemas.TestConversionRequest, schemas.TestConversionResponse), output: &TestConversionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

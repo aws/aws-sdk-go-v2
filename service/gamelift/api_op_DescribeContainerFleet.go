@@ -26,9 +26,9 @@ import (
 // If successful, a ContainerFleet object is returned. This object includes the
 // fleet properties, including information about the most recent deployment.
 //
-// Some API operations limit the number of fleet IDs that allowed in one request.
-// If a request exceeds this limit, the request fails and the error message
-// contains the maximum allowed number.
+// Some API operations limit the number of fleet IDs that are allowed in one
+// request. If a request exceeds this limit, the request fails and the error
+// message contains the maximum allowed number.
 func (c *Client) DescribeContainerFleet(ctx context.Context, params *DescribeContainerFleetInput, optFns ...func(*Options)) (*DescribeContainerFleetOutput, error) {
 	if params == nil {
 		params = &DescribeContainerFleetInput{}

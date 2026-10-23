@@ -4,6 +4,8 @@ package iotmanagedintegrations
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/iotmanagedintegrations/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -34,6 +36,18 @@ type StartAccountAssociationRefreshInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartAccountAssociationRefreshInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartAccountAssociationRefreshRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartAccountAssociationRefreshInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountAssociationId != nil {
+		s.WriteString(schemas.StartAccountAssociationRefreshRequest_AccountAssociationId, *v.AccountAssociationId)
+	}
+}
+
 type StartAccountAssociationRefreshOutput struct {
 
 	// Third-party IoT platform OAuth authorization server URL with all required
@@ -50,13 +64,32 @@ type StartAccountAssociationRefreshOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartAccountAssociationRefreshOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartAccountAssociationRefreshResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartAccountAssociationRefreshOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.OAuthAuthorizationUrl != nil {
+		s.WriteString(schemas.StartAccountAssociationRefreshResponse_OAuthAuthorizationUrl, *v.OAuthAuthorizationUrl)
+	}
+}
+func (v *StartAccountAssociationRefreshOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartAccountAssociationRefreshResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartAccountAssociationRefreshResponse_OAuthAuthorizationUrl:
+			v.OAuthAuthorizationUrl = new(string)
+			return d.ReadString(schemas.StartAccountAssociationRefreshResponse_OAuthAuthorizationUrl, v.OAuthAuthorizationUrl)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartAccountAssociationRefreshMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpStartAccountAssociationRefresh{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartAccountAssociationRefresh, schemas.StartAccountAssociationRefreshRequest, schemas.StartAccountAssociationRefreshResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStartAccountAssociationRefresh{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartAccountAssociationRefresh, schemas.StartAccountAssociationRefreshRequest, schemas.StartAccountAssociationRefreshResponse), output: &StartAccountAssociationRefreshOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

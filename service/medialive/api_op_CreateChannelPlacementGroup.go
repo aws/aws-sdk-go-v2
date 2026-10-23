@@ -5,7 +5,9 @@ package medialive
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/medialive/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/medialive/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -59,6 +61,26 @@ type CreateChannelPlacementGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateChannelPlacementGroupInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateChannelPlacementGroupRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateChannelPlacementGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClusterId != nil {
+		s.WriteString(schemas.CreateChannelPlacementGroupRequest_ClusterId, *v.ClusterId)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateChannelPlacementGroupRequest_Name, *v.Name)
+	}
+	serialize__listOf__string(s, schemas.CreateChannelPlacementGroupRequest_Nodes, v.Nodes)
+	if v.RequestId != nil {
+		s.WriteString(schemas.CreateChannelPlacementGroupRequest_RequestId, *v.RequestId)
+	}
+	serializeTags(s, schemas.CreateChannelPlacementGroupRequest_Tags, v.Tags)
+}
+
 // Placeholder documentation for CreateChannelPlacementGroupResponse
 type CreateChannelPlacementGroupOutput struct {
 
@@ -92,13 +114,66 @@ type CreateChannelPlacementGroupOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateChannelPlacementGroupOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateChannelPlacementGroupResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateChannelPlacementGroupOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.CreateChannelPlacementGroupResponse_Arn, *v.Arn)
+	}
+	serialize__listOf__string(s, schemas.CreateChannelPlacementGroupResponse_Channels, v.Channels)
+	if v.ClusterId != nil {
+		s.WriteString(schemas.CreateChannelPlacementGroupResponse_ClusterId, *v.ClusterId)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.CreateChannelPlacementGroupResponse_Id, *v.Id)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateChannelPlacementGroupResponse_Name, *v.Name)
+	}
+	serialize__listOf__string(s, schemas.CreateChannelPlacementGroupResponse_Nodes, v.Nodes)
+	if v.State != "" {
+		s.WriteString(schemas.CreateChannelPlacementGroupResponse_State, string(v.State))
+	}
+}
+func (v *CreateChannelPlacementGroupOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateChannelPlacementGroupResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateChannelPlacementGroupResponse_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.CreateChannelPlacementGroupResponse_Arn, v.Arn)
+		case schemas.CreateChannelPlacementGroupResponse_Channels:
+			return deserialize__listOf__string(d, schemas.CreateChannelPlacementGroupResponse_Channels, &v.Channels)
+		case schemas.CreateChannelPlacementGroupResponse_ClusterId:
+			v.ClusterId = new(string)
+			return d.ReadString(schemas.CreateChannelPlacementGroupResponse_ClusterId, v.ClusterId)
+		case schemas.CreateChannelPlacementGroupResponse_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.CreateChannelPlacementGroupResponse_Id, v.Id)
+		case schemas.CreateChannelPlacementGroupResponse_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.CreateChannelPlacementGroupResponse_Name, v.Name)
+		case schemas.CreateChannelPlacementGroupResponse_Nodes:
+			return deserialize__listOf__string(d, schemas.CreateChannelPlacementGroupResponse_Nodes, &v.Nodes)
+		case schemas.CreateChannelPlacementGroupResponse_State:
+			var ev string
+			if err := d.ReadString(schemas.CreateChannelPlacementGroupResponse_State, &ev); err != nil {
+				return err
+			}
+			v.State = types.ChannelPlacementGroupState(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateChannelPlacementGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateChannelPlacementGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateChannelPlacementGroup, schemas.CreateChannelPlacementGroupRequest, schemas.CreateChannelPlacementGroupResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateChannelPlacementGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateChannelPlacementGroup, schemas.CreateChannelPlacementGroupRequest, schemas.CreateChannelPlacementGroupResponse), output: &CreateChannelPlacementGroupOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

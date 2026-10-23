@@ -4,7 +4,9 @@ package pinpointemail
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/pinpointemail/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/pinpointemail/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -55,6 +57,19 @@ type CreateEmailIdentityInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateEmailIdentityInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateEmailIdentityRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateEmailIdentityInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EmailIdentity != nil {
+		s.WriteString(schemas.CreateEmailIdentityRequest_EmailIdentity, *v.EmailIdentity)
+	}
+	serializeTagList(s, schemas.CreateEmailIdentityRequest_Tags, v.Tags)
+}
+
 // If the email identity is a domain, this object contains tokens that you can use
 // to create a set of CNAME records. To sucessfully verify your domain, you have to
 // add these records to the DNS configuration for your domain.
@@ -83,13 +98,49 @@ type CreateEmailIdentityOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateEmailIdentityOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateEmailIdentityResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateEmailIdentityOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DkimAttributes != nil {
+		s.WriteStruct(schemas.CreateEmailIdentityResponse_DkimAttributes)
+		v.DkimAttributes.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.IdentityType != "" {
+		s.WriteString(schemas.CreateEmailIdentityResponse_IdentityType, string(v.IdentityType))
+	}
+	if v.VerifiedForSendingStatus != false {
+		s.WriteBool(schemas.CreateEmailIdentityResponse_VerifiedForSendingStatus, v.VerifiedForSendingStatus)
+	}
+}
+func (v *CreateEmailIdentityOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateEmailIdentityResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateEmailIdentityResponse_DkimAttributes:
+			v.DkimAttributes = &types.DkimAttributes{}
+			return v.DkimAttributes.Deserialize(d)
+		case schemas.CreateEmailIdentityResponse_IdentityType:
+			var ev string
+			if err := d.ReadString(schemas.CreateEmailIdentityResponse_IdentityType, &ev); err != nil {
+				return err
+			}
+			v.IdentityType = types.IdentityType(ev)
+			return nil
+		case schemas.CreateEmailIdentityResponse_VerifiedForSendingStatus:
+			return d.ReadBool(schemas.CreateEmailIdentityResponse_VerifiedForSendingStatus, &v.VerifiedForSendingStatus)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateEmailIdentityMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateEmailIdentity{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateEmailIdentity, schemas.CreateEmailIdentityRequest, schemas.CreateEmailIdentityResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateEmailIdentity{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateEmailIdentity, schemas.CreateEmailIdentityRequest, schemas.CreateEmailIdentityResponse), output: &CreateEmailIdentityOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

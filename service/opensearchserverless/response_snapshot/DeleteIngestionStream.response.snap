@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: OpenSearchServerless.DeleteIngestionStream
+
+{"collectionId":"__CollectionId__","ingestionStreamId":"__IngestionStreamId__","ingestionStreamName":"__IngestionStreamName__","status":"CREATING"}

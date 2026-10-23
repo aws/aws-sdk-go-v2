@@ -5,7 +5,9 @@ package devicefarm
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/devicefarm/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/devicefarm/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -57,6 +59,39 @@ type ListTestGridSessionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListTestGridSessionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListTestGridSessionsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListTestGridSessionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreationTimeAfter != nil {
+		s.WriteTime(schemas.ListTestGridSessionsRequest_creationTimeAfter, *v.CreationTimeAfter)
+	}
+	if v.CreationTimeBefore != nil {
+		s.WriteTime(schemas.ListTestGridSessionsRequest_creationTimeBefore, *v.CreationTimeBefore)
+	}
+	if v.EndTimeAfter != nil {
+		s.WriteTime(schemas.ListTestGridSessionsRequest_endTimeAfter, *v.EndTimeAfter)
+	}
+	if v.EndTimeBefore != nil {
+		s.WriteTime(schemas.ListTestGridSessionsRequest_endTimeBefore, *v.EndTimeBefore)
+	}
+	if v.MaxResult != nil {
+		s.WriteInt32(schemas.ListTestGridSessionsRequest_maxResult, *v.MaxResult)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListTestGridSessionsRequest_nextToken, *v.NextToken)
+	}
+	if v.ProjectArn != nil {
+		s.WriteString(schemas.ListTestGridSessionsRequest_projectArn, *v.ProjectArn)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.ListTestGridSessionsRequest_status, string(v.Status))
+	}
+}
+
 type ListTestGridSessionsOutput struct {
 
 	// Pagination token.
@@ -71,13 +106,35 @@ type ListTestGridSessionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListTestGridSessionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListTestGridSessionsResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListTestGridSessionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListTestGridSessionsResult_nextToken, *v.NextToken)
+	}
+	serializeTestGridSessions(s, schemas.ListTestGridSessionsResult_testGridSessions, v.TestGridSessions)
+}
+func (v *ListTestGridSessionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListTestGridSessionsResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListTestGridSessionsResult_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListTestGridSessionsResult_nextToken, v.NextToken)
+		case schemas.ListTestGridSessionsResult_testGridSessions:
+			return deserializeTestGridSessions(d, schemas.ListTestGridSessionsResult_testGridSessions, &v.TestGridSessions)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListTestGridSessionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListTestGridSessions{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListTestGridSessions, schemas.ListTestGridSessionsRequest, schemas.ListTestGridSessionsResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListTestGridSessions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListTestGridSessions, schemas.ListTestGridSessionsRequest, schemas.ListTestGridSessionsResult), output: &ListTestGridSessionsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

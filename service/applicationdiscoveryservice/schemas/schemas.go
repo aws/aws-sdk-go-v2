@@ -271,7 +271,8 @@ var _ApplicationWave = smithy.NewSchema(smithy.ShapeID{
 var AuthorizationErrorException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.applicationdiscoveryservice",
 	Name:      "AuthorizationErrorException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 403})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 403})
 var AuthorizationErrorException_message *smithy.Schema
 
 var BatchDeleteAgentError = smithy.NewSchema(smithy.ShapeID{
@@ -447,7 +448,8 @@ var _ConfigurationTagSet_member *smithy.Schema
 var ConflictErrorException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.applicationdiscoveryservice",
 	Name:      "ConflictErrorException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 409})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 409})
 var ConflictErrorException_message *smithy.Schema
 
 var ContinuousExportDescription = smithy.NewSchema(smithy.ShapeID{
@@ -852,7 +854,8 @@ var _FilterValues_member *smithy.Schema
 var HomeRegionNotSetException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.applicationdiscoveryservice",
 	Name:      "HomeRegionNotSetException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var HomeRegionNotSetException_message *smithy.Schema
 
 var ImportStatus = smithy.NewSchema(smithy.ShapeID{
@@ -975,19 +978,22 @@ var _Integer = smithy.NewSchema(smithy.ShapeID{
 var InvalidParameterException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.applicationdiscoveryservice",
 	Name:      "InvalidParameterException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var InvalidParameterException_message *smithy.Schema
 
 var InvalidParameterValueException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.applicationdiscoveryservice",
 	Name:      "InvalidParameterValueException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var InvalidParameterValueException_message *smithy.Schema
 
 var LimitExceededException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.applicationdiscoveryservice",
 	Name:      "LimitExceededException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var LimitExceededException_message *smithy.Schema
 
 var _Long = smithy.NewSchema(smithy.ShapeID{
@@ -1036,7 +1042,8 @@ var OfferingClass_CONVERTIBLE *smithy.Schema
 var OperationNotPermittedException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.applicationdiscoveryservice",
 	Name:      "OperationNotPermittedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 429})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 429})
 var OperationNotPermittedException_message *smithy.Schema
 
 var OrderByElement = smithy.NewSchema(smithy.ShapeID{
@@ -1089,13 +1096,15 @@ var ReservedInstanceOptions_termLength *smithy.Schema
 var ResourceInUseException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.applicationdiscoveryservice",
 	Name:      "ResourceInUseException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var ResourceInUseException_message *smithy.Schema
 
 var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.applicationdiscoveryservice",
 	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var ResourceNotFoundException_message *smithy.Schema
 
 var _S3Bucket = smithy.NewSchema(smithy.ShapeID{
@@ -1119,7 +1128,8 @@ var _SchemaStorageConfig_value *smithy.Schema
 var ServerInternalErrorException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.applicationdiscoveryservice",
 	Name:      "ServerInternalErrorException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 500})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
+	&smithytraits.HTTPError{Code: 500})
 var ServerInternalErrorException_message *smithy.Schema
 
 var _String = smithy.NewSchema(smithy.ShapeID{

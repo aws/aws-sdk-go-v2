@@ -4,6 +4,8 @@ package datapipeline
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/datapipeline/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,19 @@ type RemoveTagsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RemoveTagsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RemoveTagsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RemoveTagsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PipelineId != nil {
+		s.WriteString(schemas.RemoveTagsInput_pipelineId, *v.PipelineId)
+	}
+	serializestringList(s, schemas.RemoveTagsInput_tagKeys, v.TagKeys)
+}
+
 // Contains the output of RemoveTags.
 type RemoveTagsOutput struct {
 	// Metadata pertaining to the operation's result.
@@ -47,13 +62,26 @@ type RemoveTagsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RemoveTagsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RemoveTagsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RemoveTagsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *RemoveTagsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RemoveTagsOutput, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationRemoveTagsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpRemoveTags{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RemoveTags, schemas.RemoveTagsInput, schemas.RemoveTagsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpRemoveTags{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RemoveTags, schemas.RemoveTagsInput, schemas.RemoveTagsOutput), output: &RemoveTagsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

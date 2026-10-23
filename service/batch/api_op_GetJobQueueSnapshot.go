@@ -4,7 +4,9 @@ package batch
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/batch/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/batch/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -40,6 +42,18 @@ type GetJobQueueSnapshotInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetJobQueueSnapshotInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetJobQueueSnapshotRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetJobQueueSnapshotInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.JobQueue != nil {
+		s.WriteString(schemas.GetJobQueueSnapshotRequest_jobQueue, *v.JobQueue)
+	}
+}
+
 type GetJobQueueSnapshotOutput struct {
 
 	// The list of the first 100 RUNNABLE jobs in each job queue. For
@@ -62,13 +76,50 @@ type GetJobQueueSnapshotOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetJobQueueSnapshotOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetJobQueueSnapshotResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetJobQueueSnapshotOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FrontOfQueue != nil {
+		s.WriteStruct(schemas.GetJobQueueSnapshotResponse_frontOfQueue)
+		v.FrontOfQueue.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.FrontOfQuotaShares != nil {
+		s.WriteStruct(schemas.GetJobQueueSnapshotResponse_frontOfQuotaShares)
+		v.FrontOfQuotaShares.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.QueueUtilization != nil {
+		s.WriteStruct(schemas.GetJobQueueSnapshotResponse_queueUtilization)
+		v.QueueUtilization.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetJobQueueSnapshotOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetJobQueueSnapshotResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetJobQueueSnapshotResponse_frontOfQueue:
+			v.FrontOfQueue = &types.FrontOfQueueDetail{}
+			return v.FrontOfQueue.Deserialize(d)
+		case schemas.GetJobQueueSnapshotResponse_frontOfQuotaShares:
+			v.FrontOfQuotaShares = &types.FrontOfQuotaSharesDetail{}
+			return v.FrontOfQuotaShares.Deserialize(d)
+		case schemas.GetJobQueueSnapshotResponse_queueUtilization:
+			v.QueueUtilization = &types.QueueSnapshotUtilizationDetail{}
+			return v.QueueUtilization.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetJobQueueSnapshotMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetJobQueueSnapshot{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetJobQueueSnapshot, schemas.GetJobQueueSnapshotRequest, schemas.GetJobQueueSnapshotResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetJobQueueSnapshot{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetJobQueueSnapshot, schemas.GetJobQueueSnapshotRequest, schemas.GetJobQueueSnapshotResponse), output: &GetJobQueueSnapshotOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

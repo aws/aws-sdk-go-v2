@@ -5,7 +5,9 @@ package resiliencehub
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/resiliencehub/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/resiliencehub/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -51,6 +53,27 @@ type ListMetricsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListMetricsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListMetricsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListMetricsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeConditionList(s, schemas.ListMetricsRequest_conditions, v.Conditions)
+	if v.DataSource != nil {
+		s.WriteString(schemas.ListMetricsRequest_dataSource, *v.DataSource)
+	}
+	serializeFieldList(s, schemas.ListMetricsRequest_fields, v.Fields)
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListMetricsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListMetricsRequest_nextToken, *v.NextToken)
+	}
+	serializeSortList(s, schemas.ListMetricsRequest_sorts, v.Sorts)
+}
+
 type ListMetricsOutput struct {
 
 	// Specifies all the list of metric values for each row of metrics.
@@ -67,13 +90,35 @@ type ListMetricsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListMetricsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListMetricsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListMetricsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListMetricsResponse_nextToken, *v.NextToken)
+	}
+	serializeRowList(s, schemas.ListMetricsResponse_rows, v.Rows)
+}
+func (v *ListMetricsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListMetricsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListMetricsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListMetricsResponse_nextToken, v.NextToken)
+		case schemas.ListMetricsResponse_rows:
+			return deserializeRowList(d, schemas.ListMetricsResponse_rows, &v.Rows)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListMetricsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListMetrics{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListMetrics, schemas.ListMetricsRequest, schemas.ListMetricsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListMetrics{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListMetrics, schemas.ListMetricsRequest, schemas.ListMetricsResponse), output: &ListMetricsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

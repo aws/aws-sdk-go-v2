@@ -5,7 +5,9 @@ package devicefarm
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/devicefarm/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/devicefarm/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -40,6 +42,21 @@ type ListSuitesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListSuitesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListSuitesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListSuitesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.ListSuitesRequest_arn, *v.Arn)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListSuitesRequest_nextToken, *v.NextToken)
+	}
+}
+
 // Represents the result of a list suites request.
 type ListSuitesOutput struct {
 
@@ -57,13 +74,35 @@ type ListSuitesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListSuitesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListSuitesResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListSuitesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListSuitesResult_nextToken, *v.NextToken)
+	}
+	serializeSuites(s, schemas.ListSuitesResult_suites, v.Suites)
+}
+func (v *ListSuitesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListSuitesResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListSuitesResult_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListSuitesResult_nextToken, v.NextToken)
+		case schemas.ListSuitesResult_suites:
+			return deserializeSuites(d, schemas.ListSuitesResult_suites, &v.Suites)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListSuitesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListSuites{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListSuites, schemas.ListSuitesRequest, schemas.ListSuitesResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListSuites{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListSuites, schemas.ListSuitesRequest, schemas.ListSuitesResult), output: &ListSuitesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

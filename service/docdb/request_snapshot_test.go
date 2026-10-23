@@ -407,6 +407,7 @@ func TestCheckRequestSnapshot_CreateDBCluster(t *testing.T) {
 		ManageMasterUserPassword: ptr.Bool(true),
 		MasterUserSecretKmsKeyId: ptr.String("__MasterUserSecretKmsKeyId__"),
 		NetworkType:              ptr.String("__NetworkType__"),
+		CopyTagsToSnapshot:       ptr.Bool(true),
 		SourceRegion:             ptr.String("__SourceRegion__"),
 		destinationRegion:        ptr.String("__destinationRegion__"),
 	}
@@ -1732,6 +1733,7 @@ func TestCheckRequestSnapshot_ModifyDBCluster(t *testing.T) {
 		MasterUserSecretKmsKeyId: ptr.String("__MasterUserSecretKmsKeyId__"),
 		RotateMasterUserPassword: ptr.Bool(true),
 		NetworkType:              ptr.String("__NetworkType__"),
+		CopyTagsToSnapshot:       ptr.Bool(true),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -2184,8 +2186,9 @@ func TestCheckRequestSnapshot_RestoreDBClusterFromSnapshot(t *testing.T) {
 			MinCapacity: ptr.Float64(1.0),
 			MaxCapacity: ptr.Float64(1.0),
 		},
-		StorageType: ptr.String("__StorageType__"),
-		NetworkType: ptr.String("__NetworkType__"),
+		StorageType:        ptr.String("__StorageType__"),
+		NetworkType:        ptr.String("__NetworkType__"),
+		CopyTagsToSnapshot: ptr.Bool(true),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -2243,8 +2246,9 @@ func TestCheckRequestSnapshot_RestoreDBClusterToPointInTime(t *testing.T) {
 			MinCapacity: ptr.Float64(1.0),
 			MaxCapacity: ptr.Float64(1.0),
 		},
-		StorageType: ptr.String("__StorageType__"),
-		NetworkType: ptr.String("__NetworkType__"),
+		StorageType:        ptr.String("__StorageType__"),
+		NetworkType:        ptr.String("__NetworkType__"),
+		CopyTagsToSnapshot: ptr.Bool(true),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -2574,6 +2578,7 @@ func TestUpdateRequestSnapshot_CreateDBCluster(t *testing.T) {
 		ManageMasterUserPassword: ptr.Bool(true),
 		MasterUserSecretKmsKeyId: ptr.String("__MasterUserSecretKmsKeyId__"),
 		NetworkType:              ptr.String("__NetworkType__"),
+		CopyTagsToSnapshot:       ptr.Bool(true),
 		SourceRegion:             ptr.String("__SourceRegion__"),
 		destinationRegion:        ptr.String("__destinationRegion__"),
 	}
@@ -3899,6 +3904,7 @@ func TestUpdateRequestSnapshot_ModifyDBCluster(t *testing.T) {
 		MasterUserSecretKmsKeyId: ptr.String("__MasterUserSecretKmsKeyId__"),
 		RotateMasterUserPassword: ptr.Bool(true),
 		NetworkType:              ptr.String("__NetworkType__"),
+		CopyTagsToSnapshot:       ptr.Bool(true),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -4351,8 +4357,9 @@ func TestUpdateRequestSnapshot_RestoreDBClusterFromSnapshot(t *testing.T) {
 			MinCapacity: ptr.Float64(1.0),
 			MaxCapacity: ptr.Float64(1.0),
 		},
-		StorageType: ptr.String("__StorageType__"),
-		NetworkType: ptr.String("__NetworkType__"),
+		StorageType:        ptr.String("__StorageType__"),
+		NetworkType:        ptr.String("__NetworkType__"),
+		CopyTagsToSnapshot: ptr.Bool(true),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -4410,8 +4417,9 @@ func TestUpdateRequestSnapshot_RestoreDBClusterToPointInTime(t *testing.T) {
 			MinCapacity: ptr.Float64(1.0),
 			MaxCapacity: ptr.Float64(1.0),
 		},
-		StorageType: ptr.String("__StorageType__"),
-		NetworkType: ptr.String("__NetworkType__"),
+		StorageType:        ptr.String("__StorageType__"),
+		NetworkType:        ptr.String("__NetworkType__"),
+		CopyTagsToSnapshot: ptr.Bool(true),
 	}
 	body := &bytes.Buffer{}
 	method := ""

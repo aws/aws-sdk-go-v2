@@ -4,7 +4,9 @@ package cloudfrontkeyvaluestore
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/cloudfrontkeyvaluestore/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cloudfrontkeyvaluestore/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -46,6 +48,22 @@ type UpdateKeysInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateKeysInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateKeysRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateKeysInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDeleteKeyRequestsList(s, schemas.UpdateKeysRequest_Deletes, v.Deletes)
+	if v.IfMatch != nil {
+		s.WriteString(schemas.UpdateKeysRequest_IfMatch, *v.IfMatch)
+	}
+	if v.KvsARN != nil {
+		s.WriteString(schemas.UpdateKeysRequest_KvsARN, *v.KvsARN)
+	}
+	serializePutKeyRequestsList(s, schemas.UpdateKeysRequest_Puts, v.Puts)
+}
 func (in *UpdateKeysInput) bindEndpointParams(p *EndpointParameters) {
 
 	p.KvsARN = in.KvsARN
@@ -77,13 +95,44 @@ type UpdateKeysOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateKeysOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateKeysResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateKeysOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ETag != nil {
+		s.WriteString(schemas.UpdateKeysResponse_ETag, *v.ETag)
+	}
+	if v.ItemCount != nil {
+		s.WriteInt32(schemas.UpdateKeysResponse_ItemCount, *v.ItemCount)
+	}
+	if v.TotalSizeInBytes != nil {
+		s.WriteInt64(schemas.UpdateKeysResponse_TotalSizeInBytes, *v.TotalSizeInBytes)
+	}
+}
+func (v *UpdateKeysOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateKeysResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateKeysResponse_ETag:
+			v.ETag = new(string)
+			return d.ReadString(schemas.UpdateKeysResponse_ETag, v.ETag)
+		case schemas.UpdateKeysResponse_ItemCount:
+			v.ItemCount = new(int32)
+			return d.ReadInt32(schemas.UpdateKeysResponse_ItemCount, v.ItemCount)
+		case schemas.UpdateKeysResponse_TotalSizeInBytes:
+			v.TotalSizeInBytes = new(int64)
+			return d.ReadInt64(schemas.UpdateKeysResponse_TotalSizeInBytes, v.TotalSizeInBytes)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateKeysMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateKeys{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateKeys, schemas.UpdateKeysRequest, schemas.UpdateKeysResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateKeys{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateKeys, schemas.UpdateKeysRequest, schemas.UpdateKeysResponse), output: &UpdateKeysOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

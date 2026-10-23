@@ -563,6 +563,10 @@ func TestUpdateResponseSnapshot_BatchGetJobEntity(t *testing.T) {
 						},
 					},
 					SchemaVersion: ptr.String("__SchemaVersion__"),
+					Extensions: []string{
+						"__Member__",
+						"__Member__",
+					},
 					PathMappingRules: []types.PathMappingRule{
 						{
 							SourcePathFormat: types.PathFormat("windows"),
@@ -603,6 +607,10 @@ func TestUpdateResponseSnapshot_BatchGetJobEntity(t *testing.T) {
 						},
 					},
 					SchemaVersion: ptr.String("__SchemaVersion__"),
+					Extensions: []string{
+						"__Member__",
+						"__Member__",
+					},
 					PathMappingRules: []types.PathMappingRule{
 						{
 							SourcePathFormat: types.PathFormat("windows"),
@@ -3906,6 +3914,50 @@ func TestUpdateResponseSnapshot_ListLimits(t *testing.T) {
 	}
 }
 
+func TestUpdateResponseSnapshot_ListMemberships(t *testing.T) {
+	want := &ListMembershipsOutput{
+		Memberships: []types.MembershipSummary{
+			&types.MembershipSummaryMemberFarm{
+				Value: types.FarmMember{
+					FarmId:          ptr.String("__FarmId__"),
+					PrincipalId:     ptr.String("__PrincipalId__"),
+					PrincipalType:   types.DeadlinePrincipalType("USER"),
+					IdentityStoreId: ptr.String("__IdentityStoreId__"),
+					MembershipLevel: types.MembershipLevel("VIEWER"),
+				},
+			},
+			&types.MembershipSummaryMemberFarm{
+				Value: types.FarmMember{
+					FarmId:          ptr.String("__FarmId__"),
+					PrincipalId:     ptr.String("__PrincipalId__"),
+					PrincipalType:   types.DeadlinePrincipalType("USER"),
+					IdentityStoreId: ptr.String("__IdentityStoreId__"),
+					MembershipLevel: types.MembershipLevel("VIEWER"),
+				},
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	proto := restjson1.New(schemas.Deadline)
+	opSchema := smithy.NewOperationSchema(schemas.ListMemberships, schemas.ListMembershipsResponse, schemas.ListMembershipsResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("ListMemberships.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateResponseSnapshot_ListMeteredProducts(t *testing.T) {
 	want := &ListMeteredProductsOutput{
 		MeteredProducts: []types.MeteredProductSummary{
@@ -5648,6 +5700,9 @@ func TestUpdateResponseSnapshot_UpdateWorkerSchedule(t *testing.T) {
 						"key0": "__Value__",
 					},
 					Error: ptr.String("__Error__"),
+				},
+				Metadata: map[string]string{
+					"key0": "__Value__",
 				},
 			},
 		},

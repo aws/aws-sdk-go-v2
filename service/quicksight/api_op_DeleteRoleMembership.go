@@ -4,7 +4,9 @@ package quicksight
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/quicksight/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/quicksight/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -51,6 +53,27 @@ type DeleteRoleMembershipInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteRoleMembershipInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteRoleMembershipRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteRoleMembershipInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AwsAccountId != nil {
+		s.WriteString(schemas.DeleteRoleMembershipRequest_AwsAccountId, *v.AwsAccountId)
+	}
+	if v.MemberName != nil {
+		s.WriteString(schemas.DeleteRoleMembershipRequest_MemberName, *v.MemberName)
+	}
+	if v.Namespace != nil {
+		s.WriteString(schemas.DeleteRoleMembershipRequest_Namespace, *v.Namespace)
+	}
+	if v.Role != "" {
+		s.WriteString(schemas.DeleteRoleMembershipRequest_Role, string(v.Role))
+	}
+}
+
 type DeleteRoleMembershipOutput struct {
 
 	// The Amazon Web Services request ID for this operation.
@@ -65,13 +88,37 @@ type DeleteRoleMembershipOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteRoleMembershipOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteRoleMembershipResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteRoleMembershipOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RequestId != nil {
+		s.WriteString(schemas.DeleteRoleMembershipResponse_RequestId, *v.RequestId)
+	}
+	if v.Status != 0 {
+		s.WriteInt32(schemas.DeleteRoleMembershipResponse_Status, v.Status)
+	}
+}
+func (v *DeleteRoleMembershipOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteRoleMembershipResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteRoleMembershipResponse_RequestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.DeleteRoleMembershipResponse_RequestId, v.RequestId)
+		case schemas.DeleteRoleMembershipResponse_Status:
+			return d.ReadInt32(schemas.DeleteRoleMembershipResponse_Status, &v.Status)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteRoleMembershipMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteRoleMembership{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteRoleMembership, schemas.DeleteRoleMembershipRequest, schemas.DeleteRoleMembershipResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteRoleMembership{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteRoleMembership, schemas.DeleteRoleMembershipRequest, schemas.DeleteRoleMembershipResponse), output: &DeleteRoleMembershipOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

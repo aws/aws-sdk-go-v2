@@ -4,6 +4,8 @@ package connectcampaignsv2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/connectcampaignsv2/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,21 @@ type UpdateCampaignFlowAssociationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateCampaignFlowAssociationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateCampaignFlowAssociationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateCampaignFlowAssociationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConnectCampaignFlowArn != nil {
+		s.WriteString(schemas.UpdateCampaignFlowAssociationRequest_connectCampaignFlowArn, *v.ConnectCampaignFlowArn)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.UpdateCampaignFlowAssociationRequest_id, *v.Id)
+	}
+}
+
 type UpdateCampaignFlowAssociationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -46,13 +63,26 @@ type UpdateCampaignFlowAssociationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateCampaignFlowAssociationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateCampaignFlowAssociationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *UpdateCampaignFlowAssociationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateCampaignFlowAssociationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateCampaignFlowAssociation{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateCampaignFlowAssociation, schemas.UpdateCampaignFlowAssociationRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateCampaignFlowAssociation{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateCampaignFlowAssociation, schemas.UpdateCampaignFlowAssociationRequest, nil), output: &UpdateCampaignFlowAssociationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

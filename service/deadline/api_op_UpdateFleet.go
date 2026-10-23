@@ -13,6 +13,14 @@ import (
 )
 
 // Updates a fleet.
+//
+// Workers that are running when you call UpdateFleet keep the instance type and
+// capabilities that they launched with until they scale in. Deadline Cloud can
+// schedule jobs that you submit after the update on these existing workers, so the
+// new configuration might not take effect immediately. To make sure that all
+// workers use the new configuration, set maxWorkerCount to 0, use the ListWorkers
+// operation to confirm that the fleet has no workers, and then restore
+// maxWorkerCount .
 func (c *Client) UpdateFleet(ctx context.Context, params *UpdateFleetInput, optFns ...func(*Options)) (*UpdateFleetOutput, error) {
 	if params == nil {
 		params = &UpdateFleetInput{}

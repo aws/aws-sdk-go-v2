@@ -3,4 +3,4 @@ POST /
 Content-Type: application/x-amz-json-1.0
 X-Amz-Target: PinpointSMSVoiceV2.CarrierLookup
 
-{"PhoneNumber":"__PhoneNumber__"}
+{"EnableCleansing":true,"PhoneNumber":"__PhoneNumber__"}

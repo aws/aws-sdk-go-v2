@@ -190,6 +190,7 @@
                 "aws.protocols#awsJson1_1": {},
                 "smithy.api#documentation": "<p>This is the <i>Firewall Manager API Reference</i>. This guide is for\n      developers who need detailed information about the Firewall Manager API actions, data\n      types, and errors. For detailed information about Firewall Manager features, see the\n        <a href=\"https://docs.aws.amazon.com/waf/latest/developerguide/fms-chapter.html\">Firewall Manager Developer Guide</a>.</p>\n         <p>Some API actions require explicit resource permissions. For information, see the developer guide topic\n        <a href=\"https://docs.aws.amazon.com/waf/latest/developerguide/fms-security_iam_service-with-iam.html#fms-security_iam_service-with-iam-roles-service\">Service roles for Firewall Manager</a>.\n</p>",
                 "smithy.api#title": "Firewall Management Service",
+                "smithy.protocols#rpcv2Cbor": {},
                 "smithy.rules#endpointBdd": {
                     "version": "1.1",
                     "parameters": {

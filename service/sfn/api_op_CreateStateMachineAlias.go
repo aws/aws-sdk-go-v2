@@ -4,7 +4,9 @@ package sfn
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/sfn/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sfn/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -84,6 +86,22 @@ type CreateStateMachineAliasInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateStateMachineAliasInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateStateMachineAliasInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateStateMachineAliasInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.CreateStateMachineAliasInput_description, *v.Description)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateStateMachineAliasInput_name, *v.Name)
+	}
+	serializeRoutingConfigurationList(s, schemas.CreateStateMachineAliasInput_routingConfiguration, v.RoutingConfiguration)
+}
+
 type CreateStateMachineAliasOutput struct {
 
 	// The date the state machine alias was created.
@@ -102,13 +120,38 @@ type CreateStateMachineAliasOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateStateMachineAliasOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateStateMachineAliasOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateStateMachineAliasOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreationDate != nil {
+		s.WriteTime(schemas.CreateStateMachineAliasOutput_creationDate, *v.CreationDate)
+	}
+	if v.StateMachineAliasArn != nil {
+		s.WriteString(schemas.CreateStateMachineAliasOutput_stateMachineAliasArn, *v.StateMachineAliasArn)
+	}
+}
+func (v *CreateStateMachineAliasOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateStateMachineAliasOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateStateMachineAliasOutput_creationDate:
+			v.CreationDate = new(time.Time)
+			return d.ReadTime(schemas.CreateStateMachineAliasOutput_creationDate, v.CreationDate)
+		case schemas.CreateStateMachineAliasOutput_stateMachineAliasArn:
+			v.StateMachineAliasArn = new(string)
+			return d.ReadString(schemas.CreateStateMachineAliasOutput_stateMachineAliasArn, v.StateMachineAliasArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateStateMachineAliasMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpCreateStateMachineAlias{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateStateMachineAlias, schemas.CreateStateMachineAliasInput, schemas.CreateStateMachineAliasOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpCreateStateMachineAlias{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateStateMachineAlias, schemas.CreateStateMachineAliasInput, schemas.CreateStateMachineAliasOutput), output: &CreateStateMachineAliasOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,6 +4,8 @@ package geomaps
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/geomaps/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -209,6 +211,21 @@ type GetGlyphsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetGlyphsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetGlyphsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetGlyphsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FontStack != nil {
+		s.WriteString(schemas.GetGlyphsRequest_FontStack, *v.FontStack)
+	}
+	if v.FontUnicodeRange != nil {
+		s.WriteString(schemas.GetGlyphsRequest_FontUnicodeRange, *v.FontUnicodeRange)
+	}
+}
+
 type GetGlyphsOutput struct {
 
 	// The Glyph, as a binary blob.
@@ -230,13 +247,49 @@ type GetGlyphsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetGlyphsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetGlyphsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetGlyphsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Blob != nil {
+		s.WriteBlob(schemas.GetGlyphsResponse_Blob, v.Blob)
+	}
+	if v.CacheControl != nil {
+		s.WriteString(schemas.GetGlyphsResponse_CacheControl, *v.CacheControl)
+	}
+	if v.ContentType != nil {
+		s.WriteString(schemas.GetGlyphsResponse_ContentType, *v.ContentType)
+	}
+	if v.ETag != nil {
+		s.WriteString(schemas.GetGlyphsResponse_ETag, *v.ETag)
+	}
+}
+func (v *GetGlyphsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetGlyphsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetGlyphsResponse_Blob:
+			return d.ReadBlob(schemas.GetGlyphsResponse_Blob, &v.Blob)
+		case schemas.GetGlyphsResponse_CacheControl:
+			v.CacheControl = new(string)
+			return d.ReadString(schemas.GetGlyphsResponse_CacheControl, v.CacheControl)
+		case schemas.GetGlyphsResponse_ContentType:
+			v.ContentType = new(string)
+			return d.ReadString(schemas.GetGlyphsResponse_ContentType, v.ContentType)
+		case schemas.GetGlyphsResponse_ETag:
+			v.ETag = new(string)
+			return d.ReadString(schemas.GetGlyphsResponse_ETag, v.ETag)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetGlyphsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetGlyphs{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetGlyphs, schemas.GetGlyphsRequest, schemas.GetGlyphsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetGlyphs{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetGlyphs, schemas.GetGlyphsRequest, schemas.GetGlyphsResponse), output: &GetGlyphsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

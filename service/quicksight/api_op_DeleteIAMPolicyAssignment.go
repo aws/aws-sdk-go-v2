@@ -4,6 +4,8 @@ package quicksight
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/quicksight/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -44,6 +46,24 @@ type DeleteIAMPolicyAssignmentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteIAMPolicyAssignmentInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteIAMPolicyAssignmentRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteIAMPolicyAssignmentInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AssignmentName != nil {
+		s.WriteString(schemas.DeleteIAMPolicyAssignmentRequest_AssignmentName, *v.AssignmentName)
+	}
+	if v.AwsAccountId != nil {
+		s.WriteString(schemas.DeleteIAMPolicyAssignmentRequest_AwsAccountId, *v.AwsAccountId)
+	}
+	if v.Namespace != nil {
+		s.WriteString(schemas.DeleteIAMPolicyAssignmentRequest_Namespace, *v.Namespace)
+	}
+}
+
 type DeleteIAMPolicyAssignmentOutput struct {
 
 	// The name of the assignment.
@@ -61,13 +81,43 @@ type DeleteIAMPolicyAssignmentOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteIAMPolicyAssignmentOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteIAMPolicyAssignmentResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteIAMPolicyAssignmentOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AssignmentName != nil {
+		s.WriteString(schemas.DeleteIAMPolicyAssignmentResponse_AssignmentName, *v.AssignmentName)
+	}
+	if v.RequestId != nil {
+		s.WriteString(schemas.DeleteIAMPolicyAssignmentResponse_RequestId, *v.RequestId)
+	}
+	if v.Status != 0 {
+		s.WriteInt32(schemas.DeleteIAMPolicyAssignmentResponse_Status, v.Status)
+	}
+}
+func (v *DeleteIAMPolicyAssignmentOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteIAMPolicyAssignmentResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteIAMPolicyAssignmentResponse_AssignmentName:
+			v.AssignmentName = new(string)
+			return d.ReadString(schemas.DeleteIAMPolicyAssignmentResponse_AssignmentName, v.AssignmentName)
+		case schemas.DeleteIAMPolicyAssignmentResponse_RequestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.DeleteIAMPolicyAssignmentResponse_RequestId, v.RequestId)
+		case schemas.DeleteIAMPolicyAssignmentResponse_Status:
+			return d.ReadInt32(schemas.DeleteIAMPolicyAssignmentResponse_Status, &v.Status)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteIAMPolicyAssignmentMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteIAMPolicyAssignment{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteIAMPolicyAssignment, schemas.DeleteIAMPolicyAssignmentRequest, schemas.DeleteIAMPolicyAssignmentResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteIAMPolicyAssignment{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteIAMPolicyAssignment, schemas.DeleteIAMPolicyAssignmentRequest, schemas.DeleteIAMPolicyAssignmentResponse), output: &DeleteIAMPolicyAssignmentOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,6 +4,8 @@ package sesv2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/sesv2/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -51,6 +53,21 @@ type CreateTenantResourceAssociationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateTenantResourceAssociationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateTenantResourceAssociationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateTenantResourceAssociationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ResourceArn != nil {
+		s.WriteString(schemas.CreateTenantResourceAssociationRequest_ResourceArn, *v.ResourceArn)
+	}
+	if v.TenantName != nil {
+		s.WriteString(schemas.CreateTenantResourceAssociationRequest_TenantName, *v.TenantName)
+	}
+}
+
 // If the action is successful, the service sends back an HTTP 200 response with
 // an empty HTTP body.
 type CreateTenantResourceAssociationOutput struct {
@@ -60,13 +77,26 @@ type CreateTenantResourceAssociationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateTenantResourceAssociationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateTenantResourceAssociationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateTenantResourceAssociationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *CreateTenantResourceAssociationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateTenantResourceAssociationResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateTenantResourceAssociationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateTenantResourceAssociation{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateTenantResourceAssociation, schemas.CreateTenantResourceAssociationRequest, schemas.CreateTenantResourceAssociationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateTenantResourceAssociation{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateTenantResourceAssociation, schemas.CreateTenantResourceAssociationRequest, schemas.CreateTenantResourceAssociationResponse), output: &CreateTenantResourceAssociationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

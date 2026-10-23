@@ -4,7 +4,9 @@ package iotmanagedintegrations
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/iotmanagedintegrations/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotmanagedintegrations/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -90,6 +92,45 @@ type StartDeviceDiscoveryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartDeviceDiscoveryInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartDeviceDiscoveryRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartDeviceDiscoveryInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountAssociationId != nil {
+		s.WriteString(schemas.StartDeviceDiscoveryRequest_AccountAssociationId, *v.AccountAssociationId)
+	}
+	if v.AuthenticationMaterial != nil {
+		s.WriteString(schemas.StartDeviceDiscoveryRequest_AuthenticationMaterial, *v.AuthenticationMaterial)
+	}
+	if v.AuthenticationMaterialType != "" {
+		s.WriteString(schemas.StartDeviceDiscoveryRequest_AuthenticationMaterialType, string(v.AuthenticationMaterialType))
+	}
+	if v.ClientToken != nil {
+		s.WriteString(schemas.StartDeviceDiscoveryRequest_ClientToken, *v.ClientToken)
+	}
+	if v.ConnectorAssociationIdentifier != nil {
+		s.WriteString(schemas.StartDeviceDiscoveryRequest_ConnectorAssociationIdentifier, *v.ConnectorAssociationIdentifier)
+	}
+	serializeConnectorDeviceIdList(s, schemas.StartDeviceDiscoveryRequest_ConnectorDeviceIdList, v.ConnectorDeviceIdList)
+	if v.ControllerIdentifier != nil {
+		s.WriteString(schemas.StartDeviceDiscoveryRequest_ControllerIdentifier, *v.ControllerIdentifier)
+	}
+	serializeCustomProtocolDetail(s, schemas.StartDeviceDiscoveryRequest_CustomProtocolDetail, v.CustomProtocolDetail)
+	if v.DiscoveryType != "" {
+		s.WriteString(schemas.StartDeviceDiscoveryRequest_DiscoveryType, string(v.DiscoveryType))
+	}
+	if v.EndDeviceIdentifier != nil {
+		s.WriteString(schemas.StartDeviceDiscoveryRequest_EndDeviceIdentifier, *v.EndDeviceIdentifier)
+	}
+	if v.Protocol != "" {
+		s.WriteString(schemas.StartDeviceDiscoveryRequest_Protocol, string(v.Protocol))
+	}
+	serializeTagsMap(s, schemas.StartDeviceDiscoveryRequest_Tags, v.Tags)
+}
+
 type StartDeviceDiscoveryOutput struct {
 
 	// The id of the device discovery job request.
@@ -104,13 +145,38 @@ type StartDeviceDiscoveryOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartDeviceDiscoveryOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartDeviceDiscoveryResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartDeviceDiscoveryOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Id != nil {
+		s.WriteString(schemas.StartDeviceDiscoveryResponse_Id, *v.Id)
+	}
+	if v.StartedAt != nil {
+		s.WriteTime(schemas.StartDeviceDiscoveryResponse_StartedAt, *v.StartedAt)
+	}
+}
+func (v *StartDeviceDiscoveryOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartDeviceDiscoveryResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartDeviceDiscoveryResponse_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.StartDeviceDiscoveryResponse_Id, v.Id)
+		case schemas.StartDeviceDiscoveryResponse_StartedAt:
+			v.StartedAt = new(time.Time)
+			return d.ReadTime(schemas.StartDeviceDiscoveryResponse_StartedAt, v.StartedAt)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartDeviceDiscoveryMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpStartDeviceDiscovery{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartDeviceDiscovery, schemas.StartDeviceDiscoveryRequest, schemas.StartDeviceDiscoveryResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStartDeviceDiscovery{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartDeviceDiscovery, schemas.StartDeviceDiscoveryRequest, schemas.StartDeviceDiscoveryResponse), output: &StartDeviceDiscoveryOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

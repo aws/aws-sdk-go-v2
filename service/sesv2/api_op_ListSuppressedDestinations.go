@@ -5,7 +5,9 @@ package sesv2
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/sesv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sesv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -62,6 +64,31 @@ type ListSuppressedDestinationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListSuppressedDestinationsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListSuppressedDestinationsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListSuppressedDestinationsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EndDate != nil {
+		s.WriteTime(schemas.ListSuppressedDestinationsRequest_EndDate, *v.EndDate)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListSuppressedDestinationsRequest_NextToken, *v.NextToken)
+	}
+	if v.PageSize != nil {
+		s.WriteInt32(schemas.ListSuppressedDestinationsRequest_PageSize, *v.PageSize)
+	}
+	serializeSuppressionListReasons(s, schemas.ListSuppressedDestinationsRequest_Reasons, v.Reasons)
+	if v.StartDate != nil {
+		s.WriteTime(schemas.ListSuppressedDestinationsRequest_StartDate, *v.StartDate)
+	}
+	if v.TenantName != nil {
+		s.WriteString(schemas.ListSuppressedDestinationsRequest_TenantName, *v.TenantName)
+	}
+}
+
 // A list of suppressed email addresses.
 type ListSuppressedDestinationsOutput struct {
 
@@ -81,13 +108,35 @@ type ListSuppressedDestinationsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListSuppressedDestinationsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListSuppressedDestinationsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListSuppressedDestinationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListSuppressedDestinationsResponse_NextToken, *v.NextToken)
+	}
+	serializeSuppressedDestinationSummaries(s, schemas.ListSuppressedDestinationsResponse_SuppressedDestinationSummaries, v.SuppressedDestinationSummaries)
+}
+func (v *ListSuppressedDestinationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListSuppressedDestinationsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListSuppressedDestinationsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListSuppressedDestinationsResponse_NextToken, v.NextToken)
+		case schemas.ListSuppressedDestinationsResponse_SuppressedDestinationSummaries:
+			return deserializeSuppressedDestinationSummaries(d, schemas.ListSuppressedDestinationsResponse_SuppressedDestinationSummaries, &v.SuppressedDestinationSummaries)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListSuppressedDestinationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListSuppressedDestinations{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListSuppressedDestinations, schemas.ListSuppressedDestinationsRequest, schemas.ListSuppressedDestinationsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListSuppressedDestinations{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListSuppressedDestinations, schemas.ListSuppressedDestinationsRequest, schemas.ListSuppressedDestinationsResponse), output: &ListSuppressedDestinationsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

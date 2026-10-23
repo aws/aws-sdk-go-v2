@@ -4,7 +4,9 @@ package pinpointemail
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/pinpointemail/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/pinpointemail/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -38,6 +40,16 @@ type GetBlacklistReportsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetBlacklistReportsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetBlacklistReportsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetBlacklistReportsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeBlacklistItemNames(s, schemas.GetBlacklistReportsRequest_BlacklistItemNames, v.BlacklistItemNames)
+}
+
 // An object that contains information about blacklist events.
 type GetBlacklistReportsOutput struct {
 
@@ -53,13 +65,29 @@ type GetBlacklistReportsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetBlacklistReportsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetBlacklistReportsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetBlacklistReportsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeBlacklistReport(s, schemas.GetBlacklistReportsResponse_BlacklistReport, v.BlacklistReport)
+}
+func (v *GetBlacklistReportsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetBlacklistReportsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetBlacklistReportsResponse_BlacklistReport:
+			return deserializeBlacklistReport(d, schemas.GetBlacklistReportsResponse_BlacklistReport, &v.BlacklistReport)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetBlacklistReportsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetBlacklistReports{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetBlacklistReports, schemas.GetBlacklistReportsRequest, schemas.GetBlacklistReportsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetBlacklistReports{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetBlacklistReports, schemas.GetBlacklistReportsRequest, schemas.GetBlacklistReportsResponse), output: &GetBlacklistReportsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

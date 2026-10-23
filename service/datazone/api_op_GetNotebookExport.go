@@ -4,7 +4,9 @@ package datazone
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/datazone/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/datazone/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -39,6 +41,21 @@ type GetNotebookExportInput struct {
 	Identifier *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetNotebookExportInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetNotebookExportInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetNotebookExportInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DomainIdentifier != nil {
+		s.WriteString(schemas.GetNotebookExportInput_domainIdentifier, *v.DomainIdentifier)
+	}
+	if v.Identifier != nil {
+		s.WriteString(schemas.GetNotebookExportInput_identifier, *v.Identifier)
+	}
 }
 
 type GetNotebookExportOutput struct {
@@ -94,13 +111,99 @@ type GetNotebookExportOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetNotebookExportOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetNotebookExportOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetNotebookExportOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CompletedAt != nil {
+		s.WriteTime(schemas.GetNotebookExportOutput_completedAt, *v.CompletedAt)
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.GetNotebookExportOutput_createdAt, *v.CreatedAt)
+	}
+	if v.CreatedBy != nil {
+		s.WriteString(schemas.GetNotebookExportOutput_createdBy, *v.CreatedBy)
+	}
+	if v.DomainId != nil {
+		s.WriteString(schemas.GetNotebookExportOutput_domainId, *v.DomainId)
+	}
+	if v.Error != nil {
+		s.WriteStruct(schemas.GetNotebookExportOutput_error)
+		v.Error.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.FileFormat != "" {
+		s.WriteString(schemas.GetNotebookExportOutput_fileFormat, string(v.FileFormat))
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.GetNotebookExportOutput_id, *v.Id)
+	}
+	if v.NotebookId != nil {
+		s.WriteString(schemas.GetNotebookExportOutput_notebookId, *v.NotebookId)
+	}
+	serializeOutputLocation(s, schemas.GetNotebookExportOutput_outputLocation, v.OutputLocation)
+	if v.OwningProjectId != nil {
+		s.WriteString(schemas.GetNotebookExportOutput_owningProjectId, *v.OwningProjectId)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.GetNotebookExportOutput_status, string(v.Status))
+	}
+}
+func (v *GetNotebookExportOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetNotebookExportOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetNotebookExportOutput_completedAt:
+			v.CompletedAt = new(time.Time)
+			return d.ReadTime(schemas.GetNotebookExportOutput_completedAt, v.CompletedAt)
+		case schemas.GetNotebookExportOutput_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.GetNotebookExportOutput_createdAt, v.CreatedAt)
+		case schemas.GetNotebookExportOutput_createdBy:
+			v.CreatedBy = new(string)
+			return d.ReadString(schemas.GetNotebookExportOutput_createdBy, v.CreatedBy)
+		case schemas.GetNotebookExportOutput_domainId:
+			v.DomainId = new(string)
+			return d.ReadString(schemas.GetNotebookExportOutput_domainId, v.DomainId)
+		case schemas.GetNotebookExportOutput_error:
+			v.Error = &types.NotebookExportError{}
+			return v.Error.Deserialize(d)
+		case schemas.GetNotebookExportOutput_fileFormat:
+			var ev string
+			if err := d.ReadString(schemas.GetNotebookExportOutput_fileFormat, &ev); err != nil {
+				return err
+			}
+			v.FileFormat = types.FileFormat(ev)
+			return nil
+		case schemas.GetNotebookExportOutput_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.GetNotebookExportOutput_id, v.Id)
+		case schemas.GetNotebookExportOutput_notebookId:
+			v.NotebookId = new(string)
+			return d.ReadString(schemas.GetNotebookExportOutput_notebookId, v.NotebookId)
+		case schemas.GetNotebookExportOutput_outputLocation:
+			return deserializeOutputLocation(d, schemas.GetNotebookExportOutput_outputLocation, &v.OutputLocation)
+		case schemas.GetNotebookExportOutput_owningProjectId:
+			v.OwningProjectId = new(string)
+			return d.ReadString(schemas.GetNotebookExportOutput_owningProjectId, v.OwningProjectId)
+		case schemas.GetNotebookExportOutput_status:
+			var ev string
+			if err := d.ReadString(schemas.GetNotebookExportOutput_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.NotebookExportStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetNotebookExportMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetNotebookExport{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetNotebookExport, schemas.GetNotebookExportInput, schemas.GetNotebookExportOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetNotebookExport{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetNotebookExport, schemas.GetNotebookExportInput, schemas.GetNotebookExportOutput), output: &GetNotebookExportOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

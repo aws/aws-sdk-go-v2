@@ -4,7 +4,9 @@ package ssmcontacts
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/ssmcontacts/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ssmcontacts/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -61,6 +63,33 @@ type AcceptPageInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AcceptPageInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AcceptPageRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AcceptPageInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AcceptCode != nil {
+		s.WriteString(schemas.AcceptPageRequest_AcceptCode, *v.AcceptCode)
+	}
+	if v.AcceptCodeValidation != "" {
+		s.WriteString(schemas.AcceptPageRequest_AcceptCodeValidation, string(v.AcceptCodeValidation))
+	}
+	if v.AcceptType != "" {
+		s.WriteString(schemas.AcceptPageRequest_AcceptType, string(v.AcceptType))
+	}
+	if v.ContactChannelId != nil {
+		s.WriteString(schemas.AcceptPageRequest_ContactChannelId, *v.ContactChannelId)
+	}
+	if v.Note != nil {
+		s.WriteString(schemas.AcceptPageRequest_Note, *v.Note)
+	}
+	if v.PageId != nil {
+		s.WriteString(schemas.AcceptPageRequest_PageId, *v.PageId)
+	}
+}
+
 type AcceptPageOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -68,13 +97,26 @@ type AcceptPageOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AcceptPageOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AcceptPageResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AcceptPageOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *AcceptPageOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AcceptPageResult, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationAcceptPageMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpAcceptPage{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AcceptPage, schemas.AcceptPageRequest, schemas.AcceptPageResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpAcceptPage{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AcceptPage, schemas.AcceptPageRequest, schemas.AcceptPageResult), output: &AcceptPageOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

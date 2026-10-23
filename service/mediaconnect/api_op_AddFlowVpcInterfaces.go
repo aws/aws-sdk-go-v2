@@ -4,7 +4,9 @@ package mediaconnect
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/mediaconnect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/mediaconnect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,19 @@ type AddFlowVpcInterfacesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AddFlowVpcInterfacesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AddFlowVpcInterfacesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AddFlowVpcInterfacesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FlowArn != nil {
+		s.WriteString(schemas.AddFlowVpcInterfacesRequest_FlowArn, *v.FlowArn)
+	}
+	serialize__listOfVpcInterfaceRequest(s, schemas.AddFlowVpcInterfacesRequest_VpcInterfaces, v.VpcInterfaces)
+}
+
 type AddFlowVpcInterfacesOutput struct {
 
 	//  The ARN of the flow that these VPC interfaces were added to.
@@ -53,13 +68,35 @@ type AddFlowVpcInterfacesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AddFlowVpcInterfacesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AddFlowVpcInterfacesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AddFlowVpcInterfacesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FlowArn != nil {
+		s.WriteString(schemas.AddFlowVpcInterfacesResponse_FlowArn, *v.FlowArn)
+	}
+	serialize__listOfVpcInterface(s, schemas.AddFlowVpcInterfacesResponse_VpcInterfaces, v.VpcInterfaces)
+}
+func (v *AddFlowVpcInterfacesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AddFlowVpcInterfacesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AddFlowVpcInterfacesResponse_FlowArn:
+			v.FlowArn = new(string)
+			return d.ReadString(schemas.AddFlowVpcInterfacesResponse_FlowArn, v.FlowArn)
+		case schemas.AddFlowVpcInterfacesResponse_VpcInterfaces:
+			return deserialize__listOfVpcInterface(d, schemas.AddFlowVpcInterfacesResponse_VpcInterfaces, &v.VpcInterfaces)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationAddFlowVpcInterfacesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpAddFlowVpcInterfaces{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AddFlowVpcInterfaces, schemas.AddFlowVpcInterfacesRequest, schemas.AddFlowVpcInterfacesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpAddFlowVpcInterfaces{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AddFlowVpcInterfaces, schemas.AddFlowVpcInterfacesRequest, schemas.AddFlowVpcInterfacesResponse), output: &AddFlowVpcInterfacesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

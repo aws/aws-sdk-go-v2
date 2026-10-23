@@ -4,6 +4,8 @@ package glue
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/glue/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -44,6 +46,24 @@ type StopMaterializedViewRefreshTaskRunInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StopMaterializedViewRefreshTaskRunInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StopMaterializedViewRefreshTaskRunRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StopMaterializedViewRefreshTaskRunInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CatalogId != nil {
+		s.WriteString(schemas.StopMaterializedViewRefreshTaskRunRequest_CatalogId, *v.CatalogId)
+	}
+	if v.DatabaseName != nil {
+		s.WriteString(schemas.StopMaterializedViewRefreshTaskRunRequest_DatabaseName, *v.DatabaseName)
+	}
+	if v.TableName != nil {
+		s.WriteString(schemas.StopMaterializedViewRefreshTaskRunRequest_TableName, *v.TableName)
+	}
+}
+
 type StopMaterializedViewRefreshTaskRunOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -51,13 +71,26 @@ type StopMaterializedViewRefreshTaskRunOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StopMaterializedViewRefreshTaskRunOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StopMaterializedViewRefreshTaskRunResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StopMaterializedViewRefreshTaskRunOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *StopMaterializedViewRefreshTaskRunOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StopMaterializedViewRefreshTaskRunResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStopMaterializedViewRefreshTaskRunMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStopMaterializedViewRefreshTaskRun{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StopMaterializedViewRefreshTaskRun, schemas.StopMaterializedViewRefreshTaskRunRequest, schemas.StopMaterializedViewRefreshTaskRunResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpStopMaterializedViewRefreshTaskRun{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StopMaterializedViewRefreshTaskRun, schemas.StopMaterializedViewRefreshTaskRunRequest, schemas.StopMaterializedViewRefreshTaskRunResponse), output: &StopMaterializedViewRefreshTaskRunOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

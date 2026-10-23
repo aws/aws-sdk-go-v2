@@ -4,7 +4,9 @@ package glue
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/glue/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/glue/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -48,6 +50,29 @@ type CreateIntegrationResourcePropertyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateIntegrationResourcePropertyInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateIntegrationResourcePropertyRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateIntegrationResourcePropertyInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ResourceArn != nil {
+		s.WriteString(schemas.CreateIntegrationResourcePropertyRequest_ResourceArn, *v.ResourceArn)
+	}
+	if v.SourceProcessingProperties != nil {
+		s.WriteStruct(schemas.CreateIntegrationResourcePropertyRequest_SourceProcessingProperties)
+		v.SourceProcessingProperties.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeIntegrationTagsList(s, schemas.CreateIntegrationResourcePropertyRequest_Tags, v.Tags)
+	if v.TargetProcessingProperties != nil {
+		s.WriteStruct(schemas.CreateIntegrationResourcePropertyRequest_TargetProcessingProperties)
+		v.TargetProcessingProperties.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type CreateIntegrationResourcePropertyOutput struct {
 
 	// The connection ARN of the source, or the database ARN of the target.
@@ -71,13 +96,54 @@ type CreateIntegrationResourcePropertyOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateIntegrationResourcePropertyOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateIntegrationResourcePropertyResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateIntegrationResourcePropertyOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ResourceArn != nil {
+		s.WriteString(schemas.CreateIntegrationResourcePropertyResponse_ResourceArn, *v.ResourceArn)
+	}
+	if v.ResourcePropertyArn != nil {
+		s.WriteString(schemas.CreateIntegrationResourcePropertyResponse_ResourcePropertyArn, *v.ResourcePropertyArn)
+	}
+	if v.SourceProcessingProperties != nil {
+		s.WriteStruct(schemas.CreateIntegrationResourcePropertyResponse_SourceProcessingProperties)
+		v.SourceProcessingProperties.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TargetProcessingProperties != nil {
+		s.WriteStruct(schemas.CreateIntegrationResourcePropertyResponse_TargetProcessingProperties)
+		v.TargetProcessingProperties.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateIntegrationResourcePropertyOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateIntegrationResourcePropertyResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateIntegrationResourcePropertyResponse_ResourceArn:
+			v.ResourceArn = new(string)
+			return d.ReadString(schemas.CreateIntegrationResourcePropertyResponse_ResourceArn, v.ResourceArn)
+		case schemas.CreateIntegrationResourcePropertyResponse_ResourcePropertyArn:
+			v.ResourcePropertyArn = new(string)
+			return d.ReadString(schemas.CreateIntegrationResourcePropertyResponse_ResourcePropertyArn, v.ResourcePropertyArn)
+		case schemas.CreateIntegrationResourcePropertyResponse_SourceProcessingProperties:
+			v.SourceProcessingProperties = &types.SourceProcessingProperties{}
+			return v.SourceProcessingProperties.Deserialize(d)
+		case schemas.CreateIntegrationResourcePropertyResponse_TargetProcessingProperties:
+			v.TargetProcessingProperties = &types.TargetProcessingProperties{}
+			return v.TargetProcessingProperties.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateIntegrationResourcePropertyMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateIntegrationResourceProperty{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateIntegrationResourceProperty, schemas.CreateIntegrationResourcePropertyRequest, schemas.CreateIntegrationResourcePropertyResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateIntegrationResourceProperty{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateIntegrationResourceProperty, schemas.CreateIntegrationResourcePropertyRequest, schemas.CreateIntegrationResourcePropertyResponse), output: &CreateIntegrationResourcePropertyOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

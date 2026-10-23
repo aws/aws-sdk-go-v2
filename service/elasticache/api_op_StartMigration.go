@@ -8,7 +8,7 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
-// Start the migration of data.
+// Starts the migration of data.
 func (c *Client) StartMigration(ctx context.Context, params *StartMigrationInput, optFns ...func(*Options)) (*StartMigrationOutput, error) {
 	if params == nil {
 		params = &StartMigrationInput{}
@@ -26,16 +26,26 @@ func (c *Client) StartMigration(ctx context.Context, params *StartMigrationInput
 
 type StartMigrationInput struct {
 
-	// List of endpoints from which data should be migrated. For Valkey or Redis OSS
-	// (cluster mode disabled), the list should have only one element.
-	//
-	// This member is required.
+	// Specifies whether ElastiCache automatically attempts to complete the migration
+	// after data sync is established.
+	AutoCutover *bool
+
+	// Specifies whether ElastiCache deletes existing data in the serverless cache
+	// before migration begins. After StopMigration , StartMigration requires this
+	// option to restart the data sync.
+	ClearTargetCacheData *bool
+
+	// The list of endpoints from which to migrate data. For Valkey or Redis OSS
+	// (cluster mode disabled), the list should have only one element. For serverless
+	// cache migrations, ElastiCache uses the endpoint that you provided in
+	// PrepareMigration .
 	CustomerNodeEndpointList []types.CustomerNodeEndpoint
 
 	// The ID of the replication group to which data should be migrated.
-	//
-	// This member is required.
 	ReplicationGroupId *string
+
+	// The name of the serverless cache to which data is being migrated.
+	ServerlessCacheName *string
 
 	noSmithyDocumentSerde
 }
@@ -45,6 +55,10 @@ type StartMigrationOutput struct {
 	// Contains all of the attributes of a specific Valkey or Redis OSS replication
 	// group.
 	ReplicationGroup *types.ReplicationGroup
+
+	// Provides the details of the serverless cache to which ElastiCache is migrating
+	// data.
+	ServerlessCache *types.ServerlessCache
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -72,9 +86,6 @@ func (c *Client) addOperationStartMigrationMiddlewares(stack *middleware.Stack, 
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = addOpStartMigrationValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

@@ -5,7 +5,9 @@ package lookoutequipment
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/lookoutequipment/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lookoutequipment/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -78,6 +80,42 @@ type ImportModelVersionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ImportModelVersionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ImportModelVersionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ImportModelVersionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.ImportModelVersionRequest_ClientToken, *v.ClientToken)
+	}
+	if v.DatasetName != nil {
+		s.WriteString(schemas.ImportModelVersionRequest_DatasetName, *v.DatasetName)
+	}
+	if v.InferenceDataImportStrategy != "" {
+		s.WriteString(schemas.ImportModelVersionRequest_InferenceDataImportStrategy, string(v.InferenceDataImportStrategy))
+	}
+	if v.LabelsInputConfiguration != nil {
+		s.WriteStruct(schemas.ImportModelVersionRequest_LabelsInputConfiguration)
+		v.LabelsInputConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ModelName != nil {
+		s.WriteString(schemas.ImportModelVersionRequest_ModelName, *v.ModelName)
+	}
+	if v.RoleArn != nil {
+		s.WriteString(schemas.ImportModelVersionRequest_RoleArn, *v.RoleArn)
+	}
+	if v.ServerSideKmsKeyId != nil {
+		s.WriteString(schemas.ImportModelVersionRequest_ServerSideKmsKeyId, *v.ServerSideKmsKeyId)
+	}
+	if v.SourceModelVersionArn != nil {
+		s.WriteString(schemas.ImportModelVersionRequest_SourceModelVersionArn, *v.SourceModelVersionArn)
+	}
+	serializeTagList(s, schemas.ImportModelVersionRequest_Tags, v.Tags)
+}
+
 type ImportModelVersionOutput struct {
 
 	// The Amazon Resource Name (ARN) of the model being created.
@@ -101,13 +139,60 @@ type ImportModelVersionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ImportModelVersionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ImportModelVersionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ImportModelVersionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ModelArn != nil {
+		s.WriteString(schemas.ImportModelVersionResponse_ModelArn, *v.ModelArn)
+	}
+	if v.ModelName != nil {
+		s.WriteString(schemas.ImportModelVersionResponse_ModelName, *v.ModelName)
+	}
+	if v.ModelVersion != nil {
+		s.WriteInt64(schemas.ImportModelVersionResponse_ModelVersion, *v.ModelVersion)
+	}
+	if v.ModelVersionArn != nil {
+		s.WriteString(schemas.ImportModelVersionResponse_ModelVersionArn, *v.ModelVersionArn)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.ImportModelVersionResponse_Status, string(v.Status))
+	}
+}
+func (v *ImportModelVersionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ImportModelVersionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ImportModelVersionResponse_ModelArn:
+			v.ModelArn = new(string)
+			return d.ReadString(schemas.ImportModelVersionResponse_ModelArn, v.ModelArn)
+		case schemas.ImportModelVersionResponse_ModelName:
+			v.ModelName = new(string)
+			return d.ReadString(schemas.ImportModelVersionResponse_ModelName, v.ModelName)
+		case schemas.ImportModelVersionResponse_ModelVersion:
+			v.ModelVersion = new(int64)
+			return d.ReadInt64(schemas.ImportModelVersionResponse_ModelVersion, v.ModelVersion)
+		case schemas.ImportModelVersionResponse_ModelVersionArn:
+			v.ModelVersionArn = new(string)
+			return d.ReadString(schemas.ImportModelVersionResponse_ModelVersionArn, v.ModelVersionArn)
+		case schemas.ImportModelVersionResponse_Status:
+			var ev string
+			if err := d.ReadString(schemas.ImportModelVersionResponse_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.ModelVersionStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationImportModelVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpImportModelVersion{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ImportModelVersion, schemas.ImportModelVersionRequest, schemas.ImportModelVersionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpImportModelVersion{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ImportModelVersion, schemas.ImportModelVersionRequest, schemas.ImportModelVersionResponse), output: &ImportModelVersionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

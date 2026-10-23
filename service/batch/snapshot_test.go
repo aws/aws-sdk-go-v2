@@ -74,6 +74,18 @@ func TestCheckSnapshot_CancelJob(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_CancelJobs(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CancelJobs(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CancelJobs")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_CreateComputeEnvironment(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateComputeEnvironment(context.Background(), nil, func(o *Options) {
@@ -494,11 +506,35 @@ func TestCheckSnapshot_TerminateJob(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_TerminateJobs(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.TerminateJobs(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "TerminateJobs")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_TerminateServiceJob(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.TerminateServiceJob(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "TerminateServiceJob")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_TerminateServiceJobs(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.TerminateServiceJobs(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "TerminateServiceJobs")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -606,6 +642,18 @@ func TestUpdateSnapshot_CancelJob(t *testing.T) {
 	_, err := svc.CancelJob(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "CancelJob")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_CancelJobs(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CancelJobs(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CancelJobs")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1033,11 +1081,35 @@ func TestUpdateSnapshot_TerminateJob(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_TerminateJobs(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.TerminateJobs(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "TerminateJobs")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_TerminateServiceJob(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.TerminateServiceJob(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "TerminateServiceJob")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_TerminateServiceJobs(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.TerminateServiceJobs(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "TerminateServiceJobs")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

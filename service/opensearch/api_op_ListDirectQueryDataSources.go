@@ -4,7 +4,9 @@ package opensearch
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/opensearch/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/opensearch/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -36,6 +38,18 @@ type ListDirectQueryDataSourcesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListDirectQueryDataSourcesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListDirectQueryDataSourcesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListDirectQueryDataSourcesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListDirectQueryDataSourcesRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListDirectQueryDataSourcesOutput struct {
 
 	//  A list of the direct query data sources that are returned by the
@@ -53,13 +67,35 @@ type ListDirectQueryDataSourcesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListDirectQueryDataSourcesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListDirectQueryDataSourcesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListDirectQueryDataSourcesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDirectQueryDataSourceList(s, schemas.ListDirectQueryDataSourcesResponse_DirectQueryDataSources, v.DirectQueryDataSources)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListDirectQueryDataSourcesResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListDirectQueryDataSourcesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListDirectQueryDataSourcesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListDirectQueryDataSourcesResponse_DirectQueryDataSources:
+			return deserializeDirectQueryDataSourceList(d, schemas.ListDirectQueryDataSourcesResponse_DirectQueryDataSources, &v.DirectQueryDataSources)
+		case schemas.ListDirectQueryDataSourcesResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListDirectQueryDataSourcesResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListDirectQueryDataSourcesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListDirectQueryDataSources{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDirectQueryDataSources, schemas.ListDirectQueryDataSourcesRequest, schemas.ListDirectQueryDataSourcesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListDirectQueryDataSources{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDirectQueryDataSources, schemas.ListDirectQueryDataSourcesRequest, schemas.ListDirectQueryDataSourcesResponse), output: &ListDirectQueryDataSourcesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

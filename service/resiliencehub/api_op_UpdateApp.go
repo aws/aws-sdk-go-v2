@@ -4,7 +4,9 @@ package resiliencehub
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/resiliencehub/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/resiliencehub/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -65,6 +67,67 @@ type UpdateAppInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateAppInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateAppRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateAppInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AppArn != nil {
+		s.WriteString(schemas.UpdateAppRequest_appArn, *v.AppArn)
+	}
+	if v.AssessmentSchedule != "" {
+		s.WriteString(schemas.UpdateAppRequest_assessmentSchedule, string(v.AssessmentSchedule))
+	}
+	if v.ClearResiliencyPolicyArn != nil {
+		s.WriteBool(schemas.UpdateAppRequest_clearResiliencyPolicyArn, *v.ClearResiliencyPolicyArn)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateAppRequest_description, *v.Description)
+	}
+	serializeEventSubscriptionList(s, schemas.UpdateAppRequest_eventSubscriptions, v.EventSubscriptions)
+	if v.PermissionModel != nil {
+		s.WriteStruct(schemas.UpdateAppRequest_permissionModel)
+		v.PermissionModel.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.PolicyArn != nil {
+		s.WriteString(schemas.UpdateAppRequest_policyArn, *v.PolicyArn)
+	}
+}
+func (v *UpdateAppInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateAppRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateAppRequest_appArn:
+			v.AppArn = new(string)
+			return d.ReadString(schemas.UpdateAppRequest_appArn, v.AppArn)
+		case schemas.UpdateAppRequest_assessmentSchedule:
+			var ev string
+			if err := d.ReadString(schemas.UpdateAppRequest_assessmentSchedule, &ev); err != nil {
+				return err
+			}
+			v.AssessmentSchedule = types.AppAssessmentScheduleType(ev)
+			return nil
+		case schemas.UpdateAppRequest_clearResiliencyPolicyArn:
+			v.ClearResiliencyPolicyArn = new(bool)
+			return d.ReadBool(schemas.UpdateAppRequest_clearResiliencyPolicyArn, v.ClearResiliencyPolicyArn)
+		case schemas.UpdateAppRequest_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.UpdateAppRequest_description, v.Description)
+		case schemas.UpdateAppRequest_eventSubscriptions:
+			return deserializeEventSubscriptionList(d, schemas.UpdateAppRequest_eventSubscriptions, &v.EventSubscriptions)
+		case schemas.UpdateAppRequest_permissionModel:
+			v.PermissionModel = &types.PermissionModel{}
+			return v.PermissionModel.Deserialize(d)
+		case schemas.UpdateAppRequest_policyArn:
+			v.PolicyArn = new(string)
+			return d.ReadString(schemas.UpdateAppRequest_policyArn, v.PolicyArn)
+		}
+		return nil
+	})
+}
+
 type UpdateAppOutput struct {
 
 	// The specified application, returned as an object with details including
@@ -79,13 +142,34 @@ type UpdateAppOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateAppOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateAppResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateAppOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.App != nil {
+		s.WriteStruct(schemas.UpdateAppResponse_app)
+		v.App.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateAppOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateAppResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateAppResponse_app:
+			v.App = &types.App{}
+			return v.App.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateAppMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateApp{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateApp, schemas.UpdateAppRequest, schemas.UpdateAppResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateApp{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateApp, schemas.UpdateAppRequest, schemas.UpdateAppResponse), output: &UpdateAppOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

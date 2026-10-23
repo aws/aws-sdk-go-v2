@@ -4,7 +4,9 @@ package quicksight
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/quicksight/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/quicksight/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -67,6 +69,31 @@ type UpdateIAMPolicyAssignmentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateIAMPolicyAssignmentInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateIAMPolicyAssignmentRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateIAMPolicyAssignmentInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AssignmentName != nil {
+		s.WriteString(schemas.UpdateIAMPolicyAssignmentRequest_AssignmentName, *v.AssignmentName)
+	}
+	if v.AssignmentStatus != "" {
+		s.WriteString(schemas.UpdateIAMPolicyAssignmentRequest_AssignmentStatus, string(v.AssignmentStatus))
+	}
+	if v.AwsAccountId != nil {
+		s.WriteString(schemas.UpdateIAMPolicyAssignmentRequest_AwsAccountId, *v.AwsAccountId)
+	}
+	serializeIdentityMap(s, schemas.UpdateIAMPolicyAssignmentRequest_Identities, v.Identities)
+	if v.Namespace != nil {
+		s.WriteString(schemas.UpdateIAMPolicyAssignmentRequest_Namespace, *v.Namespace)
+	}
+	if v.PolicyArn != nil {
+		s.WriteString(schemas.UpdateIAMPolicyAssignmentRequest_PolicyArn, *v.PolicyArn)
+	}
+}
+
 type UpdateIAMPolicyAssignmentOutput struct {
 
 	// The ID of the assignment.
@@ -106,13 +133,68 @@ type UpdateIAMPolicyAssignmentOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateIAMPolicyAssignmentOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateIAMPolicyAssignmentResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateIAMPolicyAssignmentOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AssignmentId != nil {
+		s.WriteString(schemas.UpdateIAMPolicyAssignmentResponse_AssignmentId, *v.AssignmentId)
+	}
+	if v.AssignmentName != nil {
+		s.WriteString(schemas.UpdateIAMPolicyAssignmentResponse_AssignmentName, *v.AssignmentName)
+	}
+	if v.AssignmentStatus != "" {
+		s.WriteString(schemas.UpdateIAMPolicyAssignmentResponse_AssignmentStatus, string(v.AssignmentStatus))
+	}
+	serializeIdentityMap(s, schemas.UpdateIAMPolicyAssignmentResponse_Identities, v.Identities)
+	if v.PolicyArn != nil {
+		s.WriteString(schemas.UpdateIAMPolicyAssignmentResponse_PolicyArn, *v.PolicyArn)
+	}
+	if v.RequestId != nil {
+		s.WriteString(schemas.UpdateIAMPolicyAssignmentResponse_RequestId, *v.RequestId)
+	}
+	if v.Status != 0 {
+		s.WriteInt32(schemas.UpdateIAMPolicyAssignmentResponse_Status, v.Status)
+	}
+}
+func (v *UpdateIAMPolicyAssignmentOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateIAMPolicyAssignmentResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateIAMPolicyAssignmentResponse_AssignmentId:
+			v.AssignmentId = new(string)
+			return d.ReadString(schemas.UpdateIAMPolicyAssignmentResponse_AssignmentId, v.AssignmentId)
+		case schemas.UpdateIAMPolicyAssignmentResponse_AssignmentName:
+			v.AssignmentName = new(string)
+			return d.ReadString(schemas.UpdateIAMPolicyAssignmentResponse_AssignmentName, v.AssignmentName)
+		case schemas.UpdateIAMPolicyAssignmentResponse_AssignmentStatus:
+			var ev string
+			if err := d.ReadString(schemas.UpdateIAMPolicyAssignmentResponse_AssignmentStatus, &ev); err != nil {
+				return err
+			}
+			v.AssignmentStatus = types.AssignmentStatus(ev)
+			return nil
+		case schemas.UpdateIAMPolicyAssignmentResponse_Identities:
+			return deserializeIdentityMap(d, schemas.UpdateIAMPolicyAssignmentResponse_Identities, &v.Identities)
+		case schemas.UpdateIAMPolicyAssignmentResponse_PolicyArn:
+			v.PolicyArn = new(string)
+			return d.ReadString(schemas.UpdateIAMPolicyAssignmentResponse_PolicyArn, v.PolicyArn)
+		case schemas.UpdateIAMPolicyAssignmentResponse_RequestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.UpdateIAMPolicyAssignmentResponse_RequestId, v.RequestId)
+		case schemas.UpdateIAMPolicyAssignmentResponse_Status:
+			return d.ReadInt32(schemas.UpdateIAMPolicyAssignmentResponse_Status, &v.Status)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateIAMPolicyAssignmentMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateIAMPolicyAssignment{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateIAMPolicyAssignment, schemas.UpdateIAMPolicyAssignmentRequest, schemas.UpdateIAMPolicyAssignmentResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateIAMPolicyAssignment{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateIAMPolicyAssignment, schemas.UpdateIAMPolicyAssignmentRequest, schemas.UpdateIAMPolicyAssignmentResponse), output: &UpdateIAMPolicyAssignmentOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

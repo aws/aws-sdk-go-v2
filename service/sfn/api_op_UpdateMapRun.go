@@ -4,6 +4,8 @@ package sfn
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/sfn/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -44,6 +46,27 @@ type UpdateMapRunInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateMapRunInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateMapRunInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateMapRunInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MapRunArn != nil {
+		s.WriteString(schemas.UpdateMapRunInput_mapRunArn, *v.MapRunArn)
+	}
+	if v.MaxConcurrency != nil {
+		s.WriteInt32(schemas.UpdateMapRunInput_maxConcurrency, *v.MaxConcurrency)
+	}
+	if v.ToleratedFailureCount != nil {
+		s.WriteInt64(schemas.UpdateMapRunInput_toleratedFailureCount, *v.ToleratedFailureCount)
+	}
+	if v.ToleratedFailurePercentage != nil {
+		s.WriteFloat32(schemas.UpdateMapRunInput_toleratedFailurePercentage, *v.ToleratedFailurePercentage)
+	}
+}
+
 type UpdateMapRunOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -51,13 +74,26 @@ type UpdateMapRunOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateMapRunOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateMapRunOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateMapRunOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *UpdateMapRunOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateMapRunOutput, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateMapRunMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpUpdateMapRun{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateMapRun, schemas.UpdateMapRunInput, schemas.UpdateMapRunOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpUpdateMapRun{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateMapRun, schemas.UpdateMapRunInput, schemas.UpdateMapRunOutput), output: &UpdateMapRunOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

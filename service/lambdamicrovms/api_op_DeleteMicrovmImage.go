@@ -4,7 +4,9 @@ package lambdamicrovms
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/lambdamicrovms/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lambdamicrovms/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -35,6 +37,18 @@ type DeleteMicrovmImageInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteMicrovmImageInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteMicrovmImageInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteMicrovmImageInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ImageIdentifier != nil {
+		s.WriteString(schemas.DeleteMicrovmImageInput_imageIdentifier, *v.ImageIdentifier)
+	}
+}
+
 type DeleteMicrovmImageOutput struct {
 
 	// The identifier of the deleted MicroVM image.
@@ -53,13 +67,42 @@ type DeleteMicrovmImageOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteMicrovmImageOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteMicrovmImageOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteMicrovmImageOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ImageIdentifier != nil {
+		s.WriteString(schemas.DeleteMicrovmImageOutput_imageIdentifier, *v.ImageIdentifier)
+	}
+	if v.State != "" {
+		s.WriteString(schemas.DeleteMicrovmImageOutput_state, string(v.State))
+	}
+}
+func (v *DeleteMicrovmImageOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteMicrovmImageOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteMicrovmImageOutput_imageIdentifier:
+			v.ImageIdentifier = new(string)
+			return d.ReadString(schemas.DeleteMicrovmImageOutput_imageIdentifier, v.ImageIdentifier)
+		case schemas.DeleteMicrovmImageOutput_state:
+			var ev string
+			if err := d.ReadString(schemas.DeleteMicrovmImageOutput_state, &ev); err != nil {
+				return err
+			}
+			v.State = types.MicrovmImageState(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteMicrovmImageMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteMicrovmImage{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteMicrovmImage, schemas.DeleteMicrovmImageInput, schemas.DeleteMicrovmImageOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteMicrovmImage{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteMicrovmImage, schemas.DeleteMicrovmImageInput, schemas.DeleteMicrovmImageOutput), output: &DeleteMicrovmImageOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

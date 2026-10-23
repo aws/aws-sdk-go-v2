@@ -5,7 +5,9 @@ package odb
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/odb/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/odb/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -126,6 +128,76 @@ type CreateExadbVmClusterInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateExadbVmClusterInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateExadbVmClusterInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateExadbVmClusterInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateExadbVmClusterInput_clientToken, *v.ClientToken)
+	}
+	if v.ClusterName != nil {
+		s.WriteString(schemas.CreateExadbVmClusterInput_clusterName, *v.ClusterName)
+	}
+	if v.DataCollectionOptions != nil {
+		s.WriteStruct(schemas.CreateExadbVmClusterInput_dataCollectionOptions)
+		v.DataCollectionOptions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DisplayName != nil {
+		s.WriteString(schemas.CreateExadbVmClusterInput_displayName, *v.DisplayName)
+	}
+	if v.EnabledEcpuCount != nil {
+		s.WriteInt32(schemas.CreateExadbVmClusterInput_enabledEcpuCount, *v.EnabledEcpuCount)
+	}
+	if v.ExascaleDbStorageVaultId != nil {
+		s.WriteString(schemas.CreateExadbVmClusterInput_exascaleDbStorageVaultId, *v.ExascaleDbStorageVaultId)
+	}
+	if v.GridImageId != nil {
+		s.WriteString(schemas.CreateExadbVmClusterInput_gridImageId, *v.GridImageId)
+	}
+	if v.Hostname != nil {
+		s.WriteString(schemas.CreateExadbVmClusterInput_hostname, *v.Hostname)
+	}
+	if v.LicenseModel != "" {
+		s.WriteString(schemas.CreateExadbVmClusterInput_licenseModel, string(v.LicenseModel))
+	}
+	if v.NodeCount != nil {
+		s.WriteInt32(schemas.CreateExadbVmClusterInput_nodeCount, *v.NodeCount)
+	}
+	if v.OdbNetworkId != nil {
+		s.WriteString(schemas.CreateExadbVmClusterInput_odbNetworkId, *v.OdbNetworkId)
+	}
+	if v.ScanListenerPortTcp != nil {
+		s.WriteInt32(schemas.CreateExadbVmClusterInput_scanListenerPortTcp, *v.ScanListenerPortTcp)
+	}
+	if v.ScanListenerPortTcpSsl != nil {
+		s.WriteInt32(schemas.CreateExadbVmClusterInput_scanListenerPortTcpSsl, *v.ScanListenerPortTcpSsl)
+	}
+	if v.Shape != nil {
+		s.WriteString(schemas.CreateExadbVmClusterInput_shape, *v.Shape)
+	}
+	if v.ShapeAttribute != "" {
+		s.WriteString(schemas.CreateExadbVmClusterInput_shapeAttribute, string(v.ShapeAttribute))
+	}
+	serializeStringList(s, schemas.CreateExadbVmClusterInput_sshPublicKeys, v.SshPublicKeys)
+	if v.SystemVersion != nil {
+		s.WriteString(schemas.CreateExadbVmClusterInput_systemVersion, *v.SystemVersion)
+	}
+	serializeRequestTagMap(s, schemas.CreateExadbVmClusterInput_tags, v.Tags)
+	if v.TimeZone != nil {
+		s.WriteString(schemas.CreateExadbVmClusterInput_timeZone, *v.TimeZone)
+	}
+	if v.TotalEcpuCount != nil {
+		s.WriteInt32(schemas.CreateExadbVmClusterInput_totalEcpuCount, *v.TotalEcpuCount)
+	}
+	if v.VmFileSystemStorageTotalSizeInGBs != nil {
+		s.WriteInt32(schemas.CreateExadbVmClusterInput_vmFileSystemStorageTotalSizeInGBs, *v.VmFileSystemStorageTotalSizeInGBs)
+	}
+}
+
 type CreateExadbVmClusterOutput struct {
 
 	// The unique identifier of the Exascale VM cluster.
@@ -148,13 +220,54 @@ type CreateExadbVmClusterOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateExadbVmClusterOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateExadbVmClusterOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateExadbVmClusterOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DisplayName != nil {
+		s.WriteString(schemas.CreateExadbVmClusterOutput_displayName, *v.DisplayName)
+	}
+	if v.ExadbVmClusterId != nil {
+		s.WriteString(schemas.CreateExadbVmClusterOutput_exadbVmClusterId, *v.ExadbVmClusterId)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.CreateExadbVmClusterOutput_status, string(v.Status))
+	}
+	if v.StatusReason != nil {
+		s.WriteString(schemas.CreateExadbVmClusterOutput_statusReason, *v.StatusReason)
+	}
+}
+func (v *CreateExadbVmClusterOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateExadbVmClusterOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateExadbVmClusterOutput_displayName:
+			v.DisplayName = new(string)
+			return d.ReadString(schemas.CreateExadbVmClusterOutput_displayName, v.DisplayName)
+		case schemas.CreateExadbVmClusterOutput_exadbVmClusterId:
+			v.ExadbVmClusterId = new(string)
+			return d.ReadString(schemas.CreateExadbVmClusterOutput_exadbVmClusterId, v.ExadbVmClusterId)
+		case schemas.CreateExadbVmClusterOutput_status:
+			var ev string
+			if err := d.ReadString(schemas.CreateExadbVmClusterOutput_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.ResourceStatus(ev)
+			return nil
+		case schemas.CreateExadbVmClusterOutput_statusReason:
+			v.StatusReason = new(string)
+			return d.ReadString(schemas.CreateExadbVmClusterOutput_statusReason, v.StatusReason)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateExadbVmClusterMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpCreateExadbVmCluster{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateExadbVmCluster, schemas.CreateExadbVmClusterInput, schemas.CreateExadbVmClusterOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpCreateExadbVmCluster{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateExadbVmCluster, schemas.CreateExadbVmClusterInput, schemas.CreateExadbVmClusterOutput), output: &CreateExadbVmClusterOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

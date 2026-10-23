@@ -5,7 +5,9 @@ package devopsagent
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/devopsagent/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/devopsagent/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -29,6 +31,9 @@ func (c *Client) ListAgentSpaces(ctx context.Context, params *ListAgentSpacesInp
 // Input for listing AgentSpaces with pagination support.
 type ListAgentSpacesInput struct {
 
+	// How much data to include in the response.
+	IncludedData types.IncludedData
+
 	// Maximum number of results to return in a single call.
 	MaxResults *int32
 
@@ -36,6 +41,24 @@ type ListAgentSpacesInput struct {
 	NextToken *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ListAgentSpacesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAgentSpacesInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAgentSpacesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IncludedData != "" {
+		s.WriteString(schemas.ListAgentSpacesInput_includedData, string(v.IncludedData))
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListAgentSpacesInput_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAgentSpacesInput_nextToken, *v.NextToken)
+	}
 }
 
 // Output containing a list of AgentSpaces and pagination token.
@@ -55,13 +78,35 @@ type ListAgentSpacesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAgentSpacesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAgentSpacesOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAgentSpacesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAgentSpaceList(s, schemas.ListAgentSpacesOutput_agentSpaces, v.AgentSpaces)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAgentSpacesOutput_nextToken, *v.NextToken)
+	}
+}
+func (v *ListAgentSpacesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListAgentSpacesOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListAgentSpacesOutput_agentSpaces:
+			return deserializeAgentSpaceList(d, schemas.ListAgentSpacesOutput_agentSpaces, &v.AgentSpaces)
+		case schemas.ListAgentSpacesOutput_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListAgentSpacesOutput_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListAgentSpacesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListAgentSpaces{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAgentSpaces, schemas.ListAgentSpacesInput, schemas.ListAgentSpacesOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListAgentSpaces{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAgentSpaces, schemas.ListAgentSpacesInput, schemas.ListAgentSpacesOutput), output: &ListAgentSpacesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

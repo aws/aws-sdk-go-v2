@@ -4,7 +4,9 @@ package guardduty
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/guardduty/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/guardduty/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -101,6 +103,30 @@ type UpdateOrganizationConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateOrganizationConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateOrganizationConfigurationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateOrganizationConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AutoEnable != nil {
+		s.WriteBool(schemas.UpdateOrganizationConfigurationRequest_AutoEnable, *v.AutoEnable)
+	}
+	if v.AutoEnableOrganizationMembers != "" {
+		s.WriteString(schemas.UpdateOrganizationConfigurationRequest_AutoEnableOrganizationMembers, string(v.AutoEnableOrganizationMembers))
+	}
+	if v.DataSources != nil {
+		s.WriteStruct(schemas.UpdateOrganizationConfigurationRequest_DataSources)
+		v.DataSources.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DetectorId != nil {
+		s.WriteString(schemas.UpdateOrganizationConfigurationRequest_DetectorId, *v.DetectorId)
+	}
+	serializeOrganizationFeaturesConfigurations(s, schemas.UpdateOrganizationConfigurationRequest_Features, v.Features)
+}
+
 type UpdateOrganizationConfigurationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -108,13 +134,26 @@ type UpdateOrganizationConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateOrganizationConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateOrganizationConfigurationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateOrganizationConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *UpdateOrganizationConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateOrganizationConfigurationResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateOrganizationConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateOrganizationConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateOrganizationConfiguration, schemas.UpdateOrganizationConfigurationRequest, schemas.UpdateOrganizationConfigurationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateOrganizationConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateOrganizationConfiguration, schemas.UpdateOrganizationConfigurationRequest, schemas.UpdateOrganizationConfigurationResponse), output: &UpdateOrganizationConfigurationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

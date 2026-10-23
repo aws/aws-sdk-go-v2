@@ -5,7 +5,9 @@ package healthlake
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/healthlake/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/healthlake/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -41,6 +43,26 @@ type ListFHIRDatastoresInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListFHIRDatastoresInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListFHIRDatastoresRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListFHIRDatastoresInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Filter != nil {
+		s.WriteStruct(schemas.ListFHIRDatastoresRequest_Filter)
+		v.Filter.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListFHIRDatastoresRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListFHIRDatastoresRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListFHIRDatastoresOutput struct {
 
 	// The properties associated with all listed data stores.
@@ -57,13 +79,35 @@ type ListFHIRDatastoresOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListFHIRDatastoresOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListFHIRDatastoresResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListFHIRDatastoresOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDatastorePropertiesList(s, schemas.ListFHIRDatastoresResponse_DatastorePropertiesList, v.DatastorePropertiesList)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListFHIRDatastoresResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListFHIRDatastoresOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListFHIRDatastoresResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListFHIRDatastoresResponse_DatastorePropertiesList:
+			return deserializeDatastorePropertiesList(d, schemas.ListFHIRDatastoresResponse_DatastorePropertiesList, &v.DatastorePropertiesList)
+		case schemas.ListFHIRDatastoresResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListFHIRDatastoresResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListFHIRDatastoresMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpListFHIRDatastores{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListFHIRDatastores, schemas.ListFHIRDatastoresRequest, schemas.ListFHIRDatastoresResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpListFHIRDatastores{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListFHIRDatastores, schemas.ListFHIRDatastoresRequest, schemas.ListFHIRDatastoresResponse), output: &ListFHIRDatastoresOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -34,6 +34,12 @@ type GetOfferTermsInput struct {
 	// This member is required.
 	OfferId *string
 
+	// A BCP 47 language tag or comma-separated priority list specifying the preferred
+	// locale for response content. See Locale for supported values, constraints,
+	// fallback behavior, and the default locale. If omitted, the service returns
+	// content in the default locale.
+	Locale *string
+
 	// The maximum number of results that are returned per call. You can use nextToken
 	// to get more results.
 	MaxResults *int32
@@ -51,6 +57,11 @@ type GetOfferTermsOutput struct {
 	//
 	// This member is required.
 	OfferTerms []types.OfferTerm
+
+	// The locale of the returned content. Indicates whether the response contains
+	// content in the requested locale, or fell back to the default locale. See Locale
+	// for details.
+	Locale *string
 
 	// If nextToken is returned, there are more results available. Make the call again
 	// using the returned token to retrieve the next page.

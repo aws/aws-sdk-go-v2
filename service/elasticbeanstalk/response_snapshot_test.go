@@ -430,6 +430,19 @@ func TestCheckResponseSnapshot_CreateApplicationVersion(t *testing.T) {
 				S3Bucket: ptr.String("__S3Bucket__"),
 				S3Key:    ptr.String("__S3Key__"),
 			},
+			ImageSource: &types.ImageSource{
+				Uri: ptr.String("__Uri__"),
+			},
+			ImageBuildConfiguration: &types.ImageBuildConfiguration{
+				Type:                 types.ImageBuildType("docker"),
+				DockerfileLocation:   ptr.String("__DockerfileLocation__"),
+				Buildpack:            ptr.String("__Buildpack__"),
+				Architecture:         types.ArchitectureType("amd64"),
+				CodeBuildServiceRole: ptr.String("__CodeBuildServiceRole__"),
+				ComputeType:          types.ComputeType("BUILD_GENERAL1_SMALL"),
+				TimeoutInMinutes:     ptr.Int32(1),
+			},
+			Process:     ptr.Bool(true),
 			DateCreated: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			DateUpdated: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			Status:      types.ApplicationVersionStatus("Processed"),
@@ -473,6 +486,20 @@ func TestCheckResponseSnapshot_CreateApplicationVersion(t *testing.T) {
 			{
 				Key:   ptr.String("__Key__"),
 				Value: ptr.String("__Value__"),
+			},
+		},
+		ImageConfiguration: &types.ImageConfiguration{
+			Source: &types.ImageSource{
+				Uri: ptr.String("__Uri__"),
+			},
+			Build: &types.ImageBuildConfiguration{
+				Type:                 types.ImageBuildType("docker"),
+				DockerfileLocation:   ptr.String("__DockerfileLocation__"),
+				Buildpack:            ptr.String("__Buildpack__"),
+				Architecture:         types.ArchitectureType("amd64"),
+				CodeBuildServiceRole: ptr.String("__CodeBuildServiceRole__"),
+				ComputeType:          types.ComputeType("BUILD_GENERAL1_SMALL"),
+				TimeoutInMinutes:     ptr.Int32(1),
 			},
 		},
 	})
@@ -965,6 +992,19 @@ func TestCheckResponseSnapshot_DescribeApplicationVersions(t *testing.T) {
 					S3Bucket: ptr.String("__S3Bucket__"),
 					S3Key:    ptr.String("__S3Key__"),
 				},
+				ImageSource: &types.ImageSource{
+					Uri: ptr.String("__Uri__"),
+				},
+				ImageBuildConfiguration: &types.ImageBuildConfiguration{
+					Type:                 types.ImageBuildType("docker"),
+					DockerfileLocation:   ptr.String("__DockerfileLocation__"),
+					Buildpack:            ptr.String("__Buildpack__"),
+					Architecture:         types.ArchitectureType("amd64"),
+					CodeBuildServiceRole: ptr.String("__CodeBuildServiceRole__"),
+					ComputeType:          types.ComputeType("BUILD_GENERAL1_SMALL"),
+					TimeoutInMinutes:     ptr.Int32(1),
+				},
+				Process:     ptr.Bool(true),
 				DateCreated: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 				DateUpdated: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 				Status:      types.ApplicationVersionStatus("Processed"),
@@ -984,6 +1024,19 @@ func TestCheckResponseSnapshot_DescribeApplicationVersions(t *testing.T) {
 					S3Bucket: ptr.String("__S3Bucket__"),
 					S3Key:    ptr.String("__S3Key__"),
 				},
+				ImageSource: &types.ImageSource{
+					Uri: ptr.String("__Uri__"),
+				},
+				ImageBuildConfiguration: &types.ImageBuildConfiguration{
+					Type:                 types.ImageBuildType("docker"),
+					DockerfileLocation:   ptr.String("__DockerfileLocation__"),
+					Buildpack:            ptr.String("__Buildpack__"),
+					Architecture:         types.ArchitectureType("amd64"),
+					CodeBuildServiceRole: ptr.String("__CodeBuildServiceRole__"),
+					ComputeType:          types.ComputeType("BUILD_GENERAL1_SMALL"),
+					TimeoutInMinutes:     ptr.Int32(1),
+				},
+				Process:     ptr.Bool(true),
 				DateCreated: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 				DateUpdated: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 				Status:      types.ApplicationVersionStatus("Processed"),
@@ -1424,6 +1477,9 @@ func TestCheckResponseSnapshot_DescribeEnvironmentResources(t *testing.T) {
 				{
 					Name: ptr.String("__Name__"),
 				},
+			},
+			Cluster: &types.Cluster{
+				ClusterArn: ptr.String("__ClusterArn__"),
 			},
 			Instances: []types.Instance{
 				{
@@ -2481,6 +2537,19 @@ func TestCheckResponseSnapshot_UpdateApplicationVersion(t *testing.T) {
 				S3Bucket: ptr.String("__S3Bucket__"),
 				S3Key:    ptr.String("__S3Key__"),
 			},
+			ImageSource: &types.ImageSource{
+				Uri: ptr.String("__Uri__"),
+			},
+			ImageBuildConfiguration: &types.ImageBuildConfiguration{
+				Type:                 types.ImageBuildType("docker"),
+				DockerfileLocation:   ptr.String("__DockerfileLocation__"),
+				Buildpack:            ptr.String("__Buildpack__"),
+				Architecture:         types.ArchitectureType("amd64"),
+				CodeBuildServiceRole: ptr.String("__CodeBuildServiceRole__"),
+				ComputeType:          types.ComputeType("BUILD_GENERAL1_SMALL"),
+				TimeoutInMinutes:     ptr.Int32(1),
+			},
+			Process:     ptr.Bool(true),
 			DateCreated: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			DateUpdated: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			Status:      types.ApplicationVersionStatus("Processed"),
@@ -2821,6 +2890,20 @@ func TestCheckResponseSnapshot_Error_CodeBuildNotInServiceRegionException(t *tes
 				Value: ptr.String("__Value__"),
 			},
 		},
+		ImageConfiguration: &types.ImageConfiguration{
+			Source: &types.ImageSource{
+				Uri: ptr.String("__Uri__"),
+			},
+			Build: &types.ImageBuildConfiguration{
+				Type:                 types.ImageBuildType("docker"),
+				DockerfileLocation:   ptr.String("__DockerfileLocation__"),
+				Buildpack:            ptr.String("__Buildpack__"),
+				Architecture:         types.ArchitectureType("amd64"),
+				CodeBuildServiceRole: ptr.String("__CodeBuildServiceRole__"),
+				ComputeType:          types.ComputeType("BUILD_GENERAL1_SMALL"),
+				TimeoutInMinutes:     ptr.Int32(1),
+			},
+		},
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
@@ -3105,6 +3188,20 @@ func TestCheckResponseSnapshot_Error_S3LocationNotInServiceRegionException(t *te
 				Value: ptr.String("__Value__"),
 			},
 		},
+		ImageConfiguration: &types.ImageConfiguration{
+			Source: &types.ImageSource{
+				Uri: ptr.String("__Uri__"),
+			},
+			Build: &types.ImageBuildConfiguration{
+				Type:                 types.ImageBuildType("docker"),
+				DockerfileLocation:   ptr.String("__DockerfileLocation__"),
+				Buildpack:            ptr.String("__Buildpack__"),
+				Architecture:         types.ArchitectureType("amd64"),
+				CodeBuildServiceRole: ptr.String("__CodeBuildServiceRole__"),
+				ComputeType:          types.ComputeType("BUILD_GENERAL1_SMALL"),
+				TimeoutInMinutes:     ptr.Int32(1),
+			},
+		},
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
@@ -3214,6 +3311,20 @@ func TestCheckResponseSnapshot_Error_TooManyApplicationVersionsException(t *test
 			{
 				Key:   ptr.String("__Key__"),
 				Value: ptr.String("__Value__"),
+			},
+		},
+		ImageConfiguration: &types.ImageConfiguration{
+			Source: &types.ImageSource{
+				Uri: ptr.String("__Uri__"),
+			},
+			Build: &types.ImageBuildConfiguration{
+				Type:                 types.ImageBuildType("docker"),
+				DockerfileLocation:   ptr.String("__DockerfileLocation__"),
+				Buildpack:            ptr.String("__Buildpack__"),
+				Architecture:         types.ArchitectureType("amd64"),
+				CodeBuildServiceRole: ptr.String("__CodeBuildServiceRole__"),
+				ComputeType:          types.ComputeType("BUILD_GENERAL1_SMALL"),
+				TimeoutInMinutes:     ptr.Int32(1),
 			},
 		},
 	})

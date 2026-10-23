@@ -198,13 +198,13 @@ var AWSShield_20160616 = smithy.NewServiceSchema(_AWSShield_20160616, "2016-06-0
 var AccessDeniedException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.shield",
 	Name:      "AccessDeniedException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var AccessDeniedException_message *smithy.Schema
 
 var AccessDeniedForDependencyException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.shield",
 	Name:      "AccessDeniedForDependencyException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var AccessDeniedForDependencyException_message *smithy.Schema
 
 var ApplicationLayerAutomaticResponseConfiguration = smithy.NewSchema(smithy.ShapeID{
@@ -476,25 +476,25 @@ var _Integer = smithy.NewSchema(smithy.ShapeID{
 var InternalErrorException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.shield",
 	Name:      "InternalErrorException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"})
 var InternalErrorException_message *smithy.Schema
 
 var InvalidOperationException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.shield",
 	Name:      "InvalidOperationException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var InvalidOperationException_message *smithy.Schema
 
 var InvalidPaginationTokenException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.shield",
 	Name:      "InvalidPaginationTokenException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var InvalidPaginationTokenException_message *smithy.Schema
 
 var InvalidParameterException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.shield",
 	Name:      "InvalidParameterException",
-}, smithy.ShapeTypeStructure, 3)
+}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "client"})
 var InvalidParameterException_message *smithy.Schema
 
 var InvalidParameterException_reason *smithy.Schema
@@ -504,7 +504,7 @@ var InvalidParameterException_fields *smithy.Schema
 var InvalidResourceException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.shield",
 	Name:      "InvalidResourceException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var InvalidResourceException_message *smithy.Schema
 
 var Limit = smithy.NewSchema(smithy.ShapeID{
@@ -529,7 +529,7 @@ var _Limits_member *smithy.Schema
 var LimitsExceededException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.shield",
 	Name:      "LimitsExceededException",
-}, smithy.ShapeTypeStructure, 3)
+}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "client"})
 var LimitsExceededException_message *smithy.Schema
 
 var LimitsExceededException_Type *smithy.Schema
@@ -544,7 +544,7 @@ var _LimitType = smithy.NewSchema(smithy.ShapeID{
 var LockedSubscriptionException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.shield",
 	Name:      "LockedSubscriptionException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var LockedSubscriptionException_message *smithy.Schema
 
 var _LogBucket = smithy.NewSchema(smithy.ShapeID{
@@ -583,13 +583,13 @@ var _MitigationList_member *smithy.Schema
 var NoAssociatedRoleException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.shield",
 	Name:      "NoAssociatedRoleException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var NoAssociatedRoleException_message *smithy.Schema
 
 var OptimisticLockException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.shield",
 	Name:      "OptimisticLockException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var OptimisticLockException_message *smithy.Schema
 
 var _PhoneNumber = smithy.NewSchema(smithy.ShapeID{
@@ -767,7 +767,7 @@ var _Protections_member *smithy.Schema
 var ResourceAlreadyExistsException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.shield",
 	Name:      "ResourceAlreadyExistsException",
-}, smithy.ShapeTypeStructure, 2)
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"})
 var ResourceAlreadyExistsException_message *smithy.Schema
 
 var ResourceAlreadyExistsException_resourceType *smithy.Schema
@@ -798,7 +798,7 @@ var _ResourceArnList_member *smithy.Schema
 var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.shield",
 	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 2)
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"})
 var ResourceNotFoundException_message *smithy.Schema
 
 var ResourceNotFoundException_resourceType *smithy.Schema

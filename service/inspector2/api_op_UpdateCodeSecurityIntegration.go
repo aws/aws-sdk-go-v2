@@ -4,7 +4,9 @@ package inspector2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/inspector2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/inspector2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -44,6 +46,19 @@ type UpdateCodeSecurityIntegrationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateCodeSecurityIntegrationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateCodeSecurityIntegrationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateCodeSecurityIntegrationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeUpdateIntegrationDetails(s, schemas.UpdateCodeSecurityIntegrationRequest_details, v.Details)
+	if v.IntegrationArn != nil {
+		s.WriteString(schemas.UpdateCodeSecurityIntegrationRequest_integrationArn, *v.IntegrationArn)
+	}
+}
+
 type UpdateCodeSecurityIntegrationOutput struct {
 
 	// The Amazon Resource Name (ARN) of the updated code security integration.
@@ -62,13 +77,42 @@ type UpdateCodeSecurityIntegrationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateCodeSecurityIntegrationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateCodeSecurityIntegrationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateCodeSecurityIntegrationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IntegrationArn != nil {
+		s.WriteString(schemas.UpdateCodeSecurityIntegrationResponse_integrationArn, *v.IntegrationArn)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.UpdateCodeSecurityIntegrationResponse_status, string(v.Status))
+	}
+}
+func (v *UpdateCodeSecurityIntegrationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateCodeSecurityIntegrationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateCodeSecurityIntegrationResponse_integrationArn:
+			v.IntegrationArn = new(string)
+			return d.ReadString(schemas.UpdateCodeSecurityIntegrationResponse_integrationArn, v.IntegrationArn)
+		case schemas.UpdateCodeSecurityIntegrationResponse_status:
+			var ev string
+			if err := d.ReadString(schemas.UpdateCodeSecurityIntegrationResponse_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.IntegrationStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateCodeSecurityIntegrationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateCodeSecurityIntegration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateCodeSecurityIntegration, schemas.UpdateCodeSecurityIntegrationRequest, schemas.UpdateCodeSecurityIntegrationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateCodeSecurityIntegration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateCodeSecurityIntegration, schemas.UpdateCodeSecurityIntegrationRequest, schemas.UpdateCodeSecurityIntegrationResponse), output: &UpdateCodeSecurityIntegrationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

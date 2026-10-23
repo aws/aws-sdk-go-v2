@@ -4,7 +4,9 @@ package apigateway
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/apigateway/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/apigateway/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -89,6 +91,52 @@ type CreateRestApiInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateRestApiInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateRestApiRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateRestApiInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApiKeySource != "" {
+		s.WriteString(schemas.CreateRestApiRequest_apiKeySource, string(v.ApiKeySource))
+	}
+	serializeListOfString(s, schemas.CreateRestApiRequest_binaryMediaTypes, v.BinaryMediaTypes)
+	if v.CloneFrom != nil {
+		s.WriteString(schemas.CreateRestApiRequest_cloneFrom, *v.CloneFrom)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreateRestApiRequest_description, *v.Description)
+	}
+	if v.DisableExecuteApiEndpoint != false {
+		s.WriteBool(schemas.CreateRestApiRequest_disableExecuteApiEndpoint, v.DisableExecuteApiEndpoint)
+	}
+	if v.EndpointAccessMode != "" {
+		s.WriteString(schemas.CreateRestApiRequest_endpointAccessMode, string(v.EndpointAccessMode))
+	}
+	if v.EndpointConfiguration != nil {
+		s.WriteStruct(schemas.CreateRestApiRequest_endpointConfiguration)
+		v.EndpointConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MinimumCompressionSize != nil {
+		s.WriteInt32(schemas.CreateRestApiRequest_minimumCompressionSize, *v.MinimumCompressionSize)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateRestApiRequest_name, *v.Name)
+	}
+	if v.Policy != nil {
+		s.WriteString(schemas.CreateRestApiRequest_policy, *v.Policy)
+	}
+	if v.SecurityPolicy != "" {
+		s.WriteString(schemas.CreateRestApiRequest_securityPolicy, string(v.SecurityPolicy))
+	}
+	serializeMapOfStringToString(s, schemas.CreateRestApiRequest_tags, v.Tags)
+	if v.Version != nil {
+		s.WriteString(schemas.CreateRestApiRequest_version, *v.Version)
+	}
+}
+
 // Represents a REST API.
 type CreateRestApiOutput struct {
 
@@ -169,13 +217,142 @@ type CreateRestApiOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateRestApiOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RestApi)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateRestApiOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApiKeySource != "" {
+		s.WriteString(schemas.RestApi_apiKeySource, string(v.ApiKeySource))
+	}
+	if v.ApiStatus != "" {
+		s.WriteString(schemas.RestApi_apiStatus, string(v.ApiStatus))
+	}
+	if v.ApiStatusMessage != nil {
+		s.WriteString(schemas.RestApi_apiStatusMessage, *v.ApiStatusMessage)
+	}
+	serializeListOfString(s, schemas.RestApi_binaryMediaTypes, v.BinaryMediaTypes)
+	if v.CreatedDate != nil {
+		s.WriteTime(schemas.RestApi_createdDate, *v.CreatedDate)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.RestApi_description, *v.Description)
+	}
+	if v.DisableExecuteApiEndpoint != false {
+		s.WriteBool(schemas.RestApi_disableExecuteApiEndpoint, v.DisableExecuteApiEndpoint)
+	}
+	if v.EndpointAccessMode != "" {
+		s.WriteString(schemas.RestApi_endpointAccessMode, string(v.EndpointAccessMode))
+	}
+	if v.EndpointConfiguration != nil {
+		s.WriteStruct(schemas.RestApi_endpointConfiguration)
+		v.EndpointConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.RestApi_id, *v.Id)
+	}
+	if v.MinimumCompressionSize != nil {
+		s.WriteInt32(schemas.RestApi_minimumCompressionSize, *v.MinimumCompressionSize)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.RestApi_name, *v.Name)
+	}
+	if v.Policy != nil {
+		s.WriteString(schemas.RestApi_policy, *v.Policy)
+	}
+	if v.RootResourceId != nil {
+		s.WriteString(schemas.RestApi_rootResourceId, *v.RootResourceId)
+	}
+	if v.SecurityPolicy != "" {
+		s.WriteString(schemas.RestApi_securityPolicy, string(v.SecurityPolicy))
+	}
+	serializeMapOfStringToString(s, schemas.RestApi_tags, v.Tags)
+	if v.Version != nil {
+		s.WriteString(schemas.RestApi_version, *v.Version)
+	}
+	serializeListOfString(s, schemas.RestApi_warnings, v.Warnings)
+}
+func (v *CreateRestApiOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RestApi, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RestApi_apiKeySource:
+			var ev string
+			if err := d.ReadString(schemas.RestApi_apiKeySource, &ev); err != nil {
+				return err
+			}
+			v.ApiKeySource = types.ApiKeySourceType(ev)
+			return nil
+		case schemas.RestApi_apiStatus:
+			var ev string
+			if err := d.ReadString(schemas.RestApi_apiStatus, &ev); err != nil {
+				return err
+			}
+			v.ApiStatus = types.ApiStatus(ev)
+			return nil
+		case schemas.RestApi_apiStatusMessage:
+			v.ApiStatusMessage = new(string)
+			return d.ReadString(schemas.RestApi_apiStatusMessage, v.ApiStatusMessage)
+		case schemas.RestApi_binaryMediaTypes:
+			return deserializeListOfString(d, schemas.RestApi_binaryMediaTypes, &v.BinaryMediaTypes)
+		case schemas.RestApi_createdDate:
+			v.CreatedDate = new(time.Time)
+			return d.ReadTime(schemas.RestApi_createdDate, v.CreatedDate)
+		case schemas.RestApi_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.RestApi_description, v.Description)
+		case schemas.RestApi_disableExecuteApiEndpoint:
+			return d.ReadBool(schemas.RestApi_disableExecuteApiEndpoint, &v.DisableExecuteApiEndpoint)
+		case schemas.RestApi_endpointAccessMode:
+			var ev string
+			if err := d.ReadString(schemas.RestApi_endpointAccessMode, &ev); err != nil {
+				return err
+			}
+			v.EndpointAccessMode = types.EndpointAccessMode(ev)
+			return nil
+		case schemas.RestApi_endpointConfiguration:
+			v.EndpointConfiguration = &types.EndpointConfiguration{}
+			return v.EndpointConfiguration.Deserialize(d)
+		case schemas.RestApi_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.RestApi_id, v.Id)
+		case schemas.RestApi_minimumCompressionSize:
+			v.MinimumCompressionSize = new(int32)
+			return d.ReadInt32(schemas.RestApi_minimumCompressionSize, v.MinimumCompressionSize)
+		case schemas.RestApi_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.RestApi_name, v.Name)
+		case schemas.RestApi_policy:
+			v.Policy = new(string)
+			return d.ReadString(schemas.RestApi_policy, v.Policy)
+		case schemas.RestApi_rootResourceId:
+			v.RootResourceId = new(string)
+			return d.ReadString(schemas.RestApi_rootResourceId, v.RootResourceId)
+		case schemas.RestApi_securityPolicy:
+			var ev string
+			if err := d.ReadString(schemas.RestApi_securityPolicy, &ev); err != nil {
+				return err
+			}
+			v.SecurityPolicy = types.SecurityPolicy(ev)
+			return nil
+		case schemas.RestApi_tags:
+			return deserializeMapOfStringToString(d, schemas.RestApi_tags, &v.Tags)
+		case schemas.RestApi_version:
+			v.Version = new(string)
+			return d.ReadString(schemas.RestApi_version, v.Version)
+		case schemas.RestApi_warnings:
+			return deserializeListOfString(d, schemas.RestApi_warnings, &v.Warnings)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateRestApiMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateRestApi{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateRestApi, schemas.CreateRestApiRequest, schemas.RestApi)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateRestApi{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateRestApi, schemas.CreateRestApiRequest, schemas.RestApi), output: &CreateRestApiOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

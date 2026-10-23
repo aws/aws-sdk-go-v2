@@ -4,7 +4,9 @@ package ssoadmin
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/ssoadmin/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ssoadmin/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -35,6 +37,18 @@ type DescribeApplicationInput struct {
 	ApplicationArn *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DescribeApplicationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeApplicationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeApplicationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationArn != nil {
+		s.WriteString(schemas.DescribeApplicationRequest_ApplicationArn, *v.ApplicationArn)
+	}
 }
 
 type DescribeApplicationOutput struct {
@@ -83,13 +97,98 @@ type DescribeApplicationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeApplicationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeApplicationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeApplicationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationAccount != nil {
+		s.WriteString(schemas.DescribeApplicationResponse_ApplicationAccount, *v.ApplicationAccount)
+	}
+	if v.ApplicationArn != nil {
+		s.WriteString(schemas.DescribeApplicationResponse_ApplicationArn, *v.ApplicationArn)
+	}
+	if v.ApplicationProviderArn != nil {
+		s.WriteString(schemas.DescribeApplicationResponse_ApplicationProviderArn, *v.ApplicationProviderArn)
+	}
+	if v.CreatedDate != nil {
+		s.WriteTime(schemas.DescribeApplicationResponse_CreatedDate, *v.CreatedDate)
+	}
+	if v.CreatedFrom != nil {
+		s.WriteString(schemas.DescribeApplicationResponse_CreatedFrom, *v.CreatedFrom)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.DescribeApplicationResponse_Description, *v.Description)
+	}
+	if v.IdentityStoreArn != nil {
+		s.WriteString(schemas.DescribeApplicationResponse_IdentityStoreArn, *v.IdentityStoreArn)
+	}
+	if v.InstanceArn != nil {
+		s.WriteString(schemas.DescribeApplicationResponse_InstanceArn, *v.InstanceArn)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.DescribeApplicationResponse_Name, *v.Name)
+	}
+	if v.PortalOptions != nil {
+		s.WriteStruct(schemas.DescribeApplicationResponse_PortalOptions)
+		v.PortalOptions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.DescribeApplicationResponse_Status, string(v.Status))
+	}
+}
+func (v *DescribeApplicationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeApplicationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeApplicationResponse_ApplicationAccount:
+			v.ApplicationAccount = new(string)
+			return d.ReadString(schemas.DescribeApplicationResponse_ApplicationAccount, v.ApplicationAccount)
+		case schemas.DescribeApplicationResponse_ApplicationArn:
+			v.ApplicationArn = new(string)
+			return d.ReadString(schemas.DescribeApplicationResponse_ApplicationArn, v.ApplicationArn)
+		case schemas.DescribeApplicationResponse_ApplicationProviderArn:
+			v.ApplicationProviderArn = new(string)
+			return d.ReadString(schemas.DescribeApplicationResponse_ApplicationProviderArn, v.ApplicationProviderArn)
+		case schemas.DescribeApplicationResponse_CreatedDate:
+			v.CreatedDate = new(time.Time)
+			return d.ReadTime(schemas.DescribeApplicationResponse_CreatedDate, v.CreatedDate)
+		case schemas.DescribeApplicationResponse_CreatedFrom:
+			v.CreatedFrom = new(string)
+			return d.ReadString(schemas.DescribeApplicationResponse_CreatedFrom, v.CreatedFrom)
+		case schemas.DescribeApplicationResponse_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.DescribeApplicationResponse_Description, v.Description)
+		case schemas.DescribeApplicationResponse_IdentityStoreArn:
+			v.IdentityStoreArn = new(string)
+			return d.ReadString(schemas.DescribeApplicationResponse_IdentityStoreArn, v.IdentityStoreArn)
+		case schemas.DescribeApplicationResponse_InstanceArn:
+			v.InstanceArn = new(string)
+			return d.ReadString(schemas.DescribeApplicationResponse_InstanceArn, v.InstanceArn)
+		case schemas.DescribeApplicationResponse_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.DescribeApplicationResponse_Name, v.Name)
+		case schemas.DescribeApplicationResponse_PortalOptions:
+			v.PortalOptions = &types.PortalOptions{}
+			return v.PortalOptions.Deserialize(d)
+		case schemas.DescribeApplicationResponse_Status:
+			var ev string
+			if err := d.ReadString(schemas.DescribeApplicationResponse_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.ApplicationStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeApplicationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeApplication{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeApplication, schemas.DescribeApplicationRequest, schemas.DescribeApplicationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeApplication{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeApplication, schemas.DescribeApplicationRequest, schemas.DescribeApplicationResponse), output: &DescribeApplicationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

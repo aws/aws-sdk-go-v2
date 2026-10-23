@@ -70,6 +70,26 @@ func (m *validateOpCreateFeed) HandleInitialize(ctx context.Context, in middlewa
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateScheduleAction struct {
+}
+
+func (*validateOpCreateScheduleAction) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateScheduleAction) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateScheduleActionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateScheduleActionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeleteDictionary struct {
 }
 
@@ -125,6 +145,26 @@ func (m *validateOpDeleteFeedPolicy) HandleInitialize(ctx context.Context, in mi
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeleteFeedPolicyInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteScheduleAction struct {
+}
+
+func (*validateOpDeleteScheduleAction) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteScheduleAction) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteScheduleActionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteScheduleActionInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -245,6 +285,26 @@ func (m *validateOpGetFixture) HandleInitialize(ctx context.Context, in middlewa
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpGetFixtureInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListScheduleActions struct {
+}
+
+func (*validateOpListScheduleActions) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListScheduleActions) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListScheduleActionsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListScheduleActionsInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -402,6 +462,10 @@ func addOpCreateFeedValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateFeed{}, middleware.After)
 }
 
+func addOpCreateScheduleActionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateScheduleAction{}, middleware.After)
+}
+
 func addOpDeleteDictionaryValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteDictionary{}, middleware.After)
 }
@@ -412,6 +476,10 @@ func addOpDeleteFeedValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpDeleteFeedPolicyValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteFeedPolicy{}, middleware.After)
+}
+
+func addOpDeleteScheduleActionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteScheduleAction{}, middleware.After)
 }
 
 func addOpDisassociateFeedValidationMiddleware(stack *middleware.Stack) error {
@@ -436,6 +504,10 @@ func addOpGetFeedPolicyValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpGetFixtureValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetFixture{}, middleware.After)
+}
+
+func addOpListScheduleActionsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListScheduleActions{}, middleware.After)
 }
 
 func addOpListTagsForResourceValidationMiddleware(stack *middleware.Stack) error {
@@ -575,6 +647,21 @@ func validateDataSourceConfiguration(v *types.DataSourceConfiguration) error {
 	}
 }
 
+func validateFixedModeScheduleActionStartSettings(v *types.FixedModeScheduleActionStartSettings) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "FixedModeScheduleActionStartSettings"}
+	if v.ScheduledAt == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ScheduledAt"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOutputConfig(v types.OutputConfig) error {
 	if v == nil {
 		return nil
@@ -594,6 +681,86 @@ func validateOutputConfig(v types.OutputConfig) error {
 	case *types.OutputConfigMemberSubtitling:
 		if err := validateSubtitlingConfig(&uv.Value); err != nil {
 			invalidParams.AddNested("[subtitling]", err.(smithy.InvalidParamsError))
+		}
+
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateRemoveClippingDataSourceConfiguration(v *types.RemoveClippingDataSourceConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RemoveClippingDataSourceConfiguration"}
+	if v.OutputName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("OutputName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateScheduleActionOperation(v types.ScheduleActionOperation) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ScheduleActionOperation"}
+	switch uv := v.(type) {
+	case *types.ScheduleActionOperationMemberRemoveClippingDataSourceConfiguration:
+		if err := validateRemoveClippingDataSourceConfiguration(&uv.Value); err != nil {
+			invalidParams.AddNested("[removeClippingDataSourceConfiguration]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.ScheduleActionOperationMemberUpdateClippingDataSourceConfiguration:
+		if err := validateUpdateClippingDataSourceConfiguration(&uv.Value); err != nil {
+			invalidParams.AddNested("[updateClippingDataSourceConfiguration]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.ScheduleActionOperationMemberUpdateOutputStatus:
+		if err := validateUpdateOutputStatus(&uv.Value); err != nil {
+			invalidParams.AddNested("[updateOutputStatus]", err.(smithy.InvalidParamsError))
+		}
+
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateScheduleActionOperations(v []types.ScheduleActionOperation) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ScheduleActionOperations"}
+	for i := range v {
+		if err := validateScheduleActionOperation(v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateScheduleActionStartConfiguration(v types.ScheduleActionStartConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ScheduleActionStartConfiguration"}
+	switch uv := v.(type) {
+	case *types.ScheduleActionStartConfigurationMemberFixedModeScheduleActionStartSettings:
+		if err := validateFixedModeScheduleActionStartSettings(&uv.Value); err != nil {
+			invalidParams.AddNested("[fixedModeScheduleActionStartSettings]", err.(smithy.InvalidParamsError))
 		}
 
 	}
@@ -694,6 +861,28 @@ func validateTemplateGroupList(v []types.TemplateGroup) error {
 	}
 }
 
+func validateUpdateClippingDataSourceConfiguration(v *types.UpdateClippingDataSourceConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateClippingDataSourceConfiguration"}
+	if v.OutputName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("OutputName"))
+	}
+	if v.DataSourceConfiguration == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DataSourceConfiguration"))
+	} else if v.DataSourceConfiguration != nil {
+		if err := validateDataSourceConfiguration(v.DataSourceConfiguration); err != nil {
+			invalidParams.AddNested("DataSourceConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateUpdateOutput(v *types.UpdateOutput) error {
 	if v == nil {
 		return nil
@@ -728,6 +917,24 @@ func validateUpdateOutputList(v []types.UpdateOutput) error {
 		if err := validateUpdateOutput(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateUpdateOutputStatus(v *types.UpdateOutputStatus) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateOutputStatus"}
+	if v.OutputName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("OutputName"))
+	}
+	if len(v.Status) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Status"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -801,6 +1008,38 @@ func validateOpCreateFeedInput(v *CreateFeedInput) error {
 	}
 }
 
+func validateOpCreateScheduleActionInput(v *CreateScheduleActionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateScheduleActionInput"}
+	if v.Id == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Id"))
+	}
+	if v.ActionName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ActionName"))
+	}
+	if v.StartConfiguration == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("StartConfiguration"))
+	} else if v.StartConfiguration != nil {
+		if err := validateScheduleActionStartConfiguration(v.StartConfiguration); err != nil {
+			invalidParams.AddNested("StartConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Operations == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Operations"))
+	} else if v.Operations != nil {
+		if err := validateScheduleActionOperations(v.Operations); err != nil {
+			invalidParams.AddNested("Operations", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDeleteDictionaryInput(v *DeleteDictionaryInput) error {
 	if v == nil {
 		return nil
@@ -838,6 +1077,24 @@ func validateOpDeleteFeedPolicyInput(v *DeleteFeedPolicyInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteFeedPolicyInput"}
 	if v.Id == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Id"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteScheduleActionInput(v *DeleteScheduleActionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteScheduleActionInput"}
+	if v.Id == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Id"))
+	}
+	if v.ActionName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ActionName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -931,6 +1188,21 @@ func validateOpGetFixtureInput(v *GetFixtureInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "GetFixtureInput"}
 	if v.FixtureId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("FixtureId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListScheduleActionsInput(v *ListScheduleActionsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListScheduleActionsInput"}
+	if v.Id == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Id"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

@@ -4,7 +4,9 @@ package lookoutequipment
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/lookoutequipment/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lookoutequipment/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -34,6 +36,18 @@ type StopInferenceSchedulerInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StopInferenceSchedulerInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StopInferenceSchedulerRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StopInferenceSchedulerInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InferenceSchedulerName != nil {
+		s.WriteString(schemas.StopInferenceSchedulerRequest_InferenceSchedulerName, *v.InferenceSchedulerName)
+	}
+}
+
 type StopInferenceSchedulerOutput struct {
 
 	// The Amazon Resource Name (ARN) of the inference schedule being stopped.
@@ -59,13 +73,60 @@ type StopInferenceSchedulerOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StopInferenceSchedulerOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StopInferenceSchedulerResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StopInferenceSchedulerOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InferenceSchedulerArn != nil {
+		s.WriteString(schemas.StopInferenceSchedulerResponse_InferenceSchedulerArn, *v.InferenceSchedulerArn)
+	}
+	if v.InferenceSchedulerName != nil {
+		s.WriteString(schemas.StopInferenceSchedulerResponse_InferenceSchedulerName, *v.InferenceSchedulerName)
+	}
+	if v.ModelArn != nil {
+		s.WriteString(schemas.StopInferenceSchedulerResponse_ModelArn, *v.ModelArn)
+	}
+	if v.ModelName != nil {
+		s.WriteString(schemas.StopInferenceSchedulerResponse_ModelName, *v.ModelName)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.StopInferenceSchedulerResponse_Status, string(v.Status))
+	}
+}
+func (v *StopInferenceSchedulerOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StopInferenceSchedulerResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StopInferenceSchedulerResponse_InferenceSchedulerArn:
+			v.InferenceSchedulerArn = new(string)
+			return d.ReadString(schemas.StopInferenceSchedulerResponse_InferenceSchedulerArn, v.InferenceSchedulerArn)
+		case schemas.StopInferenceSchedulerResponse_InferenceSchedulerName:
+			v.InferenceSchedulerName = new(string)
+			return d.ReadString(schemas.StopInferenceSchedulerResponse_InferenceSchedulerName, v.InferenceSchedulerName)
+		case schemas.StopInferenceSchedulerResponse_ModelArn:
+			v.ModelArn = new(string)
+			return d.ReadString(schemas.StopInferenceSchedulerResponse_ModelArn, v.ModelArn)
+		case schemas.StopInferenceSchedulerResponse_ModelName:
+			v.ModelName = new(string)
+			return d.ReadString(schemas.StopInferenceSchedulerResponse_ModelName, v.ModelName)
+		case schemas.StopInferenceSchedulerResponse_Status:
+			var ev string
+			if err := d.ReadString(schemas.StopInferenceSchedulerResponse_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.InferenceSchedulerStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStopInferenceSchedulerMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpStopInferenceScheduler{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StopInferenceScheduler, schemas.StopInferenceSchedulerRequest, schemas.StopInferenceSchedulerResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpStopInferenceScheduler{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StopInferenceScheduler, schemas.StopInferenceSchedulerRequest, schemas.StopInferenceSchedulerResponse), output: &StopInferenceSchedulerOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

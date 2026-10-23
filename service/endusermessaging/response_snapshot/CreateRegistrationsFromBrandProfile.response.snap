@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"results":[{"jobId":"__JobId__","resourceIdentifier":"__ResourceIdentifier__"},{"jobId":"__JobId__","resourceIdentifier":"__ResourceIdentifier__"}]}

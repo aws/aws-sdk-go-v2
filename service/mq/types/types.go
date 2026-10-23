@@ -3,6 +3,8 @@
 package types
 
 import (
+	"github.com/aws/aws-sdk-go-v2/service/mq/schemas"
+	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
@@ -20,6 +22,34 @@ type ActionRequired struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ActionRequired) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ActionRequired)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ActionRequired) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ActionRequiredCode != nil {
+		s.WriteString(schemas.ActionRequired_ActionRequiredCode, *v.ActionRequiredCode)
+	}
+	if v.ActionRequiredInfo != nil {
+		s.WriteString(schemas.ActionRequired_ActionRequiredInfo, *v.ActionRequiredInfo)
+	}
+}
+func (v *ActionRequired) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ActionRequired, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ActionRequired_ActionRequiredCode:
+			v.ActionRequiredCode = new(string)
+			return d.ReadString(schemas.ActionRequired_ActionRequiredCode, v.ActionRequiredCode)
+		case schemas.ActionRequired_ActionRequiredInfo:
+			v.ActionRequiredInfo = new(string)
+			return d.ReadString(schemas.ActionRequired_ActionRequiredInfo, v.ActionRequiredInfo)
+		}
+		return nil
+	})
+}
+
 // Name of the availability zone.
 type AvailabilityZone struct {
 
@@ -27,6 +57,28 @@ type AvailabilityZone struct {
 	Name *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *AvailabilityZone) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AvailabilityZone)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AvailabilityZone) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.AvailabilityZone_Name, *v.Name)
+	}
+}
+func (v *AvailabilityZone) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AvailabilityZone, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AvailabilityZone_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.AvailabilityZone_Name, v.Name)
+		}
+		return nil
+	})
 }
 
 // Types of broker engines.
@@ -39,6 +91,35 @@ type BrokerEngineType struct {
 	EngineVersions []EngineVersion
 
 	noSmithyDocumentSerde
+}
+
+func (v *BrokerEngineType) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BrokerEngineType)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BrokerEngineType) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EngineType != "" {
+		s.WriteString(schemas.BrokerEngineType_EngineType, string(v.EngineType))
+	}
+	serialize__listOfEngineVersion(s, schemas.BrokerEngineType_EngineVersions, v.EngineVersions)
+}
+func (v *BrokerEngineType) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BrokerEngineType, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BrokerEngineType_EngineType:
+			var ev string
+			if err := d.ReadString(schemas.BrokerEngineType_EngineType, &ev); err != nil {
+				return err
+			}
+			v.EngineType = EngineType(ev)
+			return nil
+		case schemas.BrokerEngineType_EngineVersions:
+			return deserialize__listOfEngineVersion(d, schemas.BrokerEngineType_EngineVersions, &v.EngineVersions)
+		}
+		return nil
+	})
 }
 
 // Returns information about all brokers.
@@ -55,6 +136,37 @@ type BrokerInstance struct {
 	IpAddress *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *BrokerInstance) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BrokerInstance)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BrokerInstance) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConsoleURL != nil {
+		s.WriteString(schemas.BrokerInstance_ConsoleURL, *v.ConsoleURL)
+	}
+	serialize__listOf__string(s, schemas.BrokerInstance_Endpoints, v.Endpoints)
+	if v.IpAddress != nil {
+		s.WriteString(schemas.BrokerInstance_IpAddress, *v.IpAddress)
+	}
+}
+func (v *BrokerInstance) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BrokerInstance, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BrokerInstance_ConsoleURL:
+			v.ConsoleURL = new(string)
+			return d.ReadString(schemas.BrokerInstance_ConsoleURL, v.ConsoleURL)
+		case schemas.BrokerInstance_Endpoints:
+			return deserialize__listOf__string(d, schemas.BrokerInstance_Endpoints, &v.Endpoints)
+		case schemas.BrokerInstance_IpAddress:
+			v.IpAddress = new(string)
+			return d.ReadString(schemas.BrokerInstance_IpAddress, v.IpAddress)
+		}
+		return nil
+	})
 }
 
 // Option for host instance type.
@@ -79,6 +191,57 @@ type BrokerInstanceOption struct {
 	SupportedEngineVersions []string
 
 	noSmithyDocumentSerde
+}
+
+func (v *BrokerInstanceOption) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BrokerInstanceOption)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BrokerInstanceOption) SerializeMembers(s smithy.ShapeSerializer) {
+	serialize__listOfAvailabilityZone(s, schemas.BrokerInstanceOption_AvailabilityZones, v.AvailabilityZones)
+	if v.EngineType != "" {
+		s.WriteString(schemas.BrokerInstanceOption_EngineType, string(v.EngineType))
+	}
+	if v.HostInstanceType != nil {
+		s.WriteString(schemas.BrokerInstanceOption_HostInstanceType, *v.HostInstanceType)
+	}
+	if v.StorageType != "" {
+		s.WriteString(schemas.BrokerInstanceOption_StorageType, string(v.StorageType))
+	}
+	serialize__listOfDeploymentMode(s, schemas.BrokerInstanceOption_SupportedDeploymentModes, v.SupportedDeploymentModes)
+	serialize__listOf__string(s, schemas.BrokerInstanceOption_SupportedEngineVersions, v.SupportedEngineVersions)
+}
+func (v *BrokerInstanceOption) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BrokerInstanceOption, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BrokerInstanceOption_AvailabilityZones:
+			return deserialize__listOfAvailabilityZone(d, schemas.BrokerInstanceOption_AvailabilityZones, &v.AvailabilityZones)
+		case schemas.BrokerInstanceOption_EngineType:
+			var ev string
+			if err := d.ReadString(schemas.BrokerInstanceOption_EngineType, &ev); err != nil {
+				return err
+			}
+			v.EngineType = EngineType(ev)
+			return nil
+		case schemas.BrokerInstanceOption_HostInstanceType:
+			v.HostInstanceType = new(string)
+			return d.ReadString(schemas.BrokerInstanceOption_HostInstanceType, v.HostInstanceType)
+		case schemas.BrokerInstanceOption_StorageType:
+			var ev string
+			if err := d.ReadString(schemas.BrokerInstanceOption_StorageType, &ev); err != nil {
+				return err
+			}
+			v.StorageType = BrokerStorageType(ev)
+			return nil
+		case schemas.BrokerInstanceOption_SupportedDeploymentModes:
+			return deserialize__listOfDeploymentMode(d, schemas.BrokerInstanceOption_SupportedDeploymentModes, &v.SupportedDeploymentModes)
+		case schemas.BrokerInstanceOption_SupportedEngineVersions:
+			return deserialize__listOf__string(d, schemas.BrokerInstanceOption_SupportedEngineVersions, &v.SupportedEngineVersions)
+		}
+		return nil
+	})
 }
 
 // Returns information about all brokers.
@@ -116,6 +279,82 @@ type BrokerSummary struct {
 	HostInstanceType *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *BrokerSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BrokerSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BrokerSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BrokerArn != nil {
+		s.WriteString(schemas.BrokerSummary_BrokerArn, *v.BrokerArn)
+	}
+	if v.BrokerId != nil {
+		s.WriteString(schemas.BrokerSummary_BrokerId, *v.BrokerId)
+	}
+	if v.BrokerName != nil {
+		s.WriteString(schemas.BrokerSummary_BrokerName, *v.BrokerName)
+	}
+	if v.BrokerState != "" {
+		s.WriteString(schemas.BrokerSummary_BrokerState, string(v.BrokerState))
+	}
+	if v.Created != nil {
+		s.WriteTime(schemas.BrokerSummary_Created, *v.Created)
+	}
+	if v.DeploymentMode != "" {
+		s.WriteString(schemas.BrokerSummary_DeploymentMode, string(v.DeploymentMode))
+	}
+	if v.EngineType != "" {
+		s.WriteString(schemas.BrokerSummary_EngineType, string(v.EngineType))
+	}
+	if v.HostInstanceType != nil {
+		s.WriteString(schemas.BrokerSummary_HostInstanceType, *v.HostInstanceType)
+	}
+}
+func (v *BrokerSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BrokerSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BrokerSummary_BrokerArn:
+			v.BrokerArn = new(string)
+			return d.ReadString(schemas.BrokerSummary_BrokerArn, v.BrokerArn)
+		case schemas.BrokerSummary_BrokerId:
+			v.BrokerId = new(string)
+			return d.ReadString(schemas.BrokerSummary_BrokerId, v.BrokerId)
+		case schemas.BrokerSummary_BrokerName:
+			v.BrokerName = new(string)
+			return d.ReadString(schemas.BrokerSummary_BrokerName, v.BrokerName)
+		case schemas.BrokerSummary_BrokerState:
+			var ev string
+			if err := d.ReadString(schemas.BrokerSummary_BrokerState, &ev); err != nil {
+				return err
+			}
+			v.BrokerState = BrokerState(ev)
+			return nil
+		case schemas.BrokerSummary_Created:
+			v.Created = new(time.Time)
+			return d.ReadTime(schemas.BrokerSummary_Created, v.Created)
+		case schemas.BrokerSummary_DeploymentMode:
+			var ev string
+			if err := d.ReadString(schemas.BrokerSummary_DeploymentMode, &ev); err != nil {
+				return err
+			}
+			v.DeploymentMode = DeploymentMode(ev)
+			return nil
+		case schemas.BrokerSummary_EngineType:
+			var ev string
+			if err := d.ReadString(schemas.BrokerSummary_EngineType, &ev); err != nil {
+				return err
+			}
+			v.EngineType = EngineType(ev)
+			return nil
+		case schemas.BrokerSummary_HostInstanceType:
+			v.HostInstanceType = new(string)
+			return d.ReadString(schemas.BrokerSummary_HostInstanceType, v.HostInstanceType)
+		}
+		return nil
+	})
 }
 
 // Returns information about all configurations.
@@ -181,6 +420,89 @@ type Configuration struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Configuration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Configuration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Configuration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.Configuration_Arn, *v.Arn)
+	}
+	if v.AuthenticationStrategy != "" {
+		s.WriteString(schemas.Configuration_AuthenticationStrategy, string(v.AuthenticationStrategy))
+	}
+	if v.Created != nil {
+		s.WriteTime(schemas.Configuration_Created, *v.Created)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.Configuration_Description, *v.Description)
+	}
+	if v.EngineType != "" {
+		s.WriteString(schemas.Configuration_EngineType, string(v.EngineType))
+	}
+	if v.EngineVersion != nil {
+		s.WriteString(schemas.Configuration_EngineVersion, *v.EngineVersion)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.Configuration_Id, *v.Id)
+	}
+	if v.LatestRevision != nil {
+		s.WriteStruct(schemas.Configuration_LatestRevision)
+		v.LatestRevision.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.Configuration_Name, *v.Name)
+	}
+	serialize__mapOf__string(s, schemas.Configuration_Tags, v.Tags)
+}
+func (v *Configuration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Configuration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Configuration_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.Configuration_Arn, v.Arn)
+		case schemas.Configuration_AuthenticationStrategy:
+			var ev string
+			if err := d.ReadString(schemas.Configuration_AuthenticationStrategy, &ev); err != nil {
+				return err
+			}
+			v.AuthenticationStrategy = AuthenticationStrategy(ev)
+			return nil
+		case schemas.Configuration_Created:
+			v.Created = new(time.Time)
+			return d.ReadTime(schemas.Configuration_Created, v.Created)
+		case schemas.Configuration_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.Configuration_Description, v.Description)
+		case schemas.Configuration_EngineType:
+			var ev string
+			if err := d.ReadString(schemas.Configuration_EngineType, &ev); err != nil {
+				return err
+			}
+			v.EngineType = EngineType(ev)
+			return nil
+		case schemas.Configuration_EngineVersion:
+			v.EngineVersion = new(string)
+			return d.ReadString(schemas.Configuration_EngineVersion, v.EngineVersion)
+		case schemas.Configuration_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.Configuration_Id, v.Id)
+		case schemas.Configuration_LatestRevision:
+			v.LatestRevision = &ConfigurationRevision{}
+			return v.LatestRevision.Deserialize(d)
+		case schemas.Configuration_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.Configuration_Name, v.Name)
+		case schemas.Configuration_Tags:
+			return deserialize__mapOf__string(d, schemas.Configuration_Tags, &v.Tags)
+		}
+		return nil
+	})
+}
+
 // A list of information about the configuration.
 type ConfigurationId struct {
 
@@ -193,6 +515,34 @@ type ConfigurationId struct {
 	Revision *int32
 
 	noSmithyDocumentSerde
+}
+
+func (v *ConfigurationId) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ConfigurationId)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ConfigurationId) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Id != nil {
+		s.WriteString(schemas.ConfigurationId_Id, *v.Id)
+	}
+	if v.Revision != nil {
+		s.WriteInt32(schemas.ConfigurationId_Revision, *v.Revision)
+	}
+}
+func (v *ConfigurationId) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ConfigurationId, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ConfigurationId_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.ConfigurationId_Id, v.Id)
+		case schemas.ConfigurationId_Revision:
+			v.Revision = new(int32)
+			return d.ReadInt32(schemas.ConfigurationId_Revision, v.Revision)
+		}
+		return nil
+	})
 }
 
 // Returns information about the specified configuration revision.
@@ -214,6 +564,40 @@ type ConfigurationRevision struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ConfigurationRevision) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ConfigurationRevision)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ConfigurationRevision) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Created != nil {
+		s.WriteTime(schemas.ConfigurationRevision_Created, *v.Created)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.ConfigurationRevision_Description, *v.Description)
+	}
+	if v.Revision != nil {
+		s.WriteInt32(schemas.ConfigurationRevision_Revision, *v.Revision)
+	}
+}
+func (v *ConfigurationRevision) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ConfigurationRevision, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ConfigurationRevision_Created:
+			v.Created = new(time.Time)
+			return d.ReadTime(schemas.ConfigurationRevision_Created, v.Created)
+		case schemas.ConfigurationRevision_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.ConfigurationRevision_Description, v.Description)
+		case schemas.ConfigurationRevision_Revision:
+			v.Revision = new(int32)
+			return d.ReadInt32(schemas.ConfigurationRevision_Revision, v.Revision)
+		}
+		return nil
+	})
+}
+
 // Broker configuration information
 type Configurations struct {
 
@@ -227,6 +611,41 @@ type Configurations struct {
 	Pending *ConfigurationId
 
 	noSmithyDocumentSerde
+}
+
+func (v *Configurations) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Configurations)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Configurations) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Current != nil {
+		s.WriteStruct(schemas.Configurations_Current)
+		v.Current.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serialize__listOfConfigurationId(s, schemas.Configurations_History, v.History)
+	if v.Pending != nil {
+		s.WriteStruct(schemas.Configurations_Pending)
+		v.Pending.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *Configurations) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Configurations, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Configurations_Current:
+			v.Current = &ConfigurationId{}
+			return v.Current.Deserialize(d)
+		case schemas.Configurations_History:
+			return deserialize__listOfConfigurationId(d, schemas.Configurations_History, &v.History)
+		case schemas.Configurations_Pending:
+			v.Pending = &ConfigurationId{}
+			return v.Pending.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // Specifies a broker in a data replication pair.
@@ -243,6 +662,34 @@ type DataReplicationCounterpart struct {
 	Region *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DataReplicationCounterpart) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DataReplicationCounterpart)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DataReplicationCounterpart) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BrokerId != nil {
+		s.WriteString(schemas.DataReplicationCounterpart_BrokerId, *v.BrokerId)
+	}
+	if v.Region != nil {
+		s.WriteString(schemas.DataReplicationCounterpart_Region, *v.Region)
+	}
+}
+func (v *DataReplicationCounterpart) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DataReplicationCounterpart, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DataReplicationCounterpart_BrokerId:
+			v.BrokerId = new(string)
+			return d.ReadString(schemas.DataReplicationCounterpart_BrokerId, v.BrokerId)
+		case schemas.DataReplicationCounterpart_Region:
+			v.Region = new(string)
+			return d.ReadString(schemas.DataReplicationCounterpart_Region, v.Region)
+		}
+		return nil
+	})
 }
 
 // The replication details of the data replication-enabled broker. Only returned
@@ -262,6 +709,36 @@ type DataReplicationMetadataOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DataReplicationMetadataOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DataReplicationMetadataOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DataReplicationMetadataOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DataReplicationCounterpart != nil {
+		s.WriteStruct(schemas.DataReplicationMetadataOutput_DataReplicationCounterpart)
+		v.DataReplicationCounterpart.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DataReplicationRole != nil {
+		s.WriteString(schemas.DataReplicationMetadataOutput_DataReplicationRole, *v.DataReplicationRole)
+	}
+}
+func (v *DataReplicationMetadataOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DataReplicationMetadataOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DataReplicationMetadataOutput_DataReplicationCounterpart:
+			v.DataReplicationCounterpart = &DataReplicationCounterpart{}
+			return v.DataReplicationCounterpart.Deserialize(d)
+		case schemas.DataReplicationMetadataOutput_DataReplicationRole:
+			v.DataReplicationRole = new(string)
+			return d.ReadString(schemas.DataReplicationMetadataOutput_DataReplicationRole, v.DataReplicationRole)
+		}
+		return nil
+	})
+}
+
 // Encryption options for the broker.
 type EncryptionOptions struct {
 
@@ -279,6 +756,34 @@ type EncryptionOptions struct {
 	noSmithyDocumentSerde
 }
 
+func (v *EncryptionOptions) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EncryptionOptions)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EncryptionOptions) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.KmsKeyId != nil {
+		s.WriteString(schemas.EncryptionOptions_KmsKeyId, *v.KmsKeyId)
+	}
+	if v.UseAwsOwnedKey != nil {
+		s.WriteBool(schemas.EncryptionOptions_UseAwsOwnedKey, *v.UseAwsOwnedKey)
+	}
+}
+func (v *EncryptionOptions) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EncryptionOptions, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EncryptionOptions_KmsKeyId:
+			v.KmsKeyId = new(string)
+			return d.ReadString(schemas.EncryptionOptions_KmsKeyId, v.KmsKeyId)
+		case schemas.EncryptionOptions_UseAwsOwnedKey:
+			v.UseAwsOwnedKey = new(bool)
+			return d.ReadBool(schemas.EncryptionOptions_UseAwsOwnedKey, v.UseAwsOwnedKey)
+		}
+		return nil
+	})
+}
+
 // Id of the engine version.
 type EngineVersion struct {
 
@@ -286,6 +791,28 @@ type EngineVersion struct {
 	Name *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *EngineVersion) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EngineVersion)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EngineVersion) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.EngineVersion_Name, *v.Name)
+	}
+}
+func (v *EngineVersion) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EngineVersion, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EngineVersion_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.EngineVersion_Name, v.Name)
+		}
+		return nil
+	})
 }
 
 // Optional. The metadata of the LDAP server used to authenticate and authorize
@@ -370,6 +897,85 @@ type LdapServerMetadataInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *LdapServerMetadataInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LdapServerMetadataInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *LdapServerMetadataInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serialize__listOf__string(s, schemas.LdapServerMetadataInput_Hosts, v.Hosts)
+	if v.RoleBase != nil {
+		s.WriteString(schemas.LdapServerMetadataInput_RoleBase, *v.RoleBase)
+	}
+	if v.RoleName != nil {
+		s.WriteString(schemas.LdapServerMetadataInput_RoleName, *v.RoleName)
+	}
+	if v.RoleSearchMatching != nil {
+		s.WriteString(schemas.LdapServerMetadataInput_RoleSearchMatching, *v.RoleSearchMatching)
+	}
+	if v.RoleSearchSubtree != nil {
+		s.WriteBool(schemas.LdapServerMetadataInput_RoleSearchSubtree, *v.RoleSearchSubtree)
+	}
+	if v.ServiceAccountPassword != nil {
+		s.WriteString(schemas.LdapServerMetadataInput_ServiceAccountPassword, *v.ServiceAccountPassword)
+	}
+	if v.ServiceAccountUsername != nil {
+		s.WriteString(schemas.LdapServerMetadataInput_ServiceAccountUsername, *v.ServiceAccountUsername)
+	}
+	if v.UserBase != nil {
+		s.WriteString(schemas.LdapServerMetadataInput_UserBase, *v.UserBase)
+	}
+	if v.UserRoleName != nil {
+		s.WriteString(schemas.LdapServerMetadataInput_UserRoleName, *v.UserRoleName)
+	}
+	if v.UserSearchMatching != nil {
+		s.WriteString(schemas.LdapServerMetadataInput_UserSearchMatching, *v.UserSearchMatching)
+	}
+	if v.UserSearchSubtree != nil {
+		s.WriteBool(schemas.LdapServerMetadataInput_UserSearchSubtree, *v.UserSearchSubtree)
+	}
+}
+func (v *LdapServerMetadataInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LdapServerMetadataInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LdapServerMetadataInput_Hosts:
+			return deserialize__listOf__string(d, schemas.LdapServerMetadataInput_Hosts, &v.Hosts)
+		case schemas.LdapServerMetadataInput_RoleBase:
+			v.RoleBase = new(string)
+			return d.ReadString(schemas.LdapServerMetadataInput_RoleBase, v.RoleBase)
+		case schemas.LdapServerMetadataInput_RoleName:
+			v.RoleName = new(string)
+			return d.ReadString(schemas.LdapServerMetadataInput_RoleName, v.RoleName)
+		case schemas.LdapServerMetadataInput_RoleSearchMatching:
+			v.RoleSearchMatching = new(string)
+			return d.ReadString(schemas.LdapServerMetadataInput_RoleSearchMatching, v.RoleSearchMatching)
+		case schemas.LdapServerMetadataInput_RoleSearchSubtree:
+			v.RoleSearchSubtree = new(bool)
+			return d.ReadBool(schemas.LdapServerMetadataInput_RoleSearchSubtree, v.RoleSearchSubtree)
+		case schemas.LdapServerMetadataInput_ServiceAccountPassword:
+			v.ServiceAccountPassword = new(string)
+			return d.ReadString(schemas.LdapServerMetadataInput_ServiceAccountPassword, v.ServiceAccountPassword)
+		case schemas.LdapServerMetadataInput_ServiceAccountUsername:
+			v.ServiceAccountUsername = new(string)
+			return d.ReadString(schemas.LdapServerMetadataInput_ServiceAccountUsername, v.ServiceAccountUsername)
+		case schemas.LdapServerMetadataInput_UserBase:
+			v.UserBase = new(string)
+			return d.ReadString(schemas.LdapServerMetadataInput_UserBase, v.UserBase)
+		case schemas.LdapServerMetadataInput_UserRoleName:
+			v.UserRoleName = new(string)
+			return d.ReadString(schemas.LdapServerMetadataInput_UserRoleName, v.UserRoleName)
+		case schemas.LdapServerMetadataInput_UserSearchMatching:
+			v.UserSearchMatching = new(string)
+			return d.ReadString(schemas.LdapServerMetadataInput_UserSearchMatching, v.UserSearchMatching)
+		case schemas.LdapServerMetadataInput_UserSearchSubtree:
+			v.UserSearchSubtree = new(bool)
+			return d.ReadBool(schemas.LdapServerMetadataInput_UserSearchSubtree, v.UserSearchSubtree)
+		}
+		return nil
+	})
+}
+
 // Optional. The metadata of the LDAP server used to authenticate and authorize
 // connections to the broker.
 type LdapServerMetadataOutput struct {
@@ -443,6 +1049,79 @@ type LdapServerMetadataOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *LdapServerMetadataOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LdapServerMetadataOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *LdapServerMetadataOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serialize__listOf__string(s, schemas.LdapServerMetadataOutput_Hosts, v.Hosts)
+	if v.RoleBase != nil {
+		s.WriteString(schemas.LdapServerMetadataOutput_RoleBase, *v.RoleBase)
+	}
+	if v.RoleName != nil {
+		s.WriteString(schemas.LdapServerMetadataOutput_RoleName, *v.RoleName)
+	}
+	if v.RoleSearchMatching != nil {
+		s.WriteString(schemas.LdapServerMetadataOutput_RoleSearchMatching, *v.RoleSearchMatching)
+	}
+	if v.RoleSearchSubtree != nil {
+		s.WriteBool(schemas.LdapServerMetadataOutput_RoleSearchSubtree, *v.RoleSearchSubtree)
+	}
+	if v.ServiceAccountUsername != nil {
+		s.WriteString(schemas.LdapServerMetadataOutput_ServiceAccountUsername, *v.ServiceAccountUsername)
+	}
+	if v.UserBase != nil {
+		s.WriteString(schemas.LdapServerMetadataOutput_UserBase, *v.UserBase)
+	}
+	if v.UserRoleName != nil {
+		s.WriteString(schemas.LdapServerMetadataOutput_UserRoleName, *v.UserRoleName)
+	}
+	if v.UserSearchMatching != nil {
+		s.WriteString(schemas.LdapServerMetadataOutput_UserSearchMatching, *v.UserSearchMatching)
+	}
+	if v.UserSearchSubtree != nil {
+		s.WriteBool(schemas.LdapServerMetadataOutput_UserSearchSubtree, *v.UserSearchSubtree)
+	}
+}
+func (v *LdapServerMetadataOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LdapServerMetadataOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LdapServerMetadataOutput_Hosts:
+			return deserialize__listOf__string(d, schemas.LdapServerMetadataOutput_Hosts, &v.Hosts)
+		case schemas.LdapServerMetadataOutput_RoleBase:
+			v.RoleBase = new(string)
+			return d.ReadString(schemas.LdapServerMetadataOutput_RoleBase, v.RoleBase)
+		case schemas.LdapServerMetadataOutput_RoleName:
+			v.RoleName = new(string)
+			return d.ReadString(schemas.LdapServerMetadataOutput_RoleName, v.RoleName)
+		case schemas.LdapServerMetadataOutput_RoleSearchMatching:
+			v.RoleSearchMatching = new(string)
+			return d.ReadString(schemas.LdapServerMetadataOutput_RoleSearchMatching, v.RoleSearchMatching)
+		case schemas.LdapServerMetadataOutput_RoleSearchSubtree:
+			v.RoleSearchSubtree = new(bool)
+			return d.ReadBool(schemas.LdapServerMetadataOutput_RoleSearchSubtree, v.RoleSearchSubtree)
+		case schemas.LdapServerMetadataOutput_ServiceAccountUsername:
+			v.ServiceAccountUsername = new(string)
+			return d.ReadString(schemas.LdapServerMetadataOutput_ServiceAccountUsername, v.ServiceAccountUsername)
+		case schemas.LdapServerMetadataOutput_UserBase:
+			v.UserBase = new(string)
+			return d.ReadString(schemas.LdapServerMetadataOutput_UserBase, v.UserBase)
+		case schemas.LdapServerMetadataOutput_UserRoleName:
+			v.UserRoleName = new(string)
+			return d.ReadString(schemas.LdapServerMetadataOutput_UserRoleName, v.UserRoleName)
+		case schemas.LdapServerMetadataOutput_UserSearchMatching:
+			v.UserSearchMatching = new(string)
+			return d.ReadString(schemas.LdapServerMetadataOutput_UserSearchMatching, v.UserSearchMatching)
+		case schemas.LdapServerMetadataOutput_UserSearchSubtree:
+			v.UserSearchSubtree = new(bool)
+			return d.ReadBool(schemas.LdapServerMetadataOutput_UserSearchSubtree, v.UserSearchSubtree)
+		}
+		return nil
+	})
+}
+
 // The list of information about logs to be enabled for the specified broker.
 type Logs struct {
 
@@ -454,6 +1133,34 @@ type Logs struct {
 	General *bool
 
 	noSmithyDocumentSerde
+}
+
+func (v *Logs) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Logs)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Logs) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Audit != nil {
+		s.WriteBool(schemas.Logs_Audit, *v.Audit)
+	}
+	if v.General != nil {
+		s.WriteBool(schemas.Logs_General, *v.General)
+	}
+}
+func (v *Logs) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Logs, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Logs_Audit:
+			v.Audit = new(bool)
+			return d.ReadBool(schemas.Logs_Audit, v.Audit)
+		case schemas.Logs_General:
+			v.General = new(bool)
+			return d.ReadBool(schemas.Logs_General, v.General)
+		}
+		return nil
+	})
 }
 
 // The list of information about logs currently enabled and pending to be deployed
@@ -484,6 +1191,54 @@ type LogsSummary struct {
 	noSmithyDocumentSerde
 }
 
+func (v *LogsSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LogsSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *LogsSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Audit != nil {
+		s.WriteBool(schemas.LogsSummary_Audit, *v.Audit)
+	}
+	if v.AuditLogGroup != nil {
+		s.WriteString(schemas.LogsSummary_AuditLogGroup, *v.AuditLogGroup)
+	}
+	if v.General != nil {
+		s.WriteBool(schemas.LogsSummary_General, *v.General)
+	}
+	if v.GeneralLogGroup != nil {
+		s.WriteString(schemas.LogsSummary_GeneralLogGroup, *v.GeneralLogGroup)
+	}
+	if v.Pending != nil {
+		s.WriteStruct(schemas.LogsSummary_Pending)
+		v.Pending.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *LogsSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LogsSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LogsSummary_Audit:
+			v.Audit = new(bool)
+			return d.ReadBool(schemas.LogsSummary_Audit, v.Audit)
+		case schemas.LogsSummary_AuditLogGroup:
+			v.AuditLogGroup = new(string)
+			return d.ReadString(schemas.LogsSummary_AuditLogGroup, v.AuditLogGroup)
+		case schemas.LogsSummary_General:
+			v.General = new(bool)
+			return d.ReadBool(schemas.LogsSummary_General, v.General)
+		case schemas.LogsSummary_GeneralLogGroup:
+			v.GeneralLogGroup = new(string)
+			return d.ReadString(schemas.LogsSummary_GeneralLogGroup, v.GeneralLogGroup)
+		case schemas.LogsSummary_Pending:
+			v.Pending = &PendingLogs{}
+			return v.Pending.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // The list of information about logs to be enabled for the specified broker.
 type PendingLogs struct {
 
@@ -495,6 +1250,34 @@ type PendingLogs struct {
 	General *bool
 
 	noSmithyDocumentSerde
+}
+
+func (v *PendingLogs) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PendingLogs)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PendingLogs) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Audit != nil {
+		s.WriteBool(schemas.PendingLogs_Audit, *v.Audit)
+	}
+	if v.General != nil {
+		s.WriteBool(schemas.PendingLogs_General, *v.General)
+	}
+}
+func (v *PendingLogs) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PendingLogs, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PendingLogs_Audit:
+			v.Audit = new(bool)
+			return d.ReadBool(schemas.PendingLogs_Audit, v.Audit)
+		case schemas.PendingLogs_General:
+			v.General = new(bool)
+			return d.ReadBool(schemas.PendingLogs_General, v.General)
+		}
+		return nil
+	})
 }
 
 // Returns info about the resource share error after updating the broker.
@@ -510,6 +1293,40 @@ type ResourceShareError struct {
 	Status *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ResourceShareError) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ResourceShareError)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ResourceShareError) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ErrorCode != nil {
+		s.WriteString(schemas.ResourceShareError_ErrorCode, *v.ErrorCode)
+	}
+	if v.ResourceShareArn != nil {
+		s.WriteString(schemas.ResourceShareError_ResourceShareArn, *v.ResourceShareArn)
+	}
+	if v.Status != nil {
+		s.WriteString(schemas.ResourceShareError_Status, *v.Status)
+	}
+}
+func (v *ResourceShareError) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ResourceShareError, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ResourceShareError_ErrorCode:
+			v.ErrorCode = new(string)
+			return d.ReadString(schemas.ResourceShareError_ErrorCode, v.ErrorCode)
+		case schemas.ResourceShareError_ResourceShareArn:
+			v.ResourceShareArn = new(string)
+			return d.ReadString(schemas.ResourceShareError_ResourceShareArn, v.ResourceShareArn)
+		case schemas.ResourceShareError_Status:
+			v.Status = new(string)
+			return d.ReadString(schemas.ResourceShareError_Status, v.Status)
+		}
+		return nil
+	})
 }
 
 // Returns information about the configuration element or attribute that was
@@ -528,6 +1345,44 @@ type SanitizationWarning struct {
 	ElementName *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *SanitizationWarning) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SanitizationWarning)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SanitizationWarning) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AttributeName != nil {
+		s.WriteString(schemas.SanitizationWarning_AttributeName, *v.AttributeName)
+	}
+	if v.ElementName != nil {
+		s.WriteString(schemas.SanitizationWarning_ElementName, *v.ElementName)
+	}
+	if v.Reason != "" {
+		s.WriteString(schemas.SanitizationWarning_Reason, string(v.Reason))
+	}
+}
+func (v *SanitizationWarning) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SanitizationWarning, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SanitizationWarning_AttributeName:
+			v.AttributeName = new(string)
+			return d.ReadString(schemas.SanitizationWarning_AttributeName, v.AttributeName)
+		case schemas.SanitizationWarning_ElementName:
+			v.ElementName = new(string)
+			return d.ReadString(schemas.SanitizationWarning_ElementName, v.ElementName)
+		case schemas.SanitizationWarning_Reason:
+			var ev string
+			if err := d.ReadString(schemas.SanitizationWarning_Reason, &ev); err != nil {
+				return err
+			}
+			v.Reason = SanitizationWarningReason(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // Represents a resource that is shared with the broker, including its type, ARN,
@@ -561,6 +1416,62 @@ type SharedResource struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SharedResource) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SharedResource)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SharedResource) SerializeMembers(s smithy.ShapeSerializer) {
+	serialize__listOf__string(s, schemas.SharedResource_DnsNames, v.DnsNames)
+	if v.Error != nil {
+		s.WriteStruct(schemas.SharedResource_Error)
+		v.Error.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ResourceArn != nil {
+		s.WriteString(schemas.SharedResource_ResourceArn, *v.ResourceArn)
+	}
+	serialize__listOf__string(s, schemas.SharedResource_ResourceShareArns, v.ResourceShareArns)
+	if v.Status != "" {
+		s.WriteString(schemas.SharedResource_Status, string(v.Status))
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.SharedResource_Type, string(v.Type))
+	}
+}
+func (v *SharedResource) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SharedResource, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SharedResource_DnsNames:
+			return deserialize__listOf__string(d, schemas.SharedResource_DnsNames, &v.DnsNames)
+		case schemas.SharedResource_Error:
+			v.Error = &SharedResourceError{}
+			return v.Error.Deserialize(d)
+		case schemas.SharedResource_ResourceArn:
+			v.ResourceArn = new(string)
+			return d.ReadString(schemas.SharedResource_ResourceArn, v.ResourceArn)
+		case schemas.SharedResource_ResourceShareArns:
+			return deserialize__listOf__string(d, schemas.SharedResource_ResourceShareArns, &v.ResourceShareArns)
+		case schemas.SharedResource_Status:
+			var ev string
+			if err := d.ReadString(schemas.SharedResource_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = SharedResourceStatus(ev)
+			return nil
+		case schemas.SharedResource_Type:
+			var ev string
+			if err := d.ReadString(schemas.SharedResource_Type, &ev); err != nil {
+				return err
+			}
+			v.Type = SharedResourceType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Information on the error encountered by the resource.
 type SharedResourceError struct {
 
@@ -575,6 +1486,38 @@ type SharedResourceError struct {
 	Message *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *SharedResourceError) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SharedResourceError)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SharedResourceError) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Code != "" {
+		s.WriteString(schemas.SharedResourceError_Code, string(v.Code))
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.SharedResourceError_Message, *v.Message)
+	}
+}
+func (v *SharedResourceError) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SharedResourceError, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SharedResourceError_Code:
+			var ev string
+			if err := d.ReadString(schemas.SharedResourceError_Code, &ev); err != nil {
+				return err
+			}
+			v.Code = SharedResourceErrorCode(ev)
+			return nil
+		case schemas.SharedResourceError_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.SharedResourceError_Message, v.Message)
+		}
+		return nil
+	})
 }
 
 // A user associated with the broker. For Amazon MQ for RabbitMQ brokers, one and
@@ -626,6 +1569,49 @@ type User struct {
 	noSmithyDocumentSerde
 }
 
+func (v *User) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.User)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *User) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConsoleAccess != nil {
+		s.WriteBool(schemas.User_ConsoleAccess, *v.ConsoleAccess)
+	}
+	serialize__listOf__string(s, schemas.User_Groups, v.Groups)
+	if v.Password != nil {
+		s.WriteString(schemas.User_Password, *v.Password)
+	}
+	if v.ReplicationUser != nil {
+		s.WriteBool(schemas.User_ReplicationUser, *v.ReplicationUser)
+	}
+	if v.Username != nil {
+		s.WriteString(schemas.User_Username, *v.Username)
+	}
+}
+func (v *User) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.User, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.User_ConsoleAccess:
+			v.ConsoleAccess = new(bool)
+			return d.ReadBool(schemas.User_ConsoleAccess, v.ConsoleAccess)
+		case schemas.User_Groups:
+			return deserialize__listOf__string(d, schemas.User_Groups, &v.Groups)
+		case schemas.User_Password:
+			v.Password = new(string)
+			return d.ReadString(schemas.User_Password, v.Password)
+		case schemas.User_ReplicationUser:
+			v.ReplicationUser = new(bool)
+			return d.ReadBool(schemas.User_ReplicationUser, v.ReplicationUser)
+		case schemas.User_Username:
+			v.Username = new(string)
+			return d.ReadString(schemas.User_Username, v.Username)
+		}
+		return nil
+	})
+}
+
 // Returns information about the status of the changes pending for the ActiveMQ
 // user.
 type UserPendingChanges struct {
@@ -646,6 +1632,41 @@ type UserPendingChanges struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UserPendingChanges) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UserPendingChanges)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UserPendingChanges) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConsoleAccess != nil {
+		s.WriteBool(schemas.UserPendingChanges_ConsoleAccess, *v.ConsoleAccess)
+	}
+	serialize__listOf__string(s, schemas.UserPendingChanges_Groups, v.Groups)
+	if v.PendingChange != "" {
+		s.WriteString(schemas.UserPendingChanges_PendingChange, string(v.PendingChange))
+	}
+}
+func (v *UserPendingChanges) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UserPendingChanges, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UserPendingChanges_ConsoleAccess:
+			v.ConsoleAccess = new(bool)
+			return d.ReadBool(schemas.UserPendingChanges_ConsoleAccess, v.ConsoleAccess)
+		case schemas.UserPendingChanges_Groups:
+			return deserialize__listOf__string(d, schemas.UserPendingChanges_Groups, &v.Groups)
+		case schemas.UserPendingChanges_PendingChange:
+			var ev string
+			if err := d.ReadString(schemas.UserPendingChanges_PendingChange, &ev); err != nil {
+				return err
+			}
+			v.PendingChange = ChangeType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Returns a list of all broker users. Does not apply to RabbitMQ brokers.
 type UserSummary struct {
 
@@ -660,6 +1681,38 @@ type UserSummary struct {
 	PendingChange ChangeType
 
 	noSmithyDocumentSerde
+}
+
+func (v *UserSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UserSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UserSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PendingChange != "" {
+		s.WriteString(schemas.UserSummary_PendingChange, string(v.PendingChange))
+	}
+	if v.Username != nil {
+		s.WriteString(schemas.UserSummary_Username, *v.Username)
+	}
+}
+func (v *UserSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UserSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UserSummary_PendingChange:
+			var ev string
+			if err := d.ReadString(schemas.UserSummary_PendingChange, &ev); err != nil {
+				return err
+			}
+			v.PendingChange = ChangeType(ev)
+			return nil
+		case schemas.UserSummary_Username:
+			v.Username = new(string)
+			return d.ReadString(schemas.UserSummary_Username, v.Username)
+		}
+		return nil
+	})
 }
 
 // The scheduled time period relative to UTC during which Amazon MQ begins to
@@ -681,6 +1734,44 @@ type WeeklyStartTime struct {
 	TimeZone *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *WeeklyStartTime) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.WeeklyStartTime)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *WeeklyStartTime) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DayOfWeek != "" {
+		s.WriteString(schemas.WeeklyStartTime_DayOfWeek, string(v.DayOfWeek))
+	}
+	if v.TimeOfDay != nil {
+		s.WriteString(schemas.WeeklyStartTime_TimeOfDay, *v.TimeOfDay)
+	}
+	if v.TimeZone != nil {
+		s.WriteString(schemas.WeeklyStartTime_TimeZone, *v.TimeZone)
+	}
+}
+func (v *WeeklyStartTime) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.WeeklyStartTime, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.WeeklyStartTime_DayOfWeek:
+			var ev string
+			if err := d.ReadString(schemas.WeeklyStartTime_DayOfWeek, &ev); err != nil {
+				return err
+			}
+			v.DayOfWeek = DayOfWeek(ev)
+			return nil
+		case schemas.WeeklyStartTime_TimeOfDay:
+			v.TimeOfDay = new(string)
+			return d.ReadString(schemas.WeeklyStartTime_TimeOfDay, v.TimeOfDay)
+		case schemas.WeeklyStartTime_TimeZone:
+			v.TimeZone = new(string)
+			return d.ReadString(schemas.WeeklyStartTime_TimeZone, v.TimeZone)
+		}
+		return nil
+	})
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde

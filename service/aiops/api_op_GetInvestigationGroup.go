@@ -4,7 +4,9 @@ package aiops
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/aiops/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/aiops/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -33,6 +35,18 @@ type GetInvestigationGroupInput struct {
 	Identifier *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetInvestigationGroupInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetInvestigationGroupRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetInvestigationGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Identifier != nil {
+		s.WriteString(schemas.GetInvestigationGroupRequest_identifier, *v.Identifier)
+	}
 }
 
 type GetInvestigationGroupOutput struct {
@@ -96,13 +110,97 @@ type GetInvestigationGroupOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetInvestigationGroupOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetInvestigationGroupResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetInvestigationGroupOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.GetInvestigationGroupResponse_arn, *v.Arn)
+	}
+	serializeChatbotNotificationChannel(s, schemas.GetInvestigationGroupResponse_chatbotNotificationChannel, v.ChatbotNotificationChannel)
+	if v.CreatedAt != nil {
+		s.WriteInt64(schemas.GetInvestigationGroupResponse_createdAt, *v.CreatedAt)
+	}
+	if v.CreatedBy != nil {
+		s.WriteString(schemas.GetInvestigationGroupResponse_createdBy, *v.CreatedBy)
+	}
+	serializeCrossAccountConfigurations(s, schemas.GetInvestigationGroupResponse_crossAccountConfigurations, v.CrossAccountConfigurations)
+	if v.EncryptionConfiguration != nil {
+		s.WriteStruct(schemas.GetInvestigationGroupResponse_encryptionConfiguration)
+		v.EncryptionConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.IsCloudTrailEventHistoryEnabled != nil {
+		s.WriteBool(schemas.GetInvestigationGroupResponse_isCloudTrailEventHistoryEnabled, *v.IsCloudTrailEventHistoryEnabled)
+	}
+	if v.LastModifiedAt != nil {
+		s.WriteInt64(schemas.GetInvestigationGroupResponse_lastModifiedAt, *v.LastModifiedAt)
+	}
+	if v.LastModifiedBy != nil {
+		s.WriteString(schemas.GetInvestigationGroupResponse_lastModifiedBy, *v.LastModifiedBy)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.GetInvestigationGroupResponse_name, *v.Name)
+	}
+	if v.RetentionInDays != nil {
+		s.WriteInt64(schemas.GetInvestigationGroupResponse_retentionInDays, *v.RetentionInDays)
+	}
+	if v.RoleArn != nil {
+		s.WriteString(schemas.GetInvestigationGroupResponse_roleArn, *v.RoleArn)
+	}
+	serializeTagKeyBoundaries(s, schemas.GetInvestigationGroupResponse_tagKeyBoundaries, v.TagKeyBoundaries)
+}
+func (v *GetInvestigationGroupOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetInvestigationGroupResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetInvestigationGroupResponse_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.GetInvestigationGroupResponse_arn, v.Arn)
+		case schemas.GetInvestigationGroupResponse_chatbotNotificationChannel:
+			return deserializeChatbotNotificationChannel(d, schemas.GetInvestigationGroupResponse_chatbotNotificationChannel, &v.ChatbotNotificationChannel)
+		case schemas.GetInvestigationGroupResponse_createdAt:
+			v.CreatedAt = new(int64)
+			return d.ReadInt64(schemas.GetInvestigationGroupResponse_createdAt, v.CreatedAt)
+		case schemas.GetInvestigationGroupResponse_createdBy:
+			v.CreatedBy = new(string)
+			return d.ReadString(schemas.GetInvestigationGroupResponse_createdBy, v.CreatedBy)
+		case schemas.GetInvestigationGroupResponse_crossAccountConfigurations:
+			return deserializeCrossAccountConfigurations(d, schemas.GetInvestigationGroupResponse_crossAccountConfigurations, &v.CrossAccountConfigurations)
+		case schemas.GetInvestigationGroupResponse_encryptionConfiguration:
+			v.EncryptionConfiguration = &types.EncryptionConfiguration{}
+			return v.EncryptionConfiguration.Deserialize(d)
+		case schemas.GetInvestigationGroupResponse_isCloudTrailEventHistoryEnabled:
+			v.IsCloudTrailEventHistoryEnabled = new(bool)
+			return d.ReadBool(schemas.GetInvestigationGroupResponse_isCloudTrailEventHistoryEnabled, v.IsCloudTrailEventHistoryEnabled)
+		case schemas.GetInvestigationGroupResponse_lastModifiedAt:
+			v.LastModifiedAt = new(int64)
+			return d.ReadInt64(schemas.GetInvestigationGroupResponse_lastModifiedAt, v.LastModifiedAt)
+		case schemas.GetInvestigationGroupResponse_lastModifiedBy:
+			v.LastModifiedBy = new(string)
+			return d.ReadString(schemas.GetInvestigationGroupResponse_lastModifiedBy, v.LastModifiedBy)
+		case schemas.GetInvestigationGroupResponse_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.GetInvestigationGroupResponse_name, v.Name)
+		case schemas.GetInvestigationGroupResponse_retentionInDays:
+			v.RetentionInDays = new(int64)
+			return d.ReadInt64(schemas.GetInvestigationGroupResponse_retentionInDays, v.RetentionInDays)
+		case schemas.GetInvestigationGroupResponse_roleArn:
+			v.RoleArn = new(string)
+			return d.ReadString(schemas.GetInvestigationGroupResponse_roleArn, v.RoleArn)
+		case schemas.GetInvestigationGroupResponse_tagKeyBoundaries:
+			return deserializeTagKeyBoundaries(d, schemas.GetInvestigationGroupResponse_tagKeyBoundaries, &v.TagKeyBoundaries)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetInvestigationGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetInvestigationGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetInvestigationGroup, schemas.GetInvestigationGroupRequest, schemas.GetInvestigationGroupResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetInvestigationGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetInvestigationGroup, schemas.GetInvestigationGroupRequest, schemas.GetInvestigationGroupResponse), output: &GetInvestigationGroupOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

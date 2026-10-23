@@ -5,7 +5,9 @@ package bedrock
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/bedrock/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrock/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -71,6 +73,42 @@ type ListProvisionedModelThroughputsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListProvisionedModelThroughputsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListProvisionedModelThroughputsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListProvisionedModelThroughputsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreationTimeAfter != nil {
+		s.WriteTime(schemas.ListProvisionedModelThroughputsRequest_creationTimeAfter, *v.CreationTimeAfter)
+	}
+	if v.CreationTimeBefore != nil {
+		s.WriteTime(schemas.ListProvisionedModelThroughputsRequest_creationTimeBefore, *v.CreationTimeBefore)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListProvisionedModelThroughputsRequest_maxResults, *v.MaxResults)
+	}
+	if v.ModelArnEquals != nil {
+		s.WriteString(schemas.ListProvisionedModelThroughputsRequest_modelArnEquals, *v.ModelArnEquals)
+	}
+	if v.NameContains != nil {
+		s.WriteString(schemas.ListProvisionedModelThroughputsRequest_nameContains, *v.NameContains)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListProvisionedModelThroughputsRequest_nextToken, *v.NextToken)
+	}
+	if v.SortBy != "" {
+		s.WriteString(schemas.ListProvisionedModelThroughputsRequest_sortBy, string(v.SortBy))
+	}
+	if v.SortOrder != "" {
+		s.WriteString(schemas.ListProvisionedModelThroughputsRequest_sortOrder, string(v.SortOrder))
+	}
+	if v.StatusEquals != "" {
+		s.WriteString(schemas.ListProvisionedModelThroughputsRequest_statusEquals, string(v.StatusEquals))
+	}
+}
+
 type ListProvisionedModelThroughputsOutput struct {
 
 	// If there are more results than the number you specified in the maxResults
@@ -87,13 +125,35 @@ type ListProvisionedModelThroughputsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListProvisionedModelThroughputsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListProvisionedModelThroughputsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListProvisionedModelThroughputsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListProvisionedModelThroughputsResponse_nextToken, *v.NextToken)
+	}
+	serializeProvisionedModelSummaries(s, schemas.ListProvisionedModelThroughputsResponse_provisionedModelSummaries, v.ProvisionedModelSummaries)
+}
+func (v *ListProvisionedModelThroughputsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListProvisionedModelThroughputsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListProvisionedModelThroughputsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListProvisionedModelThroughputsResponse_nextToken, v.NextToken)
+		case schemas.ListProvisionedModelThroughputsResponse_provisionedModelSummaries:
+			return deserializeProvisionedModelSummaries(d, schemas.ListProvisionedModelThroughputsResponse_provisionedModelSummaries, &v.ProvisionedModelSummaries)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListProvisionedModelThroughputsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListProvisionedModelThroughputs{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListProvisionedModelThroughputs, schemas.ListProvisionedModelThroughputsRequest, schemas.ListProvisionedModelThroughputsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListProvisionedModelThroughputs{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListProvisionedModelThroughputs, schemas.ListProvisionedModelThroughputsRequest, schemas.ListProvisionedModelThroughputsResponse), output: &ListProvisionedModelThroughputsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

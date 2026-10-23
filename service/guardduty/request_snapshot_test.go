@@ -666,8 +666,9 @@ func TestCheckRequestSnapshot_CreatePublishingDestination(t *testing.T) {
 		DetectorId:      ptr.String("__DetectorId__"),
 		DestinationType: types.DestinationType("S3"),
 		DestinationProperties: &types.DestinationProperties{
-			DestinationArn: ptr.String("__DestinationArn__"),
-			KmsKeyArn:      ptr.String("__KmsKeyArn__"),
+			DestinationArn:      ptr.String("__DestinationArn__"),
+			KmsKeyArn:           ptr.String("__KmsKeyArn__"),
+			ExpectedBucketOwner: ptr.String("__ExpectedBucketOwner__"),
 		},
 		ClientToken: ptr.String("__ClientToken__"),
 		Tags: map[string]string{
@@ -3681,8 +3682,9 @@ func TestCheckRequestSnapshot_UpdatePublishingDestination(t *testing.T) {
 		DetectorId:    ptr.String("__DetectorId__"),
 		DestinationId: ptr.String("__DestinationId__"),
 		DestinationProperties: &types.DestinationProperties{
-			DestinationArn: ptr.String("__DestinationArn__"),
-			KmsKeyArn:      ptr.String("__KmsKeyArn__"),
+			DestinationArn:      ptr.String("__DestinationArn__"),
+			KmsKeyArn:           ptr.String("__KmsKeyArn__"),
+			ExpectedBucketOwner: ptr.String("__ExpectedBucketOwner__"),
 		},
 	}
 	body := &bytes.Buffer{}
@@ -4263,8 +4265,9 @@ func TestUpdateRequestSnapshot_CreatePublishingDestination(t *testing.T) {
 		DetectorId:      ptr.String("__DetectorId__"),
 		DestinationType: types.DestinationType("S3"),
 		DestinationProperties: &types.DestinationProperties{
-			DestinationArn: ptr.String("__DestinationArn__"),
-			KmsKeyArn:      ptr.String("__KmsKeyArn__"),
+			DestinationArn:      ptr.String("__DestinationArn__"),
+			KmsKeyArn:           ptr.String("__KmsKeyArn__"),
+			ExpectedBucketOwner: ptr.String("__ExpectedBucketOwner__"),
 		},
 		ClientToken: ptr.String("__ClientToken__"),
 		Tags: map[string]string{
@@ -7278,8 +7281,9 @@ func TestUpdateRequestSnapshot_UpdatePublishingDestination(t *testing.T) {
 		DetectorId:    ptr.String("__DetectorId__"),
 		DestinationId: ptr.String("__DestinationId__"),
 		DestinationProperties: &types.DestinationProperties{
-			DestinationArn: ptr.String("__DestinationArn__"),
-			KmsKeyArn:      ptr.String("__KmsKeyArn__"),
+			DestinationArn:      ptr.String("__DestinationArn__"),
+			KmsKeyArn:           ptr.String("__KmsKeyArn__"),
+			ExpectedBucketOwner: ptr.String("__ExpectedBucketOwner__"),
 		},
 	}
 	body := &bytes.Buffer{}

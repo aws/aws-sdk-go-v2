@@ -1,0 +1,5 @@
+402
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: AWSBCMPricingCalculator.BatchCreateBillScenarioUsageModification
+
+{"__type":"ServiceQuotaExceededException","message":"__Message__","quotaCode":"__QuotaCode__","resourceId":"__ResourceId__","resourceType":"__ResourceType__","serviceCode":"__ServiceCode__"}

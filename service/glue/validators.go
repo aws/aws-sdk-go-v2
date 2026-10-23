@@ -210,6 +210,26 @@ func (m *validateOpBatchGetDataQualityResult) HandleInitialize(ctx context.Conte
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpBatchGetDataQualityResultV2 struct {
+}
+
+func (*validateOpBatchGetDataQualityResultV2) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpBatchGetDataQualityResultV2) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*BatchGetDataQualityResultV2Input)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpBatchGetDataQualityResultV2Input(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpBatchGetDataQualityRulesetEvaluationRun struct {
 }
 
@@ -2370,6 +2390,26 @@ func (m *validateOpGetDataQualityResult) HandleInitialize(ctx context.Context, i
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetDataQualityResultV2 struct {
+}
+
+func (*validateOpGetDataQualityResultV2) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetDataQualityResultV2) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetDataQualityResultV2Input)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetDataQualityResultV2Input(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetDataQualityRuleRecommendationRun struct {
 }
 
@@ -3010,6 +3050,46 @@ func (m *validateOpGetStatement) HandleInitialize(ctx context.Context, in middle
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetSystemLogsForJobRun struct {
+}
+
+func (*validateOpGetSystemLogsForJobRun) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetSystemLogsForJobRun) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetSystemLogsForJobRunInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetSystemLogsForJobRunInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetSystemLogsForSession struct {
+}
+
+func (*validateOpGetSystemLogsForSession) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetSystemLogsForSession) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetSystemLogsForSessionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetSystemLogsForSessionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetTable struct {
 }
 
@@ -3390,6 +3470,26 @@ func (m *validateOpListDataQualityResults) HandleInitialize(ctx context.Context,
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpListDataQualityResultsV2 struct {
+}
+
+func (*validateOpListDataQualityResultsV2) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListDataQualityResultsV2) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListDataQualityResultsV2Input)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListDataQualityResultsV2Input(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListDataQualityRuleRecommendationRuns struct {
 }
 
@@ -3605,6 +3705,26 @@ func (m *validateOpModifyIntegration) HandleInitialize(ctx context.Context, in m
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpModifyIntegrationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpPublishDataQualityResultV2 struct {
+}
+
+func (*validateOpPublishDataQualityResultV2) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpPublishDataQualityResultV2) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*PublishDataQualityResultV2Input)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpPublishDataQualityResultV2Input(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -5070,6 +5190,10 @@ func addOpBatchGetDataQualityResultValidationMiddleware(stack *middleware.Stack)
 	return stack.Initialize.Add(&validateOpBatchGetDataQualityResult{}, middleware.After)
 }
 
+func addOpBatchGetDataQualityResultV2ValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpBatchGetDataQualityResultV2{}, middleware.After)
+}
+
 func addOpBatchGetDataQualityRulesetEvaluationRunValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpBatchGetDataQualityRulesetEvaluationRun{}, middleware.After)
 }
@@ -5502,6 +5626,10 @@ func addOpGetDataQualityResultValidationMiddleware(stack *middleware.Stack) erro
 	return stack.Initialize.Add(&validateOpGetDataQualityResult{}, middleware.After)
 }
 
+func addOpGetDataQualityResultV2ValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetDataQualityResultV2{}, middleware.After)
+}
+
 func addOpGetDataQualityRuleRecommendationRunValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetDataQualityRuleRecommendationRun{}, middleware.After)
 }
@@ -5630,6 +5758,14 @@ func addOpGetStatementValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetStatement{}, middleware.After)
 }
 
+func addOpGetSystemLogsForJobRunValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetSystemLogsForJobRun{}, middleware.After)
+}
+
+func addOpGetSystemLogsForSessionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetSystemLogsForSession{}, middleware.After)
+}
+
 func addOpGetTableValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetTable{}, middleware.After)
 }
@@ -5706,6 +5842,10 @@ func addOpListDataQualityResultsValidationMiddleware(stack *middleware.Stack) er
 	return stack.Initialize.Add(&validateOpListDataQualityResults{}, middleware.After)
 }
 
+func addOpListDataQualityResultsV2ValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListDataQualityResultsV2{}, middleware.After)
+}
+
 func addOpListDataQualityRuleRecommendationRunsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListDataQualityRuleRecommendationRuns{}, middleware.After)
 }
@@ -5748,6 +5888,10 @@ func addOpListTableOptimizerRunsValidationMiddleware(stack *middleware.Stack) er
 
 func addOpModifyIntegrationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpModifyIntegration{}, middleware.After)
+}
+
+func addOpPublishDataQualityResultV2ValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpPublishDataQualityResultV2{}, middleware.After)
 }
 
 func addOpPutAssetValidationMiddleware(stack *middleware.Stack) error {
@@ -7769,6 +7913,23 @@ func validateDataQualityResultFilterCriteria(v *types.DataQualityResultFilterCri
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DataQualityResultFilterCriteria"}
+	if v.DataSource != nil {
+		if err := validateDataSource(v.DataSource); err != nil {
+			invalidParams.AddNested("DataSource", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateDataQualityResultsV2FilterCriteria(v *types.DataQualityResultsV2FilterCriteria) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DataQualityResultsV2FilterCriteria"}
 	if v.DataSource != nil {
 		if err := validateDataSource(v.DataSource); err != nil {
 			invalidParams.AddNested("DataSource", err.(smithy.InvalidParamsError))
@@ -11337,6 +11498,21 @@ func validateOpBatchGetDataQualityResultInput(v *BatchGetDataQualityResultInput)
 	}
 }
 
+func validateOpBatchGetDataQualityResultV2Input(v *BatchGetDataQualityResultV2Input) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "BatchGetDataQualityResultV2Input"}
+	if v.ResultIds == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResultIds"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpBatchGetDataQualityRulesetEvaluationRunInput(v *BatchGetDataQualityRulesetEvaluationRunInput) error {
 	if v == nil {
 		return nil
@@ -13281,6 +13457,21 @@ func validateOpGetDataQualityResultInput(v *GetDataQualityResultInput) error {
 	}
 }
 
+func validateOpGetDataQualityResultV2Input(v *GetDataQualityResultV2Input) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetDataQualityResultV2Input"}
+	if v.ResultId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResultId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpGetDataQualityRuleRecommendationRunInput(v *GetDataQualityRuleRecommendationRunInput) error {
 	if v == nil {
 		return nil
@@ -13843,6 +14034,39 @@ func validateOpGetStatementInput(v *GetStatementInput) error {
 	}
 }
 
+func validateOpGetSystemLogsForJobRunInput(v *GetSystemLogsForJobRunInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetSystemLogsForJobRunInput"}
+	if v.JobName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("JobName"))
+	}
+	if v.RunId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RunId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetSystemLogsForSessionInput(v *GetSystemLogsForSessionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetSystemLogsForSessionInput"}
+	if v.Id == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Id"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpGetTableInput(v *GetTableInput) error {
 	if v == nil {
 		return nil
@@ -14192,6 +14416,23 @@ func validateOpListDataQualityResultsInput(v *ListDataQualityResultsInput) error
 	}
 }
 
+func validateOpListDataQualityResultsV2Input(v *ListDataQualityResultsV2Input) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListDataQualityResultsV2Input"}
+	if v.Filter != nil {
+		if err := validateDataQualityResultsV2FilterCriteria(v.Filter); err != nil {
+			invalidParams.AddNested("Filter", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpListDataQualityRuleRecommendationRunsInput(v *ListDataQualityRuleRecommendationRunsInput) error {
 	if v == nil {
 		return nil
@@ -14369,6 +14610,30 @@ func validateOpModifyIntegrationInput(v *ModifyIntegrationInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "ModifyIntegrationInput"}
 	if v.IntegrationIdentifier == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("IntegrationIdentifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpPublishDataQualityResultV2Input(v *PublishDataQualityResultV2Input) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PublishDataQualityResultV2Input"}
+	if v.Dimensions == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Dimensions"))
+	}
+	if v.Score == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Score"))
+	}
+	if v.RuleResults == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RuleResults"))
+	}
+	if v.EvaluationContext == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EvaluationContext"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

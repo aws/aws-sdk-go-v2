@@ -4,7 +4,9 @@ package rekognition
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/rekognition/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/rekognition/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -44,6 +46,18 @@ type DeleteProjectInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteProjectInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteProjectRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteProjectInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ProjectArn != nil {
+		s.WriteString(schemas.DeleteProjectRequest_ProjectArn, *v.ProjectArn)
+	}
+}
+
 type DeleteProjectOutput struct {
 
 	// The current status of the delete project operation.
@@ -55,13 +69,36 @@ type DeleteProjectOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteProjectOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteProjectResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteProjectOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Status != "" {
+		s.WriteString(schemas.DeleteProjectResponse_Status, string(v.Status))
+	}
+}
+func (v *DeleteProjectOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteProjectResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteProjectResponse_Status:
+			var ev string
+			if err := d.ReadString(schemas.DeleteProjectResponse_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.ProjectStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteProjectMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteProject{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteProject, schemas.DeleteProjectRequest, schemas.DeleteProjectResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeleteProject{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteProject, schemas.DeleteProjectRequest, schemas.DeleteProjectResponse), output: &DeleteProjectOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

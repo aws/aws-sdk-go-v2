@@ -3964,6 +3964,10 @@ type BotLocaleImportSpecification struct {
 	//   - IntentC
 	NluIntentConfidenceThreshold *float64
 
+	// The speaker diarization settings to apply when importing the bot locale
+	// configuration.
+	SpeakerDiarizationSettings *SpeakerDiarizationSettings
+
 	// The sensitivity level for voice activity detection (VAD) in the bot locale.
 	// This setting helps optimize speech recognition accuracy by adjusting how the
 	// system responds to background noise during voice interactions.
@@ -4015,6 +4019,11 @@ func (v *BotLocaleImportSpecification) SerializeMembers(s smithy.ShapeSerializer
 	if v.NluIntentConfidenceThreshold != nil {
 		s.WriteFloat64(schemas.BotLocaleImportSpecification_nluIntentConfidenceThreshold, *v.NluIntentConfidenceThreshold)
 	}
+	if v.SpeakerDiarizationSettings != nil {
+		s.WriteStruct(schemas.BotLocaleImportSpecification_speakerDiarizationSettings)
+		v.SpeakerDiarizationSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
 	if v.SpeechDetectionSensitivity != "" {
 		s.WriteString(schemas.BotLocaleImportSpecification_speechDetectionSensitivity, string(v.SpeechDetectionSensitivity))
 	}
@@ -4052,6 +4061,9 @@ func (v *BotLocaleImportSpecification) Deserialize(d smithy.ShapeDeserializer) e
 		case schemas.BotLocaleImportSpecification_nluIntentConfidenceThreshold:
 			v.NluIntentConfidenceThreshold = new(float64)
 			return d.ReadFloat64(schemas.BotLocaleImportSpecification_nluIntentConfidenceThreshold, v.NluIntentConfidenceThreshold)
+		case schemas.BotLocaleImportSpecification_speakerDiarizationSettings:
+			v.SpeakerDiarizationSettings = &SpeakerDiarizationSettings{}
+			return v.SpeakerDiarizationSettings.Deserialize(d)
 		case schemas.BotLocaleImportSpecification_speechDetectionSensitivity:
 			var ev string
 			if err := d.ReadString(schemas.BotLocaleImportSpecification_speechDetectionSensitivity, &ev); err != nil {
@@ -8588,18 +8600,6 @@ func (v *IntentClosingSetting) Deserialize(d smithy.ShapeDeserializer) error {
 // fulfilled.
 type IntentConfirmationSetting struct {
 
-	// Prompts the user to confirm the intent. This question should have a yes or no
-	// answer.
-	//
-	// Amazon Lex uses this prompt to ensure that the user acknowledges that the
-	// intent is ready for fulfillment. For example, with the OrderPizza intent, you
-	// might want to confirm that the order is correct before placing it. For other
-	// intents, such as intents that simply respond to user questions, you might not
-	// need to ask the user for confirmation before providing the information.
-	//
-	// This member is required.
-	PromptSpecification *PromptSpecification
-
 	// Specifies whether the intent's confirmation is sent to the user. When this
 	// field is false, confirmation and declination responses aren't sent. If the
 	// active field isn't specified, the default is true.
@@ -8651,6 +8651,19 @@ type IntentConfirmationSetting struct {
 	// Specifies a list of message groups that Amazon Lex uses to respond the user
 	// input.
 	FailureResponse *ResponseSpecification
+
+	// Prompts the user to confirm the intent. This question should have a yes or no
+	// answer.
+	//
+	// Amazon Lex uses this prompt to ensure that the user acknowledges that the
+	// intent is ready for fulfillment. For example, with the OrderPizza intent, you
+	// might want to confirm that the order is correct before placing it. For other
+	// intents, such as intents that simply respond to user questions, you might not
+	// need to ask the user for confirmation before providing the information.
+	//
+	// Required unless the bot locale's assistedNluMode is DialogManager , in which
+	// case Amazon Lex generates the confirmation prompt.
+	PromptSpecification *PromptSpecification
 
 	noSmithyDocumentSerde
 }
@@ -9620,8 +9633,10 @@ type NluImprovementSpecification struct {
 	Enabled bool
 
 	// Specifies the mode for Assisted NLU operation. Use Primary to make Assisted NLU
-	// the primary intent recognition method, or Fallback to use it only when standard
-	// NLU confidence is low.
+	// the primary intent recognition method, Fallback to use it only when standard
+	// NLU confidence is low, or DialogManager to use a large language model to manage
+	// the conversation, including intent recognition, slot elicitation, and
+	// confirmation.
 	AssistedNluMode AssistedNluMode
 
 	// An object containing specifications for the Intent Disambiguation feature
@@ -11822,7 +11837,7 @@ type SlotResolutionSetting struct {
 
 	// Specifies whether assisted slot resolution is turned on for the slot or not. If
 	// the value is EnhancedFallback , assisted slot resolution is activated when
-	// Amazon Lex defaults to the AMAZON.FallbackIntent . If the value is Default ,
+	// Amazon Lex V2 defaults to the AMAZON.FallbackIntent . If the value is Default ,
 	// assisted slot resolution is turned off.
 	//
 	// This member is required.
@@ -12690,6 +12705,42 @@ func (v *SlotValueSelectionSetting) Deserialize(d smithy.ShapeDeserializer) erro
 			}
 			v.ResolutionStrategy = SlotValueResolutionStrategy(ev)
 			return nil
+		}
+		return nil
+	})
+}
+
+// Specifies configuration that restricts speech detection to the primary
+// (loudest) speaker during streaming audio conversations, so that speech from
+// background speakers does not start a turn, interrupt the bot, or reach speech
+// recognition.
+type SpeakerDiarizationSettings struct {
+
+	// Specifies whether speaker diarization is enabled for the bot locale. Set to true
+	// to have Amazon Lex treat speech from speakers other than the primary speaker as
+	// non-speech. Set to false to disable speaker diarization and rely on voice
+	// activity detection alone.
+	//
+	// This member is required.
+	Enabled bool
+
+	noSmithyDocumentSerde
+}
+
+func (v *SpeakerDiarizationSettings) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SpeakerDiarizationSettings)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SpeakerDiarizationSettings) SerializeMembers(s smithy.ShapeSerializer) {
+	s.WriteBool(schemas.SpeakerDiarizationSettings_enabled, v.Enabled)
+}
+func (v *SpeakerDiarizationSettings) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SpeakerDiarizationSettings, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SpeakerDiarizationSettings_enabled:
+			return d.ReadBool(schemas.SpeakerDiarizationSettings_enabled, &v.Enabled)
 		}
 		return nil
 	})
@@ -15567,26 +15618,24 @@ func (v *VoiceSettings) Deserialize(d smithy.ShapeDeserializer) error {
 // input.
 type WaitAndContinueSpecification struct {
 
-	// The response that Amazon Lex sends to indicate that the bot is ready to
-	// continue the conversation.
-	//
-	// This member is required.
-	ContinueResponse *ResponseSpecification
-
-	// The response that Amazon Lex sends to indicate that the bot is waiting for the
-	// conversation to continue.
-	//
-	// This member is required.
-	WaitingResponse *ResponseSpecification
-
 	// Specifies whether the bot will wait for a user to respond. When this field is
 	// false, wait and continue responses for a slot aren't used. If the active field
 	// isn't specified, the default is true.
 	Active *bool
 
+	// The response that Amazon Lex sends to indicate that the bot is ready to
+	// continue the conversation. Required unless the bot locale's assistedNluMode is
+	// DialogManager .
+	ContinueResponse *ResponseSpecification
+
 	// A response that Amazon Lex sends periodically to the user to indicate that the
 	// bot is still waiting for input from the user.
 	StillWaitingResponse *StillWaitingResponseSpecification
+
+	// The response that Amazon Lex sends to indicate that the bot is waiting for the
+	// conversation to continue. Required unless the bot locale's assistedNluMode is
+	// DialogManager .
+	WaitingResponse *ResponseSpecification
 
 	noSmithyDocumentSerde
 }

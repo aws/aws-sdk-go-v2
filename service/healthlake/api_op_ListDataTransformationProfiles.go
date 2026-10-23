@@ -5,7 +5,9 @@ package healthlake
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/healthlake/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/healthlake/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -48,6 +50,24 @@ type ListDataTransformationProfilesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListDataTransformationProfilesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListDataTransformationProfilesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListDataTransformationProfilesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListDataTransformationProfilesRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListDataTransformationProfilesRequest_NextToken, *v.NextToken)
+	}
+	if v.SourceFormat != "" {
+		s.WriteString(schemas.ListDataTransformationProfilesRequest_SourceFormat, string(v.SourceFormat))
+	}
+}
+
 // The response from the ListDataTransformationProfiles operation.
 type ListDataTransformationProfilesOutput struct {
 
@@ -66,13 +86,35 @@ type ListDataTransformationProfilesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListDataTransformationProfilesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListDataTransformationProfilesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListDataTransformationProfilesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDataTransformationProfileSummaryList(s, schemas.ListDataTransformationProfilesResponse_Items, v.Items)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListDataTransformationProfilesResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListDataTransformationProfilesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListDataTransformationProfilesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListDataTransformationProfilesResponse_Items:
+			return deserializeDataTransformationProfileSummaryList(d, schemas.ListDataTransformationProfilesResponse_Items, &v.Items)
+		case schemas.ListDataTransformationProfilesResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListDataTransformationProfilesResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListDataTransformationProfilesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpListDataTransformationProfiles{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDataTransformationProfiles, schemas.ListDataTransformationProfilesRequest, schemas.ListDataTransformationProfilesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpListDataTransformationProfiles{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDataTransformationProfiles, schemas.ListDataTransformationProfilesRequest, schemas.ListDataTransformationProfilesResponse), output: &ListDataTransformationProfilesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package billing
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/billing/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/billing/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -51,6 +53,23 @@ type GetBillingPreferencesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetBillingPreferencesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetBillingPreferencesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetBillingPreferencesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeBillingFeatures(s, schemas.GetBillingPreferencesRequest_features, v.Features)
+	serializeBillingFeatureFilters(s, schemas.GetBillingPreferencesRequest_filters, v.Filters)
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.GetBillingPreferencesRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetBillingPreferencesRequest_nextToken, *v.NextToken)
+	}
+}
+
 type GetBillingPreferencesOutput struct {
 
 	// The list of preference entries matching the request.
@@ -68,13 +87,35 @@ type GetBillingPreferencesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetBillingPreferencesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetBillingPreferencesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetBillingPreferencesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeBillingPreferences(s, schemas.GetBillingPreferencesResponse_billingPreferences, v.BillingPreferences)
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetBillingPreferencesResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *GetBillingPreferencesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetBillingPreferencesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetBillingPreferencesResponse_billingPreferences:
+			return deserializeBillingPreferences(d, schemas.GetBillingPreferencesResponse_billingPreferences, &v.BillingPreferences)
+		case schemas.GetBillingPreferencesResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.GetBillingPreferencesResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetBillingPreferencesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpGetBillingPreferences{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetBillingPreferences, schemas.GetBillingPreferencesRequest, schemas.GetBillingPreferencesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpGetBillingPreferences{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetBillingPreferences, schemas.GetBillingPreferencesRequest, schemas.GetBillingPreferencesResponse), output: &GetBillingPreferencesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

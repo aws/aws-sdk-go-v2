@@ -5,8 +5,10 @@ package dynamodb
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/dynamodb/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/dynamodb/types"
 	internalEndpointDiscovery "github.com/aws/aws-sdk-go-v2/service/internal/endpoint-discovery"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -250,6 +252,39 @@ type PutItemInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutItemInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutItemInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutItemInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConditionExpression != nil {
+		s.WriteString(schemas.PutItemInput_ConditionExpression, *v.ConditionExpression)
+	}
+	if v.ConditionalOperator != "" {
+		s.WriteString(schemas.PutItemInput_ConditionalOperator, string(v.ConditionalOperator))
+	}
+	serializeExpectedAttributeMap(s, schemas.PutItemInput_Expected, v.Expected)
+	serializeExpressionAttributeNameMap(s, schemas.PutItemInput_ExpressionAttributeNames, v.ExpressionAttributeNames)
+	serializeExpressionAttributeValueMap(s, schemas.PutItemInput_ExpressionAttributeValues, v.ExpressionAttributeValues)
+	serializePutItemInputAttributeMap(s, schemas.PutItemInput_Item, v.Item)
+	if v.ReturnConsumedCapacity != "" {
+		s.WriteString(schemas.PutItemInput_ReturnConsumedCapacity, string(v.ReturnConsumedCapacity))
+	}
+	if v.ReturnItemCollectionMetrics != "" {
+		s.WriteString(schemas.PutItemInput_ReturnItemCollectionMetrics, string(v.ReturnItemCollectionMetrics))
+	}
+	if v.ReturnValues != "" {
+		s.WriteString(schemas.PutItemInput_ReturnValues, string(v.ReturnValues))
+	}
+	if v.ReturnValuesOnConditionCheckFailure != "" {
+		s.WriteString(schemas.PutItemInput_ReturnValuesOnConditionCheckFailure, string(v.ReturnValuesOnConditionCheckFailure))
+	}
+	if v.TableName != nil {
+		s.WriteString(schemas.PutItemInput_TableName, *v.TableName)
+	}
+}
 func (in *PutItemInput) bindEndpointParams(p *EndpointParameters) {
 
 	p.ResourceArn = in.TableName
@@ -303,13 +338,45 @@ type PutItemOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutItemOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutItemOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutItemOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAttributeMap(s, schemas.PutItemOutput_Attributes, v.Attributes)
+	if v.ConsumedCapacity != nil {
+		s.WriteStruct(schemas.PutItemOutput_ConsumedCapacity)
+		v.ConsumedCapacity.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ItemCollectionMetrics != nil {
+		s.WriteStruct(schemas.PutItemOutput_ItemCollectionMetrics)
+		v.ItemCollectionMetrics.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *PutItemOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PutItemOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PutItemOutput_Attributes:
+			return deserializeAttributeMap(d, schemas.PutItemOutput_Attributes, &v.Attributes)
+		case schemas.PutItemOutput_ConsumedCapacity:
+			v.ConsumedCapacity = &types.ConsumedCapacity{}
+			return v.ConsumedCapacity.Deserialize(d)
+		case schemas.PutItemOutput_ItemCollectionMetrics:
+			v.ItemCollectionMetrics = &types.ItemCollectionMetrics{}
+			return v.ItemCollectionMetrics.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPutItemMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpPutItem{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutItem, schemas.PutItemInput, schemas.PutItemOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpPutItem{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutItem, schemas.PutItemInput, schemas.PutItemOutput), output: &PutItemOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

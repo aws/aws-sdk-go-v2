@@ -4,7 +4,9 @@ package costoptimizationhub
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/costoptimizationhub/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/costoptimizationhub/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -38,6 +40,18 @@ type GetRecommendationInput struct {
 	RecommendationId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetRecommendationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetRecommendationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetRecommendationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RecommendationId != nil {
+		s.WriteString(schemas.GetRecommendationRequest_recommendationId, *v.RecommendationId)
+	}
 }
 
 type GetRecommendationOutput struct {
@@ -121,13 +135,175 @@ type GetRecommendationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetRecommendationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetRecommendationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetRecommendationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountId != nil {
+		s.WriteString(schemas.GetRecommendationResponse_accountId, *v.AccountId)
+	}
+	if v.ActionType != "" {
+		s.WriteString(schemas.GetRecommendationResponse_actionType, string(v.ActionType))
+	}
+	if v.CostCalculationLookbackPeriodInDays != nil {
+		s.WriteInt32(schemas.GetRecommendationResponse_costCalculationLookbackPeriodInDays, *v.CostCalculationLookbackPeriodInDays)
+	}
+	if v.CurrencyCode != nil {
+		s.WriteString(schemas.GetRecommendationResponse_currencyCode, *v.CurrencyCode)
+	}
+	serializeResourceDetails(s, schemas.GetRecommendationResponse_currentResourceDetails, v.CurrentResourceDetails)
+	if v.CurrentResourceType != "" {
+		s.WriteString(schemas.GetRecommendationResponse_currentResourceType, string(v.CurrentResourceType))
+	}
+	if v.EstimatedMonthlyCost != nil {
+		s.WriteFloat64(schemas.GetRecommendationResponse_estimatedMonthlyCost, *v.EstimatedMonthlyCost)
+	}
+	if v.EstimatedMonthlySavings != nil {
+		s.WriteFloat64(schemas.GetRecommendationResponse_estimatedMonthlySavings, *v.EstimatedMonthlySavings)
+	}
+	if v.EstimatedSavingsOverCostCalculationLookbackPeriod != nil {
+		s.WriteFloat64(schemas.GetRecommendationResponse_estimatedSavingsOverCostCalculationLookbackPeriod, *v.EstimatedSavingsOverCostCalculationLookbackPeriod)
+	}
+	if v.EstimatedSavingsPercentage != nil {
+		s.WriteFloat64(schemas.GetRecommendationResponse_estimatedSavingsPercentage, *v.EstimatedSavingsPercentage)
+	}
+	if v.ImplementationEffort != "" {
+		s.WriteString(schemas.GetRecommendationResponse_implementationEffort, string(v.ImplementationEffort))
+	}
+	if v.LastRefreshTimestamp != nil {
+		s.WriteTime(schemas.GetRecommendationResponse_lastRefreshTimestamp, *v.LastRefreshTimestamp)
+	}
+	if v.RecommendationId != nil {
+		s.WriteString(schemas.GetRecommendationResponse_recommendationId, *v.RecommendationId)
+	}
+	if v.RecommendationLookbackPeriodInDays != nil {
+		s.WriteInt32(schemas.GetRecommendationResponse_recommendationLookbackPeriodInDays, *v.RecommendationLookbackPeriodInDays)
+	}
+	serializeResourceDetails(s, schemas.GetRecommendationResponse_recommendedResourceDetails, v.RecommendedResourceDetails)
+	if v.RecommendedResourceType != "" {
+		s.WriteString(schemas.GetRecommendationResponse_recommendedResourceType, string(v.RecommendedResourceType))
+	}
+	if v.Region != nil {
+		s.WriteString(schemas.GetRecommendationResponse_region, *v.Region)
+	}
+	if v.ResourceArn != nil {
+		s.WriteString(schemas.GetRecommendationResponse_resourceArn, *v.ResourceArn)
+	}
+	if v.ResourceId != nil {
+		s.WriteString(schemas.GetRecommendationResponse_resourceId, *v.ResourceId)
+	}
+	if v.RestartNeeded != nil {
+		s.WriteBool(schemas.GetRecommendationResponse_restartNeeded, *v.RestartNeeded)
+	}
+	if v.RollbackPossible != nil {
+		s.WriteBool(schemas.GetRecommendationResponse_rollbackPossible, *v.RollbackPossible)
+	}
+	if v.Source != "" {
+		s.WriteString(schemas.GetRecommendationResponse_source, string(v.Source))
+	}
+	serializeTagList(s, schemas.GetRecommendationResponse_tags, v.Tags)
+}
+func (v *GetRecommendationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetRecommendationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetRecommendationResponse_accountId:
+			v.AccountId = new(string)
+			return d.ReadString(schemas.GetRecommendationResponse_accountId, v.AccountId)
+		case schemas.GetRecommendationResponse_actionType:
+			var ev string
+			if err := d.ReadString(schemas.GetRecommendationResponse_actionType, &ev); err != nil {
+				return err
+			}
+			v.ActionType = types.ActionType(ev)
+			return nil
+		case schemas.GetRecommendationResponse_costCalculationLookbackPeriodInDays:
+			v.CostCalculationLookbackPeriodInDays = new(int32)
+			return d.ReadInt32(schemas.GetRecommendationResponse_costCalculationLookbackPeriodInDays, v.CostCalculationLookbackPeriodInDays)
+		case schemas.GetRecommendationResponse_currencyCode:
+			v.CurrencyCode = new(string)
+			return d.ReadString(schemas.GetRecommendationResponse_currencyCode, v.CurrencyCode)
+		case schemas.GetRecommendationResponse_currentResourceDetails:
+			return deserializeResourceDetails(d, schemas.GetRecommendationResponse_currentResourceDetails, &v.CurrentResourceDetails)
+		case schemas.GetRecommendationResponse_currentResourceType:
+			var ev string
+			if err := d.ReadString(schemas.GetRecommendationResponse_currentResourceType, &ev); err != nil {
+				return err
+			}
+			v.CurrentResourceType = types.ResourceType(ev)
+			return nil
+		case schemas.GetRecommendationResponse_estimatedMonthlyCost:
+			v.EstimatedMonthlyCost = new(float64)
+			return d.ReadFloat64(schemas.GetRecommendationResponse_estimatedMonthlyCost, v.EstimatedMonthlyCost)
+		case schemas.GetRecommendationResponse_estimatedMonthlySavings:
+			v.EstimatedMonthlySavings = new(float64)
+			return d.ReadFloat64(schemas.GetRecommendationResponse_estimatedMonthlySavings, v.EstimatedMonthlySavings)
+		case schemas.GetRecommendationResponse_estimatedSavingsOverCostCalculationLookbackPeriod:
+			v.EstimatedSavingsOverCostCalculationLookbackPeriod = new(float64)
+			return d.ReadFloat64(schemas.GetRecommendationResponse_estimatedSavingsOverCostCalculationLookbackPeriod, v.EstimatedSavingsOverCostCalculationLookbackPeriod)
+		case schemas.GetRecommendationResponse_estimatedSavingsPercentage:
+			v.EstimatedSavingsPercentage = new(float64)
+			return d.ReadFloat64(schemas.GetRecommendationResponse_estimatedSavingsPercentage, v.EstimatedSavingsPercentage)
+		case schemas.GetRecommendationResponse_implementationEffort:
+			var ev string
+			if err := d.ReadString(schemas.GetRecommendationResponse_implementationEffort, &ev); err != nil {
+				return err
+			}
+			v.ImplementationEffort = types.ImplementationEffort(ev)
+			return nil
+		case schemas.GetRecommendationResponse_lastRefreshTimestamp:
+			v.LastRefreshTimestamp = new(time.Time)
+			return d.ReadTime(schemas.GetRecommendationResponse_lastRefreshTimestamp, v.LastRefreshTimestamp)
+		case schemas.GetRecommendationResponse_recommendationId:
+			v.RecommendationId = new(string)
+			return d.ReadString(schemas.GetRecommendationResponse_recommendationId, v.RecommendationId)
+		case schemas.GetRecommendationResponse_recommendationLookbackPeriodInDays:
+			v.RecommendationLookbackPeriodInDays = new(int32)
+			return d.ReadInt32(schemas.GetRecommendationResponse_recommendationLookbackPeriodInDays, v.RecommendationLookbackPeriodInDays)
+		case schemas.GetRecommendationResponse_recommendedResourceDetails:
+			return deserializeResourceDetails(d, schemas.GetRecommendationResponse_recommendedResourceDetails, &v.RecommendedResourceDetails)
+		case schemas.GetRecommendationResponse_recommendedResourceType:
+			var ev string
+			if err := d.ReadString(schemas.GetRecommendationResponse_recommendedResourceType, &ev); err != nil {
+				return err
+			}
+			v.RecommendedResourceType = types.ResourceType(ev)
+			return nil
+		case schemas.GetRecommendationResponse_region:
+			v.Region = new(string)
+			return d.ReadString(schemas.GetRecommendationResponse_region, v.Region)
+		case schemas.GetRecommendationResponse_resourceArn:
+			v.ResourceArn = new(string)
+			return d.ReadString(schemas.GetRecommendationResponse_resourceArn, v.ResourceArn)
+		case schemas.GetRecommendationResponse_resourceId:
+			v.ResourceId = new(string)
+			return d.ReadString(schemas.GetRecommendationResponse_resourceId, v.ResourceId)
+		case schemas.GetRecommendationResponse_restartNeeded:
+			v.RestartNeeded = new(bool)
+			return d.ReadBool(schemas.GetRecommendationResponse_restartNeeded, v.RestartNeeded)
+		case schemas.GetRecommendationResponse_rollbackPossible:
+			v.RollbackPossible = new(bool)
+			return d.ReadBool(schemas.GetRecommendationResponse_rollbackPossible, v.RollbackPossible)
+		case schemas.GetRecommendationResponse_source:
+			var ev string
+			if err := d.ReadString(schemas.GetRecommendationResponse_source, &ev); err != nil {
+				return err
+			}
+			v.Source = types.Source(ev)
+			return nil
+		case schemas.GetRecommendationResponse_tags:
+			return deserializeTagList(d, schemas.GetRecommendationResponse_tags, &v.Tags)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetRecommendationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpGetRecommendation{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetRecommendation, schemas.GetRecommendationRequest, schemas.GetRecommendationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpGetRecommendation{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetRecommendation, schemas.GetRecommendationRequest, schemas.GetRecommendationResponse), output: &GetRecommendationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -3,6 +3,8 @@
 package types
 
 import (
+	"github.com/aws/aws-sdk-go-v2/service/auditmanager/schemas"
+	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
@@ -28,6 +30,55 @@ type Assessment struct {
 	Tags map[string]string
 
 	noSmithyDocumentSerde
+}
+
+func (v *Assessment) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Assessment)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Assessment) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.Assessment_arn, *v.Arn)
+	}
+	if v.AwsAccount != nil {
+		s.WriteStruct(schemas.Assessment_awsAccount)
+		v.AwsAccount.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Framework != nil {
+		s.WriteStruct(schemas.Assessment_framework)
+		v.Framework.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Metadata != nil {
+		s.WriteStruct(schemas.Assessment_metadata)
+		v.Metadata.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeTagMap(s, schemas.Assessment_tags, v.Tags)
+}
+func (v *Assessment) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Assessment, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Assessment_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.Assessment_arn, v.Arn)
+		case schemas.Assessment_awsAccount:
+			v.AwsAccount = &AWSAccount{}
+			return v.AwsAccount.Deserialize(d)
+		case schemas.Assessment_framework:
+			v.Framework = &AssessmentFramework{}
+			return v.Framework.Deserialize(d)
+		case schemas.Assessment_metadata:
+			v.Metadata = &AssessmentMetadata{}
+			return v.Metadata.Deserialize(d)
+		case schemas.Assessment_tags:
+			return deserializeTagMap(d, schemas.Assessment_tags, &v.Tags)
+		}
+		return nil
+	})
 }
 
 //	The control entity that represents a standard control or a custom control in
@@ -68,6 +119,76 @@ type AssessmentControl struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssessmentControl) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssessmentControl)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssessmentControl) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AssessmentReportEvidenceCount != 0 {
+		s.WriteInt32(schemas.AssessmentControl_assessmentReportEvidenceCount, v.AssessmentReportEvidenceCount)
+	}
+	serializeControlComments(s, schemas.AssessmentControl_comments, v.Comments)
+	if v.Description != nil {
+		s.WriteString(schemas.AssessmentControl_description, *v.Description)
+	}
+	if v.EvidenceCount != 0 {
+		s.WriteInt32(schemas.AssessmentControl_evidenceCount, v.EvidenceCount)
+	}
+	serializeEvidenceSources(s, schemas.AssessmentControl_evidenceSources, v.EvidenceSources)
+	if v.Id != nil {
+		s.WriteString(schemas.AssessmentControl_id, *v.Id)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.AssessmentControl_name, *v.Name)
+	}
+	if v.Response != "" {
+		s.WriteString(schemas.AssessmentControl_response, string(v.Response))
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.AssessmentControl_status, string(v.Status))
+	}
+}
+func (v *AssessmentControl) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AssessmentControl, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AssessmentControl_assessmentReportEvidenceCount:
+			return d.ReadInt32(schemas.AssessmentControl_assessmentReportEvidenceCount, &v.AssessmentReportEvidenceCount)
+		case schemas.AssessmentControl_comments:
+			return deserializeControlComments(d, schemas.AssessmentControl_comments, &v.Comments)
+		case schemas.AssessmentControl_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.AssessmentControl_description, v.Description)
+		case schemas.AssessmentControl_evidenceCount:
+			return d.ReadInt32(schemas.AssessmentControl_evidenceCount, &v.EvidenceCount)
+		case schemas.AssessmentControl_evidenceSources:
+			return deserializeEvidenceSources(d, schemas.AssessmentControl_evidenceSources, &v.EvidenceSources)
+		case schemas.AssessmentControl_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.AssessmentControl_id, v.Id)
+		case schemas.AssessmentControl_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.AssessmentControl_name, v.Name)
+		case schemas.AssessmentControl_response:
+			var ev string
+			if err := d.ReadString(schemas.AssessmentControl_response, &ev); err != nil {
+				return err
+			}
+			v.Response = ControlResponse(ev)
+			return nil
+		case schemas.AssessmentControl_status:
+			var ev string
+			if err := d.ReadString(schemas.AssessmentControl_status, &ev); err != nil {
+				return err
+			}
+			v.Status = ControlStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Represents a set of controls in an Audit Manager assessment.
 type AssessmentControlSet struct {
 
@@ -99,6 +220,63 @@ type AssessmentControlSet struct {
 	SystemEvidenceCount int32
 
 	noSmithyDocumentSerde
+}
+
+func (v *AssessmentControlSet) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssessmentControlSet)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssessmentControlSet) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAssessmentControls(s, schemas.AssessmentControlSet_controls, v.Controls)
+	serializeDelegations(s, schemas.AssessmentControlSet_delegations, v.Delegations)
+	if v.Description != nil {
+		s.WriteString(schemas.AssessmentControlSet_description, *v.Description)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.AssessmentControlSet_id, *v.Id)
+	}
+	if v.ManualEvidenceCount != 0 {
+		s.WriteInt32(schemas.AssessmentControlSet_manualEvidenceCount, v.ManualEvidenceCount)
+	}
+	serializeRoles(s, schemas.AssessmentControlSet_roles, v.Roles)
+	if v.Status != "" {
+		s.WriteString(schemas.AssessmentControlSet_status, string(v.Status))
+	}
+	if v.SystemEvidenceCount != 0 {
+		s.WriteInt32(schemas.AssessmentControlSet_systemEvidenceCount, v.SystemEvidenceCount)
+	}
+}
+func (v *AssessmentControlSet) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AssessmentControlSet, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AssessmentControlSet_controls:
+			return deserializeAssessmentControls(d, schemas.AssessmentControlSet_controls, &v.Controls)
+		case schemas.AssessmentControlSet_delegations:
+			return deserializeDelegations(d, schemas.AssessmentControlSet_delegations, &v.Delegations)
+		case schemas.AssessmentControlSet_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.AssessmentControlSet_description, v.Description)
+		case schemas.AssessmentControlSet_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.AssessmentControlSet_id, v.Id)
+		case schemas.AssessmentControlSet_manualEvidenceCount:
+			return d.ReadInt32(schemas.AssessmentControlSet_manualEvidenceCount, &v.ManualEvidenceCount)
+		case schemas.AssessmentControlSet_roles:
+			return deserializeRoles(d, schemas.AssessmentControlSet_roles, &v.Roles)
+		case schemas.AssessmentControlSet_status:
+			var ev string
+			if err := d.ReadString(schemas.AssessmentControlSet_status, &ev); err != nil {
+				return err
+			}
+			v.Status = ControlSetStatus(ev)
+			return nil
+		case schemas.AssessmentControlSet_systemEvidenceCount:
+			return d.ReadInt32(schemas.AssessmentControlSet_systemEvidenceCount, &v.SystemEvidenceCount)
+		}
+		return nil
+	})
 }
 
 // The folder where Audit Manager stores evidence for an assessment.
@@ -168,6 +346,121 @@ type AssessmentEvidenceFolder struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssessmentEvidenceFolder) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssessmentEvidenceFolder)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssessmentEvidenceFolder) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AssessmentId != nil {
+		s.WriteString(schemas.AssessmentEvidenceFolder_assessmentId, *v.AssessmentId)
+	}
+	if v.AssessmentReportSelectionCount != 0 {
+		s.WriteInt32(schemas.AssessmentEvidenceFolder_assessmentReportSelectionCount, v.AssessmentReportSelectionCount)
+	}
+	if v.Author != nil {
+		s.WriteString(schemas.AssessmentEvidenceFolder_author, *v.Author)
+	}
+	if v.ControlId != nil {
+		s.WriteString(schemas.AssessmentEvidenceFolder_controlId, *v.ControlId)
+	}
+	if v.ControlName != nil {
+		s.WriteString(schemas.AssessmentEvidenceFolder_controlName, *v.ControlName)
+	}
+	if v.ControlSetId != nil {
+		s.WriteString(schemas.AssessmentEvidenceFolder_controlSetId, *v.ControlSetId)
+	}
+	if v.DataSource != nil {
+		s.WriteString(schemas.AssessmentEvidenceFolder_dataSource, *v.DataSource)
+	}
+	if v.Date != nil {
+		s.WriteTime(schemas.AssessmentEvidenceFolder_date, *v.Date)
+	}
+	if v.EvidenceAwsServiceSourceCount != 0 {
+		s.WriteInt32(schemas.AssessmentEvidenceFolder_evidenceAwsServiceSourceCount, v.EvidenceAwsServiceSourceCount)
+	}
+	if v.EvidenceByTypeComplianceCheckCount != 0 {
+		s.WriteInt32(schemas.AssessmentEvidenceFolder_evidenceByTypeComplianceCheckCount, v.EvidenceByTypeComplianceCheckCount)
+	}
+	if v.EvidenceByTypeComplianceCheckIssuesCount != 0 {
+		s.WriteInt32(schemas.AssessmentEvidenceFolder_evidenceByTypeComplianceCheckIssuesCount, v.EvidenceByTypeComplianceCheckIssuesCount)
+	}
+	if v.EvidenceByTypeConfigurationDataCount != 0 {
+		s.WriteInt32(schemas.AssessmentEvidenceFolder_evidenceByTypeConfigurationDataCount, v.EvidenceByTypeConfigurationDataCount)
+	}
+	if v.EvidenceByTypeManualCount != 0 {
+		s.WriteInt32(schemas.AssessmentEvidenceFolder_evidenceByTypeManualCount, v.EvidenceByTypeManualCount)
+	}
+	if v.EvidenceByTypeUserActivityCount != 0 {
+		s.WriteInt32(schemas.AssessmentEvidenceFolder_evidenceByTypeUserActivityCount, v.EvidenceByTypeUserActivityCount)
+	}
+	if v.EvidenceResourcesIncludedCount != 0 {
+		s.WriteInt32(schemas.AssessmentEvidenceFolder_evidenceResourcesIncludedCount, v.EvidenceResourcesIncludedCount)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.AssessmentEvidenceFolder_id, *v.Id)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.AssessmentEvidenceFolder_name, *v.Name)
+	}
+	if v.TotalEvidence != 0 {
+		s.WriteInt32(schemas.AssessmentEvidenceFolder_totalEvidence, v.TotalEvidence)
+	}
+}
+func (v *AssessmentEvidenceFolder) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AssessmentEvidenceFolder, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AssessmentEvidenceFolder_assessmentId:
+			v.AssessmentId = new(string)
+			return d.ReadString(schemas.AssessmentEvidenceFolder_assessmentId, v.AssessmentId)
+		case schemas.AssessmentEvidenceFolder_assessmentReportSelectionCount:
+			return d.ReadInt32(schemas.AssessmentEvidenceFolder_assessmentReportSelectionCount, &v.AssessmentReportSelectionCount)
+		case schemas.AssessmentEvidenceFolder_author:
+			v.Author = new(string)
+			return d.ReadString(schemas.AssessmentEvidenceFolder_author, v.Author)
+		case schemas.AssessmentEvidenceFolder_controlId:
+			v.ControlId = new(string)
+			return d.ReadString(schemas.AssessmentEvidenceFolder_controlId, v.ControlId)
+		case schemas.AssessmentEvidenceFolder_controlName:
+			v.ControlName = new(string)
+			return d.ReadString(schemas.AssessmentEvidenceFolder_controlName, v.ControlName)
+		case schemas.AssessmentEvidenceFolder_controlSetId:
+			v.ControlSetId = new(string)
+			return d.ReadString(schemas.AssessmentEvidenceFolder_controlSetId, v.ControlSetId)
+		case schemas.AssessmentEvidenceFolder_dataSource:
+			v.DataSource = new(string)
+			return d.ReadString(schemas.AssessmentEvidenceFolder_dataSource, v.DataSource)
+		case schemas.AssessmentEvidenceFolder_date:
+			v.Date = new(time.Time)
+			return d.ReadTime(schemas.AssessmentEvidenceFolder_date, v.Date)
+		case schemas.AssessmentEvidenceFolder_evidenceAwsServiceSourceCount:
+			return d.ReadInt32(schemas.AssessmentEvidenceFolder_evidenceAwsServiceSourceCount, &v.EvidenceAwsServiceSourceCount)
+		case schemas.AssessmentEvidenceFolder_evidenceByTypeComplianceCheckCount:
+			return d.ReadInt32(schemas.AssessmentEvidenceFolder_evidenceByTypeComplianceCheckCount, &v.EvidenceByTypeComplianceCheckCount)
+		case schemas.AssessmentEvidenceFolder_evidenceByTypeComplianceCheckIssuesCount:
+			return d.ReadInt32(schemas.AssessmentEvidenceFolder_evidenceByTypeComplianceCheckIssuesCount, &v.EvidenceByTypeComplianceCheckIssuesCount)
+		case schemas.AssessmentEvidenceFolder_evidenceByTypeConfigurationDataCount:
+			return d.ReadInt32(schemas.AssessmentEvidenceFolder_evidenceByTypeConfigurationDataCount, &v.EvidenceByTypeConfigurationDataCount)
+		case schemas.AssessmentEvidenceFolder_evidenceByTypeManualCount:
+			return d.ReadInt32(schemas.AssessmentEvidenceFolder_evidenceByTypeManualCount, &v.EvidenceByTypeManualCount)
+		case schemas.AssessmentEvidenceFolder_evidenceByTypeUserActivityCount:
+			return d.ReadInt32(schemas.AssessmentEvidenceFolder_evidenceByTypeUserActivityCount, &v.EvidenceByTypeUserActivityCount)
+		case schemas.AssessmentEvidenceFolder_evidenceResourcesIncludedCount:
+			return d.ReadInt32(schemas.AssessmentEvidenceFolder_evidenceResourcesIncludedCount, &v.EvidenceResourcesIncludedCount)
+		case schemas.AssessmentEvidenceFolder_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.AssessmentEvidenceFolder_id, v.Id)
+		case schemas.AssessmentEvidenceFolder_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.AssessmentEvidenceFolder_name, v.Name)
+		case schemas.AssessmentEvidenceFolder_totalEvidence:
+			return d.ReadInt32(schemas.AssessmentEvidenceFolder_totalEvidence, &v.TotalEvidence)
+		}
+		return nil
+	})
+}
+
 //	The file used to structure and automate Audit Manager assessments for a given
 //
 // compliance standard.
@@ -186,6 +479,45 @@ type AssessmentFramework struct {
 	Metadata *FrameworkMetadata
 
 	noSmithyDocumentSerde
+}
+
+func (v *AssessmentFramework) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssessmentFramework)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssessmentFramework) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.AssessmentFramework_arn, *v.Arn)
+	}
+	serializeAssessmentControlSets(s, schemas.AssessmentFramework_controlSets, v.ControlSets)
+	if v.Id != nil {
+		s.WriteString(schemas.AssessmentFramework_id, *v.Id)
+	}
+	if v.Metadata != nil {
+		s.WriteStruct(schemas.AssessmentFramework_metadata)
+		v.Metadata.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *AssessmentFramework) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AssessmentFramework, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AssessmentFramework_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.AssessmentFramework_arn, v.Arn)
+		case schemas.AssessmentFramework_controlSets:
+			return deserializeAssessmentControlSets(d, schemas.AssessmentFramework_controlSets, &v.ControlSets)
+		case schemas.AssessmentFramework_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.AssessmentFramework_id, v.Id)
+		case schemas.AssessmentFramework_metadata:
+			v.Metadata = &FrameworkMetadata{}
+			return v.Metadata.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 //	The metadata that's associated with a standard framework or a custom
@@ -228,6 +560,90 @@ type AssessmentFrameworkMetadata struct {
 	Type FrameworkType
 
 	noSmithyDocumentSerde
+}
+
+func (v *AssessmentFrameworkMetadata) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssessmentFrameworkMetadata)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssessmentFrameworkMetadata) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.AssessmentFrameworkMetadata_arn, *v.Arn)
+	}
+	if v.ComplianceType != nil {
+		s.WriteString(schemas.AssessmentFrameworkMetadata_complianceType, *v.ComplianceType)
+	}
+	if v.ControlSetsCount != 0 {
+		s.WriteInt32(schemas.AssessmentFrameworkMetadata_controlSetsCount, v.ControlSetsCount)
+	}
+	if v.ControlsCount != 0 {
+		s.WriteInt32(schemas.AssessmentFrameworkMetadata_controlsCount, v.ControlsCount)
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.AssessmentFrameworkMetadata_createdAt, *v.CreatedAt)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.AssessmentFrameworkMetadata_description, *v.Description)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.AssessmentFrameworkMetadata_id, *v.Id)
+	}
+	if v.LastUpdatedAt != nil {
+		s.WriteTime(schemas.AssessmentFrameworkMetadata_lastUpdatedAt, *v.LastUpdatedAt)
+	}
+	if v.Logo != nil {
+		s.WriteString(schemas.AssessmentFrameworkMetadata_logo, *v.Logo)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.AssessmentFrameworkMetadata_name, *v.Name)
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.AssessmentFrameworkMetadata_type, string(v.Type))
+	}
+}
+func (v *AssessmentFrameworkMetadata) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AssessmentFrameworkMetadata, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AssessmentFrameworkMetadata_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.AssessmentFrameworkMetadata_arn, v.Arn)
+		case schemas.AssessmentFrameworkMetadata_complianceType:
+			v.ComplianceType = new(string)
+			return d.ReadString(schemas.AssessmentFrameworkMetadata_complianceType, v.ComplianceType)
+		case schemas.AssessmentFrameworkMetadata_controlSetsCount:
+			return d.ReadInt32(schemas.AssessmentFrameworkMetadata_controlSetsCount, &v.ControlSetsCount)
+		case schemas.AssessmentFrameworkMetadata_controlsCount:
+			return d.ReadInt32(schemas.AssessmentFrameworkMetadata_controlsCount, &v.ControlsCount)
+		case schemas.AssessmentFrameworkMetadata_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.AssessmentFrameworkMetadata_createdAt, v.CreatedAt)
+		case schemas.AssessmentFrameworkMetadata_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.AssessmentFrameworkMetadata_description, v.Description)
+		case schemas.AssessmentFrameworkMetadata_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.AssessmentFrameworkMetadata_id, v.Id)
+		case schemas.AssessmentFrameworkMetadata_lastUpdatedAt:
+			v.LastUpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.AssessmentFrameworkMetadata_lastUpdatedAt, v.LastUpdatedAt)
+		case schemas.AssessmentFrameworkMetadata_logo:
+			v.Logo = new(string)
+			return d.ReadString(schemas.AssessmentFrameworkMetadata_logo, v.Logo)
+		case schemas.AssessmentFrameworkMetadata_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.AssessmentFrameworkMetadata_name, v.Name)
+		case schemas.AssessmentFrameworkMetadata_type:
+			var ev string
+			if err := d.ReadString(schemas.AssessmentFrameworkMetadata_type, &ev); err != nil {
+				return err
+			}
+			v.Type = FrameworkType(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // Represents a share request for a custom framework in Audit Manager.
@@ -282,6 +698,116 @@ type AssessmentFrameworkShareRequest struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssessmentFrameworkShareRequest) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssessmentFrameworkShareRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssessmentFrameworkShareRequest) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Comment != nil {
+		s.WriteString(schemas.AssessmentFrameworkShareRequest_comment, *v.Comment)
+	}
+	if v.ComplianceType != nil {
+		s.WriteString(schemas.AssessmentFrameworkShareRequest_complianceType, *v.ComplianceType)
+	}
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.AssessmentFrameworkShareRequest_creationTime, *v.CreationTime)
+	}
+	if v.CustomControlsCount != nil {
+		s.WriteInt32(schemas.AssessmentFrameworkShareRequest_customControlsCount, *v.CustomControlsCount)
+	}
+	if v.DestinationAccount != nil {
+		s.WriteString(schemas.AssessmentFrameworkShareRequest_destinationAccount, *v.DestinationAccount)
+	}
+	if v.DestinationRegion != nil {
+		s.WriteString(schemas.AssessmentFrameworkShareRequest_destinationRegion, *v.DestinationRegion)
+	}
+	if v.ExpirationTime != nil {
+		s.WriteTime(schemas.AssessmentFrameworkShareRequest_expirationTime, *v.ExpirationTime)
+	}
+	if v.FrameworkDescription != nil {
+		s.WriteString(schemas.AssessmentFrameworkShareRequest_frameworkDescription, *v.FrameworkDescription)
+	}
+	if v.FrameworkId != nil {
+		s.WriteString(schemas.AssessmentFrameworkShareRequest_frameworkId, *v.FrameworkId)
+	}
+	if v.FrameworkName != nil {
+		s.WriteString(schemas.AssessmentFrameworkShareRequest_frameworkName, *v.FrameworkName)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.AssessmentFrameworkShareRequest_id, *v.Id)
+	}
+	if v.LastUpdated != nil {
+		s.WriteTime(schemas.AssessmentFrameworkShareRequest_lastUpdated, *v.LastUpdated)
+	}
+	if v.SourceAccount != nil {
+		s.WriteString(schemas.AssessmentFrameworkShareRequest_sourceAccount, *v.SourceAccount)
+	}
+	if v.StandardControlsCount != nil {
+		s.WriteInt32(schemas.AssessmentFrameworkShareRequest_standardControlsCount, *v.StandardControlsCount)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.AssessmentFrameworkShareRequest_status, string(v.Status))
+	}
+}
+func (v *AssessmentFrameworkShareRequest) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AssessmentFrameworkShareRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AssessmentFrameworkShareRequest_comment:
+			v.Comment = new(string)
+			return d.ReadString(schemas.AssessmentFrameworkShareRequest_comment, v.Comment)
+		case schemas.AssessmentFrameworkShareRequest_complianceType:
+			v.ComplianceType = new(string)
+			return d.ReadString(schemas.AssessmentFrameworkShareRequest_complianceType, v.ComplianceType)
+		case schemas.AssessmentFrameworkShareRequest_creationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.AssessmentFrameworkShareRequest_creationTime, v.CreationTime)
+		case schemas.AssessmentFrameworkShareRequest_customControlsCount:
+			v.CustomControlsCount = new(int32)
+			return d.ReadInt32(schemas.AssessmentFrameworkShareRequest_customControlsCount, v.CustomControlsCount)
+		case schemas.AssessmentFrameworkShareRequest_destinationAccount:
+			v.DestinationAccount = new(string)
+			return d.ReadString(schemas.AssessmentFrameworkShareRequest_destinationAccount, v.DestinationAccount)
+		case schemas.AssessmentFrameworkShareRequest_destinationRegion:
+			v.DestinationRegion = new(string)
+			return d.ReadString(schemas.AssessmentFrameworkShareRequest_destinationRegion, v.DestinationRegion)
+		case schemas.AssessmentFrameworkShareRequest_expirationTime:
+			v.ExpirationTime = new(time.Time)
+			return d.ReadTime(schemas.AssessmentFrameworkShareRequest_expirationTime, v.ExpirationTime)
+		case schemas.AssessmentFrameworkShareRequest_frameworkDescription:
+			v.FrameworkDescription = new(string)
+			return d.ReadString(schemas.AssessmentFrameworkShareRequest_frameworkDescription, v.FrameworkDescription)
+		case schemas.AssessmentFrameworkShareRequest_frameworkId:
+			v.FrameworkId = new(string)
+			return d.ReadString(schemas.AssessmentFrameworkShareRequest_frameworkId, v.FrameworkId)
+		case schemas.AssessmentFrameworkShareRequest_frameworkName:
+			v.FrameworkName = new(string)
+			return d.ReadString(schemas.AssessmentFrameworkShareRequest_frameworkName, v.FrameworkName)
+		case schemas.AssessmentFrameworkShareRequest_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.AssessmentFrameworkShareRequest_id, v.Id)
+		case schemas.AssessmentFrameworkShareRequest_lastUpdated:
+			v.LastUpdated = new(time.Time)
+			return d.ReadTime(schemas.AssessmentFrameworkShareRequest_lastUpdated, v.LastUpdated)
+		case schemas.AssessmentFrameworkShareRequest_sourceAccount:
+			v.SourceAccount = new(string)
+			return d.ReadString(schemas.AssessmentFrameworkShareRequest_sourceAccount, v.SourceAccount)
+		case schemas.AssessmentFrameworkShareRequest_standardControlsCount:
+			v.StandardControlsCount = new(int32)
+			return d.ReadInt32(schemas.AssessmentFrameworkShareRequest_standardControlsCount, v.StandardControlsCount)
+		case schemas.AssessmentFrameworkShareRequest_status:
+			var ev string
+			if err := d.ReadString(schemas.AssessmentFrameworkShareRequest_status, &ev); err != nil {
+				return err
+			}
+			v.Status = ShareRequestStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // The metadata that's associated with the specified assessment.
 type AssessmentMetadata struct {
 
@@ -323,6 +849,90 @@ type AssessmentMetadata struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssessmentMetadata) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssessmentMetadata)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssessmentMetadata) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AssessmentReportsDestination != nil {
+		s.WriteStruct(schemas.AssessmentMetadata_assessmentReportsDestination)
+		v.AssessmentReportsDestination.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ComplianceType != nil {
+		s.WriteString(schemas.AssessmentMetadata_complianceType, *v.ComplianceType)
+	}
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.AssessmentMetadata_creationTime, *v.CreationTime)
+	}
+	serializeDelegations(s, schemas.AssessmentMetadata_delegations, v.Delegations)
+	if v.Description != nil {
+		s.WriteString(schemas.AssessmentMetadata_description, *v.Description)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.AssessmentMetadata_id, *v.Id)
+	}
+	if v.LastUpdated != nil {
+		s.WriteTime(schemas.AssessmentMetadata_lastUpdated, *v.LastUpdated)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.AssessmentMetadata_name, *v.Name)
+	}
+	serializeRoles(s, schemas.AssessmentMetadata_roles, v.Roles)
+	if v.Scope != nil {
+		s.WriteStruct(schemas.AssessmentMetadata_scope)
+		v.Scope.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.AssessmentMetadata_status, string(v.Status))
+	}
+}
+func (v *AssessmentMetadata) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AssessmentMetadata, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AssessmentMetadata_assessmentReportsDestination:
+			v.AssessmentReportsDestination = &AssessmentReportsDestination{}
+			return v.AssessmentReportsDestination.Deserialize(d)
+		case schemas.AssessmentMetadata_complianceType:
+			v.ComplianceType = new(string)
+			return d.ReadString(schemas.AssessmentMetadata_complianceType, v.ComplianceType)
+		case schemas.AssessmentMetadata_creationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.AssessmentMetadata_creationTime, v.CreationTime)
+		case schemas.AssessmentMetadata_delegations:
+			return deserializeDelegations(d, schemas.AssessmentMetadata_delegations, &v.Delegations)
+		case schemas.AssessmentMetadata_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.AssessmentMetadata_description, v.Description)
+		case schemas.AssessmentMetadata_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.AssessmentMetadata_id, v.Id)
+		case schemas.AssessmentMetadata_lastUpdated:
+			v.LastUpdated = new(time.Time)
+			return d.ReadTime(schemas.AssessmentMetadata_lastUpdated, v.LastUpdated)
+		case schemas.AssessmentMetadata_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.AssessmentMetadata_name, v.Name)
+		case schemas.AssessmentMetadata_roles:
+			return deserializeRoles(d, schemas.AssessmentMetadata_roles, &v.Roles)
+		case schemas.AssessmentMetadata_scope:
+			v.Scope = &Scope{}
+			return v.Scope.Deserialize(d)
+		case schemas.AssessmentMetadata_status:
+			var ev string
+			if err := d.ReadString(schemas.AssessmentMetadata_status, &ev); err != nil {
+				return err
+			}
+			v.Status = AssessmentStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // A metadata object that's associated with an assessment in Audit Manager.
 type AssessmentMetadataItem struct {
 
@@ -352,6 +962,68 @@ type AssessmentMetadataItem struct {
 	Status AssessmentStatus
 
 	noSmithyDocumentSerde
+}
+
+func (v *AssessmentMetadataItem) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssessmentMetadataItem)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssessmentMetadataItem) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ComplianceType != nil {
+		s.WriteString(schemas.AssessmentMetadataItem_complianceType, *v.ComplianceType)
+	}
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.AssessmentMetadataItem_creationTime, *v.CreationTime)
+	}
+	serializeDelegations(s, schemas.AssessmentMetadataItem_delegations, v.Delegations)
+	if v.Id != nil {
+		s.WriteString(schemas.AssessmentMetadataItem_id, *v.Id)
+	}
+	if v.LastUpdated != nil {
+		s.WriteTime(schemas.AssessmentMetadataItem_lastUpdated, *v.LastUpdated)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.AssessmentMetadataItem_name, *v.Name)
+	}
+	serializeRoles(s, schemas.AssessmentMetadataItem_roles, v.Roles)
+	if v.Status != "" {
+		s.WriteString(schemas.AssessmentMetadataItem_status, string(v.Status))
+	}
+}
+func (v *AssessmentMetadataItem) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AssessmentMetadataItem, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AssessmentMetadataItem_complianceType:
+			v.ComplianceType = new(string)
+			return d.ReadString(schemas.AssessmentMetadataItem_complianceType, v.ComplianceType)
+		case schemas.AssessmentMetadataItem_creationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.AssessmentMetadataItem_creationTime, v.CreationTime)
+		case schemas.AssessmentMetadataItem_delegations:
+			return deserializeDelegations(d, schemas.AssessmentMetadataItem_delegations, &v.Delegations)
+		case schemas.AssessmentMetadataItem_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.AssessmentMetadataItem_id, v.Id)
+		case schemas.AssessmentMetadataItem_lastUpdated:
+			v.LastUpdated = new(time.Time)
+			return d.ReadTime(schemas.AssessmentMetadataItem_lastUpdated, v.LastUpdated)
+		case schemas.AssessmentMetadataItem_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.AssessmentMetadataItem_name, v.Name)
+		case schemas.AssessmentMetadataItem_roles:
+			return deserializeRoles(d, schemas.AssessmentMetadataItem_roles, &v.Roles)
+		case schemas.AssessmentMetadataItem_status:
+			var ev string
+			if err := d.ReadString(schemas.AssessmentMetadataItem_status, &ev); err != nil {
+				return err
+			}
+			v.Status = AssessmentStatus(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 //	A finalized document that's generated from an Audit Manager assessment. These
@@ -391,6 +1063,80 @@ type AssessmentReport struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssessmentReport) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssessmentReport)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssessmentReport) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AssessmentId != nil {
+		s.WriteString(schemas.AssessmentReport_assessmentId, *v.AssessmentId)
+	}
+	if v.AssessmentName != nil {
+		s.WriteString(schemas.AssessmentReport_assessmentName, *v.AssessmentName)
+	}
+	if v.Author != nil {
+		s.WriteString(schemas.AssessmentReport_author, *v.Author)
+	}
+	if v.AwsAccountId != nil {
+		s.WriteString(schemas.AssessmentReport_awsAccountId, *v.AwsAccountId)
+	}
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.AssessmentReport_creationTime, *v.CreationTime)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.AssessmentReport_description, *v.Description)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.AssessmentReport_id, *v.Id)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.AssessmentReport_name, *v.Name)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.AssessmentReport_status, string(v.Status))
+	}
+}
+func (v *AssessmentReport) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AssessmentReport, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AssessmentReport_assessmentId:
+			v.AssessmentId = new(string)
+			return d.ReadString(schemas.AssessmentReport_assessmentId, v.AssessmentId)
+		case schemas.AssessmentReport_assessmentName:
+			v.AssessmentName = new(string)
+			return d.ReadString(schemas.AssessmentReport_assessmentName, v.AssessmentName)
+		case schemas.AssessmentReport_author:
+			v.Author = new(string)
+			return d.ReadString(schemas.AssessmentReport_author, v.Author)
+		case schemas.AssessmentReport_awsAccountId:
+			v.AwsAccountId = new(string)
+			return d.ReadString(schemas.AssessmentReport_awsAccountId, v.AwsAccountId)
+		case schemas.AssessmentReport_creationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.AssessmentReport_creationTime, v.CreationTime)
+		case schemas.AssessmentReport_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.AssessmentReport_description, v.Description)
+		case schemas.AssessmentReport_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.AssessmentReport_id, v.Id)
+		case schemas.AssessmentReport_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.AssessmentReport_name, v.Name)
+		case schemas.AssessmentReport_status:
+			var ev string
+			if err := d.ReadString(schemas.AssessmentReport_status, &ev); err != nil {
+				return err
+			}
+			v.Status = AssessmentReportStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 //	An error entity for assessment report evidence errors. This is used to provide
 //
 // more meaningful errors than a simple string message.
@@ -406,6 +1152,40 @@ type AssessmentReportEvidenceError struct {
 	EvidenceId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *AssessmentReportEvidenceError) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssessmentReportEvidenceError)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssessmentReportEvidenceError) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ErrorCode != nil {
+		s.WriteString(schemas.AssessmentReportEvidenceError_errorCode, *v.ErrorCode)
+	}
+	if v.ErrorMessage != nil {
+		s.WriteString(schemas.AssessmentReportEvidenceError_errorMessage, *v.ErrorMessage)
+	}
+	if v.EvidenceId != nil {
+		s.WriteString(schemas.AssessmentReportEvidenceError_evidenceId, *v.EvidenceId)
+	}
+}
+func (v *AssessmentReportEvidenceError) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AssessmentReportEvidenceError, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AssessmentReportEvidenceError_errorCode:
+			v.ErrorCode = new(string)
+			return d.ReadString(schemas.AssessmentReportEvidenceError_errorCode, v.ErrorCode)
+		case schemas.AssessmentReportEvidenceError_errorMessage:
+			v.ErrorMessage = new(string)
+			return d.ReadString(schemas.AssessmentReportEvidenceError_errorMessage, v.ErrorMessage)
+		case schemas.AssessmentReportEvidenceError_evidenceId:
+			v.EvidenceId = new(string)
+			return d.ReadString(schemas.AssessmentReportEvidenceError_evidenceId, v.EvidenceId)
+		}
+		return nil
+	})
 }
 
 // The metadata objects that are associated with the specified assessment report.
@@ -438,6 +1218,74 @@ type AssessmentReportMetadata struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssessmentReportMetadata) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssessmentReportMetadata)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssessmentReportMetadata) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AssessmentId != nil {
+		s.WriteString(schemas.AssessmentReportMetadata_assessmentId, *v.AssessmentId)
+	}
+	if v.AssessmentName != nil {
+		s.WriteString(schemas.AssessmentReportMetadata_assessmentName, *v.AssessmentName)
+	}
+	if v.Author != nil {
+		s.WriteString(schemas.AssessmentReportMetadata_author, *v.Author)
+	}
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.AssessmentReportMetadata_creationTime, *v.CreationTime)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.AssessmentReportMetadata_description, *v.Description)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.AssessmentReportMetadata_id, *v.Id)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.AssessmentReportMetadata_name, *v.Name)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.AssessmentReportMetadata_status, string(v.Status))
+	}
+}
+func (v *AssessmentReportMetadata) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AssessmentReportMetadata, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AssessmentReportMetadata_assessmentId:
+			v.AssessmentId = new(string)
+			return d.ReadString(schemas.AssessmentReportMetadata_assessmentId, v.AssessmentId)
+		case schemas.AssessmentReportMetadata_assessmentName:
+			v.AssessmentName = new(string)
+			return d.ReadString(schemas.AssessmentReportMetadata_assessmentName, v.AssessmentName)
+		case schemas.AssessmentReportMetadata_author:
+			v.Author = new(string)
+			return d.ReadString(schemas.AssessmentReportMetadata_author, v.Author)
+		case schemas.AssessmentReportMetadata_creationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.AssessmentReportMetadata_creationTime, v.CreationTime)
+		case schemas.AssessmentReportMetadata_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.AssessmentReportMetadata_description, v.Description)
+		case schemas.AssessmentReportMetadata_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.AssessmentReportMetadata_id, v.Id)
+		case schemas.AssessmentReportMetadata_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.AssessmentReportMetadata_name, v.Name)
+		case schemas.AssessmentReportMetadata_status:
+			var ev string
+			if err := d.ReadString(schemas.AssessmentReportMetadata_status, &ev); err != nil {
+				return err
+			}
+			v.Status = AssessmentReportStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 //	The location where Audit Manager saves assessment reports for the given
 //
 // assessment.
@@ -450,6 +1298,38 @@ type AssessmentReportsDestination struct {
 	DestinationType AssessmentReportDestinationType
 
 	noSmithyDocumentSerde
+}
+
+func (v *AssessmentReportsDestination) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssessmentReportsDestination)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssessmentReportsDestination) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Destination != nil {
+		s.WriteString(schemas.AssessmentReportsDestination_destination, *v.Destination)
+	}
+	if v.DestinationType != "" {
+		s.WriteString(schemas.AssessmentReportsDestination_destinationType, string(v.DestinationType))
+	}
+}
+func (v *AssessmentReportsDestination) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AssessmentReportsDestination, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AssessmentReportsDestination_destination:
+			v.Destination = new(string)
+			return d.ReadString(schemas.AssessmentReportsDestination_destination, v.Destination)
+		case schemas.AssessmentReportsDestination_destinationType:
+			var ev string
+			if err := d.ReadString(schemas.AssessmentReportsDestination_destinationType, &ev); err != nil {
+				return err
+			}
+			v.DestinationType = AssessmentReportDestinationType(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 //	The wrapper of Amazon Web Services account details, such as account ID or
@@ -467,6 +1347,40 @@ type AWSAccount struct {
 	Name *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *AWSAccount) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AWSAccount)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AWSAccount) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EmailAddress != nil {
+		s.WriteString(schemas.AWSAccount_emailAddress, *v.EmailAddress)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.AWSAccount_id, *v.Id)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.AWSAccount_name, *v.Name)
+	}
+}
+func (v *AWSAccount) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AWSAccount, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AWSAccount_emailAddress:
+			v.EmailAddress = new(string)
+			return d.ReadString(schemas.AWSAccount_emailAddress, v.EmailAddress)
+		case schemas.AWSAccount_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.AWSAccount_id, v.Id)
+		case schemas.AWSAccount_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.AWSAccount_name, v.Name)
+		}
+		return nil
+	})
 }
 
 //	An Amazon Web Services service such as Amazon S3 or CloudTrail.
@@ -488,6 +1402,28 @@ type AWSService struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AWSService) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AWSService)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AWSService) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ServiceName != nil {
+		s.WriteString(schemas.AWSService_serviceName, *v.ServiceName)
+	}
+}
+func (v *AWSService) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AWSService, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AWSService_serviceName:
+			v.ServiceName = new(string)
+			return d.ReadString(schemas.AWSService_serviceName, v.ServiceName)
+		}
+		return nil
+	})
+}
+
 //	An error entity for the BatchCreateDelegationByAssessment API. This is used to
 //
 // provide more meaningful errors than a simple string message.
@@ -503,6 +1439,42 @@ type BatchCreateDelegationByAssessmentError struct {
 	ErrorMessage *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *BatchCreateDelegationByAssessmentError) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchCreateDelegationByAssessmentError)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchCreateDelegationByAssessmentError) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreateDelegationRequest != nil {
+		s.WriteStruct(schemas.BatchCreateDelegationByAssessmentError_createDelegationRequest)
+		v.CreateDelegationRequest.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ErrorCode != nil {
+		s.WriteString(schemas.BatchCreateDelegationByAssessmentError_errorCode, *v.ErrorCode)
+	}
+	if v.ErrorMessage != nil {
+		s.WriteString(schemas.BatchCreateDelegationByAssessmentError_errorMessage, *v.ErrorMessage)
+	}
+}
+func (v *BatchCreateDelegationByAssessmentError) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchCreateDelegationByAssessmentError, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchCreateDelegationByAssessmentError_createDelegationRequest:
+			v.CreateDelegationRequest = &CreateDelegationRequest{}
+			return v.CreateDelegationRequest.Deserialize(d)
+		case schemas.BatchCreateDelegationByAssessmentError_errorCode:
+			v.ErrorCode = new(string)
+			return d.ReadString(schemas.BatchCreateDelegationByAssessmentError_errorCode, v.ErrorCode)
+		case schemas.BatchCreateDelegationByAssessmentError_errorMessage:
+			v.ErrorMessage = new(string)
+			return d.ReadString(schemas.BatchCreateDelegationByAssessmentError_errorMessage, v.ErrorMessage)
+		}
+		return nil
+	})
 }
 
 //	An error entity for the BatchDeleteDelegationByAssessment API. This is used to
@@ -522,6 +1494,40 @@ type BatchDeleteDelegationByAssessmentError struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchDeleteDelegationByAssessmentError) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchDeleteDelegationByAssessmentError)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchDeleteDelegationByAssessmentError) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DelegationId != nil {
+		s.WriteString(schemas.BatchDeleteDelegationByAssessmentError_delegationId, *v.DelegationId)
+	}
+	if v.ErrorCode != nil {
+		s.WriteString(schemas.BatchDeleteDelegationByAssessmentError_errorCode, *v.ErrorCode)
+	}
+	if v.ErrorMessage != nil {
+		s.WriteString(schemas.BatchDeleteDelegationByAssessmentError_errorMessage, *v.ErrorMessage)
+	}
+}
+func (v *BatchDeleteDelegationByAssessmentError) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchDeleteDelegationByAssessmentError, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchDeleteDelegationByAssessmentError_delegationId:
+			v.DelegationId = new(string)
+			return d.ReadString(schemas.BatchDeleteDelegationByAssessmentError_delegationId, v.DelegationId)
+		case schemas.BatchDeleteDelegationByAssessmentError_errorCode:
+			v.ErrorCode = new(string)
+			return d.ReadString(schemas.BatchDeleteDelegationByAssessmentError_errorCode, v.ErrorCode)
+		case schemas.BatchDeleteDelegationByAssessmentError_errorMessage:
+			v.ErrorMessage = new(string)
+			return d.ReadString(schemas.BatchDeleteDelegationByAssessmentError_errorMessage, v.ErrorMessage)
+		}
+		return nil
+	})
+}
+
 //	An error entity for the BatchImportEvidenceToAssessmentControl API. This is
 //
 // used to provide more meaningful errors than a simple string message.
@@ -538,6 +1544,42 @@ type BatchImportEvidenceToAssessmentControlError struct {
 	ManualEvidence *ManualEvidence
 
 	noSmithyDocumentSerde
+}
+
+func (v *BatchImportEvidenceToAssessmentControlError) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchImportEvidenceToAssessmentControlError)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchImportEvidenceToAssessmentControlError) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ErrorCode != nil {
+		s.WriteString(schemas.BatchImportEvidenceToAssessmentControlError_errorCode, *v.ErrorCode)
+	}
+	if v.ErrorMessage != nil {
+		s.WriteString(schemas.BatchImportEvidenceToAssessmentControlError_errorMessage, *v.ErrorMessage)
+	}
+	if v.ManualEvidence != nil {
+		s.WriteStruct(schemas.BatchImportEvidenceToAssessmentControlError_manualEvidence)
+		v.ManualEvidence.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *BatchImportEvidenceToAssessmentControlError) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchImportEvidenceToAssessmentControlError, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchImportEvidenceToAssessmentControlError_errorCode:
+			v.ErrorCode = new(string)
+			return d.ReadString(schemas.BatchImportEvidenceToAssessmentControlError_errorCode, v.ErrorCode)
+		case schemas.BatchImportEvidenceToAssessmentControlError_errorMessage:
+			v.ErrorMessage = new(string)
+			return d.ReadString(schemas.BatchImportEvidenceToAssessmentControlError_errorMessage, v.ErrorMessage)
+		case schemas.BatchImportEvidenceToAssessmentControlError_manualEvidence:
+			v.ManualEvidence = &ManualEvidence{}
+			return v.ManualEvidence.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 //	The record of a change within Audit Manager. For example, this could be the
@@ -562,6 +1604,60 @@ type ChangeLog struct {
 	ObjectType ObjectTypeEnum
 
 	noSmithyDocumentSerde
+}
+
+func (v *ChangeLog) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ChangeLog)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ChangeLog) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Action != "" {
+		s.WriteString(schemas.ChangeLog_action, string(v.Action))
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.ChangeLog_createdAt, *v.CreatedAt)
+	}
+	if v.CreatedBy != nil {
+		s.WriteString(schemas.ChangeLog_createdBy, *v.CreatedBy)
+	}
+	if v.ObjectName != nil {
+		s.WriteString(schemas.ChangeLog_objectName, *v.ObjectName)
+	}
+	if v.ObjectType != "" {
+		s.WriteString(schemas.ChangeLog_objectType, string(v.ObjectType))
+	}
+}
+func (v *ChangeLog) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ChangeLog, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ChangeLog_action:
+			var ev string
+			if err := d.ReadString(schemas.ChangeLog_action, &ev); err != nil {
+				return err
+			}
+			v.Action = ActionEnum(ev)
+			return nil
+		case schemas.ChangeLog_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.ChangeLog_createdAt, v.CreatedAt)
+		case schemas.ChangeLog_createdBy:
+			v.CreatedBy = new(string)
+			return d.ReadString(schemas.ChangeLog_createdBy, v.CreatedBy)
+		case schemas.ChangeLog_objectName:
+			v.ObjectName = new(string)
+			return d.ReadString(schemas.ChangeLog_objectName, v.ObjectName)
+		case schemas.ChangeLog_objectType:
+			var ev string
+			if err := d.ReadString(schemas.ChangeLog_objectType, &ev); err != nil {
+				return err
+			}
+			v.ObjectType = ObjectTypeEnum(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // A control in Audit Manager.
@@ -623,6 +1719,120 @@ type Control struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Control) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Control)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Control) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ActionPlanInstructions != nil {
+		s.WriteString(schemas.Control_actionPlanInstructions, *v.ActionPlanInstructions)
+	}
+	if v.ActionPlanTitle != nil {
+		s.WriteString(schemas.Control_actionPlanTitle, *v.ActionPlanTitle)
+	}
+	if v.Arn != nil {
+		s.WriteString(schemas.Control_arn, *v.Arn)
+	}
+	serializeControlMappingSources(s, schemas.Control_controlMappingSources, v.ControlMappingSources)
+	if v.ControlSources != nil {
+		s.WriteString(schemas.Control_controlSources, *v.ControlSources)
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.Control_createdAt, *v.CreatedAt)
+	}
+	if v.CreatedBy != nil {
+		s.WriteString(schemas.Control_createdBy, *v.CreatedBy)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.Control_description, *v.Description)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.Control_id, *v.Id)
+	}
+	if v.LastUpdatedAt != nil {
+		s.WriteTime(schemas.Control_lastUpdatedAt, *v.LastUpdatedAt)
+	}
+	if v.LastUpdatedBy != nil {
+		s.WriteString(schemas.Control_lastUpdatedBy, *v.LastUpdatedBy)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.Control_name, *v.Name)
+	}
+	if v.State != "" {
+		s.WriteString(schemas.Control_state, string(v.State))
+	}
+	serializeTagMap(s, schemas.Control_tags, v.Tags)
+	if v.TestingInformation != nil {
+		s.WriteString(schemas.Control_testingInformation, *v.TestingInformation)
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.Control_type, string(v.Type))
+	}
+}
+func (v *Control) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Control, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Control_actionPlanInstructions:
+			v.ActionPlanInstructions = new(string)
+			return d.ReadString(schemas.Control_actionPlanInstructions, v.ActionPlanInstructions)
+		case schemas.Control_actionPlanTitle:
+			v.ActionPlanTitle = new(string)
+			return d.ReadString(schemas.Control_actionPlanTitle, v.ActionPlanTitle)
+		case schemas.Control_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.Control_arn, v.Arn)
+		case schemas.Control_controlMappingSources:
+			return deserializeControlMappingSources(d, schemas.Control_controlMappingSources, &v.ControlMappingSources)
+		case schemas.Control_controlSources:
+			v.ControlSources = new(string)
+			return d.ReadString(schemas.Control_controlSources, v.ControlSources)
+		case schemas.Control_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.Control_createdAt, v.CreatedAt)
+		case schemas.Control_createdBy:
+			v.CreatedBy = new(string)
+			return d.ReadString(schemas.Control_createdBy, v.CreatedBy)
+		case schemas.Control_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.Control_description, v.Description)
+		case schemas.Control_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.Control_id, v.Id)
+		case schemas.Control_lastUpdatedAt:
+			v.LastUpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.Control_lastUpdatedAt, v.LastUpdatedAt)
+		case schemas.Control_lastUpdatedBy:
+			v.LastUpdatedBy = new(string)
+			return d.ReadString(schemas.Control_lastUpdatedBy, v.LastUpdatedBy)
+		case schemas.Control_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.Control_name, v.Name)
+		case schemas.Control_state:
+			var ev string
+			if err := d.ReadString(schemas.Control_state, &ev); err != nil {
+				return err
+			}
+			v.State = ControlState(ev)
+			return nil
+		case schemas.Control_tags:
+			return deserializeTagMap(d, schemas.Control_tags, &v.Tags)
+		case schemas.Control_testingInformation:
+			v.TestingInformation = new(string)
+			return d.ReadString(schemas.Control_testingInformation, v.TestingInformation)
+		case schemas.Control_type:
+			var ev string
+			if err := d.ReadString(schemas.Control_type, &ev); err != nil {
+				return err
+			}
+			v.Type = ControlType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 //	A comment that's posted by a user on a control. This includes the author's
 //
 // name, the comment text, and a timestamp.
@@ -638,6 +1848,40 @@ type ControlComment struct {
 	PostedDate *time.Time
 
 	noSmithyDocumentSerde
+}
+
+func (v *ControlComment) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ControlComment)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ControlComment) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AuthorName != nil {
+		s.WriteString(schemas.ControlComment_authorName, *v.AuthorName)
+	}
+	if v.CommentBody != nil {
+		s.WriteString(schemas.ControlComment_commentBody, *v.CommentBody)
+	}
+	if v.PostedDate != nil {
+		s.WriteTime(schemas.ControlComment_postedDate, *v.PostedDate)
+	}
+}
+func (v *ControlComment) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ControlComment, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ControlComment_authorName:
+			v.AuthorName = new(string)
+			return d.ReadString(schemas.ControlComment_authorName, v.AuthorName)
+		case schemas.ControlComment_commentBody:
+			v.CommentBody = new(string)
+			return d.ReadString(schemas.ControlComment_commentBody, v.CommentBody)
+		case schemas.ControlComment_postedDate:
+			v.PostedDate = new(time.Time)
+			return d.ReadTime(schemas.ControlComment_postedDate, v.PostedDate)
+		}
+		return nil
+	})
 }
 
 // A summary of the latest analytics data for a specific control domain.
@@ -674,6 +1918,60 @@ type ControlDomainInsights struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ControlDomainInsights) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ControlDomainInsights)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ControlDomainInsights) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ControlsCountByNoncompliantEvidence != nil {
+		s.WriteInt32(schemas.ControlDomainInsights_controlsCountByNoncompliantEvidence, *v.ControlsCountByNoncompliantEvidence)
+	}
+	if v.EvidenceInsights != nil {
+		s.WriteStruct(schemas.ControlDomainInsights_evidenceInsights)
+		v.EvidenceInsights.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.ControlDomainInsights_id, *v.Id)
+	}
+	if v.LastUpdated != nil {
+		s.WriteTime(schemas.ControlDomainInsights_lastUpdated, *v.LastUpdated)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.ControlDomainInsights_name, *v.Name)
+	}
+	if v.TotalControlsCount != nil {
+		s.WriteInt32(schemas.ControlDomainInsights_totalControlsCount, *v.TotalControlsCount)
+	}
+}
+func (v *ControlDomainInsights) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ControlDomainInsights, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ControlDomainInsights_controlsCountByNoncompliantEvidence:
+			v.ControlsCountByNoncompliantEvidence = new(int32)
+			return d.ReadInt32(schemas.ControlDomainInsights_controlsCountByNoncompliantEvidence, v.ControlsCountByNoncompliantEvidence)
+		case schemas.ControlDomainInsights_evidenceInsights:
+			v.EvidenceInsights = &EvidenceInsights{}
+			return v.EvidenceInsights.Deserialize(d)
+		case schemas.ControlDomainInsights_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.ControlDomainInsights_id, v.Id)
+		case schemas.ControlDomainInsights_lastUpdated:
+			v.LastUpdated = new(time.Time)
+			return d.ReadTime(schemas.ControlDomainInsights_lastUpdated, v.LastUpdated)
+		case schemas.ControlDomainInsights_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.ControlDomainInsights_name, v.Name)
+		case schemas.ControlDomainInsights_totalControlsCount:
+			v.TotalControlsCount = new(int32)
+			return d.ReadInt32(schemas.ControlDomainInsights_totalControlsCount, v.TotalControlsCount)
+		}
+		return nil
+	})
+}
+
 // A summary of the latest analytics data for a specific control in a specific
 // active assessment.
 //
@@ -700,6 +1998,54 @@ type ControlInsightsMetadataByAssessmentItem struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ControlInsightsMetadataByAssessmentItem) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ControlInsightsMetadataByAssessmentItem)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ControlInsightsMetadataByAssessmentItem) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ControlSetName != nil {
+		s.WriteString(schemas.ControlInsightsMetadataByAssessmentItem_controlSetName, *v.ControlSetName)
+	}
+	if v.EvidenceInsights != nil {
+		s.WriteStruct(schemas.ControlInsightsMetadataByAssessmentItem_evidenceInsights)
+		v.EvidenceInsights.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.ControlInsightsMetadataByAssessmentItem_id, *v.Id)
+	}
+	if v.LastUpdated != nil {
+		s.WriteTime(schemas.ControlInsightsMetadataByAssessmentItem_lastUpdated, *v.LastUpdated)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.ControlInsightsMetadataByAssessmentItem_name, *v.Name)
+	}
+}
+func (v *ControlInsightsMetadataByAssessmentItem) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ControlInsightsMetadataByAssessmentItem, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ControlInsightsMetadataByAssessmentItem_controlSetName:
+			v.ControlSetName = new(string)
+			return d.ReadString(schemas.ControlInsightsMetadataByAssessmentItem_controlSetName, v.ControlSetName)
+		case schemas.ControlInsightsMetadataByAssessmentItem_evidenceInsights:
+			v.EvidenceInsights = &EvidenceInsights{}
+			return v.EvidenceInsights.Deserialize(d)
+		case schemas.ControlInsightsMetadataByAssessmentItem_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.ControlInsightsMetadataByAssessmentItem_id, v.Id)
+		case schemas.ControlInsightsMetadataByAssessmentItem_lastUpdated:
+			v.LastUpdated = new(time.Time)
+			return d.ReadTime(schemas.ControlInsightsMetadataByAssessmentItem_lastUpdated, v.LastUpdated)
+		case schemas.ControlInsightsMetadataByAssessmentItem_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.ControlInsightsMetadataByAssessmentItem_name, v.Name)
+		}
+		return nil
+	})
+}
+
 // A summary of the latest analytics data for a specific control.
 //
 // This data reflects the total counts for the specified control across all active
@@ -721,6 +2067,48 @@ type ControlInsightsMetadataItem struct {
 	Name *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ControlInsightsMetadataItem) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ControlInsightsMetadataItem)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ControlInsightsMetadataItem) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EvidenceInsights != nil {
+		s.WriteStruct(schemas.ControlInsightsMetadataItem_evidenceInsights)
+		v.EvidenceInsights.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.ControlInsightsMetadataItem_id, *v.Id)
+	}
+	if v.LastUpdated != nil {
+		s.WriteTime(schemas.ControlInsightsMetadataItem_lastUpdated, *v.LastUpdated)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.ControlInsightsMetadataItem_name, *v.Name)
+	}
+}
+func (v *ControlInsightsMetadataItem) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ControlInsightsMetadataItem, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ControlInsightsMetadataItem_evidenceInsights:
+			v.EvidenceInsights = &EvidenceInsights{}
+			return v.EvidenceInsights.Deserialize(d)
+		case schemas.ControlInsightsMetadataItem_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.ControlInsightsMetadataItem_id, v.Id)
+		case schemas.ControlInsightsMetadataItem_lastUpdated:
+			v.LastUpdated = new(time.Time)
+			return d.ReadTime(schemas.ControlInsightsMetadataItem_lastUpdated, v.LastUpdated)
+		case schemas.ControlInsightsMetadataItem_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.ControlInsightsMetadataItem_name, v.Name)
+		}
+		return nil
+	})
 }
 
 //	The data source that determines where Audit Manager collects evidence from for
@@ -786,6 +2174,84 @@ type ControlMappingSource struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ControlMappingSource) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ControlMappingSource)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ControlMappingSource) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SourceDescription != nil {
+		s.WriteString(schemas.ControlMappingSource_sourceDescription, *v.SourceDescription)
+	}
+	if v.SourceFrequency != "" {
+		s.WriteString(schemas.ControlMappingSource_sourceFrequency, string(v.SourceFrequency))
+	}
+	if v.SourceId != nil {
+		s.WriteString(schemas.ControlMappingSource_sourceId, *v.SourceId)
+	}
+	if v.SourceKeyword != nil {
+		s.WriteStruct(schemas.ControlMappingSource_sourceKeyword)
+		v.SourceKeyword.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SourceName != nil {
+		s.WriteString(schemas.ControlMappingSource_sourceName, *v.SourceName)
+	}
+	if v.SourceSetUpOption != "" {
+		s.WriteString(schemas.ControlMappingSource_sourceSetUpOption, string(v.SourceSetUpOption))
+	}
+	if v.SourceType != "" {
+		s.WriteString(schemas.ControlMappingSource_sourceType, string(v.SourceType))
+	}
+	if v.TroubleshootingText != nil {
+		s.WriteString(schemas.ControlMappingSource_troubleshootingText, *v.TroubleshootingText)
+	}
+}
+func (v *ControlMappingSource) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ControlMappingSource, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ControlMappingSource_sourceDescription:
+			v.SourceDescription = new(string)
+			return d.ReadString(schemas.ControlMappingSource_sourceDescription, v.SourceDescription)
+		case schemas.ControlMappingSource_sourceFrequency:
+			var ev string
+			if err := d.ReadString(schemas.ControlMappingSource_sourceFrequency, &ev); err != nil {
+				return err
+			}
+			v.SourceFrequency = SourceFrequency(ev)
+			return nil
+		case schemas.ControlMappingSource_sourceId:
+			v.SourceId = new(string)
+			return d.ReadString(schemas.ControlMappingSource_sourceId, v.SourceId)
+		case schemas.ControlMappingSource_sourceKeyword:
+			v.SourceKeyword = &SourceKeyword{}
+			return v.SourceKeyword.Deserialize(d)
+		case schemas.ControlMappingSource_sourceName:
+			v.SourceName = new(string)
+			return d.ReadString(schemas.ControlMappingSource_sourceName, v.SourceName)
+		case schemas.ControlMappingSource_sourceSetUpOption:
+			var ev string
+			if err := d.ReadString(schemas.ControlMappingSource_sourceSetUpOption, &ev); err != nil {
+				return err
+			}
+			v.SourceSetUpOption = SourceSetUpOption(ev)
+			return nil
+		case schemas.ControlMappingSource_sourceType:
+			var ev string
+			if err := d.ReadString(schemas.ControlMappingSource_sourceType, &ev); err != nil {
+				return err
+			}
+			v.SourceType = SourceType(ev)
+			return nil
+		case schemas.ControlMappingSource_troubleshootingText:
+			v.TroubleshootingText = new(string)
+			return d.ReadString(schemas.ControlMappingSource_troubleshootingText, v.TroubleshootingText)
+		}
+		return nil
+	})
+}
+
 // The metadata that's associated with the standard control or custom control.
 type ControlMetadata struct {
 
@@ -811,6 +2277,58 @@ type ControlMetadata struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ControlMetadata) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ControlMetadata)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ControlMetadata) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.ControlMetadata_arn, *v.Arn)
+	}
+	if v.ControlSources != nil {
+		s.WriteString(schemas.ControlMetadata_controlSources, *v.ControlSources)
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.ControlMetadata_createdAt, *v.CreatedAt)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.ControlMetadata_id, *v.Id)
+	}
+	if v.LastUpdatedAt != nil {
+		s.WriteTime(schemas.ControlMetadata_lastUpdatedAt, *v.LastUpdatedAt)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.ControlMetadata_name, *v.Name)
+	}
+}
+func (v *ControlMetadata) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ControlMetadata, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ControlMetadata_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.ControlMetadata_arn, v.Arn)
+		case schemas.ControlMetadata_controlSources:
+			v.ControlSources = new(string)
+			return d.ReadString(schemas.ControlMetadata_controlSources, v.ControlSources)
+		case schemas.ControlMetadata_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.ControlMetadata_createdAt, v.CreatedAt)
+		case schemas.ControlMetadata_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.ControlMetadata_id, v.Id)
+		case schemas.ControlMetadata_lastUpdatedAt:
+			v.LastUpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.ControlMetadata_lastUpdatedAt, v.LastUpdatedAt)
+		case schemas.ControlMetadata_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.ControlMetadata_name, v.Name)
+		}
+		return nil
+	})
+}
+
 // A set of controls in Audit Manager.
 type ControlSet struct {
 
@@ -827,6 +2345,37 @@ type ControlSet struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ControlSet) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ControlSet)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ControlSet) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeControls(s, schemas.ControlSet_controls, v.Controls)
+	if v.Id != nil {
+		s.WriteString(schemas.ControlSet_id, *v.Id)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.ControlSet_name, *v.Name)
+	}
+}
+func (v *ControlSet) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ControlSet, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ControlSet_controls:
+			return deserializeControls(d, schemas.ControlSet_controls, &v.Controls)
+		case schemas.ControlSet_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.ControlSet_id, v.Id)
+		case schemas.ControlSet_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.ControlSet_name, v.Name)
+		}
+		return nil
+	})
+}
+
 //	The control entity attributes that uniquely identify an existing control to be
 //
 // added to a framework in Audit Manager.
@@ -838,6 +2387,28 @@ type CreateAssessmentFrameworkControl struct {
 	Id *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *CreateAssessmentFrameworkControl) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateAssessmentFrameworkControl)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateAssessmentFrameworkControl) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Id != nil {
+		s.WriteString(schemas.CreateAssessmentFrameworkControl_id, *v.Id)
+	}
+}
+func (v *CreateAssessmentFrameworkControl) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateAssessmentFrameworkControl, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateAssessmentFrameworkControl_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.CreateAssessmentFrameworkControl_id, v.Id)
+		}
+		return nil
+	})
 }
 
 //	A controlSet entity that represents a collection of controls in Audit Manager.
@@ -855,6 +2426,31 @@ type CreateAssessmentFrameworkControlSet struct {
 	Controls []CreateAssessmentFrameworkControl
 
 	noSmithyDocumentSerde
+}
+
+func (v *CreateAssessmentFrameworkControlSet) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateAssessmentFrameworkControlSet)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateAssessmentFrameworkControlSet) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeCreateAssessmentFrameworkControls(s, schemas.CreateAssessmentFrameworkControlSet_controls, v.Controls)
+	if v.Name != nil {
+		s.WriteString(schemas.CreateAssessmentFrameworkControlSet_name, *v.Name)
+	}
+}
+func (v *CreateAssessmentFrameworkControlSet) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateAssessmentFrameworkControlSet, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateAssessmentFrameworkControlSet_controls:
+			return deserializeCreateAssessmentFrameworkControls(d, schemas.CreateAssessmentFrameworkControlSet_controls, &v.Controls)
+		case schemas.CreateAssessmentFrameworkControlSet_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.CreateAssessmentFrameworkControlSet_name, v.Name)
+		}
+		return nil
+	})
 }
 
 // The mapping attributes that determine the evidence source for a given control,
@@ -917,6 +2513,78 @@ type CreateControlMappingSource struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateControlMappingSource) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateControlMappingSource)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateControlMappingSource) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SourceDescription != nil {
+		s.WriteString(schemas.CreateControlMappingSource_sourceDescription, *v.SourceDescription)
+	}
+	if v.SourceFrequency != "" {
+		s.WriteString(schemas.CreateControlMappingSource_sourceFrequency, string(v.SourceFrequency))
+	}
+	if v.SourceKeyword != nil {
+		s.WriteStruct(schemas.CreateControlMappingSource_sourceKeyword)
+		v.SourceKeyword.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SourceName != nil {
+		s.WriteString(schemas.CreateControlMappingSource_sourceName, *v.SourceName)
+	}
+	if v.SourceSetUpOption != "" {
+		s.WriteString(schemas.CreateControlMappingSource_sourceSetUpOption, string(v.SourceSetUpOption))
+	}
+	if v.SourceType != "" {
+		s.WriteString(schemas.CreateControlMappingSource_sourceType, string(v.SourceType))
+	}
+	if v.TroubleshootingText != nil {
+		s.WriteString(schemas.CreateControlMappingSource_troubleshootingText, *v.TroubleshootingText)
+	}
+}
+func (v *CreateControlMappingSource) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateControlMappingSource, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateControlMappingSource_sourceDescription:
+			v.SourceDescription = new(string)
+			return d.ReadString(schemas.CreateControlMappingSource_sourceDescription, v.SourceDescription)
+		case schemas.CreateControlMappingSource_sourceFrequency:
+			var ev string
+			if err := d.ReadString(schemas.CreateControlMappingSource_sourceFrequency, &ev); err != nil {
+				return err
+			}
+			v.SourceFrequency = SourceFrequency(ev)
+			return nil
+		case schemas.CreateControlMappingSource_sourceKeyword:
+			v.SourceKeyword = &SourceKeyword{}
+			return v.SourceKeyword.Deserialize(d)
+		case schemas.CreateControlMappingSource_sourceName:
+			v.SourceName = new(string)
+			return d.ReadString(schemas.CreateControlMappingSource_sourceName, v.SourceName)
+		case schemas.CreateControlMappingSource_sourceSetUpOption:
+			var ev string
+			if err := d.ReadString(schemas.CreateControlMappingSource_sourceSetUpOption, &ev); err != nil {
+				return err
+			}
+			v.SourceSetUpOption = SourceSetUpOption(ev)
+			return nil
+		case schemas.CreateControlMappingSource_sourceType:
+			var ev string
+			if err := d.ReadString(schemas.CreateControlMappingSource_sourceType, &ev); err != nil {
+				return err
+			}
+			v.SourceType = SourceType(ev)
+			return nil
+		case schemas.CreateControlMappingSource_troubleshootingText:
+			v.TroubleshootingText = new(string)
+			return d.ReadString(schemas.CreateControlMappingSource_troubleshootingText, v.TroubleshootingText)
+		}
+		return nil
+	})
+}
+
 //	A collection of attributes that's used to create a delegation for an
 //
 // assessment in Audit Manager.
@@ -943,6 +2611,50 @@ type CreateDelegationRequest struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateDelegationRequest) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateDelegationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateDelegationRequest) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Comment != nil {
+		s.WriteString(schemas.CreateDelegationRequest_comment, *v.Comment)
+	}
+	if v.ControlSetId != nil {
+		s.WriteString(schemas.CreateDelegationRequest_controlSetId, *v.ControlSetId)
+	}
+	if v.RoleArn != nil {
+		s.WriteString(schemas.CreateDelegationRequest_roleArn, *v.RoleArn)
+	}
+	if v.RoleType != "" {
+		s.WriteString(schemas.CreateDelegationRequest_roleType, string(v.RoleType))
+	}
+}
+func (v *CreateDelegationRequest) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateDelegationRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateDelegationRequest_comment:
+			v.Comment = new(string)
+			return d.ReadString(schemas.CreateDelegationRequest_comment, v.Comment)
+		case schemas.CreateDelegationRequest_controlSetId:
+			v.ControlSetId = new(string)
+			return d.ReadString(schemas.CreateDelegationRequest_controlSetId, v.ControlSetId)
+		case schemas.CreateDelegationRequest_roleArn:
+			v.RoleArn = new(string)
+			return d.ReadString(schemas.CreateDelegationRequest_roleArn, v.RoleArn)
+		case schemas.CreateDelegationRequest_roleType:
+			var ev string
+			if err := d.ReadString(schemas.CreateDelegationRequest_roleType, &ev); err != nil {
+				return err
+			}
+			v.RoleType = RoleType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // The default s3 bucket where Audit Manager saves the files that you export from
 // evidence finder.
 type DefaultExportDestination struct {
@@ -954,6 +2666,38 @@ type DefaultExportDestination struct {
 	DestinationType ExportDestinationType
 
 	noSmithyDocumentSerde
+}
+
+func (v *DefaultExportDestination) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DefaultExportDestination)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DefaultExportDestination) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Destination != nil {
+		s.WriteString(schemas.DefaultExportDestination_destination, *v.Destination)
+	}
+	if v.DestinationType != "" {
+		s.WriteString(schemas.DefaultExportDestination_destinationType, string(v.DestinationType))
+	}
+}
+func (v *DefaultExportDestination) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DefaultExportDestination, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DefaultExportDestination_destination:
+			v.Destination = new(string)
+			return d.ReadString(schemas.DefaultExportDestination_destination, v.Destination)
+		case schemas.DefaultExportDestination_destinationType:
+			var ev string
+			if err := d.ReadString(schemas.DefaultExportDestination_destinationType, &ev); err != nil {
+				return err
+			}
+			v.DestinationType = ExportDestinationType(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // The assignment of a control set to a delegate for review.
@@ -1001,6 +2745,96 @@ type Delegation struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Delegation) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Delegation)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Delegation) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AssessmentId != nil {
+		s.WriteString(schemas.Delegation_assessmentId, *v.AssessmentId)
+	}
+	if v.AssessmentName != nil {
+		s.WriteString(schemas.Delegation_assessmentName, *v.AssessmentName)
+	}
+	if v.Comment != nil {
+		s.WriteString(schemas.Delegation_comment, *v.Comment)
+	}
+	if v.ControlSetId != nil {
+		s.WriteString(schemas.Delegation_controlSetId, *v.ControlSetId)
+	}
+	if v.CreatedBy != nil {
+		s.WriteString(schemas.Delegation_createdBy, *v.CreatedBy)
+	}
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.Delegation_creationTime, *v.CreationTime)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.Delegation_id, *v.Id)
+	}
+	if v.LastUpdated != nil {
+		s.WriteTime(schemas.Delegation_lastUpdated, *v.LastUpdated)
+	}
+	if v.RoleArn != nil {
+		s.WriteString(schemas.Delegation_roleArn, *v.RoleArn)
+	}
+	if v.RoleType != "" {
+		s.WriteString(schemas.Delegation_roleType, string(v.RoleType))
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.Delegation_status, string(v.Status))
+	}
+}
+func (v *Delegation) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Delegation, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Delegation_assessmentId:
+			v.AssessmentId = new(string)
+			return d.ReadString(schemas.Delegation_assessmentId, v.AssessmentId)
+		case schemas.Delegation_assessmentName:
+			v.AssessmentName = new(string)
+			return d.ReadString(schemas.Delegation_assessmentName, v.AssessmentName)
+		case schemas.Delegation_comment:
+			v.Comment = new(string)
+			return d.ReadString(schemas.Delegation_comment, v.Comment)
+		case schemas.Delegation_controlSetId:
+			v.ControlSetId = new(string)
+			return d.ReadString(schemas.Delegation_controlSetId, v.ControlSetId)
+		case schemas.Delegation_createdBy:
+			v.CreatedBy = new(string)
+			return d.ReadString(schemas.Delegation_createdBy, v.CreatedBy)
+		case schemas.Delegation_creationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.Delegation_creationTime, v.CreationTime)
+		case schemas.Delegation_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.Delegation_id, v.Id)
+		case schemas.Delegation_lastUpdated:
+			v.LastUpdated = new(time.Time)
+			return d.ReadTime(schemas.Delegation_lastUpdated, v.LastUpdated)
+		case schemas.Delegation_roleArn:
+			v.RoleArn = new(string)
+			return d.ReadString(schemas.Delegation_roleArn, v.RoleArn)
+		case schemas.Delegation_roleType:
+			var ev string
+			if err := d.ReadString(schemas.Delegation_roleType, &ev); err != nil {
+				return err
+			}
+			v.RoleType = RoleType(ev)
+			return nil
+		case schemas.Delegation_status:
+			var ev string
+			if err := d.ReadString(schemas.Delegation_status, &ev); err != nil {
+				return err
+			}
+			v.Status = DelegationStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // The metadata that's associated with the delegation.
 type DelegationMetadata struct {
 
@@ -1026,6 +2860,68 @@ type DelegationMetadata struct {
 	Status DelegationStatus
 
 	noSmithyDocumentSerde
+}
+
+func (v *DelegationMetadata) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DelegationMetadata)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DelegationMetadata) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AssessmentId != nil {
+		s.WriteString(schemas.DelegationMetadata_assessmentId, *v.AssessmentId)
+	}
+	if v.AssessmentName != nil {
+		s.WriteString(schemas.DelegationMetadata_assessmentName, *v.AssessmentName)
+	}
+	if v.ControlSetName != nil {
+		s.WriteString(schemas.DelegationMetadata_controlSetName, *v.ControlSetName)
+	}
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.DelegationMetadata_creationTime, *v.CreationTime)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.DelegationMetadata_id, *v.Id)
+	}
+	if v.RoleArn != nil {
+		s.WriteString(schemas.DelegationMetadata_roleArn, *v.RoleArn)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.DelegationMetadata_status, string(v.Status))
+	}
+}
+func (v *DelegationMetadata) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DelegationMetadata, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DelegationMetadata_assessmentId:
+			v.AssessmentId = new(string)
+			return d.ReadString(schemas.DelegationMetadata_assessmentId, v.AssessmentId)
+		case schemas.DelegationMetadata_assessmentName:
+			v.AssessmentName = new(string)
+			return d.ReadString(schemas.DelegationMetadata_assessmentName, v.AssessmentName)
+		case schemas.DelegationMetadata_controlSetName:
+			v.ControlSetName = new(string)
+			return d.ReadString(schemas.DelegationMetadata_controlSetName, v.ControlSetName)
+		case schemas.DelegationMetadata_creationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.DelegationMetadata_creationTime, v.CreationTime)
+		case schemas.DelegationMetadata_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.DelegationMetadata_id, v.Id)
+		case schemas.DelegationMetadata_roleArn:
+			v.RoleArn = new(string)
+			return d.ReadString(schemas.DelegationMetadata_roleArn, v.RoleArn)
+		case schemas.DelegationMetadata_status:
+			var ev string
+			if err := d.ReadString(schemas.DelegationMetadata_status, &ev); err != nil {
+				return err
+			}
+			v.Status = DelegationStatus(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // The deregistration policy for the data that's stored in Audit Manager. You can
@@ -1062,6 +2958,32 @@ type DeregistrationPolicy struct {
 	DeleteResources DeleteResources
 
 	noSmithyDocumentSerde
+}
+
+func (v *DeregistrationPolicy) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeregistrationPolicy)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeregistrationPolicy) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DeleteResources != "" {
+		s.WriteString(schemas.DeregistrationPolicy_deleteResources, string(v.DeleteResources))
+	}
+}
+func (v *DeregistrationPolicy) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeregistrationPolicy, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeregistrationPolicy_deleteResources:
+			var ev string
+			if err := d.ReadString(schemas.DeregistrationPolicy_deleteResources, &ev); err != nil {
+				return err
+			}
+			v.DeleteResources = DeleteResources(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 //	A record that contains the information needed to demonstrate compliance with
@@ -1136,6 +3058,106 @@ type Evidence struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Evidence) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Evidence)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Evidence) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AssessmentReportSelection != nil {
+		s.WriteString(schemas.Evidence_assessmentReportSelection, *v.AssessmentReportSelection)
+	}
+	serializeEvidenceAttributes(s, schemas.Evidence_attributes, v.Attributes)
+	if v.AwsAccountId != nil {
+		s.WriteString(schemas.Evidence_awsAccountId, *v.AwsAccountId)
+	}
+	if v.AwsOrganization != nil {
+		s.WriteString(schemas.Evidence_awsOrganization, *v.AwsOrganization)
+	}
+	if v.ComplianceCheck != nil {
+		s.WriteString(schemas.Evidence_complianceCheck, *v.ComplianceCheck)
+	}
+	if v.DataSource != nil {
+		s.WriteString(schemas.Evidence_dataSource, *v.DataSource)
+	}
+	if v.EventName != nil {
+		s.WriteString(schemas.Evidence_eventName, *v.EventName)
+	}
+	if v.EventSource != nil {
+		s.WriteString(schemas.Evidence_eventSource, *v.EventSource)
+	}
+	if v.EvidenceAwsAccountId != nil {
+		s.WriteString(schemas.Evidence_evidenceAwsAccountId, *v.EvidenceAwsAccountId)
+	}
+	if v.EvidenceByType != nil {
+		s.WriteString(schemas.Evidence_evidenceByType, *v.EvidenceByType)
+	}
+	if v.EvidenceFolderId != nil {
+		s.WriteString(schemas.Evidence_evidenceFolderId, *v.EvidenceFolderId)
+	}
+	if v.IamId != nil {
+		s.WriteString(schemas.Evidence_iamId, *v.IamId)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.Evidence_id, *v.Id)
+	}
+	serializeResources(s, schemas.Evidence_resourcesIncluded, v.ResourcesIncluded)
+	if v.Time != nil {
+		s.WriteTime(schemas.Evidence_time, *v.Time)
+	}
+}
+func (v *Evidence) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Evidence, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Evidence_assessmentReportSelection:
+			v.AssessmentReportSelection = new(string)
+			return d.ReadString(schemas.Evidence_assessmentReportSelection, v.AssessmentReportSelection)
+		case schemas.Evidence_attributes:
+			return deserializeEvidenceAttributes(d, schemas.Evidence_attributes, &v.Attributes)
+		case schemas.Evidence_awsAccountId:
+			v.AwsAccountId = new(string)
+			return d.ReadString(schemas.Evidence_awsAccountId, v.AwsAccountId)
+		case schemas.Evidence_awsOrganization:
+			v.AwsOrganization = new(string)
+			return d.ReadString(schemas.Evidence_awsOrganization, v.AwsOrganization)
+		case schemas.Evidence_complianceCheck:
+			v.ComplianceCheck = new(string)
+			return d.ReadString(schemas.Evidence_complianceCheck, v.ComplianceCheck)
+		case schemas.Evidence_dataSource:
+			v.DataSource = new(string)
+			return d.ReadString(schemas.Evidence_dataSource, v.DataSource)
+		case schemas.Evidence_eventName:
+			v.EventName = new(string)
+			return d.ReadString(schemas.Evidence_eventName, v.EventName)
+		case schemas.Evidence_eventSource:
+			v.EventSource = new(string)
+			return d.ReadString(schemas.Evidence_eventSource, v.EventSource)
+		case schemas.Evidence_evidenceAwsAccountId:
+			v.EvidenceAwsAccountId = new(string)
+			return d.ReadString(schemas.Evidence_evidenceAwsAccountId, v.EvidenceAwsAccountId)
+		case schemas.Evidence_evidenceByType:
+			v.EvidenceByType = new(string)
+			return d.ReadString(schemas.Evidence_evidenceByType, v.EvidenceByType)
+		case schemas.Evidence_evidenceFolderId:
+			v.EvidenceFolderId = new(string)
+			return d.ReadString(schemas.Evidence_evidenceFolderId, v.EvidenceFolderId)
+		case schemas.Evidence_iamId:
+			v.IamId = new(string)
+			return d.ReadString(schemas.Evidence_iamId, v.IamId)
+		case schemas.Evidence_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.Evidence_id, v.Id)
+		case schemas.Evidence_resourcesIncluded:
+			return deserializeResources(d, schemas.Evidence_resourcesIncluded, &v.ResourcesIncluded)
+		case schemas.Evidence_time:
+			v.Time = new(time.Time)
+			return d.ReadTime(schemas.Evidence_time, v.Time)
+		}
+		return nil
+	})
+}
+
 // The settings object that specifies whether evidence finder is enabled. This
 // object also describes the related event data store, and the backfill status for
 // populating the event data store with evidence data.
@@ -1187,6 +3209,54 @@ type EvidenceFinderEnablement struct {
 	noSmithyDocumentSerde
 }
 
+func (v *EvidenceFinderEnablement) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EvidenceFinderEnablement)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EvidenceFinderEnablement) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BackfillStatus != "" {
+		s.WriteString(schemas.EvidenceFinderEnablement_backfillStatus, string(v.BackfillStatus))
+	}
+	if v.EnablementStatus != "" {
+		s.WriteString(schemas.EvidenceFinderEnablement_enablementStatus, string(v.EnablementStatus))
+	}
+	if v.Error != nil {
+		s.WriteString(schemas.EvidenceFinderEnablement_error, *v.Error)
+	}
+	if v.EventDataStoreArn != nil {
+		s.WriteString(schemas.EvidenceFinderEnablement_eventDataStoreArn, *v.EventDataStoreArn)
+	}
+}
+func (v *EvidenceFinderEnablement) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EvidenceFinderEnablement, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EvidenceFinderEnablement_backfillStatus:
+			var ev string
+			if err := d.ReadString(schemas.EvidenceFinderEnablement_backfillStatus, &ev); err != nil {
+				return err
+			}
+			v.BackfillStatus = EvidenceFinderBackfillStatus(ev)
+			return nil
+		case schemas.EvidenceFinderEnablement_enablementStatus:
+			var ev string
+			if err := d.ReadString(schemas.EvidenceFinderEnablement_enablementStatus, &ev); err != nil {
+				return err
+			}
+			v.EnablementStatus = EvidenceFinderEnablementStatus(ev)
+			return nil
+		case schemas.EvidenceFinderEnablement_error:
+			v.Error = new(string)
+			return d.ReadString(schemas.EvidenceFinderEnablement_error, v.Error)
+		case schemas.EvidenceFinderEnablement_eventDataStoreArn:
+			v.EventDataStoreArn = new(string)
+			return d.ReadString(schemas.EvidenceFinderEnablement_eventDataStoreArn, v.EventDataStoreArn)
+		}
+		return nil
+	})
+}
+
 // A breakdown of the latest compliance check status for the evidence in your
 // Audit Manager assessments.
 type EvidenceInsights struct {
@@ -1212,6 +3282,40 @@ type EvidenceInsights struct {
 	NoncompliantEvidenceCount *int32
 
 	noSmithyDocumentSerde
+}
+
+func (v *EvidenceInsights) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EvidenceInsights)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EvidenceInsights) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CompliantEvidenceCount != nil {
+		s.WriteInt32(schemas.EvidenceInsights_compliantEvidenceCount, *v.CompliantEvidenceCount)
+	}
+	if v.InconclusiveEvidenceCount != nil {
+		s.WriteInt32(schemas.EvidenceInsights_inconclusiveEvidenceCount, *v.InconclusiveEvidenceCount)
+	}
+	if v.NoncompliantEvidenceCount != nil {
+		s.WriteInt32(schemas.EvidenceInsights_noncompliantEvidenceCount, *v.NoncompliantEvidenceCount)
+	}
+}
+func (v *EvidenceInsights) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EvidenceInsights, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EvidenceInsights_compliantEvidenceCount:
+			v.CompliantEvidenceCount = new(int32)
+			return d.ReadInt32(schemas.EvidenceInsights_compliantEvidenceCount, v.CompliantEvidenceCount)
+		case schemas.EvidenceInsights_inconclusiveEvidenceCount:
+			v.InconclusiveEvidenceCount = new(int32)
+			return d.ReadInt32(schemas.EvidenceInsights_inconclusiveEvidenceCount, v.InconclusiveEvidenceCount)
+		case schemas.EvidenceInsights_noncompliantEvidenceCount:
+			v.NoncompliantEvidenceCount = new(int32)
+			return d.ReadInt32(schemas.EvidenceInsights_noncompliantEvidenceCount, v.NoncompliantEvidenceCount)
+		}
+		return nil
+	})
 }
 
 //	The file that's used to structure and automate Audit Manager assessments for a
@@ -1271,6 +3375,104 @@ type Framework struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Framework) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Framework)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Framework) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.Framework_arn, *v.Arn)
+	}
+	if v.ComplianceType != nil {
+		s.WriteString(schemas.Framework_complianceType, *v.ComplianceType)
+	}
+	serializeControlSets(s, schemas.Framework_controlSets, v.ControlSets)
+	if v.ControlSources != nil {
+		s.WriteString(schemas.Framework_controlSources, *v.ControlSources)
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.Framework_createdAt, *v.CreatedAt)
+	}
+	if v.CreatedBy != nil {
+		s.WriteString(schemas.Framework_createdBy, *v.CreatedBy)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.Framework_description, *v.Description)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.Framework_id, *v.Id)
+	}
+	if v.LastUpdatedAt != nil {
+		s.WriteTime(schemas.Framework_lastUpdatedAt, *v.LastUpdatedAt)
+	}
+	if v.LastUpdatedBy != nil {
+		s.WriteString(schemas.Framework_lastUpdatedBy, *v.LastUpdatedBy)
+	}
+	if v.Logo != nil {
+		s.WriteString(schemas.Framework_logo, *v.Logo)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.Framework_name, *v.Name)
+	}
+	serializeTagMap(s, schemas.Framework_tags, v.Tags)
+	if v.Type != "" {
+		s.WriteString(schemas.Framework_type, string(v.Type))
+	}
+}
+func (v *Framework) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Framework, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Framework_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.Framework_arn, v.Arn)
+		case schemas.Framework_complianceType:
+			v.ComplianceType = new(string)
+			return d.ReadString(schemas.Framework_complianceType, v.ComplianceType)
+		case schemas.Framework_controlSets:
+			return deserializeControlSets(d, schemas.Framework_controlSets, &v.ControlSets)
+		case schemas.Framework_controlSources:
+			v.ControlSources = new(string)
+			return d.ReadString(schemas.Framework_controlSources, v.ControlSources)
+		case schemas.Framework_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.Framework_createdAt, v.CreatedAt)
+		case schemas.Framework_createdBy:
+			v.CreatedBy = new(string)
+			return d.ReadString(schemas.Framework_createdBy, v.CreatedBy)
+		case schemas.Framework_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.Framework_description, v.Description)
+		case schemas.Framework_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.Framework_id, v.Id)
+		case schemas.Framework_lastUpdatedAt:
+			v.LastUpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.Framework_lastUpdatedAt, v.LastUpdatedAt)
+		case schemas.Framework_lastUpdatedBy:
+			v.LastUpdatedBy = new(string)
+			return d.ReadString(schemas.Framework_lastUpdatedBy, v.LastUpdatedBy)
+		case schemas.Framework_logo:
+			v.Logo = new(string)
+			return d.ReadString(schemas.Framework_logo, v.Logo)
+		case schemas.Framework_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.Framework_name, v.Name)
+		case schemas.Framework_tags:
+			return deserializeTagMap(d, schemas.Framework_tags, &v.Tags)
+		case schemas.Framework_type:
+			var ev string
+			if err := d.ReadString(schemas.Framework_type, &ev); err != nil {
+				return err
+			}
+			v.Type = FrameworkType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // The metadata of a framework, such as the name, ID, or description.
 type FrameworkMetadata struct {
 
@@ -1288,6 +3490,46 @@ type FrameworkMetadata struct {
 	Name *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *FrameworkMetadata) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.FrameworkMetadata)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *FrameworkMetadata) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ComplianceType != nil {
+		s.WriteString(schemas.FrameworkMetadata_complianceType, *v.ComplianceType)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.FrameworkMetadata_description, *v.Description)
+	}
+	if v.Logo != nil {
+		s.WriteString(schemas.FrameworkMetadata_logo, *v.Logo)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.FrameworkMetadata_name, *v.Name)
+	}
+}
+func (v *FrameworkMetadata) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.FrameworkMetadata, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.FrameworkMetadata_complianceType:
+			v.ComplianceType = new(string)
+			return d.ReadString(schemas.FrameworkMetadata_complianceType, v.ComplianceType)
+		case schemas.FrameworkMetadata_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.FrameworkMetadata_description, v.Description)
+		case schemas.FrameworkMetadata_logo:
+			v.Logo = new(string)
+			return d.ReadString(schemas.FrameworkMetadata_logo, v.Logo)
+		case schemas.FrameworkMetadata_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.FrameworkMetadata_name, v.Name)
+		}
+		return nil
+	})
 }
 
 // A summary of the latest analytics data for all your active assessments.
@@ -1351,6 +3593,64 @@ type Insights struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Insights) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Insights)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Insights) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ActiveAssessmentsCount != nil {
+		s.WriteInt32(schemas.Insights_activeAssessmentsCount, *v.ActiveAssessmentsCount)
+	}
+	if v.AssessmentControlsCountByNoncompliantEvidence != nil {
+		s.WriteInt32(schemas.Insights_assessmentControlsCountByNoncompliantEvidence, *v.AssessmentControlsCountByNoncompliantEvidence)
+	}
+	if v.CompliantEvidenceCount != nil {
+		s.WriteInt32(schemas.Insights_compliantEvidenceCount, *v.CompliantEvidenceCount)
+	}
+	if v.InconclusiveEvidenceCount != nil {
+		s.WriteInt32(schemas.Insights_inconclusiveEvidenceCount, *v.InconclusiveEvidenceCount)
+	}
+	if v.LastUpdated != nil {
+		s.WriteTime(schemas.Insights_lastUpdated, *v.LastUpdated)
+	}
+	if v.NoncompliantEvidenceCount != nil {
+		s.WriteInt32(schemas.Insights_noncompliantEvidenceCount, *v.NoncompliantEvidenceCount)
+	}
+	if v.TotalAssessmentControlsCount != nil {
+		s.WriteInt32(schemas.Insights_totalAssessmentControlsCount, *v.TotalAssessmentControlsCount)
+	}
+}
+func (v *Insights) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Insights, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Insights_activeAssessmentsCount:
+			v.ActiveAssessmentsCount = new(int32)
+			return d.ReadInt32(schemas.Insights_activeAssessmentsCount, v.ActiveAssessmentsCount)
+		case schemas.Insights_assessmentControlsCountByNoncompliantEvidence:
+			v.AssessmentControlsCountByNoncompliantEvidence = new(int32)
+			return d.ReadInt32(schemas.Insights_assessmentControlsCountByNoncompliantEvidence, v.AssessmentControlsCountByNoncompliantEvidence)
+		case schemas.Insights_compliantEvidenceCount:
+			v.CompliantEvidenceCount = new(int32)
+			return d.ReadInt32(schemas.Insights_compliantEvidenceCount, v.CompliantEvidenceCount)
+		case schemas.Insights_inconclusiveEvidenceCount:
+			v.InconclusiveEvidenceCount = new(int32)
+			return d.ReadInt32(schemas.Insights_inconclusiveEvidenceCount, v.InconclusiveEvidenceCount)
+		case schemas.Insights_lastUpdated:
+			v.LastUpdated = new(time.Time)
+			return d.ReadTime(schemas.Insights_lastUpdated, v.LastUpdated)
+		case schemas.Insights_noncompliantEvidenceCount:
+			v.NoncompliantEvidenceCount = new(int32)
+			return d.ReadInt32(schemas.Insights_noncompliantEvidenceCount, v.NoncompliantEvidenceCount)
+		case schemas.Insights_totalAssessmentControlsCount:
+			v.TotalAssessmentControlsCount = new(int32)
+			return d.ReadInt32(schemas.Insights_totalAssessmentControlsCount, v.TotalAssessmentControlsCount)
+		}
+		return nil
+	})
+}
+
 // A summary of the latest analytics data for a specific active assessment.
 //
 // This summary is a snapshot of the data that was collected on the lastUpdated
@@ -1408,6 +3708,58 @@ type InsightsByAssessment struct {
 	noSmithyDocumentSerde
 }
 
+func (v *InsightsByAssessment) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InsightsByAssessment)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InsightsByAssessment) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AssessmentControlsCountByNoncompliantEvidence != nil {
+		s.WriteInt32(schemas.InsightsByAssessment_assessmentControlsCountByNoncompliantEvidence, *v.AssessmentControlsCountByNoncompliantEvidence)
+	}
+	if v.CompliantEvidenceCount != nil {
+		s.WriteInt32(schemas.InsightsByAssessment_compliantEvidenceCount, *v.CompliantEvidenceCount)
+	}
+	if v.InconclusiveEvidenceCount != nil {
+		s.WriteInt32(schemas.InsightsByAssessment_inconclusiveEvidenceCount, *v.InconclusiveEvidenceCount)
+	}
+	if v.LastUpdated != nil {
+		s.WriteTime(schemas.InsightsByAssessment_lastUpdated, *v.LastUpdated)
+	}
+	if v.NoncompliantEvidenceCount != nil {
+		s.WriteInt32(schemas.InsightsByAssessment_noncompliantEvidenceCount, *v.NoncompliantEvidenceCount)
+	}
+	if v.TotalAssessmentControlsCount != nil {
+		s.WriteInt32(schemas.InsightsByAssessment_totalAssessmentControlsCount, *v.TotalAssessmentControlsCount)
+	}
+}
+func (v *InsightsByAssessment) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InsightsByAssessment, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InsightsByAssessment_assessmentControlsCountByNoncompliantEvidence:
+			v.AssessmentControlsCountByNoncompliantEvidence = new(int32)
+			return d.ReadInt32(schemas.InsightsByAssessment_assessmentControlsCountByNoncompliantEvidence, v.AssessmentControlsCountByNoncompliantEvidence)
+		case schemas.InsightsByAssessment_compliantEvidenceCount:
+			v.CompliantEvidenceCount = new(int32)
+			return d.ReadInt32(schemas.InsightsByAssessment_compliantEvidenceCount, v.CompliantEvidenceCount)
+		case schemas.InsightsByAssessment_inconclusiveEvidenceCount:
+			v.InconclusiveEvidenceCount = new(int32)
+			return d.ReadInt32(schemas.InsightsByAssessment_inconclusiveEvidenceCount, v.InconclusiveEvidenceCount)
+		case schemas.InsightsByAssessment_lastUpdated:
+			v.LastUpdated = new(time.Time)
+			return d.ReadTime(schemas.InsightsByAssessment_lastUpdated, v.LastUpdated)
+		case schemas.InsightsByAssessment_noncompliantEvidenceCount:
+			v.NoncompliantEvidenceCount = new(int32)
+			return d.ReadInt32(schemas.InsightsByAssessment_noncompliantEvidenceCount, v.NoncompliantEvidenceCount)
+		case schemas.InsightsByAssessment_totalAssessmentControlsCount:
+			v.TotalAssessmentControlsCount = new(int32)
+			return d.ReadInt32(schemas.InsightsByAssessment_totalAssessmentControlsCount, v.TotalAssessmentControlsCount)
+		}
+		return nil
+	})
+}
+
 //	Evidence that's manually added to a control in Audit Manager. manualEvidence
 //
 // can be one of the following: evidenceFileName , s3ResourcePath , or textResponse
@@ -1427,6 +3779,40 @@ type ManualEvidence struct {
 	TextResponse *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ManualEvidence) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ManualEvidence)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ManualEvidence) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EvidenceFileName != nil {
+		s.WriteString(schemas.ManualEvidence_evidenceFileName, *v.EvidenceFileName)
+	}
+	if v.S3ResourcePath != nil {
+		s.WriteString(schemas.ManualEvidence_s3ResourcePath, *v.S3ResourcePath)
+	}
+	if v.TextResponse != nil {
+		s.WriteString(schemas.ManualEvidence_textResponse, *v.TextResponse)
+	}
+}
+func (v *ManualEvidence) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ManualEvidence, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ManualEvidence_evidenceFileName:
+			v.EvidenceFileName = new(string)
+			return d.ReadString(schemas.ManualEvidence_evidenceFileName, v.EvidenceFileName)
+		case schemas.ManualEvidence_s3ResourcePath:
+			v.S3ResourcePath = new(string)
+			return d.ReadString(schemas.ManualEvidence_s3ResourcePath, v.S3ResourcePath)
+		case schemas.ManualEvidence_textResponse:
+			v.TextResponse = new(string)
+			return d.ReadString(schemas.ManualEvidence_textResponse, v.TextResponse)
+		}
+		return nil
+	})
 }
 
 //	The notification that informs a user of an update in Audit Manager. For
@@ -1462,6 +3848,70 @@ type Notification struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Notification) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Notification)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Notification) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AssessmentId != nil {
+		s.WriteString(schemas.Notification_assessmentId, *v.AssessmentId)
+	}
+	if v.AssessmentName != nil {
+		s.WriteString(schemas.Notification_assessmentName, *v.AssessmentName)
+	}
+	if v.ControlSetId != nil {
+		s.WriteString(schemas.Notification_controlSetId, *v.ControlSetId)
+	}
+	if v.ControlSetName != nil {
+		s.WriteString(schemas.Notification_controlSetName, *v.ControlSetName)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.Notification_description, *v.Description)
+	}
+	if v.EventTime != nil {
+		s.WriteTime(schemas.Notification_eventTime, *v.EventTime)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.Notification_id, *v.Id)
+	}
+	if v.Source != nil {
+		s.WriteString(schemas.Notification_source, *v.Source)
+	}
+}
+func (v *Notification) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Notification, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Notification_assessmentId:
+			v.AssessmentId = new(string)
+			return d.ReadString(schemas.Notification_assessmentId, v.AssessmentId)
+		case schemas.Notification_assessmentName:
+			v.AssessmentName = new(string)
+			return d.ReadString(schemas.Notification_assessmentName, v.AssessmentName)
+		case schemas.Notification_controlSetId:
+			v.ControlSetId = new(string)
+			return d.ReadString(schemas.Notification_controlSetId, v.ControlSetId)
+		case schemas.Notification_controlSetName:
+			v.ControlSetName = new(string)
+			return d.ReadString(schemas.Notification_controlSetName, v.ControlSetName)
+		case schemas.Notification_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.Notification_description, v.Description)
+		case schemas.Notification_eventTime:
+			v.EventTime = new(time.Time)
+			return d.ReadTime(schemas.Notification_eventTime, v.EventTime)
+		case schemas.Notification_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.Notification_id, v.Id)
+		case schemas.Notification_source:
+			v.Source = new(string)
+			return d.ReadString(schemas.Notification_source, v.Source)
+		}
+		return nil
+	})
+}
+
 // A system asset that's evaluated in an Audit Manager assessment.
 type Resource struct {
 
@@ -1491,6 +3941,40 @@ type Resource struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Resource) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Resource)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Resource) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.Resource_arn, *v.Arn)
+	}
+	if v.ComplianceCheck != nil {
+		s.WriteString(schemas.Resource_complianceCheck, *v.ComplianceCheck)
+	}
+	if v.Value != nil {
+		s.WriteString(schemas.Resource_value, *v.Value)
+	}
+}
+func (v *Resource) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Resource, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Resource_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.Resource_arn, v.Arn)
+		case schemas.Resource_complianceCheck:
+			v.ComplianceCheck = new(string)
+			return d.ReadString(schemas.Resource_complianceCheck, v.ComplianceCheck)
+		case schemas.Resource_value:
+			v.Value = new(string)
+			return d.ReadString(schemas.Resource_value, v.Value)
+		}
+		return nil
+	})
+}
+
 //	The wrapper that contains the Audit Manager role information of the current
 //
 // user. This includes the role type and IAM Amazon Resource Name (ARN).
@@ -1513,6 +3997,38 @@ type Role struct {
 	RoleType RoleType
 
 	noSmithyDocumentSerde
+}
+
+func (v *Role) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Role)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Role) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RoleArn != nil {
+		s.WriteString(schemas.Role_roleArn, *v.RoleArn)
+	}
+	if v.RoleType != "" {
+		s.WriteString(schemas.Role_roleType, string(v.RoleType))
+	}
+}
+func (v *Role) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Role, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Role_roleArn:
+			v.RoleArn = new(string)
+			return d.ReadString(schemas.Role_roleArn, v.RoleArn)
+		case schemas.Role_roleType:
+			var ev string
+			if err := d.ReadString(schemas.Role_roleType, &ev); err != nil {
+				return err
+			}
+			v.RoleType = RoleType(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 //	The wrapper that contains the Amazon Web Services accounts that are in scope
@@ -1550,6 +4066,28 @@ type Scope struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Scope) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Scope)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Scope) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAWSAccounts(s, schemas.Scope_awsAccounts, v.AwsAccounts)
+	serializeAWSServices(s, schemas.Scope_awsServices, v.AwsServices)
+}
+func (v *Scope) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Scope, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Scope_awsAccounts:
+			return deserializeAWSAccounts(d, schemas.Scope_awsAccounts, &v.AwsAccounts)
+		case schemas.Scope_awsServices:
+			return deserializeAWSServices(d, schemas.Scope_awsServices, &v.AwsServices)
+		}
+		return nil
+	})
+}
+
 // The metadata that's associated with the Amazon Web Services service.
 type ServiceMetadata struct {
 
@@ -1567,6 +4105,46 @@ type ServiceMetadata struct {
 	Name *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ServiceMetadata) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ServiceMetadata)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ServiceMetadata) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Category != nil {
+		s.WriteString(schemas.ServiceMetadata_category, *v.Category)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.ServiceMetadata_description, *v.Description)
+	}
+	if v.DisplayName != nil {
+		s.WriteString(schemas.ServiceMetadata_displayName, *v.DisplayName)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.ServiceMetadata_name, *v.Name)
+	}
+}
+func (v *ServiceMetadata) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ServiceMetadata, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ServiceMetadata_category:
+			v.Category = new(string)
+			return d.ReadString(schemas.ServiceMetadata_category, v.Category)
+		case schemas.ServiceMetadata_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.ServiceMetadata_description, v.Description)
+		case schemas.ServiceMetadata_displayName:
+			v.DisplayName = new(string)
+			return d.ReadString(schemas.ServiceMetadata_displayName, v.DisplayName)
+		case schemas.ServiceMetadata_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.ServiceMetadata_name, v.Name)
+		}
+		return nil
+	})
 }
 
 // The settings object that holds all supported Audit Manager settings.
@@ -1599,6 +4177,75 @@ type Settings struct {
 	SnsTopic *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *Settings) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Settings)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Settings) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DefaultAssessmentReportsDestination != nil {
+		s.WriteStruct(schemas.Settings_defaultAssessmentReportsDestination)
+		v.DefaultAssessmentReportsDestination.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DefaultExportDestination != nil {
+		s.WriteStruct(schemas.Settings_defaultExportDestination)
+		v.DefaultExportDestination.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeRoles(s, schemas.Settings_defaultProcessOwners, v.DefaultProcessOwners)
+	if v.DeregistrationPolicy != nil {
+		s.WriteStruct(schemas.Settings_deregistrationPolicy)
+		v.DeregistrationPolicy.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.EvidenceFinderEnablement != nil {
+		s.WriteStruct(schemas.Settings_evidenceFinderEnablement)
+		v.EvidenceFinderEnablement.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.IsAwsOrgEnabled != nil {
+		s.WriteBool(schemas.Settings_isAwsOrgEnabled, *v.IsAwsOrgEnabled)
+	}
+	if v.KmsKey != nil {
+		s.WriteString(schemas.Settings_kmsKey, *v.KmsKey)
+	}
+	if v.SnsTopic != nil {
+		s.WriteString(schemas.Settings_snsTopic, *v.SnsTopic)
+	}
+}
+func (v *Settings) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Settings, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Settings_defaultAssessmentReportsDestination:
+			v.DefaultAssessmentReportsDestination = &AssessmentReportsDestination{}
+			return v.DefaultAssessmentReportsDestination.Deserialize(d)
+		case schemas.Settings_defaultExportDestination:
+			v.DefaultExportDestination = &DefaultExportDestination{}
+			return v.DefaultExportDestination.Deserialize(d)
+		case schemas.Settings_defaultProcessOwners:
+			return deserializeRoles(d, schemas.Settings_defaultProcessOwners, &v.DefaultProcessOwners)
+		case schemas.Settings_deregistrationPolicy:
+			v.DeregistrationPolicy = &DeregistrationPolicy{}
+			return v.DeregistrationPolicy.Deserialize(d)
+		case schemas.Settings_evidenceFinderEnablement:
+			v.EvidenceFinderEnablement = &EvidenceFinderEnablement{}
+			return v.EvidenceFinderEnablement.Deserialize(d)
+		case schemas.Settings_isAwsOrgEnabled:
+			v.IsAwsOrgEnabled = new(bool)
+			return d.ReadBool(schemas.Settings_isAwsOrgEnabled, v.IsAwsOrgEnabled)
+		case schemas.Settings_kmsKey:
+			v.KmsKey = new(string)
+			return d.ReadString(schemas.Settings_kmsKey, v.KmsKey)
+		case schemas.Settings_snsTopic:
+			v.SnsTopic = new(string)
+			return d.ReadString(schemas.Settings_snsTopic, v.SnsTopic)
+		}
+		return nil
+	})
 }
 
 // A keyword that relates to the control data source.
@@ -1733,6 +4380,38 @@ type SourceKeyword struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SourceKeyword) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SourceKeyword)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SourceKeyword) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.KeywordInputType != "" {
+		s.WriteString(schemas.SourceKeyword_keywordInputType, string(v.KeywordInputType))
+	}
+	if v.KeywordValue != nil {
+		s.WriteString(schemas.SourceKeyword_keywordValue, *v.KeywordValue)
+	}
+}
+func (v *SourceKeyword) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SourceKeyword, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SourceKeyword_keywordInputType:
+			var ev string
+			if err := d.ReadString(schemas.SourceKeyword_keywordInputType, &ev); err != nil {
+				return err
+			}
+			v.KeywordInputType = KeywordInputType(ev)
+			return nil
+		case schemas.SourceKeyword_keywordValue:
+			v.KeywordValue = new(string)
+			return d.ReadString(schemas.SourceKeyword_keywordValue, v.KeywordValue)
+		}
+		return nil
+	})
+}
+
 //	A controlSet entity that represents a collection of controls in Audit Manager.
 //
 // This doesn't contain the control set ID.
@@ -1754,6 +4433,37 @@ type UpdateAssessmentFrameworkControlSet struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateAssessmentFrameworkControlSet) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateAssessmentFrameworkControlSet)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateAssessmentFrameworkControlSet) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeCreateAssessmentFrameworkControls(s, schemas.UpdateAssessmentFrameworkControlSet_controls, v.Controls)
+	if v.Id != nil {
+		s.WriteString(schemas.UpdateAssessmentFrameworkControlSet_id, *v.Id)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateAssessmentFrameworkControlSet_name, *v.Name)
+	}
+}
+func (v *UpdateAssessmentFrameworkControlSet) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateAssessmentFrameworkControlSet, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateAssessmentFrameworkControlSet_controls:
+			return deserializeCreateAssessmentFrameworkControls(d, schemas.UpdateAssessmentFrameworkControlSet_controls, &v.Controls)
+		case schemas.UpdateAssessmentFrameworkControlSet_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.UpdateAssessmentFrameworkControlSet_id, v.Id)
+		case schemas.UpdateAssessmentFrameworkControlSet_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.UpdateAssessmentFrameworkControlSet_name, v.Name)
+		}
+		return nil
+	})
+}
+
 //	Short for uniform resource locator. A URL is used as a unique identifier to
 //
 // locate a resource on the internet.
@@ -1766,6 +4476,34 @@ type URL struct {
 	Link *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *URL) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.URL)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *URL) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.HyperlinkName != nil {
+		s.WriteString(schemas.URL_hyperlinkName, *v.HyperlinkName)
+	}
+	if v.Link != nil {
+		s.WriteString(schemas.URL_link, *v.Link)
+	}
+}
+func (v *URL) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.URL, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.URL_hyperlinkName:
+			v.HyperlinkName = new(string)
+			return d.ReadString(schemas.URL_hyperlinkName, v.HyperlinkName)
+		case schemas.URL_link:
+			v.Link = new(string)
+			return d.ReadString(schemas.URL_link, v.Link)
+		}
+		return nil
+	})
 }
 
 // Indicates that the request has invalid or missing parameters for the field.
@@ -1782,6 +4520,34 @@ type ValidationExceptionField struct {
 	Name *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ValidationExceptionField) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ValidationExceptionField)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ValidationExceptionField) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.ValidationExceptionField_message, *v.Message)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.ValidationExceptionField_name, *v.Name)
+	}
+}
+func (v *ValidationExceptionField) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ValidationExceptionField, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ValidationExceptionField_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ValidationExceptionField_message, v.Message)
+		case schemas.ValidationExceptionField_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.ValidationExceptionField_name, v.Name)
+		}
+		return nil
+	})
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde

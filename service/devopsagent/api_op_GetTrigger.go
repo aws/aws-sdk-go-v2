@@ -5,7 +5,9 @@ package devopsagent
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/devopsagent/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/devopsagent/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -42,6 +44,21 @@ type GetTriggerInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetTriggerInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetTriggerRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetTriggerInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AgentSpaceId != nil {
+		s.WriteString(schemas.GetTriggerRequest_agentSpaceId, *v.AgentSpaceId)
+	}
+	if v.TriggerId != nil {
+		s.WriteString(schemas.GetTriggerRequest_triggerId, *v.TriggerId)
+	}
+}
+
 // Response structure for getting a Trigger
 type GetTriggerOutput struct {
 
@@ -56,13 +73,34 @@ type GetTriggerOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetTriggerOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetTriggerResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetTriggerOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Trigger != nil {
+		s.WriteStruct(schemas.GetTriggerResponse_trigger)
+		v.Trigger.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetTriggerOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetTriggerResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetTriggerResponse_trigger:
+			v.Trigger = &types.Trigger{}
+			return v.Trigger.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetTriggerMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetTrigger{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetTrigger, schemas.GetTriggerRequest, schemas.GetTriggerResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetTrigger{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetTrigger, schemas.GetTriggerRequest, schemas.GetTriggerResponse), output: &GetTriggerOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

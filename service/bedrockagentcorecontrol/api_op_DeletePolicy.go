@@ -4,7 +4,9 @@ package bedrockagentcorecontrol
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -43,6 +45,21 @@ type DeletePolicyInput struct {
 	PolicyId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DeletePolicyInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeletePolicyRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeletePolicyInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PolicyEngineId != nil {
+		s.WriteString(schemas.DeletePolicyRequest_policyEngineId, *v.PolicyEngineId)
+	}
+	if v.PolicyId != nil {
+		s.WriteString(schemas.DeletePolicyRequest_policyId, *v.PolicyId)
+	}
 }
 
 type DeletePolicyOutput struct {
@@ -114,13 +131,94 @@ type DeletePolicyOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeletePolicyOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeletePolicyResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeletePolicyOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.DeletePolicyResponse_createdAt, *v.CreatedAt)
+	}
+	serializePolicyDefinition(s, schemas.DeletePolicyResponse_definition, v.Definition)
+	if v.Description != nil {
+		s.WriteString(schemas.DeletePolicyResponse_description, *v.Description)
+	}
+	if v.EnforcementMode != "" {
+		s.WriteString(schemas.DeletePolicyResponse_enforcementMode, string(v.EnforcementMode))
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.DeletePolicyResponse_name, *v.Name)
+	}
+	if v.PolicyArn != nil {
+		s.WriteString(schemas.DeletePolicyResponse_policyArn, *v.PolicyArn)
+	}
+	if v.PolicyEngineId != nil {
+		s.WriteString(schemas.DeletePolicyResponse_policyEngineId, *v.PolicyEngineId)
+	}
+	if v.PolicyId != nil {
+		s.WriteString(schemas.DeletePolicyResponse_policyId, *v.PolicyId)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.DeletePolicyResponse_status, string(v.Status))
+	}
+	serializePolicyStatusReasons(s, schemas.DeletePolicyResponse_statusReasons, v.StatusReasons)
+	if v.UpdatedAt != nil {
+		s.WriteTime(schemas.DeletePolicyResponse_updatedAt, *v.UpdatedAt)
+	}
+}
+func (v *DeletePolicyOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeletePolicyResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeletePolicyResponse_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.DeletePolicyResponse_createdAt, v.CreatedAt)
+		case schemas.DeletePolicyResponse_definition:
+			return deserializePolicyDefinition(d, schemas.DeletePolicyResponse_definition, &v.Definition)
+		case schemas.DeletePolicyResponse_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.DeletePolicyResponse_description, v.Description)
+		case schemas.DeletePolicyResponse_enforcementMode:
+			var ev string
+			if err := d.ReadString(schemas.DeletePolicyResponse_enforcementMode, &ev); err != nil {
+				return err
+			}
+			v.EnforcementMode = types.EnforcementMode(ev)
+			return nil
+		case schemas.DeletePolicyResponse_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.DeletePolicyResponse_name, v.Name)
+		case schemas.DeletePolicyResponse_policyArn:
+			v.PolicyArn = new(string)
+			return d.ReadString(schemas.DeletePolicyResponse_policyArn, v.PolicyArn)
+		case schemas.DeletePolicyResponse_policyEngineId:
+			v.PolicyEngineId = new(string)
+			return d.ReadString(schemas.DeletePolicyResponse_policyEngineId, v.PolicyEngineId)
+		case schemas.DeletePolicyResponse_policyId:
+			v.PolicyId = new(string)
+			return d.ReadString(schemas.DeletePolicyResponse_policyId, v.PolicyId)
+		case schemas.DeletePolicyResponse_status:
+			var ev string
+			if err := d.ReadString(schemas.DeletePolicyResponse_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.PolicyStatus(ev)
+			return nil
+		case schemas.DeletePolicyResponse_statusReasons:
+			return deserializePolicyStatusReasons(d, schemas.DeletePolicyResponse_statusReasons, &v.StatusReasons)
+		case schemas.DeletePolicyResponse_updatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.DeletePolicyResponse_updatedAt, v.UpdatedAt)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeletePolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeletePolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeletePolicy, schemas.DeletePolicyRequest, schemas.DeletePolicyResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeletePolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeletePolicy, schemas.DeletePolicyRequest, schemas.DeletePolicyResponse), output: &DeletePolicyOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

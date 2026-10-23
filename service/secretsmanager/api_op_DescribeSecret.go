@@ -4,7 +4,9 @@ package secretsmanager
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/secretsmanager/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/secretsmanager/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -50,6 +52,18 @@ type DescribeSecretInput struct {
 	SecretId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DescribeSecretInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeSecretRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeSecretInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SecretId != nil {
+		s.WriteString(schemas.DescribeSecretRequest_SecretId, *v.SecretId)
+	}
 }
 
 type DescribeSecretOutput struct {
@@ -195,13 +209,142 @@ type DescribeSecretOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeSecretOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeSecretResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeSecretOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ARN != nil {
+		s.WriteString(schemas.DescribeSecretResponse_ARN, *v.ARN)
+	}
+	if v.CreatedDate != nil {
+		s.WriteTime(schemas.DescribeSecretResponse_CreatedDate, *v.CreatedDate)
+	}
+	if v.DeletedDate != nil {
+		s.WriteTime(schemas.DescribeSecretResponse_DeletedDate, *v.DeletedDate)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.DescribeSecretResponse_Description, *v.Description)
+	}
+	serializeExternalSecretRotationMetadataType(s, schemas.DescribeSecretResponse_ExternalSecretRotationMetadata, v.ExternalSecretRotationMetadata)
+	if v.ExternalSecretRotationRoleArn != nil {
+		s.WriteString(schemas.DescribeSecretResponse_ExternalSecretRotationRoleArn, *v.ExternalSecretRotationRoleArn)
+	}
+	if v.KmsKeyId != nil {
+		s.WriteString(schemas.DescribeSecretResponse_KmsKeyId, *v.KmsKeyId)
+	}
+	if v.LastAccessedDate != nil {
+		s.WriteTime(schemas.DescribeSecretResponse_LastAccessedDate, *v.LastAccessedDate)
+	}
+	if v.LastChangedDate != nil {
+		s.WriteTime(schemas.DescribeSecretResponse_LastChangedDate, *v.LastChangedDate)
+	}
+	if v.LastRotatedDate != nil {
+		s.WriteTime(schemas.DescribeSecretResponse_LastRotatedDate, *v.LastRotatedDate)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.DescribeSecretResponse_Name, *v.Name)
+	}
+	if v.NextRotationDate != nil {
+		s.WriteTime(schemas.DescribeSecretResponse_NextRotationDate, *v.NextRotationDate)
+	}
+	if v.OwningService != nil {
+		s.WriteString(schemas.DescribeSecretResponse_OwningService, *v.OwningService)
+	}
+	if v.PrimaryRegion != nil {
+		s.WriteString(schemas.DescribeSecretResponse_PrimaryRegion, *v.PrimaryRegion)
+	}
+	serializeReplicationStatusListType(s, schemas.DescribeSecretResponse_ReplicationStatus, v.ReplicationStatus)
+	if v.RotationEnabled != nil {
+		s.WriteBool(schemas.DescribeSecretResponse_RotationEnabled, *v.RotationEnabled)
+	}
+	if v.RotationLambdaARN != nil {
+		s.WriteString(schemas.DescribeSecretResponse_RotationLambdaARN, *v.RotationLambdaARN)
+	}
+	if v.RotationRules != nil {
+		s.WriteStruct(schemas.DescribeSecretResponse_RotationRules)
+		v.RotationRules.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeTagListType(s, schemas.DescribeSecretResponse_Tags, v.Tags)
+	if v.Type != nil {
+		s.WriteString(schemas.DescribeSecretResponse_Type, *v.Type)
+	}
+	serializeSecretVersionsToStagesMapType(s, schemas.DescribeSecretResponse_VersionIdsToStages, v.VersionIdsToStages)
+}
+func (v *DescribeSecretOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeSecretResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeSecretResponse_ARN:
+			v.ARN = new(string)
+			return d.ReadString(schemas.DescribeSecretResponse_ARN, v.ARN)
+		case schemas.DescribeSecretResponse_CreatedDate:
+			v.CreatedDate = new(time.Time)
+			return d.ReadTime(schemas.DescribeSecretResponse_CreatedDate, v.CreatedDate)
+		case schemas.DescribeSecretResponse_DeletedDate:
+			v.DeletedDate = new(time.Time)
+			return d.ReadTime(schemas.DescribeSecretResponse_DeletedDate, v.DeletedDate)
+		case schemas.DescribeSecretResponse_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.DescribeSecretResponse_Description, v.Description)
+		case schemas.DescribeSecretResponse_ExternalSecretRotationMetadata:
+			return deserializeExternalSecretRotationMetadataType(d, schemas.DescribeSecretResponse_ExternalSecretRotationMetadata, &v.ExternalSecretRotationMetadata)
+		case schemas.DescribeSecretResponse_ExternalSecretRotationRoleArn:
+			v.ExternalSecretRotationRoleArn = new(string)
+			return d.ReadString(schemas.DescribeSecretResponse_ExternalSecretRotationRoleArn, v.ExternalSecretRotationRoleArn)
+		case schemas.DescribeSecretResponse_KmsKeyId:
+			v.KmsKeyId = new(string)
+			return d.ReadString(schemas.DescribeSecretResponse_KmsKeyId, v.KmsKeyId)
+		case schemas.DescribeSecretResponse_LastAccessedDate:
+			v.LastAccessedDate = new(time.Time)
+			return d.ReadTime(schemas.DescribeSecretResponse_LastAccessedDate, v.LastAccessedDate)
+		case schemas.DescribeSecretResponse_LastChangedDate:
+			v.LastChangedDate = new(time.Time)
+			return d.ReadTime(schemas.DescribeSecretResponse_LastChangedDate, v.LastChangedDate)
+		case schemas.DescribeSecretResponse_LastRotatedDate:
+			v.LastRotatedDate = new(time.Time)
+			return d.ReadTime(schemas.DescribeSecretResponse_LastRotatedDate, v.LastRotatedDate)
+		case schemas.DescribeSecretResponse_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.DescribeSecretResponse_Name, v.Name)
+		case schemas.DescribeSecretResponse_NextRotationDate:
+			v.NextRotationDate = new(time.Time)
+			return d.ReadTime(schemas.DescribeSecretResponse_NextRotationDate, v.NextRotationDate)
+		case schemas.DescribeSecretResponse_OwningService:
+			v.OwningService = new(string)
+			return d.ReadString(schemas.DescribeSecretResponse_OwningService, v.OwningService)
+		case schemas.DescribeSecretResponse_PrimaryRegion:
+			v.PrimaryRegion = new(string)
+			return d.ReadString(schemas.DescribeSecretResponse_PrimaryRegion, v.PrimaryRegion)
+		case schemas.DescribeSecretResponse_ReplicationStatus:
+			return deserializeReplicationStatusListType(d, schemas.DescribeSecretResponse_ReplicationStatus, &v.ReplicationStatus)
+		case schemas.DescribeSecretResponse_RotationEnabled:
+			v.RotationEnabled = new(bool)
+			return d.ReadBool(schemas.DescribeSecretResponse_RotationEnabled, v.RotationEnabled)
+		case schemas.DescribeSecretResponse_RotationLambdaARN:
+			v.RotationLambdaARN = new(string)
+			return d.ReadString(schemas.DescribeSecretResponse_RotationLambdaARN, v.RotationLambdaARN)
+		case schemas.DescribeSecretResponse_RotationRules:
+			v.RotationRules = &types.RotationRulesType{}
+			return v.RotationRules.Deserialize(d)
+		case schemas.DescribeSecretResponse_Tags:
+			return deserializeTagListType(d, schemas.DescribeSecretResponse_Tags, &v.Tags)
+		case schemas.DescribeSecretResponse_Type:
+			v.Type = new(string)
+			return d.ReadString(schemas.DescribeSecretResponse_Type, v.Type)
+		case schemas.DescribeSecretResponse_VersionIdsToStages:
+			return deserializeSecretVersionsToStagesMapType(d, schemas.DescribeSecretResponse_VersionIdsToStages, &v.VersionIdsToStages)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeSecretMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeSecret{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeSecret, schemas.DescribeSecretRequest, schemas.DescribeSecretResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeSecret{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeSecret, schemas.DescribeSecretRequest, schemas.DescribeSecretResponse), output: &DescribeSecretOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

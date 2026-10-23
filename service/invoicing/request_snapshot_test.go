@@ -339,6 +339,10 @@ func TestCheckRequestSnapshot_CreateProcurementPortalPreference(t *testing.T) {
 			EinvoiceDeliveryActivationDate: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 		},
 		PurchaseOrderRetrievalEnabled: ptr.Bool(true),
+		MarketplacePunchOutEnabled:    ptr.Bool(true),
+		MarketplacePunchOutPreference: &types.MarketplacePunchOutPreference{
+			ApprovalRequestRedirectUrl: ptr.String("__ApprovalRequestRedirectUrl__"),
+		},
 		Contacts: []types.Contact{
 			{
 				Name:  ptr.String("__Name__"),
@@ -641,6 +645,63 @@ func TestCheckRequestSnapshot_ListProcurementPortalPreferences(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_ListProcurementPortals(t *testing.T) {
+	input := &ListProcurementPortalsInput{
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListProcurementPortals(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListProcurementPortals"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_ListProcurementPortalSuppliers(t *testing.T) {
+	input := &ListProcurementPortalSuppliersInput{
+		PortalIdentifier: ptr.String("__PortalIdentifier__"),
+		NextToken:        ptr.String("__NextToken__"),
+		MaxResults:       ptr.Int32(1),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListProcurementPortalSuppliers(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListProcurementPortalSuppliers"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_ListTagsForResource(t *testing.T) {
 	input := &ListTagsForResourceInput{
 		ResourceArn: ptr.String("__ResourceArn__"),
@@ -716,6 +777,10 @@ func TestCheckRequestSnapshot_PutProcurementPortalPreference(t *testing.T) {
 			EinvoiceDeliveryActivationDate: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 		},
 		PurchaseOrderRetrievalEnabled: ptr.Bool(true),
+		MarketplacePunchOutEnabled:    ptr.Bool(true),
+		MarketplacePunchOutPreference: &types.MarketplacePunchOutPreference{
+			ApprovalRequestRedirectUrl: ptr.String("__ApprovalRequestRedirectUrl__"),
+		},
 		Contacts: []types.Contact{
 			{
 				Name:  ptr.String("__Name__"),
@@ -1080,6 +1145,10 @@ func TestUpdateRequestSnapshot_CreateProcurementPortalPreference(t *testing.T) {
 			EinvoiceDeliveryActivationDate: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 		},
 		PurchaseOrderRetrievalEnabled: ptr.Bool(true),
+		MarketplacePunchOutEnabled:    ptr.Bool(true),
+		MarketplacePunchOutPreference: &types.MarketplacePunchOutPreference{
+			ApprovalRequestRedirectUrl: ptr.String("__ApprovalRequestRedirectUrl__"),
+		},
 		Contacts: []types.Contact{
 			{
 				Name:  ptr.String("__Name__"),
@@ -1382,6 +1451,63 @@ func TestUpdateRequestSnapshot_ListProcurementPortalPreferences(t *testing.T) {
 	}
 }
 
+func TestUpdateRequestSnapshot_ListProcurementPortals(t *testing.T) {
+	input := &ListProcurementPortalsInput{
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListProcurementPortals(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListProcurementPortals"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_ListProcurementPortalSuppliers(t *testing.T) {
+	input := &ListProcurementPortalSuppliersInput{
+		PortalIdentifier: ptr.String("__PortalIdentifier__"),
+		NextToken:        ptr.String("__NextToken__"),
+		MaxResults:       ptr.Int32(1),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListProcurementPortalSuppliers(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListProcurementPortalSuppliers"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_ListTagsForResource(t *testing.T) {
 	input := &ListTagsForResourceInput{
 		ResourceArn: ptr.String("__ResourceArn__"),
@@ -1457,6 +1583,10 @@ func TestUpdateRequestSnapshot_PutProcurementPortalPreference(t *testing.T) {
 			EinvoiceDeliveryActivationDate: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 		},
 		PurchaseOrderRetrievalEnabled: ptr.Bool(true),
+		MarketplacePunchOutEnabled:    ptr.Bool(true),
+		MarketplacePunchOutPreference: &types.MarketplacePunchOutPreference{
+			ApprovalRequestRedirectUrl: ptr.String("__ApprovalRequestRedirectUrl__"),
+		},
 		Contacts: []types.Contact{
 			{
 				Name:  ptr.String("__Name__"),

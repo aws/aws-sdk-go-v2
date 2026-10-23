@@ -4,6 +4,8 @@ package quicksight
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/quicksight/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -43,6 +45,24 @@ type DeleteDashboardInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteDashboardInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteDashboardRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteDashboardInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AwsAccountId != nil {
+		s.WriteString(schemas.DeleteDashboardRequest_AwsAccountId, *v.AwsAccountId)
+	}
+	if v.DashboardId != nil {
+		s.WriteString(schemas.DeleteDashboardRequest_DashboardId, *v.DashboardId)
+	}
+	if v.VersionNumber != nil {
+		s.WriteInt64(schemas.DeleteDashboardRequest_VersionNumber, *v.VersionNumber)
+	}
+}
+
 type DeleteDashboardOutput struct {
 
 	// The Secure Socket Layer (SSL) properties that apply for the resource.
@@ -63,13 +83,49 @@ type DeleteDashboardOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteDashboardOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteDashboardResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteDashboardOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.DeleteDashboardResponse_Arn, *v.Arn)
+	}
+	if v.DashboardId != nil {
+		s.WriteString(schemas.DeleteDashboardResponse_DashboardId, *v.DashboardId)
+	}
+	if v.RequestId != nil {
+		s.WriteString(schemas.DeleteDashboardResponse_RequestId, *v.RequestId)
+	}
+	if v.Status != 0 {
+		s.WriteInt32(schemas.DeleteDashboardResponse_Status, v.Status)
+	}
+}
+func (v *DeleteDashboardOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteDashboardResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteDashboardResponse_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.DeleteDashboardResponse_Arn, v.Arn)
+		case schemas.DeleteDashboardResponse_DashboardId:
+			v.DashboardId = new(string)
+			return d.ReadString(schemas.DeleteDashboardResponse_DashboardId, v.DashboardId)
+		case schemas.DeleteDashboardResponse_RequestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.DeleteDashboardResponse_RequestId, v.RequestId)
+		case schemas.DeleteDashboardResponse_Status:
+			return d.ReadInt32(schemas.DeleteDashboardResponse_Status, &v.Status)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteDashboardMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteDashboard{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteDashboard, schemas.DeleteDashboardRequest, schemas.DeleteDashboardResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteDashboard{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteDashboard, schemas.DeleteDashboardRequest, schemas.DeleteDashboardResponse), output: &DeleteDashboardOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

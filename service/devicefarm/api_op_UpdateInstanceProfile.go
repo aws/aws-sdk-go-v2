@@ -4,7 +4,9 @@ package devicefarm
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/devicefarm/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/devicefarm/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -54,6 +56,31 @@ type UpdateInstanceProfileInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateInstanceProfileInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateInstanceProfileRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateInstanceProfileInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.UpdateInstanceProfileRequest_arn, *v.Arn)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateInstanceProfileRequest_description, *v.Description)
+	}
+	serializePackageIds(s, schemas.UpdateInstanceProfileRequest_excludeAppPackagesFromCleanup, v.ExcludeAppPackagesFromCleanup)
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateInstanceProfileRequest_name, *v.Name)
+	}
+	if v.PackageCleanup != nil {
+		s.WriteBool(schemas.UpdateInstanceProfileRequest_packageCleanup, *v.PackageCleanup)
+	}
+	if v.RebootAfterUse != nil {
+		s.WriteBool(schemas.UpdateInstanceProfileRequest_rebootAfterUse, *v.RebootAfterUse)
+	}
+}
+
 type UpdateInstanceProfileOutput struct {
 
 	// An object that contains information about your instance profile.
@@ -65,13 +92,34 @@ type UpdateInstanceProfileOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateInstanceProfileOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateInstanceProfileResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateInstanceProfileOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InstanceProfile != nil {
+		s.WriteStruct(schemas.UpdateInstanceProfileResult_instanceProfile)
+		v.InstanceProfile.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateInstanceProfileOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateInstanceProfileResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateInstanceProfileResult_instanceProfile:
+			v.InstanceProfile = &types.InstanceProfile{}
+			return v.InstanceProfile.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateInstanceProfileMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateInstanceProfile{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateInstanceProfile, schemas.UpdateInstanceProfileRequest, schemas.UpdateInstanceProfileResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateInstanceProfile{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateInstanceProfile, schemas.UpdateInstanceProfileRequest, schemas.UpdateInstanceProfileResult), output: &UpdateInstanceProfileOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

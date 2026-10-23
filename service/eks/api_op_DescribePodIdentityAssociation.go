@@ -4,7 +4,9 @@ package eks
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/eks/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/eks/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -44,6 +46,21 @@ type DescribePodIdentityAssociationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribePodIdentityAssociationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribePodIdentityAssociationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribePodIdentityAssociationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AssociationId != nil {
+		s.WriteString(schemas.DescribePodIdentityAssociationRequest_associationId, *v.AssociationId)
+	}
+	if v.ClusterName != nil {
+		s.WriteString(schemas.DescribePodIdentityAssociationRequest_clusterName, *v.ClusterName)
+	}
+}
+
 type DescribePodIdentityAssociationOutput struct {
 
 	// The full description of the EKS Pod Identity association.
@@ -55,13 +72,34 @@ type DescribePodIdentityAssociationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribePodIdentityAssociationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribePodIdentityAssociationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribePodIdentityAssociationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Association != nil {
+		s.WriteStruct(schemas.DescribePodIdentityAssociationResponse_association)
+		v.Association.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DescribePodIdentityAssociationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribePodIdentityAssociationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribePodIdentityAssociationResponse_association:
+			v.Association = &types.PodIdentityAssociation{}
+			return v.Association.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribePodIdentityAssociationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribePodIdentityAssociation{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribePodIdentityAssociation, schemas.DescribePodIdentityAssociationRequest, schemas.DescribePodIdentityAssociationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribePodIdentityAssociation{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribePodIdentityAssociation, schemas.DescribePodIdentityAssociationRequest, schemas.DescribePodIdentityAssociationResponse), output: &DescribePodIdentityAssociationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

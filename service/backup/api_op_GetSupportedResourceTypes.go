@@ -4,6 +4,8 @@ package backup
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/backup/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -25,6 +27,22 @@ func (c *Client) GetSupportedResourceTypes(ctx context.Context, params *GetSuppo
 
 type GetSupportedResourceTypesInput struct {
 	noSmithyDocumentSerde
+}
+
+func (v *GetSupportedResourceTypesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetSupportedResourceTypesInput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *GetSupportedResourceTypesInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
 }
 
 type GetSupportedResourceTypesOutput struct {
@@ -73,13 +91,29 @@ type GetSupportedResourceTypesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetSupportedResourceTypesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetSupportedResourceTypesOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetSupportedResourceTypesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeResourceTypes(s, schemas.GetSupportedResourceTypesOutput_ResourceTypes, v.ResourceTypes)
+}
+func (v *GetSupportedResourceTypesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetSupportedResourceTypesOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetSupportedResourceTypesOutput_ResourceTypes:
+			return deserializeResourceTypes(d, schemas.GetSupportedResourceTypesOutput_ResourceTypes, &v.ResourceTypes)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetSupportedResourceTypesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetSupportedResourceTypes{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetSupportedResourceTypes, nil, schemas.GetSupportedResourceTypesOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetSupportedResourceTypes{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetSupportedResourceTypes, nil, schemas.GetSupportedResourceTypesOutput), output: &GetSupportedResourceTypesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

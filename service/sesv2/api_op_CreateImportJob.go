@@ -4,7 +4,9 @@ package sesv2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/sesv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sesv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -41,6 +43,25 @@ type CreateImportJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateImportJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateImportJobRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateImportJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ImportDataSource != nil {
+		s.WriteStruct(schemas.CreateImportJobRequest_ImportDataSource)
+		v.ImportDataSource.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ImportDestination != nil {
+		s.WriteStruct(schemas.CreateImportJobRequest_ImportDestination)
+		v.ImportDestination.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 // An HTTP 200 response if the request succeeds, or an error message if the
 // request fails.
 type CreateImportJobOutput struct {
@@ -54,13 +75,32 @@ type CreateImportJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateImportJobOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateImportJobResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateImportJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.JobId != nil {
+		s.WriteString(schemas.CreateImportJobResponse_JobId, *v.JobId)
+	}
+}
+func (v *CreateImportJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateImportJobResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateImportJobResponse_JobId:
+			v.JobId = new(string)
+			return d.ReadString(schemas.CreateImportJobResponse_JobId, v.JobId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateImportJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateImportJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateImportJob, schemas.CreateImportJobRequest, schemas.CreateImportJobResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateImportJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateImportJob, schemas.CreateImportJobRequest, schemas.CreateImportJobResponse), output: &CreateImportJobOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package databasemigrationservice
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/databasemigrationservice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/databasemigrationservice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -46,6 +48,21 @@ type CancelMetadataModelCreationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CancelMetadataModelCreationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CancelMetadataModelCreationMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CancelMetadataModelCreationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MigrationProjectIdentifier != nil {
+		s.WriteString(schemas.CancelMetadataModelCreationMessage_MigrationProjectIdentifier, *v.MigrationProjectIdentifier)
+	}
+	if v.RequestIdentifier != nil {
+		s.WriteString(schemas.CancelMetadataModelCreationMessage_RequestIdentifier, *v.RequestIdentifier)
+	}
+}
+
 type CancelMetadataModelCreationOutput struct {
 
 	// The metadata model creation request.
@@ -59,13 +76,34 @@ type CancelMetadataModelCreationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CancelMetadataModelCreationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CancelMetadataModelCreationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CancelMetadataModelCreationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Request != nil {
+		s.WriteStruct(schemas.CancelMetadataModelCreationResponse_Request)
+		v.Request.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CancelMetadataModelCreationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CancelMetadataModelCreationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CancelMetadataModelCreationResponse_Request:
+			v.Request = &types.SchemaConversionRequest{}
+			return v.Request.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCancelMetadataModelCreationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCancelMetadataModelCreation{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CancelMetadataModelCreation, schemas.CancelMetadataModelCreationMessage, schemas.CancelMetadataModelCreationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCancelMetadataModelCreation{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CancelMetadataModelCreation, schemas.CancelMetadataModelCreationMessage, schemas.CancelMetadataModelCreationResponse), output: &CancelMetadataModelCreationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

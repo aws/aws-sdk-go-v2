@@ -4,7 +4,9 @@ package firehose
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/firehose/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/firehose/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -82,6 +84,23 @@ type StartDeliveryStreamEncryptionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartDeliveryStreamEncryptionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartDeliveryStreamEncryptionInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartDeliveryStreamEncryptionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DeliveryStreamEncryptionConfigurationInput != nil {
+		s.WriteStruct(schemas.StartDeliveryStreamEncryptionInput_DeliveryStreamEncryptionConfigurationInput)
+		v.DeliveryStreamEncryptionConfigurationInput.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DeliveryStreamName != nil {
+		s.WriteString(schemas.StartDeliveryStreamEncryptionInput_DeliveryStreamName, *v.DeliveryStreamName)
+	}
+}
+
 type StartDeliveryStreamEncryptionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -89,13 +108,26 @@ type StartDeliveryStreamEncryptionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartDeliveryStreamEncryptionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartDeliveryStreamEncryptionOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartDeliveryStreamEncryptionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *StartDeliveryStreamEncryptionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartDeliveryStreamEncryptionOutput, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartDeliveryStreamEncryptionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStartDeliveryStreamEncryption{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartDeliveryStreamEncryption, schemas.StartDeliveryStreamEncryptionInput, schemas.StartDeliveryStreamEncryptionOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpStartDeliveryStreamEncryption{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartDeliveryStreamEncryption, schemas.StartDeliveryStreamEncryptionInput, schemas.StartDeliveryStreamEncryptionOutput), output: &StartDeliveryStreamEncryptionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

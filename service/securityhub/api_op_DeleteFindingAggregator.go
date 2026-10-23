@@ -4,6 +4,8 @@ package securityhub
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/securityhub/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -43,6 +45,18 @@ type DeleteFindingAggregatorInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteFindingAggregatorInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteFindingAggregatorRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteFindingAggregatorInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FindingAggregatorArn != nil {
+		s.WriteString(schemas.DeleteFindingAggregatorRequest_FindingAggregatorArn, *v.FindingAggregatorArn)
+	}
+}
+
 type DeleteFindingAggregatorOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -50,13 +64,26 @@ type DeleteFindingAggregatorOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteFindingAggregatorOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteFindingAggregatorResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteFindingAggregatorOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteFindingAggregatorOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteFindingAggregatorResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteFindingAggregatorMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteFindingAggregator{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteFindingAggregator, schemas.DeleteFindingAggregatorRequest, schemas.DeleteFindingAggregatorResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteFindingAggregator{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteFindingAggregator, schemas.DeleteFindingAggregatorRequest, schemas.DeleteFindingAggregatorResponse), output: &DeleteFindingAggregatorOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

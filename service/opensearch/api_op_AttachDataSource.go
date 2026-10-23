@@ -4,7 +4,9 @@ package opensearch
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/opensearch/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/opensearch/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -64,6 +66,32 @@ type AttachDataSourceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AttachDataSourceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AttachDataSourceRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AttachDataSourceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.AttachDataSourceRequest_clientToken, *v.ClientToken)
+	}
+	if v.DataSourceArn != nil {
+		s.WriteString(schemas.AttachDataSourceRequest_dataSourceArn, *v.DataSourceArn)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.AttachDataSourceRequest_id, *v.Id)
+	}
+	if v.WorkspaceConfiguration != nil {
+		s.WriteStruct(schemas.AttachDataSourceRequest_workspaceConfiguration)
+		v.WorkspaceConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.WorkspaceId != nil {
+		s.WriteString(schemas.AttachDataSourceRequest_workspaceId, *v.WorkspaceId)
+	}
+}
+
 type AttachDataSourceOutput struct {
 
 	// The Amazon Resource Name (ARN) of the domain. See [Identifiers for IAM Entities] in Using Amazon Web Services
@@ -95,13 +123,60 @@ type AttachDataSourceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AttachDataSourceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AttachDataSourceResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AttachDataSourceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.AttachDataSourceResponse_arn, *v.Arn)
+	}
+	if v.AttachmentId != nil {
+		s.WriteString(schemas.AttachDataSourceResponse_attachmentId, *v.AttachmentId)
+	}
+	if v.DataSourceArn != nil {
+		s.WriteString(schemas.AttachDataSourceResponse_dataSourceArn, *v.DataSourceArn)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.AttachDataSourceResponse_id, *v.Id)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.AttachDataSourceResponse_status, string(v.Status))
+	}
+}
+func (v *AttachDataSourceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AttachDataSourceResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AttachDataSourceResponse_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.AttachDataSourceResponse_arn, v.Arn)
+		case schemas.AttachDataSourceResponse_attachmentId:
+			v.AttachmentId = new(string)
+			return d.ReadString(schemas.AttachDataSourceResponse_attachmentId, v.AttachmentId)
+		case schemas.AttachDataSourceResponse_dataSourceArn:
+			v.DataSourceArn = new(string)
+			return d.ReadString(schemas.AttachDataSourceResponse_dataSourceArn, v.DataSourceArn)
+		case schemas.AttachDataSourceResponse_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.AttachDataSourceResponse_id, v.Id)
+		case schemas.AttachDataSourceResponse_status:
+			var ev string
+			if err := d.ReadString(schemas.AttachDataSourceResponse_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.DataSourceAttachmentStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationAttachDataSourceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpAttachDataSource{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AttachDataSource, schemas.AttachDataSourceRequest, schemas.AttachDataSourceResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpAttachDataSource{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AttachDataSource, schemas.AttachDataSourceRequest, schemas.AttachDataSourceResponse), output: &AttachDataSourceOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

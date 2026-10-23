@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"assessmentId":"__AssessmentId__","assessmentStatus":"NOT_STARTED","serviceArn":"__ServiceArn__","startedAt":946684800}

@@ -5,7 +5,9 @@ package backup
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/backup/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/backup/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,21 @@ type ListReportPlansInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListReportPlansInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListReportPlansInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListReportPlansInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListReportPlansInput_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListReportPlansInput_NextToken, *v.NextToken)
+	}
+}
+
 type ListReportPlansOutput struct {
 
 	// An identifier that was returned from the previous call to this operation, which
@@ -57,13 +74,35 @@ type ListReportPlansOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListReportPlansOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListReportPlansOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListReportPlansOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListReportPlansOutput_NextToken, *v.NextToken)
+	}
+	serializeReportPlanList(s, schemas.ListReportPlansOutput_ReportPlans, v.ReportPlans)
+}
+func (v *ListReportPlansOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListReportPlansOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListReportPlansOutput_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListReportPlansOutput_NextToken, v.NextToken)
+		case schemas.ListReportPlansOutput_ReportPlans:
+			return deserializeReportPlanList(d, schemas.ListReportPlansOutput_ReportPlans, &v.ReportPlans)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListReportPlansMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListReportPlans{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListReportPlans, schemas.ListReportPlansInput, schemas.ListReportPlansOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListReportPlans{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListReportPlans, schemas.ListReportPlansInput, schemas.ListReportPlansOutput), output: &ListReportPlansOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

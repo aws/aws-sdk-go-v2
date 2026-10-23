@@ -123,7 +123,7 @@ var AWSMigrationHub = smithy.NewServiceSchema(_AWSMigrationHub, "2017-05-31")
 var AccessDeniedException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.migrationhub",
 	Name:      "AccessDeniedException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var AccessDeniedException_Message *smithy.Schema
 
 var _ApplicationId = smithy.NewSchema(smithy.ShapeID{
@@ -219,7 +219,7 @@ var _DryRun = smithy.NewSchema(smithy.ShapeID{
 var DryRunOperation = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.migrationhub",
 	Name:      "DryRunOperation",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var DryRunOperation_Message *smithy.Schema
 
 var _ErrorMessage = smithy.NewSchema(smithy.ShapeID{
@@ -230,19 +230,19 @@ var _ErrorMessage = smithy.NewSchema(smithy.ShapeID{
 var HomeRegionNotSetException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.migrationhub",
 	Name:      "HomeRegionNotSetException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var HomeRegionNotSetException_Message *smithy.Schema
 
 var InternalServerError = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.migrationhub",
 	Name:      "InternalServerError",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"})
 var InternalServerError_Message *smithy.Schema
 
 var InvalidInputException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.migrationhub",
 	Name:      "InvalidInputException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var InvalidInputException_Message *smithy.Schema
 
 var _LatestResourceAttributeList = smithy.NewSchema(smithy.ShapeID{
@@ -336,7 +336,7 @@ var _NextUpdateSeconds = smithy.NewSchema(smithy.ShapeID{
 var PolicyErrorException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.migrationhub",
 	Name:      "PolicyErrorException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var PolicyErrorException_Message *smithy.Schema
 
 var _ProgressPercent = smithy.NewSchema(smithy.ShapeID{
@@ -412,7 +412,7 @@ var _ResourceName = smithy.NewSchema(smithy.ShapeID{
 var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.migrationhub",
 	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var ResourceNotFoundException_Message *smithy.Schema
 
 var _RetryAfterSeconds = smithy.NewSchema(smithy.ShapeID{
@@ -423,7 +423,7 @@ var _RetryAfterSeconds = smithy.NewSchema(smithy.ShapeID{
 var ServiceUnavailableException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.migrationhub",
 	Name:      "ServiceUnavailableException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"})
 var ServiceUnavailableException_Message *smithy.Schema
 
 var SourceResource = smithy.NewSchema(smithy.ShapeID{
@@ -482,7 +482,8 @@ var Task_ProgressPercent *smithy.Schema
 var ThrottlingException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.migrationhub",
 	Name:      "ThrottlingException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.HTTPError{Code: 429})
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 429})
 var ThrottlingException_Message *smithy.Schema
 
 var ThrottlingException_RetryAfterSeconds *smithy.Schema
@@ -495,7 +496,7 @@ var _Token = smithy.NewSchema(smithy.ShapeID{
 var UnauthorizedOperation = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.migrationhub",
 	Name:      "UnauthorizedOperation",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var UnauthorizedOperation_Message *smithy.Schema
 
 var _UpdateDateTime = smithy.NewSchema(smithy.ShapeID{

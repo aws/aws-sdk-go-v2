@@ -5,7 +5,9 @@ package lookoutequipment
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/lookoutequipment/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lookoutequipment/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -75,6 +77,33 @@ type CreateRetrainingSchedulerInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateRetrainingSchedulerInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateRetrainingSchedulerRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateRetrainingSchedulerInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateRetrainingSchedulerRequest_ClientToken, *v.ClientToken)
+	}
+	if v.LookbackWindow != nil {
+		s.WriteString(schemas.CreateRetrainingSchedulerRequest_LookbackWindow, *v.LookbackWindow)
+	}
+	if v.ModelName != nil {
+		s.WriteString(schemas.CreateRetrainingSchedulerRequest_ModelName, *v.ModelName)
+	}
+	if v.PromoteMode != "" {
+		s.WriteString(schemas.CreateRetrainingSchedulerRequest_PromoteMode, string(v.PromoteMode))
+	}
+	if v.RetrainingFrequency != nil {
+		s.WriteString(schemas.CreateRetrainingSchedulerRequest_RetrainingFrequency, *v.RetrainingFrequency)
+	}
+	if v.RetrainingStartDate != nil {
+		s.WriteTime(schemas.CreateRetrainingSchedulerRequest_RetrainingStartDate, *v.RetrainingStartDate)
+	}
+}
+
 type CreateRetrainingSchedulerOutput struct {
 
 	// The ARN of the model that you added the retraining scheduler to.
@@ -92,13 +121,48 @@ type CreateRetrainingSchedulerOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateRetrainingSchedulerOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateRetrainingSchedulerResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateRetrainingSchedulerOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ModelArn != nil {
+		s.WriteString(schemas.CreateRetrainingSchedulerResponse_ModelArn, *v.ModelArn)
+	}
+	if v.ModelName != nil {
+		s.WriteString(schemas.CreateRetrainingSchedulerResponse_ModelName, *v.ModelName)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.CreateRetrainingSchedulerResponse_Status, string(v.Status))
+	}
+}
+func (v *CreateRetrainingSchedulerOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateRetrainingSchedulerResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateRetrainingSchedulerResponse_ModelArn:
+			v.ModelArn = new(string)
+			return d.ReadString(schemas.CreateRetrainingSchedulerResponse_ModelArn, v.ModelArn)
+		case schemas.CreateRetrainingSchedulerResponse_ModelName:
+			v.ModelName = new(string)
+			return d.ReadString(schemas.CreateRetrainingSchedulerResponse_ModelName, v.ModelName)
+		case schemas.CreateRetrainingSchedulerResponse_Status:
+			var ev string
+			if err := d.ReadString(schemas.CreateRetrainingSchedulerResponse_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.RetrainingSchedulerStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateRetrainingSchedulerMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpCreateRetrainingScheduler{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateRetrainingScheduler, schemas.CreateRetrainingSchedulerRequest, schemas.CreateRetrainingSchedulerResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpCreateRetrainingScheduler{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateRetrainingScheduler, schemas.CreateRetrainingSchedulerRequest, schemas.CreateRetrainingSchedulerResponse), output: &CreateRetrainingSchedulerOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

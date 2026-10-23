@@ -433,6 +433,11 @@ func awsRestjson1_serializeOpDocumentCreateContainerRecipeInput(v *CreateContain
 		ok.String(*v.DockerfileTemplateUri)
 	}
 
+	if v.DryRun {
+		ok := object.Key("dryRun")
+		ok.Boolean(v.DryRun)
+	}
+
 	if v.ImageOsVersionOverride != nil {
 		ok := object.Key("imageOsVersionOverride")
 		ok.String(*v.ImageOsVersionOverride)
@@ -580,6 +585,11 @@ func awsRestjson1_serializeOpDocumentCreateDistributionConfigurationInput(v *Cre
 		if err := awsRestjson1_serializeDocumentDistributionList(v.Distributions, ok); err != nil {
 			return err
 		}
+	}
+
+	if v.DryRun {
+		ok := object.Key("dryRun")
+		ok.Boolean(v.DryRun)
 	}
 
 	if v.Name != nil {
@@ -836,6 +846,11 @@ func awsRestjson1_serializeOpDocumentCreateImagePipelineInput(v *CreateImagePipe
 		ok.String(*v.DistributionConfigurationArn)
 	}
 
+	if v.DryRun {
+		ok := object.Key("dryRun")
+		ok.Boolean(v.DryRun)
+	}
+
 	if v.EnhancedImageMetadataEnabled != nil {
 		ok := object.Key("enhancedImageMetadataEnabled")
 		ok.Boolean(*v.EnhancedImageMetadataEnabled)
@@ -1036,6 +1051,11 @@ func awsRestjson1_serializeOpDocumentCreateImageRecipeInput(v *CreateImageRecipe
 		ok.String(*v.Description)
 	}
 
+	if v.DryRun {
+		ok := object.Key("dryRun")
+		ok.Boolean(v.DryRun)
+	}
+
 	if v.Name != nil {
 		ok := object.Key("name")
 		ok.String(*v.Name)
@@ -1147,6 +1167,11 @@ func awsRestjson1_serializeOpDocumentCreateInfrastructureConfigurationInput(v *C
 	if v.Description != nil {
 		ok := object.Key("description")
 		ok.String(*v.Description)
+	}
+
+	if v.DryRun {
+		ok := object.Key("dryRun")
+		ok.Boolean(v.DryRun)
 	}
 
 	if v.InstanceMetadataOptions != nil {
@@ -1312,6 +1337,11 @@ func awsRestjson1_serializeOpDocumentCreateLifecyclePolicyInput(v *CreateLifecyc
 	if v.Description != nil {
 		ok := object.Key("description")
 		ok.String(*v.Description)
+	}
+
+	if v.DryRun {
+		ok := object.Key("dryRun")
+		ok.Boolean(v.DryRun)
 	}
 
 	if v.ExecutionRole != nil {

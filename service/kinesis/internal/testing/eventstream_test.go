@@ -24,41 +24,42 @@ func removeValidationMiddleware(stack *middleware.Stack) error {
 }
 
 func TestSubscribeToShard_Read(t *testing.T) {
-	cfg, cleanupFn, err := eventstreamtesting.SetupEventStream(t,
-		eventstreamtesting.ServeEventStream{
-			T: t,
-			Events: []eventstream.Message{
-				{
-					Headers: eventstream.Headers{
-						eventstreamtesting.EventMessageTypeHeader,
-						{
-							Name:  eventstreamapi.EventTypeHeader,
-							Value: eventstream.StringValue("initial-response"),
-						},
-					},
-					Payload: []byte(`{}`),
-				},
-				{
-					Headers: eventstream.Headers{
-						eventstreamtesting.EventMessageTypeHeader,
-						{
-							Name:  eventstreamapi.EventTypeHeader,
-							Value: eventstream.StringValue("SubscribeToShardEvent"),
-						},
-					},
-					Payload: []byte(`{
-  "ContinuationSequenceNumber": "01234"
-}`),
-				},
-			},
-		},
-	)
+	stream := &eventstreamtesting.ServeEventStream{T: t}
+	cfg, cleanupFn, err := eventstreamtesting.SetupEventStream(t, stream)
 	if err != nil {
 		t.Fatalf("expect no error, %v", err)
 	}
 	defer cleanupFn()
 
 	svc := kinesis.NewFromConfig(cfg)
+
+	// Encode payloads in whatever wire format the client's resolved protocol decodes
+	f := clientWireFormat(svc)
+	stream.Events = []eventstream.Message{
+		{
+			Headers: eventstream.Headers{
+				eventstreamtesting.EventMessageTypeHeader,
+				{
+					Name:  eventstreamapi.EventTypeHeader,
+					Value: eventstream.StringValue("initial-response"),
+				},
+			},
+			Payload: emptyPayload(f),
+		},
+		{
+			Headers: eventstream.Headers{
+				eventstreamtesting.EventMessageTypeHeader,
+				{
+					Name:  eventstreamapi.EventTypeHeader,
+					Value: eventstream.StringValue("SubscribeToShardEvent"),
+				},
+			},
+			Payload: objectPayload(f, map[string]string{
+				"ContinuationSequenceNumber": "01234",
+			}),
+		},
+	}
+
 	resp, err := svc.SubscribeToShard(context.Background(),
 		&kinesis.SubscribeToShardInput{}, func(options *kinesis.Options) {
 			options.APIOptions = append(options.APIOptions, removeValidationMiddleware)
@@ -90,41 +91,41 @@ func TestSubscribeToShard_Read(t *testing.T) {
 }
 
 func TestSubscribeToShard_ReadClose(t *testing.T) {
-	sess, cleanupFn, err := eventstreamtesting.SetupEventStream(t,
-		eventstreamtesting.ServeEventStream{
-			T: t,
-			Events: []eventstream.Message{
-				{
-					Headers: eventstream.Headers{
-						eventstreamtesting.EventMessageTypeHeader,
-						{
-							Name:  eventstreamapi.EventTypeHeader,
-							Value: eventstream.StringValue("initial-response"),
-						},
-					},
-					Payload: []byte(`{}`),
-				},
-				{
-					Headers: eventstream.Headers{
-						eventstreamtesting.EventMessageTypeHeader,
-						{
-							Name:  eventstreamapi.EventTypeHeader,
-							Value: eventstream.StringValue("SubscribeToShardEvent"),
-						},
-					},
-					Payload: []byte(`{
-  "ContinuationSequenceNumber": "01234"
-}`),
-				},
-			},
-		},
-	)
+	stream := &eventstreamtesting.ServeEventStream{T: t}
+	sess, cleanupFn, err := eventstreamtesting.SetupEventStream(t, stream)
 	if err != nil {
 		t.Fatalf("expect no error, %v", err)
 	}
 	defer cleanupFn()
 
 	svc := kinesis.NewFromConfig(sess)
+
+	f := clientWireFormat(svc)
+	stream.Events = []eventstream.Message{
+		{
+			Headers: eventstream.Headers{
+				eventstreamtesting.EventMessageTypeHeader,
+				{
+					Name:  eventstreamapi.EventTypeHeader,
+					Value: eventstream.StringValue("initial-response"),
+				},
+			},
+			Payload: emptyPayload(f),
+		},
+		{
+			Headers: eventstream.Headers{
+				eventstreamtesting.EventMessageTypeHeader,
+				{
+					Name:  eventstreamapi.EventTypeHeader,
+					Value: eventstream.StringValue("SubscribeToShardEvent"),
+				},
+			},
+			Payload: objectPayload(f, map[string]string{
+				"ContinuationSequenceNumber": "01234",
+			}),
+		},
+	}
+
 	resp, err := svc.SubscribeToShard(context.Background(), &kinesis.SubscribeToShardInput{}, func(options *kinesis.Options) {
 		options.APIOptions = append(options.APIOptions, removeValidationMiddleware)
 	})
@@ -151,51 +152,51 @@ func TestSubscribeToShard_ReadClose(t *testing.T) {
 }
 
 func TestSubscribeToShard_ReadUnknownEvent(t *testing.T) {
-	cfg, cleanupFn, err := eventstreamtesting.SetupEventStream(t,
-		eventstreamtesting.ServeEventStream{
-			T: t,
-			Events: []eventstream.Message{
-				{
-					Headers: eventstream.Headers{
-						eventstreamtesting.EventMessageTypeHeader,
-						{
-							Name:  eventstreamapi.EventTypeHeader,
-							Value: eventstream.StringValue("initial-response"),
-						},
-					},
-					Payload: []byte(`{}`),
-				},
-				{
-					Headers: eventstream.Headers{
-						eventstreamtesting.EventMessageTypeHeader,
-						{
-							Name:  eventstreamapi.EventTypeHeader,
-							Value: eventstream.StringValue("SubscribeToShardEvent"),
-						},
-					},
-					Payload: []byte(`{
-  "ContinuationSequenceNumber": "01234"
-}`),
-				},
-				{
-					Headers: eventstream.Headers{
-						eventstreamtesting.EventMessageTypeHeader,
-						{
-							Name:  eventstreamapi.EventTypeHeader,
-							Value: eventstream.StringValue("UnknownEventName"),
-						},
-					},
-					Payload: []byte(`{}`),
-				},
-			},
-		},
-	)
+	stream := &eventstreamtesting.ServeEventStream{T: t}
+	cfg, cleanupFn, err := eventstreamtesting.SetupEventStream(t, stream)
 	if err != nil {
 		t.Fatalf("expect no error, %v", err)
 	}
 	defer cleanupFn()
 
 	svc := kinesis.NewFromConfig(cfg)
+
+	f := clientWireFormat(svc)
+	stream.Events = []eventstream.Message{
+		{
+			Headers: eventstream.Headers{
+				eventstreamtesting.EventMessageTypeHeader,
+				{
+					Name:  eventstreamapi.EventTypeHeader,
+					Value: eventstream.StringValue("initial-response"),
+				},
+			},
+			Payload: emptyPayload(f),
+		},
+		{
+			Headers: eventstream.Headers{
+				eventstreamtesting.EventMessageTypeHeader,
+				{
+					Name:  eventstreamapi.EventTypeHeader,
+					Value: eventstream.StringValue("SubscribeToShardEvent"),
+				},
+			},
+			Payload: objectPayload(f, map[string]string{
+				"ContinuationSequenceNumber": "01234",
+			}),
+		},
+		{
+			Headers: eventstream.Headers{
+				eventstreamtesting.EventMessageTypeHeader,
+				{
+					Name:  eventstreamapi.EventTypeHeader,
+					Value: eventstream.StringValue("UnknownEventName"),
+				},
+			},
+			Payload: emptyPayload(f),
+		},
+	}
+
 	resp, err := svc.SubscribeToShard(context.Background(), &kinesis.SubscribeToShardInput{}, func(options *kinesis.Options) {
 		options.APIOptions = append(options.APIOptions, removeValidationMiddleware)
 	})
@@ -219,7 +220,7 @@ func TestSubscribeToShard_ReadUnknownEvent(t *testing.T) {
 						Value: eventstream.StringValue("UnknownEventName"),
 					},
 				},
-				Payload: []byte(`{}`)})
+				Payload: emptyPayload(f)})
 			return buff.Bytes()
 		}()},
 	}
@@ -240,41 +241,41 @@ func TestSubscribeToShard_ReadUnknownEvent(t *testing.T) {
 }
 
 func TestSubscribeToShard_ReadException(t *testing.T) {
-	cfg, cleanupFn, err := eventstreamtesting.SetupEventStream(t,
-		eventstreamtesting.ServeEventStream{
-			T: t,
-			Events: []eventstream.Message{
-				{
-					Headers: eventstream.Headers{
-						eventstreamtesting.EventMessageTypeHeader,
-						{
-							Name:  eventstreamapi.EventTypeHeader,
-							Value: eventstream.StringValue("initial-response"),
-						},
-					},
-					Payload: []byte(`{}`),
-				},
-				{
-					Headers: eventstream.Headers{
-						eventstreamtesting.EventExceptionTypeHeader,
-						{
-							Name:  eventstreamapi.ExceptionTypeHeader,
-							Value: eventstream.StringValue("InternalFailureException"),
-						},
-					},
-					Payload: []byte(`{
-  "message": "this is an exception message"
-}`),
-				},
-			},
-		},
-	)
+	stream := &eventstreamtesting.ServeEventStream{T: t}
+	cfg, cleanupFn, err := eventstreamtesting.SetupEventStream(t, stream)
 	if err != nil {
 		t.Fatalf("expect no error, %v", err)
 	}
 	defer cleanupFn()
 
 	svc := kinesis.NewFromConfig(cfg)
+
+	f := clientWireFormat(svc)
+	stream.Events = []eventstream.Message{
+		{
+			Headers: eventstream.Headers{
+				eventstreamtesting.EventMessageTypeHeader,
+				{
+					Name:  eventstreamapi.EventTypeHeader,
+					Value: eventstream.StringValue("initial-response"),
+				},
+			},
+			Payload: emptyPayload(f),
+		},
+		{
+			Headers: eventstream.Headers{
+				eventstreamtesting.EventExceptionTypeHeader,
+				{
+					Name:  eventstreamapi.ExceptionTypeHeader,
+					Value: eventstream.StringValue("InternalFailureException"),
+				},
+			},
+			Payload: objectPayload(f, map[string]string{
+				"message": "this is an exception message",
+			}),
+		},
+	}
+
 	resp, err := svc.SubscribeToShard(context.Background(), &kinesis.SubscribeToShardInput{}, func(options *kinesis.Options) {
 		options.APIOptions = append(options.APIOptions, removeValidationMiddleware)
 	})
@@ -304,41 +305,41 @@ func TestSubscribeToShard_ReadException(t *testing.T) {
 }
 
 func TestSubscribeToShard_ReadUnmodeledException(t *testing.T) {
-	cfg, cleanupFn, err := eventstreamtesting.SetupEventStream(t,
-		eventstreamtesting.ServeEventStream{
-			T: t,
-			Events: []eventstream.Message{
-				{
-					Headers: eventstream.Headers{
-						eventstreamtesting.EventMessageTypeHeader,
-						{
-							Name:  eventstreamapi.EventTypeHeader,
-							Value: eventstream.StringValue("initial-response"),
-						},
-					},
-					Payload: []byte(`{}`),
-				},
-				{
-					Headers: eventstream.Headers{
-						eventstreamtesting.EventExceptionTypeHeader,
-						{
-							Name:  eventstreamapi.ExceptionTypeHeader,
-							Value: eventstream.StringValue("UnmodeledException"),
-						},
-					},
-					Payload: []byte(`{
-  "Message": "this is an unmodeled exception message"
-}`),
-				},
-			},
-		},
-	)
+	stream := &eventstreamtesting.ServeEventStream{T: t}
+	cfg, cleanupFn, err := eventstreamtesting.SetupEventStream(t, stream)
 	if err != nil {
 		t.Fatalf("expect no error, %v", err)
 	}
 	defer cleanupFn()
 
 	svc := kinesis.NewFromConfig(cfg)
+
+	f := clientWireFormat(svc)
+	stream.Events = []eventstream.Message{
+		{
+			Headers: eventstream.Headers{
+				eventstreamtesting.EventMessageTypeHeader,
+				{
+					Name:  eventstreamapi.EventTypeHeader,
+					Value: eventstream.StringValue("initial-response"),
+				},
+			},
+			Payload: emptyPayload(f),
+		},
+		{
+			Headers: eventstream.Headers{
+				eventstreamtesting.EventExceptionTypeHeader,
+				{
+					Name:  eventstreamapi.ExceptionTypeHeader,
+					Value: eventstream.StringValue("UnmodeledException"),
+				},
+			},
+			Payload: objectPayload(f, map[string]string{
+				"message": "this is an unmodeled exception message",
+			}),
+		},
+	}
+
 	resp, err := svc.SubscribeToShard(context.Background(), &kinesis.SubscribeToShardInput{}, func(options *kinesis.Options) {
 		options.APIOptions = append(options.APIOptions, removeValidationMiddleware)
 	})
@@ -371,45 +372,45 @@ func TestSubscribeToShard_ReadUnmodeledException(t *testing.T) {
 }
 
 func TestSubscribeToShard_ReadErrorEvent(t *testing.T) {
-	cfg, cleanupFn, err := eventstreamtesting.SetupEventStream(t,
-		eventstreamtesting.ServeEventStream{
-			T: t,
-			Events: []eventstream.Message{
-				{
-					Headers: eventstream.Headers{
-						eventstreamtesting.EventMessageTypeHeader,
-						{
-							Name:  eventstreamapi.EventTypeHeader,
-							Value: eventstream.StringValue("initial-response"),
-						},
-					},
-					Payload: []byte(`{}`),
-				},
-				{
-					Headers: eventstream.Headers{
-						{
-							Name:  eventstreamapi.MessageTypeHeader,
-							Value: eventstream.StringValue(eventstreamapi.ErrorMessageType),
-						},
-						{
-							Name:  eventstreamapi.ErrorCodeHeader,
-							Value: eventstream.StringValue("AnErrorCode"),
-						},
-						{
-							Name:  eventstreamapi.ErrorMessageHeader,
-							Value: eventstream.StringValue("An error message"),
-						},
-					},
-				},
-			},
-		},
-	)
+	stream := &eventstreamtesting.ServeEventStream{T: t}
+	cfg, cleanupFn, err := eventstreamtesting.SetupEventStream(t, stream)
 	if err != nil {
 		t.Fatalf("expect no error, %v", err)
 	}
 	defer cleanupFn()
 
 	svc := kinesis.NewFromConfig(cfg)
+
+	f := clientWireFormat(svc)
+	stream.Events = []eventstream.Message{
+		{
+			Headers: eventstream.Headers{
+				eventstreamtesting.EventMessageTypeHeader,
+				{
+					Name:  eventstreamapi.EventTypeHeader,
+					Value: eventstream.StringValue("initial-response"),
+				},
+			},
+			Payload: emptyPayload(f),
+		},
+		{
+			Headers: eventstream.Headers{
+				{
+					Name:  eventstreamapi.MessageTypeHeader,
+					Value: eventstream.StringValue(eventstreamapi.ErrorMessageType),
+				},
+				{
+					Name:  eventstreamapi.ErrorCodeHeader,
+					Value: eventstream.StringValue("AnErrorCode"),
+				},
+				{
+					Name:  eventstreamapi.ErrorMessageHeader,
+					Value: eventstream.StringValue("An error message"),
+				},
+			},
+		},
+	}
+
 	resp, err := svc.SubscribeToShard(context.Background(), &kinesis.SubscribeToShardInput{}, func(options *kinesis.Options) {
 		options.APIOptions = append(options.APIOptions, removeValidationMiddleware)
 	})
@@ -442,23 +443,23 @@ func TestSubscribeToShard_ReadErrorEvent(t *testing.T) {
 }
 
 func TestSubscribeToShard_ResponseError(t *testing.T) {
-	cfg, cleanupFn, err := eventstreamtesting.SetupEventStream(t,
-		eventstreamtesting.ServeEventStream{
-			T: t,
-			StaticResponse: &eventstreamtesting.StaticResponse{
-				StatusCode: 500,
-				Body: []byte(`{
-  "Message": "this is an exception message"
-}`),
-			},
-		},
-	)
+	stream := &eventstreamtesting.ServeEventStream{
+		T:              t,
+		StaticResponse: &eventstreamtesting.StaticResponse{StatusCode: 500},
+	}
+	cfg, cleanupFn, err := eventstreamtesting.SetupEventStream(t, stream)
 	if err != nil {
 		t.Fatalf("expect no error, %v", err)
 	}
 	defer cleanupFn()
 
 	svc := kinesis.NewFromConfig(cfg)
+
+	f := clientWireFormat(svc)
+	stream.StaticResponse.Body = objectPayload(f, map[string]string{
+		"message": "this is an exception message",
+	})
+
 	_, err = svc.SubscribeToShard(context.Background(), &kinesis.SubscribeToShardInput{}, func(options *kinesis.Options) {
 		options.APIOptions = append(options.APIOptions, removeValidationMiddleware)
 	})

@@ -4,7 +4,9 @@ package customerprofiles
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/customerprofiles/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/customerprofiles/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -35,6 +37,21 @@ type ListProfileObjectTypeTemplatesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListProfileObjectTypeTemplatesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListProfileObjectTypeTemplatesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListProfileObjectTypeTemplatesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListProfileObjectTypeTemplatesRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListProfileObjectTypeTemplatesRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListProfileObjectTypeTemplatesOutput struct {
 
 	// The list of ListProfileObjectType template instances.
@@ -49,13 +66,35 @@ type ListProfileObjectTypeTemplatesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListProfileObjectTypeTemplatesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListProfileObjectTypeTemplatesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListProfileObjectTypeTemplatesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeProfileObjectTypeTemplateList(s, schemas.ListProfileObjectTypeTemplatesResponse_Items, v.Items)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListProfileObjectTypeTemplatesResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListProfileObjectTypeTemplatesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListProfileObjectTypeTemplatesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListProfileObjectTypeTemplatesResponse_Items:
+			return deserializeProfileObjectTypeTemplateList(d, schemas.ListProfileObjectTypeTemplatesResponse_Items, &v.Items)
+		case schemas.ListProfileObjectTypeTemplatesResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListProfileObjectTypeTemplatesResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListProfileObjectTypeTemplatesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListProfileObjectTypeTemplates{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListProfileObjectTypeTemplates, schemas.ListProfileObjectTypeTemplatesRequest, schemas.ListProfileObjectTypeTemplatesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListProfileObjectTypeTemplates{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListProfileObjectTypeTemplates, schemas.ListProfileObjectTypeTemplatesRequest, schemas.ListProfileObjectTypeTemplatesResponse), output: &ListProfileObjectTypeTemplatesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

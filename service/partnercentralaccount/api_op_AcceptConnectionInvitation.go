@@ -5,7 +5,9 @@ package partnercentralaccount
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/partnercentralaccount/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/partnercentralaccount/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -47,6 +49,24 @@ type AcceptConnectionInvitationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AcceptConnectionInvitationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AcceptConnectionInvitationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AcceptConnectionInvitationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Catalog != nil {
+		s.WriteString(schemas.AcceptConnectionInvitationRequest_Catalog, *v.Catalog)
+	}
+	if v.ClientToken != nil {
+		s.WriteString(schemas.AcceptConnectionInvitationRequest_ClientToken, *v.ClientToken)
+	}
+	if v.Identifier != nil {
+		s.WriteString(schemas.AcceptConnectionInvitationRequest_Identifier, *v.Identifier)
+	}
+}
+
 type AcceptConnectionInvitationOutput struct {
 
 	// The details of the accepted connection between the two partners.
@@ -60,13 +80,34 @@ type AcceptConnectionInvitationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AcceptConnectionInvitationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AcceptConnectionInvitationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AcceptConnectionInvitationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Connection != nil {
+		s.WriteStruct(schemas.AcceptConnectionInvitationResponse_Connection)
+		v.Connection.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *AcceptConnectionInvitationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AcceptConnectionInvitationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AcceptConnectionInvitationResponse_Connection:
+			v.Connection = &types.Connection{}
+			return v.Connection.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationAcceptConnectionInvitationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpAcceptConnectionInvitation{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AcceptConnectionInvitation, schemas.AcceptConnectionInvitationRequest, schemas.AcceptConnectionInvitationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpAcceptConnectionInvitation{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AcceptConnectionInvitation, schemas.AcceptConnectionInvitationRequest, schemas.AcceptConnectionInvitationResponse), output: &AcceptConnectionInvitationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

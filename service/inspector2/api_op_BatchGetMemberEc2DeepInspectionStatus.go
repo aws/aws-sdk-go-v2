@@ -4,7 +4,9 @@ package inspector2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/inspector2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/inspector2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -35,6 +37,16 @@ type BatchGetMemberEc2DeepInspectionStatusInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchGetMemberEc2DeepInspectionStatusInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchGetMemberEc2DeepInspectionStatusRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchGetMemberEc2DeepInspectionStatusInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAccountIdSet(s, schemas.BatchGetMemberEc2DeepInspectionStatusRequest_accountIds, v.AccountIds)
+}
+
 type BatchGetMemberEc2DeepInspectionStatusOutput struct {
 
 	// An array of objects that provide details on the activation status of Amazon
@@ -51,13 +63,32 @@ type BatchGetMemberEc2DeepInspectionStatusOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchGetMemberEc2DeepInspectionStatusOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchGetMemberEc2DeepInspectionStatusResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchGetMemberEc2DeepInspectionStatusOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeMemberAccountEc2DeepInspectionStatusStateList(s, schemas.BatchGetMemberEc2DeepInspectionStatusResponse_accountIds, v.AccountIds)
+	serializeFailedMemberAccountEc2DeepInspectionStatusStateList(s, schemas.BatchGetMemberEc2DeepInspectionStatusResponse_failedAccountIds, v.FailedAccountIds)
+}
+func (v *BatchGetMemberEc2DeepInspectionStatusOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchGetMemberEc2DeepInspectionStatusResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchGetMemberEc2DeepInspectionStatusResponse_accountIds:
+			return deserializeMemberAccountEc2DeepInspectionStatusStateList(d, schemas.BatchGetMemberEc2DeepInspectionStatusResponse_accountIds, &v.AccountIds)
+		case schemas.BatchGetMemberEc2DeepInspectionStatusResponse_failedAccountIds:
+			return deserializeFailedMemberAccountEc2DeepInspectionStatusStateList(d, schemas.BatchGetMemberEc2DeepInspectionStatusResponse_failedAccountIds, &v.FailedAccountIds)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationBatchGetMemberEc2DeepInspectionStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpBatchGetMemberEc2DeepInspectionStatus{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchGetMemberEc2DeepInspectionStatus, schemas.BatchGetMemberEc2DeepInspectionStatusRequest, schemas.BatchGetMemberEc2DeepInspectionStatusResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpBatchGetMemberEc2DeepInspectionStatus{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchGetMemberEc2DeepInspectionStatus, schemas.BatchGetMemberEc2DeepInspectionStatusRequest, schemas.BatchGetMemberEc2DeepInspectionStatusResponse), output: &BatchGetMemberEc2DeepInspectionStatusOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

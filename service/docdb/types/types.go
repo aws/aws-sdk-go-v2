@@ -54,8 +54,8 @@ type Certificate struct {
 //
 // For more information, see [Updating Your Amazon DocumentDB TLS Certificates] and [Encrypting Data in Transit] in the Amazon DocumentDB Developer Guide.
 //
-// [Updating Your Amazon DocumentDB TLS Certificates]: https://docs.aws.amazon.com/documentdb/latest/developerguide/ca_cert_rotation.html
-// [Encrypting Data in Transit]: https://docs.aws.amazon.com/documentdb/latest/developerguide/security.encryption.ssl.html
+// [Updating Your Amazon DocumentDB TLS Certificates]: https://docs.aws.amazon.com/documentdb/latest/devguide/ca_cert_rotation.html
+// [Encrypting Data in Transit]: https://docs.aws.amazon.com/documentdb/latest/devguide/security.encryption.ssl.html
 type CertificateDetails struct {
 
 	// The CA identifier of the CA certificate used for the DB instance's server
@@ -142,6 +142,10 @@ type DBCluster struct {
 	// (UTC).
 	ClusterCreateTime *time.Time
 
+	// Specifies whether to copy all tags from the DB cluster to snapshots of the DB
+	// cluster. The default is not to copy them.
+	CopyTagsToSnapshot *bool
+
 	// The Amazon Resource Name (ARN) for the cluster.
 	DBClusterArn *string
 
@@ -221,7 +225,7 @@ type DBCluster struct {
 	//
 	// Valid Values: IPV4 | DUAL
 	//
-	// [DocumentDB clusters in a VPC]: https://docs.aws.amazon.com/documentdb/latest/developerguide/vpc-clusters.html
+	// [DocumentDB clusters in a VPC]: https://docs.aws.amazon.com/documentdb/latest/devguide/vpc-clusters.html
 	NetworkType *string
 
 	// Specifies the progress of the operation as a percentage.
@@ -495,8 +499,8 @@ type DBEngineVersion struct {
 	//
 	// For more information, see [Updating Your Amazon DocumentDB TLS Certificates] and [Encrypting Data in Transit] in the Amazon DocumentDB Developer Guide.
 	//
-	// [Updating Your Amazon DocumentDB TLS Certificates]: https://docs.aws.amazon.com/documentdb/latest/developerguide/ca_cert_rotation.html
-	// [Encrypting Data in Transit]: https://docs.aws.amazon.com/documentdb/latest/developerguide/security.encryption.ssl.html
+	// [Updating Your Amazon DocumentDB TLS Certificates]: https://docs.aws.amazon.com/documentdb/latest/devguide/ca_cert_rotation.html
+	// [Encrypting Data in Transit]: https://docs.aws.amazon.com/documentdb/latest/devguide/security.encryption.ssl.html
 	SupportedCACertificateIdentifiers []string
 
 	// Indicates whether the engine version supports rotating the server certificate

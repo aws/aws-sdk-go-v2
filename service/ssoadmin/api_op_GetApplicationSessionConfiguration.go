@@ -4,7 +4,9 @@ package ssoadmin
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/ssoadmin/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ssoadmin/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -41,6 +43,18 @@ type GetApplicationSessionConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetApplicationSessionConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetApplicationSessionConfigurationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetApplicationSessionConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationArn != nil {
+		s.WriteString(schemas.GetApplicationSessionConfigurationRequest_ApplicationArn, *v.ApplicationArn)
+	}
+}
+
 type GetApplicationSessionConfigurationOutput struct {
 
 	// The status of user background sessions for the application.
@@ -52,13 +66,36 @@ type GetApplicationSessionConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetApplicationSessionConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetApplicationSessionConfigurationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetApplicationSessionConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.UserBackgroundSessionApplicationStatus != "" {
+		s.WriteString(schemas.GetApplicationSessionConfigurationResponse_UserBackgroundSessionApplicationStatus, string(v.UserBackgroundSessionApplicationStatus))
+	}
+}
+func (v *GetApplicationSessionConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetApplicationSessionConfigurationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetApplicationSessionConfigurationResponse_UserBackgroundSessionApplicationStatus:
+			var ev string
+			if err := d.ReadString(schemas.GetApplicationSessionConfigurationResponse_UserBackgroundSessionApplicationStatus, &ev); err != nil {
+				return err
+			}
+			v.UserBackgroundSessionApplicationStatus = types.UserBackgroundSessionApplicationStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetApplicationSessionConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetApplicationSessionConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetApplicationSessionConfiguration, schemas.GetApplicationSessionConfigurationRequest, schemas.GetApplicationSessionConfigurationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetApplicationSessionConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetApplicationSessionConfiguration, schemas.GetApplicationSessionConfigurationRequest, schemas.GetApplicationSessionConfigurationResponse), output: &GetApplicationSessionConfigurationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

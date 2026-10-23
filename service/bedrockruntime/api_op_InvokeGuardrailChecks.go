@@ -4,7 +4,9 @@ package bedrockruntime
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/bedrockruntime/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockruntime/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -43,6 +45,21 @@ type InvokeGuardrailChecksInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *InvokeGuardrailChecksInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InvokeGuardrailChecksRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InvokeGuardrailChecksInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Checks != nil {
+		s.WriteStruct(schemas.InvokeGuardrailChecksRequest_checks)
+		v.Checks.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeGuardrailChecksMessageList(s, schemas.InvokeGuardrailChecksRequest_messages, v.Messages)
+}
+
 type InvokeGuardrailChecksOutput struct {
 
 	// The per-check results containing findings from the guardrail evaluation.
@@ -61,13 +78,42 @@ type InvokeGuardrailChecksOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *InvokeGuardrailChecksOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InvokeGuardrailChecksResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InvokeGuardrailChecksOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Results != nil {
+		s.WriteStruct(schemas.InvokeGuardrailChecksResponse_results)
+		v.Results.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Usage != nil {
+		s.WriteStruct(schemas.InvokeGuardrailChecksResponse_usage)
+		v.Usage.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *InvokeGuardrailChecksOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InvokeGuardrailChecksResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InvokeGuardrailChecksResponse_results:
+			v.Results = &types.GuardrailChecksResults{}
+			return v.Results.Deserialize(d)
+		case schemas.InvokeGuardrailChecksResponse_usage:
+			v.Usage = &types.GuardrailChecksUsageResults{}
+			return v.Usage.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationInvokeGuardrailChecksMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpInvokeGuardrailChecks{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.InvokeGuardrailChecks, schemas.InvokeGuardrailChecksRequest, schemas.InvokeGuardrailChecksResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpInvokeGuardrailChecks{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.InvokeGuardrailChecks, schemas.InvokeGuardrailChecksRequest, schemas.InvokeGuardrailChecksResponse), output: &InvokeGuardrailChecksOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

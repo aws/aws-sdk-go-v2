@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"adminAccountDetails":{"adminAccount":"__AdminAccount__","adminScope":{"firewallTypeScope":{"allFirewallTypesEnabled":true,"firewallTypes":["WAF","WAF"]},"scopeFilter":{"includeAll":{}}},"priority":1,"status":"ONBOARDED"}}

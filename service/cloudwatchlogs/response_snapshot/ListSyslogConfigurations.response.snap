@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: Logs_20140328.ListSyslogConfigurations
+
+{"nextToken":"__NextToken__","syslogConfigurations":[{"createdAt":1,"logGroupArn":"__LogGroupArn__","sourceType":"VPCE","vpcEndpointId":"__VpcEndpointId__"},{"createdAt":1,"logGroupArn":"__LogGroupArn__","sourceType":"VPCE","vpcEndpointId":"__VpcEndpointId__"}]}

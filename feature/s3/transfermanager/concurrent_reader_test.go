@@ -5,6 +5,7 @@ import (
 	"bytes"
 	"context"
 	"errors"
+
 	"io"
 	"math"
 	"math/rand"
@@ -16,6 +17,92 @@ import (
 	"github.com/aws/aws-sdk-go-v2/feature/s3/transfermanager/types"
 	"github.com/aws/aws-sdk-go-v2/service/s3"
 )
+
+func TestConcurrentReaderReadUsesSliceLenForBounds(t *testing.T) {
+	tests := map[string]struct {
+		readType types.GetObjectType
+		readerFn func(*concurrentReader)
+	}{
+		"part read buffered chunk": {
+			readType: types.GetObjectParts,
+			readerFn: func(r *concurrentReader) {
+				r.capacity = 2
+				r.receiveCount = 2
+				r.buf[1] = &outChunk{
+					body:   bytes.NewReader([]byte("chunk")),
+					index:  1,
+					length: int64(len("chunk")),
+				}
+			},
+		},
+		"part read received chunk": {
+			readType: types.GetObjectParts,
+			readerFn: func(r *concurrentReader) {
+				r.capacity = 2
+				r.receiveCount = 1
+				r.ch <- outChunk{
+					body:   bytes.NewReader([]byte("chunk")),
+					index:  1,
+					length: int64(len("chunk")),
+				}
+			},
+		},
+		"range read buffered chunk": {
+			readType: types.GetObjectRanges,
+			readerFn: func(r *concurrentReader) {
+				r.capacity = 2
+				r.receiveCount = 2
+				r.buf[1] = &outChunk{
+					body:   bytes.NewReader([]byte("chunk")),
+					index:  1,
+					length: int64(len("chunk")),
+				}
+			},
+		},
+		"range read received chunk": {
+			readType: types.GetObjectRanges,
+			readerFn: func(r *concurrentReader) {
+				r.capacity = 2
+				r.receiveCount = 1
+				r.ch <- outChunk{
+					body:   bytes.NewReader([]byte("chunk")),
+					index:  1,
+					length: int64(len("chunk")),
+				}
+			},
+		},
+	}
+
+	for name, c := range tests {
+		t.Run(name, func(t *testing.T) {
+			r := &concurrentReader{
+				partSize:   8,
+				partsCount: 2,
+				buf:        make(map[int32]*outChunk),
+				ch:         make(chan outChunk, 1),
+				getType:    c.readType,
+			}
+			c.readerFn(r)
+
+			p := make([]byte, 4, 9)
+			n, err := r.read(p)
+			if err != nil {
+				t.Fatalf("expect no error, got %v", err)
+			}
+			if n != 0 {
+				t.Fatalf("expect no bytes read into short slice, got %d", n)
+			}
+
+			chunk, ok := r.buf[1]
+			if !ok {
+				t.Fatal("expect chunk to remain buffered")
+			}
+			if chunk.cur != 0 {
+				t.Fatalf("expect chunk cursor to remain unchanged, got %d", chunk.cur)
+			}
+		})
+	}
+}
 
 func TestConcurrentReader(t *testing.T) {
 	cases := map[string]struct {

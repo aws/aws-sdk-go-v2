@@ -759,6 +759,11 @@ func validateInfluxDBv3EnterpriseParameters(v *types.InfluxDBv3EnterpriseParamet
 			invalidParams.AddNested("CatalogSyncInterval", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.SnapshotDuration != nil {
+		if err := validateDuration(v.SnapshotDuration); err != nil {
+			invalidParams.AddNested("SnapshotDuration", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {

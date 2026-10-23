@@ -4,6 +4,8 @@ package lookoutequipment
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/lookoutequipment/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -35,6 +37,18 @@ type DeleteLabelGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteLabelGroupInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteLabelGroupRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteLabelGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LabelGroupName != nil {
+		s.WriteString(schemas.DeleteLabelGroupRequest_LabelGroupName, *v.LabelGroupName)
+	}
+}
+
 type DeleteLabelGroupOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -42,13 +56,26 @@ type DeleteLabelGroupOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteLabelGroupOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteLabelGroupOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteLabelGroupOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteLabelGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpDeleteLabelGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteLabelGroup, schemas.DeleteLabelGroupRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpDeleteLabelGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteLabelGroup, schemas.DeleteLabelGroupRequest, nil), output: &DeleteLabelGroupOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

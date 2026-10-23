@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"errorDetails":"__ErrorDetails__","operationResult":{"forward":{"lossFnOutputType":"__LossFnOutputType__","lossFnOutputs":[{"key0":{"data":"__Document__","dtype":"__Dtype__","shape":[1,1]}},{"key0":{"data":"__Document__","dtype":"__Dtype__","shape":[1,1]}}],"metrics":{"key0":1},"tokenUsage":{"trainingTokens":1}}},"status":"Pending","tokenUsage":{"trainingTokens":1}}

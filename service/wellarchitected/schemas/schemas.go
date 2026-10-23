@@ -683,7 +683,8 @@ var WellArchitectedApiServiceLambda = smithy.NewServiceSchema(_WellArchitectedAp
 var AccessDeniedException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.wellarchitected",
 	Name:      "AccessDeniedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 403})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 403})
 var AccessDeniedException_Message *smithy.Schema
 
 var _AccountId = smithy.NewSchema(smithy.ShapeID{
@@ -900,10 +901,12 @@ var _AgentRecommendationSummaries_member *smithy.Schema
 var AgentRecommendationSummary = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.wellarchitected",
 	Name:      "AgentRecommendationSummary",
-}, smithy.ShapeTypeStructure, 21)
+}, smithy.ShapeTypeStructure, 22)
 var AgentRecommendationSummary_recommendationArn *smithy.Schema
 
 var AgentRecommendationSummary_profileArn *smithy.Schema
+
+var AgentRecommendationSummary_generationId *smithy.Schema
 
 var AgentRecommendationSummary_title *smithy.Schema
 
@@ -1363,7 +1366,8 @@ var _ClientRequestToken = smithy.NewSchema(smithy.ShapeID{
 var ConflictException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.wellarchitected",
 	Name:      "ConflictException",
-}, smithy.ShapeTypeStructure, 3, &smithytraits.HTTPError{Code: 409})
+}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 409})
 var ConflictException_Message *smithy.Schema
 
 var ConflictException_ResourceId *smithy.Schema
@@ -1798,7 +1802,8 @@ var IntegrationStatusInput_NOT_CONFIGURED *smithy.Schema
 var InternalServerException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.wellarchitected",
 	Name:      "InternalServerException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 500})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
+	&smithytraits.HTTPError{Code: 500})
 var InternalServerException_Message *smithy.Schema
 
 var _IsApplicable = smithy.NewSchema(smithy.ShapeID{
@@ -2847,7 +2852,8 @@ var _ResourceLinks_member *smithy.Schema
 var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.wellarchitected",
 	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 3, &smithytraits.HTTPError{Code: 404})
+}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 404})
 var ResourceNotFoundException_Message *smithy.Schema
 
 var ResourceNotFoundException_ResourceId *smithy.Schema
@@ -3153,7 +3159,8 @@ var _ServiceCode = smithy.NewSchema(smithy.ShapeID{
 var ServiceQuotaExceededException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.wellarchitected",
 	Name:      "ServiceQuotaExceededException",
-}, smithy.ShapeTypeStructure, 5, &smithytraits.HTTPError{Code: 402})
+}, smithy.ShapeTypeStructure, 5, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 402})
 var ServiceQuotaExceededException_Message *smithy.Schema
 
 var ServiceQuotaExceededException_ResourceId *smithy.Schema
@@ -3379,7 +3386,8 @@ var TemplateShareSummary_StatusMessage *smithy.Schema
 var ThrottlingException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.wellarchitected",
 	Name:      "ThrottlingException",
-}, smithy.ShapeTypeStructure, 3, &smithytraits.HTTPError{Code: 429})
+}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 429})
 var ThrottlingException_Message *smithy.Schema
 
 var ThrottlingException_QuotaCode *smithy.Schema
@@ -3430,7 +3438,8 @@ var _UUID = smithy.NewSchema(smithy.ShapeID{
 var ValidationException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.wellarchitected",
 	Name:      "ValidationException",
-}, smithy.ShapeTypeStructure, 3, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var ValidationException_Message *smithy.Schema
 
 var ValidationException_Reason *smithy.Schema
@@ -4366,10 +4375,12 @@ var GetAgentRecommendationRequest_remediationType *smithy.Schema
 var GetAgentRecommendationResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.wellarchitected",
 	Name:      "GetAgentRecommendationResponse",
-}, smithy.ShapeTypeStructure, 31)
+}, smithy.ShapeTypeStructure, 32)
 var GetAgentRecommendationResponse_recommendationArn *smithy.Schema
 
 var GetAgentRecommendationResponse_profileArn *smithy.Schema
+
+var GetAgentRecommendationResponse_generationId *smithy.Schema
 
 var GetAgentRecommendationResponse_title *smithy.Schema
 
@@ -5978,6 +5989,8 @@ func init() {
 	AgentRecommendationSummary_recommendationArn = AgentRecommendationSummary.AddMember("recommendationArn", _RecommendationArn)
 
 	AgentRecommendationSummary_profileArn = AgentRecommendationSummary.AddMember("profileArn", _AgentProfileArn)
+
+	AgentRecommendationSummary_generationId = AgentRecommendationSummary.AddMember("generationId", _UUID)
 
 	AgentRecommendationSummary_title = AgentRecommendationSummary.AddMember("title", _SensitiveString)
 
@@ -7708,6 +7721,8 @@ func init() {
 	GetAgentRecommendationResponse_recommendationArn = GetAgentRecommendationResponse.AddMember("recommendationArn", _RecommendationArn)
 
 	GetAgentRecommendationResponse_profileArn = GetAgentRecommendationResponse.AddMember("profileArn", _AgentProfileArn)
+
+	GetAgentRecommendationResponse_generationId = GetAgentRecommendationResponse.AddMember("generationId", _UUID)
 
 	GetAgentRecommendationResponse_title = GetAgentRecommendationResponse.AddMember("title", _SensitiveString)
 

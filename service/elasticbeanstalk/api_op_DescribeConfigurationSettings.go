@@ -18,9 +18,25 @@ import (
 // an environment that is either in the process of deployment or that failed to
 // deploy.
 //
+// This action only returns information about resources that the calling principle
+// has IAM permissions to access. For example, consider a case where a user only
+// has permission to access one of three resources. When the user calls the this
+// action, the response will only include the one resource that the user has
+// permission to access instead of all three resources. If the user doesn’t have
+// access to any of the resources an empty result is returned.
+//
+// The [AWSElasticBeanstalkReadOnly] managed policy allows operators to view information about resources
+// related to Elastic Beanstalk. For more information, see [Managing Elastic Beanstalk user policies]in the Elastic
+// Beanstalk Developer Guide. For detailed instructions to attach a policy to a
+// user or group, see the section [Controlling access with managed policies]in the same topic.
+//
 // # Related Topics
 //
-// DeleteEnvironmentConfiguration
+// # DeleteEnvironmentConfiguration
+//
+// [AWSElasticBeanstalkReadOnly]: https://docs.aws.amazon.com/aws-managed-policy/latest/reference/AWSElasticBeanstalkReadOnly.html
+// [Managing Elastic Beanstalk user policies]: https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/AWSHowTo.iam.managed-policies.html
+// [Controlling access with managed policies]: https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/AWSHowTo.iam.managed-policies.html#iam-userpolicies-managed
 func (c *Client) DescribeConfigurationSettings(ctx context.Context, params *DescribeConfigurationSettingsInput, optFns ...func(*Options)) (*DescribeConfigurationSettingsOutput, error) {
 	if params == nil {
 		params = &DescribeConfigurationSettingsInput{}
@@ -48,16 +64,16 @@ type DescribeConfigurationSettingsInput struct {
 	// The name of the environment to describe.
 	//
 	// Condition: You must specify either this or a TemplateName, but not both. If you
-	// specify both, AWS Elastic Beanstalk returns an InvalidParameterCombination
-	// error. If you do not specify either, AWS Elastic Beanstalk returns
-	// MissingRequiredParameter error.
+	// specify both, Elastic Beanstalk returns an InvalidParameterCombination error.
+	// If you do not specify either, Elastic Beanstalk returns MissingRequiredParameter
+	// error.
 	EnvironmentName *string
 
 	// The name of the configuration template to describe.
 	//
 	// Conditional: You must specify either this parameter or an EnvironmentName, but
-	// not both. If you specify both, AWS Elastic Beanstalk returns an
-	// InvalidParameterCombination error. If you do not specify either, AWS Elastic
+	// not both. If you specify both, Elastic Beanstalk returns an
+	// InvalidParameterCombination error. If you do not specify either, Elastic
 	// Beanstalk returns a MissingRequiredParameter error.
 	TemplateName *string
 

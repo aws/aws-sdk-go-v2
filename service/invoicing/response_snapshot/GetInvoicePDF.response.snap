@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: Invoicing.GetInvoicePDF
+
+{"InvoicePDF":{"DocumentUrl":"__DocumentUrl__","DocumentUrlExpirationDate":946684800,"InvoiceId":"__InvoiceId__","SupplementalDocuments":[{"DocumentId":"__DocumentId__","DocumentType":"GOVERNMENT_INVOICE","DocumentUrl":"__DocumentUrl__","DocumentUrlExpirationDate":946684800},{"DocumentId":"__DocumentId__","DocumentType":"GOVERNMENT_INVOICE","DocumentUrl":"__DocumentUrl__","DocumentUrlExpirationDate":946684800}]}}

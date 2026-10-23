@@ -10,12 +10,12 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
-// Deregisters a NotificationConfiguration in the specified Region.
+// Deregisters a NotificationHub in the specified Region.
 //
 // You can't deregister the last NotificationHub in the account. NotificationEvents
-// stored in the deregistered NotificationConfiguration are no longer be visible.
-// Recreating a new NotificationConfiguration in the same Region restores access
-// to those NotificationEvents .
+// stored in the deregistered NotificationHub are no longer visible. Recreating a
+// new NotificationHub in the same Region restores access to those
+// NotificationEvents .
 func (c *Client) DeregisterNotificationHub(ctx context.Context, params *DeregisterNotificationHubInput, optFns ...func(*Options)) (*DeregisterNotificationHubOutput, error) {
 	if params == nil {
 		params = &DeregisterNotificationHubInput{}
@@ -33,7 +33,7 @@ func (c *Client) DeregisterNotificationHub(ctx context.Context, params *Deregist
 
 type DeregisterNotificationHubInput struct {
 
-	// The NotificationConfiguration Region.
+	// The NotificationHub Region.
 	//
 	// This member is required.
 	NotificationHubRegion *string
@@ -55,12 +55,12 @@ func (v *DeregisterNotificationHubInput) SerializeMembers(s smithy.ShapeSerializ
 
 type DeregisterNotificationHubOutput struct {
 
-	// The NotificationConfiguration Region.
+	// The NotificationHub Region.
 	//
 	// This member is required.
 	NotificationHubRegion *string
 
-	// NotificationConfiguration status information.
+	// NotificationHub status information.
 	//
 	// This member is required.
 	StatusSummary *types.NotificationHubStatusSummary

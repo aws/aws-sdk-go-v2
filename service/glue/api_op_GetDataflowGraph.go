@@ -4,7 +4,9 @@ package glue
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/glue/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/glue/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -32,6 +34,18 @@ type GetDataflowGraphInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetDataflowGraphInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetDataflowGraphRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetDataflowGraphInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PythonScript != nil {
+		s.WriteString(schemas.GetDataflowGraphRequest_PythonScript, *v.PythonScript)
+	}
+}
+
 type GetDataflowGraphOutput struct {
 
 	// A list of the edges in the resulting DAG.
@@ -46,13 +60,32 @@ type GetDataflowGraphOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetDataflowGraphOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetDataflowGraphResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetDataflowGraphOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDagEdges(s, schemas.GetDataflowGraphResponse_DagEdges, v.DagEdges)
+	serializeDagNodes(s, schemas.GetDataflowGraphResponse_DagNodes, v.DagNodes)
+}
+func (v *GetDataflowGraphOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetDataflowGraphResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetDataflowGraphResponse_DagEdges:
+			return deserializeDagEdges(d, schemas.GetDataflowGraphResponse_DagEdges, &v.DagEdges)
+		case schemas.GetDataflowGraphResponse_DagNodes:
+			return deserializeDagNodes(d, schemas.GetDataflowGraphResponse_DagNodes, &v.DagNodes)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetDataflowGraphMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetDataflowGraph{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetDataflowGraph, schemas.GetDataflowGraphRequest, schemas.GetDataflowGraphResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetDataflowGraph{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetDataflowGraph, schemas.GetDataflowGraphRequest, schemas.GetDataflowGraphResponse), output: &GetDataflowGraphOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

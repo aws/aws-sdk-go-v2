@@ -4,7 +4,9 @@ package connectcampaignsv2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/connectcampaignsv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connectcampaignsv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -41,6 +43,19 @@ type PutProfileOutboundRequestBatchInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutProfileOutboundRequestBatchInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutProfileOutboundRequestBatchRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutProfileOutboundRequestBatchInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Id != nil {
+		s.WriteString(schemas.PutProfileOutboundRequestBatchRequest_id, *v.Id)
+	}
+	serializeProfileOutboundRequestList(s, schemas.PutProfileOutboundRequestBatchRequest_profileOutboundRequests, v.ProfileOutboundRequests)
+}
+
 // The response for PutProfileOutboundRequestBatch API
 type PutProfileOutboundRequestBatchOutput struct {
 
@@ -56,13 +71,32 @@ type PutProfileOutboundRequestBatchOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutProfileOutboundRequestBatchOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutProfileOutboundRequestBatchResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutProfileOutboundRequestBatchOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeFailedProfileOutboundRequestList(s, schemas.PutProfileOutboundRequestBatchResponse_failedRequests, v.FailedRequests)
+	serializeSuccessfulProfileOutboundRequestList(s, schemas.PutProfileOutboundRequestBatchResponse_successfulRequests, v.SuccessfulRequests)
+}
+func (v *PutProfileOutboundRequestBatchOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PutProfileOutboundRequestBatchResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PutProfileOutboundRequestBatchResponse_failedRequests:
+			return deserializeFailedProfileOutboundRequestList(d, schemas.PutProfileOutboundRequestBatchResponse_failedRequests, &v.FailedRequests)
+		case schemas.PutProfileOutboundRequestBatchResponse_successfulRequests:
+			return deserializeSuccessfulProfileOutboundRequestList(d, schemas.PutProfileOutboundRequestBatchResponse_successfulRequests, &v.SuccessfulRequests)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPutProfileOutboundRequestBatchMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpPutProfileOutboundRequestBatch{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutProfileOutboundRequestBatch, schemas.PutProfileOutboundRequestBatchRequest, schemas.PutProfileOutboundRequestBatchResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpPutProfileOutboundRequestBatch{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutProfileOutboundRequestBatch, schemas.PutProfileOutboundRequestBatchRequest, schemas.PutProfileOutboundRequestBatchResponse), output: &PutProfileOutboundRequestBatchOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package bedrockagentcorecontrol
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -59,6 +61,31 @@ type CreateConsentPortalInput struct {
 	Tags map[string]string
 
 	noSmithyDocumentSerde
+}
+
+func (v *CreateConsentPortalInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateConsentPortalRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateConsentPortalInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.CreateConsentPortalRequest_description, *v.Description)
+	}
+	if v.ExecutionRoleArn != nil {
+		s.WriteString(schemas.CreateConsentPortalRequest_executionRoleArn, *v.ExecutionRoleArn)
+	}
+	if v.IdpConfig != nil {
+		s.WriteStruct(schemas.CreateConsentPortalRequest_idpConfig)
+		v.IdpConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateConsentPortalRequest_name, *v.Name)
+	}
+	serializeConsentPortalSources(s, schemas.CreateConsentPortalRequest_sources, v.Sources)
+	serializeTagsMap(s, schemas.CreateConsentPortalRequest_tags, v.Tags)
 }
 
 type CreateConsentPortalOutput struct {
@@ -126,13 +153,101 @@ type CreateConsentPortalOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateConsentPortalOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateConsentPortalResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateConsentPortalOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConsentPortalArn != nil {
+		s.WriteString(schemas.CreateConsentPortalResponse_consentPortalArn, *v.ConsentPortalArn)
+	}
+	if v.ConsentPortalId != nil {
+		s.WriteString(schemas.CreateConsentPortalResponse_consentPortalId, *v.ConsentPortalId)
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.CreateConsentPortalResponse_createdAt, *v.CreatedAt)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreateConsentPortalResponse_description, *v.Description)
+	}
+	if v.ExecutionRoleArn != nil {
+		s.WriteString(schemas.CreateConsentPortalResponse_executionRoleArn, *v.ExecutionRoleArn)
+	}
+	if v.IdpConfig != nil {
+		s.WriteStruct(schemas.CreateConsentPortalResponse_idpConfig)
+		v.IdpConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateConsentPortalResponse_name, *v.Name)
+	}
+	if v.PortalUrl != nil {
+		s.WriteString(schemas.CreateConsentPortalResponse_portalUrl, *v.PortalUrl)
+	}
+	serializeConsentPortalSources(s, schemas.CreateConsentPortalResponse_sources, v.Sources)
+	if v.Status != "" {
+		s.WriteString(schemas.CreateConsentPortalResponse_status, string(v.Status))
+	}
+	if v.StatusReason != nil {
+		s.WriteString(schemas.CreateConsentPortalResponse_statusReason, *v.StatusReason)
+	}
+	if v.UpdatedAt != nil {
+		s.WriteTime(schemas.CreateConsentPortalResponse_updatedAt, *v.UpdatedAt)
+	}
+}
+func (v *CreateConsentPortalOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateConsentPortalResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateConsentPortalResponse_consentPortalArn:
+			v.ConsentPortalArn = new(string)
+			return d.ReadString(schemas.CreateConsentPortalResponse_consentPortalArn, v.ConsentPortalArn)
+		case schemas.CreateConsentPortalResponse_consentPortalId:
+			v.ConsentPortalId = new(string)
+			return d.ReadString(schemas.CreateConsentPortalResponse_consentPortalId, v.ConsentPortalId)
+		case schemas.CreateConsentPortalResponse_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.CreateConsentPortalResponse_createdAt, v.CreatedAt)
+		case schemas.CreateConsentPortalResponse_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.CreateConsentPortalResponse_description, v.Description)
+		case schemas.CreateConsentPortalResponse_executionRoleArn:
+			v.ExecutionRoleArn = new(string)
+			return d.ReadString(schemas.CreateConsentPortalResponse_executionRoleArn, v.ExecutionRoleArn)
+		case schemas.CreateConsentPortalResponse_idpConfig:
+			v.IdpConfig = &types.ConsentPortalIdpConfig{}
+			return v.IdpConfig.Deserialize(d)
+		case schemas.CreateConsentPortalResponse_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.CreateConsentPortalResponse_name, v.Name)
+		case schemas.CreateConsentPortalResponse_portalUrl:
+			v.PortalUrl = new(string)
+			return d.ReadString(schemas.CreateConsentPortalResponse_portalUrl, v.PortalUrl)
+		case schemas.CreateConsentPortalResponse_sources:
+			return deserializeConsentPortalSources(d, schemas.CreateConsentPortalResponse_sources, &v.Sources)
+		case schemas.CreateConsentPortalResponse_status:
+			var ev string
+			if err := d.ReadString(schemas.CreateConsentPortalResponse_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.ConsentPortalStatus(ev)
+			return nil
+		case schemas.CreateConsentPortalResponse_statusReason:
+			v.StatusReason = new(string)
+			return d.ReadString(schemas.CreateConsentPortalResponse_statusReason, v.StatusReason)
+		case schemas.CreateConsentPortalResponse_updatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.CreateConsentPortalResponse_updatedAt, v.UpdatedAt)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateConsentPortalMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateConsentPortal{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateConsentPortal, schemas.CreateConsentPortalRequest, schemas.CreateConsentPortalResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateConsentPortal{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateConsentPortal, schemas.CreateConsentPortalRequest, schemas.CreateConsentPortalResponse), output: &CreateConsentPortalOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

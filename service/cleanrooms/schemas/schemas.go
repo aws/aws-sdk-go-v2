@@ -805,7 +805,8 @@ var AccessBudgetType_LIFETIME *smithy.Schema
 var AccessDeniedException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cleanrooms",
 	Name:      "AccessDeniedException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.HTTPError{Code: 403})
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 403})
 var AccessDeniedException_message *smithy.Schema
 
 var AccessDeniedException_reason *smithy.Schema
@@ -2418,7 +2419,7 @@ var _ConfiguredAudienceModelAssociationSummaryList_member *smithy.Schema
 var ConfiguredTable = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cleanrooms",
 	Name:      "ConfiguredTable",
-}, smithy.ShapeTypeStructure, 11)
+}, smithy.ShapeTypeStructure, 12)
 var ConfiguredTable_id *smithy.Schema
 
 var ConfiguredTable_arn *smithy.Schema
@@ -2428,6 +2429,8 @@ var ConfiguredTable_name *smithy.Schema
 var ConfiguredTable_description *smithy.Schema
 
 var ConfiguredTable_tableReference *smithy.Schema
+
+var ConfiguredTable_tableType *smithy.Schema
 
 var ConfiguredTable_createTime *smithy.Schema
 
@@ -2650,12 +2653,14 @@ var _ConfiguredTableIdentifier = smithy.NewSchema(smithy.ShapeID{
 var ConfiguredTableSummary = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cleanrooms",
 	Name:      "ConfiguredTableSummary",
-}, smithy.ShapeTypeStructure, 8)
+}, smithy.ShapeTypeStructure, 9)
 var ConfiguredTableSummary_id *smithy.Schema
 
 var ConfiguredTableSummary_arn *smithy.Schema
 
 var ConfiguredTableSummary_name *smithy.Schema
+
+var ConfiguredTableSummary_tableType *smithy.Schema
 
 var ConfiguredTableSummary_createTime *smithy.Schema
 
@@ -2676,7 +2681,8 @@ var _ConfiguredTableSummaryList_member *smithy.Schema
 var ConflictException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cleanrooms",
 	Name:      "ConflictException",
-}, smithy.ShapeTypeStructure, 4, &smithytraits.HTTPError{Code: 409})
+}, smithy.ShapeTypeStructure, 4, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 409})
 var ConflictException_message *smithy.Schema
 
 var ConflictException_resourceId *smithy.Schema
@@ -2781,6 +2787,47 @@ var CustomMLMemberAbility = smithy.NewSchema(smithy.ShapeID{
 var CustomMLMemberAbility_CAN_RECEIVE_MODEL_OUTPUT *smithy.Schema
 
 var CustomMLMemberAbility_CAN_RECEIVE_INFERENCE_OUTPUT *smithy.Schema
+
+var DatabricksConnectionType = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.cleanrooms",
+	Name:      "DatabricksConnectionType",
+}, smithy.ShapeTypeUnion, 1)
+var DatabricksConnectionType_deltaSharing *smithy.Schema
+
+var DatabricksDeltaSharingConnection = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.cleanrooms",
+	Name:      "DatabricksDeltaSharingConnection",
+}, smithy.ShapeTypeStructure, 2)
+var DatabricksDeltaSharingConnection_deltaShareEndpoint *smithy.Schema
+
+var DatabricksDeltaSharingConnection_shareName *smithy.Schema
+
+var _DatabricksEndpointUrl = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.cleanrooms",
+	Name:      "DatabricksEndpointUrl",
+}, smithy.ShapeTypeString, 0)
+
+var _DatabricksObject = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.cleanrooms",
+	Name:      "DatabricksObject",
+}, smithy.ShapeTypeString, 0)
+
+var DatabricksTableReference = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.cleanrooms",
+	Name:      "DatabricksTableReference",
+}, smithy.ShapeTypeStructure, 4)
+var DatabricksTableReference_schemaName *smithy.Schema
+
+var DatabricksTableReference_tableName *smithy.Schema
+
+var DatabricksTableReference_workspaceUrl *smithy.Schema
+
+var DatabricksTableReference_connectionType *smithy.Schema
+
+var _DatabricksWorkspaceUrl = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.cleanrooms",
+	Name:      "DatabricksWorkspaceUrl",
+}, smithy.ShapeTypeString, 0)
 
 var DataEncryptionMetadata = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cleanrooms",
@@ -3634,7 +3681,8 @@ var _IntermediateTableVersionSummaryList_member *smithy.Schema
 var InternalServerException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cleanrooms",
 	Name:      "InternalServerException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 500})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
+	&smithytraits.HTTPError{Code: 500})
 var InternalServerException_message *smithy.Schema
 
 var JobComputePaymentConfig = smithy.NewSchema(smithy.ShapeID{
@@ -4820,7 +4868,8 @@ var _ResourceDescription = smithy.NewSchema(smithy.ShapeID{
 var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cleanrooms",
 	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 3, &smithytraits.HTTPError{Code: 404})
+}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 404})
 var ResourceNotFoundException_message *smithy.Schema
 
 var ResourceNotFoundException_resourceId *smithy.Schema
@@ -5115,7 +5164,8 @@ var _SelectedAnalysisMethods_member *smithy.Schema
 var ServiceQuotaExceededException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cleanrooms",
 	Name:      "ServiceQuotaExceededException",
-}, smithy.ShapeTypeStructure, 3, &smithytraits.HTTPError{Code: 402})
+}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 402})
 var ServiceQuotaExceededException_message *smithy.Schema
 
 var ServiceQuotaExceededException_quotaName *smithy.Schema
@@ -5320,12 +5370,26 @@ var _TableDescription = smithy.NewSchema(smithy.ShapeID{
 var TableReference = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cleanrooms",
 	Name:      "TableReference",
-}, smithy.ShapeTypeUnion, 3)
+}, smithy.ShapeTypeUnion, 4)
 var TableReference_glue *smithy.Schema
 
 var TableReference_snowflake *smithy.Schema
 
 var TableReference_athena *smithy.Schema
+
+var TableReference_databricks *smithy.Schema
+
+var TableReferenceType = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.cleanrooms",
+	Name:      "TableReferenceType",
+}, smithy.ShapeTypeEnum, 4)
+var TableReferenceType_GLUE *smithy.Schema
+
+var TableReferenceType_SNOWFLAKE *smithy.Schema
+
+var TableReferenceType_ATHENA *smithy.Schema
+
+var TableReferenceType_DATABRICKS *smithy.Schema
 
 var _TagKey = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cleanrooms",
@@ -5365,7 +5429,8 @@ var _TargetProtectedQueryStatus = smithy.NewSchema(smithy.ShapeID{
 var ThrottlingException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cleanrooms",
 	Name:      "ThrottlingException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 429})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 429})
 var ThrottlingException_message *smithy.Schema
 
 var UpdateMembershipPaymentConfiguration = smithy.NewSchema(smithy.ShapeID{
@@ -5391,7 +5456,8 @@ var _UUID = smithy.NewSchema(smithy.ShapeID{
 var ValidationException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cleanrooms",
 	Name:      "ValidationException",
-}, smithy.ShapeTypeStructure, 3, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var ValidationException_message *smithy.Schema
 
 var ValidationException_reason *smithy.Schema
@@ -8629,11 +8695,35 @@ func init() {
 
 	SnowflakeTableReference_tableSchema = SnowflakeTableReference.AddMember("tableSchema", SnowflakeTableSchema)
 
+	DatabricksDeltaSharingConnection_deltaShareEndpoint = DatabricksDeltaSharingConnection.AddMember("deltaShareEndpoint", _DatabricksEndpointUrl)
+
+	DatabricksDeltaSharingConnection_shareName = DatabricksDeltaSharingConnection.AddMember("shareName", _DatabricksObject)
+
+	DatabricksConnectionType_deltaSharing = DatabricksConnectionType.AddMember("deltaSharing", DatabricksDeltaSharingConnection)
+
+	DatabricksTableReference_schemaName = DatabricksTableReference.AddMember("schemaName", _DatabricksObject)
+
+	DatabricksTableReference_tableName = DatabricksTableReference.AddMember("tableName", _DatabricksObject)
+
+	DatabricksTableReference_workspaceUrl = DatabricksTableReference.AddMember("workspaceUrl", _DatabricksWorkspaceUrl)
+
+	DatabricksTableReference_connectionType = DatabricksTableReference.AddMember("connectionType", DatabricksConnectionType)
+
 	TableReference_glue = TableReference.AddMember("glue", GlueTableReference)
 
 	TableReference_snowflake = TableReference.AddMember("snowflake", SnowflakeTableReference)
 
 	TableReference_athena = TableReference.AddMember("athena", AthenaTableReference)
+
+	TableReference_databricks = TableReference.AddMember("databricks", DatabricksTableReference)
+
+	TableReferenceType_GLUE = TableReferenceType.AddMember("GLUE", smithyprelude.Unit)
+
+	TableReferenceType_SNOWFLAKE = TableReferenceType.AddMember("SNOWFLAKE", smithyprelude.Unit)
+
+	TableReferenceType_ATHENA = TableReferenceType.AddMember("ATHENA", smithyprelude.Unit)
+
+	TableReferenceType_DATABRICKS = TableReferenceType.AddMember("DATABRICKS", smithyprelude.Unit)
 
 	ConfiguredTableAnalysisRuleType_AGGREGATION = ConfiguredTableAnalysisRuleType.AddMember("AGGREGATION", smithyprelude.Unit)
 
@@ -8658,6 +8748,8 @@ func init() {
 	ConfiguredTable_description = ConfiguredTable.AddMember("description", _TableDescription)
 
 	ConfiguredTable_tableReference = ConfiguredTable.AddMember("tableReference", TableReference)
+
+	ConfiguredTable_tableType = ConfiguredTable.AddMember("tableType", TableReferenceType)
 
 	ConfiguredTable_createTime = ConfiguredTable.AddMember("createTime", smithyprelude.Timestamp)
 
@@ -8766,6 +8858,8 @@ func init() {
 	ConfiguredTableSummary_arn = ConfiguredTableSummary.AddMember("arn", _ConfiguredTableArn)
 
 	ConfiguredTableSummary_name = ConfiguredTableSummary.AddMember("name", _DisplayName)
+
+	ConfiguredTableSummary_tableType = ConfiguredTableSummary.AddMember("tableType", TableReferenceType)
 
 	ConfiguredTableSummary_createTime = ConfiguredTableSummary.AddMember("createTime", smithyprelude.Timestamp)
 

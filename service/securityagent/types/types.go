@@ -33,6 +33,25 @@ type Actor struct {
 	noSmithyDocumentSerde
 }
 
+// A message received at an actor's server-generated email MFA address.
+type ActorMessage struct {
+
+	// The plain-text body of the message, containing the MFA code or verification
+	// link.
+	Body *string
+
+	// The time the message was received.
+	ReceivedAt *time.Time
+
+	// The address the message was sent from.
+	Sender *string
+
+	// The subject line of the message.
+	Subject *string
+
+	noSmithyDocumentSerde
+}
+
 // Represents an agent space, which is a dedicated workspace for securing a
 // specific application. An agent space contains the configuration, resources, and
 // settings needed for security testing.
@@ -254,6 +273,97 @@ type AWSResources struct {
 	noSmithyDocumentSerde
 }
 
+// Connection details for an Azure DevOps integration.
+type AzureDevOpsIntegrationInput struct {
+
+	// The OAuth 2.0 authorization code returned to your redirect URL after the
+	// connection is authorized.
+	//
+	// This member is required.
+	Code *string
+
+	// The name of the Azure DevOps organization to connect, for example my-org .
+	//
+	// This member is required.
+	OrganizationName *string
+
+	// The CSRF state value returned by InitiateProviderRegistration and echoed back
+	// on the authorization redirect.
+	//
+	// This member is required.
+	State *string
+
+	noSmithyDocumentSerde
+}
+
+// Metadata for an integrated Azure DevOps repository.
+type AzureDevOpsRepositoryMetadata struct {
+
+	// Name of the resource e.g. repository name, etc.
+	//
+	// This member is required.
+	Name *string
+
+	// The name of the Azure DevOps organization that owns the repository.
+	//
+	// This member is required.
+	Organization *string
+
+	// Provider Id of the resource e.g. GitHub repository id, etc.
+	//
+	// This member is required.
+	ProviderResourceId *string
+
+	// Defines the visibility level of provider resources. PRIVATE indicates
+	// restricted access, while PUBLIC indicates open access.
+	AccessType AccessType
+
+	// The name of the Azure DevOps project that contains the repository.
+	Project *string
+
+	// The GUID of the Azure DevOps project that contains the repository.
+	ProjectId *string
+
+	noSmithyDocumentSerde
+}
+
+// An Azure DevOps repository integrated as a resource.
+type AzureDevOpsRepositoryResource struct {
+
+	// Name of the resource e.g. repository name, etc.
+	//
+	// This member is required.
+	Name *string
+
+	// The name of the Azure DevOps organization that owns the repository.
+	//
+	// This member is required.
+	Organization *string
+
+	// The name of the Azure DevOps project that contains the repository.
+	Project *string
+
+	noSmithyDocumentSerde
+}
+
+// Capabilities for an integrated Azure DevOps repository.
+type AzureDevOpsResourceCapabilities struct {
+
+	// Whether to post code review comments on pull requests.
+	LeaveComments *bool
+
+	// Whether to create pull requests with automated fixes.
+	RemediateCode *bool
+
+	// The filter groups that control which pull request events start an automatic
+	// code review when leaveComments is enabled. A review starts when any group
+	// matches. If you omit this, a review starts on PULL_REQUEST_READY_FOR_REVIEW
+	// events.
+	TriggerFilterGroups []TriggerFilterGroup
+
+	noSmithyDocumentSerde
+}
+
 // Contains information about a successfully created security requirement.
 type BatchCreateSecurityRequirementResult struct {
 
@@ -294,6 +404,64 @@ type BatchCreateSecurityRequirementResult struct {
 
 	// The recommended remediation steps when the requirement is not met.
 	Remediation *string
+
+	noSmithyDocumentSerde
+}
+
+// A finding that failed to disassociate, with the cause of the failure.
+type BatchDisassociateFindingIssueError struct {
+
+	// The machine-readable failure category.
+	//
+	// This member is required.
+	Code ErrorCode
+
+	// The identifier of the finding that failed to disassociate.
+	//
+	// This member is required.
+	FindingId *string
+
+	// A customer-facing explanation of the failure.
+	//
+	// This member is required.
+	Message *string
+
+	noSmithyDocumentSerde
+}
+
+// A finding whose issue could not be created, with the cause of the failure.
+type BatchExportFindingError struct {
+
+	// The machine-readable failure category.
+	//
+	// This member is required.
+	Code ErrorCode
+
+	// The identifier of the finding this error corresponds to.
+	//
+	// This member is required.
+	FindingId *string
+
+	// A customer-facing explanation of why the issue could not be created.
+	//
+	// This member is required.
+	Message *string
+
+	noSmithyDocumentSerde
+}
+
+// A finding whose issue was created.
+type BatchExportFindingResult struct {
+
+	// The identifier of the finding this result corresponds to.
+	//
+	// This member is required.
+	FindingId *string
+
+	// The issue that was created for the finding.
+	//
+	// This member is required.
+	LinkedIssue *LinkedIssue
 
 	noSmithyDocumentSerde
 }
@@ -360,6 +528,30 @@ type BatchSecurityRequirementError struct {
 	//
 	// This member is required.
 	SecurityRequirementName *string
+
+	noSmithyDocumentSerde
+}
+
+// Connection details for a self-managed Bitbucket Data Center integration.
+type BitbucketDataCenterIntegrationInput struct {
+
+	// The OAuth 2.0 authorization code returned to your redirect URL after the
+	// connection is authorized.
+	//
+	// This member is required.
+	Code *string
+
+	// The CSRF state value returned by InitiateProviderRegistration and echoed back
+	// on the authorization redirect.
+	//
+	// This member is required.
+	State *string
+
+	// The HTTPS URL of your Bitbucket Data Center instance, for example
+	// https://bitbucket.example.com .
+	//
+	// This member is required.
+	TargetUrl *string
 
 	noSmithyDocumentSerde
 }
@@ -442,6 +634,12 @@ type BitbucketResourceCapabilities struct {
 	// Whether to create pull requests with automated fixes.
 	RemediateCode *bool
 
+	// The filter groups that control which pull request events start an automatic
+	// code review when leaveComments is enabled. A review starts when any group
+	// matches. If you omit this, a review starts on PULL_REQUEST_READY_FOR_REVIEW
+	// events.
+	TriggerFilterGroups []TriggerFilterGroup
+
 	noSmithyDocumentSerde
 }
 
@@ -491,6 +689,16 @@ type Category struct {
 
 	// The name of the category.
 	Name *string
+
+	noSmithyDocumentSerde
+}
+
+// The configuration that enables a pentest to run as part of a CI/CD pipeline,
+// scoped to the code changes in each pipeline run.
+type CiCdConfiguration struct {
+
+	// Whether CI/CD pentesting is enabled for this pentest.
+	Enabled *bool
 
 	noSmithyDocumentSerde
 }
@@ -600,6 +808,12 @@ type CodeReview struct {
 	// not set, jobs run to completion with no budget cap.
 	MaxTaskHours *float64
 
+	// The destination for publishing scan reports to an integrated document provider.
+	ReportDestination *ReportDestination
+
+	// The report-generation filters applied when the report is exported.
+	ReportFilters *ReportFilters
+
 	// The IAM service role used for the code review.
 	ServiceRole *string
 
@@ -651,6 +865,9 @@ type CodeReviewJob struct {
 
 	// An overview of the code review job results.
 	Overview *string
+
+	// The destination for publishing scan reports to an integrated document provider.
+	ReportDestination *ReportDestination
 
 	// The IAM service role used for the code review job.
 	ServiceRole *string
@@ -1180,6 +1397,9 @@ type Finding struct {
 	// The identifier of the entity that last updated the finding.
 	LastUpdatedBy *string
 
+	// The issue in a third-party issue tracker that this finding has been exported to.
+	LinkedIssue *LinkedIssue
+
 	// The name of the finding.
 	Name *string
 
@@ -1196,6 +1416,10 @@ type Finding struct {
 	// The reasoning behind the finding, explaining why it was identified as a
 	// vulnerability.
 	Reasoning *string
+
+	// The suggested fix for the finding, describing the changes recommended to
+	// remediate the vulnerability, with example code or configuration.
+	RemediationCode *string
 
 	// The list of pentest job identifiers for revalidation jobs that retested this
 	// finding.
@@ -1362,6 +1586,12 @@ type GitHubResourceCapabilities struct {
 	// Indicates whether the integration can create code remediation pull requests.
 	RemediateCode *bool
 
+	// The filter groups that control which pull request events start an automatic
+	// code review when leaveComments is enabled. A review starts when any group
+	// matches. If you omit this, a review starts on PULL_REQUEST_READY_FOR_REVIEW
+	// events.
+	TriggerFilterGroups []TriggerFilterGroup
+
 	noSmithyDocumentSerde
 }
 
@@ -1439,6 +1669,12 @@ type GitLabResourceCapabilities struct {
 
 	// Whether to create merge requests with automated fixes.
 	RemediateCode *bool
+
+	// The filter groups that control which merge request events start an automatic
+	// code review when leaveComments is enabled. A review starts when any group
+	// matches. If you omit this, a review starts on PULL_REQUEST_READY_FOR_REVIEW
+	// events.
+	TriggerFilterGroups []TriggerFilterGroup
 
 	noSmithyDocumentSerde
 }
@@ -1529,13 +1765,24 @@ type IntegratedRepository struct {
 //
 // The following types satisfy this interface:
 //
+//	IntegratedResourceMemberAzureDevOpsRepository
 //	IntegratedResourceMemberBitbucketRepository
 //	IntegratedResourceMemberConfluenceDocument
 //	IntegratedResourceMemberGithubRepository
 //	IntegratedResourceMemberGitlabRepository
+//	IntegratedResourceMemberJiraProject
 type IntegratedResource interface {
 	isIntegratedResource()
 }
+
+// The Azure DevOps repository resource information.
+type IntegratedResourceMemberAzureDevOpsRepository struct {
+	Value AzureDevOpsRepositoryResource
+
+	noSmithyDocumentSerde
+}
+
+func (*IntegratedResourceMemberAzureDevOpsRepository) isIntegratedResource() {}
 
 // A Bitbucket repository integrated as a resource.
 type IntegratedResourceMemberBitbucketRepository struct {
@@ -1573,6 +1820,15 @@ type IntegratedResourceMemberGitlabRepository struct {
 
 func (*IntegratedResourceMemberGitlabRepository) isIntegratedResource() {}
 
+// The Jira project resource information.
+type IntegratedResourceMemberJiraProject struct {
+	Value JiraProjectResource
+
+	noSmithyDocumentSerde
+}
+
+func (*IntegratedResourceMemberJiraProject) isIntegratedResource() {}
+
 // Represents an input item for updating integrated resources, including the
 // resource and its capabilities.
 type IntegratedResourceInputItem struct {
@@ -1593,13 +1849,24 @@ type IntegratedResourceInputItem struct {
 //
 // The following types satisfy this interface:
 //
+//	IntegratedResourceMetadataMemberAzureDevOpsRepository
 //	IntegratedResourceMetadataMemberBitbucketRepository
 //	IntegratedResourceMetadataMemberConfluenceDocument
 //	IntegratedResourceMetadataMemberGithubRepository
 //	IntegratedResourceMetadataMemberGitlabRepository
+//	IntegratedResourceMetadataMemberJiraProject
 type IntegratedResourceMetadata interface {
 	isIntegratedResourceMetadata()
 }
+
+// The Azure DevOps repository metadata.
+type IntegratedResourceMetadataMemberAzureDevOpsRepository struct {
+	Value AzureDevOpsRepositoryMetadata
+
+	noSmithyDocumentSerde
+}
+
+func (*IntegratedResourceMetadataMemberAzureDevOpsRepository) isIntegratedResourceMetadata() {}
 
 // Metadata for an integrated Bitbucket repository.
 type IntegratedResourceMetadataMemberBitbucketRepository struct {
@@ -1636,6 +1903,15 @@ type IntegratedResourceMetadataMemberGitlabRepository struct {
 }
 
 func (*IntegratedResourceMetadataMemberGitlabRepository) isIntegratedResourceMetadata() {}
+
+// The Jira project metadata.
+type IntegratedResourceMetadataMemberJiraProject struct {
+	Value JiraProjectMetadata
+
+	noSmithyDocumentSerde
+}
+
+func (*IntegratedResourceMetadataMemberJiraProject) isIntegratedResourceMetadata() {}
 
 // Contains summary information about an integrated resource.
 type IntegratedResourceSummary struct {
@@ -1721,6 +1997,145 @@ type IntegrationSummary struct {
 	// Server or self-managed GitLab instance. This value is absent for SaaS
 	// integrations.
 	TargetUrl *string
+
+	// The payload URL of the integration's webhook, once it has been created. The
+	// signing secret is never returned on a read.
+	WebhookUrl *string
+
+	noSmithyDocumentSerde
+}
+
+// The destination for filing findings as issues in an integrated issue tracker.
+type IssueDestination struct {
+
+	// The integration identifier for the issue-tracker provider.
+	//
+	// This member is required.
+	IntegrationId *string
+
+	// The identifier of the project the issues are filed under.
+	//
+	// This member is required.
+	ProjectKey *string
+
+	noSmithyDocumentSerde
+}
+
+// The configuration for creating a Jira integration.
+type JiraIntegrationInput struct {
+
+	// The OAuth 2.0 authorization code returned from the consent redirect.
+	//
+	// This member is required.
+	Code *string
+
+	// The Atlassian installation identifier, available from the Atlassian
+	// administration console.
+	//
+	// This member is required.
+	InstallationId *string
+
+	// The Jira Cloud site URL, for example https://mysite.atlassian.net.
+	//
+	// This member is required.
+	SiteUrl *string
+
+	// The CSRF state token echoed back from the OAuth redirect.
+	//
+	// This member is required.
+	State *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains metadata about a Jira project that is integrated with the service.
+type JiraProjectMetadata struct {
+
+	// Name of the resource e.g. repository name, etc.
+	//
+	// This member is required.
+	Name *string
+
+	// The Jira project identifier.
+	//
+	// This member is required.
+	ProjectId *string
+
+	// The Jira project key, for example PROJ.
+	//
+	// This member is required.
+	ProjectKey *string
+
+	// Provider Id of the resource e.g. GitHub repository id, etc.
+	//
+	// This member is required.
+	ProviderResourceId *string
+
+	// The display name of the Jira project.
+	ProjectName *string
+
+	noSmithyDocumentSerde
+}
+
+// Represents a Jira project resource used in an integration.
+type JiraProjectResource struct {
+
+	// Name of the resource e.g. repository name, etc.
+	//
+	// This member is required.
+	Name *string
+
+	// The Jira project identifier.
+	//
+	// This member is required.
+	ProjectId *string
+
+	// The Jira project key, for example PROJ.
+	//
+	// This member is required.
+	ProjectKey *string
+
+	// The display name of the Jira project.
+	ProjectName *string
+
+	noSmithyDocumentSerde
+}
+
+// Capabilities for an integrated Jira project.
+type JiraResourceCapabilities struct {
+
+	// Whether to post comments on issues in the integrated jira project.
+	CommentIssue *bool
+
+	// Whether to create issues in the integrated jira project.
+	CreateIssue *bool
+
+	noSmithyDocumentSerde
+}
+
+// A reference to an issue created for a finding in a third-party issue tracker.
+type LinkedIssue struct {
+
+	// The integration identifier for the issue-tracker provider.
+	IntegrationId *string
+
+	// The stable numeric issue identifier.
+	IssueId *string
+
+	// The issue key.
+	IssueKey *string
+
+	// The issue URL.
+	IssueUrl *string
+
+	// The key of the project the issue belongs to.
+	ProjectKey *string
+
+	// The issue-tracker provider.
+	Provider Provider
+
+	// The Atlassian Cloud site URL.
+	SiteUrl *string
 
 	noSmithyDocumentSerde
 }
@@ -1895,6 +2310,10 @@ type Pentest struct {
 	// This member is required.
 	Title *string
 
+	// The CI/CD pentesting configuration for this pentest. Present when the pentest
+	// is set up to run from a CI/CD pipeline.
+	CicdConfiguration *CiCdConfiguration
+
 	// Strategy for cleaning up resources after pentest job completion.
 	CleanUpStrategy CleanUpStrategy
 
@@ -1922,8 +2341,17 @@ type Pentest struct {
 	// The network traffic configuration for the pentest.
 	NetworkTrafficConfig *NetworkTrafficConfig
 
+	// The destination for publishing scan reports to an integrated document provider.
+	ReportDestination *ReportDestination
+
+	// The report-generation filters applied when the report is exported.
+	ReportFilters *ReportFilters
+
 	// The IAM service role used for the pentest.
 	ServiceRole *string
+
+	// The category of application a pentest targets.
+	TestScope *TestScope
 
 	// The date and time the pentest was last updated, in UTC format.
 	UpdatedAt *time.Time
@@ -1944,6 +2372,10 @@ type PentestJob struct {
 
 	// The list of domains allowed during the pentest job.
 	AllowedDomains []Endpoint
+
+	// The configuration that enables a pentest to run as part of a CI/CD pipeline,
+	// scoped to the code changes in each pipeline run.
+	CicdConfiguration *CiCdConfiguration
 
 	// Strategy for cleaning up resources after pentest job completion.
 	CleanUpStrategy CleanUpStrategy
@@ -1979,7 +2411,7 @@ type PentestJob struct {
 	// The list of integrated repositories associated with the pentest job.
 	IntegratedRepositories []IntegratedRepository
 
-	// The type of the pentest job. Valid values are FULL and REVALIDATION.
+	// The type of the pentest job. Valid values are FULL, REVALIDATION, and CICD.
 	JobType JobType
 
 	// The CloudWatch Logs configuration for the pentest job.
@@ -2001,6 +2433,20 @@ type PentestJob struct {
 	// The unique identifier of the pentest job.
 	PentestJobId *string
 
+	// The destination for publishing scan reports to an integrated document provider.
+	ReportDestination *ReportDestination
+
+	// The URL to view this pentest job's findings report in the console.
+	ReportUrl *string
+
+	// The code changes that defined the scope of this CI/CD pentest job. Present only
+	// for jobs of type CICD.
+	ScopeChanges []ScopeChange
+
+	// The scoping outcome for this CI/CD pentest job. Present only for jobs of type
+	// CICD.
+	ScopeResult *ScopeResult
+
 	// The list of finding identifiers selected for revalidation. Present only when
 	// jobType is REVALIDATION.
 	SelectedFindingIds []string
@@ -2016,6 +2462,9 @@ type PentestJob struct {
 
 	// The list of steps in the pentest job execution.
 	Steps []Step
+
+	// The category of application a pentest targets.
+	TestScope *TestScope
 
 	// The title of the pentest job.
 	Title *string
@@ -2048,6 +2497,12 @@ type PentestJobSummary struct {
 
 	// The date and time the pentest job was created, in UTC format.
 	CreatedAt *time.Time
+
+	// The type of the pentest job. Valid values are FULL, REVALIDATION, and CICD.
+	JobType JobType
+
+	// The URL to view this pentest job's findings report in the console.
+	ReportUrl *string
 
 	// The current status of the pentest job.
 	Status JobStatus
@@ -2171,13 +2626,25 @@ type PrivateConnectionSummary struct {
 //
 // The following types satisfy this interface:
 //
+//	ProviderInputMemberAzureDevOps
 //	ProviderInputMemberBitbucket
+//	ProviderInputMemberBitbucketDataCenter
 //	ProviderInputMemberConfluence
 //	ProviderInputMemberGithub
 //	ProviderInputMemberGitlab
+//	ProviderInputMemberJira
 type ProviderInput interface {
 	isProviderInput()
 }
+
+// The Azure DevOps-specific input for creating an integration.
+type ProviderInputMemberAzureDevOps struct {
+	Value AzureDevOpsIntegrationInput
+
+	noSmithyDocumentSerde
+}
+
+func (*ProviderInputMemberAzureDevOps) isProviderInput() {}
 
 // The configuration for a Bitbucket integration.
 type ProviderInputMemberBitbucket struct {
@@ -2187,6 +2654,15 @@ type ProviderInputMemberBitbucket struct {
 }
 
 func (*ProviderInputMemberBitbucket) isProviderInput() {}
+
+// The Bitbucket Data Center-specific input for creating an integration.
+type ProviderInputMemberBitbucketDataCenter struct {
+	Value BitbucketDataCenterIntegrationInput
+
+	noSmithyDocumentSerde
+}
+
+func (*ProviderInputMemberBitbucketDataCenter) isProviderInput() {}
 
 // The configuration for a Confluence integration.
 type ProviderInputMemberConfluence struct {
@@ -2215,18 +2691,38 @@ type ProviderInputMemberGitlab struct {
 
 func (*ProviderInputMemberGitlab) isProviderInput() {}
 
+// The configuration for a Jira integration.
+type ProviderInputMemberJira struct {
+	Value JiraIntegrationInput
+
+	noSmithyDocumentSerde
+}
+
+func (*ProviderInputMemberJira) isProviderInput() {}
+
 // The capabilities for an integrated resource from a third-party provider. This
 // is a union type that contains provider-specific capabilities.
 //
 // The following types satisfy this interface:
 //
+//	ProviderResourceCapabilitiesMemberAzureDevOps
 //	ProviderResourceCapabilitiesMemberBitbucket
 //	ProviderResourceCapabilitiesMemberConfluence
 //	ProviderResourceCapabilitiesMemberGithub
 //	ProviderResourceCapabilitiesMemberGitlab
+//	ProviderResourceCapabilitiesMemberJira
 type ProviderResourceCapabilities interface {
 	isProviderResourceCapabilities()
 }
+
+// The Azure DevOps-specific resource capabilities.
+type ProviderResourceCapabilitiesMemberAzureDevOps struct {
+	Value AzureDevOpsResourceCapabilities
+
+	noSmithyDocumentSerde
+}
+
+func (*ProviderResourceCapabilitiesMemberAzureDevOps) isProviderResourceCapabilities() {}
 
 // Capabilities for an integrated Bitbucket repository.
 type ProviderResourceCapabilitiesMemberBitbucket struct {
@@ -2264,6 +2760,15 @@ type ProviderResourceCapabilitiesMemberGitlab struct {
 
 func (*ProviderResourceCapabilitiesMemberGitlab) isProviderResourceCapabilities() {}
 
+// The Jira-specific resource capabilities.
+type ProviderResourceCapabilitiesMemberJira struct {
+	Value JiraResourceCapabilities
+
+	noSmithyDocumentSerde
+}
+
+func (*ProviderResourceCapabilitiesMemberJira) isProviderResourceCapabilities() {}
+
 // Destination for publishing scan reports to an integrated document provider.
 type ReportDestination struct {
 
@@ -2282,6 +2787,85 @@ type ReportDestination struct {
 
 	// The parent document identifier under which the report will be created.
 	ParentId *string
+
+	noSmithyDocumentSerde
+}
+
+// The report-generation filters applied when a pentest or code review report is
+// exported.
+type ReportFilters struct {
+
+	// Whether to include reviewer annotation notes under each finding.
+	AnnotationNotes *bool
+
+	// Whether to include the compliance-ready report additions.
+	ComplianceReport *bool
+
+	// The confidence levels to include in the report.
+	ConfidenceLevels []ConfidenceLevel
+
+	// The finding types to include in the report.
+	FindingTypes []string
+
+	// The severity levels to include in the report.
+	RiskLevels []RiskLevel
+
+	// The risk types to include in the report.
+	RiskTypes []RiskType
+
+	// The finding statuses to include in the report.
+	Statuses []FindingStatus
+
+	// The task execution statuses to include in the report's task table.
+	TaskStatuses []TaskExecutionStatus
+
+	noSmithyDocumentSerde
+}
+
+// A code change in a CI/CD pipeline run that defines what a CI/CD pentest job
+// tests. Each scope change identifies an integrated repository and the commit
+// range for the change.
+type ScopeChange struct {
+
+	// The commit SHA at the tip of the change to be tested.
+	//
+	// This member is required.
+	HeadCommitSha *string
+
+	// The identifier of the integration for the source-code provider that hosts the
+	// repository.
+	//
+	// This member is required.
+	IntegrationId *string
+
+	// The provider-specific identifier of the repository the change belongs to.
+	//
+	// This member is required.
+	ProviderResourceId *string
+
+	// The commit SHA that the change is compared against. When omitted, the change is
+	// evaluated against the head commit alone.
+	BaseCommitSha *string
+
+	// The identifier of the CI/CD pipeline run that triggered this pentest job.
+	TriggerRunId *string
+
+	noSmithyDocumentSerde
+}
+
+// The outcome of scoping a CI/CD pentest job's code changes, including the
+// decision and the reason for it.
+type ScopeResult struct {
+
+	// The scoping decision for the job's code changes.
+	//
+	// This member is required.
+	Decision ScopeDecision
+
+	// A human-readable explanation of the scoping decision.
+	//
+	// This member is required.
+	Reason *string
 
 	noSmithyDocumentSerde
 }
@@ -2605,6 +3189,17 @@ type TaskSummary struct {
 	noSmithyDocumentSerde
 }
 
+// The category of application a pentest targets.
+type TestScope struct {
+
+	// The category of application under test.
+	//
+	// This member is required.
+	Type TestScopeType
+
+	noSmithyDocumentSerde
+}
+
 // Represents a threat identified during threat modeling.
 type Threat struct {
 
@@ -2734,6 +3329,9 @@ type ThreatModel struct {
 	// The CloudWatch Logs configuration for the threat model.
 	LogConfig *CloudWatchLog
 
+	// The destination for publishing scan reports to an integrated document provider.
+	ReportDestination *ReportDestination
+
 	// The scoped documents for the agent to focus on during threat modeling.
 	ScopeDocs []DocumentInfo
 
@@ -2769,6 +3367,9 @@ type ThreatModelJob struct {
 
 	// The list of integrated repositories used for threat modeling.
 	IntegratedRepositories []IntegratedRepository
+
+	// The destination for publishing scan reports to an integrated document provider.
+	ReportDestination *ReportDestination
 
 	// The scoped documents for the agent to focus on during threat modeling.
 	ScopeDocs []DocumentInfo
@@ -2964,10 +3565,45 @@ type ThreatSummary struct {
 	noSmithyDocumentSerde
 }
 
+// A condition on a pull request value.
+type TriggerFilter struct {
+
+	// The regular expressions to match against the value.
+	//
+	// This member is required.
+	Patterns []string
+
+	// The pull request value to match.
+	//
+	// This member is required.
+	Type TriggerFilterType
+
+	// Whether the value must match the patterns. The default is INCLUDE .
+	MatchMode TriggerFilterMatchMode
+
+	noSmithyDocumentSerde
+}
+
+// A set of conditions that start an automatic code review when they all pass. A
+// filter group must include events , filters , or both.
+type TriggerFilterGroup struct {
+
+	// Passes when the pull request event is one of the listed events. If you omit
+	// this, the group matches PULL_REQUEST_READY_FOR_REVIEW and PULL_REQUEST_DRAFT
+	// events only.
+	Events []TriggerEvent
+
+	// Passes when every filter passes. If you omit this, the group matches its events
+	// on any target branch and with any labels.
+	Filters []TriggerFilter
+
+	noSmithyDocumentSerde
+}
+
 // A trust anchor used when validating a target endpoint's TLS certificate.
 type TrustedCaCertificate struct {
 
-	// The source that AWS Security Agent reads the certificate from.
+	// The source that Security Agent reads the certificate from.
 	//
 	// This member is required.
 	Source CaCertificateSource
@@ -3096,14 +3732,15 @@ type VerificationScriptEnvVar struct {
 // subnets to use during testing.
 type VpcConfig struct {
 
-	// The Amazon Resource Names (ARNs) of the security groups for the VPC
+	// The Amazon Resource Names (ARNs) or IDs of the security groups for the VPC
 	// configuration.
 	SecurityGroupArns []string
 
-	// The Amazon Resource Names (ARNs) of the subnets for the VPC configuration.
+	// The Amazon Resource Names (ARNs) or IDs of the subnets for the VPC
+	// configuration.
 	SubnetArns []string
 
-	// The Amazon Resource Name (ARN) of the VPC.
+	// The Amazon Resource Name (ARN) or ID of the VPC.
 	VpcArn *string
 
 	noSmithyDocumentSerde

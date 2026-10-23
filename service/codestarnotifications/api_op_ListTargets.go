@@ -5,7 +5,9 @@ package codestarnotifications
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/codestarnotifications/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/codestarnotifications/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -46,6 +48,22 @@ type ListTargetsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListTargetsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListTargetsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListTargetsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeListTargetsFilters(s, schemas.ListTargetsRequest_Filters, v.Filters)
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListTargetsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListTargetsRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListTargetsOutput struct {
 
 	// An enumeration token that can be used in a request to return the next batch of
@@ -61,13 +79,35 @@ type ListTargetsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListTargetsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListTargetsResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListTargetsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListTargetsResult_NextToken, *v.NextToken)
+	}
+	serializeTargetsBatch(s, schemas.ListTargetsResult_Targets, v.Targets)
+}
+func (v *ListTargetsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListTargetsResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListTargetsResult_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListTargetsResult_NextToken, v.NextToken)
+		case schemas.ListTargetsResult_Targets:
+			return deserializeTargetsBatch(d, schemas.ListTargetsResult_Targets, &v.Targets)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListTargetsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListTargets{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListTargets, schemas.ListTargetsRequest, schemas.ListTargetsResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListTargets{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListTargets, schemas.ListTargetsRequest, schemas.ListTargetsResult), output: &ListTargetsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

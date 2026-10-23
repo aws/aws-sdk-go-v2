@@ -4,6 +4,8 @@ package appsync
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/appsync/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -38,6 +40,21 @@ type DeleteChannelNamespaceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteChannelNamespaceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteChannelNamespaceRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteChannelNamespaceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApiId != nil {
+		s.WriteString(schemas.DeleteChannelNamespaceRequest_apiId, *v.ApiId)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.DeleteChannelNamespaceRequest_name, *v.Name)
+	}
+}
+
 type DeleteChannelNamespaceOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -45,13 +62,26 @@ type DeleteChannelNamespaceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteChannelNamespaceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteChannelNamespaceResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteChannelNamespaceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteChannelNamespaceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteChannelNamespaceResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteChannelNamespaceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteChannelNamespace{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteChannelNamespace, schemas.DeleteChannelNamespaceRequest, schemas.DeleteChannelNamespaceResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteChannelNamespace{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteChannelNamespace, schemas.DeleteChannelNamespaceRequest, schemas.DeleteChannelNamespaceResponse), output: &DeleteChannelNamespaceOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,6 +4,8 @@ package guardduty
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/guardduty/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -45,6 +47,21 @@ type DeleteTrustedEntitySetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteTrustedEntitySetInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteTrustedEntitySetRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteTrustedEntitySetInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DetectorId != nil {
+		s.WriteString(schemas.DeleteTrustedEntitySetRequest_DetectorId, *v.DetectorId)
+	}
+	if v.TrustedEntitySetId != nil {
+		s.WriteString(schemas.DeleteTrustedEntitySetRequest_TrustedEntitySetId, *v.TrustedEntitySetId)
+	}
+}
+
 type DeleteTrustedEntitySetOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -52,13 +69,26 @@ type DeleteTrustedEntitySetOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteTrustedEntitySetOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteTrustedEntitySetResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteTrustedEntitySetOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteTrustedEntitySetOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteTrustedEntitySetResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteTrustedEntitySetMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteTrustedEntitySet{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteTrustedEntitySet, schemas.DeleteTrustedEntitySetRequest, schemas.DeleteTrustedEntitySetResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteTrustedEntitySet{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteTrustedEntitySet, schemas.DeleteTrustedEntitySetRequest, schemas.DeleteTrustedEntitySetResponse), output: &DeleteTrustedEntitySetOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

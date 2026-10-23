@@ -49,6 +49,21 @@ type CreateDirectConnectGatewayAttachmentInput struct {
 	// client token
 	ClientToken *string
 
+	// The NAT rules for the Direct Connect gateway attachment, up to 50 rules.
+	NatGatewayRules []types.NatRuleRequest
+
+	// Specifies whether to enable NAT gateway support on the Direct Connect gateway
+	// attachment. To enable NAT gateway support, you must also specify at least one
+	// NAT rule. If you don't specify a value, NAT gateway support is disabled. Only
+	// the core network owner can configure NAT on an attachment.
+	NatGatewaySupport types.NatGatewaySupportValue
+
+	// Specifies whether the core network installs system routes for the NAT CIDR
+	// blocks of the attachment's NAT rules. System routes have a route type of SYSTEM
+	// . NAT is applied to traffic whether or not this option is enabled. The default
+	// is true .
+	NatSystemRouteSupport *bool
+
 	// The routing policy label to apply to the Direct Connect Gateway attachment for
 	// traffic routing decisions.
 	RoutingPolicyLabel *string
@@ -77,6 +92,13 @@ func (v *CreateDirectConnectGatewayAttachmentInput) SerializeMembers(s smithy.Sh
 		s.WriteString(schemas.CreateDirectConnectGatewayAttachmentRequest_DirectConnectGatewayArn, *v.DirectConnectGatewayArn)
 	}
 	serializeExternalRegionCodeList(s, schemas.CreateDirectConnectGatewayAttachmentRequest_EdgeLocations, v.EdgeLocations)
+	serializeNatRuleRequestList(s, schemas.CreateDirectConnectGatewayAttachmentRequest_NatGatewayRules, v.NatGatewayRules)
+	if v.NatGatewaySupport != "" {
+		s.WriteString(schemas.CreateDirectConnectGatewayAttachmentRequest_NatGatewaySupport, string(v.NatGatewaySupport))
+	}
+	if v.NatSystemRouteSupport != nil {
+		s.WriteBool(schemas.CreateDirectConnectGatewayAttachmentRequest_NatSystemRouteSupport, *v.NatSystemRouteSupport)
+	}
 	if v.RoutingPolicyLabel != nil {
 		s.WriteString(schemas.CreateDirectConnectGatewayAttachmentRequest_RoutingPolicyLabel, *v.RoutingPolicyLabel)
 	}

@@ -4,7 +4,9 @@ package bedrock
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/bedrock/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrock/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -36,6 +38,18 @@ type GetMarketplaceModelEndpointInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetMarketplaceModelEndpointInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetMarketplaceModelEndpointRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetMarketplaceModelEndpointInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EndpointArn != nil {
+		s.WriteString(schemas.GetMarketplaceModelEndpointRequest_endpointArn, *v.EndpointArn)
+	}
+}
+
 type GetMarketplaceModelEndpointOutput struct {
 
 	// Details about the requested endpoint.
@@ -47,13 +61,34 @@ type GetMarketplaceModelEndpointOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetMarketplaceModelEndpointOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetMarketplaceModelEndpointResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetMarketplaceModelEndpointOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MarketplaceModelEndpoint != nil {
+		s.WriteStruct(schemas.GetMarketplaceModelEndpointResponse_marketplaceModelEndpoint)
+		v.MarketplaceModelEndpoint.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetMarketplaceModelEndpointOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetMarketplaceModelEndpointResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetMarketplaceModelEndpointResponse_marketplaceModelEndpoint:
+			v.MarketplaceModelEndpoint = &types.MarketplaceModelEndpoint{}
+			return v.MarketplaceModelEndpoint.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetMarketplaceModelEndpointMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetMarketplaceModelEndpoint{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetMarketplaceModelEndpoint, schemas.GetMarketplaceModelEndpointRequest, schemas.GetMarketplaceModelEndpointResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetMarketplaceModelEndpoint{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetMarketplaceModelEndpoint, schemas.GetMarketplaceModelEndpointRequest, schemas.GetMarketplaceModelEndpointResponse), output: &GetMarketplaceModelEndpointOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,6 +4,8 @@ package backup
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/backup/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -49,6 +51,24 @@ type GetRestoreTestingInferredMetadataInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetRestoreTestingInferredMetadataInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetRestoreTestingInferredMetadataInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetRestoreTestingInferredMetadataInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BackupVaultAccountId != nil {
+		s.WriteString(schemas.GetRestoreTestingInferredMetadataInput_BackupVaultAccountId, *v.BackupVaultAccountId)
+	}
+	if v.BackupVaultName != nil {
+		s.WriteString(schemas.GetRestoreTestingInferredMetadataInput_BackupVaultName, *v.BackupVaultName)
+	}
+	if v.RecoveryPointArn != nil {
+		s.WriteString(schemas.GetRestoreTestingInferredMetadataInput_RecoveryPointArn, *v.RecoveryPointArn)
+	}
+}
+
 type GetRestoreTestingInferredMetadataOutput struct {
 
 	// This is a string map of the metadata inferred from the request.
@@ -62,13 +82,29 @@ type GetRestoreTestingInferredMetadataOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetRestoreTestingInferredMetadataOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetRestoreTestingInferredMetadataOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetRestoreTestingInferredMetadataOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializestringMap(s, schemas.GetRestoreTestingInferredMetadataOutput_InferredMetadata, v.InferredMetadata)
+}
+func (v *GetRestoreTestingInferredMetadataOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetRestoreTestingInferredMetadataOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetRestoreTestingInferredMetadataOutput_InferredMetadata:
+			return deserializestringMap(d, schemas.GetRestoreTestingInferredMetadataOutput_InferredMetadata, &v.InferredMetadata)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetRestoreTestingInferredMetadataMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetRestoreTestingInferredMetadata{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetRestoreTestingInferredMetadata, schemas.GetRestoreTestingInferredMetadataInput, schemas.GetRestoreTestingInferredMetadataOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetRestoreTestingInferredMetadata{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetRestoreTestingInferredMetadata, schemas.GetRestoreTestingInferredMetadataInput, schemas.GetRestoreTestingInferredMetadataOutput), output: &GetRestoreTestingInferredMetadataOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

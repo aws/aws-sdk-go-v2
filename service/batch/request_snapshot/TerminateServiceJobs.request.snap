@@ -1,0 +1,5 @@
+POST /v1/terminateservicejobs
+
+Content-Type: application/json
+
+{"jobs":["__Member__","__Member__"],"reason":"__Reason__"}

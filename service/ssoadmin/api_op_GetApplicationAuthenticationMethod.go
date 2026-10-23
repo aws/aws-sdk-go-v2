@@ -4,7 +4,9 @@ package ssoadmin
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/ssoadmin/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ssoadmin/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,21 @@ type GetApplicationAuthenticationMethodInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetApplicationAuthenticationMethodInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetApplicationAuthenticationMethodRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetApplicationAuthenticationMethodInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationArn != nil {
+		s.WriteString(schemas.GetApplicationAuthenticationMethodRequest_ApplicationArn, *v.ApplicationArn)
+	}
+	if v.AuthenticationMethodType != "" {
+		s.WriteString(schemas.GetApplicationAuthenticationMethodRequest_AuthenticationMethodType, string(v.AuthenticationMethodType))
+	}
+}
+
 type GetApplicationAuthenticationMethodOutput struct {
 
 	// A structure that contains details about the requested authentication method.
@@ -50,13 +67,29 @@ type GetApplicationAuthenticationMethodOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetApplicationAuthenticationMethodOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetApplicationAuthenticationMethodResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetApplicationAuthenticationMethodOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAuthenticationMethod(s, schemas.GetApplicationAuthenticationMethodResponse_AuthenticationMethod, v.AuthenticationMethod)
+}
+func (v *GetApplicationAuthenticationMethodOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetApplicationAuthenticationMethodResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetApplicationAuthenticationMethodResponse_AuthenticationMethod:
+			return deserializeAuthenticationMethod(d, schemas.GetApplicationAuthenticationMethodResponse_AuthenticationMethod, &v.AuthenticationMethod)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetApplicationAuthenticationMethodMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetApplicationAuthenticationMethod{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetApplicationAuthenticationMethod, schemas.GetApplicationAuthenticationMethodRequest, schemas.GetApplicationAuthenticationMethodResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetApplicationAuthenticationMethod{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetApplicationAuthenticationMethod, schemas.GetApplicationAuthenticationMethodRequest, schemas.GetApplicationAuthenticationMethodResponse), output: &GetApplicationAuthenticationMethodOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

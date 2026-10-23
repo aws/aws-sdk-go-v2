@@ -4,7 +4,9 @@ package securityhub
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/securityhub/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/securityhub/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -44,6 +46,22 @@ type UpdateSecurityControlInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateSecurityControlInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateSecurityControlRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateSecurityControlInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LastUpdateReason != nil {
+		s.WriteString(schemas.UpdateSecurityControlRequest_LastUpdateReason, *v.LastUpdateReason)
+	}
+	serializeParameters(s, schemas.UpdateSecurityControlRequest_Parameters, v.Parameters)
+	if v.SecurityControlId != nil {
+		s.WriteString(schemas.UpdateSecurityControlRequest_SecurityControlId, *v.SecurityControlId)
+	}
+}
+
 type UpdateSecurityControlOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -51,13 +69,26 @@ type UpdateSecurityControlOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateSecurityControlOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateSecurityControlResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateSecurityControlOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *UpdateSecurityControlOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateSecurityControlResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateSecurityControlMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateSecurityControl{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateSecurityControl, schemas.UpdateSecurityControlRequest, schemas.UpdateSecurityControlResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateSecurityControl{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateSecurityControl, schemas.UpdateSecurityControlRequest, schemas.UpdateSecurityControlResponse), output: &UpdateSecurityControlOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

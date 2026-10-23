@@ -5,7 +5,9 @@ package iotwireless
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/iotwireless/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotwireless/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -47,6 +49,24 @@ type ListPositionConfigurationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListPositionConfigurationsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListPositionConfigurationsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListPositionConfigurationsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != 0 {
+		s.WriteInt32(schemas.ListPositionConfigurationsRequest_MaxResults, v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListPositionConfigurationsRequest_NextToken, *v.NextToken)
+	}
+	if v.ResourceType != "" {
+		s.WriteString(schemas.ListPositionConfigurationsRequest_ResourceType, string(v.ResourceType))
+	}
+}
+
 type ListPositionConfigurationsOutput struct {
 
 	// The token to use to get the next set of results, or null if there are no
@@ -62,13 +82,35 @@ type ListPositionConfigurationsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListPositionConfigurationsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListPositionConfigurationsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListPositionConfigurationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListPositionConfigurationsResponse_NextToken, *v.NextToken)
+	}
+	serializePositionConfigurationList(s, schemas.ListPositionConfigurationsResponse_PositionConfigurationList, v.PositionConfigurationList)
+}
+func (v *ListPositionConfigurationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListPositionConfigurationsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListPositionConfigurationsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListPositionConfigurationsResponse_NextToken, v.NextToken)
+		case schemas.ListPositionConfigurationsResponse_PositionConfigurationList:
+			return deserializePositionConfigurationList(d, schemas.ListPositionConfigurationsResponse_PositionConfigurationList, &v.PositionConfigurationList)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListPositionConfigurationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListPositionConfigurations{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListPositionConfigurations, schemas.ListPositionConfigurationsRequest, schemas.ListPositionConfigurationsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListPositionConfigurations{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListPositionConfigurations, schemas.ListPositionConfigurationsRequest, schemas.ListPositionConfigurationsResponse), output: &ListPositionConfigurationsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

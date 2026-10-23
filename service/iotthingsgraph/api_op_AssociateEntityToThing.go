@@ -4,6 +4,8 @@ package iotthingsgraph
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/iotthingsgraph/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -51,6 +53,24 @@ type AssociateEntityToThingInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssociateEntityToThingInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssociateEntityToThingRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssociateEntityToThingInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EntityId != nil {
+		s.WriteString(schemas.AssociateEntityToThingRequest_entityId, *v.EntityId)
+	}
+	if v.NamespaceVersion != nil {
+		s.WriteInt64(schemas.AssociateEntityToThingRequest_namespaceVersion, *v.NamespaceVersion)
+	}
+	if v.ThingName != nil {
+		s.WriteString(schemas.AssociateEntityToThingRequest_thingName, *v.ThingName)
+	}
+}
+
 type AssociateEntityToThingOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -58,13 +78,26 @@ type AssociateEntityToThingOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssociateEntityToThingOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssociateEntityToThingResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssociateEntityToThingOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *AssociateEntityToThingOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AssociateEntityToThingResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationAssociateEntityToThingMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpAssociateEntityToThing{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociateEntityToThing, schemas.AssociateEntityToThingRequest, schemas.AssociateEntityToThingResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpAssociateEntityToThing{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociateEntityToThing, schemas.AssociateEntityToThingRequest, schemas.AssociateEntityToThingResponse), output: &AssociateEntityToThingOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

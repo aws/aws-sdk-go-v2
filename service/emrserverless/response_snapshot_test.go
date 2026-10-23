@@ -652,9 +652,10 @@ func TestCheckResponseSnapshot_GetResourceDashboard(t *testing.T) {
 	}
 	svc := serdeRespClient(status, header, body)
 	got, err := svc.GetResourceDashboard(context.Background(), &GetResourceDashboardInput{
-		ApplicationId: ptr.String("__ApplicationId__"),
-		ResourceId:    ptr.String("__ResourceId__"),
-		ResourceType:  types.ResourceType("SESSION"),
+		ApplicationId:           ptr.String("__ApplicationId__"),
+		ResourceId:              ptr.String("__ResourceId__"),
+		ResourceType:            types.ResourceType("SESSION"),
+		AccessSystemProfileLogs: ptr.Bool(true),
 	})
 	if err != nil {
 		t.Fatal(err)

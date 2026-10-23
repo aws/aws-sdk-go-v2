@@ -5,7 +5,9 @@ package emrserverless
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/emrserverless/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/emrserverless/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -46,6 +48,27 @@ type ListJobRunAttemptsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListJobRunAttemptsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListJobRunAttemptsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListJobRunAttemptsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationId != nil {
+		s.WriteString(schemas.ListJobRunAttemptsRequest_applicationId, *v.ApplicationId)
+	}
+	if v.JobRunId != nil {
+		s.WriteString(schemas.ListJobRunAttemptsRequest_jobRunId, *v.JobRunId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListJobRunAttemptsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListJobRunAttemptsRequest_nextToken, *v.NextToken)
+	}
+}
+
 type ListJobRunAttemptsOutput struct {
 
 	// The array of the listed job run attempt objects.
@@ -63,13 +86,35 @@ type ListJobRunAttemptsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListJobRunAttemptsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListJobRunAttemptsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListJobRunAttemptsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeJobRunAttempts(s, schemas.ListJobRunAttemptsResponse_jobRunAttempts, v.JobRunAttempts)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListJobRunAttemptsResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListJobRunAttemptsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListJobRunAttemptsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListJobRunAttemptsResponse_jobRunAttempts:
+			return deserializeJobRunAttempts(d, schemas.ListJobRunAttemptsResponse_jobRunAttempts, &v.JobRunAttempts)
+		case schemas.ListJobRunAttemptsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListJobRunAttemptsResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListJobRunAttemptsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListJobRunAttempts{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListJobRunAttempts, schemas.ListJobRunAttemptsRequest, schemas.ListJobRunAttemptsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListJobRunAttempts{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListJobRunAttempts, schemas.ListJobRunAttemptsRequest, schemas.ListJobRunAttemptsResponse), output: &ListJobRunAttemptsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

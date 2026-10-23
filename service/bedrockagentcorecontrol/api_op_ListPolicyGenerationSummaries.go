@@ -5,7 +5,9 @@ package bedrockagentcorecontrol
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -52,6 +54,24 @@ type ListPolicyGenerationSummariesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListPolicyGenerationSummariesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListPolicyGenerationSummariesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListPolicyGenerationSummariesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListPolicyGenerationSummariesRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListPolicyGenerationSummariesRequest_nextToken, *v.NextToken)
+	}
+	if v.PolicyEngineId != nil {
+		s.WriteString(schemas.ListPolicyGenerationSummariesRequest_policyEngineId, *v.PolicyEngineId)
+	}
+}
+
 type ListPolicyGenerationSummariesOutput struct {
 
 	// An array of policy generation summary objects that match the specified
@@ -73,13 +93,35 @@ type ListPolicyGenerationSummariesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListPolicyGenerationSummariesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListPolicyGenerationSummariesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListPolicyGenerationSummariesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListPolicyGenerationSummariesResponse_nextToken, *v.NextToken)
+	}
+	serializePolicyGenerationSummaryList(s, schemas.ListPolicyGenerationSummariesResponse_policyGenerations, v.PolicyGenerations)
+}
+func (v *ListPolicyGenerationSummariesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListPolicyGenerationSummariesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListPolicyGenerationSummariesResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListPolicyGenerationSummariesResponse_nextToken, v.NextToken)
+		case schemas.ListPolicyGenerationSummariesResponse_policyGenerations:
+			return deserializePolicyGenerationSummaryList(d, schemas.ListPolicyGenerationSummariesResponse_policyGenerations, &v.PolicyGenerations)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListPolicyGenerationSummariesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListPolicyGenerationSummaries{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListPolicyGenerationSummaries, schemas.ListPolicyGenerationSummariesRequest, schemas.ListPolicyGenerationSummariesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListPolicyGenerationSummaries{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListPolicyGenerationSummaries, schemas.ListPolicyGenerationSummariesRequest, schemas.ListPolicyGenerationSummariesResponse), output: &ListPolicyGenerationSummariesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

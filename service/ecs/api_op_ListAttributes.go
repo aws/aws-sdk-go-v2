@@ -5,7 +5,9 @@ package ecs
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/ecs/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ecs/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -70,6 +72,33 @@ type ListAttributesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAttributesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAttributesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAttributesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AttributeName != nil {
+		s.WriteString(schemas.ListAttributesRequest_attributeName, *v.AttributeName)
+	}
+	if v.AttributeValue != nil {
+		s.WriteString(schemas.ListAttributesRequest_attributeValue, *v.AttributeValue)
+	}
+	if v.Cluster != nil {
+		s.WriteString(schemas.ListAttributesRequest_cluster, *v.Cluster)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListAttributesRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAttributesRequest_nextToken, *v.NextToken)
+	}
+	if v.TargetType != "" {
+		s.WriteString(schemas.ListAttributesRequest_targetType, string(v.TargetType))
+	}
+}
+
 type ListAttributesOutput struct {
 
 	// A list of attribute objects that meet the criteria of the request.
@@ -87,13 +116,35 @@ type ListAttributesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAttributesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAttributesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAttributesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAttributes(s, schemas.ListAttributesResponse_attributes, v.Attributes)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAttributesResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListAttributesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListAttributesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListAttributesResponse_attributes:
+			return deserializeAttributes(d, schemas.ListAttributesResponse_attributes, &v.Attributes)
+		case schemas.ListAttributesResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListAttributesResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListAttributesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListAttributes{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAttributes, schemas.ListAttributesRequest, schemas.ListAttributesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListAttributes{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAttributes, schemas.ListAttributesRequest, schemas.ListAttributesResponse), output: &ListAttributesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package bedrock
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/bedrock/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrock/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -53,6 +55,27 @@ type ListFoundationModelsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListFoundationModelsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListFoundationModelsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListFoundationModelsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ByCustomizationType != "" {
+		s.WriteString(schemas.ListFoundationModelsRequest_byCustomizationType, string(v.ByCustomizationType))
+	}
+	if v.ByInferenceType != "" {
+		s.WriteString(schemas.ListFoundationModelsRequest_byInferenceType, string(v.ByInferenceType))
+	}
+	if v.ByOutputModality != "" {
+		s.WriteString(schemas.ListFoundationModelsRequest_byOutputModality, string(v.ByOutputModality))
+	}
+	if v.ByProvider != nil {
+		s.WriteString(schemas.ListFoundationModelsRequest_byProvider, *v.ByProvider)
+	}
+}
+
 type ListFoundationModelsOutput struct {
 
 	// A list of Amazon Bedrock foundation models.
@@ -64,13 +87,29 @@ type ListFoundationModelsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListFoundationModelsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListFoundationModelsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListFoundationModelsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeFoundationModelSummaryList(s, schemas.ListFoundationModelsResponse_modelSummaries, v.ModelSummaries)
+}
+func (v *ListFoundationModelsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListFoundationModelsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListFoundationModelsResponse_modelSummaries:
+			return deserializeFoundationModelSummaryList(d, schemas.ListFoundationModelsResponse_modelSummaries, &v.ModelSummaries)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListFoundationModelsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListFoundationModels{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListFoundationModels, schemas.ListFoundationModelsRequest, schemas.ListFoundationModelsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListFoundationModels{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListFoundationModels, schemas.ListFoundationModelsRequest, schemas.ListFoundationModelsResponse), output: &ListFoundationModelsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

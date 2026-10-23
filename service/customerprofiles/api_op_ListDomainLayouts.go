@@ -5,7 +5,9 @@ package customerprofiles
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/customerprofiles/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/customerprofiles/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -42,6 +44,24 @@ type ListDomainLayoutsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListDomainLayoutsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListDomainLayoutsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListDomainLayoutsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DomainName != nil {
+		s.WriteString(schemas.ListDomainLayoutsRequest_DomainName, *v.DomainName)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListDomainLayoutsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListDomainLayoutsRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListDomainLayoutsOutput struct {
 
 	// Contains summary information about an EventStream.
@@ -56,13 +76,35 @@ type ListDomainLayoutsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListDomainLayoutsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListDomainLayoutsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListDomainLayoutsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeLayoutList(s, schemas.ListDomainLayoutsResponse_Items, v.Items)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListDomainLayoutsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListDomainLayoutsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListDomainLayoutsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListDomainLayoutsResponse_Items:
+			return deserializeLayoutList(d, schemas.ListDomainLayoutsResponse_Items, &v.Items)
+		case schemas.ListDomainLayoutsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListDomainLayoutsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListDomainLayoutsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListDomainLayouts{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDomainLayouts, schemas.ListDomainLayoutsRequest, schemas.ListDomainLayoutsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListDomainLayouts{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDomainLayouts, schemas.ListDomainLayoutsRequest, schemas.ListDomainLayoutsResponse), output: &ListDomainLayoutsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

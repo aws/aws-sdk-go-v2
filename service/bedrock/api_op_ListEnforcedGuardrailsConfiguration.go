@@ -5,7 +5,9 @@ package bedrock
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/bedrock/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrock/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -33,6 +35,18 @@ type ListEnforcedGuardrailsConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListEnforcedGuardrailsConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListEnforcedGuardrailsConfigurationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListEnforcedGuardrailsConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListEnforcedGuardrailsConfigurationRequest_nextToken, *v.NextToken)
+	}
+}
+
 type ListEnforcedGuardrailsConfigurationOutput struct {
 
 	// Array of AccountEnforcedGuardrailOutputConfiguration objects.
@@ -49,13 +63,35 @@ type ListEnforcedGuardrailsConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListEnforcedGuardrailsConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListEnforcedGuardrailsConfigurationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListEnforcedGuardrailsConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAccountEnforcedGuardrailsOutputConfiguration(s, schemas.ListEnforcedGuardrailsConfigurationResponse_guardrailsConfig, v.GuardrailsConfig)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListEnforcedGuardrailsConfigurationResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListEnforcedGuardrailsConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListEnforcedGuardrailsConfigurationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListEnforcedGuardrailsConfigurationResponse_guardrailsConfig:
+			return deserializeAccountEnforcedGuardrailsOutputConfiguration(d, schemas.ListEnforcedGuardrailsConfigurationResponse_guardrailsConfig, &v.GuardrailsConfig)
+		case schemas.ListEnforcedGuardrailsConfigurationResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListEnforcedGuardrailsConfigurationResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListEnforcedGuardrailsConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListEnforcedGuardrailsConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListEnforcedGuardrailsConfiguration, schemas.ListEnforcedGuardrailsConfigurationRequest, schemas.ListEnforcedGuardrailsConfigurationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListEnforcedGuardrailsConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListEnforcedGuardrailsConfiguration, schemas.ListEnforcedGuardrailsConfigurationRequest, schemas.ListEnforcedGuardrailsConfigurationResponse), output: &ListEnforcedGuardrailsConfigurationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

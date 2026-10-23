@@ -4,7 +4,9 @@ package mq
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/mq/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/mq/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -33,6 +35,18 @@ type DescribeConfigurationInput struct {
 	ConfigurationId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DescribeConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeConfigurationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConfigurationId != nil {
+		s.WriteString(schemas.DescribeConfigurationRequest_ConfigurationId, *v.ConfigurationId)
+	}
 }
 
 type DescribeConfigurationOutput struct {
@@ -82,13 +96,93 @@ type DescribeConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeConfigurationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.DescribeConfigurationResponse_Arn, *v.Arn)
+	}
+	if v.AuthenticationStrategy != "" {
+		s.WriteString(schemas.DescribeConfigurationResponse_AuthenticationStrategy, string(v.AuthenticationStrategy))
+	}
+	if v.Created != nil {
+		s.WriteTime(schemas.DescribeConfigurationResponse_Created, *v.Created)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.DescribeConfigurationResponse_Description, *v.Description)
+	}
+	if v.EngineType != "" {
+		s.WriteString(schemas.DescribeConfigurationResponse_EngineType, string(v.EngineType))
+	}
+	if v.EngineVersion != nil {
+		s.WriteString(schemas.DescribeConfigurationResponse_EngineVersion, *v.EngineVersion)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.DescribeConfigurationResponse_Id, *v.Id)
+	}
+	if v.LatestRevision != nil {
+		s.WriteStruct(schemas.DescribeConfigurationResponse_LatestRevision)
+		v.LatestRevision.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.DescribeConfigurationResponse_Name, *v.Name)
+	}
+	serialize__mapOf__string(s, schemas.DescribeConfigurationResponse_Tags, v.Tags)
+}
+func (v *DescribeConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeConfigurationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeConfigurationResponse_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.DescribeConfigurationResponse_Arn, v.Arn)
+		case schemas.DescribeConfigurationResponse_AuthenticationStrategy:
+			var ev string
+			if err := d.ReadString(schemas.DescribeConfigurationResponse_AuthenticationStrategy, &ev); err != nil {
+				return err
+			}
+			v.AuthenticationStrategy = types.AuthenticationStrategy(ev)
+			return nil
+		case schemas.DescribeConfigurationResponse_Created:
+			v.Created = new(time.Time)
+			return d.ReadTime(schemas.DescribeConfigurationResponse_Created, v.Created)
+		case schemas.DescribeConfigurationResponse_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.DescribeConfigurationResponse_Description, v.Description)
+		case schemas.DescribeConfigurationResponse_EngineType:
+			var ev string
+			if err := d.ReadString(schemas.DescribeConfigurationResponse_EngineType, &ev); err != nil {
+				return err
+			}
+			v.EngineType = types.EngineType(ev)
+			return nil
+		case schemas.DescribeConfigurationResponse_EngineVersion:
+			v.EngineVersion = new(string)
+			return d.ReadString(schemas.DescribeConfigurationResponse_EngineVersion, v.EngineVersion)
+		case schemas.DescribeConfigurationResponse_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.DescribeConfigurationResponse_Id, v.Id)
+		case schemas.DescribeConfigurationResponse_LatestRevision:
+			v.LatestRevision = &types.ConfigurationRevision{}
+			return v.LatestRevision.Deserialize(d)
+		case schemas.DescribeConfigurationResponse_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.DescribeConfigurationResponse_Name, v.Name)
+		case schemas.DescribeConfigurationResponse_Tags:
+			return deserialize__mapOf__string(d, schemas.DescribeConfigurationResponse_Tags, &v.Tags)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeConfiguration, schemas.DescribeConfigurationRequest, schemas.DescribeConfigurationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeConfiguration, schemas.DescribeConfigurationRequest, schemas.DescribeConfigurationResponse), output: &DescribeConfigurationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

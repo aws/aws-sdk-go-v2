@@ -4,7 +4,9 @@ package accessanalyzer
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/accessanalyzer/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/accessanalyzer/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -35,6 +37,28 @@ type GetAnalyzerInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetAnalyzerInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetAnalyzerRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetAnalyzerInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AnalyzerName != nil {
+		s.WriteString(schemas.GetAnalyzerRequest_analyzerName, *v.AnalyzerName)
+	}
+}
+func (v *GetAnalyzerInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetAnalyzerRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetAnalyzerRequest_analyzerName:
+			v.AnalyzerName = new(string)
+			return d.ReadString(schemas.GetAnalyzerRequest_analyzerName, v.AnalyzerName)
+		}
+		return nil
+	})
+}
+
 // The response to the request.
 type GetAnalyzerOutput struct {
 
@@ -49,13 +73,34 @@ type GetAnalyzerOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetAnalyzerOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetAnalyzerResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetAnalyzerOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Analyzer != nil {
+		s.WriteStruct(schemas.GetAnalyzerResponse_analyzer)
+		v.Analyzer.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetAnalyzerOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetAnalyzerResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetAnalyzerResponse_analyzer:
+			v.Analyzer = &types.AnalyzerSummary{}
+			return v.Analyzer.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetAnalyzerMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetAnalyzer{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAnalyzer, schemas.GetAnalyzerRequest, schemas.GetAnalyzerResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetAnalyzer{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAnalyzer, schemas.GetAnalyzerRequest, schemas.GetAnalyzerResponse), output: &GetAnalyzerOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

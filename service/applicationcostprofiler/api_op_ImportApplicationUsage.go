@@ -4,7 +4,9 @@ package applicationcostprofiler
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/applicationcostprofiler/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/applicationcostprofiler/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -38,6 +40,20 @@ type ImportApplicationUsageInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ImportApplicationUsageInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ImportApplicationUsageRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ImportApplicationUsageInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SourceS3Location != nil {
+		s.WriteStruct(schemas.ImportApplicationUsageRequest_sourceS3Location)
+		v.SourceS3Location.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type ImportApplicationUsageOutput struct {
 
 	// ID of the import request.
@@ -51,13 +67,32 @@ type ImportApplicationUsageOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ImportApplicationUsageOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ImportApplicationUsageResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ImportApplicationUsageOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ImportId != nil {
+		s.WriteString(schemas.ImportApplicationUsageResult_importId, *v.ImportId)
+	}
+}
+func (v *ImportApplicationUsageOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ImportApplicationUsageResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ImportApplicationUsageResult_importId:
+			v.ImportId = new(string)
+			return d.ReadString(schemas.ImportApplicationUsageResult_importId, v.ImportId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationImportApplicationUsageMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpImportApplicationUsage{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ImportApplicationUsage, schemas.ImportApplicationUsageRequest, schemas.ImportApplicationUsageResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpImportApplicationUsage{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ImportApplicationUsage, schemas.ImportApplicationUsageRequest, schemas.ImportApplicationUsageResult), output: &ImportApplicationUsageOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: Logs_20140328.DescribeDeliverySources
+
+{"deliverySources":[{"arn":"__Arn__","deliverySourceConfiguration":{"key0":"__Value__"},"logType":"__LogType__","name":"__Name__","resourceArns":["__Member__","__Member__"],"service":"__Service__","status":"ACTIVE","statusReason":"RESOURCE_DELETED","tags":{"key0":"__Value__"}},{"arn":"__Arn__","deliverySourceConfiguration":{"key0":"__Value__"},"logType":"__LogType__","name":"__Name__","resourceArns":["__Member__","__Member__"],"service":"__Service__","status":"ACTIVE","statusReason":"RESOURCE_DELETED","tags":{"key0":"__Value__"}}],"nextToken":"__NextToken__"}

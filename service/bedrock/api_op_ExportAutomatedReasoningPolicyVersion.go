@@ -4,7 +4,9 @@ package bedrock
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/bedrock/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrock/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -38,6 +40,18 @@ type ExportAutomatedReasoningPolicyVersionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ExportAutomatedReasoningPolicyVersionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ExportAutomatedReasoningPolicyVersionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ExportAutomatedReasoningPolicyVersionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PolicyArn != nil {
+		s.WriteString(schemas.ExportAutomatedReasoningPolicyVersionRequest_policyArn, *v.PolicyArn)
+	}
+}
+
 type ExportAutomatedReasoningPolicyVersionOutput struct {
 
 	// The exported policy definition containing the formal logic rules, variables,
@@ -52,13 +66,34 @@ type ExportAutomatedReasoningPolicyVersionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ExportAutomatedReasoningPolicyVersionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ExportAutomatedReasoningPolicyVersionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ExportAutomatedReasoningPolicyVersionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PolicyDefinition != nil {
+		s.WriteStruct(schemas.ExportAutomatedReasoningPolicyVersionResponse_policyDefinition)
+		v.PolicyDefinition.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *ExportAutomatedReasoningPolicyVersionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ExportAutomatedReasoningPolicyVersionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ExportAutomatedReasoningPolicyVersionResponse_policyDefinition:
+			v.PolicyDefinition = &types.AutomatedReasoningPolicyDefinition{}
+			return v.PolicyDefinition.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationExportAutomatedReasoningPolicyVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpExportAutomatedReasoningPolicyVersion{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ExportAutomatedReasoningPolicyVersion, schemas.ExportAutomatedReasoningPolicyVersionRequest, schemas.ExportAutomatedReasoningPolicyVersionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpExportAutomatedReasoningPolicyVersion{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ExportAutomatedReasoningPolicyVersion, schemas.ExportAutomatedReasoningPolicyVersionRequest, schemas.ExportAutomatedReasoningPolicyVersionResponse), output: &ExportAutomatedReasoningPolicyVersionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

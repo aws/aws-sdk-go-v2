@@ -5,7 +5,9 @@ package timestreaminfluxdb
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/timestreaminfluxdb/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/timestreaminfluxdb/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -40,6 +42,21 @@ type ListDbInstancesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListDbInstancesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListDbInstancesInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListDbInstancesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListDbInstancesInput_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListDbInstancesInput_nextToken, *v.NextToken)
+	}
+}
+
 type ListDbInstancesOutput struct {
 
 	// A list of Timestream for InfluxDB DB instance summaries.
@@ -57,13 +74,35 @@ type ListDbInstancesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListDbInstancesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListDbInstancesOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListDbInstancesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDbInstanceSummaryList(s, schemas.ListDbInstancesOutput_items, v.Items)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListDbInstancesOutput_nextToken, *v.NextToken)
+	}
+}
+func (v *ListDbInstancesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListDbInstancesOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListDbInstancesOutput_items:
+			return deserializeDbInstanceSummaryList(d, schemas.ListDbInstancesOutput_items, &v.Items)
+		case schemas.ListDbInstancesOutput_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListDbInstancesOutput_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListDbInstancesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpListDbInstances{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDbInstances, schemas.ListDbInstancesInput, schemas.ListDbInstancesOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpListDbInstances{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDbInstances, schemas.ListDbInstancesInput, schemas.ListDbInstancesOutput), output: &ListDbInstancesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

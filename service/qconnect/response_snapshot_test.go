@@ -865,6 +865,7 @@ func TestCheckResponseSnapshot_CreateAssistant(t *testing.T) {
 			AiAgentConfiguration: map[string]types.AIAgentConfigurationData{
 				"key0": {
 					AiAgentId: ptr.String("__AiAgentId__"),
+					Enabled:   ptr.Bool(true),
 				},
 			},
 			OrchestratorConfigurationList: []types.OrchestratorConfigurationEntry{
@@ -1826,6 +1827,7 @@ func TestCheckResponseSnapshot_CreateSession(t *testing.T) {
 			AiAgentConfiguration: map[string]types.AIAgentConfigurationData{
 				"key0": {
 					AiAgentId: ptr.String("__AiAgentId__"),
+					Enabled:   ptr.Bool(true),
 				},
 			},
 			Origin: types.Origin("SYSTEM"),
@@ -1866,6 +1868,7 @@ func TestCheckResponseSnapshot_CreateSession(t *testing.T) {
 		AiAgentConfiguration: map[string]types.AIAgentConfigurationData{
 			"key0": {
 				AiAgentId: ptr.String("__AiAgentId__"),
+				Enabled:   ptr.Bool(true),
 			},
 		},
 		ContactArn: ptr.String("__ContactArn__"),
@@ -2540,6 +2543,7 @@ func TestCheckResponseSnapshot_GetAssistant(t *testing.T) {
 			AiAgentConfiguration: map[string]types.AIAgentConfigurationData{
 				"key0": {
 					AiAgentId: ptr.String("__AiAgentId__"),
+					Enabled:   ptr.Bool(true),
 				},
 			},
 			OrchestratorConfigurationList: []types.OrchestratorConfigurationEntry{
@@ -3465,6 +3469,7 @@ func TestCheckResponseSnapshot_GetSession(t *testing.T) {
 			AiAgentConfiguration: map[string]types.AIAgentConfigurationData{
 				"key0": {
 					AiAgentId: ptr.String("__AiAgentId__"),
+					Enabled:   ptr.Bool(true),
 				},
 			},
 			Origin: types.Origin("SYSTEM"),
@@ -4131,6 +4136,7 @@ func TestCheckResponseSnapshot_ListAssistants(t *testing.T) {
 				AiAgentConfiguration: map[string]types.AIAgentConfigurationData{
 					"key0": {
 						AiAgentId: ptr.String("__AiAgentId__"),
+						Enabled:   ptr.Bool(true),
 					},
 				},
 				OrchestratorConfigurationList: []types.OrchestratorConfigurationEntry{
@@ -4166,6 +4172,7 @@ func TestCheckResponseSnapshot_ListAssistants(t *testing.T) {
 				AiAgentConfiguration: map[string]types.AIAgentConfigurationData{
 					"key0": {
 						AiAgentId: ptr.String("__AiAgentId__"),
+						Enabled:   ptr.Bool(true),
 					},
 				},
 				OrchestratorConfigurationList: []types.OrchestratorConfigurationEntry{
@@ -4930,6 +4937,9 @@ func TestCheckResponseSnapshot_ListSpans(t *testing.T) {
 					AiAgentVersion:             ptr.Int32(1),
 					AiAgentInvoker:             ptr.String("__AiAgentInvoker__"),
 					AiAgentOrchestratorUseCase: ptr.String("__AiAgentOrchestratorUseCase__"),
+					InteractionMode:            types.InteractionMode("DELEGATE"),
+					TargetAgentId:              ptr.String("__TargetAgentId__"),
+					ReturnReason:               types.ReturnReason("COMPLETE"),
 					RequestModel:               ptr.String("__RequestModel__"),
 					RequestMaxTokens:           ptr.Int32(1),
 					Temperature:                ptr.Float32(1.0),
@@ -5273,6 +5283,9 @@ func TestCheckResponseSnapshot_ListSpans(t *testing.T) {
 					AiAgentVersion:             ptr.Int32(1),
 					AiAgentInvoker:             ptr.String("__AiAgentInvoker__"),
 					AiAgentOrchestratorUseCase: ptr.String("__AiAgentOrchestratorUseCase__"),
+					InteractionMode:            types.InteractionMode("DELEGATE"),
+					TargetAgentId:              ptr.String("__TargetAgentId__"),
+					ReturnReason:               types.ReturnReason("COMPLETE"),
 					RequestModel:               ptr.String("__RequestModel__"),
 					RequestMaxTokens:           ptr.Int32(1),
 					Temperature:                ptr.Float32(1.0),
@@ -6165,6 +6178,18 @@ func TestCheckResponseSnapshot_Retrieve(t *testing.T) {
 				SourceId:      ptr.String("__SourceId__"),
 				ReferenceType: types.ReferenceType("WEB_CRAWLER"),
 				ContentText:   ptr.String("__ContentText__"),
+			},
+		},
+		Errors: []types.RetrieveError{
+			{
+				AssociationId: ptr.String("__AssociationId__"),
+				Code:          types.RetrieveErrorCode("ACCESS_DENIED"),
+				Message:       ptr.String("__Message__"),
+			},
+			{
+				AssociationId: ptr.String("__AssociationId__"),
+				Code:          types.RetrieveErrorCode("ACCESS_DENIED"),
+				Message:       ptr.String("__Message__"),
 			},
 		},
 	}
@@ -7341,6 +7366,7 @@ func TestCheckResponseSnapshot_UpdateAssistantAIAgent(t *testing.T) {
 			AiAgentConfiguration: map[string]types.AIAgentConfigurationData{
 				"key0": {
 					AiAgentId: ptr.String("__AiAgentId__"),
+					Enabled:   ptr.Bool(true),
 				},
 			},
 			OrchestratorConfigurationList: []types.OrchestratorConfigurationEntry{
@@ -7368,6 +7394,7 @@ func TestCheckResponseSnapshot_UpdateAssistantAIAgent(t *testing.T) {
 		AiAgentType: types.AIAgentType("MANUAL_SEARCH"),
 		Configuration: &types.AIAgentConfigurationData{
 			AiAgentId: ptr.String("__AiAgentId__"),
+			Enabled:   ptr.Bool(true),
 		},
 		OrchestratorUseCase: ptr.String("__OrchestratorUseCase__"),
 	})
@@ -8086,6 +8113,7 @@ func TestCheckResponseSnapshot_UpdateSession(t *testing.T) {
 			AiAgentConfiguration: map[string]types.AIAgentConfigurationData{
 				"key0": {
 					AiAgentId: ptr.String("__AiAgentId__"),
+					Enabled:   ptr.Bool(true),
 				},
 			},
 			Origin: types.Origin("SYSTEM"),
@@ -8122,6 +8150,7 @@ func TestCheckResponseSnapshot_UpdateSession(t *testing.T) {
 		AiAgentConfiguration: map[string]types.AIAgentConfigurationData{
 			"key0": {
 				AiAgentId: ptr.String("__AiAgentId__"),
+				Enabled:   ptr.Bool(true),
 			},
 		},
 		OrchestratorConfigurationList: []types.OrchestratorConfigurationEntry{
@@ -8286,6 +8315,7 @@ func TestCheckResponseSnapshot_Error_DependencyFailedException(t *testing.T) {
 		AiAgentConfiguration: map[string]types.AIAgentConfigurationData{
 			"key0": {
 				AiAgentId: ptr.String("__AiAgentId__"),
+				Enabled:   ptr.Bool(true),
 			},
 		},
 		ContactArn: ptr.String("__ContactArn__"),

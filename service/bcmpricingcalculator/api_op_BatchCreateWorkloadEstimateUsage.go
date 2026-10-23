@@ -5,7 +5,9 @@ package bcmpricingcalculator
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/bcmpricingcalculator/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bcmpricingcalculator/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -52,6 +54,22 @@ type BatchCreateWorkloadEstimateUsageInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchCreateWorkloadEstimateUsageInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchCreateWorkloadEstimateUsageRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchCreateWorkloadEstimateUsageInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.BatchCreateWorkloadEstimateUsageRequest_clientToken, *v.ClientToken)
+	}
+	serializeBatchCreateWorkloadEstimateUsageEntries(s, schemas.BatchCreateWorkloadEstimateUsageRequest_usage, v.Usage)
+	if v.WorkloadEstimateId != nil {
+		s.WriteString(schemas.BatchCreateWorkloadEstimateUsageRequest_workloadEstimateId, *v.WorkloadEstimateId)
+	}
+}
+
 type BatchCreateWorkloadEstimateUsageOutput struct {
 
 	//  Returns the list of errors reason and the usage item keys that cannot be
@@ -68,13 +86,32 @@ type BatchCreateWorkloadEstimateUsageOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchCreateWorkloadEstimateUsageOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchCreateWorkloadEstimateUsageResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchCreateWorkloadEstimateUsageOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeBatchCreateWorkloadEstimateUsageErrors(s, schemas.BatchCreateWorkloadEstimateUsageResponse_errors, v.Errors)
+	serializeBatchCreateWorkloadEstimateUsageItems(s, schemas.BatchCreateWorkloadEstimateUsageResponse_items, v.Items)
+}
+func (v *BatchCreateWorkloadEstimateUsageOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchCreateWorkloadEstimateUsageResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchCreateWorkloadEstimateUsageResponse_errors:
+			return deserializeBatchCreateWorkloadEstimateUsageErrors(d, schemas.BatchCreateWorkloadEstimateUsageResponse_errors, &v.Errors)
+		case schemas.BatchCreateWorkloadEstimateUsageResponse_items:
+			return deserializeBatchCreateWorkloadEstimateUsageItems(d, schemas.BatchCreateWorkloadEstimateUsageResponse_items, &v.Items)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationBatchCreateWorkloadEstimateUsageMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpBatchCreateWorkloadEstimateUsage{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchCreateWorkloadEstimateUsage, schemas.BatchCreateWorkloadEstimateUsageRequest, schemas.BatchCreateWorkloadEstimateUsageResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpBatchCreateWorkloadEstimateUsage{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchCreateWorkloadEstimateUsage, schemas.BatchCreateWorkloadEstimateUsageRequest, schemas.BatchCreateWorkloadEstimateUsageResponse), output: &BatchCreateWorkloadEstimateUsageOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

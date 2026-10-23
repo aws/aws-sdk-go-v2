@@ -5,7 +5,9 @@ package securityhub
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/securityhub/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/securityhub/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -49,6 +51,25 @@ type ListSecurityControlDefinitionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListSecurityControlDefinitionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListSecurityControlDefinitionsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListSecurityControlDefinitionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListSecurityControlDefinitionsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListSecurityControlDefinitionsRequest_NextToken, *v.NextToken)
+	}
+	serializeSecurityControlsProviders(s, schemas.ListSecurityControlDefinitionsRequest_Providers, v.Providers)
+	if v.StandardsArn != nil {
+		s.WriteString(schemas.ListSecurityControlDefinitionsRequest_StandardsArn, *v.StandardsArn)
+	}
+}
+
 type ListSecurityControlDefinitionsOutput struct {
 
 	//  An array of controls that apply to the specified standard.
@@ -66,13 +87,35 @@ type ListSecurityControlDefinitionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListSecurityControlDefinitionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListSecurityControlDefinitionsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListSecurityControlDefinitionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListSecurityControlDefinitionsResponse_NextToken, *v.NextToken)
+	}
+	serializeSecurityControlDefinitions(s, schemas.ListSecurityControlDefinitionsResponse_SecurityControlDefinitions, v.SecurityControlDefinitions)
+}
+func (v *ListSecurityControlDefinitionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListSecurityControlDefinitionsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListSecurityControlDefinitionsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListSecurityControlDefinitionsResponse_NextToken, v.NextToken)
+		case schemas.ListSecurityControlDefinitionsResponse_SecurityControlDefinitions:
+			return deserializeSecurityControlDefinitions(d, schemas.ListSecurityControlDefinitionsResponse_SecurityControlDefinitions, &v.SecurityControlDefinitions)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListSecurityControlDefinitionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListSecurityControlDefinitions{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListSecurityControlDefinitions, schemas.ListSecurityControlDefinitionsRequest, schemas.ListSecurityControlDefinitionsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListSecurityControlDefinitions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListSecurityControlDefinitions, schemas.ListSecurityControlDefinitionsRequest, schemas.ListSecurityControlDefinitionsResponse), output: &ListSecurityControlDefinitionsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

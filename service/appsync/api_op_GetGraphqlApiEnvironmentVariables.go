@@ -4,6 +4,8 @@ package appsync
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/appsync/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -34,6 +36,18 @@ type GetGraphqlApiEnvironmentVariablesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetGraphqlApiEnvironmentVariablesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetGraphqlApiEnvironmentVariablesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetGraphqlApiEnvironmentVariablesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApiId != nil {
+		s.WriteString(schemas.GetGraphqlApiEnvironmentVariablesRequest_apiId, *v.ApiId)
+	}
+}
+
 type GetGraphqlApiEnvironmentVariablesOutput struct {
 
 	// The payload containing each environmental variable in the "key" : "value"
@@ -46,13 +60,29 @@ type GetGraphqlApiEnvironmentVariablesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetGraphqlApiEnvironmentVariablesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetGraphqlApiEnvironmentVariablesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetGraphqlApiEnvironmentVariablesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeEnvironmentVariableMap(s, schemas.GetGraphqlApiEnvironmentVariablesResponse_environmentVariables, v.EnvironmentVariables)
+}
+func (v *GetGraphqlApiEnvironmentVariablesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetGraphqlApiEnvironmentVariablesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetGraphqlApiEnvironmentVariablesResponse_environmentVariables:
+			return deserializeEnvironmentVariableMap(d, schemas.GetGraphqlApiEnvironmentVariablesResponse_environmentVariables, &v.EnvironmentVariables)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetGraphqlApiEnvironmentVariablesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetGraphqlApiEnvironmentVariables{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetGraphqlApiEnvironmentVariables, schemas.GetGraphqlApiEnvironmentVariablesRequest, schemas.GetGraphqlApiEnvironmentVariablesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetGraphqlApiEnvironmentVariables{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetGraphqlApiEnvironmentVariables, schemas.GetGraphqlApiEnvironmentVariablesRequest, schemas.GetGraphqlApiEnvironmentVariablesResponse), output: &GetGraphqlApiEnvironmentVariablesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

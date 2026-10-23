@@ -146,6 +146,14 @@ func deserializeAppliedTerminologyList(d smithy.ShapeDeserializer, s *smithy.Sch
 	*v = make([]types.AppliedTerminology, 0)
 	var vv types.AppliedTerminology
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.AppliedTerminology
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = types.AppliedTerminology{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -160,6 +168,13 @@ func deserializeLanguageCodeStringList(d smithy.ShapeDeserializer, s *smithy.Sch
 	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			*v = append(*v, zero)
+			return nil
+		}
 
 		if err := d.ReadString(s.ListMember(), &vv); err != nil {
 			return err
@@ -174,6 +189,14 @@ func deserializeLanguagesList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[
 	*v = make([]types.Language, 0)
 	var vv types.Language
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.Language
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = types.Language{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -188,6 +211,14 @@ func deserializeParallelDataPropertiesList(d smithy.ShapeDeserializer, s *smithy
 	*v = make([]types.ParallelDataProperties, 0)
 	var vv types.ParallelDataProperties
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.ParallelDataProperties
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = types.ParallelDataProperties{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -202,6 +233,13 @@ func deserializeResourceNameList(d smithy.ShapeDeserializer, s *smithy.Schema, v
 	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			*v = append(*v, zero)
+			return nil
+		}
 
 		if err := d.ReadString(s.ListMember(), &vv); err != nil {
 			return err
@@ -216,6 +254,13 @@ func deserializeTagKeyList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]st
 	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			*v = append(*v, zero)
+			return nil
+		}
 
 		if err := d.ReadString(s.ListMember(), &vv); err != nil {
 			return err
@@ -230,6 +275,14 @@ func deserializeTagList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types
 	*v = make([]types.Tag, 0)
 	var vv types.Tag
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.Tag
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = types.Tag{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -244,6 +297,13 @@ func deserializeTargetLanguageCodeStringList(d smithy.ShapeDeserializer, s *smit
 	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			*v = append(*v, zero)
+			return nil
+		}
 
 		if err := d.ReadString(s.ListMember(), &vv); err != nil {
 			return err
@@ -258,6 +318,14 @@ func deserializeTerminologyPropertiesList(d smithy.ShapeDeserializer, s *smithy.
 	*v = make([]types.TerminologyProperties, 0)
 	var vv types.TerminologyProperties
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.TerminologyProperties
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = types.TerminologyProperties{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -272,6 +340,14 @@ func deserializeTermList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]type
 	*v = make([]types.Term, 0)
 	var vv types.Term
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.Term
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = types.Term{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -286,6 +362,14 @@ func deserializeTextTranslationJobPropertiesList(d smithy.ShapeDeserializer, s *
 	*v = make([]types.TextTranslationJobProperties, 0)
 	var vv types.TextTranslationJobProperties
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.TextTranslationJobProperties
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = types.TextTranslationJobProperties{}
 		if err := vv.Deserialize(d); err != nil {
 			return err

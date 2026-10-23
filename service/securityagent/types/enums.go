@@ -367,6 +367,9 @@ const (
 	// A targeted revalidation job that retests specific findings to determine whether
 	// they are still exploitable.
 	JobTypeRevalidation JobType = "REVALIDATION"
+	// A CI/CD pentest job that tests only the code changes in a single pipeline run,
+	// as determined by the scope changes supplied when the job is started.
+	JobTypeCicd JobType = "CICD"
 )
 
 // Values returns all known values for JobType. Note that this can be expanded in
@@ -377,6 +380,7 @@ func (JobType) Values() []JobType {
 	return []JobType{
 		"FULL",
 		"REVALIDATION",
+		"CICD",
 	}
 }
 
@@ -543,10 +547,12 @@ type Provider string
 
 // Enum values for Provider
 const (
-	ProviderGithub     Provider = "GITHUB"
-	ProviderGitlab     Provider = "GITLAB"
-	ProviderBitbucket  Provider = "BITBUCKET"
-	ProviderConfluence Provider = "CONFLUENCE"
+	ProviderGithub      Provider = "GITHUB"
+	ProviderGitlab      Provider = "GITLAB"
+	ProviderBitbucket   Provider = "BITBUCKET"
+	ProviderConfluence  Provider = "CONFLUENCE"
+	ProviderAzureDevops Provider = "AZURE_DEVOPS"
+	ProviderJira        Provider = "JIRA"
 )
 
 // Values returns all known values for Provider. Note that this can be expanded in
@@ -559,6 +565,8 @@ func (Provider) Values() []Provider {
 		"GITLAB",
 		"BITBUCKET",
 		"CONFLUENCE",
+		"AZURE_DEVOPS",
+		"JIRA",
 	}
 }
 
@@ -568,6 +576,7 @@ type ProviderType string
 const (
 	ProviderTypeSourceCode    ProviderType = "SOURCE_CODE"
 	ProviderTypeDocumentation ProviderType = "DOCUMENTATION"
+	ProviderTypeIssueTracking ProviderType = "ISSUE_TRACKING"
 )
 
 // Values returns all known values for ProviderType. Note that this can be
@@ -578,6 +587,7 @@ func (ProviderType) Values() []ProviderType {
 	return []ProviderType{
 		"SOURCE_CODE",
 		"DOCUMENTATION",
+		"ISSUE_TRACKING",
 	}
 }
 
@@ -606,6 +616,7 @@ type ResourceType string
 const (
 	ResourceTypeCodeRepository ResourceType = "CODE_REPOSITORY"
 	ResourceTypeDocument       ResourceType = "DOCUMENT"
+	ResourceTypeProject        ResourceType = "PROJECT"
 )
 
 // Values returns all known values for ResourceType. Note that this can be
@@ -616,6 +627,7 @@ func (ResourceType) Values() []ResourceType {
 	return []ResourceType{
 		"CODE_REPOSITORY",
 		"DOCUMENT",
+		"PROJECT",
 	}
 }
 
@@ -742,6 +754,32 @@ func (RiskType) Values() []RiskType {
 		"DATABASE_ACCESS",
 		"OUTBOUND_SERVICE_REQUEST",
 		"UNKNOWN",
+	}
+}
+
+type ScopeDecision string
+
+// Enum values for ScopeDecision
+const (
+	// The code changes are in scope and are tested by the pentest job.
+	ScopeDecisionInScope ScopeDecision = "IN_SCOPE"
+	// The code changes are out of scope and are not tested. No pentest is run for the
+	// changes.
+	ScopeDecisionScopedOut ScopeDecision = "SCOPED_OUT"
+	// The code changes could not be conclusively scoped because of a conflict in the
+	// scoping inputs.
+	ScopeDecisionScopeConflict ScopeDecision = "SCOPE_CONFLICT"
+)
+
+// Values returns all known values for ScopeDecision. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ScopeDecision) Values() []ScopeDecision {
+	return []ScopeDecision{
+		"IN_SCOPE",
+		"SCOPED_OUT",
+		"SCOPE_CONFLICT",
 	}
 }
 
@@ -983,6 +1021,27 @@ func (TaskExecutionStatus) Values() []TaskExecutionStatus {
 	}
 }
 
+type TestScopeType string
+
+// Enum values for TestScopeType
+const (
+	// A traditional web application.
+	TestScopeTypeWebApp TestScopeType = "WEB_APP"
+	// A generative AI application.
+	TestScopeTypeGenerativeAiApp TestScopeType = "GENERATIVE_AI_APP"
+)
+
+// Values returns all known values for TestScopeType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (TestScopeType) Values() []TestScopeType {
+	return []TestScopeType{
+		"WEB_APP",
+		"GENERATIVE_AI_APP",
+	}
+}
+
 type ThreatActor string
 
 // Enum values for ThreatActor
@@ -1050,6 +1109,75 @@ func (ThreatStatus) Values() []ThreatStatus {
 	}
 }
 
+type TriggerEvent string
+
+// Enum values for TriggerEvent
+const (
+	// A pull request that isn't a draft is opened, updated, or marked ready for
+	// review.
+	TriggerEventPullRequestReadyForReview TriggerEvent = "PULL_REQUEST_READY_FOR_REVIEW"
+	// A draft pull request is opened or updated.
+	TriggerEventPullRequestDraft TriggerEvent = "PULL_REQUEST_DRAFT"
+	// A label is added to a pull request. A filter group that selects this event must
+	// include a LABEL filter with the INCLUDE match mode, and a review starts only
+	// when the added label matches it.
+	TriggerEventPullRequestLabelAdded TriggerEvent = "PULL_REQUEST_LABEL_ADDED"
+)
+
+// Values returns all known values for TriggerEvent. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (TriggerEvent) Values() []TriggerEvent {
+	return []TriggerEvent{
+		"PULL_REQUEST_READY_FOR_REVIEW",
+		"PULL_REQUEST_DRAFT",
+		"PULL_REQUEST_LABEL_ADDED",
+	}
+}
+
+type TriggerFilterMatchMode string
+
+// Enum values for TriggerFilterMatchMode
+const (
+	// The filter passes when a value fully matches at least one pattern.
+	TriggerFilterMatchModeInclude TriggerFilterMatchMode = "INCLUDE"
+	// The filter passes when no value fully matches any pattern.
+	TriggerFilterMatchModeExclude TriggerFilterMatchMode = "EXCLUDE"
+)
+
+// Values returns all known values for TriggerFilterMatchMode. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (TriggerFilterMatchMode) Values() []TriggerFilterMatchMode {
+	return []TriggerFilterMatchMode{
+		"INCLUDE",
+		"EXCLUDE",
+	}
+}
+
+type TriggerFilterType string
+
+// Enum values for TriggerFilterType
+const (
+	// The name of the pull request's target branch, for example main .
+	TriggerFilterTypeTargetBranch TriggerFilterType = "TARGET_BRANCH"
+	// The labels on the pull request.
+	TriggerFilterTypeLabel TriggerFilterType = "LABEL"
+)
+
+// Values returns all known values for TriggerFilterType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (TriggerFilterType) Values() []TriggerFilterType {
+	return []TriggerFilterType{
+		"TARGET_BRANCH",
+		"LABEL",
+	}
+}
+
 type UserRole string
 
 // Enum values for UserRole
@@ -1109,5 +1237,28 @@ func (ValidationStatus) Values() []ValidationStatus {
 		"VALIDATION_FAILED",
 		"VALIDATING",
 		"NOT_VALIDATED",
+	}
+}
+
+type WebhookAction string
+
+// Enum values for WebhookAction
+const (
+	// Create the webhook if one does not already exist. Returns the payload URL and
+	// the signing secret.
+	WebhookActionCreateIfAbsent WebhookAction = "CREATE_IF_ABSENT"
+	// Generate a new signing secret for the existing webhook, keeping the same
+	// payload URL. Returns the new secret.
+	WebhookActionRotate WebhookAction = "ROTATE"
+)
+
+// Values returns all known values for WebhookAction. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (WebhookAction) Values() []WebhookAction {
+	return []WebhookAction{
+		"CREATE_IF_ABSENT",
+		"ROTATE",
 	}
 }

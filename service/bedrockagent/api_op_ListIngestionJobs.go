@@ -5,7 +5,9 @@ package bedrockagent
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/bedrockagent/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagent/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -58,6 +60,33 @@ type ListIngestionJobsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListIngestionJobsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListIngestionJobsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListIngestionJobsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DataSourceId != nil {
+		s.WriteString(schemas.ListIngestionJobsRequest_dataSourceId, *v.DataSourceId)
+	}
+	serializeIngestionJobFilters(s, schemas.ListIngestionJobsRequest_filters, v.Filters)
+	if v.KnowledgeBaseId != nil {
+		s.WriteString(schemas.ListIngestionJobsRequest_knowledgeBaseId, *v.KnowledgeBaseId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListIngestionJobsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListIngestionJobsRequest_nextToken, *v.NextToken)
+	}
+	if v.SortBy != nil {
+		s.WriteStruct(schemas.ListIngestionJobsRequest_sortBy)
+		v.SortBy.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type ListIngestionJobsOutput struct {
 
 	// A list of data ingestion jobs with information about each job.
@@ -76,13 +105,35 @@ type ListIngestionJobsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListIngestionJobsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListIngestionJobsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListIngestionJobsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeIngestionJobSummaries(s, schemas.ListIngestionJobsResponse_ingestionJobSummaries, v.IngestionJobSummaries)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListIngestionJobsResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListIngestionJobsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListIngestionJobsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListIngestionJobsResponse_ingestionJobSummaries:
+			return deserializeIngestionJobSummaries(d, schemas.ListIngestionJobsResponse_ingestionJobSummaries, &v.IngestionJobSummaries)
+		case schemas.ListIngestionJobsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListIngestionJobsResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListIngestionJobsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListIngestionJobs{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListIngestionJobs, schemas.ListIngestionJobsRequest, schemas.ListIngestionJobsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListIngestionJobs{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListIngestionJobs, schemas.ListIngestionJobsRequest, schemas.ListIngestionJobsResponse), output: &ListIngestionJobsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

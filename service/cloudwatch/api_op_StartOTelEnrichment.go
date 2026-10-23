@@ -5,8 +5,10 @@ package cloudwatch
 import (
 	"context"
 	"github.com/aws/aws-sdk-go-v2/service/cloudwatch/schemas"
+	"github.com/aws/aws-sdk-go-v2/service/cloudwatch/types"
 	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
+	"time"
 )
 
 // Enables enrichment and PromQL access for CloudWatch vended metrics for [supported Amazon Web Services resources] in the
@@ -17,7 +19,14 @@ import (
 // Before calling this operation, you must enable resource tags on telemetry for
 // your account. For more information, see [Enable resource tags on telemetry].
 //
+// Optionally, IncludeFilters and ExcludeFilters limit enrichment to a subset of
+// the account's metrics. These filters are stored only when this operation starts
+// enrichment. Calling StartOTelEnrichment for an account where enrichment is
+// already running has no effect and does not modify the filters that are applied.
+// To change them, use [UpdateOTelEnrichment].
+//
 // [supported Amazon Web Services resources]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/UsingResourceTagsForTelemetry.html
+// [UpdateOTelEnrichment]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_UpdateOTelEnrichment.html
 // [Enable resource tags on telemetry]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/EnableResourceTagsOnTelemetry.html
 func (c *Client) StartOTelEnrichment(ctx context.Context, params *StartOTelEnrichmentInput, optFns ...func(*Options)) (*StartOTelEnrichmentOutput, error) {
 	if params == nil {
@@ -35,6 +44,25 @@ func (c *Client) StartOTelEnrichment(ctx context.Context, params *StartOTelEnric
 }
 
 type StartOTelEnrichmentInput struct {
+
+	// The metric namespaces, and the metric names, to leave unenriched. If this
+	// parameter is omitted, nothing is excluded.
+	//
+	// Amazon CloudWatch applies ExcludeFilters after IncludeFilters , so a metric that
+	// both parameters match is not enriched.
+	//
+	// A maximum of 100 filters is allowed across IncludeFilters and ExcludeFilters
+	// combined.
+	ExcludeFilters []types.OTelEnrichmentMetricSelector
+
+	// The metric namespaces, and the metric names, to enrich. If this parameter is
+	// omitted, every namespace that Amazon CloudWatch supports for enrichment is in
+	// scope.
+	//
+	// A maximum of 100 filters is allowed across IncludeFilters and ExcludeFilters
+	// combined.
+	IncludeFilters []types.OTelEnrichmentMetricSelector
+
 	noSmithyDocumentSerde
 }
 
@@ -45,9 +73,25 @@ func (v *StartOTelEnrichmentInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *StartOTelEnrichmentInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeOTelEnrichmentMetricSelectorList(s, schemas.StartOTelEnrichmentInput_ExcludeFilters, v.ExcludeFilters)
+	serializeOTelEnrichmentMetricSelectorList(s, schemas.StartOTelEnrichmentInput_IncludeFilters, v.IncludeFilters)
 }
 
 type StartOTelEnrichmentOutput struct {
+
+	// The date and time that enrichment started for the account.
+	CreatedAt *time.Time
+
+	// The exclude filters that are stored for the account.
+	ExcludeFilters []types.OTelEnrichmentMetricSelector
+
+	// The include filters that are stored for the account.
+	IncludeFilters []types.OTelEnrichmentMetricSelector
+
+	// The date and time that the enrichment configuration for the account was last
+	// stored.
+	UpdatedAt *time.Time
+
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 
@@ -61,10 +105,28 @@ func (v *StartOTelEnrichmentOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *StartOTelEnrichmentOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.StartOTelEnrichmentOutput_CreatedAt, *v.CreatedAt)
+	}
+	serializeOTelEnrichmentMetricSelectorList(s, schemas.StartOTelEnrichmentOutput_ExcludeFilters, v.ExcludeFilters)
+	serializeOTelEnrichmentMetricSelectorList(s, schemas.StartOTelEnrichmentOutput_IncludeFilters, v.IncludeFilters)
+	if v.UpdatedAt != nil {
+		s.WriteTime(schemas.StartOTelEnrichmentOutput_UpdatedAt, *v.UpdatedAt)
+	}
 }
 func (v *StartOTelEnrichmentOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.StartOTelEnrichmentOutput, func(s *smithy.Schema) error {
 		switch s {
+		case schemas.StartOTelEnrichmentOutput_CreatedAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.StartOTelEnrichmentOutput_CreatedAt, v.CreatedAt)
+		case schemas.StartOTelEnrichmentOutput_ExcludeFilters:
+			return deserializeOTelEnrichmentMetricSelectorList(d, schemas.StartOTelEnrichmentOutput_ExcludeFilters, &v.ExcludeFilters)
+		case schemas.StartOTelEnrichmentOutput_IncludeFilters:
+			return deserializeOTelEnrichmentMetricSelectorList(d, schemas.StartOTelEnrichmentOutput_IncludeFilters, &v.IncludeFilters)
+		case schemas.StartOTelEnrichmentOutput_UpdatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.StartOTelEnrichmentOutput_UpdatedAt, v.UpdatedAt)
 		}
 		return nil
 	})
@@ -90,6 +152,9 @@ func (c *Client) addOperationStartOTelEnrichmentMiddlewares(stack *middleware.St
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
+	if err = addOpStartOTelEnrichmentValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

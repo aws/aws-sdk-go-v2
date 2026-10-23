@@ -4,7 +4,9 @@ package kinesis
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/kinesis/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/kinesis/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"github.com/aws/smithy-go/ptr"
 )
@@ -50,6 +52,23 @@ type DescribeStreamSummaryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeStreamSummaryInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeStreamSummaryInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeStreamSummaryInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.StreamARN != nil {
+		s.WriteString(schemas.DescribeStreamSummaryInput_StreamARN, *v.StreamARN)
+	}
+	if v.StreamId != nil {
+		s.WriteString(schemas.DescribeStreamSummaryInput_StreamId, *v.StreamId)
+	}
+	if v.StreamName != nil {
+		s.WriteString(schemas.DescribeStreamSummaryInput_StreamName, *v.StreamName)
+	}
+}
 func (in *DescribeStreamSummaryInput) bindEndpointParams(p *EndpointParameters) {
 
 	p.StreamARN = in.StreamARN
@@ -70,13 +89,34 @@ type DescribeStreamSummaryOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeStreamSummaryOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeStreamSummaryOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeStreamSummaryOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.StreamDescriptionSummary != nil {
+		s.WriteStruct(schemas.DescribeStreamSummaryOutput_StreamDescriptionSummary)
+		v.StreamDescriptionSummary.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DescribeStreamSummaryOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeStreamSummaryOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeStreamSummaryOutput_StreamDescriptionSummary:
+			v.StreamDescriptionSummary = &types.StreamDescriptionSummary{}
+			return v.StreamDescriptionSummary.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeStreamSummaryMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeStreamSummary{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeStreamSummary, schemas.DescribeStreamSummaryInput, schemas.DescribeStreamSummaryOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeStreamSummary{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeStreamSummary, schemas.DescribeStreamSummaryInput, schemas.DescribeStreamSummaryOutput), output: &DescribeStreamSummaryOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

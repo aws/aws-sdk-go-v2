@@ -4,7 +4,9 @@ package backup
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/backup/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/backup/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -33,6 +35,18 @@ type DescribeFrameworkInput struct {
 	FrameworkName *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DescribeFrameworkInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeFrameworkInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeFrameworkInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FrameworkName != nil {
+		s.WriteString(schemas.DescribeFrameworkInput_FrameworkName, *v.FrameworkName)
+	}
 }
 
 type DescribeFrameworkOutput struct {
@@ -90,13 +104,71 @@ type DescribeFrameworkOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeFrameworkOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeFrameworkOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeFrameworkOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.DescribeFrameworkOutput_CreationTime, *v.CreationTime)
+	}
+	if v.DeploymentStatus != nil {
+		s.WriteString(schemas.DescribeFrameworkOutput_DeploymentStatus, *v.DeploymentStatus)
+	}
+	if v.FrameworkArn != nil {
+		s.WriteString(schemas.DescribeFrameworkOutput_FrameworkArn, *v.FrameworkArn)
+	}
+	serializeFrameworkControls(s, schemas.DescribeFrameworkOutput_FrameworkControls, v.FrameworkControls)
+	if v.FrameworkDescription != nil {
+		s.WriteString(schemas.DescribeFrameworkOutput_FrameworkDescription, *v.FrameworkDescription)
+	}
+	if v.FrameworkName != nil {
+		s.WriteString(schemas.DescribeFrameworkOutput_FrameworkName, *v.FrameworkName)
+	}
+	if v.FrameworkStatus != nil {
+		s.WriteString(schemas.DescribeFrameworkOutput_FrameworkStatus, *v.FrameworkStatus)
+	}
+	if v.IdempotencyToken != nil {
+		s.WriteString(schemas.DescribeFrameworkOutput_IdempotencyToken, *v.IdempotencyToken)
+	}
+}
+func (v *DescribeFrameworkOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeFrameworkOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeFrameworkOutput_CreationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.DescribeFrameworkOutput_CreationTime, v.CreationTime)
+		case schemas.DescribeFrameworkOutput_DeploymentStatus:
+			v.DeploymentStatus = new(string)
+			return d.ReadString(schemas.DescribeFrameworkOutput_DeploymentStatus, v.DeploymentStatus)
+		case schemas.DescribeFrameworkOutput_FrameworkArn:
+			v.FrameworkArn = new(string)
+			return d.ReadString(schemas.DescribeFrameworkOutput_FrameworkArn, v.FrameworkArn)
+		case schemas.DescribeFrameworkOutput_FrameworkControls:
+			return deserializeFrameworkControls(d, schemas.DescribeFrameworkOutput_FrameworkControls, &v.FrameworkControls)
+		case schemas.DescribeFrameworkOutput_FrameworkDescription:
+			v.FrameworkDescription = new(string)
+			return d.ReadString(schemas.DescribeFrameworkOutput_FrameworkDescription, v.FrameworkDescription)
+		case schemas.DescribeFrameworkOutput_FrameworkName:
+			v.FrameworkName = new(string)
+			return d.ReadString(schemas.DescribeFrameworkOutput_FrameworkName, v.FrameworkName)
+		case schemas.DescribeFrameworkOutput_FrameworkStatus:
+			v.FrameworkStatus = new(string)
+			return d.ReadString(schemas.DescribeFrameworkOutput_FrameworkStatus, v.FrameworkStatus)
+		case schemas.DescribeFrameworkOutput_IdempotencyToken:
+			v.IdempotencyToken = new(string)
+			return d.ReadString(schemas.DescribeFrameworkOutput_IdempotencyToken, v.IdempotencyToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeFrameworkMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeFramework{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeFramework, schemas.DescribeFrameworkInput, schemas.DescribeFrameworkOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeFramework{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeFramework, schemas.DescribeFrameworkInput, schemas.DescribeFrameworkOutput), output: &DescribeFrameworkOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

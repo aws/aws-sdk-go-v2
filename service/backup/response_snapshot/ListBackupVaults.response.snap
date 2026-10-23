@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"BackupVaultList":[{"BackupVaultArn":"__BackupVaultArn__","BackupVaultName":"__BackupVaultName__","CreationDate":946684800,"CreatorRequestId":"__CreatorRequestId__","EncryptionKeyArn":"__EncryptionKeyArn__","EncryptionKeyType":"AWS_OWNED_KMS_KEY","LockDate":946684800,"Locked":true,"MaxRetentionDays":1,"MinRetentionDays":1,"NumberOfRecoveryPoints":1,"VaultState":"CREATING","VaultType":"BACKUP_VAULT"},{"BackupVaultArn":"__BackupVaultArn__","BackupVaultName":"__BackupVaultName__","CreationDate":946684800,"CreatorRequestId":"__CreatorRequestId__","EncryptionKeyArn":"__EncryptionKeyArn__","EncryptionKeyType":"AWS_OWNED_KMS_KEY","LockDate":946684800,"Locked":true,"MaxRetentionDays":1,"MinRetentionDays":1,"NumberOfRecoveryPoints":1,"VaultState":"CREATING","VaultType":"BACKUP_VAULT"}],"NextToken":"__NextToken__"}

@@ -4,6 +4,8 @@ package glue
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/glue/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -61,6 +63,38 @@ type CreateColumnStatisticsTaskSettingsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateColumnStatisticsTaskSettingsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateColumnStatisticsTaskSettingsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateColumnStatisticsTaskSettingsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CatalogID != nil {
+		s.WriteString(schemas.CreateColumnStatisticsTaskSettingsRequest_CatalogID, *v.CatalogID)
+	}
+	serializeColumnNameList(s, schemas.CreateColumnStatisticsTaskSettingsRequest_ColumnNameList, v.ColumnNameList)
+	if v.DatabaseName != nil {
+		s.WriteString(schemas.CreateColumnStatisticsTaskSettingsRequest_DatabaseName, *v.DatabaseName)
+	}
+	if v.Role != nil {
+		s.WriteString(schemas.CreateColumnStatisticsTaskSettingsRequest_Role, *v.Role)
+	}
+	if v.SampleSize != 0 {
+		s.WriteFloat64(schemas.CreateColumnStatisticsTaskSettingsRequest_SampleSize, v.SampleSize)
+	}
+	if v.Schedule != nil {
+		s.WriteString(schemas.CreateColumnStatisticsTaskSettingsRequest_Schedule, *v.Schedule)
+	}
+	if v.SecurityConfiguration != nil {
+		s.WriteString(schemas.CreateColumnStatisticsTaskSettingsRequest_SecurityConfiguration, *v.SecurityConfiguration)
+	}
+	if v.TableName != nil {
+		s.WriteString(schemas.CreateColumnStatisticsTaskSettingsRequest_TableName, *v.TableName)
+	}
+	serializeTagsMap(s, schemas.CreateColumnStatisticsTaskSettingsRequest_Tags, v.Tags)
+}
+
 type CreateColumnStatisticsTaskSettingsOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -68,13 +102,26 @@ type CreateColumnStatisticsTaskSettingsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateColumnStatisticsTaskSettingsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateColumnStatisticsTaskSettingsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateColumnStatisticsTaskSettingsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *CreateColumnStatisticsTaskSettingsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateColumnStatisticsTaskSettingsResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateColumnStatisticsTaskSettingsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateColumnStatisticsTaskSettings{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateColumnStatisticsTaskSettings, schemas.CreateColumnStatisticsTaskSettingsRequest, schemas.CreateColumnStatisticsTaskSettingsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateColumnStatisticsTaskSettings{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateColumnStatisticsTaskSettings, schemas.CreateColumnStatisticsTaskSettingsRequest, schemas.CreateColumnStatisticsTaskSettingsResponse), output: &CreateColumnStatisticsTaskSettingsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

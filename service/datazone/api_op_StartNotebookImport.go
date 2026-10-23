@@ -5,7 +5,9 @@ package datazone
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/datazone/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/datazone/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -47,8 +49,9 @@ type StartNotebookImportInput struct {
 	// This member is required.
 	OwningProjectIdentifier *string
 
-	// The source location of the notebook to import. This specifies the Amazon Simple
-	// Storage Service URI of the notebook file.
+	// The source location of the notebook to import. Specify either a single Amazon
+	// Simple Storage Service URI, or a list of objects to import as the notebook's
+	// cells.
 	//
 	// This member is required.
 	SourceLocation types.SourceLocation
@@ -60,7 +63,38 @@ type StartNotebookImportInput struct {
 	// The description of the imported notebook.
 	Description *string
 
+	// The type of the notebook to import. If not specified, defaults to DATA .
+	Type types.NotebookType
+
 	noSmithyDocumentSerde
+}
+
+func (v *StartNotebookImportInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartNotebookImportInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartNotebookImportInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.StartNotebookImportInput_clientToken, *v.ClientToken)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.StartNotebookImportInput_description, *v.Description)
+	}
+	if v.DomainIdentifier != nil {
+		s.WriteString(schemas.StartNotebookImportInput_domainIdentifier, *v.DomainIdentifier)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.StartNotebookImportInput_name, *v.Name)
+	}
+	if v.OwningProjectIdentifier != nil {
+		s.WriteString(schemas.StartNotebookImportInput_owningProjectIdentifier, *v.OwningProjectIdentifier)
+	}
+	serializeSourceLocation(s, schemas.StartNotebookImportInput_sourceLocation, v.SourceLocation)
+	if v.Type != "" {
+		s.WriteString(schemas.StartNotebookImportInput_type, string(v.Type))
+	}
 }
 
 type StartNotebookImportOutput struct {
@@ -92,19 +126,100 @@ type StartNotebookImportOutput struct {
 	// The status of the notebook import.
 	Status types.NotebookStatus
 
+	// The type of the imported notebook.
+	Type types.NotebookType
+
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 
 	noSmithyDocumentSerde
 }
 
+func (v *StartNotebookImportOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartNotebookImportOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartNotebookImportOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.StartNotebookImportOutput_createdAt, *v.CreatedAt)
+	}
+	if v.CreatedBy != nil {
+		s.WriteString(schemas.StartNotebookImportOutput_createdBy, *v.CreatedBy)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.StartNotebookImportOutput_description, *v.Description)
+	}
+	if v.DomainId != nil {
+		s.WriteString(schemas.StartNotebookImportOutput_domainId, *v.DomainId)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.StartNotebookImportOutput_name, *v.Name)
+	}
+	if v.NotebookId != nil {
+		s.WriteString(schemas.StartNotebookImportOutput_notebookId, *v.NotebookId)
+	}
+	if v.OwningProjectId != nil {
+		s.WriteString(schemas.StartNotebookImportOutput_owningProjectId, *v.OwningProjectId)
+	}
+	serializeSourceLocation(s, schemas.StartNotebookImportOutput_sourceLocation, v.SourceLocation)
+	if v.Status != "" {
+		s.WriteString(schemas.StartNotebookImportOutput_status, string(v.Status))
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.StartNotebookImportOutput_type, string(v.Type))
+	}
+}
+func (v *StartNotebookImportOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartNotebookImportOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartNotebookImportOutput_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.StartNotebookImportOutput_createdAt, v.CreatedAt)
+		case schemas.StartNotebookImportOutput_createdBy:
+			v.CreatedBy = new(string)
+			return d.ReadString(schemas.StartNotebookImportOutput_createdBy, v.CreatedBy)
+		case schemas.StartNotebookImportOutput_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.StartNotebookImportOutput_description, v.Description)
+		case schemas.StartNotebookImportOutput_domainId:
+			v.DomainId = new(string)
+			return d.ReadString(schemas.StartNotebookImportOutput_domainId, v.DomainId)
+		case schemas.StartNotebookImportOutput_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.StartNotebookImportOutput_name, v.Name)
+		case schemas.StartNotebookImportOutput_notebookId:
+			v.NotebookId = new(string)
+			return d.ReadString(schemas.StartNotebookImportOutput_notebookId, v.NotebookId)
+		case schemas.StartNotebookImportOutput_owningProjectId:
+			v.OwningProjectId = new(string)
+			return d.ReadString(schemas.StartNotebookImportOutput_owningProjectId, v.OwningProjectId)
+		case schemas.StartNotebookImportOutput_sourceLocation:
+			return deserializeSourceLocation(d, schemas.StartNotebookImportOutput_sourceLocation, &v.SourceLocation)
+		case schemas.StartNotebookImportOutput_status:
+			var ev string
+			if err := d.ReadString(schemas.StartNotebookImportOutput_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.NotebookStatus(ev)
+			return nil
+		case schemas.StartNotebookImportOutput_type:
+			var ev string
+			if err := d.ReadString(schemas.StartNotebookImportOutput_type, &ev); err != nil {
+				return err
+			}
+			v.Type = types.NotebookType(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartNotebookImportMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpStartNotebookImport{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartNotebookImport, schemas.StartNotebookImportInput, schemas.StartNotebookImportOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStartNotebookImport{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartNotebookImport, schemas.StartNotebookImportInput, schemas.StartNotebookImportOutput), output: &StartNotebookImportOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

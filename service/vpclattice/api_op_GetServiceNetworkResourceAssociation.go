@@ -87,7 +87,7 @@ type GetServiceNetworkResourceAssociationOutput struct {
 	// association.
 	PrivateDnsEnabled *bool
 
-	// The private DNS entry for the service.
+	// The private DNS entry for the service. This entry includes only the domain name.
 	PrivateDnsEntry *types.DnsEntry
 
 	// The Amazon Resource Name (ARN) of the association.

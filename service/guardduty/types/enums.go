@@ -444,6 +444,7 @@ type DetectionRuleDataSource string
 // Enum values for DetectionRuleDataSource
 const (
 	DetectionRuleDataSourceCloudtrailManagementEvent DetectionRuleDataSource = "CloudTrailManagementEvent"
+	DetectionRuleDataSourceRuntimeMonitoring         DetectionRuleDataSource = "RuntimeMonitoring"
 )
 
 // Values returns all known values for DetectionRuleDataSource. Note that this can
@@ -453,6 +454,7 @@ const (
 func (DetectionRuleDataSource) Values() []DetectionRuleDataSource {
 	return []DetectionRuleDataSource{
 		"CloudTrailManagementEvent",
+		"RuntimeMonitoring",
 	}
 }
 
@@ -679,6 +681,9 @@ const (
 	FeatureAdditionalConfigurationEksAddonManagement        FeatureAdditionalConfiguration = "EKS_ADDON_MANAGEMENT"
 	FeatureAdditionalConfigurationEcsFargateAgentManagement FeatureAdditionalConfiguration = "ECS_FARGATE_AGENT_MANAGEMENT"
 	FeatureAdditionalConfigurationEc2AgentManagement        FeatureAdditionalConfiguration = "EC2_AGENT_MANAGEMENT"
+	// RDS Data Activity Monitoring, which monitors data activity on supported Amazon
+	// RDS database engines to detect potentially unauthorized access to your data.
+	FeatureAdditionalConfigurationRdsDataRisk FeatureAdditionalConfiguration = "RDS_DATA_RISK"
 )
 
 // Values returns all known values for FeatureAdditionalConfiguration. Note that
@@ -691,6 +696,7 @@ func (FeatureAdditionalConfiguration) Values() []FeatureAdditionalConfiguration 
 		"EKS_ADDON_MANAGEMENT",
 		"ECS_FARGATE_AGENT_MANAGEMENT",
 		"EC2_AGENT_MANAGEMENT",
+		"RDS_DATA_RISK",
 	}
 }
 
@@ -821,6 +827,28 @@ const (
 	FindingResourceTypeEc2LaunchTemplate           FindingResourceType = "EC2_LAUNCH_TEMPLATE"
 	FindingResourceTypeEc2Vpc                      FindingResourceType = "EC2_VPC"
 	FindingResourceTypeEc2Image                    FindingResourceType = "EC2_IMAGE"
+	// An Amazon Bedrock custom model fine-tuned by the customer.
+	FindingResourceTypeBedrockCustomModel FindingResourceType = "BEDROCK_CUSTOM_MODEL"
+	// An Amazon Bedrock imported model brought in from an external source.
+	FindingResourceTypeBedrockImportedModel FindingResourceType = "BEDROCK_IMPORTED_MODEL"
+	// An Amazon Bedrock model with provisioned throughput.
+	FindingResourceTypeBedrockProvisionedModel FindingResourceType = "BEDROCK_PROVISIONED_MODEL"
+	// A deployment of an Amazon Bedrock custom model.
+	FindingResourceTypeBedrockCustomModelDeployment FindingResourceType = "BEDROCK_CUSTOM_MODEL_DEPLOYMENT"
+	// An Amazon Bedrock inference profile that routes model invocations across
+	// Regions.
+	FindingResourceTypeBedrockInferenceProfile FindingResourceType = "BEDROCK_INFERENCE_PROFILE"
+	// An application-scoped Amazon Bedrock inference profile used to track invocation
+	// usage.
+	FindingResourceTypeBedrockApplicationInferenceProfile FindingResourceType = "BEDROCK_APPLICATION_INFERENCE_PROFILE"
+	// A managed prompt stored in Amazon Bedrock Prompt Management.
+	FindingResourceTypeBedrockPrompt FindingResourceType = "BEDROCK_PROMPT"
+	// An Amazon Bedrock prompt router that selects a model per request.
+	FindingResourceTypeBedrockPromptRouter FindingResourceType = "BEDROCK_PROMPT_ROUTER"
+	// An Amazon Bedrock guardrail evaluated during a model invocation.
+	FindingResourceTypeBedrockGuardrail FindingResourceType = "BEDROCK_GUARDRAIL"
+	// An Amazon SageMaker inference endpoint.
+	FindingResourceTypeSagemakerEndpoint FindingResourceType = "SAGEMAKER_ENDPOINT"
 )
 
 // Values returns all known values for FindingResourceType. Note that this can be
@@ -845,6 +873,16 @@ func (FindingResourceType) Values() []FindingResourceType {
 		"EC2_LAUNCH_TEMPLATE",
 		"EC2_VPC",
 		"EC2_IMAGE",
+		"BEDROCK_CUSTOM_MODEL",
+		"BEDROCK_IMPORTED_MODEL",
+		"BEDROCK_PROVISIONED_MODEL",
+		"BEDROCK_CUSTOM_MODEL_DEPLOYMENT",
+		"BEDROCK_INFERENCE_PROFILE",
+		"BEDROCK_APPLICATION_INFERENCE_PROFILE",
+		"BEDROCK_PROMPT",
+		"BEDROCK_PROMPT_ROUTER",
+		"BEDROCK_GUARDRAIL",
+		"SAGEMAKER_ENDPOINT",
 	}
 }
 
@@ -1312,6 +1350,23 @@ func (MalwareProtectionScanType) Values() []MalwareProtectionScanType {
 	}
 }
 
+type ManagedBy string
+
+// Enum values for ManagedBy
+const (
+	ManagedByGuarddutyPolicy ManagedBy = "GUARDDUTY_POLICY"
+)
+
+// Values returns all known values for ManagedBy. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ManagedBy) Values() []ManagedBy {
+	return []ManagedBy{
+		"GUARDDUTY_POLICY",
+	}
+}
+
 type ManagementType string
 
 // Enum values for ManagementType
@@ -1428,6 +1483,9 @@ const (
 	OrgFeatureAdditionalConfigurationEksAddonManagement        OrgFeatureAdditionalConfiguration = "EKS_ADDON_MANAGEMENT"
 	OrgFeatureAdditionalConfigurationEcsFargateAgentManagement OrgFeatureAdditionalConfiguration = "ECS_FARGATE_AGENT_MANAGEMENT"
 	OrgFeatureAdditionalConfigurationEc2AgentManagement        OrgFeatureAdditionalConfiguration = "EC2_AGENT_MANAGEMENT"
+	// RDS Data Activity Monitoring, which monitors data activity on supported Amazon
+	// RDS database engines to detect potentially unauthorized access to your data.
+	OrgFeatureAdditionalConfigurationRdsDataRisk OrgFeatureAdditionalConfiguration = "RDS_DATA_RISK"
 )
 
 // Values returns all known values for OrgFeatureAdditionalConfiguration. Note
@@ -1440,6 +1498,7 @@ func (OrgFeatureAdditionalConfiguration) Values() []OrgFeatureAdditionalConfigur
 		"EKS_ADDON_MANAGEMENT",
 		"ECS_FARGATE_AGENT_MANAGEMENT",
 		"EC2_AGENT_MANAGEMENT",
+		"RDS_DATA_RISK",
 	}
 }
 
@@ -2069,7 +2128,19 @@ const (
 	UsageFeatureFargateRuntimeMonitoring    UsageFeature = "FARGATE_RUNTIME_MONITORING"
 	UsageFeatureRdsDbiProtectionProvisioned UsageFeature = "RDS_DBI_PROTECTION_PROVISIONED"
 	UsageFeatureRdsDbiProtectionServerless  UsageFeature = "RDS_DBI_PROTECTION_SERVERLESS"
-	UsageFeatureAiProtection                UsageFeature = "AI_PROTECTION"
+	// Usage attributed to RDS Protection database infrastructure monitoring for
+	// Amazon Aurora DSQL Limitless databases.
+	UsageFeatureRdsDbiProtectionLimitless UsageFeature = "RDS_DBI_PROTECTION_LIMITLESS"
+	// Usage attributed to RDS Data Activity Monitoring for provisioned Amazon RDS
+	// databases.
+	UsageFeatureRdsDataActivityDbiProtectionProvisioned UsageFeature = "RDS_DATA_ACTIVITY_DBI_PROTECTION_PROVISIONED"
+	// Usage attributed to RDS Data Activity Monitoring for Amazon Aurora Serverless
+	// databases.
+	UsageFeatureRdsDataActivityDbiProtectionServerless UsageFeature = "RDS_DATA_ACTIVITY_DBI_PROTECTION_SERVERLESS"
+	// Usage attributed to RDS Data Activity Monitoring for Amazon Aurora DSQL
+	// Limitless databases.
+	UsageFeatureRdsDataActivityDbiProtectionLimitless UsageFeature = "RDS_DATA_ACTIVITY_DBI_PROTECTION_LIMITLESS"
+	UsageFeatureAiProtection                          UsageFeature = "AI_PROTECTION"
 )
 
 // Values returns all known values for UsageFeature. Note that this can be
@@ -2091,6 +2162,10 @@ func (UsageFeature) Values() []UsageFeature {
 		"FARGATE_RUNTIME_MONITORING",
 		"RDS_DBI_PROTECTION_PROVISIONED",
 		"RDS_DBI_PROTECTION_SERVERLESS",
+		"RDS_DBI_PROTECTION_LIMITLESS",
+		"RDS_DATA_ACTIVITY_DBI_PROTECTION_PROVISIONED",
+		"RDS_DATA_ACTIVITY_DBI_PROTECTION_SERVERLESS",
+		"RDS_DATA_ACTIVITY_DBI_PROTECTION_LIMITLESS",
 		"AI_PROTECTION",
 	}
 }

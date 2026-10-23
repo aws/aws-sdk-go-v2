@@ -56,7 +56,9 @@ type Lexicon struct {
 // [Managing Lexicons]: https://docs.aws.amazon.com/polly/latest/dg/managing-lexicons.html
 type LexiconAttributes struct {
 
-	// Phonetic alphabet used in the lexicon. Valid values are ipa and x-sampa .
+	// Phonetic alphabet used in the lexicon. Valid values are ipa , x-sampa ,
+	// x-amazon-pinyin , x-amazon-jyutping , x-amazon-pron-kana , and x-amazon-yomigana
+	// .
 	Alphabet *string
 
 	// Language code that the lexicon applies to. A lexicon with a language code such

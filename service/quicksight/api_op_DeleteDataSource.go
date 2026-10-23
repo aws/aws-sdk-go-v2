@@ -4,6 +4,8 @@ package quicksight
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/quicksight/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -40,6 +42,21 @@ type DeleteDataSourceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteDataSourceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteDataSourceRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteDataSourceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AwsAccountId != nil {
+		s.WriteString(schemas.DeleteDataSourceRequest_AwsAccountId, *v.AwsAccountId)
+	}
+	if v.DataSourceId != nil {
+		s.WriteString(schemas.DeleteDataSourceRequest_DataSourceId, *v.DataSourceId)
+	}
+}
+
 type DeleteDataSourceOutput struct {
 
 	// The Amazon Resource Name (ARN) of the data source that you deleted.
@@ -61,13 +78,49 @@ type DeleteDataSourceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteDataSourceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteDataSourceResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteDataSourceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.DeleteDataSourceResponse_Arn, *v.Arn)
+	}
+	if v.DataSourceId != nil {
+		s.WriteString(schemas.DeleteDataSourceResponse_DataSourceId, *v.DataSourceId)
+	}
+	if v.RequestId != nil {
+		s.WriteString(schemas.DeleteDataSourceResponse_RequestId, *v.RequestId)
+	}
+	if v.Status != 0 {
+		s.WriteInt32(schemas.DeleteDataSourceResponse_Status, v.Status)
+	}
+}
+func (v *DeleteDataSourceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteDataSourceResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteDataSourceResponse_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.DeleteDataSourceResponse_Arn, v.Arn)
+		case schemas.DeleteDataSourceResponse_DataSourceId:
+			v.DataSourceId = new(string)
+			return d.ReadString(schemas.DeleteDataSourceResponse_DataSourceId, v.DataSourceId)
+		case schemas.DeleteDataSourceResponse_RequestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.DeleteDataSourceResponse_RequestId, v.RequestId)
+		case schemas.DeleteDataSourceResponse_Status:
+			return d.ReadInt32(schemas.DeleteDataSourceResponse_Status, &v.Status)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteDataSourceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteDataSource{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteDataSource, schemas.DeleteDataSourceRequest, schemas.DeleteDataSourceResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteDataSource{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteDataSource, schemas.DeleteDataSourceRequest, schemas.DeleteDataSourceResponse), output: &DeleteDataSourceOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

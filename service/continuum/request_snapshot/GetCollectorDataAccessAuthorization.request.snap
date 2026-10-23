@@ -1,0 +1,3 @@
+GET /collectors/__CollectorId__/data-access-authorization?accountId=__AccountId__&environmentArn=__EnvironmentArn__
+
+

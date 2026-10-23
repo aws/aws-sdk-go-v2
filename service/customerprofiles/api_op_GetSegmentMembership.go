@@ -4,7 +4,9 @@ package customerprofiles
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/customerprofiles/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/customerprofiles/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -45,6 +47,22 @@ type GetSegmentMembershipInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetSegmentMembershipInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetSegmentMembershipRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetSegmentMembershipInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DomainName != nil {
+		s.WriteString(schemas.GetSegmentMembershipRequest_DomainName, *v.DomainName)
+	}
+	serializeProfileIds(s, schemas.GetSegmentMembershipRequest_ProfileIds, v.ProfileIds)
+	if v.SegmentDefinitionName != nil {
+		s.WriteString(schemas.GetSegmentMembershipRequest_SegmentDefinitionName, *v.SegmentDefinitionName)
+	}
+}
+
 type GetSegmentMembershipOutput struct {
 
 	// An array of maps where each contains a response per profile failed for the
@@ -67,13 +85,44 @@ type GetSegmentMembershipOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetSegmentMembershipOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetSegmentMembershipResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetSegmentMembershipOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeFailures(s, schemas.GetSegmentMembershipResponse_Failures, v.Failures)
+	if v.LastComputedAt != nil {
+		s.WriteTime(schemas.GetSegmentMembershipResponse_LastComputedAt, *v.LastComputedAt)
+	}
+	serializeProfiles(s, schemas.GetSegmentMembershipResponse_Profiles, v.Profiles)
+	if v.SegmentDefinitionName != nil {
+		s.WriteString(schemas.GetSegmentMembershipResponse_SegmentDefinitionName, *v.SegmentDefinitionName)
+	}
+}
+func (v *GetSegmentMembershipOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetSegmentMembershipResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetSegmentMembershipResponse_Failures:
+			return deserializeFailures(d, schemas.GetSegmentMembershipResponse_Failures, &v.Failures)
+		case schemas.GetSegmentMembershipResponse_LastComputedAt:
+			v.LastComputedAt = new(time.Time)
+			return d.ReadTime(schemas.GetSegmentMembershipResponse_LastComputedAt, v.LastComputedAt)
+		case schemas.GetSegmentMembershipResponse_Profiles:
+			return deserializeProfiles(d, schemas.GetSegmentMembershipResponse_Profiles, &v.Profiles)
+		case schemas.GetSegmentMembershipResponse_SegmentDefinitionName:
+			v.SegmentDefinitionName = new(string)
+			return d.ReadString(schemas.GetSegmentMembershipResponse_SegmentDefinitionName, v.SegmentDefinitionName)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetSegmentMembershipMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetSegmentMembership{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetSegmentMembership, schemas.GetSegmentMembershipRequest, schemas.GetSegmentMembershipResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetSegmentMembership{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetSegmentMembership, schemas.GetSegmentMembershipRequest, schemas.GetSegmentMembershipResponse), output: &GetSegmentMembershipOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

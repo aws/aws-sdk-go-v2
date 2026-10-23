@@ -5,7 +5,9 @@ package cleanroomsml
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/cleanroomsml/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cleanroomsml/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -43,6 +45,24 @@ type ListCollaborationTrainedModelsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListCollaborationTrainedModelsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListCollaborationTrainedModelsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListCollaborationTrainedModelsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CollaborationIdentifier != nil {
+		s.WriteString(schemas.ListCollaborationTrainedModelsRequest_collaborationIdentifier, *v.CollaborationIdentifier)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListCollaborationTrainedModelsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListCollaborationTrainedModelsRequest_nextToken, *v.NextToken)
+	}
+}
+
 type ListCollaborationTrainedModelsOutput struct {
 
 	// The trained models in the collaboration that you requested.
@@ -59,13 +79,35 @@ type ListCollaborationTrainedModelsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListCollaborationTrainedModelsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListCollaborationTrainedModelsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListCollaborationTrainedModelsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeCollaborationTrainedModelList(s, schemas.ListCollaborationTrainedModelsResponse_collaborationTrainedModels, v.CollaborationTrainedModels)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListCollaborationTrainedModelsResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListCollaborationTrainedModelsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListCollaborationTrainedModelsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListCollaborationTrainedModelsResponse_collaborationTrainedModels:
+			return deserializeCollaborationTrainedModelList(d, schemas.ListCollaborationTrainedModelsResponse_collaborationTrainedModels, &v.CollaborationTrainedModels)
+		case schemas.ListCollaborationTrainedModelsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListCollaborationTrainedModelsResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListCollaborationTrainedModelsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListCollaborationTrainedModels{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListCollaborationTrainedModels, schemas.ListCollaborationTrainedModelsRequest, schemas.ListCollaborationTrainedModelsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListCollaborationTrainedModels{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListCollaborationTrainedModels, schemas.ListCollaborationTrainedModelsRequest, schemas.ListCollaborationTrainedModelsResponse), output: &ListCollaborationTrainedModelsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

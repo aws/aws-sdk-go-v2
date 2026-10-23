@@ -4,6 +4,8 @@ package cloudhsm
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/cloudhsm/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -49,6 +51,18 @@ type DeleteHsmInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteHsmInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteHsmRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteHsmInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.HsmArn != nil {
+		s.WriteString(schemas.DeleteHsmRequest_HsmArn, *v.HsmArn)
+	}
+}
+
 // Contains the output of the DeleteHsm operation.
 type DeleteHsmOutput struct {
 
@@ -63,13 +77,32 @@ type DeleteHsmOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteHsmOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteHsmResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteHsmOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Status != nil {
+		s.WriteString(schemas.DeleteHsmResponse_Status, *v.Status)
+	}
+}
+func (v *DeleteHsmOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteHsmResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteHsmResponse_Status:
+			v.Status = new(string)
+			return d.ReadString(schemas.DeleteHsmResponse_Status, v.Status)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteHsmMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteHsm{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteHsm, schemas.DeleteHsmRequest, schemas.DeleteHsmResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeleteHsm{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteHsm, schemas.DeleteHsmRequest, schemas.DeleteHsmResponse), output: &DeleteHsmOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

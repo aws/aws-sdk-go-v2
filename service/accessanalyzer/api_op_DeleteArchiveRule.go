@@ -5,6 +5,8 @@ package accessanalyzer
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/accessanalyzer/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -43,6 +45,40 @@ type DeleteArchiveRuleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteArchiveRuleInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteArchiveRuleRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteArchiveRuleInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AnalyzerName != nil {
+		s.WriteString(schemas.DeleteArchiveRuleRequest_analyzerName, *v.AnalyzerName)
+	}
+	if v.ClientToken != nil {
+		s.WriteString(schemas.DeleteArchiveRuleRequest_clientToken, *v.ClientToken)
+	}
+	if v.RuleName != nil {
+		s.WriteString(schemas.DeleteArchiveRuleRequest_ruleName, *v.RuleName)
+	}
+}
+func (v *DeleteArchiveRuleInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteArchiveRuleRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteArchiveRuleRequest_analyzerName:
+			v.AnalyzerName = new(string)
+			return d.ReadString(schemas.DeleteArchiveRuleRequest_analyzerName, v.AnalyzerName)
+		case schemas.DeleteArchiveRuleRequest_clientToken:
+			v.ClientToken = new(string)
+			return d.ReadString(schemas.DeleteArchiveRuleRequest_clientToken, v.ClientToken)
+		case schemas.DeleteArchiveRuleRequest_ruleName:
+			v.RuleName = new(string)
+			return d.ReadString(schemas.DeleteArchiveRuleRequest_ruleName, v.RuleName)
+		}
+		return nil
+	})
+}
+
 type DeleteArchiveRuleOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -50,13 +86,26 @@ type DeleteArchiveRuleOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteArchiveRuleOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteArchiveRuleOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteArchiveRuleOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteArchiveRuleMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteArchiveRule{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteArchiveRule, schemas.DeleteArchiveRuleRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteArchiveRule{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteArchiveRule, schemas.DeleteArchiveRuleRequest, nil), output: &DeleteArchiveRuleOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

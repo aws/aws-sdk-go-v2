@@ -3691,6 +3691,33 @@ func TestCheckRequestSnapshot_BatchUpdateStandardsControlAssociations(t *testing
 	}
 }
 
+func TestCheckRequestSnapshot_CancelExportJobV2(t *testing.T) {
+	input := &CancelExportJobV2Input{
+		ExportJobId: ptr.String("__ExportJobId__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.CancelExportJobV2(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CancelExportJobV2"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_CreateActionTarget(t *testing.T) {
 	input := &CreateActionTargetInput{
 		Name:        ptr.String("__Name__"),
@@ -4603,6 +4630,9 @@ func TestCheckRequestSnapshot_CreateAutomationRuleV2(t *testing.T) {
 				ExternalIntegrationConfiguration: &types.ExternalIntegrationConfiguration{
 					ConnectorArn: ptr.String("__ConnectorArn__"),
 				},
+				ResourceFieldsUpdate: &types.AutomationRulesResourceFieldsUpdateV2{
+					Criticality: types.ResourceCriticality("Very High"),
+				},
 			},
 			{
 				Type: types.AutomationRulesActionTypeV2("FINDING_FIELDS_UPDATE"),
@@ -4613,6 +4643,9 @@ func TestCheckRequestSnapshot_CreateAutomationRuleV2(t *testing.T) {
 				},
 				ExternalIntegrationConfiguration: &types.ExternalIntegrationConfiguration{
 					ConnectorArn: ptr.String("__ConnectorArn__"),
+				},
+				ResourceFieldsUpdate: &types.AutomationRulesResourceFieldsUpdateV2{
+					Criticality: types.ResourceCriticality("Very High"),
 				},
 			},
 		},
@@ -7302,6 +7335,33 @@ func TestCheckRequestSnapshot_GetEnabledStandards(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_GetExportJobV2(t *testing.T) {
+	input := &GetExportJobV2Input{
+		ExportJobId: ptr.String("__ExportJobId__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.GetExportJobV2(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetExportJobV2"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_GetFindingAggregator(t *testing.T) {
 	input := &GetFindingAggregatorInput{
 		FindingAggregatorArn: ptr.String("__FindingAggregatorArn__"),
@@ -9699,6 +9759,74 @@ func TestCheckRequestSnapshot_GetRecommendedPolicyV2(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_GetRemediationsV2(t *testing.T) {
+	input := &GetRemediationsV2Input{
+		TargetUid:   ptr.String("__TargetUid__"),
+		MetadataUid: ptr.String("__MetadataUid__"),
+		Filters: &types.RemediationFilters{
+			CompositeFilters: []types.RemediationCompositeFilter{
+				{
+					StringFilters: []types.RemediationStringFilter{
+						{
+							FieldName: types.RemediationStringField("Resource.Type"),
+							Filter: &types.RemediationStringFilterCondition{
+								Value: ptr.String("__Value__"),
+							},
+						},
+						{
+							FieldName: types.RemediationStringField("Resource.Type"),
+							Filter: &types.RemediationStringFilterCondition{
+								Value: ptr.String("__Value__"),
+							},
+						},
+					},
+				},
+				{
+					StringFilters: []types.RemediationStringFilter{
+						{
+							FieldName: types.RemediationStringField("Resource.Type"),
+							Filter: &types.RemediationStringFilterCondition{
+								Value: ptr.String("__Value__"),
+							},
+						},
+						{
+							FieldName: types.RemediationStringField("Resource.Type"),
+							Filter: &types.RemediationStringFilterCondition{
+								Value: ptr.String("__Value__"),
+							},
+						},
+					},
+				},
+			},
+		},
+		ShowGuidance:   ptr.Bool(true),
+		GuidanceFormat: types.GuidanceFormat("All"),
+		MaxResults:     ptr.Int32(1),
+		NextToken:      ptr.String("__NextToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.GetRemediationsV2(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetRemediationsV2"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_GetResourcesStatisticsV2(t *testing.T) {
 	input := &GetResourcesStatisticsV2Input{
 		GroupByRules: []types.ResourceGroupByRule{
@@ -10719,6 +10847,65 @@ func TestCheckRequestSnapshot_ListEnabledProductsForImport(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_ListExportJobsV2(t *testing.T) {
+	input := &ListExportJobsV2Input{
+		Status:     types.ExportStatus("RUNNING"),
+		DataType:   types.ExportDataType("FINDINGS"),
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListExportJobsV2(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListExportJobsV2"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_ListExposuresByRemediationV2(t *testing.T) {
+	input := &ListExposuresByRemediationV2Input{
+		TargetUid:  ptr.String("__TargetUid__"),
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListExposuresByRemediationV2(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListExposuresByRemediationV2"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_ListFindingAggregators(t *testing.T) {
 	input := &ListFindingAggregatorsInput{
 		NextToken:  ptr.String("__NextToken__"),
@@ -11042,6 +11229,301 @@ func TestCheckRequestSnapshot_StartConfigurationPolicyDisassociation(t *testing.
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "StartConfigurationPolicyDisassociation"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_StartExportJobV2(t *testing.T) {
+	input := &StartExportJobV2Input{
+		Name: ptr.String("__Name__"),
+		Destination: &types.ExportDestinationMemberS3{
+			Value: types.S3ExportDestination{
+				BucketArn:    ptr.String("__BucketArn__"),
+				KmsKeyArn:    ptr.String("__KmsKeyArn__"),
+				ObjectPrefix: ptr.String("__ObjectPrefix__"),
+			},
+		},
+		OutputConfiguration: &types.ExportOutputMemberFindings{
+			Value: types.FindingsOutput{
+				Format: types.FindingsExportFormat("CSV"),
+				Filters: &types.OcsfFindingFilters{
+					CompositeFilters: []types.CompositeFilter{
+						{
+							StringFilters: []types.OcsfStringFilter{
+								{
+									FieldName: types.OcsfStringField("metadata.uid"),
+									Filter: &types.StringFilter{
+										Value:      ptr.String("__Value__"),
+										Comparison: types.StringFilterComparison("EQUALS"),
+									},
+								},
+								{
+									FieldName: types.OcsfStringField("metadata.uid"),
+									Filter: &types.StringFilter{
+										Value:      ptr.String("__Value__"),
+										Comparison: types.StringFilterComparison("EQUALS"),
+									},
+								},
+							},
+							DateFilters: []types.OcsfDateFilter{
+								{
+									FieldName: types.OcsfDateField("finding_info.created_time_dt"),
+									Filter: &types.DateFilter{
+										Start: ptr.String("__Start__"),
+										End:   ptr.String("__End__"),
+										DateRange: &types.DateRange{
+											Value:      ptr.Int32(1),
+											Unit:       types.DateRangeUnit("DAYS"),
+											Comparison: types.DateRangeComparison("WITHIN"),
+										},
+									},
+								},
+								{
+									FieldName: types.OcsfDateField("finding_info.created_time_dt"),
+									Filter: &types.DateFilter{
+										Start: ptr.String("__Start__"),
+										End:   ptr.String("__End__"),
+										DateRange: &types.DateRange{
+											Value:      ptr.Int32(1),
+											Unit:       types.DateRangeUnit("DAYS"),
+											Comparison: types.DateRangeComparison("WITHIN"),
+										},
+									},
+								},
+							},
+							BooleanFilters: []types.OcsfBooleanFilter{
+								{
+									FieldName: types.OcsfBooleanField("compliance.assessments.meets_criteria"),
+									Filter: &types.BooleanFilter{
+										Value: ptr.Bool(true),
+									},
+								},
+								{
+									FieldName: types.OcsfBooleanField("compliance.assessments.meets_criteria"),
+									Filter: &types.BooleanFilter{
+										Value: ptr.Bool(true),
+									},
+								},
+							},
+							NumberFilters: []types.OcsfNumberFilter{
+								{
+									FieldName: types.OcsfNumberField("activity_id"),
+									Filter: &types.NumberFilter{
+										Gte: ptr.Float64(1.0),
+										Lte: ptr.Float64(1.0),
+										Eq:  ptr.Float64(1.0),
+										Gt:  ptr.Float64(1.0),
+										Lt:  ptr.Float64(1.0),
+									},
+								},
+								{
+									FieldName: types.OcsfNumberField("activity_id"),
+									Filter: &types.NumberFilter{
+										Gte: ptr.Float64(1.0),
+										Lte: ptr.Float64(1.0),
+										Eq:  ptr.Float64(1.0),
+										Gt:  ptr.Float64(1.0),
+										Lt:  ptr.Float64(1.0),
+									},
+								},
+							},
+							MapFilters: []types.OcsfMapFilter{
+								{
+									FieldName: types.OcsfMapField("resources.tags"),
+									Filter: &types.MapFilter{
+										Key:        ptr.String("__Key__"),
+										Value:      ptr.String("__Value__"),
+										Comparison: types.MapFilterComparison("EQUALS"),
+									},
+								},
+								{
+									FieldName: types.OcsfMapField("resources.tags"),
+									Filter: &types.MapFilter{
+										Key:        ptr.String("__Key__"),
+										Value:      ptr.String("__Value__"),
+										Comparison: types.MapFilterComparison("EQUALS"),
+									},
+								},
+							},
+							IpFilters: []types.OcsfIpFilter{
+								{
+									FieldName: types.OcsfIpField("evidences.dst_endpoint.ip"),
+									Filter: &types.IpFilter{
+										Cidr: ptr.String("__Cidr__"),
+									},
+								},
+								{
+									FieldName: types.OcsfIpField("evidences.dst_endpoint.ip"),
+									Filter: &types.IpFilter{
+										Cidr: ptr.String("__Cidr__"),
+									},
+								},
+							},
+							NestedCompositeFilters: []types.CompositeFilter{
+								{},
+								{},
+							},
+							Operator: types.AllowedOperators("AND"),
+						},
+						{
+							StringFilters: []types.OcsfStringFilter{
+								{
+									FieldName: types.OcsfStringField("metadata.uid"),
+									Filter: &types.StringFilter{
+										Value:      ptr.String("__Value__"),
+										Comparison: types.StringFilterComparison("EQUALS"),
+									},
+								},
+								{
+									FieldName: types.OcsfStringField("metadata.uid"),
+									Filter: &types.StringFilter{
+										Value:      ptr.String("__Value__"),
+										Comparison: types.StringFilterComparison("EQUALS"),
+									},
+								},
+							},
+							DateFilters: []types.OcsfDateFilter{
+								{
+									FieldName: types.OcsfDateField("finding_info.created_time_dt"),
+									Filter: &types.DateFilter{
+										Start: ptr.String("__Start__"),
+										End:   ptr.String("__End__"),
+										DateRange: &types.DateRange{
+											Value:      ptr.Int32(1),
+											Unit:       types.DateRangeUnit("DAYS"),
+											Comparison: types.DateRangeComparison("WITHIN"),
+										},
+									},
+								},
+								{
+									FieldName: types.OcsfDateField("finding_info.created_time_dt"),
+									Filter: &types.DateFilter{
+										Start: ptr.String("__Start__"),
+										End:   ptr.String("__End__"),
+										DateRange: &types.DateRange{
+											Value:      ptr.Int32(1),
+											Unit:       types.DateRangeUnit("DAYS"),
+											Comparison: types.DateRangeComparison("WITHIN"),
+										},
+									},
+								},
+							},
+							BooleanFilters: []types.OcsfBooleanFilter{
+								{
+									FieldName: types.OcsfBooleanField("compliance.assessments.meets_criteria"),
+									Filter: &types.BooleanFilter{
+										Value: ptr.Bool(true),
+									},
+								},
+								{
+									FieldName: types.OcsfBooleanField("compliance.assessments.meets_criteria"),
+									Filter: &types.BooleanFilter{
+										Value: ptr.Bool(true),
+									},
+								},
+							},
+							NumberFilters: []types.OcsfNumberFilter{
+								{
+									FieldName: types.OcsfNumberField("activity_id"),
+									Filter: &types.NumberFilter{
+										Gte: ptr.Float64(1.0),
+										Lte: ptr.Float64(1.0),
+										Eq:  ptr.Float64(1.0),
+										Gt:  ptr.Float64(1.0),
+										Lt:  ptr.Float64(1.0),
+									},
+								},
+								{
+									FieldName: types.OcsfNumberField("activity_id"),
+									Filter: &types.NumberFilter{
+										Gte: ptr.Float64(1.0),
+										Lte: ptr.Float64(1.0),
+										Eq:  ptr.Float64(1.0),
+										Gt:  ptr.Float64(1.0),
+										Lt:  ptr.Float64(1.0),
+									},
+								},
+							},
+							MapFilters: []types.OcsfMapFilter{
+								{
+									FieldName: types.OcsfMapField("resources.tags"),
+									Filter: &types.MapFilter{
+										Key:        ptr.String("__Key__"),
+										Value:      ptr.String("__Value__"),
+										Comparison: types.MapFilterComparison("EQUALS"),
+									},
+								},
+								{
+									FieldName: types.OcsfMapField("resources.tags"),
+									Filter: &types.MapFilter{
+										Key:        ptr.String("__Key__"),
+										Value:      ptr.String("__Value__"),
+										Comparison: types.MapFilterComparison("EQUALS"),
+									},
+								},
+							},
+							IpFilters: []types.OcsfIpFilter{
+								{
+									FieldName: types.OcsfIpField("evidences.dst_endpoint.ip"),
+									Filter: &types.IpFilter{
+										Cidr: ptr.String("__Cidr__"),
+									},
+								},
+								{
+									FieldName: types.OcsfIpField("evidences.dst_endpoint.ip"),
+									Filter: &types.IpFilter{
+										Cidr: ptr.String("__Cidr__"),
+									},
+								},
+							},
+							NestedCompositeFilters: []types.CompositeFilter{
+								{},
+								{},
+							},
+							Operator: types.AllowedOperators("AND"),
+						},
+					},
+					CompositeOperator: types.AllowedOperators("AND"),
+				},
+				SelectedFields: []types.FindingsSelectableField{
+					types.FindingsSelectableField("metadata.uid"),
+					types.FindingsSelectableField("metadata.uid"),
+				},
+			},
+		},
+		Scopes: &types.ExportScopes{
+			AwsOrganizations: []types.AwsOrganizationScope{
+				{
+					OrganizationId:       ptr.String("__OrganizationId__"),
+					OrganizationalUnitId: ptr.String("__OrganizationalUnitId__"),
+				},
+				{
+					OrganizationId:       ptr.String("__OrganizationId__"),
+					OrganizationalUnitId: ptr.String("__OrganizationalUnitId__"),
+				},
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.StartExportJobV2(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "StartExportJobV2"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -11427,6 +11909,9 @@ func TestCheckRequestSnapshot_UpdateAutomationRuleV2(t *testing.T) {
 				ExternalIntegrationConfiguration: &types.ExternalIntegrationConfiguration{
 					ConnectorArn: ptr.String("__ConnectorArn__"),
 				},
+				ResourceFieldsUpdate: &types.AutomationRulesResourceFieldsUpdateV2{
+					Criticality: types.ResourceCriticality("Very High"),
+				},
 			},
 			{
 				Type: types.AutomationRulesActionTypeV2("FINDING_FIELDS_UPDATE"),
@@ -11437,6 +11922,9 @@ func TestCheckRequestSnapshot_UpdateAutomationRuleV2(t *testing.T) {
 				},
 				ExternalIntegrationConfiguration: &types.ExternalIntegrationConfiguration{
 					ConnectorArn: ptr.String("__ConnectorArn__"),
+				},
+				ResourceFieldsUpdate: &types.AutomationRulesResourceFieldsUpdateV2{
+					Criticality: types.ResourceCriticality("Very High"),
 				},
 			},
 		},
@@ -17782,6 +18270,33 @@ func TestUpdateRequestSnapshot_BatchUpdateStandardsControlAssociations(t *testin
 	}
 }
 
+func TestUpdateRequestSnapshot_CancelExportJobV2(t *testing.T) {
+	input := &CancelExportJobV2Input{
+		ExportJobId: ptr.String("__ExportJobId__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.CancelExportJobV2(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CancelExportJobV2"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_CreateActionTarget(t *testing.T) {
 	input := &CreateActionTargetInput{
 		Name:        ptr.String("__Name__"),
@@ -18694,6 +19209,9 @@ func TestUpdateRequestSnapshot_CreateAutomationRuleV2(t *testing.T) {
 				ExternalIntegrationConfiguration: &types.ExternalIntegrationConfiguration{
 					ConnectorArn: ptr.String("__ConnectorArn__"),
 				},
+				ResourceFieldsUpdate: &types.AutomationRulesResourceFieldsUpdateV2{
+					Criticality: types.ResourceCriticality("Very High"),
+				},
 			},
 			{
 				Type: types.AutomationRulesActionTypeV2("FINDING_FIELDS_UPDATE"),
@@ -18704,6 +19222,9 @@ func TestUpdateRequestSnapshot_CreateAutomationRuleV2(t *testing.T) {
 				},
 				ExternalIntegrationConfiguration: &types.ExternalIntegrationConfiguration{
 					ConnectorArn: ptr.String("__ConnectorArn__"),
+				},
+				ResourceFieldsUpdate: &types.AutomationRulesResourceFieldsUpdateV2{
+					Criticality: types.ResourceCriticality("Very High"),
 				},
 			},
 		},
@@ -21393,6 +21914,33 @@ func TestUpdateRequestSnapshot_GetEnabledStandards(t *testing.T) {
 	}
 }
 
+func TestUpdateRequestSnapshot_GetExportJobV2(t *testing.T) {
+	input := &GetExportJobV2Input{
+		ExportJobId: ptr.String("__ExportJobId__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.GetExportJobV2(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetExportJobV2"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_GetFindingAggregator(t *testing.T) {
 	input := &GetFindingAggregatorInput{
 		FindingAggregatorArn: ptr.String("__FindingAggregatorArn__"),
@@ -23790,6 +24338,74 @@ func TestUpdateRequestSnapshot_GetRecommendedPolicyV2(t *testing.T) {
 	}
 }
 
+func TestUpdateRequestSnapshot_GetRemediationsV2(t *testing.T) {
+	input := &GetRemediationsV2Input{
+		TargetUid:   ptr.String("__TargetUid__"),
+		MetadataUid: ptr.String("__MetadataUid__"),
+		Filters: &types.RemediationFilters{
+			CompositeFilters: []types.RemediationCompositeFilter{
+				{
+					StringFilters: []types.RemediationStringFilter{
+						{
+							FieldName: types.RemediationStringField("Resource.Type"),
+							Filter: &types.RemediationStringFilterCondition{
+								Value: ptr.String("__Value__"),
+							},
+						},
+						{
+							FieldName: types.RemediationStringField("Resource.Type"),
+							Filter: &types.RemediationStringFilterCondition{
+								Value: ptr.String("__Value__"),
+							},
+						},
+					},
+				},
+				{
+					StringFilters: []types.RemediationStringFilter{
+						{
+							FieldName: types.RemediationStringField("Resource.Type"),
+							Filter: &types.RemediationStringFilterCondition{
+								Value: ptr.String("__Value__"),
+							},
+						},
+						{
+							FieldName: types.RemediationStringField("Resource.Type"),
+							Filter: &types.RemediationStringFilterCondition{
+								Value: ptr.String("__Value__"),
+							},
+						},
+					},
+				},
+			},
+		},
+		ShowGuidance:   ptr.Bool(true),
+		GuidanceFormat: types.GuidanceFormat("All"),
+		MaxResults:     ptr.Int32(1),
+		NextToken:      ptr.String("__NextToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.GetRemediationsV2(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetRemediationsV2"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_GetResourcesStatisticsV2(t *testing.T) {
 	input := &GetResourcesStatisticsV2Input{
 		GroupByRules: []types.ResourceGroupByRule{
@@ -24810,6 +25426,65 @@ func TestUpdateRequestSnapshot_ListEnabledProductsForImport(t *testing.T) {
 	}
 }
 
+func TestUpdateRequestSnapshot_ListExportJobsV2(t *testing.T) {
+	input := &ListExportJobsV2Input{
+		Status:     types.ExportStatus("RUNNING"),
+		DataType:   types.ExportDataType("FINDINGS"),
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListExportJobsV2(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListExportJobsV2"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_ListExposuresByRemediationV2(t *testing.T) {
+	input := &ListExposuresByRemediationV2Input{
+		TargetUid:  ptr.String("__TargetUid__"),
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListExposuresByRemediationV2(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListExposuresByRemediationV2"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_ListFindingAggregators(t *testing.T) {
 	input := &ListFindingAggregatorsInput{
 		NextToken:  ptr.String("__NextToken__"),
@@ -25133,6 +25808,301 @@ func TestUpdateRequestSnapshot_StartConfigurationPolicyDisassociation(t *testing
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "StartConfigurationPolicyDisassociation"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_StartExportJobV2(t *testing.T) {
+	input := &StartExportJobV2Input{
+		Name: ptr.String("__Name__"),
+		Destination: &types.ExportDestinationMemberS3{
+			Value: types.S3ExportDestination{
+				BucketArn:    ptr.String("__BucketArn__"),
+				KmsKeyArn:    ptr.String("__KmsKeyArn__"),
+				ObjectPrefix: ptr.String("__ObjectPrefix__"),
+			},
+		},
+		OutputConfiguration: &types.ExportOutputMemberFindings{
+			Value: types.FindingsOutput{
+				Format: types.FindingsExportFormat("CSV"),
+				Filters: &types.OcsfFindingFilters{
+					CompositeFilters: []types.CompositeFilter{
+						{
+							StringFilters: []types.OcsfStringFilter{
+								{
+									FieldName: types.OcsfStringField("metadata.uid"),
+									Filter: &types.StringFilter{
+										Value:      ptr.String("__Value__"),
+										Comparison: types.StringFilterComparison("EQUALS"),
+									},
+								},
+								{
+									FieldName: types.OcsfStringField("metadata.uid"),
+									Filter: &types.StringFilter{
+										Value:      ptr.String("__Value__"),
+										Comparison: types.StringFilterComparison("EQUALS"),
+									},
+								},
+							},
+							DateFilters: []types.OcsfDateFilter{
+								{
+									FieldName: types.OcsfDateField("finding_info.created_time_dt"),
+									Filter: &types.DateFilter{
+										Start: ptr.String("__Start__"),
+										End:   ptr.String("__End__"),
+										DateRange: &types.DateRange{
+											Value:      ptr.Int32(1),
+											Unit:       types.DateRangeUnit("DAYS"),
+											Comparison: types.DateRangeComparison("WITHIN"),
+										},
+									},
+								},
+								{
+									FieldName: types.OcsfDateField("finding_info.created_time_dt"),
+									Filter: &types.DateFilter{
+										Start: ptr.String("__Start__"),
+										End:   ptr.String("__End__"),
+										DateRange: &types.DateRange{
+											Value:      ptr.Int32(1),
+											Unit:       types.DateRangeUnit("DAYS"),
+											Comparison: types.DateRangeComparison("WITHIN"),
+										},
+									},
+								},
+							},
+							BooleanFilters: []types.OcsfBooleanFilter{
+								{
+									FieldName: types.OcsfBooleanField("compliance.assessments.meets_criteria"),
+									Filter: &types.BooleanFilter{
+										Value: ptr.Bool(true),
+									},
+								},
+								{
+									FieldName: types.OcsfBooleanField("compliance.assessments.meets_criteria"),
+									Filter: &types.BooleanFilter{
+										Value: ptr.Bool(true),
+									},
+								},
+							},
+							NumberFilters: []types.OcsfNumberFilter{
+								{
+									FieldName: types.OcsfNumberField("activity_id"),
+									Filter: &types.NumberFilter{
+										Gte: ptr.Float64(1.0),
+										Lte: ptr.Float64(1.0),
+										Eq:  ptr.Float64(1.0),
+										Gt:  ptr.Float64(1.0),
+										Lt:  ptr.Float64(1.0),
+									},
+								},
+								{
+									FieldName: types.OcsfNumberField("activity_id"),
+									Filter: &types.NumberFilter{
+										Gte: ptr.Float64(1.0),
+										Lte: ptr.Float64(1.0),
+										Eq:  ptr.Float64(1.0),
+										Gt:  ptr.Float64(1.0),
+										Lt:  ptr.Float64(1.0),
+									},
+								},
+							},
+							MapFilters: []types.OcsfMapFilter{
+								{
+									FieldName: types.OcsfMapField("resources.tags"),
+									Filter: &types.MapFilter{
+										Key:        ptr.String("__Key__"),
+										Value:      ptr.String("__Value__"),
+										Comparison: types.MapFilterComparison("EQUALS"),
+									},
+								},
+								{
+									FieldName: types.OcsfMapField("resources.tags"),
+									Filter: &types.MapFilter{
+										Key:        ptr.String("__Key__"),
+										Value:      ptr.String("__Value__"),
+										Comparison: types.MapFilterComparison("EQUALS"),
+									},
+								},
+							},
+							IpFilters: []types.OcsfIpFilter{
+								{
+									FieldName: types.OcsfIpField("evidences.dst_endpoint.ip"),
+									Filter: &types.IpFilter{
+										Cidr: ptr.String("__Cidr__"),
+									},
+								},
+								{
+									FieldName: types.OcsfIpField("evidences.dst_endpoint.ip"),
+									Filter: &types.IpFilter{
+										Cidr: ptr.String("__Cidr__"),
+									},
+								},
+							},
+							NestedCompositeFilters: []types.CompositeFilter{
+								{},
+								{},
+							},
+							Operator: types.AllowedOperators("AND"),
+						},
+						{
+							StringFilters: []types.OcsfStringFilter{
+								{
+									FieldName: types.OcsfStringField("metadata.uid"),
+									Filter: &types.StringFilter{
+										Value:      ptr.String("__Value__"),
+										Comparison: types.StringFilterComparison("EQUALS"),
+									},
+								},
+								{
+									FieldName: types.OcsfStringField("metadata.uid"),
+									Filter: &types.StringFilter{
+										Value:      ptr.String("__Value__"),
+										Comparison: types.StringFilterComparison("EQUALS"),
+									},
+								},
+							},
+							DateFilters: []types.OcsfDateFilter{
+								{
+									FieldName: types.OcsfDateField("finding_info.created_time_dt"),
+									Filter: &types.DateFilter{
+										Start: ptr.String("__Start__"),
+										End:   ptr.String("__End__"),
+										DateRange: &types.DateRange{
+											Value:      ptr.Int32(1),
+											Unit:       types.DateRangeUnit("DAYS"),
+											Comparison: types.DateRangeComparison("WITHIN"),
+										},
+									},
+								},
+								{
+									FieldName: types.OcsfDateField("finding_info.created_time_dt"),
+									Filter: &types.DateFilter{
+										Start: ptr.String("__Start__"),
+										End:   ptr.String("__End__"),
+										DateRange: &types.DateRange{
+											Value:      ptr.Int32(1),
+											Unit:       types.DateRangeUnit("DAYS"),
+											Comparison: types.DateRangeComparison("WITHIN"),
+										},
+									},
+								},
+							},
+							BooleanFilters: []types.OcsfBooleanFilter{
+								{
+									FieldName: types.OcsfBooleanField("compliance.assessments.meets_criteria"),
+									Filter: &types.BooleanFilter{
+										Value: ptr.Bool(true),
+									},
+								},
+								{
+									FieldName: types.OcsfBooleanField("compliance.assessments.meets_criteria"),
+									Filter: &types.BooleanFilter{
+										Value: ptr.Bool(true),
+									},
+								},
+							},
+							NumberFilters: []types.OcsfNumberFilter{
+								{
+									FieldName: types.OcsfNumberField("activity_id"),
+									Filter: &types.NumberFilter{
+										Gte: ptr.Float64(1.0),
+										Lte: ptr.Float64(1.0),
+										Eq:  ptr.Float64(1.0),
+										Gt:  ptr.Float64(1.0),
+										Lt:  ptr.Float64(1.0),
+									},
+								},
+								{
+									FieldName: types.OcsfNumberField("activity_id"),
+									Filter: &types.NumberFilter{
+										Gte: ptr.Float64(1.0),
+										Lte: ptr.Float64(1.0),
+										Eq:  ptr.Float64(1.0),
+										Gt:  ptr.Float64(1.0),
+										Lt:  ptr.Float64(1.0),
+									},
+								},
+							},
+							MapFilters: []types.OcsfMapFilter{
+								{
+									FieldName: types.OcsfMapField("resources.tags"),
+									Filter: &types.MapFilter{
+										Key:        ptr.String("__Key__"),
+										Value:      ptr.String("__Value__"),
+										Comparison: types.MapFilterComparison("EQUALS"),
+									},
+								},
+								{
+									FieldName: types.OcsfMapField("resources.tags"),
+									Filter: &types.MapFilter{
+										Key:        ptr.String("__Key__"),
+										Value:      ptr.String("__Value__"),
+										Comparison: types.MapFilterComparison("EQUALS"),
+									},
+								},
+							},
+							IpFilters: []types.OcsfIpFilter{
+								{
+									FieldName: types.OcsfIpField("evidences.dst_endpoint.ip"),
+									Filter: &types.IpFilter{
+										Cidr: ptr.String("__Cidr__"),
+									},
+								},
+								{
+									FieldName: types.OcsfIpField("evidences.dst_endpoint.ip"),
+									Filter: &types.IpFilter{
+										Cidr: ptr.String("__Cidr__"),
+									},
+								},
+							},
+							NestedCompositeFilters: []types.CompositeFilter{
+								{},
+								{},
+							},
+							Operator: types.AllowedOperators("AND"),
+						},
+					},
+					CompositeOperator: types.AllowedOperators("AND"),
+				},
+				SelectedFields: []types.FindingsSelectableField{
+					types.FindingsSelectableField("metadata.uid"),
+					types.FindingsSelectableField("metadata.uid"),
+				},
+			},
+		},
+		Scopes: &types.ExportScopes{
+			AwsOrganizations: []types.AwsOrganizationScope{
+				{
+					OrganizationId:       ptr.String("__OrganizationId__"),
+					OrganizationalUnitId: ptr.String("__OrganizationalUnitId__"),
+				},
+				{
+					OrganizationId:       ptr.String("__OrganizationId__"),
+					OrganizationalUnitId: ptr.String("__OrganizationalUnitId__"),
+				},
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.StartExportJobV2(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "StartExportJobV2"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -25518,6 +26488,9 @@ func TestUpdateRequestSnapshot_UpdateAutomationRuleV2(t *testing.T) {
 				ExternalIntegrationConfiguration: &types.ExternalIntegrationConfiguration{
 					ConnectorArn: ptr.String("__ConnectorArn__"),
 				},
+				ResourceFieldsUpdate: &types.AutomationRulesResourceFieldsUpdateV2{
+					Criticality: types.ResourceCriticality("Very High"),
+				},
 			},
 			{
 				Type: types.AutomationRulesActionTypeV2("FINDING_FIELDS_UPDATE"),
@@ -25528,6 +26501,9 @@ func TestUpdateRequestSnapshot_UpdateAutomationRuleV2(t *testing.T) {
 				},
 				ExternalIntegrationConfiguration: &types.ExternalIntegrationConfiguration{
 					ConnectorArn: ptr.String("__ConnectorArn__"),
+				},
+				ResourceFieldsUpdate: &types.AutomationRulesResourceFieldsUpdateV2{
+					Criticality: types.ResourceCriticality("Very High"),
 				},
 			},
 		},

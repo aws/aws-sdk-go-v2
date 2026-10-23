@@ -4,6 +4,8 @@ package appconfig
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/appconfig/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -38,6 +40,21 @@ type DeleteExtensionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteExtensionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteExtensionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteExtensionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ExtensionIdentifier != nil {
+		s.WriteString(schemas.DeleteExtensionRequest_ExtensionIdentifier, *v.ExtensionIdentifier)
+	}
+	if v.VersionNumber != nil {
+		s.WriteInt32(schemas.DeleteExtensionRequest_VersionNumber, *v.VersionNumber)
+	}
+}
+
 type DeleteExtensionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -45,13 +62,26 @@ type DeleteExtensionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteExtensionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteExtensionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteExtensionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteExtensionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteExtension{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteExtension, schemas.DeleteExtensionRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteExtension{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteExtension, schemas.DeleteExtensionRequest, nil), output: &DeleteExtensionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

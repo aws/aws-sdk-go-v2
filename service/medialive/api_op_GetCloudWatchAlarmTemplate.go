@@ -4,7 +4,9 @@ package medialive
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/medialive/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/medialive/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -35,6 +37,18 @@ type GetCloudWatchAlarmTemplateInput struct {
 	Identifier *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetCloudWatchAlarmTemplateInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetCloudWatchAlarmTemplateRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetCloudWatchAlarmTemplateInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Identifier != nil {
+		s.WriteString(schemas.GetCloudWatchAlarmTemplateRequest_Identifier, *v.Identifier)
+	}
 }
 
 // Placeholder documentation for GetCloudWatchAlarmTemplateResponse
@@ -105,13 +119,141 @@ type GetCloudWatchAlarmTemplateOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetCloudWatchAlarmTemplateOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetCloudWatchAlarmTemplateResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetCloudWatchAlarmTemplateOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.GetCloudWatchAlarmTemplateResponse_Arn, *v.Arn)
+	}
+	if v.ComparisonOperator != "" {
+		s.WriteString(schemas.GetCloudWatchAlarmTemplateResponse_ComparisonOperator, string(v.ComparisonOperator))
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.GetCloudWatchAlarmTemplateResponse_CreatedAt, *v.CreatedAt)
+	}
+	if v.DatapointsToAlarm != nil {
+		s.WriteInt32(schemas.GetCloudWatchAlarmTemplateResponse_DatapointsToAlarm, *v.DatapointsToAlarm)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.GetCloudWatchAlarmTemplateResponse_Description, *v.Description)
+	}
+	if v.EvaluationPeriods != nil {
+		s.WriteInt32(schemas.GetCloudWatchAlarmTemplateResponse_EvaluationPeriods, *v.EvaluationPeriods)
+	}
+	if v.GroupId != nil {
+		s.WriteString(schemas.GetCloudWatchAlarmTemplateResponse_GroupId, *v.GroupId)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.GetCloudWatchAlarmTemplateResponse_Id, *v.Id)
+	}
+	if v.MetricName != nil {
+		s.WriteString(schemas.GetCloudWatchAlarmTemplateResponse_MetricName, *v.MetricName)
+	}
+	if v.ModifiedAt != nil {
+		s.WriteTime(schemas.GetCloudWatchAlarmTemplateResponse_ModifiedAt, *v.ModifiedAt)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.GetCloudWatchAlarmTemplateResponse_Name, *v.Name)
+	}
+	if v.Period != nil {
+		s.WriteInt32(schemas.GetCloudWatchAlarmTemplateResponse_Period, *v.Period)
+	}
+	if v.Statistic != "" {
+		s.WriteString(schemas.GetCloudWatchAlarmTemplateResponse_Statistic, string(v.Statistic))
+	}
+	serializeTagMap(s, schemas.GetCloudWatchAlarmTemplateResponse_Tags, v.Tags)
+	if v.TargetResourceType != "" {
+		s.WriteString(schemas.GetCloudWatchAlarmTemplateResponse_TargetResourceType, string(v.TargetResourceType))
+	}
+	if v.Threshold != nil {
+		s.WriteFloat64(schemas.GetCloudWatchAlarmTemplateResponse_Threshold, *v.Threshold)
+	}
+	if v.TreatMissingData != "" {
+		s.WriteString(schemas.GetCloudWatchAlarmTemplateResponse_TreatMissingData, string(v.TreatMissingData))
+	}
+}
+func (v *GetCloudWatchAlarmTemplateOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetCloudWatchAlarmTemplateResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetCloudWatchAlarmTemplateResponse_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.GetCloudWatchAlarmTemplateResponse_Arn, v.Arn)
+		case schemas.GetCloudWatchAlarmTemplateResponse_ComparisonOperator:
+			var ev string
+			if err := d.ReadString(schemas.GetCloudWatchAlarmTemplateResponse_ComparisonOperator, &ev); err != nil {
+				return err
+			}
+			v.ComparisonOperator = types.CloudWatchAlarmTemplateComparisonOperator(ev)
+			return nil
+		case schemas.GetCloudWatchAlarmTemplateResponse_CreatedAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.GetCloudWatchAlarmTemplateResponse_CreatedAt, v.CreatedAt)
+		case schemas.GetCloudWatchAlarmTemplateResponse_DatapointsToAlarm:
+			v.DatapointsToAlarm = new(int32)
+			return d.ReadInt32(schemas.GetCloudWatchAlarmTemplateResponse_DatapointsToAlarm, v.DatapointsToAlarm)
+		case schemas.GetCloudWatchAlarmTemplateResponse_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.GetCloudWatchAlarmTemplateResponse_Description, v.Description)
+		case schemas.GetCloudWatchAlarmTemplateResponse_EvaluationPeriods:
+			v.EvaluationPeriods = new(int32)
+			return d.ReadInt32(schemas.GetCloudWatchAlarmTemplateResponse_EvaluationPeriods, v.EvaluationPeriods)
+		case schemas.GetCloudWatchAlarmTemplateResponse_GroupId:
+			v.GroupId = new(string)
+			return d.ReadString(schemas.GetCloudWatchAlarmTemplateResponse_GroupId, v.GroupId)
+		case schemas.GetCloudWatchAlarmTemplateResponse_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.GetCloudWatchAlarmTemplateResponse_Id, v.Id)
+		case schemas.GetCloudWatchAlarmTemplateResponse_MetricName:
+			v.MetricName = new(string)
+			return d.ReadString(schemas.GetCloudWatchAlarmTemplateResponse_MetricName, v.MetricName)
+		case schemas.GetCloudWatchAlarmTemplateResponse_ModifiedAt:
+			v.ModifiedAt = new(time.Time)
+			return d.ReadTime(schemas.GetCloudWatchAlarmTemplateResponse_ModifiedAt, v.ModifiedAt)
+		case schemas.GetCloudWatchAlarmTemplateResponse_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.GetCloudWatchAlarmTemplateResponse_Name, v.Name)
+		case schemas.GetCloudWatchAlarmTemplateResponse_Period:
+			v.Period = new(int32)
+			return d.ReadInt32(schemas.GetCloudWatchAlarmTemplateResponse_Period, v.Period)
+		case schemas.GetCloudWatchAlarmTemplateResponse_Statistic:
+			var ev string
+			if err := d.ReadString(schemas.GetCloudWatchAlarmTemplateResponse_Statistic, &ev); err != nil {
+				return err
+			}
+			v.Statistic = types.CloudWatchAlarmTemplateStatistic(ev)
+			return nil
+		case schemas.GetCloudWatchAlarmTemplateResponse_Tags:
+			return deserializeTagMap(d, schemas.GetCloudWatchAlarmTemplateResponse_Tags, &v.Tags)
+		case schemas.GetCloudWatchAlarmTemplateResponse_TargetResourceType:
+			var ev string
+			if err := d.ReadString(schemas.GetCloudWatchAlarmTemplateResponse_TargetResourceType, &ev); err != nil {
+				return err
+			}
+			v.TargetResourceType = types.CloudWatchAlarmTemplateTargetResourceType(ev)
+			return nil
+		case schemas.GetCloudWatchAlarmTemplateResponse_Threshold:
+			v.Threshold = new(float64)
+			return d.ReadFloat64(schemas.GetCloudWatchAlarmTemplateResponse_Threshold, v.Threshold)
+		case schemas.GetCloudWatchAlarmTemplateResponse_TreatMissingData:
+			var ev string
+			if err := d.ReadString(schemas.GetCloudWatchAlarmTemplateResponse_TreatMissingData, &ev); err != nil {
+				return err
+			}
+			v.TreatMissingData = types.CloudWatchAlarmTemplateTreatMissingData(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetCloudWatchAlarmTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetCloudWatchAlarmTemplate{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetCloudWatchAlarmTemplate, schemas.GetCloudWatchAlarmTemplateRequest, schemas.GetCloudWatchAlarmTemplateResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetCloudWatchAlarmTemplate{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetCloudWatchAlarmTemplate, schemas.GetCloudWatchAlarmTemplateRequest, schemas.GetCloudWatchAlarmTemplateResponse), output: &GetCloudWatchAlarmTemplateOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

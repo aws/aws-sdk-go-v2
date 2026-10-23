@@ -4,6 +4,8 @@ package sesv2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/sesv2/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -42,6 +44,21 @@ type PutEmailIdentityDkimAttributesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutEmailIdentityDkimAttributesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutEmailIdentityDkimAttributesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutEmailIdentityDkimAttributesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EmailIdentity != nil {
+		s.WriteString(schemas.PutEmailIdentityDkimAttributesRequest_EmailIdentity, *v.EmailIdentity)
+	}
+	if v.SigningEnabled != false {
+		s.WriteBool(schemas.PutEmailIdentityDkimAttributesRequest_SigningEnabled, v.SigningEnabled)
+	}
+}
+
 // An HTTP 200 response if the request succeeds, or an error message if the
 // request fails.
 type PutEmailIdentityDkimAttributesOutput struct {
@@ -51,13 +68,26 @@ type PutEmailIdentityDkimAttributesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutEmailIdentityDkimAttributesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutEmailIdentityDkimAttributesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutEmailIdentityDkimAttributesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *PutEmailIdentityDkimAttributesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PutEmailIdentityDkimAttributesResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPutEmailIdentityDkimAttributesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpPutEmailIdentityDkimAttributes{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutEmailIdentityDkimAttributes, schemas.PutEmailIdentityDkimAttributesRequest, schemas.PutEmailIdentityDkimAttributesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpPutEmailIdentityDkimAttributes{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutEmailIdentityDkimAttributes, schemas.PutEmailIdentityDkimAttributesRequest, schemas.PutEmailIdentityDkimAttributesResponse), output: &PutEmailIdentityDkimAttributesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

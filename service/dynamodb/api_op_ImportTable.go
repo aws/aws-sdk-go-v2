@@ -5,7 +5,9 @@ package dynamodb
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/dynamodb/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/dynamodb/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -65,6 +67,38 @@ type ImportTableInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ImportTableInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ImportTableInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ImportTableInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.ImportTableInput_ClientToken, *v.ClientToken)
+	}
+	if v.InputCompressionType != "" {
+		s.WriteString(schemas.ImportTableInput_InputCompressionType, string(v.InputCompressionType))
+	}
+	if v.InputFormat != "" {
+		s.WriteString(schemas.ImportTableInput_InputFormat, string(v.InputFormat))
+	}
+	if v.InputFormatOptions != nil {
+		s.WriteStruct(schemas.ImportTableInput_InputFormatOptions)
+		v.InputFormatOptions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.S3BucketSource != nil {
+		s.WriteStruct(schemas.ImportTableInput_S3BucketSource)
+		v.S3BucketSource.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TableCreationParameters != nil {
+		s.WriteStruct(schemas.ImportTableInput_TableCreationParameters)
+		v.TableCreationParameters.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
 func (in *ImportTableInput) bindEndpointParams(p *EndpointParameters) {
 	func() {
 		v1 := in.TableCreationParameters
@@ -93,13 +127,34 @@ type ImportTableOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ImportTableOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ImportTableOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ImportTableOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ImportTableDescription != nil {
+		s.WriteStruct(schemas.ImportTableOutput_ImportTableDescription)
+		v.ImportTableDescription.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *ImportTableOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ImportTableOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ImportTableOutput_ImportTableDescription:
+			v.ImportTableDescription = &types.ImportTableDescription{}
+			return v.ImportTableDescription.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationImportTableMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpImportTable{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ImportTable, schemas.ImportTableInput, schemas.ImportTableOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpImportTable{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ImportTable, schemas.ImportTableInput, schemas.ImportTableOutput), output: &ImportTableOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,6 +4,8 @@ package backup
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/backup/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -30,6 +32,15 @@ func (c *Client) DescribeGlobalSettings(ctx context.Context, params *DescribeGlo
 
 type DescribeGlobalSettingsInput struct {
 	noSmithyDocumentSerde
+}
+
+func (v *DescribeGlobalSettingsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeGlobalSettingsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeGlobalSettingsInput) SerializeMembers(s smithy.ShapeSerializer) {
 }
 
 type DescribeGlobalSettingsOutput struct {
@@ -59,13 +70,35 @@ type DescribeGlobalSettingsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeGlobalSettingsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeGlobalSettingsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeGlobalSettingsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeGlobalSettings(s, schemas.DescribeGlobalSettingsOutput_GlobalSettings, v.GlobalSettings)
+	if v.LastUpdateTime != nil {
+		s.WriteTime(schemas.DescribeGlobalSettingsOutput_LastUpdateTime, *v.LastUpdateTime)
+	}
+}
+func (v *DescribeGlobalSettingsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeGlobalSettingsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeGlobalSettingsOutput_GlobalSettings:
+			return deserializeGlobalSettings(d, schemas.DescribeGlobalSettingsOutput_GlobalSettings, &v.GlobalSettings)
+		case schemas.DescribeGlobalSettingsOutput_LastUpdateTime:
+			v.LastUpdateTime = new(time.Time)
+			return d.ReadTime(schemas.DescribeGlobalSettingsOutput_LastUpdateTime, v.LastUpdateTime)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeGlobalSettingsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeGlobalSettings{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeGlobalSettings, schemas.DescribeGlobalSettingsInput, schemas.DescribeGlobalSettingsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeGlobalSettings{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeGlobalSettings, schemas.DescribeGlobalSettingsInput, schemas.DescribeGlobalSettingsOutput), output: &DescribeGlobalSettingsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

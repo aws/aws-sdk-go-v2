@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"items":[{"createdAt":"2000-01-01T00:00:00Z","integrationArn":"__IntegrationArn__","integrationId":"__IntegrationId__","integrationType":"GITHUB","name":"__Name__","providerDetails":{"github":{"organizationName":"__OrganizationName__"}},"updatedAt":"2000-01-01T00:00:00Z"},{"createdAt":"2000-01-01T00:00:00Z","integrationArn":"__IntegrationArn__","integrationId":"__IntegrationId__","integrationType":"GITHUB","name":"__Name__","providerDetails":{"github":{"organizationName":"__OrganizationName__"}},"updatedAt":"2000-01-01T00:00:00Z"}],"nextToken":"__NextToken__"}

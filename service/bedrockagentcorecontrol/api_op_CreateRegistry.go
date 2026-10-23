@@ -5,7 +5,9 @@ package bedrockagentcorecontrol
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -71,6 +73,33 @@ type CreateRegistryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateRegistryInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateRegistryRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateRegistryInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApprovalConfiguration != nil {
+		s.WriteStruct(schemas.CreateRegistryRequest_approvalConfiguration)
+		v.ApprovalConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeAuthorizerConfiguration(s, schemas.CreateRegistryRequest_authorizerConfiguration, v.AuthorizerConfiguration)
+	if v.AuthorizerType != "" {
+		s.WriteString(schemas.CreateRegistryRequest_authorizerType, string(v.AuthorizerType))
+	}
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateRegistryRequest_clientToken, *v.ClientToken)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreateRegistryRequest_description, *v.Description)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateRegistryRequest_name, *v.Name)
+	}
+}
+
 type CreateRegistryOutput struct {
 
 	// The Amazon Resource Name (ARN) of the created registry.
@@ -84,13 +113,32 @@ type CreateRegistryOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateRegistryOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateRegistryResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateRegistryOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RegistryArn != nil {
+		s.WriteString(schemas.CreateRegistryResponse_registryArn, *v.RegistryArn)
+	}
+}
+func (v *CreateRegistryOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateRegistryResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateRegistryResponse_registryArn:
+			v.RegistryArn = new(string)
+			return d.ReadString(schemas.CreateRegistryResponse_registryArn, v.RegistryArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateRegistryMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateRegistry{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateRegistry, schemas.CreateRegistryRequest, schemas.CreateRegistryResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateRegistry{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateRegistry, schemas.CreateRegistryRequest, schemas.CreateRegistryResponse), output: &CreateRegistryOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

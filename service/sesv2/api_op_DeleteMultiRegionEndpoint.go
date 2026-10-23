@@ -4,7 +4,9 @@ package sesv2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/sesv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sesv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -38,6 +40,18 @@ type DeleteMultiRegionEndpointInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteMultiRegionEndpointInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteMultiRegionEndpointRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteMultiRegionEndpointInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EndpointName != nil {
+		s.WriteString(schemas.DeleteMultiRegionEndpointRequest_EndpointName, *v.EndpointName)
+	}
+}
+
 // An HTTP 200 response if the request succeeds, or an error message if the
 // request fails.
 type DeleteMultiRegionEndpointOutput struct {
@@ -60,13 +74,36 @@ type DeleteMultiRegionEndpointOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteMultiRegionEndpointOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteMultiRegionEndpointResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteMultiRegionEndpointOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Status != "" {
+		s.WriteString(schemas.DeleteMultiRegionEndpointResponse_Status, string(v.Status))
+	}
+}
+func (v *DeleteMultiRegionEndpointOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteMultiRegionEndpointResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteMultiRegionEndpointResponse_Status:
+			var ev string
+			if err := d.ReadString(schemas.DeleteMultiRegionEndpointResponse_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.Status(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteMultiRegionEndpointMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteMultiRegionEndpoint{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteMultiRegionEndpoint, schemas.DeleteMultiRegionEndpointRequest, schemas.DeleteMultiRegionEndpointResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteMultiRegionEndpoint{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteMultiRegionEndpoint, schemas.DeleteMultiRegionEndpointRequest, schemas.DeleteMultiRegionEndpointResponse), output: &DeleteMultiRegionEndpointOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

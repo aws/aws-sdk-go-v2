@@ -4,6 +4,8 @@ package secretsmanager
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/secretsmanager/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -73,6 +75,39 @@ type GetRandomPasswordInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetRandomPasswordInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetRandomPasswordRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetRandomPasswordInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ExcludeCharacters != nil {
+		s.WriteString(schemas.GetRandomPasswordRequest_ExcludeCharacters, *v.ExcludeCharacters)
+	}
+	if v.ExcludeLowercase != nil {
+		s.WriteBool(schemas.GetRandomPasswordRequest_ExcludeLowercase, *v.ExcludeLowercase)
+	}
+	if v.ExcludeNumbers != nil {
+		s.WriteBool(schemas.GetRandomPasswordRequest_ExcludeNumbers, *v.ExcludeNumbers)
+	}
+	if v.ExcludePunctuation != nil {
+		s.WriteBool(schemas.GetRandomPasswordRequest_ExcludePunctuation, *v.ExcludePunctuation)
+	}
+	if v.ExcludeUppercase != nil {
+		s.WriteBool(schemas.GetRandomPasswordRequest_ExcludeUppercase, *v.ExcludeUppercase)
+	}
+	if v.IncludeSpace != nil {
+		s.WriteBool(schemas.GetRandomPasswordRequest_IncludeSpace, *v.IncludeSpace)
+	}
+	if v.PasswordLength != nil {
+		s.WriteInt64(schemas.GetRandomPasswordRequest_PasswordLength, *v.PasswordLength)
+	}
+	if v.RequireEachIncludedType != nil {
+		s.WriteBool(schemas.GetRandomPasswordRequest_RequireEachIncludedType, *v.RequireEachIncludedType)
+	}
+}
+
 type GetRandomPasswordOutput struct {
 
 	// A string with the password.
@@ -84,13 +119,32 @@ type GetRandomPasswordOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetRandomPasswordOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetRandomPasswordResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetRandomPasswordOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RandomPassword != nil {
+		s.WriteString(schemas.GetRandomPasswordResponse_RandomPassword, *v.RandomPassword)
+	}
+}
+func (v *GetRandomPasswordOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetRandomPasswordResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetRandomPasswordResponse_RandomPassword:
+			v.RandomPassword = new(string)
+			return d.ReadString(schemas.GetRandomPasswordResponse_RandomPassword, v.RandomPassword)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetRandomPasswordMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetRandomPassword{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetRandomPassword, schemas.GetRandomPasswordRequest, schemas.GetRandomPasswordResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetRandomPassword{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetRandomPassword, schemas.GetRandomPasswordRequest, schemas.GetRandomPasswordResponse), output: &GetRandomPasswordOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

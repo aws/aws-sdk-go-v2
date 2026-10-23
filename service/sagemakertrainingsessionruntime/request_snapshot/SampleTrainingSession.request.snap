@@ -1,0 +1,7 @@
+POST /training-sessions/__TrainingSessionName__/sample
+
+Accept: __Accept__
+Content-Type: __ContentType__
+X-Amzn-Sagemaker-Model-Package: __ModelPackageArn__
+
+blob

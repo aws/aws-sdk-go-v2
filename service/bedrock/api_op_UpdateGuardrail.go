@@ -4,7 +4,9 @@ package bedrock
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/bedrock/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrock/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -116,6 +118,68 @@ type UpdateGuardrailInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateGuardrailInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateGuardrailRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateGuardrailInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AutomatedReasoningPolicyConfig != nil {
+		s.WriteStruct(schemas.UpdateGuardrailRequest_automatedReasoningPolicyConfig)
+		v.AutomatedReasoningPolicyConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.BlockedInputMessaging != nil {
+		s.WriteString(schemas.UpdateGuardrailRequest_blockedInputMessaging, *v.BlockedInputMessaging)
+	}
+	if v.BlockedOutputsMessaging != nil {
+		s.WriteString(schemas.UpdateGuardrailRequest_blockedOutputsMessaging, *v.BlockedOutputsMessaging)
+	}
+	if v.ContentPolicyConfig != nil {
+		s.WriteStruct(schemas.UpdateGuardrailRequest_contentPolicyConfig)
+		v.ContentPolicyConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ContextualGroundingPolicyConfig != nil {
+		s.WriteStruct(schemas.UpdateGuardrailRequest_contextualGroundingPolicyConfig)
+		v.ContextualGroundingPolicyConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CrossRegionConfig != nil {
+		s.WriteStruct(schemas.UpdateGuardrailRequest_crossRegionConfig)
+		v.CrossRegionConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateGuardrailRequest_description, *v.Description)
+	}
+	if v.GuardrailIdentifier != nil {
+		s.WriteString(schemas.UpdateGuardrailRequest_guardrailIdentifier, *v.GuardrailIdentifier)
+	}
+	if v.KmsKeyId != nil {
+		s.WriteString(schemas.UpdateGuardrailRequest_kmsKeyId, *v.KmsKeyId)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateGuardrailRequest_name, *v.Name)
+	}
+	if v.SensitiveInformationPolicyConfig != nil {
+		s.WriteStruct(schemas.UpdateGuardrailRequest_sensitiveInformationPolicyConfig)
+		v.SensitiveInformationPolicyConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TopicPolicyConfig != nil {
+		s.WriteStruct(schemas.UpdateGuardrailRequest_topicPolicyConfig)
+		v.TopicPolicyConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.WordPolicyConfig != nil {
+		s.WriteStruct(schemas.UpdateGuardrailRequest_wordPolicyConfig)
+		v.WordPolicyConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type UpdateGuardrailOutput struct {
 
 	// The ARN of the guardrail.
@@ -144,13 +208,50 @@ type UpdateGuardrailOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateGuardrailOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateGuardrailResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateGuardrailOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GuardrailArn != nil {
+		s.WriteString(schemas.UpdateGuardrailResponse_guardrailArn, *v.GuardrailArn)
+	}
+	if v.GuardrailId != nil {
+		s.WriteString(schemas.UpdateGuardrailResponse_guardrailId, *v.GuardrailId)
+	}
+	if v.UpdatedAt != nil {
+		s.WriteTime(schemas.UpdateGuardrailResponse_updatedAt, *v.UpdatedAt)
+	}
+	if v.Version != nil {
+		s.WriteString(schemas.UpdateGuardrailResponse_version, *v.Version)
+	}
+}
+func (v *UpdateGuardrailOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateGuardrailResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateGuardrailResponse_guardrailArn:
+			v.GuardrailArn = new(string)
+			return d.ReadString(schemas.UpdateGuardrailResponse_guardrailArn, v.GuardrailArn)
+		case schemas.UpdateGuardrailResponse_guardrailId:
+			v.GuardrailId = new(string)
+			return d.ReadString(schemas.UpdateGuardrailResponse_guardrailId, v.GuardrailId)
+		case schemas.UpdateGuardrailResponse_updatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.UpdateGuardrailResponse_updatedAt, v.UpdatedAt)
+		case schemas.UpdateGuardrailResponse_version:
+			v.Version = new(string)
+			return d.ReadString(schemas.UpdateGuardrailResponse_version, v.Version)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateGuardrailMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateGuardrail{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateGuardrail, schemas.UpdateGuardrailRequest, schemas.UpdateGuardrailResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateGuardrail{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateGuardrail, schemas.UpdateGuardrailRequest, schemas.UpdateGuardrailResponse), output: &UpdateGuardrailOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

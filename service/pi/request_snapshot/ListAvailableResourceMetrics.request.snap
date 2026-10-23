@@ -1,6 +1,7 @@
-POST /
+POST /service/PerformanceInsightsv20180227/operation/ListAvailableResourceMetrics
 
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: PerformanceInsightsv20180227.ListAvailableResourceMetrics
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"Identifier":"__Identifier__","MaxResults":1,"MetricTypes":["__Member__","__Member__"],"NextToken":"__NextToken__","ServiceType":"RDS"}
+¿jIdentifiern__Identifier__jMaxResultskMetricTypesŸj__Member__j__Member__ÿiNextTokenm__NextToken__kServiceTypecRDSÿ

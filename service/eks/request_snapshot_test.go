@@ -525,6 +525,14 @@ func TestCheckRequestSnapshot_CreateCapability(t *testing.T) {
 						"__Member__",
 					},
 				},
+				EndpointPrefix: ptr.String("__EndpointPrefix__"),
+			},
+			Ack: &types.AckConfigRequest{
+				EnableCrossNamespace: ptr.Bool(true),
+				DisabledServices: []string{
+					"__Member__",
+					"__Member__",
+				},
 			},
 		},
 		Tags: map[string]string{
@@ -2565,6 +2573,13 @@ func TestCheckRequestSnapshot_UpdateCapability(t *testing.T) {
 					},
 				},
 			},
+			Ack: &types.UpdateAckConfig{
+				EnableCrossNamespace: ptr.Bool(true),
+				DisabledServices: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
 		},
 		ClientRequestToken:      ptr.String("__ClientRequestToken__"),
 		DeletePropagationPolicy: types.CapabilityDeletePropagationPolicy("RETAIN"),
@@ -3302,6 +3317,14 @@ func TestUpdateRequestSnapshot_CreateCapability(t *testing.T) {
 						"__Member__",
 						"__Member__",
 					},
+				},
+				EndpointPrefix: ptr.String("__EndpointPrefix__"),
+			},
+			Ack: &types.AckConfigRequest{
+				EnableCrossNamespace: ptr.Bool(true),
+				DisabledServices: []string{
+					"__Member__",
+					"__Member__",
 				},
 			},
 		},
@@ -5341,6 +5364,13 @@ func TestUpdateRequestSnapshot_UpdateCapability(t *testing.T) {
 						"__Member__",
 						"__Member__",
 					},
+				},
+			},
+			Ack: &types.UpdateAckConfig{
+				EnableCrossNamespace: ptr.Bool(true),
+				DisabledServices: []string{
+					"__Member__",
+					"__Member__",
 				},
 			},
 		},

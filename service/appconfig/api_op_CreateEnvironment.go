@@ -4,7 +4,9 @@ package appconfig
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/appconfig/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/appconfig/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -56,6 +58,26 @@ type CreateEnvironmentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateEnvironmentInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateEnvironmentRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateEnvironmentInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationId != nil {
+		s.WriteString(schemas.CreateEnvironmentRequest_ApplicationId, *v.ApplicationId)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreateEnvironmentRequest_Description, *v.Description)
+	}
+	serializeMonitorList(s, schemas.CreateEnvironmentRequest_Monitors, v.Monitors)
+	if v.Name != nil {
+		s.WriteString(schemas.CreateEnvironmentRequest_Name, *v.Name)
+	}
+	serializeTagMap(s, schemas.CreateEnvironmentRequest_Tags, v.Tags)
+}
+
 type CreateEnvironmentOutput struct {
 
 	// The application ID.
@@ -83,13 +105,63 @@ type CreateEnvironmentOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateEnvironmentOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Environment)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateEnvironmentOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationId != nil {
+		s.WriteString(schemas.Environment_ApplicationId, *v.ApplicationId)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.Environment_Description, *v.Description)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.Environment_Id, *v.Id)
+	}
+	serializeMonitorList(s, schemas.Environment_Monitors, v.Monitors)
+	if v.Name != nil {
+		s.WriteString(schemas.Environment_Name, *v.Name)
+	}
+	if v.State != "" {
+		s.WriteString(schemas.Environment_State, string(v.State))
+	}
+}
+func (v *CreateEnvironmentOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Environment, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Environment_ApplicationId:
+			v.ApplicationId = new(string)
+			return d.ReadString(schemas.Environment_ApplicationId, v.ApplicationId)
+		case schemas.Environment_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.Environment_Description, v.Description)
+		case schemas.Environment_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.Environment_Id, v.Id)
+		case schemas.Environment_Monitors:
+			return deserializeMonitorList(d, schemas.Environment_Monitors, &v.Monitors)
+		case schemas.Environment_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.Environment_Name, v.Name)
+		case schemas.Environment_State:
+			var ev string
+			if err := d.ReadString(schemas.Environment_State, &ev); err != nil {
+				return err
+			}
+			v.State = types.EnvironmentState(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateEnvironmentMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateEnvironment{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateEnvironment, schemas.CreateEnvironmentRequest, schemas.Environment)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateEnvironment{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateEnvironment, schemas.CreateEnvironmentRequest, schemas.Environment), output: &CreateEnvironmentOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

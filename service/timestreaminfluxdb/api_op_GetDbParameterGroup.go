@@ -4,7 +4,9 @@ package timestreaminfluxdb
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/timestreaminfluxdb/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/timestreaminfluxdb/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -32,6 +34,18 @@ type GetDbParameterGroupInput struct {
 	Identifier *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetDbParameterGroupInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetDbParameterGroupInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetDbParameterGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Identifier != nil {
+		s.WriteString(schemas.GetDbParameterGroupInput_identifier, *v.Identifier)
+	}
 }
 
 type GetDbParameterGroupOutput struct {
@@ -64,13 +78,53 @@ type GetDbParameterGroupOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetDbParameterGroupOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetDbParameterGroupOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetDbParameterGroupOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.GetDbParameterGroupOutput_arn, *v.Arn)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.GetDbParameterGroupOutput_description, *v.Description)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.GetDbParameterGroupOutput_id, *v.Id)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.GetDbParameterGroupOutput_name, *v.Name)
+	}
+	serializeParameters(s, schemas.GetDbParameterGroupOutput_parameters, v.Parameters)
+}
+func (v *GetDbParameterGroupOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetDbParameterGroupOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetDbParameterGroupOutput_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.GetDbParameterGroupOutput_arn, v.Arn)
+		case schemas.GetDbParameterGroupOutput_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.GetDbParameterGroupOutput_description, v.Description)
+		case schemas.GetDbParameterGroupOutput_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.GetDbParameterGroupOutput_id, v.Id)
+		case schemas.GetDbParameterGroupOutput_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.GetDbParameterGroupOutput_name, v.Name)
+		case schemas.GetDbParameterGroupOutput_parameters:
+			return deserializeParameters(d, schemas.GetDbParameterGroupOutput_parameters, &v.Parameters)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetDbParameterGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpGetDbParameterGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetDbParameterGroup, schemas.GetDbParameterGroupInput, schemas.GetDbParameterGroupOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpGetDbParameterGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetDbParameterGroup, schemas.GetDbParameterGroupInput, schemas.GetDbParameterGroupOutput), output: &GetDbParameterGroupOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

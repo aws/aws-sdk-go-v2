@@ -4,7 +4,9 @@ package mediatailor
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/mediatailor/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/mediatailor/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -49,6 +51,48 @@ type UpdateProgramInput struct {
 	AudienceMedia []types.AudienceMedia
 
 	noSmithyDocumentSerde
+}
+
+func (v *UpdateProgramInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateProgramRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateProgramInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serialize__listOfAdBreak(s, schemas.UpdateProgramRequest_AdBreaks, v.AdBreaks)
+	serialize__listOfAudienceMedia(s, schemas.UpdateProgramRequest_AudienceMedia, v.AudienceMedia)
+	if v.ChannelName != nil {
+		s.WriteString(schemas.UpdateProgramRequest_ChannelName, *v.ChannelName)
+	}
+	if v.ProgramName != nil {
+		s.WriteString(schemas.UpdateProgramRequest_ProgramName, *v.ProgramName)
+	}
+	if v.ScheduleConfiguration != nil {
+		s.WriteStruct(schemas.UpdateProgramRequest_ScheduleConfiguration)
+		v.ScheduleConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateProgramInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateProgramRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateProgramRequest_AdBreaks:
+			return deserialize__listOfAdBreak(d, schemas.UpdateProgramRequest_AdBreaks, &v.AdBreaks)
+		case schemas.UpdateProgramRequest_AudienceMedia:
+			return deserialize__listOfAudienceMedia(d, schemas.UpdateProgramRequest_AudienceMedia, &v.AudienceMedia)
+		case schemas.UpdateProgramRequest_ChannelName:
+			v.ChannelName = new(string)
+			return d.ReadString(schemas.UpdateProgramRequest_ChannelName, v.ChannelName)
+		case schemas.UpdateProgramRequest_ProgramName:
+			v.ProgramName = new(string)
+			return d.ReadString(schemas.UpdateProgramRequest_ProgramName, v.ProgramName)
+		case schemas.UpdateProgramRequest_ScheduleConfiguration:
+			v.ScheduleConfiguration = &types.UpdateProgramScheduleConfiguration{}
+			return v.ScheduleConfiguration.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 type UpdateProgramOutput struct {
@@ -102,13 +146,97 @@ type UpdateProgramOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateProgramOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateProgramResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateProgramOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serialize__listOfAdBreak(s, schemas.UpdateProgramResponse_AdBreaks, v.AdBreaks)
+	if v.Arn != nil {
+		s.WriteString(schemas.UpdateProgramResponse_Arn, *v.Arn)
+	}
+	serialize__listOfAudienceMedia(s, schemas.UpdateProgramResponse_AudienceMedia, v.AudienceMedia)
+	if v.ChannelName != nil {
+		s.WriteString(schemas.UpdateProgramResponse_ChannelName, *v.ChannelName)
+	}
+	if v.ClipRange != nil {
+		s.WriteStruct(schemas.UpdateProgramResponse_ClipRange)
+		v.ClipRange.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.UpdateProgramResponse_CreationTime, *v.CreationTime)
+	}
+	if v.DurationMillis != nil {
+		s.WriteInt64(schemas.UpdateProgramResponse_DurationMillis, *v.DurationMillis)
+	}
+	if v.LiveSourceName != nil {
+		s.WriteString(schemas.UpdateProgramResponse_LiveSourceName, *v.LiveSourceName)
+	}
+	if v.ProgramName != nil {
+		s.WriteString(schemas.UpdateProgramResponse_ProgramName, *v.ProgramName)
+	}
+	if v.ScheduledStartTime != nil {
+		s.WriteTime(schemas.UpdateProgramResponse_ScheduledStartTime, *v.ScheduledStartTime)
+	}
+	if v.SourceLocationName != nil {
+		s.WriteString(schemas.UpdateProgramResponse_SourceLocationName, *v.SourceLocationName)
+	}
+	serialize__mapOf__string(s, schemas.UpdateProgramResponse_Tags, v.Tags)
+	if v.VodSourceName != nil {
+		s.WriteString(schemas.UpdateProgramResponse_VodSourceName, *v.VodSourceName)
+	}
+}
+func (v *UpdateProgramOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateProgramResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateProgramResponse_AdBreaks:
+			return deserialize__listOfAdBreak(d, schemas.UpdateProgramResponse_AdBreaks, &v.AdBreaks)
+		case schemas.UpdateProgramResponse_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.UpdateProgramResponse_Arn, v.Arn)
+		case schemas.UpdateProgramResponse_AudienceMedia:
+			return deserialize__listOfAudienceMedia(d, schemas.UpdateProgramResponse_AudienceMedia, &v.AudienceMedia)
+		case schemas.UpdateProgramResponse_ChannelName:
+			v.ChannelName = new(string)
+			return d.ReadString(schemas.UpdateProgramResponse_ChannelName, v.ChannelName)
+		case schemas.UpdateProgramResponse_ClipRange:
+			v.ClipRange = &types.ClipRange{}
+			return v.ClipRange.Deserialize(d)
+		case schemas.UpdateProgramResponse_CreationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.UpdateProgramResponse_CreationTime, v.CreationTime)
+		case schemas.UpdateProgramResponse_DurationMillis:
+			v.DurationMillis = new(int64)
+			return d.ReadInt64(schemas.UpdateProgramResponse_DurationMillis, v.DurationMillis)
+		case schemas.UpdateProgramResponse_LiveSourceName:
+			v.LiveSourceName = new(string)
+			return d.ReadString(schemas.UpdateProgramResponse_LiveSourceName, v.LiveSourceName)
+		case schemas.UpdateProgramResponse_ProgramName:
+			v.ProgramName = new(string)
+			return d.ReadString(schemas.UpdateProgramResponse_ProgramName, v.ProgramName)
+		case schemas.UpdateProgramResponse_ScheduledStartTime:
+			v.ScheduledStartTime = new(time.Time)
+			return d.ReadTime(schemas.UpdateProgramResponse_ScheduledStartTime, v.ScheduledStartTime)
+		case schemas.UpdateProgramResponse_SourceLocationName:
+			v.SourceLocationName = new(string)
+			return d.ReadString(schemas.UpdateProgramResponse_SourceLocationName, v.SourceLocationName)
+		case schemas.UpdateProgramResponse_Tags:
+			return deserialize__mapOf__string(d, schemas.UpdateProgramResponse_Tags, &v.Tags)
+		case schemas.UpdateProgramResponse_VodSourceName:
+			v.VodSourceName = new(string)
+			return d.ReadString(schemas.UpdateProgramResponse_VodSourceName, v.VodSourceName)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateProgramMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateProgram{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateProgram, schemas.UpdateProgramRequest, schemas.UpdateProgramResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateProgram{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateProgram, schemas.UpdateProgramRequest, schemas.UpdateProgramResponse), output: &UpdateProgramOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

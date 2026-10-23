@@ -5,7 +5,9 @@ package iotsitewise
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/iotsitewise/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotsitewise/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -62,6 +64,35 @@ type StartSearchInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartSearchInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartSearchRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartSearchInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.StartSearchRequest_clientToken, *v.ClientToken)
+	}
+	if v.GroupId != nil {
+		s.WriteString(schemas.StartSearchRequest_groupId, *v.GroupId)
+	}
+	if v.QueryStatement != nil {
+		s.WriteString(schemas.StartSearchRequest_queryStatement, *v.QueryStatement)
+	}
+	if v.SearchFilters != nil {
+		s.WriteStruct(schemas.StartSearchRequest_searchFilters)
+		v.SearchFilters.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SearchType != "" {
+		s.WriteString(schemas.StartSearchRequest_searchType, string(v.SearchType))
+	}
+	if v.WorkspaceName != nil {
+		s.WriteString(schemas.StartSearchRequest_workspaceName, *v.WorkspaceName)
+	}
+}
+
 // Output of the StartSearch operation.
 type StartSearchOutput struct {
 
@@ -90,13 +121,54 @@ type StartSearchOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartSearchOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartSearchResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartSearchOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GroupId != nil {
+		s.WriteString(schemas.StartSearchResponse_groupId, *v.GroupId)
+	}
+	if v.SearchId != nil {
+		s.WriteString(schemas.StartSearchResponse_searchId, *v.SearchId)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.StartSearchResponse_status, string(v.Status))
+	}
+	if v.WorkspaceName != nil {
+		s.WriteString(schemas.StartSearchResponse_workspaceName, *v.WorkspaceName)
+	}
+}
+func (v *StartSearchOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartSearchResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartSearchResponse_groupId:
+			v.GroupId = new(string)
+			return d.ReadString(schemas.StartSearchResponse_groupId, v.GroupId)
+		case schemas.StartSearchResponse_searchId:
+			v.SearchId = new(string)
+			return d.ReadString(schemas.StartSearchResponse_searchId, v.SearchId)
+		case schemas.StartSearchResponse_status:
+			var ev string
+			if err := d.ReadString(schemas.StartSearchResponse_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.SearchStatus(ev)
+			return nil
+		case schemas.StartSearchResponse_workspaceName:
+			v.WorkspaceName = new(string)
+			return d.ReadString(schemas.StartSearchResponse_workspaceName, v.WorkspaceName)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartSearchMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpStartSearch{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartSearch, schemas.StartSearchRequest, schemas.StartSearchResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStartSearch{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartSearch, schemas.StartSearchRequest, schemas.StartSearchResponse), output: &StartSearchOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

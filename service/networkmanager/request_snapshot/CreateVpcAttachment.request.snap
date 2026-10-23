@@ -2,4 +2,4 @@ POST /vpc-attachments
 
 Content-Type: application/json
 
-{"ClientToken":"__ClientToken__","CoreNetworkId":"__CoreNetworkId__","Options":{"ApplianceModeSupport":true,"DnsSupport":true,"Ipv6Support":true,"SecurityGroupReferencingSupport":true},"RoutingPolicyLabel":"__RoutingPolicyLabel__","SubnetArns":["__Member__","__Member__"],"Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}],"VpcArn":"__VpcArn__"}
+{"ClientToken":"__ClientToken__","CoreNetworkId":"__CoreNetworkId__","NatGatewayRules":[{"MatchSourceCidr":"__MatchSourceCidr__","NatCidr":"__NatCidr__","RuleNumber":1},{"MatchSourceCidr":"__MatchSourceCidr__","NatCidr":"__NatCidr__","RuleNumber":1}],"NatGatewaySupport":"ENABLE","Options":{"ApplianceModeSupport":true,"DnsSupport":true,"Ipv6Support":true,"SecurityGroupReferencingSupport":true},"RoutingPolicyLabel":"__RoutingPolicyLabel__","SubnetArns":["__Member__","__Member__"],"Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}],"VpcArn":"__VpcArn__"}

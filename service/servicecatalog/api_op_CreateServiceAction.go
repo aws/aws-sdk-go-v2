@@ -5,7 +5,9 @@ package servicecatalog
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/servicecatalog/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/servicecatalog/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -83,6 +85,31 @@ type CreateServiceActionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateServiceActionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateServiceActionInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateServiceActionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AcceptLanguage != nil {
+		s.WriteString(schemas.CreateServiceActionInput_AcceptLanguage, *v.AcceptLanguage)
+	}
+	serializeServiceActionDefinitionMap(s, schemas.CreateServiceActionInput_Definition, v.Definition)
+	if v.DefinitionType != "" {
+		s.WriteString(schemas.CreateServiceActionInput_DefinitionType, string(v.DefinitionType))
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreateServiceActionInput_Description, *v.Description)
+	}
+	if v.IdempotencyToken != nil {
+		s.WriteString(schemas.CreateServiceActionInput_IdempotencyToken, *v.IdempotencyToken)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateServiceActionInput_Name, *v.Name)
+	}
+}
+
 type CreateServiceActionOutput struct {
 
 	// An object containing information about the self-service action.
@@ -94,13 +121,34 @@ type CreateServiceActionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateServiceActionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateServiceActionOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateServiceActionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ServiceActionDetail != nil {
+		s.WriteStruct(schemas.CreateServiceActionOutput_ServiceActionDetail)
+		v.ServiceActionDetail.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateServiceActionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateServiceActionOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateServiceActionOutput_ServiceActionDetail:
+			v.ServiceActionDetail = &types.ServiceActionDetail{}
+			return v.ServiceActionDetail.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateServiceActionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateServiceAction{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateServiceAction, schemas.CreateServiceActionInput, schemas.CreateServiceActionOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateServiceAction{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateServiceAction, schemas.CreateServiceActionInput, schemas.CreateServiceActionOutput), output: &CreateServiceActionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

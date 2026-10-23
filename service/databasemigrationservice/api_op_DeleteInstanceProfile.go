@@ -4,7 +4,9 @@ package databasemigrationservice
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/databasemigrationservice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/databasemigrationservice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -41,6 +43,18 @@ type DeleteInstanceProfileInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteInstanceProfileInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteInstanceProfileMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteInstanceProfileInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InstanceProfileIdentifier != nil {
+		s.WriteString(schemas.DeleteInstanceProfileMessage_InstanceProfileIdentifier, *v.InstanceProfileIdentifier)
+	}
+}
+
 type DeleteInstanceProfileOutput struct {
 
 	// The instance profile that was deleted.
@@ -52,13 +66,34 @@ type DeleteInstanceProfileOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteInstanceProfileOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteInstanceProfileResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteInstanceProfileOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InstanceProfile != nil {
+		s.WriteStruct(schemas.DeleteInstanceProfileResponse_InstanceProfile)
+		v.InstanceProfile.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DeleteInstanceProfileOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteInstanceProfileResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteInstanceProfileResponse_InstanceProfile:
+			v.InstanceProfile = &types.InstanceProfile{}
+			return v.InstanceProfile.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteInstanceProfileMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteInstanceProfile{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteInstanceProfile, schemas.DeleteInstanceProfileMessage, schemas.DeleteInstanceProfileResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeleteInstanceProfile{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteInstanceProfile, schemas.DeleteInstanceProfileMessage, schemas.DeleteInstanceProfileResponse), output: &DeleteInstanceProfileOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

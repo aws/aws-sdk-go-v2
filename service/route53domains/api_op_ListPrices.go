@@ -20,9 +20,14 @@ import (
 //
 //   - Owner change
 //
-//   - Domain renewal
+//   - Renewal
 //
-//   - Domain restoration
+//   - Restoration
+//
+// The prices that ListPrices returns are the standard rates for a TLD. ListPrices
+// doesn't return registry premium prices, which apply to individual domain names
+// rather than to a TLD. To get accurate pricing for a specific domain name,
+// including premium prices, call GetDomainPrices .
 func (c *Client) ListPrices(ctx context.Context, params *ListPricesInput, optFns ...func(*Options)) (*ListPricesOutput, error) {
 	if params == nil {
 		params = &ListPricesInput{}

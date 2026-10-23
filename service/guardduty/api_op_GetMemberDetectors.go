@@ -4,7 +4,9 @@ package guardduty
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/guardduty/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/guardduty/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -50,6 +52,19 @@ type GetMemberDetectorsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetMemberDetectorsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetMemberDetectorsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetMemberDetectorsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAccountIds(s, schemas.GetMemberDetectorsRequest_AccountIds, v.AccountIds)
+	if v.DetectorId != nil {
+		s.WriteString(schemas.GetMemberDetectorsRequest_DetectorId, *v.DetectorId)
+	}
+}
+
 type GetMemberDetectorsOutput struct {
 
 	// An object that describes which data sources are enabled for a member account.
@@ -69,13 +84,32 @@ type GetMemberDetectorsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetMemberDetectorsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetMemberDetectorsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetMemberDetectorsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeMemberDataSourceConfigurations(s, schemas.GetMemberDetectorsResponse_MemberDataSourceConfigurations, v.MemberDataSourceConfigurations)
+	serializeUnprocessedAccounts(s, schemas.GetMemberDetectorsResponse_UnprocessedAccounts, v.UnprocessedAccounts)
+}
+func (v *GetMemberDetectorsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetMemberDetectorsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetMemberDetectorsResponse_MemberDataSourceConfigurations:
+			return deserializeMemberDataSourceConfigurations(d, schemas.GetMemberDetectorsResponse_MemberDataSourceConfigurations, &v.MemberDataSourceConfigurations)
+		case schemas.GetMemberDetectorsResponse_UnprocessedAccounts:
+			return deserializeUnprocessedAccounts(d, schemas.GetMemberDetectorsResponse_UnprocessedAccounts, &v.UnprocessedAccounts)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetMemberDetectorsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetMemberDetectors{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetMemberDetectors, schemas.GetMemberDetectorsRequest, schemas.GetMemberDetectorsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetMemberDetectors{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetMemberDetectors, schemas.GetMemberDetectorsRequest, schemas.GetMemberDetectorsResponse), output: &GetMemberDetectorsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

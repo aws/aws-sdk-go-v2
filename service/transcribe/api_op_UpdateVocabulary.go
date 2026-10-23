@@ -14,6 +14,10 @@ import (
 // Updates an existing custom vocabulary with new values. This operation
 // overwrites all existing information with your new values; you cannot append new
 // terms onto an existing custom vocabulary.
+//
+// Your custom vocabulary must be in a terminal state ( READY or FAILED ) before
+// you can update it. You must include either Phrases or VocabularyFileUri in your
+// request.
 func (c *Client) UpdateVocabulary(ctx context.Context, params *UpdateVocabularyInput, optFns ...func(*Options)) (*UpdateVocabularyOutput, error) {
 	if params == nil {
 		params = &UpdateVocabularyInput{}
@@ -56,8 +60,9 @@ type UpdateVocabularyInput struct {
 
 	// The Amazon Resource Name (ARN) of an IAM role that has permissions to access
 	// the Amazon S3 bucket that contains your input files (in this case, your custom
-	// vocabulary). If the role that you specify doesn’t have the appropriate
-	// permissions to access the specified Amazon S3 location, your request fails.
+	// vocabulary). If you include EncryptionConfiguration in your request, this role
+	// must also have permissions to access the specified KMS key. If the role that you
+	// specify doesn’t have the appropriate permissions, your request fails.
 	//
 	// IAM role ARNs have the format
 	// arn:partition:iam::account:role/role-name-with-path . For example:
@@ -67,6 +72,11 @@ type UpdateVocabularyInput struct {
 	//
 	// [IAM ARNs]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.html#identifiers-arns
 	DataAccessRoleArn *string
+
+	// Specifies the new encryption configuration for your custom vocabulary. The
+	// vocabulary artifacts are re-encrypted in place using the specified KMS key or
+	// with an AWS-owned key if a key is not supplied.
+	EncryptionConfiguration *types.EncryptionConfiguration
 
 	// Use this parameter if you want to update your custom vocabulary by including
 	// all desired terms, as comma-separated values, within your request. The other
@@ -106,6 +116,11 @@ func (v *UpdateVocabularyInput) Serialize(s smithy.ShapeSerializer) {
 func (v *UpdateVocabularyInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.DataAccessRoleArn != nil {
 		s.WriteString(schemas.UpdateVocabularyRequest_DataAccessRoleArn, *v.DataAccessRoleArn)
+	}
+	if v.EncryptionConfiguration != nil {
+		s.WriteStruct(schemas.UpdateVocabularyRequest_EncryptionConfiguration)
+		v.EncryptionConfiguration.SerializeMembers(s)
+		s.CloseStruct()
 	}
 	if v.LanguageCode != "" {
 		s.WriteString(schemas.UpdateVocabularyRequest_LanguageCode, string(v.LanguageCode))

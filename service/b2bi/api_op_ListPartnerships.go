@@ -5,7 +5,9 @@ package b2bi
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/b2bi/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/b2bi/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -45,6 +47,24 @@ type ListPartnershipsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListPartnershipsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListPartnershipsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListPartnershipsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListPartnershipsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListPartnershipsRequest_nextToken, *v.NextToken)
+	}
+	if v.ProfileId != nil {
+		s.WriteString(schemas.ListPartnershipsRequest_profileId, *v.ProfileId)
+	}
+}
+
 type ListPartnershipsOutput struct {
 
 	// Specifies a list of your partnerships.
@@ -63,13 +83,35 @@ type ListPartnershipsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListPartnershipsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListPartnershipsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListPartnershipsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListPartnershipsResponse_nextToken, *v.NextToken)
+	}
+	serializePartnershipList(s, schemas.ListPartnershipsResponse_partnerships, v.Partnerships)
+}
+func (v *ListPartnershipsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListPartnershipsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListPartnershipsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListPartnershipsResponse_nextToken, v.NextToken)
+		case schemas.ListPartnershipsResponse_partnerships:
+			return deserializePartnershipList(d, schemas.ListPartnershipsResponse_partnerships, &v.Partnerships)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListPartnershipsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpListPartnerships{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListPartnerships, schemas.ListPartnershipsRequest, schemas.ListPartnershipsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpListPartnerships{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListPartnerships, schemas.ListPartnershipsRequest, schemas.ListPartnershipsResponse), output: &ListPartnershipsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

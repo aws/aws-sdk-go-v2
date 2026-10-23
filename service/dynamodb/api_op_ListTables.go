@@ -5,7 +5,9 @@ package dynamodb
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/dynamodb/schemas"
 	internalEndpointDiscovery "github.com/aws/aws-sdk-go-v2/service/internal/endpoint-discovery"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -42,6 +44,21 @@ type ListTablesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListTablesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListTablesInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListTablesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ExclusiveStartTableName != nil {
+		s.WriteString(schemas.ListTablesInput_ExclusiveStartTableName, *v.ExclusiveStartTableName)
+	}
+	if v.Limit != nil {
+		s.WriteInt32(schemas.ListTablesInput_Limit, *v.Limit)
+	}
+}
+
 // Represents the output of a ListTables operation.
 type ListTablesOutput struct {
 
@@ -67,13 +84,35 @@ type ListTablesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListTablesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListTablesOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListTablesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LastEvaluatedTableName != nil {
+		s.WriteString(schemas.ListTablesOutput_LastEvaluatedTableName, *v.LastEvaluatedTableName)
+	}
+	serializeTableNameList(s, schemas.ListTablesOutput_TableNames, v.TableNames)
+}
+func (v *ListTablesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListTablesOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListTablesOutput_LastEvaluatedTableName:
+			v.LastEvaluatedTableName = new(string)
+			return d.ReadString(schemas.ListTablesOutput_LastEvaluatedTableName, v.LastEvaluatedTableName)
+		case schemas.ListTablesOutput_TableNames:
+			return deserializeTableNameList(d, schemas.ListTablesOutput_TableNames, &v.TableNames)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListTablesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpListTables{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListTables, schemas.ListTablesInput, schemas.ListTablesOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpListTables{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListTables, schemas.ListTablesInput, schemas.ListTablesOutput), output: &ListTablesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

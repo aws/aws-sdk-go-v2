@@ -5,7 +5,9 @@ package bedrock
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/bedrock/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrock/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -64,6 +66,39 @@ type ListModelImportJobsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListModelImportJobsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListModelImportJobsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListModelImportJobsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreationTimeAfter != nil {
+		s.WriteTime(schemas.ListModelImportJobsRequest_creationTimeAfter, *v.CreationTimeAfter)
+	}
+	if v.CreationTimeBefore != nil {
+		s.WriteTime(schemas.ListModelImportJobsRequest_creationTimeBefore, *v.CreationTimeBefore)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListModelImportJobsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NameContains != nil {
+		s.WriteString(schemas.ListModelImportJobsRequest_nameContains, *v.NameContains)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListModelImportJobsRequest_nextToken, *v.NextToken)
+	}
+	if v.SortBy != "" {
+		s.WriteString(schemas.ListModelImportJobsRequest_sortBy, string(v.SortBy))
+	}
+	if v.SortOrder != "" {
+		s.WriteString(schemas.ListModelImportJobsRequest_sortOrder, string(v.SortOrder))
+	}
+	if v.StatusEquals != "" {
+		s.WriteString(schemas.ListModelImportJobsRequest_statusEquals, string(v.StatusEquals))
+	}
+}
+
 type ListModelImportJobsOutput struct {
 
 	// Import job summaries.
@@ -80,13 +115,35 @@ type ListModelImportJobsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListModelImportJobsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListModelImportJobsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListModelImportJobsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeModelImportJobSummaries(s, schemas.ListModelImportJobsResponse_modelImportJobSummaries, v.ModelImportJobSummaries)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListModelImportJobsResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListModelImportJobsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListModelImportJobsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListModelImportJobsResponse_modelImportJobSummaries:
+			return deserializeModelImportJobSummaries(d, schemas.ListModelImportJobsResponse_modelImportJobSummaries, &v.ModelImportJobSummaries)
+		case schemas.ListModelImportJobsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListModelImportJobsResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListModelImportJobsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListModelImportJobs{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListModelImportJobs, schemas.ListModelImportJobsRequest, schemas.ListModelImportJobsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListModelImportJobs{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListModelImportJobs, schemas.ListModelImportJobsRequest, schemas.ListModelImportJobsResponse), output: &ListModelImportJobsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -5,7 +5,9 @@ package invoicing
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/invoicing/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/invoicing/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -60,6 +62,33 @@ type UpdateProcurementPortalPreferenceStatusInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateProcurementPortalPreferenceStatusInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateProcurementPortalPreferenceStatusRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateProcurementPortalPreferenceStatusInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.UpdateProcurementPortalPreferenceStatusRequest_ClientToken, *v.ClientToken)
+	}
+	if v.EinvoiceDeliveryPreferenceStatus != "" {
+		s.WriteString(schemas.UpdateProcurementPortalPreferenceStatusRequest_EinvoiceDeliveryPreferenceStatus, string(v.EinvoiceDeliveryPreferenceStatus))
+	}
+	if v.EinvoiceDeliveryPreferenceStatusReason != nil {
+		s.WriteString(schemas.UpdateProcurementPortalPreferenceStatusRequest_EinvoiceDeliveryPreferenceStatusReason, *v.EinvoiceDeliveryPreferenceStatusReason)
+	}
+	if v.ProcurementPortalPreferenceArn != nil {
+		s.WriteString(schemas.UpdateProcurementPortalPreferenceStatusRequest_ProcurementPortalPreferenceArn, *v.ProcurementPortalPreferenceArn)
+	}
+	if v.PurchaseOrderRetrievalPreferenceStatus != "" {
+		s.WriteString(schemas.UpdateProcurementPortalPreferenceStatusRequest_PurchaseOrderRetrievalPreferenceStatus, string(v.PurchaseOrderRetrievalPreferenceStatus))
+	}
+	if v.PurchaseOrderRetrievalPreferenceStatusReason != nil {
+		s.WriteString(schemas.UpdateProcurementPortalPreferenceStatusRequest_PurchaseOrderRetrievalPreferenceStatusReason, *v.PurchaseOrderRetrievalPreferenceStatusReason)
+	}
+}
+
 type UpdateProcurementPortalPreferenceStatusOutput struct {
 
 	// The Amazon Resource Name (ARN) of the procurement portal preference with
@@ -74,13 +103,32 @@ type UpdateProcurementPortalPreferenceStatusOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateProcurementPortalPreferenceStatusOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateProcurementPortalPreferenceStatusResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateProcurementPortalPreferenceStatusOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ProcurementPortalPreferenceArn != nil {
+		s.WriteString(schemas.UpdateProcurementPortalPreferenceStatusResponse_ProcurementPortalPreferenceArn, *v.ProcurementPortalPreferenceArn)
+	}
+}
+func (v *UpdateProcurementPortalPreferenceStatusOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateProcurementPortalPreferenceStatusResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateProcurementPortalPreferenceStatusResponse_ProcurementPortalPreferenceArn:
+			v.ProcurementPortalPreferenceArn = new(string)
+			return d.ReadString(schemas.UpdateProcurementPortalPreferenceStatusResponse_ProcurementPortalPreferenceArn, v.ProcurementPortalPreferenceArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateProcurementPortalPreferenceStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpUpdateProcurementPortalPreferenceStatus{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateProcurementPortalPreferenceStatus, schemas.UpdateProcurementPortalPreferenceStatusRequest, schemas.UpdateProcurementPortalPreferenceStatusResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpUpdateProcurementPortalPreferenceStatus{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateProcurementPortalPreferenceStatus, schemas.UpdateProcurementPortalPreferenceStatusRequest, schemas.UpdateProcurementPortalPreferenceStatusResponse), output: &UpdateProcurementPortalPreferenceStatusOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

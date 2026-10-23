@@ -4,7 +4,9 @@ package pinpointemail
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/pinpointemail/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/pinpointemail/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -71,6 +73,36 @@ type SendEmailInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SendEmailInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SendEmailRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SendEmailInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConfigurationSetName != nil {
+		s.WriteString(schemas.SendEmailRequest_ConfigurationSetName, *v.ConfigurationSetName)
+	}
+	if v.Content != nil {
+		s.WriteStruct(schemas.SendEmailRequest_Content)
+		v.Content.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Destination != nil {
+		s.WriteStruct(schemas.SendEmailRequest_Destination)
+		v.Destination.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeMessageTagList(s, schemas.SendEmailRequest_EmailTags, v.EmailTags)
+	if v.FeedbackForwardingEmailAddress != nil {
+		s.WriteString(schemas.SendEmailRequest_FeedbackForwardingEmailAddress, *v.FeedbackForwardingEmailAddress)
+	}
+	if v.FromEmailAddress != nil {
+		s.WriteString(schemas.SendEmailRequest_FromEmailAddress, *v.FromEmailAddress)
+	}
+	serializeEmailAddressList(s, schemas.SendEmailRequest_ReplyToAddresses, v.ReplyToAddresses)
+}
+
 // A unique message ID that you receive when Amazon Pinpoint accepts an email for
 // sending.
 type SendEmailOutput struct {
@@ -90,13 +122,32 @@ type SendEmailOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SendEmailOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SendEmailResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SendEmailOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MessageId != nil {
+		s.WriteString(schemas.SendEmailResponse_MessageId, *v.MessageId)
+	}
+}
+func (v *SendEmailOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SendEmailResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SendEmailResponse_MessageId:
+			v.MessageId = new(string)
+			return d.ReadString(schemas.SendEmailResponse_MessageId, v.MessageId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationSendEmailMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpSendEmail{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SendEmail, schemas.SendEmailRequest, schemas.SendEmailResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpSendEmail{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SendEmail, schemas.SendEmailRequest, schemas.SendEmailResponse), output: &SendEmailOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

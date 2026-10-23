@@ -5,7 +5,9 @@ package mq
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/mq/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/mq/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -38,6 +40,21 @@ type ListBrokersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListBrokersInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListBrokersRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListBrokersInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListBrokersRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListBrokersRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListBrokersOutput struct {
 
 	// A list of information about all brokers.
@@ -53,13 +70,35 @@ type ListBrokersOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListBrokersOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListBrokersResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListBrokersOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serialize__listOfBrokerSummary(s, schemas.ListBrokersResponse_BrokerSummaries, v.BrokerSummaries)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListBrokersResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListBrokersOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListBrokersResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListBrokersResponse_BrokerSummaries:
+			return deserialize__listOfBrokerSummary(d, schemas.ListBrokersResponse_BrokerSummaries, &v.BrokerSummaries)
+		case schemas.ListBrokersResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListBrokersResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListBrokersMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListBrokers{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListBrokers, schemas.ListBrokersRequest, schemas.ListBrokersResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListBrokers{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListBrokers, schemas.ListBrokersRequest, schemas.ListBrokersResponse), output: &ListBrokersOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

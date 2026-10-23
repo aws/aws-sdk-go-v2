@@ -127,6 +127,23 @@ func (BulkEmailStatus) Values() []BulkEmailStatus {
 	}
 }
 
+type ConfigurationSetFilterKey string
+
+// Enum values for ConfigurationSetFilterKey
+const (
+	ConfigurationSetFilterKeyConfigurationSetNameContains ConfigurationSetFilterKey = "CONFIGURATION_SET_NAME_CONTAINS"
+)
+
+// Values returns all known values for ConfigurationSetFilterKey. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ConfigurationSetFilterKey) Values() []ConfigurationSetFilterKey {
+	return []ConfigurationSetFilterKey{
+		"CONFIGURATION_SET_NAME_CONTAINS",
+	}
+}
+
 type ContactLanguage string
 
 // Enum values for ContactLanguage
@@ -554,6 +571,27 @@ func (IdentityCertificateStatus) Values() []IdentityCertificateStatus {
 	}
 }
 
+type IdentityFilterKey string
+
+// Enum values for IdentityFilterKey
+const (
+	IdentityFilterKeyIdentityNameContains IdentityFilterKey = "IDENTITY_NAME_CONTAINS"
+	IdentityFilterKeyIdentityType         IdentityFilterKey = "IDENTITY_TYPE"
+	IdentityFilterKeyVerificationStatus   IdentityFilterKey = "VERIFICATION_STATUS"
+)
+
+// Values returns all known values for IdentityFilterKey. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (IdentityFilterKey) Values() []IdentityFilterKey {
+	return []IdentityFilterKey{
+		"IDENTITY_NAME_CONTAINS",
+		"IDENTITY_TYPE",
+		"VERIFICATION_STATUS",
+	}
+}
+
 type IdentityType string
 
 // Enum values for IdentityType
@@ -661,6 +699,25 @@ func (ListTenantResourcesFilterKey) Values() []ListTenantResourcesFilterKey {
 	}
 }
 
+type ListTenantsFilterKey string
+
+// Enum values for ListTenantsFilterKey
+const (
+	ListTenantsFilterKeyTenantNameContains ListTenantsFilterKey = "TENANT_NAME_CONTAINS"
+	ListTenantsFilterKeySendingStatus      ListTenantsFilterKey = "SENDING_STATUS"
+)
+
+// Values returns all known values for ListTenantsFilterKey. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ListTenantsFilterKey) Values() []ListTenantsFilterKey {
+	return []ListTenantsFilterKey{
+		"TENANT_NAME_CONTAINS",
+		"SENDING_STATUS",
+	}
+}
+
 type MailFromDomainStatus string
 
 // Enum values for MailFromDomainStatus
@@ -764,6 +821,7 @@ const (
 	MetricDimensionNameEmailIdentity    MetricDimensionName = "EMAIL_IDENTITY"
 	MetricDimensionNameConfigurationSet MetricDimensionName = "CONFIGURATION_SET"
 	MetricDimensionNameIsp              MetricDimensionName = "ISP"
+	MetricDimensionNameTenantName       MetricDimensionName = "TENANT_NAME"
 )
 
 // Values returns all known values for MetricDimensionName. Note that this can be
@@ -775,6 +833,7 @@ func (MetricDimensionName) Values() []MetricDimensionName {
 		"EMAIL_IDENTITY",
 		"CONFIGURATION_SET",
 		"ISP",
+		"TENANT_NAME",
 	}
 }
 

@@ -4361,6 +4361,14 @@ type OriginAccessControlConfig struct {
 	//   must add the Authorization header to a [cache policy]for all cache behaviors that use
 	//   origins associated with this origin access control.
 	//
+	//   - always-amz-auth – CloudFront signs all origin requests with Amazon
+	//   authentication headers. If the viewer request contains the Authorization
+	//   header, then CloudFront also forwards that header to the origin. This value is
+	//   only valid with Lambda-Web origins. WARNING: To forward the Authorization
+	//   header from the viewer request, you must add the Authorization header to a [cache policy]
+	//   for all cache behaviors that use origins associated with this origin access
+	//   control.
+	//
 	// [origin access control advanced settings]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/private-content-restricting-access-to-s3.html#oac-advanced-settings
 	// [cache policy]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/controlling-the-cache-key.html
 	//
@@ -4450,6 +4458,10 @@ type OriginAccessControlSummary struct {
 	//   header, CloudFront signs the origin request. If the viewer request contains the
 	//   Authorization header, CloudFront doesn't sign the origin request, but instead
 	//   passes along the Authorization header that it received in the viewer request.
+	//
+	//   - always-amz-auth – CloudFront signs all origin requests with Amazon
+	//   authentication headers, and forwards the viewer's Authorization header to the
+	//   origin if one is present. This value is only valid with Lambda-Web origins.
 	//
 	// This member is required.
 	SigningBehavior OriginAccessControlSigningBehaviors
@@ -7014,6 +7026,10 @@ type VpcOriginEndpointConfig struct {
 	// This member is required.
 	OriginProtocolPolicy OriginProtocolPolicy
 
+	// The IP address type of the CloudFront VPC origin endpoint configuration. Valid
+	// values are ipv4 and dualstack . IPv6-only is not supported for VPC origins.
+	IpAddressType VpcIpAddressType
+
 	// A complex type that contains information about the SSL/TLS protocols that
 	// CloudFront can use when establishing an HTTPS connection with your origin.
 	OriginSslProtocols *OriginSslProtocols
@@ -7095,6 +7111,10 @@ type VpcOriginSummary struct {
 
 	// The account ID of the Amazon Web Services account that owns the VPC origin.
 	AccountId *string
+
+	// The IP address type of the CloudFront VPC origin. Valid values are ipv4 and
+	// dualstack . IPv6-only is not supported for VPC origins.
+	IpAddressType VpcIpAddressType
 
 	noSmithyDocumentSerde
 }

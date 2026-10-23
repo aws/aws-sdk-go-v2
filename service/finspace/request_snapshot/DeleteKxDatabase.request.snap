@@ -1,3 +1,0 @@
-DELETE /kx/environments/__EnvironmentId__/databases/__DatabaseName__?clientToken=__ClientToken__
-
-

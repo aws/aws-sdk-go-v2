@@ -5,6 +5,8 @@ package glue
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/glue/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -44,6 +46,24 @@ type PutFormTypeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutFormTypeInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutFormTypeRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutFormTypeInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.PutFormTypeRequest_ClientToken, *v.ClientToken)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.PutFormTypeRequest_Name, *v.Name)
+	}
+	if v.Schema != nil {
+		s.WriteString(schemas.PutFormTypeRequest_Schema, *v.Schema)
+	}
+}
+
 type PutFormTypeOutput struct {
 
 	// The identifier of the form type.
@@ -61,13 +81,44 @@ type PutFormTypeOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutFormTypeOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutFormTypeResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutFormTypeOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Id != nil {
+		s.WriteString(schemas.PutFormTypeResponse_Id, *v.Id)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.PutFormTypeResponse_Name, *v.Name)
+	}
+	if v.Schema != nil {
+		s.WriteString(schemas.PutFormTypeResponse_Schema, *v.Schema)
+	}
+}
+func (v *PutFormTypeOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PutFormTypeResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PutFormTypeResponse_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.PutFormTypeResponse_Id, v.Id)
+		case schemas.PutFormTypeResponse_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.PutFormTypeResponse_Name, v.Name)
+		case schemas.PutFormTypeResponse_Schema:
+			v.Schema = new(string)
+			return d.ReadString(schemas.PutFormTypeResponse_Schema, v.Schema)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPutFormTypeMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpPutFormType{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutFormType, schemas.PutFormTypeRequest, schemas.PutFormTypeResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpPutFormType{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutFormType, schemas.PutFormTypeRequest, schemas.PutFormTypeResponse), output: &PutFormTypeOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

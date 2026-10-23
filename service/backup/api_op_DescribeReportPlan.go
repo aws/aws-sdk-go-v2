@@ -4,7 +4,9 @@ package backup
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/backup/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/backup/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -35,6 +37,18 @@ type DescribeReportPlanInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeReportPlanInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeReportPlanInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeReportPlanInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ReportPlanName != nil {
+		s.WriteString(schemas.DescribeReportPlanInput_ReportPlanName, *v.ReportPlanName)
+	}
+}
+
 type DescribeReportPlanOutput struct {
 
 	// Returns details about the report plan that is specified by its name. These
@@ -49,13 +63,34 @@ type DescribeReportPlanOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeReportPlanOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeReportPlanOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeReportPlanOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ReportPlan != nil {
+		s.WriteStruct(schemas.DescribeReportPlanOutput_ReportPlan)
+		v.ReportPlan.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DescribeReportPlanOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeReportPlanOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeReportPlanOutput_ReportPlan:
+			v.ReportPlan = &types.ReportPlan{}
+			return v.ReportPlan.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeReportPlanMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeReportPlan{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeReportPlan, schemas.DescribeReportPlanInput, schemas.DescribeReportPlanOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeReportPlan{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeReportPlan, schemas.DescribeReportPlanInput, schemas.DescribeReportPlanOutput), output: &DescribeReportPlanOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

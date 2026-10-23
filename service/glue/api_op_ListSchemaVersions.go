@@ -5,7 +5,9 @@ package glue
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/glue/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/glue/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -52,6 +54,26 @@ type ListSchemaVersionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListSchemaVersionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListSchemaVersionsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListSchemaVersionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListSchemaVersionsInput_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListSchemaVersionsInput_NextToken, *v.NextToken)
+	}
+	if v.SchemaId != nil {
+		s.WriteStruct(schemas.ListSchemaVersionsInput_SchemaId)
+		v.SchemaId.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type ListSchemaVersionsOutput struct {
 
 	// A continuation token for paginating the returned list of tokens, returned if
@@ -67,13 +89,35 @@ type ListSchemaVersionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListSchemaVersionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListSchemaVersionsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListSchemaVersionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListSchemaVersionsResponse_NextToken, *v.NextToken)
+	}
+	serializeSchemaVersionList(s, schemas.ListSchemaVersionsResponse_Schemas, v.Schemas)
+}
+func (v *ListSchemaVersionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListSchemaVersionsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListSchemaVersionsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListSchemaVersionsResponse_NextToken, v.NextToken)
+		case schemas.ListSchemaVersionsResponse_Schemas:
+			return deserializeSchemaVersionList(d, schemas.ListSchemaVersionsResponse_Schemas, &v.Schemas)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListSchemaVersionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListSchemaVersions{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListSchemaVersions, schemas.ListSchemaVersionsInput, schemas.ListSchemaVersionsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListSchemaVersions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListSchemaVersions, schemas.ListSchemaVersionsInput, schemas.ListSchemaVersionsResponse), output: &ListSchemaVersionsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

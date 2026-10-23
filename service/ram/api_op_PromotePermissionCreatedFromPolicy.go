@@ -4,7 +4,9 @@ package ram
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/ram/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ram/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -82,6 +84,24 @@ type PromotePermissionCreatedFromPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PromotePermissionCreatedFromPolicyInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PromotePermissionCreatedFromPolicyRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PromotePermissionCreatedFromPolicyInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.PromotePermissionCreatedFromPolicyRequest_clientToken, *v.ClientToken)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.PromotePermissionCreatedFromPolicyRequest_name, *v.Name)
+	}
+	if v.PermissionArn != nil {
+		s.WriteString(schemas.PromotePermissionCreatedFromPolicyRequest_permissionArn, *v.PermissionArn)
+	}
+}
+
 type PromotePermissionCreatedFromPolicyOutput struct {
 
 	// The idempotency identifier associated with this request. If you want to repeat
@@ -99,13 +119,40 @@ type PromotePermissionCreatedFromPolicyOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PromotePermissionCreatedFromPolicyOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PromotePermissionCreatedFromPolicyResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PromotePermissionCreatedFromPolicyOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.PromotePermissionCreatedFromPolicyResponse_clientToken, *v.ClientToken)
+	}
+	if v.Permission != nil {
+		s.WriteStruct(schemas.PromotePermissionCreatedFromPolicyResponse_permission)
+		v.Permission.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *PromotePermissionCreatedFromPolicyOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PromotePermissionCreatedFromPolicyResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PromotePermissionCreatedFromPolicyResponse_clientToken:
+			v.ClientToken = new(string)
+			return d.ReadString(schemas.PromotePermissionCreatedFromPolicyResponse_clientToken, v.ClientToken)
+		case schemas.PromotePermissionCreatedFromPolicyResponse_permission:
+			v.Permission = &types.ResourceSharePermissionSummary{}
+			return v.Permission.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPromotePermissionCreatedFromPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpPromotePermissionCreatedFromPolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PromotePermissionCreatedFromPolicy, schemas.PromotePermissionCreatedFromPolicyRequest, schemas.PromotePermissionCreatedFromPolicyResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpPromotePermissionCreatedFromPolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PromotePermissionCreatedFromPolicy, schemas.PromotePermissionCreatedFromPolicyRequest, schemas.PromotePermissionCreatedFromPolicyResponse), output: &PromotePermissionCreatedFromPolicyOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

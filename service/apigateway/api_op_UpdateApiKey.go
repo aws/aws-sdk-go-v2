@@ -4,7 +4,9 @@ package apigateway
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/apigateway/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/apigateway/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -39,6 +41,19 @@ type UpdateApiKeyInput struct {
 	PatchOperations []types.PatchOperation
 
 	noSmithyDocumentSerde
+}
+
+func (v *UpdateApiKeyInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateApiKeyRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateApiKeyInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApiKey != nil {
+		s.WriteString(schemas.UpdateApiKeyRequest_apiKey, *v.ApiKey)
+	}
+	serializeListOfPatchOperation(s, schemas.UpdateApiKeyRequest_patchOperations, v.PatchOperations)
 }
 
 // A resource that can be distributed to callers for executing Method resources
@@ -84,13 +99,79 @@ type UpdateApiKeyOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateApiKeyOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ApiKey)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateApiKeyOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreatedDate != nil {
+		s.WriteTime(schemas.ApiKey_createdDate, *v.CreatedDate)
+	}
+	if v.CustomerId != nil {
+		s.WriteString(schemas.ApiKey_customerId, *v.CustomerId)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.ApiKey_description, *v.Description)
+	}
+	if v.Enabled != false {
+		s.WriteBool(schemas.ApiKey_enabled, v.Enabled)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.ApiKey_id, *v.Id)
+	}
+	if v.LastUpdatedDate != nil {
+		s.WriteTime(schemas.ApiKey_lastUpdatedDate, *v.LastUpdatedDate)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.ApiKey_name, *v.Name)
+	}
+	serializeListOfString(s, schemas.ApiKey_stageKeys, v.StageKeys)
+	serializeMapOfStringToString(s, schemas.ApiKey_tags, v.Tags)
+	if v.Value != nil {
+		s.WriteString(schemas.ApiKey_value, *v.Value)
+	}
+}
+func (v *UpdateApiKeyOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ApiKey, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ApiKey_createdDate:
+			v.CreatedDate = new(time.Time)
+			return d.ReadTime(schemas.ApiKey_createdDate, v.CreatedDate)
+		case schemas.ApiKey_customerId:
+			v.CustomerId = new(string)
+			return d.ReadString(schemas.ApiKey_customerId, v.CustomerId)
+		case schemas.ApiKey_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.ApiKey_description, v.Description)
+		case schemas.ApiKey_enabled:
+			return d.ReadBool(schemas.ApiKey_enabled, &v.Enabled)
+		case schemas.ApiKey_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.ApiKey_id, v.Id)
+		case schemas.ApiKey_lastUpdatedDate:
+			v.LastUpdatedDate = new(time.Time)
+			return d.ReadTime(schemas.ApiKey_lastUpdatedDate, v.LastUpdatedDate)
+		case schemas.ApiKey_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.ApiKey_name, v.Name)
+		case schemas.ApiKey_stageKeys:
+			return deserializeListOfString(d, schemas.ApiKey_stageKeys, &v.StageKeys)
+		case schemas.ApiKey_tags:
+			return deserializeMapOfStringToString(d, schemas.ApiKey_tags, &v.Tags)
+		case schemas.ApiKey_value:
+			v.Value = new(string)
+			return d.ReadString(schemas.ApiKey_value, v.Value)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateApiKeyMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateApiKey{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateApiKey, schemas.UpdateApiKeyRequest, schemas.ApiKey)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateApiKey{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateApiKey, schemas.UpdateApiKeyRequest, schemas.ApiKey), output: &UpdateApiKeyOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

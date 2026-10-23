@@ -5,7 +5,9 @@ package devicefarm
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/devicefarm/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/devicefarm/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,18 @@ type ListOfferingsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListOfferingsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListOfferingsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListOfferingsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListOfferingsRequest_nextToken, *v.NextToken)
+	}
+}
+
 // Represents the return values of the list of offerings.
 type ListOfferingsOutput struct {
 
@@ -55,13 +69,35 @@ type ListOfferingsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListOfferingsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListOfferingsResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListOfferingsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListOfferingsResult_nextToken, *v.NextToken)
+	}
+	serializeOfferings(s, schemas.ListOfferingsResult_offerings, v.Offerings)
+}
+func (v *ListOfferingsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListOfferingsResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListOfferingsResult_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListOfferingsResult_nextToken, v.NextToken)
+		case schemas.ListOfferingsResult_offerings:
+			return deserializeOfferings(d, schemas.ListOfferingsResult_offerings, &v.Offerings)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListOfferingsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListOfferings{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListOfferings, schemas.ListOfferingsRequest, schemas.ListOfferingsResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListOfferings{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListOfferings, schemas.ListOfferingsRequest, schemas.ListOfferingsResult), output: &ListOfferingsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

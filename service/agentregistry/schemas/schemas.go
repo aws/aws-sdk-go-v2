@@ -49,7 +49,8 @@ var A2aAgentCardDescriptor_source *smithy.Schema
 var AccessDeniedException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.agentregistry",
 	Name:      "AccessDeniedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 403})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 403})
 var AccessDeniedException_message *smithy.Schema
 
 var AgentSkillsAdditionalData = smithy.NewSchema(smithy.ShapeID{
@@ -117,6 +118,11 @@ var CustomDescriptor = smithy.NewSchema(smithy.ShapeID{
 	Name:      "CustomDescriptor",
 }, smithy.ShapeTypeStructure, 1)
 var CustomDescriptor_data *smithy.Schema
+
+var _CustomMetadataDocument = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.agentregistry",
+	Name:      "CustomMetadataDocument",
+}, smithy.ShapeTypeDocument, 0, &smithytraits.Sensitive{})
 
 var _DataSchemaVersion = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.agentregistry",
@@ -231,7 +237,8 @@ var HttpDescriptor_source *smithy.Schema
 var InternalServerException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.agentregistry",
 	Name:      "InternalServerException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 500})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
+	&smithytraits.HTTPError{Code: 500})
 var InternalServerException_message *smithy.Schema
 
 var McpServerAdditionalData = smithy.NewSchema(smithy.ShapeID{
@@ -392,7 +399,7 @@ var RegistryRecordStatus_UPDATE_FAILED *smithy.Schema
 var RegistryRecordSummary = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.agentregistry",
 	Name:      "RegistryRecordSummary",
-}, smithy.ShapeTypeStructure, 12)
+}, smithy.ShapeTypeStructure, 13)
 var RegistryRecordSummary_registryArn *smithy.Schema
 
 var RegistryRecordSummary_recordArn *smithy.Schema
@@ -417,6 +424,8 @@ var RegistryRecordSummary_createdAt *smithy.Schema
 
 var RegistryRecordSummary_updatedAt *smithy.Schema
 
+var RegistryRecordSummary_customMetadata *smithy.Schema
+
 var _RegistryRecordSummaryList = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.agentregistry",
 	Name:      "RegistryRecordSummaryList",
@@ -431,7 +440,8 @@ var _RegistryRecordVersion = smithy.NewSchema(smithy.ShapeID{
 var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.agentregistry",
 	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 404})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 404})
 var ResourceNotFoundException_message *smithy.Schema
 
 var _SearchQuery = smithy.NewSchema(smithy.ShapeID{
@@ -442,19 +452,22 @@ var _SearchQuery = smithy.NewSchema(smithy.ShapeID{
 var ThrottlingException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.agentregistry",
 	Name:      "ThrottlingException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 429})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 429})
 var ThrottlingException_message *smithy.Schema
 
 var UnauthorizedException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.agentregistry",
 	Name:      "UnauthorizedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 401})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 401})
 var UnauthorizedException_message *smithy.Schema
 
 var ValidationException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.agentregistry",
 	Name:      "ValidationException",
-}, smithy.ShapeTypeStructure, 3, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var ValidationException_message *smithy.Schema
 
 var ValidationException_reason *smithy.Schema
@@ -721,6 +734,8 @@ func init() {
 	RegistryRecordSummary_createdAt = RegistryRecordSummary.AddMember("createdAt", _DateTimestamp)
 
 	RegistryRecordSummary_updatedAt = RegistryRecordSummary.AddMember("updatedAt", _DateTimestamp)
+
+	RegistryRecordSummary_customMetadata = RegistryRecordSummary.AddMember("customMetadata", _CustomMetadataDocument)
 
 	_RegistryRecordSummaryList_member = _RegistryRecordSummaryList.AddMember("member", RegistryRecordSummary)
 

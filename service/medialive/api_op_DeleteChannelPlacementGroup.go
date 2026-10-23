@@ -4,7 +4,9 @@ package medialive
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/medialive/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/medialive/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -40,6 +42,21 @@ type DeleteChannelPlacementGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteChannelPlacementGroupInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteChannelPlacementGroupRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteChannelPlacementGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ChannelPlacementGroupId != nil {
+		s.WriteString(schemas.DeleteChannelPlacementGroupRequest_ChannelPlacementGroupId, *v.ChannelPlacementGroupId)
+	}
+	if v.ClusterId != nil {
+		s.WriteString(schemas.DeleteChannelPlacementGroupRequest_ClusterId, *v.ClusterId)
+	}
+}
+
 // Placeholder documentation for DeleteChannelPlacementGroupResponse
 type DeleteChannelPlacementGroupOutput struct {
 
@@ -73,13 +90,66 @@ type DeleteChannelPlacementGroupOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteChannelPlacementGroupOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteChannelPlacementGroupResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteChannelPlacementGroupOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.DeleteChannelPlacementGroupResponse_Arn, *v.Arn)
+	}
+	serialize__listOf__string(s, schemas.DeleteChannelPlacementGroupResponse_Channels, v.Channels)
+	if v.ClusterId != nil {
+		s.WriteString(schemas.DeleteChannelPlacementGroupResponse_ClusterId, *v.ClusterId)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.DeleteChannelPlacementGroupResponse_Id, *v.Id)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.DeleteChannelPlacementGroupResponse_Name, *v.Name)
+	}
+	serialize__listOf__string(s, schemas.DeleteChannelPlacementGroupResponse_Nodes, v.Nodes)
+	if v.State != "" {
+		s.WriteString(schemas.DeleteChannelPlacementGroupResponse_State, string(v.State))
+	}
+}
+func (v *DeleteChannelPlacementGroupOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteChannelPlacementGroupResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteChannelPlacementGroupResponse_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.DeleteChannelPlacementGroupResponse_Arn, v.Arn)
+		case schemas.DeleteChannelPlacementGroupResponse_Channels:
+			return deserialize__listOf__string(d, schemas.DeleteChannelPlacementGroupResponse_Channels, &v.Channels)
+		case schemas.DeleteChannelPlacementGroupResponse_ClusterId:
+			v.ClusterId = new(string)
+			return d.ReadString(schemas.DeleteChannelPlacementGroupResponse_ClusterId, v.ClusterId)
+		case schemas.DeleteChannelPlacementGroupResponse_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.DeleteChannelPlacementGroupResponse_Id, v.Id)
+		case schemas.DeleteChannelPlacementGroupResponse_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.DeleteChannelPlacementGroupResponse_Name, v.Name)
+		case schemas.DeleteChannelPlacementGroupResponse_Nodes:
+			return deserialize__listOf__string(d, schemas.DeleteChannelPlacementGroupResponse_Nodes, &v.Nodes)
+		case schemas.DeleteChannelPlacementGroupResponse_State:
+			var ev string
+			if err := d.ReadString(schemas.DeleteChannelPlacementGroupResponse_State, &ev); err != nil {
+				return err
+			}
+			v.State = types.ChannelPlacementGroupState(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteChannelPlacementGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteChannelPlacementGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteChannelPlacementGroup, schemas.DeleteChannelPlacementGroupRequest, schemas.DeleteChannelPlacementGroupResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteChannelPlacementGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteChannelPlacementGroup, schemas.DeleteChannelPlacementGroupRequest, schemas.DeleteChannelPlacementGroupResponse), output: &DeleteChannelPlacementGroupOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package directconnect
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/directconnect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/directconnect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -52,6 +54,29 @@ type ListVirtualInterfaceRoutesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListVirtualInterfaceRoutesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListVirtualInterfaceRoutesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListVirtualInterfaceRoutesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Filters != nil {
+		s.WriteStruct(schemas.ListVirtualInterfaceRoutesRequest_filters)
+		v.Filters.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListVirtualInterfaceRoutesRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListVirtualInterfaceRoutesRequest_nextToken, *v.NextToken)
+	}
+	if v.VirtualInterfaceId != nil {
+		s.WriteString(schemas.ListVirtualInterfaceRoutesRequest_virtualInterfaceId, *v.VirtualInterfaceId)
+	}
+}
+
 type ListVirtualInterfaceRoutesOutput struct {
 
 	// The token to use to retrieve the next page of results. This value is null when
@@ -70,13 +95,41 @@ type ListVirtualInterfaceRoutesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListVirtualInterfaceRoutesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListVirtualInterfaceRoutesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListVirtualInterfaceRoutesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListVirtualInterfaceRoutesResponse_nextToken, *v.NextToken)
+	}
+	serializeRouteList(s, schemas.ListVirtualInterfaceRoutesResponse_routes, v.Routes)
+	if v.VirtualInterfaceId != nil {
+		s.WriteString(schemas.ListVirtualInterfaceRoutesResponse_virtualInterfaceId, *v.VirtualInterfaceId)
+	}
+}
+func (v *ListVirtualInterfaceRoutesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListVirtualInterfaceRoutesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListVirtualInterfaceRoutesResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListVirtualInterfaceRoutesResponse_nextToken, v.NextToken)
+		case schemas.ListVirtualInterfaceRoutesResponse_routes:
+			return deserializeRouteList(d, schemas.ListVirtualInterfaceRoutesResponse_routes, &v.Routes)
+		case schemas.ListVirtualInterfaceRoutesResponse_virtualInterfaceId:
+			v.VirtualInterfaceId = new(string)
+			return d.ReadString(schemas.ListVirtualInterfaceRoutesResponse_virtualInterfaceId, v.VirtualInterfaceId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListVirtualInterfaceRoutesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListVirtualInterfaceRoutes{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListVirtualInterfaceRoutes, schemas.ListVirtualInterfaceRoutesRequest, schemas.ListVirtualInterfaceRoutesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListVirtualInterfaceRoutes{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListVirtualInterfaceRoutes, schemas.ListVirtualInterfaceRoutesRequest, schemas.ListVirtualInterfaceRoutesResponse), output: &ListVirtualInterfaceRoutesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,6 +4,8 @@ package glue
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/glue/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -35,7 +37,29 @@ type StopColumnStatisticsTaskRunScheduleInput struct {
 	// This member is required.
 	TableName *string
 
+	// The ID of the Data Catalog where the table resides. If none is supplied, the
+	// Amazon Web Services account ID is used by default.
+	CatalogID *string
+
 	noSmithyDocumentSerde
+}
+
+func (v *StopColumnStatisticsTaskRunScheduleInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StopColumnStatisticsTaskRunScheduleRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StopColumnStatisticsTaskRunScheduleInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CatalogID != nil {
+		s.WriteString(schemas.StopColumnStatisticsTaskRunScheduleRequest_CatalogID, *v.CatalogID)
+	}
+	if v.DatabaseName != nil {
+		s.WriteString(schemas.StopColumnStatisticsTaskRunScheduleRequest_DatabaseName, *v.DatabaseName)
+	}
+	if v.TableName != nil {
+		s.WriteString(schemas.StopColumnStatisticsTaskRunScheduleRequest_TableName, *v.TableName)
+	}
 }
 
 type StopColumnStatisticsTaskRunScheduleOutput struct {
@@ -45,13 +69,26 @@ type StopColumnStatisticsTaskRunScheduleOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StopColumnStatisticsTaskRunScheduleOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StopColumnStatisticsTaskRunScheduleResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StopColumnStatisticsTaskRunScheduleOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *StopColumnStatisticsTaskRunScheduleOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StopColumnStatisticsTaskRunScheduleResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStopColumnStatisticsTaskRunScheduleMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStopColumnStatisticsTaskRunSchedule{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StopColumnStatisticsTaskRunSchedule, schemas.StopColumnStatisticsTaskRunScheduleRequest, schemas.StopColumnStatisticsTaskRunScheduleResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpStopColumnStatisticsTaskRunSchedule{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StopColumnStatisticsTaskRunSchedule, schemas.StopColumnStatisticsTaskRunScheduleRequest, schemas.StopColumnStatisticsTaskRunScheduleResponse), output: &StopColumnStatisticsTaskRunScheduleOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

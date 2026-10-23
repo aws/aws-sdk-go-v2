@@ -5,6 +5,8 @@ package iotsitewise
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/iotsitewise/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -74,6 +76,31 @@ type CreateDashboardInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateDashboardInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateDashboardRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateDashboardInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateDashboardRequest_clientToken, *v.ClientToken)
+	}
+	if v.DashboardDefinition != nil {
+		s.WriteString(schemas.CreateDashboardRequest_dashboardDefinition, *v.DashboardDefinition)
+	}
+	if v.DashboardDescription != nil {
+		s.WriteString(schemas.CreateDashboardRequest_dashboardDescription, *v.DashboardDescription)
+	}
+	if v.DashboardName != nil {
+		s.WriteString(schemas.CreateDashboardRequest_dashboardName, *v.DashboardName)
+	}
+	if v.ProjectId != nil {
+		s.WriteString(schemas.CreateDashboardRequest_projectId, *v.ProjectId)
+	}
+	serializeTagMap(s, schemas.CreateDashboardRequest_tags, v.Tags)
+}
+
 type CreateDashboardOutput struct {
 
 	// The [ARN] of the dashboard, which has the following format.
@@ -96,13 +123,38 @@ type CreateDashboardOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateDashboardOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateDashboardResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateDashboardOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DashboardArn != nil {
+		s.WriteString(schemas.CreateDashboardResponse_dashboardArn, *v.DashboardArn)
+	}
+	if v.DashboardId != nil {
+		s.WriteString(schemas.CreateDashboardResponse_dashboardId, *v.DashboardId)
+	}
+}
+func (v *CreateDashboardOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateDashboardResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateDashboardResponse_dashboardArn:
+			v.DashboardArn = new(string)
+			return d.ReadString(schemas.CreateDashboardResponse_dashboardArn, v.DashboardArn)
+		case schemas.CreateDashboardResponse_dashboardId:
+			v.DashboardId = new(string)
+			return d.ReadString(schemas.CreateDashboardResponse_dashboardId, v.DashboardId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateDashboardMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateDashboard{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateDashboard, schemas.CreateDashboardRequest, schemas.CreateDashboardResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateDashboard{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateDashboard, schemas.CreateDashboardRequest, schemas.CreateDashboardResponse), output: &CreateDashboardOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

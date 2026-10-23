@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"clientRequestToken":"__ClientRequestToken__","endTime":"2000-01-01T00:00:00Z","failureMessage":"__FailureMessage__","invocationArn":"__InvocationArn__","lastModifiedTime":"2000-01-01T00:00:00Z","modelArn":"__ModelArn__","outputDataConfig":{"s3OutputDataConfig":{"bucketOwner":"__BucketOwner__","kmsKeyId":"__KmsKeyId__","s3Uri":"__S3Uri__"}},"status":"InProgress","submitTime":"2000-01-01T00:00:00Z"}

@@ -4,7 +4,9 @@ package quicksight
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/quicksight/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/quicksight/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -41,6 +43,21 @@ type DescribeTopicPermissionsV2Input struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeTopicPermissionsV2Input) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeTopicPermissionsV2Request)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeTopicPermissionsV2Input) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AwsAccountId != nil {
+		s.WriteString(schemas.DescribeTopicPermissionsV2Request_AwsAccountId, *v.AwsAccountId)
+	}
+	if v.TopicId != nil {
+		s.WriteString(schemas.DescribeTopicPermissionsV2Request_TopicId, *v.TopicId)
+	}
+}
+
 type DescribeTopicPermissionsV2Output struct {
 
 	// A list of resource permissions that are configured to the topic.
@@ -65,13 +82,52 @@ type DescribeTopicPermissionsV2Output struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeTopicPermissionsV2Output) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeTopicPermissionsV2Response)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeTopicPermissionsV2Output) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeResourcePermissionList(s, schemas.DescribeTopicPermissionsV2Response_Permissions, v.Permissions)
+	if v.RequestId != nil {
+		s.WriteString(schemas.DescribeTopicPermissionsV2Response_RequestId, *v.RequestId)
+	}
+	if v.Status != 0 {
+		s.WriteInt32(schemas.DescribeTopicPermissionsV2Response_Status, v.Status)
+	}
+	if v.TopicArn != nil {
+		s.WriteString(schemas.DescribeTopicPermissionsV2Response_TopicArn, *v.TopicArn)
+	}
+	if v.TopicId != nil {
+		s.WriteString(schemas.DescribeTopicPermissionsV2Response_TopicId, *v.TopicId)
+	}
+}
+func (v *DescribeTopicPermissionsV2Output) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeTopicPermissionsV2Response, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeTopicPermissionsV2Response_Permissions:
+			return deserializeResourcePermissionList(d, schemas.DescribeTopicPermissionsV2Response_Permissions, &v.Permissions)
+		case schemas.DescribeTopicPermissionsV2Response_RequestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.DescribeTopicPermissionsV2Response_RequestId, v.RequestId)
+		case schemas.DescribeTopicPermissionsV2Response_Status:
+			return d.ReadInt32(schemas.DescribeTopicPermissionsV2Response_Status, &v.Status)
+		case schemas.DescribeTopicPermissionsV2Response_TopicArn:
+			v.TopicArn = new(string)
+			return d.ReadString(schemas.DescribeTopicPermissionsV2Response_TopicArn, v.TopicArn)
+		case schemas.DescribeTopicPermissionsV2Response_TopicId:
+			v.TopicId = new(string)
+			return d.ReadString(schemas.DescribeTopicPermissionsV2Response_TopicId, v.TopicId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeTopicPermissionsV2Middlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeTopicPermissionsV2{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeTopicPermissionsV2, schemas.DescribeTopicPermissionsV2Request, schemas.DescribeTopicPermissionsV2Response)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeTopicPermissionsV2{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeTopicPermissionsV2, schemas.DescribeTopicPermissionsV2Request, schemas.DescribeTopicPermissionsV2Response), output: &DescribeTopicPermissionsV2Output{}}, middleware.After); err != nil {
 		return err
 	}
 

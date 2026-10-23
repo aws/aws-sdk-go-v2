@@ -4,6 +4,8 @@ package inspector2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/inspector2/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -33,6 +35,28 @@ type DisassociateMemberInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DisassociateMemberInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DisassociateMemberRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DisassociateMemberInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountId != nil {
+		s.WriteString(schemas.DisassociateMemberRequest_accountId, *v.AccountId)
+	}
+}
+func (v *DisassociateMemberInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DisassociateMemberRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DisassociateMemberRequest_accountId:
+			v.AccountId = new(string)
+			return d.ReadString(schemas.DisassociateMemberRequest_accountId, v.AccountId)
+		}
+		return nil
+	})
+}
+
 type DisassociateMemberOutput struct {
 
 	// The Amazon Web Services account ID of the successfully disassociated member.
@@ -46,13 +70,32 @@ type DisassociateMemberOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DisassociateMemberOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DisassociateMemberResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DisassociateMemberOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountId != nil {
+		s.WriteString(schemas.DisassociateMemberResponse_accountId, *v.AccountId)
+	}
+}
+func (v *DisassociateMemberOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DisassociateMemberResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DisassociateMemberResponse_accountId:
+			v.AccountId = new(string)
+			return d.ReadString(schemas.DisassociateMemberResponse_accountId, v.AccountId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDisassociateMemberMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDisassociateMember{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisassociateMember, schemas.DisassociateMemberRequest, schemas.DisassociateMemberResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDisassociateMember{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisassociateMember, schemas.DisassociateMemberRequest, schemas.DisassociateMemberResponse), output: &DisassociateMemberOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

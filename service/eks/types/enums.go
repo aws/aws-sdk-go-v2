@@ -1199,6 +1199,8 @@ const (
 	UpdateParamTypeVendedLogs                       UpdateParamType = "VendedLogs"
 	UpdateParamTypeUpdatedTier                      UpdateParamType = "UpdatedTier"
 	UpdateParamTypePreviousTier                     UpdateParamType = "PreviousTier"
+	UpdateParamTypeEnableCrossNamespace             UpdateParamType = "EnableCrossNamespace"
+	UpdateParamTypeDisabledServices                 UpdateParamType = "DisabledServices"
 	UpdateParamTypeWarmPoolEnabled                  UpdateParamType = "WarmPoolEnabled"
 	UpdateParamTypeWarmPoolMaxGroupPreparedCapacity UpdateParamType = "WarmPoolMaxGroupPreparedCapacity"
 	UpdateParamTypeWarmPoolMinSize                  UpdateParamType = "WarmPoolMinSize"
@@ -1265,6 +1267,8 @@ func (UpdateParamType) Values() []UpdateParamType {
 		"VendedLogs",
 		"UpdatedTier",
 		"PreviousTier",
+		"EnableCrossNamespace",
+		"DisabledServices",
 		"WarmPoolEnabled",
 		"WarmPoolMaxGroupPreparedCapacity",
 		"WarmPoolMinSize",

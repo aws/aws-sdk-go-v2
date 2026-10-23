@@ -113,8 +113,8 @@ type CreateFileSystemOutput struct {
 	// The lifecycle state of the file system. Valid values are: AVAILABLE (the file
 	// system is available for use), CREATING (the file system is being created),
 	// DELETING (the file system is being deleted), DELETED (the file system has been
-	// deleted), ERROR (the file system is in an error state), or UPDATING (the file
-	// system is being updated).
+	// deleted), ERROR (the file system is in an error state), MISCONFIGURED (the file
+	// system has a misconfiguration), or UPDATING (the file system is being updated).
 	Status types.LifeCycleState
 
 	// Additional information about the file system status. This field provides more

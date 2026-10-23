@@ -5,6 +5,7 @@ package networkmanager
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/networkmanager/types"
 	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
@@ -1589,6 +1590,26 @@ func (m *validateOpUntagResource) HandleInitialize(ctx context.Context, in middl
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateAttachmentNatConfiguration struct {
+}
+
+func (*validateOpUpdateAttachmentNatConfiguration) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateAttachmentNatConfiguration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateAttachmentNatConfigurationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateAttachmentNatConfigurationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateConnection struct {
 }
 
@@ -2085,6 +2106,10 @@ func addOpUntagResourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUntagResource{}, middleware.After)
 }
 
+func addOpUpdateAttachmentNatConfigurationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateAttachmentNatConfiguration{}, middleware.After)
+}
+
 func addOpUpdateConnectionValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateConnection{}, middleware.After)
 }
@@ -2119,6 +2144,44 @@ func addOpUpdateSiteValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpUpdateVpcAttachmentValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateVpcAttachment{}, middleware.After)
+}
+
+func validateNatRuleRequest(v *types.NatRuleRequest) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "NatRuleRequest"}
+	if v.RuleNumber == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RuleNumber"))
+	}
+	if v.MatchSourceCidr == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MatchSourceCidr"))
+	}
+	if v.NatCidr == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("NatCidr"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateNatRuleRequestList(v []types.NatRuleRequest) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "NatRuleRequestList"}
+	for i := range v {
+		if err := validateNatRuleRequest(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
 }
 
 func validateOpAcceptAttachmentInput(v *AcceptAttachmentInput) error {
@@ -2234,6 +2297,11 @@ func validateOpCreateConnectAttachmentInput(v *CreateConnectAttachmentInput) err
 	if v.TransportAttachmentId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TransportAttachmentId"))
 	}
+	if v.NatGatewayRules != nil {
+		if err := validateNatRuleRequestList(v.NatGatewayRules); err != nil {
+			invalidParams.AddNested("NatGatewayRules", err.(smithy.InvalidParamsError))
+		}
+	}
 	if v.Options == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Options"))
 	}
@@ -2348,6 +2416,11 @@ func validateOpCreateDirectConnectGatewayAttachmentInput(v *CreateDirectConnectG
 	if v.EdgeLocations == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("EdgeLocations"))
 	}
+	if v.NatGatewayRules != nil {
+		if err := validateNatRuleRequestList(v.NatGatewayRules); err != nil {
+			invalidParams.AddNested("NatGatewayRules", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -2401,6 +2474,11 @@ func validateOpCreateSiteToSiteVpnAttachmentInput(v *CreateSiteToSiteVpnAttachme
 	}
 	if v.VpnConnectionArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("VpnConnectionArn"))
+	}
+	if v.NatGatewayRules != nil {
+		if err := validateNatRuleRequestList(v.NatGatewayRules); err != nil {
+			invalidParams.AddNested("NatGatewayRules", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2458,6 +2536,11 @@ func validateOpCreateVpcAttachmentInput(v *CreateVpcAttachmentInput) error {
 	}
 	if v.SubnetArns == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SubnetArns"))
+	}
+	if v.NatGatewayRules != nil {
+		if err := validateNatRuleRequestList(v.NatGatewayRules); err != nil {
+			invalidParams.AddNested("NatGatewayRules", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3463,6 +3546,26 @@ func validateOpUntagResourceInput(v *UntagResourceInput) error {
 	}
 	if v.TagKeys == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TagKeys"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateAttachmentNatConfigurationInput(v *UpdateAttachmentNatConfigurationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateAttachmentNatConfigurationInput"}
+	if v.AttachmentId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AttachmentId"))
+	}
+	if v.NatGatewayRules != nil {
+		if err := validateNatRuleRequestList(v.NatGatewayRules); err != nil {
+			invalidParams.AddNested("NatGatewayRules", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

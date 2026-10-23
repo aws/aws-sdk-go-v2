@@ -322,6 +322,7 @@ const (
 	EffectivePolicyTypeBedrockPolicy                 EffectivePolicyType = "BEDROCK_POLICY"
 	EffectivePolicyTypeS3Policy                      EffectivePolicyType = "S3_POLICY"
 	EffectivePolicyTypeNetworkSecurityDirectorPolicy EffectivePolicyType = "NETWORK_SECURITY_DIRECTOR_POLICY"
+	EffectivePolicyTypeGuarddutyPolicy               EffectivePolicyType = "GUARDDUTY_POLICY"
 )
 
 // Values returns all known values for EffectivePolicyType. Note that this can be
@@ -341,6 +342,7 @@ func (EffectivePolicyType) Values() []EffectivePolicyType {
 		"BEDROCK_POLICY",
 		"S3_POLICY",
 		"NETWORK_SECURITY_DIRECTOR_POLICY",
+		"GUARDDUTY_POLICY",
 	}
 }
 
@@ -654,6 +656,7 @@ const (
 	PolicyTypeBedrockPolicy                 PolicyType = "BEDROCK_POLICY"
 	PolicyTypeS3Policy                      PolicyType = "S3_POLICY"
 	PolicyTypeNetworkSecurityDirectorPolicy PolicyType = "NETWORK_SECURITY_DIRECTOR_POLICY"
+	PolicyTypeGuarddutyPolicy               PolicyType = "GUARDDUTY_POLICY"
 )
 
 // Values returns all known values for PolicyType. Note that this can be expanded
@@ -675,6 +678,7 @@ func (PolicyType) Values() []PolicyType {
 		"BEDROCK_POLICY",
 		"S3_POLICY",
 		"NETWORK_SECURITY_DIRECTOR_POLICY",
+		"GUARDDUTY_POLICY",
 	}
 }
 

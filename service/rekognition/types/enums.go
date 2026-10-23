@@ -342,6 +342,35 @@ func (FaceSearchSortBy) Values() []FaceSearchSortBy {
 	}
 }
 
+type FeedbackCode string
+
+// Enum values for FeedbackCode
+const (
+	FeedbackCodeFaceNotVisible          FeedbackCode = "FACE_NOT_VISIBLE"
+	FeedbackCodeFaceObstructionDetected FeedbackCode = "FACE_OBSTRUCTION_DETECTED"
+	FeedbackCodeLowVideoQualityDetected FeedbackCode = "LOW_VIDEO_QUALITY_DETECTED"
+	FeedbackCodeFaceNotAligned          FeedbackCode = "FACE_NOT_ALIGNED"
+	FeedbackCodeEyesClosedDetected      FeedbackCode = "EYES_CLOSED_DETECTED"
+	FeedbackCodeLowLightingDetected     FeedbackCode = "LOW_LIGHTING_DETECTED"
+	FeedbackCodeHighLightingDetected    FeedbackCode = "HIGH_LIGHTING_DETECTED"
+)
+
+// Values returns all known values for FeedbackCode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (FeedbackCode) Values() []FeedbackCode {
+	return []FeedbackCode{
+		"FACE_NOT_VISIBLE",
+		"FACE_OBSTRUCTION_DETECTED",
+		"LOW_VIDEO_QUALITY_DETECTED",
+		"FACE_NOT_ALIGNED",
+		"EYES_CLOSED_DETECTED",
+		"LOW_LIGHTING_DETECTED",
+		"HIGH_LIGHTING_DETECTED",
+	}
+}
+
 type GenderType string
 
 // Enum values for GenderType

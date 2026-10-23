@@ -5,8 +5,10 @@ package dynamodb
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/dynamodb/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/dynamodb/types"
 	internalEndpointDiscovery "github.com/aws/aws-sdk-go-v2/service/internal/endpoint-discovery"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -48,6 +50,17 @@ type DescribeGlobalTableSettingsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeGlobalTableSettingsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeGlobalTableSettingsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeGlobalTableSettingsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GlobalTableName != nil {
+		s.WriteString(schemas.DescribeGlobalTableSettingsInput_GlobalTableName, *v.GlobalTableName)
+	}
+}
 func (in *DescribeGlobalTableSettingsInput) bindEndpointParams(p *EndpointParameters) {
 
 	p.ResourceArn = in.GlobalTableName
@@ -68,13 +81,35 @@ type DescribeGlobalTableSettingsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeGlobalTableSettingsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeGlobalTableSettingsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeGlobalTableSettingsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GlobalTableName != nil {
+		s.WriteString(schemas.DescribeGlobalTableSettingsOutput_GlobalTableName, *v.GlobalTableName)
+	}
+	serializeReplicaSettingsDescriptionList(s, schemas.DescribeGlobalTableSettingsOutput_ReplicaSettings, v.ReplicaSettings)
+}
+func (v *DescribeGlobalTableSettingsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeGlobalTableSettingsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeGlobalTableSettingsOutput_GlobalTableName:
+			v.GlobalTableName = new(string)
+			return d.ReadString(schemas.DescribeGlobalTableSettingsOutput_GlobalTableName, v.GlobalTableName)
+		case schemas.DescribeGlobalTableSettingsOutput_ReplicaSettings:
+			return deserializeReplicaSettingsDescriptionList(d, schemas.DescribeGlobalTableSettingsOutput_ReplicaSettings, &v.ReplicaSettings)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeGlobalTableSettingsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpDescribeGlobalTableSettings{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeGlobalTableSettings, schemas.DescribeGlobalTableSettingsInput, schemas.DescribeGlobalTableSettingsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpDescribeGlobalTableSettings{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeGlobalTableSettings, schemas.DescribeGlobalTableSettingsInput, schemas.DescribeGlobalTableSettingsOutput), output: &DescribeGlobalTableSettingsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

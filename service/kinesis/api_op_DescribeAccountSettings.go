@@ -4,7 +4,9 @@ package kinesis
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/kinesis/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/kinesis/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"github.com/aws/smithy-go/ptr"
 )
@@ -34,6 +36,14 @@ type DescribeAccountSettingsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeAccountSettingsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeAccountSettingsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeAccountSettingsInput) SerializeMembers(s smithy.ShapeSerializer) {
+}
 func (in *DescribeAccountSettingsInput) bindEndpointParams(p *EndpointParameters) {
 
 	p.OperationType = ptr.String("control")
@@ -51,13 +61,34 @@ type DescribeAccountSettingsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeAccountSettingsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeAccountSettingsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeAccountSettingsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MinimumThroughputBillingCommitment != nil {
+		s.WriteStruct(schemas.DescribeAccountSettingsOutput_MinimumThroughputBillingCommitment)
+		v.MinimumThroughputBillingCommitment.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DescribeAccountSettingsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeAccountSettingsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeAccountSettingsOutput_MinimumThroughputBillingCommitment:
+			v.MinimumThroughputBillingCommitment = &types.MinimumThroughputBillingCommitmentOutput{}
+			return v.MinimumThroughputBillingCommitment.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeAccountSettingsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeAccountSettings{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeAccountSettings, schemas.DescribeAccountSettingsInput, schemas.DescribeAccountSettingsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeAccountSettings{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeAccountSettings, schemas.DescribeAccountSettingsInput, schemas.DescribeAccountSettingsOutput), output: &DescribeAccountSettingsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

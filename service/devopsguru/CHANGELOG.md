@@ -1,3 +1,31 @@
+# v1.50.0 (2026-10-22)
+
+* **Feature**: Enable schema-based (de)serialization for this service.
+* **Bug Fix**: Update smithy-go to v1.28.6
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.49.0 (2026-10-20)
+
+* **Feature**: Enable schema-based (de)serialization for this service.
+
+# v1.48.4 (2026-10-09.2)
+
+* **Dependency Update**: Update to smithy-go v1.28.5.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.48.3 (2026-10-08)
+
+* **Dependency Update**: Update to smithy-go v1.28.4.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.48.2 (2026-10-06)
+
+* No change notes available for this release.
+
+# v1.48.1 (2026-09-24)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.48.0 (2026-09-09)
 
 * **Feature**: Stop registering the `retry.MetricsHeader` middleware in generated clients. The `Amz-Sdk-Request` header is now set by the retry middleware itself.

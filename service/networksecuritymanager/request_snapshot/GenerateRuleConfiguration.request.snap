@@ -1,0 +1,5 @@
+POST /GenerateRuleConfiguration
+
+Content-Type: application/json
+
+{"clientToken":"__ClientToken__","currentConfiguration":"__CurrentConfiguration__","prompt":"__Prompt__","ruleFirewallType":"WAF","ruleType":"CONFIGURATION","wafConfigDataType":"DefaultAction"}

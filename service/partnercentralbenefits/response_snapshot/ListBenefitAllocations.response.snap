@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: PartnerCentralBenefitsService.ListBenefitAllocations
+
+{"BenefitAllocationSummaries":[{"ApplicableBenefitIds":["__Member__","__Member__"],"Arn":"__Arn__","BenefitApplicationId":"__BenefitApplicationId__","BenefitId":"__BenefitId__","Catalog":"__Catalog__","CreatedAt":"2000-01-01T00:00:00Z","ExpiresAt":"2000-01-01T00:00:00Z","FulfillmentTypes":["CREDITS","CREDITS"],"Id":"__Id__","Name":"__Name__","Status":"ACTIVE","StatusReason":"__StatusReason__"},{"ApplicableBenefitIds":["__Member__","__Member__"],"Arn":"__Arn__","BenefitApplicationId":"__BenefitApplicationId__","BenefitId":"__BenefitId__","Catalog":"__Catalog__","CreatedAt":"2000-01-01T00:00:00Z","ExpiresAt":"2000-01-01T00:00:00Z","FulfillmentTypes":["CREDITS","CREDITS"],"Id":"__Id__","Name":"__Name__","Status":"ACTIVE","StatusReason":"__StatusReason__"}],"NextToken":"__NextToken__"}

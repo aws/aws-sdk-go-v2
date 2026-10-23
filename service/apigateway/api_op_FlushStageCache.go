@@ -4,6 +4,8 @@ package apigateway
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/apigateway/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,21 @@ type FlushStageCacheInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *FlushStageCacheInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.FlushStageCacheRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *FlushStageCacheInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RestApiId != nil {
+		s.WriteString(schemas.FlushStageCacheRequest_restApiId, *v.RestApiId)
+	}
+	if v.StageName != nil {
+		s.WriteString(schemas.FlushStageCacheRequest_stageName, *v.StageName)
+	}
+}
+
 type FlushStageCacheOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -46,13 +63,26 @@ type FlushStageCacheOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *FlushStageCacheOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *FlushStageCacheOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *FlushStageCacheOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationFlushStageCacheMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpFlushStageCache{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.FlushStageCache, schemas.FlushStageCacheRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpFlushStageCache{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.FlushStageCache, schemas.FlushStageCacheRequest, nil), output: &FlushStageCacheOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

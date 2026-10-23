@@ -5,6 +5,8 @@ package redshiftdata
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/redshiftdata/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -60,15 +62,13 @@ func (c *Client) ListDatabases(ctx context.Context, params *ListDatabasesInput, 
 
 type ListDatabasesInput struct {
 
-	// The name of the database. This parameter is required when authenticating using
-	// either Secrets Manager or temporary credentials.
-	//
-	// This member is required.
-	Database *string
-
 	// The cluster identifier. This parameter is required when connecting to a cluster
 	// and authenticating using either Secrets Manager or temporary credentials.
 	ClusterIdentifier *string
+
+	// The name of the database. This parameter is required when authenticating using
+	// either Secrets Manager or temporary credentials.
+	Database *string
 
 	// The database user name. This parameter is required when connecting to a cluster
 	// as a database user and authenticating using temporary credentials.
@@ -98,6 +98,36 @@ type ListDatabasesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListDatabasesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListDatabasesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListDatabasesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClusterIdentifier != nil {
+		s.WriteString(schemas.ListDatabasesRequest_ClusterIdentifier, *v.ClusterIdentifier)
+	}
+	if v.Database != nil {
+		s.WriteString(schemas.ListDatabasesRequest_Database, *v.Database)
+	}
+	if v.DbUser != nil {
+		s.WriteString(schemas.ListDatabasesRequest_DbUser, *v.DbUser)
+	}
+	if v.MaxResults != 0 {
+		s.WriteInt32(schemas.ListDatabasesRequest_MaxResults, v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListDatabasesRequest_NextToken, *v.NextToken)
+	}
+	if v.SecretArn != nil {
+		s.WriteString(schemas.ListDatabasesRequest_SecretArn, *v.SecretArn)
+	}
+	if v.WorkgroupName != nil {
+		s.WriteString(schemas.ListDatabasesRequest_WorkgroupName, *v.WorkgroupName)
+	}
+}
+
 type ListDatabasesOutput struct {
 
 	// The names of databases.
@@ -116,13 +146,35 @@ type ListDatabasesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListDatabasesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListDatabasesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListDatabasesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDatabaseList(s, schemas.ListDatabasesResponse_Databases, v.Databases)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListDatabasesResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListDatabasesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListDatabasesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListDatabasesResponse_Databases:
+			return deserializeDatabaseList(d, schemas.ListDatabasesResponse_Databases, &v.Databases)
+		case schemas.ListDatabasesResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListDatabasesResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListDatabasesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListDatabases{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDatabases, schemas.ListDatabasesRequest, schemas.ListDatabasesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListDatabases{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDatabases, schemas.ListDatabasesRequest, schemas.ListDatabasesResponse), output: &ListDatabasesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 
@@ -136,9 +188,6 @@ func (c *Client) addOperationListDatabasesMiddlewares(stack *middleware.Stack, o
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = addOpListDatabasesValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

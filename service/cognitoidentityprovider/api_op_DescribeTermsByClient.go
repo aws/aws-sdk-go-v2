@@ -16,9 +16,8 @@ import (
 //
 // To call DescribeTermsByClient , you must have the
 // cognito-idp:DescribeTermsByClient Identity and Access Management (IAM)
-// permission. This operation additionally validates your permission for
-// cognito-idp:DescribeTerms , the action for . As a result, an IAM policy that
-// denies cognito-idp:DescribeTerms also denies requests to DescribeTermsByClient .
+// permission. An IAM policy that denies cognito-idp:DescribeTerms also denies
+// requests to DescribeTermsByClient .
 //
 // Amazon Cognito evaluates Identity and Access Management (IAM) policies in
 // requests for this API operation. For this operation, you must use IAM
@@ -90,7 +89,7 @@ func (v *DescribeTermsByClientInput) SerializeMembers(s smithy.ShapeSerializer) 
 
 type DescribeTermsByClientOutput struct {
 
-	// A summary of the requested terms documents. Includes a unique identifier for
+	// A summary of the requested terms documents, including a unique identifier for
 	// later changes to the terms documents.
 	Terms *types.TermsType
 

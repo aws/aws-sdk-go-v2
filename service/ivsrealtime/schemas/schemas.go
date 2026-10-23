@@ -225,6 +225,13 @@ var ListTagsForResource = smithy.NewSchema(smithy.ShapeID{
 	URI:  "/tags/{resourceArn}",
 	Code: 200})
 
+var RevokeConnectionToken = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.ivsrealtime",
+	Name:      "RevokeConnectionToken",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	URI:  "/RevokeConnectionToken",
+	Code: 200})
+
 var StartComposition = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ivsrealtime",
 	Name:      "StartComposition",
@@ -291,7 +298,8 @@ var AmazonInteractiveVideoServiceRealTime = smithy.NewServiceSchema(_AmazonInter
 var AccessDeniedException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ivsrealtime",
 	Name:      "AccessDeniedException",
-}, smithy.ShapeTypeStructure, 9, &smithytraits.HTTPError{Code: 403})
+}, smithy.ShapeTypeStructure, 9, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 403})
 var AccessDeniedException_accessControlAllowOrigin *smithy.Schema
 
 var AccessDeniedException_accessControlExposeHeaders *smithy.Schema
@@ -446,7 +454,8 @@ var _CompositionThumbnailConfigurationList_member *smithy.Schema
 var ConflictException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ivsrealtime",
 	Name:      "ConflictException",
-}, smithy.ShapeTypeStructure, 9, &smithytraits.HTTPError{Code: 409})
+}, smithy.ShapeTypeStructure, 9, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 409})
 var ConflictException_accessControlAllowOrigin *smithy.Schema
 
 var ConflictException_accessControlExposeHeaders *smithy.Schema
@@ -464,6 +473,11 @@ var ConflictException_xFrameOptions *smithy.Schema
 var ConflictException_xAmznErrorType *smithy.Schema
 
 var ConflictException_exceptionMessage *smithy.Schema
+
+var _ConnectionTokenId = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.ivsrealtime",
+	Name:      "ConnectionTokenId",
+}, smithy.ShapeTypeString, 0)
 
 var Destination = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ivsrealtime",
@@ -791,7 +805,8 @@ var _InsecureIngest = smithy.NewSchema(smithy.ShapeID{
 var InternalServerException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ivsrealtime",
 	Name:      "InternalServerException",
-}, smithy.ShapeTypeStructure, 9, &smithytraits.HTTPError{Code: 500})
+}, smithy.ShapeTypeStructure, 9, &smithytraits.Error{Type: "server"},
+	&smithytraits.HTTPError{Code: 500})
 var InternalServerException_accessControlAllowOrigin *smithy.Schema
 
 var InternalServerException_accessControlExposeHeaders *smithy.Schema
@@ -1168,7 +1183,8 @@ var _ParticipantTokenUserId = smithy.NewSchema(smithy.ShapeID{
 var PendingVerification = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ivsrealtime",
 	Name:      "PendingVerification",
-}, smithy.ShapeTypeStructure, 9, &smithytraits.HTTPError{Code: 403})
+}, smithy.ShapeTypeStructure, 9, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 403})
 var PendingVerification_accessControlAllowOrigin *smithy.Schema
 
 var PendingVerification_accessControlExposeHeaders *smithy.Schema
@@ -1368,7 +1384,8 @@ var _ResourceArn = smithy.NewSchema(smithy.ShapeID{
 var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ivsrealtime",
 	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 9, &smithytraits.HTTPError{Code: 404})
+}, smithy.ShapeTypeStructure, 9, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 404})
 var ResourceNotFoundException_accessControlAllowOrigin *smithy.Schema
 
 var ResourceNotFoundException_accessControlExposeHeaders *smithy.Schema
@@ -1419,7 +1436,8 @@ var S3StorageConfiguration_bucketName *smithy.Schema
 var ServiceQuotaExceededException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ivsrealtime",
 	Name:      "ServiceQuotaExceededException",
-}, smithy.ShapeTypeStructure, 9, &smithytraits.HTTPError{Code: 402})
+}, smithy.ShapeTypeStructure, 9, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 402})
 var ServiceQuotaExceededException_accessControlAllowOrigin *smithy.Schema
 
 var ServiceQuotaExceededException_accessControlExposeHeaders *smithy.Schema
@@ -1644,7 +1662,8 @@ var _UserId = smithy.NewSchema(smithy.ShapeID{
 var ValidationException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ivsrealtime",
 	Name:      "ValidationException",
-}, smithy.ShapeTypeStructure, 9, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 9, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var ValidationException_accessControlAllowOrigin *smithy.Schema
 
 var ValidationException_accessControlExposeHeaders *smithy.Schema
@@ -1741,7 +1760,21 @@ var CreateIngestConfigurationRequest_tags *smithy.Schema
 var CreateIngestConfigurationResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ivsrealtime",
 	Name:      "CreateIngestConfigurationResponse",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 8)
+var CreateIngestConfigurationResponse_accessControlAllowOrigin *smithy.Schema
+
+var CreateIngestConfigurationResponse_accessControlExposeHeaders *smithy.Schema
+
+var CreateIngestConfigurationResponse_cacheControl *smithy.Schema
+
+var CreateIngestConfigurationResponse_contentSecurityPolicy *smithy.Schema
+
+var CreateIngestConfigurationResponse_strictTransportSecurity *smithy.Schema
+
+var CreateIngestConfigurationResponse_xContentTypeOptions *smithy.Schema
+
+var CreateIngestConfigurationResponse_xFrameOptions *smithy.Schema
+
 var CreateIngestConfigurationResponse_ingestConfiguration *smithy.Schema
 
 var CreateParticipantTokenRequest = smithy.NewSchema(smithy.ShapeID{
@@ -2194,6 +2227,17 @@ var ListTagsForResourceResponse = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeStructure, 1)
 var ListTagsForResourceResponse_tags *smithy.Schema
 
+var RevokeConnectionTokenRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.ivsrealtime",
+	Name:      "RevokeConnectionTokenRequest",
+}, smithy.ShapeTypeStructure, 1)
+var RevokeConnectionTokenRequest_tokenId *smithy.Schema
+
+var RevokeConnectionTokenResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.ivsrealtime",
+	Name:      "RevokeConnectionTokenResponse",
+}, smithy.ShapeTypeStructure, 0)
+
 var StartCompositionRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ivsrealtime",
 	Name:      "StartCompositionRequest",
@@ -2324,7 +2368,21 @@ var UpdateIngestConfigurationRequest_redundantIngest *smithy.Schema
 var UpdateIngestConfigurationResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ivsrealtime",
 	Name:      "UpdateIngestConfigurationResponse",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 8)
+var UpdateIngestConfigurationResponse_accessControlAllowOrigin *smithy.Schema
+
+var UpdateIngestConfigurationResponse_accessControlExposeHeaders *smithy.Schema
+
+var UpdateIngestConfigurationResponse_cacheControl *smithy.Schema
+
+var UpdateIngestConfigurationResponse_contentSecurityPolicy *smithy.Schema
+
+var UpdateIngestConfigurationResponse_strictTransportSecurity *smithy.Schema
+
+var UpdateIngestConfigurationResponse_xContentTypeOptions *smithy.Schema
+
+var UpdateIngestConfigurationResponse_xFrameOptions *smithy.Schema
+
 var UpdateIngestConfigurationResponse_ingestConfiguration *smithy.Schema
 
 var UpdateStageRequest = smithy.NewSchema(smithy.ShapeID{
@@ -3042,6 +3100,20 @@ func init() {
 
 	CreateIngestConfigurationRequest_tags = CreateIngestConfigurationRequest.AddMember("tags", _Tags)
 
+	CreateIngestConfigurationResponse_accessControlAllowOrigin = CreateIngestConfigurationResponse.AddMember("accessControlAllowOrigin", _String, &smithytraits.HTTPHeader{Name: "Access-Control-Allow-Origin"})
+
+	CreateIngestConfigurationResponse_accessControlExposeHeaders = CreateIngestConfigurationResponse.AddMember("accessControlExposeHeaders", _String, &smithytraits.HTTPHeader{Name: "Access-Control-Expose-Headers"})
+
+	CreateIngestConfigurationResponse_cacheControl = CreateIngestConfigurationResponse.AddMember("cacheControl", _String, &smithytraits.HTTPHeader{Name: "Cache-Control"})
+
+	CreateIngestConfigurationResponse_contentSecurityPolicy = CreateIngestConfigurationResponse.AddMember("contentSecurityPolicy", _String, &smithytraits.HTTPHeader{Name: "Content-Security-Policy"})
+
+	CreateIngestConfigurationResponse_strictTransportSecurity = CreateIngestConfigurationResponse.AddMember("strictTransportSecurity", _String, &smithytraits.HTTPHeader{Name: "Strict-Transport-Security"})
+
+	CreateIngestConfigurationResponse_xContentTypeOptions = CreateIngestConfigurationResponse.AddMember("xContentTypeOptions", _String, &smithytraits.HTTPHeader{Name: "X-Content-Type-Options"})
+
+	CreateIngestConfigurationResponse_xFrameOptions = CreateIngestConfigurationResponse.AddMember("xFrameOptions", _String, &smithytraits.HTTPHeader{Name: "X-Frame-Options"})
+
 	CreateIngestConfigurationResponse_ingestConfiguration = CreateIngestConfigurationResponse.AddMember("ingestConfiguration", IngestConfiguration)
 
 	CreateParticipantTokenRequest_stageArn = CreateParticipantTokenRequest.AddMember("stageArn", _StageArn)
@@ -3256,6 +3328,8 @@ func init() {
 
 	ListTagsForResourceResponse_tags = ListTagsForResourceResponse.AddMember("tags", _Tags)
 
+	RevokeConnectionTokenRequest_tokenId = RevokeConnectionTokenRequest.AddMember("tokenId", _ConnectionTokenId)
+
 	StartCompositionRequest_stageArn = StartCompositionRequest.AddMember("stageArn", _StageArn)
 
 	StartCompositionRequest_idempotencyToken = StartCompositionRequest.AddMember("idempotencyToken", _CompositionClientToken)
@@ -3327,6 +3401,20 @@ func init() {
 	UpdateIngestConfigurationRequest_stageArn = UpdateIngestConfigurationRequest.AddMember("stageArn", _IngestConfigurationStageArn)
 
 	UpdateIngestConfigurationRequest_redundantIngest = UpdateIngestConfigurationRequest.AddMember("redundantIngest", _RedundantIngest)
+
+	UpdateIngestConfigurationResponse_accessControlAllowOrigin = UpdateIngestConfigurationResponse.AddMember("accessControlAllowOrigin", _String, &smithytraits.HTTPHeader{Name: "Access-Control-Allow-Origin"})
+
+	UpdateIngestConfigurationResponse_accessControlExposeHeaders = UpdateIngestConfigurationResponse.AddMember("accessControlExposeHeaders", _String, &smithytraits.HTTPHeader{Name: "Access-Control-Expose-Headers"})
+
+	UpdateIngestConfigurationResponse_cacheControl = UpdateIngestConfigurationResponse.AddMember("cacheControl", _String, &smithytraits.HTTPHeader{Name: "Cache-Control"})
+
+	UpdateIngestConfigurationResponse_contentSecurityPolicy = UpdateIngestConfigurationResponse.AddMember("contentSecurityPolicy", _String, &smithytraits.HTTPHeader{Name: "Content-Security-Policy"})
+
+	UpdateIngestConfigurationResponse_strictTransportSecurity = UpdateIngestConfigurationResponse.AddMember("strictTransportSecurity", _String, &smithytraits.HTTPHeader{Name: "Strict-Transport-Security"})
+
+	UpdateIngestConfigurationResponse_xContentTypeOptions = UpdateIngestConfigurationResponse.AddMember("xContentTypeOptions", _String, &smithytraits.HTTPHeader{Name: "X-Content-Type-Options"})
+
+	UpdateIngestConfigurationResponse_xFrameOptions = UpdateIngestConfigurationResponse.AddMember("xFrameOptions", _String, &smithytraits.HTTPHeader{Name: "X-Frame-Options"})
 
 	UpdateIngestConfigurationResponse_ingestConfiguration = UpdateIngestConfigurationResponse.AddMember("ingestConfiguration", IngestConfiguration)
 

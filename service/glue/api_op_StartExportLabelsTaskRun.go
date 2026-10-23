@@ -4,6 +4,8 @@ package glue
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/glue/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -46,6 +48,21 @@ type StartExportLabelsTaskRunInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartExportLabelsTaskRunInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartExportLabelsTaskRunRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartExportLabelsTaskRunInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.OutputS3Path != nil {
+		s.WriteString(schemas.StartExportLabelsTaskRunRequest_OutputS3Path, *v.OutputS3Path)
+	}
+	if v.TransformId != nil {
+		s.WriteString(schemas.StartExportLabelsTaskRunRequest_TransformId, *v.TransformId)
+	}
+}
+
 type StartExportLabelsTaskRunOutput struct {
 
 	// The unique identifier for the task run.
@@ -57,13 +74,32 @@ type StartExportLabelsTaskRunOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartExportLabelsTaskRunOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartExportLabelsTaskRunResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartExportLabelsTaskRunOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TaskRunId != nil {
+		s.WriteString(schemas.StartExportLabelsTaskRunResponse_TaskRunId, *v.TaskRunId)
+	}
+}
+func (v *StartExportLabelsTaskRunOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartExportLabelsTaskRunResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartExportLabelsTaskRunResponse_TaskRunId:
+			v.TaskRunId = new(string)
+			return d.ReadString(schemas.StartExportLabelsTaskRunResponse_TaskRunId, v.TaskRunId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartExportLabelsTaskRunMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStartExportLabelsTaskRun{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartExportLabelsTaskRun, schemas.StartExportLabelsTaskRunRequest, schemas.StartExportLabelsTaskRunResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpStartExportLabelsTaskRun{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartExportLabelsTaskRun, schemas.StartExportLabelsTaskRunRequest, schemas.StartExportLabelsTaskRunResponse), output: &StartExportLabelsTaskRunOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

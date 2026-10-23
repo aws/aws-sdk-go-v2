@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: AmazonElasticVMwareService.AssociateEipToVlan
+
+{"vlan":{"availabilityZone":"__AvailabilityZone__","cidr":"__Cidr__","createdAt":946684800,"eipAssociations":[{"allocationId":"__AllocationId__","associationId":"__AssociationId__","ipAddress":"__IpAddress__"},{"allocationId":"__AllocationId__","associationId":"__AssociationId__","ipAddress":"__IpAddress__"}],"functionName":"__FunctionName__","isPublic":true,"modifiedAt":946684800,"networkAclId":"__NetworkAclId__","stateDetails":"__StateDetails__","subnetId":"__SubnetId__","vlanId":1,"vlanState":"CREATING"}}

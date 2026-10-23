@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"Attributes":[{"Key":{"FacetName":"__FacetName__","Name":"__Name__","SchemaArn":"__SchemaArn__"},"Value":{"StringValue":"__TypedAttributeValueMemberStringValue__"}},{"Key":{"FacetName":"__FacetName__","Name":"__Name__","SchemaArn":"__SchemaArn__"},"Value":{"StringValue":"__TypedAttributeValueMemberStringValue__"}}]}

@@ -977,7 +977,8 @@ var ComputeCapacityStatus_DrainModeUnusedUserSessions *smithy.Schema
 var ConcurrentModificationException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.appstream",
 	Name:      "ConcurrentModificationException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var ConcurrentModificationException_Message *smithy.Schema
 
 var ContentRedirection = smithy.NewSchema(smithy.ShapeID{
@@ -1054,7 +1055,8 @@ var _DomainList_member *smithy.Schema
 var DryRunOperationException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.appstream",
 	Name:      "DryRunOperationException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 412})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 412})
 var DryRunOperationException_Message *smithy.Schema
 
 var DynamicAppProvidersEnabled = smithy.NewSchema(smithy.ShapeID{
@@ -1109,7 +1111,8 @@ var Entitlement_LastModifiedTime *smithy.Schema
 var EntitlementAlreadyExistsException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.appstream",
 	Name:      "EntitlementAlreadyExistsException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var EntitlementAlreadyExistsException_Message *smithy.Schema
 
 var EntitlementAttribute = smithy.NewSchema(smithy.ShapeID{
@@ -1135,7 +1138,8 @@ var _EntitlementList_member *smithy.Schema
 var EntitlementNotFoundException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.appstream",
 	Name:      "EntitlementNotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var EntitlementNotFoundException_Message *smithy.Schema
 
 var ErrorDetails = smithy.NewSchema(smithy.ShapeID{
@@ -1432,7 +1436,7 @@ var FleetType_ELASTIC *smithy.Schema
 var Image = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.appstream",
 	Name:      "Image",
-}, smithy.ShapeTypeStructure, 23)
+}, smithy.ShapeTypeStructure, 24)
 var Image_Name *smithy.Schema
 
 var Image_Arn *smithy.Schema
@@ -1478,6 +1482,8 @@ var Image_ImageSharedWithOthers *smithy.Schema
 var Image_ManagedSoftwareIncluded *smithy.Schema
 
 var Image_ImageType *smithy.Schema
+
+var Image_ImageSoftwareMetadata *smithy.Schema
 
 var ImageBuilder = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.appstream",
@@ -1611,6 +1617,12 @@ var ImageSharedWithOthers_TRUE *smithy.Schema
 
 var ImageSharedWithOthers_FALSE *smithy.Schema
 
+var ImageSoftwareMetadata = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.appstream",
+	Name:      "ImageSoftwareMetadata",
+}, smithy.ShapeTypeStructure, 1)
+var ImageSoftwareMetadata_nvidiaGridDriverVersion *smithy.Schema
+
 var ImageState = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.appstream",
 	Name:      "ImageState",
@@ -1666,7 +1678,8 @@ var ImageType_BYOL *smithy.Schema
 var IncompatibleImageException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.appstream",
 	Name:      "IncompatibleImageException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var IncompatibleImageException_Message *smithy.Schema
 
 var InstanceDrainStatus = smithy.NewSchema(smithy.ShapeID{
@@ -1692,19 +1705,22 @@ var _Integer = smithy.NewSchema(smithy.ShapeID{
 var InvalidAccountStatusException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.appstream",
 	Name:      "InvalidAccountStatusException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var InvalidAccountStatusException_Message *smithy.Schema
 
 var InvalidParameterCombinationException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.appstream",
 	Name:      "InvalidParameterCombinationException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var InvalidParameterCombinationException_Message *smithy.Schema
 
 var InvalidRoleException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.appstream",
 	Name:      "InvalidRoleException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var InvalidRoleException_Message *smithy.Schema
 
 var LastReportGenerationExecutionError = smithy.NewSchema(smithy.ShapeID{
@@ -1737,7 +1753,8 @@ var _LaunchParameters = smithy.NewSchema(smithy.ShapeID{
 var LimitExceededException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.appstream",
 	Name:      "LimitExceededException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var LimitExceededException_Message *smithy.Schema
 
 var _Long = smithy.NewSchema(smithy.ShapeID{
@@ -1781,10 +1798,16 @@ var NetworkAccessConfiguration_EniIpv6Addresses *smithy.Schema
 
 var NetworkAccessConfiguration_EniId *smithy.Schema
 
+var _NvidiaGridDriverVersion = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.appstream",
+	Name:      "NvidiaGridDriverVersion",
+}, smithy.ShapeTypeString, 0)
+
 var OperationNotPermittedException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.appstream",
 	Name:      "OperationNotPermittedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var OperationNotPermittedException_Message *smithy.Schema
 
 var _OrganizationalUnitDistinguishedName = smithy.NewSchema(smithy.ShapeID{
@@ -1868,13 +1891,15 @@ var _RegionName = smithy.NewSchema(smithy.ShapeID{
 var RequestLimitExceededException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.appstream",
 	Name:      "RequestLimitExceededException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var RequestLimitExceededException_Message *smithy.Schema
 
 var ResourceAlreadyExistsException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.appstream",
 	Name:      "ResourceAlreadyExistsException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var ResourceAlreadyExistsException_Message *smithy.Schema
 
 var ResourceError = smithy.NewSchema(smithy.ShapeID{
@@ -1901,19 +1926,22 @@ var _ResourceIdentifier = smithy.NewSchema(smithy.ShapeID{
 var ResourceInUseException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.appstream",
 	Name:      "ResourceInUseException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var ResourceInUseException_Message *smithy.Schema
 
 var ResourceNotAvailableException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.appstream",
 	Name:      "ResourceNotAvailableException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var ResourceNotAvailableException_Message *smithy.Schema
 
 var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.appstream",
 	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 404})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 404})
 var ResourceNotFoundException_Message *smithy.Schema
 
 var RuntimeValidationConfig = smithy.NewSchema(smithy.ShapeID{
@@ -2093,7 +2121,7 @@ var SoftwareDeploymentStatus_FAILED_TO_UNINSTALL *smithy.Schema
 var Stack = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.appstream",
 	Name:      "Stack",
-}, smithy.ShapeTypeStructure, 16)
+}, smithy.ShapeTypeStructure, 17)
 var Stack_Arn *smithy.Schema
 
 var Stack_Name *smithy.Schema
@@ -2126,10 +2154,12 @@ var Stack_ContentRedirection *smithy.Schema
 
 var Stack_AgentAccessConfig *smithy.Schema
 
+var Stack_StorageConnectorAuthentication *smithy.Schema
+
 var StackAttribute = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.appstream",
 	Name:      "StackAttribute",
-}, smithy.ShapeTypeEnum, 14)
+}, smithy.ShapeTypeEnum, 15)
 var StackAttribute_STORAGE_CONNECTORS *smithy.Schema
 
 var StackAttribute_STORAGE_CONNECTOR_HOMEFOLDERS *smithy.Schema
@@ -2157,6 +2187,8 @@ var StackAttribute_STREAMING_EXPERIENCE_SETTINGS *smithy.Schema
 var StackAttribute_CONTENT_REDIRECTION *smithy.Schema
 
 var StackAttribute_AGENT_ACCESS_CONFIG *smithy.Schema
+
+var StackAttribute_STORAGE_CONNECTOR_AUTHENTICATION *smithy.Schema
 
 var _StackAttributes = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.appstream",
@@ -2203,6 +2235,14 @@ var StorageConnector_ResourceIdentifier *smithy.Schema
 var StorageConnector_Domains *smithy.Schema
 
 var StorageConnector_DomainsRequireAdminConsent *smithy.Schema
+
+var StorageConnectorAuthentication = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.appstream",
+	Name:      "StorageConnectorAuthentication",
+}, smithy.ShapeTypeEnum, 2)
+var StorageConnectorAuthentication_FORCE_REAUTHENTICATION *smithy.Schema
+
+var StorageConnectorAuthentication_REUSE_CREDENTIALS *smithy.Schema
 
 var _StorageConnectorList = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.appstream",
@@ -3007,7 +3047,7 @@ var CreateImportedImageResult_Image *smithy.Schema
 var CreateStackRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.appstream",
 	Name:      "CreateStackRequest",
-}, smithy.ShapeTypeStructure, 14)
+}, smithy.ShapeTypeStructure, 15)
 var CreateStackRequest_Name *smithy.Schema
 
 var CreateStackRequest_Description *smithy.Schema
@@ -3035,6 +3075,8 @@ var CreateStackRequest_StreamingExperienceSettings *smithy.Schema
 var CreateStackRequest_ContentRedirection *smithy.Schema
 
 var CreateStackRequest_AgentAccessConfig *smithy.Schema
+
+var CreateStackRequest_StorageConnectorAuthentication *smithy.Schema
 
 var CreateStackResult = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.appstream",
@@ -4146,7 +4188,7 @@ var UpdateImagePermissionsResult = smithy.NewSchema(smithy.ShapeID{
 var UpdateStackRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.appstream",
 	Name:      "UpdateStackRequest",
-}, smithy.ShapeTypeStructure, 15)
+}, smithy.ShapeTypeStructure, 16)
 var UpdateStackRequest_DisplayName *smithy.Schema
 
 var UpdateStackRequest_Description *smithy.Schema
@@ -4176,6 +4218,8 @@ var UpdateStackRequest_StreamingExperienceSettings *smithy.Schema
 var UpdateStackRequest_ContentRedirection *smithy.Schema
 
 var UpdateStackRequest_AgentAccessConfig *smithy.Schema
+
+var UpdateStackRequest_StorageConnectorAuthentication *smithy.Schema
 
 var UpdateStackResult = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.appstream",
@@ -4918,6 +4962,8 @@ func init() {
 
 	ImageType_BYOL = ImageType.AddMember("BYOL", smithyprelude.Unit)
 
+	ImageSoftwareMetadata_nvidiaGridDriverVersion = ImageSoftwareMetadata.AddMember("nvidiaGridDriverVersion", _NvidiaGridDriverVersion)
+
 	Image_Name = Image.AddMember("Name", _String)
 
 	Image_Arn = Image.AddMember("Arn", _Arn)
@@ -4963,6 +5009,8 @@ func init() {
 	Image_ManagedSoftwareIncluded = Image.AddMember("ManagedSoftwareIncluded", _Boolean)
 
 	Image_ImageType = Image.AddMember("ImageType", ImageType)
+
+	Image_ImageSoftwareMetadata = Image.AddMember("ImageSoftwareMetadata", ImageSoftwareMetadata)
 
 	ImageBuilderState_PENDING = ImageBuilderState.AddMember("PENDING", smithyprelude.Unit)
 
@@ -5202,6 +5250,10 @@ func init() {
 
 	StreamingExperienceSettings_PreferredProtocol = StreamingExperienceSettings.AddMember("PreferredProtocol", PreferredProtocol)
 
+	StorageConnectorAuthentication_FORCE_REAUTHENTICATION = StorageConnectorAuthentication.AddMember("FORCE_REAUTHENTICATION", smithyprelude.Unit)
+
+	StorageConnectorAuthentication_REUSE_CREDENTIALS = StorageConnectorAuthentication.AddMember("REUSE_CREDENTIALS", smithyprelude.Unit)
+
 	Stack_Arn = Stack.AddMember("Arn", _Arn)
 
 	Stack_Name = Stack.AddMember("Name", _String)
@@ -5234,6 +5286,8 @@ func init() {
 
 	Stack_AgentAccessConfig = Stack.AddMember("AgentAccessConfig", AgentAccessConfig)
 
+	Stack_StorageConnectorAuthentication = Stack.AddMember("StorageConnectorAuthentication", StorageConnectorAuthentication)
+
 	StackAttribute_STORAGE_CONNECTORS = StackAttribute.AddMember("STORAGE_CONNECTORS", smithyprelude.Unit)
 
 	StackAttribute_STORAGE_CONNECTOR_HOMEFOLDERS = StackAttribute.AddMember("STORAGE_CONNECTOR_HOMEFOLDERS", smithyprelude.Unit)
@@ -5261,6 +5315,8 @@ func init() {
 	StackAttribute_CONTENT_REDIRECTION = StackAttribute.AddMember("CONTENT_REDIRECTION", smithyprelude.Unit)
 
 	StackAttribute_AGENT_ACCESS_CONFIG = StackAttribute.AddMember("AGENT_ACCESS_CONFIG", smithyprelude.Unit)
+
+	StackAttribute_STORAGE_CONNECTOR_AUTHENTICATION = StackAttribute.AddMember("STORAGE_CONNECTOR_AUTHENTICATION", smithyprelude.Unit)
 
 	_StackAttributes_member = _StackAttributes.AddMember("member", StackAttribute)
 
@@ -5659,6 +5715,8 @@ func init() {
 	CreateStackRequest_ContentRedirection = CreateStackRequest.AddMember("ContentRedirection", ContentRedirection)
 
 	CreateStackRequest_AgentAccessConfig = CreateStackRequest.AddMember("AgentAccessConfig", AgentAccessConfig)
+
+	CreateStackRequest_StorageConnectorAuthentication = CreateStackRequest.AddMember("StorageConnectorAuthentication", StorageConnectorAuthentication)
 
 	CreateStackResult_Stack = CreateStackResult.AddMember("Stack", Stack)
 
@@ -6227,6 +6285,8 @@ func init() {
 	UpdateStackRequest_ContentRedirection = UpdateStackRequest.AddMember("ContentRedirection", ContentRedirection)
 
 	UpdateStackRequest_AgentAccessConfig = UpdateStackRequest.AddMember("AgentAccessConfig", AgentAccessConfigForUpdate)
+
+	UpdateStackRequest_StorageConnectorAuthentication = UpdateStackRequest.AddMember("StorageConnectorAuthentication", StorageConnectorAuthentication)
 
 	UpdateStackResult_Stack = UpdateStackResult.AddMember("Stack", Stack)
 

@@ -5,6 +5,8 @@ package backup
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/backup/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -58,6 +60,25 @@ type CreateBackupVaultInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateBackupVaultInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateBackupVaultInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateBackupVaultInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BackupVaultName != nil {
+		s.WriteString(schemas.CreateBackupVaultInput_BackupVaultName, *v.BackupVaultName)
+	}
+	serializeTags(s, schemas.CreateBackupVaultInput_BackupVaultTags, v.BackupVaultTags)
+	if v.CreatorRequestId != nil {
+		s.WriteString(schemas.CreateBackupVaultInput_CreatorRequestId, *v.CreatorRequestId)
+	}
+	if v.EncryptionKeyArn != nil {
+		s.WriteString(schemas.CreateBackupVaultInput_EncryptionKeyArn, *v.EncryptionKeyArn)
+	}
+}
+
 type CreateBackupVaultOutput struct {
 
 	// An Amazon Resource Name (ARN) that uniquely identifies a backup vault; for
@@ -82,13 +103,44 @@ type CreateBackupVaultOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateBackupVaultOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateBackupVaultOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateBackupVaultOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BackupVaultArn != nil {
+		s.WriteString(schemas.CreateBackupVaultOutput_BackupVaultArn, *v.BackupVaultArn)
+	}
+	if v.BackupVaultName != nil {
+		s.WriteString(schemas.CreateBackupVaultOutput_BackupVaultName, *v.BackupVaultName)
+	}
+	if v.CreationDate != nil {
+		s.WriteTime(schemas.CreateBackupVaultOutput_CreationDate, *v.CreationDate)
+	}
+}
+func (v *CreateBackupVaultOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateBackupVaultOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateBackupVaultOutput_BackupVaultArn:
+			v.BackupVaultArn = new(string)
+			return d.ReadString(schemas.CreateBackupVaultOutput_BackupVaultArn, v.BackupVaultArn)
+		case schemas.CreateBackupVaultOutput_BackupVaultName:
+			v.BackupVaultName = new(string)
+			return d.ReadString(schemas.CreateBackupVaultOutput_BackupVaultName, v.BackupVaultName)
+		case schemas.CreateBackupVaultOutput_CreationDate:
+			v.CreationDate = new(time.Time)
+			return d.ReadTime(schemas.CreateBackupVaultOutput_CreationDate, v.CreationDate)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateBackupVaultMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateBackupVault{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateBackupVault, schemas.CreateBackupVaultInput, schemas.CreateBackupVaultOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateBackupVault{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateBackupVault, schemas.CreateBackupVaultInput, schemas.CreateBackupVaultOutput), output: &CreateBackupVaultOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

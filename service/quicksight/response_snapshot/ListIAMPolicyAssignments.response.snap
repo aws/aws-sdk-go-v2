@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"IAMPolicyAssignments":[{"AssignmentName":"__AssignmentName__","AssignmentStatus":"ENABLED"},{"AssignmentName":"__AssignmentName__","AssignmentStatus":"ENABLED"}],"NextToken":"__NextToken__","RequestId":"__RequestId__","Status":200}

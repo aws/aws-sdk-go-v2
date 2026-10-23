@@ -461,6 +461,18 @@ func TestCheckResponseSnapshot_CreatePricingRule(t *testing.T) {
 			FreeTier: &types.CreateFreeTierConfig{
 				Activated: ptr.Bool(true),
 			},
+			CustomTiers: []types.CustomTier{
+				{
+					BeginRangeInclusive: ptr.Float64(1.0),
+					EndRangeExclusive:   ptr.Float64(1.0),
+					RateValue:           ptr.Float64(1.0),
+				},
+				{
+					BeginRangeInclusive: ptr.Float64(1.0),
+					EndRangeExclusive:   ptr.Float64(1.0),
+					RateValue:           ptr.Float64(1.0),
+				},
+			},
 		},
 		UsageType: ptr.String("__UsageType__"),
 		Operation: ptr.String("__Operation__"),
@@ -691,6 +703,34 @@ func TestCheckResponseSnapshot_GetBillingGroupCostReport(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "GetBillingGroupCostReport.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_GetBillingTransferPreference(t *testing.T) {
+	want := &GetBillingTransferPreferenceOutput{
+		ResponsibilityTransferArn: ptr.String("__ResponsibilityTransferArn__"),
+		AutoBillingTransferBillingGroupCreation: &types.AutoTransferBillingGroupCreationPreference{
+			Enabled:        ptr.Bool(true),
+			PricingPlanArn: ptr.String("__PricingPlanArn__"),
+		},
+		LastModifiedTime: ptr.Int64(1),
+	}
+	status, header, body, err := serdeRespReadSnapshot("GetBillingTransferPreference.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.GetBillingTransferPreference(context.Background(), &GetBillingTransferPreferenceInput{
+		ResponsibilityTransferArn: ptr.String("__ResponsibilityTransferArn__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "GetBillingTransferPreference.response", err)
 	}
 }
 
@@ -1278,6 +1318,18 @@ func TestCheckResponseSnapshot_ListPricingRules(t *testing.T) {
 					FreeTier: &types.FreeTierConfig{
 						Activated: ptr.Bool(true),
 					},
+					CustomTiers: []types.CustomTier{
+						{
+							BeginRangeInclusive: ptr.Float64(1.0),
+							EndRangeExclusive:   ptr.Float64(1.0),
+							RateValue:           ptr.Float64(1.0),
+						},
+						{
+							BeginRangeInclusive: ptr.Float64(1.0),
+							EndRangeExclusive:   ptr.Float64(1.0),
+							RateValue:           ptr.Float64(1.0),
+						},
+					},
 				},
 				UsageType: ptr.String("__UsageType__"),
 				Operation: ptr.String("__Operation__"),
@@ -1297,6 +1349,18 @@ func TestCheckResponseSnapshot_ListPricingRules(t *testing.T) {
 				Tiering: &types.Tiering{
 					FreeTier: &types.FreeTierConfig{
 						Activated: ptr.Bool(true),
+					},
+					CustomTiers: []types.CustomTier{
+						{
+							BeginRangeInclusive: ptr.Float64(1.0),
+							EndRangeExclusive:   ptr.Float64(1.0),
+							RateValue:           ptr.Float64(1.0),
+						},
+						{
+							BeginRangeInclusive: ptr.Float64(1.0),
+							EndRangeExclusive:   ptr.Float64(1.0),
+							RateValue:           ptr.Float64(1.0),
+						},
 					},
 				},
 				UsageType: ptr.String("__UsageType__"),
@@ -1525,6 +1589,39 @@ func TestCheckResponseSnapshot_UpdateBillingGroup(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_UpdateBillingTransferPreference(t *testing.T) {
+	want := &UpdateBillingTransferPreferenceOutput{
+		ResponsibilityTransferArn: ptr.String("__ResponsibilityTransferArn__"),
+		AutoBillingTransferBillingGroupCreation: &types.AutoTransferBillingGroupCreationPreference{
+			Enabled:        ptr.Bool(true),
+			PricingPlanArn: ptr.String("__PricingPlanArn__"),
+		},
+		LastModifiedTime: 1,
+	}
+	status, header, body, err := serdeRespReadSnapshot("UpdateBillingTransferPreference.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.UpdateBillingTransferPreference(context.Background(), &UpdateBillingTransferPreferenceInput{
+		ClientToken:               ptr.String("__ClientToken__"),
+		ResponsibilityTransferArn: ptr.String("__ResponsibilityTransferArn__"),
+		AutoBillingTransferBillingGroupCreation: &types.AutoTransferBillingGroupCreationPreference{
+			Enabled:        ptr.Bool(true),
+			PricingPlanArn: ptr.String("__PricingPlanArn__"),
+		},
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "UpdateBillingTransferPreference.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_UpdateCustomLineItem(t *testing.T) {
 	want := &UpdateCustomLineItemOutput{
 		Arn:             ptr.String("__Arn__"),
@@ -1673,6 +1770,18 @@ func TestCheckResponseSnapshot_UpdatePricingRule(t *testing.T) {
 			FreeTier: &types.UpdateFreeTierConfig{
 				Activated: ptr.Bool(true),
 			},
+			CustomTiers: []types.CustomTier{
+				{
+					BeginRangeInclusive: ptr.Float64(1.0),
+					EndRangeExclusive:   ptr.Float64(1.0),
+					RateValue:           ptr.Float64(1.0),
+				},
+				{
+					BeginRangeInclusive: ptr.Float64(1.0),
+					EndRangeExclusive:   ptr.Float64(1.0),
+					RateValue:           ptr.Float64(1.0),
+				},
+			},
 		},
 		UsageType: ptr.String("__UsageType__"),
 		Operation: ptr.String("__Operation__"),
@@ -1694,6 +1803,18 @@ func TestCheckResponseSnapshot_UpdatePricingRule(t *testing.T) {
 		Tiering: &types.UpdateTieringInput{
 			FreeTier: &types.UpdateFreeTierConfig{
 				Activated: ptr.Bool(true),
+			},
+			CustomTiers: []types.CustomTier{
+				{
+					BeginRangeInclusive: ptr.Float64(1.0),
+					EndRangeExclusive:   ptr.Float64(1.0),
+					RateValue:           ptr.Float64(1.0),
+				},
+				{
+					BeginRangeInclusive: ptr.Float64(1.0),
+					EndRangeExclusive:   ptr.Float64(1.0),
+					RateValue:           ptr.Float64(1.0),
+				},
 			},
 		},
 	})

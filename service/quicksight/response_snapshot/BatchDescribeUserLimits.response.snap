@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"errors":[{"errorCode":"__ErrorCode__","message":"__Message__","namespace":"__Namespace__","userArn":"__UserArn__","userName":"__UserName__"},{"errorCode":"__ErrorCode__","message":"__Message__","namespace":"__Namespace__","userArn":"__UserArn__","userName":"__UserName__"}],"userLimits":[{"effectiveLimits":[{"limitUnit":"MB","limitValue":1,"profileId":"__ProfileId__","resourceType":"INDEX_STORAGE","source":"DIRECT_USER"},{"limitUnit":"MB","limitValue":1,"profileId":"__ProfileId__","resourceType":"INDEX_STORAGE","source":"DIRECT_USER"}],"namespace":"__Namespace__","userName":"__UserName__"},{"effectiveLimits":[{"limitUnit":"MB","limitValue":1,"profileId":"__ProfileId__","resourceType":"INDEX_STORAGE","source":"DIRECT_USER"},{"limitUnit":"MB","limitValue":1,"profileId":"__ProfileId__","resourceType":"INDEX_STORAGE","source":"DIRECT_USER"}],"namespace":"__Namespace__","userName":"__UserName__"}]}

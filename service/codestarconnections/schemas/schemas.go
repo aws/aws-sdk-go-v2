@@ -153,7 +153,8 @@ var CodeStar_connections_20191201 = smithy.NewServiceSchema(_CodeStar_connection
 var AccessDeniedException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codestarconnections",
 	Name:      "AccessDeniedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 403})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 403})
 var AccessDeniedException_Message *smithy.Schema
 
 var _AccountId = smithy.NewSchema(smithy.ShapeID{
@@ -188,19 +189,22 @@ var _BranchName = smithy.NewSchema(smithy.ShapeID{
 var ConcurrentModificationException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codestarconnections",
 	Name:      "ConcurrentModificationException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 409})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 409})
 var ConcurrentModificationException_Message *smithy.Schema
 
 var ConditionalCheckFailedException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codestarconnections",
 	Name:      "ConditionalCheckFailedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 409})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 409})
 var ConditionalCheckFailedException_Message *smithy.Schema
 
 var ConflictException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codestarconnections",
 	Name:      "ConflictException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 409})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 409})
 var ConflictException_Message *smithy.Schema
 
 var Connection = smithy.NewSchema(smithy.ShapeID{
@@ -332,13 +336,15 @@ var _Id = smithy.NewSchema(smithy.ShapeID{
 var InternalServerException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codestarconnections",
 	Name:      "InternalServerException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 503})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
+	&smithytraits.HTTPError{Code: 503})
 var InternalServerException_Message *smithy.Schema
 
 var InvalidInputException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codestarconnections",
 	Name:      "InvalidInputException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var InvalidInputException_Message *smithy.Schema
 
 var _KmsKeyArn = smithy.NewSchema(smithy.ShapeID{
@@ -355,7 +361,8 @@ var _LatestSyncBlockerList_member *smithy.Schema
 var LimitExceededException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codestarconnections",
 	Name:      "LimitExceededException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 429})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 429})
 var LimitExceededException_Message *smithy.Schema
 
 var _MaxResults = smithy.NewSchema(smithy.ShapeID{
@@ -507,7 +514,8 @@ var _ResolvedReason = smithy.NewSchema(smithy.ShapeID{
 var ResourceAlreadyExistsException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codestarconnections",
 	Name:      "ResourceAlreadyExistsException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 409})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 409})
 var ResourceAlreadyExistsException_Message *smithy.Schema
 
 var _ResourceName = smithy.NewSchema(smithy.ShapeID{
@@ -518,7 +526,8 @@ var _ResourceName = smithy.NewSchema(smithy.ShapeID{
 var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codestarconnections",
 	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 404})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 404})
 var ResourceNotFoundException_Message *smithy.Schema
 
 var ResourceSyncAttempt = smithy.NewSchema(smithy.ShapeID{
@@ -570,13 +579,15 @@ var ResourceSyncStatus_SUCCEEDED *smithy.Schema
 var ResourceUnavailableException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codestarconnections",
 	Name:      "ResourceUnavailableException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var ResourceUnavailableException_Message *smithy.Schema
 
 var RetryLatestCommitFailedException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codestarconnections",
 	Name:      "RetryLatestCommitFailedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 503})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
+	&smithytraits.HTTPError{Code: 503})
 var RetryLatestCommitFailedException_Message *smithy.Schema
 
 var Revision = smithy.NewSchema(smithy.ShapeID{
@@ -674,7 +685,8 @@ var _SyncBlockerContextValue = smithy.NewSchema(smithy.ShapeID{
 var SyncBlockerDoesNotExistException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codestarconnections",
 	Name:      "SyncBlockerDoesNotExistException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 404})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 404})
 var SyncBlockerDoesNotExistException_Message *smithy.Schema
 
 var SyncBlockerSummary = smithy.NewSchema(smithy.ShapeID{
@@ -722,7 +734,8 @@ var _SyncConfigurationList_member *smithy.Schema
 var SyncConfigurationStillExistsException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codestarconnections",
 	Name:      "SyncConfigurationStillExistsException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 409})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 409})
 var SyncConfigurationStillExistsException_Message *smithy.Schema
 
 var SyncConfigurationType = smithy.NewSchema(smithy.ShapeID{
@@ -769,7 +782,8 @@ var _Target = smithy.NewSchema(smithy.ShapeID{
 var ThrottlingException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codestarconnections",
 	Name:      "ThrottlingException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 429})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 429})
 var ThrottlingException_Message *smithy.Schema
 
 var _Timestamp = smithy.NewSchema(smithy.ShapeID{
@@ -798,19 +812,22 @@ var _Type = smithy.NewSchema(smithy.ShapeID{
 var UnsupportedOperationException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codestarconnections",
 	Name:      "UnsupportedOperationException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var UnsupportedOperationException_Message *smithy.Schema
 
 var UnsupportedProviderTypeException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codestarconnections",
 	Name:      "UnsupportedProviderTypeException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var UnsupportedProviderTypeException_Message *smithy.Schema
 
 var UpdateOutOfSyncException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codestarconnections",
 	Name:      "UpdateOutOfSyncException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 409})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 409})
 var UpdateOutOfSyncException_Message *smithy.Schema
 
 var _Url = smithy.NewSchema(smithy.ShapeID{

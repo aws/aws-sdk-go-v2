@@ -4,6 +4,8 @@ package resiliencehubv2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/resiliencehubv2/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -38,6 +40,21 @@ type DeleteTestInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteTestInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteTestRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteTestInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ServiceArn != nil {
+		s.WriteString(schemas.DeleteTestRequest_serviceArn, *v.ServiceArn)
+	}
+	if v.TestId != nil {
+		s.WriteString(schemas.DeleteTestRequest_testId, *v.TestId)
+	}
+}
+
 type DeleteTestOutput struct {
 
 	// The identifier of the deleted test.
@@ -51,13 +68,32 @@ type DeleteTestOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteTestOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteTestResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteTestOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TestId != nil {
+		s.WriteString(schemas.DeleteTestResponse_testId, *v.TestId)
+	}
+}
+func (v *DeleteTestOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteTestResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteTestResponse_testId:
+			v.TestId = new(string)
+			return d.ReadString(schemas.DeleteTestResponse_testId, v.TestId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteTestMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteTest{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteTest, schemas.DeleteTestRequest, schemas.DeleteTestResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteTest{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteTest, schemas.DeleteTestRequest, schemas.DeleteTestResponse), output: &DeleteTestOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

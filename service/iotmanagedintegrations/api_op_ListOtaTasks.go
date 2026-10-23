@@ -5,7 +5,9 @@ package iotmanagedintegrations
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/iotmanagedintegrations/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotmanagedintegrations/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -36,6 +38,21 @@ type ListOtaTasksInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListOtaTasksInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListOtaTasksRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListOtaTasksInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListOtaTasksRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListOtaTasksRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListOtaTasksOutput struct {
 
 	// A token that can be used to retrieve the next set of results.
@@ -50,13 +67,35 @@ type ListOtaTasksOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListOtaTasksOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListOtaTasksResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListOtaTasksOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListOtaTasksResponse_NextToken, *v.NextToken)
+	}
+	serializeOtaTaskListDefinition(s, schemas.ListOtaTasksResponse_Tasks, v.Tasks)
+}
+func (v *ListOtaTasksOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListOtaTasksResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListOtaTasksResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListOtaTasksResponse_NextToken, v.NextToken)
+		case schemas.ListOtaTasksResponse_Tasks:
+			return deserializeOtaTaskListDefinition(d, schemas.ListOtaTasksResponse_Tasks, &v.Tasks)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListOtaTasksMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListOtaTasks{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListOtaTasks, schemas.ListOtaTasksRequest, schemas.ListOtaTasksResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListOtaTasks{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListOtaTasks, schemas.ListOtaTasksRequest, schemas.ListOtaTasksResponse), output: &ListOtaTasksOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

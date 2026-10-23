@@ -5,7 +5,9 @@ package bedrock
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/bedrock/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrock/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -61,6 +63,36 @@ type ListImportedModelsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListImportedModelsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListImportedModelsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListImportedModelsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreationTimeAfter != nil {
+		s.WriteTime(schemas.ListImportedModelsRequest_creationTimeAfter, *v.CreationTimeAfter)
+	}
+	if v.CreationTimeBefore != nil {
+		s.WriteTime(schemas.ListImportedModelsRequest_creationTimeBefore, *v.CreationTimeBefore)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListImportedModelsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NameContains != nil {
+		s.WriteString(schemas.ListImportedModelsRequest_nameContains, *v.NameContains)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListImportedModelsRequest_nextToken, *v.NextToken)
+	}
+	if v.SortBy != "" {
+		s.WriteString(schemas.ListImportedModelsRequest_sortBy, string(v.SortBy))
+	}
+	if v.SortOrder != "" {
+		s.WriteString(schemas.ListImportedModelsRequest_sortOrder, string(v.SortOrder))
+	}
+}
+
 type ListImportedModelsOutput struct {
 
 	// Model summaries.
@@ -77,13 +109,35 @@ type ListImportedModelsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListImportedModelsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListImportedModelsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListImportedModelsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeImportedModelSummaryList(s, schemas.ListImportedModelsResponse_modelSummaries, v.ModelSummaries)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListImportedModelsResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListImportedModelsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListImportedModelsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListImportedModelsResponse_modelSummaries:
+			return deserializeImportedModelSummaryList(d, schemas.ListImportedModelsResponse_modelSummaries, &v.ModelSummaries)
+		case schemas.ListImportedModelsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListImportedModelsResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListImportedModelsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListImportedModels{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListImportedModels, schemas.ListImportedModelsRequest, schemas.ListImportedModelsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListImportedModels{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListImportedModels, schemas.ListImportedModelsRequest, schemas.ListImportedModelsResponse), output: &ListImportedModelsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

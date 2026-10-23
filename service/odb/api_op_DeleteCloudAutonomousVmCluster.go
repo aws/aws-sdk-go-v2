@@ -4,6 +4,8 @@ package odb
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/odb/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -33,6 +35,18 @@ type DeleteCloudAutonomousVmClusterInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteCloudAutonomousVmClusterInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteCloudAutonomousVmClusterInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteCloudAutonomousVmClusterInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CloudAutonomousVmClusterId != nil {
+		s.WriteString(schemas.DeleteCloudAutonomousVmClusterInput_cloudAutonomousVmClusterId, *v.CloudAutonomousVmClusterId)
+	}
+}
+
 type DeleteCloudAutonomousVmClusterOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -40,13 +54,26 @@ type DeleteCloudAutonomousVmClusterOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteCloudAutonomousVmClusterOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteCloudAutonomousVmClusterOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteCloudAutonomousVmClusterOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteCloudAutonomousVmClusterOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteCloudAutonomousVmClusterOutput, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteCloudAutonomousVmClusterMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpDeleteCloudAutonomousVmCluster{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteCloudAutonomousVmCluster, schemas.DeleteCloudAutonomousVmClusterInput, schemas.DeleteCloudAutonomousVmClusterOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpDeleteCloudAutonomousVmCluster{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteCloudAutonomousVmCluster, schemas.DeleteCloudAutonomousVmClusterInput, schemas.DeleteCloudAutonomousVmClusterOutput), output: &DeleteCloudAutonomousVmClusterOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

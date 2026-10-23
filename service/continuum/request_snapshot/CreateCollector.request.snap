@@ -1,0 +1,5 @@
+POST /collectors
+
+Content-Type: application/json
+
+{"clientToken":"__ClientToken__","k8ClusterRole":{"externalId":"__ExternalId__","roleArn":"__RoleArn__"},"type":"AWS_COLLECTOR"}

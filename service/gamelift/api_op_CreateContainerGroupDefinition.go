@@ -71,7 +71,7 @@ import (
 //
 //   - TotalMemoryLimitMebibytes
 //
-//   - TotalVcpuLimit
+//   - Either TotalVcpuLimit or a Vcpu value for the game server container
 //
 //   - At least one GameServerContainerDefinition
 //
@@ -160,16 +160,6 @@ type CreateContainerGroupDefinitionInput struct {
 	// This member is required.
 	TotalMemoryLimitMebibytes *int32
 
-	// The maximum amount of vCPU units to allocate to the container group (1 vCPU is
-	// equal to 1024 CPU units). All containers in the group share this memory. If you
-	// specify vCPU limits for individual containers, the total value must be equal to
-	// or greater than the sum of the CPU limits for all containers in the group.
-	//
-	// Default value: 1
-	//
-	// This member is required.
-	TotalVcpuLimit *float64
-
 	// The type of container group being defined. Container group type determines how
 	// Amazon GameLift Servers deploys the container group on each fleet instance.
 	//
@@ -188,12 +178,30 @@ type CreateContainerGroupDefinitionInput struct {
 	SupportContainerDefinitions []types.SupportContainerDefinitionInput
 
 	// A list of labels to assign to the container group definition resource. Tags are
-	// developer-defined key-value pairs. Tagging Amazon Web Services resources are
+	// developer-defined key-value pairs. Tagging Amazon Web Services resources is
 	// useful for resource management, access management and cost allocation. For more
 	// information, see [Tagging Amazon Web Services Resources]in the Amazon Web Services General Reference.
 	//
 	// [Tagging Amazon Web Services Resources]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
 	Tags []types.Tag
+
+	// The maximum amount of vCPU units to allocate to the container group (1 vCPU is
+	// equal to 1024 CPU units). All containers in the group share these resources. If
+	// you set vCPU reservations for individual containers, the total value must be
+	// equal to or greater than the sum of the Vcpu values for all containers in the
+	// group.
+	//
+	// This property is required for a per-instance container group.
+	//
+	// For a game server container group, Amazon GameLift Servers requires either a
+	// total vCPU limit or a Vcpu value for the game server container. If you set a
+	// total vCPU limit for a game server container group, Amazon GameLift Servers uses
+	// this value to calculate how many game server container groups fit on an
+	// instance. If you don't set a total vCPU limit, the group's containers can use up
+	// to the instance's available vCPU, and Amazon GameLift Servers uses the sum of
+	// the containers' Vcpu values to calculate how many game server container groups
+	// fit on an instance.
+	TotalVcpuLimit *float64
 
 	// A description for the initial version of this container group definition.
 	VersionDescription *string

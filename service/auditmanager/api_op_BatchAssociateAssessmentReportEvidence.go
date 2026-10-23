@@ -4,7 +4,9 @@ package auditmanager
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/auditmanager/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/auditmanager/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -46,6 +48,22 @@ type BatchAssociateAssessmentReportEvidenceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchAssociateAssessmentReportEvidenceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchAssociateAssessmentReportEvidenceRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchAssociateAssessmentReportEvidenceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AssessmentId != nil {
+		s.WriteString(schemas.BatchAssociateAssessmentReportEvidenceRequest_assessmentId, *v.AssessmentId)
+	}
+	if v.EvidenceFolderId != nil {
+		s.WriteString(schemas.BatchAssociateAssessmentReportEvidenceRequest_evidenceFolderId, *v.EvidenceFolderId)
+	}
+	serializeEvidenceIds(s, schemas.BatchAssociateAssessmentReportEvidenceRequest_evidenceIds, v.EvidenceIds)
+}
+
 type BatchAssociateAssessmentReportEvidenceOutput struct {
 
 	//  A list of errors that the BatchAssociateAssessmentReportEvidence API returned.
@@ -60,13 +78,32 @@ type BatchAssociateAssessmentReportEvidenceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchAssociateAssessmentReportEvidenceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchAssociateAssessmentReportEvidenceResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchAssociateAssessmentReportEvidenceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAssessmentReportEvidenceErrors(s, schemas.BatchAssociateAssessmentReportEvidenceResponse_errors, v.Errors)
+	serializeEvidenceIds(s, schemas.BatchAssociateAssessmentReportEvidenceResponse_evidenceIds, v.EvidenceIds)
+}
+func (v *BatchAssociateAssessmentReportEvidenceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchAssociateAssessmentReportEvidenceResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchAssociateAssessmentReportEvidenceResponse_errors:
+			return deserializeAssessmentReportEvidenceErrors(d, schemas.BatchAssociateAssessmentReportEvidenceResponse_errors, &v.Errors)
+		case schemas.BatchAssociateAssessmentReportEvidenceResponse_evidenceIds:
+			return deserializeEvidenceIds(d, schemas.BatchAssociateAssessmentReportEvidenceResponse_evidenceIds, &v.EvidenceIds)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationBatchAssociateAssessmentReportEvidenceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpBatchAssociateAssessmentReportEvidence{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchAssociateAssessmentReportEvidence, schemas.BatchAssociateAssessmentReportEvidenceRequest, schemas.BatchAssociateAssessmentReportEvidenceResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpBatchAssociateAssessmentReportEvidence{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchAssociateAssessmentReportEvidence, schemas.BatchAssociateAssessmentReportEvidenceRequest, schemas.BatchAssociateAssessmentReportEvidenceResponse), output: &BatchAssociateAssessmentReportEvidenceOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -5,7 +5,9 @@ package resiliencehub
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/resiliencehub/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/resiliencehub/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -45,6 +47,34 @@ type DeleteAppAssessmentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteAppAssessmentInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteAppAssessmentRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteAppAssessmentInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AssessmentArn != nil {
+		s.WriteString(schemas.DeleteAppAssessmentRequest_assessmentArn, *v.AssessmentArn)
+	}
+	if v.ClientToken != nil {
+		s.WriteString(schemas.DeleteAppAssessmentRequest_clientToken, *v.ClientToken)
+	}
+}
+func (v *DeleteAppAssessmentInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteAppAssessmentRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteAppAssessmentRequest_assessmentArn:
+			v.AssessmentArn = new(string)
+			return d.ReadString(schemas.DeleteAppAssessmentRequest_assessmentArn, v.AssessmentArn)
+		case schemas.DeleteAppAssessmentRequest_clientToken:
+			v.ClientToken = new(string)
+			return d.ReadString(schemas.DeleteAppAssessmentRequest_clientToken, v.ClientToken)
+		}
+		return nil
+	})
+}
+
 type DeleteAppAssessmentOutput struct {
 
 	// Amazon Resource Name (ARN) of the assessment. The format for this ARN is: arn:
@@ -67,13 +97,42 @@ type DeleteAppAssessmentOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteAppAssessmentOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteAppAssessmentResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteAppAssessmentOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AssessmentArn != nil {
+		s.WriteString(schemas.DeleteAppAssessmentResponse_assessmentArn, *v.AssessmentArn)
+	}
+	if v.AssessmentStatus != "" {
+		s.WriteString(schemas.DeleteAppAssessmentResponse_assessmentStatus, string(v.AssessmentStatus))
+	}
+}
+func (v *DeleteAppAssessmentOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteAppAssessmentResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteAppAssessmentResponse_assessmentArn:
+			v.AssessmentArn = new(string)
+			return d.ReadString(schemas.DeleteAppAssessmentResponse_assessmentArn, v.AssessmentArn)
+		case schemas.DeleteAppAssessmentResponse_assessmentStatus:
+			var ev string
+			if err := d.ReadString(schemas.DeleteAppAssessmentResponse_assessmentStatus, &ev); err != nil {
+				return err
+			}
+			v.AssessmentStatus = types.AssessmentStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteAppAssessmentMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteAppAssessment{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteAppAssessment, schemas.DeleteAppAssessmentRequest, schemas.DeleteAppAssessmentResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteAppAssessment{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteAppAssessment, schemas.DeleteAppAssessmentRequest, schemas.DeleteAppAssessmentResponse), output: &DeleteAppAssessmentOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

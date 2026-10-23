@@ -4,6 +4,8 @@ package eks
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/eks/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -44,6 +46,24 @@ type DisassociateAccessPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DisassociateAccessPolicyInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DisassociateAccessPolicyRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DisassociateAccessPolicyInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClusterName != nil {
+		s.WriteString(schemas.DisassociateAccessPolicyRequest_clusterName, *v.ClusterName)
+	}
+	if v.PolicyArn != nil {
+		s.WriteString(schemas.DisassociateAccessPolicyRequest_policyArn, *v.PolicyArn)
+	}
+	if v.PrincipalArn != nil {
+		s.WriteString(schemas.DisassociateAccessPolicyRequest_principalArn, *v.PrincipalArn)
+	}
+}
+
 type DisassociateAccessPolicyOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -51,13 +71,26 @@ type DisassociateAccessPolicyOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DisassociateAccessPolicyOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DisassociateAccessPolicyResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DisassociateAccessPolicyOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DisassociateAccessPolicyOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DisassociateAccessPolicyResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDisassociateAccessPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDisassociateAccessPolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisassociateAccessPolicy, schemas.DisassociateAccessPolicyRequest, schemas.DisassociateAccessPolicyResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDisassociateAccessPolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisassociateAccessPolicy, schemas.DisassociateAccessPolicyRequest, schemas.DisassociateAccessPolicyResponse), output: &DisassociateAccessPolicyOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

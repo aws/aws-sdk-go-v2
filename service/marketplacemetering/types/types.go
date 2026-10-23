@@ -9,6 +9,40 @@ import (
 	"time"
 )
 
+// Metadata associated with a resolved customer. Includes the AgreementId of the
+// Amazon Web Services Marketplace agreement the customer accepted.
+type Metadata struct {
+
+	// The unique identifier of the Amazon Web Services Marketplace agreement the
+	// customer accepted. Use it to call Amazon Web Services Marketplace Agreement
+	// APIs.
+	AgreementId *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *Metadata) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Metadata)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Metadata) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AgreementId != nil {
+		s.WriteString(schemas.Metadata_AgreementId, *v.AgreementId)
+	}
+}
+func (v *Metadata) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Metadata, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Metadata_AgreementId:
+			v.AgreementId = new(string)
+			return d.ReadString(schemas.Metadata_AgreementId, v.AgreementId)
+		}
+		return nil
+	})
+}
+
 // Metadata assigned to an allocation. Each tag is made up of a key and a value .
 type Tag struct {
 

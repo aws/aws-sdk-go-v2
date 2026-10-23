@@ -1,3 +1,62 @@
+# v1.284.2 (2026-10-22)
+
+* **Bug Fix**: Update smithy-go to v1.28.6
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.284.1 (2026-10-19)
+
+* **Bug Fix**: Allow lists with null values to deserialize into its zero value instead of failing
+
+# v1.284.0 (2026-10-13)
+
+* **Feature**: Adds Amazon Athena, Cleanup, ForEach, and Amazon EMR Serverless step metadata, ForEach iteration context, and the CompletedWithFailures execution status to SageMaker Pipelines.
+
+# v1.283.0 (2026-10-12)
+
+* **Feature**: Amazon SageMaker Training Session is a managed service for training on shared GPU infrastructure. It provides full lifecycle management of training sessions and exposes low-level primitive APIs for operations like forward-backward passes, optimizer steps, and state management.
+
+# v1.282.3 (2026-10-09.2)
+
+* **Dependency Update**: Update to smithy-go v1.28.5.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.282.2 (2026-10-08)
+
+* **Dependency Update**: Update to smithy-go v1.28.4.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.282.1 (2026-10-06)
+
+* No change notes available for this release.
+
+# v1.282.0 (2026-10-01)
+
+* **Feature**: Release support for c8a.16xlarge and m8a.16xlarge instance types for SageMaker HyperPod
+
+# v1.281.0 (2026-09-30)
+
+* **Feature**: This feature enables customers to modify their accounting database via API.
+
+# v1.280.0 (2026-09-29)
+
+* **Feature**: Adds support for cpu flex type instances on SageMaker Training and Processing. Also contains minor updates to DescribeTrainingPlan to support ARN inputs.
+
+# v1.279.1 (2026-09-24)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.279.0 (2026-09-21)
+
+* **Feature**: Add support for r6i, m8i, c8i, r8i instance types in Training and Processing
+
+# v1.278.0 (2026-09-18)
+
+* **Feature**: Adds support for the hub content resource in SageMaker Search.
+
+# v1.277.0 (2026-09-10)
+
+* **Feature**: This release adds the ability for customers to attach customer owned Elastic Network Interfaces (ENIs) to HyperPod cluster nodes.
+
 # v1.276.0 (2026-09-09)
 
 * **Feature**: Stop registering the `retry.MetricsHeader` middleware in generated clients. The `Amz-Sdk-Request` header is now set by the retry middleware itself.

@@ -8,6 +8,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/opensearchserverless/schemas"
 	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
+	"time"
 )
 
 // Details about an OpenSearch Serverless access policy.
@@ -2015,6 +2016,814 @@ func (v *IamIdentityCenterConfigOptions) Deserialize(d smithy.ShapeDeserializer)
 	})
 }
 
+// An active alert about a running ingestion — operational issues or updates to
+// processing state. Cleared when the issue resolves.
+type IngestionAlert struct {
+
+	// The code that identifies the alert.
+	Code IngestionAlertCode
+
+	// A description of the alert.
+	Message *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *IngestionAlert) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.IngestionAlert)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *IngestionAlert) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Code != "" {
+		s.WriteString(schemas.IngestionAlert_code, string(v.Code))
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.IngestionAlert_message, *v.Message)
+	}
+}
+func (v *IngestionAlert) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.IngestionAlert, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.IngestionAlert_code:
+			var ev string
+			if err := d.ReadString(schemas.IngestionAlert_code, &ev); err != nil {
+				return err
+			}
+			v.Code = IngestionAlertCode(ev)
+			return nil
+		case schemas.IngestionAlert_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.IngestionAlert_message, v.Message)
+		}
+		return nil
+	})
+}
+
+// A terminal failure reason explaining why an ingestion stopped.
+type IngestionFailureReason struct {
+
+	// The code that identifies the reason for the failure.
+	Code IngestionFailureCode
+
+	// A description of the reason for the failure.
+	Message *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *IngestionFailureReason) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.IngestionFailureReason)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *IngestionFailureReason) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Code != "" {
+		s.WriteString(schemas.IngestionFailureReason_code, string(v.Code))
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.IngestionFailureReason_message, *v.Message)
+	}
+}
+func (v *IngestionFailureReason) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.IngestionFailureReason, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.IngestionFailureReason_code:
+			var ev string
+			if err := d.ReadString(schemas.IngestionFailureReason_code, &ev); err != nil {
+				return err
+			}
+			v.Code = IngestionFailureCode(ev)
+			return nil
+		case schemas.IngestionFailureReason_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.IngestionFailureReason_message, v.Message)
+		}
+		return nil
+	})
+}
+
+// Details about an ingestion job.
+type IngestionJobDetail struct {
+
+	// Active alerts about operational issues that currently affect the ingestion job.
+	// Alerts are cleared when the issue is resolved.
+	ActiveAlerts []IngestionAlert
+
+	// The Amazon Resource Name (ARN) of the ingestion job.
+	Arn *string
+
+	// The unique identifier of the collection that the ingestion job belongs to.
+	CollectionId *string
+
+	// The date and time when the ingestion job was created.
+	CreatedAt *time.Time
+
+	// The name of the index where documents that fail to be ingested are recorded.
+	FailureIndexName *string
+
+	// The reasons that the ingestion job reached a terminal failure state, if
+	// applicable.
+	FailureReasons []IngestionFailureReason
+
+	// The name of the index that documents are ingested into.
+	IndexName *string
+
+	// The unique identifier of the ingestion job.
+	IngestionJobId *string
+
+	// The name of the ingestion job.
+	IngestionJobName *string
+
+	// The revision number of the ingestion job.
+	Revision *int64
+
+	// The Amazon S3 source that the ingestion job ingests data from.
+	Source *IngestionJobSource
+
+	// The current processing state of the ingestion job. For example, SCANNING ,
+	// INGESTION_IN_PROGRESS , or INGESTION_COMPLETE .
+	State IngestionState
+
+	// Processing statistics for the ingestion job, such as the number of Amazon S3
+	// objects discovered, ingested, and failed.
+	Statistics *IngestionStatistics
+
+	// The current lifecycle status of the ingestion job. For example, CREATING ,
+	// ACTIVE , COMPLETED , or CANCELLED .
+	Status IngestionJobStatus
+
+	// The date and time when the ingestion job was last updated.
+	UpdatedAt *time.Time
+
+	noSmithyDocumentSerde
+}
+
+func (v *IngestionJobDetail) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.IngestionJobDetail)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *IngestionJobDetail) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeIngestionAlerts(s, schemas.IngestionJobDetail_activeAlerts, v.ActiveAlerts)
+	if v.Arn != nil {
+		s.WriteString(schemas.IngestionJobDetail_arn, *v.Arn)
+	}
+	if v.CollectionId != nil {
+		s.WriteString(schemas.IngestionJobDetail_collectionId, *v.CollectionId)
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.IngestionJobDetail_createdAt, *v.CreatedAt)
+	}
+	if v.FailureIndexName != nil {
+		s.WriteString(schemas.IngestionJobDetail_failureIndexName, *v.FailureIndexName)
+	}
+	serializeIngestionFailureReasons(s, schemas.IngestionJobDetail_failureReasons, v.FailureReasons)
+	if v.IndexName != nil {
+		s.WriteString(schemas.IngestionJobDetail_indexName, *v.IndexName)
+	}
+	if v.IngestionJobId != nil {
+		s.WriteString(schemas.IngestionJobDetail_ingestionJobId, *v.IngestionJobId)
+	}
+	if v.IngestionJobName != nil {
+		s.WriteString(schemas.IngestionJobDetail_ingestionJobName, *v.IngestionJobName)
+	}
+	if v.Revision != nil {
+		s.WriteInt64(schemas.IngestionJobDetail_revision, *v.Revision)
+	}
+	if v.Source != nil {
+		s.WriteStruct(schemas.IngestionJobDetail_source)
+		v.Source.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.State != "" {
+		s.WriteString(schemas.IngestionJobDetail_state, string(v.State))
+	}
+	if v.Statistics != nil {
+		s.WriteStruct(schemas.IngestionJobDetail_statistics)
+		v.Statistics.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.IngestionJobDetail_status, string(v.Status))
+	}
+	if v.UpdatedAt != nil {
+		s.WriteTime(schemas.IngestionJobDetail_updatedAt, *v.UpdatedAt)
+	}
+}
+func (v *IngestionJobDetail) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.IngestionJobDetail, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.IngestionJobDetail_activeAlerts:
+			return deserializeIngestionAlerts(d, schemas.IngestionJobDetail_activeAlerts, &v.ActiveAlerts)
+		case schemas.IngestionJobDetail_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.IngestionJobDetail_arn, v.Arn)
+		case schemas.IngestionJobDetail_collectionId:
+			v.CollectionId = new(string)
+			return d.ReadString(schemas.IngestionJobDetail_collectionId, v.CollectionId)
+		case schemas.IngestionJobDetail_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.IngestionJobDetail_createdAt, v.CreatedAt)
+		case schemas.IngestionJobDetail_failureIndexName:
+			v.FailureIndexName = new(string)
+			return d.ReadString(schemas.IngestionJobDetail_failureIndexName, v.FailureIndexName)
+		case schemas.IngestionJobDetail_failureReasons:
+			return deserializeIngestionFailureReasons(d, schemas.IngestionJobDetail_failureReasons, &v.FailureReasons)
+		case schemas.IngestionJobDetail_indexName:
+			v.IndexName = new(string)
+			return d.ReadString(schemas.IngestionJobDetail_indexName, v.IndexName)
+		case schemas.IngestionJobDetail_ingestionJobId:
+			v.IngestionJobId = new(string)
+			return d.ReadString(schemas.IngestionJobDetail_ingestionJobId, v.IngestionJobId)
+		case schemas.IngestionJobDetail_ingestionJobName:
+			v.IngestionJobName = new(string)
+			return d.ReadString(schemas.IngestionJobDetail_ingestionJobName, v.IngestionJobName)
+		case schemas.IngestionJobDetail_revision:
+			v.Revision = new(int64)
+			return d.ReadInt64(schemas.IngestionJobDetail_revision, v.Revision)
+		case schemas.IngestionJobDetail_source:
+			v.Source = &IngestionJobSource{}
+			return v.Source.Deserialize(d)
+		case schemas.IngestionJobDetail_state:
+			var ev string
+			if err := d.ReadString(schemas.IngestionJobDetail_state, &ev); err != nil {
+				return err
+			}
+			v.State = IngestionState(ev)
+			return nil
+		case schemas.IngestionJobDetail_statistics:
+			v.Statistics = &IngestionStatistics{}
+			return v.Statistics.Deserialize(d)
+		case schemas.IngestionJobDetail_status:
+			var ev string
+			if err := d.ReadString(schemas.IngestionJobDetail_status, &ev); err != nil {
+				return err
+			}
+			v.Status = IngestionJobStatus(ev)
+			return nil
+		case schemas.IngestionJobDetail_updatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.IngestionJobDetail_updatedAt, v.UpdatedAt)
+		}
+		return nil
+	})
+}
+
+// The Amazon S3 source configuration for an ingestion job.
+type IngestionJobS3Source struct {
+
+	// The name or Amazon Resource Name (ARN) of the Amazon S3 bucket to ingest data
+	// from.
+	Bucket *string
+
+	// The Amazon Web Services account ID that owns the Amazon S3 bucket.
+	BucketOwnerAccountId *string
+
+	// A key prefix that limits ingestion to objects in the Amazon S3 bucket whose
+	// keys begin with the prefix.
+	KeyPrefix *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *IngestionJobS3Source) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.IngestionJobS3Source)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *IngestionJobS3Source) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Bucket != nil {
+		s.WriteString(schemas.IngestionJobS3Source_bucket, *v.Bucket)
+	}
+	if v.BucketOwnerAccountId != nil {
+		s.WriteString(schemas.IngestionJobS3Source_bucketOwnerAccountId, *v.BucketOwnerAccountId)
+	}
+	if v.KeyPrefix != nil {
+		s.WriteString(schemas.IngestionJobS3Source_keyPrefix, *v.KeyPrefix)
+	}
+}
+func (v *IngestionJobS3Source) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.IngestionJobS3Source, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.IngestionJobS3Source_bucket:
+			v.Bucket = new(string)
+			return d.ReadString(schemas.IngestionJobS3Source_bucket, v.Bucket)
+		case schemas.IngestionJobS3Source_bucketOwnerAccountId:
+			v.BucketOwnerAccountId = new(string)
+			return d.ReadString(schemas.IngestionJobS3Source_bucketOwnerAccountId, v.BucketOwnerAccountId)
+		case schemas.IngestionJobS3Source_keyPrefix:
+			v.KeyPrefix = new(string)
+			return d.ReadString(schemas.IngestionJobS3Source_keyPrefix, v.KeyPrefix)
+		}
+		return nil
+	})
+}
+
+// The source that an ingestion job ingests data from.
+type IngestionJobSource struct {
+
+	// The Amazon S3 source configuration for the ingestion job.
+	//
+	// This member is required.
+	S3 *IngestionJobS3Source
+
+	noSmithyDocumentSerde
+}
+
+func (v *IngestionJobSource) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.IngestionJobSource)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *IngestionJobSource) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.S3 != nil {
+		s.WriteStruct(schemas.IngestionJobSource_s3)
+		v.S3.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *IngestionJobSource) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.IngestionJobSource, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.IngestionJobSource_s3:
+			v.S3 = &IngestionJobS3Source{}
+			return v.S3.Deserialize(d)
+		}
+		return nil
+	})
+}
+
+// Summary information about an ingestion job.
+type IngestionJobSummary struct {
+
+	// The Amazon Resource Name (ARN) of the ingestion job.
+	Arn *string
+
+	// The date and time when the ingestion job was created.
+	CreatedAt *time.Time
+
+	// The name of the index that documents are ingested into.
+	IndexName *string
+
+	// The unique identifier of the ingestion job.
+	IngestionJobId *string
+
+	// The name of the ingestion job.
+	IngestionJobName *string
+
+	// The current lifecycle status of the ingestion job.
+	Status IngestionJobStatus
+
+	// The date and time when the ingestion job was last updated.
+	UpdatedAt *time.Time
+
+	noSmithyDocumentSerde
+}
+
+func (v *IngestionJobSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.IngestionJobSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *IngestionJobSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.IngestionJobSummary_arn, *v.Arn)
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.IngestionJobSummary_createdAt, *v.CreatedAt)
+	}
+	if v.IndexName != nil {
+		s.WriteString(schemas.IngestionJobSummary_indexName, *v.IndexName)
+	}
+	if v.IngestionJobId != nil {
+		s.WriteString(schemas.IngestionJobSummary_ingestionJobId, *v.IngestionJobId)
+	}
+	if v.IngestionJobName != nil {
+		s.WriteString(schemas.IngestionJobSummary_ingestionJobName, *v.IngestionJobName)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.IngestionJobSummary_status, string(v.Status))
+	}
+	if v.UpdatedAt != nil {
+		s.WriteTime(schemas.IngestionJobSummary_updatedAt, *v.UpdatedAt)
+	}
+}
+func (v *IngestionJobSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.IngestionJobSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.IngestionJobSummary_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.IngestionJobSummary_arn, v.Arn)
+		case schemas.IngestionJobSummary_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.IngestionJobSummary_createdAt, v.CreatedAt)
+		case schemas.IngestionJobSummary_indexName:
+			v.IndexName = new(string)
+			return d.ReadString(schemas.IngestionJobSummary_indexName, v.IndexName)
+		case schemas.IngestionJobSummary_ingestionJobId:
+			v.IngestionJobId = new(string)
+			return d.ReadString(schemas.IngestionJobSummary_ingestionJobId, v.IngestionJobId)
+		case schemas.IngestionJobSummary_ingestionJobName:
+			v.IngestionJobName = new(string)
+			return d.ReadString(schemas.IngestionJobSummary_ingestionJobName, v.IngestionJobName)
+		case schemas.IngestionJobSummary_status:
+			var ev string
+			if err := d.ReadString(schemas.IngestionJobSummary_status, &ev); err != nil {
+				return err
+			}
+			v.Status = IngestionJobStatus(ev)
+			return nil
+		case schemas.IngestionJobSummary_updatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.IngestionJobSummary_updatedAt, v.UpdatedAt)
+		}
+		return nil
+	})
+}
+
+// Processing statistics for an ingestion job or ingestion stream.
+type IngestionStatistics struct {
+
+	// Processing statistics for the Amazon S3 source.
+	S3 *S3Statistics
+
+	noSmithyDocumentSerde
+}
+
+func (v *IngestionStatistics) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.IngestionStatistics)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *IngestionStatistics) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.S3 != nil {
+		s.WriteStruct(schemas.IngestionStatistics_s3)
+		v.S3.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *IngestionStatistics) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.IngestionStatistics, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.IngestionStatistics_s3:
+			v.S3 = &S3Statistics{}
+			return v.S3.Deserialize(d)
+		}
+		return nil
+	})
+}
+
+// Details about an ingestion stream.
+type IngestionStreamDetail struct {
+
+	// Active alerts about operational issues that currently affect the ingestion
+	// stream. Alerts are cleared when the issue is resolved.
+	ActiveAlerts []IngestionAlert
+
+	// The Amazon Resource Name (ARN) of the ingestion stream.
+	Arn *string
+
+	// The unique identifier of the collection that the ingestion stream belongs to.
+	CollectionId *string
+
+	// The date and time when the ingestion stream was created.
+	CreatedAt *time.Time
+
+	// The name of the index where documents that fail to be ingested are recorded.
+	FailureIndexName *string
+
+	// The reasons that the ingestion stream reached a terminal failure state, if
+	// applicable.
+	FailureReasons []IngestionFailureReason
+
+	// The name of the index that documents are ingested into.
+	IndexName *string
+
+	// The unique identifier of the ingestion stream.
+	IngestionStreamId *string
+
+	// The name of the ingestion stream.
+	IngestionStreamName *string
+
+	// The revision number of the ingestion stream.
+	Revision *int64
+
+	// The Amazon Resource Name (ARN) of the IAM role that OpenSearch Serverless
+	// assumes to read data from the source.
+	RoleArn *string
+
+	// The Amazon S3 source that the ingestion stream ingests data from.
+	Source *IngestionStreamSource
+
+	// The current processing state of the ingestion stream. For example, STARTING or
+	// INGESTION_IN_PROGRESS .
+	State IngestionState
+
+	// Processing statistics for the ingestion stream, such as the number of Amazon S3
+	// objects discovered, ingested, and failed.
+	Statistics *IngestionStatistics
+
+	// The current lifecycle status of the ingestion stream. For example, CREATING ,
+	// ACTIVE , or DELETING .
+	Status IngestionStreamStatus
+
+	// The date and time when the ingestion stream was last updated.
+	UpdatedAt *time.Time
+
+	noSmithyDocumentSerde
+}
+
+func (v *IngestionStreamDetail) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.IngestionStreamDetail)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *IngestionStreamDetail) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeIngestionAlerts(s, schemas.IngestionStreamDetail_activeAlerts, v.ActiveAlerts)
+	if v.Arn != nil {
+		s.WriteString(schemas.IngestionStreamDetail_arn, *v.Arn)
+	}
+	if v.CollectionId != nil {
+		s.WriteString(schemas.IngestionStreamDetail_collectionId, *v.CollectionId)
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.IngestionStreamDetail_createdAt, *v.CreatedAt)
+	}
+	if v.FailureIndexName != nil {
+		s.WriteString(schemas.IngestionStreamDetail_failureIndexName, *v.FailureIndexName)
+	}
+	serializeIngestionFailureReasons(s, schemas.IngestionStreamDetail_failureReasons, v.FailureReasons)
+	if v.IndexName != nil {
+		s.WriteString(schemas.IngestionStreamDetail_indexName, *v.IndexName)
+	}
+	if v.IngestionStreamId != nil {
+		s.WriteString(schemas.IngestionStreamDetail_ingestionStreamId, *v.IngestionStreamId)
+	}
+	if v.IngestionStreamName != nil {
+		s.WriteString(schemas.IngestionStreamDetail_ingestionStreamName, *v.IngestionStreamName)
+	}
+	if v.Revision != nil {
+		s.WriteInt64(schemas.IngestionStreamDetail_revision, *v.Revision)
+	}
+	if v.RoleArn != nil {
+		s.WriteString(schemas.IngestionStreamDetail_roleArn, *v.RoleArn)
+	}
+	if v.Source != nil {
+		s.WriteStruct(schemas.IngestionStreamDetail_source)
+		v.Source.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.State != "" {
+		s.WriteString(schemas.IngestionStreamDetail_state, string(v.State))
+	}
+	if v.Statistics != nil {
+		s.WriteStruct(schemas.IngestionStreamDetail_statistics)
+		v.Statistics.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.IngestionStreamDetail_status, string(v.Status))
+	}
+	if v.UpdatedAt != nil {
+		s.WriteTime(schemas.IngestionStreamDetail_updatedAt, *v.UpdatedAt)
+	}
+}
+func (v *IngestionStreamDetail) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.IngestionStreamDetail, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.IngestionStreamDetail_activeAlerts:
+			return deserializeIngestionAlerts(d, schemas.IngestionStreamDetail_activeAlerts, &v.ActiveAlerts)
+		case schemas.IngestionStreamDetail_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.IngestionStreamDetail_arn, v.Arn)
+		case schemas.IngestionStreamDetail_collectionId:
+			v.CollectionId = new(string)
+			return d.ReadString(schemas.IngestionStreamDetail_collectionId, v.CollectionId)
+		case schemas.IngestionStreamDetail_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.IngestionStreamDetail_createdAt, v.CreatedAt)
+		case schemas.IngestionStreamDetail_failureIndexName:
+			v.FailureIndexName = new(string)
+			return d.ReadString(schemas.IngestionStreamDetail_failureIndexName, v.FailureIndexName)
+		case schemas.IngestionStreamDetail_failureReasons:
+			return deserializeIngestionFailureReasons(d, schemas.IngestionStreamDetail_failureReasons, &v.FailureReasons)
+		case schemas.IngestionStreamDetail_indexName:
+			v.IndexName = new(string)
+			return d.ReadString(schemas.IngestionStreamDetail_indexName, v.IndexName)
+		case schemas.IngestionStreamDetail_ingestionStreamId:
+			v.IngestionStreamId = new(string)
+			return d.ReadString(schemas.IngestionStreamDetail_ingestionStreamId, v.IngestionStreamId)
+		case schemas.IngestionStreamDetail_ingestionStreamName:
+			v.IngestionStreamName = new(string)
+			return d.ReadString(schemas.IngestionStreamDetail_ingestionStreamName, v.IngestionStreamName)
+		case schemas.IngestionStreamDetail_revision:
+			v.Revision = new(int64)
+			return d.ReadInt64(schemas.IngestionStreamDetail_revision, v.Revision)
+		case schemas.IngestionStreamDetail_roleArn:
+			v.RoleArn = new(string)
+			return d.ReadString(schemas.IngestionStreamDetail_roleArn, v.RoleArn)
+		case schemas.IngestionStreamDetail_source:
+			v.Source = &IngestionStreamSource{}
+			return v.Source.Deserialize(d)
+		case schemas.IngestionStreamDetail_state:
+			var ev string
+			if err := d.ReadString(schemas.IngestionStreamDetail_state, &ev); err != nil {
+				return err
+			}
+			v.State = IngestionState(ev)
+			return nil
+		case schemas.IngestionStreamDetail_statistics:
+			v.Statistics = &IngestionStatistics{}
+			return v.Statistics.Deserialize(d)
+		case schemas.IngestionStreamDetail_status:
+			var ev string
+			if err := d.ReadString(schemas.IngestionStreamDetail_status, &ev); err != nil {
+				return err
+			}
+			v.Status = IngestionStreamStatus(ev)
+			return nil
+		case schemas.IngestionStreamDetail_updatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.IngestionStreamDetail_updatedAt, v.UpdatedAt)
+		}
+		return nil
+	})
+}
+
+// The Amazon S3 source configuration for an ingestion stream.
+type IngestionStreamS3Source struct {
+
+	// The Amazon Resource Name (ARN) of the Amazon SQS queue that receives Amazon S3
+	// event notifications for the source buckets.
+	//
+	// This member is required.
+	SqsArn *string
+
+	// The configuration for each Amazon S3 bucket that the ingestion stream ingests
+	// data from.
+	Buckets []StreamBucketConfig
+
+	noSmithyDocumentSerde
+}
+
+func (v *IngestionStreamS3Source) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.IngestionStreamS3Source)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *IngestionStreamS3Source) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeStreamBucketConfigs(s, schemas.IngestionStreamS3Source_buckets, v.Buckets)
+	if v.SqsArn != nil {
+		s.WriteString(schemas.IngestionStreamS3Source_sqsArn, *v.SqsArn)
+	}
+}
+func (v *IngestionStreamS3Source) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.IngestionStreamS3Source, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.IngestionStreamS3Source_buckets:
+			return deserializeStreamBucketConfigs(d, schemas.IngestionStreamS3Source_buckets, &v.Buckets)
+		case schemas.IngestionStreamS3Source_sqsArn:
+			v.SqsArn = new(string)
+			return d.ReadString(schemas.IngestionStreamS3Source_sqsArn, v.SqsArn)
+		}
+		return nil
+	})
+}
+
+// The source that an ingestion stream ingests data from.
+type IngestionStreamSource struct {
+
+	// The Amazon S3 source configuration for the ingestion stream.
+	//
+	// This member is required.
+	S3 *IngestionStreamS3Source
+
+	noSmithyDocumentSerde
+}
+
+func (v *IngestionStreamSource) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.IngestionStreamSource)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *IngestionStreamSource) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.S3 != nil {
+		s.WriteStruct(schemas.IngestionStreamSource_s3)
+		v.S3.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *IngestionStreamSource) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.IngestionStreamSource, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.IngestionStreamSource_s3:
+			v.S3 = &IngestionStreamS3Source{}
+			return v.S3.Deserialize(d)
+		}
+		return nil
+	})
+}
+
+// Summary information about an ingestion stream.
+type IngestionStreamSummary struct {
+
+	// The Amazon Resource Name (ARN) of the ingestion stream.
+	Arn *string
+
+	// The date and time when the ingestion stream was created.
+	CreatedAt *time.Time
+
+	// The name of the index that documents are ingested into.
+	IndexName *string
+
+	// The unique identifier of the ingestion stream.
+	IngestionStreamId *string
+
+	// The name of the ingestion stream.
+	IngestionStreamName *string
+
+	// The current lifecycle status of the ingestion stream.
+	Status IngestionStreamStatus
+
+	// The date and time when the ingestion stream was last updated.
+	UpdatedAt *time.Time
+
+	noSmithyDocumentSerde
+}
+
+func (v *IngestionStreamSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.IngestionStreamSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *IngestionStreamSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.IngestionStreamSummary_arn, *v.Arn)
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.IngestionStreamSummary_createdAt, *v.CreatedAt)
+	}
+	if v.IndexName != nil {
+		s.WriteString(schemas.IngestionStreamSummary_indexName, *v.IndexName)
+	}
+	if v.IngestionStreamId != nil {
+		s.WriteString(schemas.IngestionStreamSummary_ingestionStreamId, *v.IngestionStreamId)
+	}
+	if v.IngestionStreamName != nil {
+		s.WriteString(schemas.IngestionStreamSummary_ingestionStreamName, *v.IngestionStreamName)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.IngestionStreamSummary_status, string(v.Status))
+	}
+	if v.UpdatedAt != nil {
+		s.WriteTime(schemas.IngestionStreamSummary_updatedAt, *v.UpdatedAt)
+	}
+}
+func (v *IngestionStreamSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.IngestionStreamSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.IngestionStreamSummary_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.IngestionStreamSummary_arn, v.Arn)
+		case schemas.IngestionStreamSummary_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.IngestionStreamSummary_createdAt, v.CreatedAt)
+		case schemas.IngestionStreamSummary_indexName:
+			v.IndexName = new(string)
+			return d.ReadString(schemas.IngestionStreamSummary_indexName, v.IndexName)
+		case schemas.IngestionStreamSummary_ingestionStreamId:
+			v.IngestionStreamId = new(string)
+			return d.ReadString(schemas.IngestionStreamSummary_ingestionStreamId, v.IngestionStreamId)
+		case schemas.IngestionStreamSummary_ingestionStreamName:
+			v.IngestionStreamName = new(string)
+			return d.ReadString(schemas.IngestionStreamSummary_ingestionStreamName, v.IngestionStreamName)
+		case schemas.IngestionStreamSummary_status:
+			var ev string
+			if err := d.ReadString(schemas.IngestionStreamSummary_status, &ev); err != nil {
+				return err
+			}
+			v.Status = IngestionStreamStatus(ev)
+			return nil
+		case schemas.IngestionStreamSummary_updatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.IngestionStreamSummary_updatedAt, v.UpdatedAt)
+		}
+		return nil
+	})
+}
+
 // Details about an OpenSearch Serverless lifecycle policy.
 type LifecyclePolicyDetail struct {
 
@@ -2375,6 +3184,55 @@ func (v *LifecyclePolicySummary) Deserialize(d smithy.ShapeDeserializer) error {
 			}
 			v.Type = LifecyclePolicyType(ev)
 			return nil
+		}
+		return nil
+	})
+}
+
+// Processing statistics for the Amazon S3 objects in an ingestion source.
+type S3Statistics struct {
+
+	// The number of Amazon S3 objects discovered for ingestion.
+	ObjectsDiscovered *int64
+
+	// The number of Amazon S3 objects that failed to be ingested.
+	ObjectsFailed *int64
+
+	// The number of Amazon S3 objects successfully ingested.
+	ObjectsIngested *int64
+
+	noSmithyDocumentSerde
+}
+
+func (v *S3Statistics) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.S3Statistics)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *S3Statistics) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ObjectsDiscovered != nil {
+		s.WriteInt64(schemas.S3Statistics_objectsDiscovered, *v.ObjectsDiscovered)
+	}
+	if v.ObjectsFailed != nil {
+		s.WriteInt64(schemas.S3Statistics_objectsFailed, *v.ObjectsFailed)
+	}
+	if v.ObjectsIngested != nil {
+		s.WriteInt64(schemas.S3Statistics_objectsIngested, *v.ObjectsIngested)
+	}
+}
+func (v *S3Statistics) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.S3Statistics, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.S3Statistics_objectsDiscovered:
+			v.ObjectsDiscovered = new(int64)
+			return d.ReadInt64(schemas.S3Statistics_objectsDiscovered, v.ObjectsDiscovered)
+		case schemas.S3Statistics_objectsFailed:
+			v.ObjectsFailed = new(int64)
+			return d.ReadInt64(schemas.S3Statistics_objectsFailed, v.ObjectsFailed)
+		case schemas.S3Statistics_objectsIngested:
+			v.ObjectsIngested = new(int64)
+			return d.ReadInt64(schemas.S3Statistics_objectsIngested, v.ObjectsIngested)
 		}
 		return nil
 	})
@@ -2892,6 +3750,66 @@ func (v *SecurityPolicySummary) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
+// S3 bucket configuration for SQS-driven ingestion. The scan mode controls only
+// the optional one-time delta scan of existing objects in this bucket.
+type StreamBucketConfig struct {
+
+	// The name or Amazon Resource Name (ARN) of the Amazon S3 bucket to ingest data
+	// from.
+	//
+	// This member is required.
+	Bucket *string
+
+	// The AWS account ID that owns the S3 bucket. Optional. If omitted, the control
+	// plane derives it from the account segment of sqsArn.
+	BucketOwnerAccountId *string
+
+	// Specifies whether to perform a one-time scan of the objects that already exist
+	// in the bucket before the stream begins processing Amazon S3 event notifications.
+	// If DISABLED , only new objects are ingested.
+	InitialScan InitialScan
+
+	noSmithyDocumentSerde
+}
+
+func (v *StreamBucketConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StreamBucketConfig)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StreamBucketConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Bucket != nil {
+		s.WriteString(schemas.StreamBucketConfig_bucket, *v.Bucket)
+	}
+	if v.BucketOwnerAccountId != nil {
+		s.WriteString(schemas.StreamBucketConfig_bucketOwnerAccountId, *v.BucketOwnerAccountId)
+	}
+	if v.InitialScan != "" {
+		s.WriteString(schemas.StreamBucketConfig_initialScan, string(v.InitialScan))
+	}
+}
+func (v *StreamBucketConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StreamBucketConfig, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StreamBucketConfig_bucket:
+			v.Bucket = new(string)
+			return d.ReadString(schemas.StreamBucketConfig_bucket, v.Bucket)
+		case schemas.StreamBucketConfig_bucketOwnerAccountId:
+			v.BucketOwnerAccountId = new(string)
+			return d.ReadString(schemas.StreamBucketConfig_bucketOwnerAccountId, v.BucketOwnerAccountId)
+		case schemas.StreamBucketConfig_initialScan:
+			var ev string
+			if err := d.ReadString(schemas.StreamBucketConfig_initialScan, &ev); err != nil {
+				return err
+			}
+			v.InitialScan = InitialScan(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // A map of key-value pairs associated to an OpenSearch Serverless resource.
 type Tag struct {
 
@@ -2954,6 +3872,10 @@ type UpdateCollectionDetail struct {
 	// The unique identifier of the collection.
 	Id *string
 
+	// The Amazon Resource Name (ARN) of the Amazon Web Services Key Management
+	// Service (Amazon Web Services KMS) key used to encrypt the collection.
+	KmsKeyArn *string
+
 	// The date and time when the collection was last modified.
 	LastModifiedDate *int64
 
@@ -2993,6 +3915,9 @@ func (v *UpdateCollectionDetail) SerializeMembers(s smithy.ShapeSerializer) {
 	}
 	if v.Id != nil {
 		s.WriteString(schemas.UpdateCollectionDetail_id, *v.Id)
+	}
+	if v.KmsKeyArn != nil {
+		s.WriteString(schemas.UpdateCollectionDetail_kmsKeyArn, *v.KmsKeyArn)
 	}
 	if v.LastModifiedDate != nil {
 		s.WriteInt64(schemas.UpdateCollectionDetail_lastModifiedDate, *v.LastModifiedDate)
@@ -3034,6 +3959,9 @@ func (v *UpdateCollectionDetail) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.UpdateCollectionDetail_id:
 			v.Id = new(string)
 			return d.ReadString(schemas.UpdateCollectionDetail_id, v.Id)
+		case schemas.UpdateCollectionDetail_kmsKeyArn:
+			v.KmsKeyArn = new(string)
+			return d.ReadString(schemas.UpdateCollectionDetail_kmsKeyArn, v.KmsKeyArn)
 		case schemas.UpdateCollectionDetail_lastModifiedDate:
 			v.LastModifiedDate = new(int64)
 			return d.ReadInt64(schemas.UpdateCollectionDetail_lastModifiedDate, v.LastModifiedDate)

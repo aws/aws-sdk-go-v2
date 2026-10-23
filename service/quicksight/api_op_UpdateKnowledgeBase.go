@@ -4,7 +4,9 @@ package quicksight
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/quicksight/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/quicksight/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -60,6 +62,45 @@ type UpdateKnowledgeBaseInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateKnowledgeBaseInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateKnowledgeBaseRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateKnowledgeBaseInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccessControlConfiguration != nil {
+		s.WriteStruct(schemas.UpdateKnowledgeBaseRequest_AccessControlConfiguration)
+		v.AccessControlConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.AwsAccountId != nil {
+		s.WriteString(schemas.UpdateKnowledgeBaseRequest_AwsAccountId, *v.AwsAccountId)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateKnowledgeBaseRequest_Description, *v.Description)
+	}
+	if v.IsEmailNotificationOptedForIngestionFailures != nil {
+		s.WriteBool(schemas.UpdateKnowledgeBaseRequest_IsEmailNotificationOptedForIngestionFailures, *v.IsEmailNotificationOptedForIngestionFailures)
+	}
+	if v.KnowledgeBaseConfiguration != nil {
+		s.WriteStruct(schemas.UpdateKnowledgeBaseRequest_KnowledgeBaseConfiguration)
+		v.KnowledgeBaseConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.KnowledgeBaseId != nil {
+		s.WriteString(schemas.UpdateKnowledgeBaseRequest_KnowledgeBaseId, *v.KnowledgeBaseId)
+	}
+	if v.MediaExtractionConfiguration != nil {
+		s.WriteStruct(schemas.UpdateKnowledgeBaseRequest_MediaExtractionConfiguration)
+		v.MediaExtractionConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateKnowledgeBaseRequest_Name, *v.Name)
+	}
+}
+
 type UpdateKnowledgeBaseOutput struct {
 
 	// The Amazon Resource Name (ARN) of the knowledge base.
@@ -84,13 +125,50 @@ type UpdateKnowledgeBaseOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateKnowledgeBaseOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateKnowledgeBaseResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateKnowledgeBaseOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.KnowledgeBaseArn != nil {
+		s.WriteString(schemas.UpdateKnowledgeBaseResponse_KnowledgeBaseArn, *v.KnowledgeBaseArn)
+	}
+	if v.KnowledgeBaseId != nil {
+		s.WriteString(schemas.UpdateKnowledgeBaseResponse_KnowledgeBaseId, *v.KnowledgeBaseId)
+	}
+	if v.RequestId != nil {
+		s.WriteString(schemas.UpdateKnowledgeBaseResponse_RequestId, *v.RequestId)
+	}
+	if v.Status != nil {
+		s.WriteInt32(schemas.UpdateKnowledgeBaseResponse_Status, *v.Status)
+	}
+}
+func (v *UpdateKnowledgeBaseOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateKnowledgeBaseResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateKnowledgeBaseResponse_KnowledgeBaseArn:
+			v.KnowledgeBaseArn = new(string)
+			return d.ReadString(schemas.UpdateKnowledgeBaseResponse_KnowledgeBaseArn, v.KnowledgeBaseArn)
+		case schemas.UpdateKnowledgeBaseResponse_KnowledgeBaseId:
+			v.KnowledgeBaseId = new(string)
+			return d.ReadString(schemas.UpdateKnowledgeBaseResponse_KnowledgeBaseId, v.KnowledgeBaseId)
+		case schemas.UpdateKnowledgeBaseResponse_RequestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.UpdateKnowledgeBaseResponse_RequestId, v.RequestId)
+		case schemas.UpdateKnowledgeBaseResponse_Status:
+			v.Status = new(int32)
+			return d.ReadInt32(schemas.UpdateKnowledgeBaseResponse_Status, v.Status)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateKnowledgeBaseMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateKnowledgeBase{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateKnowledgeBase, schemas.UpdateKnowledgeBaseRequest, schemas.UpdateKnowledgeBaseResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateKnowledgeBase{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateKnowledgeBase, schemas.UpdateKnowledgeBaseRequest, schemas.UpdateKnowledgeBaseResponse), output: &UpdateKnowledgeBaseOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

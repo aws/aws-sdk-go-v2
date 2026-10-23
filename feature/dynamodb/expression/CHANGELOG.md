@@ -1,3 +1,51 @@
+# v1.10.3 (2026-10-22)
+
+* **Bug Fix**: Update smithy-go to v1.28.6
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.10.2 (2026-10-20)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.10.1 (2026-10-19)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.10.0 (2026-10-14)
+
+* **Feature**: Support multi-attribute key conditions in `expression`. `KeyAnd` now accepts two or more conditions.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.9.11 (2026-10-09.2)
+
+* **Dependency Update**: Update to smithy-go v1.28.5.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.9.10 (2026-10-08)
+
+* **Dependency Update**: Update to smithy-go v1.28.4.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.9.9 (2026-10-06)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.9.8 (2026-09-30)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.9.7 (2026-09-24)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.9.6 (2026-09-21)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.9.5 (2026-09-15)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.9.4 (2026-09-09)
 
 * **Dependency Update**: Updated to the latest SDK module versions

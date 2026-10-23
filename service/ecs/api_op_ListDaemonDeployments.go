@@ -4,7 +4,9 @@ package ecs
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/ecs/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ecs/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -62,6 +64,30 @@ type ListDaemonDeploymentsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListDaemonDeploymentsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListDaemonDeploymentsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListDaemonDeploymentsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreatedAt != nil {
+		s.WriteStruct(schemas.ListDaemonDeploymentsRequest_createdAt)
+		v.CreatedAt.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DaemonArn != nil {
+		s.WriteString(schemas.ListDaemonDeploymentsRequest_daemonArn, *v.DaemonArn)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListDaemonDeploymentsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListDaemonDeploymentsRequest_nextToken, *v.NextToken)
+	}
+	serializeDaemonDeploymentStatusList(s, schemas.ListDaemonDeploymentsRequest_status, v.Status)
+}
+
 type ListDaemonDeploymentsOutput struct {
 
 	// The list of daemon deployment summaries.
@@ -78,13 +104,35 @@ type ListDaemonDeploymentsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListDaemonDeploymentsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListDaemonDeploymentsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListDaemonDeploymentsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDaemonDeploymentSummaryList(s, schemas.ListDaemonDeploymentsResponse_daemonDeployments, v.DaemonDeployments)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListDaemonDeploymentsResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListDaemonDeploymentsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListDaemonDeploymentsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListDaemonDeploymentsResponse_daemonDeployments:
+			return deserializeDaemonDeploymentSummaryList(d, schemas.ListDaemonDeploymentsResponse_daemonDeployments, &v.DaemonDeployments)
+		case schemas.ListDaemonDeploymentsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListDaemonDeploymentsResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListDaemonDeploymentsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListDaemonDeployments{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDaemonDeployments, schemas.ListDaemonDeploymentsRequest, schemas.ListDaemonDeploymentsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListDaemonDeployments{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDaemonDeployments, schemas.ListDaemonDeploymentsRequest, schemas.ListDaemonDeploymentsResponse), output: &ListDaemonDeploymentsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

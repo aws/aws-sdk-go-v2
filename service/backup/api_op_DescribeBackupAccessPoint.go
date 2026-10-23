@@ -4,7 +4,9 @@ package backup
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/backup/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/backup/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -38,6 +40,18 @@ type DescribeBackupAccessPointInput struct {
 	AccessPointArn *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DescribeBackupAccessPointInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeBackupAccessPointInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeBackupAccessPointInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccessPointArn != nil {
+		s.WriteString(schemas.DescribeBackupAccessPointInput_AccessPointArn, *v.AccessPointArn)
+	}
 }
 
 type DescribeBackupAccessPointOutput struct {
@@ -110,13 +124,93 @@ type DescribeBackupAccessPointOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeBackupAccessPointOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeBackupAccessPointResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeBackupAccessPointOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccessPointArn != nil {
+		s.WriteString(schemas.DescribeBackupAccessPointResponse_AccessPointArn, *v.AccessPointArn)
+	}
+	serializeAccessPointMetadataMap(s, schemas.DescribeBackupAccessPointResponse_AccessPointMetadata, v.AccessPointMetadata)
+	if v.BackupVaultArn != nil {
+		s.WriteString(schemas.DescribeBackupAccessPointResponse_BackupVaultArn, *v.BackupVaultArn)
+	}
+	if v.BackupVaultName != nil {
+		s.WriteString(schemas.DescribeBackupAccessPointResponse_BackupVaultName, *v.BackupVaultName)
+	}
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.DescribeBackupAccessPointResponse_CreationTime, *v.CreationTime)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.DescribeBackupAccessPointResponse_Name, *v.Name)
+	}
+	if v.RecoveryPointArn != nil {
+		s.WriteString(schemas.DescribeBackupAccessPointResponse_RecoveryPointArn, *v.RecoveryPointArn)
+	}
+	if v.ResourceArn != nil {
+		s.WriteString(schemas.DescribeBackupAccessPointResponse_ResourceArn, *v.ResourceArn)
+	}
+	if v.ResourceType != nil {
+		s.WriteString(schemas.DescribeBackupAccessPointResponse_ResourceType, *v.ResourceType)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.DescribeBackupAccessPointResponse_Status, string(v.Status))
+	}
+	if v.StatusMessage != nil {
+		s.WriteString(schemas.DescribeBackupAccessPointResponse_StatusMessage, *v.StatusMessage)
+	}
+}
+func (v *DescribeBackupAccessPointOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeBackupAccessPointResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeBackupAccessPointResponse_AccessPointArn:
+			v.AccessPointArn = new(string)
+			return d.ReadString(schemas.DescribeBackupAccessPointResponse_AccessPointArn, v.AccessPointArn)
+		case schemas.DescribeBackupAccessPointResponse_AccessPointMetadata:
+			return deserializeAccessPointMetadataMap(d, schemas.DescribeBackupAccessPointResponse_AccessPointMetadata, &v.AccessPointMetadata)
+		case schemas.DescribeBackupAccessPointResponse_BackupVaultArn:
+			v.BackupVaultArn = new(string)
+			return d.ReadString(schemas.DescribeBackupAccessPointResponse_BackupVaultArn, v.BackupVaultArn)
+		case schemas.DescribeBackupAccessPointResponse_BackupVaultName:
+			v.BackupVaultName = new(string)
+			return d.ReadString(schemas.DescribeBackupAccessPointResponse_BackupVaultName, v.BackupVaultName)
+		case schemas.DescribeBackupAccessPointResponse_CreationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.DescribeBackupAccessPointResponse_CreationTime, v.CreationTime)
+		case schemas.DescribeBackupAccessPointResponse_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.DescribeBackupAccessPointResponse_Name, v.Name)
+		case schemas.DescribeBackupAccessPointResponse_RecoveryPointArn:
+			v.RecoveryPointArn = new(string)
+			return d.ReadString(schemas.DescribeBackupAccessPointResponse_RecoveryPointArn, v.RecoveryPointArn)
+		case schemas.DescribeBackupAccessPointResponse_ResourceArn:
+			v.ResourceArn = new(string)
+			return d.ReadString(schemas.DescribeBackupAccessPointResponse_ResourceArn, v.ResourceArn)
+		case schemas.DescribeBackupAccessPointResponse_ResourceType:
+			v.ResourceType = new(string)
+			return d.ReadString(schemas.DescribeBackupAccessPointResponse_ResourceType, v.ResourceType)
+		case schemas.DescribeBackupAccessPointResponse_Status:
+			var ev string
+			if err := d.ReadString(schemas.DescribeBackupAccessPointResponse_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.AccessPointStatus(ev)
+			return nil
+		case schemas.DescribeBackupAccessPointResponse_StatusMessage:
+			v.StatusMessage = new(string)
+			return d.ReadString(schemas.DescribeBackupAccessPointResponse_StatusMessage, v.StatusMessage)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeBackupAccessPointMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeBackupAccessPoint{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeBackupAccessPoint, schemas.DescribeBackupAccessPointInput, schemas.DescribeBackupAccessPointResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeBackupAccessPoint{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeBackupAccessPoint, schemas.DescribeBackupAccessPointInput, schemas.DescribeBackupAccessPointResponse), output: &DescribeBackupAccessPointOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

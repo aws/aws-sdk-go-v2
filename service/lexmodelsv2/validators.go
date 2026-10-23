@@ -3569,6 +3569,11 @@ func validateBotLocaleImportSpecification(v *types.BotLocaleImportSpecification)
 			invalidParams.AddNested("UnifiedSpeechSettings", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.SpeakerDiarizationSettings != nil {
+		if err := validateSpeakerDiarizationSettings(v.SpeakerDiarizationSettings); err != nil {
+			invalidParams.AddNested("SpeakerDiarizationSettings", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -4889,9 +4894,7 @@ func validateIntentConfirmationSetting(v *types.IntentConfirmationSetting) error
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "IntentConfirmationSetting"}
-	if v.PromptSpecification == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("PromptSpecification"))
-	} else if v.PromptSpecification != nil {
+	if v.PromptSpecification != nil {
 		if err := validatePromptSpecification(v.PromptSpecification); err != nil {
 			invalidParams.AddNested("PromptSpecification", err.(smithy.InvalidParamsError))
 		}
@@ -6141,6 +6144,18 @@ func validateSlotValueSelectionSetting(v *types.SlotValueSelectionSetting) error
 	}
 }
 
+func validateSpeakerDiarizationSettings(v *types.SpeakerDiarizationSettings) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SpeakerDiarizationSettings"}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateSpecifications(v *types.Specifications) error {
 	if v == nil {
 		return nil
@@ -6779,16 +6794,12 @@ func validateWaitAndContinueSpecification(v *types.WaitAndContinueSpecification)
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "WaitAndContinueSpecification"}
-	if v.WaitingResponse == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("WaitingResponse"))
-	} else if v.WaitingResponse != nil {
+	if v.WaitingResponse != nil {
 		if err := validateResponseSpecification(v.WaitingResponse); err != nil {
 			invalidParams.AddNested("WaitingResponse", err.(smithy.InvalidParamsError))
 		}
 	}
-	if v.ContinueResponse == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ContinueResponse"))
-	} else if v.ContinueResponse != nil {
+	if v.ContinueResponse != nil {
 		if err := validateResponseSpecification(v.ContinueResponse); err != nil {
 			invalidParams.AddNested("ContinueResponse", err.(smithy.InvalidParamsError))
 		}
@@ -7016,6 +7027,11 @@ func validateOpCreateBotLocaleInput(v *CreateBotLocaleInput) error {
 	if v.GenerativeAISettings != nil {
 		if err := validateGenerativeAISettings(v.GenerativeAISettings); err != nil {
 			invalidParams.AddNested("GenerativeAISettings", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.SpeakerDiarizationSettings != nil {
+		if err := validateSpeakerDiarizationSettings(v.SpeakerDiarizationSettings); err != nil {
+			invalidParams.AddNested("SpeakerDiarizationSettings", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -9204,6 +9220,11 @@ func validateOpUpdateBotLocaleInput(v *UpdateBotLocaleInput) error {
 	if v.GenerativeAISettings != nil {
 		if err := validateGenerativeAISettings(v.GenerativeAISettings); err != nil {
 			invalidParams.AddNested("GenerativeAISettings", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.SpeakerDiarizationSettings != nil {
+		if err := validateSpeakerDiarizationSettings(v.SpeakerDiarizationSettings); err != nil {
+			invalidParams.AddNested("SpeakerDiarizationSettings", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

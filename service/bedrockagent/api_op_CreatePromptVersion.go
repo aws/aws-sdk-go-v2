@@ -5,7 +5,9 @@ package bedrockagent
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/bedrockagent/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagent/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -53,6 +55,25 @@ type CreatePromptVersionInput struct {
 	Tags map[string]string
 
 	noSmithyDocumentSerde
+}
+
+func (v *CreatePromptVersionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreatePromptVersionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreatePromptVersionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreatePromptVersionRequest_clientToken, *v.ClientToken)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreatePromptVersionRequest_description, *v.Description)
+	}
+	if v.PromptIdentifier != nil {
+		s.WriteString(schemas.CreatePromptVersionRequest_promptIdentifier, *v.PromptIdentifier)
+	}
+	serializeTagsMap(s, schemas.CreatePromptVersionRequest_tags, v.Tags)
 }
 
 type CreatePromptVersionOutput struct {
@@ -110,13 +131,83 @@ type CreatePromptVersionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreatePromptVersionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreatePromptVersionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreatePromptVersionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.CreatePromptVersionResponse_arn, *v.Arn)
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.CreatePromptVersionResponse_createdAt, *v.CreatedAt)
+	}
+	if v.CustomerEncryptionKeyArn != nil {
+		s.WriteString(schemas.CreatePromptVersionResponse_customerEncryptionKeyArn, *v.CustomerEncryptionKeyArn)
+	}
+	if v.DefaultVariant != nil {
+		s.WriteString(schemas.CreatePromptVersionResponse_defaultVariant, *v.DefaultVariant)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreatePromptVersionResponse_description, *v.Description)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.CreatePromptVersionResponse_id, *v.Id)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreatePromptVersionResponse_name, *v.Name)
+	}
+	if v.UpdatedAt != nil {
+		s.WriteTime(schemas.CreatePromptVersionResponse_updatedAt, *v.UpdatedAt)
+	}
+	serializePromptVariantList(s, schemas.CreatePromptVersionResponse_variants, v.Variants)
+	if v.Version != nil {
+		s.WriteString(schemas.CreatePromptVersionResponse_version, *v.Version)
+	}
+}
+func (v *CreatePromptVersionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreatePromptVersionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreatePromptVersionResponse_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.CreatePromptVersionResponse_arn, v.Arn)
+		case schemas.CreatePromptVersionResponse_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.CreatePromptVersionResponse_createdAt, v.CreatedAt)
+		case schemas.CreatePromptVersionResponse_customerEncryptionKeyArn:
+			v.CustomerEncryptionKeyArn = new(string)
+			return d.ReadString(schemas.CreatePromptVersionResponse_customerEncryptionKeyArn, v.CustomerEncryptionKeyArn)
+		case schemas.CreatePromptVersionResponse_defaultVariant:
+			v.DefaultVariant = new(string)
+			return d.ReadString(schemas.CreatePromptVersionResponse_defaultVariant, v.DefaultVariant)
+		case schemas.CreatePromptVersionResponse_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.CreatePromptVersionResponse_description, v.Description)
+		case schemas.CreatePromptVersionResponse_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.CreatePromptVersionResponse_id, v.Id)
+		case schemas.CreatePromptVersionResponse_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.CreatePromptVersionResponse_name, v.Name)
+		case schemas.CreatePromptVersionResponse_updatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.CreatePromptVersionResponse_updatedAt, v.UpdatedAt)
+		case schemas.CreatePromptVersionResponse_variants:
+			return deserializePromptVariantList(d, schemas.CreatePromptVersionResponse_variants, &v.Variants)
+		case schemas.CreatePromptVersionResponse_version:
+			v.Version = new(string)
+			return d.ReadString(schemas.CreatePromptVersionResponse_version, v.Version)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreatePromptVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreatePromptVersion{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreatePromptVersion, schemas.CreatePromptVersionRequest, schemas.CreatePromptVersionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreatePromptVersion{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreatePromptVersion, schemas.CreatePromptVersionRequest, schemas.CreatePromptVersionResponse), output: &CreatePromptVersionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

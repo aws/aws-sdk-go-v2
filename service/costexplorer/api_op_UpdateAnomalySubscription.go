@@ -4,7 +4,9 @@ package costexplorer
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/costexplorer/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/costexplorer/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -102,6 +104,34 @@ type UpdateAnomalySubscriptionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateAnomalySubscriptionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateAnomalySubscriptionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateAnomalySubscriptionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Frequency != "" {
+		s.WriteString(schemas.UpdateAnomalySubscriptionRequest_Frequency, string(v.Frequency))
+	}
+	serializeMonitorArnList(s, schemas.UpdateAnomalySubscriptionRequest_MonitorArnList, v.MonitorArnList)
+	serializeSubscribers(s, schemas.UpdateAnomalySubscriptionRequest_Subscribers, v.Subscribers)
+	if v.SubscriptionArn != nil {
+		s.WriteString(schemas.UpdateAnomalySubscriptionRequest_SubscriptionArn, *v.SubscriptionArn)
+	}
+	if v.SubscriptionName != nil {
+		s.WriteString(schemas.UpdateAnomalySubscriptionRequest_SubscriptionName, *v.SubscriptionName)
+	}
+	if v.Threshold != nil {
+		s.WriteFloat64(schemas.UpdateAnomalySubscriptionRequest_Threshold, *v.Threshold)
+	}
+	if v.ThresholdExpression != nil {
+		s.WriteStruct(schemas.UpdateAnomalySubscriptionRequest_ThresholdExpression)
+		v.ThresholdExpression.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type UpdateAnomalySubscriptionOutput struct {
 
 	// A cost anomaly subscription ARN.
@@ -115,13 +145,32 @@ type UpdateAnomalySubscriptionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateAnomalySubscriptionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateAnomalySubscriptionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateAnomalySubscriptionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SubscriptionArn != nil {
+		s.WriteString(schemas.UpdateAnomalySubscriptionResponse_SubscriptionArn, *v.SubscriptionArn)
+	}
+}
+func (v *UpdateAnomalySubscriptionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateAnomalySubscriptionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateAnomalySubscriptionResponse_SubscriptionArn:
+			v.SubscriptionArn = new(string)
+			return d.ReadString(schemas.UpdateAnomalySubscriptionResponse_SubscriptionArn, v.SubscriptionArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateAnomalySubscriptionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateAnomalySubscription{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateAnomalySubscription, schemas.UpdateAnomalySubscriptionRequest, schemas.UpdateAnomalySubscriptionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateAnomalySubscription{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateAnomalySubscription, schemas.UpdateAnomalySubscriptionRequest, schemas.UpdateAnomalySubscriptionResponse), output: &UpdateAnomalySubscriptionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

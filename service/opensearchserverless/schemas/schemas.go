@@ -33,6 +33,11 @@ var BatchGetVpcEndpoint = smithy.NewSchema(smithy.ShapeID{
 	Name:      "BatchGetVpcEndpoint",
 }, smithy.ShapeTypeOperation, 0)
 
+var CancelIngestionJob = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.opensearchserverless",
+	Name:      "CancelIngestionJob",
+}, smithy.ShapeTypeOperation, 0)
+
 var CreateAccessPolicy = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.opensearchserverless",
 	Name:      "CreateAccessPolicy",
@@ -51,6 +56,16 @@ var CreateCollectionGroup = smithy.NewSchema(smithy.ShapeID{
 var CreateIndex = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.opensearchserverless",
 	Name:      "CreateIndex",
+}, smithy.ShapeTypeOperation, 0)
+
+var CreateIngestionJob = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.opensearchserverless",
+	Name:      "CreateIngestionJob",
+}, smithy.ShapeTypeOperation, 0)
+
+var CreateIngestionStream = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.opensearchserverless",
+	Name:      "CreateIngestionStream",
 }, smithy.ShapeTypeOperation, 0)
 
 var CreateLifecyclePolicy = smithy.NewSchema(smithy.ShapeID{
@@ -93,6 +108,11 @@ var DeleteIndex = smithy.NewSchema(smithy.ShapeID{
 	Name:      "DeleteIndex",
 }, smithy.ShapeTypeOperation, 0)
 
+var DeleteIngestionStream = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.opensearchserverless",
+	Name:      "DeleteIngestionStream",
+}, smithy.ShapeTypeOperation, 0)
+
 var DeleteLifecyclePolicy = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.opensearchserverless",
 	Name:      "DeleteLifecyclePolicy",
@@ -128,6 +148,16 @@ var GetIndex = smithy.NewSchema(smithy.ShapeID{
 	Name:      "GetIndex",
 }, smithy.ShapeTypeOperation, 0)
 
+var GetIngestionJob = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.opensearchserverless",
+	Name:      "GetIngestionJob",
+}, smithy.ShapeTypeOperation, 0)
+
+var GetIngestionStream = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.opensearchserverless",
+	Name:      "GetIngestionStream",
+}, smithy.ShapeTypeOperation, 0)
+
 var GetPoliciesStats = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.opensearchserverless",
 	Name:      "GetPoliciesStats",
@@ -156,6 +186,16 @@ var ListCollectionGroups = smithy.NewSchema(smithy.ShapeID{
 var ListCollections = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.opensearchserverless",
 	Name:      "ListCollections",
+}, smithy.ShapeTypeOperation, 0)
+
+var ListIngestionJobs = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.opensearchserverless",
+	Name:      "ListIngestionJobs",
+}, smithy.ShapeTypeOperation, 0)
+
+var ListIngestionStreams = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.opensearchserverless",
+	Name:      "ListIngestionStreams",
 }, smithy.ShapeTypeOperation, 0)
 
 var ListLifecyclePolicies = smithy.NewSchema(smithy.ShapeID{
@@ -310,6 +350,11 @@ var _Arn = smithy.NewSchema(smithy.ShapeID{
 var _AutoscalingStatus = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.opensearchserverless",
 	Name:      "AutoscalingStatus",
+}, smithy.ShapeTypeString, 0)
+
+var _BucketOwnerAccountId = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.opensearchserverless",
+	Name:      "BucketOwnerAccountId",
 }, smithy.ShapeTypeString, 0)
 
 var CapacityDetails = smithy.NewSchema(smithy.ShapeID{
@@ -602,7 +647,8 @@ var _ConfigName = smithy.NewSchema(smithy.ShapeID{
 var ConflictException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.opensearchserverless",
 	Name:      "ConflictException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 409})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 409})
 var ConflictException_message *smithy.Schema
 
 var CreateCollectionDetail = smithy.NewSchema(smithy.ShapeID{
@@ -837,10 +883,258 @@ var _IndexSchema = smithy.NewSchema(smithy.ShapeID{
 	Name:      "IndexSchema",
 }, smithy.ShapeTypeDocument, 0)
 
+var IngestionAlert = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.opensearchserverless",
+	Name:      "IngestionAlert",
+}, smithy.ShapeTypeStructure, 2)
+var IngestionAlert_code *smithy.Schema
+
+var IngestionAlert_message *smithy.Schema
+
+var _IngestionAlertCode = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.opensearchserverless",
+	Name:      "IngestionAlertCode",
+}, smithy.ShapeTypeString, 0)
+
+var _IngestionAlerts = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.opensearchserverless",
+	Name:      "IngestionAlerts",
+}, smithy.ShapeTypeList, 1)
+var _IngestionAlerts_member *smithy.Schema
+
+var _IngestionFailureCode = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.opensearchserverless",
+	Name:      "IngestionFailureCode",
+}, smithy.ShapeTypeString, 0)
+
+var IngestionFailureReason = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.opensearchserverless",
+	Name:      "IngestionFailureReason",
+}, smithy.ShapeTypeStructure, 2)
+var IngestionFailureReason_code *smithy.Schema
+
+var IngestionFailureReason_message *smithy.Schema
+
+var _IngestionFailureReasons = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.opensearchserverless",
+	Name:      "IngestionFailureReasons",
+}, smithy.ShapeTypeList, 1)
+var _IngestionFailureReasons_member *smithy.Schema
+
+var _IngestionIndexName = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.opensearchserverless",
+	Name:      "IngestionIndexName",
+}, smithy.ShapeTypeString, 0)
+
+var IngestionJobDetail = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.opensearchserverless",
+	Name:      "IngestionJobDetail",
+}, smithy.ShapeTypeStructure, 15)
+var IngestionJobDetail_ingestionJobId *smithy.Schema
+
+var IngestionJobDetail_arn *smithy.Schema
+
+var IngestionJobDetail_collectionId *smithy.Schema
+
+var IngestionJobDetail_ingestionJobName *smithy.Schema
+
+var IngestionJobDetail_indexName *smithy.Schema
+
+var IngestionJobDetail_failureIndexName *smithy.Schema
+
+var IngestionJobDetail_source *smithy.Schema
+
+var IngestionJobDetail_status *smithy.Schema
+
+var IngestionJobDetail_state *smithy.Schema
+
+var IngestionJobDetail_statistics *smithy.Schema
+
+var IngestionJobDetail_revision *smithy.Schema
+
+var IngestionJobDetail_createdAt *smithy.Schema
+
+var IngestionJobDetail_updatedAt *smithy.Schema
+
+var IngestionJobDetail_failureReasons *smithy.Schema
+
+var IngestionJobDetail_activeAlerts *smithy.Schema
+
+var _IngestionJobId = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.opensearchserverless",
+	Name:      "IngestionJobId",
+}, smithy.ShapeTypeString, 0)
+
+var _IngestionJobName = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.opensearchserverless",
+	Name:      "IngestionJobName",
+}, smithy.ShapeTypeString, 0)
+
+var _IngestionJobResourceArn = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.opensearchserverless",
+	Name:      "IngestionJobResourceArn",
+}, smithy.ShapeTypeString, 0)
+
+var IngestionJobS3Source = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.opensearchserverless",
+	Name:      "IngestionJobS3Source",
+}, smithy.ShapeTypeStructure, 3)
+var IngestionJobS3Source_bucket *smithy.Schema
+
+var IngestionJobS3Source_bucketOwnerAccountId *smithy.Schema
+
+var IngestionJobS3Source_keyPrefix *smithy.Schema
+
+var IngestionJobSource = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.opensearchserverless",
+	Name:      "IngestionJobSource",
+}, smithy.ShapeTypeStructure, 1)
+var IngestionJobSource_s3 *smithy.Schema
+
+var _IngestionJobStatus = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.opensearchserverless",
+	Name:      "IngestionJobStatus",
+}, smithy.ShapeTypeString, 0)
+
+var _IngestionJobSummaries = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.opensearchserverless",
+	Name:      "IngestionJobSummaries",
+}, smithy.ShapeTypeList, 1)
+var _IngestionJobSummaries_member *smithy.Schema
+
+var IngestionJobSummary = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.opensearchserverless",
+	Name:      "IngestionJobSummary",
+}, smithy.ShapeTypeStructure, 7)
+var IngestionJobSummary_ingestionJobId *smithy.Schema
+
+var IngestionJobSummary_arn *smithy.Schema
+
+var IngestionJobSummary_ingestionJobName *smithy.Schema
+
+var IngestionJobSummary_indexName *smithy.Schema
+
+var IngestionJobSummary_status *smithy.Schema
+
+var IngestionJobSummary_createdAt *smithy.Schema
+
+var IngestionJobSummary_updatedAt *smithy.Schema
+
+var _IngestionState = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.opensearchserverless",
+	Name:      "IngestionState",
+}, smithy.ShapeTypeString, 0)
+
+var IngestionStatistics = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.opensearchserverless",
+	Name:      "IngestionStatistics",
+}, smithy.ShapeTypeStructure, 1)
+var IngestionStatistics_s3 *smithy.Schema
+
+var IngestionStreamDetail = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.opensearchserverless",
+	Name:      "IngestionStreamDetail",
+}, smithy.ShapeTypeStructure, 16)
+var IngestionStreamDetail_ingestionStreamId *smithy.Schema
+
+var IngestionStreamDetail_arn *smithy.Schema
+
+var IngestionStreamDetail_collectionId *smithy.Schema
+
+var IngestionStreamDetail_ingestionStreamName *smithy.Schema
+
+var IngestionStreamDetail_indexName *smithy.Schema
+
+var IngestionStreamDetail_failureIndexName *smithy.Schema
+
+var IngestionStreamDetail_source *smithy.Schema
+
+var IngestionStreamDetail_roleArn *smithy.Schema
+
+var IngestionStreamDetail_status *smithy.Schema
+
+var IngestionStreamDetail_state *smithy.Schema
+
+var IngestionStreamDetail_statistics *smithy.Schema
+
+var IngestionStreamDetail_revision *smithy.Schema
+
+var IngestionStreamDetail_createdAt *smithy.Schema
+
+var IngestionStreamDetail_updatedAt *smithy.Schema
+
+var IngestionStreamDetail_failureReasons *smithy.Schema
+
+var IngestionStreamDetail_activeAlerts *smithy.Schema
+
+var _IngestionStreamId = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.opensearchserverless",
+	Name:      "IngestionStreamId",
+}, smithy.ShapeTypeString, 0)
+
+var _IngestionStreamName = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.opensearchserverless",
+	Name:      "IngestionStreamName",
+}, smithy.ShapeTypeString, 0)
+
+var _IngestionStreamResourceArn = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.opensearchserverless",
+	Name:      "IngestionStreamResourceArn",
+}, smithy.ShapeTypeString, 0)
+
+var IngestionStreamS3Source = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.opensearchserverless",
+	Name:      "IngestionStreamS3Source",
+}, smithy.ShapeTypeStructure, 2)
+var IngestionStreamS3Source_sqsArn *smithy.Schema
+
+var IngestionStreamS3Source_buckets *smithy.Schema
+
+var IngestionStreamSource = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.opensearchserverless",
+	Name:      "IngestionStreamSource",
+}, smithy.ShapeTypeStructure, 1)
+var IngestionStreamSource_s3 *smithy.Schema
+
+var _IngestionStreamStatus = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.opensearchserverless",
+	Name:      "IngestionStreamStatus",
+}, smithy.ShapeTypeString, 0)
+
+var _IngestionStreamSummaries = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.opensearchserverless",
+	Name:      "IngestionStreamSummaries",
+}, smithy.ShapeTypeList, 1)
+var _IngestionStreamSummaries_member *smithy.Schema
+
+var IngestionStreamSummary = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.opensearchserverless",
+	Name:      "IngestionStreamSummary",
+}, smithy.ShapeTypeStructure, 7)
+var IngestionStreamSummary_ingestionStreamId *smithy.Schema
+
+var IngestionStreamSummary_arn *smithy.Schema
+
+var IngestionStreamSummary_ingestionStreamName *smithy.Schema
+
+var IngestionStreamSummary_indexName *smithy.Schema
+
+var IngestionStreamSummary_status *smithy.Schema
+
+var IngestionStreamSummary_createdAt *smithy.Schema
+
+var IngestionStreamSummary_updatedAt *smithy.Schema
+
+var _InitialScan = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.opensearchserverless",
+	Name:      "InitialScan",
+}, smithy.ShapeTypeString, 0)
+
 var InternalServerException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.opensearchserverless",
 	Name:      "InternalServerException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 500})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
+	&smithytraits.HTTPError{Code: 500})
 var InternalServerException_message *smithy.Schema
 
 var LifecyclePolicyDetail = smithy.NewSchema(smithy.ShapeID{
@@ -960,7 +1254,8 @@ var _LifecycleResourceFilter_member *smithy.Schema
 var OcuLimitExceededException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.opensearchserverless",
 	Name:      "OcuLimitExceededException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 402})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 402})
 var OcuLimitExceededException_message *smithy.Schema
 
 var _openSearchServerlessEntityId = smithy.NewSchema(smithy.ShapeID{
@@ -1007,13 +1302,34 @@ var _ResourceName = smithy.NewSchema(smithy.ShapeID{
 var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.opensearchserverless",
 	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 404})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 404})
 var ResourceNotFoundException_message *smithy.Schema
 
 var _ResourceType = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.opensearchserverless",
 	Name:      "ResourceType",
 }, smithy.ShapeTypeString, 0)
+
+var _RoleArn = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.opensearchserverless",
+	Name:      "RoleArn",
+}, smithy.ShapeTypeString, 0)
+
+var _S3BucketNameOrArn = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.opensearchserverless",
+	Name:      "S3BucketNameOrArn",
+}, smithy.ShapeTypeString, 0)
+
+var S3Statistics = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.opensearchserverless",
+	Name:      "S3Statistics",
+}, smithy.ShapeTypeStructure, 3)
+var S3Statistics_objectsDiscovered *smithy.Schema
+
+var S3Statistics_objectsIngested *smithy.Schema
+
+var S3Statistics_objectsFailed *smithy.Schema
 
 var SamlConfigOptions = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.opensearchserverless",
@@ -1186,7 +1502,8 @@ var _ServerlessVectorAccelerationStatus = smithy.NewSchema(smithy.ShapeID{
 var ServiceQuotaExceededException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.opensearchserverless",
 	Name:      "ServiceQuotaExceededException",
-}, smithy.ShapeTypeStructure, 5, &smithytraits.HTTPError{Code: 402})
+}, smithy.ShapeTypeStructure, 5, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 402})
 var ServiceQuotaExceededException_message *smithy.Schema
 
 var ServiceQuotaExceededException_resourceId *smithy.Schema
@@ -1197,10 +1514,31 @@ var ServiceQuotaExceededException_serviceCode *smithy.Schema
 
 var ServiceQuotaExceededException_quotaCode *smithy.Schema
 
+var _SqsArn = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.opensearchserverless",
+	Name:      "SqsArn",
+}, smithy.ShapeTypeString, 0)
+
 var _StandbyReplicas = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.opensearchserverless",
 	Name:      "StandbyReplicas",
 }, smithy.ShapeTypeString, 0)
+
+var StreamBucketConfig = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.opensearchserverless",
+	Name:      "StreamBucketConfig",
+}, smithy.ShapeTypeStructure, 3)
+var StreamBucketConfig_bucket *smithy.Schema
+
+var StreamBucketConfig_bucketOwnerAccountId *smithy.Schema
+
+var StreamBucketConfig_initialScan *smithy.Schema
+
+var _StreamBucketConfigs = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.opensearchserverless",
+	Name:      "StreamBucketConfigs",
+}, smithy.ShapeTypeList, 1)
+var _StreamBucketConfigs_member *smithy.Schema
 
 var _SubnetId = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.opensearchserverless",
@@ -1246,7 +1584,7 @@ var _TagValue = smithy.NewSchema(smithy.ShapeID{
 var UpdateCollectionDetail = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.opensearchserverless",
 	Name:      "UpdateCollectionDetail",
-}, smithy.ShapeTypeStructure, 10)
+}, smithy.ShapeTypeStructure, 11)
 var UpdateCollectionDetail_id *smithy.Schema
 
 var UpdateCollectionDetail_name *smithy.Schema
@@ -1258,6 +1596,8 @@ var UpdateCollectionDetail_type *smithy.Schema
 var UpdateCollectionDetail_description *smithy.Schema
 
 var UpdateCollectionDetail_vectorOptions *smithy.Schema
+
+var UpdateCollectionDetail_kmsKeyArn *smithy.Schema
 
 var UpdateCollectionDetail_arn *smithy.Schema
 
@@ -1314,7 +1654,8 @@ var UpdateVpcEndpointDetail_lastModifiedDate *smithy.Schema
 var ValidationException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.opensearchserverless",
 	Name:      "ValidationException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var ValidationException_message *smithy.Schema
 
 var VectorOptions = smithy.NewSchema(smithy.ShapeID{
@@ -1489,6 +1830,28 @@ var BatchGetVpcEndpointResponse_vpcEndpointDetails *smithy.Schema
 
 var BatchGetVpcEndpointResponse_vpcEndpointErrorDetails *smithy.Schema
 
+var CancelIngestionJobRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.opensearchserverless",
+	Name:      "CancelIngestionJobRequest",
+}, smithy.ShapeTypeStructure, 3)
+var CancelIngestionJobRequest_collectionId *smithy.Schema
+
+var CancelIngestionJobRequest_ingestionJobId *smithy.Schema
+
+var CancelIngestionJobRequest_clientToken *smithy.Schema
+
+var CancelIngestionJobResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.opensearchserverless",
+	Name:      "CancelIngestionJobResponse",
+}, smithy.ShapeTypeStructure, 4)
+var CancelIngestionJobResponse_ingestionJobId *smithy.Schema
+
+var CancelIngestionJobResponse_collectionId *smithy.Schema
+
+var CancelIngestionJobResponse_ingestionJobName *smithy.Schema
+
+var CancelIngestionJobResponse_status *smithy.Schema
+
 var CreateAccessPolicyRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.opensearchserverless",
 	Name:      "CreateAccessPolicyRequest",
@@ -1577,6 +1940,56 @@ var CreateIndexResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.opensearchserverless",
 	Name:      "CreateIndexResponse",
 }, smithy.ShapeTypeStructure, 0)
+
+var CreateIngestionJobRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.opensearchserverless",
+	Name:      "CreateIngestionJobRequest",
+}, smithy.ShapeTypeStructure, 7)
+var CreateIngestionJobRequest_collectionId *smithy.Schema
+
+var CreateIngestionJobRequest_ingestionJobName *smithy.Schema
+
+var CreateIngestionJobRequest_indexName *smithy.Schema
+
+var CreateIngestionJobRequest_failureIndexName *smithy.Schema
+
+var CreateIngestionJobRequest_source *smithy.Schema
+
+var CreateIngestionJobRequest_tags *smithy.Schema
+
+var CreateIngestionJobRequest_clientToken *smithy.Schema
+
+var CreateIngestionJobResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.opensearchserverless",
+	Name:      "CreateIngestionJobResponse",
+}, smithy.ShapeTypeStructure, 1)
+var CreateIngestionJobResponse_ingestionJobDetail *smithy.Schema
+
+var CreateIngestionStreamRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.opensearchserverless",
+	Name:      "CreateIngestionStreamRequest",
+}, smithy.ShapeTypeStructure, 8)
+var CreateIngestionStreamRequest_collectionId *smithy.Schema
+
+var CreateIngestionStreamRequest_ingestionStreamName *smithy.Schema
+
+var CreateIngestionStreamRequest_indexName *smithy.Schema
+
+var CreateIngestionStreamRequest_failureIndexName *smithy.Schema
+
+var CreateIngestionStreamRequest_source *smithy.Schema
+
+var CreateIngestionStreamRequest_roleArn *smithy.Schema
+
+var CreateIngestionStreamRequest_tags *smithy.Schema
+
+var CreateIngestionStreamRequest_clientToken *smithy.Schema
+
+var CreateIngestionStreamResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.opensearchserverless",
+	Name:      "CreateIngestionStreamResponse",
+}, smithy.ShapeTypeStructure, 1)
+var CreateIngestionStreamResponse_ingestionStreamDetail *smithy.Schema
 
 var CreateLifecyclePolicyRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.opensearchserverless",
@@ -1717,6 +2130,28 @@ var DeleteIndexResponse = smithy.NewSchema(smithy.ShapeID{
 	Name:      "DeleteIndexResponse",
 }, smithy.ShapeTypeStructure, 0)
 
+var DeleteIngestionStreamRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.opensearchserverless",
+	Name:      "DeleteIngestionStreamRequest",
+}, smithy.ShapeTypeStructure, 3)
+var DeleteIngestionStreamRequest_collectionId *smithy.Schema
+
+var DeleteIngestionStreamRequest_ingestionStreamId *smithy.Schema
+
+var DeleteIngestionStreamRequest_clientToken *smithy.Schema
+
+var DeleteIngestionStreamResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.opensearchserverless",
+	Name:      "DeleteIngestionStreamResponse",
+}, smithy.ShapeTypeStructure, 4)
+var DeleteIngestionStreamResponse_ingestionStreamId *smithy.Schema
+
+var DeleteIngestionStreamResponse_collectionId *smithy.Schema
+
+var DeleteIngestionStreamResponse_ingestionStreamName *smithy.Schema
+
+var DeleteIngestionStreamResponse_status *smithy.Schema
+
 var DeleteLifecyclePolicyRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.opensearchserverless",
 	Name:      "DeleteLifecyclePolicyRequest",
@@ -1812,6 +2247,34 @@ var GetIndexResponse = smithy.NewSchema(smithy.ShapeID{
 	Name:      "GetIndexResponse",
 }, smithy.ShapeTypeStructure, 1)
 var GetIndexResponse_indexSchema *smithy.Schema
+
+var GetIngestionJobRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.opensearchserverless",
+	Name:      "GetIngestionJobRequest",
+}, smithy.ShapeTypeStructure, 2)
+var GetIngestionJobRequest_collectionId *smithy.Schema
+
+var GetIngestionJobRequest_ingestionJobId *smithy.Schema
+
+var GetIngestionJobResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.opensearchserverless",
+	Name:      "GetIngestionJobResponse",
+}, smithy.ShapeTypeStructure, 1)
+var GetIngestionJobResponse_ingestionJobDetail *smithy.Schema
+
+var GetIngestionStreamRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.opensearchserverless",
+	Name:      "GetIngestionStreamRequest",
+}, smithy.ShapeTypeStructure, 2)
+var GetIngestionStreamRequest_collectionId *smithy.Schema
+
+var GetIngestionStreamRequest_ingestionStreamId *smithy.Schema
+
+var GetIngestionStreamResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.opensearchserverless",
+	Name:      "GetIngestionStreamResponse",
+}, smithy.ShapeTypeStructure, 1)
+var GetIngestionStreamResponse_ingestionStreamDetail *smithy.Schema
 
 var GetPoliciesStatsRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.opensearchserverless",
@@ -1911,6 +2374,42 @@ var ListCollectionsResponse = smithy.NewSchema(smithy.ShapeID{
 var ListCollectionsResponse_collectionSummaries *smithy.Schema
 
 var ListCollectionsResponse_nextToken *smithy.Schema
+
+var ListIngestionJobsRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.opensearchserverless",
+	Name:      "ListIngestionJobsRequest",
+}, smithy.ShapeTypeStructure, 3)
+var ListIngestionJobsRequest_collectionId *smithy.Schema
+
+var ListIngestionJobsRequest_nextToken *smithy.Schema
+
+var ListIngestionJobsRequest_maxResults *smithy.Schema
+
+var ListIngestionJobsResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.opensearchserverless",
+	Name:      "ListIngestionJobsResponse",
+}, smithy.ShapeTypeStructure, 2)
+var ListIngestionJobsResponse_ingestionJobSummaries *smithy.Schema
+
+var ListIngestionJobsResponse_nextToken *smithy.Schema
+
+var ListIngestionStreamsRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.opensearchserverless",
+	Name:      "ListIngestionStreamsRequest",
+}, smithy.ShapeTypeStructure, 3)
+var ListIngestionStreamsRequest_collectionId *smithy.Schema
+
+var ListIngestionStreamsRequest_nextToken *smithy.Schema
+
+var ListIngestionStreamsRequest_maxResults *smithy.Schema
+
+var ListIngestionStreamsResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.opensearchserverless",
+	Name:      "ListIngestionStreamsResponse",
+}, smithy.ShapeTypeStructure, 2)
+var ListIngestionStreamsResponse_ingestionStreamSummaries *smithy.Schema
+
+var ListIngestionStreamsResponse_nextToken *smithy.Schema
 
 var ListLifecyclePoliciesRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.opensearchserverless",
@@ -2081,7 +2580,7 @@ var UpdateCollectionGroupResponse_updateCollectionGroupDetail *smithy.Schema
 var UpdateCollectionRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.opensearchserverless",
 	Name:      "UpdateCollectionRequest",
-}, smithy.ShapeTypeStructure, 5)
+}, smithy.ShapeTypeStructure, 6)
 var UpdateCollectionRequest_id *smithy.Schema
 
 var UpdateCollectionRequest_description *smithy.Schema
@@ -2089,6 +2588,8 @@ var UpdateCollectionRequest_description *smithy.Schema
 var UpdateCollectionRequest_vectorOptions *smithy.Schema
 
 var UpdateCollectionRequest_deletionProtection *smithy.Schema
+
+var UpdateCollectionRequest_encryptionConfig *smithy.Schema
 
 var UpdateCollectionRequest_clientToken *smithy.Schema
 
@@ -2512,6 +3013,142 @@ func init() {
 
 	IamIdentityCenterConfigOptions_groupAttribute = IamIdentityCenterConfigOptions.AddMember("groupAttribute", _IamIdentityCenterGroupAttribute)
 
+	IngestionAlert_code = IngestionAlert.AddMember("code", _IngestionAlertCode)
+
+	IngestionAlert_message = IngestionAlert.AddMember("message", smithyprelude.String)
+
+	_IngestionAlerts_member = _IngestionAlerts.AddMember("member", IngestionAlert)
+
+	IngestionFailureReason_code = IngestionFailureReason.AddMember("code", _IngestionFailureCode)
+
+	IngestionFailureReason_message = IngestionFailureReason.AddMember("message", smithyprelude.String)
+
+	_IngestionFailureReasons_member = _IngestionFailureReasons.AddMember("member", IngestionFailureReason)
+
+	IngestionJobS3Source_bucket = IngestionJobS3Source.AddMember("bucket", _S3BucketNameOrArn)
+
+	IngestionJobS3Source_bucketOwnerAccountId = IngestionJobS3Source.AddMember("bucketOwnerAccountId", _BucketOwnerAccountId)
+
+	IngestionJobS3Source_keyPrefix = IngestionJobS3Source.AddMember("keyPrefix", smithyprelude.String)
+
+	IngestionJobSource_s3 = IngestionJobSource.AddMember("s3", IngestionJobS3Source)
+
+	S3Statistics_objectsDiscovered = S3Statistics.AddMember("objectsDiscovered", smithyprelude.Long)
+
+	S3Statistics_objectsIngested = S3Statistics.AddMember("objectsIngested", smithyprelude.Long)
+
+	S3Statistics_objectsFailed = S3Statistics.AddMember("objectsFailed", smithyprelude.Long)
+
+	IngestionStatistics_s3 = IngestionStatistics.AddMember("s3", S3Statistics)
+
+	IngestionJobDetail_ingestionJobId = IngestionJobDetail.AddMember("ingestionJobId", _IngestionJobId)
+
+	IngestionJobDetail_arn = IngestionJobDetail.AddMember("arn", _IngestionJobResourceArn)
+
+	IngestionJobDetail_collectionId = IngestionJobDetail.AddMember("collectionId", _CollectionId)
+
+	IngestionJobDetail_ingestionJobName = IngestionJobDetail.AddMember("ingestionJobName", _IngestionJobName)
+
+	IngestionJobDetail_indexName = IngestionJobDetail.AddMember("indexName", _IngestionIndexName)
+
+	IngestionJobDetail_failureIndexName = IngestionJobDetail.AddMember("failureIndexName", _IngestionIndexName)
+
+	IngestionJobDetail_source = IngestionJobDetail.AddMember("source", IngestionJobSource)
+
+	IngestionJobDetail_status = IngestionJobDetail.AddMember("status", _IngestionJobStatus)
+
+	IngestionJobDetail_state = IngestionJobDetail.AddMember("state", _IngestionState)
+
+	IngestionJobDetail_statistics = IngestionJobDetail.AddMember("statistics", IngestionStatistics)
+
+	IngestionJobDetail_revision = IngestionJobDetail.AddMember("revision", smithyprelude.Long)
+
+	IngestionJobDetail_createdAt = IngestionJobDetail.AddMember("createdAt", smithyprelude.Timestamp)
+
+	IngestionJobDetail_updatedAt = IngestionJobDetail.AddMember("updatedAt", smithyprelude.Timestamp)
+
+	IngestionJobDetail_failureReasons = IngestionJobDetail.AddMember("failureReasons", _IngestionFailureReasons)
+
+	IngestionJobDetail_activeAlerts = IngestionJobDetail.AddMember("activeAlerts", _IngestionAlerts)
+
+	IngestionJobSummary_ingestionJobId = IngestionJobSummary.AddMember("ingestionJobId", _IngestionJobId)
+
+	IngestionJobSummary_arn = IngestionJobSummary.AddMember("arn", _IngestionJobResourceArn)
+
+	IngestionJobSummary_ingestionJobName = IngestionJobSummary.AddMember("ingestionJobName", _IngestionJobName)
+
+	IngestionJobSummary_indexName = IngestionJobSummary.AddMember("indexName", _IngestionIndexName)
+
+	IngestionJobSummary_status = IngestionJobSummary.AddMember("status", _IngestionJobStatus)
+
+	IngestionJobSummary_createdAt = IngestionJobSummary.AddMember("createdAt", smithyprelude.Timestamp)
+
+	IngestionJobSummary_updatedAt = IngestionJobSummary.AddMember("updatedAt", smithyprelude.Timestamp)
+
+	_IngestionJobSummaries_member = _IngestionJobSummaries.AddMember("member", IngestionJobSummary)
+
+	StreamBucketConfig_bucket = StreamBucketConfig.AddMember("bucket", _S3BucketNameOrArn)
+
+	StreamBucketConfig_bucketOwnerAccountId = StreamBucketConfig.AddMember("bucketOwnerAccountId", _BucketOwnerAccountId)
+
+	StreamBucketConfig_initialScan = StreamBucketConfig.AddMember("initialScan", _InitialScan)
+
+	_StreamBucketConfigs_member = _StreamBucketConfigs.AddMember("member", StreamBucketConfig)
+
+	IngestionStreamS3Source_sqsArn = IngestionStreamS3Source.AddMember("sqsArn", _SqsArn)
+
+	IngestionStreamS3Source_buckets = IngestionStreamS3Source.AddMember("buckets", _StreamBucketConfigs)
+
+	IngestionStreamSource_s3 = IngestionStreamSource.AddMember("s3", IngestionStreamS3Source)
+
+	IngestionStreamDetail_ingestionStreamId = IngestionStreamDetail.AddMember("ingestionStreamId", _IngestionStreamId)
+
+	IngestionStreamDetail_arn = IngestionStreamDetail.AddMember("arn", _IngestionStreamResourceArn)
+
+	IngestionStreamDetail_collectionId = IngestionStreamDetail.AddMember("collectionId", _CollectionId)
+
+	IngestionStreamDetail_ingestionStreamName = IngestionStreamDetail.AddMember("ingestionStreamName", _IngestionStreamName)
+
+	IngestionStreamDetail_indexName = IngestionStreamDetail.AddMember("indexName", _IngestionIndexName)
+
+	IngestionStreamDetail_failureIndexName = IngestionStreamDetail.AddMember("failureIndexName", _IngestionIndexName)
+
+	IngestionStreamDetail_source = IngestionStreamDetail.AddMember("source", IngestionStreamSource)
+
+	IngestionStreamDetail_roleArn = IngestionStreamDetail.AddMember("roleArn", _RoleArn)
+
+	IngestionStreamDetail_status = IngestionStreamDetail.AddMember("status", _IngestionStreamStatus)
+
+	IngestionStreamDetail_state = IngestionStreamDetail.AddMember("state", _IngestionState)
+
+	IngestionStreamDetail_statistics = IngestionStreamDetail.AddMember("statistics", IngestionStatistics)
+
+	IngestionStreamDetail_revision = IngestionStreamDetail.AddMember("revision", smithyprelude.Long)
+
+	IngestionStreamDetail_createdAt = IngestionStreamDetail.AddMember("createdAt", smithyprelude.Timestamp)
+
+	IngestionStreamDetail_updatedAt = IngestionStreamDetail.AddMember("updatedAt", smithyprelude.Timestamp)
+
+	IngestionStreamDetail_failureReasons = IngestionStreamDetail.AddMember("failureReasons", _IngestionFailureReasons)
+
+	IngestionStreamDetail_activeAlerts = IngestionStreamDetail.AddMember("activeAlerts", _IngestionAlerts)
+
+	IngestionStreamSummary_ingestionStreamId = IngestionStreamSummary.AddMember("ingestionStreamId", _IngestionStreamId)
+
+	IngestionStreamSummary_arn = IngestionStreamSummary.AddMember("arn", _IngestionStreamResourceArn)
+
+	IngestionStreamSummary_ingestionStreamName = IngestionStreamSummary.AddMember("ingestionStreamName", _IngestionStreamName)
+
+	IngestionStreamSummary_indexName = IngestionStreamSummary.AddMember("indexName", _IngestionIndexName)
+
+	IngestionStreamSummary_status = IngestionStreamSummary.AddMember("status", _IngestionStreamStatus)
+
+	IngestionStreamSummary_createdAt = IngestionStreamSummary.AddMember("createdAt", smithyprelude.Timestamp)
+
+	IngestionStreamSummary_updatedAt = IngestionStreamSummary.AddMember("updatedAt", smithyprelude.Timestamp)
+
+	_IngestionStreamSummaries_member = _IngestionStreamSummaries.AddMember("member", IngestionStreamSummary)
+
 	InternalServerException_message = InternalServerException.AddMember("message", smithyprelude.String)
 
 	LifecyclePolicyDetail_type = LifecyclePolicyDetail.AddMember("type", _LifecyclePolicyType)
@@ -2680,6 +3317,8 @@ func init() {
 
 	UpdateCollectionDetail_vectorOptions = UpdateCollectionDetail.AddMember("vectorOptions", VectorOptions)
 
+	UpdateCollectionDetail_kmsKeyArn = UpdateCollectionDetail.AddMember("kmsKeyArn", smithyprelude.String)
+
 	UpdateCollectionDetail_arn = UpdateCollectionDetail.AddMember("arn", smithyprelude.String)
 
 	UpdateCollectionDetail_createdDate = UpdateCollectionDetail.AddMember("createdDate", smithyprelude.Long)
@@ -2796,6 +3435,20 @@ func init() {
 
 	BatchGetVpcEndpointResponse_vpcEndpointErrorDetails = BatchGetVpcEndpointResponse.AddMember("vpcEndpointErrorDetails", _VpcEndpointErrorDetails)
 
+	CancelIngestionJobRequest_collectionId = CancelIngestionJobRequest.AddMember("collectionId", _CollectionId)
+
+	CancelIngestionJobRequest_ingestionJobId = CancelIngestionJobRequest.AddMember("ingestionJobId", _IngestionJobId)
+
+	CancelIngestionJobRequest_clientToken = CancelIngestionJobRequest.AddMember("clientToken", _ClientToken)
+
+	CancelIngestionJobResponse_ingestionJobId = CancelIngestionJobResponse.AddMember("ingestionJobId", _IngestionJobId)
+
+	CancelIngestionJobResponse_collectionId = CancelIngestionJobResponse.AddMember("collectionId", _CollectionId)
+
+	CancelIngestionJobResponse_ingestionJobName = CancelIngestionJobResponse.AddMember("ingestionJobName", _IngestionJobName)
+
+	CancelIngestionJobResponse_status = CancelIngestionJobResponse.AddMember("status", _IngestionJobStatus)
+
 	CreateAccessPolicyRequest_type = CreateAccessPolicyRequest.AddMember("type", _AccessPolicyType)
 
 	CreateAccessPolicyRequest_name = CreateAccessPolicyRequest.AddMember("name", _PolicyName)
@@ -2851,6 +3504,40 @@ func init() {
 	CreateIndexRequest_indexName = CreateIndexRequest.AddMember("indexName", _IndexName)
 
 	CreateIndexRequest_indexSchema = CreateIndexRequest.AddMember("indexSchema", _IndexSchema)
+
+	CreateIngestionJobRequest_collectionId = CreateIngestionJobRequest.AddMember("collectionId", _CollectionId)
+
+	CreateIngestionJobRequest_ingestionJobName = CreateIngestionJobRequest.AddMember("ingestionJobName", _IngestionJobName)
+
+	CreateIngestionJobRequest_indexName = CreateIngestionJobRequest.AddMember("indexName", _IngestionIndexName)
+
+	CreateIngestionJobRequest_failureIndexName = CreateIngestionJobRequest.AddMember("failureIndexName", _IngestionIndexName)
+
+	CreateIngestionJobRequest_source = CreateIngestionJobRequest.AddMember("source", IngestionJobSource)
+
+	CreateIngestionJobRequest_tags = CreateIngestionJobRequest.AddMember("tags", _Tags)
+
+	CreateIngestionJobRequest_clientToken = CreateIngestionJobRequest.AddMember("clientToken", _ClientToken)
+
+	CreateIngestionJobResponse_ingestionJobDetail = CreateIngestionJobResponse.AddMember("ingestionJobDetail", IngestionJobDetail)
+
+	CreateIngestionStreamRequest_collectionId = CreateIngestionStreamRequest.AddMember("collectionId", _CollectionId)
+
+	CreateIngestionStreamRequest_ingestionStreamName = CreateIngestionStreamRequest.AddMember("ingestionStreamName", _IngestionStreamName)
+
+	CreateIngestionStreamRequest_indexName = CreateIngestionStreamRequest.AddMember("indexName", _IngestionIndexName)
+
+	CreateIngestionStreamRequest_failureIndexName = CreateIngestionStreamRequest.AddMember("failureIndexName", _IngestionIndexName)
+
+	CreateIngestionStreamRequest_source = CreateIngestionStreamRequest.AddMember("source", IngestionStreamSource)
+
+	CreateIngestionStreamRequest_roleArn = CreateIngestionStreamRequest.AddMember("roleArn", _RoleArn)
+
+	CreateIngestionStreamRequest_tags = CreateIngestionStreamRequest.AddMember("tags", _Tags)
+
+	CreateIngestionStreamRequest_clientToken = CreateIngestionStreamRequest.AddMember("clientToken", _ClientToken)
+
+	CreateIngestionStreamResponse_ingestionStreamDetail = CreateIngestionStreamResponse.AddMember("ingestionStreamDetail", IngestionStreamDetail)
 
 	CreateLifecyclePolicyRequest_type = CreateLifecyclePolicyRequest.AddMember("type", _LifecyclePolicyType)
 
@@ -2924,6 +3611,20 @@ func init() {
 
 	DeleteIndexRequest_indexName = DeleteIndexRequest.AddMember("indexName", _IndexName)
 
+	DeleteIngestionStreamRequest_collectionId = DeleteIngestionStreamRequest.AddMember("collectionId", _CollectionId)
+
+	DeleteIngestionStreamRequest_ingestionStreamId = DeleteIngestionStreamRequest.AddMember("ingestionStreamId", _IngestionStreamId)
+
+	DeleteIngestionStreamRequest_clientToken = DeleteIngestionStreamRequest.AddMember("clientToken", _ClientToken)
+
+	DeleteIngestionStreamResponse_ingestionStreamId = DeleteIngestionStreamResponse.AddMember("ingestionStreamId", _IngestionStreamId)
+
+	DeleteIngestionStreamResponse_collectionId = DeleteIngestionStreamResponse.AddMember("collectionId", _CollectionId)
+
+	DeleteIngestionStreamResponse_ingestionStreamName = DeleteIngestionStreamResponse.AddMember("ingestionStreamName", _IngestionStreamName)
+
+	DeleteIngestionStreamResponse_status = DeleteIngestionStreamResponse.AddMember("status", _IngestionStreamStatus)
+
 	DeleteLifecyclePolicyRequest_type = DeleteLifecyclePolicyRequest.AddMember("type", _LifecyclePolicyType)
 
 	DeleteLifecyclePolicyRequest_name = DeleteLifecyclePolicyRequest.AddMember("name", _PolicyName)
@@ -2959,6 +3660,18 @@ func init() {
 	GetIndexRequest_indexName = GetIndexRequest.AddMember("indexName", _IndexName)
 
 	GetIndexResponse_indexSchema = GetIndexResponse.AddMember("indexSchema", _IndexSchema)
+
+	GetIngestionJobRequest_collectionId = GetIngestionJobRequest.AddMember("collectionId", _CollectionId)
+
+	GetIngestionJobRequest_ingestionJobId = GetIngestionJobRequest.AddMember("ingestionJobId", _IngestionJobId)
+
+	GetIngestionJobResponse_ingestionJobDetail = GetIngestionJobResponse.AddMember("ingestionJobDetail", IngestionJobDetail)
+
+	GetIngestionStreamRequest_collectionId = GetIngestionStreamRequest.AddMember("collectionId", _CollectionId)
+
+	GetIngestionStreamRequest_ingestionStreamId = GetIngestionStreamRequest.AddMember("ingestionStreamId", _IngestionStreamId)
+
+	GetIngestionStreamResponse_ingestionStreamDetail = GetIngestionStreamResponse.AddMember("ingestionStreamDetail", IngestionStreamDetail)
 
 	GetPoliciesStatsResponse_AccessPolicyStats = GetPoliciesStatsResponse.AddMember("AccessPolicyStats", AccessPolicyStats)
 
@@ -3009,6 +3722,26 @@ func init() {
 	ListCollectionsResponse_collectionSummaries = ListCollectionsResponse.AddMember("collectionSummaries", _CollectionSummaries)
 
 	ListCollectionsResponse_nextToken = ListCollectionsResponse.AddMember("nextToken", smithyprelude.String)
+
+	ListIngestionJobsRequest_collectionId = ListIngestionJobsRequest.AddMember("collectionId", _CollectionId)
+
+	ListIngestionJobsRequest_nextToken = ListIngestionJobsRequest.AddMember("nextToken", smithyprelude.String)
+
+	ListIngestionJobsRequest_maxResults = ListIngestionJobsRequest.AddMember("maxResults", smithyprelude.Integer)
+
+	ListIngestionJobsResponse_ingestionJobSummaries = ListIngestionJobsResponse.AddMember("ingestionJobSummaries", _IngestionJobSummaries)
+
+	ListIngestionJobsResponse_nextToken = ListIngestionJobsResponse.AddMember("nextToken", smithyprelude.String)
+
+	ListIngestionStreamsRequest_collectionId = ListIngestionStreamsRequest.AddMember("collectionId", _CollectionId)
+
+	ListIngestionStreamsRequest_nextToken = ListIngestionStreamsRequest.AddMember("nextToken", smithyprelude.String)
+
+	ListIngestionStreamsRequest_maxResults = ListIngestionStreamsRequest.AddMember("maxResults", smithyprelude.Integer)
+
+	ListIngestionStreamsResponse_ingestionStreamSummaries = ListIngestionStreamsResponse.AddMember("ingestionStreamSummaries", _IngestionStreamSummaries)
+
+	ListIngestionStreamsResponse_nextToken = ListIngestionStreamsResponse.AddMember("nextToken", smithyprelude.String)
 
 	ListLifecyclePoliciesRequest_type = ListLifecyclePoliciesRequest.AddMember("type", _LifecyclePolicyType)
 
@@ -3101,6 +3834,8 @@ func init() {
 	UpdateCollectionRequest_vectorOptions = UpdateCollectionRequest.AddMember("vectorOptions", VectorOptions)
 
 	UpdateCollectionRequest_deletionProtection = UpdateCollectionRequest.AddMember("deletionProtection", _DeletionProtection)
+
+	UpdateCollectionRequest_encryptionConfig = UpdateCollectionRequest.AddMember("encryptionConfig", EncryptionConfig)
 
 	UpdateCollectionRequest_clientToken = UpdateCollectionRequest.AddMember("clientToken", _ClientToken)
 

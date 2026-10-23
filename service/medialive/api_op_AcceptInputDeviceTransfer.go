@@ -4,6 +4,8 @@ package medialive
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/medialive/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -35,6 +37,18 @@ type AcceptInputDeviceTransferInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AcceptInputDeviceTransferInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AcceptInputDeviceTransferRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AcceptInputDeviceTransferInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InputDeviceId != nil {
+		s.WriteString(schemas.AcceptInputDeviceTransferRequest_InputDeviceId, *v.InputDeviceId)
+	}
+}
+
 // Placeholder documentation for AcceptInputDeviceTransferResponse
 type AcceptInputDeviceTransferOutput struct {
 	// Metadata pertaining to the operation's result.
@@ -43,13 +57,26 @@ type AcceptInputDeviceTransferOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AcceptInputDeviceTransferOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AcceptInputDeviceTransferResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AcceptInputDeviceTransferOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *AcceptInputDeviceTransferOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AcceptInputDeviceTransferResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationAcceptInputDeviceTransferMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpAcceptInputDeviceTransfer{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AcceptInputDeviceTransfer, schemas.AcceptInputDeviceTransferRequest, schemas.AcceptInputDeviceTransferResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpAcceptInputDeviceTransfer{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AcceptInputDeviceTransfer, schemas.AcceptInputDeviceTransferRequest, schemas.AcceptInputDeviceTransferResponse), output: &AcceptInputDeviceTransferOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

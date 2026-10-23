@@ -4,7 +4,9 @@ package mediaconnect
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/mediaconnect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/mediaconnect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -59,6 +61,38 @@ type CreateBridgeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateBridgeInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateBridgeRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateBridgeInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EgressGatewayBridge != nil {
+		s.WriteStruct(schemas.CreateBridgeRequest_EgressGatewayBridge)
+		v.EgressGatewayBridge.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.IngressGatewayBridge != nil {
+		s.WriteStruct(schemas.CreateBridgeRequest_IngressGatewayBridge)
+		v.IngressGatewayBridge.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateBridgeRequest_Name, *v.Name)
+	}
+	serialize__listOfAddBridgeOutputRequest(s, schemas.CreateBridgeRequest_Outputs, v.Outputs)
+	if v.PlacementArn != nil {
+		s.WriteString(schemas.CreateBridgeRequest_PlacementArn, *v.PlacementArn)
+	}
+	if v.SourceFailoverConfig != nil {
+		s.WriteStruct(schemas.CreateBridgeRequest_SourceFailoverConfig)
+		v.SourceFailoverConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serialize__listOfAddBridgeSourceRequest(s, schemas.CreateBridgeRequest_Sources, v.Sources)
+}
+
 type CreateBridgeOutput struct {
 
 	//  The name of the bridge that was created.
@@ -70,13 +104,34 @@ type CreateBridgeOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateBridgeOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateBridgeResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateBridgeOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Bridge != nil {
+		s.WriteStruct(schemas.CreateBridgeResponse_Bridge)
+		v.Bridge.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateBridgeOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateBridgeResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateBridgeResponse_Bridge:
+			v.Bridge = &types.Bridge{}
+			return v.Bridge.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateBridgeMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateBridge{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateBridge, schemas.CreateBridgeRequest, schemas.CreateBridgeResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateBridge{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateBridge, schemas.CreateBridgeRequest, schemas.CreateBridgeResponse), output: &CreateBridgeOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

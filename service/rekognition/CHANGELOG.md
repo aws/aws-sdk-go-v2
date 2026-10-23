@@ -1,3 +1,35 @@
+# v1.62.0 (2026-10-22)
+
+* **Feature**: Enable schema-based (de)serialization for this service.
+* **Bug Fix**: Update smithy-go to v1.28.6
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.61.0 (2026-10-20)
+
+* **Feature**: Enable schema-based (de)serialization for this service.
+
+# v1.60.3 (2026-10-09.2)
+
+* **Dependency Update**: Update to smithy-go v1.28.5.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.60.2 (2026-10-08)
+
+* **Dependency Update**: Update to smithy-go v1.28.4.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.60.1 (2026-10-06)
+
+* No change notes available for this release.
+
+# v1.60.0 (2026-09-25)
+
+* **Feature**: This release adds support for Feedback and Metadata in the GetFaceLivenessSessionResults response. Feedback returns codes explaining why a Face Liveness check produced its result. Metadata includes the client SDK type.
+
+# v1.59.1 (2026-09-24)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.59.0 (2026-09-09)
 
 * **Feature**: Stop registering the `retry.MetricsHeader` middleware in generated clients. The `Amz-Sdk-Request` header is now set by the retry middleware itself.

@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"Errors":[{"Code":"METRIC_LIMIT_EXCEEDED","MetricIndex":1},{"Code":"METRIC_LIMIT_EXCEEDED","MetricIndex":1}]}

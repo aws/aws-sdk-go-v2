@@ -4,7 +4,9 @@ package costexplorer
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/costexplorer/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/costexplorer/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -62,6 +64,21 @@ type CreateAnomalyMonitorInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateAnomalyMonitorInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateAnomalyMonitorRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateAnomalyMonitorInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AnomalyMonitor != nil {
+		s.WriteStruct(schemas.CreateAnomalyMonitorRequest_AnomalyMonitor)
+		v.AnomalyMonitor.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeResourceTagList(s, schemas.CreateAnomalyMonitorRequest_ResourceTags, v.ResourceTags)
+}
+
 type CreateAnomalyMonitorOutput struct {
 
 	// The unique identifier of your newly created cost anomaly detection monitor.
@@ -75,13 +92,32 @@ type CreateAnomalyMonitorOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateAnomalyMonitorOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateAnomalyMonitorResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateAnomalyMonitorOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MonitorArn != nil {
+		s.WriteString(schemas.CreateAnomalyMonitorResponse_MonitorArn, *v.MonitorArn)
+	}
+}
+func (v *CreateAnomalyMonitorOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateAnomalyMonitorResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateAnomalyMonitorResponse_MonitorArn:
+			v.MonitorArn = new(string)
+			return d.ReadString(schemas.CreateAnomalyMonitorResponse_MonitorArn, v.MonitorArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateAnomalyMonitorMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateAnomalyMonitor{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateAnomalyMonitor, schemas.CreateAnomalyMonitorRequest, schemas.CreateAnomalyMonitorResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateAnomalyMonitor{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateAnomalyMonitor, schemas.CreateAnomalyMonitorRequest, schemas.CreateAnomalyMonitorResponse), output: &CreateAnomalyMonitorOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

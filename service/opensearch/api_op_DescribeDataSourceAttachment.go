@@ -4,7 +4,9 @@ package opensearch
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/opensearch/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/opensearch/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -44,6 +46,21 @@ type DescribeDataSourceAttachmentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeDataSourceAttachmentInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeDataSourceAttachmentRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeDataSourceAttachmentInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DataSourceArn != nil {
+		s.WriteString(schemas.DescribeDataSourceAttachmentRequest_dataSourceArn, *v.DataSourceArn)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.DescribeDataSourceAttachmentRequest_id, *v.Id)
+	}
+}
+
 type DescribeDataSourceAttachmentOutput struct {
 
 	// The Amazon Resource Name (ARN) of the domain. See [Identifiers for IAM Entities] in Using Amazon Web Services
@@ -74,13 +91,60 @@ type DescribeDataSourceAttachmentOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeDataSourceAttachmentOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeDataSourceAttachmentResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeDataSourceAttachmentOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.DescribeDataSourceAttachmentResponse_arn, *v.Arn)
+	}
+	if v.AttachmentId != nil {
+		s.WriteString(schemas.DescribeDataSourceAttachmentResponse_attachmentId, *v.AttachmentId)
+	}
+	if v.DataSourceArn != nil {
+		s.WriteString(schemas.DescribeDataSourceAttachmentResponse_dataSourceArn, *v.DataSourceArn)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.DescribeDataSourceAttachmentResponse_id, *v.Id)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.DescribeDataSourceAttachmentResponse_status, string(v.Status))
+	}
+}
+func (v *DescribeDataSourceAttachmentOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeDataSourceAttachmentResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeDataSourceAttachmentResponse_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.DescribeDataSourceAttachmentResponse_arn, v.Arn)
+		case schemas.DescribeDataSourceAttachmentResponse_attachmentId:
+			v.AttachmentId = new(string)
+			return d.ReadString(schemas.DescribeDataSourceAttachmentResponse_attachmentId, v.AttachmentId)
+		case schemas.DescribeDataSourceAttachmentResponse_dataSourceArn:
+			v.DataSourceArn = new(string)
+			return d.ReadString(schemas.DescribeDataSourceAttachmentResponse_dataSourceArn, v.DataSourceArn)
+		case schemas.DescribeDataSourceAttachmentResponse_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.DescribeDataSourceAttachmentResponse_id, v.Id)
+		case schemas.DescribeDataSourceAttachmentResponse_status:
+			var ev string
+			if err := d.ReadString(schemas.DescribeDataSourceAttachmentResponse_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.DataSourceAttachmentStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeDataSourceAttachmentMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeDataSourceAttachment{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeDataSourceAttachment, schemas.DescribeDataSourceAttachmentRequest, schemas.DescribeDataSourceAttachmentResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeDataSourceAttachment{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeDataSourceAttachment, schemas.DescribeDataSourceAttachmentRequest, schemas.DescribeDataSourceAttachmentResponse), output: &DescribeDataSourceAttachmentOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

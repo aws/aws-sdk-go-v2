@@ -1,6 +1,7 @@
-POST /
+POST /service/KeyspacesService/operation/UpdateKeyspace
 
-Content-Type: application/x-amz-json-1.0
-X-Amz-Target: KeyspacesService.UpdateKeyspace
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"clientSideTimestamps":{"status":"ENABLED"},"keyspaceName":"__KeyspaceName__","replicationSpecification":{"regionList":["__Member__","__Member__"],"replicationStrategy":"SINGLE_REGION"}}
+¿tclientSideTimestamps¿fstatusgENABLEDÿlkeyspaceNamep__KeyspaceName__xreplicationSpecification¿jregionListŸj__Member__j__Member__ÿsreplicationStrategymSINGLE_REGIONÿÿ

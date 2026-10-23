@@ -4,7 +4,9 @@ package bedrockruntime
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/bedrockruntime/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockruntime/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -128,6 +130,45 @@ type InvokeModelInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *InvokeModelInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InvokeModelRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InvokeModelInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Accept != nil {
+		s.WriteString(schemas.InvokeModelRequest_accept, *v.Accept)
+	}
+	if v.Body != nil {
+		s.WriteBlob(schemas.InvokeModelRequest_body, v.Body)
+	}
+	if v.ContentType != nil {
+		s.WriteString(schemas.InvokeModelRequest_contentType, *v.ContentType)
+	}
+	if v.GuardrailIdentifier != nil {
+		s.WriteString(schemas.InvokeModelRequest_guardrailIdentifier, *v.GuardrailIdentifier)
+	}
+	if v.GuardrailVersion != nil {
+		s.WriteString(schemas.InvokeModelRequest_guardrailVersion, *v.GuardrailVersion)
+	}
+	if v.ModelId != nil {
+		s.WriteString(schemas.InvokeModelRequest_modelId, *v.ModelId)
+	}
+	if v.PerformanceConfigLatency != "" {
+		s.WriteString(schemas.InvokeModelRequest_performanceConfigLatency, string(v.PerformanceConfigLatency))
+	}
+	if v.RequestMetadata != nil {
+		s.WriteString(schemas.InvokeModelRequest_requestMetadata, *v.RequestMetadata)
+	}
+	if v.ServiceTier != "" {
+		s.WriteString(schemas.InvokeModelRequest_serviceTier, string(v.ServiceTier))
+	}
+	if v.Trace != "" {
+		s.WriteString(schemas.InvokeModelRequest_trace, string(v.Trace))
+	}
+}
+
 type InvokeModelOutput struct {
 
 	// Inference response from the model in the format specified in the contentType
@@ -156,13 +197,57 @@ type InvokeModelOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *InvokeModelOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InvokeModelResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InvokeModelOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Body != nil {
+		s.WriteBlob(schemas.InvokeModelResponse_body, v.Body)
+	}
+	if v.ContentType != nil {
+		s.WriteString(schemas.InvokeModelResponse_contentType, *v.ContentType)
+	}
+	if v.PerformanceConfigLatency != "" {
+		s.WriteString(schemas.InvokeModelResponse_performanceConfigLatency, string(v.PerformanceConfigLatency))
+	}
+	if v.ServiceTier != "" {
+		s.WriteString(schemas.InvokeModelResponse_serviceTier, string(v.ServiceTier))
+	}
+}
+func (v *InvokeModelOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InvokeModelResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InvokeModelResponse_body:
+			return d.ReadBlob(schemas.InvokeModelResponse_body, &v.Body)
+		case schemas.InvokeModelResponse_contentType:
+			v.ContentType = new(string)
+			return d.ReadString(schemas.InvokeModelResponse_contentType, v.ContentType)
+		case schemas.InvokeModelResponse_performanceConfigLatency:
+			var ev string
+			if err := d.ReadString(schemas.InvokeModelResponse_performanceConfigLatency, &ev); err != nil {
+				return err
+			}
+			v.PerformanceConfigLatency = types.PerformanceConfigLatency(ev)
+			return nil
+		case schemas.InvokeModelResponse_serviceTier:
+			var ev string
+			if err := d.ReadString(schemas.InvokeModelResponse_serviceTier, &ev); err != nil {
+				return err
+			}
+			v.ServiceTier = types.ServiceTierType(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationInvokeModelMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpInvokeModel{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.InvokeModel, schemas.InvokeModelRequest, schemas.InvokeModelResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpInvokeModel{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.InvokeModel, schemas.InvokeModelRequest, schemas.InvokeModelResponse), output: &InvokeModelOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

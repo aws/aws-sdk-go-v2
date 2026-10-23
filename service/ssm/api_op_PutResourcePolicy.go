@@ -4,6 +4,8 @@ package ssm
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/ssm/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -42,11 +44,26 @@ import (
 //
 // For more information, see [Sharing a parameter]in the Amazon Web Services Systems Manager User Guide
 //
+//   - Document – Shares the document using Resource Access Manager (RAM). For more
+//     information about sharing documents, see [Sharing Systems Manager documents]in the Amazon Web Services Systems
+//     Manager User Guide.
+//
+// While you can share a document using the Systems Manager PutResourcePolicy
+// operation, we recommend using Resource Access Manager (RAM) instead. Using
+// PutResourcePolicy requires an extra step. You must promote the document to a
+// standard RAM Resource Share using the RAM [PromoteResourceShareCreatedFromPolicy]API operation. Otherwise, the Systems
+// Manager [ListDocuments]API operation won't return the document when filtering for shared
+// documents. The Amazon Web Services Config [PutRemediationConfigurations]API operation also can't use the
+// document.
+//
+// [PromoteResourceShareCreatedFromPolicy]: https://docs.aws.amazon.com/ram/latest/APIReference/API_PromoteResourceShareCreatedFromPolicy.html
 // [Sharing a parameter]: https://docs.aws.amazon.com/systems-manager/latest/userguide/parameter-store-shared-parameters.html#share
+// [Sharing Systems Manager documents]: https://docs.aws.amazon.com/systems-manager/latest/userguide/documents-ssm-sharing.html
+// [PutRemediationConfigurations]: https://docs.aws.amazon.com/config/latest/APIReference/API_PutRemediationConfigurations.html
+// [ListDocuments]: https://docs.aws.amazon.com/systems-manager/latest/APIReference/API_ListDocuments.html
 //
 // [Managing parameter tiers]: https://docs.aws.amazon.com/systems-manager/latest/userguide/parameter-store-advanced-parameters.html
 // [Changing a standard parameter to an advanced parameter]: https://docs.aws.amazon.com/systems-manager/latest/userguide/parameter-store-advanced-parameters.html#parameter-store-advanced-parameters-enabling
-// [PromoteResourceShareCreatedFromPolicy]: https://docs.aws.amazon.com/ram/latest/APIReference/API_PromoteResourceShareCreatedFromPolicy.html
 // [KMS concepts]: https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html
 // [DescribeParameters]: https://docs.aws.amazon.com/systems-manager/latest/APIReference/API_DescribeParameters.html
 func (c *Client) PutResourcePolicy(ctx context.Context, params *PutResourcePolicyInput, optFns ...func(*Options)) (*PutResourcePolicyOutput, error) {
@@ -87,6 +104,27 @@ type PutResourcePolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutResourcePolicyInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutResourcePolicyRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutResourcePolicyInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Policy != nil {
+		s.WriteString(schemas.PutResourcePolicyRequest_Policy, *v.Policy)
+	}
+	if v.PolicyHash != nil {
+		s.WriteString(schemas.PutResourcePolicyRequest_PolicyHash, *v.PolicyHash)
+	}
+	if v.PolicyId != nil {
+		s.WriteString(schemas.PutResourcePolicyRequest_PolicyId, *v.PolicyId)
+	}
+	if v.ResourceArn != nil {
+		s.WriteString(schemas.PutResourcePolicyRequest_ResourceArn, *v.ResourceArn)
+	}
+}
+
 type PutResourcePolicyOutput struct {
 
 	// ID of the current policy version.
@@ -101,13 +139,38 @@ type PutResourcePolicyOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutResourcePolicyOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutResourcePolicyResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutResourcePolicyOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PolicyHash != nil {
+		s.WriteString(schemas.PutResourcePolicyResponse_PolicyHash, *v.PolicyHash)
+	}
+	if v.PolicyId != nil {
+		s.WriteString(schemas.PutResourcePolicyResponse_PolicyId, *v.PolicyId)
+	}
+}
+func (v *PutResourcePolicyOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PutResourcePolicyResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PutResourcePolicyResponse_PolicyHash:
+			v.PolicyHash = new(string)
+			return d.ReadString(schemas.PutResourcePolicyResponse_PolicyHash, v.PolicyHash)
+		case schemas.PutResourcePolicyResponse_PolicyId:
+			v.PolicyId = new(string)
+			return d.ReadString(schemas.PutResourcePolicyResponse_PolicyId, v.PolicyId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPutResourcePolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpPutResourcePolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutResourcePolicy, schemas.PutResourcePolicyRequest, schemas.PutResourcePolicyResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpPutResourcePolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutResourcePolicy, schemas.PutResourcePolicyRequest, schemas.PutResourcePolicyResponse), output: &PutResourcePolicyOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

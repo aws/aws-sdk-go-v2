@@ -5,7 +5,9 @@ package backup
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/backup/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/backup/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -50,6 +52,25 @@ type UpdateFrameworkInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateFrameworkInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateFrameworkInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateFrameworkInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeFrameworkControls(s, schemas.UpdateFrameworkInput_FrameworkControls, v.FrameworkControls)
+	if v.FrameworkDescription != nil {
+		s.WriteString(schemas.UpdateFrameworkInput_FrameworkDescription, *v.FrameworkDescription)
+	}
+	if v.FrameworkName != nil {
+		s.WriteString(schemas.UpdateFrameworkInput_FrameworkName, *v.FrameworkName)
+	}
+	if v.IdempotencyToken != nil {
+		s.WriteString(schemas.UpdateFrameworkInput_IdempotencyToken, *v.IdempotencyToken)
+	}
+}
+
 type UpdateFrameworkOutput struct {
 
 	// The date and time that a framework is created, in ISO 8601 representation. The
@@ -73,13 +94,44 @@ type UpdateFrameworkOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateFrameworkOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateFrameworkOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateFrameworkOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.UpdateFrameworkOutput_CreationTime, *v.CreationTime)
+	}
+	if v.FrameworkArn != nil {
+		s.WriteString(schemas.UpdateFrameworkOutput_FrameworkArn, *v.FrameworkArn)
+	}
+	if v.FrameworkName != nil {
+		s.WriteString(schemas.UpdateFrameworkOutput_FrameworkName, *v.FrameworkName)
+	}
+}
+func (v *UpdateFrameworkOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateFrameworkOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateFrameworkOutput_CreationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.UpdateFrameworkOutput_CreationTime, v.CreationTime)
+		case schemas.UpdateFrameworkOutput_FrameworkArn:
+			v.FrameworkArn = new(string)
+			return d.ReadString(schemas.UpdateFrameworkOutput_FrameworkArn, v.FrameworkArn)
+		case schemas.UpdateFrameworkOutput_FrameworkName:
+			v.FrameworkName = new(string)
+			return d.ReadString(schemas.UpdateFrameworkOutput_FrameworkName, v.FrameworkName)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateFrameworkMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateFramework{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateFramework, schemas.UpdateFrameworkInput, schemas.UpdateFrameworkOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateFramework{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateFramework, schemas.UpdateFrameworkInput, schemas.UpdateFrameworkOutput), output: &UpdateFrameworkOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -1,6 +1,7 @@
-POST /
+POST /service/PerformanceInsightsv20180227/operation/GetDimensionKeyDetails
 
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: PerformanceInsightsv20180227.GetDimensionKeyDetails
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"Group":"__Group__","GroupIdentifier":"__GroupIdentifier__","Identifier":"__Identifier__","RequestedDimensions":["__Member__","__Member__"],"ServiceType":"RDS"}
+¿eGroupi__Group__oGroupIdentifiers__GroupIdentifier__jIdentifiern__Identifier__sRequestedDimensionsŸj__Member__j__Member__ÿkServiceTypecRDSÿ

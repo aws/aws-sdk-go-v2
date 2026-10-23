@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWS242ServiceCatalogService.DescribePortfolio
+
+{"Budgets":[{"BudgetName":"__BudgetName__"},{"BudgetName":"__BudgetName__"}],"PortfolioDetail":{"ARN":"__ARN__","CreatedTime":946684800,"Description":"__Description__","DisplayName":"__DisplayName__","Id":"__Id__","ProviderName":"__ProviderName__"},"TagOptions":[{"Active":true,"Id":"__Id__","Key":"__Key__","Owner":"__Owner__","Value":"__Value__"},{"Active":true,"Id":"__Id__","Key":"__Key__","Owner":"__Owner__","Value":"__Value__"}],"Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}]}

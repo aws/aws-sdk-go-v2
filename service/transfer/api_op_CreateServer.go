@@ -132,6 +132,12 @@ type CreateServerInput struct {
 	// [Manage host keys for your SFTP-enabled server]: https://docs.aws.amazon.com/transfer/latest/userguide/edit-server-config.html#configuring-servers-change-host-key
 	HostKey *string
 
+	// Specifies whether the host key is stored by Transfer Family ( SERVICE_MANAGED )
+	// or in Secrets Manager ( SECRETS_MANAGER ). When you specify SECRETS_MANAGER ,
+	// Transfer Family stores the private host key material in an Secrets Manager
+	// secret.
+	HostKeyStorageType types.HostKeyStorageType
+
 	// Required when IdentityProviderType is set to AWS_DIRECTORY_SERVICE , Amazon Web
 	// Services_LAMBDA or API_GATEWAY . Accepts an array containing all of the
 	// information required to use a directory in AWS_DIRECTORY_SERVICE or invoke a
@@ -216,6 +222,9 @@ type CreateServerInput struct {
 	//   CloudWatch Logs, so that you can determine when the client is making a SETSTAT
 	//   call.
 	//
+	//   - To specify which ports your Transfer Family server listens to, use the
+	//   SftpPorts parameter.
+	//
 	//   - To determine whether your Transfer Family server resumes recent, negotiated
 	//   sessions through a unique session ID, use the TlsSessionResumptionMode
 	//   parameter.
@@ -277,7 +286,7 @@ type CreateServerInput struct {
 	// To specify a log group, you must provide the ARN for an existing log group. In
 	// this case, the format of the log group is as follows:
 	//
-	//     arn:aws:logs:region-name:amazon-account-id:log-group:log-group-name:*
+	//     arn:partition:logs:region-name:amazon-account-id:log-group:log-group-name:*
 	//
 	// For example, arn:aws:logs:us-east-1:111122223333:log-group:mytestgroup:*
 	//
@@ -326,6 +335,9 @@ func (v *CreateServerInput) SerializeMembers(s smithy.ShapeSerializer) {
 	}
 	if v.HostKey != nil {
 		s.WriteString(schemas.CreateServerRequest_HostKey, *v.HostKey)
+	}
+	if v.HostKeyStorageType != "" {
+		s.WriteString(schemas.CreateServerRequest_HostKeyStorageType, string(v.HostKeyStorageType))
 	}
 	if v.IdentityProviderDetails != nil {
 		s.WriteStruct(schemas.CreateServerRequest_IdentityProviderDetails)

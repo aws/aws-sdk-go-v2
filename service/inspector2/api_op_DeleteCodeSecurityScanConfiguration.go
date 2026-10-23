@@ -4,6 +4,8 @@ package inspector2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/inspector2/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -33,6 +35,18 @@ type DeleteCodeSecurityScanConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteCodeSecurityScanConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteCodeSecurityScanConfigurationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteCodeSecurityScanConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ScanConfigurationArn != nil {
+		s.WriteString(schemas.DeleteCodeSecurityScanConfigurationRequest_scanConfigurationArn, *v.ScanConfigurationArn)
+	}
+}
+
 type DeleteCodeSecurityScanConfigurationOutput struct {
 
 	// The Amazon Resource Name (ARN) of the deleted scan configuration.
@@ -44,13 +58,32 @@ type DeleteCodeSecurityScanConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteCodeSecurityScanConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteCodeSecurityScanConfigurationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteCodeSecurityScanConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ScanConfigurationArn != nil {
+		s.WriteString(schemas.DeleteCodeSecurityScanConfigurationResponse_scanConfigurationArn, *v.ScanConfigurationArn)
+	}
+}
+func (v *DeleteCodeSecurityScanConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteCodeSecurityScanConfigurationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteCodeSecurityScanConfigurationResponse_scanConfigurationArn:
+			v.ScanConfigurationArn = new(string)
+			return d.ReadString(schemas.DeleteCodeSecurityScanConfigurationResponse_scanConfigurationArn, v.ScanConfigurationArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteCodeSecurityScanConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteCodeSecurityScanConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteCodeSecurityScanConfiguration, schemas.DeleteCodeSecurityScanConfigurationRequest, schemas.DeleteCodeSecurityScanConfigurationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteCodeSecurityScanConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteCodeSecurityScanConfiguration, schemas.DeleteCodeSecurityScanConfigurationRequest, schemas.DeleteCodeSecurityScanConfigurationResponse), output: &DeleteCodeSecurityScanConfigurationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

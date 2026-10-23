@@ -582,6 +582,13 @@ var ListLimits = smithy.NewSchema(smithy.ShapeID{
 	URI:  "/2023-10-12/farms/{farmId}/limits",
 	Code: 200})
 
+var ListMemberships = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.deadline",
+	Name:      "ListMemberships",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	URI:  "/2023-10-12/memberships",
+	Code: 200})
+
 var ListMeteredProducts = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.deadline",
 	Name:      "ListMeteredProducts",
@@ -969,7 +976,8 @@ var _AcceleratorTypes_member *smithy.Schema
 var AccessDeniedException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.deadline",
 	Name:      "AccessDeniedException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.HTTPError{Code: 403})
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 403})
 var AccessDeniedException_message *smithy.Schema
 
 var AccessDeniedException_context *smithy.Schema
@@ -1029,7 +1037,7 @@ var AssignedEnvironmentExitSessionActionDefinition_environmentId *smithy.Schema
 var AssignedSession = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.deadline",
 	Name:      "AssignedSession",
-}, smithy.ShapeTypeStructure, 4)
+}, smithy.ShapeTypeStructure, 5)
 var AssignedSession_queueId *smithy.Schema
 
 var AssignedSession_jobId *smithy.Schema
@@ -1037,6 +1045,8 @@ var AssignedSession_jobId *smithy.Schema
 var AssignedSession_sessionActions *smithy.Schema
 
 var AssignedSession_logConfiguration *smithy.Schema
+
+var AssignedSession_metadata *smithy.Schema
 
 var AssignedSessionAction = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.deadline",
@@ -1856,6 +1866,17 @@ var _BatchUpdateTaskItems = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeList, 1)
 var _BatchUpdateTaskItems_member *smithy.Schema
 
+var _BooleanString = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.deadline",
+	Name:      "BooleanString",
+}, smithy.ShapeTypeString, 0)
+
+var _BooleanStringList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.deadline",
+	Name:      "BooleanStringList",
+}, smithy.ShapeTypeList, 1)
+var _BooleanStringList_member *smithy.Schema
+
 var _BoundedString = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.deadline",
 	Name:      "BoundedString",
@@ -2005,7 +2026,8 @@ var CompletedStatus_NEVER_ATTEMPTED *smithy.Schema
 var ConflictException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.deadline",
 	Name:      "ConflictException",
-}, smithy.ShapeTypeStructure, 5, &smithytraits.HTTPError{Code: 409})
+}, smithy.ShapeTypeStructure, 5, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 409})
 var ConflictException_message *smithy.Schema
 
 var ConflictException_reason *smithy.Schema
@@ -2274,7 +2296,7 @@ var _EndsAt = smithy.NewSchema(smithy.ShapeID{
 var EnvironmentDetailsEntity = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.deadline",
 	Name:      "EnvironmentDetailsEntity",
-}, smithy.ShapeTypeStructure, 4)
+}, smithy.ShapeTypeStructure, 6)
 var EnvironmentDetailsEntity_jobId *smithy.Schema
 
 var EnvironmentDetailsEntity_environmentId *smithy.Schema
@@ -2282,6 +2304,10 @@ var EnvironmentDetailsEntity_environmentId *smithy.Schema
 var EnvironmentDetailsEntity_schemaVersion *smithy.Schema
 
 var EnvironmentDetailsEntity_template *smithy.Schema
+
+var EnvironmentDetailsEntity_extensions *smithy.Schema
+
+var EnvironmentDetailsEntity_resolvedSymbolTable *smithy.Schema
 
 var EnvironmentDetailsError = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.deadline",
@@ -2531,6 +2557,24 @@ var _FleetMembers = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeList, 1)
 var _FleetMembers_member *smithy.Schema
 
+var FleetSoftwareAddOn = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.deadline",
+	Name:      "FleetSoftwareAddOn",
+}, smithy.ShapeTypeStructure, 1)
+var FleetSoftwareAddOn_name *smithy.Schema
+
+var FleetSoftwareAddOnName = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.deadline",
+	Name:      "FleetSoftwareAddOnName",
+}, smithy.ShapeTypeEnum, 1)
+var FleetSoftwareAddOnName_DOCKER *smithy.Schema
+
+var _FleetSoftwareAddOns = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.deadline",
+	Name:      "FleetSoftwareAddOns",
+}, smithy.ShapeTypeList, 1)
+var _FleetSoftwareAddOns_member *smithy.Schema
+
 var FleetStatus = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.deadline",
 	Name:      "FleetStatus",
@@ -2591,6 +2635,12 @@ var _FloatString = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.deadline",
 	Name:      "FloatString",
 }, smithy.ShapeTypeString, 0)
+
+var _FloatStringList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.deadline",
+	Name:      "FloatStringList",
+}, smithy.ShapeTypeList, 1)
+var _FloatStringList_member *smithy.Schema
 
 var GetJobEntityError = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.deadline",
@@ -2691,7 +2741,8 @@ var _Integer = smithy.NewSchema(smithy.ShapeID{
 var InternalServerErrorException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.deadline",
 	Name:      "InternalServerErrorException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.HTTPError{Code: 500})
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "server"},
+	&smithytraits.HTTPError{Code: 500})
 var InternalServerErrorException_message *smithy.Schema
 
 var InternalServerErrorException_retryAfterSeconds *smithy.Schema
@@ -2700,6 +2751,18 @@ var _IntString = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.deadline",
 	Name:      "IntString",
 }, smithy.ShapeTypeString, 0)
+
+var _IntStringList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.deadline",
+	Name:      "IntStringList",
+}, smithy.ShapeTypeList, 1)
+var _IntStringList_member *smithy.Schema
+
+var _IntStringListList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.deadline",
+	Name:      "IntStringListList",
+}, smithy.ShapeTypeList, 1)
+var _IntStringListList_member *smithy.Schema
 
 var IpAddresses = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.deadline",
@@ -2784,7 +2847,7 @@ var _JobDescriptionOverride = smithy.NewSchema(smithy.ShapeID{
 var JobDetailsEntity = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.deadline",
 	Name:      "JobDetailsEntity",
-}, smithy.ShapeTypeStructure, 8)
+}, smithy.ShapeTypeStructure, 9)
 var JobDetailsEntity_jobId *smithy.Schema
 
 var JobDetailsEntity_jobAttachmentSettings *smithy.Schema
@@ -2798,6 +2861,8 @@ var JobDetailsEntity_queueRoleArn *smithy.Schema
 var JobDetailsEntity_parameters *smithy.Schema
 
 var JobDetailsEntity_schemaVersion *smithy.Schema
+
+var JobDetailsEntity_extensions *smithy.Schema
 
 var JobDetailsEntity_pathMappingRules *smithy.Schema
 
@@ -2930,7 +2995,7 @@ var _JobName = smithy.NewSchema(smithy.ShapeID{
 var JobParameter = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.deadline",
 	Name:      "JobParameter",
-}, smithy.ShapeTypeUnion, 4)
+}, smithy.ShapeTypeUnion, 12)
 var JobParameter_int *smithy.Schema
 
 var JobParameter_float *smithy.Schema
@@ -2938,6 +3003,22 @@ var JobParameter_float *smithy.Schema
 var JobParameter_string *smithy.Schema
 
 var JobParameter_path *smithy.Schema
+
+var JobParameter_bool *smithy.Schema
+
+var JobParameter_rangeExpr *smithy.Schema
+
+var JobParameter_stringList *smithy.Schema
+
+var JobParameter_pathList *smithy.Schema
+
+var JobParameter_intList *smithy.Schema
+
+var JobParameter_floatList *smithy.Schema
+
+var JobParameter_boolList *smithy.Schema
+
+var JobParameter_intListList *smithy.Schema
 
 var _JobParameterDefinition = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.deadline",
@@ -3299,6 +3380,42 @@ var MembershipLevel_OWNER *smithy.Schema
 
 var MembershipLevel_MANAGER *smithy.Schema
 
+var MembershipResourceType = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.deadline",
+	Name:      "MembershipResourceType",
+}, smithy.ShapeTypeEnum, 4)
+var MembershipResourceType_FARM *smithy.Schema
+
+var MembershipResourceType_QUEUE *smithy.Schema
+
+var MembershipResourceType_FLEET *smithy.Schema
+
+var MembershipResourceType_JOB *smithy.Schema
+
+var _MembershipResourceTypes = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.deadline",
+	Name:      "MembershipResourceTypes",
+}, smithy.ShapeTypeList, 1)
+var _MembershipResourceTypes_member *smithy.Schema
+
+var _MembershipSummaries = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.deadline",
+	Name:      "MembershipSummaries",
+}, smithy.ShapeTypeList, 1)
+var _MembershipSummaries_member *smithy.Schema
+
+var MembershipSummary = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.deadline",
+	Name:      "MembershipSummary",
+}, smithy.ShapeTypeUnion, 4)
+var MembershipSummary_farm *smithy.Schema
+
+var MembershipSummary_queue *smithy.Schema
+
+var MembershipSummary_fleet *smithy.Schema
+
+var MembershipSummary_job *smithy.Schema
+
 var _MemoryAmountMiB = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.deadline",
 	Name:      "MemoryAmountMiB",
@@ -3394,6 +3511,12 @@ var _MountPath = smithy.NewSchema(smithy.ShapeID{
 	Name:      "MountPath",
 }, smithy.ShapeTypeString, 0)
 
+var _NestedIntStringList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.deadline",
+	Name:      "NestedIntStringList",
+}, smithy.ShapeTypeList, 1)
+var _NestedIntStringList_member *smithy.Schema
+
 var _NextItemOffset = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.deadline",
 	Name:      "NextItemOffset",
@@ -3403,6 +3526,17 @@ var _NextToken = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.deadline",
 	Name:      "NextToken",
 }, smithy.ShapeTypeString, 0)
+
+var _OpenjdExtensionName = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.deadline",
+	Name:      "OpenjdExtensionName",
+}, smithy.ShapeTypeString, 0)
+
+var _OpenjdExtensionNameList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.deadline",
+	Name:      "OpenjdExtensionNameList",
+}, smithy.ShapeTypeList, 1)
+var _OpenjdExtensionNameList_member *smithy.Schema
 
 var _OutputRelativeDirectoriesList = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.deadline",
@@ -3441,6 +3575,12 @@ var _ParameterString = smithy.NewSchema(smithy.ShapeID{
 	Name:      "ParameterString",
 }, smithy.ShapeTypeString, 0)
 
+var _ParameterStringList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.deadline",
+	Name:      "ParameterStringList",
+}, smithy.ShapeTypeList, 1)
+var _ParameterStringList_member *smithy.Schema
+
 var _ParameterValue = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.deadline",
 	Name:      "ParameterValue",
@@ -3474,6 +3614,12 @@ var _PathString = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.deadline",
 	Name:      "PathString",
 }, smithy.ShapeTypeString, 0)
+
+var _PathStringList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.deadline",
+	Name:      "PathStringList",
+}, smithy.ShapeTypeList, 1)
+var _PathStringList_member *smithy.Schema
 
 var Period = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.deadline",
@@ -3737,6 +3883,11 @@ var RangeConstraint_CONTIGUOUS *smithy.Schema
 
 var RangeConstraint_NONCONTIGUOUS *smithy.Schema
 
+var _RangeExprString = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.deadline",
+	Name:      "RangeExprString",
+}, smithy.ShapeTypeString, 0)
+
 var _Region = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.deadline",
 	Name:      "Region",
@@ -3756,7 +3907,8 @@ var _ResourceName = smithy.NewSchema(smithy.ShapeID{
 var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.deadline",
 	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 4, &smithytraits.HTTPError{Code: 404})
+}, smithy.ShapeTypeStructure, 4, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 404})
 var ResourceNotFoundException_message *smithy.Schema
 
 var ResourceNotFoundException_resourceId *smithy.Schema
@@ -3952,6 +4104,11 @@ var _SecurityGroupIdList = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeList, 1)
 var _SecurityGroupIdList_member *smithy.Schema
 
+var _SerializedSymbolTable = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.deadline",
+	Name:      "SerializedSymbolTable",
+}, smithy.ShapeTypeString, 0)
+
 var ServiceManagedEc2AutoScalingConfiguration = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.deadline",
 	Name:      "ServiceManagedEc2AutoScalingConfiguration",
@@ -3981,7 +4138,7 @@ var ServiceManagedEc2FleetConfiguration_autoScalingConfiguration *smithy.Schema
 var ServiceManagedEc2InstanceCapabilities = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.deadline",
 	Name:      "ServiceManagedEc2InstanceCapabilities",
-}, smithy.ShapeTypeStructure, 10)
+}, smithy.ShapeTypeStructure, 11)
 var ServiceManagedEc2InstanceCapabilities_vCpuCount *smithy.Schema
 
 var ServiceManagedEc2InstanceCapabilities_memoryMiB *smithy.Schema
@@ -4001,6 +4158,8 @@ var ServiceManagedEc2InstanceCapabilities_excludedInstanceTypes *smithy.Schema
 var ServiceManagedEc2InstanceCapabilities_customAmounts *smithy.Schema
 
 var ServiceManagedEc2InstanceCapabilities_customAttributes *smithy.Schema
+
+var ServiceManagedEc2InstanceCapabilities_softwareAddOns *smithy.Schema
 
 var ServiceManagedEc2InstanceMarketOptions = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.deadline",
@@ -4024,7 +4183,8 @@ var ServiceManagedFleetOperatingSystemFamily_LINUX *smithy.Schema
 var ServiceQuotaExceededException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.deadline",
 	Name:      "ServiceQuotaExceededException",
-}, smithy.ShapeTypeStructure, 7, &smithytraits.HTTPError{Code: 402})
+}, smithy.ShapeTypeStructure, 7, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 402})
 var ServiceQuotaExceededException_message *smithy.Schema
 
 var ServiceQuotaExceededException_reason *smithy.Schema
@@ -4170,6 +4330,24 @@ var SessionLifecycleTargetStatus = smithy.NewSchema(smithy.ShapeID{
 	Name:      "SessionLifecycleTargetStatus",
 }, smithy.ShapeTypeEnum, 1)
 var SessionLifecycleTargetStatus_ENDED *smithy.Schema
+
+var _SessionMetadata = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.deadline",
+	Name:      "SessionMetadata",
+}, smithy.ShapeTypeMap, 2)
+var _SessionMetadata_key *smithy.Schema
+
+var _SessionMetadata_value *smithy.Schema
+
+var _SessionMetadataKey = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.deadline",
+	Name:      "SessionMetadataKey",
+}, smithy.ShapeTypeString, 0)
+
+var _SessionMetadataValue = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.deadline",
+	Name:      "SessionMetadataValue",
+}, smithy.ShapeTypeString, 0)
 
 var SessionsStatisticsAggregationStatus = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.deadline",
@@ -4383,7 +4561,7 @@ var _StepDescription = smithy.NewSchema(smithy.ShapeID{
 var StepDetailsEntity = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.deadline",
 	Name:      "StepDetailsEntity",
-}, smithy.ShapeTypeStructure, 5)
+}, smithy.ShapeTypeStructure, 7)
 var StepDetailsEntity_jobId *smithy.Schema
 
 var StepDetailsEntity_stepId *smithy.Schema
@@ -4393,6 +4571,10 @@ var StepDetailsEntity_schemaVersion *smithy.Schema
 var StepDetailsEntity_template *smithy.Schema
 
 var StepDetailsEntity_dependencies *smithy.Schema
+
+var StepDetailsEntity_extensions *smithy.Schema
+
+var StepDetailsEntity_resolvedSymbolTable *smithy.Schema
 
 var StepDetailsError = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.deadline",
@@ -4926,7 +5108,8 @@ var _ThresholdPercentage = smithy.NewSchema(smithy.ShapeID{
 var ThrottlingException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.deadline",
 	Name:      "ThrottlingException",
-}, smithy.ShapeTypeStructure, 5, &smithytraits.HTTPError{Code: 429})
+}, smithy.ShapeTypeStructure, 5, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 429})
 var ThrottlingException_message *smithy.Schema
 
 var ThrottlingException_serviceCode *smithy.Schema
@@ -5108,7 +5291,8 @@ var UserJobsFirst_userIdentityId *smithy.Schema
 var ValidationException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.deadline",
 	Name:      "ValidationException",
-}, smithy.ShapeTypeStructure, 4, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 4, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var ValidationException_message *smithy.Schema
 
 var ValidationException_reason *smithy.Schema
@@ -7217,6 +7401,30 @@ var ListLimitsResponse_limits *smithy.Schema
 
 var ListLimitsResponse_nextToken *smithy.Schema
 
+var ListMembershipsRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.deadline",
+	Name:      "ListMembershipsRequest",
+}, smithy.ShapeTypeStructure, 6)
+var ListMembershipsRequest_nextToken *smithy.Schema
+
+var ListMembershipsRequest_maxResults *smithy.Schema
+
+var ListMembershipsRequest_principalId *smithy.Schema
+
+var ListMembershipsRequest_identityStoreId *smithy.Schema
+
+var ListMembershipsRequest_identityCenterRegion *smithy.Schema
+
+var ListMembershipsRequest_resourceTypes *smithy.Schema
+
+var ListMembershipsResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.deadline",
+	Name:      "ListMembershipsResponse",
+}, smithy.ShapeTypeStructure, 2)
+var ListMembershipsResponse_memberships *smithy.Schema
+
+var ListMembershipsResponse_nextToken *smithy.Schema
+
 var ListMeteredProductsRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.deadline",
 	Name:      "ListMeteredProductsRequest",
@@ -8278,6 +8486,10 @@ func init() {
 
 	LogConfiguration_error = LogConfiguration.AddMember("error", _LogError)
 
+	_SessionMetadata_key = _SessionMetadata.AddMember("key", _SessionMetadataKey)
+
+	_SessionMetadata_value = _SessionMetadata.AddMember("value", _SessionMetadataValue)
+
 	AssignedSession_queueId = AssignedSession.AddMember("queueId", _QueueId)
 
 	AssignedSession_jobId = AssignedSession.AddMember("jobId", _JobId)
@@ -8285,6 +8497,8 @@ func init() {
 	AssignedSession_sessionActions = AssignedSession.AddMember("sessionActions", _AssignedSessionActions)
 
 	AssignedSession_logConfiguration = AssignedSession.AddMember("logConfiguration", LogConfiguration)
+
+	AssignedSession_metadata = AssignedSession.AddMember("metadata", _SessionMetadata)
 
 	_AssignedSessions_key = _AssignedSessions.AddMember("key", _SessionId)
 
@@ -8410,6 +8624,20 @@ func init() {
 
 	JobRunAsUser_runAs = JobRunAsUser.AddMember("runAs", RunAs)
 
+	_ParameterStringList_member = _ParameterStringList.AddMember("member", _ParameterString)
+
+	_PathStringList_member = _PathStringList.AddMember("member", _PathString)
+
+	_IntStringList_member = _IntStringList.AddMember("member", _IntString)
+
+	_FloatStringList_member = _FloatStringList.AddMember("member", _FloatString)
+
+	_BooleanStringList_member = _BooleanStringList.AddMember("member", _BooleanString)
+
+	_NestedIntStringList_member = _NestedIntStringList.AddMember("member", _IntString)
+
+	_IntStringListList_member = _IntStringListList.AddMember("member", _NestedIntStringList)
+
 	JobParameter_int = JobParameter.AddMember("int", _IntString)
 
 	JobParameter_float = JobParameter.AddMember("float", _FloatString)
@@ -8418,9 +8646,27 @@ func init() {
 
 	JobParameter_path = JobParameter.AddMember("path", _PathString)
 
+	JobParameter_bool = JobParameter.AddMember("bool", _BooleanString)
+
+	JobParameter_rangeExpr = JobParameter.AddMember("rangeExpr", _RangeExprString)
+
+	JobParameter_stringList = JobParameter.AddMember("stringList", _ParameterStringList)
+
+	JobParameter_pathList = JobParameter.AddMember("pathList", _PathStringList)
+
+	JobParameter_intList = JobParameter.AddMember("intList", _IntStringList)
+
+	JobParameter_floatList = JobParameter.AddMember("floatList", _FloatStringList)
+
+	JobParameter_boolList = JobParameter.AddMember("boolList", _BooleanStringList)
+
+	JobParameter_intListList = JobParameter.AddMember("intListList", _IntStringListList)
+
 	_JobParameters_key = _JobParameters.AddMember("key", _String)
 
 	_JobParameters_value = _JobParameters.AddMember("value", JobParameter)
+
+	_OpenjdExtensionNameList_member = _OpenjdExtensionNameList.AddMember("member", _OpenjdExtensionName)
 
 	PathMappingRule_sourcePathFormat = PathMappingRule.AddMember("sourcePathFormat", PathFormat)
 
@@ -8444,6 +8690,8 @@ func init() {
 
 	JobDetailsEntity_schemaVersion = JobDetailsEntity.AddMember("schemaVersion", _String)
 
+	JobDetailsEntity_extensions = JobDetailsEntity.AddMember("extensions", _OpenjdExtensionNameList)
+
 	JobDetailsEntity_pathMappingRules = JobDetailsEntity.AddMember("pathMappingRules", _PathMappingRules)
 
 	JobAttachmentDetailsEntity_jobId = JobAttachmentDetailsEntity.AddMember("jobId", _JobId)
@@ -8462,6 +8710,10 @@ func init() {
 
 	StepDetailsEntity_dependencies = StepDetailsEntity.AddMember("dependencies", _DependenciesList)
 
+	StepDetailsEntity_extensions = StepDetailsEntity.AddMember("extensions", _OpenjdExtensionNameList)
+
+	StepDetailsEntity_resolvedSymbolTable = StepDetailsEntity.AddMember("resolvedSymbolTable", _SerializedSymbolTable)
+
 	EnvironmentDetailsEntity_jobId = EnvironmentDetailsEntity.AddMember("jobId", _JobId)
 
 	EnvironmentDetailsEntity_environmentId = EnvironmentDetailsEntity.AddMember("environmentId", _EnvironmentId)
@@ -8469,6 +8721,10 @@ func init() {
 	EnvironmentDetailsEntity_schemaVersion = EnvironmentDetailsEntity.AddMember("schemaVersion", _String)
 
 	EnvironmentDetailsEntity_template = EnvironmentDetailsEntity.AddMember("template", _Document)
+
+	EnvironmentDetailsEntity_extensions = EnvironmentDetailsEntity.AddMember("extensions", _OpenjdExtensionNameList)
+
+	EnvironmentDetailsEntity_resolvedSymbolTable = EnvironmentDetailsEntity.AddMember("resolvedSymbolTable", _SerializedSymbolTable)
 
 	JobEntity_jobDetails = JobEntity.AddMember("jobDetails", JobDetailsEntity)
 
@@ -9522,6 +9778,12 @@ func init() {
 
 	_InstanceTypes_member = _InstanceTypes.AddMember("member", _InstanceType)
 
+	FleetSoftwareAddOnName_DOCKER = FleetSoftwareAddOnName.AddMember("DOCKER", smithyprelude.Unit)
+
+	FleetSoftwareAddOn_name = FleetSoftwareAddOn.AddMember("name", FleetSoftwareAddOnName)
+
+	_FleetSoftwareAddOns_member = _FleetSoftwareAddOns.AddMember("member", FleetSoftwareAddOn)
+
 	ServiceManagedEc2InstanceCapabilities_vCpuCount = ServiceManagedEc2InstanceCapabilities.AddMember("vCpuCount", VCpuCountRange)
 
 	ServiceManagedEc2InstanceCapabilities_memoryMiB = ServiceManagedEc2InstanceCapabilities.AddMember("memoryMiB", MemoryMiBRange)
@@ -9541,6 +9803,8 @@ func init() {
 	ServiceManagedEc2InstanceCapabilities_customAmounts = ServiceManagedEc2InstanceCapabilities.AddMember("customAmounts", _CustomFleetAmountCapabilities)
 
 	ServiceManagedEc2InstanceCapabilities_customAttributes = ServiceManagedEc2InstanceCapabilities.AddMember("customAttributes", _CustomFleetAttributeCapabilities)
+
+	ServiceManagedEc2InstanceCapabilities_softwareAddOns = ServiceManagedEc2InstanceCapabilities.AddMember("softwareAddOns", _FleetSoftwareAddOns)
 
 	ServiceManagedEc2InstanceMarketOptions_type = ServiceManagedEc2InstanceMarketOptions.AddMember("type", Ec2MarketType)
 
@@ -9840,6 +10104,38 @@ func init() {
 
 	LogicalOperator_OR = LogicalOperator.AddMember("OR", smithyprelude.Unit)
 
+	MembershipResourceType_FARM = MembershipResourceType.AddMember("FARM", smithyprelude.Unit)
+
+	MembershipResourceType_QUEUE = MembershipResourceType.AddMember("QUEUE", smithyprelude.Unit)
+
+	MembershipResourceType_FLEET = MembershipResourceType.AddMember("FLEET", smithyprelude.Unit)
+
+	MembershipResourceType_JOB = MembershipResourceType.AddMember("JOB", smithyprelude.Unit)
+
+	_MembershipResourceTypes_member = _MembershipResourceTypes.AddMember("member", MembershipResourceType)
+
+	QueueMember_farmId = QueueMember.AddMember("farmId", _FarmId)
+
+	QueueMember_queueId = QueueMember.AddMember("queueId", _QueueId)
+
+	QueueMember_principalId = QueueMember.AddMember("principalId", _IdentityCenterPrincipalId)
+
+	QueueMember_principalType = QueueMember.AddMember("principalType", DeadlinePrincipalType)
+
+	QueueMember_identityStoreId = QueueMember.AddMember("identityStoreId", _IdentityStoreId)
+
+	QueueMember_membershipLevel = QueueMember.AddMember("membershipLevel", MembershipLevel)
+
+	MembershipSummary_farm = MembershipSummary.AddMember("farm", FarmMember)
+
+	MembershipSummary_queue = MembershipSummary.AddMember("queue", QueueMember)
+
+	MembershipSummary_fleet = MembershipSummary.AddMember("fleet", FleetMember)
+
+	MembershipSummary_job = MembershipSummary.AddMember("job", JobMember)
+
+	_MembershipSummaries_member = _MembershipSummaries.AddMember("member", MembershipSummary)
+
 	MeteredProductSummary_productId = MeteredProductSummary.AddMember("productId", _MeteredProductId)
 
 	MeteredProductSummary_family = MeteredProductSummary.AddMember("family", _BoundedString)
@@ -9957,18 +10253,6 @@ func init() {
 	QueueLimitAssociationSummary_updatedBy = QueueLimitAssociationSummary.AddMember("updatedBy", _UpdatedBy)
 
 	_QueueLimitAssociationSummaries_member = _QueueLimitAssociationSummaries.AddMember("member", QueueLimitAssociationSummary)
-
-	QueueMember_farmId = QueueMember.AddMember("farmId", _FarmId)
-
-	QueueMember_queueId = QueueMember.AddMember("queueId", _QueueId)
-
-	QueueMember_principalId = QueueMember.AddMember("principalId", _IdentityCenterPrincipalId)
-
-	QueueMember_principalType = QueueMember.AddMember("principalType", DeadlinePrincipalType)
-
-	QueueMember_identityStoreId = QueueMember.AddMember("identityStoreId", _IdentityStoreId)
-
-	QueueMember_membershipLevel = QueueMember.AddMember("membershipLevel", MembershipLevel)
 
 	_QueueMemberList_member = _QueueMemberList.AddMember("member", QueueMember)
 
@@ -11729,6 +12013,22 @@ func init() {
 	ListLimitsResponse_limits = ListLimitsResponse.AddMember("limits", _LimitSummaries)
 
 	ListLimitsResponse_nextToken = ListLimitsResponse.AddMember("nextToken", _NextToken)
+
+	ListMembershipsRequest_nextToken = ListMembershipsRequest.AddMember("nextToken", _NextToken, &smithytraits.HTTPQuery{Name: "nextToken"})
+
+	ListMembershipsRequest_maxResults = ListMembershipsRequest.AddMember("maxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
+
+	ListMembershipsRequest_principalId = ListMembershipsRequest.AddMember("principalId", _IdentityCenterPrincipalId, &smithytraits.HTTPQuery{Name: "principalId"})
+
+	ListMembershipsRequest_identityStoreId = ListMembershipsRequest.AddMember("identityStoreId", _IdentityStoreId, &smithytraits.HTTPQuery{Name: "identityStoreId"})
+
+	ListMembershipsRequest_identityCenterRegion = ListMembershipsRequest.AddMember("identityCenterRegion", _Region, &smithytraits.HTTPQuery{Name: "identityCenterRegion"})
+
+	ListMembershipsRequest_resourceTypes = ListMembershipsRequest.AddMember("resourceTypes", _MembershipResourceTypes, &smithytraits.HTTPQuery{Name: "resourceTypes"})
+
+	ListMembershipsResponse_memberships = ListMembershipsResponse.AddMember("memberships", _MembershipSummaries)
+
+	ListMembershipsResponse_nextToken = ListMembershipsResponse.AddMember("nextToken", _NextToken)
 
 	ListMeteredProductsRequest_licenseEndpointId = ListMeteredProductsRequest.AddMember("licenseEndpointId", _LicenseEndpointId, &smithytraits.HTTPLabel{})
 

@@ -4,7 +4,9 @@ package elasticsearchservice
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/elasticsearchservice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/elasticsearchservice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -35,6 +37,18 @@ type DeleteVpcEndpointInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteVpcEndpointInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteVpcEndpointRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteVpcEndpointInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.VpcEndpointId != nil {
+		s.WriteString(schemas.DeleteVpcEndpointRequest_VpcEndpointId, *v.VpcEndpointId)
+	}
+}
+
 // Container for response parameters to the DeleteVpcEndpoint operation. Contains the summarized
 // detail of the VPC Endpoint being deleted.
 type DeleteVpcEndpointOutput struct {
@@ -51,13 +65,34 @@ type DeleteVpcEndpointOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteVpcEndpointOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteVpcEndpointResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteVpcEndpointOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.VpcEndpointSummary != nil {
+		s.WriteStruct(schemas.DeleteVpcEndpointResponse_VpcEndpointSummary)
+		v.VpcEndpointSummary.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DeleteVpcEndpointOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteVpcEndpointResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteVpcEndpointResponse_VpcEndpointSummary:
+			v.VpcEndpointSummary = &types.VpcEndpointSummary{}
+			return v.VpcEndpointSummary.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteVpcEndpointMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteVpcEndpoint{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteVpcEndpoint, schemas.DeleteVpcEndpointRequest, schemas.DeleteVpcEndpointResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteVpcEndpoint{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteVpcEndpoint, schemas.DeleteVpcEndpointRequest, schemas.DeleteVpcEndpointResponse), output: &DeleteVpcEndpointOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -78,6 +78,14 @@ func deserializeAttachedToList(d smithy.ShapeDeserializer, s *smithy.Schema, v *
 	*v = make([]AttachedTo, 0)
 	var vv AttachedTo
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero AttachedTo
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = AttachedTo{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -92,6 +100,14 @@ func deserializeEvaluations(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]E
 	*v = make([]Evaluation, 0)
 	var vv Evaluation
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero Evaluation
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = Evaluation{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -106,6 +122,14 @@ func deserializeMatchedPolicyList(d smithy.ShapeDeserializer, s *smithy.Schema, 
 	*v = make([]MatchedPolicy, 0)
 	var vv MatchedPolicy
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero MatchedPolicy
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = MatchedPolicy{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -120,6 +144,14 @@ func deserializeMatchedStatementList(d smithy.ShapeDeserializer, s *smithy.Schem
 	*v = make([]MatchedStatement, 0)
 	var vv MatchedStatement
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero MatchedStatement
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = MatchedStatement{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -134,6 +166,14 @@ func deserializePolicyInfoList(d smithy.ShapeDeserializer, s *smithy.Schema, v *
 	*v = make([]PolicyInfo, 0)
 	var vv PolicyInfo
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero PolicyInfo
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = PolicyInfo{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -160,6 +200,13 @@ func deserializeAuthorizationContext(d smithy.ShapeDeserializer, s *smithy.Schem
 	*v = make(map[string]document.Interface)
 	var vv smithydocument.Value
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero document.Interface
+			(*v)[k] = zero
+			return nil
+		}
 
 		if err := d.ReadDocument(s.MapValue(), &vv); err != nil {
 			return err

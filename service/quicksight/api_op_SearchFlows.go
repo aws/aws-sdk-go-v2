@@ -5,7 +5,9 @@ package quicksight
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/quicksight/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/quicksight/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -49,6 +51,25 @@ type SearchFlowsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SearchFlowsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SearchFlowsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SearchFlowsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AwsAccountId != nil {
+		s.WriteString(schemas.SearchFlowsInput_AwsAccountId, *v.AwsAccountId)
+	}
+	serializeSearchFlowsFilterList(s, schemas.SearchFlowsInput_Filters, v.Filters)
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.SearchFlowsInput_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.SearchFlowsInput_NextToken, *v.NextToken)
+	}
+}
+
 type SearchFlowsOutput struct {
 
 	// The list of flows found against the search.
@@ -71,13 +92,46 @@ type SearchFlowsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SearchFlowsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SearchFlowsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SearchFlowsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeFlowSummaryList(s, schemas.SearchFlowsOutput_FlowSummaryList, v.FlowSummaryList)
+	if v.NextToken != nil {
+		s.WriteString(schemas.SearchFlowsOutput_NextToken, *v.NextToken)
+	}
+	if v.RequestId != nil {
+		s.WriteString(schemas.SearchFlowsOutput_RequestId, *v.RequestId)
+	}
+	if v.Status != 0 {
+		s.WriteInt32(schemas.SearchFlowsOutput_Status, v.Status)
+	}
+}
+func (v *SearchFlowsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SearchFlowsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SearchFlowsOutput_FlowSummaryList:
+			return deserializeFlowSummaryList(d, schemas.SearchFlowsOutput_FlowSummaryList, &v.FlowSummaryList)
+		case schemas.SearchFlowsOutput_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.SearchFlowsOutput_NextToken, v.NextToken)
+		case schemas.SearchFlowsOutput_RequestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.SearchFlowsOutput_RequestId, v.RequestId)
+		case schemas.SearchFlowsOutput_Status:
+			return d.ReadInt32(schemas.SearchFlowsOutput_Status, &v.Status)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationSearchFlowsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpSearchFlows{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SearchFlows, schemas.SearchFlowsInput, schemas.SearchFlowsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpSearchFlows{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SearchFlows, schemas.SearchFlowsInput, schemas.SearchFlowsOutput), output: &SearchFlowsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

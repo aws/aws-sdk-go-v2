@@ -5,6 +5,7 @@ package schemas
 import (
 	smithy "github.com/aws/smithy-go"
 	smithyprelude "github.com/aws/smithy-go/prelude"
+	smithytraits "github.com/aws/smithy-go/traits"
 )
 
 var CreateCertificateAuthority = smithy.NewSchema(smithy.ShapeID{
@@ -381,7 +382,7 @@ var _CertificateChainBlob = smithy.NewSchema(smithy.ShapeID{
 var CertificateMismatchException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.acmpca",
 	Name:      "CertificateMismatchException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var CertificateMismatchException_message *smithy.Schema
 
 var _CertificatePolicyList = smithy.NewSchema(smithy.ShapeID{
@@ -398,7 +399,7 @@ var _CnameString = smithy.NewSchema(smithy.ShapeID{
 var ConcurrentModificationException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.acmpca",
 	Name:      "ConcurrentModificationException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var ConcurrentModificationException_message *smithy.Schema
 
 var _CountryCodeString = smithy.NewSchema(smithy.ShapeID{
@@ -605,43 +606,43 @@ var _Integer1To5000 = smithy.NewSchema(smithy.ShapeID{
 var InvalidArgsException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.acmpca",
 	Name:      "InvalidArgsException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var InvalidArgsException_message *smithy.Schema
 
 var InvalidArnException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.acmpca",
 	Name:      "InvalidArnException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var InvalidArnException_message *smithy.Schema
 
 var InvalidNextTokenException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.acmpca",
 	Name:      "InvalidNextTokenException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var InvalidNextTokenException_message *smithy.Schema
 
 var InvalidPolicyException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.acmpca",
 	Name:      "InvalidPolicyException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var InvalidPolicyException_message *smithy.Schema
 
 var InvalidRequestException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.acmpca",
 	Name:      "InvalidRequestException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var InvalidRequestException_message *smithy.Schema
 
 var InvalidStateException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.acmpca",
 	Name:      "InvalidStateException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var InvalidStateException_message *smithy.Schema
 
 var InvalidTagException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.acmpca",
 	Name:      "InvalidTagException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var InvalidTagException_message *smithy.Schema
 
 var KeyAlgorithm = smithy.NewSchema(smithy.ShapeID{
@@ -703,25 +704,25 @@ var KeyUsage_DecipherOnly *smithy.Schema
 var LimitExceededException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.acmpca",
 	Name:      "LimitExceededException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var LimitExceededException_message *smithy.Schema
 
 var LockoutPreventedException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.acmpca",
 	Name:      "LockoutPreventedException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var LockoutPreventedException_message *smithy.Schema
 
 var MalformedCertificateException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.acmpca",
 	Name:      "MalformedCertificateException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var MalformedCertificateException_message *smithy.Schema
 
 var MalformedCSRException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.acmpca",
 	Name:      "MalformedCSRException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var MalformedCSRException_message *smithy.Schema
 
 var _MaxResults = smithy.NewSchema(smithy.ShapeID{
@@ -774,7 +775,7 @@ var Permission_Policy *smithy.Schema
 var PermissionAlreadyExistsException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.acmpca",
 	Name:      "PermissionAlreadyExistsException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var PermissionAlreadyExistsException_message *smithy.Schema
 
 var _PermissionList = smithy.NewSchema(smithy.ShapeID{
@@ -830,25 +831,25 @@ var Qualifier_CpsUri *smithy.Schema
 var RequestAlreadyProcessedException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.acmpca",
 	Name:      "RequestAlreadyProcessedException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var RequestAlreadyProcessedException_message *smithy.Schema
 
 var RequestFailedException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.acmpca",
 	Name:      "RequestFailedException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var RequestFailedException_message *smithy.Schema
 
 var RequestInProgressException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.acmpca",
 	Name:      "RequestInProgressException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var RequestInProgressException_message *smithy.Schema
 
 var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.acmpca",
 	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var ResourceNotFoundException_message *smithy.Schema
 
 var ResourceOwner = smithy.NewSchema(smithy.ShapeID{
@@ -1022,7 +1023,7 @@ var _TagValue = smithy.NewSchema(smithy.ShapeID{
 var TooManyTagsException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.acmpca",
 	Name:      "TooManyTagsException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var TooManyTagsException_message *smithy.Schema
 
 var _TStamp = smithy.NewSchema(smithy.ShapeID{

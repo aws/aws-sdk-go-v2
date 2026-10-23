@@ -45,6 +45,13 @@ func deserializeConfigurationSets(d smithy.ShapeDeserializer, s *smithy.Schema, 
 	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			*v = append(*v, zero)
+			return nil
+		}
 
 		if err := d.ReadString(s.ListMember(), &vv); err != nil {
 			return err
@@ -59,6 +66,14 @@ func deserializeEventDestinations(d smithy.ShapeDeserializer, s *smithy.Schema, 
 	*v = make([]EventDestination, 0)
 	var vv EventDestination
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero EventDestination
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = EventDestination{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -73,6 +88,13 @@ func deserializeEventTypes(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]Ev
 	*v = make([]EventType, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero EventType
+			*v = append(*v, zero)
+			return nil
+		}
 
 		if err := d.ReadString(s.ListMember(), &vv); err != nil {
 			return err

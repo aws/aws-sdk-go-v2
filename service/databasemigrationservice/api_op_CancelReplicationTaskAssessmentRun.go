@@ -4,7 +4,9 @@ package databasemigrationservice
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/databasemigrationservice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/databasemigrationservice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -38,6 +40,18 @@ type CancelReplicationTaskAssessmentRunInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CancelReplicationTaskAssessmentRunInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CancelReplicationTaskAssessmentRunMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CancelReplicationTaskAssessmentRunInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ReplicationTaskAssessmentRunArn != nil {
+		s.WriteString(schemas.CancelReplicationTaskAssessmentRunMessage_ReplicationTaskAssessmentRunArn, *v.ReplicationTaskAssessmentRunArn)
+	}
+}
+
 type CancelReplicationTaskAssessmentRunOutput struct {
 
 	// The ReplicationTaskAssessmentRun object for the canceled assessment run.
@@ -49,13 +63,34 @@ type CancelReplicationTaskAssessmentRunOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CancelReplicationTaskAssessmentRunOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CancelReplicationTaskAssessmentRunResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CancelReplicationTaskAssessmentRunOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ReplicationTaskAssessmentRun != nil {
+		s.WriteStruct(schemas.CancelReplicationTaskAssessmentRunResponse_ReplicationTaskAssessmentRun)
+		v.ReplicationTaskAssessmentRun.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CancelReplicationTaskAssessmentRunOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CancelReplicationTaskAssessmentRunResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CancelReplicationTaskAssessmentRunResponse_ReplicationTaskAssessmentRun:
+			v.ReplicationTaskAssessmentRun = &types.ReplicationTaskAssessmentRun{}
+			return v.ReplicationTaskAssessmentRun.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCancelReplicationTaskAssessmentRunMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCancelReplicationTaskAssessmentRun{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CancelReplicationTaskAssessmentRun, schemas.CancelReplicationTaskAssessmentRunMessage, schemas.CancelReplicationTaskAssessmentRunResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCancelReplicationTaskAssessmentRun{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CancelReplicationTaskAssessmentRun, schemas.CancelReplicationTaskAssessmentRunMessage, schemas.CancelReplicationTaskAssessmentRunResponse), output: &CancelReplicationTaskAssessmentRunOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

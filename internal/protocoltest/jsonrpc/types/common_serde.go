@@ -227,6 +227,14 @@ func deserializeListOfKitchenSinks(d smithy.ShapeDeserializer, s *smithy.Schema,
 	*v = make([]KitchenSink, 0)
 	var vv KitchenSink
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero KitchenSink
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = KitchenSink{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -241,6 +249,14 @@ func deserializeListOfListOfStrings(d smithy.ShapeDeserializer, s *smithy.Schema
 	*v = make([][]string, 0)
 	var vv []string
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero []string
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = nil
 		if err := deserializeListOfStrings(d, s.ListMember(), &vv); err != nil {
 			return err
@@ -255,6 +271,14 @@ func deserializeListOfMapsOfStrings(d smithy.ShapeDeserializer, s *smithy.Schema
 	*v = make([]map[string]string, 0)
 	var vv map[string]string
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero map[string]string
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = nil
 		if err := deserializeMapOfStrings(d, s.ListMember(), &vv); err != nil {
 			return err
@@ -269,6 +293,13 @@ func deserializeListOfStrings(d smithy.ShapeDeserializer, s *smithy.Schema, v *[
 	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			*v = append(*v, zero)
+			return nil
+		}
 
 		if err := d.ReadString(s.ListMember(), &vv); err != nil {
 			return err
@@ -283,6 +314,14 @@ func deserializeListOfStructs(d smithy.ShapeDeserializer, s *smithy.Schema, v *[
 	*v = make([]SimpleStruct, 0)
 	var vv SimpleStruct
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero SimpleStruct
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = SimpleStruct{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -297,6 +336,13 @@ func deserializeFooEnumList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]F
 	*v = make([]FooEnum, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero FooEnum
+			*v = append(*v, zero)
+			return nil
+		}
 
 		if err := d.ReadString(s.ListMember(), &vv); err != nil {
 			return err
@@ -311,6 +357,13 @@ func deserializeFooEnumSet(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]Fo
 	*v = make([]FooEnum, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero FooEnum
+			*v = append(*v, zero)
+			return nil
+		}
 
 		if err := d.ReadString(s.ListMember(), &vv); err != nil {
 			return err
@@ -325,6 +378,13 @@ func deserializeIntegerEnumList(d smithy.ShapeDeserializer, s *smithy.Schema, v 
 	*v = make([]IntegerEnum, 0)
 	var vv int32
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero IntegerEnum
+			*v = append(*v, zero)
+			return nil
+		}
 
 		if err := d.ReadInt32(s.ListMember(), &vv); err != nil {
 			return err
@@ -339,6 +399,13 @@ func deserializeIntegerEnumSet(d smithy.ShapeDeserializer, s *smithy.Schema, v *
 	*v = make([]IntegerEnum, 0)
 	var vv int32
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero IntegerEnum
+			*v = append(*v, zero)
+			return nil
+		}
 
 		if err := d.ReadInt32(s.ListMember(), &vv); err != nil {
 			return err
@@ -376,6 +443,13 @@ func deserializeStringList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]st
 	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			*v = append(*v, zero)
+			return nil
+		}
 
 		if err := d.ReadString(s.ListMember(), &vv); err != nil {
 			return err
@@ -506,6 +580,14 @@ func deserializeMapOfKitchenSinks(d smithy.ShapeDeserializer, s *smithy.Schema, 
 	*v = make(map[string]KitchenSink)
 	var vv KitchenSink
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero KitchenSink
+			(*v)[k] = zero
+			return nil
+		}
+
 		vv = KitchenSink{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -520,6 +602,14 @@ func deserializeMapOfListsOfStrings(d smithy.ShapeDeserializer, s *smithy.Schema
 	*v = make(map[string][]string)
 	var vv []string
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero []string
+			(*v)[k] = zero
+			return nil
+		}
+
 		vv = nil
 		if err := deserializeListOfStrings(d, s.MapValue(), &vv); err != nil {
 			return err
@@ -534,6 +624,14 @@ func deserializeMapOfMapOfStrings(d smithy.ShapeDeserializer, s *smithy.Schema, 
 	*v = make(map[string]map[string]string)
 	var vv map[string]string
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero map[string]string
+			(*v)[k] = zero
+			return nil
+		}
+
 		vv = nil
 		if err := deserializeMapOfStrings(d, s.MapValue(), &vv); err != nil {
 			return err
@@ -548,6 +646,13 @@ func deserializeMapOfStrings(d smithy.ShapeDeserializer, s *smithy.Schema, v *ma
 	*v = make(map[string]string)
 	var vv string
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			(*v)[k] = zero
+			return nil
+		}
 
 		if err := d.ReadString(s.MapValue(), &vv); err != nil {
 			return err
@@ -562,6 +667,14 @@ func deserializeMapOfStructs(d smithy.ShapeDeserializer, s *smithy.Schema, v *ma
 	*v = make(map[string]SimpleStruct)
 	var vv SimpleStruct
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero SimpleStruct
+			(*v)[k] = zero
+			return nil
+		}
+
 		vv = SimpleStruct{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -576,6 +689,13 @@ func deserializeFooEnumMap(d smithy.ShapeDeserializer, s *smithy.Schema, v *map[
 	*v = make(map[string]FooEnum)
 	var vv string
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero FooEnum
+			(*v)[k] = zero
+			return nil
+		}
 
 		if err := d.ReadString(s.MapValue(), &vv); err != nil {
 			return err
@@ -590,6 +710,13 @@ func deserializeIntegerEnumMap(d smithy.ShapeDeserializer, s *smithy.Schema, v *
 	*v = make(map[string]IntegerEnum)
 	var vv int32
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero IntegerEnum
+			(*v)[k] = zero
+			return nil
+		}
 
 		if err := d.ReadInt32(s.MapValue(), &vv); err != nil {
 			return err
@@ -627,6 +754,13 @@ func deserializeStringMap(d smithy.ShapeDeserializer, s *smithy.Schema, v *map[s
 	*v = make(map[string]string)
 	var vv string
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			(*v)[k] = zero
+			return nil
+		}
 
 		if err := d.ReadString(s.MapValue(), &vv); err != nil {
 			return err

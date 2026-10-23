@@ -4,7 +4,9 @@ package securityhub
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/securityhub/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/securityhub/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -37,6 +39,21 @@ type ListAutomationRulesV2Input struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAutomationRulesV2Input) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAutomationRulesV2Request)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAutomationRulesV2Input) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListAutomationRulesV2Request_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAutomationRulesV2Request_NextToken, *v.NextToken)
+	}
+}
+
 type ListAutomationRulesV2Output struct {
 
 	// The pagination token to use to request the next page of results. Otherwise,
@@ -52,13 +69,35 @@ type ListAutomationRulesV2Output struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAutomationRulesV2Output) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAutomationRulesV2Response)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAutomationRulesV2Output) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAutomationRulesV2Response_NextToken, *v.NextToken)
+	}
+	serializeAutomationRulesMetadataListV2(s, schemas.ListAutomationRulesV2Response_Rules, v.Rules)
+}
+func (v *ListAutomationRulesV2Output) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListAutomationRulesV2Response, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListAutomationRulesV2Response_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListAutomationRulesV2Response_NextToken, v.NextToken)
+		case schemas.ListAutomationRulesV2Response_Rules:
+			return deserializeAutomationRulesMetadataListV2(d, schemas.ListAutomationRulesV2Response_Rules, &v.Rules)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListAutomationRulesV2Middlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListAutomationRulesV2{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAutomationRulesV2, schemas.ListAutomationRulesV2Request, schemas.ListAutomationRulesV2Response)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListAutomationRulesV2{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAutomationRulesV2, schemas.ListAutomationRulesV2Request, schemas.ListAutomationRulesV2Response), output: &ListAutomationRulesV2Output{}}, middleware.After); err != nil {
 		return err
 	}
 

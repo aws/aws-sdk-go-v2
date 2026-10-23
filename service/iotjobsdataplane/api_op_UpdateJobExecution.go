@@ -4,7 +4,9 @@ package iotjobsdataplane
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/iotjobsdataplane/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotjobsdataplane/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -90,6 +92,40 @@ type UpdateJobExecutionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateJobExecutionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateJobExecutionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateJobExecutionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ExecutionNumber != nil {
+		s.WriteInt64(schemas.UpdateJobExecutionRequest_executionNumber, *v.ExecutionNumber)
+	}
+	if v.ExpectedVersion != nil {
+		s.WriteInt64(schemas.UpdateJobExecutionRequest_expectedVersion, *v.ExpectedVersion)
+	}
+	if v.IncludeJobDocument != nil {
+		s.WriteBool(schemas.UpdateJobExecutionRequest_includeJobDocument, *v.IncludeJobDocument)
+	}
+	if v.IncludeJobExecutionState != nil {
+		s.WriteBool(schemas.UpdateJobExecutionRequest_includeJobExecutionState, *v.IncludeJobExecutionState)
+	}
+	if v.JobId != nil {
+		s.WriteString(schemas.UpdateJobExecutionRequest_jobId, *v.JobId)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.UpdateJobExecutionRequest_status, string(v.Status))
+	}
+	serializeDetailsMap(s, schemas.UpdateJobExecutionRequest_statusDetails, v.StatusDetails)
+	if v.StepTimeoutInMinutes != nil {
+		s.WriteInt64(schemas.UpdateJobExecutionRequest_stepTimeoutInMinutes, *v.StepTimeoutInMinutes)
+	}
+	if v.ThingName != nil {
+		s.WriteString(schemas.UpdateJobExecutionRequest_thingName, *v.ThingName)
+	}
+}
+
 type UpdateJobExecutionOutput struct {
 
 	// A JobExecutionState object.
@@ -104,13 +140,40 @@ type UpdateJobExecutionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateJobExecutionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateJobExecutionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateJobExecutionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ExecutionState != nil {
+		s.WriteStruct(schemas.UpdateJobExecutionResponse_executionState)
+		v.ExecutionState.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.JobDocument != nil {
+		s.WriteString(schemas.UpdateJobExecutionResponse_jobDocument, *v.JobDocument)
+	}
+}
+func (v *UpdateJobExecutionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateJobExecutionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateJobExecutionResponse_executionState:
+			v.ExecutionState = &types.JobExecutionState{}
+			return v.ExecutionState.Deserialize(d)
+		case schemas.UpdateJobExecutionResponse_jobDocument:
+			v.JobDocument = new(string)
+			return d.ReadString(schemas.UpdateJobExecutionResponse_jobDocument, v.JobDocument)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateJobExecutionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateJobExecution{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateJobExecution, schemas.UpdateJobExecutionRequest, schemas.UpdateJobExecutionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateJobExecution{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateJobExecution, schemas.UpdateJobExecutionRequest, schemas.UpdateJobExecutionResponse), output: &UpdateJobExecutionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

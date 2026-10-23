@@ -1589,6 +1589,21 @@ func validateCapabilityConfiguration(v *types.CapabilityConfiguration) error {
 	}
 }
 
+func validateCronSchedule(v *types.CronSchedule) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CronSchedule"}
+	if v.Expression == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Expression"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateDatadogAuthorizationConfig(v types.DatadogAuthorizationConfig) error {
 	if v == nil {
 		return nil
@@ -1850,6 +1865,11 @@ func validateMCPServerAuthorizationConfig(v types.MCPServerAuthorizationConfig) 
 			invalidParams.AddNested("[bearerToken]", err.(smithy.InvalidParamsError))
 		}
 
+	case *types.MCPServerAuthorizationConfigMemberCustomHeaders:
+		if err := validateMCPServerCustomHeadersConfig(&uv.Value); err != nil {
+			invalidParams.AddNested("[customHeaders]", err.(smithy.InvalidParamsError))
+		}
+
 	case *types.MCPServerAuthorizationConfigMemberOAuth3LO:
 		if err := validateMCPServerOAuth3LOConfig(&uv.Value); err != nil {
 			invalidParams.AddNested("[oAuth3LO]", err.(smithy.InvalidParamsError))
@@ -1913,6 +1933,21 @@ func validateMCPServerConfiguration(v *types.MCPServerConfiguration) error {
 		if err := validateMCPToolDetailsList(v.ToolDetails); err != nil {
 			invalidParams.AddNested("ToolDetails", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateMCPServerCustomHeadersConfig(v *types.MCPServerCustomHeadersConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "MCPServerCustomHeadersConfig"}
+	if v.Headers == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Headers"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2141,6 +2176,105 @@ func validateMCPToolDetailsList(v []types.MCPToolDetail) error {
 	}
 }
 
+func validateMonthlyRecurrence(v *types.MonthlyRecurrence) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "MonthlyRecurrence"}
+	if v.DayOfMonth == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DayOfMonth"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateMSTeamsChannel(v *types.MSTeamsChannel) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "MSTeamsChannel"}
+	if v.ChannelName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ChannelName"))
+	}
+	if v.ChannelId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ChannelId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateMSTeamsConfiguration(v *types.MSTeamsConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "MSTeamsConfiguration"}
+	if v.TeamId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TeamId"))
+	}
+	if v.TeamName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TeamName"))
+	}
+	if v.TransmissionTarget == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TransmissionTarget"))
+	} else if v.TransmissionTarget != nil {
+		if err := validateMSTeamsTransmissionTarget(v.TransmissionTarget); err != nil {
+			invalidParams.AddNested("TransmissionTarget", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateMSTeamsTransmissionTarget(v *types.MSTeamsTransmissionTarget) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "MSTeamsTransmissionTarget"}
+	if v.OpsOncallTarget != nil {
+		if err := validateMSTeamsChannel(v.OpsOncallTarget); err != nil {
+			invalidParams.AddNested("OpsOncallTarget", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.OpsSRETarget != nil {
+		if err := validateMSTeamsChannel(v.OpsSRETarget); err != nil {
+			invalidParams.AddNested("OpsSRETarget", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateNetworkAccessConfiguration(v types.NetworkAccessConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "NetworkAccessConfiguration"}
+	switch uv := v.(type) {
+	case *types.NetworkAccessConfigurationMemberPrivateAccess:
+		if err := validatePrivateNetworkAccess(&uv.Value); err != nil {
+			invalidParams.AddNested("[privateAccess]", err.(smithy.InvalidParamsError))
+		}
+
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateNewRelicApiKeyConfig(v *types.NewRelicApiKeyConfig) error {
 	if v == nil {
 		return nil
@@ -2316,6 +2450,48 @@ func validatePrivateConnectionMode(v types.PrivateConnectionMode) error {
 	}
 }
 
+func validatePrivateNetworkAccess(v *types.PrivateNetworkAccess) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PrivateNetworkAccess"}
+	if v.PrivateConnectionName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PrivateConnectionName"))
+	}
+	if v.RuntimeRoleArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RuntimeRoleArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateRecurrence(v types.Recurrence) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "Recurrence"}
+	switch uv := v.(type) {
+	case *types.RecurrenceMemberMonthly:
+		if err := validateMonthlyRecurrence(&uv.Value); err != nil {
+			invalidParams.AddNested("[monthly]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.RecurrenceMemberWeekly:
+		if err := validateWeeklyRecurrence(&uv.Value); err != nil {
+			invalidParams.AddNested("[weekly]", err.(smithy.InvalidParamsError))
+		}
+
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateReferenceInput(v *types.ReferenceInput) error {
 	if v == nil {
 		return nil
@@ -2356,6 +2532,28 @@ func validateRegisteredAzureIdentityDetails(v *types.RegisteredAzureIdentityDeta
 	}
 	if v.WebIdentityTokenAudiences == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("WebIdentityTokenAudiences"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateReleaseManagementConfiguration(v *types.ReleaseManagementConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ReleaseManagementConfiguration"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.NetworkAccess == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("NetworkAccess"))
+	} else if v.NetworkAccess != nil {
+		if err := validateNetworkAccessConfiguration(v.NetworkAccess); err != nil {
+			invalidParams.AddNested("NetworkAccess", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2526,8 +2724,34 @@ func validateScheduleCondition(v *types.ScheduleCondition) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ScheduleCondition"}
-	if v.Expression == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Expression"))
+	if v.Spec != nil {
+		if err := validateScheduleSpec(v.Spec); err != nil {
+			invalidParams.AddNested("Spec", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateScheduleSpec(v types.ScheduleSpec) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ScheduleSpec"}
+	switch uv := v.(type) {
+	case *types.ScheduleSpecMemberCron:
+		if err := validateCronSchedule(&uv.Value); err != nil {
+			invalidParams.AddNested("[cron]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.ScheduleSpecMemberTimeRange:
+		if err := validateTimeRangeSchedule(&uv.Value); err != nil {
+			invalidParams.AddNested("[timeRange]", err.(smithy.InvalidParamsError))
+		}
+
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2612,9 +2836,19 @@ func validateServiceConfiguration(v types.ServiceConfiguration) error {
 			invalidParams.AddNested("[mcpserversigv4]", err.(smithy.InvalidParamsError))
 		}
 
+	case *types.ServiceConfigurationMemberMsteams:
+		if err := validateMSTeamsConfiguration(&uv.Value); err != nil {
+			invalidParams.AddNested("[msteams]", err.(smithy.InvalidParamsError))
+		}
+
 	case *types.ServiceConfigurationMemberPagerduty:
 		if err := validatePagerDutyConfiguration(&uv.Value); err != nil {
 			invalidParams.AddNested("[pagerduty]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.ServiceConfigurationMemberReleaseManagement:
+		if err := validateReleaseManagementConfiguration(&uv.Value); err != nil {
+			invalidParams.AddNested("[releaseManagement]", err.(smithy.InvalidParamsError))
 		}
 
 	case *types.ServiceConfigurationMemberSlack:
@@ -2897,6 +3131,31 @@ func validateSourceAwsConfiguration(v *types.SourceAwsConfiguration) error {
 	}
 }
 
+func validateTimeRangeSchedule(v *types.TimeRangeSchedule) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TimeRangeSchedule"}
+	if v.StartAfter == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("StartAfter"))
+	}
+	if v.StartBefore == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("StartBefore"))
+	}
+	if v.Recurrence == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Recurrence"))
+	} else if v.Recurrence != nil {
+		if err := validateRecurrence(v.Recurrence); err != nil {
+			invalidParams.AddNested("Recurrence", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateTriggerCondition(v types.TriggerCondition) error {
 	if v == nil {
 		return nil
@@ -2942,6 +3201,21 @@ func validateTriggerFilterGroups(v []types.TriggerFilterGroup) error {
 		if err := validateTriggerFilterGroup(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateWeeklyRecurrence(v *types.WeeklyRecurrence) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "WeeklyRecurrence"}
+	if len(v.DayOfWeek) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("DayOfWeek"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

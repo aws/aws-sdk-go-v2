@@ -5,7 +5,9 @@ package backup
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/backup/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/backup/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -43,6 +45,21 @@ type ListProtectedResourcesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListProtectedResourcesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListProtectedResourcesInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListProtectedResourcesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListProtectedResourcesInput_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListProtectedResourcesInput_NextToken, *v.NextToken)
+	}
+}
+
 type ListProtectedResourcesOutput struct {
 
 	// The next item following a partial list of returned items. For example, if a
@@ -62,13 +79,35 @@ type ListProtectedResourcesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListProtectedResourcesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListProtectedResourcesOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListProtectedResourcesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListProtectedResourcesOutput_NextToken, *v.NextToken)
+	}
+	serializeProtectedResourcesList(s, schemas.ListProtectedResourcesOutput_Results, v.Results)
+}
+func (v *ListProtectedResourcesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListProtectedResourcesOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListProtectedResourcesOutput_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListProtectedResourcesOutput_NextToken, v.NextToken)
+		case schemas.ListProtectedResourcesOutput_Results:
+			return deserializeProtectedResourcesList(d, schemas.ListProtectedResourcesOutput_Results, &v.Results)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListProtectedResourcesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListProtectedResources{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListProtectedResources, schemas.ListProtectedResourcesInput, schemas.ListProtectedResourcesOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListProtectedResources{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListProtectedResources, schemas.ListProtectedResourcesInput, schemas.ListProtectedResourcesOutput), output: &ListProtectedResourcesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

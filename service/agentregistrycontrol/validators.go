@@ -626,6 +626,23 @@ func validateCustomJWTAuthorizerConfiguration(v *types.CustomJWTAuthorizerConfig
 	}
 }
 
+func validateCustomMetadataSchemaConfiguration(v *types.CustomMetadataSchemaConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CustomMetadataSchemaConfiguration"}
+	if v.RecordTypeSchemaOverrides != nil {
+		if err := validateRecordTypeSchemaOverrideList(v.RecordTypeSchemaOverrides); err != nil {
+			invalidParams.AddNested("RecordTypeSchemaOverrides", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateDescriptors(v *types.Descriptors) error {
 	if v == nil {
 		return nil
@@ -875,6 +892,41 @@ func validateProvenanceList(v []types.Provenance) error {
 	invalidParams := smithy.InvalidParamsError{Context: "ProvenanceList"}
 	for i := range v {
 		if err := validateProvenance(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateRecordTypeSchemaOverride(v *types.RecordTypeSchemaOverride) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RecordTypeSchemaOverride"}
+	if len(v.RecordType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("RecordType"))
+	}
+	if v.Schema == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Schema"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateRecordTypeSchemaOverrideList(v []types.RecordTypeSchemaOverride) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RecordTypeSchemaOverrideList"}
+	for i := range v {
+		if err := validateRecordTypeSchemaOverride(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -1256,6 +1308,23 @@ func validateUpdatedAutoDetectionConfiguration(v *types.UpdatedAutoDetectionConf
 	}
 }
 
+func validateUpdatedCustomMetadataSchemaConfiguration(v *types.UpdatedCustomMetadataSchemaConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdatedCustomMetadataSchemaConfiguration"}
+	if v.OptionalValue != nil {
+		if err := validateCustomMetadataSchemaConfiguration(v.OptionalValue); err != nil {
+			invalidParams.AddNested("OptionalValue", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateUpdatedDescriptors(v *types.UpdatedDescriptors) error {
 	if v == nil {
 		return nil
@@ -1443,6 +1512,11 @@ func validateOpCreateRegistryInput(v *CreateRegistryInput) error {
 	if v.DiscoveryConfiguration != nil {
 		if err := validateDiscoveryConfiguration(v.DiscoveryConfiguration); err != nil {
 			invalidParams.AddNested("DiscoveryConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.CustomMetadataSchemaConfiguration != nil {
+		if err := validateCustomMetadataSchemaConfiguration(v.CustomMetadataSchemaConfiguration); err != nil {
+			invalidParams.AddNested("CustomMetadataSchemaConfiguration", err.(smithy.InvalidParamsError))
 		}
 	}
 	if v.AutoDetectionConfiguration != nil {
@@ -1673,6 +1747,11 @@ func validateOpUpdateRegistryInput(v *UpdateRegistryInput) error {
 	if v.DiscoveryConfiguration != nil {
 		if err := validateUpdatedDiscoveryConfiguration(v.DiscoveryConfiguration); err != nil {
 			invalidParams.AddNested("DiscoveryConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.CustomMetadataSchemaConfiguration != nil {
+		if err := validateUpdatedCustomMetadataSchemaConfiguration(v.CustomMetadataSchemaConfiguration); err != nil {
+			invalidParams.AddNested("CustomMetadataSchemaConfiguration", err.(smithy.InvalidParamsError))
 		}
 	}
 	if v.AutoDetectionConfiguration != nil {

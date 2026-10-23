@@ -4,6 +4,8 @@ package datazone
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/datazone/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -50,6 +52,21 @@ type DeleteGlossaryTermInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteGlossaryTermInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteGlossaryTermInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteGlossaryTermInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DomainIdentifier != nil {
+		s.WriteString(schemas.DeleteGlossaryTermInput_domainIdentifier, *v.DomainIdentifier)
+	}
+	if v.Identifier != nil {
+		s.WriteString(schemas.DeleteGlossaryTermInput_identifier, *v.Identifier)
+	}
+}
+
 type DeleteGlossaryTermOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -57,13 +74,26 @@ type DeleteGlossaryTermOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteGlossaryTermOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteGlossaryTermOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteGlossaryTermOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteGlossaryTermOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteGlossaryTermOutput, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteGlossaryTermMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteGlossaryTerm{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteGlossaryTerm, schemas.DeleteGlossaryTermInput, schemas.DeleteGlossaryTermOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteGlossaryTerm{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteGlossaryTerm, schemas.DeleteGlossaryTermInput, schemas.DeleteGlossaryTermOutput), output: &DeleteGlossaryTermOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

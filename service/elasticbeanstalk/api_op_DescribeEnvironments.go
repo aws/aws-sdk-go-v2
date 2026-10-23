@@ -13,6 +13,23 @@ import (
 )
 
 // Returns descriptions for existing environments.
+//
+// This action only returns information about environments that the calling
+// principle has IAM permissions to access. For example, consider a case where a
+// user only has permission to access one of three environments. When the user
+// calls the DescribeEnvironments action, the response will only include the one
+// environment that the user has permission to access instead of all three
+// environments. If the user doesn’t have access to any of the environments an
+// empty result is returned.
+//
+// The [AWSElasticBeanstalkReadOnly] managed policy allows operators to view information about resources
+// related to Elastic Beanstalk environments. For more information, see [Managing Elastic Beanstalk user policies]in the
+// Elastic Beanstalk Developer Guide. For detailed instructions to attach a policy
+// to a user or group, see the section [Controlling access with managed policies]in the same topic.
+//
+// [AWSElasticBeanstalkReadOnly]: https://docs.aws.amazon.com/aws-managed-policy/latest/reference/AWSElasticBeanstalkReadOnly.html
+// [Managing Elastic Beanstalk user policies]: https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/AWSHowTo.iam.managed-policies.html
+// [Controlling access with managed policies]: https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/AWSHowTo.iam.managed-policies.html#iam-userpolicies-managed
 func (c *Client) DescribeEnvironments(ctx context.Context, params *DescribeEnvironmentsInput, optFns ...func(*Options)) (*DescribeEnvironmentsOutput, error) {
 	if params == nil {
 		params = &DescribeEnvironmentsInput{}
@@ -31,16 +48,16 @@ func (c *Client) DescribeEnvironments(ctx context.Context, params *DescribeEnvir
 // Request to describe one or more environments.
 type DescribeEnvironmentsInput struct {
 
-	// If specified, AWS Elastic Beanstalk restricts the returned descriptions to
-	// include only those that are associated with this application.
+	// If specified, Elastic Beanstalk restricts the returned descriptions to include
+	// only those that are associated with this application.
 	ApplicationName *string
 
-	// If specified, AWS Elastic Beanstalk restricts the returned descriptions to
-	// include only those that have the specified IDs.
+	// If specified, Elastic Beanstalk restricts the returned descriptions to include
+	// only those that have the specified IDs.
 	EnvironmentIds []string
 
-	// If specified, AWS Elastic Beanstalk restricts the returned descriptions to
-	// include only those that have the specified names.
+	// If specified, Elastic Beanstalk restricts the returned descriptions to include
+	// only those that have the specified names.
 	EnvironmentNames []string
 
 	// Indicates whether to include deleted environments:
@@ -69,8 +86,8 @@ type DescribeEnvironmentsInput struct {
 	// If no NextToken is specified, the first page is retrieved.
 	NextToken *string
 
-	// If specified, AWS Elastic Beanstalk restricts the returned descriptions to
-	// include only those that are associated with this application version.
+	// If specified, Elastic Beanstalk restricts the returned descriptions to include
+	// only those that are associated with this application version.
 	VersionLabel *string
 
 	noSmithyDocumentSerde

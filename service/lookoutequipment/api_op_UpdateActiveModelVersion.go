@@ -4,6 +4,8 @@ package lookoutequipment
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/lookoutequipment/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -40,6 +42,21 @@ type UpdateActiveModelVersionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateActiveModelVersionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateActiveModelVersionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateActiveModelVersionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ModelName != nil {
+		s.WriteString(schemas.UpdateActiveModelVersionRequest_ModelName, *v.ModelName)
+	}
+	if v.ModelVersion != nil {
+		s.WriteInt64(schemas.UpdateActiveModelVersionRequest_ModelVersion, *v.ModelVersion)
+	}
+}
+
 type UpdateActiveModelVersionOutput struct {
 
 	// The version that is currently active of the machine learning model for which
@@ -72,13 +89,62 @@ type UpdateActiveModelVersionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateActiveModelVersionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateActiveModelVersionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateActiveModelVersionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CurrentActiveVersion != nil {
+		s.WriteInt64(schemas.UpdateActiveModelVersionResponse_CurrentActiveVersion, *v.CurrentActiveVersion)
+	}
+	if v.CurrentActiveVersionArn != nil {
+		s.WriteString(schemas.UpdateActiveModelVersionResponse_CurrentActiveVersionArn, *v.CurrentActiveVersionArn)
+	}
+	if v.ModelArn != nil {
+		s.WriteString(schemas.UpdateActiveModelVersionResponse_ModelArn, *v.ModelArn)
+	}
+	if v.ModelName != nil {
+		s.WriteString(schemas.UpdateActiveModelVersionResponse_ModelName, *v.ModelName)
+	}
+	if v.PreviousActiveVersion != nil {
+		s.WriteInt64(schemas.UpdateActiveModelVersionResponse_PreviousActiveVersion, *v.PreviousActiveVersion)
+	}
+	if v.PreviousActiveVersionArn != nil {
+		s.WriteString(schemas.UpdateActiveModelVersionResponse_PreviousActiveVersionArn, *v.PreviousActiveVersionArn)
+	}
+}
+func (v *UpdateActiveModelVersionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateActiveModelVersionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateActiveModelVersionResponse_CurrentActiveVersion:
+			v.CurrentActiveVersion = new(int64)
+			return d.ReadInt64(schemas.UpdateActiveModelVersionResponse_CurrentActiveVersion, v.CurrentActiveVersion)
+		case schemas.UpdateActiveModelVersionResponse_CurrentActiveVersionArn:
+			v.CurrentActiveVersionArn = new(string)
+			return d.ReadString(schemas.UpdateActiveModelVersionResponse_CurrentActiveVersionArn, v.CurrentActiveVersionArn)
+		case schemas.UpdateActiveModelVersionResponse_ModelArn:
+			v.ModelArn = new(string)
+			return d.ReadString(schemas.UpdateActiveModelVersionResponse_ModelArn, v.ModelArn)
+		case schemas.UpdateActiveModelVersionResponse_ModelName:
+			v.ModelName = new(string)
+			return d.ReadString(schemas.UpdateActiveModelVersionResponse_ModelName, v.ModelName)
+		case schemas.UpdateActiveModelVersionResponse_PreviousActiveVersion:
+			v.PreviousActiveVersion = new(int64)
+			return d.ReadInt64(schemas.UpdateActiveModelVersionResponse_PreviousActiveVersion, v.PreviousActiveVersion)
+		case schemas.UpdateActiveModelVersionResponse_PreviousActiveVersionArn:
+			v.PreviousActiveVersionArn = new(string)
+			return d.ReadString(schemas.UpdateActiveModelVersionResponse_PreviousActiveVersionArn, v.PreviousActiveVersionArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateActiveModelVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpUpdateActiveModelVersion{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateActiveModelVersion, schemas.UpdateActiveModelVersionRequest, schemas.UpdateActiveModelVersionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpUpdateActiveModelVersion{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateActiveModelVersion, schemas.UpdateActiveModelVersionRequest, schemas.UpdateActiveModelVersionResponse), output: &UpdateActiveModelVersionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package apigateway
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/apigateway/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/apigateway/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -67,6 +69,42 @@ type CreateDeploymentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateDeploymentInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateDeploymentRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateDeploymentInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CacheClusterEnabled != nil {
+		s.WriteBool(schemas.CreateDeploymentRequest_cacheClusterEnabled, *v.CacheClusterEnabled)
+	}
+	if v.CacheClusterSize != "" {
+		s.WriteString(schemas.CreateDeploymentRequest_cacheClusterSize, string(v.CacheClusterSize))
+	}
+	if v.CanarySettings != nil {
+		s.WriteStruct(schemas.CreateDeploymentRequest_canarySettings)
+		v.CanarySettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreateDeploymentRequest_description, *v.Description)
+	}
+	if v.RestApiId != nil {
+		s.WriteString(schemas.CreateDeploymentRequest_restApiId, *v.RestApiId)
+	}
+	if v.StageDescription != nil {
+		s.WriteString(schemas.CreateDeploymentRequest_stageDescription, *v.StageDescription)
+	}
+	if v.StageName != nil {
+		s.WriteString(schemas.CreateDeploymentRequest_stageName, *v.StageName)
+	}
+	if v.TracingEnabled != nil {
+		s.WriteBool(schemas.CreateDeploymentRequest_tracingEnabled, *v.TracingEnabled)
+	}
+	serializeMapOfStringToString(s, schemas.CreateDeploymentRequest_variables, v.Variables)
+}
+
 // An immutable representation of a RestApi resource that can be called by users
 // using Stages. A deployment must be associated with a Stage for it to be callable
 // over the Internet.
@@ -91,13 +129,47 @@ type CreateDeploymentOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateDeploymentOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Deployment)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateDeploymentOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializePathToMapOfMethodSnapshot(s, schemas.Deployment_apiSummary, v.ApiSummary)
+	if v.CreatedDate != nil {
+		s.WriteTime(schemas.Deployment_createdDate, *v.CreatedDate)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.Deployment_description, *v.Description)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.Deployment_id, *v.Id)
+	}
+}
+func (v *CreateDeploymentOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Deployment, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Deployment_apiSummary:
+			return deserializePathToMapOfMethodSnapshot(d, schemas.Deployment_apiSummary, &v.ApiSummary)
+		case schemas.Deployment_createdDate:
+			v.CreatedDate = new(time.Time)
+			return d.ReadTime(schemas.Deployment_createdDate, v.CreatedDate)
+		case schemas.Deployment_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.Deployment_description, v.Description)
+		case schemas.Deployment_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.Deployment_id, v.Id)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateDeploymentMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateDeployment{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateDeployment, schemas.CreateDeploymentRequest, schemas.Deployment)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateDeployment{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateDeployment, schemas.CreateDeploymentRequest, schemas.Deployment), output: &CreateDeploymentOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

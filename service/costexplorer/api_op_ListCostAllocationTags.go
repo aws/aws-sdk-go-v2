@@ -5,7 +5,9 @@ package costexplorer
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/costexplorer/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/costexplorer/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -52,6 +54,28 @@ type ListCostAllocationTagsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListCostAllocationTagsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListCostAllocationTagsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListCostAllocationTagsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListCostAllocationTagsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListCostAllocationTagsRequest_NextToken, *v.NextToken)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.ListCostAllocationTagsRequest_Status, string(v.Status))
+	}
+	serializeCostAllocationTagKeyList(s, schemas.ListCostAllocationTagsRequest_TagKeys, v.TagKeys)
+	if v.Type != "" {
+		s.WriteString(schemas.ListCostAllocationTagsRequest_Type, string(v.Type))
+	}
+}
+
 type ListCostAllocationTagsOutput struct {
 
 	// A list of cost allocation tags that includes the detailed metadata for each
@@ -69,13 +93,35 @@ type ListCostAllocationTagsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListCostAllocationTagsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListCostAllocationTagsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListCostAllocationTagsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeCostAllocationTagList(s, schemas.ListCostAllocationTagsResponse_CostAllocationTags, v.CostAllocationTags)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListCostAllocationTagsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListCostAllocationTagsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListCostAllocationTagsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListCostAllocationTagsResponse_CostAllocationTags:
+			return deserializeCostAllocationTagList(d, schemas.ListCostAllocationTagsResponse_CostAllocationTags, &v.CostAllocationTags)
+		case schemas.ListCostAllocationTagsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListCostAllocationTagsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListCostAllocationTagsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListCostAllocationTags{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListCostAllocationTags, schemas.ListCostAllocationTagsRequest, schemas.ListCostAllocationTagsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListCostAllocationTags{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListCostAllocationTags, schemas.ListCostAllocationTagsRequest, schemas.ListCostAllocationTagsResponse), output: &ListCostAllocationTagsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

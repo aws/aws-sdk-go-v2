@@ -4,7 +4,9 @@ package costexplorer
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/costexplorer/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/costexplorer/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -51,8 +53,8 @@ type GetTagsInput struct {
 	//
 	//   - Simple dimension values.
 	//
-	//   - There are three types of simple dimension values: CostCategories , Tags ,
-	//   and Dimensions .
+	//   - There are four types of simple dimension values: CostCategories , Tags ,
+	//   Dimensions , and ProductAttributes .
 	//
 	//   - Specify the CostCategories field to define a filter that acts on Cost
 	//   Categories.
@@ -61,6 +63,13 @@ type GetTagsInput struct {
 	//
 	//   - Specify the Dimensions field to define a filter that acts on the [DimensionValues]
 	//   DimensionValues .
+	//
+	//   - Specify the ProductAttributes field to define a filter that acts on the
+	//   product attributes of supported services, such as Amazon Bedrock. Only
+	//   GetCostAndUsage , GetCostAndUsageWithResources , GetDimensionValues (in the
+	//   COST_AND_USAGE context), GetTags , and GetCostCategories support
+	//   ProductAttributes . For the supported services, keys and SERVICE filter rules,
+	//   see [ProductAttributeValues]ProductAttributeValues .
 	//
 	//   - For each filter type, you can set the dimension name and values for the
 	//   filters that you plan to use.
@@ -117,6 +126,7 @@ type GetTagsInput struct {
 	// and OR aren't supported. Dimensions are limited to LINKED_ACCOUNT .
 	//
 	// [DimensionValues]: https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_DimensionValues.html
+	// [ProductAttributeValues]: https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_ProductAttributeValues.html
 	Filter *types.Expression
 
 	// This field is only used when SortBy is provided in the request. The maximum
@@ -164,6 +174,41 @@ type GetTagsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetTagsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetTagsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetTagsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BillingViewArn != nil {
+		s.WriteString(schemas.GetTagsRequest_BillingViewArn, *v.BillingViewArn)
+	}
+	if v.Filter != nil {
+		s.WriteStruct(schemas.GetTagsRequest_Filter)
+		v.Filter.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.GetTagsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextPageToken != nil {
+		s.WriteString(schemas.GetTagsRequest_NextPageToken, *v.NextPageToken)
+	}
+	if v.SearchString != nil {
+		s.WriteString(schemas.GetTagsRequest_SearchString, *v.SearchString)
+	}
+	serializeSortDefinitions(s, schemas.GetTagsRequest_SortBy, v.SortBy)
+	if v.TagKey != nil {
+		s.WriteString(schemas.GetTagsRequest_TagKey, *v.TagKey)
+	}
+	if v.TimePeriod != nil {
+		s.WriteStruct(schemas.GetTagsRequest_TimePeriod)
+		v.TimePeriod.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type GetTagsOutput struct {
 
 	// The number of query results that Amazon Web Services returns at a time.
@@ -192,13 +237,47 @@ type GetTagsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetTagsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetTagsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetTagsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextPageToken != nil {
+		s.WriteString(schemas.GetTagsResponse_NextPageToken, *v.NextPageToken)
+	}
+	if v.ReturnSize != nil {
+		s.WriteInt32(schemas.GetTagsResponse_ReturnSize, *v.ReturnSize)
+	}
+	serializeTagList(s, schemas.GetTagsResponse_Tags, v.Tags)
+	if v.TotalSize != nil {
+		s.WriteInt32(schemas.GetTagsResponse_TotalSize, *v.TotalSize)
+	}
+}
+func (v *GetTagsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetTagsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetTagsResponse_NextPageToken:
+			v.NextPageToken = new(string)
+			return d.ReadString(schemas.GetTagsResponse_NextPageToken, v.NextPageToken)
+		case schemas.GetTagsResponse_ReturnSize:
+			v.ReturnSize = new(int32)
+			return d.ReadInt32(schemas.GetTagsResponse_ReturnSize, v.ReturnSize)
+		case schemas.GetTagsResponse_Tags:
+			return deserializeTagList(d, schemas.GetTagsResponse_Tags, &v.Tags)
+		case schemas.GetTagsResponse_TotalSize:
+			v.TotalSize = new(int32)
+			return d.ReadInt32(schemas.GetTagsResponse_TotalSize, v.TotalSize)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetTagsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetTags{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetTags, schemas.GetTagsRequest, schemas.GetTagsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetTags{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetTags, schemas.GetTagsRequest, schemas.GetTagsResponse), output: &GetTagsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

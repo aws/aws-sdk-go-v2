@@ -5,7 +5,9 @@ package healthlake
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/healthlake/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/healthlake/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -78,6 +80,43 @@ type StartDataTransformationJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartDataTransformationJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartDataTransformationJobRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartDataTransformationJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.StartDataTransformationJobRequest_ClientToken, *v.ClientToken)
+	}
+	if v.DataAccessRoleArn != nil {
+		s.WriteString(schemas.StartDataTransformationJobRequest_DataAccessRoleArn, *v.DataAccessRoleArn)
+	}
+	if v.DriftDetectionEnabled != nil {
+		s.WriteBool(schemas.StartDataTransformationJobRequest_DriftDetectionEnabled, *v.DriftDetectionEnabled)
+	}
+	if v.InputDataConfig != nil {
+		s.WriteStruct(schemas.StartDataTransformationJobRequest_InputDataConfig)
+		v.InputDataConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.JobName != nil {
+		s.WriteString(schemas.StartDataTransformationJobRequest_JobName, *v.JobName)
+	}
+	if v.OutputDataConfig != nil {
+		s.WriteStruct(schemas.StartDataTransformationJobRequest_OutputDataConfig)
+		v.OutputDataConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ProfileId != nil {
+		s.WriteString(schemas.StartDataTransformationJobRequest_ProfileId, *v.ProfileId)
+	}
+	if v.ProvenanceEnabled != nil {
+		s.WriteBool(schemas.StartDataTransformationJobRequest_ProvenanceEnabled, *v.ProvenanceEnabled)
+	}
+}
+
 // The response from the StartDataTransformationJob operation.
 type StartDataTransformationJobOutput struct {
 
@@ -97,13 +136,42 @@ type StartDataTransformationJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartDataTransformationJobOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartDataTransformationJobResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartDataTransformationJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.JobId != nil {
+		s.WriteString(schemas.StartDataTransformationJobResponse_JobId, *v.JobId)
+	}
+	if v.JobStatus != "" {
+		s.WriteString(schemas.StartDataTransformationJobResponse_JobStatus, string(v.JobStatus))
+	}
+}
+func (v *StartDataTransformationJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartDataTransformationJobResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartDataTransformationJobResponse_JobId:
+			v.JobId = new(string)
+			return d.ReadString(schemas.StartDataTransformationJobResponse_JobId, v.JobId)
+		case schemas.StartDataTransformationJobResponse_JobStatus:
+			var ev string
+			if err := d.ReadString(schemas.StartDataTransformationJobResponse_JobStatus, &ev); err != nil {
+				return err
+			}
+			v.JobStatus = types.TransformationJobStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartDataTransformationJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpStartDataTransformationJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartDataTransformationJob, schemas.StartDataTransformationJobRequest, schemas.StartDataTransformationJobResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpStartDataTransformationJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartDataTransformationJob, schemas.StartDataTransformationJobRequest, schemas.StartDataTransformationJobResponse), output: &StartDataTransformationJobOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

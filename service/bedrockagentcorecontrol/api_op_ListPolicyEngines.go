@@ -5,7 +5,9 @@ package bedrockagentcorecontrol
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -44,6 +46,21 @@ type ListPolicyEnginesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListPolicyEnginesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListPolicyEnginesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListPolicyEnginesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListPolicyEnginesRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListPolicyEnginesRequest_nextToken, *v.NextToken)
+	}
+}
+
 type ListPolicyEnginesOutput struct {
 
 	// An array of policy engine objects that exist in the account. Each policy engine
@@ -65,13 +82,35 @@ type ListPolicyEnginesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListPolicyEnginesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListPolicyEnginesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListPolicyEnginesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListPolicyEnginesResponse_nextToken, *v.NextToken)
+	}
+	serializePolicyEngines(s, schemas.ListPolicyEnginesResponse_policyEngines, v.PolicyEngines)
+}
+func (v *ListPolicyEnginesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListPolicyEnginesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListPolicyEnginesResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListPolicyEnginesResponse_nextToken, v.NextToken)
+		case schemas.ListPolicyEnginesResponse_policyEngines:
+			return deserializePolicyEngines(d, schemas.ListPolicyEnginesResponse_policyEngines, &v.PolicyEngines)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListPolicyEnginesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListPolicyEngines{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListPolicyEngines, schemas.ListPolicyEnginesRequest, schemas.ListPolicyEnginesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListPolicyEngines{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListPolicyEngines, schemas.ListPolicyEnginesRequest, schemas.ListPolicyEnginesResponse), output: &ListPolicyEnginesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

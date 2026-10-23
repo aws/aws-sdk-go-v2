@@ -562,6 +562,10 @@ func TestCheckResponseSnapshot_BatchGetJobEntity(t *testing.T) {
 						},
 					},
 					SchemaVersion: ptr.String("__SchemaVersion__"),
+					Extensions: []string{
+						"__Member__",
+						"__Member__",
+					},
 					PathMappingRules: []types.PathMappingRule{
 						{
 							SourcePathFormat: types.PathFormat("windows"),
@@ -602,6 +606,10 @@ func TestCheckResponseSnapshot_BatchGetJobEntity(t *testing.T) {
 						},
 					},
 					SchemaVersion: ptr.String("__SchemaVersion__"),
+					Extensions: []string{
+						"__Member__",
+						"__Member__",
+					},
 					PathMappingRules: []types.PathMappingRule{
 						{
 							SourcePathFormat: types.PathFormat("windows"),
@@ -4316,6 +4324,57 @@ func TestCheckResponseSnapshot_ListLimits(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_ListMemberships(t *testing.T) {
+	want := &ListMembershipsOutput{
+		Memberships: []types.MembershipSummary{
+			&types.MembershipSummaryMemberFarm{
+				Value: types.FarmMember{
+					FarmId:          ptr.String("__FarmId__"),
+					PrincipalId:     ptr.String("__PrincipalId__"),
+					PrincipalType:   types.DeadlinePrincipalType("USER"),
+					IdentityStoreId: ptr.String("__IdentityStoreId__"),
+					MembershipLevel: types.MembershipLevel("VIEWER"),
+				},
+			},
+			&types.MembershipSummaryMemberFarm{
+				Value: types.FarmMember{
+					FarmId:          ptr.String("__FarmId__"),
+					PrincipalId:     ptr.String("__PrincipalId__"),
+					PrincipalType:   types.DeadlinePrincipalType("USER"),
+					IdentityStoreId: ptr.String("__IdentityStoreId__"),
+					MembershipLevel: types.MembershipLevel("VIEWER"),
+				},
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("ListMemberships.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.ListMemberships(context.Background(), &ListMembershipsInput{
+		NextToken:            ptr.String("__NextToken__"),
+		MaxResults:           ptr.Int32(1),
+		PrincipalId:          ptr.String("__PrincipalId__"),
+		IdentityStoreId:      ptr.String("__IdentityStoreId__"),
+		IdentityCenterRegion: ptr.String("__IdentityCenterRegion__"),
+		ResourceTypes: []types.MembershipResourceType{
+			types.MembershipResourceType("FARM"),
+			types.MembershipResourceType("FARM"),
+		},
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "ListMemberships.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_ListMeteredProducts(t *testing.T) {
 	want := &ListMeteredProductsOutput{
 		MeteredProducts: []types.MeteredProductSummary{
@@ -6529,6 +6588,9 @@ func TestCheckResponseSnapshot_UpdateWorkerSchedule(t *testing.T) {
 						"key0": "__Value__",
 					},
 					Error: ptr.String("__Error__"),
+				},
+				Metadata: map[string]string{
+					"key0": "__Value__",
 				},
 			},
 		},

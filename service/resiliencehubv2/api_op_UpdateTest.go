@@ -4,7 +4,9 @@ package resiliencehubv2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/resiliencehubv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/resiliencehubv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -51,6 +53,31 @@ type UpdateTestInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateTestInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateTestRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateTestInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LoggingConfiguration != nil {
+		s.WriteStruct(schemas.UpdateTestRequest_loggingConfiguration)
+		v.LoggingConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeTestParameters(s, schemas.UpdateTestRequest_parameters, v.Parameters)
+	if v.RoleName != nil {
+		s.WriteString(schemas.UpdateTestRequest_roleName, *v.RoleName)
+	}
+	if v.ServiceArn != nil {
+		s.WriteString(schemas.UpdateTestRequest_serviceArn, *v.ServiceArn)
+	}
+	serializeStopConditionList(s, schemas.UpdateTestRequest_stopConditions, v.StopConditions)
+	if v.TestId != nil {
+		s.WriteString(schemas.UpdateTestRequest_testId, *v.TestId)
+	}
+}
+
 type UpdateTestOutput struct {
 
 	// The updated test.
@@ -64,13 +91,34 @@ type UpdateTestOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateTestOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateTestResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateTestOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Test != nil {
+		s.WriteStruct(schemas.UpdateTestResponse_test)
+		v.Test.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateTestOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateTestResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateTestResponse_test:
+			v.Test = &types.Test{}
+			return v.Test.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateTestMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateTest{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateTest, schemas.UpdateTestRequest, schemas.UpdateTestResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateTest{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateTest, schemas.UpdateTestRequest, schemas.UpdateTestResponse), output: &UpdateTestOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -5,7 +5,9 @@ package sesv2
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/sesv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sesv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -35,6 +37,11 @@ func (c *Client) ListEmailIdentities(ctx context.Context, params *ListEmailIdent
 // but are no longer verified.
 type ListEmailIdentitiesInput struct {
 
+	// An object that contains filters to apply when listing email identities. You can
+	// filter by a substring of the identity name, by identity type, or by verification
+	// status.
+	Filter map[string]string
+
 	// A token returned from a previous call to ListEmailIdentities to indicate the
 	// position in the list of identities.
 	NextToken *string
@@ -48,6 +55,22 @@ type ListEmailIdentitiesInput struct {
 	PageSize *int32
 
 	noSmithyDocumentSerde
+}
+
+func (v *ListEmailIdentitiesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListEmailIdentitiesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListEmailIdentitiesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeIdentityFilter(s, schemas.ListEmailIdentitiesRequest_Filter, v.Filter)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListEmailIdentitiesRequest_NextToken, *v.NextToken)
+	}
+	if v.PageSize != nil {
+		s.WriteInt32(schemas.ListEmailIdentitiesRequest_PageSize, *v.PageSize)
+	}
 }
 
 // A list of all of the identities that you've attempted to verify, regardless of
@@ -69,13 +92,35 @@ type ListEmailIdentitiesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListEmailIdentitiesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListEmailIdentitiesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListEmailIdentitiesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeIdentityInfoList(s, schemas.ListEmailIdentitiesResponse_EmailIdentities, v.EmailIdentities)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListEmailIdentitiesResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListEmailIdentitiesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListEmailIdentitiesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListEmailIdentitiesResponse_EmailIdentities:
+			return deserializeIdentityInfoList(d, schemas.ListEmailIdentitiesResponse_EmailIdentities, &v.EmailIdentities)
+		case schemas.ListEmailIdentitiesResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListEmailIdentitiesResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListEmailIdentitiesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListEmailIdentities{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListEmailIdentities, schemas.ListEmailIdentitiesRequest, schemas.ListEmailIdentitiesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListEmailIdentities{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListEmailIdentities, schemas.ListEmailIdentitiesRequest, schemas.ListEmailIdentitiesResponse), output: &ListEmailIdentitiesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

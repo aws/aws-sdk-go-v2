@@ -4,7 +4,9 @@ package databasemigrationservice
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/databasemigrationservice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/databasemigrationservice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -90,6 +92,25 @@ type StartMetadataModelCreationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartMetadataModelCreationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartMetadataModelCreationMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartMetadataModelCreationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MetadataModelName != nil {
+		s.WriteString(schemas.StartMetadataModelCreationMessage_MetadataModelName, *v.MetadataModelName)
+	}
+	if v.MigrationProjectIdentifier != nil {
+		s.WriteString(schemas.StartMetadataModelCreationMessage_MigrationProjectIdentifier, *v.MigrationProjectIdentifier)
+	}
+	serializeMetadataModelProperties(s, schemas.StartMetadataModelCreationMessage_Properties, v.Properties)
+	if v.SelectionRules != nil {
+		s.WriteString(schemas.StartMetadataModelCreationMessage_SelectionRules, *v.SelectionRules)
+	}
+}
+
 type StartMetadataModelCreationOutput struct {
 
 	// The identifier for the creation request.
@@ -101,13 +122,32 @@ type StartMetadataModelCreationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartMetadataModelCreationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartMetadataModelCreationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartMetadataModelCreationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RequestIdentifier != nil {
+		s.WriteString(schemas.StartMetadataModelCreationResponse_RequestIdentifier, *v.RequestIdentifier)
+	}
+}
+func (v *StartMetadataModelCreationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartMetadataModelCreationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartMetadataModelCreationResponse_RequestIdentifier:
+			v.RequestIdentifier = new(string)
+			return d.ReadString(schemas.StartMetadataModelCreationResponse_RequestIdentifier, v.RequestIdentifier)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartMetadataModelCreationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStartMetadataModelCreation{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartMetadataModelCreation, schemas.StartMetadataModelCreationMessage, schemas.StartMetadataModelCreationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpStartMetadataModelCreation{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartMetadataModelCreation, schemas.StartMetadataModelCreationMessage, schemas.StartMetadataModelCreationResponse), output: &StartMetadataModelCreationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

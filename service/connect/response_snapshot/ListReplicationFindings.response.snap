@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"ApproximateDriftedResourceCounts":[{"Count":1,"Region":"__Region__","Timestamp":946684800},{"Count":1,"Region":"__Region__","Timestamp":946684800}],"NextToken":"__NextToken__","ReplicationFindingsList":[{"Arn":"__Arn__","Id":"__Id__","Message":"__Message__","Name":"__Name__","Operation":"__Operation__","ReferenceCode":"__ReferenceCode__","Region":"__Region__","ResourceType":"__ResourceType__"},{"Arn":"__Arn__","Id":"__Id__","Message":"__Message__","Name":"__Name__","Operation":"__Operation__","ReferenceCode":"__ReferenceCode__","Region":"__Region__","ResourceType":"__ResourceType__"}],"ResourceReplicationStatuses":[{"Region":"__Region__","Status":"__Status__"},{"Region":"__Region__","Status":"__Status__"}]}

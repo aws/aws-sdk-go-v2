@@ -91,7 +91,13 @@
                     "target": "com.amazonaws.elasticache#CacheSubnetGroupNotFoundFault"
                 },
                 {
+                    "target": "com.amazonaws.elasticache#GlobalReplicationGroupNotFoundFault"
+                },
+                {
                     "target": "com.amazonaws.elasticache#InvalidARNFault"
+                },
+                {
+                    "target": "com.amazonaws.elasticache#InvalidParameterValueException"
                 },
                 {
                     "target": "com.amazonaws.elasticache#InvalidReplicationGroupStateFault"
@@ -128,7 +134,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>A tag is a key-value pair where the key and value are case-sensitive. You can use tags\n            to categorize and track all your ElastiCache resources, with the exception of global\n            replication group. When you add or remove tags on replication groups, those actions will\n            be replicated to all nodes in the replication group. For more information, see <a href=\"http://docs.aws.amazon.com/AmazonElastiCache/latest/dg/IAM.ResourceLevelPermissions.html\">Resource-level permissions</a>.</p>\n         <p> For example, you can use cost-allocation tags to your ElastiCache resources, Amazon\n            generates a cost allocation report as a comma-separated value (CSV) file with your usage\n            and costs aggregated by your tags. You can apply tags that represent business categories\n            (such as cost centers, application names, or owners) to organize your costs across\n            multiple services.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AmazonElastiCache/latest/dg/Tagging.html\">Using Cost Allocation Tags in\n                Amazon ElastiCache</a> in the <i>ElastiCache User\n            Guide</i>.</p>",
+                "smithy.api#documentation": "<p>A tag is a key-value pair where the key and value are case-sensitive. You can use tags\n            to categorize and track all your ElastiCache resources.\n            When you add or remove tags on replication groups, those actions will\n            be replicated to all nodes in the replication group. For more information, see <a href=\"http://docs.aws.amazon.com/AmazonElastiCache/latest/dg/IAM.ResourceLevelPermissions.html\">Resource-level permissions</a>.</p>\n         <p> For example, you can use cost-allocation tags to your ElastiCache resources, Amazon\n            generates a cost allocation report as a comma-separated value (CSV) file with your usage\n            and costs aggregated by your tags. You can apply tags that represent business categories\n            (such as cost centers, application names, or owners) to organize your costs across\n            multiple services.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AmazonElastiCache/latest/dg/Tagging.html\">Using Cost Allocation Tags in\n                Amazon ElastiCache</a> in the <i>ElastiCache User\n            Guide</i>.</p>",
                 "smithy.api#examples": [
                     {
                         "title": "AddTagsToResource",
@@ -421,6 +427,9 @@
                     "target": "com.amazonaws.elasticache#ModifyUserGroup"
                 },
                 {
+                    "target": "com.amazonaws.elasticache#PrepareMigration"
+                },
+                {
                     "target": "com.amazonaws.elasticache#PurchaseReservedCacheNodesOffering"
                 },
                 {
@@ -440,6 +449,9 @@
                 },
                 {
                     "target": "com.amazonaws.elasticache#StartMigration"
+                },
+                {
+                    "target": "com.amazonaws.elasticache#StopMigration"
                 },
                 {
                     "target": "com.amazonaws.elasticache#TestFailover"
@@ -3224,17 +3236,38 @@
             },
             "errors": [
                 {
+                    "target": "com.amazonaws.elasticache#InvalidCacheClusterStateFault"
+                },
+                {
+                    "target": "com.amazonaws.elasticache#InvalidParameterCombinationException"
+                },
+                {
+                    "target": "com.amazonaws.elasticache#InvalidParameterValueException"
+                },
+                {
                     "target": "com.amazonaws.elasticache#InvalidReplicationGroupStateFault"
+                },
+                {
+                    "target": "com.amazonaws.elasticache#InvalidServerlessCacheStateFault"
+                },
+                {
+                    "target": "com.amazonaws.elasticache#MigrationHealthFault"
                 },
                 {
                     "target": "com.amazonaws.elasticache#ReplicationGroupNotFoundFault"
                 },
                 {
                     "target": "com.amazonaws.elasticache#ReplicationGroupNotUnderMigrationFault"
+                },
+                {
+                    "target": "com.amazonaws.elasticache#ServerlessCacheNotFoundFault"
+                },
+                {
+                    "target": "com.amazonaws.elasticache#ServerlessCacheNotUnderMigrationFault"
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Complete the migration of data.</p>"
+                "smithy.api#documentation": "<p>Completes the migration of data.</p>"
             }
         },
         "com.amazonaws.elasticache#CompleteMigrationMessage": {
@@ -3243,9 +3276,13 @@
                 "ReplicationGroupId": {
                     "target": "com.amazonaws.elasticache#String",
                     "traits": {
-                        "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>The ID of the replication group to which data is being migrated.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The ID of the replication group to which data is being migrated.</p>"
+                    }
+                },
+                "ServerlessCacheName": {
+                    "target": "com.amazonaws.elasticache#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the serverless cache to which data is being migrated.</p>"
                     }
                 },
                 "Force": {
@@ -3264,6 +3301,12 @@
             "members": {
                 "ReplicationGroup": {
                     "target": "com.amazonaws.elasticache#ReplicationGroup"
+                },
+                "ServerlessCache": {
+                    "target": "com.amazonaws.elasticache#ServerlessCache",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Provides the details of the serverless cache for which the migration completed.</p>"
+                    }
                 }
             },
             "traits": {
@@ -3304,6 +3347,23 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Node group (shard) configuration options when adding or removing replicas. Each\n            node group (shard) configuration has the following members: NodeGroupId,\n            NewReplicaCount, and PreferredAvailabilityZones. </p>"
+            }
+        },
+        "com.amazonaws.elasticache#ConnectionType": {
+            "type": "enum",
+            "members": {
+                "VPC": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "vpc"
+                    }
+                },
+                "PUBLIC": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "public"
+                    }
+                }
             }
         },
         "com.amazonaws.elasticache#CopyServerlessCacheSnapshot": {
@@ -4188,6 +4248,9 @@
                 },
                 {
                     "target": "com.amazonaws.elasticache#ServiceLinkedRoleNotFoundFault"
+                },
+                {
+                    "target": "com.amazonaws.elasticache#TagQuotaPerResourceExceeded"
                 }
             ],
             "traits": {
@@ -4217,6 +4280,12 @@
                         "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name of the primary cluster that accepts writes and will replicate updates to the\n            secondary cluster. This value is stored as a lowercase string.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.elasticache#TagList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of tags to be added to this resource. A tag is a key-value pair. A tag key must\n            be accompanied by a tag value, although null is accepted.</p>"
                     }
                 }
             },
@@ -4789,6 +4858,12 @@
                     "target": "com.amazonaws.elasticache#NetworkType",
                     "traits": {
                         "smithy.api#documentation": "<p>The IP protocol version used by the serverless cache.\n           Must be either <code>ipv4</code> | <code>ipv6</code> | <code>dual_stack</code>.\n           <code>ipv6</code> is only supported with IPv6-only subnets.\n           If not specified, defaults to <code>ipv4</code>, unless all provided subnets are IPv6-only, in which case it defaults to <code>ipv6</code>.\n           </p>"
+                    }
+                },
+                "ConnectionType": {
+                    "target": "com.amazonaws.elasticache#ConnectionType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The connection type for the serverless cache.\n           Must be either <code>vpc</code> | <code>public</code>.\n           Use <code>vpc</code> to access the cache through a VPC endpoint, or <code>public</code> to access the cache over the internet.\n           If not specified, defaults to <code>vpc</code>.\n           This value cannot be changed after the serverless cache is created.\n           Setting this to <code>public</code> requires Valkey 9 or above.</p>"
                     }
                 }
             },
@@ -11172,7 +11247,13 @@
                     "target": "com.amazonaws.elasticache#CacheSubnetGroupNotFoundFault"
                 },
                 {
+                    "target": "com.amazonaws.elasticache#GlobalReplicationGroupNotFoundFault"
+                },
+                {
                     "target": "com.amazonaws.elasticache#InvalidARNFault"
+                },
+                {
+                    "target": "com.amazonaws.elasticache#InvalidParameterValueException"
                 },
                 {
                     "target": "com.amazonaws.elasticache#InvalidReplicationGroupStateFault"
@@ -11206,7 +11287,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists all tags currently on a named resource.</p>\n         <p> A tag is a key-value pair where the key and value are case-sensitive. You can use\n            tags to categorize and track all your ElastiCache resources, with the exception of\n            global replication group. When you add or remove tags on replication groups, those\n            actions will be replicated to all nodes in the replication group. For more information,\n            see <a href=\"http://docs.aws.amazon.com/AmazonElastiCache/latest/dg/IAM.ResourceLevelPermissions.html\">Resource-level permissions</a>.</p>\n         <p>If the cluster is not in the <i>available</i> state,\n                <code>ListTagsForResource</code> returns an error.</p>",
+                "smithy.api#documentation": "<p>Lists all tags currently on a named resource.</p>\n         <p> A tag is a key-value pair where the key and value are case-sensitive. You can use\n            tags to categorize and track all your ElastiCache resources.\n            When you add or remove tags on replication groups, those\n            actions will be replicated to all nodes in the replication group. For more information,\n            see <a href=\"http://docs.aws.amazon.com/AmazonElastiCache/latest/dg/IAM.ResourceLevelPermissions.html\">Resource-level permissions</a>.</p>\n         <p>If the cluster is not in the <i>available</i> state,\n                <code>ListTagsForResource</code> returns an error.</p>",
                 "smithy.api#examples": [
                     {
                         "title": "ListTagsForResource",
@@ -11414,6 +11495,49 @@
                         "smithy.api#enumValue": "engine-log"
                     }
                 }
+            }
+        },
+        "com.amazonaws.elasticache#MigrationHealthFault": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.elasticache#ExceptionMessage"
+                }
+            },
+            "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "MigrationHealthFault",
+                    "httpResponseCode": 400
+                },
+                "smithy.api#documentation": "<p>The migration is not healthy. Check the events for this serverless cache for more details. For\n            <code>CompleteMigration</code>, set <code>Force</code> to true to bypass this check.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.elasticache#MigrationSummary": {
+            "type": "structure",
+            "members": {
+                "Status": {
+                    "target": "com.amazonaws.elasticache#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of the migration.</p>"
+                    }
+                },
+                "MigrationEndpoint": {
+                    "target": "com.amazonaws.elasticache#Endpoint",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The migration endpoint, which is the standard endpoint of the serverless cache. Point your\n            application at this endpoint during the migration. Until cutover, ElastiCache routes requests\n            on this endpoint to your source.</p>"
+                    }
+                },
+                "CutoverMode": {
+                    "target": "com.amazonaws.elasticache#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The cutover configuration for the migration.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Provides a summary of the current migration status for a serverless cache.</p>"
             }
         },
         "com.amazonaws.elasticache#ModifyCacheCluster": {
@@ -13500,6 +13624,82 @@
                 }
             }
         },
+        "com.amazonaws.elasticache#PrepareMigration": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.elasticache#PrepareMigrationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.elasticache#PrepareMigrationResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.elasticache#InvalidParameterValueException"
+                },
+                {
+                    "target": "com.amazonaws.elasticache#InvalidServerlessCacheStateFault"
+                },
+                {
+                    "target": "com.amazonaws.elasticache#ServerlessCacheAlreadyUnderMigrationFault"
+                },
+                {
+                    "target": "com.amazonaws.elasticache#ServerlessCacheNotFoundFault"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Prepares the serverless cache for data migration by validating the configuration and setting up the migration resources.</p>"
+            }
+        },
+        "com.amazonaws.elasticache#PrepareMigrationRequest": {
+            "type": "structure",
+            "members": {
+                "ServerlessCacheName": {
+                    "target": "com.amazonaws.elasticache#String",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The name of the serverless cache to prepare for migration.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "CustomerNodeEndpointList": {
+                    "target": "com.amazonaws.elasticache#CustomerNodeEndpointList",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The list of endpoints from which to migrate data. For serverless cache migrations, the\n            list should have only one element.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "SourceAuthenticationConfiguration": {
+                    "target": "com.amazonaws.elasticache#SourceAuthenticationConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The authentication configuration for connecting to the source during migration.</p>"
+                    }
+                },
+                "SourceTlsConfiguration": {
+                    "target": "com.amazonaws.elasticache#SourceTlsConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The TLS configuration for connecting to the source during migration.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.elasticache#PrepareMigrationResponse": {
+            "type": "structure",
+            "members": {
+                "ServerlessCache": {
+                    "target": "com.amazonaws.elasticache#ServerlessCache",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Provides the details of the serverless cache prepared for migration.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.elasticache#ProcessedUpdateAction": {
             "type": "structure",
             "members": {
@@ -13880,7 +14080,13 @@
                     "target": "com.amazonaws.elasticache#CacheSubnetGroupNotFoundFault"
                 },
                 {
+                    "target": "com.amazonaws.elasticache#GlobalReplicationGroupNotFoundFault"
+                },
+                {
                     "target": "com.amazonaws.elasticache#InvalidARNFault"
+                },
+                {
+                    "target": "com.amazonaws.elasticache#InvalidParameterValueException"
                 },
                 {
                     "target": "com.amazonaws.elasticache#InvalidReplicationGroupStateFault"
@@ -13917,7 +14123,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Removes the tags identified by the <code>TagKeys</code> list from the named resource.\n            A tag is a key-value pair where the key and value are case-sensitive. You can use tags\n            to categorize and track all your ElastiCache resources, with the exception of global\n            replication group. When you add or remove tags on replication groups, those actions will\n            be replicated to all nodes in the replication group. For more information, see <a href=\"http://docs.aws.amazon.com/AmazonElastiCache/latest/dg/IAM.ResourceLevelPermissions.html\">Resource-level permissions</a>.</p>",
+                "smithy.api#documentation": "<p>Removes the tags identified by the <code>TagKeys</code> list from the named resource.\n            A tag is a key-value pair where the key and value are case-sensitive. You can use tags\n            to categorize and track all your ElastiCache resources.\n            When you add or remove tags on replication groups, those actions will\n            be replicated to all nodes in the replication group. For more information, see <a href=\"http://docs.aws.amazon.com/AmazonElastiCache/latest/dg/IAM.ResourceLevelPermissions.html\">Resource-level permissions</a>.</p>",
                 "smithy.api#examples": [
                     {
                         "title": "RemoveTagsFromResource",
@@ -14879,6 +15085,20 @@
                 "smithy.api#documentation": "<p>Configuration settings for horizontal or vertical scaling operations on Memcached clusters.</p>"
             }
         },
+        "com.amazonaws.elasticache#SecretManagerAuthConfig": {
+            "type": "structure",
+            "members": {
+                "SecretArn": {
+                    "target": "com.amazonaws.elasticache#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the secret in AWS Secrets Manager that contains the credentials for authenticating\n            with the source.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Configuration for authenticating with the source using Secrets Manager during migration.</p>"
+            }
+        },
         "com.amazonaws.elasticache#SecurityGroupIdsList": {
             "type": "list",
             "member": {
@@ -15024,6 +15244,18 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The type of IP address protocol used by the serverless cache. \n           Must be either <code>ipv4</code> | <code>ipv6</code> | <code>dual_stack</code>.\n           <code>ipv6</code> is only supported with IPv6-only subnets. \n           If not specified, defaults to <code>ipv4</code>, unless all provided subnets are IPv6-only, in which case it defaults to <code>ipv6</code>.</p>"
                     }
+                },
+                "ConnectionType": {
+                    "target": "com.amazonaws.elasticache#ConnectionType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The connection type for the serverless cache.\n           Must be either <code>vpc</code> | <code>public</code>.\n           If not specified, defaults to <code>vpc</code>.</p>"
+                    }
+                },
+                "Migration": {
+                    "target": "com.amazonaws.elasticache#MigrationSummary",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Provides a summary of the migration status for the serverless cache.</p>"
+                    }
                 }
             },
             "traits": {
@@ -15043,6 +15275,23 @@
                     "httpResponseCode": 400
                 },
                 "smithy.api#documentation": "<p>A serverless cache with this name already exists.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.elasticache#ServerlessCacheAlreadyUnderMigrationFault": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.elasticache#ExceptionMessage"
+                }
+            },
+            "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "ServerlessCacheAlreadyUnderMigrationFault",
+                    "httpResponseCode": 400
+                },
+                "smithy.api#documentation": "<p>A migration is already in progress for this serverless cache. You cannot start another migration until the current one completes.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
             }
@@ -15094,6 +15343,23 @@
                 "smithy.api#documentation": "<p>The serverless cache was not found or does not exist.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 404
+            }
+        },
+        "com.amazonaws.elasticache#ServerlessCacheNotUnderMigrationFault": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.elasticache#ExceptionMessage"
+                }
+            },
+            "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "ServerlessCacheNotUnderMigrationFault",
+                    "httpResponseCode": 400
+                },
+                "smithy.api#documentation": "<p>The serverless cache is not currently under migration.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
             }
         },
         "com.amazonaws.elasticache#ServerlessCacheQuotaForCustomerExceededFault": {
@@ -15758,6 +16024,40 @@
                 "smithy.api#httpError": 400
             }
         },
+        "com.amazonaws.elasticache#SourceAuthenticationConfiguration": {
+            "type": "structure",
+            "members": {
+                "SecretManagerConfig": {
+                    "target": "com.amazonaws.elasticache#SecretManagerAuthConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Secrets Manager configuration used for authenticating with the source during migration.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The authentication configuration for connecting to the source during migration.</p>"
+            }
+        },
+        "com.amazonaws.elasticache#SourceTlsConfiguration": {
+            "type": "structure",
+            "members": {
+                "SourceTlsMode": {
+                    "target": "com.amazonaws.elasticache#TlsMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The TLS mode to use when connecting to the source. Valid values are <code>none</code> and <code>verify-ca</code>.</p>"
+                    }
+                },
+                "SourceTlsCertificate": {
+                    "target": "com.amazonaws.elasticache#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The TLS certificate used to verify the identity of the source during migration.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The TLS configuration for connecting to the source during migration.</p>"
+            }
+        },
         "com.amazonaws.elasticache#SourceType": {
             "type": "enum",
             "members": {
@@ -15827,39 +16127,71 @@
             },
             "errors": [
                 {
+                    "target": "com.amazonaws.elasticache#InvalidCacheClusterStateFault"
+                },
+                {
+                    "target": "com.amazonaws.elasticache#InvalidParameterCombinationException"
+                },
+                {
                     "target": "com.amazonaws.elasticache#InvalidParameterValueException"
                 },
                 {
                     "target": "com.amazonaws.elasticache#InvalidReplicationGroupStateFault"
                 },
                 {
+                    "target": "com.amazonaws.elasticache#InvalidServerlessCacheStateFault"
+                },
+                {
+                    "target": "com.amazonaws.elasticache#MigrationHealthFault"
+                },
+                {
                     "target": "com.amazonaws.elasticache#ReplicationGroupAlreadyUnderMigrationFault"
                 },
                 {
                     "target": "com.amazonaws.elasticache#ReplicationGroupNotFoundFault"
+                },
+                {
+                    "target": "com.amazonaws.elasticache#ServerlessCacheNotFoundFault"
+                },
+                {
+                    "target": "com.amazonaws.elasticache#ServerlessCacheNotUnderMigrationFault"
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Start the migration of data.</p>"
+                "smithy.api#documentation": "<p>Starts the migration of data.</p>"
             }
         },
         "com.amazonaws.elasticache#StartMigrationMessage": {
             "type": "structure",
             "members": {
+                "ServerlessCacheName": {
+                    "target": "com.amazonaws.elasticache#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the serverless cache to which data is being migrated.</p>"
+                    }
+                },
                 "ReplicationGroupId": {
                     "target": "com.amazonaws.elasticache#String",
                     "traits": {
-                        "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>The ID of the replication group to which data should be migrated.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The ID of the replication group to which data should be migrated.</p>"
                     }
                 },
                 "CustomerNodeEndpointList": {
                     "target": "com.amazonaws.elasticache#CustomerNodeEndpointList",
                     "traits": {
-                        "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>List of endpoints from which data should be migrated. For Valkey or Redis OSS (cluster mode\n            disabled), the list should have only one element.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The list of endpoints from which to migrate data. For Valkey or Redis OSS (cluster mode\n            disabled), the list should have only one element. For serverless cache migrations, ElastiCache\n            uses the endpoint that you provided in <code>PrepareMigration</code>.</p>"
+                    }
+                },
+                "AutoCutover": {
+                    "target": "com.amazonaws.elasticache#BooleanOptional",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether ElastiCache automatically attempts to complete the migration after data\n            sync is established.</p>"
+                    }
+                },
+                "ClearTargetCacheData": {
+                    "target": "com.amazonaws.elasticache#BooleanOptional",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether ElastiCache deletes existing data in the serverless cache before migration\n            begins. After <code>StopMigration</code>, <code>StartMigration</code> requires this option to\n            restart the data sync.</p>"
                     }
                 }
             },
@@ -15872,6 +16204,68 @@
             "members": {
                 "ReplicationGroup": {
                     "target": "com.amazonaws.elasticache#ReplicationGroup"
+                },
+                "ServerlessCache": {
+                    "target": "com.amazonaws.elasticache#ServerlessCache",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Provides the details of the serverless cache to which ElastiCache is migrating data.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.elasticache#StopMigration": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.elasticache#StopMigrationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.elasticache#StopMigrationResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.elasticache#InvalidParameterValueException"
+                },
+                {
+                    "target": "com.amazonaws.elasticache#InvalidServerlessCacheStateFault"
+                },
+                {
+                    "target": "com.amazonaws.elasticache#ServerlessCacheNotFoundFault"
+                },
+                {
+                    "target": "com.amazonaws.elasticache#ServerlessCacheNotUnderMigrationFault"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Stops an ongoing data sync between the source and the serverless cache. The migration remains\n            open and the data sync can be restarted. This operation is valid only while the migration is\n            syncing; during cutover it returns\n            <code>InvalidServerlessCacheStateFault</code>.</p>"
+            }
+        },
+        "com.amazonaws.elasticache#StopMigrationRequest": {
+            "type": "structure",
+            "members": {
+                "ServerlessCacheName": {
+                    "target": "com.amazonaws.elasticache#String",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The name of the serverless cache for which to stop the data sync.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.elasticache#StopMigrationResponse": {
+            "type": "structure",
+            "members": {
+                "ServerlessCache": {
+                    "target": "com.amazonaws.elasticache#ServerlessCache",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Provides the details of the serverless cache for which the data sync stopped.</p>"
+                    }
                 }
             },
             "traits": {
@@ -16031,7 +16425,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A tag that can be added to an ElastiCache cluster or replication group. Tags are\n            composed of a Key/Value pair. You can use tags to categorize and track all your\n            ElastiCache resources, with the exception of global replication group. When you add or\n            remove tags on replication groups, those actions will be replicated to all nodes in the\n            replication group. A tag with a null Value is permitted.</p>"
+                "smithy.api#documentation": "<p>A tag that can be added to an ElastiCache cluster or replication group. Tags are\n            composed of a Key/Value pair. You can use tags to categorize and track all your\n            ElastiCache resources. When you add or\n            remove tags on replication groups, those actions will be replicated to all nodes in the\n            replication group. A tag with a null Value is permitted.</p>"
             }
         },
         "com.amazonaws.elasticache#TagList": {
@@ -16194,6 +16588,12 @@
             },
             "errors": [
                 {
+                    "target": "com.amazonaws.elasticache#InvalidCacheClusterStateFault"
+                },
+                {
+                    "target": "com.amazonaws.elasticache#InvalidParameterCombinationException"
+                },
+                {
                     "target": "com.amazonaws.elasticache#InvalidParameterValueException"
                 },
                 {
@@ -16263,6 +16663,23 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Filters update actions from the service updates that are in available status during\n            the time range.</p>"
+            }
+        },
+        "com.amazonaws.elasticache#TlsMode": {
+            "type": "enum",
+            "members": {
+                "none": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "none"
+                    }
+                },
+                "verify_ca": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "verify-ca"
+                    }
+                }
             }
         },
         "com.amazonaws.elasticache#TransitEncryptionMode": {

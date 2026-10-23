@@ -5,7 +5,9 @@ package lambdamicrovms
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/lambdamicrovms/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lambdamicrovms/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -71,6 +73,41 @@ type RunMicrovmInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RunMicrovmInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RunMicrovmRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RunMicrovmInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.RunMicrovmRequest_clientToken, *v.ClientToken)
+	}
+	serializeNetworkConnectorList(s, schemas.RunMicrovmRequest_egressNetworkConnectors, v.EgressNetworkConnectors)
+	if v.ExecutionRoleArn != nil {
+		s.WriteString(schemas.RunMicrovmRequest_executionRoleArn, *v.ExecutionRoleArn)
+	}
+	if v.IdlePolicy != nil {
+		s.WriteStruct(schemas.RunMicrovmRequest_idlePolicy)
+		v.IdlePolicy.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ImageIdentifier != nil {
+		s.WriteString(schemas.RunMicrovmRequest_imageIdentifier, *v.ImageIdentifier)
+	}
+	if v.ImageVersion != nil {
+		s.WriteString(schemas.RunMicrovmRequest_imageVersion, *v.ImageVersion)
+	}
+	serializeNetworkConnectorList(s, schemas.RunMicrovmRequest_ingressNetworkConnectors, v.IngressNetworkConnectors)
+	serializeLogging(s, schemas.RunMicrovmRequest_logging, v.Logging)
+	if v.MaximumDurationInSeconds != nil {
+		s.WriteInt32(schemas.RunMicrovmRequest_maximumDurationInSeconds, *v.MaximumDurationInSeconds)
+	}
+	if v.RunHookPayload != nil {
+		s.WriteString(schemas.RunMicrovmRequest_runHookPayload, *v.RunHookPayload)
+	}
+}
+
 type RunMicrovmOutput struct {
 
 	// The HTTPS endpoint URL for communicating with the MicroVM. Include a valid
@@ -133,13 +170,104 @@ type RunMicrovmOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RunMicrovmOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RunMicrovmResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RunMicrovmOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeNetworkConnectorList(s, schemas.RunMicrovmResponse_egressNetworkConnectors, v.EgressNetworkConnectors)
+	if v.Endpoint != nil {
+		s.WriteString(schemas.RunMicrovmResponse_endpoint, *v.Endpoint)
+	}
+	if v.ExecutionRoleArn != nil {
+		s.WriteString(schemas.RunMicrovmResponse_executionRoleArn, *v.ExecutionRoleArn)
+	}
+	if v.IdlePolicy != nil {
+		s.WriteStruct(schemas.RunMicrovmResponse_idlePolicy)
+		v.IdlePolicy.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ImageArn != nil {
+		s.WriteString(schemas.RunMicrovmResponse_imageArn, *v.ImageArn)
+	}
+	if v.ImageVersion != nil {
+		s.WriteString(schemas.RunMicrovmResponse_imageVersion, *v.ImageVersion)
+	}
+	serializeNetworkConnectorList(s, schemas.RunMicrovmResponse_ingressNetworkConnectors, v.IngressNetworkConnectors)
+	if v.MaximumDurationInSeconds != nil {
+		s.WriteInt32(schemas.RunMicrovmResponse_maximumDurationInSeconds, *v.MaximumDurationInSeconds)
+	}
+	if v.MicrovmId != nil {
+		s.WriteString(schemas.RunMicrovmResponse_microvmId, *v.MicrovmId)
+	}
+	if v.StartedAt != nil {
+		s.WriteTime(schemas.RunMicrovmResponse_startedAt, *v.StartedAt)
+	}
+	if v.State != "" {
+		s.WriteString(schemas.RunMicrovmResponse_state, string(v.State))
+	}
+	if v.StateReason != nil {
+		s.WriteString(schemas.RunMicrovmResponse_stateReason, *v.StateReason)
+	}
+	if v.TerminatedAt != nil {
+		s.WriteTime(schemas.RunMicrovmResponse_terminatedAt, *v.TerminatedAt)
+	}
+}
+func (v *RunMicrovmOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RunMicrovmResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RunMicrovmResponse_egressNetworkConnectors:
+			return deserializeNetworkConnectorList(d, schemas.RunMicrovmResponse_egressNetworkConnectors, &v.EgressNetworkConnectors)
+		case schemas.RunMicrovmResponse_endpoint:
+			v.Endpoint = new(string)
+			return d.ReadString(schemas.RunMicrovmResponse_endpoint, v.Endpoint)
+		case schemas.RunMicrovmResponse_executionRoleArn:
+			v.ExecutionRoleArn = new(string)
+			return d.ReadString(schemas.RunMicrovmResponse_executionRoleArn, v.ExecutionRoleArn)
+		case schemas.RunMicrovmResponse_idlePolicy:
+			v.IdlePolicy = &types.IdlePolicy{}
+			return v.IdlePolicy.Deserialize(d)
+		case schemas.RunMicrovmResponse_imageArn:
+			v.ImageArn = new(string)
+			return d.ReadString(schemas.RunMicrovmResponse_imageArn, v.ImageArn)
+		case schemas.RunMicrovmResponse_imageVersion:
+			v.ImageVersion = new(string)
+			return d.ReadString(schemas.RunMicrovmResponse_imageVersion, v.ImageVersion)
+		case schemas.RunMicrovmResponse_ingressNetworkConnectors:
+			return deserializeNetworkConnectorList(d, schemas.RunMicrovmResponse_ingressNetworkConnectors, &v.IngressNetworkConnectors)
+		case schemas.RunMicrovmResponse_maximumDurationInSeconds:
+			v.MaximumDurationInSeconds = new(int32)
+			return d.ReadInt32(schemas.RunMicrovmResponse_maximumDurationInSeconds, v.MaximumDurationInSeconds)
+		case schemas.RunMicrovmResponse_microvmId:
+			v.MicrovmId = new(string)
+			return d.ReadString(schemas.RunMicrovmResponse_microvmId, v.MicrovmId)
+		case schemas.RunMicrovmResponse_startedAt:
+			v.StartedAt = new(time.Time)
+			return d.ReadTime(schemas.RunMicrovmResponse_startedAt, v.StartedAt)
+		case schemas.RunMicrovmResponse_state:
+			var ev string
+			if err := d.ReadString(schemas.RunMicrovmResponse_state, &ev); err != nil {
+				return err
+			}
+			v.State = types.MicrovmState(ev)
+			return nil
+		case schemas.RunMicrovmResponse_stateReason:
+			v.StateReason = new(string)
+			return d.ReadString(schemas.RunMicrovmResponse_stateReason, v.StateReason)
+		case schemas.RunMicrovmResponse_terminatedAt:
+			v.TerminatedAt = new(time.Time)
+			return d.ReadTime(schemas.RunMicrovmResponse_terminatedAt, v.TerminatedAt)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationRunMicrovmMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpRunMicrovm{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RunMicrovm, schemas.RunMicrovmRequest, schemas.RunMicrovmResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpRunMicrovm{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RunMicrovm, schemas.RunMicrovmRequest, schemas.RunMicrovmResponse), output: &RunMicrovmOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

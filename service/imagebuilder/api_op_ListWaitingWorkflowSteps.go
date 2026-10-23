@@ -5,12 +5,15 @@ package imagebuilder
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/imagebuilder/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/imagebuilder/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
-// Get a list of workflow steps that are waiting for action for workflows in your
-// Amazon Web Services account.
+// Lists the workflow steps in your Amazon Web Services account that have paused
+// at a WaitForAction step, and are waiting for you to respond. To send a
+// response, call SendWorkflowStepAction.
 func (c *Client) ListWaitingWorkflowSteps(ctx context.Context, params *ListWaitingWorkflowStepsInput, optFns ...func(*Options)) (*ListWaitingWorkflowStepsOutput, error) {
 	if params == nil {
 		params = &ListWaitingWorkflowStepsInput{}
@@ -28,14 +31,29 @@ func (c *Client) ListWaitingWorkflowSteps(ctx context.Context, params *ListWaiti
 
 type ListWaitingWorkflowStepsInput struct {
 
-	// Specify the maximum number of items to return in a request.
+	// The maximum number of items to return in a single request.
 	MaxResults *int32
 
-	// A token to specify where to start paginating. This is the nextToken from a
+	// A token to specify where to start paginating. Use the nextToken value from a
 	// previously truncated response.
 	NextToken *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ListWaitingWorkflowStepsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListWaitingWorkflowStepsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListWaitingWorkflowStepsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListWaitingWorkflowStepsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListWaitingWorkflowStepsRequest_nextToken, *v.NextToken)
+	}
 }
 
 type ListWaitingWorkflowStepsOutput struct {
@@ -46,7 +64,8 @@ type ListWaitingWorkflowStepsOutput struct {
 	NextToken *string
 
 	// An array of the workflow steps that are waiting for action in your Amazon Web
-	// Services account.
+	// Services account. Each step is paused at a WaitForAction step, and remains in
+	// the list until you respond with SendWorkflowStepActionor the wait times out.
 	Steps []types.WorkflowStepExecution
 
 	// Metadata pertaining to the operation's result.
@@ -55,13 +74,35 @@ type ListWaitingWorkflowStepsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListWaitingWorkflowStepsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListWaitingWorkflowStepsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListWaitingWorkflowStepsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListWaitingWorkflowStepsResponse_nextToken, *v.NextToken)
+	}
+	serializeWorkflowStepExecutionList(s, schemas.ListWaitingWorkflowStepsResponse_steps, v.Steps)
+}
+func (v *ListWaitingWorkflowStepsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListWaitingWorkflowStepsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListWaitingWorkflowStepsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListWaitingWorkflowStepsResponse_nextToken, v.NextToken)
+		case schemas.ListWaitingWorkflowStepsResponse_steps:
+			return deserializeWorkflowStepExecutionList(d, schemas.ListWaitingWorkflowStepsResponse_steps, &v.Steps)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListWaitingWorkflowStepsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListWaitingWorkflowSteps{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListWaitingWorkflowSteps, schemas.ListWaitingWorkflowStepsRequest, schemas.ListWaitingWorkflowStepsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListWaitingWorkflowSteps{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListWaitingWorkflowSteps, schemas.ListWaitingWorkflowStepsRequest, schemas.ListWaitingWorkflowStepsResponse), output: &ListWaitingWorkflowStepsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 
@@ -98,7 +139,7 @@ func (c *Client) addOperationListWaitingWorkflowStepsMiddlewares(stack *middlewa
 // ListWaitingWorkflowStepsPaginatorOptions is the paginator options for
 // ListWaitingWorkflowSteps
 type ListWaitingWorkflowStepsPaginatorOptions struct {
-	// Specify the maximum number of items to return in a request.
+	// The maximum number of items to return in a single request.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

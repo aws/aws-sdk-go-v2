@@ -706,8 +706,9 @@ func TestCheckRequestSnapshot_CreateDomain(t *testing.T) {
 			RoleArn:        ptr.String("__RoleArn__"),
 		},
 		EncryptionAtRestOptions: &types.EncryptionAtRestOptions{
-			Enabled:  ptr.Bool(true),
-			KmsKeyId: ptr.String("__KmsKeyId__"),
+			Enabled:        ptr.Bool(true),
+			KmsKeyId:       ptr.String("__KmsKeyId__"),
+			EncryptionMode: types.EncryptionMode("DISK"),
 		},
 		NodeToNodeEncryptionOptions: &types.NodeToNodeEncryptionOptions{
 			Enabled: ptr.Bool(true),
@@ -3303,8 +3304,9 @@ func TestCheckRequestSnapshot_UpdateDomainConfig(t *testing.T) {
 			},
 		},
 		EncryptionAtRestOptions: &types.EncryptionAtRestOptions{
-			Enabled:  ptr.Bool(true),
-			KmsKeyId: ptr.String("__KmsKeyId__"),
+			Enabled:        ptr.Bool(true),
+			KmsKeyId:       ptr.String("__KmsKeyId__"),
+			EncryptionMode: types.EncryptionMode("DISK"),
 		},
 		DomainEndpointOptions: &types.DomainEndpointOptions{
 			EnforceHTTPS:                 ptr.Bool(true),
@@ -3416,6 +3418,10 @@ func TestCheckRequestSnapshot_UpdateDomainConfig(t *testing.T) {
 		},
 		UseCase:    types.DomainUseCase("SEARCH"),
 		EngineMode: types.EngineMode("GENERAL"),
+		AcceptedWarnings: []string{
+			"__Member__",
+			"__Member__",
+		},
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -4143,8 +4149,9 @@ func TestUpdateRequestSnapshot_CreateDomain(t *testing.T) {
 			RoleArn:        ptr.String("__RoleArn__"),
 		},
 		EncryptionAtRestOptions: &types.EncryptionAtRestOptions{
-			Enabled:  ptr.Bool(true),
-			KmsKeyId: ptr.String("__KmsKeyId__"),
+			Enabled:        ptr.Bool(true),
+			KmsKeyId:       ptr.String("__KmsKeyId__"),
+			EncryptionMode: types.EncryptionMode("DISK"),
 		},
 		NodeToNodeEncryptionOptions: &types.NodeToNodeEncryptionOptions{
 			Enabled: ptr.Bool(true),
@@ -6740,8 +6747,9 @@ func TestUpdateRequestSnapshot_UpdateDomainConfig(t *testing.T) {
 			},
 		},
 		EncryptionAtRestOptions: &types.EncryptionAtRestOptions{
-			Enabled:  ptr.Bool(true),
-			KmsKeyId: ptr.String("__KmsKeyId__"),
+			Enabled:        ptr.Bool(true),
+			KmsKeyId:       ptr.String("__KmsKeyId__"),
+			EncryptionMode: types.EncryptionMode("DISK"),
 		},
 		DomainEndpointOptions: &types.DomainEndpointOptions{
 			EnforceHTTPS:                 ptr.Bool(true),
@@ -6853,6 +6861,10 @@ func TestUpdateRequestSnapshot_UpdateDomainConfig(t *testing.T) {
 		},
 		UseCase:    types.DomainUseCase("SEARCH"),
 		EngineMode: types.EngineMode("GENERAL"),
+		AcceptedWarnings: []string{
+			"__Member__",
+			"__Member__",
+		},
 	}
 	body := &bytes.Buffer{}
 	method := ""

@@ -676,7 +676,8 @@ var WisdomService = smithy.NewServiceSchema(_WisdomService, "2020-10-19")
 var AccessDeniedException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.qconnect",
 	Name:      "AccessDeniedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 403})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 403})
 var AccessDeniedException_message *smithy.Schema
 
 var _AccessRoleArn = smithy.NewSchema(smithy.ShapeID{
@@ -691,6 +692,14 @@ var AgentAttributes = smithy.NewSchema(smithy.ShapeID{
 var AgentAttributes_firstName *smithy.Schema
 
 var AgentAttributes_lastName *smithy.Schema
+
+var AgentTarget = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.qconnect",
+	Name:      "AgentTarget",
+}, smithy.ShapeTypeUnion, 2)
+var AgentTarget_aiAgentId *smithy.Schema
+
+var AgentTarget_applicationId *smithy.Schema
 
 var _AIAgentAssociationConfigurationType = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.qconnect",
@@ -722,8 +731,10 @@ var AIAgentConfiguration_caseSummarizationAIAgentConfiguration *smithy.Schema
 var AIAgentConfigurationData = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.qconnect",
 	Name:      "AIAgentConfigurationData",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 2)
 var AIAgentConfigurationData_aiAgentId *smithy.Schema
+
+var AIAgentConfigurationData_enabled *smithy.Schema
 
 var _AIAgentConfigurationMap = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.qconnect",
@@ -1456,7 +1467,8 @@ var Configuration_connectConfiguration *smithy.Schema
 var ConflictException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.qconnect",
 	Name:      "ConflictException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 409})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 409})
 var ConflictException_message *smithy.Schema
 
 var ConnectConfiguration = smithy.NewSchema(smithy.ShapeID{
@@ -1832,7 +1844,7 @@ var CustomerProfileAttributes_custom *smithy.Schema
 var DataDetails = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.qconnect",
 	Name:      "DataDetails",
-}, smithy.ShapeTypeUnion, 12)
+}, smithy.ShapeTypeUnion, 13)
 var DataDetails_contentData *smithy.Schema
 
 var DataDetails_generativeData *smithy.Schema
@@ -1856,6 +1868,8 @@ var DataDetails_suggestedMessageData *smithy.Schema
 var DataDetails_notesData *smithy.Schema
 
 var DataDetails_notesChunkData *smithy.Schema
+
+var DataDetails_proactiveRecommendationData *smithy.Schema
 
 var DataReference = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.qconnect",
@@ -1881,10 +1895,19 @@ var _DataSummaryList = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeList, 1)
 var _DataSummaryList_member *smithy.Schema
 
+var DelegateAgentConfiguration = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.qconnect",
+	Name:      "DelegateAgentConfiguration",
+}, smithy.ShapeTypeStructure, 2)
+var DelegateAgentConfiguration_agentTarget *smithy.Schema
+
+var DelegateAgentConfiguration_instruction *smithy.Schema
+
 var DependencyFailedException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.qconnect",
 	Name:      "DependencyFailedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 424})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 424})
 var DependencyFailedException_message *smithy.Schema
 
 var _Description = smithy.NewSchema(smithy.ShapeID{
@@ -2411,6 +2434,18 @@ var _GuardrailWordText = smithy.NewSchema(smithy.ShapeID{
 	Name:      "GuardrailWordText",
 }, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
 
+var HandoffAgentConfiguration = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.qconnect",
+	Name:      "HandoffAgentConfiguration",
+}, smithy.ShapeTypeStructure, 4)
+var HandoffAgentConfiguration_agentTarget *smithy.Schema
+
+var HandoffAgentConfiguration_instruction *smithy.Schema
+
+var HandoffAgentConfiguration_audioStreamingEnabled *smithy.Schema
+
+var HandoffAgentConfiguration_immediateHandoff *smithy.Schema
+
 var _Headers = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.qconnect",
 	Name:      "Headers",
@@ -2544,10 +2579,21 @@ var IntentInputData = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeStructure, 1)
 var IntentInputData_intentId *smithy.Schema
 
+var _InteractionMode = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.qconnect",
+	Name:      "InteractionMode",
+}, smithy.ShapeTypeString, 0)
+
 var _JSONDocument = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.qconnect",
 	Name:      "JSONDocument",
 }, smithy.ShapeTypeDocument, 0, &smithytraits.Sensitive{})
+
+var _JSONDocumentList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.qconnect",
+	Name:      "JSONDocumentList",
+}, smithy.ShapeTypeList, 1)
+var _JSONDocumentList_member *smithy.Schema
 
 var KnowledgeBaseAssociationConfigurationData = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.qconnect",
@@ -2701,10 +2747,12 @@ var MessageConfiguration_generateChunkedMessage *smithy.Schema
 var MessageData = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.qconnect",
 	Name:      "MessageData",
-}, smithy.ShapeTypeUnion, 2)
+}, smithy.ShapeTypeUnion, 3)
 var MessageData_text *smithy.Schema
 
 var MessageData_toolUseResult *smithy.Schema
+
+var MessageData_data *smithy.Schema
 
 var _MessageFilterType = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.qconnect",
@@ -3125,6 +3173,34 @@ var _ModelSummaryList = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeList, 1)
 var _ModelSummaryList_member *smithy.Schema
 
+var MultiAgentConfiguration = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.qconnect",
+	Name:      "MultiAgentConfiguration",
+}, smithy.ShapeTypeUnion, 2)
+var MultiAgentConfiguration_delegateAgentConfiguration *smithy.Schema
+
+var MultiAgentConfiguration_handoffAgentConfiguration *smithy.Schema
+
+var _MultiAgentConfigurationList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.qconnect",
+	Name:      "MultiAgentConfigurationList",
+}, smithy.ShapeTypeList, 1)
+var _MultiAgentConfigurationList_member *smithy.Schema
+
+var _MultiAgentExampleList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.qconnect",
+	Name:      "MultiAgentExampleList",
+}, smithy.ShapeTypeList, 1)
+var _MultiAgentExampleList_member *smithy.Schema
+
+var MultiAgentInstruction = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.qconnect",
+	Name:      "MultiAgentInstruction",
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Sensitive{})
+var MultiAgentInstruction_instruction *smithy.Schema
+
+var MultiAgentInstruction_examples *smithy.Schema
+
 var _Name = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.qconnect",
 	Name:      "Name",
@@ -3202,16 +3278,22 @@ var _ObjectFieldsList_member *smithy.Schema
 var OrchestrationAIAgentConfiguration = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.qconnect",
 	Name:      "OrchestrationAIAgentConfiguration",
-}, smithy.ShapeTypeStructure, 5)
+}, smithy.ShapeTypeStructure, 8)
 var OrchestrationAIAgentConfiguration_orchestrationAIPromptId *smithy.Schema
 
 var OrchestrationAIAgentConfiguration_orchestrationAIGuardrailId *smithy.Schema
 
 var OrchestrationAIAgentConfiguration_toolConfigurations *smithy.Schema
 
+var OrchestrationAIAgentConfiguration_multiAgentConfigurations *smithy.Schema
+
 var OrchestrationAIAgentConfiguration_connectInstanceArn *smithy.Schema
 
 var OrchestrationAIAgentConfiguration_locale *smithy.Schema
+
+var OrchestrationAIAgentConfiguration_inputSchemas *smithy.Schema
+
+var OrchestrationAIAgentConfiguration_outputSchemas *smithy.Schema
 
 var OrchestratorConfigurationEntry = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.qconnect",
@@ -3283,13 +3365,20 @@ var _Participant = smithy.NewSchema(smithy.ShapeID{
 var PreconditionFailedException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.qconnect",
 	Name:      "PreconditionFailedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 412})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 412})
 var PreconditionFailedException_message *smithy.Schema
 
 var _Priority = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.qconnect",
 	Name:      "Priority",
 }, smithy.ShapeTypeString, 0)
+
+var ProactiveRecommendationDataDetails = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.qconnect",
+	Name:      "ProactiveRecommendationDataDetails",
+}, smithy.ShapeTypeStructure, 1)
+var ProactiveRecommendationDataDetails_nextMessageToken *smithy.Schema
 
 var _Probability = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.qconnect",
@@ -3839,13 +3928,15 @@ var RenderingConfiguration_templateUri *smithy.Schema
 var RequestTimeoutException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.qconnect",
 	Name:      "RequestTimeoutException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 408})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 408})
 var RequestTimeoutException_message *smithy.Schema
 
 var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.qconnect",
 	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.HTTPError{Code: 404})
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 404})
 var ResourceNotFoundException_message *smithy.Schema
 
 var ResourceNotFoundException_resourceName *smithy.Schema
@@ -3912,6 +4003,27 @@ var _RetrievalFilterList = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeList, 1)
 var _RetrievalFilterList_member *smithy.Schema
 
+var RetrieveError = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.qconnect",
+	Name:      "RetrieveError",
+}, smithy.ShapeTypeStructure, 3)
+var RetrieveError_associationId *smithy.Schema
+
+var RetrieveError_code *smithy.Schema
+
+var RetrieveError_message *smithy.Schema
+
+var _RetrieveErrorCode = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.qconnect",
+	Name:      "RetrieveErrorCode",
+}, smithy.ShapeTypeString, 0)
+
+var _RetrieveErrorList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.qconnect",
+	Name:      "RetrieveErrorList",
+}, smithy.ShapeTypeList, 1)
+var _RetrieveErrorList_member *smithy.Schema
+
 var RetrieveResult = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.qconnect",
 	Name:      "RetrieveResult",
@@ -3929,6 +4041,11 @@ var _RetrieveResultList = smithy.NewSchema(smithy.ShapeID{
 	Name:      "RetrieveResultList",
 }, smithy.ShapeTypeList, 1)
 var _RetrieveResultList_member *smithy.Schema
+
+var _ReturnReason = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.qconnect",
+	Name:      "ReturnReason",
+}, smithy.ShapeTypeString, 0)
 
 var RuntimeSessionData = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.qconnect",
@@ -4022,7 +4139,8 @@ var ServerSideEncryptionConfiguration_kmsKeyId *smithy.Schema
 var ServiceQuotaExceededException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.qconnect",
 	Name:      "ServiceQuotaExceededException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 402})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 402})
 var ServiceQuotaExceededException_message *smithy.Schema
 
 var SessionData = smithy.NewSchema(smithy.ShapeID{
@@ -4155,7 +4273,7 @@ var Span_attributes *smithy.Schema
 var SpanAttributes = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.qconnect",
 	Name:      "SpanAttributes",
-}, smithy.ShapeTypeStructure, 36)
+}, smithy.ShapeTypeStructure, 39)
 var SpanAttributes_operationName *smithy.Schema
 
 var SpanAttributes_providerName *smithy.Schema
@@ -4185,6 +4303,12 @@ var SpanAttributes_aiAgentVersion *smithy.Schema
 var SpanAttributes_aiAgentInvoker *smithy.Schema
 
 var SpanAttributes_aiAgentOrchestratorUseCase *smithy.Schema
+
+var SpanAttributes_interactionMode *smithy.Schema
+
+var SpanAttributes_targetAgentId *smithy.Schema
+
+var SpanAttributes_returnReason *smithy.Schema
 
 var SpanAttributes_requestModel *smithy.Schema
 
@@ -4485,7 +4609,8 @@ var TextMessage_aiGuardrailAssessment *smithy.Schema
 var ThrottlingException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.qconnect",
 	Name:      "ThrottlingException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var ThrottlingException_message *smithy.Schema
 
 var _TimeToLive = smithy.NewSchema(smithy.ShapeID{
@@ -4616,7 +4741,8 @@ var ToolUseResultData_inputSchema *smithy.Schema
 var TooManyTagsException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.qconnect",
 	Name:      "TooManyTagsException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var TooManyTagsException_message *smithy.Schema
 
 var TooManyTagsException_resourceName *smithy.Schema
@@ -4629,13 +4755,15 @@ var _TopK = smithy.NewSchema(smithy.ShapeID{
 var UnauthorizedException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.qconnect",
 	Name:      "UnauthorizedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 401})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 401})
 var UnauthorizedException_message *smithy.Schema
 
 var UnprocessableContentException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.qconnect",
 	Name:      "UnprocessableContentException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 422})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 422})
 var UnprocessableContentException_message *smithy.Schema
 
 var _UploadId = smithy.NewSchema(smithy.ShapeID{
@@ -4699,7 +4827,8 @@ var _UuidWithQualifier = smithy.NewSchema(smithy.ShapeID{
 var ValidationException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.qconnect",
 	Name:      "ValidationException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var ValidationException_message *smithy.Schema
 
 var VectorIngestionConfiguration = smithy.NewSchema(smithy.ShapeID{
@@ -6210,8 +6339,10 @@ var RetrieveRequest_retrievalQuery *smithy.Schema
 var RetrieveResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.qconnect",
 	Name:      "RetrieveResponse",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 2)
 var RetrieveResponse_results *smithy.Schema
+
+var RetrieveResponse_errors *smithy.Schema
 
 var SearchContentRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.qconnect",
@@ -6678,6 +6809,10 @@ func init() {
 
 	AgentAttributes_lastName = AgentAttributes.AddMember("lastName", _MessageTemplateAttributeValue)
 
+	AgentTarget_aiAgentId = AgentTarget.AddMember("aiAgentId", _NonEmptyString)
+
+	AgentTarget_applicationId = AgentTarget.AddMember("applicationId", _NonEmptyString)
+
 	TagCondition_key = TagCondition.AddMember("key", _TagKey)
 
 	TagCondition_value = TagCondition.AddMember("value", _TagValue)
@@ -6824,15 +6959,47 @@ func init() {
 
 	_ToolConfigurationList_member = _ToolConfigurationList.AddMember("member", ToolConfiguration)
 
+	_MultiAgentExampleList_member = _MultiAgentExampleList.AddMember("member", smithyprelude.String)
+
+	MultiAgentInstruction_instruction = MultiAgentInstruction.AddMember("instruction", smithyprelude.String)
+
+	MultiAgentInstruction_examples = MultiAgentInstruction.AddMember("examples", _MultiAgentExampleList)
+
+	DelegateAgentConfiguration_agentTarget = DelegateAgentConfiguration.AddMember("agentTarget", AgentTarget)
+
+	DelegateAgentConfiguration_instruction = DelegateAgentConfiguration.AddMember("instruction", MultiAgentInstruction)
+
+	HandoffAgentConfiguration_agentTarget = HandoffAgentConfiguration.AddMember("agentTarget", AgentTarget)
+
+	HandoffAgentConfiguration_instruction = HandoffAgentConfiguration.AddMember("instruction", MultiAgentInstruction)
+
+	HandoffAgentConfiguration_audioStreamingEnabled = HandoffAgentConfiguration.AddMember("audioStreamingEnabled", smithyprelude.Boolean)
+
+	HandoffAgentConfiguration_immediateHandoff = HandoffAgentConfiguration.AddMember("immediateHandoff", smithyprelude.Boolean)
+
+	MultiAgentConfiguration_delegateAgentConfiguration = MultiAgentConfiguration.AddMember("delegateAgentConfiguration", DelegateAgentConfiguration)
+
+	MultiAgentConfiguration_handoffAgentConfiguration = MultiAgentConfiguration.AddMember("handoffAgentConfiguration", HandoffAgentConfiguration)
+
+	_MultiAgentConfigurationList_member = _MultiAgentConfigurationList.AddMember("member", MultiAgentConfiguration)
+
+	_JSONDocumentList_member = _JSONDocumentList.AddMember("member", _JSONDocument)
+
 	OrchestrationAIAgentConfiguration_orchestrationAIPromptId = OrchestrationAIAgentConfiguration.AddMember("orchestrationAIPromptId", _UuidWithQualifier)
 
 	OrchestrationAIAgentConfiguration_orchestrationAIGuardrailId = OrchestrationAIAgentConfiguration.AddMember("orchestrationAIGuardrailId", _UuidWithQualifier)
 
 	OrchestrationAIAgentConfiguration_toolConfigurations = OrchestrationAIAgentConfiguration.AddMember("toolConfigurations", _ToolConfigurationList)
 
+	OrchestrationAIAgentConfiguration_multiAgentConfigurations = OrchestrationAIAgentConfiguration.AddMember("multiAgentConfigurations", _MultiAgentConfigurationList)
+
 	OrchestrationAIAgentConfiguration_connectInstanceArn = OrchestrationAIAgentConfiguration.AddMember("connectInstanceArn", _GenericArn)
 
 	OrchestrationAIAgentConfiguration_locale = OrchestrationAIAgentConfiguration.AddMember("locale", _NonEmptyString)
+
+	OrchestrationAIAgentConfiguration_inputSchemas = OrchestrationAIAgentConfiguration.AddMember("inputSchemas", _JSONDocumentList)
+
+	OrchestrationAIAgentConfiguration_outputSchemas = OrchestrationAIAgentConfiguration.AddMember("outputSchemas", _JSONDocumentList)
 
 	NoteTakingAIAgentConfiguration_noteTakingAIPromptId = NoteTakingAIAgentConfiguration.AddMember("noteTakingAIPromptId", _UuidWithQualifier)
 
@@ -6865,6 +7032,8 @@ func init() {
 	AIAgentConfiguration_caseSummarizationAIAgentConfiguration = AIAgentConfiguration.AddMember("caseSummarizationAIAgentConfiguration", CaseSummarizationAIAgentConfiguration)
 
 	AIAgentConfigurationData_aiAgentId = AIAgentConfigurationData.AddMember("aiAgentId", _UuidWithQualifier)
+
+	AIAgentConfigurationData_enabled = AIAgentConfigurationData.AddMember("enabled", smithyprelude.Boolean)
 
 	_AIAgentConfigurationMap_key = _AIAgentConfigurationMap.AddMember("key", _AIAgentType)
 
@@ -7676,6 +7845,8 @@ func init() {
 
 	NotesChunkDataDetails_nextChunkToken = NotesChunkDataDetails.AddMember("nextChunkToken", _NextToken)
 
+	ProactiveRecommendationDataDetails_nextMessageToken = ProactiveRecommendationDataDetails.AddMember("nextMessageToken", _NextToken)
+
 	DataDetails_contentData = DataDetails.AddMember("contentData", ContentDataDetails)
 
 	DataDetails_generativeData = DataDetails.AddMember("generativeData", GenerativeDataDetails)
@@ -7699,6 +7870,8 @@ func init() {
 	DataDetails_notesData = DataDetails.AddMember("notesData", NotesDataDetails)
 
 	DataDetails_notesChunkData = DataDetails.AddMember("notesChunkData", NotesChunkDataDetails)
+
+	DataDetails_proactiveRecommendationData = DataDetails.AddMember("proactiveRecommendationData", ProactiveRecommendationDataDetails)
 
 	DependencyFailedException_message = DependencyFailedException.AddMember("message", smithyprelude.String)
 
@@ -8107,6 +8280,8 @@ func init() {
 	MessageData_text = MessageData.AddMember("text", TextMessage)
 
 	MessageData_toolUseResult = MessageData.AddMember("toolUseResult", ToolUseResultData)
+
+	MessageData_data = MessageData.AddMember("data", _JSONDocument)
 
 	MessageInput_value = MessageInput.AddMember("value", MessageData)
 
@@ -8576,6 +8751,14 @@ func init() {
 
 	RetrievalConfiguration_overrideKnowledgeBaseSearchType = RetrievalConfiguration.AddMember("overrideKnowledgeBaseSearchType", _KnowledgeBaseSearchType)
 
+	RetrieveError_associationId = RetrieveError.AddMember("associationId", _Uuid)
+
+	RetrieveError_code = RetrieveError.AddMember("code", _RetrieveErrorCode)
+
+	RetrieveError_message = RetrieveError.AddMember("message", smithyprelude.String)
+
+	_RetrieveErrorList_member = _RetrieveErrorList.AddMember("member", RetrieveError)
+
 	RetrieveResult_associationId = RetrieveResult.AddMember("associationId", _Uuid)
 
 	RetrieveResult_sourceId = RetrieveResult.AddMember("sourceId", _SensitiveString)
@@ -8723,6 +8906,12 @@ func init() {
 	SpanAttributes_aiAgentInvoker = SpanAttributes.AddMember("aiAgentInvoker", _NonEmptyString)
 
 	SpanAttributes_aiAgentOrchestratorUseCase = SpanAttributes.AddMember("aiAgentOrchestratorUseCase", _NonEmptyString)
+
+	SpanAttributes_interactionMode = SpanAttributes.AddMember("interactionMode", _InteractionMode)
+
+	SpanAttributes_targetAgentId = SpanAttributes.AddMember("targetAgentId", _NonEmptyString)
+
+	SpanAttributes_returnReason = SpanAttributes.AddMember("returnReason", _ReturnReason)
 
 	SpanAttributes_requestModel = SpanAttributes.AddMember("requestModel", _NonEmptyString)
 
@@ -9581,6 +9770,8 @@ func init() {
 	RetrieveRequest_retrievalQuery = RetrieveRequest.AddMember("retrievalQuery", _NonEmptySensitiveString)
 
 	RetrieveResponse_results = RetrieveResponse.AddMember("results", _RetrieveResultList)
+
+	RetrieveResponse_errors = RetrieveResponse.AddMember("errors", _RetrieveErrorList)
 
 	SearchContentRequest_nextToken = SearchContentRequest.AddMember("nextToken", _NextToken, &smithytraits.HTTPQuery{Name: "nextToken"})
 

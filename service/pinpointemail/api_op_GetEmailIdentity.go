@@ -4,7 +4,9 @@ package pinpointemail
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/pinpointemail/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/pinpointemail/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -35,6 +37,18 @@ type GetEmailIdentityInput struct {
 	EmailIdentity *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetEmailIdentityInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetEmailIdentityRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetEmailIdentityInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EmailIdentity != nil {
+		s.WriteString(schemas.GetEmailIdentityRequest_EmailIdentity, *v.EmailIdentity)
+	}
 }
 
 // Details about an email identity.
@@ -83,13 +97,65 @@ type GetEmailIdentityOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetEmailIdentityOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetEmailIdentityResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetEmailIdentityOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DkimAttributes != nil {
+		s.WriteStruct(schemas.GetEmailIdentityResponse_DkimAttributes)
+		v.DkimAttributes.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.FeedbackForwardingStatus != false {
+		s.WriteBool(schemas.GetEmailIdentityResponse_FeedbackForwardingStatus, v.FeedbackForwardingStatus)
+	}
+	if v.IdentityType != "" {
+		s.WriteString(schemas.GetEmailIdentityResponse_IdentityType, string(v.IdentityType))
+	}
+	if v.MailFromAttributes != nil {
+		s.WriteStruct(schemas.GetEmailIdentityResponse_MailFromAttributes)
+		v.MailFromAttributes.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeTagList(s, schemas.GetEmailIdentityResponse_Tags, v.Tags)
+	if v.VerifiedForSendingStatus != false {
+		s.WriteBool(schemas.GetEmailIdentityResponse_VerifiedForSendingStatus, v.VerifiedForSendingStatus)
+	}
+}
+func (v *GetEmailIdentityOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetEmailIdentityResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetEmailIdentityResponse_DkimAttributes:
+			v.DkimAttributes = &types.DkimAttributes{}
+			return v.DkimAttributes.Deserialize(d)
+		case schemas.GetEmailIdentityResponse_FeedbackForwardingStatus:
+			return d.ReadBool(schemas.GetEmailIdentityResponse_FeedbackForwardingStatus, &v.FeedbackForwardingStatus)
+		case schemas.GetEmailIdentityResponse_IdentityType:
+			var ev string
+			if err := d.ReadString(schemas.GetEmailIdentityResponse_IdentityType, &ev); err != nil {
+				return err
+			}
+			v.IdentityType = types.IdentityType(ev)
+			return nil
+		case schemas.GetEmailIdentityResponse_MailFromAttributes:
+			v.MailFromAttributes = &types.MailFromAttributes{}
+			return v.MailFromAttributes.Deserialize(d)
+		case schemas.GetEmailIdentityResponse_Tags:
+			return deserializeTagList(d, schemas.GetEmailIdentityResponse_Tags, &v.Tags)
+		case schemas.GetEmailIdentityResponse_VerifiedForSendingStatus:
+			return d.ReadBool(schemas.GetEmailIdentityResponse_VerifiedForSendingStatus, &v.VerifiedForSendingStatus)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetEmailIdentityMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetEmailIdentity{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetEmailIdentity, schemas.GetEmailIdentityRequest, schemas.GetEmailIdentityResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetEmailIdentity{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetEmailIdentity, schemas.GetEmailIdentityRequest, schemas.GetEmailIdentityResponse), output: &GetEmailIdentityOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -1,6 +1,7 @@
-POST /
+POST /service/AWSFMS_20180101/operation/PutAdminAccount
 
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: AWSFMS_20180101.PutAdminAccount
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"AdminAccount":"__AdminAccount__","AdminScope":{"AccountScope":{"Accounts":["__Member__","__Member__"],"AllAccountsEnabled":true,"ExcludeSpecifiedAccounts":true},"OrganizationalUnitScope":{"AllOrganizationalUnitsEnabled":true,"ExcludeSpecifiedOrganizationalUnits":true,"OrganizationalUnits":["__Member__","__Member__"]},"PolicyTypeScope":{"AllPolicyTypesEnabled":true,"PolicyTypes":["WAF","WAF"]},"RegionScope":{"AllRegionsEnabled":true,"Regions":["__Member__","__Member__"]}}}
+¿lAdminAccountp__AdminAccount__jAdminScope¿lAccountScope¿hAccountsŸj__Member__j__Member__ÿrAllAccountsEnabledõxExcludeSpecifiedAccountsõÿwOrganizationalUnitScope¿xAllOrganizationalUnitsEnabledõx#ExcludeSpecifiedOrganizationalUnitsõsOrganizationalUnitsŸj__Member__j__Member__ÿÿoPolicyTypeScope¿uAllPolicyTypesEnabledõkPolicyTypesŸcWAFcWAFÿÿkRegionScope¿qAllRegionsEnabledõgRegionsŸj__Member__j__Member__ÿÿÿÿ

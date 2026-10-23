@@ -4,7 +4,9 @@ package bedrock
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/bedrock/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrock/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -35,6 +37,18 @@ type GetModelInvocationJobInput struct {
 	JobIdentifier *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetModelInvocationJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetModelInvocationJobRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetModelInvocationJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.JobIdentifier != nil {
+		s.WriteString(schemas.GetModelInvocationJobRequest_jobIdentifier, *v.JobIdentifier)
+	}
 }
 
 type GetModelInvocationJobOutput struct {
@@ -174,13 +188,150 @@ type GetModelInvocationJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetModelInvocationJobOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetModelInvocationJobResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetModelInvocationJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientRequestToken != nil {
+		s.WriteString(schemas.GetModelInvocationJobResponse_clientRequestToken, *v.ClientRequestToken)
+	}
+	if v.EndTime != nil {
+		s.WriteTime(schemas.GetModelInvocationJobResponse_endTime, *v.EndTime)
+	}
+	if v.ErrorRecordCount != nil {
+		s.WriteInt64(schemas.GetModelInvocationJobResponse_errorRecordCount, *v.ErrorRecordCount)
+	}
+	serializeModelInvocationJobInputDataConfig(s, schemas.GetModelInvocationJobResponse_inputDataConfig, v.InputDataConfig)
+	if v.JobArn != nil {
+		s.WriteString(schemas.GetModelInvocationJobResponse_jobArn, *v.JobArn)
+	}
+	if v.JobExpirationTime != nil {
+		s.WriteTime(schemas.GetModelInvocationJobResponse_jobExpirationTime, *v.JobExpirationTime)
+	}
+	if v.JobName != nil {
+		s.WriteString(schemas.GetModelInvocationJobResponse_jobName, *v.JobName)
+	}
+	if v.LastModifiedTime != nil {
+		s.WriteTime(schemas.GetModelInvocationJobResponse_lastModifiedTime, *v.LastModifiedTime)
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.GetModelInvocationJobResponse_message, *v.Message)
+	}
+	if v.ModelId != nil {
+		s.WriteString(schemas.GetModelInvocationJobResponse_modelId, *v.ModelId)
+	}
+	if v.ModelInvocationType != "" {
+		s.WriteString(schemas.GetModelInvocationJobResponse_modelInvocationType, string(v.ModelInvocationType))
+	}
+	serializeModelInvocationJobOutputDataConfig(s, schemas.GetModelInvocationJobResponse_outputDataConfig, v.OutputDataConfig)
+	if v.ProcessedRecordCount != nil {
+		s.WriteInt64(schemas.GetModelInvocationJobResponse_processedRecordCount, *v.ProcessedRecordCount)
+	}
+	if v.RoleArn != nil {
+		s.WriteString(schemas.GetModelInvocationJobResponse_roleArn, *v.RoleArn)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.GetModelInvocationJobResponse_status, string(v.Status))
+	}
+	if v.SubmitTime != nil {
+		s.WriteTime(schemas.GetModelInvocationJobResponse_submitTime, *v.SubmitTime)
+	}
+	if v.SuccessRecordCount != nil {
+		s.WriteInt64(schemas.GetModelInvocationJobResponse_successRecordCount, *v.SuccessRecordCount)
+	}
+	if v.TimeoutDurationInHours != nil {
+		s.WriteInt32(schemas.GetModelInvocationJobResponse_timeoutDurationInHours, *v.TimeoutDurationInHours)
+	}
+	if v.TotalRecordCount != nil {
+		s.WriteInt64(schemas.GetModelInvocationJobResponse_totalRecordCount, *v.TotalRecordCount)
+	}
+	if v.VpcConfig != nil {
+		s.WriteStruct(schemas.GetModelInvocationJobResponse_vpcConfig)
+		v.VpcConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetModelInvocationJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetModelInvocationJobResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetModelInvocationJobResponse_clientRequestToken:
+			v.ClientRequestToken = new(string)
+			return d.ReadString(schemas.GetModelInvocationJobResponse_clientRequestToken, v.ClientRequestToken)
+		case schemas.GetModelInvocationJobResponse_endTime:
+			v.EndTime = new(time.Time)
+			return d.ReadTime(schemas.GetModelInvocationJobResponse_endTime, v.EndTime)
+		case schemas.GetModelInvocationJobResponse_errorRecordCount:
+			v.ErrorRecordCount = new(int64)
+			return d.ReadInt64(schemas.GetModelInvocationJobResponse_errorRecordCount, v.ErrorRecordCount)
+		case schemas.GetModelInvocationJobResponse_inputDataConfig:
+			return deserializeModelInvocationJobInputDataConfig(d, schemas.GetModelInvocationJobResponse_inputDataConfig, &v.InputDataConfig)
+		case schemas.GetModelInvocationJobResponse_jobArn:
+			v.JobArn = new(string)
+			return d.ReadString(schemas.GetModelInvocationJobResponse_jobArn, v.JobArn)
+		case schemas.GetModelInvocationJobResponse_jobExpirationTime:
+			v.JobExpirationTime = new(time.Time)
+			return d.ReadTime(schemas.GetModelInvocationJobResponse_jobExpirationTime, v.JobExpirationTime)
+		case schemas.GetModelInvocationJobResponse_jobName:
+			v.JobName = new(string)
+			return d.ReadString(schemas.GetModelInvocationJobResponse_jobName, v.JobName)
+		case schemas.GetModelInvocationJobResponse_lastModifiedTime:
+			v.LastModifiedTime = new(time.Time)
+			return d.ReadTime(schemas.GetModelInvocationJobResponse_lastModifiedTime, v.LastModifiedTime)
+		case schemas.GetModelInvocationJobResponse_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.GetModelInvocationJobResponse_message, v.Message)
+		case schemas.GetModelInvocationJobResponse_modelId:
+			v.ModelId = new(string)
+			return d.ReadString(schemas.GetModelInvocationJobResponse_modelId, v.ModelId)
+		case schemas.GetModelInvocationJobResponse_modelInvocationType:
+			var ev string
+			if err := d.ReadString(schemas.GetModelInvocationJobResponse_modelInvocationType, &ev); err != nil {
+				return err
+			}
+			v.ModelInvocationType = types.ModelInvocationType(ev)
+			return nil
+		case schemas.GetModelInvocationJobResponse_outputDataConfig:
+			return deserializeModelInvocationJobOutputDataConfig(d, schemas.GetModelInvocationJobResponse_outputDataConfig, &v.OutputDataConfig)
+		case schemas.GetModelInvocationJobResponse_processedRecordCount:
+			v.ProcessedRecordCount = new(int64)
+			return d.ReadInt64(schemas.GetModelInvocationJobResponse_processedRecordCount, v.ProcessedRecordCount)
+		case schemas.GetModelInvocationJobResponse_roleArn:
+			v.RoleArn = new(string)
+			return d.ReadString(schemas.GetModelInvocationJobResponse_roleArn, v.RoleArn)
+		case schemas.GetModelInvocationJobResponse_status:
+			var ev string
+			if err := d.ReadString(schemas.GetModelInvocationJobResponse_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.ModelInvocationJobStatus(ev)
+			return nil
+		case schemas.GetModelInvocationJobResponse_submitTime:
+			v.SubmitTime = new(time.Time)
+			return d.ReadTime(schemas.GetModelInvocationJobResponse_submitTime, v.SubmitTime)
+		case schemas.GetModelInvocationJobResponse_successRecordCount:
+			v.SuccessRecordCount = new(int64)
+			return d.ReadInt64(schemas.GetModelInvocationJobResponse_successRecordCount, v.SuccessRecordCount)
+		case schemas.GetModelInvocationJobResponse_timeoutDurationInHours:
+			v.TimeoutDurationInHours = new(int32)
+			return d.ReadInt32(schemas.GetModelInvocationJobResponse_timeoutDurationInHours, v.TimeoutDurationInHours)
+		case schemas.GetModelInvocationJobResponse_totalRecordCount:
+			v.TotalRecordCount = new(int64)
+			return d.ReadInt64(schemas.GetModelInvocationJobResponse_totalRecordCount, v.TotalRecordCount)
+		case schemas.GetModelInvocationJobResponse_vpcConfig:
+			v.VpcConfig = &types.VpcConfig{}
+			return v.VpcConfig.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetModelInvocationJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetModelInvocationJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetModelInvocationJob, schemas.GetModelInvocationJobRequest, schemas.GetModelInvocationJobResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetModelInvocationJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetModelInvocationJob, schemas.GetModelInvocationJobRequest, schemas.GetModelInvocationJobResponse), output: &GetModelInvocationJobOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

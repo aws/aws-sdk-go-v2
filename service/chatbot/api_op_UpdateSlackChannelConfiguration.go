@@ -4,7 +4,9 @@ package chatbot
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/chatbot/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/chatbot/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -68,6 +70,35 @@ type UpdateSlackChannelConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateSlackChannelConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateSlackChannelConfigurationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateSlackChannelConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ChatConfigurationArn != nil {
+		s.WriteString(schemas.UpdateSlackChannelConfigurationRequest_ChatConfigurationArn, *v.ChatConfigurationArn)
+	}
+	serializeGuardrailPolicyArnList(s, schemas.UpdateSlackChannelConfigurationRequest_GuardrailPolicyArns, v.GuardrailPolicyArns)
+	if v.IamRoleArn != nil {
+		s.WriteString(schemas.UpdateSlackChannelConfigurationRequest_IamRoleArn, *v.IamRoleArn)
+	}
+	if v.LoggingLevel != nil {
+		s.WriteString(schemas.UpdateSlackChannelConfigurationRequest_LoggingLevel, *v.LoggingLevel)
+	}
+	if v.SlackChannelId != nil {
+		s.WriteString(schemas.UpdateSlackChannelConfigurationRequest_SlackChannelId, *v.SlackChannelId)
+	}
+	if v.SlackChannelName != nil {
+		s.WriteString(schemas.UpdateSlackChannelConfigurationRequest_SlackChannelName, *v.SlackChannelName)
+	}
+	serializeSnsTopicArnList(s, schemas.UpdateSlackChannelConfigurationRequest_SnsTopicArns, v.SnsTopicArns)
+	if v.UserAuthorizationRequired != nil {
+		s.WriteBool(schemas.UpdateSlackChannelConfigurationRequest_UserAuthorizationRequired, *v.UserAuthorizationRequired)
+	}
+}
+
 type UpdateSlackChannelConfigurationOutput struct {
 
 	// The configuration for a Slack channel configured with AWS Chatbot.
@@ -79,13 +110,34 @@ type UpdateSlackChannelConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateSlackChannelConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateSlackChannelConfigurationResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateSlackChannelConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ChannelConfiguration != nil {
+		s.WriteStruct(schemas.UpdateSlackChannelConfigurationResult_ChannelConfiguration)
+		v.ChannelConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateSlackChannelConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateSlackChannelConfigurationResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateSlackChannelConfigurationResult_ChannelConfiguration:
+			v.ChannelConfiguration = &types.SlackChannelConfiguration{}
+			return v.ChannelConfiguration.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateSlackChannelConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateSlackChannelConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateSlackChannelConfiguration, schemas.UpdateSlackChannelConfigurationRequest, schemas.UpdateSlackChannelConfigurationResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateSlackChannelConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateSlackChannelConfiguration, schemas.UpdateSlackChannelConfigurationRequest, schemas.UpdateSlackChannelConfigurationResult), output: &UpdateSlackChannelConfigurationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

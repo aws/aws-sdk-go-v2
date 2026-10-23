@@ -4,7 +4,9 @@ package glue
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/glue/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/glue/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -46,6 +48,32 @@ type ModifyIntegrationInput struct {
 	IntegrationName *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ModifyIntegrationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ModifyIntegrationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ModifyIntegrationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DataFilter != nil {
+		s.WriteString(schemas.ModifyIntegrationRequest_DataFilter, *v.DataFilter)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.ModifyIntegrationRequest_Description, *v.Description)
+	}
+	if v.IntegrationConfig != nil {
+		s.WriteStruct(schemas.ModifyIntegrationRequest_IntegrationConfig)
+		v.IntegrationConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.IntegrationIdentifier != nil {
+		s.WriteString(schemas.ModifyIntegrationRequest_IntegrationIdentifier, *v.IntegrationIdentifier)
+	}
+	if v.IntegrationName != nil {
+		s.WriteString(schemas.ModifyIntegrationRequest_IntegrationName, *v.IntegrationName)
+	}
 }
 
 type ModifyIntegrationOutput struct {
@@ -124,13 +152,101 @@ type ModifyIntegrationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ModifyIntegrationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ModifyIntegrationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ModifyIntegrationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeIntegrationAdditionalEncryptionContextMap(s, schemas.ModifyIntegrationResponse_AdditionalEncryptionContext, v.AdditionalEncryptionContext)
+	if v.CreateTime != nil {
+		s.WriteTime(schemas.ModifyIntegrationResponse_CreateTime, *v.CreateTime)
+	}
+	if v.DataFilter != nil {
+		s.WriteString(schemas.ModifyIntegrationResponse_DataFilter, *v.DataFilter)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.ModifyIntegrationResponse_Description, *v.Description)
+	}
+	serializeIntegrationErrorList(s, schemas.ModifyIntegrationResponse_Errors, v.Errors)
+	if v.IntegrationArn != nil {
+		s.WriteString(schemas.ModifyIntegrationResponse_IntegrationArn, *v.IntegrationArn)
+	}
+	if v.IntegrationConfig != nil {
+		s.WriteStruct(schemas.ModifyIntegrationResponse_IntegrationConfig)
+		v.IntegrationConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.IntegrationName != nil {
+		s.WriteString(schemas.ModifyIntegrationResponse_IntegrationName, *v.IntegrationName)
+	}
+	if v.KmsKeyId != nil {
+		s.WriteString(schemas.ModifyIntegrationResponse_KmsKeyId, *v.KmsKeyId)
+	}
+	if v.SourceArn != nil {
+		s.WriteString(schemas.ModifyIntegrationResponse_SourceArn, *v.SourceArn)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.ModifyIntegrationResponse_Status, string(v.Status))
+	}
+	serializeIntegrationTagsList(s, schemas.ModifyIntegrationResponse_Tags, v.Tags)
+	if v.TargetArn != nil {
+		s.WriteString(schemas.ModifyIntegrationResponse_TargetArn, *v.TargetArn)
+	}
+}
+func (v *ModifyIntegrationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ModifyIntegrationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ModifyIntegrationResponse_AdditionalEncryptionContext:
+			return deserializeIntegrationAdditionalEncryptionContextMap(d, schemas.ModifyIntegrationResponse_AdditionalEncryptionContext, &v.AdditionalEncryptionContext)
+		case schemas.ModifyIntegrationResponse_CreateTime:
+			v.CreateTime = new(time.Time)
+			return d.ReadTime(schemas.ModifyIntegrationResponse_CreateTime, v.CreateTime)
+		case schemas.ModifyIntegrationResponse_DataFilter:
+			v.DataFilter = new(string)
+			return d.ReadString(schemas.ModifyIntegrationResponse_DataFilter, v.DataFilter)
+		case schemas.ModifyIntegrationResponse_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.ModifyIntegrationResponse_Description, v.Description)
+		case schemas.ModifyIntegrationResponse_Errors:
+			return deserializeIntegrationErrorList(d, schemas.ModifyIntegrationResponse_Errors, &v.Errors)
+		case schemas.ModifyIntegrationResponse_IntegrationArn:
+			v.IntegrationArn = new(string)
+			return d.ReadString(schemas.ModifyIntegrationResponse_IntegrationArn, v.IntegrationArn)
+		case schemas.ModifyIntegrationResponse_IntegrationConfig:
+			v.IntegrationConfig = &types.IntegrationConfig{}
+			return v.IntegrationConfig.Deserialize(d)
+		case schemas.ModifyIntegrationResponse_IntegrationName:
+			v.IntegrationName = new(string)
+			return d.ReadString(schemas.ModifyIntegrationResponse_IntegrationName, v.IntegrationName)
+		case schemas.ModifyIntegrationResponse_KmsKeyId:
+			v.KmsKeyId = new(string)
+			return d.ReadString(schemas.ModifyIntegrationResponse_KmsKeyId, v.KmsKeyId)
+		case schemas.ModifyIntegrationResponse_SourceArn:
+			v.SourceArn = new(string)
+			return d.ReadString(schemas.ModifyIntegrationResponse_SourceArn, v.SourceArn)
+		case schemas.ModifyIntegrationResponse_Status:
+			var ev string
+			if err := d.ReadString(schemas.ModifyIntegrationResponse_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.IntegrationStatus(ev)
+			return nil
+		case schemas.ModifyIntegrationResponse_Tags:
+			return deserializeIntegrationTagsList(d, schemas.ModifyIntegrationResponse_Tags, &v.Tags)
+		case schemas.ModifyIntegrationResponse_TargetArn:
+			v.TargetArn = new(string)
+			return d.ReadString(schemas.ModifyIntegrationResponse_TargetArn, v.TargetArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationModifyIntegrationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpModifyIntegration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ModifyIntegration, schemas.ModifyIntegrationRequest, schemas.ModifyIntegrationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpModifyIntegration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ModifyIntegration, schemas.ModifyIntegrationRequest, schemas.ModifyIntegrationResponse), output: &ModifyIntegrationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

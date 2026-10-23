@@ -5,7 +5,9 @@ package bedrock
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/bedrock/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrock/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -49,6 +51,24 @@ type ListGuardrailsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListGuardrailsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListGuardrailsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListGuardrailsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GuardrailIdentifier != nil {
+		s.WriteString(schemas.ListGuardrailsRequest_guardrailIdentifier, *v.GuardrailIdentifier)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListGuardrailsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListGuardrailsRequest_nextToken, *v.NextToken)
+	}
+}
+
 type ListGuardrailsOutput struct {
 
 	// A list of objects, each of which contains details about a guardrail.
@@ -67,13 +87,35 @@ type ListGuardrailsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListGuardrailsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListGuardrailsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListGuardrailsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeGuardrailSummaries(s, schemas.ListGuardrailsResponse_guardrails, v.Guardrails)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListGuardrailsResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListGuardrailsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListGuardrailsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListGuardrailsResponse_guardrails:
+			return deserializeGuardrailSummaries(d, schemas.ListGuardrailsResponse_guardrails, &v.Guardrails)
+		case schemas.ListGuardrailsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListGuardrailsResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListGuardrailsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListGuardrails{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListGuardrails, schemas.ListGuardrailsRequest, schemas.ListGuardrailsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListGuardrails{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListGuardrails, schemas.ListGuardrailsRequest, schemas.ListGuardrailsResponse), output: &ListGuardrailsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

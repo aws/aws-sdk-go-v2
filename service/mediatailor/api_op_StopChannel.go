@@ -4,6 +4,8 @@ package mediatailor
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/mediatailor/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -36,6 +38,28 @@ type StopChannelInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StopChannelInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StopChannelRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StopChannelInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ChannelName != nil {
+		s.WriteString(schemas.StopChannelRequest_ChannelName, *v.ChannelName)
+	}
+}
+func (v *StopChannelInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StopChannelRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StopChannelRequest_ChannelName:
+			v.ChannelName = new(string)
+			return d.ReadString(schemas.StopChannelRequest_ChannelName, v.ChannelName)
+		}
+		return nil
+	})
+}
+
 type StopChannelOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -43,13 +67,26 @@ type StopChannelOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StopChannelOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StopChannelResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StopChannelOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *StopChannelOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StopChannelResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStopChannelMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpStopChannel{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StopChannel, schemas.StopChannelRequest, schemas.StopChannelResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStopChannel{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StopChannel, schemas.StopChannelRequest, schemas.StopChannelResponse), output: &StopChannelOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

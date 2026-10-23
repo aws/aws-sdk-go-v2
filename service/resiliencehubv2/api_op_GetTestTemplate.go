@@ -4,7 +4,9 @@ package resiliencehubv2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/resiliencehubv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/resiliencehubv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -35,6 +37,18 @@ type GetTestTemplateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetTestTemplateInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetTestTemplateRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetTestTemplateInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TestTemplateArn != nil {
+		s.WriteString(schemas.GetTestTemplateRequest_testTemplateArn, *v.TestTemplateArn)
+	}
+}
+
 type GetTestTemplateOutput struct {
 
 	// The requested test template.
@@ -48,13 +62,34 @@ type GetTestTemplateOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetTestTemplateOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetTestTemplateResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetTestTemplateOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TestTemplate != nil {
+		s.WriteStruct(schemas.GetTestTemplateResponse_testTemplate)
+		v.TestTemplate.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetTestTemplateOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetTestTemplateResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetTestTemplateResponse_testTemplate:
+			v.TestTemplate = &types.TestTemplate{}
+			return v.TestTemplate.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetTestTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetTestTemplate{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetTestTemplate, schemas.GetTestTemplateRequest, schemas.GetTestTemplateResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetTestTemplate{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetTestTemplate, schemas.GetTestTemplateRequest, schemas.GetTestTemplateResponse), output: &GetTestTemplateOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

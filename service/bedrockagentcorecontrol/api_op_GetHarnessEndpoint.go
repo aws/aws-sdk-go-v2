@@ -4,7 +4,9 @@ package bedrockagentcorecontrol
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,21 @@ type GetHarnessEndpointInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetHarnessEndpointInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetHarnessEndpointRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetHarnessEndpointInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EndpointName != nil {
+		s.WriteString(schemas.GetHarnessEndpointRequest_endpointName, *v.EndpointName)
+	}
+	if v.HarnessId != nil {
+		s.WriteString(schemas.GetHarnessEndpointRequest_harnessId, *v.HarnessId)
+	}
+}
+
 type GetHarnessEndpointOutput struct {
 
 	// The endpoint resource.
@@ -52,13 +69,34 @@ type GetHarnessEndpointOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetHarnessEndpointOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetHarnessEndpointResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetHarnessEndpointOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Endpoint != nil {
+		s.WriteStruct(schemas.GetHarnessEndpointResponse_endpoint)
+		v.Endpoint.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetHarnessEndpointOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetHarnessEndpointResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetHarnessEndpointResponse_endpoint:
+			v.Endpoint = &types.HarnessEndpoint{}
+			return v.Endpoint.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetHarnessEndpointMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetHarnessEndpoint{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetHarnessEndpoint, schemas.GetHarnessEndpointRequest, schemas.GetHarnessEndpointResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetHarnessEndpoint{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetHarnessEndpoint, schemas.GetHarnessEndpointRequest, schemas.GetHarnessEndpointResponse), output: &GetHarnessEndpointOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

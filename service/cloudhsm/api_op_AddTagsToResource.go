@@ -4,7 +4,9 @@ package cloudhsm
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/cloudhsm/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cloudhsm/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -56,6 +58,19 @@ type AddTagsToResourceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AddTagsToResourceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AddTagsToResourceRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AddTagsToResourceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ResourceArn != nil {
+		s.WriteString(schemas.AddTagsToResourceRequest_ResourceArn, *v.ResourceArn)
+	}
+	serializeTagList(s, schemas.AddTagsToResourceRequest_TagList, v.TagList)
+}
+
 type AddTagsToResourceOutput struct {
 
 	// The status of the operation.
@@ -69,13 +84,32 @@ type AddTagsToResourceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AddTagsToResourceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AddTagsToResourceResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AddTagsToResourceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Status != nil {
+		s.WriteString(schemas.AddTagsToResourceResponse_Status, *v.Status)
+	}
+}
+func (v *AddTagsToResourceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AddTagsToResourceResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AddTagsToResourceResponse_Status:
+			v.Status = new(string)
+			return d.ReadString(schemas.AddTagsToResourceResponse_Status, v.Status)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationAddTagsToResourceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpAddTagsToResource{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AddTagsToResource, schemas.AddTagsToResourceRequest, schemas.AddTagsToResourceResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpAddTagsToResource{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AddTagsToResource, schemas.AddTagsToResourceRequest, schemas.AddTagsToResourceResponse), output: &AddTagsToResourceOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

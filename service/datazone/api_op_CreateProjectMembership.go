@@ -4,7 +4,9 @@ package datazone
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/datazone/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/datazone/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -46,7 +48,34 @@ type CreateProjectMembershipInput struct {
 	// This member is required.
 	ProjectIdentifier *string
 
+	// The ID of the user-created designation to assign to the project member.
+	// Required when designation is USER_CREATED_DESIGNATION ; must not be provided
+	// otherwise.
+	UserCreatedDesignationId *string
+
 	noSmithyDocumentSerde
+}
+
+func (v *CreateProjectMembershipInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateProjectMembershipInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateProjectMembershipInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Designation != "" {
+		s.WriteString(schemas.CreateProjectMembershipInput_designation, string(v.Designation))
+	}
+	if v.DomainIdentifier != nil {
+		s.WriteString(schemas.CreateProjectMembershipInput_domainIdentifier, *v.DomainIdentifier)
+	}
+	serializeMember(s, schemas.CreateProjectMembershipInput_member, v.Member)
+	if v.ProjectIdentifier != nil {
+		s.WriteString(schemas.CreateProjectMembershipInput_projectIdentifier, *v.ProjectIdentifier)
+	}
+	if v.UserCreatedDesignationId != nil {
+		s.WriteString(schemas.CreateProjectMembershipInput_userCreatedDesignationId, *v.UserCreatedDesignationId)
+	}
 }
 
 type CreateProjectMembershipOutput struct {
@@ -56,13 +85,26 @@ type CreateProjectMembershipOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateProjectMembershipOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateProjectMembershipOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateProjectMembershipOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *CreateProjectMembershipOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateProjectMembershipOutput, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateProjectMembershipMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateProjectMembership{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateProjectMembership, schemas.CreateProjectMembershipInput, schemas.CreateProjectMembershipOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateProjectMembership{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateProjectMembership, schemas.CreateProjectMembershipInput, schemas.CreateProjectMembershipOutput), output: &CreateProjectMembershipOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -5,7 +5,9 @@ package quicksight
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/quicksight/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/quicksight/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -54,6 +56,28 @@ type SearchGroupsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SearchGroupsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SearchGroupsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SearchGroupsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AwsAccountId != nil {
+		s.WriteString(schemas.SearchGroupsRequest_AwsAccountId, *v.AwsAccountId)
+	}
+	serializeGroupSearchFilterList(s, schemas.SearchGroupsRequest_Filters, v.Filters)
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.SearchGroupsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.Namespace != nil {
+		s.WriteString(schemas.SearchGroupsRequest_Namespace, *v.Namespace)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.SearchGroupsRequest_NextToken, *v.NextToken)
+	}
+}
+
 type SearchGroupsOutput struct {
 
 	// A list of groups in a specified namespace that match the filters you set in
@@ -75,13 +99,46 @@ type SearchGroupsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SearchGroupsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SearchGroupsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SearchGroupsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeGroupList(s, schemas.SearchGroupsResponse_GroupList, v.GroupList)
+	if v.NextToken != nil {
+		s.WriteString(schemas.SearchGroupsResponse_NextToken, *v.NextToken)
+	}
+	if v.RequestId != nil {
+		s.WriteString(schemas.SearchGroupsResponse_RequestId, *v.RequestId)
+	}
+	if v.Status != 0 {
+		s.WriteInt32(schemas.SearchGroupsResponse_Status, v.Status)
+	}
+}
+func (v *SearchGroupsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SearchGroupsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SearchGroupsResponse_GroupList:
+			return deserializeGroupList(d, schemas.SearchGroupsResponse_GroupList, &v.GroupList)
+		case schemas.SearchGroupsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.SearchGroupsResponse_NextToken, v.NextToken)
+		case schemas.SearchGroupsResponse_RequestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.SearchGroupsResponse_RequestId, v.RequestId)
+		case schemas.SearchGroupsResponse_Status:
+			return d.ReadInt32(schemas.SearchGroupsResponse_Status, &v.Status)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationSearchGroupsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpSearchGroups{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SearchGroups, schemas.SearchGroupsRequest, schemas.SearchGroupsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpSearchGroups{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SearchGroups, schemas.SearchGroupsRequest, schemas.SearchGroupsResponse), output: &SearchGroupsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

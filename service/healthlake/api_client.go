@@ -17,6 +17,7 @@ import (
 	internalauthsmithy "github.com/aws/aws-sdk-go-v2/internal/auth/smithy"
 	internalConfig "github.com/aws/aws-sdk-go-v2/internal/configsources"
 	"github.com/aws/aws-sdk-go-v2/internal/timeouts"
+	"github.com/aws/aws-sdk-go-v2/service/healthlake/schemas"
 	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 	"github.com/aws/smithy-go/logging"
@@ -25,6 +26,8 @@ import (
 	smithyrand "github.com/aws/smithy-go/rand"
 	"github.com/aws/smithy-go/tracing"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
+	"github.com/aws/smithy-go/transport/http/protocol/awsjson"
+	"io"
 	"net"
 	"net/http"
 	"sync/atomic"
@@ -214,6 +217,8 @@ func New(options Options, optFns ...func(*Options)) *Client {
 
 	resolveAuthSchemeResolver(&options)
 
+	options.Protocol = awsjson.New10(schemas.HealthLake)
+
 	for _, fn := range optFns {
 		fn(&options)
 	}
@@ -337,6 +342,152 @@ func (c *Client) invokeOperation(
 	return result, metadata, err
 }
 
+func (c *Client) invokeEventStreamOperation(
+	ctx context.Context, opID string, params interface{}, optFns []func(*Options), stackFns ...func(*middleware.Stack, Options) error,
+) (
+	result interface{}, metadata middleware.Metadata, err error,
+) {
+	ctx = middleware.ClearStackValues(ctx)
+	ctx = middleware.WithServiceID(ctx, ServiceID)
+	ctx = middleware.WithOperationName(ctx, opID)
+
+	stack := middleware.NewStack(opID, smithyhttp.NewStackRequest)
+	options := c.options.Copy()
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	finalizeOperationRetryMaxAttempts(&options, *c)
+
+	finalizeClientEndpointResolverOptions(&options)
+
+	ctx = setLoggerContext(ctx, options, opID)
+
+	ctx = resolveServiceMetadata(ctx, options, opID)
+
+	if err := c.addCommonMiddlewares(stack, options, opID); err != nil {
+		return nil, metadata, err
+	}
+
+	for _, fn := range stackFns {
+		if err := fn(stack, options); err != nil {
+			return nil, metadata, err
+		}
+	}
+
+	for _, fn := range options.APIOptions {
+		if err := fn(stack); err != nil {
+			return nil, metadata, err
+		}
+	}
+
+	ctx, err = withOperationMetrics(ctx, options.MeterProvider)
+	if err != nil {
+		return nil, metadata, err
+	}
+
+	tracer := operationTracer(options.TracerProvider)
+	spanName := fmt.Sprintf("%s.%s", ServiceID, opID)
+
+	ctx = tracing.WithOperationTracer(ctx, tracer)
+
+	ctx, span := tracer.StartSpan(ctx, spanName, func(o *tracing.SpanOptions) {
+		o.Kind = tracing.SpanKindClient
+		o.Properties.Set("rpc.system", "aws-api")
+		o.Properties.Set("rpc.method", opID)
+		o.Properties.Set("rpc.service", ServiceID)
+	})
+	endTimer := startMetricTimer(ctx, "client.call.duration")
+	defer endTimer()
+	defer span.End()
+
+	handler := smithyhttp.NewClientHandlerWithOptions(options.HTTPClient, func(o *smithyhttp.ClientHandler) {
+		o.Meter = options.MeterProvider.Meter("github.com/aws/aws-sdk-go-v2/service/healthlake")
+	})
+	decorated := middleware.DecorateHandler(handler, stack)
+	// create a channel that returns immediately as soon as the request to the server is made
+	results := make(chan PartialResult, 1)
+	ctx = context.WithValue(ctx, partialResultChan{}, results)
+	go func() {
+		_, _, asyncErr := decorated.Handle(ctx, params)
+		if asyncErr != nil {
+			span.SetProperty("exception.type", fmt.Sprintf("%T", asyncErr))
+			span.SetProperty("exception.message", asyncErr.Error())
+
+			var aerr smithy.APIError
+			if errors.As(asyncErr, &aerr) {
+				span.SetProperty("api.error_code", aerr.ErrorCode())
+				span.SetProperty("api.error_message", aerr.ErrorMessage())
+				span.SetProperty("api.error_fault", aerr.ErrorFault().String())
+			}
+
+			asyncErr = &smithy.OperationError{
+				ServiceID:     ServiceID,
+				OperationName: opID,
+				Err:           asyncErr,
+			}
+		}
+		span.SetProperty("error", asyncErr != nil)
+		if asyncErr == nil {
+			span.SetStatus(tracing.SpanStatusOK)
+		} else {
+			span.SetStatus(tracing.SpanStatusError)
+		}
+	}()
+	res := <-results
+	return res.Output, res.Metadata, res.Error
+}
+
+type partialResultChan struct {
+}
+
+type deserializeResult struct {
+	reader io.ReadCloser
+	err    error
+}
+
+type asyncEventStreamReader struct {
+	pipeReader *io.PipeReader
+	pipeWriter *io.PipeWriter
+}
+
+func newAsyncEventStreamReader(resultChan <-chan deserializeResult) *asyncEventStreamReader {
+	pipeReader, pipeWriter := io.Pipe()
+
+	reader := &asyncEventStreamReader{
+		pipeReader: pipeReader,
+		pipeWriter: pipeWriter,
+	}
+
+	// Start background copying
+	go func() {
+		for result := range resultChan {
+			if result.err != nil {
+				// consume the error, this can be retried
+				// and if we close the pipeline, it will prevent us
+				// from retrying
+				continue
+			}
+
+			// Copy response body to pipe
+			_, err := io.Copy(pipeWriter, result.reader)
+			pipeWriter.CloseWithError(err)
+		}
+	}()
+
+	return reader
+}
+
+// PartialResult represents a placeholder value to return
+// immediately when calling an event streaming operation. This contains no
+// meaningful result for the caller
+type PartialResult struct {
+	Output   any
+	Metadata middleware.Metadata
+	Error    error
+}
+
 type operationInputKey struct{}
 
 func setOperationInput(ctx context.Context, input interface{}) context.Context {
@@ -429,6 +580,102 @@ func resolveAuthSchemes(options *Options) {
 			}),
 		}
 	}
+}
+
+type serializeRequestMiddleware struct {
+	options         *Options
+	operationSchema *smithy.OperationSchema
+}
+
+func (*serializeRequestMiddleware) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *serializeRequestMiddleware) HandleSerialize(
+	ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler,
+) (
+	middleware.SerializeOutput, middleware.Metadata, error,
+) {
+	req, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return middleware.SerializeOutput{}, middleware.Metadata{}, fmt.Errorf("unexpected transport type %T", in.Request)
+	}
+
+	input, ok := in.Parameters.(smithy.Serializable)
+	if !ok {
+		return middleware.SerializeOutput{}, middleware.Metadata{}, fmt.Errorf("input %T is not Serializable", in.Request)
+	}
+
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+
+	err := m.options.Protocol.SerializeRequest(ctx, m.operationSchema, input, req)
+
+	endTimer()
+	span.End()
+
+	if err != nil {
+		return middleware.SerializeOutput{}, middleware.Metadata{}, err
+	}
+
+	return next.HandleSerialize(ctx, in)
+}
+
+type deserializeResponseMiddleware struct {
+	options         *Options
+	operationSchema *smithy.OperationSchema
+	output          smithy.Deserializable
+}
+
+func (*deserializeResponseMiddleware) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *deserializeResponseMiddleware) HandleDeserialize(
+	ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler,
+) (
+	middleware.DeserializeOutput, middleware.Metadata, error,
+) {
+	out, md, err := next.HandleDeserialize(ctx, in)
+
+	resp, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		if err != nil {
+			// Transport-level failure with no HTTP response to close.
+			return out, md, err
+		}
+		return out, md, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	// Close the response body on return. CloseResponseBody keeps the body
+	// open only for a successful caller-owned stream (a streaming payload
+	// with a nil error); on any error -- including one surfaced by an
+	// interceptor that runs after OperationDeserializer (after transmit or
+	// before deserialization) -- it closes the received body. Registering
+	// this before the error check below is what covers those interceptor
+	// aborts. Event streams close their own body in the event stream
+	// deserializer.
+	if !m.operationSchema.IsInputEventStream() && !m.operationSchema.IsOutputEventStream() {
+		_, isStreamingPayload := m.output.(smithy.StreamingOutput)
+		defer func() {
+			smithyhttp.CloseResponseBody(ctx, resp, isStreamingPayload, err)
+		}()
+	}
+
+	if err != nil {
+		return out, md, err
+	}
+
+	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
+	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
+
+	err = m.options.Protocol.DeserializeResponse(ctx, m.operationSchema, TypeRegistry, resp, m.output)
+	out.Result = m.output
+
+	endTimer()
+	span.End()
+
+	return out, md, err
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde

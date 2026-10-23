@@ -5,6 +5,8 @@ package kafka
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/kafka/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -40,6 +42,24 @@ type ListScramSecretsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListScramSecretsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListScramSecretsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListScramSecretsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClusterArn != nil {
+		s.WriteString(schemas.ListScramSecretsRequest_ClusterArn, *v.ClusterArn)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListScramSecretsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListScramSecretsRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListScramSecretsOutput struct {
 
 	// Paginated results marker.
@@ -54,13 +74,35 @@ type ListScramSecretsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListScramSecretsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListScramSecretsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListScramSecretsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListScramSecretsResponse_NextToken, *v.NextToken)
+	}
+	serialize__listOf__string(s, schemas.ListScramSecretsResponse_SecretArnList, v.SecretArnList)
+}
+func (v *ListScramSecretsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListScramSecretsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListScramSecretsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListScramSecretsResponse_NextToken, v.NextToken)
+		case schemas.ListScramSecretsResponse_SecretArnList:
+			return deserialize__listOf__string(d, schemas.ListScramSecretsResponse_SecretArnList, &v.SecretArnList)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListScramSecretsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListScramSecrets{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListScramSecrets, schemas.ListScramSecretsRequest, schemas.ListScramSecretsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListScramSecrets{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListScramSecrets, schemas.ListScramSecretsRequest, schemas.ListScramSecretsResponse), output: &ListScramSecretsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

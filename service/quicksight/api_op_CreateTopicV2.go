@@ -4,7 +4,9 @@ package quicksight
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/quicksight/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/quicksight/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -57,6 +59,33 @@ type CreateTopicV2Input struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateTopicV2Input) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateTopicV2Request)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateTopicV2Input) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AwsAccountId != nil {
+		s.WriteString(schemas.CreateTopicV2Request_AwsAccountId, *v.AwsAccountId)
+	}
+	if v.CustomInstructions != nil {
+		s.WriteStruct(schemas.CreateTopicV2Request_CustomInstructions)
+		v.CustomInstructions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeFolderArnList(s, schemas.CreateTopicV2Request_FolderArns, v.FolderArns)
+	serializeTagList(s, schemas.CreateTopicV2Request_Tags, v.Tags)
+	if v.Topic != nil {
+		s.WriteStruct(schemas.CreateTopicV2Request_Topic)
+		v.Topic.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TopicId != nil {
+		s.WriteString(schemas.CreateTopicV2Request_TopicId, *v.TopicId)
+	}
+}
+
 type CreateTopicV2Output struct {
 
 	// The Amazon Resource Name (ARN) of the topic.
@@ -78,13 +107,49 @@ type CreateTopicV2Output struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateTopicV2Output) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateTopicV2Response)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateTopicV2Output) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.CreateTopicV2Response_Arn, *v.Arn)
+	}
+	if v.RequestId != nil {
+		s.WriteString(schemas.CreateTopicV2Response_RequestId, *v.RequestId)
+	}
+	if v.Status != 0 {
+		s.WriteInt32(schemas.CreateTopicV2Response_Status, v.Status)
+	}
+	if v.TopicId != nil {
+		s.WriteString(schemas.CreateTopicV2Response_TopicId, *v.TopicId)
+	}
+}
+func (v *CreateTopicV2Output) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateTopicV2Response, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateTopicV2Response_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.CreateTopicV2Response_Arn, v.Arn)
+		case schemas.CreateTopicV2Response_RequestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.CreateTopicV2Response_RequestId, v.RequestId)
+		case schemas.CreateTopicV2Response_Status:
+			return d.ReadInt32(schemas.CreateTopicV2Response_Status, &v.Status)
+		case schemas.CreateTopicV2Response_TopicId:
+			v.TopicId = new(string)
+			return d.ReadString(schemas.CreateTopicV2Response_TopicId, v.TopicId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateTopicV2Middlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateTopicV2{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateTopicV2, schemas.CreateTopicV2Request, schemas.CreateTopicV2Response)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateTopicV2{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateTopicV2, schemas.CreateTopicV2Request, schemas.CreateTopicV2Response), output: &CreateTopicV2Output{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"domainId":"__DomainId__","glossaryId":"__GlossaryId__","id":"__Id__","longDescription":"__LongDescription__","name":"__Name__","shortDescription":"__ShortDescription__","status":"ENABLED","termRelations":{"classifies":["__Member__","__Member__"],"isA":["__Member__","__Member__"]},"usageRestrictions":["ASSET_GOVERNED_TERMS","ASSET_GOVERNED_TERMS"]}

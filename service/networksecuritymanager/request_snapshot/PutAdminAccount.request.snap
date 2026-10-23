@@ -1,0 +1,5 @@
+PUT /admin-account
+
+Content-Type: application/json
+
+{"accountId":"__AccountId__","adminScope":{"firewallTypeScope":{"allFirewallTypesEnabled":true,"firewallTypes":["WAF","WAF"]},"scopeFilter":{"includeAll":{}}},"priority":1}

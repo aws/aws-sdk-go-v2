@@ -5,7 +5,9 @@ package securityhub
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/securityhub/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/securityhub/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -53,6 +55,26 @@ type CreateConnectorInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateConnectorInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateConnectorRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateConnectorInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateConnectorRequest_ClientToken, *v.ClientToken)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreateConnectorRequest_Description, *v.Description)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateConnectorRequest_Name, *v.Name)
+	}
+	serializeCspmProviderConfiguration(s, schemas.CreateConnectorRequest_Provider, v.Provider)
+	serializeTagMap(s, schemas.CreateConnectorRequest_Tags, v.Tags)
+}
+
 type CreateConnectorOutput struct {
 
 	// The Amazon Resource Name (ARN) of the connector.
@@ -77,13 +99,58 @@ type CreateConnectorOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateConnectorOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateConnectorResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateConnectorOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConnectorArn != nil {
+		s.WriteString(schemas.CreateConnectorResponse_ConnectorArn, *v.ConnectorArn)
+	}
+	if v.ConnectorId != nil {
+		s.WriteString(schemas.CreateConnectorResponse_ConnectorId, *v.ConnectorId)
+	}
+	if v.ConnectorStatus != "" {
+		s.WriteString(schemas.CreateConnectorResponse_ConnectorStatus, string(v.ConnectorStatus))
+	}
+	if v.EnablementStatus != "" {
+		s.WriteString(schemas.CreateConnectorResponse_EnablementStatus, string(v.EnablementStatus))
+	}
+}
+func (v *CreateConnectorOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateConnectorResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateConnectorResponse_ConnectorArn:
+			v.ConnectorArn = new(string)
+			return d.ReadString(schemas.CreateConnectorResponse_ConnectorArn, v.ConnectorArn)
+		case schemas.CreateConnectorResponse_ConnectorId:
+			v.ConnectorId = new(string)
+			return d.ReadString(schemas.CreateConnectorResponse_ConnectorId, v.ConnectorId)
+		case schemas.CreateConnectorResponse_ConnectorStatus:
+			var ev string
+			if err := d.ReadString(schemas.CreateConnectorResponse_ConnectorStatus, &ev); err != nil {
+				return err
+			}
+			v.ConnectorStatus = types.CspmConnectorStatus(ev)
+			return nil
+		case schemas.CreateConnectorResponse_EnablementStatus:
+			var ev string
+			if err := d.ReadString(schemas.CreateConnectorResponse_EnablementStatus, &ev); err != nil {
+				return err
+			}
+			v.EnablementStatus = types.CspmEnablementStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateConnectorMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateConnector{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateConnector, schemas.CreateConnectorRequest, schemas.CreateConnectorResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateConnector{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateConnector, schemas.CreateConnectorRequest, schemas.CreateConnectorResponse), output: &CreateConnectorOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

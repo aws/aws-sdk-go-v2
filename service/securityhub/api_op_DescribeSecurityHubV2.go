@@ -4,7 +4,9 @@ package securityhub
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/securityhub/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/securityhub/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -28,6 +30,15 @@ type DescribeSecurityHubV2Input struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeSecurityHubV2Input) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeSecurityHubV2Request)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeSecurityHubV2Input) SerializeMembers(s smithy.ShapeSerializer) {
+}
+
 type DescribeSecurityHubV2Output struct {
 
 	// A map of opt-in features and their current status and metadata for the account
@@ -46,13 +57,41 @@ type DescribeSecurityHubV2Output struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeSecurityHubV2Output) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeSecurityHubV2Response)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeSecurityHubV2Output) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeFeatures(s, schemas.DescribeSecurityHubV2Response_Features, v.Features)
+	if v.HubV2Arn != nil {
+		s.WriteString(schemas.DescribeSecurityHubV2Response_HubV2Arn, *v.HubV2Arn)
+	}
+	if v.SubscribedAt != nil {
+		s.WriteString(schemas.DescribeSecurityHubV2Response_SubscribedAt, *v.SubscribedAt)
+	}
+}
+func (v *DescribeSecurityHubV2Output) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeSecurityHubV2Response, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeSecurityHubV2Response_Features:
+			return deserializeFeatures(d, schemas.DescribeSecurityHubV2Response_Features, &v.Features)
+		case schemas.DescribeSecurityHubV2Response_HubV2Arn:
+			v.HubV2Arn = new(string)
+			return d.ReadString(schemas.DescribeSecurityHubV2Response_HubV2Arn, v.HubV2Arn)
+		case schemas.DescribeSecurityHubV2Response_SubscribedAt:
+			v.SubscribedAt = new(string)
+			return d.ReadString(schemas.DescribeSecurityHubV2Response_SubscribedAt, v.SubscribedAt)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeSecurityHubV2Middlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeSecurityHubV2{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeSecurityHubV2, schemas.DescribeSecurityHubV2Request, schemas.DescribeSecurityHubV2Response)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeSecurityHubV2{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeSecurityHubV2, schemas.DescribeSecurityHubV2Request, schemas.DescribeSecurityHubV2Response), output: &DescribeSecurityHubV2Output{}}, middleware.After); err != nil {
 		return err
 	}
 

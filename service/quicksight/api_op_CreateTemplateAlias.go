@@ -4,7 +4,9 @@ package quicksight
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/quicksight/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/quicksight/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -52,6 +54,27 @@ type CreateTemplateAliasInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateTemplateAliasInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateTemplateAliasRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateTemplateAliasInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AliasName != nil {
+		s.WriteString(schemas.CreateTemplateAliasRequest_AliasName, *v.AliasName)
+	}
+	if v.AwsAccountId != nil {
+		s.WriteString(schemas.CreateTemplateAliasRequest_AwsAccountId, *v.AwsAccountId)
+	}
+	if v.TemplateId != nil {
+		s.WriteString(schemas.CreateTemplateAliasRequest_TemplateId, *v.TemplateId)
+	}
+	if v.TemplateVersionNumber != nil {
+		s.WriteInt64(schemas.CreateTemplateAliasRequest_TemplateVersionNumber, *v.TemplateVersionNumber)
+	}
+}
+
 type CreateTemplateAliasOutput struct {
 
 	// The Amazon Web Services request ID for this operation.
@@ -69,13 +92,45 @@ type CreateTemplateAliasOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateTemplateAliasOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateTemplateAliasResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateTemplateAliasOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RequestId != nil {
+		s.WriteString(schemas.CreateTemplateAliasResponse_RequestId, *v.RequestId)
+	}
+	if v.Status != 0 {
+		s.WriteInt32(schemas.CreateTemplateAliasResponse_Status, v.Status)
+	}
+	if v.TemplateAlias != nil {
+		s.WriteStruct(schemas.CreateTemplateAliasResponse_TemplateAlias)
+		v.TemplateAlias.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateTemplateAliasOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateTemplateAliasResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateTemplateAliasResponse_RequestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.CreateTemplateAliasResponse_RequestId, v.RequestId)
+		case schemas.CreateTemplateAliasResponse_Status:
+			return d.ReadInt32(schemas.CreateTemplateAliasResponse_Status, &v.Status)
+		case schemas.CreateTemplateAliasResponse_TemplateAlias:
+			v.TemplateAlias = &types.TemplateAlias{}
+			return v.TemplateAlias.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateTemplateAliasMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateTemplateAlias{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateTemplateAlias, schemas.CreateTemplateAliasRequest, schemas.CreateTemplateAliasResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateTemplateAlias{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateTemplateAlias, schemas.CreateTemplateAliasRequest, schemas.CreateTemplateAliasResponse), output: &CreateTemplateAliasOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

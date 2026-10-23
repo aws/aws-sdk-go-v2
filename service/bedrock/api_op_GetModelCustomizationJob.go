@@ -4,7 +4,9 @@ package bedrock
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/bedrock/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrock/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -37,6 +39,18 @@ type GetModelCustomizationJobInput struct {
 	JobIdentifier *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetModelCustomizationJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetModelCustomizationJobRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetModelCustomizationJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.JobIdentifier != nil {
+		s.WriteString(schemas.GetModelCustomizationJobRequest_jobIdentifier, *v.JobIdentifier)
+	}
 }
 
 type GetModelCustomizationJobOutput struct {
@@ -140,13 +154,175 @@ type GetModelCustomizationJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetModelCustomizationJobOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetModelCustomizationJobResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetModelCustomizationJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BaseModelArn != nil {
+		s.WriteString(schemas.GetModelCustomizationJobResponse_baseModelArn, *v.BaseModelArn)
+	}
+	if v.ClientRequestToken != nil {
+		s.WriteString(schemas.GetModelCustomizationJobResponse_clientRequestToken, *v.ClientRequestToken)
+	}
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.GetModelCustomizationJobResponse_creationTime, *v.CreationTime)
+	}
+	serializeCustomizationConfig(s, schemas.GetModelCustomizationJobResponse_customizationConfig, v.CustomizationConfig)
+	if v.CustomizationType != "" {
+		s.WriteString(schemas.GetModelCustomizationJobResponse_customizationType, string(v.CustomizationType))
+	}
+	if v.EndTime != nil {
+		s.WriteTime(schemas.GetModelCustomizationJobResponse_endTime, *v.EndTime)
+	}
+	if v.FailureMessage != nil {
+		s.WriteString(schemas.GetModelCustomizationJobResponse_failureMessage, *v.FailureMessage)
+	}
+	serializeModelCustomizationHyperParameters(s, schemas.GetModelCustomizationJobResponse_hyperParameters, v.HyperParameters)
+	if v.JobArn != nil {
+		s.WriteString(schemas.GetModelCustomizationJobResponse_jobArn, *v.JobArn)
+	}
+	if v.JobName != nil {
+		s.WriteString(schemas.GetModelCustomizationJobResponse_jobName, *v.JobName)
+	}
+	if v.LastModifiedTime != nil {
+		s.WriteTime(schemas.GetModelCustomizationJobResponse_lastModifiedTime, *v.LastModifiedTime)
+	}
+	if v.OutputDataConfig != nil {
+		s.WriteStruct(schemas.GetModelCustomizationJobResponse_outputDataConfig)
+		v.OutputDataConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.OutputModelArn != nil {
+		s.WriteString(schemas.GetModelCustomizationJobResponse_outputModelArn, *v.OutputModelArn)
+	}
+	if v.OutputModelKmsKeyArn != nil {
+		s.WriteString(schemas.GetModelCustomizationJobResponse_outputModelKmsKeyArn, *v.OutputModelKmsKeyArn)
+	}
+	if v.OutputModelName != nil {
+		s.WriteString(schemas.GetModelCustomizationJobResponse_outputModelName, *v.OutputModelName)
+	}
+	if v.RoleArn != nil {
+		s.WriteString(schemas.GetModelCustomizationJobResponse_roleArn, *v.RoleArn)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.GetModelCustomizationJobResponse_status, string(v.Status))
+	}
+	if v.StatusDetails != nil {
+		s.WriteStruct(schemas.GetModelCustomizationJobResponse_statusDetails)
+		v.StatusDetails.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TrainingDataConfig != nil {
+		s.WriteStruct(schemas.GetModelCustomizationJobResponse_trainingDataConfig)
+		v.TrainingDataConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TrainingMetrics != nil {
+		s.WriteStruct(schemas.GetModelCustomizationJobResponse_trainingMetrics)
+		v.TrainingMetrics.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ValidationDataConfig != nil {
+		s.WriteStruct(schemas.GetModelCustomizationJobResponse_validationDataConfig)
+		v.ValidationDataConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeValidationMetrics(s, schemas.GetModelCustomizationJobResponse_validationMetrics, v.ValidationMetrics)
+	if v.VpcConfig != nil {
+		s.WriteStruct(schemas.GetModelCustomizationJobResponse_vpcConfig)
+		v.VpcConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetModelCustomizationJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetModelCustomizationJobResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetModelCustomizationJobResponse_baseModelArn:
+			v.BaseModelArn = new(string)
+			return d.ReadString(schemas.GetModelCustomizationJobResponse_baseModelArn, v.BaseModelArn)
+		case schemas.GetModelCustomizationJobResponse_clientRequestToken:
+			v.ClientRequestToken = new(string)
+			return d.ReadString(schemas.GetModelCustomizationJobResponse_clientRequestToken, v.ClientRequestToken)
+		case schemas.GetModelCustomizationJobResponse_creationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.GetModelCustomizationJobResponse_creationTime, v.CreationTime)
+		case schemas.GetModelCustomizationJobResponse_customizationConfig:
+			return deserializeCustomizationConfig(d, schemas.GetModelCustomizationJobResponse_customizationConfig, &v.CustomizationConfig)
+		case schemas.GetModelCustomizationJobResponse_customizationType:
+			var ev string
+			if err := d.ReadString(schemas.GetModelCustomizationJobResponse_customizationType, &ev); err != nil {
+				return err
+			}
+			v.CustomizationType = types.CustomizationType(ev)
+			return nil
+		case schemas.GetModelCustomizationJobResponse_endTime:
+			v.EndTime = new(time.Time)
+			return d.ReadTime(schemas.GetModelCustomizationJobResponse_endTime, v.EndTime)
+		case schemas.GetModelCustomizationJobResponse_failureMessage:
+			v.FailureMessage = new(string)
+			return d.ReadString(schemas.GetModelCustomizationJobResponse_failureMessage, v.FailureMessage)
+		case schemas.GetModelCustomizationJobResponse_hyperParameters:
+			return deserializeModelCustomizationHyperParameters(d, schemas.GetModelCustomizationJobResponse_hyperParameters, &v.HyperParameters)
+		case schemas.GetModelCustomizationJobResponse_jobArn:
+			v.JobArn = new(string)
+			return d.ReadString(schemas.GetModelCustomizationJobResponse_jobArn, v.JobArn)
+		case schemas.GetModelCustomizationJobResponse_jobName:
+			v.JobName = new(string)
+			return d.ReadString(schemas.GetModelCustomizationJobResponse_jobName, v.JobName)
+		case schemas.GetModelCustomizationJobResponse_lastModifiedTime:
+			v.LastModifiedTime = new(time.Time)
+			return d.ReadTime(schemas.GetModelCustomizationJobResponse_lastModifiedTime, v.LastModifiedTime)
+		case schemas.GetModelCustomizationJobResponse_outputDataConfig:
+			v.OutputDataConfig = &types.OutputDataConfig{}
+			return v.OutputDataConfig.Deserialize(d)
+		case schemas.GetModelCustomizationJobResponse_outputModelArn:
+			v.OutputModelArn = new(string)
+			return d.ReadString(schemas.GetModelCustomizationJobResponse_outputModelArn, v.OutputModelArn)
+		case schemas.GetModelCustomizationJobResponse_outputModelKmsKeyArn:
+			v.OutputModelKmsKeyArn = new(string)
+			return d.ReadString(schemas.GetModelCustomizationJobResponse_outputModelKmsKeyArn, v.OutputModelKmsKeyArn)
+		case schemas.GetModelCustomizationJobResponse_outputModelName:
+			v.OutputModelName = new(string)
+			return d.ReadString(schemas.GetModelCustomizationJobResponse_outputModelName, v.OutputModelName)
+		case schemas.GetModelCustomizationJobResponse_roleArn:
+			v.RoleArn = new(string)
+			return d.ReadString(schemas.GetModelCustomizationJobResponse_roleArn, v.RoleArn)
+		case schemas.GetModelCustomizationJobResponse_status:
+			var ev string
+			if err := d.ReadString(schemas.GetModelCustomizationJobResponse_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.ModelCustomizationJobStatus(ev)
+			return nil
+		case schemas.GetModelCustomizationJobResponse_statusDetails:
+			v.StatusDetails = &types.StatusDetails{}
+			return v.StatusDetails.Deserialize(d)
+		case schemas.GetModelCustomizationJobResponse_trainingDataConfig:
+			v.TrainingDataConfig = &types.TrainingDataConfig{}
+			return v.TrainingDataConfig.Deserialize(d)
+		case schemas.GetModelCustomizationJobResponse_trainingMetrics:
+			v.TrainingMetrics = &types.TrainingMetrics{}
+			return v.TrainingMetrics.Deserialize(d)
+		case schemas.GetModelCustomizationJobResponse_validationDataConfig:
+			v.ValidationDataConfig = &types.ValidationDataConfig{}
+			return v.ValidationDataConfig.Deserialize(d)
+		case schemas.GetModelCustomizationJobResponse_validationMetrics:
+			return deserializeValidationMetrics(d, schemas.GetModelCustomizationJobResponse_validationMetrics, &v.ValidationMetrics)
+		case schemas.GetModelCustomizationJobResponse_vpcConfig:
+			v.VpcConfig = &types.VpcConfig{}
+			return v.VpcConfig.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetModelCustomizationJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetModelCustomizationJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetModelCustomizationJob, schemas.GetModelCustomizationJobRequest, schemas.GetModelCustomizationJobResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetModelCustomizationJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetModelCustomizationJob, schemas.GetModelCustomizationJobRequest, schemas.GetModelCustomizationJobResponse), output: &GetModelCustomizationJobOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

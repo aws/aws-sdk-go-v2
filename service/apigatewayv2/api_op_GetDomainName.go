@@ -4,7 +4,9 @@ package apigatewayv2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/apigatewayv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/apigatewayv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -32,6 +34,18 @@ type GetDomainNameInput struct {
 	DomainName *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetDomainNameInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetDomainNameRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetDomainNameInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DomainName != nil {
+		s.WriteString(schemas.GetDomainNameRequest_DomainName, *v.DomainName)
+	}
 }
 
 type GetDomainNameOutput struct {
@@ -63,13 +77,68 @@ type GetDomainNameOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetDomainNameOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetDomainNameResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetDomainNameOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApiMappingSelectionExpression != nil {
+		s.WriteString(schemas.GetDomainNameResponse_ApiMappingSelectionExpression, *v.ApiMappingSelectionExpression)
+	}
+	if v.DomainName != nil {
+		s.WriteString(schemas.GetDomainNameResponse_DomainName, *v.DomainName)
+	}
+	if v.DomainNameArn != nil {
+		s.WriteString(schemas.GetDomainNameResponse_DomainNameArn, *v.DomainNameArn)
+	}
+	serializeDomainNameConfigurations(s, schemas.GetDomainNameResponse_DomainNameConfigurations, v.DomainNameConfigurations)
+	if v.MutualTlsAuthentication != nil {
+		s.WriteStruct(schemas.GetDomainNameResponse_MutualTlsAuthentication)
+		v.MutualTlsAuthentication.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RoutingMode != "" {
+		s.WriteString(schemas.GetDomainNameResponse_RoutingMode, string(v.RoutingMode))
+	}
+	serializeTags(s, schemas.GetDomainNameResponse_Tags, v.Tags)
+}
+func (v *GetDomainNameOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetDomainNameResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetDomainNameResponse_ApiMappingSelectionExpression:
+			v.ApiMappingSelectionExpression = new(string)
+			return d.ReadString(schemas.GetDomainNameResponse_ApiMappingSelectionExpression, v.ApiMappingSelectionExpression)
+		case schemas.GetDomainNameResponse_DomainName:
+			v.DomainName = new(string)
+			return d.ReadString(schemas.GetDomainNameResponse_DomainName, v.DomainName)
+		case schemas.GetDomainNameResponse_DomainNameArn:
+			v.DomainNameArn = new(string)
+			return d.ReadString(schemas.GetDomainNameResponse_DomainNameArn, v.DomainNameArn)
+		case schemas.GetDomainNameResponse_DomainNameConfigurations:
+			return deserializeDomainNameConfigurations(d, schemas.GetDomainNameResponse_DomainNameConfigurations, &v.DomainNameConfigurations)
+		case schemas.GetDomainNameResponse_MutualTlsAuthentication:
+			v.MutualTlsAuthentication = &types.MutualTlsAuthentication{}
+			return v.MutualTlsAuthentication.Deserialize(d)
+		case schemas.GetDomainNameResponse_RoutingMode:
+			var ev string
+			if err := d.ReadString(schemas.GetDomainNameResponse_RoutingMode, &ev); err != nil {
+				return err
+			}
+			v.RoutingMode = types.RoutingMode(ev)
+			return nil
+		case schemas.GetDomainNameResponse_Tags:
+			return deserializeTags(d, schemas.GetDomainNameResponse_Tags, &v.Tags)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetDomainNameMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetDomainName{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetDomainName, schemas.GetDomainNameRequest, schemas.GetDomainNameResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetDomainName{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetDomainName, schemas.GetDomainNameRequest, schemas.GetDomainNameResponse), output: &GetDomainNameOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

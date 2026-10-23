@@ -4,6 +4,8 @@ package glue
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/glue/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -41,6 +43,24 @@ type RunStatementInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RunStatementInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RunStatementRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RunStatementInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Code != nil {
+		s.WriteString(schemas.RunStatementRequest_Code, *v.Code)
+	}
+	if v.RequestOrigin != nil {
+		s.WriteString(schemas.RunStatementRequest_RequestOrigin, *v.RequestOrigin)
+	}
+	if v.SessionId != nil {
+		s.WriteString(schemas.RunStatementRequest_SessionId, *v.SessionId)
+	}
+}
+
 type RunStatementOutput struct {
 
 	// Returns the Id of the statement that was run.
@@ -52,13 +72,31 @@ type RunStatementOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RunStatementOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RunStatementResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RunStatementOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Id != 0 {
+		s.WriteInt32(schemas.RunStatementResponse_Id, v.Id)
+	}
+}
+func (v *RunStatementOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RunStatementResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RunStatementResponse_Id:
+			return d.ReadInt32(schemas.RunStatementResponse_Id, &v.Id)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationRunStatementMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpRunStatement{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RunStatement, schemas.RunStatementRequest, schemas.RunStatementResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpRunStatement{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RunStatement, schemas.RunStatementRequest, schemas.RunStatementResponse), output: &RunStatementOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

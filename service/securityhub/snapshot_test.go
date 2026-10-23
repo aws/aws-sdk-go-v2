@@ -230,6 +230,18 @@ func TestCheckSnapshot_BatchUpdateStandardsControlAssociations(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_CancelExportJobV2(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CancelExportJobV2(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CancelExportJobV2")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_CreateActionTarget(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateActionTarget(context.Background(), nil, func(o *Options) {
@@ -854,6 +866,18 @@ func TestCheckSnapshot_GetEnabledStandards(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_GetExportJobV2(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetExportJobV2(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetExportJobV2")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_GetFindingAggregator(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetFindingAggregator(context.Background(), nil, func(o *Options) {
@@ -991,6 +1015,18 @@ func TestCheckSnapshot_GetRecommendedPolicyV2(t *testing.T) {
 	_, err := svc.GetRecommendedPolicyV2(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "GetRecommendedPolicyV2")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetRemediationsV2(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetRemediationsV2(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetRemediationsV2")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1154,6 +1190,30 @@ func TestCheckSnapshot_ListEnabledProductsForImport(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_ListExportJobsV2(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListExportJobsV2(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListExportJobsV2")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListExposuresByRemediationV2(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListExposuresByRemediationV2(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListExposuresByRemediationV2")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_ListFindingAggregators(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListFindingAggregators(context.Background(), nil, func(o *Options) {
@@ -1279,6 +1339,18 @@ func TestCheckSnapshot_StartConfigurationPolicyDisassociation(t *testing.T) {
 	_, err := svc.StartConfigurationPolicyDisassociation(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "StartConfigurationPolicyDisassociation")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_StartExportJobV2(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StartExportJobV2(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "StartExportJobV2")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1626,6 +1698,18 @@ func TestUpdateSnapshot_BatchUpdateStandardsControlAssociations(t *testing.T) {
 	_, err := svc.BatchUpdateStandardsControlAssociations(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "BatchUpdateStandardsControlAssociations")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_CancelExportJobV2(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CancelExportJobV2(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CancelExportJobV2")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -2257,6 +2341,18 @@ func TestUpdateSnapshot_GetEnabledStandards(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_GetExportJobV2(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetExportJobV2(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetExportJobV2")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_GetFindingAggregator(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetFindingAggregator(context.Background(), nil, func(o *Options) {
@@ -2394,6 +2490,18 @@ func TestUpdateSnapshot_GetRecommendedPolicyV2(t *testing.T) {
 	_, err := svc.GetRecommendedPolicyV2(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "GetRecommendedPolicyV2")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetRemediationsV2(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetRemediationsV2(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetRemediationsV2")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -2557,6 +2665,30 @@ func TestUpdateSnapshot_ListEnabledProductsForImport(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_ListExportJobsV2(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListExportJobsV2(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListExportJobsV2")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListExposuresByRemediationV2(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListExposuresByRemediationV2(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListExposuresByRemediationV2")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_ListFindingAggregators(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListFindingAggregators(context.Background(), nil, func(o *Options) {
@@ -2682,6 +2814,18 @@ func TestUpdateSnapshot_StartConfigurationPolicyDisassociation(t *testing.T) {
 	_, err := svc.StartConfigurationPolicyDisassociation(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "StartConfigurationPolicyDisassociation")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_StartExportJobV2(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StartExportJobV2(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "StartExportJobV2")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

@@ -421,6 +421,10 @@ func TestCheckResponseSnapshot_CreateOriginEndpoint(t *testing.T) {
 					RoleArn:        ptr.String("__RoleArn__"),
 					Url:            ptr.String("__Url__"),
 					CertificateArn: ptr.String("__CertificateArn__"),
+					SpekeVersion:   types.SpekeVersion("V2_0"),
+					ContentKeyPeriodConfiguration: &types.ContentKeyPeriodConfiguration{
+						ContentKeyPeriodTiming: types.ContentKeyPeriodTiming("INDEX_ONLY"),
+					},
 				},
 			},
 			OutputTimestampMode: types.OutputTimestampMode("PASSTHROUGH"),
@@ -447,6 +451,13 @@ func TestCheckResponseSnapshot_CreateOriginEndpoint(t *testing.T) {
 					End:              ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 					TimeDelaySeconds: ptr.Int32(1),
 					ClipStartTime:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					Multiview: &types.MultiviewFilterConfiguration{
+						Layout: types.MultiviewLayoutType("LAYOUT_2EH"),
+						Sources: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
 				},
 				StartTag: &types.StartTag{
 					TimeOffset: ptr.Float32(1.0),
@@ -472,6 +483,13 @@ func TestCheckResponseSnapshot_CreateOriginEndpoint(t *testing.T) {
 					End:              ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 					TimeDelaySeconds: ptr.Int32(1),
 					ClipStartTime:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					Multiview: &types.MultiviewFilterConfiguration{
+						Layout: types.MultiviewLayoutType("LAYOUT_2EH"),
+						Sources: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
 				},
 				StartTag: &types.StartTag{
 					TimeOffset: ptr.Float32(1.0),
@@ -499,6 +517,13 @@ func TestCheckResponseSnapshot_CreateOriginEndpoint(t *testing.T) {
 					End:              ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 					TimeDelaySeconds: ptr.Int32(1),
 					ClipStartTime:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					Multiview: &types.MultiviewFilterConfiguration{
+						Layout: types.MultiviewLayoutType("LAYOUT_2EH"),
+						Sources: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
 				},
 				StartTag: &types.StartTag{
 					TimeOffset: ptr.Float32(1.0),
@@ -524,6 +549,13 @@ func TestCheckResponseSnapshot_CreateOriginEndpoint(t *testing.T) {
 					End:              ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 					TimeDelaySeconds: ptr.Int32(1),
 					ClipStartTime:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					Multiview: &types.MultiviewFilterConfiguration{
+						Layout: types.MultiviewLayoutType("LAYOUT_2EH"),
+						Sources: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
 				},
 				StartTag: &types.StartTag{
 					TimeOffset: ptr.Float32(1.0),
@@ -545,6 +577,13 @@ func TestCheckResponseSnapshot_CreateOriginEndpoint(t *testing.T) {
 					End:              ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 					TimeDelaySeconds: ptr.Int32(1),
 					ClipStartTime:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					Multiview: &types.MultiviewFilterConfiguration{
+						Layout: types.MultiviewLayoutType("LAYOUT_2EH"),
+						Sources: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
 				},
 				MinUpdatePeriodSeconds:            ptr.Int32(1),
 				MinBufferTimeSeconds:              ptr.Int32(1),
@@ -628,6 +667,13 @@ func TestCheckResponseSnapshot_CreateOriginEndpoint(t *testing.T) {
 					End:              ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 					TimeDelaySeconds: ptr.Int32(1),
 					ClipStartTime:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					Multiview: &types.MultiviewFilterConfiguration{
+						Layout: types.MultiviewLayoutType("LAYOUT_2EH"),
+						Sources: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
 				},
 				MinUpdatePeriodSeconds:            ptr.Int32(1),
 				MinBufferTimeSeconds:              ptr.Int32(1),
@@ -712,6 +758,13 @@ func TestCheckResponseSnapshot_CreateOriginEndpoint(t *testing.T) {
 					End:              ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 					TimeDelaySeconds: ptr.Int32(1),
 					ClipStartTime:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					Multiview: &types.MultiviewFilterConfiguration{
+						Layout: types.MultiviewLayoutType("LAYOUT_2EH"),
+						Sources: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
 				},
 				ManifestWindowSeconds: ptr.Int32(1),
 				ManifestLayout:        types.MssManifestLayout("FULL"),
@@ -726,6 +779,13 @@ func TestCheckResponseSnapshot_CreateOriginEndpoint(t *testing.T) {
 					End:              ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 					TimeDelaySeconds: ptr.Int32(1),
 					ClipStartTime:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					Multiview: &types.MultiviewFilterConfiguration{
+						Layout: types.MultiviewLayoutType("LAYOUT_2EH"),
+						Sources: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
 				},
 				ManifestWindowSeconds: ptr.Int32(1),
 				ManifestLayout:        types.MssManifestLayout("FULL"),
@@ -796,6 +856,10 @@ func TestCheckResponseSnapshot_CreateOriginEndpoint(t *testing.T) {
 					RoleArn:        ptr.String("__RoleArn__"),
 					Url:            ptr.String("__Url__"),
 					CertificateArn: ptr.String("__CertificateArn__"),
+					SpekeVersion:   types.SpekeVersion("V2_0"),
+					ContentKeyPeriodConfiguration: &types.ContentKeyPeriodConfiguration{
+						ContentKeyPeriodTiming: types.ContentKeyPeriodTiming("INDEX_ONLY"),
+					},
 				},
 			},
 			OutputTimestampMode: types.OutputTimestampMode("PASSTHROUGH"),
@@ -824,6 +888,13 @@ func TestCheckResponseSnapshot_CreateOriginEndpoint(t *testing.T) {
 					End:              ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 					TimeDelaySeconds: ptr.Int32(1),
 					ClipStartTime:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					Multiview: &types.MultiviewFilterConfiguration{
+						Layout: types.MultiviewLayoutType("LAYOUT_2EH"),
+						Sources: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
 				},
 				UrlEncodeChildManifest: ptr.Bool(true),
 				UriPathType:            types.UriPathType("LEAF"),
@@ -848,6 +919,13 @@ func TestCheckResponseSnapshot_CreateOriginEndpoint(t *testing.T) {
 					End:              ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 					TimeDelaySeconds: ptr.Int32(1),
 					ClipStartTime:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					Multiview: &types.MultiviewFilterConfiguration{
+						Layout: types.MultiviewLayoutType("LAYOUT_2EH"),
+						Sources: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
 				},
 				UrlEncodeChildManifest: ptr.Bool(true),
 				UriPathType:            types.UriPathType("LEAF"),
@@ -874,6 +952,13 @@ func TestCheckResponseSnapshot_CreateOriginEndpoint(t *testing.T) {
 					End:              ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 					TimeDelaySeconds: ptr.Int32(1),
 					ClipStartTime:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					Multiview: &types.MultiviewFilterConfiguration{
+						Layout: types.MultiviewLayoutType("LAYOUT_2EH"),
+						Sources: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
 				},
 				UrlEncodeChildManifest: ptr.Bool(true),
 				UriPathType:            types.UriPathType("LEAF"),
@@ -898,6 +983,13 @@ func TestCheckResponseSnapshot_CreateOriginEndpoint(t *testing.T) {
 					End:              ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 					TimeDelaySeconds: ptr.Int32(1),
 					ClipStartTime:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					Multiview: &types.MultiviewFilterConfiguration{
+						Layout: types.MultiviewLayoutType("LAYOUT_2EH"),
+						Sources: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
 				},
 				UrlEncodeChildManifest: ptr.Bool(true),
 				UriPathType:            types.UriPathType("LEAF"),
@@ -914,6 +1006,13 @@ func TestCheckResponseSnapshot_CreateOriginEndpoint(t *testing.T) {
 					End:              ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 					TimeDelaySeconds: ptr.Int32(1),
 					ClipStartTime:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					Multiview: &types.MultiviewFilterConfiguration{
+						Layout: types.MultiviewLayoutType("LAYOUT_2EH"),
+						Sources: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
 				},
 				MinUpdatePeriodSeconds:            ptr.Int32(1),
 				MinBufferTimeSeconds:              ptr.Int32(1),
@@ -996,6 +1095,13 @@ func TestCheckResponseSnapshot_CreateOriginEndpoint(t *testing.T) {
 					End:              ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 					TimeDelaySeconds: ptr.Int32(1),
 					ClipStartTime:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					Multiview: &types.MultiviewFilterConfiguration{
+						Layout: types.MultiviewLayoutType("LAYOUT_2EH"),
+						Sources: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
 				},
 				MinUpdatePeriodSeconds:            ptr.Int32(1),
 				MinBufferTimeSeconds:              ptr.Int32(1),
@@ -1080,6 +1186,13 @@ func TestCheckResponseSnapshot_CreateOriginEndpoint(t *testing.T) {
 					End:              ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 					TimeDelaySeconds: ptr.Int32(1),
 					ClipStartTime:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					Multiview: &types.MultiviewFilterConfiguration{
+						Layout: types.MultiviewLayoutType("LAYOUT_2EH"),
+						Sources: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
 				},
 				ManifestLayout: types.MssManifestLayout("FULL"),
 			},
@@ -1093,6 +1206,13 @@ func TestCheckResponseSnapshot_CreateOriginEndpoint(t *testing.T) {
 					End:              ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 					TimeDelaySeconds: ptr.Int32(1),
 					ClipStartTime:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					Multiview: &types.MultiviewFilterConfiguration{
+						Layout: types.MultiviewLayoutType("LAYOUT_2EH"),
+						Sources: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
 				},
 				ManifestLayout: types.MssManifestLayout("FULL"),
 			},
@@ -1474,6 +1594,10 @@ func TestCheckResponseSnapshot_GetOriginEndpoint(t *testing.T) {
 					RoleArn:        ptr.String("__RoleArn__"),
 					Url:            ptr.String("__Url__"),
 					CertificateArn: ptr.String("__CertificateArn__"),
+					SpekeVersion:   types.SpekeVersion("V2_0"),
+					ContentKeyPeriodConfiguration: &types.ContentKeyPeriodConfiguration{
+						ContentKeyPeriodTiming: types.ContentKeyPeriodTiming("INDEX_ONLY"),
+					},
 				},
 			},
 			OutputTimestampMode: types.OutputTimestampMode("PASSTHROUGH"),
@@ -1501,6 +1625,13 @@ func TestCheckResponseSnapshot_GetOriginEndpoint(t *testing.T) {
 					End:              ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 					TimeDelaySeconds: ptr.Int32(1),
 					ClipStartTime:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					Multiview: &types.MultiviewFilterConfiguration{
+						Layout: types.MultiviewLayoutType("LAYOUT_2EH"),
+						Sources: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
 				},
 				StartTag: &types.StartTag{
 					TimeOffset: ptr.Float32(1.0),
@@ -1526,6 +1657,13 @@ func TestCheckResponseSnapshot_GetOriginEndpoint(t *testing.T) {
 					End:              ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 					TimeDelaySeconds: ptr.Int32(1),
 					ClipStartTime:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					Multiview: &types.MultiviewFilterConfiguration{
+						Layout: types.MultiviewLayoutType("LAYOUT_2EH"),
+						Sources: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
 				},
 				StartTag: &types.StartTag{
 					TimeOffset: ptr.Float32(1.0),
@@ -1553,6 +1691,13 @@ func TestCheckResponseSnapshot_GetOriginEndpoint(t *testing.T) {
 					End:              ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 					TimeDelaySeconds: ptr.Int32(1),
 					ClipStartTime:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					Multiview: &types.MultiviewFilterConfiguration{
+						Layout: types.MultiviewLayoutType("LAYOUT_2EH"),
+						Sources: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
 				},
 				StartTag: &types.StartTag{
 					TimeOffset: ptr.Float32(1.0),
@@ -1578,6 +1723,13 @@ func TestCheckResponseSnapshot_GetOriginEndpoint(t *testing.T) {
 					End:              ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 					TimeDelaySeconds: ptr.Int32(1),
 					ClipStartTime:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					Multiview: &types.MultiviewFilterConfiguration{
+						Layout: types.MultiviewLayoutType("LAYOUT_2EH"),
+						Sources: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
 				},
 				StartTag: &types.StartTag{
 					TimeOffset: ptr.Float32(1.0),
@@ -1599,6 +1751,13 @@ func TestCheckResponseSnapshot_GetOriginEndpoint(t *testing.T) {
 					End:              ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 					TimeDelaySeconds: ptr.Int32(1),
 					ClipStartTime:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					Multiview: &types.MultiviewFilterConfiguration{
+						Layout: types.MultiviewLayoutType("LAYOUT_2EH"),
+						Sources: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
 				},
 				MinUpdatePeriodSeconds:            ptr.Int32(1),
 				MinBufferTimeSeconds:              ptr.Int32(1),
@@ -1682,6 +1841,13 @@ func TestCheckResponseSnapshot_GetOriginEndpoint(t *testing.T) {
 					End:              ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 					TimeDelaySeconds: ptr.Int32(1),
 					ClipStartTime:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					Multiview: &types.MultiviewFilterConfiguration{
+						Layout: types.MultiviewLayoutType("LAYOUT_2EH"),
+						Sources: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
 				},
 				MinUpdatePeriodSeconds:            ptr.Int32(1),
 				MinBufferTimeSeconds:              ptr.Int32(1),
@@ -1766,6 +1932,13 @@ func TestCheckResponseSnapshot_GetOriginEndpoint(t *testing.T) {
 					End:              ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 					TimeDelaySeconds: ptr.Int32(1),
 					ClipStartTime:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					Multiview: &types.MultiviewFilterConfiguration{
+						Layout: types.MultiviewLayoutType("LAYOUT_2EH"),
+						Sources: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
 				},
 				ManifestWindowSeconds: ptr.Int32(1),
 				ManifestLayout:        types.MssManifestLayout("FULL"),
@@ -1780,6 +1953,13 @@ func TestCheckResponseSnapshot_GetOriginEndpoint(t *testing.T) {
 					End:              ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 					TimeDelaySeconds: ptr.Int32(1),
 					ClipStartTime:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					Multiview: &types.MultiviewFilterConfiguration{
+						Layout: types.MultiviewLayoutType("LAYOUT_2EH"),
+						Sources: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
 				},
 				ManifestWindowSeconds: ptr.Int32(1),
 				ManifestLayout:        types.MssManifestLayout("FULL"),
@@ -2598,6 +2778,10 @@ func TestCheckResponseSnapshot_UpdateOriginEndpoint(t *testing.T) {
 					RoleArn:        ptr.String("__RoleArn__"),
 					Url:            ptr.String("__Url__"),
 					CertificateArn: ptr.String("__CertificateArn__"),
+					SpekeVersion:   types.SpekeVersion("V2_0"),
+					ContentKeyPeriodConfiguration: &types.ContentKeyPeriodConfiguration{
+						ContentKeyPeriodTiming: types.ContentKeyPeriodTiming("INDEX_ONLY"),
+					},
 				},
 			},
 			OutputTimestampMode: types.OutputTimestampMode("PASSTHROUGH"),
@@ -2624,6 +2808,13 @@ func TestCheckResponseSnapshot_UpdateOriginEndpoint(t *testing.T) {
 					End:              ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 					TimeDelaySeconds: ptr.Int32(1),
 					ClipStartTime:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					Multiview: &types.MultiviewFilterConfiguration{
+						Layout: types.MultiviewLayoutType("LAYOUT_2EH"),
+						Sources: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
 				},
 				StartTag: &types.StartTag{
 					TimeOffset: ptr.Float32(1.0),
@@ -2649,6 +2840,13 @@ func TestCheckResponseSnapshot_UpdateOriginEndpoint(t *testing.T) {
 					End:              ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 					TimeDelaySeconds: ptr.Int32(1),
 					ClipStartTime:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					Multiview: &types.MultiviewFilterConfiguration{
+						Layout: types.MultiviewLayoutType("LAYOUT_2EH"),
+						Sources: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
 				},
 				StartTag: &types.StartTag{
 					TimeOffset: ptr.Float32(1.0),
@@ -2676,6 +2874,13 @@ func TestCheckResponseSnapshot_UpdateOriginEndpoint(t *testing.T) {
 					End:              ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 					TimeDelaySeconds: ptr.Int32(1),
 					ClipStartTime:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					Multiview: &types.MultiviewFilterConfiguration{
+						Layout: types.MultiviewLayoutType("LAYOUT_2EH"),
+						Sources: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
 				},
 				StartTag: &types.StartTag{
 					TimeOffset: ptr.Float32(1.0),
@@ -2701,6 +2906,13 @@ func TestCheckResponseSnapshot_UpdateOriginEndpoint(t *testing.T) {
 					End:              ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 					TimeDelaySeconds: ptr.Int32(1),
 					ClipStartTime:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					Multiview: &types.MultiviewFilterConfiguration{
+						Layout: types.MultiviewLayoutType("LAYOUT_2EH"),
+						Sources: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
 				},
 				StartTag: &types.StartTag{
 					TimeOffset: ptr.Float32(1.0),
@@ -2721,6 +2933,13 @@ func TestCheckResponseSnapshot_UpdateOriginEndpoint(t *testing.T) {
 					End:              ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 					TimeDelaySeconds: ptr.Int32(1),
 					ClipStartTime:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					Multiview: &types.MultiviewFilterConfiguration{
+						Layout: types.MultiviewLayoutType("LAYOUT_2EH"),
+						Sources: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
 				},
 				ManifestWindowSeconds: ptr.Int32(1),
 				ManifestLayout:        types.MssManifestLayout("FULL"),
@@ -2735,6 +2954,13 @@ func TestCheckResponseSnapshot_UpdateOriginEndpoint(t *testing.T) {
 					End:              ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 					TimeDelaySeconds: ptr.Int32(1),
 					ClipStartTime:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					Multiview: &types.MultiviewFilterConfiguration{
+						Layout: types.MultiviewLayoutType("LAYOUT_2EH"),
+						Sources: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
 				},
 				ManifestWindowSeconds: ptr.Int32(1),
 				ManifestLayout:        types.MssManifestLayout("FULL"),
@@ -2764,6 +2990,13 @@ func TestCheckResponseSnapshot_UpdateOriginEndpoint(t *testing.T) {
 					End:              ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 					TimeDelaySeconds: ptr.Int32(1),
 					ClipStartTime:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					Multiview: &types.MultiviewFilterConfiguration{
+						Layout: types.MultiviewLayoutType("LAYOUT_2EH"),
+						Sources: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
 				},
 				MinUpdatePeriodSeconds:            ptr.Int32(1),
 				MinBufferTimeSeconds:              ptr.Int32(1),
@@ -2847,6 +3080,13 @@ func TestCheckResponseSnapshot_UpdateOriginEndpoint(t *testing.T) {
 					End:              ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 					TimeDelaySeconds: ptr.Int32(1),
 					ClipStartTime:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					Multiview: &types.MultiviewFilterConfiguration{
+						Layout: types.MultiviewLayoutType("LAYOUT_2EH"),
+						Sources: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
 				},
 				MinUpdatePeriodSeconds:            ptr.Int32(1),
 				MinBufferTimeSeconds:              ptr.Int32(1),
@@ -2973,6 +3213,10 @@ func TestCheckResponseSnapshot_UpdateOriginEndpoint(t *testing.T) {
 					RoleArn:        ptr.String("__RoleArn__"),
 					Url:            ptr.String("__Url__"),
 					CertificateArn: ptr.String("__CertificateArn__"),
+					SpekeVersion:   types.SpekeVersion("V2_0"),
+					ContentKeyPeriodConfiguration: &types.ContentKeyPeriodConfiguration{
+						ContentKeyPeriodTiming: types.ContentKeyPeriodTiming("INDEX_ONLY"),
+					},
 				},
 			},
 			OutputTimestampMode: types.OutputTimestampMode("PASSTHROUGH"),
@@ -3000,6 +3244,13 @@ func TestCheckResponseSnapshot_UpdateOriginEndpoint(t *testing.T) {
 					End:              ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 					TimeDelaySeconds: ptr.Int32(1),
 					ClipStartTime:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					Multiview: &types.MultiviewFilterConfiguration{
+						Layout: types.MultiviewLayoutType("LAYOUT_2EH"),
+						Sources: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
 				},
 				UrlEncodeChildManifest: ptr.Bool(true),
 				UriPathType:            types.UriPathType("LEAF"),
@@ -3024,6 +3275,13 @@ func TestCheckResponseSnapshot_UpdateOriginEndpoint(t *testing.T) {
 					End:              ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 					TimeDelaySeconds: ptr.Int32(1),
 					ClipStartTime:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					Multiview: &types.MultiviewFilterConfiguration{
+						Layout: types.MultiviewLayoutType("LAYOUT_2EH"),
+						Sources: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
 				},
 				UrlEncodeChildManifest: ptr.Bool(true),
 				UriPathType:            types.UriPathType("LEAF"),
@@ -3050,6 +3308,13 @@ func TestCheckResponseSnapshot_UpdateOriginEndpoint(t *testing.T) {
 					End:              ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 					TimeDelaySeconds: ptr.Int32(1),
 					ClipStartTime:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					Multiview: &types.MultiviewFilterConfiguration{
+						Layout: types.MultiviewLayoutType("LAYOUT_2EH"),
+						Sources: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
 				},
 				UrlEncodeChildManifest: ptr.Bool(true),
 				UriPathType:            types.UriPathType("LEAF"),
@@ -3074,6 +3339,13 @@ func TestCheckResponseSnapshot_UpdateOriginEndpoint(t *testing.T) {
 					End:              ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 					TimeDelaySeconds: ptr.Int32(1),
 					ClipStartTime:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					Multiview: &types.MultiviewFilterConfiguration{
+						Layout: types.MultiviewLayoutType("LAYOUT_2EH"),
+						Sources: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
 				},
 				UrlEncodeChildManifest: ptr.Bool(true),
 				UriPathType:            types.UriPathType("LEAF"),
@@ -3090,6 +3362,13 @@ func TestCheckResponseSnapshot_UpdateOriginEndpoint(t *testing.T) {
 					End:              ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 					TimeDelaySeconds: ptr.Int32(1),
 					ClipStartTime:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					Multiview: &types.MultiviewFilterConfiguration{
+						Layout: types.MultiviewLayoutType("LAYOUT_2EH"),
+						Sources: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
 				},
 				MinUpdatePeriodSeconds:            ptr.Int32(1),
 				MinBufferTimeSeconds:              ptr.Int32(1),
@@ -3172,6 +3451,13 @@ func TestCheckResponseSnapshot_UpdateOriginEndpoint(t *testing.T) {
 					End:              ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 					TimeDelaySeconds: ptr.Int32(1),
 					ClipStartTime:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					Multiview: &types.MultiviewFilterConfiguration{
+						Layout: types.MultiviewLayoutType("LAYOUT_2EH"),
+						Sources: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
 				},
 				MinUpdatePeriodSeconds:            ptr.Int32(1),
 				MinBufferTimeSeconds:              ptr.Int32(1),
@@ -3256,6 +3542,13 @@ func TestCheckResponseSnapshot_UpdateOriginEndpoint(t *testing.T) {
 					End:              ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 					TimeDelaySeconds: ptr.Int32(1),
 					ClipStartTime:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					Multiview: &types.MultiviewFilterConfiguration{
+						Layout: types.MultiviewLayoutType("LAYOUT_2EH"),
+						Sources: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
 				},
 				ManifestLayout: types.MssManifestLayout("FULL"),
 			},
@@ -3269,6 +3562,13 @@ func TestCheckResponseSnapshot_UpdateOriginEndpoint(t *testing.T) {
 					End:              ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 					TimeDelaySeconds: ptr.Int32(1),
 					ClipStartTime:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					Multiview: &types.MultiviewFilterConfiguration{
+						Layout: types.MultiviewLayoutType("LAYOUT_2EH"),
+						Sources: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
 				},
 				ManifestLayout: types.MssManifestLayout("FULL"),
 			},

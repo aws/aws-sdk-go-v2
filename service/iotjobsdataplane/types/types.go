@@ -3,6 +3,8 @@
 package types
 
 import (
+	"github.com/aws/aws-sdk-go-v2/service/iotjobsdataplane/schemas"
+	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 )
 
@@ -35,6 +37,63 @@ type CommandParameterValue struct {
 	UL *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *CommandParameterValue) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CommandParameterValue)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CommandParameterValue) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.B != nil {
+		s.WriteBool(schemas.CommandParameterValue_B, *v.B)
+	}
+	if v.BIN != nil {
+		s.WriteBlob(schemas.CommandParameterValue_BIN, v.BIN)
+	}
+	if v.D != nil {
+		s.WriteFloat64(schemas.CommandParameterValue_D, *v.D)
+	}
+	if v.I != nil {
+		s.WriteInt32(schemas.CommandParameterValue_I, *v.I)
+	}
+	if v.L != nil {
+		s.WriteInt64(schemas.CommandParameterValue_L, *v.L)
+	}
+	if v.S != nil {
+		s.WriteString(schemas.CommandParameterValue_S, *v.S)
+	}
+	if v.UL != nil {
+		s.WriteString(schemas.CommandParameterValue_UL, *v.UL)
+	}
+}
+func (v *CommandParameterValue) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CommandParameterValue, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CommandParameterValue_B:
+			v.B = new(bool)
+			return d.ReadBool(schemas.CommandParameterValue_B, v.B)
+		case schemas.CommandParameterValue_BIN:
+			return d.ReadBlob(schemas.CommandParameterValue_BIN, &v.BIN)
+		case schemas.CommandParameterValue_D:
+			v.D = new(float64)
+			return d.ReadFloat64(schemas.CommandParameterValue_D, v.D)
+		case schemas.CommandParameterValue_I:
+			v.I = new(int32)
+			return d.ReadInt32(schemas.CommandParameterValue_I, v.I)
+		case schemas.CommandParameterValue_L:
+			v.L = new(int64)
+			return d.ReadInt64(schemas.CommandParameterValue_L, v.L)
+		case schemas.CommandParameterValue_S:
+			v.S = new(string)
+			return d.ReadString(schemas.CommandParameterValue_S, v.S)
+		case schemas.CommandParameterValue_UL:
+			v.UL = new(string)
+			return d.ReadString(schemas.CommandParameterValue_UL, v.UL)
+		}
+		return nil
+	})
 }
 
 // Contains data about a job execution.
@@ -83,6 +142,86 @@ type JobExecution struct {
 	noSmithyDocumentSerde
 }
 
+func (v *JobExecution) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.JobExecution)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *JobExecution) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApproximateSecondsBeforeTimedOut != nil {
+		s.WriteInt64(schemas.JobExecution_approximateSecondsBeforeTimedOut, *v.ApproximateSecondsBeforeTimedOut)
+	}
+	if v.ExecutionNumber != nil {
+		s.WriteInt64(schemas.JobExecution_executionNumber, *v.ExecutionNumber)
+	}
+	if v.JobDocument != nil {
+		s.WriteString(schemas.JobExecution_jobDocument, *v.JobDocument)
+	}
+	if v.JobId != nil {
+		s.WriteString(schemas.JobExecution_jobId, *v.JobId)
+	}
+	if v.LastUpdatedAt != 0 {
+		s.WriteInt64(schemas.JobExecution_lastUpdatedAt, v.LastUpdatedAt)
+	}
+	if v.QueuedAt != 0 {
+		s.WriteInt64(schemas.JobExecution_queuedAt, v.QueuedAt)
+	}
+	if v.StartedAt != nil {
+		s.WriteInt64(schemas.JobExecution_startedAt, *v.StartedAt)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.JobExecution_status, string(v.Status))
+	}
+	serializeDetailsMap(s, schemas.JobExecution_statusDetails, v.StatusDetails)
+	if v.ThingName != nil {
+		s.WriteString(schemas.JobExecution_thingName, *v.ThingName)
+	}
+	if v.VersionNumber != 0 {
+		s.WriteInt64(schemas.JobExecution_versionNumber, v.VersionNumber)
+	}
+}
+func (v *JobExecution) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.JobExecution, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.JobExecution_approximateSecondsBeforeTimedOut:
+			v.ApproximateSecondsBeforeTimedOut = new(int64)
+			return d.ReadInt64(schemas.JobExecution_approximateSecondsBeforeTimedOut, v.ApproximateSecondsBeforeTimedOut)
+		case schemas.JobExecution_executionNumber:
+			v.ExecutionNumber = new(int64)
+			return d.ReadInt64(schemas.JobExecution_executionNumber, v.ExecutionNumber)
+		case schemas.JobExecution_jobDocument:
+			v.JobDocument = new(string)
+			return d.ReadString(schemas.JobExecution_jobDocument, v.JobDocument)
+		case schemas.JobExecution_jobId:
+			v.JobId = new(string)
+			return d.ReadString(schemas.JobExecution_jobId, v.JobId)
+		case schemas.JobExecution_lastUpdatedAt:
+			return d.ReadInt64(schemas.JobExecution_lastUpdatedAt, &v.LastUpdatedAt)
+		case schemas.JobExecution_queuedAt:
+			return d.ReadInt64(schemas.JobExecution_queuedAt, &v.QueuedAt)
+		case schemas.JobExecution_startedAt:
+			v.StartedAt = new(int64)
+			return d.ReadInt64(schemas.JobExecution_startedAt, v.StartedAt)
+		case schemas.JobExecution_status:
+			var ev string
+			if err := d.ReadString(schemas.JobExecution_status, &ev); err != nil {
+				return err
+			}
+			v.Status = JobExecutionStatus(ev)
+			return nil
+		case schemas.JobExecution_statusDetails:
+			return deserializeDetailsMap(d, schemas.JobExecution_statusDetails, &v.StatusDetails)
+		case schemas.JobExecution_thingName:
+			v.ThingName = new(string)
+			return d.ReadString(schemas.JobExecution_thingName, v.ThingName)
+		case schemas.JobExecution_versionNumber:
+			return d.ReadInt64(schemas.JobExecution_versionNumber, &v.VersionNumber)
+		}
+		return nil
+	})
+}
+
 // Contains data about the state of a job execution.
 type JobExecutionState struct {
 
@@ -100,6 +239,40 @@ type JobExecutionState struct {
 	VersionNumber int64
 
 	noSmithyDocumentSerde
+}
+
+func (v *JobExecutionState) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.JobExecutionState)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *JobExecutionState) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Status != "" {
+		s.WriteString(schemas.JobExecutionState_status, string(v.Status))
+	}
+	serializeDetailsMap(s, schemas.JobExecutionState_statusDetails, v.StatusDetails)
+	if v.VersionNumber != 0 {
+		s.WriteInt64(schemas.JobExecutionState_versionNumber, v.VersionNumber)
+	}
+}
+func (v *JobExecutionState) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.JobExecutionState, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.JobExecutionState_status:
+			var ev string
+			if err := d.ReadString(schemas.JobExecutionState_status, &ev); err != nil {
+				return err
+			}
+			v.Status = JobExecutionStatus(ev)
+			return nil
+		case schemas.JobExecutionState_statusDetails:
+			return deserializeDetailsMap(d, schemas.JobExecutionState_statusDetails, &v.StatusDetails)
+		case schemas.JobExecutionState_versionNumber:
+			return d.ReadInt64(schemas.JobExecutionState_versionNumber, &v.VersionNumber)
+		}
+		return nil
+	})
 }
 
 // Contains a subset of information about a job execution.
@@ -125,6 +298,55 @@ type JobExecutionSummary struct {
 	VersionNumber int64
 
 	noSmithyDocumentSerde
+}
+
+func (v *JobExecutionSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.JobExecutionSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *JobExecutionSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ExecutionNumber != nil {
+		s.WriteInt64(schemas.JobExecutionSummary_executionNumber, *v.ExecutionNumber)
+	}
+	if v.JobId != nil {
+		s.WriteString(schemas.JobExecutionSummary_jobId, *v.JobId)
+	}
+	if v.LastUpdatedAt != 0 {
+		s.WriteInt64(schemas.JobExecutionSummary_lastUpdatedAt, v.LastUpdatedAt)
+	}
+	if v.QueuedAt != 0 {
+		s.WriteInt64(schemas.JobExecutionSummary_queuedAt, v.QueuedAt)
+	}
+	if v.StartedAt != nil {
+		s.WriteInt64(schemas.JobExecutionSummary_startedAt, *v.StartedAt)
+	}
+	if v.VersionNumber != 0 {
+		s.WriteInt64(schemas.JobExecutionSummary_versionNumber, v.VersionNumber)
+	}
+}
+func (v *JobExecutionSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.JobExecutionSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.JobExecutionSummary_executionNumber:
+			v.ExecutionNumber = new(int64)
+			return d.ReadInt64(schemas.JobExecutionSummary_executionNumber, v.ExecutionNumber)
+		case schemas.JobExecutionSummary_jobId:
+			v.JobId = new(string)
+			return d.ReadString(schemas.JobExecutionSummary_jobId, v.JobId)
+		case schemas.JobExecutionSummary_lastUpdatedAt:
+			return d.ReadInt64(schemas.JobExecutionSummary_lastUpdatedAt, &v.LastUpdatedAt)
+		case schemas.JobExecutionSummary_queuedAt:
+			return d.ReadInt64(schemas.JobExecutionSummary_queuedAt, &v.QueuedAt)
+		case schemas.JobExecutionSummary_startedAt:
+			v.StartedAt = new(int64)
+			return d.ReadInt64(schemas.JobExecutionSummary_startedAt, v.StartedAt)
+		case schemas.JobExecutionSummary_versionNumber:
+			return d.ReadInt64(schemas.JobExecutionSummary_versionNumber, &v.VersionNumber)
+		}
+		return nil
+	})
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde

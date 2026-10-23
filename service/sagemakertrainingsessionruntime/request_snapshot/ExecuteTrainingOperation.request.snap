@@ -1,0 +1,5 @@
+POST /v1/training-sessions/__TrainingSessionName__/operations
+
+Content-Type: application/json
+
+{"clientToken":"__ClientToken__","operationConfig":{"forward":{"datumList":[{"lossFnInputs":{"key0":{"data":"__Document__","dtype":"__Dtype__","shape":[1,1]}},"modelInput":{"chunks":[{"tokens":[1,1],"type":"encoded_text"},{"tokens":[1,1],"type":"encoded_text"}]}},{"lossFnInputs":{"key0":{"data":"__Document__","dtype":"__Dtype__","shape":[1,1]}},"modelInput":{"chunks":[{"tokens":[1,1],"type":"encoded_text"},{"tokens":[1,1],"type":"encoded_text"}]}}],"lossFnConfig":"__Document__","lossFnName":"cross_entropy"}},"sequenceNumber":1}

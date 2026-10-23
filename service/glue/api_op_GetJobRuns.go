@@ -5,7 +5,9 @@ package glue
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/glue/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/glue/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -44,6 +46,24 @@ type GetJobRunsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetJobRunsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetJobRunsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetJobRunsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.JobName != nil {
+		s.WriteString(schemas.GetJobRunsRequest_JobName, *v.JobName)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.GetJobRunsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetJobRunsRequest_NextToken, *v.NextToken)
+	}
+}
+
 type GetJobRunsOutput struct {
 
 	// A list of job-run metadata objects.
@@ -58,13 +78,35 @@ type GetJobRunsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetJobRunsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetJobRunsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetJobRunsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeJobRunList(s, schemas.GetJobRunsResponse_JobRuns, v.JobRuns)
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetJobRunsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *GetJobRunsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetJobRunsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetJobRunsResponse_JobRuns:
+			return deserializeJobRunList(d, schemas.GetJobRunsResponse_JobRuns, &v.JobRuns)
+		case schemas.GetJobRunsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.GetJobRunsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetJobRunsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetJobRuns{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetJobRuns, schemas.GetJobRunsRequest, schemas.GetJobRunsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetJobRuns{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetJobRuns, schemas.GetJobRunsRequest, schemas.GetJobRunsResponse), output: &GetJobRunsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

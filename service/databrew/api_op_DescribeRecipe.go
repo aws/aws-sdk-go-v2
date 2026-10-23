@@ -4,7 +4,9 @@ package databrew
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/databrew/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/databrew/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -38,6 +40,21 @@ type DescribeRecipeInput struct {
 	RecipeVersion *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DescribeRecipeInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeRecipeRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeRecipeInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.DescribeRecipeRequest_Name, *v.Name)
+	}
+	if v.RecipeVersion != nil {
+		s.WriteString(schemas.DescribeRecipeRequest_RecipeVersion, *v.RecipeVersion)
+	}
 }
 
 type DescribeRecipeOutput struct {
@@ -90,13 +107,98 @@ type DescribeRecipeOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeRecipeOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeRecipeResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeRecipeOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreateDate != nil {
+		s.WriteTime(schemas.DescribeRecipeResponse_CreateDate, *v.CreateDate)
+	}
+	if v.CreatedBy != nil {
+		s.WriteString(schemas.DescribeRecipeResponse_CreatedBy, *v.CreatedBy)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.DescribeRecipeResponse_Description, *v.Description)
+	}
+	if v.LastModifiedBy != nil {
+		s.WriteString(schemas.DescribeRecipeResponse_LastModifiedBy, *v.LastModifiedBy)
+	}
+	if v.LastModifiedDate != nil {
+		s.WriteTime(schemas.DescribeRecipeResponse_LastModifiedDate, *v.LastModifiedDate)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.DescribeRecipeResponse_Name, *v.Name)
+	}
+	if v.ProjectName != nil {
+		s.WriteString(schemas.DescribeRecipeResponse_ProjectName, *v.ProjectName)
+	}
+	if v.PublishedBy != nil {
+		s.WriteString(schemas.DescribeRecipeResponse_PublishedBy, *v.PublishedBy)
+	}
+	if v.PublishedDate != nil {
+		s.WriteTime(schemas.DescribeRecipeResponse_PublishedDate, *v.PublishedDate)
+	}
+	if v.RecipeVersion != nil {
+		s.WriteString(schemas.DescribeRecipeResponse_RecipeVersion, *v.RecipeVersion)
+	}
+	if v.ResourceArn != nil {
+		s.WriteString(schemas.DescribeRecipeResponse_ResourceArn, *v.ResourceArn)
+	}
+	serializeRecipeStepList(s, schemas.DescribeRecipeResponse_Steps, v.Steps)
+	serializeTagMap(s, schemas.DescribeRecipeResponse_Tags, v.Tags)
+}
+func (v *DescribeRecipeOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeRecipeResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeRecipeResponse_CreateDate:
+			v.CreateDate = new(time.Time)
+			return d.ReadTime(schemas.DescribeRecipeResponse_CreateDate, v.CreateDate)
+		case schemas.DescribeRecipeResponse_CreatedBy:
+			v.CreatedBy = new(string)
+			return d.ReadString(schemas.DescribeRecipeResponse_CreatedBy, v.CreatedBy)
+		case schemas.DescribeRecipeResponse_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.DescribeRecipeResponse_Description, v.Description)
+		case schemas.DescribeRecipeResponse_LastModifiedBy:
+			v.LastModifiedBy = new(string)
+			return d.ReadString(schemas.DescribeRecipeResponse_LastModifiedBy, v.LastModifiedBy)
+		case schemas.DescribeRecipeResponse_LastModifiedDate:
+			v.LastModifiedDate = new(time.Time)
+			return d.ReadTime(schemas.DescribeRecipeResponse_LastModifiedDate, v.LastModifiedDate)
+		case schemas.DescribeRecipeResponse_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.DescribeRecipeResponse_Name, v.Name)
+		case schemas.DescribeRecipeResponse_ProjectName:
+			v.ProjectName = new(string)
+			return d.ReadString(schemas.DescribeRecipeResponse_ProjectName, v.ProjectName)
+		case schemas.DescribeRecipeResponse_PublishedBy:
+			v.PublishedBy = new(string)
+			return d.ReadString(schemas.DescribeRecipeResponse_PublishedBy, v.PublishedBy)
+		case schemas.DescribeRecipeResponse_PublishedDate:
+			v.PublishedDate = new(time.Time)
+			return d.ReadTime(schemas.DescribeRecipeResponse_PublishedDate, v.PublishedDate)
+		case schemas.DescribeRecipeResponse_RecipeVersion:
+			v.RecipeVersion = new(string)
+			return d.ReadString(schemas.DescribeRecipeResponse_RecipeVersion, v.RecipeVersion)
+		case schemas.DescribeRecipeResponse_ResourceArn:
+			v.ResourceArn = new(string)
+			return d.ReadString(schemas.DescribeRecipeResponse_ResourceArn, v.ResourceArn)
+		case schemas.DescribeRecipeResponse_Steps:
+			return deserializeRecipeStepList(d, schemas.DescribeRecipeResponse_Steps, &v.Steps)
+		case schemas.DescribeRecipeResponse_Tags:
+			return deserializeTagMap(d, schemas.DescribeRecipeResponse_Tags, &v.Tags)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeRecipeMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeRecipe{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeRecipe, schemas.DescribeRecipeRequest, schemas.DescribeRecipeResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeRecipe{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeRecipe, schemas.DescribeRecipeRequest, schemas.DescribeRecipeResponse), output: &DescribeRecipeOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

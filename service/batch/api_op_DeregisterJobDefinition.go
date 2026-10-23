@@ -4,6 +4,8 @@ package batch
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/batch/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -35,6 +37,18 @@ type DeregisterJobDefinitionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeregisterJobDefinitionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeregisterJobDefinitionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeregisterJobDefinitionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.JobDefinition != nil {
+		s.WriteString(schemas.DeregisterJobDefinitionRequest_jobDefinition, *v.JobDefinition)
+	}
+}
+
 type DeregisterJobDefinitionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -42,13 +56,26 @@ type DeregisterJobDefinitionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeregisterJobDefinitionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeregisterJobDefinitionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeregisterJobDefinitionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeregisterJobDefinitionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeregisterJobDefinitionResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeregisterJobDefinitionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeregisterJobDefinition{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeregisterJobDefinition, schemas.DeregisterJobDefinitionRequest, schemas.DeregisterJobDefinitionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeregisterJobDefinition{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeregisterJobDefinition, schemas.DeregisterJobDefinitionRequest, schemas.DeregisterJobDefinitionResponse), output: &DeregisterJobDefinitionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

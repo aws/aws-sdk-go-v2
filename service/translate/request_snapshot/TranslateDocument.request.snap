@@ -1,6 +1,7 @@
-POST /
+POST /service/AWSShineFrontendService_20170701/operation/TranslateDocument
 
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: AWSShineFrontendService_20170701.TranslateDocument
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"Document":{"Content":"YmxvYg==","ContentType":"__ContentType__"},"Settings":{"Brevity":"ON","Formality":"FORMAL","Profanity":"MASK"},"SourceLanguageCode":"__SourceLanguageCode__","TargetLanguageCode":"__TargetLanguageCode__","TerminologyNames":["__Member__","__Member__"]}
+¿hDocument¿gContentDblobkContentTypeo__ContentType__ÿhSettings¿gBrevitybONiFormalityfFORMALiProfanitydMASKÿrSourceLanguageCodev__SourceLanguageCode__rTargetLanguageCodev__TargetLanguageCode__pTerminologyNamesŸj__Member__j__Member__ÿÿ

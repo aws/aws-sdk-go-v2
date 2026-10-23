@@ -1486,6 +1486,9 @@ func TestCheckRequestSnapshot_CreateIdentityProvider(t *testing.T) {
 			"__Member__",
 			"__Member__",
 		},
+		AcrMapping: map[string]string{
+			"key0": "__Value__",
+		},
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -1837,6 +1840,11 @@ func TestCheckRequestSnapshot_CreateUserPool(t *testing.T) {
 		},
 		IssuerConfiguration: &types.IssuerConfigurationType{
 			Type: types.IssuerType("ORIGINAL"),
+		},
+		AcrConfiguration: map[string]types.AcrLevelConfigType{
+			"key0": {
+				AcrValue: ptr.String("__AcrValue__"),
+			},
 		},
 	}
 	body := &bytes.Buffer{}
@@ -4366,6 +4374,9 @@ func TestCheckRequestSnapshot_UpdateIdentityProvider(t *testing.T) {
 			"__Member__",
 			"__Member__",
 		},
+		AcrMapping: map[string]string{
+			"key0": "__Value__",
+		},
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -4718,6 +4729,11 @@ func TestCheckRequestSnapshot_UpdateUserPool(t *testing.T) {
 		},
 		IssuerConfiguration: &types.IssuerConfigurationType{
 			Type: types.IssuerType("ORIGINAL"),
+		},
+		AcrConfiguration: map[string]types.AcrLevelConfigType{
+			"key0": {
+				AcrValue: ptr.String("__AcrValue__"),
+			},
 		},
 	}
 	body := &bytes.Buffer{}
@@ -6235,6 +6251,9 @@ func TestUpdateRequestSnapshot_CreateIdentityProvider(t *testing.T) {
 			"__Member__",
 			"__Member__",
 		},
+		AcrMapping: map[string]string{
+			"key0": "__Value__",
+		},
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -6586,6 +6605,11 @@ func TestUpdateRequestSnapshot_CreateUserPool(t *testing.T) {
 		},
 		IssuerConfiguration: &types.IssuerConfigurationType{
 			Type: types.IssuerType("ORIGINAL"),
+		},
+		AcrConfiguration: map[string]types.AcrLevelConfigType{
+			"key0": {
+				AcrValue: ptr.String("__AcrValue__"),
+			},
 		},
 	}
 	body := &bytes.Buffer{}
@@ -9115,6 +9139,9 @@ func TestUpdateRequestSnapshot_UpdateIdentityProvider(t *testing.T) {
 			"__Member__",
 			"__Member__",
 		},
+		AcrMapping: map[string]string{
+			"key0": "__Value__",
+		},
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -9467,6 +9494,11 @@ func TestUpdateRequestSnapshot_UpdateUserPool(t *testing.T) {
 		},
 		IssuerConfiguration: &types.IssuerConfigurationType{
 			Type: types.IssuerType("ORIGINAL"),
+		},
+		AcrConfiguration: map[string]types.AcrLevelConfigType{
+			"key0": {
+				AcrValue: ptr.String("__AcrValue__"),
+			},
 		},
 	}
 	body := &bytes.Buffer{}

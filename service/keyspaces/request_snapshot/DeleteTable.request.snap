@@ -1,6 +1,7 @@
-POST /
+POST /service/KeyspacesService/operation/DeleteTable
 
-Content-Type: application/x-amz-json-1.0
-X-Amz-Target: KeyspacesService.DeleteTable
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"keyspaceName":"__KeyspaceName__","tableName":"__TableName__"}
+¿lkeyspaceNamep__KeyspaceName__itableNamem__TableName__ÿ

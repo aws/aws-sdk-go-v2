@@ -9,6 +9,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/wellarchitected/types"
 	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
+	"github.com/aws/smithy-go/ptr"
 )
 
 // Lists recommendation generation processes for a specified profile.
@@ -66,6 +67,10 @@ func (v *ListAgentRecommendationGenerationsInput) SerializeMembers(s smithy.Shap
 	if v.RecommendationType != "" {
 		s.WriteString(schemas.ListAgentRecommendationGenerationsRequest_recommendationType, string(v.RecommendationType))
 	}
+}
+func (in *ListAgentRecommendationGenerationsInput) bindEndpointParams(p *EndpointParameters) {
+
+	p.SubServiceType = ptr.String("AGENT")
 }
 
 type ListAgentRecommendationGenerationsOutput struct {

@@ -1019,6 +1019,58 @@ func (v *ContentRedaction) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
+// Encryption configuration for the invocation
+type EncryptionConfiguration struct {
+
+	// The Amazon Resource Name (ARN) of the KMS key you want to use to encrypt your
+	// resource artifacts. Only full KMS key ARN format is supported.
+	//
+	// KMS key ARNs have the format arn:partition:kms:region:account:key/key-id . For
+	// example:
+	// arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab .
+	//
+	// For more information, see [KMS key ARNs].
+	//
+	// [KMS key ARNs]: https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#key-id-key-ARN
+	//
+	// This member is required.
+	KMSKey *string
+
+	// A map of plain text, non-secret key:value pairs, known as encryption context
+	// pairs, that provide an added layer of security for your data. For more
+	// information, see [KMS encryption context].
+	//
+	// [KMS encryption context]: https://docs.aws.amazon.com/transcribe/latest/dg/key-management.html#kms-context
+	KMSEncryptionContext map[string]string
+
+	noSmithyDocumentSerde
+}
+
+func (v *EncryptionConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EncryptionConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EncryptionConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeKMSEncryptionContextMap(s, schemas.EncryptionConfiguration_KMSEncryptionContext, v.KMSEncryptionContext)
+	if v.KMSKey != nil {
+		s.WriteString(schemas.EncryptionConfiguration_KMSKey, *v.KMSKey)
+	}
+}
+func (v *EncryptionConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EncryptionConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EncryptionConfiguration_KMSEncryptionContext:
+			return deserializeKMSEncryptionContextMap(d, schemas.EncryptionConfiguration_KMSEncryptionContext, &v.KMSEncryptionContext)
+		case schemas.EncryptionConfiguration_KMSKey:
+			v.KMSKey = new(string)
+			return d.ReadString(schemas.EncryptionConfiguration_KMSKey, v.KMSKey)
+		}
+		return nil
+	})
+}
+
 // Contains the Amazon S3 location of the training data you want to use to create
 // a new custom language model, and permissions to access this location.
 //
@@ -1426,6 +1478,9 @@ type LanguageModel struct {
 	// 2022-05-04T12:32:58.761000-07:00 represents 12:32 PM UTC-7 on May 4, 2022.
 	CreateTime *time.Time
 
+	// The encryption configuration used for your custom language model.
+	EncryptionConfiguration *EncryptionConfiguration
+
 	// If ModelStatus is FAILED , FailureReason contains information about why the
 	// custom language model request failed. See also: [Common Errors].
 	//
@@ -1494,6 +1549,11 @@ func (v *LanguageModel) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.CreateTime != nil {
 		s.WriteTime(schemas.LanguageModel_CreateTime, *v.CreateTime)
 	}
+	if v.EncryptionConfiguration != nil {
+		s.WriteStruct(schemas.LanguageModel_EncryptionConfiguration)
+		v.EncryptionConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
 	if v.FailureReason != nil {
 		s.WriteString(schemas.LanguageModel_FailureReason, *v.FailureReason)
 	}
@@ -1531,6 +1591,9 @@ func (v *LanguageModel) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.LanguageModel_CreateTime:
 			v.CreateTime = new(time.Time)
 			return d.ReadTime(schemas.LanguageModel_CreateTime, v.CreateTime)
+		case schemas.LanguageModel_EncryptionConfiguration:
+			v.EncryptionConfiguration = &EncryptionConfiguration{}
+			return v.EncryptionConfiguration.Deserialize(d)
 		case schemas.LanguageModel_FailureReason:
 			v.FailureReason = new(string)
 			return d.ReadString(schemas.LanguageModel_FailureReason, v.FailureReason)

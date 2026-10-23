@@ -4,7 +4,9 @@ package mediaconnect
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/mediaconnect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/mediaconnect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -36,6 +38,16 @@ type BatchGetRouterNetworkInterfaceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchGetRouterNetworkInterfaceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchGetRouterNetworkInterfaceRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchGetRouterNetworkInterfaceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeRouterNetworkInterfaceArnList(s, schemas.BatchGetRouterNetworkInterfaceRequest_Arns, v.Arns)
+}
+
 type BatchGetRouterNetworkInterfaceOutput struct {
 
 	// An array of errors that occurred when retrieving the requested router network
@@ -55,13 +67,32 @@ type BatchGetRouterNetworkInterfaceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchGetRouterNetworkInterfaceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchGetRouterNetworkInterfaceResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchGetRouterNetworkInterfaceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeBatchGetRouterNetworkInterfaceErrorList(s, schemas.BatchGetRouterNetworkInterfaceResponse_Errors, v.Errors)
+	serializeRouterNetworkInterfaceList(s, schemas.BatchGetRouterNetworkInterfaceResponse_RouterNetworkInterfaces, v.RouterNetworkInterfaces)
+}
+func (v *BatchGetRouterNetworkInterfaceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchGetRouterNetworkInterfaceResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchGetRouterNetworkInterfaceResponse_Errors:
+			return deserializeBatchGetRouterNetworkInterfaceErrorList(d, schemas.BatchGetRouterNetworkInterfaceResponse_Errors, &v.Errors)
+		case schemas.BatchGetRouterNetworkInterfaceResponse_RouterNetworkInterfaces:
+			return deserializeRouterNetworkInterfaceList(d, schemas.BatchGetRouterNetworkInterfaceResponse_RouterNetworkInterfaces, &v.RouterNetworkInterfaces)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationBatchGetRouterNetworkInterfaceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpBatchGetRouterNetworkInterface{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchGetRouterNetworkInterface, schemas.BatchGetRouterNetworkInterfaceRequest, schemas.BatchGetRouterNetworkInterfaceResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpBatchGetRouterNetworkInterface{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchGetRouterNetworkInterface, schemas.BatchGetRouterNetworkInterfaceRequest, schemas.BatchGetRouterNetworkInterfaceResponse), output: &BatchGetRouterNetworkInterfaceOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

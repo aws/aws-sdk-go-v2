@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"accountQuotas":{"maxEndpointsPerFunction":1,"maxRevisionsPerFunction":1,"maxTotalArmVCpus":1,"maxTotalRateLimit":1},"accountUsage":{"functionCount":1}}

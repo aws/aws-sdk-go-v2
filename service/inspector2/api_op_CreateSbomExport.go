@@ -4,7 +4,9 @@ package inspector2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/inspector2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/inspector2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -42,6 +44,28 @@ type CreateSbomExportInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateSbomExportInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateSbomExportRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateSbomExportInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ReportFormat != "" {
+		s.WriteString(schemas.CreateSbomExportRequest_reportFormat, string(v.ReportFormat))
+	}
+	if v.ResourceFilterCriteria != nil {
+		s.WriteStruct(schemas.CreateSbomExportRequest_resourceFilterCriteria)
+		v.ResourceFilterCriteria.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.S3Destination != nil {
+		s.WriteStruct(schemas.CreateSbomExportRequest_s3Destination)
+		v.S3Destination.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type CreateSbomExportOutput struct {
 
 	// The report ID for the software bill of materials (SBOM) report.
@@ -53,13 +77,32 @@ type CreateSbomExportOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateSbomExportOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateSbomExportResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateSbomExportOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ReportId != nil {
+		s.WriteString(schemas.CreateSbomExportResponse_reportId, *v.ReportId)
+	}
+}
+func (v *CreateSbomExportOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateSbomExportResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateSbomExportResponse_reportId:
+			v.ReportId = new(string)
+			return d.ReadString(schemas.CreateSbomExportResponse_reportId, v.ReportId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateSbomExportMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateSbomExport{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateSbomExport, schemas.CreateSbomExportRequest, schemas.CreateSbomExportResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateSbomExport{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateSbomExport, schemas.CreateSbomExportRequest, schemas.CreateSbomExportResponse), output: &CreateSbomExportOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -8,6 +8,8 @@ type ComputeResourceType string
 const (
 	// MicroVm compute resource type
 	ComputeResourceTypeMicroVm ComputeResourceType = "MicroVm"
+	// WebFunction compute resource type
+	ComputeResourceTypeWebFunction ComputeResourceType = "WebFunction"
 )
 
 // Values returns all known values for ComputeResourceType. Note that this can be
@@ -17,6 +19,7 @@ const (
 func (ComputeResourceType) Values() []ComputeResourceType {
 	return []ComputeResourceType{
 		"MicroVm",
+		"WebFunction",
 	}
 }
 
@@ -46,13 +49,14 @@ type NetworkConnectorLastUpdateStatusReasonCode string
 
 // Enum values for NetworkConnectorLastUpdateStatusReasonCode
 const (
-	NetworkConnectorLastUpdateStatusReasonCodeDisallowedByVpcEncryptionControl NetworkConnectorLastUpdateStatusReasonCode = "DisallowedByVpcEncryptionControl"
-	NetworkConnectorLastUpdateStatusReasonCodeEc2RequestLimitExceeded          NetworkConnectorLastUpdateStatusReasonCode = "Ec2RequestLimitExceeded"
-	NetworkConnectorLastUpdateStatusReasonCodeInsufficientRolePermissions      NetworkConnectorLastUpdateStatusReasonCode = "InsufficientRolePermissions"
-	NetworkConnectorLastUpdateStatusReasonCodeInternalError                    NetworkConnectorLastUpdateStatusReasonCode = "InternalError"
-	NetworkConnectorLastUpdateStatusReasonCodeInvalidSecurityGroup             NetworkConnectorLastUpdateStatusReasonCode = "InvalidSecurityGroup"
-	NetworkConnectorLastUpdateStatusReasonCodeInvalidSubnet                    NetworkConnectorLastUpdateStatusReasonCode = "InvalidSubnet"
-	NetworkConnectorLastUpdateStatusReasonCodeSubnetOutOfIPAddresses           NetworkConnectorLastUpdateStatusReasonCode = "SubnetOutOfIPAddresses"
+	NetworkConnectorLastUpdateStatusReasonCodeDisallowedByVpcEncryptionControl        NetworkConnectorLastUpdateStatusReasonCode = "DisallowedByVpcEncryptionControl"
+	NetworkConnectorLastUpdateStatusReasonCodeEc2RequestLimitExceeded                 NetworkConnectorLastUpdateStatusReasonCode = "Ec2RequestLimitExceeded"
+	NetworkConnectorLastUpdateStatusReasonCodeInsufficientRolePermissions             NetworkConnectorLastUpdateStatusReasonCode = "InsufficientRolePermissions"
+	NetworkConnectorLastUpdateStatusReasonCodeInternalError                           NetworkConnectorLastUpdateStatusReasonCode = "InternalError"
+	NetworkConnectorLastUpdateStatusReasonCodeInvalidSecurityGroup                    NetworkConnectorLastUpdateStatusReasonCode = "InvalidSecurityGroup"
+	NetworkConnectorLastUpdateStatusReasonCodeInvalidSubnet                           NetworkConnectorLastUpdateStatusReasonCode = "InvalidSubnet"
+	NetworkConnectorLastUpdateStatusReasonCodeSecurityGroupsPerInterfaceLimitExceeded NetworkConnectorLastUpdateStatusReasonCode = "SecurityGroupsPerInterfaceLimitExceeded"
+	NetworkConnectorLastUpdateStatusReasonCodeSubnetOutOfIPAddresses                  NetworkConnectorLastUpdateStatusReasonCode = "SubnetOutOfIPAddresses"
 )
 
 // Values returns all known values for NetworkConnectorLastUpdateStatusReasonCode.
@@ -68,6 +72,7 @@ func (NetworkConnectorLastUpdateStatusReasonCode) Values() []NetworkConnectorLas
 		"InternalError",
 		"InvalidSecurityGroup",
 		"InvalidSubnet",
+		"SecurityGroupsPerInterfaceLimitExceeded",
 		"SubnetOutOfIPAddresses",
 	}
 }
@@ -109,13 +114,14 @@ type NetworkConnectorStateReasonCode string
 
 // Enum values for NetworkConnectorStateReasonCode
 const (
-	NetworkConnectorStateReasonCodeDisallowedByVpcEncryptionControl NetworkConnectorStateReasonCode = "DisallowedByVpcEncryptionControl"
-	NetworkConnectorStateReasonCodeEc2RequestLimitExceeded          NetworkConnectorStateReasonCode = "Ec2RequestLimitExceeded"
-	NetworkConnectorStateReasonCodeInsufficientRolePermissions      NetworkConnectorStateReasonCode = "InsufficientRolePermissions"
-	NetworkConnectorStateReasonCodeInternalError                    NetworkConnectorStateReasonCode = "InternalError"
-	NetworkConnectorStateReasonCodeInvalidSecurityGroup             NetworkConnectorStateReasonCode = "InvalidSecurityGroup"
-	NetworkConnectorStateReasonCodeInvalidSubnet                    NetworkConnectorStateReasonCode = "InvalidSubnet"
-	NetworkConnectorStateReasonCodeSubnetOutOfIPAddresses           NetworkConnectorStateReasonCode = "SubnetOutOfIPAddresses"
+	NetworkConnectorStateReasonCodeDisallowedByVpcEncryptionControl        NetworkConnectorStateReasonCode = "DisallowedByVpcEncryptionControl"
+	NetworkConnectorStateReasonCodeEc2RequestLimitExceeded                 NetworkConnectorStateReasonCode = "Ec2RequestLimitExceeded"
+	NetworkConnectorStateReasonCodeInsufficientRolePermissions             NetworkConnectorStateReasonCode = "InsufficientRolePermissions"
+	NetworkConnectorStateReasonCodeInternalError                           NetworkConnectorStateReasonCode = "InternalError"
+	NetworkConnectorStateReasonCodeInvalidSecurityGroup                    NetworkConnectorStateReasonCode = "InvalidSecurityGroup"
+	NetworkConnectorStateReasonCodeInvalidSubnet                           NetworkConnectorStateReasonCode = "InvalidSubnet"
+	NetworkConnectorStateReasonCodeSecurityGroupsPerInterfaceLimitExceeded NetworkConnectorStateReasonCode = "SecurityGroupsPerInterfaceLimitExceeded"
+	NetworkConnectorStateReasonCodeSubnetOutOfIPAddresses                  NetworkConnectorStateReasonCode = "SubnetOutOfIPAddresses"
 )
 
 // Values returns all known values for NetworkConnectorStateReasonCode. Note that
@@ -131,6 +137,7 @@ func (NetworkConnectorStateReasonCode) Values() []NetworkConnectorStateReasonCod
 		"InternalError",
 		"InvalidSecurityGroup",
 		"InvalidSubnet",
+		"SecurityGroupsPerInterfaceLimitExceeded",
 		"SubnetOutOfIPAddresses",
 	}
 }

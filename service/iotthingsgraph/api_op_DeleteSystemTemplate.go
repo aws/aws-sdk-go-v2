@@ -4,6 +4,8 @@ package iotthingsgraph
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/iotthingsgraph/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -41,6 +43,18 @@ type DeleteSystemTemplateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteSystemTemplateInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteSystemTemplateRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteSystemTemplateInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Id != nil {
+		s.WriteString(schemas.DeleteSystemTemplateRequest_id, *v.Id)
+	}
+}
+
 type DeleteSystemTemplateOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -48,13 +62,26 @@ type DeleteSystemTemplateOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteSystemTemplateOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteSystemTemplateResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteSystemTemplateOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteSystemTemplateOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteSystemTemplateResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteSystemTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteSystemTemplate{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteSystemTemplate, schemas.DeleteSystemTemplateRequest, schemas.DeleteSystemTemplateResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeleteSystemTemplate{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteSystemTemplate, schemas.DeleteSystemTemplateRequest, schemas.DeleteSystemTemplateResponse), output: &DeleteSystemTemplateOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

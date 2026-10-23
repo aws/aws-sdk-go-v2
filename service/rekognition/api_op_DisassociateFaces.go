@@ -5,7 +5,9 @@ package rekognition
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/rekognition/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/rekognition/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -58,6 +60,25 @@ type DisassociateFacesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DisassociateFacesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DisassociateFacesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DisassociateFacesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientRequestToken != nil {
+		s.WriteString(schemas.DisassociateFacesRequest_ClientRequestToken, *v.ClientRequestToken)
+	}
+	if v.CollectionId != nil {
+		s.WriteString(schemas.DisassociateFacesRequest_CollectionId, *v.CollectionId)
+	}
+	serializeUserFaceIdList(s, schemas.DisassociateFacesRequest_FaceIds, v.FaceIds)
+	if v.UserId != nil {
+		s.WriteString(schemas.DisassociateFacesRequest_UserId, *v.UserId)
+	}
+}
+
 type DisassociateFacesOutput struct {
 
 	// An array of DissociatedFace objects containing FaceIds that are successfully
@@ -80,13 +101,42 @@ type DisassociateFacesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DisassociateFacesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DisassociateFacesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DisassociateFacesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDisassociatedFacesList(s, schemas.DisassociateFacesResponse_DisassociatedFaces, v.DisassociatedFaces)
+	serializeUnsuccessfulFaceDisassociationList(s, schemas.DisassociateFacesResponse_UnsuccessfulFaceDisassociations, v.UnsuccessfulFaceDisassociations)
+	if v.UserStatus != "" {
+		s.WriteString(schemas.DisassociateFacesResponse_UserStatus, string(v.UserStatus))
+	}
+}
+func (v *DisassociateFacesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DisassociateFacesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DisassociateFacesResponse_DisassociatedFaces:
+			return deserializeDisassociatedFacesList(d, schemas.DisassociateFacesResponse_DisassociatedFaces, &v.DisassociatedFaces)
+		case schemas.DisassociateFacesResponse_UnsuccessfulFaceDisassociations:
+			return deserializeUnsuccessfulFaceDisassociationList(d, schemas.DisassociateFacesResponse_UnsuccessfulFaceDisassociations, &v.UnsuccessfulFaceDisassociations)
+		case schemas.DisassociateFacesResponse_UserStatus:
+			var ev string
+			if err := d.ReadString(schemas.DisassociateFacesResponse_UserStatus, &ev); err != nil {
+				return err
+			}
+			v.UserStatus = types.UserStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDisassociateFacesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDisassociateFaces{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisassociateFaces, schemas.DisassociateFacesRequest, schemas.DisassociateFacesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDisassociateFaces{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisassociateFaces, schemas.DisassociateFacesRequest, schemas.DisassociateFacesResponse), output: &DisassociateFacesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

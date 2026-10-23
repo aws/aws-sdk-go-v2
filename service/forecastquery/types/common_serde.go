@@ -23,6 +23,14 @@ func deserializeTimeSeries(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]Da
 	*v = make([]DataPoint, 0)
 	var vv DataPoint
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero DataPoint
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = DataPoint{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -61,6 +69,13 @@ func deserializeFilters(d smithy.ShapeDeserializer, s *smithy.Schema, v *map[str
 	*v = make(map[string]string)
 	var vv string
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			(*v)[k] = zero
+			return nil
+		}
 
 		if err := d.ReadString(s.MapValue(), &vv); err != nil {
 			return err
@@ -75,6 +90,14 @@ func deserializePredictions(d smithy.ShapeDeserializer, s *smithy.Schema, v *map
 	*v = make(map[string][]DataPoint)
 	var vv []DataPoint
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero []DataPoint
+			(*v)[k] = zero
+			return nil
+		}
+
 		vv = nil
 		if err := deserializeTimeSeries(d, s.MapValue(), &vv); err != nil {
 			return err

@@ -5,7 +5,9 @@ package inspector2
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/inspector2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/inspector2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -41,6 +43,34 @@ type EnableInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *EnableInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EnableRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EnableInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAccountIdSet(s, schemas.EnableRequest_accountIds, v.AccountIds)
+	if v.ClientToken != nil {
+		s.WriteString(schemas.EnableRequest_clientToken, *v.ClientToken)
+	}
+	serializeEnableResourceTypeList(s, schemas.EnableRequest_resourceTypes, v.ResourceTypes)
+}
+func (v *EnableInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EnableRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EnableRequest_accountIds:
+			return deserializeAccountIdSet(d, schemas.EnableRequest_accountIds, &v.AccountIds)
+		case schemas.EnableRequest_clientToken:
+			v.ClientToken = new(string)
+			return d.ReadString(schemas.EnableRequest_clientToken, v.ClientToken)
+		case schemas.EnableRequest_resourceTypes:
+			return deserializeEnableResourceTypeList(d, schemas.EnableRequest_resourceTypes, &v.ResourceTypes)
+		}
+		return nil
+	})
+}
+
 type EnableOutput struct {
 
 	// Information on the accounts that have had Amazon Inspector scans successfully
@@ -59,13 +89,32 @@ type EnableOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *EnableOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EnableResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EnableOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAccountList(s, schemas.EnableResponse_accounts, v.Accounts)
+	serializeFailedAccountList(s, schemas.EnableResponse_failedAccounts, v.FailedAccounts)
+}
+func (v *EnableOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EnableResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EnableResponse_accounts:
+			return deserializeAccountList(d, schemas.EnableResponse_accounts, &v.Accounts)
+		case schemas.EnableResponse_failedAccounts:
+			return deserializeFailedAccountList(d, schemas.EnableResponse_failedAccounts, &v.FailedAccounts)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationEnableMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpEnable{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.Enable, schemas.EnableRequest, schemas.EnableResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpEnable{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.Enable, schemas.EnableRequest, schemas.EnableResponse), output: &EnableOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

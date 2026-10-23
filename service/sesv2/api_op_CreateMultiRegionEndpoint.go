@@ -4,7 +4,9 @@ package sesv2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/sesv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sesv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -50,6 +52,24 @@ type CreateMultiRegionEndpointInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateMultiRegionEndpointInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateMultiRegionEndpointRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateMultiRegionEndpointInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Details != nil {
+		s.WriteStruct(schemas.CreateMultiRegionEndpointRequest_Details)
+		v.Details.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.EndpointName != nil {
+		s.WriteString(schemas.CreateMultiRegionEndpointRequest_EndpointName, *v.EndpointName)
+	}
+	serializeTagList(s, schemas.CreateMultiRegionEndpointRequest_Tags, v.Tags)
+}
+
 // An HTTP 200 response if the request succeeds, or an error message if the
 // request fails.
 type CreateMultiRegionEndpointOutput struct {
@@ -75,13 +95,42 @@ type CreateMultiRegionEndpointOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateMultiRegionEndpointOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateMultiRegionEndpointResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateMultiRegionEndpointOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EndpointId != nil {
+		s.WriteString(schemas.CreateMultiRegionEndpointResponse_EndpointId, *v.EndpointId)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.CreateMultiRegionEndpointResponse_Status, string(v.Status))
+	}
+}
+func (v *CreateMultiRegionEndpointOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateMultiRegionEndpointResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateMultiRegionEndpointResponse_EndpointId:
+			v.EndpointId = new(string)
+			return d.ReadString(schemas.CreateMultiRegionEndpointResponse_EndpointId, v.EndpointId)
+		case schemas.CreateMultiRegionEndpointResponse_Status:
+			var ev string
+			if err := d.ReadString(schemas.CreateMultiRegionEndpointResponse_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.Status(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateMultiRegionEndpointMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateMultiRegionEndpoint{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateMultiRegionEndpoint, schemas.CreateMultiRegionEndpointRequest, schemas.CreateMultiRegionEndpointResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateMultiRegionEndpoint{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateMultiRegionEndpoint, schemas.CreateMultiRegionEndpointRequest, schemas.CreateMultiRegionEndpointResponse), output: &CreateMultiRegionEndpointOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

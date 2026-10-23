@@ -5,7 +5,9 @@ package eks
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/eks/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/eks/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -116,6 +118,43 @@ type CreateAddonInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateAddonInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateAddonRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateAddonInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AddonName != nil {
+		s.WriteString(schemas.CreateAddonRequest_addonName, *v.AddonName)
+	}
+	if v.AddonVersion != nil {
+		s.WriteString(schemas.CreateAddonRequest_addonVersion, *v.AddonVersion)
+	}
+	if v.ClientRequestToken != nil {
+		s.WriteString(schemas.CreateAddonRequest_clientRequestToken, *v.ClientRequestToken)
+	}
+	if v.ClusterName != nil {
+		s.WriteString(schemas.CreateAddonRequest_clusterName, *v.ClusterName)
+	}
+	if v.ConfigurationValues != nil {
+		s.WriteString(schemas.CreateAddonRequest_configurationValues, *v.ConfigurationValues)
+	}
+	if v.NamespaceConfig != nil {
+		s.WriteStruct(schemas.CreateAddonRequest_namespaceConfig)
+		v.NamespaceConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeAddonPodIdentityAssociationsList(s, schemas.CreateAddonRequest_podIdentityAssociations, v.PodIdentityAssociations)
+	if v.ResolveConflicts != "" {
+		s.WriteString(schemas.CreateAddonRequest_resolveConflicts, string(v.ResolveConflicts))
+	}
+	if v.ServiceAccountRoleArn != nil {
+		s.WriteString(schemas.CreateAddonRequest_serviceAccountRoleArn, *v.ServiceAccountRoleArn)
+	}
+	serializeTagMap(s, schemas.CreateAddonRequest_tags, v.Tags)
+}
+
 type CreateAddonOutput struct {
 
 	// An Amazon EKS add-on. For more information, see [Amazon EKS add-ons] in the Amazon EKS User Guide.
@@ -129,13 +168,34 @@ type CreateAddonOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateAddonOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateAddonResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateAddonOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Addon != nil {
+		s.WriteStruct(schemas.CreateAddonResponse_addon)
+		v.Addon.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateAddonOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateAddonResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateAddonResponse_addon:
+			v.Addon = &types.Addon{}
+			return v.Addon.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateAddonMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateAddon{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateAddon, schemas.CreateAddonRequest, schemas.CreateAddonResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateAddon{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateAddon, schemas.CreateAddonRequest, schemas.CreateAddonResponse), output: &CreateAddonOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

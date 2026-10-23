@@ -5,7 +5,9 @@ package iotsitewise
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/iotsitewise/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotsitewise/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -85,6 +87,33 @@ type UpdateAssetPropertyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateAssetPropertyInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateAssetPropertyRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateAssetPropertyInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AssetId != nil {
+		s.WriteString(schemas.UpdateAssetPropertyRequest_assetId, *v.AssetId)
+	}
+	if v.ClientToken != nil {
+		s.WriteString(schemas.UpdateAssetPropertyRequest_clientToken, *v.ClientToken)
+	}
+	if v.PropertyAlias != nil {
+		s.WriteString(schemas.UpdateAssetPropertyRequest_propertyAlias, *v.PropertyAlias)
+	}
+	if v.PropertyId != nil {
+		s.WriteString(schemas.UpdateAssetPropertyRequest_propertyId, *v.PropertyId)
+	}
+	if v.PropertyNotificationState != "" {
+		s.WriteString(schemas.UpdateAssetPropertyRequest_propertyNotificationState, string(v.PropertyNotificationState))
+	}
+	if v.PropertyUnit != nil {
+		s.WriteString(schemas.UpdateAssetPropertyRequest_propertyUnit, *v.PropertyUnit)
+	}
+}
+
 type UpdateAssetPropertyOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -92,13 +121,26 @@ type UpdateAssetPropertyOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateAssetPropertyOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateAssetPropertyOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *UpdateAssetPropertyOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateAssetPropertyMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateAssetProperty{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateAssetProperty, schemas.UpdateAssetPropertyRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateAssetProperty{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateAssetProperty, schemas.UpdateAssetPropertyRequest, nil), output: &UpdateAssetPropertyOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -5,7 +5,9 @@ package eks
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/eks/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/eks/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -51,6 +53,24 @@ type CancelUpdateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CancelUpdateInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CancelUpdateRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CancelUpdateInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientRequestToken != nil {
+		s.WriteString(schemas.CancelUpdateRequest_clientRequestToken, *v.ClientRequestToken)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CancelUpdateRequest_name, *v.Name)
+	}
+	if v.UpdateId != nil {
+		s.WriteString(schemas.CancelUpdateRequest_updateId, *v.UpdateId)
+	}
+}
+
 type CancelUpdateOutput struct {
 
 	// The full description of the specified update.
@@ -62,13 +82,34 @@ type CancelUpdateOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CancelUpdateOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CancelUpdateResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CancelUpdateOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Update != nil {
+		s.WriteStruct(schemas.CancelUpdateResponse_update)
+		v.Update.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CancelUpdateOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CancelUpdateResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CancelUpdateResponse_update:
+			v.Update = &types.Update{}
+			return v.Update.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCancelUpdateMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCancelUpdate{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CancelUpdate, schemas.CancelUpdateRequest, schemas.CancelUpdateResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCancelUpdate{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CancelUpdate, schemas.CancelUpdateRequest, schemas.CancelUpdateResponse), output: &CancelUpdateOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

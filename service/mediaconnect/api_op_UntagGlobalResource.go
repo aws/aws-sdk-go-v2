@@ -4,6 +4,8 @@ package mediaconnect
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/mediaconnect/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -40,6 +42,19 @@ type UntagGlobalResourceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UntagGlobalResourceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UntagGlobalResourceRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UntagGlobalResourceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ResourceArn != nil {
+		s.WriteString(schemas.UntagGlobalResourceRequest_ResourceArn, *v.ResourceArn)
+	}
+	serialize__listOfString(s, schemas.UntagGlobalResourceRequest_TagKeys, v.TagKeys)
+}
+
 type UntagGlobalResourceOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -47,13 +62,26 @@ type UntagGlobalResourceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UntagGlobalResourceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UntagGlobalResourceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *UntagGlobalResourceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUntagGlobalResourceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUntagGlobalResource{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UntagGlobalResource, schemas.UntagGlobalResourceRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUntagGlobalResource{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UntagGlobalResource, schemas.UntagGlobalResourceRequest, nil), output: &UntagGlobalResourceOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

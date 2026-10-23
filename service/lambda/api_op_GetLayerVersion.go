@@ -4,7 +4,9 @@ package lambda
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/lambda/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lambda/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -40,6 +42,21 @@ type GetLayerVersionInput struct {
 	VersionNumber *int64
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetLayerVersionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetLayerVersionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetLayerVersionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LayerName != nil {
+		s.WriteString(schemas.GetLayerVersionRequest_LayerName, *v.LayerName)
+	}
+	if v.VersionNumber != nil {
+		s.WriteInt64(schemas.GetLayerVersionRequest_VersionNumber, *v.VersionNumber)
+	}
 }
 
 type GetLayerVersionOutput struct {
@@ -88,13 +105,75 @@ type GetLayerVersionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetLayerVersionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetLayerVersionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetLayerVersionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeCompatibleArchitectures(s, schemas.GetLayerVersionResponse_CompatibleArchitectures, v.CompatibleArchitectures)
+	serializeCompatibleRuntimes(s, schemas.GetLayerVersionResponse_CompatibleRuntimes, v.CompatibleRuntimes)
+	if v.Content != nil {
+		s.WriteStruct(schemas.GetLayerVersionResponse_Content)
+		v.Content.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CreatedDate != nil {
+		s.WriteString(schemas.GetLayerVersionResponse_CreatedDate, *v.CreatedDate)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.GetLayerVersionResponse_Description, *v.Description)
+	}
+	if v.LayerArn != nil {
+		s.WriteString(schemas.GetLayerVersionResponse_LayerArn, *v.LayerArn)
+	}
+	if v.LayerVersionArn != nil {
+		s.WriteString(schemas.GetLayerVersionResponse_LayerVersionArn, *v.LayerVersionArn)
+	}
+	if v.LicenseInfo != nil {
+		s.WriteString(schemas.GetLayerVersionResponse_LicenseInfo, *v.LicenseInfo)
+	}
+	if v.Version != 0 {
+		s.WriteInt64(schemas.GetLayerVersionResponse_Version, v.Version)
+	}
+}
+func (v *GetLayerVersionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetLayerVersionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetLayerVersionResponse_CompatibleArchitectures:
+			return deserializeCompatibleArchitectures(d, schemas.GetLayerVersionResponse_CompatibleArchitectures, &v.CompatibleArchitectures)
+		case schemas.GetLayerVersionResponse_CompatibleRuntimes:
+			return deserializeCompatibleRuntimes(d, schemas.GetLayerVersionResponse_CompatibleRuntimes, &v.CompatibleRuntimes)
+		case schemas.GetLayerVersionResponse_Content:
+			v.Content = &types.LayerVersionContentOutput{}
+			return v.Content.Deserialize(d)
+		case schemas.GetLayerVersionResponse_CreatedDate:
+			v.CreatedDate = new(string)
+			return d.ReadString(schemas.GetLayerVersionResponse_CreatedDate, v.CreatedDate)
+		case schemas.GetLayerVersionResponse_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.GetLayerVersionResponse_Description, v.Description)
+		case schemas.GetLayerVersionResponse_LayerArn:
+			v.LayerArn = new(string)
+			return d.ReadString(schemas.GetLayerVersionResponse_LayerArn, v.LayerArn)
+		case schemas.GetLayerVersionResponse_LayerVersionArn:
+			v.LayerVersionArn = new(string)
+			return d.ReadString(schemas.GetLayerVersionResponse_LayerVersionArn, v.LayerVersionArn)
+		case schemas.GetLayerVersionResponse_LicenseInfo:
+			v.LicenseInfo = new(string)
+			return d.ReadString(schemas.GetLayerVersionResponse_LicenseInfo, v.LicenseInfo)
+		case schemas.GetLayerVersionResponse_Version:
+			return d.ReadInt64(schemas.GetLayerVersionResponse_Version, &v.Version)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetLayerVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetLayerVersion{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetLayerVersion, schemas.GetLayerVersionRequest, schemas.GetLayerVersionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetLayerVersion{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetLayerVersion, schemas.GetLayerVersionRequest, schemas.GetLayerVersionResponse), output: &GetLayerVersionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package gameliftstreams
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/gameliftstreams/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/gameliftstreams/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -57,6 +59,19 @@ type AddStreamGroupLocationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AddStreamGroupLocationsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AddStreamGroupLocationsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AddStreamGroupLocationsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Identifier != nil {
+		s.WriteString(schemas.AddStreamGroupLocationsInput_Identifier, *v.Identifier)
+	}
+	serializeLocationConfigurations(s, schemas.AddStreamGroupLocationsInput_LocationConfigurations, v.LocationConfigurations)
+}
+
 type AddStreamGroupLocationsOutput struct {
 
 	// This value is an [Amazon Resource Name (ARN)] or ID that uniquely identifies the stream group resource.
@@ -96,13 +111,35 @@ type AddStreamGroupLocationsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AddStreamGroupLocationsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AddStreamGroupLocationsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AddStreamGroupLocationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Identifier != nil {
+		s.WriteString(schemas.AddStreamGroupLocationsOutput_Identifier, *v.Identifier)
+	}
+	serializeLocationStates(s, schemas.AddStreamGroupLocationsOutput_Locations, v.Locations)
+}
+func (v *AddStreamGroupLocationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AddStreamGroupLocationsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AddStreamGroupLocationsOutput_Identifier:
+			v.Identifier = new(string)
+			return d.ReadString(schemas.AddStreamGroupLocationsOutput_Identifier, v.Identifier)
+		case schemas.AddStreamGroupLocationsOutput_Locations:
+			return deserializeLocationStates(d, schemas.AddStreamGroupLocationsOutput_Locations, &v.Locations)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationAddStreamGroupLocationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpAddStreamGroupLocations{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AddStreamGroupLocations, schemas.AddStreamGroupLocationsInput, schemas.AddStreamGroupLocationsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpAddStreamGroupLocations{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AddStreamGroupLocations, schemas.AddStreamGroupLocationsInput, schemas.AddStreamGroupLocationsOutput), output: &AddStreamGroupLocationsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

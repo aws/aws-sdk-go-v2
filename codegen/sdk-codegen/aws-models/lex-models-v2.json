@@ -2110,6 +2110,12 @@
                     "traits": {
                         "smithy.api#enumValue": "Fallback"
                     }
+                },
+                "DialogManager": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DialogManager"
+                    }
                 }
             },
             "traits": {
@@ -3669,6 +3675,12 @@
                     "target": "com.amazonaws.lexmodelsv2#AudioFillerSettings",
                     "traits": {
                         "smithy.api#documentation": "<p>Audio filler settings to apply when importing the bot locale\n         configuration. Audio filler requires <code>unifiedSpeechSettings</code>\n         (speech-to-speech) to be enabled when <code>enabled</code> is\n         <code>true</code>.</p>"
+                    }
+                },
+                "speakerDiarizationSettings": {
+                    "target": "com.amazonaws.lexmodelsv2#SpeakerDiarizationSettings",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The speaker diarization settings to apply when importing the bot\n         locale configuration.</p>"
                     }
                 }
             },
@@ -5651,6 +5663,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The sensitivity level for voice activity detection (VAD) in the bot locale. This setting helps optimize speech recognition accuracy by adjusting how the system responds to background noise during voice interactions.</p>"
                     }
+                },
+                "speakerDiarizationSettings": {
+                    "target": "com.amazonaws.lexmodelsv2#SpeakerDiarizationSettings",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The speaker diarization settings to configure for the new bot\n         locale. When enabled, Amazon Lex restricts speech detection to the primary\n         (loudest) speaker during streaming audio conversations.</p>"
+                    }
                 }
             },
             "traits": {
@@ -5739,6 +5757,12 @@
                     "target": "com.amazonaws.lexmodelsv2#SpeechDetectionSensitivity",
                     "traits": {
                         "smithy.api#documentation": "<p>The sensitivity level for voice activity detection (VAD) that was specified for the bot locale.</p>"
+                    }
+                },
+                "speakerDiarizationSettings": {
+                    "target": "com.amazonaws.lexmodelsv2#SpeakerDiarizationSettings",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The speaker diarization settings configured for the created bot\n         locale.</p>"
                     }
                 }
             },
@@ -6373,7 +6397,7 @@
                 "qnAIntentConfiguration": {
                     "target": "com.amazonaws.lexmodelsv2#QnAIntentConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the configuration of the built-in <code>Amazon.QnAIntent</code>. The <code>AMAZON.QnAIntent</code> intent is called when\n         Amazon Lex can't determine another intent to invoke. If you specify this field, you can't specify the <code>kendraConfiguration</code> field.</p>"
+                        "smithy.api#documentation": "<p>Specifies the configuration of the built-in <code>Amazon.QnAIntent</code>. The <code>AMAZON.QnAIntent</code> intent is called when\n         Amazon Lex V2 can't determine another intent to invoke. If you specify this field, you can't specify the <code>kendraConfiguration</code> field.</p>"
                     }
                 },
                 "qInConnectIntentConfiguration": {
@@ -9632,6 +9656,12 @@
                     "target": "com.amazonaws.lexmodelsv2#SpeechDetectionSensitivity",
                     "traits": {
                         "smithy.api#documentation": "<p>The sensitivity level for voice activity detection (VAD) configured for the bot locale.</p>"
+                    }
+                },
+                "speakerDiarizationSettings": {
+                    "target": "com.amazonaws.lexmodelsv2#SpeakerDiarizationSettings",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The speaker diarization settings configured for the bot\n         locale.</p>"
                     }
                 }
             },
@@ -13521,8 +13551,7 @@
                 "promptSpecification": {
                     "target": "com.amazonaws.lexmodelsv2#PromptSpecification",
                     "traits": {
-                        "smithy.api#documentation": "<p>Prompts the user to confirm the intent. This question should have a\n         yes or no answer.</p>\n         <p>Amazon Lex uses this prompt to ensure that the user acknowledges that the\n         intent is ready for fulfillment. For example, with the\n            <code>OrderPizza</code> intent, you might want to confirm that the\n         order is correct before placing it. For other intents, such as intents\n         that simply respond to user questions, you might not need to ask the\n         user for confirmation before providing the information. </p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>Prompts the user to confirm the intent. This question should have a\n         yes or no answer.</p>\n         <p>Amazon Lex uses this prompt to ensure that the user acknowledges that the\n         intent is ready for fulfillment. For example, with the\n            <code>OrderPizza</code> intent, you might want to confirm that the\n         order is correct before placing it. For other intents, such as intents\n         that simply respond to user questions, you might not need to ask the\n         user for confirmation before providing the information. </p>\n         <p>Required unless the bot locale's <code>assistedNluMode</code> is\n         <code>DialogManager</code>, in which case Amazon Lex generates the\n         confirmation prompt.</p>"
                     }
                 },
                 "declinationResponse": {
@@ -14407,7 +14436,7 @@
                     "name": "lex"
                 },
                 "aws.protocols#restJson1": {},
-                "smithy.api#documentation": "<p>Amazon Lex Model Building Service provides APIs for creating, managing, and deploying conversational bots and their components.</p>",
+                "smithy.api#documentation": "<p>This document provides detailed information about the Amazon Lex V2 API actions and their parameters.</p>\n         <p>For information about the IAM access control permissions you need to use this API, see\n        <a href=\"https://docs.aws.amazon.com/lexv2/latest/dg/security_iam_service-with-iam.html\">Identity-based policies for Amazon Lex V2</a>.</p>\n         <p>Amazon Lex V2 Model Building V2 operations let you build and manage bots.</p>\n         <p>If you use a custom HTTP client to call Amazon Lex Model Building\n        V2 operations, you must set the \"Content-Type\" HTTP header to\n        \"application/x-amz-json-1.1\". Otherwise, you receive an HTTP 404 -\n        UnknownOperationException in the response.</p>\n         <p>Amazon Lex Model Building V2 operations return the responses with\n        the \"application/x-amz-json-1.1\" content type.</p>\n         <p>You can use <a href=\"http://aws.amazon.com/tools/#sdk\">Amazon Web Services SDKs</a> to access Amazon Lex V2 APIs using your favorite programming language.\n        The SDKs automatically perform useful tasks for you, such as:</p>\n         <ul>\n            <li>\n               <p>Cryptographically sign your service requests</p>\n            </li>\n            <li>\n               <p>Retry requests</p>\n            </li>\n            <li>\n               <p>Handle error responses</p>\n            </li>\n         </ul>\n         <p>The following resources provide additional information about the Amazon Lex V2 Model Building API.</p>\n         <ul>\n            <li>\n               <p>\n                  <i>Amazon Web Services General Reference</i>\n               </p>\n               <ul>\n                  <li>\n                     <p>\n                        <a href=\"https://docs.aws.amazon.com/general/latest/gr/lex.html\">Amazon Lex V2 Endpoints for each region</a>.</p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>\n                  <i>Command Line Interface</i>\n               </p>\n               <ul>\n                  <li>\n                     <p>\n                        <a href=\"https://docs.aws.amazon.com/cli/latest/reference/lexv2-models/index.html\">\n                    Amazon Lex Model Building V2 CLI commands</a>.</p>\n                  </li>\n               </ul>\n            </li>\n         </ul>",
                 "smithy.api#title": "Amazon Lex Model Building V2",
                 "smithy.rules#endpointBdd": {
                     "version": "1.1",
@@ -19146,7 +19175,7 @@
                 "assistedNluMode": {
                     "target": "com.amazonaws.lexmodelsv2#AssistedNluMode",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the mode for Assisted NLU operation. Use <code>Primary</code> to make Assisted NLU the primary intent recognition method, or <code>Fallback</code> to use it only when standard NLU confidence is low.</p>"
+                        "smithy.api#documentation": "<p>Specifies the mode for Assisted NLU operation. Use <code>Primary</code> to make Assisted NLU the primary intent recognition method, <code>Fallback</code> to use it only when standard NLU confidence is low, or <code>DialogManager</code> to use a large language model to manage the conversation, including intent recognition, slot elicitation, and confirmation.</p>"
                     }
                 },
                 "intentDisambiguationSettings": {
@@ -20969,7 +20998,7 @@
                 "slotResolutionStrategy": {
                     "target": "com.amazonaws.lexmodelsv2#SlotResolutionStrategy",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies whether assisted slot resolution is turned on for the slot or not. If the value is <code>EnhancedFallback</code>, assisted slot resolution is activated when Amazon Lex defaults to the <code>AMAZON.FallbackIntent</code>. If the value is <code>Default</code>, assisted slot resolution is turned off.</p>",
+                        "smithy.api#documentation": "<p>Specifies whether assisted slot resolution is turned on for the slot or not. If the value is <code>EnhancedFallback</code>, assisted slot resolution is activated when Amazon Lex V2 defaults to the <code>AMAZON.FallbackIntent</code>. If the value is <code>Default</code>, assisted slot resolution is turned off.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -21590,6 +21619,22 @@
                 }
             }
         },
+        "com.amazonaws.lexmodelsv2#SpeakerDiarizationSettings": {
+            "type": "structure",
+            "members": {
+                "enabled": {
+                    "target": "com.amazonaws.lexmodelsv2#Enabled",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>Specifies whether speaker diarization is enabled for the bot locale.\n         Set to <code>true</code> to have Amazon Lex treat speech from speakers other\n         than the primary speaker as non-speech. Set to <code>false</code> to\n         disable speaker diarization and rely on voice activity detection\n         alone.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies configuration that restricts speech detection to the\n         primary (loudest) speaker during streaming audio conversations, so that\n         speech from background speakers does not start a turn, interrupt the\n         bot, or reach speech recognition.</p>"
+            }
+        },
         "com.amazonaws.lexmodelsv2#Specifications": {
             "type": "structure",
             "members": {
@@ -21692,6 +21737,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "Deepgram"
+                    }
+                },
+                "Advanced": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Advanced"
                     }
                 }
             }
@@ -24490,6 +24541,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The new sensitivity level for voice activity detection (VAD) in the bot locale. This setting helps optimize speech recognition accuracy by adjusting how the system responds to background noise during voice interactions.</p>"
                     }
+                },
+                "speakerDiarizationSettings": {
+                    "target": "com.amazonaws.lexmodelsv2#SpeakerDiarizationSettings",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The updated speaker diarization settings to apply to the bot locale.\n         If you omit this field, Amazon Lex keeps the setting currently stored on the\n         bot locale. To turn speaker diarization off, set <code>enabled</code>\n         to <code>false</code> explicitly.</p>"
+                    }
                 }
             },
             "traits": {
@@ -24599,6 +24656,12 @@
                     "target": "com.amazonaws.lexmodelsv2#SpeechDetectionSensitivity",
                     "traits": {
                         "smithy.api#documentation": "<p>The updated sensitivity level for voice activity detection (VAD) in the bot locale.</p>"
+                    }
+                },
+                "speakerDiarizationSettings": {
+                    "target": "com.amazonaws.lexmodelsv2#SpeakerDiarizationSettings",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The updated speaker diarization settings for the bot locale.</p>"
                     }
                 }
             },
@@ -25178,7 +25241,7 @@
                 "qnAIntentConfiguration": {
                     "target": "com.amazonaws.lexmodelsv2#QnAIntentConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the configuration of the built-in <code>Amazon.QnAIntent</code>. The <code>AMAZON.QnAIntent</code> intent is called when\n         Amazon Lex can't determine another intent to invoke. If you specify this field, you can't specify the <code>kendraConfiguration</code> field.</p>"
+                        "smithy.api#documentation": "<p>Specifies the configuration of the built-in <code>Amazon.QnAIntent</code>. The <code>AMAZON.QnAIntent</code> intent is called when\n         Amazon Lex V2 can't determine another intent to invoke. If you specify this field, you can't specify the <code>kendraConfiguration</code> field.</p>"
                     }
                 },
                 "qInConnectIntentConfiguration": {
@@ -26590,15 +26653,13 @@
                 "waitingResponse": {
                     "target": "com.amazonaws.lexmodelsv2#ResponseSpecification",
                     "traits": {
-                        "smithy.api#documentation": "<p>The response that Amazon Lex sends to indicate that the bot is waiting\n         for the conversation to continue.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The response that Amazon Lex sends to indicate that the bot is waiting\n         for the conversation to continue. Required unless the bot locale's\n         <code>assistedNluMode</code> is <code>DialogManager</code>.</p>"
                     }
                 },
                 "continueResponse": {
                     "target": "com.amazonaws.lexmodelsv2#ResponseSpecification",
                     "traits": {
-                        "smithy.api#documentation": "<p>The response that Amazon Lex sends to indicate that the bot is ready to\n         continue the conversation.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The response that Amazon Lex sends to indicate that the bot is ready to\n         continue the conversation. Required unless the bot locale's\n         <code>assistedNluMode</code> is <code>DialogManager</code>.</p>"
                     }
                 },
                 "stillWaitingResponse": {

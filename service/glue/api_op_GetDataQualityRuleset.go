@@ -4,7 +4,9 @@ package glue
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/glue/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/glue/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -33,6 +35,18 @@ type GetDataQualityRulesetInput struct {
 	Name *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetDataQualityRulesetInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetDataQualityRulesetRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetDataQualityRulesetInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.GetDataQualityRulesetRequest_Name, *v.Name)
+	}
 }
 
 // Returns the data quality ruleset response.
@@ -71,13 +85,76 @@ type GetDataQualityRulesetOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetDataQualityRulesetOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetDataQualityRulesetResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetDataQualityRulesetOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreatedOn != nil {
+		s.WriteTime(schemas.GetDataQualityRulesetResponse_CreatedOn, *v.CreatedOn)
+	}
+	if v.DataQualitySecurityConfiguration != nil {
+		s.WriteString(schemas.GetDataQualityRulesetResponse_DataQualitySecurityConfiguration, *v.DataQualitySecurityConfiguration)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.GetDataQualityRulesetResponse_Description, *v.Description)
+	}
+	if v.LastModifiedOn != nil {
+		s.WriteTime(schemas.GetDataQualityRulesetResponse_LastModifiedOn, *v.LastModifiedOn)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.GetDataQualityRulesetResponse_Name, *v.Name)
+	}
+	if v.RecommendationRunId != nil {
+		s.WriteString(schemas.GetDataQualityRulesetResponse_RecommendationRunId, *v.RecommendationRunId)
+	}
+	if v.Ruleset != nil {
+		s.WriteString(schemas.GetDataQualityRulesetResponse_Ruleset, *v.Ruleset)
+	}
+	if v.TargetTable != nil {
+		s.WriteStruct(schemas.GetDataQualityRulesetResponse_TargetTable)
+		v.TargetTable.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetDataQualityRulesetOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetDataQualityRulesetResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetDataQualityRulesetResponse_CreatedOn:
+			v.CreatedOn = new(time.Time)
+			return d.ReadTime(schemas.GetDataQualityRulesetResponse_CreatedOn, v.CreatedOn)
+		case schemas.GetDataQualityRulesetResponse_DataQualitySecurityConfiguration:
+			v.DataQualitySecurityConfiguration = new(string)
+			return d.ReadString(schemas.GetDataQualityRulesetResponse_DataQualitySecurityConfiguration, v.DataQualitySecurityConfiguration)
+		case schemas.GetDataQualityRulesetResponse_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.GetDataQualityRulesetResponse_Description, v.Description)
+		case schemas.GetDataQualityRulesetResponse_LastModifiedOn:
+			v.LastModifiedOn = new(time.Time)
+			return d.ReadTime(schemas.GetDataQualityRulesetResponse_LastModifiedOn, v.LastModifiedOn)
+		case schemas.GetDataQualityRulesetResponse_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.GetDataQualityRulesetResponse_Name, v.Name)
+		case schemas.GetDataQualityRulesetResponse_RecommendationRunId:
+			v.RecommendationRunId = new(string)
+			return d.ReadString(schemas.GetDataQualityRulesetResponse_RecommendationRunId, v.RecommendationRunId)
+		case schemas.GetDataQualityRulesetResponse_Ruleset:
+			v.Ruleset = new(string)
+			return d.ReadString(schemas.GetDataQualityRulesetResponse_Ruleset, v.Ruleset)
+		case schemas.GetDataQualityRulesetResponse_TargetTable:
+			v.TargetTable = &types.DataQualityTargetTable{}
+			return v.TargetTable.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetDataQualityRulesetMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetDataQualityRuleset{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetDataQualityRuleset, schemas.GetDataQualityRulesetRequest, schemas.GetDataQualityRulesetResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetDataQualityRuleset{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetDataQualityRuleset, schemas.GetDataQualityRulesetRequest, schemas.GetDataQualityRulesetResponse), output: &GetDataQualityRulesetOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

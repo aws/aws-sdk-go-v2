@@ -4,7 +4,9 @@ package applicationautoscaling
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/applicationautoscaling/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/applicationautoscaling/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -202,6 +204,24 @@ type DeregisterScalableTargetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeregisterScalableTargetInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeregisterScalableTargetRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeregisterScalableTargetInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ResourceId != nil {
+		s.WriteString(schemas.DeregisterScalableTargetRequest_ResourceId, *v.ResourceId)
+	}
+	if v.ScalableDimension != "" {
+		s.WriteString(schemas.DeregisterScalableTargetRequest_ScalableDimension, string(v.ScalableDimension))
+	}
+	if v.ServiceNamespace != "" {
+		s.WriteString(schemas.DeregisterScalableTargetRequest_ServiceNamespace, string(v.ServiceNamespace))
+	}
+}
+
 type DeregisterScalableTargetOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -209,13 +229,26 @@ type DeregisterScalableTargetOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeregisterScalableTargetOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeregisterScalableTargetResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeregisterScalableTargetOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeregisterScalableTargetOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeregisterScalableTargetResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeregisterScalableTargetMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeregisterScalableTarget{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeregisterScalableTarget, schemas.DeregisterScalableTargetRequest, schemas.DeregisterScalableTargetResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeregisterScalableTarget{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeregisterScalableTarget, schemas.DeregisterScalableTargetRequest, schemas.DeregisterScalableTargetResponse), output: &DeregisterScalableTargetOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

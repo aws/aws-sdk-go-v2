@@ -4,7 +4,9 @@ package mediatailor
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/mediatailor/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/mediatailor/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -106,6 +108,55 @@ type PutFunctionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutFunctionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutFunctionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutFunctionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AwsServiceRequestConfiguration != nil {
+		s.WriteStruct(schemas.PutFunctionRequest_AwsServiceRequestConfiguration)
+		v.AwsServiceRequestConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ConcurrentExecutorConfiguration != nil {
+		s.WriteStruct(schemas.PutFunctionRequest_ConcurrentExecutorConfiguration)
+		v.ConcurrentExecutorConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CustomOutputConfiguration != nil {
+		s.WriteStruct(schemas.PutFunctionRequest_CustomOutputConfiguration)
+		v.CustomOutputConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.PutFunctionRequest_Description, *v.Description)
+	}
+	if v.FunctionId != nil {
+		s.WriteString(schemas.PutFunctionRequest_FunctionId, *v.FunctionId)
+	}
+	if v.FunctionType != "" {
+		s.WriteString(schemas.PutFunctionRequest_FunctionType, string(v.FunctionType))
+	}
+	if v.HttpRequestConfiguration != nil {
+		s.WriteStruct(schemas.PutFunctionRequest_HttpRequestConfiguration)
+		v.HttpRequestConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SequentialExecutorConfiguration != nil {
+		s.WriteStruct(schemas.PutFunctionRequest_SequentialExecutorConfiguration)
+		v.SequentialExecutorConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serialize__mapOf__string(s, schemas.PutFunctionRequest_Tags, v.Tags)
+	if v.VastRequestConfiguration != nil {
+		s.WriteStruct(schemas.PutFunctionRequest_VastRequestConfiguration)
+		v.VastRequestConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 // -- Define Mixin --
 type PutFunctionOutput struct {
 
@@ -157,13 +208,105 @@ type PutFunctionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutFunctionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutFunctionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutFunctionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.PutFunctionResponse_Arn, *v.Arn)
+	}
+	if v.AwsServiceRequestConfiguration != nil {
+		s.WriteStruct(schemas.PutFunctionResponse_AwsServiceRequestConfiguration)
+		v.AwsServiceRequestConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ConcurrentExecutorConfiguration != nil {
+		s.WriteStruct(schemas.PutFunctionResponse_ConcurrentExecutorConfiguration)
+		v.ConcurrentExecutorConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CustomOutputConfiguration != nil {
+		s.WriteStruct(schemas.PutFunctionResponse_CustomOutputConfiguration)
+		v.CustomOutputConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.PutFunctionResponse_Description, *v.Description)
+	}
+	if v.FunctionId != nil {
+		s.WriteString(schemas.PutFunctionResponse_FunctionId, *v.FunctionId)
+	}
+	if v.FunctionType != "" {
+		s.WriteString(schemas.PutFunctionResponse_FunctionType, string(v.FunctionType))
+	}
+	if v.HttpRequestConfiguration != nil {
+		s.WriteStruct(schemas.PutFunctionResponse_HttpRequestConfiguration)
+		v.HttpRequestConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SequentialExecutorConfiguration != nil {
+		s.WriteStruct(schemas.PutFunctionResponse_SequentialExecutorConfiguration)
+		v.SequentialExecutorConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serialize__mapOf__string(s, schemas.PutFunctionResponse_Tags, v.Tags)
+	if v.VastRequestConfiguration != nil {
+		s.WriteStruct(schemas.PutFunctionResponse_VastRequestConfiguration)
+		v.VastRequestConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *PutFunctionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PutFunctionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PutFunctionResponse_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.PutFunctionResponse_Arn, v.Arn)
+		case schemas.PutFunctionResponse_AwsServiceRequestConfiguration:
+			v.AwsServiceRequestConfiguration = &types.AwsServiceRequestConfiguration{}
+			return v.AwsServiceRequestConfiguration.Deserialize(d)
+		case schemas.PutFunctionResponse_ConcurrentExecutorConfiguration:
+			v.ConcurrentExecutorConfiguration = &types.ConcurrentExecutorConfiguration{}
+			return v.ConcurrentExecutorConfiguration.Deserialize(d)
+		case schemas.PutFunctionResponse_CustomOutputConfiguration:
+			v.CustomOutputConfiguration = &types.CustomOutputConfiguration{}
+			return v.CustomOutputConfiguration.Deserialize(d)
+		case schemas.PutFunctionResponse_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.PutFunctionResponse_Description, v.Description)
+		case schemas.PutFunctionResponse_FunctionId:
+			v.FunctionId = new(string)
+			return d.ReadString(schemas.PutFunctionResponse_FunctionId, v.FunctionId)
+		case schemas.PutFunctionResponse_FunctionType:
+			var ev string
+			if err := d.ReadString(schemas.PutFunctionResponse_FunctionType, &ev); err != nil {
+				return err
+			}
+			v.FunctionType = types.FunctionType(ev)
+			return nil
+		case schemas.PutFunctionResponse_HttpRequestConfiguration:
+			v.HttpRequestConfiguration = &types.HttpRequestConfiguration{}
+			return v.HttpRequestConfiguration.Deserialize(d)
+		case schemas.PutFunctionResponse_SequentialExecutorConfiguration:
+			v.SequentialExecutorConfiguration = &types.SequentialExecutorConfiguration{}
+			return v.SequentialExecutorConfiguration.Deserialize(d)
+		case schemas.PutFunctionResponse_Tags:
+			return deserialize__mapOf__string(d, schemas.PutFunctionResponse_Tags, &v.Tags)
+		case schemas.PutFunctionResponse_VastRequestConfiguration:
+			v.VastRequestConfiguration = &types.VastRequestConfiguration{}
+			return v.VastRequestConfiguration.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPutFunctionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpPutFunction{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutFunction, schemas.PutFunctionRequest, schemas.PutFunctionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpPutFunction{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutFunction, schemas.PutFunctionRequest, schemas.PutFunctionResponse), output: &PutFunctionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

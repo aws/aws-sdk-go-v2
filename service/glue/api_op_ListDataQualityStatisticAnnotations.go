@@ -4,7 +4,9 @@ package glue
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/glue/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/glue/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -44,6 +46,32 @@ type ListDataQualityStatisticAnnotationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListDataQualityStatisticAnnotationsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListDataQualityStatisticAnnotationsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListDataQualityStatisticAnnotationsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListDataQualityStatisticAnnotationsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListDataQualityStatisticAnnotationsRequest_NextToken, *v.NextToken)
+	}
+	if v.ProfileId != nil {
+		s.WriteString(schemas.ListDataQualityStatisticAnnotationsRequest_ProfileId, *v.ProfileId)
+	}
+	if v.StatisticId != nil {
+		s.WriteString(schemas.ListDataQualityStatisticAnnotationsRequest_StatisticId, *v.StatisticId)
+	}
+	if v.TimestampFilter != nil {
+		s.WriteStruct(schemas.ListDataQualityStatisticAnnotationsRequest_TimestampFilter)
+		v.TimestampFilter.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type ListDataQualityStatisticAnnotationsOutput struct {
 
 	// A list of StatisticAnnotation applied to the Statistic
@@ -58,13 +86,35 @@ type ListDataQualityStatisticAnnotationsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListDataQualityStatisticAnnotationsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListDataQualityStatisticAnnotationsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListDataQualityStatisticAnnotationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAnnotationList(s, schemas.ListDataQualityStatisticAnnotationsResponse_Annotations, v.Annotations)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListDataQualityStatisticAnnotationsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListDataQualityStatisticAnnotationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListDataQualityStatisticAnnotationsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListDataQualityStatisticAnnotationsResponse_Annotations:
+			return deserializeAnnotationList(d, schemas.ListDataQualityStatisticAnnotationsResponse_Annotations, &v.Annotations)
+		case schemas.ListDataQualityStatisticAnnotationsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListDataQualityStatisticAnnotationsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListDataQualityStatisticAnnotationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListDataQualityStatisticAnnotations{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDataQualityStatisticAnnotations, schemas.ListDataQualityStatisticAnnotationsRequest, schemas.ListDataQualityStatisticAnnotationsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListDataQualityStatisticAnnotations{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDataQualityStatisticAnnotations, schemas.ListDataQualityStatisticAnnotationsRequest, schemas.ListDataQualityStatisticAnnotationsResponse), output: &ListDataQualityStatisticAnnotationsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"App":{"AppId":"__AppId__","Arn":"__Arn__","CreatedTime":946684800,"LastUpdatedTime":946684800,"Name":"__Name__","Visibility":"PRIVATE"},"RequestId":"__RequestId__"}

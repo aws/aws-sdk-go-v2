@@ -4,6 +4,8 @@ package quicksight
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/quicksight/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -40,6 +42,21 @@ type DeleteDefaultQBusinessApplicationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteDefaultQBusinessApplicationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteDefaultQBusinessApplicationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteDefaultQBusinessApplicationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AwsAccountId != nil {
+		s.WriteString(schemas.DeleteDefaultQBusinessApplicationRequest_AwsAccountId, *v.AwsAccountId)
+	}
+	if v.Namespace != nil {
+		s.WriteString(schemas.DeleteDefaultQBusinessApplicationRequest_Namespace, *v.Namespace)
+	}
+}
+
 type DeleteDefaultQBusinessApplicationOutput struct {
 
 	// The Amazon Web Services request ID for this operation.
@@ -54,13 +71,37 @@ type DeleteDefaultQBusinessApplicationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteDefaultQBusinessApplicationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteDefaultQBusinessApplicationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteDefaultQBusinessApplicationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RequestId != nil {
+		s.WriteString(schemas.DeleteDefaultQBusinessApplicationResponse_RequestId, *v.RequestId)
+	}
+	if v.Status != 0 {
+		s.WriteInt32(schemas.DeleteDefaultQBusinessApplicationResponse_Status, v.Status)
+	}
+}
+func (v *DeleteDefaultQBusinessApplicationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteDefaultQBusinessApplicationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteDefaultQBusinessApplicationResponse_RequestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.DeleteDefaultQBusinessApplicationResponse_RequestId, v.RequestId)
+		case schemas.DeleteDefaultQBusinessApplicationResponse_Status:
+			return d.ReadInt32(schemas.DeleteDefaultQBusinessApplicationResponse_Status, &v.Status)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteDefaultQBusinessApplicationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteDefaultQBusinessApplication{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteDefaultQBusinessApplication, schemas.DeleteDefaultQBusinessApplicationRequest, schemas.DeleteDefaultQBusinessApplicationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteDefaultQBusinessApplication{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteDefaultQBusinessApplication, schemas.DeleteDefaultQBusinessApplicationRequest, schemas.DeleteDefaultQBusinessApplicationResponse), output: &DeleteDefaultQBusinessApplicationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -5,7 +5,9 @@ package iotsitewise
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/iotsitewise/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotsitewise/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -42,6 +44,24 @@ type DescribeComputationModelExecutionSummaryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeComputationModelExecutionSummaryInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeComputationModelExecutionSummaryRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeComputationModelExecutionSummaryInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ComputationModelId != nil {
+		s.WriteString(schemas.DescribeComputationModelExecutionSummaryRequest_computationModelId, *v.ComputationModelId)
+	}
+	if v.ResolveToResourceId != nil {
+		s.WriteString(schemas.DescribeComputationModelExecutionSummaryRequest_resolveToResourceId, *v.ResolveToResourceId)
+	}
+	if v.ResolveToResourceType != "" {
+		s.WriteString(schemas.DescribeComputationModelExecutionSummaryRequest_resolveToResourceType, string(v.ResolveToResourceType))
+	}
+}
+
 type DescribeComputationModelExecutionSummaryOutput struct {
 
 	// Contains the execution summary of the computation model.
@@ -63,13 +83,43 @@ type DescribeComputationModelExecutionSummaryOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeComputationModelExecutionSummaryOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeComputationModelExecutionSummaryResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeComputationModelExecutionSummaryOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeComputationModelExecutionSummary(s, schemas.DescribeComputationModelExecutionSummaryResponse_computationModelExecutionSummary, v.ComputationModelExecutionSummary)
+	if v.ComputationModelId != nil {
+		s.WriteString(schemas.DescribeComputationModelExecutionSummaryResponse_computationModelId, *v.ComputationModelId)
+	}
+	if v.ResolveTo != nil {
+		s.WriteStruct(schemas.DescribeComputationModelExecutionSummaryResponse_resolveTo)
+		v.ResolveTo.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DescribeComputationModelExecutionSummaryOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeComputationModelExecutionSummaryResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeComputationModelExecutionSummaryResponse_computationModelExecutionSummary:
+			return deserializeComputationModelExecutionSummary(d, schemas.DescribeComputationModelExecutionSummaryResponse_computationModelExecutionSummary, &v.ComputationModelExecutionSummary)
+		case schemas.DescribeComputationModelExecutionSummaryResponse_computationModelId:
+			v.ComputationModelId = new(string)
+			return d.ReadString(schemas.DescribeComputationModelExecutionSummaryResponse_computationModelId, v.ComputationModelId)
+		case schemas.DescribeComputationModelExecutionSummaryResponse_resolveTo:
+			v.ResolveTo = &types.ResolveTo{}
+			return v.ResolveTo.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeComputationModelExecutionSummaryMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeComputationModelExecutionSummary{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeComputationModelExecutionSummary, schemas.DescribeComputationModelExecutionSummaryRequest, schemas.DescribeComputationModelExecutionSummaryResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeComputationModelExecutionSummary{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeComputationModelExecutionSummary, schemas.DescribeComputationModelExecutionSummaryRequest, schemas.DescribeComputationModelExecutionSummaryResponse), output: &DescribeComputationModelExecutionSummaryOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

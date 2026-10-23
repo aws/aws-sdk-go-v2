@@ -4,7 +4,9 @@ package kinesisvideo
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/kinesisvideo/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/kinesisvideo/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -103,6 +105,36 @@ type CreateStreamInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateStreamInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateStreamInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateStreamInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DataRetentionInHours != nil {
+		s.WriteInt32(schemas.CreateStreamInput_DataRetentionInHours, *v.DataRetentionInHours)
+	}
+	if v.DeviceName != nil {
+		s.WriteString(schemas.CreateStreamInput_DeviceName, *v.DeviceName)
+	}
+	if v.KmsKeyId != nil {
+		s.WriteString(schemas.CreateStreamInput_KmsKeyId, *v.KmsKeyId)
+	}
+	if v.MediaType != nil {
+		s.WriteString(schemas.CreateStreamInput_MediaType, *v.MediaType)
+	}
+	if v.StreamName != nil {
+		s.WriteString(schemas.CreateStreamInput_StreamName, *v.StreamName)
+	}
+	if v.StreamStorageConfiguration != nil {
+		s.WriteStruct(schemas.CreateStreamInput_StreamStorageConfiguration)
+		v.StreamStorageConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeResourceTags(s, schemas.CreateStreamInput_Tags, v.Tags)
+}
+
 type CreateStreamOutput struct {
 
 	// The Amazon Resource Name (ARN) of the stream.
@@ -114,13 +146,32 @@ type CreateStreamOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateStreamOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateStreamOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateStreamOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.StreamARN != nil {
+		s.WriteString(schemas.CreateStreamOutput_StreamARN, *v.StreamARN)
+	}
+}
+func (v *CreateStreamOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateStreamOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateStreamOutput_StreamARN:
+			v.StreamARN = new(string)
+			return d.ReadString(schemas.CreateStreamOutput_StreamARN, v.StreamARN)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateStreamMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateStream{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateStream, schemas.CreateStreamInput, schemas.CreateStreamOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateStream{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateStream, schemas.CreateStreamInput, schemas.CreateStreamOutput), output: &CreateStreamOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

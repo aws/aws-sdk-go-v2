@@ -67,7 +67,7 @@ type GetWhatsAppFlowOutput struct {
 	// The data API version for data exchange endpoint Flows.
 	DataApiVersion *string
 
-	// The endpoint URI for data exchange Flows, if configured.
+	// The HTTPS endpoint that Meta calls for a data exchange Flow.
 	EndpointUri *string
 
 	// The health status information for this Flow from Meta.

@@ -134,6 +134,18 @@ func TestCheckSnapshot_AllocateTransitVirtualInterface(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_AssociateConnectionsToResiliencyGroup(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.AssociateConnectionsToResiliencyGroup(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "AssociateConnectionsToResiliencyGroup")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_AssociateConnectionWithLag(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.AssociateConnectionWithLag(context.Background(), nil, func(o *Options) {
@@ -350,6 +362,18 @@ func TestCheckSnapshot_CreatePublicVirtualInterface(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_CreateResiliencyGroup(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateResiliencyGroup(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateResiliencyGroup")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_CreateTransitVirtualInterface(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateTransitVirtualInterface(context.Background(), nil, func(o *Options) {
@@ -439,6 +463,18 @@ func TestCheckSnapshot_DeleteLag(t *testing.T) {
 	_, err := svc.DeleteLag(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DeleteLag")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DeleteResiliencyGroup(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteResiliencyGroup(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteResiliencyGroup")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -686,11 +722,59 @@ func TestCheckSnapshot_DisassociateConnectionFromLag(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DisassociateConnectionsFromResiliencyGroup(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DisassociateConnectionsFromResiliencyGroup(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DisassociateConnectionsFromResiliencyGroup")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DisassociateMacSecKey(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DisassociateMacSecKey(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DisassociateMacSecKey")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetResiliencyGroup(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetResiliencyGroup(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetResiliencyGroup")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListResiliencyGroupAssociations(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListResiliencyGroupAssociations(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListResiliencyGroupAssociations")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListResiliencyGroups(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListResiliencyGroups(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListResiliencyGroups")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -782,6 +866,18 @@ func TestCheckSnapshot_UpdateConnection(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_UpdateConnectionsBillingMode(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateConnectionsBillingMode(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateConnectionsBillingMode")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_UpdateDirectConnectGateway(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.UpdateDirectConnectGateway(context.Background(), nil, func(o *Options) {
@@ -811,6 +907,18 @@ func TestCheckSnapshot_UpdateLag(t *testing.T) {
 	_, err := svc.UpdateLag(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "UpdateLag")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_UpdateResiliencyGroup(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateResiliencyGroup(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateResiliencyGroup")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -894,6 +1002,18 @@ func TestUpdateSnapshot_AllocateTransitVirtualInterface(t *testing.T) {
 	_, err := svc.AllocateTransitVirtualInterface(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "AllocateTransitVirtualInterface")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_AssociateConnectionsToResiliencyGroup(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.AssociateConnectionsToResiliencyGroup(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "AssociateConnectionsToResiliencyGroup")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1117,6 +1237,18 @@ func TestUpdateSnapshot_CreatePublicVirtualInterface(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_CreateResiliencyGroup(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateResiliencyGroup(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateResiliencyGroup")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_CreateTransitVirtualInterface(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateTransitVirtualInterface(context.Background(), nil, func(o *Options) {
@@ -1206,6 +1338,18 @@ func TestUpdateSnapshot_DeleteLag(t *testing.T) {
 	_, err := svc.DeleteLag(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DeleteLag")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DeleteResiliencyGroup(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteResiliencyGroup(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteResiliencyGroup")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1453,11 +1597,59 @@ func TestUpdateSnapshot_DisassociateConnectionFromLag(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_DisassociateConnectionsFromResiliencyGroup(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DisassociateConnectionsFromResiliencyGroup(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DisassociateConnectionsFromResiliencyGroup")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_DisassociateMacSecKey(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DisassociateMacSecKey(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DisassociateMacSecKey")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetResiliencyGroup(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetResiliencyGroup(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetResiliencyGroup")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListResiliencyGroupAssociations(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListResiliencyGroupAssociations(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListResiliencyGroupAssociations")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListResiliencyGroups(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListResiliencyGroups(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListResiliencyGroups")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1549,6 +1741,18 @@ func TestUpdateSnapshot_UpdateConnection(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_UpdateConnectionsBillingMode(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateConnectionsBillingMode(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateConnectionsBillingMode")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_UpdateDirectConnectGateway(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.UpdateDirectConnectGateway(context.Background(), nil, func(o *Options) {
@@ -1578,6 +1782,18 @@ func TestUpdateSnapshot_UpdateLag(t *testing.T) {
 	_, err := svc.UpdateLag(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "UpdateLag")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateResiliencyGroup(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateResiliencyGroup(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateResiliencyGroup")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

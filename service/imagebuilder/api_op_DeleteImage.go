@@ -4,6 +4,8 @@ package imagebuilder
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/imagebuilder/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -11,6 +13,11 @@ import (
 // ECR container images that are created during the image build process. You must
 // clean those up separately, using the appropriate Amazon EC2 or Amazon ECR
 // console actions, or API or CLI commands.
+//
+// The request fails with ResourceDependencyException if the image is shared with
+// other accounts, or if other resources depend on it. It also fails while the
+// image build is still running. Cancel an in-progress build with CancelImageCreationbefore you
+// delete the image.
 //
 //   - To deregister an EC2 Linux AMI, see [Deregister your Linux AMI]in the Amazon EC2 User Guide .
 //
@@ -47,6 +54,18 @@ type DeleteImageInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteImageInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteImageRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteImageInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ImageBuildVersionArn != nil {
+		s.WriteString(schemas.DeleteImageRequest_imageBuildVersionArn, *v.ImageBuildVersionArn)
+	}
+}
+
 type DeleteImageOutput struct {
 
 	// The Amazon Resource Name (ARN) of the Image Builder image resource that this
@@ -62,13 +81,38 @@ type DeleteImageOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteImageOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteImageResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteImageOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ImageBuildVersionArn != nil {
+		s.WriteString(schemas.DeleteImageResponse_imageBuildVersionArn, *v.ImageBuildVersionArn)
+	}
+	if v.RequestId != nil {
+		s.WriteString(schemas.DeleteImageResponse_requestId, *v.RequestId)
+	}
+}
+func (v *DeleteImageOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteImageResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteImageResponse_imageBuildVersionArn:
+			v.ImageBuildVersionArn = new(string)
+			return d.ReadString(schemas.DeleteImageResponse_imageBuildVersionArn, v.ImageBuildVersionArn)
+		case schemas.DeleteImageResponse_requestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.DeleteImageResponse_requestId, v.RequestId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteImageMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteImage{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteImage, schemas.DeleteImageRequest, schemas.DeleteImageResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteImage{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteImage, schemas.DeleteImageRequest, schemas.DeleteImageResponse), output: &DeleteImageOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

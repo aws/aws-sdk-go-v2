@@ -548,6 +548,25 @@ func (DryRunMode) Values() []DryRunMode {
 	}
 }
 
+type EncryptionMode string
+
+// Enum values for EncryptionMode
+const (
+	EncryptionModeDisk   EncryptionMode = "DISK"
+	EncryptionModeNative EncryptionMode = "NATIVE"
+)
+
+// Values returns all known values for EncryptionMode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (EncryptionMode) Values() []EncryptionMode {
+	return []EncryptionMode{
+		"DISK",
+		"NATIVE",
+	}
+}
+
 type EngineMode string
 
 // Enum values for EngineMode
@@ -1737,6 +1756,7 @@ const (
 	TLSSecurityPolicyPolicyMinTls12201907            TLSSecurityPolicy = "Policy-Min-TLS-1-2-2019-07"
 	TLSSecurityPolicyPolicyMinTls12Pfs202310         TLSSecurityPolicy = "Policy-Min-TLS-1-2-PFS-2023-10"
 	TLSSecurityPolicyPolicyMinTls12Rfc9151Fips202408 TLSSecurityPolicy = "Policy-Min-TLS-1-2-RFC9151-FIPS-2024-08"
+	TLSSecurityPolicyPolicyMinTls12FipsPq202610      TLSSecurityPolicy = "Policy-Min-TLS-1-2-FIPS-PQ-2026-10"
 )
 
 // Values returns all known values for TLSSecurityPolicy. Note that this can be
@@ -1749,6 +1769,7 @@ func (TLSSecurityPolicy) Values() []TLSSecurityPolicy {
 		"Policy-Min-TLS-1-2-2019-07",
 		"Policy-Min-TLS-1-2-PFS-2023-10",
 		"Policy-Min-TLS-1-2-RFC9151-FIPS-2024-08",
+		"Policy-Min-TLS-1-2-FIPS-PQ-2026-10",
 	}
 }
 
@@ -1793,6 +1814,25 @@ func (UpgradeStep) Values() []UpgradeStep {
 		"PRE_UPGRADE_CHECK",
 		"SNAPSHOT",
 		"UPGRADE",
+	}
+}
+
+type ValidationFailureSeverity string
+
+// Enum values for ValidationFailureSeverity
+const (
+	ValidationFailureSeverityCritical ValidationFailureSeverity = "Critical"
+	ValidationFailureSeverityWarning  ValidationFailureSeverity = "Warning"
+)
+
+// Values returns all known values for ValidationFailureSeverity. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ValidationFailureSeverity) Values() []ValidationFailureSeverity {
+	return []ValidationFailureSeverity{
+		"Critical",
+		"Warning",
 	}
 }
 

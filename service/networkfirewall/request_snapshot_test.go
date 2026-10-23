@@ -644,6 +644,27 @@ func TestCheckRequestSnapshot_CreateFirewallPolicy(t *testing.T) {
 				},
 			},
 			EnableTLSSessionHolding: ptr.Bool(true),
+			Route53ResolvedIPValidation: &types.Route53ResolvedIPValidation{
+				Action:                   types.Route53ResolvedIPValidationAction("REJECT"),
+				DNSFirewallRuleGroupId:   ptr.String("__DNSFirewallRuleGroupId__"),
+				DNSExpiryExceptionPolicy: types.DNSExpiryExceptionPolicy("REJECT"),
+				BypassDestinationValidationIPRanges: []types.Address{
+					{
+						AddressDefinition: ptr.String("__AddressDefinition__"),
+					},
+					{
+						AddressDefinition: ptr.String("__AddressDefinition__"),
+					},
+				},
+				SourceIPRanges: []types.Address{
+					{
+						AddressDefinition: ptr.String("__AddressDefinition__"),
+					},
+					{
+						AddressDefinition: ptr.String("__AddressDefinition__"),
+					},
+				},
+			},
 		},
 		Description: ptr.String("__Description__"),
 		Tags: []types.Tag{
@@ -2238,6 +2259,7 @@ func TestCheckRequestSnapshot_DescribeFlowOperation(t *testing.T) {
 	input := &DescribeFlowOperationInput{
 		FirewallArn:               ptr.String("__FirewallArn__"),
 		AvailabilityZone:          ptr.String("__AvailabilityZone__"),
+		AvailabilityZoneId:        ptr.String("__AvailabilityZoneId__"),
 		VpcEndpointAssociationArn: ptr.String("__VpcEndpointAssociationArn__"),
 		VpcEndpointId:             ptr.String("__VpcEndpointId__"),
 		FlowOperationId:           ptr.String("__FlowOperationId__"),
@@ -2839,6 +2861,7 @@ func TestCheckRequestSnapshot_ListFlowOperationResults(t *testing.T) {
 		NextToken:                 ptr.String("__NextToken__"),
 		MaxResults:                ptr.Int32(1),
 		AvailabilityZone:          ptr.String("__AvailabilityZone__"),
+		AvailabilityZoneId:        ptr.String("__AvailabilityZoneId__"),
 		VpcEndpointId:             ptr.String("__VpcEndpointId__"),
 		VpcEndpointAssociationArn: ptr.String("__VpcEndpointAssociationArn__"),
 	}
@@ -2869,6 +2892,7 @@ func TestCheckRequestSnapshot_ListFlowOperations(t *testing.T) {
 	input := &ListFlowOperationsInput{
 		FirewallArn:               ptr.String("__FirewallArn__"),
 		AvailabilityZone:          ptr.String("__AvailabilityZone__"),
+		AvailabilityZoneId:        ptr.String("__AvailabilityZoneId__"),
 		VpcEndpointAssociationArn: ptr.String("__VpcEndpointAssociationArn__"),
 		VpcEndpointId:             ptr.String("__VpcEndpointId__"),
 		FlowOperationType:         types.FlowOperationType("FLOW_FLUSH"),
@@ -3188,6 +3212,7 @@ func TestCheckRequestSnapshot_StartFlowCapture(t *testing.T) {
 	input := &StartFlowCaptureInput{
 		FirewallArn:               ptr.String("__FirewallArn__"),
 		AvailabilityZone:          ptr.String("__AvailabilityZone__"),
+		AvailabilityZoneId:        ptr.String("__AvailabilityZoneId__"),
 		VpcEndpointAssociationArn: ptr.String("__VpcEndpointAssociationArn__"),
 		VpcEndpointId:             ptr.String("__VpcEndpointId__"),
 		MinimumFlowAgeInSeconds:   ptr.Int32(1),
@@ -3249,6 +3274,7 @@ func TestCheckRequestSnapshot_StartFlowFlush(t *testing.T) {
 	input := &StartFlowFlushInput{
 		FirewallArn:               ptr.String("__FirewallArn__"),
 		AvailabilityZone:          ptr.String("__AvailabilityZone__"),
+		AvailabilityZoneId:        ptr.String("__AvailabilityZoneId__"),
 		VpcEndpointAssociationArn: ptr.String("__VpcEndpointAssociationArn__"),
 		VpcEndpointId:             ptr.String("__VpcEndpointId__"),
 		MinimumFlowAgeInSeconds:   ptr.Int32(1),
@@ -3696,6 +3722,27 @@ func TestCheckRequestSnapshot_UpdateFirewallPolicy(t *testing.T) {
 				},
 			},
 			EnableTLSSessionHolding: ptr.Bool(true),
+			Route53ResolvedIPValidation: &types.Route53ResolvedIPValidation{
+				Action:                   types.Route53ResolvedIPValidationAction("REJECT"),
+				DNSFirewallRuleGroupId:   ptr.String("__DNSFirewallRuleGroupId__"),
+				DNSExpiryExceptionPolicy: types.DNSExpiryExceptionPolicy("REJECT"),
+				BypassDestinationValidationIPRanges: []types.Address{
+					{
+						AddressDefinition: ptr.String("__AddressDefinition__"),
+					},
+					{
+						AddressDefinition: ptr.String("__AddressDefinition__"),
+					},
+				},
+				SourceIPRanges: []types.Address{
+					{
+						AddressDefinition: ptr.String("__AddressDefinition__"),
+					},
+					{
+						AddressDefinition: ptr.String("__AddressDefinition__"),
+					},
+				},
+			},
 		},
 		Description: ptr.String("__Description__"),
 		DryRun:      true,
@@ -5118,6 +5165,27 @@ func TestUpdateRequestSnapshot_CreateFirewallPolicy(t *testing.T) {
 				},
 			},
 			EnableTLSSessionHolding: ptr.Bool(true),
+			Route53ResolvedIPValidation: &types.Route53ResolvedIPValidation{
+				Action:                   types.Route53ResolvedIPValidationAction("REJECT"),
+				DNSFirewallRuleGroupId:   ptr.String("__DNSFirewallRuleGroupId__"),
+				DNSExpiryExceptionPolicy: types.DNSExpiryExceptionPolicy("REJECT"),
+				BypassDestinationValidationIPRanges: []types.Address{
+					{
+						AddressDefinition: ptr.String("__AddressDefinition__"),
+					},
+					{
+						AddressDefinition: ptr.String("__AddressDefinition__"),
+					},
+				},
+				SourceIPRanges: []types.Address{
+					{
+						AddressDefinition: ptr.String("__AddressDefinition__"),
+					},
+					{
+						AddressDefinition: ptr.String("__AddressDefinition__"),
+					},
+				},
+			},
 		},
 		Description: ptr.String("__Description__"),
 		Tags: []types.Tag{
@@ -6712,6 +6780,7 @@ func TestUpdateRequestSnapshot_DescribeFlowOperation(t *testing.T) {
 	input := &DescribeFlowOperationInput{
 		FirewallArn:               ptr.String("__FirewallArn__"),
 		AvailabilityZone:          ptr.String("__AvailabilityZone__"),
+		AvailabilityZoneId:        ptr.String("__AvailabilityZoneId__"),
 		VpcEndpointAssociationArn: ptr.String("__VpcEndpointAssociationArn__"),
 		VpcEndpointId:             ptr.String("__VpcEndpointId__"),
 		FlowOperationId:           ptr.String("__FlowOperationId__"),
@@ -7313,6 +7382,7 @@ func TestUpdateRequestSnapshot_ListFlowOperationResults(t *testing.T) {
 		NextToken:                 ptr.String("__NextToken__"),
 		MaxResults:                ptr.Int32(1),
 		AvailabilityZone:          ptr.String("__AvailabilityZone__"),
+		AvailabilityZoneId:        ptr.String("__AvailabilityZoneId__"),
 		VpcEndpointId:             ptr.String("__VpcEndpointId__"),
 		VpcEndpointAssociationArn: ptr.String("__VpcEndpointAssociationArn__"),
 	}
@@ -7343,6 +7413,7 @@ func TestUpdateRequestSnapshot_ListFlowOperations(t *testing.T) {
 	input := &ListFlowOperationsInput{
 		FirewallArn:               ptr.String("__FirewallArn__"),
 		AvailabilityZone:          ptr.String("__AvailabilityZone__"),
+		AvailabilityZoneId:        ptr.String("__AvailabilityZoneId__"),
 		VpcEndpointAssociationArn: ptr.String("__VpcEndpointAssociationArn__"),
 		VpcEndpointId:             ptr.String("__VpcEndpointId__"),
 		FlowOperationType:         types.FlowOperationType("FLOW_FLUSH"),
@@ -7662,6 +7733,7 @@ func TestUpdateRequestSnapshot_StartFlowCapture(t *testing.T) {
 	input := &StartFlowCaptureInput{
 		FirewallArn:               ptr.String("__FirewallArn__"),
 		AvailabilityZone:          ptr.String("__AvailabilityZone__"),
+		AvailabilityZoneId:        ptr.String("__AvailabilityZoneId__"),
 		VpcEndpointAssociationArn: ptr.String("__VpcEndpointAssociationArn__"),
 		VpcEndpointId:             ptr.String("__VpcEndpointId__"),
 		MinimumFlowAgeInSeconds:   ptr.Int32(1),
@@ -7723,6 +7795,7 @@ func TestUpdateRequestSnapshot_StartFlowFlush(t *testing.T) {
 	input := &StartFlowFlushInput{
 		FirewallArn:               ptr.String("__FirewallArn__"),
 		AvailabilityZone:          ptr.String("__AvailabilityZone__"),
+		AvailabilityZoneId:        ptr.String("__AvailabilityZoneId__"),
 		VpcEndpointAssociationArn: ptr.String("__VpcEndpointAssociationArn__"),
 		VpcEndpointId:             ptr.String("__VpcEndpointId__"),
 		MinimumFlowAgeInSeconds:   ptr.Int32(1),
@@ -8170,6 +8243,27 @@ func TestUpdateRequestSnapshot_UpdateFirewallPolicy(t *testing.T) {
 				},
 			},
 			EnableTLSSessionHolding: ptr.Bool(true),
+			Route53ResolvedIPValidation: &types.Route53ResolvedIPValidation{
+				Action:                   types.Route53ResolvedIPValidationAction("REJECT"),
+				DNSFirewallRuleGroupId:   ptr.String("__DNSFirewallRuleGroupId__"),
+				DNSExpiryExceptionPolicy: types.DNSExpiryExceptionPolicy("REJECT"),
+				BypassDestinationValidationIPRanges: []types.Address{
+					{
+						AddressDefinition: ptr.String("__AddressDefinition__"),
+					},
+					{
+						AddressDefinition: ptr.String("__AddressDefinition__"),
+					},
+				},
+				SourceIPRanges: []types.Address{
+					{
+						AddressDefinition: ptr.String("__AddressDefinition__"),
+					},
+					{
+						AddressDefinition: ptr.String("__AddressDefinition__"),
+					},
+				},
+			},
 		},
 		Description: ptr.String("__Description__"),
 		DryRun:      true,

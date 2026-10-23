@@ -5,7 +5,9 @@ package glue
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/glue/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/glue/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -41,6 +43,24 @@ type ListGlossaryTermsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListGlossaryTermsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListGlossaryTermsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListGlossaryTermsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GlossaryIdentifier != nil {
+		s.WriteString(schemas.ListGlossaryTermsRequest_GlossaryIdentifier, *v.GlossaryIdentifier)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListGlossaryTermsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListGlossaryTermsRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListGlossaryTermsOutput struct {
 
 	// The list of glossary term items.
@@ -55,13 +75,35 @@ type ListGlossaryTermsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListGlossaryTermsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListGlossaryTermsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListGlossaryTermsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeGlossaryTermItemList(s, schemas.ListGlossaryTermsResponse_Items, v.Items)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListGlossaryTermsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListGlossaryTermsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListGlossaryTermsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListGlossaryTermsResponse_Items:
+			return deserializeGlossaryTermItemList(d, schemas.ListGlossaryTermsResponse_Items, &v.Items)
+		case schemas.ListGlossaryTermsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListGlossaryTermsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListGlossaryTermsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListGlossaryTerms{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListGlossaryTerms, schemas.ListGlossaryTermsRequest, schemas.ListGlossaryTermsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListGlossaryTerms{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListGlossaryTerms, schemas.ListGlossaryTermsRequest, schemas.ListGlossaryTermsResponse), output: &ListGlossaryTermsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

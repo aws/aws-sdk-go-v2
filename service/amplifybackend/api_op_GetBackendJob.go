@@ -4,6 +4,8 @@ package amplifybackend
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/amplifybackend/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -43,6 +45,24 @@ type GetBackendJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetBackendJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetBackendJobRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetBackendJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AppId != nil {
+		s.WriteString(schemas.GetBackendJobRequest_AppId, *v.AppId)
+	}
+	if v.BackendEnvironmentName != nil {
+		s.WriteString(schemas.GetBackendJobRequest_BackendEnvironmentName, *v.BackendEnvironmentName)
+	}
+	if v.JobId != nil {
+		s.WriteString(schemas.GetBackendJobRequest_JobId, *v.JobId)
+	}
+}
+
 type GetBackendJobOutput struct {
 
 	// The app ID.
@@ -75,13 +95,74 @@ type GetBackendJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetBackendJobOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetBackendJobResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetBackendJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AppId != nil {
+		s.WriteString(schemas.GetBackendJobResponse_AppId, *v.AppId)
+	}
+	if v.BackendEnvironmentName != nil {
+		s.WriteString(schemas.GetBackendJobResponse_BackendEnvironmentName, *v.BackendEnvironmentName)
+	}
+	if v.CreateTime != nil {
+		s.WriteString(schemas.GetBackendJobResponse_CreateTime, *v.CreateTime)
+	}
+	if v.Error != nil {
+		s.WriteString(schemas.GetBackendJobResponse_Error, *v.Error)
+	}
+	if v.JobId != nil {
+		s.WriteString(schemas.GetBackendJobResponse_JobId, *v.JobId)
+	}
+	if v.Operation != nil {
+		s.WriteString(schemas.GetBackendJobResponse_Operation, *v.Operation)
+	}
+	if v.Status != nil {
+		s.WriteString(schemas.GetBackendJobResponse_Status, *v.Status)
+	}
+	if v.UpdateTime != nil {
+		s.WriteString(schemas.GetBackendJobResponse_UpdateTime, *v.UpdateTime)
+	}
+}
+func (v *GetBackendJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetBackendJobResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetBackendJobResponse_AppId:
+			v.AppId = new(string)
+			return d.ReadString(schemas.GetBackendJobResponse_AppId, v.AppId)
+		case schemas.GetBackendJobResponse_BackendEnvironmentName:
+			v.BackendEnvironmentName = new(string)
+			return d.ReadString(schemas.GetBackendJobResponse_BackendEnvironmentName, v.BackendEnvironmentName)
+		case schemas.GetBackendJobResponse_CreateTime:
+			v.CreateTime = new(string)
+			return d.ReadString(schemas.GetBackendJobResponse_CreateTime, v.CreateTime)
+		case schemas.GetBackendJobResponse_Error:
+			v.Error = new(string)
+			return d.ReadString(schemas.GetBackendJobResponse_Error, v.Error)
+		case schemas.GetBackendJobResponse_JobId:
+			v.JobId = new(string)
+			return d.ReadString(schemas.GetBackendJobResponse_JobId, v.JobId)
+		case schemas.GetBackendJobResponse_Operation:
+			v.Operation = new(string)
+			return d.ReadString(schemas.GetBackendJobResponse_Operation, v.Operation)
+		case schemas.GetBackendJobResponse_Status:
+			v.Status = new(string)
+			return d.ReadString(schemas.GetBackendJobResponse_Status, v.Status)
+		case schemas.GetBackendJobResponse_UpdateTime:
+			v.UpdateTime = new(string)
+			return d.ReadString(schemas.GetBackendJobResponse_UpdateTime, v.UpdateTime)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetBackendJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetBackendJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetBackendJob, schemas.GetBackendJobRequest, schemas.GetBackendJobResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetBackendJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetBackendJob, schemas.GetBackendJobRequest, schemas.GetBackendJobResponse), output: &GetBackendJobOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

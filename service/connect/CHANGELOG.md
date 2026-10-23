@@ -1,3 +1,64 @@
+# v1.208.0 (2026-10-22)
+
+* **Feature**: Adds support for customer queryable replication errors.
+* **Bug Fix**: Update smithy-go to v1.28.6
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.207.0 (2026-10-21)
+
+* **Feature**: Added support for AWS-managed security profiles.
+
+# v1.206.0 (2026-10-19)
+
+* **Feature**: Amazon Connect GetAttachedFile API now supports an optional UrlContentDisposition parameter. Set it to INLINE to get a pre-signed URL that displays the file in the browser, so agents can preview email attachments without downloading them. ATTACHMENT (download) remains the default.
+* **Bug Fix**: Allow lists with null values to deserialize into its zero value instead of failing
+
+# v1.205.0 (2026-10-13)
+
+* **Feature**: New APIs to support aliases and versions for ContactFlow.
+
+# v1.204.3 (2026-10-09.2)
+
+* **Dependency Update**: Update to smithy-go v1.28.5.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.204.2 (2026-10-08)
+
+* **Dependency Update**: Update to smithy-go v1.28.4.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.204.1 (2026-10-06)
+
+* No change notes available for this release.
+
+# v1.204.0 (2026-09-30)
+
+* **Feature**: Amazon Connect Rules can now trigger in-app notifications to users as a rule action. Notification character limit was increased to 500 visible characters.
+
+# v1.203.0 (2026-09-28)
+
+* **Feature**: This release adds ConnectionTypes and ChatStreamingConfiguration to StartChatContact, and ConnectionCredentials, Websocket, and StreamingId to its response, so customers can request connection information and chat streaming in the same call that starts the chat.
+
+# v1.202.0 (2026-09-25)
+
+* **Feature**: Agent Privacy During Hold is a new privacy capability for Amazon Connect Voice that prevents agent audio from being captured in call recordings or Contact Lens conversational analytics during hold. When enabled, agents are automatically muted on entering hold and unmuted on resuming the contact
+
+# v1.201.1 (2026-09-24)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.201.0 (2026-09-18)
+
+* **Feature**: This release adds the ListSecurityProfileAIAgents API and updates the CreateSecurityProfile and UpdateSecurityProfile APIs to support the AllowedAIAgents field on security profiles, allowing customers to manage the 3P AI agents associated with a security profile for Agent-to-Agent interactions.
+
+# v1.200.0 (2026-09-17)
+
+* **Feature**: Made the replicaAlias attribute optional in the ReplicateInstance API to support Global routing for Amazon Connect Global Resiliency (ACGR) instances. This change maintains backward compatibility. When onboarding to ACGR without Global routing, you must specify a custom replicaAlias in your API call
+
+# v1.199.0 (2026-09-16)
+
+* **Feature**: Adds support for ContactAnalysis via ListContactReferences.
+
 # v1.198.0 (2026-09-09)
 
 * **Feature**: Add metric configuration field to evaluation forms and ListEvaluationFormAIVersions API for retrieving AI-generated evaluation form versions

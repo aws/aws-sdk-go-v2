@@ -5,7 +5,9 @@ package securityhub
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/securityhub/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/securityhub/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -76,6 +78,32 @@ type GetResourcesV2Input struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetResourcesV2Input) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetResourcesV2Request)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetResourcesV2Input) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Filters != nil {
+		s.WriteStruct(schemas.GetResourcesV2Request_Filters)
+		v.Filters.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.GetResourcesV2Request_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetResourcesV2Request_NextToken, *v.NextToken)
+	}
+	if v.Scopes != nil {
+		s.WriteStruct(schemas.GetResourcesV2Request_Scopes)
+		v.Scopes.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeSortCriteria(s, schemas.GetResourcesV2Request_SortCriteria, v.SortCriteria)
+}
+
 type GetResourcesV2Output struct {
 
 	// An array of resources returned by the operation.
@@ -93,13 +121,35 @@ type GetResourcesV2Output struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetResourcesV2Output) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetResourcesV2Response)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetResourcesV2Output) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetResourcesV2Response_NextToken, *v.NextToken)
+	}
+	serializeResources(s, schemas.GetResourcesV2Response_Resources, v.Resources)
+}
+func (v *GetResourcesV2Output) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetResourcesV2Response, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetResourcesV2Response_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.GetResourcesV2Response_NextToken, v.NextToken)
+		case schemas.GetResourcesV2Response_Resources:
+			return deserializeResources(d, schemas.GetResourcesV2Response_Resources, &v.Resources)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetResourcesV2Middlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetResourcesV2{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetResourcesV2, schemas.GetResourcesV2Request, schemas.GetResourcesV2Response)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetResourcesV2{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetResourcesV2, schemas.GetResourcesV2Request, schemas.GetResourcesV2Response), output: &GetResourcesV2Output{}}, middleware.After); err != nil {
 		return err
 	}
 

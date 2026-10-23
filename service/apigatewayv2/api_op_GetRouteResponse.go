@@ -4,7 +4,9 @@ package apigatewayv2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/apigatewayv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/apigatewayv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -44,6 +46,24 @@ type GetRouteResponseInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetRouteResponseInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetRouteResponseRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetRouteResponseInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApiId != nil {
+		s.WriteString(schemas.GetRouteResponseRequest_ApiId, *v.ApiId)
+	}
+	if v.RouteId != nil {
+		s.WriteString(schemas.GetRouteResponseRequest_RouteId, *v.RouteId)
+	}
+	if v.RouteResponseId != nil {
+		s.WriteString(schemas.GetRouteResponseRequest_RouteResponseId, *v.RouteResponseId)
+	}
+}
+
 type GetRouteResponseOutput struct {
 
 	// Represents the model selection expression of a route response. Supported only
@@ -68,13 +88,50 @@ type GetRouteResponseOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetRouteResponseOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetRouteResponseResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetRouteResponseOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ModelSelectionExpression != nil {
+		s.WriteString(schemas.GetRouteResponseResponse_ModelSelectionExpression, *v.ModelSelectionExpression)
+	}
+	serializeRouteModels(s, schemas.GetRouteResponseResponse_ResponseModels, v.ResponseModels)
+	serializeRouteParameters(s, schemas.GetRouteResponseResponse_ResponseParameters, v.ResponseParameters)
+	if v.RouteResponseId != nil {
+		s.WriteString(schemas.GetRouteResponseResponse_RouteResponseId, *v.RouteResponseId)
+	}
+	if v.RouteResponseKey != nil {
+		s.WriteString(schemas.GetRouteResponseResponse_RouteResponseKey, *v.RouteResponseKey)
+	}
+}
+func (v *GetRouteResponseOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetRouteResponseResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetRouteResponseResponse_ModelSelectionExpression:
+			v.ModelSelectionExpression = new(string)
+			return d.ReadString(schemas.GetRouteResponseResponse_ModelSelectionExpression, v.ModelSelectionExpression)
+		case schemas.GetRouteResponseResponse_ResponseModels:
+			return deserializeRouteModels(d, schemas.GetRouteResponseResponse_ResponseModels, &v.ResponseModels)
+		case schemas.GetRouteResponseResponse_ResponseParameters:
+			return deserializeRouteParameters(d, schemas.GetRouteResponseResponse_ResponseParameters, &v.ResponseParameters)
+		case schemas.GetRouteResponseResponse_RouteResponseId:
+			v.RouteResponseId = new(string)
+			return d.ReadString(schemas.GetRouteResponseResponse_RouteResponseId, v.RouteResponseId)
+		case schemas.GetRouteResponseResponse_RouteResponseKey:
+			v.RouteResponseKey = new(string)
+			return d.ReadString(schemas.GetRouteResponseResponse_RouteResponseKey, v.RouteResponseKey)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetRouteResponseMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetRouteResponse{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetRouteResponse, schemas.GetRouteResponseRequest, schemas.GetRouteResponseResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetRouteResponse{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetRouteResponse, schemas.GetRouteResponseRequest, schemas.GetRouteResponseResponse), output: &GetRouteResponseOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -5,7 +5,9 @@ package ram
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/ram/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ram/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -61,6 +63,25 @@ type ListReplacePermissionAssociationsWorkInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListReplacePermissionAssociationsWorkInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListReplacePermissionAssociationsWorkRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListReplacePermissionAssociationsWorkInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListReplacePermissionAssociationsWorkRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListReplacePermissionAssociationsWorkRequest_nextToken, *v.NextToken)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.ListReplacePermissionAssociationsWorkRequest_status, string(v.Status))
+	}
+	serializeReplacePermissionAssociationsWorkIdList(s, schemas.ListReplacePermissionAssociationsWorkRequest_workIds, v.WorkIds)
+}
+
 type ListReplacePermissionAssociationsWorkOutput struct {
 
 	// If present, this value indicates that more output is available than is included
@@ -79,13 +100,35 @@ type ListReplacePermissionAssociationsWorkOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListReplacePermissionAssociationsWorkOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListReplacePermissionAssociationsWorkResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListReplacePermissionAssociationsWorkOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListReplacePermissionAssociationsWorkResponse_nextToken, *v.NextToken)
+	}
+	serializeReplacePermissionAssociationsWorkList(s, schemas.ListReplacePermissionAssociationsWorkResponse_replacePermissionAssociationsWorks, v.ReplacePermissionAssociationsWorks)
+}
+func (v *ListReplacePermissionAssociationsWorkOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListReplacePermissionAssociationsWorkResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListReplacePermissionAssociationsWorkResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListReplacePermissionAssociationsWorkResponse_nextToken, v.NextToken)
+		case schemas.ListReplacePermissionAssociationsWorkResponse_replacePermissionAssociationsWorks:
+			return deserializeReplacePermissionAssociationsWorkList(d, schemas.ListReplacePermissionAssociationsWorkResponse_replacePermissionAssociationsWorks, &v.ReplacePermissionAssociationsWorks)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListReplacePermissionAssociationsWorkMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListReplacePermissionAssociationsWork{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListReplacePermissionAssociationsWork, schemas.ListReplacePermissionAssociationsWorkRequest, schemas.ListReplacePermissionAssociationsWorkResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListReplacePermissionAssociationsWork{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListReplacePermissionAssociationsWork, schemas.ListReplacePermissionAssociationsWorkRequest, schemas.ListReplacePermissionAssociationsWorkResponse), output: &ListReplacePermissionAssociationsWorkOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

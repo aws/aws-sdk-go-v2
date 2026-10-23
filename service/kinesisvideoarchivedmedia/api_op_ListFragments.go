@@ -5,7 +5,9 @@ package kinesisvideoarchivedmedia
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/kinesisvideoarchivedmedia/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/kinesisvideoarchivedmedia/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -84,6 +86,32 @@ type ListFragmentsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListFragmentsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListFragmentsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListFragmentsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FragmentSelector != nil {
+		s.WriteStruct(schemas.ListFragmentsInput_FragmentSelector)
+		v.FragmentSelector.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MaxResults != nil {
+		s.WriteInt64(schemas.ListFragmentsInput_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListFragmentsInput_NextToken, *v.NextToken)
+	}
+	if v.StreamARN != nil {
+		s.WriteString(schemas.ListFragmentsInput_StreamARN, *v.StreamARN)
+	}
+	if v.StreamName != nil {
+		s.WriteString(schemas.ListFragmentsInput_StreamName, *v.StreamName)
+	}
+}
+
 type ListFragmentsOutput struct {
 
 	// A list of archived Fragment objects from the stream that meet the selector criteria.
@@ -101,13 +129,35 @@ type ListFragmentsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListFragmentsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListFragmentsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListFragmentsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeFragmentList(s, schemas.ListFragmentsOutput_Fragments, v.Fragments)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListFragmentsOutput_NextToken, *v.NextToken)
+	}
+}
+func (v *ListFragmentsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListFragmentsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListFragmentsOutput_Fragments:
+			return deserializeFragmentList(d, schemas.ListFragmentsOutput_Fragments, &v.Fragments)
+		case schemas.ListFragmentsOutput_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListFragmentsOutput_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListFragmentsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListFragments{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListFragments, schemas.ListFragmentsInput, schemas.ListFragmentsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListFragments{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListFragments, schemas.ListFragmentsInput, schemas.ListFragmentsOutput), output: &ListFragmentsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

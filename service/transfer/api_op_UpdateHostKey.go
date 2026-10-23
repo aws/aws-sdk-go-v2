@@ -5,12 +5,19 @@ package transfer
 import (
 	"context"
 	"github.com/aws/aws-sdk-go-v2/service/transfer/schemas"
+	"github.com/aws/aws-sdk-go-v2/service/transfer/types"
 	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
-// Updates the description for the host key that's specified by the ServerId and
-// HostKeyId parameters.
+// Updates the host key that's specified by the ServerId and HostKeyId parameters.
+// You can update the description of the host key, change where the host key is
+// stored by specifying the StorageType , and specify the KMS key used to encrypt
+// the host key when it's stored in Secrets Manager.
+//
+// To change a host key's storage type from SERVICE_MANAGED to SECRETS_MANAGER ,
+// you must have the transfer:ExportHostKey permission. transfer:ExportHostKey is
+// a permission-only action that has no corresponding API operation.
 func (c *Client) UpdateHostKey(ctx context.Context, params *UpdateHostKeyInput, optFns ...func(*Options)) (*UpdateHostKeyOutput, error) {
 	if params == nil {
 		params = &UpdateHostKeyInput{}
@@ -28,11 +35,6 @@ func (c *Client) UpdateHostKey(ctx context.Context, params *UpdateHostKeyInput, 
 
 type UpdateHostKeyInput struct {
 
-	// An updated description for the host key.
-	//
-	// This member is required.
-	Description *string
-
 	// The identifier of the host key that you are updating.
 	//
 	// This member is required.
@@ -42,6 +44,22 @@ type UpdateHostKeyInput struct {
 	//
 	// This member is required.
 	ServerId *string
+
+	// An updated description for the host key.
+	Description *string
+
+	// The Amazon Resource Name (ARN) of the KMS key used to encrypt the Secrets
+	// Manager secret that stores the host key. If you specify a customer managed key,
+	// its key policy must allow the AWSServiceRoleForTransfer service-linked role to
+	// decrypt the secret. If you don't specify a value, Transfer Family uses the
+	// Amazon Web Services managed key for Secrets Manager.
+	KmsKey *string
+
+	// Specifies whether the host key is stored by Transfer Family ( SERVICE_MANAGED )
+	// or in Secrets Manager ( SECRETS_MANAGER ). When you specify SECRETS_MANAGER ,
+	// Transfer Family stores the private host key material in an Secrets Manager
+	// secret.
+	StorageType types.HostKeyStorageType
 
 	noSmithyDocumentSerde
 }
@@ -59,8 +77,14 @@ func (v *UpdateHostKeyInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.HostKeyId != nil {
 		s.WriteString(schemas.UpdateHostKeyRequest_HostKeyId, *v.HostKeyId)
 	}
+	if v.KmsKey != nil {
+		s.WriteString(schemas.UpdateHostKeyRequest_KmsKey, *v.KmsKey)
+	}
 	if v.ServerId != nil {
 		s.WriteString(schemas.UpdateHostKeyRequest_ServerId, *v.ServerId)
+	}
+	if v.StorageType != "" {
+		s.WriteString(schemas.UpdateHostKeyRequest_StorageType, string(v.StorageType))
 	}
 }
 

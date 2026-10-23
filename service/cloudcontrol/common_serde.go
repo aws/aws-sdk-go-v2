@@ -72,6 +72,14 @@ func deserializeHooksProgressEvent(d smithy.ShapeDeserializer, s *smithy.Schema,
 	*v = make([]types.HookProgressEvent, 0)
 	var vv types.HookProgressEvent
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.HookProgressEvent
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = types.HookProgressEvent{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -86,6 +94,13 @@ func deserializeOperations(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]ty
 	*v = make([]types.Operation, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.Operation
+			*v = append(*v, zero)
+			return nil
+		}
 
 		if err := d.ReadString(s.ListMember(), &vv); err != nil {
 			return err
@@ -100,6 +115,13 @@ func deserializeOperationStatuses(d smithy.ShapeDeserializer, s *smithy.Schema, 
 	*v = make([]types.OperationStatus, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.OperationStatus
+			*v = append(*v, zero)
+			return nil
+		}
 
 		if err := d.ReadString(s.ListMember(), &vv); err != nil {
 			return err
@@ -114,6 +136,14 @@ func deserializeResourceDescriptions(d smithy.ShapeDeserializer, s *smithy.Schem
 	*v = make([]types.ResourceDescription, 0)
 	var vv types.ResourceDescription
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.ResourceDescription
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = types.ResourceDescription{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -128,6 +158,14 @@ func deserializeResourceRequestStatusSummaries(d smithy.ShapeDeserializer, s *sm
 	*v = make([]types.ProgressEvent, 0)
 	var vv types.ProgressEvent
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.ProgressEvent
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = types.ProgressEvent{}
 		if err := vv.Deserialize(d); err != nil {
 			return err

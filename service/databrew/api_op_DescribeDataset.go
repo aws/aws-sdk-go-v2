@@ -4,7 +4,9 @@ package databrew
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/databrew/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/databrew/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -33,6 +35,18 @@ type DescribeDatasetInput struct {
 	Name *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DescribeDatasetInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeDatasetRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeDatasetInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.DescribeDatasetRequest_Name, *v.Name)
+	}
 }
 
 type DescribeDatasetOutput struct {
@@ -86,13 +100,109 @@ type DescribeDatasetOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeDatasetOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeDatasetResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeDatasetOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreateDate != nil {
+		s.WriteTime(schemas.DescribeDatasetResponse_CreateDate, *v.CreateDate)
+	}
+	if v.CreatedBy != nil {
+		s.WriteString(schemas.DescribeDatasetResponse_CreatedBy, *v.CreatedBy)
+	}
+	if v.Format != "" {
+		s.WriteString(schemas.DescribeDatasetResponse_Format, string(v.Format))
+	}
+	if v.FormatOptions != nil {
+		s.WriteStruct(schemas.DescribeDatasetResponse_FormatOptions)
+		v.FormatOptions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Input != nil {
+		s.WriteStruct(schemas.DescribeDatasetResponse_Input)
+		v.Input.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.LastModifiedBy != nil {
+		s.WriteString(schemas.DescribeDatasetResponse_LastModifiedBy, *v.LastModifiedBy)
+	}
+	if v.LastModifiedDate != nil {
+		s.WriteTime(schemas.DescribeDatasetResponse_LastModifiedDate, *v.LastModifiedDate)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.DescribeDatasetResponse_Name, *v.Name)
+	}
+	if v.PathOptions != nil {
+		s.WriteStruct(schemas.DescribeDatasetResponse_PathOptions)
+		v.PathOptions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ResourceArn != nil {
+		s.WriteString(schemas.DescribeDatasetResponse_ResourceArn, *v.ResourceArn)
+	}
+	if v.Source != "" {
+		s.WriteString(schemas.DescribeDatasetResponse_Source, string(v.Source))
+	}
+	serializeTagMap(s, schemas.DescribeDatasetResponse_Tags, v.Tags)
+}
+func (v *DescribeDatasetOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeDatasetResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeDatasetResponse_CreateDate:
+			v.CreateDate = new(time.Time)
+			return d.ReadTime(schemas.DescribeDatasetResponse_CreateDate, v.CreateDate)
+		case schemas.DescribeDatasetResponse_CreatedBy:
+			v.CreatedBy = new(string)
+			return d.ReadString(schemas.DescribeDatasetResponse_CreatedBy, v.CreatedBy)
+		case schemas.DescribeDatasetResponse_Format:
+			var ev string
+			if err := d.ReadString(schemas.DescribeDatasetResponse_Format, &ev); err != nil {
+				return err
+			}
+			v.Format = types.InputFormat(ev)
+			return nil
+		case schemas.DescribeDatasetResponse_FormatOptions:
+			v.FormatOptions = &types.FormatOptions{}
+			return v.FormatOptions.Deserialize(d)
+		case schemas.DescribeDatasetResponse_Input:
+			v.Input = &types.Input{}
+			return v.Input.Deserialize(d)
+		case schemas.DescribeDatasetResponse_LastModifiedBy:
+			v.LastModifiedBy = new(string)
+			return d.ReadString(schemas.DescribeDatasetResponse_LastModifiedBy, v.LastModifiedBy)
+		case schemas.DescribeDatasetResponse_LastModifiedDate:
+			v.LastModifiedDate = new(time.Time)
+			return d.ReadTime(schemas.DescribeDatasetResponse_LastModifiedDate, v.LastModifiedDate)
+		case schemas.DescribeDatasetResponse_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.DescribeDatasetResponse_Name, v.Name)
+		case schemas.DescribeDatasetResponse_PathOptions:
+			v.PathOptions = &types.PathOptions{}
+			return v.PathOptions.Deserialize(d)
+		case schemas.DescribeDatasetResponse_ResourceArn:
+			v.ResourceArn = new(string)
+			return d.ReadString(schemas.DescribeDatasetResponse_ResourceArn, v.ResourceArn)
+		case schemas.DescribeDatasetResponse_Source:
+			var ev string
+			if err := d.ReadString(schemas.DescribeDatasetResponse_Source, &ev); err != nil {
+				return err
+			}
+			v.Source = types.Source(ev)
+			return nil
+		case schemas.DescribeDatasetResponse_Tags:
+			return deserializeTagMap(d, schemas.DescribeDatasetResponse_Tags, &v.Tags)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeDatasetMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeDataset{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeDataset, schemas.DescribeDatasetRequest, schemas.DescribeDatasetResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeDataset{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeDataset, schemas.DescribeDatasetRequest, schemas.DescribeDatasetResponse), output: &DescribeDatasetOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

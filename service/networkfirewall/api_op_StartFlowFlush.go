@@ -4,7 +4,9 @@ package networkfirewall
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/networkfirewall/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/networkfirewall/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -45,12 +47,19 @@ type StartFlowFlushInput struct {
 	// This member is required.
 	FlowFilters []types.FlowFilter
 
-	// The ID of the Availability Zone where the firewall is located. For example,
+	// The name of the Availability Zone where the firewall is located. For example,
 	// us-east-2a .
 	//
 	// Defines the scope a flow operation. You can use up to 20 filters to configure a
 	// single flow operation.
 	AvailabilityZone *string
+
+	// The ID of the Availability Zone where the firewall is located. For example,
+	// use2-az1 . Availability Zone IDs are the same in every Amazon Web Services
+	// account, so use this parameter when you coordinate resources across accounts.
+	// Specify either AvailabilityZone or AvailabilityZoneId , not both. If you specify
+	// both, the request fails.
+	AvailabilityZoneId *string
 
 	// The reqested FlowOperation ignores flows with an age (in seconds) lower than
 	// MinimumFlowAgeInSeconds . You provide this for start commands.
@@ -63,6 +72,34 @@ type StartFlowFlushInput struct {
 	VpcEndpointId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *StartFlowFlushInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartFlowFlushRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartFlowFlushInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AvailabilityZone != nil {
+		s.WriteString(schemas.StartFlowFlushRequest_AvailabilityZone, *v.AvailabilityZone)
+	}
+	if v.AvailabilityZoneId != nil {
+		s.WriteString(schemas.StartFlowFlushRequest_AvailabilityZoneId, *v.AvailabilityZoneId)
+	}
+	if v.FirewallArn != nil {
+		s.WriteString(schemas.StartFlowFlushRequest_FirewallArn, *v.FirewallArn)
+	}
+	serializeFlowFilters(s, schemas.StartFlowFlushRequest_FlowFilters, v.FlowFilters)
+	if v.MinimumFlowAgeInSeconds != nil {
+		s.WriteInt32(schemas.StartFlowFlushRequest_MinimumFlowAgeInSeconds, *v.MinimumFlowAgeInSeconds)
+	}
+	if v.VpcEndpointAssociationArn != nil {
+		s.WriteString(schemas.StartFlowFlushRequest_VpcEndpointAssociationArn, *v.VpcEndpointAssociationArn)
+	}
+	if v.VpcEndpointId != nil {
+		s.WriteString(schemas.StartFlowFlushRequest_VpcEndpointId, *v.VpcEndpointId)
+	}
 }
 
 type StartFlowFlushOutput struct {
@@ -88,13 +125,48 @@ type StartFlowFlushOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartFlowFlushOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartFlowFlushResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartFlowFlushOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FirewallArn != nil {
+		s.WriteString(schemas.StartFlowFlushResponse_FirewallArn, *v.FirewallArn)
+	}
+	if v.FlowOperationId != nil {
+		s.WriteString(schemas.StartFlowFlushResponse_FlowOperationId, *v.FlowOperationId)
+	}
+	if v.FlowOperationStatus != "" {
+		s.WriteString(schemas.StartFlowFlushResponse_FlowOperationStatus, string(v.FlowOperationStatus))
+	}
+}
+func (v *StartFlowFlushOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartFlowFlushResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartFlowFlushResponse_FirewallArn:
+			v.FirewallArn = new(string)
+			return d.ReadString(schemas.StartFlowFlushResponse_FirewallArn, v.FirewallArn)
+		case schemas.StartFlowFlushResponse_FlowOperationId:
+			v.FlowOperationId = new(string)
+			return d.ReadString(schemas.StartFlowFlushResponse_FlowOperationId, v.FlowOperationId)
+		case schemas.StartFlowFlushResponse_FlowOperationStatus:
+			var ev string
+			if err := d.ReadString(schemas.StartFlowFlushResponse_FlowOperationStatus, &ev); err != nil {
+				return err
+			}
+			v.FlowOperationStatus = types.FlowOperationStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartFlowFlushMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpStartFlowFlush{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartFlowFlush, schemas.StartFlowFlushRequest, schemas.StartFlowFlushResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpStartFlowFlush{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartFlowFlush, schemas.StartFlowFlushRequest, schemas.StartFlowFlushResponse), output: &StartFlowFlushOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

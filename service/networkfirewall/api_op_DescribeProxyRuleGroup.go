@@ -4,7 +4,9 @@ package networkfirewall
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/networkfirewall/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/networkfirewall/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -40,6 +42,21 @@ type DescribeProxyRuleGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeProxyRuleGroupInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeProxyRuleGroupRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeProxyRuleGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ProxyRuleGroupArn != nil {
+		s.WriteString(schemas.DescribeProxyRuleGroupRequest_ProxyRuleGroupArn, *v.ProxyRuleGroupArn)
+	}
+	if v.ProxyRuleGroupName != nil {
+		s.WriteString(schemas.DescribeProxyRuleGroupRequest_ProxyRuleGroupName, *v.ProxyRuleGroupName)
+	}
+}
+
 type DescribeProxyRuleGroupOutput struct {
 
 	// The configuration for the specified proxy rule group.
@@ -63,13 +80,40 @@ type DescribeProxyRuleGroupOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeProxyRuleGroupOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeProxyRuleGroupResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeProxyRuleGroupOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ProxyRuleGroup != nil {
+		s.WriteStruct(schemas.DescribeProxyRuleGroupResponse_ProxyRuleGroup)
+		v.ProxyRuleGroup.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.UpdateToken != nil {
+		s.WriteString(schemas.DescribeProxyRuleGroupResponse_UpdateToken, *v.UpdateToken)
+	}
+}
+func (v *DescribeProxyRuleGroupOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeProxyRuleGroupResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeProxyRuleGroupResponse_ProxyRuleGroup:
+			v.ProxyRuleGroup = &types.ProxyRuleGroup{}
+			return v.ProxyRuleGroup.Deserialize(d)
+		case schemas.DescribeProxyRuleGroupResponse_UpdateToken:
+			v.UpdateToken = new(string)
+			return d.ReadString(schemas.DescribeProxyRuleGroupResponse_UpdateToken, v.UpdateToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeProxyRuleGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpDescribeProxyRuleGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeProxyRuleGroup, schemas.DescribeProxyRuleGroupRequest, schemas.DescribeProxyRuleGroupResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpDescribeProxyRuleGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeProxyRuleGroup, schemas.DescribeProxyRuleGroupRequest, schemas.DescribeProxyRuleGroupResponse), output: &DescribeProxyRuleGroupOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

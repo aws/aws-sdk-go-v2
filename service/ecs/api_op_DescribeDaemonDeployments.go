@@ -5,7 +5,9 @@ package ecs
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/ecs/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ecs/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithytime "github.com/aws/smithy-go/time"
 	smithywaiter "github.com/aws/smithy-go/waiter"
@@ -42,6 +44,16 @@ type DescribeDaemonDeploymentsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeDaemonDeploymentsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeDaemonDeploymentsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeDaemonDeploymentsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeStringList(s, schemas.DescribeDaemonDeploymentsRequest_daemonDeploymentArns, v.DaemonDeploymentArns)
+}
+
 type DescribeDaemonDeploymentsOutput struct {
 
 	// The list of daemon deployments.
@@ -56,13 +68,32 @@ type DescribeDaemonDeploymentsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeDaemonDeploymentsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeDaemonDeploymentsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeDaemonDeploymentsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDaemonDeploymentList(s, schemas.DescribeDaemonDeploymentsResponse_daemonDeployments, v.DaemonDeployments)
+	serializeFailures(s, schemas.DescribeDaemonDeploymentsResponse_failures, v.Failures)
+}
+func (v *DescribeDaemonDeploymentsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeDaemonDeploymentsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeDaemonDeploymentsResponse_daemonDeployments:
+			return deserializeDaemonDeploymentList(d, schemas.DescribeDaemonDeploymentsResponse_daemonDeployments, &v.DaemonDeployments)
+		case schemas.DescribeDaemonDeploymentsResponse_failures:
+			return deserializeFailures(d, schemas.DescribeDaemonDeploymentsResponse_failures, &v.Failures)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeDaemonDeploymentsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeDaemonDeployments{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeDaemonDeployments, schemas.DescribeDaemonDeploymentsRequest, schemas.DescribeDaemonDeploymentsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeDaemonDeployments{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeDaemonDeployments, schemas.DescribeDaemonDeploymentsRequest, schemas.DescribeDaemonDeploymentsResponse), output: &DescribeDaemonDeploymentsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

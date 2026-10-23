@@ -4,7 +4,9 @@ package applicationinsights
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/applicationinsights/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/applicationinsights/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -63,6 +65,28 @@ type CreateLogPatternInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateLogPatternInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateLogPatternRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateLogPatternInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Pattern != nil {
+		s.WriteString(schemas.CreateLogPatternRequest_Pattern, *v.Pattern)
+	}
+	if v.PatternName != nil {
+		s.WriteString(schemas.CreateLogPatternRequest_PatternName, *v.PatternName)
+	}
+	if v.PatternSetName != nil {
+		s.WriteString(schemas.CreateLogPatternRequest_PatternSetName, *v.PatternSetName)
+	}
+	s.WriteInt32(schemas.CreateLogPatternRequest_Rank, v.Rank)
+	if v.ResourceGroupName != nil {
+		s.WriteString(schemas.CreateLogPatternRequest_ResourceGroupName, *v.ResourceGroupName)
+	}
+}
+
 type CreateLogPatternOutput struct {
 
 	// The successfully created log pattern.
@@ -77,13 +101,40 @@ type CreateLogPatternOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateLogPatternOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateLogPatternResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateLogPatternOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LogPattern != nil {
+		s.WriteStruct(schemas.CreateLogPatternResponse_LogPattern)
+		v.LogPattern.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ResourceGroupName != nil {
+		s.WriteString(schemas.CreateLogPatternResponse_ResourceGroupName, *v.ResourceGroupName)
+	}
+}
+func (v *CreateLogPatternOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateLogPatternResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateLogPatternResponse_LogPattern:
+			v.LogPattern = &types.LogPattern{}
+			return v.LogPattern.Deserialize(d)
+		case schemas.CreateLogPatternResponse_ResourceGroupName:
+			v.ResourceGroupName = new(string)
+			return d.ReadString(schemas.CreateLogPatternResponse_ResourceGroupName, v.ResourceGroupName)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateLogPatternMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpCreateLogPattern{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateLogPattern, schemas.CreateLogPatternRequest, schemas.CreateLogPatternResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpCreateLogPattern{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateLogPattern, schemas.CreateLogPatternRequest, schemas.CreateLogPatternResponse), output: &CreateLogPatternOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

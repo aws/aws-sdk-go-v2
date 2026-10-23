@@ -3951,31 +3951,31 @@ var VisibilityConfig_MetricName *smithy.Schema
 var WAFAssociatedItemException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.wafv2",
 	Name:      "WAFAssociatedItemException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var WAFAssociatedItemException_Message *smithy.Schema
 
 var WAFConfigurationWarningException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.wafv2",
 	Name:      "WAFConfigurationWarningException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var WAFConfigurationWarningException_Message *smithy.Schema
 
 var WAFDuplicateItemException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.wafv2",
 	Name:      "WAFDuplicateItemException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var WAFDuplicateItemException_Message *smithy.Schema
 
 var WAFExpiredManagedRuleGroupVersionException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.wafv2",
 	Name:      "WAFExpiredManagedRuleGroupVersionException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var WAFExpiredManagedRuleGroupVersionException_Message *smithy.Schema
 
 var WAFFeatureNotIncludedInPricingPlanException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.wafv2",
 	Name:      "WAFFeatureNotIncludedInPricingPlanException",
-}, smithy.ShapeTypeStructure, 2)
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"})
 var WAFFeatureNotIncludedInPricingPlanException_Message *smithy.Schema
 
 var WAFFeatureNotIncludedInPricingPlanException_DisallowedFeatures *smithy.Schema
@@ -3983,19 +3983,19 @@ var WAFFeatureNotIncludedInPricingPlanException_DisallowedFeatures *smithy.Schem
 var WAFInternalErrorException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.wafv2",
 	Name:      "WAFInternalErrorException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"})
 var WAFInternalErrorException_Message *smithy.Schema
 
 var WAFInvalidOperationException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.wafv2",
 	Name:      "WAFInvalidOperationException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var WAFInvalidOperationException_Message *smithy.Schema
 
 var WAFInvalidParameterException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.wafv2",
 	Name:      "WAFInvalidParameterException",
-}, smithy.ShapeTypeStructure, 4)
+}, smithy.ShapeTypeStructure, 4, &smithytraits.Error{Type: "client"})
 var WAFInvalidParameterException_message *smithy.Schema
 
 var WAFInvalidParameterException_Field *smithy.Schema
@@ -4007,19 +4007,19 @@ var WAFInvalidParameterException_Reason *smithy.Schema
 var WAFInvalidPermissionPolicyException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.wafv2",
 	Name:      "WAFInvalidPermissionPolicyException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var WAFInvalidPermissionPolicyException_Message *smithy.Schema
 
 var WAFInvalidResourceException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.wafv2",
 	Name:      "WAFInvalidResourceException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var WAFInvalidResourceException_Message *smithy.Schema
 
 var WAFLimitsExceededException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.wafv2",
 	Name:      "WAFLimitsExceededException",
-}, smithy.ShapeTypeStructure, 2)
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"})
 var WAFLimitsExceededException_Message *smithy.Schema
 
 var WAFLimitsExceededException_SourceType *smithy.Schema
@@ -4027,55 +4027,55 @@ var WAFLimitsExceededException_SourceType *smithy.Schema
 var WAFLogDestinationPermissionIssueException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.wafv2",
 	Name:      "WAFLogDestinationPermissionIssueException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var WAFLogDestinationPermissionIssueException_Message *smithy.Schema
 
 var WAFNonexistentItemException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.wafv2",
 	Name:      "WAFNonexistentItemException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var WAFNonexistentItemException_Message *smithy.Schema
 
 var WAFOptimisticLockException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.wafv2",
 	Name:      "WAFOptimisticLockException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var WAFOptimisticLockException_Message *smithy.Schema
 
 var WAFServiceLinkedRoleErrorException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.wafv2",
 	Name:      "WAFServiceLinkedRoleErrorException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var WAFServiceLinkedRoleErrorException_message *smithy.Schema
 
 var WAFSubscriptionNotFoundException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.wafv2",
 	Name:      "WAFSubscriptionNotFoundException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var WAFSubscriptionNotFoundException_Message *smithy.Schema
 
 var WAFTagOperationException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.wafv2",
 	Name:      "WAFTagOperationException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var WAFTagOperationException_Message *smithy.Schema
 
 var WAFTagOperationInternalErrorException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.wafv2",
 	Name:      "WAFTagOperationInternalErrorException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"})
 var WAFTagOperationInternalErrorException_Message *smithy.Schema
 
 var WAFUnavailableEntityException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.wafv2",
 	Name:      "WAFUnavailableEntityException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var WAFUnavailableEntityException_Message *smithy.Schema
 
 var WAFUnsupportedAggregateKeyTypeException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.wafv2",
 	Name:      "WAFUnsupportedAggregateKeyTypeException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var WAFUnsupportedAggregateKeyTypeException_Message *smithy.Schema
 
 var _WalletAddress = smithy.NewSchema(smithy.ShapeID{

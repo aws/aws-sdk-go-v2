@@ -129,6 +129,61 @@ func TestCheckResponseSnapshot_AssociateDatasetKmsKey(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_CreateResourceMetricsConfiguration(t *testing.T) {
+	want := &CreateResourceMetricsConfigurationOutput{
+		ResourceMetricsConfiguration: &types.ResourceMetricsConfiguration{
+			ResourceArn: ptr.String("__ResourceArn__"),
+			CreatedAt:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			UpdatedAt:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			MetricSelections: []types.ResourceMetricSelection{
+				{
+					IncludeMetrics: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				{
+					IncludeMetrics: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("CreateResourceMetricsConfiguration.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.CreateResourceMetricsConfiguration(context.Background(), &CreateResourceMetricsConfigurationInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		MetricSelections: []types.ResourceMetricSelection{
+			{
+				IncludeMetrics: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				IncludeMetrics: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "CreateResourceMetricsConfiguration.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_DeleteAlarmMuteRule(t *testing.T) {
 	want := &DeleteAlarmMuteRuleOutput{}
 	status, header, body, err := serdeRespReadSnapshot("DeleteAlarmMuteRule.response")
@@ -366,6 +421,27 @@ func TestCheckResponseSnapshot_DeleteMetricStream(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_DeleteResourceMetricsConfiguration(t *testing.T) {
+	want := &DeleteResourceMetricsConfigurationOutput{}
+	status, header, body, err := serdeRespReadSnapshot("DeleteResourceMetricsConfiguration.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.DeleteResourceMetricsConfiguration(context.Background(), &DeleteResourceMetricsConfigurationInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "DeleteResourceMetricsConfiguration.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_DescribeAlarmContributors(t *testing.T) {
 	want := &DescribeAlarmContributorsOutput{
 		AlarmContributors: []types.AlarmContributor{
@@ -500,6 +576,19 @@ func TestCheckResponseSnapshot_DescribeAlarms(t *testing.T) {
 				ActionsSuppressor:                ptr.String("__ActionsSuppressor__"),
 				ActionsSuppressorWaitPeriod:      ptr.Int32(1),
 				ActionsSuppressorExtensionPeriod: ptr.Int32(1),
+				ActionConfiguration: &types.ActionConfiguration{
+					AlarmTagsPropagation: &types.AlarmTagsPropagation{
+						Enabled: ptr.Bool(true),
+						IncludedTagKeys: []string{
+							"__Member__",
+							"__Member__",
+						},
+						ExcludedTagKeys: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
 			},
 			{
 				ActionsEnabled: ptr.Bool(true),
@@ -530,6 +619,19 @@ func TestCheckResponseSnapshot_DescribeAlarms(t *testing.T) {
 				ActionsSuppressor:                ptr.String("__ActionsSuppressor__"),
 				ActionsSuppressorWaitPeriod:      ptr.Int32(1),
 				ActionsSuppressorExtensionPeriod: ptr.Int32(1),
+				ActionConfiguration: &types.ActionConfiguration{
+					AlarmTagsPropagation: &types.AlarmTagsPropagation{
+						Enabled: ptr.Bool(true),
+						IncludedTagKeys: []string{
+							"__Member__",
+							"__Member__",
+						},
+						ExcludedTagKeys: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
 			},
 		},
 		MetricAlarms: []types.MetricAlarm{
@@ -653,6 +755,19 @@ func TestCheckResponseSnapshot_DescribeAlarms(t *testing.T) {
 					},
 				},
 				EvaluationInterval: ptr.Int32(1),
+				ActionConfiguration: &types.ActionConfiguration{
+					AlarmTagsPropagation: &types.AlarmTagsPropagation{
+						Enabled: ptr.Bool(true),
+						IncludedTagKeys: []string{
+							"__Member__",
+							"__Member__",
+						},
+						ExcludedTagKeys: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
 			},
 			{
 				AlarmName:                          ptr.String("__AlarmName__"),
@@ -774,6 +889,19 @@ func TestCheckResponseSnapshot_DescribeAlarms(t *testing.T) {
 					},
 				},
 				EvaluationInterval: ptr.Int32(1),
+				ActionConfiguration: &types.ActionConfiguration{
+					AlarmTagsPropagation: &types.AlarmTagsPropagation{
+						Enabled: ptr.Bool(true),
+						IncludedTagKeys: []string{
+							"__Member__",
+							"__Member__",
+						},
+						ExcludedTagKeys: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
 			},
 		},
 		LogAlarms: []types.LogAlarm{
@@ -837,6 +965,19 @@ func TestCheckResponseSnapshot_DescribeAlarms(t *testing.T) {
 					WarmUpPeriodDurationInMinutes:            ptr.Int32(1),
 					OnlyStartEvaluatingAfterWarmUpPeriodEnds: ptr.Bool(true),
 				},
+				ActionConfiguration: &types.ActionConfiguration{
+					AlarmTagsPropagation: &types.AlarmTagsPropagation{
+						Enabled: ptr.Bool(true),
+						IncludedTagKeys: []string{
+							"__Member__",
+							"__Member__",
+						},
+						ExcludedTagKeys: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
 			},
 			{
 				AlarmName:                          ptr.String("__AlarmName__"),
@@ -897,6 +1038,19 @@ func TestCheckResponseSnapshot_DescribeAlarms(t *testing.T) {
 				WarmUpConfiguration: &types.WarmUpConfiguration{
 					WarmUpPeriodDurationInMinutes:            ptr.Int32(1),
 					OnlyStartEvaluatingAfterWarmUpPeriodEnds: ptr.Bool(true),
+				},
+				ActionConfiguration: &types.ActionConfiguration{
+					AlarmTagsPropagation: &types.AlarmTagsPropagation{
+						Enabled: ptr.Bool(true),
+						IncludedTagKeys: []string{
+							"__Member__",
+							"__Member__",
+						},
+						ExcludedTagKeys: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
 				},
 			},
 		},
@@ -1058,6 +1212,19 @@ func TestCheckResponseSnapshot_DescribeAlarmsForMetric(t *testing.T) {
 					},
 				},
 				EvaluationInterval: ptr.Int32(1),
+				ActionConfiguration: &types.ActionConfiguration{
+					AlarmTagsPropagation: &types.AlarmTagsPropagation{
+						Enabled: ptr.Bool(true),
+						IncludedTagKeys: []string{
+							"__Member__",
+							"__Member__",
+						},
+						ExcludedTagKeys: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
 			},
 			{
 				AlarmName:                          ptr.String("__AlarmName__"),
@@ -1179,6 +1346,19 @@ func TestCheckResponseSnapshot_DescribeAlarmsForMetric(t *testing.T) {
 					},
 				},
 				EvaluationInterval: ptr.Int32(1),
+				ActionConfiguration: &types.ActionConfiguration{
+					AlarmTagsPropagation: &types.AlarmTagsPropagation{
+						Enabled: ptr.Bool(true),
+						IncludedTagKeys: []string{
+							"__Member__",
+							"__Member__",
+						},
+						ExcludedTagKeys: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
 			},
 		},
 	}
@@ -1245,7 +1425,9 @@ func TestCheckResponseSnapshot_DescribeAnomalyDetectors(t *testing.T) {
 							EndTime:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 						},
 					},
-					MetricTimezone: ptr.String("__MetricTimezone__"),
+					MetricTimezone:           ptr.String("__MetricTimezone__"),
+					AdaptationSpeed:          types.AnomalyDetectorAdaptationSpeed("FAST"),
+					OutlierFilteringStrength: types.AnomalyDetectorOutlierFilteringStrength("MINIMAL"),
 				},
 				StateValue: types.AnomalyDetectorStateValue("PENDING_TRAINING"),
 				MetricCharacteristics: &types.MetricCharacteristics{
@@ -1352,7 +1534,9 @@ func TestCheckResponseSnapshot_DescribeAnomalyDetectors(t *testing.T) {
 							EndTime:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 						},
 					},
-					MetricTimezone: ptr.String("__MetricTimezone__"),
+					MetricTimezone:           ptr.String("__MetricTimezone__"),
+					AdaptationSpeed:          types.AnomalyDetectorAdaptationSpeed("FAST"),
+					OutlierFilteringStrength: types.AnomalyDetectorOutlierFilteringStrength("MINIMAL"),
 				},
 				StateValue: types.AnomalyDetectorStateValue("PENDING_TRAINING"),
 				MetricCharacteristics: &types.MetricCharacteristics{
@@ -2194,6 +2378,40 @@ func TestCheckResponseSnapshot_GetMetricWidgetImage(t *testing.T) {
 func TestCheckResponseSnapshot_GetOTelEnrichment(t *testing.T) {
 	want := &GetOTelEnrichmentOutput{
 		Status: types.OTelEnrichmentStatus("Running"),
+		IncludeFilters: []types.OTelEnrichmentMetricSelector{
+			{
+				Namespace: ptr.String("__Namespace__"),
+				MetricNames: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Namespace: ptr.String("__Namespace__"),
+				MetricNames: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		ExcludeFilters: []types.OTelEnrichmentMetricSelector{
+			{
+				Namespace: ptr.String("__Namespace__"),
+				MetricNames: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Namespace: ptr.String("__Namespace__"),
+				MetricNames: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		CreatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		UpdatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 	}
 	status, header, body, err := serdeRespReadSnapshot("GetOTelEnrichment.response")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -2209,6 +2427,47 @@ func TestCheckResponseSnapshot_GetOTelEnrichment(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "GetOTelEnrichment.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_GetResourceMetricsConfiguration(t *testing.T) {
+	want := &GetResourceMetricsConfigurationOutput{
+		ResourceMetricsConfiguration: &types.ResourceMetricsConfiguration{
+			ResourceArn: ptr.String("__ResourceArn__"),
+			CreatedAt:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			UpdatedAt:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			MetricSelections: []types.ResourceMetricSelection{
+				{
+					IncludeMetrics: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				{
+					IncludeMetrics: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("GetResourceMetricsConfiguration.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.GetResourceMetricsConfiguration(context.Background(), &GetResourceMetricsConfigurationInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "GetResourceMetricsConfiguration.response", err)
 	}
 }
 
@@ -2570,7 +2829,9 @@ func TestCheckResponseSnapshot_PutAnomalyDetector(t *testing.T) {
 					EndTime:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 				},
 			},
-			MetricTimezone: ptr.String("__MetricTimezone__"),
+			MetricTimezone:           ptr.String("__MetricTimezone__"),
+			AdaptationSpeed:          types.AnomalyDetectorAdaptationSpeed("FAST"),
+			OutlierFilteringStrength: types.AnomalyDetectorOutlierFilteringStrength("MINIMAL"),
 		},
 		MetricCharacteristics: &types.MetricCharacteristics{
 			PeriodicSpikes: ptr.Bool(true),
@@ -2698,6 +2959,19 @@ func TestCheckResponseSnapshot_PutCompositeAlarm(t *testing.T) {
 		ActionsSuppressor:                ptr.String("__ActionsSuppressor__"),
 		ActionsSuppressorWaitPeriod:      ptr.Int32(1),
 		ActionsSuppressorExtensionPeriod: ptr.Int32(1),
+		ActionConfiguration: &types.ActionConfiguration{
+			AlarmTagsPropagation: &types.AlarmTagsPropagation{
+				Enabled: ptr.Bool(true),
+				IncludedTagKeys: []string{
+					"__Member__",
+					"__Member__",
+				},
+				ExcludedTagKeys: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -2855,6 +3129,19 @@ func TestCheckResponseSnapshot_PutLogAlarm(t *testing.T) {
 		WarmUpConfiguration: &types.WarmUpConfiguration{
 			WarmUpPeriodDurationInMinutes:            ptr.Int32(1),
 			OnlyStartEvaluatingAfterWarmUpPeriodEnds: ptr.Bool(true),
+		},
+		ActionConfiguration: &types.ActionConfiguration{
+			AlarmTagsPropagation: &types.AlarmTagsPropagation{
+				Enabled: ptr.Bool(true),
+				IncludedTagKeys: []string{
+					"__Member__",
+					"__Member__",
+				},
+				ExcludedTagKeys: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
 		},
 	})
 	if err != nil {
@@ -3062,6 +3349,19 @@ func TestCheckResponseSnapshot_PutMetricAlarm(t *testing.T) {
 			},
 		},
 		EvaluationInterval: ptr.Int32(1),
+		ActionConfiguration: &types.ActionConfiguration{
+			AlarmTagsPropagation: &types.AlarmTagsPropagation{
+				Enabled: ptr.Bool(true),
+				IncludedTagKeys: []string{
+					"__Member__",
+					"__Member__",
+				},
+				ExcludedTagKeys: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -3459,7 +3759,42 @@ func TestCheckResponseSnapshot_StartMetricStreams(t *testing.T) {
 }
 
 func TestCheckResponseSnapshot_StartOTelEnrichment(t *testing.T) {
-	want := &StartOTelEnrichmentOutput{}
+	want := &StartOTelEnrichmentOutput{
+		IncludeFilters: []types.OTelEnrichmentMetricSelector{
+			{
+				Namespace: ptr.String("__Namespace__"),
+				MetricNames: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Namespace: ptr.String("__Namespace__"),
+				MetricNames: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		ExcludeFilters: []types.OTelEnrichmentMetricSelector{
+			{
+				Namespace: ptr.String("__Namespace__"),
+				MetricNames: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Namespace: ptr.String("__Namespace__"),
+				MetricNames: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		CreatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		UpdatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+	}
 	status, header, body, err := serdeRespReadSnapshot("StartOTelEnrichment.response")
 	if errors.Is(err, fs.ErrNotExist) {
 		t.Skip("no response snapshot fixture")
@@ -3468,7 +3803,40 @@ func TestCheckResponseSnapshot_StartOTelEnrichment(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartOTelEnrichment(context.Background(), &StartOTelEnrichmentInput{})
+	got, err := svc.StartOTelEnrichment(context.Background(), &StartOTelEnrichmentInput{
+		IncludeFilters: []types.OTelEnrichmentMetricSelector{
+			{
+				Namespace: ptr.String("__Namespace__"),
+				MetricNames: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Namespace: ptr.String("__Namespace__"),
+				MetricNames: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		ExcludeFilters: []types.OTelEnrichmentMetricSelector{
+			{
+				Namespace: ptr.String("__Namespace__"),
+				MetricNames: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Namespace: ptr.String("__Namespace__"),
+				MetricNames: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3573,6 +3941,148 @@ func TestCheckResponseSnapshot_UntagResource(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "UntagResource.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_UpdateOTelEnrichment(t *testing.T) {
+	want := &UpdateOTelEnrichmentOutput{
+		IncludeFilters: []types.OTelEnrichmentMetricSelector{
+			{
+				Namespace: ptr.String("__Namespace__"),
+				MetricNames: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Namespace: ptr.String("__Namespace__"),
+				MetricNames: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		ExcludeFilters: []types.OTelEnrichmentMetricSelector{
+			{
+				Namespace: ptr.String("__Namespace__"),
+				MetricNames: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Namespace: ptr.String("__Namespace__"),
+				MetricNames: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		CreatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		UpdatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+	}
+	status, header, body, err := serdeRespReadSnapshot("UpdateOTelEnrichment.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.UpdateOTelEnrichment(context.Background(), &UpdateOTelEnrichmentInput{
+		IncludeFilters: []types.OTelEnrichmentMetricSelector{
+			{
+				Namespace: ptr.String("__Namespace__"),
+				MetricNames: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Namespace: ptr.String("__Namespace__"),
+				MetricNames: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		ExcludeFilters: []types.OTelEnrichmentMetricSelector{
+			{
+				Namespace: ptr.String("__Namespace__"),
+				MetricNames: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Namespace: ptr.String("__Namespace__"),
+				MetricNames: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "UpdateOTelEnrichment.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_UpdateResourceMetricsConfiguration(t *testing.T) {
+	want := &UpdateResourceMetricsConfigurationOutput{
+		ResourceMetricsConfiguration: &types.ResourceMetricsConfiguration{
+			ResourceArn: ptr.String("__ResourceArn__"),
+			CreatedAt:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			UpdatedAt:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			MetricSelections: []types.ResourceMetricSelection{
+				{
+					IncludeMetrics: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				{
+					IncludeMetrics: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("UpdateResourceMetricsConfiguration.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.UpdateResourceMetricsConfiguration(context.Background(), &UpdateResourceMetricsConfigurationInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		MetricSelections: []types.ResourceMetricSelection{
+			{
+				IncludeMetrics: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				IncludeMetrics: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "UpdateResourceMetricsConfiguration.response", err)
 	}
 }
 
@@ -4554,5 +5064,63 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("error response snapshot mismatch for %s: %v", "ResourceNotFoundException.error", err)
+	}
+}
+
+func TestCheckResponseSnapshot_Error_ValidationException(t *testing.T) {
+	want := &types.ValidationException{
+		Message: ptr.String("__Message__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("ValidationException.error")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	_, opErr := svc.StartOTelEnrichment(context.Background(), &StartOTelEnrichmentInput{
+		IncludeFilters: []types.OTelEnrichmentMetricSelector{
+			{
+				Namespace: ptr.String("__Namespace__"),
+				MetricNames: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Namespace: ptr.String("__Namespace__"),
+				MetricNames: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		ExcludeFilters: []types.OTelEnrichmentMetricSelector{
+			{
+				Namespace: ptr.String("__Namespace__"),
+				MetricNames: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Namespace: ptr.String("__Namespace__"),
+				MetricNames: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+	})
+	if opErr == nil {
+		t.Fatal("expected error, got nil")
+	}
+	var got *types.ValidationException
+	if !errors.As(opErr, &got) {
+		t.Fatalf("expected types.ValidationException, got %v", opErr)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("error response snapshot mismatch for %s: %v", "ValidationException.error", err)
 	}
 }

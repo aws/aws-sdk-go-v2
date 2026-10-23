@@ -4,7 +4,9 @@ package ecs
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/ecs/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ecs/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -93,6 +95,36 @@ type RegisterContainerInstanceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RegisterContainerInstanceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RegisterContainerInstanceRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RegisterContainerInstanceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAttributes(s, schemas.RegisterContainerInstanceRequest_attributes, v.Attributes)
+	if v.Cluster != nil {
+		s.WriteString(schemas.RegisterContainerInstanceRequest_cluster, *v.Cluster)
+	}
+	if v.ContainerInstanceArn != nil {
+		s.WriteString(schemas.RegisterContainerInstanceRequest_containerInstanceArn, *v.ContainerInstanceArn)
+	}
+	if v.InstanceIdentityDocument != nil {
+		s.WriteString(schemas.RegisterContainerInstanceRequest_instanceIdentityDocument, *v.InstanceIdentityDocument)
+	}
+	if v.InstanceIdentityDocumentSignature != nil {
+		s.WriteString(schemas.RegisterContainerInstanceRequest_instanceIdentityDocumentSignature, *v.InstanceIdentityDocumentSignature)
+	}
+	serializePlatformDevices(s, schemas.RegisterContainerInstanceRequest_platformDevices, v.PlatformDevices)
+	serializeTags(s, schemas.RegisterContainerInstanceRequest_tags, v.Tags)
+	serializeResources(s, schemas.RegisterContainerInstanceRequest_totalResources, v.TotalResources)
+	if v.VersionInfo != nil {
+		s.WriteStruct(schemas.RegisterContainerInstanceRequest_versionInfo)
+		v.VersionInfo.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type RegisterContainerInstanceOutput struct {
 
 	// The container instance that was registered.
@@ -104,13 +136,34 @@ type RegisterContainerInstanceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RegisterContainerInstanceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RegisterContainerInstanceResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RegisterContainerInstanceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ContainerInstance != nil {
+		s.WriteStruct(schemas.RegisterContainerInstanceResponse_containerInstance)
+		v.ContainerInstance.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *RegisterContainerInstanceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RegisterContainerInstanceResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RegisterContainerInstanceResponse_containerInstance:
+			v.ContainerInstance = &types.ContainerInstance{}
+			return v.ContainerInstance.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationRegisterContainerInstanceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpRegisterContainerInstance{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RegisterContainerInstance, schemas.RegisterContainerInstanceRequest, schemas.RegisterContainerInstanceResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpRegisterContainerInstance{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RegisterContainerInstance, schemas.RegisterContainerInstanceRequest, schemas.RegisterContainerInstanceResponse), output: &RegisterContainerInstanceOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

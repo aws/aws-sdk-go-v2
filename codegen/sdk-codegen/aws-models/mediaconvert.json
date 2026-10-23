@@ -1272,7 +1272,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "An aspect ratio expressed as a fraction with numerator and denominator values, reduced to lowest terms. Used for the sample (pixel) aspect ratio and the display aspect ratio of a video track. For example, a 720x576 anamorphic track has a sample aspect ratio of 64 / 45 and a display aspect ratio of 16 / 9."
+                "smithy.api#documentation": "An aspect ratio expressed as a fraction with numerator and denominator values, reduced to lowest terms. Used for the sample (pixel) aspect ratio and the display aspect ratio of a video track. For example, a 720x576 anamorphic track has a sample aspect ratio of 64 / 45 and a display aspect ratio of 16 / 9. A video track can declare an aspect ratio in two independent places, and MediaConvert reports each one where it was found rather than choosing between them. The ratio declared by the container appears on the video track itself, and the ratio declared by the video essence appears under codecMetadata. When a file declares an aspect ratio in only one of the two places, the other is null; when it declares both and they disagree, you can compare them and decide which to use."
             }
         },
         "com.amazonaws.mediaconvert#AssociateCertificate": {
@@ -2062,7 +2062,7 @@
                 "BitDepth": {
                     "target": "com.amazonaws.mediaconvert#__integer",
                     "traits": {
-                        "smithy.api#documentation": "The bit depth of the audio track.",
+                        "smithy.api#documentation": "The bit depth of the audio track. This value is exact for PCM and FLAC audio. For lossy codecs, such as AAC, AC-3, and E-AC-3, it is a nominal value and should be treated as approximate.",
                         "smithy.api#jsonName": "bitDepth"
                     }
                 },
@@ -2076,7 +2076,7 @@
                 "ChannelLayout": {
                     "target": "com.amazonaws.mediaconvert#__string",
                     "traits": {
-                        "smithy.api#documentation": "The audio channel layout of the track, such as \"mono\", \"stereo\", \"5.1\", or \"7.1\". Object-based or immersive audio is reported as \"5.1.4\" or \"7.1.4\".",
+                        "smithy.api#documentation": "The audio channel layout of the track, such as \"mono\", \"stereo\", \"5.1\", or \"7.1\". Object-based or immersive audio is reported as \"5.1.4\" or \"7.1.4\". The layout is exact for AC-3 and E-AC-3 audio. For other codecs, it is inferred from the channel count and should be treated as approximate.",
                         "smithy.api#jsonName": "channelLayout"
                     }
                 },
@@ -2200,6 +2200,13 @@
                         "smithy.api#jsonName": "selectorType"
                     }
                 },
+                "Smpte337Passthrough": {
+                    "target": "com.amazonaws.mediaconvert#AudioSmpte337Passthrough",
+                    "traits": {
+                        "smithy.api#documentation": "Specify whether to pass SMPTE 337M-wrapped audio (such as Dolby E) through without unwrapping. Choose Enabled to pass the SMPTE 337M container through unchanged, treating the track as raw PCM. Choose Disabled (default) to automatically detect and unwrap SMPTE 337M data, extracting the underlying Dolby E programs as separate audio tracks for encoding. When this field is absent, the service defaults to Disabled (auto-unwrap).",
+                        "smithy.api#jsonName": "smpte337Passthrough"
+                    }
+                },
                 "Streams": {
                     "target": "com.amazonaws.mediaconvert#__listOf__integerMin1Max2147483647",
                     "traits": {
@@ -2276,6 +2283,26 @@
             },
             "traits": {
                 "smithy.api#documentation": "Specify how MediaConvert selects audio content within your input. The default is Track. PID: Select audio by specifying the Packet Identifier (PID) values for MPEG Transport Stream inputs. Use this when you know the exact PID values of your audio streams. Track: Default. Select audio by track number. This is the most common option and works with most input container formats. If more types of audio data get recognized in the future, these numberings may shift, but the numberings used for Stream mode will not. Language code: Select audio by language using an ISO 639-2 or ISO 639-3 three-letter code in all capital letters. Use this when your source has embedded language metadata and you want to select tracks based on their language. HLS rendition group: Select audio from an HLS rendition group. Use this when your input is an HLS package with multiple audio renditions and you want to select specific rendition groups. All PCM: Select all uncompressed PCM audio tracks from your input automatically. This is useful when you want to include all PCM audio tracks without specifying individual track numbers. Stream: Select audio by stream number. Stream numbers include all tracks in the source file, regardless of type, and correspond to either the order of tracks in the file, or if applicable, the stream number metadata of the track. Although all tracks count toward these stream numbers, in this audio selector context, only the stream number of a track containing audio data may be used. If your source file contains a track which is not recognized by the service, then the corresponding stream number will still be reserved for future use. If more types of audio data get recognized in the future, these numberings will not shift."
+            }
+        },
+        "com.amazonaws.mediaconvert#AudioSmpte337Passthrough": {
+            "type": "enum",
+            "members": {
+                "ENABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ENABLED"
+                    }
+                },
+                "DISABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DISABLED"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Specify whether to pass SMPTE 337M-wrapped audio (such as Dolby E) through without unwrapping. Choose Enabled to pass the SMPTE 337M container through unchanged, treating the track as raw PCM. Choose Disabled (default) to automatically detect and unwrap SMPTE 337M data, extracting the underlying Dolby E programs as separate audio tracks for encoding. When this field is absent, the service defaults to Disabled (auto-unwrap)."
             }
         },
         "com.amazonaws.mediaconvert#AudioTypeControl": {
@@ -2560,6 +2587,12 @@
         "com.amazonaws.mediaconvert#Av1RateControlMode": {
             "type": "enum",
             "members": {
+                "CBR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CBR"
+                    }
+                },
                 "QVBR": {
                     "target": "smithy.api#Unit",
                     "traits": {
@@ -2568,7 +2601,33 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "'With AV1 outputs, for rate control mode, MediaConvert supports only quality-defined variable bitrate (QVBR). You can''t use CBR or VBR.'"
+                "smithy.api#documentation": "'With AV1 outputs, for rate control mode, MediaConvert supports quality-defined variable bitrate (QVBR) and constant bitrate (CBR). You can''t use VBR.'"
+            }
+        },
+        "com.amazonaws.mediaconvert#Av1SceneChangeDetect": {
+            "type": "enum",
+            "members": {
+                "DISABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DISABLED"
+                    }
+                },
+                "ENABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ENABLED"
+                    }
+                },
+                "TRANSITION_DETECTION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TRANSITION_DETECTION"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Optional. Use this setting to have the service insert I-frames at scene changes that it automatically detects. For AV1, scene change detection is disabled by default. Choose Enabled to insert I-frames at detected scene changes, which can improve video quality. If this output uses QVBR, you can instead choose Transition detection for further video quality improvement. For more information about QVBR, see https://docs.aws.amazon.com/console/mediaconvert/cbr-vbr-qvbr."
             }
         },
         "com.amazonaws.mediaconvert#Av1Settings": {
@@ -2586,6 +2645,13 @@
                     "traits": {
                         "smithy.api#documentation": "Specify the Bit depth. You can choose 8-bit or 10-bit.",
                         "smithy.api#jsonName": "bitDepth"
+                    }
+                },
+                "Bitrate": {
+                    "target": "com.amazonaws.mediaconvert#__integerMin1000Max1152000000",
+                    "traits": {
+                        "smithy.api#documentation": "Specify the average bitrate in bits per second. Required when Rate control mode is CBR.",
+                        "smithy.api#jsonName": "bitrate"
                     }
                 },
                 "FilmGrainSynthesis": {
@@ -2654,15 +2720,22 @@
                 "QvbrSettings": {
                     "target": "com.amazonaws.mediaconvert#Av1QvbrSettings",
                     "traits": {
-                        "smithy.api#documentation": "Settings for quality-defined variable bitrate encoding with the H.265 codec. Use these settings only when you set QVBR for Rate control mode.",
+                        "smithy.api#documentation": "Settings for quality-defined variable bitrate encoding with the AV1 codec. Use these settings only when you set QVBR for Rate control mode.",
                         "smithy.api#jsonName": "qvbrSettings"
                     }
                 },
                 "RateControlMode": {
                     "target": "com.amazonaws.mediaconvert#Av1RateControlMode",
                     "traits": {
-                        "smithy.api#documentation": "'With AV1 outputs, for rate control mode, MediaConvert supports only quality-defined variable bitrate (QVBR). You can''t use CBR or VBR.'",
+                        "smithy.api#documentation": "'With AV1 outputs, for rate control mode, MediaConvert supports quality-defined variable bitrate (QVBR) and constant bitrate (CBR). You can''t use VBR.'",
                         "smithy.api#jsonName": "rateControlMode"
+                    }
+                },
+                "SceneChangeDetect": {
+                    "target": "com.amazonaws.mediaconvert#Av1SceneChangeDetect",
+                    "traits": {
+                        "smithy.api#documentation": "Optional. Use this setting to have the service insert I-frames at scene changes that it automatically detects. For AV1, scene change detection is disabled by default. Choose Enabled to insert I-frames at detected scene changes, which can improve video quality. If this output uses QVBR, you can instead choose Transition detection for further video quality improvement. For more information about QVBR, see https://docs.aws.amazon.com/console/mediaconvert/cbr-vbr-qvbr.",
+                        "smithy.api#jsonName": "sceneChangeDetect"
                     }
                 },
                 "Slices": {
@@ -2670,6 +2743,20 @@
                     "traits": {
                         "smithy.api#documentation": "Specify the number of slices per picture. This value must be 1, 2, 4, 8, 16, or 32. For progressive pictures, this value must be less than or equal to the number of macroblock rows. For interlaced pictures, this value must be less than or equal to half the number of macroblock rows.",
                         "smithy.api#jsonName": "slices"
+                    }
+                },
+                "SlidingWindowMs": {
+                    "target": "com.amazonaws.mediaconvert#__integerMin1000Max3000",
+                    "traits": {
+                        "smithy.api#documentation": "Optional. Specify the duration, in milliseconds, of the sliding window over which MediaConvert enforces your Peak bitrate. When you specify a Peak bitrate but omit this value, MediaConvert uses a default sliding window of 1000.",
+                        "smithy.api#jsonName": "slidingWindowMs"
+                    }
+                },
+                "SlidingWindowPeakBitrate": {
+                    "target": "com.amazonaws.mediaconvert#__integerMin1000Max1152000000",
+                    "traits": {
+                        "smithy.api#documentation": "Optional. Specify an instantaneous peak bitrate ceiling, in bits/second, that MediaConvert enforces over the sliding window set by Peak bitrate window. For example, enter fifty megabits per second as 50000000. Applies in the QVBR rate control mode. When you specify a value below Max bitrate, MediaConvert raises it to Max bitrate.",
+                        "smithy.api#jsonName": "slidingWindowPeakBitrate"
                     }
                 },
                 "SpatialAdaptiveQuantization": {
@@ -4471,6 +4558,13 @@
                         "smithy.api#jsonName": "codecSpecification"
                     }
                 },
+                "DashAdaptationSetGrouping": {
+                    "target": "com.amazonaws.mediaconvert#__listOfDashAdaptationSetGrouping",
+                    "traits": {
+                        "smithy.api#documentation": "Specify additional criteria for partitioning video outputs into separate AdaptationSets. These criteria are applied on top of the grouping produced by DashManifestStyle.",
+                        "smithy.api#jsonName": "dashAdaptationSetGrouping"
+                    }
+                },
                 "DashIFrameTrickPlayNameModifier": {
                     "target": "com.amazonaws.mediaconvert#__stringMin1Max256",
                     "traits": {
@@ -5745,6 +5839,20 @@
                         "smithy.api#jsonName": "contentLightLevel"
                     }
                 },
+                "DisplayAspectRatio": {
+                    "target": "com.amazonaws.mediaconvert#AspectRatio",
+                    "traits": {
+                        "smithy.api#documentation": "An aspect ratio expressed as a fraction with numerator and denominator values, reduced to lowest terms. Used for the sample (pixel) aspect ratio and the display aspect ratio of a video track. For example, a 720x576 anamorphic track has a sample aspect ratio of 64 / 45 and a display aspect ratio of 16 / 9. A video track can declare an aspect ratio in two independent places, and MediaConvert reports each one where it was found rather than choosing between them. The ratio declared by the container appears on the video track itself, and the ratio declared by the video essence appears under codecMetadata. When a file declares an aspect ratio in only one of the two places, the other is null; when it declares both and they disagree, you can compare them and decide which to use.",
+                        "smithy.api#jsonName": "displayAspectRatio"
+                    }
+                },
+                "DolbyVision": {
+                    "target": "com.amazonaws.mediaconvert#DolbyVisionMetadata",
+                    "traits": {
+                        "smithy.api#documentation": "Dolby Vision characteristics of the video track: the profile and level, and whether the RPU (dynamic metadata), base layer, and enhancement layer are present. Use this to distinguish Dolby Vision content from standard HEVC and to choose your encoding or passthrough settings. Omitted when the content is not Dolby Vision.",
+                        "smithy.api#jsonName": "dolbyVision"
+                    }
+                },
                 "FieldOrder": {
                     "target": "com.amazonaws.mediaconvert#__string",
                     "traits": {
@@ -5794,6 +5902,13 @@
                         "smithy.api#jsonName": "rotation"
                     }
                 },
+                "SampleAspectRatio": {
+                    "target": "com.amazonaws.mediaconvert#AspectRatio",
+                    "traits": {
+                        "smithy.api#documentation": "An aspect ratio expressed as a fraction with numerator and denominator values, reduced to lowest terms. Used for the sample (pixel) aspect ratio and the display aspect ratio of a video track. For example, a 720x576 anamorphic track has a sample aspect ratio of 64 / 45 and a display aspect ratio of 16 / 9. A video track can declare an aspect ratio in two independent places, and MediaConvert reports each one where it was found rather than choosing between them. The ratio declared by the container appears on the video track itself, and the ratio declared by the video essence appears under codecMetadata. When a file declares an aspect ratio in only one of the two places, the other is null; when it declares both and they disagree, you can compare them and decide which to use.",
+                        "smithy.api#jsonName": "sampleAspectRatio"
+                    }
+                },
                 "ScanType": {
                     "target": "com.amazonaws.mediaconvert#__string",
                     "traits": {
@@ -5817,7 +5932,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "Codec-specific parameters parsed from the video essence headers. This information provides detailed technical specifications about how the video was encoded, including profile settings, resolution details, and color space information that can help you understand the source video characteristics and make informed encoding decisions."
+                "smithy.api#documentation": "Codec-specific parameters parsed from the video essence headers. This information provides detailed technical specifications about how the video was encoded, including profile settings, resolution details, and color space information that can help you understand the source video characteristics and make informed encoding decisions. These fields are returned for H.264 (AVC), H.265 (HEVC), and MPEG-2 video, and might not be returned for other codecs. For MPEG-TS and MPEG-PS inputs, color information (color primaries, transfer characteristics, and matrix coefficients) appears in these fields rather than in the top-level videoProperties."
             }
         },
         "com.amazonaws.mediaconvert#ColorConversion3DLUTSetting": {
@@ -6254,7 +6369,7 @@
                 "Format": {
                     "target": "com.amazonaws.mediaconvert#Format",
                     "traits": {
-                        "smithy.api#documentation": "The format of your media file. For example: MP4, QuickTime (MOV), Matroska (MKV), WebM, MXF, Wave, AVI, MPEG-TS, MPEG-PS, MP3, FLAC, ASF (Windows Media / WMA), OGG. Note that this will be blank if your media file has a format that the MediaConvert Probe operation does not recognize.",
+                        "smithy.api#documentation": "The format of your media file. For example: MP4, QuickTime (MOV), Matroska (MKV), WebM, MXF, Wave, AVI, MPEG-TS, MPEG-PS, MP3, FLAC, ASF (Windows Media / WMA), OGG, 3GP, 3G2, AAC (raw ADTS), AC-3, or Enhanced AC-3 (E-AC-3). Note that this will be blank if your media file has a format that the MediaConvert Probe operation does not recognize.",
                         "smithy.api#jsonName": "format"
                     }
                 },
@@ -7081,6 +7196,20 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.mediaconvert#DashAdaptationSetGrouping": {
+            "type": "enum",
+            "members": {
+                "CODEC": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CODEC"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Specify additional criteria for partitioning video outputs into separate AdaptationSets. These criteria are applied on top of the grouping produced by DashManifestStyle."
+            }
+        },
         "com.amazonaws.mediaconvert#DashAdditionalManifest": {
             "type": "structure",
             "members": {
@@ -7167,6 +7296,13 @@
                     "traits": {
                         "smithy.api#documentation": "A partial URI prefix that will be put in the manifest (.mpd) file at the top level BaseURL element. Can be used if streams are delivered from a different URL than the manifest file.",
                         "smithy.api#jsonName": "baseUrl"
+                    }
+                },
+                "DashAdaptationSetGrouping": {
+                    "target": "com.amazonaws.mediaconvert#__listOfDashAdaptationSetGrouping",
+                    "traits": {
+                        "smithy.api#documentation": "Specify additional criteria for partitioning video outputs into separate AdaptationSets. These criteria are applied on top of the grouping produced by DashManifestStyle.",
+                        "smithy.api#jsonName": "dashAdaptationSetGrouping"
                     }
                 },
                 "DashIFrameTrickPlayNameModifier": {
@@ -8435,6 +8571,69 @@
             },
             "traits": {
                 "smithy.api#documentation": "Required when you set Dolby Vision Profile to Profile 8.1. When you set Content mapping to None, content mapping is not applied to the HDR10-compatible signal. Depending on the source peak nit level, clipping might occur on HDR devices without Dolby Vision. When you set Content mapping to HDR10 1000, the transcoder creates a 1,000 nits peak HDR10-compatible signal by applying static content mapping to the source. This mode is speed-optimized for PQ10 sources with metadata that is created from analysis. For graded Dolby Vision content, be aware that creative intent might not be guaranteed with extreme 1,000 nits trims."
+            }
+        },
+        "com.amazonaws.mediaconvert#DolbyVisionMetadata": {
+            "type": "structure",
+            "members": {
+                "BaseLayer": {
+                    "target": "com.amazonaws.mediaconvert#DolbyVisionPresence",
+                    "traits": {
+                        "smithy.api#documentation": "Whether a Dolby Vision component is present in the track.",
+                        "smithy.api#jsonName": "baseLayer"
+                    }
+                },
+                "EnhancementLayer": {
+                    "target": "com.amazonaws.mediaconvert#DolbyVisionPresence",
+                    "traits": {
+                        "smithy.api#documentation": "Whether a Dolby Vision component is present in the track.",
+                        "smithy.api#jsonName": "enhancementLayer"
+                    }
+                },
+                "Level": {
+                    "target": "com.amazonaws.mediaconvert#__integer",
+                    "traits": {
+                        "smithy.api#documentation": "The Dolby Vision level, which indicates the maximum resolution and frame rate.",
+                        "smithy.api#jsonName": "level"
+                    }
+                },
+                "Profile": {
+                    "target": "com.amazonaws.mediaconvert#__integer",
+                    "traits": {
+                        "smithy.api#documentation": "The Dolby Vision profile, for example 5, 7, or 8. The profile determines the layer structure and playback compatibility of the content.",
+                        "smithy.api#jsonName": "profile"
+                    }
+                },
+                "Rpu": {
+                    "target": "com.amazonaws.mediaconvert#DolbyVisionPresence",
+                    "traits": {
+                        "smithy.api#documentation": "Whether a Dolby Vision component is present in the track.",
+                        "smithy.api#jsonName": "rpu"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Dolby Vision characteristics of the video track: the profile and level, and whether the RPU (dynamic metadata), base layer, and enhancement layer are present. Use this to distinguish Dolby Vision content from standard HEVC and to choose your encoding or passthrough settings. Omitted when the content is not Dolby Vision."
+            }
+        },
+        "com.amazonaws.mediaconvert#DolbyVisionPresence": {
+            "type": "enum",
+            "members": {
+                "PRESENT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PRESENT"
+                    }
+                },
+                "ABSENT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ABSENT"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Whether a Dolby Vision component is present in the track."
             }
         },
         "com.amazonaws.mediaconvert#DolbyVisionProfile": {
@@ -10855,6 +11054,36 @@
                     "traits": {
                         "smithy.api#enumValue": "ogg"
                     }
+                },
+                "three_gp": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "three_gp"
+                    }
+                },
+                "three_g2": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "three_g2"
+                    }
+                },
+                "aac": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "aac"
+                    }
+                },
+                "ac3": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ac3"
+                    }
+                },
+                "eac3": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "eac3"
+                    }
                 }
             }
         },
@@ -12422,6 +12651,20 @@
                         "smithy.api#jsonName": "slices"
                     }
                 },
+                "SlidingWindowMs": {
+                    "target": "com.amazonaws.mediaconvert#__integerMin1000Max3000",
+                    "traits": {
+                        "smithy.api#documentation": "Optional. Specify the duration, in milliseconds, of the sliding window over which MediaConvert enforces your Peak bitrate. When you specify a Peak bitrate but omit this value, MediaConvert uses a default sliding window of 1000.",
+                        "smithy.api#jsonName": "slidingWindowMs"
+                    }
+                },
+                "SlidingWindowPeakBitrate": {
+                    "target": "com.amazonaws.mediaconvert#__integerMin1000Max1152000000",
+                    "traits": {
+                        "smithy.api#documentation": "Optional. Specify an instantaneous peak bitrate ceiling, in bits/second, that MediaConvert enforces over the sliding window set by Peak bitrate window. For example, enter fifty megabits per second as 50000000. Applies in the VBR, CBR, and QVBR rate control modes. When you specify a value below Max bitrate, MediaConvert raises it to Max bitrate.",
+                        "smithy.api#jsonName": "slidingWindowPeakBitrate"
+                    }
+                },
                 "SlowPal": {
                     "target": "com.amazonaws.mediaconvert#H264SlowPal",
                     "traits": {
@@ -13550,6 +13793,20 @@
                     "traits": {
                         "smithy.api#documentation": "Number of slices per picture. Must be less than or equal to the number of macroblock rows for progressive pictures, and less than or equal to half the number of macroblock rows for interlaced pictures.",
                         "smithy.api#jsonName": "slices"
+                    }
+                },
+                "SlidingWindowMs": {
+                    "target": "com.amazonaws.mediaconvert#__integerMin1000Max3000",
+                    "traits": {
+                        "smithy.api#documentation": "Optional. Specify the duration, in milliseconds, of the sliding window over which MediaConvert enforces your Peak bitrate. When you specify a Peak bitrate but omit this value, MediaConvert uses a default sliding window of 1000.",
+                        "smithy.api#jsonName": "slidingWindowMs"
+                    }
+                },
+                "SlidingWindowPeakBitrate": {
+                    "target": "com.amazonaws.mediaconvert#__integerMin1000Max1466400000",
+                    "traits": {
+                        "smithy.api#documentation": "Optional. Specify an instantaneous peak bitrate ceiling, in bits/second, that MediaConvert enforces over the sliding window set by Peak bitrate window. For example, enter fifty megabits per second as 50000000. Applies in the VBR, CBR, and QVBR rate control modes. When you specify a value below Max bitrate, MediaConvert raises it to Max bitrate.",
+                        "smithy.api#jsonName": "slidingWindowPeakBitrate"
                     }
                 },
                 "SlowPal": {
@@ -16512,6 +16769,13 @@
                         "smithy.api#jsonName": "motionImageInserter"
                     }
                 },
+                "MotionImageInserters": {
+                    "target": "com.amazonaws.mediaconvert#__listOfMotionImageInserter",
+                    "traits": {
+                        "smithy.api#documentation": "Array of motion image inserters for overlaying multiple independent motion graphics. Compositing order follows array index. Mutually exclusive with motionImageInserter.",
+                        "smithy.api#jsonName": "motionImageInserters"
+                    }
+                },
                 "NielsenConfiguration": {
                     "target": "com.amazonaws.mediaconvert#NielsenConfiguration",
                     "traits": {
@@ -16783,6 +17047,13 @@
                     "traits": {
                         "smithy.api#documentation": "Overlay motion graphics on top of your video. The motion graphics that you specify here appear on all outputs in all output groups. For more information, see https://docs.aws.amazon.com/mediaconvert/latest/ug/motion-graphic-overlay.html.",
                         "smithy.api#jsonName": "motionImageInserter"
+                    }
+                },
+                "MotionImageInserters": {
+                    "target": "com.amazonaws.mediaconvert#__listOfMotionImageInserter",
+                    "traits": {
+                        "smithy.api#documentation": "Array of motion image inserters for overlaying multiple independent motion graphics. Compositing order follows array index. Mutually exclusive with motionImageInserter.",
+                        "smithy.api#jsonName": "motionImageInserters"
                     }
                 },
                 "NielsenConfiguration": {
@@ -22715,6 +22986,20 @@
                         "smithy.api#jsonName": "sceneChangeDetect"
                     }
                 },
+                "SlidingWindowMs": {
+                    "target": "com.amazonaws.mediaconvert#__integerMin1000Max3000",
+                    "traits": {
+                        "smithy.api#documentation": "Optional. Specify the duration, in milliseconds, of the sliding window over which MediaConvert enforces your Peak bitrate. When you specify a Peak bitrate but omit this value, MediaConvert uses a default sliding window of 1000.",
+                        "smithy.api#jsonName": "slidingWindowMs"
+                    }
+                },
+                "SlidingWindowPeakBitrate": {
+                    "target": "com.amazonaws.mediaconvert#__integerMin1000Max300000000",
+                    "traits": {
+                        "smithy.api#documentation": "Optional. Specify an instantaneous peak bitrate ceiling, in bits/second, that MediaConvert enforces over the sliding window set by Peak bitrate window. For example, enter fifty megabits per second as 50000000. Applies in the VBR and CBR rate control modes. When you specify a value below Max bitrate, MediaConvert raises it to Max bitrate.",
+                        "smithy.api#jsonName": "slidingWindowPeakBitrate"
+                    }
+                },
                 "SlowPal": {
                     "target": "com.amazonaws.mediaconvert#Mpeg2SlowPal",
                     "traits": {
@@ -23482,7 +23767,7 @@
                 "Filter": {
                     "target": "com.amazonaws.mediaconvert#NoiseReducerFilter",
                     "traits": {
-                        "smithy.api#documentation": "Use Noise reducer filter to select one of the following spatial image filtering functions. To use this setting, you must also enable Noise reducer. * Bilateral preserves edges while reducing noise. * Mean (softest), Gaussian, Lanczos, and Sharpen (sharpest) do convolution filtering. * Conserve does min/max noise reduction. * Spatial does frequency-domain filtering based on JND principles. * Temporal optimizes video quality for complex motion.",
+                        "smithy.api#documentation": "Use Noise reducer filter to select one of the following spatial image filtering functions. To use this setting, you must also enable Noise reducer. * Bilateral preserves edges while reducing noise. * Mean (softest), Gaussian, Lanczos, and Sharpen (sharpest) do convolution filtering. * Conserve does min/max noise reduction. * Spatial does frequency-domain filtering based on JND principles. * Temporal optimizes video quality for complex motion. * Perceptual exploits perceptual masking, avoiding encoding bits spent on imperceptible detail. * None disables noise reduction, including the perceptual filter that MediaConvert otherwise applies by default for AVC, HEVC, AV1, MPEG-2, VP8, and VP9 outputs. MediaConvert doesn't apply that default to mezzanine and archival outputs (AVC-Intra, XAVC, Apple ProRes, VC3, Uncompressed), to frame capture outputs, or to outputs that use Dolby Vision, which doesn't support any noise reducer.",
                         "smithy.api#jsonName": "filter"
                     }
                 },
@@ -23562,10 +23847,22 @@
                     "traits": {
                         "smithy.api#enumValue": "TEMPORAL"
                     }
+                },
+                "PERCEPTUAL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PERCEPTUAL"
+                    }
+                },
+                "NONE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NONE"
+                    }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "Use Noise reducer filter to select one of the following spatial image filtering functions. To use this setting, you must also enable Noise reducer. * Bilateral preserves edges while reducing noise. * Mean (softest), Gaussian, Lanczos, and Sharpen (sharpest) do convolution filtering. * Conserve does min/max noise reduction. * Spatial does frequency-domain filtering based on JND principles. * Temporal optimizes video quality for complex motion."
+                "smithy.api#documentation": "Use Noise reducer filter to select one of the following spatial image filtering functions. To use this setting, you must also enable Noise reducer. * Bilateral preserves edges while reducing noise. * Mean (softest), Gaussian, Lanczos, and Sharpen (sharpest) do convolution filtering. * Conserve does min/max noise reduction. * Spatial does frequency-domain filtering based on JND principles. * Temporal optimizes video quality for complex motion. * Perceptual exploits perceptual masking, avoiding encoding bits spent on imperceptible detail. * None disables noise reduction, including the perceptual filter that MediaConvert otherwise applies by default for AVC, HEVC, AV1, MPEG-2, VP8, and VP9 outputs. MediaConvert doesn't apply that default to mezzanine and archival outputs (AVC-Intra, XAVC, Apple ProRes, VC3, Uncompressed), to frame capture outputs, or to outputs that use Dolby Vision, which doesn't support any noise reducer."
             }
         },
         "com.amazonaws.mediaconvert#NoiseReducerFilterSettings": {
@@ -24063,6 +24360,32 @@
                 "smithy.api#documentation": "If you work with a third party video watermarking partner, use the group of settings that correspond with your watermarking partner to include watermarks in your output."
             }
         },
+        "com.amazonaws.mediaconvert#PassthroughSegmentationMode": {
+            "type": "enum",
+            "members": {
+                "AUTO": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AUTO"
+                    }
+                },
+                "DURATION_BASED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DURATION_BASED"
+                    }
+                },
+                "GOP_COUNT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "GOP_COUNT"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Choose how MediaConvert determines segment boundaries when you passthrough video to a segmented ABR output (HLS, DASH, or CMAF). This setting applies only to ABR outputs. Keep the default value, Auto, to let MediaConvert choose based on your input: when your input is a segmented HLS or DASH source, MediaConvert reproduces your input's own segment boundaries, with one output segment per input segment; for all other inputs, MediaConvert places boundaries by duration, cutting at the first eligible IDR-frame at or after each configured Segment length or Fragment length target. Choose Duration based to always place boundaries by duration, at the first eligible IDR-frame at or after each configured Segment length or Fragment length target, regardless of your input. When your input GOP duration does not evenly divide your target segment length, output segment durations will vary. Choose GOP count to place a fixed number of input GOPs in every segment, and specify GOPs per segment. Every segment contains the same number of input GOPs, which produces consistent segment durations when your input GOP cadence is constant. In this mode MediaConvert ignores your configured Segment length and Fragment length for video boundary placement. Ad avails and input discontinuities are still honored as segment boundaries."
+            }
+        },
         "com.amazonaws.mediaconvert#PassthroughSettings": {
             "type": "structure",
             "members": {
@@ -24071,6 +24394,20 @@
                     "traits": {
                         "smithy.api#documentation": "Choose how MediaConvert handles start and end times for input clipping with video passthrough. Your input video codec must be H.264 or H.265 to use IFRAME. To clip at the nearest IDR-frame: Choose Nearest IDR. If an IDR-frame is not found at the frame that you specify, MediaConvert uses the next compatible IDR-frame. Note that your output may be shorter than your input clip duration. To clip at the nearest I-frame: Choose Nearest I-frame. If an I-frame is not found at the frame that you specify, MediaConvert uses the next compatible I-frame. Note that your output may be shorter than your input clip duration. We only recommend this setting for special workflows, and when you choose this setting your output may not be compatible with most players.",
                         "smithy.api#jsonName": "frameControl"
+                    }
+                },
+                "GopsPerSegment": {
+                    "target": "com.amazonaws.mediaconvert#__integerMin1Max100",
+                    "traits": {
+                        "smithy.api#documentation": "Specify how many input GOPs MediaConvert places in each output segment when you set Passthrough segmentation mode to GOP count. For example, if your input has a closed GOP every 1.92 seconds and you specify 2, each output segment is 3.84 seconds. In this mode, output segment duration is determined by your input GOP structure rather than by your configured Segment length or Fragment length, so segment durations are consistent only when your input GOP cadence is constant. Segments at input discontinuities or ad avails may contain fewer GOPs.",
+                        "smithy.api#jsonName": "gopsPerSegment"
+                    }
+                },
+                "SegmentationMode": {
+                    "target": "com.amazonaws.mediaconvert#PassthroughSegmentationMode",
+                    "traits": {
+                        "smithy.api#documentation": "Choose how MediaConvert determines segment boundaries when you passthrough video to a segmented ABR output (HLS, DASH, or CMAF). This setting applies only to ABR outputs. Keep the default value, Auto, to let MediaConvert choose based on your input: when your input is a segmented HLS or DASH source, MediaConvert reproduces your input's own segment boundaries, with one output segment per input segment; for all other inputs, MediaConvert places boundaries by duration, cutting at the first eligible IDR-frame at or after each configured Segment length or Fragment length target. Choose Duration based to always place boundaries by duration, at the first eligible IDR-frame at or after each configured Segment length or Fragment length target, regardless of your input. When your input GOP duration does not evenly divide your target segment length, output segment durations will vary. Choose GOP count to place a fixed number of input GOPs in every segment, and specify GOPs per segment. Every segment contains the same number of input GOPs, which produces consistent segment durations when your input GOP cadence is constant. In this mode MediaConvert ignores your configured Segment length and Fragment length for video boundary placement. Ad avails and input discontinuities are still honored as segment boundaries.",
+                        "smithy.api#jsonName": "segmentationMode"
                     }
                 },
                 "VideoSelectorMode": {
@@ -24399,10 +24736,13 @@
                 },
                 {
                     "target": "com.amazonaws.mediaconvert#TooManyRequestsException"
+                },
+                {
+                    "target": "com.amazonaws.mediaconvert#UnprocessableEntityException"
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "Use Probe to obtain detailed information about your input media files. Probe returns a JSON that includes container, codec, frame rate, resolution, track count, audio layout, captions, and more. You can use this information to learn more about your media files, or to help make decisions while automating your transcoding workflow.",
+                "smithy.api#documentation": "Use Probe to obtain detailed information about your input media files. Probe returns a JSON that includes container, codec, frame rate, resolution, track count, audio layout, captions, and more. You can use this information to learn more about your media files, or to help make decisions while automating your transcoding workflow. Probe supports the following input container formats: MP4, QuickTime (MOV), 3GP, 3G2, Matroska (MKV), WebM, MXF, MPEG-TS, MPEG-PS, AVI, WAV, MP3, FLAC, Ogg, and ASF (Windows Media / WMA). The fields that Probe returns vary by container and codec. A field isn't returned when the source doesn't contain it, or when it isn't available for that container and codec.",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/2017-08-29/probe",
@@ -27472,6 +27812,22 @@
                 "smithy.api#documentation": "When you do frame rate conversion from 23.976 frames per second (fps) to 29.97 fps, and your output scan type is interlaced, you can optionally enable hard telecine to create a smoother picture. When you keep the default value, None, MediaConvert does a standard frame rate conversion to 29.97 without doing anything with the field polarity to create a smoother picture."
             }
         },
+        "com.amazonaws.mediaconvert#UnprocessableEntityException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.mediaconvert#__string",
+                    "traits": {
+                        "smithy.api#jsonName": "message"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "The input file was recognized but appears to be malformed or corrupt.",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 422
+            }
+        },
         "com.amazonaws.mediaconvert#UntagResource": {
             "type": "operation",
             "input": {
@@ -28845,7 +29201,7 @@
                 "CodecMetadata": {
                     "target": "com.amazonaws.mediaconvert#CodecMetadata",
                     "traits": {
-                        "smithy.api#documentation": "Codec-specific parameters parsed from the video essence headers. This information provides detailed technical specifications about how the video was encoded, including profile settings, resolution details, and color space information that can help you understand the source video characteristics and make informed encoding decisions.",
+                        "smithy.api#documentation": "Codec-specific parameters parsed from the video essence headers. This information provides detailed technical specifications about how the video was encoded, including profile settings, resolution details, and color space information that can help you understand the source video characteristics and make informed encoding decisions. These fields are returned for H.264 (AVC), H.265 (HEVC), and MPEG-2 video, and might not be returned for other codecs. For MPEG-TS and MPEG-PS inputs, color information (color primaries, transfer characteristics, and matrix coefficients) appears in these fields rather than in the top-level videoProperties.",
                         "smithy.api#jsonName": "codecMetadata"
                     }
                 },
@@ -28859,7 +29215,7 @@
                 "DisplayAspectRatio": {
                     "target": "com.amazonaws.mediaconvert#AspectRatio",
                     "traits": {
-                        "smithy.api#documentation": "An aspect ratio expressed as a fraction with numerator and denominator values, reduced to lowest terms. Used for the sample (pixel) aspect ratio and the display aspect ratio of a video track. For example, a 720x576 anamorphic track has a sample aspect ratio of 64 / 45 and a display aspect ratio of 16 / 9.",
+                        "smithy.api#documentation": "An aspect ratio expressed as a fraction with numerator and denominator values, reduced to lowest terms. Used for the sample (pixel) aspect ratio and the display aspect ratio of a video track. For example, a 720x576 anamorphic track has a sample aspect ratio of 64 / 45 and a display aspect ratio of 16 / 9. A video track can declare an aspect ratio in two independent places, and MediaConvert reports each one where it was found rather than choosing between them. The ratio declared by the container appears on the video track itself, and the ratio declared by the video essence appears under codecMetadata. When a file declares an aspect ratio in only one of the two places, the other is null; when it declares both and they disagree, you can compare them and decide which to use.",
                         "smithy.api#jsonName": "displayAspectRatio"
                     }
                 },
@@ -28901,7 +29257,7 @@
                 "SampleAspectRatio": {
                     "target": "com.amazonaws.mediaconvert#AspectRatio",
                     "traits": {
-                        "smithy.api#documentation": "An aspect ratio expressed as a fraction with numerator and denominator values, reduced to lowest terms. Used for the sample (pixel) aspect ratio and the display aspect ratio of a video track. For example, a 720x576 anamorphic track has a sample aspect ratio of 64 / 45 and a display aspect ratio of 16 / 9.",
+                        "smithy.api#documentation": "An aspect ratio expressed as a fraction with numerator and denominator values, reduced to lowest terms. Used for the sample (pixel) aspect ratio and the display aspect ratio of a video track. For example, a 720x576 anamorphic track has a sample aspect ratio of 64 / 45 and a display aspect ratio of 16 / 9. A video track can declare an aspect ratio in two independent places, and MediaConvert reports each one where it was found rather than choosing between them. The ratio declared by the container appears on the video track itself, and the ratio declared by the video essence appears under codecMetadata. When a file declares an aspect ratio in only one of the two places, the other is null; when it declares both and they disagree, you can compare them and decide which to use.",
                         "smithy.api#jsonName": "sampleAspectRatio"
                     }
                 },
@@ -30169,7 +30525,7 @@
                 "InterlaceMode": {
                     "target": "com.amazonaws.mediaconvert#XavcInterlaceMode",
                     "traits": {
-                        "smithy.api#documentation": "Choose the scan line type for the output. Keep the default value, Progressive to create a progressive output, regardless of the scan type of your input. Use Top field first or Bottom field first to create an output that's interlaced with the same field polarity throughout. Use Follow, default top or Follow, default bottom to produce outputs with the same field polarity as the source. For jobs that have multiple inputs, the output field polarity might change over the course of the output. Follow behavior depends on the input scan type. If the source is interlaced, the output will be interlaced with the same polarity as the source. If the source is progressive, the output will be interlaced with top field bottom field first, depending on which of the Follow options you choose.",
+                        "smithy.api#documentation": "Choose the scan line type for the output. Keep the default value, Progressive, to create a progressive output, regardless of the scan type of your input. To create an interlaced output, choose Top field first or Follow, default top. Outputs that you create with this profile are always top field first when they are interlaced. When you create an interlaced output, set your output frame rate to 25 or 29.97.",
                         "smithy.api#jsonName": "interlaceMode"
                     }
                 },
@@ -30401,7 +30757,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "Specify the XAVC profile for this output. For more information, see the Sony documentation at https://www.xavc-info.org/. Note that MediaConvert doesn't support the interlaced video XAVC operating points for XAVC_HD_INTRA_CBG. To create an interlaced XAVC output, choose the profile XAVC_HD."
+                "smithy.api#documentation": "Specify the XAVC profile for this output. For more information, see the Sony documentation at https://www.xavc-info.org/. Note that when you choose XAVC_HD_INTRA_CBG, MediaConvert supports interlaced outputs only when they are top field first and your output frame rate is 25 or 29.97 fps."
             }
         },
         "com.amazonaws.mediaconvert#XavcSettings": {
@@ -30459,7 +30815,7 @@
                 "Profile": {
                     "target": "com.amazonaws.mediaconvert#XavcProfile",
                     "traits": {
-                        "smithy.api#documentation": "Specify the XAVC profile for this output. For more information, see the Sony documentation at https://www.xavc-info.org/. Note that MediaConvert doesn't support the interlaced video XAVC operating points for XAVC_HD_INTRA_CBG. To create an interlaced XAVC output, choose the profile XAVC_HD.",
+                        "smithy.api#documentation": "Specify the XAVC profile for this output. For more information, see the Sony documentation at https://www.xavc-info.org/. Note that when you choose XAVC_HD_INTRA_CBG, MediaConvert supports interlaced outputs only when they are top field first and your output frame rate is 25 or 29.97 fps.",
                         "smithy.api#jsonName": "profile"
                     }
                 },
@@ -30971,6 +31327,15 @@
                 "smithy.api#range": {
                     "min": 1000,
                     "max": 288000000
+                }
+            }
+        },
+        "com.amazonaws.mediaconvert#__integerMin1000Max3000": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1000,
+                    "max": 3000
                 }
             }
         },
@@ -31676,6 +32041,12 @@
                 "target": "com.amazonaws.mediaconvert#ColorConversion3DLUTSetting"
             }
         },
+        "com.amazonaws.mediaconvert#__listOfDashAdaptationSetGrouping": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.mediaconvert#DashAdaptationSetGrouping"
+            }
+        },
         "com.amazonaws.mediaconvert#__listOfDashAdditionalManifest": {
             "type": "list",
             "member": {
@@ -31800,6 +32171,12 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.mediaconvert#JobsQueryFilter"
+            }
+        },
+        "com.amazonaws.mediaconvert#__listOfMotionImageInserter": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.mediaconvert#MotionImageInserter"
             }
         },
         "com.amazonaws.mediaconvert#__listOfMsSmoothAdditionalManifest": {

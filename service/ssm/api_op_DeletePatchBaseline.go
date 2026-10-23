@@ -4,6 +4,8 @@ package ssm
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/ssm/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -33,6 +35,18 @@ type DeletePatchBaselineInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeletePatchBaselineInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeletePatchBaselineRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeletePatchBaselineInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BaselineId != nil {
+		s.WriteString(schemas.DeletePatchBaselineRequest_BaselineId, *v.BaselineId)
+	}
+}
+
 type DeletePatchBaselineOutput struct {
 
 	// The ID of the deleted patch baseline.
@@ -44,13 +58,32 @@ type DeletePatchBaselineOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeletePatchBaselineOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeletePatchBaselineResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeletePatchBaselineOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BaselineId != nil {
+		s.WriteString(schemas.DeletePatchBaselineResult_BaselineId, *v.BaselineId)
+	}
+}
+func (v *DeletePatchBaselineOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeletePatchBaselineResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeletePatchBaselineResult_BaselineId:
+			v.BaselineId = new(string)
+			return d.ReadString(schemas.DeletePatchBaselineResult_BaselineId, v.BaselineId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeletePatchBaselineMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeletePatchBaseline{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeletePatchBaseline, schemas.DeletePatchBaselineRequest, schemas.DeletePatchBaselineResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeletePatchBaseline{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeletePatchBaseline, schemas.DeletePatchBaselineRequest, schemas.DeletePatchBaselineResult), output: &DeletePatchBaselineOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

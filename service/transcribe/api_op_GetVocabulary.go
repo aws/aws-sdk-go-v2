@@ -62,9 +62,17 @@ func (v *GetVocabularyInput) SerializeMembers(s smithy.ShapeSerializer) {
 
 type GetVocabularyOutput struct {
 
+	// The Amazon Resource Name (ARN) of the IAM role used to access the Amazon S3
+	// bucket that contains your input files and, if applicable, the KMS key specified
+	// in EncryptionConfiguration .
+	DataAccessRoleArn *string
+
 	// The Amazon S3 location where the custom vocabulary is stored; use this URI to
 	// view or download the custom vocabulary.
 	DownloadUri *string
+
+	// The encryption configuration used for your custom vocabulary.
+	EncryptionConfiguration *types.EncryptionConfiguration
 
 	// If VocabularyState is FAILED , FailureReason contains information about why the
 	// custom vocabulary request failed. See also: [Common Errors].
@@ -101,8 +109,16 @@ func (v *GetVocabularyOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetVocabularyOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DataAccessRoleArn != nil {
+		s.WriteString(schemas.GetVocabularyResponse_DataAccessRoleArn, *v.DataAccessRoleArn)
+	}
 	if v.DownloadUri != nil {
 		s.WriteString(schemas.GetVocabularyResponse_DownloadUri, *v.DownloadUri)
+	}
+	if v.EncryptionConfiguration != nil {
+		s.WriteStruct(schemas.GetVocabularyResponse_EncryptionConfiguration)
+		v.EncryptionConfiguration.SerializeMembers(s)
+		s.CloseStruct()
 	}
 	if v.FailureReason != nil {
 		s.WriteString(schemas.GetVocabularyResponse_FailureReason, *v.FailureReason)
@@ -123,9 +139,15 @@ func (v *GetVocabularyOutput) SerializeMembers(s smithy.ShapeSerializer) {
 func (v *GetVocabularyOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetVocabularyResponse, func(s *smithy.Schema) error {
 		switch s {
+		case schemas.GetVocabularyResponse_DataAccessRoleArn:
+			v.DataAccessRoleArn = new(string)
+			return d.ReadString(schemas.GetVocabularyResponse_DataAccessRoleArn, v.DataAccessRoleArn)
 		case schemas.GetVocabularyResponse_DownloadUri:
 			v.DownloadUri = new(string)
 			return d.ReadString(schemas.GetVocabularyResponse_DownloadUri, v.DownloadUri)
+		case schemas.GetVocabularyResponse_EncryptionConfiguration:
+			v.EncryptionConfiguration = &types.EncryptionConfiguration{}
+			return v.EncryptionConfiguration.Deserialize(d)
 		case schemas.GetVocabularyResponse_FailureReason:
 			v.FailureReason = new(string)
 			return d.ReadString(schemas.GetVocabularyResponse_FailureReason, v.FailureReason)

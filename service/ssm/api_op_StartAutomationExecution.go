@@ -4,7 +4,9 @@ package ssm
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/ssm/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ssm/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -129,6 +131,49 @@ type StartAutomationExecutionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartAutomationExecutionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartAutomationExecutionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartAutomationExecutionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AlarmConfiguration != nil {
+		s.WriteStruct(schemas.StartAutomationExecutionRequest_AlarmConfiguration)
+		v.AlarmConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ClientToken != nil {
+		s.WriteString(schemas.StartAutomationExecutionRequest_ClientToken, *v.ClientToken)
+	}
+	if v.DocumentName != nil {
+		s.WriteString(schemas.StartAutomationExecutionRequest_DocumentName, *v.DocumentName)
+	}
+	if v.DocumentVersion != nil {
+		s.WriteString(schemas.StartAutomationExecutionRequest_DocumentVersion, *v.DocumentVersion)
+	}
+	if v.MaxConcurrency != nil {
+		s.WriteString(schemas.StartAutomationExecutionRequest_MaxConcurrency, *v.MaxConcurrency)
+	}
+	if v.MaxErrors != nil {
+		s.WriteString(schemas.StartAutomationExecutionRequest_MaxErrors, *v.MaxErrors)
+	}
+	if v.Mode != "" {
+		s.WriteString(schemas.StartAutomationExecutionRequest_Mode, string(v.Mode))
+	}
+	serializeAutomationParameterMap(s, schemas.StartAutomationExecutionRequest_Parameters, v.Parameters)
+	serializeTagList(s, schemas.StartAutomationExecutionRequest_Tags, v.Tags)
+	serializeTargetLocations(s, schemas.StartAutomationExecutionRequest_TargetLocations, v.TargetLocations)
+	if v.TargetLocationsURL != nil {
+		s.WriteString(schemas.StartAutomationExecutionRequest_TargetLocationsURL, *v.TargetLocationsURL)
+	}
+	serializeTargetMaps(s, schemas.StartAutomationExecutionRequest_TargetMaps, v.TargetMaps)
+	if v.TargetParameterName != nil {
+		s.WriteString(schemas.StartAutomationExecutionRequest_TargetParameterName, *v.TargetParameterName)
+	}
+	serializeAutomationTargets(s, schemas.StartAutomationExecutionRequest_Targets, v.Targets)
+}
+
 type StartAutomationExecutionOutput struct {
 
 	// The unique ID of a newly scheduled automation execution.
@@ -140,13 +185,32 @@ type StartAutomationExecutionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartAutomationExecutionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartAutomationExecutionResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartAutomationExecutionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AutomationExecutionId != nil {
+		s.WriteString(schemas.StartAutomationExecutionResult_AutomationExecutionId, *v.AutomationExecutionId)
+	}
+}
+func (v *StartAutomationExecutionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartAutomationExecutionResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartAutomationExecutionResult_AutomationExecutionId:
+			v.AutomationExecutionId = new(string)
+			return d.ReadString(schemas.StartAutomationExecutionResult_AutomationExecutionId, v.AutomationExecutionId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartAutomationExecutionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStartAutomationExecution{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartAutomationExecution, schemas.StartAutomationExecutionRequest, schemas.StartAutomationExecutionResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpStartAutomationExecution{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartAutomationExecution, schemas.StartAutomationExecutionRequest, schemas.StartAutomationExecutionResult), output: &StartAutomationExecutionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

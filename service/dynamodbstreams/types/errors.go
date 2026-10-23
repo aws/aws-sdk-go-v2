@@ -4,6 +4,7 @@ package types
 
 import (
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/dynamodbstreams/schemas"
 	smithy "github.com/aws/smithy-go"
 )
 
@@ -34,6 +35,27 @@ func (e *ExpiredIteratorException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ExpiredIteratorException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *ExpiredIteratorException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ExpiredIteratorException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ExpiredIteratorException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.ExpiredIteratorException_message, *v.Message)
+	}
+}
+func (v *ExpiredIteratorException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ExpiredIteratorException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ExpiredIteratorException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ExpiredIteratorException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // An error occurred on the server side.
 type InternalServerError struct {
@@ -60,6 +82,27 @@ func (e *InternalServerError) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InternalServerError) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
+func (v *InternalServerError) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InternalServerError)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InternalServerError) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.InternalServerError_message, *v.Message)
+	}
+}
+func (v *InternalServerError) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InternalServerError, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InternalServerError_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.InternalServerError_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // There is no limit to the number of daily on-demand backups that can be taken.
 //
@@ -106,6 +149,27 @@ func (e *LimitExceededException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *LimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *LimitExceededException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LimitExceededException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *LimitExceededException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.LimitExceededException_message, *v.Message)
+	}
+}
+func (v *LimitExceededException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LimitExceededException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LimitExceededException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.LimitExceededException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The operation tried to access a nonexistent table or index. The resource might
 // not be specified correctly, or its status might not be ACTIVE .
@@ -133,6 +197,27 @@ func (e *ResourceNotFoundException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *ResourceNotFoundException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ResourceNotFoundException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ResourceNotFoundException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.ResourceNotFoundException_message, *v.Message)
+	}
+}
+func (v *ResourceNotFoundException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ResourceNotFoundException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ResourceNotFoundException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ResourceNotFoundException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The operation attempted to read past the oldest stream record in a shard.
 //
@@ -170,3 +255,24 @@ func (e *TrimmedDataAccessException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *TrimmedDataAccessException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *TrimmedDataAccessException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TrimmedDataAccessException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TrimmedDataAccessException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.TrimmedDataAccessException_message, *v.Message)
+	}
+}
+func (v *TrimmedDataAccessException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TrimmedDataAccessException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TrimmedDataAccessException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.TrimmedDataAccessException_message, v.Message)
+		}
+		return nil
+	})
+}

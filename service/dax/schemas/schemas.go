@@ -184,7 +184,8 @@ var Cluster_NetworkType *smithy.Schema
 var ClusterAlreadyExistsFault = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.dax",
 	Name:      "ClusterAlreadyExistsFault",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400},
 	&smithytraits.AWSQueryError{ErrorCode: "ClusterAlreadyExists",
 		StatusCode: 400})
 var ClusterAlreadyExistsFault_message *smithy.Schema
@@ -212,7 +213,8 @@ var _ClusterNameList_member *smithy.Schema
 var ClusterNotFoundFault = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.dax",
 	Name:      "ClusterNotFoundFault",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 404},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 404},
 	&smithytraits.AWSQueryError{ErrorCode: "ClusterNotFound",
 		StatusCode: 404})
 var ClusterNotFoundFault_message *smithy.Schema
@@ -220,7 +222,8 @@ var ClusterNotFoundFault_message *smithy.Schema
 var ClusterQuotaForCustomerExceededFault = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.dax",
 	Name:      "ClusterQuotaForCustomerExceededFault",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400},
 	&smithytraits.AWSQueryError{ErrorCode: "ClusterQuotaForCustomerExceeded",
 		StatusCode: 400})
 var ClusterQuotaForCustomerExceededFault_message *smithy.Schema
@@ -261,7 +264,8 @@ var _ExceptionMessage = smithy.NewSchema(smithy.ShapeID{
 var InsufficientClusterCapacityFault = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.dax",
 	Name:      "InsufficientClusterCapacityFault",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400},
 	&smithytraits.AWSQueryError{ErrorCode: "InsufficientClusterCapacity",
 		StatusCode: 400})
 var InsufficientClusterCapacityFault_message *smithy.Schema
@@ -279,7 +283,8 @@ var _IntegerOptional = smithy.NewSchema(smithy.ShapeID{
 var InvalidARNFault = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.dax",
 	Name:      "InvalidARNFault",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400},
 	&smithytraits.AWSQueryError{ErrorCode: "InvalidARN",
 		StatusCode: 400})
 var InvalidARNFault_message *smithy.Schema
@@ -287,7 +292,8 @@ var InvalidARNFault_message *smithy.Schema
 var InvalidClusterStateFault = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.dax",
 	Name:      "InvalidClusterStateFault",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400},
 	&smithytraits.AWSQueryError{ErrorCode: "InvalidClusterState",
 		StatusCode: 400})
 var InvalidClusterStateFault_message *smithy.Schema
@@ -295,7 +301,8 @@ var InvalidClusterStateFault_message *smithy.Schema
 var InvalidParameterCombinationException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.dax",
 	Name:      "InvalidParameterCombinationException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400},
 	&smithytraits.AWSQueryError{ErrorCode: "InvalidParameterCombination",
 		StatusCode: 400})
 var InvalidParameterCombinationException_message *smithy.Schema
@@ -303,7 +310,8 @@ var InvalidParameterCombinationException_message *smithy.Schema
 var InvalidParameterGroupStateFault = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.dax",
 	Name:      "InvalidParameterGroupStateFault",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400},
 	&smithytraits.AWSQueryError{ErrorCode: "InvalidParameterGroupState",
 		StatusCode: 400})
 var InvalidParameterGroupStateFault_message *smithy.Schema
@@ -311,7 +319,8 @@ var InvalidParameterGroupStateFault_message *smithy.Schema
 var InvalidParameterValueException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.dax",
 	Name:      "InvalidParameterValueException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400},
 	&smithytraits.AWSQueryError{ErrorCode: "InvalidParameterValue",
 		StatusCode: 400})
 var InvalidParameterValueException_message *smithy.Schema
@@ -319,7 +328,8 @@ var InvalidParameterValueException_message *smithy.Schema
 var InvalidSubnet = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.dax",
 	Name:      "InvalidSubnet",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400},
 	&smithytraits.AWSQueryError{ErrorCode: "InvalidSubnet",
 		StatusCode: 400})
 var InvalidSubnet_message *smithy.Schema
@@ -327,7 +337,8 @@ var InvalidSubnet_message *smithy.Schema
 var InvalidVPCNetworkStateFault = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.dax",
 	Name:      "InvalidVPCNetworkStateFault",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400},
 	&smithytraits.AWSQueryError{ErrorCode: "InvalidVPCNetworkStateFault",
 		StatusCode: 400})
 var InvalidVPCNetworkStateFault_message *smithy.Schema
@@ -395,7 +406,8 @@ var _NodeList_member *smithy.Schema
 var NodeNotFoundFault = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.dax",
 	Name:      "NodeNotFoundFault",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 404},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 404},
 	&smithytraits.AWSQueryError{ErrorCode: "NodeNotFound",
 		StatusCode: 404})
 var NodeNotFoundFault_message *smithy.Schema
@@ -403,7 +415,8 @@ var NodeNotFoundFault_message *smithy.Schema
 var NodeQuotaForClusterExceededFault = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.dax",
 	Name:      "NodeQuotaForClusterExceededFault",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400},
 	&smithytraits.AWSQueryError{ErrorCode: "NodeQuotaForClusterExceeded",
 		StatusCode: 400})
 var NodeQuotaForClusterExceededFault_message *smithy.Schema
@@ -411,7 +424,8 @@ var NodeQuotaForClusterExceededFault_message *smithy.Schema
 var NodeQuotaForCustomerExceededFault = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.dax",
 	Name:      "NodeQuotaForCustomerExceededFault",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400},
 	&smithytraits.AWSQueryError{ErrorCode: "NodeQuotaForCustomerExceeded",
 		StatusCode: 400})
 var NodeQuotaForCustomerExceededFault_message *smithy.Schema
@@ -473,7 +487,8 @@ var ParameterGroup_Description *smithy.Schema
 var ParameterGroupAlreadyExistsFault = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.dax",
 	Name:      "ParameterGroupAlreadyExistsFault",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400},
 	&smithytraits.AWSQueryError{ErrorCode: "ParameterGroupAlreadyExists",
 		StatusCode: 400})
 var ParameterGroupAlreadyExistsFault_message *smithy.Schema
@@ -493,7 +508,8 @@ var _ParameterGroupNameList_member *smithy.Schema
 var ParameterGroupNotFoundFault = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.dax",
 	Name:      "ParameterGroupNotFoundFault",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 404},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 404},
 	&smithytraits.AWSQueryError{ErrorCode: "ParameterGroupNotFound",
 		StatusCode: 404})
 var ParameterGroupNotFoundFault_message *smithy.Schema
@@ -501,7 +517,8 @@ var ParameterGroupNotFoundFault_message *smithy.Schema
 var ParameterGroupQuotaExceededFault = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.dax",
 	Name:      "ParameterGroupQuotaExceededFault",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400},
 	&smithytraits.AWSQueryError{ErrorCode: "ParameterGroupQuotaExceeded",
 		StatusCode: 400})
 var ParameterGroupQuotaExceededFault_message *smithy.Schema
@@ -567,7 +584,8 @@ var _SecurityGroupMembershipList_member *smithy.Schema
 var ServiceLinkedRoleNotFoundFault = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.dax",
 	Name:      "ServiceLinkedRoleNotFoundFault",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400},
 	&smithytraits.AWSQueryError{ErrorCode: "ServiceLinkedRoleNotFoundFault",
 		StatusCode: 400})
 var ServiceLinkedRoleNotFoundFault_message *smithy.Schema
@@ -575,7 +593,8 @@ var ServiceLinkedRoleNotFoundFault_message *smithy.Schema
 var ServiceQuotaExceededException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.dax",
 	Name:      "ServiceQuotaExceededException",
-}, smithy.ShapeTypeStructure, 0, &smithytraits.HTTPError{Code: 402},
+}, smithy.ShapeTypeStructure, 0, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 402},
 	&smithytraits.AWSQueryError{ErrorCode: "ServiceQuotaExceeded",
 		StatusCode: 402})
 
@@ -650,7 +669,8 @@ var SubnetGroup_SupportedNetworkTypes *smithy.Schema
 var SubnetGroupAlreadyExistsFault = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.dax",
 	Name:      "SubnetGroupAlreadyExistsFault",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400},
 	&smithytraits.AWSQueryError{ErrorCode: "SubnetGroupAlreadyExists",
 		StatusCode: 400})
 var SubnetGroupAlreadyExistsFault_message *smithy.Schema
@@ -658,7 +678,8 @@ var SubnetGroupAlreadyExistsFault_message *smithy.Schema
 var SubnetGroupInUseFault = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.dax",
 	Name:      "SubnetGroupInUseFault",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400},
 	&smithytraits.AWSQueryError{ErrorCode: "SubnetGroupInUse",
 		StatusCode: 400})
 var SubnetGroupInUseFault_message *smithy.Schema
@@ -678,7 +699,8 @@ var _SubnetGroupNameList_member *smithy.Schema
 var SubnetGroupNotFoundFault = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.dax",
 	Name:      "SubnetGroupNotFoundFault",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 404},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 404},
 	&smithytraits.AWSQueryError{ErrorCode: "SubnetGroupNotFoundFault",
 		StatusCode: 404})
 var SubnetGroupNotFoundFault_message *smithy.Schema
@@ -686,7 +708,8 @@ var SubnetGroupNotFoundFault_message *smithy.Schema
 var SubnetGroupQuotaExceededFault = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.dax",
 	Name:      "SubnetGroupQuotaExceededFault",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400},
 	&smithytraits.AWSQueryError{ErrorCode: "SubnetGroupQuotaExceeded",
 		StatusCode: 400})
 var SubnetGroupQuotaExceededFault_message *smithy.Schema
@@ -700,7 +723,8 @@ var _SubnetIdentifierList_member *smithy.Schema
 var SubnetInUse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.dax",
 	Name:      "SubnetInUse",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400},
 	&smithytraits.AWSQueryError{ErrorCode: "SubnetInUse",
 		StatusCode: 400})
 var SubnetInUse_message *smithy.Schema
@@ -714,7 +738,8 @@ var _SubnetList_member *smithy.Schema
 var SubnetNotAllowedFault = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.dax",
 	Name:      "SubnetNotAllowedFault",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400},
 	&smithytraits.AWSQueryError{ErrorCode: "SubnetNotAllowedFault",
 		StatusCode: 400})
 var SubnetNotAllowedFault_message *smithy.Schema
@@ -722,7 +747,8 @@ var SubnetNotAllowedFault_message *smithy.Schema
 var SubnetQuotaExceededFault = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.dax",
 	Name:      "SubnetQuotaExceededFault",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400},
 	&smithytraits.AWSQueryError{ErrorCode: "SubnetQuotaExceededFault",
 		StatusCode: 400})
 var SubnetQuotaExceededFault_message *smithy.Schema
@@ -744,7 +770,8 @@ var _TagList_member *smithy.Schema
 var TagNotFoundFault = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.dax",
 	Name:      "TagNotFoundFault",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 404},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 404},
 	&smithytraits.AWSQueryError{ErrorCode: "TagNotFound",
 		StatusCode: 404})
 var TagNotFoundFault_message *smithy.Schema
@@ -752,7 +779,8 @@ var TagNotFoundFault_message *smithy.Schema
 var TagQuotaPerResourceExceeded = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.dax",
 	Name:      "TagQuotaPerResourceExceeded",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400},
 	&smithytraits.AWSQueryError{ErrorCode: "TagQuotaPerResourceExceeded",
 		StatusCode: 400})
 var TagQuotaPerResourceExceeded_message *smithy.Schema

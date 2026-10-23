@@ -4,6 +4,9 @@ package types
 
 import (
 	"github.com/aws/aws-sdk-go-v2/service/identitystore/document"
+	internaldocument "github.com/aws/aws-sdk-go-v2/service/identitystore/internal/document"
+	"github.com/aws/aws-sdk-go-v2/service/identitystore/schemas"
+	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
@@ -39,6 +42,69 @@ type Address struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Address) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Address)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Address) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Country != nil {
+		s.WriteString(schemas.Address_Country, *v.Country)
+	}
+	if v.Formatted != nil {
+		s.WriteString(schemas.Address_Formatted, *v.Formatted)
+	}
+	if v.Locality != nil {
+		s.WriteString(schemas.Address_Locality, *v.Locality)
+	}
+	if v.PostalCode != nil {
+		s.WriteString(schemas.Address_PostalCode, *v.PostalCode)
+	}
+	if v.Primary != false {
+		s.WriteBool(schemas.Address_Primary, v.Primary)
+	}
+	if v.Region != nil {
+		s.WriteString(schemas.Address_Region, *v.Region)
+	}
+	if v.StreetAddress != nil {
+		s.WriteString(schemas.Address_StreetAddress, *v.StreetAddress)
+	}
+	if v.Type != nil {
+		s.WriteString(schemas.Address_Type, *v.Type)
+	}
+}
+func (v *Address) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Address, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Address_Country:
+			v.Country = new(string)
+			return d.ReadString(schemas.Address_Country, v.Country)
+		case schemas.Address_Formatted:
+			v.Formatted = new(string)
+			return d.ReadString(schemas.Address_Formatted, v.Formatted)
+		case schemas.Address_Locality:
+			v.Locality = new(string)
+			return d.ReadString(schemas.Address_Locality, v.Locality)
+		case schemas.Address_PostalCode:
+			v.PostalCode = new(string)
+			return d.ReadString(schemas.Address_PostalCode, v.PostalCode)
+		case schemas.Address_Primary:
+			return d.ReadBool(schemas.Address_Primary, &v.Primary)
+		case schemas.Address_Region:
+			v.Region = new(string)
+			return d.ReadString(schemas.Address_Region, v.Region)
+		case schemas.Address_StreetAddress:
+			v.StreetAddress = new(string)
+			return d.ReadString(schemas.Address_StreetAddress, v.StreetAddress)
+		case schemas.Address_Type:
+			v.Type = new(string)
+			return d.ReadString(schemas.Address_Type, v.Type)
+		}
+		return nil
+	})
+}
+
 // A unique identifier for a user or group that is not the primary identifier.
 // This value can be an identifier from an external identity provider (IdP) that is
 // associated with the user, the group, or a unique attribute.
@@ -59,6 +125,14 @@ type AlternateIdentifierMemberExternalId struct {
 }
 
 func (*AlternateIdentifierMemberExternalId) isAlternateIdentifier() {}
+func (v *AlternateIdentifierMemberExternalId) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AlternateIdentifier_ExternalId)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *AlternateIdentifierMemberExternalId) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // An entity attribute that's unique to a specific entity.
 type AlternateIdentifierMemberUniqueAttribute struct {
@@ -68,6 +142,14 @@ type AlternateIdentifierMemberUniqueAttribute struct {
 }
 
 func (*AlternateIdentifierMemberUniqueAttribute) isAlternateIdentifier() {}
+func (v *AlternateIdentifierMemberUniqueAttribute) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AlternateIdentifier_UniqueAttribute)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *AlternateIdentifierMemberUniqueAttribute) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // An operation that applies to the requested group. This operation might add,
 // replace, or remove an attribute.
@@ -86,6 +168,40 @@ type AttributeOperation struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AttributeOperation) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AttributeOperation)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AttributeOperation) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AttributePath != nil {
+		s.WriteString(schemas.AttributeOperation_AttributePath, *v.AttributePath)
+	}
+	if v.AttributeValue != nil {
+		s.WriteDocument(schemas.AttributeOperation_AttributeValue, &smithydocument.Opaque{Value: v.AttributeValue})
+	}
+}
+func (v *AttributeOperation) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AttributeOperation, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AttributeOperation_AttributePath:
+			v.AttributePath = new(string)
+			return d.ReadString(schemas.AttributeOperation_AttributePath, v.AttributePath)
+		case schemas.AttributeOperation_AttributeValue:
+			var dv smithydocument.Value
+			if err := d.ReadDocument(schemas.AttributeOperation_AttributeValue, &dv); err != nil {
+				return err
+			}
+			if ov, ok := dv.(smithydocument.Opaque); ok {
+				v.AttributeValue = internaldocument.NewDocumentUnmarshaler(ov.Value)
+			}
+			return nil
+		}
+		return nil
+	})
+}
+
 // The email address associated with the user.
 type Email struct {
 
@@ -102,6 +218,39 @@ type Email struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Email) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Email)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Email) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Primary != false {
+		s.WriteBool(schemas.Email_Primary, v.Primary)
+	}
+	if v.Type != nil {
+		s.WriteString(schemas.Email_Type, *v.Type)
+	}
+	if v.Value != nil {
+		s.WriteString(schemas.Email_Value, *v.Value)
+	}
+}
+func (v *Email) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Email, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Email_Primary:
+			return d.ReadBool(schemas.Email_Primary, &v.Primary)
+		case schemas.Email_Type:
+			v.Type = new(string)
+			return d.ReadString(schemas.Email_Type, v.Type)
+		case schemas.Email_Value:
+			v.Value = new(string)
+			return d.ReadString(schemas.Email_Value, v.Value)
+		}
+		return nil
+	})
+}
+
 // The identifier issued to this resource by an external identity provider.
 type ExternalId struct {
 
@@ -116,6 +265,34 @@ type ExternalId struct {
 	Issuer *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ExternalId) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ExternalId)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ExternalId) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Id != nil {
+		s.WriteString(schemas.ExternalId_Id, *v.Id)
+	}
+	if v.Issuer != nil {
+		s.WriteString(schemas.ExternalId_Issuer, *v.Issuer)
+	}
+}
+func (v *ExternalId) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ExternalId, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ExternalId_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.ExternalId_Id, v.Id)
+		case schemas.ExternalId_Issuer:
+			v.Issuer = new(string)
+			return d.ReadString(schemas.ExternalId_Issuer, v.Issuer)
+		}
+		return nil
+	})
 }
 
 // A query filter used by ListUsers and ListGroups . This filter object provides
@@ -139,8 +316,42 @@ type Filter struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Filter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Filter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Filter) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AttributePath != nil {
+		s.WriteString(schemas.Filter_AttributePath, *v.AttributePath)
+	}
+	if v.AttributeValue != nil {
+		s.WriteString(schemas.Filter_AttributeValue, *v.AttributeValue)
+	}
+}
+func (v *Filter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Filter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Filter_AttributePath:
+			v.AttributePath = new(string)
+			return d.ReadString(schemas.Filter_AttributePath, v.AttributePath)
+		case schemas.Filter_AttributeValue:
+			v.AttributeValue = new(string)
+			return d.ReadString(schemas.Filter_AttributeValue, v.AttributeValue)
+		}
+		return nil
+	})
+}
+
 // A group object that contains the metadata and attributes for a specified group.
 type Group struct {
+
+	// The Amazon Resource Name (ARN) of the group in the identity store. For example,
+	// arn:aws:identitystore:::group/a1b2c3d4-5678-90ab-cdef-EXAMPLE22222 .
+	//
+	// This member is required.
+	GroupArn *string
 
 	// The identifier for a group in the identity store.
 	//
@@ -151,6 +362,15 @@ type Group struct {
 	//
 	// This member is required.
 	IdentityStoreId *string
+
+	// The current revision of the group in the identity store. This value changes
+	// each time the group is modified. You can provide it as the Revision parameter
+	// of an UpdateGroup or DeleteGroup request to make the operation conditional on
+	// the group not having changed. Treat this value as an opaque token: don't parse
+	// it or rely on its format or ordering.
+	//
+	// This member is required.
+	Revision *string
 
 	// The date and time the group was created.
 	CreatedAt *time.Time
@@ -183,6 +403,85 @@ type Group struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Group) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Group)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Group) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.Group_CreatedAt, *v.CreatedAt)
+	}
+	if v.CreatedBy != nil {
+		s.WriteString(schemas.Group_CreatedBy, *v.CreatedBy)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.Group_Description, *v.Description)
+	}
+	if v.DisplayName != nil {
+		s.WriteString(schemas.Group_DisplayName, *v.DisplayName)
+	}
+	serializeExternalIds(s, schemas.Group_ExternalIds, v.ExternalIds)
+	if v.GroupArn != nil {
+		s.WriteString(schemas.Group_GroupArn, *v.GroupArn)
+	}
+	if v.GroupId != nil {
+		s.WriteString(schemas.Group_GroupId, *v.GroupId)
+	}
+	if v.IdentityStoreId != nil {
+		s.WriteString(schemas.Group_IdentityStoreId, *v.IdentityStoreId)
+	}
+	if v.Revision != nil {
+		s.WriteString(schemas.Group_Revision, *v.Revision)
+	}
+	if v.UpdatedAt != nil {
+		s.WriteTime(schemas.Group_UpdatedAt, *v.UpdatedAt)
+	}
+	if v.UpdatedBy != nil {
+		s.WriteString(schemas.Group_UpdatedBy, *v.UpdatedBy)
+	}
+}
+func (v *Group) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Group, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Group_CreatedAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.Group_CreatedAt, v.CreatedAt)
+		case schemas.Group_CreatedBy:
+			v.CreatedBy = new(string)
+			return d.ReadString(schemas.Group_CreatedBy, v.CreatedBy)
+		case schemas.Group_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.Group_Description, v.Description)
+		case schemas.Group_DisplayName:
+			v.DisplayName = new(string)
+			return d.ReadString(schemas.Group_DisplayName, v.DisplayName)
+		case schemas.Group_ExternalIds:
+			return deserializeExternalIds(d, schemas.Group_ExternalIds, &v.ExternalIds)
+		case schemas.Group_GroupArn:
+			v.GroupArn = new(string)
+			return d.ReadString(schemas.Group_GroupArn, v.GroupArn)
+		case schemas.Group_GroupId:
+			v.GroupId = new(string)
+			return d.ReadString(schemas.Group_GroupId, v.GroupId)
+		case schemas.Group_IdentityStoreId:
+			v.IdentityStoreId = new(string)
+			return d.ReadString(schemas.Group_IdentityStoreId, v.IdentityStoreId)
+		case schemas.Group_Revision:
+			v.Revision = new(string)
+			return d.ReadString(schemas.Group_Revision, v.Revision)
+		case schemas.Group_UpdatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.Group_UpdatedAt, v.UpdatedAt)
+		case schemas.Group_UpdatedBy:
+			v.UpdatedBy = new(string)
+			return d.ReadString(schemas.Group_UpdatedBy, v.UpdatedBy)
+		}
+		return nil
+	})
+}
+
 // Contains the identifiers for a group, a group member, and a GroupMembership
 // object in the identity store.
 type GroupMembership struct {
@@ -191,6 +490,18 @@ type GroupMembership struct {
 	//
 	// This member is required.
 	IdentityStoreId *string
+
+	// The Amazon Resource Name (ARN) of the group membership in the identity store.
+	// For example,
+	// arn:aws:identitystore:::membership/a1b2c3d4-5678-90ab-cdef-EXAMPLE33333 .
+	//
+	// This member is required.
+	MembershipArn *string
+
+	// The identifier for a GroupMembership object in an identity store.
+	//
+	// This member is required.
+	MembershipId *string
 
 	// The date and time the group membership was created.
 	CreatedAt *time.Time
@@ -206,9 +517,6 @@ type GroupMembership struct {
 	// of the group.
 	MemberId MemberId
 
-	// The identifier for a GroupMembership object in an identity store.
-	MembershipId *string
-
 	// The date and time the group membership was last updated.
 	UpdatedAt *time.Time
 
@@ -216,6 +524,73 @@ type GroupMembership struct {
 	UpdatedBy *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GroupMembership) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GroupMembership)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GroupMembership) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.GroupMembership_CreatedAt, *v.CreatedAt)
+	}
+	if v.CreatedBy != nil {
+		s.WriteString(schemas.GroupMembership_CreatedBy, *v.CreatedBy)
+	}
+	if v.GroupId != nil {
+		s.WriteString(schemas.GroupMembership_GroupId, *v.GroupId)
+	}
+	if v.IdentityStoreId != nil {
+		s.WriteString(schemas.GroupMembership_IdentityStoreId, *v.IdentityStoreId)
+	}
+	serializeMemberId(s, schemas.GroupMembership_MemberId, v.MemberId)
+	if v.MembershipArn != nil {
+		s.WriteString(schemas.GroupMembership_MembershipArn, *v.MembershipArn)
+	}
+	if v.MembershipId != nil {
+		s.WriteString(schemas.GroupMembership_MembershipId, *v.MembershipId)
+	}
+	if v.UpdatedAt != nil {
+		s.WriteTime(schemas.GroupMembership_UpdatedAt, *v.UpdatedAt)
+	}
+	if v.UpdatedBy != nil {
+		s.WriteString(schemas.GroupMembership_UpdatedBy, *v.UpdatedBy)
+	}
+}
+func (v *GroupMembership) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GroupMembership, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GroupMembership_CreatedAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.GroupMembership_CreatedAt, v.CreatedAt)
+		case schemas.GroupMembership_CreatedBy:
+			v.CreatedBy = new(string)
+			return d.ReadString(schemas.GroupMembership_CreatedBy, v.CreatedBy)
+		case schemas.GroupMembership_GroupId:
+			v.GroupId = new(string)
+			return d.ReadString(schemas.GroupMembership_GroupId, v.GroupId)
+		case schemas.GroupMembership_IdentityStoreId:
+			v.IdentityStoreId = new(string)
+			return d.ReadString(schemas.GroupMembership_IdentityStoreId, v.IdentityStoreId)
+		case schemas.GroupMembership_MemberId:
+			return deserializeMemberId(d, schemas.GroupMembership_MemberId, &v.MemberId)
+		case schemas.GroupMembership_MembershipArn:
+			v.MembershipArn = new(string)
+			return d.ReadString(schemas.GroupMembership_MembershipArn, v.MembershipArn)
+		case schemas.GroupMembership_MembershipId:
+			v.MembershipId = new(string)
+			return d.ReadString(schemas.GroupMembership_MembershipId, v.MembershipId)
+		case schemas.GroupMembership_UpdatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.GroupMembership_UpdatedAt, v.UpdatedAt)
+		case schemas.GroupMembership_UpdatedBy:
+			v.UpdatedBy = new(string)
+			return d.ReadString(schemas.GroupMembership_UpdatedBy, v.UpdatedBy)
+		}
+		return nil
+	})
 }
 
 // Indicates whether a resource is a member of a group in the identity store.
@@ -235,6 +610,82 @@ type GroupMembershipExistenceResult struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GroupMembershipExistenceResult) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GroupMembershipExistenceResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GroupMembershipExistenceResult) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GroupId != nil {
+		s.WriteString(schemas.GroupMembershipExistenceResult_GroupId, *v.GroupId)
+	}
+	serializeMemberId(s, schemas.GroupMembershipExistenceResult_MemberId, v.MemberId)
+	if v.MembershipExists != false {
+		s.WriteBool(schemas.GroupMembershipExistenceResult_MembershipExists, v.MembershipExists)
+	}
+}
+func (v *GroupMembershipExistenceResult) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GroupMembershipExistenceResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GroupMembershipExistenceResult_GroupId:
+			v.GroupId = new(string)
+			return d.ReadString(schemas.GroupMembershipExistenceResult_GroupId, v.GroupId)
+		case schemas.GroupMembershipExistenceResult_MemberId:
+			return deserializeMemberId(d, schemas.GroupMembershipExistenceResult_MemberId, &v.MemberId)
+		case schemas.GroupMembershipExistenceResult_MembershipExists:
+			return d.ReadBool(schemas.GroupMembershipExistenceResult_MembershipExists, &v.MembershipExists)
+		}
+		return nil
+	})
+}
+
+// A structure that contains the identifiers for an identity store: its globally
+// unique identifier (ID) and Amazon Resource Name (ARN).
+type IdentityStore struct {
+
+	// The Amazon Resource Name (ARN) of the identity store. For example,
+	// arn:aws:identitystore::111122223333:identitystore/d-1234567890 .
+	//
+	// This member is required.
+	IdentityStoreArn *string
+
+	// The globally unique identifier for the identity store.
+	//
+	// This member is required.
+	IdentityStoreId *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *IdentityStore) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.IdentityStore)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *IdentityStore) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IdentityStoreArn != nil {
+		s.WriteString(schemas.IdentityStore_IdentityStoreArn, *v.IdentityStoreArn)
+	}
+	if v.IdentityStoreId != nil {
+		s.WriteString(schemas.IdentityStore_IdentityStoreId, *v.IdentityStoreId)
+	}
+}
+func (v *IdentityStore) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.IdentityStore, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.IdentityStore_IdentityStoreArn:
+			v.IdentityStoreArn = new(string)
+			return d.ReadString(schemas.IdentityStore_IdentityStoreArn, v.IdentityStoreArn)
+		case schemas.IdentityStore_IdentityStoreId:
+			v.IdentityStoreId = new(string)
+			return d.ReadString(schemas.IdentityStore_IdentityStoreId, v.IdentityStoreId)
+		}
+		return nil
+	})
+}
+
 // An object containing the identifier of a group member.
 //
 // The following types satisfy this interface:
@@ -244,7 +695,11 @@ type MemberId interface {
 	isMemberId()
 }
 
-// An object containing the identifiers of resources that can be members.
+// The identifier for a user in the identity store.
+//
+// You can specify the user by ID or by Amazon Resource Name (ARN). For example,
+// user ID a1b2c3d4-5678-90ab-cdef-EXAMPLE11111 or user ARN
+// arn:aws:identitystore:::user/a1b2c3d4-5678-90ab-cdef-EXAMPLE11111 .
 type MemberIdMemberUserId struct {
 	Value string
 
@@ -252,6 +707,12 @@ type MemberIdMemberUserId struct {
 }
 
 func (*MemberIdMemberUserId) isMemberId() {}
+func (v *MemberIdMemberUserId) Serialize(s smithy.ShapeSerializer) {
+	s.WriteString(schemas.MemberId_UserId, v.Value)
+}
+func (v *MemberIdMemberUserId) Deserialize(d smithy.ShapeDeserializer) error {
+	return d.ReadString(schemas.MemberId_UserId, &v.Value)
+}
 
 // The full name of the user.
 type Name struct {
@@ -277,6 +738,199 @@ type Name struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Name) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Name)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Name) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FamilyName != nil {
+		s.WriteString(schemas.Name_FamilyName, *v.FamilyName)
+	}
+	if v.Formatted != nil {
+		s.WriteString(schemas.Name_Formatted, *v.Formatted)
+	}
+	if v.GivenName != nil {
+		s.WriteString(schemas.Name_GivenName, *v.GivenName)
+	}
+	if v.HonorificPrefix != nil {
+		s.WriteString(schemas.Name_HonorificPrefix, *v.HonorificPrefix)
+	}
+	if v.HonorificSuffix != nil {
+		s.WriteString(schemas.Name_HonorificSuffix, *v.HonorificSuffix)
+	}
+	if v.MiddleName != nil {
+		s.WriteString(schemas.Name_MiddleName, *v.MiddleName)
+	}
+}
+func (v *Name) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Name, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Name_FamilyName:
+			v.FamilyName = new(string)
+			return d.ReadString(schemas.Name_FamilyName, v.FamilyName)
+		case schemas.Name_Formatted:
+			v.Formatted = new(string)
+			return d.ReadString(schemas.Name_Formatted, v.Formatted)
+		case schemas.Name_GivenName:
+			v.GivenName = new(string)
+			return d.ReadString(schemas.Name_GivenName, v.GivenName)
+		case schemas.Name_HonorificPrefix:
+			v.HonorificPrefix = new(string)
+			return d.ReadString(schemas.Name_HonorificPrefix, v.HonorificPrefix)
+		case schemas.Name_HonorificSuffix:
+			v.HonorificSuffix = new(string)
+			return d.ReadString(schemas.Name_HonorificSuffix, v.HonorificSuffix)
+		case schemas.Name_MiddleName:
+			v.MiddleName = new(string)
+			return d.ReadString(schemas.Name_MiddleName, v.MiddleName)
+		}
+		return nil
+	})
+}
+
+// The network configuration that controls how an identity store can be accessed.
+// You provide this object in a request.
+type NetworkConfiguration struct {
+
+	// Specifies whether the identity store can be accessed only through a virtual
+	// private cloud (VPC) endpoint. When set to true , requests must originate from a
+	// VPC endpoint.
+	//
+	// This value must be set to either true or false when you provide
+	// NetworkConfiguration in a request.
+	//
+	// This member is required.
+	VpceAccessRequired *bool
+
+	// A list of IP address CIDR ranges that are allowed to access the identity store
+	// API operations. A request from an IP address in this list bypasses the identity
+	// store's other API network controls: it's permitted even if it doesn't come
+	// through a VPC endpoint required by VpceAccessRequired , and even if it doesn't
+	// originate from a VPC in ApiRestrictSourceVpcs . If you don't specify a value, no
+	// such IP address exception applies.
+	ApiAllowSourceIps []string
+
+	// A list of virtual private cloud (VPC) IDs that are allowed to access the
+	// identity store API operations. A request is denied unless it originates from a
+	// VPC in this list, or from an IP address in ApiAllowSourceIps if you specified
+	// one. If you don't specify a value, access isn't restricted to specific VPCs, but
+	// the VPC endpoint requirement set by VpceAccessRequired still applies.
+	ApiRestrictSourceVpcs []string
+
+	// A list of IP address CIDR ranges that are allowed to access the identity store
+	// through the System for Cross-domain Identity Management (SCIM) protocol.
+	// Requests from IP addresses outside these ranges are denied. If you don't specify
+	// a value, SCIM requests remain subject to the identity store's other network
+	// controls, such as the VPC endpoint requirement set by VpceAccessRequired .
+	//
+	// For example, to allow SCIM traffic from the public internet while still
+	// requiring the identity store API operations to be accessed through a VPC
+	// endpoint, set VpceAccessRequired to true and set this value to 0.0.0.0/0 .
+	ScimAllowSourceIps []string
+
+	noSmithyDocumentSerde
+}
+
+func (v *NetworkConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.NetworkConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *NetworkConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeIpCidrList(s, schemas.NetworkConfiguration_ApiAllowSourceIps, v.ApiAllowSourceIps)
+	serializeVpcIdList(s, schemas.NetworkConfiguration_ApiRestrictSourceVpcs, v.ApiRestrictSourceVpcs)
+	serializeIpCidrList(s, schemas.NetworkConfiguration_ScimAllowSourceIps, v.ScimAllowSourceIps)
+	if v.VpceAccessRequired != nil {
+		s.WriteBool(schemas.NetworkConfiguration_VpceAccessRequired, *v.VpceAccessRequired)
+	}
+}
+func (v *NetworkConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.NetworkConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.NetworkConfiguration_ApiAllowSourceIps:
+			return deserializeIpCidrList(d, schemas.NetworkConfiguration_ApiAllowSourceIps, &v.ApiAllowSourceIps)
+		case schemas.NetworkConfiguration_ApiRestrictSourceVpcs:
+			return deserializeVpcIdList(d, schemas.NetworkConfiguration_ApiRestrictSourceVpcs, &v.ApiRestrictSourceVpcs)
+		case schemas.NetworkConfiguration_ScimAllowSourceIps:
+			return deserializeIpCidrList(d, schemas.NetworkConfiguration_ScimAllowSourceIps, &v.ScimAllowSourceIps)
+		case schemas.NetworkConfiguration_VpceAccessRequired:
+			v.VpceAccessRequired = new(bool)
+			return d.ReadBool(schemas.NetworkConfiguration_VpceAccessRequired, v.VpceAccessRequired)
+		}
+		return nil
+	})
+}
+
+// The network configuration that controls how an identity store can be accessed.
+// This object is returned as part of service API responses.
+type NetworkConfigurationDetails struct {
+
+	// Specifies whether the identity store can be accessed only through a virtual
+	// private cloud (VPC) endpoint. When set to true , requests must originate from a
+	// VPC endpoint.
+	//
+	// This member is required.
+	VpceAccessRequired *bool
+
+	// A list of IP address CIDR ranges that are allowed to access the identity store
+	// API operations. A request from an IP address in this list bypasses the identity
+	// store's other API network controls: it's permitted even if it doesn't come
+	// through a VPC endpoint required by VpceAccessRequired , and even if it doesn't
+	// originate from a VPC in ApiRestrictSourceVpcs . If this field is empty, no such
+	// IP address exception applies.
+	ApiAllowSourceIps []string
+
+	// A list of virtual private cloud (VPC) IDs that are allowed to access the
+	// identity store API operations. A request is denied unless it originates from a
+	// VPC in this list, or from an IP address in ApiAllowSourceIps if one is
+	// configured. If this field is empty, access isn't restricted to specific VPCs,
+	// but the VPC endpoint requirement from VpceAccessRequired still applies.
+	ApiRestrictSourceVpcs []string
+
+	// A list of IP address CIDR ranges that are allowed to access the identity store
+	// through the System for Cross-domain Identity Management (SCIM) protocol.
+	// Requests from IP addresses outside these ranges are denied. If this field is
+	// empty, SCIM requests remain subject to the identity store's other network
+	// controls, such as the VPC endpoint requirement.
+	ScimAllowSourceIps []string
+
+	noSmithyDocumentSerde
+}
+
+func (v *NetworkConfigurationDetails) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.NetworkConfigurationDetails)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *NetworkConfigurationDetails) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeIpCidrList(s, schemas.NetworkConfigurationDetails_ApiAllowSourceIps, v.ApiAllowSourceIps)
+	serializeVpcIdList(s, schemas.NetworkConfigurationDetails_ApiRestrictSourceVpcs, v.ApiRestrictSourceVpcs)
+	serializeIpCidrList(s, schemas.NetworkConfigurationDetails_ScimAllowSourceIps, v.ScimAllowSourceIps)
+	if v.VpceAccessRequired != nil {
+		s.WriteBool(schemas.NetworkConfigurationDetails_VpceAccessRequired, *v.VpceAccessRequired)
+	}
+}
+func (v *NetworkConfigurationDetails) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.NetworkConfigurationDetails, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.NetworkConfigurationDetails_ApiAllowSourceIps:
+			return deserializeIpCidrList(d, schemas.NetworkConfigurationDetails_ApiAllowSourceIps, &v.ApiAllowSourceIps)
+		case schemas.NetworkConfigurationDetails_ApiRestrictSourceVpcs:
+			return deserializeVpcIdList(d, schemas.NetworkConfigurationDetails_ApiRestrictSourceVpcs, &v.ApiRestrictSourceVpcs)
+		case schemas.NetworkConfigurationDetails_ScimAllowSourceIps:
+			return deserializeIpCidrList(d, schemas.NetworkConfigurationDetails_ScimAllowSourceIps, &v.ScimAllowSourceIps)
+		case schemas.NetworkConfigurationDetails_VpceAccessRequired:
+			v.VpceAccessRequired = new(bool)
+			return d.ReadBool(schemas.NetworkConfigurationDetails_VpceAccessRequired, v.VpceAccessRequired)
+		}
+		return nil
+	})
+}
+
 // The phone number associated with the user.
 type PhoneNumber struct {
 
@@ -292,6 +946,39 @@ type PhoneNumber struct {
 	Value *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *PhoneNumber) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PhoneNumber)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PhoneNumber) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Primary != false {
+		s.WriteBool(schemas.PhoneNumber_Primary, v.Primary)
+	}
+	if v.Type != nil {
+		s.WriteString(schemas.PhoneNumber_Type, *v.Type)
+	}
+	if v.Value != nil {
+		s.WriteString(schemas.PhoneNumber_Value, *v.Value)
+	}
+}
+func (v *PhoneNumber) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PhoneNumber, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PhoneNumber_Primary:
+			return d.ReadBool(schemas.PhoneNumber_Primary, &v.Primary)
+		case schemas.PhoneNumber_Type:
+			v.Type = new(string)
+			return d.ReadString(schemas.PhoneNumber_Type, v.Type)
+		case schemas.PhoneNumber_Value:
+			v.Value = new(string)
+			return d.ReadString(schemas.PhoneNumber_Value, v.Value)
+		}
+		return nil
+	})
 }
 
 // Contains information about a user's photo. Users can have up to 3 photos, with
@@ -320,6 +1007,45 @@ type Photo struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Photo) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Photo)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Photo) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Display != nil {
+		s.WriteString(schemas.Photo_Display, *v.Display)
+	}
+	if v.Primary != false {
+		s.WriteBool(schemas.Photo_Primary, v.Primary)
+	}
+	if v.Type != nil {
+		s.WriteString(schemas.Photo_Type, *v.Type)
+	}
+	if v.Value != nil {
+		s.WriteString(schemas.Photo_Value, *v.Value)
+	}
+}
+func (v *Photo) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Photo, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Photo_Display:
+			v.Display = new(string)
+			return d.ReadString(schemas.Photo_Display, v.Display)
+		case schemas.Photo_Primary:
+			return d.ReadBool(schemas.Photo_Primary, &v.Primary)
+		case schemas.Photo_Type:
+			v.Type = new(string)
+			return d.ReadString(schemas.Photo_Type, v.Type)
+		case schemas.Photo_Value:
+			v.Value = new(string)
+			return d.ReadString(schemas.Photo_Value, v.Value)
+		}
+		return nil
+	})
+}
+
 // The role associated with the user.
 type Role struct {
 
@@ -334,6 +1060,39 @@ type Role struct {
 	Value *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *Role) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Role)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Role) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Primary != false {
+		s.WriteBool(schemas.Role_Primary, v.Primary)
+	}
+	if v.Type != nil {
+		s.WriteString(schemas.Role_Type, *v.Type)
+	}
+	if v.Value != nil {
+		s.WriteString(schemas.Role_Value, *v.Value)
+	}
+}
+func (v *Role) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Role, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Role_Primary:
+			return d.ReadBool(schemas.Role_Primary, &v.Primary)
+		case schemas.Role_Type:
+			v.Type = new(string)
+			return d.ReadString(schemas.Role_Type, v.Type)
+		case schemas.Role_Value:
+			v.Value = new(string)
+			return d.ReadString(schemas.Role_Value, v.Value)
+		}
+		return nil
+	})
 }
 
 // An entity attribute that's unique to a specific entity.
@@ -354,6 +1113,40 @@ type UniqueAttribute struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UniqueAttribute) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UniqueAttribute)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UniqueAttribute) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AttributePath != nil {
+		s.WriteString(schemas.UniqueAttribute_AttributePath, *v.AttributePath)
+	}
+	if v.AttributeValue != nil {
+		s.WriteDocument(schemas.UniqueAttribute_AttributeValue, &smithydocument.Opaque{Value: v.AttributeValue})
+	}
+}
+func (v *UniqueAttribute) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UniqueAttribute, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UniqueAttribute_AttributePath:
+			v.AttributePath = new(string)
+			return d.ReadString(schemas.UniqueAttribute_AttributePath, v.AttributePath)
+		case schemas.UniqueAttribute_AttributeValue:
+			var dv smithydocument.Value
+			if err := d.ReadDocument(schemas.UniqueAttribute_AttributeValue, &dv); err != nil {
+				return err
+			}
+			if ov, ok := dv.(smithydocument.Opaque); ok {
+				v.AttributeValue = internaldocument.NewDocumentUnmarshaler(ov.Value)
+			}
+			return nil
+		}
+		return nil
+	})
+}
+
 // A user object that contains the metadata and attributes for a specified user.
 type User struct {
 
@@ -361,6 +1154,21 @@ type User struct {
 	//
 	// This member is required.
 	IdentityStoreId *string
+
+	// The current revision of the user in the identity store. This value changes each
+	// time the user is modified. You can provide it as the Revision parameter of an
+	// UpdateUser or DeleteUser request to make the operation conditional on the user
+	// not having changed. Treat this value as an opaque token: don't parse it or rely
+	// on its format or ordering.
+	//
+	// This member is required.
+	Revision *string
+
+	// The Amazon Resource Name (ARN) of the user in the identity store. For example,
+	// arn:aws:identitystore:::user/a1b2c3d4-5678-90ab-cdef-EXAMPLE11111 .
+	//
+	// This member is required.
+	UserArn *string
 
 	// The identifier for a user in the identity store.
 	//
@@ -454,6 +1262,175 @@ type User struct {
 	Website *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *User) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.User)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *User) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAddresses(s, schemas.User_Addresses, v.Addresses)
+	if v.Birthdate != nil {
+		s.WriteString(schemas.User_Birthdate, *v.Birthdate)
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.User_CreatedAt, *v.CreatedAt)
+	}
+	if v.CreatedBy != nil {
+		s.WriteString(schemas.User_CreatedBy, *v.CreatedBy)
+	}
+	if v.DisplayName != nil {
+		s.WriteString(schemas.User_DisplayName, *v.DisplayName)
+	}
+	serializeEmails(s, schemas.User_Emails, v.Emails)
+	serializeExtensions(s, schemas.User_Extensions, v.Extensions)
+	serializeExternalIds(s, schemas.User_ExternalIds, v.ExternalIds)
+	if v.IdentityStoreId != nil {
+		s.WriteString(schemas.User_IdentityStoreId, *v.IdentityStoreId)
+	}
+	if v.Locale != nil {
+		s.WriteString(schemas.User_Locale, *v.Locale)
+	}
+	if v.Name != nil {
+		s.WriteStruct(schemas.User_Name)
+		v.Name.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.NickName != nil {
+		s.WriteString(schemas.User_NickName, *v.NickName)
+	}
+	serializePhoneNumbers(s, schemas.User_PhoneNumbers, v.PhoneNumbers)
+	serializePhotos(s, schemas.User_Photos, v.Photos)
+	if v.PreferredLanguage != nil {
+		s.WriteString(schemas.User_PreferredLanguage, *v.PreferredLanguage)
+	}
+	if v.ProfileUrl != nil {
+		s.WriteString(schemas.User_ProfileUrl, *v.ProfileUrl)
+	}
+	if v.Revision != nil {
+		s.WriteString(schemas.User_Revision, *v.Revision)
+	}
+	serializeRoles(s, schemas.User_Roles, v.Roles)
+	if v.Timezone != nil {
+		s.WriteString(schemas.User_Timezone, *v.Timezone)
+	}
+	if v.Title != nil {
+		s.WriteString(schemas.User_Title, *v.Title)
+	}
+	if v.UpdatedAt != nil {
+		s.WriteTime(schemas.User_UpdatedAt, *v.UpdatedAt)
+	}
+	if v.UpdatedBy != nil {
+		s.WriteString(schemas.User_UpdatedBy, *v.UpdatedBy)
+	}
+	if v.UserArn != nil {
+		s.WriteString(schemas.User_UserArn, *v.UserArn)
+	}
+	if v.UserId != nil {
+		s.WriteString(schemas.User_UserId, *v.UserId)
+	}
+	if v.UserName != nil {
+		s.WriteString(schemas.User_UserName, *v.UserName)
+	}
+	if v.UserStatus != "" {
+		s.WriteString(schemas.User_UserStatus, string(v.UserStatus))
+	}
+	if v.UserType != nil {
+		s.WriteString(schemas.User_UserType, *v.UserType)
+	}
+	if v.Website != nil {
+		s.WriteString(schemas.User_Website, *v.Website)
+	}
+}
+func (v *User) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.User, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.User_Addresses:
+			return deserializeAddresses(d, schemas.User_Addresses, &v.Addresses)
+		case schemas.User_Birthdate:
+			v.Birthdate = new(string)
+			return d.ReadString(schemas.User_Birthdate, v.Birthdate)
+		case schemas.User_CreatedAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.User_CreatedAt, v.CreatedAt)
+		case schemas.User_CreatedBy:
+			v.CreatedBy = new(string)
+			return d.ReadString(schemas.User_CreatedBy, v.CreatedBy)
+		case schemas.User_DisplayName:
+			v.DisplayName = new(string)
+			return d.ReadString(schemas.User_DisplayName, v.DisplayName)
+		case schemas.User_Emails:
+			return deserializeEmails(d, schemas.User_Emails, &v.Emails)
+		case schemas.User_Extensions:
+			return deserializeExtensions(d, schemas.User_Extensions, &v.Extensions)
+		case schemas.User_ExternalIds:
+			return deserializeExternalIds(d, schemas.User_ExternalIds, &v.ExternalIds)
+		case schemas.User_IdentityStoreId:
+			v.IdentityStoreId = new(string)
+			return d.ReadString(schemas.User_IdentityStoreId, v.IdentityStoreId)
+		case schemas.User_Locale:
+			v.Locale = new(string)
+			return d.ReadString(schemas.User_Locale, v.Locale)
+		case schemas.User_Name:
+			v.Name = &Name{}
+			return v.Name.Deserialize(d)
+		case schemas.User_NickName:
+			v.NickName = new(string)
+			return d.ReadString(schemas.User_NickName, v.NickName)
+		case schemas.User_PhoneNumbers:
+			return deserializePhoneNumbers(d, schemas.User_PhoneNumbers, &v.PhoneNumbers)
+		case schemas.User_Photos:
+			return deserializePhotos(d, schemas.User_Photos, &v.Photos)
+		case schemas.User_PreferredLanguage:
+			v.PreferredLanguage = new(string)
+			return d.ReadString(schemas.User_PreferredLanguage, v.PreferredLanguage)
+		case schemas.User_ProfileUrl:
+			v.ProfileUrl = new(string)
+			return d.ReadString(schemas.User_ProfileUrl, v.ProfileUrl)
+		case schemas.User_Revision:
+			v.Revision = new(string)
+			return d.ReadString(schemas.User_Revision, v.Revision)
+		case schemas.User_Roles:
+			return deserializeRoles(d, schemas.User_Roles, &v.Roles)
+		case schemas.User_Timezone:
+			v.Timezone = new(string)
+			return d.ReadString(schemas.User_Timezone, v.Timezone)
+		case schemas.User_Title:
+			v.Title = new(string)
+			return d.ReadString(schemas.User_Title, v.Title)
+		case schemas.User_UpdatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.User_UpdatedAt, v.UpdatedAt)
+		case schemas.User_UpdatedBy:
+			v.UpdatedBy = new(string)
+			return d.ReadString(schemas.User_UpdatedBy, v.UpdatedBy)
+		case schemas.User_UserArn:
+			v.UserArn = new(string)
+			return d.ReadString(schemas.User_UserArn, v.UserArn)
+		case schemas.User_UserId:
+			v.UserId = new(string)
+			return d.ReadString(schemas.User_UserId, v.UserId)
+		case schemas.User_UserName:
+			v.UserName = new(string)
+			return d.ReadString(schemas.User_UserName, v.UserName)
+		case schemas.User_UserStatus:
+			var ev string
+			if err := d.ReadString(schemas.User_UserStatus, &ev); err != nil {
+				return err
+			}
+			v.UserStatus = UserStatus(ev)
+			return nil
+		case schemas.User_UserType:
+			v.UserType = new(string)
+			return d.ReadString(schemas.User_UserType, v.UserType)
+		case schemas.User_Website:
+			v.Website = new(string)
+			return d.ReadString(schemas.User_Website, v.Website)
+		}
+		return nil
+	})
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde

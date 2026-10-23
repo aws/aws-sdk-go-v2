@@ -5,7 +5,9 @@ package bedrockagent
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/bedrockagent/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagent/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -106,6 +108,38 @@ type CreateKnowledgeBaseInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateKnowledgeBaseInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateKnowledgeBaseRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateKnowledgeBaseInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateKnowledgeBaseRequest_clientToken, *v.ClientToken)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreateKnowledgeBaseRequest_description, *v.Description)
+	}
+	if v.KnowledgeBaseConfiguration != nil {
+		s.WriteStruct(schemas.CreateKnowledgeBaseRequest_knowledgeBaseConfiguration)
+		v.KnowledgeBaseConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateKnowledgeBaseRequest_name, *v.Name)
+	}
+	if v.RoleArn != nil {
+		s.WriteString(schemas.CreateKnowledgeBaseRequest_roleArn, *v.RoleArn)
+	}
+	if v.StorageConfiguration != nil {
+		s.WriteStruct(schemas.CreateKnowledgeBaseRequest_storageConfiguration)
+		v.StorageConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeTagsMap(s, schemas.CreateKnowledgeBaseRequest_tags, v.Tags)
+}
+
 type CreateKnowledgeBaseOutput struct {
 
 	// Contains details about the knowledge base.
@@ -119,13 +153,34 @@ type CreateKnowledgeBaseOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateKnowledgeBaseOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateKnowledgeBaseResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateKnowledgeBaseOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.KnowledgeBase != nil {
+		s.WriteStruct(schemas.CreateKnowledgeBaseResponse_knowledgeBase)
+		v.KnowledgeBase.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateKnowledgeBaseOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateKnowledgeBaseResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateKnowledgeBaseResponse_knowledgeBase:
+			v.KnowledgeBase = &types.KnowledgeBase{}
+			return v.KnowledgeBase.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateKnowledgeBaseMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateKnowledgeBase{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateKnowledgeBase, schemas.CreateKnowledgeBaseRequest, schemas.CreateKnowledgeBaseResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateKnowledgeBase{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateKnowledgeBase, schemas.CreateKnowledgeBaseRequest, schemas.CreateKnowledgeBaseResponse), output: &CreateKnowledgeBaseOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

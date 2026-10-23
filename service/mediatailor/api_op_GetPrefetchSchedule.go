@@ -4,7 +4,9 @@ package mediatailor
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/mediatailor/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/mediatailor/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -45,6 +47,34 @@ type GetPrefetchScheduleInput struct {
 	PlaybackConfigurationName *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetPrefetchScheduleInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetPrefetchScheduleRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetPrefetchScheduleInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.GetPrefetchScheduleRequest_Name, *v.Name)
+	}
+	if v.PlaybackConfigurationName != nil {
+		s.WriteString(schemas.GetPrefetchScheduleRequest_PlaybackConfigurationName, *v.PlaybackConfigurationName)
+	}
+}
+func (v *GetPrefetchScheduleInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetPrefetchScheduleRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetPrefetchScheduleRequest_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.GetPrefetchScheduleRequest_Name, v.Name)
+		case schemas.GetPrefetchScheduleRequest_PlaybackConfigurationName:
+			v.PlaybackConfigurationName = new(string)
+			return d.ReadString(schemas.GetPrefetchScheduleRequest_PlaybackConfigurationName, v.PlaybackConfigurationName)
+		}
+		return nil
+	})
 }
 
 type GetPrefetchScheduleOutput struct {
@@ -96,13 +126,87 @@ type GetPrefetchScheduleOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetPrefetchScheduleOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetPrefetchScheduleResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetPrefetchScheduleOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.GetPrefetchScheduleResponse_Arn, *v.Arn)
+	}
+	if v.Consumption != nil {
+		s.WriteStruct(schemas.GetPrefetchScheduleResponse_Consumption)
+		v.Consumption.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.GetPrefetchScheduleResponse_Name, *v.Name)
+	}
+	if v.PlaybackConfigurationName != nil {
+		s.WriteString(schemas.GetPrefetchScheduleResponse_PlaybackConfigurationName, *v.PlaybackConfigurationName)
+	}
+	if v.RecurringPrefetchConfiguration != nil {
+		s.WriteStruct(schemas.GetPrefetchScheduleResponse_RecurringPrefetchConfiguration)
+		v.RecurringPrefetchConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Retrieval != nil {
+		s.WriteStruct(schemas.GetPrefetchScheduleResponse_Retrieval)
+		v.Retrieval.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ScheduleType != "" {
+		s.WriteString(schemas.GetPrefetchScheduleResponse_ScheduleType, string(v.ScheduleType))
+	}
+	if v.StreamId != nil {
+		s.WriteString(schemas.GetPrefetchScheduleResponse_StreamId, *v.StreamId)
+	}
+	serialize__mapOf__string(s, schemas.GetPrefetchScheduleResponse_Tags, v.Tags)
+}
+func (v *GetPrefetchScheduleOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetPrefetchScheduleResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetPrefetchScheduleResponse_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.GetPrefetchScheduleResponse_Arn, v.Arn)
+		case schemas.GetPrefetchScheduleResponse_Consumption:
+			v.Consumption = &types.PrefetchConsumption{}
+			return v.Consumption.Deserialize(d)
+		case schemas.GetPrefetchScheduleResponse_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.GetPrefetchScheduleResponse_Name, v.Name)
+		case schemas.GetPrefetchScheduleResponse_PlaybackConfigurationName:
+			v.PlaybackConfigurationName = new(string)
+			return d.ReadString(schemas.GetPrefetchScheduleResponse_PlaybackConfigurationName, v.PlaybackConfigurationName)
+		case schemas.GetPrefetchScheduleResponse_RecurringPrefetchConfiguration:
+			v.RecurringPrefetchConfiguration = &types.RecurringPrefetchConfiguration{}
+			return v.RecurringPrefetchConfiguration.Deserialize(d)
+		case schemas.GetPrefetchScheduleResponse_Retrieval:
+			v.Retrieval = &types.PrefetchRetrieval{}
+			return v.Retrieval.Deserialize(d)
+		case schemas.GetPrefetchScheduleResponse_ScheduleType:
+			var ev string
+			if err := d.ReadString(schemas.GetPrefetchScheduleResponse_ScheduleType, &ev); err != nil {
+				return err
+			}
+			v.ScheduleType = types.PrefetchScheduleType(ev)
+			return nil
+		case schemas.GetPrefetchScheduleResponse_StreamId:
+			v.StreamId = new(string)
+			return d.ReadString(schemas.GetPrefetchScheduleResponse_StreamId, v.StreamId)
+		case schemas.GetPrefetchScheduleResponse_Tags:
+			return deserialize__mapOf__string(d, schemas.GetPrefetchScheduleResponse_Tags, &v.Tags)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetPrefetchScheduleMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetPrefetchSchedule{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetPrefetchSchedule, schemas.GetPrefetchScheduleRequest, schemas.GetPrefetchScheduleResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetPrefetchSchedule{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetPrefetchSchedule, schemas.GetPrefetchScheduleRequest, schemas.GetPrefetchScheduleResponse), output: &GetPrefetchScheduleOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

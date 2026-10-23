@@ -4,7 +4,9 @@ package costexplorer
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/costexplorer/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/costexplorer/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -36,6 +38,20 @@ type StartCommitmentPurchaseAnalysisInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartCommitmentPurchaseAnalysisInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartCommitmentPurchaseAnalysisRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartCommitmentPurchaseAnalysisInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CommitmentPurchaseAnalysisConfiguration != nil {
+		s.WriteStruct(schemas.StartCommitmentPurchaseAnalysisRequest_CommitmentPurchaseAnalysisConfiguration)
+		v.CommitmentPurchaseAnalysisConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type StartCommitmentPurchaseAnalysisOutput struct {
 
 	// The analysis ID that's associated with the commitment purchase analysis.
@@ -59,13 +75,44 @@ type StartCommitmentPurchaseAnalysisOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartCommitmentPurchaseAnalysisOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartCommitmentPurchaseAnalysisResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartCommitmentPurchaseAnalysisOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AnalysisId != nil {
+		s.WriteString(schemas.StartCommitmentPurchaseAnalysisResponse_AnalysisId, *v.AnalysisId)
+	}
+	if v.AnalysisStartedTime != nil {
+		s.WriteString(schemas.StartCommitmentPurchaseAnalysisResponse_AnalysisStartedTime, *v.AnalysisStartedTime)
+	}
+	if v.EstimatedCompletionTime != nil {
+		s.WriteString(schemas.StartCommitmentPurchaseAnalysisResponse_EstimatedCompletionTime, *v.EstimatedCompletionTime)
+	}
+}
+func (v *StartCommitmentPurchaseAnalysisOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartCommitmentPurchaseAnalysisResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartCommitmentPurchaseAnalysisResponse_AnalysisId:
+			v.AnalysisId = new(string)
+			return d.ReadString(schemas.StartCommitmentPurchaseAnalysisResponse_AnalysisId, v.AnalysisId)
+		case schemas.StartCommitmentPurchaseAnalysisResponse_AnalysisStartedTime:
+			v.AnalysisStartedTime = new(string)
+			return d.ReadString(schemas.StartCommitmentPurchaseAnalysisResponse_AnalysisStartedTime, v.AnalysisStartedTime)
+		case schemas.StartCommitmentPurchaseAnalysisResponse_EstimatedCompletionTime:
+			v.EstimatedCompletionTime = new(string)
+			return d.ReadString(schemas.StartCommitmentPurchaseAnalysisResponse_EstimatedCompletionTime, v.EstimatedCompletionTime)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartCommitmentPurchaseAnalysisMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStartCommitmentPurchaseAnalysis{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartCommitmentPurchaseAnalysis, schemas.StartCommitmentPurchaseAnalysisRequest, schemas.StartCommitmentPurchaseAnalysisResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpStartCommitmentPurchaseAnalysis{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartCommitmentPurchaseAnalysis, schemas.StartCommitmentPurchaseAnalysisRequest, schemas.StartCommitmentPurchaseAnalysisResponse), output: &StartCommitmentPurchaseAnalysisOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

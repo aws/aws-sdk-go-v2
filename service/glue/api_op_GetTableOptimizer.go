@@ -4,7 +4,9 @@ package glue
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/glue/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/glue/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -49,6 +51,27 @@ type GetTableOptimizerInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetTableOptimizerInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetTableOptimizerRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetTableOptimizerInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CatalogId != nil {
+		s.WriteString(schemas.GetTableOptimizerRequest_CatalogId, *v.CatalogId)
+	}
+	if v.DatabaseName != nil {
+		s.WriteString(schemas.GetTableOptimizerRequest_DatabaseName, *v.DatabaseName)
+	}
+	if v.TableName != nil {
+		s.WriteString(schemas.GetTableOptimizerRequest_TableName, *v.TableName)
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.GetTableOptimizerRequest_Type, string(v.Type))
+	}
+}
+
 type GetTableOptimizerOutput struct {
 
 	// The Catalog ID of the table.
@@ -69,13 +92,52 @@ type GetTableOptimizerOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetTableOptimizerOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetTableOptimizerResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetTableOptimizerOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CatalogId != nil {
+		s.WriteString(schemas.GetTableOptimizerResponse_CatalogId, *v.CatalogId)
+	}
+	if v.DatabaseName != nil {
+		s.WriteString(schemas.GetTableOptimizerResponse_DatabaseName, *v.DatabaseName)
+	}
+	if v.TableName != nil {
+		s.WriteString(schemas.GetTableOptimizerResponse_TableName, *v.TableName)
+	}
+	if v.TableOptimizer != nil {
+		s.WriteStruct(schemas.GetTableOptimizerResponse_TableOptimizer)
+		v.TableOptimizer.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetTableOptimizerOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetTableOptimizerResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetTableOptimizerResponse_CatalogId:
+			v.CatalogId = new(string)
+			return d.ReadString(schemas.GetTableOptimizerResponse_CatalogId, v.CatalogId)
+		case schemas.GetTableOptimizerResponse_DatabaseName:
+			v.DatabaseName = new(string)
+			return d.ReadString(schemas.GetTableOptimizerResponse_DatabaseName, v.DatabaseName)
+		case schemas.GetTableOptimizerResponse_TableName:
+			v.TableName = new(string)
+			return d.ReadString(schemas.GetTableOptimizerResponse_TableName, v.TableName)
+		case schemas.GetTableOptimizerResponse_TableOptimizer:
+			v.TableOptimizer = &types.TableOptimizer{}
+			return v.TableOptimizer.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetTableOptimizerMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetTableOptimizer{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetTableOptimizer, schemas.GetTableOptimizerRequest, schemas.GetTableOptimizerResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetTableOptimizer{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetTableOptimizer, schemas.GetTableOptimizerRequest, schemas.GetTableOptimizerResponse), output: &GetTableOptimizerOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package sesv2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/sesv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sesv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -62,6 +64,24 @@ type CreateTenantInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateTenantInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateTenantRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateTenantInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SuppressionAttributes != nil {
+		s.WriteStruct(schemas.CreateTenantRequest_SuppressionAttributes)
+		v.SuppressionAttributes.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeTagList(s, schemas.CreateTenantRequest_Tags, v.Tags)
+	if v.TenantName != nil {
+		s.WriteString(schemas.CreateTenantRequest_TenantName, *v.TenantName)
+	}
+}
+
 // Information about a newly created tenant.
 type CreateTenantOutput struct {
 
@@ -93,13 +113,71 @@ type CreateTenantOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateTenantOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateTenantResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateTenantOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreatedTimestamp != nil {
+		s.WriteTime(schemas.CreateTenantResponse_CreatedTimestamp, *v.CreatedTimestamp)
+	}
+	if v.SendingStatus != "" {
+		s.WriteString(schemas.CreateTenantResponse_SendingStatus, string(v.SendingStatus))
+	}
+	if v.SuppressionAttributes != nil {
+		s.WriteStruct(schemas.CreateTenantResponse_SuppressionAttributes)
+		v.SuppressionAttributes.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeTagList(s, schemas.CreateTenantResponse_Tags, v.Tags)
+	if v.TenantArn != nil {
+		s.WriteString(schemas.CreateTenantResponse_TenantArn, *v.TenantArn)
+	}
+	if v.TenantId != nil {
+		s.WriteString(schemas.CreateTenantResponse_TenantId, *v.TenantId)
+	}
+	if v.TenantName != nil {
+		s.WriteString(schemas.CreateTenantResponse_TenantName, *v.TenantName)
+	}
+}
+func (v *CreateTenantOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateTenantResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateTenantResponse_CreatedTimestamp:
+			v.CreatedTimestamp = new(time.Time)
+			return d.ReadTime(schemas.CreateTenantResponse_CreatedTimestamp, v.CreatedTimestamp)
+		case schemas.CreateTenantResponse_SendingStatus:
+			var ev string
+			if err := d.ReadString(schemas.CreateTenantResponse_SendingStatus, &ev); err != nil {
+				return err
+			}
+			v.SendingStatus = types.SendingStatus(ev)
+			return nil
+		case schemas.CreateTenantResponse_SuppressionAttributes:
+			v.SuppressionAttributes = &types.TenantSuppressionAttributes{}
+			return v.SuppressionAttributes.Deserialize(d)
+		case schemas.CreateTenantResponse_Tags:
+			return deserializeTagList(d, schemas.CreateTenantResponse_Tags, &v.Tags)
+		case schemas.CreateTenantResponse_TenantArn:
+			v.TenantArn = new(string)
+			return d.ReadString(schemas.CreateTenantResponse_TenantArn, v.TenantArn)
+		case schemas.CreateTenantResponse_TenantId:
+			v.TenantId = new(string)
+			return d.ReadString(schemas.CreateTenantResponse_TenantId, v.TenantId)
+		case schemas.CreateTenantResponse_TenantName:
+			v.TenantName = new(string)
+			return d.ReadString(schemas.CreateTenantResponse_TenantName, v.TenantName)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateTenantMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateTenant{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateTenant, schemas.CreateTenantRequest, schemas.CreateTenantResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateTenant{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateTenant, schemas.CreateTenantRequest, schemas.CreateTenantResponse), output: &CreateTenantOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -659,6 +659,7 @@ func TestCheckResponseSnapshot_CreateAgentRuntime(t *testing.T) {
 		Tags: map[string]string{
 			"key0": "__Value__",
 		},
+		PlatformVersion: ptr.String("__PlatformVersion__"),
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -1394,6 +1395,7 @@ func TestCheckResponseSnapshot_CreateGateway(t *testing.T) {
 				StreamingConfiguration: &types.StreamingConfiguration{
 					EnableResponseStreaming: ptr.Bool(true),
 				},
+				DisableMcpListToolsPagination: ptr.Bool(true),
 			},
 		},
 		AuthorizerType: types.AuthorizerType("CUSTOM_JWT"),
@@ -1573,6 +1575,7 @@ func TestCheckResponseSnapshot_CreateGateway(t *testing.T) {
 				StreamingConfiguration: &types.StreamingConfiguration{
 					EnableResponseStreaming: ptr.Bool(true),
 				},
+				DisableMcpListToolsPagination: ptr.Bool(true),
 			},
 		},
 		AuthorizerType: types.AuthorizerType("CUSTOM_JWT"),
@@ -2150,6 +2153,20 @@ func TestCheckResponseSnapshot_CreateGatewayTarget(t *testing.T) {
 			},
 		},
 		ProtocolType: types.TargetProtocolType("MCP"),
+		CertificateConfigurations: []types.CertificateConfiguration{
+			&types.CertificateConfigurationMemberS3{
+				Value: types.S3CertificateConfiguration{
+					Uri:                  ptr.String("__Uri__"),
+					BucketOwnerAccountId: ptr.String("__BucketOwnerAccountId__"),
+				},
+			},
+			&types.CertificateConfigurationMemberS3{
+				Value: types.S3CertificateConfiguration{
+					Uri:                  ptr.String("__Uri__"),
+					BucketOwnerAccountId: ptr.String("__BucketOwnerAccountId__"),
+				},
+			},
+		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("CreateGatewayTarget.response")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -2227,6 +2244,20 @@ func TestCheckResponseSnapshot_CreateGatewayTarget(t *testing.T) {
 		PrivateEndpoint: &types.PrivateEndpointMemberSelfManagedLatticeResource{
 			Value: &types.SelfManagedLatticeResourceMemberResourceConfigurationIdentifier{
 				Value: "__SelfManagedLatticeResourceMemberResourceConfigurationIdentifier__",
+			},
+		},
+		CertificateConfigurations: []types.CertificateConfiguration{
+			&types.CertificateConfigurationMemberS3{
+				Value: types.S3CertificateConfiguration{
+					Uri:                  ptr.String("__Uri__"),
+					BucketOwnerAccountId: ptr.String("__BucketOwnerAccountId__"),
+				},
+			},
+			&types.CertificateConfigurationMemberS3{
+				Value: types.S3CertificateConfiguration{
+					Uri:                  ptr.String("__Uri__"),
+					BucketOwnerAccountId: ptr.String("__BucketOwnerAccountId__"),
+				},
 			},
 		},
 	})
@@ -2451,6 +2482,32 @@ func TestCheckResponseSnapshot_CreateHarness(t *testing.T) {
 					},
 				},
 			},
+			Hooks: []types.HarnessHook{
+				&types.HarnessHookMemberBeforeInvocation{
+					Value: types.HarnessBeforeInvocationHook{
+						Name: ptr.String("__Name__"),
+						Target: &types.HarnessHookTargetMemberLambda{
+							Value: types.HarnessHookLambdaTarget{
+								Arn:            ptr.String("__Arn__"),
+								TimeoutSeconds: ptr.Int32(1),
+								FailureMode:    types.HarnessHookFailureMode("allow"),
+							},
+						},
+					},
+				},
+				&types.HarnessHookMemberBeforeInvocation{
+					Value: types.HarnessBeforeInvocationHook{
+						Name: ptr.String("__Name__"),
+						Target: &types.HarnessHookTargetMemberLambda{
+							Value: types.HarnessHookLambdaTarget{
+								Arn:            ptr.String("__Arn__"),
+								TimeoutSeconds: ptr.Int32(1),
+								FailureMode:    types.HarnessHookFailureMode("allow"),
+							},
+						},
+					},
+				},
+			},
 			MaxIterations:  ptr.Int32(1),
 			MaxTokens:      ptr.Int32(1),
 			TimeoutSeconds: ptr.Int32(1),
@@ -2668,6 +2725,32 @@ func TestCheckResponseSnapshot_CreateHarness(t *testing.T) {
 				},
 			},
 		},
+		Hooks: []types.HarnessHook{
+			&types.HarnessHookMemberBeforeInvocation{
+				Value: types.HarnessBeforeInvocationHook{
+					Name: ptr.String("__Name__"),
+					Target: &types.HarnessHookTargetMemberLambda{
+						Value: types.HarnessHookLambdaTarget{
+							Arn:            ptr.String("__Arn__"),
+							TimeoutSeconds: ptr.Int32(1),
+							FailureMode:    types.HarnessHookFailureMode("allow"),
+						},
+					},
+				},
+			},
+			&types.HarnessHookMemberBeforeInvocation{
+				Value: types.HarnessBeforeInvocationHook{
+					Name: ptr.String("__Name__"),
+					Target: &types.HarnessHookTargetMemberLambda{
+						Value: types.HarnessHookLambdaTarget{
+							Arn:            ptr.String("__Arn__"),
+							TimeoutSeconds: ptr.Int32(1),
+							FailureMode:    types.HarnessHookFailureMode("allow"),
+						},
+					},
+				},
+			},
+		},
 		MaxIterations:  ptr.Int32(1),
 		MaxTokens:      ptr.Int32(1),
 		TimeoutSeconds: ptr.Int32(1),
@@ -2850,6 +2933,7 @@ func TestCheckResponseSnapshot_CreateMemory(t *testing.T) {
 							},
 						},
 					},
+					RecordExpiryDurationDays: ptr.Int32(1),
 				},
 				{
 					StrategyId:  ptr.String("__StrategyId__"),
@@ -2961,6 +3045,7 @@ func TestCheckResponseSnapshot_CreateMemory(t *testing.T) {
 							},
 						},
 					},
+					RecordExpiryDurationDays: ptr.Int32(1),
 				},
 			},
 			IndexedKeys: []types.IndexedKey{
@@ -3102,6 +3187,9 @@ func TestCheckResponseSnapshot_CreateMemory(t *testing.T) {
 							},
 						},
 					},
+					RecordExpirySpecification: &types.RecordExpirySpecificationMemberRecordExpiryDurationDays{
+						Value: 1,
+					},
 				},
 			},
 			&types.MemoryStrategyInputMemberSemanticMemoryStrategy{
@@ -3157,6 +3245,9 @@ func TestCheckResponseSnapshot_CreateMemory(t *testing.T) {
 								},
 							},
 						},
+					},
+					RecordExpirySpecification: &types.RecordExpirySpecificationMemberRecordExpiryDurationDays{
+						Value: 1,
 					},
 				},
 			},
@@ -4338,8 +4429,9 @@ func TestCheckResponseSnapshot_DeleteCodeInterpreter(t *testing.T) {
 
 func TestCheckResponseSnapshot_DeleteConfigurationBundle(t *testing.T) {
 	want := &DeleteConfigurationBundleOutput{
-		BundleId: ptr.String("__BundleId__"),
-		Status:   types.ConfigurationBundleStatus("ACTIVE"),
+		BundleArn: ptr.String("__BundleArn__"),
+		BundleId:  ptr.String("__BundleId__"),
+		Status:    types.ConfigurationBundleStatus("ACTIVE"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("DeleteConfigurationBundle.response")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -4783,6 +4875,32 @@ func TestCheckResponseSnapshot_DeleteHarness(t *testing.T) {
 							TopK:           ptr.Int32(1),
 							RelevanceScore: ptr.Float32(1.0),
 							StrategyId:     ptr.String("__StrategyId__"),
+						},
+					},
+				},
+			},
+			Hooks: []types.HarnessHook{
+				&types.HarnessHookMemberBeforeInvocation{
+					Value: types.HarnessBeforeInvocationHook{
+						Name: ptr.String("__Name__"),
+						Target: &types.HarnessHookTargetMemberLambda{
+							Value: types.HarnessHookLambdaTarget{
+								Arn:            ptr.String("__Arn__"),
+								TimeoutSeconds: ptr.Int32(1),
+								FailureMode:    types.HarnessHookFailureMode("allow"),
+							},
+						},
+					},
+				},
+				&types.HarnessHookMemberBeforeInvocation{
+					Value: types.HarnessBeforeInvocationHook{
+						Name: ptr.String("__Name__"),
+						Target: &types.HarnessHookTargetMemberLambda{
+							Value: types.HarnessHookLambdaTarget{
+								Arn:            ptr.String("__Arn__"),
+								TimeoutSeconds: ptr.Int32(1),
+								FailureMode:    types.HarnessHookFailureMode("allow"),
+							},
 						},
 					},
 				},
@@ -5303,6 +5421,7 @@ func TestCheckResponseSnapshot_GetAgentRuntime(t *testing.T) {
 		CapacityProviderConfiguration: &types.CapacityProviderConfiguration{
 			CapacityProviderArn: ptr.String("__CapacityProviderArn__"),
 		},
+		PlatformVersion: ptr.String("__PlatformVersion__"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("GetAgentRuntime.response")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -6044,6 +6163,7 @@ func TestCheckResponseSnapshot_GetGateway(t *testing.T) {
 				StreamingConfiguration: &types.StreamingConfiguration{
 					EnableResponseStreaming: ptr.Bool(true),
 				},
+				DisableMcpListToolsPagination: ptr.Bool(true),
 			},
 		},
 		AuthorizerType: types.AuthorizerType("CUSTOM_JWT"),
@@ -6506,6 +6626,20 @@ func TestCheckResponseSnapshot_GetGatewayTarget(t *testing.T) {
 			},
 		},
 		ProtocolType: types.TargetProtocolType("MCP"),
+		CertificateConfigurations: []types.CertificateConfiguration{
+			&types.CertificateConfigurationMemberS3{
+				Value: types.S3CertificateConfiguration{
+					Uri:                  ptr.String("__Uri__"),
+					BucketOwnerAccountId: ptr.String("__BucketOwnerAccountId__"),
+				},
+			},
+			&types.CertificateConfigurationMemberS3{
+				Value: types.S3CertificateConfiguration{
+					Uri:                  ptr.String("__Uri__"),
+					BucketOwnerAccountId: ptr.String("__BucketOwnerAccountId__"),
+				},
+			},
+		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("GetGatewayTarget.response")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -6740,6 +6874,32 @@ func TestCheckResponseSnapshot_GetHarness(t *testing.T) {
 					},
 				},
 			},
+			Hooks: []types.HarnessHook{
+				&types.HarnessHookMemberBeforeInvocation{
+					Value: types.HarnessBeforeInvocationHook{
+						Name: ptr.String("__Name__"),
+						Target: &types.HarnessHookTargetMemberLambda{
+							Value: types.HarnessHookLambdaTarget{
+								Arn:            ptr.String("__Arn__"),
+								TimeoutSeconds: ptr.Int32(1),
+								FailureMode:    types.HarnessHookFailureMode("allow"),
+							},
+						},
+					},
+				},
+				&types.HarnessHookMemberBeforeInvocation{
+					Value: types.HarnessBeforeInvocationHook{
+						Name: ptr.String("__Name__"),
+						Target: &types.HarnessHookTargetMemberLambda{
+							Value: types.HarnessHookLambdaTarget{
+								Arn:            ptr.String("__Arn__"),
+								TimeoutSeconds: ptr.Int32(1),
+								FailureMode:    types.HarnessHookFailureMode("allow"),
+							},
+						},
+					},
+				},
+			},
 			MaxIterations:  ptr.Int32(1),
 			MaxTokens:      ptr.Int32(1),
 			TimeoutSeconds: ptr.Int32(1),
@@ -6927,6 +7087,7 @@ func TestCheckResponseSnapshot_GetMemory(t *testing.T) {
 							},
 						},
 					},
+					RecordExpiryDurationDays: ptr.Int32(1),
 				},
 				{
 					StrategyId:  ptr.String("__StrategyId__"),
@@ -7038,6 +7199,7 @@ func TestCheckResponseSnapshot_GetMemory(t *testing.T) {
 							},
 						},
 					},
+					RecordExpiryDurationDays: ptr.Int32(1),
 				},
 			},
 			IndexedKeys: []types.IndexedKey{
@@ -7327,6 +7489,7 @@ func TestCheckResponseSnapshot_GetPaymentConnector(t *testing.T) {
 		Name:               ptr.String("__Name__"),
 		Description:        ptr.String("__Description__"),
 		Type:               types.PaymentConnectorType("CoinbaseCDP"),
+		ProvisionMode:      types.PaymentConnectorProvisionMode("MANUAL"),
 		CredentialProviderConfigurations: []types.CredentialsProviderConfiguration{
 			&types.CredentialsProviderConfigurationMemberCoinbaseCDP{
 				Value: types.PaymentCredentialProviderConfiguration{
@@ -7339,10 +7502,11 @@ func TestCheckResponseSnapshot_GetPaymentConnector(t *testing.T) {
 				},
 			},
 		},
-		CreatedAt:        ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-		LastUpdatedAt:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-		Status:           types.PaymentConnectorStatus("CREATING"),
-		AuthorizationUrl: ptr.String("__AuthorizationUrl__"),
+		CreatedAt:            ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		LastUpdatedAt:        ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		Status:               types.PaymentConnectorStatus("CREATING"),
+		AuthorizationUrl:     ptr.String("__AuthorizationUrl__"),
+		CredentialsUpdatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 	}
 	status, header, body, err := serdeRespReadSnapshot("GetPaymentConnector.response")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -9551,6 +9715,7 @@ func TestCheckResponseSnapshot_ListPaymentConnectors(t *testing.T) {
 				PaymentConnectorId: ptr.String("__PaymentConnectorId__"),
 				Name:               ptr.String("__Name__"),
 				Type:               types.PaymentConnectorType("CoinbaseCDP"),
+				ProvisionMode:      types.PaymentConnectorProvisionMode("MANUAL"),
 				Status:             types.PaymentConnectorStatus("CREATING"),
 				LastUpdatedAt:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			},
@@ -9558,6 +9723,7 @@ func TestCheckResponseSnapshot_ListPaymentConnectors(t *testing.T) {
 				PaymentConnectorId: ptr.String("__PaymentConnectorId__"),
 				Name:               ptr.String("__Name__"),
 				Type:               types.PaymentConnectorType("CoinbaseCDP"),
+				ProvisionMode:      types.PaymentConnectorProvisionMode("MANUAL"),
 				Status:             types.PaymentConnectorStatus("CREATING"),
 				LastUpdatedAt:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			},
@@ -10256,6 +10422,42 @@ func TestCheckResponseSnapshot_PutResourcePolicy(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_RotatePaymentConnectorCredentials(t *testing.T) {
+	want := &RotatePaymentConnectorCredentialsOutput{
+		PaymentConnectorId: ptr.String("__PaymentConnectorId__"),
+		PaymentManagerId:   ptr.String("__PaymentManagerId__"),
+		LastUpdatedAt:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		Status:             types.PaymentConnectorStatus("CREATING"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("RotatePaymentConnectorCredentials.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.RotatePaymentConnectorCredentials(context.Background(), &RotatePaymentConnectorCredentialsInput{
+		PaymentManagerId:   ptr.String("__PaymentManagerId__"),
+		PaymentConnectorId: ptr.String("__PaymentConnectorId__"),
+		CredentialsToRotate: &types.CredentialRotationConfigMemberCoinbaseCDP{
+			Value: types.CoinbaseCdpRotationTargets{
+				Secrets: []types.CoinbaseCdpSecret{
+					types.CoinbaseCdpSecret("API_KEY"),
+					types.CoinbaseCdpSecret("API_KEY"),
+				},
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "RotatePaymentConnectorCredentials.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_SetTokenVaultCMK(t *testing.T) {
 	want := &SetTokenVaultCMKOutput{
 		TokenVaultId: ptr.String("__TokenVaultId__"),
@@ -10461,6 +10663,20 @@ func TestCheckResponseSnapshot_SynchronizeGatewayTargets(t *testing.T) {
 					},
 				},
 				ProtocolType: types.TargetProtocolType("MCP"),
+				CertificateConfigurations: []types.CertificateConfiguration{
+					&types.CertificateConfigurationMemberS3{
+						Value: types.S3CertificateConfiguration{
+							Uri:                  ptr.String("__Uri__"),
+							BucketOwnerAccountId: ptr.String("__BucketOwnerAccountId__"),
+						},
+					},
+					&types.CertificateConfigurationMemberS3{
+						Value: types.S3CertificateConfiguration{
+							Uri:                  ptr.String("__Uri__"),
+							BucketOwnerAccountId: ptr.String("__BucketOwnerAccountId__"),
+						},
+					},
+				},
 			},
 			{
 				GatewayArn: ptr.String("__GatewayArn__"),
@@ -10559,6 +10775,20 @@ func TestCheckResponseSnapshot_SynchronizeGatewayTargets(t *testing.T) {
 					},
 				},
 				ProtocolType: types.TargetProtocolType("MCP"),
+				CertificateConfigurations: []types.CertificateConfiguration{
+					&types.CertificateConfigurationMemberS3{
+						Value: types.S3CertificateConfiguration{
+							Uri:                  ptr.String("__Uri__"),
+							BucketOwnerAccountId: ptr.String("__BucketOwnerAccountId__"),
+						},
+					},
+					&types.CertificateConfigurationMemberS3{
+						Value: types.S3CertificateConfiguration{
+							Uri:                  ptr.String("__Uri__"),
+							BucketOwnerAccountId: ptr.String("__BucketOwnerAccountId__"),
+						},
+					},
+				},
 			},
 		},
 	}
@@ -10790,7 +11020,8 @@ func TestCheckResponseSnapshot_UpdateAgentRuntime(t *testing.T) {
 		CapacityProviderConfiguration: &types.CapacityProviderConfiguration{
 			CapacityProviderArn: ptr.String("__CapacityProviderArn__"),
 		},
-		ClientToken: ptr.String("__ClientToken__"),
+		PlatformVersion: ptr.String("__PlatformVersion__"),
+		ClientToken:     ptr.String("__ClientToken__"),
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -11160,6 +11391,7 @@ func TestCheckResponseSnapshot_UpdateGateway(t *testing.T) {
 				StreamingConfiguration: &types.StreamingConfiguration{
 					EnableResponseStreaming: ptr.Bool(true),
 				},
+				DisableMcpListToolsPagination: ptr.Bool(true),
 			},
 		},
 		AuthorizerType: types.AuthorizerType("CUSTOM_JWT"),
@@ -11339,6 +11571,7 @@ func TestCheckResponseSnapshot_UpdateGateway(t *testing.T) {
 				StreamingConfiguration: &types.StreamingConfiguration{
 					EnableResponseStreaming: ptr.Bool(true),
 				},
+				DisableMcpListToolsPagination: ptr.Bool(true),
 			},
 		},
 		AuthorizerType: types.AuthorizerType("CUSTOM_JWT"),
@@ -11917,6 +12150,20 @@ func TestCheckResponseSnapshot_UpdateGatewayTarget(t *testing.T) {
 			},
 		},
 		ProtocolType: types.TargetProtocolType("MCP"),
+		CertificateConfigurations: []types.CertificateConfiguration{
+			&types.CertificateConfigurationMemberS3{
+				Value: types.S3CertificateConfiguration{
+					Uri:                  ptr.String("__Uri__"),
+					BucketOwnerAccountId: ptr.String("__BucketOwnerAccountId__"),
+				},
+			},
+			&types.CertificateConfigurationMemberS3{
+				Value: types.S3CertificateConfiguration{
+					Uri:                  ptr.String("__Uri__"),
+					BucketOwnerAccountId: ptr.String("__BucketOwnerAccountId__"),
+				},
+			},
+		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("UpdateGatewayTarget.response")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -11994,6 +12241,20 @@ func TestCheckResponseSnapshot_UpdateGatewayTarget(t *testing.T) {
 		PrivateEndpoint: &types.PrivateEndpointMemberSelfManagedLatticeResource{
 			Value: &types.SelfManagedLatticeResourceMemberResourceConfigurationIdentifier{
 				Value: "__SelfManagedLatticeResourceMemberResourceConfigurationIdentifier__",
+			},
+		},
+		CertificateConfigurations: []types.CertificateConfiguration{
+			&types.CertificateConfigurationMemberS3{
+				Value: types.S3CertificateConfiguration{
+					Uri:                  ptr.String("__Uri__"),
+					BucketOwnerAccountId: ptr.String("__BucketOwnerAccountId__"),
+				},
+			},
+			&types.CertificateConfigurationMemberS3{
+				Value: types.S3CertificateConfiguration{
+					Uri:                  ptr.String("__Uri__"),
+					BucketOwnerAccountId: ptr.String("__BucketOwnerAccountId__"),
+				},
 			},
 		},
 	})
@@ -12214,6 +12475,32 @@ func TestCheckResponseSnapshot_UpdateHarness(t *testing.T) {
 							TopK:           ptr.Int32(1),
 							RelevanceScore: ptr.Float32(1.0),
 							StrategyId:     ptr.String("__StrategyId__"),
+						},
+					},
+				},
+			},
+			Hooks: []types.HarnessHook{
+				&types.HarnessHookMemberBeforeInvocation{
+					Value: types.HarnessBeforeInvocationHook{
+						Name: ptr.String("__Name__"),
+						Target: &types.HarnessHookTargetMemberLambda{
+							Value: types.HarnessHookLambdaTarget{
+								Arn:            ptr.String("__Arn__"),
+								TimeoutSeconds: ptr.Int32(1),
+								FailureMode:    types.HarnessHookFailureMode("allow"),
+							},
+						},
+					},
+				},
+				&types.HarnessHookMemberBeforeInvocation{
+					Value: types.HarnessBeforeInvocationHook{
+						Name: ptr.String("__Name__"),
+						Target: &types.HarnessHookTargetMemberLambda{
+							Value: types.HarnessHookLambdaTarget{
+								Arn:            ptr.String("__Arn__"),
+								TimeoutSeconds: ptr.Int32(1),
+								FailureMode:    types.HarnessHookFailureMode("allow"),
+							},
 						},
 					},
 				},
@@ -12441,6 +12728,32 @@ func TestCheckResponseSnapshot_UpdateHarness(t *testing.T) {
 				},
 			},
 		},
+		Hooks: []types.HarnessHook{
+			&types.HarnessHookMemberBeforeInvocation{
+				Value: types.HarnessBeforeInvocationHook{
+					Name: ptr.String("__Name__"),
+					Target: &types.HarnessHookTargetMemberLambda{
+						Value: types.HarnessHookLambdaTarget{
+							Arn:            ptr.String("__Arn__"),
+							TimeoutSeconds: ptr.Int32(1),
+							FailureMode:    types.HarnessHookFailureMode("allow"),
+						},
+					},
+				},
+			},
+			&types.HarnessHookMemberBeforeInvocation{
+				Value: types.HarnessBeforeInvocationHook{
+					Name: ptr.String("__Name__"),
+					Target: &types.HarnessHookTargetMemberLambda{
+						Value: types.HarnessHookLambdaTarget{
+							Arn:            ptr.String("__Arn__"),
+							TimeoutSeconds: ptr.Int32(1),
+							FailureMode:    types.HarnessHookFailureMode("allow"),
+						},
+					},
+				},
+			},
+		},
 		MaxIterations:  ptr.Int32(1),
 		MaxTokens:      ptr.Int32(1),
 		TimeoutSeconds: ptr.Int32(1),
@@ -12617,6 +12930,7 @@ func TestCheckResponseSnapshot_UpdateMemory(t *testing.T) {
 							},
 						},
 					},
+					RecordExpiryDurationDays: ptr.Int32(1),
 				},
 				{
 					StrategyId:  ptr.String("__StrategyId__"),
@@ -12728,6 +13042,7 @@ func TestCheckResponseSnapshot_UpdateMemory(t *testing.T) {
 							},
 						},
 					},
+					RecordExpiryDurationDays: ptr.Int32(1),
 				},
 			},
 			IndexedKeys: []types.IndexedKey{
@@ -12869,6 +13184,9 @@ func TestCheckResponseSnapshot_UpdateMemory(t *testing.T) {
 								},
 							},
 						},
+						RecordExpirySpecification: &types.RecordExpirySpecificationMemberRecordExpiryDurationDays{
+							Value: 1,
+						},
 					},
 				},
 				&types.MemoryStrategyInputMemberSemanticMemoryStrategy{
@@ -12924,6 +13242,9 @@ func TestCheckResponseSnapshot_UpdateMemory(t *testing.T) {
 									},
 								},
 							},
+						},
+						RecordExpirySpecification: &types.RecordExpirySpecificationMemberRecordExpiryDurationDays{
+							Value: 1,
 						},
 					},
 				},
@@ -13035,6 +13356,9 @@ func TestCheckResponseSnapshot_UpdateMemory(t *testing.T) {
 							},
 						},
 					},
+					RecordExpirySpecification: &types.RecordExpirySpecificationMemberRecordExpiryDurationDays{
+						Value: 1,
+					},
 				},
 				{
 					MemoryStrategyId: ptr.String("__MemoryStrategyId__"),
@@ -13135,6 +13459,9 @@ func TestCheckResponseSnapshot_UpdateMemory(t *testing.T) {
 								},
 							},
 						},
+					},
+					RecordExpirySpecification: &types.RecordExpirySpecificationMemberRecordExpiryDurationDays{
+						Value: 1,
 					},
 				},
 			},
@@ -14777,6 +15104,9 @@ func TestCheckResponseSnapshot_Error_ServiceException(t *testing.T) {
 							},
 						},
 					},
+					RecordExpirySpecification: &types.RecordExpirySpecificationMemberRecordExpiryDurationDays{
+						Value: 1,
+					},
 				},
 			},
 			&types.MemoryStrategyInputMemberSemanticMemoryStrategy{
@@ -14832,6 +15162,9 @@ func TestCheckResponseSnapshot_Error_ServiceException(t *testing.T) {
 								},
 							},
 						},
+					},
+					RecordExpirySpecification: &types.RecordExpirySpecificationMemberRecordExpiryDurationDays{
+						Value: 1,
 					},
 				},
 			},
@@ -15074,6 +15407,9 @@ func TestCheckResponseSnapshot_Error_ThrottledException(t *testing.T) {
 							},
 						},
 					},
+					RecordExpirySpecification: &types.RecordExpirySpecificationMemberRecordExpiryDurationDays{
+						Value: 1,
+					},
 				},
 			},
 			&types.MemoryStrategyInputMemberSemanticMemoryStrategy{
@@ -15129,6 +15465,9 @@ func TestCheckResponseSnapshot_Error_ThrottledException(t *testing.T) {
 								},
 							},
 						},
+					},
+					RecordExpirySpecification: &types.RecordExpirySpecificationMemberRecordExpiryDurationDays{
+						Value: 1,
 					},
 				},
 			},

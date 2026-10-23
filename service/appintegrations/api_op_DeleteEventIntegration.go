@@ -4,6 +4,8 @@ package appintegrations
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/appintegrations/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -34,6 +36,18 @@ type DeleteEventIntegrationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteEventIntegrationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteEventIntegrationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteEventIntegrationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.DeleteEventIntegrationRequest_Name, *v.Name)
+	}
+}
+
 type DeleteEventIntegrationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -41,13 +55,26 @@ type DeleteEventIntegrationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteEventIntegrationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteEventIntegrationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteEventIntegrationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteEventIntegrationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteEventIntegrationResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteEventIntegrationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteEventIntegration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteEventIntegration, schemas.DeleteEventIntegrationRequest, schemas.DeleteEventIntegrationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteEventIntegration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteEventIntegration, schemas.DeleteEventIntegrationRequest, schemas.DeleteEventIntegrationResponse), output: &DeleteEventIntegrationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

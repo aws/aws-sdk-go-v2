@@ -4,7 +4,9 @@ package apigatewayv2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/apigatewayv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/apigatewayv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -46,6 +48,27 @@ type GetProductRestEndpointPageInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetProductRestEndpointPageInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetProductRestEndpointPageRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetProductRestEndpointPageInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IncludeRawDisplayContent != nil {
+		s.WriteString(schemas.GetProductRestEndpointPageRequest_IncludeRawDisplayContent, *v.IncludeRawDisplayContent)
+	}
+	if v.PortalProductId != nil {
+		s.WriteString(schemas.GetProductRestEndpointPageRequest_PortalProductId, *v.PortalProductId)
+	}
+	if v.ProductRestEndpointPageId != nil {
+		s.WriteString(schemas.GetProductRestEndpointPageRequest_ProductRestEndpointPageId, *v.ProductRestEndpointPageId)
+	}
+	if v.ResourceOwnerAccountId != nil {
+		s.WriteString(schemas.GetProductRestEndpointPageRequest_ResourceOwnerAccountId, *v.ResourceOwnerAccountId)
+	}
+}
+
 type GetProductRestEndpointPageOutput struct {
 
 	// The content of the product REST endpoint page.
@@ -81,13 +104,94 @@ type GetProductRestEndpointPageOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetProductRestEndpointPageOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetProductRestEndpointPageResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetProductRestEndpointPageOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DisplayContent != nil {
+		s.WriteStruct(schemas.GetProductRestEndpointPageResponse_DisplayContent)
+		v.DisplayContent.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.LastModified != nil {
+		s.WriteTime(schemas.GetProductRestEndpointPageResponse_LastModified, *v.LastModified)
+	}
+	if v.ProductRestEndpointPageArn != nil {
+		s.WriteString(schemas.GetProductRestEndpointPageResponse_ProductRestEndpointPageArn, *v.ProductRestEndpointPageArn)
+	}
+	if v.ProductRestEndpointPageId != nil {
+		s.WriteString(schemas.GetProductRestEndpointPageResponse_ProductRestEndpointPageId, *v.ProductRestEndpointPageId)
+	}
+	if v.RawDisplayContent != nil {
+		s.WriteString(schemas.GetProductRestEndpointPageResponse_RawDisplayContent, *v.RawDisplayContent)
+	}
+	if v.RestEndpointIdentifier != nil {
+		s.WriteStruct(schemas.GetProductRestEndpointPageResponse_RestEndpointIdentifier)
+		v.RestEndpointIdentifier.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.GetProductRestEndpointPageResponse_Status, string(v.Status))
+	}
+	if v.StatusException != nil {
+		s.WriteStruct(schemas.GetProductRestEndpointPageResponse_StatusException)
+		v.StatusException.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TryItState != "" {
+		s.WriteString(schemas.GetProductRestEndpointPageResponse_TryItState, string(v.TryItState))
+	}
+}
+func (v *GetProductRestEndpointPageOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetProductRestEndpointPageResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetProductRestEndpointPageResponse_DisplayContent:
+			v.DisplayContent = &types.EndpointDisplayContentResponse{}
+			return v.DisplayContent.Deserialize(d)
+		case schemas.GetProductRestEndpointPageResponse_LastModified:
+			v.LastModified = new(time.Time)
+			return d.ReadTime(schemas.GetProductRestEndpointPageResponse_LastModified, v.LastModified)
+		case schemas.GetProductRestEndpointPageResponse_ProductRestEndpointPageArn:
+			v.ProductRestEndpointPageArn = new(string)
+			return d.ReadString(schemas.GetProductRestEndpointPageResponse_ProductRestEndpointPageArn, v.ProductRestEndpointPageArn)
+		case schemas.GetProductRestEndpointPageResponse_ProductRestEndpointPageId:
+			v.ProductRestEndpointPageId = new(string)
+			return d.ReadString(schemas.GetProductRestEndpointPageResponse_ProductRestEndpointPageId, v.ProductRestEndpointPageId)
+		case schemas.GetProductRestEndpointPageResponse_RawDisplayContent:
+			v.RawDisplayContent = new(string)
+			return d.ReadString(schemas.GetProductRestEndpointPageResponse_RawDisplayContent, v.RawDisplayContent)
+		case schemas.GetProductRestEndpointPageResponse_RestEndpointIdentifier:
+			v.RestEndpointIdentifier = &types.RestEndpointIdentifier{}
+			return v.RestEndpointIdentifier.Deserialize(d)
+		case schemas.GetProductRestEndpointPageResponse_Status:
+			var ev string
+			if err := d.ReadString(schemas.GetProductRestEndpointPageResponse_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.Status(ev)
+			return nil
+		case schemas.GetProductRestEndpointPageResponse_StatusException:
+			v.StatusException = &types.StatusException{}
+			return v.StatusException.Deserialize(d)
+		case schemas.GetProductRestEndpointPageResponse_TryItState:
+			var ev string
+			if err := d.ReadString(schemas.GetProductRestEndpointPageResponse_TryItState, &ev); err != nil {
+				return err
+			}
+			v.TryItState = types.TryItState(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetProductRestEndpointPageMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetProductRestEndpointPage{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetProductRestEndpointPage, schemas.GetProductRestEndpointPageRequest, schemas.GetProductRestEndpointPageResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetProductRestEndpointPage{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetProductRestEndpointPage, schemas.GetProductRestEndpointPageRequest, schemas.GetProductRestEndpointPageResponse), output: &GetProductRestEndpointPageOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package opensearch
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/opensearch/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/opensearch/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -38,6 +40,18 @@ type DeleteInboundConnectionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteInboundConnectionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteInboundConnectionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteInboundConnectionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConnectionId != nil {
+		s.WriteString(schemas.DeleteInboundConnectionRequest_ConnectionId, *v.ConnectionId)
+	}
+}
+
 // The results of a DeleteInboundConnection operation. Contains details about the
 // deleted inbound connection.
 type DeleteInboundConnectionOutput struct {
@@ -51,13 +65,34 @@ type DeleteInboundConnectionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteInboundConnectionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteInboundConnectionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteInboundConnectionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Connection != nil {
+		s.WriteStruct(schemas.DeleteInboundConnectionResponse_Connection)
+		v.Connection.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DeleteInboundConnectionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteInboundConnectionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteInboundConnectionResponse_Connection:
+			v.Connection = &types.InboundConnection{}
+			return v.Connection.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteInboundConnectionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteInboundConnection{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteInboundConnection, schemas.DeleteInboundConnectionRequest, schemas.DeleteInboundConnectionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteInboundConnection{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteInboundConnection, schemas.DeleteInboundConnectionRequest, schemas.DeleteInboundConnectionResponse), output: &DeleteInboundConnectionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

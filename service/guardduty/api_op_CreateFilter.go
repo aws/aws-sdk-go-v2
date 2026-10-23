@@ -5,7 +5,9 @@ package guardduty
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/guardduty/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/guardduty/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -1455,6 +1457,39 @@ type CreateFilterInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateFilterInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateFilterRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateFilterInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Action != "" {
+		s.WriteString(schemas.CreateFilterRequest_Action, string(v.Action))
+	}
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateFilterRequest_ClientToken, *v.ClientToken)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreateFilterRequest_Description, *v.Description)
+	}
+	if v.DetectorId != nil {
+		s.WriteString(schemas.CreateFilterRequest_DetectorId, *v.DetectorId)
+	}
+	if v.FindingCriteria != nil {
+		s.WriteStruct(schemas.CreateFilterRequest_FindingCriteria)
+		v.FindingCriteria.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateFilterRequest_Name, *v.Name)
+	}
+	if v.Rank != nil {
+		s.WriteInt32(schemas.CreateFilterRequest_Rank, *v.Rank)
+	}
+	serializeTagMap(s, schemas.CreateFilterRequest_Tags, v.Tags)
+}
+
 type CreateFilterOutput struct {
 
 	// The name of the successfully created filter.
@@ -1468,13 +1503,32 @@ type CreateFilterOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateFilterOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateFilterResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateFilterOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.CreateFilterResponse_Name, *v.Name)
+	}
+}
+func (v *CreateFilterOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateFilterResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateFilterResponse_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.CreateFilterResponse_Name, v.Name)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateFilterMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateFilter{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateFilter, schemas.CreateFilterRequest, schemas.CreateFilterResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateFilter{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateFilter, schemas.CreateFilterRequest, schemas.CreateFilterResponse), output: &CreateFilterOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

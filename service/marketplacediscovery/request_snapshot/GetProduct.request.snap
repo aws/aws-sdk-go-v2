@@ -2,4 +2,4 @@ POST /2026-02-05/getProduct
 
 Content-Type: application/json
 
-{"productId":"__ProductId__"}
+{"locale":"__Locale__","productId":"__ProductId__"}

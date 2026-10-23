@@ -4,6 +4,8 @@ package backup
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/backup/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -33,6 +35,18 @@ type GetRestoreJobMetadataInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetRestoreJobMetadataInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetRestoreJobMetadataInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetRestoreJobMetadataInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RestoreJobId != nil {
+		s.WriteString(schemas.GetRestoreJobMetadataInput_RestoreJobId, *v.RestoreJobId)
+	}
+}
+
 type GetRestoreJobMetadataOutput struct {
 
 	// This contains the metadata of the specified backup job.
@@ -47,13 +61,35 @@ type GetRestoreJobMetadataOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetRestoreJobMetadataOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetRestoreJobMetadataOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetRestoreJobMetadataOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeMetadata(s, schemas.GetRestoreJobMetadataOutput_Metadata, v.Metadata)
+	if v.RestoreJobId != nil {
+		s.WriteString(schemas.GetRestoreJobMetadataOutput_RestoreJobId, *v.RestoreJobId)
+	}
+}
+func (v *GetRestoreJobMetadataOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetRestoreJobMetadataOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetRestoreJobMetadataOutput_Metadata:
+			return deserializeMetadata(d, schemas.GetRestoreJobMetadataOutput_Metadata, &v.Metadata)
+		case schemas.GetRestoreJobMetadataOutput_RestoreJobId:
+			v.RestoreJobId = new(string)
+			return d.ReadString(schemas.GetRestoreJobMetadataOutput_RestoreJobId, v.RestoreJobId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetRestoreJobMetadataMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetRestoreJobMetadata{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetRestoreJobMetadata, schemas.GetRestoreJobMetadataInput, schemas.GetRestoreJobMetadataOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetRestoreJobMetadata{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetRestoreJobMetadata, schemas.GetRestoreJobMetadataInput, schemas.GetRestoreJobMetadataOutput), output: &GetRestoreJobMetadataOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

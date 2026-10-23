@@ -4,7 +4,9 @@ package quicksight
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/quicksight/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/quicksight/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -48,6 +50,23 @@ type UpdateActionConnectorPermissionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateActionConnectorPermissionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateActionConnectorPermissionsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateActionConnectorPermissionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ActionConnectorId != nil {
+		s.WriteString(schemas.UpdateActionConnectorPermissionsRequest_ActionConnectorId, *v.ActionConnectorId)
+	}
+	if v.AwsAccountId != nil {
+		s.WriteString(schemas.UpdateActionConnectorPermissionsRequest_AwsAccountId, *v.AwsAccountId)
+	}
+	serializeResourcePermissionList(s, schemas.UpdateActionConnectorPermissionsRequest_GrantPermissions, v.GrantPermissions)
+	serializeResourcePermissionList(s, schemas.UpdateActionConnectorPermissionsRequest_RevokePermissions, v.RevokePermissions)
+}
+
 type UpdateActionConnectorPermissionsOutput struct {
 
 	// The unique identifier of the action connector.
@@ -71,13 +90,52 @@ type UpdateActionConnectorPermissionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateActionConnectorPermissionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateActionConnectorPermissionsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateActionConnectorPermissionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ActionConnectorId != nil {
+		s.WriteString(schemas.UpdateActionConnectorPermissionsResponse_ActionConnectorId, *v.ActionConnectorId)
+	}
+	if v.Arn != nil {
+		s.WriteString(schemas.UpdateActionConnectorPermissionsResponse_Arn, *v.Arn)
+	}
+	serializeResourcePermissionList(s, schemas.UpdateActionConnectorPermissionsResponse_Permissions, v.Permissions)
+	if v.RequestId != nil {
+		s.WriteString(schemas.UpdateActionConnectorPermissionsResponse_RequestId, *v.RequestId)
+	}
+	if v.Status != 0 {
+		s.WriteInt32(schemas.UpdateActionConnectorPermissionsResponse_Status, v.Status)
+	}
+}
+func (v *UpdateActionConnectorPermissionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateActionConnectorPermissionsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateActionConnectorPermissionsResponse_ActionConnectorId:
+			v.ActionConnectorId = new(string)
+			return d.ReadString(schemas.UpdateActionConnectorPermissionsResponse_ActionConnectorId, v.ActionConnectorId)
+		case schemas.UpdateActionConnectorPermissionsResponse_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.UpdateActionConnectorPermissionsResponse_Arn, v.Arn)
+		case schemas.UpdateActionConnectorPermissionsResponse_Permissions:
+			return deserializeResourcePermissionList(d, schemas.UpdateActionConnectorPermissionsResponse_Permissions, &v.Permissions)
+		case schemas.UpdateActionConnectorPermissionsResponse_RequestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.UpdateActionConnectorPermissionsResponse_RequestId, v.RequestId)
+		case schemas.UpdateActionConnectorPermissionsResponse_Status:
+			return d.ReadInt32(schemas.UpdateActionConnectorPermissionsResponse_Status, &v.Status)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateActionConnectorPermissionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateActionConnectorPermissions{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateActionConnectorPermissions, schemas.UpdateActionConnectorPermissionsRequest, schemas.UpdateActionConnectorPermissionsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateActionConnectorPermissions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateActionConnectorPermissions, schemas.UpdateActionConnectorPermissionsRequest, schemas.UpdateActionConnectorPermissionsResponse), output: &UpdateActionConnectorPermissionsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -1,0 +1,5 @@
+POST /v1/whatsapp/call/permission/get
+
+Content-Type: application/json
+
+{"destinationPhoneNumber":"__DestinationPhoneNumber__","endUserBsuid":"__EndUserBsuid__","originationPhoneNumberId":"__OriginationPhoneNumberId__"}

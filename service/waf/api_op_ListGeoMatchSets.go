@@ -4,7 +4,9 @@ package waf
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/waf/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/waf/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -52,6 +54,21 @@ type ListGeoMatchSetsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListGeoMatchSetsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListGeoMatchSetsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListGeoMatchSetsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Limit != 0 {
+		s.WriteInt32(schemas.ListGeoMatchSetsRequest_Limit, v.Limit)
+	}
+	if v.NextMarker != nil {
+		s.WriteString(schemas.ListGeoMatchSetsRequest_NextMarker, *v.NextMarker)
+	}
+}
+
 type ListGeoMatchSetsOutput struct {
 
 	// An array of GeoMatchSetSummary objects.
@@ -69,13 +86,35 @@ type ListGeoMatchSetsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListGeoMatchSetsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListGeoMatchSetsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListGeoMatchSetsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeGeoMatchSetSummaries(s, schemas.ListGeoMatchSetsResponse_GeoMatchSets, v.GeoMatchSets)
+	if v.NextMarker != nil {
+		s.WriteString(schemas.ListGeoMatchSetsResponse_NextMarker, *v.NextMarker)
+	}
+}
+func (v *ListGeoMatchSetsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListGeoMatchSetsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListGeoMatchSetsResponse_GeoMatchSets:
+			return deserializeGeoMatchSetSummaries(d, schemas.ListGeoMatchSetsResponse_GeoMatchSets, &v.GeoMatchSets)
+		case schemas.ListGeoMatchSetsResponse_NextMarker:
+			v.NextMarker = new(string)
+			return d.ReadString(schemas.ListGeoMatchSetsResponse_NextMarker, v.NextMarker)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListGeoMatchSetsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListGeoMatchSets{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListGeoMatchSets, schemas.ListGeoMatchSetsRequest, schemas.ListGeoMatchSetsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListGeoMatchSets{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListGeoMatchSets, schemas.ListGeoMatchSetsRequest, schemas.ListGeoMatchSetsResponse), output: &ListGeoMatchSetsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package glue
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/glue/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/glue/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -66,6 +68,33 @@ type UpdateDevEndpointInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateDevEndpointInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateDevEndpointRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateDevEndpointInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeMapValue(s, schemas.UpdateDevEndpointRequest_AddArguments, v.AddArguments)
+	serializePublicKeysList(s, schemas.UpdateDevEndpointRequest_AddPublicKeys, v.AddPublicKeys)
+	if v.CustomLibraries != nil {
+		s.WriteStruct(schemas.UpdateDevEndpointRequest_CustomLibraries)
+		v.CustomLibraries.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeStringList(s, schemas.UpdateDevEndpointRequest_DeleteArguments, v.DeleteArguments)
+	serializePublicKeysList(s, schemas.UpdateDevEndpointRequest_DeletePublicKeys, v.DeletePublicKeys)
+	if v.EndpointName != nil {
+		s.WriteString(schemas.UpdateDevEndpointRequest_EndpointName, *v.EndpointName)
+	}
+	if v.PublicKey != nil {
+		s.WriteString(schemas.UpdateDevEndpointRequest_PublicKey, *v.PublicKey)
+	}
+	if v.UpdateEtlLibraries != false {
+		s.WriteBool(schemas.UpdateDevEndpointRequest_UpdateEtlLibraries, v.UpdateEtlLibraries)
+	}
+}
+
 type UpdateDevEndpointOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -73,13 +102,26 @@ type UpdateDevEndpointOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateDevEndpointOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateDevEndpointResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateDevEndpointOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *UpdateDevEndpointOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateDevEndpointResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateDevEndpointMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateDevEndpoint{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateDevEndpoint, schemas.UpdateDevEndpointRequest, schemas.UpdateDevEndpointResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateDevEndpoint{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateDevEndpoint, schemas.UpdateDevEndpointRequest, schemas.UpdateDevEndpointResponse), output: &UpdateDevEndpointOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package securityhub
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/securityhub/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/securityhub/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -44,6 +46,16 @@ type BatchGetStandardsControlAssociationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchGetStandardsControlAssociationsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchGetStandardsControlAssociationsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchGetStandardsControlAssociationsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeStandardsControlAssociationIds(s, schemas.BatchGetStandardsControlAssociationsRequest_StandardsControlAssociationIds, v.StandardsControlAssociationIds)
+}
+
 type BatchGetStandardsControlAssociationsOutput struct {
 
 	// Provides the enablement status of a security control in a specified standard
@@ -63,13 +75,32 @@ type BatchGetStandardsControlAssociationsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchGetStandardsControlAssociationsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchGetStandardsControlAssociationsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchGetStandardsControlAssociationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeStandardsControlAssociationDetails(s, schemas.BatchGetStandardsControlAssociationsResponse_StandardsControlAssociationDetails, v.StandardsControlAssociationDetails)
+	serializeUnprocessedStandardsControlAssociations(s, schemas.BatchGetStandardsControlAssociationsResponse_UnprocessedAssociations, v.UnprocessedAssociations)
+}
+func (v *BatchGetStandardsControlAssociationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchGetStandardsControlAssociationsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchGetStandardsControlAssociationsResponse_StandardsControlAssociationDetails:
+			return deserializeStandardsControlAssociationDetails(d, schemas.BatchGetStandardsControlAssociationsResponse_StandardsControlAssociationDetails, &v.StandardsControlAssociationDetails)
+		case schemas.BatchGetStandardsControlAssociationsResponse_UnprocessedAssociations:
+			return deserializeUnprocessedStandardsControlAssociations(d, schemas.BatchGetStandardsControlAssociationsResponse_UnprocessedAssociations, &v.UnprocessedAssociations)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationBatchGetStandardsControlAssociationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpBatchGetStandardsControlAssociations{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchGetStandardsControlAssociations, schemas.BatchGetStandardsControlAssociationsRequest, schemas.BatchGetStandardsControlAssociationsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpBatchGetStandardsControlAssociations{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchGetStandardsControlAssociations, schemas.BatchGetStandardsControlAssociationsRequest, schemas.BatchGetStandardsControlAssociationsResponse), output: &BatchGetStandardsControlAssociationsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

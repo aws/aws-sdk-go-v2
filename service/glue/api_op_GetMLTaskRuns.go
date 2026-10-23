@@ -5,7 +5,9 @@ package glue
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/glue/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/glue/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -53,6 +55,34 @@ type GetMLTaskRunsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetMLTaskRunsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetMLTaskRunsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetMLTaskRunsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Filter != nil {
+		s.WriteStruct(schemas.GetMLTaskRunsRequest_Filter)
+		v.Filter.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.GetMLTaskRunsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetMLTaskRunsRequest_NextToken, *v.NextToken)
+	}
+	if v.Sort != nil {
+		s.WriteStruct(schemas.GetMLTaskRunsRequest_Sort)
+		v.Sort.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TransformId != nil {
+		s.WriteString(schemas.GetMLTaskRunsRequest_TransformId, *v.TransformId)
+	}
+}
+
 type GetMLTaskRunsOutput struct {
 
 	// A pagination token, if more results are available.
@@ -67,13 +97,35 @@ type GetMLTaskRunsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetMLTaskRunsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetMLTaskRunsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetMLTaskRunsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetMLTaskRunsResponse_NextToken, *v.NextToken)
+	}
+	serializeTaskRunList(s, schemas.GetMLTaskRunsResponse_TaskRuns, v.TaskRuns)
+}
+func (v *GetMLTaskRunsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetMLTaskRunsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetMLTaskRunsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.GetMLTaskRunsResponse_NextToken, v.NextToken)
+		case schemas.GetMLTaskRunsResponse_TaskRuns:
+			return deserializeTaskRunList(d, schemas.GetMLTaskRunsResponse_TaskRuns, &v.TaskRuns)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetMLTaskRunsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetMLTaskRuns{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetMLTaskRuns, schemas.GetMLTaskRunsRequest, schemas.GetMLTaskRunsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetMLTaskRuns{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetMLTaskRuns, schemas.GetMLTaskRunsRequest, schemas.GetMLTaskRunsResponse), output: &GetMLTaskRunsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -1023,6 +1023,9 @@ func TestUpdateResponseSnapshot_CreateImportedImage(t *testing.T) {
 			ImageSharedWithOthers:      types.ImageSharedWithOthers("TRUE"),
 			ManagedSoftwareIncluded:    ptr.Bool(true),
 			ImageType:                  types.ImageType("CUSTOM"),
+			ImageSoftwareMetadata: &types.ImageSoftwareMetadata{
+				NvidiaGridDriverVersion: ptr.String("__NvidiaGridDriverVersion__"),
+			},
 		},
 	}
 	proto := rpcv2.NewCBOR(schemas.PhotonAdminProxyService)
@@ -1155,6 +1158,7 @@ func TestUpdateResponseSnapshot_CreateStack(t *testing.T) {
 				ScreenImageFormat:        types.ScreenImageFormat("PNG"),
 				UserControlMode:          types.UserControlMode("VIEW_ONLY"),
 			},
+			StorageConnectorAuthentication: types.StorageConnectorAuthentication("FORCE_REAUTHENTICATION"),
 		},
 	}
 	proto := rpcv2.NewCBOR(schemas.PhotonAdminProxyService)
@@ -1347,6 +1351,9 @@ func TestUpdateResponseSnapshot_CreateUpdatedImage(t *testing.T) {
 			ImageSharedWithOthers:      types.ImageSharedWithOthers("TRUE"),
 			ManagedSoftwareIncluded:    ptr.Bool(true),
 			ImageType:                  types.ImageType("CUSTOM"),
+			ImageSoftwareMetadata: &types.ImageSoftwareMetadata{
+				NvidiaGridDriverVersion: ptr.String("__NvidiaGridDriverVersion__"),
+			},
 		},
 		CanUpdateImage: ptr.Bool(true),
 	}
@@ -1652,6 +1659,9 @@ func TestUpdateResponseSnapshot_DeleteImage(t *testing.T) {
 			ImageSharedWithOthers:      types.ImageSharedWithOthers("TRUE"),
 			ManagedSoftwareIncluded:    ptr.Bool(true),
 			ImageType:                  types.ImageType("CUSTOM"),
+			ImageSoftwareMetadata: &types.ImageSoftwareMetadata{
+				NvidiaGridDriverVersion: ptr.String("__NvidiaGridDriverVersion__"),
+			},
 		},
 	}
 	proto := rpcv2.NewCBOR(schemas.PhotonAdminProxyService)
@@ -2891,6 +2901,9 @@ func TestUpdateResponseSnapshot_DescribeImages(t *testing.T) {
 				ImageSharedWithOthers:      types.ImageSharedWithOthers("TRUE"),
 				ManagedSoftwareIncluded:    ptr.Bool(true),
 				ImageType:                  types.ImageType("CUSTOM"),
+				ImageSoftwareMetadata: &types.ImageSoftwareMetadata{
+					NvidiaGridDriverVersion: ptr.String("__NvidiaGridDriverVersion__"),
+				},
 			},
 			{
 				Name:                  ptr.String("__Name__"),
@@ -2993,6 +3006,9 @@ func TestUpdateResponseSnapshot_DescribeImages(t *testing.T) {
 				ImageSharedWithOthers:      types.ImageSharedWithOthers("TRUE"),
 				ManagedSoftwareIncluded:    ptr.Bool(true),
 				ImageType:                  types.ImageType("CUSTOM"),
+				ImageSoftwareMetadata: &types.ImageSoftwareMetadata{
+					NvidiaGridDriverVersion: ptr.String("__NvidiaGridDriverVersion__"),
+				},
 			},
 		},
 		NextToken: ptr.String("__NextToken__"),
@@ -3251,6 +3267,7 @@ func TestUpdateResponseSnapshot_DescribeStacks(t *testing.T) {
 					ScreenImageFormat:        types.ScreenImageFormat("PNG"),
 					UserControlMode:          types.UserControlMode("VIEW_ONLY"),
 				},
+				StorageConnectorAuthentication: types.StorageConnectorAuthentication("FORCE_REAUTHENTICATION"),
 			},
 			{
 				Arn:         ptr.String("__Arn__"),
@@ -3360,6 +3377,7 @@ func TestUpdateResponseSnapshot_DescribeStacks(t *testing.T) {
 					ScreenImageFormat:        types.ScreenImageFormat("PNG"),
 					UserControlMode:          types.UserControlMode("VIEW_ONLY"),
 				},
+				StorageConnectorAuthentication: types.StorageConnectorAuthentication("FORCE_REAUTHENTICATION"),
 			},
 		},
 		NextToken: ptr.String("__NextToken__"),
@@ -4855,6 +4873,7 @@ func TestUpdateResponseSnapshot_UpdateStack(t *testing.T) {
 				ScreenImageFormat:        types.ScreenImageFormat("PNG"),
 				UserControlMode:          types.UserControlMode("VIEW_ONLY"),
 			},
+			StorageConnectorAuthentication: types.StorageConnectorAuthentication("FORCE_REAUTHENTICATION"),
 		},
 	}
 	proto := rpcv2.NewCBOR(schemas.PhotonAdminProxyService)

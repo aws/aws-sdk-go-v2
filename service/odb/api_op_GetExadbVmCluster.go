@@ -4,7 +4,9 @@ package odb
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/odb/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/odb/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -34,6 +36,18 @@ type GetExadbVmClusterInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetExadbVmClusterInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetExadbVmClusterInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetExadbVmClusterInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ExadbVmClusterId != nil {
+		s.WriteString(schemas.GetExadbVmClusterInput_exadbVmClusterId, *v.ExadbVmClusterId)
+	}
+}
+
 type GetExadbVmClusterOutput struct {
 
 	// The Exascale VM cluster.
@@ -47,13 +61,34 @@ type GetExadbVmClusterOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetExadbVmClusterOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetExadbVmClusterOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetExadbVmClusterOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ExadbVmCluster != nil {
+		s.WriteStruct(schemas.GetExadbVmClusterOutput_exadbVmCluster)
+		v.ExadbVmCluster.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetExadbVmClusterOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetExadbVmClusterOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetExadbVmClusterOutput_exadbVmCluster:
+			v.ExadbVmCluster = &types.ExadbVmCluster{}
+			return v.ExadbVmCluster.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetExadbVmClusterMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpGetExadbVmCluster{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetExadbVmCluster, schemas.GetExadbVmClusterInput, schemas.GetExadbVmClusterOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpGetExadbVmCluster{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetExadbVmCluster, schemas.GetExadbVmClusterInput, schemas.GetExadbVmClusterOutput), output: &GetExadbVmClusterOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

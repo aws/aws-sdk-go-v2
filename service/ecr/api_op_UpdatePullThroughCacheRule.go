@@ -4,6 +4,8 @@ package ecr
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/ecr/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -48,6 +50,27 @@ type UpdatePullThroughCacheRuleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdatePullThroughCacheRuleInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdatePullThroughCacheRuleRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdatePullThroughCacheRuleInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CredentialArn != nil {
+		s.WriteString(schemas.UpdatePullThroughCacheRuleRequest_credentialArn, *v.CredentialArn)
+	}
+	if v.CustomRoleArn != nil {
+		s.WriteString(schemas.UpdatePullThroughCacheRuleRequest_customRoleArn, *v.CustomRoleArn)
+	}
+	if v.EcrRepositoryPrefix != nil {
+		s.WriteString(schemas.UpdatePullThroughCacheRuleRequest_ecrRepositoryPrefix, *v.EcrRepositoryPrefix)
+	}
+	if v.RegistryId != nil {
+		s.WriteString(schemas.UpdatePullThroughCacheRuleRequest_registryId, *v.RegistryId)
+	}
+}
+
 type UpdatePullThroughCacheRuleOutput struct {
 
 	// The Amazon Resource Name (ARN) of the Amazon Web Services Secrets Manager
@@ -76,13 +99,62 @@ type UpdatePullThroughCacheRuleOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdatePullThroughCacheRuleOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdatePullThroughCacheRuleResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdatePullThroughCacheRuleOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CredentialArn != nil {
+		s.WriteString(schemas.UpdatePullThroughCacheRuleResponse_credentialArn, *v.CredentialArn)
+	}
+	if v.CustomRoleArn != nil {
+		s.WriteString(schemas.UpdatePullThroughCacheRuleResponse_customRoleArn, *v.CustomRoleArn)
+	}
+	if v.EcrRepositoryPrefix != nil {
+		s.WriteString(schemas.UpdatePullThroughCacheRuleResponse_ecrRepositoryPrefix, *v.EcrRepositoryPrefix)
+	}
+	if v.RegistryId != nil {
+		s.WriteString(schemas.UpdatePullThroughCacheRuleResponse_registryId, *v.RegistryId)
+	}
+	if v.UpdatedAt != nil {
+		s.WriteTime(schemas.UpdatePullThroughCacheRuleResponse_updatedAt, *v.UpdatedAt)
+	}
+	if v.UpstreamRepositoryPrefix != nil {
+		s.WriteString(schemas.UpdatePullThroughCacheRuleResponse_upstreamRepositoryPrefix, *v.UpstreamRepositoryPrefix)
+	}
+}
+func (v *UpdatePullThroughCacheRuleOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdatePullThroughCacheRuleResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdatePullThroughCacheRuleResponse_credentialArn:
+			v.CredentialArn = new(string)
+			return d.ReadString(schemas.UpdatePullThroughCacheRuleResponse_credentialArn, v.CredentialArn)
+		case schemas.UpdatePullThroughCacheRuleResponse_customRoleArn:
+			v.CustomRoleArn = new(string)
+			return d.ReadString(schemas.UpdatePullThroughCacheRuleResponse_customRoleArn, v.CustomRoleArn)
+		case schemas.UpdatePullThroughCacheRuleResponse_ecrRepositoryPrefix:
+			v.EcrRepositoryPrefix = new(string)
+			return d.ReadString(schemas.UpdatePullThroughCacheRuleResponse_ecrRepositoryPrefix, v.EcrRepositoryPrefix)
+		case schemas.UpdatePullThroughCacheRuleResponse_registryId:
+			v.RegistryId = new(string)
+			return d.ReadString(schemas.UpdatePullThroughCacheRuleResponse_registryId, v.RegistryId)
+		case schemas.UpdatePullThroughCacheRuleResponse_updatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.UpdatePullThroughCacheRuleResponse_updatedAt, v.UpdatedAt)
+		case schemas.UpdatePullThroughCacheRuleResponse_upstreamRepositoryPrefix:
+			v.UpstreamRepositoryPrefix = new(string)
+			return d.ReadString(schemas.UpdatePullThroughCacheRuleResponse_upstreamRepositoryPrefix, v.UpstreamRepositoryPrefix)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdatePullThroughCacheRuleMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdatePullThroughCacheRule{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdatePullThroughCacheRule, schemas.UpdatePullThroughCacheRuleRequest, schemas.UpdatePullThroughCacheRuleResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdatePullThroughCacheRule{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdatePullThroughCacheRule, schemas.UpdatePullThroughCacheRuleRequest, schemas.UpdatePullThroughCacheRuleResponse), output: &UpdatePullThroughCacheRuleOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

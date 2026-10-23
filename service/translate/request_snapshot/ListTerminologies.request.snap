@@ -1,6 +1,7 @@
-POST /
+POST /service/AWSShineFrontendService_20170701/operation/ListTerminologies
 
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: AWSShineFrontendService_20170701.ListTerminologies
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"MaxResults":1,"NextToken":"__NextToken__"}
+¿jMaxResultsiNextTokenm__NextToken__ÿ

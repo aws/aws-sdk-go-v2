@@ -5,7 +5,9 @@ package iotsitewise
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/iotsitewise/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotsitewise/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -52,6 +54,21 @@ type DeleteAssetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteAssetInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteAssetRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteAssetInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AssetId != nil {
+		s.WriteString(schemas.DeleteAssetRequest_assetId, *v.AssetId)
+	}
+	if v.ClientToken != nil {
+		s.WriteString(schemas.DeleteAssetRequest_clientToken, *v.ClientToken)
+	}
+}
+
 type DeleteAssetOutput struct {
 
 	// The status of the asset, which contains a state ( DELETING after successfully
@@ -69,13 +86,40 @@ type DeleteAssetOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteAssetOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteAssetResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteAssetOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AssetId != nil {
+		s.WriteString(schemas.DeleteAssetResponse_assetId, *v.AssetId)
+	}
+	if v.AssetStatus != nil {
+		s.WriteStruct(schemas.DeleteAssetResponse_assetStatus)
+		v.AssetStatus.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DeleteAssetOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteAssetResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteAssetResponse_assetId:
+			v.AssetId = new(string)
+			return d.ReadString(schemas.DeleteAssetResponse_assetId, v.AssetId)
+		case schemas.DeleteAssetResponse_assetStatus:
+			v.AssetStatus = &types.AssetStatus{}
+			return v.AssetStatus.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteAssetMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteAsset{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteAsset, schemas.DeleteAssetRequest, schemas.DeleteAssetResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteAsset{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteAsset, schemas.DeleteAssetRequest, schemas.DeleteAssetResponse), output: &DeleteAssetOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

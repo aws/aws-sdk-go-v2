@@ -5,7 +5,9 @@ package guardduty
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/guardduty/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/guardduty/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -88,6 +90,37 @@ type CreateTrustedEntitySetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateTrustedEntitySetInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateTrustedEntitySetRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateTrustedEntitySetInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Activate != nil {
+		s.WriteBool(schemas.CreateTrustedEntitySetRequest_Activate, *v.Activate)
+	}
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateTrustedEntitySetRequest_ClientToken, *v.ClientToken)
+	}
+	if v.DetectorId != nil {
+		s.WriteString(schemas.CreateTrustedEntitySetRequest_DetectorId, *v.DetectorId)
+	}
+	if v.ExpectedBucketOwner != nil {
+		s.WriteString(schemas.CreateTrustedEntitySetRequest_ExpectedBucketOwner, *v.ExpectedBucketOwner)
+	}
+	if v.Format != "" {
+		s.WriteString(schemas.CreateTrustedEntitySetRequest_Format, string(v.Format))
+	}
+	if v.Location != nil {
+		s.WriteString(schemas.CreateTrustedEntitySetRequest_Location, *v.Location)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateTrustedEntitySetRequest_Name, *v.Name)
+	}
+	serializeTagMap(s, schemas.CreateTrustedEntitySetRequest_Tags, v.Tags)
+}
+
 type CreateTrustedEntitySetOutput struct {
 
 	// The ID returned by GuardDuty after creation of the trusted entity set resource.
@@ -101,13 +134,32 @@ type CreateTrustedEntitySetOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateTrustedEntitySetOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateTrustedEntitySetResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateTrustedEntitySetOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TrustedEntitySetId != nil {
+		s.WriteString(schemas.CreateTrustedEntitySetResponse_TrustedEntitySetId, *v.TrustedEntitySetId)
+	}
+}
+func (v *CreateTrustedEntitySetOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateTrustedEntitySetResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateTrustedEntitySetResponse_TrustedEntitySetId:
+			v.TrustedEntitySetId = new(string)
+			return d.ReadString(schemas.CreateTrustedEntitySetResponse_TrustedEntitySetId, v.TrustedEntitySetId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateTrustedEntitySetMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateTrustedEntitySet{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateTrustedEntitySet, schemas.CreateTrustedEntitySetRequest, schemas.CreateTrustedEntitySetResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateTrustedEntitySet{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateTrustedEntitySet, schemas.CreateTrustedEntitySetRequest, schemas.CreateTrustedEntitySetResponse), output: &CreateTrustedEntitySetOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

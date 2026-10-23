@@ -4,6 +4,8 @@ package mediaconnect
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/mediaconnect/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -36,6 +38,18 @@ type ListTagsForGlobalResourceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListTagsForGlobalResourceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListTagsForGlobalResourceRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListTagsForGlobalResourceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ResourceArn != nil {
+		s.WriteString(schemas.ListTagsForGlobalResourceRequest_ResourceArn, *v.ResourceArn)
+	}
+}
+
 type ListTagsForGlobalResourceOutput struct {
 
 	// A map of tag keys and values associated with the global resource.
@@ -47,13 +61,29 @@ type ListTagsForGlobalResourceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListTagsForGlobalResourceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListTagsForGlobalResourceResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListTagsForGlobalResourceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serialize__mapOfString(s, schemas.ListTagsForGlobalResourceResponse_Tags, v.Tags)
+}
+func (v *ListTagsForGlobalResourceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListTagsForGlobalResourceResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListTagsForGlobalResourceResponse_Tags:
+			return deserialize__mapOfString(d, schemas.ListTagsForGlobalResourceResponse_Tags, &v.Tags)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListTagsForGlobalResourceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListTagsForGlobalResource{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListTagsForGlobalResource, schemas.ListTagsForGlobalResourceRequest, schemas.ListTagsForGlobalResourceResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListTagsForGlobalResource{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListTagsForGlobalResource, schemas.ListTagsForGlobalResourceRequest, schemas.ListTagsForGlobalResourceResponse), output: &ListTagsForGlobalResourceOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

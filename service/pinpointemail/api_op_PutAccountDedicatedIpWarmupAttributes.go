@@ -4,6 +4,8 @@ package pinpointemail
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/pinpointemail/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -35,6 +37,18 @@ type PutAccountDedicatedIpWarmupAttributesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutAccountDedicatedIpWarmupAttributesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutAccountDedicatedIpWarmupAttributesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutAccountDedicatedIpWarmupAttributesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AutoWarmupEnabled != false {
+		s.WriteBool(schemas.PutAccountDedicatedIpWarmupAttributesRequest_AutoWarmupEnabled, v.AutoWarmupEnabled)
+	}
+}
+
 // An HTTP 200 response if the request succeeds, or an error message if the
 // request fails.
 type PutAccountDedicatedIpWarmupAttributesOutput struct {
@@ -44,13 +58,26 @@ type PutAccountDedicatedIpWarmupAttributesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutAccountDedicatedIpWarmupAttributesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutAccountDedicatedIpWarmupAttributesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutAccountDedicatedIpWarmupAttributesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *PutAccountDedicatedIpWarmupAttributesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PutAccountDedicatedIpWarmupAttributesResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPutAccountDedicatedIpWarmupAttributesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpPutAccountDedicatedIpWarmupAttributes{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutAccountDedicatedIpWarmupAttributes, schemas.PutAccountDedicatedIpWarmupAttributesRequest, schemas.PutAccountDedicatedIpWarmupAttributesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpPutAccountDedicatedIpWarmupAttributes{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutAccountDedicatedIpWarmupAttributes, schemas.PutAccountDedicatedIpWarmupAttributesRequest, schemas.PutAccountDedicatedIpWarmupAttributesResponse), output: &PutAccountDedicatedIpWarmupAttributesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

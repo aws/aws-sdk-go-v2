@@ -51,8 +51,15 @@ type ListCoreNetworkRoutingInformationInput struct {
 	// Exact AS path values to match when filtering routing information.
 	ExactAsPathMatches []string
 
+	// Exact prefix values to match when filtering routing information.
+	ExactPrefixMatches []string
+
 	// Local preference values to match when filtering routing information.
 	LocalPreferenceMatches []string
+
+	// Filters routing information based on the longest prefix that matches each
+	// provided IP address.
+	LongestPrefixMatches []string
 
 	// The maximum number of routing information entries to return in a single page.
 	MaxResults *int32
@@ -61,11 +68,44 @@ type ListCoreNetworkRoutingInformationInput struct {
 	// information.
 	MedMatches []string
 
-	// Filters to apply based on next hop information.
+	// Filters to apply based on next hop information. Each filter value must exactly
+	// match the corresponding next hop value. Values for the same filter are joined
+	// with OR, and different filters are joined with AND. The following filters are
+	// supported:
+	//
+	//   - core-network-attachment-id : The ID of the core network attachment for the
+	//   next hop, for example attachment-0123456789abcdef0 .
+	//
+	//   - segment-name : The name of the segment for the next hop.
+	//
+	//   - edge-location : The edge location for the next hop, for example us-east-1 .
+	//
+	//   - resource-id : The ID of the resource for the next hop.
+	//
+	//   - resource-type : The type of resource for the next hop. The possible values
+	//   are vpc , vpn , connect-peer , direct-connect-gateway ,
+	//   transit-gateway-route-table , attachment , and blackhole .
+	//
+	//   - ip-address : The IP address of the next hop. For a Site-to-Site VPN next
+	//   hop, this is the outside IP address of the AWS side of the VPN tunnel. For a
+	//   Connect peer next hop, this is the core network BGP address of the Connect peer.
+	//   The value must be a single IPv4 or IPv6 address.
+	//
+	// You can specify up to 10 filter values in total across NextHopFilters and the
+	// other match parameters in the request. Each filter value can be up to 256
+	// characters.
 	NextHopFilters map[string][]string
 
 	// The token for the next page of results.
 	NextToken *string
+
+	// Prefix values to filter routing information whose prefix is a subnet of the
+	// prefixes provided.
+	SubnetOfMatches []string
+
+	// Prefix values to filter routing information whose prefix is a supernet of the
+	// prefixes provided.
+	SupernetOfMatches []string
 
 	noSmithyDocumentSerde
 }
@@ -85,7 +125,9 @@ func (v *ListCoreNetworkRoutingInformationInput) SerializeMembers(s smithy.Shape
 		s.WriteString(schemas.ListCoreNetworkRoutingInformationRequest_EdgeLocation, *v.EdgeLocation)
 	}
 	serializeConstrainedStringList(s, schemas.ListCoreNetworkRoutingInformationRequest_ExactAsPathMatches, v.ExactAsPathMatches)
+	serializeConstrainedStringList(s, schemas.ListCoreNetworkRoutingInformationRequest_ExactPrefixMatches, v.ExactPrefixMatches)
 	serializeConstrainedStringList(s, schemas.ListCoreNetworkRoutingInformationRequest_LocalPreferenceMatches, v.LocalPreferenceMatches)
+	serializeConstrainedStringList(s, schemas.ListCoreNetworkRoutingInformationRequest_LongestPrefixMatches, v.LongestPrefixMatches)
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.ListCoreNetworkRoutingInformationRequest_MaxResults, *v.MaxResults)
 	}
@@ -97,6 +139,8 @@ func (v *ListCoreNetworkRoutingInformationInput) SerializeMembers(s smithy.Shape
 	if v.SegmentName != nil {
 		s.WriteString(schemas.ListCoreNetworkRoutingInformationRequest_SegmentName, *v.SegmentName)
 	}
+	serializeConstrainedStringList(s, schemas.ListCoreNetworkRoutingInformationRequest_SubnetOfMatches, v.SubnetOfMatches)
+	serializeConstrainedStringList(s, schemas.ListCoreNetworkRoutingInformationRequest_SupernetOfMatches, v.SupernetOfMatches)
 }
 
 type ListCoreNetworkRoutingInformationOutput struct {

@@ -5,7 +5,9 @@ package ecs
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/ecs/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ecs/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithytime "github.com/aws/smithy-go/time"
 	smithywaiter "github.com/aws/smithy-go/waiter"
@@ -42,6 +44,18 @@ type DescribeDaemonTaskDefinitionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeDaemonTaskDefinitionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeDaemonTaskDefinitionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeDaemonTaskDefinitionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DaemonTaskDefinition != nil {
+		s.WriteString(schemas.DescribeDaemonTaskDefinitionRequest_daemonTaskDefinition, *v.DaemonTaskDefinition)
+	}
+}
+
 type DescribeDaemonTaskDefinitionOutput struct {
 
 	// The full daemon task definition description.
@@ -53,13 +67,34 @@ type DescribeDaemonTaskDefinitionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeDaemonTaskDefinitionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeDaemonTaskDefinitionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeDaemonTaskDefinitionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DaemonTaskDefinition != nil {
+		s.WriteStruct(schemas.DescribeDaemonTaskDefinitionResponse_daemonTaskDefinition)
+		v.DaemonTaskDefinition.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DescribeDaemonTaskDefinitionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeDaemonTaskDefinitionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeDaemonTaskDefinitionResponse_daemonTaskDefinition:
+			v.DaemonTaskDefinition = &types.DaemonTaskDefinition{}
+			return v.DaemonTaskDefinition.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeDaemonTaskDefinitionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeDaemonTaskDefinition{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeDaemonTaskDefinition, schemas.DescribeDaemonTaskDefinitionRequest, schemas.DescribeDaemonTaskDefinitionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeDaemonTaskDefinition{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeDaemonTaskDefinition, schemas.DescribeDaemonTaskDefinitionRequest, schemas.DescribeDaemonTaskDefinitionResponse), output: &DescribeDaemonTaskDefinitionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

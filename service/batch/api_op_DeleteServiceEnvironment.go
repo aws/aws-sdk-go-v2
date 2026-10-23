@@ -4,6 +4,8 @@ package batch
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/batch/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -36,6 +38,18 @@ type DeleteServiceEnvironmentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteServiceEnvironmentInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteServiceEnvironmentRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteServiceEnvironmentInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ServiceEnvironment != nil {
+		s.WriteString(schemas.DeleteServiceEnvironmentRequest_serviceEnvironment, *v.ServiceEnvironment)
+	}
+}
+
 type DeleteServiceEnvironmentOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -43,13 +57,26 @@ type DeleteServiceEnvironmentOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteServiceEnvironmentOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteServiceEnvironmentResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteServiceEnvironmentOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteServiceEnvironmentOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteServiceEnvironmentResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteServiceEnvironmentMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteServiceEnvironment{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteServiceEnvironment, schemas.DeleteServiceEnvironmentRequest, schemas.DeleteServiceEnvironmentResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteServiceEnvironment{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteServiceEnvironment, schemas.DeleteServiceEnvironmentRequest, schemas.DeleteServiceEnvironmentResponse), output: &DeleteServiceEnvironmentOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

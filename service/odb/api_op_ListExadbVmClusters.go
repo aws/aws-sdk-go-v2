@@ -5,7 +5,9 @@ package odb
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/odb/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/odb/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -43,6 +45,24 @@ type ListExadbVmClustersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListExadbVmClustersInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListExadbVmClustersInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListExadbVmClustersInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ExascaleDbStorageVaultId != nil {
+		s.WriteString(schemas.ListExadbVmClustersInput_exascaleDbStorageVaultId, *v.ExascaleDbStorageVaultId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListExadbVmClustersInput_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListExadbVmClustersInput_nextToken, *v.NextToken)
+	}
+}
+
 type ListExadbVmClustersOutput struct {
 
 	// The list of Exascale VM clusters.
@@ -60,13 +80,35 @@ type ListExadbVmClustersOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListExadbVmClustersOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListExadbVmClustersOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListExadbVmClustersOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeExadbVmClusterList(s, schemas.ListExadbVmClustersOutput_exadbVmClusters, v.ExadbVmClusters)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListExadbVmClustersOutput_nextToken, *v.NextToken)
+	}
+}
+func (v *ListExadbVmClustersOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListExadbVmClustersOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListExadbVmClustersOutput_exadbVmClusters:
+			return deserializeExadbVmClusterList(d, schemas.ListExadbVmClustersOutput_exadbVmClusters, &v.ExadbVmClusters)
+		case schemas.ListExadbVmClustersOutput_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListExadbVmClustersOutput_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListExadbVmClustersMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpListExadbVmClusters{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListExadbVmClusters, schemas.ListExadbVmClustersInput, schemas.ListExadbVmClustersOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpListExadbVmClusters{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListExadbVmClusters, schemas.ListExadbVmClustersInput, schemas.ListExadbVmClustersOutput), output: &ListExadbVmClustersOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

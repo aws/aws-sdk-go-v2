@@ -88,7 +88,7 @@ var _AutomaticStopTimeMinutes = smithy.NewSchema(smithy.ShapeID{
 var BadRequestException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloud9",
 	Name:      "BadRequestException",
-}, smithy.ShapeTypeStructure, 3)
+}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "client"})
 var BadRequestException_message *smithy.Schema
 
 var BadRequestException_className *smithy.Schema
@@ -109,7 +109,7 @@ var _ClientRequestToken = smithy.NewSchema(smithy.ShapeID{
 var ConcurrentAccessException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloud9",
 	Name:      "ConcurrentAccessException",
-}, smithy.ShapeTypeStructure, 3)
+}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "client"})
 var ConcurrentAccessException_message *smithy.Schema
 
 var ConcurrentAccessException_className *smithy.Schema
@@ -119,7 +119,7 @@ var ConcurrentAccessException_code *smithy.Schema
 var ConflictException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloud9",
 	Name:      "ConflictException",
-}, smithy.ShapeTypeStructure, 3)
+}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "client"})
 var ConflictException_message *smithy.Schema
 
 var ConflictException_className *smithy.Schema
@@ -261,7 +261,7 @@ var EnvironmentType_EC2 *smithy.Schema
 var ForbiddenException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloud9",
 	Name:      "ForbiddenException",
-}, smithy.ShapeTypeStructure, 3)
+}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "client"})
 var ForbiddenException_message *smithy.Schema
 
 var ForbiddenException_className *smithy.Schema
@@ -286,7 +286,7 @@ var _Integer = smithy.NewSchema(smithy.ShapeID{
 var InternalServerErrorException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloud9",
 	Name:      "InternalServerErrorException",
-}, smithy.ShapeTypeStructure, 3)
+}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "server"})
 var InternalServerErrorException_message *smithy.Schema
 
 var InternalServerErrorException_className *smithy.Schema
@@ -296,7 +296,7 @@ var InternalServerErrorException_code *smithy.Schema
 var LimitExceededException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloud9",
 	Name:      "LimitExceededException",
-}, smithy.ShapeTypeStructure, 3)
+}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "client"})
 var LimitExceededException_message *smithy.Schema
 
 var LimitExceededException_className *smithy.Schema
@@ -353,7 +353,7 @@ var MemberPermissions_READ_ONLY *smithy.Schema
 var NotFoundException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloud9",
 	Name:      "NotFoundException",
-}, smithy.ShapeTypeStructure, 3)
+}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "client"})
 var NotFoundException_message *smithy.Schema
 
 var NotFoundException_className *smithy.Schema
@@ -429,7 +429,7 @@ var _Timestamp = smithy.NewSchema(smithy.ShapeID{
 var TooManyRequestsException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloud9",
 	Name:      "TooManyRequestsException",
-}, smithy.ShapeTypeStructure, 3)
+}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "client"})
 var TooManyRequestsException_message *smithy.Schema
 
 var TooManyRequestsException_className *smithy.Schema

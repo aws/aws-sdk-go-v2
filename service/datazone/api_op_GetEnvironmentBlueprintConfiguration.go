@@ -4,7 +4,9 @@ package datazone
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/datazone/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/datazone/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -38,6 +40,21 @@ type GetEnvironmentBlueprintConfigurationInput struct {
 	EnvironmentBlueprintIdentifier *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetEnvironmentBlueprintConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetEnvironmentBlueprintConfigurationInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetEnvironmentBlueprintConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DomainIdentifier != nil {
+		s.WriteString(schemas.GetEnvironmentBlueprintConfigurationInput_domainIdentifier, *v.DomainIdentifier)
+	}
+	if v.EnvironmentBlueprintIdentifier != nil {
+		s.WriteString(schemas.GetEnvironmentBlueprintConfigurationInput_environmentBlueprintIdentifier, *v.EnvironmentBlueprintIdentifier)
+	}
 }
 
 type GetEnvironmentBlueprintConfigurationOutput struct {
@@ -89,13 +106,86 @@ type GetEnvironmentBlueprintConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetEnvironmentBlueprintConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetEnvironmentBlueprintConfigurationOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetEnvironmentBlueprintConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AllowUserProvidedConfigurations != nil {
+		s.WriteBool(schemas.GetEnvironmentBlueprintConfigurationOutput_allowUserProvidedConfigurations, *v.AllowUserProvidedConfigurations)
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.GetEnvironmentBlueprintConfigurationOutput_createdAt, *v.CreatedAt)
+	}
+	if v.DomainId != nil {
+		s.WriteString(schemas.GetEnvironmentBlueprintConfigurationOutput_domainId, *v.DomainId)
+	}
+	serializeEnabledRegionList(s, schemas.GetEnvironmentBlueprintConfigurationOutput_enabledRegions, v.EnabledRegions)
+	if v.EnvironmentBlueprintId != nil {
+		s.WriteString(schemas.GetEnvironmentBlueprintConfigurationOutput_environmentBlueprintId, *v.EnvironmentBlueprintId)
+	}
+	if v.EnvironmentRolePermissionBoundary != nil {
+		s.WriteString(schemas.GetEnvironmentBlueprintConfigurationOutput_environmentRolePermissionBoundary, *v.EnvironmentRolePermissionBoundary)
+	}
+	if v.ManageAccessRoleArn != nil {
+		s.WriteString(schemas.GetEnvironmentBlueprintConfigurationOutput_manageAccessRoleArn, *v.ManageAccessRoleArn)
+	}
+	serializeProvisioningConfigurationList(s, schemas.GetEnvironmentBlueprintConfigurationOutput_provisioningConfigurations, v.ProvisioningConfigurations)
+	if v.ProvisioningRoleArn != nil {
+		s.WriteString(schemas.GetEnvironmentBlueprintConfigurationOutput_provisioningRoleArn, *v.ProvisioningRoleArn)
+	}
+	serializeRegionalParameterMap(s, schemas.GetEnvironmentBlueprintConfigurationOutput_regionalParameters, v.RegionalParameters)
+	serializeResourceConfigurations(s, schemas.GetEnvironmentBlueprintConfigurationOutput_resourceConfigurations, v.ResourceConfigurations)
+	if v.UpdatedAt != nil {
+		s.WriteTime(schemas.GetEnvironmentBlueprintConfigurationOutput_updatedAt, *v.UpdatedAt)
+	}
+}
+func (v *GetEnvironmentBlueprintConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetEnvironmentBlueprintConfigurationOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetEnvironmentBlueprintConfigurationOutput_allowUserProvidedConfigurations:
+			v.AllowUserProvidedConfigurations = new(bool)
+			return d.ReadBool(schemas.GetEnvironmentBlueprintConfigurationOutput_allowUserProvidedConfigurations, v.AllowUserProvidedConfigurations)
+		case schemas.GetEnvironmentBlueprintConfigurationOutput_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.GetEnvironmentBlueprintConfigurationOutput_createdAt, v.CreatedAt)
+		case schemas.GetEnvironmentBlueprintConfigurationOutput_domainId:
+			v.DomainId = new(string)
+			return d.ReadString(schemas.GetEnvironmentBlueprintConfigurationOutput_domainId, v.DomainId)
+		case schemas.GetEnvironmentBlueprintConfigurationOutput_enabledRegions:
+			return deserializeEnabledRegionList(d, schemas.GetEnvironmentBlueprintConfigurationOutput_enabledRegions, &v.EnabledRegions)
+		case schemas.GetEnvironmentBlueprintConfigurationOutput_environmentBlueprintId:
+			v.EnvironmentBlueprintId = new(string)
+			return d.ReadString(schemas.GetEnvironmentBlueprintConfigurationOutput_environmentBlueprintId, v.EnvironmentBlueprintId)
+		case schemas.GetEnvironmentBlueprintConfigurationOutput_environmentRolePermissionBoundary:
+			v.EnvironmentRolePermissionBoundary = new(string)
+			return d.ReadString(schemas.GetEnvironmentBlueprintConfigurationOutput_environmentRolePermissionBoundary, v.EnvironmentRolePermissionBoundary)
+		case schemas.GetEnvironmentBlueprintConfigurationOutput_manageAccessRoleArn:
+			v.ManageAccessRoleArn = new(string)
+			return d.ReadString(schemas.GetEnvironmentBlueprintConfigurationOutput_manageAccessRoleArn, v.ManageAccessRoleArn)
+		case schemas.GetEnvironmentBlueprintConfigurationOutput_provisioningConfigurations:
+			return deserializeProvisioningConfigurationList(d, schemas.GetEnvironmentBlueprintConfigurationOutput_provisioningConfigurations, &v.ProvisioningConfigurations)
+		case schemas.GetEnvironmentBlueprintConfigurationOutput_provisioningRoleArn:
+			v.ProvisioningRoleArn = new(string)
+			return d.ReadString(schemas.GetEnvironmentBlueprintConfigurationOutput_provisioningRoleArn, v.ProvisioningRoleArn)
+		case schemas.GetEnvironmentBlueprintConfigurationOutput_regionalParameters:
+			return deserializeRegionalParameterMap(d, schemas.GetEnvironmentBlueprintConfigurationOutput_regionalParameters, &v.RegionalParameters)
+		case schemas.GetEnvironmentBlueprintConfigurationOutput_resourceConfigurations:
+			return deserializeResourceConfigurations(d, schemas.GetEnvironmentBlueprintConfigurationOutput_resourceConfigurations, &v.ResourceConfigurations)
+		case schemas.GetEnvironmentBlueprintConfigurationOutput_updatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.GetEnvironmentBlueprintConfigurationOutput_updatedAt, v.UpdatedAt)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetEnvironmentBlueprintConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetEnvironmentBlueprintConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetEnvironmentBlueprintConfiguration, schemas.GetEnvironmentBlueprintConfigurationInput, schemas.GetEnvironmentBlueprintConfigurationOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetEnvironmentBlueprintConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetEnvironmentBlueprintConfiguration, schemas.GetEnvironmentBlueprintConfigurationInput, schemas.GetEnvironmentBlueprintConfigurationOutput), output: &GetEnvironmentBlueprintConfigurationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

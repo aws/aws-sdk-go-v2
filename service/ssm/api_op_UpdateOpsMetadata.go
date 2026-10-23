@@ -4,7 +4,9 @@ package ssm
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/ssm/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ssm/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -41,6 +43,20 @@ type UpdateOpsMetadataInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateOpsMetadataInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateOpsMetadataRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateOpsMetadataInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeMetadataKeysToDeleteList(s, schemas.UpdateOpsMetadataRequest_KeysToDelete, v.KeysToDelete)
+	serializeMetadataMap(s, schemas.UpdateOpsMetadataRequest_MetadataToUpdate, v.MetadataToUpdate)
+	if v.OpsMetadataArn != nil {
+		s.WriteString(schemas.UpdateOpsMetadataRequest_OpsMetadataArn, *v.OpsMetadataArn)
+	}
+}
+
 type UpdateOpsMetadataOutput struct {
 
 	// The Amazon Resource Name (ARN) of the OpsMetadata Object that was updated.
@@ -52,13 +68,32 @@ type UpdateOpsMetadataOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateOpsMetadataOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateOpsMetadataResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateOpsMetadataOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.OpsMetadataArn != nil {
+		s.WriteString(schemas.UpdateOpsMetadataResult_OpsMetadataArn, *v.OpsMetadataArn)
+	}
+}
+func (v *UpdateOpsMetadataOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateOpsMetadataResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateOpsMetadataResult_OpsMetadataArn:
+			v.OpsMetadataArn = new(string)
+			return d.ReadString(schemas.UpdateOpsMetadataResult_OpsMetadataArn, v.OpsMetadataArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateOpsMetadataMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateOpsMetadata{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateOpsMetadata, schemas.UpdateOpsMetadataRequest, schemas.UpdateOpsMetadataResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateOpsMetadata{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateOpsMetadata, schemas.UpdateOpsMetadataRequest, schemas.UpdateOpsMetadataResult), output: &UpdateOpsMetadataOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -2893,6 +2893,9 @@
                     "target": "com.amazonaws.ec2#CreateCapacityReservationCancellationQuote"
                 },
                 {
+                    "target": "com.amazonaws.ec2#CreateCapacityReservationDateChangeQuote"
+                },
+                {
                     "target": "com.amazonaws.ec2#CreateCapacityReservationFleet"
                 },
                 {
@@ -3215,6 +3218,9 @@
                 },
                 {
                     "target": "com.amazonaws.ec2#DeleteClientVpnEndpoint"
+                },
+                {
+                    "target": "com.amazonaws.ec2#DeleteClientVpnEndpointAuthorizationPolicy"
                 },
                 {
                     "target": "com.amazonaws.ec2#DeleteClientVpnRoute"
@@ -3581,6 +3587,9 @@
                 },
                 {
                     "target": "com.amazonaws.ec2#DescribeCapacityReservationCancellationQuotes"
+                },
+                {
+                    "target": "com.amazonaws.ec2#DescribeCapacityReservationDateChangeQuotes"
                 },
                 {
                     "target": "com.amazonaws.ec2#DescribeCapacityReservationFleets"
@@ -4360,6 +4369,9 @@
                     "target": "com.amazonaws.ec2#GetCapacityReservationUsage"
                 },
                 {
+                    "target": "com.amazonaws.ec2#GetClientVpnEndpointAuthorizationPolicy"
+                },
+                {
                     "target": "com.amazonaws.ec2#GetCoipPoolUsage"
                 },
                 {
@@ -4516,6 +4528,9 @@
                     "target": "com.amazonaws.ec2#GetSubnetCidrReservations"
                 },
                 {
+                    "target": "com.amazonaws.ec2#GetTransitGatewayAttachmentNatConfiguration"
+                },
+                {
                     "target": "com.amazonaws.ec2#GetTransitGatewayAttachmentPropagations"
                 },
                 {
@@ -4610,6 +4625,9 @@
                 },
                 {
                     "target": "com.amazonaws.ec2#ModifyClientVpnEndpoint"
+                },
+                {
+                    "target": "com.amazonaws.ec2#ModifyClientVpnEndpointAuthorizationPolicy"
                 },
                 {
                     "target": "com.amazonaws.ec2#ModifyDefaultCreditSpecification"
@@ -4754,6 +4772,9 @@
                 },
                 {
                     "target": "com.amazonaws.ec2#ModifyTransitGateway"
+                },
+                {
+                    "target": "com.amazonaws.ec2#ModifyTransitGatewayAttachmentNatConfiguration"
                 },
                 {
                     "target": "com.amazonaws.ec2#ModifyTransitGatewayMeteringPolicy"
@@ -6806,6 +6827,70 @@
                         "smithy.api#enumValue": "failed"
                     }
                 }
+            }
+        },
+        "com.amazonaws.ec2#AnalysisTransitGatewayPolicyTableEntry": {
+            "type": "structure",
+            "members": {
+                "RuleNumber": {
+                    "target": "com.amazonaws.ec2#Integer",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "RuleNumber",
+                        "smithy.api#documentation": "<p>The rule number for the policy table entry. Entries are evaluated in ascending order of rule number.</p>",
+                        "smithy.api#xmlName": "ruleNumber"
+                    }
+                },
+                "Protocol": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "Protocol",
+                        "smithy.api#documentation": "<p>The protocol number. A value of <code>-1</code> means that the entry matches all protocols.</p>",
+                        "smithy.api#xmlName": "protocol"
+                    }
+                },
+                "SourceCidr": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "SourceCidr",
+                        "smithy.api#documentation": "<p>The source CIDR block. If this value is not present, the entry matches any source address.</p>",
+                        "smithy.api#xmlName": "sourceCidr"
+                    }
+                },
+                "DestinationCidr": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "DestinationCidr",
+                        "smithy.api#documentation": "<p>The destination CIDR block. If this value is not present, the entry matches any destination address.</p>",
+                        "smithy.api#xmlName": "destinationCidr"
+                    }
+                },
+                "SourcePortRange": {
+                    "target": "com.amazonaws.ec2#PortRange",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "SourcePortRange",
+                        "smithy.api#documentation": "<p>The source port range. If this value is not present, the entry matches any source port.</p>",
+                        "smithy.api#xmlName": "sourcePortRange"
+                    }
+                },
+                "DestinationPortRange": {
+                    "target": "com.amazonaws.ec2#PortRange",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "DestinationPortRange",
+                        "smithy.api#documentation": "<p>The destination port range. If this value is not present, the entry matches any destination port.</p>",
+                        "smithy.api#xmlName": "destinationPortRange"
+                    }
+                },
+                "TargetRouteTableId": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "TargetRouteTableId",
+                        "smithy.api#documentation": "<p>The ID of the transit gateway route table to which the entry routes matching traffic.</p>",
+                        "smithy.api#xmlName": "targetRouteTableId"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes an entry in a transit gateway policy table.</p>"
             }
         },
         "com.amazonaws.ec2#ApplianceModeSupportValue": {
@@ -11842,6 +11927,17 @@
         "com.amazonaws.ec2#Boolean": {
             "type": "boolean"
         },
+        "com.amazonaws.ec2#BootModeOverrideValues": {
+            "type": "enum",
+            "members": {
+                "uefi": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "uefi"
+                    }
+                }
+            }
+        },
         "com.amazonaws.ec2#BootModeType": {
             "type": "enum",
             "members": {
@@ -14762,6 +14858,30 @@
                         "smithy.api#xmlName": "interruptionInfo"
                     }
                 },
+                "AdjustmentStatus": {
+                    "target": "com.amazonaws.ec2#CapacityReservationAdjustmentStatus",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "AdjustmentStatus",
+                        "smithy.api#documentation": "<p>The status of the most recent modification to the Capacity Reservation. A Capacity\n\t\t\tReservation can have one of the following adjustment statuses:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>requested</code> - The modification was requested and is being\n\t\t\t\t\tprocessed.</p>\n            </li>\n            <li>\n               <p>\n                  <code>applied</code> - The modification was applied to the Capacity\n\t\t\t\t\tReservation.</p>\n            </li>\n            <li>\n               <p>\n                  <code>rejected</code> - The modification was not applied and the Capacity\n\t\t\t\t\tReservation keeps its existing configuration.</p>\n            </li>\n         </ul>\n         <p>This field is not returned if the Capacity Reservation has never been modified.</p>",
+                        "smithy.api#xmlName": "adjustmentStatus"
+                    }
+                },
+                "AdjustmentDetails": {
+                    "target": "com.amazonaws.ec2#CapacityReservationAdjustmentDetails",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "AdjustmentDetails",
+                        "smithy.api#documentation": "<p>The configuration that the Capacity Reservation will have after the requested adjustment\n\t\t\tis applied.</p>",
+                        "smithy.api#xmlName": "adjustmentDetails"
+                    }
+                },
+                "OriginalStartDate": {
+                    "target": "com.amazonaws.ec2#MillisecondDateTime",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "OriginalStartDate",
+                        "smithy.api#documentation": "<p>The start date that you originally requested for the Capacity Reservation, in the ISO8601\n\t\t\tformat in the UTC time zone (<code>YYYY-MM-DDThh:mm:ss.sssZ</code>). This value doesn't\n\t\t\tchange when you push out the start date.</p>",
+                        "smithy.api#xmlName": "originalStartDate"
+                    }
+                },
                 "ZeroSizePreference": {
                     "target": "com.amazonaws.ec2#ZeroSizePreference",
                     "traits": {
@@ -14769,10 +14889,89 @@
                         "smithy.api#documentation": "<p>\n\t\t\tThe zero-size preference configured for the interruptible Capacity Reservation. A value of <code>retain</code> keeps the interruptible Capacity Reservation active at zero capacity when you reduce its allocation to zero. A value of <code>default</code> cancels the interruptible Capacity Reservation when you reduce its allocation to zero.\n\t\t</p>",
                         "smithy.api#xmlName": "zeroSizePreference"
                     }
+                },
+                "LaunchStatus": {
+                    "target": "com.amazonaws.ec2#CapacityReservationLaunchStatus",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "LaunchStatus",
+                        "smithy.api#documentation": "<note>\n            <p>Only supported for UltraServers.</p>\n         </note>\n         <p>Indicates whether you can launch instances into the Capacity Reservation. A Capacity\n\t\t\tReservation can have the following launch statuses:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>launchable</code> - You can launch instances into the Capacity\n\t\t\t\t\tReservation.</p>\n            </li>\n            <li>\n               <p>\n                  <code>unlaunchable</code> - You can't launch instances into the Capacity\n\t\t\t\t\tReservation. For example, the Capacity Reservation is not active.</p>\n            </li>\n         </ul>",
+                        "smithy.api#xmlName": "launchStatus"
+                    }
                 }
             },
             "traits": {
                 "smithy.api#documentation": "<p>Describes a Capacity Reservation.</p>"
+            }
+        },
+        "com.amazonaws.ec2#CapacityReservationAdjustmentDetails": {
+            "type": "structure",
+            "members": {
+                "StartDate": {
+                    "target": "com.amazonaws.ec2#MillisecondDateTime",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "StartDate",
+                        "smithy.api#documentation": "<p>The start date that the Capacity Reservation will have after the adjustment.</p>",
+                        "smithy.api#xmlName": "startDate"
+                    }
+                },
+                "EndDate": {
+                    "target": "com.amazonaws.ec2#MillisecondDateTime",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "EndDate",
+                        "smithy.api#documentation": "<p>The end date that the Capacity Reservation will have after the adjustment.</p>",
+                        "smithy.api#xmlName": "endDate"
+                    }
+                },
+                "CommitmentEndDate": {
+                    "target": "com.amazonaws.ec2#MillisecondDateTime",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "CommitmentEndDate",
+                        "smithy.api#documentation": "<p>The date and time at which the commitment duration will expire after the\n\t\t\tadjustment.</p>",
+                        "smithy.api#xmlName": "commitmentEndDate"
+                    }
+                },
+                "EndDateType": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "EndDateType",
+                        "smithy.api#documentation": "<p>Indicates the way in which the Capacity Reservation will end after the adjustment.\n\t\t\tPossible values are:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>unlimited</code> - The Capacity Reservation remains active until you\n\t\t\t\t\texplicitly cancel it.</p>\n            </li>\n            <li>\n               <p>\n                  <code>limited</code> - The Capacity Reservation expires automatically at the\n\t\t\t\t\tdate and time given by <code>endDate</code>.</p>\n            </li>\n         </ul>",
+                        "smithy.api#xmlName": "endDateType"
+                    }
+                },
+                "CommitmentDuration": {
+                    "target": "com.amazonaws.ec2#BoxedLong",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "CommitmentDuration",
+                        "smithy.api#documentation": "<p>The commitment duration, in seconds, that the Capacity Reservation will have after the\n\t\t\tadjustment.</p>",
+                        "smithy.api#xmlName": "commitmentDuration"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes the configuration that a Capacity Reservation will have after a pending\n\t\t\tadjustment is applied.</p>"
+            }
+        },
+        "com.amazonaws.ec2#CapacityReservationAdjustmentStatus": {
+            "type": "enum",
+            "members": {
+                "requested": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "requested"
+                    }
+                },
+                "applied": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "applied"
+                    }
+                },
+                "rejected": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "rejected"
+                    }
+                }
             }
         },
         "com.amazonaws.ec2#CapacityReservationBillingRequest": {
@@ -15031,6 +15230,14 @@
                         "aws.protocols#ec2QueryName": "CommitmentEndDate",
                         "smithy.api#documentation": "<p>The date and time at which the commitment duration expires, in the ISO8601 format in\n\t\t\tthe UTC time zone (<code>YYYY-MM-DDThh:mm:ss.sssZ</code>). You can't decrease the\n\t\t\tinstance count or cancel the Capacity Reservation before this date and time.</p>",
                         "smithy.api#xmlName": "commitmentEndDate"
+                    }
+                },
+                "CommitmentDuration": {
+                    "target": "com.amazonaws.ec2#BoxedLong",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "CommitmentDuration",
+                        "smithy.api#documentation": "<p>The commitment duration, in seconds, for the future-dated Capacity Reservation. This is\n\t\t\tthe minimum duration for which you commit to having the Capacity Reservation in the\n\t\t\t<code>active</code> state in your account after it has been delivered.</p>",
+                        "smithy.api#xmlName": "commitmentDuration"
                     }
                 }
             },
@@ -15498,6 +15705,139 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "Ubuntu Pro"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ec2#CapacityReservationLaunchStatus": {
+            "type": "enum",
+            "members": {
+                "LAUNCHABLE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "launchable"
+                    }
+                },
+                "UNLAUNCHABLE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "unlaunchable"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ec2#CapacityReservationModificationQuote": {
+            "type": "structure",
+            "members": {
+                "CapacityReservationModificationQuoteId": {
+                    "target": "com.amazonaws.ec2#CapacityReservationModificationQuoteId",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "CapacityReservationModificationQuoteId",
+                        "smithy.api#documentation": "<p>The ID of the modification quote.</p>",
+                        "smithy.api#xmlName": "capacityReservationModificationQuoteId"
+                    }
+                },
+                "CapacityReservationId": {
+                    "target": "com.amazonaws.ec2#CapacityReservationId",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "CapacityReservationId",
+                        "smithy.api#documentation": "<p>The ID of the Capacity Reservation associated with the modification quote.</p>",
+                        "smithy.api#xmlName": "capacityReservationId"
+                    }
+                },
+                "CreateTime": {
+                    "target": "com.amazonaws.ec2#MillisecondDateTime",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "CreateTime",
+                        "smithy.api#documentation": "<p>The date and time at which the modification quote was created.</p>",
+                        "smithy.api#xmlName": "createTime"
+                    }
+                },
+                "ExpirationTime": {
+                    "target": "com.amazonaws.ec2#MillisecondDateTime",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "ExpirationTime",
+                        "smithy.api#documentation": "<p>The date and time at which the modification quote expires.</p>",
+                        "smithy.api#xmlName": "expirationTime"
+                    }
+                },
+                "QuoteState": {
+                    "target": "com.amazonaws.ec2#CapacityReservationModificationQuoteState",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "QuoteState",
+                        "smithy.api#documentation": "<p>The state of the modification quote itself. Possible values are:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>active</code> - The quote can still be used.</p>\n            </li>\n            <li>\n               <p>\n                  <code>expired</code> - The quote can no longer be used. A quote becomes\n\t\t\t\t\t<code>expired</code> at its <code>expirationTime</code>.</p>\n            </li>\n         </ul>",
+                        "smithy.api#xmlName": "quoteState"
+                    }
+                },
+                "CurrentConfiguration": {
+                    "target": "com.amazonaws.ec2#ModificationQuoteCurrentConfiguration",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "CurrentConfiguration",
+                        "smithy.api#documentation": "<p>The configuration that the Capacity Reservation has at the time the quote was\n\t\t\tgenerated.</p>",
+                        "smithy.api#xmlName": "currentConfiguration"
+                    }
+                },
+                "ModificationTerms": {
+                    "target": "com.amazonaws.ec2#ModificationTerms",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "ModificationTerms",
+                        "smithy.api#documentation": "<p>The terms of the modification, including the configuration that the Capacity Reservation\n\t\t\twill have if you accept them by using <code>ModifyCapacityReservation</code>.</p>",
+                        "smithy.api#xmlName": "modificationTerms"
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.ec2#TagList",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "TagSet",
+                        "smithy.api#documentation": "<p>The tags assigned to the modification quote.</p>",
+                        "smithy.api#xmlName": "tagSet"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes a Capacity Reservation modification quote, which provides the terms for\n\t\t\tchanging the start date or the commitment of a future-dated Capacity Reservation.</p>"
+            }
+        },
+        "com.amazonaws.ec2#CapacityReservationModificationQuoteId": {
+            "type": "string"
+        },
+        "com.amazonaws.ec2#CapacityReservationModificationQuoteIdSet": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ec2#CapacityReservationModificationQuoteId",
+                "traits": {
+                    "smithy.api#xmlName": "item"
+                }
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 1000
+                }
+            }
+        },
+        "com.amazonaws.ec2#CapacityReservationModificationQuoteResponseSet": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ec2#CapacityReservationModificationQuote",
+                "traits": {
+                    "smithy.api#xmlName": "item"
+                }
+            }
+        },
+        "com.amazonaws.ec2#CapacityReservationModificationQuoteState": {
+            "type": "enum",
+            "members": {
+                "active": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "active"
+                    }
+                },
+                "expired": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "expired"
                     }
                 }
             }
@@ -16578,6 +16918,64 @@
                 }
             }
         },
+        "com.amazonaws.ec2#ClientVpnAuthorizationPolicyShadowMode": {
+            "type": "enum",
+            "members": {
+                "enabled": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "enabled"
+                    }
+                },
+                "disabled": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "disabled"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Indicates whether the authorization policy for a Client VPN endpoint is evaluated in shadow mode. Possible values include:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>enabled</code> - The authorization policy is evaluated and the results are logged, but access is not enforced.</p>\n            </li>\n            <li>\n               <p>\n                  <code>disabled</code> - The authorization policy is enforced.</p>\n            </li>\n         </ul>"
+            }
+        },
+        "com.amazonaws.ec2#ClientVpnAuthorizationPolicyStatus": {
+            "type": "enum",
+            "members": {
+                "creating": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "creating"
+                    }
+                },
+                "updating": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "updating"
+                    }
+                },
+                "active": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "active"
+                    }
+                },
+                "failed": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "failed"
+                    }
+                },
+                "deleting": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "deleting"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes the state of an authorization policy for a Client VPN endpoint. Possible states include:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>creating</code> - The authorization policy is being created.</p>\n            </li>\n            <li>\n               <p>\n                  <code>updating</code> - The authorization policy is being updated.</p>\n            </li>\n            <li>\n               <p>\n                  <code>active</code> - The authorization policy has been applied to the Client VPN endpoint.</p>\n            </li>\n            <li>\n               <p>\n                  <code>failed</code> - The authorization policy could not be applied to the Client VPN endpoint.</p>\n            </li>\n            <li>\n               <p>\n                  <code>deleting</code> - The authorization policy is being deleted.</p>\n            </li>\n         </ul>"
+            }
+        },
         "com.amazonaws.ec2#ClientVpnAuthorizationRuleStatus": {
             "type": "structure",
             "members": {
@@ -16771,6 +17169,14 @@
                         "smithy.api#documentation": "<p>The statuses returned by the client connect handler for posture compliance, if applicable.</p>",
                         "smithy.api#xmlName": "postureComplianceStatusSet"
                     }
+                },
+                "AuthorizationPolicyLastEvaluatedTime": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "AuthorizationPolicyLastEvaluatedTime",
+                        "smithy.api#documentation": "<p>The date and time the authorization policy was last evaluated for the client connection, if applicable.</p>",
+                        "smithy.api#xmlName": "authorizationPolicyLastEvaluatedTime"
+                    }
                 }
             },
             "traits": {
@@ -16835,6 +17241,29 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "terminated"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ec2#ClientVpnDeviceTrustProviderType": {
+            "type": "enum",
+            "members": {
+                "crowdstrike": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "crowdstrike"
+                    }
+                },
+                "jamf": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "jamf"
+                    }
+                },
+                "jumpcloud": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "jumpcloud"
                     }
                 }
             }
@@ -17067,6 +17496,14 @@
                         "aws.protocols#ec2QueryName": "TransitGatewayConfiguration",
                         "smithy.api#documentation": "<p>The Transit Gateway configuration for the Client VPN endpoint.</p>",
                         "smithy.api#xmlName": "transitGatewayConfiguration"
+                    }
+                },
+                "DevicePostureOptions": {
+                    "target": "com.amazonaws.ec2#DevicePostureResponseOptions",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "DevicePostureOptions",
+                        "smithy.api#documentation": "<p>The device trust providers configured for the Client VPN endpoint, if applicable.</p>",
+                        "smithy.api#xmlName": "devicePostureOptions"
                     }
                 }
             },
@@ -17324,6 +17761,82 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.ec2#SecurityGroupId",
+                "traits": {
+                    "smithy.api#xmlName": "item"
+                }
+            }
+        },
+        "com.amazonaws.ec2#ClientVpnTrustProvider": {
+            "type": "structure",
+            "members": {
+                "TrustProviderType": {
+                    "target": "com.amazonaws.ec2#ClientVpnDeviceTrustProviderType",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "TrustProviderType",
+                        "smithy.api#documentation": "<p>The type of the device trust provider. Possible values include:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>crowdstrike</code> - CrowdStrike device trust provider.</p>\n            </li>\n            <li>\n               <p>\n                  <code>jamf</code> - Jamf device trust provider.</p>\n            </li>\n            <li>\n               <p>\n                  <code>jumpcloud</code> - JumpCloud device trust provider.</p>\n            </li>\n         </ul>",
+                        "smithy.api#xmlName": "trustProviderType"
+                    }
+                },
+                "TenantId": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "TenantId",
+                        "smithy.api#documentation": "<p>The tenant ID associated with your device trust provider account.</p>",
+                        "smithy.api#xmlName": "tenantId"
+                    }
+                },
+                "PublicSigningKeyUrl": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "PublicSigningKeyUrl",
+                        "smithy.api#documentation": "<p>The URL of the public signing key that is used to verify the identity token issued by the device trust provider.</p>",
+                        "smithy.api#xmlName": "publicSigningKeyUrl"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about a device trust provider configured for a Client VPN endpoint.</p>"
+            }
+        },
+        "com.amazonaws.ec2#ClientVpnTrustProviderRequest": {
+            "type": "structure",
+            "members": {
+                "TrustProviderType": {
+                    "target": "com.amazonaws.ec2#ClientVpnDeviceTrustProviderType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of the device trust provider. Possible values include:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>crowdstrike</code> - CrowdStrike device trust provider.</p>\n            </li>\n            <li>\n               <p>\n                  <code>jamf</code> - Jamf device trust provider.</p>\n            </li>\n            <li>\n               <p>\n                  <code>jumpcloud</code> - JumpCloud device trust provider.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "TenantId": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tenant ID associated with your device trust provider account.</p>"
+                    }
+                },
+                "PublicSigningKeyUrl": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The URL of the public signing key that is used to verify the identity token issued by the device trust provider.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes a device trust provider to configure for a Client VPN endpoint.</p>"
+            }
+        },
+        "com.amazonaws.ec2#ClientVpnTrustProviderRequestList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ec2#ClientVpnTrustProviderRequest",
+                "traits": {
+                    "smithy.api#xmlName": "item"
+                }
+            }
+        },
+        "com.amazonaws.ec2#ClientVpnTrustProviderSet": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ec2#ClientVpnTrustProvider",
                 "traits": {
                     "smithy.api#xmlName": "item"
                 }
@@ -17745,6 +18258,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The name of the CloudWatch Logs log stream to which the connection data is published.</p>"
                     }
+                },
+                "IncludeAuthorizationPolicyContext": {
+                    "target": "com.amazonaws.ec2#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether to include the authorization policy evaluation context in the connection logs for the Client VPN endpoint.</p>"
+                    }
                 }
             },
             "traits": {
@@ -17770,6 +18289,12 @@
                     "target": "com.amazonaws.ec2#String",
                     "traits": {
                         "smithy.api#documentation": "<p>The name of the Amazon CloudWatch Logs log stream to which connection logging data is published.</p>"
+                    }
+                },
+                "IncludeAuthorizationPolicyContext": {
+                    "target": "com.amazonaws.ec2#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether the authorization policy evaluation context is included in the connection logs for the Client VPN endpoint.</p>"
                     }
                 }
             },
@@ -18342,7 +18867,7 @@
                 "CopyImageTags": {
                     "target": "com.amazonaws.ec2#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies whether to copy your user-defined AMI tags to the new AMI.</p>\n         <p>The following tags are not be copied:</p>\n         <ul>\n            <li>\n               <p>System tags (prefixed with <code>aws:</code>)</p>\n            </li>\n            <li>\n               <p>For public and shared AMIs, user-defined tags that are attached by other Amazon Web Services\n          accounts</p>\n            </li>\n         </ul>\n         <p>Default: Your user-defined AMI tags are not copied.</p>"
+                        "smithy.api#documentation": "<p>Specifies whether to copy your user-defined AMI tags to the new AMI.</p>\n         <p>The following tags are not be copied:</p>\n         <ul>\n            <li>\n               <p>System tags (prefixed with <code>aws:</code>)</p>\n            </li>\n            <li>\n               <p>For public and shared AMIs, user-defined tags that are attached by other Amazon Web Services\n          accounts, except tags with the <code>ec2:SharedTag/</code> prefix. For more information\n          about tag sharing, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html#sharing-tags\">Sharing\n          tags</a> in the <i>Amazon EC2 User Guide</i>.</p>\n            </li>\n         </ul>\n         <p>Default: Your user-defined AMI tags are not copied.</p>"
                     }
                 },
                 "TagSpecifications": {
@@ -19249,6 +19774,78 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.ec2#CreateCapacityReservationDateChangeQuote": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ec2#CreateCapacityReservationDateChangeQuoteRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.ec2#CreateCapacityReservationDateChangeQuoteResult"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Generates a quote for changing the start date of a future-dated Capacity Reservation\n\t\t\tthat has not yet been delivered. The quote includes the new start date, the resulting\n\t\t\tcommitment end date, and a quote ID. Pass the quote ID to\n\t\t\t<code>ModifyCapacityReservation</code> to apply the change.</p>\n         <p>The cumulative pushout across all changes is limited to 30 days from the Capacity\n\t\t\tReservation's original start date. Quotes are valid for 24 hours, and always expire at\n\t\t\tleast one hour before the start date.</p>"
+            }
+        },
+        "com.amazonaws.ec2#CreateCapacityReservationDateChangeQuoteRequest": {
+            "type": "structure",
+            "members": {
+                "CapacityReservationId": {
+                    "target": "com.amazonaws.ec2#CapacityReservationId",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The ID of the Capacity Reservation.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "NewStartDate": {
+                    "target": "com.amazonaws.ec2#MillisecondDateTime",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The requested new start date for the Capacity Reservation, in the ISO8601 format in the\n\t\t\tUTC time zone (<code>YYYY-MM-DDThh:mm:ss.sssZ</code>). The new start date must be later\n\t\t\tthan the current start date and within the cumulative 30-day pushout limit.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ClientToken": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html\">Ensure Idempotency</a>.</p>",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                },
+                "TagSpecifications": {
+                    "target": "com.amazonaws.ec2#TagSpecificationList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags to apply to the date change quote.</p>",
+                        "smithy.api#xmlName": "TagSpecification"
+                    }
+                },
+                "DryRun": {
+                    "target": "com.amazonaws.ec2#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.ec2#CreateCapacityReservationDateChangeQuoteResult": {
+            "type": "structure",
+            "members": {
+                "CapacityReservationModificationQuote": {
+                    "target": "com.amazonaws.ec2#CapacityReservationModificationQuote",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "CapacityReservationModificationQuote",
+                        "smithy.api#documentation": "<p>Information about the Capacity Reservation date change quote.</p>",
+                        "smithy.api#xmlName": "capacityReservationModificationQuote"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.ec2#CreateCapacityReservationFleet": {
             "type": "operation",
             "input": {
@@ -19793,6 +20390,12 @@
                     "target": "com.amazonaws.ec2#TransitGatewayConfigurationInputStructure",
                     "traits": {
                         "smithy.api#documentation": "<p>The Transit Gateway configuration for the Client VPN endpoint. Use this parameter to associate the endpoint with a Transit Gateway instead of a VPC. You cannot specify both <code>TransitGatewayConfiguration</code> and <code>VpcId</code>/<code>SecurityGroupIds</code>.</p>"
+                    }
+                },
+                "DevicePostureOptions": {
+                    "target": "com.amazonaws.ec2#DevicePostureOptions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The device posture options for the Client VPN endpoint. Use this parameter to specify the device trust providers that the endpoint uses to evaluate the security posture of connecting devices.</p>"
                     }
                 }
             },
@@ -21024,6 +21627,12 @@
                     "target": "com.amazonaws.ec2#SnapshotLocationEnum",
                     "traits": {
                         "smithy.api#documentation": "<note>\n            <p>Only supported for instances in Local Zones and for instances on Outposts that support\n        local snapshots. If the source instance is not in one of these locations, omit this\n        parameter.</p>\n         </note>\n         <p>The Amazon S3 location where the snapshots will be stored.</p>\n         <ul>\n            <li>\n               <p>To create local snapshots in the same Local Zone or on the same Outpost as the source\n          instance, specify <code>local</code>.</p>\n            </li>\n            <li>\n               <p>To create regional snapshots in the parent Region of the Local Zone or Outpost, specify\n            <code>regional</code>.</p>\n            </li>\n         </ul>\n         <p>If the source instance is in a Local Zone and you omit this parameter, regional snapshots\n      are created in the parent Region of the Local Zone.</p>\n         <p>If the source instance is on an Outpost that supports local snapshots, this parameter is\n      required. If you omit it, the request fails with an\n      <code>InvalidParameterValue</code> error.</p>\n         <p>Default: <code>regional</code> (for instances in Local Zones only)</p>"
+                    }
+                },
+                "BootModeOverride": {
+                    "target": "com.amazonaws.ec2#BootModeOverrideValues",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The boot mode of the new image, which overrides the default boot mode. By default, \n      if you do not specify this parameter, the new image inherits \n      the <code>boot-mode</code> from the source instance.</p>\n         <p>A value of <code>uefi</code> indicates that the image only supports UEFI boot mode. You can\n      specify this parameter only if the <code>current-instance-boot-mode</code> of the source instance is\n        <code>uefi</code>. To find the <code>boot-mode</code> or <code>current-instance-boot-mode</code> of \n        an instance, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeInstances.html\">DescribeInstances</a>.</p>\n         <note>\n            <p>The operating system contained in the AMI must be configured to support the specified\n        boot mode.</p>\n         </note>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ami-boot.html\">Instance launch behavior with Amazon EC2 boot modes</a> in\n      the <i>Amazon EC2 User Guide</i>.</p>"
                     }
                 },
                 "DryRun": {
@@ -28838,7 +29447,7 @@
                 "VpcEndpointType": {
                     "target": "com.amazonaws.ec2#VpcEndpointType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of endpoint.</p>\n         <p>Default: Gateway</p>"
+                        "smithy.api#documentation": "<p>The type of endpoint.</p>\n         <p>For more information about the types of VPC endpoints, see <a href=\"https://docs.aws.amazon.com/vpc/latest/privatelink/concepts.html#concepts-vpc-endpoints\">VPC endpoints</a> in the <i>Amazon Web Services PrivateLink User Guide</i>.</p>\n         <p>Default: Gateway</p>"
                     }
                 },
                 "VpcId": {
@@ -28871,14 +29480,14 @@
                 "SubnetIds": {
                     "target": "com.amazonaws.ec2#VpcEndpointSubnetIdList",
                     "traits": {
-                        "smithy.api#documentation": "<p>(Interface and Gateway Load Balancer endpoints) The IDs of the subnets in which to create endpoint\n            network interfaces. For a Gateway Load Balancer endpoint, you can specify only one subnet.</p>",
+                        "smithy.api#documentation": "<p>(Interface, Gateway Load Balancer endpoints, Resource, ServiceNetwork, and Tunnel endpoints only) The IDs of the\n            subnets in which to create endpoint network interfaces. For a Gateway Load Balancer endpoint, you can\n            specify only one subnet. For a <code>Tunnel</code> endpoint, the subnets must be in the\n            Availability Zones of the resource gateway associated with the shared resource\n            configuration. An endpoint network interface is created only in an Availability Zone\n            that the resource gateway is also in.</p>",
                         "smithy.api#xmlName": "SubnetId"
                     }
                 },
                 "SecurityGroupIds": {
                     "target": "com.amazonaws.ec2#VpcEndpointSecurityGroupIdList",
                     "traits": {
-                        "smithy.api#documentation": "<p>(Interface endpoint) The IDs of the security groups to associate with the\n            endpoint network interfaces. If this parameter is not specified, we use the default \n            security group for the VPC.</p>",
+                        "smithy.api#documentation": "<p>(Interface, Resource, ServiceNetwork, and Tunnel endpoints only) The IDs of the security groups\n            to associate with the endpoint network interfaces. If this parameter is not specified,\n            we use the default security group for the VPC.</p>",
                         "smithy.api#xmlName": "SecurityGroupId"
                     }
                 },
@@ -28929,7 +29538,7 @@
                 "ResourceConfigurationArn": {
                     "target": "com.amazonaws.ec2#ResourceConfigurationArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of a resource configuration that will be associated with\n         the VPC endpoint of type resource.</p>"
+                        "smithy.api#documentation": "<p>(Resource and Tunnel endpoints only) The Amazon Resource Name (ARN) of a resource\n         configuration associated with the VPC endpoint. The type of resource configuration depends\n         on the endpoint type:</p>\n         <ul>\n            <li>\n               <p>For a Resource endpoint, you can specify a resource configuration that is of type\n               <code>SINGLE</code>, <code>GROUP</code>, or <code>ARN</code>. To reach a resource\n               that belongs to a group, specify the parent <code>GROUP</code> resource\n               configuration.</p>\n            </li>\n            <li>\n               <p>For a Tunnel endpoint, you can specify a resource configuration that is of type\n               <code>CIDR</code>.</p>\n            </li>\n         </ul>\n         <p>For more information about the types of resource configurations, see <a href=\"https://docs.aws.amazon.com/vpc/latest/privatelink/resource-configuration.html\">Types of resource configurations</a> in the <i>Amazon Web Services PrivateLink User Guide</i>.</p>\n         <p>This request fails if a VPC endpoint owned by a different Amazon Web Services account\n         already exists on a resource gateway that is enabled for <code>ResourceGatewayCharges</code>\n         payer responsibility.</p>"
                     }
                 },
                 "ServiceRegion": {
@@ -30411,6 +31020,56 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Deletes the specified Client VPN endpoint. You must disassociate all target networks before you \n\t\t\tcan delete a Client VPN endpoint.</p>"
+            }
+        },
+        "com.amazonaws.ec2#DeleteClientVpnEndpointAuthorizationPolicy": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ec2#DeleteClientVpnEndpointAuthorizationPolicyRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.ec2#DeleteClientVpnEndpointAuthorizationPolicyResult"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes the authorization policy for a Client VPN endpoint.</p>"
+            }
+        },
+        "com.amazonaws.ec2#DeleteClientVpnEndpointAuthorizationPolicyRequest": {
+            "type": "structure",
+            "members": {
+                "ClientVpnEndpointId": {
+                    "target": "com.amazonaws.ec2#ClientVpnEndpointId",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The ID of the Client VPN endpoint.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "DryRun": {
+                    "target": "com.amazonaws.ec2#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.ec2#DeleteClientVpnEndpointAuthorizationPolicyResult": {
+            "type": "structure",
+            "members": {
+                "Status": {
+                    "target": "com.amazonaws.ec2#ClientVpnAuthorizationPolicyStatus",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "Status",
+                        "smithy.api#documentation": "<p>The current state of the authorization policy.</p>",
+                        "smithy.api#xmlName": "status"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.ec2#DeleteClientVpnEndpointRequest": {
@@ -34850,7 +35509,7 @@
                 "target": "com.amazonaws.ec2#DeleteTransitGatewayRouteTableResult"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Deletes the specified transit gateway route table. If there are any route tables associated with\n         the transit gateway route table, you must first run <a>DisassociateRouteTable</a> before you can delete the transit gateway route table. This removes any route tables associated with the transit gateway route table.</p>"
+                "smithy.api#documentation": "<p>Deletes the specified transit gateway route table. Before you can delete a transit gateway route table, you\n         must disassociate all attachments from it by using <a>DisassociateTransitGatewayRouteTable</a> and wait for the disassociations to\n         complete. You can't delete a transit gateway route table that is the default association route table\n         or default propagation route table for the transit gateway. To change the default route tables, use\n         <a>ModifyTransitGateway</a>.</p>"
             }
         },
         "com.amazonaws.ec2#DeleteTransitGatewayRouteTableAnnouncement": {
@@ -38308,6 +38967,97 @@
                         "aws.protocols#ec2QueryName": "CapacityReservationCancellationQuoteSet",
                         "smithy.api#documentation": "<p>Information about the Capacity Reservation cancellation quotes.</p>",
                         "smithy.api#xmlName": "capacityReservationCancellationQuoteSet"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "NextToken",
+                        "smithy.api#documentation": "<p>The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.</p>",
+                        "smithy.api#xmlName": "nextToken"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.ec2#DescribeCapacityReservationDateChangeQuotes": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ec2#DescribeCapacityReservationDateChangeQuotesRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.ec2#DescribeCapacityReservationDateChangeQuotesResult"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes one or more Capacity Reservation date change quotes that you generated by using\n\t\t\tthe <code>CreateCapacityReservationDateChangeQuote</code> operation.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "CapacityReservationModificationQuotes",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.ec2#DescribeCapacityReservationDateChangeQuotesRequest": {
+            "type": "structure",
+            "members": {
+                "CapacityReservationModificationQuoteIds": {
+                    "target": "com.amazonaws.ec2#CapacityReservationModificationQuoteIdSet",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IDs of the date change quotes to describe.</p>",
+                        "smithy.api#xmlName": "CapacityReservationModificationQuoteId"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.ec2#DescribeCapacityReservationDateChangeQuotesRequestMaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of items to return for this request. To get the next page of items, make another request with the token returned in the output. For more information, \n    see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination\">Pagination</a>.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token to use to retrieve the next page of results.</p>"
+                    }
+                },
+                "DryRun": {
+                    "target": "com.amazonaws.ec2#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
+                    }
+                },
+                "Filters": {
+                    "target": "com.amazonaws.ec2#FilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>One or more filters. Filter names and values are case-sensitive.</p>",
+                        "smithy.api#xmlName": "Filter"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.ec2#DescribeCapacityReservationDateChangeQuotesRequestMaxResults": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 1000
+                }
+            }
+        },
+        "com.amazonaws.ec2#DescribeCapacityReservationDateChangeQuotesResult": {
+            "type": "structure",
+            "members": {
+                "CapacityReservationModificationQuotes": {
+                    "target": "com.amazonaws.ec2#CapacityReservationModificationQuoteResponseSet",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "CapacityReservationModificationQuoteSet",
+                        "smithy.api#documentation": "<p>Information about the Capacity Reservation date change quotes.</p>",
+                        "smithy.api#xmlName": "capacityReservationModificationQuoteSet"
                     }
                 },
                 "NextToken": {
@@ -55322,7 +56072,7 @@
                 "Filters": {
                     "target": "com.amazonaws.ec2#FilterList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The filters.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ip-address-type</code> - The IP address type (<code>ipv4</code> | <code>ipv6</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>service-name</code> - The name of the service.</p>\n            </li>\n            <li>\n               <p>\n                  <code>service-region</code> - The Region of the service.</p>\n            </li>\n            <li>\n               <p>\n                  <code>tag</code>:<key> - The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value. For example, to find all resources that have a tag with the key <code>Owner</code> and the value <code>TeamA</code>, specify <code>tag:Owner</code> for the filter name and <code>TeamA</code> for the filter value.</p>\n            </li>\n            <li>\n               <p>\n                  <code>tag-key</code> - The key of a tag assigned to the resource. Use this filter to find all resources assigned a tag with a specific key, regardless of the tag value.</p>\n            </li>\n            <li>\n               <p>\n                  <code>vpc-id</code> - The ID of the VPC in which the endpoint resides.</p>\n            </li>\n            <li>\n               <p>\n                  <code>vpc-endpoint-id</code> - The ID of the endpoint.</p>\n            </li>\n            <li>\n               <p>\n                  <code>vpc-endpoint-state</code> - The state of the endpoint\n                        (<code>pendingAcceptance</code> | <code>pending</code> |\n                        <code>available</code> | <code>deleting</code> | <code>deleted</code> |\n                        <code>rejected</code> | <code>failed</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>vpc-endpoint-type</code> - The type of VPC endpoint (<code>Interface</code> |\n                    <code>Gateway</code> | <code>GatewayLoadBalancer</code> | <code>Resource</code> | \n                    <code>ServiceNetwork</code>).</p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The filters.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ip-address-type</code> - The IP address type (<code>ipv4</code> | <code>ipv6</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>service-name</code> - The name of the service.</p>\n            </li>\n            <li>\n               <p>\n                  <code>service-region</code> - The Region of the service.</p>\n            </li>\n            <li>\n               <p>\n                  <code>tag</code>:<key> - The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value. For example, to find all resources that have a tag with the key <code>Owner</code> and the value <code>TeamA</code>, specify <code>tag:Owner</code> for the filter name and <code>TeamA</code> for the filter value.</p>\n            </li>\n            <li>\n               <p>\n                  <code>tag-key</code> - The key of a tag assigned to the resource. Use this filter to find all resources assigned a tag with a specific key, regardless of the tag value.</p>\n            </li>\n            <li>\n               <p>\n                  <code>vpc-id</code> - The ID of the VPC in which the endpoint resides.</p>\n            </li>\n            <li>\n               <p>\n                  <code>vpc-endpoint-id</code> - The ID of the endpoint.</p>\n            </li>\n            <li>\n               <p>\n                  <code>vpc-endpoint-state</code> - The state of the endpoint\n                        (<code>pendingAcceptance</code> | <code>pending</code> |\n                        <code>available</code> | <code>deleting</code> | <code>deleted</code> |\n                        <code>rejected</code> | <code>failed</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>vpc-endpoint-type</code> - The type of VPC endpoint (<code>Interface</code> |\n                    <code>Gateway</code> | <code>GatewayLoadBalancer</code> | <code>Resource</code> | \n                    <code>ServiceNetwork</code> | <code>Tunnel</code>).</p>\n            </li>\n         </ul>",
                         "smithy.api#xmlName": "Filter"
                     }
                 },
@@ -56447,6 +57197,43 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Describes the options for an Amazon Web Services Verified Access device-identity based trust provider.</p>"
+            }
+        },
+        "com.amazonaws.ec2#DevicePostureOptions": {
+            "type": "structure",
+            "members": {
+                "TrustProviders": {
+                    "target": "com.amazonaws.ec2#ClientVpnTrustProviderRequestList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The device trust providers to configure for the Client VPN endpoint.</p>",
+                        "smithy.api#xmlName": "TrustProvider"
+                    }
+                },
+                "Enabled": {
+                    "target": "com.amazonaws.ec2#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether device posture evaluation is enabled for the Client VPN endpoint. Specify <code>false</code> to disable device posture, which clears the configured device trust providers.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes the device posture options for a Client VPN endpoint. Device posture options specify the device trust providers that the endpoint uses to evaluate the security posture of connecting devices.</p>"
+            }
+        },
+        "com.amazonaws.ec2#DevicePostureResponseOptions": {
+            "type": "structure",
+            "members": {
+                "TrustProviders": {
+                    "target": "com.amazonaws.ec2#ClientVpnTrustProviderSet",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "TrustProviderSet",
+                        "smithy.api#documentation": "<p>The device trust providers configured for the Client VPN endpoint.</p>",
+                        "smithy.api#xmlName": "trustProviderSet"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about the device posture options for a Client VPN endpoint.</p>"
             }
         },
         "com.amazonaws.ec2#DeviceTrustProviderType": {
@@ -63549,6 +64336,22 @@
                         "smithy.api#xmlName": "transitGatewayRouteTableRoute"
                     }
                 },
+                "TransitGatewayPolicyTable": {
+                    "target": "com.amazonaws.ec2#AnalysisComponent",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "TransitGatewayPolicyTable",
+                        "smithy.api#documentation": "<p>The transit gateway policy table.</p>",
+                        "smithy.api#xmlName": "transitGatewayPolicyTable"
+                    }
+                },
+                "TransitGatewayPolicyTableEntry": {
+                    "target": "com.amazonaws.ec2#AnalysisTransitGatewayPolicyTableEntry",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "TransitGatewayPolicyTableEntry",
+                        "smithy.api#documentation": "<p>The transit gateway policy table entry.</p>",
+                        "smithy.api#xmlName": "transitGatewayPolicyTableEntry"
+                    }
+                },
                 "TransitGatewayAttachment": {
                     "target": "com.amazonaws.ec2#AnalysisComponent",
                     "traits": {
@@ -67729,6 +68532,88 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.ec2#GetClientVpnEndpointAuthorizationPolicy": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ec2#GetClientVpnEndpointAuthorizationPolicyRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.ec2#GetClientVpnEndpointAuthorizationPolicyResult"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes the authorization policy for a Client VPN endpoint.</p>"
+            }
+        },
+        "com.amazonaws.ec2#GetClientVpnEndpointAuthorizationPolicyRequest": {
+            "type": "structure",
+            "members": {
+                "ClientVpnEndpointId": {
+                    "target": "com.amazonaws.ec2#ClientVpnEndpointId",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The ID of the Client VPN endpoint.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "DryRun": {
+                    "target": "com.amazonaws.ec2#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.ec2#GetClientVpnEndpointAuthorizationPolicyResult": {
+            "type": "structure",
+            "members": {
+                "ClientVpnEndpointId": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "ClientVpnEndpointId",
+                        "smithy.api#documentation": "<p>The ID of the Client VPN endpoint.</p>",
+                        "smithy.api#xmlName": "clientVpnEndpointId"
+                    }
+                },
+                "PolicyDocument": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "PolicyDocument",
+                        "smithy.api#documentation": "<p>The authorization policy document, written in the Cedar policy language.</p>",
+                        "smithy.api#xmlName": "policyDocument"
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "Description",
+                        "smithy.api#documentation": "<p>A brief description of the authorization policy.</p>",
+                        "smithy.api#xmlName": "description"
+                    }
+                },
+                "ShadowMode": {
+                    "target": "com.amazonaws.ec2#ClientVpnAuthorizationPolicyShadowMode",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "ShadowMode",
+                        "smithy.api#documentation": "<p>Specifies whether the authorization policy is evaluated in shadow mode. Possible values include:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>enabled</code> - The authorization policy is evaluated and the results are logged, but access is not enforced.</p>\n            </li>\n            <li>\n               <p>\n                  <code>disabled</code> - The authorization policy is enforced.</p>\n            </li>\n         </ul>",
+                        "smithy.api#xmlName": "shadowMode"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.ec2#ClientVpnAuthorizationPolicyStatus",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "Status",
+                        "smithy.api#documentation": "<p>The current state of the authorization policy.</p>",
+                        "smithy.api#xmlName": "status"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.ec2#GetCoipPoolUsage": {
             "type": "operation",
             "input": {
@@ -71834,6 +72719,80 @@
                         "aws.protocols#ec2QueryName": "NextToken",
                         "smithy.api#documentation": "<p>The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.</p>",
                         "smithy.api#xmlName": "nextToken"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.ec2#GetTransitGatewayAttachmentNatConfiguration": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ec2#GetTransitGatewayAttachmentNatConfigurationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.ec2#GetTransitGatewayAttachmentNatConfigurationResult"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes the NAT configuration for the specified transit gateway attachment. Only the owner of the transit gateway can describe the NAT configuration.</p>"
+            }
+        },
+        "com.amazonaws.ec2#GetTransitGatewayAttachmentNatConfigurationRequest": {
+            "type": "structure",
+            "members": {
+                "TransitGatewayAttachmentId": {
+                    "target": "com.amazonaws.ec2#TransitGatewayAttachmentId",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The ID of the transit gateway attachment.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "DryRun": {
+                    "target": "com.amazonaws.ec2#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Checks whether you have the required permissions for the action, without actually making the request, \n   and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. \n   Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.ec2#GetTransitGatewayAttachmentNatConfigurationResult": {
+            "type": "structure",
+            "members": {
+                "TransitGatewayAttachmentId": {
+                    "target": "com.amazonaws.ec2#TransitGatewayAttachmentId",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "TransitGatewayAttachmentId",
+                        "smithy.api#documentation": "<p>The ID of the transit gateway attachment.</p>",
+                        "smithy.api#xmlName": "transitGatewayAttachmentId"
+                    }
+                },
+                "NatGatewaySupport": {
+                    "target": "com.amazonaws.ec2#TransitGatewayAttachmentNatGatewaySupportState",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "NatGatewaySupport",
+                        "smithy.api#documentation": "<p>The state of NAT gateway support for the attachment.</p>",
+                        "smithy.api#xmlName": "natGatewaySupport"
+                    }
+                },
+                "NatSystemRouteSupport": {
+                    "target": "com.amazonaws.ec2#TransitGatewayAttachmentNatSystemRouteSupportValue",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "NatSystemRouteSupport",
+                        "smithy.api#documentation": "<p>Specifies whether the transit gateway installs routes for the NAT CIDRs in the route tables to which the attachment propagates.</p>",
+                        "smithy.api#xmlName": "natSystemRouteSupport"
+                    }
+                },
+                "NatGatewayRules": {
+                    "target": "com.amazonaws.ec2#TransitGatewayNatRuleList",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "NatGatewayRuleSet",
+                        "smithy.api#documentation": "<p>The NAT gateway rules for the attachment.</p>",
+                        "smithy.api#xmlName": "natGatewayRuleSet"
                     }
                 }
             },
@@ -81477,10 +82436,18 @@
                         "smithy.api#documentation": "<p>Reports the application-level health status for the instance.</p>",
                         "smithy.api#xmlName": "applicationStatus"
                     }
+                },
+                "PerformanceStatus": {
+                    "target": "com.amazonaws.ec2#PerformanceStatusSummary",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "PerformanceStatus",
+                        "smithy.api#documentation": "<p>Reports the performance-related health status for the instance. This information is\n            returned only when performance status checks are enabled for the instance.</p>",
+                        "smithy.api#xmlName": "performanceStatus"
+                    }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Describes the status of an instance, including system status, instance status,\n            attached EBS status, and application status.</p>"
+                "smithy.api#documentation": "<p>Describes the status of an instance, including system status, instance status,\n            attached EBS status, application status, and performance status.</p>"
             }
         },
         "com.amazonaws.ec2#InstanceStatusDetails": {
@@ -90211,6 +91178,198 @@
                     "traits": {
                         "smithy.api#enumValue": "c9gd.metal-48xl"
                     }
+                },
+                "r9g_medium": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "r9g.medium"
+                    }
+                },
+                "r9g_large": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "r9g.large"
+                    }
+                },
+                "r9g_xlarge": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "r9g.xlarge"
+                    }
+                },
+                "r9g_2xlarge": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "r9g.2xlarge"
+                    }
+                },
+                "r9g_4xlarge": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "r9g.4xlarge"
+                    }
+                },
+                "r9g_8xlarge": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "r9g.8xlarge"
+                    }
+                },
+                "r9g_12xlarge": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "r9g.12xlarge"
+                    }
+                },
+                "r9g_16xlarge": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "r9g.16xlarge"
+                    }
+                },
+                "r9g_24xlarge": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "r9g.24xlarge"
+                    }
+                },
+                "r9g_48xlarge": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "r9g.48xlarge"
+                    }
+                },
+                "r9g_metal_48xl": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "r9g.metal-48xl"
+                    }
+                },
+                "r9gd_medium": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "r9gd.medium"
+                    }
+                },
+                "r9gd_large": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "r9gd.large"
+                    }
+                },
+                "r9gd_xlarge": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "r9gd.xlarge"
+                    }
+                },
+                "r9gd_2xlarge": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "r9gd.2xlarge"
+                    }
+                },
+                "r9gd_4xlarge": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "r9gd.4xlarge"
+                    }
+                },
+                "r9gd_8xlarge": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "r9gd.8xlarge"
+                    }
+                },
+                "r9gd_12xlarge": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "r9gd.12xlarge"
+                    }
+                },
+                "r9gd_16xlarge": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "r9gd.16xlarge"
+                    }
+                },
+                "r9gd_24xlarge": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "r9gd.24xlarge"
+                    }
+                },
+                "r9gd_48xlarge": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "r9gd.48xlarge"
+                    }
+                },
+                "r9gd_metal_48xl": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "r9gd.metal-48xl"
+                    }
+                },
+                "m9g_medium": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "m9g.medium"
+                    }
+                },
+                "t8i_nano": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "t8i.nano"
+                    }
+                },
+                "t8i_micro": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "t8i.micro"
+                    }
+                },
+                "t8i_small": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "t8i.small"
+                    }
+                },
+                "t8i_medium": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "t8i.medium"
+                    }
+                },
+                "i8g_metal_48xl": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "i8g.metal-48xl"
+                    }
+                },
+                "r8gb_48xlarge": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "r8gb.48xlarge"
+                    }
+                },
+                "r8gb_metal_48xl": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "r8gb.metal-48xl"
+                    }
+                },
+                "m9gd_medium": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "m9gd.medium"
+                    }
+                },
+                "trn2u_48xlarge": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "trn2u.48xlarge"
+                    }
                 }
             }
         },
@@ -92594,6 +93753,24 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "enable-failed"
+                    }
+                },
+                "disable_in_progress": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "disable-in-progress"
+                    }
+                },
+                "disable_complete": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "disable-complete"
+                    }
+                },
+                "disable_failed": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "disable-failed"
                     }
                 },
                 "delete_in_progress": {
@@ -102285,6 +103462,94 @@
         "com.amazonaws.ec2#MillisecondDateTime": {
             "type": "timestamp"
         },
+        "com.amazonaws.ec2#ModificationQuoteCurrentConfiguration": {
+            "type": "structure",
+            "members": {
+                "InstanceCount": {
+                    "target": "com.amazonaws.ec2#Integer",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "InstanceCount",
+                        "smithy.api#documentation": "<p>The number of instances in the Capacity Reservation.</p>",
+                        "smithy.api#xmlName": "instanceCount"
+                    }
+                },
+                "ReservationState": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "ReservationState",
+                        "smithy.api#documentation": "<p>The current state of the Capacity Reservation.</p>",
+                        "smithy.api#xmlName": "reservationState"
+                    }
+                },
+                "StartDate": {
+                    "target": "com.amazonaws.ec2#MillisecondDateTime",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "StartDate",
+                        "smithy.api#documentation": "<p>The start date that the Capacity Reservation has before the quoted modification is\n\t\t\tapplied.</p>",
+                        "smithy.api#xmlName": "startDate"
+                    }
+                },
+                "OriginalStartDate": {
+                    "target": "com.amazonaws.ec2#MillisecondDateTime",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "OriginalStartDate",
+                        "smithy.api#documentation": "<p>The start date that the Capacity Reservation was originally requested with. This value\n\t\t\tdoes not change when you push out the start date.</p>",
+                        "smithy.api#xmlName": "originalStartDate"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes the configuration that a Capacity Reservation has at the time a modification\n\t\t\tquote is generated.</p>"
+            }
+        },
+        "com.amazonaws.ec2#ModificationReservationUpdate": {
+            "type": "structure",
+            "members": {
+                "NewCommitmentEndDate": {
+                    "target": "com.amazonaws.ec2#MillisecondDateTime",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "NewCommitmentEndDate",
+                        "smithy.api#documentation": "<p>The date and time at which the commitment duration will expire after the modification,\n\t\t\tin the ISO8601 format in the UTC time zone\n\t\t\t(<code>YYYY-MM-DDThh:mm:ss.sssZ</code>).</p>",
+                        "smithy.api#xmlName": "newCommitmentEndDate"
+                    }
+                },
+                "NewStartDate": {
+                    "target": "com.amazonaws.ec2#MillisecondDateTime",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "NewStartDate",
+                        "smithy.api#documentation": "<p>The start date that the Capacity Reservation will have after the modification, in the\n\t\t\tISO8601 format in the UTC time zone (<code>YYYY-MM-DDThh:mm:ss.sssZ</code>).</p>",
+                        "smithy.api#xmlName": "newStartDate"
+                    }
+                },
+                "NewCommitmentDuration": {
+                    "target": "com.amazonaws.ec2#BoxedInteger",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "NewCommitmentDuration",
+                        "smithy.api#documentation": "<p>The commitment duration, in seconds, that the Capacity Reservation will have after the\n\t\t\tmodification.</p>",
+                        "smithy.api#xmlName": "newCommitmentDuration"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes the changes that a Capacity Reservation modification quote will apply to a\n\t\t\tCapacity Reservation.</p>"
+            }
+        },
+        "com.amazonaws.ec2#ModificationTerms": {
+            "type": "structure",
+            "members": {
+                "ReservationUpdate": {
+                    "target": "com.amazonaws.ec2#ModificationReservationUpdate",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "ReservationUpdate",
+                        "smithy.api#documentation": "<p>The changes that will be applied to the Capacity Reservation if you accept the\n\t\t\tmodification terms.</p>",
+                        "smithy.api#xmlName": "reservationUpdate"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes the terms of a Capacity Reservation modification quote.</p>"
+            }
+        },
         "com.amazonaws.ec2#ModifyAccountVpcEncryptionControl": {
             "type": "operation",
             "input": {
@@ -102687,7 +103952,7 @@
                 "target": "com.amazonaws.ec2#ModifyCapacityReservationResult"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Modifies a Capacity Reservation's capacity, instance eligibility, and the conditions\n\t\t\tunder which it is to be released. You can't modify a Capacity Reservation's instance\n\t\t\ttype, EBS optimization, platform, instance store settings, Availability Zone, or\n\t\t\ttenancy. If you need to modify any of these attributes, we recommend that you cancel the\n\t\t\tCapacity Reservation, and then create a new one with the required attributes. For more\n\t\t\tinformation, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/capacity-reservations-modify.html\"> Modify an active\n\t\t\t\tCapacity Reservation</a>.</p>\n         <p>The allowed modifications depend on the state of the Capacity Reservation:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>assessing</code> or <code>scheduled</code> state - You can modify the\n\t\t\t\t\ttags only.</p>\n            </li>\n            <li>\n               <p>\n                  <code>pending</code> state - You can't modify the Capacity Reservation in any\n\t\t\t\t\tway.</p>\n            </li>\n            <li>\n               <p>\n                  <code>active</code> state but still within the commitment duration - You can't\n\t\t\t\t\tdecrease the instance count or set an end date that is within the commitment\n\t\t\t\t\tduration. All other modifications are allowed.</p>\n            </li>\n            <li>\n               <p>\n                  <code>active</code> state with no commitment duration or elapsed commitment\n\t\t\t\t\tduration - All modifications are allowed.</p>\n            </li>\n            <li>\n               <p>\n                  <code>expired</code>, <code>cancelled</code>, <code>unsupported</code>, or\n\t\t\t\t\t\t<code>failed</code> state - You can't modify the Capacity Reservation in any\n\t\t\t\t\tway.</p>\n            </li>\n         </ul>"
+                "smithy.api#documentation": "<p>Modifies a Capacity Reservation's capacity, instance eligibility, and the conditions\n\t\t\tunder which it is to be released. You can't modify a Capacity Reservation's instance\n\t\t\ttype, EBS optimization, platform, instance store settings, Availability Zone, or\n\t\t\ttenancy. If you need to modify any of these attributes, we recommend that you cancel the\n\t\t\tCapacity Reservation, and then create a new one with the required attributes. For more\n\t\t\tinformation, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/capacity-reservations-modify.html\"> Modify an active\n\t\t\t\tCapacity Reservation</a>.</p>\n         <p>The allowed modifications depend on the state of the Capacity Reservation:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>assessing</code> or <code>scheduled</code> state - You can modify the\n\t\t\t\t\ttags only.</p>\n            </li>\n            <li>\n               <p>\n                  <code>pending</code> state - You can't modify the Capacity Reservation in any\n\t\t\t\t\tway.</p>\n            </li>\n            <li>\n               <p>\n                  <code>active</code> state but still within the commitment duration - You can't\n\t\t\t\t\tdecrease the instance count or set an end date that is within the commitment\n\t\t\t\t\tduration. All other modifications are allowed.</p>\n            </li>\n            <li>\n               <p>\n                  <code>active</code> state with no commitment duration or elapsed commitment\n\t\t\t\t\tduration - All modifications are allowed.</p>\n            </li>\n            <li>\n               <p>\n                  <code>expired</code>, <code>cancelled</code>, <code>unsupported</code>, or\n\t\t\t\t\t\t<code>failed</code> state - You can't modify the Capacity Reservation in any\n\t\t\t\t\tway.</p>\n            </li>\n         </ul>\n         <p>For a future-dated Capacity Reservation that has not yet been delivered, pushing out the\n\t\t\tstart date requires a quote generated by\n\t\t\t<code>CreateCapacityReservationDateChangeQuote</code>. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/capacity-reservations-modify.html\">Modify an active\n\t\t\t\tCapacity Reservation</a> in the <i>Amazon EC2 User Guide</i>.</p>"
             }
         },
         "com.amazonaws.ec2#ModifyCapacityReservationFleet": {
@@ -102810,6 +104075,24 @@
                     "traits": {
                         "smithy.api#documentation": "<p> The matching criteria (instance eligibility) that you want to use in the modified\n\t\t\tCapacity Reservation. If you change the instance eligibility of an existing Capacity\n\t\t\tReservation from <code>targeted</code> to <code>open</code>, any running instances that\n\t\t\tmatch the attributes of the Capacity Reservation, have the\n\t\t\t\t<code>CapacityReservationPreference</code> set to <code>open</code>, and are not yet\n\t\t\trunning in the Capacity Reservation, will automatically use the modified Capacity\n\t\t\tReservation. </p>\n         <p>To modify the instance eligibility, the Capacity Reservation must be completely idle\n\t\t\t(zero usage).</p>"
                     }
+                },
+                "AcceptModificationTerms": {
+                    "target": "com.amazonaws.ec2#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates that you accept the modification terms of the quote identified by\n\t\t\t<code>QuoteId</code>. To apply a quoted modification, set this parameter to\n\t\t\t<code>true</code>.</p>"
+                    }
+                },
+                "StartDate": {
+                    "target": "com.amazonaws.ec2#MillisecondDateTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The new start date for the Capacity Reservation, in the ISO8601 format in the UTC time\n\t\t\tzone (<code>YYYY-MM-DDThh:mm:ss.sssZ</code>). Applies to future-dated Capacity\n\t\t\tReservations only. Requires a quote from\n\t\t\t<code>CreateCapacityReservationDateChangeQuote</code>; pass the quote ID in\n\t\t\t<code>QuoteId</code> with <code>AcceptModificationTerms</code> set to\n\t\t\t<code>true</code>.</p>"
+                    }
+                },
+                "QuoteId": {
+                    "target": "com.amazonaws.ec2#CapacityReservationModificationQuoteId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the quote that describes the modification you want to apply. Generate a quote\n\t\t\tby using <code>CreateCapacityReservationDateChangeQuote</code>. The quote must be in the\n\t\t\t<code>active</code> state, and each quote can be used only once.</p>"
+                    }
                 }
             },
             "traits": {
@@ -102825,6 +104108,22 @@
                         "aws.protocols#ec2QueryName": "Return",
                         "smithy.api#documentation": "<p>Returns <code>true</code> if the request succeeds; otherwise, it returns an error.</p>",
                         "smithy.api#xmlName": "return"
+                    }
+                },
+                "AdjustmentStatus": {
+                    "target": "com.amazonaws.ec2#CapacityReservationAdjustmentStatus",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "AdjustmentStatus",
+                        "smithy.api#documentation": "<p>The status of the requested modification. For a description of each possible value, see\n\t\t\tthe <code>adjustmentStatus</code> field of the <code>CapacityReservation</code> data\n\t\t\ttype.</p>",
+                        "smithy.api#xmlName": "adjustmentStatus"
+                    }
+                },
+                "AdjustmentDetails": {
+                    "target": "com.amazonaws.ec2#CapacityReservationAdjustmentDetails",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "AdjustmentDetails",
+                        "smithy.api#documentation": "<p>The configuration that the Capacity Reservation will have after the adjustment is\n\t\t\tapplied.</p>",
+                        "smithy.api#xmlName": "adjustmentDetails"
                     }
                 }
             },
@@ -102842,6 +104141,81 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Modifies the specified Client VPN endpoint. Modifying the DNS server resets existing client connections.</p>"
+            }
+        },
+        "com.amazonaws.ec2#ModifyClientVpnEndpointAuthorizationPolicy": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ec2#ModifyClientVpnEndpointAuthorizationPolicyRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.ec2#ModifyClientVpnEndpointAuthorizationPolicyResult"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Creates or updates the authorization policy for a Client VPN endpoint. A Client VPN endpoint can have one authorization policy. If a policy already exists for the endpoint, the values that you specify replace the corresponding values in the existing policy, and values that you do not specify remain unchanged.</p>"
+            }
+        },
+        "com.amazonaws.ec2#ModifyClientVpnEndpointAuthorizationPolicyRequest": {
+            "type": "structure",
+            "members": {
+                "ClientVpnEndpointId": {
+                    "target": "com.amazonaws.ec2#ClientVpnEndpointId",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The ID of the Client VPN endpoint.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "PolicyDocument": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The authorization policy document, written in the Cedar policy language. This parameter is required when you create the authorization policy for a Client VPN endpoint that does not already have one.</p>"
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A brief description of the authorization policy.</p>"
+                    }
+                },
+                "ShadowMode": {
+                    "target": "com.amazonaws.ec2#ClientVpnAuthorizationPolicyShadowMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether the authorization policy is evaluated in shadow mode. Possible values include:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>enabled</code> - The authorization policy is evaluated and the results are logged, but access is not enforced.</p>\n            </li>\n            <li>\n               <p>\n                  <code>disabled</code> - The authorization policy is enforced.</p>\n            </li>\n         </ul>\n         <p>The default value is <code>disabled</code>.</p>"
+                    }
+                },
+                "ClientToken": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. \nFor more information, see <a href=\"https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html\">Ensuring idempotency</a>.</p>",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                },
+                "DryRun": {
+                    "target": "com.amazonaws.ec2#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.ec2#ModifyClientVpnEndpointAuthorizationPolicyResult": {
+            "type": "structure",
+            "members": {
+                "Status": {
+                    "target": "com.amazonaws.ec2#ClientVpnAuthorizationPolicyStatus",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "Status",
+                        "smithy.api#documentation": "<p>The current state of the authorization policy.</p>",
+                        "smithy.api#xmlName": "status"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.ec2#ModifyClientVpnEndpointRequest": {
@@ -102950,6 +104324,12 @@
                     "target": "com.amazonaws.ec2#TransitGatewayConfigurationInputStructure",
                     "traits": {
                         "smithy.api#documentation": "<p>The Transit Gateway configuration for the Client VPN endpoint. This option is currently not supported.</p>"
+                    }
+                },
+                "DevicePostureOptions": {
+                    "target": "com.amazonaws.ec2#DevicePostureOptions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The device posture options for the Client VPN endpoint. Specifying this parameter replaces the entire device posture configuration for the endpoint. To disable device posture and remove all device trust providers, specify <code>false</code> for <code>Enabled</code>.</p>"
                     }
                 }
             },
@@ -106760,6 +108140,105 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Modifies the specified transit gateway. When you modify a transit gateway, the modified options are applied to new transit gateway attachments only. Your existing transit gateway attachments are not modified.</p>"
+            }
+        },
+        "com.amazonaws.ec2#ModifyTransitGatewayAttachmentNatConfiguration": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ec2#ModifyTransitGatewayAttachmentNatConfigurationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.ec2#ModifyTransitGatewayAttachmentNatConfigurationResult"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Modifies the NAT configuration for the specified transit gateway attachment. Use this operation to do the following:</p>\n         <ul>\n            <li>\n               <p>Enable or disable NAT gateway support for the attachment.</p>\n            </li>\n            <li>\n               <p>Specify whether the transit gateway installs routes for the NAT CIDRs.</p>\n            </li>\n            <li>\n               <p>Replace the NAT gateway rules for the attachment.</p>\n            </li>\n         </ul>\n         <p>Only the owner of the transit gateway can modify the NAT configuration.</p>\n         <p>With NAT gateway support enabled, the transit gateway translates addresses in each rule's <code>MatchSourceCidr</code> range \n         to the corresponding addresses in its <code>NatCidr</code> range.</p>\n         <p>The transit gateway applies changes asynchronously. To check the result, use <code>GetTransitGatewayAttachmentNatConfiguration</code>.</p>"
+            }
+        },
+        "com.amazonaws.ec2#ModifyTransitGatewayAttachmentNatConfigurationRequest": {
+            "type": "structure",
+            "members": {
+                "TransitGatewayAttachmentId": {
+                    "target": "com.amazonaws.ec2#TransitGatewayAttachmentId",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The ID of the transit gateway attachment.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "NatGatewaySupport": {
+                    "target": "com.amazonaws.ec2#TransitGatewayAttachmentNatGatewaySupportValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether to enable or disable NAT gateway support for the attachment. To enable NAT gateway support, the attachment \n         must have at least one NAT gateway rule. You can't modify the NAT configuration while NAT gateway support is <code>enabling</code> \n         or <code>disabling</code>. If you omit this parameter, the current value doesn't change.</p>"
+                    }
+                },
+                "NatSystemRouteSupport": {
+                    "target": "com.amazonaws.ec2#TransitGatewayAttachmentNatSystemRouteSupportValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether the transit gateway installs routes for the NAT CIDRs in the route tables to which the attachment \n         propagates. For VPC attachments, the transit gateway always installs these routes. You can enable or disable this option only for \n         Amazon Web Services Direct Connect gateway attachments and Site-to-Site VPN attachments that use dynamic routing. For these \n         attachments, the default is <code>enable</code>. If you omit this parameter, the current value doesn't change.</p>"
+                    }
+                },
+                "NatGatewayRules": {
+                    "target": "com.amazonaws.ec2#TransitGatewayNatRuleRequestList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The NAT gateway rules for the attachment. The rules that you specify replace all existing NAT gateway rules for the attachment. \n         You can specify up to 50 rules for an attachment. If you omit this parameter, the existing rules don't change. \n         To remove all rules, use <code>ResetNatGatewayRules</code>.</p>",
+                        "smithy.api#xmlName": "NatGatewayRule"
+                    }
+                },
+                "ResetNatGatewayRules": {
+                    "target": "com.amazonaws.ec2#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether to remove all NAT gateway rules from the attachment. If you omit this parameter, the transit gateway doesn't \n         remove any rules. You can't specify this parameter together with <code>NatGatewayRules</code>. Because you can't enable \n         NAT gateway support without rules, also set <code>NatGatewaySupport</code> to <code>disable</code> in the same request \n         if NAT gateway support is currently enabled.</p>"
+                    }
+                },
+                "DryRun": {
+                    "target": "com.amazonaws.ec2#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Checks whether you have the required permissions for the action, without actually making the request, \n   and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. \n   Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.ec2#ModifyTransitGatewayAttachmentNatConfigurationResult": {
+            "type": "structure",
+            "members": {
+                "TransitGatewayAttachmentId": {
+                    "target": "com.amazonaws.ec2#TransitGatewayAttachmentId",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "TransitGatewayAttachmentId",
+                        "smithy.api#documentation": "<p>The ID of the transit gateway attachment.</p>",
+                        "smithy.api#xmlName": "transitGatewayAttachmentId"
+                    }
+                },
+                "NatGatewaySupport": {
+                    "target": "com.amazonaws.ec2#TransitGatewayAttachmentNatGatewaySupportState",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "NatGatewaySupport",
+                        "smithy.api#documentation": "<p>The state of NAT gateway support for the attachment.</p>",
+                        "smithy.api#xmlName": "natGatewaySupport"
+                    }
+                },
+                "NatSystemRouteSupport": {
+                    "target": "com.amazonaws.ec2#TransitGatewayAttachmentNatSystemRouteSupportValue",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "NatSystemRouteSupport",
+                        "smithy.api#documentation": "<p>Specifies whether the transit gateway installs routes for the NAT CIDRs in the route tables to which the attachment propagates.</p>",
+                        "smithy.api#xmlName": "natSystemRouteSupport"
+                    }
+                },
+                "NatGatewayRules": {
+                    "target": "com.amazonaws.ec2#TransitGatewayNatRuleList",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "NatGatewayRuleSet",
+                        "smithy.api#documentation": "<p>The NAT gateway rules for the attachment.</p>",
+                        "smithy.api#xmlName": "natGatewayRuleSet"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.ec2#ModifyTransitGatewayMeteringPolicy": {
@@ -113533,6 +115012,14 @@
                         "smithy.api#xmlName": "transitGatewayRouteTableRoute"
                     }
                 },
+                "TransitGatewayPolicyTableEntry": {
+                    "target": "com.amazonaws.ec2#AnalysisTransitGatewayPolicyTableEntry",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "TransitGatewayPolicyTableEntry",
+                        "smithy.api#documentation": "<p>The entry in a transit gateway policy table.</p>",
+                        "smithy.api#xmlName": "transitGatewayPolicyTableEntry"
+                    }
+                },
                 "Explanations": {
                     "target": "com.amazonaws.ec2#ExplanationList",
                     "traits": {
@@ -113746,6 +115233,12 @@
                     "traits": {
                         "smithy.api#enumValue": "vpc-endpoint-charges"
                     }
+                },
+                "ResourceGatewayCharges": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "resource-gateway-charges"
+                    }
                 }
             }
         },
@@ -113765,6 +115258,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "vpc-endpoint-account"
+                    }
+                },
+                "ResourceGatewayAccount": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "resource-gateway-account"
                     }
                 },
                 "VpcEndpointServiceAccount": {
@@ -114001,6 +115500,38 @@
                 "traits": {
                     "smithy.api#xmlName": "item"
                 }
+            }
+        },
+        "com.amazonaws.ec2#PerformanceStatusSummary": {
+            "type": "structure",
+            "members": {
+                "Status": {
+                    "target": "com.amazonaws.ec2#SummaryStatus",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "Status",
+                        "smithy.api#documentation": "<p>The current status.</p>",
+                        "smithy.api#xmlName": "status"
+                    }
+                },
+                "ImpairedSince": {
+                    "target": "com.amazonaws.ec2#MillisecondDateTime",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "ImpairedSince",
+                        "smithy.api#documentation": "<p>The date and time when the performance status became impaired.</p>",
+                        "smithy.api#xmlName": "impairedSince"
+                    }
+                },
+                "Remediation": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "Remediation",
+                        "smithy.api#documentation": "<p>The recommended action to remediate the impaired instance, if one is available. This\n            value is returned only when the instance is impaired.</p>",
+                        "smithy.api#xmlName": "remediation"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Provides a summary of the performance status check results for an instance.</p>"
             }
         },
         "com.amazonaws.ec2#Period": {
@@ -122428,6 +123959,12 @@
                     "traits": {
                         "smithy.api#enumValue": "application-status-check"
                     }
+                },
+                "capacity_reservation_modification_quote": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "capacity-reservation-modification-quote"
+                    }
                 }
             }
         },
@@ -123744,6 +125281,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "lacnic"
+                    }
+                },
+                "nicbr": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "nicbr"
                     }
                 }
             },
@@ -134994,6 +136537,14 @@
                         "smithy.api#documentation": "<p>The tags for the attachment.</p>",
                         "smithy.api#xmlName": "tagSet"
                     }
+                },
+                "NatGatewaySupport": {
+                    "target": "com.amazonaws.ec2#TransitGatewayAttachmentNatGatewaySupportState",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "NatGatewaySupport",
+                        "smithy.api#documentation": "<p>The state of NAT gateway support for the attachment. Only the owner of the transit gateway receives this parameter.</p>",
+                        "smithy.api#xmlName": "natGatewaySupport"
+                    }
                 }
             },
             "traits": {
@@ -135104,6 +136655,69 @@
                 "target": "com.amazonaws.ec2#TransitGatewayAttachment",
                 "traits": {
                     "smithy.api#xmlName": "item"
+                }
+            }
+        },
+        "com.amazonaws.ec2#TransitGatewayAttachmentNatGatewaySupportState": {
+            "type": "enum",
+            "members": {
+                "enabled": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "enabled"
+                    }
+                },
+                "disabled": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "disabled"
+                    }
+                },
+                "enabling": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "enabling"
+                    }
+                },
+                "disabling": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "disabling"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ec2#TransitGatewayAttachmentNatGatewaySupportValue": {
+            "type": "enum",
+            "members": {
+                "enable": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "enable"
+                    }
+                },
+                "disable": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "disable"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ec2#TransitGatewayAttachmentNatSystemRouteSupportValue": {
+            "type": "enum",
+            "members": {
+                "enable": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "enable"
+                    }
+                },
+                "disable": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "disable"
+                    }
                 }
             }
         },
@@ -136587,6 +138201,131 @@
                 "smithy.api#documentation": "<p>Describes the members registered with the  transit gateway multicast group.</p>"
             }
         },
+        "com.amazonaws.ec2#TransitGatewayNatRule": {
+            "type": "structure",
+            "members": {
+                "RuleNumber": {
+                    "target": "com.amazonaws.ec2#Integer",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "RuleNumber",
+                        "smithy.api#documentation": "<p>The rule number.</p>",
+                        "smithy.api#xmlName": "ruleNumber"
+                    }
+                },
+                "MatchSourceCidr": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "MatchSourceCidr",
+                        "smithy.api#documentation": "<p>The IPv4 CIDR block of the source addresses to translate.</p>",
+                        "smithy.api#xmlName": "matchSourceCidr"
+                    }
+                },
+                "NatCidr": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "NatCidr",
+                        "smithy.api#documentation": "<p>The IPv4 CIDR block that the transit gateway translates the source addresses to.</p>",
+                        "smithy.api#xmlName": "natCidr"
+                    }
+                },
+                "State": {
+                    "target": "com.amazonaws.ec2#TransitGatewayNatRuleState",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "State",
+                        "smithy.api#documentation": "<p>The state of the NAT gateway rule. The possible values are:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>pending</code> - The transit gateway is applying a change to the rule.</p>\n            </li>\n            <li>\n               <p>\n                  <code>activated</code> - The rule is in effect because NAT gateway support is enabled for the attachment.</p>\n            </li>\n            <li>\n               <p>\n                  <code>deactivated</code> - The rule isn't in effect because NAT gateway support is disabled for the attachment.</p>\n            </li>\n         </ul>",
+                        "smithy.api#xmlName": "state"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains information about a NAT gateway rule for a transit gateway attachment, including the rule number, the source CIDR block, the translated CIDR block, and the state of the rule.</p>"
+            }
+        },
+        "com.amazonaws.ec2#TransitGatewayNatRuleList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ec2#TransitGatewayNatRule",
+                "traits": {
+                    "smithy.api#xmlName": "item"
+                }
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 50
+                }
+            }
+        },
+        "com.amazonaws.ec2#TransitGatewayNatRuleRequest": {
+            "type": "structure",
+            "members": {
+                "RuleNumber": {
+                    "target": "com.amazonaws.ec2#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The rule number. Valid values are 1 to 32766. Each rule number must be unique within the request.</p>"
+                    }
+                },
+                "MatchSourceCidr": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IPv4 CIDR block of the source addresses to translate. The CIDR block can't overlap the multicast \n         range (<code>224.0.0.0/4</code>) or the link-local range (<code>169.254.0.0/16</code>).</p>"
+                    }
+                },
+                "NatCidr": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IPv4 CIDR block to translate the source addresses to. The CIDR block must be in a private (RFC 1918) \n         or shared address space (RFC 6598) range, and must have the same prefix length as <code>MatchSourceCidr</code>. \n         The CIDR blocks in the rules for an attachment can't overlap each other.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes a NAT gateway rule to apply to a transit gateway attachment. A NAT gateway rule translates source addresses in the \n         <code>MatchSourceCidr</code> range to the corresponding addresses in the <code>NatCidr</code> range.</p>"
+            }
+        },
+        "com.amazonaws.ec2#TransitGatewayNatRuleRequestList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ec2#TransitGatewayNatRuleRequest",
+                "traits": {
+                    "smithy.api#xmlName": "item"
+                }
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 50
+                }
+            }
+        },
+        "com.amazonaws.ec2#TransitGatewayNatRuleState": {
+            "type": "enum",
+            "members": {
+                "pending": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "pending"
+                    }
+                },
+                "activated": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "activated"
+                    }
+                },
+                "deactivated": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "deactivated"
+                    }
+                },
+                "deleting": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "deleting"
+                    }
+                }
+            }
+        },
         "com.amazonaws.ec2#TransitGatewayNetworkInterfaceIdList": {
             "type": "list",
             "member": {
@@ -138057,6 +139796,12 @@
                     "traits": {
                         "smithy.api#enumValue": "propagated"
                     }
+                },
+                "system": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "system"
+                    }
                 }
             }
         },
@@ -138787,6 +140532,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "t4g"
+                    }
+                },
+                "t8i": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "t8i"
                     }
                 }
             }
@@ -139903,7 +141654,7 @@
                 "target": "com.amazonaws.ec2#ValidateSecurityGroupQuotasForInterfaceResult"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Validates whether the specified security groups can be associated with a single\n            network interface. The operation checks Amazon Virtual Private Cloud (Amazon VPC)\n            quotas for inbound or outbound rules per security group and security groups per\n            network interface. Only authorized AWS services can call this operation.</p>\n         <p>For more information about security group quotas, see <a href=\"https://docs.aws.amazon.com/vpc/latest/userguide/amazon-vpc-limits.html#vpc-limits-security-groups\">Amazon\n            VPC quotas</a> in the <i>Amazon VPC User Guide</i>.</p>"
+                "smithy.api#documentation": "<p>Validates whether the specified security groups can be associated with a single\n            network interface. The operation checks Amazon Virtual Private Cloud (Amazon VPC)\n            quotas. It checks inbound or outbound rules per security group and security groups\n            per network interface. Only authorized Amazon Web Services services can call this operation.</p>\n         <p>For more information about security group quotas, see <a href=\"https://docs.aws.amazon.com/vpc/latest/userguide/amazon-vpc-limits.html#vpc-limits-security-groups\">Amazon\n            VPC quotas</a> in the <i>Amazon VPC User Guide</i>.</p>"
             }
         },
         "com.amazonaws.ec2#ValidateSecurityGroupQuotasForInterfaceRequest": {
@@ -139936,7 +141687,7 @@
                     "target": "com.amazonaws.ec2#Boolean",
                     "traits": {
                         "aws.protocols#ec2QueryName": "Valid",
-                        "smithy.api#documentation": "<p>The operation returns <code>true</code> if the specified security groups can be\n            associated with a single network interface without exceeding the quotas. It returns\n            an error if associating the security groups would exceed a quota.</p>",
+                        "smithy.api#documentation": "<p>Specifies whether the specified security groups can be associated with a single\n            network interface without exceeding the quotas. If associating the security groups\n            would exceed a quota, the operation returns an error.</p>",
                         "smithy.api#xmlName": "valid"
                     }
                 }
@@ -143856,7 +145607,7 @@
                     "target": "com.amazonaws.ec2#VpcEndpointType",
                     "traits": {
                         "aws.protocols#ec2QueryName": "VpcEndpointType",
-                        "smithy.api#documentation": "<p>The type of endpoint.</p>",
+                        "smithy.api#documentation": "<p>The type of endpoint.</p>\n         <p>For more information about the types of VPC endpoints, see <a href=\"https://docs.aws.amazon.com/vpc/latest/privatelink/concepts.html#concepts-vpc-endpoints\">VPC endpoints</a> in the <i>Amazon Web Services PrivateLink User Guide</i>.</p>",
                         "smithy.api#xmlName": "vpcEndpointType"
                     }
                 },
@@ -143904,7 +145655,7 @@
                     "target": "com.amazonaws.ec2#ValueStringList",
                     "traits": {
                         "aws.protocols#ec2QueryName": "SubnetIdSet",
-                        "smithy.api#documentation": "<p>(Interface endpoint) The subnets for the endpoint.</p>",
+                        "smithy.api#documentation": "<p>(Interface, Gateway Load Balancer endpoints, Resource, ServiceNetwork, and Tunnel endpoints only) The subnets for the endpoint.</p>",
                         "smithy.api#xmlName": "subnetIdSet"
                     }
                 },
@@ -143912,7 +145663,7 @@
                     "target": "com.amazonaws.ec2#GroupIdentifierSet",
                     "traits": {
                         "aws.protocols#ec2QueryName": "GroupSet",
-                        "smithy.api#documentation": "<p>(Interface endpoint) Information about the security groups that are associated with\n            the network interface.</p>",
+                        "smithy.api#documentation": "<p>(Interface, Resource, ServiceNetwork, and Tunnel endpoints only) Information about the security groups that are associated with\n            the network interface.</p>",
                         "smithy.api#xmlName": "groupSet"
                     }
                 },
@@ -143952,7 +145703,7 @@
                     "target": "com.amazonaws.ec2#ValueStringList",
                     "traits": {
                         "aws.protocols#ec2QueryName": "NetworkInterfaceIdSet",
-                        "smithy.api#documentation": "<p>(Interface endpoint) The network interfaces for the endpoint.</p>",
+                        "smithy.api#documentation": "<p>(Interface, Gateway Load Balancer endpoints, Resource, ServiceNetwork, and Tunnel endpoints only) The network interfaces for the endpoint.</p>",
                         "smithy.api#xmlName": "networkInterfaceIdSet"
                     }
                 },
@@ -144382,6 +146133,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "ServiceNetwork"
+                    }
+                },
+                "Tunnel": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Tunnel"
                     }
                 }
             }

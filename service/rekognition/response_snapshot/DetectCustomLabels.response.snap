@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: RekognitionService.DetectCustomLabels
+
+{"CustomLabels":[{"Confidence":1,"Geometry":{"BoundingBox":{"Height":1,"Left":1,"Top":1,"Width":1},"Polygon":[{"X":1,"Y":1},{"X":1,"Y":1}]},"Name":"__Name__"},{"Confidence":1,"Geometry":{"BoundingBox":{"Height":1,"Left":1,"Top":1,"Width":1},"Polygon":[{"X":1,"Y":1},{"X":1,"Y":1}]},"Name":"__Name__"}]}

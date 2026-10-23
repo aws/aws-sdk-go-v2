@@ -1,0 +1,7 @@
+POST /service/CloudWatchOmniFrontend/operation/CreateView
+
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
+
+¿kclientTokeno__ClientToken__jdefinitionn__Definition__kdescriptiono__Description__dnameh__Name__dtags¿dkey0i__Value__ÿÿ

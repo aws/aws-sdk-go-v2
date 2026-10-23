@@ -5,7 +5,9 @@ package bedrockagentcorecontrol
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -37,6 +39,21 @@ type ListConsentPortalsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListConsentPortalsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListConsentPortalsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListConsentPortalsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListConsentPortalsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListConsentPortalsRequest_nextToken, *v.NextToken)
+	}
+}
+
 type ListConsentPortalsOutput struct {
 
 	// The list of consent portals.
@@ -54,13 +71,35 @@ type ListConsentPortalsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListConsentPortalsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListConsentPortalsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListConsentPortalsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeConsentPortalSummaries(s, schemas.ListConsentPortalsResponse_consentPortals, v.ConsentPortals)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListConsentPortalsResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListConsentPortalsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListConsentPortalsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListConsentPortalsResponse_consentPortals:
+			return deserializeConsentPortalSummaries(d, schemas.ListConsentPortalsResponse_consentPortals, &v.ConsentPortals)
+		case schemas.ListConsentPortalsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListConsentPortalsResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListConsentPortalsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListConsentPortals{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListConsentPortals, schemas.ListConsentPortalsRequest, schemas.ListConsentPortalsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListConsentPortals{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListConsentPortals, schemas.ListConsentPortalsRequest, schemas.ListConsentPortalsResponse), output: &ListConsentPortalsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

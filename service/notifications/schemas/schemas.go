@@ -274,6 +274,13 @@ var UpdateEventRule = smithy.NewSchema(smithy.ShapeID{
 	URI:  "/event-rules/{arn}",
 	Code: 200})
 
+var UpdateManagedNotificationChannelAssociation = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.notifications",
+	Name:      "UpdateManagedNotificationChannelAssociation",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	URI:  "/channels/update-managed-notification-channel-association",
+	Code: 200})
+
 var UpdateNotificationConfiguration = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.notifications",
 	Name:      "UpdateNotificationConfiguration",
@@ -291,7 +298,8 @@ var Notifications = smithy.NewServiceSchema(_Notifications, "2018-05-10")
 var AccessDeniedException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.notifications",
 	Name:      "AccessDeniedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 403})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 403})
 var AccessDeniedException_message *smithy.Schema
 
 var AccessStatus = smithy.NewSchema(smithy.ShapeID{
@@ -373,6 +381,16 @@ var _Arn = smithy.NewSchema(smithy.ShapeID{
 	Name:      "Arn",
 }, smithy.ShapeTypeString, 0)
 
+var _AttachmentContentType = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.notifications",
+	Name:      "AttachmentContentType",
+}, smithy.ShapeTypeString, 0)
+
+var _AttachmentDisplayName = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.notifications",
+	Name:      "AttachmentDisplayName",
+}, smithy.ShapeTypeString, 0)
+
 var _ChannelArn = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.notifications",
 	Name:      "ChannelArn",
@@ -394,15 +412,23 @@ var _Channels = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeList, 1)
 var _Channels_member *smithy.Schema
 
-var _ChannelType = smithy.NewSchema(smithy.ShapeID{
+var ChannelType = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.notifications",
 	Name:      "ChannelType",
-}, smithy.ShapeTypeString, 0)
+}, smithy.ShapeTypeEnum, 4)
+var ChannelType_MOBILE *smithy.Schema
+
+var ChannelType_CHATBOT *smithy.Schema
+
+var ChannelType_EMAIL *smithy.Schema
+
+var ChannelType_ACCOUNT_CONTACT *smithy.Schema
 
 var ConflictException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.notifications",
 	Name:      "ConflictException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.HTTPError{Code: 409})
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 409})
 var ConflictException_message *smithy.Schema
 
 var ConflictException_resourceId *smithy.Schema
@@ -500,7 +526,8 @@ var _EventType = smithy.NewSchema(smithy.ShapeID{
 var InternalServerException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.notifications",
 	Name:      "InternalServerException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 500})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
+	&smithytraits.HTTPError{Code: 500})
 var InternalServerException_message *smithy.Schema
 
 var _LastActivationTime = smithy.NewSchema(smithy.ShapeID{
@@ -522,12 +549,19 @@ var _ManagedNotificationChannelAssociations_member *smithy.Schema
 var ManagedNotificationChannelAssociationSummary = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.notifications",
 	Name:      "ManagedNotificationChannelAssociationSummary",
-}, smithy.ShapeTypeStructure, 3)
+}, smithy.ShapeTypeStructure, 4)
 var ManagedNotificationChannelAssociationSummary_channelIdentifier *smithy.Schema
 
 var ManagedNotificationChannelAssociationSummary_channelType *smithy.Schema
 
 var ManagedNotificationChannelAssociationSummary_overrideOption *smithy.Schema
+
+var ManagedNotificationChannelAssociationSummary_isSensitiveEventsSubscribed *smithy.Schema
+
+var _ManagedNotificationChannelIdentifier = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.notifications",
+	Name:      "ManagedNotificationChannelIdentifier",
+}, smithy.ShapeTypeString, 0)
 
 var ManagedNotificationChildEvent = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.notifications",
@@ -638,7 +672,7 @@ var ManagedNotificationConfigurationStructure_description *smithy.Schema
 var ManagedNotificationEvent = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.notifications",
 	Name:      "ManagedNotificationEvent",
-}, smithy.ShapeTypeStructure, 13)
+}, smithy.ShapeTypeStructure, 14)
 var ManagedNotificationEvent_schemaVersion *smithy.Schema
 
 var ManagedNotificationEvent_id *smithy.Schema
@@ -664,6 +698,8 @@ var ManagedNotificationEvent_endTime *smithy.Schema
 var ManagedNotificationEvent_textParts *smithy.Schema
 
 var ManagedNotificationEvent_organizationalUnitId *smithy.Schema
+
+var ManagedNotificationEvent_attachments *smithy.Schema
 
 var _ManagedNotificationEventArn = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.notifications",
@@ -789,12 +825,14 @@ var _MemberAccounts_member *smithy.Schema
 var MessageComponents = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.notifications",
 	Name:      "MessageComponents",
-}, smithy.ShapeTypeStructure, 4)
+}, smithy.ShapeTypeStructure, 5)
 var MessageComponents_headline *smithy.Schema
 
 var MessageComponents_paragraphSummary *smithy.Schema
 
 var MessageComponents_completeDescription *smithy.Schema
+
+var MessageComponents_markupDescription *smithy.Schema
 
 var MessageComponents_dimensions *smithy.Schema
 
@@ -862,6 +900,22 @@ var _NotificationEventArn = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.notifications",
 	Name:      "NotificationEventArn",
 }, smithy.ShapeTypeString, 0)
+
+var NotificationEventAttachment = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.notifications",
+	Name:      "NotificationEventAttachment",
+}, smithy.ShapeTypeStructure, 3)
+var NotificationEventAttachment_displayName *smithy.Schema
+
+var NotificationEventAttachment_attachmentDownloadUrl *smithy.Schema
+
+var NotificationEventAttachment_contentType *smithy.Schema
+
+var _NotificationEventAttachmentList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.notifications",
+	Name:      "NotificationEventAttachmentList",
+}, smithy.ShapeTypeList, 1)
+var _NotificationEventAttachmentList_member *smithy.Schema
 
 var _NotificationEventId = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.notifications",
@@ -1040,7 +1094,8 @@ var _ResourceId = smithy.NewSchema(smithy.ShapeID{
 var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.notifications",
 	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.HTTPError{Code: 404})
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 404})
 var ResourceNotFoundException_message *smithy.Schema
 
 var ResourceNotFoundException_resourceId *smithy.Schema
@@ -1067,6 +1122,11 @@ var _SchemaVersion = smithy.NewSchema(smithy.ShapeID{
 	Name:      "SchemaVersion",
 }, smithy.ShapeTypeString, 0)
 
+var _SensitiveUrl = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.notifications",
+	Name:      "SensitiveUrl",
+}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
+
 var _ServiceCode = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.notifications",
 	Name:      "ServiceCode",
@@ -1075,7 +1135,8 @@ var _ServiceCode = smithy.NewSchema(smithy.ShapeID{
 var ServiceQuotaExceededException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.notifications",
 	Name:      "ServiceQuotaExceededException",
-}, smithy.ShapeTypeStructure, 5, &smithytraits.HTTPError{Code: 402})
+}, smithy.ShapeTypeStructure, 5, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 402})
 var ServiceQuotaExceededException_message *smithy.Schema
 
 var ServiceQuotaExceededException_resourceType *smithy.Schema
@@ -1235,7 +1296,8 @@ var TextPartValue_url *smithy.Schema
 var ThrottlingException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.notifications",
 	Name:      "ThrottlingException",
-}, smithy.ShapeTypeStructure, 4, &smithytraits.HTTPError{Code: 429})
+}, smithy.ShapeTypeStructure, 4, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 429})
 var ThrottlingException_message *smithy.Schema
 
 var ThrottlingException_serviceCode *smithy.Schema
@@ -1252,7 +1314,8 @@ var _Url = smithy.NewSchema(smithy.ShapeID{
 var ValidationException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.notifications",
 	Name:      "ValidationException",
-}, smithy.ShapeTypeStructure, 3, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var ValidationException_message *smithy.Schema
 
 var ValidationException_reason *smithy.Schema
@@ -1294,10 +1357,12 @@ var AssociateChannelResponse = smithy.NewSchema(smithy.ShapeID{
 var AssociateManagedNotificationAccountContactRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.notifications",
 	Name:      "AssociateManagedNotificationAccountContactRequest",
-}, smithy.ShapeTypeStructure, 2)
+}, smithy.ShapeTypeStructure, 3)
 var AssociateManagedNotificationAccountContactRequest_contactIdentifier *smithy.Schema
 
 var AssociateManagedNotificationAccountContactRequest_managedNotificationConfigurationArn *smithy.Schema
+
+var AssociateManagedNotificationAccountContactRequest_isSensitiveEventsSubscribed *smithy.Schema
 
 var AssociateManagedNotificationAccountContactResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.notifications",
@@ -1307,10 +1372,12 @@ var AssociateManagedNotificationAccountContactResponse = smithy.NewSchema(smithy
 var AssociateManagedNotificationAdditionalChannelRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.notifications",
 	Name:      "AssociateManagedNotificationAdditionalChannelRequest",
-}, smithy.ShapeTypeStructure, 2)
+}, smithy.ShapeTypeStructure, 3)
 var AssociateManagedNotificationAdditionalChannelRequest_channelArn *smithy.Schema
 
 var AssociateManagedNotificationAdditionalChannelRequest_managedNotificationConfigurationArn *smithy.Schema
+
+var AssociateManagedNotificationAdditionalChannelRequest_isSensitiveEventsSubscribed *smithy.Schema
 
 var AssociateManagedNotificationAdditionalChannelResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.notifications",
@@ -1728,7 +1795,7 @@ var ListManagedNotificationConfigurationsResponse_managedNotificationConfigurati
 var ListManagedNotificationEventsRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.notifications",
 	Name:      "ListManagedNotificationEventsRequest",
-}, smithy.ShapeTypeStructure, 8)
+}, smithy.ShapeTypeStructure, 9)
 var ListManagedNotificationEventsRequest_startTime *smithy.Schema
 
 var ListManagedNotificationEventsRequest_endTime *smithy.Schema
@@ -1744,6 +1811,8 @@ var ListManagedNotificationEventsRequest_nextToken *smithy.Schema
 var ListManagedNotificationEventsRequest_organizationalUnitId *smithy.Schema
 
 var ListManagedNotificationEventsRequest_relatedAccount *smithy.Schema
+
+var ListManagedNotificationEventsRequest_includeSensitiveEvents *smithy.Schema
 
 var ListManagedNotificationEventsResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.notifications",
@@ -1941,6 +2010,21 @@ var UpdateEventRuleResponse_notificationConfigurationArn *smithy.Schema
 
 var UpdateEventRuleResponse_statusSummaryByRegion *smithy.Schema
 
+var UpdateManagedNotificationChannelAssociationRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.notifications",
+	Name:      "UpdateManagedNotificationChannelAssociationRequest",
+}, smithy.ShapeTypeStructure, 3)
+var UpdateManagedNotificationChannelAssociationRequest_managedNotificationConfigurationArn *smithy.Schema
+
+var UpdateManagedNotificationChannelAssociationRequest_channelIdentifier *smithy.Schema
+
+var UpdateManagedNotificationChannelAssociationRequest_isSensitiveEventsSubscribed *smithy.Schema
+
+var UpdateManagedNotificationChannelAssociationResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.notifications",
+	Name:      "UpdateManagedNotificationChannelAssociationResponse",
+}, smithy.ShapeTypeStructure, 0)
+
 var UpdateNotificationConfigurationRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.notifications",
 	Name:      "UpdateNotificationConfigurationRequest",
@@ -2012,6 +2096,14 @@ func init() {
 
 	_Channels_member = _Channels.AddMember("member", _ChannelArn)
 
+	ChannelType_MOBILE = ChannelType.AddMember("MOBILE", smithyprelude.Unit)
+
+	ChannelType_CHATBOT = ChannelType.AddMember("CHATBOT", smithyprelude.Unit)
+
+	ChannelType_EMAIL = ChannelType.AddMember("EMAIL", smithyprelude.Unit)
+
+	ChannelType_ACCOUNT_CONTACT = ChannelType.AddMember("ACCOUNT_CONTACT", smithyprelude.Unit)
+
 	ConflictException_message = ConflictException.AddMember("message", _ErrorMessage)
 
 	ConflictException_resourceId = ConflictException.AddMember("resourceId", _ResourceId)
@@ -2058,9 +2150,11 @@ func init() {
 
 	ManagedNotificationChannelAssociationSummary_channelIdentifier = ManagedNotificationChannelAssociationSummary.AddMember("channelIdentifier", smithyprelude.String)
 
-	ManagedNotificationChannelAssociationSummary_channelType = ManagedNotificationChannelAssociationSummary.AddMember("channelType", _ChannelType)
+	ManagedNotificationChannelAssociationSummary_channelType = ManagedNotificationChannelAssociationSummary.AddMember("channelType", ChannelType)
 
 	ManagedNotificationChannelAssociationSummary_overrideOption = ManagedNotificationChannelAssociationSummary.AddMember("overrideOption", _ChannelAssociationOverrideOption)
+
+	ManagedNotificationChannelAssociationSummary_isSensitiveEventsSubscribed = ManagedNotificationChannelAssociationSummary.AddMember("isSensitiveEventsSubscribed", smithyprelude.Boolean)
 
 	_ManagedNotificationChannelAssociations_member = _ManagedNotificationChannelAssociations.AddMember("member", ManagedNotificationChannelAssociationSummary)
 
@@ -2069,6 +2163,8 @@ func init() {
 	MessageComponents_paragraphSummary = MessageComponents.AddMember("paragraphSummary", _TextPartReference)
 
 	MessageComponents_completeDescription = MessageComponents.AddMember("completeDescription", _TextPartReference)
+
+	MessageComponents_markupDescription = MessageComponents.AddMember("markupDescription", _TextPartReference)
 
 	MessageComponents_dimensions = MessageComponents.AddMember("dimensions", _Dimensions)
 
@@ -2158,6 +2254,14 @@ func init() {
 
 	_ManagedNotificationConfigurations_member = _ManagedNotificationConfigurations.AddMember("member", ManagedNotificationConfigurationStructure)
 
+	NotificationEventAttachment_displayName = NotificationEventAttachment.AddMember("displayName", _AttachmentDisplayName)
+
+	NotificationEventAttachment_attachmentDownloadUrl = NotificationEventAttachment.AddMember("attachmentDownloadUrl", _SensitiveUrl)
+
+	NotificationEventAttachment_contentType = NotificationEventAttachment.AddMember("contentType", _AttachmentContentType)
+
+	_NotificationEventAttachmentList_member = _NotificationEventAttachmentList.AddMember("member", NotificationEventAttachment)
+
 	ManagedNotificationEvent_schemaVersion = ManagedNotificationEvent.AddMember("schemaVersion", _SchemaVersion)
 
 	ManagedNotificationEvent_id = ManagedNotificationEvent.AddMember("id", _NotificationEventId)
@@ -2183,6 +2287,8 @@ func init() {
 	ManagedNotificationEvent_textParts = ManagedNotificationEvent.AddMember("textParts", _TextParts)
 
 	ManagedNotificationEvent_organizationalUnitId = ManagedNotificationEvent.AddMember("organizationalUnitId", _OrganizationalUnitId)
+
+	ManagedNotificationEvent_attachments = ManagedNotificationEvent.AddMember("attachments", _NotificationEventAttachmentList)
 
 	ManagedNotificationEventSummary_schemaVersion = ManagedNotificationEventSummary.AddMember("schemaVersion", _SchemaVersion)
 
@@ -2414,9 +2520,13 @@ func init() {
 
 	AssociateManagedNotificationAccountContactRequest_managedNotificationConfigurationArn = AssociateManagedNotificationAccountContactRequest.AddMember("managedNotificationConfigurationArn", _ManagedNotificationConfigurationOsArn)
 
+	AssociateManagedNotificationAccountContactRequest_isSensitiveEventsSubscribed = AssociateManagedNotificationAccountContactRequest.AddMember("isSensitiveEventsSubscribed", smithyprelude.Boolean)
+
 	AssociateManagedNotificationAdditionalChannelRequest_channelArn = AssociateManagedNotificationAdditionalChannelRequest.AddMember("channelArn", _ChannelArn, &smithytraits.HTTPLabel{})
 
 	AssociateManagedNotificationAdditionalChannelRequest_managedNotificationConfigurationArn = AssociateManagedNotificationAdditionalChannelRequest.AddMember("managedNotificationConfigurationArn", _ManagedNotificationConfigurationOsArn)
+
+	AssociateManagedNotificationAdditionalChannelRequest_isSensitiveEventsSubscribed = AssociateManagedNotificationAdditionalChannelRequest.AddMember("isSensitiveEventsSubscribed", smithyprelude.Boolean)
 
 	AssociateOrganizationalUnitRequest_organizationalUnitId = AssociateOrganizationalUnitRequest.AddMember("organizationalUnitId", _OrganizationalUnitId, &smithytraits.HTTPLabel{})
 
@@ -2646,6 +2756,8 @@ func init() {
 
 	ListManagedNotificationEventsRequest_relatedAccount = ListManagedNotificationEventsRequest.AddMember("relatedAccount", _AccountId, &smithytraits.HTTPQuery{Name: "relatedAccount"})
 
+	ListManagedNotificationEventsRequest_includeSensitiveEvents = ListManagedNotificationEventsRequest.AddMember("includeSensitiveEvents", smithyprelude.Boolean, &smithytraits.HTTPQuery{Name: "includeSensitiveEvents"})
+
 	ListManagedNotificationEventsResponse_nextToken = ListManagedNotificationEventsResponse.AddMember("nextToken", _NextToken)
 
 	ListManagedNotificationEventsResponse_managedNotificationEvents = ListManagedNotificationEventsResponse.AddMember("managedNotificationEvents", _ManagedNotificationEvents)
@@ -2759,6 +2871,12 @@ func init() {
 	UpdateEventRuleResponse_notificationConfigurationArn = UpdateEventRuleResponse.AddMember("notificationConfigurationArn", _NotificationConfigurationArn)
 
 	UpdateEventRuleResponse_statusSummaryByRegion = UpdateEventRuleResponse.AddMember("statusSummaryByRegion", _StatusSummaryByRegion)
+
+	UpdateManagedNotificationChannelAssociationRequest_managedNotificationConfigurationArn = UpdateManagedNotificationChannelAssociationRequest.AddMember("managedNotificationConfigurationArn", _ManagedNotificationConfigurationOsArn)
+
+	UpdateManagedNotificationChannelAssociationRequest_channelIdentifier = UpdateManagedNotificationChannelAssociationRequest.AddMember("channelIdentifier", _ManagedNotificationChannelIdentifier)
+
+	UpdateManagedNotificationChannelAssociationRequest_isSensitiveEventsSubscribed = UpdateManagedNotificationChannelAssociationRequest.AddMember("isSensitiveEventsSubscribed", smithyprelude.Boolean)
 
 	UpdateNotificationConfigurationRequest_arn = UpdateNotificationConfigurationRequest.AddMember("arn", _NotificationConfigurationArn, &smithytraits.HTTPLabel{})
 

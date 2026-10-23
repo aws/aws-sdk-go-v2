@@ -280,6 +280,10 @@ func TestCheckResponseSnapshot_CreateProcurementPortalPreference(t *testing.T) {
 			EinvoiceDeliveryActivationDate: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 		},
 		PurchaseOrderRetrievalEnabled: ptr.Bool(true),
+		MarketplacePunchOutEnabled:    ptr.Bool(true),
+		MarketplacePunchOutPreference: &types.MarketplacePunchOutPreference{
+			ApprovalRequestRedirectUrl: ptr.String("__ApprovalRequestRedirectUrl__"),
+		},
 		Contacts: []types.Contact{
 			{
 				Name:  ptr.String("__Name__"),
@@ -495,6 +499,10 @@ func TestCheckResponseSnapshot_GetProcurementPortalPreference(t *testing.T) {
 				EinvoiceDeliveryActivationDate: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			},
 			PurchaseOrderRetrievalEnabled: ptr.Bool(true),
+			MarketplacePunchOutEnabled:    ptr.Bool(true),
+			MarketplacePunchOutPreference: &types.MarketplacePunchOutPreference{
+				ApprovalRequestRedirectUrl: ptr.String("__ApprovalRequestRedirectUrl__"),
+			},
 			Contacts: []types.Contact{
 				{
 					Name:  ptr.String("__Name__"),
@@ -1083,6 +1091,7 @@ func TestCheckResponseSnapshot_ListProcurementPortalPreferences(t *testing.T) {
 				},
 				EinvoiceDeliveryEnabled:                      ptr.Bool(true),
 				PurchaseOrderRetrievalEnabled:                ptr.Bool(true),
+				MarketplacePunchOutEnabled:                   ptr.Bool(true),
 				EinvoiceDeliveryPreferenceStatus:             types.ProcurementPortalPreferenceStatus("PENDING_VERIFICATION"),
 				EinvoiceDeliveryPreferenceStatusReason:       ptr.String("__EinvoiceDeliveryPreferenceStatusReason__"),
 				PurchaseOrderRetrievalPreferenceStatus:       types.ProcurementPortalPreferenceStatus("PENDING_VERIFICATION"),
@@ -1111,6 +1120,7 @@ func TestCheckResponseSnapshot_ListProcurementPortalPreferences(t *testing.T) {
 				},
 				EinvoiceDeliveryEnabled:                      ptr.Bool(true),
 				PurchaseOrderRetrievalEnabled:                ptr.Bool(true),
+				MarketplacePunchOutEnabled:                   ptr.Bool(true),
 				EinvoiceDeliveryPreferenceStatus:             types.ProcurementPortalPreferenceStatus("PENDING_VERIFICATION"),
 				EinvoiceDeliveryPreferenceStatusReason:       ptr.String("__EinvoiceDeliveryPreferenceStatusReason__"),
 				PurchaseOrderRetrievalPreferenceStatus:       types.ProcurementPortalPreferenceStatus("PENDING_VERIFICATION"),
@@ -1139,6 +1149,105 @@ func TestCheckResponseSnapshot_ListProcurementPortalPreferences(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "ListProcurementPortalPreferences.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_ListProcurementPortalSuppliers(t *testing.T) {
+	want := &ListProcurementPortalSuppliersOutput{
+		ProcurementPortalSuppliers: []types.ProcurementPortalSupplier{
+			{
+				SupplierIdentifier: ptr.String("__SupplierIdentifier__"),
+				SellerOfRecord:     ptr.String("__SellerOfRecord__"),
+				CountryCode:        ptr.String("__CountryCode__"),
+				Environment:        types.ProcurementPortalEnv("PROD"),
+			},
+			{
+				SupplierIdentifier: ptr.String("__SupplierIdentifier__"),
+				SellerOfRecord:     ptr.String("__SellerOfRecord__"),
+				CountryCode:        ptr.String("__CountryCode__"),
+				Environment:        types.ProcurementPortalEnv("PROD"),
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("ListProcurementPortalSuppliers.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.ListProcurementPortalSuppliers(context.Background(), &ListProcurementPortalSuppliersInput{
+		PortalIdentifier: ptr.String("__PortalIdentifier__"),
+		NextToken:        ptr.String("__NextToken__"),
+		MaxResults:       ptr.Int32(1),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "ListProcurementPortalSuppliers.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_ListProcurementPortals(t *testing.T) {
+	want := &ListProcurementPortalsOutput{
+		ProcurementPortals: []types.ProcurementPortal{
+			{
+				PortalIdentifier:  ptr.String("__PortalIdentifier__"),
+				PortalName:        types.ProcurementPortalName("SAP_BUSINESS_NETWORK"),
+				PortalDisplayName: ptr.String("__PortalDisplayName__"),
+				DefaultFeatureConfigurations: &types.FeatureConfigurations{
+					InvoiceConfiguration: &types.InvoiceConfiguration{
+						DocumentTypes: []types.EinvoiceDeliveryDocumentType{
+							types.EinvoiceDeliveryDocumentType("AWS_CLOUD_INVOICE"),
+							types.EinvoiceDeliveryDocumentType("AWS_CLOUD_INVOICE"),
+						},
+						AttachmentTypes: []types.EinvoiceDeliveryAttachmentType{
+							types.EinvoiceDeliveryAttachmentType("INVOICE_PDF"),
+							types.EinvoiceDeliveryAttachmentType("INVOICE_PDF"),
+						},
+					},
+				},
+			},
+			{
+				PortalIdentifier:  ptr.String("__PortalIdentifier__"),
+				PortalName:        types.ProcurementPortalName("SAP_BUSINESS_NETWORK"),
+				PortalDisplayName: ptr.String("__PortalDisplayName__"),
+				DefaultFeatureConfigurations: &types.FeatureConfigurations{
+					InvoiceConfiguration: &types.InvoiceConfiguration{
+						DocumentTypes: []types.EinvoiceDeliveryDocumentType{
+							types.EinvoiceDeliveryDocumentType("AWS_CLOUD_INVOICE"),
+							types.EinvoiceDeliveryDocumentType("AWS_CLOUD_INVOICE"),
+						},
+						AttachmentTypes: []types.EinvoiceDeliveryAttachmentType{
+							types.EinvoiceDeliveryAttachmentType("INVOICE_PDF"),
+							types.EinvoiceDeliveryAttachmentType("INVOICE_PDF"),
+						},
+					},
+				},
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("ListProcurementPortals.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.ListProcurementPortals(context.Background(), &ListProcurementPortalsInput{
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "ListProcurementPortals.response", err)
 	}
 }
 
@@ -1233,6 +1342,10 @@ func TestCheckResponseSnapshot_PutProcurementPortalPreference(t *testing.T) {
 			EinvoiceDeliveryActivationDate: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 		},
 		PurchaseOrderRetrievalEnabled: ptr.Bool(true),
+		MarketplacePunchOutEnabled:    ptr.Bool(true),
+		MarketplacePunchOutPreference: &types.MarketplacePunchOutPreference{
+			ApprovalRequestRedirectUrl: ptr.String("__ApprovalRequestRedirectUrl__"),
+		},
 		Contacts: []types.Contact{
 			{
 				Name:  ptr.String("__Name__"),
@@ -1518,6 +1631,10 @@ func TestCheckResponseSnapshot_Error_ConflictException(t *testing.T) {
 			EinvoiceDeliveryActivationDate: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 		},
 		PurchaseOrderRetrievalEnabled: ptr.Bool(true),
+		MarketplacePunchOutEnabled:    ptr.Bool(true),
+		MarketplacePunchOutPreference: &types.MarketplacePunchOutPreference{
+			ApprovalRequestRedirectUrl: ptr.String("__ApprovalRequestRedirectUrl__"),
+		},
 		Contacts: []types.Contact{
 			{
 				Name:  ptr.String("__Name__"),
@@ -1677,6 +1794,10 @@ func TestCheckResponseSnapshot_Error_ServiceQuotaExceededException(t *testing.T)
 			EinvoiceDeliveryActivationDate: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 		},
 		PurchaseOrderRetrievalEnabled: ptr.Bool(true),
+		MarketplacePunchOutEnabled:    ptr.Bool(true),
+		MarketplacePunchOutPreference: &types.MarketplacePunchOutPreference{
+			ApprovalRequestRedirectUrl: ptr.String("__ApprovalRequestRedirectUrl__"),
+		},
 		Contacts: []types.Contact{
 			{
 				Name:  ptr.String("__Name__"),

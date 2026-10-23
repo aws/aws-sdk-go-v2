@@ -4,7 +4,9 @@ package inspector2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/inspector2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/inspector2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -40,6 +42,21 @@ type ResetEncryptionKeyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ResetEncryptionKeyInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ResetEncryptionKeyRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ResetEncryptionKeyInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ResourceType != "" {
+		s.WriteString(schemas.ResetEncryptionKeyRequest_resourceType, string(v.ResourceType))
+	}
+	if v.ScanType != "" {
+		s.WriteString(schemas.ResetEncryptionKeyRequest_scanType, string(v.ScanType))
+	}
+}
+
 type ResetEncryptionKeyOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -47,13 +64,26 @@ type ResetEncryptionKeyOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ResetEncryptionKeyOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ResetEncryptionKeyResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ResetEncryptionKeyOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *ResetEncryptionKeyOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ResetEncryptionKeyResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationResetEncryptionKeyMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpResetEncryptionKey{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ResetEncryptionKey, schemas.ResetEncryptionKeyRequest, schemas.ResetEncryptionKeyResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpResetEncryptionKey{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ResetEncryptionKey, schemas.ResetEncryptionKeyRequest, schemas.ResetEncryptionKeyResponse), output: &ResetEncryptionKeyOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

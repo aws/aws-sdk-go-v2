@@ -4,6 +4,8 @@ package ssmcontacts
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/ssmcontacts/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -34,6 +36,18 @@ type GetContactPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetContactPolicyInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetContactPolicyRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetContactPolicyInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ContactArn != nil {
+		s.WriteString(schemas.GetContactPolicyRequest_ContactArn, *v.ContactArn)
+	}
+}
+
 type GetContactPolicyOutput struct {
 
 	// The ARN of the contact or escalation plan.
@@ -48,13 +62,38 @@ type GetContactPolicyOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetContactPolicyOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetContactPolicyResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetContactPolicyOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ContactArn != nil {
+		s.WriteString(schemas.GetContactPolicyResult_ContactArn, *v.ContactArn)
+	}
+	if v.Policy != nil {
+		s.WriteString(schemas.GetContactPolicyResult_Policy, *v.Policy)
+	}
+}
+func (v *GetContactPolicyOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetContactPolicyResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetContactPolicyResult_ContactArn:
+			v.ContactArn = new(string)
+			return d.ReadString(schemas.GetContactPolicyResult_ContactArn, v.ContactArn)
+		case schemas.GetContactPolicyResult_Policy:
+			v.Policy = new(string)
+			return d.ReadString(schemas.GetContactPolicyResult_Policy, v.Policy)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetContactPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetContactPolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetContactPolicy, schemas.GetContactPolicyRequest, schemas.GetContactPolicyResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetContactPolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetContactPolicy, schemas.GetContactPolicyRequest, schemas.GetContactPolicyResult), output: &GetContactPolicyOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

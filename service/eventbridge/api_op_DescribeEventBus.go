@@ -94,8 +94,13 @@ type DescribeEventBusOutput struct {
 	//
 	// For more information, see [Configuring logs for event buses] in the EventBridge User Guide.
 	//
-	// [Configuring logs for event buses]: https://docs.aws.amazon.com/eb-event-bus-logs.html
+	// [Configuring logs for event buses]: https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-event-bus-logs.html
 	LogConfig *types.LogConfig
+
+	// If the event bus was created on behalf of your account by an Amazon Web
+	// Services service, this field displays the principal name of the service that
+	// created the event bus.
+	ManagedBy *string
 
 	// The name of the event bus. Currently, this is always default .
 	Name *string
@@ -141,6 +146,9 @@ func (v *DescribeEventBusOutput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.LogConfig.SerializeMembers(s)
 		s.CloseStruct()
 	}
+	if v.ManagedBy != nil {
+		s.WriteString(schemas.DescribeEventBusResponse_ManagedBy, *v.ManagedBy)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.DescribeEventBusResponse_Name, *v.Name)
 	}
@@ -172,6 +180,9 @@ func (v *DescribeEventBusOutput) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.DescribeEventBusResponse_LogConfig:
 			v.LogConfig = &types.LogConfig{}
 			return v.LogConfig.Deserialize(d)
+		case schemas.DescribeEventBusResponse_ManagedBy:
+			v.ManagedBy = new(string)
+			return d.ReadString(schemas.DescribeEventBusResponse_ManagedBy, v.ManagedBy)
 		case schemas.DescribeEventBusResponse_Name:
 			v.Name = new(string)
 			return d.ReadString(schemas.DescribeEventBusResponse_Name, v.Name)

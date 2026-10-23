@@ -4,6 +4,8 @@ package waf
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/waf/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -63,6 +65,21 @@ type DeleteXssMatchSetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteXssMatchSetInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteXssMatchSetRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteXssMatchSetInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ChangeToken != nil {
+		s.WriteString(schemas.DeleteXssMatchSetRequest_ChangeToken, *v.ChangeToken)
+	}
+	if v.XssMatchSetId != nil {
+		s.WriteString(schemas.DeleteXssMatchSetRequest_XssMatchSetId, *v.XssMatchSetId)
+	}
+}
+
 // The response to a request to delete an XssMatchSet from AWS WAF.
 type DeleteXssMatchSetOutput struct {
 
@@ -77,13 +94,32 @@ type DeleteXssMatchSetOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteXssMatchSetOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteXssMatchSetResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteXssMatchSetOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ChangeToken != nil {
+		s.WriteString(schemas.DeleteXssMatchSetResponse_ChangeToken, *v.ChangeToken)
+	}
+}
+func (v *DeleteXssMatchSetOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteXssMatchSetResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteXssMatchSetResponse_ChangeToken:
+			v.ChangeToken = new(string)
+			return d.ReadString(schemas.DeleteXssMatchSetResponse_ChangeToken, v.ChangeToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteXssMatchSetMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteXssMatchSet{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteXssMatchSet, schemas.DeleteXssMatchSetRequest, schemas.DeleteXssMatchSetResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeleteXssMatchSet{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteXssMatchSet, schemas.DeleteXssMatchSetRequest, schemas.DeleteXssMatchSetResponse), output: &DeleteXssMatchSetOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

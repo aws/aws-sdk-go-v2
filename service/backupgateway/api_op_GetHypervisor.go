@@ -4,7 +4,9 @@ package backupgateway
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/backupgateway/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/backupgateway/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -36,6 +38,28 @@ type GetHypervisorInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetHypervisorInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetHypervisorInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetHypervisorInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.HypervisorArn != nil {
+		s.WriteString(schemas.GetHypervisorInput_HypervisorArn, *v.HypervisorArn)
+	}
+}
+func (v *GetHypervisorInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetHypervisorInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetHypervisorInput_HypervisorArn:
+			v.HypervisorArn = new(string)
+			return d.ReadString(schemas.GetHypervisorInput_HypervisorArn, v.HypervisorArn)
+		}
+		return nil
+	})
+}
+
 type GetHypervisorOutput struct {
 
 	// Details about the requested hypervisor.
@@ -47,13 +71,34 @@ type GetHypervisorOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetHypervisorOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetHypervisorOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetHypervisorOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Hypervisor != nil {
+		s.WriteStruct(schemas.GetHypervisorOutput_Hypervisor)
+		v.Hypervisor.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetHypervisorOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetHypervisorOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetHypervisorOutput_Hypervisor:
+			v.Hypervisor = &types.HypervisorDetails{}
+			return v.Hypervisor.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetHypervisorMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpGetHypervisor{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetHypervisor, schemas.GetHypervisorInput, schemas.GetHypervisorOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpGetHypervisor{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetHypervisor, schemas.GetHypervisorInput, schemas.GetHypervisorOutput), output: &GetHypervisorOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

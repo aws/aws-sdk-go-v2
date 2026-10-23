@@ -5,7 +5,9 @@ package backup
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/backup/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/backup/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -48,6 +50,24 @@ type ListBackupAccessPointsByRecoveryPointInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListBackupAccessPointsByRecoveryPointInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListBackupAccessPointsByRecoveryPointRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListBackupAccessPointsByRecoveryPointInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListBackupAccessPointsByRecoveryPointRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListBackupAccessPointsByRecoveryPointRequest_NextToken, *v.NextToken)
+	}
+	if v.RecoveryPointArn != nil {
+		s.WriteString(schemas.ListBackupAccessPointsByRecoveryPointRequest_RecoveryPointArn, *v.RecoveryPointArn)
+	}
+}
+
 type ListBackupAccessPointsByRecoveryPointOutput struct {
 
 	// A list of backup access points, each containing metadata such as its name, ARN,
@@ -68,13 +88,35 @@ type ListBackupAccessPointsByRecoveryPointOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListBackupAccessPointsByRecoveryPointOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListBackupAccessPointsByRecoveryPointResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListBackupAccessPointsByRecoveryPointOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeBackupAccessPoints(s, schemas.ListBackupAccessPointsByRecoveryPointResponse_BackupAccessPoints, v.BackupAccessPoints)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListBackupAccessPointsByRecoveryPointResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListBackupAccessPointsByRecoveryPointOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListBackupAccessPointsByRecoveryPointResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListBackupAccessPointsByRecoveryPointResponse_BackupAccessPoints:
+			return deserializeBackupAccessPoints(d, schemas.ListBackupAccessPointsByRecoveryPointResponse_BackupAccessPoints, &v.BackupAccessPoints)
+		case schemas.ListBackupAccessPointsByRecoveryPointResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListBackupAccessPointsByRecoveryPointResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListBackupAccessPointsByRecoveryPointMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListBackupAccessPointsByRecoveryPoint{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListBackupAccessPointsByRecoveryPoint, schemas.ListBackupAccessPointsByRecoveryPointRequest, schemas.ListBackupAccessPointsByRecoveryPointResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListBackupAccessPointsByRecoveryPoint{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListBackupAccessPointsByRecoveryPoint, schemas.ListBackupAccessPointsByRecoveryPointRequest, schemas.ListBackupAccessPointsByRecoveryPointResponse), output: &ListBackupAccessPointsByRecoveryPointOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

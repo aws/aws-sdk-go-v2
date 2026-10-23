@@ -4,7 +4,9 @@ package ssoadmin
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/ssoadmin/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ssoadmin/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,21 @@ type GetApplicationGrantInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetApplicationGrantInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetApplicationGrantRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetApplicationGrantInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationArn != nil {
+		s.WriteString(schemas.GetApplicationGrantRequest_ApplicationArn, *v.ApplicationArn)
+	}
+	if v.GrantType != "" {
+		s.WriteString(schemas.GetApplicationGrantRequest_GrantType, string(v.GrantType))
+	}
+}
+
 type GetApplicationGrantOutput struct {
 
 	// A structure that describes the requested grant.
@@ -52,13 +69,29 @@ type GetApplicationGrantOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetApplicationGrantOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetApplicationGrantResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetApplicationGrantOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeGrant(s, schemas.GetApplicationGrantResponse_Grant, v.Grant)
+}
+func (v *GetApplicationGrantOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetApplicationGrantResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetApplicationGrantResponse_Grant:
+			return deserializeGrant(d, schemas.GetApplicationGrantResponse_Grant, &v.Grant)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetApplicationGrantMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetApplicationGrant{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetApplicationGrant, schemas.GetApplicationGrantRequest, schemas.GetApplicationGrantResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetApplicationGrant{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetApplicationGrant, schemas.GetApplicationGrantRequest, schemas.GetApplicationGrantResponse), output: &GetApplicationGrantOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

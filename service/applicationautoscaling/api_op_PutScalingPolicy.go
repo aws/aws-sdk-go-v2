@@ -4,7 +4,9 @@ package applicationautoscaling
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/applicationautoscaling/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/applicationautoscaling/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -275,6 +277,45 @@ type PutScalingPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutScalingPolicyInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutScalingPolicyRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutScalingPolicyInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PolicyName != nil {
+		s.WriteString(schemas.PutScalingPolicyRequest_PolicyName, *v.PolicyName)
+	}
+	if v.PolicyType != "" {
+		s.WriteString(schemas.PutScalingPolicyRequest_PolicyType, string(v.PolicyType))
+	}
+	if v.PredictiveScalingPolicyConfiguration != nil {
+		s.WriteStruct(schemas.PutScalingPolicyRequest_PredictiveScalingPolicyConfiguration)
+		v.PredictiveScalingPolicyConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ResourceId != nil {
+		s.WriteString(schemas.PutScalingPolicyRequest_ResourceId, *v.ResourceId)
+	}
+	if v.ScalableDimension != "" {
+		s.WriteString(schemas.PutScalingPolicyRequest_ScalableDimension, string(v.ScalableDimension))
+	}
+	if v.ServiceNamespace != "" {
+		s.WriteString(schemas.PutScalingPolicyRequest_ServiceNamespace, string(v.ServiceNamespace))
+	}
+	if v.StepScalingPolicyConfiguration != nil {
+		s.WriteStruct(schemas.PutScalingPolicyRequest_StepScalingPolicyConfiguration)
+		v.StepScalingPolicyConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TargetTrackingScalingPolicyConfiguration != nil {
+		s.WriteStruct(schemas.PutScalingPolicyRequest_TargetTrackingScalingPolicyConfiguration)
+		v.TargetTrackingScalingPolicyConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type PutScalingPolicyOutput struct {
 
 	// The Amazon Resource Name (ARN) of the resulting scaling policy.
@@ -291,13 +332,35 @@ type PutScalingPolicyOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutScalingPolicyOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutScalingPolicyResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutScalingPolicyOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAlarms(s, schemas.PutScalingPolicyResponse_Alarms, v.Alarms)
+	if v.PolicyARN != nil {
+		s.WriteString(schemas.PutScalingPolicyResponse_PolicyARN, *v.PolicyARN)
+	}
+}
+func (v *PutScalingPolicyOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PutScalingPolicyResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PutScalingPolicyResponse_Alarms:
+			return deserializeAlarms(d, schemas.PutScalingPolicyResponse_Alarms, &v.Alarms)
+		case schemas.PutScalingPolicyResponse_PolicyARN:
+			v.PolicyARN = new(string)
+			return d.ReadString(schemas.PutScalingPolicyResponse_PolicyARN, v.PolicyARN)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPutScalingPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpPutScalingPolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutScalingPolicy, schemas.PutScalingPolicyRequest, schemas.PutScalingPolicyResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpPutScalingPolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutScalingPolicy, schemas.PutScalingPolicyRequest, schemas.PutScalingPolicyResponse), output: &PutScalingPolicyOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

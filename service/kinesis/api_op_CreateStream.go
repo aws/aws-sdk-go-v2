@@ -4,7 +4,9 @@ package kinesis
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/kinesis/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/kinesis/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"github.com/aws/smithy-go/ptr"
 )
@@ -102,6 +104,22 @@ type CreateStreamInput struct {
 	// to, and read from a stream.
 	MaxRecordSizeInKiB *int32
 
+	// The record distribution strategy for the stream, which determines how Amazon
+	// Kinesis Data Streams distributes records across shards. Specify one of the
+	// following values:
+	//
+	//   - AUTO – Amazon Kinesis Data Streams distributes records evenly across shards
+	//   and ignores any partition key and ExplicitHashKey that producers supply. Use
+	//   this value for stateless workloads that do not require partition-key ordering.
+	//
+	//   - USER_PARTITION_KEY – Producers must supply a partition key, which Amazon
+	//   Kinesis Data Streams uses to determine shard placement. This is the default.
+	//
+	// The record distribution strategy is only supported for streams that use the
+	// on-demand capacity mode. If you do not specify this parameter, the stream uses
+	// USER_PARTITION_KEY .
+	RecordDistributionStrategy types.RecordDistributionStrategy
+
 	// The number of shards that the stream will use. The throughput of the stream is
 	// a function of the number of shards; more shards are required for greater
 	// provisioned throughput.
@@ -124,6 +142,35 @@ type CreateStreamInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateStreamInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateStreamInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateStreamInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxRecordSizeInKiB != nil {
+		s.WriteInt32(schemas.CreateStreamInput_MaxRecordSizeInKiB, *v.MaxRecordSizeInKiB)
+	}
+	if v.RecordDistributionStrategy != "" {
+		s.WriteString(schemas.CreateStreamInput_RecordDistributionStrategy, string(v.RecordDistributionStrategy))
+	}
+	if v.ShardCount != nil {
+		s.WriteInt32(schemas.CreateStreamInput_ShardCount, *v.ShardCount)
+	}
+	if v.StreamModeDetails != nil {
+		s.WriteStruct(schemas.CreateStreamInput_StreamModeDetails)
+		v.StreamModeDetails.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.StreamName != nil {
+		s.WriteString(schemas.CreateStreamInput_StreamName, *v.StreamName)
+	}
+	serializeTagMap(s, schemas.CreateStreamInput_Tags, v.Tags)
+	if v.WarmThroughputMiBps != nil {
+		s.WriteInt32(schemas.CreateStreamInput_WarmThroughputMiBps, *v.WarmThroughputMiBps)
+	}
+}
 func (in *CreateStreamInput) bindEndpointParams(p *EndpointParameters) {
 
 	p.OperationType = ptr.String("control")
@@ -136,13 +183,26 @@ type CreateStreamOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateStreamOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateStreamOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *CreateStreamOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateStreamMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateStream{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateStream, schemas.CreateStreamInput, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateStream{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateStream, schemas.CreateStreamInput, nil), output: &CreateStreamOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

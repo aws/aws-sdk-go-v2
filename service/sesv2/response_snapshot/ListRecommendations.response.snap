@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"NextToken":"__NextToken__","Recommendations":[{"CreatedTimestamp":946684800,"Description":"__Description__","Impact":"LOW","LastUpdatedTimestamp":946684800,"ResourceArn":"__ResourceArn__","Status":"OPEN","Type":"DKIM"},{"CreatedTimestamp":946684800,"Description":"__Description__","Impact":"LOW","LastUpdatedTimestamp":946684800,"ResourceArn":"__ResourceArn__","Status":"OPEN","Type":"DKIM"}]}

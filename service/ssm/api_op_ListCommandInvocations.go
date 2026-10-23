@@ -5,7 +5,9 @@ package ssm
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/ssm/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ssm/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -57,6 +59,31 @@ type ListCommandInvocationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListCommandInvocationsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListCommandInvocationsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListCommandInvocationsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CommandId != nil {
+		s.WriteString(schemas.ListCommandInvocationsRequest_CommandId, *v.CommandId)
+	}
+	if v.Details != false {
+		s.WriteBool(schemas.ListCommandInvocationsRequest_Details, v.Details)
+	}
+	serializeCommandFilterList(s, schemas.ListCommandInvocationsRequest_Filters, v.Filters)
+	if v.InstanceId != nil {
+		s.WriteString(schemas.ListCommandInvocationsRequest_InstanceId, *v.InstanceId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListCommandInvocationsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListCommandInvocationsRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListCommandInvocationsOutput struct {
 
 	// (Optional) A list of all invocations.
@@ -72,13 +99,35 @@ type ListCommandInvocationsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListCommandInvocationsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListCommandInvocationsResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListCommandInvocationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeCommandInvocationList(s, schemas.ListCommandInvocationsResult_CommandInvocations, v.CommandInvocations)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListCommandInvocationsResult_NextToken, *v.NextToken)
+	}
+}
+func (v *ListCommandInvocationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListCommandInvocationsResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListCommandInvocationsResult_CommandInvocations:
+			return deserializeCommandInvocationList(d, schemas.ListCommandInvocationsResult_CommandInvocations, &v.CommandInvocations)
+		case schemas.ListCommandInvocationsResult_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListCommandInvocationsResult_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListCommandInvocationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListCommandInvocations{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListCommandInvocations, schemas.ListCommandInvocationsRequest, schemas.ListCommandInvocationsResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListCommandInvocations{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListCommandInvocations, schemas.ListCommandInvocationsRequest, schemas.ListCommandInvocationsResult), output: &ListCommandInvocationsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

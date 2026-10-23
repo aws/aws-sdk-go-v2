@@ -5,7 +5,9 @@ package ram
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/ram/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ram/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -106,6 +108,32 @@ type ListPrincipalsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListPrincipalsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListPrincipalsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListPrincipalsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListPrincipalsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListPrincipalsRequest_nextToken, *v.NextToken)
+	}
+	serializePrincipalArnOrIdList(s, schemas.ListPrincipalsRequest_principals, v.Principals)
+	if v.ResourceArn != nil {
+		s.WriteString(schemas.ListPrincipalsRequest_resourceArn, *v.ResourceArn)
+	}
+	if v.ResourceOwner != "" {
+		s.WriteString(schemas.ListPrincipalsRequest_resourceOwner, string(v.ResourceOwner))
+	}
+	serializeResourceShareArnList(s, schemas.ListPrincipalsRequest_resourceShareArns, v.ResourceShareArns)
+	if v.ResourceType != nil {
+		s.WriteString(schemas.ListPrincipalsRequest_resourceType, *v.ResourceType)
+	}
+}
+
 type ListPrincipalsOutput struct {
 
 	// If present, this value indicates that more output is available than is included
@@ -124,13 +152,35 @@ type ListPrincipalsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListPrincipalsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListPrincipalsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListPrincipalsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListPrincipalsResponse_nextToken, *v.NextToken)
+	}
+	serializePrincipalList(s, schemas.ListPrincipalsResponse_principals, v.Principals)
+}
+func (v *ListPrincipalsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListPrincipalsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListPrincipalsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListPrincipalsResponse_nextToken, v.NextToken)
+		case schemas.ListPrincipalsResponse_principals:
+			return deserializePrincipalList(d, schemas.ListPrincipalsResponse_principals, &v.Principals)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListPrincipalsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListPrincipals{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListPrincipals, schemas.ListPrincipalsRequest, schemas.ListPrincipalsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListPrincipals{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListPrincipals, schemas.ListPrincipalsRequest, schemas.ListPrincipalsResponse), output: &ListPrincipalsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

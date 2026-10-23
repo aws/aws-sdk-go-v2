@@ -9,15 +9,15 @@ import (
 )
 
 // Creates an application version for the specified application. You can create an
-// application version from a source bundle in Amazon S3, a commit in AWS
-// CodeCommit, or the output of an AWS CodeBuild build as follows:
+// application version from a source bundle in Amazon S3, a commit in CodeCommit,
+// or the output of an CodeBuild build as follows:
 //
-// Specify a commit in an AWS CodeCommit repository with SourceBuildInformation .
+// Specify a commit in an CodeCommit repository with SourceBuildInformation .
 //
-// Specify a build in an AWS CodeBuild with SourceBuildInformation and
+// Specify a build in an CodeBuild with SourceBuildInformation and
 // BuildConfiguration .
 //
-// # Specify a source bundle in S3 with SourceBundle
+// # Specify a source bundle in Amazon S3 with SourceBundle
 //
 // Omit both SourceBuildInformation and SourceBundle to use the default sample
 // application.
@@ -52,8 +52,8 @@ type CreateApplicationVersionInput struct {
 	// A label identifying this version.
 	//
 	// Constraint: Must be unique per application. If an application version already
-	// exists with this label for the specified application, AWS Elastic Beanstalk
-	// returns an InvalidParameterValue error.
+	// exists with this label for the specified application, Elastic Beanstalk returns
+	// an InvalidParameterValue error.
 	//
 	// This member is required.
 	VersionLabel *string
@@ -62,28 +62,40 @@ type CreateApplicationVersionInput struct {
 	// already exist.
 	AutoCreateApplication *bool
 
-	// Settings for an AWS CodeBuild build.
+	// Settings for an CodeBuild build.
+	//
+	// Don't specify BuildConfiguration together with ImageConfiguration , which
+	// configures a container image build instead.
 	BuildConfiguration *types.BuildConfiguration
 
 	// A description of this application version.
 	Description *string
+
+	// The source of the container image for this application version. You can specify
+	// an image that you built and pushed to a container registry yourself, or settings
+	// for Elastic Beanstalk to build one from your source bundle. Specify exactly one
+	// of the Source and Build members.
+	//
+	// Don't specify ImageConfiguration together with BuildConfiguration , which
+	// configures an CodeBuild build instead.
+	ImageConfiguration *types.ImageConfiguration
 
 	// Pre-processes and validates the environment manifest ( env.yaml ) and
 	// configuration files ( *.config files in the .ebextensions folder) in the source
 	// bundle. Validating configuration files can identify issues prior to deploying
 	// the application version to an environment.
 	//
-	// You must turn processing on for application versions that you create using AWS
-	// CodeBuild or AWS CodeCommit. For application versions built from a source bundle
-	// in Amazon S3, processing is optional.
+	// You must turn processing on for application versions that you create using
+	// CodeBuild or CodeCommit. For application versions built from a source bundle in
+	// Amazon S3, processing is optional.
 	//
 	// The Process option validates Elastic Beanstalk configuration files. It doesn't
 	// validate your application's configuration files, like proxy server or Docker
 	// configuration.
 	Process *bool
 
-	// Specify a commit in an AWS CodeCommit Git repository to use as the source code
-	// for the application version.
+	// Specify a commit in an CodeCommit Git repository to use as the source code for
+	// the application version.
 	SourceBuildInformation *types.SourceBuildInformation
 
 	// The Amazon S3 bucket and key that identify the location of the source bundle
@@ -91,8 +103,13 @@ type CreateApplicationVersionInput struct {
 	//
 	// The Amazon S3 bucket must be in the same region as the environment.
 	//
-	// Specify a source bundle in S3 or a commit in an AWS CodeCommit repository (with
-	// SourceBuildInformation ), but not both. If neither SourceBundle nor
+	// Unless you're specifying a source bundle in the bucket that Elastic Beanstalk
+	// manages in your account, you must assign a custom policy to your user, and grant
+	// Allow permission to the s3:Get* actions on your S3 object resource, for
+	// example, arn:aws:s3:::your-bucket/your-source-bundle-object .
+	//
+	// Specify a source bundle in Amazon S3 or a commit in an CodeCommit repository
+	// (with SourceBuildInformation ), but not both. If neither SourceBundle nor
 	// SourceBuildInformation are provided, Elastic Beanstalk uses a sample application.
 	SourceBundle *types.S3Location
 

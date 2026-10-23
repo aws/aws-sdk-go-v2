@@ -5,7 +5,9 @@ package appfabric
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/appfabric/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/appfabric/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -44,6 +46,21 @@ type ListAppBundlesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAppBundlesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAppBundlesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAppBundlesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListAppBundlesRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAppBundlesRequest_nextToken, *v.NextToken)
+	}
+}
+
 type ListAppBundlesOutput struct {
 
 	// Contains a list of app bundle summaries.
@@ -64,13 +81,35 @@ type ListAppBundlesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAppBundlesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAppBundlesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAppBundlesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAppBundleSummaryList(s, schemas.ListAppBundlesResponse_appBundleSummaryList, v.AppBundleSummaryList)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAppBundlesResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListAppBundlesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListAppBundlesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListAppBundlesResponse_appBundleSummaryList:
+			return deserializeAppBundleSummaryList(d, schemas.ListAppBundlesResponse_appBundleSummaryList, &v.AppBundleSummaryList)
+		case schemas.ListAppBundlesResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListAppBundlesResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListAppBundlesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListAppBundles{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAppBundles, schemas.ListAppBundlesRequest, schemas.ListAppBundlesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListAppBundles{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAppBundles, schemas.ListAppBundlesRequest, schemas.ListAppBundlesResponse), output: &ListAppBundlesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

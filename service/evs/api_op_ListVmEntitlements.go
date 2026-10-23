@@ -5,7 +5,9 @@ package evs
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/evs/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/evs/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -58,6 +60,30 @@ type ListVmEntitlementsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListVmEntitlementsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListVmEntitlementsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListVmEntitlementsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConnectorId != nil {
+		s.WriteString(schemas.ListVmEntitlementsRequest_connectorId, *v.ConnectorId)
+	}
+	if v.EntitlementType != "" {
+		s.WriteString(schemas.ListVmEntitlementsRequest_entitlementType, string(v.EntitlementType))
+	}
+	if v.EnvironmentId != nil {
+		s.WriteString(schemas.ListVmEntitlementsRequest_environmentId, *v.EnvironmentId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListVmEntitlementsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListVmEntitlementsRequest_nextToken, *v.NextToken)
+	}
+}
+
 type ListVmEntitlementsOutput struct {
 
 	// A list of entitlements for virtual machines in the environment.
@@ -73,13 +99,35 @@ type ListVmEntitlementsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListVmEntitlementsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListVmEntitlementsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListVmEntitlementsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeVmEntitlementList(s, schemas.ListVmEntitlementsResponse_entitlements, v.Entitlements)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListVmEntitlementsResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListVmEntitlementsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListVmEntitlementsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListVmEntitlementsResponse_entitlements:
+			return deserializeVmEntitlementList(d, schemas.ListVmEntitlementsResponse_entitlements, &v.Entitlements)
+		case schemas.ListVmEntitlementsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListVmEntitlementsResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListVmEntitlementsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpListVmEntitlements{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListVmEntitlements, schemas.ListVmEntitlementsRequest, schemas.ListVmEntitlementsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpListVmEntitlements{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListVmEntitlements, schemas.ListVmEntitlementsRequest, schemas.ListVmEntitlementsResponse), output: &ListVmEntitlementsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

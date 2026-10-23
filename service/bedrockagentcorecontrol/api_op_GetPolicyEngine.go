@@ -6,7 +6,9 @@ import (
 	"context"
 	"errors"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithytime "github.com/aws/smithy-go/time"
 	smithywaiter "github.com/aws/smithy-go/waiter"
@@ -41,6 +43,18 @@ type GetPolicyEngineInput struct {
 	PolicyEngineId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetPolicyEngineInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetPolicyEngineRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetPolicyEngineInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PolicyEngineId != nil {
+		s.WriteString(schemas.GetPolicyEngineRequest_policyEngineId, *v.PolicyEngineId)
+	}
 }
 
 type GetPolicyEngineOutput struct {
@@ -99,13 +113,81 @@ type GetPolicyEngineOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetPolicyEngineOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetPolicyEngineResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetPolicyEngineOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.GetPolicyEngineResponse_createdAt, *v.CreatedAt)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.GetPolicyEngineResponse_description, *v.Description)
+	}
+	if v.EncryptionKeyArn != nil {
+		s.WriteString(schemas.GetPolicyEngineResponse_encryptionKeyArn, *v.EncryptionKeyArn)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.GetPolicyEngineResponse_name, *v.Name)
+	}
+	if v.PolicyEngineArn != nil {
+		s.WriteString(schemas.GetPolicyEngineResponse_policyEngineArn, *v.PolicyEngineArn)
+	}
+	if v.PolicyEngineId != nil {
+		s.WriteString(schemas.GetPolicyEngineResponse_policyEngineId, *v.PolicyEngineId)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.GetPolicyEngineResponse_status, string(v.Status))
+	}
+	serializePolicyStatusReasons(s, schemas.GetPolicyEngineResponse_statusReasons, v.StatusReasons)
+	if v.UpdatedAt != nil {
+		s.WriteTime(schemas.GetPolicyEngineResponse_updatedAt, *v.UpdatedAt)
+	}
+}
+func (v *GetPolicyEngineOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetPolicyEngineResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetPolicyEngineResponse_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.GetPolicyEngineResponse_createdAt, v.CreatedAt)
+		case schemas.GetPolicyEngineResponse_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.GetPolicyEngineResponse_description, v.Description)
+		case schemas.GetPolicyEngineResponse_encryptionKeyArn:
+			v.EncryptionKeyArn = new(string)
+			return d.ReadString(schemas.GetPolicyEngineResponse_encryptionKeyArn, v.EncryptionKeyArn)
+		case schemas.GetPolicyEngineResponse_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.GetPolicyEngineResponse_name, v.Name)
+		case schemas.GetPolicyEngineResponse_policyEngineArn:
+			v.PolicyEngineArn = new(string)
+			return d.ReadString(schemas.GetPolicyEngineResponse_policyEngineArn, v.PolicyEngineArn)
+		case schemas.GetPolicyEngineResponse_policyEngineId:
+			v.PolicyEngineId = new(string)
+			return d.ReadString(schemas.GetPolicyEngineResponse_policyEngineId, v.PolicyEngineId)
+		case schemas.GetPolicyEngineResponse_status:
+			var ev string
+			if err := d.ReadString(schemas.GetPolicyEngineResponse_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.PolicyEngineStatus(ev)
+			return nil
+		case schemas.GetPolicyEngineResponse_statusReasons:
+			return deserializePolicyStatusReasons(d, schemas.GetPolicyEngineResponse_statusReasons, &v.StatusReasons)
+		case schemas.GetPolicyEngineResponse_updatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.GetPolicyEngineResponse_updatedAt, v.UpdatedAt)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetPolicyEngineMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetPolicyEngine{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetPolicyEngine, schemas.GetPolicyEngineRequest, schemas.GetPolicyEngineResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetPolicyEngine{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetPolicyEngine, schemas.GetPolicyEngineRequest, schemas.GetPolicyEngineResponse), output: &GetPolicyEngineOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

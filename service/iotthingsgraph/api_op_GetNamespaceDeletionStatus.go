@@ -4,7 +4,9 @@ package iotthingsgraph
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/iotthingsgraph/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotthingsgraph/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -30,6 +32,15 @@ type GetNamespaceDeletionStatusInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetNamespaceDeletionStatusInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetNamespaceDeletionStatusRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetNamespaceDeletionStatusInput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+
 type GetNamespaceDeletionStatusOutput struct {
 
 	// An error code returned by the namespace deletion task.
@@ -53,13 +64,64 @@ type GetNamespaceDeletionStatusOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetNamespaceDeletionStatusOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetNamespaceDeletionStatusResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetNamespaceDeletionStatusOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ErrorCode != "" {
+		s.WriteString(schemas.GetNamespaceDeletionStatusResponse_errorCode, string(v.ErrorCode))
+	}
+	if v.ErrorMessage != nil {
+		s.WriteString(schemas.GetNamespaceDeletionStatusResponse_errorMessage, *v.ErrorMessage)
+	}
+	if v.NamespaceArn != nil {
+		s.WriteString(schemas.GetNamespaceDeletionStatusResponse_namespaceArn, *v.NamespaceArn)
+	}
+	if v.NamespaceName != nil {
+		s.WriteString(schemas.GetNamespaceDeletionStatusResponse_namespaceName, *v.NamespaceName)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.GetNamespaceDeletionStatusResponse_status, string(v.Status))
+	}
+}
+func (v *GetNamespaceDeletionStatusOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetNamespaceDeletionStatusResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetNamespaceDeletionStatusResponse_errorCode:
+			var ev string
+			if err := d.ReadString(schemas.GetNamespaceDeletionStatusResponse_errorCode, &ev); err != nil {
+				return err
+			}
+			v.ErrorCode = types.NamespaceDeletionStatusErrorCodes(ev)
+			return nil
+		case schemas.GetNamespaceDeletionStatusResponse_errorMessage:
+			v.ErrorMessage = new(string)
+			return d.ReadString(schemas.GetNamespaceDeletionStatusResponse_errorMessage, v.ErrorMessage)
+		case schemas.GetNamespaceDeletionStatusResponse_namespaceArn:
+			v.NamespaceArn = new(string)
+			return d.ReadString(schemas.GetNamespaceDeletionStatusResponse_namespaceArn, v.NamespaceArn)
+		case schemas.GetNamespaceDeletionStatusResponse_namespaceName:
+			v.NamespaceName = new(string)
+			return d.ReadString(schemas.GetNamespaceDeletionStatusResponse_namespaceName, v.NamespaceName)
+		case schemas.GetNamespaceDeletionStatusResponse_status:
+			var ev string
+			if err := d.ReadString(schemas.GetNamespaceDeletionStatusResponse_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.NamespaceDeletionStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetNamespaceDeletionStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetNamespaceDeletionStatus{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetNamespaceDeletionStatus, schemas.GetNamespaceDeletionStatusRequest, schemas.GetNamespaceDeletionStatusResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetNamespaceDeletionStatus{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetNamespaceDeletionStatus, schemas.GetNamespaceDeletionStatusRequest, schemas.GetNamespaceDeletionStatusResponse), output: &GetNamespaceDeletionStatusOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,6 +4,8 @@ package securityhub
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/securityhub/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -33,6 +35,18 @@ type DeleteAggregatorV2Input struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteAggregatorV2Input) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteAggregatorV2Request)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteAggregatorV2Input) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AggregatorV2Arn != nil {
+		s.WriteString(schemas.DeleteAggregatorV2Request_AggregatorV2Arn, *v.AggregatorV2Arn)
+	}
+}
+
 type DeleteAggregatorV2Output struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -40,13 +54,26 @@ type DeleteAggregatorV2Output struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteAggregatorV2Output) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteAggregatorV2Response)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteAggregatorV2Output) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteAggregatorV2Output) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteAggregatorV2Response, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteAggregatorV2Middlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteAggregatorV2{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteAggregatorV2, schemas.DeleteAggregatorV2Request, schemas.DeleteAggregatorV2Response)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteAggregatorV2{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteAggregatorV2, schemas.DeleteAggregatorV2Request, schemas.DeleteAggregatorV2Response), output: &DeleteAggregatorV2Output{}}, middleware.After); err != nil {
 		return err
 	}
 

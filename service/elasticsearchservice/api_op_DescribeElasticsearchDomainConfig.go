@@ -4,7 +4,9 @@ package elasticsearchservice
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/elasticsearchservice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/elasticsearchservice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -40,6 +42,18 @@ type DescribeElasticsearchDomainConfigInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeElasticsearchDomainConfigInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeElasticsearchDomainConfigRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeElasticsearchDomainConfigInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DomainName != nil {
+		s.WriteString(schemas.DescribeElasticsearchDomainConfigRequest_DomainName, *v.DomainName)
+	}
+}
+
 // The result of a DescribeElasticsearchDomainConfig request. Contains the
 // configuration information of the requested domain.
 type DescribeElasticsearchDomainConfigOutput struct {
@@ -56,13 +70,34 @@ type DescribeElasticsearchDomainConfigOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeElasticsearchDomainConfigOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeElasticsearchDomainConfigResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeElasticsearchDomainConfigOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DomainConfig != nil {
+		s.WriteStruct(schemas.DescribeElasticsearchDomainConfigResponse_DomainConfig)
+		v.DomainConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DescribeElasticsearchDomainConfigOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeElasticsearchDomainConfigResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeElasticsearchDomainConfigResponse_DomainConfig:
+			v.DomainConfig = &types.ElasticsearchDomainConfig{}
+			return v.DomainConfig.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeElasticsearchDomainConfigMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeElasticsearchDomainConfig{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeElasticsearchDomainConfig, schemas.DescribeElasticsearchDomainConfigRequest, schemas.DescribeElasticsearchDomainConfigResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeElasticsearchDomainConfig{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeElasticsearchDomainConfig, schemas.DescribeElasticsearchDomainConfigRequest, schemas.DescribeElasticsearchDomainConfigResponse), output: &DescribeElasticsearchDomainConfigOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

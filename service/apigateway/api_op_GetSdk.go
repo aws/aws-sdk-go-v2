@@ -4,6 +4,8 @@ package apigateway
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/apigateway/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -52,6 +54,25 @@ type GetSdkInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetSdkInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetSdkRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetSdkInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeMapOfStringToString(s, schemas.GetSdkRequest_parameters, v.Parameters)
+	if v.RestApiId != nil {
+		s.WriteString(schemas.GetSdkRequest_restApiId, *v.RestApiId)
+	}
+	if v.SdkType != nil {
+		s.WriteString(schemas.GetSdkRequest_sdkType, *v.SdkType)
+	}
+	if v.StageName != nil {
+		s.WriteString(schemas.GetSdkRequest_stageName, *v.StageName)
+	}
+}
+
 // The binary blob response to GetSdk, which contains the generated SDK.
 type GetSdkOutput struct {
 
@@ -70,13 +91,43 @@ type GetSdkOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetSdkOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SdkResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetSdkOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Body != nil {
+		s.WriteBlob(schemas.SdkResponse_body, v.Body)
+	}
+	if v.ContentDisposition != nil {
+		s.WriteString(schemas.SdkResponse_contentDisposition, *v.ContentDisposition)
+	}
+	if v.ContentType != nil {
+		s.WriteString(schemas.SdkResponse_contentType, *v.ContentType)
+	}
+}
+func (v *GetSdkOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SdkResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SdkResponse_body:
+			return d.ReadBlob(schemas.SdkResponse_body, &v.Body)
+		case schemas.SdkResponse_contentDisposition:
+			v.ContentDisposition = new(string)
+			return d.ReadString(schemas.SdkResponse_contentDisposition, v.ContentDisposition)
+		case schemas.SdkResponse_contentType:
+			v.ContentType = new(string)
+			return d.ReadString(schemas.SdkResponse_contentType, v.ContentType)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetSdkMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetSdk{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetSdk, schemas.GetSdkRequest, schemas.SdkResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetSdk{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetSdk, schemas.GetSdkRequest, schemas.SdkResponse), output: &GetSdkOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

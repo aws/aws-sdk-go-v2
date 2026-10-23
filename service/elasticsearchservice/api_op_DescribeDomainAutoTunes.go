@@ -5,7 +5,9 @@ package elasticsearchservice
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/elasticsearchservice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/elasticsearchservice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -45,6 +47,24 @@ type DescribeDomainAutoTunesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeDomainAutoTunesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeDomainAutoTunesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeDomainAutoTunesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DomainName != nil {
+		s.WriteString(schemas.DescribeDomainAutoTunesRequest_DomainName, *v.DomainName)
+	}
+	if v.MaxResults != 0 {
+		s.WriteInt32(schemas.DescribeDomainAutoTunesRequest_MaxResults, v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeDomainAutoTunesRequest_NextToken, *v.NextToken)
+	}
+}
+
 // The result of DescribeDomainAutoTunes request. See the [Developer Guide] for more information.
 //
 // [Developer Guide]: https://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/auto-tune.html
@@ -65,13 +85,35 @@ type DescribeDomainAutoTunesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeDomainAutoTunesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeDomainAutoTunesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeDomainAutoTunesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAutoTuneList(s, schemas.DescribeDomainAutoTunesResponse_AutoTunes, v.AutoTunes)
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeDomainAutoTunesResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *DescribeDomainAutoTunesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeDomainAutoTunesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeDomainAutoTunesResponse_AutoTunes:
+			return deserializeAutoTuneList(d, schemas.DescribeDomainAutoTunesResponse_AutoTunes, &v.AutoTunes)
+		case schemas.DescribeDomainAutoTunesResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.DescribeDomainAutoTunesResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeDomainAutoTunesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeDomainAutoTunes{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeDomainAutoTunes, schemas.DescribeDomainAutoTunesRequest, schemas.DescribeDomainAutoTunesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeDomainAutoTunes{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeDomainAutoTunes, schemas.DescribeDomainAutoTunesRequest, schemas.DescribeDomainAutoTunesResponse), output: &DescribeDomainAutoTunesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

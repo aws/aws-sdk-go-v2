@@ -7,9 +7,28 @@ import (
 	"time"
 )
 
+// Contains supported Amazon EBS volume information for an AMI fulfillment option.
+type AmazonMachineImageEbsVolume struct {
+
+	// The supported Amazon EBS volume types.
+	//
+	// This member is required.
+	VolumeTypes []string
+
+	// The total number of provisioned IOPS supported.
+	Iops *int32
+
+	noSmithyDocumentSerde
+}
+
 // Describes an Amazon Machine Image (AMI) fulfillment option, including version
 // details, supported operating systems, and recommended instance types.
 type AmazonMachineImageFulfillmentOption struct {
+
+	// The architecture of the AMI, such as x86_64 .
+	//
+	// This member is required.
+	Architecture *string
 
 	// A human-readable name for the fulfillment option type.
 	//
@@ -36,6 +55,18 @@ type AmazonMachineImageFulfillmentOption struct {
 	// This member is required.
 	OperatingSystems []AmazonMachineImageOperatingSystem
 
+	// The URL pattern for accessing the product when an instance is running.
+	AccessUrlTemplate *string
+
+	// The alias of the AMI associated with this fulfillment option.
+	AmiAlias *string
+
+	// The date and time when the AMI became available for fulfillment.
+	AvailableFromTime *time.Time
+
+	// The supported Amazon EBS volume configuration for the AMI.
+	EbsVolume *AmazonMachineImageEbsVolume
+
 	// The version identifier of the fulfillment option.
 	FulfillmentOptionVersion *string
 
@@ -44,6 +75,9 @@ type AmazonMachineImageFulfillmentOption struct {
 
 	// Release notes describing changes in this version of the fulfillment option.
 	ReleaseNotes *string
+
+	// A short description of the fulfillment option.
+	ShortDescription *string
 
 	// Instructions on how to deploy and use this fulfillment option.
 	UsageInstructions *string
@@ -78,6 +112,36 @@ type AmazonMachineImageRecommendation struct {
 	//
 	// This member is required.
 	InstanceType *string
+
+	// The recommended security group configurations for this AMI.
+	SecurityGroups []AmazonMachineImageSecurityGroup
+
+	noSmithyDocumentSerde
+}
+
+// Contains a recommended security group configuration for an AMI fulfillment
+// option.
+type AmazonMachineImageSecurityGroup struct {
+
+	// The IP address ranges in CIDR format.
+	//
+	// This member is required.
+	CidrIpAddresses []string
+
+	// The start of the port range.
+	//
+	// This member is required.
+	FromPort *int32
+
+	// The IP protocol name, such as tcp .
+	//
+	// This member is required.
+	Protocol *string
+
+	// The end of the port range.
+	//
+	// This member is required.
+	ToPort *int32
 
 	noSmithyDocumentSerde
 }
@@ -190,11 +254,21 @@ type CloudFormationFulfillmentOption struct {
 	// This member is required.
 	FulfillmentOptionType FulfillmentOptionType
 
+	// The date and time when the CloudFormation fulfillment option became available
+	// for fulfillment.
+	AvailableFromTime *time.Time
+
 	// The version identifier of the fulfillment option.
 	FulfillmentOptionVersion *string
 
+	// A detailed description of the fulfillment option.
+	LongDescription *string
+
 	// Release notes describing changes in this version of the fulfillment option.
 	ReleaseNotes *string
+
+	// A short description of the fulfillment option.
+	ShortDescription *string
 
 	// Instructions on how to deploy and use this CloudFormation template.
 	UsageInstructions *string
@@ -1214,24 +1288,21 @@ func (*OfferTermMemberVariablePaymentTerm) isOfferTerm() {}
 type PaymentScheduleEntry struct {
 
 	// The relative offset from the renewal agreement start date when this installment
-	// is due, in ISO 8601 duration format. The offset uses months only or days only
-	// (for example, P1M or P30D); mixed units are not supported, and every offset in a
-	// schedule uses the same unit.
+	// is due, represented in ISO 8601 duration format (for example, P1M or P30D).
 	//
 	// This member is required.
 	ChargeDateOffset *string
 
-	// The percentage of the increased TCV to charge in this installment. All entries
-	// in a schedule sum to 100.00.
+	// The percentage of the increased Total Contract Value (TCV) to charge in this
+	// installment. All entries in a schedule sum to 100.00.
 	//
 	// This member is required.
 	ChargePercentage *string
 
 	// The optional calendar day of month on which the charge occurs. When absent, the
-	// charge day is derived from chargeDateOffset , and this field does not apply when
-	// chargeDateOffset is expressed in days. For months with fewer days than the
-	// specified day, the charge occurs on the last day of the month. For example, if
-	// dayOfMonth is 31, the charge in April occurs on April 30.
+	// charge day is derived from chargeDateOffset . For months with fewer days than
+	// the specified day, the charge occurs on the last day of the month. For example,
+	// if dayOfMonth is 31, the charge in April occurs on April 30.
 	DayOfMonth *int32
 
 	noSmithyDocumentSerde
@@ -1527,8 +1598,23 @@ type PurchaseOptionFilter struct {
 	// This member is required.
 	FilterType PurchaseOptionFilterType
 
-	// The values to filter by. Multiple values within the same filter are combined
-	// with OR logic.
+	// The values to filter by. Supported values depend on filterType :
+	//
+	//   - PRODUCT_ID – One or more product identifiers to filter by.
+	//
+	//   - SELLER_OF_RECORD_PROFILE_ID – One or more seller profile identifiers to
+	//   filter by.
+	//
+	//   - PURCHASE_OPTION_TYPE – One or more purchase option types to filter by: OFFER
+	//   or OFFERSET .
+	//
+	//   - VISIBILITY_SCOPE – The visibility scope to filter by: PRIVATE .
+	//
+	//   - AVAILABILITY_STATUS – One or more availability statuses to filter by:
+	//   AVAILABLE or EXPIRED .
+	//
+	// To retrieve private offers and offer sets visible to you, use VISIBILITY_SCOPE
+	// with PRIVATE . OR logic combines multiple values within the same filter.
 	//
 	// This member is required.
 	FilterValues []string
@@ -1770,8 +1856,21 @@ type SaasFulfillmentOption struct {
 	// This member is required.
 	FulfillmentOptionType FulfillmentOptionType
 
+	// Specifies whether the SaaS product supports quick-launch deployment.
+	//
+	// This member is required.
+	QuickLaunch SaasQuickLaunchStatus
+
+	// The date and time when the SaaS product became available for fulfillment.
+	AvailableFromTime *time.Time
+
 	// The URL of the seller's software registration landing page.
 	FulfillmentUrl *string
+
+	// The URL that a buyer uses to launch the seller's SaaS product. This URL is
+	// distinct from fulfillmentUrl , which is the seller's software registration
+	// landing page.
+	LaunchUrl *string
 
 	// Instructions on how to access and use this SaaS product.
 	UsageInstructions *string
@@ -1860,6 +1959,12 @@ type SageMakerModelFulfillmentOption struct {
 
 	// Release notes describing changes in this version of the fulfillment option.
 	ReleaseNotes *string
+
+	// The MIME types that this model accepts as input.
+	SupportedContentTypes []string
+
+	// The MIME types that this model returns as output.
+	SupportedResponseMimeTypes []string
 
 	// Instructions on how to use this SageMaker model.
 	UsageInstructions *string

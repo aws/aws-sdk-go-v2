@@ -4,6 +4,8 @@ package mediaconnect
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/mediaconnect/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -41,6 +43,21 @@ type RevokeFlowEntitlementInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RevokeFlowEntitlementInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RevokeFlowEntitlementRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RevokeFlowEntitlementInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EntitlementArn != nil {
+		s.WriteString(schemas.RevokeFlowEntitlementRequest_EntitlementArn, *v.EntitlementArn)
+	}
+	if v.FlowArn != nil {
+		s.WriteString(schemas.RevokeFlowEntitlementRequest_FlowArn, *v.FlowArn)
+	}
+}
+
 type RevokeFlowEntitlementOutput struct {
 
 	//  The ARN of the entitlement that was revoked.
@@ -55,13 +72,38 @@ type RevokeFlowEntitlementOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RevokeFlowEntitlementOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RevokeFlowEntitlementResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RevokeFlowEntitlementOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EntitlementArn != nil {
+		s.WriteString(schemas.RevokeFlowEntitlementResponse_EntitlementArn, *v.EntitlementArn)
+	}
+	if v.FlowArn != nil {
+		s.WriteString(schemas.RevokeFlowEntitlementResponse_FlowArn, *v.FlowArn)
+	}
+}
+func (v *RevokeFlowEntitlementOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RevokeFlowEntitlementResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RevokeFlowEntitlementResponse_EntitlementArn:
+			v.EntitlementArn = new(string)
+			return d.ReadString(schemas.RevokeFlowEntitlementResponse_EntitlementArn, v.EntitlementArn)
+		case schemas.RevokeFlowEntitlementResponse_FlowArn:
+			v.FlowArn = new(string)
+			return d.ReadString(schemas.RevokeFlowEntitlementResponse_FlowArn, v.FlowArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationRevokeFlowEntitlementMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpRevokeFlowEntitlement{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RevokeFlowEntitlement, schemas.RevokeFlowEntitlementRequest, schemas.RevokeFlowEntitlementResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpRevokeFlowEntitlement{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RevokeFlowEntitlement, schemas.RevokeFlowEntitlementRequest, schemas.RevokeFlowEntitlementResponse), output: &RevokeFlowEntitlementOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

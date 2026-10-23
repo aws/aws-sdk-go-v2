@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"Policy":{"Actions":["SHARE","SHARE"],"ApplicableTo":{"GroupArns":["__Member__","__Member__"],"Type":"GROUP"},"ApprovalGroups":["__Member__","__Member__"],"AssetTypes":["AGENT","AGENT"],"CreatedAt":946684800,"Description":"__Description__","Name":"__Name__","PolicyArn":"__PolicyArn__","PolicyId":"__PolicyId__","UpdatedAt":946684800}}

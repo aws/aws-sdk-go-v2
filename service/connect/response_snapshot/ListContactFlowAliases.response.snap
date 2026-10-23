@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"ContactFlowAliasSummaryList":[{"AliasDescription":"__AliasDescription__","AliasId":"__AliasId__","AliasName":"__AliasName__","Arn":"__Arn__","LastModifiedRegion":"__LastModifiedRegion__","LastModifiedTime":946684800,"Version":1},{"AliasDescription":"__AliasDescription__","AliasId":"__AliasId__","AliasName":"__AliasName__","Arn":"__Arn__","LastModifiedRegion":"__LastModifiedRegion__","LastModifiedTime":946684800,"Version":1}],"NextToken":"__NextToken__"}

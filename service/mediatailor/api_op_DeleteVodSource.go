@@ -4,6 +4,8 @@ package mediatailor
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/mediatailor/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -38,6 +40,34 @@ type DeleteVodSourceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteVodSourceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteVodSourceRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteVodSourceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SourceLocationName != nil {
+		s.WriteString(schemas.DeleteVodSourceRequest_SourceLocationName, *v.SourceLocationName)
+	}
+	if v.VodSourceName != nil {
+		s.WriteString(schemas.DeleteVodSourceRequest_VodSourceName, *v.VodSourceName)
+	}
+}
+func (v *DeleteVodSourceInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteVodSourceRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteVodSourceRequest_SourceLocationName:
+			v.SourceLocationName = new(string)
+			return d.ReadString(schemas.DeleteVodSourceRequest_SourceLocationName, v.SourceLocationName)
+		case schemas.DeleteVodSourceRequest_VodSourceName:
+			v.VodSourceName = new(string)
+			return d.ReadString(schemas.DeleteVodSourceRequest_VodSourceName, v.VodSourceName)
+		}
+		return nil
+	})
+}
+
 type DeleteVodSourceOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -45,13 +75,26 @@ type DeleteVodSourceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteVodSourceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteVodSourceResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteVodSourceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteVodSourceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteVodSourceResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteVodSourceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteVodSource{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteVodSource, schemas.DeleteVodSourceRequest, schemas.DeleteVodSourceResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteVodSource{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteVodSource, schemas.DeleteVodSourceRequest, schemas.DeleteVodSourceResponse), output: &DeleteVodSourceOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package sfn
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/sfn/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sfn/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -65,6 +67,24 @@ type ListStateMachineVersionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListStateMachineVersionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListStateMachineVersionsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListStateMachineVersionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != 0 {
+		s.WriteInt32(schemas.ListStateMachineVersionsInput_maxResults, v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListStateMachineVersionsInput_nextToken, *v.NextToken)
+	}
+	if v.StateMachineArn != nil {
+		s.WriteString(schemas.ListStateMachineVersionsInput_stateMachineArn, *v.StateMachineArn)
+	}
+}
+
 type ListStateMachineVersionsOutput struct {
 
 	// Versions for the state machine.
@@ -85,13 +105,35 @@ type ListStateMachineVersionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListStateMachineVersionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListStateMachineVersionsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListStateMachineVersionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListStateMachineVersionsOutput_nextToken, *v.NextToken)
+	}
+	serializeStateMachineVersionList(s, schemas.ListStateMachineVersionsOutput_stateMachineVersions, v.StateMachineVersions)
+}
+func (v *ListStateMachineVersionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListStateMachineVersionsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListStateMachineVersionsOutput_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListStateMachineVersionsOutput_nextToken, v.NextToken)
+		case schemas.ListStateMachineVersionsOutput_stateMachineVersions:
+			return deserializeStateMachineVersionList(d, schemas.ListStateMachineVersionsOutput_stateMachineVersions, &v.StateMachineVersions)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListStateMachineVersionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpListStateMachineVersions{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListStateMachineVersions, schemas.ListStateMachineVersionsInput, schemas.ListStateMachineVersionsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpListStateMachineVersions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListStateMachineVersions, schemas.ListStateMachineVersionsInput, schemas.ListStateMachineVersionsOutput), output: &ListStateMachineVersionsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

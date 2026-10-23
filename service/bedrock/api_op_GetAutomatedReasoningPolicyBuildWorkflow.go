@@ -4,7 +4,9 @@ package bedrock
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/bedrock/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrock/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -40,6 +42,21 @@ type GetAutomatedReasoningPolicyBuildWorkflowInput struct {
 	PolicyArn *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetAutomatedReasoningPolicyBuildWorkflowInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetAutomatedReasoningPolicyBuildWorkflowRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetAutomatedReasoningPolicyBuildWorkflowInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BuildWorkflowId != nil {
+		s.WriteString(schemas.GetAutomatedReasoningPolicyBuildWorkflowRequest_buildWorkflowId, *v.BuildWorkflowId)
+	}
+	if v.PolicyArn != nil {
+		s.WriteString(schemas.GetAutomatedReasoningPolicyBuildWorkflowRequest_policyArn, *v.PolicyArn)
+	}
 }
 
 type GetAutomatedReasoningPolicyBuildWorkflowOutput struct {
@@ -92,13 +109,92 @@ type GetAutomatedReasoningPolicyBuildWorkflowOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetAutomatedReasoningPolicyBuildWorkflowOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetAutomatedReasoningPolicyBuildWorkflowResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetAutomatedReasoningPolicyBuildWorkflowOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BuildWorkflowId != nil {
+		s.WriteString(schemas.GetAutomatedReasoningPolicyBuildWorkflowResponse_buildWorkflowId, *v.BuildWorkflowId)
+	}
+	if v.BuildWorkflowType != "" {
+		s.WriteString(schemas.GetAutomatedReasoningPolicyBuildWorkflowResponse_buildWorkflowType, string(v.BuildWorkflowType))
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.GetAutomatedReasoningPolicyBuildWorkflowResponse_createdAt, *v.CreatedAt)
+	}
+	if v.DocumentContentType != "" {
+		s.WriteString(schemas.GetAutomatedReasoningPolicyBuildWorkflowResponse_documentContentType, string(v.DocumentContentType))
+	}
+	if v.DocumentDescription != nil {
+		s.WriteString(schemas.GetAutomatedReasoningPolicyBuildWorkflowResponse_documentDescription, *v.DocumentDescription)
+	}
+	if v.DocumentName != nil {
+		s.WriteString(schemas.GetAutomatedReasoningPolicyBuildWorkflowResponse_documentName, *v.DocumentName)
+	}
+	if v.PolicyArn != nil {
+		s.WriteString(schemas.GetAutomatedReasoningPolicyBuildWorkflowResponse_policyArn, *v.PolicyArn)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.GetAutomatedReasoningPolicyBuildWorkflowResponse_status, string(v.Status))
+	}
+	if v.UpdatedAt != nil {
+		s.WriteTime(schemas.GetAutomatedReasoningPolicyBuildWorkflowResponse_updatedAt, *v.UpdatedAt)
+	}
+}
+func (v *GetAutomatedReasoningPolicyBuildWorkflowOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetAutomatedReasoningPolicyBuildWorkflowResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetAutomatedReasoningPolicyBuildWorkflowResponse_buildWorkflowId:
+			v.BuildWorkflowId = new(string)
+			return d.ReadString(schemas.GetAutomatedReasoningPolicyBuildWorkflowResponse_buildWorkflowId, v.BuildWorkflowId)
+		case schemas.GetAutomatedReasoningPolicyBuildWorkflowResponse_buildWorkflowType:
+			var ev string
+			if err := d.ReadString(schemas.GetAutomatedReasoningPolicyBuildWorkflowResponse_buildWorkflowType, &ev); err != nil {
+				return err
+			}
+			v.BuildWorkflowType = types.AutomatedReasoningPolicyBuildWorkflowType(ev)
+			return nil
+		case schemas.GetAutomatedReasoningPolicyBuildWorkflowResponse_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.GetAutomatedReasoningPolicyBuildWorkflowResponse_createdAt, v.CreatedAt)
+		case schemas.GetAutomatedReasoningPolicyBuildWorkflowResponse_documentContentType:
+			var ev string
+			if err := d.ReadString(schemas.GetAutomatedReasoningPolicyBuildWorkflowResponse_documentContentType, &ev); err != nil {
+				return err
+			}
+			v.DocumentContentType = types.AutomatedReasoningPolicyBuildDocumentContentType(ev)
+			return nil
+		case schemas.GetAutomatedReasoningPolicyBuildWorkflowResponse_documentDescription:
+			v.DocumentDescription = new(string)
+			return d.ReadString(schemas.GetAutomatedReasoningPolicyBuildWorkflowResponse_documentDescription, v.DocumentDescription)
+		case schemas.GetAutomatedReasoningPolicyBuildWorkflowResponse_documentName:
+			v.DocumentName = new(string)
+			return d.ReadString(schemas.GetAutomatedReasoningPolicyBuildWorkflowResponse_documentName, v.DocumentName)
+		case schemas.GetAutomatedReasoningPolicyBuildWorkflowResponse_policyArn:
+			v.PolicyArn = new(string)
+			return d.ReadString(schemas.GetAutomatedReasoningPolicyBuildWorkflowResponse_policyArn, v.PolicyArn)
+		case schemas.GetAutomatedReasoningPolicyBuildWorkflowResponse_status:
+			var ev string
+			if err := d.ReadString(schemas.GetAutomatedReasoningPolicyBuildWorkflowResponse_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.AutomatedReasoningPolicyBuildWorkflowStatus(ev)
+			return nil
+		case schemas.GetAutomatedReasoningPolicyBuildWorkflowResponse_updatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.GetAutomatedReasoningPolicyBuildWorkflowResponse_updatedAt, v.UpdatedAt)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetAutomatedReasoningPolicyBuildWorkflowMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetAutomatedReasoningPolicyBuildWorkflow{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAutomatedReasoningPolicyBuildWorkflow, schemas.GetAutomatedReasoningPolicyBuildWorkflowRequest, schemas.GetAutomatedReasoningPolicyBuildWorkflowResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetAutomatedReasoningPolicyBuildWorkflow{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAutomatedReasoningPolicyBuildWorkflow, schemas.GetAutomatedReasoningPolicyBuildWorkflowRequest, schemas.GetAutomatedReasoningPolicyBuildWorkflowResponse), output: &GetAutomatedReasoningPolicyBuildWorkflowOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

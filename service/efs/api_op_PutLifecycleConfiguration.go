@@ -4,7 +4,9 @@ package efs
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/efs/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/efs/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -116,6 +118,19 @@ type PutLifecycleConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutLifecycleConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutLifecycleConfigurationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutLifecycleConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FileSystemId != nil {
+		s.WriteString(schemas.PutLifecycleConfigurationRequest_FileSystemId, *v.FileSystemId)
+	}
+	serializeLifecyclePolicies(s, schemas.PutLifecycleConfigurationRequest_LifecyclePolicies, v.LifecyclePolicies)
+}
+
 type PutLifecycleConfigurationOutput struct {
 
 	// An array of lifecycle management policies. EFS supports a maximum of one policy
@@ -128,13 +143,29 @@ type PutLifecycleConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutLifecycleConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LifecycleConfigurationDescription)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutLifecycleConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeLifecyclePolicies(s, schemas.LifecycleConfigurationDescription_LifecyclePolicies, v.LifecyclePolicies)
+}
+func (v *PutLifecycleConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LifecycleConfigurationDescription, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LifecycleConfigurationDescription_LifecyclePolicies:
+			return deserializeLifecyclePolicies(d, schemas.LifecycleConfigurationDescription_LifecyclePolicies, &v.LifecyclePolicies)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPutLifecycleConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpPutLifecycleConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutLifecycleConfiguration, schemas.PutLifecycleConfigurationRequest, schemas.LifecycleConfigurationDescription)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpPutLifecycleConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutLifecycleConfiguration, schemas.PutLifecycleConfigurationRequest, schemas.LifecycleConfigurationDescription), output: &PutLifecycleConfigurationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

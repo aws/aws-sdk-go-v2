@@ -4,7 +4,9 @@ package batch
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/batch/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/batch/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -144,6 +146,65 @@ type RegisterJobDefinitionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RegisterJobDefinitionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RegisterJobDefinitionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RegisterJobDefinitionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConsumableResourceProperties != nil {
+		s.WriteStruct(schemas.RegisterJobDefinitionRequest_consumableResourceProperties)
+		v.ConsumableResourceProperties.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ContainerProperties != nil {
+		s.WriteStruct(schemas.RegisterJobDefinitionRequest_containerProperties)
+		v.ContainerProperties.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.EcsProperties != nil {
+		s.WriteStruct(schemas.RegisterJobDefinitionRequest_ecsProperties)
+		v.EcsProperties.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.EksProperties != nil {
+		s.WriteStruct(schemas.RegisterJobDefinitionRequest_eksProperties)
+		v.EksProperties.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.JobDefinitionName != nil {
+		s.WriteString(schemas.RegisterJobDefinitionRequest_jobDefinitionName, *v.JobDefinitionName)
+	}
+	if v.NodeProperties != nil {
+		s.WriteStruct(schemas.RegisterJobDefinitionRequest_nodeProperties)
+		v.NodeProperties.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeParametersMap(s, schemas.RegisterJobDefinitionRequest_parameters, v.Parameters)
+	serializePlatformCapabilityList(s, schemas.RegisterJobDefinitionRequest_platformCapabilities, v.PlatformCapabilities)
+	if v.PropagateTags != nil {
+		s.WriteBool(schemas.RegisterJobDefinitionRequest_propagateTags, *v.PropagateTags)
+	}
+	if v.RetryStrategy != nil {
+		s.WriteStruct(schemas.RegisterJobDefinitionRequest_retryStrategy)
+		v.RetryStrategy.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SchedulingPriority != nil {
+		s.WriteInt32(schemas.RegisterJobDefinitionRequest_schedulingPriority, *v.SchedulingPriority)
+	}
+	serializeTagrisTagsMap(s, schemas.RegisterJobDefinitionRequest_tags, v.Tags)
+	if v.Timeout != nil {
+		s.WriteStruct(schemas.RegisterJobDefinitionRequest_timeout)
+		v.Timeout.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.RegisterJobDefinitionRequest_type, string(v.Type))
+	}
+}
+
 type RegisterJobDefinitionOutput struct {
 
 	// The Amazon Resource Name (ARN) of the job definition.
@@ -167,13 +228,44 @@ type RegisterJobDefinitionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RegisterJobDefinitionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RegisterJobDefinitionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RegisterJobDefinitionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.JobDefinitionArn != nil {
+		s.WriteString(schemas.RegisterJobDefinitionResponse_jobDefinitionArn, *v.JobDefinitionArn)
+	}
+	if v.JobDefinitionName != nil {
+		s.WriteString(schemas.RegisterJobDefinitionResponse_jobDefinitionName, *v.JobDefinitionName)
+	}
+	if v.Revision != nil {
+		s.WriteInt32(schemas.RegisterJobDefinitionResponse_revision, *v.Revision)
+	}
+}
+func (v *RegisterJobDefinitionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RegisterJobDefinitionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RegisterJobDefinitionResponse_jobDefinitionArn:
+			v.JobDefinitionArn = new(string)
+			return d.ReadString(schemas.RegisterJobDefinitionResponse_jobDefinitionArn, v.JobDefinitionArn)
+		case schemas.RegisterJobDefinitionResponse_jobDefinitionName:
+			v.JobDefinitionName = new(string)
+			return d.ReadString(schemas.RegisterJobDefinitionResponse_jobDefinitionName, v.JobDefinitionName)
+		case schemas.RegisterJobDefinitionResponse_revision:
+			v.Revision = new(int32)
+			return d.ReadInt32(schemas.RegisterJobDefinitionResponse_revision, v.Revision)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationRegisterJobDefinitionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpRegisterJobDefinition{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RegisterJobDefinition, schemas.RegisterJobDefinitionRequest, schemas.RegisterJobDefinitionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpRegisterJobDefinition{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RegisterJobDefinition, schemas.RegisterJobDefinitionRequest, schemas.RegisterJobDefinitionResponse), output: &RegisterJobDefinitionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package appfabric
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/appfabric/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/appfabric/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -41,6 +43,21 @@ type GetAppAuthorizationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetAppAuthorizationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetAppAuthorizationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetAppAuthorizationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AppAuthorizationIdentifier != nil {
+		s.WriteString(schemas.GetAppAuthorizationRequest_appAuthorizationIdentifier, *v.AppAuthorizationIdentifier)
+	}
+	if v.AppBundleIdentifier != nil {
+		s.WriteString(schemas.GetAppAuthorizationRequest_appBundleIdentifier, *v.AppBundleIdentifier)
+	}
+}
+
 type GetAppAuthorizationOutput struct {
 
 	// Contains information about an app authorization.
@@ -54,13 +71,34 @@ type GetAppAuthorizationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetAppAuthorizationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetAppAuthorizationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetAppAuthorizationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AppAuthorization != nil {
+		s.WriteStruct(schemas.GetAppAuthorizationResponse_appAuthorization)
+		v.AppAuthorization.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetAppAuthorizationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetAppAuthorizationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetAppAuthorizationResponse_appAuthorization:
+			v.AppAuthorization = &types.AppAuthorization{}
+			return v.AppAuthorization.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetAppAuthorizationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetAppAuthorization{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAppAuthorization, schemas.GetAppAuthorizationRequest, schemas.GetAppAuthorizationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetAppAuthorization{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAppAuthorization, schemas.GetAppAuthorizationRequest, schemas.GetAppAuthorizationResponse), output: &GetAppAuthorizationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

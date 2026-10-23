@@ -95,6 +95,15 @@ type Index struct {
 	// configuration of the vector bucket.
 	EncryptionConfiguration *EncryptionConfiguration
 
+	// The mode that determines how the vector index processes queries.
+	//
+	// Valid values:
+	//
+	//   - CLASSIC - Applies metadata filters during the vector search.
+	//
+	//   - ENHANCED - Applies metadata filters before the vector search.
+	IndexMode IndexMode
+
 	// The metadata configuration for the vector index.
 	MetadataConfiguration *MetadataConfiguration
 
@@ -245,6 +254,10 @@ type VectorBucket struct {
 	//
 	// This member is required.
 	VectorBucketName *string
+
+	// The mode that is automatically assigned to new vector indexes in the vector
+	// bucket. Changing the default index mode doesn't affect existing vector indexes.
+	DefaultIndexMode IndexMode
 
 	// The encryption configuration for the vector bucket.
 	EncryptionConfiguration *EncryptionConfiguration

@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"nextToken":"__NextToken__","workflowSummaries":[{"createdAt":946684800,"resolutionType":"RULE_MATCHING","updatedAt":946684800,"workflowArn":"__WorkflowArn__","workflowName":"__WorkflowName__"},{"createdAt":946684800,"resolutionType":"RULE_MATCHING","updatedAt":946684800,"workflowArn":"__WorkflowArn__","workflowName":"__WorkflowName__"}]}

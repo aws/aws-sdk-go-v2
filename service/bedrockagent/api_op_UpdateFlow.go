@@ -4,7 +4,9 @@ package bedrockagent
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/bedrockagent/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagent/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -59,6 +61,35 @@ type UpdateFlowInput struct {
 	Description *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *UpdateFlowInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateFlowRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateFlowInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CustomerEncryptionKeyArn != nil {
+		s.WriteString(schemas.UpdateFlowRequest_customerEncryptionKeyArn, *v.CustomerEncryptionKeyArn)
+	}
+	if v.Definition != nil {
+		s.WriteStruct(schemas.UpdateFlowRequest_definition)
+		v.Definition.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateFlowRequest_description, *v.Description)
+	}
+	if v.ExecutionRoleArn != nil {
+		s.WriteString(schemas.UpdateFlowRequest_executionRoleArn, *v.ExecutionRoleArn)
+	}
+	if v.FlowIdentifier != nil {
+		s.WriteString(schemas.UpdateFlowRequest_flowIdentifier, *v.FlowIdentifier)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateFlowRequest_name, *v.Name)
+	}
 }
 
 type UpdateFlowOutput struct {
@@ -123,13 +154,98 @@ type UpdateFlowOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateFlowOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateFlowResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateFlowOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.UpdateFlowResponse_arn, *v.Arn)
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.UpdateFlowResponse_createdAt, *v.CreatedAt)
+	}
+	if v.CustomerEncryptionKeyArn != nil {
+		s.WriteString(schemas.UpdateFlowResponse_customerEncryptionKeyArn, *v.CustomerEncryptionKeyArn)
+	}
+	if v.Definition != nil {
+		s.WriteStruct(schemas.UpdateFlowResponse_definition)
+		v.Definition.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateFlowResponse_description, *v.Description)
+	}
+	if v.ExecutionRoleArn != nil {
+		s.WriteString(schemas.UpdateFlowResponse_executionRoleArn, *v.ExecutionRoleArn)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.UpdateFlowResponse_id, *v.Id)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateFlowResponse_name, *v.Name)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.UpdateFlowResponse_status, string(v.Status))
+	}
+	if v.UpdatedAt != nil {
+		s.WriteTime(schemas.UpdateFlowResponse_updatedAt, *v.UpdatedAt)
+	}
+	if v.Version != nil {
+		s.WriteString(schemas.UpdateFlowResponse_version, *v.Version)
+	}
+}
+func (v *UpdateFlowOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateFlowResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateFlowResponse_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.UpdateFlowResponse_arn, v.Arn)
+		case schemas.UpdateFlowResponse_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.UpdateFlowResponse_createdAt, v.CreatedAt)
+		case schemas.UpdateFlowResponse_customerEncryptionKeyArn:
+			v.CustomerEncryptionKeyArn = new(string)
+			return d.ReadString(schemas.UpdateFlowResponse_customerEncryptionKeyArn, v.CustomerEncryptionKeyArn)
+		case schemas.UpdateFlowResponse_definition:
+			v.Definition = &types.FlowDefinition{}
+			return v.Definition.Deserialize(d)
+		case schemas.UpdateFlowResponse_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.UpdateFlowResponse_description, v.Description)
+		case schemas.UpdateFlowResponse_executionRoleArn:
+			v.ExecutionRoleArn = new(string)
+			return d.ReadString(schemas.UpdateFlowResponse_executionRoleArn, v.ExecutionRoleArn)
+		case schemas.UpdateFlowResponse_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.UpdateFlowResponse_id, v.Id)
+		case schemas.UpdateFlowResponse_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.UpdateFlowResponse_name, v.Name)
+		case schemas.UpdateFlowResponse_status:
+			var ev string
+			if err := d.ReadString(schemas.UpdateFlowResponse_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.FlowStatus(ev)
+			return nil
+		case schemas.UpdateFlowResponse_updatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.UpdateFlowResponse_updatedAt, v.UpdatedAt)
+		case schemas.UpdateFlowResponse_version:
+			v.Version = new(string)
+			return d.ReadString(schemas.UpdateFlowResponse_version, v.Version)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateFlowMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateFlow{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateFlow, schemas.UpdateFlowRequest, schemas.UpdateFlowResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateFlow{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateFlow, schemas.UpdateFlowRequest, schemas.UpdateFlowResponse), output: &UpdateFlowOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

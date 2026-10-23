@@ -86,6 +86,18 @@ func TestCheckSnapshot_AssumeDecoratedRoleWithSAML(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_AttachRLSPolicy(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.AttachRLSPolicy(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "AttachRLSPolicy")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_BatchGrantPermissions(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.BatchGrantPermissions(context.Background(), nil, func(o *Options) {
@@ -194,6 +206,18 @@ func TestCheckSnapshot_CreateLFTagExpression(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_CreateRLSPolicy(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateRLSPolicy(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateRLSPolicy")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DeleteDataCellsFilter(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteDataCellsFilter(context.Background(), nil, func(o *Options) {
@@ -266,6 +290,18 @@ func TestCheckSnapshot_DeleteObjectsOnCancel(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DeleteRLSPolicy(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteRLSPolicy(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteRLSPolicy")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DeregisterResource(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeregisterResource(context.Background(), nil, func(o *Options) {
@@ -307,6 +343,18 @@ func TestCheckSnapshot_DescribeTransaction(t *testing.T) {
 	_, err := svc.DescribeTransaction(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DescribeTransaction")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DetachRLSPolicy(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DetachRLSPolicy(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DetachRLSPolicy")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -427,6 +475,18 @@ func TestCheckSnapshot_GetResourceLFTags(t *testing.T) {
 	_, err := svc.GetResourceLFTags(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "GetResourceLFTags")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetRLSPolicy(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetRLSPolicy(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetRLSPolicy")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -583,6 +643,30 @@ func TestCheckSnapshot_ListResources(t *testing.T) {
 	_, err := svc.ListResources(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "ListResources")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListRLSPolicies(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListRLSPolicies(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListRLSPolicies")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListRLSPolicyAttachments(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListRLSPolicyAttachments(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListRLSPolicyAttachments")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -770,6 +854,18 @@ func TestCheckSnapshot_UpdateResource(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_UpdateRLSPolicy(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateRLSPolicy(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateRLSPolicy")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_UpdateTableObjects(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.UpdateTableObjects(context.Background(), nil, func(o *Options) {
@@ -810,6 +906,18 @@ func TestUpdateSnapshot_AssumeDecoratedRoleWithSAML(t *testing.T) {
 	_, err := svc.AssumeDecoratedRoleWithSAML(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "AssumeDecoratedRoleWithSAML")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_AttachRLSPolicy(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.AttachRLSPolicy(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "AttachRLSPolicy")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -925,6 +1033,18 @@ func TestUpdateSnapshot_CreateLFTagExpression(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_CreateRLSPolicy(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateRLSPolicy(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateRLSPolicy")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_DeleteDataCellsFilter(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteDataCellsFilter(context.Background(), nil, func(o *Options) {
@@ -997,6 +1117,18 @@ func TestUpdateSnapshot_DeleteObjectsOnCancel(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_DeleteRLSPolicy(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteRLSPolicy(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteRLSPolicy")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_DeregisterResource(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeregisterResource(context.Background(), nil, func(o *Options) {
@@ -1038,6 +1170,18 @@ func TestUpdateSnapshot_DescribeTransaction(t *testing.T) {
 	_, err := svc.DescribeTransaction(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DescribeTransaction")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DetachRLSPolicy(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DetachRLSPolicy(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DetachRLSPolicy")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1158,6 +1302,18 @@ func TestUpdateSnapshot_GetResourceLFTags(t *testing.T) {
 	_, err := svc.GetResourceLFTags(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "GetResourceLFTags")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetRLSPolicy(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetRLSPolicy(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetRLSPolicy")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1314,6 +1470,30 @@ func TestUpdateSnapshot_ListResources(t *testing.T) {
 	_, err := svc.ListResources(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ListResources")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListRLSPolicies(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListRLSPolicies(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListRLSPolicies")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListRLSPolicyAttachments(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListRLSPolicyAttachments(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListRLSPolicyAttachments")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1494,6 +1674,18 @@ func TestUpdateSnapshot_UpdateResource(t *testing.T) {
 	_, err := svc.UpdateResource(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "UpdateResource")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateRLSPolicy(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateRLSPolicy(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateRLSPolicy")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

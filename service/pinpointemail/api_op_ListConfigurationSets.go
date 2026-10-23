@@ -5,6 +5,8 @@ package pinpointemail
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/pinpointemail/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -48,6 +50,21 @@ type ListConfigurationSetsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListConfigurationSetsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListConfigurationSetsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListConfigurationSetsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListConfigurationSetsRequest_NextToken, *v.NextToken)
+	}
+	if v.PageSize != nil {
+		s.WriteInt32(schemas.ListConfigurationSetsRequest_PageSize, *v.PageSize)
+	}
+}
+
 // A list of configuration sets in your Amazon Pinpoint account in the current AWS
 // Region.
 type ListConfigurationSetsOutput struct {
@@ -67,13 +84,35 @@ type ListConfigurationSetsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListConfigurationSetsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListConfigurationSetsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListConfigurationSetsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeConfigurationSetNameList(s, schemas.ListConfigurationSetsResponse_ConfigurationSets, v.ConfigurationSets)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListConfigurationSetsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListConfigurationSetsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListConfigurationSetsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListConfigurationSetsResponse_ConfigurationSets:
+			return deserializeConfigurationSetNameList(d, schemas.ListConfigurationSetsResponse_ConfigurationSets, &v.ConfigurationSets)
+		case schemas.ListConfigurationSetsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListConfigurationSetsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListConfigurationSetsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListConfigurationSets{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListConfigurationSets, schemas.ListConfigurationSetsRequest, schemas.ListConfigurationSetsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListConfigurationSets{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListConfigurationSets, schemas.ListConfigurationSetsRequest, schemas.ListConfigurationSetsResponse), output: &ListConfigurationSetsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

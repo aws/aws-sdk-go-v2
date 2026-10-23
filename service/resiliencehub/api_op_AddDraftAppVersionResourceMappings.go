@@ -4,7 +4,9 @@ package resiliencehub
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/resiliencehub/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/resiliencehub/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -54,6 +56,31 @@ type AddDraftAppVersionResourceMappingsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AddDraftAppVersionResourceMappingsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AddDraftAppVersionResourceMappingsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AddDraftAppVersionResourceMappingsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AppArn != nil {
+		s.WriteString(schemas.AddDraftAppVersionResourceMappingsRequest_appArn, *v.AppArn)
+	}
+	serializeResourceMappingList(s, schemas.AddDraftAppVersionResourceMappingsRequest_resourceMappings, v.ResourceMappings)
+}
+func (v *AddDraftAppVersionResourceMappingsInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AddDraftAppVersionResourceMappingsRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AddDraftAppVersionResourceMappingsRequest_appArn:
+			v.AppArn = new(string)
+			return d.ReadString(schemas.AddDraftAppVersionResourceMappingsRequest_appArn, v.AppArn)
+		case schemas.AddDraftAppVersionResourceMappingsRequest_resourceMappings:
+			return deserializeResourceMappingList(d, schemas.AddDraftAppVersionResourceMappingsRequest_resourceMappings, &v.ResourceMappings)
+		}
+		return nil
+	})
+}
+
 type AddDraftAppVersionResourceMappingsOutput struct {
 
 	// Amazon Resource Name (ARN) of the Resilience Hub application. The format for
@@ -84,13 +111,41 @@ type AddDraftAppVersionResourceMappingsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AddDraftAppVersionResourceMappingsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AddDraftAppVersionResourceMappingsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AddDraftAppVersionResourceMappingsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AppArn != nil {
+		s.WriteString(schemas.AddDraftAppVersionResourceMappingsResponse_appArn, *v.AppArn)
+	}
+	if v.AppVersion != nil {
+		s.WriteString(schemas.AddDraftAppVersionResourceMappingsResponse_appVersion, *v.AppVersion)
+	}
+	serializeResourceMappingList(s, schemas.AddDraftAppVersionResourceMappingsResponse_resourceMappings, v.ResourceMappings)
+}
+func (v *AddDraftAppVersionResourceMappingsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AddDraftAppVersionResourceMappingsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AddDraftAppVersionResourceMappingsResponse_appArn:
+			v.AppArn = new(string)
+			return d.ReadString(schemas.AddDraftAppVersionResourceMappingsResponse_appArn, v.AppArn)
+		case schemas.AddDraftAppVersionResourceMappingsResponse_appVersion:
+			v.AppVersion = new(string)
+			return d.ReadString(schemas.AddDraftAppVersionResourceMappingsResponse_appVersion, v.AppVersion)
+		case schemas.AddDraftAppVersionResourceMappingsResponse_resourceMappings:
+			return deserializeResourceMappingList(d, schemas.AddDraftAppVersionResourceMappingsResponse_resourceMappings, &v.ResourceMappings)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationAddDraftAppVersionResourceMappingsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpAddDraftAppVersionResourceMappings{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AddDraftAppVersionResourceMappings, schemas.AddDraftAppVersionResourceMappingsRequest, schemas.AddDraftAppVersionResourceMappingsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpAddDraftAppVersionResourceMappings{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AddDraftAppVersionResourceMappings, schemas.AddDraftAppVersionResourceMappingsRequest, schemas.AddDraftAppVersionResourceMappingsResponse), output: &AddDraftAppVersionResourceMappingsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

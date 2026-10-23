@@ -4,6 +4,7 @@ package types
 
 import (
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/chatbot/schemas"
 	smithy "github.com/aws/smithy-go"
 )
 
@@ -32,6 +33,27 @@ func (e *ConflictException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ConflictException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *ConflictException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ConflictException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ConflictException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.ConflictException_message, *v.Message)
+	}
+}
+func (v *ConflictException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ConflictException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ConflictException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ConflictException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // We can’t process your request right now because of a server issue. Try again
 // later.
@@ -60,6 +82,27 @@ func (e *CreateChimeWebhookConfigurationException) ErrorCode() string {
 }
 func (e *CreateChimeWebhookConfigurationException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultServer
+}
+func (v *CreateChimeWebhookConfigurationException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateChimeWebhookConfigurationException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateChimeWebhookConfigurationException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.CreateChimeWebhookConfigurationException_Message, *v.Message)
+	}
+}
+func (v *CreateChimeWebhookConfigurationException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateChimeWebhookConfigurationException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateChimeWebhookConfigurationException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.CreateChimeWebhookConfigurationException_Message, v.Message)
+		}
+		return nil
+	})
 }
 
 // We can’t process your request right now because of a server issue. Try again
@@ -90,6 +133,27 @@ func (e *CreateSlackChannelConfigurationException) ErrorCode() string {
 func (e *CreateSlackChannelConfigurationException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultServer
 }
+func (v *CreateSlackChannelConfigurationException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateSlackChannelConfigurationException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateSlackChannelConfigurationException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.CreateSlackChannelConfigurationException_Message, *v.Message)
+	}
+}
+func (v *CreateSlackChannelConfigurationException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateSlackChannelConfigurationException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateSlackChannelConfigurationException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.CreateSlackChannelConfigurationException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // We can’t process your request right now because of a server issue. Try again
 // later.
@@ -118,6 +182,27 @@ func (e *CreateTeamsChannelConfigurationException) ErrorCode() string {
 }
 func (e *CreateTeamsChannelConfigurationException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultServer
+}
+func (v *CreateTeamsChannelConfigurationException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateTeamsChannelConfigurationException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateTeamsChannelConfigurationException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.CreateTeamsChannelConfigurationException_Message, *v.Message)
+	}
+}
+func (v *CreateTeamsChannelConfigurationException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateTeamsChannelConfigurationException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateTeamsChannelConfigurationException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.CreateTeamsChannelConfigurationException_Message, v.Message)
+		}
+		return nil
+	})
 }
 
 // We can’t process your request right now because of a server issue. Try again
@@ -148,6 +233,27 @@ func (e *DeleteChimeWebhookConfigurationException) ErrorCode() string {
 func (e *DeleteChimeWebhookConfigurationException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultServer
 }
+func (v *DeleteChimeWebhookConfigurationException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteChimeWebhookConfigurationException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteChimeWebhookConfigurationException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.DeleteChimeWebhookConfigurationException_Message, *v.Message)
+	}
+}
+func (v *DeleteChimeWebhookConfigurationException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteChimeWebhookConfigurationException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteChimeWebhookConfigurationException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.DeleteChimeWebhookConfigurationException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // We can’t process your request right now because of a server issue. Try again
 // later.
@@ -176,6 +282,27 @@ func (e *DeleteMicrosoftTeamsUserIdentityException) ErrorCode() string {
 }
 func (e *DeleteMicrosoftTeamsUserIdentityException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultServer
+}
+func (v *DeleteMicrosoftTeamsUserIdentityException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteMicrosoftTeamsUserIdentityException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteMicrosoftTeamsUserIdentityException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.DeleteMicrosoftTeamsUserIdentityException_Message, *v.Message)
+	}
+}
+func (v *DeleteMicrosoftTeamsUserIdentityException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteMicrosoftTeamsUserIdentityException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteMicrosoftTeamsUserIdentityException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.DeleteMicrosoftTeamsUserIdentityException_Message, v.Message)
+		}
+		return nil
+	})
 }
 
 // We can’t process your request right now because of a server issue. Try again
@@ -206,6 +333,27 @@ func (e *DeleteSlackChannelConfigurationException) ErrorCode() string {
 func (e *DeleteSlackChannelConfigurationException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultServer
 }
+func (v *DeleteSlackChannelConfigurationException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteSlackChannelConfigurationException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteSlackChannelConfigurationException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.DeleteSlackChannelConfigurationException_Message, *v.Message)
+	}
+}
+func (v *DeleteSlackChannelConfigurationException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteSlackChannelConfigurationException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteSlackChannelConfigurationException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.DeleteSlackChannelConfigurationException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // We can’t process your request right now because of a server issue. Try again
 // later.
@@ -233,6 +381,27 @@ func (e *DeleteSlackUserIdentityException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *DeleteSlackUserIdentityException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
+func (v *DeleteSlackUserIdentityException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteSlackUserIdentityException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteSlackUserIdentityException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.DeleteSlackUserIdentityException_Message, *v.Message)
+	}
+}
+func (v *DeleteSlackUserIdentityException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteSlackUserIdentityException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteSlackUserIdentityException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.DeleteSlackUserIdentityException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // There was an issue deleting your Slack workspace.
 type DeleteSlackWorkspaceAuthorizationFault struct {
@@ -260,6 +429,27 @@ func (e *DeleteSlackWorkspaceAuthorizationFault) ErrorCode() string {
 }
 func (e *DeleteSlackWorkspaceAuthorizationFault) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultServer
+}
+func (v *DeleteSlackWorkspaceAuthorizationFault) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteSlackWorkspaceAuthorizationFault)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteSlackWorkspaceAuthorizationFault) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.DeleteSlackWorkspaceAuthorizationFault_Message, *v.Message)
+	}
+}
+func (v *DeleteSlackWorkspaceAuthorizationFault) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteSlackWorkspaceAuthorizationFault, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteSlackWorkspaceAuthorizationFault_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.DeleteSlackWorkspaceAuthorizationFault_Message, v.Message)
+		}
+		return nil
+	})
 }
 
 // We can’t process your request right now because of a server issue. Try again
@@ -290,6 +480,27 @@ func (e *DeleteTeamsChannelConfigurationException) ErrorCode() string {
 func (e *DeleteTeamsChannelConfigurationException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultServer
 }
+func (v *DeleteTeamsChannelConfigurationException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteTeamsChannelConfigurationException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteTeamsChannelConfigurationException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.DeleteTeamsChannelConfigurationException_Message, *v.Message)
+	}
+}
+func (v *DeleteTeamsChannelConfigurationException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteTeamsChannelConfigurationException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteTeamsChannelConfigurationException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.DeleteTeamsChannelConfigurationException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // We can’t process your request right now because of a server issue. Try again
 // later.
@@ -318,6 +529,27 @@ func (e *DeleteTeamsConfiguredTeamException) ErrorCode() string {
 }
 func (e *DeleteTeamsConfiguredTeamException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultServer
+}
+func (v *DeleteTeamsConfiguredTeamException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteTeamsConfiguredTeamException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteTeamsConfiguredTeamException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.DeleteTeamsConfiguredTeamException_Message, *v.Message)
+	}
+}
+func (v *DeleteTeamsConfiguredTeamException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteTeamsConfiguredTeamException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteTeamsConfiguredTeamException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.DeleteTeamsConfiguredTeamException_Message, v.Message)
+		}
+		return nil
+	})
 }
 
 // We can’t process your request right now because of a server issue. Try again
@@ -348,6 +580,27 @@ func (e *DescribeChimeWebhookConfigurationsException) ErrorCode() string {
 func (e *DescribeChimeWebhookConfigurationsException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultServer
 }
+func (v *DescribeChimeWebhookConfigurationsException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeChimeWebhookConfigurationsException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeChimeWebhookConfigurationsException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.DescribeChimeWebhookConfigurationsException_Message, *v.Message)
+	}
+}
+func (v *DescribeChimeWebhookConfigurationsException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeChimeWebhookConfigurationsException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeChimeWebhookConfigurationsException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.DescribeChimeWebhookConfigurationsException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // We can’t process your request right now because of a server issue. Try again
 // later.
@@ -376,6 +629,27 @@ func (e *DescribeSlackChannelConfigurationsException) ErrorCode() string {
 }
 func (e *DescribeSlackChannelConfigurationsException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultServer
+}
+func (v *DescribeSlackChannelConfigurationsException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeSlackChannelConfigurationsException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeSlackChannelConfigurationsException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.DescribeSlackChannelConfigurationsException_Message, *v.Message)
+	}
+}
+func (v *DescribeSlackChannelConfigurationsException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeSlackChannelConfigurationsException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeSlackChannelConfigurationsException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.DescribeSlackChannelConfigurationsException_Message, v.Message)
+		}
+		return nil
+	})
 }
 
 // We can’t process your request right now because of a server issue. Try again
@@ -406,6 +680,27 @@ func (e *DescribeSlackUserIdentitiesException) ErrorCode() string {
 func (e *DescribeSlackUserIdentitiesException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultServer
 }
+func (v *DescribeSlackUserIdentitiesException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeSlackUserIdentitiesException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeSlackUserIdentitiesException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.DescribeSlackUserIdentitiesException_Message, *v.Message)
+	}
+}
+func (v *DescribeSlackUserIdentitiesException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeSlackUserIdentitiesException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeSlackUserIdentitiesException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.DescribeSlackUserIdentitiesException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // We can’t process your request right now because of a server issue. Try again
 // later.
@@ -433,6 +728,27 @@ func (e *DescribeSlackWorkspacesException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *DescribeSlackWorkspacesException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
+func (v *DescribeSlackWorkspacesException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeSlackWorkspacesException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeSlackWorkspacesException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.DescribeSlackWorkspacesException_Message, *v.Message)
+	}
+}
+func (v *DescribeSlackWorkspacesException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeSlackWorkspacesException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeSlackWorkspacesException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.DescribeSlackWorkspacesException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // We can’t process your request right now because of a server issue. Try again
 // later.
@@ -460,6 +776,27 @@ func (e *GetAccountPreferencesException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *GetAccountPreferencesException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
+func (v *GetAccountPreferencesException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetAccountPreferencesException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetAccountPreferencesException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.GetAccountPreferencesException_Message, *v.Message)
+	}
+}
+func (v *GetAccountPreferencesException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetAccountPreferencesException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetAccountPreferencesException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.GetAccountPreferencesException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // We can’t process your request right now because of a server issue. Try again
 // later.
@@ -489,6 +826,27 @@ func (e *GetTeamsChannelConfigurationException) ErrorCode() string {
 func (e *GetTeamsChannelConfigurationException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultServer
 }
+func (v *GetTeamsChannelConfigurationException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetTeamsChannelConfigurationException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetTeamsChannelConfigurationException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.GetTeamsChannelConfigurationException_Message, *v.Message)
+	}
+}
+func (v *GetTeamsChannelConfigurationException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetTeamsChannelConfigurationException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetTeamsChannelConfigurationException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.GetTeamsChannelConfigurationException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // Unexpected error during processing of request.
 type InternalServiceError struct {
@@ -515,6 +873,27 @@ func (e *InternalServiceError) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InternalServiceError) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
+func (v *InternalServiceError) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InternalServiceError)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InternalServiceError) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.InternalServiceError_Message, *v.Message)
+	}
+}
+func (v *InternalServiceError) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InternalServiceError, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InternalServiceError_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.InternalServiceError_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // Your request input doesn't meet the constraints required by AWS Chatbot.
 type InvalidParameterException struct {
@@ -541,6 +920,27 @@ func (e *InvalidParameterException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InvalidParameterException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *InvalidParameterException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InvalidParameterException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InvalidParameterException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.InvalidParameterException_message, *v.Message)
+	}
+}
+func (v *InvalidParameterException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InvalidParameterException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InvalidParameterException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.InvalidParameterException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // Your request input doesn't meet the constraints required by AWS Chatbot.
 type InvalidRequestException struct {
@@ -567,6 +967,27 @@ func (e *InvalidRequestException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InvalidRequestException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *InvalidRequestException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InvalidRequestException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InvalidRequestException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.InvalidRequestException_message, *v.Message)
+	}
+}
+func (v *InvalidRequestException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InvalidRequestException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InvalidRequestException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.InvalidRequestException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // You have exceeded a service limit for AWS Chatbot.
 type LimitExceededException struct {
@@ -593,6 +1014,27 @@ func (e *LimitExceededException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *LimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *LimitExceededException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LimitExceededException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *LimitExceededException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.LimitExceededException_message, *v.Message)
+	}
+}
+func (v *LimitExceededException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LimitExceededException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LimitExceededException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.LimitExceededException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // We can’t process your request right now because of a server issue. Try again
 // later.
@@ -621,6 +1063,27 @@ func (e *ListMicrosoftTeamsConfiguredTeamsException) ErrorCode() string {
 }
 func (e *ListMicrosoftTeamsConfiguredTeamsException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultServer
+}
+func (v *ListMicrosoftTeamsConfiguredTeamsException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListMicrosoftTeamsConfiguredTeamsException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListMicrosoftTeamsConfiguredTeamsException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.ListMicrosoftTeamsConfiguredTeamsException_Message, *v.Message)
+	}
+}
+func (v *ListMicrosoftTeamsConfiguredTeamsException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListMicrosoftTeamsConfiguredTeamsException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListMicrosoftTeamsConfiguredTeamsException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ListMicrosoftTeamsConfiguredTeamsException_Message, v.Message)
+		}
+		return nil
+	})
 }
 
 // We can’t process your request right now because of a server issue. Try again
@@ -651,6 +1114,27 @@ func (e *ListMicrosoftTeamsUserIdentitiesException) ErrorCode() string {
 func (e *ListMicrosoftTeamsUserIdentitiesException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultServer
 }
+func (v *ListMicrosoftTeamsUserIdentitiesException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListMicrosoftTeamsUserIdentitiesException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListMicrosoftTeamsUserIdentitiesException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.ListMicrosoftTeamsUserIdentitiesException_Message, *v.Message)
+	}
+}
+func (v *ListMicrosoftTeamsUserIdentitiesException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListMicrosoftTeamsUserIdentitiesException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListMicrosoftTeamsUserIdentitiesException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ListMicrosoftTeamsUserIdentitiesException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // We can’t process your request right now because of a server issue. Try again
 // later.
@@ -680,6 +1164,27 @@ func (e *ListTeamsChannelConfigurationsException) ErrorCode() string {
 func (e *ListTeamsChannelConfigurationsException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultServer
 }
+func (v *ListTeamsChannelConfigurationsException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListTeamsChannelConfigurationsException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListTeamsChannelConfigurationsException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.ListTeamsChannelConfigurationsException_Message, *v.Message)
+	}
+}
+func (v *ListTeamsChannelConfigurationsException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListTeamsChannelConfigurationsException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListTeamsChannelConfigurationsException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ListTeamsChannelConfigurationsException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // We were unable to find the resource for your request
 type ResourceNotFoundException struct {
@@ -706,6 +1211,27 @@ func (e *ResourceNotFoundException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *ResourceNotFoundException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ResourceNotFoundException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ResourceNotFoundException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.ResourceNotFoundException_Message, *v.Message)
+	}
+}
+func (v *ResourceNotFoundException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ResourceNotFoundException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ResourceNotFoundException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ResourceNotFoundException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // We can’t process your request right now because of a server issue. Try again
 // later.
@@ -733,6 +1259,27 @@ func (e *ServiceUnavailableException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ServiceUnavailableException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *ServiceUnavailableException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ServiceUnavailableException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ServiceUnavailableException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.ServiceUnavailableException_message, *v.Message)
+	}
+}
+func (v *ServiceUnavailableException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ServiceUnavailableException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ServiceUnavailableException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ServiceUnavailableException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The supplied list of tags contains too many tags.
 type TooManyTagsException struct {
@@ -759,6 +1306,27 @@ func (e *TooManyTagsException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *TooManyTagsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *TooManyTagsException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TooManyTagsException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TooManyTagsException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.TooManyTagsException_message, *v.Message)
+	}
+}
+func (v *TooManyTagsException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TooManyTagsException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TooManyTagsException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.TooManyTagsException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The request was rejected because it doesn't have valid credentials for the
 // target resource.
@@ -786,6 +1354,27 @@ func (e *UnauthorizedException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *UnauthorizedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *UnauthorizedException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UnauthorizedException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UnauthorizedException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.UnauthorizedException_message, *v.Message)
+	}
+}
+func (v *UnauthorizedException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UnauthorizedException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UnauthorizedException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.UnauthorizedException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // We can’t process your request right now because of a server issue. Try again
 // later.
@@ -813,6 +1402,27 @@ func (e *UpdateAccountPreferencesException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *UpdateAccountPreferencesException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
+func (v *UpdateAccountPreferencesException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateAccountPreferencesException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateAccountPreferencesException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.UpdateAccountPreferencesException_Message, *v.Message)
+	}
+}
+func (v *UpdateAccountPreferencesException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateAccountPreferencesException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateAccountPreferencesException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.UpdateAccountPreferencesException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // We can’t process your request right now because of a server issue. Try again
 // later.
@@ -841,6 +1451,27 @@ func (e *UpdateChimeWebhookConfigurationException) ErrorCode() string {
 }
 func (e *UpdateChimeWebhookConfigurationException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultServer
+}
+func (v *UpdateChimeWebhookConfigurationException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateChimeWebhookConfigurationException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateChimeWebhookConfigurationException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.UpdateChimeWebhookConfigurationException_Message, *v.Message)
+	}
+}
+func (v *UpdateChimeWebhookConfigurationException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateChimeWebhookConfigurationException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateChimeWebhookConfigurationException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.UpdateChimeWebhookConfigurationException_Message, v.Message)
+		}
+		return nil
+	})
 }
 
 // We can’t process your request right now because of a server issue. Try again
@@ -871,6 +1502,27 @@ func (e *UpdateSlackChannelConfigurationException) ErrorCode() string {
 func (e *UpdateSlackChannelConfigurationException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultServer
 }
+func (v *UpdateSlackChannelConfigurationException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateSlackChannelConfigurationException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateSlackChannelConfigurationException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.UpdateSlackChannelConfigurationException_Message, *v.Message)
+	}
+}
+func (v *UpdateSlackChannelConfigurationException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateSlackChannelConfigurationException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateSlackChannelConfigurationException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.UpdateSlackChannelConfigurationException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // We can’t process your request right now because of a server issue. Try again
 // later.
@@ -899,4 +1551,25 @@ func (e *UpdateTeamsChannelConfigurationException) ErrorCode() string {
 }
 func (e *UpdateTeamsChannelConfigurationException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultServer
+}
+func (v *UpdateTeamsChannelConfigurationException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateTeamsChannelConfigurationException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateTeamsChannelConfigurationException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.UpdateTeamsChannelConfigurationException_Message, *v.Message)
+	}
+}
+func (v *UpdateTeamsChannelConfigurationException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateTeamsChannelConfigurationException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateTeamsChannelConfigurationException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.UpdateTeamsChannelConfigurationException_Message, v.Message)
+		}
+		return nil
+	})
 }

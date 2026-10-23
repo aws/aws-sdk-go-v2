@@ -4,7 +4,9 @@ package costexplorer
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/costexplorer/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/costexplorer/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -40,6 +42,21 @@ type ProvideAnomalyFeedbackInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ProvideAnomalyFeedbackInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ProvideAnomalyFeedbackRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ProvideAnomalyFeedbackInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AnomalyId != nil {
+		s.WriteString(schemas.ProvideAnomalyFeedbackRequest_AnomalyId, *v.AnomalyId)
+	}
+	if v.Feedback != "" {
+		s.WriteString(schemas.ProvideAnomalyFeedbackRequest_Feedback, string(v.Feedback))
+	}
+}
+
 type ProvideAnomalyFeedbackOutput struct {
 
 	// The ID of the modified cost anomaly.
@@ -53,13 +70,32 @@ type ProvideAnomalyFeedbackOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ProvideAnomalyFeedbackOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ProvideAnomalyFeedbackResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ProvideAnomalyFeedbackOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AnomalyId != nil {
+		s.WriteString(schemas.ProvideAnomalyFeedbackResponse_AnomalyId, *v.AnomalyId)
+	}
+}
+func (v *ProvideAnomalyFeedbackOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ProvideAnomalyFeedbackResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ProvideAnomalyFeedbackResponse_AnomalyId:
+			v.AnomalyId = new(string)
+			return d.ReadString(schemas.ProvideAnomalyFeedbackResponse_AnomalyId, v.AnomalyId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationProvideAnomalyFeedbackMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpProvideAnomalyFeedback{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ProvideAnomalyFeedback, schemas.ProvideAnomalyFeedbackRequest, schemas.ProvideAnomalyFeedbackResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpProvideAnomalyFeedback{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ProvideAnomalyFeedback, schemas.ProvideAnomalyFeedbackRequest, schemas.ProvideAnomalyFeedbackResponse), output: &ProvideAnomalyFeedbackOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

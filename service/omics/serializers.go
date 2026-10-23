@@ -10787,6 +10787,11 @@ func awsRestjson1_serializeDocumentRegistryMapping(v *types.RegistryMapping, val
 	object := value.Object()
 	defer object.Close()
 
+	if v.CredentialArn != nil {
+		ok := object.Key("credentialArn")
+		ok.String(*v.CredentialArn)
+	}
+
 	if v.EcrAccountId != nil {
 		ok := object.Key("ecrAccountId")
 		ok.String(*v.EcrAccountId)
@@ -11341,6 +11346,11 @@ func awsRestjson1_serializeDocumentVpcConfig(v *types.VpcConfig, value smithyjso
 		if err := awsRestjson1_serializeDocumentSubnetIds(v.SubnetIds, ok); err != nil {
 			return err
 		}
+	}
+
+	if v.VpcOwnerAccountId != nil {
+		ok := object.Key("vpcOwnerAccountId")
+		ok.String(*v.VpcOwnerAccountId)
 	}
 
 	return nil

@@ -5,7 +5,9 @@ package guardduty
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/guardduty/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/guardduty/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -50,6 +52,24 @@ type ListPublishingDestinationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListPublishingDestinationsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListPublishingDestinationsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListPublishingDestinationsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DetectorId != nil {
+		s.WriteString(schemas.ListPublishingDestinationsRequest_DetectorId, *v.DetectorId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListPublishingDestinationsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListPublishingDestinationsRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListPublishingDestinationsOutput struct {
 
 	// A Destinations object that includes information about each publishing
@@ -70,13 +90,35 @@ type ListPublishingDestinationsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListPublishingDestinationsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListPublishingDestinationsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListPublishingDestinationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDestinations(s, schemas.ListPublishingDestinationsResponse_Destinations, v.Destinations)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListPublishingDestinationsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListPublishingDestinationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListPublishingDestinationsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListPublishingDestinationsResponse_Destinations:
+			return deserializeDestinations(d, schemas.ListPublishingDestinationsResponse_Destinations, &v.Destinations)
+		case schemas.ListPublishingDestinationsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListPublishingDestinationsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListPublishingDestinationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListPublishingDestinations{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListPublishingDestinations, schemas.ListPublishingDestinationsRequest, schemas.ListPublishingDestinationsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListPublishingDestinations{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListPublishingDestinations, schemas.ListPublishingDestinationsRequest, schemas.ListPublishingDestinationsResponse), output: &ListPublishingDestinationsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

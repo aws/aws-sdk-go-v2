@@ -110,6 +110,18 @@ func TestCheckSnapshot_ListNetworkConnectors(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_ListNetworkConnectorVersions(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListNetworkConnectorVersions(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListNetworkConnectorVersions")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_UpdateNetworkConnector(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.UpdateNetworkConnector(context.Background(), nil, func(o *Options) {
@@ -162,6 +174,18 @@ func TestUpdateSnapshot_ListNetworkConnectors(t *testing.T) {
 	_, err := svc.ListNetworkConnectors(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ListNetworkConnectors")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListNetworkConnectorVersions(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListNetworkConnectorVersions(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListNetworkConnectorVersions")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

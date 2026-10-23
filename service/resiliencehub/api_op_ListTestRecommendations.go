@@ -5,7 +5,9 @@ package resiliencehub
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/resiliencehub/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/resiliencehub/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -47,6 +49,40 @@ type ListTestRecommendationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListTestRecommendationsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListTestRecommendationsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListTestRecommendationsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AssessmentArn != nil {
+		s.WriteString(schemas.ListTestRecommendationsRequest_assessmentArn, *v.AssessmentArn)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListTestRecommendationsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListTestRecommendationsRequest_nextToken, *v.NextToken)
+	}
+}
+func (v *ListTestRecommendationsInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListTestRecommendationsRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListTestRecommendationsRequest_assessmentArn:
+			v.AssessmentArn = new(string)
+			return d.ReadString(schemas.ListTestRecommendationsRequest_assessmentArn, v.AssessmentArn)
+		case schemas.ListTestRecommendationsRequest_maxResults:
+			v.MaxResults = new(int32)
+			return d.ReadInt32(schemas.ListTestRecommendationsRequest_maxResults, v.MaxResults)
+		case schemas.ListTestRecommendationsRequest_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListTestRecommendationsRequest_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
+
 type ListTestRecommendationsOutput struct {
 
 	// The test recommendations for the Resilience Hub application.
@@ -63,13 +99,35 @@ type ListTestRecommendationsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListTestRecommendationsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListTestRecommendationsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListTestRecommendationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListTestRecommendationsResponse_nextToken, *v.NextToken)
+	}
+	serializeTestRecommendationList(s, schemas.ListTestRecommendationsResponse_testRecommendations, v.TestRecommendations)
+}
+func (v *ListTestRecommendationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListTestRecommendationsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListTestRecommendationsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListTestRecommendationsResponse_nextToken, v.NextToken)
+		case schemas.ListTestRecommendationsResponse_testRecommendations:
+			return deserializeTestRecommendationList(d, schemas.ListTestRecommendationsResponse_testRecommendations, &v.TestRecommendations)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListTestRecommendationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListTestRecommendations{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListTestRecommendations, schemas.ListTestRecommendationsRequest, schemas.ListTestRecommendationsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListTestRecommendations{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListTestRecommendations, schemas.ListTestRecommendationsRequest, schemas.ListTestRecommendationsResponse), output: &ListTestRecommendationsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

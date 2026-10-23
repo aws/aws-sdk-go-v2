@@ -4,7 +4,9 @@ package databasemigrationservice
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/databasemigrationservice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/databasemigrationservice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -46,6 +48,21 @@ type CancelMetadataModelConversionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CancelMetadataModelConversionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CancelMetadataModelConversionMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CancelMetadataModelConversionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MigrationProjectIdentifier != nil {
+		s.WriteString(schemas.CancelMetadataModelConversionMessage_MigrationProjectIdentifier, *v.MigrationProjectIdentifier)
+	}
+	if v.RequestIdentifier != nil {
+		s.WriteString(schemas.CancelMetadataModelConversionMessage_RequestIdentifier, *v.RequestIdentifier)
+	}
+}
+
 type CancelMetadataModelConversionOutput struct {
 
 	// The metadata model conversion request.
@@ -59,13 +76,34 @@ type CancelMetadataModelConversionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CancelMetadataModelConversionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CancelMetadataModelConversionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CancelMetadataModelConversionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Request != nil {
+		s.WriteStruct(schemas.CancelMetadataModelConversionResponse_Request)
+		v.Request.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CancelMetadataModelConversionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CancelMetadataModelConversionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CancelMetadataModelConversionResponse_Request:
+			v.Request = &types.SchemaConversionRequest{}
+			return v.Request.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCancelMetadataModelConversionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCancelMetadataModelConversion{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CancelMetadataModelConversion, schemas.CancelMetadataModelConversionMessage, schemas.CancelMetadataModelConversionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCancelMetadataModelConversion{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CancelMetadataModelConversion, schemas.CancelMetadataModelConversionMessage, schemas.CancelMetadataModelConversionResponse), output: &CancelMetadataModelConversionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

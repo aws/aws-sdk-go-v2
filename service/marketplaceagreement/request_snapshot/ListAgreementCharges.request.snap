@@ -1,6 +1,7 @@
-POST /
+POST /service/AWSMPCommerceService_v20200301/operation/ListAgreementCharges
 
-Content-Type: application/x-amz-json-1.0
-X-Amz-Target: AWSMPCommerceService_v20200301.ListAgreementCharges
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"agreementId":"__AgreementId__","agreementType":"__AgreementType__","catalog":"__Catalog__","maxResults":1,"nextToken":"__NextToken__"}
+¿kagreementIdo__AgreementId__magreementTypeq__AgreementType__gcatalogk__Catalog__jmaxResultsinextTokenm__NextToken__ÿ

@@ -5,7 +5,9 @@ package bedrockagentcorecontrol
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -61,6 +63,33 @@ type ListRegistryRecordsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListRegistryRecordsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListRegistryRecordsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListRegistryRecordsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DescriptorType != "" {
+		s.WriteString(schemas.ListRegistryRecordsRequest_descriptorType, string(v.DescriptorType))
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListRegistryRecordsRequest_maxResults, *v.MaxResults)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.ListRegistryRecordsRequest_name, *v.Name)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListRegistryRecordsRequest_nextToken, *v.NextToken)
+	}
+	if v.RegistryId != nil {
+		s.WriteString(schemas.ListRegistryRecordsRequest_registryId, *v.RegistryId)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.ListRegistryRecordsRequest_status, string(v.Status))
+	}
+}
+
 type ListRegistryRecordsOutput struct {
 
 	// The list of registry record summaries. For details about the fields in each
@@ -80,13 +109,35 @@ type ListRegistryRecordsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListRegistryRecordsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListRegistryRecordsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListRegistryRecordsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListRegistryRecordsResponse_nextToken, *v.NextToken)
+	}
+	serializeRegistryRecordSummaryList(s, schemas.ListRegistryRecordsResponse_registryRecords, v.RegistryRecords)
+}
+func (v *ListRegistryRecordsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListRegistryRecordsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListRegistryRecordsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListRegistryRecordsResponse_nextToken, v.NextToken)
+		case schemas.ListRegistryRecordsResponse_registryRecords:
+			return deserializeRegistryRecordSummaryList(d, schemas.ListRegistryRecordsResponse_registryRecords, &v.RegistryRecords)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListRegistryRecordsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListRegistryRecords{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListRegistryRecords, schemas.ListRegistryRecordsRequest, schemas.ListRegistryRecordsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListRegistryRecords{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListRegistryRecords, schemas.ListRegistryRecordsRequest, schemas.ListRegistryRecordsResponse), output: &ListRegistryRecordsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

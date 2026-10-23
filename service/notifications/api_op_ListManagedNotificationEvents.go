@@ -34,6 +34,11 @@ type ListManagedNotificationEventsInput struct {
 	// Latest time of events to return from this call.
 	EndTime *time.Time
 
+	// Specifies whether to include sensitive events in the result. By default, only
+	// non-sensitive events are returned. The notifications:AccessSensitiveEvents
+	// permission controls access to sensitive events.
+	IncludeSensitiveEvents *bool
+
 	// The locale code of the language used for the retrieved NotificationEvent. The
 	// default locale is English (en_US).
 	Locale types.LocaleCode
@@ -71,6 +76,9 @@ func (v *ListManagedNotificationEventsInput) Serialize(s smithy.ShapeSerializer)
 func (v *ListManagedNotificationEventsInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.EndTime != nil {
 		s.WriteTime(schemas.ListManagedNotificationEventsRequest_endTime, *v.EndTime)
+	}
+	if v.IncludeSensitiveEvents != nil {
+		s.WriteBool(schemas.ListManagedNotificationEventsRequest_includeSensitiveEvents, *v.IncludeSensitiveEvents)
 	}
 	if v.Locale != "" {
 		s.WriteString(schemas.ListManagedNotificationEventsRequest_locale, string(v.Locale))

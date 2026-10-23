@@ -1,6 +1,7 @@
-POST /
+POST /service/AWSMPCommerceService_v20200301/operation/SearchAgreements
 
-Content-Type: application/x-amz-json-1.0
-X-Amz-Target: AWSMPCommerceService_v20200301.SearchAgreements
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"catalog":"__Catalog__","filters":[{"name":"__Name__","values":["__Member__","__Member__"]},{"name":"__Name__","values":["__Member__","__Member__"]}],"maxResults":1,"nextToken":"__NextToken__","sort":{"sortBy":"__SortBy__","sortOrder":"ASCENDING"}}
+¿gcatalogk__Catalog__gfiltersŸ¿dnameh__Name__fvaluesŸj__Member__j__Member__ÿÿ¿dnameh__Name__fvaluesŸj__Member__j__Member__ÿÿÿjmaxResultsinextTokenm__NextToken__dsort¿fsortByj__SortBy__isortOrderiASCENDINGÿÿ

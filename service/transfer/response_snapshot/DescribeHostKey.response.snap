@@ -2,4 +2,4 @@
 Content-Type: application/x-amz-json-1.1
 X-Amz-Target: TransferService.DescribeHostKey
 
-{"HostKey":{"Arn":"__Arn__","DateImported":946684800,"Description":"__Description__","HostKeyFingerprint":"__HostKeyFingerprint__","HostKeyId":"__HostKeyId__","Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}],"Type":"__Type__"}}
+{"HostKey":{"Arn":"__Arn__","DateImported":946684800,"Description":"__Description__","HostKeyFingerprint":"__HostKeyFingerprint__","HostKeyId":"__HostKeyId__","SecretId":"__SecretId__","StorageType":"SERVICE_MANAGED","Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}],"Type":"__Type__"}}

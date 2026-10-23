@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: SSMContacts.ListPreviewRotationShifts
+
+{"NextToken":"__NextToken__","RotationShifts":[{"ContactIds":["__Member__","__Member__"],"EndTime":946684800,"ShiftDetails":{"OverriddenContactIds":["__Member__","__Member__"]},"StartTime":946684800,"Type":"REGULAR"},{"ContactIds":["__Member__","__Member__"],"EndTime":946684800,"ShiftDetails":{"OverriddenContactIds":["__Member__","__Member__"]},"StartTime":946684800,"Type":"REGULAR"}]}

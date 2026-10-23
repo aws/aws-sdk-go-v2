@@ -1270,6 +1270,26 @@ func (m *validateOpCreateCapacityReservationCancellationQuote) HandleInitialize(
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateCapacityReservationDateChangeQuote struct {
+}
+
+func (*validateOpCreateCapacityReservationDateChangeQuote) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateCapacityReservationDateChangeQuote) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateCapacityReservationDateChangeQuoteInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateCapacityReservationDateChangeQuoteInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateCapacityReservationFleet struct {
 }
 
@@ -3125,6 +3145,26 @@ func (m *validateOpDeleteCarrierGateway) HandleInitialize(ctx context.Context, i
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeleteCarrierGatewayInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteClientVpnEndpointAuthorizationPolicy struct {
+}
+
+func (*validateOpDeleteClientVpnEndpointAuthorizationPolicy) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteClientVpnEndpointAuthorizationPolicy) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteClientVpnEndpointAuthorizationPolicyInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteClientVpnEndpointAuthorizationPolicyInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -6890,6 +6930,26 @@ func (m *validateOpGetCapacityReservationUsage) HandleInitialize(ctx context.Con
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetClientVpnEndpointAuthorizationPolicy struct {
+}
+
+func (*validateOpGetClientVpnEndpointAuthorizationPolicy) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetClientVpnEndpointAuthorizationPolicy) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetClientVpnEndpointAuthorizationPolicyInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetClientVpnEndpointAuthorizationPolicyInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetCoipPoolUsage struct {
 }
 
@@ -7770,6 +7830,26 @@ func (m *validateOpGetSubnetCidrReservations) HandleInitialize(ctx context.Conte
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetTransitGatewayAttachmentNatConfiguration struct {
+}
+
+func (*validateOpGetTransitGatewayAttachmentNatConfiguration) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetTransitGatewayAttachmentNatConfiguration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetTransitGatewayAttachmentNatConfigurationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetTransitGatewayAttachmentNatConfigurationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetTransitGatewayAttachmentPropagations struct {
 }
 
@@ -8245,6 +8325,26 @@ func (m *validateOpModifyCapacityReservation) HandleInitialize(ctx context.Conte
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpModifyCapacityReservationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpModifyClientVpnEndpointAuthorizationPolicy struct {
+}
+
+func (*validateOpModifyClientVpnEndpointAuthorizationPolicy) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpModifyClientVpnEndpointAuthorizationPolicy) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ModifyClientVpnEndpointAuthorizationPolicyInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpModifyClientVpnEndpointAuthorizationPolicyInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -9165,6 +9265,26 @@ func (m *validateOpModifyTrafficMirrorSession) HandleInitialize(ctx context.Cont
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpModifyTrafficMirrorSessionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpModifyTransitGatewayAttachmentNatConfiguration struct {
+}
+
+func (*validateOpModifyTransitGatewayAttachmentNatConfiguration) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpModifyTransitGatewayAttachmentNatConfiguration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ModifyTransitGatewayAttachmentNatConfigurationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpModifyTransitGatewayAttachmentNatConfigurationInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -11502,6 +11622,10 @@ func addOpCreateCapacityReservationCancellationQuoteValidationMiddleware(stack *
 	return stack.Initialize.Add(&validateOpCreateCapacityReservationCancellationQuote{}, middleware.After)
 }
 
+func addOpCreateCapacityReservationDateChangeQuoteValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateCapacityReservationDateChangeQuote{}, middleware.After)
+}
+
 func addOpCreateCapacityReservationFleetValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateCapacityReservationFleet{}, middleware.After)
 }
@@ -11872,6 +11996,10 @@ func addOpDeleteCapacityManagerDataExportValidationMiddleware(stack *middleware.
 
 func addOpDeleteCarrierGatewayValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteCarrierGateway{}, middleware.After)
+}
+
+func addOpDeleteClientVpnEndpointAuthorizationPolicyValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteClientVpnEndpointAuthorizationPolicy{}, middleware.After)
 }
 
 func addOpDeleteClientVpnEndpointValidationMiddleware(stack *middleware.Stack) error {
@@ -12626,6 +12754,10 @@ func addOpGetCapacityReservationUsageValidationMiddleware(stack *middleware.Stac
 	return stack.Initialize.Add(&validateOpGetCapacityReservationUsage{}, middleware.After)
 }
 
+func addOpGetClientVpnEndpointAuthorizationPolicyValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetClientVpnEndpointAuthorizationPolicy{}, middleware.After)
+}
+
 func addOpGetCoipPoolUsageValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetCoipPoolUsage{}, middleware.After)
 }
@@ -12802,6 +12934,10 @@ func addOpGetSubnetCidrReservationsValidationMiddleware(stack *middleware.Stack)
 	return stack.Initialize.Add(&validateOpGetSubnetCidrReservations{}, middleware.After)
 }
 
+func addOpGetTransitGatewayAttachmentNatConfigurationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetTransitGatewayAttachmentNatConfiguration{}, middleware.After)
+}
+
 func addOpGetTransitGatewayAttachmentPropagationsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetTransitGatewayAttachmentPropagations{}, middleware.After)
 }
@@ -12896,6 +13032,10 @@ func addOpModifyCapacityReservationFleetValidationMiddleware(stack *middleware.S
 
 func addOpModifyCapacityReservationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpModifyCapacityReservation{}, middleware.After)
+}
+
+func addOpModifyClientVpnEndpointAuthorizationPolicyValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpModifyClientVpnEndpointAuthorizationPolicy{}, middleware.After)
 }
 
 func addOpModifyClientVpnEndpointValidationMiddleware(stack *middleware.Stack) error {
@@ -13080,6 +13220,10 @@ func addOpModifyTrafficMirrorFilterRuleValidationMiddleware(stack *middleware.St
 
 func addOpModifyTrafficMirrorSessionValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpModifyTrafficMirrorSession{}, middleware.After)
+}
+
+func addOpModifyTransitGatewayAttachmentNatConfigurationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpModifyTransitGatewayAttachmentNatConfiguration{}, middleware.After)
 }
 
 func addOpModifyTransitGatewayValidationMiddleware(stack *middleware.Stack) error {
@@ -15625,6 +15769,24 @@ func validateOpCreateCapacityReservationCancellationQuoteInput(v *CreateCapacity
 	}
 }
 
+func validateOpCreateCapacityReservationDateChangeQuoteInput(v *CreateCapacityReservationDateChangeQuoteInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateCapacityReservationDateChangeQuoteInput"}
+	if v.CapacityReservationId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CapacityReservationId"))
+	}
+	if v.NewStartDate == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("NewStartDate"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateCapacityReservationFleetInput(v *CreateCapacityReservationFleetInput) error {
 	if v == nil {
 		return nil
@@ -17301,6 +17463,21 @@ func validateOpDeleteCarrierGatewayInput(v *DeleteCarrierGatewayInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteCarrierGatewayInput"}
 	if v.CarrierGatewayId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("CarrierGatewayId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteClientVpnEndpointAuthorizationPolicyInput(v *DeleteClientVpnEndpointAuthorizationPolicyInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteClientVpnEndpointAuthorizationPolicyInput"}
+	if v.ClientVpnEndpointId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClientVpnEndpointId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -20325,6 +20502,21 @@ func validateOpGetCapacityReservationUsageInput(v *GetCapacityReservationUsageIn
 	}
 }
 
+func validateOpGetClientVpnEndpointAuthorizationPolicyInput(v *GetClientVpnEndpointAuthorizationPolicyInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetClientVpnEndpointAuthorizationPolicyInput"}
+	if v.ClientVpnEndpointId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClientVpnEndpointId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpGetCoipPoolUsageInput(v *GetCoipPoolUsageInput) error {
 	if v == nil {
 		return nil
@@ -21042,6 +21234,21 @@ func validateOpGetSubnetCidrReservationsInput(v *GetSubnetCidrReservationsInput)
 	}
 }
 
+func validateOpGetTransitGatewayAttachmentNatConfigurationInput(v *GetTransitGatewayAttachmentNatConfigurationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetTransitGatewayAttachmentNatConfigurationInput"}
+	if v.TransitGatewayAttachmentId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TransitGatewayAttachmentId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpGetTransitGatewayAttachmentPropagationsInput(v *GetTransitGatewayAttachmentPropagationsInput) error {
 	if v == nil {
 		return nil
@@ -21428,6 +21635,21 @@ func validateOpModifyCapacityReservationInput(v *ModifyCapacityReservationInput)
 	invalidParams := smithy.InvalidParamsError{Context: "ModifyCapacityReservationInput"}
 	if v.CapacityReservationId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("CapacityReservationId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpModifyClientVpnEndpointAuthorizationPolicyInput(v *ModifyClientVpnEndpointAuthorizationPolicyInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ModifyClientVpnEndpointAuthorizationPolicyInput"}
+	if v.ClientVpnEndpointId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClientVpnEndpointId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -22208,6 +22430,21 @@ func validateOpModifyTrafficMirrorSessionInput(v *ModifyTrafficMirrorSessionInpu
 	invalidParams := smithy.InvalidParamsError{Context: "ModifyTrafficMirrorSessionInput"}
 	if v.TrafficMirrorSessionId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TrafficMirrorSessionId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpModifyTransitGatewayAttachmentNatConfigurationInput(v *ModifyTransitGatewayAttachmentNatConfigurationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ModifyTransitGatewayAttachmentNatConfigurationInput"}
+	if v.TransitGatewayAttachmentId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TransitGatewayAttachmentId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

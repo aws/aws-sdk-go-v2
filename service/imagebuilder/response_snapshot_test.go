@@ -319,6 +319,7 @@ func TestCheckResponseSnapshot_CreateContainerRecipe(t *testing.T) {
 		},
 		KmsKeyId:    ptr.String("__KmsKeyId__"),
 		ClientToken: ptr.String("__ClientToken__"),
+		DryRun:      true,
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -563,6 +564,7 @@ func TestCheckResponseSnapshot_CreateDistributionConfiguration(t *testing.T) {
 			"key0": "__Value__",
 		},
 		ClientToken: ptr.String("__ClientToken__"),
+		DryRun:      true,
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -774,6 +776,7 @@ func TestCheckResponseSnapshot_CreateImagePipeline(t *testing.T) {
 			ImageLogGroupName:    ptr.String("__ImageLogGroupName__"),
 			PipelineLogGroupName: ptr.String("__PipelineLogGroupName__"),
 		},
+		DryRun: true,
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -898,6 +901,7 @@ func TestCheckResponseSnapshot_CreateImageRecipe(t *testing.T) {
 			"__Member__",
 		},
 		ClientToken: ptr.String("__ClientToken__"),
+		DryRun:      true,
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -940,9 +944,10 @@ func TestCheckResponseSnapshot_CreateInfrastructureConfiguration(t *testing.T) {
 				S3KeyPrefix:  ptr.String("__S3KeyPrefix__"),
 			},
 		},
-		KeyPair:                    ptr.String("__KeyPair__"),
-		TerminateInstanceOnFailure: ptr.Bool(true),
-		SnsTopicArn:                ptr.String("__SnsTopicArn__"),
+		KeyPair:                       ptr.String("__KeyPair__"),
+		TerminateInstanceOnFailure:    ptr.Bool(true),
+		TerminateInstanceOnCompletion: ptr.Bool(true),
+		SnsTopicArn:                   ptr.String("__SnsTopicArn__"),
 		ResourceTags: map[string]string{
 			"key0": "__Value__",
 		},
@@ -959,7 +964,14 @@ func TestCheckResponseSnapshot_CreateInfrastructureConfiguration(t *testing.T) {
 			HostId:               ptr.String("__HostId__"),
 			HostResourceGroupArn: ptr.String("__HostResourceGroupArn__"),
 		},
+		ParentInstance: &types.ParentInstanceConfiguration{
+			AutoScalingGroup: &types.AutoScalingGroupConfiguration{
+				Name:                       ptr.String("__Name__"),
+				CapacityWaitTimeoutSeconds: ptr.Int32(1),
+			},
+		},
 		ClientToken: ptr.String("__ClientToken__"),
+		DryRun:      true,
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -1087,6 +1099,7 @@ func TestCheckResponseSnapshot_CreateLifecyclePolicy(t *testing.T) {
 			"key0": "__Value__",
 		},
 		ClientToken: ptr.String("__ClientToken__"),
+		DryRun:      true,
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -1907,6 +1920,39 @@ func TestCheckResponseSnapshot_GetImage(t *testing.T) {
 			State: &types.ImageState{
 				Status: types.ImageStatus("PENDING"),
 				Reason: ptr.String("__Reason__"),
+				FailureContext: &types.ImageFailureContext{
+					ImageStatus:         types.ImageStatus("PENDING"),
+					WorkflowExecutionId: ptr.String("__WorkflowExecutionId__"),
+					WorkflowArn:         ptr.String("__WorkflowArn__"),
+					StepExecutionId:     ptr.String("__StepExecutionId__"),
+					FailedStep:          ptr.String("__FailedStep__"),
+					ComponentFailure: &types.ComponentFailureContext{
+						ComponentArn: ptr.String("__ComponentArn__"),
+						PhaseName:    ptr.String("__PhaseName__"),
+						StepName:     ptr.String("__StepName__"),
+						Action:       ptr.String("__Action__"),
+						ErrorMessage: ptr.String("__ErrorMessage__"),
+					},
+					DistributionFailure: &types.DistributionFailureContext{
+						ErrorMessage: ptr.String("__ErrorMessage__"),
+						RegionFailures: []types.RegionFailure{
+							{
+								Region:                 ptr.String("__Region__"),
+								Status:                 types.RegionFailureStatus("FAILED"),
+								ImageConfigurationStep: types.ImageConfigurationStep("ASSOCIATE_LICENSES"),
+								ErrorMessage:           ptr.String("__ErrorMessage__"),
+								TargetAccountId:        ptr.String("__TargetAccountId__"),
+							},
+							{
+								Region:                 ptr.String("__Region__"),
+								Status:                 types.RegionFailureStatus("FAILED"),
+								ImageConfigurationStep: types.ImageConfigurationStep("ASSOCIATE_LICENSES"),
+								ErrorMessage:           ptr.String("__ErrorMessage__"),
+								TargetAccountId:        ptr.String("__TargetAccountId__"),
+							},
+						},
+					},
+				},
 			},
 			ImageRecipe: &types.ImageRecipe{
 				Arn:         ptr.String("__Arn__"),
@@ -2147,6 +2193,13 @@ func TestCheckResponseSnapshot_GetImage(t *testing.T) {
 					Tenancy:              types.TenancyType("default"),
 					HostId:               ptr.String("__HostId__"),
 					HostResourceGroupArn: ptr.String("__HostResourceGroupArn__"),
+				},
+				TerminateInstanceOnCompletion: ptr.Bool(true),
+				ParentInstance: &types.ParentInstanceConfiguration{
+					AutoScalingGroup: &types.AutoScalingGroupConfiguration{
+						Name:                       ptr.String("__Name__"),
+						CapacityWaitTimeoutSeconds: ptr.Int32(1),
+					},
 				},
 			},
 			DistributionConfiguration: &types.DistributionConfiguration{
@@ -2389,6 +2442,39 @@ func TestCheckResponseSnapshot_GetImage(t *testing.T) {
 						State: &types.ImageState{
 							Status: types.ImageStatus("PENDING"),
 							Reason: ptr.String("__Reason__"),
+							FailureContext: &types.ImageFailureContext{
+								ImageStatus:         types.ImageStatus("PENDING"),
+								WorkflowExecutionId: ptr.String("__WorkflowExecutionId__"),
+								WorkflowArn:         ptr.String("__WorkflowArn__"),
+								StepExecutionId:     ptr.String("__StepExecutionId__"),
+								FailedStep:          ptr.String("__FailedStep__"),
+								ComponentFailure: &types.ComponentFailureContext{
+									ComponentArn: ptr.String("__ComponentArn__"),
+									PhaseName:    ptr.String("__PhaseName__"),
+									StepName:     ptr.String("__StepName__"),
+									Action:       ptr.String("__Action__"),
+									ErrorMessage: ptr.String("__ErrorMessage__"),
+								},
+								DistributionFailure: &types.DistributionFailureContext{
+									ErrorMessage: ptr.String("__ErrorMessage__"),
+									RegionFailures: []types.RegionFailure{
+										{
+											Region:                 ptr.String("__Region__"),
+											Status:                 types.RegionFailureStatus("FAILED"),
+											ImageConfigurationStep: types.ImageConfigurationStep("ASSOCIATE_LICENSES"),
+											ErrorMessage:           ptr.String("__ErrorMessage__"),
+											TargetAccountId:        ptr.String("__TargetAccountId__"),
+										},
+										{
+											Region:                 ptr.String("__Region__"),
+											Status:                 types.RegionFailureStatus("FAILED"),
+											ImageConfigurationStep: types.ImageConfigurationStep("ASSOCIATE_LICENSES"),
+											ErrorMessage:           ptr.String("__ErrorMessage__"),
+											TargetAccountId:        ptr.String("__TargetAccountId__"),
+										},
+									},
+								},
+							},
 						},
 						AccountId: ptr.String("__AccountId__"),
 					},
@@ -2400,6 +2486,39 @@ func TestCheckResponseSnapshot_GetImage(t *testing.T) {
 						State: &types.ImageState{
 							Status: types.ImageStatus("PENDING"),
 							Reason: ptr.String("__Reason__"),
+							FailureContext: &types.ImageFailureContext{
+								ImageStatus:         types.ImageStatus("PENDING"),
+								WorkflowExecutionId: ptr.String("__WorkflowExecutionId__"),
+								WorkflowArn:         ptr.String("__WorkflowArn__"),
+								StepExecutionId:     ptr.String("__StepExecutionId__"),
+								FailedStep:          ptr.String("__FailedStep__"),
+								ComponentFailure: &types.ComponentFailureContext{
+									ComponentArn: ptr.String("__ComponentArn__"),
+									PhaseName:    ptr.String("__PhaseName__"),
+									StepName:     ptr.String("__StepName__"),
+									Action:       ptr.String("__Action__"),
+									ErrorMessage: ptr.String("__ErrorMessage__"),
+								},
+								DistributionFailure: &types.DistributionFailureContext{
+									ErrorMessage: ptr.String("__ErrorMessage__"),
+									RegionFailures: []types.RegionFailure{
+										{
+											Region:                 ptr.String("__Region__"),
+											Status:                 types.RegionFailureStatus("FAILED"),
+											ImageConfigurationStep: types.ImageConfigurationStep("ASSOCIATE_LICENSES"),
+											ErrorMessage:           ptr.String("__ErrorMessage__"),
+											TargetAccountId:        ptr.String("__TargetAccountId__"),
+										},
+										{
+											Region:                 ptr.String("__Region__"),
+											Status:                 types.RegionFailureStatus("FAILED"),
+											ImageConfigurationStep: types.ImageConfigurationStep("ASSOCIATE_LICENSES"),
+											ErrorMessage:           ptr.String("__ErrorMessage__"),
+											TargetAccountId:        ptr.String("__TargetAccountId__"),
+										},
+									},
+								},
+							},
 						},
 						AccountId: ptr.String("__AccountId__"),
 					},
@@ -2856,6 +2975,13 @@ func TestCheckResponseSnapshot_GetInfrastructureConfiguration(t *testing.T) {
 				HostId:               ptr.String("__HostId__"),
 				HostResourceGroupArn: ptr.String("__HostResourceGroupArn__"),
 			},
+			TerminateInstanceOnCompletion: ptr.Bool(true),
+			ParentInstance: &types.ParentInstanceConfiguration{
+				AutoScalingGroup: &types.AutoScalingGroupConfiguration{
+					Name:                       ptr.String("__Name__"),
+					CapacityWaitTimeoutSeconds: ptr.Int32(1),
+				},
+			},
 		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("GetInfrastructureConfiguration.response")
@@ -3192,6 +3318,8 @@ func TestCheckResponseSnapshot_GetWorkflowStepExecution(t *testing.T) {
 		EndTime:                 ptr.String("__EndTime__"),
 		OnFailure:               ptr.String("__OnFailure__"),
 		TimeoutSeconds:          ptr.Int32(1),
+		AttemptNumber:           ptr.Int32(1),
+		MaxAttempts:             ptr.Int32(1),
 	}
 	status, header, body, err := serdeRespReadSnapshot("GetWorkflowStepExecution.response")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -3658,6 +3786,39 @@ func TestCheckResponseSnapshot_ListImageBuildVersions(t *testing.T) {
 				State: &types.ImageState{
 					Status: types.ImageStatus("PENDING"),
 					Reason: ptr.String("__Reason__"),
+					FailureContext: &types.ImageFailureContext{
+						ImageStatus:         types.ImageStatus("PENDING"),
+						WorkflowExecutionId: ptr.String("__WorkflowExecutionId__"),
+						WorkflowArn:         ptr.String("__WorkflowArn__"),
+						StepExecutionId:     ptr.String("__StepExecutionId__"),
+						FailedStep:          ptr.String("__FailedStep__"),
+						ComponentFailure: &types.ComponentFailureContext{
+							ComponentArn: ptr.String("__ComponentArn__"),
+							PhaseName:    ptr.String("__PhaseName__"),
+							StepName:     ptr.String("__StepName__"),
+							Action:       ptr.String("__Action__"),
+							ErrorMessage: ptr.String("__ErrorMessage__"),
+						},
+						DistributionFailure: &types.DistributionFailureContext{
+							ErrorMessage: ptr.String("__ErrorMessage__"),
+							RegionFailures: []types.RegionFailure{
+								{
+									Region:                 ptr.String("__Region__"),
+									Status:                 types.RegionFailureStatus("FAILED"),
+									ImageConfigurationStep: types.ImageConfigurationStep("ASSOCIATE_LICENSES"),
+									ErrorMessage:           ptr.String("__ErrorMessage__"),
+									TargetAccountId:        ptr.String("__TargetAccountId__"),
+								},
+								{
+									Region:                 ptr.String("__Region__"),
+									Status:                 types.RegionFailureStatus("FAILED"),
+									ImageConfigurationStep: types.ImageConfigurationStep("ASSOCIATE_LICENSES"),
+									ErrorMessage:           ptr.String("__ErrorMessage__"),
+									TargetAccountId:        ptr.String("__TargetAccountId__"),
+								},
+							},
+						},
+					},
 				},
 				Owner:       ptr.String("__Owner__"),
 				DateCreated: ptr.String("__DateCreated__"),
@@ -3671,6 +3832,39 @@ func TestCheckResponseSnapshot_ListImageBuildVersions(t *testing.T) {
 							State: &types.ImageState{
 								Status: types.ImageStatus("PENDING"),
 								Reason: ptr.String("__Reason__"),
+								FailureContext: &types.ImageFailureContext{
+									ImageStatus:         types.ImageStatus("PENDING"),
+									WorkflowExecutionId: ptr.String("__WorkflowExecutionId__"),
+									WorkflowArn:         ptr.String("__WorkflowArn__"),
+									StepExecutionId:     ptr.String("__StepExecutionId__"),
+									FailedStep:          ptr.String("__FailedStep__"),
+									ComponentFailure: &types.ComponentFailureContext{
+										ComponentArn: ptr.String("__ComponentArn__"),
+										PhaseName:    ptr.String("__PhaseName__"),
+										StepName:     ptr.String("__StepName__"),
+										Action:       ptr.String("__Action__"),
+										ErrorMessage: ptr.String("__ErrorMessage__"),
+									},
+									DistributionFailure: &types.DistributionFailureContext{
+										ErrorMessage: ptr.String("__ErrorMessage__"),
+										RegionFailures: []types.RegionFailure{
+											{
+												Region:                 ptr.String("__Region__"),
+												Status:                 types.RegionFailureStatus("FAILED"),
+												ImageConfigurationStep: types.ImageConfigurationStep("ASSOCIATE_LICENSES"),
+												ErrorMessage:           ptr.String("__ErrorMessage__"),
+												TargetAccountId:        ptr.String("__TargetAccountId__"),
+											},
+											{
+												Region:                 ptr.String("__Region__"),
+												Status:                 types.RegionFailureStatus("FAILED"),
+												ImageConfigurationStep: types.ImageConfigurationStep("ASSOCIATE_LICENSES"),
+												ErrorMessage:           ptr.String("__ErrorMessage__"),
+												TargetAccountId:        ptr.String("__TargetAccountId__"),
+											},
+										},
+									},
+								},
 							},
 							AccountId: ptr.String("__AccountId__"),
 						},
@@ -3682,6 +3876,39 @@ func TestCheckResponseSnapshot_ListImageBuildVersions(t *testing.T) {
 							State: &types.ImageState{
 								Status: types.ImageStatus("PENDING"),
 								Reason: ptr.String("__Reason__"),
+								FailureContext: &types.ImageFailureContext{
+									ImageStatus:         types.ImageStatus("PENDING"),
+									WorkflowExecutionId: ptr.String("__WorkflowExecutionId__"),
+									WorkflowArn:         ptr.String("__WorkflowArn__"),
+									StepExecutionId:     ptr.String("__StepExecutionId__"),
+									FailedStep:          ptr.String("__FailedStep__"),
+									ComponentFailure: &types.ComponentFailureContext{
+										ComponentArn: ptr.String("__ComponentArn__"),
+										PhaseName:    ptr.String("__PhaseName__"),
+										StepName:     ptr.String("__StepName__"),
+										Action:       ptr.String("__Action__"),
+										ErrorMessage: ptr.String("__ErrorMessage__"),
+									},
+									DistributionFailure: &types.DistributionFailureContext{
+										ErrorMessage: ptr.String("__ErrorMessage__"),
+										RegionFailures: []types.RegionFailure{
+											{
+												Region:                 ptr.String("__Region__"),
+												Status:                 types.RegionFailureStatus("FAILED"),
+												ImageConfigurationStep: types.ImageConfigurationStep("ASSOCIATE_LICENSES"),
+												ErrorMessage:           ptr.String("__ErrorMessage__"),
+												TargetAccountId:        ptr.String("__TargetAccountId__"),
+											},
+											{
+												Region:                 ptr.String("__Region__"),
+												Status:                 types.RegionFailureStatus("FAILED"),
+												ImageConfigurationStep: types.ImageConfigurationStep("ASSOCIATE_LICENSES"),
+												ErrorMessage:           ptr.String("__ErrorMessage__"),
+												TargetAccountId:        ptr.String("__TargetAccountId__"),
+											},
+										},
+									},
+								},
 							},
 							AccountId: ptr.String("__AccountId__"),
 						},
@@ -3724,6 +3951,39 @@ func TestCheckResponseSnapshot_ListImageBuildVersions(t *testing.T) {
 				State: &types.ImageState{
 					Status: types.ImageStatus("PENDING"),
 					Reason: ptr.String("__Reason__"),
+					FailureContext: &types.ImageFailureContext{
+						ImageStatus:         types.ImageStatus("PENDING"),
+						WorkflowExecutionId: ptr.String("__WorkflowExecutionId__"),
+						WorkflowArn:         ptr.String("__WorkflowArn__"),
+						StepExecutionId:     ptr.String("__StepExecutionId__"),
+						FailedStep:          ptr.String("__FailedStep__"),
+						ComponentFailure: &types.ComponentFailureContext{
+							ComponentArn: ptr.String("__ComponentArn__"),
+							PhaseName:    ptr.String("__PhaseName__"),
+							StepName:     ptr.String("__StepName__"),
+							Action:       ptr.String("__Action__"),
+							ErrorMessage: ptr.String("__ErrorMessage__"),
+						},
+						DistributionFailure: &types.DistributionFailureContext{
+							ErrorMessage: ptr.String("__ErrorMessage__"),
+							RegionFailures: []types.RegionFailure{
+								{
+									Region:                 ptr.String("__Region__"),
+									Status:                 types.RegionFailureStatus("FAILED"),
+									ImageConfigurationStep: types.ImageConfigurationStep("ASSOCIATE_LICENSES"),
+									ErrorMessage:           ptr.String("__ErrorMessage__"),
+									TargetAccountId:        ptr.String("__TargetAccountId__"),
+								},
+								{
+									Region:                 ptr.String("__Region__"),
+									Status:                 types.RegionFailureStatus("FAILED"),
+									ImageConfigurationStep: types.ImageConfigurationStep("ASSOCIATE_LICENSES"),
+									ErrorMessage:           ptr.String("__ErrorMessage__"),
+									TargetAccountId:        ptr.String("__TargetAccountId__"),
+								},
+							},
+						},
+					},
 				},
 				Owner:       ptr.String("__Owner__"),
 				DateCreated: ptr.String("__DateCreated__"),
@@ -3737,6 +3997,39 @@ func TestCheckResponseSnapshot_ListImageBuildVersions(t *testing.T) {
 							State: &types.ImageState{
 								Status: types.ImageStatus("PENDING"),
 								Reason: ptr.String("__Reason__"),
+								FailureContext: &types.ImageFailureContext{
+									ImageStatus:         types.ImageStatus("PENDING"),
+									WorkflowExecutionId: ptr.String("__WorkflowExecutionId__"),
+									WorkflowArn:         ptr.String("__WorkflowArn__"),
+									StepExecutionId:     ptr.String("__StepExecutionId__"),
+									FailedStep:          ptr.String("__FailedStep__"),
+									ComponentFailure: &types.ComponentFailureContext{
+										ComponentArn: ptr.String("__ComponentArn__"),
+										PhaseName:    ptr.String("__PhaseName__"),
+										StepName:     ptr.String("__StepName__"),
+										Action:       ptr.String("__Action__"),
+										ErrorMessage: ptr.String("__ErrorMessage__"),
+									},
+									DistributionFailure: &types.DistributionFailureContext{
+										ErrorMessage: ptr.String("__ErrorMessage__"),
+										RegionFailures: []types.RegionFailure{
+											{
+												Region:                 ptr.String("__Region__"),
+												Status:                 types.RegionFailureStatus("FAILED"),
+												ImageConfigurationStep: types.ImageConfigurationStep("ASSOCIATE_LICENSES"),
+												ErrorMessage:           ptr.String("__ErrorMessage__"),
+												TargetAccountId:        ptr.String("__TargetAccountId__"),
+											},
+											{
+												Region:                 ptr.String("__Region__"),
+												Status:                 types.RegionFailureStatus("FAILED"),
+												ImageConfigurationStep: types.ImageConfigurationStep("ASSOCIATE_LICENSES"),
+												ErrorMessage:           ptr.String("__ErrorMessage__"),
+												TargetAccountId:        ptr.String("__TargetAccountId__"),
+											},
+										},
+									},
+								},
 							},
 							AccountId: ptr.String("__AccountId__"),
 						},
@@ -3748,6 +4041,39 @@ func TestCheckResponseSnapshot_ListImageBuildVersions(t *testing.T) {
 							State: &types.ImageState{
 								Status: types.ImageStatus("PENDING"),
 								Reason: ptr.String("__Reason__"),
+								FailureContext: &types.ImageFailureContext{
+									ImageStatus:         types.ImageStatus("PENDING"),
+									WorkflowExecutionId: ptr.String("__WorkflowExecutionId__"),
+									WorkflowArn:         ptr.String("__WorkflowArn__"),
+									StepExecutionId:     ptr.String("__StepExecutionId__"),
+									FailedStep:          ptr.String("__FailedStep__"),
+									ComponentFailure: &types.ComponentFailureContext{
+										ComponentArn: ptr.String("__ComponentArn__"),
+										PhaseName:    ptr.String("__PhaseName__"),
+										StepName:     ptr.String("__StepName__"),
+										Action:       ptr.String("__Action__"),
+										ErrorMessage: ptr.String("__ErrorMessage__"),
+									},
+									DistributionFailure: &types.DistributionFailureContext{
+										ErrorMessage: ptr.String("__ErrorMessage__"),
+										RegionFailures: []types.RegionFailure{
+											{
+												Region:                 ptr.String("__Region__"),
+												Status:                 types.RegionFailureStatus("FAILED"),
+												ImageConfigurationStep: types.ImageConfigurationStep("ASSOCIATE_LICENSES"),
+												ErrorMessage:           ptr.String("__ErrorMessage__"),
+												TargetAccountId:        ptr.String("__TargetAccountId__"),
+											},
+											{
+												Region:                 ptr.String("__Region__"),
+												Status:                 types.RegionFailureStatus("FAILED"),
+												ImageConfigurationStep: types.ImageConfigurationStep("ASSOCIATE_LICENSES"),
+												ErrorMessage:           ptr.String("__ErrorMessage__"),
+												TargetAccountId:        ptr.String("__TargetAccountId__"),
+											},
+										},
+									},
+								},
 							},
 							AccountId: ptr.String("__AccountId__"),
 						},
@@ -3870,6 +4196,39 @@ func TestCheckResponseSnapshot_ListImagePipelineImages(t *testing.T) {
 				State: &types.ImageState{
 					Status: types.ImageStatus("PENDING"),
 					Reason: ptr.String("__Reason__"),
+					FailureContext: &types.ImageFailureContext{
+						ImageStatus:         types.ImageStatus("PENDING"),
+						WorkflowExecutionId: ptr.String("__WorkflowExecutionId__"),
+						WorkflowArn:         ptr.String("__WorkflowArn__"),
+						StepExecutionId:     ptr.String("__StepExecutionId__"),
+						FailedStep:          ptr.String("__FailedStep__"),
+						ComponentFailure: &types.ComponentFailureContext{
+							ComponentArn: ptr.String("__ComponentArn__"),
+							PhaseName:    ptr.String("__PhaseName__"),
+							StepName:     ptr.String("__StepName__"),
+							Action:       ptr.String("__Action__"),
+							ErrorMessage: ptr.String("__ErrorMessage__"),
+						},
+						DistributionFailure: &types.DistributionFailureContext{
+							ErrorMessage: ptr.String("__ErrorMessage__"),
+							RegionFailures: []types.RegionFailure{
+								{
+									Region:                 ptr.String("__Region__"),
+									Status:                 types.RegionFailureStatus("FAILED"),
+									ImageConfigurationStep: types.ImageConfigurationStep("ASSOCIATE_LICENSES"),
+									ErrorMessage:           ptr.String("__ErrorMessage__"),
+									TargetAccountId:        ptr.String("__TargetAccountId__"),
+								},
+								{
+									Region:                 ptr.String("__Region__"),
+									Status:                 types.RegionFailureStatus("FAILED"),
+									ImageConfigurationStep: types.ImageConfigurationStep("ASSOCIATE_LICENSES"),
+									ErrorMessage:           ptr.String("__ErrorMessage__"),
+									TargetAccountId:        ptr.String("__TargetAccountId__"),
+								},
+							},
+						},
+					},
 				},
 				Owner:       ptr.String("__Owner__"),
 				DateCreated: ptr.String("__DateCreated__"),
@@ -3883,6 +4242,39 @@ func TestCheckResponseSnapshot_ListImagePipelineImages(t *testing.T) {
 							State: &types.ImageState{
 								Status: types.ImageStatus("PENDING"),
 								Reason: ptr.String("__Reason__"),
+								FailureContext: &types.ImageFailureContext{
+									ImageStatus:         types.ImageStatus("PENDING"),
+									WorkflowExecutionId: ptr.String("__WorkflowExecutionId__"),
+									WorkflowArn:         ptr.String("__WorkflowArn__"),
+									StepExecutionId:     ptr.String("__StepExecutionId__"),
+									FailedStep:          ptr.String("__FailedStep__"),
+									ComponentFailure: &types.ComponentFailureContext{
+										ComponentArn: ptr.String("__ComponentArn__"),
+										PhaseName:    ptr.String("__PhaseName__"),
+										StepName:     ptr.String("__StepName__"),
+										Action:       ptr.String("__Action__"),
+										ErrorMessage: ptr.String("__ErrorMessage__"),
+									},
+									DistributionFailure: &types.DistributionFailureContext{
+										ErrorMessage: ptr.String("__ErrorMessage__"),
+										RegionFailures: []types.RegionFailure{
+											{
+												Region:                 ptr.String("__Region__"),
+												Status:                 types.RegionFailureStatus("FAILED"),
+												ImageConfigurationStep: types.ImageConfigurationStep("ASSOCIATE_LICENSES"),
+												ErrorMessage:           ptr.String("__ErrorMessage__"),
+												TargetAccountId:        ptr.String("__TargetAccountId__"),
+											},
+											{
+												Region:                 ptr.String("__Region__"),
+												Status:                 types.RegionFailureStatus("FAILED"),
+												ImageConfigurationStep: types.ImageConfigurationStep("ASSOCIATE_LICENSES"),
+												ErrorMessage:           ptr.String("__ErrorMessage__"),
+												TargetAccountId:        ptr.String("__TargetAccountId__"),
+											},
+										},
+									},
+								},
 							},
 							AccountId: ptr.String("__AccountId__"),
 						},
@@ -3894,6 +4286,39 @@ func TestCheckResponseSnapshot_ListImagePipelineImages(t *testing.T) {
 							State: &types.ImageState{
 								Status: types.ImageStatus("PENDING"),
 								Reason: ptr.String("__Reason__"),
+								FailureContext: &types.ImageFailureContext{
+									ImageStatus:         types.ImageStatus("PENDING"),
+									WorkflowExecutionId: ptr.String("__WorkflowExecutionId__"),
+									WorkflowArn:         ptr.String("__WorkflowArn__"),
+									StepExecutionId:     ptr.String("__StepExecutionId__"),
+									FailedStep:          ptr.String("__FailedStep__"),
+									ComponentFailure: &types.ComponentFailureContext{
+										ComponentArn: ptr.String("__ComponentArn__"),
+										PhaseName:    ptr.String("__PhaseName__"),
+										StepName:     ptr.String("__StepName__"),
+										Action:       ptr.String("__Action__"),
+										ErrorMessage: ptr.String("__ErrorMessage__"),
+									},
+									DistributionFailure: &types.DistributionFailureContext{
+										ErrorMessage: ptr.String("__ErrorMessage__"),
+										RegionFailures: []types.RegionFailure{
+											{
+												Region:                 ptr.String("__Region__"),
+												Status:                 types.RegionFailureStatus("FAILED"),
+												ImageConfigurationStep: types.ImageConfigurationStep("ASSOCIATE_LICENSES"),
+												ErrorMessage:           ptr.String("__ErrorMessage__"),
+												TargetAccountId:        ptr.String("__TargetAccountId__"),
+											},
+											{
+												Region:                 ptr.String("__Region__"),
+												Status:                 types.RegionFailureStatus("FAILED"),
+												ImageConfigurationStep: types.ImageConfigurationStep("ASSOCIATE_LICENSES"),
+												ErrorMessage:           ptr.String("__ErrorMessage__"),
+												TargetAccountId:        ptr.String("__TargetAccountId__"),
+											},
+										},
+									},
+								},
 							},
 							AccountId: ptr.String("__AccountId__"),
 						},
@@ -3936,6 +4361,39 @@ func TestCheckResponseSnapshot_ListImagePipelineImages(t *testing.T) {
 				State: &types.ImageState{
 					Status: types.ImageStatus("PENDING"),
 					Reason: ptr.String("__Reason__"),
+					FailureContext: &types.ImageFailureContext{
+						ImageStatus:         types.ImageStatus("PENDING"),
+						WorkflowExecutionId: ptr.String("__WorkflowExecutionId__"),
+						WorkflowArn:         ptr.String("__WorkflowArn__"),
+						StepExecutionId:     ptr.String("__StepExecutionId__"),
+						FailedStep:          ptr.String("__FailedStep__"),
+						ComponentFailure: &types.ComponentFailureContext{
+							ComponentArn: ptr.String("__ComponentArn__"),
+							PhaseName:    ptr.String("__PhaseName__"),
+							StepName:     ptr.String("__StepName__"),
+							Action:       ptr.String("__Action__"),
+							ErrorMessage: ptr.String("__ErrorMessage__"),
+						},
+						DistributionFailure: &types.DistributionFailureContext{
+							ErrorMessage: ptr.String("__ErrorMessage__"),
+							RegionFailures: []types.RegionFailure{
+								{
+									Region:                 ptr.String("__Region__"),
+									Status:                 types.RegionFailureStatus("FAILED"),
+									ImageConfigurationStep: types.ImageConfigurationStep("ASSOCIATE_LICENSES"),
+									ErrorMessage:           ptr.String("__ErrorMessage__"),
+									TargetAccountId:        ptr.String("__TargetAccountId__"),
+								},
+								{
+									Region:                 ptr.String("__Region__"),
+									Status:                 types.RegionFailureStatus("FAILED"),
+									ImageConfigurationStep: types.ImageConfigurationStep("ASSOCIATE_LICENSES"),
+									ErrorMessage:           ptr.String("__ErrorMessage__"),
+									TargetAccountId:        ptr.String("__TargetAccountId__"),
+								},
+							},
+						},
+					},
 				},
 				Owner:       ptr.String("__Owner__"),
 				DateCreated: ptr.String("__DateCreated__"),
@@ -3949,6 +4407,39 @@ func TestCheckResponseSnapshot_ListImagePipelineImages(t *testing.T) {
 							State: &types.ImageState{
 								Status: types.ImageStatus("PENDING"),
 								Reason: ptr.String("__Reason__"),
+								FailureContext: &types.ImageFailureContext{
+									ImageStatus:         types.ImageStatus("PENDING"),
+									WorkflowExecutionId: ptr.String("__WorkflowExecutionId__"),
+									WorkflowArn:         ptr.String("__WorkflowArn__"),
+									StepExecutionId:     ptr.String("__StepExecutionId__"),
+									FailedStep:          ptr.String("__FailedStep__"),
+									ComponentFailure: &types.ComponentFailureContext{
+										ComponentArn: ptr.String("__ComponentArn__"),
+										PhaseName:    ptr.String("__PhaseName__"),
+										StepName:     ptr.String("__StepName__"),
+										Action:       ptr.String("__Action__"),
+										ErrorMessage: ptr.String("__ErrorMessage__"),
+									},
+									DistributionFailure: &types.DistributionFailureContext{
+										ErrorMessage: ptr.String("__ErrorMessage__"),
+										RegionFailures: []types.RegionFailure{
+											{
+												Region:                 ptr.String("__Region__"),
+												Status:                 types.RegionFailureStatus("FAILED"),
+												ImageConfigurationStep: types.ImageConfigurationStep("ASSOCIATE_LICENSES"),
+												ErrorMessage:           ptr.String("__ErrorMessage__"),
+												TargetAccountId:        ptr.String("__TargetAccountId__"),
+											},
+											{
+												Region:                 ptr.String("__Region__"),
+												Status:                 types.RegionFailureStatus("FAILED"),
+												ImageConfigurationStep: types.ImageConfigurationStep("ASSOCIATE_LICENSES"),
+												ErrorMessage:           ptr.String("__ErrorMessage__"),
+												TargetAccountId:        ptr.String("__TargetAccountId__"),
+											},
+										},
+									},
+								},
 							},
 							AccountId: ptr.String("__AccountId__"),
 						},
@@ -3960,6 +4451,39 @@ func TestCheckResponseSnapshot_ListImagePipelineImages(t *testing.T) {
 							State: &types.ImageState{
 								Status: types.ImageStatus("PENDING"),
 								Reason: ptr.String("__Reason__"),
+								FailureContext: &types.ImageFailureContext{
+									ImageStatus:         types.ImageStatus("PENDING"),
+									WorkflowExecutionId: ptr.String("__WorkflowExecutionId__"),
+									WorkflowArn:         ptr.String("__WorkflowArn__"),
+									StepExecutionId:     ptr.String("__StepExecutionId__"),
+									FailedStep:          ptr.String("__FailedStep__"),
+									ComponentFailure: &types.ComponentFailureContext{
+										ComponentArn: ptr.String("__ComponentArn__"),
+										PhaseName:    ptr.String("__PhaseName__"),
+										StepName:     ptr.String("__StepName__"),
+										Action:       ptr.String("__Action__"),
+										ErrorMessage: ptr.String("__ErrorMessage__"),
+									},
+									DistributionFailure: &types.DistributionFailureContext{
+										ErrorMessage: ptr.String("__ErrorMessage__"),
+										RegionFailures: []types.RegionFailure{
+											{
+												Region:                 ptr.String("__Region__"),
+												Status:                 types.RegionFailureStatus("FAILED"),
+												ImageConfigurationStep: types.ImageConfigurationStep("ASSOCIATE_LICENSES"),
+												ErrorMessage:           ptr.String("__ErrorMessage__"),
+												TargetAccountId:        ptr.String("__TargetAccountId__"),
+											},
+											{
+												Region:                 ptr.String("__Region__"),
+												Status:                 types.RegionFailureStatus("FAILED"),
+												ImageConfigurationStep: types.ImageConfigurationStep("ASSOCIATE_LICENSES"),
+												ErrorMessage:           ptr.String("__ErrorMessage__"),
+												TargetAccountId:        ptr.String("__TargetAccountId__"),
+											},
+										},
+									},
+								},
 							},
 							AccountId: ptr.String("__AccountId__"),
 						},
@@ -5265,6 +5789,8 @@ func TestCheckResponseSnapshot_ListWorkflowStepExecutions(t *testing.T) {
 				Outputs:         ptr.String("__Outputs__"),
 				StartTime:       ptr.String("__StartTime__"),
 				EndTime:         ptr.String("__EndTime__"),
+				AttemptNumber:   ptr.Int32(1),
+				MaxAttempts:     ptr.Int32(1),
 			},
 			{
 				StepExecutionId: ptr.String("__StepExecutionId__"),
@@ -5278,6 +5804,8 @@ func TestCheckResponseSnapshot_ListWorkflowStepExecutions(t *testing.T) {
 				Outputs:         ptr.String("__Outputs__"),
 				StartTime:       ptr.String("__StartTime__"),
 				EndTime:         ptr.String("__EndTime__"),
+				AttemptNumber:   ptr.Int32(1),
+				MaxAttempts:     ptr.Int32(1),
 			},
 		},
 		WorkflowBuildVersionArn: ptr.String("__WorkflowBuildVersionArn__"),
@@ -6037,9 +6565,10 @@ func TestCheckResponseSnapshot_UpdateInfrastructureConfiguration(t *testing.T) {
 				S3KeyPrefix:  ptr.String("__S3KeyPrefix__"),
 			},
 		},
-		KeyPair:                    ptr.String("__KeyPair__"),
-		TerminateInstanceOnFailure: ptr.Bool(true),
-		SnsTopicArn:                ptr.String("__SnsTopicArn__"),
+		KeyPair:                       ptr.String("__KeyPair__"),
+		TerminateInstanceOnFailure:    ptr.Bool(true),
+		TerminateInstanceOnCompletion: ptr.Bool(true),
+		SnsTopicArn:                   ptr.String("__SnsTopicArn__"),
 		ResourceTags: map[string]string{
 			"key0": "__Value__",
 		},
@@ -6052,6 +6581,12 @@ func TestCheckResponseSnapshot_UpdateInfrastructureConfiguration(t *testing.T) {
 			Tenancy:              types.TenancyType("default"),
 			HostId:               ptr.String("__HostId__"),
 			HostResourceGroupArn: ptr.String("__HostResourceGroupArn__"),
+		},
+		ParentInstance: &types.ParentInstanceConfiguration{
+			AutoScalingGroup: &types.AutoScalingGroupConfiguration{
+				Name:                       ptr.String("__Name__"),
+				CapacityWaitTimeoutSeconds: ptr.Int32(1),
+			},
 		},
 		ClientToken: ptr.String("__ClientToken__"),
 	})
@@ -6682,6 +7217,7 @@ func TestCheckResponseSnapshot_Error_ResourceAlreadyExistsException(t *testing.T
 		},
 		KmsKeyId:    ptr.String("__KmsKeyId__"),
 		ClientToken: ptr.String("__ClientToken__"),
+		DryRun:      true,
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")

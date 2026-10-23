@@ -10324,6 +10324,131 @@ func TestCheckResponseSnapshot_SearchProfiles(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_SearchRecommendations(t *testing.T) {
+	want := &SearchRecommendationsOutput{
+		ProfileId: ptr.String("__ProfileId__"),
+		Recommendations: []types.Recommendation{
+			{
+				CatalogItem: &types.CatalogItem{
+					Id:                    ptr.String("__Id__"),
+					Name:                  ptr.String("__Name__"),
+					Code:                  ptr.String("__Code__"),
+					Type:                  ptr.String("__Type__"),
+					Category:              ptr.String("__Category__"),
+					Description:           ptr.String("__Description__"),
+					AdditionalInformation: ptr.String("__AdditionalInformation__"),
+					ImageLink:             ptr.String("__ImageLink__"),
+					Link:                  ptr.String("__Link__"),
+					CreatedAt:             ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					UpdatedAt:             ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					Price:                 ptr.String("__Price__"),
+					Attributes: map[string]string{
+						"key0": "__Value__",
+					},
+				},
+				Score: ptr.Float64(1.0),
+			},
+			{
+				CatalogItem: &types.CatalogItem{
+					Id:                    ptr.String("__Id__"),
+					Name:                  ptr.String("__Name__"),
+					Code:                  ptr.String("__Code__"),
+					Type:                  ptr.String("__Type__"),
+					Category:              ptr.String("__Category__"),
+					Description:           ptr.String("__Description__"),
+					AdditionalInformation: ptr.String("__AdditionalInformation__"),
+					ImageLink:             ptr.String("__ImageLink__"),
+					Link:                  ptr.String("__Link__"),
+					CreatedAt:             ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					UpdatedAt:             ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					Price:                 ptr.String("__Price__"),
+					Attributes: map[string]string{
+						"key0": "__Value__",
+					},
+				},
+				Score: ptr.Float64(1.0),
+			},
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("SearchRecommendations.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.SearchRecommendations(context.Background(), &SearchRecommendationsInput{
+		DomainName: ptr.String("__DomainName__"),
+		KeyName:    ptr.String("__KeyName__"),
+		KeyValues: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Recommender: &types.Recommender{
+			Name: ptr.String("__Name__"),
+			Filters: []types.RecommenderFilter{
+				{
+					Name: ptr.String("__Name__"),
+					Values: map[string]string{
+						"key0": "__Value__",
+					},
+				},
+				{
+					Name: ptr.String("__Name__"),
+					Values: map[string]string{
+						"key0": "__Value__",
+					},
+				},
+			},
+			PromotionalFilters: []types.RecommenderPromotionalFilter{
+				{
+					Name: ptr.String("__Name__"),
+					Values: map[string]string{
+						"key0": "__Value__",
+					},
+					PromotionName:        ptr.String("__PromotionName__"),
+					PercentPromotedItems: ptr.Int32(1),
+				},
+				{
+					Name: ptr.String("__Name__"),
+					Values: map[string]string{
+						"key0": "__Value__",
+					},
+					PromotionName:        ptr.String("__PromotionName__"),
+					PercentPromotedItems: ptr.Int32(1),
+				},
+			},
+		},
+		CandidateIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Context: map[string]string{
+			"key0": "__Value__",
+		},
+		Diversity: &types.RecommendationDiversityConfig{
+			Enabled: ptr.Bool(true),
+			Values: map[string]int32{
+				"key0": 1,
+			},
+		},
+		Metadata: &types.RecommendationMetadata{
+			Columns: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+		MaxRecommendations: ptr.Int32(1),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "SearchRecommendations.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_StartRecommender(t *testing.T) {
 	want := &StartRecommenderOutput{}
 	status, header, body, err := serdeRespReadSnapshot("StartRecommender.response")

@@ -4,7 +4,9 @@ package apigatewayv2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/apigatewayv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/apigatewayv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -41,6 +43,23 @@ type CreateProductPageInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateProductPageInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateProductPageRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateProductPageInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DisplayContent != nil {
+		s.WriteStruct(schemas.CreateProductPageRequest_DisplayContent)
+		v.DisplayContent.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.PortalProductId != nil {
+		s.WriteString(schemas.CreateProductPageRequest_PortalProductId, *v.PortalProductId)
+	}
+}
+
 type CreateProductPageOutput struct {
 
 	// The content of the product page.
@@ -61,13 +80,52 @@ type CreateProductPageOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateProductPageOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateProductPageResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateProductPageOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DisplayContent != nil {
+		s.WriteStruct(schemas.CreateProductPageResponse_DisplayContent)
+		v.DisplayContent.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.LastModified != nil {
+		s.WriteTime(schemas.CreateProductPageResponse_LastModified, *v.LastModified)
+	}
+	if v.ProductPageArn != nil {
+		s.WriteString(schemas.CreateProductPageResponse_ProductPageArn, *v.ProductPageArn)
+	}
+	if v.ProductPageId != nil {
+		s.WriteString(schemas.CreateProductPageResponse_ProductPageId, *v.ProductPageId)
+	}
+}
+func (v *CreateProductPageOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateProductPageResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateProductPageResponse_DisplayContent:
+			v.DisplayContent = &types.DisplayContent{}
+			return v.DisplayContent.Deserialize(d)
+		case schemas.CreateProductPageResponse_LastModified:
+			v.LastModified = new(time.Time)
+			return d.ReadTime(schemas.CreateProductPageResponse_LastModified, v.LastModified)
+		case schemas.CreateProductPageResponse_ProductPageArn:
+			v.ProductPageArn = new(string)
+			return d.ReadString(schemas.CreateProductPageResponse_ProductPageArn, v.ProductPageArn)
+		case schemas.CreateProductPageResponse_ProductPageId:
+			v.ProductPageId = new(string)
+			return d.ReadString(schemas.CreateProductPageResponse_ProductPageId, v.ProductPageId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateProductPageMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateProductPage{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateProductPage, schemas.CreateProductPageRequest, schemas.CreateProductPageResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateProductPage{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateProductPage, schemas.CreateProductPageRequest, schemas.CreateProductPageResponse), output: &CreateProductPageOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

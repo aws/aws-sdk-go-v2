@@ -9,13 +9,29 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
-// Lists the platform versions available for your account in an AWS Region.
-// Provides summary information about each platform version. Compare to DescribePlatformVersion, which
-// provides full details about a single platform version.
+// Lists the platform versions available for your account in an Amazon Web
+// Services Region. Provides summary information about each platform version.
+// Compare to DescribePlatformVersion, which provides full details about a single platform version.
 //
-// For definitions of platform version and other platform-related terms, see [AWS Elastic Beanstalk Platforms Glossary].
+// This action only returns information about platform versions that the calling
+// principle has IAM permissions to access. For example, consider a case where a
+// user only has permission to access one of ten platform versions. When the user
+// calls the ListPlatformVersions action, the response will only include the one
+// platform version that the user has permission to access instead of all ten
+// platform versions. If the user doesn’t have access to any of the platform
+// versions an empty result is returned.
 //
-// [AWS Elastic Beanstalk Platforms Glossary]: https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/platforms-glossary.html
+// The AWSElasticBeanstalkReadOnly managed policy allows operators to view
+// information about resources related to Elastic Beanstalk environments. For more
+// information, see [Managing Elastic Beanstalk user policies]in the Elastic Beanstalk Developer Guide. For detailed
+// instructions to attach a policy to a user or group, see the section [Controlling access with managed policies]in the same
+// topic.
+//
+// For definitions of platform version and other platform-related terms, see [Elastic Beanstalk Platforms Glossary].
+//
+// [Managing Elastic Beanstalk user policies]: https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/AWSHowTo.iam.managed-policies.html
+// [Elastic Beanstalk Platforms Glossary]: https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/platforms-glossary.html
+// [Controlling access with managed policies]: https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/AWSHowTo.iam.managed-policies.html#iam-userpolicies-managed
 func (c *Client) ListPlatformVersions(ctx context.Context, params *ListPlatformVersionsInput, optFns ...func(*Options)) (*ListPlatformVersionsOutput, error) {
 	if params == nil {
 		params = &ListPlatformVersionsInput{}

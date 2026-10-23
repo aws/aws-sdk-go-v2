@@ -1094,6 +1094,13 @@
                         "smithy.api#documentation": "<p>Controls how MediaConnect generates timecodes for NDI output frames. If you don't specify this field, MediaConnect uses <code>EMBEDDED_TIMECODE</code>.</p> <ul> <li> <p> <code>EMBEDDED_TIMECODE</code> (default) - Preserves timecodes from the input transport stream. The timecodes must be embedded in the video stream as SEI timing messages. If no embedded timecode is detected, MediaConnect uses the UTC system time instead.</p> </li> <li> <p> <code>UTC_SYSTEM_TIME</code> - Generates timecodes based on the system clock time when each frame is sent.</p> </li> </ul>",
                         "smithy.api#jsonName": "ndiOutputTimecodeSource"
                     }
+                },
+                "NdiAudioReferenceLevel": {
+                    "target": "com.amazonaws.mediaconnect#NdiAudioReferenceLevel",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The audio reference level of the NDI receiver, in decibels relative to full scale (dBFS). Common values are <code>-20</code> (NDI and SMPTE) and <code>-18</code> (EBU). If you don't specify this field, MediaConnect uses <code>-20</code>.</p>",
+                        "smithy.api#jsonName": "ndiAudioReferenceLevel"
+                    }
                 }
             },
             "traits": {
@@ -2119,6 +2126,35 @@
                 "smithy.api#pattern": "^[!-~]+$"
             }
         },
+        "com.amazonaws.mediaconnect#ColorInformation": {
+            "type": "structure",
+            "members": {
+                "Colorimetry": {
+                    "target": "com.amazonaws.mediaconnect#VideoColorimetry",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The color primaries that the video stream uses (for example, <code>BT709</code> or <code>BT2020</code>).</p>",
+                        "smithy.api#jsonName": "colorimetry"
+                    }
+                },
+                "TransferCharacteristics": {
+                    "target": "com.amazonaws.mediaconnect#VideoTransferCharacteristics",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The transfer characteristics that the video stream uses (for example, <code>BT601</code>, <code>BT709</code>, <code>BT2100_PQ</code>, or <code>BT2100_HLG</code>).</p>",
+                        "smithy.api#jsonName": "transferCharacteristics"
+                    }
+                },
+                "MatrixCoefficients": {
+                    "target": "com.amazonaws.mediaconnect#VideoMatrixCoefficients",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The YCbCr matrix coefficients that the video stream uses (for example, <code>BT709</code> or <code>BT2020_NCL</code>).</p>",
+                        "smithy.api#jsonName": "matrixCoefficients"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The color signaling of the video stream.</p>"
+            }
+        },
         "com.amazonaws.mediaconnect#Colorimetry": {
             "type": "enum",
             "members": {
@@ -2737,6 +2773,8 @@
                     "requiredActions": [
                         "mediaconnect:CreateRouterInput",
                         "mediaconnect:AssociateRouterNetworkInterface",
+                        "mediaconnect:AssociateDestination",
+                        "mediaconnect:RegisterDestinationEndpoint",
                         "mediaconnect:UpdateFlowOutput",
                         "mediaconnect:TagResource",
                         "medialive:UpdateChannel",
@@ -2795,7 +2833,7 @@
                 "Tier": {
                     "target": "com.amazonaws.mediaconnect#RouterInputTier",
                     "traits": {
-                        "smithy.api#documentation": "<p>The tier level for the router input.</p>",
+                        "smithy.api#documentation": "<p>The tier level for the router input. The tier sets the maximum bitrate, in Mbps, for the router input. Valid values include the following:</p> <ul> <li> <p> <code>INPUT_20</code> – 20 Mbps</p> </li> <li> <p> <code>INPUT_50</code> – 50 Mbps</p> </li> <li> <p> <code>INPUT_100</code> – 100 Mbps</p> </li> <li> <p> <code>INPUT_250</code> – 250 Mbps</p> </li> <li> <p> <code>INPUT_500</code> – 500 Mbps</p> </li> </ul> <p>The 250 Mbps and 500 Mbps tiers are high-bitrate tiers that support TR-07 (JPEG XS) workflows.</p>",
                         "smithy.api#jsonName": "tier",
                         "smithy.api#required": {}
                     }
@@ -3037,6 +3075,8 @@
                     "requiredActions": [
                         "mediaconnect:CreateRouterOutput",
                         "mediaconnect:AssociateRouterNetworkInterface",
+                        "mediaconnect:AssociateSource",
+                        "mediaconnect:RegisterSourceEndpoint",
                         "mediaconnect:UpdateFlowSource",
                         "mediaconnect:TagResource",
                         "medialive:UpdateInput",
@@ -3096,7 +3136,7 @@
                 "Tier": {
                     "target": "com.amazonaws.mediaconnect#RouterOutputTier",
                     "traits": {
-                        "smithy.api#documentation": "<p>The tier level for the router output.</p>",
+                        "smithy.api#documentation": "<p>The tier level for the router output. The tier sets the maximum bitrate, in Mbps, for the router output. Valid values include the following:</p> <ul> <li> <p> <code>OUTPUT_20</code> – 20 Mbps</p> </li> <li> <p> <code>OUTPUT_50</code> – 50 Mbps</p> </li> <li> <p> <code>OUTPUT_100</code> – 100 Mbps</p> </li> <li> <p> <code>OUTPUT_250</code> – 250 Mbps</p> </li> <li> <p> <code>OUTPUT_500</code> – 500 Mbps</p> </li> </ul> <p>The 250 Mbps and 500 Mbps tiers are high-bitrate tiers that support TR-07 (JPEG XS) workflows.</p>",
                         "smithy.api#jsonName": "tier",
                         "smithy.api#required": {}
                     }
@@ -3487,7 +3527,11 @@
             "traits": {
                 "aws.iam#iamAction": {
                     "name": "DeleteRouterInput",
-                    "documentation": "Grants permission to delete a router input in AWS Elemental MediaConnect"
+                    "documentation": "Grants permission to delete a router input in AWS Elemental MediaConnect",
+                    "requiredActions": [
+                        "mediaconnect:DeregisterDestinationEndpoint",
+                        "mediaconnect:DisassociateDestination"
+                    ]
                 },
                 "smithy.api#documentation": "<p>Deletes a router input from AWS Elemental MediaConnect.</p>",
                 "smithy.api#http": {
@@ -3677,7 +3721,11 @@
             "traits": {
                 "aws.iam#iamAction": {
                     "name": "DeleteRouterOutput",
-                    "documentation": "Grants permission to delete a router output from AWS Elemental MediaConnect"
+                    "documentation": "Grants permission to delete a router output from AWS Elemental MediaConnect",
+                    "requiredActions": [
+                        "mediaconnect:DeregisterSourceEndpoint",
+                        "mediaconnect:DisassociateSource"
+                    ]
                 },
                 "smithy.api#documentation": "<p>Deletes a router output from AWS Elemental MediaConnect.</p>",
                 "smithy.api#http": {
@@ -10466,7 +10514,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Configuration settings for connecting a router input to a flow output.</p>",
+                "smithy.api#documentation": "<p>Configuration settings for connecting a router input to a flow output.</p> <p>To connect the router input to the flow output, provide both <code>flowArn</code> and <code>flowOutputArn</code>. To disconnect it, call the update operation and omit both fields while keeping this configuration object.</p> <note> <p>You can't change <code>sourceTransitDecryption</code> while the router input is connected to a flow output. To change it, first disconnect the router input, then update the decryption.</p> </note>",
                 "smithy.api#references": [
                     {
                         "resource": "com.amazonaws.mediaconnect#FlowResource"
@@ -10508,7 +10556,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Configuration settings for connecting a router output to a MediaConnect flow source.</p>",
+                "smithy.api#documentation": "<p>Configuration settings for connecting a router output to a MediaConnect flow source.</p> <p>To connect the router output to the flow source, provide both <code>flowArn</code> and <code>flowSourceArn</code>. To disconnect it, call the update operation and omit both fields while keeping this configuration object.</p> <note> <p>You can't change <code>destinationTransitEncryption</code> while the router output is connected to a flow source. To change it, first disconnect the router output, then update the encryption.</p> </note>",
                 "smithy.api#references": [
                     {
                         "resource": "com.amazonaws.mediaconnect#FlowResource"
@@ -10579,7 +10627,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Configuration settings for connecting a router input to a MediaLive channel output.</p>"
+                "smithy.api#documentation": "<p>Configuration settings for connecting a router input to a MediaLive channel output.</p> <p>To connect the router input to the MediaLive channel output, provide all three of <code>mediaLiveChannelArn</code>, <code>mediaLivePipelineId</code>, and <code>mediaLiveChannelOutputName</code>. To disconnect it, call the update operation and omit all three fields while keeping this configuration object.</p> <note> <p>You can't change <code>sourceTransitDecryption</code> while the router input is connected to a MediaLive channel output. To change it, first disconnect the router input, then update the decryption.</p> </note>"
             }
         },
         "com.amazonaws.mediaconnect#MediaLiveChannelRouterInputStreamDetails": {
@@ -10639,7 +10687,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Configuration settings for connecting a router output to a MediaLive input.</p>"
+                "smithy.api#documentation": "<p>Configuration settings for connecting a router output to a MediaLive input.</p> <p>To connect the router output to the MediaLive input, provide both <code>mediaLiveInputArn</code> and <code>mediaLivePipelineId</code>. To disconnect it, call the update operation and omit both fields while keeping this configuration object.</p> <note> <p>You can't change <code>destinationTransitEncryption</code> while the router output is connected to a MediaLive input. To change it, first disconnect the router output, then update the encryption.</p> </note>"
             }
         },
         "com.amazonaws.mediaconnect#MediaLiveInputRouterOutputStreamDetails": {
@@ -11212,6 +11260,15 @@
                 "smithy.api#documentation": "<p> The settings related to the multicast source. </p>"
             }
         },
+        "com.amazonaws.mediaconnect#NdiAudioReferenceLevel": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": -40,
+                    "max": 0
+                }
+            }
+        },
         "com.amazonaws.mediaconnect#NdiConfig": {
             "type": "structure",
             "members": {
@@ -11326,6 +11383,13 @@
                     "traits": {
                         "smithy.api#documentation": "<p> The method used to display video frames. Used when the <code>streamType</code> is <code>Video</code>.</p>",
                         "smithy.api#jsonName": "scanMode"
+                    }
+                },
+                "Color": {
+                    "target": "com.amazonaws.mediaconnect#ColorInformation",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The color signaling of the video stream. Used when the <code>streamType</code> is <code>Video</code>. </p>",
+                        "smithy.api#jsonName": "color"
                     }
                 },
                 "FrameResolution": {
@@ -11446,10 +11510,17 @@
                         "smithy.api#documentation": "<p> The exact name of an existing NDI sender that's registered with your discovery server. If included, the format of this name must be <code>MACHINENAME (ProgramName)</code>. </p>",
                         "smithy.api#jsonName": "sourceName"
                     }
+                },
+                "AudioReferenceLevel": {
+                    "target": "com.amazonaws.mediaconnect#NdiAudioReferenceLevel",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The audio reference level of the NDI sender, in decibels relative to full scale (dBFS). Common values are <code>-20</code> (NDI and SMPTE) and <code>-18</code> (EBU). If you don't specify this field, MediaConnect uses <code>-20</code>.</p>",
+                        "smithy.api#jsonName": "audioReferenceLevel"
+                    }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p> The settings for the NDI® source. This includes the exact name of the upstream NDI sender that you want to connect to your source. </p>"
+                "smithy.api#documentation": "<p> The settings for the NDI® source. This includes the exact name of the upstream NDI sender that you want to connect to your source. </p> <note> <p>When you update the NDI source, include only the members you want to change. MediaConnect leaves the members that you don't specify unchanged.</p> </note>"
             }
         },
         "com.amazonaws.mediaconnect#NdiState": {
@@ -11989,6 +12060,13 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>A rule that allows a specific CIDR block to access the public router network interface.</p>"
+            }
+        },
+        "com.amazonaws.mediaconnect#PublicTlsEncryptionConfiguration": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#documentation": "<p>The TLS encryption configuration for destinations that present a certificate from a publicly trusted certificate authority. This type does not require any additional settings.</p>"
             }
         },
         "com.amazonaws.mediaconnect#PurchaseOffering": {
@@ -13382,7 +13460,7 @@
                 "Tier": {
                     "target": "com.amazonaws.mediaconnect#RouterInputTier",
                     "traits": {
-                        "smithy.api#documentation": "<p>The tier level of the router input.</p>",
+                        "smithy.api#documentation": "<p>The tier level for the router input. The tier sets the maximum bitrate, in Mbps, for the router input. Valid values include the following:</p> <ul> <li> <p> <code>INPUT_20</code> – 20 Mbps</p> </li> <li> <p> <code>INPUT_50</code> – 50 Mbps</p> </li> <li> <p> <code>INPUT_100</code> – 100 Mbps</p> </li> <li> <p> <code>INPUT_250</code> – 250 Mbps</p> </li> <li> <p> <code>INPUT_500</code> – 500 Mbps</p> </li> </ul> <p>The 250 Mbps and 500 Mbps tiers are high-bitrate tiers that support TR-07 (JPEG XS) workflows.</p>",
                         "smithy.api#jsonName": "tier",
                         "smithy.api#required": {}
                     }
@@ -14003,6 +14081,18 @@
                     "traits": {
                         "smithy.api#enumValue": "INPUT_20"
                     }
+                },
+                "INPUT_500": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INPUT_500"
+                    }
+                },
+                "INPUT_250": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INPUT_250"
+                    }
                 }
             }
         },
@@ -14518,7 +14608,7 @@
                 "Tier": {
                     "target": "com.amazonaws.mediaconnect#RouterOutputTier",
                     "traits": {
-                        "smithy.api#documentation": "<p>The tier level of the router output.</p>",
+                        "smithy.api#documentation": "<p>The tier level for the router output. The tier sets the maximum bitrate, in Mbps, for the router output. Valid values include the following:</p> <ul> <li> <p> <code>OUTPUT_20</code> – 20 Mbps</p> </li> <li> <p> <code>OUTPUT_50</code> – 50 Mbps</p> </li> <li> <p> <code>OUTPUT_100</code> – 100 Mbps</p> </li> <li> <p> <code>OUTPUT_250</code> – 250 Mbps</p> </li> <li> <p> <code>OUTPUT_500</code> – 500 Mbps</p> </li> </ul> <p>The 250 Mbps and 500 Mbps tiers are high-bitrate tiers that support TR-07 (JPEG XS) workflows.</p>",
                         "smithy.api#jsonName": "tier",
                         "smithy.api#required": {}
                     }
@@ -14788,6 +14878,12 @@
                     "traits": {
                         "smithy.api#enumValue": "SRT_LISTENER"
                     }
+                },
+                "RTMP_PUSH": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RTMP_PUSH"
+                    }
                 }
             }
         },
@@ -14804,6 +14900,12 @@
                     "target": "com.amazonaws.mediaconnect#SrtListenerRouterOutputConfiguration",
                     "traits": {
                         "smithy.api#jsonName": "srtListener"
+                    }
+                },
+                "RtmpPush": {
+                    "target": "com.amazonaws.mediaconnect#RtmpPushRouterOutputConfiguration",
+                    "traits": {
+                        "smithy.api#jsonName": "rtmpPush"
                     }
                 },
                 "SrtCaller": {
@@ -15042,6 +15144,18 @@
                     "traits": {
                         "smithy.api#enumValue": "OUTPUT_20"
                     }
+                },
+                "OUTPUT_500": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "OUTPUT_500"
+                    }
+                },
+                "OUTPUT_250": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "OUTPUT_250"
+                    }
                 }
             }
         },
@@ -15095,6 +15209,57 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.mediaconnect#RoutingScope"
+            }
+        },
+        "com.amazonaws.mediaconnect#RtmpPushRouterOutputConfiguration": {
+            "type": "structure",
+            "members": {
+                "DestinationAddress": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IP address or hostname of the destination RTMP server that the router output pushes the stream to. Provide only the server address; specify the application and stream names separately.</p>",
+                        "smithy.api#jsonName": "destinationAddress",
+                        "smithy.api#required": {}
+                    }
+                },
+                "DestinationPort": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The TCP port on the destination RTMP server. For RTMP, valid values range from <code>1024</code> to <code>65535</code>. For RTMPS (RTMP over TLS), valid values are <code>443</code> or <code>1024</code> to <code>65535</code>. RTMP typically uses port <code>1935</code>, and RTMPS typically uses port <code>443</code>.</p>",
+                        "smithy.api#jsonName": "destinationPort",
+                        "smithy.api#range": {
+                            "min": 443,
+                            "max": 65535
+                        },
+                        "smithy.api#required": {}
+                    }
+                },
+                "ApplicationName": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the RTMP application on the destination server. Together with the stream name, the application name forms the RTMP URL path, in the pattern <code>rtmp://destinationAddress/applicationName/streamName</code>.</p>",
+                        "smithy.api#jsonName": "applicationName",
+                        "smithy.api#required": {}
+                    }
+                },
+                "StreamName": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the RTMP stream that the output publishes to the destination application. The stream name forms the final segment of the RTMP URL path.</p>",
+                        "smithy.api#jsonName": "streamName",
+                        "smithy.api#required": {}
+                    }
+                },
+                "TlsEncryption": {
+                    "target": "com.amazonaws.mediaconnect#TlsEncryption",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The TLS encryption settings for the output. When you specify these settings, the output uses RTMPS (RTMP over TLS) to establish a secure, encrypted connection to the destination server.</p>",
+                        "smithy.api#jsonName": "tlsEncryption"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The configuration settings for a router output that pushes a stream to a destination using the RTMP (Real-Time Messaging Protocol) protocol, or RTMPS (RTMP over TLS) when TLS encryption is specified. These settings include the destination address and port, the application and stream names, and optional TLS encryption configuration.</p>"
             }
         },
         "com.amazonaws.mediaconnect#RtpRouterInputConfiguration": {
@@ -16704,7 +16869,9 @@
                             "RouterOutput": {},
                             "RouterNetworkInterface": {},
                             "VpcInterface": {},
-                            "MediaStream": {}
+                            "MediaStream": {},
+                            "SourceEndpoint": {},
+                            "DestinationEndpoint": {}
                         }
                     }
                 },
@@ -16981,6 +17148,55 @@
                 }
             }
         },
+        "com.amazonaws.mediaconnect#TlsEncryption": {
+            "type": "structure",
+            "members": {
+                "EncryptionType": {
+                    "target": "com.amazonaws.mediaconnect#TlsEncryptionType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of TLS encryption to use for the connection.</p>",
+                        "smithy.api#jsonName": "encryptionType"
+                    }
+                },
+                "EncryptionConfiguration": {
+                    "target": "com.amazonaws.mediaconnect#TlsEncryptionConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration settings for the specified TLS encryption type.</p>",
+                        "smithy.api#jsonName": "encryptionConfiguration",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The Transport Layer Security (TLS) encryption settings used to establish a secure connection to a destination.</p>"
+            }
+        },
+        "com.amazonaws.mediaconnect#TlsEncryptionConfiguration": {
+            "type": "union",
+            "members": {
+                "Public": {
+                    "target": "com.amazonaws.mediaconnect#PublicTlsEncryptionConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The TLS encryption configuration that validates the destination by using a publicly trusted certificate authority.</p>",
+                        "smithy.api#jsonName": "public"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The configuration settings for TLS encryption.</p>"
+            }
+        },
+        "com.amazonaws.mediaconnect#TlsEncryptionType": {
+            "type": "enum",
+            "members": {
+                "PUBLIC": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PUBLIC"
+                    }
+                }
+            }
+        },
         "com.amazonaws.mediaconnect#TooManyRequestsException": {
             "type": "structure",
             "members": {
@@ -17123,6 +17339,13 @@
                         "smithy.api#documentation": "<p>The timecode source for NDI output frames. For NDI outputs, this field is always present and defaults to <code>EMBEDDED_TIMECODE</code>.</p> <ul> <li> <p> <code>EMBEDDED_TIMECODE</code> - Preserves timecodes from the input transport stream. The timecodes must be embedded in the video stream as SEI timing messages. If no embedded timecode is detected, MediaConnect uses the UTC system time instead.</p> </li> <li> <p> <code>UTC_SYSTEM_TIME</code> - Generates timecodes based on the system clock time when each frame is sent.</p> </li> </ul>",
                         "smithy.api#jsonName": "ndiOutputTimecodeSource"
                     }
+                },
+                "NdiAudioReferenceLevel": {
+                    "target": "com.amazonaws.mediaconnect#NdiAudioReferenceLevel",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The audio reference level of the NDI receiver, in decibels relative to full scale (dBFS). Common values are <code>-20</code> (NDI and SMPTE) and <code>-18</code> (EBU). For NDI outputs, this field is always present and defaults to <code>-20</code>.</p>",
+                        "smithy.api#jsonName": "ndiAudioReferenceLevel"
+                    }
                 }
             },
             "traits": {
@@ -17139,6 +17362,13 @@
                         "smithy.api#documentation": "<p> The list of transport stream programs in the current flow's source.</p>",
                         "smithy.api#jsonName": "programs",
                         "smithy.api#required": {}
+                    }
+                },
+                "TsId": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The transport stream ID (TSID) of the source, from the Program Association Table (PAT).</p>",
+                        "smithy.api#jsonName": "tsId"
                     }
                 }
             },
@@ -17161,6 +17391,13 @@
                     "traits": {
                         "smithy.api#documentation": "<p> The codec used by the stream.</p>",
                         "smithy.api#jsonName": "codec"
+                    }
+                },
+                "Color": {
+                    "target": "com.amazonaws.mediaconnect#ColorInformation",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The color signaling of the video stream.</p>",
+                        "smithy.api#jsonName": "color"
                     }
                 },
                 "FrameRate": {
@@ -17357,7 +17594,9 @@
                             "RouterOutput": {},
                             "RouterNetworkInterface": {},
                             "VpcInterface": {},
-                            "MediaStream": {}
+                            "MediaStream": {},
+                            "SourceEndpoint": {},
+                            "DestinationEndpoint": {}
                         }
                     }
                 },
@@ -18524,6 +18763,13 @@
                         "smithy.api#documentation": "<p>Controls how MediaConnect generates timecodes for NDI output frames. If you don't specify this field, MediaConnect leaves the value unchanged.</p> <ul> <li> <p> <code>EMBEDDED_TIMECODE</code> - Preserves timecodes from the input transport stream. The timecodes must be embedded in the video stream as SEI timing messages. If no embedded timecode is detected, MediaConnect uses the UTC system time instead.</p> </li> <li> <p> <code>UTC_SYSTEM_TIME</code> - Generates timecodes based on the system clock time when each frame is sent.</p> </li> </ul>",
                         "smithy.api#jsonName": "ndiOutputTimecodeSource"
                     }
+                },
+                "NdiAudioReferenceLevel": {
+                    "target": "com.amazonaws.mediaconnect#NdiAudioReferenceLevel",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The audio reference level of the NDI receiver, in decibels relative to full scale (dBFS). Common values are <code>-20</code> (NDI and SMPTE) and <code>-18</code> (EBU). If you don't specify this field, MediaConnect leaves the value unchanged.</p>",
+                        "smithy.api#jsonName": "ndiAudioReferenceLevel"
+                    }
                 }
             },
             "traits": {
@@ -19134,7 +19380,7 @@
                 "Tier": {
                     "target": "com.amazonaws.mediaconnect#RouterInputTier",
                     "traits": {
-                        "smithy.api#documentation": "<p>The updated tier level for the router input.</p>",
+                        "smithy.api#documentation": "<p>The updated tier level for the router input. The tier sets the maximum bitrate, in Mbps, for the router input. Valid values include the following:</p> <ul> <li> <p> <code>INPUT_20</code> – 20 Mbps</p> </li> <li> <p> <code>INPUT_50</code> – 50 Mbps</p> </li> <li> <p> <code>INPUT_100</code> – 100 Mbps</p> </li> <li> <p> <code>INPUT_250</code> – 250 Mbps</p> </li> <li> <p> <code>INPUT_500</code> – 500 Mbps</p> </li> </ul> <p>The 250 Mbps and 500 Mbps tiers are high-bitrate tiers that support TR-07 (JPEG XS) workflows.</p>",
                         "smithy.api#jsonName": "tier"
                     }
                 },
@@ -19381,7 +19627,7 @@
                 "Tier": {
                     "target": "com.amazonaws.mediaconnect#RouterOutputTier",
                     "traits": {
-                        "smithy.api#documentation": "<p>The updated tier level for the router output.</p>",
+                        "smithy.api#documentation": "<p>The updated tier level for the router output. The tier sets the maximum bitrate, in Mbps, for the router output. Valid values include the following:</p> <ul> <li> <p> <code>OUTPUT_20</code> – 20 Mbps</p> </li> <li> <p> <code>OUTPUT_50</code> – 50 Mbps</p> </li> <li> <p> <code>OUTPUT_100</code> – 100 Mbps</p> </li> <li> <p> <code>OUTPUT_250</code> – 250 Mbps</p> </li> <li> <p> <code>OUTPUT_500</code> – 500 Mbps</p> </li> </ul> <p>The 250 Mbps and 500 Mbps tiers are high-bitrate tiers that support TR-07 (JPEG XS) workflows.</p>",
                         "smithy.api#jsonName": "tier"
                     }
                 },
@@ -19422,6 +19668,160 @@
                 "smithy.api#private": {}
             }
         },
+        "com.amazonaws.mediaconnect#VideoColorimetry": {
+            "type": "enum",
+            "members": {
+                "BT709": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BT709"
+                    }
+                },
+                "BT470M": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BT470M"
+                    }
+                },
+                "BT470BG": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BT470BG"
+                    }
+                },
+                "BT601": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BT601"
+                    }
+                },
+                "SMPTE240M": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SMPTE240M"
+                    }
+                },
+                "GENERIC_FILM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "GENERIC_FILM"
+                    }
+                },
+                "BT2020": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BT2020"
+                    }
+                },
+                "SMPTE428": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SMPTE428"
+                    }
+                },
+                "SMPTE431": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SMPTE431"
+                    }
+                },
+                "SMPTE432": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SMPTE432"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.mediaconnect#VideoMatrixCoefficients": {
+            "type": "enum",
+            "members": {
+                "IDENTITY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IDENTITY"
+                    }
+                },
+                "BT709": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BT709"
+                    }
+                },
+                "FCC": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FCC"
+                    }
+                },
+                "BT470BG": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BT470BG"
+                    }
+                },
+                "BT601": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BT601"
+                    }
+                },
+                "SMPTE240M": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SMPTE240M"
+                    }
+                },
+                "YCGCO": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "YCGCO"
+                    }
+                },
+                "BT2020_NCL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BT2020_NCL"
+                    }
+                },
+                "BT2020_CL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BT2020_CL"
+                    }
+                },
+                "SMPTE2085": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SMPTE2085"
+                    }
+                },
+                "CHROMATICITY_DERIVED_NCL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CHROMATICITY_DERIVED_NCL"
+                    }
+                },
+                "CHROMATICITY_DERIVED_CL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CHROMATICITY_DERIVED_CL"
+                    }
+                },
+                "BT2100_ICTCP": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BT2100_ICTCP"
+                    }
+                },
+                "IPT_C2": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IPT_C2"
+                    }
+                }
+            }
+        },
         "com.amazonaws.mediaconnect#VideoMonitoringSetting": {
             "type": "structure",
             "members": {
@@ -19442,6 +19842,107 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Specifies the configuration for video stream metrics monitoring.</p>"
+            }
+        },
+        "com.amazonaws.mediaconnect#VideoTransferCharacteristics": {
+            "type": "enum",
+            "members": {
+                "BT709": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BT709"
+                    }
+                },
+                "BT470M": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BT470M"
+                    }
+                },
+                "BT470BG": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BT470BG"
+                    }
+                },
+                "BT601": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BT601"
+                    }
+                },
+                "SMPTE240M": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SMPTE240M"
+                    }
+                },
+                "LINEAR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LINEAR"
+                    }
+                },
+                "LOG100": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LOG100"
+                    }
+                },
+                "LOG316": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LOG316"
+                    }
+                },
+                "IEC61966_2_4": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IEC61966_2_4"
+                    }
+                },
+                "BT1361_ECG": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BT1361_ECG"
+                    }
+                },
+                "IEC61966_2_1": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IEC61966_2_1"
+                    }
+                },
+                "BT2020_10": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BT2020_10"
+                    }
+                },
+                "BT2020_12": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BT2020_12"
+                    }
+                },
+                "BT2100_PQ": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BT2100_PQ"
+                    }
+                },
+                "SMPTE428": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SMPTE428"
+                    }
+                },
+                "BT2100_HLG": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BT2100_HLG"
+                    }
+                }
             }
         },
         "com.amazonaws.mediaconnect#VpcInterface": {

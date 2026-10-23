@@ -4,6 +4,8 @@ package medialive
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/medialive/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -36,6 +38,18 @@ type StopInputDeviceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StopInputDeviceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StopInputDeviceRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StopInputDeviceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InputDeviceId != nil {
+		s.WriteString(schemas.StopInputDeviceRequest_InputDeviceId, *v.InputDeviceId)
+	}
+}
+
 // Placeholder documentation for StopInputDeviceResponse
 type StopInputDeviceOutput struct {
 	// Metadata pertaining to the operation's result.
@@ -44,13 +58,26 @@ type StopInputDeviceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StopInputDeviceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StopInputDeviceResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StopInputDeviceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *StopInputDeviceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StopInputDeviceResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStopInputDeviceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpStopInputDevice{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StopInputDevice, schemas.StopInputDeviceRequest, schemas.StopInputDeviceResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStopInputDevice{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StopInputDevice, schemas.StopInputDeviceRequest, schemas.StopInputDeviceResponse), output: &StopInputDeviceOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package auditmanager
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/auditmanager/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/auditmanager/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,21 @@ type GetAssessmentReportUrlInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetAssessmentReportUrlInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetAssessmentReportUrlRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetAssessmentReportUrlInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AssessmentId != nil {
+		s.WriteString(schemas.GetAssessmentReportUrlRequest_assessmentId, *v.AssessmentId)
+	}
+	if v.AssessmentReportId != nil {
+		s.WriteString(schemas.GetAssessmentReportUrlRequest_assessmentReportId, *v.AssessmentReportId)
+	}
+}
+
 type GetAssessmentReportUrlOutput struct {
 
 	//  Short for uniform resource locator. A URL is used as a unique identifier to
@@ -51,13 +68,34 @@ type GetAssessmentReportUrlOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetAssessmentReportUrlOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetAssessmentReportUrlResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetAssessmentReportUrlOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PreSignedUrl != nil {
+		s.WriteStruct(schemas.GetAssessmentReportUrlResponse_preSignedUrl)
+		v.PreSignedUrl.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetAssessmentReportUrlOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetAssessmentReportUrlResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetAssessmentReportUrlResponse_preSignedUrl:
+			v.PreSignedUrl = &types.URL{}
+			return v.PreSignedUrl.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetAssessmentReportUrlMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetAssessmentReportUrl{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAssessmentReportUrl, schemas.GetAssessmentReportUrlRequest, schemas.GetAssessmentReportUrlResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetAssessmentReportUrl{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAssessmentReportUrl, schemas.GetAssessmentReportUrlRequest, schemas.GetAssessmentReportUrlResponse), output: &GetAssessmentReportUrlOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

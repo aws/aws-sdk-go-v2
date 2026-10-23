@@ -4,7 +4,9 @@ package ssm
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/ssm/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ssm/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -35,6 +37,18 @@ type GetMaintenanceWindowExecutionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetMaintenanceWindowExecutionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetMaintenanceWindowExecutionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetMaintenanceWindowExecutionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.WindowExecutionId != nil {
+		s.WriteString(schemas.GetMaintenanceWindowExecutionRequest_WindowExecutionId, *v.WindowExecutionId)
+	}
+}
+
 type GetMaintenanceWindowExecutionOutput struct {
 
 	// The time the maintenance window finished running.
@@ -61,13 +75,63 @@ type GetMaintenanceWindowExecutionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetMaintenanceWindowExecutionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetMaintenanceWindowExecutionResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetMaintenanceWindowExecutionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EndTime != nil {
+		s.WriteTime(schemas.GetMaintenanceWindowExecutionResult_EndTime, *v.EndTime)
+	}
+	if v.StartTime != nil {
+		s.WriteTime(schemas.GetMaintenanceWindowExecutionResult_StartTime, *v.StartTime)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.GetMaintenanceWindowExecutionResult_Status, string(v.Status))
+	}
+	if v.StatusDetails != nil {
+		s.WriteString(schemas.GetMaintenanceWindowExecutionResult_StatusDetails, *v.StatusDetails)
+	}
+	serializeMaintenanceWindowExecutionTaskIdList(s, schemas.GetMaintenanceWindowExecutionResult_TaskIds, v.TaskIds)
+	if v.WindowExecutionId != nil {
+		s.WriteString(schemas.GetMaintenanceWindowExecutionResult_WindowExecutionId, *v.WindowExecutionId)
+	}
+}
+func (v *GetMaintenanceWindowExecutionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetMaintenanceWindowExecutionResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetMaintenanceWindowExecutionResult_EndTime:
+			v.EndTime = new(time.Time)
+			return d.ReadTime(schemas.GetMaintenanceWindowExecutionResult_EndTime, v.EndTime)
+		case schemas.GetMaintenanceWindowExecutionResult_StartTime:
+			v.StartTime = new(time.Time)
+			return d.ReadTime(schemas.GetMaintenanceWindowExecutionResult_StartTime, v.StartTime)
+		case schemas.GetMaintenanceWindowExecutionResult_Status:
+			var ev string
+			if err := d.ReadString(schemas.GetMaintenanceWindowExecutionResult_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.MaintenanceWindowExecutionStatus(ev)
+			return nil
+		case schemas.GetMaintenanceWindowExecutionResult_StatusDetails:
+			v.StatusDetails = new(string)
+			return d.ReadString(schemas.GetMaintenanceWindowExecutionResult_StatusDetails, v.StatusDetails)
+		case schemas.GetMaintenanceWindowExecutionResult_TaskIds:
+			return deserializeMaintenanceWindowExecutionTaskIdList(d, schemas.GetMaintenanceWindowExecutionResult_TaskIds, &v.TaskIds)
+		case schemas.GetMaintenanceWindowExecutionResult_WindowExecutionId:
+			v.WindowExecutionId = new(string)
+			return d.ReadString(schemas.GetMaintenanceWindowExecutionResult_WindowExecutionId, v.WindowExecutionId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetMaintenanceWindowExecutionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetMaintenanceWindowExecution{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetMaintenanceWindowExecution, schemas.GetMaintenanceWindowExecutionRequest, schemas.GetMaintenanceWindowExecutionResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetMaintenanceWindowExecution{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetMaintenanceWindowExecution, schemas.GetMaintenanceWindowExecutionRequest, schemas.GetMaintenanceWindowExecutionResult), output: &GetMaintenanceWindowExecutionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

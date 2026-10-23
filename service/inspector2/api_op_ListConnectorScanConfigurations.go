@@ -5,7 +5,9 @@ package inspector2
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/inspector2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/inspector2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -44,6 +46,22 @@ type ListConnectorScanConfigurationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListConnectorScanConfigurationsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListConnectorScanConfigurationsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListConnectorScanConfigurationsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAwsConfigConnectorArnList(s, schemas.ListConnectorScanConfigurationsRequest_awsConfigConnectorArns, v.AwsConfigConnectorArns)
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListConnectorScanConfigurationsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListConnectorScanConfigurationsRequest_nextToken, *v.NextToken)
+	}
+}
+
 type ListConnectorScanConfigurationsOutput struct {
 
 	// A list of scan configuration items.
@@ -62,13 +80,35 @@ type ListConnectorScanConfigurationsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListConnectorScanConfigurationsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListConnectorScanConfigurationsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListConnectorScanConfigurationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListConnectorScanConfigurationsResponse_nextToken, *v.NextToken)
+	}
+	serializeConnectorScanConfigurationItemList(s, schemas.ListConnectorScanConfigurationsResponse_scanConfigurations, v.ScanConfigurations)
+}
+func (v *ListConnectorScanConfigurationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListConnectorScanConfigurationsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListConnectorScanConfigurationsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListConnectorScanConfigurationsResponse_nextToken, v.NextToken)
+		case schemas.ListConnectorScanConfigurationsResponse_scanConfigurations:
+			return deserializeConnectorScanConfigurationItemList(d, schemas.ListConnectorScanConfigurationsResponse_scanConfigurations, &v.ScanConfigurations)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListConnectorScanConfigurationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListConnectorScanConfigurations{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListConnectorScanConfigurations, schemas.ListConnectorScanConfigurationsRequest, schemas.ListConnectorScanConfigurationsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListConnectorScanConfigurations{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListConnectorScanConfigurations, schemas.ListConnectorScanConfigurationsRequest, schemas.ListConnectorScanConfigurationsResponse), output: &ListConnectorScanConfigurationsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

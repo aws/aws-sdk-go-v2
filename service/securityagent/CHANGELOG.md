@@ -1,3 +1,52 @@
+# v1.25.1 (2026-10-22)
+
+* **Bug Fix**: Update smithy-go to v1.28.6
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.25.0 (2026-10-12)
+
+* **Feature**: Adds support for Jira integration provider in AWS Security Agent.
+
+# v1.24.1 (2026-10-09.2)
+
+* **Dependency Update**: Update to smithy-go v1.28.5.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.24.0 (2026-10-09)
+
+* **Feature**: Adds a test scope field to specify whether a pentest targets a web application or a generative AI application.
+
+# v1.23.0 (2026-10-08)
+
+* **Feature**: Include model field for suggested remediation steps as part of findings
+* **Dependency Update**: Update to smithy-go v1.28.4.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.22.1 (2026-10-06)
+
+* No change notes available for this release.
+
+# v1.22.0 (2026-10-02)
+
+* **Feature**: Adds trigger filters that control which pull request events, target branches, and labels start an automatic code review.
+
+# v1.21.0 (2026-09-29)
+
+* **Feature**: Adds support for Azure DevOps and Bitbucket Data Center integration providers.
+
+# v1.20.0 (2026-09-28)
+
+* **Feature**: Run automated penetration tests directly from your CI-CD pipeline to scan code changes before they ship, gating deployments on the findings
+
+# v1.19.0 (2026-09-25)
+
+* **Feature**: This release adds the ListActorMessages operation, which returns the multi-factor authentication messages received at an actor's server-generated email address
+
+# v1.18.0 (2026-09-24)
+
+* **Feature**: Added support for Confluence export, enabling customers to publish security findings to Confluence pages.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.17.0 (2026-09-09)
 
 * **Feature**: Stop registering the `retry.MetricsHeader` middleware in generated clients. The `Amz-Sdk-Request` header is now set by the retry middleware itself.

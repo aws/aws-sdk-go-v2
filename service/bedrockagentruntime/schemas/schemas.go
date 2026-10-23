@@ -263,7 +263,8 @@ var AmazonBedrockAgentRunTimeService = smithy.NewServiceSchema(_AmazonBedrockAge
 var AccessDeniedException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagentruntime",
 	Name:      "AccessDeniedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 403})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 403})
 var AccessDeniedException_message *smithy.Schema
 
 var ActionGroupExecutor = smithy.NewSchema(smithy.ShapeID{
@@ -492,6 +493,14 @@ var _AgenticRetrieveActions = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeList, 1)
 var _AgenticRetrieveActions_member *smithy.Schema
 
+var AgenticRetrieveAppliedInstruction = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagentruntime",
+	Name:      "AgenticRetrieveAppliedInstruction",
+}, smithy.ShapeTypeStructure, 2)
+var AgenticRetrieveAppliedInstruction_id *smithy.Schema
+
+var AgenticRetrieveAppliedInstruction_version *smithy.Schema
+
 var AgenticRetrieveBedrockGuardrailConfiguration = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagentruntime",
 	Name:      "AgenticRetrieveBedrockGuardrailConfiguration",
@@ -593,6 +602,14 @@ var AgenticRetrieveGuardrailWarning_version *smithy.Schema
 var AgenticRetrieveGuardrailWarning_action *smithy.Schema
 
 var AgenticRetrieveGuardrailWarning_message *smithy.Schema
+
+var AgenticRetrieveInstructionConfiguration = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagentruntime",
+	Name:      "AgenticRetrieveInstructionConfiguration",
+}, smithy.ShapeTypeStructure, 2)
+var AgenticRetrieveInstructionConfiguration_retrievalInstructionId *smithy.Schema
+
+var AgenticRetrieveInstructionConfiguration_version *smithy.Schema
 
 var AgenticRetrieveMemoryConfiguration = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagentruntime",
@@ -934,7 +951,7 @@ var AgenticRetrieveTraceEvent_attributes *smithy.Schema
 var AgenticRetrieveTraceEventAttributes = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagentruntime",
 	Name:      "AgenticRetrieveTraceEventAttributes",
-}, smithy.ShapeTypeStructure, 8)
+}, smithy.ShapeTypeStructure, 9)
 var AgenticRetrieveTraceEventAttributes_step *smithy.Schema
 
 var AgenticRetrieveTraceEventAttributes_status *smithy.Schema
@@ -950,6 +967,8 @@ var AgenticRetrieveTraceEventAttributes_failures *smithy.Schema
 var AgenticRetrieveTraceEventAttributes_retrievalMetadata *smithy.Schema
 
 var AgenticRetrieveTraceEventAttributes_retrievalResponse *smithy.Schema
+
+var AgenticRetrieveTraceEventAttributes_appliedInstruction *smithy.Schema
 
 var AgenticRetrieveTraceResultItem = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagentruntime",
@@ -1134,7 +1153,8 @@ var _AWSResourceARN = smithy.NewSchema(smithy.ShapeID{
 var BadGatewayException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagentruntime",
 	Name:      "BadGatewayException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.HTTPError{Code: 502})
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "server"},
+	&smithytraits.HTTPError{Code: 502})
 var BadGatewayException_message *smithy.Schema
 
 var BadGatewayException_resourceName *smithy.Schema
@@ -1359,7 +1379,8 @@ var ConfirmationState_DENY *smithy.Schema
 var ConflictException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagentruntime",
 	Name:      "ConflictException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 409})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 409})
 var ConflictException_message *smithy.Schema
 
 var ContentBlock = smithy.NewSchema(smithy.ShapeID{
@@ -1456,7 +1477,8 @@ var _DateTimestamp = smithy.NewSchema(smithy.ShapeID{
 var DependencyFailedException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagentruntime",
 	Name:      "DependencyFailedException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.HTTPError{Code: 424})
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 424})
 var DependencyFailedException_message *smithy.Schema
 
 var DependencyFailedException_resourceName *smithy.Schema
@@ -2241,16 +2263,20 @@ var _FlowTraceNodeOutputNextList_member *smithy.Schema
 var FoundationModelConfiguration = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagentruntime",
 	Name:      "FoundationModelConfiguration",
-}, smithy.ShapeTypeStructure, 2)
+}, smithy.ShapeTypeStructure, 3)
 var FoundationModelConfiguration_type *smithy.Schema
 
 var FoundationModelConfiguration_bedrockFoundationModelConfiguration *smithy.Schema
 
+var FoundationModelConfiguration_mantleFoundationModelConfiguration *smithy.Schema
+
 var FoundationModelConfigurationType = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagentruntime",
 	Name:      "FoundationModelConfigurationType",
-}, smithy.ShapeTypeEnum, 1)
+}, smithy.ShapeTypeEnum, 2)
 var FoundationModelConfigurationType_BEDROCK_FOUNDATION_MODEL *smithy.Schema
+
+var FoundationModelConfigurationType_MANTLE_FOUNDATION_MODEL *smithy.Schema
 
 var FoundationModelType = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagentruntime",
@@ -2960,7 +2986,8 @@ var _Instruction = smithy.NewSchema(smithy.ShapeID{
 var InternalServerException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagentruntime",
 	Name:      "InternalServerException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.HTTPError{Code: 500})
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "server"},
+	&smithytraits.HTTPError{Code: 500})
 var InternalServerException_message *smithy.Schema
 
 var InternalServerException_reason *smithy.Schema
@@ -3288,6 +3315,25 @@ var ManagedSearchRerankingConfigurationType = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeEnum, 1)
 var ManagedSearchRerankingConfigurationType_BEDROCK_RERANKING_MODEL *smithy.Schema
 
+var MantleFoundationModelConfiguration = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagentruntime",
+	Name:      "MantleFoundationModelConfiguration",
+}, smithy.ShapeTypeStructure, 1)
+var MantleFoundationModelConfiguration_modelConfiguration *smithy.Schema
+
+var MantleFoundationModelModelConfiguration = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagentruntime",
+	Name:      "MantleFoundationModelModelConfiguration",
+}, smithy.ShapeTypeStructure, 2)
+var MantleFoundationModelModelConfiguration_modelArn *smithy.Schema
+
+var MantleFoundationModelModelConfiguration_projectId *smithy.Schema
+
+var _MantleProjectId = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagentruntime",
+	Name:      "MantleProjectId",
+}, smithy.ShapeTypeString, 0)
+
 var _MaximumLength = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagentruntime",
 	Name:      "MaximumLength",
@@ -3437,7 +3483,8 @@ var ModelInvocationInput_foundationModel *smithy.Schema
 var ModelNotReadyException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagentruntime",
 	Name:      "ModelNotReadyException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 424})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 424})
 var ModelNotReadyException_message *smithy.Schema
 
 var ModelPerformanceConfiguration = smithy.NewSchema(smithy.ShapeID{
@@ -4271,7 +4318,8 @@ var _ResourceName = smithy.NewSchema(smithy.ShapeID{
 var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagentruntime",
 	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 404})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 404})
 var ResourceNotFoundException_message *smithy.Schema
 
 var _ResponseBody = smithy.NewSchema(smithy.ShapeID{
@@ -4367,6 +4415,16 @@ var _RetrievalFilterList = smithy.NewSchema(smithy.ShapeID{
 	Name:      "RetrievalFilterList",
 }, smithy.ShapeTypeList, 1)
 var _RetrievalFilterList_member *smithy.Schema
+
+var _RetrievalInstructionId = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagentruntime",
+	Name:      "RetrievalInstructionId",
+}, smithy.ShapeTypeString, 0)
+
+var _RetrievalInstructionVersion = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagentruntime",
+	Name:      "RetrievalInstructionVersion",
+}, smithy.ShapeTypeString, 0)
 
 var RetrievalOverrides = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagentruntime",
@@ -4766,7 +4824,8 @@ var SearchType_SEMANTIC *smithy.Schema
 var ServiceQuotaExceededException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagentruntime",
 	Name:      "ServiceQuotaExceededException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var ServiceQuotaExceededException_message *smithy.Schema
 
 var _SessionArn = smithy.NewSchema(smithy.ShapeID{
@@ -4988,7 +5047,8 @@ var TextToSqlKnowledgeBaseConfiguration_knowledgeBaseArn *smithy.Schema
 var ThrottlingException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagentruntime",
 	Name:      "ThrottlingException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 429})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 429})
 var ThrottlingException_message *smithy.Schema
 
 var _TopK = smithy.NewSchema(smithy.ShapeID{
@@ -5101,7 +5161,8 @@ var _Uuid = smithy.NewSchema(smithy.ShapeID{
 var ValidationException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagentruntime",
 	Name:      "ValidationException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var ValidationException_message *smithy.Schema
 
 var VectorSearchBedrockRerankingConfiguration = smithy.NewSchema(smithy.ShapeID{
@@ -5157,7 +5218,7 @@ var VideoSegment_summary *smithy.Schema
 var AgenticRetrieveStreamRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagentruntime",
 	Name:      "AgenticRetrieveStreamRequest",
-}, smithy.ShapeTypeStructure, 8)
+}, smithy.ShapeTypeStructure, 9)
 var AgenticRetrieveStreamRequest_messages *smithy.Schema
 
 var AgenticRetrieveStreamRequest_retrievers *smithy.Schema
@@ -5171,6 +5232,8 @@ var AgenticRetrieveStreamRequest_nextToken *smithy.Schema
 var AgenticRetrieveStreamRequest_userContext *smithy.Schema
 
 var AgenticRetrieveStreamRequest_memoryConfiguration *smithy.Schema
+
+var AgenticRetrieveStreamRequest_retrievalInstructionConfiguration *smithy.Schema
 
 var AgenticRetrieveStreamRequest_generateResponse *smithy.Schema
 
@@ -6255,6 +6318,10 @@ func init() {
 
 	_AgenticRetrieveActions_member = _AgenticRetrieveActions.AddMember("member", AgenticRetrieveAction)
 
+	AgenticRetrieveAppliedInstruction_id = AgenticRetrieveAppliedInstruction.AddMember("id", _RetrievalInstructionId)
+
+	AgenticRetrieveAppliedInstruction_version = AgenticRetrieveAppliedInstruction.AddMember("version", _RetrievalInstructionVersion)
+
 	AgenticRetrieveBedrockGuardrailConfiguration_guardrailId = AgenticRetrieveBedrockGuardrailConfiguration.AddMember("guardrailId", smithyprelude.String)
 
 	AgenticRetrieveBedrockGuardrailConfiguration_guardrailVersion = AgenticRetrieveBedrockGuardrailConfiguration.AddMember("guardrailVersion", smithyprelude.String)
@@ -6281,13 +6348,23 @@ func init() {
 
 	FoundationModelConfigurationType_BEDROCK_FOUNDATION_MODEL = FoundationModelConfigurationType.AddMember("BEDROCK_FOUNDATION_MODEL", smithyprelude.Unit)
 
+	FoundationModelConfigurationType_MANTLE_FOUNDATION_MODEL = FoundationModelConfigurationType.AddMember("MANTLE_FOUNDATION_MODEL", smithyprelude.Unit)
+
 	BedrockFoundationModelModelConfiguration_modelArn = BedrockFoundationModelModelConfiguration.AddMember("modelArn", _BedrockModelArn)
 
 	BedrockFoundationModelConfiguration_modelConfiguration = BedrockFoundationModelConfiguration.AddMember("modelConfiguration", BedrockFoundationModelModelConfiguration)
 
+	MantleFoundationModelModelConfiguration_modelArn = MantleFoundationModelModelConfiguration.AddMember("modelArn", _BedrockModelArn)
+
+	MantleFoundationModelModelConfiguration_projectId = MantleFoundationModelModelConfiguration.AddMember("projectId", _MantleProjectId)
+
+	MantleFoundationModelConfiguration_modelConfiguration = MantleFoundationModelConfiguration.AddMember("modelConfiguration", MantleFoundationModelModelConfiguration)
+
 	FoundationModelConfiguration_type = FoundationModelConfiguration.AddMember("type", FoundationModelConfigurationType)
 
 	FoundationModelConfiguration_bedrockFoundationModelConfiguration = FoundationModelConfiguration.AddMember("bedrockFoundationModelConfiguration", BedrockFoundationModelConfiguration)
+
+	FoundationModelConfiguration_mantleFoundationModelConfiguration = FoundationModelConfiguration.AddMember("mantleFoundationModelConfiguration", MantleFoundationModelConfiguration)
 
 	AgenticRetrieveRerankingModelType_CUSTOM = AgenticRetrieveRerankingModelType.AddMember("CUSTOM", smithyprelude.Unit)
 
@@ -6330,6 +6407,10 @@ func init() {
 	AgenticRetrieveGuardrailWarning_action = AgenticRetrieveGuardrailWarning.AddMember("action", GuardrailAction)
 
 	AgenticRetrieveGuardrailWarning_message = AgenticRetrieveGuardrailWarning.AddMember("message", smithyprelude.String)
+
+	AgenticRetrieveInstructionConfiguration_retrievalInstructionId = AgenticRetrieveInstructionConfiguration.AddMember("retrievalInstructionId", _RetrievalInstructionId)
+
+	AgenticRetrieveInstructionConfiguration_version = AgenticRetrieveInstructionConfiguration.AddMember("version", _RetrievalInstructionVersion)
 
 	AgenticRetrieveMemorySessionBinding_actorId = AgenticRetrieveMemorySessionBinding.AddMember("actorId", _AgentCoreMemoryActorId)
 
@@ -6542,6 +6623,8 @@ func init() {
 	AgenticRetrieveTraceEventAttributes_retrievalMetadata = AgenticRetrieveTraceEventAttributes.AddMember("retrievalMetadata", _AgenticRetrieveSourceMetadataList)
 
 	AgenticRetrieveTraceEventAttributes_retrievalResponse = AgenticRetrieveTraceEventAttributes.AddMember("retrievalResponse", _AgenticRetrieveTraceResults)
+
+	AgenticRetrieveTraceEventAttributes_appliedInstruction = AgenticRetrieveTraceEventAttributes.AddMember("appliedInstruction", AgenticRetrieveAppliedInstruction)
 
 	AgenticRetrieveTraceEvent_id = AgenticRetrieveTraceEvent.AddMember("id", smithyprelude.String)
 
@@ -8382,6 +8465,8 @@ func init() {
 	AgenticRetrieveStreamRequest_userContext = AgenticRetrieveStreamRequest.AddMember("userContext", UserContext)
 
 	AgenticRetrieveStreamRequest_memoryConfiguration = AgenticRetrieveStreamRequest.AddMember("memoryConfiguration", AgenticRetrieveMemoryConfiguration)
+
+	AgenticRetrieveStreamRequest_retrievalInstructionConfiguration = AgenticRetrieveStreamRequest.AddMember("retrievalInstructionConfiguration", AgenticRetrieveInstructionConfiguration)
 
 	AgenticRetrieveStreamRequest_generateResponse = AgenticRetrieveStreamRequest.AddMember("generateResponse", smithyprelude.Boolean)
 

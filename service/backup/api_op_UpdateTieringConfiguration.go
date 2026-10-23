@@ -4,7 +4,9 @@ package backup
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/backup/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/backup/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -49,6 +51,23 @@ type UpdateTieringConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateTieringConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateTieringConfigurationInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateTieringConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TieringConfiguration != nil {
+		s.WriteStruct(schemas.UpdateTieringConfigurationInput_TieringConfiguration)
+		v.TieringConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TieringConfigurationName != nil {
+		s.WriteString(schemas.UpdateTieringConfigurationInput_TieringConfigurationName, *v.TieringConfigurationName)
+	}
+}
+
 type UpdateTieringConfigurationOutput struct {
 
 	// The date and time a tiering configuration was created, in Unix format and
@@ -76,13 +95,50 @@ type UpdateTieringConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateTieringConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateTieringConfigurationOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateTieringConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.UpdateTieringConfigurationOutput_CreationTime, *v.CreationTime)
+	}
+	if v.LastUpdatedTime != nil {
+		s.WriteTime(schemas.UpdateTieringConfigurationOutput_LastUpdatedTime, *v.LastUpdatedTime)
+	}
+	if v.TieringConfigurationArn != nil {
+		s.WriteString(schemas.UpdateTieringConfigurationOutput_TieringConfigurationArn, *v.TieringConfigurationArn)
+	}
+	if v.TieringConfigurationName != nil {
+		s.WriteString(schemas.UpdateTieringConfigurationOutput_TieringConfigurationName, *v.TieringConfigurationName)
+	}
+}
+func (v *UpdateTieringConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateTieringConfigurationOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateTieringConfigurationOutput_CreationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.UpdateTieringConfigurationOutput_CreationTime, v.CreationTime)
+		case schemas.UpdateTieringConfigurationOutput_LastUpdatedTime:
+			v.LastUpdatedTime = new(time.Time)
+			return d.ReadTime(schemas.UpdateTieringConfigurationOutput_LastUpdatedTime, v.LastUpdatedTime)
+		case schemas.UpdateTieringConfigurationOutput_TieringConfigurationArn:
+			v.TieringConfigurationArn = new(string)
+			return d.ReadString(schemas.UpdateTieringConfigurationOutput_TieringConfigurationArn, v.TieringConfigurationArn)
+		case schemas.UpdateTieringConfigurationOutput_TieringConfigurationName:
+			v.TieringConfigurationName = new(string)
+			return d.ReadString(schemas.UpdateTieringConfigurationOutput_TieringConfigurationName, v.TieringConfigurationName)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateTieringConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateTieringConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateTieringConfiguration, schemas.UpdateTieringConfigurationInput, schemas.UpdateTieringConfigurationOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateTieringConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateTieringConfiguration, schemas.UpdateTieringConfigurationInput, schemas.UpdateTieringConfigurationOutput), output: &UpdateTieringConfigurationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

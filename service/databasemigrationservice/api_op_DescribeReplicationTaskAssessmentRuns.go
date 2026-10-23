@@ -5,7 +5,9 @@ package databasemigrationservice
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/databasemigrationservice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/databasemigrationservice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -55,6 +57,22 @@ type DescribeReplicationTaskAssessmentRunsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeReplicationTaskAssessmentRunsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeReplicationTaskAssessmentRunsMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeReplicationTaskAssessmentRunsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeFilterList(s, schemas.DescribeReplicationTaskAssessmentRunsMessage_Filters, v.Filters)
+	if v.Marker != nil {
+		s.WriteString(schemas.DescribeReplicationTaskAssessmentRunsMessage_Marker, *v.Marker)
+	}
+	if v.MaxRecords != nil {
+		s.WriteInt32(schemas.DescribeReplicationTaskAssessmentRunsMessage_MaxRecords, *v.MaxRecords)
+	}
+}
+
 type DescribeReplicationTaskAssessmentRunsOutput struct {
 
 	// A pagination token returned for you to pass to a subsequent request. If you
@@ -72,13 +90,35 @@ type DescribeReplicationTaskAssessmentRunsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeReplicationTaskAssessmentRunsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeReplicationTaskAssessmentRunsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeReplicationTaskAssessmentRunsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Marker != nil {
+		s.WriteString(schemas.DescribeReplicationTaskAssessmentRunsResponse_Marker, *v.Marker)
+	}
+	serializeReplicationTaskAssessmentRunList(s, schemas.DescribeReplicationTaskAssessmentRunsResponse_ReplicationTaskAssessmentRuns, v.ReplicationTaskAssessmentRuns)
+}
+func (v *DescribeReplicationTaskAssessmentRunsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeReplicationTaskAssessmentRunsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeReplicationTaskAssessmentRunsResponse_Marker:
+			v.Marker = new(string)
+			return d.ReadString(schemas.DescribeReplicationTaskAssessmentRunsResponse_Marker, v.Marker)
+		case schemas.DescribeReplicationTaskAssessmentRunsResponse_ReplicationTaskAssessmentRuns:
+			return deserializeReplicationTaskAssessmentRunList(d, schemas.DescribeReplicationTaskAssessmentRunsResponse_ReplicationTaskAssessmentRuns, &v.ReplicationTaskAssessmentRuns)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeReplicationTaskAssessmentRunsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeReplicationTaskAssessmentRuns{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeReplicationTaskAssessmentRuns, schemas.DescribeReplicationTaskAssessmentRunsMessage, schemas.DescribeReplicationTaskAssessmentRunsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeReplicationTaskAssessmentRuns{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeReplicationTaskAssessmentRuns, schemas.DescribeReplicationTaskAssessmentRunsMessage, schemas.DescribeReplicationTaskAssessmentRunsResponse), output: &DescribeReplicationTaskAssessmentRunsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

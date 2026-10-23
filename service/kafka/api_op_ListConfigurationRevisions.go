@@ -5,7 +5,9 @@ package kafka
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/kafka/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/kafka/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -45,6 +47,24 @@ type ListConfigurationRevisionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListConfigurationRevisionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListConfigurationRevisionsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListConfigurationRevisionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.ListConfigurationRevisionsRequest_Arn, *v.Arn)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListConfigurationRevisionsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListConfigurationRevisionsRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListConfigurationRevisionsOutput struct {
 
 	// Paginated results marker.
@@ -59,13 +79,35 @@ type ListConfigurationRevisionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListConfigurationRevisionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListConfigurationRevisionsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListConfigurationRevisionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListConfigurationRevisionsResponse_NextToken, *v.NextToken)
+	}
+	serialize__listOfConfigurationRevision(s, schemas.ListConfigurationRevisionsResponse_Revisions, v.Revisions)
+}
+func (v *ListConfigurationRevisionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListConfigurationRevisionsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListConfigurationRevisionsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListConfigurationRevisionsResponse_NextToken, v.NextToken)
+		case schemas.ListConfigurationRevisionsResponse_Revisions:
+			return deserialize__listOfConfigurationRevision(d, schemas.ListConfigurationRevisionsResponse_Revisions, &v.Revisions)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListConfigurationRevisionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListConfigurationRevisions{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListConfigurationRevisions, schemas.ListConfigurationRevisionsRequest, schemas.ListConfigurationRevisionsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListConfigurationRevisions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListConfigurationRevisions, schemas.ListConfigurationRevisionsRequest, schemas.ListConfigurationRevisionsResponse), output: &ListConfigurationRevisionsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

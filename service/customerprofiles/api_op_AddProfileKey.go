@@ -4,6 +4,8 @@ package customerprofiles
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/customerprofiles/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -57,6 +59,25 @@ type AddProfileKeyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AddProfileKeyInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AddProfileKeyRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AddProfileKeyInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DomainName != nil {
+		s.WriteString(schemas.AddProfileKeyRequest_DomainName, *v.DomainName)
+	}
+	if v.KeyName != nil {
+		s.WriteString(schemas.AddProfileKeyRequest_KeyName, *v.KeyName)
+	}
+	if v.ProfileId != nil {
+		s.WriteString(schemas.AddProfileKeyRequest_ProfileId, *v.ProfileId)
+	}
+	serializerequestValueList(s, schemas.AddProfileKeyRequest_Values, v.Values)
+}
+
 type AddProfileKeyOutput struct {
 
 	// A searchable identifier of a customer profile.
@@ -71,13 +92,35 @@ type AddProfileKeyOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AddProfileKeyOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AddProfileKeyResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AddProfileKeyOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.KeyName != nil {
+		s.WriteString(schemas.AddProfileKeyResponse_KeyName, *v.KeyName)
+	}
+	serializerequestValueList(s, schemas.AddProfileKeyResponse_Values, v.Values)
+}
+func (v *AddProfileKeyOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AddProfileKeyResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AddProfileKeyResponse_KeyName:
+			v.KeyName = new(string)
+			return d.ReadString(schemas.AddProfileKeyResponse_KeyName, v.KeyName)
+		case schemas.AddProfileKeyResponse_Values:
+			return deserializerequestValueList(d, schemas.AddProfileKeyResponse_Values, &v.Values)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationAddProfileKeyMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpAddProfileKey{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AddProfileKey, schemas.AddProfileKeyRequest, schemas.AddProfileKeyResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpAddProfileKey{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AddProfileKey, schemas.AddProfileKeyRequest, schemas.AddProfileKeyResponse), output: &AddProfileKeyOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

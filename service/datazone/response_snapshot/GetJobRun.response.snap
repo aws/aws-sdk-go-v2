@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"createdAt":946684800,"createdBy":"__CreatedBy__","details":{"lineageRunDetails":{"sqlQueryRunDetails":{"errorMessages":["__Member__","__Member__"],"numQueriesFailed":1,"queryEndTime":946684800,"queryStartTime":946684800,"totalQueriesProcessed":1}}},"domainId":"__DomainId__","endTime":946684800,"error":{"message":"__Message__"},"id":"__Id__","jobId":"__JobId__","jobType":"LINEAGE","runMode":"SCHEDULED","startTime":946684800,"status":"SCHEDULED"}

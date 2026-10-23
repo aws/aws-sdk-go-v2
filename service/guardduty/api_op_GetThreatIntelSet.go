@@ -4,7 +4,9 @@ package guardduty
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/guardduty/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/guardduty/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -42,6 +44,21 @@ type GetThreatIntelSetInput struct {
 	ThreatIntelSetId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetThreatIntelSetInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetThreatIntelSetRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetThreatIntelSetInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DetectorId != nil {
+		s.WriteString(schemas.GetThreatIntelSetRequest_DetectorId, *v.DetectorId)
+	}
+	if v.ThreatIntelSetId != nil {
+		s.WriteString(schemas.GetThreatIntelSetRequest_ThreatIntelSetId, *v.ThreatIntelSetId)
+	}
 }
 
 type GetThreatIntelSetOutput struct {
@@ -82,13 +99,67 @@ type GetThreatIntelSetOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetThreatIntelSetOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetThreatIntelSetResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetThreatIntelSetOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ExpectedBucketOwner != nil {
+		s.WriteString(schemas.GetThreatIntelSetResponse_ExpectedBucketOwner, *v.ExpectedBucketOwner)
+	}
+	if v.Format != "" {
+		s.WriteString(schemas.GetThreatIntelSetResponse_Format, string(v.Format))
+	}
+	if v.Location != nil {
+		s.WriteString(schemas.GetThreatIntelSetResponse_Location, *v.Location)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.GetThreatIntelSetResponse_Name, *v.Name)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.GetThreatIntelSetResponse_Status, string(v.Status))
+	}
+	serializeTagMap(s, schemas.GetThreatIntelSetResponse_Tags, v.Tags)
+}
+func (v *GetThreatIntelSetOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetThreatIntelSetResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetThreatIntelSetResponse_ExpectedBucketOwner:
+			v.ExpectedBucketOwner = new(string)
+			return d.ReadString(schemas.GetThreatIntelSetResponse_ExpectedBucketOwner, v.ExpectedBucketOwner)
+		case schemas.GetThreatIntelSetResponse_Format:
+			var ev string
+			if err := d.ReadString(schemas.GetThreatIntelSetResponse_Format, &ev); err != nil {
+				return err
+			}
+			v.Format = types.ThreatIntelSetFormat(ev)
+			return nil
+		case schemas.GetThreatIntelSetResponse_Location:
+			v.Location = new(string)
+			return d.ReadString(schemas.GetThreatIntelSetResponse_Location, v.Location)
+		case schemas.GetThreatIntelSetResponse_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.GetThreatIntelSetResponse_Name, v.Name)
+		case schemas.GetThreatIntelSetResponse_Status:
+			var ev string
+			if err := d.ReadString(schemas.GetThreatIntelSetResponse_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.ThreatIntelSetStatus(ev)
+			return nil
+		case schemas.GetThreatIntelSetResponse_Tags:
+			return deserializeTagMap(d, schemas.GetThreatIntelSetResponse_Tags, &v.Tags)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetThreatIntelSetMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetThreatIntelSet{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetThreatIntelSet, schemas.GetThreatIntelSetRequest, schemas.GetThreatIntelSetResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetThreatIntelSet{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetThreatIntelSet, schemas.GetThreatIntelSetRequest, schemas.GetThreatIntelSetResponse), output: &GetThreatIntelSetOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

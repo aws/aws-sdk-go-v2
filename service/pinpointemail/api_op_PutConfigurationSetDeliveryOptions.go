@@ -4,7 +4,9 @@ package pinpointemail
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/pinpointemail/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/pinpointemail/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -49,6 +51,24 @@ type PutConfigurationSetDeliveryOptionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutConfigurationSetDeliveryOptionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutConfigurationSetDeliveryOptionsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutConfigurationSetDeliveryOptionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConfigurationSetName != nil {
+		s.WriteString(schemas.PutConfigurationSetDeliveryOptionsRequest_ConfigurationSetName, *v.ConfigurationSetName)
+	}
+	if v.SendingPoolName != nil {
+		s.WriteString(schemas.PutConfigurationSetDeliveryOptionsRequest_SendingPoolName, *v.SendingPoolName)
+	}
+	if v.TlsPolicy != "" {
+		s.WriteString(schemas.PutConfigurationSetDeliveryOptionsRequest_TlsPolicy, string(v.TlsPolicy))
+	}
+}
+
 // An HTTP 200 response if the request succeeds, or an error message if the
 // request fails.
 type PutConfigurationSetDeliveryOptionsOutput struct {
@@ -58,13 +78,26 @@ type PutConfigurationSetDeliveryOptionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutConfigurationSetDeliveryOptionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutConfigurationSetDeliveryOptionsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutConfigurationSetDeliveryOptionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *PutConfigurationSetDeliveryOptionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PutConfigurationSetDeliveryOptionsResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPutConfigurationSetDeliveryOptionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpPutConfigurationSetDeliveryOptions{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutConfigurationSetDeliveryOptions, schemas.PutConfigurationSetDeliveryOptionsRequest, schemas.PutConfigurationSetDeliveryOptionsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpPutConfigurationSetDeliveryOptions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutConfigurationSetDeliveryOptions, schemas.PutConfigurationSetDeliveryOptionsRequest, schemas.PutConfigurationSetDeliveryOptionsResponse), output: &PutConfigurationSetDeliveryOptionsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

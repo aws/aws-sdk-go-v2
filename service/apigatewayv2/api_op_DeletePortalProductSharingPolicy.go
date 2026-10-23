@@ -4,6 +4,8 @@ package apigatewayv2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/apigatewayv2/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -33,6 +35,18 @@ type DeletePortalProductSharingPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeletePortalProductSharingPolicyInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeletePortalProductSharingPolicyRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeletePortalProductSharingPolicyInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PortalProductId != nil {
+		s.WriteString(schemas.DeletePortalProductSharingPolicyRequest_PortalProductId, *v.PortalProductId)
+	}
+}
+
 type DeletePortalProductSharingPolicyOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -40,13 +54,26 @@ type DeletePortalProductSharingPolicyOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeletePortalProductSharingPolicyOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeletePortalProductSharingPolicyOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeletePortalProductSharingPolicyOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeletePortalProductSharingPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeletePortalProductSharingPolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeletePortalProductSharingPolicy, schemas.DeletePortalProductSharingPolicyRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeletePortalProductSharingPolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeletePortalProductSharingPolicy, schemas.DeletePortalProductSharingPolicyRequest, nil), output: &DeletePortalProductSharingPolicyOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

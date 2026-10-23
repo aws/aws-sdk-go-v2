@@ -5,6 +5,8 @@ package guardduty
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/guardduty/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,21 @@ type ListDetectorsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListDetectorsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListDetectorsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListDetectorsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListDetectorsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListDetectorsRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListDetectorsOutput struct {
 
 	// A list of detector IDs.
@@ -56,13 +73,35 @@ type ListDetectorsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListDetectorsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListDetectorsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListDetectorsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDetectorIds(s, schemas.ListDetectorsResponse_DetectorIds, v.DetectorIds)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListDetectorsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListDetectorsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListDetectorsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListDetectorsResponse_DetectorIds:
+			return deserializeDetectorIds(d, schemas.ListDetectorsResponse_DetectorIds, &v.DetectorIds)
+		case schemas.ListDetectorsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListDetectorsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListDetectorsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListDetectors{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDetectors, schemas.ListDetectorsRequest, schemas.ListDetectorsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListDetectors{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDetectors, schemas.ListDetectorsRequest, schemas.ListDetectorsResponse), output: &ListDetectorsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

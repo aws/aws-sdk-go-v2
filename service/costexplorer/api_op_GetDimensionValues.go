@@ -4,7 +4,9 @@ package costexplorer
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/costexplorer/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/costexplorer/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -30,6 +32,11 @@ type GetDimensionValuesInput struct {
 	// The name of the dimension. Each Dimension is available for a different Context .
 	// For more information, see Context . LINK_ACCOUNT_NAME and SERVICE_CODE can only
 	// be used in [CostCategoryRule].
+	//
+	// PRODUCT_ATTRIBUTE returns the product attribute keys that are available for
+	// your costs of supported services, or the values of the key that you specify in
+	// DimensionKey . PRODUCT_ATTRIBUTE is supported only in the COST_AND_USAGE
+	// context.
 	//
 	// [CostCategoryRule]: https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/AAPI_CostCategoryRule.html
 	//
@@ -106,6 +113,9 @@ type GetDimensionValuesInput struct {
 	//   CreateBucket .
 	//
 	//   - PLATFORM - The Amazon EC2 operating system. Examples are Windows or Linux.
+	//
+	//   - PRODUCT_ATTRIBUTE - The product attributes of supported services, such as
+	//   the model provider or the model for Amazon Bedrock.
 	//
 	//   - PURCHASE_TYPE - The reservation type of the purchase that this usage is
 	//   related to. Examples include On-Demand Instances and Standard Reserved
@@ -186,6 +196,23 @@ type GetDimensionValuesInput struct {
 	//   - SAVINGS_PLAN_ARN - The unique identifier for your Savings Plans.
 	Context types.Context
 
+	// The product attribute key to return values for, such as model . If you omit
+	// DimensionKey or set it to an empty string, the response lists the product
+	// attribute keys that are available for your costs of supported services instead.
+	// For the supported services, see [ProductAttributeValues].
+	//
+	// If you specify a key, the response lists the values of that key. If some of
+	// your costs have no value for the key, the response includes an empty-string
+	// value. Keys are case-sensitive, and a key that doesn't exist returns no values
+	// other than an empty string.
+	//
+	// You can specify DimensionKey only when Dimension is PRODUCT_ATTRIBUTE . If you
+	// also specify SortBy , DimensionKey is required. As a result, you can't list
+	// product attribute keys when you use SortBy .
+	//
+	// [ProductAttributeValues]: https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_ProductAttributeValues.html
+	DimensionKey *string
+
 	// Use Expression to filter in various Cost Explorer APIs.
 	//
 	// Not all Expression types are supported in each API. Refer to the documentation
@@ -195,8 +222,8 @@ type GetDimensionValuesInput struct {
 	//
 	//   - Simple dimension values.
 	//
-	//   - There are three types of simple dimension values: CostCategories , Tags ,
-	//   and Dimensions .
+	//   - There are four types of simple dimension values: CostCategories , Tags ,
+	//   Dimensions , and ProductAttributes .
 	//
 	//   - Specify the CostCategories field to define a filter that acts on Cost
 	//   Categories.
@@ -205,6 +232,13 @@ type GetDimensionValuesInput struct {
 	//
 	//   - Specify the Dimensions field to define a filter that acts on the [DimensionValues]
 	//   DimensionValues .
+	//
+	//   - Specify the ProductAttributes field to define a filter that acts on the
+	//   product attributes of supported services, such as Amazon Bedrock. Only
+	//   GetCostAndUsage , GetCostAndUsageWithResources , GetDimensionValues (in the
+	//   COST_AND_USAGE context), GetTags , and GetCostCategories support
+	//   ProductAttributes . For the supported services, keys and SERVICE filter rules,
+	//   see [ProductAttributeValues]ProductAttributeValues .
 	//
 	//   - For each filter type, you can set the dimension name and values for the
 	//   filters that you plan to use.
@@ -261,6 +295,7 @@ type GetDimensionValuesInput struct {
 	// and OR aren't supported. Dimensions are limited to LINKED_ACCOUNT .
 	//
 	// [DimensionValues]: https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_DimensionValues.html
+	// [ProductAttributeValues]: https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_ProductAttributeValues.html
 	Filter *types.Expression
 
 	// This field is only used when SortBy is provided in the request. The maximum
@@ -304,6 +339,47 @@ type GetDimensionValuesInput struct {
 	SortBy []types.SortDefinition
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetDimensionValuesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetDimensionValuesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetDimensionValuesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BillingViewArn != nil {
+		s.WriteString(schemas.GetDimensionValuesRequest_BillingViewArn, *v.BillingViewArn)
+	}
+	if v.Context != "" {
+		s.WriteString(schemas.GetDimensionValuesRequest_Context, string(v.Context))
+	}
+	if v.Dimension != "" {
+		s.WriteString(schemas.GetDimensionValuesRequest_Dimension, string(v.Dimension))
+	}
+	if v.DimensionKey != nil {
+		s.WriteString(schemas.GetDimensionValuesRequest_DimensionKey, *v.DimensionKey)
+	}
+	if v.Filter != nil {
+		s.WriteStruct(schemas.GetDimensionValuesRequest_Filter)
+		v.Filter.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.GetDimensionValuesRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextPageToken != nil {
+		s.WriteString(schemas.GetDimensionValuesRequest_NextPageToken, *v.NextPageToken)
+	}
+	if v.SearchString != nil {
+		s.WriteString(schemas.GetDimensionValuesRequest_SearchString, *v.SearchString)
+	}
+	serializeSortDefinitions(s, schemas.GetDimensionValuesRequest_SortBy, v.SortBy)
+	if v.TimePeriod != nil {
+		s.WriteStruct(schemas.GetDimensionValuesRequest_TimePeriod)
+		v.TimePeriod.SerializeMembers(s)
+		s.CloseStruct()
+	}
 }
 
 type GetDimensionValuesOutput struct {
@@ -427,13 +503,47 @@ type GetDimensionValuesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetDimensionValuesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetDimensionValuesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetDimensionValuesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDimensionValuesWithAttributesList(s, schemas.GetDimensionValuesResponse_DimensionValues, v.DimensionValues)
+	if v.NextPageToken != nil {
+		s.WriteString(schemas.GetDimensionValuesResponse_NextPageToken, *v.NextPageToken)
+	}
+	if v.ReturnSize != nil {
+		s.WriteInt32(schemas.GetDimensionValuesResponse_ReturnSize, *v.ReturnSize)
+	}
+	if v.TotalSize != nil {
+		s.WriteInt32(schemas.GetDimensionValuesResponse_TotalSize, *v.TotalSize)
+	}
+}
+func (v *GetDimensionValuesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetDimensionValuesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetDimensionValuesResponse_DimensionValues:
+			return deserializeDimensionValuesWithAttributesList(d, schemas.GetDimensionValuesResponse_DimensionValues, &v.DimensionValues)
+		case schemas.GetDimensionValuesResponse_NextPageToken:
+			v.NextPageToken = new(string)
+			return d.ReadString(schemas.GetDimensionValuesResponse_NextPageToken, v.NextPageToken)
+		case schemas.GetDimensionValuesResponse_ReturnSize:
+			v.ReturnSize = new(int32)
+			return d.ReadInt32(schemas.GetDimensionValuesResponse_ReturnSize, v.ReturnSize)
+		case schemas.GetDimensionValuesResponse_TotalSize:
+			v.TotalSize = new(int32)
+			return d.ReadInt32(schemas.GetDimensionValuesResponse_TotalSize, v.TotalSize)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetDimensionValuesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetDimensionValues{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetDimensionValues, schemas.GetDimensionValuesRequest, schemas.GetDimensionValuesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetDimensionValues{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetDimensionValues, schemas.GetDimensionValuesRequest, schemas.GetDimensionValuesResponse), output: &GetDimensionValuesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

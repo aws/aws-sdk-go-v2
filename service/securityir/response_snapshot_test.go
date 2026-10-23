@@ -505,6 +505,41 @@ func TestCheckResponseSnapshot_GetCaseAttachmentUploadUrl(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_GetFindingMetrics(t *testing.T) {
+	want := &GetFindingMetricsOutput{
+		FindingsIngestedSecurityHub:       ptr.Int64(1),
+		FindingsIngestedGuardDuty:         ptr.Int64(1),
+		FindingsTriaged:                   ptr.Int64(1),
+		FindingsTriagedFalsePositive:      ptr.Int64(1),
+		FindingsInvestigated:              ptr.Int64(1),
+		FindingsInvestigatedFalsePositive: ptr.Int64(1),
+		FindingsEscalated:                 ptr.Int64(1),
+		FindingsEscalatedFalsePositive:    ptr.Int64(1),
+		FindingsTruePositive:              ptr.Int64(1),
+		FindingsInvestigatedInProgress:    ptr.Int64(1),
+		FindingsEscalatedInProgress:       ptr.Int64(1),
+	}
+	status, header, body, err := serdeRespReadSnapshot("GetFindingMetrics.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.GetFindingMetrics(context.Background(), &GetFindingMetricsInput{
+		MembershipId: ptr.String("__MembershipId__"),
+		StartDate:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		EndDate:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "GetFindingMetrics.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_GetMembership(t *testing.T) {
 	want := &GetMembershipOutput{
 		MembershipId:                    ptr.String("__MembershipId__"),

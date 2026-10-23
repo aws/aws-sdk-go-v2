@@ -4,7 +4,9 @@ package lookoutequipment
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/lookoutequipment/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lookoutequipment/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -34,6 +36,18 @@ type DescribeDatasetInput struct {
 	DatasetName *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DescribeDatasetInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeDatasetRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeDatasetInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DatasetName != nil {
+		s.WriteString(schemas.DescribeDatasetRequest_DatasetName, *v.DatasetName)
+	}
 }
 
 type DescribeDatasetOutput struct {
@@ -99,13 +113,120 @@ type DescribeDatasetOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeDatasetOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeDatasetResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeDatasetOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.DescribeDatasetResponse_CreatedAt, *v.CreatedAt)
+	}
+	if v.DataEndTime != nil {
+		s.WriteTime(schemas.DescribeDatasetResponse_DataEndTime, *v.DataEndTime)
+	}
+	if v.DataQualitySummary != nil {
+		s.WriteStruct(schemas.DescribeDatasetResponse_DataQualitySummary)
+		v.DataQualitySummary.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DataStartTime != nil {
+		s.WriteTime(schemas.DescribeDatasetResponse_DataStartTime, *v.DataStartTime)
+	}
+	if v.DatasetArn != nil {
+		s.WriteString(schemas.DescribeDatasetResponse_DatasetArn, *v.DatasetArn)
+	}
+	if v.DatasetName != nil {
+		s.WriteString(schemas.DescribeDatasetResponse_DatasetName, *v.DatasetName)
+	}
+	if v.IngestedFilesSummary != nil {
+		s.WriteStruct(schemas.DescribeDatasetResponse_IngestedFilesSummary)
+		v.IngestedFilesSummary.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.IngestionInputConfiguration != nil {
+		s.WriteStruct(schemas.DescribeDatasetResponse_IngestionInputConfiguration)
+		v.IngestionInputConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.LastUpdatedAt != nil {
+		s.WriteTime(schemas.DescribeDatasetResponse_LastUpdatedAt, *v.LastUpdatedAt)
+	}
+	if v.RoleArn != nil {
+		s.WriteString(schemas.DescribeDatasetResponse_RoleArn, *v.RoleArn)
+	}
+	if v.Schema != nil {
+		s.WriteString(schemas.DescribeDatasetResponse_Schema, *v.Schema)
+	}
+	if v.ServerSideKmsKeyId != nil {
+		s.WriteString(schemas.DescribeDatasetResponse_ServerSideKmsKeyId, *v.ServerSideKmsKeyId)
+	}
+	if v.SourceDatasetArn != nil {
+		s.WriteString(schemas.DescribeDatasetResponse_SourceDatasetArn, *v.SourceDatasetArn)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.DescribeDatasetResponse_Status, string(v.Status))
+	}
+}
+func (v *DescribeDatasetOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeDatasetResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeDatasetResponse_CreatedAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.DescribeDatasetResponse_CreatedAt, v.CreatedAt)
+		case schemas.DescribeDatasetResponse_DataEndTime:
+			v.DataEndTime = new(time.Time)
+			return d.ReadTime(schemas.DescribeDatasetResponse_DataEndTime, v.DataEndTime)
+		case schemas.DescribeDatasetResponse_DataQualitySummary:
+			v.DataQualitySummary = &types.DataQualitySummary{}
+			return v.DataQualitySummary.Deserialize(d)
+		case schemas.DescribeDatasetResponse_DataStartTime:
+			v.DataStartTime = new(time.Time)
+			return d.ReadTime(schemas.DescribeDatasetResponse_DataStartTime, v.DataStartTime)
+		case schemas.DescribeDatasetResponse_DatasetArn:
+			v.DatasetArn = new(string)
+			return d.ReadString(schemas.DescribeDatasetResponse_DatasetArn, v.DatasetArn)
+		case schemas.DescribeDatasetResponse_DatasetName:
+			v.DatasetName = new(string)
+			return d.ReadString(schemas.DescribeDatasetResponse_DatasetName, v.DatasetName)
+		case schemas.DescribeDatasetResponse_IngestedFilesSummary:
+			v.IngestedFilesSummary = &types.IngestedFilesSummary{}
+			return v.IngestedFilesSummary.Deserialize(d)
+		case schemas.DescribeDatasetResponse_IngestionInputConfiguration:
+			v.IngestionInputConfiguration = &types.IngestionInputConfiguration{}
+			return v.IngestionInputConfiguration.Deserialize(d)
+		case schemas.DescribeDatasetResponse_LastUpdatedAt:
+			v.LastUpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.DescribeDatasetResponse_LastUpdatedAt, v.LastUpdatedAt)
+		case schemas.DescribeDatasetResponse_RoleArn:
+			v.RoleArn = new(string)
+			return d.ReadString(schemas.DescribeDatasetResponse_RoleArn, v.RoleArn)
+		case schemas.DescribeDatasetResponse_Schema:
+			v.Schema = new(string)
+			return d.ReadString(schemas.DescribeDatasetResponse_Schema, v.Schema)
+		case schemas.DescribeDatasetResponse_ServerSideKmsKeyId:
+			v.ServerSideKmsKeyId = new(string)
+			return d.ReadString(schemas.DescribeDatasetResponse_ServerSideKmsKeyId, v.ServerSideKmsKeyId)
+		case schemas.DescribeDatasetResponse_SourceDatasetArn:
+			v.SourceDatasetArn = new(string)
+			return d.ReadString(schemas.DescribeDatasetResponse_SourceDatasetArn, v.SourceDatasetArn)
+		case schemas.DescribeDatasetResponse_Status:
+			var ev string
+			if err := d.ReadString(schemas.DescribeDatasetResponse_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.DatasetStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeDatasetMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpDescribeDataset{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeDataset, schemas.DescribeDatasetRequest, schemas.DescribeDatasetResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpDescribeDataset{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeDataset, schemas.DescribeDatasetRequest, schemas.DescribeDatasetResponse), output: &DescribeDatasetOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

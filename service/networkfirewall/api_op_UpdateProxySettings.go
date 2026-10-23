@@ -4,7 +4,9 @@ package networkfirewall
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/networkfirewall/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/networkfirewall/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -63,6 +65,29 @@ type UpdateProxySettingsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateProxySettingsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateProxySettingsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateProxySettingsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FirewallArn != nil {
+		s.WriteString(schemas.UpdateProxySettingsRequest_FirewallArn, *v.FirewallArn)
+	}
+	if v.FirewallName != nil {
+		s.WriteString(schemas.UpdateProxySettingsRequest_FirewallName, *v.FirewallName)
+	}
+	if v.ProxySettings != nil {
+		s.WriteStruct(schemas.UpdateProxySettingsRequest_ProxySettings)
+		v.ProxySettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.UpdateToken != nil {
+		s.WriteString(schemas.UpdateProxySettingsRequest_UpdateToken, *v.UpdateToken)
+	}
+}
+
 type UpdateProxySettingsOutput struct {
 
 	// The Amazon Resource Name (ARN) of the firewall.
@@ -97,13 +122,52 @@ type UpdateProxySettingsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateProxySettingsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateProxySettingsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateProxySettingsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FirewallArn != nil {
+		s.WriteString(schemas.UpdateProxySettingsResponse_FirewallArn, *v.FirewallArn)
+	}
+	if v.FirewallName != nil {
+		s.WriteString(schemas.UpdateProxySettingsResponse_FirewallName, *v.FirewallName)
+	}
+	if v.ProxySettings != nil {
+		s.WriteStruct(schemas.UpdateProxySettingsResponse_ProxySettings)
+		v.ProxySettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.UpdateToken != nil {
+		s.WriteString(schemas.UpdateProxySettingsResponse_UpdateToken, *v.UpdateToken)
+	}
+}
+func (v *UpdateProxySettingsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateProxySettingsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateProxySettingsResponse_FirewallArn:
+			v.FirewallArn = new(string)
+			return d.ReadString(schemas.UpdateProxySettingsResponse_FirewallArn, v.FirewallArn)
+		case schemas.UpdateProxySettingsResponse_FirewallName:
+			v.FirewallName = new(string)
+			return d.ReadString(schemas.UpdateProxySettingsResponse_FirewallName, v.FirewallName)
+		case schemas.UpdateProxySettingsResponse_ProxySettings:
+			v.ProxySettings = &types.ProxySettings{}
+			return v.ProxySettings.Deserialize(d)
+		case schemas.UpdateProxySettingsResponse_UpdateToken:
+			v.UpdateToken = new(string)
+			return d.ReadString(schemas.UpdateProxySettingsResponse_UpdateToken, v.UpdateToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateProxySettingsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpUpdateProxySettings{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateProxySettings, schemas.UpdateProxySettingsRequest, schemas.UpdateProxySettingsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpUpdateProxySettings{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateProxySettings, schemas.UpdateProxySettingsRequest, schemas.UpdateProxySettingsResponse), output: &UpdateProxySettingsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

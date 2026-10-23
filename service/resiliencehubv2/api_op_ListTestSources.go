@@ -5,7 +5,9 @@ package resiliencehubv2
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/resiliencehubv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/resiliencehubv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -49,6 +51,30 @@ type ListTestSourcesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListTestSourcesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListTestSourcesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListTestSourcesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListTestSourcesRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListTestSourcesRequest_nextToken, *v.NextToken)
+	}
+	if v.ServiceArn != nil {
+		s.WriteString(schemas.ListTestSourcesRequest_serviceArn, *v.ServiceArn)
+	}
+	if v.TestId != nil {
+		s.WriteString(schemas.ListTestSourcesRequest_testId, *v.TestId)
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.ListTestSourcesRequest_type, string(v.Type))
+	}
+}
+
 type ListTestSourcesOutput struct {
 
 	// The list of configured monitoring sources.
@@ -65,13 +91,35 @@ type ListTestSourcesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListTestSourcesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListTestSourcesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListTestSourcesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListTestSourcesResponse_nextToken, *v.NextToken)
+	}
+	serializeTestSourceSummaryList(s, schemas.ListTestSourcesResponse_testSources, v.TestSources)
+}
+func (v *ListTestSourcesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListTestSourcesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListTestSourcesResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListTestSourcesResponse_nextToken, v.NextToken)
+		case schemas.ListTestSourcesResponse_testSources:
+			return deserializeTestSourceSummaryList(d, schemas.ListTestSourcesResponse_testSources, &v.TestSources)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListTestSourcesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListTestSources{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListTestSources, schemas.ListTestSourcesRequest, schemas.ListTestSourcesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListTestSources{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListTestSources, schemas.ListTestSourcesRequest, schemas.ListTestSourcesResponse), output: &ListTestSourcesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

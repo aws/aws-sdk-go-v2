@@ -4,7 +4,9 @@ package glue
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/glue/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/glue/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -66,6 +68,39 @@ type StartDataQualityRulesetEvaluationRunInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartDataQualityRulesetEvaluationRunInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartDataQualityRulesetEvaluationRunRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartDataQualityRulesetEvaluationRunInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDataSourceMap(s, schemas.StartDataQualityRulesetEvaluationRunRequest_AdditionalDataSources, v.AdditionalDataSources)
+	if v.AdditionalRunOptions != nil {
+		s.WriteStruct(schemas.StartDataQualityRulesetEvaluationRunRequest_AdditionalRunOptions)
+		v.AdditionalRunOptions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ClientToken != nil {
+		s.WriteString(schemas.StartDataQualityRulesetEvaluationRunRequest_ClientToken, *v.ClientToken)
+	}
+	if v.DataSource != nil {
+		s.WriteStruct(schemas.StartDataQualityRulesetEvaluationRunRequest_DataSource)
+		v.DataSource.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.NumberOfWorkers != nil {
+		s.WriteInt32(schemas.StartDataQualityRulesetEvaluationRunRequest_NumberOfWorkers, *v.NumberOfWorkers)
+	}
+	if v.Role != nil {
+		s.WriteString(schemas.StartDataQualityRulesetEvaluationRunRequest_Role, *v.Role)
+	}
+	serializeRulesetNames(s, schemas.StartDataQualityRulesetEvaluationRunRequest_RulesetNames, v.RulesetNames)
+	if v.Timeout != nil {
+		s.WriteInt32(schemas.StartDataQualityRulesetEvaluationRunRequest_Timeout, *v.Timeout)
+	}
+}
+
 type StartDataQualityRulesetEvaluationRunOutput struct {
 
 	// The unique run identifier associated with this run.
@@ -77,13 +112,32 @@ type StartDataQualityRulesetEvaluationRunOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartDataQualityRulesetEvaluationRunOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartDataQualityRulesetEvaluationRunResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartDataQualityRulesetEvaluationRunOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RunId != nil {
+		s.WriteString(schemas.StartDataQualityRulesetEvaluationRunResponse_RunId, *v.RunId)
+	}
+}
+func (v *StartDataQualityRulesetEvaluationRunOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartDataQualityRulesetEvaluationRunResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartDataQualityRulesetEvaluationRunResponse_RunId:
+			v.RunId = new(string)
+			return d.ReadString(schemas.StartDataQualityRulesetEvaluationRunResponse_RunId, v.RunId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartDataQualityRulesetEvaluationRunMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStartDataQualityRulesetEvaluationRun{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartDataQualityRulesetEvaluationRun, schemas.StartDataQualityRulesetEvaluationRunRequest, schemas.StartDataQualityRulesetEvaluationRunResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpStartDataQualityRulesetEvaluationRun{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartDataQualityRulesetEvaluationRun, schemas.StartDataQualityRulesetEvaluationRunRequest, schemas.StartDataQualityRulesetEvaluationRunResponse), output: &StartDataQualityRulesetEvaluationRunOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

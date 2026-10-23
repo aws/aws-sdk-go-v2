@@ -4,7 +4,9 @@ package elasticsearchservice
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/elasticsearchservice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/elasticsearchservice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -47,6 +49,28 @@ type CreateOutboundCrossClusterSearchConnectionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateOutboundCrossClusterSearchConnectionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateOutboundCrossClusterSearchConnectionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateOutboundCrossClusterSearchConnectionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConnectionAlias != nil {
+		s.WriteString(schemas.CreateOutboundCrossClusterSearchConnectionRequest_ConnectionAlias, *v.ConnectionAlias)
+	}
+	if v.DestinationDomainInfo != nil {
+		s.WriteStruct(schemas.CreateOutboundCrossClusterSearchConnectionRequest_DestinationDomainInfo)
+		v.DestinationDomainInfo.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SourceDomainInfo != nil {
+		s.WriteStruct(schemas.CreateOutboundCrossClusterSearchConnectionRequest_SourceDomainInfo)
+		v.SourceDomainInfo.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 // The result of a CreateOutboundCrossClusterSearchConnection request. Contains the details of the newly created
 // cross-cluster search connection.
 type CreateOutboundCrossClusterSearchConnectionOutput struct {
@@ -73,13 +97,62 @@ type CreateOutboundCrossClusterSearchConnectionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateOutboundCrossClusterSearchConnectionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateOutboundCrossClusterSearchConnectionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateOutboundCrossClusterSearchConnectionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConnectionAlias != nil {
+		s.WriteString(schemas.CreateOutboundCrossClusterSearchConnectionResponse_ConnectionAlias, *v.ConnectionAlias)
+	}
+	if v.ConnectionStatus != nil {
+		s.WriteStruct(schemas.CreateOutboundCrossClusterSearchConnectionResponse_ConnectionStatus)
+		v.ConnectionStatus.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CrossClusterSearchConnectionId != nil {
+		s.WriteString(schemas.CreateOutboundCrossClusterSearchConnectionResponse_CrossClusterSearchConnectionId, *v.CrossClusterSearchConnectionId)
+	}
+	if v.DestinationDomainInfo != nil {
+		s.WriteStruct(schemas.CreateOutboundCrossClusterSearchConnectionResponse_DestinationDomainInfo)
+		v.DestinationDomainInfo.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SourceDomainInfo != nil {
+		s.WriteStruct(schemas.CreateOutboundCrossClusterSearchConnectionResponse_SourceDomainInfo)
+		v.SourceDomainInfo.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateOutboundCrossClusterSearchConnectionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateOutboundCrossClusterSearchConnectionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateOutboundCrossClusterSearchConnectionResponse_ConnectionAlias:
+			v.ConnectionAlias = new(string)
+			return d.ReadString(schemas.CreateOutboundCrossClusterSearchConnectionResponse_ConnectionAlias, v.ConnectionAlias)
+		case schemas.CreateOutboundCrossClusterSearchConnectionResponse_ConnectionStatus:
+			v.ConnectionStatus = &types.OutboundCrossClusterSearchConnectionStatus{}
+			return v.ConnectionStatus.Deserialize(d)
+		case schemas.CreateOutboundCrossClusterSearchConnectionResponse_CrossClusterSearchConnectionId:
+			v.CrossClusterSearchConnectionId = new(string)
+			return d.ReadString(schemas.CreateOutboundCrossClusterSearchConnectionResponse_CrossClusterSearchConnectionId, v.CrossClusterSearchConnectionId)
+		case schemas.CreateOutboundCrossClusterSearchConnectionResponse_DestinationDomainInfo:
+			v.DestinationDomainInfo = &types.DomainInformation{}
+			return v.DestinationDomainInfo.Deserialize(d)
+		case schemas.CreateOutboundCrossClusterSearchConnectionResponse_SourceDomainInfo:
+			v.SourceDomainInfo = &types.DomainInformation{}
+			return v.SourceDomainInfo.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateOutboundCrossClusterSearchConnectionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateOutboundCrossClusterSearchConnection{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateOutboundCrossClusterSearchConnection, schemas.CreateOutboundCrossClusterSearchConnectionRequest, schemas.CreateOutboundCrossClusterSearchConnectionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateOutboundCrossClusterSearchConnection{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateOutboundCrossClusterSearchConnection, schemas.CreateOutboundCrossClusterSearchConnectionRequest, schemas.CreateOutboundCrossClusterSearchConnectionResponse), output: &CreateOutboundCrossClusterSearchConnectionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

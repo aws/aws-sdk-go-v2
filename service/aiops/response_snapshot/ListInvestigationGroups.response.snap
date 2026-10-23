@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"investigationGroups":[{"arn":"__Arn__","name":"__Name__"},{"arn":"__Arn__","name":"__Name__"}],"nextToken":"__NextToken__"}

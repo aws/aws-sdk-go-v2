@@ -4,7 +4,9 @@ package sesv2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/sesv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sesv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -44,6 +46,21 @@ type PutAccountSuppressionAttributesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutAccountSuppressionAttributesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutAccountSuppressionAttributesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutAccountSuppressionAttributesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeSuppressionListReasons(s, schemas.PutAccountSuppressionAttributesRequest_SuppressedReasons, v.SuppressedReasons)
+	if v.ValidationAttributes != nil {
+		s.WriteStruct(schemas.PutAccountSuppressionAttributesRequest_ValidationAttributes)
+		v.ValidationAttributes.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 // An HTTP 200 response if the request succeeds, or an error message if the
 // request fails.
 type PutAccountSuppressionAttributesOutput struct {
@@ -53,13 +70,26 @@ type PutAccountSuppressionAttributesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutAccountSuppressionAttributesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutAccountSuppressionAttributesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutAccountSuppressionAttributesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *PutAccountSuppressionAttributesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PutAccountSuppressionAttributesResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPutAccountSuppressionAttributesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpPutAccountSuppressionAttributes{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutAccountSuppressionAttributes, schemas.PutAccountSuppressionAttributesRequest, schemas.PutAccountSuppressionAttributesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpPutAccountSuppressionAttributes{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutAccountSuppressionAttributes, schemas.PutAccountSuppressionAttributesRequest, schemas.PutAccountSuppressionAttributesResponse), output: &PutAccountSuppressionAttributesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

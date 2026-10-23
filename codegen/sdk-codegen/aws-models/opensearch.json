@@ -226,6 +226,18 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.opensearch#AcceptedWarningsList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.opensearch#String"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 25
+                }
+            }
+        },
         "com.amazonaws.opensearch#AccessDeniedException": {
             "type": "structure",
             "members": {
@@ -3907,6 +3919,18 @@
                     "target": "com.amazonaws.opensearch#InitiatedBy",
                     "traits": {
                         "smithy.api#documentation": "<p>The IAM principal who initiated the configuration change.</p>"
+                    }
+                },
+                "ValidationFailures": {
+                    "target": "com.amazonaws.opensearch#ValidationFailures",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The validation failures that occurred as a result of the configuration change.</p>"
+                    }
+                },
+                "AcceptedWarnings": {
+                    "target": "com.amazonaws.opensearch#AcceptedWarningsList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of advisory warning codes that were accepted for the configuration change.</p>"
                     }
                 }
             },
@@ -8032,7 +8056,7 @@
                 "TLSSecurityPolicy": {
                     "target": "com.amazonaws.opensearch#TLSSecurityPolicy",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specify the TLS security policy to apply to the HTTPS endpoint of the domain. The\n            policy can be one of the following values:</p>\n         <ul>\n            <li>\n               <p>\n                  <b>Policy-Min-TLS-1-0-2019-07:</b> TLS security\n                    policy that supports TLS version 1.0 to TLS version 1.2</p>\n            </li>\n            <li>\n               <p>\n                  <b>Policy-Min-TLS-1-2-2019-07:</b> TLS security\n                    policy that supports only TLS version 1.2</p>\n            </li>\n            <li>\n               <p>\n                  <b>Policy-Min-TLS-1-2-PFS-2023-10:</b> TLS security\n                    policy that supports TLS version 1.2 to TLS version 1.3 with perfect forward\n                    secrecy cipher suites</p>\n            </li>\n            <li>\n               <p>\n                  <b>Policy-Min-TLS-1-2-RFC9151-FIPS-2024-08:</b> TLS \n                security policy that supports TLS version 1.3 with FIPS</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>Specify the TLS security policy to apply to the HTTPS endpoint of the domain. The\n            policy can be one of the following values:</p>\n         <ul>\n            <li>\n               <p>\n                  <b>Policy-Min-TLS-1-0-2019-07:</b> TLS security\n                    policy that supports TLS version 1.0 to TLS version 1.2</p>\n            </li>\n            <li>\n               <p>\n                  <b>Policy-Min-TLS-1-2-2019-07:</b> TLS security\n                    policy that supports only TLS version 1.2</p>\n            </li>\n            <li>\n               <p>\n                  <b>Policy-Min-TLS-1-2-PFS-2023-10:</b> TLS security\n                    policy that supports TLS version 1.2 to TLS version 1.3 with perfect forward\n                    secrecy cipher suites</p>\n            </li>\n            <li>\n               <p>\n                  <b>Policy-Min-TLS-1-2-RFC9151-FIPS-2024-08:</b> TLS \n                security policy that supports TLS version 1.3 with FIPS</p>\n            </li>\n            <li>\n               <p>\n                  <b>Policy-Min-TLS-1-2-FIPS-PQ-2026-10:</b> TLS\n                security policy that supports TLS version 1.2 to TLS version 1.3 with FIPS and post-quantum cipher suites</p>\n            </li>\n         </ul>"
                     }
                 },
                 "CustomEndpointEnabled": {
@@ -8842,7 +8866,13 @@
                 "ValidationFailures": {
                     "target": "com.amazonaws.opensearch#ValidationFailures",
                     "traits": {
-                        "smithy.api#documentation": "<p>Any validation failures that occurred as a result of the dry run.</p>"
+                        "smithy.api#documentation": "<p>The validation failures that occurred as a result of the dry run.</p>"
+                    }
+                },
+                "AcceptedWarnings": {
+                    "target": "com.amazonaws.opensearch#AcceptedWarningsList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of advisory warning codes that were accepted for the configuration change.</p>"
                     }
                 }
             },
@@ -8974,6 +9004,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The KMS key ID. Takes the form\n            <code>1a2a3a4-1a2a-3a4a-5a6a-1a2a3a4a5a6a</code>.</p>"
                     }
+                },
+                "EncryptionMode": {
+                    "target": "com.amazonaws.opensearch#EncryptionMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of encryption at rest applied to the domain's data. Valid values are\n            <code>DISK</code> and <code>NATIVE</code>. <code>DISK</code> is the default and uses\n            volume-level encryption. <code>NATIVE</code> uses engine-native, index-level encryption\n            and requires encryption at rest to be enabled and OpenSearch version 3.3 or later. After\n            the mode is set to <code>NATIVE</code>, it can't be changed back to\n            <code>DISK</code>.</p>"
+                    }
                 }
             },
             "traits": {
@@ -9000,6 +9036,26 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Status of the encryption at rest options for the specified OpenSearch Service\n            domain.</p>"
+            }
+        },
+        "com.amazonaws.opensearch#EncryptionMode": {
+            "type": "enum",
+            "members": {
+                "Disk": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DISK"
+                    }
+                },
+                "Native": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NATIVE"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The type of encryption at rest applied to a domain's data: <code>DISK</code> for\n            volume-level encryption or <code>NATIVE</code> for engine-native, index-level\n            encryption.</p>"
             }
         },
         "com.amazonaws.opensearch#Endpoint": {
@@ -17314,6 +17370,12 @@
                     "traits": {
                         "smithy.api#enumValue": "Policy-Min-TLS-1-2-RFC9151-FIPS-2024-08"
                     }
+                },
+                "POLICY_MIN_TLS_1_2_FIPS_PQ_2026_10": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Policy-Min-TLS-1-2-FIPS-PQ-2026-10"
+                    }
                 }
             }
         },
@@ -17923,6 +17985,12 @@
                     "target": "com.amazonaws.opensearch#EngineMode",
                     "traits": {
                         "smithy.api#documentation": "<p>The engine mode for the domain. The engine mode can't be changed after the domain is created. For valid values, see <code>EngineMode</code>.</p>"
+                    }
+                },
+                "AcceptedWarnings": {
+                    "target": "com.amazonaws.opensearch#AcceptedWarningsList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of advisory warning codes to accept for this configuration change. By default, any advisory warning blocks the change. Include the code of each warning you want to accept so the change can proceed. You can find warning codes in the <code>ValidationFailures</code> list returned by <code>DescribeDomainChangeProgress</code> and <code>DescribeDryRunProgress</code>. Critical validation failures cannot be accepted and always block the change. If you omit this parameter or pass an empty list, all warnings block the change. For more information, see <a href=\"https://docs.aws.amazon.com/opensearch-service/latest/developerguide/managedomains-configuration-changes#validation-check\">Validating a domain update</a>.</p>"
                     }
                 }
             },
@@ -18813,10 +18881,33 @@
                     "traits": {
                         "smithy.api#documentation": "<p>A message corresponding to the failure.</p>"
                     }
+                },
+                "Severity": {
+                    "target": "com.amazonaws.opensearch#ValidationFailureSeverity",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The severity of the validation failure.</p>"
+                    }
                 }
             },
             "traits": {
                 "smithy.api#documentation": "<p>A validation failure that occurred as the result of a pre-update validation check\n            (verbose dry run) on a domain.</p>"
+            }
+        },
+        "com.amazonaws.opensearch#ValidationFailureSeverity": {
+            "type": "enum",
+            "members": {
+                "CRITICAL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Critical"
+                    }
+                },
+                "WARNING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Warning"
+                    }
+                }
             }
         },
         "com.amazonaws.opensearch#ValidationFailures": {

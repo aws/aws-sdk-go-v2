@@ -4,7 +4,9 @@ package bcmdataexports
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/bcmdataexports/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bcmdataexports/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -42,6 +44,19 @@ type GetTableInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetTableInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetTableRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetTableInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TableName != nil {
+		s.WriteString(schemas.GetTableRequest_TableName, *v.TableName)
+	}
+	serializeTableProperties(s, schemas.GetTableRequest_TableProperties, v.TableProperties)
+}
+
 type GetTableOutput struct {
 
 	// The table description.
@@ -65,13 +80,44 @@ type GetTableOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetTableOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetTableResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetTableOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.GetTableResponse_Description, *v.Description)
+	}
+	serializeColumnList(s, schemas.GetTableResponse_Schema, v.Schema)
+	if v.TableName != nil {
+		s.WriteString(schemas.GetTableResponse_TableName, *v.TableName)
+	}
+	serializeTableProperties(s, schemas.GetTableResponse_TableProperties, v.TableProperties)
+}
+func (v *GetTableOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetTableResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetTableResponse_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.GetTableResponse_Description, v.Description)
+		case schemas.GetTableResponse_Schema:
+			return deserializeColumnList(d, schemas.GetTableResponse_Schema, &v.Schema)
+		case schemas.GetTableResponse_TableName:
+			v.TableName = new(string)
+			return d.ReadString(schemas.GetTableResponse_TableName, v.TableName)
+		case schemas.GetTableResponse_TableProperties:
+			return deserializeTableProperties(d, schemas.GetTableResponse_TableProperties, &v.TableProperties)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetTableMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetTable{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetTable, schemas.GetTableRequest, schemas.GetTableResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetTable{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetTable, schemas.GetTableRequest, schemas.GetTableResponse), output: &GetTableOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

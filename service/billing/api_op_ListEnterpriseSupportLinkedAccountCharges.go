@@ -5,7 +5,9 @@ package billing
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/billing/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/billing/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -33,16 +35,38 @@ type ListEnterpriseSupportLinkedAccountChargesInput struct {
 	// This member is required.
 	BillingMonth *string
 
-	// An optional linked account ID to filter results to a specific account.
+	// The linked account ID to filter results to a specific account. If you don't
+	// specify a value, the response includes charges for all linked accounts.
 	AccountId *string
 
-	// The maximum number of results to return per page.
+	// The maximum number of results to return per page. Default is 100.
 	MaxResults *int32
 
 	// The pagination token for the next page of results.
 	NextToken *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ListEnterpriseSupportLinkedAccountChargesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListEnterpriseSupportLinkedAccountChargesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListEnterpriseSupportLinkedAccountChargesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountId != nil {
+		s.WriteString(schemas.ListEnterpriseSupportLinkedAccountChargesRequest_accountId, *v.AccountId)
+	}
+	if v.BillingMonth != nil {
+		s.WriteString(schemas.ListEnterpriseSupportLinkedAccountChargesRequest_billingMonth, *v.BillingMonth)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListEnterpriseSupportLinkedAccountChargesRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListEnterpriseSupportLinkedAccountChargesRequest_nextToken, *v.NextToken)
+	}
 }
 
 // The response structure for ListEnterpriseSupportLinkedAccountCharges.
@@ -62,13 +86,35 @@ type ListEnterpriseSupportLinkedAccountChargesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListEnterpriseSupportLinkedAccountChargesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListEnterpriseSupportLinkedAccountChargesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListEnterpriseSupportLinkedAccountChargesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeLinkedAccountChargeList(s, schemas.ListEnterpriseSupportLinkedAccountChargesResponse_linkedAccount, v.LinkedAccount)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListEnterpriseSupportLinkedAccountChargesResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListEnterpriseSupportLinkedAccountChargesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListEnterpriseSupportLinkedAccountChargesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListEnterpriseSupportLinkedAccountChargesResponse_linkedAccount:
+			return deserializeLinkedAccountChargeList(d, schemas.ListEnterpriseSupportLinkedAccountChargesResponse_linkedAccount, &v.LinkedAccount)
+		case schemas.ListEnterpriseSupportLinkedAccountChargesResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListEnterpriseSupportLinkedAccountChargesResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListEnterpriseSupportLinkedAccountChargesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpListEnterpriseSupportLinkedAccountCharges{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListEnterpriseSupportLinkedAccountCharges, schemas.ListEnterpriseSupportLinkedAccountChargesRequest, schemas.ListEnterpriseSupportLinkedAccountChargesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpListEnterpriseSupportLinkedAccountCharges{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListEnterpriseSupportLinkedAccountCharges, schemas.ListEnterpriseSupportLinkedAccountChargesRequest, schemas.ListEnterpriseSupportLinkedAccountChargesResponse), output: &ListEnterpriseSupportLinkedAccountChargesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 
@@ -108,7 +154,7 @@ func (c *Client) addOperationListEnterpriseSupportLinkedAccountChargesMiddleware
 // ListEnterpriseSupportLinkedAccountChargesPaginatorOptions is the paginator
 // options for ListEnterpriseSupportLinkedAccountCharges
 type ListEnterpriseSupportLinkedAccountChargesPaginatorOptions struct {
-	// The maximum number of results to return per page.
+	// The maximum number of results to return per page. Default is 100.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

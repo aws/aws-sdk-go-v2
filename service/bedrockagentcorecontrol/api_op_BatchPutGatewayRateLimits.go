@@ -5,7 +5,9 @@ package bedrockagentcorecontrol
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -53,6 +55,22 @@ type BatchPutGatewayRateLimitsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchPutGatewayRateLimitsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchPutGatewayRateLimitsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchPutGatewayRateLimitsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.BatchPutGatewayRateLimitsRequest_clientToken, *v.ClientToken)
+	}
+	if v.GatewayIdentifier != nil {
+		s.WriteString(schemas.BatchPutGatewayRateLimitsRequest_gatewayIdentifier, *v.GatewayIdentifier)
+	}
+	serializeBatchPutLimitEntries(s, schemas.BatchPutGatewayRateLimitsRequest_rateLimits, v.RateLimits)
+}
+
 type BatchPutGatewayRateLimitsOutput struct {
 
 	// The resulting set of rate limits after the batch operation.
@@ -66,13 +84,29 @@ type BatchPutGatewayRateLimitsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchPutGatewayRateLimitsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchPutGatewayRateLimitsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchPutGatewayRateLimitsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeGatewayRateLimits(s, schemas.BatchPutGatewayRateLimitsResponse_rateLimits, v.RateLimits)
+}
+func (v *BatchPutGatewayRateLimitsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchPutGatewayRateLimitsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchPutGatewayRateLimitsResponse_rateLimits:
+			return deserializeGatewayRateLimits(d, schemas.BatchPutGatewayRateLimitsResponse_rateLimits, &v.RateLimits)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationBatchPutGatewayRateLimitsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpBatchPutGatewayRateLimits{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchPutGatewayRateLimits, schemas.BatchPutGatewayRateLimitsRequest, schemas.BatchPutGatewayRateLimitsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpBatchPutGatewayRateLimits{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchPutGatewayRateLimits, schemas.BatchPutGatewayRateLimitsRequest, schemas.BatchPutGatewayRateLimitsResponse), output: &BatchPutGatewayRateLimitsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

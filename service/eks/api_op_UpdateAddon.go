@@ -5,7 +5,9 @@ package eks
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/eks/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/eks/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -96,6 +98,37 @@ type UpdateAddonInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateAddonInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateAddonRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateAddonInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AddonName != nil {
+		s.WriteString(schemas.UpdateAddonRequest_addonName, *v.AddonName)
+	}
+	if v.AddonVersion != nil {
+		s.WriteString(schemas.UpdateAddonRequest_addonVersion, *v.AddonVersion)
+	}
+	if v.ClientRequestToken != nil {
+		s.WriteString(schemas.UpdateAddonRequest_clientRequestToken, *v.ClientRequestToken)
+	}
+	if v.ClusterName != nil {
+		s.WriteString(schemas.UpdateAddonRequest_clusterName, *v.ClusterName)
+	}
+	if v.ConfigurationValues != nil {
+		s.WriteString(schemas.UpdateAddonRequest_configurationValues, *v.ConfigurationValues)
+	}
+	serializeAddonPodIdentityAssociationsList(s, schemas.UpdateAddonRequest_podIdentityAssociations, v.PodIdentityAssociations)
+	if v.ResolveConflicts != "" {
+		s.WriteString(schemas.UpdateAddonRequest_resolveConflicts, string(v.ResolveConflicts))
+	}
+	if v.ServiceAccountRoleArn != nil {
+		s.WriteString(schemas.UpdateAddonRequest_serviceAccountRoleArn, *v.ServiceAccountRoleArn)
+	}
+}
+
 type UpdateAddonOutput struct {
 
 	// An object representing an asynchronous update.
@@ -107,13 +140,34 @@ type UpdateAddonOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateAddonOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateAddonResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateAddonOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Update != nil {
+		s.WriteStruct(schemas.UpdateAddonResponse_update)
+		v.Update.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateAddonOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateAddonResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateAddonResponse_update:
+			v.Update = &types.Update{}
+			return v.Update.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateAddonMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateAddon{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateAddon, schemas.UpdateAddonRequest, schemas.UpdateAddonResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateAddon{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateAddon, schemas.UpdateAddonRequest, schemas.UpdateAddonResponse), output: &UpdateAddonOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

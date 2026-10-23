@@ -5,7 +5,9 @@ package inspector2
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/inspector2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/inspector2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -57,6 +59,29 @@ type CreateConnectorInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateConnectorInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateConnectorRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateConnectorInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateConnectorRequest_clientToken, *v.ClientToken)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreateConnectorRequest_description, *v.Description)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateConnectorRequest_name, *v.Name)
+	}
+	if v.Provider != "" {
+		s.WriteString(schemas.CreateConnectorRequest_provider, string(v.Provider))
+	}
+	serializeProviderDetailCreate(s, schemas.CreateConnectorRequest_providerDetail, v.ProviderDetail)
+	serializeConnectorTagMap(s, schemas.CreateConnectorRequest_tags, v.Tags)
+}
+
 type CreateConnectorOutput struct {
 
 	// The Amazon Resource Name (ARN) of the created connector.
@@ -70,13 +95,32 @@ type CreateConnectorOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateConnectorOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateConnectorResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateConnectorOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConnectorArn != nil {
+		s.WriteString(schemas.CreateConnectorResponse_connectorArn, *v.ConnectorArn)
+	}
+}
+func (v *CreateConnectorOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateConnectorResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateConnectorResponse_connectorArn:
+			v.ConnectorArn = new(string)
+			return d.ReadString(schemas.CreateConnectorResponse_connectorArn, v.ConnectorArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateConnectorMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateConnector{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateConnector, schemas.CreateConnectorRequest, schemas.CreateConnectorResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateConnector{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateConnector, schemas.CreateConnectorRequest, schemas.CreateConnectorResponse), output: &CreateConnectorOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

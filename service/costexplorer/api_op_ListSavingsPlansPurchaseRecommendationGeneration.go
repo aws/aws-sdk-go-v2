@@ -5,7 +5,9 @@ package costexplorer
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/costexplorer/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/costexplorer/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -44,6 +46,25 @@ type ListSavingsPlansPurchaseRecommendationGenerationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListSavingsPlansPurchaseRecommendationGenerationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListSavingsPlansPurchaseRecommendationGenerationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListSavingsPlansPurchaseRecommendationGenerationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GenerationStatus != "" {
+		s.WriteString(schemas.ListSavingsPlansPurchaseRecommendationGenerationRequest_GenerationStatus, string(v.GenerationStatus))
+	}
+	if v.NextPageToken != nil {
+		s.WriteString(schemas.ListSavingsPlansPurchaseRecommendationGenerationRequest_NextPageToken, *v.NextPageToken)
+	}
+	if v.PageSize != 0 {
+		s.WriteInt32(schemas.ListSavingsPlansPurchaseRecommendationGenerationRequest_PageSize, v.PageSize)
+	}
+	serializeRecommendationIdList(s, schemas.ListSavingsPlansPurchaseRecommendationGenerationRequest_RecommendationIds, v.RecommendationIds)
+}
+
 type ListSavingsPlansPurchaseRecommendationGenerationOutput struct {
 
 	// The list of historical recommendation generations.
@@ -58,13 +79,35 @@ type ListSavingsPlansPurchaseRecommendationGenerationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListSavingsPlansPurchaseRecommendationGenerationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListSavingsPlansPurchaseRecommendationGenerationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListSavingsPlansPurchaseRecommendationGenerationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeGenerationSummaryList(s, schemas.ListSavingsPlansPurchaseRecommendationGenerationResponse_GenerationSummaryList, v.GenerationSummaryList)
+	if v.NextPageToken != nil {
+		s.WriteString(schemas.ListSavingsPlansPurchaseRecommendationGenerationResponse_NextPageToken, *v.NextPageToken)
+	}
+}
+func (v *ListSavingsPlansPurchaseRecommendationGenerationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListSavingsPlansPurchaseRecommendationGenerationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListSavingsPlansPurchaseRecommendationGenerationResponse_GenerationSummaryList:
+			return deserializeGenerationSummaryList(d, schemas.ListSavingsPlansPurchaseRecommendationGenerationResponse_GenerationSummaryList, &v.GenerationSummaryList)
+		case schemas.ListSavingsPlansPurchaseRecommendationGenerationResponse_NextPageToken:
+			v.NextPageToken = new(string)
+			return d.ReadString(schemas.ListSavingsPlansPurchaseRecommendationGenerationResponse_NextPageToken, v.NextPageToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListSavingsPlansPurchaseRecommendationGenerationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListSavingsPlansPurchaseRecommendationGeneration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListSavingsPlansPurchaseRecommendationGeneration, schemas.ListSavingsPlansPurchaseRecommendationGenerationRequest, schemas.ListSavingsPlansPurchaseRecommendationGenerationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListSavingsPlansPurchaseRecommendationGeneration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListSavingsPlansPurchaseRecommendationGeneration, schemas.ListSavingsPlansPurchaseRecommendationGenerationRequest, schemas.ListSavingsPlansPurchaseRecommendationGenerationResponse), output: &ListSavingsPlansPurchaseRecommendationGenerationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

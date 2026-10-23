@@ -4,7 +4,9 @@ package inspector2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/inspector2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/inspector2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -40,6 +42,19 @@ type GetCodeSecurityScanInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetCodeSecurityScanInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetCodeSecurityScanRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetCodeSecurityScanInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeCodeSecurityResource(s, schemas.GetCodeSecurityScanRequest_resource, v.Resource)
+	if v.ScanId != nil {
+		s.WriteString(schemas.GetCodeSecurityScanRequest_scanId, *v.ScanId)
+	}
+}
+
 type GetCodeSecurityScanOutput struct {
 
 	// The Amazon Web Services account ID associated with the scan.
@@ -73,13 +88,75 @@ type GetCodeSecurityScanOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetCodeSecurityScanOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetCodeSecurityScanResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetCodeSecurityScanOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountId != nil {
+		s.WriteString(schemas.GetCodeSecurityScanResponse_accountId, *v.AccountId)
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.GetCodeSecurityScanResponse_createdAt, *v.CreatedAt)
+	}
+	if v.LastCommitId != nil {
+		s.WriteString(schemas.GetCodeSecurityScanResponse_lastCommitId, *v.LastCommitId)
+	}
+	serializeCodeSecurityResource(s, schemas.GetCodeSecurityScanResponse_resource, v.Resource)
+	if v.ScanId != nil {
+		s.WriteString(schemas.GetCodeSecurityScanResponse_scanId, *v.ScanId)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.GetCodeSecurityScanResponse_status, string(v.Status))
+	}
+	if v.StatusReason != nil {
+		s.WriteString(schemas.GetCodeSecurityScanResponse_statusReason, *v.StatusReason)
+	}
+	if v.UpdatedAt != nil {
+		s.WriteTime(schemas.GetCodeSecurityScanResponse_updatedAt, *v.UpdatedAt)
+	}
+}
+func (v *GetCodeSecurityScanOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetCodeSecurityScanResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetCodeSecurityScanResponse_accountId:
+			v.AccountId = new(string)
+			return d.ReadString(schemas.GetCodeSecurityScanResponse_accountId, v.AccountId)
+		case schemas.GetCodeSecurityScanResponse_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.GetCodeSecurityScanResponse_createdAt, v.CreatedAt)
+		case schemas.GetCodeSecurityScanResponse_lastCommitId:
+			v.LastCommitId = new(string)
+			return d.ReadString(schemas.GetCodeSecurityScanResponse_lastCommitId, v.LastCommitId)
+		case schemas.GetCodeSecurityScanResponse_resource:
+			return deserializeCodeSecurityResource(d, schemas.GetCodeSecurityScanResponse_resource, &v.Resource)
+		case schemas.GetCodeSecurityScanResponse_scanId:
+			v.ScanId = new(string)
+			return d.ReadString(schemas.GetCodeSecurityScanResponse_scanId, v.ScanId)
+		case schemas.GetCodeSecurityScanResponse_status:
+			var ev string
+			if err := d.ReadString(schemas.GetCodeSecurityScanResponse_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.CodeScanStatus(ev)
+			return nil
+		case schemas.GetCodeSecurityScanResponse_statusReason:
+			v.StatusReason = new(string)
+			return d.ReadString(schemas.GetCodeSecurityScanResponse_statusReason, v.StatusReason)
+		case schemas.GetCodeSecurityScanResponse_updatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.GetCodeSecurityScanResponse_updatedAt, v.UpdatedAt)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetCodeSecurityScanMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetCodeSecurityScan{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetCodeSecurityScan, schemas.GetCodeSecurityScanRequest, schemas.GetCodeSecurityScanResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetCodeSecurityScan{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetCodeSecurityScan, schemas.GetCodeSecurityScanRequest, schemas.GetCodeSecurityScanResponse), output: &GetCodeSecurityScanOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

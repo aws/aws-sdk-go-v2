@@ -4,6 +4,8 @@ package quicksight
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/quicksight/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -45,6 +47,24 @@ type RestoreAnalysisInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RestoreAnalysisInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RestoreAnalysisRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RestoreAnalysisInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AnalysisId != nil {
+		s.WriteString(schemas.RestoreAnalysisRequest_AnalysisId, *v.AnalysisId)
+	}
+	if v.AwsAccountId != nil {
+		s.WriteString(schemas.RestoreAnalysisRequest_AwsAccountId, *v.AwsAccountId)
+	}
+	if v.RestoreToFolders != false {
+		s.WriteBool(schemas.RestoreAnalysisRequest_RestoreToFolders, v.RestoreToFolders)
+	}
+}
+
 type RestoreAnalysisOutput struct {
 
 	// The ID of the analysis that you're restoring.
@@ -68,13 +88,52 @@ type RestoreAnalysisOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RestoreAnalysisOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RestoreAnalysisResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RestoreAnalysisOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AnalysisId != nil {
+		s.WriteString(schemas.RestoreAnalysisResponse_AnalysisId, *v.AnalysisId)
+	}
+	if v.Arn != nil {
+		s.WriteString(schemas.RestoreAnalysisResponse_Arn, *v.Arn)
+	}
+	if v.RequestId != nil {
+		s.WriteString(schemas.RestoreAnalysisResponse_RequestId, *v.RequestId)
+	}
+	serializeFolderArnList(s, schemas.RestoreAnalysisResponse_RestorationFailedFolderArns, v.RestorationFailedFolderArns)
+	if v.Status != 0 {
+		s.WriteInt32(schemas.RestoreAnalysisResponse_Status, v.Status)
+	}
+}
+func (v *RestoreAnalysisOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RestoreAnalysisResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RestoreAnalysisResponse_AnalysisId:
+			v.AnalysisId = new(string)
+			return d.ReadString(schemas.RestoreAnalysisResponse_AnalysisId, v.AnalysisId)
+		case schemas.RestoreAnalysisResponse_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.RestoreAnalysisResponse_Arn, v.Arn)
+		case schemas.RestoreAnalysisResponse_RequestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.RestoreAnalysisResponse_RequestId, v.RequestId)
+		case schemas.RestoreAnalysisResponse_RestorationFailedFolderArns:
+			return deserializeFolderArnList(d, schemas.RestoreAnalysisResponse_RestorationFailedFolderArns, &v.RestorationFailedFolderArns)
+		case schemas.RestoreAnalysisResponse_Status:
+			return d.ReadInt32(schemas.RestoreAnalysisResponse_Status, &v.Status)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationRestoreAnalysisMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpRestoreAnalysis{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RestoreAnalysis, schemas.RestoreAnalysisRequest, schemas.RestoreAnalysisResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpRestoreAnalysis{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RestoreAnalysis, schemas.RestoreAnalysisRequest, schemas.RestoreAnalysisResponse), output: &RestoreAnalysisOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

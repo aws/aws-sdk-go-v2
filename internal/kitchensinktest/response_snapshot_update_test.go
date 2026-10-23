@@ -13,6 +13,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/kitchensinktest/types"
 	smithy "github.com/aws/smithy-go"
 	smithycbor "github.com/aws/smithy-go/encoding/cbor"
+	"github.com/aws/smithy-go/ptr"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"github.com/aws/smithy-go/transport/http/protocol/awsjson"
 	"io"
@@ -161,6 +162,86 @@ func TestUpdateResponseSnapshot_GetItem(t *testing.T) {
 	}
 }
 
+func TestUpdateResponseSnapshot_GetLists(t *testing.T) {
+	want := &GetListsOutput{
+		Strings: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Integers: []int32{
+			1,
+			1,
+		},
+		Structs: []types.ListValueStruct{
+			{
+				Name: ptr.String("__Name__"),
+			},
+			{
+				Name: ptr.String("__Name__"),
+			},
+		},
+		SparseStrings: []*string{
+			ptr.String("__Member__"),
+			ptr.String("__Member__"),
+		},
+	}
+	proto := awsjson.New10(schemas.AwsJson1KitchenSink)
+	opSchema := smithy.NewOperationSchema(schemas.GetLists, schemas.GetListsOutput, schemas.GetListsOutput)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("GetLists.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_GetMaps(t *testing.T) {
+	want := &GetMapsOutput{
+		Strings: map[string]string{
+			"key0": "__Value__",
+		},
+		Integers: map[string]int32{
+			"key0": 1,
+		},
+		Structs: map[string]types.MapValueStruct{
+			"key0": {
+				Name: ptr.String("__Name__"),
+			},
+		},
+		SparseStrings: map[string]*string{
+			"key0": ptr.String("__Value__"),
+		},
+	}
+	proto := awsjson.New10(schemas.AwsJson1KitchenSink)
+	opSchema := smithy.NewOperationSchema(schemas.GetMaps, schemas.GetMapsOutput, schemas.GetMapsOutput)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("GetMaps.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateResponseSnapshot_PutCompressedData(t *testing.T) {
 	want := &PutCompressedDataOutput{}
 	proto := awsjson.New10(schemas.AwsJson1KitchenSink)
@@ -184,7 +265,9 @@ func TestUpdateResponseSnapshot_PutCompressedData(t *testing.T) {
 }
 
 func TestUpdateResponseSnapshot_Error_ItemNotFound(t *testing.T) {
-	want := &types.ItemNotFound{}
+	want := &types.ItemNotFound{
+		Message: ptr.String("__Message__"),
+	}
 	proto := awsjson.New10(schemas.AwsJson1KitchenSink)
 	opSchema := smithy.NewOperationSchema(schemas.GetItem, schemas.ItemNotFound, schemas.ItemNotFound)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)

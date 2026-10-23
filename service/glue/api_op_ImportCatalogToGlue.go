@@ -4,6 +4,8 @@ package glue
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/glue/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -32,6 +34,18 @@ type ImportCatalogToGlueInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ImportCatalogToGlueInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ImportCatalogToGlueRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ImportCatalogToGlueInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CatalogId != nil {
+		s.WriteString(schemas.ImportCatalogToGlueRequest_CatalogId, *v.CatalogId)
+	}
+}
+
 type ImportCatalogToGlueOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -39,13 +53,26 @@ type ImportCatalogToGlueOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ImportCatalogToGlueOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ImportCatalogToGlueResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ImportCatalogToGlueOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *ImportCatalogToGlueOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ImportCatalogToGlueResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationImportCatalogToGlueMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpImportCatalogToGlue{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ImportCatalogToGlue, schemas.ImportCatalogToGlueRequest, schemas.ImportCatalogToGlueResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpImportCatalogToGlue{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ImportCatalogToGlue, schemas.ImportCatalogToGlueRequest, schemas.ImportCatalogToGlueResponse), output: &ImportCatalogToGlueOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -5,7 +5,9 @@ package datazone
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/datazone/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/datazone/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -55,6 +57,30 @@ type DeleteTimeSeriesDataPointsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteTimeSeriesDataPointsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteTimeSeriesDataPointsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteTimeSeriesDataPointsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.DeleteTimeSeriesDataPointsInput_clientToken, *v.ClientToken)
+	}
+	if v.DomainIdentifier != nil {
+		s.WriteString(schemas.DeleteTimeSeriesDataPointsInput_domainIdentifier, *v.DomainIdentifier)
+	}
+	if v.EntityIdentifier != nil {
+		s.WriteString(schemas.DeleteTimeSeriesDataPointsInput_entityIdentifier, *v.EntityIdentifier)
+	}
+	if v.EntityType != "" {
+		s.WriteString(schemas.DeleteTimeSeriesDataPointsInput_entityType, string(v.EntityType))
+	}
+	if v.FormName != nil {
+		s.WriteString(schemas.DeleteTimeSeriesDataPointsInput_formName, *v.FormName)
+	}
+}
+
 type DeleteTimeSeriesDataPointsOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -62,13 +88,26 @@ type DeleteTimeSeriesDataPointsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteTimeSeriesDataPointsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteTimeSeriesDataPointsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteTimeSeriesDataPointsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteTimeSeriesDataPointsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteTimeSeriesDataPointsOutput, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteTimeSeriesDataPointsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteTimeSeriesDataPoints{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteTimeSeriesDataPoints, schemas.DeleteTimeSeriesDataPointsInput, schemas.DeleteTimeSeriesDataPointsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteTimeSeriesDataPoints{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteTimeSeriesDataPoints, schemas.DeleteTimeSeriesDataPointsInput, schemas.DeleteTimeSeriesDataPointsOutput), output: &DeleteTimeSeriesDataPointsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

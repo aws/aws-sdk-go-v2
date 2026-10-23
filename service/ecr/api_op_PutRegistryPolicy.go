@@ -4,6 +4,8 @@ package ecr
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/ecr/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -43,6 +45,18 @@ type PutRegistryPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutRegistryPolicyInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutRegistryPolicyRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutRegistryPolicyInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PolicyText != nil {
+		s.WriteString(schemas.PutRegistryPolicyRequest_policyText, *v.PolicyText)
+	}
+}
+
 type PutRegistryPolicyOutput struct {
 
 	// The JSON policy text for your registry.
@@ -57,13 +71,38 @@ type PutRegistryPolicyOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutRegistryPolicyOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutRegistryPolicyResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutRegistryPolicyOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PolicyText != nil {
+		s.WriteString(schemas.PutRegistryPolicyResponse_policyText, *v.PolicyText)
+	}
+	if v.RegistryId != nil {
+		s.WriteString(schemas.PutRegistryPolicyResponse_registryId, *v.RegistryId)
+	}
+}
+func (v *PutRegistryPolicyOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PutRegistryPolicyResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PutRegistryPolicyResponse_policyText:
+			v.PolicyText = new(string)
+			return d.ReadString(schemas.PutRegistryPolicyResponse_policyText, v.PolicyText)
+		case schemas.PutRegistryPolicyResponse_registryId:
+			v.RegistryId = new(string)
+			return d.ReadString(schemas.PutRegistryPolicyResponse_registryId, v.RegistryId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPutRegistryPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpPutRegistryPolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutRegistryPolicy, schemas.PutRegistryPolicyRequest, schemas.PutRegistryPolicyResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpPutRegistryPolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutRegistryPolicy, schemas.PutRegistryPolicyRequest, schemas.PutRegistryPolicyResponse), output: &PutRegistryPolicyOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

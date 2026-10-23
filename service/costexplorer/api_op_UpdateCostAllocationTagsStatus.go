@@ -4,7 +4,9 @@ package costexplorer
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/costexplorer/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/costexplorer/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -38,6 +40,16 @@ type UpdateCostAllocationTagsStatusInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateCostAllocationTagsStatusInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateCostAllocationTagsStatusRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateCostAllocationTagsStatusInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeCostAllocationTagStatusList(s, schemas.UpdateCostAllocationTagsStatusRequest_CostAllocationTagsStatus, v.CostAllocationTagsStatus)
+}
+
 type UpdateCostAllocationTagsStatusOutput struct {
 
 	// A list of UpdateCostAllocationTagsStatusError objects with error details about
@@ -51,13 +63,29 @@ type UpdateCostAllocationTagsStatusOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateCostAllocationTagsStatusOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateCostAllocationTagsStatusResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateCostAllocationTagsStatusOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeUpdateCostAllocationTagsStatusErrors(s, schemas.UpdateCostAllocationTagsStatusResponse_Errors, v.Errors)
+}
+func (v *UpdateCostAllocationTagsStatusOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateCostAllocationTagsStatusResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateCostAllocationTagsStatusResponse_Errors:
+			return deserializeUpdateCostAllocationTagsStatusErrors(d, schemas.UpdateCostAllocationTagsStatusResponse_Errors, &v.Errors)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateCostAllocationTagsStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateCostAllocationTagsStatus{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateCostAllocationTagsStatus, schemas.UpdateCostAllocationTagsStatusRequest, schemas.UpdateCostAllocationTagsStatusResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateCostAllocationTagsStatus{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateCostAllocationTagsStatus, schemas.UpdateCostAllocationTagsStatusRequest, schemas.UpdateCostAllocationTagsStatusResponse), output: &UpdateCostAllocationTagsStatusOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

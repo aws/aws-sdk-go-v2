@@ -48,6 +48,7 @@
         "api_op_TagResource.go",
         "api_op_UntagResource.go",
         "api_op_UpdateCallAnalyticsCategory.go",
+        "api_op_UpdateLanguageModel.go",
         "api_op_UpdateMedicalVocabulary.go",
         "api_op_UpdateVocabulary.go",
         "api_op_UpdateVocabularyFilter.go",

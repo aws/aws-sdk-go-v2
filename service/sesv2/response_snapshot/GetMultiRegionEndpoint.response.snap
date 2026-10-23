@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"CreatedTimestamp":946684800,"EndpointId":"__EndpointId__","EndpointName":"__EndpointName__","LastUpdatedTimestamp":946684800,"Routes":[{"Region":"__Region__"},{"Region":"__Region__"}],"Status":"CREATING"}

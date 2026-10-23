@@ -2989,6 +2989,11 @@ func TestCheckResponseSnapshot_GetFunction(t *testing.T) {
 			Headers: map[string]string{
 				"key0": "__Value__",
 			},
+			Cache: &types.HttpRequestCacheConfiguration{
+				TtlMinimumSeconds: ptr.Int32(1),
+				TtlMaximumSeconds: ptr.Int32(1),
+				Key:               ptr.String("__Key__"),
+			},
 		},
 		AwsServiceRequestConfiguration: &types.AwsServiceRequestConfiguration{
 			Runtime: types.RuntimeType("JSONATA"),
@@ -3001,6 +3006,11 @@ func TestCheckResponseSnapshot_GetFunction(t *testing.T) {
 			Body:                       ptr.String("__Body__"),
 			Headers: map[string]string{
 				"key0": "__Value__",
+			},
+			Cache: &types.HttpRequestCacheConfiguration{
+				TtlMinimumSeconds: ptr.Int32(1),
+				TtlMaximumSeconds: ptr.Int32(1),
+				Key:               ptr.String("__Key__"),
 			},
 			TargetService: ptr.String("__TargetService__"),
 			TargetRegion:  ptr.String("__TargetRegion__"),
@@ -3061,6 +3071,11 @@ func TestCheckResponseSnapshot_GetFunction(t *testing.T) {
 			Body:                       ptr.String("__Body__"),
 			Headers: map[string]string{
 				"key0": "__Value__",
+			},
+			Cache: &types.HttpRequestCacheConfiguration{
+				TtlMinimumSeconds: ptr.Int32(1),
+				TtlMaximumSeconds: ptr.Int32(1),
+				Key:               ptr.String("__Key__"),
 			},
 		},
 		Tags: map[string]string{
@@ -3208,6 +3223,15 @@ func TestCheckResponseSnapshot_GetPlaybackConfiguration(t *testing.T) {
 		AdsPersonalizationConcurrency: &types.AdsPersonalizationConcurrency{
 			MaxConcurrentAdsRequests:     ptr.Int32(1),
 			EnableVodVastParallelization: ptr.Bool(true),
+		},
+		BeaconingConfiguration: &types.BeaconingConfiguration{
+			ClientSide: &types.ClientSideBeaconingConfiguration{
+				ReportingMode: types.ClientSideBeaconingMode("DISABLED"),
+				AdditionalEventTypes: []types.BeaconEventType{
+					types.BeaconEventType("MUTE"),
+					types.BeaconEventType("MUTE"),
+				},
+			},
 		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("GetPlaybackConfiguration.response")
@@ -3546,6 +3570,11 @@ func TestCheckResponseSnapshot_ListFunctions(t *testing.T) {
 					Headers: map[string]string{
 						"key0": "__Value__",
 					},
+					Cache: &types.HttpRequestCacheConfiguration{
+						TtlMinimumSeconds: ptr.Int32(1),
+						TtlMaximumSeconds: ptr.Int32(1),
+						Key:               ptr.String("__Key__"),
+					},
 				},
 				AwsServiceRequestConfiguration: &types.AwsServiceRequestConfiguration{
 					Runtime: types.RuntimeType("JSONATA"),
@@ -3558,6 +3587,11 @@ func TestCheckResponseSnapshot_ListFunctions(t *testing.T) {
 					Body:                       ptr.String("__Body__"),
 					Headers: map[string]string{
 						"key0": "__Value__",
+					},
+					Cache: &types.HttpRequestCacheConfiguration{
+						TtlMinimumSeconds: ptr.Int32(1),
+						TtlMaximumSeconds: ptr.Int32(1),
+						Key:               ptr.String("__Key__"),
 					},
 					TargetService: ptr.String("__TargetService__"),
 					TargetRegion:  ptr.String("__TargetRegion__"),
@@ -3618,6 +3652,11 @@ func TestCheckResponseSnapshot_ListFunctions(t *testing.T) {
 					Body:                       ptr.String("__Body__"),
 					Headers: map[string]string{
 						"key0": "__Value__",
+					},
+					Cache: &types.HttpRequestCacheConfiguration{
+						TtlMinimumSeconds: ptr.Int32(1),
+						TtlMaximumSeconds: ptr.Int32(1),
+						Key:               ptr.String("__Key__"),
 					},
 				},
 				Tags: map[string]string{
@@ -3641,6 +3680,11 @@ func TestCheckResponseSnapshot_ListFunctions(t *testing.T) {
 					Headers: map[string]string{
 						"key0": "__Value__",
 					},
+					Cache: &types.HttpRequestCacheConfiguration{
+						TtlMinimumSeconds: ptr.Int32(1),
+						TtlMaximumSeconds: ptr.Int32(1),
+						Key:               ptr.String("__Key__"),
+					},
 				},
 				AwsServiceRequestConfiguration: &types.AwsServiceRequestConfiguration{
 					Runtime: types.RuntimeType("JSONATA"),
@@ -3653,6 +3697,11 @@ func TestCheckResponseSnapshot_ListFunctions(t *testing.T) {
 					Body:                       ptr.String("__Body__"),
 					Headers: map[string]string{
 						"key0": "__Value__",
+					},
+					Cache: &types.HttpRequestCacheConfiguration{
+						TtlMinimumSeconds: ptr.Int32(1),
+						TtlMaximumSeconds: ptr.Int32(1),
+						Key:               ptr.String("__Key__"),
 					},
 					TargetService: ptr.String("__TargetService__"),
 					TargetRegion:  ptr.String("__TargetRegion__"),
@@ -3713,6 +3762,11 @@ func TestCheckResponseSnapshot_ListFunctions(t *testing.T) {
 					Body:                       ptr.String("__Body__"),
 					Headers: map[string]string{
 						"key0": "__Value__",
+					},
+					Cache: &types.HttpRequestCacheConfiguration{
+						TtlMinimumSeconds: ptr.Int32(1),
+						TtlMaximumSeconds: ptr.Int32(1),
+						Key:               ptr.String("__Key__"),
 					},
 				},
 				Tags: map[string]string{
@@ -3938,6 +3992,15 @@ func TestCheckResponseSnapshot_ListPlaybackConfigurations(t *testing.T) {
 					MaxConcurrentAdsRequests:     ptr.Int32(1),
 					EnableVodVastParallelization: ptr.Bool(true),
 				},
+				BeaconingConfiguration: &types.BeaconingConfiguration{
+					ClientSide: &types.ClientSideBeaconingConfiguration{
+						ReportingMode: types.ClientSideBeaconingMode("DISABLED"),
+						AdditionalEventTypes: []types.BeaconEventType{
+							types.BeaconEventType("MUTE"),
+							types.BeaconEventType("MUTE"),
+						},
+					},
+				},
 			},
 			{
 				AdDecisionServerUrl: ptr.String("__AdDecisionServerUrl__"),
@@ -4059,6 +4122,15 @@ func TestCheckResponseSnapshot_ListPlaybackConfigurations(t *testing.T) {
 				AdsPersonalizationConcurrency: &types.AdsPersonalizationConcurrency{
 					MaxConcurrentAdsRequests:     ptr.Int32(1),
 					EnableVodVastParallelization: ptr.Bool(true),
+				},
+				BeaconingConfiguration: &types.BeaconingConfiguration{
+					ClientSide: &types.ClientSideBeaconingConfiguration{
+						ReportingMode: types.ClientSideBeaconingMode("DISABLED"),
+						AdditionalEventTypes: []types.BeaconEventType{
+							types.BeaconEventType("MUTE"),
+							types.BeaconEventType("MUTE"),
+						},
+					},
 				},
 			},
 		},
@@ -4480,6 +4552,11 @@ func TestCheckResponseSnapshot_PutFunction(t *testing.T) {
 			Headers: map[string]string{
 				"key0": "__Value__",
 			},
+			Cache: &types.HttpRequestCacheConfiguration{
+				TtlMinimumSeconds: ptr.Int32(1),
+				TtlMaximumSeconds: ptr.Int32(1),
+				Key:               ptr.String("__Key__"),
+			},
 		},
 		AwsServiceRequestConfiguration: &types.AwsServiceRequestConfiguration{
 			Runtime: types.RuntimeType("JSONATA"),
@@ -4492,6 +4569,11 @@ func TestCheckResponseSnapshot_PutFunction(t *testing.T) {
 			Body:                       ptr.String("__Body__"),
 			Headers: map[string]string{
 				"key0": "__Value__",
+			},
+			Cache: &types.HttpRequestCacheConfiguration{
+				TtlMinimumSeconds: ptr.Int32(1),
+				TtlMaximumSeconds: ptr.Int32(1),
+				Key:               ptr.String("__Key__"),
 			},
 			TargetService: ptr.String("__TargetService__"),
 			TargetRegion:  ptr.String("__TargetRegion__"),
@@ -4552,6 +4634,11 @@ func TestCheckResponseSnapshot_PutFunction(t *testing.T) {
 			Body:                       ptr.String("__Body__"),
 			Headers: map[string]string{
 				"key0": "__Value__",
+			},
+			Cache: &types.HttpRequestCacheConfiguration{
+				TtlMinimumSeconds: ptr.Int32(1),
+				TtlMaximumSeconds: ptr.Int32(1),
+				Key:               ptr.String("__Key__"),
 			},
 		},
 		Tags: map[string]string{
@@ -4583,6 +4670,11 @@ func TestCheckResponseSnapshot_PutFunction(t *testing.T) {
 			Headers: map[string]string{
 				"key0": "__Value__",
 			},
+			Cache: &types.HttpRequestCacheConfiguration{
+				TtlMinimumSeconds: ptr.Int32(1),
+				TtlMaximumSeconds: ptr.Int32(1),
+				Key:               ptr.String("__Key__"),
+			},
 		},
 		AwsServiceRequestConfiguration: &types.AwsServiceRequestConfiguration{
 			Runtime: types.RuntimeType("JSONATA"),
@@ -4595,6 +4687,11 @@ func TestCheckResponseSnapshot_PutFunction(t *testing.T) {
 			Body:                       ptr.String("__Body__"),
 			Headers: map[string]string{
 				"key0": "__Value__",
+			},
+			Cache: &types.HttpRequestCacheConfiguration{
+				TtlMinimumSeconds: ptr.Int32(1),
+				TtlMaximumSeconds: ptr.Int32(1),
+				Key:               ptr.String("__Key__"),
 			},
 			TargetService: ptr.String("__TargetService__"),
 			TargetRegion:  ptr.String("__TargetRegion__"),
@@ -4655,6 +4752,11 @@ func TestCheckResponseSnapshot_PutFunction(t *testing.T) {
 			Body:                       ptr.String("__Body__"),
 			Headers: map[string]string{
 				"key0": "__Value__",
+			},
+			Cache: &types.HttpRequestCacheConfiguration{
+				TtlMinimumSeconds: ptr.Int32(1),
+				TtlMaximumSeconds: ptr.Int32(1),
+				Key:               ptr.String("__Key__"),
 			},
 		},
 		Tags: map[string]string{
@@ -4791,6 +4893,15 @@ func TestCheckResponseSnapshot_PutPlaybackConfiguration(t *testing.T) {
 			MaxConcurrentAdsRequests:     ptr.Int32(1),
 			EnableVodVastParallelization: ptr.Bool(true),
 		},
+		BeaconingConfiguration: &types.BeaconingConfiguration{
+			ClientSide: &types.ClientSideBeaconingConfiguration{
+				ReportingMode: types.ClientSideBeaconingMode("DISABLED"),
+				AdditionalEventTypes: []types.BeaconEventType{
+					types.BeaconEventType("MUTE"),
+					types.BeaconEventType("MUTE"),
+				},
+			},
+		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("PutPlaybackConfiguration.response")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -4882,6 +4993,15 @@ func TestCheckResponseSnapshot_PutPlaybackConfiguration(t *testing.T) {
 		AdsPersonalizationConcurrency: &types.AdsPersonalizationConcurrency{
 			MaxConcurrentAdsRequests:     ptr.Int32(1),
 			EnableVodVastParallelization: ptr.Bool(true),
+		},
+		BeaconingConfiguration: &types.BeaconingConfiguration{
+			ClientSide: &types.ClientSideBeaconingConfiguration{
+				ReportingMode: types.ClientSideBeaconingMode("DISABLED"),
+				AdditionalEventTypes: []types.BeaconEventType{
+					types.BeaconEventType("MUTE"),
+					types.BeaconEventType("MUTE"),
+				},
+			},
 		},
 	})
 	if err != nil {

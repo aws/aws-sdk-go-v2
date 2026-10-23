@@ -4,6 +4,8 @@ package applicationinsights
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/applicationinsights/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -43,6 +45,24 @@ type DeleteLogPatternInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteLogPatternInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteLogPatternRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteLogPatternInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PatternName != nil {
+		s.WriteString(schemas.DeleteLogPatternRequest_PatternName, *v.PatternName)
+	}
+	if v.PatternSetName != nil {
+		s.WriteString(schemas.DeleteLogPatternRequest_PatternSetName, *v.PatternSetName)
+	}
+	if v.ResourceGroupName != nil {
+		s.WriteString(schemas.DeleteLogPatternRequest_ResourceGroupName, *v.ResourceGroupName)
+	}
+}
+
 type DeleteLogPatternOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -50,13 +70,26 @@ type DeleteLogPatternOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteLogPatternOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteLogPatternResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteLogPatternOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteLogPatternOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteLogPatternResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteLogPatternMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpDeleteLogPattern{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteLogPattern, schemas.DeleteLogPatternRequest, schemas.DeleteLogPatternResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpDeleteLogPattern{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteLogPattern, schemas.DeleteLogPatternRequest, schemas.DeleteLogPatternResponse), output: &DeleteLogPatternOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

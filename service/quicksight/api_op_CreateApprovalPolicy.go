@@ -4,7 +4,9 @@ package quicksight
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/quicksight/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/quicksight/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -63,6 +65,32 @@ type CreateApprovalPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateApprovalPolicyInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateApprovalPolicyRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateApprovalPolicyInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeGovernedActionList(s, schemas.CreateApprovalPolicyRequest_Actions, v.Actions)
+	if v.ApplicableTo != nil {
+		s.WriteStruct(schemas.CreateApprovalPolicyRequest_ApplicableTo)
+		v.ApplicableTo.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeApprovalGroupList(s, schemas.CreateApprovalPolicyRequest_ApprovalGroups, v.ApprovalGroups)
+	serializeAssetTypeList(s, schemas.CreateApprovalPolicyRequest_AssetTypes, v.AssetTypes)
+	if v.Description != nil {
+		s.WriteString(schemas.CreateApprovalPolicyRequest_Description, *v.Description)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateApprovalPolicyRequest_Name, *v.Name)
+	}
+	if v.PolicyId != nil {
+		s.WriteString(schemas.CreateApprovalPolicyRequest_PolicyId, *v.PolicyId)
+	}
+}
+
 type CreateApprovalPolicyOutput struct {
 
 	// The approval policy that was created.
@@ -76,13 +104,34 @@ type CreateApprovalPolicyOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateApprovalPolicyOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateApprovalPolicyResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateApprovalPolicyOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Policy != nil {
+		s.WriteStruct(schemas.CreateApprovalPolicyResponse_Policy)
+		v.Policy.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateApprovalPolicyOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateApprovalPolicyResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateApprovalPolicyResponse_Policy:
+			v.Policy = &types.ApprovalPolicy{}
+			return v.Policy.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateApprovalPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateApprovalPolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateApprovalPolicy, schemas.CreateApprovalPolicyRequest, schemas.CreateApprovalPolicyResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateApprovalPolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateApprovalPolicy, schemas.CreateApprovalPolicyRequest, schemas.CreateApprovalPolicyResponse), output: &CreateApprovalPolicyOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

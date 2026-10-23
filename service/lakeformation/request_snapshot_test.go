@@ -281,6 +281,10 @@ func TestCheckRequestSnapshot_AddLFTagsToResource(t *testing.T) {
 				CatalogId: ptr.String("__CatalogId__"),
 				Name:      ptr.String("__Name__"),
 			},
+			RLSPolicy: &types.RLSPolicyResource{
+				CatalogId: ptr.String("__CatalogId__"),
+				Name:      ptr.String("__Name__"),
+			},
 		},
 		LFTags: []types.LFTagPair{
 			{
@@ -350,6 +354,117 @@ func TestCheckRequestSnapshot_AssumeDecoratedRoleWithSAML(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "AssumeDecoratedRoleWithSAML"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_AttachRLSPolicy(t *testing.T) {
+	input := &AttachRLSPolicyInput{
+		Name: ptr.String("__Name__"),
+		Resource: &types.Resource{
+			Catalog: &types.CatalogResource{
+				Id: ptr.String("__Id__"),
+			},
+			Database: &types.DatabaseResource{
+				CatalogId: ptr.String("__CatalogId__"),
+				Name:      ptr.String("__Name__"),
+			},
+			Table: &types.TableResource{
+				CatalogId:     ptr.String("__CatalogId__"),
+				DatabaseName:  ptr.String("__DatabaseName__"),
+				Name:          ptr.String("__Name__"),
+				TableWildcard: &types.TableWildcard{},
+			},
+			TableWithColumns: &types.TableWithColumnsResource{
+				CatalogId:    ptr.String("__CatalogId__"),
+				DatabaseName: ptr.String("__DatabaseName__"),
+				Name:         ptr.String("__Name__"),
+				ColumnNames: []string{
+					"__Member__",
+					"__Member__",
+				},
+				ColumnWildcard: &types.ColumnWildcard{
+					ExcludedColumnNames: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+			DataLocation: &types.DataLocationResource{
+				CatalogId:   ptr.String("__CatalogId__"),
+				ResourceArn: ptr.String("__ResourceArn__"),
+			},
+			DataCellsFilter: &types.DataCellsFilterResource{
+				TableCatalogId: ptr.String("__TableCatalogId__"),
+				DatabaseName:   ptr.String("__DatabaseName__"),
+				TableName:      ptr.String("__TableName__"),
+				Name:           ptr.String("__Name__"),
+			},
+			LFTag: &types.LFTagKeyResource{
+				CatalogId: ptr.String("__CatalogId__"),
+				TagKey:    ptr.String("__TagKey__"),
+				TagValues: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			LFTagPolicy: &types.LFTagPolicyResource{
+				CatalogId:    ptr.String("__CatalogId__"),
+				ResourceType: types.ResourceType("DATABASE"),
+				Expression: []types.LFTag{
+					{
+						TagKey: ptr.String("__TagKey__"),
+						TagValues: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					{
+						TagKey: ptr.String("__TagKey__"),
+						TagValues: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+				ExpressionName: ptr.String("__ExpressionName__"),
+			},
+			LFTagExpression: &types.LFTagExpressionResource{
+				CatalogId: ptr.String("__CatalogId__"),
+				Name:      ptr.String("__Name__"),
+			},
+			RLSPolicy: &types.RLSPolicyResource{
+				CatalogId: ptr.String("__CatalogId__"),
+				Name:      ptr.String("__Name__"),
+			},
+		},
+		Principal: &types.DataLakePrincipal{
+			DataLakePrincipalIdentifier: ptr.String("__DataLakePrincipalIdentifier__"),
+		},
+		Condition: &types.Condition{
+			Expression: ptr.String("__Expression__"),
+		},
+		SetDefault: ptr.Bool(true),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.AttachRLSPolicy(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "AttachRLSPolicy"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -432,6 +547,10 @@ func TestCheckRequestSnapshot_BatchGrantPermissions(t *testing.T) {
 						ExpressionName: ptr.String("__ExpressionName__"),
 					},
 					LFTagExpression: &types.LFTagExpressionResource{
+						CatalogId: ptr.String("__CatalogId__"),
+						Name:      ptr.String("__Name__"),
+					},
+					RLSPolicy: &types.RLSPolicyResource{
 						CatalogId: ptr.String("__CatalogId__"),
 						Name:      ptr.String("__Name__"),
 					},
@@ -522,6 +641,10 @@ func TestCheckRequestSnapshot_BatchGrantPermissions(t *testing.T) {
 						ExpressionName: ptr.String("__ExpressionName__"),
 					},
 					LFTagExpression: &types.LFTagExpressionResource{
+						CatalogId: ptr.String("__CatalogId__"),
+						Name:      ptr.String("__Name__"),
+					},
+					RLSPolicy: &types.RLSPolicyResource{
 						CatalogId: ptr.String("__CatalogId__"),
 						Name:      ptr.String("__Name__"),
 					},
@@ -644,6 +767,10 @@ func TestCheckRequestSnapshot_BatchRevokePermissions(t *testing.T) {
 						CatalogId: ptr.String("__CatalogId__"),
 						Name:      ptr.String("__Name__"),
 					},
+					RLSPolicy: &types.RLSPolicyResource{
+						CatalogId: ptr.String("__CatalogId__"),
+						Name:      ptr.String("__Name__"),
+					},
 				},
 				Permissions: []types.Permission{
 					types.Permission("ALL"),
@@ -731,6 +858,10 @@ func TestCheckRequestSnapshot_BatchRevokePermissions(t *testing.T) {
 						ExpressionName: ptr.String("__ExpressionName__"),
 					},
 					LFTagExpression: &types.LFTagExpressionResource{
+						CatalogId: ptr.String("__CatalogId__"),
+						Name:      ptr.String("__Name__"),
+					},
+					RLSPolicy: &types.RLSPolicyResource{
 						CatalogId: ptr.String("__CatalogId__"),
 						Name:      ptr.String("__Name__"),
 					},
@@ -1023,6 +1154,10 @@ func TestCheckRequestSnapshot_CreateLakeFormationOptIn(t *testing.T) {
 				CatalogId: ptr.String("__CatalogId__"),
 				Name:      ptr.String("__Name__"),
 			},
+			RLSPolicy: &types.RLSPolicyResource{
+				CatalogId: ptr.String("__CatalogId__"),
+				Name:      ptr.String("__Name__"),
+			},
 		},
 		Condition: &types.Condition{
 			Expression: ptr.String("__Expression__"),
@@ -1124,6 +1259,44 @@ func TestCheckRequestSnapshot_CreateLFTagExpression(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateLFTagExpression"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_CreateRLSPolicy(t *testing.T) {
+	input := &CreateRLSPolicyInput{
+		Name: ptr.String("__Name__"),
+		AttachmentColumns: []types.Column{
+			{
+				Name: ptr.String("__Name__"),
+				Type: ptr.String("__Type__"),
+			},
+			{
+				Name: ptr.String("__Name__"),
+				Type: ptr.String("__Type__"),
+			},
+		},
+		FilterExpression: ptr.String("__FilterExpression__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.CreateRLSPolicy(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateRLSPolicy"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -1262,6 +1435,10 @@ func TestCheckRequestSnapshot_DeleteLakeFormationOptIn(t *testing.T) {
 				CatalogId: ptr.String("__CatalogId__"),
 				Name:      ptr.String("__Name__"),
 			},
+			RLSPolicy: &types.RLSPolicyResource{
+				CatalogId: ptr.String("__CatalogId__"),
+				Name:      ptr.String("__Name__"),
+			},
 		},
 		Condition: &types.Condition{
 			Expression: ptr.String("__Expression__"),
@@ -1386,6 +1563,33 @@ func TestCheckRequestSnapshot_DeleteObjectsOnCancel(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_DeleteRLSPolicy(t *testing.T) {
+	input := &DeleteRLSPolicyInput{
+		Name: ptr.String("__Name__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DeleteRLSPolicy(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteRLSPolicy"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_DeregisterResource(t *testing.T) {
 	input := &DeregisterResourceInput{
 		ResourceArn: ptr.String("__ResourceArn__"),
@@ -1490,6 +1694,117 @@ func TestCheckRequestSnapshot_DescribeTransaction(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DescribeTransaction"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_DetachRLSPolicy(t *testing.T) {
+	input := &DetachRLSPolicyInput{
+		Name: ptr.String("__Name__"),
+		Resource: &types.Resource{
+			Catalog: &types.CatalogResource{
+				Id: ptr.String("__Id__"),
+			},
+			Database: &types.DatabaseResource{
+				CatalogId: ptr.String("__CatalogId__"),
+				Name:      ptr.String("__Name__"),
+			},
+			Table: &types.TableResource{
+				CatalogId:     ptr.String("__CatalogId__"),
+				DatabaseName:  ptr.String("__DatabaseName__"),
+				Name:          ptr.String("__Name__"),
+				TableWildcard: &types.TableWildcard{},
+			},
+			TableWithColumns: &types.TableWithColumnsResource{
+				CatalogId:    ptr.String("__CatalogId__"),
+				DatabaseName: ptr.String("__DatabaseName__"),
+				Name:         ptr.String("__Name__"),
+				ColumnNames: []string{
+					"__Member__",
+					"__Member__",
+				},
+				ColumnWildcard: &types.ColumnWildcard{
+					ExcludedColumnNames: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+			DataLocation: &types.DataLocationResource{
+				CatalogId:   ptr.String("__CatalogId__"),
+				ResourceArn: ptr.String("__ResourceArn__"),
+			},
+			DataCellsFilter: &types.DataCellsFilterResource{
+				TableCatalogId: ptr.String("__TableCatalogId__"),
+				DatabaseName:   ptr.String("__DatabaseName__"),
+				TableName:      ptr.String("__TableName__"),
+				Name:           ptr.String("__Name__"),
+			},
+			LFTag: &types.LFTagKeyResource{
+				CatalogId: ptr.String("__CatalogId__"),
+				TagKey:    ptr.String("__TagKey__"),
+				TagValues: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			LFTagPolicy: &types.LFTagPolicyResource{
+				CatalogId:    ptr.String("__CatalogId__"),
+				ResourceType: types.ResourceType("DATABASE"),
+				Expression: []types.LFTag{
+					{
+						TagKey: ptr.String("__TagKey__"),
+						TagValues: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					{
+						TagKey: ptr.String("__TagKey__"),
+						TagValues: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+				ExpressionName: ptr.String("__ExpressionName__"),
+			},
+			LFTagExpression: &types.LFTagExpressionResource{
+				CatalogId: ptr.String("__CatalogId__"),
+				Name:      ptr.String("__Name__"),
+			},
+			RLSPolicy: &types.RLSPolicyResource{
+				CatalogId: ptr.String("__CatalogId__"),
+				Name:      ptr.String("__Name__"),
+			},
+		},
+		Principal: &types.DataLakePrincipal{
+			DataLakePrincipalIdentifier: ptr.String("__DataLakePrincipalIdentifier__"),
+		},
+		Condition: &types.Condition{
+			Expression: ptr.String("__Expression__"),
+		},
+		RemoveDefault: ptr.Bool(true),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DetachRLSPolicy(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DetachRLSPolicy"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -1818,6 +2133,10 @@ func TestCheckRequestSnapshot_GetResourceLFTags(t *testing.T) {
 				CatalogId: ptr.String("__CatalogId__"),
 				Name:      ptr.String("__Name__"),
 			},
+			RLSPolicy: &types.RLSPolicyResource{
+				CatalogId: ptr.String("__CatalogId__"),
+				Name:      ptr.String("__Name__"),
+			},
 		},
 		ShowAssignedLFTags: ptr.Bool(true),
 	}
@@ -1840,6 +2159,33 @@ func TestCheckRequestSnapshot_GetResourceLFTags(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetResourceLFTags"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_GetRLSPolicy(t *testing.T) {
+	input := &GetRLSPolicyInput{
+		Name: ptr.String("__Name__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.GetRLSPolicy(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetRLSPolicy"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -2143,6 +2489,10 @@ func TestCheckRequestSnapshot_GrantPermissions(t *testing.T) {
 				CatalogId: ptr.String("__CatalogId__"),
 				Name:      ptr.String("__Name__"),
 			},
+			RLSPolicy: &types.RLSPolicyResource{
+				CatalogId: ptr.String("__CatalogId__"),
+				Name:      ptr.String("__Name__"),
+			},
 		},
 		Permissions: []types.Permission{
 			types.Permission("ALL"),
@@ -2287,6 +2637,10 @@ func TestCheckRequestSnapshot_ListLakeFormationOptIns(t *testing.T) {
 				ExpressionName: ptr.String("__ExpressionName__"),
 			},
 			LFTagExpression: &types.LFTagExpressionResource{
+				CatalogId: ptr.String("__CatalogId__"),
+				Name:      ptr.String("__Name__"),
+			},
+			RLSPolicy: &types.RLSPolicyResource{
 				CatalogId: ptr.String("__CatalogId__"),
 				Name:      ptr.String("__Name__"),
 			},
@@ -2455,6 +2809,10 @@ func TestCheckRequestSnapshot_ListPermissions(t *testing.T) {
 				CatalogId: ptr.String("__CatalogId__"),
 				Name:      ptr.String("__Name__"),
 			},
+			RLSPolicy: &types.RLSPolicyResource{
+				CatalogId: ptr.String("__CatalogId__"),
+				Name:      ptr.String("__Name__"),
+			},
 		},
 		NextToken:      ptr.String("__NextToken__"),
 		MaxResults:     ptr.Int32(1),
@@ -2525,6 +2883,143 @@ func TestCheckRequestSnapshot_ListResources(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListResources"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_ListRLSPolicies(t *testing.T) {
+	input := &ListRLSPoliciesInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListRLSPolicies(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListRLSPolicies"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_ListRLSPolicyAttachments(t *testing.T) {
+	input := &ListRLSPolicyAttachmentsInput{
+		Resource: &types.Resource{
+			Catalog: &types.CatalogResource{
+				Id: ptr.String("__Id__"),
+			},
+			Database: &types.DatabaseResource{
+				CatalogId: ptr.String("__CatalogId__"),
+				Name:      ptr.String("__Name__"),
+			},
+			Table: &types.TableResource{
+				CatalogId:     ptr.String("__CatalogId__"),
+				DatabaseName:  ptr.String("__DatabaseName__"),
+				Name:          ptr.String("__Name__"),
+				TableWildcard: &types.TableWildcard{},
+			},
+			TableWithColumns: &types.TableWithColumnsResource{
+				CatalogId:    ptr.String("__CatalogId__"),
+				DatabaseName: ptr.String("__DatabaseName__"),
+				Name:         ptr.String("__Name__"),
+				ColumnNames: []string{
+					"__Member__",
+					"__Member__",
+				},
+				ColumnWildcard: &types.ColumnWildcard{
+					ExcludedColumnNames: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+			DataLocation: &types.DataLocationResource{
+				CatalogId:   ptr.String("__CatalogId__"),
+				ResourceArn: ptr.String("__ResourceArn__"),
+			},
+			DataCellsFilter: &types.DataCellsFilterResource{
+				TableCatalogId: ptr.String("__TableCatalogId__"),
+				DatabaseName:   ptr.String("__DatabaseName__"),
+				TableName:      ptr.String("__TableName__"),
+				Name:           ptr.String("__Name__"),
+			},
+			LFTag: &types.LFTagKeyResource{
+				CatalogId: ptr.String("__CatalogId__"),
+				TagKey:    ptr.String("__TagKey__"),
+				TagValues: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			LFTagPolicy: &types.LFTagPolicyResource{
+				CatalogId:    ptr.String("__CatalogId__"),
+				ResourceType: types.ResourceType("DATABASE"),
+				Expression: []types.LFTag{
+					{
+						TagKey: ptr.String("__TagKey__"),
+						TagValues: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					{
+						TagKey: ptr.String("__TagKey__"),
+						TagValues: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+				ExpressionName: ptr.String("__ExpressionName__"),
+			},
+			LFTagExpression: &types.LFTagExpressionResource{
+				CatalogId: ptr.String("__CatalogId__"),
+				Name:      ptr.String("__Name__"),
+			},
+			RLSPolicy: &types.RLSPolicyResource{
+				CatalogId: ptr.String("__CatalogId__"),
+				Name:      ptr.String("__Name__"),
+			},
+		},
+		Principal: &types.DataLakePrincipal{
+			DataLakePrincipalIdentifier: ptr.String("__DataLakePrincipalIdentifier__"),
+		},
+		PolicyName: ptr.String("__PolicyName__"),
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListRLSPolicyAttachments(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListRLSPolicyAttachments"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -2805,6 +3300,10 @@ func TestCheckRequestSnapshot_RemoveLFTagsFromResource(t *testing.T) {
 				CatalogId: ptr.String("__CatalogId__"),
 				Name:      ptr.String("__Name__"),
 			},
+			RLSPolicy: &types.RLSPolicyResource{
+				CatalogId: ptr.String("__CatalogId__"),
+				Name:      ptr.String("__Name__"),
+			},
 		},
 		LFTags: []types.LFTagPair{
 			{
@@ -2923,6 +3422,10 @@ func TestCheckRequestSnapshot_RevokePermissions(t *testing.T) {
 				ExpressionName: ptr.String("__ExpressionName__"),
 			},
 			LFTagExpression: &types.LFTagExpressionResource{
+				CatalogId: ptr.String("__CatalogId__"),
+				Name:      ptr.String("__Name__"),
+			},
+			RLSPolicy: &types.RLSPolicyResource{
 				CatalogId: ptr.String("__CatalogId__"),
 				Name:      ptr.String("__Name__"),
 			},
@@ -3347,6 +3850,34 @@ func TestCheckRequestSnapshot_UpdateResource(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_UpdateRLSPolicy(t *testing.T) {
+	input := &UpdateRLSPolicyInput{
+		Name:             ptr.String("__Name__"),
+		FilterExpression: ptr.String("__FilterExpression__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.UpdateRLSPolicy(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateRLSPolicy"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_UpdateTableObjects(t *testing.T) {
 	input := &UpdateTableObjectsInput{
 		CatalogId:     ptr.String("__CatalogId__"),
@@ -3525,6 +4056,10 @@ func TestUpdateRequestSnapshot_AddLFTagsToResource(t *testing.T) {
 				CatalogId: ptr.String("__CatalogId__"),
 				Name:      ptr.String("__Name__"),
 			},
+			RLSPolicy: &types.RLSPolicyResource{
+				CatalogId: ptr.String("__CatalogId__"),
+				Name:      ptr.String("__Name__"),
+			},
 		},
 		LFTags: []types.LFTagPair{
 			{
@@ -3594,6 +4129,117 @@ func TestUpdateRequestSnapshot_AssumeDecoratedRoleWithSAML(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "AssumeDecoratedRoleWithSAML"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_AttachRLSPolicy(t *testing.T) {
+	input := &AttachRLSPolicyInput{
+		Name: ptr.String("__Name__"),
+		Resource: &types.Resource{
+			Catalog: &types.CatalogResource{
+				Id: ptr.String("__Id__"),
+			},
+			Database: &types.DatabaseResource{
+				CatalogId: ptr.String("__CatalogId__"),
+				Name:      ptr.String("__Name__"),
+			},
+			Table: &types.TableResource{
+				CatalogId:     ptr.String("__CatalogId__"),
+				DatabaseName:  ptr.String("__DatabaseName__"),
+				Name:          ptr.String("__Name__"),
+				TableWildcard: &types.TableWildcard{},
+			},
+			TableWithColumns: &types.TableWithColumnsResource{
+				CatalogId:    ptr.String("__CatalogId__"),
+				DatabaseName: ptr.String("__DatabaseName__"),
+				Name:         ptr.String("__Name__"),
+				ColumnNames: []string{
+					"__Member__",
+					"__Member__",
+				},
+				ColumnWildcard: &types.ColumnWildcard{
+					ExcludedColumnNames: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+			DataLocation: &types.DataLocationResource{
+				CatalogId:   ptr.String("__CatalogId__"),
+				ResourceArn: ptr.String("__ResourceArn__"),
+			},
+			DataCellsFilter: &types.DataCellsFilterResource{
+				TableCatalogId: ptr.String("__TableCatalogId__"),
+				DatabaseName:   ptr.String("__DatabaseName__"),
+				TableName:      ptr.String("__TableName__"),
+				Name:           ptr.String("__Name__"),
+			},
+			LFTag: &types.LFTagKeyResource{
+				CatalogId: ptr.String("__CatalogId__"),
+				TagKey:    ptr.String("__TagKey__"),
+				TagValues: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			LFTagPolicy: &types.LFTagPolicyResource{
+				CatalogId:    ptr.String("__CatalogId__"),
+				ResourceType: types.ResourceType("DATABASE"),
+				Expression: []types.LFTag{
+					{
+						TagKey: ptr.String("__TagKey__"),
+						TagValues: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					{
+						TagKey: ptr.String("__TagKey__"),
+						TagValues: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+				ExpressionName: ptr.String("__ExpressionName__"),
+			},
+			LFTagExpression: &types.LFTagExpressionResource{
+				CatalogId: ptr.String("__CatalogId__"),
+				Name:      ptr.String("__Name__"),
+			},
+			RLSPolicy: &types.RLSPolicyResource{
+				CatalogId: ptr.String("__CatalogId__"),
+				Name:      ptr.String("__Name__"),
+			},
+		},
+		Principal: &types.DataLakePrincipal{
+			DataLakePrincipalIdentifier: ptr.String("__DataLakePrincipalIdentifier__"),
+		},
+		Condition: &types.Condition{
+			Expression: ptr.String("__Expression__"),
+		},
+		SetDefault: ptr.Bool(true),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.AttachRLSPolicy(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "AttachRLSPolicy"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -3676,6 +4322,10 @@ func TestUpdateRequestSnapshot_BatchGrantPermissions(t *testing.T) {
 						ExpressionName: ptr.String("__ExpressionName__"),
 					},
 					LFTagExpression: &types.LFTagExpressionResource{
+						CatalogId: ptr.String("__CatalogId__"),
+						Name:      ptr.String("__Name__"),
+					},
+					RLSPolicy: &types.RLSPolicyResource{
 						CatalogId: ptr.String("__CatalogId__"),
 						Name:      ptr.String("__Name__"),
 					},
@@ -3766,6 +4416,10 @@ func TestUpdateRequestSnapshot_BatchGrantPermissions(t *testing.T) {
 						ExpressionName: ptr.String("__ExpressionName__"),
 					},
 					LFTagExpression: &types.LFTagExpressionResource{
+						CatalogId: ptr.String("__CatalogId__"),
+						Name:      ptr.String("__Name__"),
+					},
+					RLSPolicy: &types.RLSPolicyResource{
 						CatalogId: ptr.String("__CatalogId__"),
 						Name:      ptr.String("__Name__"),
 					},
@@ -3888,6 +4542,10 @@ func TestUpdateRequestSnapshot_BatchRevokePermissions(t *testing.T) {
 						CatalogId: ptr.String("__CatalogId__"),
 						Name:      ptr.String("__Name__"),
 					},
+					RLSPolicy: &types.RLSPolicyResource{
+						CatalogId: ptr.String("__CatalogId__"),
+						Name:      ptr.String("__Name__"),
+					},
 				},
 				Permissions: []types.Permission{
 					types.Permission("ALL"),
@@ -3975,6 +4633,10 @@ func TestUpdateRequestSnapshot_BatchRevokePermissions(t *testing.T) {
 						ExpressionName: ptr.String("__ExpressionName__"),
 					},
 					LFTagExpression: &types.LFTagExpressionResource{
+						CatalogId: ptr.String("__CatalogId__"),
+						Name:      ptr.String("__Name__"),
+					},
+					RLSPolicy: &types.RLSPolicyResource{
 						CatalogId: ptr.String("__CatalogId__"),
 						Name:      ptr.String("__Name__"),
 					},
@@ -4267,6 +4929,10 @@ func TestUpdateRequestSnapshot_CreateLakeFormationOptIn(t *testing.T) {
 				CatalogId: ptr.String("__CatalogId__"),
 				Name:      ptr.String("__Name__"),
 			},
+			RLSPolicy: &types.RLSPolicyResource{
+				CatalogId: ptr.String("__CatalogId__"),
+				Name:      ptr.String("__Name__"),
+			},
 		},
 		Condition: &types.Condition{
 			Expression: ptr.String("__Expression__"),
@@ -4368,6 +5034,44 @@ func TestUpdateRequestSnapshot_CreateLFTagExpression(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateLFTagExpression"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_CreateRLSPolicy(t *testing.T) {
+	input := &CreateRLSPolicyInput{
+		Name: ptr.String("__Name__"),
+		AttachmentColumns: []types.Column{
+			{
+				Name: ptr.String("__Name__"),
+				Type: ptr.String("__Type__"),
+			},
+			{
+				Name: ptr.String("__Name__"),
+				Type: ptr.String("__Type__"),
+			},
+		},
+		FilterExpression: ptr.String("__FilterExpression__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.CreateRLSPolicy(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateRLSPolicy"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -4506,6 +5210,10 @@ func TestUpdateRequestSnapshot_DeleteLakeFormationOptIn(t *testing.T) {
 				CatalogId: ptr.String("__CatalogId__"),
 				Name:      ptr.String("__Name__"),
 			},
+			RLSPolicy: &types.RLSPolicyResource{
+				CatalogId: ptr.String("__CatalogId__"),
+				Name:      ptr.String("__Name__"),
+			},
 		},
 		Condition: &types.Condition{
 			Expression: ptr.String("__Expression__"),
@@ -4630,6 +5338,33 @@ func TestUpdateRequestSnapshot_DeleteObjectsOnCancel(t *testing.T) {
 	}
 }
 
+func TestUpdateRequestSnapshot_DeleteRLSPolicy(t *testing.T) {
+	input := &DeleteRLSPolicyInput{
+		Name: ptr.String("__Name__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DeleteRLSPolicy(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteRLSPolicy"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_DeregisterResource(t *testing.T) {
 	input := &DeregisterResourceInput{
 		ResourceArn: ptr.String("__ResourceArn__"),
@@ -4734,6 +5469,117 @@ func TestUpdateRequestSnapshot_DescribeTransaction(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DescribeTransaction"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_DetachRLSPolicy(t *testing.T) {
+	input := &DetachRLSPolicyInput{
+		Name: ptr.String("__Name__"),
+		Resource: &types.Resource{
+			Catalog: &types.CatalogResource{
+				Id: ptr.String("__Id__"),
+			},
+			Database: &types.DatabaseResource{
+				CatalogId: ptr.String("__CatalogId__"),
+				Name:      ptr.String("__Name__"),
+			},
+			Table: &types.TableResource{
+				CatalogId:     ptr.String("__CatalogId__"),
+				DatabaseName:  ptr.String("__DatabaseName__"),
+				Name:          ptr.String("__Name__"),
+				TableWildcard: &types.TableWildcard{},
+			},
+			TableWithColumns: &types.TableWithColumnsResource{
+				CatalogId:    ptr.String("__CatalogId__"),
+				DatabaseName: ptr.String("__DatabaseName__"),
+				Name:         ptr.String("__Name__"),
+				ColumnNames: []string{
+					"__Member__",
+					"__Member__",
+				},
+				ColumnWildcard: &types.ColumnWildcard{
+					ExcludedColumnNames: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+			DataLocation: &types.DataLocationResource{
+				CatalogId:   ptr.String("__CatalogId__"),
+				ResourceArn: ptr.String("__ResourceArn__"),
+			},
+			DataCellsFilter: &types.DataCellsFilterResource{
+				TableCatalogId: ptr.String("__TableCatalogId__"),
+				DatabaseName:   ptr.String("__DatabaseName__"),
+				TableName:      ptr.String("__TableName__"),
+				Name:           ptr.String("__Name__"),
+			},
+			LFTag: &types.LFTagKeyResource{
+				CatalogId: ptr.String("__CatalogId__"),
+				TagKey:    ptr.String("__TagKey__"),
+				TagValues: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			LFTagPolicy: &types.LFTagPolicyResource{
+				CatalogId:    ptr.String("__CatalogId__"),
+				ResourceType: types.ResourceType("DATABASE"),
+				Expression: []types.LFTag{
+					{
+						TagKey: ptr.String("__TagKey__"),
+						TagValues: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					{
+						TagKey: ptr.String("__TagKey__"),
+						TagValues: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+				ExpressionName: ptr.String("__ExpressionName__"),
+			},
+			LFTagExpression: &types.LFTagExpressionResource{
+				CatalogId: ptr.String("__CatalogId__"),
+				Name:      ptr.String("__Name__"),
+			},
+			RLSPolicy: &types.RLSPolicyResource{
+				CatalogId: ptr.String("__CatalogId__"),
+				Name:      ptr.String("__Name__"),
+			},
+		},
+		Principal: &types.DataLakePrincipal{
+			DataLakePrincipalIdentifier: ptr.String("__DataLakePrincipalIdentifier__"),
+		},
+		Condition: &types.Condition{
+			Expression: ptr.String("__Expression__"),
+		},
+		RemoveDefault: ptr.Bool(true),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DetachRLSPolicy(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DetachRLSPolicy"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -5062,6 +5908,10 @@ func TestUpdateRequestSnapshot_GetResourceLFTags(t *testing.T) {
 				CatalogId: ptr.String("__CatalogId__"),
 				Name:      ptr.String("__Name__"),
 			},
+			RLSPolicy: &types.RLSPolicyResource{
+				CatalogId: ptr.String("__CatalogId__"),
+				Name:      ptr.String("__Name__"),
+			},
 		},
 		ShowAssignedLFTags: ptr.Bool(true),
 	}
@@ -5084,6 +5934,33 @@ func TestUpdateRequestSnapshot_GetResourceLFTags(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetResourceLFTags"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_GetRLSPolicy(t *testing.T) {
+	input := &GetRLSPolicyInput{
+		Name: ptr.String("__Name__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.GetRLSPolicy(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetRLSPolicy"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -5387,6 +6264,10 @@ func TestUpdateRequestSnapshot_GrantPermissions(t *testing.T) {
 				CatalogId: ptr.String("__CatalogId__"),
 				Name:      ptr.String("__Name__"),
 			},
+			RLSPolicy: &types.RLSPolicyResource{
+				CatalogId: ptr.String("__CatalogId__"),
+				Name:      ptr.String("__Name__"),
+			},
 		},
 		Permissions: []types.Permission{
 			types.Permission("ALL"),
@@ -5531,6 +6412,10 @@ func TestUpdateRequestSnapshot_ListLakeFormationOptIns(t *testing.T) {
 				ExpressionName: ptr.String("__ExpressionName__"),
 			},
 			LFTagExpression: &types.LFTagExpressionResource{
+				CatalogId: ptr.String("__CatalogId__"),
+				Name:      ptr.String("__Name__"),
+			},
+			RLSPolicy: &types.RLSPolicyResource{
 				CatalogId: ptr.String("__CatalogId__"),
 				Name:      ptr.String("__Name__"),
 			},
@@ -5699,6 +6584,10 @@ func TestUpdateRequestSnapshot_ListPermissions(t *testing.T) {
 				CatalogId: ptr.String("__CatalogId__"),
 				Name:      ptr.String("__Name__"),
 			},
+			RLSPolicy: &types.RLSPolicyResource{
+				CatalogId: ptr.String("__CatalogId__"),
+				Name:      ptr.String("__Name__"),
+			},
 		},
 		NextToken:      ptr.String("__NextToken__"),
 		MaxResults:     ptr.Int32(1),
@@ -5769,6 +6658,143 @@ func TestUpdateRequestSnapshot_ListResources(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListResources"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_ListRLSPolicies(t *testing.T) {
+	input := &ListRLSPoliciesInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListRLSPolicies(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListRLSPolicies"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_ListRLSPolicyAttachments(t *testing.T) {
+	input := &ListRLSPolicyAttachmentsInput{
+		Resource: &types.Resource{
+			Catalog: &types.CatalogResource{
+				Id: ptr.String("__Id__"),
+			},
+			Database: &types.DatabaseResource{
+				CatalogId: ptr.String("__CatalogId__"),
+				Name:      ptr.String("__Name__"),
+			},
+			Table: &types.TableResource{
+				CatalogId:     ptr.String("__CatalogId__"),
+				DatabaseName:  ptr.String("__DatabaseName__"),
+				Name:          ptr.String("__Name__"),
+				TableWildcard: &types.TableWildcard{},
+			},
+			TableWithColumns: &types.TableWithColumnsResource{
+				CatalogId:    ptr.String("__CatalogId__"),
+				DatabaseName: ptr.String("__DatabaseName__"),
+				Name:         ptr.String("__Name__"),
+				ColumnNames: []string{
+					"__Member__",
+					"__Member__",
+				},
+				ColumnWildcard: &types.ColumnWildcard{
+					ExcludedColumnNames: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+			DataLocation: &types.DataLocationResource{
+				CatalogId:   ptr.String("__CatalogId__"),
+				ResourceArn: ptr.String("__ResourceArn__"),
+			},
+			DataCellsFilter: &types.DataCellsFilterResource{
+				TableCatalogId: ptr.String("__TableCatalogId__"),
+				DatabaseName:   ptr.String("__DatabaseName__"),
+				TableName:      ptr.String("__TableName__"),
+				Name:           ptr.String("__Name__"),
+			},
+			LFTag: &types.LFTagKeyResource{
+				CatalogId: ptr.String("__CatalogId__"),
+				TagKey:    ptr.String("__TagKey__"),
+				TagValues: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			LFTagPolicy: &types.LFTagPolicyResource{
+				CatalogId:    ptr.String("__CatalogId__"),
+				ResourceType: types.ResourceType("DATABASE"),
+				Expression: []types.LFTag{
+					{
+						TagKey: ptr.String("__TagKey__"),
+						TagValues: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					{
+						TagKey: ptr.String("__TagKey__"),
+						TagValues: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+				ExpressionName: ptr.String("__ExpressionName__"),
+			},
+			LFTagExpression: &types.LFTagExpressionResource{
+				CatalogId: ptr.String("__CatalogId__"),
+				Name:      ptr.String("__Name__"),
+			},
+			RLSPolicy: &types.RLSPolicyResource{
+				CatalogId: ptr.String("__CatalogId__"),
+				Name:      ptr.String("__Name__"),
+			},
+		},
+		Principal: &types.DataLakePrincipal{
+			DataLakePrincipalIdentifier: ptr.String("__DataLakePrincipalIdentifier__"),
+		},
+		PolicyName: ptr.String("__PolicyName__"),
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListRLSPolicyAttachments(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListRLSPolicyAttachments"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -6049,6 +7075,10 @@ func TestUpdateRequestSnapshot_RemoveLFTagsFromResource(t *testing.T) {
 				CatalogId: ptr.String("__CatalogId__"),
 				Name:      ptr.String("__Name__"),
 			},
+			RLSPolicy: &types.RLSPolicyResource{
+				CatalogId: ptr.String("__CatalogId__"),
+				Name:      ptr.String("__Name__"),
+			},
 		},
 		LFTags: []types.LFTagPair{
 			{
@@ -6167,6 +7197,10 @@ func TestUpdateRequestSnapshot_RevokePermissions(t *testing.T) {
 				ExpressionName: ptr.String("__ExpressionName__"),
 			},
 			LFTagExpression: &types.LFTagExpressionResource{
+				CatalogId: ptr.String("__CatalogId__"),
+				Name:      ptr.String("__Name__"),
+			},
+			RLSPolicy: &types.RLSPolicyResource{
 				CatalogId: ptr.String("__CatalogId__"),
 				Name:      ptr.String("__Name__"),
 			},
@@ -6587,6 +7621,34 @@ func TestUpdateRequestSnapshot_UpdateResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateResource"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_UpdateRLSPolicy(t *testing.T) {
+	input := &UpdateRLSPolicyInput{
+		Name:             ptr.String("__Name__"),
+		FilterExpression: ptr.String("__FilterExpression__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.UpdateRLSPolicy(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateRLSPolicy"); err != nil {
 		t.Fatal(err)
 	}
 }

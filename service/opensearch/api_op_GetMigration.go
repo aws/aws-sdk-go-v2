@@ -4,7 +4,9 @@ package opensearch
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/opensearch/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/opensearch/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -35,6 +37,18 @@ type GetMigrationInput struct {
 	MigrationId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetMigrationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetMigrationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetMigrationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MigrationId != nil {
+		s.WriteString(schemas.GetMigrationRequest_migrationId, *v.MigrationId)
+	}
 }
 
 type GetMigrationOutput struct {
@@ -74,13 +88,82 @@ type GetMigrationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetMigrationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetMigrationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetMigrationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationId != nil {
+		s.WriteString(schemas.GetMigrationResponse_applicationId, *v.ApplicationId)
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.GetMigrationResponse_createdAt, *v.CreatedAt)
+	}
+	if v.Error != nil {
+		s.WriteStruct(schemas.GetMigrationResponse_error)
+		v.Error.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ExportedCount != 0 {
+		s.WriteInt32(schemas.GetMigrationResponse_exportedCount, v.ExportedCount)
+	}
+	if v.ImportedCount != 0 {
+		s.WriteInt32(schemas.GetMigrationResponse_importedCount, v.ImportedCount)
+	}
+	if v.MigrationId != nil {
+		s.WriteString(schemas.GetMigrationResponse_migrationId, *v.MigrationId)
+	}
+	if v.Source != nil {
+		s.WriteStruct(schemas.GetMigrationResponse_source)
+		v.Source.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Status != nil {
+		s.WriteString(schemas.GetMigrationResponse_status, *v.Status)
+	}
+	if v.UpdatedAt != nil {
+		s.WriteTime(schemas.GetMigrationResponse_updatedAt, *v.UpdatedAt)
+	}
+}
+func (v *GetMigrationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetMigrationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetMigrationResponse_applicationId:
+			v.ApplicationId = new(string)
+			return d.ReadString(schemas.GetMigrationResponse_applicationId, v.ApplicationId)
+		case schemas.GetMigrationResponse_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.GetMigrationResponse_createdAt, v.CreatedAt)
+		case schemas.GetMigrationResponse_error:
+			v.Error = &types.MigrationError{}
+			return v.Error.Deserialize(d)
+		case schemas.GetMigrationResponse_exportedCount:
+			return d.ReadInt32(schemas.GetMigrationResponse_exportedCount, &v.ExportedCount)
+		case schemas.GetMigrationResponse_importedCount:
+			return d.ReadInt32(schemas.GetMigrationResponse_importedCount, &v.ImportedCount)
+		case schemas.GetMigrationResponse_migrationId:
+			v.MigrationId = new(string)
+			return d.ReadString(schemas.GetMigrationResponse_migrationId, v.MigrationId)
+		case schemas.GetMigrationResponse_source:
+			v.Source = &types.MigrationSource{}
+			return v.Source.Deserialize(d)
+		case schemas.GetMigrationResponse_status:
+			v.Status = new(string)
+			return d.ReadString(schemas.GetMigrationResponse_status, v.Status)
+		case schemas.GetMigrationResponse_updatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.GetMigrationResponse_updatedAt, v.UpdatedAt)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetMigrationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetMigration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetMigration, schemas.GetMigrationRequest, schemas.GetMigrationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetMigration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetMigration, schemas.GetMigrationRequest, schemas.GetMigrationResponse), output: &GetMigrationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

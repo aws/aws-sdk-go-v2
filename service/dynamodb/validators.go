@@ -1606,6 +1606,24 @@ func validateDeleteVectorIndexAction(v *types.DeleteVectorIndexAction) error {
 	}
 }
 
+func validateDisassociateReplicationGroupMemberAction(v *types.DisassociateReplicationGroupMemberAction) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DisassociateReplicationGroupMemberAction"}
+	if v.RegionName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RegionName"))
+	}
+	if len(v.DisassociationMode) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("DisassociationMode"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateFilterConditionMap(v map[string]types.Condition) error {
 	if v == nil {
 		return nil
@@ -2273,6 +2291,11 @@ func validateReplicationGroupUpdate(v *types.ReplicationGroupUpdate) error {
 	if v.Delete != nil {
 		if err := validateDeleteReplicationGroupMemberAction(v.Delete); err != nil {
 			invalidParams.AddNested("Delete", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Disassociate != nil {
+		if err := validateDisassociateReplicationGroupMemberAction(v.Disassociate); err != nil {
+			invalidParams.AddNested("Disassociate", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

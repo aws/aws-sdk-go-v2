@@ -4,7 +4,9 @@ package appsync
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/appsync/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/appsync/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -125,6 +127,34 @@ type CreateApiCacheInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateApiCacheInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateApiCacheRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateApiCacheInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApiCachingBehavior != "" {
+		s.WriteString(schemas.CreateApiCacheRequest_apiCachingBehavior, string(v.ApiCachingBehavior))
+	}
+	if v.ApiId != nil {
+		s.WriteString(schemas.CreateApiCacheRequest_apiId, *v.ApiId)
+	}
+	if v.AtRestEncryptionEnabled != false {
+		s.WriteBool(schemas.CreateApiCacheRequest_atRestEncryptionEnabled, v.AtRestEncryptionEnabled)
+	}
+	if v.HealthMetricsConfig != "" {
+		s.WriteString(schemas.CreateApiCacheRequest_healthMetricsConfig, string(v.HealthMetricsConfig))
+	}
+	if v.TransitEncryptionEnabled != false {
+		s.WriteBool(schemas.CreateApiCacheRequest_transitEncryptionEnabled, v.TransitEncryptionEnabled)
+	}
+	s.WriteInt64(schemas.CreateApiCacheRequest_ttl, v.Ttl)
+	if v.Type != "" {
+		s.WriteString(schemas.CreateApiCacheRequest_type, string(v.Type))
+	}
+}
+
 // Represents the output of a CreateApiCache operation.
 type CreateApiCacheOutput struct {
 
@@ -137,13 +167,34 @@ type CreateApiCacheOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateApiCacheOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateApiCacheResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateApiCacheOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApiCache != nil {
+		s.WriteStruct(schemas.CreateApiCacheResponse_apiCache)
+		v.ApiCache.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateApiCacheOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateApiCacheResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateApiCacheResponse_apiCache:
+			v.ApiCache = &types.ApiCache{}
+			return v.ApiCache.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateApiCacheMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateApiCache{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateApiCache, schemas.CreateApiCacheRequest, schemas.CreateApiCacheResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateApiCache{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateApiCache, schemas.CreateApiCacheRequest, schemas.CreateApiCacheResponse), output: &CreateApiCacheOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

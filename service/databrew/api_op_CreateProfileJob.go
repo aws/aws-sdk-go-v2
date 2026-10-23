@@ -4,7 +4,9 @@ package databrew
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/databrew/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/databrew/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -94,6 +96,59 @@ type CreateProfileJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateProfileJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateProfileJobRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateProfileJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Configuration != nil {
+		s.WriteStruct(schemas.CreateProfileJobRequest_Configuration)
+		v.Configuration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DatasetName != nil {
+		s.WriteString(schemas.CreateProfileJobRequest_DatasetName, *v.DatasetName)
+	}
+	if v.EncryptionKeyArn != nil {
+		s.WriteString(schemas.CreateProfileJobRequest_EncryptionKeyArn, *v.EncryptionKeyArn)
+	}
+	if v.EncryptionMode != "" {
+		s.WriteString(schemas.CreateProfileJobRequest_EncryptionMode, string(v.EncryptionMode))
+	}
+	if v.JobSample != nil {
+		s.WriteStruct(schemas.CreateProfileJobRequest_JobSample)
+		v.JobSample.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.LogSubscription != "" {
+		s.WriteString(schemas.CreateProfileJobRequest_LogSubscription, string(v.LogSubscription))
+	}
+	if v.MaxCapacity != 0 {
+		s.WriteInt32(schemas.CreateProfileJobRequest_MaxCapacity, v.MaxCapacity)
+	}
+	if v.MaxRetries != 0 {
+		s.WriteInt32(schemas.CreateProfileJobRequest_MaxRetries, v.MaxRetries)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateProfileJobRequest_Name, *v.Name)
+	}
+	if v.OutputLocation != nil {
+		s.WriteStruct(schemas.CreateProfileJobRequest_OutputLocation)
+		v.OutputLocation.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RoleArn != nil {
+		s.WriteString(schemas.CreateProfileJobRequest_RoleArn, *v.RoleArn)
+	}
+	serializeTagMap(s, schemas.CreateProfileJobRequest_Tags, v.Tags)
+	if v.Timeout != 0 {
+		s.WriteInt32(schemas.CreateProfileJobRequest_Timeout, v.Timeout)
+	}
+	serializeValidationConfigurationList(s, schemas.CreateProfileJobRequest_ValidationConfigurations, v.ValidationConfigurations)
+}
+
 type CreateProfileJobOutput struct {
 
 	// The name of the job that was created.
@@ -107,13 +162,32 @@ type CreateProfileJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateProfileJobOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateProfileJobResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateProfileJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.CreateProfileJobResponse_Name, *v.Name)
+	}
+}
+func (v *CreateProfileJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateProfileJobResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateProfileJobResponse_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.CreateProfileJobResponse_Name, v.Name)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateProfileJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateProfileJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateProfileJob, schemas.CreateProfileJobRequest, schemas.CreateProfileJobResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateProfileJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateProfileJob, schemas.CreateProfileJobRequest, schemas.CreateProfileJobResponse), output: &CreateProfileJobOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

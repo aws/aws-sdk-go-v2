@@ -3,6 +3,8 @@
 package types
 
 import (
+	"github.com/aws/aws-sdk-go-v2/service/appconfigdata/schemas"
+	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 )
 
@@ -24,6 +26,12 @@ type BadRequestDetailsMemberInvalidParameters struct {
 }
 
 func (*BadRequestDetailsMemberInvalidParameters) isBadRequestDetails() {}
+func (v *BadRequestDetailsMemberInvalidParameters) Serialize(s smithy.ShapeSerializer) {
+	serializeInvalidParameterMap(s, schemas.BadRequestDetails_InvalidParameters, v.Value)
+}
+func (v *BadRequestDetailsMemberInvalidParameters) Deserialize(d smithy.ShapeDeserializer) error {
+	return deserializeInvalidParameterMap(d, schemas.BadRequestDetails_InvalidParameters, &v.Value)
+}
 
 // Information about an invalid parameter.
 type InvalidParameterDetail struct {
@@ -32,6 +40,32 @@ type InvalidParameterDetail struct {
 	Problem InvalidParameterProblem
 
 	noSmithyDocumentSerde
+}
+
+func (v *InvalidParameterDetail) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InvalidParameterDetail)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InvalidParameterDetail) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Problem != "" {
+		s.WriteString(schemas.InvalidParameterDetail_Problem, string(v.Problem))
+	}
+}
+func (v *InvalidParameterDetail) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InvalidParameterDetail, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InvalidParameterDetail_Problem:
+			var ev string
+			if err := d.ReadString(schemas.InvalidParameterDetail_Problem, &ev); err != nil {
+				return err
+			}
+			v.Problem = InvalidParameterProblem(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde

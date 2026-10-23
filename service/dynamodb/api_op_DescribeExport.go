@@ -5,7 +5,9 @@ package dynamodb
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/dynamodb/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/dynamodb/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithytime "github.com/aws/smithy-go/time"
 	smithywaiter "github.com/aws/smithy-go/waiter"
@@ -38,6 +40,17 @@ type DescribeExportInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeExportInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeExportInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeExportInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ExportArn != nil {
+		s.WriteString(schemas.DescribeExportInput_ExportArn, *v.ExportArn)
+	}
+}
 func (in *DescribeExportInput) bindEndpointParams(p *EndpointParameters) {
 
 	p.ResourceArn = in.ExportArn
@@ -55,13 +68,34 @@ type DescribeExportOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeExportOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeExportOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeExportOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ExportDescription != nil {
+		s.WriteStruct(schemas.DescribeExportOutput_ExportDescription)
+		v.ExportDescription.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DescribeExportOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeExportOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeExportOutput_ExportDescription:
+			v.ExportDescription = &types.ExportDescription{}
+			return v.ExportDescription.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeExportMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpDescribeExport{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeExport, schemas.DescribeExportInput, schemas.DescribeExportOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpDescribeExport{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeExport, schemas.DescribeExportInput, schemas.DescribeExportOutput), output: &DescribeExportOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package opensearch
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/opensearch/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/opensearch/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -34,6 +36,18 @@ type DescribeDomainHealthInput struct {
 	DomainName *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DescribeDomainHealthInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeDomainHealthRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeDomainHealthInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DomainName != nil {
+		s.WriteString(schemas.DescribeDomainHealthRequest_DomainName, *v.DomainName)
+	}
 }
 
 // The result of a DescribeDomainHealth request. Contains health information for
@@ -110,13 +124,113 @@ type DescribeDomainHealthOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeDomainHealthOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeDomainHealthResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeDomainHealthOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ActiveAvailabilityZoneCount != nil {
+		s.WriteString(schemas.DescribeDomainHealthResponse_ActiveAvailabilityZoneCount, *v.ActiveAvailabilityZoneCount)
+	}
+	if v.AvailabilityZoneCount != nil {
+		s.WriteString(schemas.DescribeDomainHealthResponse_AvailabilityZoneCount, *v.AvailabilityZoneCount)
+	}
+	if v.ClusterHealth != "" {
+		s.WriteString(schemas.DescribeDomainHealthResponse_ClusterHealth, string(v.ClusterHealth))
+	}
+	if v.DataNodeCount != nil {
+		s.WriteString(schemas.DescribeDomainHealthResponse_DataNodeCount, *v.DataNodeCount)
+	}
+	if v.DedicatedMaster != nil {
+		s.WriteBool(schemas.DescribeDomainHealthResponse_DedicatedMaster, *v.DedicatedMaster)
+	}
+	if v.DomainState != "" {
+		s.WriteString(schemas.DescribeDomainHealthResponse_DomainState, string(v.DomainState))
+	}
+	serializeEnvironmentInfoList(s, schemas.DescribeDomainHealthResponse_EnvironmentInformation, v.EnvironmentInformation)
+	if v.MasterEligibleNodeCount != nil {
+		s.WriteString(schemas.DescribeDomainHealthResponse_MasterEligibleNodeCount, *v.MasterEligibleNodeCount)
+	}
+	if v.MasterNode != "" {
+		s.WriteString(schemas.DescribeDomainHealthResponse_MasterNode, string(v.MasterNode))
+	}
+	if v.StandByAvailabilityZoneCount != nil {
+		s.WriteString(schemas.DescribeDomainHealthResponse_StandByAvailabilityZoneCount, *v.StandByAvailabilityZoneCount)
+	}
+	if v.TotalShards != nil {
+		s.WriteString(schemas.DescribeDomainHealthResponse_TotalShards, *v.TotalShards)
+	}
+	if v.TotalUnAssignedShards != nil {
+		s.WriteString(schemas.DescribeDomainHealthResponse_TotalUnAssignedShards, *v.TotalUnAssignedShards)
+	}
+	if v.WarmNodeCount != nil {
+		s.WriteString(schemas.DescribeDomainHealthResponse_WarmNodeCount, *v.WarmNodeCount)
+	}
+}
+func (v *DescribeDomainHealthOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeDomainHealthResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeDomainHealthResponse_ActiveAvailabilityZoneCount:
+			v.ActiveAvailabilityZoneCount = new(string)
+			return d.ReadString(schemas.DescribeDomainHealthResponse_ActiveAvailabilityZoneCount, v.ActiveAvailabilityZoneCount)
+		case schemas.DescribeDomainHealthResponse_AvailabilityZoneCount:
+			v.AvailabilityZoneCount = new(string)
+			return d.ReadString(schemas.DescribeDomainHealthResponse_AvailabilityZoneCount, v.AvailabilityZoneCount)
+		case schemas.DescribeDomainHealthResponse_ClusterHealth:
+			var ev string
+			if err := d.ReadString(schemas.DescribeDomainHealthResponse_ClusterHealth, &ev); err != nil {
+				return err
+			}
+			v.ClusterHealth = types.DomainHealth(ev)
+			return nil
+		case schemas.DescribeDomainHealthResponse_DataNodeCount:
+			v.DataNodeCount = new(string)
+			return d.ReadString(schemas.DescribeDomainHealthResponse_DataNodeCount, v.DataNodeCount)
+		case schemas.DescribeDomainHealthResponse_DedicatedMaster:
+			v.DedicatedMaster = new(bool)
+			return d.ReadBool(schemas.DescribeDomainHealthResponse_DedicatedMaster, v.DedicatedMaster)
+		case schemas.DescribeDomainHealthResponse_DomainState:
+			var ev string
+			if err := d.ReadString(schemas.DescribeDomainHealthResponse_DomainState, &ev); err != nil {
+				return err
+			}
+			v.DomainState = types.DomainState(ev)
+			return nil
+		case schemas.DescribeDomainHealthResponse_EnvironmentInformation:
+			return deserializeEnvironmentInfoList(d, schemas.DescribeDomainHealthResponse_EnvironmentInformation, &v.EnvironmentInformation)
+		case schemas.DescribeDomainHealthResponse_MasterEligibleNodeCount:
+			v.MasterEligibleNodeCount = new(string)
+			return d.ReadString(schemas.DescribeDomainHealthResponse_MasterEligibleNodeCount, v.MasterEligibleNodeCount)
+		case schemas.DescribeDomainHealthResponse_MasterNode:
+			var ev string
+			if err := d.ReadString(schemas.DescribeDomainHealthResponse_MasterNode, &ev); err != nil {
+				return err
+			}
+			v.MasterNode = types.MasterNodeStatus(ev)
+			return nil
+		case schemas.DescribeDomainHealthResponse_StandByAvailabilityZoneCount:
+			v.StandByAvailabilityZoneCount = new(string)
+			return d.ReadString(schemas.DescribeDomainHealthResponse_StandByAvailabilityZoneCount, v.StandByAvailabilityZoneCount)
+		case schemas.DescribeDomainHealthResponse_TotalShards:
+			v.TotalShards = new(string)
+			return d.ReadString(schemas.DescribeDomainHealthResponse_TotalShards, v.TotalShards)
+		case schemas.DescribeDomainHealthResponse_TotalUnAssignedShards:
+			v.TotalUnAssignedShards = new(string)
+			return d.ReadString(schemas.DescribeDomainHealthResponse_TotalUnAssignedShards, v.TotalUnAssignedShards)
+		case schemas.DescribeDomainHealthResponse_WarmNodeCount:
+			v.WarmNodeCount = new(string)
+			return d.ReadString(schemas.DescribeDomainHealthResponse_WarmNodeCount, v.WarmNodeCount)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeDomainHealthMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeDomainHealth{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeDomainHealth, schemas.DescribeDomainHealthRequest, schemas.DescribeDomainHealthResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeDomainHealth{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeDomainHealth, schemas.DescribeDomainHealthRequest, schemas.DescribeDomainHealthResponse), output: &DescribeDomainHealthOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

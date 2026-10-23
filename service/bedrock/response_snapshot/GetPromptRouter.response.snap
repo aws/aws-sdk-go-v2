@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"createdAt":"2000-01-01T00:00:00Z","description":"__Description__","fallbackModel":{"modelArn":"__ModelArn__"},"models":[{"modelArn":"__ModelArn__"},{"modelArn":"__ModelArn__"}],"promptRouterArn":"__PromptRouterArn__","promptRouterName":"__PromptRouterName__","routingCriteria":{"responseQualityDifference":1},"status":"AVAILABLE","type":"custom","updatedAt":"2000-01-01T00:00:00Z"}

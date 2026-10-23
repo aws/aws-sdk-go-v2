@@ -367,8 +367,9 @@ func TestCheckRequestSnapshot_CreateStream(t *testing.T) {
 		Tags: map[string]string{
 			"key0": "__Value__",
 		},
-		WarmThroughputMiBps: ptr.Int32(1),
-		MaxRecordSizeInKiB:  ptr.Int32(1),
+		WarmThroughputMiBps:        ptr.Int32(1),
+		MaxRecordSizeInKiB:         ptr.Int32(1),
+		RecordDistributionStrategy: types.RecordDistributionStrategy("AUTO"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -1607,6 +1608,35 @@ func TestCheckRequestSnapshot_UpdateStreamMode(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_UpdateStreamRecordDistributionStrategy(t *testing.T) {
+	input := &UpdateStreamRecordDistributionStrategyInput{
+		StreamARN:                  ptr.String("__StreamARN__"),
+		StreamId:                   ptr.String("__StreamId__"),
+		RecordDistributionStrategy: types.RecordDistributionStrategy("AUTO"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.UpdateStreamRecordDistributionStrategy(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateStreamRecordDistributionStrategy"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_UpdateStreamWarmThroughput(t *testing.T) {
 	input := &UpdateStreamWarmThroughputInput{
 		StreamARN:           ptr.String("__StreamARN__"),
@@ -1797,8 +1827,9 @@ func TestUpdateRequestSnapshot_CreateStream(t *testing.T) {
 		Tags: map[string]string{
 			"key0": "__Value__",
 		},
-		WarmThroughputMiBps: ptr.Int32(1),
-		MaxRecordSizeInKiB:  ptr.Int32(1),
+		WarmThroughputMiBps:        ptr.Int32(1),
+		MaxRecordSizeInKiB:         ptr.Int32(1),
+		RecordDistributionStrategy: types.RecordDistributionStrategy("AUTO"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -3033,6 +3064,35 @@ func TestUpdateRequestSnapshot_UpdateStreamMode(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateStreamMode"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_UpdateStreamRecordDistributionStrategy(t *testing.T) {
+	input := &UpdateStreamRecordDistributionStrategyInput{
+		StreamARN:                  ptr.String("__StreamARN__"),
+		StreamId:                   ptr.String("__StreamId__"),
+		RecordDistributionStrategy: types.RecordDistributionStrategy("AUTO"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.UpdateStreamRecordDistributionStrategy(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateStreamRecordDistributionStrategy"); err != nil {
 		t.Fatal(err)
 	}
 }

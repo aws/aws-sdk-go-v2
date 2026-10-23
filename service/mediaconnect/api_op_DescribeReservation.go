@@ -4,7 +4,9 @@ package mediaconnect
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/mediaconnect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/mediaconnect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -37,6 +39,18 @@ type DescribeReservationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeReservationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeReservationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeReservationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ReservationArn != nil {
+		s.WriteString(schemas.DescribeReservationRequest_ReservationArn, *v.ReservationArn)
+	}
+}
+
 type DescribeReservationOutput struct {
 
 	//  A pricing agreement for a discounted rate for a specific outbound bandwidth
@@ -53,13 +67,34 @@ type DescribeReservationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeReservationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeReservationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeReservationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Reservation != nil {
+		s.WriteStruct(schemas.DescribeReservationResponse_Reservation)
+		v.Reservation.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DescribeReservationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeReservationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeReservationResponse_Reservation:
+			v.Reservation = &types.Reservation{}
+			return v.Reservation.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeReservationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeReservation{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeReservation, schemas.DescribeReservationRequest, schemas.DescribeReservationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeReservation{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeReservation, schemas.DescribeReservationRequest, schemas.DescribeReservationResponse), output: &DescribeReservationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

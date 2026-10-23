@@ -5,7 +5,9 @@ package codecatalyst
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/codecatalyst/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/codecatalyst/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -49,6 +51,27 @@ type ListSourceRepositoriesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListSourceRepositoriesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListSourceRepositoriesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListSourceRepositoriesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListSourceRepositoriesRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListSourceRepositoriesRequest_nextToken, *v.NextToken)
+	}
+	if v.ProjectName != nil {
+		s.WriteString(schemas.ListSourceRepositoriesRequest_projectName, *v.ProjectName)
+	}
+	if v.SpaceName != nil {
+		s.WriteString(schemas.ListSourceRepositoriesRequest_spaceName, *v.SpaceName)
+	}
+}
+
 type ListSourceRepositoriesOutput struct {
 
 	// Information about the source repositories.
@@ -64,13 +87,35 @@ type ListSourceRepositoriesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListSourceRepositoriesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListSourceRepositoriesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListSourceRepositoriesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeListSourceRepositoriesItems(s, schemas.ListSourceRepositoriesResponse_items, v.Items)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListSourceRepositoriesResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListSourceRepositoriesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListSourceRepositoriesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListSourceRepositoriesResponse_items:
+			return deserializeListSourceRepositoriesItems(d, schemas.ListSourceRepositoriesResponse_items, &v.Items)
+		case schemas.ListSourceRepositoriesResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListSourceRepositoriesResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListSourceRepositoriesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListSourceRepositories{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListSourceRepositories, schemas.ListSourceRepositoriesRequest, schemas.ListSourceRepositoriesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListSourceRepositories{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListSourceRepositories, schemas.ListSourceRepositoriesRequest, schemas.ListSourceRepositoriesResponse), output: &ListSourceRepositoriesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

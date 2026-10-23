@@ -7,6 +7,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/wellarchitected/schemas"
 	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
+	"github.com/aws/smithy-go/ptr"
 )
 
 // Deletes an optimization goal from a profile.
@@ -53,6 +54,10 @@ func (v *DeleteAgentGoalInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ProfileArn != nil {
 		s.WriteString(schemas.DeleteAgentGoalRequest_profileArn, *v.ProfileArn)
 	}
+}
+func (in *DeleteAgentGoalInput) bindEndpointParams(p *EndpointParameters) {
+
+	p.SubServiceType = ptr.String("AGENT")
 }
 
 type DeleteAgentGoalOutput struct {

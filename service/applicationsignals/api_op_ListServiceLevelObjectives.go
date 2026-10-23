@@ -5,7 +5,9 @@ package applicationsignals
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/applicationsignals/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/applicationsignals/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -96,6 +98,42 @@ type ListServiceLevelObjectivesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListServiceLevelObjectivesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListServiceLevelObjectivesInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListServiceLevelObjectivesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DependencyConfig != nil {
+		s.WriteStruct(schemas.ListServiceLevelObjectivesInput_DependencyConfig)
+		v.DependencyConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.IncludeLinkedAccounts != false {
+		s.WriteBool(schemas.ListServiceLevelObjectivesInput_IncludeLinkedAccounts, v.IncludeLinkedAccounts)
+	}
+	serializeAttributes(s, schemas.ListServiceLevelObjectivesInput_KeyAttributes, v.KeyAttributes)
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListServiceLevelObjectivesInput_MaxResults, *v.MaxResults)
+	}
+	if v.MetricSource != nil {
+		s.WriteStruct(schemas.ListServiceLevelObjectivesInput_MetricSource)
+		v.MetricSource.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeMetricSourceTypes(s, schemas.ListServiceLevelObjectivesInput_MetricSourceTypes, v.MetricSourceTypes)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListServiceLevelObjectivesInput_NextToken, *v.NextToken)
+	}
+	if v.OperationName != nil {
+		s.WriteString(schemas.ListServiceLevelObjectivesInput_OperationName, *v.OperationName)
+	}
+	if v.SloOwnerAwsAccountId != nil {
+		s.WriteString(schemas.ListServiceLevelObjectivesInput_SloOwnerAwsAccountId, *v.SloOwnerAwsAccountId)
+	}
+}
+
 type ListServiceLevelObjectivesOutput struct {
 
 	// Include this value in your next use of this API to get next set of service
@@ -111,13 +149,35 @@ type ListServiceLevelObjectivesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListServiceLevelObjectivesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListServiceLevelObjectivesOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListServiceLevelObjectivesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListServiceLevelObjectivesOutput_NextToken, *v.NextToken)
+	}
+	serializeServiceLevelObjectiveSummaries(s, schemas.ListServiceLevelObjectivesOutput_SloSummaries, v.SloSummaries)
+}
+func (v *ListServiceLevelObjectivesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListServiceLevelObjectivesOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListServiceLevelObjectivesOutput_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListServiceLevelObjectivesOutput_NextToken, v.NextToken)
+		case schemas.ListServiceLevelObjectivesOutput_SloSummaries:
+			return deserializeServiceLevelObjectiveSummaries(d, schemas.ListServiceLevelObjectivesOutput_SloSummaries, &v.SloSummaries)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListServiceLevelObjectivesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListServiceLevelObjectives{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListServiceLevelObjectives, schemas.ListServiceLevelObjectivesInput, schemas.ListServiceLevelObjectivesOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListServiceLevelObjectives{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListServiceLevelObjectives, schemas.ListServiceLevelObjectivesInput, schemas.ListServiceLevelObjectivesOutput), output: &ListServiceLevelObjectivesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

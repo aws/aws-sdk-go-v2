@@ -1,5 +1,6 @@
 200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: AWSFMS_20180101.ListDiscoveredResources
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"Items":[{"AccountId":"__AccountId__","Name":"__Name__","Type":"__Type__","URI":"__URI__"},{"AccountId":"__AccountId__","Name":"__Name__","Type":"__Type__","URI":"__URI__"}],"NextToken":"__NextToken__"}
+¿eItemsŸ¿iAccountIdm__AccountId__dNameh__Name__dTypeh__Type__cURIg__URI__ÿ¿iAccountIdm__AccountId__dNameh__Name__dTypeh__Type__cURIg__URI__ÿÿiNextTokenm__NextToken__ÿ

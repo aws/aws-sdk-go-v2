@@ -5,7 +5,9 @@ package glue
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/glue/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/glue/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -36,6 +38,21 @@ type ListUsageProfilesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListUsageProfilesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListUsageProfilesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListUsageProfilesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListUsageProfilesRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListUsageProfilesRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListUsageProfilesOutput struct {
 
 	// A continuation token, present if the current list segment is not the last.
@@ -50,13 +67,35 @@ type ListUsageProfilesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListUsageProfilesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListUsageProfilesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListUsageProfilesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListUsageProfilesResponse_NextToken, *v.NextToken)
+	}
+	serializeUsageProfileDefinitionList(s, schemas.ListUsageProfilesResponse_Profiles, v.Profiles)
+}
+func (v *ListUsageProfilesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListUsageProfilesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListUsageProfilesResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListUsageProfilesResponse_NextToken, v.NextToken)
+		case schemas.ListUsageProfilesResponse_Profiles:
+			return deserializeUsageProfileDefinitionList(d, schemas.ListUsageProfilesResponse_Profiles, &v.Profiles)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListUsageProfilesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListUsageProfiles{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListUsageProfiles, schemas.ListUsageProfilesRequest, schemas.ListUsageProfilesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListUsageProfiles{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListUsageProfiles, schemas.ListUsageProfilesRequest, schemas.ListUsageProfilesResponse), output: &ListUsageProfilesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

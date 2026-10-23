@@ -9,6 +9,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/wellarchitected/types"
 	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
+	"github.com/aws/smithy-go/ptr"
 )
 
 // Updates the pillars and title of an existing goal associated with a profile.
@@ -79,6 +80,10 @@ func (v *UpdateAgentGoalInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Title != nil {
 		s.WriteString(schemas.UpdateAgentGoalRequest_title, *v.Title)
 	}
+}
+func (in *UpdateAgentGoalInput) bindEndpointParams(p *EndpointParameters) {
+
+	p.SubServiceType = ptr.String("AGENT")
 }
 
 type UpdateAgentGoalOutput struct {

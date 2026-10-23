@@ -5,7 +5,9 @@ package customerprofiles
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/customerprofiles/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/customerprofiles/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -41,6 +43,24 @@ type ListEventTriggersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListEventTriggersInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListEventTriggersRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListEventTriggersInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DomainName != nil {
+		s.WriteString(schemas.ListEventTriggersRequest_DomainName, *v.DomainName)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListEventTriggersRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListEventTriggersRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListEventTriggersOutput struct {
 
 	// The list of Event Triggers.
@@ -55,13 +75,35 @@ type ListEventTriggersOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListEventTriggersOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListEventTriggersResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListEventTriggersOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeEventTriggerSummaryList(s, schemas.ListEventTriggersResponse_Items, v.Items)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListEventTriggersResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListEventTriggersOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListEventTriggersResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListEventTriggersResponse_Items:
+			return deserializeEventTriggerSummaryList(d, schemas.ListEventTriggersResponse_Items, &v.Items)
+		case schemas.ListEventTriggersResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListEventTriggersResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListEventTriggersMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListEventTriggers{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListEventTriggers, schemas.ListEventTriggersRequest, schemas.ListEventTriggersResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListEventTriggers{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListEventTriggers, schemas.ListEventTriggersRequest, schemas.ListEventTriggersResponse), output: &ListEventTriggersOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

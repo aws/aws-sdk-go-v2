@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"AccountCustomization":{"DefaultEmailCustomizationTemplate":"__DefaultEmailCustomizationTemplate__","DefaultTheme":"__DefaultTheme__"},"Arn":"__Arn__","AwsAccountId":"__AwsAccountId__","Namespace":"__Namespace__","RequestId":"__RequestId__","Status":200}

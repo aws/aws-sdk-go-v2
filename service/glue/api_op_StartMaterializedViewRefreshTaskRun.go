@@ -4,6 +4,8 @@ package glue
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/glue/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -47,6 +49,27 @@ type StartMaterializedViewRefreshTaskRunInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartMaterializedViewRefreshTaskRunInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartMaterializedViewRefreshTaskRunRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartMaterializedViewRefreshTaskRunInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CatalogId != nil {
+		s.WriteString(schemas.StartMaterializedViewRefreshTaskRunRequest_CatalogId, *v.CatalogId)
+	}
+	if v.DatabaseName != nil {
+		s.WriteString(schemas.StartMaterializedViewRefreshTaskRunRequest_DatabaseName, *v.DatabaseName)
+	}
+	if v.FullRefresh != nil {
+		s.WriteBool(schemas.StartMaterializedViewRefreshTaskRunRequest_FullRefresh, *v.FullRefresh)
+	}
+	if v.TableName != nil {
+		s.WriteString(schemas.StartMaterializedViewRefreshTaskRunRequest_TableName, *v.TableName)
+	}
+}
+
 type StartMaterializedViewRefreshTaskRunOutput struct {
 
 	// The identifier for the materialized view refresh task run.
@@ -58,13 +81,32 @@ type StartMaterializedViewRefreshTaskRunOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartMaterializedViewRefreshTaskRunOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartMaterializedViewRefreshTaskRunResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartMaterializedViewRefreshTaskRunOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaterializedViewRefreshTaskRunId != nil {
+		s.WriteString(schemas.StartMaterializedViewRefreshTaskRunResponse_MaterializedViewRefreshTaskRunId, *v.MaterializedViewRefreshTaskRunId)
+	}
+}
+func (v *StartMaterializedViewRefreshTaskRunOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartMaterializedViewRefreshTaskRunResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartMaterializedViewRefreshTaskRunResponse_MaterializedViewRefreshTaskRunId:
+			v.MaterializedViewRefreshTaskRunId = new(string)
+			return d.ReadString(schemas.StartMaterializedViewRefreshTaskRunResponse_MaterializedViewRefreshTaskRunId, v.MaterializedViewRefreshTaskRunId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartMaterializedViewRefreshTaskRunMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStartMaterializedViewRefreshTaskRun{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartMaterializedViewRefreshTaskRun, schemas.StartMaterializedViewRefreshTaskRunRequest, schemas.StartMaterializedViewRefreshTaskRunResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpStartMaterializedViewRefreshTaskRun{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartMaterializedViewRefreshTaskRun, schemas.StartMaterializedViewRefreshTaskRunRequest, schemas.StartMaterializedViewRefreshTaskRunResponse), output: &StartMaterializedViewRefreshTaskRunOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

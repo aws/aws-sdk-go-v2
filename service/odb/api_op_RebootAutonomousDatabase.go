@@ -4,7 +4,9 @@ package odb
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/odb/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/odb/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -38,6 +40,21 @@ type RebootAutonomousDatabaseInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RebootAutonomousDatabaseInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RebootAutonomousDatabaseInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RebootAutonomousDatabaseInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AutonomousDatabaseId != nil {
+		s.WriteString(schemas.RebootAutonomousDatabaseInput_autonomousDatabaseId, *v.AutonomousDatabaseId)
+	}
+	if v.IsOnlineReboot != nil {
+		s.WriteBool(schemas.RebootAutonomousDatabaseInput_isOnlineReboot, *v.IsOnlineReboot)
+	}
+}
+
 type RebootAutonomousDatabaseOutput struct {
 
 	// The unique identifier of the Autonomous Database that was rebooted.
@@ -61,13 +78,54 @@ type RebootAutonomousDatabaseOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RebootAutonomousDatabaseOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RebootAutonomousDatabaseOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RebootAutonomousDatabaseOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AutonomousDatabaseId != nil {
+		s.WriteString(schemas.RebootAutonomousDatabaseOutput_autonomousDatabaseId, *v.AutonomousDatabaseId)
+	}
+	if v.DisplayName != nil {
+		s.WriteString(schemas.RebootAutonomousDatabaseOutput_displayName, *v.DisplayName)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.RebootAutonomousDatabaseOutput_status, string(v.Status))
+	}
+	if v.StatusReason != nil {
+		s.WriteString(schemas.RebootAutonomousDatabaseOutput_statusReason, *v.StatusReason)
+	}
+}
+func (v *RebootAutonomousDatabaseOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RebootAutonomousDatabaseOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RebootAutonomousDatabaseOutput_autonomousDatabaseId:
+			v.AutonomousDatabaseId = new(string)
+			return d.ReadString(schemas.RebootAutonomousDatabaseOutput_autonomousDatabaseId, v.AutonomousDatabaseId)
+		case schemas.RebootAutonomousDatabaseOutput_displayName:
+			v.DisplayName = new(string)
+			return d.ReadString(schemas.RebootAutonomousDatabaseOutput_displayName, v.DisplayName)
+		case schemas.RebootAutonomousDatabaseOutput_status:
+			var ev string
+			if err := d.ReadString(schemas.RebootAutonomousDatabaseOutput_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.AutonomousDatabaseResourceStatus(ev)
+			return nil
+		case schemas.RebootAutonomousDatabaseOutput_statusReason:
+			v.StatusReason = new(string)
+			return d.ReadString(schemas.RebootAutonomousDatabaseOutput_statusReason, v.StatusReason)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationRebootAutonomousDatabaseMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpRebootAutonomousDatabase{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RebootAutonomousDatabase, schemas.RebootAutonomousDatabaseInput, schemas.RebootAutonomousDatabaseOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpRebootAutonomousDatabase{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RebootAutonomousDatabase, schemas.RebootAutonomousDatabaseInput, schemas.RebootAutonomousDatabaseOutput), output: &RebootAutonomousDatabaseOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -154,6 +154,35 @@ func (v *ArnResource) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
+// Describes a CIDR resource, which represents a network segment as one or more
+// CIDR ranges.
+type CidrResource struct {
+
+	// The CIDR ranges of the network segment, for example, 10.0.0.0/16 .
+	CidrRanges []string
+
+	noSmithyDocumentSerde
+}
+
+func (v *CidrResource) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CidrResource)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CidrResource) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeCidrRangeList(s, schemas.CidrResource_cidrRanges, v.CidrRanges)
+}
+func (v *CidrResource) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CidrResource, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CidrResource_cidrRanges:
+			return deserializeCidrRangeList(d, schemas.CidrResource_cidrRanges, &v.CidrRanges)
+		}
+		return nil
+	})
+}
+
 // Describes the DNS information of a service.
 type DnsEntry struct {
 
@@ -991,11 +1020,63 @@ func (v *PathMatchTypeMemberPrefix) Deserialize(d smithy.ShapeDeserializer) erro
 	return d.ReadString(schemas.PathMatchType_prefix, &v.Value)
 }
 
+// Specifies which account pays for a category of charges on a VPC endpoint
+// association.
+type PayerResponsibilityEntry struct {
+
+	// The account that pays this category of charges. VpcEndpointAccount owns the VPC
+	// endpoint. ResourceGatewayAccount owns the resource gateway.
+	PayerResponsibilityType PayerResponsibilityPayer
+
+	// The category of charges that this entry applies to. ResourceGatewayCharges
+	// covers the resource gateway's data processing charge.
+	Scope PayerResponsibilityScope
+
+	noSmithyDocumentSerde
+}
+
+func (v *PayerResponsibilityEntry) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PayerResponsibilityEntry)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PayerResponsibilityEntry) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PayerResponsibilityType != "" {
+		s.WriteString(schemas.PayerResponsibilityEntry_payerResponsibilityType, string(v.PayerResponsibilityType))
+	}
+	if v.Scope != "" {
+		s.WriteString(schemas.PayerResponsibilityEntry_scope, string(v.Scope))
+	}
+}
+func (v *PayerResponsibilityEntry) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PayerResponsibilityEntry, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PayerResponsibilityEntry_payerResponsibilityType:
+			var ev string
+			if err := d.ReadString(schemas.PayerResponsibilityEntry_payerResponsibilityType, &ev); err != nil {
+				return err
+			}
+			v.PayerResponsibilityType = PayerResponsibilityPayer(ev)
+			return nil
+		case schemas.PayerResponsibilityEntry_scope:
+			var ev string
+			if err := d.ReadString(schemas.PayerResponsibilityEntry_scope, &ev); err != nil {
+				return err
+			}
+			v.Scope = PayerResponsibilityScope(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Describes a resource configuration.
 //
 // The following types satisfy this interface:
 //
 //	ResourceConfigurationDefinitionMemberArnResource
+//	ResourceConfigurationDefinitionMemberCidrResource
 //	ResourceConfigurationDefinitionMemberDnsResource
 //	ResourceConfigurationDefinitionMemberIpResource
 type ResourceConfigurationDefinition interface {
@@ -1016,6 +1097,25 @@ func (v *ResourceConfigurationDefinitionMemberArnResource) Serialize(s smithy.Sh
 	s.CloseStruct()
 }
 func (v *ResourceConfigurationDefinitionMemberArnResource) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
+
+// The network segment for a resource configuration of type CIDR, specified as one
+// or more CIDR ranges ( cidrRanges ). Resources whose IP addresses fall within
+// these ranges are reachable through a Tunnel VPC endpoint.
+type ResourceConfigurationDefinitionMemberCidrResource struct {
+	Value CidrResource
+
+	noSmithyDocumentSerde
+}
+
+func (*ResourceConfigurationDefinitionMemberCidrResource) isResourceConfigurationDefinition() {}
+func (v *ResourceConfigurationDefinitionMemberCidrResource) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ResourceConfigurationDefinition_cidrResource)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *ResourceConfigurationDefinitionMemberCidrResource) Deserialize(d smithy.ShapeDeserializer) error {
 	return v.Value.Deserialize(d)
 }
 
@@ -1107,6 +1207,9 @@ type ResourceConfigurationSummary struct {
 	//   - CHILD - A single resource that is part of a group resource configuration.
 	//
 	//   - ARN - An Amazon Web Services resource.
+	//
+	//   - CIDR - A network segment (a range of IP addresses) accessed through a Tunnel
+	//   VPC endpoint.
 	Type ResourceConfigurationType
 
 	noSmithyDocumentSerde
@@ -1230,6 +1333,9 @@ type ResourceEndpointAssociationSummary struct {
 	// The ID of the VPC endpoint association.
 	Id *string
 
+	// Who pays for each category of charges on the VPC endpoint association.
+	PayerResponsibility []PayerResponsibilityEntry
+
 	// The Amazon Resource Name (ARN) of the resource configuration.
 	ResourceConfigurationArn *string
 
@@ -1267,6 +1373,7 @@ func (v *ResourceEndpointAssociationSummary) SerializeMembers(s smithy.ShapeSeri
 	if v.Id != nil {
 		s.WriteString(schemas.ResourceEndpointAssociationSummary_id, *v.Id)
 	}
+	serializePayerResponsibilityList(s, schemas.ResourceEndpointAssociationSummary_payerResponsibility, v.PayerResponsibility)
 	if v.ResourceConfigurationArn != nil {
 		s.WriteString(schemas.ResourceEndpointAssociationSummary_resourceConfigurationArn, *v.ResourceConfigurationArn)
 	}
@@ -1298,6 +1405,8 @@ func (v *ResourceEndpointAssociationSummary) Deserialize(d smithy.ShapeDeseriali
 		case schemas.ResourceEndpointAssociationSummary_id:
 			v.Id = new(string)
 			return d.ReadString(schemas.ResourceEndpointAssociationSummary_id, v.Id)
+		case schemas.ResourceEndpointAssociationSummary_payerResponsibility:
+			return deserializePayerResponsibilityList(d, schemas.ResourceEndpointAssociationSummary_payerResponsibility, &v.PayerResponsibility)
 		case schemas.ResourceEndpointAssociationSummary_resourceConfigurationArn:
 			v.ResourceConfigurationArn = new(string)
 			return d.ReadString(schemas.ResourceEndpointAssociationSummary_resourceConfigurationArn, v.ResourceConfigurationArn)
@@ -1910,7 +2019,7 @@ type ServiceNetworkResourceAssociationSummary struct {
 	// association.
 	PrivateDnsEnabled *bool
 
-	// The private DNS entry for the service.
+	// The private DNS entry for the service. This entry includes only the domain name.
 	PrivateDnsEntry *DnsEntry
 
 	// The Amazon Resource Name (ARN) of the association.

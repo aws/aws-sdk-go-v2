@@ -4,7 +4,9 @@ package glue
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/glue/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/glue/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -43,6 +45,26 @@ type CreateUserDefinedFunctionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateUserDefinedFunctionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateUserDefinedFunctionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateUserDefinedFunctionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CatalogId != nil {
+		s.WriteString(schemas.CreateUserDefinedFunctionRequest_CatalogId, *v.CatalogId)
+	}
+	if v.DatabaseName != nil {
+		s.WriteString(schemas.CreateUserDefinedFunctionRequest_DatabaseName, *v.DatabaseName)
+	}
+	if v.FunctionInput != nil {
+		s.WriteStruct(schemas.CreateUserDefinedFunctionRequest_FunctionInput)
+		v.FunctionInput.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type CreateUserDefinedFunctionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -50,13 +72,26 @@ type CreateUserDefinedFunctionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateUserDefinedFunctionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateUserDefinedFunctionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateUserDefinedFunctionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *CreateUserDefinedFunctionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateUserDefinedFunctionResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateUserDefinedFunctionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateUserDefinedFunction{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateUserDefinedFunction, schemas.CreateUserDefinedFunctionRequest, schemas.CreateUserDefinedFunctionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateUserDefinedFunction{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateUserDefinedFunction, schemas.CreateUserDefinedFunctionRequest, schemas.CreateUserDefinedFunctionResponse), output: &CreateUserDefinedFunctionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

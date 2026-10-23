@@ -5,11 +5,21 @@ package rekognition
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/rekognition/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/rekognition/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
+// Service availability notice: Streaming Video and Bulk Image Analysis is no
+// longer available to new customers. For more information, see [Rekognition feature availability changes].
+//
+// This change does not impact the availability of other Amazon Rekognition
+// features.
+//
 // Gets a list of stream processors that you have created with CreateStreamProcessor.
+//
+// [Rekognition feature availability changes]: https://docs.aws.amazon.com/rekognition/latest/dg/rekognition-availability-changes.html
 func (c *Client) ListStreamProcessors(ctx context.Context, params *ListStreamProcessorsInput, optFns ...func(*Options)) (*ListStreamProcessorsOutput, error) {
 	if params == nil {
 		params = &ListStreamProcessorsInput{}
@@ -40,6 +50,21 @@ type ListStreamProcessorsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListStreamProcessorsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListStreamProcessorsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListStreamProcessorsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListStreamProcessorsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListStreamProcessorsRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListStreamProcessorsOutput struct {
 
 	// If the response is truncated, Amazon Rekognition Video returns this token that
@@ -56,13 +81,35 @@ type ListStreamProcessorsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListStreamProcessorsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListStreamProcessorsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListStreamProcessorsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListStreamProcessorsResponse_NextToken, *v.NextToken)
+	}
+	serializeStreamProcessorList(s, schemas.ListStreamProcessorsResponse_StreamProcessors, v.StreamProcessors)
+}
+func (v *ListStreamProcessorsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListStreamProcessorsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListStreamProcessorsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListStreamProcessorsResponse_NextToken, v.NextToken)
+		case schemas.ListStreamProcessorsResponse_StreamProcessors:
+			return deserializeStreamProcessorList(d, schemas.ListStreamProcessorsResponse_StreamProcessors, &v.StreamProcessors)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListStreamProcessorsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListStreamProcessors{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListStreamProcessors, schemas.ListStreamProcessorsRequest, schemas.ListStreamProcessorsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListStreamProcessors{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListStreamProcessors, schemas.ListStreamProcessorsRequest, schemas.ListStreamProcessorsResponse), output: &ListStreamProcessorsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

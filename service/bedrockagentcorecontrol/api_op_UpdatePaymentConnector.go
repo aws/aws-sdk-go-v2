@@ -5,7 +5,9 @@ package bedrockagentcorecontrol
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -59,6 +61,31 @@ type UpdatePaymentConnectorInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdatePaymentConnectorInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdatePaymentConnectorRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdatePaymentConnectorInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.UpdatePaymentConnectorRequest_clientToken, *v.ClientToken)
+	}
+	serializeCredentialsProviderConfigurations(s, schemas.UpdatePaymentConnectorRequest_credentialProviderConfigurations, v.CredentialProviderConfigurations)
+	if v.Description != nil {
+		s.WriteString(schemas.UpdatePaymentConnectorRequest_description, *v.Description)
+	}
+	if v.PaymentConnectorId != nil {
+		s.WriteString(schemas.UpdatePaymentConnectorRequest_paymentConnectorId, *v.PaymentConnectorId)
+	}
+	if v.PaymentManagerId != nil {
+		s.WriteString(schemas.UpdatePaymentConnectorRequest_paymentManagerId, *v.PaymentManagerId)
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.UpdatePaymentConnectorRequest_type, string(v.Type))
+	}
+}
+
 type UpdatePaymentConnectorOutput struct {
 
 	// The credential provider configurations for the updated payment connector.
@@ -108,13 +135,79 @@ type UpdatePaymentConnectorOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdatePaymentConnectorOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdatePaymentConnectorResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdatePaymentConnectorOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AuthorizationUrl != nil {
+		s.WriteString(schemas.UpdatePaymentConnectorResponse_authorizationUrl, *v.AuthorizationUrl)
+	}
+	serializeCredentialsProviderConfigurations(s, schemas.UpdatePaymentConnectorResponse_credentialProviderConfigurations, v.CredentialProviderConfigurations)
+	if v.LastUpdatedAt != nil {
+		s.WriteTime(schemas.UpdatePaymentConnectorResponse_lastUpdatedAt, *v.LastUpdatedAt)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.UpdatePaymentConnectorResponse_name, *v.Name)
+	}
+	if v.PaymentConnectorId != nil {
+		s.WriteString(schemas.UpdatePaymentConnectorResponse_paymentConnectorId, *v.PaymentConnectorId)
+	}
+	if v.PaymentManagerId != nil {
+		s.WriteString(schemas.UpdatePaymentConnectorResponse_paymentManagerId, *v.PaymentManagerId)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.UpdatePaymentConnectorResponse_status, string(v.Status))
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.UpdatePaymentConnectorResponse_type, string(v.Type))
+	}
+}
+func (v *UpdatePaymentConnectorOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdatePaymentConnectorResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdatePaymentConnectorResponse_authorizationUrl:
+			v.AuthorizationUrl = new(string)
+			return d.ReadString(schemas.UpdatePaymentConnectorResponse_authorizationUrl, v.AuthorizationUrl)
+		case schemas.UpdatePaymentConnectorResponse_credentialProviderConfigurations:
+			return deserializeCredentialsProviderConfigurations(d, schemas.UpdatePaymentConnectorResponse_credentialProviderConfigurations, &v.CredentialProviderConfigurations)
+		case schemas.UpdatePaymentConnectorResponse_lastUpdatedAt:
+			v.LastUpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.UpdatePaymentConnectorResponse_lastUpdatedAt, v.LastUpdatedAt)
+		case schemas.UpdatePaymentConnectorResponse_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.UpdatePaymentConnectorResponse_name, v.Name)
+		case schemas.UpdatePaymentConnectorResponse_paymentConnectorId:
+			v.PaymentConnectorId = new(string)
+			return d.ReadString(schemas.UpdatePaymentConnectorResponse_paymentConnectorId, v.PaymentConnectorId)
+		case schemas.UpdatePaymentConnectorResponse_paymentManagerId:
+			v.PaymentManagerId = new(string)
+			return d.ReadString(schemas.UpdatePaymentConnectorResponse_paymentManagerId, v.PaymentManagerId)
+		case schemas.UpdatePaymentConnectorResponse_status:
+			var ev string
+			if err := d.ReadString(schemas.UpdatePaymentConnectorResponse_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.PaymentConnectorStatus(ev)
+			return nil
+		case schemas.UpdatePaymentConnectorResponse_type:
+			var ev string
+			if err := d.ReadString(schemas.UpdatePaymentConnectorResponse_type, &ev); err != nil {
+				return err
+			}
+			v.Type = types.PaymentConnectorType(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdatePaymentConnectorMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdatePaymentConnector{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdatePaymentConnector, schemas.UpdatePaymentConnectorRequest, schemas.UpdatePaymentConnectorResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdatePaymentConnector{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdatePaymentConnector, schemas.UpdatePaymentConnectorRequest, schemas.UpdatePaymentConnectorResponse), output: &UpdatePaymentConnectorOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

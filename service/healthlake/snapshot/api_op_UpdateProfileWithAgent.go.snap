@@ -6,6 +6,7 @@ UpdateProfileWithAgent
 		ResolveEndpoint
 		OperationSerializer
 	Build stack step
+		EventStreamBuildMiddleware
 		ClientRequestID
 		UserAgent
 		RecursionDetection
@@ -23,6 +24,7 @@ UpdateProfileWithAgent
 		Signing
 	Deserialize stack step
 		AddRawResponseToMetadata
+		OperationEventStreamDeserializer
 		ResponseErrorWrapper
 		RequestIDRetriever
 		OperationDeserializer

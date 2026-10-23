@@ -5,7 +5,9 @@ package glue
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/glue/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/glue/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -51,6 +53,32 @@ type ListMLTransformsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListMLTransformsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListMLTransformsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListMLTransformsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Filter != nil {
+		s.WriteStruct(schemas.ListMLTransformsRequest_Filter)
+		v.Filter.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListMLTransformsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListMLTransformsRequest_NextToken, *v.NextToken)
+	}
+	if v.Sort != nil {
+		s.WriteStruct(schemas.ListMLTransformsRequest_Sort)
+		v.Sort.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeTagsMap(s, schemas.ListMLTransformsRequest_Tags, v.Tags)
+}
+
 type ListMLTransformsOutput struct {
 
 	// The identifiers of all the machine learning transforms in the account, or the
@@ -69,13 +97,35 @@ type ListMLTransformsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListMLTransformsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListMLTransformsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListMLTransformsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListMLTransformsResponse_NextToken, *v.NextToken)
+	}
+	serializeTransformIdList(s, schemas.ListMLTransformsResponse_TransformIds, v.TransformIds)
+}
+func (v *ListMLTransformsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListMLTransformsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListMLTransformsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListMLTransformsResponse_NextToken, v.NextToken)
+		case schemas.ListMLTransformsResponse_TransformIds:
+			return deserializeTransformIdList(d, schemas.ListMLTransformsResponse_TransformIds, &v.TransformIds)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListMLTransformsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListMLTransforms{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListMLTransforms, schemas.ListMLTransformsRequest, schemas.ListMLTransformsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListMLTransforms{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListMLTransforms, schemas.ListMLTransformsRequest, schemas.ListMLTransformsResponse), output: &ListMLTransformsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

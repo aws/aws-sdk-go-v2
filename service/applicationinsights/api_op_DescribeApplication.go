@@ -4,7 +4,9 @@ package applicationinsights
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/applicationinsights/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/applicationinsights/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -37,6 +39,21 @@ type DescribeApplicationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeApplicationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeApplicationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeApplicationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountId != nil {
+		s.WriteString(schemas.DescribeApplicationRequest_AccountId, *v.AccountId)
+	}
+	if v.ResourceGroupName != nil {
+		s.WriteString(schemas.DescribeApplicationRequest_ResourceGroupName, *v.ResourceGroupName)
+	}
+}
+
 type DescribeApplicationOutput struct {
 
 	// Information about the application.
@@ -48,13 +65,34 @@ type DescribeApplicationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeApplicationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeApplicationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeApplicationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationInfo != nil {
+		s.WriteStruct(schemas.DescribeApplicationResponse_ApplicationInfo)
+		v.ApplicationInfo.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DescribeApplicationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeApplicationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeApplicationResponse_ApplicationInfo:
+			v.ApplicationInfo = &types.ApplicationInfo{}
+			return v.ApplicationInfo.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeApplicationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpDescribeApplication{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeApplication, schemas.DescribeApplicationRequest, schemas.DescribeApplicationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpDescribeApplication{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeApplication, schemas.DescribeApplicationRequest, schemas.DescribeApplicationResponse), output: &DescribeApplicationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

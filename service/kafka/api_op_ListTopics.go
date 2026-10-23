@@ -5,7 +5,9 @@ package kafka
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/kafka/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/kafka/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -47,6 +49,27 @@ type ListTopicsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListTopicsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListTopicsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListTopicsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClusterArn != nil {
+		s.WriteString(schemas.ListTopicsRequest_ClusterArn, *v.ClusterArn)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListTopicsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListTopicsRequest_NextToken, *v.NextToken)
+	}
+	if v.TopicNameFilter != nil {
+		s.WriteString(schemas.ListTopicsRequest_TopicNameFilter, *v.TopicNameFilter)
+	}
+}
+
 type ListTopicsOutput struct {
 
 	// The paginated results marker. When the result of a ListTopics operation is
@@ -63,13 +86,35 @@ type ListTopicsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListTopicsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListTopicsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListTopicsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListTopicsResponse_NextToken, *v.NextToken)
+	}
+	serialize__listOfTopicInfo(s, schemas.ListTopicsResponse_Topics, v.Topics)
+}
+func (v *ListTopicsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListTopicsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListTopicsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListTopicsResponse_NextToken, v.NextToken)
+		case schemas.ListTopicsResponse_Topics:
+			return deserialize__listOfTopicInfo(d, schemas.ListTopicsResponse_Topics, &v.Topics)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListTopicsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListTopics{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListTopics, schemas.ListTopicsRequest, schemas.ListTopicsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListTopics{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListTopics, schemas.ListTopicsRequest, schemas.ListTopicsResponse), output: &ListTopicsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

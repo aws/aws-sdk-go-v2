@@ -4,6 +4,8 @@ package glue
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/glue/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -44,6 +46,25 @@ type CreateBlueprintInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateBlueprintInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateBlueprintRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateBlueprintInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BlueprintLocation != nil {
+		s.WriteString(schemas.CreateBlueprintRequest_BlueprintLocation, *v.BlueprintLocation)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreateBlueprintRequest_Description, *v.Description)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateBlueprintRequest_Name, *v.Name)
+	}
+	serializeTagsMap(s, schemas.CreateBlueprintRequest_Tags, v.Tags)
+}
+
 type CreateBlueprintOutput struct {
 
 	// Returns the name of the blueprint that was registered.
@@ -55,13 +76,32 @@ type CreateBlueprintOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateBlueprintOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateBlueprintResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateBlueprintOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.CreateBlueprintResponse_Name, *v.Name)
+	}
+}
+func (v *CreateBlueprintOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateBlueprintResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateBlueprintResponse_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.CreateBlueprintResponse_Name, v.Name)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateBlueprintMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateBlueprint{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateBlueprint, schemas.CreateBlueprintRequest, schemas.CreateBlueprintResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateBlueprint{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateBlueprint, schemas.CreateBlueprintRequest, schemas.CreateBlueprintResponse), output: &CreateBlueprintOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

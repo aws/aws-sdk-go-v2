@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"associatedCollectors":[{"collectorArn":"__CollectorArn__","collectorId":"__CollectorId__"},{"collectorArn":"__CollectorArn__","collectorId":"__CollectorId__"}],"nextToken":"__NextToken__"}

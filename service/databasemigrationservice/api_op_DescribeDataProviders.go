@@ -5,7 +5,9 @@ package databasemigrationservice
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/databasemigrationservice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/databasemigrationservice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -57,6 +59,22 @@ type DescribeDataProvidersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeDataProvidersInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeDataProvidersMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeDataProvidersInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeFilterList(s, schemas.DescribeDataProvidersMessage_Filters, v.Filters)
+	if v.Marker != nil {
+		s.WriteString(schemas.DescribeDataProvidersMessage_Marker, *v.Marker)
+	}
+	if v.MaxRecords != nil {
+		s.WriteInt32(schemas.DescribeDataProvidersMessage_MaxRecords, *v.MaxRecords)
+	}
+}
+
 type DescribeDataProvidersOutput struct {
 
 	// A description of data providers.
@@ -78,13 +96,35 @@ type DescribeDataProvidersOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeDataProvidersOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeDataProvidersResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeDataProvidersOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDataProviderList(s, schemas.DescribeDataProvidersResponse_DataProviders, v.DataProviders)
+	if v.Marker != nil {
+		s.WriteString(schemas.DescribeDataProvidersResponse_Marker, *v.Marker)
+	}
+}
+func (v *DescribeDataProvidersOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeDataProvidersResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeDataProvidersResponse_DataProviders:
+			return deserializeDataProviderList(d, schemas.DescribeDataProvidersResponse_DataProviders, &v.DataProviders)
+		case schemas.DescribeDataProvidersResponse_Marker:
+			v.Marker = new(string)
+			return d.ReadString(schemas.DescribeDataProvidersResponse_Marker, v.Marker)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeDataProvidersMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeDataProviders{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeDataProviders, schemas.DescribeDataProvidersMessage, schemas.DescribeDataProvidersResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeDataProviders{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeDataProviders, schemas.DescribeDataProvidersMessage, schemas.DescribeDataProvidersResponse), output: &DescribeDataProvidersOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

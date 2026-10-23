@@ -5,7 +5,9 @@ package databasemigrationservice
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/databasemigrationservice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/databasemigrationservice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -49,6 +51,22 @@ type DescribeEndpointTypesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeEndpointTypesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeEndpointTypesMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeEndpointTypesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeFilterList(s, schemas.DescribeEndpointTypesMessage_Filters, v.Filters)
+	if v.Marker != nil {
+		s.WriteString(schemas.DescribeEndpointTypesMessage_Marker, *v.Marker)
+	}
+	if v.MaxRecords != nil {
+		s.WriteInt32(schemas.DescribeEndpointTypesMessage_MaxRecords, *v.MaxRecords)
+	}
+}
+
 type DescribeEndpointTypesOutput struct {
 
 	//  An optional pagination token provided by a previous request. If this parameter
@@ -65,13 +83,35 @@ type DescribeEndpointTypesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeEndpointTypesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeEndpointTypesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeEndpointTypesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Marker != nil {
+		s.WriteString(schemas.DescribeEndpointTypesResponse_Marker, *v.Marker)
+	}
+	serializeSupportedEndpointTypeList(s, schemas.DescribeEndpointTypesResponse_SupportedEndpointTypes, v.SupportedEndpointTypes)
+}
+func (v *DescribeEndpointTypesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeEndpointTypesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeEndpointTypesResponse_Marker:
+			v.Marker = new(string)
+			return d.ReadString(schemas.DescribeEndpointTypesResponse_Marker, v.Marker)
+		case schemas.DescribeEndpointTypesResponse_SupportedEndpointTypes:
+			return deserializeSupportedEndpointTypeList(d, schemas.DescribeEndpointTypesResponse_SupportedEndpointTypes, &v.SupportedEndpointTypes)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeEndpointTypesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeEndpointTypes{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeEndpointTypes, schemas.DescribeEndpointTypesMessage, schemas.DescribeEndpointTypesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeEndpointTypes{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeEndpointTypes, schemas.DescribeEndpointTypesMessage, schemas.DescribeEndpointTypesResponse), output: &DescribeEndpointTypesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

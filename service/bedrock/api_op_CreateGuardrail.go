@@ -5,7 +5,9 @@ package bedrock
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/bedrock/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrock/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -118,6 +120,69 @@ type CreateGuardrailInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateGuardrailInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateGuardrailRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateGuardrailInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AutomatedReasoningPolicyConfig != nil {
+		s.WriteStruct(schemas.CreateGuardrailRequest_automatedReasoningPolicyConfig)
+		v.AutomatedReasoningPolicyConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.BlockedInputMessaging != nil {
+		s.WriteString(schemas.CreateGuardrailRequest_blockedInputMessaging, *v.BlockedInputMessaging)
+	}
+	if v.BlockedOutputsMessaging != nil {
+		s.WriteString(schemas.CreateGuardrailRequest_blockedOutputsMessaging, *v.BlockedOutputsMessaging)
+	}
+	if v.ClientRequestToken != nil {
+		s.WriteString(schemas.CreateGuardrailRequest_clientRequestToken, *v.ClientRequestToken)
+	}
+	if v.ContentPolicyConfig != nil {
+		s.WriteStruct(schemas.CreateGuardrailRequest_contentPolicyConfig)
+		v.ContentPolicyConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ContextualGroundingPolicyConfig != nil {
+		s.WriteStruct(schemas.CreateGuardrailRequest_contextualGroundingPolicyConfig)
+		v.ContextualGroundingPolicyConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CrossRegionConfig != nil {
+		s.WriteStruct(schemas.CreateGuardrailRequest_crossRegionConfig)
+		v.CrossRegionConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreateGuardrailRequest_description, *v.Description)
+	}
+	if v.KmsKeyId != nil {
+		s.WriteString(schemas.CreateGuardrailRequest_kmsKeyId, *v.KmsKeyId)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateGuardrailRequest_name, *v.Name)
+	}
+	if v.SensitiveInformationPolicyConfig != nil {
+		s.WriteStruct(schemas.CreateGuardrailRequest_sensitiveInformationPolicyConfig)
+		v.SensitiveInformationPolicyConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeTagList(s, schemas.CreateGuardrailRequest_tags, v.Tags)
+	if v.TopicPolicyConfig != nil {
+		s.WriteStruct(schemas.CreateGuardrailRequest_topicPolicyConfig)
+		v.TopicPolicyConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.WordPolicyConfig != nil {
+		s.WriteStruct(schemas.CreateGuardrailRequest_wordPolicyConfig)
+		v.WordPolicyConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type CreateGuardrailOutput struct {
 
 	// The time at which the guardrail was created.
@@ -146,13 +211,50 @@ type CreateGuardrailOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateGuardrailOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateGuardrailResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateGuardrailOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.CreateGuardrailResponse_createdAt, *v.CreatedAt)
+	}
+	if v.GuardrailArn != nil {
+		s.WriteString(schemas.CreateGuardrailResponse_guardrailArn, *v.GuardrailArn)
+	}
+	if v.GuardrailId != nil {
+		s.WriteString(schemas.CreateGuardrailResponse_guardrailId, *v.GuardrailId)
+	}
+	if v.Version != nil {
+		s.WriteString(schemas.CreateGuardrailResponse_version, *v.Version)
+	}
+}
+func (v *CreateGuardrailOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateGuardrailResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateGuardrailResponse_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.CreateGuardrailResponse_createdAt, v.CreatedAt)
+		case schemas.CreateGuardrailResponse_guardrailArn:
+			v.GuardrailArn = new(string)
+			return d.ReadString(schemas.CreateGuardrailResponse_guardrailArn, v.GuardrailArn)
+		case schemas.CreateGuardrailResponse_guardrailId:
+			v.GuardrailId = new(string)
+			return d.ReadString(schemas.CreateGuardrailResponse_guardrailId, v.GuardrailId)
+		case schemas.CreateGuardrailResponse_version:
+			v.Version = new(string)
+			return d.ReadString(schemas.CreateGuardrailResponse_version, v.Version)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateGuardrailMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateGuardrail{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateGuardrail, schemas.CreateGuardrailRequest, schemas.CreateGuardrailResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateGuardrail{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateGuardrail, schemas.CreateGuardrailRequest, schemas.CreateGuardrailResponse), output: &CreateGuardrailOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

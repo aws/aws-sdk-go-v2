@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"Items":[{"DestinationSummary":{"Status":"HEALTHY","UnhealthySince":946684800,"Uri":"__Uri__"},"DomainName":"__DomainName__","EventStreamArn":"__EventStreamArn__","EventStreamName":"__EventStreamName__","State":"RUNNING","StoppedSince":946684800,"Tags":{"key0":"__Value__"}},{"DestinationSummary":{"Status":"HEALTHY","UnhealthySince":946684800,"Uri":"__Uri__"},"DomainName":"__DomainName__","EventStreamArn":"__EventStreamArn__","EventStreamName":"__EventStreamName__","State":"RUNNING","StoppedSince":946684800,"Tags":{"key0":"__Value__"}}],"NextToken":"__NextToken__"}

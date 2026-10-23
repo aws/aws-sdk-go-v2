@@ -1210,6 +1210,12 @@
                     "traits": {
                         "smithy.api#enumValue": "MCP_SERVER"
                     }
+                },
+                "A2A_SERVER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "A2A_SERVER"
+                    }
                 }
             },
             "traits": {
@@ -1246,6 +1252,49 @@
                     "max": 2048
                 },
                 "smithy.api#pattern": "^(arn:aws:[A-Za-z0-9][A-Za-z0-9_/.-]{0,62}:[A-Za-z0-9_/.-]{0,63}:[A-Za-z0-9_/.-]{0,63}:[A-Za-z0-9][A-Za-z0-9:_/+=,@.-]{0,1023}|[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12})(:[\\w\\$]+)?$"
+            }
+        },
+        "com.amazonaws.appintegrations#AuthConfig": {
+            "type": "structure",
+            "members": {
+                "AuthType": {
+                    "target": "com.amazonaws.appintegrations#AuthType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of authentication that Connect Customer uses to call the external application endpoint. You must specify an authentication type for <code>A2A_SERVER</code> applications. Valid values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>API_KEY</code>: Connect Customer sends an API key that is stored in the Secrets Manager secret that you specify in <code>CredentialProviderIdentifier</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CONNECT_JWT</code>: Connect Customer issues a short-lived, signed JSON Web Token (JWT). This authentication type doesn't require a stored credential.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "CredentialProviderIdentifier": {
+                    "target": "com.amazonaws.appintegrations#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the Secrets Manager secret that stores the credentials. The secret must be accessible to Connect Customer.</p>\n         <p>You must specify this ARN when <code>AuthType</code> is <code>API_KEY</code>. Don't specify it when <code>AuthType</code> is <code>CONNECT_JWT</code>.</p>"
+                    }
+                },
+                "AudienceOverride": {
+                    "target": "com.amazonaws.appintegrations#Identifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The value that Connect Customer uses as the audience (<code>aud</code>) claim of the JSON Web Token (JWT) that it issues. You can specify this parameter only when <code>AuthType</code> is <code>CONNECT_JWT</code>. If you don't specify it, the audience is the <code>AccessUrl</code> of the application. The value can't contain <code>connect.amazonaws.com</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains the authentication settings that Connect Customer uses to call an external application endpoint.</p>"
+            }
+        },
+        "com.amazonaws.appintegrations#AuthType": {
+            "type": "enum",
+            "members": {
+                "API_KEY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "API_KEY"
+                    }
+                },
+                "CONNECT_JWT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CONNECT_JWT"
+                    }
+                }
             }
         },
         "com.amazonaws.appintegrations#Boolean": {
@@ -1477,6 +1526,12 @@
                     "target": "com.amazonaws.appintegrations#ApplicationType",
                     "traits": {
                         "smithy.api#documentation": "<p>The type of application.</p>"
+                    }
+                },
+                "AuthConfig": {
+                    "target": "com.amazonaws.appintegrations#AuthConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The authentication settings that Connect Customer uses when calling the external application.</p>"
                     }
                 }
             },
@@ -2695,6 +2750,12 @@
                     "target": "com.amazonaws.appintegrations#ApplicationType",
                     "traits": {
                         "smithy.api#documentation": "<p>The type of application.</p>"
+                    }
+                },
+                "AuthConfig": {
+                    "target": "com.amazonaws.appintegrations#AuthConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The authentication settings that Connect Customer uses when calling the external application.</p>"
                     }
                 }
             },
@@ -4262,6 +4323,12 @@
                     "target": "com.amazonaws.appintegrations#ApplicationType",
                     "traits": {
                         "smithy.api#documentation": "<p>The type of application.</p>"
+                    }
+                },
+                "AuthConfig": {
+                    "target": "com.amazonaws.appintegrations#AuthConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The authentication settings that Connect Customer uses when calling the external application.</p>"
                     }
                 }
             },

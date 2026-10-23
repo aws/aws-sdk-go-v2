@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"Items":[{"CompletedAt":"2000-01-01T00:00:00Z","ConfigurationName":"__ConfigurationName__","ConfigurationProfileId":"__ConfigurationProfileId__","ConfigurationVersion":"__ConfigurationVersion__","DeploymentDurationInMinutes":1,"DeploymentNumber":1,"FinalBakeTimeInMinutes":1,"GrowthFactor":1,"GrowthType":"LINEAR","PercentageComplete":1,"StartedAt":"2000-01-01T00:00:00Z","State":"BAKING","Type":"USER","VersionLabel":"__VersionLabel__"},{"CompletedAt":"2000-01-01T00:00:00Z","ConfigurationName":"__ConfigurationName__","ConfigurationProfileId":"__ConfigurationProfileId__","ConfigurationVersion":"__ConfigurationVersion__","DeploymentDurationInMinutes":1,"DeploymentNumber":1,"FinalBakeTimeInMinutes":1,"GrowthFactor":1,"GrowthType":"LINEAR","PercentageComplete":1,"StartedAt":"2000-01-01T00:00:00Z","State":"BAKING","Type":"USER","VersionLabel":"__VersionLabel__"}],"NextToken":"__NextToken__"}

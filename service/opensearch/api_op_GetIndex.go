@@ -5,6 +5,10 @@ package opensearch
 import (
 	"context"
 	"github.com/aws/aws-sdk-go-v2/service/opensearch/document"
+	internaldocument "github.com/aws/aws-sdk-go-v2/service/opensearch/internal/document"
+	"github.com/aws/aws-sdk-go-v2/service/opensearch/schemas"
+	smithy "github.com/aws/smithy-go"
+	smithydocument "github.com/aws/smithy-go/document"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -42,6 +46,21 @@ type GetIndexInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetIndexInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetIndexRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetIndexInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DomainName != nil {
+		s.WriteString(schemas.GetIndexRequest_DomainName, *v.DomainName)
+	}
+	if v.IndexName != nil {
+		s.WriteString(schemas.GetIndexRequest_IndexName, *v.IndexName)
+	}
+}
+
 type GetIndexOutput struct {
 
 	// The JSON schema of the index including mappings, settings, and semantic
@@ -56,13 +75,38 @@ type GetIndexOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetIndexOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetIndexResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetIndexOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IndexSchema != nil {
+		s.WriteDocument(schemas.GetIndexResponse_IndexSchema, &smithydocument.Opaque{Value: v.IndexSchema})
+	}
+}
+func (v *GetIndexOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetIndexResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetIndexResponse_IndexSchema:
+			var dv smithydocument.Value
+			if err := d.ReadDocument(schemas.GetIndexResponse_IndexSchema, &dv); err != nil {
+				return err
+			}
+			if ov, ok := dv.(smithydocument.Opaque); ok {
+				v.IndexSchema = internaldocument.NewDocumentUnmarshaler(ov.Value)
+			}
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetIndexMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetIndex{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetIndex, schemas.GetIndexRequest, schemas.GetIndexResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetIndex{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetIndex, schemas.GetIndexRequest, schemas.GetIndexResponse), output: &GetIndexOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

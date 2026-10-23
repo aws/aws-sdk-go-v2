@@ -4,7 +4,9 @@ package glue
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/glue/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/glue/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -56,6 +58,30 @@ type UpdatePartitionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdatePartitionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdatePartitionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdatePartitionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CatalogId != nil {
+		s.WriteString(schemas.UpdatePartitionRequest_CatalogId, *v.CatalogId)
+	}
+	if v.DatabaseName != nil {
+		s.WriteString(schemas.UpdatePartitionRequest_DatabaseName, *v.DatabaseName)
+	}
+	if v.PartitionInput != nil {
+		s.WriteStruct(schemas.UpdatePartitionRequest_PartitionInput)
+		v.PartitionInput.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeBoundedPartitionValueList(s, schemas.UpdatePartitionRequest_PartitionValueList, v.PartitionValueList)
+	if v.TableName != nil {
+		s.WriteString(schemas.UpdatePartitionRequest_TableName, *v.TableName)
+	}
+}
+
 type UpdatePartitionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -63,13 +89,26 @@ type UpdatePartitionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdatePartitionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdatePartitionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdatePartitionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *UpdatePartitionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdatePartitionResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdatePartitionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdatePartition{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdatePartition, schemas.UpdatePartitionRequest, schemas.UpdatePartitionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdatePartition{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdatePartition, schemas.UpdatePartitionRequest, schemas.UpdatePartitionResponse), output: &UpdatePartitionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -3467,6 +3467,81 @@ func awsAwsquery_serializeDocumentEnvironmentTier(v *types.EnvironmentTier, valu
 	return nil
 }
 
+func awsAwsquery_serializeDocumentImageBuildConfiguration(v *types.ImageBuildConfiguration, value query.Value) error {
+	object := value.Object()
+	_ = object
+
+	if len(v.Architecture) > 0 {
+		objectKey := object.Key("Architecture")
+		objectKey.String(string(v.Architecture))
+	}
+
+	if v.Buildpack != nil {
+		objectKey := object.Key("Buildpack")
+		objectKey.String(*v.Buildpack)
+	}
+
+	if v.CodeBuildServiceRole != nil {
+		objectKey := object.Key("CodeBuildServiceRole")
+		objectKey.String(*v.CodeBuildServiceRole)
+	}
+
+	if len(v.ComputeType) > 0 {
+		objectKey := object.Key("ComputeType")
+		objectKey.String(string(v.ComputeType))
+	}
+
+	if v.DockerfileLocation != nil {
+		objectKey := object.Key("DockerfileLocation")
+		objectKey.String(*v.DockerfileLocation)
+	}
+
+	if v.TimeoutInMinutes != nil {
+		objectKey := object.Key("TimeoutInMinutes")
+		objectKey.Integer(*v.TimeoutInMinutes)
+	}
+
+	if len(v.Type) > 0 {
+		objectKey := object.Key("Type")
+		objectKey.String(string(v.Type))
+	}
+
+	return nil
+}
+
+func awsAwsquery_serializeDocumentImageConfiguration(v *types.ImageConfiguration, value query.Value) error {
+	object := value.Object()
+	_ = object
+
+	if v.Build != nil {
+		objectKey := object.Key("Build")
+		if err := awsAwsquery_serializeDocumentImageBuildConfiguration(v.Build, objectKey); err != nil {
+			return err
+		}
+	}
+
+	if v.Source != nil {
+		objectKey := object.Key("Source")
+		if err := awsAwsquery_serializeDocumentImageSource(v.Source, objectKey); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsAwsquery_serializeDocumentImageSource(v *types.ImageSource, value query.Value) error {
+	object := value.Object()
+	_ = object
+
+	if v.Uri != nil {
+		objectKey := object.Key("Uri")
+		objectKey.String(*v.Uri)
+	}
+
+	return nil
+}
+
 func awsAwsquery_serializeDocumentInstancesHealthAttributes(v []types.InstancesHealthAttribute, value query.Value) error {
 	array := value.Array("member")
 
@@ -3921,6 +3996,13 @@ func awsAwsquery_serializeOpDocumentCreateApplicationVersionInput(v *CreateAppli
 	if v.Description != nil {
 		objectKey := object.Key("Description")
 		objectKey.String(*v.Description)
+	}
+
+	if v.ImageConfiguration != nil {
+		objectKey := object.Key("ImageConfiguration")
+		if err := awsAwsquery_serializeDocumentImageConfiguration(v.ImageConfiguration, objectKey); err != nil {
+			return err
+		}
 	}
 
 	if v.Process != nil {

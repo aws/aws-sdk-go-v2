@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"VpcEndpoint":{"DomainArn":"__DomainArn__","Endpoint":"__Endpoint__","Status":"CREATING","VpcEndpointId":"__VpcEndpointId__","VpcEndpointOwner":"__VpcEndpointOwner__","VpcOptions":{"AvailabilityZones":["__Member__","__Member__"],"SecurityGroupIds":["__Member__","__Member__"],"SubnetIds":["__Member__","__Member__"],"VPCId":"__VPCId__"}}}

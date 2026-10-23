@@ -4,7 +4,9 @@ package codecatalyst
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/codecatalyst/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/codecatalyst/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -45,6 +47,24 @@ type GetDevEnvironmentInput struct {
 	SpaceName *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetDevEnvironmentInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetDevEnvironmentRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetDevEnvironmentInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Id != nil {
+		s.WriteString(schemas.GetDevEnvironmentRequest_id, *v.Id)
+	}
+	if v.ProjectName != nil {
+		s.WriteString(schemas.GetDevEnvironmentRequest_projectName, *v.ProjectName)
+	}
+	if v.SpaceName != nil {
+		s.WriteString(schemas.GetDevEnvironmentRequest_spaceName, *v.SpaceName)
+	}
 }
 
 type GetDevEnvironmentOutput struct {
@@ -124,13 +144,111 @@ type GetDevEnvironmentOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetDevEnvironmentOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetDevEnvironmentResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetDevEnvironmentOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Alias != nil {
+		s.WriteString(schemas.GetDevEnvironmentResponse_alias, *v.Alias)
+	}
+	if v.CreatorId != nil {
+		s.WriteString(schemas.GetDevEnvironmentResponse_creatorId, *v.CreatorId)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.GetDevEnvironmentResponse_id, *v.Id)
+	}
+	serializeIdes(s, schemas.GetDevEnvironmentResponse_ides, v.Ides)
+	s.WriteInt32(schemas.GetDevEnvironmentResponse_inactivityTimeoutMinutes, v.InactivityTimeoutMinutes)
+	if v.InstanceType != "" {
+		s.WriteString(schemas.GetDevEnvironmentResponse_instanceType, string(v.InstanceType))
+	}
+	if v.LastUpdatedTime != nil {
+		s.WriteTime(schemas.GetDevEnvironmentResponse_lastUpdatedTime, *v.LastUpdatedTime)
+	}
+	if v.PersistentStorage != nil {
+		s.WriteStruct(schemas.GetDevEnvironmentResponse_persistentStorage)
+		v.PersistentStorage.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ProjectName != nil {
+		s.WriteString(schemas.GetDevEnvironmentResponse_projectName, *v.ProjectName)
+	}
+	serializeDevEnvironmentRepositorySummaries(s, schemas.GetDevEnvironmentResponse_repositories, v.Repositories)
+	if v.SpaceName != nil {
+		s.WriteString(schemas.GetDevEnvironmentResponse_spaceName, *v.SpaceName)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.GetDevEnvironmentResponse_status, string(v.Status))
+	}
+	if v.StatusReason != nil {
+		s.WriteString(schemas.GetDevEnvironmentResponse_statusReason, *v.StatusReason)
+	}
+	if v.VpcConnectionName != nil {
+		s.WriteString(schemas.GetDevEnvironmentResponse_vpcConnectionName, *v.VpcConnectionName)
+	}
+}
+func (v *GetDevEnvironmentOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetDevEnvironmentResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetDevEnvironmentResponse_alias:
+			v.Alias = new(string)
+			return d.ReadString(schemas.GetDevEnvironmentResponse_alias, v.Alias)
+		case schemas.GetDevEnvironmentResponse_creatorId:
+			v.CreatorId = new(string)
+			return d.ReadString(schemas.GetDevEnvironmentResponse_creatorId, v.CreatorId)
+		case schemas.GetDevEnvironmentResponse_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.GetDevEnvironmentResponse_id, v.Id)
+		case schemas.GetDevEnvironmentResponse_ides:
+			return deserializeIdes(d, schemas.GetDevEnvironmentResponse_ides, &v.Ides)
+		case schemas.GetDevEnvironmentResponse_inactivityTimeoutMinutes:
+			return d.ReadInt32(schemas.GetDevEnvironmentResponse_inactivityTimeoutMinutes, &v.InactivityTimeoutMinutes)
+		case schemas.GetDevEnvironmentResponse_instanceType:
+			var ev string
+			if err := d.ReadString(schemas.GetDevEnvironmentResponse_instanceType, &ev); err != nil {
+				return err
+			}
+			v.InstanceType = types.InstanceType(ev)
+			return nil
+		case schemas.GetDevEnvironmentResponse_lastUpdatedTime:
+			v.LastUpdatedTime = new(time.Time)
+			return d.ReadTime(schemas.GetDevEnvironmentResponse_lastUpdatedTime, v.LastUpdatedTime)
+		case schemas.GetDevEnvironmentResponse_persistentStorage:
+			v.PersistentStorage = &types.PersistentStorage{}
+			return v.PersistentStorage.Deserialize(d)
+		case schemas.GetDevEnvironmentResponse_projectName:
+			v.ProjectName = new(string)
+			return d.ReadString(schemas.GetDevEnvironmentResponse_projectName, v.ProjectName)
+		case schemas.GetDevEnvironmentResponse_repositories:
+			return deserializeDevEnvironmentRepositorySummaries(d, schemas.GetDevEnvironmentResponse_repositories, &v.Repositories)
+		case schemas.GetDevEnvironmentResponse_spaceName:
+			v.SpaceName = new(string)
+			return d.ReadString(schemas.GetDevEnvironmentResponse_spaceName, v.SpaceName)
+		case schemas.GetDevEnvironmentResponse_status:
+			var ev string
+			if err := d.ReadString(schemas.GetDevEnvironmentResponse_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.DevEnvironmentStatus(ev)
+			return nil
+		case schemas.GetDevEnvironmentResponse_statusReason:
+			v.StatusReason = new(string)
+			return d.ReadString(schemas.GetDevEnvironmentResponse_statusReason, v.StatusReason)
+		case schemas.GetDevEnvironmentResponse_vpcConnectionName:
+			v.VpcConnectionName = new(string)
+			return d.ReadString(schemas.GetDevEnvironmentResponse_vpcConnectionName, v.VpcConnectionName)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetDevEnvironmentMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetDevEnvironment{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetDevEnvironment, schemas.GetDevEnvironmentRequest, schemas.GetDevEnvironmentResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetDevEnvironment{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetDevEnvironment, schemas.GetDevEnvironmentRequest, schemas.GetDevEnvironmentResponse), output: &GetDevEnvironmentOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

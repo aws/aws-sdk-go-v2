@@ -4,7 +4,9 @@ package customerprofiles
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/customerprofiles/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/customerprofiles/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -48,6 +50,27 @@ type BatchGetCalculatedAttributeForProfileInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchGetCalculatedAttributeForProfileInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchGetCalculatedAttributeForProfileRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchGetCalculatedAttributeForProfileInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CalculatedAttributeName != nil {
+		s.WriteString(schemas.BatchGetCalculatedAttributeForProfileRequest_CalculatedAttributeName, *v.CalculatedAttributeName)
+	}
+	if v.ConditionOverrides != nil {
+		s.WriteStruct(schemas.BatchGetCalculatedAttributeForProfileRequest_ConditionOverrides)
+		v.ConditionOverrides.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DomainName != nil {
+		s.WriteString(schemas.BatchGetCalculatedAttributeForProfileRequest_DomainName, *v.DomainName)
+	}
+	serializeBatchGetCalculatedAttributeForProfileIdList(s, schemas.BatchGetCalculatedAttributeForProfileRequest_ProfileIds, v.ProfileIds)
+}
+
 type BatchGetCalculatedAttributeForProfileOutput struct {
 
 	// List of calculated attribute values retrieved.
@@ -66,13 +89,40 @@ type BatchGetCalculatedAttributeForProfileOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchGetCalculatedAttributeForProfileOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchGetCalculatedAttributeForProfileResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchGetCalculatedAttributeForProfileOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeCalculatedAttributeValueList(s, schemas.BatchGetCalculatedAttributeForProfileResponse_CalculatedAttributeValues, v.CalculatedAttributeValues)
+	if v.ConditionOverrides != nil {
+		s.WriteStruct(schemas.BatchGetCalculatedAttributeForProfileResponse_ConditionOverrides)
+		v.ConditionOverrides.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeBatchGetCalculatedAttributeForProfileErrorList(s, schemas.BatchGetCalculatedAttributeForProfileResponse_Errors, v.Errors)
+}
+func (v *BatchGetCalculatedAttributeForProfileOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchGetCalculatedAttributeForProfileResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchGetCalculatedAttributeForProfileResponse_CalculatedAttributeValues:
+			return deserializeCalculatedAttributeValueList(d, schemas.BatchGetCalculatedAttributeForProfileResponse_CalculatedAttributeValues, &v.CalculatedAttributeValues)
+		case schemas.BatchGetCalculatedAttributeForProfileResponse_ConditionOverrides:
+			v.ConditionOverrides = &types.ConditionOverrides{}
+			return v.ConditionOverrides.Deserialize(d)
+		case schemas.BatchGetCalculatedAttributeForProfileResponse_Errors:
+			return deserializeBatchGetCalculatedAttributeForProfileErrorList(d, schemas.BatchGetCalculatedAttributeForProfileResponse_Errors, &v.Errors)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationBatchGetCalculatedAttributeForProfileMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpBatchGetCalculatedAttributeForProfile{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchGetCalculatedAttributeForProfile, schemas.BatchGetCalculatedAttributeForProfileRequest, schemas.BatchGetCalculatedAttributeForProfileResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpBatchGetCalculatedAttributeForProfile{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchGetCalculatedAttributeForProfile, schemas.BatchGetCalculatedAttributeForProfileRequest, schemas.BatchGetCalculatedAttributeForProfileResponse), output: &BatchGetCalculatedAttributeForProfileOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

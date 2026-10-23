@@ -4,7 +4,9 @@ package directconnect
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/directconnect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/directconnect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -54,6 +56,24 @@ type DescribeConnectionLoaInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeConnectionLoaInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeConnectionLoaRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeConnectionLoaInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConnectionId != nil {
+		s.WriteString(schemas.DescribeConnectionLoaRequest_connectionId, *v.ConnectionId)
+	}
+	if v.LoaContentType != "" {
+		s.WriteString(schemas.DescribeConnectionLoaRequest_loaContentType, string(v.LoaContentType))
+	}
+	if v.ProviderName != nil {
+		s.WriteString(schemas.DescribeConnectionLoaRequest_providerName, *v.ProviderName)
+	}
+}
+
 type DescribeConnectionLoaOutput struct {
 
 	// The Letter of Authorization - Connecting Facility Assignment (LOA-CFA).
@@ -65,13 +85,34 @@ type DescribeConnectionLoaOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeConnectionLoaOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeConnectionLoaResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeConnectionLoaOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Loa != nil {
+		s.WriteStruct(schemas.DescribeConnectionLoaResponse_loa)
+		v.Loa.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DescribeConnectionLoaOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeConnectionLoaResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeConnectionLoaResponse_loa:
+			v.Loa = &types.Loa{}
+			return v.Loa.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeConnectionLoaMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeConnectionLoa{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeConnectionLoa, schemas.DescribeConnectionLoaRequest, schemas.DescribeConnectionLoaResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeConnectionLoa{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeConnectionLoa, schemas.DescribeConnectionLoaRequest, schemas.DescribeConnectionLoaResponse), output: &DescribeConnectionLoaOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

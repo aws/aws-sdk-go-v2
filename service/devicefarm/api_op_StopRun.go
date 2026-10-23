@@ -4,7 +4,9 @@ package devicefarm
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/devicefarm/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/devicefarm/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,18 @@ type StopRunInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StopRunInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StopRunRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StopRunInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.StopRunRequest_arn, *v.Arn)
+	}
+}
+
 // Represents the results of your stop run attempt.
 type StopRunOutput struct {
 
@@ -51,13 +65,34 @@ type StopRunOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StopRunOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StopRunResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StopRunOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Run != nil {
+		s.WriteStruct(schemas.StopRunResult_run)
+		v.Run.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *StopRunOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StopRunResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StopRunResult_run:
+			v.Run = &types.Run{}
+			return v.Run.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStopRunMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStopRun{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StopRun, schemas.StopRunRequest, schemas.StopRunResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpStopRun{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StopRun, schemas.StopRunRequest, schemas.StopRunResult), output: &StopRunOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

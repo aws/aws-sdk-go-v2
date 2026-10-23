@@ -4,7 +4,9 @@ package quicksight
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/quicksight/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/quicksight/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -50,6 +52,27 @@ type DescribeTemplateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeTemplateInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeTemplateRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeTemplateInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AliasName != nil {
+		s.WriteString(schemas.DescribeTemplateRequest_AliasName, *v.AliasName)
+	}
+	if v.AwsAccountId != nil {
+		s.WriteString(schemas.DescribeTemplateRequest_AwsAccountId, *v.AwsAccountId)
+	}
+	if v.TemplateId != nil {
+		s.WriteString(schemas.DescribeTemplateRequest_TemplateId, *v.TemplateId)
+	}
+	if v.VersionNumber != nil {
+		s.WriteInt64(schemas.DescribeTemplateRequest_VersionNumber, *v.VersionNumber)
+	}
+}
+
 type DescribeTemplateOutput struct {
 
 	// The Amazon Web Services request ID for this operation.
@@ -67,13 +90,45 @@ type DescribeTemplateOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeTemplateOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeTemplateResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeTemplateOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RequestId != nil {
+		s.WriteString(schemas.DescribeTemplateResponse_RequestId, *v.RequestId)
+	}
+	if v.Status != 0 {
+		s.WriteInt32(schemas.DescribeTemplateResponse_Status, v.Status)
+	}
+	if v.Template != nil {
+		s.WriteStruct(schemas.DescribeTemplateResponse_Template)
+		v.Template.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DescribeTemplateOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeTemplateResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeTemplateResponse_RequestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.DescribeTemplateResponse_RequestId, v.RequestId)
+		case schemas.DescribeTemplateResponse_Status:
+			return d.ReadInt32(schemas.DescribeTemplateResponse_Status, &v.Status)
+		case schemas.DescribeTemplateResponse_Template:
+			v.Template = &types.Template{}
+			return v.Template.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeTemplate{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeTemplate, schemas.DescribeTemplateRequest, schemas.DescribeTemplateResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeTemplate{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeTemplate, schemas.DescribeTemplateRequest, schemas.DescribeTemplateResponse), output: &DescribeTemplateOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

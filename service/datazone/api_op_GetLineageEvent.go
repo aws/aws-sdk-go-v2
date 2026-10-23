@@ -4,7 +4,9 @@ package datazone
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/datazone/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/datazone/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -40,6 +42,21 @@ type GetLineageEventInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetLineageEventInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetLineageEventInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetLineageEventInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DomainIdentifier != nil {
+		s.WriteString(schemas.GetLineageEventInput_domainIdentifier, *v.DomainIdentifier)
+	}
+	if v.Identifier != nil {
+		s.WriteString(schemas.GetLineageEventInput_identifier, *v.Identifier)
+	}
+}
+
 type GetLineageEventOutput struct {
 
 	// The timestamp of when the lineage event was created.
@@ -69,13 +86,71 @@ type GetLineageEventOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetLineageEventOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetLineageEventOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetLineageEventOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.GetLineageEventOutput_createdAt, *v.CreatedAt)
+	}
+	if v.CreatedBy != nil {
+		s.WriteString(schemas.GetLineageEventOutput_createdBy, *v.CreatedBy)
+	}
+	if v.DomainId != nil {
+		s.WriteString(schemas.GetLineageEventOutput_domainId, *v.DomainId)
+	}
+	if v.Event != nil {
+		s.WriteBlob(schemas.GetLineageEventOutput_event, v.Event)
+	}
+	if v.EventTime != nil {
+		s.WriteTime(schemas.GetLineageEventOutput_eventTime, *v.EventTime)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.GetLineageEventOutput_id, *v.Id)
+	}
+	if v.ProcessingStatus != "" {
+		s.WriteString(schemas.GetLineageEventOutput_processingStatus, string(v.ProcessingStatus))
+	}
+}
+func (v *GetLineageEventOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetLineageEventOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetLineageEventOutput_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.GetLineageEventOutput_createdAt, v.CreatedAt)
+		case schemas.GetLineageEventOutput_createdBy:
+			v.CreatedBy = new(string)
+			return d.ReadString(schemas.GetLineageEventOutput_createdBy, v.CreatedBy)
+		case schemas.GetLineageEventOutput_domainId:
+			v.DomainId = new(string)
+			return d.ReadString(schemas.GetLineageEventOutput_domainId, v.DomainId)
+		case schemas.GetLineageEventOutput_event:
+			return d.ReadBlob(schemas.GetLineageEventOutput_event, &v.Event)
+		case schemas.GetLineageEventOutput_eventTime:
+			v.EventTime = new(time.Time)
+			return d.ReadTime(schemas.GetLineageEventOutput_eventTime, v.EventTime)
+		case schemas.GetLineageEventOutput_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.GetLineageEventOutput_id, v.Id)
+		case schemas.GetLineageEventOutput_processingStatus:
+			var ev string
+			if err := d.ReadString(schemas.GetLineageEventOutput_processingStatus, &ev); err != nil {
+				return err
+			}
+			v.ProcessingStatus = types.LineageEventProcessingStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetLineageEventMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetLineageEvent{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetLineageEvent, schemas.GetLineageEventInput, schemas.GetLineageEventOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetLineageEvent{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetLineageEvent, schemas.GetLineageEventInput, schemas.GetLineageEventOutput), output: &GetLineageEventOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

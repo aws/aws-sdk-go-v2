@@ -449,6 +449,9 @@ func ExampleRouterOutputProtocolConfiguration_outputUsage() {
 	case *types.RouterOutputProtocolConfigurationMemberRist:
 		_ = v.Value // Value is types.RistRouterOutputConfiguration
 
+	case *types.RouterOutputProtocolConfigurationMemberRtmpPush:
+		_ = v.Value // Value is types.RtmpPushRouterOutputConfiguration
+
 	case *types.RouterOutputProtocolConfigurationMemberRtp:
 		_ = v.Value // Value is types.RtpRouterOutputConfiguration
 
@@ -467,6 +470,7 @@ func ExampleRouterOutputProtocolConfiguration_outputUsage() {
 	}
 }
 
+var _ *types.RtmpPushRouterOutputConfiguration
 var _ *types.RtpRouterOutputConfiguration
 var _ *types.SrtCallerRouterOutputConfiguration
 var _ *types.RistRouterOutputConfiguration
@@ -497,3 +501,21 @@ func ExampleRouterOutputStreamDetails_outputUsage() {
 var _ *types.StandardRouterOutputStreamDetails
 var _ *types.MediaConnectFlowRouterOutputStreamDetails
 var _ *types.MediaLiveInputRouterOutputStreamDetails
+
+func ExampleTlsEncryptionConfiguration_outputUsage() {
+	var union types.TlsEncryptionConfiguration
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.TlsEncryptionConfigurationMemberPublic:
+		_ = v.Value // Value is types.PublicTlsEncryptionConfiguration
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.PublicTlsEncryptionConfiguration

@@ -4,7 +4,9 @@ package bedrockagentcorecontrol
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -33,6 +35,18 @@ type GetBrowserInput struct {
 	BrowserId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetBrowserInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetBrowserRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetBrowserInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BrowserId != nil {
+		s.WriteString(schemas.GetBrowserRequest_browserId, *v.BrowserId)
+	}
 }
 
 type GetBrowserOutput struct {
@@ -106,13 +120,117 @@ type GetBrowserOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetBrowserOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetBrowserResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetBrowserOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BrowserArn != nil {
+		s.WriteString(schemas.GetBrowserResponse_browserArn, *v.BrowserArn)
+	}
+	if v.BrowserId != nil {
+		s.WriteString(schemas.GetBrowserResponse_browserId, *v.BrowserId)
+	}
+	if v.BrowserSigning != nil {
+		s.WriteStruct(schemas.GetBrowserResponse_browserSigning)
+		v.BrowserSigning.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeCertificates(s, schemas.GetBrowserResponse_certificates, v.Certificates)
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.GetBrowserResponse_createdAt, *v.CreatedAt)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.GetBrowserResponse_description, *v.Description)
+	}
+	serializeBrowserEnterprisePolicies(s, schemas.GetBrowserResponse_enterprisePolicies, v.EnterprisePolicies)
+	if v.ExecutionRoleArn != nil {
+		s.WriteString(schemas.GetBrowserResponse_executionRoleArn, *v.ExecutionRoleArn)
+	}
+	if v.FailureReason != nil {
+		s.WriteString(schemas.GetBrowserResponse_failureReason, *v.FailureReason)
+	}
+	serializeToolsFileSystemConfigurations(s, schemas.GetBrowserResponse_filesystemConfigurations, v.FilesystemConfigurations)
+	if v.LastUpdatedAt != nil {
+		s.WriteTime(schemas.GetBrowserResponse_lastUpdatedAt, *v.LastUpdatedAt)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.GetBrowserResponse_name, *v.Name)
+	}
+	if v.NetworkConfiguration != nil {
+		s.WriteStruct(schemas.GetBrowserResponse_networkConfiguration)
+		v.NetworkConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Recording != nil {
+		s.WriteStruct(schemas.GetBrowserResponse_recording)
+		v.Recording.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.GetBrowserResponse_status, string(v.Status))
+	}
+}
+func (v *GetBrowserOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetBrowserResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetBrowserResponse_browserArn:
+			v.BrowserArn = new(string)
+			return d.ReadString(schemas.GetBrowserResponse_browserArn, v.BrowserArn)
+		case schemas.GetBrowserResponse_browserId:
+			v.BrowserId = new(string)
+			return d.ReadString(schemas.GetBrowserResponse_browserId, v.BrowserId)
+		case schemas.GetBrowserResponse_browserSigning:
+			v.BrowserSigning = &types.BrowserSigningConfigOutput{}
+			return v.BrowserSigning.Deserialize(d)
+		case schemas.GetBrowserResponse_certificates:
+			return deserializeCertificates(d, schemas.GetBrowserResponse_certificates, &v.Certificates)
+		case schemas.GetBrowserResponse_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.GetBrowserResponse_createdAt, v.CreatedAt)
+		case schemas.GetBrowserResponse_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.GetBrowserResponse_description, v.Description)
+		case schemas.GetBrowserResponse_enterprisePolicies:
+			return deserializeBrowserEnterprisePolicies(d, schemas.GetBrowserResponse_enterprisePolicies, &v.EnterprisePolicies)
+		case schemas.GetBrowserResponse_executionRoleArn:
+			v.ExecutionRoleArn = new(string)
+			return d.ReadString(schemas.GetBrowserResponse_executionRoleArn, v.ExecutionRoleArn)
+		case schemas.GetBrowserResponse_failureReason:
+			v.FailureReason = new(string)
+			return d.ReadString(schemas.GetBrowserResponse_failureReason, v.FailureReason)
+		case schemas.GetBrowserResponse_filesystemConfigurations:
+			return deserializeToolsFileSystemConfigurations(d, schemas.GetBrowserResponse_filesystemConfigurations, &v.FilesystemConfigurations)
+		case schemas.GetBrowserResponse_lastUpdatedAt:
+			v.LastUpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.GetBrowserResponse_lastUpdatedAt, v.LastUpdatedAt)
+		case schemas.GetBrowserResponse_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.GetBrowserResponse_name, v.Name)
+		case schemas.GetBrowserResponse_networkConfiguration:
+			v.NetworkConfiguration = &types.BrowserNetworkConfiguration{}
+			return v.NetworkConfiguration.Deserialize(d)
+		case schemas.GetBrowserResponse_recording:
+			v.Recording = &types.RecordingConfig{}
+			return v.Recording.Deserialize(d)
+		case schemas.GetBrowserResponse_status:
+			var ev string
+			if err := d.ReadString(schemas.GetBrowserResponse_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.BrowserStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetBrowserMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetBrowser{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetBrowser, schemas.GetBrowserRequest, schemas.GetBrowserResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetBrowser{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetBrowser, schemas.GetBrowserRequest, schemas.GetBrowserResponse), output: &GetBrowserOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

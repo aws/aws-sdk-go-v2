@@ -4,6 +4,8 @@ package directconnect
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/directconnect/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -33,6 +35,18 @@ type ConfirmCustomerAgreementInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ConfirmCustomerAgreementInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ConfirmCustomerAgreementRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ConfirmCustomerAgreementInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AgreementName != nil {
+		s.WriteString(schemas.ConfirmCustomerAgreementRequest_agreementName, *v.AgreementName)
+	}
+}
+
 type ConfirmCustomerAgreementOutput struct {
 
 	//  The status of the customer agreement when the connection was created. This
@@ -45,13 +59,32 @@ type ConfirmCustomerAgreementOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ConfirmCustomerAgreementOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ConfirmCustomerAgreementResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ConfirmCustomerAgreementOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Status != nil {
+		s.WriteString(schemas.ConfirmCustomerAgreementResponse_status, *v.Status)
+	}
+}
+func (v *ConfirmCustomerAgreementOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ConfirmCustomerAgreementResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ConfirmCustomerAgreementResponse_status:
+			v.Status = new(string)
+			return d.ReadString(schemas.ConfirmCustomerAgreementResponse_status, v.Status)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationConfirmCustomerAgreementMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpConfirmCustomerAgreement{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ConfirmCustomerAgreement, schemas.ConfirmCustomerAgreementRequest, schemas.ConfirmCustomerAgreementResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpConfirmCustomerAgreement{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ConfirmCustomerAgreement, schemas.ConfirmCustomerAgreementRequest, schemas.ConfirmCustomerAgreementResponse), output: &ConfirmCustomerAgreementOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

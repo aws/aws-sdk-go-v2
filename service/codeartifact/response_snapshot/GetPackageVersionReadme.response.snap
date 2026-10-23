@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"format":"npm","namespace":"__Namespace__","package":"__Package__","readme":"__Readme__","version":"__Version__","versionRevision":"__VersionRevision__"}

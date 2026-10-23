@@ -4,7 +4,9 @@ package iotmanagedintegrations
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/iotmanagedintegrations/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotmanagedintegrations/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -78,6 +80,57 @@ type UpdateManagedThingInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateManagedThingInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateManagedThingRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateManagedThingInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Brand != nil {
+		s.WriteString(schemas.UpdateManagedThingRequest_Brand, *v.Brand)
+	}
+	if v.Capabilities != nil {
+		s.WriteString(schemas.UpdateManagedThingRequest_Capabilities, *v.Capabilities)
+	}
+	if v.CapabilityReport != nil {
+		s.WriteStruct(schemas.UpdateManagedThingRequest_CapabilityReport)
+		v.CapabilityReport.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeCapabilitySchemas(s, schemas.UpdateManagedThingRequest_CapabilitySchemas, v.CapabilitySchemas)
+	if v.Classification != nil {
+		s.WriteString(schemas.UpdateManagedThingRequest_Classification, *v.Classification)
+	}
+	if v.CredentialLockerId != nil {
+		s.WriteString(schemas.UpdateManagedThingRequest_CredentialLockerId, *v.CredentialLockerId)
+	}
+	if v.HubNetworkMode != "" {
+		s.WriteString(schemas.UpdateManagedThingRequest_HubNetworkMode, string(v.HubNetworkMode))
+	}
+	if v.Identifier != nil {
+		s.WriteString(schemas.UpdateManagedThingRequest_Identifier, *v.Identifier)
+	}
+	serializeMetaData(s, schemas.UpdateManagedThingRequest_MetaData, v.MetaData)
+	if v.Model != nil {
+		s.WriteString(schemas.UpdateManagedThingRequest_Model, *v.Model)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateManagedThingRequest_Name, *v.Name)
+	}
+	if v.Owner != nil {
+		s.WriteString(schemas.UpdateManagedThingRequest_Owner, *v.Owner)
+	}
+	if v.SerialNumber != nil {
+		s.WriteString(schemas.UpdateManagedThingRequest_SerialNumber, *v.SerialNumber)
+	}
+	if v.WiFiSimpleSetupConfiguration != nil {
+		s.WriteStruct(schemas.UpdateManagedThingRequest_WiFiSimpleSetupConfiguration)
+		v.WiFiSimpleSetupConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type UpdateManagedThingOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -85,13 +138,26 @@ type UpdateManagedThingOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateManagedThingOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateManagedThingOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *UpdateManagedThingOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateManagedThingMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateManagedThing{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateManagedThing, schemas.UpdateManagedThingRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateManagedThing{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateManagedThing, schemas.UpdateManagedThingRequest, nil), output: &UpdateManagedThingOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package quicksight
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/quicksight/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/quicksight/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -51,6 +53,27 @@ type DescribeDashboardDefinitionInput struct {
 	VersionNumber *int64
 
 	noSmithyDocumentSerde
+}
+
+func (v *DescribeDashboardDefinitionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeDashboardDefinitionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeDashboardDefinitionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AliasName != nil {
+		s.WriteString(schemas.DescribeDashboardDefinitionRequest_AliasName, *v.AliasName)
+	}
+	if v.AwsAccountId != nil {
+		s.WriteString(schemas.DescribeDashboardDefinitionRequest_AwsAccountId, *v.AwsAccountId)
+	}
+	if v.DashboardId != nil {
+		s.WriteString(schemas.DescribeDashboardDefinitionRequest_DashboardId, *v.DashboardId)
+	}
+	if v.VersionNumber != nil {
+		s.WriteInt64(schemas.DescribeDashboardDefinitionRequest_VersionNumber, *v.VersionNumber)
+	}
 }
 
 type DescribeDashboardDefinitionOutput struct {
@@ -130,13 +153,84 @@ type DescribeDashboardDefinitionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeDashboardDefinitionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeDashboardDefinitionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeDashboardDefinitionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DashboardId != nil {
+		s.WriteString(schemas.DescribeDashboardDefinitionResponse_DashboardId, *v.DashboardId)
+	}
+	if v.DashboardPublishOptions != nil {
+		s.WriteStruct(schemas.DescribeDashboardDefinitionResponse_DashboardPublishOptions)
+		v.DashboardPublishOptions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Definition != nil {
+		s.WriteStruct(schemas.DescribeDashboardDefinitionResponse_Definition)
+		v.Definition.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeDashboardErrorList(s, schemas.DescribeDashboardDefinitionResponse_Errors, v.Errors)
+	if v.Name != nil {
+		s.WriteString(schemas.DescribeDashboardDefinitionResponse_Name, *v.Name)
+	}
+	if v.RequestId != nil {
+		s.WriteString(schemas.DescribeDashboardDefinitionResponse_RequestId, *v.RequestId)
+	}
+	if v.ResourceStatus != "" {
+		s.WriteString(schemas.DescribeDashboardDefinitionResponse_ResourceStatus, string(v.ResourceStatus))
+	}
+	if v.Status != 0 {
+		s.WriteInt32(schemas.DescribeDashboardDefinitionResponse_Status, v.Status)
+	}
+	if v.ThemeArn != nil {
+		s.WriteString(schemas.DescribeDashboardDefinitionResponse_ThemeArn, *v.ThemeArn)
+	}
+}
+func (v *DescribeDashboardDefinitionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeDashboardDefinitionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeDashboardDefinitionResponse_DashboardId:
+			v.DashboardId = new(string)
+			return d.ReadString(schemas.DescribeDashboardDefinitionResponse_DashboardId, v.DashboardId)
+		case schemas.DescribeDashboardDefinitionResponse_DashboardPublishOptions:
+			v.DashboardPublishOptions = &types.DashboardPublishOptions{}
+			return v.DashboardPublishOptions.Deserialize(d)
+		case schemas.DescribeDashboardDefinitionResponse_Definition:
+			v.Definition = &types.DashboardVersionDefinition{}
+			return v.Definition.Deserialize(d)
+		case schemas.DescribeDashboardDefinitionResponse_Errors:
+			return deserializeDashboardErrorList(d, schemas.DescribeDashboardDefinitionResponse_Errors, &v.Errors)
+		case schemas.DescribeDashboardDefinitionResponse_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.DescribeDashboardDefinitionResponse_Name, v.Name)
+		case schemas.DescribeDashboardDefinitionResponse_RequestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.DescribeDashboardDefinitionResponse_RequestId, v.RequestId)
+		case schemas.DescribeDashboardDefinitionResponse_ResourceStatus:
+			var ev string
+			if err := d.ReadString(schemas.DescribeDashboardDefinitionResponse_ResourceStatus, &ev); err != nil {
+				return err
+			}
+			v.ResourceStatus = types.ResourceStatus(ev)
+			return nil
+		case schemas.DescribeDashboardDefinitionResponse_Status:
+			return d.ReadInt32(schemas.DescribeDashboardDefinitionResponse_Status, &v.Status)
+		case schemas.DescribeDashboardDefinitionResponse_ThemeArn:
+			v.ThemeArn = new(string)
+			return d.ReadString(schemas.DescribeDashboardDefinitionResponse_ThemeArn, v.ThemeArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeDashboardDefinitionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeDashboardDefinition{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeDashboardDefinition, schemas.DescribeDashboardDefinitionRequest, schemas.DescribeDashboardDefinitionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeDashboardDefinition{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeDashboardDefinition, schemas.DescribeDashboardDefinitionRequest, schemas.DescribeDashboardDefinitionResponse), output: &DescribeDashboardDefinitionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

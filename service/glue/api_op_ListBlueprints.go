@@ -5,6 +5,8 @@ package glue
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/glue/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -38,6 +40,22 @@ type ListBlueprintsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListBlueprintsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListBlueprintsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListBlueprintsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListBlueprintsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListBlueprintsRequest_NextToken, *v.NextToken)
+	}
+	serializeTagsMap(s, schemas.ListBlueprintsRequest_Tags, v.Tags)
+}
+
 type ListBlueprintsOutput struct {
 
 	// List of names of blueprints in the account.
@@ -52,13 +70,35 @@ type ListBlueprintsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListBlueprintsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListBlueprintsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListBlueprintsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeBlueprintNames(s, schemas.ListBlueprintsResponse_Blueprints, v.Blueprints)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListBlueprintsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListBlueprintsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListBlueprintsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListBlueprintsResponse_Blueprints:
+			return deserializeBlueprintNames(d, schemas.ListBlueprintsResponse_Blueprints, &v.Blueprints)
+		case schemas.ListBlueprintsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListBlueprintsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListBlueprintsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListBlueprints{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListBlueprints, schemas.ListBlueprintsRequest, schemas.ListBlueprintsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListBlueprints{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListBlueprints, schemas.ListBlueprintsRequest, schemas.ListBlueprintsResponse), output: &ListBlueprintsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

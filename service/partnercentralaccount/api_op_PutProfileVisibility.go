@@ -4,7 +4,9 @@ package partnercentralaccount
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/partnercentralaccount/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/partnercentralaccount/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -45,6 +47,24 @@ type PutProfileVisibilityInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutProfileVisibilityInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutProfileVisibilityRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutProfileVisibilityInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Catalog != nil {
+		s.WriteString(schemas.PutProfileVisibilityRequest_Catalog, *v.Catalog)
+	}
+	if v.Identifier != nil {
+		s.WriteString(schemas.PutProfileVisibilityRequest_Identifier, *v.Identifier)
+	}
+	if v.Visibility != "" {
+		s.WriteString(schemas.PutProfileVisibilityRequest_Visibility, string(v.Visibility))
+	}
+}
+
 type PutProfileVisibilityOutput struct {
 
 	// The Amazon Resource Name (ARN) of the partner account.
@@ -78,13 +98,60 @@ type PutProfileVisibilityOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutProfileVisibilityOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutProfileVisibilityResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutProfileVisibilityOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.PutProfileVisibilityResponse_Arn, *v.Arn)
+	}
+	if v.Catalog != nil {
+		s.WriteString(schemas.PutProfileVisibilityResponse_Catalog, *v.Catalog)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.PutProfileVisibilityResponse_Id, *v.Id)
+	}
+	if v.ProfileId != nil {
+		s.WriteString(schemas.PutProfileVisibilityResponse_ProfileId, *v.ProfileId)
+	}
+	if v.Visibility != "" {
+		s.WriteString(schemas.PutProfileVisibilityResponse_Visibility, string(v.Visibility))
+	}
+}
+func (v *PutProfileVisibilityOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PutProfileVisibilityResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PutProfileVisibilityResponse_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.PutProfileVisibilityResponse_Arn, v.Arn)
+		case schemas.PutProfileVisibilityResponse_Catalog:
+			v.Catalog = new(string)
+			return d.ReadString(schemas.PutProfileVisibilityResponse_Catalog, v.Catalog)
+		case schemas.PutProfileVisibilityResponse_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.PutProfileVisibilityResponse_Id, v.Id)
+		case schemas.PutProfileVisibilityResponse_ProfileId:
+			v.ProfileId = new(string)
+			return d.ReadString(schemas.PutProfileVisibilityResponse_ProfileId, v.ProfileId)
+		case schemas.PutProfileVisibilityResponse_Visibility:
+			var ev string
+			if err := d.ReadString(schemas.PutProfileVisibilityResponse_Visibility, &ev); err != nil {
+				return err
+			}
+			v.Visibility = types.ProfileVisibility(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPutProfileVisibilityMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpPutProfileVisibility{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutProfileVisibility, schemas.PutProfileVisibilityRequest, schemas.PutProfileVisibilityResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpPutProfileVisibility{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutProfileVisibility, schemas.PutProfileVisibilityRequest, schemas.PutProfileVisibilityResponse), output: &PutProfileVisibilityOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

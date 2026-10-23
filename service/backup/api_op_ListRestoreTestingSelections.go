@@ -5,7 +5,9 @@ package backup
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/backup/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/backup/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -45,6 +47,24 @@ type ListRestoreTestingSelectionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListRestoreTestingSelectionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListRestoreTestingSelectionsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListRestoreTestingSelectionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListRestoreTestingSelectionsInput_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListRestoreTestingSelectionsInput_NextToken, *v.NextToken)
+	}
+	if v.RestoreTestingPlanName != nil {
+		s.WriteString(schemas.ListRestoreTestingSelectionsInput_RestoreTestingPlanName, *v.RestoreTestingPlanName)
+	}
+}
+
 type ListRestoreTestingSelectionsOutput struct {
 
 	// The returned restore testing selections associated with the restore testing
@@ -65,13 +85,35 @@ type ListRestoreTestingSelectionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListRestoreTestingSelectionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListRestoreTestingSelectionsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListRestoreTestingSelectionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListRestoreTestingSelectionsOutput_NextToken, *v.NextToken)
+	}
+	serializeRestoreTestingSelections(s, schemas.ListRestoreTestingSelectionsOutput_RestoreTestingSelections, v.RestoreTestingSelections)
+}
+func (v *ListRestoreTestingSelectionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListRestoreTestingSelectionsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListRestoreTestingSelectionsOutput_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListRestoreTestingSelectionsOutput_NextToken, v.NextToken)
+		case schemas.ListRestoreTestingSelectionsOutput_RestoreTestingSelections:
+			return deserializeRestoreTestingSelections(d, schemas.ListRestoreTestingSelectionsOutput_RestoreTestingSelections, &v.RestoreTestingSelections)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListRestoreTestingSelectionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListRestoreTestingSelections{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListRestoreTestingSelections, schemas.ListRestoreTestingSelectionsInput, schemas.ListRestoreTestingSelectionsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListRestoreTestingSelections{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListRestoreTestingSelections, schemas.ListRestoreTestingSelectionsInput, schemas.ListRestoreTestingSelectionsOutput), output: &ListRestoreTestingSelectionsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

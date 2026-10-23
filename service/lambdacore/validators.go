@@ -69,6 +69,26 @@ func (m *validateOpGetNetworkConnector) HandleInitialize(ctx context.Context, in
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpListNetworkConnectorVersions struct {
+}
+
+func (*validateOpListNetworkConnectorVersions) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListNetworkConnectorVersions) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListNetworkConnectorVersionsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListNetworkConnectorVersionsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateNetworkConnector struct {
 }
 
@@ -99,6 +119,10 @@ func addOpDeleteNetworkConnectorValidationMiddleware(stack *middleware.Stack) er
 
 func addOpGetNetworkConnectorValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetNetworkConnector{}, middleware.After)
+}
+
+func addOpListNetworkConnectorVersionsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListNetworkConnectorVersions{}, middleware.After)
 }
 
 func addOpUpdateNetworkConnectorValidationMiddleware(stack *middleware.Stack) error {
@@ -143,6 +167,21 @@ func validateOpGetNetworkConnectorInput(v *GetNetworkConnectorInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "GetNetworkConnectorInput"}
+	if v.Identifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Identifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListNetworkConnectorVersionsInput(v *ListNetworkConnectorVersionsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListNetworkConnectorVersionsInput"}
 	if v.Identifier == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Identifier"))
 	}

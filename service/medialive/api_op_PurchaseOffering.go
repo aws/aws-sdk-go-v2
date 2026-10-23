@@ -5,7 +5,9 @@ package medialive
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/medialive/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/medialive/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -59,6 +61,36 @@ type PurchaseOfferingInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PurchaseOfferingInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PurchaseOfferingRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PurchaseOfferingInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Count != nil {
+		s.WriteInt32(schemas.PurchaseOfferingRequest_Count, *v.Count)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.PurchaseOfferingRequest_Name, *v.Name)
+	}
+	if v.OfferingId != nil {
+		s.WriteString(schemas.PurchaseOfferingRequest_OfferingId, *v.OfferingId)
+	}
+	if v.RenewalSettings != nil {
+		s.WriteStruct(schemas.PurchaseOfferingRequest_RenewalSettings)
+		v.RenewalSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RequestId != nil {
+		s.WriteString(schemas.PurchaseOfferingRequest_RequestId, *v.RequestId)
+	}
+	if v.Start != nil {
+		s.WriteString(schemas.PurchaseOfferingRequest_Start, *v.Start)
+	}
+	serializeTags(s, schemas.PurchaseOfferingRequest_Tags, v.Tags)
+}
+
 // Placeholder documentation for PurchaseOfferingResponse
 type PurchaseOfferingOutput struct {
 
@@ -71,13 +103,34 @@ type PurchaseOfferingOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PurchaseOfferingOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PurchaseOfferingResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PurchaseOfferingOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Reservation != nil {
+		s.WriteStruct(schemas.PurchaseOfferingResponse_Reservation)
+		v.Reservation.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *PurchaseOfferingOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PurchaseOfferingResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PurchaseOfferingResponse_Reservation:
+			v.Reservation = &types.Reservation{}
+			return v.Reservation.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPurchaseOfferingMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpPurchaseOffering{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PurchaseOffering, schemas.PurchaseOfferingRequest, schemas.PurchaseOfferingResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpPurchaseOffering{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PurchaseOffering, schemas.PurchaseOfferingRequest, schemas.PurchaseOfferingResponse), output: &PurchaseOfferingOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

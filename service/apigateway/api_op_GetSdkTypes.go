@@ -4,7 +4,9 @@ package apigateway
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/apigateway/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/apigateway/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -37,6 +39,21 @@ type GetSdkTypesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetSdkTypesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetSdkTypesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetSdkTypesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Limit != nil {
+		s.WriteInt32(schemas.GetSdkTypesRequest_limit, *v.Limit)
+	}
+	if v.Position != nil {
+		s.WriteString(schemas.GetSdkTypesRequest_position, *v.Position)
+	}
+}
+
 // The collection of SdkType instances.
 type GetSdkTypesOutput struct {
 
@@ -49,13 +66,29 @@ type GetSdkTypesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetSdkTypesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SdkTypes)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetSdkTypesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeListOfSdkType(s, schemas.SdkTypes_items, v.Items)
+}
+func (v *GetSdkTypesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SdkTypes, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SdkTypes_items:
+			return deserializeListOfSdkType(d, schemas.SdkTypes_items, &v.Items)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetSdkTypesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetSdkTypes{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetSdkTypes, schemas.GetSdkTypesRequest, schemas.SdkTypes)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetSdkTypes{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetSdkTypes, schemas.GetSdkTypesRequest, schemas.SdkTypes), output: &GetSdkTypesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

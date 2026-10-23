@@ -4,6 +4,8 @@ package codecatalyst
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/codecatalyst/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -48,6 +50,21 @@ type CreateAccessTokenInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateAccessTokenInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateAccessTokenRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateAccessTokenInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ExpiresTime != nil {
+		s.WriteTime(schemas.CreateAccessTokenRequest_expiresTime, *v.ExpiresTime)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateAccessTokenRequest_name, *v.Name)
+	}
+}
+
 type CreateAccessTokenOutput struct {
 
 	// The system-generated unique ID of the access token.
@@ -80,13 +97,50 @@ type CreateAccessTokenOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateAccessTokenOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateAccessTokenResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateAccessTokenOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccessTokenId != nil {
+		s.WriteString(schemas.CreateAccessTokenResponse_accessTokenId, *v.AccessTokenId)
+	}
+	if v.ExpiresTime != nil {
+		s.WriteTime(schemas.CreateAccessTokenResponse_expiresTime, *v.ExpiresTime)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateAccessTokenResponse_name, *v.Name)
+	}
+	if v.Secret != nil {
+		s.WriteString(schemas.CreateAccessTokenResponse_secret, *v.Secret)
+	}
+}
+func (v *CreateAccessTokenOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateAccessTokenResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateAccessTokenResponse_accessTokenId:
+			v.AccessTokenId = new(string)
+			return d.ReadString(schemas.CreateAccessTokenResponse_accessTokenId, v.AccessTokenId)
+		case schemas.CreateAccessTokenResponse_expiresTime:
+			v.ExpiresTime = new(time.Time)
+			return d.ReadTime(schemas.CreateAccessTokenResponse_expiresTime, v.ExpiresTime)
+		case schemas.CreateAccessTokenResponse_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.CreateAccessTokenResponse_name, v.Name)
+		case schemas.CreateAccessTokenResponse_secret:
+			v.Secret = new(string)
+			return d.ReadString(schemas.CreateAccessTokenResponse_secret, v.Secret)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateAccessTokenMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateAccessToken{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateAccessToken, schemas.CreateAccessTokenRequest, schemas.CreateAccessTokenResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateAccessToken{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateAccessToken, schemas.CreateAccessTokenRequest, schemas.CreateAccessTokenResponse), output: &CreateAccessTokenOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

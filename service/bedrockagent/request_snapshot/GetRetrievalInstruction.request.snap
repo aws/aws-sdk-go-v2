@@ -1,0 +1,3 @@
+GET /retrievalinstructions/__RetrievalInstructionId__?retrievalInstructionVersion=__RetrievalInstructionVersion__
+
+

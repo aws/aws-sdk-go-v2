@@ -4,7 +4,9 @@ package glue
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/glue/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/glue/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,23 @@ type UpdateCatalogInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateCatalogInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateCatalogRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateCatalogInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CatalogId != nil {
+		s.WriteString(schemas.UpdateCatalogRequest_CatalogId, *v.CatalogId)
+	}
+	if v.CatalogInput != nil {
+		s.WriteStruct(schemas.UpdateCatalogRequest_CatalogInput)
+		v.CatalogInput.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type UpdateCatalogOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -46,13 +65,26 @@ type UpdateCatalogOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateCatalogOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateCatalogResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateCatalogOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *UpdateCatalogOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateCatalogResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateCatalogMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateCatalog{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateCatalog, schemas.UpdateCatalogRequest, schemas.UpdateCatalogResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateCatalog{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateCatalog, schemas.UpdateCatalogRequest, schemas.UpdateCatalogResponse), output: &UpdateCatalogOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

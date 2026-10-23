@@ -194,6 +194,18 @@ func TestCheckSnapshot_ListWorkspaceInstances(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_ModifyVolume(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ModifyVolume(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ModifyVolume")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_TagResource(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.TagResource(context.Background(), nil, func(o *Options) {
@@ -342,6 +354,18 @@ func TestUpdateSnapshot_ListWorkspaceInstances(t *testing.T) {
 	_, err := svc.ListWorkspaceInstances(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ListWorkspaceInstances")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ModifyVolume(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ModifyVolume(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ModifyVolume")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

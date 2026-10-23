@@ -4,7 +4,9 @@ package customerprofiles
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/customerprofiles/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/customerprofiles/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -59,6 +61,36 @@ type ListProfileHistoryRecordsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListProfileHistoryRecordsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListProfileHistoryRecordsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListProfileHistoryRecordsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ActionType != "" {
+		s.WriteString(schemas.ListProfileHistoryRecordsRequest_ActionType, string(v.ActionType))
+	}
+	if v.DomainName != nil {
+		s.WriteString(schemas.ListProfileHistoryRecordsRequest_DomainName, *v.DomainName)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListProfileHistoryRecordsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListProfileHistoryRecordsRequest_NextToken, *v.NextToken)
+	}
+	if v.ObjectTypeName != nil {
+		s.WriteString(schemas.ListProfileHistoryRecordsRequest_ObjectTypeName, *v.ObjectTypeName)
+	}
+	if v.PerformedBy != nil {
+		s.WriteString(schemas.ListProfileHistoryRecordsRequest_PerformedBy, *v.PerformedBy)
+	}
+	if v.ProfileId != nil {
+		s.WriteString(schemas.ListProfileHistoryRecordsRequest_ProfileId, *v.ProfileId)
+	}
+}
+
 type ListProfileHistoryRecordsOutput struct {
 
 	// If there are additional results, this is the token for the next set of results.
@@ -73,13 +105,35 @@ type ListProfileHistoryRecordsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListProfileHistoryRecordsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListProfileHistoryRecordsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListProfileHistoryRecordsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListProfileHistoryRecordsResponse_NextToken, *v.NextToken)
+	}
+	serializeProfileHistoryRecords(s, schemas.ListProfileHistoryRecordsResponse_ProfileHistoryRecords, v.ProfileHistoryRecords)
+}
+func (v *ListProfileHistoryRecordsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListProfileHistoryRecordsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListProfileHistoryRecordsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListProfileHistoryRecordsResponse_NextToken, v.NextToken)
+		case schemas.ListProfileHistoryRecordsResponse_ProfileHistoryRecords:
+			return deserializeProfileHistoryRecords(d, schemas.ListProfileHistoryRecordsResponse_ProfileHistoryRecords, &v.ProfileHistoryRecords)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListProfileHistoryRecordsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListProfileHistoryRecords{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListProfileHistoryRecords, schemas.ListProfileHistoryRecordsRequest, schemas.ListProfileHistoryRecordsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListProfileHistoryRecords{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListProfileHistoryRecords, schemas.ListProfileHistoryRecordsRequest, schemas.ListProfileHistoryRecordsResponse), output: &ListProfileHistoryRecordsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

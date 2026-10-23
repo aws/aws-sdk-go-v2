@@ -4,7 +4,9 @@ package glue
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/glue/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/glue/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -42,6 +44,22 @@ type GetStatementInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetStatementInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetStatementRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetStatementInput) SerializeMembers(s smithy.ShapeSerializer) {
+	s.WriteInt32(schemas.GetStatementRequest_Id, v.Id)
+	if v.RequestOrigin != nil {
+		s.WriteString(schemas.GetStatementRequest_RequestOrigin, *v.RequestOrigin)
+	}
+	if v.SessionId != nil {
+		s.WriteString(schemas.GetStatementRequest_SessionId, *v.SessionId)
+	}
+}
+
 type GetStatementOutput struct {
 
 	// Returns the statement.
@@ -53,13 +71,34 @@ type GetStatementOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetStatementOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetStatementResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetStatementOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Statement != nil {
+		s.WriteStruct(schemas.GetStatementResponse_Statement)
+		v.Statement.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetStatementOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetStatementResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetStatementResponse_Statement:
+			v.Statement = &types.Statement{}
+			return v.Statement.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetStatementMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetStatement{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetStatement, schemas.GetStatementRequest, schemas.GetStatementResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetStatement{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetStatement, schemas.GetStatementRequest, schemas.GetStatementResponse), output: &GetStatementOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

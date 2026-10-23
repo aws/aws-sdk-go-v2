@@ -5,7 +5,9 @@ package securityhub
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/securityhub/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/securityhub/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -97,6 +99,32 @@ type GetFindingHistoryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetFindingHistoryInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetFindingHistoryRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetFindingHistoryInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EndTime != nil {
+		s.WriteTime(schemas.GetFindingHistoryRequest_EndTime, *v.EndTime)
+	}
+	if v.FindingIdentifier != nil {
+		s.WriteStruct(schemas.GetFindingHistoryRequest_FindingIdentifier)
+		v.FindingIdentifier.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.GetFindingHistoryRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetFindingHistoryRequest_NextToken, *v.NextToken)
+	}
+	if v.StartTime != nil {
+		s.WriteTime(schemas.GetFindingHistoryRequest_StartTime, *v.StartTime)
+	}
+}
+
 type GetFindingHistoryOutput struct {
 
 	//  A token for pagination purposes. Provide this token in the subsequent request
@@ -114,13 +142,35 @@ type GetFindingHistoryOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetFindingHistoryOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetFindingHistoryResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetFindingHistoryOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetFindingHistoryResponse_NextToken, *v.NextToken)
+	}
+	serializeFindingHistoryRecordList(s, schemas.GetFindingHistoryResponse_Records, v.Records)
+}
+func (v *GetFindingHistoryOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetFindingHistoryResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetFindingHistoryResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.GetFindingHistoryResponse_NextToken, v.NextToken)
+		case schemas.GetFindingHistoryResponse_Records:
+			return deserializeFindingHistoryRecordList(d, schemas.GetFindingHistoryResponse_Records, &v.Records)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetFindingHistoryMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetFindingHistory{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetFindingHistory, schemas.GetFindingHistoryRequest, schemas.GetFindingHistoryResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetFindingHistory{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetFindingHistory, schemas.GetFindingHistoryRequest, schemas.GetFindingHistoryResponse), output: &GetFindingHistoryOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

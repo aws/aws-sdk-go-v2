@@ -690,19 +690,19 @@ var _DirectoryId = smithy.NewSchema(smithy.ShapeID{
 var DirectoryInUseException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.workmail",
 	Name:      "DirectoryInUseException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var DirectoryInUseException_Message *smithy.Schema
 
 var DirectoryServiceAuthenticationFailedException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.workmail",
 	Name:      "DirectoryServiceAuthenticationFailedException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var DirectoryServiceAuthenticationFailedException_Message *smithy.Schema
 
 var DirectoryUnavailableException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.workmail",
 	Name:      "DirectoryUnavailableException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var DirectoryUnavailableException_Message *smithy.Schema
 
 var DnsRecord = smithy.NewSchema(smithy.ShapeID{
@@ -758,13 +758,13 @@ var _EmailAddress = smithy.NewSchema(smithy.ShapeID{
 var EmailAddressInUseException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.workmail",
 	Name:      "EmailAddressInUseException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var EmailAddressInUseException_Message *smithy.Schema
 
 var EntityAlreadyRegisteredException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.workmail",
 	Name:      "EntityAlreadyRegisteredException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var EntityAlreadyRegisteredException_Message *smithy.Schema
 
 var _EntityIdentifier = smithy.NewSchema(smithy.ShapeID{
@@ -775,7 +775,7 @@ var _EntityIdentifier = smithy.NewSchema(smithy.ShapeID{
 var EntityNotFoundException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.workmail",
 	Name:      "EntityNotFoundException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var EntityNotFoundException_Message *smithy.Schema
 
 var EntityState = smithy.NewSchema(smithy.ShapeID{
@@ -791,7 +791,7 @@ var EntityState_DELETED *smithy.Schema
 var EntityStateException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.workmail",
 	Name:      "EntityStateException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var EntityStateException_Message *smithy.Schema
 
 var EntityType = smithy.NewSchema(smithy.ShapeID{
@@ -1059,25 +1059,25 @@ var _InstanceArn = smithy.NewSchema(smithy.ShapeID{
 var InvalidConfigurationException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.workmail",
 	Name:      "InvalidConfigurationException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var InvalidConfigurationException_Message *smithy.Schema
 
 var InvalidCustomSesConfigurationException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.workmail",
 	Name:      "InvalidCustomSesConfigurationException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var InvalidCustomSesConfigurationException_Message *smithy.Schema
 
 var InvalidParameterException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.workmail",
 	Name:      "InvalidParameterException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var InvalidParameterException_Message *smithy.Schema
 
 var InvalidPasswordException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.workmail",
 	Name:      "InvalidPasswordException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var InvalidPasswordException_Message *smithy.Schema
 
 var _IpAddress = smithy.NewSchema(smithy.ShapeID{
@@ -1121,7 +1121,7 @@ var LambdaAvailabilityProvider_LambdaArn *smithy.Schema
 var LimitExceededException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.workmail",
 	Name:      "LimitExceededException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var LimitExceededException_Message *smithy.Schema
 
 var ListGroupsFilters = smithy.NewSchema(smithy.ShapeID{
@@ -1226,13 +1226,13 @@ var _MailboxSize = smithy.NewSchema(smithy.ShapeID{
 var MailDomainInUseException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.workmail",
 	Name:      "MailDomainInUseException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var MailDomainInUseException_Message *smithy.Schema
 
 var MailDomainNotFoundException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.workmail",
 	Name:      "MailDomainNotFoundException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var MailDomainNotFoundException_Message *smithy.Schema
 
 var _MailDomains = smithy.NewSchema(smithy.ShapeID{
@@ -1244,7 +1244,7 @@ var _MailDomains_member *smithy.Schema
 var MailDomainStateException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.workmail",
 	Name:      "MailDomainStateException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var MailDomainStateException_Message *smithy.Schema
 
 var MailDomainSummary = smithy.NewSchema(smithy.ShapeID{
@@ -1390,7 +1390,7 @@ var _MobileDeviceAccessRulesList_member *smithy.Schema
 var NameAvailabilityException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.workmail",
 	Name:      "NameAvailabilityException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var NameAvailabilityException_Message *smithy.Schema
 
 var _NewResourceDescription = smithy.NewSchema(smithy.ShapeID{
@@ -1416,13 +1416,13 @@ var _OrganizationName = smithy.NewSchema(smithy.ShapeID{
 var OrganizationNotFoundException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.workmail",
 	Name:      "OrganizationNotFoundException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var OrganizationNotFoundException_Message *smithy.Schema
 
 var OrganizationStateException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.workmail",
 	Name:      "OrganizationStateException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var OrganizationStateException_Message *smithy.Schema
 
 var _OrganizationSummaries = smithy.NewSchema(smithy.ShapeID{
@@ -1569,7 +1569,7 @@ var RedactedEwsAvailabilityProvider_EwsUsername *smithy.Schema
 var ReservedNameException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.workmail",
 	Name:      "ReservedNameException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var ReservedNameException_Message *smithy.Schema
 
 var Resource = smithy.NewSchema(smithy.ShapeID{
@@ -1616,7 +1616,8 @@ var _ResourceName = smithy.NewSchema(smithy.ShapeID{
 var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.workmail",
 	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 404})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 404})
 var ResourceNotFoundException_Message *smithy.Schema
 
 var _Resources = smithy.NewSchema(smithy.ShapeID{
@@ -1717,13 +1718,14 @@ var _Timestamp = smithy.NewSchema(smithy.ShapeID{
 var TooManyTagsException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.workmail",
 	Name:      "TooManyTagsException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var TooManyTagsException_Message *smithy.Schema
 
 var UnsupportedOperationException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.workmail",
 	Name:      "UnsupportedOperationException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var UnsupportedOperationException_Message *smithy.Schema
 
 var _Url = smithy.NewSchema(smithy.ShapeID{

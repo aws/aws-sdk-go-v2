@@ -4,7 +4,9 @@ package applicationinsights
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/applicationinsights/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/applicationinsights/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -37,6 +39,21 @@ type DescribeProblemObservationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeProblemObservationsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeProblemObservationsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeProblemObservationsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountId != nil {
+		s.WriteString(schemas.DescribeProblemObservationsRequest_AccountId, *v.AccountId)
+	}
+	if v.ProblemId != nil {
+		s.WriteString(schemas.DescribeProblemObservationsRequest_ProblemId, *v.ProblemId)
+	}
+}
+
 type DescribeProblemObservationsOutput struct {
 
 	// Observations related to the problem.
@@ -48,13 +65,34 @@ type DescribeProblemObservationsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeProblemObservationsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeProblemObservationsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeProblemObservationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RelatedObservations != nil {
+		s.WriteStruct(schemas.DescribeProblemObservationsResponse_RelatedObservations)
+		v.RelatedObservations.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DescribeProblemObservationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeProblemObservationsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeProblemObservationsResponse_RelatedObservations:
+			v.RelatedObservations = &types.RelatedObservations{}
+			return v.RelatedObservations.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeProblemObservationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpDescribeProblemObservations{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeProblemObservations, schemas.DescribeProblemObservationsRequest, schemas.DescribeProblemObservationsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpDescribeProblemObservations{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeProblemObservations, schemas.DescribeProblemObservationsRequest, schemas.DescribeProblemObservationsResponse), output: &DescribeProblemObservationsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

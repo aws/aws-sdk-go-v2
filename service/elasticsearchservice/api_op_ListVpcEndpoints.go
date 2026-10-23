@@ -4,7 +4,9 @@ package elasticsearchservice
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/elasticsearchservice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/elasticsearchservice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -34,6 +36,18 @@ type ListVpcEndpointsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListVpcEndpointsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListVpcEndpointsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListVpcEndpointsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListVpcEndpointsRequest_NextToken, *v.NextToken)
+	}
+}
+
 // Container for response parameters to the ListVpcEndpoints operation. Returns a list containing
 // summarized details of the VPC endpoints.
 type ListVpcEndpointsOutput struct {
@@ -54,13 +68,35 @@ type ListVpcEndpointsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListVpcEndpointsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListVpcEndpointsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListVpcEndpointsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListVpcEndpointsResponse_NextToken, *v.NextToken)
+	}
+	serializeVpcEndpointSummaryList(s, schemas.ListVpcEndpointsResponse_VpcEndpointSummaryList, v.VpcEndpointSummaryList)
+}
+func (v *ListVpcEndpointsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListVpcEndpointsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListVpcEndpointsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListVpcEndpointsResponse_NextToken, v.NextToken)
+		case schemas.ListVpcEndpointsResponse_VpcEndpointSummaryList:
+			return deserializeVpcEndpointSummaryList(d, schemas.ListVpcEndpointsResponse_VpcEndpointSummaryList, &v.VpcEndpointSummaryList)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListVpcEndpointsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListVpcEndpoints{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListVpcEndpoints, schemas.ListVpcEndpointsRequest, schemas.ListVpcEndpointsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListVpcEndpoints{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListVpcEndpoints, schemas.ListVpcEndpointsRequest, schemas.ListVpcEndpointsResponse), output: &ListVpcEndpointsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package rekognition
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/rekognition/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/rekognition/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -76,6 +78,21 @@ type DetectFacesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DetectFacesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DetectFacesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DetectFacesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAttributes(s, schemas.DetectFacesRequest_Attributes, v.Attributes)
+	if v.Image != nil {
+		s.WriteStruct(schemas.DetectFacesRequest_Image)
+		v.Image.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type DetectFacesOutput struct {
 
 	// Details of each face found in the image.
@@ -102,13 +119,39 @@ type DetectFacesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DetectFacesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DetectFacesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DetectFacesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeFaceDetailList(s, schemas.DetectFacesResponse_FaceDetails, v.FaceDetails)
+	if v.OrientationCorrection != "" {
+		s.WriteString(schemas.DetectFacesResponse_OrientationCorrection, string(v.OrientationCorrection))
+	}
+}
+func (v *DetectFacesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DetectFacesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DetectFacesResponse_FaceDetails:
+			return deserializeFaceDetailList(d, schemas.DetectFacesResponse_FaceDetails, &v.FaceDetails)
+		case schemas.DetectFacesResponse_OrientationCorrection:
+			var ev string
+			if err := d.ReadString(schemas.DetectFacesResponse_OrientationCorrection, &ev); err != nil {
+				return err
+			}
+			v.OrientationCorrection = types.OrientationCorrection(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDetectFacesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDetectFaces{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DetectFaces, schemas.DetectFacesRequest, schemas.DetectFacesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDetectFaces{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DetectFaces, schemas.DetectFacesRequest, schemas.DetectFacesResponse), output: &DetectFacesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

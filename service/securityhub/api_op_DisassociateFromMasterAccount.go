@@ -4,6 +4,8 @@ package securityhub
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/securityhub/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -45,6 +47,15 @@ type DisassociateFromMasterAccountInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DisassociateFromMasterAccountInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DisassociateFromMasterAccountRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DisassociateFromMasterAccountInput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+
 type DisassociateFromMasterAccountOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -52,13 +63,26 @@ type DisassociateFromMasterAccountOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DisassociateFromMasterAccountOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DisassociateFromMasterAccountResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DisassociateFromMasterAccountOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DisassociateFromMasterAccountOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DisassociateFromMasterAccountResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDisassociateFromMasterAccountMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDisassociateFromMasterAccount{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisassociateFromMasterAccount, schemas.DisassociateFromMasterAccountRequest, schemas.DisassociateFromMasterAccountResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDisassociateFromMasterAccount{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisassociateFromMasterAccount, schemas.DisassociateFromMasterAccountRequest, schemas.DisassociateFromMasterAccountResponse), output: &DisassociateFromMasterAccountOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

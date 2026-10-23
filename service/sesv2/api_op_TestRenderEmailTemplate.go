@@ -4,6 +4,8 @@ package sesv2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/sesv2/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -45,6 +47,21 @@ type TestRenderEmailTemplateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *TestRenderEmailTemplateInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TestRenderEmailTemplateRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TestRenderEmailTemplateInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TemplateData != nil {
+		s.WriteString(schemas.TestRenderEmailTemplateRequest_TemplateData, *v.TemplateData)
+	}
+	if v.TemplateName != nil {
+		s.WriteString(schemas.TestRenderEmailTemplateRequest_TemplateName, *v.TemplateName)
+	}
+}
+
 // The following element is returned by the service.
 type TestRenderEmailTemplateOutput struct {
 
@@ -60,13 +77,32 @@ type TestRenderEmailTemplateOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *TestRenderEmailTemplateOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TestRenderEmailTemplateResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TestRenderEmailTemplateOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RenderedTemplate != nil {
+		s.WriteString(schemas.TestRenderEmailTemplateResponse_RenderedTemplate, *v.RenderedTemplate)
+	}
+}
+func (v *TestRenderEmailTemplateOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TestRenderEmailTemplateResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TestRenderEmailTemplateResponse_RenderedTemplate:
+			v.RenderedTemplate = new(string)
+			return d.ReadString(schemas.TestRenderEmailTemplateResponse_RenderedTemplate, v.RenderedTemplate)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationTestRenderEmailTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpTestRenderEmailTemplate{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.TestRenderEmailTemplate, schemas.TestRenderEmailTemplateRequest, schemas.TestRenderEmailTemplateResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpTestRenderEmailTemplate{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.TestRenderEmailTemplate, schemas.TestRenderEmailTemplateRequest, schemas.TestRenderEmailTemplateResponse), output: &TestRenderEmailTemplateOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

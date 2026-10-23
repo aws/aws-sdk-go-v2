@@ -3,6 +3,8 @@
 package types
 
 import (
+	"github.com/aws/aws-sdk-go-v2/service/elementalinference/schemas"
+	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
@@ -22,6 +24,34 @@ type AspectRatio struct {
 	Width *int32
 
 	noSmithyDocumentSerde
+}
+
+func (v *AspectRatio) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AspectRatio)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AspectRatio) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Height != nil {
+		s.WriteInt32(schemas.AspectRatio_height, *v.Height)
+	}
+	if v.Width != nil {
+		s.WriteInt32(schemas.AspectRatio_width, *v.Width)
+	}
+}
+func (v *AspectRatio) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AspectRatio, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AspectRatio_height:
+			v.Height = new(int32)
+			return d.ReadInt32(schemas.AspectRatio_height, v.Height)
+		case schemas.AspectRatio_width:
+			v.Width = new(int32)
+			return d.ReadInt32(schemas.AspectRatio_width, v.Width)
+		}
+		return nil
+	})
 }
 
 // A type of OutputConfig, used when the output in a feed is for the clip feature.
@@ -44,6 +74,36 @@ type ClippingConfig struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ClippingConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ClippingConfig)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ClippingConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CallbackMetadata != nil {
+		s.WriteString(schemas.ClippingConfig_callbackMetadata, *v.CallbackMetadata)
+	}
+	if v.DataSourceConfiguration != nil {
+		s.WriteStruct(schemas.ClippingConfig_dataSourceConfiguration)
+		v.DataSourceConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *ClippingConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ClippingConfig, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ClippingConfig_callbackMetadata:
+			v.CallbackMetadata = new(string)
+			return d.ReadString(schemas.ClippingConfig_callbackMetadata, v.CallbackMetadata)
+		case schemas.ClippingConfig_dataSourceConfiguration:
+			v.DataSourceConfiguration = &DataSourceConfiguration{}
+			return v.DataSourceConfiguration.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Contains information about one competitor in a fixture. It is used in the
 // FixtureSummary that is in the SearchFixtures response.
 type Competitor struct {
@@ -58,23 +118,104 @@ type Competitor struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Competitor) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Competitor)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Competitor) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IsHome != nil {
+		s.WriteBool(schemas.Competitor_isHome, *v.IsHome)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.Competitor_name, *v.Name)
+	}
+}
+func (v *Competitor) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Competitor, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Competitor_isHome:
+			v.IsHome = new(bool)
+			return d.ReadBool(schemas.Competitor_isHome, v.IsHome)
+		case schemas.Competitor_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.Competitor_name, v.Name)
+		}
+		return nil
+	})
+}
+
 // The output configuration settings for the contextual metadata feature. Use this
 // structure when the feed output generates metadata that describes the media
 // content.
 type ContextualMetadataConfig struct {
 
-	// Specifies whether Elemental Inference generates a descriptive summary of the
-	// media content for this output.
+	// Specifies whether Elemental Inference generates extended analysis of the media
+	// content for this output. Extended analysis identifies the people, environments,
+	// brands, and on-screen text in the media content. This setting is independent of
+	// summaryGeneration .
 	//
 	// Valid values:
 	//
-	//   - ENABLED (default) – Elemental Inference generates a descriptive summary
-	//   along with IAB taxonomy and GARM suitability classifications.
+	//   - ENABLED (default) – Elemental Inference populates the people, environments,
+	//   brands, and on-screen text fields.
 	//
-	//   - DISABLED – No descriptive summary is generated.
+	//   - DISABLED – Elemental Inference doesn't populate the people, environments,
+	//   brands, and on-screen text fields.
+	ExtendedAnalysis ExtendedAnalysisMode
+
+	// Specifies whether Elemental Inference generates a descriptive summary of the
+	// media content for this output, along with the objects and actions that it
+	// detects. This setting is independent of extendedAnalysis .
+	//
+	// Valid values:
+	//
+	//   - ENABLED (default) – Elemental Inference populates the summary, objects, and
+	//   actions fields, along with the IAB taxonomy and GARM suitability
+	//   classifications.
+	//
+	//   - DISABLED – Elemental Inference doesn't populate the summary, objects, and
+	//   actions fields.
 	SummaryGeneration SummaryGenerationMode
 
 	noSmithyDocumentSerde
+}
+
+func (v *ContextualMetadataConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ContextualMetadataConfig)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ContextualMetadataConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ExtendedAnalysis != "" {
+		s.WriteString(schemas.ContextualMetadataConfig_extendedAnalysis, string(v.ExtendedAnalysis))
+	}
+	if v.SummaryGeneration != "" {
+		s.WriteString(schemas.ContextualMetadataConfig_summaryGeneration, string(v.SummaryGeneration))
+	}
+}
+func (v *ContextualMetadataConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ContextualMetadataConfig, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ContextualMetadataConfig_extendedAnalysis:
+			var ev string
+			if err := d.ReadString(schemas.ContextualMetadataConfig_extendedAnalysis, &ev); err != nil {
+				return err
+			}
+			v.ExtendedAnalysis = ExtendedAnalysisMode(ev)
+			return nil
+		case schemas.ContextualMetadataConfig_summaryGeneration:
+			var ev string
+			if err := d.ReadString(schemas.ContextualMetadataConfig_summaryGeneration, &ev); err != nil {
+				return err
+			}
+			v.SummaryGeneration = SummaryGenerationMode(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // Contains configuration information about one output in a feed. It is used in
@@ -105,6 +246,47 @@ type CreateOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.CreateOutput_description, *v.Description)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateOutput_name, *v.Name)
+	}
+	serializeOutputConfig(s, schemas.CreateOutput_outputConfig, v.OutputConfig)
+	if v.Status != "" {
+		s.WriteString(schemas.CreateOutput_status, string(v.Status))
+	}
+}
+func (v *CreateOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateOutput_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.CreateOutput_description, v.Description)
+		case schemas.CreateOutput_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.CreateOutput_name, v.Name)
+		case schemas.CreateOutput_outputConfig:
+			return deserializeOutputConfig(d, schemas.CreateOutput_outputConfig, &v.OutputConfig)
+		case schemas.CreateOutput_status:
+			var ev string
+			if err := d.ReadString(schemas.CreateOutput_status, &ev); err != nil {
+				return err
+			}
+			v.Status = OutputStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // A type of OutputConfig, used when the output in a feed is for the crop feature.
 type CroppingConfig struct {
 
@@ -114,6 +296,25 @@ type CroppingConfig struct {
 	TemplateGroups []TemplateGroup
 
 	noSmithyDocumentSerde
+}
+
+func (v *CroppingConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CroppingConfig)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CroppingConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeTemplateGroupList(s, schemas.CroppingConfig_templateGroups, v.TemplateGroups)
+}
+func (v *CroppingConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CroppingConfig, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CroppingConfig_templateGroups:
+			return deserializeTemplateGroupList(d, schemas.CroppingConfig_templateGroups, &v.TemplateGroups)
+		}
+		return nil
+	})
 }
 
 // Contains the data source configuration for a clipping output. It identifies the
@@ -132,6 +333,28 @@ type DataSourceConfiguration struct {
 	FixtureId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DataSourceConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DataSourceConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DataSourceConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FixtureId != nil {
+		s.WriteString(schemas.DataSourceConfiguration_fixtureId, *v.FixtureId)
+	}
+}
+func (v *DataSourceConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DataSourceConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DataSourceConfiguration_fixtureId:
+			v.FixtureId = new(string)
+			return d.ReadString(schemas.DataSourceConfiguration_fixtureId, v.FixtureId)
+		}
+		return nil
+	})
 }
 
 // Contains summary information about a dictionary. Used in the ListDictionaries
@@ -166,6 +389,60 @@ type DictionarySummary struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DictionarySummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DictionarySummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DictionarySummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.DictionarySummary_arn, *v.Arn)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.DictionarySummary_id, *v.Id)
+	}
+	if v.Language != "" {
+		s.WriteString(schemas.DictionarySummary_language, string(v.Language))
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.DictionarySummary_name, *v.Name)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.DictionarySummary_status, string(v.Status))
+	}
+}
+func (v *DictionarySummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DictionarySummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DictionarySummary_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.DictionarySummary_arn, v.Arn)
+		case schemas.DictionarySummary_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.DictionarySummary_id, v.Id)
+		case schemas.DictionarySummary_language:
+			var ev string
+			if err := d.ReadString(schemas.DictionarySummary_language, &ev); err != nil {
+				return err
+			}
+			v.Language = DictionaryLanguage(ev)
+			return nil
+		case schemas.DictionarySummary_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.DictionarySummary_name, v.Name)
+		case schemas.DictionarySummary_status:
+			var ev string
+			if err := d.ReadString(schemas.DictionarySummary_status, &ev); err != nil {
+				return err
+			}
+			v.Status = DictionaryStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Contains information about the resource that is associated with a feed. It is
 // used in the FeedSummary that is used in the response of a ListFeeds action.
 type FeedAssociation struct {
@@ -176,6 +453,28 @@ type FeedAssociation struct {
 	AssociatedResourceName *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *FeedAssociation) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.FeedAssociation)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *FeedAssociation) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AssociatedResourceName != nil {
+		s.WriteString(schemas.FeedAssociation_associatedResourceName, *v.AssociatedResourceName)
+	}
+}
+func (v *FeedAssociation) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.FeedAssociation, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.FeedAssociation_associatedResourceName:
+			v.AssociatedResourceName = new(string)
+			return d.ReadString(schemas.FeedAssociation_associatedResourceName, v.AssociatedResourceName)
+		}
+		return nil
+	})
 }
 
 // Contains configuration information about a feed. It is used in the ListFeeds
@@ -206,6 +505,97 @@ type FeedSummary struct {
 	Association *FeedAssociation
 
 	noSmithyDocumentSerde
+}
+
+func (v *FeedSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.FeedSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *FeedSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.FeedSummary_arn, *v.Arn)
+	}
+	if v.Association != nil {
+		s.WriteStruct(schemas.FeedSummary_association)
+		v.Association.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.FeedSummary_id, *v.Id)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.FeedSummary_name, *v.Name)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.FeedSummary_status, string(v.Status))
+	}
+}
+func (v *FeedSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.FeedSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.FeedSummary_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.FeedSummary_arn, v.Arn)
+		case schemas.FeedSummary_association:
+			v.Association = &FeedAssociation{}
+			return v.Association.Deserialize(d)
+		case schemas.FeedSummary_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.FeedSummary_id, v.Id)
+		case schemas.FeedSummary_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.FeedSummary_name, v.Name)
+		case schemas.FeedSummary_status:
+			var ev string
+			if err := d.ReadString(schemas.FeedSummary_status, &ev); err != nil {
+				return err
+			}
+			v.Status = FeedStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
+// Sets the time at which a schedule action runs once. This is a type of
+// ScheduleActionStartConfiguration.
+type FixedModeScheduleActionStartSettings struct {
+
+	// The UTC time at which the action runs. Specify the time in whole seconds. For
+	// the range of times that you can specify, see the AWS Elemental Inference User
+	// Guide.
+	//
+	// This time is approximate. The change can take a few minutes to take effect on
+	// the media that the feed is processing.
+	//
+	// This member is required.
+	ScheduledAt *time.Time
+
+	noSmithyDocumentSerde
+}
+
+func (v *FixedModeScheduleActionStartSettings) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.FixedModeScheduleActionStartSettings)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *FixedModeScheduleActionStartSettings) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ScheduledAt != nil {
+		s.WriteTime(schemas.FixedModeScheduleActionStartSettings_scheduledAt, *v.ScheduledAt)
+	}
+}
+func (v *FixedModeScheduleActionStartSettings) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.FixedModeScheduleActionStartSettings, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.FixedModeScheduleActionStartSettings_scheduledAt:
+			v.ScheduledAt = new(time.Time)
+			return d.ReadTime(schemas.FixedModeScheduleActionStartSettings_scheduledAt, v.ScheduledAt)
+		}
+		return nil
+	})
 }
 
 // Contains information about one fixture. It is used in the SearchFixtures
@@ -250,6 +640,55 @@ type FixtureSummary struct {
 	noSmithyDocumentSerde
 }
 
+func (v *FixtureSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.FixtureSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *FixtureSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeCompetitorList(s, schemas.FixtureSummary_competitors, v.Competitors)
+	if v.FixtureGroup != nil {
+		s.WriteString(schemas.FixtureSummary_fixtureGroup, *v.FixtureGroup)
+	}
+	if v.FixtureId != nil {
+		s.WriteString(schemas.FixtureSummary_fixtureId, *v.FixtureId)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.FixtureSummary_name, *v.Name)
+	}
+	if v.ScheduledStart != nil {
+		s.WriteTime(schemas.FixtureSummary_scheduledStart, *v.ScheduledStart)
+	}
+	if v.Status != nil {
+		s.WriteString(schemas.FixtureSummary_status, *v.Status)
+	}
+}
+func (v *FixtureSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.FixtureSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.FixtureSummary_competitors:
+			return deserializeCompetitorList(d, schemas.FixtureSummary_competitors, &v.Competitors)
+		case schemas.FixtureSummary_fixtureGroup:
+			v.FixtureGroup = new(string)
+			return d.ReadString(schemas.FixtureSummary_fixtureGroup, v.FixtureGroup)
+		case schemas.FixtureSummary_fixtureId:
+			v.FixtureId = new(string)
+			return d.ReadString(schemas.FixtureSummary_fixtureId, v.FixtureId)
+		case schemas.FixtureSummary_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.FixtureSummary_name, v.Name)
+		case schemas.FixtureSummary_scheduledStart:
+			v.ScheduledStart = new(time.Time)
+			return d.ReadTime(schemas.FixtureSummary_scheduledStart, v.ScheduledStart)
+		case schemas.FixtureSummary_status:
+			v.Status = new(string)
+			return d.ReadString(schemas.FixtureSummary_status, v.Status)
+		}
+		return nil
+	})
+}
+
 // Contains configuration information about one output in a feed. It is used in
 // the GetFeed response.
 type GetOutput struct {
@@ -285,6 +724,53 @@ type GetOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.GetOutput_description, *v.Description)
+	}
+	if v.FromAssociation != nil {
+		s.WriteBool(schemas.GetOutput_fromAssociation, *v.FromAssociation)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.GetOutput_name, *v.Name)
+	}
+	serializeOutputConfig(s, schemas.GetOutput_outputConfig, v.OutputConfig)
+	if v.Status != "" {
+		s.WriteString(schemas.GetOutput_status, string(v.Status))
+	}
+}
+func (v *GetOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetOutput_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.GetOutput_description, v.Description)
+		case schemas.GetOutput_fromAssociation:
+			v.FromAssociation = new(bool)
+			return d.ReadBool(schemas.GetOutput_fromAssociation, v.FromAssociation)
+		case schemas.GetOutput_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.GetOutput_name, v.Name)
+		case schemas.GetOutput_outputConfig:
+			return deserializeOutputConfig(d, schemas.GetOutput_outputConfig, &v.OutputConfig)
+		case schemas.GetOutput_status:
+			var ev string
+			if err := d.ReadString(schemas.GetOutput_status, &ev); err != nil {
+				return err
+			}
+			v.Status = OutputStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Contains one typed output. It is used in the CreateOutput, GetOutput, and
 // Update Output structures.
 //
@@ -306,6 +792,14 @@ type OutputConfigMemberClipping struct {
 }
 
 func (*OutputConfigMemberClipping) isOutputConfig() {}
+func (v *OutputConfigMemberClipping) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.OutputConfig_clipping)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *OutputConfigMemberClipping) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // The output config type that applies to the contextual metadata feature.
 type OutputConfigMemberContextualMetadata struct {
@@ -315,6 +809,14 @@ type OutputConfigMemberContextualMetadata struct {
 }
 
 func (*OutputConfigMemberContextualMetadata) isOutputConfig() {}
+func (v *OutputConfigMemberContextualMetadata) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.OutputConfig_contextualMetadata)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *OutputConfigMemberContextualMetadata) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // The output config type that applies to the cropping feature.
 type OutputConfigMemberCropping struct {
@@ -324,6 +826,14 @@ type OutputConfigMemberCropping struct {
 }
 
 func (*OutputConfigMemberCropping) isOutputConfig() {}
+func (v *OutputConfigMemberCropping) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.OutputConfig_cropping)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *OutputConfigMemberCropping) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // The output config type that applies to the smart subtitling feature.
 type OutputConfigMemberSubtitling struct {
@@ -333,6 +843,280 @@ type OutputConfigMemberSubtitling struct {
 }
 
 func (*OutputConfigMemberSubtitling) isOutputConfig() {}
+func (v *OutputConfigMemberSubtitling) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.OutputConfig_subtitling)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *OutputConfigMemberSubtitling) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
+
+// Removes the game from an event clipping output at the action's scheduled time.
+// This is a type of ScheduleActionOperation, and the output must be an event
+// clipping output.
+type RemoveClippingDataSourceConfiguration struct {
+
+	// The name of the output that you want to remove the game from.
+	//
+	// This member is required.
+	OutputName *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *RemoveClippingDataSourceConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RemoveClippingDataSourceConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RemoveClippingDataSourceConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.OutputName != nil {
+		s.WriteString(schemas.RemoveClippingDataSourceConfiguration_outputName, *v.OutputName)
+	}
+}
+func (v *RemoveClippingDataSourceConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RemoveClippingDataSourceConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RemoveClippingDataSourceConfiguration_outputName:
+			v.OutputName = new(string)
+			return d.ReadString(schemas.RemoveClippingDataSourceConfiguration_outputName, v.OutputName)
+		}
+		return nil
+	})
+}
+
+// Describes one schedule action on a feed, including the changes it makes and
+// whether it has run yet. Elemental Inference returns this structure in the
+// ListScheduleActions operation.
+type ScheduleAction struct {
+
+	// The name of the schedule action. The name is unique within the feed.
+	//
+	// This member is required.
+	ActionName *string
+
+	// The configuration changes that the action makes to the feed.
+	//
+	// This member is required.
+	Operations []ScheduleActionOperation
+
+	// Specifies when the action runs.
+	//
+	// This member is required.
+	StartConfiguration ScheduleActionStartConfiguration
+
+	// The status of the action. Valid values are the following:
+	//
+	// PENDING The action is waiting for its scheduled time.
+	//
+	// COMPLETED Elemental Inference applied all the action's operations to the feed.
+	//
+	// FAILED Elemental Inference couldn't apply the action.
+	//
+	// This member is required.
+	Status ScheduleActionStatus
+
+	// A description of why the action failed. Elemental Inference returns this
+	// property only when the status is FAILED.
+	Error *ScheduleActionError
+
+	noSmithyDocumentSerde
+}
+
+func (v *ScheduleAction) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ScheduleAction)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ScheduleAction) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ActionName != nil {
+		s.WriteString(schemas.ScheduleAction_actionName, *v.ActionName)
+	}
+	if v.Error != nil {
+		s.WriteStruct(schemas.ScheduleAction_error)
+		v.Error.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeScheduleActionOperations(s, schemas.ScheduleAction_operations, v.Operations)
+	serializeScheduleActionStartConfiguration(s, schemas.ScheduleAction_startConfiguration, v.StartConfiguration)
+	if v.Status != "" {
+		s.WriteString(schemas.ScheduleAction_status, string(v.Status))
+	}
+}
+func (v *ScheduleAction) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ScheduleAction, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ScheduleAction_actionName:
+			v.ActionName = new(string)
+			return d.ReadString(schemas.ScheduleAction_actionName, v.ActionName)
+		case schemas.ScheduleAction_error:
+			v.Error = &ScheduleActionError{}
+			return v.Error.Deserialize(d)
+		case schemas.ScheduleAction_operations:
+			return deserializeScheduleActionOperations(d, schemas.ScheduleAction_operations, &v.Operations)
+		case schemas.ScheduleAction_startConfiguration:
+			return deserializeScheduleActionStartConfiguration(d, schemas.ScheduleAction_startConfiguration, &v.StartConfiguration)
+		case schemas.ScheduleAction_status:
+			var ev string
+			if err := d.ReadString(schemas.ScheduleAction_status, &ev); err != nil {
+				return err
+			}
+			v.Status = ScheduleActionStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
+// Describes the cause of a schedule action failure, including the failure type
+// and a description of what went wrong.
+type ScheduleActionError struct {
+
+	// The type of failure. Valid values are the following:
+	//
+	// INVALID_ACTION_TARGET The action referred to something that didn't exist or
+	// wasn't valid at the scheduled time, for example an output that you deleted.
+	//
+	// INTERNAL_ERROR An unexpected error prevented the action from completing.
+	//
+	// This member is required.
+	ErrorCode ScheduleActionErrorCode
+
+	// A description of the failure.
+	//
+	// This member is required.
+	ErrorMessage *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *ScheduleActionError) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ScheduleActionError)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ScheduleActionError) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ErrorCode != "" {
+		s.WriteString(schemas.ScheduleActionError_errorCode, string(v.ErrorCode))
+	}
+	if v.ErrorMessage != nil {
+		s.WriteString(schemas.ScheduleActionError_errorMessage, *v.ErrorMessage)
+	}
+}
+func (v *ScheduleActionError) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ScheduleActionError, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ScheduleActionError_errorCode:
+			var ev string
+			if err := d.ReadString(schemas.ScheduleActionError_errorCode, &ev); err != nil {
+				return err
+			}
+			v.ErrorCode = ScheduleActionErrorCode(ev)
+			return nil
+		case schemas.ScheduleActionError_errorMessage:
+			v.ErrorMessage = new(string)
+			return d.ReadString(schemas.ScheduleActionError_errorMessage, v.ErrorMessage)
+		}
+		return nil
+	})
+}
+
+// Holds one typed configuration change that a schedule action makes to a feed.
+// Each operation must contain exactly one property.
+//
+// The following types satisfy this interface:
+//
+//	ScheduleActionOperationMemberRemoveClippingDataSourceConfiguration
+//	ScheduleActionOperationMemberUpdateClippingDataSourceConfiguration
+//	ScheduleActionOperationMemberUpdateOutputStatus
+type ScheduleActionOperation interface {
+	isScheduleActionOperation()
+}
+
+// The operation type that removes the game from an event clipping output.
+type ScheduleActionOperationMemberRemoveClippingDataSourceConfiguration struct {
+	Value RemoveClippingDataSourceConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (*ScheduleActionOperationMemberRemoveClippingDataSourceConfiguration) isScheduleActionOperation() {
+}
+func (v *ScheduleActionOperationMemberRemoveClippingDataSourceConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ScheduleActionOperation_removeClippingDataSourceConfiguration)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *ScheduleActionOperationMemberRemoveClippingDataSourceConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
+
+// The operation type that attaches a game to an event clipping output.
+type ScheduleActionOperationMemberUpdateClippingDataSourceConfiguration struct {
+	Value UpdateClippingDataSourceConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (*ScheduleActionOperationMemberUpdateClippingDataSourceConfiguration) isScheduleActionOperation() {
+}
+func (v *ScheduleActionOperationMemberUpdateClippingDataSourceConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ScheduleActionOperation_updateClippingDataSourceConfiguration)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *ScheduleActionOperationMemberUpdateClippingDataSourceConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
+
+// The operation type that enables or disables an output.
+type ScheduleActionOperationMemberUpdateOutputStatus struct {
+	Value UpdateOutputStatus
+
+	noSmithyDocumentSerde
+}
+
+func (*ScheduleActionOperationMemberUpdateOutputStatus) isScheduleActionOperation() {}
+func (v *ScheduleActionOperationMemberUpdateOutputStatus) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ScheduleActionOperation_updateOutputStatus)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *ScheduleActionOperationMemberUpdateOutputStatus) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
+
+// Holds the typed start settings that determine when a schedule action runs.
+// Currently, only fixed mode is supported.
+//
+// The following types satisfy this interface:
+//
+//	ScheduleActionStartConfigurationMemberFixedModeScheduleActionStartSettings
+type ScheduleActionStartConfiguration interface {
+	isScheduleActionStartConfiguration()
+}
+
+// The start settings type for an action that runs once, at a fixed time.
+type ScheduleActionStartConfigurationMemberFixedModeScheduleActionStartSettings struct {
+	Value FixedModeScheduleActionStartSettings
+
+	noSmithyDocumentSerde
+}
+
+func (*ScheduleActionStartConfigurationMemberFixedModeScheduleActionStartSettings) isScheduleActionStartConfiguration() {
+}
+func (v *ScheduleActionStartConfigurationMemberFixedModeScheduleActionStartSettings) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ScheduleActionStartConfiguration_fixedModeScheduleActionStartSettings)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *ScheduleActionStartConfigurationMemberFixedModeScheduleActionStartSettings) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // A filter for a fixture search. It is used in the filters array of a
 // SearchFixtures request.
@@ -353,8 +1137,37 @@ type SearchFilter struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SearchFilter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SearchFilter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SearchFilter) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != "" {
+		s.WriteString(schemas.SearchFilter_name, string(v.Name))
+	}
+	serializeFilterValueList(s, schemas.SearchFilter_values, v.Values)
+}
+func (v *SearchFilter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SearchFilter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SearchFilter_name:
+			var ev string
+			if err := d.ReadString(schemas.SearchFilter_name, &ev); err != nil {
+				return err
+			}
+			v.Name = FilterName(ev)
+			return nil
+		case schemas.SearchFilter_values:
+			return deserializeFilterValueList(d, schemas.SearchFilter_values, &v.Values)
+		}
+		return nil
+	})
+}
+
 // A type of OutputConfig, used when the output in a feed is for the smart
-// subtitling feature. smart subtitling uses automatic speech recognition (ASR) to
+// subtitling feature. Smart subtitling uses automatic speech recognition (ASR) to
 // generate live TTML subtitles from the audio in your source media.
 type SubtitlingConfig struct {
 
@@ -384,6 +1197,56 @@ type SubtitlingConfig struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SubtitlingConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SubtitlingConfig)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SubtitlingConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AspectRatio != nil {
+		s.WriteStruct(schemas.SubtitlingConfig_aspectRatio)
+		v.AspectRatio.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Dictionary != nil {
+		s.WriteString(schemas.SubtitlingConfig_dictionary, *v.Dictionary)
+	}
+	if v.Language != "" {
+		s.WriteString(schemas.SubtitlingConfig_language, string(v.Language))
+	}
+	if v.ProfanityFilter != "" {
+		s.WriteString(schemas.SubtitlingConfig_profanityFilter, string(v.ProfanityFilter))
+	}
+}
+func (v *SubtitlingConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SubtitlingConfig, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SubtitlingConfig_aspectRatio:
+			v.AspectRatio = &AspectRatio{}
+			return v.AspectRatio.Deserialize(d)
+		case schemas.SubtitlingConfig_dictionary:
+			v.Dictionary = new(string)
+			return d.ReadString(schemas.SubtitlingConfig_dictionary, v.Dictionary)
+		case schemas.SubtitlingConfig_language:
+			var ev string
+			if err := d.ReadString(schemas.SubtitlingConfig_language, &ev); err != nil {
+				return err
+			}
+			v.Language = TranscriptionLanguage(ev)
+			return nil
+		case schemas.SubtitlingConfig_profanityFilter:
+			var ev string
+			if err := d.ReadString(schemas.SubtitlingConfig_profanityFilter, &ev); err != nil {
+				return err
+			}
+			v.ProfanityFilter = ProfanityFilterMode(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // A named set of graphics-compositing templates used by the crop feature,
 // specified in the templateGroups array of a CroppingConfig.
 type TemplateGroup struct {
@@ -402,6 +1265,79 @@ type TemplateGroup struct {
 	TemplateUris []string
 
 	noSmithyDocumentSerde
+}
+
+func (v *TemplateGroup) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TemplateGroup)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TemplateGroup) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.TemplateGroup_name, *v.Name)
+	}
+	serializeTemplateUriList(s, schemas.TemplateGroup_templateUris, v.TemplateUris)
+}
+func (v *TemplateGroup) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TemplateGroup, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TemplateGroup_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.TemplateGroup_name, v.Name)
+		case schemas.TemplateGroup_templateUris:
+			return deserializeTemplateUriList(d, schemas.TemplateGroup_templateUris, &v.TemplateUris)
+		}
+		return nil
+	})
+}
+
+// Attaches a game to an event clipping output at the action's scheduled time.
+// This is a type of ScheduleActionOperation, and the output must be an event
+// clipping output.
+type UpdateClippingDataSourceConfiguration struct {
+
+	// The game that you want to attach to the output.
+	//
+	// This member is required.
+	DataSourceConfiguration *DataSourceConfiguration
+
+	// The name of the output that you want to attach the game to.
+	//
+	// This member is required.
+	OutputName *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *UpdateClippingDataSourceConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateClippingDataSourceConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateClippingDataSourceConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DataSourceConfiguration != nil {
+		s.WriteStruct(schemas.UpdateClippingDataSourceConfiguration_dataSourceConfiguration)
+		v.DataSourceConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.OutputName != nil {
+		s.WriteString(schemas.UpdateClippingDataSourceConfiguration_outputName, *v.OutputName)
+	}
+}
+func (v *UpdateClippingDataSourceConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateClippingDataSourceConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateClippingDataSourceConfiguration_dataSourceConfiguration:
+			v.DataSourceConfiguration = &DataSourceConfiguration{}
+			return v.DataSourceConfiguration.Deserialize(d)
+		case schemas.UpdateClippingDataSourceConfiguration_outputName:
+			v.OutputName = new(string)
+			return d.ReadString(schemas.UpdateClippingDataSourceConfiguration_outputName, v.OutputName)
+		}
+		return nil
+	})
 }
 
 // Contains configuration information about one output in a feed. It is used in
@@ -441,6 +1377,103 @@ type UpdateOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateOutput_description, *v.Description)
+	}
+	if v.FromAssociation != nil {
+		s.WriteBool(schemas.UpdateOutput_fromAssociation, *v.FromAssociation)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateOutput_name, *v.Name)
+	}
+	serializeOutputConfig(s, schemas.UpdateOutput_outputConfig, v.OutputConfig)
+	if v.Status != "" {
+		s.WriteString(schemas.UpdateOutput_status, string(v.Status))
+	}
+}
+func (v *UpdateOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateOutput_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.UpdateOutput_description, v.Description)
+		case schemas.UpdateOutput_fromAssociation:
+			v.FromAssociation = new(bool)
+			return d.ReadBool(schemas.UpdateOutput_fromAssociation, v.FromAssociation)
+		case schemas.UpdateOutput_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.UpdateOutput_name, v.Name)
+		case schemas.UpdateOutput_outputConfig:
+			return deserializeOutputConfig(d, schemas.UpdateOutput_outputConfig, &v.OutputConfig)
+		case schemas.UpdateOutput_status:
+			var ev string
+			if err := d.ReadString(schemas.UpdateOutput_status, &ev); err != nil {
+				return err
+			}
+			v.Status = OutputStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
+// Enables or disables an output at the action's scheduled time. This is a type of
+// ScheduleActionOperation.
+type UpdateOutputStatus struct {
+
+	// The name of the output that you want to enable or disable. The output must
+	// exist in the feed when you create the action.
+	//
+	// This member is required.
+	OutputName *string
+
+	// Specifies whether the output is enabled or disabled after the action runs.
+	//
+	// This member is required.
+	Status OutputStatus
+
+	noSmithyDocumentSerde
+}
+
+func (v *UpdateOutputStatus) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateOutputStatus)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateOutputStatus) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.OutputName != nil {
+		s.WriteString(schemas.UpdateOutputStatus_outputName, *v.OutputName)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.UpdateOutputStatus_status, string(v.Status))
+	}
+}
+func (v *UpdateOutputStatus) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateOutputStatus, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateOutputStatus_outputName:
+			v.OutputName = new(string)
+			return d.ReadString(schemas.UpdateOutputStatus_outputName, v.OutputName)
+		case schemas.UpdateOutputStatus_status:
+			var ev string
+			if err := d.ReadString(schemas.UpdateOutputStatus_status, &ev); err != nil {
+				return err
+			}
+			v.Status = OutputStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 type noSmithyDocumentSerde = smithydocument.NoSerde
 
 // UnknownUnionMember is returned when a union member is returned over the wire,
@@ -452,4 +1485,6 @@ type UnknownUnionMember struct {
 	noSmithyDocumentSerde
 }
 
-func (*UnknownUnionMember) isOutputConfig() {}
+func (*UnknownUnionMember) isOutputConfig()                     {}
+func (*UnknownUnionMember) isScheduleActionOperation()          {}
+func (*UnknownUnionMember) isScheduleActionStartConfiguration() {}

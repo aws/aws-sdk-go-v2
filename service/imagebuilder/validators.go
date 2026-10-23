@@ -1513,6 +1513,21 @@ func validateAutoDisablePolicy(v *types.AutoDisablePolicy) error {
 	}
 }
 
+func validateAutoScalingGroupConfiguration(v *types.AutoScalingGroupConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AutoScalingGroupConfiguration"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateComponentConfiguration(v *types.ComponentConfiguration) error {
 	if v == nil {
 		return nil
@@ -1898,6 +1913,25 @@ func validateLifecyclePolicyResourceSelectionRecipes(v []types.LifecyclePolicyRe
 	for i := range v {
 		if err := validateLifecyclePolicyResourceSelectionRecipe(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateParentInstanceConfiguration(v *types.ParentInstanceConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ParentInstanceConfiguration"}
+	if v.AutoScalingGroup == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AutoScalingGroup"))
+	} else if v.AutoScalingGroup != nil {
+		if err := validateAutoScalingGroupConfiguration(v.AutoScalingGroup); err != nil {
+			invalidParams.AddNested("AutoScalingGroup", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -2316,6 +2350,11 @@ func validateOpCreateInfrastructureConfigurationInput(v *CreateInfrastructureCon
 	}
 	if v.InstanceProfileName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("InstanceProfileName"))
+	}
+	if v.ParentInstance != nil {
+		if err := validateParentInstanceConfiguration(v.ParentInstance); err != nil {
+			invalidParams.AddNested("ParentInstance", err.(smithy.InvalidParamsError))
+		}
 	}
 	if v.ClientToken == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ClientToken"))
@@ -3266,6 +3305,11 @@ func validateOpUpdateInfrastructureConfigurationInput(v *UpdateInfrastructureCon
 	}
 	if v.InstanceProfileName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("InstanceProfileName"))
+	}
+	if v.ParentInstance != nil {
+		if err := validateParentInstanceConfiguration(v.ParentInstance); err != nil {
+			invalidParams.AddNested("ParentInstance", err.(smithy.InvalidParamsError))
+		}
 	}
 	if v.ClientToken == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ClientToken"))

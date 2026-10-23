@@ -2319,6 +2319,12 @@ const (
 	RuntimeNodejs22X    Runtime = "NODEJS_22_X"
 	RuntimeJava21       Runtime = "JAVA_21"
 	RuntimeJava25       Runtime = "JAVA_25"
+	RuntimePython312    Runtime = "PYTHON_3_12"
+	RuntimePython313    Runtime = "PYTHON_3_13"
+	RuntimePython314    Runtime = "PYTHON_3_14"
+	RuntimeRuby33       Runtime = "RUBY_3_3"
+	RuntimeDotnet8      Runtime = "DOTNET_8"
+	RuntimeNodejs20X    Runtime = "NODEJS_20_X"
 )
 
 // Values returns all known values for Runtime. Note that this can be expanded in
@@ -2353,6 +2359,12 @@ func (Runtime) Values() []Runtime {
 		"NODEJS_22_X",
 		"JAVA_21",
 		"JAVA_25",
+		"PYTHON_3_12",
+		"PYTHON_3_13",
+		"PYTHON_3_14",
+		"RUBY_3_3",
+		"DOTNET_8",
+		"NODEJS_20_X",
 	}
 }
 

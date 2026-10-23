@@ -1,0 +1,5 @@
+POST /
+
+Content-Type: application/x-www-form-urlencoded
+
+Action=PutAccountSetting&Name=__Name__&Value=__Value__&Version=2011-01-01

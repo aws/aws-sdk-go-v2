@@ -4,6 +4,8 @@ package glue
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/glue/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -29,6 +31,15 @@ type DeleteGlueIdentityCenterConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteGlueIdentityCenterConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteGlueIdentityCenterConfigurationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteGlueIdentityCenterConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+
 // Response from deleting the Glue Identity Center configuration.
 type DeleteGlueIdentityCenterConfigurationOutput struct {
 	// Metadata pertaining to the operation's result.
@@ -37,13 +48,26 @@ type DeleteGlueIdentityCenterConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteGlueIdentityCenterConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteGlueIdentityCenterConfigurationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteGlueIdentityCenterConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteGlueIdentityCenterConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteGlueIdentityCenterConfigurationResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteGlueIdentityCenterConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteGlueIdentityCenterConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteGlueIdentityCenterConfiguration, schemas.DeleteGlueIdentityCenterConfigurationRequest, schemas.DeleteGlueIdentityCenterConfigurationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeleteGlueIdentityCenterConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteGlueIdentityCenterConfiguration, schemas.DeleteGlueIdentityCenterConfigurationRequest, schemas.DeleteGlueIdentityCenterConfigurationResponse), output: &DeleteGlueIdentityCenterConfigurationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

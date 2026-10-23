@@ -4,7 +4,9 @@ package sfn
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/sfn/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sfn/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -36,6 +38,18 @@ type DescribeActivityInput struct {
 	ActivityArn *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DescribeActivityInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeActivityInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeActivityInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ActivityArn != nil {
+		s.WriteString(schemas.DescribeActivityInput_activityArn, *v.ActivityArn)
+	}
 }
 
 type DescribeActivityOutput struct {
@@ -83,13 +97,52 @@ type DescribeActivityOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeActivityOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeActivityOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeActivityOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ActivityArn != nil {
+		s.WriteString(schemas.DescribeActivityOutput_activityArn, *v.ActivityArn)
+	}
+	if v.CreationDate != nil {
+		s.WriteTime(schemas.DescribeActivityOutput_creationDate, *v.CreationDate)
+	}
+	if v.EncryptionConfiguration != nil {
+		s.WriteStruct(schemas.DescribeActivityOutput_encryptionConfiguration)
+		v.EncryptionConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.DescribeActivityOutput_name, *v.Name)
+	}
+}
+func (v *DescribeActivityOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeActivityOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeActivityOutput_activityArn:
+			v.ActivityArn = new(string)
+			return d.ReadString(schemas.DescribeActivityOutput_activityArn, v.ActivityArn)
+		case schemas.DescribeActivityOutput_creationDate:
+			v.CreationDate = new(time.Time)
+			return d.ReadTime(schemas.DescribeActivityOutput_creationDate, v.CreationDate)
+		case schemas.DescribeActivityOutput_encryptionConfiguration:
+			v.EncryptionConfiguration = &types.EncryptionConfiguration{}
+			return v.EncryptionConfiguration.Deserialize(d)
+		case schemas.DescribeActivityOutput_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.DescribeActivityOutput_name, v.Name)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeActivityMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpDescribeActivity{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeActivity, schemas.DescribeActivityInput, schemas.DescribeActivityOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpDescribeActivity{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeActivity, schemas.DescribeActivityInput, schemas.DescribeActivityOutput), output: &DescribeActivityOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

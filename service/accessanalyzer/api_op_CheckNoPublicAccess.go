@@ -4,7 +4,9 @@ package accessanalyzer
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/accessanalyzer/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/accessanalyzer/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -45,6 +47,21 @@ type CheckNoPublicAccessInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CheckNoPublicAccessInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CheckNoPublicAccessRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CheckNoPublicAccessInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PolicyDocument != nil {
+		s.WriteString(schemas.CheckNoPublicAccessRequest_policyDocument, *v.PolicyDocument)
+	}
+	if v.ResourceType != "" {
+		s.WriteString(schemas.CheckNoPublicAccessRequest_resourceType, string(v.ResourceType))
+	}
+}
+
 type CheckNoPublicAccessOutput struct {
 
 	// The message indicating whether the specified policy allows public access to
@@ -67,13 +84,45 @@ type CheckNoPublicAccessOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CheckNoPublicAccessOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CheckNoPublicAccessResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CheckNoPublicAccessOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.CheckNoPublicAccessResponse_message, *v.Message)
+	}
+	serializeReasonSummaryList(s, schemas.CheckNoPublicAccessResponse_reasons, v.Reasons)
+	if v.Result != "" {
+		s.WriteString(schemas.CheckNoPublicAccessResponse_result, string(v.Result))
+	}
+}
+func (v *CheckNoPublicAccessOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CheckNoPublicAccessResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CheckNoPublicAccessResponse_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.CheckNoPublicAccessResponse_message, v.Message)
+		case schemas.CheckNoPublicAccessResponse_reasons:
+			return deserializeReasonSummaryList(d, schemas.CheckNoPublicAccessResponse_reasons, &v.Reasons)
+		case schemas.CheckNoPublicAccessResponse_result:
+			var ev string
+			if err := d.ReadString(schemas.CheckNoPublicAccessResponse_result, &ev); err != nil {
+				return err
+			}
+			v.Result = types.CheckNoPublicAccessResult(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCheckNoPublicAccessMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCheckNoPublicAccess{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CheckNoPublicAccess, schemas.CheckNoPublicAccessRequest, schemas.CheckNoPublicAccessResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCheckNoPublicAccess{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CheckNoPublicAccess, schemas.CheckNoPublicAccessRequest, schemas.CheckNoPublicAccessResponse), output: &CheckNoPublicAccessOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

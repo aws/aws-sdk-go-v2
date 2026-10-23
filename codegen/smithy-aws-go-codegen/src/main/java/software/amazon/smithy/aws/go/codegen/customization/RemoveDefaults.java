@@ -46,7 +46,11 @@ public class RemoveDefaults implements GoIntegration {
                     "com.amazonaws.networkmanager#VpcOptions$Ipv6Support",
                     "com.amazonaws.networkmanager#VpcOptions$ApplianceModeSupport",
                     "com.amazonaws.networkmanager#VpcOptions$DnsSupport",
-                    "com.amazonaws.networkmanager#VpcOptions$SecurityGroupReferencingSupport")
+                    "com.amazonaws.networkmanager#VpcOptions$SecurityGroupReferencingSupport"),
+        serviceToShapeIds("com.amazonaws.backup#CryoControllerUserManager",
+                    // https://github.com/aws/aws-sdk-go-v2/issues/3580
+                    "com.amazonaws.backup#RestoreTestingSelectionForCreate$ValidationWindowHours",
+                    "com.amazonaws.backup#RestoreTestingSelectionForUpdate$ValidationWindowHours")
     );
 
     private boolean mustPreprocess(ShapeId service) {

@@ -12119,6 +12119,11 @@ func validateDatabricksParameters(v *types.DatabricksParameters) error {
 	if v.SqlEndpointPath == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SqlEndpointPath"))
 	}
+	if v.OAuthParameters != nil {
+		if err := validateOAuthParameters(v.OAuthParameters); err != nil {
+			invalidParams.AddNested("OAuthParameters", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -12775,6 +12780,21 @@ func validateDataSourceCredentials(v *types.DataSourceCredentials) error {
 			invalidParams.AddNested("WebProxyCredentials", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.ServiceAccountCredentials != nil {
+		if err := validateServiceAccountCredentials(v.ServiceAccountCredentials); err != nil {
+			invalidParams.AddNested("ServiceAccountCredentials", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.SharePointClientCredentials != nil {
+		if err := validateSharePointClientCredentials(v.SharePointClientCredentials); err != nil {
+			invalidParams.AddNested("SharePointClientCredentials", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.OneDriveClientCredentials != nil {
+		if err := validateOneDriveClientCredentials(v.OneDriveClientCredentials); err != nil {
+			invalidParams.AddNested("OneDriveClientCredentials", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -13377,6 +13397,16 @@ func validateDefaultFilterControlOptions(v *types.DefaultFilterControlOptions) e
 			invalidParams.AddNested("DefaultSliderOptions", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.DefaultHierarchyList != nil {
+		if err := validateDefaultHierarchyFilterListControlOptions(v.DefaultHierarchyList); err != nil {
+			invalidParams.AddNested("DefaultHierarchyList", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.DefaultHierarchyDropdown != nil {
+		if err := validateDefaultHierarchyFilterDropDownControlOptions(v.DefaultHierarchyDropdown); err != nil {
+			invalidParams.AddNested("DefaultHierarchyDropdown", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -13447,6 +13477,40 @@ func validateDefaultGridLayoutConfiguration(v *types.DefaultGridLayoutConfigurat
 	} else if v.CanvasSizeOptions != nil {
 		if err := validateGridLayoutCanvasSizeOptions(v.CanvasSizeOptions); err != nil {
 			invalidParams.AddNested("CanvasSizeOptions", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateDefaultHierarchyFilterDropDownControlOptions(v *types.DefaultHierarchyFilterDropDownControlOptions) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DefaultHierarchyFilterDropDownControlOptions"}
+	if v.ControlSortConfigurations != nil {
+		if err := validateControlSortConfigurationList(v.ControlSortConfigurations); err != nil {
+			invalidParams.AddNested("ControlSortConfigurations", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateDefaultHierarchyFilterListControlOptions(v *types.DefaultHierarchyFilterListControlOptions) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DefaultHierarchyFilterListControlOptions"}
+	if v.ControlSortConfigurations != nil {
+		if err := validateControlSortConfigurationList(v.ControlSortConfigurations); err != nil {
+			invalidParams.AddNested("ControlSortConfigurations", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -14291,6 +14355,11 @@ func validateFilter(v *types.Filter) error {
 			invalidParams.AddNested("NestedFilter", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.HierarchyFilter != nil {
+		if err := validateHierarchyFilter(v.HierarchyFilter); err != nil {
+			invalidParams.AddNested("HierarchyFilter", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -14375,6 +14444,16 @@ func validateFilterControl(v *types.FilterControl) error {
 	if v.CrossSheet != nil {
 		if err := validateFilterCrossSheetControl(v.CrossSheet); err != nil {
 			invalidParams.AddNested("CrossSheet", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.HierarchyList != nil {
+		if err := validateHierarchyFilterListControl(v.HierarchyList); err != nil {
+			invalidParams.AddNested("HierarchyList", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.HierarchyDropdown != nil {
+		if err := validateHierarchyFilterDropDownControl(v.HierarchyDropdown); err != nil {
+			invalidParams.AddNested("HierarchyDropdown", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -16690,6 +16769,174 @@ func validateHeatMapVisual(v *types.HeatMapVisual) error {
 	}
 }
 
+func validateHierarchyFilter(v *types.HierarchyFilter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "HierarchyFilter"}
+	if v.FilterId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FilterId"))
+	}
+	if v.Column == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Column"))
+	} else if v.Column != nil {
+		if err := validateColumnIdentifier(v.Column); err != nil {
+			invalidParams.AddNested("Column", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.HierarchyLevels == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("HierarchyLevels"))
+	} else if v.HierarchyLevels != nil {
+		if err := validateHierarchyFilterLevelList(v.HierarchyLevels); err != nil {
+			invalidParams.AddNested("HierarchyLevels", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.HierarchyTree != nil {
+		if err := validateHierarchyFilterNode(v.HierarchyTree); err != nil {
+			invalidParams.AddNested("HierarchyTree", err.(smithy.InvalidParamsError))
+		}
+	}
+	if len(v.NullOption) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("NullOption"))
+	}
+	if len(v.MatchOperator) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("MatchOperator"))
+	}
+	if v.DefaultFilterControlConfiguration != nil {
+		if err := validateDefaultFilterControlConfiguration(v.DefaultFilterControlConfiguration); err != nil {
+			invalidParams.AddNested("DefaultFilterControlConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateHierarchyFilterDropDownControl(v *types.HierarchyFilterDropDownControl) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "HierarchyFilterDropDownControl"}
+	if v.FilterControlId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FilterControlId"))
+	}
+	if v.SourceFilterId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SourceFilterId"))
+	}
+	if v.ControlSortConfigurations != nil {
+		if err := validateControlSortConfigurationList(v.ControlSortConfigurations); err != nil {
+			invalidParams.AddNested("ControlSortConfigurations", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateHierarchyFilterLevel(v *types.HierarchyFilterLevel) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "HierarchyFilterLevel"}
+	if v.Column == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Column"))
+	} else if v.Column != nil {
+		if err := validateColumnIdentifier(v.Column); err != nil {
+			invalidParams.AddNested("Column", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateHierarchyFilterLevelList(v []types.HierarchyFilterLevel) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "HierarchyFilterLevelList"}
+	for i := range v {
+		if err := validateHierarchyFilterLevel(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateHierarchyFilterListControl(v *types.HierarchyFilterListControl) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "HierarchyFilterListControl"}
+	if v.FilterControlId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FilterControlId"))
+	}
+	if v.SourceFilterId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SourceFilterId"))
+	}
+	if v.ControlSortConfigurations != nil {
+		if err := validateControlSortConfigurationList(v.ControlSortConfigurations); err != nil {
+			invalidParams.AddNested("ControlSortConfigurations", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateHierarchyFilterNode(v *types.HierarchyFilterNode) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "HierarchyFilterNode"}
+	if v.Column == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Column"))
+	} else if v.Column != nil {
+		if err := validateColumnIdentifier(v.Column); err != nil {
+			invalidParams.AddNested("Column", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Children != nil {
+		if err := validateHierarchyFilterNodeList(v.Children); err != nil {
+			invalidParams.AddNested("Children", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateHierarchyFilterNodeList(v []types.HierarchyFilterNode) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "HierarchyFilterNodeList"}
+	for i := range v {
+		if err := validateHierarchyFilterNode(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateHistogramAggregatedFieldWells(v *types.HistogramAggregatedFieldWells) error {
 	if v == nil {
 		return nil
@@ -18920,6 +19167,24 @@ func validateOAuthParameters(v *types.OAuthParameters) error {
 		if err := validateVpcConnectionProperties(v.IdentityProviderVpcConnectionProperties); err != nil {
 			invalidParams.AddNested("IdentityProviderVpcConnectionProperties", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOneDriveClientCredentials(v *types.OneDriveClientCredentials) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "OneDriveClientCredentials"}
+	if v.KmsKeyArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("KmsKeyArn"))
+	}
+	if v.CertThumbprint == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CertThumbprint"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -22139,6 +22404,27 @@ func validateSeriesItemList(v []types.SeriesItem) error {
 	}
 }
 
+func validateServiceAccountCredentials(v *types.ServiceAccountCredentials) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ServiceAccountCredentials"}
+	if v.AdminAccountEmail == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AdminAccountEmail"))
+	}
+	if v.ServiceAccountPrivateKey == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ServiceAccountPrivateKey"))
+	}
+	if v.ClientEmail == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClientEmail"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateServiceNowParameters(v *types.ServiceNowParameters) error {
 	if v == nil {
 		return nil
@@ -22284,6 +22570,24 @@ func validateSharedViewConfigurations(v *types.SharedViewConfigurations) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "SharedViewConfigurations"}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateSharePointClientCredentials(v *types.SharePointClientCredentials) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SharePointClientCredentials"}
+	if v.KmsKeyArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("KmsKeyArn"))
+	}
+	if v.CertThumbprint == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CertThumbprint"))
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {

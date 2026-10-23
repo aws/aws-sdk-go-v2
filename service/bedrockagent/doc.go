@@ -3,5 +3,12 @@
 // Package bedrockagent provides the API client, operations, and parameter types
 // for Agents for Amazon Bedrock.
 //
+// Amazon Bedrock Agents (now Amazon Bedrock Agents Classic) is no longer open to
+// new customers. For capabilities similar to Bedrock Agents Classic, explore
+// Amazon Bedrock AgentCore. Existing customers can continue to use the service as
+// normal. For more information, see [Amazon Bedrock Agents Classic availability change].
+//
 // Describes the API operations for creating and managing Amazon Bedrock agents.
+//
+// [Amazon Bedrock Agents Classic availability change]: https://docs.aws.amazon.com/bedrock/latest/userguide/agents-classic-maintenance-mode.html
 package bedrockagent

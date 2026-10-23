@@ -27,7 +27,7 @@ import (
 //
 // To establish the connection, call this operation from the Amazon Web Services
 // account that is used to manage the Amazon GameLift Servers fleets. Identify the
-// following values: (1) The ID of the fleet you want to be enable a VPC peering
+// following values: (1) The ID of the fleet you want to enable a VPC peering
 // connection for; (2) The Amazon Web Services account with the VPC that you want
 // to peer with; and (3) The ID of the VPC you want to peer with. This operation is
 // asynchronous. If successful, a connection request is created. You can use

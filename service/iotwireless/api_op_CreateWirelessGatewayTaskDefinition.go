@@ -5,7 +5,9 @@ package iotwireless
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/iotwireless/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotwireless/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -58,6 +60,28 @@ type CreateWirelessGatewayTaskDefinitionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateWirelessGatewayTaskDefinitionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateWirelessGatewayTaskDefinitionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateWirelessGatewayTaskDefinitionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	s.WriteBool(schemas.CreateWirelessGatewayTaskDefinitionRequest_AutoCreateTasks, v.AutoCreateTasks)
+	if v.ClientRequestToken != nil {
+		s.WriteString(schemas.CreateWirelessGatewayTaskDefinitionRequest_ClientRequestToken, *v.ClientRequestToken)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateWirelessGatewayTaskDefinitionRequest_Name, *v.Name)
+	}
+	serializeTagList(s, schemas.CreateWirelessGatewayTaskDefinitionRequest_Tags, v.Tags)
+	if v.Update != nil {
+		s.WriteStruct(schemas.CreateWirelessGatewayTaskDefinitionRequest_Update)
+		v.Update.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type CreateWirelessGatewayTaskDefinitionOutput struct {
 
 	// The Amazon Resource Name of the resource.
@@ -72,13 +96,38 @@ type CreateWirelessGatewayTaskDefinitionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateWirelessGatewayTaskDefinitionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateWirelessGatewayTaskDefinitionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateWirelessGatewayTaskDefinitionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.CreateWirelessGatewayTaskDefinitionResponse_Arn, *v.Arn)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.CreateWirelessGatewayTaskDefinitionResponse_Id, *v.Id)
+	}
+}
+func (v *CreateWirelessGatewayTaskDefinitionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateWirelessGatewayTaskDefinitionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateWirelessGatewayTaskDefinitionResponse_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.CreateWirelessGatewayTaskDefinitionResponse_Arn, v.Arn)
+		case schemas.CreateWirelessGatewayTaskDefinitionResponse_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.CreateWirelessGatewayTaskDefinitionResponse_Id, v.Id)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateWirelessGatewayTaskDefinitionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateWirelessGatewayTaskDefinition{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateWirelessGatewayTaskDefinition, schemas.CreateWirelessGatewayTaskDefinitionRequest, schemas.CreateWirelessGatewayTaskDefinitionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateWirelessGatewayTaskDefinition{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateWirelessGatewayTaskDefinition, schemas.CreateWirelessGatewayTaskDefinitionRequest, schemas.CreateWirelessGatewayTaskDefinitionResponse), output: &CreateWirelessGatewayTaskDefinitionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

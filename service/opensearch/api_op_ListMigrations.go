@@ -4,7 +4,9 @@ package opensearch
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/opensearch/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/opensearch/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -46,6 +48,27 @@ type ListMigrationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListMigrationsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListMigrationsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListMigrationsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationId != nil {
+		s.WriteString(schemas.ListMigrationsRequest_applicationId, *v.ApplicationId)
+	}
+	if v.MaxResults != 0 {
+		s.WriteInt32(schemas.ListMigrationsRequest_maxResults, v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListMigrationsRequest_nextToken, *v.NextToken)
+	}
+	if v.Status != nil {
+		s.WriteString(schemas.ListMigrationsRequest_status, *v.Status)
+	}
+}
+
 type ListMigrationsOutput struct {
 
 	// A list of migration job summaries for the specified application.
@@ -61,13 +84,35 @@ type ListMigrationsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListMigrationsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListMigrationsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListMigrationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeMigrationSummaryList(s, schemas.ListMigrationsResponse_migrations, v.Migrations)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListMigrationsResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListMigrationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListMigrationsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListMigrationsResponse_migrations:
+			return deserializeMigrationSummaryList(d, schemas.ListMigrationsResponse_migrations, &v.Migrations)
+		case schemas.ListMigrationsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListMigrationsResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListMigrationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListMigrations{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListMigrations, schemas.ListMigrationsRequest, schemas.ListMigrationsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListMigrations{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListMigrations, schemas.ListMigrationsRequest, schemas.ListMigrationsResponse), output: &ListMigrationsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

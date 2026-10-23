@@ -4,7 +4,9 @@ package bedrockagent
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/bedrockagent/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagent/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -47,6 +49,24 @@ type GetIngestionJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetIngestionJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetIngestionJobRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetIngestionJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DataSourceId != nil {
+		s.WriteString(schemas.GetIngestionJobRequest_dataSourceId, *v.DataSourceId)
+	}
+	if v.IngestionJobId != nil {
+		s.WriteString(schemas.GetIngestionJobRequest_ingestionJobId, *v.IngestionJobId)
+	}
+	if v.KnowledgeBaseId != nil {
+		s.WriteString(schemas.GetIngestionJobRequest_knowledgeBaseId, *v.KnowledgeBaseId)
+	}
+}
+
 type GetIngestionJobOutput struct {
 
 	// Contains details about the data ingestion job.
@@ -60,13 +80,34 @@ type GetIngestionJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetIngestionJobOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetIngestionJobResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetIngestionJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IngestionJob != nil {
+		s.WriteStruct(schemas.GetIngestionJobResponse_ingestionJob)
+		v.IngestionJob.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetIngestionJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetIngestionJobResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetIngestionJobResponse_ingestionJob:
+			v.IngestionJob = &types.IngestionJob{}
+			return v.IngestionJob.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetIngestionJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetIngestionJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetIngestionJob, schemas.GetIngestionJobRequest, schemas.GetIngestionJobResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetIngestionJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetIngestionJob, schemas.GetIngestionJobRequest, schemas.GetIngestionJobResponse), output: &GetIngestionJobOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

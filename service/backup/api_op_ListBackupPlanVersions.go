@@ -5,7 +5,9 @@ package backup
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/backup/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/backup/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -46,6 +48,24 @@ type ListBackupPlanVersionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListBackupPlanVersionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListBackupPlanVersionsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListBackupPlanVersionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BackupPlanId != nil {
+		s.WriteString(schemas.ListBackupPlanVersionsInput_BackupPlanId, *v.BackupPlanId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListBackupPlanVersionsInput_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListBackupPlanVersionsInput_NextToken, *v.NextToken)
+	}
+}
+
 type ListBackupPlanVersionsOutput struct {
 
 	// An array of version list items containing metadata about your backup plans.
@@ -63,13 +83,35 @@ type ListBackupPlanVersionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListBackupPlanVersionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListBackupPlanVersionsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListBackupPlanVersionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeBackupPlanVersionsList(s, schemas.ListBackupPlanVersionsOutput_BackupPlanVersionsList, v.BackupPlanVersionsList)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListBackupPlanVersionsOutput_NextToken, *v.NextToken)
+	}
+}
+func (v *ListBackupPlanVersionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListBackupPlanVersionsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListBackupPlanVersionsOutput_BackupPlanVersionsList:
+			return deserializeBackupPlanVersionsList(d, schemas.ListBackupPlanVersionsOutput_BackupPlanVersionsList, &v.BackupPlanVersionsList)
+		case schemas.ListBackupPlanVersionsOutput_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListBackupPlanVersionsOutput_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListBackupPlanVersionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListBackupPlanVersions{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListBackupPlanVersions, schemas.ListBackupPlanVersionsInput, schemas.ListBackupPlanVersionsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListBackupPlanVersions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListBackupPlanVersions, schemas.ListBackupPlanVersionsInput, schemas.ListBackupPlanVersionsOutput), output: &ListBackupPlanVersionsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

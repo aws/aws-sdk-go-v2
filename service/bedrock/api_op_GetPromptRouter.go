@@ -4,7 +4,9 @@ package bedrock
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/bedrock/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrock/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -33,6 +35,18 @@ type GetPromptRouterInput struct {
 	PromptRouterArn *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetPromptRouterInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetPromptRouterRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetPromptRouterInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PromptRouterArn != nil {
+		s.WriteString(schemas.GetPromptRouterRequest_promptRouterArn, *v.PromptRouterArn)
+	}
 }
 
 type GetPromptRouterOutput struct {
@@ -87,13 +101,95 @@ type GetPromptRouterOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetPromptRouterOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetPromptRouterResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetPromptRouterOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.GetPromptRouterResponse_createdAt, *v.CreatedAt)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.GetPromptRouterResponse_description, *v.Description)
+	}
+	if v.FallbackModel != nil {
+		s.WriteStruct(schemas.GetPromptRouterResponse_fallbackModel)
+		v.FallbackModel.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializePromptRouterTargetModels(s, schemas.GetPromptRouterResponse_models, v.Models)
+	if v.PromptRouterArn != nil {
+		s.WriteString(schemas.GetPromptRouterResponse_promptRouterArn, *v.PromptRouterArn)
+	}
+	if v.PromptRouterName != nil {
+		s.WriteString(schemas.GetPromptRouterResponse_promptRouterName, *v.PromptRouterName)
+	}
+	if v.RoutingCriteria != nil {
+		s.WriteStruct(schemas.GetPromptRouterResponse_routingCriteria)
+		v.RoutingCriteria.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.GetPromptRouterResponse_status, string(v.Status))
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.GetPromptRouterResponse_type, string(v.Type))
+	}
+	if v.UpdatedAt != nil {
+		s.WriteTime(schemas.GetPromptRouterResponse_updatedAt, *v.UpdatedAt)
+	}
+}
+func (v *GetPromptRouterOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetPromptRouterResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetPromptRouterResponse_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.GetPromptRouterResponse_createdAt, v.CreatedAt)
+		case schemas.GetPromptRouterResponse_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.GetPromptRouterResponse_description, v.Description)
+		case schemas.GetPromptRouterResponse_fallbackModel:
+			v.FallbackModel = &types.PromptRouterTargetModel{}
+			return v.FallbackModel.Deserialize(d)
+		case schemas.GetPromptRouterResponse_models:
+			return deserializePromptRouterTargetModels(d, schemas.GetPromptRouterResponse_models, &v.Models)
+		case schemas.GetPromptRouterResponse_promptRouterArn:
+			v.PromptRouterArn = new(string)
+			return d.ReadString(schemas.GetPromptRouterResponse_promptRouterArn, v.PromptRouterArn)
+		case schemas.GetPromptRouterResponse_promptRouterName:
+			v.PromptRouterName = new(string)
+			return d.ReadString(schemas.GetPromptRouterResponse_promptRouterName, v.PromptRouterName)
+		case schemas.GetPromptRouterResponse_routingCriteria:
+			v.RoutingCriteria = &types.RoutingCriteria{}
+			return v.RoutingCriteria.Deserialize(d)
+		case schemas.GetPromptRouterResponse_status:
+			var ev string
+			if err := d.ReadString(schemas.GetPromptRouterResponse_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.PromptRouterStatus(ev)
+			return nil
+		case schemas.GetPromptRouterResponse_type:
+			var ev string
+			if err := d.ReadString(schemas.GetPromptRouterResponse_type, &ev); err != nil {
+				return err
+			}
+			v.Type = types.PromptRouterType(ev)
+			return nil
+		case schemas.GetPromptRouterResponse_updatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.GetPromptRouterResponse_updatedAt, v.UpdatedAt)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetPromptRouterMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetPromptRouter{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetPromptRouter, schemas.GetPromptRouterRequest, schemas.GetPromptRouterResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetPromptRouter{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetPromptRouter, schemas.GetPromptRouterRequest, schemas.GetPromptRouterResponse), output: &GetPromptRouterOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

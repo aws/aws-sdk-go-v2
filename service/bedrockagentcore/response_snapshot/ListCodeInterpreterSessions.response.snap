@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"items":[{"codeInterpreterIdentifier":"__CodeInterpreterIdentifier__","createdAt":"2000-01-01T00:00:00Z","lastUpdatedAt":"2000-01-01T00:00:00Z","name":"__Name__","sessionId":"__SessionId__","status":"READY"},{"codeInterpreterIdentifier":"__CodeInterpreterIdentifier__","createdAt":"2000-01-01T00:00:00Z","lastUpdatedAt":"2000-01-01T00:00:00Z","name":"__Name__","sessionId":"__SessionId__","status":"READY"}],"nextToken":"__NextToken__"}

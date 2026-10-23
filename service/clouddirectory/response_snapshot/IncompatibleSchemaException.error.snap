@@ -1,0 +1,4 @@
+400
+Content-Type: application/json
+
+{"__type":"IncompatibleSchemaException","Message":"__Message__"}

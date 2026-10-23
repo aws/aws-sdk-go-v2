@@ -4,7 +4,9 @@ package appsync
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/appsync/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/appsync/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -50,6 +52,29 @@ type UpdateSourceApiAssociationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateSourceApiAssociationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateSourceApiAssociationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateSourceApiAssociationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AssociationId != nil {
+		s.WriteString(schemas.UpdateSourceApiAssociationRequest_associationId, *v.AssociationId)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateSourceApiAssociationRequest_description, *v.Description)
+	}
+	if v.MergedApiIdentifier != nil {
+		s.WriteString(schemas.UpdateSourceApiAssociationRequest_mergedApiIdentifier, *v.MergedApiIdentifier)
+	}
+	if v.SourceApiAssociationConfig != nil {
+		s.WriteStruct(schemas.UpdateSourceApiAssociationRequest_sourceApiAssociationConfig)
+		v.SourceApiAssociationConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type UpdateSourceApiAssociationOutput struct {
 
 	// The SourceApiAssociation object data.
@@ -61,13 +86,34 @@ type UpdateSourceApiAssociationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateSourceApiAssociationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateSourceApiAssociationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateSourceApiAssociationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SourceApiAssociation != nil {
+		s.WriteStruct(schemas.UpdateSourceApiAssociationResponse_sourceApiAssociation)
+		v.SourceApiAssociation.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateSourceApiAssociationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateSourceApiAssociationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateSourceApiAssociationResponse_sourceApiAssociation:
+			v.SourceApiAssociation = &types.SourceApiAssociation{}
+			return v.SourceApiAssociation.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateSourceApiAssociationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateSourceApiAssociation{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateSourceApiAssociation, schemas.UpdateSourceApiAssociationRequest, schemas.UpdateSourceApiAssociationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateSourceApiAssociation{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateSourceApiAssociation, schemas.UpdateSourceApiAssociationRequest, schemas.UpdateSourceApiAssociationResponse), output: &UpdateSourceApiAssociationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

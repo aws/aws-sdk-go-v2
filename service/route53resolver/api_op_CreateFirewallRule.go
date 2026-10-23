@@ -15,7 +15,8 @@ import (
 // use any one of the following match sources, and the chosen source must be
 // supplied through the matching request field — they are mutually exclusive:
 //
-//   - FirewallDomainListId — match a customer-managed or AWS-managed domain list.
+//   - FirewallDomainListId — match a customer-managed or Amazon Web
+//     Services-managed domain list.
 //
 //   - DnsThreatProtection — match a built-in DNS Firewall Advanced threat detector
 //     ( DGA , DNS_TUNNELING , or DICTIONARY_DGA ).
@@ -23,8 +24,8 @@ import (
 //   - FirewallRuleType — match one of the rule-type variants returned by ListFirewallRuleTypes:
 //     FirewallAdvancedContentCategory , FirewallAdvancedThreatCategory ,
 //     DnsThreatProtection , or PartnerThreatProtection . The PartnerThreatProtection
-//     variant requires an active AWS Marketplace subscription to the named partner
-//     product.
+//     variant requires an active Amazon Web Services Marketplace subscription to the
+//     named partner product.
 //
 // For rules that require asynchronous provisioning (today, the
 // PartnerThreatProtection rule type), the rule's Status begins at CREATING and
@@ -177,18 +178,18 @@ type CreateFirewallRuleInput struct {
 	// exactly one of its members. This setting is mutually exclusive with the
 	// top-level FirewallDomainListId and DnsThreatProtection fields. Use one of:
 	//
-	//   - FirewallAdvancedContentCategory — match an AWS-managed content category (for
-	//   example, VIOLENCE_AND_HATE_SPEECH ).
+	//   - FirewallAdvancedContentCategory — match an Amazon Web Services-managed
+	//   content category (for example, VIOLENCE_AND_HATE_SPEECH ).
 	//
-	//   - FirewallAdvancedThreatCategory — match an AWS-managed advanced threat
-	//   category (for example, PHISHING ).
+	//   - FirewallAdvancedThreatCategory — match an Amazon Web Services-managed
+	//   advanced threat category (for example, PHISHING ).
 	//
 	//   - DnsThreatProtection — match a built-in DNS Firewall Advanced threat detector
 	//   ( DGA , DNS_TUNNELING , or DICTIONARY_DGA ).
 	//
 	//   - PartnerThreatProtection — match a third-party threat feed delivered through
-	//   AWS Marketplace. The selected partner must be an active subscription on the
-	//   calling account.
+	//   Amazon Web Services Marketplace. The selected partner must be an active
+	//   subscription on the calling account.
 	//
 	// To enumerate the values supported in your account, call ListFirewallRuleTypes.
 	FirewallRuleType *types.FirewallRuleType

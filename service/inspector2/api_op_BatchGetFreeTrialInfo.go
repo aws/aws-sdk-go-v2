@@ -4,7 +4,9 @@ package inspector2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/inspector2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/inspector2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -34,6 +36,25 @@ type BatchGetFreeTrialInfoInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchGetFreeTrialInfoInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchGetFreeTrialInfoRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchGetFreeTrialInfoInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeMeteringAccountIdList(s, schemas.BatchGetFreeTrialInfoRequest_accountIds, v.AccountIds)
+}
+func (v *BatchGetFreeTrialInfoInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchGetFreeTrialInfoRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchGetFreeTrialInfoRequest_accountIds:
+			return deserializeMeteringAccountIdList(d, schemas.BatchGetFreeTrialInfoRequest_accountIds, &v.AccountIds)
+		}
+		return nil
+	})
+}
+
 type BatchGetFreeTrialInfoOutput struct {
 
 	// An array of objects that provide Amazon Inspector free trial details for each
@@ -54,13 +75,32 @@ type BatchGetFreeTrialInfoOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchGetFreeTrialInfoOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchGetFreeTrialInfoResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchGetFreeTrialInfoOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeFreeTrialAccountInfoList(s, schemas.BatchGetFreeTrialInfoResponse_accounts, v.Accounts)
+	serializeFreeTrialInfoErrorList(s, schemas.BatchGetFreeTrialInfoResponse_failedAccounts, v.FailedAccounts)
+}
+func (v *BatchGetFreeTrialInfoOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchGetFreeTrialInfoResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchGetFreeTrialInfoResponse_accounts:
+			return deserializeFreeTrialAccountInfoList(d, schemas.BatchGetFreeTrialInfoResponse_accounts, &v.Accounts)
+		case schemas.BatchGetFreeTrialInfoResponse_failedAccounts:
+			return deserializeFreeTrialInfoErrorList(d, schemas.BatchGetFreeTrialInfoResponse_failedAccounts, &v.FailedAccounts)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationBatchGetFreeTrialInfoMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpBatchGetFreeTrialInfo{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchGetFreeTrialInfo, schemas.BatchGetFreeTrialInfoRequest, schemas.BatchGetFreeTrialInfoResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpBatchGetFreeTrialInfo{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchGetFreeTrialInfo, schemas.BatchGetFreeTrialInfoRequest, schemas.BatchGetFreeTrialInfoResponse), output: &BatchGetFreeTrialInfoOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

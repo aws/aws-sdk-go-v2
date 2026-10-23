@@ -4,10 +4,18 @@ package rekognition
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/rekognition/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/rekognition/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
+// Service availability notice: Streaming Video and Bulk Image Analysis is no
+// longer available to new customers. For more information, see [Rekognition feature availability changes].
+//
+// This change does not impact the availability of other Amazon Rekognition
+// features.
+//
 // Creates an Amazon Rekognition stream processor that you can use to detect and
 // recognize faces or to detect labels in a streaming video.
 //
@@ -41,6 +49,8 @@ import (
 // rekognition:CreateStreamProcessor action. If you want to tag your stream
 // processor, you also require permission to perform the rekognition:TagResource
 // operation.
+//
+// [Rekognition feature availability changes]: https://docs.aws.amazon.com/rekognition/latest/dg/rekognition-availability-changes.html
 func (c *Client) CreateStreamProcessor(ctx context.Context, params *CreateStreamProcessorInput, optFns ...func(*Options)) (*CreateStreamProcessorOutput, error) {
 	if params == nil {
 		params = &CreateStreamProcessorInput{}
@@ -141,6 +151,51 @@ type CreateStreamProcessorInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateStreamProcessorInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateStreamProcessorRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateStreamProcessorInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DataSharingPreference != nil {
+		s.WriteStruct(schemas.CreateStreamProcessorRequest_DataSharingPreference)
+		v.DataSharingPreference.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Input != nil {
+		s.WriteStruct(schemas.CreateStreamProcessorRequest_Input)
+		v.Input.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.KmsKeyId != nil {
+		s.WriteString(schemas.CreateStreamProcessorRequest_KmsKeyId, *v.KmsKeyId)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateStreamProcessorRequest_Name, *v.Name)
+	}
+	if v.NotificationChannel != nil {
+		s.WriteStruct(schemas.CreateStreamProcessorRequest_NotificationChannel)
+		v.NotificationChannel.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Output != nil {
+		s.WriteStruct(schemas.CreateStreamProcessorRequest_Output)
+		v.Output.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeRegionsOfInterest(s, schemas.CreateStreamProcessorRequest_RegionsOfInterest, v.RegionsOfInterest)
+	if v.RoleArn != nil {
+		s.WriteString(schemas.CreateStreamProcessorRequest_RoleArn, *v.RoleArn)
+	}
+	if v.Settings != nil {
+		s.WriteStruct(schemas.CreateStreamProcessorRequest_Settings)
+		v.Settings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeTagMap(s, schemas.CreateStreamProcessorRequest_Tags, v.Tags)
+}
+
 type CreateStreamProcessorOutput struct {
 
 	// Amazon Resource Number for the newly created stream processor.
@@ -152,13 +207,32 @@ type CreateStreamProcessorOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateStreamProcessorOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateStreamProcessorResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateStreamProcessorOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.StreamProcessorArn != nil {
+		s.WriteString(schemas.CreateStreamProcessorResponse_StreamProcessorArn, *v.StreamProcessorArn)
+	}
+}
+func (v *CreateStreamProcessorOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateStreamProcessorResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateStreamProcessorResponse_StreamProcessorArn:
+			v.StreamProcessorArn = new(string)
+			return d.ReadString(schemas.CreateStreamProcessorResponse_StreamProcessorArn, v.StreamProcessorArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateStreamProcessorMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateStreamProcessor{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateStreamProcessor, schemas.CreateStreamProcessorRequest, schemas.CreateStreamProcessorResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateStreamProcessor{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateStreamProcessor, schemas.CreateStreamProcessorRequest, schemas.CreateStreamProcessorResponse), output: &CreateStreamProcessorOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

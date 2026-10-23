@@ -4,6 +4,8 @@ package guardduty
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/guardduty/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -28,6 +30,15 @@ type GetInvitationsCountInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetInvitationsCountInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetInvitationsCountRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetInvitationsCountInput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+
 type GetInvitationsCountOutput struct {
 
 	// The number of received invitations.
@@ -39,13 +50,32 @@ type GetInvitationsCountOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetInvitationsCountOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetInvitationsCountResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetInvitationsCountOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InvitationsCount != nil {
+		s.WriteInt32(schemas.GetInvitationsCountResponse_InvitationsCount, *v.InvitationsCount)
+	}
+}
+func (v *GetInvitationsCountOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetInvitationsCountResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetInvitationsCountResponse_InvitationsCount:
+			v.InvitationsCount = new(int32)
+			return d.ReadInt32(schemas.GetInvitationsCountResponse_InvitationsCount, v.InvitationsCount)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetInvitationsCountMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetInvitationsCount{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetInvitationsCount, schemas.GetInvitationsCountRequest, schemas.GetInvitationsCountResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetInvitationsCount{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetInvitationsCount, schemas.GetInvitationsCountRequest, schemas.GetInvitationsCountResponse), output: &GetInvitationsCountOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

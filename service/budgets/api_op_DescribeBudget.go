@@ -4,7 +4,9 @@ package budgets
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/budgets/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/budgets/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -51,6 +53,24 @@ type DescribeBudgetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeBudgetInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeBudgetRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeBudgetInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountId != nil {
+		s.WriteString(schemas.DescribeBudgetRequest_AccountId, *v.AccountId)
+	}
+	if v.BudgetName != nil {
+		s.WriteString(schemas.DescribeBudgetRequest_BudgetName, *v.BudgetName)
+	}
+	if v.ShowFilterExpression != nil {
+		s.WriteBool(schemas.DescribeBudgetRequest_ShowFilterExpression, *v.ShowFilterExpression)
+	}
+}
+
 // Response of DescribeBudget
 type DescribeBudgetOutput struct {
 
@@ -63,13 +83,34 @@ type DescribeBudgetOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeBudgetOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeBudgetResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeBudgetOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Budget != nil {
+		s.WriteStruct(schemas.DescribeBudgetResponse_Budget)
+		v.Budget.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DescribeBudgetOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeBudgetResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeBudgetResponse_Budget:
+			v.Budget = &types.Budget{}
+			return v.Budget.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeBudgetMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeBudget{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeBudget, schemas.DescribeBudgetRequest, schemas.DescribeBudgetResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeBudget{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeBudget, schemas.DescribeBudgetRequest, schemas.DescribeBudgetResponse), output: &DescribeBudgetOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

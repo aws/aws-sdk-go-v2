@@ -4,7 +4,9 @@ package apigateway
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/apigateway/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/apigateway/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -47,6 +49,26 @@ type CreateDocumentationPartInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateDocumentationPartInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateDocumentationPartRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateDocumentationPartInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Location != nil {
+		s.WriteStruct(schemas.CreateDocumentationPartRequest_location)
+		v.Location.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Properties != nil {
+		s.WriteString(schemas.CreateDocumentationPartRequest_properties, *v.Properties)
+	}
+	if v.RestApiId != nil {
+		s.WriteString(schemas.CreateDocumentationPartRequest_restApiId, *v.RestApiId)
+	}
+}
+
 // A documentation part for a targeted API entity.
 type CreateDocumentationPartOutput struct {
 
@@ -75,13 +97,46 @@ type CreateDocumentationPartOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateDocumentationPartOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DocumentationPart)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateDocumentationPartOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Id != nil {
+		s.WriteString(schemas.DocumentationPart_id, *v.Id)
+	}
+	if v.Location != nil {
+		s.WriteStruct(schemas.DocumentationPart_location)
+		v.Location.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Properties != nil {
+		s.WriteString(schemas.DocumentationPart_properties, *v.Properties)
+	}
+}
+func (v *CreateDocumentationPartOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DocumentationPart, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DocumentationPart_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.DocumentationPart_id, v.Id)
+		case schemas.DocumentationPart_location:
+			v.Location = &types.DocumentationPartLocation{}
+			return v.Location.Deserialize(d)
+		case schemas.DocumentationPart_properties:
+			v.Properties = new(string)
+			return d.ReadString(schemas.DocumentationPart_properties, v.Properties)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateDocumentationPartMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateDocumentationPart{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateDocumentationPart, schemas.CreateDocumentationPartRequest, schemas.DocumentationPart)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateDocumentationPart{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateDocumentationPart, schemas.CreateDocumentationPartRequest, schemas.DocumentationPart), output: &CreateDocumentationPartOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

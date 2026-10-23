@@ -4,7 +4,9 @@ package rekognition
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/rekognition/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/rekognition/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -102,6 +104,40 @@ type StartLabelDetectionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartLabelDetectionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartLabelDetectionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartLabelDetectionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientRequestToken != nil {
+		s.WriteString(schemas.StartLabelDetectionRequest_ClientRequestToken, *v.ClientRequestToken)
+	}
+	serializeLabelDetectionFeatureList(s, schemas.StartLabelDetectionRequest_Features, v.Features)
+	if v.JobTag != nil {
+		s.WriteString(schemas.StartLabelDetectionRequest_JobTag, *v.JobTag)
+	}
+	if v.MinConfidence != nil {
+		s.WriteFloat32(schemas.StartLabelDetectionRequest_MinConfidence, *v.MinConfidence)
+	}
+	if v.NotificationChannel != nil {
+		s.WriteStruct(schemas.StartLabelDetectionRequest_NotificationChannel)
+		v.NotificationChannel.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Settings != nil {
+		s.WriteStruct(schemas.StartLabelDetectionRequest_Settings)
+		v.Settings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Video != nil {
+		s.WriteStruct(schemas.StartLabelDetectionRequest_Video)
+		v.Video.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type StartLabelDetectionOutput struct {
 
 	// The identifier for the label detection job. Use JobId to identify the job in a
@@ -114,13 +150,32 @@ type StartLabelDetectionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartLabelDetectionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartLabelDetectionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartLabelDetectionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.JobId != nil {
+		s.WriteString(schemas.StartLabelDetectionResponse_JobId, *v.JobId)
+	}
+}
+func (v *StartLabelDetectionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartLabelDetectionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartLabelDetectionResponse_JobId:
+			v.JobId = new(string)
+			return d.ReadString(schemas.StartLabelDetectionResponse_JobId, v.JobId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartLabelDetectionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStartLabelDetection{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartLabelDetection, schemas.StartLabelDetectionRequest, schemas.StartLabelDetectionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpStartLabelDetection{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartLabelDetection, schemas.StartLabelDetectionRequest, schemas.StartLabelDetectionResponse), output: &StartLabelDetectionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

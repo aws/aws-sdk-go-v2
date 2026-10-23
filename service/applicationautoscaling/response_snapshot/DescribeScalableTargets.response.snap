@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AnyScaleFrontendService.DescribeScalableTargets
+
+{"NextToken":"__NextToken__","ScalableTargets":[{"CreationTime":946684800,"MaxCapacity":1,"MinCapacity":1,"PredictedCapacity":1,"ResourceId":"__ResourceId__","RoleARN":"__RoleARN__","ScalableDimension":"ecs:service:DesiredCount","ScalableTargetARN":"__ScalableTargetARN__","ServiceNamespace":"ecs","SuspendedState":{"DynamicScalingInSuspended":true,"DynamicScalingOutSuspended":true,"ScheduledScalingSuspended":true}},{"CreationTime":946684800,"MaxCapacity":1,"MinCapacity":1,"PredictedCapacity":1,"ResourceId":"__ResourceId__","RoleARN":"__RoleARN__","ScalableDimension":"ecs:service:DesiredCount","ScalableTargetARN":"__ScalableTargetARN__","ServiceNamespace":"ecs","SuspendedState":{"DynamicScalingInSuspended":true,"DynamicScalingOutSuspended":true,"ScheduledScalingSuspended":true}}]}

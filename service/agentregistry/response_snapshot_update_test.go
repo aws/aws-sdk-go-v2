@@ -9,6 +9,7 @@ import (
 	"context"
 	"encoding/json"
 	"errors"
+	"github.com/aws/aws-sdk-go-v2/service/agentregistry/document"
 	"github.com/aws/aws-sdk-go-v2/service/agentregistry/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/agentregistry/types"
 	smithy "github.com/aws/smithy-go"
@@ -210,10 +211,11 @@ func TestUpdateResponseSnapshot_BatchGetDiscoverableRegistryRecord(t *testing.T)
 						},
 					},
 				},
-				RecordVersion: ptr.String("__RecordVersion__"),
-				Status:        types.RegistryRecordStatus("DRAFT"),
-				CreatedAt:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-				UpdatedAt:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				RecordVersion:  ptr.String("__RecordVersion__"),
+				Status:         types.RegistryRecordStatus("DRAFT"),
+				CreatedAt:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				UpdatedAt:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				CustomMetadata: document.NewLazyDocument("__Document__"),
 			},
 			{
 				RegistryArn: ptr.String("__RegistryArn__"),
@@ -281,10 +283,11 @@ func TestUpdateResponseSnapshot_BatchGetDiscoverableRegistryRecord(t *testing.T)
 						},
 					},
 				},
-				RecordVersion: ptr.String("__RecordVersion__"),
-				Status:        types.RegistryRecordStatus("DRAFT"),
-				CreatedAt:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-				UpdatedAt:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				RecordVersion:  ptr.String("__RecordVersion__"),
+				Status:         types.RegistryRecordStatus("DRAFT"),
+				CreatedAt:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				UpdatedAt:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				CustomMetadata: document.NewLazyDocument("__Document__"),
 			},
 		},
 		Errors: []types.BatchGetDiscoverableRegistryRecordError{
@@ -451,10 +454,11 @@ func TestUpdateResponseSnapshot_SearchDiscoverableRegistryRecords(t *testing.T) 
 						},
 					},
 				},
-				RecordVersion: ptr.String("__RecordVersion__"),
-				Status:        types.RegistryRecordStatus("DRAFT"),
-				CreatedAt:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-				UpdatedAt:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				RecordVersion:  ptr.String("__RecordVersion__"),
+				Status:         types.RegistryRecordStatus("DRAFT"),
+				CreatedAt:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				UpdatedAt:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				CustomMetadata: document.NewLazyDocument("__Document__"),
 			},
 			{
 				RegistryArn: ptr.String("__RegistryArn__"),
@@ -522,10 +526,11 @@ func TestUpdateResponseSnapshot_SearchDiscoverableRegistryRecords(t *testing.T) 
 						},
 					},
 				},
-				RecordVersion: ptr.String("__RecordVersion__"),
-				Status:        types.RegistryRecordStatus("DRAFT"),
-				CreatedAt:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-				UpdatedAt:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				RecordVersion:  ptr.String("__RecordVersion__"),
+				Status:         types.RegistryRecordStatus("DRAFT"),
+				CreatedAt:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				UpdatedAt:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				CustomMetadata: document.NewLazyDocument("__Document__"),
 			},
 		},
 	}

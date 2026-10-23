@@ -5,7 +5,9 @@ package bedrockagent
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/bedrockagent/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagent/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -58,6 +60,25 @@ type DeleteKnowledgeBaseDocumentsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteKnowledgeBaseDocumentsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteKnowledgeBaseDocumentsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteKnowledgeBaseDocumentsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.DeleteKnowledgeBaseDocumentsRequest_clientToken, *v.ClientToken)
+	}
+	if v.DataSourceId != nil {
+		s.WriteString(schemas.DeleteKnowledgeBaseDocumentsRequest_dataSourceId, *v.DataSourceId)
+	}
+	serializeDocumentIdentifiers(s, schemas.DeleteKnowledgeBaseDocumentsRequest_documentIdentifiers, v.DocumentIdentifiers)
+	if v.KnowledgeBaseId != nil {
+		s.WriteString(schemas.DeleteKnowledgeBaseDocumentsRequest_knowledgeBaseId, *v.KnowledgeBaseId)
+	}
+}
+
 type DeleteKnowledgeBaseDocumentsOutput struct {
 
 	// A list of objects, each of which contains information about the documents that
@@ -70,13 +91,29 @@ type DeleteKnowledgeBaseDocumentsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteKnowledgeBaseDocumentsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteKnowledgeBaseDocumentsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteKnowledgeBaseDocumentsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeKnowledgeBaseDocumentDetails(s, schemas.DeleteKnowledgeBaseDocumentsResponse_documentDetails, v.DocumentDetails)
+}
+func (v *DeleteKnowledgeBaseDocumentsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteKnowledgeBaseDocumentsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteKnowledgeBaseDocumentsResponse_documentDetails:
+			return deserializeKnowledgeBaseDocumentDetails(d, schemas.DeleteKnowledgeBaseDocumentsResponse_documentDetails, &v.DocumentDetails)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteKnowledgeBaseDocumentsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteKnowledgeBaseDocuments{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteKnowledgeBaseDocuments, schemas.DeleteKnowledgeBaseDocumentsRequest, schemas.DeleteKnowledgeBaseDocumentsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteKnowledgeBaseDocuments{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteKnowledgeBaseDocuments, schemas.DeleteKnowledgeBaseDocumentsRequest, schemas.DeleteKnowledgeBaseDocumentsResponse), output: &DeleteKnowledgeBaseDocumentsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

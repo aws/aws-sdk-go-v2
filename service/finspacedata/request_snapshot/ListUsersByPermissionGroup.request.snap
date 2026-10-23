@@ -1,3 +1,0 @@
-GET /permission-group/__PermissionGroupId__/users?maxResults=1&nextToken=__NextToken__
-
-

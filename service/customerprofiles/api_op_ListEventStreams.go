@@ -5,7 +5,9 @@ package customerprofiles
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/customerprofiles/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/customerprofiles/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -41,6 +43,24 @@ type ListEventStreamsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListEventStreamsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListEventStreamsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListEventStreamsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DomainName != nil {
+		s.WriteString(schemas.ListEventStreamsRequest_DomainName, *v.DomainName)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListEventStreamsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListEventStreamsRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListEventStreamsOutput struct {
 
 	// Contains summary information about an EventStream.
@@ -55,13 +75,35 @@ type ListEventStreamsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListEventStreamsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListEventStreamsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListEventStreamsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeEventStreamSummaryList(s, schemas.ListEventStreamsResponse_Items, v.Items)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListEventStreamsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListEventStreamsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListEventStreamsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListEventStreamsResponse_Items:
+			return deserializeEventStreamSummaryList(d, schemas.ListEventStreamsResponse_Items, &v.Items)
+		case schemas.ListEventStreamsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListEventStreamsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListEventStreamsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListEventStreams{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListEventStreams, schemas.ListEventStreamsRequest, schemas.ListEventStreamsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListEventStreams{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListEventStreams, schemas.ListEventStreamsRequest, schemas.ListEventStreamsResponse), output: &ListEventStreamsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

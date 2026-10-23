@@ -1,0 +1,5 @@
+409
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: PartnerCentralAccount.AcceptConnectionInvitation
+
+{"__type":"ConflictException","Message":"__Message__","Reason":"CONFLICT_CLIENT_TOKEN"}

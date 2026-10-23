@@ -4,7 +4,9 @@ package quicksight
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/quicksight/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/quicksight/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,21 @@ type DescribeLimitsProfileInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeLimitsProfileInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeLimitsProfileRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeLimitsProfileInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountId != nil {
+		s.WriteString(schemas.DescribeLimitsProfileRequest_accountId, *v.AccountId)
+	}
+	if v.ProfileId != nil {
+		s.WriteString(schemas.DescribeLimitsProfileRequest_profileId, *v.ProfileId)
+	}
+}
+
 type DescribeLimitsProfileOutput struct {
 
 	// The details of the requested limits profile, including its name, description,
@@ -53,13 +70,34 @@ type DescribeLimitsProfileOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeLimitsProfileOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeLimitsProfileResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeLimitsProfileOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Profile != nil {
+		s.WriteStruct(schemas.DescribeLimitsProfileResponse_profile)
+		v.Profile.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DescribeLimitsProfileOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeLimitsProfileResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeLimitsProfileResponse_profile:
+			v.Profile = &types.LimitsProfile{}
+			return v.Profile.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeLimitsProfileMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeLimitsProfile{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeLimitsProfile, schemas.DescribeLimitsProfileRequest, schemas.DescribeLimitsProfileResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeLimitsProfile{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeLimitsProfile, schemas.DescribeLimitsProfileRequest, schemas.DescribeLimitsProfileResponse), output: &DescribeLimitsProfileOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package elasticsearchservice
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/elasticsearchservice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/elasticsearchservice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -43,6 +45,26 @@ type CreateVpcEndpointInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateVpcEndpointInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateVpcEndpointRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateVpcEndpointInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateVpcEndpointRequest_ClientToken, *v.ClientToken)
+	}
+	if v.DomainArn != nil {
+		s.WriteString(schemas.CreateVpcEndpointRequest_DomainArn, *v.DomainArn)
+	}
+	if v.VpcOptions != nil {
+		s.WriteStruct(schemas.CreateVpcEndpointRequest_VpcOptions)
+		v.VpcOptions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 // Container for response parameters to the CreateVpcEndpoint operation. Contains the configuration
 // and status of the VPC Endpoint being created.
 type CreateVpcEndpointOutput struct {
@@ -58,13 +80,34 @@ type CreateVpcEndpointOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateVpcEndpointOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateVpcEndpointResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateVpcEndpointOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.VpcEndpoint != nil {
+		s.WriteStruct(schemas.CreateVpcEndpointResponse_VpcEndpoint)
+		v.VpcEndpoint.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateVpcEndpointOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateVpcEndpointResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateVpcEndpointResponse_VpcEndpoint:
+			v.VpcEndpoint = &types.VpcEndpoint{}
+			return v.VpcEndpoint.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateVpcEndpointMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateVpcEndpoint{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateVpcEndpoint, schemas.CreateVpcEndpointRequest, schemas.CreateVpcEndpointResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateVpcEndpoint{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateVpcEndpoint, schemas.CreateVpcEndpointRequest, schemas.CreateVpcEndpointResponse), output: &CreateVpcEndpointOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

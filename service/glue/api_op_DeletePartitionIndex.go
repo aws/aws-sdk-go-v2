@@ -4,6 +4,8 @@ package glue
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/glue/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -47,6 +49,27 @@ type DeletePartitionIndexInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeletePartitionIndexInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeletePartitionIndexRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeletePartitionIndexInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CatalogId != nil {
+		s.WriteString(schemas.DeletePartitionIndexRequest_CatalogId, *v.CatalogId)
+	}
+	if v.DatabaseName != nil {
+		s.WriteString(schemas.DeletePartitionIndexRequest_DatabaseName, *v.DatabaseName)
+	}
+	if v.IndexName != nil {
+		s.WriteString(schemas.DeletePartitionIndexRequest_IndexName, *v.IndexName)
+	}
+	if v.TableName != nil {
+		s.WriteString(schemas.DeletePartitionIndexRequest_TableName, *v.TableName)
+	}
+}
+
 type DeletePartitionIndexOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -54,13 +77,26 @@ type DeletePartitionIndexOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeletePartitionIndexOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeletePartitionIndexResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeletePartitionIndexOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeletePartitionIndexOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeletePartitionIndexResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeletePartitionIndexMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeletePartitionIndex{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeletePartitionIndex, schemas.DeletePartitionIndexRequest, schemas.DeletePartitionIndexResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeletePartitionIndex{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeletePartitionIndex, schemas.DeletePartitionIndexRequest, schemas.DeletePartitionIndexResponse), output: &DeletePartitionIndexOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

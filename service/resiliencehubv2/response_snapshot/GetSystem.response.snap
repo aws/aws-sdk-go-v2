@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"system":{"createdAt":946684800,"description":"__Description__","kmsKeyId":"__KmsKeyId__","name":"__Name__","organizationId":"__OrganizationId__","ouId":"__OuId__","sharingEnabled":true,"systemArn":"__SystemArn__","systemId":"__SystemId__","tags":{"key0":"__Value__"},"updatedAt":946684800}}

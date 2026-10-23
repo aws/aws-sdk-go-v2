@@ -5,7 +5,9 @@ package bedrockruntime
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/bedrockruntime/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockruntime/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -53,6 +55,36 @@ type ListAsyncInvokesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAsyncInvokesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAsyncInvokesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAsyncInvokesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListAsyncInvokesRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAsyncInvokesRequest_nextToken, *v.NextToken)
+	}
+	if v.SortBy != "" {
+		s.WriteString(schemas.ListAsyncInvokesRequest_sortBy, string(v.SortBy))
+	}
+	if v.SortOrder != "" {
+		s.WriteString(schemas.ListAsyncInvokesRequest_sortOrder, string(v.SortOrder))
+	}
+	if v.StatusEquals != "" {
+		s.WriteString(schemas.ListAsyncInvokesRequest_statusEquals, string(v.StatusEquals))
+	}
+	if v.SubmitTimeAfter != nil {
+		s.WriteTime(schemas.ListAsyncInvokesRequest_submitTimeAfter, *v.SubmitTimeAfter)
+	}
+	if v.SubmitTimeBefore != nil {
+		s.WriteTime(schemas.ListAsyncInvokesRequest_submitTimeBefore, *v.SubmitTimeBefore)
+	}
+}
+
 type ListAsyncInvokesOutput struct {
 
 	// A list of invocation summaries.
@@ -68,13 +100,35 @@ type ListAsyncInvokesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAsyncInvokesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAsyncInvokesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAsyncInvokesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAsyncInvokeSummaries(s, schemas.ListAsyncInvokesResponse_asyncInvokeSummaries, v.AsyncInvokeSummaries)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAsyncInvokesResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListAsyncInvokesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListAsyncInvokesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListAsyncInvokesResponse_asyncInvokeSummaries:
+			return deserializeAsyncInvokeSummaries(d, schemas.ListAsyncInvokesResponse_asyncInvokeSummaries, &v.AsyncInvokeSummaries)
+		case schemas.ListAsyncInvokesResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListAsyncInvokesResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListAsyncInvokesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListAsyncInvokes{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAsyncInvokes, schemas.ListAsyncInvokesRequest, schemas.ListAsyncInvokesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListAsyncInvokes{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAsyncInvokes, schemas.ListAsyncInvokesRequest, schemas.ListAsyncInvokesResponse), output: &ListAsyncInvokesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

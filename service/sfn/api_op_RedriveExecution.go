@@ -5,6 +5,8 @@ package sfn
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/sfn/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -90,6 +92,21 @@ type RedriveExecutionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RedriveExecutionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RedriveExecutionInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RedriveExecutionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.RedriveExecutionInput_clientToken, *v.ClientToken)
+	}
+	if v.ExecutionArn != nil {
+		s.WriteString(schemas.RedriveExecutionInput_executionArn, *v.ExecutionArn)
+	}
+}
+
 type RedriveExecutionOutput struct {
 
 	// The date the execution was last redriven.
@@ -103,13 +120,32 @@ type RedriveExecutionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RedriveExecutionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RedriveExecutionOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RedriveExecutionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RedriveDate != nil {
+		s.WriteTime(schemas.RedriveExecutionOutput_redriveDate, *v.RedriveDate)
+	}
+}
+func (v *RedriveExecutionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RedriveExecutionOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RedriveExecutionOutput_redriveDate:
+			v.RedriveDate = new(time.Time)
+			return d.ReadTime(schemas.RedriveExecutionOutput_redriveDate, v.RedriveDate)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationRedriveExecutionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpRedriveExecution{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RedriveExecution, schemas.RedriveExecutionInput, schemas.RedriveExecutionOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpRedriveExecution{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RedriveExecution, schemas.RedriveExecutionInput, schemas.RedriveExecutionOutput), output: &RedriveExecutionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

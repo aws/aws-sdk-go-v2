@@ -5,7 +5,9 @@ package rekognition
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/rekognition/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/rekognition/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -68,6 +70,24 @@ type GetFaceDetectionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetFaceDetectionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetFaceDetectionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetFaceDetectionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.JobId != nil {
+		s.WriteString(schemas.GetFaceDetectionRequest_JobId, *v.JobId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.GetFaceDetectionRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetFaceDetectionRequest_NextToken, *v.NextToken)
+	}
+}
+
 type GetFaceDetectionOutput struct {
 
 	// An array of faces detected in the video. Each element contains a detected
@@ -110,13 +130,79 @@ type GetFaceDetectionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetFaceDetectionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetFaceDetectionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetFaceDetectionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeFaceDetections(s, schemas.GetFaceDetectionResponse_Faces, v.Faces)
+	if v.JobId != nil {
+		s.WriteString(schemas.GetFaceDetectionResponse_JobId, *v.JobId)
+	}
+	if v.JobStatus != "" {
+		s.WriteString(schemas.GetFaceDetectionResponse_JobStatus, string(v.JobStatus))
+	}
+	if v.JobTag != nil {
+		s.WriteString(schemas.GetFaceDetectionResponse_JobTag, *v.JobTag)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetFaceDetectionResponse_NextToken, *v.NextToken)
+	}
+	if v.StatusMessage != nil {
+		s.WriteString(schemas.GetFaceDetectionResponse_StatusMessage, *v.StatusMessage)
+	}
+	if v.Video != nil {
+		s.WriteStruct(schemas.GetFaceDetectionResponse_Video)
+		v.Video.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.VideoMetadata != nil {
+		s.WriteStruct(schemas.GetFaceDetectionResponse_VideoMetadata)
+		v.VideoMetadata.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetFaceDetectionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetFaceDetectionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetFaceDetectionResponse_Faces:
+			return deserializeFaceDetections(d, schemas.GetFaceDetectionResponse_Faces, &v.Faces)
+		case schemas.GetFaceDetectionResponse_JobId:
+			v.JobId = new(string)
+			return d.ReadString(schemas.GetFaceDetectionResponse_JobId, v.JobId)
+		case schemas.GetFaceDetectionResponse_JobStatus:
+			var ev string
+			if err := d.ReadString(schemas.GetFaceDetectionResponse_JobStatus, &ev); err != nil {
+				return err
+			}
+			v.JobStatus = types.VideoJobStatus(ev)
+			return nil
+		case schemas.GetFaceDetectionResponse_JobTag:
+			v.JobTag = new(string)
+			return d.ReadString(schemas.GetFaceDetectionResponse_JobTag, v.JobTag)
+		case schemas.GetFaceDetectionResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.GetFaceDetectionResponse_NextToken, v.NextToken)
+		case schemas.GetFaceDetectionResponse_StatusMessage:
+			v.StatusMessage = new(string)
+			return d.ReadString(schemas.GetFaceDetectionResponse_StatusMessage, v.StatusMessage)
+		case schemas.GetFaceDetectionResponse_Video:
+			v.Video = &types.Video{}
+			return v.Video.Deserialize(d)
+		case schemas.GetFaceDetectionResponse_VideoMetadata:
+			v.VideoMetadata = &types.VideoMetadata{}
+			return v.VideoMetadata.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetFaceDetectionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetFaceDetection{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetFaceDetection, schemas.GetFaceDetectionRequest, schemas.GetFaceDetectionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetFaceDetection{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetFaceDetection, schemas.GetFaceDetectionRequest, schemas.GetFaceDetectionResponse), output: &GetFaceDetectionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

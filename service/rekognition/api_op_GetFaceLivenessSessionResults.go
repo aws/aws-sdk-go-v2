@@ -4,7 +4,9 @@ package rekognition
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/rekognition/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/rekognition/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -17,6 +19,11 @@ import (
 // The number of audit images returned by GetFaceLivenessSessionResults is defined
 // by the AuditImagesLimit paramater when calling CreateFaceLivenessSession .
 // Reference images are always returned when possible.
+//
+// For a session that has completed, the response can also include a Feedback list
+// describing conditions that were detected in the selfie-video, such as low
+// lighting or an obstructed face, and Metadata about the client that streamed the
+// session.
 func (c *Client) GetFaceLivenessSessionResults(ctx context.Context, params *GetFaceLivenessSessionResultsInput, optFns ...func(*Options)) (*GetFaceLivenessSessionResultsOutput, error) {
 	if params == nil {
 		params = &GetFaceLivenessSessionResultsInput{}
@@ -41,6 +48,18 @@ type GetFaceLivenessSessionResultsInput struct {
 	SessionId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetFaceLivenessSessionResultsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetFaceLivenessSessionResultsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetFaceLivenessSessionResultsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SessionId != nil {
+		s.WriteString(schemas.GetFaceLivenessSessionResultsRequest_SessionId, *v.SessionId)
+	}
 }
 
 type GetFaceLivenessSessionResultsOutput struct {
@@ -72,6 +91,15 @@ type GetFaceLivenessSessionResultsOutput struct {
 	// represented as a float value between 0 to 100.
 	Confidence *float32
 
+	// A list of conditions that were detected in the Face Liveness video and that
+	// contributed to the returned Confidence score. Each item contains a code and a
+	// human-readable message. Feedback is returned only for sessions with a Status of
+	// SUCCEEDED , and the list is empty when no such conditions were detected.
+	Feedback []types.FeedbackItem
+
+	// Metadata about the client that streamed the video for the Face Liveness session.
+	Metadata *types.SessionMetadata
+
 	// A high-quality image from the Face Liveness video that can be used for face
 	// comparison or search. It includes a bounding box of the face and the
 	// Base64-encoded bytes that return an image. If the CreateFaceLivenessSession
@@ -86,13 +114,78 @@ type GetFaceLivenessSessionResultsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetFaceLivenessSessionResultsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetFaceLivenessSessionResultsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetFaceLivenessSessionResultsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAuditImages(s, schemas.GetFaceLivenessSessionResultsResponse_AuditImages, v.AuditImages)
+	if v.Challenge != nil {
+		s.WriteStruct(schemas.GetFaceLivenessSessionResultsResponse_Challenge)
+		v.Challenge.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Confidence != nil {
+		s.WriteFloat32(schemas.GetFaceLivenessSessionResultsResponse_Confidence, *v.Confidence)
+	}
+	serializeFeedbackList(s, schemas.GetFaceLivenessSessionResultsResponse_Feedback, v.Feedback)
+	if v.Metadata != nil {
+		s.WriteStruct(schemas.GetFaceLivenessSessionResultsResponse_Metadata)
+		v.Metadata.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ReferenceImage != nil {
+		s.WriteStruct(schemas.GetFaceLivenessSessionResultsResponse_ReferenceImage)
+		v.ReferenceImage.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SessionId != nil {
+		s.WriteString(schemas.GetFaceLivenessSessionResultsResponse_SessionId, *v.SessionId)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.GetFaceLivenessSessionResultsResponse_Status, string(v.Status))
+	}
+}
+func (v *GetFaceLivenessSessionResultsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetFaceLivenessSessionResultsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetFaceLivenessSessionResultsResponse_AuditImages:
+			return deserializeAuditImages(d, schemas.GetFaceLivenessSessionResultsResponse_AuditImages, &v.AuditImages)
+		case schemas.GetFaceLivenessSessionResultsResponse_Challenge:
+			v.Challenge = &types.Challenge{}
+			return v.Challenge.Deserialize(d)
+		case schemas.GetFaceLivenessSessionResultsResponse_Confidence:
+			v.Confidence = new(float32)
+			return d.ReadFloat32(schemas.GetFaceLivenessSessionResultsResponse_Confidence, v.Confidence)
+		case schemas.GetFaceLivenessSessionResultsResponse_Feedback:
+			return deserializeFeedbackList(d, schemas.GetFaceLivenessSessionResultsResponse_Feedback, &v.Feedback)
+		case schemas.GetFaceLivenessSessionResultsResponse_Metadata:
+			v.Metadata = &types.SessionMetadata{}
+			return v.Metadata.Deserialize(d)
+		case schemas.GetFaceLivenessSessionResultsResponse_ReferenceImage:
+			v.ReferenceImage = &types.AuditImage{}
+			return v.ReferenceImage.Deserialize(d)
+		case schemas.GetFaceLivenessSessionResultsResponse_SessionId:
+			v.SessionId = new(string)
+			return d.ReadString(schemas.GetFaceLivenessSessionResultsResponse_SessionId, v.SessionId)
+		case schemas.GetFaceLivenessSessionResultsResponse_Status:
+			var ev string
+			if err := d.ReadString(schemas.GetFaceLivenessSessionResultsResponse_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.LivenessSessionStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetFaceLivenessSessionResultsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetFaceLivenessSessionResults{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetFaceLivenessSessionResults, schemas.GetFaceLivenessSessionResultsRequest, schemas.GetFaceLivenessSessionResultsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetFaceLivenessSessionResults{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetFaceLivenessSessionResults, schemas.GetFaceLivenessSessionResultsRequest, schemas.GetFaceLivenessSessionResultsResponse), output: &GetFaceLivenessSessionResultsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

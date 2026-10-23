@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"items":[{"architecture":"ARM_64","buildId":"__BuildId__","buildState":"PENDING","chipset":"GRAVITON","chipsetGeneration":"__ChipsetGeneration__","createdAt":946684800,"imageArn":"__ImageArn__","imageVersion":"__ImageVersion__","stateReason":"__StateReason__"},{"architecture":"ARM_64","buildId":"__BuildId__","buildState":"PENDING","chipset":"GRAVITON","chipsetGeneration":"__ChipsetGeneration__","createdAt":946684800,"imageArn":"__ImageArn__","imageVersion":"__ImageVersion__","stateReason":"__StateReason__"}],"nextToken":"__NextToken__"}

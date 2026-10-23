@@ -5,7 +5,9 @@ package eks
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/eks/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/eks/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -47,6 +49,21 @@ type ListAccessPoliciesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAccessPoliciesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAccessPoliciesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAccessPoliciesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListAccessPoliciesRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAccessPoliciesRequest_nextToken, *v.NextToken)
+	}
+}
+
 type ListAccessPoliciesOutput struct {
 
 	// The list of available access policies. You can't view the contents of an access
@@ -70,13 +87,35 @@ type ListAccessPoliciesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAccessPoliciesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAccessPoliciesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAccessPoliciesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAccessPoliciesList(s, schemas.ListAccessPoliciesResponse_accessPolicies, v.AccessPolicies)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAccessPoliciesResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListAccessPoliciesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListAccessPoliciesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListAccessPoliciesResponse_accessPolicies:
+			return deserializeAccessPoliciesList(d, schemas.ListAccessPoliciesResponse_accessPolicies, &v.AccessPolicies)
+		case schemas.ListAccessPoliciesResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListAccessPoliciesResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListAccessPoliciesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListAccessPolicies{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAccessPolicies, schemas.ListAccessPoliciesRequest, schemas.ListAccessPoliciesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListAccessPolicies{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAccessPolicies, schemas.ListAccessPoliciesRequest, schemas.ListAccessPoliciesResponse), output: &ListAccessPoliciesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

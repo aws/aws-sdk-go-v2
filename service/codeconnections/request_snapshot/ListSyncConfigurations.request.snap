@@ -1,6 +1,7 @@
-POST /
+POST /service/CodeConnections_20231201/operation/ListSyncConfigurations
 
-Content-Type: application/x-amz-json-1.0
-X-Amz-Target: CodeConnections_20231201.ListSyncConfigurations
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"MaxResults":1,"NextToken":"__NextToken__","RepositoryLinkId":"__RepositoryLinkId__","SyncType":"CFN_STACK_SYNC"}
+¿jMaxResultsiNextTokenm__NextToken__pRepositoryLinkIdt__RepositoryLinkId__hSyncTypenCFN_STACK_SYNCÿ

@@ -4,6 +4,8 @@ package sfn
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/sfn/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -71,6 +73,24 @@ type PublishStateMachineVersionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PublishStateMachineVersionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PublishStateMachineVersionInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PublishStateMachineVersionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.PublishStateMachineVersionInput_description, *v.Description)
+	}
+	if v.RevisionId != nil {
+		s.WriteString(schemas.PublishStateMachineVersionInput_revisionId, *v.RevisionId)
+	}
+	if v.StateMachineArn != nil {
+		s.WriteString(schemas.PublishStateMachineVersionInput_stateMachineArn, *v.StateMachineArn)
+	}
+}
+
 type PublishStateMachineVersionOutput struct {
 
 	// The date the version was created.
@@ -89,13 +109,38 @@ type PublishStateMachineVersionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PublishStateMachineVersionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PublishStateMachineVersionOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PublishStateMachineVersionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreationDate != nil {
+		s.WriteTime(schemas.PublishStateMachineVersionOutput_creationDate, *v.CreationDate)
+	}
+	if v.StateMachineVersionArn != nil {
+		s.WriteString(schemas.PublishStateMachineVersionOutput_stateMachineVersionArn, *v.StateMachineVersionArn)
+	}
+}
+func (v *PublishStateMachineVersionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PublishStateMachineVersionOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PublishStateMachineVersionOutput_creationDate:
+			v.CreationDate = new(time.Time)
+			return d.ReadTime(schemas.PublishStateMachineVersionOutput_creationDate, v.CreationDate)
+		case schemas.PublishStateMachineVersionOutput_stateMachineVersionArn:
+			v.StateMachineVersionArn = new(string)
+			return d.ReadString(schemas.PublishStateMachineVersionOutput_stateMachineVersionArn, v.StateMachineVersionArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPublishStateMachineVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpPublishStateMachineVersion{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PublishStateMachineVersion, schemas.PublishStateMachineVersionInput, schemas.PublishStateMachineVersionOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpPublishStateMachineVersion{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PublishStateMachineVersion, schemas.PublishStateMachineVersionInput, schemas.PublishStateMachineVersionOutput), output: &PublishStateMachineVersionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

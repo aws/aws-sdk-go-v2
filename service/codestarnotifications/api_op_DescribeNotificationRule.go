@@ -4,7 +4,9 @@ package codestarnotifications
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/codestarnotifications/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/codestarnotifications/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -33,6 +35,18 @@ type DescribeNotificationRuleInput struct {
 	Arn *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DescribeNotificationRuleInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeNotificationRuleRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeNotificationRuleInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.DescribeNotificationRuleRequest_Arn, *v.Arn)
+	}
 }
 
 type DescribeNotificationRuleOutput struct {
@@ -86,13 +100,91 @@ type DescribeNotificationRuleOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeNotificationRuleOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeNotificationRuleResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeNotificationRuleOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.DescribeNotificationRuleResult_Arn, *v.Arn)
+	}
+	if v.CreatedBy != nil {
+		s.WriteString(schemas.DescribeNotificationRuleResult_CreatedBy, *v.CreatedBy)
+	}
+	if v.CreatedTimestamp != nil {
+		s.WriteTime(schemas.DescribeNotificationRuleResult_CreatedTimestamp, *v.CreatedTimestamp)
+	}
+	if v.DetailType != "" {
+		s.WriteString(schemas.DescribeNotificationRuleResult_DetailType, string(v.DetailType))
+	}
+	serializeEventTypeBatch(s, schemas.DescribeNotificationRuleResult_EventTypes, v.EventTypes)
+	if v.LastModifiedTimestamp != nil {
+		s.WriteTime(schemas.DescribeNotificationRuleResult_LastModifiedTimestamp, *v.LastModifiedTimestamp)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.DescribeNotificationRuleResult_Name, *v.Name)
+	}
+	if v.Resource != nil {
+		s.WriteString(schemas.DescribeNotificationRuleResult_Resource, *v.Resource)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.DescribeNotificationRuleResult_Status, string(v.Status))
+	}
+	serializeTags(s, schemas.DescribeNotificationRuleResult_Tags, v.Tags)
+	serializeTargetsBatch(s, schemas.DescribeNotificationRuleResult_Targets, v.Targets)
+}
+func (v *DescribeNotificationRuleOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeNotificationRuleResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeNotificationRuleResult_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.DescribeNotificationRuleResult_Arn, v.Arn)
+		case schemas.DescribeNotificationRuleResult_CreatedBy:
+			v.CreatedBy = new(string)
+			return d.ReadString(schemas.DescribeNotificationRuleResult_CreatedBy, v.CreatedBy)
+		case schemas.DescribeNotificationRuleResult_CreatedTimestamp:
+			v.CreatedTimestamp = new(time.Time)
+			return d.ReadTime(schemas.DescribeNotificationRuleResult_CreatedTimestamp, v.CreatedTimestamp)
+		case schemas.DescribeNotificationRuleResult_DetailType:
+			var ev string
+			if err := d.ReadString(schemas.DescribeNotificationRuleResult_DetailType, &ev); err != nil {
+				return err
+			}
+			v.DetailType = types.DetailType(ev)
+			return nil
+		case schemas.DescribeNotificationRuleResult_EventTypes:
+			return deserializeEventTypeBatch(d, schemas.DescribeNotificationRuleResult_EventTypes, &v.EventTypes)
+		case schemas.DescribeNotificationRuleResult_LastModifiedTimestamp:
+			v.LastModifiedTimestamp = new(time.Time)
+			return d.ReadTime(schemas.DescribeNotificationRuleResult_LastModifiedTimestamp, v.LastModifiedTimestamp)
+		case schemas.DescribeNotificationRuleResult_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.DescribeNotificationRuleResult_Name, v.Name)
+		case schemas.DescribeNotificationRuleResult_Resource:
+			v.Resource = new(string)
+			return d.ReadString(schemas.DescribeNotificationRuleResult_Resource, v.Resource)
+		case schemas.DescribeNotificationRuleResult_Status:
+			var ev string
+			if err := d.ReadString(schemas.DescribeNotificationRuleResult_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.NotificationRuleStatus(ev)
+			return nil
+		case schemas.DescribeNotificationRuleResult_Tags:
+			return deserializeTags(d, schemas.DescribeNotificationRuleResult_Tags, &v.Tags)
+		case schemas.DescribeNotificationRuleResult_Targets:
+			return deserializeTargetsBatch(d, schemas.DescribeNotificationRuleResult_Targets, &v.Targets)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeNotificationRuleMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeNotificationRule{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeNotificationRule, schemas.DescribeNotificationRuleRequest, schemas.DescribeNotificationRuleResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeNotificationRule{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeNotificationRule, schemas.DescribeNotificationRuleRequest, schemas.DescribeNotificationRuleResult), output: &DescribeNotificationRuleOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

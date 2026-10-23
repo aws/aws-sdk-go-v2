@@ -1990,6 +1990,26 @@ func (m *validateOpSearchProfiles) HandleInitialize(ctx context.Context, in midd
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpSearchRecommendations struct {
+}
+
+func (*validateOpSearchRecommendations) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpSearchRecommendations) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*SearchRecommendationsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpSearchRecommendationsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpStartRecommender struct {
 }
 
@@ -2624,6 +2644,10 @@ func addOpPutSegmentSubscriptionValidationMiddleware(stack *middleware.Stack) er
 
 func addOpSearchProfilesValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpSearchProfiles{}, middleware.After)
+}
+
+func addOpSearchRecommendationsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpSearchRecommendations{}, middleware.After)
 }
 
 func addOpStartRecommenderValidationMiddleware(stack *middleware.Stack) error {
@@ -4002,6 +4026,21 @@ func validateRecommendationDiversityConfig(v *types.RecommendationDiversityConfi
 	invalidParams := smithy.InvalidParamsError{Context: "RecommendationDiversityConfig"}
 	if v.Enabled == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Enabled"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateRecommender(v *types.Recommender) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "Recommender"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -6427,6 +6466,39 @@ func validateOpSearchProfilesInput(v *SearchProfilesInput) error {
 	if v.AdditionalSearchKeys != nil {
 		if err := validateAdditionalSearchKeysList(v.AdditionalSearchKeys); err != nil {
 			invalidParams.AddNested("AdditionalSearchKeys", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpSearchRecommendationsInput(v *SearchRecommendationsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SearchRecommendationsInput"}
+	if v.DomainName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DomainName"))
+	}
+	if v.KeyName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("KeyName"))
+	}
+	if v.KeyValues == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("KeyValues"))
+	}
+	if v.Recommender == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Recommender"))
+	} else if v.Recommender != nil {
+		if err := validateRecommender(v.Recommender); err != nil {
+			invalidParams.AddNested("Recommender", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Diversity != nil {
+		if err := validateRecommendationDiversityConfig(v.Diversity); err != nil {
+			invalidParams.AddNested("Diversity", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

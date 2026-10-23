@@ -5,7 +5,9 @@ package ssm
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/ssm/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ssm/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -54,6 +56,27 @@ type GetOpsSummaryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetOpsSummaryInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetOpsSummaryRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetOpsSummaryInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeOpsAggregatorList(s, schemas.GetOpsSummaryRequest_Aggregators, v.Aggregators)
+	serializeOpsFilterList(s, schemas.GetOpsSummaryRequest_Filters, v.Filters)
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.GetOpsSummaryRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetOpsSummaryRequest_NextToken, *v.NextToken)
+	}
+	serializeOpsResultAttributeList(s, schemas.GetOpsSummaryRequest_ResultAttributes, v.ResultAttributes)
+	if v.SyncName != nil {
+		s.WriteString(schemas.GetOpsSummaryRequest_SyncName, *v.SyncName)
+	}
+}
+
 type GetOpsSummaryOutput struct {
 
 	// The list of aggregated details and filtered OpsData.
@@ -69,13 +92,35 @@ type GetOpsSummaryOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetOpsSummaryOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetOpsSummaryResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetOpsSummaryOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeOpsEntityList(s, schemas.GetOpsSummaryResult_Entities, v.Entities)
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetOpsSummaryResult_NextToken, *v.NextToken)
+	}
+}
+func (v *GetOpsSummaryOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetOpsSummaryResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetOpsSummaryResult_Entities:
+			return deserializeOpsEntityList(d, schemas.GetOpsSummaryResult_Entities, &v.Entities)
+		case schemas.GetOpsSummaryResult_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.GetOpsSummaryResult_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetOpsSummaryMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetOpsSummary{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetOpsSummary, schemas.GetOpsSummaryRequest, schemas.GetOpsSummaryResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetOpsSummary{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetOpsSummary, schemas.GetOpsSummaryRequest, schemas.GetOpsSummaryResult), output: &GetOpsSummaryOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

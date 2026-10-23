@@ -5,7 +5,9 @@ package quicksight
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/quicksight/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/quicksight/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -47,6 +49,25 @@ type SearchDataSetsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SearchDataSetsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SearchDataSetsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SearchDataSetsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AwsAccountId != nil {
+		s.WriteString(schemas.SearchDataSetsRequest_AwsAccountId, *v.AwsAccountId)
+	}
+	serializeDataSetSearchFilterList(s, schemas.SearchDataSetsRequest_Filters, v.Filters)
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.SearchDataSetsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.SearchDataSetsRequest_NextToken, *v.NextToken)
+	}
+}
+
 type SearchDataSetsOutput struct {
 
 	// A DataSetSummaries object that returns a summary of a dataset.
@@ -67,13 +88,46 @@ type SearchDataSetsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SearchDataSetsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SearchDataSetsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SearchDataSetsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDataSetSummaryList(s, schemas.SearchDataSetsResponse_DataSetSummaries, v.DataSetSummaries)
+	if v.NextToken != nil {
+		s.WriteString(schemas.SearchDataSetsResponse_NextToken, *v.NextToken)
+	}
+	if v.RequestId != nil {
+		s.WriteString(schemas.SearchDataSetsResponse_RequestId, *v.RequestId)
+	}
+	if v.Status != 0 {
+		s.WriteInt32(schemas.SearchDataSetsResponse_Status, v.Status)
+	}
+}
+func (v *SearchDataSetsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SearchDataSetsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SearchDataSetsResponse_DataSetSummaries:
+			return deserializeDataSetSummaryList(d, schemas.SearchDataSetsResponse_DataSetSummaries, &v.DataSetSummaries)
+		case schemas.SearchDataSetsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.SearchDataSetsResponse_NextToken, v.NextToken)
+		case schemas.SearchDataSetsResponse_RequestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.SearchDataSetsResponse_RequestId, v.RequestId)
+		case schemas.SearchDataSetsResponse_Status:
+			return d.ReadInt32(schemas.SearchDataSetsResponse_Status, &v.Status)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationSearchDataSetsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpSearchDataSets{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SearchDataSets, schemas.SearchDataSetsRequest, schemas.SearchDataSetsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpSearchDataSets{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SearchDataSets, schemas.SearchDataSetsRequest, schemas.SearchDataSetsResponse), output: &SearchDataSetsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

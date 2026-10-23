@@ -4,7 +4,9 @@ package auditmanager
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/auditmanager/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/auditmanager/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -52,6 +54,35 @@ type UpdateAssessmentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateAssessmentInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateAssessmentRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateAssessmentInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AssessmentDescription != nil {
+		s.WriteString(schemas.UpdateAssessmentRequest_assessmentDescription, *v.AssessmentDescription)
+	}
+	if v.AssessmentId != nil {
+		s.WriteString(schemas.UpdateAssessmentRequest_assessmentId, *v.AssessmentId)
+	}
+	if v.AssessmentName != nil {
+		s.WriteString(schemas.UpdateAssessmentRequest_assessmentName, *v.AssessmentName)
+	}
+	if v.AssessmentReportsDestination != nil {
+		s.WriteStruct(schemas.UpdateAssessmentRequest_assessmentReportsDestination)
+		v.AssessmentReportsDestination.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeRoles(s, schemas.UpdateAssessmentRequest_roles, v.Roles)
+	if v.Scope != nil {
+		s.WriteStruct(schemas.UpdateAssessmentRequest_scope)
+		v.Scope.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type UpdateAssessmentOutput struct {
 
 	//  The response object for the UpdateAssessment API. This is the name of the
@@ -64,13 +95,34 @@ type UpdateAssessmentOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateAssessmentOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateAssessmentResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateAssessmentOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Assessment != nil {
+		s.WriteStruct(schemas.UpdateAssessmentResponse_assessment)
+		v.Assessment.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateAssessmentOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateAssessmentResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateAssessmentResponse_assessment:
+			v.Assessment = &types.Assessment{}
+			return v.Assessment.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateAssessmentMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateAssessment{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateAssessment, schemas.UpdateAssessmentRequest, schemas.UpdateAssessmentResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateAssessment{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateAssessment, schemas.UpdateAssessmentRequest, schemas.UpdateAssessmentResponse), output: &UpdateAssessmentOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

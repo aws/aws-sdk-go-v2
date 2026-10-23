@@ -4,7 +4,9 @@ package glue
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/glue/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/glue/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -37,6 +39,21 @@ type GetSessionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetSessionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetSessionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetSessionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Id != nil {
+		s.WriteString(schemas.GetSessionRequest_Id, *v.Id)
+	}
+	if v.RequestOrigin != nil {
+		s.WriteString(schemas.GetSessionRequest_RequestOrigin, *v.RequestOrigin)
+	}
+}
+
 type GetSessionOutput struct {
 
 	// The session object is returned in the response.
@@ -48,13 +65,34 @@ type GetSessionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetSessionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetSessionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetSessionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Session != nil {
+		s.WriteStruct(schemas.GetSessionResponse_Session)
+		v.Session.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetSessionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetSessionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetSessionResponse_Session:
+			v.Session = &types.Session{}
+			return v.Session.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetSessionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetSession{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetSession, schemas.GetSessionRequest, schemas.GetSessionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetSession{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetSession, schemas.GetSessionRequest, schemas.GetSessionResponse), output: &GetSessionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

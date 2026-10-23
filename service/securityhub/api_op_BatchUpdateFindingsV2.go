@@ -4,7 +4,9 @@ package securityhub
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/securityhub/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/securityhub/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -72,6 +74,26 @@ type BatchUpdateFindingsV2Input struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchUpdateFindingsV2Input) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchUpdateFindingsV2Request)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchUpdateFindingsV2Input) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Comment != nil {
+		s.WriteString(schemas.BatchUpdateFindingsV2Request_Comment, *v.Comment)
+	}
+	serializeOcsfFindingIdentifierList(s, schemas.BatchUpdateFindingsV2Request_FindingIdentifiers, v.FindingIdentifiers)
+	serializeMetadataUidList(s, schemas.BatchUpdateFindingsV2Request_MetadataUids, v.MetadataUids)
+	if v.SeverityId != nil {
+		s.WriteInt32(schemas.BatchUpdateFindingsV2Request_SeverityId, *v.SeverityId)
+	}
+	if v.StatusId != nil {
+		s.WriteInt32(schemas.BatchUpdateFindingsV2Request_StatusId, *v.StatusId)
+	}
+}
+
 type BatchUpdateFindingsV2Output struct {
 
 	// The list of findings that were updated successfully.
@@ -90,13 +112,32 @@ type BatchUpdateFindingsV2Output struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchUpdateFindingsV2Output) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchUpdateFindingsV2Response)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchUpdateFindingsV2Output) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeBatchUpdateFindingsV2ProcessedFindingsList(s, schemas.BatchUpdateFindingsV2Response_ProcessedFindings, v.ProcessedFindings)
+	serializeBatchUpdateFindingsV2UnprocessedFindingsList(s, schemas.BatchUpdateFindingsV2Response_UnprocessedFindings, v.UnprocessedFindings)
+}
+func (v *BatchUpdateFindingsV2Output) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchUpdateFindingsV2Response, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchUpdateFindingsV2Response_ProcessedFindings:
+			return deserializeBatchUpdateFindingsV2ProcessedFindingsList(d, schemas.BatchUpdateFindingsV2Response_ProcessedFindings, &v.ProcessedFindings)
+		case schemas.BatchUpdateFindingsV2Response_UnprocessedFindings:
+			return deserializeBatchUpdateFindingsV2UnprocessedFindingsList(d, schemas.BatchUpdateFindingsV2Response_UnprocessedFindings, &v.UnprocessedFindings)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationBatchUpdateFindingsV2Middlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpBatchUpdateFindingsV2{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchUpdateFindingsV2, schemas.BatchUpdateFindingsV2Request, schemas.BatchUpdateFindingsV2Response)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpBatchUpdateFindingsV2{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchUpdateFindingsV2, schemas.BatchUpdateFindingsV2Request, schemas.BatchUpdateFindingsV2Response), output: &BatchUpdateFindingsV2Output{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package glue
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/glue/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/glue/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -34,6 +36,18 @@ type GetAssetTypeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetAssetTypeInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetAssetTypeRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetAssetTypeInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Identifier != nil {
+		s.WriteString(schemas.GetAssetTypeRequest_Identifier, *v.Identifier)
+	}
+}
+
 type GetAssetTypeOutput struct {
 
 	// The forms that make up the asset type, keyed by form name.
@@ -51,13 +65,41 @@ type GetAssetTypeOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetAssetTypeOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetAssetTypeResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetAssetTypeOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAssetTypeFormsMap(s, schemas.GetAssetTypeResponse_Forms, v.Forms)
+	if v.Id != nil {
+		s.WriteString(schemas.GetAssetTypeResponse_Id, *v.Id)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.GetAssetTypeResponse_Name, *v.Name)
+	}
+}
+func (v *GetAssetTypeOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetAssetTypeResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetAssetTypeResponse_Forms:
+			return deserializeAssetTypeFormsMap(d, schemas.GetAssetTypeResponse_Forms, &v.Forms)
+		case schemas.GetAssetTypeResponse_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.GetAssetTypeResponse_Id, v.Id)
+		case schemas.GetAssetTypeResponse_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.GetAssetTypeResponse_Name, v.Name)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetAssetTypeMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetAssetType{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAssetType, schemas.GetAssetTypeRequest, schemas.GetAssetTypeResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetAssetType{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAssetType, schemas.GetAssetTypeRequest, schemas.GetAssetTypeResponse), output: &GetAssetTypeOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -5,7 +5,9 @@ package resiliencehubv2
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/resiliencehubv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/resiliencehubv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -39,6 +41,21 @@ type StartFailureModeAssessmentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartFailureModeAssessmentInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartFailureModeAssessmentRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartFailureModeAssessmentInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.StartFailureModeAssessmentRequest_clientToken, *v.ClientToken)
+	}
+	if v.ServiceArn != nil {
+		s.WriteString(schemas.StartFailureModeAssessmentRequest_serviceArn, *v.ServiceArn)
+	}
+}
+
 type StartFailureModeAssessmentOutput struct {
 
 	// The unique identifier of the started assessment.
@@ -59,13 +76,54 @@ type StartFailureModeAssessmentOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartFailureModeAssessmentOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartFailureModeAssessmentResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartFailureModeAssessmentOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AssessmentId != nil {
+		s.WriteString(schemas.StartFailureModeAssessmentResponse_assessmentId, *v.AssessmentId)
+	}
+	if v.AssessmentStatus != "" {
+		s.WriteString(schemas.StartFailureModeAssessmentResponse_assessmentStatus, string(v.AssessmentStatus))
+	}
+	if v.ServiceArn != nil {
+		s.WriteString(schemas.StartFailureModeAssessmentResponse_serviceArn, *v.ServiceArn)
+	}
+	if v.StartedAt != nil {
+		s.WriteTime(schemas.StartFailureModeAssessmentResponse_startedAt, *v.StartedAt)
+	}
+}
+func (v *StartFailureModeAssessmentOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartFailureModeAssessmentResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartFailureModeAssessmentResponse_assessmentId:
+			v.AssessmentId = new(string)
+			return d.ReadString(schemas.StartFailureModeAssessmentResponse_assessmentId, v.AssessmentId)
+		case schemas.StartFailureModeAssessmentResponse_assessmentStatus:
+			var ev string
+			if err := d.ReadString(schemas.StartFailureModeAssessmentResponse_assessmentStatus, &ev); err != nil {
+				return err
+			}
+			v.AssessmentStatus = types.AssessmentStatus(ev)
+			return nil
+		case schemas.StartFailureModeAssessmentResponse_serviceArn:
+			v.ServiceArn = new(string)
+			return d.ReadString(schemas.StartFailureModeAssessmentResponse_serviceArn, v.ServiceArn)
+		case schemas.StartFailureModeAssessmentResponse_startedAt:
+			v.StartedAt = new(time.Time)
+			return d.ReadTime(schemas.StartFailureModeAssessmentResponse_startedAt, v.StartedAt)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartFailureModeAssessmentMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpStartFailureModeAssessment{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartFailureModeAssessment, schemas.StartFailureModeAssessmentRequest, schemas.StartFailureModeAssessmentResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStartFailureModeAssessment{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartFailureModeAssessment, schemas.StartFailureModeAssessmentRequest, schemas.StartFailureModeAssessmentResponse), output: &StartFailureModeAssessmentOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

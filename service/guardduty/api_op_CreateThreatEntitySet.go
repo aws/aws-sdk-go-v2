@@ -5,7 +5,9 @@ package guardduty
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/guardduty/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/guardduty/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -85,6 +87,37 @@ type CreateThreatEntitySetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateThreatEntitySetInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateThreatEntitySetRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateThreatEntitySetInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Activate != nil {
+		s.WriteBool(schemas.CreateThreatEntitySetRequest_Activate, *v.Activate)
+	}
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateThreatEntitySetRequest_ClientToken, *v.ClientToken)
+	}
+	if v.DetectorId != nil {
+		s.WriteString(schemas.CreateThreatEntitySetRequest_DetectorId, *v.DetectorId)
+	}
+	if v.ExpectedBucketOwner != nil {
+		s.WriteString(schemas.CreateThreatEntitySetRequest_ExpectedBucketOwner, *v.ExpectedBucketOwner)
+	}
+	if v.Format != "" {
+		s.WriteString(schemas.CreateThreatEntitySetRequest_Format, string(v.Format))
+	}
+	if v.Location != nil {
+		s.WriteString(schemas.CreateThreatEntitySetRequest_Location, *v.Location)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateThreatEntitySetRequest_Name, *v.Name)
+	}
+	serializeTagMap(s, schemas.CreateThreatEntitySetRequest_Tags, v.Tags)
+}
+
 type CreateThreatEntitySetOutput struct {
 
 	// The ID returned by GuardDuty after creation of the threat entity set resource.
@@ -98,13 +131,32 @@ type CreateThreatEntitySetOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateThreatEntitySetOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateThreatEntitySetResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateThreatEntitySetOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ThreatEntitySetId != nil {
+		s.WriteString(schemas.CreateThreatEntitySetResponse_ThreatEntitySetId, *v.ThreatEntitySetId)
+	}
+}
+func (v *CreateThreatEntitySetOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateThreatEntitySetResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateThreatEntitySetResponse_ThreatEntitySetId:
+			v.ThreatEntitySetId = new(string)
+			return d.ReadString(schemas.CreateThreatEntitySetResponse_ThreatEntitySetId, v.ThreatEntitySetId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateThreatEntitySetMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateThreatEntitySet{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateThreatEntitySet, schemas.CreateThreatEntitySetRequest, schemas.CreateThreatEntitySetResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateThreatEntitySet{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateThreatEntitySet, schemas.CreateThreatEntitySetRequest, schemas.CreateThreatEntitySetResponse), output: &CreateThreatEntitySetOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

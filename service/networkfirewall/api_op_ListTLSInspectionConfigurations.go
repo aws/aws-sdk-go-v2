@@ -5,7 +5,9 @@ package networkfirewall
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/networkfirewall/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/networkfirewall/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -45,6 +47,21 @@ type ListTLSInspectionConfigurationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListTLSInspectionConfigurationsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListTLSInspectionConfigurationsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListTLSInspectionConfigurationsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListTLSInspectionConfigurationsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListTLSInspectionConfigurationsRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListTLSInspectionConfigurationsOutput struct {
 
 	// When you request a list of objects with a MaxResults setting, if the number of
@@ -65,13 +82,35 @@ type ListTLSInspectionConfigurationsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListTLSInspectionConfigurationsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListTLSInspectionConfigurationsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListTLSInspectionConfigurationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListTLSInspectionConfigurationsResponse_NextToken, *v.NextToken)
+	}
+	serializeTLSInspectionConfigurations(s, schemas.ListTLSInspectionConfigurationsResponse_TLSInspectionConfigurations, v.TLSInspectionConfigurations)
+}
+func (v *ListTLSInspectionConfigurationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListTLSInspectionConfigurationsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListTLSInspectionConfigurationsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListTLSInspectionConfigurationsResponse_NextToken, v.NextToken)
+		case schemas.ListTLSInspectionConfigurationsResponse_TLSInspectionConfigurations:
+			return deserializeTLSInspectionConfigurations(d, schemas.ListTLSInspectionConfigurationsResponse_TLSInspectionConfigurations, &v.TLSInspectionConfigurations)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListTLSInspectionConfigurationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpListTLSInspectionConfigurations{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListTLSInspectionConfigurations, schemas.ListTLSInspectionConfigurationsRequest, schemas.ListTLSInspectionConfigurationsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpListTLSInspectionConfigurations{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListTLSInspectionConfigurations, schemas.ListTLSInspectionConfigurationsRequest, schemas.ListTLSInspectionConfigurationsResponse), output: &ListTLSInspectionConfigurationsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

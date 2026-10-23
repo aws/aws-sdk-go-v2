@@ -4,6 +4,8 @@ package bedrock
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/bedrock/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -37,6 +39,18 @@ type DeleteInferenceProfileInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteInferenceProfileInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteInferenceProfileRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteInferenceProfileInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InferenceProfileIdentifier != nil {
+		s.WriteString(schemas.DeleteInferenceProfileRequest_inferenceProfileIdentifier, *v.InferenceProfileIdentifier)
+	}
+}
+
 type DeleteInferenceProfileOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -44,13 +58,26 @@ type DeleteInferenceProfileOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteInferenceProfileOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteInferenceProfileResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteInferenceProfileOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteInferenceProfileOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteInferenceProfileResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteInferenceProfileMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteInferenceProfile{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteInferenceProfile, schemas.DeleteInferenceProfileRequest, schemas.DeleteInferenceProfileResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteInferenceProfile{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteInferenceProfile, schemas.DeleteInferenceProfileRequest, schemas.DeleteInferenceProfileResponse), output: &DeleteInferenceProfileOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

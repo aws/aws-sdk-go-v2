@@ -4,7 +4,9 @@ package clouddirectory
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/clouddirectory/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/clouddirectory/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -44,6 +46,28 @@ type RemoveFacetFromObjectInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RemoveFacetFromObjectInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RemoveFacetFromObjectRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RemoveFacetFromObjectInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DirectoryArn != nil {
+		s.WriteString(schemas.RemoveFacetFromObjectRequest_DirectoryArn, *v.DirectoryArn)
+	}
+	if v.ObjectReference != nil {
+		s.WriteStruct(schemas.RemoveFacetFromObjectRequest_ObjectReference)
+		v.ObjectReference.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SchemaFacet != nil {
+		s.WriteStruct(schemas.RemoveFacetFromObjectRequest_SchemaFacet)
+		v.SchemaFacet.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type RemoveFacetFromObjectOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -51,13 +75,26 @@ type RemoveFacetFromObjectOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RemoveFacetFromObjectOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RemoveFacetFromObjectResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RemoveFacetFromObjectOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *RemoveFacetFromObjectOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RemoveFacetFromObjectResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationRemoveFacetFromObjectMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpRemoveFacetFromObject{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RemoveFacetFromObject, schemas.RemoveFacetFromObjectRequest, schemas.RemoveFacetFromObjectResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpRemoveFacetFromObject{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RemoveFacetFromObject, schemas.RemoveFacetFromObjectRequest, schemas.RemoveFacetFromObjectResponse), output: &RemoveFacetFromObjectOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

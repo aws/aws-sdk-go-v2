@@ -5,7 +5,9 @@ package iotsitewise
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/iotsitewise/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotsitewise/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -47,6 +49,26 @@ type ListComputationModelDataBindingUsagesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListComputationModelDataBindingUsagesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListComputationModelDataBindingUsagesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListComputationModelDataBindingUsagesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DataBindingValueFilter != nil {
+		s.WriteStruct(schemas.ListComputationModelDataBindingUsagesRequest_dataBindingValueFilter)
+		v.DataBindingValueFilter.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListComputationModelDataBindingUsagesRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListComputationModelDataBindingUsagesRequest_nextToken, *v.NextToken)
+	}
+}
+
 type ListComputationModelDataBindingUsagesOutput struct {
 
 	// A list of summaries describing the data binding usages across computation
@@ -66,13 +88,35 @@ type ListComputationModelDataBindingUsagesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListComputationModelDataBindingUsagesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListComputationModelDataBindingUsagesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListComputationModelDataBindingUsagesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeComputationModelDataBindingUsageSummaries(s, schemas.ListComputationModelDataBindingUsagesResponse_dataBindingUsageSummaries, v.DataBindingUsageSummaries)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListComputationModelDataBindingUsagesResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListComputationModelDataBindingUsagesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListComputationModelDataBindingUsagesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListComputationModelDataBindingUsagesResponse_dataBindingUsageSummaries:
+			return deserializeComputationModelDataBindingUsageSummaries(d, schemas.ListComputationModelDataBindingUsagesResponse_dataBindingUsageSummaries, &v.DataBindingUsageSummaries)
+		case schemas.ListComputationModelDataBindingUsagesResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListComputationModelDataBindingUsagesResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListComputationModelDataBindingUsagesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListComputationModelDataBindingUsages{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListComputationModelDataBindingUsages, schemas.ListComputationModelDataBindingUsagesRequest, schemas.ListComputationModelDataBindingUsagesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListComputationModelDataBindingUsages{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListComputationModelDataBindingUsages, schemas.ListComputationModelDataBindingUsagesRequest, schemas.ListComputationModelDataBindingUsagesResponse), output: &ListComputationModelDataBindingUsagesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

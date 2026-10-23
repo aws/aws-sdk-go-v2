@@ -4,7 +4,9 @@ package dynamodb
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/dynamodb/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/dynamodb/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -65,6 +67,19 @@ type BatchExecuteStatementInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchExecuteStatementInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchExecuteStatementInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchExecuteStatementInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ReturnConsumedCapacity != "" {
+		s.WriteString(schemas.BatchExecuteStatementInput_ReturnConsumedCapacity, string(v.ReturnConsumedCapacity))
+	}
+	serializePartiQLBatchRequest(s, schemas.BatchExecuteStatementInput_Statements, v.Statements)
+}
+
 type BatchExecuteStatementOutput struct {
 
 	// The capacity units consumed by the entire operation. The values of the list are
@@ -81,13 +96,32 @@ type BatchExecuteStatementOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchExecuteStatementOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchExecuteStatementOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchExecuteStatementOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeConsumedCapacityMultiple(s, schemas.BatchExecuteStatementOutput_ConsumedCapacity, v.ConsumedCapacity)
+	serializePartiQLBatchResponse(s, schemas.BatchExecuteStatementOutput_Responses, v.Responses)
+}
+func (v *BatchExecuteStatementOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchExecuteStatementOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchExecuteStatementOutput_ConsumedCapacity:
+			return deserializeConsumedCapacityMultiple(d, schemas.BatchExecuteStatementOutput_ConsumedCapacity, &v.ConsumedCapacity)
+		case schemas.BatchExecuteStatementOutput_Responses:
+			return deserializePartiQLBatchResponse(d, schemas.BatchExecuteStatementOutput_Responses, &v.Responses)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationBatchExecuteStatementMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpBatchExecuteStatement{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchExecuteStatement, schemas.BatchExecuteStatementInput, schemas.BatchExecuteStatementOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpBatchExecuteStatement{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchExecuteStatement, schemas.BatchExecuteStatementInput, schemas.BatchExecuteStatementOutput), output: &BatchExecuteStatementOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

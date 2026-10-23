@@ -4,7 +4,9 @@ package firehose
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/firehose/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/firehose/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -91,6 +93,23 @@ type PutRecordInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutRecordInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutRecordInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutRecordInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DeliveryStreamName != nil {
+		s.WriteString(schemas.PutRecordInput_DeliveryStreamName, *v.DeliveryStreamName)
+	}
+	if v.Record != nil {
+		s.WriteStruct(schemas.PutRecordInput_Record)
+		v.Record.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type PutRecordOutput struct {
 
 	// The ID of the record.
@@ -108,13 +127,38 @@ type PutRecordOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutRecordOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutRecordOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutRecordOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Encrypted != nil {
+		s.WriteBool(schemas.PutRecordOutput_Encrypted, *v.Encrypted)
+	}
+	if v.RecordId != nil {
+		s.WriteString(schemas.PutRecordOutput_RecordId, *v.RecordId)
+	}
+}
+func (v *PutRecordOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PutRecordOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PutRecordOutput_Encrypted:
+			v.Encrypted = new(bool)
+			return d.ReadBool(schemas.PutRecordOutput_Encrypted, v.Encrypted)
+		case schemas.PutRecordOutput_RecordId:
+			v.RecordId = new(string)
+			return d.ReadString(schemas.PutRecordOutput_RecordId, v.RecordId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPutRecordMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpPutRecord{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutRecord, schemas.PutRecordInput, schemas.PutRecordOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpPutRecord{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutRecord, schemas.PutRecordInput, schemas.PutRecordOutput), output: &PutRecordOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

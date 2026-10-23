@@ -4,6 +4,8 @@ package rekognition
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/rekognition/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -50,6 +52,24 @@ type DeleteProjectPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteProjectPolicyInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteProjectPolicyRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteProjectPolicyInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PolicyName != nil {
+		s.WriteString(schemas.DeleteProjectPolicyRequest_PolicyName, *v.PolicyName)
+	}
+	if v.PolicyRevisionId != nil {
+		s.WriteString(schemas.DeleteProjectPolicyRequest_PolicyRevisionId, *v.PolicyRevisionId)
+	}
+	if v.ProjectArn != nil {
+		s.WriteString(schemas.DeleteProjectPolicyRequest_ProjectArn, *v.ProjectArn)
+	}
+}
+
 type DeleteProjectPolicyOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -57,13 +77,26 @@ type DeleteProjectPolicyOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteProjectPolicyOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteProjectPolicyResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteProjectPolicyOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteProjectPolicyOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteProjectPolicyResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteProjectPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteProjectPolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteProjectPolicy, schemas.DeleteProjectPolicyRequest, schemas.DeleteProjectPolicyResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeleteProjectPolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteProjectPolicy, schemas.DeleteProjectPolicyRequest, schemas.DeleteProjectPolicyResponse), output: &DeleteProjectPolicyOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package backup
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/backup/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/backup/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -40,6 +42,21 @@ type GetRestoreTestingSelectionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetRestoreTestingSelectionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetRestoreTestingSelectionInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetRestoreTestingSelectionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RestoreTestingPlanName != nil {
+		s.WriteString(schemas.GetRestoreTestingSelectionInput_RestoreTestingPlanName, *v.RestoreTestingPlanName)
+	}
+	if v.RestoreTestingSelectionName != nil {
+		s.WriteString(schemas.GetRestoreTestingSelectionInput_RestoreTestingSelectionName, *v.RestoreTestingSelectionName)
+	}
+}
+
 type GetRestoreTestingSelectionOutput struct {
 
 	// Unique name of the restore testing selection.
@@ -53,13 +70,34 @@ type GetRestoreTestingSelectionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetRestoreTestingSelectionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetRestoreTestingSelectionOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetRestoreTestingSelectionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RestoreTestingSelection != nil {
+		s.WriteStruct(schemas.GetRestoreTestingSelectionOutput_RestoreTestingSelection)
+		v.RestoreTestingSelection.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetRestoreTestingSelectionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetRestoreTestingSelectionOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetRestoreTestingSelectionOutput_RestoreTestingSelection:
+			v.RestoreTestingSelection = &types.RestoreTestingSelectionForGet{}
+			return v.RestoreTestingSelection.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetRestoreTestingSelectionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetRestoreTestingSelection{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetRestoreTestingSelection, schemas.GetRestoreTestingSelectionInput, schemas.GetRestoreTestingSelectionOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetRestoreTestingSelection{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetRestoreTestingSelection, schemas.GetRestoreTestingSelectionInput, schemas.GetRestoreTestingSelectionOutput), output: &GetRestoreTestingSelectionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

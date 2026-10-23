@@ -13457,7 +13457,7 @@
                 "targetType": {
                     "target": "com.amazonaws.iot#LogTargetType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of resource for which you are configuring logging. Must be\n            <code>THING_Group</code>.</p>",
+                        "smithy.api#documentation": "<p>The type of resource for which you are configuring logging. Must be\n            <code>DEFAULT</code>, <code>THING_GROUP</code>, <code>CLIENT_ID</code>,\n            <code>SOURCE_IP</code>, or <code>PRINCIPAL_ID</code>.</p>",
                         "smithy.api#httpQuery": "targetType",
                         "smithy.api#required": {}
                     }
@@ -28825,7 +28825,7 @@
                 "targetType": {
                     "target": "com.amazonaws.iot#LogTargetType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of resource for which you are configuring logging. Must be\n            <code>THING_Group</code>.</p>",
+                        "smithy.api#documentation": "<p>The type of resource for which you are configuring logging. Must be\n            <code>DEFAULT</code>, <code>THING_GROUP</code>, <code>CLIENT_ID</code>,\n            <code>SOURCE_IP</code>, or <code>PRINCIPAL_ID</code>.</p>",
                         "smithy.api#httpQuery": "targetType"
                     }
                 },

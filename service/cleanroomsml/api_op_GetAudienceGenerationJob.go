@@ -4,7 +4,9 @@ package cleanroomsml
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/cleanroomsml/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cleanroomsml/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -34,6 +36,18 @@ type GetAudienceGenerationJobInput struct {
 	AudienceGenerationJobArn *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetAudienceGenerationJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetAudienceGenerationJobRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetAudienceGenerationJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AudienceGenerationJobArn != nil {
+		s.WriteString(schemas.GetAudienceGenerationJobRequest_audienceGenerationJobArn, *v.AudienceGenerationJobArn)
+	}
 }
 
 type GetAudienceGenerationJobOutput struct {
@@ -111,13 +125,123 @@ type GetAudienceGenerationJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetAudienceGenerationJobOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetAudienceGenerationJobResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetAudienceGenerationJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AudienceGenerationJobArn != nil {
+		s.WriteString(schemas.GetAudienceGenerationJobResponse_audienceGenerationJobArn, *v.AudienceGenerationJobArn)
+	}
+	if v.CollaborationId != nil {
+		s.WriteString(schemas.GetAudienceGenerationJobResponse_collaborationId, *v.CollaborationId)
+	}
+	if v.ConfiguredAudienceModelArn != nil {
+		s.WriteString(schemas.GetAudienceGenerationJobResponse_configuredAudienceModelArn, *v.ConfiguredAudienceModelArn)
+	}
+	if v.CreateTime != nil {
+		s.WriteTime(schemas.GetAudienceGenerationJobResponse_createTime, *v.CreateTime)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.GetAudienceGenerationJobResponse_description, *v.Description)
+	}
+	if v.IncludeSeedInOutput != nil {
+		s.WriteBool(schemas.GetAudienceGenerationJobResponse_includeSeedInOutput, *v.IncludeSeedInOutput)
+	}
+	if v.Metrics != nil {
+		s.WriteStruct(schemas.GetAudienceGenerationJobResponse_metrics)
+		v.Metrics.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.GetAudienceGenerationJobResponse_name, *v.Name)
+	}
+	if v.ProtectedQueryIdentifier != nil {
+		s.WriteString(schemas.GetAudienceGenerationJobResponse_protectedQueryIdentifier, *v.ProtectedQueryIdentifier)
+	}
+	if v.SeedAudience != nil {
+		s.WriteStruct(schemas.GetAudienceGenerationJobResponse_seedAudience)
+		v.SeedAudience.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.StartedBy != nil {
+		s.WriteString(schemas.GetAudienceGenerationJobResponse_startedBy, *v.StartedBy)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.GetAudienceGenerationJobResponse_status, string(v.Status))
+	}
+	if v.StatusDetails != nil {
+		s.WriteStruct(schemas.GetAudienceGenerationJobResponse_statusDetails)
+		v.StatusDetails.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeTagMap(s, schemas.GetAudienceGenerationJobResponse_tags, v.Tags)
+	if v.UpdateTime != nil {
+		s.WriteTime(schemas.GetAudienceGenerationJobResponse_updateTime, *v.UpdateTime)
+	}
+}
+func (v *GetAudienceGenerationJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetAudienceGenerationJobResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetAudienceGenerationJobResponse_audienceGenerationJobArn:
+			v.AudienceGenerationJobArn = new(string)
+			return d.ReadString(schemas.GetAudienceGenerationJobResponse_audienceGenerationJobArn, v.AudienceGenerationJobArn)
+		case schemas.GetAudienceGenerationJobResponse_collaborationId:
+			v.CollaborationId = new(string)
+			return d.ReadString(schemas.GetAudienceGenerationJobResponse_collaborationId, v.CollaborationId)
+		case schemas.GetAudienceGenerationJobResponse_configuredAudienceModelArn:
+			v.ConfiguredAudienceModelArn = new(string)
+			return d.ReadString(schemas.GetAudienceGenerationJobResponse_configuredAudienceModelArn, v.ConfiguredAudienceModelArn)
+		case schemas.GetAudienceGenerationJobResponse_createTime:
+			v.CreateTime = new(time.Time)
+			return d.ReadTime(schemas.GetAudienceGenerationJobResponse_createTime, v.CreateTime)
+		case schemas.GetAudienceGenerationJobResponse_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.GetAudienceGenerationJobResponse_description, v.Description)
+		case schemas.GetAudienceGenerationJobResponse_includeSeedInOutput:
+			v.IncludeSeedInOutput = new(bool)
+			return d.ReadBool(schemas.GetAudienceGenerationJobResponse_includeSeedInOutput, v.IncludeSeedInOutput)
+		case schemas.GetAudienceGenerationJobResponse_metrics:
+			v.Metrics = &types.AudienceQualityMetrics{}
+			return v.Metrics.Deserialize(d)
+		case schemas.GetAudienceGenerationJobResponse_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.GetAudienceGenerationJobResponse_name, v.Name)
+		case schemas.GetAudienceGenerationJobResponse_protectedQueryIdentifier:
+			v.ProtectedQueryIdentifier = new(string)
+			return d.ReadString(schemas.GetAudienceGenerationJobResponse_protectedQueryIdentifier, v.ProtectedQueryIdentifier)
+		case schemas.GetAudienceGenerationJobResponse_seedAudience:
+			v.SeedAudience = &types.AudienceGenerationJobDataSource{}
+			return v.SeedAudience.Deserialize(d)
+		case schemas.GetAudienceGenerationJobResponse_startedBy:
+			v.StartedBy = new(string)
+			return d.ReadString(schemas.GetAudienceGenerationJobResponse_startedBy, v.StartedBy)
+		case schemas.GetAudienceGenerationJobResponse_status:
+			var ev string
+			if err := d.ReadString(schemas.GetAudienceGenerationJobResponse_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.AudienceGenerationJobStatus(ev)
+			return nil
+		case schemas.GetAudienceGenerationJobResponse_statusDetails:
+			v.StatusDetails = &types.StatusDetails{}
+			return v.StatusDetails.Deserialize(d)
+		case schemas.GetAudienceGenerationJobResponse_tags:
+			return deserializeTagMap(d, schemas.GetAudienceGenerationJobResponse_tags, &v.Tags)
+		case schemas.GetAudienceGenerationJobResponse_updateTime:
+			v.UpdateTime = new(time.Time)
+			return d.ReadTime(schemas.GetAudienceGenerationJobResponse_updateTime, v.UpdateTime)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetAudienceGenerationJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetAudienceGenerationJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAudienceGenerationJob, schemas.GetAudienceGenerationJobRequest, schemas.GetAudienceGenerationJobResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetAudienceGenerationJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAudienceGenerationJob, schemas.GetAudienceGenerationJobRequest, schemas.GetAudienceGenerationJobResponse), output: &GetAudienceGenerationJobOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

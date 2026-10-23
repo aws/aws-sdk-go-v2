@@ -4,7 +4,9 @@ package costexplorer
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/costexplorer/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/costexplorer/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -54,10 +56,15 @@ type GetCostAndUsageWithResourcesInput struct {
 	//
 	// Valid values for MatchOptions for Dimensions are EQUALS and CASE_SENSITIVE .
 	//
-	// Valid values for MatchOptions for CostCategories and Tags are EQUALS , ABSENT ,
-	// and CASE_SENSITIVE . Default values are EQUALS and CASE_SENSITIVE .
+	// Valid values for MatchOptions for CostCategories , Tags , and ProductAttributes
+	// are EQUALS , ABSENT , and CASE_SENSITIVE . Default values are EQUALS and
+	// CASE_SENSITIVE .
+	//
+	// If you filter or group by product attributes, the SERVICE filter rules are the
+	// same as for [GetCostAndUsage].
 	//
 	// [Expression]: https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_Expression.html
+	// [GetCostAndUsage]: https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_GetCostAndUsage.html
 	//
 	// This member is required.
 	Filter *types.Expression
@@ -87,7 +94,13 @@ type GetCostAndUsageWithResourcesInput struct {
 	BillingViewArn *string
 
 	// You can group Amazon Web Services costs using up to two different groups:
-	// DIMENSION , TAG , COST_CATEGORY .
+	// DIMENSION , TAG , COST_CATEGORY , and PRODUCT_ATTRIBUTE .
+	//
+	// PRODUCT_ATTRIBUTE groups work the same way as in [GetCostAndUsage]. A PRODUCT_ATTRIBUTE group or
+	// a ProductAttributes filter doesn't meet the requirement to group by or filter
+	// by a ResourceId .
+	//
+	// [GetCostAndUsage]: https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_GetCostAndUsage.html
 	GroupBy []types.GroupDefinition
 
 	// Which metrics are returned in the query. For more information about blended and
@@ -116,6 +129,36 @@ type GetCostAndUsageWithResourcesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetCostAndUsageWithResourcesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetCostAndUsageWithResourcesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetCostAndUsageWithResourcesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BillingViewArn != nil {
+		s.WriteString(schemas.GetCostAndUsageWithResourcesRequest_BillingViewArn, *v.BillingViewArn)
+	}
+	if v.Filter != nil {
+		s.WriteStruct(schemas.GetCostAndUsageWithResourcesRequest_Filter)
+		v.Filter.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Granularity != "" {
+		s.WriteString(schemas.GetCostAndUsageWithResourcesRequest_Granularity, string(v.Granularity))
+	}
+	serializeGroupDefinitions(s, schemas.GetCostAndUsageWithResourcesRequest_GroupBy, v.GroupBy)
+	serializeMetricNames(s, schemas.GetCostAndUsageWithResourcesRequest_Metrics, v.Metrics)
+	if v.NextPageToken != nil {
+		s.WriteString(schemas.GetCostAndUsageWithResourcesRequest_NextPageToken, *v.NextPageToken)
+	}
+	if v.TimePeriod != nil {
+		s.WriteStruct(schemas.GetCostAndUsageWithResourcesRequest_TimePeriod)
+		v.TimePeriod.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type GetCostAndUsageWithResourcesOutput struct {
 
 	// The attributes that apply to a specific dimension value. For example, if the
@@ -140,13 +183,41 @@ type GetCostAndUsageWithResourcesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetCostAndUsageWithResourcesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetCostAndUsageWithResourcesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetCostAndUsageWithResourcesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDimensionValuesWithAttributesList(s, schemas.GetCostAndUsageWithResourcesResponse_DimensionValueAttributes, v.DimensionValueAttributes)
+	serializeGroupDefinitions(s, schemas.GetCostAndUsageWithResourcesResponse_GroupDefinitions, v.GroupDefinitions)
+	if v.NextPageToken != nil {
+		s.WriteString(schemas.GetCostAndUsageWithResourcesResponse_NextPageToken, *v.NextPageToken)
+	}
+	serializeResultsByTime(s, schemas.GetCostAndUsageWithResourcesResponse_ResultsByTime, v.ResultsByTime)
+}
+func (v *GetCostAndUsageWithResourcesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetCostAndUsageWithResourcesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetCostAndUsageWithResourcesResponse_DimensionValueAttributes:
+			return deserializeDimensionValuesWithAttributesList(d, schemas.GetCostAndUsageWithResourcesResponse_DimensionValueAttributes, &v.DimensionValueAttributes)
+		case schemas.GetCostAndUsageWithResourcesResponse_GroupDefinitions:
+			return deserializeGroupDefinitions(d, schemas.GetCostAndUsageWithResourcesResponse_GroupDefinitions, &v.GroupDefinitions)
+		case schemas.GetCostAndUsageWithResourcesResponse_NextPageToken:
+			v.NextPageToken = new(string)
+			return d.ReadString(schemas.GetCostAndUsageWithResourcesResponse_NextPageToken, v.NextPageToken)
+		case schemas.GetCostAndUsageWithResourcesResponse_ResultsByTime:
+			return deserializeResultsByTime(d, schemas.GetCostAndUsageWithResourcesResponse_ResultsByTime, &v.ResultsByTime)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetCostAndUsageWithResourcesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetCostAndUsageWithResources{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetCostAndUsageWithResources, schemas.GetCostAndUsageWithResourcesRequest, schemas.GetCostAndUsageWithResourcesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetCostAndUsageWithResources{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetCostAndUsageWithResources, schemas.GetCostAndUsageWithResourcesRequest, schemas.GetCostAndUsageWithResourcesResponse), output: &GetCostAndUsageWithResourcesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

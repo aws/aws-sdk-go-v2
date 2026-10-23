@@ -4,7 +4,9 @@ package inspector2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/inspector2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/inspector2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -32,6 +34,18 @@ type GetSbomExportInput struct {
 	ReportId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetSbomExportInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetSbomExportRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetSbomExportInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ReportId != nil {
+		s.WriteString(schemas.GetSbomExportRequest_reportId, *v.ReportId)
+	}
 }
 
 type GetSbomExportOutput struct {
@@ -64,13 +78,84 @@ type GetSbomExportOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetSbomExportOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetSbomExportResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetSbomExportOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ErrorCode != "" {
+		s.WriteString(schemas.GetSbomExportResponse_errorCode, string(v.ErrorCode))
+	}
+	if v.ErrorMessage != nil {
+		s.WriteString(schemas.GetSbomExportResponse_errorMessage, *v.ErrorMessage)
+	}
+	if v.FilterCriteria != nil {
+		s.WriteStruct(schemas.GetSbomExportResponse_filterCriteria)
+		v.FilterCriteria.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Format != "" {
+		s.WriteString(schemas.GetSbomExportResponse_format, string(v.Format))
+	}
+	if v.ReportId != nil {
+		s.WriteString(schemas.GetSbomExportResponse_reportId, *v.ReportId)
+	}
+	if v.S3Destination != nil {
+		s.WriteStruct(schemas.GetSbomExportResponse_s3Destination)
+		v.S3Destination.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.GetSbomExportResponse_status, string(v.Status))
+	}
+}
+func (v *GetSbomExportOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetSbomExportResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetSbomExportResponse_errorCode:
+			var ev string
+			if err := d.ReadString(schemas.GetSbomExportResponse_errorCode, &ev); err != nil {
+				return err
+			}
+			v.ErrorCode = types.ReportingErrorCode(ev)
+			return nil
+		case schemas.GetSbomExportResponse_errorMessage:
+			v.ErrorMessage = new(string)
+			return d.ReadString(schemas.GetSbomExportResponse_errorMessage, v.ErrorMessage)
+		case schemas.GetSbomExportResponse_filterCriteria:
+			v.FilterCriteria = &types.ResourceFilterCriteria{}
+			return v.FilterCriteria.Deserialize(d)
+		case schemas.GetSbomExportResponse_format:
+			var ev string
+			if err := d.ReadString(schemas.GetSbomExportResponse_format, &ev); err != nil {
+				return err
+			}
+			v.Format = types.SbomReportFormat(ev)
+			return nil
+		case schemas.GetSbomExportResponse_reportId:
+			v.ReportId = new(string)
+			return d.ReadString(schemas.GetSbomExportResponse_reportId, v.ReportId)
+		case schemas.GetSbomExportResponse_s3Destination:
+			v.S3Destination = &types.Destination{}
+			return v.S3Destination.Deserialize(d)
+		case schemas.GetSbomExportResponse_status:
+			var ev string
+			if err := d.ReadString(schemas.GetSbomExportResponse_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.ExternalReportStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetSbomExportMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetSbomExport{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetSbomExport, schemas.GetSbomExportRequest, schemas.GetSbomExportResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetSbomExport{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetSbomExport, schemas.GetSbomExportRequest, schemas.GetSbomExportResponse), output: &GetSbomExportOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

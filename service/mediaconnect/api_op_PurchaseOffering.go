@@ -4,7 +4,9 @@ package mediaconnect
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/mediaconnect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/mediaconnect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -53,6 +55,24 @@ type PurchaseOfferingInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PurchaseOfferingInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PurchaseOfferingRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PurchaseOfferingInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.OfferingArn != nil {
+		s.WriteString(schemas.PurchaseOfferingRequest_OfferingArn, *v.OfferingArn)
+	}
+	if v.ReservationName != nil {
+		s.WriteString(schemas.PurchaseOfferingRequest_ReservationName, *v.ReservationName)
+	}
+	if v.Start != nil {
+		s.WriteString(schemas.PurchaseOfferingRequest_Start, *v.Start)
+	}
+}
+
 type PurchaseOfferingOutput struct {
 
 	// The details of the reservation that you just created when you purchased the
@@ -65,13 +85,34 @@ type PurchaseOfferingOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PurchaseOfferingOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PurchaseOfferingResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PurchaseOfferingOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Reservation != nil {
+		s.WriteStruct(schemas.PurchaseOfferingResponse_Reservation)
+		v.Reservation.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *PurchaseOfferingOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PurchaseOfferingResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PurchaseOfferingResponse_Reservation:
+			v.Reservation = &types.Reservation{}
+			return v.Reservation.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPurchaseOfferingMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpPurchaseOffering{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PurchaseOffering, schemas.PurchaseOfferingRequest, schemas.PurchaseOfferingResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpPurchaseOffering{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PurchaseOffering, schemas.PurchaseOfferingRequest, schemas.PurchaseOfferingResponse), output: &PurchaseOfferingOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

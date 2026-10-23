@@ -4,9 +4,12 @@ package agentregistrycontrol
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/agentregistrycontrol/document"
+	internaldocument "github.com/aws/aws-sdk-go-v2/service/agentregistrycontrol/internal/document"
 	"github.com/aws/aws-sdk-go-v2/service/agentregistrycontrol/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/agentregistrycontrol/types"
 	smithy "github.com/aws/smithy-go"
+	smithydocument "github.com/aws/smithy-go/document"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -41,6 +44,12 @@ type UpdateRegistryRecordInput struct {
 	// This member is required.
 	RegistryId *string
 
+	// The updated custom metadata for the registry record. Values can be strings
+	// (maximum 128 characters) or native JSON booleans ( true or false ). Omit to
+	// leave the existing metadata unchanged. Supply the wrapper with a full
+	// replacement set to update, or with a null value to clear all metadata.
+	CustomMetadata *types.UpdatedCustomMetadataMap
+
 	// The updated description of the registry record. Omit to leave the description
 	// unchanged; provide an empty wrapper to unset it.
 	Description *types.UpdatedDescription
@@ -56,10 +65,11 @@ type UpdateRegistryRecordInput struct {
 	// The updated name of the registry record. Omit to leave the name unchanged.
 	Name *string
 
-	// List of provenance entries on a registry record. Capped at one entry today: a
-	// record carries a single DETECTED_FROM lineage. Modeled as a list so additional
-	// relations can be unlocked post-GA by raising this bound without a breaking shape
-	// change.
+	// The provenance lineage re-assertion for the registry record. This field is
+	// reserved for the Amazon Web Services Agent Registry auto-detection service
+	// principal. Requests that include this field from other callers are rejected. The
+	// source identity of an existing lineage is immutable; a re-assertion may only
+	// refresh the source details.
 	Provenance []types.Provenance
 
 	// The updated type of the registry record. Omit to leave the record type
@@ -83,6 +93,11 @@ func (v *UpdateRegistryRecordInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *UpdateRegistryRecordInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CustomMetadata != nil {
+		s.WriteStruct(schemas.UpdateRegistryRecordRequest_customMetadata)
+		v.CustomMetadata.SerializeMembers(s)
+		s.CloseStruct()
+	}
 	if v.Description != nil {
 		s.WriteStruct(schemas.UpdateRegistryRecordRequest_description)
 		v.Description.SerializeMembers(s)
@@ -171,6 +186,14 @@ type UpdateRegistryRecordOutput struct {
 	// through a control-plane API call.
 	CreatedByAutoDetection *bool
 
+	// The custom metadata attached to this registry record. Values are strings
+	// (maximum 128 characters) or booleans.
+	CustomMetadata document.Interface
+
+	// Indicates whether this record's custom metadata conforms to the registry's
+	// current schema. This status is computed at read time against the latest schema.
+	CustomMetadataSchemaComplianceStatus types.CustomMetadataSchemaComplianceStatus
+
 	// A description of the registry record.
 	Description *string
 
@@ -180,10 +203,9 @@ type UpdateRegistryRecordOutput struct {
 	// The human-readable display name of the registry record.
 	DisplayName *string
 
-	// List of provenance entries on a registry record. Capped at one entry today: a
-	// record carries a single DETECTED_FROM lineage. Modeled as a list so additional
-	// relations can be unlocked post-GA by raising this bound without a breaking shape
-	// change.
+	// The provenance lineage entries for the registry record. Populated for records
+	// created by auto-detection; each entry identifies the upstream source that the
+	// record was detected from.
 	Provenance []types.Provenance
 
 	// The version identifier of the registry record.
@@ -214,6 +236,12 @@ func (v *UpdateRegistryRecordOutput) SerializeMembers(s smithy.ShapeSerializer) 
 	}
 	if v.CreatedByAutoDetection != nil {
 		s.WriteBool(schemas.UpdateRegistryRecordResponse_createdByAutoDetection, *v.CreatedByAutoDetection)
+	}
+	if v.CustomMetadata != nil {
+		s.WriteDocument(schemas.UpdateRegistryRecordResponse_customMetadata, &smithydocument.Opaque{Value: v.CustomMetadata})
+	}
+	if v.CustomMetadataSchemaComplianceStatus != "" {
+		s.WriteString(schemas.UpdateRegistryRecordResponse_customMetadataSchemaComplianceStatus, string(v.CustomMetadataSchemaComplianceStatus))
 	}
 	if v.Description != nil {
 		s.WriteString(schemas.UpdateRegistryRecordResponse_description, *v.Description)
@@ -267,6 +295,22 @@ func (v *UpdateRegistryRecordOutput) Deserialize(d smithy.ShapeDeserializer) err
 		case schemas.UpdateRegistryRecordResponse_createdByAutoDetection:
 			v.CreatedByAutoDetection = new(bool)
 			return d.ReadBool(schemas.UpdateRegistryRecordResponse_createdByAutoDetection, v.CreatedByAutoDetection)
+		case schemas.UpdateRegistryRecordResponse_customMetadata:
+			var dv smithydocument.Value
+			if err := d.ReadDocument(schemas.UpdateRegistryRecordResponse_customMetadata, &dv); err != nil {
+				return err
+			}
+			if ov, ok := dv.(smithydocument.Opaque); ok {
+				v.CustomMetadata = internaldocument.NewDocumentUnmarshaler(ov.Value)
+			}
+			return nil
+		case schemas.UpdateRegistryRecordResponse_customMetadataSchemaComplianceStatus:
+			var ev string
+			if err := d.ReadString(schemas.UpdateRegistryRecordResponse_customMetadataSchemaComplianceStatus, &ev); err != nil {
+				return err
+			}
+			v.CustomMetadataSchemaComplianceStatus = types.CustomMetadataSchemaComplianceStatus(ev)
+			return nil
 		case schemas.UpdateRegistryRecordResponse_description:
 			v.Description = new(string)
 			return d.ReadString(schemas.UpdateRegistryRecordResponse_description, v.Description)

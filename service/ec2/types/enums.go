@@ -1047,6 +1047,23 @@ func (BlockPublicAccessMode) Values() []BlockPublicAccessMode {
 	}
 }
 
+type BootModeOverrideValues string
+
+// Enum values for BootModeOverrideValues
+const (
+	BootModeOverrideValuesUefi BootModeOverrideValues = "uefi"
+)
+
+// Values returns all known values for BootModeOverrideValues. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (BootModeOverrideValues) Values() []BootModeOverrideValues {
+	return []BootModeOverrideValues{
+		"uefi",
+	}
+}
+
 type BootModeType string
 
 // Enum values for BootModeType
@@ -1382,6 +1399,28 @@ func (CapacityManagerStatus) Values() []CapacityManagerStatus {
 	}
 }
 
+type CapacityReservationAdjustmentStatus string
+
+// Enum values for CapacityReservationAdjustmentStatus
+const (
+	CapacityReservationAdjustmentStatusRequested CapacityReservationAdjustmentStatus = "requested"
+	CapacityReservationAdjustmentStatusApplied   CapacityReservationAdjustmentStatus = "applied"
+	CapacityReservationAdjustmentStatusRejected  CapacityReservationAdjustmentStatus = "rejected"
+)
+
+// Values returns all known values for CapacityReservationAdjustmentStatus. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (CapacityReservationAdjustmentStatus) Values() []CapacityReservationAdjustmentStatus {
+	return []CapacityReservationAdjustmentStatus{
+		"requested",
+		"applied",
+		"rejected",
+	}
+}
+
 type CapacityReservationBillingRequestStatus string
 
 // Enum values for CapacityReservationBillingRequestStatus
@@ -1535,6 +1574,46 @@ func (CapacityReservationInstancePlatform) Values() []CapacityReservationInstanc
 		"RHEL with HA and SQL Server Standard",
 		"RHEL with HA and SQL Server Enterprise",
 		"Ubuntu Pro",
+	}
+}
+
+type CapacityReservationLaunchStatus string
+
+// Enum values for CapacityReservationLaunchStatus
+const (
+	CapacityReservationLaunchStatusLaunchable   CapacityReservationLaunchStatus = "launchable"
+	CapacityReservationLaunchStatusUnlaunchable CapacityReservationLaunchStatus = "unlaunchable"
+)
+
+// Values returns all known values for CapacityReservationLaunchStatus. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (CapacityReservationLaunchStatus) Values() []CapacityReservationLaunchStatus {
+	return []CapacityReservationLaunchStatus{
+		"launchable",
+		"unlaunchable",
+	}
+}
+
+type CapacityReservationModificationQuoteState string
+
+// Enum values for CapacityReservationModificationQuoteState
+const (
+	CapacityReservationModificationQuoteStateActive  CapacityReservationModificationQuoteState = "active"
+	CapacityReservationModificationQuoteStateExpired CapacityReservationModificationQuoteState = "expired"
+)
+
+// Values returns all known values for CapacityReservationModificationQuoteState.
+// Note that this can be expanded in the future, and so it is only as up to date as
+// the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (CapacityReservationModificationQuoteState) Values() []CapacityReservationModificationQuoteState {
+	return []CapacityReservationModificationQuoteState{
+		"active",
+		"expired",
 	}
 }
 
@@ -1741,6 +1820,52 @@ func (ClientVpnAuthenticationType) Values() []ClientVpnAuthenticationType {
 	}
 }
 
+type ClientVpnAuthorizationPolicyShadowMode string
+
+// Enum values for ClientVpnAuthorizationPolicyShadowMode
+const (
+	ClientVpnAuthorizationPolicyShadowModeEnabled  ClientVpnAuthorizationPolicyShadowMode = "enabled"
+	ClientVpnAuthorizationPolicyShadowModeDisabled ClientVpnAuthorizationPolicyShadowMode = "disabled"
+)
+
+// Values returns all known values for ClientVpnAuthorizationPolicyShadowMode.
+// Note that this can be expanded in the future, and so it is only as up to date as
+// the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ClientVpnAuthorizationPolicyShadowMode) Values() []ClientVpnAuthorizationPolicyShadowMode {
+	return []ClientVpnAuthorizationPolicyShadowMode{
+		"enabled",
+		"disabled",
+	}
+}
+
+type ClientVpnAuthorizationPolicyStatus string
+
+// Enum values for ClientVpnAuthorizationPolicyStatus
+const (
+	ClientVpnAuthorizationPolicyStatusCreating ClientVpnAuthorizationPolicyStatus = "creating"
+	ClientVpnAuthorizationPolicyStatusUpdating ClientVpnAuthorizationPolicyStatus = "updating"
+	ClientVpnAuthorizationPolicyStatusActive   ClientVpnAuthorizationPolicyStatus = "active"
+	ClientVpnAuthorizationPolicyStatusFailed   ClientVpnAuthorizationPolicyStatus = "failed"
+	ClientVpnAuthorizationPolicyStatusDeleting ClientVpnAuthorizationPolicyStatus = "deleting"
+)
+
+// Values returns all known values for ClientVpnAuthorizationPolicyStatus. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ClientVpnAuthorizationPolicyStatus) Values() []ClientVpnAuthorizationPolicyStatus {
+	return []ClientVpnAuthorizationPolicyStatus{
+		"creating",
+		"updating",
+		"active",
+		"failed",
+		"deleting",
+	}
+}
+
 type ClientVpnAuthorizationRuleStatusCode string
 
 // Enum values for ClientVpnAuthorizationRuleStatusCode
@@ -1786,6 +1911,28 @@ func (ClientVpnConnectionStatusCode) Values() []ClientVpnConnectionStatusCode {
 		"failed-to-terminate",
 		"terminating",
 		"terminated",
+	}
+}
+
+type ClientVpnDeviceTrustProviderType string
+
+// Enum values for ClientVpnDeviceTrustProviderType
+const (
+	ClientVpnDeviceTrustProviderTypeCrowdstrike ClientVpnDeviceTrustProviderType = "crowdstrike"
+	ClientVpnDeviceTrustProviderTypeJamf        ClientVpnDeviceTrustProviderType = "jamf"
+	ClientVpnDeviceTrustProviderTypeJumpcloud   ClientVpnDeviceTrustProviderType = "jumpcloud"
+)
+
+// Values returns all known values for ClientVpnDeviceTrustProviderType. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ClientVpnDeviceTrustProviderType) Values() []ClientVpnDeviceTrustProviderType {
+	return []ClientVpnDeviceTrustProviderType{
+		"crowdstrike",
+		"jamf",
+		"jumpcloud",
 	}
 }
 
@@ -5660,6 +5807,38 @@ const (
 	InstanceTypeC9gd24xlarge       InstanceType = "c9gd.24xlarge"
 	InstanceTypeC9gd48xlarge       InstanceType = "c9gd.48xlarge"
 	InstanceTypeC9gdMetal48xl      InstanceType = "c9gd.metal-48xl"
+	InstanceTypeR9gMedium          InstanceType = "r9g.medium"
+	InstanceTypeR9gLarge           InstanceType = "r9g.large"
+	InstanceTypeR9gXlarge          InstanceType = "r9g.xlarge"
+	InstanceTypeR9g2xlarge         InstanceType = "r9g.2xlarge"
+	InstanceTypeR9g4xlarge         InstanceType = "r9g.4xlarge"
+	InstanceTypeR9g8xlarge         InstanceType = "r9g.8xlarge"
+	InstanceTypeR9g12xlarge        InstanceType = "r9g.12xlarge"
+	InstanceTypeR9g16xlarge        InstanceType = "r9g.16xlarge"
+	InstanceTypeR9g24xlarge        InstanceType = "r9g.24xlarge"
+	InstanceTypeR9g48xlarge        InstanceType = "r9g.48xlarge"
+	InstanceTypeR9gMetal48xl       InstanceType = "r9g.metal-48xl"
+	InstanceTypeR9gdMedium         InstanceType = "r9gd.medium"
+	InstanceTypeR9gdLarge          InstanceType = "r9gd.large"
+	InstanceTypeR9gdXlarge         InstanceType = "r9gd.xlarge"
+	InstanceTypeR9gd2xlarge        InstanceType = "r9gd.2xlarge"
+	InstanceTypeR9gd4xlarge        InstanceType = "r9gd.4xlarge"
+	InstanceTypeR9gd8xlarge        InstanceType = "r9gd.8xlarge"
+	InstanceTypeR9gd12xlarge       InstanceType = "r9gd.12xlarge"
+	InstanceTypeR9gd16xlarge       InstanceType = "r9gd.16xlarge"
+	InstanceTypeR9gd24xlarge       InstanceType = "r9gd.24xlarge"
+	InstanceTypeR9gd48xlarge       InstanceType = "r9gd.48xlarge"
+	InstanceTypeR9gdMetal48xl      InstanceType = "r9gd.metal-48xl"
+	InstanceTypeM9gMedium          InstanceType = "m9g.medium"
+	InstanceTypeT8iNano            InstanceType = "t8i.nano"
+	InstanceTypeT8iMicro           InstanceType = "t8i.micro"
+	InstanceTypeT8iSmall           InstanceType = "t8i.small"
+	InstanceTypeT8iMedium          InstanceType = "t8i.medium"
+	InstanceTypeI8gMetal48xl       InstanceType = "i8g.metal-48xl"
+	InstanceTypeR8gb48xlarge       InstanceType = "r8gb.48xlarge"
+	InstanceTypeR8gbMetal48xl      InstanceType = "r8gb.metal-48xl"
+	InstanceTypeM9gdMedium         InstanceType = "m9gd.medium"
+	InstanceTypeTrn2u48xlarge      InstanceType = "trn2u.48xlarge"
 )
 
 // Values returns all known values for InstanceType. Note that this can be
@@ -7073,6 +7252,38 @@ func (InstanceType) Values() []InstanceType {
 		"c9gd.24xlarge",
 		"c9gd.48xlarge",
 		"c9gd.metal-48xl",
+		"r9g.medium",
+		"r9g.large",
+		"r9g.xlarge",
+		"r9g.2xlarge",
+		"r9g.4xlarge",
+		"r9g.8xlarge",
+		"r9g.12xlarge",
+		"r9g.16xlarge",
+		"r9g.24xlarge",
+		"r9g.48xlarge",
+		"r9g.metal-48xl",
+		"r9gd.medium",
+		"r9gd.large",
+		"r9gd.xlarge",
+		"r9gd.2xlarge",
+		"r9gd.4xlarge",
+		"r9gd.8xlarge",
+		"r9gd.12xlarge",
+		"r9gd.16xlarge",
+		"r9gd.24xlarge",
+		"r9gd.48xlarge",
+		"r9gd.metal-48xl",
+		"m9g.medium",
+		"t8i.nano",
+		"t8i.micro",
+		"t8i.small",
+		"t8i.medium",
+		"i8g.metal-48xl",
+		"r8gb.48xlarge",
+		"r8gb.metal-48xl",
+		"m9gd.medium",
+		"trn2u.48xlarge",
 	}
 }
 
@@ -7416,15 +7627,18 @@ type IpamInternetRegistryAssociationState string
 
 // Enum values for IpamInternetRegistryAssociationState
 const (
-	IpamInternetRegistryAssociationStatePendingEnable    IpamInternetRegistryAssociationState = "pending-enable"
-	IpamInternetRegistryAssociationStateCreateInProgress IpamInternetRegistryAssociationState = "create-in-progress"
-	IpamInternetRegistryAssociationStateCreateFailed     IpamInternetRegistryAssociationState = "create-failed"
-	IpamInternetRegistryAssociationStateEnableInProgress IpamInternetRegistryAssociationState = "enable-in-progress"
-	IpamInternetRegistryAssociationStateEnableComplete   IpamInternetRegistryAssociationState = "enable-complete"
-	IpamInternetRegistryAssociationStateEnableFailed     IpamInternetRegistryAssociationState = "enable-failed"
-	IpamInternetRegistryAssociationStateDeleteInProgress IpamInternetRegistryAssociationState = "delete-in-progress"
-	IpamInternetRegistryAssociationStateDeleteComplete   IpamInternetRegistryAssociationState = "delete-complete"
-	IpamInternetRegistryAssociationStateDeleteFailed     IpamInternetRegistryAssociationState = "delete-failed"
+	IpamInternetRegistryAssociationStatePendingEnable     IpamInternetRegistryAssociationState = "pending-enable"
+	IpamInternetRegistryAssociationStateCreateInProgress  IpamInternetRegistryAssociationState = "create-in-progress"
+	IpamInternetRegistryAssociationStateCreateFailed      IpamInternetRegistryAssociationState = "create-failed"
+	IpamInternetRegistryAssociationStateEnableInProgress  IpamInternetRegistryAssociationState = "enable-in-progress"
+	IpamInternetRegistryAssociationStateEnableComplete    IpamInternetRegistryAssociationState = "enable-complete"
+	IpamInternetRegistryAssociationStateEnableFailed      IpamInternetRegistryAssociationState = "enable-failed"
+	IpamInternetRegistryAssociationStateDisableInProgress IpamInternetRegistryAssociationState = "disable-in-progress"
+	IpamInternetRegistryAssociationStateDisableComplete   IpamInternetRegistryAssociationState = "disable-complete"
+	IpamInternetRegistryAssociationStateDisableFailed     IpamInternetRegistryAssociationState = "disable-failed"
+	IpamInternetRegistryAssociationStateDeleteInProgress  IpamInternetRegistryAssociationState = "delete-in-progress"
+	IpamInternetRegistryAssociationStateDeleteComplete    IpamInternetRegistryAssociationState = "delete-complete"
+	IpamInternetRegistryAssociationStateDeleteFailed      IpamInternetRegistryAssociationState = "delete-failed"
 )
 
 // Values returns all known values for IpamInternetRegistryAssociationState. Note
@@ -7440,6 +7654,9 @@ func (IpamInternetRegistryAssociationState) Values() []IpamInternetRegistryAssoc
 		"enable-in-progress",
 		"enable-complete",
 		"enable-failed",
+		"disable-in-progress",
+		"disable-complete",
+		"disable-failed",
 		"delete-in-progress",
 		"delete-complete",
 		"delete-failed",
@@ -9823,7 +10040,8 @@ type PayerResponsibilityScope string
 
 // Enum values for PayerResponsibilityScope
 const (
-	PayerResponsibilityScopeVpcEndpointCharges PayerResponsibilityScope = "vpc-endpoint-charges"
+	PayerResponsibilityScopeVpcEndpointCharges     PayerResponsibilityScope = "vpc-endpoint-charges"
+	PayerResponsibilityScopeResourceGatewayCharges PayerResponsibilityScope = "resource-gateway-charges"
 )
 
 // Values returns all known values for PayerResponsibilityScope. Note that this
@@ -9833,6 +10051,7 @@ const (
 func (PayerResponsibilityScope) Values() []PayerResponsibilityScope {
 	return []PayerResponsibilityScope{
 		"vpc-endpoint-charges",
+		"resource-gateway-charges",
 	}
 }
 
@@ -9841,6 +10060,7 @@ type PayerResponsibilityType string
 // Enum values for PayerResponsibilityType
 const (
 	PayerResponsibilityTypeVpcEndpointAccount        PayerResponsibilityType = "vpc-endpoint-account"
+	PayerResponsibilityTypeResourceGatewayAccount    PayerResponsibilityType = "resource-gateway-account"
 	PayerResponsibilityTypeVpcEndpointServiceAccount PayerResponsibilityType = "vpc-endpoint-service-account"
 )
 
@@ -9851,6 +10071,7 @@ const (
 func (PayerResponsibilityType) Values() []PayerResponsibilityType {
 	return []PayerResponsibilityType{
 		"vpc-endpoint-account",
+		"resource-gateway-account",
 		"vpc-endpoint-service-account",
 	}
 }
@@ -10609,6 +10830,7 @@ const (
 	ResourceTypeIpamPoolAllocation                                     ResourceType = "ipam-pool-allocation"
 	ResourceTypeCapacityReservationCancellationQuote                   ResourceType = "capacity-reservation-cancellation-quote"
 	ResourceTypeApplicationStatusCheck                                 ResourceType = "application-status-check"
+	ResourceTypeCapacityReservationModificationQuote                   ResourceType = "capacity-reservation-modification-quote"
 )
 
 // Values returns all known values for ResourceType. Note that this can be
@@ -10728,6 +10950,7 @@ func (ResourceType) Values() []ResourceType {
 		"ipam-pool-allocation",
 		"capacity-reservation-cancellation-quote",
 		"application-status-check",
+		"capacity-reservation-modification-quote",
 	}
 }
 
@@ -10762,6 +10985,7 @@ const (
 	RirApnic  Rir = "apnic"
 	RirArin   Rir = "arin"
 	RirLacnic Rir = "lacnic"
+	RirNicbr  Rir = "nicbr"
 )
 
 // Values returns all known values for Rir. Note that this can be expanded in the
@@ -10774,6 +10998,7 @@ func (Rir) Values() []Rir {
 		"apnic",
 		"arin",
 		"lacnic",
+		"nicbr",
 	}
 }
 
@@ -12452,6 +12677,70 @@ func (TransitGatewayAssociationState) Values() []TransitGatewayAssociationState 
 	}
 }
 
+type TransitGatewayAttachmentNatGatewaySupportState string
+
+// Enum values for TransitGatewayAttachmentNatGatewaySupportState
+const (
+	TransitGatewayAttachmentNatGatewaySupportStateEnabled   TransitGatewayAttachmentNatGatewaySupportState = "enabled"
+	TransitGatewayAttachmentNatGatewaySupportStateDisabled  TransitGatewayAttachmentNatGatewaySupportState = "disabled"
+	TransitGatewayAttachmentNatGatewaySupportStateEnabling  TransitGatewayAttachmentNatGatewaySupportState = "enabling"
+	TransitGatewayAttachmentNatGatewaySupportStateDisabling TransitGatewayAttachmentNatGatewaySupportState = "disabling"
+)
+
+// Values returns all known values for
+// TransitGatewayAttachmentNatGatewaySupportState. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (TransitGatewayAttachmentNatGatewaySupportState) Values() []TransitGatewayAttachmentNatGatewaySupportState {
+	return []TransitGatewayAttachmentNatGatewaySupportState{
+		"enabled",
+		"disabled",
+		"enabling",
+		"disabling",
+	}
+}
+
+type TransitGatewayAttachmentNatGatewaySupportValue string
+
+// Enum values for TransitGatewayAttachmentNatGatewaySupportValue
+const (
+	TransitGatewayAttachmentNatGatewaySupportValueEnable  TransitGatewayAttachmentNatGatewaySupportValue = "enable"
+	TransitGatewayAttachmentNatGatewaySupportValueDisable TransitGatewayAttachmentNatGatewaySupportValue = "disable"
+)
+
+// Values returns all known values for
+// TransitGatewayAttachmentNatGatewaySupportValue. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (TransitGatewayAttachmentNatGatewaySupportValue) Values() []TransitGatewayAttachmentNatGatewaySupportValue {
+	return []TransitGatewayAttachmentNatGatewaySupportValue{
+		"enable",
+		"disable",
+	}
+}
+
+type TransitGatewayAttachmentNatSystemRouteSupportValue string
+
+// Enum values for TransitGatewayAttachmentNatSystemRouteSupportValue
+const (
+	TransitGatewayAttachmentNatSystemRouteSupportValueEnable  TransitGatewayAttachmentNatSystemRouteSupportValue = "enable"
+	TransitGatewayAttachmentNatSystemRouteSupportValueDisable TransitGatewayAttachmentNatSystemRouteSupportValue = "disable"
+)
+
+// Values returns all known values for
+// TransitGatewayAttachmentNatSystemRouteSupportValue. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (TransitGatewayAttachmentNatSystemRouteSupportValue) Values() []TransitGatewayAttachmentNatSystemRouteSupportValue {
+	return []TransitGatewayAttachmentNatSystemRouteSupportValue{
+		"enable",
+		"disable",
+	}
+}
+
 type TransitGatewayAttachmentResourceType string
 
 // Enum values for TransitGatewayAttachmentResourceType
@@ -12702,6 +12991,29 @@ func (TransitGatewayMulticastDomainState) Values() []TransitGatewayMulticastDoma
 	}
 }
 
+type TransitGatewayNatRuleState string
+
+// Enum values for TransitGatewayNatRuleState
+const (
+	TransitGatewayNatRuleStatePending     TransitGatewayNatRuleState = "pending"
+	TransitGatewayNatRuleStateActivated   TransitGatewayNatRuleState = "activated"
+	TransitGatewayNatRuleStateDeactivated TransitGatewayNatRuleState = "deactivated"
+	TransitGatewayNatRuleStateDeleting    TransitGatewayNatRuleState = "deleting"
+)
+
+// Values returns all known values for TransitGatewayNatRuleState. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (TransitGatewayNatRuleState) Values() []TransitGatewayNatRuleState {
+	return []TransitGatewayNatRuleState{
+		"pending",
+		"activated",
+		"deactivated",
+		"deleting",
+	}
+}
+
 type TransitGatewayPolicyTableEntryState string
 
 // Enum values for TransitGatewayPolicyTableEntryState
@@ -12897,6 +13209,7 @@ type TransitGatewayRouteType string
 const (
 	TransitGatewayRouteTypeStatic     TransitGatewayRouteType = "static"
 	TransitGatewayRouteTypePropagated TransitGatewayRouteType = "propagated"
+	TransitGatewayRouteTypeSystem     TransitGatewayRouteType = "system"
 )
 
 // Values returns all known values for TransitGatewayRouteType. Note that this can
@@ -12907,6 +13220,7 @@ func (TransitGatewayRouteType) Values() []TransitGatewayRouteType {
 	return []TransitGatewayRouteType{
 		"static",
 		"propagated",
+		"system",
 	}
 }
 
@@ -13000,6 +13314,7 @@ const (
 	UnlimitedSupportedInstanceFamilyT3  UnlimitedSupportedInstanceFamily = "t3"
 	UnlimitedSupportedInstanceFamilyT3a UnlimitedSupportedInstanceFamily = "t3a"
 	UnlimitedSupportedInstanceFamilyT4g UnlimitedSupportedInstanceFamily = "t4g"
+	UnlimitedSupportedInstanceFamilyT8i UnlimitedSupportedInstanceFamily = "t8i"
 )
 
 // Values returns all known values for UnlimitedSupportedInstanceFamily. Note that
@@ -13013,6 +13328,7 @@ func (UnlimitedSupportedInstanceFamily) Values() []UnlimitedSupportedInstanceFam
 		"t3",
 		"t3a",
 		"t4g",
+		"t8i",
 	}
 }
 
@@ -13624,6 +13940,7 @@ const (
 	VpcEndpointTypeGatewayLoadBalancer VpcEndpointType = "GatewayLoadBalancer"
 	VpcEndpointTypeResource            VpcEndpointType = "Resource"
 	VpcEndpointTypeServiceNetwork      VpcEndpointType = "ServiceNetwork"
+	VpcEndpointTypeTunnel              VpcEndpointType = "Tunnel"
 )
 
 // Values returns all known values for VpcEndpointType. Note that this can be
@@ -13637,6 +13954,7 @@ func (VpcEndpointType) Values() []VpcEndpointType {
 		"GatewayLoadBalancer",
 		"Resource",
 		"ServiceNetwork",
+		"Tunnel",
 	}
 }
 

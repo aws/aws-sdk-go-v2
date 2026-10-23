@@ -1,6 +1,7 @@
-POST /
+POST /service/AWSMPCommerceService_v20200301/operation/SendAgreementCancellationRequest
 
-Content-Type: application/x-amz-json-1.0
-X-Amz-Target: AWSMPCommerceService_v20200301.SendAgreementCancellationRequest
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"agreementId":"__AgreementId__","clientToken":"__ClientToken__","description":"__Description__","reasonCode":"INCORRECT_TERMS_ACCEPTED"}
+¿kagreementIdo__AgreementId__kclientTokeno__ClientToken__kdescriptiono__Description__jreasonCodexINCORRECT_TERMS_ACCEPTEDÿ

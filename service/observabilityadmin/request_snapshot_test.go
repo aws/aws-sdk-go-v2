@@ -223,6 +223,7 @@ func TestCheckRequestSnapshot_CreateCentralizationRuleForOrganization(t *testing
 				SourceMetricsConfiguration: &types.SourceMetricsConfiguration{
 					MetricsSelectionCriteria: ptr.String("__MetricsSelectionCriteria__"),
 				},
+				SourceContextGraphConfiguration: &types.SourceContextGraphConfiguration{},
 			},
 			Destination: &types.CentralizationRuleDestination{
 				Region:  ptr.String("__Region__"),
@@ -245,6 +246,7 @@ func TestCheckRequestSnapshot_CreateCentralizationRuleForOrganization(t *testing
 						DestinationRoleArn:            ptr.String("__DestinationRoleArn__"),
 						TagConflictResolutionStrategy: types.TagConflictResolutionStrategy("IN_SYNC"),
 					},
+					LogGroupDeletionProtection: types.DeletionProtection("ENABLED"),
 				},
 				DestinationMetricsConfiguration: &types.DestinationMetricsConfiguration{
 					BackupConfiguration: &types.MetricsBackupConfiguration{
@@ -276,6 +278,36 @@ func TestCheckRequestSnapshot_CreateCentralizationRuleForOrganization(t *testing
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateCentralizationRuleForOrganization"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_CreateDatasetIntegration(t *testing.T) {
+	input := &CreateDatasetIntegrationInput{
+		RoleArn: ptr.String("__RoleArn__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.CreateDatasetIntegration(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateDatasetIntegration"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -898,6 +930,33 @@ func TestCheckRequestSnapshot_DeleteCentralizationRuleForOrganization(t *testing
 	}
 }
 
+func TestCheckRequestSnapshot_DeleteDatasetIntegration(t *testing.T) {
+	input := &DeleteDatasetIntegrationInput{
+		Arn: ptr.String("__Arn__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DeleteDatasetIntegration(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteDatasetIntegration"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_DeleteS3TableIntegration(t *testing.T) {
 	input := &DeleteS3TableIntegrationInput{
 		Arn: ptr.String("__Arn__"),
@@ -1029,6 +1088,33 @@ func TestCheckRequestSnapshot_GetCentralizationRuleForOrganization(t *testing.T)
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetCentralizationRuleForOrganization"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_GetDatasetIntegration(t *testing.T) {
+	input := &GetDatasetIntegrationInput{
+		Arn: ptr.String("__Arn__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.GetDatasetIntegration(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetDatasetIntegration"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -1242,6 +1328,34 @@ func TestCheckRequestSnapshot_ListCentralizationRulesForOrganization(t *testing.
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListCentralizationRulesForOrganization"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_ListDatasetIntegrations(t *testing.T) {
+	input := &ListDatasetIntegrationsInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListDatasetIntegrations(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListDatasetIntegrations"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -1758,6 +1872,7 @@ func TestCheckRequestSnapshot_UpdateCentralizationRuleForOrganization(t *testing
 				SourceMetricsConfiguration: &types.SourceMetricsConfiguration{
 					MetricsSelectionCriteria: ptr.String("__MetricsSelectionCriteria__"),
 				},
+				SourceContextGraphConfiguration: &types.SourceContextGraphConfiguration{},
 			},
 			Destination: &types.CentralizationRuleDestination{
 				Region:  ptr.String("__Region__"),
@@ -1780,6 +1895,7 @@ func TestCheckRequestSnapshot_UpdateCentralizationRuleForOrganization(t *testing
 						DestinationRoleArn:            ptr.String("__DestinationRoleArn__"),
 						TagConflictResolutionStrategy: types.TagConflictResolutionStrategy("IN_SYNC"),
 					},
+					LogGroupDeletionProtection: types.DeletionProtection("ENABLED"),
 				},
 				DestinationMetricsConfiguration: &types.DestinationMetricsConfiguration{
 					BackupConfiguration: &types.MetricsBackupConfiguration{
@@ -1808,6 +1924,34 @@ func TestCheckRequestSnapshot_UpdateCentralizationRuleForOrganization(t *testing
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateCentralizationRuleForOrganization"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_UpdateDatasetIntegration(t *testing.T) {
+	input := &UpdateDatasetIntegrationInput{
+		Arn:     ptr.String("__Arn__"),
+		RoleArn: ptr.String("__RoleArn__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.UpdateDatasetIntegration(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateDatasetIntegration"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -2406,6 +2550,7 @@ func TestUpdateRequestSnapshot_CreateCentralizationRuleForOrganization(t *testin
 				SourceMetricsConfiguration: &types.SourceMetricsConfiguration{
 					MetricsSelectionCriteria: ptr.String("__MetricsSelectionCriteria__"),
 				},
+				SourceContextGraphConfiguration: &types.SourceContextGraphConfiguration{},
 			},
 			Destination: &types.CentralizationRuleDestination{
 				Region:  ptr.String("__Region__"),
@@ -2428,6 +2573,7 @@ func TestUpdateRequestSnapshot_CreateCentralizationRuleForOrganization(t *testin
 						DestinationRoleArn:            ptr.String("__DestinationRoleArn__"),
 						TagConflictResolutionStrategy: types.TagConflictResolutionStrategy("IN_SYNC"),
 					},
+					LogGroupDeletionProtection: types.DeletionProtection("ENABLED"),
 				},
 				DestinationMetricsConfiguration: &types.DestinationMetricsConfiguration{
 					BackupConfiguration: &types.MetricsBackupConfiguration{
@@ -2459,6 +2605,36 @@ func TestUpdateRequestSnapshot_CreateCentralizationRuleForOrganization(t *testin
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateCentralizationRuleForOrganization"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_CreateDatasetIntegration(t *testing.T) {
+	input := &CreateDatasetIntegrationInput{
+		RoleArn: ptr.String("__RoleArn__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.CreateDatasetIntegration(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateDatasetIntegration"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -3081,6 +3257,33 @@ func TestUpdateRequestSnapshot_DeleteCentralizationRuleForOrganization(t *testin
 	}
 }
 
+func TestUpdateRequestSnapshot_DeleteDatasetIntegration(t *testing.T) {
+	input := &DeleteDatasetIntegrationInput{
+		Arn: ptr.String("__Arn__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DeleteDatasetIntegration(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteDatasetIntegration"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_DeleteS3TableIntegration(t *testing.T) {
 	input := &DeleteS3TableIntegrationInput{
 		Arn: ptr.String("__Arn__"),
@@ -3212,6 +3415,33 @@ func TestUpdateRequestSnapshot_GetCentralizationRuleForOrganization(t *testing.T
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetCentralizationRuleForOrganization"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_GetDatasetIntegration(t *testing.T) {
+	input := &GetDatasetIntegrationInput{
+		Arn: ptr.String("__Arn__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.GetDatasetIntegration(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetDatasetIntegration"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -3425,6 +3655,34 @@ func TestUpdateRequestSnapshot_ListCentralizationRulesForOrganization(t *testing
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListCentralizationRulesForOrganization"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_ListDatasetIntegrations(t *testing.T) {
+	input := &ListDatasetIntegrationsInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListDatasetIntegrations(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListDatasetIntegrations"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -3941,6 +4199,7 @@ func TestUpdateRequestSnapshot_UpdateCentralizationRuleForOrganization(t *testin
 				SourceMetricsConfiguration: &types.SourceMetricsConfiguration{
 					MetricsSelectionCriteria: ptr.String("__MetricsSelectionCriteria__"),
 				},
+				SourceContextGraphConfiguration: &types.SourceContextGraphConfiguration{},
 			},
 			Destination: &types.CentralizationRuleDestination{
 				Region:  ptr.String("__Region__"),
@@ -3963,6 +4222,7 @@ func TestUpdateRequestSnapshot_UpdateCentralizationRuleForOrganization(t *testin
 						DestinationRoleArn:            ptr.String("__DestinationRoleArn__"),
 						TagConflictResolutionStrategy: types.TagConflictResolutionStrategy("IN_SYNC"),
 					},
+					LogGroupDeletionProtection: types.DeletionProtection("ENABLED"),
 				},
 				DestinationMetricsConfiguration: &types.DestinationMetricsConfiguration{
 					BackupConfiguration: &types.MetricsBackupConfiguration{
@@ -3991,6 +4251,34 @@ func TestUpdateRequestSnapshot_UpdateCentralizationRuleForOrganization(t *testin
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateCentralizationRuleForOrganization"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_UpdateDatasetIntegration(t *testing.T) {
+	input := &UpdateDatasetIntegrationInput{
+		Arn:     ptr.String("__Arn__"),
+		RoleArn: ptr.String("__RoleArn__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.UpdateDatasetIntegration(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateDatasetIntegration"); err != nil {
 		t.Fatal(err)
 	}
 }

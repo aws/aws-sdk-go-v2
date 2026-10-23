@@ -4,7 +4,9 @@ package ecs
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/ecs/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ecs/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -139,6 +141,46 @@ type CreateDaemonInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateDaemonInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateDaemonRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateDaemonInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeStringList(s, schemas.CreateDaemonRequest_capacityProviderArns, v.CapacityProviderArns)
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateDaemonRequest_clientToken, *v.ClientToken)
+	}
+	if v.ClusterArn != nil {
+		s.WriteString(schemas.CreateDaemonRequest_clusterArn, *v.ClusterArn)
+	}
+	if v.Critical != nil {
+		s.WriteBool(schemas.CreateDaemonRequest_critical, *v.Critical)
+	}
+	if v.DaemonName != nil {
+		s.WriteString(schemas.CreateDaemonRequest_daemonName, *v.DaemonName)
+	}
+	if v.DaemonTaskDefinitionArn != nil {
+		s.WriteString(schemas.CreateDaemonRequest_daemonTaskDefinitionArn, *v.DaemonTaskDefinitionArn)
+	}
+	if v.DeploymentConfiguration != nil {
+		s.WriteStruct(schemas.CreateDaemonRequest_deploymentConfiguration)
+		v.DeploymentConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.EnableECSManagedTags != false {
+		s.WriteBool(schemas.CreateDaemonRequest_enableECSManagedTags, v.EnableECSManagedTags)
+	}
+	if v.EnableExecuteCommand != false {
+		s.WriteBool(schemas.CreateDaemonRequest_enableExecuteCommand, v.EnableExecuteCommand)
+	}
+	if v.PropagateTags != "" {
+		s.WriteString(schemas.CreateDaemonRequest_propagateTags, string(v.PropagateTags))
+	}
+	serializeTags(s, schemas.CreateDaemonRequest_tags, v.Tags)
+}
+
 type CreateDaemonOutput struct {
 
 	// The Unix timestamp for the time when the daemon was created.
@@ -161,13 +203,54 @@ type CreateDaemonOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateDaemonOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateDaemonResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateDaemonOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.CreateDaemonResponse_createdAt, *v.CreatedAt)
+	}
+	if v.DaemonArn != nil {
+		s.WriteString(schemas.CreateDaemonResponse_daemonArn, *v.DaemonArn)
+	}
+	if v.DeploymentArn != nil {
+		s.WriteString(schemas.CreateDaemonResponse_deploymentArn, *v.DeploymentArn)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.CreateDaemonResponse_status, string(v.Status))
+	}
+}
+func (v *CreateDaemonOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateDaemonResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateDaemonResponse_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.CreateDaemonResponse_createdAt, v.CreatedAt)
+		case schemas.CreateDaemonResponse_daemonArn:
+			v.DaemonArn = new(string)
+			return d.ReadString(schemas.CreateDaemonResponse_daemonArn, v.DaemonArn)
+		case schemas.CreateDaemonResponse_deploymentArn:
+			v.DeploymentArn = new(string)
+			return d.ReadString(schemas.CreateDaemonResponse_deploymentArn, v.DeploymentArn)
+		case schemas.CreateDaemonResponse_status:
+			var ev string
+			if err := d.ReadString(schemas.CreateDaemonResponse_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.DaemonStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateDaemonMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateDaemon{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateDaemon, schemas.CreateDaemonRequest, schemas.CreateDaemonResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateDaemon{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateDaemon, schemas.CreateDaemonRequest, schemas.CreateDaemonResponse), output: &CreateDaemonOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

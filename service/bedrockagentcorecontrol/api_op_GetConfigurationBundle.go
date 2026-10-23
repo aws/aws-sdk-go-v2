@@ -4,7 +4,9 @@ package bedrockagentcorecontrol
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -39,6 +41,21 @@ type GetConfigurationBundleInput struct {
 	BranchName *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetConfigurationBundleInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetConfigurationBundleRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetConfigurationBundleInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BranchName != nil {
+		s.WriteString(schemas.GetConfigurationBundleRequest_branchName, *v.BranchName)
+	}
+	if v.BundleId != nil {
+		s.WriteString(schemas.GetConfigurationBundleRequest_bundleId, *v.BundleId)
+	}
 }
 
 type GetConfigurationBundleOutput struct {
@@ -94,13 +111,85 @@ type GetConfigurationBundleOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetConfigurationBundleOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetConfigurationBundleResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetConfigurationBundleOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BundleArn != nil {
+		s.WriteString(schemas.GetConfigurationBundleResponse_bundleArn, *v.BundleArn)
+	}
+	if v.BundleId != nil {
+		s.WriteString(schemas.GetConfigurationBundleResponse_bundleId, *v.BundleId)
+	}
+	if v.BundleName != nil {
+		s.WriteString(schemas.GetConfigurationBundleResponse_bundleName, *v.BundleName)
+	}
+	serializeComponentConfigurationMap(s, schemas.GetConfigurationBundleResponse_components, v.Components)
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.GetConfigurationBundleResponse_createdAt, *v.CreatedAt)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.GetConfigurationBundleResponse_description, *v.Description)
+	}
+	if v.KmsKeyArn != nil {
+		s.WriteString(schemas.GetConfigurationBundleResponse_kmsKeyArn, *v.KmsKeyArn)
+	}
+	if v.LineageMetadata != nil {
+		s.WriteStruct(schemas.GetConfigurationBundleResponse_lineageMetadata)
+		v.LineageMetadata.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.UpdatedAt != nil {
+		s.WriteTime(schemas.GetConfigurationBundleResponse_updatedAt, *v.UpdatedAt)
+	}
+	if v.VersionId != nil {
+		s.WriteString(schemas.GetConfigurationBundleResponse_versionId, *v.VersionId)
+	}
+}
+func (v *GetConfigurationBundleOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetConfigurationBundleResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetConfigurationBundleResponse_bundleArn:
+			v.BundleArn = new(string)
+			return d.ReadString(schemas.GetConfigurationBundleResponse_bundleArn, v.BundleArn)
+		case schemas.GetConfigurationBundleResponse_bundleId:
+			v.BundleId = new(string)
+			return d.ReadString(schemas.GetConfigurationBundleResponse_bundleId, v.BundleId)
+		case schemas.GetConfigurationBundleResponse_bundleName:
+			v.BundleName = new(string)
+			return d.ReadString(schemas.GetConfigurationBundleResponse_bundleName, v.BundleName)
+		case schemas.GetConfigurationBundleResponse_components:
+			return deserializeComponentConfigurationMap(d, schemas.GetConfigurationBundleResponse_components, &v.Components)
+		case schemas.GetConfigurationBundleResponse_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.GetConfigurationBundleResponse_createdAt, v.CreatedAt)
+		case schemas.GetConfigurationBundleResponse_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.GetConfigurationBundleResponse_description, v.Description)
+		case schemas.GetConfigurationBundleResponse_kmsKeyArn:
+			v.KmsKeyArn = new(string)
+			return d.ReadString(schemas.GetConfigurationBundleResponse_kmsKeyArn, v.KmsKeyArn)
+		case schemas.GetConfigurationBundleResponse_lineageMetadata:
+			v.LineageMetadata = &types.VersionLineageMetadata{}
+			return v.LineageMetadata.Deserialize(d)
+		case schemas.GetConfigurationBundleResponse_updatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.GetConfigurationBundleResponse_updatedAt, v.UpdatedAt)
+		case schemas.GetConfigurationBundleResponse_versionId:
+			v.VersionId = new(string)
+			return d.ReadString(schemas.GetConfigurationBundleResponse_versionId, v.VersionId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetConfigurationBundleMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetConfigurationBundle{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetConfigurationBundle, schemas.GetConfigurationBundleRequest, schemas.GetConfigurationBundleResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetConfigurationBundle{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetConfigurationBundle, schemas.GetConfigurationBundleRequest, schemas.GetConfigurationBundleResponse), output: &GetConfigurationBundleOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

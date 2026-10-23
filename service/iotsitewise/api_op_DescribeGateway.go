@@ -5,7 +5,9 @@ package iotsitewise
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/iotsitewise/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotsitewise/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -35,6 +37,18 @@ type DescribeGatewayInput struct {
 	GatewayId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DescribeGatewayInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeGatewayRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeGatewayInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GatewayId != nil {
+		s.WriteString(schemas.DescribeGatewayRequest_gatewayId, *v.GatewayId)
+	}
 }
 
 type DescribeGatewayOutput struct {
@@ -90,13 +104,73 @@ type DescribeGatewayOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeGatewayOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeGatewayResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeGatewayOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreationDate != nil {
+		s.WriteTime(schemas.DescribeGatewayResponse_creationDate, *v.CreationDate)
+	}
+	if v.GatewayArn != nil {
+		s.WriteString(schemas.DescribeGatewayResponse_gatewayArn, *v.GatewayArn)
+	}
+	serializeGatewayCapabilitySummaries(s, schemas.DescribeGatewayResponse_gatewayCapabilitySummaries, v.GatewayCapabilitySummaries)
+	if v.GatewayId != nil {
+		s.WriteString(schemas.DescribeGatewayResponse_gatewayId, *v.GatewayId)
+	}
+	if v.GatewayName != nil {
+		s.WriteString(schemas.DescribeGatewayResponse_gatewayName, *v.GatewayName)
+	}
+	if v.GatewayPlatform != nil {
+		s.WriteStruct(schemas.DescribeGatewayResponse_gatewayPlatform)
+		v.GatewayPlatform.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.GatewayVersion != nil {
+		s.WriteString(schemas.DescribeGatewayResponse_gatewayVersion, *v.GatewayVersion)
+	}
+	if v.LastUpdateDate != nil {
+		s.WriteTime(schemas.DescribeGatewayResponse_lastUpdateDate, *v.LastUpdateDate)
+	}
+}
+func (v *DescribeGatewayOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeGatewayResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeGatewayResponse_creationDate:
+			v.CreationDate = new(time.Time)
+			return d.ReadTime(schemas.DescribeGatewayResponse_creationDate, v.CreationDate)
+		case schemas.DescribeGatewayResponse_gatewayArn:
+			v.GatewayArn = new(string)
+			return d.ReadString(schemas.DescribeGatewayResponse_gatewayArn, v.GatewayArn)
+		case schemas.DescribeGatewayResponse_gatewayCapabilitySummaries:
+			return deserializeGatewayCapabilitySummaries(d, schemas.DescribeGatewayResponse_gatewayCapabilitySummaries, &v.GatewayCapabilitySummaries)
+		case schemas.DescribeGatewayResponse_gatewayId:
+			v.GatewayId = new(string)
+			return d.ReadString(schemas.DescribeGatewayResponse_gatewayId, v.GatewayId)
+		case schemas.DescribeGatewayResponse_gatewayName:
+			v.GatewayName = new(string)
+			return d.ReadString(schemas.DescribeGatewayResponse_gatewayName, v.GatewayName)
+		case schemas.DescribeGatewayResponse_gatewayPlatform:
+			v.GatewayPlatform = &types.GatewayPlatform{}
+			return v.GatewayPlatform.Deserialize(d)
+		case schemas.DescribeGatewayResponse_gatewayVersion:
+			v.GatewayVersion = new(string)
+			return d.ReadString(schemas.DescribeGatewayResponse_gatewayVersion, v.GatewayVersion)
+		case schemas.DescribeGatewayResponse_lastUpdateDate:
+			v.LastUpdateDate = new(time.Time)
+			return d.ReadTime(schemas.DescribeGatewayResponse_lastUpdateDate, v.LastUpdateDate)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeGatewayMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeGateway{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeGateway, schemas.DescribeGatewayRequest, schemas.DescribeGatewayResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeGateway{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeGateway, schemas.DescribeGatewayRequest, schemas.DescribeGatewayResponse), output: &DescribeGatewayOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

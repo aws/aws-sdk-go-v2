@@ -5,7 +5,9 @@ package backup
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/backup/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/backup/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -99,6 +101,36 @@ type ListCopyJobSummariesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListCopyJobSummariesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListCopyJobSummariesInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListCopyJobSummariesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountId != nil {
+		s.WriteString(schemas.ListCopyJobSummariesInput_AccountId, *v.AccountId)
+	}
+	if v.AggregationPeriod != "" {
+		s.WriteString(schemas.ListCopyJobSummariesInput_AggregationPeriod, string(v.AggregationPeriod))
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListCopyJobSummariesInput_MaxResults, *v.MaxResults)
+	}
+	if v.MessageCategory != nil {
+		s.WriteString(schemas.ListCopyJobSummariesInput_MessageCategory, *v.MessageCategory)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListCopyJobSummariesInput_NextToken, *v.NextToken)
+	}
+	if v.ResourceType != nil {
+		s.WriteString(schemas.ListCopyJobSummariesInput_ResourceType, *v.ResourceType)
+	}
+	if v.State != "" {
+		s.WriteString(schemas.ListCopyJobSummariesInput_State, string(v.State))
+	}
+}
+
 type ListCopyJobSummariesOutput struct {
 
 	// The period for the returned results.
@@ -126,13 +158,41 @@ type ListCopyJobSummariesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListCopyJobSummariesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListCopyJobSummariesOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListCopyJobSummariesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AggregationPeriod != nil {
+		s.WriteString(schemas.ListCopyJobSummariesOutput_AggregationPeriod, *v.AggregationPeriod)
+	}
+	serializeCopyJobSummaryList(s, schemas.ListCopyJobSummariesOutput_CopyJobSummaries, v.CopyJobSummaries)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListCopyJobSummariesOutput_NextToken, *v.NextToken)
+	}
+}
+func (v *ListCopyJobSummariesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListCopyJobSummariesOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListCopyJobSummariesOutput_AggregationPeriod:
+			v.AggregationPeriod = new(string)
+			return d.ReadString(schemas.ListCopyJobSummariesOutput_AggregationPeriod, v.AggregationPeriod)
+		case schemas.ListCopyJobSummariesOutput_CopyJobSummaries:
+			return deserializeCopyJobSummaryList(d, schemas.ListCopyJobSummariesOutput_CopyJobSummaries, &v.CopyJobSummaries)
+		case schemas.ListCopyJobSummariesOutput_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListCopyJobSummariesOutput_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListCopyJobSummariesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListCopyJobSummaries{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListCopyJobSummaries, schemas.ListCopyJobSummariesInput, schemas.ListCopyJobSummariesOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListCopyJobSummaries{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListCopyJobSummaries, schemas.ListCopyJobSummariesInput, schemas.ListCopyJobSummariesOutput), output: &ListCopyJobSummariesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

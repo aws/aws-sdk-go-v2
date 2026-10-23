@@ -4,6 +4,8 @@ package ssm
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/ssm/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -50,6 +52,21 @@ type UpdateManagedInstanceRoleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateManagedInstanceRoleInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateManagedInstanceRoleRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateManagedInstanceRoleInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IamRole != nil {
+		s.WriteString(schemas.UpdateManagedInstanceRoleRequest_IamRole, *v.IamRole)
+	}
+	if v.InstanceId != nil {
+		s.WriteString(schemas.UpdateManagedInstanceRoleRequest_InstanceId, *v.InstanceId)
+	}
+}
+
 type UpdateManagedInstanceRoleOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -57,13 +74,26 @@ type UpdateManagedInstanceRoleOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateManagedInstanceRoleOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateManagedInstanceRoleResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateManagedInstanceRoleOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *UpdateManagedInstanceRoleOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateManagedInstanceRoleResult, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateManagedInstanceRoleMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateManagedInstanceRole{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateManagedInstanceRole, schemas.UpdateManagedInstanceRoleRequest, schemas.UpdateManagedInstanceRoleResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateManagedInstanceRole{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateManagedInstanceRole, schemas.UpdateManagedInstanceRoleRequest, schemas.UpdateManagedInstanceRoleResult), output: &UpdateManagedInstanceRoleOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

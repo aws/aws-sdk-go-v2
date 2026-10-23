@@ -4,7 +4,9 @@ package databasemigrationservice
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/databasemigrationservice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/databasemigrationservice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -34,6 +36,18 @@ type DeleteCertificateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteCertificateInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteCertificateMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteCertificateInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CertificateArn != nil {
+		s.WriteString(schemas.DeleteCertificateMessage_CertificateArn, *v.CertificateArn)
+	}
+}
+
 type DeleteCertificateOutput struct {
 
 	// The Secure Sockets Layer (SSL) certificate.
@@ -45,13 +59,34 @@ type DeleteCertificateOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteCertificateOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteCertificateResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteCertificateOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Certificate != nil {
+		s.WriteStruct(schemas.DeleteCertificateResponse_Certificate)
+		v.Certificate.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DeleteCertificateOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteCertificateResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteCertificateResponse_Certificate:
+			v.Certificate = &types.Certificate{}
+			return v.Certificate.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteCertificateMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteCertificate{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteCertificate, schemas.DeleteCertificateMessage, schemas.DeleteCertificateResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeleteCertificate{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteCertificate, schemas.DeleteCertificateMessage, schemas.DeleteCertificateResponse), output: &DeleteCertificateOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

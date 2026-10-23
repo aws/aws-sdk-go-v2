@@ -5,7 +5,9 @@ package appsync
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/appsync/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/appsync/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -37,6 +39,21 @@ type ListDomainNamesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListDomainNamesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListDomainNamesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListDomainNamesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != 0 {
+		s.WriteInt32(schemas.ListDomainNamesRequest_maxResults, v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListDomainNamesRequest_nextToken, *v.NextToken)
+	}
+}
+
 type ListDomainNamesOutput struct {
 
 	// Lists configurations for multiple domain names.
@@ -52,13 +69,35 @@ type ListDomainNamesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListDomainNamesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListDomainNamesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListDomainNamesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDomainNameConfigs(s, schemas.ListDomainNamesResponse_domainNameConfigs, v.DomainNameConfigs)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListDomainNamesResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListDomainNamesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListDomainNamesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListDomainNamesResponse_domainNameConfigs:
+			return deserializeDomainNameConfigs(d, schemas.ListDomainNamesResponse_domainNameConfigs, &v.DomainNameConfigs)
+		case schemas.ListDomainNamesResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListDomainNamesResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListDomainNamesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListDomainNames{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDomainNames, schemas.ListDomainNamesRequest, schemas.ListDomainNamesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListDomainNames{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDomainNames, schemas.ListDomainNamesRequest, schemas.ListDomainNamesResponse), output: &ListDomainNamesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

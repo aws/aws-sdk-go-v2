@@ -4,7 +4,9 @@ package opensearch
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/opensearch/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/opensearch/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -51,6 +53,25 @@ type AddDataSourceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AddDataSourceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AddDataSourceRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AddDataSourceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDataSourceType(s, schemas.AddDataSourceRequest_DataSourceType, v.DataSourceType)
+	if v.Description != nil {
+		s.WriteString(schemas.AddDataSourceRequest_Description, *v.Description)
+	}
+	if v.DomainName != nil {
+		s.WriteString(schemas.AddDataSourceRequest_DomainName, *v.DomainName)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.AddDataSourceRequest_Name, *v.Name)
+	}
+}
+
 // The result of an AddDataSource operation.
 type AddDataSourceOutput struct {
 
@@ -63,13 +84,32 @@ type AddDataSourceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AddDataSourceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AddDataSourceResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AddDataSourceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.AddDataSourceResponse_Message, *v.Message)
+	}
+}
+func (v *AddDataSourceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AddDataSourceResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AddDataSourceResponse_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.AddDataSourceResponse_Message, v.Message)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationAddDataSourceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpAddDataSource{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AddDataSource, schemas.AddDataSourceRequest, schemas.AddDataSourceResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpAddDataSource{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AddDataSource, schemas.AddDataSourceRequest, schemas.AddDataSourceResponse), output: &AddDataSourceOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

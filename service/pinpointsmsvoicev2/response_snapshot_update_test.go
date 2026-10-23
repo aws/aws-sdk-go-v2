@@ -198,14 +198,15 @@ func TestUpdateResponseSnapshot_AssociateProtectConfiguration(t *testing.T) {
 
 func TestUpdateResponseSnapshot_CarrierLookup(t *testing.T) {
 	want := &CarrierLookupOutput{
-		E164PhoneNumber:    ptr.String("__E164PhoneNumber__"),
-		DialingCountryCode: ptr.String("__DialingCountryCode__"),
-		IsoCountryCode:     ptr.String("__IsoCountryCode__"),
-		Country:            ptr.String("__Country__"),
-		MCC:                ptr.String("__MCC__"),
-		MNC:                ptr.String("__MNC__"),
-		Carrier:            ptr.String("__Carrier__"),
-		PhoneNumberType:    types.PhoneNumberType("MOBILE"),
+		E164PhoneNumber:     ptr.String("__E164PhoneNumber__"),
+		DialingCountryCode:  ptr.String("__DialingCountryCode__"),
+		IsoCountryCode:      ptr.String("__IsoCountryCode__"),
+		Country:             ptr.String("__Country__"),
+		MCC:                 ptr.String("__MCC__"),
+		MNC:                 ptr.String("__MNC__"),
+		Carrier:             ptr.String("__Carrier__"),
+		PhoneNumberType:     types.PhoneNumberType("MOBILE"),
+		OriginalPhoneNumber: ptr.String("__OriginalPhoneNumber__"),
 	}
 	proto := awsjson.New10(schemas.PinpointSMSVoiceV2)
 	opSchema := smithy.NewOperationSchema(schemas.CarrierLookup, schemas.CarrierLookupResult, schemas.CarrierLookupResult)
@@ -1942,6 +1943,7 @@ func TestUpdateResponseSnapshot_DescribePhoneNumbers(t *testing.T) {
 						"key0": 1,
 					},
 				},
+				PricingTier:      ptr.String("__PricingTier__"),
 				CreatedTimestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			},
 			{
@@ -1974,6 +1976,7 @@ func TestUpdateResponseSnapshot_DescribePhoneNumbers(t *testing.T) {
 						"key0": 1,
 					},
 				},
+				PricingTier:      ptr.String("__PricingTier__"),
 				CreatedTimestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			},
 		},
@@ -2865,6 +2868,7 @@ func TestUpdateResponseSnapshot_DescribeSenderIds(t *testing.T) {
 						"key0": 1,
 					},
 				},
+				PricingTier: ptr.String("__PricingTier__"),
 			},
 			{
 				SenderIdArn:    ptr.String("__SenderIdArn__"),
@@ -2886,6 +2890,7 @@ func TestUpdateResponseSnapshot_DescribeSenderIds(t *testing.T) {
 						"key0": 1,
 					},
 				},
+				PricingTier: ptr.String("__PricingTier__"),
 			},
 		},
 		NextToken: ptr.String("__NextToken__"),

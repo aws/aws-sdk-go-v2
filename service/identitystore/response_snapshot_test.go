@@ -110,8 +110,10 @@ func serdeRespClient(status int, header http.Header, body []byte) *Client {
 }
 func TestCheckResponseSnapshot_CreateGroup(t *testing.T) {
 	want := &CreateGroupOutput{
-		GroupId:         ptr.String("__GroupId__"),
 		IdentityStoreId: ptr.String("__IdentityStoreId__"),
+		GroupId:         ptr.String("__GroupId__"),
+		GroupArn:        ptr.String("__GroupArn__"),
+		Revision:        ptr.String("__Revision__"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("CreateGroup.response")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -136,8 +138,9 @@ func TestCheckResponseSnapshot_CreateGroup(t *testing.T) {
 
 func TestCheckResponseSnapshot_CreateGroupMembership(t *testing.T) {
 	want := &CreateGroupMembershipOutput{
-		MembershipId:    ptr.String("__MembershipId__"),
 		IdentityStoreId: ptr.String("__IdentityStoreId__"),
+		MembershipId:    ptr.String("__MembershipId__"),
+		MembershipArn:   ptr.String("__MembershipArn__"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("CreateGroupMembership.response")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -166,6 +169,8 @@ func TestCheckResponseSnapshot_CreateUser(t *testing.T) {
 	want := &CreateUserOutput{
 		IdentityStoreId: ptr.String("__IdentityStoreId__"),
 		UserId:          ptr.String("__UserId__"),
+		UserArn:         ptr.String("__UserArn__"),
+		Revision:        ptr.String("__Revision__"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("CreateUser.response")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -293,6 +298,7 @@ func TestCheckResponseSnapshot_DeleteGroup(t *testing.T) {
 	got, err := svc.DeleteGroup(context.Background(), &DeleteGroupInput{
 		IdentityStoreId: ptr.String("__IdentityStoreId__"),
 		GroupId:         ptr.String("__GroupId__"),
+		Revision:        ptr.String("__Revision__"),
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -337,6 +343,7 @@ func TestCheckResponseSnapshot_DeleteUser(t *testing.T) {
 	got, err := svc.DeleteUser(context.Background(), &DeleteUserInput{
 		IdentityStoreId: ptr.String("__IdentityStoreId__"),
 		UserId:          ptr.String("__UserId__"),
+		Revision:        ptr.String("__Revision__"),
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -348,8 +355,11 @@ func TestCheckResponseSnapshot_DeleteUser(t *testing.T) {
 
 func TestCheckResponseSnapshot_DescribeGroup(t *testing.T) {
 	want := &DescribeGroupOutput{
-		GroupId:     ptr.String("__GroupId__"),
-		DisplayName: ptr.String("__DisplayName__"),
+		IdentityStoreId: ptr.String("__IdentityStoreId__"),
+		GroupId:         ptr.String("__GroupId__"),
+		GroupArn:        ptr.String("__GroupArn__"),
+		Revision:        ptr.String("__Revision__"),
+		DisplayName:     ptr.String("__DisplayName__"),
 		ExternalIds: []types.ExternalId{
 			{
 				Issuer: ptr.String("__Issuer__"),
@@ -360,12 +370,11 @@ func TestCheckResponseSnapshot_DescribeGroup(t *testing.T) {
 				Id:     ptr.String("__Id__"),
 			},
 		},
-		Description:     ptr.String("__Description__"),
-		CreatedAt:       ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-		UpdatedAt:       ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-		CreatedBy:       ptr.String("__CreatedBy__"),
-		UpdatedBy:       ptr.String("__UpdatedBy__"),
-		IdentityStoreId: ptr.String("__IdentityStoreId__"),
+		Description: ptr.String("__Description__"),
+		CreatedAt:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		UpdatedAt:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		CreatedBy:   ptr.String("__CreatedBy__"),
+		UpdatedBy:   ptr.String("__UpdatedBy__"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("DescribeGroup.response")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -391,6 +400,7 @@ func TestCheckResponseSnapshot_DescribeGroupMembership(t *testing.T) {
 	want := &DescribeGroupMembershipOutput{
 		IdentityStoreId: ptr.String("__IdentityStoreId__"),
 		MembershipId:    ptr.String("__MembershipId__"),
+		MembershipArn:   ptr.String("__MembershipArn__"),
 		GroupId:         ptr.String("__GroupId__"),
 		MemberId: &types.MemberIdMemberUserId{
 			Value: "__MemberIdMemberUserId__",
@@ -420,10 +430,51 @@ func TestCheckResponseSnapshot_DescribeGroupMembership(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_DescribeIdentityStore(t *testing.T) {
+	want := &DescribeIdentityStoreOutput{
+		IdentityStoreId:  ptr.String("__IdentityStoreId__"),
+		IdentityStoreArn: ptr.String("__IdentityStoreArn__"),
+		NetworkConfiguration: &types.NetworkConfigurationDetails{
+			VpceAccessRequired: ptr.Bool(true),
+			ApiRestrictSourceVpcs: []string{
+				"__Member__",
+				"__Member__",
+			},
+			ApiAllowSourceIps: []string{
+				"__Member__",
+				"__Member__",
+			},
+			ScimAllowSourceIps: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("DescribeIdentityStore.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.DescribeIdentityStore(context.Background(), &DescribeIdentityStoreInput{
+		IdentityStoreId: ptr.String("__IdentityStoreId__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "DescribeIdentityStore.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_DescribeUser(t *testing.T) {
 	want := &DescribeUserOutput{
 		IdentityStoreId: ptr.String("__IdentityStoreId__"),
 		UserId:          ptr.String("__UserId__"),
+		UserArn:         ptr.String("__UserArn__"),
+		Revision:        ptr.String("__Revision__"),
 		UserName:        ptr.String("__UserName__"),
 		ExternalIds: []types.ExternalId{
 			{
@@ -560,8 +611,9 @@ func TestCheckResponseSnapshot_DescribeUser(t *testing.T) {
 
 func TestCheckResponseSnapshot_GetGroupId(t *testing.T) {
 	want := &GetGroupIdOutput{
-		GroupId:         ptr.String("__GroupId__"),
 		IdentityStoreId: ptr.String("__IdentityStoreId__"),
+		GroupId:         ptr.String("__GroupId__"),
+		GroupArn:        ptr.String("__GroupArn__"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("GetGroupId.response")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -590,8 +642,9 @@ func TestCheckResponseSnapshot_GetGroupId(t *testing.T) {
 
 func TestCheckResponseSnapshot_GetGroupMembershipId(t *testing.T) {
 	want := &GetGroupMembershipIdOutput{
-		MembershipId:    ptr.String("__MembershipId__"),
 		IdentityStoreId: ptr.String("__IdentityStoreId__"),
+		MembershipId:    ptr.String("__MembershipId__"),
+		MembershipArn:   ptr.String("__MembershipArn__"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("GetGroupMembershipId.response")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -620,6 +673,7 @@ func TestCheckResponseSnapshot_GetUserId(t *testing.T) {
 	want := &GetUserIdOutput{
 		IdentityStoreId: ptr.String("__IdentityStoreId__"),
 		UserId:          ptr.String("__UserId__"),
+		UserArn:         ptr.String("__UserArn__"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("GetUserId.response")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -697,6 +751,7 @@ func TestCheckResponseSnapshot_ListGroupMemberships(t *testing.T) {
 			{
 				IdentityStoreId: ptr.String("__IdentityStoreId__"),
 				MembershipId:    ptr.String("__MembershipId__"),
+				MembershipArn:   ptr.String("__MembershipArn__"),
 				GroupId:         ptr.String("__GroupId__"),
 				MemberId: &types.MemberIdMemberUserId{
 					Value: "__MemberIdMemberUserId__",
@@ -709,6 +764,7 @@ func TestCheckResponseSnapshot_ListGroupMemberships(t *testing.T) {
 			{
 				IdentityStoreId: ptr.String("__IdentityStoreId__"),
 				MembershipId:    ptr.String("__MembershipId__"),
+				MembershipArn:   ptr.String("__MembershipArn__"),
 				GroupId:         ptr.String("__GroupId__"),
 				MemberId: &types.MemberIdMemberUserId{
 					Value: "__MemberIdMemberUserId__",
@@ -749,6 +805,7 @@ func TestCheckResponseSnapshot_ListGroupMembershipsForMember(t *testing.T) {
 			{
 				IdentityStoreId: ptr.String("__IdentityStoreId__"),
 				MembershipId:    ptr.String("__MembershipId__"),
+				MembershipArn:   ptr.String("__MembershipArn__"),
 				GroupId:         ptr.String("__GroupId__"),
 				MemberId: &types.MemberIdMemberUserId{
 					Value: "__MemberIdMemberUserId__",
@@ -761,6 +818,7 @@ func TestCheckResponseSnapshot_ListGroupMembershipsForMember(t *testing.T) {
 			{
 				IdentityStoreId: ptr.String("__IdentityStoreId__"),
 				MembershipId:    ptr.String("__MembershipId__"),
+				MembershipArn:   ptr.String("__MembershipArn__"),
 				GroupId:         ptr.String("__GroupId__"),
 				MemberId: &types.MemberIdMemberUserId{
 					Value: "__MemberIdMemberUserId__",
@@ -801,8 +859,11 @@ func TestCheckResponseSnapshot_ListGroups(t *testing.T) {
 	want := &ListGroupsOutput{
 		Groups: []types.Group{
 			{
-				GroupId:     ptr.String("__GroupId__"),
-				DisplayName: ptr.String("__DisplayName__"),
+				IdentityStoreId: ptr.String("__IdentityStoreId__"),
+				GroupId:         ptr.String("__GroupId__"),
+				GroupArn:        ptr.String("__GroupArn__"),
+				Revision:        ptr.String("__Revision__"),
+				DisplayName:     ptr.String("__DisplayName__"),
 				ExternalIds: []types.ExternalId{
 					{
 						Issuer: ptr.String("__Issuer__"),
@@ -813,16 +874,18 @@ func TestCheckResponseSnapshot_ListGroups(t *testing.T) {
 						Id:     ptr.String("__Id__"),
 					},
 				},
-				Description:     ptr.String("__Description__"),
-				CreatedAt:       ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-				UpdatedAt:       ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-				CreatedBy:       ptr.String("__CreatedBy__"),
-				UpdatedBy:       ptr.String("__UpdatedBy__"),
-				IdentityStoreId: ptr.String("__IdentityStoreId__"),
+				Description: ptr.String("__Description__"),
+				CreatedAt:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				UpdatedAt:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				CreatedBy:   ptr.String("__CreatedBy__"),
+				UpdatedBy:   ptr.String("__UpdatedBy__"),
 			},
 			{
-				GroupId:     ptr.String("__GroupId__"),
-				DisplayName: ptr.String("__DisplayName__"),
+				IdentityStoreId: ptr.String("__IdentityStoreId__"),
+				GroupId:         ptr.String("__GroupId__"),
+				GroupArn:        ptr.String("__GroupArn__"),
+				Revision:        ptr.String("__Revision__"),
+				DisplayName:     ptr.String("__DisplayName__"),
 				ExternalIds: []types.ExternalId{
 					{
 						Issuer: ptr.String("__Issuer__"),
@@ -833,12 +896,11 @@ func TestCheckResponseSnapshot_ListGroups(t *testing.T) {
 						Id:     ptr.String("__Id__"),
 					},
 				},
-				Description:     ptr.String("__Description__"),
-				CreatedAt:       ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-				UpdatedAt:       ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-				CreatedBy:       ptr.String("__CreatedBy__"),
-				UpdatedBy:       ptr.String("__UpdatedBy__"),
-				IdentityStoreId: ptr.String("__IdentityStoreId__"),
+				Description: ptr.String("__Description__"),
+				CreatedAt:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				UpdatedAt:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				CreatedBy:   ptr.String("__CreatedBy__"),
+				UpdatedBy:   ptr.String("__UpdatedBy__"),
 			},
 		},
 		NextToken: ptr.String("__NextToken__"),
@@ -874,12 +936,48 @@ func TestCheckResponseSnapshot_ListGroups(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_ListIdentityStores(t *testing.T) {
+	want := &ListIdentityStoresOutput{
+		IdentityStores: []types.IdentityStore{
+			{
+				IdentityStoreId:  ptr.String("__IdentityStoreId__"),
+				IdentityStoreArn: ptr.String("__IdentityStoreArn__"),
+			},
+			{
+				IdentityStoreId:  ptr.String("__IdentityStoreId__"),
+				IdentityStoreArn: ptr.String("__IdentityStoreArn__"),
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("ListIdentityStores.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.ListIdentityStores(context.Background(), &ListIdentityStoresInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "ListIdentityStores.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_ListUsers(t *testing.T) {
 	want := &ListUsersOutput{
 		Users: []types.User{
 			{
 				IdentityStoreId: ptr.String("__IdentityStoreId__"),
 				UserId:          ptr.String("__UserId__"),
+				UserArn:         ptr.String("__UserArn__"),
+				Revision:        ptr.String("__Revision__"),
 				UserName:        ptr.String("__UserName__"),
 				ExternalIds: []types.ExternalId{
 					{
@@ -993,6 +1091,8 @@ func TestCheckResponseSnapshot_ListUsers(t *testing.T) {
 			{
 				IdentityStoreId: ptr.String("__IdentityStoreId__"),
 				UserId:          ptr.String("__UserId__"),
+				UserArn:         ptr.String("__UserArn__"),
+				Revision:        ptr.String("__Revision__"),
 				UserName:        ptr.String("__UserName__"),
 				ExternalIds: []types.ExternalId{
 					{
@@ -1142,7 +1242,12 @@ func TestCheckResponseSnapshot_ListUsers(t *testing.T) {
 }
 
 func TestCheckResponseSnapshot_UpdateGroup(t *testing.T) {
-	want := &UpdateGroupOutput{}
+	want := &UpdateGroupOutput{
+		IdentityStoreId: ptr.String("__IdentityStoreId__"),
+		GroupId:         ptr.String("__GroupId__"),
+		GroupArn:        ptr.String("__GroupArn__"),
+		Revision:        ptr.String("__Revision__"),
+	}
 	status, header, body, err := serdeRespReadSnapshot("UpdateGroup.response")
 	if errors.Is(err, fs.ErrNotExist) {
 		t.Skip("no response snapshot fixture")
@@ -1164,6 +1269,7 @@ func TestCheckResponseSnapshot_UpdateGroup(t *testing.T) {
 				AttributeValue: document.NewLazyDocument("__Document__"),
 			},
 		},
+		Revision: ptr.String("__Revision__"),
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -1173,8 +1279,52 @@ func TestCheckResponseSnapshot_UpdateGroup(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_UpdateIdentityStore(t *testing.T) {
+	want := &UpdateIdentityStoreOutput{
+		IdentityStoreId:  ptr.String("__IdentityStoreId__"),
+		IdentityStoreArn: ptr.String("__IdentityStoreArn__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("UpdateIdentityStore.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.UpdateIdentityStore(context.Background(), &UpdateIdentityStoreInput{
+		IdentityStoreId: ptr.String("__IdentityStoreId__"),
+		NetworkConfiguration: &types.NetworkConfiguration{
+			VpceAccessRequired: ptr.Bool(true),
+			ApiRestrictSourceVpcs: []string{
+				"__Member__",
+				"__Member__",
+			},
+			ApiAllowSourceIps: []string{
+				"__Member__",
+				"__Member__",
+			},
+			ScimAllowSourceIps: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "UpdateIdentityStore.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_UpdateUser(t *testing.T) {
-	want := &UpdateUserOutput{}
+	want := &UpdateUserOutput{
+		IdentityStoreId: ptr.String("__IdentityStoreId__"),
+		UserId:          ptr.String("__UserId__"),
+		UserArn:         ptr.String("__UserArn__"),
+		Revision:        ptr.String("__Revision__"),
+	}
 	status, header, body, err := serdeRespReadSnapshot("UpdateUser.response")
 	if errors.Is(err, fs.ErrNotExist) {
 		t.Skip("no response snapshot fixture")
@@ -1196,6 +1346,7 @@ func TestCheckResponseSnapshot_UpdateUser(t *testing.T) {
 				AttributeValue: document.NewLazyDocument("__Document__"),
 			},
 		},
+		Revision: ptr.String("__Revision__"),
 	})
 	if err != nil {
 		t.Fatal(err)

@@ -6,7 +6,9 @@ import (
 	"context"
 	"errors"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/databasemigrationservice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/databasemigrationservice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithytime "github.com/aws/smithy-go/time"
 	smithywaiter "github.com/aws/smithy-go/waiter"
@@ -60,6 +62,25 @@ type DescribeReplicationTasksInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeReplicationTasksInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeReplicationTasksMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeReplicationTasksInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeFilterList(s, schemas.DescribeReplicationTasksMessage_Filters, v.Filters)
+	if v.Marker != nil {
+		s.WriteString(schemas.DescribeReplicationTasksMessage_Marker, *v.Marker)
+	}
+	if v.MaxRecords != nil {
+		s.WriteInt32(schemas.DescribeReplicationTasksMessage_MaxRecords, *v.MaxRecords)
+	}
+	if v.WithoutSettings != nil {
+		s.WriteBool(schemas.DescribeReplicationTasksMessage_WithoutSettings, *v.WithoutSettings)
+	}
+}
+
 type DescribeReplicationTasksOutput struct {
 
 	//  An optional pagination token provided by a previous request. If this parameter
@@ -76,13 +97,35 @@ type DescribeReplicationTasksOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeReplicationTasksOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeReplicationTasksResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeReplicationTasksOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Marker != nil {
+		s.WriteString(schemas.DescribeReplicationTasksResponse_Marker, *v.Marker)
+	}
+	serializeReplicationTaskList(s, schemas.DescribeReplicationTasksResponse_ReplicationTasks, v.ReplicationTasks)
+}
+func (v *DescribeReplicationTasksOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeReplicationTasksResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeReplicationTasksResponse_Marker:
+			v.Marker = new(string)
+			return d.ReadString(schemas.DescribeReplicationTasksResponse_Marker, v.Marker)
+		case schemas.DescribeReplicationTasksResponse_ReplicationTasks:
+			return deserializeReplicationTaskList(d, schemas.DescribeReplicationTasksResponse_ReplicationTasks, &v.ReplicationTasks)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeReplicationTasksMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeReplicationTasks{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeReplicationTasks, schemas.DescribeReplicationTasksMessage, schemas.DescribeReplicationTasksResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeReplicationTasks{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeReplicationTasks, schemas.DescribeReplicationTasksMessage, schemas.DescribeReplicationTasksResponse), output: &DescribeReplicationTasksOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

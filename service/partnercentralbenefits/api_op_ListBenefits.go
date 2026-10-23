@@ -5,7 +5,9 @@ package partnercentralbenefits
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/partnercentralbenefits/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/partnercentralbenefits/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -51,6 +53,27 @@ type ListBenefitsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListBenefitsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListBenefitsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListBenefitsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Catalog != nil {
+		s.WriteString(schemas.ListBenefitsInput_Catalog, *v.Catalog)
+	}
+	serializeFulfillmentTypes(s, schemas.ListBenefitsInput_FulfillmentTypes, v.FulfillmentTypes)
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListBenefitsInput_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListBenefitsInput_NextToken, *v.NextToken)
+	}
+	serializePrograms(s, schemas.ListBenefitsInput_Programs, v.Programs)
+	serializeBenefitStatuses(s, schemas.ListBenefitsInput_Status, v.Status)
+}
+
 type ListBenefitsOutput struct {
 
 	// A list of benefit summaries matching the specified criteria.
@@ -66,13 +89,35 @@ type ListBenefitsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListBenefitsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListBenefitsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListBenefitsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeBenefitSummaries(s, schemas.ListBenefitsOutput_BenefitSummaries, v.BenefitSummaries)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListBenefitsOutput_NextToken, *v.NextToken)
+	}
+}
+func (v *ListBenefitsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListBenefitsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListBenefitsOutput_BenefitSummaries:
+			return deserializeBenefitSummaries(d, schemas.ListBenefitsOutput_BenefitSummaries, &v.BenefitSummaries)
+		case schemas.ListBenefitsOutput_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListBenefitsOutput_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListBenefitsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpListBenefits{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListBenefits, schemas.ListBenefitsInput, schemas.ListBenefitsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpListBenefits{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListBenefits, schemas.ListBenefitsInput, schemas.ListBenefitsOutput), output: &ListBenefitsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

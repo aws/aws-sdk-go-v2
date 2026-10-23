@@ -5,7 +5,9 @@ package lambdamicrovms
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/lambdamicrovms/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lambdamicrovms/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -45,6 +47,27 @@ type ListMicrovmsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListMicrovmsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListMicrovmsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListMicrovmsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ImageIdentifier != nil {
+		s.WriteString(schemas.ListMicrovmsRequest_imageIdentifier, *v.ImageIdentifier)
+	}
+	if v.ImageVersion != nil {
+		s.WriteString(schemas.ListMicrovmsRequest_imageVersion, *v.ImageVersion)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListMicrovmsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListMicrovmsRequest_nextToken, *v.NextToken)
+	}
+}
+
 type ListMicrovmsOutput struct {
 
 	// The list of MicroVMs.
@@ -62,13 +85,35 @@ type ListMicrovmsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListMicrovmsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListMicrovmsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListMicrovmsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeMicrovmItemList(s, schemas.ListMicrovmsResponse_items, v.Items)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListMicrovmsResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListMicrovmsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListMicrovmsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListMicrovmsResponse_items:
+			return deserializeMicrovmItemList(d, schemas.ListMicrovmsResponse_items, &v.Items)
+		case schemas.ListMicrovmsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListMicrovmsResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListMicrovmsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListMicrovms{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListMicrovms, schemas.ListMicrovmsRequest, schemas.ListMicrovmsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListMicrovms{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListMicrovms, schemas.ListMicrovmsRequest, schemas.ListMicrovmsResponse), output: &ListMicrovmsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

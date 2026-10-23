@@ -4,6 +4,7 @@ package types
 
 import (
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/ec2instanceconnect/schemas"
 	smithy "github.com/aws/smithy-go"
 )
 
@@ -33,6 +34,27 @@ func (e *AuthException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *AuthException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *AuthException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AuthException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AuthException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.AuthException_Message, *v.Message)
+	}
+}
+func (v *AuthException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AuthException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AuthException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.AuthException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The specified instance was not found.
 type EC2InstanceNotFoundException struct {
@@ -59,6 +81,27 @@ func (e *EC2InstanceNotFoundException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *EC2InstanceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *EC2InstanceNotFoundException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EC2InstanceNotFoundException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EC2InstanceNotFoundException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.EC2InstanceNotFoundException_Message, *v.Message)
+	}
+}
+func (v *EC2InstanceNotFoundException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EC2InstanceNotFoundException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EC2InstanceNotFoundException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.EC2InstanceNotFoundException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // Unable to connect because the instance is not in a valid state. Connecting to a
 // stopped or terminated instance is not supported. If the instance is stopped,
@@ -87,6 +130,27 @@ func (e *EC2InstanceStateInvalidException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *EC2InstanceStateInvalidException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *EC2InstanceStateInvalidException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EC2InstanceStateInvalidException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EC2InstanceStateInvalidException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.EC2InstanceStateInvalidException_Message, *v.Message)
+	}
+}
+func (v *EC2InstanceStateInvalidException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EC2InstanceStateInvalidException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EC2InstanceStateInvalidException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.EC2InstanceStateInvalidException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The instance type is not supported for connecting via the serial console. Only
 // Nitro instance types are currently supported.
@@ -114,6 +178,27 @@ func (e *EC2InstanceTypeInvalidException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *EC2InstanceTypeInvalidException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *EC2InstanceTypeInvalidException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EC2InstanceTypeInvalidException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EC2InstanceTypeInvalidException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.EC2InstanceTypeInvalidException_Message, *v.Message)
+	}
+}
+func (v *EC2InstanceTypeInvalidException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EC2InstanceTypeInvalidException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EC2InstanceTypeInvalidException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.EC2InstanceTypeInvalidException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The instance is currently unavailable. Wait a few minutes and try again.
 type EC2InstanceUnavailableException struct {
@@ -140,6 +225,27 @@ func (e *EC2InstanceUnavailableException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *EC2InstanceUnavailableException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
+func (v *EC2InstanceUnavailableException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EC2InstanceUnavailableException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EC2InstanceUnavailableException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.EC2InstanceUnavailableException_Message, *v.Message)
+	}
+}
+func (v *EC2InstanceUnavailableException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EC2InstanceUnavailableException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EC2InstanceUnavailableException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.EC2InstanceUnavailableException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // One of the parameters is not valid.
 type InvalidArgsException struct {
@@ -166,6 +272,27 @@ func (e *InvalidArgsException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InvalidArgsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *InvalidArgsException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InvalidArgsException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InvalidArgsException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.InvalidArgsException_Message, *v.Message)
+	}
+}
+func (v *InvalidArgsException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InvalidArgsException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InvalidArgsException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.InvalidArgsException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // Your account is not authorized to use the EC2 Serial Console. To authorize your
 // account, run the EnableSerialConsoleAccess API. For more information, see [EnableSerialConsoleAccess]in
@@ -198,6 +325,27 @@ func (e *SerialConsoleAccessDisabledException) ErrorCode() string {
 func (e *SerialConsoleAccessDisabledException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
+func (v *SerialConsoleAccessDisabledException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SerialConsoleAccessDisabledException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SerialConsoleAccessDisabledException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.SerialConsoleAccessDisabledException_Message, *v.Message)
+	}
+}
+func (v *SerialConsoleAccessDisabledException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SerialConsoleAccessDisabledException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SerialConsoleAccessDisabledException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.SerialConsoleAccessDisabledException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The instance currently has 1 active serial console session. Only 1 session is
 // supported at a time.
@@ -227,6 +375,27 @@ func (e *SerialConsoleSessionLimitExceededException) ErrorCode() string {
 func (e *SerialConsoleSessionLimitExceededException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
+func (v *SerialConsoleSessionLimitExceededException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SerialConsoleSessionLimitExceededException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SerialConsoleSessionLimitExceededException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.SerialConsoleSessionLimitExceededException_Message, *v.Message)
+	}
+}
+func (v *SerialConsoleSessionLimitExceededException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SerialConsoleSessionLimitExceededException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SerialConsoleSessionLimitExceededException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.SerialConsoleSessionLimitExceededException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // Unable to start a serial console session. Please try again.
 type SerialConsoleSessionUnavailableException struct {
@@ -254,6 +423,27 @@ func (e *SerialConsoleSessionUnavailableException) ErrorCode() string {
 }
 func (e *SerialConsoleSessionUnavailableException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultServer
+}
+func (v *SerialConsoleSessionUnavailableException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SerialConsoleSessionUnavailableException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SerialConsoleSessionUnavailableException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.SerialConsoleSessionUnavailableException_Message, *v.Message)
+	}
+}
+func (v *SerialConsoleSessionUnavailableException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SerialConsoleSessionUnavailableException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SerialConsoleSessionUnavailableException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.SerialConsoleSessionUnavailableException_Message, v.Message)
+		}
+		return nil
+	})
 }
 
 // Your instance's BIOS version is unsupported for serial console connection.
@@ -284,6 +474,27 @@ func (e *SerialConsoleSessionUnsupportedException) ErrorCode() string {
 func (e *SerialConsoleSessionUnsupportedException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
+func (v *SerialConsoleSessionUnsupportedException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SerialConsoleSessionUnsupportedException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SerialConsoleSessionUnsupportedException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.SerialConsoleSessionUnsupportedException_Message, *v.Message)
+	}
+}
+func (v *SerialConsoleSessionUnsupportedException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SerialConsoleSessionUnsupportedException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SerialConsoleSessionUnsupportedException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.SerialConsoleSessionUnsupportedException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The service encountered an error. Follow the instructions in the error message
 // and try again.
@@ -311,6 +522,27 @@ func (e *ServiceException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ServiceException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
+func (v *ServiceException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ServiceException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ServiceException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.ServiceException_Message, *v.Message)
+	}
+}
+func (v *ServiceException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ServiceException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ServiceException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ServiceException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The requests were made too frequently and have been throttled. Wait a while and
 // try again. To increase the limit on your request frequency, contact AWS Support.
@@ -338,3 +570,24 @@ func (e *ThrottlingException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ThrottlingException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *ThrottlingException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ThrottlingException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ThrottlingException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.ThrottlingException_Message, *v.Message)
+	}
+}
+func (v *ThrottlingException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ThrottlingException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ThrottlingException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ThrottlingException_Message, v.Message)
+		}
+		return nil
+	})
+}

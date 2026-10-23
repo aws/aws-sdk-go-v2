@@ -120,6 +120,35 @@ func (CapabilityType) Values() []CapabilityType {
 	}
 }
 
+type DayOfWeek string
+
+// Enum values for DayOfWeek
+const (
+	DayOfWeekMonday    DayOfWeek = "MONDAY"
+	DayOfWeekTuesday   DayOfWeek = "TUESDAY"
+	DayOfWeekWednesday DayOfWeek = "WEDNESDAY"
+	DayOfWeekThursday  DayOfWeek = "THURSDAY"
+	DayOfWeekFriday    DayOfWeek = "FRIDAY"
+	DayOfWeekSaturday  DayOfWeek = "SATURDAY"
+	DayOfWeekSunday    DayOfWeek = "SUNDAY"
+)
+
+// Values returns all known values for DayOfWeek. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (DayOfWeek) Values() []DayOfWeek {
+	return []DayOfWeek{
+		"MONDAY",
+		"TUESDAY",
+		"WEDNESDAY",
+		"THURSDAY",
+		"FRIDAY",
+		"SATURDAY",
+		"SUNDAY",
+	}
+}
+
 type EventChannelType string
 
 // Enum values for EventChannelType
@@ -257,6 +286,25 @@ func (GoalType) Values() []GoalType {
 	}
 }
 
+type IncludedData string
+
+// Enum values for IncludedData
+const (
+	IncludedDataMetadataOnly IncludedData = "METADATA_ONLY"
+	IncludedDataAllData      IncludedData = "ALL_DATA"
+)
+
+// Values returns all known values for IncludedData. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (IncludedData) Values() []IncludedData {
+	return []IncludedData{
+		"METADATA_ONLY",
+		"ALL_DATA",
+	}
+}
+
 type IpAddressType string
 
 // Enum values for IpAddressType
@@ -289,7 +337,8 @@ const (
 	// API key-based authentication.
 	MCPServerAuthorizationMethodApiKey MCPServerAuthorizationMethod = "api-key"
 	// Bearer token authentication (RFC 6750).
-	MCPServerAuthorizationMethodBearerToken MCPServerAuthorizationMethod = "bearer-token"
+	MCPServerAuthorizationMethodBearerToken   MCPServerAuthorizationMethod = "bearer-token"
+	MCPServerAuthorizationMethodCustomHeaders MCPServerAuthorizationMethod = "custom-headers"
 )
 
 // Values returns all known values for MCPServerAuthorizationMethod. Note that
@@ -303,6 +352,7 @@ func (MCPServerAuthorizationMethod) Values() []MCPServerAuthorizationMethod {
 		"oauth-3lo",
 		"api-key",
 		"bearer-token",
+		"custom-headers",
 	}
 }
 
@@ -627,6 +677,7 @@ const (
 	ServiceSlack        Service = "slack"
 	ServiceAzure        Service = "azure"
 	ServiceAzureDevops  Service = "azuredevops"
+	ServiceMsTeams      Service = "msteams"
 	ServiceDynatrace    Service = "dynatrace"
 	ServiceServicenow   Service = "servicenow"
 	ServicePagerduty    Service = "pagerduty"
@@ -662,6 +713,7 @@ func (Service) Values() []Service {
 		"slack",
 		"azure",
 		"azuredevops",
+		"msteams",
 		"dynatrace",
 		"servicenow",
 		"pagerduty",

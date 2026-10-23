@@ -4,7 +4,9 @@ package glue
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/glue/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/glue/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -46,6 +48,27 @@ type CreateUsageProfileInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateUsageProfileInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateUsageProfileRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateUsageProfileInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Configuration != nil {
+		s.WriteStruct(schemas.CreateUsageProfileRequest_Configuration)
+		v.Configuration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreateUsageProfileRequest_Description, *v.Description)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateUsageProfileRequest_Name, *v.Name)
+	}
+	serializeTagsMap(s, schemas.CreateUsageProfileRequest_Tags, v.Tags)
+}
+
 type CreateUsageProfileOutput struct {
 
 	// The name of the usage profile that was created.
@@ -57,13 +80,32 @@ type CreateUsageProfileOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateUsageProfileOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateUsageProfileResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateUsageProfileOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.CreateUsageProfileResponse_Name, *v.Name)
+	}
+}
+func (v *CreateUsageProfileOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateUsageProfileResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateUsageProfileResponse_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.CreateUsageProfileResponse_Name, v.Name)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateUsageProfileMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateUsageProfile{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateUsageProfile, schemas.CreateUsageProfileRequest, schemas.CreateUsageProfileResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateUsageProfile{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateUsageProfile, schemas.CreateUsageProfileRequest, schemas.CreateUsageProfileResponse), output: &CreateUsageProfileOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

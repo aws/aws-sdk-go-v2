@@ -4,7 +4,9 @@ package databasemigrationservice
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/databasemigrationservice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/databasemigrationservice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -110,6 +112,39 @@ type StartReplicationTaskAssessmentRunInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartReplicationTaskAssessmentRunInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartReplicationTaskAssessmentRunMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartReplicationTaskAssessmentRunInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AssessmentRunName != nil {
+		s.WriteString(schemas.StartReplicationTaskAssessmentRunMessage_AssessmentRunName, *v.AssessmentRunName)
+	}
+	serializeExcludeTestList(s, schemas.StartReplicationTaskAssessmentRunMessage_Exclude, v.Exclude)
+	serializeIncludeTestList(s, schemas.StartReplicationTaskAssessmentRunMessage_IncludeOnly, v.IncludeOnly)
+	if v.ReplicationTaskArn != nil {
+		s.WriteString(schemas.StartReplicationTaskAssessmentRunMessage_ReplicationTaskArn, *v.ReplicationTaskArn)
+	}
+	if v.ResultEncryptionMode != nil {
+		s.WriteString(schemas.StartReplicationTaskAssessmentRunMessage_ResultEncryptionMode, *v.ResultEncryptionMode)
+	}
+	if v.ResultKmsKeyArn != nil {
+		s.WriteString(schemas.StartReplicationTaskAssessmentRunMessage_ResultKmsKeyArn, *v.ResultKmsKeyArn)
+	}
+	if v.ResultLocationBucket != nil {
+		s.WriteString(schemas.StartReplicationTaskAssessmentRunMessage_ResultLocationBucket, *v.ResultLocationBucket)
+	}
+	if v.ResultLocationFolder != nil {
+		s.WriteString(schemas.StartReplicationTaskAssessmentRunMessage_ResultLocationFolder, *v.ResultLocationFolder)
+	}
+	if v.ServiceAccessRoleArn != nil {
+		s.WriteString(schemas.StartReplicationTaskAssessmentRunMessage_ServiceAccessRoleArn, *v.ServiceAccessRoleArn)
+	}
+	serializeTagList(s, schemas.StartReplicationTaskAssessmentRunMessage_Tags, v.Tags)
+}
+
 type StartReplicationTaskAssessmentRunOutput struct {
 
 	// The premigration assessment run that was started.
@@ -121,13 +156,34 @@ type StartReplicationTaskAssessmentRunOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartReplicationTaskAssessmentRunOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartReplicationTaskAssessmentRunResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartReplicationTaskAssessmentRunOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ReplicationTaskAssessmentRun != nil {
+		s.WriteStruct(schemas.StartReplicationTaskAssessmentRunResponse_ReplicationTaskAssessmentRun)
+		v.ReplicationTaskAssessmentRun.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *StartReplicationTaskAssessmentRunOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartReplicationTaskAssessmentRunResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartReplicationTaskAssessmentRunResponse_ReplicationTaskAssessmentRun:
+			v.ReplicationTaskAssessmentRun = &types.ReplicationTaskAssessmentRun{}
+			return v.ReplicationTaskAssessmentRun.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartReplicationTaskAssessmentRunMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStartReplicationTaskAssessmentRun{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartReplicationTaskAssessmentRun, schemas.StartReplicationTaskAssessmentRunMessage, schemas.StartReplicationTaskAssessmentRunResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpStartReplicationTaskAssessmentRun{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartReplicationTaskAssessmentRun, schemas.StartReplicationTaskAssessmentRunMessage, schemas.StartReplicationTaskAssessmentRunResponse), output: &StartReplicationTaskAssessmentRunOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

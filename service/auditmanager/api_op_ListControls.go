@@ -5,7 +5,9 @@ package auditmanager
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/auditmanager/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/auditmanager/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -63,6 +65,27 @@ type ListControlsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListControlsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListControlsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListControlsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ControlCatalogId != nil {
+		s.WriteString(schemas.ListControlsRequest_controlCatalogId, *v.ControlCatalogId)
+	}
+	if v.ControlType != "" {
+		s.WriteString(schemas.ListControlsRequest_controlType, string(v.ControlType))
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListControlsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListControlsRequest_nextToken, *v.NextToken)
+	}
+}
+
 type ListControlsOutput struct {
 
 	//  A list of metadata that the ListControls API returns for each control.
@@ -77,13 +100,35 @@ type ListControlsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListControlsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListControlsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListControlsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeControlMetadataList(s, schemas.ListControlsResponse_controlMetadataList, v.ControlMetadataList)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListControlsResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListControlsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListControlsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListControlsResponse_controlMetadataList:
+			return deserializeControlMetadataList(d, schemas.ListControlsResponse_controlMetadataList, &v.ControlMetadataList)
+		case schemas.ListControlsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListControlsResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListControlsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListControls{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListControls, schemas.ListControlsRequest, schemas.ListControlsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListControls{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListControls, schemas.ListControlsRequest, schemas.ListControlsResponse), output: &ListControlsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

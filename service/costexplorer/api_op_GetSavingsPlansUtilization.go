@@ -4,7 +4,9 @@ package costexplorer
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/costexplorer/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/costexplorer/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -86,6 +88,33 @@ type GetSavingsPlansUtilizationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetSavingsPlansUtilizationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetSavingsPlansUtilizationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetSavingsPlansUtilizationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Filter != nil {
+		s.WriteStruct(schemas.GetSavingsPlansUtilizationRequest_Filter)
+		v.Filter.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Granularity != "" {
+		s.WriteString(schemas.GetSavingsPlansUtilizationRequest_Granularity, string(v.Granularity))
+	}
+	if v.SortBy != nil {
+		s.WriteStruct(schemas.GetSavingsPlansUtilizationRequest_SortBy)
+		v.SortBy.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TimePeriod != nil {
+		s.WriteStruct(schemas.GetSavingsPlansUtilizationRequest_TimePeriod)
+		v.TimePeriod.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type GetSavingsPlansUtilizationOutput struct {
 
 	// The total amount of cost/commitment that you used your Savings Plans,
@@ -104,13 +133,37 @@ type GetSavingsPlansUtilizationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetSavingsPlansUtilizationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetSavingsPlansUtilizationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetSavingsPlansUtilizationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeSavingsPlansUtilizationsByTime(s, schemas.GetSavingsPlansUtilizationResponse_SavingsPlansUtilizationsByTime, v.SavingsPlansUtilizationsByTime)
+	if v.Total != nil {
+		s.WriteStruct(schemas.GetSavingsPlansUtilizationResponse_Total)
+		v.Total.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetSavingsPlansUtilizationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetSavingsPlansUtilizationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetSavingsPlansUtilizationResponse_SavingsPlansUtilizationsByTime:
+			return deserializeSavingsPlansUtilizationsByTime(d, schemas.GetSavingsPlansUtilizationResponse_SavingsPlansUtilizationsByTime, &v.SavingsPlansUtilizationsByTime)
+		case schemas.GetSavingsPlansUtilizationResponse_Total:
+			v.Total = &types.SavingsPlansUtilizationAggregates{}
+			return v.Total.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetSavingsPlansUtilizationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetSavingsPlansUtilization{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetSavingsPlansUtilization, schemas.GetSavingsPlansUtilizationRequest, schemas.GetSavingsPlansUtilizationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetSavingsPlansUtilization{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetSavingsPlansUtilization, schemas.GetSavingsPlansUtilizationRequest, schemas.GetSavingsPlansUtilizationResponse), output: &GetSavingsPlansUtilizationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

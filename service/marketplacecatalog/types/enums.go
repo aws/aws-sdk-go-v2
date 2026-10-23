@@ -212,6 +212,50 @@ func (DataProductVisibilityString) Values() []DataProductVisibilityString {
 	}
 }
 
+type ExpressPrivateOfferConfigurationSortBy string
+
+// Enum values for ExpressPrivateOfferConfigurationSortBy
+const (
+	ExpressPrivateOfferConfigurationSortByEntityId         ExpressPrivateOfferConfigurationSortBy = "EntityId"
+	ExpressPrivateOfferConfigurationSortByLastModifiedDate ExpressPrivateOfferConfigurationSortBy = "LastModifiedDate"
+	ExpressPrivateOfferConfigurationSortByProductId        ExpressPrivateOfferConfigurationSortBy = "ProductId"
+	ExpressPrivateOfferConfigurationSortByState            ExpressPrivateOfferConfigurationSortBy = "State"
+)
+
+// Values returns all known values for ExpressPrivateOfferConfigurationSortBy.
+// Note that this can be expanded in the future, and so it is only as up to date as
+// the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ExpressPrivateOfferConfigurationSortBy) Values() []ExpressPrivateOfferConfigurationSortBy {
+	return []ExpressPrivateOfferConfigurationSortBy{
+		"EntityId",
+		"LastModifiedDate",
+		"ProductId",
+		"State",
+	}
+}
+
+type ExpressPrivateOfferConfigurationStateString string
+
+// Enum values for ExpressPrivateOfferConfigurationStateString
+const (
+	ExpressPrivateOfferConfigurationStateStringActive   ExpressPrivateOfferConfigurationStateString = "ACTIVE"
+	ExpressPrivateOfferConfigurationStateStringInactive ExpressPrivateOfferConfigurationStateString = "INACTIVE"
+)
+
+// Values returns all known values for
+// ExpressPrivateOfferConfigurationStateString. Note that this can be expanded in
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ExpressPrivateOfferConfigurationStateString) Values() []ExpressPrivateOfferConfigurationStateString {
+	return []ExpressPrivateOfferConfigurationStateString{
+		"ACTIVE",
+		"INACTIVE",
+	}
+}
+
 type FailureCode string
 
 // Enum values for FailureCode
@@ -522,6 +566,9 @@ const (
 	ResaleAuthorizationSortByCreatedDate           ResaleAuthorizationSortBy = "CreatedDate"
 	ResaleAuthorizationSortByAvailabilityEndDate   ResaleAuthorizationSortBy = "AvailabilityEndDate"
 	ResaleAuthorizationSortByLastModifiedDate      ResaleAuthorizationSortBy = "LastModifiedDate"
+	ResaleAuthorizationSortByResellerRole          ResaleAuthorizationSortBy = "ResellerRole"
+	ResaleAuthorizationSortBySourceAuthorization   ResaleAuthorizationSortBy = "SourceAuthorization"
+	ResaleAuthorizationSortByIssuerAccountId       ResaleAuthorizationSortBy = "IssuerAccountId"
 )
 
 // Values returns all known values for ResaleAuthorizationSortBy. Note that this
@@ -543,6 +590,9 @@ func (ResaleAuthorizationSortBy) Values() []ResaleAuthorizationSortBy {
 		"CreatedDate",
 		"AvailabilityEndDate",
 		"LastModifiedDate",
+		"ResellerRole",
+		"SourceAuthorization",
+		"IssuerAccountId",
 	}
 }
 

@@ -4,7 +4,9 @@ package resiliencehub
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/resiliencehub/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/resiliencehub/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -38,6 +40,28 @@ type DescribeAppAssessmentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeAppAssessmentInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeAppAssessmentRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeAppAssessmentInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AssessmentArn != nil {
+		s.WriteString(schemas.DescribeAppAssessmentRequest_assessmentArn, *v.AssessmentArn)
+	}
+}
+func (v *DescribeAppAssessmentInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeAppAssessmentRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeAppAssessmentRequest_assessmentArn:
+			v.AssessmentArn = new(string)
+			return d.ReadString(schemas.DescribeAppAssessmentRequest_assessmentArn, v.AssessmentArn)
+		}
+		return nil
+	})
+}
+
 type DescribeAppAssessmentOutput struct {
 
 	// The assessment for an Resilience Hub application, returned as an object. This
@@ -53,13 +77,34 @@ type DescribeAppAssessmentOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeAppAssessmentOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeAppAssessmentResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeAppAssessmentOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Assessment != nil {
+		s.WriteStruct(schemas.DescribeAppAssessmentResponse_assessment)
+		v.Assessment.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DescribeAppAssessmentOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeAppAssessmentResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeAppAssessmentResponse_assessment:
+			v.Assessment = &types.AppAssessment{}
+			return v.Assessment.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeAppAssessmentMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeAppAssessment{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeAppAssessment, schemas.DescribeAppAssessmentRequest, schemas.DescribeAppAssessmentResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeAppAssessment{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeAppAssessment, schemas.DescribeAppAssessmentRequest, schemas.DescribeAppAssessmentResponse), output: &DescribeAppAssessmentOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

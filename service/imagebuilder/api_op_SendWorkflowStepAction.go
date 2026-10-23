@@ -5,12 +5,15 @@ package imagebuilder
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/imagebuilder/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/imagebuilder/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
-// Pauses or resumes image creation when the associated workflow runs a
-// WaitForAction step.
+// Sends an action to a workflow step that has paused at a WaitForAction step, so
+// that image creation can continue. To find the steps that are waiting for an
+// action, call ListWaitingWorkflowSteps.
 func (c *Client) SendWorkflowStepAction(ctx context.Context, params *SendWorkflowStepActionInput, optFns ...func(*Options)) (*SendWorkflowStepActionOutput, error) {
 	if params == nil {
 		params = &SendWorkflowStepActionInput{}
@@ -28,15 +31,19 @@ func (c *Client) SendWorkflowStepAction(ctx context.Context, params *SendWorkflo
 
 type SendWorkflowStepActionInput struct {
 
-	// The action to perform on the paused workflow step. The workflow step must be in
-	// a waiting state to accept an action. The request fails if the step has already
-	// timed out or been actioned.
+	// The action to perform on the paused workflow step. RESUME completes the waiting
+	// step, and the workflow continues. STOP fails the step, and the step's onFailure
+	// setting determines whether the workflow continues or aborts. The workflow step
+	// must be in a waiting state to accept an action. The request fails if the step
+	// has already timed out or been actioned.
 	//
 	// This member is required.
 	Action types.WorkflowStepActionType
 
-	// Unique, case-sensitive identifier you provide to ensure idempotency of the
-	// request. For more information, see [Ensuring idempotency]in the Amazon EC2 API Reference.
+	// A unique, case-sensitive identifier you provide to ensure that the operation
+	// runs no more than one time. If you retry a request with the same client token,
+	// Image Builder returns the original response without running the operation again.
+	// For more information, see [Ensuring idempotency]in the Amazon EC2 API Reference.
 	//
 	// [Ensuring idempotency]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
 	//
@@ -51,7 +58,8 @@ type SendWorkflowStepActionInput struct {
 	// This member is required.
 	ImageBuildVersionArn *string
 
-	// Uniquely identifies the workflow step that sent the step action.
+	// Uniquely identifies the waiting workflow step that you send the action to. To
+	// get this identifier, call ListWaitingWorkflowSteps.
 	//
 	// This member is required.
 	StepExecutionId *string
@@ -63,6 +71,30 @@ type SendWorkflowStepActionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SendWorkflowStepActionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SendWorkflowStepActionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SendWorkflowStepActionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Action != "" {
+		s.WriteString(schemas.SendWorkflowStepActionRequest_action, string(v.Action))
+	}
+	if v.ClientToken != nil {
+		s.WriteString(schemas.SendWorkflowStepActionRequest_clientToken, *v.ClientToken)
+	}
+	if v.ImageBuildVersionArn != nil {
+		s.WriteString(schemas.SendWorkflowStepActionRequest_imageBuildVersionArn, *v.ImageBuildVersionArn)
+	}
+	if v.Reason != nil {
+		s.WriteString(schemas.SendWorkflowStepActionRequest_reason, *v.Reason)
+	}
+	if v.StepExecutionId != nil {
+		s.WriteString(schemas.SendWorkflowStepActionRequest_stepExecutionId, *v.StepExecutionId)
+	}
+}
+
 type SendWorkflowStepActionOutput struct {
 
 	// The client token that uniquely identifies the request.
@@ -72,7 +104,8 @@ type SendWorkflowStepActionOutput struct {
 	// action request.
 	ImageBuildVersionArn *string
 
-	// The workflow step that sent the step action.
+	// The unique identifier for the workflow step that received the action, as
+	// specified in the request.
 	StepExecutionId *string
 
 	// Metadata pertaining to the operation's result.
@@ -81,13 +114,44 @@ type SendWorkflowStepActionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SendWorkflowStepActionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SendWorkflowStepActionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SendWorkflowStepActionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.SendWorkflowStepActionResponse_clientToken, *v.ClientToken)
+	}
+	if v.ImageBuildVersionArn != nil {
+		s.WriteString(schemas.SendWorkflowStepActionResponse_imageBuildVersionArn, *v.ImageBuildVersionArn)
+	}
+	if v.StepExecutionId != nil {
+		s.WriteString(schemas.SendWorkflowStepActionResponse_stepExecutionId, *v.StepExecutionId)
+	}
+}
+func (v *SendWorkflowStepActionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SendWorkflowStepActionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SendWorkflowStepActionResponse_clientToken:
+			v.ClientToken = new(string)
+			return d.ReadString(schemas.SendWorkflowStepActionResponse_clientToken, v.ClientToken)
+		case schemas.SendWorkflowStepActionResponse_imageBuildVersionArn:
+			v.ImageBuildVersionArn = new(string)
+			return d.ReadString(schemas.SendWorkflowStepActionResponse_imageBuildVersionArn, v.ImageBuildVersionArn)
+		case schemas.SendWorkflowStepActionResponse_stepExecutionId:
+			v.StepExecutionId = new(string)
+			return d.ReadString(schemas.SendWorkflowStepActionResponse_stepExecutionId, v.StepExecutionId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationSendWorkflowStepActionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpSendWorkflowStepAction{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SendWorkflowStepAction, schemas.SendWorkflowStepActionRequest, schemas.SendWorkflowStepActionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpSendWorkflowStepAction{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SendWorkflowStepAction, schemas.SendWorkflowStepActionRequest, schemas.SendWorkflowStepActionResponse), output: &SendWorkflowStepActionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

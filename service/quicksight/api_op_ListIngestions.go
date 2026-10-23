@@ -5,7 +5,9 @@ package quicksight
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/quicksight/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/quicksight/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -47,6 +49,27 @@ type ListIngestionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListIngestionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListIngestionsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListIngestionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AwsAccountId != nil {
+		s.WriteString(schemas.ListIngestionsRequest_AwsAccountId, *v.AwsAccountId)
+	}
+	if v.DataSetId != nil {
+		s.WriteString(schemas.ListIngestionsRequest_DataSetId, *v.DataSetId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListIngestionsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListIngestionsRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListIngestionsOutput struct {
 
 	// A list of the ingestions.
@@ -67,13 +90,46 @@ type ListIngestionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListIngestionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListIngestionsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListIngestionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeIngestions(s, schemas.ListIngestionsResponse_Ingestions, v.Ingestions)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListIngestionsResponse_NextToken, *v.NextToken)
+	}
+	if v.RequestId != nil {
+		s.WriteString(schemas.ListIngestionsResponse_RequestId, *v.RequestId)
+	}
+	if v.Status != 0 {
+		s.WriteInt32(schemas.ListIngestionsResponse_Status, v.Status)
+	}
+}
+func (v *ListIngestionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListIngestionsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListIngestionsResponse_Ingestions:
+			return deserializeIngestions(d, schemas.ListIngestionsResponse_Ingestions, &v.Ingestions)
+		case schemas.ListIngestionsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListIngestionsResponse_NextToken, v.NextToken)
+		case schemas.ListIngestionsResponse_RequestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.ListIngestionsResponse_RequestId, v.RequestId)
+		case schemas.ListIngestionsResponse_Status:
+			return d.ReadInt32(schemas.ListIngestionsResponse_Status, &v.Status)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListIngestionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListIngestions{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListIngestions, schemas.ListIngestionsRequest, schemas.ListIngestionsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListIngestions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListIngestions, schemas.ListIngestionsRequest, schemas.ListIngestionsResponse), output: &ListIngestionsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

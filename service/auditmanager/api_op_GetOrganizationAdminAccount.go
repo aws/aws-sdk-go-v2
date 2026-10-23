@@ -4,6 +4,8 @@ package auditmanager
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/auditmanager/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -29,6 +31,15 @@ type GetOrganizationAdminAccountInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetOrganizationAdminAccountInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetOrganizationAdminAccountRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetOrganizationAdminAccountInput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+
 type GetOrganizationAdminAccountOutput struct {
 
 	//  The identifier for the administrator account.
@@ -43,13 +54,38 @@ type GetOrganizationAdminAccountOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetOrganizationAdminAccountOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetOrganizationAdminAccountResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetOrganizationAdminAccountOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AdminAccountId != nil {
+		s.WriteString(schemas.GetOrganizationAdminAccountResponse_adminAccountId, *v.AdminAccountId)
+	}
+	if v.OrganizationId != nil {
+		s.WriteString(schemas.GetOrganizationAdminAccountResponse_organizationId, *v.OrganizationId)
+	}
+}
+func (v *GetOrganizationAdminAccountOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetOrganizationAdminAccountResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetOrganizationAdminAccountResponse_adminAccountId:
+			v.AdminAccountId = new(string)
+			return d.ReadString(schemas.GetOrganizationAdminAccountResponse_adminAccountId, v.AdminAccountId)
+		case schemas.GetOrganizationAdminAccountResponse_organizationId:
+			v.OrganizationId = new(string)
+			return d.ReadString(schemas.GetOrganizationAdminAccountResponse_organizationId, v.OrganizationId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetOrganizationAdminAccountMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetOrganizationAdminAccount{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetOrganizationAdminAccount, schemas.GetOrganizationAdminAccountRequest, schemas.GetOrganizationAdminAccountResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetOrganizationAdminAccount{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetOrganizationAdminAccount, schemas.GetOrganizationAdminAccountRequest, schemas.GetOrganizationAdminAccountResponse), output: &GetOrganizationAdminAccountOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

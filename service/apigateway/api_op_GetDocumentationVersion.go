@@ -4,6 +4,8 @@ package apigateway
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/apigateway/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -40,6 +42,21 @@ type GetDocumentationVersionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetDocumentationVersionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetDocumentationVersionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetDocumentationVersionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DocumentationVersion != nil {
+		s.WriteString(schemas.GetDocumentationVersionRequest_documentationVersion, *v.DocumentationVersion)
+	}
+	if v.RestApiId != nil {
+		s.WriteString(schemas.GetDocumentationVersionRequest_restApiId, *v.RestApiId)
+	}
+}
+
 // A snapshot of the documentation of an API.
 type GetDocumentationVersionOutput struct {
 
@@ -58,13 +75,44 @@ type GetDocumentationVersionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetDocumentationVersionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DocumentationVersion)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetDocumentationVersionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreatedDate != nil {
+		s.WriteTime(schemas.DocumentationVersion_createdDate, *v.CreatedDate)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.DocumentationVersion_description, *v.Description)
+	}
+	if v.Version != nil {
+		s.WriteString(schemas.DocumentationVersion_version, *v.Version)
+	}
+}
+func (v *GetDocumentationVersionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DocumentationVersion, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DocumentationVersion_createdDate:
+			v.CreatedDate = new(time.Time)
+			return d.ReadTime(schemas.DocumentationVersion_createdDate, v.CreatedDate)
+		case schemas.DocumentationVersion_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.DocumentationVersion_description, v.Description)
+		case schemas.DocumentationVersion_version:
+			v.Version = new(string)
+			return d.ReadString(schemas.DocumentationVersion_version, v.Version)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetDocumentationVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetDocumentationVersion{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetDocumentationVersion, schemas.GetDocumentationVersionRequest, schemas.DocumentationVersion)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetDocumentationVersion{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetDocumentationVersion, schemas.GetDocumentationVersionRequest, schemas.DocumentationVersion), output: &GetDocumentationVersionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

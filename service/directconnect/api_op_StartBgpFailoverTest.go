@@ -4,7 +4,9 @@ package directconnect
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/directconnect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/directconnect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -55,6 +57,22 @@ type StartBgpFailoverTestInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartBgpFailoverTestInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartBgpFailoverTestRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartBgpFailoverTestInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeBGPPeerIdList(s, schemas.StartBgpFailoverTestRequest_bgpPeers, v.BgpPeers)
+	if v.TestDurationInMinutes != nil {
+		s.WriteInt32(schemas.StartBgpFailoverTestRequest_testDurationInMinutes, *v.TestDurationInMinutes)
+	}
+	if v.VirtualInterfaceId != nil {
+		s.WriteString(schemas.StartBgpFailoverTestRequest_virtualInterfaceId, *v.VirtualInterfaceId)
+	}
+}
+
 type StartBgpFailoverTestOutput struct {
 
 	// Information about the virtual interface failover test.
@@ -66,13 +84,34 @@ type StartBgpFailoverTestOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartBgpFailoverTestOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartBgpFailoverTestResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartBgpFailoverTestOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.VirtualInterfaceTest != nil {
+		s.WriteStruct(schemas.StartBgpFailoverTestResponse_virtualInterfaceTest)
+		v.VirtualInterfaceTest.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *StartBgpFailoverTestOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartBgpFailoverTestResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartBgpFailoverTestResponse_virtualInterfaceTest:
+			v.VirtualInterfaceTest = &types.VirtualInterfaceTestHistory{}
+			return v.VirtualInterfaceTest.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartBgpFailoverTestMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStartBgpFailoverTest{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartBgpFailoverTest, schemas.StartBgpFailoverTestRequest, schemas.StartBgpFailoverTestResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpStartBgpFailoverTest{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartBgpFailoverTest, schemas.StartBgpFailoverTestRequest, schemas.StartBgpFailoverTestResponse), output: &StartBgpFailoverTestOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

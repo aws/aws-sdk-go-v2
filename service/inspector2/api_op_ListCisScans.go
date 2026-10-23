@@ -5,7 +5,9 @@ package inspector2
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/inspector2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/inspector2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -49,6 +51,35 @@ type ListCisScansInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListCisScansInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListCisScansRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListCisScansInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DetailLevel != "" {
+		s.WriteString(schemas.ListCisScansRequest_detailLevel, string(v.DetailLevel))
+	}
+	if v.FilterCriteria != nil {
+		s.WriteStruct(schemas.ListCisScansRequest_filterCriteria)
+		v.FilterCriteria.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListCisScansRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListCisScansRequest_nextToken, *v.NextToken)
+	}
+	if v.SortBy != "" {
+		s.WriteString(schemas.ListCisScansRequest_sortBy, string(v.SortBy))
+	}
+	if v.SortOrder != "" {
+		s.WriteString(schemas.ListCisScansRequest_sortOrder, string(v.SortOrder))
+	}
+}
+
 type ListCisScansOutput struct {
 
 	// The pagination token from a previous request that's used to retrieve the next
@@ -64,13 +95,35 @@ type ListCisScansOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListCisScansOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListCisScansResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListCisScansOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListCisScansResponse_nextToken, *v.NextToken)
+	}
+	serializeCisScanList(s, schemas.ListCisScansResponse_scans, v.Scans)
+}
+func (v *ListCisScansOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListCisScansResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListCisScansResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListCisScansResponse_nextToken, v.NextToken)
+		case schemas.ListCisScansResponse_scans:
+			return deserializeCisScanList(d, schemas.ListCisScansResponse_scans, &v.Scans)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListCisScansMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListCisScans{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListCisScans, schemas.ListCisScansRequest, schemas.ListCisScansResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListCisScans{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListCisScans, schemas.ListCisScansRequest, schemas.ListCisScansResponse), output: &ListCisScansOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

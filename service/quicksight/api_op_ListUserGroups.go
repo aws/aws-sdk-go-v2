@@ -5,7 +5,9 @@ package quicksight
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/quicksight/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/quicksight/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -54,6 +56,30 @@ type ListUserGroupsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListUserGroupsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListUserGroupsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListUserGroupsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AwsAccountId != nil {
+		s.WriteString(schemas.ListUserGroupsRequest_AwsAccountId, *v.AwsAccountId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListUserGroupsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.Namespace != nil {
+		s.WriteString(schemas.ListUserGroupsRequest_Namespace, *v.Namespace)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListUserGroupsRequest_NextToken, *v.NextToken)
+	}
+	if v.UserName != nil {
+		s.WriteString(schemas.ListUserGroupsRequest_UserName, *v.UserName)
+	}
+}
+
 type ListUserGroupsOutput struct {
 
 	// The list of groups the user is a member of.
@@ -74,13 +100,46 @@ type ListUserGroupsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListUserGroupsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListUserGroupsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListUserGroupsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeGroupList(s, schemas.ListUserGroupsResponse_GroupList, v.GroupList)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListUserGroupsResponse_NextToken, *v.NextToken)
+	}
+	if v.RequestId != nil {
+		s.WriteString(schemas.ListUserGroupsResponse_RequestId, *v.RequestId)
+	}
+	if v.Status != 0 {
+		s.WriteInt32(schemas.ListUserGroupsResponse_Status, v.Status)
+	}
+}
+func (v *ListUserGroupsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListUserGroupsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListUserGroupsResponse_GroupList:
+			return deserializeGroupList(d, schemas.ListUserGroupsResponse_GroupList, &v.GroupList)
+		case schemas.ListUserGroupsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListUserGroupsResponse_NextToken, v.NextToken)
+		case schemas.ListUserGroupsResponse_RequestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.ListUserGroupsResponse_RequestId, v.RequestId)
+		case schemas.ListUserGroupsResponse_Status:
+			return d.ReadInt32(schemas.ListUserGroupsResponse_Status, &v.Status)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListUserGroupsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListUserGroups{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListUserGroups, schemas.ListUserGroupsRequest, schemas.ListUserGroupsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListUserGroups{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListUserGroups, schemas.ListUserGroupsRequest, schemas.ListUserGroupsResponse), output: &ListUserGroupsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

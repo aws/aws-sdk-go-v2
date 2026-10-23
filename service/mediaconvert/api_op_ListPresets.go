@@ -5,7 +5,9 @@ package mediaconvert
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/mediaconvert/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/mediaconvert/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -52,6 +54,30 @@ type ListPresetsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListPresetsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListPresetsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListPresetsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Category != nil {
+		s.WriteString(schemas.ListPresetsRequest_Category, *v.Category)
+	}
+	if v.ListBy != "" {
+		s.WriteString(schemas.ListPresetsRequest_ListBy, string(v.ListBy))
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListPresetsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListPresetsRequest_NextToken, *v.NextToken)
+	}
+	if v.Order != "" {
+		s.WriteString(schemas.ListPresetsRequest_Order, string(v.Order))
+	}
+}
+
 type ListPresetsOutput struct {
 
 	// Use this string to request the next batch of presets.
@@ -66,13 +92,35 @@ type ListPresetsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListPresetsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListPresetsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListPresetsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListPresetsResponse_NextToken, *v.NextToken)
+	}
+	serialize__listOfPreset(s, schemas.ListPresetsResponse_Presets, v.Presets)
+}
+func (v *ListPresetsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListPresetsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListPresetsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListPresetsResponse_NextToken, v.NextToken)
+		case schemas.ListPresetsResponse_Presets:
+			return deserialize__listOfPreset(d, schemas.ListPresetsResponse_Presets, &v.Presets)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListPresetsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListPresets{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListPresets, schemas.ListPresetsRequest, schemas.ListPresetsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListPresets{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListPresets, schemas.ListPresetsRequest, schemas.ListPresetsResponse), output: &ListPresetsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

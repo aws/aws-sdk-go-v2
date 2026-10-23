@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: TrentService.ListKeyRotations
+
+{"NextMarker":"__NextMarker__","Rotations":[{"ExpirationModel":"KEY_MATERIAL_EXPIRES","ImportState":"IMPORTED","KeyId":"__KeyId__","KeyMaterialDescription":"__KeyMaterialDescription__","KeyMaterialId":"__KeyMaterialId__","KeyMaterialState":"NON_CURRENT","RotationDate":946684800,"RotationType":"AUTOMATIC","ValidTo":946684800},{"ExpirationModel":"KEY_MATERIAL_EXPIRES","ImportState":"IMPORTED","KeyId":"__KeyId__","KeyMaterialDescription":"__KeyMaterialDescription__","KeyMaterialId":"__KeyMaterialId__","KeyMaterialState":"NON_CURRENT","RotationDate":946684800,"RotationType":"AUTOMATIC","ValidTo":946684800}],"Truncated":true}

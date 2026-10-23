@@ -5,7 +5,9 @@ package bedrock
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/bedrock/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrock/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -45,6 +47,27 @@ type ListAdvancedPromptOptimizationJobsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAdvancedPromptOptimizationJobsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAdvancedPromptOptimizationJobsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAdvancedPromptOptimizationJobsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListAdvancedPromptOptimizationJobsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAdvancedPromptOptimizationJobsRequest_nextToken, *v.NextToken)
+	}
+	if v.SortBy != "" {
+		s.WriteString(schemas.ListAdvancedPromptOptimizationJobsRequest_sortBy, string(v.SortBy))
+	}
+	if v.SortOrder != "" {
+		s.WriteString(schemas.ListAdvancedPromptOptimizationJobsRequest_sortOrder, string(v.SortOrder))
+	}
+}
+
 // List Advanced Prompt Optimization Jobs Response
 type ListAdvancedPromptOptimizationJobsOutput struct {
 
@@ -62,13 +85,35 @@ type ListAdvancedPromptOptimizationJobsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAdvancedPromptOptimizationJobsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAdvancedPromptOptimizationJobsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAdvancedPromptOptimizationJobsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAdvancedPromptOptimizationJobSummaries(s, schemas.ListAdvancedPromptOptimizationJobsResponse_jobSummaries, v.JobSummaries)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAdvancedPromptOptimizationJobsResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListAdvancedPromptOptimizationJobsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListAdvancedPromptOptimizationJobsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListAdvancedPromptOptimizationJobsResponse_jobSummaries:
+			return deserializeAdvancedPromptOptimizationJobSummaries(d, schemas.ListAdvancedPromptOptimizationJobsResponse_jobSummaries, &v.JobSummaries)
+		case schemas.ListAdvancedPromptOptimizationJobsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListAdvancedPromptOptimizationJobsResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListAdvancedPromptOptimizationJobsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListAdvancedPromptOptimizationJobs{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAdvancedPromptOptimizationJobs, schemas.ListAdvancedPromptOptimizationJobsRequest, schemas.ListAdvancedPromptOptimizationJobsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListAdvancedPromptOptimizationJobs{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAdvancedPromptOptimizationJobs, schemas.ListAdvancedPromptOptimizationJobsRequest, schemas.ListAdvancedPromptOptimizationJobsResponse), output: &ListAdvancedPromptOptimizationJobsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

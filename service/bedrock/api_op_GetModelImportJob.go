@@ -4,7 +4,9 @@ package bedrock
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/bedrock/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrock/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -37,6 +39,18 @@ type GetModelImportJobInput struct {
 	JobIdentifier *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetModelImportJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetModelImportJobRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetModelImportJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.JobIdentifier != nil {
+		s.WriteString(schemas.GetModelImportJobRequest_jobIdentifier, *v.JobIdentifier)
+	}
 }
 
 type GetModelImportJobOutput struct {
@@ -88,13 +102,107 @@ type GetModelImportJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetModelImportJobOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetModelImportJobResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetModelImportJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.GetModelImportJobResponse_creationTime, *v.CreationTime)
+	}
+	if v.EndTime != nil {
+		s.WriteTime(schemas.GetModelImportJobResponse_endTime, *v.EndTime)
+	}
+	if v.FailureMessage != nil {
+		s.WriteString(schemas.GetModelImportJobResponse_failureMessage, *v.FailureMessage)
+	}
+	if v.ImportedModelArn != nil {
+		s.WriteString(schemas.GetModelImportJobResponse_importedModelArn, *v.ImportedModelArn)
+	}
+	if v.ImportedModelKmsKeyArn != nil {
+		s.WriteString(schemas.GetModelImportJobResponse_importedModelKmsKeyArn, *v.ImportedModelKmsKeyArn)
+	}
+	if v.ImportedModelName != nil {
+		s.WriteString(schemas.GetModelImportJobResponse_importedModelName, *v.ImportedModelName)
+	}
+	if v.JobArn != nil {
+		s.WriteString(schemas.GetModelImportJobResponse_jobArn, *v.JobArn)
+	}
+	if v.JobName != nil {
+		s.WriteString(schemas.GetModelImportJobResponse_jobName, *v.JobName)
+	}
+	if v.LastModifiedTime != nil {
+		s.WriteTime(schemas.GetModelImportJobResponse_lastModifiedTime, *v.LastModifiedTime)
+	}
+	serializeModelDataSource(s, schemas.GetModelImportJobResponse_modelDataSource, v.ModelDataSource)
+	if v.RoleArn != nil {
+		s.WriteString(schemas.GetModelImportJobResponse_roleArn, *v.RoleArn)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.GetModelImportJobResponse_status, string(v.Status))
+	}
+	if v.VpcConfig != nil {
+		s.WriteStruct(schemas.GetModelImportJobResponse_vpcConfig)
+		v.VpcConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetModelImportJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetModelImportJobResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetModelImportJobResponse_creationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.GetModelImportJobResponse_creationTime, v.CreationTime)
+		case schemas.GetModelImportJobResponse_endTime:
+			v.EndTime = new(time.Time)
+			return d.ReadTime(schemas.GetModelImportJobResponse_endTime, v.EndTime)
+		case schemas.GetModelImportJobResponse_failureMessage:
+			v.FailureMessage = new(string)
+			return d.ReadString(schemas.GetModelImportJobResponse_failureMessage, v.FailureMessage)
+		case schemas.GetModelImportJobResponse_importedModelArn:
+			v.ImportedModelArn = new(string)
+			return d.ReadString(schemas.GetModelImportJobResponse_importedModelArn, v.ImportedModelArn)
+		case schemas.GetModelImportJobResponse_importedModelKmsKeyArn:
+			v.ImportedModelKmsKeyArn = new(string)
+			return d.ReadString(schemas.GetModelImportJobResponse_importedModelKmsKeyArn, v.ImportedModelKmsKeyArn)
+		case schemas.GetModelImportJobResponse_importedModelName:
+			v.ImportedModelName = new(string)
+			return d.ReadString(schemas.GetModelImportJobResponse_importedModelName, v.ImportedModelName)
+		case schemas.GetModelImportJobResponse_jobArn:
+			v.JobArn = new(string)
+			return d.ReadString(schemas.GetModelImportJobResponse_jobArn, v.JobArn)
+		case schemas.GetModelImportJobResponse_jobName:
+			v.JobName = new(string)
+			return d.ReadString(schemas.GetModelImportJobResponse_jobName, v.JobName)
+		case schemas.GetModelImportJobResponse_lastModifiedTime:
+			v.LastModifiedTime = new(time.Time)
+			return d.ReadTime(schemas.GetModelImportJobResponse_lastModifiedTime, v.LastModifiedTime)
+		case schemas.GetModelImportJobResponse_modelDataSource:
+			return deserializeModelDataSource(d, schemas.GetModelImportJobResponse_modelDataSource, &v.ModelDataSource)
+		case schemas.GetModelImportJobResponse_roleArn:
+			v.RoleArn = new(string)
+			return d.ReadString(schemas.GetModelImportJobResponse_roleArn, v.RoleArn)
+		case schemas.GetModelImportJobResponse_status:
+			var ev string
+			if err := d.ReadString(schemas.GetModelImportJobResponse_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.ModelImportJobStatus(ev)
+			return nil
+		case schemas.GetModelImportJobResponse_vpcConfig:
+			v.VpcConfig = &types.VpcConfig{}
+			return v.VpcConfig.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetModelImportJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetModelImportJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetModelImportJob, schemas.GetModelImportJobRequest, schemas.GetModelImportJobResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetModelImportJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetModelImportJob, schemas.GetModelImportJobRequest, schemas.GetModelImportJobResponse), output: &GetModelImportJobOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

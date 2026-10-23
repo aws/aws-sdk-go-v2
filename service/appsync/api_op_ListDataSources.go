@@ -5,7 +5,9 @@ package appsync
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/appsync/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/appsync/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -42,6 +44,24 @@ type ListDataSourcesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListDataSourcesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListDataSourcesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListDataSourcesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApiId != nil {
+		s.WriteString(schemas.ListDataSourcesRequest_apiId, *v.ApiId)
+	}
+	if v.MaxResults != 0 {
+		s.WriteInt32(schemas.ListDataSourcesRequest_maxResults, v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListDataSourcesRequest_nextToken, *v.NextToken)
+	}
+}
+
 type ListDataSourcesOutput struct {
 
 	// The DataSource objects.
@@ -57,13 +77,35 @@ type ListDataSourcesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListDataSourcesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListDataSourcesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListDataSourcesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDataSources(s, schemas.ListDataSourcesResponse_dataSources, v.DataSources)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListDataSourcesResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListDataSourcesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListDataSourcesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListDataSourcesResponse_dataSources:
+			return deserializeDataSources(d, schemas.ListDataSourcesResponse_dataSources, &v.DataSources)
+		case schemas.ListDataSourcesResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListDataSourcesResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListDataSourcesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListDataSources{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDataSources, schemas.ListDataSourcesRequest, schemas.ListDataSourcesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListDataSources{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDataSources, schemas.ListDataSourcesRequest, schemas.ListDataSourcesResponse), output: &ListDataSourcesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

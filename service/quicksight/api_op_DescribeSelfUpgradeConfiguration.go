@@ -4,7 +4,9 @@ package quicksight
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/quicksight/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/quicksight/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -41,6 +43,21 @@ type DescribeSelfUpgradeConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeSelfUpgradeConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeSelfUpgradeConfigurationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeSelfUpgradeConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AwsAccountId != nil {
+		s.WriteString(schemas.DescribeSelfUpgradeConfigurationRequest_AwsAccountId, *v.AwsAccountId)
+	}
+	if v.Namespace != nil {
+		s.WriteString(schemas.DescribeSelfUpgradeConfigurationRequest_Namespace, *v.Namespace)
+	}
+}
+
 type DescribeSelfUpgradeConfigurationOutput struct {
 
 	// The Amazon Web Services request ID for this operation.
@@ -58,13 +75,45 @@ type DescribeSelfUpgradeConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeSelfUpgradeConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeSelfUpgradeConfigurationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeSelfUpgradeConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RequestId != nil {
+		s.WriteString(schemas.DescribeSelfUpgradeConfigurationResponse_RequestId, *v.RequestId)
+	}
+	if v.SelfUpgradeConfiguration != nil {
+		s.WriteStruct(schemas.DescribeSelfUpgradeConfigurationResponse_SelfUpgradeConfiguration)
+		v.SelfUpgradeConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Status != 0 {
+		s.WriteInt32(schemas.DescribeSelfUpgradeConfigurationResponse_Status, v.Status)
+	}
+}
+func (v *DescribeSelfUpgradeConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeSelfUpgradeConfigurationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeSelfUpgradeConfigurationResponse_RequestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.DescribeSelfUpgradeConfigurationResponse_RequestId, v.RequestId)
+		case schemas.DescribeSelfUpgradeConfigurationResponse_SelfUpgradeConfiguration:
+			v.SelfUpgradeConfiguration = &types.SelfUpgradeConfiguration{}
+			return v.SelfUpgradeConfiguration.Deserialize(d)
+		case schemas.DescribeSelfUpgradeConfigurationResponse_Status:
+			return d.ReadInt32(schemas.DescribeSelfUpgradeConfigurationResponse_Status, &v.Status)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeSelfUpgradeConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeSelfUpgradeConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeSelfUpgradeConfiguration, schemas.DescribeSelfUpgradeConfigurationRequest, schemas.DescribeSelfUpgradeConfigurationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeSelfUpgradeConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeSelfUpgradeConfiguration, schemas.DescribeSelfUpgradeConfigurationRequest, schemas.DescribeSelfUpgradeConfigurationResponse), output: &DescribeSelfUpgradeConfigurationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

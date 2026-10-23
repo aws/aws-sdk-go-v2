@@ -4,7 +4,9 @@ package rekognition
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/rekognition/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/rekognition/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -43,6 +45,19 @@ type DeleteFacesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteFacesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteFacesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteFacesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CollectionId != nil {
+		s.WriteString(schemas.DeleteFacesRequest_CollectionId, *v.CollectionId)
+	}
+	serializeFaceIdList(s, schemas.DeleteFacesRequest_FaceIds, v.FaceIds)
+}
+
 type DeleteFacesOutput struct {
 
 	// An array of strings (face IDs) of the faces that were deleted.
@@ -57,13 +72,32 @@ type DeleteFacesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteFacesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteFacesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteFacesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeFaceIdList(s, schemas.DeleteFacesResponse_DeletedFaces, v.DeletedFaces)
+	serializeUnsuccessfulFaceDeletionsList(s, schemas.DeleteFacesResponse_UnsuccessfulFaceDeletions, v.UnsuccessfulFaceDeletions)
+}
+func (v *DeleteFacesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteFacesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteFacesResponse_DeletedFaces:
+			return deserializeFaceIdList(d, schemas.DeleteFacesResponse_DeletedFaces, &v.DeletedFaces)
+		case schemas.DeleteFacesResponse_UnsuccessfulFaceDeletions:
+			return deserializeUnsuccessfulFaceDeletionsList(d, schemas.DeleteFacesResponse_UnsuccessfulFaceDeletions, &v.UnsuccessfulFaceDeletions)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteFacesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteFaces{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteFaces, schemas.DeleteFacesRequest, schemas.DeleteFacesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeleteFaces{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteFaces, schemas.DeleteFacesRequest, schemas.DeleteFacesResponse), output: &DeleteFacesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

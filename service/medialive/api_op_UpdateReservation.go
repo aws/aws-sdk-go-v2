@@ -4,7 +4,9 @@ package medialive
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/medialive/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/medialive/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -41,6 +43,26 @@ type UpdateReservationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateReservationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateReservationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateReservationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateReservationRequest_Name, *v.Name)
+	}
+	if v.RenewalSettings != nil {
+		s.WriteStruct(schemas.UpdateReservationRequest_RenewalSettings)
+		v.RenewalSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ReservationId != nil {
+		s.WriteString(schemas.UpdateReservationRequest_ReservationId, *v.ReservationId)
+	}
+}
+
 // Placeholder documentation for UpdateReservationResponse
 type UpdateReservationOutput struct {
 
@@ -53,13 +75,34 @@ type UpdateReservationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateReservationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateReservationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateReservationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Reservation != nil {
+		s.WriteStruct(schemas.UpdateReservationResponse_Reservation)
+		v.Reservation.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateReservationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateReservationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateReservationResponse_Reservation:
+			v.Reservation = &types.Reservation{}
+			return v.Reservation.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateReservationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateReservation{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateReservation, schemas.UpdateReservationRequest, schemas.UpdateReservationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateReservation{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateReservation, schemas.UpdateReservationRequest, schemas.UpdateReservationResponse), output: &UpdateReservationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

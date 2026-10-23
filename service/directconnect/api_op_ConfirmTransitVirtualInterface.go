@@ -4,7 +4,9 @@ package directconnect
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/directconnect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/directconnect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -41,6 +43,21 @@ type ConfirmTransitVirtualInterfaceInput struct {
 	VirtualInterfaceId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ConfirmTransitVirtualInterfaceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ConfirmTransitVirtualInterfaceRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ConfirmTransitVirtualInterfaceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DirectConnectGatewayId != nil {
+		s.WriteString(schemas.ConfirmTransitVirtualInterfaceRequest_directConnectGatewayId, *v.DirectConnectGatewayId)
+	}
+	if v.VirtualInterfaceId != nil {
+		s.WriteString(schemas.ConfirmTransitVirtualInterfaceRequest_virtualInterfaceId, *v.VirtualInterfaceId)
+	}
 }
 
 type ConfirmTransitVirtualInterfaceOutput struct {
@@ -85,13 +102,36 @@ type ConfirmTransitVirtualInterfaceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ConfirmTransitVirtualInterfaceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ConfirmTransitVirtualInterfaceResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ConfirmTransitVirtualInterfaceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.VirtualInterfaceState != "" {
+		s.WriteString(schemas.ConfirmTransitVirtualInterfaceResponse_virtualInterfaceState, string(v.VirtualInterfaceState))
+	}
+}
+func (v *ConfirmTransitVirtualInterfaceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ConfirmTransitVirtualInterfaceResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ConfirmTransitVirtualInterfaceResponse_virtualInterfaceState:
+			var ev string
+			if err := d.ReadString(schemas.ConfirmTransitVirtualInterfaceResponse_virtualInterfaceState, &ev); err != nil {
+				return err
+			}
+			v.VirtualInterfaceState = types.VirtualInterfaceState(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationConfirmTransitVirtualInterfaceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpConfirmTransitVirtualInterface{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ConfirmTransitVirtualInterface, schemas.ConfirmTransitVirtualInterfaceRequest, schemas.ConfirmTransitVirtualInterfaceResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpConfirmTransitVirtualInterface{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ConfirmTransitVirtualInterface, schemas.ConfirmTransitVirtualInterfaceRequest, schemas.ConfirmTransitVirtualInterfaceResponse), output: &ConfirmTransitVirtualInterfaceOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

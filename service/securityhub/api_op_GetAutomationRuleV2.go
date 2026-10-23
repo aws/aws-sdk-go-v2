@@ -4,7 +4,9 @@ package securityhub
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/securityhub/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/securityhub/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -33,6 +35,18 @@ type GetAutomationRuleV2Input struct {
 	Identifier *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetAutomationRuleV2Input) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetAutomationRuleV2Request)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetAutomationRuleV2Input) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Identifier != nil {
+		s.WriteString(schemas.GetAutomationRuleV2Request_Identifier, *v.Identifier)
+	}
 }
 
 type GetAutomationRuleV2Output struct {
@@ -73,13 +87,84 @@ type GetAutomationRuleV2Output struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetAutomationRuleV2Output) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetAutomationRuleV2Response)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetAutomationRuleV2Output) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAutomationRulesActionListV2(s, schemas.GetAutomationRuleV2Response_Actions, v.Actions)
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.GetAutomationRuleV2Response_CreatedAt, *v.CreatedAt)
+	}
+	serializeCriteria(s, schemas.GetAutomationRuleV2Response_Criteria, v.Criteria)
+	if v.Description != nil {
+		s.WriteString(schemas.GetAutomationRuleV2Response_Description, *v.Description)
+	}
+	if v.RuleArn != nil {
+		s.WriteString(schemas.GetAutomationRuleV2Response_RuleArn, *v.RuleArn)
+	}
+	if v.RuleId != nil {
+		s.WriteString(schemas.GetAutomationRuleV2Response_RuleId, *v.RuleId)
+	}
+	if v.RuleName != nil {
+		s.WriteString(schemas.GetAutomationRuleV2Response_RuleName, *v.RuleName)
+	}
+	if v.RuleOrder != nil {
+		s.WriteFloat32(schemas.GetAutomationRuleV2Response_RuleOrder, *v.RuleOrder)
+	}
+	if v.RuleStatus != "" {
+		s.WriteString(schemas.GetAutomationRuleV2Response_RuleStatus, string(v.RuleStatus))
+	}
+	if v.UpdatedAt != nil {
+		s.WriteTime(schemas.GetAutomationRuleV2Response_UpdatedAt, *v.UpdatedAt)
+	}
+}
+func (v *GetAutomationRuleV2Output) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetAutomationRuleV2Response, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetAutomationRuleV2Response_Actions:
+			return deserializeAutomationRulesActionListV2(d, schemas.GetAutomationRuleV2Response_Actions, &v.Actions)
+		case schemas.GetAutomationRuleV2Response_CreatedAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.GetAutomationRuleV2Response_CreatedAt, v.CreatedAt)
+		case schemas.GetAutomationRuleV2Response_Criteria:
+			return deserializeCriteria(d, schemas.GetAutomationRuleV2Response_Criteria, &v.Criteria)
+		case schemas.GetAutomationRuleV2Response_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.GetAutomationRuleV2Response_Description, v.Description)
+		case schemas.GetAutomationRuleV2Response_RuleArn:
+			v.RuleArn = new(string)
+			return d.ReadString(schemas.GetAutomationRuleV2Response_RuleArn, v.RuleArn)
+		case schemas.GetAutomationRuleV2Response_RuleId:
+			v.RuleId = new(string)
+			return d.ReadString(schemas.GetAutomationRuleV2Response_RuleId, v.RuleId)
+		case schemas.GetAutomationRuleV2Response_RuleName:
+			v.RuleName = new(string)
+			return d.ReadString(schemas.GetAutomationRuleV2Response_RuleName, v.RuleName)
+		case schemas.GetAutomationRuleV2Response_RuleOrder:
+			v.RuleOrder = new(float32)
+			return d.ReadFloat32(schemas.GetAutomationRuleV2Response_RuleOrder, v.RuleOrder)
+		case schemas.GetAutomationRuleV2Response_RuleStatus:
+			var ev string
+			if err := d.ReadString(schemas.GetAutomationRuleV2Response_RuleStatus, &ev); err != nil {
+				return err
+			}
+			v.RuleStatus = types.RuleStatusV2(ev)
+			return nil
+		case schemas.GetAutomationRuleV2Response_UpdatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.GetAutomationRuleV2Response_UpdatedAt, v.UpdatedAt)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetAutomationRuleV2Middlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetAutomationRuleV2{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAutomationRuleV2, schemas.GetAutomationRuleV2Request, schemas.GetAutomationRuleV2Response)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetAutomationRuleV2{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAutomationRuleV2, schemas.GetAutomationRuleV2Request, schemas.GetAutomationRuleV2Response), output: &GetAutomationRuleV2Output{}}, middleware.After); err != nil {
 		return err
 	}
 

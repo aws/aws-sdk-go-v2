@@ -4,6 +4,8 @@ package glue
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/glue/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -33,6 +35,18 @@ type DeleteCustomEntityTypeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteCustomEntityTypeInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteCustomEntityTypeRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteCustomEntityTypeInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.DeleteCustomEntityTypeRequest_Name, *v.Name)
+	}
+}
+
 type DeleteCustomEntityTypeOutput struct {
 
 	// The name of the custom pattern you deleted.
@@ -44,13 +58,32 @@ type DeleteCustomEntityTypeOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteCustomEntityTypeOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteCustomEntityTypeResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteCustomEntityTypeOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.DeleteCustomEntityTypeResponse_Name, *v.Name)
+	}
+}
+func (v *DeleteCustomEntityTypeOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteCustomEntityTypeResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteCustomEntityTypeResponse_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.DeleteCustomEntityTypeResponse_Name, v.Name)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteCustomEntityTypeMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteCustomEntityType{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteCustomEntityType, schemas.DeleteCustomEntityTypeRequest, schemas.DeleteCustomEntityTypeResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeleteCustomEntityType{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteCustomEntityType, schemas.DeleteCustomEntityTypeRequest, schemas.DeleteCustomEntityTypeResponse), output: &DeleteCustomEntityTypeOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

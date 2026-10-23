@@ -5,7 +5,9 @@ package iotsitewise
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/iotsitewise/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotsitewise/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -36,6 +38,18 @@ type DescribeAccessPolicyInput struct {
 	AccessPolicyId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DescribeAccessPolicyInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeAccessPolicyRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeAccessPolicyInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccessPolicyId != nil {
+		s.WriteString(schemas.DescribeAccessPolicyRequest_accessPolicyId, *v.AccessPolicyId)
+	}
 }
 
 type DescribeAccessPolicyOutput struct {
@@ -88,13 +102,76 @@ type DescribeAccessPolicyOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeAccessPolicyOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeAccessPolicyResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeAccessPolicyOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccessPolicyArn != nil {
+		s.WriteString(schemas.DescribeAccessPolicyResponse_accessPolicyArn, *v.AccessPolicyArn)
+	}
+	if v.AccessPolicyCreationDate != nil {
+		s.WriteTime(schemas.DescribeAccessPolicyResponse_accessPolicyCreationDate, *v.AccessPolicyCreationDate)
+	}
+	if v.AccessPolicyId != nil {
+		s.WriteString(schemas.DescribeAccessPolicyResponse_accessPolicyId, *v.AccessPolicyId)
+	}
+	if v.AccessPolicyIdentity != nil {
+		s.WriteStruct(schemas.DescribeAccessPolicyResponse_accessPolicyIdentity)
+		v.AccessPolicyIdentity.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.AccessPolicyLastUpdateDate != nil {
+		s.WriteTime(schemas.DescribeAccessPolicyResponse_accessPolicyLastUpdateDate, *v.AccessPolicyLastUpdateDate)
+	}
+	if v.AccessPolicyPermission != "" {
+		s.WriteString(schemas.DescribeAccessPolicyResponse_accessPolicyPermission, string(v.AccessPolicyPermission))
+	}
+	if v.AccessPolicyResource != nil {
+		s.WriteStruct(schemas.DescribeAccessPolicyResponse_accessPolicyResource)
+		v.AccessPolicyResource.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DescribeAccessPolicyOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeAccessPolicyResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeAccessPolicyResponse_accessPolicyArn:
+			v.AccessPolicyArn = new(string)
+			return d.ReadString(schemas.DescribeAccessPolicyResponse_accessPolicyArn, v.AccessPolicyArn)
+		case schemas.DescribeAccessPolicyResponse_accessPolicyCreationDate:
+			v.AccessPolicyCreationDate = new(time.Time)
+			return d.ReadTime(schemas.DescribeAccessPolicyResponse_accessPolicyCreationDate, v.AccessPolicyCreationDate)
+		case schemas.DescribeAccessPolicyResponse_accessPolicyId:
+			v.AccessPolicyId = new(string)
+			return d.ReadString(schemas.DescribeAccessPolicyResponse_accessPolicyId, v.AccessPolicyId)
+		case schemas.DescribeAccessPolicyResponse_accessPolicyIdentity:
+			v.AccessPolicyIdentity = &types.Identity{}
+			return v.AccessPolicyIdentity.Deserialize(d)
+		case schemas.DescribeAccessPolicyResponse_accessPolicyLastUpdateDate:
+			v.AccessPolicyLastUpdateDate = new(time.Time)
+			return d.ReadTime(schemas.DescribeAccessPolicyResponse_accessPolicyLastUpdateDate, v.AccessPolicyLastUpdateDate)
+		case schemas.DescribeAccessPolicyResponse_accessPolicyPermission:
+			var ev string
+			if err := d.ReadString(schemas.DescribeAccessPolicyResponse_accessPolicyPermission, &ev); err != nil {
+				return err
+			}
+			v.AccessPolicyPermission = types.Permission(ev)
+			return nil
+		case schemas.DescribeAccessPolicyResponse_accessPolicyResource:
+			v.AccessPolicyResource = &types.Resource{}
+			return v.AccessPolicyResource.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeAccessPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeAccessPolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeAccessPolicy, schemas.DescribeAccessPolicyRequest, schemas.DescribeAccessPolicyResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeAccessPolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeAccessPolicy, schemas.DescribeAccessPolicyRequest, schemas.DescribeAccessPolicyResponse), output: &DescribeAccessPolicyOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

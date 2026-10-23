@@ -4,7 +4,9 @@ package sfn
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/sfn/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sfn/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -112,6 +114,45 @@ type UpdateStateMachineInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateStateMachineInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateStateMachineInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateStateMachineInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Definition != nil {
+		s.WriteString(schemas.UpdateStateMachineInput_definition, *v.Definition)
+	}
+	if v.EncryptionConfiguration != nil {
+		s.WriteStruct(schemas.UpdateStateMachineInput_encryptionConfiguration)
+		v.EncryptionConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.LoggingConfiguration != nil {
+		s.WriteStruct(schemas.UpdateStateMachineInput_loggingConfiguration)
+		v.LoggingConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Publish != false {
+		s.WriteBool(schemas.UpdateStateMachineInput_publish, v.Publish)
+	}
+	if v.RoleArn != nil {
+		s.WriteString(schemas.UpdateStateMachineInput_roleArn, *v.RoleArn)
+	}
+	if v.StateMachineArn != nil {
+		s.WriteString(schemas.UpdateStateMachineInput_stateMachineArn, *v.StateMachineArn)
+	}
+	if v.TracingConfiguration != nil {
+		s.WriteStruct(schemas.UpdateStateMachineInput_tracingConfiguration)
+		v.TracingConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.VersionDescription != nil {
+		s.WriteString(schemas.UpdateStateMachineInput_versionDescription, *v.VersionDescription)
+	}
+}
+
 type UpdateStateMachineOutput struct {
 
 	// The date and time the state machine was updated.
@@ -133,13 +174,44 @@ type UpdateStateMachineOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateStateMachineOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateStateMachineOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateStateMachineOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RevisionId != nil {
+		s.WriteString(schemas.UpdateStateMachineOutput_revisionId, *v.RevisionId)
+	}
+	if v.StateMachineVersionArn != nil {
+		s.WriteString(schemas.UpdateStateMachineOutput_stateMachineVersionArn, *v.StateMachineVersionArn)
+	}
+	if v.UpdateDate != nil {
+		s.WriteTime(schemas.UpdateStateMachineOutput_updateDate, *v.UpdateDate)
+	}
+}
+func (v *UpdateStateMachineOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateStateMachineOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateStateMachineOutput_revisionId:
+			v.RevisionId = new(string)
+			return d.ReadString(schemas.UpdateStateMachineOutput_revisionId, v.RevisionId)
+		case schemas.UpdateStateMachineOutput_stateMachineVersionArn:
+			v.StateMachineVersionArn = new(string)
+			return d.ReadString(schemas.UpdateStateMachineOutput_stateMachineVersionArn, v.StateMachineVersionArn)
+		case schemas.UpdateStateMachineOutput_updateDate:
+			v.UpdateDate = new(time.Time)
+			return d.ReadTime(schemas.UpdateStateMachineOutput_updateDate, v.UpdateDate)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateStateMachineMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpUpdateStateMachine{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateStateMachine, schemas.UpdateStateMachineInput, schemas.UpdateStateMachineOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpUpdateStateMachine{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateStateMachine, schemas.UpdateStateMachineInput, schemas.UpdateStateMachineOutput), output: &UpdateStateMachineOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

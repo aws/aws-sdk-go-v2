@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AmazonDMSv20160101.BatchStartRecommendations
+
+{"ErrorEntries":[{"Code":"__Code__","DatabaseId":"__DatabaseId__","Message":"__Message__"},{"Code":"__Code__","DatabaseId":"__DatabaseId__","Message":"__Message__"}]}

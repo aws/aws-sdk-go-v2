@@ -902,6 +902,18 @@ func TestCheckSnapshot_CreateCapacityReservationCancellationQuote(t *testing.T) 
 	}
 }
 
+func TestCheckSnapshot_CreateCapacityReservationDateChangeQuote(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateCapacityReservationDateChangeQuote(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateCapacityReservationDateChangeQuote")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_CreateCapacityReservationFleet(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateCapacityReservationFleet(context.Background(), nil, func(o *Options) {
@@ -2191,6 +2203,18 @@ func TestCheckSnapshot_DeleteClientVpnEndpoint(t *testing.T) {
 	_, err := svc.DeleteClientVpnEndpoint(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DeleteClientVpnEndpoint")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DeleteClientVpnEndpointAuthorizationPolicy(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteClientVpnEndpointAuthorizationPolicy(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteClientVpnEndpointAuthorizationPolicy")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -3655,6 +3679,18 @@ func TestCheckSnapshot_DescribeCapacityReservationCancellationQuotes(t *testing.
 	_, err := svc.DescribeCapacityReservationCancellationQuotes(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DescribeCapacityReservationCancellationQuotes")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DescribeCapacityReservationDateChangeQuotes(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeCapacityReservationDateChangeQuotes(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DescribeCapacityReservationDateChangeQuotes")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -6770,6 +6806,18 @@ func TestCheckSnapshot_GetCapacityReservationUsage(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_GetClientVpnEndpointAuthorizationPolicy(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetClientVpnEndpointAuthorizationPolicy(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetClientVpnEndpointAuthorizationPolicy")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_GetCoipPoolUsage(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetCoipPoolUsage(context.Background(), nil, func(o *Options) {
@@ -7394,6 +7442,18 @@ func TestCheckSnapshot_GetSubnetCidrReservations(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_GetTransitGatewayAttachmentNatConfiguration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetTransitGatewayAttachmentNatConfiguration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetTransitGatewayAttachmentNatConfiguration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_GetTransitGatewayAttachmentPropagations(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetTransitGatewayAttachmentPropagations(context.Background(), nil, func(o *Options) {
@@ -7771,6 +7831,18 @@ func TestCheckSnapshot_ModifyClientVpnEndpoint(t *testing.T) {
 	_, err := svc.ModifyClientVpnEndpoint(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "ModifyClientVpnEndpoint")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ModifyClientVpnEndpointAuthorizationPolicy(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ModifyClientVpnEndpointAuthorizationPolicy(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ModifyClientVpnEndpointAuthorizationPolicy")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -8347,6 +8419,18 @@ func TestCheckSnapshot_ModifyTransitGateway(t *testing.T) {
 	_, err := svc.ModifyTransitGateway(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "ModifyTransitGateway")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ModifyTransitGatewayAttachmentNatConfiguration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ModifyTransitGatewayAttachmentNatConfiguration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ModifyTransitGatewayAttachmentNatConfiguration")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -10525,6 +10609,18 @@ func TestUpdateSnapshot_CreateCapacityReservationCancellationQuote(t *testing.T)
 	}
 }
 
+func TestUpdateSnapshot_CreateCapacityReservationDateChangeQuote(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateCapacityReservationDateChangeQuote(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateCapacityReservationDateChangeQuote")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_CreateCapacityReservationFleet(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateCapacityReservationFleet(context.Background(), nil, func(o *Options) {
@@ -11814,6 +11910,18 @@ func TestUpdateSnapshot_DeleteClientVpnEndpoint(t *testing.T) {
 	_, err := svc.DeleteClientVpnEndpoint(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DeleteClientVpnEndpoint")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DeleteClientVpnEndpointAuthorizationPolicy(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteClientVpnEndpointAuthorizationPolicy(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteClientVpnEndpointAuthorizationPolicy")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -13278,6 +13386,18 @@ func TestUpdateSnapshot_DescribeCapacityReservationCancellationQuotes(t *testing
 	_, err := svc.DescribeCapacityReservationCancellationQuotes(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DescribeCapacityReservationCancellationQuotes")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DescribeCapacityReservationDateChangeQuotes(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeCapacityReservationDateChangeQuotes(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DescribeCapacityReservationDateChangeQuotes")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -16393,6 +16513,18 @@ func TestUpdateSnapshot_GetCapacityReservationUsage(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_GetClientVpnEndpointAuthorizationPolicy(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetClientVpnEndpointAuthorizationPolicy(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetClientVpnEndpointAuthorizationPolicy")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_GetCoipPoolUsage(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetCoipPoolUsage(context.Background(), nil, func(o *Options) {
@@ -17017,6 +17149,18 @@ func TestUpdateSnapshot_GetSubnetCidrReservations(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_GetTransitGatewayAttachmentNatConfiguration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetTransitGatewayAttachmentNatConfiguration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetTransitGatewayAttachmentNatConfiguration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_GetTransitGatewayAttachmentPropagations(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetTransitGatewayAttachmentPropagations(context.Background(), nil, func(o *Options) {
@@ -17394,6 +17538,18 @@ func TestUpdateSnapshot_ModifyClientVpnEndpoint(t *testing.T) {
 	_, err := svc.ModifyClientVpnEndpoint(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ModifyClientVpnEndpoint")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ModifyClientVpnEndpointAuthorizationPolicy(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ModifyClientVpnEndpointAuthorizationPolicy(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ModifyClientVpnEndpointAuthorizationPolicy")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -17970,6 +18126,18 @@ func TestUpdateSnapshot_ModifyTransitGateway(t *testing.T) {
 	_, err := svc.ModifyTransitGateway(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ModifyTransitGateway")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ModifyTransitGatewayAttachmentNatConfiguration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ModifyTransitGatewayAttachmentNatConfiguration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ModifyTransitGatewayAttachmentNatConfiguration")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

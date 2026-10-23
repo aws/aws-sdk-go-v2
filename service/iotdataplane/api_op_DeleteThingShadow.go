@@ -4,6 +4,8 @@ package iotdataplane
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/iotdataplane/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -43,6 +45,21 @@ type DeleteThingShadowInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteThingShadowInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteThingShadowRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteThingShadowInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ShadowName != nil {
+		s.WriteString(schemas.DeleteThingShadowRequest_shadowName, *v.ShadowName)
+	}
+	if v.ThingName != nil {
+		s.WriteString(schemas.DeleteThingShadowRequest_thingName, *v.ThingName)
+	}
+}
+
 // The output from the DeleteThingShadow operation.
 type DeleteThingShadowOutput struct {
 
@@ -57,13 +74,31 @@ type DeleteThingShadowOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteThingShadowOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteThingShadowResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteThingShadowOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Payload != nil {
+		s.WriteBlob(schemas.DeleteThingShadowResponse_payload, v.Payload)
+	}
+}
+func (v *DeleteThingShadowOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteThingShadowResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteThingShadowResponse_payload:
+			return d.ReadBlob(schemas.DeleteThingShadowResponse_payload, &v.Payload)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteThingShadowMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteThingShadow{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteThingShadow, schemas.DeleteThingShadowRequest, schemas.DeleteThingShadowResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteThingShadow{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteThingShadow, schemas.DeleteThingShadowRequest, schemas.DeleteThingShadowResponse), output: &DeleteThingShadowOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

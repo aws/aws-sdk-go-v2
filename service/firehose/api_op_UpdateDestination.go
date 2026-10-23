@@ -4,7 +4,9 @@ package firehose
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/firehose/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/firehose/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -111,6 +113,74 @@ type UpdateDestinationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateDestinationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateDestinationInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateDestinationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AmazonOpenSearchServerlessDestinationUpdate != nil {
+		s.WriteStruct(schemas.UpdateDestinationInput_AmazonOpenSearchServerlessDestinationUpdate)
+		v.AmazonOpenSearchServerlessDestinationUpdate.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.AmazonopensearchserviceDestinationUpdate != nil {
+		s.WriteStruct(schemas.UpdateDestinationInput_AmazonopensearchserviceDestinationUpdate)
+		v.AmazonopensearchserviceDestinationUpdate.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CurrentDeliveryStreamVersionId != nil {
+		s.WriteString(schemas.UpdateDestinationInput_CurrentDeliveryStreamVersionId, *v.CurrentDeliveryStreamVersionId)
+	}
+	if v.DeliveryStreamName != nil {
+		s.WriteString(schemas.UpdateDestinationInput_DeliveryStreamName, *v.DeliveryStreamName)
+	}
+	if v.DestinationId != nil {
+		s.WriteString(schemas.UpdateDestinationInput_DestinationId, *v.DestinationId)
+	}
+	if v.ElasticsearchDestinationUpdate != nil {
+		s.WriteStruct(schemas.UpdateDestinationInput_ElasticsearchDestinationUpdate)
+		v.ElasticsearchDestinationUpdate.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ExtendedS3DestinationUpdate != nil {
+		s.WriteStruct(schemas.UpdateDestinationInput_ExtendedS3DestinationUpdate)
+		v.ExtendedS3DestinationUpdate.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.HttpEndpointDestinationUpdate != nil {
+		s.WriteStruct(schemas.UpdateDestinationInput_HttpEndpointDestinationUpdate)
+		v.HttpEndpointDestinationUpdate.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.IcebergDestinationUpdate != nil {
+		s.WriteStruct(schemas.UpdateDestinationInput_IcebergDestinationUpdate)
+		v.IcebergDestinationUpdate.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RedshiftDestinationUpdate != nil {
+		s.WriteStruct(schemas.UpdateDestinationInput_RedshiftDestinationUpdate)
+		v.RedshiftDestinationUpdate.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.S3DestinationUpdate != nil {
+		s.WriteStruct(schemas.UpdateDestinationInput_S3DestinationUpdate)
+		v.S3DestinationUpdate.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SnowflakeDestinationUpdate != nil {
+		s.WriteStruct(schemas.UpdateDestinationInput_SnowflakeDestinationUpdate)
+		v.SnowflakeDestinationUpdate.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SplunkDestinationUpdate != nil {
+		s.WriteStruct(schemas.UpdateDestinationInput_SplunkDestinationUpdate)
+		v.SplunkDestinationUpdate.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type UpdateDestinationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -118,13 +188,26 @@ type UpdateDestinationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateDestinationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateDestinationOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateDestinationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *UpdateDestinationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateDestinationOutput, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateDestinationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateDestination{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateDestination, schemas.UpdateDestinationInput, schemas.UpdateDestinationOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateDestination{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateDestination, schemas.UpdateDestinationInput, schemas.UpdateDestinationOutput), output: &UpdateDestinationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -5,7 +5,9 @@ package bedrockagent
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/bedrockagent/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagent/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -47,6 +49,24 @@ type ListDataSourcesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListDataSourcesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListDataSourcesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListDataSourcesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.KnowledgeBaseId != nil {
+		s.WriteString(schemas.ListDataSourcesRequest_knowledgeBaseId, *v.KnowledgeBaseId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListDataSourcesRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListDataSourcesRequest_nextToken, *v.NextToken)
+	}
+}
+
 type ListDataSourcesOutput struct {
 
 	// A list of objects, each of which contains information about a data source.
@@ -65,13 +85,35 @@ type ListDataSourcesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListDataSourcesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListDataSourcesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListDataSourcesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDataSourceSummaries(s, schemas.ListDataSourcesResponse_dataSourceSummaries, v.DataSourceSummaries)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListDataSourcesResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListDataSourcesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListDataSourcesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListDataSourcesResponse_dataSourceSummaries:
+			return deserializeDataSourceSummaries(d, schemas.ListDataSourcesResponse_dataSourceSummaries, &v.DataSourceSummaries)
+		case schemas.ListDataSourcesResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListDataSourcesResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListDataSourcesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListDataSources{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDataSources, schemas.ListDataSourcesRequest, schemas.ListDataSourcesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListDataSources{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDataSources, schemas.ListDataSourcesRequest, schemas.ListDataSourcesResponse), output: &ListDataSourcesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

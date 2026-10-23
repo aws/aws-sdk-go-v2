@@ -166,6 +166,183 @@ func (IamIdentityCenterUserAttribute) Values() []IamIdentityCenterUserAttribute 
 	}
 }
 
+type IngestionAlertCode string
+
+// Enum values for IngestionAlertCode
+const (
+	IngestionAlertCodeSourceAccessDenied          IngestionAlertCode = "SOURCE_ACCESS_DENIED"
+	IngestionAlertCodeSourceResourceNotFound      IngestionAlertCode = "SOURCE_RESOURCE_NOT_FOUND"
+	IngestionAlertCodeDestinationAccessDenied     IngestionAlertCode = "DESTINATION_ACCESS_DENIED"
+	IngestionAlertCodeDestinationResourceNotFound IngestionAlertCode = "DESTINATION_RESOURCE_NOT_FOUND"
+	IngestionAlertCodeInternalServerError         IngestionAlertCode = "INTERNAL_SERVER_ERROR"
+)
+
+// Values returns all known values for IngestionAlertCode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (IngestionAlertCode) Values() []IngestionAlertCode {
+	return []IngestionAlertCode{
+		"SOURCE_ACCESS_DENIED",
+		"SOURCE_RESOURCE_NOT_FOUND",
+		"DESTINATION_ACCESS_DENIED",
+		"DESTINATION_RESOURCE_NOT_FOUND",
+		"INTERNAL_SERVER_ERROR",
+	}
+}
+
+type IngestionFailureCode string
+
+// Enum values for IngestionFailureCode
+const (
+	IngestionFailureCodeSourceAccessDenied          IngestionFailureCode = "SOURCE_ACCESS_DENIED"
+	IngestionFailureCodeSourceResourceNotFound      IngestionFailureCode = "SOURCE_RESOURCE_NOT_FOUND"
+	IngestionFailureCodeDestinationAccessDenied     IngestionFailureCode = "DESTINATION_ACCESS_DENIED"
+	IngestionFailureCodeDestinationResourceNotFound IngestionFailureCode = "DESTINATION_RESOURCE_NOT_FOUND"
+	IngestionFailureCodeInternalServerError         IngestionFailureCode = "INTERNAL_SERVER_ERROR"
+)
+
+// Values returns all known values for IngestionFailureCode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (IngestionFailureCode) Values() []IngestionFailureCode {
+	return []IngestionFailureCode{
+		"SOURCE_ACCESS_DENIED",
+		"SOURCE_RESOURCE_NOT_FOUND",
+		"DESTINATION_ACCESS_DENIED",
+		"DESTINATION_RESOURCE_NOT_FOUND",
+		"INTERNAL_SERVER_ERROR",
+	}
+}
+
+type IngestionJobStatus string
+
+// Enum values for IngestionJobStatus
+const (
+	// Ingestion job is being created
+	IngestionJobStatusCreating IngestionJobStatus = "CREATING"
+	// Ingestion job is provisioned and ingesting
+	IngestionJobStatusActive IngestionJobStatus = "ACTIVE"
+	// Bulk ingestion finished; job is complete
+	IngestionJobStatusCompleted IngestionJobStatus = "COMPLETED"
+	// Ingestion job is being cancelled
+	IngestionJobStatusCancelling IngestionJobStatus = "CANCELLING"
+	// Ingestion job was cancelled
+	IngestionJobStatusCancelled IngestionJobStatus = "CANCELLED"
+	// Ingestion job failed terminally (no retry)
+	IngestionJobStatusFailed IngestionJobStatus = "FAILED"
+	// Ingestion job creation failed
+	IngestionJobStatusCreateFailed IngestionJobStatus = "CREATE_FAILED"
+	// Ingestion job cancellation failed
+	IngestionJobStatusCancelFailed IngestionJobStatus = "CANCEL_FAILED"
+)
+
+// Values returns all known values for IngestionJobStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (IngestionJobStatus) Values() []IngestionJobStatus {
+	return []IngestionJobStatus{
+		"CREATING",
+		"ACTIVE",
+		"COMPLETED",
+		"CANCELLING",
+		"CANCELLED",
+		"FAILED",
+		"CREATE_FAILED",
+		"CANCEL_FAILED",
+	}
+}
+
+type IngestionState string
+
+// Enum values for IngestionState
+const (
+	// Ingestion is initializing
+	IngestionStateStarting IngestionState = "STARTING"
+	// Bulk source scan in progress
+	IngestionStateScanning IngestionState = "SCANNING"
+	// Documents are being read, chunked and indexed
+	IngestionStateIngestionInProgress IngestionState = "INGESTION_IN_PROGRESS"
+	// Bulk ingestion finished
+	IngestionStateIngestionComplete IngestionState = "INGESTION_COMPLETE"
+	// Ingestion halted (recoverable)
+	IngestionStateStopped IngestionState = "STOPPED"
+	// Ingestion runtime failure (terminal)
+	IngestionStateFailed IngestionState = "FAILED"
+)
+
+// Values returns all known values for IngestionState. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (IngestionState) Values() []IngestionState {
+	return []IngestionState{
+		"STARTING",
+		"SCANNING",
+		"INGESTION_IN_PROGRESS",
+		"INGESTION_COMPLETE",
+		"STOPPED",
+		"FAILED",
+	}
+}
+
+type IngestionStreamStatus string
+
+// Enum values for IngestionStreamStatus
+const (
+	// Ingestion stream is being created
+	IngestionStreamStatusCreating IngestionStreamStatus = "CREATING"
+	// Ingestion stream is provisioned and ingesting
+	IngestionStreamStatusActive IngestionStreamStatus = "ACTIVE"
+	// Ingestion stream is being deleted
+	IngestionStreamStatusDeleting IngestionStreamStatus = "DELETING"
+	// Ingestion stream was deleted
+	IngestionStreamStatusDeleted IngestionStreamStatus = "DELETED"
+	// Ingestion stream creation failed
+	IngestionStreamStatusCreateFailed IngestionStreamStatus = "CREATE_FAILED"
+	// Ingestion stream deletion failed
+	IngestionStreamStatusDeleteFailed IngestionStreamStatus = "DELETE_FAILED"
+)
+
+// Values returns all known values for IngestionStreamStatus. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (IngestionStreamStatus) Values() []IngestionStreamStatus {
+	return []IngestionStreamStatus{
+		"CREATING",
+		"ACTIVE",
+		"DELETING",
+		"DELETED",
+		"CREATE_FAILED",
+		"DELETE_FAILED",
+	}
+}
+
+type InitialScan string
+
+// Enum values for InitialScan
+const (
+	// Perform a one-time delta scan of existing S3 objects before processing SQS
+	// notifications
+	InitialScanEnabled InitialScan = "ENABLED"
+	// Skip the one-time delta scan and process SQS notifications only
+	InitialScanDisabled InitialScan = "DISABLED"
+)
+
+// Values returns all known values for InitialScan. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (InitialScan) Values() []InitialScan {
+	return []InitialScan{
+		"ENABLED",
+		"DISABLED",
+	}
+}
+
 type LifecyclePolicyType string
 
 // Enum values for LifecyclePolicyType

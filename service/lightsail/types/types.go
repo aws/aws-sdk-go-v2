@@ -4545,6 +4545,73 @@ func (v *DistributionBundle) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
+// Describes a custom error response for a Lightsail distribution. A custom error
+// response specifies the page that the distribution returns to the viewer. It also
+// specifies the HTTP status code that the distribution sends when the origin
+// responds with a given HTTP error code.
+type DistributionCustomErrorResponse struct {
+
+	// The minimum time, in seconds, that the distribution caches the custom error
+	// response before requesting the object again from the origin. If you don't
+	// specify a value, the default is 10 seconds.
+	ErrorCachingMinTTL *int64
+
+	// The HTTP error code from the origin that triggers the custom error response
+	// (for example, 403 or 404 ).
+	ErrorCode *int32
+
+	// The HTTP status code that the distribution returns to the viewer for the custom
+	// error response.
+	ResponseCode *string
+
+	// The path to the custom error page that the distribution returns to the viewer
+	// (for example, /404.html ). The path must begin with a forward slash ( / ) and
+	// reference an object that is available from the origin.
+	ResponsePagePath *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *DistributionCustomErrorResponse) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DistributionCustomErrorResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DistributionCustomErrorResponse) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ErrorCachingMinTTL != nil {
+		s.WriteInt64(schemas.DistributionCustomErrorResponse_errorCachingMinTTL, *v.ErrorCachingMinTTL)
+	}
+	if v.ErrorCode != nil {
+		s.WriteInt32(schemas.DistributionCustomErrorResponse_errorCode, *v.ErrorCode)
+	}
+	if v.ResponseCode != nil {
+		s.WriteString(schemas.DistributionCustomErrorResponse_responseCode, *v.ResponseCode)
+	}
+	if v.ResponsePagePath != nil {
+		s.WriteString(schemas.DistributionCustomErrorResponse_responsePagePath, *v.ResponsePagePath)
+	}
+}
+func (v *DistributionCustomErrorResponse) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DistributionCustomErrorResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DistributionCustomErrorResponse_errorCachingMinTTL:
+			v.ErrorCachingMinTTL = new(int64)
+			return d.ReadInt64(schemas.DistributionCustomErrorResponse_errorCachingMinTTL, v.ErrorCachingMinTTL)
+		case schemas.DistributionCustomErrorResponse_errorCode:
+			v.ErrorCode = new(int32)
+			return d.ReadInt32(schemas.DistributionCustomErrorResponse_errorCode, v.ErrorCode)
+		case schemas.DistributionCustomErrorResponse_responseCode:
+			v.ResponseCode = new(string)
+			return d.ReadString(schemas.DistributionCustomErrorResponse_responseCode, v.ResponseCode)
+		case schemas.DistributionCustomErrorResponse_responsePagePath:
+			v.ResponsePagePath = new(string)
+			return d.ReadString(schemas.DistributionCustomErrorResponse_responsePagePath, v.ResponsePagePath)
+		}
+		return nil
+	})
+}
+
 // Describes the creation state of the canonical name (CNAME) records that are
 // automatically added by Amazon Lightsail to the DNS of a domain to validate
 // domain ownership for an SSL/TLS certificate.
@@ -7085,8 +7152,17 @@ type LightsailDistribution struct {
 	// The timestamp when the distribution was created.
 	CreatedAt *time.Time
 
+	// An array of objects that describe the custom error responses configured for the
+	// distribution.
+	CustomErrorResponses []DistributionCustomErrorResponse
+
 	// An object that describes the default cache behavior of the distribution.
 	DefaultCacheBehavior *CacheBehavior
+
+	// The object (for example, index.html ) that the distribution returns when a
+	// viewer requests the root URL of the distribution ( / ) instead of a specific
+	// object.
+	DefaultRootObject *string
 
 	// The domain name of the distribution.
 	DomainName *string
@@ -7172,10 +7248,14 @@ func (v *LightsailDistribution) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.CreatedAt != nil {
 		s.WriteTime(schemas.LightsailDistribution_createdAt, *v.CreatedAt)
 	}
+	serializeDistributionCustomErrorResponseList(s, schemas.LightsailDistribution_customErrorResponses, v.CustomErrorResponses)
 	if v.DefaultCacheBehavior != nil {
 		s.WriteStruct(schemas.LightsailDistribution_defaultCacheBehavior)
 		v.DefaultCacheBehavior.SerializeMembers(s)
 		s.CloseStruct()
+	}
+	if v.DefaultRootObject != nil {
+		s.WriteString(schemas.LightsailDistribution_defaultRootObject, *v.DefaultRootObject)
 	}
 	if v.DomainName != nil {
 		s.WriteString(schemas.LightsailDistribution_domainName, *v.DomainName)
@@ -7241,9 +7321,14 @@ func (v *LightsailDistribution) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.LightsailDistribution_createdAt:
 			v.CreatedAt = new(time.Time)
 			return d.ReadTime(schemas.LightsailDistribution_createdAt, v.CreatedAt)
+		case schemas.LightsailDistribution_customErrorResponses:
+			return deserializeDistributionCustomErrorResponseList(d, schemas.LightsailDistribution_customErrorResponses, &v.CustomErrorResponses)
 		case schemas.LightsailDistribution_defaultCacheBehavior:
 			v.DefaultCacheBehavior = &CacheBehavior{}
 			return v.DefaultCacheBehavior.Deserialize(d)
+		case schemas.LightsailDistribution_defaultRootObject:
+			v.DefaultRootObject = new(string)
+			return d.ReadString(schemas.LightsailDistribution_defaultRootObject, v.DefaultRootObject)
 		case schemas.LightsailDistribution_domainName:
 			v.DomainName = new(string)
 			return d.ReadString(schemas.LightsailDistribution_domainName, v.DomainName)
@@ -8658,6 +8743,15 @@ type Origin struct {
 	// for IPv4 and IPv6.
 	IpAddressType OriginIpAddressTypeEnum
 
+	// Specifies whether private origin access is enabled for the distribution's
+	// origin. With private origin access, the distribution can serve objects that
+	// aren't publicly accessible from a Lightsail bucket.
+	//
+	// This applies when you set the bucket's getObject access rule to private . It
+	// also applies when you set getObject to public but set individual objects to
+	// private.
+	IsPrivateOriginAccessEnabled *bool
+
 	// The name of the origin resource.
 	Name *string
 
@@ -8690,6 +8784,9 @@ func (v *Origin) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.IpAddressType != "" {
 		s.WriteString(schemas.Origin_ipAddressType, string(v.IpAddressType))
 	}
+	if v.IsPrivateOriginAccessEnabled != nil {
+		s.WriteBool(schemas.Origin_isPrivateOriginAccessEnabled, *v.IsPrivateOriginAccessEnabled)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.Origin_name, *v.Name)
 	}
@@ -8716,6 +8813,9 @@ func (v *Origin) Deserialize(d smithy.ShapeDeserializer) error {
 			}
 			v.IpAddressType = OriginIpAddressTypeEnum(ev)
 			return nil
+		case schemas.Origin_isPrivateOriginAccessEnabled:
+			v.IsPrivateOriginAccessEnabled = new(bool)
+			return d.ReadBool(schemas.Origin_isPrivateOriginAccessEnabled, v.IsPrivateOriginAccessEnabled)
 		case schemas.Origin_name:
 			v.Name = new(string)
 			return d.ReadString(schemas.Origin_name, v.Name)

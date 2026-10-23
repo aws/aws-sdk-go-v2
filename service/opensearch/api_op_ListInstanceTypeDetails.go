@@ -5,7 +5,9 @@ package opensearch
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/opensearch/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/opensearch/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -55,6 +57,33 @@ type ListInstanceTypeDetailsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListInstanceTypeDetailsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListInstanceTypeDetailsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListInstanceTypeDetailsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DomainName != nil {
+		s.WriteString(schemas.ListInstanceTypeDetailsRequest_DomainName, *v.DomainName)
+	}
+	if v.EngineVersion != nil {
+		s.WriteString(schemas.ListInstanceTypeDetailsRequest_EngineVersion, *v.EngineVersion)
+	}
+	if v.InstanceType != nil {
+		s.WriteString(schemas.ListInstanceTypeDetailsRequest_InstanceType, *v.InstanceType)
+	}
+	if v.MaxResults != 0 {
+		s.WriteInt32(schemas.ListInstanceTypeDetailsRequest_MaxResults, v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListInstanceTypeDetailsRequest_NextToken, *v.NextToken)
+	}
+	if v.RetrieveAZs != nil {
+		s.WriteBool(schemas.ListInstanceTypeDetailsRequest_RetrieveAZs, *v.RetrieveAZs)
+	}
+}
+
 type ListInstanceTypeDetailsOutput struct {
 
 	// Lists all supported instance types and features for the given OpenSearch or
@@ -72,13 +101,35 @@ type ListInstanceTypeDetailsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListInstanceTypeDetailsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListInstanceTypeDetailsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListInstanceTypeDetailsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeInstanceTypeDetailsList(s, schemas.ListInstanceTypeDetailsResponse_InstanceTypeDetails, v.InstanceTypeDetails)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListInstanceTypeDetailsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListInstanceTypeDetailsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListInstanceTypeDetailsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListInstanceTypeDetailsResponse_InstanceTypeDetails:
+			return deserializeInstanceTypeDetailsList(d, schemas.ListInstanceTypeDetailsResponse_InstanceTypeDetails, &v.InstanceTypeDetails)
+		case schemas.ListInstanceTypeDetailsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListInstanceTypeDetailsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListInstanceTypeDetailsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListInstanceTypeDetails{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListInstanceTypeDetails, schemas.ListInstanceTypeDetailsRequest, schemas.ListInstanceTypeDetailsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListInstanceTypeDetails{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListInstanceTypeDetails, schemas.ListInstanceTypeDetailsRequest, schemas.ListInstanceTypeDetailsResponse), output: &ListInstanceTypeDetailsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

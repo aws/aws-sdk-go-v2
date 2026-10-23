@@ -4,6 +4,8 @@ package quicksight
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/quicksight/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,21 @@ type DeleteDlpSettingInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteDlpSettingInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteDlpSettingRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteDlpSettingInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AwsAccountId != nil {
+		s.WriteString(schemas.DeleteDlpSettingRequest_AwsAccountId, *v.AwsAccountId)
+	}
+	if v.DlpSettingId != nil {
+		s.WriteString(schemas.DeleteDlpSettingRequest_DlpSettingId, *v.DlpSettingId)
+	}
+}
+
 type DeleteDlpSettingOutput struct {
 
 	// The Amazon Resource Name (ARN) of the deleted DLP setting.
@@ -60,13 +77,44 @@ type DeleteDlpSettingOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteDlpSettingOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteDlpSettingResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteDlpSettingOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.DeleteDlpSettingResponse_Arn, *v.Arn)
+	}
+	if v.DlpSettingId != nil {
+		s.WriteString(schemas.DeleteDlpSettingResponse_DlpSettingId, *v.DlpSettingId)
+	}
+	if v.RequestId != nil {
+		s.WriteString(schemas.DeleteDlpSettingResponse_RequestId, *v.RequestId)
+	}
+}
+func (v *DeleteDlpSettingOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteDlpSettingResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteDlpSettingResponse_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.DeleteDlpSettingResponse_Arn, v.Arn)
+		case schemas.DeleteDlpSettingResponse_DlpSettingId:
+			v.DlpSettingId = new(string)
+			return d.ReadString(schemas.DeleteDlpSettingResponse_DlpSettingId, v.DlpSettingId)
+		case schemas.DeleteDlpSettingResponse_RequestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.DeleteDlpSettingResponse_RequestId, v.RequestId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteDlpSettingMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteDlpSetting{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteDlpSetting, schemas.DeleteDlpSettingRequest, schemas.DeleteDlpSettingResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteDlpSetting{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteDlpSetting, schemas.DeleteDlpSettingRequest, schemas.DeleteDlpSettingResponse), output: &DeleteDlpSettingOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

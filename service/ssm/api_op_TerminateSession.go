@@ -4,6 +4,8 @@ package ssm
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/ssm/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -35,6 +37,18 @@ type TerminateSessionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *TerminateSessionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TerminateSessionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TerminateSessionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SessionId != nil {
+		s.WriteString(schemas.TerminateSessionRequest_SessionId, *v.SessionId)
+	}
+}
+
 type TerminateSessionOutput struct {
 
 	// The ID of the session that has been terminated.
@@ -46,13 +60,32 @@ type TerminateSessionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *TerminateSessionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TerminateSessionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TerminateSessionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SessionId != nil {
+		s.WriteString(schemas.TerminateSessionResponse_SessionId, *v.SessionId)
+	}
+}
+func (v *TerminateSessionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TerminateSessionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TerminateSessionResponse_SessionId:
+			v.SessionId = new(string)
+			return d.ReadString(schemas.TerminateSessionResponse_SessionId, v.SessionId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationTerminateSessionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpTerminateSession{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.TerminateSession, schemas.TerminateSessionRequest, schemas.TerminateSessionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpTerminateSession{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.TerminateSession, schemas.TerminateSessionRequest, schemas.TerminateSessionResponse), output: &TerminateSessionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

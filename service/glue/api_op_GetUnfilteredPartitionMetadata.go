@@ -4,7 +4,9 @@ package glue
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/glue/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/glue/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -70,6 +72,39 @@ type GetUnfilteredPartitionMetadataInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetUnfilteredPartitionMetadataInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetUnfilteredPartitionMetadataRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetUnfilteredPartitionMetadataInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AuditContext != nil {
+		s.WriteStruct(schemas.GetUnfilteredPartitionMetadataRequest_AuditContext)
+		v.AuditContext.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CatalogId != nil {
+		s.WriteString(schemas.GetUnfilteredPartitionMetadataRequest_CatalogId, *v.CatalogId)
+	}
+	if v.DatabaseName != nil {
+		s.WriteString(schemas.GetUnfilteredPartitionMetadataRequest_DatabaseName, *v.DatabaseName)
+	}
+	serializeValueStringList(s, schemas.GetUnfilteredPartitionMetadataRequest_PartitionValues, v.PartitionValues)
+	if v.QuerySessionContext != nil {
+		s.WriteStruct(schemas.GetUnfilteredPartitionMetadataRequest_QuerySessionContext)
+		v.QuerySessionContext.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Region != nil {
+		s.WriteString(schemas.GetUnfilteredPartitionMetadataRequest_Region, *v.Region)
+	}
+	serializePermissionTypeList(s, schemas.GetUnfilteredPartitionMetadataRequest_SupportedPermissionTypes, v.SupportedPermissionTypes)
+	if v.TableName != nil {
+		s.WriteString(schemas.GetUnfilteredPartitionMetadataRequest_TableName, *v.TableName)
+	}
+}
+
 type GetUnfilteredPartitionMetadataOutput struct {
 
 	// A list of column names that the user has been granted access to.
@@ -88,13 +123,42 @@ type GetUnfilteredPartitionMetadataOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetUnfilteredPartitionMetadataOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetUnfilteredPartitionMetadataResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetUnfilteredPartitionMetadataOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeNameStringList(s, schemas.GetUnfilteredPartitionMetadataResponse_AuthorizedColumns, v.AuthorizedColumns)
+	if v.IsRegisteredWithLakeFormation != false {
+		s.WriteBool(schemas.GetUnfilteredPartitionMetadataResponse_IsRegisteredWithLakeFormation, v.IsRegisteredWithLakeFormation)
+	}
+	if v.Partition != nil {
+		s.WriteStruct(schemas.GetUnfilteredPartitionMetadataResponse_Partition)
+		v.Partition.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetUnfilteredPartitionMetadataOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetUnfilteredPartitionMetadataResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetUnfilteredPartitionMetadataResponse_AuthorizedColumns:
+			return deserializeNameStringList(d, schemas.GetUnfilteredPartitionMetadataResponse_AuthorizedColumns, &v.AuthorizedColumns)
+		case schemas.GetUnfilteredPartitionMetadataResponse_IsRegisteredWithLakeFormation:
+			return d.ReadBool(schemas.GetUnfilteredPartitionMetadataResponse_IsRegisteredWithLakeFormation, &v.IsRegisteredWithLakeFormation)
+		case schemas.GetUnfilteredPartitionMetadataResponse_Partition:
+			v.Partition = &types.Partition{}
+			return v.Partition.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetUnfilteredPartitionMetadataMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetUnfilteredPartitionMetadata{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetUnfilteredPartitionMetadata, schemas.GetUnfilteredPartitionMetadataRequest, schemas.GetUnfilteredPartitionMetadataResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetUnfilteredPartitionMetadata{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetUnfilteredPartitionMetadata, schemas.GetUnfilteredPartitionMetadataRequest, schemas.GetUnfilteredPartitionMetadataResponse), output: &GetUnfilteredPartitionMetadataOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

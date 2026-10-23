@@ -313,13 +313,13 @@ var CodeBuild_20161006 = smithy.NewServiceSchema(_CodeBuild_20161006, "2016-10-0
 var AccountLimitExceededException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codebuild",
 	Name:      "AccountLimitExceededException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var AccountLimitExceededException_message *smithy.Schema
 
 var AccountSuspendedException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codebuild",
 	Name:      "AccountSuspendedException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var AccountSuspendedException_message *smithy.Schema
 
 var ArtifactNamespace = smithy.NewSchema(smithy.ShapeID{
@@ -1328,7 +1328,7 @@ var _ImageVersions_member *smithy.Schema
 var InvalidInputException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codebuild",
 	Name:      "InvalidInputException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var InvalidInputException_message *smithy.Schema
 
 var _KeyInput = smithy.NewSchema(smithy.ShapeID{
@@ -1425,7 +1425,7 @@ var _NonNegativeInt = smithy.NewSchema(smithy.ShapeID{
 var OAuthProviderException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codebuild",
 	Name:      "OAuthProviderException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var OAuthProviderException_message *smithy.Schema
 
 var _PageSize = smithy.NewSchema(smithy.ShapeID{
@@ -2040,13 +2040,13 @@ var _ResolvedSecondaryArtifacts_member *smithy.Schema
 var ResourceAlreadyExistsException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codebuild",
 	Name:      "ResourceAlreadyExistsException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var ResourceAlreadyExistsException_message *smithy.Schema
 
 var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codebuild",
 	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var ResourceNotFoundException_message *smithy.Schema
 
 var RetryBuildBatchType = smithy.NewSchema(smithy.ShapeID{

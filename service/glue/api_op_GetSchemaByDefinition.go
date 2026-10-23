@@ -4,7 +4,9 @@ package glue
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/glue/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/glue/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -51,6 +53,23 @@ type GetSchemaByDefinitionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetSchemaByDefinitionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetSchemaByDefinitionInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetSchemaByDefinitionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SchemaDefinition != nil {
+		s.WriteString(schemas.GetSchemaByDefinitionInput_SchemaDefinition, *v.SchemaDefinition)
+	}
+	if v.SchemaId != nil {
+		s.WriteStruct(schemas.GetSchemaByDefinitionInput_SchemaId)
+		v.SchemaId.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type GetSchemaByDefinitionOutput struct {
 
 	// The date and time the schema was created.
@@ -75,13 +94,64 @@ type GetSchemaByDefinitionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetSchemaByDefinitionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetSchemaByDefinitionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetSchemaByDefinitionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreatedTime != nil {
+		s.WriteString(schemas.GetSchemaByDefinitionResponse_CreatedTime, *v.CreatedTime)
+	}
+	if v.DataFormat != "" {
+		s.WriteString(schemas.GetSchemaByDefinitionResponse_DataFormat, string(v.DataFormat))
+	}
+	if v.SchemaArn != nil {
+		s.WriteString(schemas.GetSchemaByDefinitionResponse_SchemaArn, *v.SchemaArn)
+	}
+	if v.SchemaVersionId != nil {
+		s.WriteString(schemas.GetSchemaByDefinitionResponse_SchemaVersionId, *v.SchemaVersionId)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.GetSchemaByDefinitionResponse_Status, string(v.Status))
+	}
+}
+func (v *GetSchemaByDefinitionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetSchemaByDefinitionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetSchemaByDefinitionResponse_CreatedTime:
+			v.CreatedTime = new(string)
+			return d.ReadString(schemas.GetSchemaByDefinitionResponse_CreatedTime, v.CreatedTime)
+		case schemas.GetSchemaByDefinitionResponse_DataFormat:
+			var ev string
+			if err := d.ReadString(schemas.GetSchemaByDefinitionResponse_DataFormat, &ev); err != nil {
+				return err
+			}
+			v.DataFormat = types.DataFormat(ev)
+			return nil
+		case schemas.GetSchemaByDefinitionResponse_SchemaArn:
+			v.SchemaArn = new(string)
+			return d.ReadString(schemas.GetSchemaByDefinitionResponse_SchemaArn, v.SchemaArn)
+		case schemas.GetSchemaByDefinitionResponse_SchemaVersionId:
+			v.SchemaVersionId = new(string)
+			return d.ReadString(schemas.GetSchemaByDefinitionResponse_SchemaVersionId, v.SchemaVersionId)
+		case schemas.GetSchemaByDefinitionResponse_Status:
+			var ev string
+			if err := d.ReadString(schemas.GetSchemaByDefinitionResponse_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.SchemaVersionStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetSchemaByDefinitionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetSchemaByDefinition{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetSchemaByDefinition, schemas.GetSchemaByDefinitionInput, schemas.GetSchemaByDefinitionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetSchemaByDefinition{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetSchemaByDefinition, schemas.GetSchemaByDefinitionInput, schemas.GetSchemaByDefinitionResponse), output: &GetSchemaByDefinitionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

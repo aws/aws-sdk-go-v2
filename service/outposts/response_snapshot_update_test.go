@@ -295,6 +295,8 @@ func TestUpdateResponseSnapshot_CreateOutpost(t *testing.T) {
 			},
 			SiteArn:               ptr.String("__SiteArn__"),
 			SupportedHardwareType: types.SupportedHardwareType("RACK"),
+			Generation:            types.OutpostGeneration("GENERATION_2"),
+			RackScalingType:       types.RackScalingType("SINGLE_RACK"),
 		},
 	}
 	proto := restjson1.New(schemas.OutpostsOlafService)
@@ -1096,6 +1098,7 @@ func TestUpdateResponseSnapshot_GetCatalogItem(t *testing.T) {
 				types.SupportedStorageEnum("EBS"),
 				types.SupportedStorageEnum("EBS"),
 			},
+			RackScalingType: types.RackScalingType("SINGLE_RACK"),
 		},
 	}
 	proto := restjson1.New(schemas.OutpostsOlafService)
@@ -1263,6 +1266,8 @@ func TestUpdateResponseSnapshot_GetOutpost(t *testing.T) {
 			},
 			SiteArn:               ptr.String("__SiteArn__"),
 			SupportedHardwareType: types.SupportedHardwareType("RACK"),
+			Generation:            types.OutpostGeneration("GENERATION_2"),
+			RackScalingType:       types.RackScalingType("SINGLE_RACK"),
 		},
 	}
 	proto := restjson1.New(schemas.OutpostsOlafService)
@@ -2321,6 +2326,7 @@ func TestUpdateResponseSnapshot_ListCatalogItems(t *testing.T) {
 					types.SupportedStorageEnum("EBS"),
 					types.SupportedStorageEnum("EBS"),
 				},
+				RackScalingType: types.RackScalingType("SINGLE_RACK"),
 			},
 			{
 				CatalogItemId: ptr.String("__CatalogItemId__"),
@@ -2347,6 +2353,7 @@ func TestUpdateResponseSnapshot_ListCatalogItems(t *testing.T) {
 					types.SupportedStorageEnum("EBS"),
 					types.SupportedStorageEnum("EBS"),
 				},
+				RackScalingType: types.RackScalingType("SINGLE_RACK"),
 			},
 		},
 		NextToken: ptr.String("__NextToken__"),
@@ -2495,6 +2502,8 @@ func TestUpdateResponseSnapshot_ListOutposts(t *testing.T) {
 				},
 				SiteArn:               ptr.String("__SiteArn__"),
 				SupportedHardwareType: types.SupportedHardwareType("RACK"),
+				Generation:            types.OutpostGeneration("GENERATION_2"),
+				RackScalingType:       types.RackScalingType("SINGLE_RACK"),
 			},
 			{
 				OutpostId:          ptr.String("__OutpostId__"),
@@ -2511,6 +2520,8 @@ func TestUpdateResponseSnapshot_ListOutposts(t *testing.T) {
 				},
 				SiteArn:               ptr.String("__SiteArn__"),
 				SupportedHardwareType: types.SupportedHardwareType("RACK"),
+				Generation:            types.OutpostGeneration("GENERATION_2"),
+				RackScalingType:       types.RackScalingType("SINGLE_RACK"),
 			},
 		},
 		NextToken: ptr.String("__NextToken__"),
@@ -3770,6 +3781,8 @@ func TestUpdateResponseSnapshot_UpdateOutpost(t *testing.T) {
 			},
 			SiteArn:               ptr.String("__SiteArn__"),
 			SupportedHardwareType: types.SupportedHardwareType("RACK"),
+			Generation:            types.OutpostGeneration("GENERATION_2"),
+			RackScalingType:       types.RackScalingType("SINGLE_RACK"),
 		},
 	}
 	proto := restjson1.New(schemas.OutpostsOlafService)

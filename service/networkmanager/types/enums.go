@@ -6,19 +6,25 @@ type AttachmentErrorCode string
 
 // Enum values for AttachmentErrorCode
 const (
-	AttachmentErrorCodeVpcNotFound                             AttachmentErrorCode = "VPC_NOT_FOUND"
-	AttachmentErrorCodeSubnetNotFound                          AttachmentErrorCode = "SUBNET_NOT_FOUND"
-	AttachmentErrorCodeSubnetDuplicatedInAvailabilityZone      AttachmentErrorCode = "SUBNET_DUPLICATED_IN_AVAILABILITY_ZONE"
-	AttachmentErrorCodeSubnetNoFreeAddresses                   AttachmentErrorCode = "SUBNET_NO_FREE_ADDRESSES"
-	AttachmentErrorCodeSubnetUnsupportedAvailabilityZone       AttachmentErrorCode = "SUBNET_UNSUPPORTED_AVAILABILITY_ZONE"
-	AttachmentErrorCodeSubnetNoIpv6Cidrs                       AttachmentErrorCode = "SUBNET_NO_IPV6_CIDRS"
-	AttachmentErrorCodeVpnConnectionNotFound                   AttachmentErrorCode = "VPN_CONNECTION_NOT_FOUND"
-	AttachmentErrorCodeMaximumNoEncapLimitExceeded             AttachmentErrorCode = "MAXIMUM_NO_ENCAP_LIMIT_EXCEEDED"
-	AttachmentErrorCodeDirectConnectGatewayNotFound            AttachmentErrorCode = "DIRECT_CONNECT_GATEWAY_NOT_FOUND"
-	AttachmentErrorCodeDirectConnectGatewayExistingAttachments AttachmentErrorCode = "DIRECT_CONNECT_GATEWAY_EXISTING_ATTACHMENTS"
-	AttachmentErrorCodeDirectConnectGatewayNoPrivateVif        AttachmentErrorCode = "DIRECT_CONNECT_GATEWAY_NO_PRIVATE_VIF"
-	AttachmentErrorCodeVpnExistingAssociations                 AttachmentErrorCode = "VPN_EXISTING_ASSOCIATIONS"
-	AttachmentErrorCodeVpcUnsupportedFeatures                  AttachmentErrorCode = "VPC_UNSUPPORTED_FEATURES"
+	AttachmentErrorCodeVpcNotFound                                         AttachmentErrorCode = "VPC_NOT_FOUND"
+	AttachmentErrorCodeSubnetNotFound                                      AttachmentErrorCode = "SUBNET_NOT_FOUND"
+	AttachmentErrorCodeSubnetDuplicatedInAvailabilityZone                  AttachmentErrorCode = "SUBNET_DUPLICATED_IN_AVAILABILITY_ZONE"
+	AttachmentErrorCodeSubnetNoFreeAddresses                               AttachmentErrorCode = "SUBNET_NO_FREE_ADDRESSES"
+	AttachmentErrorCodeSubnetUnsupportedAvailabilityZone                   AttachmentErrorCode = "SUBNET_UNSUPPORTED_AVAILABILITY_ZONE"
+	AttachmentErrorCodeSubnetNoIpv6Cidrs                                   AttachmentErrorCode = "SUBNET_NO_IPV6_CIDRS"
+	AttachmentErrorCodeSecurityGroupReferencingUnsupportedAvailabilityZone AttachmentErrorCode = "SECURITY_GROUP_REFERENCING_UNSUPPORTED_AVAILABILITY_ZONE"
+	AttachmentErrorCodeVpnConnectionNotFound                               AttachmentErrorCode = "VPN_CONNECTION_NOT_FOUND"
+	AttachmentErrorCodeMaximumNoEncapLimitExceeded                         AttachmentErrorCode = "MAXIMUM_NO_ENCAP_LIMIT_EXCEEDED"
+	AttachmentErrorCodeDirectConnectGatewayNotFound                        AttachmentErrorCode = "DIRECT_CONNECT_GATEWAY_NOT_FOUND"
+	AttachmentErrorCodeDirectConnectGatewayExistingAttachments             AttachmentErrorCode = "DIRECT_CONNECT_GATEWAY_EXISTING_ATTACHMENTS"
+	AttachmentErrorCodeDirectConnectGatewayNoPrivateVif                    AttachmentErrorCode = "DIRECT_CONNECT_GATEWAY_NO_PRIVATE_VIF"
+	AttachmentErrorCodeVpnExistingAssociations                             AttachmentErrorCode = "VPN_EXISTING_ASSOCIATIONS"
+	AttachmentErrorCodeVpnStaticRoutesNatUnsupported                       AttachmentErrorCode = "VPN_STATIC_ROUTES_NAT_UNSUPPORTED"
+	AttachmentErrorCodeVpcUnsupportedFeatures                              AttachmentErrorCode = "VPC_UNSUPPORTED_FEATURES"
+	AttachmentErrorCodeDirectConnectGatewayTopologyRestrictions            AttachmentErrorCode = "DIRECT_CONNECT_GATEWAY_TOPOLOGY_RESTRICTIONS"
+	AttachmentErrorCodeCreationFailed                                      AttachmentErrorCode = "CREATION_FAILED"
+	AttachmentErrorCodeUpdateFailed                                        AttachmentErrorCode = "UPDATE_FAILED"
+	AttachmentErrorCodeDeletionFailed                                      AttachmentErrorCode = "DELETION_FAILED"
 )
 
 // Values returns all known values for AttachmentErrorCode. Note that this can be
@@ -33,13 +39,19 @@ func (AttachmentErrorCode) Values() []AttachmentErrorCode {
 		"SUBNET_NO_FREE_ADDRESSES",
 		"SUBNET_UNSUPPORTED_AVAILABILITY_ZONE",
 		"SUBNET_NO_IPV6_CIDRS",
+		"SECURITY_GROUP_REFERENCING_UNSUPPORTED_AVAILABILITY_ZONE",
 		"VPN_CONNECTION_NOT_FOUND",
 		"MAXIMUM_NO_ENCAP_LIMIT_EXCEEDED",
 		"DIRECT_CONNECT_GATEWAY_NOT_FOUND",
 		"DIRECT_CONNECT_GATEWAY_EXISTING_ATTACHMENTS",
 		"DIRECT_CONNECT_GATEWAY_NO_PRIVATE_VIF",
 		"VPN_EXISTING_ASSOCIATIONS",
+		"VPN_STATIC_ROUTES_NAT_UNSUPPORTED",
 		"VPC_UNSUPPORTED_FEATURES",
+		"DIRECT_CONNECT_GATEWAY_TOPOLOGY_RESTRICTIONS",
+		"CREATION_FAILED",
+		"UPDATE_FAILED",
+		"DELETION_FAILED",
 	}
 }
 
@@ -309,6 +321,8 @@ const (
 	ConnectPeerErrorCodeIpOutsideSubnetCidrRange  ConnectPeerErrorCode = "IP_OUTSIDE_SUBNET_CIDR_RANGE"
 	ConnectPeerErrorCodeInvalidInsideCidrBlock    ConnectPeerErrorCode = "INVALID_INSIDE_CIDR_BLOCK"
 	ConnectPeerErrorCodeNoAssociatedCidrBlock     ConnectPeerErrorCode = "NO_ASSOCIATED_CIDR_BLOCK"
+	ConnectPeerErrorCodeCreationFailed            ConnectPeerErrorCode = "CREATION_FAILED"
+	ConnectPeerErrorCodeDeletionFailed            ConnectPeerErrorCode = "DELETION_FAILED"
 )
 
 // Values returns all known values for ConnectPeerErrorCode. Note that this can be
@@ -323,6 +337,8 @@ func (ConnectPeerErrorCode) Values() []ConnectPeerErrorCode {
 		"IP_OUTSIDE_SUBNET_CIDR_RANGE",
 		"INVALID_INSIDE_CIDR_BLOCK",
 		"NO_ASSOCIATED_CIDR_BLOCK",
+		"CREATION_FAILED",
+		"DELETION_FAILED",
 	}
 }
 
@@ -507,16 +523,96 @@ func (LinkState) Values() []LinkState {
 	}
 }
 
+type NatGatewaySupportState string
+
+// Enum values for NatGatewaySupportState
+const (
+	NatGatewaySupportStateEnabled                     NatGatewaySupportState = "ENABLED"
+	NatGatewaySupportStateEnabling                    NatGatewaySupportState = "ENABLING"
+	NatGatewaySupportStateDisabled                    NatGatewaySupportState = "DISABLED"
+	NatGatewaySupportStateDisabling                   NatGatewaySupportState = "DISABLING"
+	NatGatewaySupportStatePendingAttachmentAcceptance NatGatewaySupportState = "PENDING_ATTACHMENT_ACCEPTANCE"
+)
+
+// Values returns all known values for NatGatewaySupportState. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (NatGatewaySupportState) Values() []NatGatewaySupportState {
+	return []NatGatewaySupportState{
+		"ENABLED",
+		"ENABLING",
+		"DISABLED",
+		"DISABLING",
+		"PENDING_ATTACHMENT_ACCEPTANCE",
+	}
+}
+
+type NatGatewaySupportValue string
+
+// Enum values for NatGatewaySupportValue
+const (
+	NatGatewaySupportValueEnable  NatGatewaySupportValue = "ENABLE"
+	NatGatewaySupportValueDisable NatGatewaySupportValue = "DISABLE"
+)
+
+// Values returns all known values for NatGatewaySupportValue. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (NatGatewaySupportValue) Values() []NatGatewaySupportValue {
+	return []NatGatewaySupportValue{
+		"ENABLE",
+		"DISABLE",
+	}
+}
+
+type NatRuleState string
+
+// Enum values for NatRuleState
+const (
+	NatRuleStateCreating                    NatRuleState = "CREATING"
+	NatRuleStateModifying                   NatRuleState = "MODIFYING"
+	NatRuleStateDeleting                    NatRuleState = "DELETING"
+	NatRuleStateActivated                   NatRuleState = "ACTIVATED"
+	NatRuleStateActivating                  NatRuleState = "ACTIVATING"
+	NatRuleStateDeactivated                 NatRuleState = "DEACTIVATED"
+	NatRuleStateDeactivating                NatRuleState = "DEACTIVATING"
+	NatRuleStateFailed                      NatRuleState = "FAILED"
+	NatRuleStatePendingAttachmentAcceptance NatRuleState = "PENDING_ATTACHMENT_ACCEPTANCE"
+)
+
+// Values returns all known values for NatRuleState. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (NatRuleState) Values() []NatRuleState {
+	return []NatRuleState{
+		"CREATING",
+		"MODIFYING",
+		"DELETING",
+		"ACTIVATED",
+		"ACTIVATING",
+		"DEACTIVATED",
+		"DEACTIVATING",
+		"FAILED",
+		"PENDING_ATTACHMENT_ACCEPTANCE",
+	}
+}
+
 type PeeringErrorCode string
 
 // Enum values for PeeringErrorCode
 const (
-	PeeringErrorCodeTransitGatewayNotFound           PeeringErrorCode = "TRANSIT_GATEWAY_NOT_FOUND"
-	PeeringErrorCodeTransitGatewayPeersLimitExceeded PeeringErrorCode = "TRANSIT_GATEWAY_PEERS_LIMIT_EXCEEDED"
-	PeeringErrorCodeMissingRequiredPermissions       PeeringErrorCode = "MISSING_PERMISSIONS"
-	PeeringErrorCodeInternalError                    PeeringErrorCode = "INTERNAL_ERROR"
-	PeeringErrorCodeEdgeLocationPeerDuplicate        PeeringErrorCode = "EDGE_LOCATION_PEER_DUPLICATE"
-	PeeringErrorCodeInvalidTransitGatewayState       PeeringErrorCode = "INVALID_TRANSIT_GATEWAY_STATE"
+	PeeringErrorCodeTransitGatewayNotFound               PeeringErrorCode = "TRANSIT_GATEWAY_NOT_FOUND"
+	PeeringErrorCodeTransitGatewayPeersLimitExceeded     PeeringErrorCode = "TRANSIT_GATEWAY_PEERS_LIMIT_EXCEEDED"
+	PeeringErrorCodeMissingRequiredPermissions           PeeringErrorCode = "MISSING_PERMISSIONS"
+	PeeringErrorCodeInternalError                        PeeringErrorCode = "INTERNAL_ERROR"
+	PeeringErrorCodeEdgeLocationPeerDuplicate            PeeringErrorCode = "EDGE_LOCATION_PEER_DUPLICATE"
+	PeeringErrorCodeInvalidTransitGatewayState           PeeringErrorCode = "INVALID_TRANSIT_GATEWAY_STATE"
+	PeeringErrorCodeTransitGatewayEncryptionNotSupported PeeringErrorCode = "TRANSIT_GATEWAY_ENCRYPTION_NOT_SUPPORTED"
+	PeeringErrorCodeCreationFailed                       PeeringErrorCode = "CREATION_FAILED"
+	PeeringErrorCodeDeletionFailed                       PeeringErrorCode = "DELETION_FAILED"
 )
 
 // Values returns all known values for PeeringErrorCode. Note that this can be
@@ -531,6 +627,9 @@ func (PeeringErrorCode) Values() []PeeringErrorCode {
 		"INTERNAL_ERROR",
 		"EDGE_LOCATION_PEER_DUPLICATE",
 		"INVALID_TRANSIT_GATEWAY_STATE",
+		"TRANSIT_GATEWAY_ENCRYPTION_NOT_SUPPORTED",
+		"CREATION_FAILED",
+		"DELETION_FAILED",
 	}
 }
 
@@ -699,6 +798,7 @@ type RouteType string
 const (
 	RouteTypePropagated RouteType = "PROPAGATED"
 	RouteTypeStatic     RouteType = "STATIC"
+	RouteTypeSystem     RouteType = "SYSTEM"
 )
 
 // Values returns all known values for RouteType. Note that this can be expanded
@@ -709,6 +809,7 @@ func (RouteType) Values() []RouteType {
 	return []RouteType{
 		"PROPAGATED",
 		"STATIC",
+		"SYSTEM",
 	}
 }
 

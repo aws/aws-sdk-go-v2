@@ -4,6 +4,9 @@ package ssm
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/ssm/schemas"
+	"github.com/aws/aws-sdk-go-v2/service/ssm/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -21,7 +24,12 @@ import (
 //     cross-account sharing of parameters, see [Working with shared parameters]in the Amazon Web Services Systems
 //     Manager User Guide.
 //
+//   - Document – Shares the document using Resource Access Manager (RAM). For more
+//     information about sharing documents, see [Sharing Systems Manager documents]in the Amazon Web Services Systems
+//     Manager User Guide.
+//
 // [Working with shared parameters]: https://docs.aws.amazon.com/systems-manager/latest/userguide/parameter-store-shared-parameters.html
+// [Sharing Systems Manager documents]: https://docs.aws.amazon.com/systems-manager/latest/userguide/documents-ssm-sharing.html
 func (c *Client) DeleteResourcePolicy(ctx context.Context, params *DeleteResourcePolicyInput, optFns ...func(*Options)) (*DeleteResourcePolicyOutput, error) {
 	if params == nil {
 		params = &DeleteResourcePolicyInput{}
@@ -55,7 +63,39 @@ type DeleteResourcePolicyInput struct {
 	// This member is required.
 	ResourceArn *string
 
+	// Specifies the intended outcome of the operation. Applies only to the Document
+	// resource type. The operation ignores this parameter for other resource types.
+	// Optional. Defaults to RemoveSharing .
+	//
+	//   - RemoveSharing – Deletes the resource policy and removes sharing of the
+	//   document.
+	//
+	//   - RollbackMigration – Reverts the document to Custom sharing, preserving
+	//   existing consumer access, instead of removing the policy.
+	DeletionMode types.DeletionMode
+
 	noSmithyDocumentSerde
+}
+
+func (v *DeleteResourcePolicyInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteResourcePolicyRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteResourcePolicyInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DeletionMode != "" {
+		s.WriteString(schemas.DeleteResourcePolicyRequest_DeletionMode, string(v.DeletionMode))
+	}
+	if v.PolicyHash != nil {
+		s.WriteString(schemas.DeleteResourcePolicyRequest_PolicyHash, *v.PolicyHash)
+	}
+	if v.PolicyId != nil {
+		s.WriteString(schemas.DeleteResourcePolicyRequest_PolicyId, *v.PolicyId)
+	}
+	if v.ResourceArn != nil {
+		s.WriteString(schemas.DeleteResourcePolicyRequest_ResourceArn, *v.ResourceArn)
+	}
 }
 
 type DeleteResourcePolicyOutput struct {
@@ -65,13 +105,26 @@ type DeleteResourcePolicyOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteResourcePolicyOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteResourcePolicyResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteResourcePolicyOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteResourcePolicyOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteResourcePolicyResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteResourcePolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteResourcePolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteResourcePolicy, schemas.DeleteResourcePolicyRequest, schemas.DeleteResourcePolicyResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeleteResourcePolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteResourcePolicy, schemas.DeleteResourcePolicyRequest, schemas.DeleteResourcePolicyResponse), output: &DeleteResourcePolicyOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

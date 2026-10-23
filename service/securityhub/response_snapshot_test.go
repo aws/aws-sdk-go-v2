@@ -5010,6 +5010,30 @@ func TestCheckResponseSnapshot_BatchUpdateStandardsControlAssociations(t *testin
 	}
 }
 
+func TestCheckResponseSnapshot_CancelExportJobV2(t *testing.T) {
+	want := &CancelExportJobV2Output{
+		ExportJobId: ptr.String("__ExportJobId__"),
+		Status:      types.ExportStatus("RUNNING"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("CancelExportJobV2.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.CancelExportJobV2(context.Background(), &CancelExportJobV2Input{
+		ExportJobId: ptr.String("__ExportJobId__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "CancelExportJobV2.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_CreateActionTarget(t *testing.T) {
 	want := &CreateActionTargetOutput{
 		ActionTargetArn: ptr.String("__ActionTargetArn__"),
@@ -5928,6 +5952,9 @@ func TestCheckResponseSnapshot_CreateAutomationRuleV2(t *testing.T) {
 				ExternalIntegrationConfiguration: &types.ExternalIntegrationConfiguration{
 					ConnectorArn: ptr.String("__ConnectorArn__"),
 				},
+				ResourceFieldsUpdate: &types.AutomationRulesResourceFieldsUpdateV2{
+					Criticality: types.ResourceCriticality("Very High"),
+				},
 			},
 			{
 				Type: types.AutomationRulesActionTypeV2("FINDING_FIELDS_UPDATE"),
@@ -5938,6 +5965,9 @@ func TestCheckResponseSnapshot_CreateAutomationRuleV2(t *testing.T) {
 				},
 				ExternalIntegrationConfiguration: &types.ExternalIntegrationConfiguration{
 					ConnectorArn: ptr.String("__ConnectorArn__"),
+				},
+				ResourceFieldsUpdate: &types.AutomationRulesResourceFieldsUpdateV2{
+					Criticality: types.ResourceCriticality("Very High"),
 				},
 			},
 		},
@@ -8766,6 +8796,9 @@ func TestCheckResponseSnapshot_GetAutomationRuleV2(t *testing.T) {
 				ExternalIntegrationConfiguration: &types.ExternalIntegrationConfiguration{
 					ConnectorArn: ptr.String("__ConnectorArn__"),
 				},
+				ResourceFieldsUpdate: &types.AutomationRulesResourceFieldsUpdateV2{
+					Criticality: types.ResourceCriticality("Very High"),
+				},
 			},
 			{
 				Type: types.AutomationRulesActionTypeV2("FINDING_FIELDS_UPDATE"),
@@ -8776,6 +8809,9 @@ func TestCheckResponseSnapshot_GetAutomationRuleV2(t *testing.T) {
 				},
 				ExternalIntegrationConfiguration: &types.ExternalIntegrationConfiguration{
 					ConnectorArn: ptr.String("__ConnectorArn__"),
+				},
+				ResourceFieldsUpdate: &types.AutomationRulesResourceFieldsUpdateV2{
+					Criticality: types.ResourceCriticality("Very High"),
 				},
 			},
 		},
@@ -9076,6 +9112,303 @@ func TestCheckResponseSnapshot_GetEnabledStandards(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "GetEnabledStandards.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_GetExportJobV2(t *testing.T) {
+	want := &GetExportJobV2Output{
+		ExportJobId: ptr.String("__ExportJobId__"),
+		Name:        ptr.String("__Name__"),
+		Status:      types.ExportStatus("RUNNING"),
+		DataType:    types.ExportDataType("FINDINGS"),
+		OutputConfiguration: &types.ExportOutputMemberFindings{
+			Value: types.FindingsOutput{
+				Format: types.FindingsExportFormat("CSV"),
+				Filters: &types.OcsfFindingFilters{
+					CompositeFilters: []types.CompositeFilter{
+						{
+							StringFilters: []types.OcsfStringFilter{
+								{
+									FieldName: types.OcsfStringField("metadata.uid"),
+									Filter: &types.StringFilter{
+										Value:      ptr.String("__Value__"),
+										Comparison: types.StringFilterComparison("EQUALS"),
+									},
+								},
+								{
+									FieldName: types.OcsfStringField("metadata.uid"),
+									Filter: &types.StringFilter{
+										Value:      ptr.String("__Value__"),
+										Comparison: types.StringFilterComparison("EQUALS"),
+									},
+								},
+							},
+							DateFilters: []types.OcsfDateFilter{
+								{
+									FieldName: types.OcsfDateField("finding_info.created_time_dt"),
+									Filter: &types.DateFilter{
+										Start: ptr.String("__Start__"),
+										End:   ptr.String("__End__"),
+										DateRange: &types.DateRange{
+											Value:      ptr.Int32(1),
+											Unit:       types.DateRangeUnit("DAYS"),
+											Comparison: types.DateRangeComparison("WITHIN"),
+										},
+									},
+								},
+								{
+									FieldName: types.OcsfDateField("finding_info.created_time_dt"),
+									Filter: &types.DateFilter{
+										Start: ptr.String("__Start__"),
+										End:   ptr.String("__End__"),
+										DateRange: &types.DateRange{
+											Value:      ptr.Int32(1),
+											Unit:       types.DateRangeUnit("DAYS"),
+											Comparison: types.DateRangeComparison("WITHIN"),
+										},
+									},
+								},
+							},
+							BooleanFilters: []types.OcsfBooleanFilter{
+								{
+									FieldName: types.OcsfBooleanField("compliance.assessments.meets_criteria"),
+									Filter: &types.BooleanFilter{
+										Value: ptr.Bool(true),
+									},
+								},
+								{
+									FieldName: types.OcsfBooleanField("compliance.assessments.meets_criteria"),
+									Filter: &types.BooleanFilter{
+										Value: ptr.Bool(true),
+									},
+								},
+							},
+							NumberFilters: []types.OcsfNumberFilter{
+								{
+									FieldName: types.OcsfNumberField("activity_id"),
+									Filter: &types.NumberFilter{
+										Gte: ptr.Float64(1.0),
+										Lte: ptr.Float64(1.0),
+										Eq:  ptr.Float64(1.0),
+										Gt:  ptr.Float64(1.0),
+										Lt:  ptr.Float64(1.0),
+									},
+								},
+								{
+									FieldName: types.OcsfNumberField("activity_id"),
+									Filter: &types.NumberFilter{
+										Gte: ptr.Float64(1.0),
+										Lte: ptr.Float64(1.0),
+										Eq:  ptr.Float64(1.0),
+										Gt:  ptr.Float64(1.0),
+										Lt:  ptr.Float64(1.0),
+									},
+								},
+							},
+							MapFilters: []types.OcsfMapFilter{
+								{
+									FieldName: types.OcsfMapField("resources.tags"),
+									Filter: &types.MapFilter{
+										Key:        ptr.String("__Key__"),
+										Value:      ptr.String("__Value__"),
+										Comparison: types.MapFilterComparison("EQUALS"),
+									},
+								},
+								{
+									FieldName: types.OcsfMapField("resources.tags"),
+									Filter: &types.MapFilter{
+										Key:        ptr.String("__Key__"),
+										Value:      ptr.String("__Value__"),
+										Comparison: types.MapFilterComparison("EQUALS"),
+									},
+								},
+							},
+							IpFilters: []types.OcsfIpFilter{
+								{
+									FieldName: types.OcsfIpField("evidences.dst_endpoint.ip"),
+									Filter: &types.IpFilter{
+										Cidr: ptr.String("__Cidr__"),
+									},
+								},
+								{
+									FieldName: types.OcsfIpField("evidences.dst_endpoint.ip"),
+									Filter: &types.IpFilter{
+										Cidr: ptr.String("__Cidr__"),
+									},
+								},
+							},
+							NestedCompositeFilters: []types.CompositeFilter{
+								{},
+								{},
+							},
+							Operator: types.AllowedOperators("AND"),
+						},
+						{
+							StringFilters: []types.OcsfStringFilter{
+								{
+									FieldName: types.OcsfStringField("metadata.uid"),
+									Filter: &types.StringFilter{
+										Value:      ptr.String("__Value__"),
+										Comparison: types.StringFilterComparison("EQUALS"),
+									},
+								},
+								{
+									FieldName: types.OcsfStringField("metadata.uid"),
+									Filter: &types.StringFilter{
+										Value:      ptr.String("__Value__"),
+										Comparison: types.StringFilterComparison("EQUALS"),
+									},
+								},
+							},
+							DateFilters: []types.OcsfDateFilter{
+								{
+									FieldName: types.OcsfDateField("finding_info.created_time_dt"),
+									Filter: &types.DateFilter{
+										Start: ptr.String("__Start__"),
+										End:   ptr.String("__End__"),
+										DateRange: &types.DateRange{
+											Value:      ptr.Int32(1),
+											Unit:       types.DateRangeUnit("DAYS"),
+											Comparison: types.DateRangeComparison("WITHIN"),
+										},
+									},
+								},
+								{
+									FieldName: types.OcsfDateField("finding_info.created_time_dt"),
+									Filter: &types.DateFilter{
+										Start: ptr.String("__Start__"),
+										End:   ptr.String("__End__"),
+										DateRange: &types.DateRange{
+											Value:      ptr.Int32(1),
+											Unit:       types.DateRangeUnit("DAYS"),
+											Comparison: types.DateRangeComparison("WITHIN"),
+										},
+									},
+								},
+							},
+							BooleanFilters: []types.OcsfBooleanFilter{
+								{
+									FieldName: types.OcsfBooleanField("compliance.assessments.meets_criteria"),
+									Filter: &types.BooleanFilter{
+										Value: ptr.Bool(true),
+									},
+								},
+								{
+									FieldName: types.OcsfBooleanField("compliance.assessments.meets_criteria"),
+									Filter: &types.BooleanFilter{
+										Value: ptr.Bool(true),
+									},
+								},
+							},
+							NumberFilters: []types.OcsfNumberFilter{
+								{
+									FieldName: types.OcsfNumberField("activity_id"),
+									Filter: &types.NumberFilter{
+										Gte: ptr.Float64(1.0),
+										Lte: ptr.Float64(1.0),
+										Eq:  ptr.Float64(1.0),
+										Gt:  ptr.Float64(1.0),
+										Lt:  ptr.Float64(1.0),
+									},
+								},
+								{
+									FieldName: types.OcsfNumberField("activity_id"),
+									Filter: &types.NumberFilter{
+										Gte: ptr.Float64(1.0),
+										Lte: ptr.Float64(1.0),
+										Eq:  ptr.Float64(1.0),
+										Gt:  ptr.Float64(1.0),
+										Lt:  ptr.Float64(1.0),
+									},
+								},
+							},
+							MapFilters: []types.OcsfMapFilter{
+								{
+									FieldName: types.OcsfMapField("resources.tags"),
+									Filter: &types.MapFilter{
+										Key:        ptr.String("__Key__"),
+										Value:      ptr.String("__Value__"),
+										Comparison: types.MapFilterComparison("EQUALS"),
+									},
+								},
+								{
+									FieldName: types.OcsfMapField("resources.tags"),
+									Filter: &types.MapFilter{
+										Key:        ptr.String("__Key__"),
+										Value:      ptr.String("__Value__"),
+										Comparison: types.MapFilterComparison("EQUALS"),
+									},
+								},
+							},
+							IpFilters: []types.OcsfIpFilter{
+								{
+									FieldName: types.OcsfIpField("evidences.dst_endpoint.ip"),
+									Filter: &types.IpFilter{
+										Cidr: ptr.String("__Cidr__"),
+									},
+								},
+								{
+									FieldName: types.OcsfIpField("evidences.dst_endpoint.ip"),
+									Filter: &types.IpFilter{
+										Cidr: ptr.String("__Cidr__"),
+									},
+								},
+							},
+							NestedCompositeFilters: []types.CompositeFilter{
+								{},
+								{},
+							},
+							Operator: types.AllowedOperators("AND"),
+						},
+					},
+					CompositeOperator: types.AllowedOperators("AND"),
+				},
+				SelectedFields: []types.FindingsSelectableField{
+					types.FindingsSelectableField("metadata.uid"),
+					types.FindingsSelectableField("metadata.uid"),
+				},
+			},
+		},
+		Scopes: &types.ExportScopes{
+			AwsOrganizations: []types.AwsOrganizationScope{
+				{
+					OrganizationId:       ptr.String("__OrganizationId__"),
+					OrganizationalUnitId: ptr.String("__OrganizationalUnitId__"),
+				},
+				{
+					OrganizationId:       ptr.String("__OrganizationId__"),
+					OrganizationalUnitId: ptr.String("__OrganizationalUnitId__"),
+				},
+			},
+		},
+		Destination: &types.ExportDestinationMemberS3{
+			Value: types.S3ExportDestination{
+				BucketArn:    ptr.String("__BucketArn__"),
+				KmsKeyArn:    ptr.String("__KmsKeyArn__"),
+				ObjectPrefix: ptr.String("__ObjectPrefix__"),
+			},
+		},
+		FailureCode:    types.ExportFailureCode("ACCESS_DENIED"),
+		FailureMessage: ptr.String("__FailureMessage__"),
+		StartedAt:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		EndedAt:        ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+	}
+	status, header, body, err := serdeRespReadSnapshot("GetExportJobV2.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.GetExportJobV2(context.Background(), &GetExportJobV2Input{
+		ExportJobId: ptr.String("__ExportJobId__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "GetExportJobV2.response", err)
 	}
 }
 
@@ -15963,6 +16296,324 @@ func TestCheckResponseSnapshot_GetRecommendedPolicyV2(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_GetRemediationsV2(t *testing.T) {
+	want := &GetRemediationsV2Output{
+		Items: []types.RemediationV2Item{
+			{
+				TargetUid: ptr.String("__TargetUid__"),
+				Outcome: &types.RemediationOutcome{
+					ResolvedFindingsCount:          ptr.Int32(1),
+					SeverityReductionFindingsCount: ptr.Int32(1),
+					SeverityUnchangedCount:         ptr.Int32(1),
+				},
+				Priority: types.RemediationPriority("Critical"),
+				RemediationSummary: &types.RemediationSummaryDetail{
+					Action:      ptr.String("__Action__"),
+					Description: ptr.String("__Description__"),
+					IsImmediate: ptr.Bool(true),
+					PostRemediationSteps: []string{
+						"__Member__",
+						"__Member__",
+					},
+					KbArticles: []types.KbArticle{
+						{
+							Title: ptr.String("__Title__"),
+							Url:   ptr.String("__Url__"),
+						},
+						{
+							Title: ptr.String("__Title__"),
+							Url:   ptr.String("__Url__"),
+						},
+					},
+				},
+				Resource: &types.RemediationResource{
+					AccountId:              ptr.String("__AccountId__"),
+					Region:                 ptr.String("__Region__"),
+					ResourceOwnerAccountId: ptr.String("__ResourceOwnerAccountId__"),
+					ResourceOwnerOrgId:     ptr.String("__ResourceOwnerOrgId__"),
+					Type:                   ptr.String("__Type__"),
+					Name:                   ptr.String("__Name__"),
+					Id:                     ptr.String("__Id__"),
+					ResourceGuid:           ptr.String("__ResourceGuid__"),
+					ResourceRegion:         ptr.String("__ResourceRegion__"),
+					CloudProvider:          types.CloudProviderName("Azure"),
+				},
+				Status: types.RemediationStatus("New"),
+				Trait: &types.RemediationTrait{
+					Type:  ptr.String("__Type__"),
+					Title: ptr.String("__Title__"),
+				},
+				Guidance: &types.RemediationGuidance{
+					TargetTypeName: ptr.String("__TargetTypeName__"),
+					Pattern:        ptr.String("__Pattern__"),
+					Version:        ptr.String("__Version__"),
+					Context: &types.RemediationGuidanceContext{
+						ProblemStatement: ptr.String("__ProblemStatement__"),
+						RiskAssessment:   ptr.String("__RiskAssessment__"),
+						AffectedScope:    ptr.String("__AffectedScope__"),
+						Prerequisites: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					Specification: &types.RemediationGuidanceSpecification{
+						Parameters: []types.RemediationParameter{
+							{
+								Name:        ptr.String("__Name__"),
+								Type:        ptr.String("__Type__"),
+								Description: ptr.String("__Description__"),
+								Required:    ptr.Bool(true),
+							},
+							{
+								Name:        ptr.String("__Name__"),
+								Type:        ptr.String("__Type__"),
+								Description: ptr.String("__Description__"),
+								Required:    ptr.Bool(true),
+							},
+						},
+						Steps: []types.RemediationStep{
+							{
+								Phase:       ptr.String("__Phase__"),
+								Description: ptr.String("__Description__"),
+								Service:     ptr.String("__Service__"),
+								Action:      ptr.String("__Action__"),
+								Logic:       ptr.String("__Logic__"),
+								Inverse:     ptr.String("__Inverse__"),
+								VerifyAfter: ptr.String("__VerifyAfter__"),
+							},
+							{
+								Phase:       ptr.String("__Phase__"),
+								Description: ptr.String("__Description__"),
+								Service:     ptr.String("__Service__"),
+								Action:      ptr.String("__Action__"),
+								Logic:       ptr.String("__Logic__"),
+								Inverse:     ptr.String("__Inverse__"),
+								VerifyAfter: ptr.String("__VerifyAfter__"),
+							},
+						},
+						ExpectedEndState: ptr.String("__ExpectedEndState__"),
+						RequiredPermissions: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					Examples: &types.RemediationGuidanceExamples{
+						AwsCli:         ptr.String("__AwsCli__"),
+						Cli:            ptr.String("__Cli__"),
+						Python:         ptr.String("__Python__"),
+						Terraform:      ptr.String("__Terraform__"),
+						Cdk:            ptr.String("__Cdk__"),
+						CloudFormation: ptr.String("__CloudFormation__"),
+						IaC:            ptr.String("__IaC__"),
+						Template:       ptr.String("__Template__"),
+					},
+					Metadata: &types.RemediationGuidanceMetadata{
+						ResourceType: ptr.String("__ResourceType__"),
+						ExposureType: ptr.String("__ExposureType__"),
+						TraitTitles: []string{
+							"__Member__",
+							"__Member__",
+						},
+						Reversibility:       ptr.String("__Reversibility__"),
+						FixEffect:           ptr.String("__FixEffect__"),
+						RiskLevel:           ptr.String("__RiskLevel__"),
+						AutomationLevel:     ptr.String("__AutomationLevel__"),
+						HumanReviewRequired: ptr.Bool(true),
+						GeneratedAt:         ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+						VerificationStatus:  ptr.String("__VerificationStatus__"),
+					},
+				},
+				UpdatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+			{
+				TargetUid: ptr.String("__TargetUid__"),
+				Outcome: &types.RemediationOutcome{
+					ResolvedFindingsCount:          ptr.Int32(1),
+					SeverityReductionFindingsCount: ptr.Int32(1),
+					SeverityUnchangedCount:         ptr.Int32(1),
+				},
+				Priority: types.RemediationPriority("Critical"),
+				RemediationSummary: &types.RemediationSummaryDetail{
+					Action:      ptr.String("__Action__"),
+					Description: ptr.String("__Description__"),
+					IsImmediate: ptr.Bool(true),
+					PostRemediationSteps: []string{
+						"__Member__",
+						"__Member__",
+					},
+					KbArticles: []types.KbArticle{
+						{
+							Title: ptr.String("__Title__"),
+							Url:   ptr.String("__Url__"),
+						},
+						{
+							Title: ptr.String("__Title__"),
+							Url:   ptr.String("__Url__"),
+						},
+					},
+				},
+				Resource: &types.RemediationResource{
+					AccountId:              ptr.String("__AccountId__"),
+					Region:                 ptr.String("__Region__"),
+					ResourceOwnerAccountId: ptr.String("__ResourceOwnerAccountId__"),
+					ResourceOwnerOrgId:     ptr.String("__ResourceOwnerOrgId__"),
+					Type:                   ptr.String("__Type__"),
+					Name:                   ptr.String("__Name__"),
+					Id:                     ptr.String("__Id__"),
+					ResourceGuid:           ptr.String("__ResourceGuid__"),
+					ResourceRegion:         ptr.String("__ResourceRegion__"),
+					CloudProvider:          types.CloudProviderName("Azure"),
+				},
+				Status: types.RemediationStatus("New"),
+				Trait: &types.RemediationTrait{
+					Type:  ptr.String("__Type__"),
+					Title: ptr.String("__Title__"),
+				},
+				Guidance: &types.RemediationGuidance{
+					TargetTypeName: ptr.String("__TargetTypeName__"),
+					Pattern:        ptr.String("__Pattern__"),
+					Version:        ptr.String("__Version__"),
+					Context: &types.RemediationGuidanceContext{
+						ProblemStatement: ptr.String("__ProblemStatement__"),
+						RiskAssessment:   ptr.String("__RiskAssessment__"),
+						AffectedScope:    ptr.String("__AffectedScope__"),
+						Prerequisites: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					Specification: &types.RemediationGuidanceSpecification{
+						Parameters: []types.RemediationParameter{
+							{
+								Name:        ptr.String("__Name__"),
+								Type:        ptr.String("__Type__"),
+								Description: ptr.String("__Description__"),
+								Required:    ptr.Bool(true),
+							},
+							{
+								Name:        ptr.String("__Name__"),
+								Type:        ptr.String("__Type__"),
+								Description: ptr.String("__Description__"),
+								Required:    ptr.Bool(true),
+							},
+						},
+						Steps: []types.RemediationStep{
+							{
+								Phase:       ptr.String("__Phase__"),
+								Description: ptr.String("__Description__"),
+								Service:     ptr.String("__Service__"),
+								Action:      ptr.String("__Action__"),
+								Logic:       ptr.String("__Logic__"),
+								Inverse:     ptr.String("__Inverse__"),
+								VerifyAfter: ptr.String("__VerifyAfter__"),
+							},
+							{
+								Phase:       ptr.String("__Phase__"),
+								Description: ptr.String("__Description__"),
+								Service:     ptr.String("__Service__"),
+								Action:      ptr.String("__Action__"),
+								Logic:       ptr.String("__Logic__"),
+								Inverse:     ptr.String("__Inverse__"),
+								VerifyAfter: ptr.String("__VerifyAfter__"),
+							},
+						},
+						ExpectedEndState: ptr.String("__ExpectedEndState__"),
+						RequiredPermissions: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					Examples: &types.RemediationGuidanceExamples{
+						AwsCli:         ptr.String("__AwsCli__"),
+						Cli:            ptr.String("__Cli__"),
+						Python:         ptr.String("__Python__"),
+						Terraform:      ptr.String("__Terraform__"),
+						Cdk:            ptr.String("__Cdk__"),
+						CloudFormation: ptr.String("__CloudFormation__"),
+						IaC:            ptr.String("__IaC__"),
+						Template:       ptr.String("__Template__"),
+					},
+					Metadata: &types.RemediationGuidanceMetadata{
+						ResourceType: ptr.String("__ResourceType__"),
+						ExposureType: ptr.String("__ExposureType__"),
+						TraitTitles: []string{
+							"__Member__",
+							"__Member__",
+						},
+						Reversibility:       ptr.String("__Reversibility__"),
+						FixEffect:           ptr.String("__FixEffect__"),
+						RiskLevel:           ptr.String("__RiskLevel__"),
+						AutomationLevel:     ptr.String("__AutomationLevel__"),
+						HumanReviewRequired: ptr.Bool(true),
+						GeneratedAt:         ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+						VerificationStatus:  ptr.String("__VerificationStatus__"),
+					},
+				},
+				UpdatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("GetRemediationsV2.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.GetRemediationsV2(context.Background(), &GetRemediationsV2Input{
+		TargetUid:   ptr.String("__TargetUid__"),
+		MetadataUid: ptr.String("__MetadataUid__"),
+		Filters: &types.RemediationFilters{
+			CompositeFilters: []types.RemediationCompositeFilter{
+				{
+					StringFilters: []types.RemediationStringFilter{
+						{
+							FieldName: types.RemediationStringField("Resource.Type"),
+							Filter: &types.RemediationStringFilterCondition{
+								Value: ptr.String("__Value__"),
+							},
+						},
+						{
+							FieldName: types.RemediationStringField("Resource.Type"),
+							Filter: &types.RemediationStringFilterCondition{
+								Value: ptr.String("__Value__"),
+							},
+						},
+					},
+				},
+				{
+					StringFilters: []types.RemediationStringFilter{
+						{
+							FieldName: types.RemediationStringField("Resource.Type"),
+							Filter: &types.RemediationStringFilterCondition{
+								Value: ptr.String("__Value__"),
+							},
+						},
+						{
+							FieldName: types.RemediationStringField("Resource.Type"),
+							Filter: &types.RemediationStringFilterCondition{
+								Value: ptr.String("__Value__"),
+							},
+						},
+					},
+				},
+			},
+		},
+		ShowGuidance:   ptr.Bool(true),
+		GuidanceFormat: types.GuidanceFormat("All"),
+		MaxResults:     ptr.Int32(1),
+		NextToken:      ptr.String("__NextToken__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "GetRemediationsV2.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_GetResourcesStatisticsV2(t *testing.T) {
 	want := &GetResourcesStatisticsV2Output{
 		GroupByResults: []types.GroupByResult{
@@ -16575,6 +17226,17 @@ func TestCheckResponseSnapshot_GetResourcesV2(t *testing.T) {
 						SelfHostedTotalAIResourceCount:                 ptr.Int32(1),
 					},
 				},
+				ResourceCriticality: types.ResourceCriticality("Very High"),
+				CriticalitySources: []types.CriticalitySource{
+					{
+						Source: types.CriticalitySourceType("AutomationRule"),
+						Reason: ptr.String("__Reason__"),
+					},
+					{
+						Source: types.CriticalitySourceType("AutomationRule"),
+						Reason: ptr.String("__Reason__"),
+					},
+				},
 			},
 			{
 				ResourceGuid:                ptr.String("__ResourceGuid__"),
@@ -16650,6 +17312,17 @@ func TestCheckResponseSnapshot_GetResourcesV2(t *testing.T) {
 						SelfHostedAIAgentFrameworkResourceCount:        ptr.Int32(1),
 						SelfHostedAIAgentToolsAndIdentityResourceCount: ptr.Int32(1),
 						SelfHostedTotalAIResourceCount:                 ptr.Int32(1),
+					},
+				},
+				ResourceCriticality: types.ResourceCriticality("Very High"),
+				CriticalitySources: []types.CriticalitySource{
+					{
+						Source: types.CriticalitySourceType("AutomationRule"),
+						Reason: ptr.String("__Reason__"),
+					},
+					{
+						Source: types.CriticalitySourceType("AutomationRule"),
+						Reason: ptr.String("__Reason__"),
 					},
 				},
 			},
@@ -17384,6 +18057,161 @@ func TestCheckResponseSnapshot_ListEnabledProductsForImport(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_ListExportJobsV2(t *testing.T) {
+	want := &ListExportJobsV2Output{
+		Items: []types.ExportSummary{
+			{
+				ExportJobId: ptr.String("__ExportJobId__"),
+				Name:        ptr.String("__Name__"),
+				Status:      types.ExportStatus("RUNNING"),
+				DataType:    types.ExportDataType("FINDINGS"),
+				OutputConfiguration: &types.ExportOutputSummaryMemberFindings{
+					Value: types.FindingsOutputSummary{
+						Format: types.FindingsExportFormat("CSV"),
+					},
+				},
+				Scopes: &types.ExportScopes{
+					AwsOrganizations: []types.AwsOrganizationScope{
+						{
+							OrganizationId:       ptr.String("__OrganizationId__"),
+							OrganizationalUnitId: ptr.String("__OrganizationalUnitId__"),
+						},
+						{
+							OrganizationId:       ptr.String("__OrganizationId__"),
+							OrganizationalUnitId: ptr.String("__OrganizationalUnitId__"),
+						},
+					},
+				},
+				Destination: &types.ExportDestinationMemberS3{
+					Value: types.S3ExportDestination{
+						BucketArn:    ptr.String("__BucketArn__"),
+						KmsKeyArn:    ptr.String("__KmsKeyArn__"),
+						ObjectPrefix: ptr.String("__ObjectPrefix__"),
+					},
+				},
+				FailureCode:    types.ExportFailureCode("ACCESS_DENIED"),
+				FailureMessage: ptr.String("__FailureMessage__"),
+				StartedAt:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				EndedAt:        ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+			{
+				ExportJobId: ptr.String("__ExportJobId__"),
+				Name:        ptr.String("__Name__"),
+				Status:      types.ExportStatus("RUNNING"),
+				DataType:    types.ExportDataType("FINDINGS"),
+				OutputConfiguration: &types.ExportOutputSummaryMemberFindings{
+					Value: types.FindingsOutputSummary{
+						Format: types.FindingsExportFormat("CSV"),
+					},
+				},
+				Scopes: &types.ExportScopes{
+					AwsOrganizations: []types.AwsOrganizationScope{
+						{
+							OrganizationId:       ptr.String("__OrganizationId__"),
+							OrganizationalUnitId: ptr.String("__OrganizationalUnitId__"),
+						},
+						{
+							OrganizationId:       ptr.String("__OrganizationId__"),
+							OrganizationalUnitId: ptr.String("__OrganizationalUnitId__"),
+						},
+					},
+				},
+				Destination: &types.ExportDestinationMemberS3{
+					Value: types.S3ExportDestination{
+						BucketArn:    ptr.String("__BucketArn__"),
+						KmsKeyArn:    ptr.String("__KmsKeyArn__"),
+						ObjectPrefix: ptr.String("__ObjectPrefix__"),
+					},
+				},
+				FailureCode:    types.ExportFailureCode("ACCESS_DENIED"),
+				FailureMessage: ptr.String("__FailureMessage__"),
+				StartedAt:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				EndedAt:        ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("ListExportJobsV2.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.ListExportJobsV2(context.Background(), &ListExportJobsV2Input{
+		Status:     types.ExportStatus("RUNNING"),
+		DataType:   types.ExportDataType("FINDINGS"),
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "ListExportJobsV2.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_ListExposuresByRemediationV2(t *testing.T) {
+	want := &ListExposuresByRemediationV2Output{
+		Items: []types.ExposureFinding{
+			{
+				MetadataUid:       ptr.String("__MetadataUid__"),
+				Title:             ptr.String("__Title__"),
+				PreviousSeverity:  types.ExposureSeverity("Informational"),
+				ProjectedSeverity: types.ExposureSeverity("Informational"),
+				Impact:            types.ExposureImpact("Reduces"),
+			},
+			{
+				MetadataUid:       ptr.String("__MetadataUid__"),
+				Title:             ptr.String("__Title__"),
+				PreviousSeverity:  types.ExposureSeverity("Informational"),
+				ProjectedSeverity: types.ExposureSeverity("Informational"),
+				Impact:            types.ExposureImpact("Reduces"),
+			},
+		},
+		TargetUid: ptr.String("__TargetUid__"),
+		Resource: &types.RemediationResource{
+			AccountId:              ptr.String("__AccountId__"),
+			Region:                 ptr.String("__Region__"),
+			ResourceOwnerAccountId: ptr.String("__ResourceOwnerAccountId__"),
+			ResourceOwnerOrgId:     ptr.String("__ResourceOwnerOrgId__"),
+			Type:                   ptr.String("__Type__"),
+			Name:                   ptr.String("__Name__"),
+			Id:                     ptr.String("__Id__"),
+			ResourceGuid:           ptr.String("__ResourceGuid__"),
+			ResourceRegion:         ptr.String("__ResourceRegion__"),
+			CloudProvider:          types.CloudProviderName("Azure"),
+		},
+		TotalCount: ptr.Int32(1),
+		Trait: &types.RemediationTrait{
+			Type:  ptr.String("__Type__"),
+			Title: ptr.String("__Title__"),
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("ListExposuresByRemediationV2.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.ListExposuresByRemediationV2(context.Background(), &ListExposuresByRemediationV2Input{
+		TargetUid:  ptr.String("__TargetUid__"),
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "ListExposuresByRemediationV2.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_ListFindingAggregators(t *testing.T) {
 	want := &ListFindingAggregatorsOutput{
 		FindingAggregators: []types.FindingAggregator{
@@ -17847,6 +18675,297 @@ func TestCheckResponseSnapshot_StartConfigurationPolicyDisassociation(t *testing
 	}
 }
 
+func TestCheckResponseSnapshot_StartExportJobV2(t *testing.T) {
+	want := &StartExportJobV2Output{
+		ExportJobId: ptr.String("__ExportJobId__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("StartExportJobV2.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.StartExportJobV2(context.Background(), &StartExportJobV2Input{
+		Name: ptr.String("__Name__"),
+		Destination: &types.ExportDestinationMemberS3{
+			Value: types.S3ExportDestination{
+				BucketArn:    ptr.String("__BucketArn__"),
+				KmsKeyArn:    ptr.String("__KmsKeyArn__"),
+				ObjectPrefix: ptr.String("__ObjectPrefix__"),
+			},
+		},
+		OutputConfiguration: &types.ExportOutputMemberFindings{
+			Value: types.FindingsOutput{
+				Format: types.FindingsExportFormat("CSV"),
+				Filters: &types.OcsfFindingFilters{
+					CompositeFilters: []types.CompositeFilter{
+						{
+							StringFilters: []types.OcsfStringFilter{
+								{
+									FieldName: types.OcsfStringField("metadata.uid"),
+									Filter: &types.StringFilter{
+										Value:      ptr.String("__Value__"),
+										Comparison: types.StringFilterComparison("EQUALS"),
+									},
+								},
+								{
+									FieldName: types.OcsfStringField("metadata.uid"),
+									Filter: &types.StringFilter{
+										Value:      ptr.String("__Value__"),
+										Comparison: types.StringFilterComparison("EQUALS"),
+									},
+								},
+							},
+							DateFilters: []types.OcsfDateFilter{
+								{
+									FieldName: types.OcsfDateField("finding_info.created_time_dt"),
+									Filter: &types.DateFilter{
+										Start: ptr.String("__Start__"),
+										End:   ptr.String("__End__"),
+										DateRange: &types.DateRange{
+											Value:      ptr.Int32(1),
+											Unit:       types.DateRangeUnit("DAYS"),
+											Comparison: types.DateRangeComparison("WITHIN"),
+										},
+									},
+								},
+								{
+									FieldName: types.OcsfDateField("finding_info.created_time_dt"),
+									Filter: &types.DateFilter{
+										Start: ptr.String("__Start__"),
+										End:   ptr.String("__End__"),
+										DateRange: &types.DateRange{
+											Value:      ptr.Int32(1),
+											Unit:       types.DateRangeUnit("DAYS"),
+											Comparison: types.DateRangeComparison("WITHIN"),
+										},
+									},
+								},
+							},
+							BooleanFilters: []types.OcsfBooleanFilter{
+								{
+									FieldName: types.OcsfBooleanField("compliance.assessments.meets_criteria"),
+									Filter: &types.BooleanFilter{
+										Value: ptr.Bool(true),
+									},
+								},
+								{
+									FieldName: types.OcsfBooleanField("compliance.assessments.meets_criteria"),
+									Filter: &types.BooleanFilter{
+										Value: ptr.Bool(true),
+									},
+								},
+							},
+							NumberFilters: []types.OcsfNumberFilter{
+								{
+									FieldName: types.OcsfNumberField("activity_id"),
+									Filter: &types.NumberFilter{
+										Gte: ptr.Float64(1.0),
+										Lte: ptr.Float64(1.0),
+										Eq:  ptr.Float64(1.0),
+										Gt:  ptr.Float64(1.0),
+										Lt:  ptr.Float64(1.0),
+									},
+								},
+								{
+									FieldName: types.OcsfNumberField("activity_id"),
+									Filter: &types.NumberFilter{
+										Gte: ptr.Float64(1.0),
+										Lte: ptr.Float64(1.0),
+										Eq:  ptr.Float64(1.0),
+										Gt:  ptr.Float64(1.0),
+										Lt:  ptr.Float64(1.0),
+									},
+								},
+							},
+							MapFilters: []types.OcsfMapFilter{
+								{
+									FieldName: types.OcsfMapField("resources.tags"),
+									Filter: &types.MapFilter{
+										Key:        ptr.String("__Key__"),
+										Value:      ptr.String("__Value__"),
+										Comparison: types.MapFilterComparison("EQUALS"),
+									},
+								},
+								{
+									FieldName: types.OcsfMapField("resources.tags"),
+									Filter: &types.MapFilter{
+										Key:        ptr.String("__Key__"),
+										Value:      ptr.String("__Value__"),
+										Comparison: types.MapFilterComparison("EQUALS"),
+									},
+								},
+							},
+							IpFilters: []types.OcsfIpFilter{
+								{
+									FieldName: types.OcsfIpField("evidences.dst_endpoint.ip"),
+									Filter: &types.IpFilter{
+										Cidr: ptr.String("__Cidr__"),
+									},
+								},
+								{
+									FieldName: types.OcsfIpField("evidences.dst_endpoint.ip"),
+									Filter: &types.IpFilter{
+										Cidr: ptr.String("__Cidr__"),
+									},
+								},
+							},
+							NestedCompositeFilters: []types.CompositeFilter{
+								{},
+								{},
+							},
+							Operator: types.AllowedOperators("AND"),
+						},
+						{
+							StringFilters: []types.OcsfStringFilter{
+								{
+									FieldName: types.OcsfStringField("metadata.uid"),
+									Filter: &types.StringFilter{
+										Value:      ptr.String("__Value__"),
+										Comparison: types.StringFilterComparison("EQUALS"),
+									},
+								},
+								{
+									FieldName: types.OcsfStringField("metadata.uid"),
+									Filter: &types.StringFilter{
+										Value:      ptr.String("__Value__"),
+										Comparison: types.StringFilterComparison("EQUALS"),
+									},
+								},
+							},
+							DateFilters: []types.OcsfDateFilter{
+								{
+									FieldName: types.OcsfDateField("finding_info.created_time_dt"),
+									Filter: &types.DateFilter{
+										Start: ptr.String("__Start__"),
+										End:   ptr.String("__End__"),
+										DateRange: &types.DateRange{
+											Value:      ptr.Int32(1),
+											Unit:       types.DateRangeUnit("DAYS"),
+											Comparison: types.DateRangeComparison("WITHIN"),
+										},
+									},
+								},
+								{
+									FieldName: types.OcsfDateField("finding_info.created_time_dt"),
+									Filter: &types.DateFilter{
+										Start: ptr.String("__Start__"),
+										End:   ptr.String("__End__"),
+										DateRange: &types.DateRange{
+											Value:      ptr.Int32(1),
+											Unit:       types.DateRangeUnit("DAYS"),
+											Comparison: types.DateRangeComparison("WITHIN"),
+										},
+									},
+								},
+							},
+							BooleanFilters: []types.OcsfBooleanFilter{
+								{
+									FieldName: types.OcsfBooleanField("compliance.assessments.meets_criteria"),
+									Filter: &types.BooleanFilter{
+										Value: ptr.Bool(true),
+									},
+								},
+								{
+									FieldName: types.OcsfBooleanField("compliance.assessments.meets_criteria"),
+									Filter: &types.BooleanFilter{
+										Value: ptr.Bool(true),
+									},
+								},
+							},
+							NumberFilters: []types.OcsfNumberFilter{
+								{
+									FieldName: types.OcsfNumberField("activity_id"),
+									Filter: &types.NumberFilter{
+										Gte: ptr.Float64(1.0),
+										Lte: ptr.Float64(1.0),
+										Eq:  ptr.Float64(1.0),
+										Gt:  ptr.Float64(1.0),
+										Lt:  ptr.Float64(1.0),
+									},
+								},
+								{
+									FieldName: types.OcsfNumberField("activity_id"),
+									Filter: &types.NumberFilter{
+										Gte: ptr.Float64(1.0),
+										Lte: ptr.Float64(1.0),
+										Eq:  ptr.Float64(1.0),
+										Gt:  ptr.Float64(1.0),
+										Lt:  ptr.Float64(1.0),
+									},
+								},
+							},
+							MapFilters: []types.OcsfMapFilter{
+								{
+									FieldName: types.OcsfMapField("resources.tags"),
+									Filter: &types.MapFilter{
+										Key:        ptr.String("__Key__"),
+										Value:      ptr.String("__Value__"),
+										Comparison: types.MapFilterComparison("EQUALS"),
+									},
+								},
+								{
+									FieldName: types.OcsfMapField("resources.tags"),
+									Filter: &types.MapFilter{
+										Key:        ptr.String("__Key__"),
+										Value:      ptr.String("__Value__"),
+										Comparison: types.MapFilterComparison("EQUALS"),
+									},
+								},
+							},
+							IpFilters: []types.OcsfIpFilter{
+								{
+									FieldName: types.OcsfIpField("evidences.dst_endpoint.ip"),
+									Filter: &types.IpFilter{
+										Cidr: ptr.String("__Cidr__"),
+									},
+								},
+								{
+									FieldName: types.OcsfIpField("evidences.dst_endpoint.ip"),
+									Filter: &types.IpFilter{
+										Cidr: ptr.String("__Cidr__"),
+									},
+								},
+							},
+							NestedCompositeFilters: []types.CompositeFilter{
+								{},
+								{},
+							},
+							Operator: types.AllowedOperators("AND"),
+						},
+					},
+					CompositeOperator: types.AllowedOperators("AND"),
+				},
+				SelectedFields: []types.FindingsSelectableField{
+					types.FindingsSelectableField("metadata.uid"),
+					types.FindingsSelectableField("metadata.uid"),
+				},
+			},
+		},
+		Scopes: &types.ExportScopes{
+			AwsOrganizations: []types.AwsOrganizationScope{
+				{
+					OrganizationId:       ptr.String("__OrganizationId__"),
+					OrganizationalUnitId: ptr.String("__OrganizationalUnitId__"),
+				},
+				{
+					OrganizationId:       ptr.String("__OrganizationId__"),
+					OrganizationalUnitId: ptr.String("__OrganizationalUnitId__"),
+				},
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "StartExportJobV2.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_TagResource(t *testing.T) {
 	want := &TagResourceOutput{}
 	status, header, body, err := serdeRespReadSnapshot("TagResource.response")
@@ -18221,6 +19340,9 @@ func TestCheckResponseSnapshot_UpdateAutomationRuleV2(t *testing.T) {
 				ExternalIntegrationConfiguration: &types.ExternalIntegrationConfiguration{
 					ConnectorArn: ptr.String("__ConnectorArn__"),
 				},
+				ResourceFieldsUpdate: &types.AutomationRulesResourceFieldsUpdateV2{
+					Criticality: types.ResourceCriticality("Very High"),
+				},
 			},
 			{
 				Type: types.AutomationRulesActionTypeV2("FINDING_FIELDS_UPDATE"),
@@ -18231,6 +19353,9 @@ func TestCheckResponseSnapshot_UpdateAutomationRuleV2(t *testing.T) {
 				},
 				ExternalIntegrationConfiguration: &types.ExternalIntegrationConfiguration{
 					ConnectorArn: ptr.String("__ConnectorArn__"),
+				},
+				ResourceFieldsUpdate: &types.AutomationRulesResourceFieldsUpdateV2{
+					Criticality: types.ResourceCriticality("Very High"),
 				},
 			},
 		},

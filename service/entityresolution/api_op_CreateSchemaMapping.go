@@ -4,7 +4,9 @@ package entityresolution
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/entityresolution/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/entityresolution/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -51,6 +53,23 @@ type CreateSchemaMappingInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateSchemaMappingInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateSchemaMappingInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateSchemaMappingInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.CreateSchemaMappingInput_description, *v.Description)
+	}
+	serializeSchemaInputAttributes(s, schemas.CreateSchemaMappingInput_mappedInputFields, v.MappedInputFields)
+	if v.SchemaName != nil {
+		s.WriteString(schemas.CreateSchemaMappingInput_schemaName, *v.SchemaName)
+	}
+	serializeTagMap(s, schemas.CreateSchemaMappingInput_tags, v.Tags)
+}
+
 type CreateSchemaMappingOutput struct {
 
 	// A description of the schema.
@@ -82,13 +101,47 @@ type CreateSchemaMappingOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateSchemaMappingOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateSchemaMappingOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateSchemaMappingOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.CreateSchemaMappingOutput_description, *v.Description)
+	}
+	serializeSchemaInputAttributes(s, schemas.CreateSchemaMappingOutput_mappedInputFields, v.MappedInputFields)
+	if v.SchemaArn != nil {
+		s.WriteString(schemas.CreateSchemaMappingOutput_schemaArn, *v.SchemaArn)
+	}
+	if v.SchemaName != nil {
+		s.WriteString(schemas.CreateSchemaMappingOutput_schemaName, *v.SchemaName)
+	}
+}
+func (v *CreateSchemaMappingOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateSchemaMappingOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateSchemaMappingOutput_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.CreateSchemaMappingOutput_description, v.Description)
+		case schemas.CreateSchemaMappingOutput_mappedInputFields:
+			return deserializeSchemaInputAttributes(d, schemas.CreateSchemaMappingOutput_mappedInputFields, &v.MappedInputFields)
+		case schemas.CreateSchemaMappingOutput_schemaArn:
+			v.SchemaArn = new(string)
+			return d.ReadString(schemas.CreateSchemaMappingOutput_schemaArn, v.SchemaArn)
+		case schemas.CreateSchemaMappingOutput_schemaName:
+			v.SchemaName = new(string)
+			return d.ReadString(schemas.CreateSchemaMappingOutput_schemaName, v.SchemaName)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateSchemaMappingMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateSchemaMapping{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateSchemaMapping, schemas.CreateSchemaMappingInput, schemas.CreateSchemaMappingOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateSchemaMapping{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateSchemaMapping, schemas.CreateSchemaMappingInput, schemas.CreateSchemaMappingOutput), output: &CreateSchemaMappingOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

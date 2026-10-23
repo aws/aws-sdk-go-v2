@@ -1,0 +1,5 @@
+POST /
+
+Content-Type: application/x-www-form-urlencoded
+
+Action=PrepareMigration&CustomerNodeEndpointList.member.1.Address=__Address__&CustomerNodeEndpointList.member.1.Port=1&CustomerNodeEndpointList.member.2.Address=__Address__&CustomerNodeEndpointList.member.2.Port=1&ServerlessCacheName=__ServerlessCacheName__&SourceAuthenticationConfiguration.SecretManagerConfig.SecretArn=__SecretArn__&SourceTlsConfiguration.SourceTlsCertificate=__SourceTlsCertificate__&SourceTlsConfiguration.SourceTlsMode=none&Version=2015-02-02

@@ -4,7 +4,9 @@ package quicksight
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/quicksight/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/quicksight/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,21 @@ type DescribeAppInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeAppInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeAppRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeAppInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AppId != nil {
+		s.WriteString(schemas.DescribeAppRequest_AppId, *v.AppId)
+	}
+	if v.AwsAccountId != nil {
+		s.WriteString(schemas.DescribeAppRequest_AwsAccountId, *v.AwsAccountId)
+	}
+}
+
 type DescribeAppOutput struct {
 
 	// The information about the app.
@@ -55,13 +72,40 @@ type DescribeAppOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeAppOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeAppResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeAppOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.App != nil {
+		s.WriteStruct(schemas.DescribeAppResponse_App)
+		v.App.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RequestId != nil {
+		s.WriteString(schemas.DescribeAppResponse_RequestId, *v.RequestId)
+	}
+}
+func (v *DescribeAppOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeAppResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeAppResponse_App:
+			v.App = &types.AppSummary{}
+			return v.App.Deserialize(d)
+		case schemas.DescribeAppResponse_RequestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.DescribeAppResponse_RequestId, v.RequestId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeAppMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeApp{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeApp, schemas.DescribeAppRequest, schemas.DescribeAppResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeApp{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeApp, schemas.DescribeAppRequest, schemas.DescribeAppResponse), output: &DescribeAppOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

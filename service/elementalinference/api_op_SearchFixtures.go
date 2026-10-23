@@ -5,7 +5,9 @@ package elementalinference
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/elementalinference/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/elementalinference/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -81,6 +83,31 @@ type SearchFixturesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SearchFixturesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SearchFixturesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SearchFixturesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EndDate != nil {
+		s.WriteString(schemas.SearchFixturesRequest_endDate, *v.EndDate)
+	}
+	serializeSearchFilterList(s, schemas.SearchFixturesRequest_filters, v.Filters)
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.SearchFixturesRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.SearchFixturesRequest_nextToken, *v.NextToken)
+	}
+	if v.Sport != "" {
+		s.WriteString(schemas.SearchFixturesRequest_sport, string(v.Sport))
+	}
+	if v.StartDate != nil {
+		s.WriteString(schemas.SearchFixturesRequest_startDate, *v.StartDate)
+	}
+}
+
 type SearchFixturesOutput struct {
 
 	// An array of FixtureSummary objects, one for each fixture that matches the
@@ -102,13 +129,35 @@ type SearchFixturesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SearchFixturesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SearchFixturesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SearchFixturesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeFixtureSummaryList(s, schemas.SearchFixturesResponse_fixtures, v.Fixtures)
+	if v.NextToken != nil {
+		s.WriteString(schemas.SearchFixturesResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *SearchFixturesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SearchFixturesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SearchFixturesResponse_fixtures:
+			return deserializeFixtureSummaryList(d, schemas.SearchFixturesResponse_fixtures, &v.Fixtures)
+		case schemas.SearchFixturesResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.SearchFixturesResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationSearchFixturesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpSearchFixtures{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SearchFixtures, schemas.SearchFixturesRequest, schemas.SearchFixturesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpSearchFixtures{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SearchFixtures, schemas.SearchFixturesRequest, schemas.SearchFixturesResponse), output: &SearchFixturesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

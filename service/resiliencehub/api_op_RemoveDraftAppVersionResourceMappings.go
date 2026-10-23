@@ -4,6 +4,8 @@ package resiliencehub
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/resiliencehub/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -62,6 +64,46 @@ type RemoveDraftAppVersionResourceMappingsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RemoveDraftAppVersionResourceMappingsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RemoveDraftAppVersionResourceMappingsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RemoveDraftAppVersionResourceMappingsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AppArn != nil {
+		s.WriteString(schemas.RemoveDraftAppVersionResourceMappingsRequest_appArn, *v.AppArn)
+	}
+	serializeEntityNameList(s, schemas.RemoveDraftAppVersionResourceMappingsRequest_appRegistryAppNames, v.AppRegistryAppNames)
+	serializeString255List(s, schemas.RemoveDraftAppVersionResourceMappingsRequest_eksSourceNames, v.EksSourceNames)
+	serializeString255List(s, schemas.RemoveDraftAppVersionResourceMappingsRequest_logicalStackNames, v.LogicalStackNames)
+	serializeEntityNameList(s, schemas.RemoveDraftAppVersionResourceMappingsRequest_resourceGroupNames, v.ResourceGroupNames)
+	serializeEntityNameList(s, schemas.RemoveDraftAppVersionResourceMappingsRequest_resourceNames, v.ResourceNames)
+	serializeString255List(s, schemas.RemoveDraftAppVersionResourceMappingsRequest_terraformSourceNames, v.TerraformSourceNames)
+}
+func (v *RemoveDraftAppVersionResourceMappingsInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RemoveDraftAppVersionResourceMappingsRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RemoveDraftAppVersionResourceMappingsRequest_appArn:
+			v.AppArn = new(string)
+			return d.ReadString(schemas.RemoveDraftAppVersionResourceMappingsRequest_appArn, v.AppArn)
+		case schemas.RemoveDraftAppVersionResourceMappingsRequest_appRegistryAppNames:
+			return deserializeEntityNameList(d, schemas.RemoveDraftAppVersionResourceMappingsRequest_appRegistryAppNames, &v.AppRegistryAppNames)
+		case schemas.RemoveDraftAppVersionResourceMappingsRequest_eksSourceNames:
+			return deserializeString255List(d, schemas.RemoveDraftAppVersionResourceMappingsRequest_eksSourceNames, &v.EksSourceNames)
+		case schemas.RemoveDraftAppVersionResourceMappingsRequest_logicalStackNames:
+			return deserializeString255List(d, schemas.RemoveDraftAppVersionResourceMappingsRequest_logicalStackNames, &v.LogicalStackNames)
+		case schemas.RemoveDraftAppVersionResourceMappingsRequest_resourceGroupNames:
+			return deserializeEntityNameList(d, schemas.RemoveDraftAppVersionResourceMappingsRequest_resourceGroupNames, &v.ResourceGroupNames)
+		case schemas.RemoveDraftAppVersionResourceMappingsRequest_resourceNames:
+			return deserializeEntityNameList(d, schemas.RemoveDraftAppVersionResourceMappingsRequest_resourceNames, &v.ResourceNames)
+		case schemas.RemoveDraftAppVersionResourceMappingsRequest_terraformSourceNames:
+			return deserializeString255List(d, schemas.RemoveDraftAppVersionResourceMappingsRequest_terraformSourceNames, &v.TerraformSourceNames)
+		}
+		return nil
+	})
+}
+
 type RemoveDraftAppVersionResourceMappingsOutput struct {
 
 	// Amazon Resource Name (ARN) of the Resilience Hub application. The format for
@@ -81,13 +123,38 @@ type RemoveDraftAppVersionResourceMappingsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RemoveDraftAppVersionResourceMappingsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RemoveDraftAppVersionResourceMappingsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RemoveDraftAppVersionResourceMappingsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AppArn != nil {
+		s.WriteString(schemas.RemoveDraftAppVersionResourceMappingsResponse_appArn, *v.AppArn)
+	}
+	if v.AppVersion != nil {
+		s.WriteString(schemas.RemoveDraftAppVersionResourceMappingsResponse_appVersion, *v.AppVersion)
+	}
+}
+func (v *RemoveDraftAppVersionResourceMappingsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RemoveDraftAppVersionResourceMappingsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RemoveDraftAppVersionResourceMappingsResponse_appArn:
+			v.AppArn = new(string)
+			return d.ReadString(schemas.RemoveDraftAppVersionResourceMappingsResponse_appArn, v.AppArn)
+		case schemas.RemoveDraftAppVersionResourceMappingsResponse_appVersion:
+			v.AppVersion = new(string)
+			return d.ReadString(schemas.RemoveDraftAppVersionResourceMappingsResponse_appVersion, v.AppVersion)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationRemoveDraftAppVersionResourceMappingsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpRemoveDraftAppVersionResourceMappings{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RemoveDraftAppVersionResourceMappings, schemas.RemoveDraftAppVersionResourceMappingsRequest, schemas.RemoveDraftAppVersionResourceMappingsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpRemoveDraftAppVersionResourceMappings{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RemoveDraftAppVersionResourceMappings, schemas.RemoveDraftAppVersionResourceMappingsRequest, schemas.RemoveDraftAppVersionResourceMappingsResponse), output: &RemoveDraftAppVersionResourceMappingsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

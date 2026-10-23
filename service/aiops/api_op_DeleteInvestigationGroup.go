@@ -4,6 +4,8 @@ package aiops
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/aiops/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -37,6 +39,18 @@ type DeleteInvestigationGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteInvestigationGroupInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteInvestigationGroupRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteInvestigationGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Identifier != nil {
+		s.WriteString(schemas.DeleteInvestigationGroupRequest_identifier, *v.Identifier)
+	}
+}
+
 type DeleteInvestigationGroupOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -44,13 +58,26 @@ type DeleteInvestigationGroupOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteInvestigationGroupOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteInvestigationGroupOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteInvestigationGroupOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteInvestigationGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteInvestigationGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteInvestigationGroup, schemas.DeleteInvestigationGroupRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteInvestigationGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteInvestigationGroup, schemas.DeleteInvestigationGroupRequest, nil), output: &DeleteInvestigationGroupOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

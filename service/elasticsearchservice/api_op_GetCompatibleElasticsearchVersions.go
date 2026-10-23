@@ -4,7 +4,9 @@ package elasticsearchservice
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/elasticsearchservice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/elasticsearchservice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,18 @@ type GetCompatibleElasticsearchVersionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetCompatibleElasticsearchVersionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetCompatibleElasticsearchVersionsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetCompatibleElasticsearchVersionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DomainName != nil {
+		s.WriteString(schemas.GetCompatibleElasticsearchVersionsRequest_DomainName, *v.DomainName)
+	}
+}
+
 // Container for response returned by GetCompatibleElasticsearchVersions operation.
 type GetCompatibleElasticsearchVersionsOutput struct {
 
@@ -51,13 +65,29 @@ type GetCompatibleElasticsearchVersionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetCompatibleElasticsearchVersionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetCompatibleElasticsearchVersionsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetCompatibleElasticsearchVersionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeCompatibleElasticsearchVersionsList(s, schemas.GetCompatibleElasticsearchVersionsResponse_CompatibleElasticsearchVersions, v.CompatibleElasticsearchVersions)
+}
+func (v *GetCompatibleElasticsearchVersionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetCompatibleElasticsearchVersionsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetCompatibleElasticsearchVersionsResponse_CompatibleElasticsearchVersions:
+			return deserializeCompatibleElasticsearchVersionsList(d, schemas.GetCompatibleElasticsearchVersionsResponse_CompatibleElasticsearchVersions, &v.CompatibleElasticsearchVersions)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetCompatibleElasticsearchVersionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetCompatibleElasticsearchVersions{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetCompatibleElasticsearchVersions, schemas.GetCompatibleElasticsearchVersionsRequest, schemas.GetCompatibleElasticsearchVersionsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetCompatibleElasticsearchVersions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetCompatibleElasticsearchVersions, schemas.GetCompatibleElasticsearchVersionsRequest, schemas.GetCompatibleElasticsearchVersionsResponse), output: &GetCompatibleElasticsearchVersionsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -456,7 +456,7 @@ var ActionExecutionInput_namespace *smithy.Schema
 var ActionExecutionNotFoundException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codepipeline",
 	Name:      "ActionExecutionNotFoundException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var ActionExecutionNotFoundException_message *smithy.Schema
 
 var ActionExecutionOutput = smithy.NewSchema(smithy.ShapeID{
@@ -513,7 +513,7 @@ var _ActionNamespace = smithy.NewSchema(smithy.ShapeID{
 var ActionNotFoundException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codepipeline",
 	Name:      "ActionNotFoundException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var ActionNotFoundException_message *smithy.Schema
 
 var ActionOwner = smithy.NewSchema(smithy.ShapeID{
@@ -663,7 +663,7 @@ var _ActionTypeList_member *smithy.Schema
 var ActionTypeNotFoundException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codepipeline",
 	Name:      "ActionTypeNotFoundException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var ActionTypeNotFoundException_message *smithy.Schema
 
 var _ActionTypeOwner = smithy.NewSchema(smithy.ShapeID{
@@ -737,7 +737,7 @@ var _AllowedAccounts_member *smithy.Schema
 var ApprovalAlreadyCompletedException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codepipeline",
 	Name:      "ApprovalAlreadyCompletedException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var ApprovalAlreadyCompletedException_message *smithy.Schema
 
 var ApprovalResult = smithy.NewSchema(smithy.ShapeID{
@@ -953,13 +953,13 @@ var _CommandList_member *smithy.Schema
 var ConcurrentModificationException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codepipeline",
 	Name:      "ConcurrentModificationException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var ConcurrentModificationException_message *smithy.Schema
 
 var ConcurrentPipelineExecutionsLimitExceededException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codepipeline",
 	Name:      "ConcurrentPipelineExecutionsLimitExceededException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var ConcurrentPipelineExecutionsLimitExceededException_message *smithy.Schema
 
 var Condition = smithy.NewSchema(smithy.ShapeID{
@@ -1007,7 +1007,7 @@ var _ConditionList_member *smithy.Schema
 var ConditionNotOverridableException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codepipeline",
 	Name:      "ConditionNotOverridableException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var ConditionNotOverridableException_message *smithy.Schema
 
 var ConditionState = smithy.NewSchema(smithy.ShapeID{
@@ -1035,7 +1035,8 @@ var ConditionType_ON_SUCCESS *smithy.Schema
 var ConflictException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codepipeline",
 	Name:      "ConflictException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 409})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 409})
 var ConflictException_message *smithy.Schema
 
 var _ContinuationToken = smithy.NewSchema(smithy.ShapeID{
@@ -1118,7 +1119,7 @@ var _DisabledReason = smithy.NewSchema(smithy.ShapeID{
 var DuplicatedStopRequestException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codepipeline",
 	Name:      "DuplicatedStopRequestException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var DuplicatedStopRequestException_message *smithy.Schema
 
 var _Enabled = smithy.NewSchema(smithy.ShapeID{
@@ -1436,85 +1437,85 @@ var _InputArtifactList_member *smithy.Schema
 var InvalidActionDeclarationException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codepipeline",
 	Name:      "InvalidActionDeclarationException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var InvalidActionDeclarationException_message *smithy.Schema
 
 var InvalidApprovalTokenException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codepipeline",
 	Name:      "InvalidApprovalTokenException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var InvalidApprovalTokenException_message *smithy.Schema
 
 var InvalidArnException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codepipeline",
 	Name:      "InvalidArnException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var InvalidArnException_message *smithy.Schema
 
 var InvalidBlockerDeclarationException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codepipeline",
 	Name:      "InvalidBlockerDeclarationException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var InvalidBlockerDeclarationException_message *smithy.Schema
 
 var InvalidClientTokenException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codepipeline",
 	Name:      "InvalidClientTokenException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var InvalidClientTokenException_message *smithy.Schema
 
 var InvalidJobException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codepipeline",
 	Name:      "InvalidJobException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var InvalidJobException_message *smithy.Schema
 
 var InvalidJobStateException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codepipeline",
 	Name:      "InvalidJobStateException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var InvalidJobStateException_message *smithy.Schema
 
 var InvalidNextTokenException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codepipeline",
 	Name:      "InvalidNextTokenException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var InvalidNextTokenException_message *smithy.Schema
 
 var InvalidNonceException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codepipeline",
 	Name:      "InvalidNonceException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var InvalidNonceException_message *smithy.Schema
 
 var InvalidStageDeclarationException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codepipeline",
 	Name:      "InvalidStageDeclarationException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var InvalidStageDeclarationException_message *smithy.Schema
 
 var InvalidStructureException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codepipeline",
 	Name:      "InvalidStructureException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var InvalidStructureException_message *smithy.Schema
 
 var InvalidTagsException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codepipeline",
 	Name:      "InvalidTagsException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var InvalidTagsException_message *smithy.Schema
 
 var InvalidWebhookAuthenticationParametersException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codepipeline",
 	Name:      "InvalidWebhookAuthenticationParametersException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var InvalidWebhookAuthenticationParametersException_message *smithy.Schema
 
 var InvalidWebhookFilterPatternException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codepipeline",
 	Name:      "InvalidWebhookFilterPatternException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var InvalidWebhookFilterPatternException_message *smithy.Schema
 
 var Job = smithy.NewSchema(smithy.ShapeID{
@@ -1573,7 +1574,7 @@ var _JobList_member *smithy.Schema
 var JobNotFoundException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codepipeline",
 	Name:      "JobNotFoundException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var JobNotFoundException_message *smithy.Schema
 
 var JobStatus = smithy.NewSchema(smithy.ShapeID{
@@ -1649,7 +1650,7 @@ var LatestInPipelineExecutionFilter_startTimeRange *smithy.Schema
 var LimitExceededException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codepipeline",
 	Name:      "LimitExceededException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var LimitExceededException_message *smithy.Schema
 
 var ListWebhookItem = smithy.NewSchema(smithy.ShapeID{
@@ -1733,7 +1734,7 @@ var _Nonce = smithy.NewSchema(smithy.ShapeID{
 var NotLatestPipelineExecutionException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codepipeline",
 	Name:      "NotLatestPipelineExecutionException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var NotLatestPipelineExecutionException_message *smithy.Schema
 
 var OutputArtifact = smithy.NewSchema(smithy.ShapeID{
@@ -1777,7 +1778,7 @@ var _OutputVariablesMap_value *smithy.Schema
 var OutputVariablesSizeExceededException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codepipeline",
 	Name:      "OutputVariablesSizeExceededException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var OutputVariablesSizeExceededException_message *smithy.Schema
 
 var _OutputVariablesValue = smithy.NewSchema(smithy.ShapeID{
@@ -1873,19 +1874,19 @@ var _PipelineExecutionId = smithy.NewSchema(smithy.ShapeID{
 var PipelineExecutionNotFoundException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codepipeline",
 	Name:      "PipelineExecutionNotFoundException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var PipelineExecutionNotFoundException_message *smithy.Schema
 
 var PipelineExecutionNotStoppableException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codepipeline",
 	Name:      "PipelineExecutionNotStoppableException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var PipelineExecutionNotStoppableException_message *smithy.Schema
 
 var PipelineExecutionOutdatedException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codepipeline",
 	Name:      "PipelineExecutionOutdatedException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var PipelineExecutionOutdatedException_message *smithy.Schema
 
 var PipelineExecutionStatus = smithy.NewSchema(smithy.ShapeID{
@@ -1969,13 +1970,13 @@ var _PipelineName = smithy.NewSchema(smithy.ShapeID{
 var PipelineNameInUseException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codepipeline",
 	Name:      "PipelineNameInUseException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var PipelineNameInUseException_message *smithy.Schema
 
 var PipelineNotFoundException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codepipeline",
 	Name:      "PipelineNotFoundException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var PipelineNotFoundException_message *smithy.Schema
 
 var PipelineRollbackMetadata = smithy.NewSchema(smithy.ShapeID{
@@ -2087,7 +2088,7 @@ var _PipelineVersion = smithy.NewSchema(smithy.ShapeID{
 var PipelineVersionNotFoundException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codepipeline",
 	Name:      "PipelineVersionNotFoundException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var PipelineVersionNotFoundException_message *smithy.Schema
 
 var _PolicyStatementsTemplate = smithy.NewSchema(smithy.ShapeID{
@@ -2123,7 +2124,7 @@ var _QueryParamMap_value *smithy.Schema
 var RequestFailedException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codepipeline",
 	Name:      "RequestFailedException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var RequestFailedException_message *smithy.Schema
 
 var _ResolvedActionConfigurationMap = smithy.NewSchema(smithy.ShapeID{
@@ -2164,7 +2165,7 @@ var _ResourceArn = smithy.NewSchema(smithy.ShapeID{
 var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codepipeline",
 	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var ResourceNotFoundException_message *smithy.Schema
 
 var Result = smithy.NewSchema(smithy.ShapeID{
@@ -2712,13 +2713,13 @@ var _StageName = smithy.NewSchema(smithy.ShapeID{
 var StageNotFoundException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codepipeline",
 	Name:      "StageNotFoundException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var StageNotFoundException_message *smithy.Schema
 
 var StageNotRetryableException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codepipeline",
 	Name:      "StageNotRetryableException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var StageNotRetryableException_message *smithy.Schema
 
 var StageRetryMode = smithy.NewSchema(smithy.ShapeID{
@@ -2926,7 +2927,7 @@ var _Timestamp = smithy.NewSchema(smithy.ShapeID{
 var TooManyTagsException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codepipeline",
 	Name:      "TooManyTagsException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var TooManyTagsException_message *smithy.Schema
 
 var TransitionState = smithy.NewSchema(smithy.ShapeID{
@@ -2971,7 +2972,7 @@ var TriggerType_AutomatedRollback *smithy.Schema
 var UnableToRollbackStageException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codepipeline",
 	Name:      "UnableToRollbackStageException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var UnableToRollbackStageException_message *smithy.Schema
 
 var _Url = smithy.NewSchema(smithy.ShapeID{
@@ -2987,7 +2988,7 @@ var _UrlTemplate = smithy.NewSchema(smithy.ShapeID{
 var ValidationException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codepipeline",
 	Name:      "ValidationException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var ValidationException_message *smithy.Schema
 
 var _Version = smithy.NewSchema(smithy.ShapeID{
@@ -3087,7 +3088,7 @@ var _WebhookName = smithy.NewSchema(smithy.ShapeID{
 var WebhookNotFoundException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codepipeline",
 	Name:      "WebhookNotFoundException",
-}, smithy.ShapeTypeStructure, 0)
+}, smithy.ShapeTypeStructure, 0, &smithytraits.Error{Type: "client"})
 
 var _WebhookUrl = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codepipeline",

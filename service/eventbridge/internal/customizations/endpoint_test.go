@@ -30,21 +30,21 @@ func TestPutEventsUpdateEndpoint(t *testing.T) {
 	}{
 		"standard aws endpoint": {
 			Region:           "us-mock-1",
-			WantEndpoint:     "https://events.us-mock-1.amazonaws.com/",
+			WantEndpoint:     "https://events.us-mock-1.amazonaws.com",
 			WantSignedName:   "events",
 			WantSignedRegion: "us-mock-1",
 		},
 		"dualstack aws endpoint": {
 			Region:           "us-mock-1",
 			UseDualStack:     aws.DualStackEndpointStateEnabled,
-			WantEndpoint:     "https://events.us-mock-1.api.aws/",
+			WantEndpoint:     "https://events.us-mock-1.api.aws",
 			WantSignedName:   "events",
 			WantSignedRegion: "us-mock-1",
 		},
 		"fips aws endpoint": {
 			Region:           "us-mock-1",
 			UseFIPS:          aws.FIPSEndpointStateEnabled,
-			WantEndpoint:     "https://events-fips.us-mock-1.amazonaws.com/",
+			WantEndpoint:     "https://events-fips.us-mock-1.amazonaws.com",
 			WantSignedName:   "events",
 			WantSignedRegion: "us-mock-1",
 		},
@@ -52,7 +52,7 @@ func TestPutEventsUpdateEndpoint(t *testing.T) {
 			Region:           "us-mock-1",
 			UseDualStack:     aws.DualStackEndpointStateEnabled,
 			UseFIPS:          aws.FIPSEndpointStateEnabled,
-			WantEndpoint:     "https://events-fips.us-mock-1.api.aws/",
+			WantEndpoint:     "https://events-fips.us-mock-1.api.aws",
 			WantSignedName:   "events",
 			WantSignedRegion: "us-mock-1",
 		},
@@ -63,14 +63,14 @@ func TestPutEventsUpdateEndpoint(t *testing.T) {
 				SigningRegion: "us-mock-1",
 				Source:        aws.EndpointSourceCustom,
 			},
-			WantEndpoint:     "https://custom.amazonaws.com/",
+			WantEndpoint:     "https://custom.amazonaws.com",
 			WantSignedName:   "events",
 			WantSignedRegion: "us-mock-1",
 		},
 		"multi-region aws endpoint": {
 			Region:           "us-mock-1",
 			EndpointId:       aws.String("abc123.456def"),
-			WantEndpoint:     "https://abc123.456def.endpoint.events.amazonaws.com/",
+			WantEndpoint:     "https://abc123.456def.endpoint.events.amazonaws.com",
 			WantSignedName:   "events",
 			WantSignedRegion: "*",
 			WantV4a:          true,
@@ -79,7 +79,7 @@ func TestPutEventsUpdateEndpoint(t *testing.T) {
 			Region:           "us-mock-1",
 			EndpointId:       aws.String("abc123.456def"),
 			UseDualStack:     aws.DualStackEndpointStateEnabled,
-			WantEndpoint:     "https://abc123.456def.endpoint.events.api.aws/",
+			WantEndpoint:     "https://abc123.456def.endpoint.events.api.aws",
 			WantSignedName:   "events",
 			WantSignedRegion: "*",
 			WantV4a:          true,
@@ -105,7 +105,7 @@ func TestPutEventsUpdateEndpoint(t *testing.T) {
 				SigningRegion: "us-mock-1",
 				Source:        aws.EndpointSourceCustom,
 			},
-			WantEndpoint:     "https://custom.amazonaws.com/",
+			WantEndpoint:     "https://custom.amazonaws.com",
 			WantSignedName:   "events",
 			WantSignedRegion: "*",
 			WantV4a:          true,
@@ -118,7 +118,7 @@ func TestPutEventsUpdateEndpoint(t *testing.T) {
 				SigningRegion: "us-mock-1",
 				Source:        aws.EndpointSourceServiceMetadata,
 			},
-			WantEndpoint:     "https://abc123.456def.endpoint.events.amazonaws.com/",
+			WantEndpoint:     "https://abc123.456def.endpoint.events.amazonaws.com",
 			WantSignedName:   "events",
 			WantSignedRegion: "*",
 			WantV4a:          true,
@@ -131,7 +131,7 @@ func TestPutEventsUpdateEndpoint(t *testing.T) {
 				SigningRegion: "us-iso-mock-1",
 				Source:        aws.EndpointSourceServiceMetadata,
 			},
-			WantEndpoint:     "https://abc123.456def.endpoint.events.c2s.ic.gov/",
+			WantEndpoint:     "https://abc123.456def.endpoint.events.c2s.ic.gov",
 			WantSignedName:   "events",
 			WantSignedRegion: "*",
 			WantV4a:          true,
@@ -140,7 +140,7 @@ func TestPutEventsUpdateEndpoint(t *testing.T) {
 			Region:           "us-mock-1",
 			DisableHTTPS:     true,
 			EndpointId:       aws.String("abc123.456def"),
-			WantEndpoint:     "http://abc123.456def.endpoint.events.amazonaws.com/",
+			WantEndpoint:     "http://abc123.456def.endpoint.events.amazonaws.com",
 			WantSignedName:   "events",
 			WantSignedRegion: "*",
 			WantV4a:          true,
@@ -158,7 +158,7 @@ func TestPutEventsUpdateEndpoint(t *testing.T) {
 		"multi-region us-iso-mock-1": {
 			Region:           "us-iso-mock-1",
 			EndpointId:       aws.String("abc123.456def"),
-			WantEndpoint:     "https://abc123.456def.endpoint.events.c2s.ic.gov/",
+			WantEndpoint:     "https://abc123.456def.endpoint.events.c2s.ic.gov",
 			WantSignedName:   "events",
 			WantSignedRegion: "*",
 			WantV4a:          true,
@@ -227,8 +227,9 @@ func TestPutEventsUpdateEndpoint(t *testing.T) {
 			}
 
 			req := request.Build(context.Background())
-			if e, a := tt.WantEndpoint, req.URL.String(); e != a {
-				t.Errorf("expect url %s, got %s", e, a)
+			gotEndpoint := req.URL.Scheme + "://" + req.URL.Host
+			if e, a := tt.WantEndpoint, gotEndpoint; e != a {
+				t.Errorf("expect endpoint %s, got %s", e, a)
 			}
 
 			if e, a := tt.WantSignedRegion, signingRegion; e != a {

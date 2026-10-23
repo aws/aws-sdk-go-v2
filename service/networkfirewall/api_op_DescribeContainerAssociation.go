@@ -4,7 +4,9 @@ package networkfirewall
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/networkfirewall/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/networkfirewall/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -38,6 +40,21 @@ type DescribeContainerAssociationInput struct {
 	ContainerAssociationName *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DescribeContainerAssociationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeContainerAssociationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeContainerAssociationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ContainerAssociationArn != nil {
+		s.WriteString(schemas.DescribeContainerAssociationRequest_ContainerAssociationArn, *v.ContainerAssociationArn)
+	}
+	if v.ContainerAssociationName != nil {
+		s.WriteString(schemas.DescribeContainerAssociationRequest_ContainerAssociationName, *v.ContainerAssociationName)
+	}
 }
 
 type DescribeContainerAssociationOutput struct {
@@ -92,13 +109,88 @@ type DescribeContainerAssociationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeContainerAssociationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeContainerAssociationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeContainerAssociationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ContainerAssociationArn != nil {
+		s.WriteString(schemas.DescribeContainerAssociationResponse_ContainerAssociationArn, *v.ContainerAssociationArn)
+	}
+	if v.ContainerAssociationName != nil {
+		s.WriteString(schemas.DescribeContainerAssociationResponse_ContainerAssociationName, *v.ContainerAssociationName)
+	}
+	serializeContainerMonitoringConfigurations(s, schemas.DescribeContainerAssociationResponse_ContainerMonitoringConfigurations, v.ContainerMonitoringConfigurations)
+	if v.Description != nil {
+		s.WriteString(schemas.DescribeContainerAssociationResponse_Description, *v.Description)
+	}
+	if v.LastUpdatedTime != nil {
+		s.WriteTime(schemas.DescribeContainerAssociationResponse_LastUpdatedTime, *v.LastUpdatedTime)
+	}
+	if v.ResolvedCidrCount != nil {
+		s.WriteInt32(schemas.DescribeContainerAssociationResponse_ResolvedCidrCount, *v.ResolvedCidrCount)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.DescribeContainerAssociationResponse_Status, string(v.Status))
+	}
+	serializeTagList(s, schemas.DescribeContainerAssociationResponse_Tags, v.Tags)
+	if v.Type != "" {
+		s.WriteString(schemas.DescribeContainerAssociationResponse_Type, string(v.Type))
+	}
+	if v.UpdateToken != nil {
+		s.WriteString(schemas.DescribeContainerAssociationResponse_UpdateToken, *v.UpdateToken)
+	}
+}
+func (v *DescribeContainerAssociationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeContainerAssociationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeContainerAssociationResponse_ContainerAssociationArn:
+			v.ContainerAssociationArn = new(string)
+			return d.ReadString(schemas.DescribeContainerAssociationResponse_ContainerAssociationArn, v.ContainerAssociationArn)
+		case schemas.DescribeContainerAssociationResponse_ContainerAssociationName:
+			v.ContainerAssociationName = new(string)
+			return d.ReadString(schemas.DescribeContainerAssociationResponse_ContainerAssociationName, v.ContainerAssociationName)
+		case schemas.DescribeContainerAssociationResponse_ContainerMonitoringConfigurations:
+			return deserializeContainerMonitoringConfigurations(d, schemas.DescribeContainerAssociationResponse_ContainerMonitoringConfigurations, &v.ContainerMonitoringConfigurations)
+		case schemas.DescribeContainerAssociationResponse_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.DescribeContainerAssociationResponse_Description, v.Description)
+		case schemas.DescribeContainerAssociationResponse_LastUpdatedTime:
+			v.LastUpdatedTime = new(time.Time)
+			return d.ReadTime(schemas.DescribeContainerAssociationResponse_LastUpdatedTime, v.LastUpdatedTime)
+		case schemas.DescribeContainerAssociationResponse_ResolvedCidrCount:
+			v.ResolvedCidrCount = new(int32)
+			return d.ReadInt32(schemas.DescribeContainerAssociationResponse_ResolvedCidrCount, v.ResolvedCidrCount)
+		case schemas.DescribeContainerAssociationResponse_Status:
+			var ev string
+			if err := d.ReadString(schemas.DescribeContainerAssociationResponse_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.ContainerAssociationStatus(ev)
+			return nil
+		case schemas.DescribeContainerAssociationResponse_Tags:
+			return deserializeTagList(d, schemas.DescribeContainerAssociationResponse_Tags, &v.Tags)
+		case schemas.DescribeContainerAssociationResponse_Type:
+			var ev string
+			if err := d.ReadString(schemas.DescribeContainerAssociationResponse_Type, &ev); err != nil {
+				return err
+			}
+			v.Type = types.ContainerMonitoringType(ev)
+			return nil
+		case schemas.DescribeContainerAssociationResponse_UpdateToken:
+			v.UpdateToken = new(string)
+			return d.ReadString(schemas.DescribeContainerAssociationResponse_UpdateToken, v.UpdateToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeContainerAssociationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpDescribeContainerAssociation{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeContainerAssociation, schemas.DescribeContainerAssociationRequest, schemas.DescribeContainerAssociationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpDescribeContainerAssociation{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeContainerAssociation, schemas.DescribeContainerAssociationRequest, schemas.DescribeContainerAssociationResponse), output: &DescribeContainerAssociationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

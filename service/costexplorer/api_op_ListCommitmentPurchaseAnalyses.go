@@ -5,7 +5,9 @@ package costexplorer
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/costexplorer/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/costexplorer/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -42,6 +44,25 @@ type ListCommitmentPurchaseAnalysesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListCommitmentPurchaseAnalysesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListCommitmentPurchaseAnalysesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListCommitmentPurchaseAnalysesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAnalysisIds(s, schemas.ListCommitmentPurchaseAnalysesRequest_AnalysisIds, v.AnalysisIds)
+	if v.AnalysisStatus != "" {
+		s.WriteString(schemas.ListCommitmentPurchaseAnalysesRequest_AnalysisStatus, string(v.AnalysisStatus))
+	}
+	if v.NextPageToken != nil {
+		s.WriteString(schemas.ListCommitmentPurchaseAnalysesRequest_NextPageToken, *v.NextPageToken)
+	}
+	if v.PageSize != 0 {
+		s.WriteInt32(schemas.ListCommitmentPurchaseAnalysesRequest_PageSize, v.PageSize)
+	}
+}
+
 type ListCommitmentPurchaseAnalysesOutput struct {
 
 	// The list of analyses.
@@ -56,13 +77,35 @@ type ListCommitmentPurchaseAnalysesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListCommitmentPurchaseAnalysesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListCommitmentPurchaseAnalysesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListCommitmentPurchaseAnalysesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAnalysisSummaryList(s, schemas.ListCommitmentPurchaseAnalysesResponse_AnalysisSummaryList, v.AnalysisSummaryList)
+	if v.NextPageToken != nil {
+		s.WriteString(schemas.ListCommitmentPurchaseAnalysesResponse_NextPageToken, *v.NextPageToken)
+	}
+}
+func (v *ListCommitmentPurchaseAnalysesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListCommitmentPurchaseAnalysesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListCommitmentPurchaseAnalysesResponse_AnalysisSummaryList:
+			return deserializeAnalysisSummaryList(d, schemas.ListCommitmentPurchaseAnalysesResponse_AnalysisSummaryList, &v.AnalysisSummaryList)
+		case schemas.ListCommitmentPurchaseAnalysesResponse_NextPageToken:
+			v.NextPageToken = new(string)
+			return d.ReadString(schemas.ListCommitmentPurchaseAnalysesResponse_NextPageToken, v.NextPageToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListCommitmentPurchaseAnalysesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListCommitmentPurchaseAnalyses{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListCommitmentPurchaseAnalyses, schemas.ListCommitmentPurchaseAnalysesRequest, schemas.ListCommitmentPurchaseAnalysesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListCommitmentPurchaseAnalyses{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListCommitmentPurchaseAnalyses, schemas.ListCommitmentPurchaseAnalysesRequest, schemas.ListCommitmentPurchaseAnalysesResponse), output: &ListCommitmentPurchaseAnalysesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package redshiftserverless
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/redshiftserverless/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/redshiftserverless/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -50,6 +52,25 @@ type ConvertRecoveryPointToSnapshotInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ConvertRecoveryPointToSnapshotInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ConvertRecoveryPointToSnapshotRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ConvertRecoveryPointToSnapshotInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RecoveryPointId != nil {
+		s.WriteString(schemas.ConvertRecoveryPointToSnapshotRequest_recoveryPointId, *v.RecoveryPointId)
+	}
+	if v.RetentionPeriod != nil {
+		s.WriteInt32(schemas.ConvertRecoveryPointToSnapshotRequest_retentionPeriod, *v.RetentionPeriod)
+	}
+	if v.SnapshotName != nil {
+		s.WriteString(schemas.ConvertRecoveryPointToSnapshotRequest_snapshotName, *v.SnapshotName)
+	}
+	serializeTagList(s, schemas.ConvertRecoveryPointToSnapshotRequest_tags, v.Tags)
+}
+
 type ConvertRecoveryPointToSnapshotOutput struct {
 
 	// The snapshot converted from the recovery point.
@@ -61,13 +82,34 @@ type ConvertRecoveryPointToSnapshotOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ConvertRecoveryPointToSnapshotOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ConvertRecoveryPointToSnapshotResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ConvertRecoveryPointToSnapshotOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Snapshot != nil {
+		s.WriteStruct(schemas.ConvertRecoveryPointToSnapshotResponse_snapshot)
+		v.Snapshot.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *ConvertRecoveryPointToSnapshotOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ConvertRecoveryPointToSnapshotResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ConvertRecoveryPointToSnapshotResponse_snapshot:
+			v.Snapshot = &types.Snapshot{}
+			return v.Snapshot.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationConvertRecoveryPointToSnapshotMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpConvertRecoveryPointToSnapshot{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ConvertRecoveryPointToSnapshot, schemas.ConvertRecoveryPointToSnapshotRequest, schemas.ConvertRecoveryPointToSnapshotResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpConvertRecoveryPointToSnapshot{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ConvertRecoveryPointToSnapshot, schemas.ConvertRecoveryPointToSnapshotRequest, schemas.ConvertRecoveryPointToSnapshotResponse), output: &ConvertRecoveryPointToSnapshotOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

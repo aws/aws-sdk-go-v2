@@ -4,7 +4,9 @@ package quicksight
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/quicksight/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/quicksight/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -53,6 +55,27 @@ type DescribeGroupMembershipInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeGroupMembershipInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeGroupMembershipRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeGroupMembershipInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AwsAccountId != nil {
+		s.WriteString(schemas.DescribeGroupMembershipRequest_AwsAccountId, *v.AwsAccountId)
+	}
+	if v.GroupName != nil {
+		s.WriteString(schemas.DescribeGroupMembershipRequest_GroupName, *v.GroupName)
+	}
+	if v.MemberName != nil {
+		s.WriteString(schemas.DescribeGroupMembershipRequest_MemberName, *v.MemberName)
+	}
+	if v.Namespace != nil {
+		s.WriteString(schemas.DescribeGroupMembershipRequest_Namespace, *v.Namespace)
+	}
+}
+
 type DescribeGroupMembershipOutput struct {
 
 	// A member of an Quick Sight group. Currently, group members must be users.
@@ -71,13 +94,45 @@ type DescribeGroupMembershipOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeGroupMembershipOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeGroupMembershipResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeGroupMembershipOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GroupMember != nil {
+		s.WriteStruct(schemas.DescribeGroupMembershipResponse_GroupMember)
+		v.GroupMember.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RequestId != nil {
+		s.WriteString(schemas.DescribeGroupMembershipResponse_RequestId, *v.RequestId)
+	}
+	if v.Status != 0 {
+		s.WriteInt32(schemas.DescribeGroupMembershipResponse_Status, v.Status)
+	}
+}
+func (v *DescribeGroupMembershipOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeGroupMembershipResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeGroupMembershipResponse_GroupMember:
+			v.GroupMember = &types.GroupMember{}
+			return v.GroupMember.Deserialize(d)
+		case schemas.DescribeGroupMembershipResponse_RequestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.DescribeGroupMembershipResponse_RequestId, v.RequestId)
+		case schemas.DescribeGroupMembershipResponse_Status:
+			return d.ReadInt32(schemas.DescribeGroupMembershipResponse_Status, &v.Status)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeGroupMembershipMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeGroupMembership{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeGroupMembership, schemas.DescribeGroupMembershipRequest, schemas.DescribeGroupMembershipResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeGroupMembership{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeGroupMembership, schemas.DescribeGroupMembershipRequest, schemas.DescribeGroupMembershipResponse), output: &DescribeGroupMembershipOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -5,7 +5,9 @@ package bcmpricingcalculator
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/bcmpricingcalculator/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bcmpricingcalculator/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -51,6 +53,22 @@ type BatchCreateBillScenarioUsageModificationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchCreateBillScenarioUsageModificationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchCreateBillScenarioUsageModificationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchCreateBillScenarioUsageModificationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BillScenarioId != nil {
+		s.WriteString(schemas.BatchCreateBillScenarioUsageModificationRequest_billScenarioId, *v.BillScenarioId)
+	}
+	if v.ClientToken != nil {
+		s.WriteString(schemas.BatchCreateBillScenarioUsageModificationRequest_clientToken, *v.ClientToken)
+	}
+	serializeBatchCreateBillScenarioUsageModificationEntries(s, schemas.BatchCreateBillScenarioUsageModificationRequest_usageModifications, v.UsageModifications)
+}
+
 type BatchCreateBillScenarioUsageModificationOutput struct {
 
 	//  Returns the list of errors reason and the usage item keys that cannot be
@@ -67,13 +85,32 @@ type BatchCreateBillScenarioUsageModificationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchCreateBillScenarioUsageModificationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchCreateBillScenarioUsageModificationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchCreateBillScenarioUsageModificationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeBatchCreateBillScenarioUsageModificationErrors(s, schemas.BatchCreateBillScenarioUsageModificationResponse_errors, v.Errors)
+	serializeBatchCreateBillScenarioUsageModificationItems(s, schemas.BatchCreateBillScenarioUsageModificationResponse_items, v.Items)
+}
+func (v *BatchCreateBillScenarioUsageModificationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchCreateBillScenarioUsageModificationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchCreateBillScenarioUsageModificationResponse_errors:
+			return deserializeBatchCreateBillScenarioUsageModificationErrors(d, schemas.BatchCreateBillScenarioUsageModificationResponse_errors, &v.Errors)
+		case schemas.BatchCreateBillScenarioUsageModificationResponse_items:
+			return deserializeBatchCreateBillScenarioUsageModificationItems(d, schemas.BatchCreateBillScenarioUsageModificationResponse_items, &v.Items)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationBatchCreateBillScenarioUsageModificationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpBatchCreateBillScenarioUsageModification{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchCreateBillScenarioUsageModification, schemas.BatchCreateBillScenarioUsageModificationRequest, schemas.BatchCreateBillScenarioUsageModificationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpBatchCreateBillScenarioUsageModification{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchCreateBillScenarioUsageModification, schemas.BatchCreateBillScenarioUsageModificationRequest, schemas.BatchCreateBillScenarioUsageModificationResponse), output: &BatchCreateBillScenarioUsageModificationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

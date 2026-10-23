@@ -11,7 +11,7 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
-//	This API works with the following fleet types:EC2, Container
+//	This API works with the following fleet types: EC2, Container
 //
 // Retrieves information about the EC2 instances in an Amazon GameLift Servers
 // managed fleet, including instance ID, connection data, and status. You can use

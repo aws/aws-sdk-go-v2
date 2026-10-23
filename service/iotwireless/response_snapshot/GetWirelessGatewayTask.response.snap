@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"LastUplinkReceivedAt":"__LastUplinkReceivedAt__","Status":"PENDING","TaskCreatedAt":"__TaskCreatedAt__","WirelessGatewayId":"__WirelessGatewayId__","WirelessGatewayTaskDefinitionId":"__WirelessGatewayTaskDefinitionId__"}

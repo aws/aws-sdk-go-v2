@@ -5,7 +5,9 @@ package sesv2
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/sesv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sesv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -52,6 +54,21 @@ type ListCustomVerificationEmailTemplatesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListCustomVerificationEmailTemplatesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListCustomVerificationEmailTemplatesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListCustomVerificationEmailTemplatesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListCustomVerificationEmailTemplatesRequest_NextToken, *v.NextToken)
+	}
+	if v.PageSize != nil {
+		s.WriteInt32(schemas.ListCustomVerificationEmailTemplatesRequest_PageSize, *v.PageSize)
+	}
+}
+
 // The following elements are returned by the service.
 type ListCustomVerificationEmailTemplatesOutput struct {
 
@@ -70,13 +87,35 @@ type ListCustomVerificationEmailTemplatesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListCustomVerificationEmailTemplatesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListCustomVerificationEmailTemplatesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListCustomVerificationEmailTemplatesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeCustomVerificationEmailTemplatesList(s, schemas.ListCustomVerificationEmailTemplatesResponse_CustomVerificationEmailTemplates, v.CustomVerificationEmailTemplates)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListCustomVerificationEmailTemplatesResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListCustomVerificationEmailTemplatesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListCustomVerificationEmailTemplatesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListCustomVerificationEmailTemplatesResponse_CustomVerificationEmailTemplates:
+			return deserializeCustomVerificationEmailTemplatesList(d, schemas.ListCustomVerificationEmailTemplatesResponse_CustomVerificationEmailTemplates, &v.CustomVerificationEmailTemplates)
+		case schemas.ListCustomVerificationEmailTemplatesResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListCustomVerificationEmailTemplatesResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListCustomVerificationEmailTemplatesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListCustomVerificationEmailTemplates{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListCustomVerificationEmailTemplates, schemas.ListCustomVerificationEmailTemplatesRequest, schemas.ListCustomVerificationEmailTemplatesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListCustomVerificationEmailTemplates{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListCustomVerificationEmailTemplates, schemas.ListCustomVerificationEmailTemplatesRequest, schemas.ListCustomVerificationEmailTemplatesResponse), output: &ListCustomVerificationEmailTemplatesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

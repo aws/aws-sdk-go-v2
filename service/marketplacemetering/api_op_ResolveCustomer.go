@@ -5,6 +5,7 @@ package marketplacemetering
 import (
 	"context"
 	"github.com/aws/aws-sdk-go-v2/service/marketplacemetering/schemas"
+	"github.com/aws/aws-sdk-go-v2/service/marketplacemetering/types"
 	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
@@ -78,7 +79,7 @@ func (v *ResolveCustomerInput) SerializeMembers(s smithy.ShapeSerializer) {
 }
 
 // The result of the ResolveCustomer operation. Contains the CustomerIdentifier
-// along with the CustomerAWSAccountId , ProductCode , and LicenseArn .
+// along with the CustomerAWSAccountId , ProductCode , LicenseArn , and Metadata .
 type ResolveCustomerOutput struct {
 
 	// The CustomerAWSAccountId provides the Amazon Web Services account ID associated
@@ -100,6 +101,10 @@ type ResolveCustomerOutput struct {
 	// Once you receive the CustomerAWSAccountId and LicenseArn in the response, store
 	// that for future purposes/API calls/integrations.
 	LicenseArn *string
+
+	// The metadata associated with the resolved customer, including the AgreementId
+	// of the Amazon Web Services Marketplace agreement the customer accepted.
+	Metadata *types.Metadata
 
 	// The product code is returned to confirm that the buyer is registering for your
 	// product. Subsequent BatchMeterUsage calls should be made using this product
@@ -128,6 +133,11 @@ func (v *ResolveCustomerOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.LicenseArn != nil {
 		s.WriteString(schemas.ResolveCustomerResult_LicenseArn, *v.LicenseArn)
 	}
+	if v.Metadata != nil {
+		s.WriteStruct(schemas.ResolveCustomerResult_Metadata)
+		v.Metadata.SerializeMembers(s)
+		s.CloseStruct()
+	}
 	if v.ProductCode != nil {
 		s.WriteString(schemas.ResolveCustomerResult_ProductCode, *v.ProductCode)
 	}
@@ -144,6 +154,9 @@ func (v *ResolveCustomerOutput) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.ResolveCustomerResult_LicenseArn:
 			v.LicenseArn = new(string)
 			return d.ReadString(schemas.ResolveCustomerResult_LicenseArn, v.LicenseArn)
+		case schemas.ResolveCustomerResult_Metadata:
+			v.Metadata = &types.Metadata{}
+			return v.Metadata.Deserialize(d)
 		case schemas.ResolveCustomerResult_ProductCode:
 			v.ProductCode = new(string)
 			return d.ReadString(schemas.ResolveCustomerResult_ProductCode, v.ProductCode)

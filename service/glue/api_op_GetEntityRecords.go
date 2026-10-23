@@ -5,6 +5,8 @@ package glue
 import (
 	"context"
 	"github.com/aws/aws-sdk-go-v2/service/glue/document"
+	"github.com/aws/aws-sdk-go-v2/service/glue/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -73,6 +75,41 @@ type GetEntityRecordsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetEntityRecordsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetEntityRecordsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetEntityRecordsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CatalogId != nil {
+		s.WriteString(schemas.GetEntityRecordsRequest_CatalogId, *v.CatalogId)
+	}
+	if v.ConnectionName != nil {
+		s.WriteString(schemas.GetEntityRecordsRequest_ConnectionName, *v.ConnectionName)
+	}
+	serializeConnectionOptions(s, schemas.GetEntityRecordsRequest_ConnectionOptions, v.ConnectionOptions)
+	if v.DataStoreApiVersion != nil {
+		s.WriteString(schemas.GetEntityRecordsRequest_DataStoreApiVersion, *v.DataStoreApiVersion)
+	}
+	if v.EntityName != nil {
+		s.WriteString(schemas.GetEntityRecordsRequest_EntityName, *v.EntityName)
+	}
+	if v.FilterPredicate != nil {
+		s.WriteString(schemas.GetEntityRecordsRequest_FilterPredicate, *v.FilterPredicate)
+	}
+	if v.Limit != nil {
+		s.WriteInt64(schemas.GetEntityRecordsRequest_Limit, *v.Limit)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetEntityRecordsRequest_NextToken, *v.NextToken)
+	}
+	if v.OrderBy != nil {
+		s.WriteString(schemas.GetEntityRecordsRequest_OrderBy, *v.OrderBy)
+	}
+	serializeSelectedFields(s, schemas.GetEntityRecordsRequest_SelectedFields, v.SelectedFields)
+}
+
 type GetEntityRecordsOutput struct {
 
 	// A continuation token, present if the current segment is not the last.
@@ -87,13 +124,35 @@ type GetEntityRecordsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetEntityRecordsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetEntityRecordsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetEntityRecordsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetEntityRecordsResponse_NextToken, *v.NextToken)
+	}
+	serializeRecords(s, schemas.GetEntityRecordsResponse_Records, v.Records)
+}
+func (v *GetEntityRecordsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetEntityRecordsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetEntityRecordsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.GetEntityRecordsResponse_NextToken, v.NextToken)
+		case schemas.GetEntityRecordsResponse_Records:
+			return deserializeRecords(d, schemas.GetEntityRecordsResponse_Records, &v.Records)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetEntityRecordsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetEntityRecords{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetEntityRecords, schemas.GetEntityRecordsRequest, schemas.GetEntityRecordsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetEntityRecords{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetEntityRecords, schemas.GetEntityRecordsRequest, schemas.GetEntityRecordsResponse), output: &GetEntityRecordsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,6 +4,8 @@ package iotwireless
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/iotwireless/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -51,6 +53,29 @@ type UpdateWirelessGatewayInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateWirelessGatewayInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateWirelessGatewayRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateWirelessGatewayInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateWirelessGatewayRequest_Description, *v.Description)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.UpdateWirelessGatewayRequest_Id, *v.Id)
+	}
+	serializeJoinEuiFilters(s, schemas.UpdateWirelessGatewayRequest_JoinEuiFilters, v.JoinEuiFilters)
+	if v.MaxEirp != nil {
+		s.WriteFloat32(schemas.UpdateWirelessGatewayRequest_MaxEirp, *v.MaxEirp)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateWirelessGatewayRequest_Name, *v.Name)
+	}
+	serializeNetIdFilters(s, schemas.UpdateWirelessGatewayRequest_NetIdFilters, v.NetIdFilters)
+}
+
 type UpdateWirelessGatewayOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -58,13 +83,26 @@ type UpdateWirelessGatewayOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateWirelessGatewayOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateWirelessGatewayResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateWirelessGatewayOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *UpdateWirelessGatewayOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateWirelessGatewayResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateWirelessGatewayMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateWirelessGateway{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateWirelessGateway, schemas.UpdateWirelessGatewayRequest, schemas.UpdateWirelessGatewayResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateWirelessGateway{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateWirelessGateway, schemas.UpdateWirelessGatewayRequest, schemas.UpdateWirelessGatewayResponse), output: &UpdateWirelessGatewayOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

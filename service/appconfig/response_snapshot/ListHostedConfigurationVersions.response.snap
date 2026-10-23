@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"Items":[{"ApplicationId":"__ApplicationId__","ConfigurationProfileId":"__ConfigurationProfileId__","ContentType":"__ContentType__","Description":"__Description__","KmsKeyArn":"__KmsKeyArn__","VersionLabel":"__VersionLabel__","VersionNumber":1},{"ApplicationId":"__ApplicationId__","ConfigurationProfileId":"__ConfigurationProfileId__","ContentType":"__ContentType__","Description":"__Description__","KmsKeyArn":"__KmsKeyArn__","VersionLabel":"__VersionLabel__","VersionNumber":1}],"NextToken":"__NextToken__"}

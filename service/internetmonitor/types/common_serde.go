@@ -167,6 +167,13 @@ func deserializeFilterList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]st
 	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			*v = append(*v, zero)
+			return nil
+		}
 
 		if err := d.ReadString(s.ListMember(), &vv); err != nil {
 			return err
@@ -181,6 +188,14 @@ func deserializeFilterParameters(d smithy.ShapeDeserializer, s *smithy.Schema, v
 	*v = make([]FilterParameter, 0)
 	var vv FilterParameter
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero FilterParameter
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = FilterParameter{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -195,6 +210,14 @@ func deserializeHealthEventList(d smithy.ShapeDeserializer, s *smithy.Schema, v 
 	*v = make([]HealthEvent, 0)
 	var vv HealthEvent
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero HealthEvent
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = HealthEvent{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -209,6 +232,14 @@ func deserializeImpactedLocationsList(d smithy.ShapeDeserializer, s *smithy.Sche
 	*v = make([]ImpactedLocation, 0)
 	var vv ImpactedLocation
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero ImpactedLocation
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = ImpactedLocation{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -223,6 +254,14 @@ func deserializeInternetEventsList(d smithy.ShapeDeserializer, s *smithy.Schema,
 	*v = make([]InternetEventSummary, 0)
 	var vv InternetEventSummary
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero InternetEventSummary
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = InternetEventSummary{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -237,6 +276,13 @@ func deserializeIpv4PrefixList(d smithy.ShapeDeserializer, s *smithy.Schema, v *
 	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			*v = append(*v, zero)
+			return nil
+		}
 
 		if err := d.ReadString(s.ListMember(), &vv); err != nil {
 			return err
@@ -251,6 +297,14 @@ func deserializeMonitorList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]M
 	*v = make([]Monitor, 0)
 	var vv Monitor
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero Monitor
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = Monitor{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -265,6 +319,14 @@ func deserializeNetworkList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]N
 	*v = make([]Network, 0)
 	var vv Network
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero Network
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = Network{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -279,6 +341,14 @@ func deserializeQueryData(d smithy.ShapeDeserializer, s *smithy.Schema, v *[][]s
 	*v = make([][]string, 0)
 	var vv []string
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero []string
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = nil
 		if err := deserializeQueryRow(d, s.ListMember(), &vv); err != nil {
 			return err
@@ -293,6 +363,14 @@ func deserializeQueryFields(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]Q
 	*v = make([]QueryField, 0)
 	var vv QueryField
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero QueryField
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = QueryField{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -307,6 +385,13 @@ func deserializeQueryRow(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]stri
 	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			*v = append(*v, zero)
+			return nil
+		}
 
 		if err := d.ReadString(s.ListMember(), &vv); err != nil {
 			return err
@@ -321,6 +406,13 @@ func deserializeSetOfARNs(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]str
 	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			*v = append(*v, zero)
+			return nil
+		}
 
 		if err := d.ReadString(s.ListMember(), &vv); err != nil {
 			return err
@@ -335,6 +427,13 @@ func deserializeTagKeys(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]strin
 	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			*v = append(*v, zero)
+			return nil
+		}
 
 		if err := d.ReadString(s.ListMember(), &vv); err != nil {
 			return err
@@ -361,6 +460,13 @@ func deserializeTagMap(d smithy.ShapeDeserializer, s *smithy.Schema, v *map[stri
 	*v = make(map[string]string)
 	var vv string
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			(*v)[k] = zero
+			return nil
+		}
 
 		if err := d.ReadString(s.MapValue(), &vv); err != nil {
 			return err

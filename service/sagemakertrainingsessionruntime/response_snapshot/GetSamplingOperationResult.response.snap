@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"errorDetails":"__ErrorDetails__","operationResult":{"sample":{"promptLogprobs":[1,1],"sequences":[{"logprobs":[1,1],"stopReason":"stop","tokenUsage":{"decode":1,"prefill":1},"tokens":[1,1]},{"logprobs":[1,1],"stopReason":"stop","tokenUsage":{"decode":1,"prefill":1},"tokens":[1,1]}],"topkPromptLogprobs":[[{"logprob":1,"tokenId":1},{"logprob":1,"tokenId":1}],[{"logprob":1,"tokenId":1},{"logprob":1,"tokenId":1}]]}},"status":"Pending"}

@@ -4,6 +4,7 @@ package types
 
 import (
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/costandusagereportservice/schemas"
 	smithy "github.com/aws/smithy-go"
 )
 
@@ -33,6 +34,27 @@ func (e *DuplicateReportNameException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *DuplicateReportNameException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *DuplicateReportNameException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DuplicateReportNameException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DuplicateReportNameException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.DuplicateReportNameException_Message, *v.Message)
+	}
+}
+func (v *DuplicateReportNameException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DuplicateReportNameException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DuplicateReportNameException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.DuplicateReportNameException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // An error on the server occurred during the processing of your request. Try
 // again later.
@@ -60,6 +82,27 @@ func (e *InternalErrorException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InternalErrorException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
+func (v *InternalErrorException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InternalErrorException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InternalErrorException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.InternalErrorException_Message, *v.Message)
+	}
+}
+func (v *InternalErrorException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InternalErrorException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InternalErrorException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.InternalErrorException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // This account already has five reports defined. To define a new report, you must
 // delete an existing report.
@@ -87,6 +130,27 @@ func (e *ReportLimitReachedException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ReportLimitReachedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *ReportLimitReachedException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ReportLimitReachedException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ReportLimitReachedException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.ReportLimitReachedException_Message, *v.Message)
+	}
+}
+func (v *ReportLimitReachedException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ReportLimitReachedException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ReportLimitReachedException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ReportLimitReachedException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The specified report ( ReportName ) in the request doesn't exist.
 type ResourceNotFoundException struct {
@@ -113,6 +177,27 @@ func (e *ResourceNotFoundException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *ResourceNotFoundException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ResourceNotFoundException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ResourceNotFoundException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.ResourceNotFoundException_Message, *v.Message)
+	}
+}
+func (v *ResourceNotFoundException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ResourceNotFoundException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ResourceNotFoundException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ResourceNotFoundException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The input fails to satisfy the constraints specified by an Amazon Web Services
 // service.
@@ -140,3 +225,24 @@ func (e *ValidationException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ValidationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *ValidationException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ValidationException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ValidationException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.ValidationException_Message, *v.Message)
+	}
+}
+func (v *ValidationException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ValidationException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ValidationException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ValidationException_Message, v.Message)
+		}
+		return nil
+	})
+}

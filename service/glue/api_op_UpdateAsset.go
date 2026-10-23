@@ -5,6 +5,8 @@ package glue
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/glue/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -46,6 +48,27 @@ type UpdateAssetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateAssetInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateAssetRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateAssetInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.UpdateAssetRequest_ClientToken, *v.ClientToken)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateAssetRequest_Description, *v.Description)
+	}
+	if v.Identifier != nil {
+		s.WriteString(schemas.UpdateAssetRequest_Identifier, *v.Identifier)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateAssetRequest_Name, *v.Name)
+	}
+}
+
 type UpdateAssetOutput struct {
 
 	// The unique identifier of the asset.
@@ -68,13 +91,50 @@ type UpdateAssetOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateAssetOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateAssetResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateAssetOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateAssetResponse_Description, *v.Description)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.UpdateAssetResponse_Id, *v.Id)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateAssetResponse_Name, *v.Name)
+	}
+	if v.UpdatedAt != nil {
+		s.WriteTime(schemas.UpdateAssetResponse_UpdatedAt, *v.UpdatedAt)
+	}
+}
+func (v *UpdateAssetOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateAssetResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateAssetResponse_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.UpdateAssetResponse_Description, v.Description)
+		case schemas.UpdateAssetResponse_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.UpdateAssetResponse_Id, v.Id)
+		case schemas.UpdateAssetResponse_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.UpdateAssetResponse_Name, v.Name)
+		case schemas.UpdateAssetResponse_UpdatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.UpdateAssetResponse_UpdatedAt, v.UpdatedAt)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateAssetMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateAsset{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateAsset, schemas.UpdateAssetRequest, schemas.UpdateAssetResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateAsset{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateAsset, schemas.UpdateAssetRequest, schemas.UpdateAssetResponse), output: &UpdateAssetOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

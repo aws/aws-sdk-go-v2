@@ -5,7 +5,9 @@ package dynamodb
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/dynamodb/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/dynamodb/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -41,6 +43,23 @@ type ListImportsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListImportsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListImportsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListImportsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListImportsInput_NextToken, *v.NextToken)
+	}
+	if v.PageSize != nil {
+		s.WriteInt32(schemas.ListImportsInput_PageSize, *v.PageSize)
+	}
+	if v.TableArn != nil {
+		s.WriteString(schemas.ListImportsInput_TableArn, *v.TableArn)
+	}
+}
 func (in *ListImportsInput) bindEndpointParams(p *EndpointParameters) {
 
 	p.ResourceArn = in.TableArn
@@ -62,13 +81,35 @@ type ListImportsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListImportsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListImportsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListImportsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeImportSummaryList(s, schemas.ListImportsOutput_ImportSummaryList, v.ImportSummaryList)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListImportsOutput_NextToken, *v.NextToken)
+	}
+}
+func (v *ListImportsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListImportsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListImportsOutput_ImportSummaryList:
+			return deserializeImportSummaryList(d, schemas.ListImportsOutput_ImportSummaryList, &v.ImportSummaryList)
+		case schemas.ListImportsOutput_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListImportsOutput_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListImportsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpListImports{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListImports, schemas.ListImportsInput, schemas.ListImportsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpListImports{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListImports, schemas.ListImportsInput, schemas.ListImportsOutput), output: &ListImportsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

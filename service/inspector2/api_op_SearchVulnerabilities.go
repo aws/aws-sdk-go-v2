@@ -5,7 +5,9 @@ package inspector2
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/inspector2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/inspector2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -41,6 +43,23 @@ type SearchVulnerabilitiesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SearchVulnerabilitiesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SearchVulnerabilitiesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SearchVulnerabilitiesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FilterCriteria != nil {
+		s.WriteStruct(schemas.SearchVulnerabilitiesRequest_filterCriteria)
+		v.FilterCriteria.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.SearchVulnerabilitiesRequest_nextToken, *v.NextToken)
+	}
+}
+
 type SearchVulnerabilitiesOutput struct {
 
 	// Details about the listed vulnerability.
@@ -58,13 +77,35 @@ type SearchVulnerabilitiesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SearchVulnerabilitiesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SearchVulnerabilitiesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SearchVulnerabilitiesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.SearchVulnerabilitiesResponse_nextToken, *v.NextToken)
+	}
+	serializeVulnerabilities(s, schemas.SearchVulnerabilitiesResponse_vulnerabilities, v.Vulnerabilities)
+}
+func (v *SearchVulnerabilitiesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SearchVulnerabilitiesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SearchVulnerabilitiesResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.SearchVulnerabilitiesResponse_nextToken, v.NextToken)
+		case schemas.SearchVulnerabilitiesResponse_vulnerabilities:
+			return deserializeVulnerabilities(d, schemas.SearchVulnerabilitiesResponse_vulnerabilities, &v.Vulnerabilities)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationSearchVulnerabilitiesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpSearchVulnerabilities{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SearchVulnerabilities, schemas.SearchVulnerabilitiesRequest, schemas.SearchVulnerabilitiesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpSearchVulnerabilities{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SearchVulnerabilities, schemas.SearchVulnerabilitiesRequest, schemas.SearchVulnerabilitiesResponse), output: &SearchVulnerabilitiesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

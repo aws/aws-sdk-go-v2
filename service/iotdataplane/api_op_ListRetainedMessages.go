@@ -5,7 +5,9 @@ package iotdataplane
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/iotdataplane/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotdataplane/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -52,6 +54,21 @@ type ListRetainedMessagesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListRetainedMessagesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListRetainedMessagesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListRetainedMessagesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListRetainedMessagesRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListRetainedMessagesRequest_nextToken, *v.NextToken)
+	}
+}
+
 type ListRetainedMessagesOutput struct {
 
 	// The token for the next set of results, or null if there are no additional
@@ -68,13 +85,35 @@ type ListRetainedMessagesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListRetainedMessagesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListRetainedMessagesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListRetainedMessagesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListRetainedMessagesResponse_nextToken, *v.NextToken)
+	}
+	serializeRetainedMessageList(s, schemas.ListRetainedMessagesResponse_retainedTopics, v.RetainedTopics)
+}
+func (v *ListRetainedMessagesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListRetainedMessagesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListRetainedMessagesResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListRetainedMessagesResponse_nextToken, v.NextToken)
+		case schemas.ListRetainedMessagesResponse_retainedTopics:
+			return deserializeRetainedMessageList(d, schemas.ListRetainedMessagesResponse_retainedTopics, &v.RetainedTopics)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListRetainedMessagesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListRetainedMessages{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListRetainedMessages, schemas.ListRetainedMessagesRequest, schemas.ListRetainedMessagesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListRetainedMessages{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListRetainedMessages, schemas.ListRetainedMessagesRequest, schemas.ListRetainedMessagesResponse), output: &ListRetainedMessagesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,6 +4,8 @@ package clouddirectory
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/clouddirectory/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -35,6 +37,18 @@ type DisableDirectoryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DisableDirectoryInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DisableDirectoryRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DisableDirectoryInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DirectoryArn != nil {
+		s.WriteString(schemas.DisableDirectoryRequest_DirectoryArn, *v.DirectoryArn)
+	}
+}
+
 type DisableDirectoryOutput struct {
 
 	// The ARN of the directory that has been disabled.
@@ -48,13 +62,32 @@ type DisableDirectoryOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DisableDirectoryOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DisableDirectoryResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DisableDirectoryOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DirectoryArn != nil {
+		s.WriteString(schemas.DisableDirectoryResponse_DirectoryArn, *v.DirectoryArn)
+	}
+}
+func (v *DisableDirectoryOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DisableDirectoryResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DisableDirectoryResponse_DirectoryArn:
+			v.DirectoryArn = new(string)
+			return d.ReadString(schemas.DisableDirectoryResponse_DirectoryArn, v.DirectoryArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDisableDirectoryMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDisableDirectory{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisableDirectory, schemas.DisableDirectoryRequest, schemas.DisableDirectoryResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDisableDirectory{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisableDirectory, schemas.DisableDirectoryRequest, schemas.DisableDirectoryResponse), output: &DisableDirectoryOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

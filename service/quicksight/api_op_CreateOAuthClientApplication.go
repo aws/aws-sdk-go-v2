@@ -4,7 +4,9 @@ package quicksight
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/quicksight/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/quicksight/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -89,6 +91,51 @@ type CreateOAuthClientApplicationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateOAuthClientApplicationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateOAuthClientApplicationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateOAuthClientApplicationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AwsAccountId != nil {
+		s.WriteString(schemas.CreateOAuthClientApplicationRequest_AwsAccountId, *v.AwsAccountId)
+	}
+	if v.ClientId != nil {
+		s.WriteString(schemas.CreateOAuthClientApplicationRequest_ClientId, *v.ClientId)
+	}
+	if v.ClientSecret != nil {
+		s.WriteString(schemas.CreateOAuthClientApplicationRequest_ClientSecret, *v.ClientSecret)
+	}
+	if v.DataSourceType != "" {
+		s.WriteString(schemas.CreateOAuthClientApplicationRequest_DataSourceType, string(v.DataSourceType))
+	}
+	if v.IdentityProviderVpcConnectionProperties != nil {
+		s.WriteStruct(schemas.CreateOAuthClientApplicationRequest_IdentityProviderVpcConnectionProperties)
+		v.IdentityProviderVpcConnectionProperties.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateOAuthClientApplicationRequest_Name, *v.Name)
+	}
+	if v.OAuthAuthorizationEndpointUrl != nil {
+		s.WriteString(schemas.CreateOAuthClientApplicationRequest_OAuthAuthorizationEndpointUrl, *v.OAuthAuthorizationEndpointUrl)
+	}
+	if v.OAuthClientApplicationId != nil {
+		s.WriteString(schemas.CreateOAuthClientApplicationRequest_OAuthClientApplicationId, *v.OAuthClientApplicationId)
+	}
+	if v.OAuthClientAuthenticationType != "" {
+		s.WriteString(schemas.CreateOAuthClientApplicationRequest_OAuthClientAuthenticationType, string(v.OAuthClientAuthenticationType))
+	}
+	if v.OAuthScopes != nil {
+		s.WriteString(schemas.CreateOAuthClientApplicationRequest_OAuthScopes, *v.OAuthScopes)
+	}
+	if v.OAuthTokenEndpointUrl != nil {
+		s.WriteString(schemas.CreateOAuthClientApplicationRequest_OAuthTokenEndpointUrl, *v.OAuthTokenEndpointUrl)
+	}
+	serializeTagList(s, schemas.CreateOAuthClientApplicationRequest_Tags, v.Tags)
+}
+
 type CreateOAuthClientApplicationOutput struct {
 
 	// The Amazon Resource Name (ARN) of the OAuthClientApplication.
@@ -113,13 +160,59 @@ type CreateOAuthClientApplicationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateOAuthClientApplicationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateOAuthClientApplicationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateOAuthClientApplicationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.CreateOAuthClientApplicationResponse_Arn, *v.Arn)
+	}
+	if v.CreationStatus != "" {
+		s.WriteString(schemas.CreateOAuthClientApplicationResponse_CreationStatus, string(v.CreationStatus))
+	}
+	if v.OAuthClientApplicationId != nil {
+		s.WriteString(schemas.CreateOAuthClientApplicationResponse_OAuthClientApplicationId, *v.OAuthClientApplicationId)
+	}
+	if v.RequestId != nil {
+		s.WriteString(schemas.CreateOAuthClientApplicationResponse_RequestId, *v.RequestId)
+	}
+	if v.Status != 0 {
+		s.WriteInt32(schemas.CreateOAuthClientApplicationResponse_Status, v.Status)
+	}
+}
+func (v *CreateOAuthClientApplicationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateOAuthClientApplicationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateOAuthClientApplicationResponse_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.CreateOAuthClientApplicationResponse_Arn, v.Arn)
+		case schemas.CreateOAuthClientApplicationResponse_CreationStatus:
+			var ev string
+			if err := d.ReadString(schemas.CreateOAuthClientApplicationResponse_CreationStatus, &ev); err != nil {
+				return err
+			}
+			v.CreationStatus = types.ResourceStatus(ev)
+			return nil
+		case schemas.CreateOAuthClientApplicationResponse_OAuthClientApplicationId:
+			v.OAuthClientApplicationId = new(string)
+			return d.ReadString(schemas.CreateOAuthClientApplicationResponse_OAuthClientApplicationId, v.OAuthClientApplicationId)
+		case schemas.CreateOAuthClientApplicationResponse_RequestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.CreateOAuthClientApplicationResponse_RequestId, v.RequestId)
+		case schemas.CreateOAuthClientApplicationResponse_Status:
+			return d.ReadInt32(schemas.CreateOAuthClientApplicationResponse_Status, &v.Status)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateOAuthClientApplicationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateOAuthClientApplication{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateOAuthClientApplication, schemas.CreateOAuthClientApplicationRequest, schemas.CreateOAuthClientApplicationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateOAuthClientApplication{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateOAuthClientApplication, schemas.CreateOAuthClientApplicationRequest, schemas.CreateOAuthClientApplicationResponse), output: &CreateOAuthClientApplicationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

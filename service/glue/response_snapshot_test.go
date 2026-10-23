@@ -837,6 +837,7 @@ func TestCheckResponseSnapshot_BatchGetCrawlers(t *testing.T) {
 					UseLakeFormationCredentials: ptr.Bool(true),
 					AccountId:                   ptr.String("__AccountId__"),
 				},
+				CatalogId: ptr.String("__CatalogId__"),
 			},
 			{
 				Name: ptr.String("__Name__"),
@@ -1051,6 +1052,7 @@ func TestCheckResponseSnapshot_BatchGetCrawlers(t *testing.T) {
 					UseLakeFormationCredentials: ptr.Bool(true),
 					AccountId:                   ptr.String("__AccountId__"),
 				},
+				CatalogId: ptr.String("__CatalogId__"),
 			},
 		},
 		CrawlersNotFound: []string{
@@ -1465,6 +1467,359 @@ func TestCheckResponseSnapshot_BatchGetDataQualityResult(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "BatchGetDataQualityResult.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_BatchGetDataQualityResultV2(t *testing.T) {
+	want := &BatchGetDataQualityResultV2Output{
+		Results: []types.DataQualityResultV2Item{
+			{
+				ResultId: ptr.String("__ResultId__"),
+				DataSource: &types.DataSource{
+					GlueTable: &types.GlueTable{
+						DatabaseName:   ptr.String("__DatabaseName__"),
+						TableName:      ptr.String("__TableName__"),
+						CatalogId:      ptr.String("__CatalogId__"),
+						ConnectionName: ptr.String("__ConnectionName__"),
+						AdditionalOptions: map[string]string{
+							"key0": "__Value__",
+						},
+					},
+					DataQualityGlueTable: &types.DataQualityGlueTable{
+						DatabaseName:   ptr.String("__DatabaseName__"),
+						TableName:      ptr.String("__TableName__"),
+						CatalogId:      ptr.String("__CatalogId__"),
+						ConnectionName: ptr.String("__ConnectionName__"),
+						AdditionalOptions: map[string]string{
+							"key0": "__Value__",
+						},
+						PreProcessingQuery: ptr.String("__PreProcessingQuery__"),
+					},
+				},
+				Dimensions: map[string]string{
+					"key0": "__Value__",
+				},
+				Tags: map[string]string{
+					"key0": "__Value__",
+				},
+				ExecutionStartedOn:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				ExecutionCompletedOn: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				ResultPublishedOn:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				Score:                ptr.Float64(1.0),
+				RuleResults: []types.DataQualityRuleResult{
+					{
+						Name:              ptr.String("__Name__"),
+						Description:       ptr.String("__Description__"),
+						EvaluationMessage: ptr.String("__EvaluationMessage__"),
+						Result:            types.DataQualityRuleResultStatus("PASS"),
+						EvaluatedMetrics: map[string]float64{
+							"key0": 1.0,
+						},
+						EvaluatedRule: ptr.String("__EvaluatedRule__"),
+						RuleMetrics: map[string]float64{
+							"key0": 1.0,
+						},
+						Labels: map[string]string{
+							"key0": "__Value__",
+						},
+					},
+					{
+						Name:              ptr.String("__Name__"),
+						Description:       ptr.String("__Description__"),
+						EvaluationMessage: ptr.String("__EvaluationMessage__"),
+						Result:            types.DataQualityRuleResultStatus("PASS"),
+						EvaluatedMetrics: map[string]float64{
+							"key0": 1.0,
+						},
+						EvaluatedRule: ptr.String("__EvaluatedRule__"),
+						RuleMetrics: map[string]float64{
+							"key0": 1.0,
+						},
+						Labels: map[string]string{
+							"key0": "__Value__",
+						},
+					},
+				},
+				AnalyzerResults: []types.DataQualityAnalyzerResult{
+					{
+						Name:              ptr.String("__Name__"),
+						Description:       ptr.String("__Description__"),
+						EvaluationMessage: ptr.String("__EvaluationMessage__"),
+						EvaluatedMetrics: map[string]float64{
+							"key0": 1.0,
+						},
+						EvaluatedDistributions: map[string]types.DistributionData{
+							"key0": {
+								BinEdges: []string{
+									"__Member__",
+									"__Member__",
+								},
+								Count: []int32{
+									1,
+									1,
+								},
+								DataType: ptr.String("__DataType__"),
+							},
+						},
+					},
+					{
+						Name:              ptr.String("__Name__"),
+						Description:       ptr.String("__Description__"),
+						EvaluationMessage: ptr.String("__EvaluationMessage__"),
+						EvaluatedMetrics: map[string]float64{
+							"key0": 1.0,
+						},
+						EvaluatedDistributions: map[string]types.DistributionData{
+							"key0": {
+								BinEdges: []string{
+									"__Member__",
+									"__Member__",
+								},
+								Count: []int32{
+									1,
+									1,
+								},
+								DataType: ptr.String("__DataType__"),
+							},
+						},
+					},
+				},
+				Observations: []types.DataQualityObservation{
+					{
+						Description: ptr.String("__Description__"),
+						MetricBasedObservation: &types.MetricBasedObservation{
+							MetricName:  ptr.String("__MetricName__"),
+							StatisticId: ptr.String("__StatisticId__"),
+							MetricValues: &types.DataQualityMetricValues{
+								ActualValue:   ptr.Float64(1.0),
+								ExpectedValue: ptr.Float64(1.0),
+								LowerLimit:    ptr.Float64(1.0),
+								UpperLimit:    ptr.Float64(1.0),
+							},
+							NewRules: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+					},
+					{
+						Description: ptr.String("__Description__"),
+						MetricBasedObservation: &types.MetricBasedObservation{
+							MetricName:  ptr.String("__MetricName__"),
+							StatisticId: ptr.String("__StatisticId__"),
+							MetricValues: &types.DataQualityMetricValues{
+								ActualValue:   ptr.Float64(1.0),
+								ExpectedValue: ptr.Float64(1.0),
+								LowerLimit:    ptr.Float64(1.0),
+								UpperLimit:    ptr.Float64(1.0),
+							},
+							NewRules: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+					},
+				},
+				EvaluationContext: ptr.String("__EvaluationContext__"),
+				Descriptors: map[string]string{
+					"key0": "__Value__",
+				},
+				AggregatedMetrics: &types.DataQualityAggregatedMetrics{
+					TotalRowsProcessed:  ptr.Float64(1.0),
+					TotalRowsPassed:     ptr.Float64(1.0),
+					TotalRowsFailed:     ptr.Float64(1.0),
+					TotalRulesProcessed: ptr.Float64(1.0),
+					TotalRulesPassed:    ptr.Float64(1.0),
+					TotalRulesFailed:    ptr.Float64(1.0),
+				},
+				RulesetName: ptr.String("__RulesetName__"),
+			},
+			{
+				ResultId: ptr.String("__ResultId__"),
+				DataSource: &types.DataSource{
+					GlueTable: &types.GlueTable{
+						DatabaseName:   ptr.String("__DatabaseName__"),
+						TableName:      ptr.String("__TableName__"),
+						CatalogId:      ptr.String("__CatalogId__"),
+						ConnectionName: ptr.String("__ConnectionName__"),
+						AdditionalOptions: map[string]string{
+							"key0": "__Value__",
+						},
+					},
+					DataQualityGlueTable: &types.DataQualityGlueTable{
+						DatabaseName:   ptr.String("__DatabaseName__"),
+						TableName:      ptr.String("__TableName__"),
+						CatalogId:      ptr.String("__CatalogId__"),
+						ConnectionName: ptr.String("__ConnectionName__"),
+						AdditionalOptions: map[string]string{
+							"key0": "__Value__",
+						},
+						PreProcessingQuery: ptr.String("__PreProcessingQuery__"),
+					},
+				},
+				Dimensions: map[string]string{
+					"key0": "__Value__",
+				},
+				Tags: map[string]string{
+					"key0": "__Value__",
+				},
+				ExecutionStartedOn:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				ExecutionCompletedOn: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				ResultPublishedOn:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				Score:                ptr.Float64(1.0),
+				RuleResults: []types.DataQualityRuleResult{
+					{
+						Name:              ptr.String("__Name__"),
+						Description:       ptr.String("__Description__"),
+						EvaluationMessage: ptr.String("__EvaluationMessage__"),
+						Result:            types.DataQualityRuleResultStatus("PASS"),
+						EvaluatedMetrics: map[string]float64{
+							"key0": 1.0,
+						},
+						EvaluatedRule: ptr.String("__EvaluatedRule__"),
+						RuleMetrics: map[string]float64{
+							"key0": 1.0,
+						},
+						Labels: map[string]string{
+							"key0": "__Value__",
+						},
+					},
+					{
+						Name:              ptr.String("__Name__"),
+						Description:       ptr.String("__Description__"),
+						EvaluationMessage: ptr.String("__EvaluationMessage__"),
+						Result:            types.DataQualityRuleResultStatus("PASS"),
+						EvaluatedMetrics: map[string]float64{
+							"key0": 1.0,
+						},
+						EvaluatedRule: ptr.String("__EvaluatedRule__"),
+						RuleMetrics: map[string]float64{
+							"key0": 1.0,
+						},
+						Labels: map[string]string{
+							"key0": "__Value__",
+						},
+					},
+				},
+				AnalyzerResults: []types.DataQualityAnalyzerResult{
+					{
+						Name:              ptr.String("__Name__"),
+						Description:       ptr.String("__Description__"),
+						EvaluationMessage: ptr.String("__EvaluationMessage__"),
+						EvaluatedMetrics: map[string]float64{
+							"key0": 1.0,
+						},
+						EvaluatedDistributions: map[string]types.DistributionData{
+							"key0": {
+								BinEdges: []string{
+									"__Member__",
+									"__Member__",
+								},
+								Count: []int32{
+									1,
+									1,
+								},
+								DataType: ptr.String("__DataType__"),
+							},
+						},
+					},
+					{
+						Name:              ptr.String("__Name__"),
+						Description:       ptr.String("__Description__"),
+						EvaluationMessage: ptr.String("__EvaluationMessage__"),
+						EvaluatedMetrics: map[string]float64{
+							"key0": 1.0,
+						},
+						EvaluatedDistributions: map[string]types.DistributionData{
+							"key0": {
+								BinEdges: []string{
+									"__Member__",
+									"__Member__",
+								},
+								Count: []int32{
+									1,
+									1,
+								},
+								DataType: ptr.String("__DataType__"),
+							},
+						},
+					},
+				},
+				Observations: []types.DataQualityObservation{
+					{
+						Description: ptr.String("__Description__"),
+						MetricBasedObservation: &types.MetricBasedObservation{
+							MetricName:  ptr.String("__MetricName__"),
+							StatisticId: ptr.String("__StatisticId__"),
+							MetricValues: &types.DataQualityMetricValues{
+								ActualValue:   ptr.Float64(1.0),
+								ExpectedValue: ptr.Float64(1.0),
+								LowerLimit:    ptr.Float64(1.0),
+								UpperLimit:    ptr.Float64(1.0),
+							},
+							NewRules: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+					},
+					{
+						Description: ptr.String("__Description__"),
+						MetricBasedObservation: &types.MetricBasedObservation{
+							MetricName:  ptr.String("__MetricName__"),
+							StatisticId: ptr.String("__StatisticId__"),
+							MetricValues: &types.DataQualityMetricValues{
+								ActualValue:   ptr.Float64(1.0),
+								ExpectedValue: ptr.Float64(1.0),
+								LowerLimit:    ptr.Float64(1.0),
+								UpperLimit:    ptr.Float64(1.0),
+							},
+							NewRules: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+					},
+				},
+				EvaluationContext: ptr.String("__EvaluationContext__"),
+				Descriptors: map[string]string{
+					"key0": "__Value__",
+				},
+				AggregatedMetrics: &types.DataQualityAggregatedMetrics{
+					TotalRowsProcessed:  ptr.Float64(1.0),
+					TotalRowsPassed:     ptr.Float64(1.0),
+					TotalRowsFailed:     ptr.Float64(1.0),
+					TotalRulesProcessed: ptr.Float64(1.0),
+					TotalRulesPassed:    ptr.Float64(1.0),
+					TotalRulesFailed:    ptr.Float64(1.0),
+				},
+				RulesetName: ptr.String("__RulesetName__"),
+			},
+		},
+		ResultsNotFound: []string{
+			"__Member__",
+			"__Member__",
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("BatchGetDataQualityResultV2.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.BatchGetDataQualityResultV2(context.Background(), &BatchGetDataQualityResultV2Input{
+		ResultIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "BatchGetDataQualityResultV2.response", err)
 	}
 }
 
@@ -10636,6 +10991,7 @@ func TestCheckResponseSnapshot_CreateCrawler(t *testing.T) {
 		Tags: map[string]string{
 			"key0": "__Value__",
 		},
+		CatalogId: ptr.String("__CatalogId__"),
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -10968,7 +11324,8 @@ func TestCheckResponseSnapshot_CreateIntegration(t *testing.T) {
 			SourceProperties: map[string]string{
 				"key0": "__Value__",
 			},
-			ContinuousSync: ptr.Bool(true),
+			ContinuousSync:  ptr.Bool(true),
+			TargetNamespace: ptr.String("__TargetNamespace__"),
 		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("CreateIntegration.response")
@@ -11004,7 +11361,8 @@ func TestCheckResponseSnapshot_CreateIntegration(t *testing.T) {
 			SourceProperties: map[string]string{
 				"key0": "__Value__",
 			},
-			ContinuousSync: ptr.Bool(true),
+			ContinuousSync:  ptr.Bool(true),
+			TargetNamespace: ptr.String("__TargetNamespace__"),
 		},
 	})
 	if err != nil {
@@ -11107,6 +11465,7 @@ func TestCheckResponseSnapshot_CreateIntegrationTableProperties(t *testing.T) {
 				},
 			},
 			TargetTableName: ptr.String("__TargetTableName__"),
+			IntegrationArn:  ptr.String("__IntegrationArn__"),
 		},
 	})
 	if err != nil {
@@ -14508,8 +14867,15 @@ func TestCheckResponseSnapshot_CreateTable(t *testing.T) {
 				Name:         ptr.String("__Name__"),
 				Region:       ptr.String("__Region__"),
 			},
+			FederatedTable: &types.FederatedTable{
+				Identifier:         ptr.String("__Identifier__"),
+				DatabaseIdentifier: ptr.String("__DatabaseIdentifier__"),
+				ConnectionName:     ptr.String("__ConnectionName__"),
+				ConnectionType:     ptr.String("__ConnectionType__"),
+			},
 			ViewDefinition: &types.ViewDefinitionInput{
 				IsProtected: ptr.Bool(true),
+				IsManaged:   ptr.Bool(true),
 				Definer:     ptr.String("__Definer__"),
 				Representations: []types.ViewRepresentationInput{
 					{
@@ -14538,6 +14904,25 @@ func TestCheckResponseSnapshot_CreateTable(t *testing.T) {
 				SubObjectVersionIds: []int64{
 					1,
 					1,
+				},
+				SubObjectsStatistics: []types.SubObjectStatistics{
+					{
+						SourceType:     types.SubObjectSourceType("HIVE_PARQUET"),
+						GlueVersionId:  ptr.String("__GlueVersionId__"),
+						PartitionCount: ptr.Int64(1),
+						FileCount:      ptr.Int64(1),
+						TotalFileBytes: ptr.Int64(1),
+					},
+					{
+						SourceType:     types.SubObjectSourceType("HIVE_PARQUET"),
+						GlueVersionId:  ptr.String("__GlueVersionId__"),
+						PartitionCount: ptr.Int64(1),
+						FileCount:      ptr.Int64(1),
+						TotalFileBytes: ptr.Int64(1),
+					},
+				},
+				SparkPipelineInfo: map[string]string{
+					"key0": "__Value__",
 				},
 			},
 		},
@@ -15095,6 +15480,7 @@ func TestCheckResponseSnapshot_DeleteColumnStatisticsTaskSettings(t *testing.T) 
 	got, err := svc.DeleteColumnStatisticsTaskSettings(context.Background(), &DeleteColumnStatisticsTaskSettingsInput{
 		DatabaseName: ptr.String("__DatabaseName__"),
 		TableName:    ptr.String("__TableName__"),
+		CatalogID:    ptr.String("__CatalogID__"),
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -16670,7 +17056,8 @@ func TestCheckResponseSnapshot_DescribeInboundIntegrations(t *testing.T) {
 					SourceProperties: map[string]string{
 						"key0": "__Value__",
 					},
-					ContinuousSync: ptr.Bool(true),
+					ContinuousSync:  ptr.Bool(true),
+					TargetNamespace: ptr.String("__TargetNamespace__"),
 				},
 				Errors: []types.IntegrationError{
 					{
@@ -16694,7 +17081,8 @@ func TestCheckResponseSnapshot_DescribeInboundIntegrations(t *testing.T) {
 					SourceProperties: map[string]string{
 						"key0": "__Value__",
 					},
-					ContinuousSync: ptr.Bool(true),
+					ContinuousSync:  ptr.Bool(true),
+					TargetNamespace: ptr.String("__TargetNamespace__"),
 				},
 				Errors: []types.IntegrationError{
 					{
@@ -16762,7 +17150,8 @@ func TestCheckResponseSnapshot_DescribeIntegrations(t *testing.T) {
 					SourceProperties: map[string]string{
 						"key0": "__Value__",
 					},
-					ContinuousSync: ptr.Bool(true),
+					ContinuousSync:  ptr.Bool(true),
+					TargetNamespace: ptr.String("__TargetNamespace__"),
 				},
 				Errors: []types.IntegrationError{
 					{
@@ -16803,7 +17192,8 @@ func TestCheckResponseSnapshot_DescribeIntegrations(t *testing.T) {
 					SourceProperties: map[string]string{
 						"key0": "__Value__",
 					},
-					ContinuousSync: ptr.Bool(true),
+					ContinuousSync:  ptr.Bool(true),
+					TargetNamespace: ptr.String("__TargetNamespace__"),
 				},
 				Errors: []types.IntegrationError{
 					{
@@ -18056,6 +18446,7 @@ func TestCheckResponseSnapshot_GetColumnStatisticsTaskRuns(t *testing.T) {
 		TableName:    ptr.String("__TableName__"),
 		MaxResults:   ptr.Int32(1),
 		NextToken:    ptr.String("__NextToken__"),
+		CatalogID:    ptr.String("__CatalogID__"),
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -18103,6 +18494,7 @@ func TestCheckResponseSnapshot_GetColumnStatisticsTaskSettings(t *testing.T) {
 	got, err := svc.GetColumnStatisticsTaskSettings(context.Background(), &GetColumnStatisticsTaskSettingsInput{
 		DatabaseName: ptr.String("__DatabaseName__"),
 		TableName:    ptr.String("__TableName__"),
+		CatalogID:    ptr.String("__CatalogID__"),
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -18556,6 +18948,7 @@ func TestCheckResponseSnapshot_GetCrawler(t *testing.T) {
 				UseLakeFormationCredentials: ptr.Bool(true),
 				AccountId:                   ptr.String("__AccountId__"),
 			},
+			CatalogId: ptr.String("__CatalogId__"),
 		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("GetCrawler.response")
@@ -18843,6 +19236,7 @@ func TestCheckResponseSnapshot_GetCrawlers(t *testing.T) {
 					UseLakeFormationCredentials: ptr.Bool(true),
 					AccountId:                   ptr.String("__AccountId__"),
 				},
+				CatalogId: ptr.String("__CatalogId__"),
 			},
 			{
 				Name: ptr.String("__Name__"),
@@ -19057,6 +19451,7 @@ func TestCheckResponseSnapshot_GetCrawlers(t *testing.T) {
 					UseLakeFormationCredentials: ptr.Bool(true),
 					AccountId:                   ptr.String("__AccountId__"),
 				},
+				CatalogId: ptr.String("__CatalogId__"),
 			},
 		},
 		NextToken: ptr.String("__NextToken__"),
@@ -19440,6 +19835,188 @@ func TestCheckResponseSnapshot_GetDataQualityResult(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_GetDataQualityResultV2(t *testing.T) {
+	want := &GetDataQualityResultV2Output{
+		ResultId: ptr.String("__ResultId__"),
+		DataSource: &types.DataSource{
+			GlueTable: &types.GlueTable{
+				DatabaseName:   ptr.String("__DatabaseName__"),
+				TableName:      ptr.String("__TableName__"),
+				CatalogId:      ptr.String("__CatalogId__"),
+				ConnectionName: ptr.String("__ConnectionName__"),
+				AdditionalOptions: map[string]string{
+					"key0": "__Value__",
+				},
+			},
+			DataQualityGlueTable: &types.DataQualityGlueTable{
+				DatabaseName:   ptr.String("__DatabaseName__"),
+				TableName:      ptr.String("__TableName__"),
+				CatalogId:      ptr.String("__CatalogId__"),
+				ConnectionName: ptr.String("__ConnectionName__"),
+				AdditionalOptions: map[string]string{
+					"key0": "__Value__",
+				},
+				PreProcessingQuery: ptr.String("__PreProcessingQuery__"),
+			},
+		},
+		ProfileId: ptr.String("__ProfileId__"),
+		Dimensions: map[string]string{
+			"key0": "__Value__",
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		ExecutionStartedOn:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		ExecutionCompletedOn: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		ResultPublishedOn:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		Score:                ptr.Float64(1.0),
+		RuleResults: []types.DataQualityRuleResult{
+			{
+				Name:              ptr.String("__Name__"),
+				Description:       ptr.String("__Description__"),
+				EvaluationMessage: ptr.String("__EvaluationMessage__"),
+				Result:            types.DataQualityRuleResultStatus("PASS"),
+				EvaluatedMetrics: map[string]float64{
+					"key0": 1.0,
+				},
+				EvaluatedRule: ptr.String("__EvaluatedRule__"),
+				RuleMetrics: map[string]float64{
+					"key0": 1.0,
+				},
+				Labels: map[string]string{
+					"key0": "__Value__",
+				},
+			},
+			{
+				Name:              ptr.String("__Name__"),
+				Description:       ptr.String("__Description__"),
+				EvaluationMessage: ptr.String("__EvaluationMessage__"),
+				Result:            types.DataQualityRuleResultStatus("PASS"),
+				EvaluatedMetrics: map[string]float64{
+					"key0": 1.0,
+				},
+				EvaluatedRule: ptr.String("__EvaluatedRule__"),
+				RuleMetrics: map[string]float64{
+					"key0": 1.0,
+				},
+				Labels: map[string]string{
+					"key0": "__Value__",
+				},
+			},
+		},
+		AnalyzerResults: []types.DataQualityAnalyzerResult{
+			{
+				Name:              ptr.String("__Name__"),
+				Description:       ptr.String("__Description__"),
+				EvaluationMessage: ptr.String("__EvaluationMessage__"),
+				EvaluatedMetrics: map[string]float64{
+					"key0": 1.0,
+				},
+				EvaluatedDistributions: map[string]types.DistributionData{
+					"key0": {
+						BinEdges: []string{
+							"__Member__",
+							"__Member__",
+						},
+						Count: []int32{
+							1,
+							1,
+						},
+						DataType: ptr.String("__DataType__"),
+					},
+				},
+			},
+			{
+				Name:              ptr.String("__Name__"),
+				Description:       ptr.String("__Description__"),
+				EvaluationMessage: ptr.String("__EvaluationMessage__"),
+				EvaluatedMetrics: map[string]float64{
+					"key0": 1.0,
+				},
+				EvaluatedDistributions: map[string]types.DistributionData{
+					"key0": {
+						BinEdges: []string{
+							"__Member__",
+							"__Member__",
+						},
+						Count: []int32{
+							1,
+							1,
+						},
+						DataType: ptr.String("__DataType__"),
+					},
+				},
+			},
+		},
+		Observations: []types.DataQualityObservation{
+			{
+				Description: ptr.String("__Description__"),
+				MetricBasedObservation: &types.MetricBasedObservation{
+					MetricName:  ptr.String("__MetricName__"),
+					StatisticId: ptr.String("__StatisticId__"),
+					MetricValues: &types.DataQualityMetricValues{
+						ActualValue:   ptr.Float64(1.0),
+						ExpectedValue: ptr.Float64(1.0),
+						LowerLimit:    ptr.Float64(1.0),
+						UpperLimit:    ptr.Float64(1.0),
+					},
+					NewRules: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+			{
+				Description: ptr.String("__Description__"),
+				MetricBasedObservation: &types.MetricBasedObservation{
+					MetricName:  ptr.String("__MetricName__"),
+					StatisticId: ptr.String("__StatisticId__"),
+					MetricValues: &types.DataQualityMetricValues{
+						ActualValue:   ptr.Float64(1.0),
+						ExpectedValue: ptr.Float64(1.0),
+						LowerLimit:    ptr.Float64(1.0),
+						UpperLimit:    ptr.Float64(1.0),
+					},
+					NewRules: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+		},
+		EvaluationContext: ptr.String("__EvaluationContext__"),
+		Descriptors: map[string]string{
+			"key0": "__Value__",
+		},
+		AggregatedMetrics: &types.DataQualityAggregatedMetrics{
+			TotalRowsProcessed:  ptr.Float64(1.0),
+			TotalRowsPassed:     ptr.Float64(1.0),
+			TotalRowsFailed:     ptr.Float64(1.0),
+			TotalRulesProcessed: ptr.Float64(1.0),
+			TotalRulesPassed:    ptr.Float64(1.0),
+			TotalRulesFailed:    ptr.Float64(1.0),
+		},
+		RulesetName: ptr.String("__RulesetName__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("GetDataQualityResultV2.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.GetDataQualityResultV2(context.Background(), &GetDataQualityResultV2Input{
+		ResultId: ptr.String("__ResultId__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "GetDataQualityResultV2.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_GetDataQualityRuleRecommendationRun(t *testing.T) {
 	want := &GetDataQualityRuleRecommendationRunOutput{
 		RunId: ptr.String("__RunId__"),
@@ -19479,6 +20056,7 @@ func TestCheckResponseSnapshot_GetDataQualityRuleRecommendationRun(t *testing.T)
 		AdditionalRunOptions: &types.DataQualityRuleRecommendationRunAdditionalRunOptions{
 			CustomLogGroupPrefix: ptr.String("__CustomLogGroupPrefix__"),
 		},
+		RecommendationMode: types.RecommendationMode("BASIC"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("GetDataQualityRuleRecommendationRun.response")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -20278,6 +20856,7 @@ func TestCheckResponseSnapshot_GetIntegrationTableProperties(t *testing.T) {
 				},
 			},
 			TargetTableName: ptr.String("__TargetTableName__"),
+			IntegrationArn:  ptr.String("__IntegrationArn__"),
 		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("GetIntegrationTableProperties.response")
@@ -30505,6 +31084,53 @@ func TestCheckResponseSnapshot_GetStatement(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_GetSystemLogsForJobRun(t *testing.T) {
+	want := &GetSystemLogsForJobRunOutput{
+		SystemLogsUrl: ptr.String("__SystemLogsUrl__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("GetSystemLogsForJobRun.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.GetSystemLogsForJobRun(context.Background(), &GetSystemLogsForJobRunInput{
+		JobName: ptr.String("__JobName__"),
+		RunId:   ptr.String("__RunId__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "GetSystemLogsForJobRun.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_GetSystemLogsForSession(t *testing.T) {
+	want := &GetSystemLogsForSessionOutput{
+		SystemLogsUrl: ptr.String("__SystemLogsUrl__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("GetSystemLogsForSession.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.GetSystemLogsForSession(context.Background(), &GetSystemLogsForSessionInput{
+		Id: ptr.String("__Id__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "GetSystemLogsForSession.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_GetTable(t *testing.T) {
 	want := &GetTableOutput{
 		Table: &types.Table{
@@ -30635,6 +31261,7 @@ func TestCheckResponseSnapshot_GetTable(t *testing.T) {
 			},
 			ViewDefinition: &types.ViewDefinition{
 				IsProtected:      ptr.Bool(true),
+				IsManaged:        ptr.Bool(true),
 				Definer:          ptr.String("__Definer__"),
 				ViewVersionId:    1,
 				ViewVersionToken: ptr.String("__ViewVersionToken__"),
@@ -30647,6 +31274,22 @@ func TestCheckResponseSnapshot_GetTable(t *testing.T) {
 				SubObjectVersionIds: []int64{
 					1,
 					1,
+				},
+				SubObjectsStatistics: []types.SubObjectStatistics{
+					{
+						SourceType:     types.SubObjectSourceType("HIVE_PARQUET"),
+						GlueVersionId:  ptr.String("__GlueVersionId__"),
+						PartitionCount: ptr.Int64(1),
+						FileCount:      ptr.Int64(1),
+						TotalFileBytes: ptr.Int64(1),
+					},
+					{
+						SourceType:     types.SubObjectSourceType("HIVE_PARQUET"),
+						GlueVersionId:  ptr.String("__GlueVersionId__"),
+						PartitionCount: ptr.Int64(1),
+						FileCount:      ptr.Int64(1),
+						TotalFileBytes: ptr.Int64(1),
+					},
 				},
 				Representations: []types.ViewRepresentation{
 					{
@@ -30665,6 +31308,9 @@ func TestCheckResponseSnapshot_GetTable(t *testing.T) {
 						ValidationConnection: ptr.String("__ValidationConnection__"),
 						IsStale:              ptr.Bool(true),
 					},
+				},
+				SparkPipelineInfo: map[string]string{
+					"key0": "__Value__",
 				},
 			},
 			IsMultiDialectView: ptr.Bool(true),
@@ -30850,6 +31496,9 @@ func TestCheckResponseSnapshot_GetTable(t *testing.T) {
 						},
 					},
 				},
+			},
+			RLSProperties: &types.RLSProperties{
+				DefaultRLSPolicy: ptr.String("__DefaultRLSPolicy__"),
 			},
 		},
 	}
@@ -31121,6 +31770,7 @@ func TestCheckResponseSnapshot_GetTableVersion(t *testing.T) {
 				},
 				ViewDefinition: &types.ViewDefinition{
 					IsProtected:      ptr.Bool(true),
+					IsManaged:        ptr.Bool(true),
 					Definer:          ptr.String("__Definer__"),
 					ViewVersionId:    1,
 					ViewVersionToken: ptr.String("__ViewVersionToken__"),
@@ -31133,6 +31783,22 @@ func TestCheckResponseSnapshot_GetTableVersion(t *testing.T) {
 					SubObjectVersionIds: []int64{
 						1,
 						1,
+					},
+					SubObjectsStatistics: []types.SubObjectStatistics{
+						{
+							SourceType:     types.SubObjectSourceType("HIVE_PARQUET"),
+							GlueVersionId:  ptr.String("__GlueVersionId__"),
+							PartitionCount: ptr.Int64(1),
+							FileCount:      ptr.Int64(1),
+							TotalFileBytes: ptr.Int64(1),
+						},
+						{
+							SourceType:     types.SubObjectSourceType("HIVE_PARQUET"),
+							GlueVersionId:  ptr.String("__GlueVersionId__"),
+							PartitionCount: ptr.Int64(1),
+							FileCount:      ptr.Int64(1),
+							TotalFileBytes: ptr.Int64(1),
+						},
 					},
 					Representations: []types.ViewRepresentation{
 						{
@@ -31151,6 +31817,9 @@ func TestCheckResponseSnapshot_GetTableVersion(t *testing.T) {
 							ValidationConnection: ptr.String("__ValidationConnection__"),
 							IsStale:              ptr.Bool(true),
 						},
+					},
+					SparkPipelineInfo: map[string]string{
+						"key0": "__Value__",
 					},
 				},
 				IsMultiDialectView: ptr.Bool(true),
@@ -31337,6 +32006,9 @@ func TestCheckResponseSnapshot_GetTableVersion(t *testing.T) {
 						},
 					},
 				},
+				RLSProperties: &types.RLSProperties{
+					DefaultRLSPolicy: ptr.String("__DefaultRLSPolicy__"),
+				},
 			},
 			VersionId: ptr.String("__VersionId__"),
 		},
@@ -31503,6 +32175,7 @@ func TestCheckResponseSnapshot_GetTableVersions(t *testing.T) {
 					},
 					ViewDefinition: &types.ViewDefinition{
 						IsProtected:      ptr.Bool(true),
+						IsManaged:        ptr.Bool(true),
 						Definer:          ptr.String("__Definer__"),
 						ViewVersionId:    1,
 						ViewVersionToken: ptr.String("__ViewVersionToken__"),
@@ -31515,6 +32188,22 @@ func TestCheckResponseSnapshot_GetTableVersions(t *testing.T) {
 						SubObjectVersionIds: []int64{
 							1,
 							1,
+						},
+						SubObjectsStatistics: []types.SubObjectStatistics{
+							{
+								SourceType:     types.SubObjectSourceType("HIVE_PARQUET"),
+								GlueVersionId:  ptr.String("__GlueVersionId__"),
+								PartitionCount: ptr.Int64(1),
+								FileCount:      ptr.Int64(1),
+								TotalFileBytes: ptr.Int64(1),
+							},
+							{
+								SourceType:     types.SubObjectSourceType("HIVE_PARQUET"),
+								GlueVersionId:  ptr.String("__GlueVersionId__"),
+								PartitionCount: ptr.Int64(1),
+								FileCount:      ptr.Int64(1),
+								TotalFileBytes: ptr.Int64(1),
+							},
 						},
 						Representations: []types.ViewRepresentation{
 							{
@@ -31533,6 +32222,9 @@ func TestCheckResponseSnapshot_GetTableVersions(t *testing.T) {
 								ValidationConnection: ptr.String("__ValidationConnection__"),
 								IsStale:              ptr.Bool(true),
 							},
+						},
+						SparkPipelineInfo: map[string]string{
+							"key0": "__Value__",
 						},
 					},
 					IsMultiDialectView: ptr.Bool(true),
@@ -31718,6 +32410,9 @@ func TestCheckResponseSnapshot_GetTableVersions(t *testing.T) {
 								},
 							},
 						},
+					},
+					RLSProperties: &types.RLSProperties{
+						DefaultRLSPolicy: ptr.String("__DefaultRLSPolicy__"),
 					},
 				},
 				VersionId: ptr.String("__VersionId__"),
@@ -31851,6 +32546,7 @@ func TestCheckResponseSnapshot_GetTableVersions(t *testing.T) {
 					},
 					ViewDefinition: &types.ViewDefinition{
 						IsProtected:      ptr.Bool(true),
+						IsManaged:        ptr.Bool(true),
 						Definer:          ptr.String("__Definer__"),
 						ViewVersionId:    1,
 						ViewVersionToken: ptr.String("__ViewVersionToken__"),
@@ -31863,6 +32559,22 @@ func TestCheckResponseSnapshot_GetTableVersions(t *testing.T) {
 						SubObjectVersionIds: []int64{
 							1,
 							1,
+						},
+						SubObjectsStatistics: []types.SubObjectStatistics{
+							{
+								SourceType:     types.SubObjectSourceType("HIVE_PARQUET"),
+								GlueVersionId:  ptr.String("__GlueVersionId__"),
+								PartitionCount: ptr.Int64(1),
+								FileCount:      ptr.Int64(1),
+								TotalFileBytes: ptr.Int64(1),
+							},
+							{
+								SourceType:     types.SubObjectSourceType("HIVE_PARQUET"),
+								GlueVersionId:  ptr.String("__GlueVersionId__"),
+								PartitionCount: ptr.Int64(1),
+								FileCount:      ptr.Int64(1),
+								TotalFileBytes: ptr.Int64(1),
+							},
 						},
 						Representations: []types.ViewRepresentation{
 							{
@@ -31881,6 +32593,9 @@ func TestCheckResponseSnapshot_GetTableVersions(t *testing.T) {
 								ValidationConnection: ptr.String("__ValidationConnection__"),
 								IsStale:              ptr.Bool(true),
 							},
+						},
+						SparkPipelineInfo: map[string]string{
+							"key0": "__Value__",
 						},
 					},
 					IsMultiDialectView: ptr.Bool(true),
@@ -32066,6 +32781,9 @@ func TestCheckResponseSnapshot_GetTableVersions(t *testing.T) {
 								},
 							},
 						},
+					},
+					RLSProperties: &types.RLSProperties{
+						DefaultRLSPolicy: ptr.String("__DefaultRLSPolicy__"),
 					},
 				},
 				VersionId: ptr.String("__VersionId__"),
@@ -32235,6 +32953,7 @@ func TestCheckResponseSnapshot_GetTables(t *testing.T) {
 				},
 				ViewDefinition: &types.ViewDefinition{
 					IsProtected:      ptr.Bool(true),
+					IsManaged:        ptr.Bool(true),
 					Definer:          ptr.String("__Definer__"),
 					ViewVersionId:    1,
 					ViewVersionToken: ptr.String("__ViewVersionToken__"),
@@ -32247,6 +32966,22 @@ func TestCheckResponseSnapshot_GetTables(t *testing.T) {
 					SubObjectVersionIds: []int64{
 						1,
 						1,
+					},
+					SubObjectsStatistics: []types.SubObjectStatistics{
+						{
+							SourceType:     types.SubObjectSourceType("HIVE_PARQUET"),
+							GlueVersionId:  ptr.String("__GlueVersionId__"),
+							PartitionCount: ptr.Int64(1),
+							FileCount:      ptr.Int64(1),
+							TotalFileBytes: ptr.Int64(1),
+						},
+						{
+							SourceType:     types.SubObjectSourceType("HIVE_PARQUET"),
+							GlueVersionId:  ptr.String("__GlueVersionId__"),
+							PartitionCount: ptr.Int64(1),
+							FileCount:      ptr.Int64(1),
+							TotalFileBytes: ptr.Int64(1),
+						},
 					},
 					Representations: []types.ViewRepresentation{
 						{
@@ -32265,6 +33000,9 @@ func TestCheckResponseSnapshot_GetTables(t *testing.T) {
 							ValidationConnection: ptr.String("__ValidationConnection__"),
 							IsStale:              ptr.Bool(true),
 						},
+					},
+					SparkPipelineInfo: map[string]string{
+						"key0": "__Value__",
 					},
 				},
 				IsMultiDialectView: ptr.Bool(true),
@@ -32450,6 +33188,9 @@ func TestCheckResponseSnapshot_GetTables(t *testing.T) {
 							},
 						},
 					},
+				},
+				RLSProperties: &types.RLSProperties{
+					DefaultRLSPolicy: ptr.String("__DefaultRLSPolicy__"),
 				},
 			},
 			{
@@ -32580,6 +33321,7 @@ func TestCheckResponseSnapshot_GetTables(t *testing.T) {
 				},
 				ViewDefinition: &types.ViewDefinition{
 					IsProtected:      ptr.Bool(true),
+					IsManaged:        ptr.Bool(true),
 					Definer:          ptr.String("__Definer__"),
 					ViewVersionId:    1,
 					ViewVersionToken: ptr.String("__ViewVersionToken__"),
@@ -32592,6 +33334,22 @@ func TestCheckResponseSnapshot_GetTables(t *testing.T) {
 					SubObjectVersionIds: []int64{
 						1,
 						1,
+					},
+					SubObjectsStatistics: []types.SubObjectStatistics{
+						{
+							SourceType:     types.SubObjectSourceType("HIVE_PARQUET"),
+							GlueVersionId:  ptr.String("__GlueVersionId__"),
+							PartitionCount: ptr.Int64(1),
+							FileCount:      ptr.Int64(1),
+							TotalFileBytes: ptr.Int64(1),
+						},
+						{
+							SourceType:     types.SubObjectSourceType("HIVE_PARQUET"),
+							GlueVersionId:  ptr.String("__GlueVersionId__"),
+							PartitionCount: ptr.Int64(1),
+							FileCount:      ptr.Int64(1),
+							TotalFileBytes: ptr.Int64(1),
+						},
 					},
 					Representations: []types.ViewRepresentation{
 						{
@@ -32610,6 +33368,9 @@ func TestCheckResponseSnapshot_GetTables(t *testing.T) {
 							ValidationConnection: ptr.String("__ValidationConnection__"),
 							IsStale:              ptr.Bool(true),
 						},
+					},
+					SparkPipelineInfo: map[string]string{
+						"key0": "__Value__",
 					},
 				},
 				IsMultiDialectView: ptr.Bool(true),
@@ -32796,6 +33557,9 @@ func TestCheckResponseSnapshot_GetTables(t *testing.T) {
 						},
 					},
 				},
+				RLSProperties: &types.RLSProperties{
+					DefaultRLSPolicy: ptr.String("__DefaultRLSPolicy__"),
+				},
 			},
 		},
 		NextToken: ptr.String("__NextToken__"),
@@ -32824,6 +33588,7 @@ func TestCheckResponseSnapshot_GetTables(t *testing.T) {
 			},
 			AllColumnsRequested: ptr.Bool(true),
 		},
+		ResourceShareType:    types.TableResourceShareType("FEDERATED"),
 		IncludeStatusDetails: ptr.Bool(true),
 		AttributesToGet: []types.TableAttributes{
 			types.TableAttributes("NAME"),
@@ -33614,6 +34379,7 @@ func TestCheckResponseSnapshot_GetUnfilteredTableMetadata(t *testing.T) {
 			},
 			ViewDefinition: &types.ViewDefinition{
 				IsProtected:      ptr.Bool(true),
+				IsManaged:        ptr.Bool(true),
 				Definer:          ptr.String("__Definer__"),
 				ViewVersionId:    1,
 				ViewVersionToken: ptr.String("__ViewVersionToken__"),
@@ -33626,6 +34392,22 @@ func TestCheckResponseSnapshot_GetUnfilteredTableMetadata(t *testing.T) {
 				SubObjectVersionIds: []int64{
 					1,
 					1,
+				},
+				SubObjectsStatistics: []types.SubObjectStatistics{
+					{
+						SourceType:     types.SubObjectSourceType("HIVE_PARQUET"),
+						GlueVersionId:  ptr.String("__GlueVersionId__"),
+						PartitionCount: ptr.Int64(1),
+						FileCount:      ptr.Int64(1),
+						TotalFileBytes: ptr.Int64(1),
+					},
+					{
+						SourceType:     types.SubObjectSourceType("HIVE_PARQUET"),
+						GlueVersionId:  ptr.String("__GlueVersionId__"),
+						PartitionCount: ptr.Int64(1),
+						FileCount:      ptr.Int64(1),
+						TotalFileBytes: ptr.Int64(1),
+					},
 				},
 				Representations: []types.ViewRepresentation{
 					{
@@ -33644,6 +34426,9 @@ func TestCheckResponseSnapshot_GetUnfilteredTableMetadata(t *testing.T) {
 						ValidationConnection: ptr.String("__ValidationConnection__"),
 						IsStale:              ptr.Bool(true),
 					},
+				},
+				SparkPipelineInfo: map[string]string{
+					"key0": "__Value__",
 				},
 			},
 			IsMultiDialectView: ptr.Bool(true),
@@ -33829,6 +34614,9 @@ func TestCheckResponseSnapshot_GetUnfilteredTableMetadata(t *testing.T) {
 						},
 					},
 				},
+			},
+			RLSProperties: &types.RLSProperties{
+				DefaultRLSPolicy: ptr.String("__DefaultRLSPolicy__"),
 			},
 		},
 		AuthorizedColumns: []string{
@@ -36617,6 +37405,125 @@ func TestCheckResponseSnapshot_ListDataQualityResults(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_ListDataQualityResultsV2(t *testing.T) {
+	want := &ListDataQualityResultsV2Output{
+		Results: []types.DataQualityResultsV2Description{
+			{
+				ResultId: ptr.String("__ResultId__"),
+				DataSource: &types.DataSource{
+					GlueTable: &types.GlueTable{
+						DatabaseName:   ptr.String("__DatabaseName__"),
+						TableName:      ptr.String("__TableName__"),
+						CatalogId:      ptr.String("__CatalogId__"),
+						ConnectionName: ptr.String("__ConnectionName__"),
+						AdditionalOptions: map[string]string{
+							"key0": "__Value__",
+						},
+					},
+					DataQualityGlueTable: &types.DataQualityGlueTable{
+						DatabaseName:   ptr.String("__DatabaseName__"),
+						TableName:      ptr.String("__TableName__"),
+						CatalogId:      ptr.String("__CatalogId__"),
+						ConnectionName: ptr.String("__ConnectionName__"),
+						AdditionalOptions: map[string]string{
+							"key0": "__Value__",
+						},
+						PreProcessingQuery: ptr.String("__PreProcessingQuery__"),
+					},
+				},
+				ResultPublishedOn: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				Dimensions: map[string]string{
+					"key0": "__Value__",
+				},
+				EvaluationContext: ptr.String("__EvaluationContext__"),
+				Descriptors: map[string]string{
+					"key0": "__Value__",
+				},
+			},
+			{
+				ResultId: ptr.String("__ResultId__"),
+				DataSource: &types.DataSource{
+					GlueTable: &types.GlueTable{
+						DatabaseName:   ptr.String("__DatabaseName__"),
+						TableName:      ptr.String("__TableName__"),
+						CatalogId:      ptr.String("__CatalogId__"),
+						ConnectionName: ptr.String("__ConnectionName__"),
+						AdditionalOptions: map[string]string{
+							"key0": "__Value__",
+						},
+					},
+					DataQualityGlueTable: &types.DataQualityGlueTable{
+						DatabaseName:   ptr.String("__DatabaseName__"),
+						TableName:      ptr.String("__TableName__"),
+						CatalogId:      ptr.String("__CatalogId__"),
+						ConnectionName: ptr.String("__ConnectionName__"),
+						AdditionalOptions: map[string]string{
+							"key0": "__Value__",
+						},
+						PreProcessingQuery: ptr.String("__PreProcessingQuery__"),
+					},
+				},
+				ResultPublishedOn: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				Dimensions: map[string]string{
+					"key0": "__Value__",
+				},
+				EvaluationContext: ptr.String("__EvaluationContext__"),
+				Descriptors: map[string]string{
+					"key0": "__Value__",
+				},
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("ListDataQualityResultsV2.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.ListDataQualityResultsV2(context.Background(), &ListDataQualityResultsV2Input{
+		Filter: &types.DataQualityResultsV2FilterCriteria{
+			DataSource: &types.DataSource{
+				GlueTable: &types.GlueTable{
+					DatabaseName:   ptr.String("__DatabaseName__"),
+					TableName:      ptr.String("__TableName__"),
+					CatalogId:      ptr.String("__CatalogId__"),
+					ConnectionName: ptr.String("__ConnectionName__"),
+					AdditionalOptions: map[string]string{
+						"key0": "__Value__",
+					},
+				},
+				DataQualityGlueTable: &types.DataQualityGlueTable{
+					DatabaseName:   ptr.String("__DatabaseName__"),
+					TableName:      ptr.String("__TableName__"),
+					CatalogId:      ptr.String("__CatalogId__"),
+					ConnectionName: ptr.String("__ConnectionName__"),
+					AdditionalOptions: map[string]string{
+						"key0": "__Value__",
+					},
+					PreProcessingQuery: ptr.String("__PreProcessingQuery__"),
+				},
+			},
+			PublishedAfter:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			PublishedBefore: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			Dimensions: map[string]string{
+				"key0": "__Value__",
+			},
+			EvaluationContext: ptr.String("__EvaluationContext__"),
+		},
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "ListDataQualityResultsV2.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_ListDataQualityRuleRecommendationRuns(t *testing.T) {
 	want := &ListDataQualityRuleRecommendationRunsOutput{
 		Runs: []types.DataQualityRuleRecommendationRunDescription{
@@ -36646,6 +37553,7 @@ func TestCheckResponseSnapshot_ListDataQualityRuleRecommendationRuns(t *testing.
 					},
 				},
 				CreatedRulesetName: ptr.String("__CreatedRulesetName__"),
+				RecommendationMode: types.RecommendationMode("BASIC"),
 			},
 			{
 				RunId:     ptr.String("__RunId__"),
@@ -36673,6 +37581,7 @@ func TestCheckResponseSnapshot_ListDataQualityRuleRecommendationRuns(t *testing.
 					},
 				},
 				CreatedRulesetName: ptr.String("__CreatedRulesetName__"),
+				RecommendationMode: types.RecommendationMode("BASIC"),
 			},
 		},
 		NextToken: ptr.String("__NextToken__"),
@@ -37307,6 +38216,114 @@ func TestCheckResponseSnapshot_ListIntegrationResourceProperties(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "ListIntegrationResourceProperties.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_ListIntegrationTableProperties(t *testing.T) {
+	want := &ListIntegrationTablePropertiesOutput{
+		IntegrationTablePropertiesList: []types.IntegrationTableProperties{
+			{
+				ResourceArn: ptr.String("__ResourceArn__"),
+				TableName:   ptr.String("__TableName__"),
+				SourceTableConfig: &types.SourceTableConfig{
+					Fields: []string{
+						"__Member__",
+						"__Member__",
+					},
+					FilterPredicate: ptr.String("__FilterPredicate__"),
+					PrimaryKey: []string{
+						"__Member__",
+						"__Member__",
+					},
+					RecordUpdateField: ptr.String("__RecordUpdateField__"),
+				},
+				TargetTableConfig: &types.TargetTableConfig{
+					UnnestSpec: types.UnnestSpec("TOPLEVEL"),
+					PartitionSpec: []types.IntegrationPartition{
+						{
+							FieldName:      ptr.String("__FieldName__"),
+							FunctionSpec:   ptr.String("__FunctionSpec__"),
+							ConversionSpec: ptr.String("__ConversionSpec__"),
+						},
+						{
+							FieldName:      ptr.String("__FieldName__"),
+							FunctionSpec:   ptr.String("__FunctionSpec__"),
+							ConversionSpec: ptr.String("__ConversionSpec__"),
+						},
+					},
+					TargetTableName: ptr.String("__TargetTableName__"),
+					IntegrationArn:  ptr.String("__IntegrationArn__"),
+				},
+			},
+			{
+				ResourceArn: ptr.String("__ResourceArn__"),
+				TableName:   ptr.String("__TableName__"),
+				SourceTableConfig: &types.SourceTableConfig{
+					Fields: []string{
+						"__Member__",
+						"__Member__",
+					},
+					FilterPredicate: ptr.String("__FilterPredicate__"),
+					PrimaryKey: []string{
+						"__Member__",
+						"__Member__",
+					},
+					RecordUpdateField: ptr.String("__RecordUpdateField__"),
+				},
+				TargetTableConfig: &types.TargetTableConfig{
+					UnnestSpec: types.UnnestSpec("TOPLEVEL"),
+					PartitionSpec: []types.IntegrationPartition{
+						{
+							FieldName:      ptr.String("__FieldName__"),
+							FunctionSpec:   ptr.String("__FunctionSpec__"),
+							ConversionSpec: ptr.String("__ConversionSpec__"),
+						},
+						{
+							FieldName:      ptr.String("__FieldName__"),
+							FunctionSpec:   ptr.String("__FunctionSpec__"),
+							ConversionSpec: ptr.String("__ConversionSpec__"),
+						},
+					},
+					TargetTableName: ptr.String("__TargetTableName__"),
+					IntegrationArn:  ptr.String("__IntegrationArn__"),
+				},
+			},
+		},
+		Marker: ptr.String("__Marker__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("ListIntegrationTableProperties.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.ListIntegrationTableProperties(context.Background(), &ListIntegrationTablePropertiesInput{
+		Marker: ptr.String("__Marker__"),
+		Filters: []types.IntegrationTablePropertiesFilter{
+			{
+				Name: ptr.String("__Name__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Name: ptr.String("__Name__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		MaxRecords: ptr.Int32(1),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "ListIntegrationTableProperties.response", err)
 	}
 }
 
@@ -38059,7 +39076,8 @@ func TestCheckResponseSnapshot_ModifyIntegration(t *testing.T) {
 			SourceProperties: map[string]string{
 				"key0": "__Value__",
 			},
-			ContinuousSync: ptr.Bool(true),
+			ContinuousSync:  ptr.Bool(true),
+			TargetNamespace: ptr.String("__TargetNamespace__"),
 		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("ModifyIntegration.response")
@@ -38079,7 +39097,8 @@ func TestCheckResponseSnapshot_ModifyIntegration(t *testing.T) {
 			SourceProperties: map[string]string{
 				"key0": "__Value__",
 			},
-			ContinuousSync: ptr.Bool(true),
+			ContinuousSync:  ptr.Bool(true),
+			TargetNamespace: ptr.String("__TargetNamespace__"),
 		},
 		IntegrationName: ptr.String("__IntegrationName__"),
 	})
@@ -38088,6 +39107,258 @@ func TestCheckResponseSnapshot_ModifyIntegration(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "ModifyIntegration.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_PublishDataQualityResultV2(t *testing.T) {
+	want := &PublishDataQualityResultV2Output{
+		ResultId: ptr.String("__ResultId__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("PublishDataQualityResultV2.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.PublishDataQualityResultV2(context.Background(), &PublishDataQualityResultV2Input{
+		Dimensions: map[string]string{
+			"key0": "__Value__",
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		ExecutionStartedOn:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		ExecutionCompletedOn: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		Score:                ptr.Float64(1.0),
+		RuleResults: []types.DataQualityRuleResult{
+			{
+				Name:              ptr.String("__Name__"),
+				Description:       ptr.String("__Description__"),
+				EvaluationMessage: ptr.String("__EvaluationMessage__"),
+				Result:            types.DataQualityRuleResultStatus("PASS"),
+				EvaluatedMetrics: map[string]float64{
+					"key0": 1.0,
+				},
+				EvaluatedRule: ptr.String("__EvaluatedRule__"),
+				RuleMetrics: map[string]float64{
+					"key0": 1.0,
+				},
+				Labels: map[string]string{
+					"key0": "__Value__",
+				},
+			},
+			{
+				Name:              ptr.String("__Name__"),
+				Description:       ptr.String("__Description__"),
+				EvaluationMessage: ptr.String("__EvaluationMessage__"),
+				Result:            types.DataQualityRuleResultStatus("PASS"),
+				EvaluatedMetrics: map[string]float64{
+					"key0": 1.0,
+				},
+				EvaluatedRule: ptr.String("__EvaluatedRule__"),
+				RuleMetrics: map[string]float64{
+					"key0": 1.0,
+				},
+				Labels: map[string]string{
+					"key0": "__Value__",
+				},
+			},
+		},
+		AnalyzerResults: []types.DataQualityAnalyzerResult{
+			{
+				Name:              ptr.String("__Name__"),
+				Description:       ptr.String("__Description__"),
+				EvaluationMessage: ptr.String("__EvaluationMessage__"),
+				EvaluatedMetrics: map[string]float64{
+					"key0": 1.0,
+				},
+				EvaluatedDistributions: map[string]types.DistributionData{
+					"key0": {
+						BinEdges: []string{
+							"__Member__",
+							"__Member__",
+						},
+						Count: []int32{
+							1,
+							1,
+						},
+						DataType: ptr.String("__DataType__"),
+					},
+				},
+			},
+			{
+				Name:              ptr.String("__Name__"),
+				Description:       ptr.String("__Description__"),
+				EvaluationMessage: ptr.String("__EvaluationMessage__"),
+				EvaluatedMetrics: map[string]float64{
+					"key0": 1.0,
+				},
+				EvaluatedDistributions: map[string]types.DistributionData{
+					"key0": {
+						BinEdges: []string{
+							"__Member__",
+							"__Member__",
+						},
+						Count: []int32{
+							1,
+							1,
+						},
+						DataType: ptr.String("__DataType__"),
+					},
+				},
+			},
+		},
+		Observations: []types.DataQualityObservation{
+			{
+				Description: ptr.String("__Description__"),
+				MetricBasedObservation: &types.MetricBasedObservation{
+					MetricName:  ptr.String("__MetricName__"),
+					StatisticId: ptr.String("__StatisticId__"),
+					MetricValues: &types.DataQualityMetricValues{
+						ActualValue:   ptr.Float64(1.0),
+						ExpectedValue: ptr.Float64(1.0),
+						LowerLimit:    ptr.Float64(1.0),
+						UpperLimit:    ptr.Float64(1.0),
+					},
+					NewRules: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+			{
+				Description: ptr.String("__Description__"),
+				MetricBasedObservation: &types.MetricBasedObservation{
+					MetricName:  ptr.String("__MetricName__"),
+					StatisticId: ptr.String("__StatisticId__"),
+					MetricValues: &types.DataQualityMetricValues{
+						ActualValue:   ptr.Float64(1.0),
+						ExpectedValue: ptr.Float64(1.0),
+						LowerLimit:    ptr.Float64(1.0),
+						UpperLimit:    ptr.Float64(1.0),
+					},
+					NewRules: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+		},
+		AggregatedMetrics: &types.DataQualityAggregatedMetrics{
+			TotalRowsProcessed:  ptr.Float64(1.0),
+			TotalRowsPassed:     ptr.Float64(1.0),
+			TotalRowsFailed:     ptr.Float64(1.0),
+			TotalRulesProcessed: ptr.Float64(1.0),
+			TotalRulesPassed:    ptr.Float64(1.0),
+			TotalRulesFailed:    ptr.Float64(1.0),
+		},
+		Statistics: []types.StatisticSummary{
+			{
+				StatisticId: ptr.String("__StatisticId__"),
+				ProfileId:   ptr.String("__ProfileId__"),
+				RunIdentifier: &types.RunIdentifier{
+					RunId:    ptr.String("__RunId__"),
+					JobRunId: ptr.String("__JobRunId__"),
+				},
+				StatisticName: ptr.String("__StatisticName__"),
+				DoubleValue:   1.0,
+				DistributionValue: &types.DistributionData{
+					BinEdges: []string{
+						"__Member__",
+						"__Member__",
+					},
+					Count: []int32{
+						1,
+						1,
+					},
+					DataType: ptr.String("__DataType__"),
+				},
+				EvaluationLevel: types.StatisticEvaluationLevel("Dataset"),
+				ColumnsReferenced: []string{
+					"__Member__",
+					"__Member__",
+				},
+				ReferencedDatasets: []string{
+					"__Member__",
+					"__Member__",
+				},
+				StatisticProperties: map[string]string{
+					"key0": "__Value__",
+				},
+				RecordedOn: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				InclusionAnnotation: &types.TimestampedInclusionAnnotation{
+					Value:          types.InclusionAnnotationValue("INCLUDE"),
+					LastModifiedOn: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				},
+			},
+			{
+				StatisticId: ptr.String("__StatisticId__"),
+				ProfileId:   ptr.String("__ProfileId__"),
+				RunIdentifier: &types.RunIdentifier{
+					RunId:    ptr.String("__RunId__"),
+					JobRunId: ptr.String("__JobRunId__"),
+				},
+				StatisticName: ptr.String("__StatisticName__"),
+				DoubleValue:   1.0,
+				DistributionValue: &types.DistributionData{
+					BinEdges: []string{
+						"__Member__",
+						"__Member__",
+					},
+					Count: []int32{
+						1,
+						1,
+					},
+					DataType: ptr.String("__DataType__"),
+				},
+				EvaluationLevel: types.StatisticEvaluationLevel("Dataset"),
+				ColumnsReferenced: []string{
+					"__Member__",
+					"__Member__",
+				},
+				ReferencedDatasets: []string{
+					"__Member__",
+					"__Member__",
+				},
+				StatisticProperties: map[string]string{
+					"key0": "__Value__",
+				},
+				RecordedOn: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				InclusionAnnotation: &types.TimestampedInclusionAnnotation{
+					Value:          types.InclusionAnnotationValue("INCLUDE"),
+					LastModifiedOn: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				},
+			},
+		},
+		RunConfiguration: &types.DataQualityConfigurationV2{
+			ObservationsEnabled: types.ObservationConfiguration("ALL"),
+			ObservationMode:     types.ObservationMode("SCHEDULED"),
+		},
+		ClientToken:       ptr.String("__ClientToken__"),
+		EvaluationContext: ptr.String("__EvaluationContext__"),
+		Descriptors: map[string]string{
+			"key0": "__Value__",
+		},
+		RulesetName:                      ptr.String("__RulesetName__"),
+		DataQualitySecurityConfiguration: ptr.String("__DataQualitySecurityConfiguration__"),
+		Telemetry: &types.DataQualityTelemetry{
+			VcpuHours: ptr.Float64(1.0),
+			FlagsEnabled: map[string]string{
+				"key0": "__Value__",
+			},
+			LibraryVersion:     ptr.String("__LibraryVersion__"),
+			SparkVersion:       ptr.String("__SparkVersion__"),
+			HostRuntimeVersion: ptr.String("__HostRuntimeVersion__"),
+			Engine:             types.DataQualityEngine("SPARK"),
+		},
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "PublishDataQualityResultV2.response", err)
 	}
 }
 
@@ -39564,6 +40835,7 @@ func TestCheckResponseSnapshot_SearchTables(t *testing.T) {
 				},
 				ViewDefinition: &types.ViewDefinition{
 					IsProtected:      ptr.Bool(true),
+					IsManaged:        ptr.Bool(true),
 					Definer:          ptr.String("__Definer__"),
 					ViewVersionId:    1,
 					ViewVersionToken: ptr.String("__ViewVersionToken__"),
@@ -39576,6 +40848,22 @@ func TestCheckResponseSnapshot_SearchTables(t *testing.T) {
 					SubObjectVersionIds: []int64{
 						1,
 						1,
+					},
+					SubObjectsStatistics: []types.SubObjectStatistics{
+						{
+							SourceType:     types.SubObjectSourceType("HIVE_PARQUET"),
+							GlueVersionId:  ptr.String("__GlueVersionId__"),
+							PartitionCount: ptr.Int64(1),
+							FileCount:      ptr.Int64(1),
+							TotalFileBytes: ptr.Int64(1),
+						},
+						{
+							SourceType:     types.SubObjectSourceType("HIVE_PARQUET"),
+							GlueVersionId:  ptr.String("__GlueVersionId__"),
+							PartitionCount: ptr.Int64(1),
+							FileCount:      ptr.Int64(1),
+							TotalFileBytes: ptr.Int64(1),
+						},
 					},
 					Representations: []types.ViewRepresentation{
 						{
@@ -39594,6 +40882,9 @@ func TestCheckResponseSnapshot_SearchTables(t *testing.T) {
 							ValidationConnection: ptr.String("__ValidationConnection__"),
 							IsStale:              ptr.Bool(true),
 						},
+					},
+					SparkPipelineInfo: map[string]string{
+						"key0": "__Value__",
 					},
 				},
 				IsMultiDialectView: ptr.Bool(true),
@@ -39779,6 +41070,9 @@ func TestCheckResponseSnapshot_SearchTables(t *testing.T) {
 							},
 						},
 					},
+				},
+				RLSProperties: &types.RLSProperties{
+					DefaultRLSPolicy: ptr.String("__DefaultRLSPolicy__"),
 				},
 			},
 			{
@@ -39909,6 +41203,7 @@ func TestCheckResponseSnapshot_SearchTables(t *testing.T) {
 				},
 				ViewDefinition: &types.ViewDefinition{
 					IsProtected:      ptr.Bool(true),
+					IsManaged:        ptr.Bool(true),
 					Definer:          ptr.String("__Definer__"),
 					ViewVersionId:    1,
 					ViewVersionToken: ptr.String("__ViewVersionToken__"),
@@ -39921,6 +41216,22 @@ func TestCheckResponseSnapshot_SearchTables(t *testing.T) {
 					SubObjectVersionIds: []int64{
 						1,
 						1,
+					},
+					SubObjectsStatistics: []types.SubObjectStatistics{
+						{
+							SourceType:     types.SubObjectSourceType("HIVE_PARQUET"),
+							GlueVersionId:  ptr.String("__GlueVersionId__"),
+							PartitionCount: ptr.Int64(1),
+							FileCount:      ptr.Int64(1),
+							TotalFileBytes: ptr.Int64(1),
+						},
+						{
+							SourceType:     types.SubObjectSourceType("HIVE_PARQUET"),
+							GlueVersionId:  ptr.String("__GlueVersionId__"),
+							PartitionCount: ptr.Int64(1),
+							FileCount:      ptr.Int64(1),
+							TotalFileBytes: ptr.Int64(1),
+						},
 					},
 					Representations: []types.ViewRepresentation{
 						{
@@ -39939,6 +41250,9 @@ func TestCheckResponseSnapshot_SearchTables(t *testing.T) {
 							ValidationConnection: ptr.String("__ValidationConnection__"),
 							IsStale:              ptr.Bool(true),
 						},
+					},
+					SparkPipelineInfo: map[string]string{
+						"key0": "__Value__",
 					},
 				},
 				IsMultiDialectView: ptr.Bool(true),
@@ -40125,6 +41439,9 @@ func TestCheckResponseSnapshot_SearchTables(t *testing.T) {
 						},
 					},
 				},
+				RLSProperties: &types.RLSProperties{
+					DefaultRLSPolicy: ptr.String("__DefaultRLSPolicy__"),
+				},
 			},
 		},
 	}
@@ -40244,6 +41561,7 @@ func TestCheckResponseSnapshot_StartColumnStatisticsTaskRunSchedule(t *testing.T
 	got, err := svc.StartColumnStatisticsTaskRunSchedule(context.Background(), &StartColumnStatisticsTaskRunScheduleInput{
 		DatabaseName: ptr.String("__DatabaseName__"),
 		TableName:    ptr.String("__TableName__"),
+		CatalogID:    ptr.String("__CatalogID__"),
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -40338,6 +41656,7 @@ func TestCheckResponseSnapshot_StartDataQualityRuleRecommendationRun(t *testing.
 		AdditionalRunOptions: &types.DataQualityRuleRecommendationRunAdditionalRunOptions{
 			CustomLogGroupPrefix: ptr.String("__CustomLogGroupPrefix__"),
 		},
+		RecommendationMode: types.RecommendationMode("BASIC"),
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -40698,6 +42017,7 @@ func TestCheckResponseSnapshot_StopColumnStatisticsTaskRun(t *testing.T) {
 	got, err := svc.StopColumnStatisticsTaskRun(context.Background(), &StopColumnStatisticsTaskRunInput{
 		DatabaseName: ptr.String("__DatabaseName__"),
 		TableName:    ptr.String("__TableName__"),
+		CatalogID:    ptr.String("__CatalogID__"),
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -40720,6 +42040,7 @@ func TestCheckResponseSnapshot_StopColumnStatisticsTaskRunSchedule(t *testing.T)
 	got, err := svc.StopColumnStatisticsTaskRunSchedule(context.Background(), &StopColumnStatisticsTaskRunScheduleInput{
 		DatabaseName: ptr.String("__DatabaseName__"),
 		TableName:    ptr.String("__TableName__"),
+		CatalogID:    ptr.String("__CatalogID__"),
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -42023,6 +43344,7 @@ func TestCheckResponseSnapshot_UpdateCrawler(t *testing.T) {
 		},
 		Configuration:                ptr.String("__Configuration__"),
 		CrawlerSecurityConfiguration: ptr.String("__CrawlerSecurityConfiguration__"),
+		CatalogId:                    ptr.String("__CatalogId__"),
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -42349,6 +43671,7 @@ func TestCheckResponseSnapshot_UpdateIntegrationTableProperties(t *testing.T) {
 				},
 			},
 			TargetTableName: ptr.String("__TargetTableName__"),
+			IntegrationArn:  ptr.String("__IntegrationArn__"),
 		},
 	})
 	if err != nil {
@@ -45536,8 +46859,15 @@ func TestCheckResponseSnapshot_UpdateTable(t *testing.T) {
 				Name:         ptr.String("__Name__"),
 				Region:       ptr.String("__Region__"),
 			},
+			FederatedTable: &types.FederatedTable{
+				Identifier:         ptr.String("__Identifier__"),
+				DatabaseIdentifier: ptr.String("__DatabaseIdentifier__"),
+				ConnectionName:     ptr.String("__ConnectionName__"),
+				ConnectionType:     ptr.String("__ConnectionType__"),
+			},
 			ViewDefinition: &types.ViewDefinitionInput{
 				IsProtected: ptr.Bool(true),
+				IsManaged:   ptr.Bool(true),
 				Definer:     ptr.String("__Definer__"),
 				Representations: []types.ViewRepresentationInput{
 					{
@@ -45566,6 +46896,25 @@ func TestCheckResponseSnapshot_UpdateTable(t *testing.T) {
 				SubObjectVersionIds: []int64{
 					1,
 					1,
+				},
+				SubObjectsStatistics: []types.SubObjectStatistics{
+					{
+						SourceType:     types.SubObjectSourceType("HIVE_PARQUET"),
+						GlueVersionId:  ptr.String("__GlueVersionId__"),
+						PartitionCount: ptr.Int64(1),
+						FileCount:      ptr.Int64(1),
+						TotalFileBytes: ptr.Int64(1),
+					},
+					{
+						SourceType:     types.SubObjectSourceType("HIVE_PARQUET"),
+						GlueVersionId:  ptr.String("__GlueVersionId__"),
+						PartitionCount: ptr.Int64(1),
+						FileCount:      ptr.Int64(1),
+						TotalFileBytes: ptr.Int64(1),
+					},
+				},
+				SparkPipelineInfo: map[string]string{
+					"key0": "__Value__",
 				},
 			},
 		},
@@ -46304,6 +47653,7 @@ func TestCheckResponseSnapshot_Error_ColumnStatisticsTaskNotRunningException(t *
 	_, opErr := svc.StopColumnStatisticsTaskRun(context.Background(), &StopColumnStatisticsTaskRunInput{
 		DatabaseName: ptr.String("__DatabaseName__"),
 		TableName:    ptr.String("__TableName__"),
+		CatalogID:    ptr.String("__CatalogID__"),
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
@@ -46372,6 +47722,7 @@ func TestCheckResponseSnapshot_Error_ColumnStatisticsTaskStoppingException(t *te
 	_, opErr := svc.StopColumnStatisticsTaskRun(context.Background(), &StopColumnStatisticsTaskRunInput{
 		DatabaseName: ptr.String("__DatabaseName__"),
 		TableName:    ptr.String("__TableName__"),
+		CatalogID:    ptr.String("__CatalogID__"),
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
@@ -46516,7 +47867,8 @@ func TestCheckResponseSnapshot_Error_ConflictException(t *testing.T) {
 			SourceProperties: map[string]string{
 				"key0": "__Value__",
 			},
-			ContinuousSync: ptr.Bool(true),
+			ContinuousSync:  ptr.Bool(true),
+			TargetNamespace: ptr.String("__TargetNamespace__"),
 		},
 	})
 	if opErr == nil {
@@ -47245,7 +48597,8 @@ func TestCheckResponseSnapshot_Error_IntegrationConflictOperationFault(t *testin
 			SourceProperties: map[string]string{
 				"key0": "__Value__",
 			},
-			ContinuousSync: ptr.Bool(true),
+			ContinuousSync:  ptr.Bool(true),
+			TargetNamespace: ptr.String("__TargetNamespace__"),
 		},
 	})
 	if opErr == nil {
@@ -47324,7 +48677,8 @@ func TestCheckResponseSnapshot_Error_IntegrationQuotaExceededFault(t *testing.T)
 			SourceProperties: map[string]string{
 				"key0": "__Value__",
 			},
-			ContinuousSync: ptr.Bool(true),
+			ContinuousSync:  ptr.Bool(true),
+			TargetNamespace: ptr.String("__TargetNamespace__"),
 		},
 	})
 	if opErr == nil {
@@ -47376,7 +48730,8 @@ func TestCheckResponseSnapshot_Error_InternalServerException(t *testing.T) {
 			SourceProperties: map[string]string{
 				"key0": "__Value__",
 			},
-			ContinuousSync: ptr.Bool(true),
+			ContinuousSync:  ptr.Bool(true),
+			TargetNamespace: ptr.String("__TargetNamespace__"),
 		},
 	})
 	if opErr == nil {
@@ -47584,7 +48939,8 @@ func TestCheckResponseSnapshot_Error_KMSKeyNotAccessibleFault(t *testing.T) {
 			SourceProperties: map[string]string{
 				"key0": "__Value__",
 			},
-			ContinuousSync: ptr.Bool(true),
+			ContinuousSync:  ptr.Bool(true),
+			TargetNamespace: ptr.String("__TargetNamespace__"),
 		},
 	})
 	if opErr == nil {
@@ -48092,7 +49448,8 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 			SourceProperties: map[string]string{
 				"key0": "__Value__",
 			},
-			ContinuousSync: ptr.Bool(true),
+			ContinuousSync:  ptr.Bool(true),
+			TargetNamespace: ptr.String("__TargetNamespace__"),
 		},
 	})
 	if opErr == nil {

@@ -5,7 +5,9 @@ package eks
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/eks/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/eks/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -103,6 +105,30 @@ type CreateFargateProfileInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateFargateProfileInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateFargateProfileRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateFargateProfileInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientRequestToken != nil {
+		s.WriteString(schemas.CreateFargateProfileRequest_clientRequestToken, *v.ClientRequestToken)
+	}
+	if v.ClusterName != nil {
+		s.WriteString(schemas.CreateFargateProfileRequest_clusterName, *v.ClusterName)
+	}
+	if v.FargateProfileName != nil {
+		s.WriteString(schemas.CreateFargateProfileRequest_fargateProfileName, *v.FargateProfileName)
+	}
+	if v.PodExecutionRoleArn != nil {
+		s.WriteString(schemas.CreateFargateProfileRequest_podExecutionRoleArn, *v.PodExecutionRoleArn)
+	}
+	serializeFargateProfileSelectors(s, schemas.CreateFargateProfileRequest_selectors, v.Selectors)
+	serializeStringList(s, schemas.CreateFargateProfileRequest_subnets, v.Subnets)
+	serializeTagMap(s, schemas.CreateFargateProfileRequest_tags, v.Tags)
+}
+
 type CreateFargateProfileOutput struct {
 
 	// The full description of your new Fargate profile.
@@ -114,13 +140,34 @@ type CreateFargateProfileOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateFargateProfileOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateFargateProfileResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateFargateProfileOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FargateProfile != nil {
+		s.WriteStruct(schemas.CreateFargateProfileResponse_fargateProfile)
+		v.FargateProfile.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateFargateProfileOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateFargateProfileResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateFargateProfileResponse_fargateProfile:
+			v.FargateProfile = &types.FargateProfile{}
+			return v.FargateProfile.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateFargateProfileMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateFargateProfile{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateFargateProfile, schemas.CreateFargateProfileRequest, schemas.CreateFargateProfileResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateFargateProfile{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateFargateProfile, schemas.CreateFargateProfileRequest, schemas.CreateFargateProfileResponse), output: &CreateFargateProfileOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

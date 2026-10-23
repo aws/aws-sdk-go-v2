@@ -4,7 +4,9 @@ package inspector2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/inspector2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/inspector2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -36,6 +38,28 @@ type DisableInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DisableInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DisableRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DisableInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAccountIdSet(s, schemas.DisableRequest_accountIds, v.AccountIds)
+	serializeDisableResourceTypeList(s, schemas.DisableRequest_resourceTypes, v.ResourceTypes)
+}
+func (v *DisableInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DisableRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DisableRequest_accountIds:
+			return deserializeAccountIdSet(d, schemas.DisableRequest_accountIds, &v.AccountIds)
+		case schemas.DisableRequest_resourceTypes:
+			return deserializeDisableResourceTypeList(d, schemas.DisableRequest_resourceTypes, &v.ResourceTypes)
+		}
+		return nil
+	})
+}
+
 type DisableOutput struct {
 
 	// Information on the accounts that have had Amazon Inspector scans successfully
@@ -54,13 +78,32 @@ type DisableOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DisableOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DisableResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DisableOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAccountList(s, schemas.DisableResponse_accounts, v.Accounts)
+	serializeFailedAccountList(s, schemas.DisableResponse_failedAccounts, v.FailedAccounts)
+}
+func (v *DisableOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DisableResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DisableResponse_accounts:
+			return deserializeAccountList(d, schemas.DisableResponse_accounts, &v.Accounts)
+		case schemas.DisableResponse_failedAccounts:
+			return deserializeFailedAccountList(d, schemas.DisableResponse_failedAccounts, &v.FailedAccounts)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDisableMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDisable{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.Disable, schemas.DisableRequest, schemas.DisableResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDisable{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.Disable, schemas.DisableRequest, schemas.DisableResponse), output: &DisableOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

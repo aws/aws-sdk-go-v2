@@ -5,7 +5,9 @@ package mediatailor
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/mediatailor/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/mediatailor/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -53,6 +55,34 @@ type ListSourceLocationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListSourceLocationsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListSourceLocationsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListSourceLocationsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListSourceLocationsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListSourceLocationsRequest_NextToken, *v.NextToken)
+	}
+}
+func (v *ListSourceLocationsInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListSourceLocationsRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListSourceLocationsRequest_MaxResults:
+			v.MaxResults = new(int32)
+			return d.ReadInt32(schemas.ListSourceLocationsRequest_MaxResults, v.MaxResults)
+		case schemas.ListSourceLocationsRequest_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListSourceLocationsRequest_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
+
 type ListSourceLocationsOutput struct {
 
 	// A list of source locations.
@@ -68,13 +98,35 @@ type ListSourceLocationsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListSourceLocationsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListSourceLocationsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListSourceLocationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serialize__listOfSourceLocation(s, schemas.ListSourceLocationsResponse_Items, v.Items)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListSourceLocationsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListSourceLocationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListSourceLocationsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListSourceLocationsResponse_Items:
+			return deserialize__listOfSourceLocation(d, schemas.ListSourceLocationsResponse_Items, &v.Items)
+		case schemas.ListSourceLocationsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListSourceLocationsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListSourceLocationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListSourceLocations{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListSourceLocations, schemas.ListSourceLocationsRequest, schemas.ListSourceLocationsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListSourceLocations{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListSourceLocations, schemas.ListSourceLocationsRequest, schemas.ListSourceLocationsResponse), output: &ListSourceLocationsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

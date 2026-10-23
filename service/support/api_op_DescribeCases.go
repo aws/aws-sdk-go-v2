@@ -5,7 +5,9 @@ package support
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/support/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/support/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -113,6 +115,43 @@ type DescribeCasesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeCasesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeCasesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeCasesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AfterTime != nil {
+		s.WriteString(schemas.DescribeCasesRequest_afterTime, *v.AfterTime)
+	}
+	if v.BeforeTime != nil {
+		s.WriteString(schemas.DescribeCasesRequest_beforeTime, *v.BeforeTime)
+	}
+	serializeCaseIdList(s, schemas.DescribeCasesRequest_caseIdList, v.CaseIdList)
+	if v.DisplayId != nil {
+		s.WriteString(schemas.DescribeCasesRequest_displayId, *v.DisplayId)
+	}
+	if v.DryRun != nil {
+		s.WriteBool(schemas.DescribeCasesRequest_dryRun, *v.DryRun)
+	}
+	if v.IncludeCommunications != nil {
+		s.WriteBool(schemas.DescribeCasesRequest_includeCommunications, *v.IncludeCommunications)
+	}
+	if v.IncludeResolvedCases != false {
+		s.WriteBool(schemas.DescribeCasesRequest_includeResolvedCases, v.IncludeResolvedCases)
+	}
+	if v.Language != nil {
+		s.WriteString(schemas.DescribeCasesRequest_language, *v.Language)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.DescribeCasesRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeCasesRequest_nextToken, *v.NextToken)
+	}
+}
+
 // Returns an array of [CaseDetails] objects and a nextToken that defines a point for
 // pagination in the result set.
 //
@@ -131,13 +170,35 @@ type DescribeCasesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeCasesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeCasesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeCasesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeCaseList(s, schemas.DescribeCasesResponse_cases, v.Cases)
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeCasesResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *DescribeCasesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeCasesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeCasesResponse_cases:
+			return deserializeCaseList(d, schemas.DescribeCasesResponse_cases, &v.Cases)
+		case schemas.DescribeCasesResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.DescribeCasesResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeCasesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeCases{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeCases, schemas.DescribeCasesRequest, schemas.DescribeCasesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeCases{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeCases, schemas.DescribeCasesRequest, schemas.DescribeCasesResponse), output: &DescribeCasesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

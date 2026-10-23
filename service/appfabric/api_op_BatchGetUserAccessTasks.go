@@ -4,7 +4,9 @@ package appfabric
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/appfabric/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/appfabric/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -43,6 +45,19 @@ type BatchGetUserAccessTasksInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchGetUserAccessTasksInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchGetUserAccessTasksRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchGetUserAccessTasksInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AppBundleIdentifier != nil {
+		s.WriteString(schemas.BatchGetUserAccessTasksRequest_appBundleIdentifier, *v.AppBundleIdentifier)
+	}
+	serializeTaskIdList(s, schemas.BatchGetUserAccessTasksRequest_taskIdList, v.TaskIdList)
+}
+
 type BatchGetUserAccessTasksOutput struct {
 
 	// Contains a list of user access results.
@@ -54,13 +69,29 @@ type BatchGetUserAccessTasksOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchGetUserAccessTasksOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchGetUserAccessTasksResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchGetUserAccessTasksOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeUserAccessResultsList(s, schemas.BatchGetUserAccessTasksResponse_userAccessResultsList, v.UserAccessResultsList)
+}
+func (v *BatchGetUserAccessTasksOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchGetUserAccessTasksResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchGetUserAccessTasksResponse_userAccessResultsList:
+			return deserializeUserAccessResultsList(d, schemas.BatchGetUserAccessTasksResponse_userAccessResultsList, &v.UserAccessResultsList)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationBatchGetUserAccessTasksMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpBatchGetUserAccessTasks{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchGetUserAccessTasks, schemas.BatchGetUserAccessTasksRequest, schemas.BatchGetUserAccessTasksResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpBatchGetUserAccessTasks{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchGetUserAccessTasks, schemas.BatchGetUserAccessTasksRequest, schemas.BatchGetUserAccessTasksResponse), output: &BatchGetUserAccessTasksOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

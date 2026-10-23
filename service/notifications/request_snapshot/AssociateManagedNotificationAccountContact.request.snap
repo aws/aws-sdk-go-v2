@@ -2,4 +2,4 @@ PUT /contacts/associate-managed-notification/ACCOUNT_PRIMARY
 
 Content-Type: application/json
 
-{"managedNotificationConfigurationArn":"__ManagedNotificationConfigurationArn__"}
+{"isSensitiveEventsSubscribed":true,"managedNotificationConfigurationArn":"__ManagedNotificationConfigurationArn__"}

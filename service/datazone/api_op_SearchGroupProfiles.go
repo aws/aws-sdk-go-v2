@@ -5,7 +5,9 @@ package datazone
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/datazone/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/datazone/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -57,6 +59,30 @@ type SearchGroupProfilesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SearchGroupProfilesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SearchGroupProfilesInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SearchGroupProfilesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DomainIdentifier != nil {
+		s.WriteString(schemas.SearchGroupProfilesInput_domainIdentifier, *v.DomainIdentifier)
+	}
+	if v.GroupType != "" {
+		s.WriteString(schemas.SearchGroupProfilesInput_groupType, string(v.GroupType))
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.SearchGroupProfilesInput_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.SearchGroupProfilesInput_nextToken, *v.NextToken)
+	}
+	if v.SearchText != nil {
+		s.WriteString(schemas.SearchGroupProfilesInput_searchText, *v.SearchText)
+	}
+}
+
 type SearchGroupProfilesOutput struct {
 
 	// The results of the SearchGroupProfiles action.
@@ -75,13 +101,35 @@ type SearchGroupProfilesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SearchGroupProfilesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SearchGroupProfilesOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SearchGroupProfilesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeGroupProfileSummaries(s, schemas.SearchGroupProfilesOutput_items, v.Items)
+	if v.NextToken != nil {
+		s.WriteString(schemas.SearchGroupProfilesOutput_nextToken, *v.NextToken)
+	}
+}
+func (v *SearchGroupProfilesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SearchGroupProfilesOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SearchGroupProfilesOutput_items:
+			return deserializeGroupProfileSummaries(d, schemas.SearchGroupProfilesOutput_items, &v.Items)
+		case schemas.SearchGroupProfilesOutput_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.SearchGroupProfilesOutput_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationSearchGroupProfilesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpSearchGroupProfiles{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SearchGroupProfiles, schemas.SearchGroupProfilesInput, schemas.SearchGroupProfilesOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpSearchGroupProfiles{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SearchGroupProfiles, schemas.SearchGroupProfilesInput, schemas.SearchGroupProfilesOutput), output: &SearchGroupProfilesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

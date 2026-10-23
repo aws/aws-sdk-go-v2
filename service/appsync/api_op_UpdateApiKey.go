@@ -4,7 +4,9 @@ package appsync
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/appsync/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/appsync/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -46,6 +48,27 @@ type UpdateApiKeyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateApiKeyInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateApiKeyRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateApiKeyInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApiId != nil {
+		s.WriteString(schemas.UpdateApiKeyRequest_apiId, *v.ApiId)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateApiKeyRequest_description, *v.Description)
+	}
+	if v.Expires != 0 {
+		s.WriteInt64(schemas.UpdateApiKeyRequest_expires, v.Expires)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.UpdateApiKeyRequest_id, *v.Id)
+	}
+}
+
 type UpdateApiKeyOutput struct {
 
 	// The API key.
@@ -57,13 +80,34 @@ type UpdateApiKeyOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateApiKeyOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateApiKeyResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateApiKeyOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApiKey != nil {
+		s.WriteStruct(schemas.UpdateApiKeyResponse_apiKey)
+		v.ApiKey.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateApiKeyOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateApiKeyResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateApiKeyResponse_apiKey:
+			v.ApiKey = &types.ApiKey{}
+			return v.ApiKey.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateApiKeyMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateApiKey{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateApiKey, schemas.UpdateApiKeyRequest, schemas.UpdateApiKeyResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateApiKey{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateApiKey, schemas.UpdateApiKeyRequest, schemas.UpdateApiKeyResponse), output: &UpdateApiKeyOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

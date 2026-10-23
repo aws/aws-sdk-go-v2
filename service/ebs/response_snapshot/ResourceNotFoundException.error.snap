@@ -1,0 +1,4 @@
+404
+Content-Type: application/json
+
+{"__type":"ResourceNotFoundException","Message":"__Message__","Reason":"SNAPSHOT_NOT_FOUND"}

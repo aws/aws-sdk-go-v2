@@ -4,7 +4,9 @@ package sesv2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/sesv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sesv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -51,6 +53,24 @@ type PutSuppressedDestinationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutSuppressedDestinationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutSuppressedDestinationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutSuppressedDestinationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EmailAddress != nil {
+		s.WriteString(schemas.PutSuppressedDestinationRequest_EmailAddress, *v.EmailAddress)
+	}
+	if v.Reason != "" {
+		s.WriteString(schemas.PutSuppressedDestinationRequest_Reason, string(v.Reason))
+	}
+	if v.TenantName != nil {
+		s.WriteString(schemas.PutSuppressedDestinationRequest_TenantName, *v.TenantName)
+	}
+}
+
 // An HTTP 200 response if the request succeeds, or an error message if the
 // request fails.
 type PutSuppressedDestinationOutput struct {
@@ -60,13 +80,26 @@ type PutSuppressedDestinationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutSuppressedDestinationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutSuppressedDestinationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutSuppressedDestinationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *PutSuppressedDestinationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PutSuppressedDestinationResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPutSuppressedDestinationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpPutSuppressedDestination{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutSuppressedDestination, schemas.PutSuppressedDestinationRequest, schemas.PutSuppressedDestinationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpPutSuppressedDestination{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutSuppressedDestination, schemas.PutSuppressedDestinationRequest, schemas.PutSuppressedDestinationResponse), output: &PutSuppressedDestinationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

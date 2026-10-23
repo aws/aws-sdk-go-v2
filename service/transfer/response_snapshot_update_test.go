@@ -954,6 +954,8 @@ func TestUpdateResponseSnapshot_DescribeHostKey(t *testing.T) {
 					Value: ptr.String("__Value__"),
 				},
 			},
+			StorageType: types.HostKeyStorageType("SERVICE_MANAGED"),
+			SecretId:    ptr.String("__SecretId__"),
 		},
 	}
 	proto := awsjson.New11(schemas.TransferService)
@@ -1080,9 +1082,22 @@ func TestUpdateResponseSnapshot_DescribeServer(t *testing.T) {
 				PassiveIp:                ptr.String("__PassiveIp__"),
 				TlsSessionResumptionMode: types.TlsSessionResumptionMode("DISABLED"),
 				SetStatOption:            types.SetStatOption("DEFAULT"),
+				SftpPorts: []types.SftpPortWithOptions{
+					{
+						SftpPort:          ptr.Int32(1),
+						CommunicationMode: types.CommunicationMode("CLIENT_TALK_FIRST"),
+					},
+					{
+						SftpPort:          ptr.Int32(1),
+						CommunicationMode: types.CommunicationMode("CLIENT_TALK_FIRST"),
+					},
+				},
 				As2Transports: []types.As2Transport{
 					types.As2Transport("HTTP"),
 					types.As2Transport("HTTP"),
+				},
+				ProxyConfig: &types.ProxyConfig{
+					SftpMode: types.ProxyMode("NONE"),
 				},
 			},
 			Domain: types.Domain("S3"),
@@ -1606,6 +1621,10 @@ func TestUpdateResponseSnapshot_DescribeWorkflow(t *testing.T) {
 					Value: ptr.String("__Value__"),
 				},
 			},
+			StructuredLogDestinations: []string{
+				"__Member__",
+				"__Member__",
+			},
 		},
 	}
 	proto := awsjson.New11(schemas.TransferService)
@@ -1991,6 +2010,8 @@ func TestUpdateResponseSnapshot_ListHostKeys(t *testing.T) {
 				Description:  ptr.String("__Description__"),
 				Type:         ptr.String("__Type__"),
 				DateImported: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				StorageType:  types.HostKeyStorageType("SERVICE_MANAGED"),
+				SecretId:     ptr.String("__SecretId__"),
 			},
 			{
 				Arn:          ptr.String("__Arn__"),
@@ -1999,6 +2020,8 @@ func TestUpdateResponseSnapshot_ListHostKeys(t *testing.T) {
 				Description:  ptr.String("__Description__"),
 				Type:         ptr.String("__Type__"),
 				DateImported: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				StorageType:  types.HostKeyStorageType("SERVICE_MANAGED"),
+				SecretId:     ptr.String("__SecretId__"),
 			},
 		},
 	}

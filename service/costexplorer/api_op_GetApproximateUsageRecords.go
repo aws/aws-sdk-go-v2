@@ -4,7 +4,9 @@ package costexplorer
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/costexplorer/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/costexplorer/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -47,6 +49,22 @@ type GetApproximateUsageRecordsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetApproximateUsageRecordsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetApproximateUsageRecordsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetApproximateUsageRecordsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApproximationDimension != "" {
+		s.WriteString(schemas.GetApproximateUsageRecordsRequest_ApproximationDimension, string(v.ApproximationDimension))
+	}
+	if v.Granularity != "" {
+		s.WriteString(schemas.GetApproximateUsageRecordsRequest_Granularity, string(v.Granularity))
+	}
+	serializeUsageServices(s, schemas.GetApproximateUsageRecordsRequest_Services, v.Services)
+}
+
 type GetApproximateUsageRecordsOutput struct {
 
 	// The lookback period that's used for the estimation.
@@ -64,13 +82,42 @@ type GetApproximateUsageRecordsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetApproximateUsageRecordsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetApproximateUsageRecordsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetApproximateUsageRecordsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LookbackPeriod != nil {
+		s.WriteStruct(schemas.GetApproximateUsageRecordsResponse_LookbackPeriod)
+		v.LookbackPeriod.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeApproximateUsageRecordsPerService(s, schemas.GetApproximateUsageRecordsResponse_Services, v.Services)
+	if v.TotalRecords != 0 {
+		s.WriteInt64(schemas.GetApproximateUsageRecordsResponse_TotalRecords, v.TotalRecords)
+	}
+}
+func (v *GetApproximateUsageRecordsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetApproximateUsageRecordsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetApproximateUsageRecordsResponse_LookbackPeriod:
+			v.LookbackPeriod = &types.DateInterval{}
+			return v.LookbackPeriod.Deserialize(d)
+		case schemas.GetApproximateUsageRecordsResponse_Services:
+			return deserializeApproximateUsageRecordsPerService(d, schemas.GetApproximateUsageRecordsResponse_Services, &v.Services)
+		case schemas.GetApproximateUsageRecordsResponse_TotalRecords:
+			return d.ReadInt64(schemas.GetApproximateUsageRecordsResponse_TotalRecords, &v.TotalRecords)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetApproximateUsageRecordsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetApproximateUsageRecords{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetApproximateUsageRecords, schemas.GetApproximateUsageRecordsRequest, schemas.GetApproximateUsageRecordsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetApproximateUsageRecords{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetApproximateUsageRecords, schemas.GetApproximateUsageRecordsRequest, schemas.GetApproximateUsageRecordsResponse), output: &GetApproximateUsageRecordsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

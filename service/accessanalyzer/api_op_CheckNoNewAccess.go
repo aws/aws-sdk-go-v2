@@ -4,7 +4,9 @@ package accessanalyzer
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/accessanalyzer/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/accessanalyzer/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -59,6 +61,24 @@ type CheckNoNewAccessInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CheckNoNewAccessInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CheckNoNewAccessRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CheckNoNewAccessInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ExistingPolicyDocument != nil {
+		s.WriteString(schemas.CheckNoNewAccessRequest_existingPolicyDocument, *v.ExistingPolicyDocument)
+	}
+	if v.NewPolicyDocument != nil {
+		s.WriteString(schemas.CheckNoNewAccessRequest_newPolicyDocument, *v.NewPolicyDocument)
+	}
+	if v.PolicyType != "" {
+		s.WriteString(schemas.CheckNoNewAccessRequest_policyType, string(v.PolicyType))
+	}
+}
+
 type CheckNoNewAccessOutput struct {
 
 	// The message indicating whether the updated policy allows new access.
@@ -78,13 +98,45 @@ type CheckNoNewAccessOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CheckNoNewAccessOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CheckNoNewAccessResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CheckNoNewAccessOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.CheckNoNewAccessResponse_message, *v.Message)
+	}
+	serializeReasonSummaryList(s, schemas.CheckNoNewAccessResponse_reasons, v.Reasons)
+	if v.Result != "" {
+		s.WriteString(schemas.CheckNoNewAccessResponse_result, string(v.Result))
+	}
+}
+func (v *CheckNoNewAccessOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CheckNoNewAccessResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CheckNoNewAccessResponse_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.CheckNoNewAccessResponse_message, v.Message)
+		case schemas.CheckNoNewAccessResponse_reasons:
+			return deserializeReasonSummaryList(d, schemas.CheckNoNewAccessResponse_reasons, &v.Reasons)
+		case schemas.CheckNoNewAccessResponse_result:
+			var ev string
+			if err := d.ReadString(schemas.CheckNoNewAccessResponse_result, &ev); err != nil {
+				return err
+			}
+			v.Result = types.CheckNoNewAccessResult(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCheckNoNewAccessMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCheckNoNewAccess{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CheckNoNewAccess, schemas.CheckNoNewAccessRequest, schemas.CheckNoNewAccessResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCheckNoNewAccess{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CheckNoNewAccess, schemas.CheckNoNewAccessRequest, schemas.CheckNoNewAccessResponse), output: &CheckNoNewAccessOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

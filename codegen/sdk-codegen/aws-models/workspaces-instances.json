@@ -486,7 +486,7 @@
                     }
                 },
                 "SizeInGB": {
-                    "target": "com.amazonaws.workspacesinstances#NonNegativeInteger",
+                    "target": "com.amazonaws.workspacesinstances#VolumeSizeInGB",
                     "traits": {
                         "smithy.api#documentation": "<p>Volume size in gigabytes.</p>"
                     }
@@ -950,6 +950,9 @@
                 },
                 {
                     "target": "com.amazonaws.workspacesinstances#ListWorkspaceInstances"
+                },
+                {
+                    "target": "com.amazonaws.workspacesinstances#ModifyVolume"
                 },
                 {
                     "target": "com.amazonaws.workspacesinstances#TagResource"
@@ -2724,6 +2727,134 @@
                 }
             }
         },
+        "com.amazonaws.workspacesinstances#ModifyVolume": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.workspacesinstances#ModifyVolumeRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.workspacesinstances#ModifyVolumeResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.workspacesinstances#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.workspacesinstances#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.workspacesinstances#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.workspacesinstances#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.workspacesinstances#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.workspacesinstances#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.workspacesinstances#ValidationException"
+                },
+                {
+                    "target": "com.amazonaws.workspacesinstances#VolumeModificationRateExceededException"
+                }
+            ],
+            "traits": {
+                "aws.iam#iamAction": {
+                    "documentation": "Grants permission to modify a workspace managed volume in your account"
+                },
+                "smithy.api#documentation": "<p>Modifies the size, volume type, IOPS (input/output operations per second), or throughput of a volume. When you modify a volume, you must specify at least one of these parameters. You can modify a volume only after any previous modification for that volume has finished.</p> <p>To track the progress of a modification, use the Amazon EC2 <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeVolumesModifications.html\">DescribeVolumesModifications</a> operation. For more information, see <a href=\"https://docs.aws.amazon.com/ebs/latest/userguide/monitoring-volume-modifications.html\">Monitor the progress of Amazon EBS volume modifications</a> in the <i>Amazon EBS User Guide</i>.</p> <p>After you increase the size of a volume, you must extend the partition and file system to use the new storage capacity. For more information, see <a href=\"https://docs.aws.amazon.com/ebs/latest/userguide/recognize-expanded-volume-linux.html\">Extend the file system after resizing an Amazon EBS volume</a> in the <i>Amazon EBS User Guide</i>, which covers both <a href=\"https://docs.aws.amazon.com/ebs/latest/userguide/recognize-expanded-volume-linux.html#extend-linux\">Linux</a> and <a href=\"https://docs.aws.amazon.com/ebs/latest/userguide/recognize-expanded-volume-linux.html#extend-windows\">Windows</a> instances.</p>",
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.workspacesinstances#ModifyVolumeRequest": {
+            "type": "structure",
+            "members": {
+                "VolumeId": {
+                    "target": "com.amazonaws.workspacesinstances#VolumeId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the identifier of the volume to modify.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "SizeInGB": {
+                    "target": "com.amazonaws.workspacesinstances#VolumeSizeInGB",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the target size of the volume, in GiB. The target size must be greater than or equal to the current size of the volume. If you don't specify a size, the current size is retained.</p>"
+                    }
+                },
+                "VolumeType": {
+                    "target": "com.amazonaws.workspacesinstances#VolumeTypeEnum",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the target Amazon Elastic Block Store (Amazon EBS) volume type. If you don't specify a volume type, the current volume type is retained.</p>"
+                    }
+                },
+                "Iops": {
+                    "target": "com.amazonaws.workspacesinstances#NonNegativeInteger",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the target IOPS rate of the volume. This parameter is valid only for <code>gp3</code>, <code>io1</code>, and <code>io2</code> volumes. If you don't specify IOPS and keep the same volume type, the current IOPS rate is retained.</p>"
+                    }
+                },
+                "Throughput": {
+                    "target": "com.amazonaws.workspacesinstances#NonNegativeInteger",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the target throughput of the volume, in MiB/s. This parameter is valid only for <code>gp3</code> volumes. If you don't specify throughput and the volume remains <code>gp3</code>, the current throughput is retained.</p>"
+                    }
+                },
+                "ClientToken": {
+                    "target": "com.amazonaws.workspacesinstances#ClientToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Unique token to ensure idempotent volume modification, preventing duplicate volume modifications.</p>",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains the parameters for modifying a volume, including the target size, volume type, IOPS, or throughput.</p>",
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.workspacesinstances#ModifyVolumeResponse": {
+            "type": "structure",
+            "members": {
+                "VolumeId": {
+                    "target": "com.amazonaws.workspacesinstances#VolumeId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the identifier of the modified volume.</p>"
+                    }
+                },
+                "TargetSize": {
+                    "target": "com.amazonaws.workspacesinstances#NonNegativeInteger",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the target size of the volume, in GiB.</p>"
+                    }
+                },
+                "TargetVolumeType": {
+                    "target": "com.amazonaws.workspacesinstances#VolumeTypeEnum",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the target Amazon EBS volume type.</p>"
+                    }
+                },
+                "TargetIops": {
+                    "target": "com.amazonaws.workspacesinstances#NonNegativeInteger",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the target IOPS rate of the volume.</p>"
+                    }
+                },
+                "TargetThroughput": {
+                    "target": "com.amazonaws.workspacesinstances#NonNegativeInteger",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the target throughput of the volume, in MiB/s.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains the target configuration of the volume after the modification, including the size, volume type, IOPS, and throughput where applicable.</p>",
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.workspacesinstances#NestedVirtualizationEnum": {
             "type": "enum",
             "members": {
@@ -3681,6 +3812,46 @@
             "type": "string",
             "traits": {
                 "smithy.api#pattern": "^vol-[0-9a-zA-Z]{1,63}$"
+            }
+        },
+        "com.amazonaws.workspacesinstances#VolumeModificationRateExceededException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the reason that the modification request was rejected.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ResourceId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the identifier of the volume for which the modification request was rejected.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ResourceType": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the type of the resource for which the modification request was rejected.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The volume has a previous modification that is still in progress, or has reached the limit of four modifications in a rolling 24-hour period. Wait for the current modification to finish, or wait until the time indicated in the error message, and then retry the request.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 429
+            }
+        },
+        "com.amazonaws.workspacesinstances#VolumeSizeInGB": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 16384
+                }
             }
         },
         "com.amazonaws.workspacesinstances#VolumeTypeEnum": {

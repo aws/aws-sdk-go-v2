@@ -4,7 +4,9 @@ package arczonalshift
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/arczonalshift/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/arczonalshift/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -55,6 +57,21 @@ type UpdateZonalAutoshiftConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateZonalAutoshiftConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateZonalAutoshiftConfigurationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateZonalAutoshiftConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ResourceIdentifier != nil {
+		s.WriteString(schemas.UpdateZonalAutoshiftConfigurationRequest_resourceIdentifier, *v.ResourceIdentifier)
+	}
+	if v.ZonalAutoshiftStatus != "" {
+		s.WriteString(schemas.UpdateZonalAutoshiftConfigurationRequest_zonalAutoshiftStatus, string(v.ZonalAutoshiftStatus))
+	}
+}
+
 type UpdateZonalAutoshiftConfigurationOutput struct {
 
 	// The identifier for the resource that you updated the zonal autoshift
@@ -75,13 +92,42 @@ type UpdateZonalAutoshiftConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateZonalAutoshiftConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateZonalAutoshiftConfigurationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateZonalAutoshiftConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ResourceIdentifier != nil {
+		s.WriteString(schemas.UpdateZonalAutoshiftConfigurationResponse_resourceIdentifier, *v.ResourceIdentifier)
+	}
+	if v.ZonalAutoshiftStatus != "" {
+		s.WriteString(schemas.UpdateZonalAutoshiftConfigurationResponse_zonalAutoshiftStatus, string(v.ZonalAutoshiftStatus))
+	}
+}
+func (v *UpdateZonalAutoshiftConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateZonalAutoshiftConfigurationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateZonalAutoshiftConfigurationResponse_resourceIdentifier:
+			v.ResourceIdentifier = new(string)
+			return d.ReadString(schemas.UpdateZonalAutoshiftConfigurationResponse_resourceIdentifier, v.ResourceIdentifier)
+		case schemas.UpdateZonalAutoshiftConfigurationResponse_zonalAutoshiftStatus:
+			var ev string
+			if err := d.ReadString(schemas.UpdateZonalAutoshiftConfigurationResponse_zonalAutoshiftStatus, &ev); err != nil {
+				return err
+			}
+			v.ZonalAutoshiftStatus = types.ZonalAutoshiftStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateZonalAutoshiftConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateZonalAutoshiftConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateZonalAutoshiftConfiguration, schemas.UpdateZonalAutoshiftConfigurationRequest, schemas.UpdateZonalAutoshiftConfigurationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateZonalAutoshiftConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateZonalAutoshiftConfiguration, schemas.UpdateZonalAutoshiftConfigurationRequest, schemas.UpdateZonalAutoshiftConfigurationResponse), output: &UpdateZonalAutoshiftConfigurationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

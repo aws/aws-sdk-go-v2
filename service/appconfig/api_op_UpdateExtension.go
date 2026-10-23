@@ -4,7 +4,9 @@ package appconfig
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/appconfig/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/appconfig/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -49,6 +51,26 @@ type UpdateExtensionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateExtensionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateExtensionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateExtensionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeActionsMap(s, schemas.UpdateExtensionRequest_Actions, v.Actions)
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateExtensionRequest_Description, *v.Description)
+	}
+	if v.ExtensionIdentifier != nil {
+		s.WriteString(schemas.UpdateExtensionRequest_ExtensionIdentifier, *v.ExtensionIdentifier)
+	}
+	serializeParameterMap(s, schemas.UpdateExtensionRequest_Parameters, v.Parameters)
+	if v.VersionNumber != nil {
+		s.WriteInt32(schemas.UpdateExtensionRequest_VersionNumber, *v.VersionNumber)
+	}
+}
+
 type UpdateExtensionOutput struct {
 
 	// The actions defined in the extension.
@@ -81,13 +103,61 @@ type UpdateExtensionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateExtensionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Extension)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateExtensionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeActionsMap(s, schemas.Extension_Actions, v.Actions)
+	if v.Arn != nil {
+		s.WriteString(schemas.Extension_Arn, *v.Arn)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.Extension_Description, *v.Description)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.Extension_Id, *v.Id)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.Extension_Name, *v.Name)
+	}
+	serializeParameterMap(s, schemas.Extension_Parameters, v.Parameters)
+	if v.VersionNumber != 0 {
+		s.WriteInt32(schemas.Extension_VersionNumber, v.VersionNumber)
+	}
+}
+func (v *UpdateExtensionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Extension, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Extension_Actions:
+			return deserializeActionsMap(d, schemas.Extension_Actions, &v.Actions)
+		case schemas.Extension_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.Extension_Arn, v.Arn)
+		case schemas.Extension_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.Extension_Description, v.Description)
+		case schemas.Extension_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.Extension_Id, v.Id)
+		case schemas.Extension_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.Extension_Name, v.Name)
+		case schemas.Extension_Parameters:
+			return deserializeParameterMap(d, schemas.Extension_Parameters, &v.Parameters)
+		case schemas.Extension_VersionNumber:
+			return d.ReadInt32(schemas.Extension_VersionNumber, &v.VersionNumber)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateExtensionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateExtension{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateExtension, schemas.UpdateExtensionRequest, schemas.Extension)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateExtension{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateExtension, schemas.UpdateExtensionRequest, schemas.Extension), output: &UpdateExtensionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

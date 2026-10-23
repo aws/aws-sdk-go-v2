@@ -4,7 +4,9 @@ package quicksight
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/quicksight/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/quicksight/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,21 @@ type DescribeDataSetRefreshPropertiesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeDataSetRefreshPropertiesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeDataSetRefreshPropertiesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeDataSetRefreshPropertiesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AwsAccountId != nil {
+		s.WriteString(schemas.DescribeDataSetRefreshPropertiesRequest_AwsAccountId, *v.AwsAccountId)
+	}
+	if v.DataSetId != nil {
+		s.WriteString(schemas.DescribeDataSetRefreshPropertiesRequest_DataSetId, *v.DataSetId)
+	}
+}
+
 type DescribeDataSetRefreshPropertiesOutput struct {
 
 	// The dataset refresh properties.
@@ -56,13 +73,45 @@ type DescribeDataSetRefreshPropertiesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeDataSetRefreshPropertiesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeDataSetRefreshPropertiesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeDataSetRefreshPropertiesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DataSetRefreshProperties != nil {
+		s.WriteStruct(schemas.DescribeDataSetRefreshPropertiesResponse_DataSetRefreshProperties)
+		v.DataSetRefreshProperties.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RequestId != nil {
+		s.WriteString(schemas.DescribeDataSetRefreshPropertiesResponse_RequestId, *v.RequestId)
+	}
+	if v.Status != 0 {
+		s.WriteInt32(schemas.DescribeDataSetRefreshPropertiesResponse_Status, v.Status)
+	}
+}
+func (v *DescribeDataSetRefreshPropertiesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeDataSetRefreshPropertiesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeDataSetRefreshPropertiesResponse_DataSetRefreshProperties:
+			v.DataSetRefreshProperties = &types.DataSetRefreshProperties{}
+			return v.DataSetRefreshProperties.Deserialize(d)
+		case schemas.DescribeDataSetRefreshPropertiesResponse_RequestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.DescribeDataSetRefreshPropertiesResponse_RequestId, v.RequestId)
+		case schemas.DescribeDataSetRefreshPropertiesResponse_Status:
+			return d.ReadInt32(schemas.DescribeDataSetRefreshPropertiesResponse_Status, &v.Status)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeDataSetRefreshPropertiesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeDataSetRefreshProperties{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeDataSetRefreshProperties, schemas.DescribeDataSetRefreshPropertiesRequest, schemas.DescribeDataSetRefreshPropertiesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeDataSetRefreshProperties{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeDataSetRefreshProperties, schemas.DescribeDataSetRefreshPropertiesRequest, schemas.DescribeDataSetRefreshPropertiesResponse), output: &DescribeDataSetRefreshPropertiesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -5,7 +5,9 @@ package verifiedpermissions
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/verifiedpermissions/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/verifiedpermissions/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -71,6 +73,25 @@ type ListIdentitySourcesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListIdentitySourcesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListIdentitySourcesInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListIdentitySourcesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeIdentitySourceFilters(s, schemas.ListIdentitySourcesInput_filters, v.Filters)
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListIdentitySourcesInput_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListIdentitySourcesInput_nextToken, *v.NextToken)
+	}
+	if v.PolicyStoreId != nil {
+		s.WriteString(schemas.ListIdentitySourcesInput_policyStoreId, *v.PolicyStoreId)
+	}
+}
+
 type ListIdentitySourcesOutput struct {
 
 	// The list of identity sources stored in the specified policy store.
@@ -91,13 +112,35 @@ type ListIdentitySourcesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListIdentitySourcesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListIdentitySourcesOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListIdentitySourcesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeIdentitySources(s, schemas.ListIdentitySourcesOutput_identitySources, v.IdentitySources)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListIdentitySourcesOutput_nextToken, *v.NextToken)
+	}
+}
+func (v *ListIdentitySourcesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListIdentitySourcesOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListIdentitySourcesOutput_identitySources:
+			return deserializeIdentitySources(d, schemas.ListIdentitySourcesOutput_identitySources, &v.IdentitySources)
+		case schemas.ListIdentitySourcesOutput_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListIdentitySourcesOutput_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListIdentitySourcesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpListIdentitySources{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListIdentitySources, schemas.ListIdentitySourcesInput, schemas.ListIdentitySourcesOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpListIdentitySources{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListIdentitySources, schemas.ListIdentitySourcesInput, schemas.ListIdentitySourcesOutput), output: &ListIdentitySourcesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

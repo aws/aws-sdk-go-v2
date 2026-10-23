@@ -4,7 +4,9 @@ package networkfirewall
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/networkfirewall/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/networkfirewall/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -80,6 +82,32 @@ type UpdateContainerAssociationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateContainerAssociationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateContainerAssociationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateContainerAssociationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ContainerAssociationArn != nil {
+		s.WriteString(schemas.UpdateContainerAssociationRequest_ContainerAssociationArn, *v.ContainerAssociationArn)
+	}
+	if v.ContainerAssociationName != nil {
+		s.WriteString(schemas.UpdateContainerAssociationRequest_ContainerAssociationName, *v.ContainerAssociationName)
+	}
+	serializeContainerMonitoringConfigurations(s, schemas.UpdateContainerAssociationRequest_ContainerMonitoringConfigurations, v.ContainerMonitoringConfigurations)
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateContainerAssociationRequest_Description, *v.Description)
+	}
+	serializeTagList(s, schemas.UpdateContainerAssociationRequest_Tags, v.Tags)
+	if v.Type != "" {
+		s.WriteString(schemas.UpdateContainerAssociationRequest_Type, string(v.Type))
+	}
+	if v.UpdateToken != nil {
+		s.WriteString(schemas.UpdateContainerAssociationRequest_UpdateToken, *v.UpdateToken)
+	}
+}
+
 type UpdateContainerAssociationOutput struct {
 
 	// The Amazon Resource Name (ARN) of the container association.
@@ -126,13 +154,76 @@ type UpdateContainerAssociationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateContainerAssociationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateContainerAssociationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateContainerAssociationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ContainerAssociationArn != nil {
+		s.WriteString(schemas.UpdateContainerAssociationResponse_ContainerAssociationArn, *v.ContainerAssociationArn)
+	}
+	if v.ContainerAssociationName != nil {
+		s.WriteString(schemas.UpdateContainerAssociationResponse_ContainerAssociationName, *v.ContainerAssociationName)
+	}
+	serializeContainerMonitoringConfigurations(s, schemas.UpdateContainerAssociationResponse_ContainerMonitoringConfigurations, v.ContainerMonitoringConfigurations)
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateContainerAssociationResponse_Description, *v.Description)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.UpdateContainerAssociationResponse_Status, string(v.Status))
+	}
+	serializeTagList(s, schemas.UpdateContainerAssociationResponse_Tags, v.Tags)
+	if v.Type != "" {
+		s.WriteString(schemas.UpdateContainerAssociationResponse_Type, string(v.Type))
+	}
+	if v.UpdateToken != nil {
+		s.WriteString(schemas.UpdateContainerAssociationResponse_UpdateToken, *v.UpdateToken)
+	}
+}
+func (v *UpdateContainerAssociationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateContainerAssociationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateContainerAssociationResponse_ContainerAssociationArn:
+			v.ContainerAssociationArn = new(string)
+			return d.ReadString(schemas.UpdateContainerAssociationResponse_ContainerAssociationArn, v.ContainerAssociationArn)
+		case schemas.UpdateContainerAssociationResponse_ContainerAssociationName:
+			v.ContainerAssociationName = new(string)
+			return d.ReadString(schemas.UpdateContainerAssociationResponse_ContainerAssociationName, v.ContainerAssociationName)
+		case schemas.UpdateContainerAssociationResponse_ContainerMonitoringConfigurations:
+			return deserializeContainerMonitoringConfigurations(d, schemas.UpdateContainerAssociationResponse_ContainerMonitoringConfigurations, &v.ContainerMonitoringConfigurations)
+		case schemas.UpdateContainerAssociationResponse_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.UpdateContainerAssociationResponse_Description, v.Description)
+		case schemas.UpdateContainerAssociationResponse_Status:
+			var ev string
+			if err := d.ReadString(schemas.UpdateContainerAssociationResponse_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.ContainerAssociationStatus(ev)
+			return nil
+		case schemas.UpdateContainerAssociationResponse_Tags:
+			return deserializeTagList(d, schemas.UpdateContainerAssociationResponse_Tags, &v.Tags)
+		case schemas.UpdateContainerAssociationResponse_Type:
+			var ev string
+			if err := d.ReadString(schemas.UpdateContainerAssociationResponse_Type, &ev); err != nil {
+				return err
+			}
+			v.Type = types.ContainerMonitoringType(ev)
+			return nil
+		case schemas.UpdateContainerAssociationResponse_UpdateToken:
+			v.UpdateToken = new(string)
+			return d.ReadString(schemas.UpdateContainerAssociationResponse_UpdateToken, v.UpdateToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateContainerAssociationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpUpdateContainerAssociation{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateContainerAssociation, schemas.UpdateContainerAssociationRequest, schemas.UpdateContainerAssociationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpUpdateContainerAssociation{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateContainerAssociation, schemas.UpdateContainerAssociationRequest, schemas.UpdateContainerAssociationResponse), output: &UpdateContainerAssociationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

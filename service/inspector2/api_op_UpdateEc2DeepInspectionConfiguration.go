@@ -4,7 +4,9 @@ package inspector2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/inspector2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/inspector2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -42,6 +44,19 @@ type UpdateEc2DeepInspectionConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateEc2DeepInspectionConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateEc2DeepInspectionConfigurationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateEc2DeepInspectionConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ActivateDeepInspection != nil {
+		s.WriteBool(schemas.UpdateEc2DeepInspectionConfigurationRequest_activateDeepInspection, *v.ActivateDeepInspection)
+	}
+	serializePathList(s, schemas.UpdateEc2DeepInspectionConfigurationRequest_packagePaths, v.PackagePaths)
+}
+
 type UpdateEc2DeepInspectionConfigurationOutput struct {
 
 	// An error message explaining why new Amazon Inspector deep inspection custom
@@ -63,13 +78,48 @@ type UpdateEc2DeepInspectionConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateEc2DeepInspectionConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateEc2DeepInspectionConfigurationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateEc2DeepInspectionConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ErrorMessage != nil {
+		s.WriteString(schemas.UpdateEc2DeepInspectionConfigurationResponse_errorMessage, *v.ErrorMessage)
+	}
+	serializePathList(s, schemas.UpdateEc2DeepInspectionConfigurationResponse_orgPackagePaths, v.OrgPackagePaths)
+	serializePathList(s, schemas.UpdateEc2DeepInspectionConfigurationResponse_packagePaths, v.PackagePaths)
+	if v.Status != "" {
+		s.WriteString(schemas.UpdateEc2DeepInspectionConfigurationResponse_status, string(v.Status))
+	}
+}
+func (v *UpdateEc2DeepInspectionConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateEc2DeepInspectionConfigurationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateEc2DeepInspectionConfigurationResponse_errorMessage:
+			v.ErrorMessage = new(string)
+			return d.ReadString(schemas.UpdateEc2DeepInspectionConfigurationResponse_errorMessage, v.ErrorMessage)
+		case schemas.UpdateEc2DeepInspectionConfigurationResponse_orgPackagePaths:
+			return deserializePathList(d, schemas.UpdateEc2DeepInspectionConfigurationResponse_orgPackagePaths, &v.OrgPackagePaths)
+		case schemas.UpdateEc2DeepInspectionConfigurationResponse_packagePaths:
+			return deserializePathList(d, schemas.UpdateEc2DeepInspectionConfigurationResponse_packagePaths, &v.PackagePaths)
+		case schemas.UpdateEc2DeepInspectionConfigurationResponse_status:
+			var ev string
+			if err := d.ReadString(schemas.UpdateEc2DeepInspectionConfigurationResponse_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.Ec2DeepInspectionStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateEc2DeepInspectionConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateEc2DeepInspectionConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateEc2DeepInspectionConfiguration, schemas.UpdateEc2DeepInspectionConfigurationRequest, schemas.UpdateEc2DeepInspectionConfigurationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateEc2DeepInspectionConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateEc2DeepInspectionConfiguration, schemas.UpdateEc2DeepInspectionConfigurationRequest, schemas.UpdateEc2DeepInspectionConfigurationResponse), output: &UpdateEc2DeepInspectionConfigurationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

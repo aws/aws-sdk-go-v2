@@ -668,6 +668,10 @@ type DeploymentGroupInfo struct {
 	// want to run and whether to route deployment traffic behind a load balancer.
 	DeploymentStyle *DeploymentStyle
 
+	// Options that control how CodeDeploy manages Amazon EC2 Auto Scaling groups
+	// during a deployment.
+	Ec2DeploymentOptions *EC2DeploymentOptions
+
 	// The Amazon EC2 tags on which to filter. The deployment group includes EC2
 	// instances with any of the specified tags.
 	Ec2TagFilters []EC2TagFilter
@@ -782,6 +786,11 @@ func (v *DeploymentGroupInfo) SerializeMembers(s smithy.ShapeSerializer) {
 		v.DeploymentStyle.SerializeMembers(s)
 		s.CloseStruct()
 	}
+	if v.Ec2DeploymentOptions != nil {
+		s.WriteStruct(schemas.DeploymentGroupInfo_ec2DeploymentOptions)
+		v.Ec2DeploymentOptions.SerializeMembers(s)
+		s.CloseStruct()
+	}
 	serializeEC2TagFilterList(s, schemas.DeploymentGroupInfo_ec2TagFilters, v.Ec2TagFilters)
 	if v.Ec2TagSet != nil {
 		s.WriteStruct(schemas.DeploymentGroupInfo_ec2TagSet)
@@ -862,6 +871,9 @@ func (v *DeploymentGroupInfo) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.DeploymentGroupInfo_deploymentStyle:
 			v.DeploymentStyle = &DeploymentStyle{}
 			return v.DeploymentStyle.Deserialize(d)
+		case schemas.DeploymentGroupInfo_ec2DeploymentOptions:
+			v.Ec2DeploymentOptions = &EC2DeploymentOptions{}
+			return v.Ec2DeploymentOptions.Deserialize(d)
 		case schemas.DeploymentGroupInfo_ec2TagFilters:
 			return deserializeEC2TagFilterList(d, schemas.DeploymentGroupInfo_ec2TagFilters, &v.Ec2TagFilters)
 		case schemas.DeploymentGroupInfo_ec2TagSet:
@@ -956,6 +968,19 @@ type DeploymentInfo struct {
 	//  The unique ID of a deployment.
 	DeploymentId *string
 
+	// The deployment's type. Valid values are:
+	//
+	//   - STANDARD : The deployment installed the specified revision.
+	//
+	//   - RESTART : The deployment restarted the application on the target instances
+	//   using the revision from the deployment group's last successful deployment,
+	//   without downloading a new revision.
+	//
+	// This field is absent for deployments created before deploymentMode existed, and
+	// for STANDARD deployments. An absent value must not be interpreted as STANDARD ;
+	// it simply means no value was recorded either way.
+	DeploymentMode DeploymentMode
+
 	// A summary of the deployment status of the instances in the deployment.
 	DeploymentOverview *DeploymentOverview
 
@@ -968,6 +993,10 @@ type DeploymentInfo struct {
 
 	// A comment about the deployment.
 	Description *string
+
+	// Options that control how CodeDeploy manages Amazon EC2 Auto Scaling groups
+	// during a deployment.
+	Ec2DeploymentOptions *EC2DeploymentOptions
 
 	// Information about any error associated with this deployment.
 	ErrorInformation *ErrorInformation
@@ -1106,6 +1135,9 @@ func (v *DeploymentInfo) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.DeploymentId != nil {
 		s.WriteString(schemas.DeploymentInfo_deploymentId, *v.DeploymentId)
 	}
+	if v.DeploymentMode != "" {
+		s.WriteString(schemas.DeploymentInfo_deploymentMode, string(v.DeploymentMode))
+	}
 	if v.DeploymentOverview != nil {
 		s.WriteStruct(schemas.DeploymentInfo_deploymentOverview)
 		v.DeploymentOverview.SerializeMembers(s)
@@ -1119,6 +1151,11 @@ func (v *DeploymentInfo) SerializeMembers(s smithy.ShapeSerializer) {
 	}
 	if v.Description != nil {
 		s.WriteString(schemas.DeploymentInfo_description, *v.Description)
+	}
+	if v.Ec2DeploymentOptions != nil {
+		s.WriteStruct(schemas.DeploymentInfo_ec2DeploymentOptions)
+		v.Ec2DeploymentOptions.SerializeMembers(s)
+		s.CloseStruct()
 	}
 	if v.ErrorInformation != nil {
 		s.WriteStruct(schemas.DeploymentInfo_errorInformation)
@@ -1226,6 +1263,13 @@ func (v *DeploymentInfo) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.DeploymentInfo_deploymentId:
 			v.DeploymentId = new(string)
 			return d.ReadString(schemas.DeploymentInfo_deploymentId, v.DeploymentId)
+		case schemas.DeploymentInfo_deploymentMode:
+			var ev string
+			if err := d.ReadString(schemas.DeploymentInfo_deploymentMode, &ev); err != nil {
+				return err
+			}
+			v.DeploymentMode = DeploymentMode(ev)
+			return nil
 		case schemas.DeploymentInfo_deploymentOverview:
 			v.DeploymentOverview = &DeploymentOverview{}
 			return v.DeploymentOverview.Deserialize(d)
@@ -1237,6 +1281,9 @@ func (v *DeploymentInfo) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.DeploymentInfo_description:
 			v.Description = new(string)
 			return d.ReadString(schemas.DeploymentInfo_description, v.Description)
+		case schemas.DeploymentInfo_ec2DeploymentOptions:
+			v.Ec2DeploymentOptions = &EC2DeploymentOptions{}
+			return v.Ec2DeploymentOptions.Deserialize(d)
 		case schemas.DeploymentInfo_errorInformation:
 			v.ErrorInformation = &ErrorInformation{}
 			return v.ErrorInformation.Deserialize(d)
@@ -1627,6 +1674,57 @@ func (v *Diagnostics) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.Diagnostics_scriptName:
 			v.ScriptName = new(string)
 			return d.ReadString(schemas.Diagnostics_scriptName, v.ScriptName)
+		}
+		return nil
+	})
+}
+
+// Options that control how CodeDeploy manages Amazon EC2 Auto Scaling groups
+// during a deployment.
+type EC2DeploymentOptions struct {
+
+	// The Amazon EC2 Auto Scaling processes to suspend during the deployment.
+	// CodeDeploy suspends these processes before it deploys to instances in an Auto
+	// Scaling group, and resumes them when the deployment succeeds, fails, or is
+	// stopped. Valid values are Terminate , AZRebalance , InstanceRefresh , and
+	// ScheduledActions .
+	//
+	// This parameter applies only to in-place deployments on the EC2/On-premises
+	// compute platform. If the list is empty, or if the deployment does not target
+	// instances in an Auto Scaling group, no processes are suspended.
+	//
+	// The service role for the deployment group must have permission to call
+	// autoscaling:SuspendProcesses and autoscaling:ResumeProcesses on the target Auto
+	// Scaling groups. If the processes cannot be suspended, the deployment fails
+	// before any instance is updated.
+	//
+	// If you suspend ScheduledActions , scheduled actions with a start time during the
+	// deployment are skipped and do not run after the process resumes.
+	//
+	// If CodeDeploy cannot resume the processes, the deployment fails and the
+	// processes stay suspended until you resume them with the Auto Scaling
+	// ResumeProcesses action. While Terminate is suspended, Auto Scaling does not
+	// replace unhealthy instances. If you suspend Terminate , configure a trigger that
+	// notifies you when a deployment fails.
+	AutoScalingGroupProcessesToSuspend []AutoScalingGroupProcess
+
+	noSmithyDocumentSerde
+}
+
+func (v *EC2DeploymentOptions) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EC2DeploymentOptions)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EC2DeploymentOptions) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAutoScalingGroupProcessesToSuspendList(s, schemas.EC2DeploymentOptions_autoScalingGroupProcessesToSuspend, v.AutoScalingGroupProcessesToSuspend)
+}
+func (v *EC2DeploymentOptions) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EC2DeploymentOptions, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EC2DeploymentOptions_autoScalingGroupProcessesToSuspend:
+			return deserializeAutoScalingGroupProcessesToSuspendList(d, schemas.EC2DeploymentOptions_autoScalingGroupProcessesToSuspend, &v.AutoScalingGroupProcessesToSuspend)
 		}
 		return nil
 	})

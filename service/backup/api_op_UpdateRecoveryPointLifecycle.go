@@ -4,7 +4,9 @@ package backup
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/backup/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/backup/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -75,6 +77,26 @@ type UpdateRecoveryPointLifecycleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateRecoveryPointLifecycleInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateRecoveryPointLifecycleInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateRecoveryPointLifecycleInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BackupVaultName != nil {
+		s.WriteString(schemas.UpdateRecoveryPointLifecycleInput_BackupVaultName, *v.BackupVaultName)
+	}
+	if v.Lifecycle != nil {
+		s.WriteStruct(schemas.UpdateRecoveryPointLifecycleInput_Lifecycle)
+		v.Lifecycle.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RecoveryPointArn != nil {
+		s.WriteString(schemas.UpdateRecoveryPointLifecycleInput_RecoveryPointArn, *v.RecoveryPointArn)
+	}
+}
+
 type UpdateRecoveryPointLifecycleOutput struct {
 
 	// An ARN that uniquely identifies a backup vault; for example,
@@ -112,13 +134,54 @@ type UpdateRecoveryPointLifecycleOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateRecoveryPointLifecycleOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateRecoveryPointLifecycleOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateRecoveryPointLifecycleOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BackupVaultArn != nil {
+		s.WriteString(schemas.UpdateRecoveryPointLifecycleOutput_BackupVaultArn, *v.BackupVaultArn)
+	}
+	if v.CalculatedLifecycle != nil {
+		s.WriteStruct(schemas.UpdateRecoveryPointLifecycleOutput_CalculatedLifecycle)
+		v.CalculatedLifecycle.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Lifecycle != nil {
+		s.WriteStruct(schemas.UpdateRecoveryPointLifecycleOutput_Lifecycle)
+		v.Lifecycle.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RecoveryPointArn != nil {
+		s.WriteString(schemas.UpdateRecoveryPointLifecycleOutput_RecoveryPointArn, *v.RecoveryPointArn)
+	}
+}
+func (v *UpdateRecoveryPointLifecycleOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateRecoveryPointLifecycleOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateRecoveryPointLifecycleOutput_BackupVaultArn:
+			v.BackupVaultArn = new(string)
+			return d.ReadString(schemas.UpdateRecoveryPointLifecycleOutput_BackupVaultArn, v.BackupVaultArn)
+		case schemas.UpdateRecoveryPointLifecycleOutput_CalculatedLifecycle:
+			v.CalculatedLifecycle = &types.CalculatedLifecycle{}
+			return v.CalculatedLifecycle.Deserialize(d)
+		case schemas.UpdateRecoveryPointLifecycleOutput_Lifecycle:
+			v.Lifecycle = &types.Lifecycle{}
+			return v.Lifecycle.Deserialize(d)
+		case schemas.UpdateRecoveryPointLifecycleOutput_RecoveryPointArn:
+			v.RecoveryPointArn = new(string)
+			return d.ReadString(schemas.UpdateRecoveryPointLifecycleOutput_RecoveryPointArn, v.RecoveryPointArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateRecoveryPointLifecycleMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateRecoveryPointLifecycle{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateRecoveryPointLifecycle, schemas.UpdateRecoveryPointLifecycleInput, schemas.UpdateRecoveryPointLifecycleOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateRecoveryPointLifecycle{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateRecoveryPointLifecycle, schemas.UpdateRecoveryPointLifecycleInput, schemas.UpdateRecoveryPointLifecycleOutput), output: &UpdateRecoveryPointLifecycleOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

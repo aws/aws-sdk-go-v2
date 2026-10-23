@@ -4,6 +4,7 @@ package connect
 
 import (
 	"context"
+	"fmt"
 	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connect/types"
 	smithy "github.com/aws/smithy-go"
@@ -153,3 +154,99 @@ func (c *Client) addOperationListEvaluationFormAIVersionsMiddlewares(stack *midd
 	}
 	return nil
 }
+
+// ListEvaluationFormAIVersionsPaginatorOptions is the paginator options for
+// ListEvaluationFormAIVersions
+type ListEvaluationFormAIVersionsPaginatorOptions struct {
+	// The maximum number of results to return per page.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListEvaluationFormAIVersionsPaginator is a paginator for
+// ListEvaluationFormAIVersions
+type ListEvaluationFormAIVersionsPaginator struct {
+	options   ListEvaluationFormAIVersionsPaginatorOptions
+	client    ListEvaluationFormAIVersionsAPIClient
+	params    *ListEvaluationFormAIVersionsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListEvaluationFormAIVersionsPaginator returns a new
+// ListEvaluationFormAIVersionsPaginator
+func NewListEvaluationFormAIVersionsPaginator(client ListEvaluationFormAIVersionsAPIClient, params *ListEvaluationFormAIVersionsInput, optFns ...func(*ListEvaluationFormAIVersionsPaginatorOptions)) *ListEvaluationFormAIVersionsPaginator {
+	if params == nil {
+		params = &ListEvaluationFormAIVersionsInput{}
+	}
+
+	options := ListEvaluationFormAIVersionsPaginatorOptions{}
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	return &ListEvaluationFormAIVersionsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+		nextToken: params.NextToken,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListEvaluationFormAIVersionsPaginator) HasMorePages() bool {
+	return p.firstPage || (p.nextToken != nil && len(*p.nextToken) != 0)
+}
+
+// NextPage retrieves the next ListEvaluationFormAIVersions page.
+func (p *ListEvaluationFormAIVersionsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListEvaluationFormAIVersionsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
+
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
+	result, err := p.client.ListEvaluationFormAIVersions(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken &&
+		prevToken != nil &&
+		p.nextToken != nil &&
+		*prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
+}
+
+// ListEvaluationFormAIVersionsAPIClient is a client that implements the
+// ListEvaluationFormAIVersions operation.
+type ListEvaluationFormAIVersionsAPIClient interface {
+	ListEvaluationFormAIVersions(context.Context, *ListEvaluationFormAIVersionsInput, ...func(*Options)) (*ListEvaluationFormAIVersionsOutput, error)
+}
+
+var _ ListEvaluationFormAIVersionsAPIClient = (*Client)(nil)

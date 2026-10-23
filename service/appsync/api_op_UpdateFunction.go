@@ -4,7 +4,9 @@ package appsync
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/appsync/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/appsync/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -83,6 +85,55 @@ type UpdateFunctionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateFunctionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateFunctionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateFunctionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApiId != nil {
+		s.WriteString(schemas.UpdateFunctionRequest_apiId, *v.ApiId)
+	}
+	if v.Code != nil {
+		s.WriteString(schemas.UpdateFunctionRequest_code, *v.Code)
+	}
+	if v.DataSourceName != nil {
+		s.WriteString(schemas.UpdateFunctionRequest_dataSourceName, *v.DataSourceName)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateFunctionRequest_description, *v.Description)
+	}
+	if v.FunctionId != nil {
+		s.WriteString(schemas.UpdateFunctionRequest_functionId, *v.FunctionId)
+	}
+	if v.FunctionVersion != nil {
+		s.WriteString(schemas.UpdateFunctionRequest_functionVersion, *v.FunctionVersion)
+	}
+	if v.MaxBatchSize != 0 {
+		s.WriteInt32(schemas.UpdateFunctionRequest_maxBatchSize, v.MaxBatchSize)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateFunctionRequest_name, *v.Name)
+	}
+	if v.RequestMappingTemplate != nil {
+		s.WriteString(schemas.UpdateFunctionRequest_requestMappingTemplate, *v.RequestMappingTemplate)
+	}
+	if v.ResponseMappingTemplate != nil {
+		s.WriteString(schemas.UpdateFunctionRequest_responseMappingTemplate, *v.ResponseMappingTemplate)
+	}
+	if v.Runtime != nil {
+		s.WriteStruct(schemas.UpdateFunctionRequest_runtime)
+		v.Runtime.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SyncConfig != nil {
+		s.WriteStruct(schemas.UpdateFunctionRequest_syncConfig)
+		v.SyncConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type UpdateFunctionOutput struct {
 
 	// The Function object.
@@ -94,13 +145,34 @@ type UpdateFunctionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateFunctionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateFunctionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateFunctionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FunctionConfiguration != nil {
+		s.WriteStruct(schemas.UpdateFunctionResponse_functionConfiguration)
+		v.FunctionConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateFunctionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateFunctionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateFunctionResponse_functionConfiguration:
+			v.FunctionConfiguration = &types.FunctionConfiguration{}
+			return v.FunctionConfiguration.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateFunctionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateFunction{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateFunction, schemas.UpdateFunctionRequest, schemas.UpdateFunctionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateFunction{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateFunction, schemas.UpdateFunctionRequest, schemas.UpdateFunctionResponse), output: &UpdateFunctionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

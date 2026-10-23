@@ -74,6 +74,18 @@ func TestCheckSnapshot_CreateCentralizationRuleForOrganization(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_CreateDatasetIntegration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateDatasetIntegration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateDatasetIntegration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_CreateS3TableIntegration(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateS3TableIntegration(context.Background(), nil, func(o *Options) {
@@ -134,6 +146,18 @@ func TestCheckSnapshot_DeleteCentralizationRuleForOrganization(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DeleteDatasetIntegration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteDatasetIntegration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteDatasetIntegration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DeleteS3TableIntegration(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteS3TableIntegration(context.Background(), nil, func(o *Options) {
@@ -187,6 +211,18 @@ func TestCheckSnapshot_GetCentralizationRuleForOrganization(t *testing.T) {
 	_, err := svc.GetCentralizationRuleForOrganization(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "GetCentralizationRuleForOrganization")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetDatasetIntegration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetDatasetIntegration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetDatasetIntegration")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -283,6 +319,18 @@ func TestCheckSnapshot_ListCentralizationRulesForOrganization(t *testing.T) {
 	_, err := svc.ListCentralizationRulesForOrganization(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "ListCentralizationRulesForOrganization")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListDatasetIntegrations(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListDatasetIntegrations(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListDatasetIntegrations")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -494,6 +542,18 @@ func TestCheckSnapshot_UpdateCentralizationRuleForOrganization(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_UpdateDatasetIntegration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateDatasetIntegration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateDatasetIntegration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_UpdateTelemetryPipeline(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.UpdateTelemetryPipeline(context.Background(), nil, func(o *Options) {
@@ -546,6 +606,18 @@ func TestUpdateSnapshot_CreateCentralizationRuleForOrganization(t *testing.T) {
 	_, err := svc.CreateCentralizationRuleForOrganization(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "CreateCentralizationRuleForOrganization")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_CreateDatasetIntegration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateDatasetIntegration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateDatasetIntegration")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -613,6 +685,18 @@ func TestUpdateSnapshot_DeleteCentralizationRuleForOrganization(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_DeleteDatasetIntegration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteDatasetIntegration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteDatasetIntegration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_DeleteS3TableIntegration(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteS3TableIntegration(context.Background(), nil, func(o *Options) {
@@ -666,6 +750,18 @@ func TestUpdateSnapshot_GetCentralizationRuleForOrganization(t *testing.T) {
 	_, err := svc.GetCentralizationRuleForOrganization(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "GetCentralizationRuleForOrganization")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetDatasetIntegration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetDatasetIntegration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetDatasetIntegration")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -762,6 +858,18 @@ func TestUpdateSnapshot_ListCentralizationRulesForOrganization(t *testing.T) {
 	_, err := svc.ListCentralizationRulesForOrganization(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ListCentralizationRulesForOrganization")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListDatasetIntegrations(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListDatasetIntegrations(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListDatasetIntegrations")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -966,6 +1074,18 @@ func TestUpdateSnapshot_UpdateCentralizationRuleForOrganization(t *testing.T) {
 	_, err := svc.UpdateCentralizationRuleForOrganization(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "UpdateCentralizationRuleForOrganization")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateDatasetIntegration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateDatasetIntegration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateDatasetIntegration")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

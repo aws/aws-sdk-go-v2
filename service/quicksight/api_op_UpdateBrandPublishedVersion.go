@@ -4,6 +4,8 @@ package quicksight
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/quicksight/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -43,6 +45,24 @@ type UpdateBrandPublishedVersionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateBrandPublishedVersionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateBrandPublishedVersionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateBrandPublishedVersionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AwsAccountId != nil {
+		s.WriteString(schemas.UpdateBrandPublishedVersionRequest_AwsAccountId, *v.AwsAccountId)
+	}
+	if v.BrandId != nil {
+		s.WriteString(schemas.UpdateBrandPublishedVersionRequest_BrandId, *v.BrandId)
+	}
+	if v.VersionId != nil {
+		s.WriteString(schemas.UpdateBrandPublishedVersionRequest_VersionId, *v.VersionId)
+	}
+}
+
 type UpdateBrandPublishedVersionOutput struct {
 
 	// The Amazon Web Services request ID for this operation.
@@ -57,13 +77,38 @@ type UpdateBrandPublishedVersionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateBrandPublishedVersionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateBrandPublishedVersionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateBrandPublishedVersionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RequestId != nil {
+		s.WriteString(schemas.UpdateBrandPublishedVersionResponse_RequestId, *v.RequestId)
+	}
+	if v.VersionId != nil {
+		s.WriteString(schemas.UpdateBrandPublishedVersionResponse_VersionId, *v.VersionId)
+	}
+}
+func (v *UpdateBrandPublishedVersionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateBrandPublishedVersionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateBrandPublishedVersionResponse_RequestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.UpdateBrandPublishedVersionResponse_RequestId, v.RequestId)
+		case schemas.UpdateBrandPublishedVersionResponse_VersionId:
+			v.VersionId = new(string)
+			return d.ReadString(schemas.UpdateBrandPublishedVersionResponse_VersionId, v.VersionId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateBrandPublishedVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateBrandPublishedVersion{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateBrandPublishedVersion, schemas.UpdateBrandPublishedVersionRequest, schemas.UpdateBrandPublishedVersionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateBrandPublishedVersion{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateBrandPublishedVersion, schemas.UpdateBrandPublishedVersionRequest, schemas.UpdateBrandPublishedVersionResponse), output: &UpdateBrandPublishedVersionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

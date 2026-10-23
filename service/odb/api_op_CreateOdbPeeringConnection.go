@@ -5,7 +5,9 @@ package odb
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/odb/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/odb/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -66,6 +68,30 @@ type CreateOdbPeeringConnectionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateOdbPeeringConnectionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateOdbPeeringConnectionInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateOdbPeeringConnectionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateOdbPeeringConnectionInput_clientToken, *v.ClientToken)
+	}
+	if v.DisplayName != nil {
+		s.WriteString(schemas.CreateOdbPeeringConnectionInput_displayName, *v.DisplayName)
+	}
+	if v.OdbNetworkId != nil {
+		s.WriteString(schemas.CreateOdbPeeringConnectionInput_odbNetworkId, *v.OdbNetworkId)
+	}
+	serializePeeredCidrList(s, schemas.CreateOdbPeeringConnectionInput_peerNetworkCidrsToBeAdded, v.PeerNetworkCidrsToBeAdded)
+	if v.PeerNetworkId != nil {
+		s.WriteString(schemas.CreateOdbPeeringConnectionInput_peerNetworkId, *v.PeerNetworkId)
+	}
+	serializePeerNetworkRouteTableIdList(s, schemas.CreateOdbPeeringConnectionInput_peerNetworkRouteTableIds, v.PeerNetworkRouteTableIds)
+	serializeRequestTagMap(s, schemas.CreateOdbPeeringConnectionInput_tags, v.Tags)
+}
+
 type CreateOdbPeeringConnectionOutput struct {
 
 	// The unique identifier of the ODB peering connection.
@@ -88,13 +114,54 @@ type CreateOdbPeeringConnectionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateOdbPeeringConnectionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateOdbPeeringConnectionOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateOdbPeeringConnectionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DisplayName != nil {
+		s.WriteString(schemas.CreateOdbPeeringConnectionOutput_displayName, *v.DisplayName)
+	}
+	if v.OdbPeeringConnectionId != nil {
+		s.WriteString(schemas.CreateOdbPeeringConnectionOutput_odbPeeringConnectionId, *v.OdbPeeringConnectionId)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.CreateOdbPeeringConnectionOutput_status, string(v.Status))
+	}
+	if v.StatusReason != nil {
+		s.WriteString(schemas.CreateOdbPeeringConnectionOutput_statusReason, *v.StatusReason)
+	}
+}
+func (v *CreateOdbPeeringConnectionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateOdbPeeringConnectionOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateOdbPeeringConnectionOutput_displayName:
+			v.DisplayName = new(string)
+			return d.ReadString(schemas.CreateOdbPeeringConnectionOutput_displayName, v.DisplayName)
+		case schemas.CreateOdbPeeringConnectionOutput_odbPeeringConnectionId:
+			v.OdbPeeringConnectionId = new(string)
+			return d.ReadString(schemas.CreateOdbPeeringConnectionOutput_odbPeeringConnectionId, v.OdbPeeringConnectionId)
+		case schemas.CreateOdbPeeringConnectionOutput_status:
+			var ev string
+			if err := d.ReadString(schemas.CreateOdbPeeringConnectionOutput_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.ResourceStatus(ev)
+			return nil
+		case schemas.CreateOdbPeeringConnectionOutput_statusReason:
+			v.StatusReason = new(string)
+			return d.ReadString(schemas.CreateOdbPeeringConnectionOutput_statusReason, v.StatusReason)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateOdbPeeringConnectionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpCreateOdbPeeringConnection{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateOdbPeeringConnection, schemas.CreateOdbPeeringConnectionInput, schemas.CreateOdbPeeringConnectionOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpCreateOdbPeeringConnection{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateOdbPeeringConnection, schemas.CreateOdbPeeringConnectionInput, schemas.CreateOdbPeeringConnectionOutput), output: &CreateOdbPeeringConnectionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

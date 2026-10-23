@@ -4,7 +4,9 @@ package pinpointemail
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/pinpointemail/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/pinpointemail/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -50,6 +52,24 @@ type GetDomainStatisticsReportInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetDomainStatisticsReportInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetDomainStatisticsReportRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetDomainStatisticsReportInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Domain != nil {
+		s.WriteString(schemas.GetDomainStatisticsReportRequest_Domain, *v.Domain)
+	}
+	if v.EndDate != nil {
+		s.WriteTime(schemas.GetDomainStatisticsReportRequest_EndDate, *v.EndDate)
+	}
+	if v.StartDate != nil {
+		s.WriteTime(schemas.GetDomainStatisticsReportRequest_StartDate, *v.StartDate)
+	}
+}
+
 // An object that includes statistics that are related to the domain that you
 // specified.
 type GetDomainStatisticsReportOutput struct {
@@ -74,13 +94,37 @@ type GetDomainStatisticsReportOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetDomainStatisticsReportOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetDomainStatisticsReportResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetDomainStatisticsReportOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDailyVolumes(s, schemas.GetDomainStatisticsReportResponse_DailyVolumes, v.DailyVolumes)
+	if v.OverallVolume != nil {
+		s.WriteStruct(schemas.GetDomainStatisticsReportResponse_OverallVolume)
+		v.OverallVolume.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetDomainStatisticsReportOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetDomainStatisticsReportResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetDomainStatisticsReportResponse_DailyVolumes:
+			return deserializeDailyVolumes(d, schemas.GetDomainStatisticsReportResponse_DailyVolumes, &v.DailyVolumes)
+		case schemas.GetDomainStatisticsReportResponse_OverallVolume:
+			v.OverallVolume = &types.OverallVolume{}
+			return v.OverallVolume.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetDomainStatisticsReportMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetDomainStatisticsReport{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetDomainStatisticsReport, schemas.GetDomainStatisticsReportRequest, schemas.GetDomainStatisticsReportResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetDomainStatisticsReport{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetDomainStatisticsReport, schemas.GetDomainStatisticsReportRequest, schemas.GetDomainStatisticsReportResponse), output: &GetDomainStatisticsReportOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

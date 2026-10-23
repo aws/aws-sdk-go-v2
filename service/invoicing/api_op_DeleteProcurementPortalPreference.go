@@ -5,6 +5,8 @@ package invoicing
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/invoicing/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -46,6 +48,21 @@ type DeleteProcurementPortalPreferenceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteProcurementPortalPreferenceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteProcurementPortalPreferenceRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteProcurementPortalPreferenceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.DeleteProcurementPortalPreferenceRequest_ClientToken, *v.ClientToken)
+	}
+	if v.ProcurementPortalPreferenceArn != nil {
+		s.WriteString(schemas.DeleteProcurementPortalPreferenceRequest_ProcurementPortalPreferenceArn, *v.ProcurementPortalPreferenceArn)
+	}
+}
+
 type DeleteProcurementPortalPreferenceOutput struct {
 
 	// The Amazon Resource Name (ARN) of the deleted procurement portal preference.
@@ -59,13 +76,32 @@ type DeleteProcurementPortalPreferenceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteProcurementPortalPreferenceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteProcurementPortalPreferenceResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteProcurementPortalPreferenceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ProcurementPortalPreferenceArn != nil {
+		s.WriteString(schemas.DeleteProcurementPortalPreferenceResponse_ProcurementPortalPreferenceArn, *v.ProcurementPortalPreferenceArn)
+	}
+}
+func (v *DeleteProcurementPortalPreferenceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteProcurementPortalPreferenceResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteProcurementPortalPreferenceResponse_ProcurementPortalPreferenceArn:
+			v.ProcurementPortalPreferenceArn = new(string)
+			return d.ReadString(schemas.DeleteProcurementPortalPreferenceResponse_ProcurementPortalPreferenceArn, v.ProcurementPortalPreferenceArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteProcurementPortalPreferenceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpDeleteProcurementPortalPreference{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteProcurementPortalPreference, schemas.DeleteProcurementPortalPreferenceRequest, schemas.DeleteProcurementPortalPreferenceResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpDeleteProcurementPortalPreference{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteProcurementPortalPreference, schemas.DeleteProcurementPortalPreferenceRequest, schemas.DeleteProcurementPortalPreferenceResponse), output: &DeleteProcurementPortalPreferenceOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

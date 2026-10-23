@@ -4,7 +4,9 @@ package batch
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/batch/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/batch/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -43,6 +45,22 @@ type UpdateServiceEnvironmentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateServiceEnvironmentInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateServiceEnvironmentRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateServiceEnvironmentInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeCapacityLimits(s, schemas.UpdateServiceEnvironmentRequest_capacityLimits, v.CapacityLimits)
+	if v.ServiceEnvironment != nil {
+		s.WriteString(schemas.UpdateServiceEnvironmentRequest_serviceEnvironment, *v.ServiceEnvironment)
+	}
+	if v.State != "" {
+		s.WriteString(schemas.UpdateServiceEnvironmentRequest_state, string(v.State))
+	}
+}
+
 type UpdateServiceEnvironmentOutput struct {
 
 	// The Amazon Resource Name (ARN) of the service environment that was updated.
@@ -61,13 +79,38 @@ type UpdateServiceEnvironmentOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateServiceEnvironmentOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateServiceEnvironmentResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateServiceEnvironmentOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ServiceEnvironmentArn != nil {
+		s.WriteString(schemas.UpdateServiceEnvironmentResponse_serviceEnvironmentArn, *v.ServiceEnvironmentArn)
+	}
+	if v.ServiceEnvironmentName != nil {
+		s.WriteString(schemas.UpdateServiceEnvironmentResponse_serviceEnvironmentName, *v.ServiceEnvironmentName)
+	}
+}
+func (v *UpdateServiceEnvironmentOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateServiceEnvironmentResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateServiceEnvironmentResponse_serviceEnvironmentArn:
+			v.ServiceEnvironmentArn = new(string)
+			return d.ReadString(schemas.UpdateServiceEnvironmentResponse_serviceEnvironmentArn, v.ServiceEnvironmentArn)
+		case schemas.UpdateServiceEnvironmentResponse_serviceEnvironmentName:
+			v.ServiceEnvironmentName = new(string)
+			return d.ReadString(schemas.UpdateServiceEnvironmentResponse_serviceEnvironmentName, v.ServiceEnvironmentName)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateServiceEnvironmentMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateServiceEnvironment{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateServiceEnvironment, schemas.UpdateServiceEnvironmentRequest, schemas.UpdateServiceEnvironmentResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateServiceEnvironment{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateServiceEnvironment, schemas.UpdateServiceEnvironmentRequest, schemas.UpdateServiceEnvironmentResponse), output: &UpdateServiceEnvironmentOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

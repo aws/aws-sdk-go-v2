@@ -4,7 +4,9 @@ package costexplorer
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/costexplorer/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/costexplorer/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -143,6 +145,40 @@ type GetReservationUtilizationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetReservationUtilizationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetReservationUtilizationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetReservationUtilizationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Filter != nil {
+		s.WriteStruct(schemas.GetReservationUtilizationRequest_Filter)
+		v.Filter.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Granularity != "" {
+		s.WriteString(schemas.GetReservationUtilizationRequest_Granularity, string(v.Granularity))
+	}
+	serializeGroupDefinitions(s, schemas.GetReservationUtilizationRequest_GroupBy, v.GroupBy)
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.GetReservationUtilizationRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextPageToken != nil {
+		s.WriteString(schemas.GetReservationUtilizationRequest_NextPageToken, *v.NextPageToken)
+	}
+	if v.SortBy != nil {
+		s.WriteStruct(schemas.GetReservationUtilizationRequest_SortBy)
+		v.SortBy.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TimePeriod != nil {
+		s.WriteStruct(schemas.GetReservationUtilizationRequest_TimePeriod)
+		v.TimePeriod.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type GetReservationUtilizationOutput struct {
 
 	// The amount of time that you used your Reserved Instances (RIs).
@@ -164,13 +200,43 @@ type GetReservationUtilizationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetReservationUtilizationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetReservationUtilizationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetReservationUtilizationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextPageToken != nil {
+		s.WriteString(schemas.GetReservationUtilizationResponse_NextPageToken, *v.NextPageToken)
+	}
+	if v.Total != nil {
+		s.WriteStruct(schemas.GetReservationUtilizationResponse_Total)
+		v.Total.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeUtilizationsByTime(s, schemas.GetReservationUtilizationResponse_UtilizationsByTime, v.UtilizationsByTime)
+}
+func (v *GetReservationUtilizationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetReservationUtilizationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetReservationUtilizationResponse_NextPageToken:
+			v.NextPageToken = new(string)
+			return d.ReadString(schemas.GetReservationUtilizationResponse_NextPageToken, v.NextPageToken)
+		case schemas.GetReservationUtilizationResponse_Total:
+			v.Total = &types.ReservationAggregates{}
+			return v.Total.Deserialize(d)
+		case schemas.GetReservationUtilizationResponse_UtilizationsByTime:
+			return deserializeUtilizationsByTime(d, schemas.GetReservationUtilizationResponse_UtilizationsByTime, &v.UtilizationsByTime)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetReservationUtilizationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetReservationUtilization{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetReservationUtilization, schemas.GetReservationUtilizationRequest, schemas.GetReservationUtilizationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetReservationUtilization{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetReservationUtilization, schemas.GetReservationUtilizationRequest, schemas.GetReservationUtilizationResponse), output: &GetReservationUtilizationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

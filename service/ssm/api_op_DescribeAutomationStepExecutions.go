@@ -5,7 +5,9 @@ package ssm
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/ssm/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ssm/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -52,6 +54,28 @@ type DescribeAutomationStepExecutionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeAutomationStepExecutionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeAutomationStepExecutionsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeAutomationStepExecutionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AutomationExecutionId != nil {
+		s.WriteString(schemas.DescribeAutomationStepExecutionsRequest_AutomationExecutionId, *v.AutomationExecutionId)
+	}
+	serializeStepExecutionFilterList(s, schemas.DescribeAutomationStepExecutionsRequest_Filters, v.Filters)
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.DescribeAutomationStepExecutionsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeAutomationStepExecutionsRequest_NextToken, *v.NextToken)
+	}
+	if v.ReverseOrder != nil {
+		s.WriteBool(schemas.DescribeAutomationStepExecutionsRequest_ReverseOrder, *v.ReverseOrder)
+	}
+}
+
 type DescribeAutomationStepExecutionsOutput struct {
 
 	// The token to use when requesting the next set of items. If there are no
@@ -68,13 +92,35 @@ type DescribeAutomationStepExecutionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeAutomationStepExecutionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeAutomationStepExecutionsResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeAutomationStepExecutionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeAutomationStepExecutionsResult_NextToken, *v.NextToken)
+	}
+	serializeStepExecutionList(s, schemas.DescribeAutomationStepExecutionsResult_StepExecutions, v.StepExecutions)
+}
+func (v *DescribeAutomationStepExecutionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeAutomationStepExecutionsResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeAutomationStepExecutionsResult_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.DescribeAutomationStepExecutionsResult_NextToken, v.NextToken)
+		case schemas.DescribeAutomationStepExecutionsResult_StepExecutions:
+			return deserializeStepExecutionList(d, schemas.DescribeAutomationStepExecutionsResult_StepExecutions, &v.StepExecutions)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeAutomationStepExecutionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeAutomationStepExecutions{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeAutomationStepExecutions, schemas.DescribeAutomationStepExecutionsRequest, schemas.DescribeAutomationStepExecutionsResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeAutomationStepExecutions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeAutomationStepExecutions, schemas.DescribeAutomationStepExecutionsRequest, schemas.DescribeAutomationStepExecutionsResult), output: &DescribeAutomationStepExecutionsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

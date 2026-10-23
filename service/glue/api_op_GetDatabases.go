@@ -5,7 +5,9 @@ package glue
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/glue/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/glue/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -56,6 +58,28 @@ type GetDatabasesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetDatabasesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetDatabasesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetDatabasesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDatabaseAttributesList(s, schemas.GetDatabasesRequest_AttributesToGet, v.AttributesToGet)
+	if v.CatalogId != nil {
+		s.WriteString(schemas.GetDatabasesRequest_CatalogId, *v.CatalogId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.GetDatabasesRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetDatabasesRequest_NextToken, *v.NextToken)
+	}
+	if v.ResourceShareType != "" {
+		s.WriteString(schemas.GetDatabasesRequest_ResourceShareType, string(v.ResourceShareType))
+	}
+}
+
 type GetDatabasesOutput struct {
 
 	// A list of Database objects from the specified catalog.
@@ -73,13 +97,35 @@ type GetDatabasesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetDatabasesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetDatabasesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetDatabasesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDatabaseList(s, schemas.GetDatabasesResponse_DatabaseList, v.DatabaseList)
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetDatabasesResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *GetDatabasesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetDatabasesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetDatabasesResponse_DatabaseList:
+			return deserializeDatabaseList(d, schemas.GetDatabasesResponse_DatabaseList, &v.DatabaseList)
+		case schemas.GetDatabasesResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.GetDatabasesResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetDatabasesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetDatabases{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetDatabases, schemas.GetDatabasesRequest, schemas.GetDatabasesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetDatabases{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetDatabases, schemas.GetDatabasesRequest, schemas.GetDatabasesResponse), output: &GetDatabasesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

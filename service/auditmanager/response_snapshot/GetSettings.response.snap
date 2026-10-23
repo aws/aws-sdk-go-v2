@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"settings":{"defaultAssessmentReportsDestination":{"destination":"__Destination__","destinationType":"S3"},"defaultExportDestination":{"destination":"__Destination__","destinationType":"S3"},"defaultProcessOwners":[{"roleArn":"__RoleArn__","roleType":"PROCESS_OWNER"},{"roleArn":"__RoleArn__","roleType":"PROCESS_OWNER"}],"deregistrationPolicy":{"deleteResources":"ALL"},"evidenceFinderEnablement":{"backfillStatus":"NOT_STARTED","enablementStatus":"ENABLED","error":"__Error__","eventDataStoreArn":"__EventDataStoreArn__"},"isAwsOrgEnabled":true,"kmsKey":"__KmsKey__","snsTopic":"__SnsTopic__"}}

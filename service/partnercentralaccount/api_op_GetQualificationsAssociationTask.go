@@ -4,7 +4,9 @@ package partnercentralaccount
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/partnercentralaccount/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/partnercentralaccount/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -42,6 +44,21 @@ type GetQualificationsAssociationTaskInput struct {
 	Identifier *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetQualificationsAssociationTaskInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetQualificationsAssociationTaskRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetQualificationsAssociationTaskInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Catalog != nil {
+		s.WriteString(schemas.GetQualificationsAssociationTaskRequest_Catalog, *v.Catalog)
+	}
+	if v.Identifier != nil {
+		s.WriteString(schemas.GetQualificationsAssociationTaskRequest_Identifier, *v.Identifier)
+	}
 }
 
 type GetQualificationsAssociationTaskOutput struct {
@@ -95,13 +112,80 @@ type GetQualificationsAssociationTaskOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetQualificationsAssociationTaskOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetQualificationsAssociationTaskResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetQualificationsAssociationTaskOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.GetQualificationsAssociationTaskResponse_Arn, *v.Arn)
+	}
+	if v.Catalog != nil {
+		s.WriteString(schemas.GetQualificationsAssociationTaskResponse_Catalog, *v.Catalog)
+	}
+	if v.EndedAt != nil {
+		s.WriteTime(schemas.GetQualificationsAssociationTaskResponse_EndedAt, *v.EndedAt)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.GetQualificationsAssociationTaskResponse_Id, *v.Id)
+	}
+	if v.PrimaryPartner != nil {
+		s.WriteStruct(schemas.GetQualificationsAssociationTaskResponse_PrimaryPartner)
+		v.PrimaryPartner.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.StartedAt != nil {
+		s.WriteTime(schemas.GetQualificationsAssociationTaskResponse_StartedAt, *v.StartedAt)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.GetQualificationsAssociationTaskResponse_Status, string(v.Status))
+	}
+	if v.TaskId != nil {
+		s.WriteString(schemas.GetQualificationsAssociationTaskResponse_TaskId, *v.TaskId)
+	}
+}
+func (v *GetQualificationsAssociationTaskOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetQualificationsAssociationTaskResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetQualificationsAssociationTaskResponse_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.GetQualificationsAssociationTaskResponse_Arn, v.Arn)
+		case schemas.GetQualificationsAssociationTaskResponse_Catalog:
+			v.Catalog = new(string)
+			return d.ReadString(schemas.GetQualificationsAssociationTaskResponse_Catalog, v.Catalog)
+		case schemas.GetQualificationsAssociationTaskResponse_EndedAt:
+			v.EndedAt = new(time.Time)
+			return d.ReadTime(schemas.GetQualificationsAssociationTaskResponse_EndedAt, v.EndedAt)
+		case schemas.GetQualificationsAssociationTaskResponse_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.GetQualificationsAssociationTaskResponse_Id, v.Id)
+		case schemas.GetQualificationsAssociationTaskResponse_PrimaryPartner:
+			v.PrimaryPartner = &types.QualificationsAssociationPartner{}
+			return v.PrimaryPartner.Deserialize(d)
+		case schemas.GetQualificationsAssociationTaskResponse_StartedAt:
+			v.StartedAt = new(time.Time)
+			return d.ReadTime(schemas.GetQualificationsAssociationTaskResponse_StartedAt, v.StartedAt)
+		case schemas.GetQualificationsAssociationTaskResponse_Status:
+			var ev string
+			if err := d.ReadString(schemas.GetQualificationsAssociationTaskResponse_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.QualificationsAssociationTaskStatus(ev)
+			return nil
+		case schemas.GetQualificationsAssociationTaskResponse_TaskId:
+			v.TaskId = new(string)
+			return d.ReadString(schemas.GetQualificationsAssociationTaskResponse_TaskId, v.TaskId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetQualificationsAssociationTaskMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpGetQualificationsAssociationTask{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetQualificationsAssociationTask, schemas.GetQualificationsAssociationTaskRequest, schemas.GetQualificationsAssociationTaskResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpGetQualificationsAssociationTask{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetQualificationsAssociationTask, schemas.GetQualificationsAssociationTaskRequest, schemas.GetQualificationsAssociationTaskResponse), output: &GetQualificationsAssociationTaskOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

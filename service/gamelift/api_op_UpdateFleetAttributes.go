@@ -20,7 +20,7 @@ import (
 // identifiers for the updated fleet.
 //
 // A managed fleet's runtime environment, which depends on the fleet's Amazon
-// Machine Image {AMI} version, can't be updated. You must create a new fleet. As a
+// Machine Image (AMI) version, can't be updated. You must create a new fleet. As a
 // best practice, we recommend replacing your managed fleets every 30 days to
 // maintain a secure and up-to-date runtime environment for your hosted game
 // servers. For guidance, see [Security best practices for Amazon GameLift Servers].

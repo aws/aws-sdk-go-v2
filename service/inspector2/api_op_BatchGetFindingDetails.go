@@ -4,7 +4,9 @@ package inspector2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/inspector2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/inspector2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -34,6 +36,16 @@ type BatchGetFindingDetailsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchGetFindingDetailsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchGetFindingDetailsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchGetFindingDetailsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeFindingArnList(s, schemas.BatchGetFindingDetailsRequest_findingArns, v.FindingArns)
+}
+
 type BatchGetFindingDetailsOutput struct {
 
 	// Error information for findings that details could not be returned for.
@@ -48,13 +60,32 @@ type BatchGetFindingDetailsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchGetFindingDetailsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchGetFindingDetailsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchGetFindingDetailsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeFindingDetailsErrorList(s, schemas.BatchGetFindingDetailsResponse_errors, v.Errors)
+	serializeFindingDetails(s, schemas.BatchGetFindingDetailsResponse_findingDetails, v.FindingDetails)
+}
+func (v *BatchGetFindingDetailsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchGetFindingDetailsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchGetFindingDetailsResponse_errors:
+			return deserializeFindingDetailsErrorList(d, schemas.BatchGetFindingDetailsResponse_errors, &v.Errors)
+		case schemas.BatchGetFindingDetailsResponse_findingDetails:
+			return deserializeFindingDetails(d, schemas.BatchGetFindingDetailsResponse_findingDetails, &v.FindingDetails)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationBatchGetFindingDetailsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpBatchGetFindingDetails{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchGetFindingDetails, schemas.BatchGetFindingDetailsRequest, schemas.BatchGetFindingDetailsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpBatchGetFindingDetails{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchGetFindingDetails, schemas.BatchGetFindingDetailsRequest, schemas.BatchGetFindingDetailsResponse), output: &BatchGetFindingDetailsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

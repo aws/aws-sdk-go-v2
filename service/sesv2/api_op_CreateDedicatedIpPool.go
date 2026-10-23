@@ -4,7 +4,9 @@ package sesv2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/sesv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sesv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -46,6 +48,22 @@ type CreateDedicatedIpPoolInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateDedicatedIpPoolInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateDedicatedIpPoolRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateDedicatedIpPoolInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PoolName != nil {
+		s.WriteString(schemas.CreateDedicatedIpPoolRequest_PoolName, *v.PoolName)
+	}
+	if v.ScalingMode != "" {
+		s.WriteString(schemas.CreateDedicatedIpPoolRequest_ScalingMode, string(v.ScalingMode))
+	}
+	serializeTagList(s, schemas.CreateDedicatedIpPoolRequest_Tags, v.Tags)
+}
+
 // An HTTP 200 response if the request succeeds, or an error message if the
 // request fails.
 type CreateDedicatedIpPoolOutput struct {
@@ -55,13 +73,26 @@ type CreateDedicatedIpPoolOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateDedicatedIpPoolOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateDedicatedIpPoolResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateDedicatedIpPoolOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *CreateDedicatedIpPoolOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateDedicatedIpPoolResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateDedicatedIpPoolMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateDedicatedIpPool{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateDedicatedIpPool, schemas.CreateDedicatedIpPoolRequest, schemas.CreateDedicatedIpPoolResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateDedicatedIpPool{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateDedicatedIpPool, schemas.CreateDedicatedIpPoolRequest, schemas.CreateDedicatedIpPoolResponse), output: &CreateDedicatedIpPoolOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

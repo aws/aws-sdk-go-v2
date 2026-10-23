@@ -73,6 +73,25 @@ func (DictionaryStatus) Values() []DictionaryStatus {
 	}
 }
 
+type ExtendedAnalysisMode string
+
+// Enum values for ExtendedAnalysisMode
+const (
+	ExtendedAnalysisModeEnabled  ExtendedAnalysisMode = "ENABLED"
+	ExtendedAnalysisModeDisabled ExtendedAnalysisMode = "DISABLED"
+)
+
+// Values returns all known values for ExtendedAnalysisMode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ExtendedAnalysisMode) Values() []ExtendedAnalysisMode {
+	return []ExtendedAnalysisMode{
+		"ENABLED",
+		"DISABLED",
+	}
+}
+
 type FeedStatus string
 
 // Enum values for FeedStatus
@@ -156,6 +175,46 @@ func (ProfanityFilterMode) Values() []ProfanityFilterMode {
 		"DISABLED",
 		"CENSOR",
 		"DROP",
+	}
+}
+
+type ScheduleActionErrorCode string
+
+// Enum values for ScheduleActionErrorCode
+const (
+	ScheduleActionErrorCodeInvalidActionTarget ScheduleActionErrorCode = "INVALID_ACTION_TARGET"
+	ScheduleActionErrorCodeInternalError       ScheduleActionErrorCode = "INTERNAL_ERROR"
+)
+
+// Values returns all known values for ScheduleActionErrorCode. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ScheduleActionErrorCode) Values() []ScheduleActionErrorCode {
+	return []ScheduleActionErrorCode{
+		"INVALID_ACTION_TARGET",
+		"INTERNAL_ERROR",
+	}
+}
+
+type ScheduleActionStatus string
+
+// Enum values for ScheduleActionStatus
+const (
+	ScheduleActionStatusPending   ScheduleActionStatus = "PENDING"
+	ScheduleActionStatusCompleted ScheduleActionStatus = "COMPLETED"
+	ScheduleActionStatusFailed    ScheduleActionStatus = "FAILED"
+)
+
+// Values returns all known values for ScheduleActionStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ScheduleActionStatus) Values() []ScheduleActionStatus {
+	return []ScheduleActionStatus{
+		"PENDING",
+		"COMPLETED",
+		"FAILED",
 	}
 }
 

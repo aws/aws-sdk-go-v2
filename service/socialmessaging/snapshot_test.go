@@ -230,6 +230,18 @@ func TestCheckSnapshot_GetWhatsAppBusinessPublicKey(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_GetWhatsAppCallPermission(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetWhatsAppCallPermission(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetWhatsAppCallPermission")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_GetWhatsAppFlow(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetWhatsAppFlow(context.Background(), nil, func(o *Options) {
@@ -398,6 +410,18 @@ func TestCheckSnapshot_PutWhatsAppBusinessPublicKey(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_SendWhatsAppCallEvent(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.SendWhatsAppCallEvent(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "SendWhatsAppCallEvent")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_SendWhatsAppConversionEvent(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.SendWhatsAppConversionEvent(context.Background(), nil, func(o *Options) {
@@ -439,6 +463,18 @@ func TestCheckSnapshot_UntagResource(t *testing.T) {
 	_, err := svc.UntagResource(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "UntagResource")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_UpdateLinkedWhatsAppBusinessAccountPhoneNumber(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateLinkedWhatsAppBusinessAccountPhoneNumber(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateLinkedWhatsAppBusinessAccountPhoneNumber")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -649,6 +685,18 @@ func TestUpdateSnapshot_GetWhatsAppBusinessPublicKey(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_GetWhatsAppCallPermission(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetWhatsAppCallPermission(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetWhatsAppCallPermission")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_GetWhatsAppFlow(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetWhatsAppFlow(context.Background(), nil, func(o *Options) {
@@ -817,6 +865,18 @@ func TestUpdateSnapshot_PutWhatsAppBusinessPublicKey(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_SendWhatsAppCallEvent(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.SendWhatsAppCallEvent(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "SendWhatsAppCallEvent")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_SendWhatsAppConversionEvent(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.SendWhatsAppConversionEvent(context.Background(), nil, func(o *Options) {
@@ -858,6 +918,18 @@ func TestUpdateSnapshot_UntagResource(t *testing.T) {
 	_, err := svc.UntagResource(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "UntagResource")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateLinkedWhatsAppBusinessAccountPhoneNumber(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateLinkedWhatsAppBusinessAccountPhoneNumber(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateLinkedWhatsAppBusinessAccountPhoneNumber")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

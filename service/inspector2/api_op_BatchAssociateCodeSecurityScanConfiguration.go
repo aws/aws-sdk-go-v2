@@ -4,7 +4,9 @@ package inspector2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/inspector2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/inspector2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -35,6 +37,16 @@ type BatchAssociateCodeSecurityScanConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchAssociateCodeSecurityScanConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchAssociateCodeSecurityScanConfigurationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchAssociateCodeSecurityScanConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAssociateConfigurationRequestList(s, schemas.BatchAssociateCodeSecurityScanConfigurationRequest_associateConfigurationRequests, v.AssociateConfigurationRequests)
+}
+
 type BatchAssociateCodeSecurityScanConfigurationOutput struct {
 
 	// Details of any code repositories that failed to be associated with the scan
@@ -51,13 +63,32 @@ type BatchAssociateCodeSecurityScanConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchAssociateCodeSecurityScanConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchAssociateCodeSecurityScanConfigurationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchAssociateCodeSecurityScanConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeFailedAssociationResultList(s, schemas.BatchAssociateCodeSecurityScanConfigurationResponse_failedAssociations, v.FailedAssociations)
+	serializeSuccessfulAssociationResultList(s, schemas.BatchAssociateCodeSecurityScanConfigurationResponse_successfulAssociations, v.SuccessfulAssociations)
+}
+func (v *BatchAssociateCodeSecurityScanConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchAssociateCodeSecurityScanConfigurationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchAssociateCodeSecurityScanConfigurationResponse_failedAssociations:
+			return deserializeFailedAssociationResultList(d, schemas.BatchAssociateCodeSecurityScanConfigurationResponse_failedAssociations, &v.FailedAssociations)
+		case schemas.BatchAssociateCodeSecurityScanConfigurationResponse_successfulAssociations:
+			return deserializeSuccessfulAssociationResultList(d, schemas.BatchAssociateCodeSecurityScanConfigurationResponse_successfulAssociations, &v.SuccessfulAssociations)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationBatchAssociateCodeSecurityScanConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpBatchAssociateCodeSecurityScanConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchAssociateCodeSecurityScanConfiguration, schemas.BatchAssociateCodeSecurityScanConfigurationRequest, schemas.BatchAssociateCodeSecurityScanConfigurationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpBatchAssociateCodeSecurityScanConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchAssociateCodeSecurityScanConfiguration, schemas.BatchAssociateCodeSecurityScanConfigurationRequest, schemas.BatchAssociateCodeSecurityScanConfigurationResponse), output: &BatchAssociateCodeSecurityScanConfigurationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -5,7 +5,9 @@ package iotsitewise
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/iotsitewise/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotsitewise/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -47,6 +49,27 @@ type ListDatasetExportJobsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListDatasetExportJobsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListDatasetExportJobsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListDatasetExportJobsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Filter != "" {
+		s.WriteString(schemas.ListDatasetExportJobsRequest_filter, string(v.Filter))
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListDatasetExportJobsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListDatasetExportJobsRequest_nextToken, *v.NextToken)
+	}
+	if v.WorkspaceName != nil {
+		s.WriteString(schemas.ListDatasetExportJobsRequest_workspaceName, *v.WorkspaceName)
+	}
+}
+
 // Response for list dataset export jobs request.
 type ListDatasetExportJobsOutput struct {
 
@@ -65,13 +88,35 @@ type ListDatasetExportJobsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListDatasetExportJobsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListDatasetExportJobsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListDatasetExportJobsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeExportJobSummaryList(s, schemas.ListDatasetExportJobsResponse_jobs, v.Jobs)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListDatasetExportJobsResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListDatasetExportJobsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListDatasetExportJobsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListDatasetExportJobsResponse_jobs:
+			return deserializeExportJobSummaryList(d, schemas.ListDatasetExportJobsResponse_jobs, &v.Jobs)
+		case schemas.ListDatasetExportJobsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListDatasetExportJobsResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListDatasetExportJobsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListDatasetExportJobs{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDatasetExportJobs, schemas.ListDatasetExportJobsRequest, schemas.ListDatasetExportJobsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListDatasetExportJobs{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDatasetExportJobs, schemas.ListDatasetExportJobsRequest, schemas.ListDatasetExportJobsResponse), output: &ListDatasetExportJobsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

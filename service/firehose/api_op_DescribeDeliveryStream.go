@@ -4,7 +4,9 @@ package firehose
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/firehose/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/firehose/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -49,6 +51,24 @@ type DescribeDeliveryStreamInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeDeliveryStreamInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeDeliveryStreamInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeDeliveryStreamInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DeliveryStreamName != nil {
+		s.WriteString(schemas.DescribeDeliveryStreamInput_DeliveryStreamName, *v.DeliveryStreamName)
+	}
+	if v.ExclusiveStartDestinationId != nil {
+		s.WriteString(schemas.DescribeDeliveryStreamInput_ExclusiveStartDestinationId, *v.ExclusiveStartDestinationId)
+	}
+	if v.Limit != nil {
+		s.WriteInt32(schemas.DescribeDeliveryStreamInput_Limit, *v.Limit)
+	}
+}
+
 type DescribeDeliveryStreamOutput struct {
 
 	// Information about the Firehose stream.
@@ -62,13 +82,34 @@ type DescribeDeliveryStreamOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeDeliveryStreamOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeDeliveryStreamOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeDeliveryStreamOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DeliveryStreamDescription != nil {
+		s.WriteStruct(schemas.DescribeDeliveryStreamOutput_DeliveryStreamDescription)
+		v.DeliveryStreamDescription.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DescribeDeliveryStreamOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeDeliveryStreamOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeDeliveryStreamOutput_DeliveryStreamDescription:
+			v.DeliveryStreamDescription = &types.DeliveryStreamDescription{}
+			return v.DeliveryStreamDescription.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeDeliveryStreamMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeDeliveryStream{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeDeliveryStream, schemas.DescribeDeliveryStreamInput, schemas.DescribeDeliveryStreamOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeDeliveryStream{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeDeliveryStream, schemas.DescribeDeliveryStreamInput, schemas.DescribeDeliveryStreamOutput), output: &DescribeDeliveryStreamOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

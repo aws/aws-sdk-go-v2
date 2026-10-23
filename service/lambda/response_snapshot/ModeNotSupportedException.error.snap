@@ -1,0 +1,4 @@
+400
+Content-Type: application/json
+
+{"__type":"ModeNotSupportedException","Type":"__Type__","message":"__Message__"}

@@ -46,6 +46,11 @@ type AssociateManagedNotificationAdditionalChannelInput struct {
 	// This member is required.
 	ManagedNotificationConfigurationArn *string
 
+	// Specifies whether this channel is subscribed to sensitive events. The
+	// notifications:SubscribeSensitiveEvents permission controls access to sensitive
+	// events. Defaults to false.
+	IsSensitiveEventsSubscribed *bool
+
 	noSmithyDocumentSerde
 }
 
@@ -58,6 +63,9 @@ func (v *AssociateManagedNotificationAdditionalChannelInput) Serialize(s smithy.
 func (v *AssociateManagedNotificationAdditionalChannelInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ChannelArn != nil {
 		s.WriteString(schemas.AssociateManagedNotificationAdditionalChannelRequest_channelArn, *v.ChannelArn)
+	}
+	if v.IsSensitiveEventsSubscribed != nil {
+		s.WriteBool(schemas.AssociateManagedNotificationAdditionalChannelRequest_isSensitiveEventsSubscribed, *v.IsSensitiveEventsSubscribed)
 	}
 	if v.ManagedNotificationConfigurationArn != nil {
 		s.WriteString(schemas.AssociateManagedNotificationAdditionalChannelRequest_managedNotificationConfigurationArn, *v.ManagedNotificationConfigurationArn)

@@ -5,7 +5,9 @@ package eks
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/eks/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/eks/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -73,6 +75,54 @@ type UpdateNodegroupConfigInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateNodegroupConfigInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateNodegroupConfigRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateNodegroupConfigInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientRequestToken != nil {
+		s.WriteString(schemas.UpdateNodegroupConfigRequest_clientRequestToken, *v.ClientRequestToken)
+	}
+	if v.ClusterName != nil {
+		s.WriteString(schemas.UpdateNodegroupConfigRequest_clusterName, *v.ClusterName)
+	}
+	if v.Labels != nil {
+		s.WriteStruct(schemas.UpdateNodegroupConfigRequest_labels)
+		v.Labels.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.NodeRepairConfig != nil {
+		s.WriteStruct(schemas.UpdateNodegroupConfigRequest_nodeRepairConfig)
+		v.NodeRepairConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.NodegroupName != nil {
+		s.WriteString(schemas.UpdateNodegroupConfigRequest_nodegroupName, *v.NodegroupName)
+	}
+	if v.ScalingConfig != nil {
+		s.WriteStruct(schemas.UpdateNodegroupConfigRequest_scalingConfig)
+		v.ScalingConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Taints != nil {
+		s.WriteStruct(schemas.UpdateNodegroupConfigRequest_taints)
+		v.Taints.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.UpdateConfig != nil {
+		s.WriteStruct(schemas.UpdateNodegroupConfigRequest_updateConfig)
+		v.UpdateConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.WarmPoolConfig != nil {
+		s.WriteStruct(schemas.UpdateNodegroupConfigRequest_warmPoolConfig)
+		v.WarmPoolConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type UpdateNodegroupConfigOutput struct {
 
 	// An object representing an asynchronous update.
@@ -84,13 +134,34 @@ type UpdateNodegroupConfigOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateNodegroupConfigOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateNodegroupConfigResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateNodegroupConfigOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Update != nil {
+		s.WriteStruct(schemas.UpdateNodegroupConfigResponse_update)
+		v.Update.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateNodegroupConfigOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateNodegroupConfigResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateNodegroupConfigResponse_update:
+			v.Update = &types.Update{}
+			return v.Update.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateNodegroupConfigMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateNodegroupConfig{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateNodegroupConfig, schemas.UpdateNodegroupConfigRequest, schemas.UpdateNodegroupConfigResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateNodegroupConfig{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateNodegroupConfig, schemas.UpdateNodegroupConfigRequest, schemas.UpdateNodegroupConfigResponse), output: &UpdateNodegroupConfigOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

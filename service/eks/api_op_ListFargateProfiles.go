@@ -5,6 +5,8 @@ package eks
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/eks/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -52,6 +54,24 @@ type ListFargateProfilesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListFargateProfilesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListFargateProfilesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListFargateProfilesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClusterName != nil {
+		s.WriteString(schemas.ListFargateProfilesRequest_clusterName, *v.ClusterName)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListFargateProfilesRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListFargateProfilesRequest_nextToken, *v.NextToken)
+	}
+}
+
 type ListFargateProfilesOutput struct {
 
 	// A list of all of the Fargate profiles associated with the specified cluster.
@@ -72,13 +92,35 @@ type ListFargateProfilesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListFargateProfilesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListFargateProfilesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListFargateProfilesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeStringList(s, schemas.ListFargateProfilesResponse_fargateProfileNames, v.FargateProfileNames)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListFargateProfilesResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListFargateProfilesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListFargateProfilesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListFargateProfilesResponse_fargateProfileNames:
+			return deserializeStringList(d, schemas.ListFargateProfilesResponse_fargateProfileNames, &v.FargateProfileNames)
+		case schemas.ListFargateProfilesResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListFargateProfilesResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListFargateProfilesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListFargateProfiles{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListFargateProfiles, schemas.ListFargateProfilesRequest, schemas.ListFargateProfilesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListFargateProfiles{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListFargateProfiles, schemas.ListFargateProfilesRequest, schemas.ListFargateProfilesResponse), output: &ListFargateProfilesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,11 +4,13 @@ package imagebuilder
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/imagebuilder/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/imagebuilder/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
-// Gets a component object.
+// Retrieves a component object.
 func (c *Client) GetComponent(ctx context.Context, params *GetComponentInput, optFns ...func(*Options)) (*GetComponentOutput, error) {
 	if params == nil {
 		params = &GetComponentInput{}
@@ -26,8 +28,10 @@ func (c *Client) GetComponent(ctx context.Context, params *GetComponentInput, op
 
 type GetComponentInput struct {
 
-	// The Amazon Resource Name (ARN) of the component that you want to get. Regex
-	// requires the suffix /\d+$ .
+	// The Amazon Resource Name (ARN) of the component that you want to get. You can
+	// specify a build version ARN, or a component version ARN. The version can use the
+	// x wildcard in trailing positions, for example 1.0.x or 1.x.x . Version ARNs
+	// resolve to the latest available matching component build version.
 	//
 	// This member is required.
 	ComponentBuildVersionArn *string
@@ -35,12 +39,26 @@ type GetComponentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetComponentInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetComponentRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetComponentInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ComponentBuildVersionArn != nil {
+		s.WriteString(schemas.GetComponentRequest_componentBuildVersionArn, *v.ComponentBuildVersionArn)
+	}
+}
+
 type GetComponentOutput struct {
 
 	// The component object specified in the request.
 	Component *types.Component
 
-	// The resource ARNs with different wildcard variations of semantic versioning.
+	// A set of wildcard version ARNs that always reference the latest version of the
+	// resource. ARNs are included for the latest version overall, and for the latest
+	// versions within the same major, minor, and patch levels.
 	LatestVersionReferences *types.LatestVersionReferences
 
 	// The request ID that uniquely identifies this request.
@@ -52,13 +70,48 @@ type GetComponentOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetComponentOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetComponentResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetComponentOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Component != nil {
+		s.WriteStruct(schemas.GetComponentResponse_component)
+		v.Component.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.LatestVersionReferences != nil {
+		s.WriteStruct(schemas.GetComponentResponse_latestVersionReferences)
+		v.LatestVersionReferences.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RequestId != nil {
+		s.WriteString(schemas.GetComponentResponse_requestId, *v.RequestId)
+	}
+}
+func (v *GetComponentOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetComponentResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetComponentResponse_component:
+			v.Component = &types.Component{}
+			return v.Component.Deserialize(d)
+		case schemas.GetComponentResponse_latestVersionReferences:
+			v.LatestVersionReferences = &types.LatestVersionReferences{}
+			return v.LatestVersionReferences.Deserialize(d)
+		case schemas.GetComponentResponse_requestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.GetComponentResponse_requestId, v.RequestId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetComponentMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetComponent{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetComponent, schemas.GetComponentRequest, schemas.GetComponentResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetComponent{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetComponent, schemas.GetComponentRequest, schemas.GetComponentResponse), output: &GetComponentOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

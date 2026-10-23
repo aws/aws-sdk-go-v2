@@ -308,6 +308,17 @@ func TestCheckRequestSnapshot_CreateBudget(t *testing.T) {
 						types.MatchOption("EQUALS"),
 					},
 				},
+				ProductAttributes: &types.ProductAttributeValues{
+					Key: ptr.String("__Key__"),
+					Values: []string{
+						"__Member__",
+						"__Member__",
+					},
+					MatchOptions: []types.MatchOption{
+						types.MatchOption("EQUALS"),
+						types.MatchOption("EQUALS"),
+					},
+				},
 			},
 			Metrics: []types.Metric{
 				types.Metric("BlendedCost"),
@@ -1236,6 +1247,17 @@ func TestCheckRequestSnapshot_UpdateBudget(t *testing.T) {
 						types.MatchOption("EQUALS"),
 					},
 				},
+				ProductAttributes: &types.ProductAttributeValues{
+					Key: ptr.String("__Key__"),
+					Values: []string{
+						"__Member__",
+						"__Member__",
+					},
+					MatchOptions: []types.MatchOption{
+						types.MatchOption("EQUALS"),
+						types.MatchOption("EQUALS"),
+					},
+				},
 			},
 			Metrics: []types.Metric{
 				types.Metric("BlendedCost"),
@@ -1526,6 +1548,17 @@ func TestUpdateRequestSnapshot_CreateBudget(t *testing.T) {
 					},
 				},
 				CostCategories: &types.CostCategoryValues{
+					Key: ptr.String("__Key__"),
+					Values: []string{
+						"__Member__",
+						"__Member__",
+					},
+					MatchOptions: []types.MatchOption{
+						types.MatchOption("EQUALS"),
+						types.MatchOption("EQUALS"),
+					},
+				},
+				ProductAttributes: &types.ProductAttributeValues{
 					Key: ptr.String("__Key__"),
 					Values: []string{
 						"__Member__",
@@ -2454,6 +2487,17 @@ func TestUpdateRequestSnapshot_UpdateBudget(t *testing.T) {
 					},
 				},
 				CostCategories: &types.CostCategoryValues{
+					Key: ptr.String("__Key__"),
+					Values: []string{
+						"__Member__",
+						"__Member__",
+					},
+					MatchOptions: []types.MatchOption{
+						types.MatchOption("EQUALS"),
+						types.MatchOption("EQUALS"),
+					},
+				},
+				ProductAttributes: &types.ProductAttributeValues{
 					Key: ptr.String("__Key__"),
 					Values: []string{
 						"__Member__",

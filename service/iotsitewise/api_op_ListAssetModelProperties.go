@@ -5,7 +5,9 @@ package iotsitewise
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/iotsitewise/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotsitewise/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -68,6 +70,30 @@ type ListAssetModelPropertiesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAssetModelPropertiesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAssetModelPropertiesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAssetModelPropertiesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AssetModelId != nil {
+		s.WriteString(schemas.ListAssetModelPropertiesRequest_assetModelId, *v.AssetModelId)
+	}
+	if v.AssetModelVersion != nil {
+		s.WriteString(schemas.ListAssetModelPropertiesRequest_assetModelVersion, *v.AssetModelVersion)
+	}
+	if v.Filter != "" {
+		s.WriteString(schemas.ListAssetModelPropertiesRequest_filter, string(v.Filter))
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListAssetModelPropertiesRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAssetModelPropertiesRequest_nextToken, *v.NextToken)
+	}
+}
+
 type ListAssetModelPropertiesOutput struct {
 
 	// A list that summarizes the properties associated with the specified asset model.
@@ -85,13 +111,35 @@ type ListAssetModelPropertiesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAssetModelPropertiesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAssetModelPropertiesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAssetModelPropertiesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAssetModelPropertySummaries(s, schemas.ListAssetModelPropertiesResponse_assetModelPropertySummaries, v.AssetModelPropertySummaries)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAssetModelPropertiesResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListAssetModelPropertiesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListAssetModelPropertiesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListAssetModelPropertiesResponse_assetModelPropertySummaries:
+			return deserializeAssetModelPropertySummaries(d, schemas.ListAssetModelPropertiesResponse_assetModelPropertySummaries, &v.AssetModelPropertySummaries)
+		case schemas.ListAssetModelPropertiesResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListAssetModelPropertiesResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListAssetModelPropertiesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListAssetModelProperties{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAssetModelProperties, schemas.ListAssetModelPropertiesRequest, schemas.ListAssetModelPropertiesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListAssetModelProperties{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAssetModelProperties, schemas.ListAssetModelPropertiesRequest, schemas.ListAssetModelPropertiesResponse), output: &ListAssetModelPropertiesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

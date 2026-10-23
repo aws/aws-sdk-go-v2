@@ -4,7 +4,9 @@ package quicksight
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/quicksight/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/quicksight/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -48,6 +50,24 @@ type DescribeTemplateAliasInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeTemplateAliasInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeTemplateAliasRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeTemplateAliasInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AliasName != nil {
+		s.WriteString(schemas.DescribeTemplateAliasRequest_AliasName, *v.AliasName)
+	}
+	if v.AwsAccountId != nil {
+		s.WriteString(schemas.DescribeTemplateAliasRequest_AwsAccountId, *v.AwsAccountId)
+	}
+	if v.TemplateId != nil {
+		s.WriteString(schemas.DescribeTemplateAliasRequest_TemplateId, *v.TemplateId)
+	}
+}
+
 type DescribeTemplateAliasOutput struct {
 
 	// The Amazon Web Services request ID for this operation.
@@ -65,13 +85,45 @@ type DescribeTemplateAliasOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeTemplateAliasOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeTemplateAliasResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeTemplateAliasOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RequestId != nil {
+		s.WriteString(schemas.DescribeTemplateAliasResponse_RequestId, *v.RequestId)
+	}
+	if v.Status != 0 {
+		s.WriteInt32(schemas.DescribeTemplateAliasResponse_Status, v.Status)
+	}
+	if v.TemplateAlias != nil {
+		s.WriteStruct(schemas.DescribeTemplateAliasResponse_TemplateAlias)
+		v.TemplateAlias.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DescribeTemplateAliasOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeTemplateAliasResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeTemplateAliasResponse_RequestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.DescribeTemplateAliasResponse_RequestId, v.RequestId)
+		case schemas.DescribeTemplateAliasResponse_Status:
+			return d.ReadInt32(schemas.DescribeTemplateAliasResponse_Status, &v.Status)
+		case schemas.DescribeTemplateAliasResponse_TemplateAlias:
+			v.TemplateAlias = &types.TemplateAlias{}
+			return v.TemplateAlias.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeTemplateAliasMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeTemplateAlias{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeTemplateAlias, schemas.DescribeTemplateAliasRequest, schemas.DescribeTemplateAliasResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeTemplateAlias{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeTemplateAlias, schemas.DescribeTemplateAliasRequest, schemas.DescribeTemplateAliasResponse), output: &DescribeTemplateAliasOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

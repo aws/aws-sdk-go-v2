@@ -10,6 +10,7 @@ import (
 	"context"
 	"errors"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/agentregistrycontrol/document"
 	"github.com/aws/aws-sdk-go-v2/service/agentregistrycontrol/types"
 	smithyendpoints "github.com/aws/smithy-go/endpoints"
 	"github.com/aws/smithy-go/middleware"
@@ -198,6 +199,19 @@ func TestCheckResponseSnapshot_CreateRegistry(t *testing.T) {
 			AutoApprovalRules: []types.AutoApprovalRule{
 				types.AutoApprovalRule("APPROVE_ALL"),
 				types.AutoApprovalRule("APPROVE_ALL"),
+			},
+		},
+		CustomMetadataSchemaConfiguration: &types.CustomMetadataSchemaConfiguration{
+			DefaultSchema: ptr.String("__DefaultSchema__"),
+			RecordTypeSchemaOverrides: []types.RecordTypeSchemaOverride{
+				{
+					RecordType: types.RecordType("MCP"),
+					Schema:     ptr.String("__Schema__"),
+				},
+				{
+					RecordType: types.RecordType("MCP"),
+					Schema:     ptr.String("__Schema__"),
+				},
 			},
 		},
 		AutoDetectionConfiguration: &types.AutoDetectionConfiguration{
@@ -618,6 +632,7 @@ func TestCheckResponseSnapshot_CreateRegistryRecord(t *testing.T) {
 				},
 			},
 		},
+		CustomMetadata: document.NewLazyDocument("__Document__"),
 		Tags: map[string]string{
 			"key0": "__Value__",
 		},
@@ -753,6 +768,19 @@ func TestCheckResponseSnapshot_GetRegistry(t *testing.T) {
 			AutoApprovalRules: []types.AutoApprovalRule{
 				types.AutoApprovalRule("APPROVE_ALL"),
 				types.AutoApprovalRule("APPROVE_ALL"),
+			},
+		},
+		CustomMetadataSchemaConfiguration: &types.CustomMetadataSchemaConfiguration{
+			DefaultSchema: ptr.String("__DefaultSchema__"),
+			RecordTypeSchemaOverrides: []types.RecordTypeSchemaOverride{
+				{
+					RecordType: types.RecordType("MCP"),
+					Schema:     ptr.String("__Schema__"),
+				},
+				{
+					RecordType: types.RecordType("MCP"),
+					Schema:     ptr.String("__Schema__"),
+				},
 			},
 		},
 		Status:       types.RegistryStatus("CREATING"),
@@ -1185,8 +1213,10 @@ func TestCheckResponseSnapshot_GetRegistryRecord(t *testing.T) {
 				},
 			},
 		},
-		CreatedByAutoDetection: ptr.Bool(true),
-		CreatedBy:              ptr.String("__CreatedBy__"),
+		CreatedByAutoDetection:               ptr.Bool(true),
+		CreatedBy:                            ptr.String("__CreatedBy__"),
+		CustomMetadata:                       document.NewLazyDocument("__Document__"),
+		CustomMetadataSchemaComplianceStatus: types.CustomMetadataSchemaComplianceStatus("COMPLIANT"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("GetRegistryRecord.response")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -1445,6 +1475,7 @@ func TestCheckResponseSnapshot_ListRegistryRecords(t *testing.T) {
 						SourceType: types.SourceType("AWS::BedrockAgentCore::Runtime"),
 					},
 				},
+				CustomMetadataSchemaComplianceStatus: types.CustomMetadataSchemaComplianceStatus("COMPLIANT"),
 			},
 			{
 				RegistryArn:            ptr.String("__RegistryArn__"),
@@ -1472,6 +1503,7 @@ func TestCheckResponseSnapshot_ListRegistryRecords(t *testing.T) {
 						SourceType: types.SourceType("AWS::BedrockAgentCore::Runtime"),
 					},
 				},
+				CustomMetadataSchemaComplianceStatus: types.CustomMetadataSchemaComplianceStatus("COMPLIANT"),
 			},
 		},
 		NextToken: ptr.String("__NextToken__"),
@@ -1695,6 +1727,19 @@ func TestCheckResponseSnapshot_UpdateRegistry(t *testing.T) {
 				types.AutoApprovalRule("APPROVE_ALL"),
 			},
 		},
+		CustomMetadataSchemaConfiguration: &types.CustomMetadataSchemaConfiguration{
+			DefaultSchema: ptr.String("__DefaultSchema__"),
+			RecordTypeSchemaOverrides: []types.RecordTypeSchemaOverride{
+				{
+					RecordType: types.RecordType("MCP"),
+					Schema:     ptr.String("__Schema__"),
+				},
+				{
+					RecordType: types.RecordType("MCP"),
+					Schema:     ptr.String("__Schema__"),
+				},
+			},
+		},
 		Status:       types.RegistryStatus("CREATING"),
 		StatusReason: ptr.String("__StatusReason__"),
 		AutoDetection: &types.AutoDetection{
@@ -1793,6 +1838,21 @@ func TestCheckResponseSnapshot_UpdateRegistry(t *testing.T) {
 				AutoApprovalRules: []types.AutoApprovalRule{
 					types.AutoApprovalRule("APPROVE_ALL"),
 					types.AutoApprovalRule("APPROVE_ALL"),
+				},
+			},
+		},
+		CustomMetadataSchemaConfiguration: &types.UpdatedCustomMetadataSchemaConfiguration{
+			OptionalValue: &types.CustomMetadataSchemaConfiguration{
+				DefaultSchema: ptr.String("__DefaultSchema__"),
+				RecordTypeSchemaOverrides: []types.RecordTypeSchemaOverride{
+					{
+						RecordType: types.RecordType("MCP"),
+						Schema:     ptr.String("__Schema__"),
+					},
+					{
+						RecordType: types.RecordType("MCP"),
+						Schema:     ptr.String("__Schema__"),
+					},
 				},
 			},
 		},
@@ -2209,8 +2269,10 @@ func TestCheckResponseSnapshot_UpdateRegistryRecord(t *testing.T) {
 				},
 			},
 		},
-		CreatedByAutoDetection: ptr.Bool(true),
-		CreatedBy:              ptr.String("__CreatedBy__"),
+		CreatedByAutoDetection:               ptr.Bool(true),
+		CreatedBy:                            ptr.String("__CreatedBy__"),
+		CustomMetadata:                       document.NewLazyDocument("__Document__"),
+		CustomMetadataSchemaComplianceStatus: types.CustomMetadataSchemaComplianceStatus("COMPLIANT"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("UpdateRegistryRecord.response")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -2309,7 +2371,10 @@ func TestCheckResponseSnapshot_UpdateRegistryRecord(t *testing.T) {
 				},
 			},
 		},
-		RecordVersion:          ptr.String("__RecordVersion__"),
+		RecordVersion: ptr.String("__RecordVersion__"),
+		CustomMetadata: &types.UpdatedCustomMetadataMap{
+			OptionalValue: document.NewLazyDocument("__Document__"),
+		},
 		TriggerSynchronization: ptr.Bool(true),
 		Provenance: []types.Provenance{
 			{
@@ -2462,6 +2527,19 @@ func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 				types.AutoApprovalRule("APPROVE_ALL"),
 			},
 		},
+		CustomMetadataSchemaConfiguration: &types.CustomMetadataSchemaConfiguration{
+			DefaultSchema: ptr.String("__DefaultSchema__"),
+			RecordTypeSchemaOverrides: []types.RecordTypeSchemaOverride{
+				{
+					RecordType: types.RecordType("MCP"),
+					Schema:     ptr.String("__Schema__"),
+				},
+				{
+					RecordType: types.RecordType("MCP"),
+					Schema:     ptr.String("__Schema__"),
+				},
+			},
+		},
 		AutoDetectionConfiguration: &types.AutoDetectionConfiguration{
 			Scope:   types.AutoDetectionScope("ORGANIZATION"),
 			Enabled: ptr.Bool(true),
@@ -2572,6 +2650,19 @@ func TestCheckResponseSnapshot_Error_ConflictException(t *testing.T) {
 				types.AutoApprovalRule("APPROVE_ALL"),
 			},
 		},
+		CustomMetadataSchemaConfiguration: &types.CustomMetadataSchemaConfiguration{
+			DefaultSchema: ptr.String("__DefaultSchema__"),
+			RecordTypeSchemaOverrides: []types.RecordTypeSchemaOverride{
+				{
+					RecordType: types.RecordType("MCP"),
+					Schema:     ptr.String("__Schema__"),
+				},
+				{
+					RecordType: types.RecordType("MCP"),
+					Schema:     ptr.String("__Schema__"),
+				},
+			},
+		},
 		AutoDetectionConfiguration: &types.AutoDetectionConfiguration{
 			Scope:   types.AutoDetectionScope("ORGANIZATION"),
 			Enabled: ptr.Bool(true),
@@ -2680,6 +2771,19 @@ func TestCheckResponseSnapshot_Error_InternalServerException(t *testing.T) {
 			AutoApprovalRules: []types.AutoApprovalRule{
 				types.AutoApprovalRule("APPROVE_ALL"),
 				types.AutoApprovalRule("APPROVE_ALL"),
+			},
+		},
+		CustomMetadataSchemaConfiguration: &types.CustomMetadataSchemaConfiguration{
+			DefaultSchema: ptr.String("__DefaultSchema__"),
+			RecordTypeSchemaOverrides: []types.RecordTypeSchemaOverride{
+				{
+					RecordType: types.RecordType("MCP"),
+					Schema:     ptr.String("__Schema__"),
+				},
+				{
+					RecordType: types.RecordType("MCP"),
+					Schema:     ptr.String("__Schema__"),
+				},
 			},
 		},
 		AutoDetectionConfiguration: &types.AutoDetectionConfiguration{
@@ -3103,6 +3207,7 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 				},
 			},
 		},
+		CustomMetadata: document.NewLazyDocument("__Document__"),
 		Tags: map[string]string{
 			"key0": "__Value__",
 		},
@@ -3210,6 +3315,19 @@ func TestCheckResponseSnapshot_Error_ServiceQuotaExceededException(t *testing.T)
 			AutoApprovalRules: []types.AutoApprovalRule{
 				types.AutoApprovalRule("APPROVE_ALL"),
 				types.AutoApprovalRule("APPROVE_ALL"),
+			},
+		},
+		CustomMetadataSchemaConfiguration: &types.CustomMetadataSchemaConfiguration{
+			DefaultSchema: ptr.String("__DefaultSchema__"),
+			RecordTypeSchemaOverrides: []types.RecordTypeSchemaOverride{
+				{
+					RecordType: types.RecordType("MCP"),
+					Schema:     ptr.String("__Schema__"),
+				},
+				{
+					RecordType: types.RecordType("MCP"),
+					Schema:     ptr.String("__Schema__"),
+				},
 			},
 		},
 		AutoDetectionConfiguration: &types.AutoDetectionConfiguration{
@@ -3320,6 +3438,19 @@ func TestCheckResponseSnapshot_Error_ThrottlingException(t *testing.T) {
 			AutoApprovalRules: []types.AutoApprovalRule{
 				types.AutoApprovalRule("APPROVE_ALL"),
 				types.AutoApprovalRule("APPROVE_ALL"),
+			},
+		},
+		CustomMetadataSchemaConfiguration: &types.CustomMetadataSchemaConfiguration{
+			DefaultSchema: ptr.String("__DefaultSchema__"),
+			RecordTypeSchemaOverrides: []types.RecordTypeSchemaOverride{
+				{
+					RecordType: types.RecordType("MCP"),
+					Schema:     ptr.String("__Schema__"),
+				},
+				{
+					RecordType: types.RecordType("MCP"),
+					Schema:     ptr.String("__Schema__"),
+				},
 			},
 		},
 		AutoDetectionConfiguration: &types.AutoDetectionConfiguration{
@@ -3441,6 +3572,19 @@ func TestCheckResponseSnapshot_Error_ValidationException(t *testing.T) {
 			AutoApprovalRules: []types.AutoApprovalRule{
 				types.AutoApprovalRule("APPROVE_ALL"),
 				types.AutoApprovalRule("APPROVE_ALL"),
+			},
+		},
+		CustomMetadataSchemaConfiguration: &types.CustomMetadataSchemaConfiguration{
+			DefaultSchema: ptr.String("__DefaultSchema__"),
+			RecordTypeSchemaOverrides: []types.RecordTypeSchemaOverride{
+				{
+					RecordType: types.RecordType("MCP"),
+					Schema:     ptr.String("__Schema__"),
+				},
+				{
+					RecordType: types.RecordType("MCP"),
+					Schema:     ptr.String("__Schema__"),
+				},
 			},
 		},
 		AutoDetectionConfiguration: &types.AutoDetectionConfiguration{

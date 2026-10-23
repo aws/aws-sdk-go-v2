@@ -4,6 +4,8 @@ package batch
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/batch/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -33,16 +35,31 @@ type TerminateJobInput struct {
 	// This member is required.
 	JobId *string
 
-	// A message to attach to the job that explains the reason for canceling it. This
-	// message is returned by future DescribeJobsoperations on the job. It is also recorded in the
-	// Batch activity logs.
+	// A message to attach to the job that explains the reason for terminating it.
+	// This message is returned by future DescribeJobsoperations on the job. It is also recorded
+	// in the Batch activity logs.
 	//
-	// This parameter has as limit of 1024 characters.
+	// This parameter has a limit of 1024 characters.
 	//
 	// This member is required.
 	Reason *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *TerminateJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TerminateJobRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TerminateJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.JobId != nil {
+		s.WriteString(schemas.TerminateJobRequest_jobId, *v.JobId)
+	}
+	if v.Reason != nil {
+		s.WriteString(schemas.TerminateJobRequest_reason, *v.Reason)
+	}
 }
 
 type TerminateJobOutput struct {
@@ -52,13 +69,26 @@ type TerminateJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *TerminateJobOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TerminateJobResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TerminateJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *TerminateJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TerminateJobResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationTerminateJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpTerminateJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.TerminateJob, schemas.TerminateJobRequest, schemas.TerminateJobResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpTerminateJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.TerminateJob, schemas.TerminateJobRequest, schemas.TerminateJobResponse), output: &TerminateJobOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

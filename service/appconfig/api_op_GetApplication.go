@@ -4,6 +4,8 @@ package appconfig
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/appconfig/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -33,6 +35,18 @@ type GetApplicationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetApplicationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetApplicationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetApplicationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationId != nil {
+		s.WriteString(schemas.GetApplicationRequest_ApplicationId, *v.ApplicationId)
+	}
+}
+
 type GetApplicationOutput struct {
 
 	// The description of the application.
@@ -50,13 +64,44 @@ type GetApplicationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetApplicationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Application)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetApplicationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.Application_Description, *v.Description)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.Application_Id, *v.Id)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.Application_Name, *v.Name)
+	}
+}
+func (v *GetApplicationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Application, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Application_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.Application_Description, v.Description)
+		case schemas.Application_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.Application_Id, v.Id)
+		case schemas.Application_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.Application_Name, v.Name)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetApplicationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetApplication{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetApplication, schemas.GetApplicationRequest, schemas.Application)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetApplication{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetApplication, schemas.GetApplicationRequest, schemas.Application), output: &GetApplicationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

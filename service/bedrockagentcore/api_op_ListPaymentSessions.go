@@ -5,7 +5,9 @@ package bedrockagentcore
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcore/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcore/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -48,6 +50,30 @@ type ListPaymentSessionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListPaymentSessionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListPaymentSessionsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListPaymentSessionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AgentName != nil {
+		s.WriteString(schemas.ListPaymentSessionsRequest_agentName, *v.AgentName)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListPaymentSessionsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListPaymentSessionsRequest_nextToken, *v.NextToken)
+	}
+	if v.PaymentManagerArn != nil {
+		s.WriteString(schemas.ListPaymentSessionsRequest_paymentManagerArn, *v.PaymentManagerArn)
+	}
+	if v.UserId != nil {
+		s.WriteString(schemas.ListPaymentSessionsRequest_userId, *v.UserId)
+	}
+}
+
 // Response structure for listing payment sessions.
 type ListPaymentSessionsOutput struct {
 
@@ -65,13 +91,35 @@ type ListPaymentSessionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListPaymentSessionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListPaymentSessionsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListPaymentSessionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListPaymentSessionsResponse_nextToken, *v.NextToken)
+	}
+	serializePaymentSessionSummaryList(s, schemas.ListPaymentSessionsResponse_paymentSessions, v.PaymentSessions)
+}
+func (v *ListPaymentSessionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListPaymentSessionsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListPaymentSessionsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListPaymentSessionsResponse_nextToken, v.NextToken)
+		case schemas.ListPaymentSessionsResponse_paymentSessions:
+			return deserializePaymentSessionSummaryList(d, schemas.ListPaymentSessionsResponse_paymentSessions, &v.PaymentSessions)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListPaymentSessionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListPaymentSessions{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListPaymentSessions, schemas.ListPaymentSessionsRequest, schemas.ListPaymentSessionsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListPaymentSessions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListPaymentSessions, schemas.ListPaymentSessionsRequest, schemas.ListPaymentSessionsResponse), output: &ListPaymentSessionsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

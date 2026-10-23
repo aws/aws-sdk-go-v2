@@ -4,6 +4,8 @@ package mediatailor
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/mediatailor/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -36,6 +38,28 @@ type DeleteSourceLocationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteSourceLocationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteSourceLocationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteSourceLocationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SourceLocationName != nil {
+		s.WriteString(schemas.DeleteSourceLocationRequest_SourceLocationName, *v.SourceLocationName)
+	}
+}
+func (v *DeleteSourceLocationInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteSourceLocationRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteSourceLocationRequest_SourceLocationName:
+			v.SourceLocationName = new(string)
+			return d.ReadString(schemas.DeleteSourceLocationRequest_SourceLocationName, v.SourceLocationName)
+		}
+		return nil
+	})
+}
+
 type DeleteSourceLocationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -43,13 +67,26 @@ type DeleteSourceLocationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteSourceLocationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteSourceLocationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteSourceLocationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteSourceLocationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteSourceLocationResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteSourceLocationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteSourceLocation{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteSourceLocation, schemas.DeleteSourceLocationRequest, schemas.DeleteSourceLocationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteSourceLocation{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteSourceLocation, schemas.DeleteSourceLocationRequest, schemas.DeleteSourceLocationResponse), output: &DeleteSourceLocationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

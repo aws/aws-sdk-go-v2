@@ -4,7 +4,9 @@ package mturk
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/mturk/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/mturk/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -48,6 +50,21 @@ type GetQualificationScoreInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetQualificationScoreInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetQualificationScoreRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetQualificationScoreInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.QualificationTypeId != nil {
+		s.WriteString(schemas.GetQualificationScoreRequest_QualificationTypeId, *v.QualificationTypeId)
+	}
+	if v.WorkerId != nil {
+		s.WriteString(schemas.GetQualificationScoreRequest_WorkerId, *v.WorkerId)
+	}
+}
+
 type GetQualificationScoreOutput struct {
 
 	//  The Qualification data structure of the Qualification assigned to a user,
@@ -60,13 +77,34 @@ type GetQualificationScoreOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetQualificationScoreOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetQualificationScoreResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetQualificationScoreOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Qualification != nil {
+		s.WriteStruct(schemas.GetQualificationScoreResponse_Qualification)
+		v.Qualification.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetQualificationScoreOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetQualificationScoreResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetQualificationScoreResponse_Qualification:
+			v.Qualification = &types.Qualification{}
+			return v.Qualification.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetQualificationScoreMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetQualificationScore{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetQualificationScore, schemas.GetQualificationScoreRequest, schemas.GetQualificationScoreResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetQualificationScore{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetQualificationScore, schemas.GetQualificationScoreRequest, schemas.GetQualificationScoreResponse), output: &GetQualificationScoreOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

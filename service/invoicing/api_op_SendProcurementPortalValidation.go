@@ -5,6 +5,8 @@ package invoicing
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/invoicing/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -48,6 +50,21 @@ type SendProcurementPortalValidationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SendProcurementPortalValidationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SendProcurementPortalValidationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SendProcurementPortalValidationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.SendProcurementPortalValidationRequest_ClientToken, *v.ClientToken)
+	}
+	if v.ProcurementPortalPreferenceArn != nil {
+		s.WriteString(schemas.SendProcurementPortalValidationRequest_ProcurementPortalPreferenceArn, *v.ProcurementPortalPreferenceArn)
+	}
+}
+
 type SendProcurementPortalValidationOutput struct {
 
 	// The Amazon Resource Name (ARN) of the procurement portal preference for which
@@ -62,13 +79,32 @@ type SendProcurementPortalValidationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SendProcurementPortalValidationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SendProcurementPortalValidationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SendProcurementPortalValidationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ProcurementPortalPreferenceArn != nil {
+		s.WriteString(schemas.SendProcurementPortalValidationResponse_ProcurementPortalPreferenceArn, *v.ProcurementPortalPreferenceArn)
+	}
+}
+func (v *SendProcurementPortalValidationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SendProcurementPortalValidationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SendProcurementPortalValidationResponse_ProcurementPortalPreferenceArn:
+			v.ProcurementPortalPreferenceArn = new(string)
+			return d.ReadString(schemas.SendProcurementPortalValidationResponse_ProcurementPortalPreferenceArn, v.ProcurementPortalPreferenceArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationSendProcurementPortalValidationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpSendProcurementPortalValidation{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SendProcurementPortalValidation, schemas.SendProcurementPortalValidationRequest, schemas.SendProcurementPortalValidationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpSendProcurementPortalValidation{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SendProcurementPortalValidation, schemas.SendProcurementPortalValidationRequest, schemas.SendProcurementPortalValidationResponse), output: &SendProcurementPortalValidationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

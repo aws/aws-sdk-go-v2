@@ -4,6 +4,8 @@ package billing
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/billing/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -42,6 +44,19 @@ type DisassociateSourceViewsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DisassociateSourceViewsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DisassociateSourceViewsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DisassociateSourceViewsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.DisassociateSourceViewsRequest_arn, *v.Arn)
+	}
+	serializeBillingViewSourceViewsList(s, schemas.DisassociateSourceViewsRequest_sourceViews, v.SourceViews)
+}
+
 type DisassociateSourceViewsOutput struct {
 
 	//  The ARN of the billing view that the source views were disassociated from.
@@ -55,13 +70,32 @@ type DisassociateSourceViewsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DisassociateSourceViewsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DisassociateSourceViewsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DisassociateSourceViewsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.DisassociateSourceViewsResponse_arn, *v.Arn)
+	}
+}
+func (v *DisassociateSourceViewsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DisassociateSourceViewsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DisassociateSourceViewsResponse_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.DisassociateSourceViewsResponse_arn, v.Arn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDisassociateSourceViewsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpDisassociateSourceViews{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisassociateSourceViews, schemas.DisassociateSourceViewsRequest, schemas.DisassociateSourceViewsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpDisassociateSourceViews{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisassociateSourceViews, schemas.DisassociateSourceViewsRequest, schemas.DisassociateSourceViewsResponse), output: &DisassociateSourceViewsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

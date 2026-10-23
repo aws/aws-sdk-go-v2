@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"items":[{"apiId":"__ApiId__","apiMappingId":"__ApiMappingId__","apiMappingKey":"__ApiMappingKey__","stage":"__Stage__"},{"apiId":"__ApiId__","apiMappingId":"__ApiMappingId__","apiMappingKey":"__ApiMappingKey__","stage":"__Stage__"}],"nextToken":"__NextToken__"}

@@ -1350,6 +1350,19 @@ func TestCheckRequestSnapshot_ExportTableToPointInTime(t *testing.T) {
 			ExportToTime:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			ExportViewType: types.ExportViewType("NEW_IMAGE"),
 		},
+		FilterSpecification: &types.FilterSpecification{
+			FilterExpression:       ptr.String("__FilterExpression__"),
+			ProjectionExpression:   ptr.String("__ProjectionExpression__"),
+			KeyConditionExpression: ptr.String("__KeyConditionExpression__"),
+			ExpressionAttributeNames: map[string]string{
+				"key0": "__Value__",
+			},
+			ExpressionAttributeValues: map[string]types.AttributeValue{
+				"key0": &types.AttributeValueMemberS{
+					Value: "__AttributeValueMemberS__",
+				},
+			},
+		},
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -3461,6 +3474,10 @@ func TestCheckRequestSnapshot_UpdateTable(t *testing.T) {
 				Delete: &types.DeleteReplicationGroupMemberAction{
 					RegionName: ptr.String("__RegionName__"),
 				},
+				Disassociate: &types.DisassociateReplicationGroupMemberAction{
+					RegionName:         ptr.String("__RegionName__"),
+					DisassociationMode: types.DisassociationMode("WAIT_FOR_REPLICATION"),
+				},
 			},
 			{
 				Create: &types.CreateReplicationGroupMemberAction{
@@ -3528,6 +3545,10 @@ func TestCheckRequestSnapshot_UpdateTable(t *testing.T) {
 				Delete: &types.DeleteReplicationGroupMemberAction{
 					RegionName: ptr.String("__RegionName__"),
 				},
+				Disassociate: &types.DisassociateReplicationGroupMemberAction{
+					RegionName:         ptr.String("__RegionName__"),
+					DisassociationMode: types.DisassociationMode("WAIT_FOR_REPLICATION"),
+				},
 			},
 		},
 		TableClass:                types.TableClass("STANDARD"),
@@ -3560,6 +3581,7 @@ func TestCheckRequestSnapshot_UpdateTable(t *testing.T) {
 			WriteUnitsPerSecond: ptr.Int64(1),
 		},
 		GlobalTableSettingsReplicationMode: types.GlobalTableSettingsReplicationMode("ENABLED"),
+		DisassociationProtectionEnabled:    ptr.Bool(true),
 		VectorIndexUpdates: []types.VectorIndexUpdate{
 			{
 				Create: &types.CreateVectorIndexAction{
@@ -5013,6 +5035,19 @@ func TestUpdateRequestSnapshot_ExportTableToPointInTime(t *testing.T) {
 			ExportFromTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			ExportToTime:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			ExportViewType: types.ExportViewType("NEW_IMAGE"),
+		},
+		FilterSpecification: &types.FilterSpecification{
+			FilterExpression:       ptr.String("__FilterExpression__"),
+			ProjectionExpression:   ptr.String("__ProjectionExpression__"),
+			KeyConditionExpression: ptr.String("__KeyConditionExpression__"),
+			ExpressionAttributeNames: map[string]string{
+				"key0": "__Value__",
+			},
+			ExpressionAttributeValues: map[string]types.AttributeValue{
+				"key0": &types.AttributeValueMemberS{
+					Value: "__AttributeValueMemberS__",
+				},
+			},
 		},
 	}
 	body := &bytes.Buffer{}
@@ -7125,6 +7160,10 @@ func TestUpdateRequestSnapshot_UpdateTable(t *testing.T) {
 				Delete: &types.DeleteReplicationGroupMemberAction{
 					RegionName: ptr.String("__RegionName__"),
 				},
+				Disassociate: &types.DisassociateReplicationGroupMemberAction{
+					RegionName:         ptr.String("__RegionName__"),
+					DisassociationMode: types.DisassociationMode("WAIT_FOR_REPLICATION"),
+				},
 			},
 			{
 				Create: &types.CreateReplicationGroupMemberAction{
@@ -7192,6 +7231,10 @@ func TestUpdateRequestSnapshot_UpdateTable(t *testing.T) {
 				Delete: &types.DeleteReplicationGroupMemberAction{
 					RegionName: ptr.String("__RegionName__"),
 				},
+				Disassociate: &types.DisassociateReplicationGroupMemberAction{
+					RegionName:         ptr.String("__RegionName__"),
+					DisassociationMode: types.DisassociationMode("WAIT_FOR_REPLICATION"),
+				},
 			},
 		},
 		TableClass:                types.TableClass("STANDARD"),
@@ -7224,6 +7267,7 @@ func TestUpdateRequestSnapshot_UpdateTable(t *testing.T) {
 			WriteUnitsPerSecond: ptr.Int64(1),
 		},
 		GlobalTableSettingsReplicationMode: types.GlobalTableSettingsReplicationMode("ENABLED"),
+		DisassociationProtectionEnabled:    ptr.Bool(true),
 		VectorIndexUpdates: []types.VectorIndexUpdate{
 			{
 				Create: &types.CreateVectorIndexAction{

@@ -4,7 +4,9 @@ package mediaconvert
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/mediaconvert/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/mediaconvert/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -69,6 +71,39 @@ type CreateQueueInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateQueueInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateQueueRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateQueueInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConcurrentJobs != nil {
+		s.WriteInt32(schemas.CreateQueueRequest_ConcurrentJobs, *v.ConcurrentJobs)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreateQueueRequest_Description, *v.Description)
+	}
+	if v.MaximumConcurrentFeeds != nil {
+		s.WriteInt32(schemas.CreateQueueRequest_MaximumConcurrentFeeds, *v.MaximumConcurrentFeeds)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateQueueRequest_Name, *v.Name)
+	}
+	if v.PricingPlan != "" {
+		s.WriteString(schemas.CreateQueueRequest_PricingPlan, string(v.PricingPlan))
+	}
+	if v.ReservationPlanSettings != nil {
+		s.WriteStruct(schemas.CreateQueueRequest_ReservationPlanSettings)
+		v.ReservationPlanSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.CreateQueueRequest_Status, string(v.Status))
+	}
+	serialize__mapOf__string(s, schemas.CreateQueueRequest_Tags, v.Tags)
+}
+
 type CreateQueueOutput struct {
 
 	// You can use queues to manage the resources that are available to your AWS
@@ -84,13 +119,34 @@ type CreateQueueOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateQueueOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateQueueResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateQueueOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Queue != nil {
+		s.WriteStruct(schemas.CreateQueueResponse_Queue)
+		v.Queue.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateQueueOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateQueueResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateQueueResponse_Queue:
+			v.Queue = &types.Queue{}
+			return v.Queue.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateQueueMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateQueue{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateQueue, schemas.CreateQueueRequest, schemas.CreateQueueResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateQueue{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateQueue, schemas.CreateQueueRequest, schemas.CreateQueueResponse), output: &CreateQueueOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

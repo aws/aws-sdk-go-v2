@@ -4,7 +4,9 @@ package mediaconnect
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/mediaconnect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/mediaconnect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -37,6 +39,21 @@ type UpdateGatewayInstanceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateGatewayInstanceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateGatewayInstanceRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateGatewayInstanceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BridgePlacement != "" {
+		s.WriteString(schemas.UpdateGatewayInstanceRequest_BridgePlacement, string(v.BridgePlacement))
+	}
+	if v.GatewayInstanceArn != nil {
+		s.WriteString(schemas.UpdateGatewayInstanceRequest_GatewayInstanceArn, *v.GatewayInstanceArn)
+	}
+}
+
 type UpdateGatewayInstanceOutput struct {
 
 	// The state of the instance. ACTIVE or INACTIVE .
@@ -51,13 +68,42 @@ type UpdateGatewayInstanceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateGatewayInstanceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateGatewayInstanceResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateGatewayInstanceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BridgePlacement != "" {
+		s.WriteString(schemas.UpdateGatewayInstanceResponse_BridgePlacement, string(v.BridgePlacement))
+	}
+	if v.GatewayInstanceArn != nil {
+		s.WriteString(schemas.UpdateGatewayInstanceResponse_GatewayInstanceArn, *v.GatewayInstanceArn)
+	}
+}
+func (v *UpdateGatewayInstanceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateGatewayInstanceResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateGatewayInstanceResponse_BridgePlacement:
+			var ev string
+			if err := d.ReadString(schemas.UpdateGatewayInstanceResponse_BridgePlacement, &ev); err != nil {
+				return err
+			}
+			v.BridgePlacement = types.BridgePlacement(ev)
+			return nil
+		case schemas.UpdateGatewayInstanceResponse_GatewayInstanceArn:
+			v.GatewayInstanceArn = new(string)
+			return d.ReadString(schemas.UpdateGatewayInstanceResponse_GatewayInstanceArn, v.GatewayInstanceArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateGatewayInstanceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateGatewayInstance{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateGatewayInstance, schemas.UpdateGatewayInstanceRequest, schemas.UpdateGatewayInstanceResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateGatewayInstance{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateGatewayInstance, schemas.UpdateGatewayInstanceRequest, schemas.UpdateGatewayInstanceResponse), output: &UpdateGatewayInstanceOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

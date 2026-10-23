@@ -5,7 +5,9 @@ package entityresolution
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/entityresolution/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/entityresolution/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -40,6 +42,24 @@ type ListProviderServicesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListProviderServicesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListProviderServicesInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListProviderServicesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListProviderServicesInput_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListProviderServicesInput_nextToken, *v.NextToken)
+	}
+	if v.ProviderName != nil {
+		s.WriteString(schemas.ListProviderServicesInput_providerName, *v.ProviderName)
+	}
+}
+
 type ListProviderServicesOutput struct {
 
 	// The pagination token from the previous API call.
@@ -54,13 +74,35 @@ type ListProviderServicesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListProviderServicesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListProviderServicesOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListProviderServicesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListProviderServicesOutput_nextToken, *v.NextToken)
+	}
+	serializeProviderServiceList(s, schemas.ListProviderServicesOutput_providerServiceSummaries, v.ProviderServiceSummaries)
+}
+func (v *ListProviderServicesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListProviderServicesOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListProviderServicesOutput_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListProviderServicesOutput_nextToken, v.NextToken)
+		case schemas.ListProviderServicesOutput_providerServiceSummaries:
+			return deserializeProviderServiceList(d, schemas.ListProviderServicesOutput_providerServiceSummaries, &v.ProviderServiceSummaries)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListProviderServicesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListProviderServices{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListProviderServices, schemas.ListProviderServicesInput, schemas.ListProviderServicesOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListProviderServices{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListProviderServices, schemas.ListProviderServicesInput, schemas.ListProviderServicesOutput), output: &ListProviderServicesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -5,7 +5,9 @@ package bedrock
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/bedrock/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrock/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -89,6 +91,41 @@ type CreateEvaluationJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateEvaluationJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateEvaluationJobRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateEvaluationJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationType != "" {
+		s.WriteString(schemas.CreateEvaluationJobRequest_applicationType, string(v.ApplicationType))
+	}
+	if v.ClientRequestToken != nil {
+		s.WriteString(schemas.CreateEvaluationJobRequest_clientRequestToken, *v.ClientRequestToken)
+	}
+	if v.CustomerEncryptionKeyId != nil {
+		s.WriteString(schemas.CreateEvaluationJobRequest_customerEncryptionKeyId, *v.CustomerEncryptionKeyId)
+	}
+	serializeEvaluationConfig(s, schemas.CreateEvaluationJobRequest_evaluationConfig, v.EvaluationConfig)
+	serializeEvaluationInferenceConfig(s, schemas.CreateEvaluationJobRequest_inferenceConfig, v.InferenceConfig)
+	if v.JobDescription != nil {
+		s.WriteString(schemas.CreateEvaluationJobRequest_jobDescription, *v.JobDescription)
+	}
+	if v.JobName != nil {
+		s.WriteString(schemas.CreateEvaluationJobRequest_jobName, *v.JobName)
+	}
+	serializeTagList(s, schemas.CreateEvaluationJobRequest_jobTags, v.JobTags)
+	if v.OutputDataConfig != nil {
+		s.WriteStruct(schemas.CreateEvaluationJobRequest_outputDataConfig)
+		v.OutputDataConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RoleArn != nil {
+		s.WriteString(schemas.CreateEvaluationJobRequest_roleArn, *v.RoleArn)
+	}
+}
+
 type CreateEvaluationJobOutput struct {
 
 	// The Amazon Resource Name (ARN) of the evaluation job.
@@ -102,13 +139,32 @@ type CreateEvaluationJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateEvaluationJobOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateEvaluationJobResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateEvaluationJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.JobArn != nil {
+		s.WriteString(schemas.CreateEvaluationJobResponse_jobArn, *v.JobArn)
+	}
+}
+func (v *CreateEvaluationJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateEvaluationJobResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateEvaluationJobResponse_jobArn:
+			v.JobArn = new(string)
+			return d.ReadString(schemas.CreateEvaluationJobResponse_jobArn, v.JobArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateEvaluationJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateEvaluationJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateEvaluationJob, schemas.CreateEvaluationJobRequest, schemas.CreateEvaluationJobResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateEvaluationJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateEvaluationJob, schemas.CreateEvaluationJobRequest, schemas.CreateEvaluationJobResponse), output: &CreateEvaluationJobOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

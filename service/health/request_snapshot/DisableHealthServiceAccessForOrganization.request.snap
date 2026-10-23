@@ -1,6 +1,5 @@
-POST /
+POST /service/AWSHealth_20160804/operation/DisableHealthServiceAccessForOrganization
 
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: AWSHealth_20160804.DisableHealthServiceAccessForOrganization
+Accept: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{}

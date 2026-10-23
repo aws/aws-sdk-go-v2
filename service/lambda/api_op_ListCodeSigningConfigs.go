@@ -5,7 +5,9 @@ package lambda
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/lambda/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lambda/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -40,6 +42,21 @@ type ListCodeSigningConfigsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListCodeSigningConfigsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListCodeSigningConfigsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListCodeSigningConfigsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Marker != nil {
+		s.WriteString(schemas.ListCodeSigningConfigsRequest_Marker, *v.Marker)
+	}
+	if v.MaxItems != nil {
+		s.WriteInt32(schemas.ListCodeSigningConfigsRequest_MaxItems, *v.MaxItems)
+	}
+}
+
 type ListCodeSigningConfigsOutput struct {
 
 	// The code signing configurations
@@ -54,13 +71,35 @@ type ListCodeSigningConfigsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListCodeSigningConfigsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListCodeSigningConfigsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListCodeSigningConfigsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeCodeSigningConfigList(s, schemas.ListCodeSigningConfigsResponse_CodeSigningConfigs, v.CodeSigningConfigs)
+	if v.NextMarker != nil {
+		s.WriteString(schemas.ListCodeSigningConfigsResponse_NextMarker, *v.NextMarker)
+	}
+}
+func (v *ListCodeSigningConfigsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListCodeSigningConfigsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListCodeSigningConfigsResponse_CodeSigningConfigs:
+			return deserializeCodeSigningConfigList(d, schemas.ListCodeSigningConfigsResponse_CodeSigningConfigs, &v.CodeSigningConfigs)
+		case schemas.ListCodeSigningConfigsResponse_NextMarker:
+			v.NextMarker = new(string)
+			return d.ReadString(schemas.ListCodeSigningConfigsResponse_NextMarker, v.NextMarker)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListCodeSigningConfigsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListCodeSigningConfigs{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListCodeSigningConfigs, schemas.ListCodeSigningConfigsRequest, schemas.ListCodeSigningConfigsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListCodeSigningConfigs{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListCodeSigningConfigs, schemas.ListCodeSigningConfigsRequest, schemas.ListCodeSigningConfigsResponse), output: &ListCodeSigningConfigsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

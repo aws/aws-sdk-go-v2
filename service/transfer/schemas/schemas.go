@@ -395,7 +395,8 @@ var TransferService = smithy.NewServiceSchema(_TransferService, "2018-11-05")
 var AccessDeniedException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.transfer",
 	Name:      "AccessDeniedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 403},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 403},
 	&smithytraits.AWSQueryError{ErrorCode: "AccessDenied",
 		StatusCode: 403})
 var AccessDeniedException_Message *smithy.Schema
@@ -560,6 +561,14 @@ var _CertSerial = smithy.NewSchema(smithy.ShapeID{
 	Name:      "CertSerial",
 }, smithy.ShapeTypeString, 0)
 
+var CommunicationMode = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.transfer",
+	Name:      "CommunicationMode",
+}, smithy.ShapeTypeEnum, 2)
+var CommunicationMode_CLIENT_TALK_FIRST *smithy.Schema
+
+var CommunicationMode_SERVER_TALK_FIRST *smithy.Schema
+
 var CompressionEnum = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.transfer",
 	Name:      "CompressionEnum",
@@ -571,7 +580,8 @@ var CompressionEnum_DISABLED *smithy.Schema
 var ConflictException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.transfer",
 	Name:      "ConflictException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 409})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 409})
 var ConflictException_Message *smithy.Schema
 
 var ConnectorEgressConfig = smithy.NewSchema(smithy.ShapeID{
@@ -910,7 +920,7 @@ var DescribedExecution_Results *smithy.Schema
 var DescribedHostKey = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.transfer",
 	Name:      "DescribedHostKey",
-}, smithy.ShapeTypeStructure, 7)
+}, smithy.ShapeTypeStructure, 9)
 var DescribedHostKey_Arn *smithy.Schema
 
 var DescribedHostKey_HostKeyId *smithy.Schema
@@ -924,6 +934,10 @@ var DescribedHostKey_Type *smithy.Schema
 var DescribedHostKey_DateImported *smithy.Schema
 
 var DescribedHostKey_Tags *smithy.Schema
+
+var DescribedHostKey_StorageType *smithy.Schema
+
+var DescribedHostKey_SecretId *smithy.Schema
 
 var DescribedIdentityCenterConfig = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.transfer",
@@ -1110,7 +1124,7 @@ var DescribedWebAppVpcConfig_VpcEndpointId *smithy.Schema
 var DescribedWorkflow = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.transfer",
 	Name:      "DescribedWorkflow",
-}, smithy.ShapeTypeStructure, 6)
+}, smithy.ShapeTypeStructure, 7)
 var DescribedWorkflow_Arn *smithy.Schema
 
 var DescribedWorkflow_Description *smithy.Schema
@@ -1122,6 +1136,8 @@ var DescribedWorkflow_OnExceptionSteps *smithy.Schema
 var DescribedWorkflow_WorkflowId *smithy.Schema
 
 var DescribedWorkflow_Tags *smithy.Schema
+
+var DescribedWorkflow_StructuredLogDestinations *smithy.Schema
 
 var _Description = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.transfer",
@@ -1381,6 +1397,14 @@ var _HostKeyId = smithy.NewSchema(smithy.ShapeID{
 	Name:      "HostKeyId",
 }, smithy.ShapeTypeString, 0)
 
+var HostKeyStorageType = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.transfer",
+	Name:      "HostKeyStorageType",
+}, smithy.ShapeTypeEnum, 2)
+var HostKeyStorageType_SERVICE_MANAGED *smithy.Schema
+
+var HostKeyStorageType_SECRETS_MANAGER *smithy.Schema
+
 var _HostKeyType = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.transfer",
 	Name:      "HostKeyType",
@@ -1441,19 +1465,22 @@ var InputFileLocation_EfsFileLocation *smithy.Schema
 var InternalServiceError = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.transfer",
 	Name:      "InternalServiceError",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 503})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
+	&smithytraits.HTTPError{Code: 503})
 var InternalServiceError_Message *smithy.Schema
 
 var InvalidNextTokenException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.transfer",
 	Name:      "InvalidNextTokenException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var InvalidNextTokenException_Message *smithy.Schema
 
 var InvalidRequestException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.transfer",
 	Name:      "InvalidRequestException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var InvalidRequestException_Message *smithy.Schema
 
 var IpAddressType = smithy.NewSchema(smithy.ShapeID{
@@ -1463,6 +1490,11 @@ var IpAddressType = smithy.NewSchema(smithy.ShapeID{
 var IpAddressType_IPV4 *smithy.Schema
 
 var IpAddressType_DUALSTACK *smithy.Schema
+
+var _KmsKey = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.transfer",
+	Name:      "KmsKey",
+}, smithy.ShapeTypeString, 0)
 
 var ListedAccess = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.transfer",
@@ -1569,7 +1601,7 @@ var _ListedExecutions_member *smithy.Schema
 var ListedHostKey = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.transfer",
 	Name:      "ListedHostKey",
-}, smithy.ShapeTypeStructure, 6)
+}, smithy.ShapeTypeStructure, 8)
 var ListedHostKey_Arn *smithy.Schema
 
 var ListedHostKey_HostKeyId *smithy.Schema
@@ -1581,6 +1613,10 @@ var ListedHostKey_Description *smithy.Schema
 var ListedHostKey_Type *smithy.Schema
 
 var ListedHostKey_DateImported *smithy.Schema
+
+var ListedHostKey_StorageType *smithy.Schema
+
+var ListedHostKey_SecretId *smithy.Schema
 
 var _ListedHostKeys = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.transfer",
@@ -1901,20 +1937,38 @@ var Protocol_AS2 *smithy.Schema
 var ProtocolDetails = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.transfer",
 	Name:      "ProtocolDetails",
-}, smithy.ShapeTypeStructure, 4)
+}, smithy.ShapeTypeStructure, 6)
 var ProtocolDetails_PassiveIp *smithy.Schema
 
 var ProtocolDetails_TlsSessionResumptionMode *smithy.Schema
 
 var ProtocolDetails_SetStatOption *smithy.Schema
 
+var ProtocolDetails_SftpPorts *smithy.Schema
+
 var ProtocolDetails_As2Transports *smithy.Schema
+
+var ProtocolDetails_ProxyConfig *smithy.Schema
 
 var _Protocols = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.transfer",
 	Name:      "Protocols",
 }, smithy.ShapeTypeList, 1)
 var _Protocols_member *smithy.Schema
+
+var ProxyConfig = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.transfer",
+	Name:      "ProxyConfig",
+}, smithy.ShapeTypeStructure, 1)
+var ProxyConfig_SftpMode *smithy.Schema
+
+var ProxyMode = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.transfer",
+	Name:      "ProxyMode",
+}, smithy.ShapeTypeEnum, 2)
+var ProxyMode_NONE *smithy.Schema
+
+var ProxyMode_PROXY_PROTOCOL_V2_ENFORCED *smithy.Schema
 
 var _Resource = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.transfer",
@@ -1924,7 +1978,8 @@ var _Resource = smithy.NewSchema(smithy.ShapeID{
 var ResourceExistsException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.transfer",
 	Name:      "ResourceExistsException",
-}, smithy.ShapeTypeStructure, 3, &smithytraits.HTTPError{Code: 409})
+}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 409})
 var ResourceExistsException_Message *smithy.Schema
 
 var ResourceExistsException_Resource *smithy.Schema
@@ -1934,7 +1989,8 @@ var ResourceExistsException_ResourceType *smithy.Schema
 var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.transfer",
 	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 3, &smithytraits.HTTPError{Code: 404})
+}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 404})
 var ResourceNotFoundException_Message *smithy.Schema
 
 var ResourceNotFoundException_Resource *smithy.Schema
@@ -2138,7 +2194,8 @@ var ServiceMetadata_UserDetails *smithy.Schema
 var ServiceUnavailableException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.transfer",
 	Name:      "ServiceUnavailableException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 503},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
+	&smithytraits.HTTPError{Code: 503},
 	&smithytraits.AWSQueryError{ErrorCode: "ServiceUnavailable",
 		StatusCode: 503})
 var ServiceUnavailableException_Message *smithy.Schema
@@ -2206,6 +2263,20 @@ var _SftpPort = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.transfer",
 	Name:      "SftpPort",
 }, smithy.ShapeTypeInteger, 0)
+
+var _SftpPorts = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.transfer",
+	Name:      "SftpPorts",
+}, smithy.ShapeTypeList, 1)
+var _SftpPorts_member *smithy.Schema
+
+var SftpPortWithOptions = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.transfer",
+	Name:      "SftpPortWithOptions",
+}, smithy.ShapeTypeStructure, 2)
+var SftpPortWithOptions_SftpPort *smithy.Schema
+
+var SftpPortWithOptions_CommunicationMode *smithy.Schema
 
 var SigningAlg = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.transfer",
@@ -2353,7 +2424,8 @@ var _TagValue = smithy.NewSchema(smithy.ShapeID{
 var ThrottlingException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.transfer",
 	Name:      "ThrottlingException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 429})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 429})
 var ThrottlingException_RetryAfterSeconds *smithy.Schema
 
 var TlsSessionResumptionMode = smithy.NewSchema(smithy.ShapeID{
@@ -2733,7 +2805,7 @@ var CreateProfileResponse_ProfileId *smithy.Schema
 var CreateServerRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.transfer",
 	Name:      "CreateServerRequest",
-}, smithy.ShapeTypeStructure, 18)
+}, smithy.ShapeTypeStructure, 19)
 var CreateServerRequest_Certificate *smithy.Schema
 
 var CreateServerRequest_Domain *smithy.Schema
@@ -2769,6 +2841,8 @@ var CreateServerRequest_StructuredLogDestinations *smithy.Schema
 var CreateServerRequest_S3StorageOptions *smithy.Schema
 
 var CreateServerRequest_IpAddressType *smithy.Schema
+
+var CreateServerRequest_HostKeyStorageType *smithy.Schema
 
 var CreateServerResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.transfer",
@@ -2833,7 +2907,7 @@ var CreateWebAppResponse_WebAppId *smithy.Schema
 var CreateWorkflowRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.transfer",
 	Name:      "CreateWorkflowRequest",
-}, smithy.ShapeTypeStructure, 4)
+}, smithy.ShapeTypeStructure, 5)
 var CreateWorkflowRequest_Description *smithy.Schema
 
 var CreateWorkflowRequest_Steps *smithy.Schema
@@ -2841,6 +2915,8 @@ var CreateWorkflowRequest_Steps *smithy.Schema
 var CreateWorkflowRequest_OnExceptionSteps *smithy.Schema
 
 var CreateWorkflowRequest_Tags *smithy.Schema
+
+var CreateWorkflowRequest_StructuredLogDestinations *smithy.Schema
 
 var CreateWorkflowResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.transfer",
@@ -3133,7 +3209,7 @@ var ImportCertificateResponse_CertificateId *smithy.Schema
 var ImportHostKeyRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.transfer",
 	Name:      "ImportHostKeyRequest",
-}, smithy.ShapeTypeStructure, 4)
+}, smithy.ShapeTypeStructure, 6)
 var ImportHostKeyRequest_ServerId *smithy.Schema
 
 var ImportHostKeyRequest_HostKeyBody *smithy.Schema
@@ -3141,6 +3217,10 @@ var ImportHostKeyRequest_HostKeyBody *smithy.Schema
 var ImportHostKeyRequest_Description *smithy.Schema
 
 var ImportHostKeyRequest_Tags *smithy.Schema
+
+var ImportHostKeyRequest_StorageType *smithy.Schema
+
+var ImportHostKeyRequest_KmsKey *smithy.Schema
 
 var ImportHostKeyResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.transfer",
@@ -3692,12 +3772,16 @@ var UpdateConnectorResponse_ConnectorId *smithy.Schema
 var UpdateHostKeyRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.transfer",
 	Name:      "UpdateHostKeyRequest",
-}, smithy.ShapeTypeStructure, 3)
+}, smithy.ShapeTypeStructure, 5)
 var UpdateHostKeyRequest_ServerId *smithy.Schema
 
 var UpdateHostKeyRequest_HostKeyId *smithy.Schema
 
 var UpdateHostKeyRequest_Description *smithy.Schema
+
+var UpdateHostKeyRequest_StorageType *smithy.Schema
+
+var UpdateHostKeyRequest_KmsKey *smithy.Schema
 
 var UpdateHostKeyResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.transfer",
@@ -3937,6 +4021,10 @@ func init() {
 	CertificateUsageType_ENCRYPTION = CertificateUsageType.AddMember("ENCRYPTION", smithyprelude.Unit)
 
 	CertificateUsageType_TLS = CertificateUsageType.AddMember("TLS", smithyprelude.Unit)
+
+	CommunicationMode_CLIENT_TALK_FIRST = CommunicationMode.AddMember("CLIENT_TALK_FIRST", smithyprelude.Unit)
+
+	CommunicationMode_SERVER_TALK_FIRST = CommunicationMode.AddMember("SERVER_TALK_FIRST", smithyprelude.Unit)
 
 	ConflictException_Message = ConflictException.AddMember("Message", _Message)
 
@@ -4292,6 +4380,10 @@ func init() {
 
 	DescribedExecution_Results = DescribedExecution.AddMember("Results", ExecutionResults)
 
+	HostKeyStorageType_SERVICE_MANAGED = HostKeyStorageType.AddMember("SERVICE_MANAGED", smithyprelude.Unit)
+
+	HostKeyStorageType_SECRETS_MANAGER = HostKeyStorageType.AddMember("SECRETS_MANAGER", smithyprelude.Unit)
+
 	DescribedHostKey_Arn = DescribedHostKey.AddMember("Arn", _Arn)
 
 	DescribedHostKey_HostKeyId = DescribedHostKey.AddMember("HostKeyId", _HostKeyId)
@@ -4305,6 +4397,10 @@ func init() {
 	DescribedHostKey_DateImported = DescribedHostKey.AddMember("DateImported", _DateImported)
 
 	DescribedHostKey_Tags = DescribedHostKey.AddMember("Tags", _Tags)
+
+	DescribedHostKey_StorageType = DescribedHostKey.AddMember("StorageType", HostKeyStorageType)
+
+	DescribedHostKey_SecretId = DescribedHostKey.AddMember("SecretId", _SecretId)
 
 	DescribedIdentityCenterConfig_ApplicationArn = DescribedIdentityCenterConfig.AddMember("ApplicationArn", _IdentityCenterApplicationArn)
 
@@ -4368,13 +4464,29 @@ func init() {
 
 	SetStatOption_ENABLE_NO_OP = SetStatOption.AddMember("ENABLE_NO_OP", smithyprelude.Unit)
 
+	SftpPortWithOptions_SftpPort = SftpPortWithOptions.AddMember("SftpPort", _SftpPort)
+
+	SftpPortWithOptions_CommunicationMode = SftpPortWithOptions.AddMember("CommunicationMode", CommunicationMode)
+
+	_SftpPorts_member = _SftpPorts.AddMember("member", SftpPortWithOptions)
+
+	ProxyMode_NONE = ProxyMode.AddMember("NONE", smithyprelude.Unit)
+
+	ProxyMode_PROXY_PROTOCOL_V2_ENFORCED = ProxyMode.AddMember("PROXY_PROTOCOL_V2_ENFORCED", smithyprelude.Unit)
+
+	ProxyConfig_SftpMode = ProxyConfig.AddMember("SftpMode", ProxyMode)
+
 	ProtocolDetails_PassiveIp = ProtocolDetails.AddMember("PassiveIp", _PassiveIp)
 
 	ProtocolDetails_TlsSessionResumptionMode = ProtocolDetails.AddMember("TlsSessionResumptionMode", TlsSessionResumptionMode)
 
 	ProtocolDetails_SetStatOption = ProtocolDetails.AddMember("SetStatOption", SetStatOption)
 
+	ProtocolDetails_SftpPorts = ProtocolDetails.AddMember("SftpPorts", _SftpPorts)
+
 	ProtocolDetails_As2Transports = ProtocolDetails.AddMember("As2Transports", _As2Transports)
+
+	ProtocolDetails_ProxyConfig = ProtocolDetails.AddMember("ProxyConfig", ProxyConfig)
 
 	Domain_S3 = Domain.AddMember("S3", smithyprelude.Unit)
 
@@ -4634,6 +4746,8 @@ func init() {
 
 	DescribedWorkflow_Tags = DescribedWorkflow.AddMember("Tags", _Tags)
 
+	DescribedWorkflow_StructuredLogDestinations = DescribedWorkflow.AddMember("StructuredLogDestinations", _StructuredLogDestinations)
+
 	_FilePaths_member = _FilePaths.AddMember("member", _FilePath)
 
 	IdentityCenterConfig_InstanceArn = IdentityCenterConfig.AddMember("InstanceArn", _IdentityCenterInstanceArn)
@@ -4719,6 +4833,10 @@ func init() {
 	ListedHostKey_Type = ListedHostKey.AddMember("Type", _HostKeyType)
 
 	ListedHostKey_DateImported = ListedHostKey.AddMember("DateImported", _DateImported)
+
+	ListedHostKey_StorageType = ListedHostKey.AddMember("StorageType", HostKeyStorageType)
+
+	ListedHostKey_SecretId = ListedHostKey.AddMember("SecretId", _SecretId)
 
 	_ListedHostKeys_member = _ListedHostKeys.AddMember("member", ListedHostKey)
 
@@ -4948,6 +5066,8 @@ func init() {
 
 	CreateServerRequest_IpAddressType = CreateServerRequest.AddMember("IpAddressType", IpAddressType)
 
+	CreateServerRequest_HostKeyStorageType = CreateServerRequest.AddMember("HostKeyStorageType", HostKeyStorageType)
+
 	CreateServerResponse_ServerId = CreateServerResponse.AddMember("ServerId", _ServerId)
 
 	CreateUserRequest_HomeDirectory = CreateUserRequest.AddMember("HomeDirectory", _HomeDirectory)
@@ -4995,6 +5115,8 @@ func init() {
 	CreateWorkflowRequest_OnExceptionSteps = CreateWorkflowRequest.AddMember("OnExceptionSteps", _WorkflowSteps)
 
 	CreateWorkflowRequest_Tags = CreateWorkflowRequest.AddMember("Tags", _Tags)
+
+	CreateWorkflowRequest_StructuredLogDestinations = CreateWorkflowRequest.AddMember("StructuredLogDestinations", _StructuredLogDestinations)
 
 	CreateWorkflowResponse_WorkflowId = CreateWorkflowResponse.AddMember("WorkflowId", _WorkflowId)
 
@@ -5127,6 +5249,10 @@ func init() {
 	ImportHostKeyRequest_Description = ImportHostKeyRequest.AddMember("Description", _HostKeyDescription)
 
 	ImportHostKeyRequest_Tags = ImportHostKeyRequest.AddMember("Tags", _Tags)
+
+	ImportHostKeyRequest_StorageType = ImportHostKeyRequest.AddMember("StorageType", HostKeyStorageType)
+
+	ImportHostKeyRequest_KmsKey = ImportHostKeyRequest.AddMember("KmsKey", _KmsKey)
 
 	ImportHostKeyResponse_ServerId = ImportHostKeyResponse.AddMember("ServerId", _ServerId)
 
@@ -5451,6 +5577,10 @@ func init() {
 	UpdateHostKeyRequest_HostKeyId = UpdateHostKeyRequest.AddMember("HostKeyId", _HostKeyId)
 
 	UpdateHostKeyRequest_Description = UpdateHostKeyRequest.AddMember("Description", _HostKeyDescription)
+
+	UpdateHostKeyRequest_StorageType = UpdateHostKeyRequest.AddMember("StorageType", HostKeyStorageType)
+
+	UpdateHostKeyRequest_KmsKey = UpdateHostKeyRequest.AddMember("KmsKey", _KmsKey)
 
 	UpdateHostKeyResponse_ServerId = UpdateHostKeyResponse.AddMember("ServerId", _ServerId)
 

@@ -4,7 +4,9 @@ package ssoadmin
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/ssoadmin/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ssoadmin/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -41,6 +43,21 @@ type DescribeAccountAssignmentDeletionStatusInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeAccountAssignmentDeletionStatusInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeAccountAssignmentDeletionStatusRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeAccountAssignmentDeletionStatusInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountAssignmentDeletionRequestId != nil {
+		s.WriteString(schemas.DescribeAccountAssignmentDeletionStatusRequest_AccountAssignmentDeletionRequestId, *v.AccountAssignmentDeletionRequestId)
+	}
+	if v.InstanceArn != nil {
+		s.WriteString(schemas.DescribeAccountAssignmentDeletionStatusRequest_InstanceArn, *v.InstanceArn)
+	}
+}
+
 type DescribeAccountAssignmentDeletionStatusOutput struct {
 
 	// The status object for the account assignment deletion operation.
@@ -52,13 +69,34 @@ type DescribeAccountAssignmentDeletionStatusOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeAccountAssignmentDeletionStatusOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeAccountAssignmentDeletionStatusResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeAccountAssignmentDeletionStatusOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountAssignmentDeletionStatus != nil {
+		s.WriteStruct(schemas.DescribeAccountAssignmentDeletionStatusResponse_AccountAssignmentDeletionStatus)
+		v.AccountAssignmentDeletionStatus.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DescribeAccountAssignmentDeletionStatusOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeAccountAssignmentDeletionStatusResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeAccountAssignmentDeletionStatusResponse_AccountAssignmentDeletionStatus:
+			v.AccountAssignmentDeletionStatus = &types.AccountAssignmentOperationStatus{}
+			return v.AccountAssignmentDeletionStatus.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeAccountAssignmentDeletionStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeAccountAssignmentDeletionStatus{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeAccountAssignmentDeletionStatus, schemas.DescribeAccountAssignmentDeletionStatusRequest, schemas.DescribeAccountAssignmentDeletionStatusResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeAccountAssignmentDeletionStatus{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeAccountAssignmentDeletionStatus, schemas.DescribeAccountAssignmentDeletionStatusRequest, schemas.DescribeAccountAssignmentDeletionStatusResponse), output: &DescribeAccountAssignmentDeletionStatusOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

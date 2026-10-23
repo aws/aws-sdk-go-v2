@@ -4,7 +4,9 @@ package opensearch
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/opensearch/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/opensearch/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -55,6 +57,22 @@ type RegisterCapabilityInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RegisterCapabilityInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RegisterCapabilityRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RegisterCapabilityInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationId != nil {
+		s.WriteString(schemas.RegisterCapabilityRequest_applicationId, *v.ApplicationId)
+	}
+	serializeCapabilityBaseRequestConfig(s, schemas.RegisterCapabilityRequest_capabilityConfig, v.CapabilityConfig)
+	if v.CapabilityName != nil {
+		s.WriteString(schemas.RegisterCapabilityRequest_capabilityName, *v.CapabilityName)
+	}
+}
+
 // The result of a RegisterCapability request. Contains details about the
 // registered capability.
 type RegisterCapabilityOutput struct {
@@ -78,13 +96,51 @@ type RegisterCapabilityOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RegisterCapabilityOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RegisterCapabilityResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RegisterCapabilityOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationId != nil {
+		s.WriteString(schemas.RegisterCapabilityResponse_applicationId, *v.ApplicationId)
+	}
+	serializeCapabilityBaseResponseConfig(s, schemas.RegisterCapabilityResponse_capabilityConfig, v.CapabilityConfig)
+	if v.CapabilityName != nil {
+		s.WriteString(schemas.RegisterCapabilityResponse_capabilityName, *v.CapabilityName)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.RegisterCapabilityResponse_status, string(v.Status))
+	}
+}
+func (v *RegisterCapabilityOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RegisterCapabilityResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RegisterCapabilityResponse_applicationId:
+			v.ApplicationId = new(string)
+			return d.ReadString(schemas.RegisterCapabilityResponse_applicationId, v.ApplicationId)
+		case schemas.RegisterCapabilityResponse_capabilityConfig:
+			return deserializeCapabilityBaseResponseConfig(d, schemas.RegisterCapabilityResponse_capabilityConfig, &v.CapabilityConfig)
+		case schemas.RegisterCapabilityResponse_capabilityName:
+			v.CapabilityName = new(string)
+			return d.ReadString(schemas.RegisterCapabilityResponse_capabilityName, v.CapabilityName)
+		case schemas.RegisterCapabilityResponse_status:
+			var ev string
+			if err := d.ReadString(schemas.RegisterCapabilityResponse_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.CapabilityStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationRegisterCapabilityMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpRegisterCapability{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RegisterCapability, schemas.RegisterCapabilityRequest, schemas.RegisterCapabilityResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpRegisterCapability{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RegisterCapability, schemas.RegisterCapabilityRequest, schemas.RegisterCapabilityResponse), output: &RegisterCapabilityOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

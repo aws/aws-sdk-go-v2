@@ -4,7 +4,9 @@ package glue
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/glue/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/glue/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -84,8 +86,8 @@ type CreateSessionInput struct {
 	Timeout *int32
 
 	// The type of predefined worker that is allocated when a job runs. Accepts a
-	// value of G.1X, G.2X, G.4X, or G.8X for Spark jobs. Accepts the value Z.2X for
-	// Ray notebooks.
+	// value of G.1X, G.2X, G.4X, G.8X, G.12X, G.16X, R.1X, R.2X, R.4X, or R.8X for
+	// Spark jobs. Accepts the value Z.2X for Ray notebooks.
 	//
 	//   - For the G.1X worker type, each worker maps to 1 DPU (4 vCPUs, 16 GB of
 	//   memory) with 94GB disk, and provides 1 executor per worker. We recommend this
@@ -101,24 +103,117 @@ type CreateSessionInput struct {
 	//   memory) with 256GB disk, and provides 1 executor per worker. We recommend this
 	//   worker type for jobs whose workloads contain your most demanding transforms,
 	//   aggregations, joins, and queries. This worker type is available only for Glue
-	//   version 3.0 or later Spark ETL jobs in the following Amazon Web Services
-	//   Regions: US East (Ohio), US East (N. Virginia), US West (Oregon), Asia Pacific
-	//   (Singapore), Asia Pacific (Sydney), Asia Pacific (Tokyo), Canada (Central),
-	//   Europe (Frankfurt), Europe (Ireland), and Europe (Stockholm).
+	//   version 3.0 or later Spark ETL jobs in select Amazon Web Services Regions. For
+	//   the supported Regions, see [Configuring job properties for Spark jobs]in the developer guide.
 	//
 	//   - For the G.8X worker type, each worker maps to 8 DPU (32 vCPUs, 128 GB of
 	//   memory) with 512GB disk, and provides 1 executor per worker. We recommend this
 	//   worker type for jobs whose workloads contain your most demanding transforms,
 	//   aggregations, joins, and queries. This worker type is available only for Glue
-	//   version 3.0 or later Spark ETL jobs, in the same Amazon Web Services Regions as
-	//   supported for the G.4X worker type.
+	//   version 3.0 or later Spark ETL jobs in select Amazon Web Services Regions. For
+	//   the supported Regions, see [Configuring job properties for Spark jobs]in the developer guide.
+	//
+	//   - For the G.12X worker type, each worker maps to 12 DPU (48 vCPUs, 192 GB of
+	//   memory) with 768GB disk, and provides 1 executor per worker. We recommend this
+	//   worker type for jobs with very large workloads. This worker type is available
+	//   only for Glue version 4.0 or later Spark ETL jobs in select Amazon Web Services
+	//   Regions. For the supported Regions, see [Configuring job properties for Spark jobs]in the developer guide.
+	//
+	//   - For the G.16X worker type, each worker maps to 16 DPU (64 vCPUs, 256 GB of
+	//   memory) with 1024GB disk, and provides 1 executor per worker. We recommend this
+	//   worker type for jobs with very large workloads. This worker type is available
+	//   only for Glue version 4.0 or later Spark ETL jobs in select Amazon Web Services
+	//   Regions. For the supported Regions, see [Configuring job properties for Spark jobs]in the developer guide.
+	//
+	//   - For the R.1X worker type, each worker maps to 1 M-DPU (4 vCPUs, 32 GB of
+	//   memory) with 94GB disk, and provides 1 executor per worker. We recommend this
+	//   worker type for memory-intensive workloads. This worker type is available only
+	//   for Glue version 4.0 or later Spark ETL jobs in select Amazon Web Services
+	//   Regions. For the supported Regions, see [Configuring job properties for Spark jobs]in the developer guide.
+	//
+	//   - For the R.2X worker type, each worker maps to 2 M-DPU (8 vCPUs, 64 GB of
+	//   memory) with 138GB disk, and provides 1 executor per worker. We recommend this
+	//   worker type for memory-intensive workloads. This worker type is available only
+	//   for Glue version 4.0 or later Spark ETL jobs in select Amazon Web Services
+	//   Regions. For the supported Regions, see [Configuring job properties for Spark jobs]in the developer guide.
+	//
+	//   - For the R.4X worker type, each worker maps to 4 M-DPU (16 vCPUs, 128 GB of
+	//   memory) with 256GB disk, and provides 1 executor per worker. We recommend this
+	//   worker type for memory-intensive workloads. This worker type is available only
+	//   for Glue version 4.0 or later Spark ETL jobs in select Amazon Web Services
+	//   Regions. For the supported Regions, see [Configuring job properties for Spark jobs]in the developer guide.
+	//
+	//   - For the R.8X worker type, each worker maps to 8 M-DPU (32 vCPUs, 256 GB of
+	//   memory) with 512GB disk, and provides 1 executor per worker. We recommend this
+	//   worker type for memory-intensive workloads. This worker type is available only
+	//   for Glue version 4.0 or later Spark ETL jobs in select Amazon Web Services
+	//   Regions. For the supported Regions, see [Configuring job properties for Spark jobs]in the developer guide.
 	//
 	//   - For the Z.2X worker type, each worker maps to 2 M-DPU (8vCPUs, 64 GB of
 	//   memory) with 128 GB disk, and provides up to 8 Ray workers based on the
 	//   autoscaler.
+	//
+	// [Configuring job properties for Spark jobs]: https://docs.aws.amazon.com/glue/latest/dg/add-job.html
 	WorkerType types.WorkerType
 
 	noSmithyDocumentSerde
+}
+
+func (v *CreateSessionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateSessionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateSessionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Command != nil {
+		s.WriteStruct(schemas.CreateSessionRequest_Command)
+		v.Command.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Connections != nil {
+		s.WriteStruct(schemas.CreateSessionRequest_Connections)
+		v.Connections.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeOrchestrationArgumentsMap(s, schemas.CreateSessionRequest_DefaultArguments, v.DefaultArguments)
+	if v.Description != nil {
+		s.WriteString(schemas.CreateSessionRequest_Description, *v.Description)
+	}
+	if v.GlueVersion != nil {
+		s.WriteString(schemas.CreateSessionRequest_GlueVersion, *v.GlueVersion)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.CreateSessionRequest_Id, *v.Id)
+	}
+	if v.IdleTimeout != nil {
+		s.WriteInt32(schemas.CreateSessionRequest_IdleTimeout, *v.IdleTimeout)
+	}
+	if v.MaxCapacity != nil {
+		s.WriteFloat64(schemas.CreateSessionRequest_MaxCapacity, *v.MaxCapacity)
+	}
+	if v.NumberOfWorkers != nil {
+		s.WriteInt32(schemas.CreateSessionRequest_NumberOfWorkers, *v.NumberOfWorkers)
+	}
+	if v.RequestOrigin != nil {
+		s.WriteString(schemas.CreateSessionRequest_RequestOrigin, *v.RequestOrigin)
+	}
+	if v.Role != nil {
+		s.WriteString(schemas.CreateSessionRequest_Role, *v.Role)
+	}
+	if v.SecurityConfiguration != nil {
+		s.WriteString(schemas.CreateSessionRequest_SecurityConfiguration, *v.SecurityConfiguration)
+	}
+	if v.SessionType != "" {
+		s.WriteString(schemas.CreateSessionRequest_SessionType, string(v.SessionType))
+	}
+	serializeTagsMap(s, schemas.CreateSessionRequest_Tags, v.Tags)
+	if v.Timeout != nil {
+		s.WriteInt32(schemas.CreateSessionRequest_Timeout, *v.Timeout)
+	}
+	if v.WorkerType != "" {
+		s.WriteString(schemas.CreateSessionRequest_WorkerType, string(v.WorkerType))
+	}
 }
 
 type CreateSessionOutput struct {
@@ -132,13 +227,34 @@ type CreateSessionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateSessionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateSessionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateSessionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Session != nil {
+		s.WriteStruct(schemas.CreateSessionResponse_Session)
+		v.Session.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateSessionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateSessionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateSessionResponse_Session:
+			v.Session = &types.Session{}
+			return v.Session.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateSessionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateSession{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateSession, schemas.CreateSessionRequest, schemas.CreateSessionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateSession{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateSession, schemas.CreateSessionRequest, schemas.CreateSessionResponse), output: &CreateSessionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

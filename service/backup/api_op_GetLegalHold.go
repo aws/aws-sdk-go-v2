@@ -4,7 +4,9 @@ package backup
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/backup/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/backup/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -34,6 +36,18 @@ type GetLegalHoldInput struct {
 	LegalHoldId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetLegalHoldInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetLegalHoldInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetLegalHoldInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LegalHoldId != nil {
+		s.WriteString(schemas.GetLegalHoldInput_LegalHoldId, *v.LegalHoldId)
+	}
 }
 
 type GetLegalHoldOutput struct {
@@ -76,13 +90,92 @@ type GetLegalHoldOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetLegalHoldOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetLegalHoldOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetLegalHoldOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CancelDescription != nil {
+		s.WriteString(schemas.GetLegalHoldOutput_CancelDescription, *v.CancelDescription)
+	}
+	if v.CancellationDate != nil {
+		s.WriteTime(schemas.GetLegalHoldOutput_CancellationDate, *v.CancellationDate)
+	}
+	if v.CreationDate != nil {
+		s.WriteTime(schemas.GetLegalHoldOutput_CreationDate, *v.CreationDate)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.GetLegalHoldOutput_Description, *v.Description)
+	}
+	if v.LegalHoldArn != nil {
+		s.WriteString(schemas.GetLegalHoldOutput_LegalHoldArn, *v.LegalHoldArn)
+	}
+	if v.LegalHoldId != nil {
+		s.WriteString(schemas.GetLegalHoldOutput_LegalHoldId, *v.LegalHoldId)
+	}
+	if v.RecoveryPointSelection != nil {
+		s.WriteStruct(schemas.GetLegalHoldOutput_RecoveryPointSelection)
+		v.RecoveryPointSelection.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RetainRecordUntil != nil {
+		s.WriteTime(schemas.GetLegalHoldOutput_RetainRecordUntil, *v.RetainRecordUntil)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.GetLegalHoldOutput_Status, string(v.Status))
+	}
+	if v.Title != nil {
+		s.WriteString(schemas.GetLegalHoldOutput_Title, *v.Title)
+	}
+}
+func (v *GetLegalHoldOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetLegalHoldOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetLegalHoldOutput_CancelDescription:
+			v.CancelDescription = new(string)
+			return d.ReadString(schemas.GetLegalHoldOutput_CancelDescription, v.CancelDescription)
+		case schemas.GetLegalHoldOutput_CancellationDate:
+			v.CancellationDate = new(time.Time)
+			return d.ReadTime(schemas.GetLegalHoldOutput_CancellationDate, v.CancellationDate)
+		case schemas.GetLegalHoldOutput_CreationDate:
+			v.CreationDate = new(time.Time)
+			return d.ReadTime(schemas.GetLegalHoldOutput_CreationDate, v.CreationDate)
+		case schemas.GetLegalHoldOutput_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.GetLegalHoldOutput_Description, v.Description)
+		case schemas.GetLegalHoldOutput_LegalHoldArn:
+			v.LegalHoldArn = new(string)
+			return d.ReadString(schemas.GetLegalHoldOutput_LegalHoldArn, v.LegalHoldArn)
+		case schemas.GetLegalHoldOutput_LegalHoldId:
+			v.LegalHoldId = new(string)
+			return d.ReadString(schemas.GetLegalHoldOutput_LegalHoldId, v.LegalHoldId)
+		case schemas.GetLegalHoldOutput_RecoveryPointSelection:
+			v.RecoveryPointSelection = &types.RecoveryPointSelection{}
+			return v.RecoveryPointSelection.Deserialize(d)
+		case schemas.GetLegalHoldOutput_RetainRecordUntil:
+			v.RetainRecordUntil = new(time.Time)
+			return d.ReadTime(schemas.GetLegalHoldOutput_RetainRecordUntil, v.RetainRecordUntil)
+		case schemas.GetLegalHoldOutput_Status:
+			var ev string
+			if err := d.ReadString(schemas.GetLegalHoldOutput_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.LegalHoldStatus(ev)
+			return nil
+		case schemas.GetLegalHoldOutput_Title:
+			v.Title = new(string)
+			return d.ReadString(schemas.GetLegalHoldOutput_Title, v.Title)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetLegalHoldMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetLegalHold{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetLegalHold, schemas.GetLegalHoldInput, schemas.GetLegalHoldOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetLegalHold{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetLegalHold, schemas.GetLegalHoldInput, schemas.GetLegalHoldOutput), output: &GetLegalHoldOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

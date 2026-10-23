@@ -5,7 +5,9 @@ package odb
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/odb/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/odb/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -42,6 +44,24 @@ type ListAutonomousDatabaseVersionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAutonomousDatabaseVersionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAutonomousDatabaseVersionsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAutonomousDatabaseVersionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DbWorkload != "" {
+		s.WriteString(schemas.ListAutonomousDatabaseVersionsInput_dbWorkload, string(v.DbWorkload))
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListAutonomousDatabaseVersionsInput_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAutonomousDatabaseVersionsInput_nextToken, *v.NextToken)
+	}
+}
+
 type ListAutonomousDatabaseVersionsOutput struct {
 
 	// The list of available Autonomous Database software versions.
@@ -59,13 +79,35 @@ type ListAutonomousDatabaseVersionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAutonomousDatabaseVersionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAutonomousDatabaseVersionsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAutonomousDatabaseVersionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAutonomousDatabaseVersionList(s, schemas.ListAutonomousDatabaseVersionsOutput_autonomousDatabaseVersions, v.AutonomousDatabaseVersions)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAutonomousDatabaseVersionsOutput_nextToken, *v.NextToken)
+	}
+}
+func (v *ListAutonomousDatabaseVersionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListAutonomousDatabaseVersionsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListAutonomousDatabaseVersionsOutput_autonomousDatabaseVersions:
+			return deserializeAutonomousDatabaseVersionList(d, schemas.ListAutonomousDatabaseVersionsOutput_autonomousDatabaseVersions, &v.AutonomousDatabaseVersions)
+		case schemas.ListAutonomousDatabaseVersionsOutput_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListAutonomousDatabaseVersionsOutput_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListAutonomousDatabaseVersionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpListAutonomousDatabaseVersions{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAutonomousDatabaseVersions, schemas.ListAutonomousDatabaseVersionsInput, schemas.ListAutonomousDatabaseVersionsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpListAutonomousDatabaseVersions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAutonomousDatabaseVersions, schemas.ListAutonomousDatabaseVersionsInput, schemas.ListAutonomousDatabaseVersionsOutput), output: &ListAutonomousDatabaseVersionsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

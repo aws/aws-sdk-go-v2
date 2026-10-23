@@ -4,6 +4,8 @@ package secretsmanager
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/secretsmanager/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -83,6 +85,24 @@ type GetSecretValueInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetSecretValueInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetSecretValueRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetSecretValueInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SecretId != nil {
+		s.WriteString(schemas.GetSecretValueRequest_SecretId, *v.SecretId)
+	}
+	if v.VersionId != nil {
+		s.WriteString(schemas.GetSecretValueRequest_VersionId, *v.VersionId)
+	}
+	if v.VersionStage != nil {
+		s.WriteString(schemas.GetSecretValueRequest_VersionStage, *v.VersionStage)
+	}
+}
+
 type GetSecretValueOutput struct {
 
 	// The ARN of the secret.
@@ -134,13 +154,64 @@ type GetSecretValueOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetSecretValueOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetSecretValueResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetSecretValueOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ARN != nil {
+		s.WriteString(schemas.GetSecretValueResponse_ARN, *v.ARN)
+	}
+	if v.CreatedDate != nil {
+		s.WriteTime(schemas.GetSecretValueResponse_CreatedDate, *v.CreatedDate)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.GetSecretValueResponse_Name, *v.Name)
+	}
+	if v.SecretBinary != nil {
+		s.WriteBlob(schemas.GetSecretValueResponse_SecretBinary, v.SecretBinary)
+	}
+	if v.SecretString != nil {
+		s.WriteString(schemas.GetSecretValueResponse_SecretString, *v.SecretString)
+	}
+	if v.VersionId != nil {
+		s.WriteString(schemas.GetSecretValueResponse_VersionId, *v.VersionId)
+	}
+	serializeSecretVersionStagesType(s, schemas.GetSecretValueResponse_VersionStages, v.VersionStages)
+}
+func (v *GetSecretValueOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetSecretValueResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetSecretValueResponse_ARN:
+			v.ARN = new(string)
+			return d.ReadString(schemas.GetSecretValueResponse_ARN, v.ARN)
+		case schemas.GetSecretValueResponse_CreatedDate:
+			v.CreatedDate = new(time.Time)
+			return d.ReadTime(schemas.GetSecretValueResponse_CreatedDate, v.CreatedDate)
+		case schemas.GetSecretValueResponse_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.GetSecretValueResponse_Name, v.Name)
+		case schemas.GetSecretValueResponse_SecretBinary:
+			return d.ReadBlob(schemas.GetSecretValueResponse_SecretBinary, &v.SecretBinary)
+		case schemas.GetSecretValueResponse_SecretString:
+			v.SecretString = new(string)
+			return d.ReadString(schemas.GetSecretValueResponse_SecretString, v.SecretString)
+		case schemas.GetSecretValueResponse_VersionId:
+			v.VersionId = new(string)
+			return d.ReadString(schemas.GetSecretValueResponse_VersionId, v.VersionId)
+		case schemas.GetSecretValueResponse_VersionStages:
+			return deserializeSecretVersionStagesType(d, schemas.GetSecretValueResponse_VersionStages, &v.VersionStages)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetSecretValueMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetSecretValue{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetSecretValue, schemas.GetSecretValueRequest, schemas.GetSecretValueResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetSecretValue{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetSecretValue, schemas.GetSecretValueRequest, schemas.GetSecretValueResponse), output: &GetSecretValueOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

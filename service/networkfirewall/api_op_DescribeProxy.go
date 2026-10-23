@@ -4,7 +4,9 @@ package networkfirewall
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/networkfirewall/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/networkfirewall/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -40,6 +42,21 @@ type DescribeProxyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeProxyInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeProxyRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeProxyInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ProxyArn != nil {
+		s.WriteString(schemas.DescribeProxyRequest_ProxyArn, *v.ProxyArn)
+	}
+	if v.ProxyName != nil {
+		s.WriteString(schemas.DescribeProxyRequest_ProxyName, *v.ProxyName)
+	}
+}
+
 type DescribeProxyOutput struct {
 
 	// Proxy attached to a NAT gateway.
@@ -63,13 +80,40 @@ type DescribeProxyOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeProxyOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeProxyResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeProxyOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Proxy != nil {
+		s.WriteStruct(schemas.DescribeProxyResponse_Proxy)
+		v.Proxy.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.UpdateToken != nil {
+		s.WriteString(schemas.DescribeProxyResponse_UpdateToken, *v.UpdateToken)
+	}
+}
+func (v *DescribeProxyOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeProxyResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeProxyResponse_Proxy:
+			v.Proxy = &types.DescribeProxyResource{}
+			return v.Proxy.Deserialize(d)
+		case schemas.DescribeProxyResponse_UpdateToken:
+			v.UpdateToken = new(string)
+			return d.ReadString(schemas.DescribeProxyResponse_UpdateToken, v.UpdateToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeProxyMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpDescribeProxy{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeProxy, schemas.DescribeProxyRequest, schemas.DescribeProxyResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpDescribeProxy{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeProxy, schemas.DescribeProxyRequest, schemas.DescribeProxyResponse), output: &DescribeProxyOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

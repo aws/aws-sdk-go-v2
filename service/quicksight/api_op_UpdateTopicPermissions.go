@@ -4,7 +4,9 @@ package quicksight
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/quicksight/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/quicksight/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -47,6 +49,23 @@ type UpdateTopicPermissionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateTopicPermissionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateTopicPermissionsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateTopicPermissionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AwsAccountId != nil {
+		s.WriteString(schemas.UpdateTopicPermissionsRequest_AwsAccountId, *v.AwsAccountId)
+	}
+	serializeUpdateResourcePermissionList(s, schemas.UpdateTopicPermissionsRequest_GrantPermissions, v.GrantPermissions)
+	serializeUpdateResourcePermissionList(s, schemas.UpdateTopicPermissionsRequest_RevokePermissions, v.RevokePermissions)
+	if v.TopicId != nil {
+		s.WriteString(schemas.UpdateTopicPermissionsRequest_TopicId, *v.TopicId)
+	}
+}
+
 type UpdateTopicPermissionsOutput struct {
 
 	// A list of resource permissions on the topic.
@@ -71,13 +90,52 @@ type UpdateTopicPermissionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateTopicPermissionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateTopicPermissionsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateTopicPermissionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeResourcePermissionList(s, schemas.UpdateTopicPermissionsResponse_Permissions, v.Permissions)
+	if v.RequestId != nil {
+		s.WriteString(schemas.UpdateTopicPermissionsResponse_RequestId, *v.RequestId)
+	}
+	if v.Status != 0 {
+		s.WriteInt32(schemas.UpdateTopicPermissionsResponse_Status, v.Status)
+	}
+	if v.TopicArn != nil {
+		s.WriteString(schemas.UpdateTopicPermissionsResponse_TopicArn, *v.TopicArn)
+	}
+	if v.TopicId != nil {
+		s.WriteString(schemas.UpdateTopicPermissionsResponse_TopicId, *v.TopicId)
+	}
+}
+func (v *UpdateTopicPermissionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateTopicPermissionsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateTopicPermissionsResponse_Permissions:
+			return deserializeResourcePermissionList(d, schemas.UpdateTopicPermissionsResponse_Permissions, &v.Permissions)
+		case schemas.UpdateTopicPermissionsResponse_RequestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.UpdateTopicPermissionsResponse_RequestId, v.RequestId)
+		case schemas.UpdateTopicPermissionsResponse_Status:
+			return d.ReadInt32(schemas.UpdateTopicPermissionsResponse_Status, &v.Status)
+		case schemas.UpdateTopicPermissionsResponse_TopicArn:
+			v.TopicArn = new(string)
+			return d.ReadString(schemas.UpdateTopicPermissionsResponse_TopicArn, v.TopicArn)
+		case schemas.UpdateTopicPermissionsResponse_TopicId:
+			v.TopicId = new(string)
+			return d.ReadString(schemas.UpdateTopicPermissionsResponse_TopicId, v.TopicId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateTopicPermissionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateTopicPermissions{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateTopicPermissions, schemas.UpdateTopicPermissionsRequest, schemas.UpdateTopicPermissionsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateTopicPermissions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateTopicPermissions, schemas.UpdateTopicPermissionsRequest, schemas.UpdateTopicPermissionsResponse), output: &UpdateTopicPermissionsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

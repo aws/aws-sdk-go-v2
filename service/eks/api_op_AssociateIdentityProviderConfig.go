@@ -5,7 +5,9 @@ package eks
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/eks/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/eks/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -58,6 +60,27 @@ type AssociateIdentityProviderConfigInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssociateIdentityProviderConfigInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssociateIdentityProviderConfigRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssociateIdentityProviderConfigInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientRequestToken != nil {
+		s.WriteString(schemas.AssociateIdentityProviderConfigRequest_clientRequestToken, *v.ClientRequestToken)
+	}
+	if v.ClusterName != nil {
+		s.WriteString(schemas.AssociateIdentityProviderConfigRequest_clusterName, *v.ClusterName)
+	}
+	if v.Oidc != nil {
+		s.WriteStruct(schemas.AssociateIdentityProviderConfigRequest_oidc)
+		v.Oidc.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeTagMap(s, schemas.AssociateIdentityProviderConfigRequest_tags, v.Tags)
+}
+
 type AssociateIdentityProviderConfigOutput struct {
 
 	// The tags for the resource.
@@ -72,13 +95,37 @@ type AssociateIdentityProviderConfigOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssociateIdentityProviderConfigOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssociateIdentityProviderConfigResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssociateIdentityProviderConfigOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeTagMap(s, schemas.AssociateIdentityProviderConfigResponse_tags, v.Tags)
+	if v.Update != nil {
+		s.WriteStruct(schemas.AssociateIdentityProviderConfigResponse_update)
+		v.Update.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *AssociateIdentityProviderConfigOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AssociateIdentityProviderConfigResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AssociateIdentityProviderConfigResponse_tags:
+			return deserializeTagMap(d, schemas.AssociateIdentityProviderConfigResponse_tags, &v.Tags)
+		case schemas.AssociateIdentityProviderConfigResponse_update:
+			v.Update = &types.Update{}
+			return v.Update.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationAssociateIdentityProviderConfigMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpAssociateIdentityProviderConfig{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociateIdentityProviderConfig, schemas.AssociateIdentityProviderConfigRequest, schemas.AssociateIdentityProviderConfigResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpAssociateIdentityProviderConfig{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociateIdentityProviderConfig, schemas.AssociateIdentityProviderConfigRequest, schemas.AssociateIdentityProviderConfigResponse), output: &AssociateIdentityProviderConfigOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

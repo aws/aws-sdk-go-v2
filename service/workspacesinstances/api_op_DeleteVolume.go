@@ -4,6 +4,8 @@ package workspacesinstances
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/workspacesinstances/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -34,6 +36,18 @@ type DeleteVolumeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteVolumeInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteVolumeRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteVolumeInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.VolumeId != nil {
+		s.WriteString(schemas.DeleteVolumeRequest_VolumeId, *v.VolumeId)
+	}
+}
+
 // Confirms volume deletion.
 type DeleteVolumeOutput struct {
 	// Metadata pertaining to the operation's result.
@@ -42,13 +56,26 @@ type DeleteVolumeOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteVolumeOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteVolumeResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteVolumeOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteVolumeOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteVolumeResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteVolumeMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpDeleteVolume{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteVolume, schemas.DeleteVolumeRequest, schemas.DeleteVolumeResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpDeleteVolume{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteVolume, schemas.DeleteVolumeRequest, schemas.DeleteVolumeResponse), output: &DeleteVolumeOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

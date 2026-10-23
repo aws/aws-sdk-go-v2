@@ -5,7 +5,9 @@ package resiliencehub
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/resiliencehub/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/resiliencehub/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -38,6 +40,34 @@ type ListSuggestedResiliencyPoliciesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListSuggestedResiliencyPoliciesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListSuggestedResiliencyPoliciesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListSuggestedResiliencyPoliciesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListSuggestedResiliencyPoliciesRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListSuggestedResiliencyPoliciesRequest_nextToken, *v.NextToken)
+	}
+}
+func (v *ListSuggestedResiliencyPoliciesInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListSuggestedResiliencyPoliciesRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListSuggestedResiliencyPoliciesRequest_maxResults:
+			v.MaxResults = new(int32)
+			return d.ReadInt32(schemas.ListSuggestedResiliencyPoliciesRequest_maxResults, v.MaxResults)
+		case schemas.ListSuggestedResiliencyPoliciesRequest_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListSuggestedResiliencyPoliciesRequest_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
+
 type ListSuggestedResiliencyPoliciesOutput struct {
 
 	// The suggested resiliency policies for the Resilience Hub applications.
@@ -54,13 +84,35 @@ type ListSuggestedResiliencyPoliciesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListSuggestedResiliencyPoliciesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListSuggestedResiliencyPoliciesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListSuggestedResiliencyPoliciesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListSuggestedResiliencyPoliciesResponse_nextToken, *v.NextToken)
+	}
+	serializeResiliencyPolicies(s, schemas.ListSuggestedResiliencyPoliciesResponse_resiliencyPolicies, v.ResiliencyPolicies)
+}
+func (v *ListSuggestedResiliencyPoliciesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListSuggestedResiliencyPoliciesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListSuggestedResiliencyPoliciesResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListSuggestedResiliencyPoliciesResponse_nextToken, v.NextToken)
+		case schemas.ListSuggestedResiliencyPoliciesResponse_resiliencyPolicies:
+			return deserializeResiliencyPolicies(d, schemas.ListSuggestedResiliencyPoliciesResponse_resiliencyPolicies, &v.ResiliencyPolicies)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListSuggestedResiliencyPoliciesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListSuggestedResiliencyPolicies{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListSuggestedResiliencyPolicies, schemas.ListSuggestedResiliencyPoliciesRequest, schemas.ListSuggestedResiliencyPoliciesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListSuggestedResiliencyPolicies{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListSuggestedResiliencyPolicies, schemas.ListSuggestedResiliencyPoliciesRequest, schemas.ListSuggestedResiliencyPoliciesResponse), output: &ListSuggestedResiliencyPoliciesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

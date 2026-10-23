@@ -4,7 +4,9 @@ package ssoadmin
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/ssoadmin/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ssoadmin/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -41,6 +43,21 @@ type DescribePermissionSetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribePermissionSetInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribePermissionSetRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribePermissionSetInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InstanceArn != nil {
+		s.WriteString(schemas.DescribePermissionSetRequest_InstanceArn, *v.InstanceArn)
+	}
+	if v.PermissionSetArn != nil {
+		s.WriteString(schemas.DescribePermissionSetRequest_PermissionSetArn, *v.PermissionSetArn)
+	}
+}
+
 type DescribePermissionSetOutput struct {
 
 	// Describes the level of access on an Amazon Web Services account.
@@ -52,13 +69,34 @@ type DescribePermissionSetOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribePermissionSetOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribePermissionSetResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribePermissionSetOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PermissionSet != nil {
+		s.WriteStruct(schemas.DescribePermissionSetResponse_PermissionSet)
+		v.PermissionSet.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DescribePermissionSetOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribePermissionSetResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribePermissionSetResponse_PermissionSet:
+			v.PermissionSet = &types.PermissionSet{}
+			return v.PermissionSet.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribePermissionSetMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribePermissionSet{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribePermissionSet, schemas.DescribePermissionSetRequest, schemas.DescribePermissionSetResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribePermissionSet{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribePermissionSet, schemas.DescribePermissionSetRequest, schemas.DescribePermissionSetResponse), output: &DescribePermissionSetOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

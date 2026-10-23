@@ -1,0 +1,3 @@
+GET /v1/jobs?brandProfileId=__BrandProfileId__&maxResults=1&nextToken=__NextToken__&operationType=__OperationType__&status=SUCCESS
+
+

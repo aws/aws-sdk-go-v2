@@ -5,6 +5,8 @@ package partnercentralchannel
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/partnercentralchannel/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -42,6 +44,24 @@ type DeleteProgramManagementAccountInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteProgramManagementAccountInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteProgramManagementAccountRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteProgramManagementAccountInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Catalog != nil {
+		s.WriteString(schemas.DeleteProgramManagementAccountRequest_catalog, *v.Catalog)
+	}
+	if v.ClientToken != nil {
+		s.WriteString(schemas.DeleteProgramManagementAccountRequest_clientToken, *v.ClientToken)
+	}
+	if v.Identifier != nil {
+		s.WriteString(schemas.DeleteProgramManagementAccountRequest_identifier, *v.Identifier)
+	}
+}
+
 type DeleteProgramManagementAccountOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -49,13 +69,26 @@ type DeleteProgramManagementAccountOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteProgramManagementAccountOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteProgramManagementAccountResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteProgramManagementAccountOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteProgramManagementAccountOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteProgramManagementAccountResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteProgramManagementAccountMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpDeleteProgramManagementAccount{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteProgramManagementAccount, schemas.DeleteProgramManagementAccountRequest, schemas.DeleteProgramManagementAccountResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpDeleteProgramManagementAccount{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteProgramManagementAccount, schemas.DeleteProgramManagementAccountRequest, schemas.DeleteProgramManagementAccountResponse), output: &DeleteProgramManagementAccountOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

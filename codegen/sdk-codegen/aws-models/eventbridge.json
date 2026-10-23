@@ -3884,7 +3884,7 @@
                 "LogConfig": {
                     "target": "com.amazonaws.eventbridge#LogConfig",
                     "traits": {
-                        "smithy.api#documentation": "<p>The logging configuration settings for the event bus.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/eb-event-bus-logs.html\">Configuring logs for event buses</a> in the <i>EventBridge User Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>The logging configuration settings for the event bus.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-event-bus-logs.html\">Configuring logs for event buses</a> in the <i>EventBridge User Guide</i>.</p>"
                     }
                 },
                 "Tags": {
@@ -3925,7 +3925,7 @@
                 "LogConfig": {
                     "target": "com.amazonaws.eventbridge#LogConfig",
                     "traits": {
-                        "smithy.api#documentation": "<p>The logging configuration settings for the event bus.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/eb-event-bus-logs.html\">Configuring logs for event buses</a> in the <i>EventBridge User Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>The logging configuration settings for the event bus.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-event-bus-logs.html\">Configuring logs for event buses</a> in the <i>EventBridge User Guide</i>.</p>"
                     }
                 }
             },
@@ -5087,7 +5087,7 @@
                 "LogConfig": {
                     "target": "com.amazonaws.eventbridge#LogConfig",
                     "traits": {
-                        "smithy.api#documentation": "<p>The logging configuration settings for the event bus.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/eb-event-bus-logs.html\">Configuring logs for event buses</a> in the <i>EventBridge User Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>The logging configuration settings for the event bus.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-event-bus-logs.html\">Configuring logs for event buses</a> in the <i>EventBridge User Guide</i>.</p>"
                     }
                 },
                 "CreationTime": {
@@ -5100,6 +5100,12 @@
                     "target": "com.amazonaws.eventbridge#Timestamp",
                     "traits": {
                         "smithy.api#documentation": "<p>The time the event bus was last modified.</p>"
+                    }
+                },
+                "ManagedBy": {
+                    "target": "com.amazonaws.eventbridge#ManagedBy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If the event bus was created on behalf of your account by an Amazon Web Services service,\n      this field displays the principal name of the service that created the event bus.</p>"
                     }
                 }
             },
@@ -5944,6 +5950,12 @@
                     "target": "com.amazonaws.eventbridge#Timestamp",
                     "traits": {
                         "smithy.api#documentation": "<p>The time the event bus was last modified.</p>"
+                    }
+                },
+                "ManagedBy": {
+                    "target": "com.amazonaws.eventbridge#ManagedBy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If the event bus was created on behalf of your account by an Amazon Web Services service,\n      this field displays the principal name of the service that created the event bus.</p>"
                     }
                 }
             },
@@ -7394,7 +7406,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The logging configuration settings for the event bus.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/eb-event-bus-logs.html\">Configuring logs for event buses</a> in the <i>EventBridge User Guide</i>.</p>"
+                "smithy.api#documentation": "<p>The logging configuration settings for the event bus.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-event-bus-logs.html\">Configuring logs for event buses</a> in the <i>EventBridge User Guide</i>.</p>"
             }
         },
         "com.amazonaws.eventbridge#Long": {
@@ -7786,7 +7798,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Sends custom events to Amazon EventBridge so that they can be matched to rules.</p>\n         <p>You can batch multiple event entries into one request for efficiency. \n      However, the total entry size must be less than 256KB. You can calculate the entry size before you send the events. \n      For more information, see <a href=\"https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-putevents.html#eb-putevent-size\">Calculating PutEvents event entry\n        size</a> in the <i>\n               <i>Amazon EventBridge User Guide</i>\n            </i>.</p>\n         <p>PutEvents accepts the data in JSON format. For the JSON number (integer) data type, the\n      constraints are: a minimum value of -9,223,372,036,854,775,808 and a maximum value of\n      9,223,372,036,854,775,807.</p>\n         <note>\n            <p>PutEvents will only process nested JSON up to 1000 levels deep.</p>\n         </note>"
+                "smithy.api#documentation": "<p>Sends custom events to Amazon EventBridge so that they can be matched to rules.</p>\n         <p>You can batch multiple event entries into one request for efficiency. \n      However, the total entry size must be less than 1MB. You can calculate the entry size before you send the events. \n      For more information, see <a href=\"https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-putevents.html#eb-putevent-size\">Calculating PutEvents event entry\n        size</a> in the <i>\n               <i>Amazon EventBridge User Guide</i>\n            </i>.</p>\n         <p>PutEvents accepts the data in JSON format. For the JSON number (integer) data type, the\n      constraints are: a minimum value of -9,223,372,036,854,775,808 and a maximum value of\n      9,223,372,036,854,775,807.</p>\n         <note>\n            <p>PutEvents will only process nested JSON up to 1000 levels deep.</p>\n         </note>"
             }
         },
         "com.amazonaws.eventbridge#PutEventsRequest": {
@@ -9296,12 +9308,12 @@
                 "MessageGroupId": {
                     "target": "com.amazonaws.eventbridge#MessageGroupId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The FIFO message group ID to use as the target.</p>"
+                        "smithy.api#documentation": "<p>The ID of the message group to use as the target.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>This structure includes the custom parameter to be used when the target is an SQS FIFO\n      queue.</p>"
+                "smithy.api#documentation": "<p>The custom parameters for EventBridge to use for a target that is an Amazon SQS fair or FIFO queue. </p>\n         <p></p>"
             }
         },
         "com.amazonaws.eventbridge#StartReplay": {
@@ -9618,7 +9630,7 @@
                 "SqsParameters": {
                     "target": "com.amazonaws.eventbridge#SqsParameters",
                     "traits": {
-                        "smithy.api#documentation": "<p>Contains the message group ID to use when the target is a FIFO queue.</p>\n         <p>If you specify an SQS FIFO queue as a target, the queue must have content-based\n      deduplication enabled.</p>"
+                        "smithy.api#documentation": "<p>Contains the message group ID to use when the target is an Amazon SQS fair or FIFO queue.</p>\n         <p>If you specify a fair or FIFO queue as a target, the queue must have content-based\n      deduplication enabled.</p>"
                     }
                 },
                 "HttpParameters": {
@@ -10523,7 +10535,7 @@
                 "LogConfig": {
                     "target": "com.amazonaws.eventbridge#LogConfig",
                     "traits": {
-                        "smithy.api#documentation": "<p>The logging configuration settings for the event bus.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/eb-event-bus-logs.html\">Configuring logs for event buses</a> in the <i>EventBridge User Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>The logging configuration settings for the event bus.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-event-bus-logs.html\">Configuring logs for event buses</a> in the <i>EventBridge User Guide</i>.</p>"
                     }
                 }
             },
@@ -10564,7 +10576,7 @@
                 "LogConfig": {
                     "target": "com.amazonaws.eventbridge#LogConfig",
                     "traits": {
-                        "smithy.api#documentation": "<p>The logging configuration settings for the event bus.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/eb-event-bus-logs.html\">Configuring logs for event buses</a> in the <i>EventBridge User Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>The logging configuration settings for the event bus.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-event-bus-logs.html\">Configuring logs for event buses</a> in the <i>EventBridge User Guide</i>.</p>"
                     }
                 }
             },

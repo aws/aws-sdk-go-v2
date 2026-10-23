@@ -4,7 +4,9 @@ package glue
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/glue/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/glue/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -51,6 +53,25 @@ type UpdateColumnStatisticsForTableInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateColumnStatisticsForTableInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateColumnStatisticsForTableRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateColumnStatisticsForTableInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CatalogId != nil {
+		s.WriteString(schemas.UpdateColumnStatisticsForTableRequest_CatalogId, *v.CatalogId)
+	}
+	serializeUpdateColumnStatisticsList(s, schemas.UpdateColumnStatisticsForTableRequest_ColumnStatisticsList, v.ColumnStatisticsList)
+	if v.DatabaseName != nil {
+		s.WriteString(schemas.UpdateColumnStatisticsForTableRequest_DatabaseName, *v.DatabaseName)
+	}
+	if v.TableName != nil {
+		s.WriteString(schemas.UpdateColumnStatisticsForTableRequest_TableName, *v.TableName)
+	}
+}
+
 type UpdateColumnStatisticsForTableOutput struct {
 
 	// List of ColumnStatisticsErrors.
@@ -62,13 +83,29 @@ type UpdateColumnStatisticsForTableOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateColumnStatisticsForTableOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateColumnStatisticsForTableResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateColumnStatisticsForTableOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeColumnStatisticsErrors(s, schemas.UpdateColumnStatisticsForTableResponse_Errors, v.Errors)
+}
+func (v *UpdateColumnStatisticsForTableOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateColumnStatisticsForTableResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateColumnStatisticsForTableResponse_Errors:
+			return deserializeColumnStatisticsErrors(d, schemas.UpdateColumnStatisticsForTableResponse_Errors, &v.Errors)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateColumnStatisticsForTableMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateColumnStatisticsForTable{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateColumnStatisticsForTable, schemas.UpdateColumnStatisticsForTableRequest, schemas.UpdateColumnStatisticsForTableResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateColumnStatisticsForTable{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateColumnStatisticsForTable, schemas.UpdateColumnStatisticsForTableRequest, schemas.UpdateColumnStatisticsForTableResponse), output: &UpdateColumnStatisticsForTableOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

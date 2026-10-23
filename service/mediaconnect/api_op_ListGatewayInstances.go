@@ -5,7 +5,9 @@ package mediaconnect
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/mediaconnect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/mediaconnect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -58,6 +60,24 @@ type ListGatewayInstancesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListGatewayInstancesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListGatewayInstancesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListGatewayInstancesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FilterArn != nil {
+		s.WriteString(schemas.ListGatewayInstancesRequest_FilterArn, *v.FilterArn)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListGatewayInstancesRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListGatewayInstancesRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListGatewayInstancesOutput struct {
 
 	//  A list of instance summaries.
@@ -77,13 +97,35 @@ type ListGatewayInstancesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListGatewayInstancesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListGatewayInstancesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListGatewayInstancesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serialize__listOfListedGatewayInstance(s, schemas.ListGatewayInstancesResponse_Instances, v.Instances)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListGatewayInstancesResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListGatewayInstancesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListGatewayInstancesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListGatewayInstancesResponse_Instances:
+			return deserialize__listOfListedGatewayInstance(d, schemas.ListGatewayInstancesResponse_Instances, &v.Instances)
+		case schemas.ListGatewayInstancesResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListGatewayInstancesResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListGatewayInstancesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListGatewayInstances{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListGatewayInstances, schemas.ListGatewayInstancesRequest, schemas.ListGatewayInstancesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListGatewayInstances{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListGatewayInstances, schemas.ListGatewayInstancesRequest, schemas.ListGatewayInstancesResponse), output: &ListGatewayInstancesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

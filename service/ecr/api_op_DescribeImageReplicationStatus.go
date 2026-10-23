@@ -4,7 +4,9 @@ package ecr
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/ecr/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ecr/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -43,6 +45,26 @@ type DescribeImageReplicationStatusInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeImageReplicationStatusInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeImageReplicationStatusRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeImageReplicationStatusInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ImageId != nil {
+		s.WriteStruct(schemas.DescribeImageReplicationStatusRequest_imageId)
+		v.ImageId.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RegistryId != nil {
+		s.WriteString(schemas.DescribeImageReplicationStatusRequest_registryId, *v.RegistryId)
+	}
+	if v.RepositoryName != nil {
+		s.WriteString(schemas.DescribeImageReplicationStatusRequest_repositoryName, *v.RepositoryName)
+	}
+}
+
 type DescribeImageReplicationStatusOutput struct {
 
 	// An object with identifying information for an image in an Amazon ECR repository.
@@ -60,13 +82,43 @@ type DescribeImageReplicationStatusOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeImageReplicationStatusOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeImageReplicationStatusResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeImageReplicationStatusOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ImageId != nil {
+		s.WriteStruct(schemas.DescribeImageReplicationStatusResponse_imageId)
+		v.ImageId.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeImageReplicationStatusList(s, schemas.DescribeImageReplicationStatusResponse_replicationStatuses, v.ReplicationStatuses)
+	if v.RepositoryName != nil {
+		s.WriteString(schemas.DescribeImageReplicationStatusResponse_repositoryName, *v.RepositoryName)
+	}
+}
+func (v *DescribeImageReplicationStatusOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeImageReplicationStatusResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeImageReplicationStatusResponse_imageId:
+			v.ImageId = &types.ImageIdentifier{}
+			return v.ImageId.Deserialize(d)
+		case schemas.DescribeImageReplicationStatusResponse_replicationStatuses:
+			return deserializeImageReplicationStatusList(d, schemas.DescribeImageReplicationStatusResponse_replicationStatuses, &v.ReplicationStatuses)
+		case schemas.DescribeImageReplicationStatusResponse_repositoryName:
+			v.RepositoryName = new(string)
+			return d.ReadString(schemas.DescribeImageReplicationStatusResponse_repositoryName, v.RepositoryName)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeImageReplicationStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeImageReplicationStatus{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeImageReplicationStatus, schemas.DescribeImageReplicationStatusRequest, schemas.DescribeImageReplicationStatusResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeImageReplicationStatus{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeImageReplicationStatus, schemas.DescribeImageReplicationStatusRequest, schemas.DescribeImageReplicationStatusResponse), output: &DescribeImageReplicationStatusOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

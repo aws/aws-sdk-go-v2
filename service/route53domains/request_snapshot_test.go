@@ -597,11 +597,39 @@ func TestCheckRequestSnapshot_GetDomainDetail(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_GetDomainPrices(t *testing.T) {
+	input := &GetDomainPricesInput{
+		DomainName: ptr.String("__DomainName__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.GetDomainPrices(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetDomainPrices"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_GetDomainSuggestions(t *testing.T) {
 	input := &GetDomainSuggestionsInput{
-		DomainName:      ptr.String("__DomainName__"),
-		SuggestionCount: 1,
-		OnlyAvailable:   ptr.Bool(true),
+		DomainName:         ptr.String("__DomainName__"),
+		SuggestionCount:    1,
+		OnlyAvailable:      ptr.Bool(true),
+		OnlyStandardPrices: ptr.Bool(true),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -936,6 +964,10 @@ func TestCheckRequestSnapshot_RegisterDomain(t *testing.T) {
 			},
 		},
 		PrivacyProtectBillingContact: ptr.Bool(true),
+		Consent: &types.Consent{
+			MaxPrice: 1.0,
+			Currency: ptr.String("__Currency__"),
+		},
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -992,6 +1024,10 @@ func TestCheckRequestSnapshot_RenewDomain(t *testing.T) {
 		DomainName:        ptr.String("__DomainName__"),
 		DurationInYears:   ptr.Int32(1),
 		CurrentExpiryYear: 1,
+		Consent: &types.Consent{
+			MaxPrice: 1.0,
+			Currency: ptr.String("__Currency__"),
+		},
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -1224,6 +1260,10 @@ func TestCheckRequestSnapshot_TransferDomain(t *testing.T) {
 			},
 		},
 		PrivacyProtectBillingContact: ptr.Bool(true),
+		Consent: &types.Consent{
+			MaxPrice: 1.0,
+			Currency: ptr.String("__Currency__"),
+		},
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -1939,11 +1979,39 @@ func TestUpdateRequestSnapshot_GetDomainDetail(t *testing.T) {
 	}
 }
 
+func TestUpdateRequestSnapshot_GetDomainPrices(t *testing.T) {
+	input := &GetDomainPricesInput{
+		DomainName: ptr.String("__DomainName__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.GetDomainPrices(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetDomainPrices"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_GetDomainSuggestions(t *testing.T) {
 	input := &GetDomainSuggestionsInput{
-		DomainName:      ptr.String("__DomainName__"),
-		SuggestionCount: 1,
-		OnlyAvailable:   ptr.Bool(true),
+		DomainName:         ptr.String("__DomainName__"),
+		SuggestionCount:    1,
+		OnlyAvailable:      ptr.Bool(true),
+		OnlyStandardPrices: ptr.Bool(true),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -2278,6 +2346,10 @@ func TestUpdateRequestSnapshot_RegisterDomain(t *testing.T) {
 			},
 		},
 		PrivacyProtectBillingContact: ptr.Bool(true),
+		Consent: &types.Consent{
+			MaxPrice: 1.0,
+			Currency: ptr.String("__Currency__"),
+		},
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -2334,6 +2406,10 @@ func TestUpdateRequestSnapshot_RenewDomain(t *testing.T) {
 		DomainName:        ptr.String("__DomainName__"),
 		DurationInYears:   ptr.Int32(1),
 		CurrentExpiryYear: 1,
+		Consent: &types.Consent{
+			MaxPrice: 1.0,
+			Currency: ptr.String("__Currency__"),
+		},
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -2566,6 +2642,10 @@ func TestUpdateRequestSnapshot_TransferDomain(t *testing.T) {
 			},
 		},
 		PrivacyProtectBillingContact: ptr.Bool(true),
+		Consent: &types.Consent{
+			MaxPrice: 1.0,
+			Currency: ptr.String("__Currency__"),
+		},
 	}
 	body := &bytes.Buffer{}
 	method := ""

@@ -5,7 +5,9 @@ package bedrockagent
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/bedrockagent/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagent/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -59,6 +61,25 @@ type IngestKnowledgeBaseDocumentsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *IngestKnowledgeBaseDocumentsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.IngestKnowledgeBaseDocumentsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *IngestKnowledgeBaseDocumentsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.IngestKnowledgeBaseDocumentsRequest_clientToken, *v.ClientToken)
+	}
+	if v.DataSourceId != nil {
+		s.WriteString(schemas.IngestKnowledgeBaseDocumentsRequest_dataSourceId, *v.DataSourceId)
+	}
+	serializeKnowledgeBaseDocuments(s, schemas.IngestKnowledgeBaseDocumentsRequest_documents, v.Documents)
+	if v.KnowledgeBaseId != nil {
+		s.WriteString(schemas.IngestKnowledgeBaseDocumentsRequest_knowledgeBaseId, *v.KnowledgeBaseId)
+	}
+}
+
 type IngestKnowledgeBaseDocumentsOutput struct {
 
 	// A list of objects, each of which contains information about the documents that
@@ -71,13 +92,29 @@ type IngestKnowledgeBaseDocumentsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *IngestKnowledgeBaseDocumentsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.IngestKnowledgeBaseDocumentsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *IngestKnowledgeBaseDocumentsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeKnowledgeBaseDocumentDetails(s, schemas.IngestKnowledgeBaseDocumentsResponse_documentDetails, v.DocumentDetails)
+}
+func (v *IngestKnowledgeBaseDocumentsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.IngestKnowledgeBaseDocumentsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.IngestKnowledgeBaseDocumentsResponse_documentDetails:
+			return deserializeKnowledgeBaseDocumentDetails(d, schemas.IngestKnowledgeBaseDocumentsResponse_documentDetails, &v.DocumentDetails)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationIngestKnowledgeBaseDocumentsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpIngestKnowledgeBaseDocuments{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.IngestKnowledgeBaseDocuments, schemas.IngestKnowledgeBaseDocumentsRequest, schemas.IngestKnowledgeBaseDocumentsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpIngestKnowledgeBaseDocuments{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.IngestKnowledgeBaseDocuments, schemas.IngestKnowledgeBaseDocumentsRequest, schemas.IngestKnowledgeBaseDocumentsResponse), output: &IngestKnowledgeBaseDocumentsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

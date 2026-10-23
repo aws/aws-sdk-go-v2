@@ -4,6 +4,8 @@ package entityresolution
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/entityresolution/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,21 @@ type DeletePolicyStatementInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeletePolicyStatementInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeletePolicyStatementInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeletePolicyStatementInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.DeletePolicyStatementInput_arn, *v.Arn)
+	}
+	if v.StatementId != nil {
+		s.WriteString(schemas.DeletePolicyStatementInput_statementId, *v.StatementId)
+	}
+}
+
 type DeletePolicyStatementOutput struct {
 
 	// The ARN of the resource for which the policy need to be deleted.
@@ -60,13 +77,44 @@ type DeletePolicyStatementOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeletePolicyStatementOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeletePolicyStatementOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeletePolicyStatementOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.DeletePolicyStatementOutput_arn, *v.Arn)
+	}
+	if v.Policy != nil {
+		s.WriteString(schemas.DeletePolicyStatementOutput_policy, *v.Policy)
+	}
+	if v.Token != nil {
+		s.WriteString(schemas.DeletePolicyStatementOutput_token, *v.Token)
+	}
+}
+func (v *DeletePolicyStatementOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeletePolicyStatementOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeletePolicyStatementOutput_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.DeletePolicyStatementOutput_arn, v.Arn)
+		case schemas.DeletePolicyStatementOutput_policy:
+			v.Policy = new(string)
+			return d.ReadString(schemas.DeletePolicyStatementOutput_policy, v.Policy)
+		case schemas.DeletePolicyStatementOutput_token:
+			v.Token = new(string)
+			return d.ReadString(schemas.DeletePolicyStatementOutput_token, v.Token)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeletePolicyStatementMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeletePolicyStatement{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeletePolicyStatement, schemas.DeletePolicyStatementInput, schemas.DeletePolicyStatementOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeletePolicyStatement{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeletePolicyStatement, schemas.DeletePolicyStatementInput, schemas.DeletePolicyStatementOutput), output: &DeletePolicyStatementOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -5,7 +5,9 @@ package databasemigrationservice
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/databasemigrationservice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/databasemigrationservice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -46,6 +48,22 @@ type DescribeCertificatesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeCertificatesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeCertificatesMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeCertificatesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeFilterList(s, schemas.DescribeCertificatesMessage_Filters, v.Filters)
+	if v.Marker != nil {
+		s.WriteString(schemas.DescribeCertificatesMessage_Marker, *v.Marker)
+	}
+	if v.MaxRecords != nil {
+		s.WriteInt32(schemas.DescribeCertificatesMessage_MaxRecords, *v.MaxRecords)
+	}
+}
+
 type DescribeCertificatesOutput struct {
 
 	// The Secure Sockets Layer (SSL) certificates associated with the replication
@@ -61,13 +79,35 @@ type DescribeCertificatesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeCertificatesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeCertificatesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeCertificatesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeCertificateList(s, schemas.DescribeCertificatesResponse_Certificates, v.Certificates)
+	if v.Marker != nil {
+		s.WriteString(schemas.DescribeCertificatesResponse_Marker, *v.Marker)
+	}
+}
+func (v *DescribeCertificatesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeCertificatesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeCertificatesResponse_Certificates:
+			return deserializeCertificateList(d, schemas.DescribeCertificatesResponse_Certificates, &v.Certificates)
+		case schemas.DescribeCertificatesResponse_Marker:
+			v.Marker = new(string)
+			return d.ReadString(schemas.DescribeCertificatesResponse_Marker, v.Marker)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeCertificatesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeCertificates{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeCertificates, schemas.DescribeCertificatesMessage, schemas.DescribeCertificatesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeCertificates{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeCertificates, schemas.DescribeCertificatesMessage, schemas.DescribeCertificatesResponse), output: &DescribeCertificatesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package ecr
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/ecr/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ecr/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -51,6 +53,26 @@ type PutImageScanningConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutImageScanningConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutImageScanningConfigurationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutImageScanningConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ImageScanningConfiguration != nil {
+		s.WriteStruct(schemas.PutImageScanningConfigurationRequest_imageScanningConfiguration)
+		v.ImageScanningConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RegistryId != nil {
+		s.WriteString(schemas.PutImageScanningConfigurationRequest_registryId, *v.RegistryId)
+	}
+	if v.RepositoryName != nil {
+		s.WriteString(schemas.PutImageScanningConfigurationRequest_repositoryName, *v.RepositoryName)
+	}
+}
+
 type PutImageScanningConfigurationOutput struct {
 
 	// The image scanning configuration setting for the repository.
@@ -68,13 +90,46 @@ type PutImageScanningConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutImageScanningConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutImageScanningConfigurationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutImageScanningConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ImageScanningConfiguration != nil {
+		s.WriteStruct(schemas.PutImageScanningConfigurationResponse_imageScanningConfiguration)
+		v.ImageScanningConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RegistryId != nil {
+		s.WriteString(schemas.PutImageScanningConfigurationResponse_registryId, *v.RegistryId)
+	}
+	if v.RepositoryName != nil {
+		s.WriteString(schemas.PutImageScanningConfigurationResponse_repositoryName, *v.RepositoryName)
+	}
+}
+func (v *PutImageScanningConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PutImageScanningConfigurationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PutImageScanningConfigurationResponse_imageScanningConfiguration:
+			v.ImageScanningConfiguration = &types.ImageScanningConfiguration{}
+			return v.ImageScanningConfiguration.Deserialize(d)
+		case schemas.PutImageScanningConfigurationResponse_registryId:
+			v.RegistryId = new(string)
+			return d.ReadString(schemas.PutImageScanningConfigurationResponse_registryId, v.RegistryId)
+		case schemas.PutImageScanningConfigurationResponse_repositoryName:
+			v.RepositoryName = new(string)
+			return d.ReadString(schemas.PutImageScanningConfigurationResponse_repositoryName, v.RepositoryName)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPutImageScanningConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpPutImageScanningConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutImageScanningConfiguration, schemas.PutImageScanningConfigurationRequest, schemas.PutImageScanningConfigurationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpPutImageScanningConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutImageScanningConfiguration, schemas.PutImageScanningConfigurationRequest, schemas.PutImageScanningConfigurationResponse), output: &PutImageScanningConfigurationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

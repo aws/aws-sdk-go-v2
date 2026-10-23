@@ -4,6 +4,8 @@ package securityhub
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/securityhub/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -40,6 +42,21 @@ type RegisterConnectorV2Input struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RegisterConnectorV2Input) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RegisterConnectorV2Request)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RegisterConnectorV2Input) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AuthCode != nil {
+		s.WriteString(schemas.RegisterConnectorV2Request_AuthCode, *v.AuthCode)
+	}
+	if v.AuthState != nil {
+		s.WriteString(schemas.RegisterConnectorV2Request_AuthState, *v.AuthState)
+	}
+}
+
 type RegisterConnectorV2Output struct {
 
 	// The UUID of the connectorV2 to identify connectorV2 resource.
@@ -56,13 +73,38 @@ type RegisterConnectorV2Output struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RegisterConnectorV2Output) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RegisterConnectorV2Response)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RegisterConnectorV2Output) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConnectorArn != nil {
+		s.WriteString(schemas.RegisterConnectorV2Response_ConnectorArn, *v.ConnectorArn)
+	}
+	if v.ConnectorId != nil {
+		s.WriteString(schemas.RegisterConnectorV2Response_ConnectorId, *v.ConnectorId)
+	}
+}
+func (v *RegisterConnectorV2Output) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RegisterConnectorV2Response, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RegisterConnectorV2Response_ConnectorArn:
+			v.ConnectorArn = new(string)
+			return d.ReadString(schemas.RegisterConnectorV2Response_ConnectorArn, v.ConnectorArn)
+		case schemas.RegisterConnectorV2Response_ConnectorId:
+			v.ConnectorId = new(string)
+			return d.ReadString(schemas.RegisterConnectorV2Response_ConnectorId, v.ConnectorId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationRegisterConnectorV2Middlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpRegisterConnectorV2{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RegisterConnectorV2, schemas.RegisterConnectorV2Request, schemas.RegisterConnectorV2Response)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpRegisterConnectorV2{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RegisterConnectorV2, schemas.RegisterConnectorV2Request, schemas.RegisterConnectorV2Response), output: &RegisterConnectorV2Output{}}, middleware.After); err != nil {
 		return err
 	}
 

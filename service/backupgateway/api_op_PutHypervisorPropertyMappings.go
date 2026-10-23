@@ -4,7 +4,9 @@ package backupgateway
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/backupgateway/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/backupgateway/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -48,6 +50,37 @@ type PutHypervisorPropertyMappingsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutHypervisorPropertyMappingsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutHypervisorPropertyMappingsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutHypervisorPropertyMappingsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.HypervisorArn != nil {
+		s.WriteString(schemas.PutHypervisorPropertyMappingsInput_HypervisorArn, *v.HypervisorArn)
+	}
+	if v.IamRoleArn != nil {
+		s.WriteString(schemas.PutHypervisorPropertyMappingsInput_IamRoleArn, *v.IamRoleArn)
+	}
+	serializeVmwareToAwsTagMappings(s, schemas.PutHypervisorPropertyMappingsInput_VmwareToAwsTagMappings, v.VmwareToAwsTagMappings)
+}
+func (v *PutHypervisorPropertyMappingsInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PutHypervisorPropertyMappingsInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PutHypervisorPropertyMappingsInput_HypervisorArn:
+			v.HypervisorArn = new(string)
+			return d.ReadString(schemas.PutHypervisorPropertyMappingsInput_HypervisorArn, v.HypervisorArn)
+		case schemas.PutHypervisorPropertyMappingsInput_IamRoleArn:
+			v.IamRoleArn = new(string)
+			return d.ReadString(schemas.PutHypervisorPropertyMappingsInput_IamRoleArn, v.IamRoleArn)
+		case schemas.PutHypervisorPropertyMappingsInput_VmwareToAwsTagMappings:
+			return deserializeVmwareToAwsTagMappings(d, schemas.PutHypervisorPropertyMappingsInput_VmwareToAwsTagMappings, &v.VmwareToAwsTagMappings)
+		}
+		return nil
+	})
+}
+
 type PutHypervisorPropertyMappingsOutput struct {
 
 	// The Amazon Resource Name (ARN) of the hypervisor.
@@ -59,13 +92,32 @@ type PutHypervisorPropertyMappingsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutHypervisorPropertyMappingsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutHypervisorPropertyMappingsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutHypervisorPropertyMappingsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.HypervisorArn != nil {
+		s.WriteString(schemas.PutHypervisorPropertyMappingsOutput_HypervisorArn, *v.HypervisorArn)
+	}
+}
+func (v *PutHypervisorPropertyMappingsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PutHypervisorPropertyMappingsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PutHypervisorPropertyMappingsOutput_HypervisorArn:
+			v.HypervisorArn = new(string)
+			return d.ReadString(schemas.PutHypervisorPropertyMappingsOutput_HypervisorArn, v.HypervisorArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPutHypervisorPropertyMappingsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpPutHypervisorPropertyMappings{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutHypervisorPropertyMappings, schemas.PutHypervisorPropertyMappingsInput, schemas.PutHypervisorPropertyMappingsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpPutHypervisorPropertyMappings{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutHypervisorPropertyMappings, schemas.PutHypervisorPropertyMappingsInput, schemas.PutHypervisorPropertyMappingsOutput), output: &PutHypervisorPropertyMappingsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -77,6 +77,15 @@ type CheckDomainTransferabilityOutput struct {
 	// Provides an explanation for when a domain can't be transferred.
 	Message *string
 
+	// The price to transfer the domain name to Route 53, in the currency that Currency
+	// specifies. If the domain has registry premium pricing, this price is different
+	// from the standard rate for the TLD that ListPrices returns. Use PriceType to
+	// determine which rate applies.
+	//
+	// This element is returned only when Route 53 can determine whether the domain is
+	// transferable.
+	Price *types.PriceWithCurrency
+
 	// A complex type that contains information about whether the specified domain can
 	// be transferred to Route 53.
 	Transferability *types.DomainTransferability
@@ -97,6 +106,11 @@ func (v *CheckDomainTransferabilityOutput) SerializeMembers(s smithy.ShapeSerial
 	if v.Message != nil {
 		s.WriteString(schemas.CheckDomainTransferabilityResponse_Message, *v.Message)
 	}
+	if v.Price != nil {
+		s.WriteStruct(schemas.CheckDomainTransferabilityResponse_Price)
+		v.Price.SerializeMembers(s)
+		s.CloseStruct()
+	}
 	if v.Transferability != nil {
 		s.WriteStruct(schemas.CheckDomainTransferabilityResponse_Transferability)
 		v.Transferability.SerializeMembers(s)
@@ -109,6 +123,9 @@ func (v *CheckDomainTransferabilityOutput) Deserialize(d smithy.ShapeDeserialize
 		case schemas.CheckDomainTransferabilityResponse_Message:
 			v.Message = new(string)
 			return d.ReadString(schemas.CheckDomainTransferabilityResponse_Message, v.Message)
+		case schemas.CheckDomainTransferabilityResponse_Price:
+			v.Price = &types.PriceWithCurrency{}
+			return v.Price.Deserialize(d)
 		case schemas.CheckDomainTransferabilityResponse_Transferability:
 			v.Transferability = &types.DomainTransferability{}
 			return v.Transferability.Deserialize(d)

@@ -5,7 +5,9 @@ package backup
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/backup/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/backup/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -58,6 +60,24 @@ type CreateTieringConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateTieringConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateTieringConfigurationInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateTieringConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreatorRequestId != nil {
+		s.WriteString(schemas.CreateTieringConfigurationInput_CreatorRequestId, *v.CreatorRequestId)
+	}
+	if v.TieringConfiguration != nil {
+		s.WriteStruct(schemas.CreateTieringConfigurationInput_TieringConfiguration)
+		v.TieringConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeTags(s, schemas.CreateTieringConfigurationInput_TieringConfigurationTags, v.TieringConfigurationTags)
+}
+
 type CreateTieringConfigurationOutput struct {
 
 	// The date and time a tiering configuration was created, in Unix format and
@@ -82,13 +102,44 @@ type CreateTieringConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateTieringConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateTieringConfigurationOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateTieringConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.CreateTieringConfigurationOutput_CreationTime, *v.CreationTime)
+	}
+	if v.TieringConfigurationArn != nil {
+		s.WriteString(schemas.CreateTieringConfigurationOutput_TieringConfigurationArn, *v.TieringConfigurationArn)
+	}
+	if v.TieringConfigurationName != nil {
+		s.WriteString(schemas.CreateTieringConfigurationOutput_TieringConfigurationName, *v.TieringConfigurationName)
+	}
+}
+func (v *CreateTieringConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateTieringConfigurationOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateTieringConfigurationOutput_CreationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.CreateTieringConfigurationOutput_CreationTime, v.CreationTime)
+		case schemas.CreateTieringConfigurationOutput_TieringConfigurationArn:
+			v.TieringConfigurationArn = new(string)
+			return d.ReadString(schemas.CreateTieringConfigurationOutput_TieringConfigurationArn, v.TieringConfigurationArn)
+		case schemas.CreateTieringConfigurationOutput_TieringConfigurationName:
+			v.TieringConfigurationName = new(string)
+			return d.ReadString(schemas.CreateTieringConfigurationOutput_TieringConfigurationName, v.TieringConfigurationName)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateTieringConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateTieringConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateTieringConfiguration, schemas.CreateTieringConfigurationInput, schemas.CreateTieringConfigurationOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateTieringConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateTieringConfiguration, schemas.CreateTieringConfigurationInput, schemas.CreateTieringConfigurationOutput), output: &CreateTieringConfigurationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

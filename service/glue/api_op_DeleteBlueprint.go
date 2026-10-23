@@ -4,6 +4,8 @@ package glue
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/glue/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -33,6 +35,18 @@ type DeleteBlueprintInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteBlueprintInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteBlueprintRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteBlueprintInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.DeleteBlueprintRequest_Name, *v.Name)
+	}
+}
+
 type DeleteBlueprintOutput struct {
 
 	// Returns the name of the blueprint that was deleted.
@@ -44,13 +58,32 @@ type DeleteBlueprintOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteBlueprintOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteBlueprintResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteBlueprintOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.DeleteBlueprintResponse_Name, *v.Name)
+	}
+}
+func (v *DeleteBlueprintOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteBlueprintResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteBlueprintResponse_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.DeleteBlueprintResponse_Name, v.Name)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteBlueprintMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteBlueprint{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteBlueprint, schemas.DeleteBlueprintRequest, schemas.DeleteBlueprintResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeleteBlueprint{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteBlueprint, schemas.DeleteBlueprintRequest, schemas.DeleteBlueprintResponse), output: &DeleteBlueprintOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

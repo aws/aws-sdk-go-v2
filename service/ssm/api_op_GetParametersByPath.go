@@ -5,7 +5,9 @@ package ssm
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/ssm/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ssm/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -81,6 +83,31 @@ type GetParametersByPathInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetParametersByPathInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetParametersByPathRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetParametersByPathInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.GetParametersByPathRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetParametersByPathRequest_NextToken, *v.NextToken)
+	}
+	serializeParameterStringFilterList(s, schemas.GetParametersByPathRequest_ParameterFilters, v.ParameterFilters)
+	if v.Path != nil {
+		s.WriteString(schemas.GetParametersByPathRequest_Path, *v.Path)
+	}
+	if v.Recursive != nil {
+		s.WriteBool(schemas.GetParametersByPathRequest_Recursive, *v.Recursive)
+	}
+	if v.WithDecryption != nil {
+		s.WriteBool(schemas.GetParametersByPathRequest_WithDecryption, *v.WithDecryption)
+	}
+}
+
 type GetParametersByPathOutput struct {
 
 	// The token for the next set of items to return. Use this token to get the next
@@ -96,13 +123,35 @@ type GetParametersByPathOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetParametersByPathOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetParametersByPathResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetParametersByPathOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetParametersByPathResult_NextToken, *v.NextToken)
+	}
+	serializeParameterList(s, schemas.GetParametersByPathResult_Parameters, v.Parameters)
+}
+func (v *GetParametersByPathOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetParametersByPathResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetParametersByPathResult_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.GetParametersByPathResult_NextToken, v.NextToken)
+		case schemas.GetParametersByPathResult_Parameters:
+			return deserializeParameterList(d, schemas.GetParametersByPathResult_Parameters, &v.Parameters)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetParametersByPathMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetParametersByPath{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetParametersByPath, schemas.GetParametersByPathRequest, schemas.GetParametersByPathResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetParametersByPath{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetParametersByPath, schemas.GetParametersByPathRequest, schemas.GetParametersByPathResult), output: &GetParametersByPathOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

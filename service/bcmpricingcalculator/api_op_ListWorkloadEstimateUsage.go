@@ -5,7 +5,9 @@ package bcmpricingcalculator
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/bcmpricingcalculator/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bcmpricingcalculator/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -44,6 +46,25 @@ type ListWorkloadEstimateUsageInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListWorkloadEstimateUsageInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListWorkloadEstimateUsageRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListWorkloadEstimateUsageInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeListUsageFilters(s, schemas.ListWorkloadEstimateUsageRequest_filters, v.Filters)
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListWorkloadEstimateUsageRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListWorkloadEstimateUsageRequest_nextToken, *v.NextToken)
+	}
+	if v.WorkloadEstimateId != nil {
+		s.WriteString(schemas.ListWorkloadEstimateUsageRequest_workloadEstimateId, *v.WorkloadEstimateId)
+	}
+}
+
 type ListWorkloadEstimateUsageOutput struct {
 
 	//  The list of usage items associated with the workload estimate.
@@ -58,13 +79,35 @@ type ListWorkloadEstimateUsageOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListWorkloadEstimateUsageOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListWorkloadEstimateUsageResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListWorkloadEstimateUsageOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeWorkloadEstimateUsageItems(s, schemas.ListWorkloadEstimateUsageResponse_items, v.Items)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListWorkloadEstimateUsageResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListWorkloadEstimateUsageOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListWorkloadEstimateUsageResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListWorkloadEstimateUsageResponse_items:
+			return deserializeWorkloadEstimateUsageItems(d, schemas.ListWorkloadEstimateUsageResponse_items, &v.Items)
+		case schemas.ListWorkloadEstimateUsageResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListWorkloadEstimateUsageResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListWorkloadEstimateUsageMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpListWorkloadEstimateUsage{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListWorkloadEstimateUsage, schemas.ListWorkloadEstimateUsageRequest, schemas.ListWorkloadEstimateUsageResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpListWorkloadEstimateUsage{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListWorkloadEstimateUsage, schemas.ListWorkloadEstimateUsageRequest, schemas.ListWorkloadEstimateUsageResponse), output: &ListWorkloadEstimateUsageOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -916,6 +916,10 @@ func TestCheckRequestSnapshot_CreateExportJob(t *testing.T) {
 						"__Member__",
 						"__Member__",
 					},
+					TenantName: []string{
+						"__Member__",
+						"__Member__",
+					},
 					LastDeliveryEvent: []types.DeliveryEventType{
 						types.DeliveryEventType("SEND"),
 						types.DeliveryEventType("SEND"),
@@ -939,6 +943,10 @@ func TestCheckRequestSnapshot_CreateExportJob(t *testing.T) {
 						"__Member__",
 					},
 					Isp: []string{
+						"__Member__",
+						"__Member__",
+					},
+					TenantName: []string{
 						"__Member__",
 						"__Member__",
 					},
@@ -2207,6 +2215,9 @@ func TestCheckRequestSnapshot_GetTenant(t *testing.T) {
 
 func TestCheckRequestSnapshot_ListConfigurationSets(t *testing.T) {
 	input := &ListConfigurationSetsInput{
+		Filter: map[string]string{
+			"key0": "__Value__",
+		},
 		NextToken: ptr.String("__NextToken__"),
 		PageSize:  ptr.Int32(1),
 	}
@@ -2414,6 +2425,9 @@ func TestCheckRequestSnapshot_ListDomainDeliverabilityCampaigns(t *testing.T) {
 
 func TestCheckRequestSnapshot_ListEmailIdentities(t *testing.T) {
 	input := &ListEmailIdentitiesInput{
+		Filter: map[string]string{
+			"key0": "__Value__",
+		},
 		NextToken: ptr.String("__NextToken__"),
 		PageSize:  ptr.Int32(1),
 	}
@@ -2771,6 +2785,9 @@ func TestCheckRequestSnapshot_ListTenantResources(t *testing.T) {
 
 func TestCheckRequestSnapshot_ListTenants(t *testing.T) {
 	input := &ListTenantsInput{
+		Filter: map[string]string{
+			"key0": "__Value__",
+		},
 		NextToken: ptr.String("__NextToken__"),
 		PageSize:  ptr.Int32(1),
 	}
@@ -5049,6 +5066,10 @@ func TestUpdateRequestSnapshot_CreateExportJob(t *testing.T) {
 						"__Member__",
 						"__Member__",
 					},
+					TenantName: []string{
+						"__Member__",
+						"__Member__",
+					},
 					LastDeliveryEvent: []types.DeliveryEventType{
 						types.DeliveryEventType("SEND"),
 						types.DeliveryEventType("SEND"),
@@ -5072,6 +5093,10 @@ func TestUpdateRequestSnapshot_CreateExportJob(t *testing.T) {
 						"__Member__",
 					},
 					Isp: []string{
+						"__Member__",
+						"__Member__",
+					},
+					TenantName: []string{
 						"__Member__",
 						"__Member__",
 					},
@@ -6340,6 +6365,9 @@ func TestUpdateRequestSnapshot_GetTenant(t *testing.T) {
 
 func TestUpdateRequestSnapshot_ListConfigurationSets(t *testing.T) {
 	input := &ListConfigurationSetsInput{
+		Filter: map[string]string{
+			"key0": "__Value__",
+		},
 		NextToken: ptr.String("__NextToken__"),
 		PageSize:  ptr.Int32(1),
 	}
@@ -6547,6 +6575,9 @@ func TestUpdateRequestSnapshot_ListDomainDeliverabilityCampaigns(t *testing.T) {
 
 func TestUpdateRequestSnapshot_ListEmailIdentities(t *testing.T) {
 	input := &ListEmailIdentitiesInput{
+		Filter: map[string]string{
+			"key0": "__Value__",
+		},
 		NextToken: ptr.String("__NextToken__"),
 		PageSize:  ptr.Int32(1),
 	}
@@ -6904,6 +6935,9 @@ func TestUpdateRequestSnapshot_ListTenantResources(t *testing.T) {
 
 func TestUpdateRequestSnapshot_ListTenants(t *testing.T) {
 	input := &ListTenantsInput{
+		Filter: map[string]string{
+			"key0": "__Value__",
+		},
 		NextToken: ptr.String("__NextToken__"),
 		PageSize:  ptr.Int32(1),
 	}

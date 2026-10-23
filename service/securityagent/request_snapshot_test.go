@@ -402,6 +402,76 @@ func TestCheckRequestSnapshot_BatchDeleteThreatModels(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_BatchDisassociateFindingIssue(t *testing.T) {
+	input := &BatchDisassociateFindingIssueInput{
+		AgentSpaceId:    ptr.String("__AgentSpaceId__"),
+		PentestJobId:    ptr.String("__PentestJobId__"),
+		CodeReviewJobId: ptr.String("__CodeReviewJobId__"),
+		FindingIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.BatchDisassociateFindingIssue(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "BatchDisassociateFindingIssue"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_BatchExportFindings(t *testing.T) {
+	input := &BatchExportFindingsInput{
+		AgentSpaceId:    ptr.String("__AgentSpaceId__"),
+		PentestJobId:    ptr.String("__PentestJobId__"),
+		CodeReviewJobId: ptr.String("__CodeReviewJobId__"),
+		IssueDestination: &types.IssueDestination{
+			IntegrationId: ptr.String("__IntegrationId__"),
+			ProjectKey:    ptr.String("__ProjectKey__"),
+		},
+		FindingIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.BatchExportFindings(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "BatchExportFindings"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_BatchGetAgentSpaces(t *testing.T) {
 	input := &BatchGetAgentSpacesInput{
 		AgentSpaceIds: []string{
@@ -1128,6 +1198,40 @@ func TestCheckRequestSnapshot_CreateCodeReview(t *testing.T) {
 		CodeRemediationStrategy: types.CodeRemediationStrategy("AUTOMATIC"),
 		ValidationMode:          types.ValidationMode("DISABLED"),
 		MaxTaskHours:            ptr.Float64(1.0),
+		ReportDestination: &types.ReportDestination{
+			IntegrationId: ptr.String("__IntegrationId__"),
+			ContainerId:   ptr.String("__ContainerId__"),
+			ParentId:      ptr.String("__ParentId__"),
+			DocumentId:    ptr.String("__DocumentId__"),
+		},
+		ReportFilters: &types.ReportFilters{
+			RiskLevels: []types.RiskLevel{
+				types.RiskLevel("UNKNOWN"),
+				types.RiskLevel("UNKNOWN"),
+			},
+			ConfidenceLevels: []types.ConfidenceLevel{
+				types.ConfidenceLevel("FALSE_POSITIVE"),
+				types.ConfidenceLevel("FALSE_POSITIVE"),
+			},
+			Statuses: []types.FindingStatus{
+				types.FindingStatus("ACTIVE"),
+				types.FindingStatus("ACTIVE"),
+			},
+			RiskTypes: []types.RiskType{
+				types.RiskType("CROSS_SITE_SCRIPTING"),
+				types.RiskType("CROSS_SITE_SCRIPTING"),
+			},
+			FindingTypes: []string{
+				"__Member__",
+				"__Member__",
+			},
+			TaskStatuses: []types.TaskExecutionStatus{
+				types.TaskExecutionStatus("IN_PROGRESS"),
+				types.TaskExecutionStatus("IN_PROGRESS"),
+			},
+			AnnotationNotes:  ptr.Bool(true),
+			ComplianceReport: ptr.Bool(true),
+		},
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -1373,6 +1477,46 @@ func TestCheckRequestSnapshot_CreatePentest(t *testing.T) {
 			types.SkillType("FINDING_PERSONALIZATION"),
 		},
 		MaxTaskHours: ptr.Float64(1.0),
+		ReportDestination: &types.ReportDestination{
+			IntegrationId: ptr.String("__IntegrationId__"),
+			ContainerId:   ptr.String("__ContainerId__"),
+			ParentId:      ptr.String("__ParentId__"),
+			DocumentId:    ptr.String("__DocumentId__"),
+		},
+		ReportFilters: &types.ReportFilters{
+			RiskLevels: []types.RiskLevel{
+				types.RiskLevel("UNKNOWN"),
+				types.RiskLevel("UNKNOWN"),
+			},
+			ConfidenceLevels: []types.ConfidenceLevel{
+				types.ConfidenceLevel("FALSE_POSITIVE"),
+				types.ConfidenceLevel("FALSE_POSITIVE"),
+			},
+			Statuses: []types.FindingStatus{
+				types.FindingStatus("ACTIVE"),
+				types.FindingStatus("ACTIVE"),
+			},
+			RiskTypes: []types.RiskType{
+				types.RiskType("CROSS_SITE_SCRIPTING"),
+				types.RiskType("CROSS_SITE_SCRIPTING"),
+			},
+			FindingTypes: []string{
+				"__Member__",
+				"__Member__",
+			},
+			TaskStatuses: []types.TaskExecutionStatus{
+				types.TaskExecutionStatus("IN_PROGRESS"),
+				types.TaskExecutionStatus("IN_PROGRESS"),
+			},
+			AnnotationNotes:  ptr.Bool(true),
+			ComplianceReport: ptr.Bool(true),
+		},
+		CicdConfiguration: &types.CiCdConfiguration{
+			Enabled: ptr.Bool(true),
+		},
+		TestScope: &types.TestScope{
+			Type: types.TestScopeType("WEB_APP"),
+		},
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -2124,7 +2268,11 @@ func TestCheckRequestSnapshot_ImportSecurityRequirements(t *testing.T) {
 
 func TestCheckRequestSnapshot_InitiateProviderRegistration(t *testing.T) {
 	input := &InitiateProviderRegistrationInput{
-		Provider: types.Provider("GITHUB"),
+		Provider:         types.Provider("GITHUB"),
+		TargetUrl:        ptr.String("__TargetUrl__"),
+		OrganizationName: ptr.String("__OrganizationName__"),
+		ClientId:         ptr.String("__ClientId__"),
+		ClientSecret:     ptr.String("__ClientSecret__"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -2145,6 +2293,37 @@ func TestCheckRequestSnapshot_InitiateProviderRegistration(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "InitiateProviderRegistration"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_ListActorMessages(t *testing.T) {
+	input := &ListActorMessagesInput{
+		MaxResults:      ptr.Int32(1),
+		NextToken:       ptr.String("__NextToken__"),
+		AgentSpaceId:    ptr.String("__AgentSpaceId__"),
+		PentestId:       ptr.String("__PentestId__"),
+		ActorIdentifier: ptr.String("__ActorIdentifier__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListActorMessages(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListActorMessages"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -2491,6 +2670,7 @@ func TestCheckRequestSnapshot_ListPentestJobsForPentest(t *testing.T) {
 		PentestId:    ptr.String("__PentestId__"),
 		AgentSpaceId: ptr.String("__AgentSpaceId__"),
 		NextToken:    ptr.String("__NextToken__"),
+		JobType:      types.JobType("FULL"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -2912,6 +3092,22 @@ func TestCheckRequestSnapshot_StartPentestJob(t *testing.T) {
 			"__Member__",
 			"__Member__",
 		},
+		ScopeChanges: []types.ScopeChange{
+			{
+				IntegrationId:      ptr.String("__IntegrationId__"),
+				ProviderResourceId: ptr.String("__ProviderResourceId__"),
+				BaseCommitSha:      ptr.String("__BaseCommitSha__"),
+				HeadCommitSha:      ptr.String("__HeadCommitSha__"),
+				TriggerRunId:       ptr.String("__TriggerRunId__"),
+			},
+			{
+				IntegrationId:      ptr.String("__IntegrationId__"),
+				ProviderResourceId: ptr.String("__ProviderResourceId__"),
+				BaseCommitSha:      ptr.String("__BaseCommitSha__"),
+				HeadCommitSha:      ptr.String("__HeadCommitSha__"),
+				TriggerRunId:       ptr.String("__TriggerRunId__"),
+			},
+		},
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -3324,6 +3520,40 @@ func TestCheckRequestSnapshot_UpdateCodeReview(t *testing.T) {
 		CodeRemediationStrategy: types.CodeRemediationStrategy("AUTOMATIC"),
 		ValidationMode:          types.ValidationMode("DISABLED"),
 		MaxTaskHours:            ptr.Float64(1.0),
+		ReportDestination: &types.ReportDestination{
+			IntegrationId: ptr.String("__IntegrationId__"),
+			ContainerId:   ptr.String("__ContainerId__"),
+			ParentId:      ptr.String("__ParentId__"),
+			DocumentId:    ptr.String("__DocumentId__"),
+		},
+		ReportFilters: &types.ReportFilters{
+			RiskLevels: []types.RiskLevel{
+				types.RiskLevel("UNKNOWN"),
+				types.RiskLevel("UNKNOWN"),
+			},
+			ConfidenceLevels: []types.ConfidenceLevel{
+				types.ConfidenceLevel("FALSE_POSITIVE"),
+				types.ConfidenceLevel("FALSE_POSITIVE"),
+			},
+			Statuses: []types.FindingStatus{
+				types.FindingStatus("ACTIVE"),
+				types.FindingStatus("ACTIVE"),
+			},
+			RiskTypes: []types.RiskType{
+				types.RiskType("CROSS_SITE_SCRIPTING"),
+				types.RiskType("CROSS_SITE_SCRIPTING"),
+			},
+			FindingTypes: []string{
+				"__Member__",
+				"__Member__",
+			},
+			TaskStatuses: []types.TaskExecutionStatus{
+				types.TaskExecutionStatus("IN_PROGRESS"),
+				types.TaskExecutionStatus("IN_PROGRESS"),
+			},
+			AnnotationNotes:  ptr.Bool(true),
+			ComplianceReport: ptr.Bool(true),
+		},
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -3399,6 +3629,56 @@ func TestCheckRequestSnapshot_UpdateIntegratedResources(t *testing.T) {
 				},
 				Capabilities: &types.ProviderResourceCapabilitiesMemberGithub{
 					Value: types.GitHubResourceCapabilities{
+						TriggerFilterGroups: []types.TriggerFilterGroup{
+							{
+								Events: []types.TriggerEvent{
+									types.TriggerEvent("PULL_REQUEST_READY_FOR_REVIEW"),
+									types.TriggerEvent("PULL_REQUEST_READY_FOR_REVIEW"),
+								},
+								Filters: []types.TriggerFilter{
+									{
+										Type: types.TriggerFilterType("TARGET_BRANCH"),
+										Patterns: []string{
+											"__Member__",
+											"__Member__",
+										},
+										MatchMode: types.TriggerFilterMatchMode("INCLUDE"),
+									},
+									{
+										Type: types.TriggerFilterType("TARGET_BRANCH"),
+										Patterns: []string{
+											"__Member__",
+											"__Member__",
+										},
+										MatchMode: types.TriggerFilterMatchMode("INCLUDE"),
+									},
+								},
+							},
+							{
+								Events: []types.TriggerEvent{
+									types.TriggerEvent("PULL_REQUEST_READY_FOR_REVIEW"),
+									types.TriggerEvent("PULL_REQUEST_READY_FOR_REVIEW"),
+								},
+								Filters: []types.TriggerFilter{
+									{
+										Type: types.TriggerFilterType("TARGET_BRANCH"),
+										Patterns: []string{
+											"__Member__",
+											"__Member__",
+										},
+										MatchMode: types.TriggerFilterMatchMode("INCLUDE"),
+									},
+									{
+										Type: types.TriggerFilterType("TARGET_BRANCH"),
+										Patterns: []string{
+											"__Member__",
+											"__Member__",
+										},
+										MatchMode: types.TriggerFilterMatchMode("INCLUDE"),
+									},
+								},
+							},
+						},
 						LeaveComments: ptr.Bool(true),
 						RemediateCode: ptr.Bool(true),
 					},
@@ -3413,6 +3693,56 @@ func TestCheckRequestSnapshot_UpdateIntegratedResources(t *testing.T) {
 				},
 				Capabilities: &types.ProviderResourceCapabilitiesMemberGithub{
 					Value: types.GitHubResourceCapabilities{
+						TriggerFilterGroups: []types.TriggerFilterGroup{
+							{
+								Events: []types.TriggerEvent{
+									types.TriggerEvent("PULL_REQUEST_READY_FOR_REVIEW"),
+									types.TriggerEvent("PULL_REQUEST_READY_FOR_REVIEW"),
+								},
+								Filters: []types.TriggerFilter{
+									{
+										Type: types.TriggerFilterType("TARGET_BRANCH"),
+										Patterns: []string{
+											"__Member__",
+											"__Member__",
+										},
+										MatchMode: types.TriggerFilterMatchMode("INCLUDE"),
+									},
+									{
+										Type: types.TriggerFilterType("TARGET_BRANCH"),
+										Patterns: []string{
+											"__Member__",
+											"__Member__",
+										},
+										MatchMode: types.TriggerFilterMatchMode("INCLUDE"),
+									},
+								},
+							},
+							{
+								Events: []types.TriggerEvent{
+									types.TriggerEvent("PULL_REQUEST_READY_FOR_REVIEW"),
+									types.TriggerEvent("PULL_REQUEST_READY_FOR_REVIEW"),
+								},
+								Filters: []types.TriggerFilter{
+									{
+										Type: types.TriggerFilterType("TARGET_BRANCH"),
+										Patterns: []string{
+											"__Member__",
+											"__Member__",
+										},
+										MatchMode: types.TriggerFilterMatchMode("INCLUDE"),
+									},
+									{
+										Type: types.TriggerFilterType("TARGET_BRANCH"),
+										Patterns: []string{
+											"__Member__",
+											"__Member__",
+										},
+										MatchMode: types.TriggerFilterMatchMode("INCLUDE"),
+									},
+								},
+							},
+						},
 						LeaveComments: ptr.Bool(true),
 						RemediateCode: ptr.Bool(true),
 					},
@@ -3439,6 +3769,34 @@ func TestCheckRequestSnapshot_UpdateIntegratedResources(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateIntegratedResources"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_UpdateIntegration(t *testing.T) {
+	input := &UpdateIntegrationInput{
+		IntegrationId: ptr.String("__IntegrationId__"),
+		WebhookAction: types.WebhookAction("CREATE_IF_ABSENT"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.UpdateIntegration(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateIntegration"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -3588,6 +3946,46 @@ func TestCheckRequestSnapshot_UpdatePentest(t *testing.T) {
 			types.SkillType("FINDING_PERSONALIZATION"),
 		},
 		MaxTaskHours: ptr.Float64(1.0),
+		ReportDestination: &types.ReportDestination{
+			IntegrationId: ptr.String("__IntegrationId__"),
+			ContainerId:   ptr.String("__ContainerId__"),
+			ParentId:      ptr.String("__ParentId__"),
+			DocumentId:    ptr.String("__DocumentId__"),
+		},
+		ReportFilters: &types.ReportFilters{
+			RiskLevels: []types.RiskLevel{
+				types.RiskLevel("UNKNOWN"),
+				types.RiskLevel("UNKNOWN"),
+			},
+			ConfidenceLevels: []types.ConfidenceLevel{
+				types.ConfidenceLevel("FALSE_POSITIVE"),
+				types.ConfidenceLevel("FALSE_POSITIVE"),
+			},
+			Statuses: []types.FindingStatus{
+				types.FindingStatus("ACTIVE"),
+				types.FindingStatus("ACTIVE"),
+			},
+			RiskTypes: []types.RiskType{
+				types.RiskType("CROSS_SITE_SCRIPTING"),
+				types.RiskType("CROSS_SITE_SCRIPTING"),
+			},
+			FindingTypes: []string{
+				"__Member__",
+				"__Member__",
+			},
+			TaskStatuses: []types.TaskExecutionStatus{
+				types.TaskExecutionStatus("IN_PROGRESS"),
+				types.TaskExecutionStatus("IN_PROGRESS"),
+			},
+			AnnotationNotes:  ptr.Bool(true),
+			ComplianceReport: ptr.Bool(true),
+		},
+		CicdConfiguration: &types.CiCdConfiguration{
+			Enabled: ptr.Bool(true),
+		},
+		TestScope: &types.TestScope{
+			Type: types.TestScopeType("WEB_APP"),
+		},
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -3878,6 +4276,12 @@ func TestCheckRequestSnapshot_UpdateThreatModel(t *testing.T) {
 			LogGroup:  ptr.String("__LogGroup__"),
 			LogStream: ptr.String("__LogStream__"),
 		},
+		ReportDestination: &types.ReportDestination{
+			IntegrationId: ptr.String("__IntegrationId__"),
+			ContainerId:   ptr.String("__ContainerId__"),
+			ParentId:      ptr.String("__ParentId__"),
+			DocumentId:    ptr.String("__DocumentId__"),
+		},
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -4121,6 +4525,76 @@ func TestUpdateRequestSnapshot_BatchDeleteThreatModels(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "BatchDeleteThreatModels"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_BatchDisassociateFindingIssue(t *testing.T) {
+	input := &BatchDisassociateFindingIssueInput{
+		AgentSpaceId:    ptr.String("__AgentSpaceId__"),
+		PentestJobId:    ptr.String("__PentestJobId__"),
+		CodeReviewJobId: ptr.String("__CodeReviewJobId__"),
+		FindingIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.BatchDisassociateFindingIssue(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "BatchDisassociateFindingIssue"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_BatchExportFindings(t *testing.T) {
+	input := &BatchExportFindingsInput{
+		AgentSpaceId:    ptr.String("__AgentSpaceId__"),
+		PentestJobId:    ptr.String("__PentestJobId__"),
+		CodeReviewJobId: ptr.String("__CodeReviewJobId__"),
+		IssueDestination: &types.IssueDestination{
+			IntegrationId: ptr.String("__IntegrationId__"),
+			ProjectKey:    ptr.String("__ProjectKey__"),
+		},
+		FindingIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.BatchExportFindings(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "BatchExportFindings"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -4851,6 +5325,40 @@ func TestUpdateRequestSnapshot_CreateCodeReview(t *testing.T) {
 		CodeRemediationStrategy: types.CodeRemediationStrategy("AUTOMATIC"),
 		ValidationMode:          types.ValidationMode("DISABLED"),
 		MaxTaskHours:            ptr.Float64(1.0),
+		ReportDestination: &types.ReportDestination{
+			IntegrationId: ptr.String("__IntegrationId__"),
+			ContainerId:   ptr.String("__ContainerId__"),
+			ParentId:      ptr.String("__ParentId__"),
+			DocumentId:    ptr.String("__DocumentId__"),
+		},
+		ReportFilters: &types.ReportFilters{
+			RiskLevels: []types.RiskLevel{
+				types.RiskLevel("UNKNOWN"),
+				types.RiskLevel("UNKNOWN"),
+			},
+			ConfidenceLevels: []types.ConfidenceLevel{
+				types.ConfidenceLevel("FALSE_POSITIVE"),
+				types.ConfidenceLevel("FALSE_POSITIVE"),
+			},
+			Statuses: []types.FindingStatus{
+				types.FindingStatus("ACTIVE"),
+				types.FindingStatus("ACTIVE"),
+			},
+			RiskTypes: []types.RiskType{
+				types.RiskType("CROSS_SITE_SCRIPTING"),
+				types.RiskType("CROSS_SITE_SCRIPTING"),
+			},
+			FindingTypes: []string{
+				"__Member__",
+				"__Member__",
+			},
+			TaskStatuses: []types.TaskExecutionStatus{
+				types.TaskExecutionStatus("IN_PROGRESS"),
+				types.TaskExecutionStatus("IN_PROGRESS"),
+			},
+			AnnotationNotes:  ptr.Bool(true),
+			ComplianceReport: ptr.Bool(true),
+		},
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -5096,6 +5604,46 @@ func TestUpdateRequestSnapshot_CreatePentest(t *testing.T) {
 			types.SkillType("FINDING_PERSONALIZATION"),
 		},
 		MaxTaskHours: ptr.Float64(1.0),
+		ReportDestination: &types.ReportDestination{
+			IntegrationId: ptr.String("__IntegrationId__"),
+			ContainerId:   ptr.String("__ContainerId__"),
+			ParentId:      ptr.String("__ParentId__"),
+			DocumentId:    ptr.String("__DocumentId__"),
+		},
+		ReportFilters: &types.ReportFilters{
+			RiskLevels: []types.RiskLevel{
+				types.RiskLevel("UNKNOWN"),
+				types.RiskLevel("UNKNOWN"),
+			},
+			ConfidenceLevels: []types.ConfidenceLevel{
+				types.ConfidenceLevel("FALSE_POSITIVE"),
+				types.ConfidenceLevel("FALSE_POSITIVE"),
+			},
+			Statuses: []types.FindingStatus{
+				types.FindingStatus("ACTIVE"),
+				types.FindingStatus("ACTIVE"),
+			},
+			RiskTypes: []types.RiskType{
+				types.RiskType("CROSS_SITE_SCRIPTING"),
+				types.RiskType("CROSS_SITE_SCRIPTING"),
+			},
+			FindingTypes: []string{
+				"__Member__",
+				"__Member__",
+			},
+			TaskStatuses: []types.TaskExecutionStatus{
+				types.TaskExecutionStatus("IN_PROGRESS"),
+				types.TaskExecutionStatus("IN_PROGRESS"),
+			},
+			AnnotationNotes:  ptr.Bool(true),
+			ComplianceReport: ptr.Bool(true),
+		},
+		CicdConfiguration: &types.CiCdConfiguration{
+			Enabled: ptr.Bool(true),
+		},
+		TestScope: &types.TestScope{
+			Type: types.TestScopeType("WEB_APP"),
+		},
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -5847,7 +6395,11 @@ func TestUpdateRequestSnapshot_ImportSecurityRequirements(t *testing.T) {
 
 func TestUpdateRequestSnapshot_InitiateProviderRegistration(t *testing.T) {
 	input := &InitiateProviderRegistrationInput{
-		Provider: types.Provider("GITHUB"),
+		Provider:         types.Provider("GITHUB"),
+		TargetUrl:        ptr.String("__TargetUrl__"),
+		OrganizationName: ptr.String("__OrganizationName__"),
+		ClientId:         ptr.String("__ClientId__"),
+		ClientSecret:     ptr.String("__ClientSecret__"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -5868,6 +6420,37 @@ func TestUpdateRequestSnapshot_InitiateProviderRegistration(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "InitiateProviderRegistration"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_ListActorMessages(t *testing.T) {
+	input := &ListActorMessagesInput{
+		MaxResults:      ptr.Int32(1),
+		NextToken:       ptr.String("__NextToken__"),
+		AgentSpaceId:    ptr.String("__AgentSpaceId__"),
+		PentestId:       ptr.String("__PentestId__"),
+		ActorIdentifier: ptr.String("__ActorIdentifier__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListActorMessages(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListActorMessages"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -6214,6 +6797,7 @@ func TestUpdateRequestSnapshot_ListPentestJobsForPentest(t *testing.T) {
 		PentestId:    ptr.String("__PentestId__"),
 		AgentSpaceId: ptr.String("__AgentSpaceId__"),
 		NextToken:    ptr.String("__NextToken__"),
+		JobType:      types.JobType("FULL"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -6635,6 +7219,22 @@ func TestUpdateRequestSnapshot_StartPentestJob(t *testing.T) {
 			"__Member__",
 			"__Member__",
 		},
+		ScopeChanges: []types.ScopeChange{
+			{
+				IntegrationId:      ptr.String("__IntegrationId__"),
+				ProviderResourceId: ptr.String("__ProviderResourceId__"),
+				BaseCommitSha:      ptr.String("__BaseCommitSha__"),
+				HeadCommitSha:      ptr.String("__HeadCommitSha__"),
+				TriggerRunId:       ptr.String("__TriggerRunId__"),
+			},
+			{
+				IntegrationId:      ptr.String("__IntegrationId__"),
+				ProviderResourceId: ptr.String("__ProviderResourceId__"),
+				BaseCommitSha:      ptr.String("__BaseCommitSha__"),
+				HeadCommitSha:      ptr.String("__HeadCommitSha__"),
+				TriggerRunId:       ptr.String("__TriggerRunId__"),
+			},
+		},
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -7047,6 +7647,40 @@ func TestUpdateRequestSnapshot_UpdateCodeReview(t *testing.T) {
 		CodeRemediationStrategy: types.CodeRemediationStrategy("AUTOMATIC"),
 		ValidationMode:          types.ValidationMode("DISABLED"),
 		MaxTaskHours:            ptr.Float64(1.0),
+		ReportDestination: &types.ReportDestination{
+			IntegrationId: ptr.String("__IntegrationId__"),
+			ContainerId:   ptr.String("__ContainerId__"),
+			ParentId:      ptr.String("__ParentId__"),
+			DocumentId:    ptr.String("__DocumentId__"),
+		},
+		ReportFilters: &types.ReportFilters{
+			RiskLevels: []types.RiskLevel{
+				types.RiskLevel("UNKNOWN"),
+				types.RiskLevel("UNKNOWN"),
+			},
+			ConfidenceLevels: []types.ConfidenceLevel{
+				types.ConfidenceLevel("FALSE_POSITIVE"),
+				types.ConfidenceLevel("FALSE_POSITIVE"),
+			},
+			Statuses: []types.FindingStatus{
+				types.FindingStatus("ACTIVE"),
+				types.FindingStatus("ACTIVE"),
+			},
+			RiskTypes: []types.RiskType{
+				types.RiskType("CROSS_SITE_SCRIPTING"),
+				types.RiskType("CROSS_SITE_SCRIPTING"),
+			},
+			FindingTypes: []string{
+				"__Member__",
+				"__Member__",
+			},
+			TaskStatuses: []types.TaskExecutionStatus{
+				types.TaskExecutionStatus("IN_PROGRESS"),
+				types.TaskExecutionStatus("IN_PROGRESS"),
+			},
+			AnnotationNotes:  ptr.Bool(true),
+			ComplianceReport: ptr.Bool(true),
+		},
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -7122,6 +7756,56 @@ func TestUpdateRequestSnapshot_UpdateIntegratedResources(t *testing.T) {
 				},
 				Capabilities: &types.ProviderResourceCapabilitiesMemberGithub{
 					Value: types.GitHubResourceCapabilities{
+						TriggerFilterGroups: []types.TriggerFilterGroup{
+							{
+								Events: []types.TriggerEvent{
+									types.TriggerEvent("PULL_REQUEST_READY_FOR_REVIEW"),
+									types.TriggerEvent("PULL_REQUEST_READY_FOR_REVIEW"),
+								},
+								Filters: []types.TriggerFilter{
+									{
+										Type: types.TriggerFilterType("TARGET_BRANCH"),
+										Patterns: []string{
+											"__Member__",
+											"__Member__",
+										},
+										MatchMode: types.TriggerFilterMatchMode("INCLUDE"),
+									},
+									{
+										Type: types.TriggerFilterType("TARGET_BRANCH"),
+										Patterns: []string{
+											"__Member__",
+											"__Member__",
+										},
+										MatchMode: types.TriggerFilterMatchMode("INCLUDE"),
+									},
+								},
+							},
+							{
+								Events: []types.TriggerEvent{
+									types.TriggerEvent("PULL_REQUEST_READY_FOR_REVIEW"),
+									types.TriggerEvent("PULL_REQUEST_READY_FOR_REVIEW"),
+								},
+								Filters: []types.TriggerFilter{
+									{
+										Type: types.TriggerFilterType("TARGET_BRANCH"),
+										Patterns: []string{
+											"__Member__",
+											"__Member__",
+										},
+										MatchMode: types.TriggerFilterMatchMode("INCLUDE"),
+									},
+									{
+										Type: types.TriggerFilterType("TARGET_BRANCH"),
+										Patterns: []string{
+											"__Member__",
+											"__Member__",
+										},
+										MatchMode: types.TriggerFilterMatchMode("INCLUDE"),
+									},
+								},
+							},
+						},
 						LeaveComments: ptr.Bool(true),
 						RemediateCode: ptr.Bool(true),
 					},
@@ -7136,6 +7820,56 @@ func TestUpdateRequestSnapshot_UpdateIntegratedResources(t *testing.T) {
 				},
 				Capabilities: &types.ProviderResourceCapabilitiesMemberGithub{
 					Value: types.GitHubResourceCapabilities{
+						TriggerFilterGroups: []types.TriggerFilterGroup{
+							{
+								Events: []types.TriggerEvent{
+									types.TriggerEvent("PULL_REQUEST_READY_FOR_REVIEW"),
+									types.TriggerEvent("PULL_REQUEST_READY_FOR_REVIEW"),
+								},
+								Filters: []types.TriggerFilter{
+									{
+										Type: types.TriggerFilterType("TARGET_BRANCH"),
+										Patterns: []string{
+											"__Member__",
+											"__Member__",
+										},
+										MatchMode: types.TriggerFilterMatchMode("INCLUDE"),
+									},
+									{
+										Type: types.TriggerFilterType("TARGET_BRANCH"),
+										Patterns: []string{
+											"__Member__",
+											"__Member__",
+										},
+										MatchMode: types.TriggerFilterMatchMode("INCLUDE"),
+									},
+								},
+							},
+							{
+								Events: []types.TriggerEvent{
+									types.TriggerEvent("PULL_REQUEST_READY_FOR_REVIEW"),
+									types.TriggerEvent("PULL_REQUEST_READY_FOR_REVIEW"),
+								},
+								Filters: []types.TriggerFilter{
+									{
+										Type: types.TriggerFilterType("TARGET_BRANCH"),
+										Patterns: []string{
+											"__Member__",
+											"__Member__",
+										},
+										MatchMode: types.TriggerFilterMatchMode("INCLUDE"),
+									},
+									{
+										Type: types.TriggerFilterType("TARGET_BRANCH"),
+										Patterns: []string{
+											"__Member__",
+											"__Member__",
+										},
+										MatchMode: types.TriggerFilterMatchMode("INCLUDE"),
+									},
+								},
+							},
+						},
 						LeaveComments: ptr.Bool(true),
 						RemediateCode: ptr.Bool(true),
 					},
@@ -7162,6 +7896,34 @@ func TestUpdateRequestSnapshot_UpdateIntegratedResources(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateIntegratedResources"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_UpdateIntegration(t *testing.T) {
+	input := &UpdateIntegrationInput{
+		IntegrationId: ptr.String("__IntegrationId__"),
+		WebhookAction: types.WebhookAction("CREATE_IF_ABSENT"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.UpdateIntegration(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateIntegration"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -7311,6 +8073,46 @@ func TestUpdateRequestSnapshot_UpdatePentest(t *testing.T) {
 			types.SkillType("FINDING_PERSONALIZATION"),
 		},
 		MaxTaskHours: ptr.Float64(1.0),
+		ReportDestination: &types.ReportDestination{
+			IntegrationId: ptr.String("__IntegrationId__"),
+			ContainerId:   ptr.String("__ContainerId__"),
+			ParentId:      ptr.String("__ParentId__"),
+			DocumentId:    ptr.String("__DocumentId__"),
+		},
+		ReportFilters: &types.ReportFilters{
+			RiskLevels: []types.RiskLevel{
+				types.RiskLevel("UNKNOWN"),
+				types.RiskLevel("UNKNOWN"),
+			},
+			ConfidenceLevels: []types.ConfidenceLevel{
+				types.ConfidenceLevel("FALSE_POSITIVE"),
+				types.ConfidenceLevel("FALSE_POSITIVE"),
+			},
+			Statuses: []types.FindingStatus{
+				types.FindingStatus("ACTIVE"),
+				types.FindingStatus("ACTIVE"),
+			},
+			RiskTypes: []types.RiskType{
+				types.RiskType("CROSS_SITE_SCRIPTING"),
+				types.RiskType("CROSS_SITE_SCRIPTING"),
+			},
+			FindingTypes: []string{
+				"__Member__",
+				"__Member__",
+			},
+			TaskStatuses: []types.TaskExecutionStatus{
+				types.TaskExecutionStatus("IN_PROGRESS"),
+				types.TaskExecutionStatus("IN_PROGRESS"),
+			},
+			AnnotationNotes:  ptr.Bool(true),
+			ComplianceReport: ptr.Bool(true),
+		},
+		CicdConfiguration: &types.CiCdConfiguration{
+			Enabled: ptr.Bool(true),
+		},
+		TestScope: &types.TestScope{
+			Type: types.TestScopeType("WEB_APP"),
+		},
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -7600,6 +8402,12 @@ func TestUpdateRequestSnapshot_UpdateThreatModel(t *testing.T) {
 		LogConfig: &types.CloudWatchLog{
 			LogGroup:  ptr.String("__LogGroup__"),
 			LogStream: ptr.String("__LogStream__"),
+		},
+		ReportDestination: &types.ReportDestination{
+			IntegrationId: ptr.String("__IntegrationId__"),
+			ContainerId:   ptr.String("__ContainerId__"),
+			ParentId:      ptr.String("__ParentId__"),
+			DocumentId:    ptr.String("__DocumentId__"),
 		},
 	}
 	body := &bytes.Buffer{}

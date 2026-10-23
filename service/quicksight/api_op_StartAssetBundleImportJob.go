@@ -4,7 +4,9 @@ package quicksight
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/quicksight/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/quicksight/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -82,6 +84,49 @@ type StartAssetBundleImportJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartAssetBundleImportJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartAssetBundleImportJobRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartAssetBundleImportJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AssetBundleImportJobId != nil {
+		s.WriteString(schemas.StartAssetBundleImportJobRequest_AssetBundleImportJobId, *v.AssetBundleImportJobId)
+	}
+	if v.AssetBundleImportSource != nil {
+		s.WriteStruct(schemas.StartAssetBundleImportJobRequest_AssetBundleImportSource)
+		v.AssetBundleImportSource.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.AwsAccountId != nil {
+		s.WriteString(schemas.StartAssetBundleImportJobRequest_AwsAccountId, *v.AwsAccountId)
+	}
+	if v.FailureAction != "" {
+		s.WriteString(schemas.StartAssetBundleImportJobRequest_FailureAction, string(v.FailureAction))
+	}
+	if v.OverrideParameters != nil {
+		s.WriteStruct(schemas.StartAssetBundleImportJobRequest_OverrideParameters)
+		v.OverrideParameters.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.OverridePermissions != nil {
+		s.WriteStruct(schemas.StartAssetBundleImportJobRequest_OverridePermissions)
+		v.OverridePermissions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.OverrideTags != nil {
+		s.WriteStruct(schemas.StartAssetBundleImportJobRequest_OverrideTags)
+		v.OverrideTags.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.OverrideValidationStrategy != nil {
+		s.WriteStruct(schemas.StartAssetBundleImportJobRequest_OverrideValidationStrategy)
+		v.OverrideValidationStrategy.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type StartAssetBundleImportJobOutput struct {
 
 	// The Amazon Resource Name (ARN) for the import job.
@@ -103,13 +148,49 @@ type StartAssetBundleImportJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartAssetBundleImportJobOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartAssetBundleImportJobResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartAssetBundleImportJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.StartAssetBundleImportJobResponse_Arn, *v.Arn)
+	}
+	if v.AssetBundleImportJobId != nil {
+		s.WriteString(schemas.StartAssetBundleImportJobResponse_AssetBundleImportJobId, *v.AssetBundleImportJobId)
+	}
+	if v.RequestId != nil {
+		s.WriteString(schemas.StartAssetBundleImportJobResponse_RequestId, *v.RequestId)
+	}
+	if v.Status != 0 {
+		s.WriteInt32(schemas.StartAssetBundleImportJobResponse_Status, v.Status)
+	}
+}
+func (v *StartAssetBundleImportJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartAssetBundleImportJobResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartAssetBundleImportJobResponse_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.StartAssetBundleImportJobResponse_Arn, v.Arn)
+		case schemas.StartAssetBundleImportJobResponse_AssetBundleImportJobId:
+			v.AssetBundleImportJobId = new(string)
+			return d.ReadString(schemas.StartAssetBundleImportJobResponse_AssetBundleImportJobId, v.AssetBundleImportJobId)
+		case schemas.StartAssetBundleImportJobResponse_RequestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.StartAssetBundleImportJobResponse_RequestId, v.RequestId)
+		case schemas.StartAssetBundleImportJobResponse_Status:
+			return d.ReadInt32(schemas.StartAssetBundleImportJobResponse_Status, &v.Status)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartAssetBundleImportJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpStartAssetBundleImportJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartAssetBundleImportJob, schemas.StartAssetBundleImportJobRequest, schemas.StartAssetBundleImportJobResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStartAssetBundleImportJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartAssetBundleImportJob, schemas.StartAssetBundleImportJobRequest, schemas.StartAssetBundleImportJobResponse), output: &StartAssetBundleImportJobOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

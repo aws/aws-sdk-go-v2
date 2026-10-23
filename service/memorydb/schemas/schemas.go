@@ -266,7 +266,8 @@ var ACL_ARN *smithy.Schema
 var ACLAlreadyExistsFault = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.memorydb",
 	Name:      "ACLAlreadyExistsFault",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400},
 	&smithytraits.AWSQueryError{ErrorCode: "ACLAlreadyExists",
 		StatusCode: 400})
 var ACLAlreadyExistsFault_message *smithy.Schema
@@ -297,7 +298,8 @@ var _ACLNameList_member *smithy.Schema
 var ACLNotFoundFault = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.memorydb",
 	Name:      "ACLNotFoundFault",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 404},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 404},
 	&smithytraits.AWSQueryError{ErrorCode: "ACLNotFound",
 		StatusCode: 404})
 var ACLNotFoundFault_message *smithy.Schema
@@ -313,7 +315,8 @@ var ACLPendingChanges_UserNamesToAdd *smithy.Schema
 var ACLQuotaExceededFault = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.memorydb",
 	Name:      "ACLQuotaExceededFault",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400},
 	&smithytraits.AWSQueryError{ErrorCode: "ACLQuotaExceeded",
 		StatusCode: 400})
 var ACLQuotaExceededFault_message *smithy.Schema
@@ -327,7 +330,8 @@ var ACLsUpdateStatus_ACLToApply *smithy.Schema
 var APICallRateForCustomerExceededFault = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.memorydb",
 	Name:      "APICallRateForCustomerExceededFault",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400},
 	&smithytraits.AWSQueryError{ErrorCode: "APICallRateForCustomerExceeded",
 		StatusCode: 400})
 var APICallRateForCustomerExceededFault_message *smithy.Schema
@@ -454,7 +458,8 @@ var Cluster_IpDiscovery *smithy.Schema
 var ClusterAlreadyExistsFault = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.memorydb",
 	Name:      "ClusterAlreadyExistsFault",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400},
 	&smithytraits.AWSQueryError{ErrorCode: "ClusterAlreadyExists",
 		StatusCode: 400})
 var ClusterAlreadyExistsFault_message *smithy.Schema
@@ -512,7 +517,8 @@ var _ClusterNameList_member *smithy.Schema
 var ClusterNotFoundFault = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.memorydb",
 	Name:      "ClusterNotFoundFault",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 404},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 404},
 	&smithytraits.AWSQueryError{ErrorCode: "ClusterNotFound",
 		StatusCode: 404})
 var ClusterNotFoundFault_message *smithy.Schema
@@ -530,7 +536,8 @@ var ClusterPendingUpdates_ServiceUpdates *smithy.Schema
 var ClusterQuotaForCustomerExceededFault = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.memorydb",
 	Name:      "ClusterQuotaForCustomerExceededFault",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400},
 	&smithytraits.AWSQueryError{ErrorCode: "ClusterQuotaForCustomerExceeded",
 		StatusCode: 400})
 var ClusterQuotaForCustomerExceededFault_message *smithy.Schema
@@ -546,7 +553,8 @@ var DataTieringStatus_FALSE *smithy.Schema
 var DefaultUserRequired = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.memorydb",
 	Name:      "DefaultUserRequired",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400},
 	&smithytraits.AWSQueryError{ErrorCode: "DefaultUserRequired",
 		StatusCode: 400})
 var DefaultUserRequired_message *smithy.Schema
@@ -559,7 +567,8 @@ var _Double = smithy.NewSchema(smithy.ShapeID{
 var DuplicateUserNameFault = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.memorydb",
 	Name:      "DuplicateUserNameFault",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400},
 	&smithytraits.AWSQueryError{ErrorCode: "DuplicateUserName",
 		StatusCode: 400})
 var DuplicateUserNameFault_message *smithy.Schema
@@ -654,7 +663,8 @@ var InputAuthenticationType_IAM *smithy.Schema
 var InsufficientClusterCapacityFault = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.memorydb",
 	Name:      "InsufficientClusterCapacityFault",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400},
 	&smithytraits.AWSQueryError{ErrorCode: "InsufficientClusterCapacity",
 		StatusCode: 400})
 var InsufficientClusterCapacityFault_message *smithy.Schema
@@ -672,7 +682,8 @@ var _IntegerOptional = smithy.NewSchema(smithy.ShapeID{
 var InvalidACLStateFault = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.memorydb",
 	Name:      "InvalidACLStateFault",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400},
 	&smithytraits.AWSQueryError{ErrorCode: "InvalidACLState",
 		StatusCode: 400})
 var InvalidACLStateFault_message *smithy.Schema
@@ -680,7 +691,8 @@ var InvalidACLStateFault_message *smithy.Schema
 var InvalidARNFault = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.memorydb",
 	Name:      "InvalidARNFault",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400},
 	&smithytraits.AWSQueryError{ErrorCode: "InvalidARN",
 		StatusCode: 400})
 var InvalidARNFault_message *smithy.Schema
@@ -688,7 +700,8 @@ var InvalidARNFault_message *smithy.Schema
 var InvalidClusterStateFault = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.memorydb",
 	Name:      "InvalidClusterStateFault",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400},
 	&smithytraits.AWSQueryError{ErrorCode: "InvalidClusterState",
 		StatusCode: 400})
 var InvalidClusterStateFault_message *smithy.Schema
@@ -696,7 +709,8 @@ var InvalidClusterStateFault_message *smithy.Schema
 var InvalidCredentialsException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.memorydb",
 	Name:      "InvalidCredentialsException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 408},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 408},
 	&smithytraits.AWSQueryError{ErrorCode: "InvalidCredentialsException",
 		StatusCode: 408})
 var InvalidCredentialsException_message *smithy.Schema
@@ -704,7 +718,8 @@ var InvalidCredentialsException_message *smithy.Schema
 var InvalidKMSKeyFault = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.memorydb",
 	Name:      "InvalidKMSKeyFault",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400},
 	&smithytraits.AWSQueryError{ErrorCode: "InvalidKMSKeyFault",
 		StatusCode: 400})
 var InvalidKMSKeyFault_message *smithy.Schema
@@ -712,7 +727,8 @@ var InvalidKMSKeyFault_message *smithy.Schema
 var InvalidMultiRegionClusterStateFault = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.memorydb",
 	Name:      "InvalidMultiRegionClusterStateFault",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400},
 	&smithytraits.AWSQueryError{ErrorCode: "InvalidMultiRegionClusterState",
 		StatusCode: 400})
 var InvalidMultiRegionClusterStateFault_message *smithy.Schema
@@ -720,7 +736,8 @@ var InvalidMultiRegionClusterStateFault_message *smithy.Schema
 var InvalidNodeStateFault = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.memorydb",
 	Name:      "InvalidNodeStateFault",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400},
 	&smithytraits.AWSQueryError{ErrorCode: "InvalidNodeState",
 		StatusCode: 400})
 var InvalidNodeStateFault_message *smithy.Schema
@@ -728,7 +745,8 @@ var InvalidNodeStateFault_message *smithy.Schema
 var InvalidParameterCombinationException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.memorydb",
 	Name:      "InvalidParameterCombinationException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400},
 	&smithytraits.AWSQueryError{ErrorCode: "InvalidParameterCombination",
 		StatusCode: 400})
 var InvalidParameterCombinationException_message *smithy.Schema
@@ -736,7 +754,8 @@ var InvalidParameterCombinationException_message *smithy.Schema
 var InvalidParameterGroupStateFault = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.memorydb",
 	Name:      "InvalidParameterGroupStateFault",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400},
 	&smithytraits.AWSQueryError{ErrorCode: "InvalidParameterGroupState",
 		StatusCode: 400})
 var InvalidParameterGroupStateFault_message *smithy.Schema
@@ -744,7 +763,8 @@ var InvalidParameterGroupStateFault_message *smithy.Schema
 var InvalidParameterValueException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.memorydb",
 	Name:      "InvalidParameterValueException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400},
 	&smithytraits.AWSQueryError{ErrorCode: "InvalidParameterValue",
 		StatusCode: 400})
 var InvalidParameterValueException_message *smithy.Schema
@@ -752,7 +772,8 @@ var InvalidParameterValueException_message *smithy.Schema
 var InvalidSnapshotStateFault = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.memorydb",
 	Name:      "InvalidSnapshotStateFault",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400},
 	&smithytraits.AWSQueryError{ErrorCode: "InvalidSnapshotState",
 		StatusCode: 400})
 var InvalidSnapshotStateFault_message *smithy.Schema
@@ -760,7 +781,8 @@ var InvalidSnapshotStateFault_message *smithy.Schema
 var InvalidSubnet = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.memorydb",
 	Name:      "InvalidSubnet",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400},
 	&smithytraits.AWSQueryError{ErrorCode: "InvalidSubnet",
 		StatusCode: 400})
 var InvalidSubnet_message *smithy.Schema
@@ -768,7 +790,8 @@ var InvalidSubnet_message *smithy.Schema
 var InvalidUserStateFault = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.memorydb",
 	Name:      "InvalidUserStateFault",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400},
 	&smithytraits.AWSQueryError{ErrorCode: "InvalidUserState",
 		StatusCode: 400})
 var InvalidUserStateFault_message *smithy.Schema
@@ -776,7 +799,8 @@ var InvalidUserStateFault_message *smithy.Schema
 var InvalidVPCNetworkStateFault = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.memorydb",
 	Name:      "InvalidVPCNetworkStateFault",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400},
 	&smithytraits.AWSQueryError{ErrorCode: "InvalidVPCNetworkStateFault",
 		StatusCode: 400})
 var InvalidVPCNetworkStateFault_message *smithy.Schema
@@ -829,7 +853,8 @@ var MultiRegionCluster_ARN *smithy.Schema
 var MultiRegionClusterAlreadyExistsFault = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.memorydb",
 	Name:      "MultiRegionClusterAlreadyExistsFault",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400},
 	&smithytraits.AWSQueryError{ErrorCode: "MultiRegionClusterAlreadyExistsFault",
 		StatusCode: 400})
 var MultiRegionClusterAlreadyExistsFault_message *smithy.Schema
@@ -843,7 +868,8 @@ var _MultiRegionClusterList_member *smithy.Schema
 var MultiRegionClusterNotFoundFault = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.memorydb",
 	Name:      "MultiRegionClusterNotFoundFault",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 404},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 404},
 	&smithytraits.AWSQueryError{ErrorCode: "MultiRegionClusterNotFound",
 		StatusCode: 404})
 var MultiRegionClusterNotFoundFault_message *smithy.Schema
@@ -887,7 +913,8 @@ var _MultiRegionParameterGroupList_member *smithy.Schema
 var MultiRegionParameterGroupNotFoundFault = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.memorydb",
 	Name:      "MultiRegionParameterGroupNotFoundFault",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 404},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 404},
 	&smithytraits.AWSQueryError{ErrorCode: "MultiRegionParameterGroupNotFoundFault",
 		StatusCode: 404})
 var MultiRegionParameterGroupNotFoundFault_message *smithy.Schema
@@ -937,7 +964,8 @@ var _NodeList_member *smithy.Schema
 var NodeQuotaForClusterExceededFault = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.memorydb",
 	Name:      "NodeQuotaForClusterExceededFault",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400},
 	&smithytraits.AWSQueryError{ErrorCode: "NodeQuotaForClusterExceeded",
 		StatusCode: 400})
 var NodeQuotaForClusterExceededFault_message *smithy.Schema
@@ -945,7 +973,8 @@ var NodeQuotaForClusterExceededFault_message *smithy.Schema
 var NodeQuotaForCustomerExceededFault = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.memorydb",
 	Name:      "NodeQuotaForCustomerExceededFault",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400},
 	&smithytraits.AWSQueryError{ErrorCode: "NodeQuotaForCustomerExceeded",
 		StatusCode: 400})
 var NodeQuotaForCustomerExceededFault_message *smithy.Schema
@@ -959,7 +988,8 @@ var _NodeTypeList_member *smithy.Schema
 var NoOperationFault = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.memorydb",
 	Name:      "NoOperationFault",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400},
 	&smithytraits.AWSQueryError{ErrorCode: "NoOperationFault",
 		StatusCode: 400})
 var NoOperationFault_message *smithy.Schema
@@ -995,7 +1025,8 @@ var ParameterGroup_ARN *smithy.Schema
 var ParameterGroupAlreadyExistsFault = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.memorydb",
 	Name:      "ParameterGroupAlreadyExistsFault",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400},
 	&smithytraits.AWSQueryError{ErrorCode: "ParameterGroupAlreadyExists",
 		StatusCode: 400})
 var ParameterGroupAlreadyExistsFault_message *smithy.Schema
@@ -1009,7 +1040,8 @@ var _ParameterGroupList_member *smithy.Schema
 var ParameterGroupNotFoundFault = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.memorydb",
 	Name:      "ParameterGroupNotFoundFault",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 404},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 404},
 	&smithytraits.AWSQueryError{ErrorCode: "ParameterGroupNotFound",
 		StatusCode: 404})
 var ParameterGroupNotFoundFault_message *smithy.Schema
@@ -1017,7 +1049,8 @@ var ParameterGroupNotFoundFault_message *smithy.Schema
 var ParameterGroupQuotaExceededFault = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.memorydb",
 	Name:      "ParameterGroupQuotaExceededFault",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400},
 	&smithytraits.AWSQueryError{ErrorCode: "ParameterGroupQuotaExceeded",
 		StatusCode: 400})
 var ParameterGroupQuotaExceededFault_message *smithy.Schema
@@ -1135,7 +1168,8 @@ var ReservedNode_ARN *smithy.Schema
 var ReservedNodeAlreadyExistsFault = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.memorydb",
 	Name:      "ReservedNodeAlreadyExistsFault",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 404},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 404},
 	&smithytraits.AWSQueryError{ErrorCode: "ReservedNodeAlreadyExists",
 		StatusCode: 404})
 var ReservedNodeAlreadyExistsFault_message *smithy.Schema
@@ -1149,7 +1183,8 @@ var _ReservedNodeList_member *smithy.Schema
 var ReservedNodeNotFoundFault = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.memorydb",
 	Name:      "ReservedNodeNotFoundFault",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 404},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 404},
 	&smithytraits.AWSQueryError{ErrorCode: "ReservedNodeNotFound",
 		StatusCode: 404})
 var ReservedNodeNotFoundFault_message *smithy.Schema
@@ -1157,7 +1192,8 @@ var ReservedNodeNotFoundFault_message *smithy.Schema
 var ReservedNodeQuotaExceededFault = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.memorydb",
 	Name:      "ReservedNodeQuotaExceededFault",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400},
 	&smithytraits.AWSQueryError{ErrorCode: "ReservedNodeQuotaExceeded",
 		StatusCode: 400})
 var ReservedNodeQuotaExceededFault_message *smithy.Schema
@@ -1187,7 +1223,8 @@ var _ReservedNodesOfferingList_member *smithy.Schema
 var ReservedNodesOfferingNotFoundFault = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.memorydb",
 	Name:      "ReservedNodesOfferingNotFoundFault",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 404},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 404},
 	&smithytraits.AWSQueryError{ErrorCode: "ReservedNodesOfferingNotFound",
 		StatusCode: 404})
 var ReservedNodesOfferingNotFoundFault_message *smithy.Schema
@@ -1221,7 +1258,8 @@ var _SecurityGroupMembershipList_member *smithy.Schema
 var ServiceLinkedRoleNotFoundFault = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.memorydb",
 	Name:      "ServiceLinkedRoleNotFoundFault",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400},
 	&smithytraits.AWSQueryError{ErrorCode: "ServiceLinkedRoleNotFoundFault",
 		StatusCode: 400})
 var ServiceLinkedRoleNotFoundFault_message *smithy.Schema
@@ -1257,7 +1295,8 @@ var _ServiceUpdateList_member *smithy.Schema
 var ServiceUpdateNotFoundFault = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.memorydb",
 	Name:      "ServiceUpdateNotFoundFault",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 404},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 404},
 	&smithytraits.AWSQueryError{ErrorCode: "ServiceUpdateNotFoundFault",
 		StatusCode: 404})
 var ServiceUpdateNotFoundFault_message *smithy.Schema
@@ -1347,7 +1386,8 @@ var _ShardList_member *smithy.Schema
 var ShardNotFoundFault = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.memorydb",
 	Name:      "ShardNotFoundFault",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 404},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 404},
 	&smithytraits.AWSQueryError{ErrorCode: "ShardNotFoundFault",
 		StatusCode: 404})
 var ShardNotFoundFault_message *smithy.Schema
@@ -1355,7 +1395,8 @@ var ShardNotFoundFault_message *smithy.Schema
 var ShardsPerClusterQuotaExceededFault = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.memorydb",
 	Name:      "ShardsPerClusterQuotaExceededFault",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400},
 	&smithytraits.AWSQueryError{ErrorCode: "ShardsPerClusterQuotaExceeded",
 		StatusCode: 400})
 var ShardsPerClusterQuotaExceededFault_message *smithy.Schema
@@ -1387,7 +1428,8 @@ var Snapshot_DataTiering *smithy.Schema
 var SnapshotAlreadyExistsFault = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.memorydb",
 	Name:      "SnapshotAlreadyExistsFault",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400},
 	&smithytraits.AWSQueryError{ErrorCode: "SnapshotAlreadyExistsFault",
 		StatusCode: 400})
 var SnapshotAlreadyExistsFault_message *smithy.Schema
@@ -1407,7 +1449,8 @@ var _SnapshotList_member *smithy.Schema
 var SnapshotNotFoundFault = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.memorydb",
 	Name:      "SnapshotNotFoundFault",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 404},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 404},
 	&smithytraits.AWSQueryError{ErrorCode: "SnapshotNotFoundFault",
 		StatusCode: 404})
 var SnapshotNotFoundFault_message *smithy.Schema
@@ -1415,7 +1458,8 @@ var SnapshotNotFoundFault_message *smithy.Schema
 var SnapshotQuotaExceededFault = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.memorydb",
 	Name:      "SnapshotQuotaExceededFault",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400},
 	&smithytraits.AWSQueryError{ErrorCode: "SnapshotQuotaExceededFault",
 		StatusCode: 400})
 var SnapshotQuotaExceededFault_message *smithy.Schema
@@ -1470,7 +1514,8 @@ var SubnetGroup_SupportedNetworkTypes *smithy.Schema
 var SubnetGroupAlreadyExistsFault = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.memorydb",
 	Name:      "SubnetGroupAlreadyExistsFault",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400},
 	&smithytraits.AWSQueryError{ErrorCode: "SubnetGroupAlreadyExists",
 		StatusCode: 400})
 var SubnetGroupAlreadyExistsFault_message *smithy.Schema
@@ -1478,7 +1523,8 @@ var SubnetGroupAlreadyExistsFault_message *smithy.Schema
 var SubnetGroupInUseFault = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.memorydb",
 	Name:      "SubnetGroupInUseFault",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400},
 	&smithytraits.AWSQueryError{ErrorCode: "SubnetGroupInUse",
 		StatusCode: 400})
 var SubnetGroupInUseFault_message *smithy.Schema
@@ -1492,7 +1538,8 @@ var _SubnetGroupList_member *smithy.Schema
 var SubnetGroupNotFoundFault = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.memorydb",
 	Name:      "SubnetGroupNotFoundFault",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 404},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 404},
 	&smithytraits.AWSQueryError{ErrorCode: "SubnetGroupNotFoundFault",
 		StatusCode: 404})
 var SubnetGroupNotFoundFault_message *smithy.Schema
@@ -1500,7 +1547,8 @@ var SubnetGroupNotFoundFault_message *smithy.Schema
 var SubnetGroupQuotaExceededFault = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.memorydb",
 	Name:      "SubnetGroupQuotaExceededFault",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400},
 	&smithytraits.AWSQueryError{ErrorCode: "SubnetGroupQuotaExceeded",
 		StatusCode: 400})
 var SubnetGroupQuotaExceededFault_message *smithy.Schema
@@ -1514,7 +1562,8 @@ var _SubnetIdentifierList_member *smithy.Schema
 var SubnetInUse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.memorydb",
 	Name:      "SubnetInUse",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400},
 	&smithytraits.AWSQueryError{ErrorCode: "SubnetInUse",
 		StatusCode: 400})
 var SubnetInUse_message *smithy.Schema
@@ -1528,7 +1577,8 @@ var _SubnetList_member *smithy.Schema
 var SubnetNotAllowedFault = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.memorydb",
 	Name:      "SubnetNotAllowedFault",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400},
 	&smithytraits.AWSQueryError{ErrorCode: "SubnetNotAllowedFault",
 		StatusCode: 400})
 var SubnetNotAllowedFault_message *smithy.Schema
@@ -1536,7 +1586,8 @@ var SubnetNotAllowedFault_message *smithy.Schema
 var SubnetQuotaExceededFault = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.memorydb",
 	Name:      "SubnetQuotaExceededFault",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400},
 	&smithytraits.AWSQueryError{ErrorCode: "SubnetQuotaExceededFault",
 		StatusCode: 400})
 var SubnetQuotaExceededFault_message *smithy.Schema
@@ -1558,7 +1609,8 @@ var _TagList_member *smithy.Schema
 var TagNotFoundFault = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.memorydb",
 	Name:      "TagNotFoundFault",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 404},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 404},
 	&smithytraits.AWSQueryError{ErrorCode: "TagNotFound",
 		StatusCode: 404})
 var TagNotFoundFault_message *smithy.Schema
@@ -1566,7 +1618,8 @@ var TagNotFoundFault_message *smithy.Schema
 var TagQuotaPerResourceExceeded = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.memorydb",
 	Name:      "TagQuotaPerResourceExceeded",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400},
 	&smithytraits.AWSQueryError{ErrorCode: "TagQuotaPerResourceExceeded",
 		StatusCode: 400})
 var TagQuotaPerResourceExceeded_message *smithy.Schema
@@ -1579,7 +1632,8 @@ var _TargetBucket = smithy.NewSchema(smithy.ShapeID{
 var TestFailoverNotAvailableFault = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.memorydb",
 	Name:      "TestFailoverNotAvailableFault",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400},
 	&smithytraits.AWSQueryError{ErrorCode: "TestFailoverNotAvailableFault",
 		StatusCode: 400})
 var TestFailoverNotAvailableFault_message *smithy.Schema
@@ -1634,7 +1688,8 @@ var User_ARN *smithy.Schema
 var UserAlreadyExistsFault = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.memorydb",
 	Name:      "UserAlreadyExistsFault",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400},
 	&smithytraits.AWSQueryError{ErrorCode: "UserAlreadyExists",
 		StatusCode: 400})
 var UserAlreadyExistsFault_message *smithy.Schema
@@ -1665,7 +1720,8 @@ var _UserNameListInput_member *smithy.Schema
 var UserNotFoundFault = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.memorydb",
 	Name:      "UserNotFoundFault",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 404},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 404},
 	&smithytraits.AWSQueryError{ErrorCode: "UserNotFound",
 		StatusCode: 404})
 var UserNotFoundFault_message *smithy.Schema
@@ -1673,7 +1729,8 @@ var UserNotFoundFault_message *smithy.Schema
 var UserQuotaExceededFault = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.memorydb",
 	Name:      "UserQuotaExceededFault",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400},
 	&smithytraits.AWSQueryError{ErrorCode: "UserQuotaExceeded",
 		StatusCode: 400})
 var UserQuotaExceededFault_message *smithy.Schema

@@ -5,7 +5,9 @@ package ssm
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/ssm/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ssm/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -54,6 +56,22 @@ type DescribePatchBaselinesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribePatchBaselinesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribePatchBaselinesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribePatchBaselinesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializePatchOrchestratorFilterList(s, schemas.DescribePatchBaselinesRequest_Filters, v.Filters)
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.DescribePatchBaselinesRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribePatchBaselinesRequest_NextToken, *v.NextToken)
+	}
+}
+
 type DescribePatchBaselinesOutput struct {
 
 	// An array of PatchBaselineIdentity elements.
@@ -69,13 +87,35 @@ type DescribePatchBaselinesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribePatchBaselinesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribePatchBaselinesResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribePatchBaselinesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializePatchBaselineIdentityList(s, schemas.DescribePatchBaselinesResult_BaselineIdentities, v.BaselineIdentities)
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribePatchBaselinesResult_NextToken, *v.NextToken)
+	}
+}
+func (v *DescribePatchBaselinesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribePatchBaselinesResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribePatchBaselinesResult_BaselineIdentities:
+			return deserializePatchBaselineIdentityList(d, schemas.DescribePatchBaselinesResult_BaselineIdentities, &v.BaselineIdentities)
+		case schemas.DescribePatchBaselinesResult_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.DescribePatchBaselinesResult_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribePatchBaselinesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribePatchBaselines{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribePatchBaselines, schemas.DescribePatchBaselinesRequest, schemas.DescribePatchBaselinesResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribePatchBaselines{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribePatchBaselines, schemas.DescribePatchBaselinesRequest, schemas.DescribePatchBaselinesResult), output: &DescribePatchBaselinesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

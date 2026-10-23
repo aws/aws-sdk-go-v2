@@ -4,6 +4,8 @@ package mturk
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/mturk/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -52,6 +54,18 @@ type DeleteHITInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteHITInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteHITRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteHITInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.HITId != nil {
+		s.WriteString(schemas.DeleteHITRequest_HITId, *v.HITId)
+	}
+}
+
 type DeleteHITOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -59,13 +73,26 @@ type DeleteHITOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteHITOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteHITResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteHITOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteHITOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteHITResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteHITMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteHIT{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteHIT, schemas.DeleteHITRequest, schemas.DeleteHITResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeleteHIT{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteHIT, schemas.DeleteHITRequest, schemas.DeleteHITResponse), output: &DeleteHITOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

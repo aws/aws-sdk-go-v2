@@ -5,7 +5,9 @@ package databasemigrationservice
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/databasemigrationservice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/databasemigrationservice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -49,6 +51,22 @@ type DescribeReplicationSubnetGroupsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeReplicationSubnetGroupsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeReplicationSubnetGroupsMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeReplicationSubnetGroupsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeFilterList(s, schemas.DescribeReplicationSubnetGroupsMessage_Filters, v.Filters)
+	if v.Marker != nil {
+		s.WriteString(schemas.DescribeReplicationSubnetGroupsMessage_Marker, *v.Marker)
+	}
+	if v.MaxRecords != nil {
+		s.WriteInt32(schemas.DescribeReplicationSubnetGroupsMessage_MaxRecords, *v.MaxRecords)
+	}
+}
+
 type DescribeReplicationSubnetGroupsOutput struct {
 
 	//  An optional pagination token provided by a previous request. If this parameter
@@ -65,13 +83,35 @@ type DescribeReplicationSubnetGroupsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeReplicationSubnetGroupsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeReplicationSubnetGroupsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeReplicationSubnetGroupsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Marker != nil {
+		s.WriteString(schemas.DescribeReplicationSubnetGroupsResponse_Marker, *v.Marker)
+	}
+	serializeReplicationSubnetGroups(s, schemas.DescribeReplicationSubnetGroupsResponse_ReplicationSubnetGroups, v.ReplicationSubnetGroups)
+}
+func (v *DescribeReplicationSubnetGroupsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeReplicationSubnetGroupsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeReplicationSubnetGroupsResponse_Marker:
+			v.Marker = new(string)
+			return d.ReadString(schemas.DescribeReplicationSubnetGroupsResponse_Marker, v.Marker)
+		case schemas.DescribeReplicationSubnetGroupsResponse_ReplicationSubnetGroups:
+			return deserializeReplicationSubnetGroups(d, schemas.DescribeReplicationSubnetGroupsResponse_ReplicationSubnetGroups, &v.ReplicationSubnetGroups)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeReplicationSubnetGroupsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeReplicationSubnetGroups{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeReplicationSubnetGroups, schemas.DescribeReplicationSubnetGroupsMessage, schemas.DescribeReplicationSubnetGroupsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeReplicationSubnetGroups{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeReplicationSubnetGroups, schemas.DescribeReplicationSubnetGroupsMessage, schemas.DescribeReplicationSubnetGroupsResponse), output: &DescribeReplicationSubnetGroupsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

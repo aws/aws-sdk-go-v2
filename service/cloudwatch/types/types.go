@@ -9,6 +9,42 @@ import (
 	"time"
 )
 
+// Settings that change the content of the notifications and events that an alarm
+// sends when its state changes. These settings apply to the alarm's actions,
+// whichever state triggers them.
+type ActionConfiguration struct {
+
+	// Settings for including the alarm's tags in its action notifications and
+	// state-change events.
+	AlarmTagsPropagation *AlarmTagsPropagation
+
+	noSmithyDocumentSerde
+}
+
+func (v *ActionConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ActionConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ActionConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AlarmTagsPropagation != nil {
+		s.WriteStruct(schemas.ActionConfiguration_AlarmTagsPropagation)
+		v.AlarmTagsPropagation.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *ActionConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ActionConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ActionConfiguration_AlarmTagsPropagation:
+			v.AlarmTagsPropagation = &AlarmTagsPropagation{}
+			return v.AlarmTagsPropagation.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Represents an individual contributor to a multi-timeseries alarm, containing
 // information about a specific time series and its contribution to the alarm's
 // state.
@@ -307,6 +343,76 @@ func (v *AlarmPromQLCriteria) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
+// Includes the alarm's tags in the notifications that the alarm sends to Amazon
+// SNS topics and Lambda functions. The tags are also included in the alarm's
+// state-change events in Amazon EventBridge. Other types of alarm actions don't
+// receive the tags.
+//
+// By default, the alarm's tags aren't included.
+//
+// Use this to route or filter notifications and events by tag, such as by team or
+// environment. You can also use it to read the alarm's tags without looking them
+// up separately.
+//
+// To limit which tags are included, specify either IncludedTagKeys or
+// ExcludedTagKeys . You can't specify both. If you specify neither, all of the
+// alarm's tags are included. This includes tags that you add to the alarm later.
+type AlarmTagsPropagation struct {
+
+	// Set to true to include the alarm's tags. Set to false to stop including them.
+	//
+	// When this is true , you must have the cloudwatch:ListTagsForResource permission
+	// on the alarm to create or update it.
+	//
+	// This member is required.
+	Enabled *bool
+
+	// The tag keys to exclude. All of the alarm's tags except those with these keys
+	// are included.
+	//
+	// You can specify 1 to 50 tag keys. Each tag key must be 1 to 128 characters long.
+	//
+	// You can't specify both IncludedTagKeys and ExcludedTagKeys .
+	ExcludedTagKeys []string
+
+	// The tag keys to include. Only the alarm's tags with these keys are included.
+	//
+	// You can specify 1 to 50 tag keys. Each tag key must be 1 to 128 characters long.
+	//
+	// You can't specify both IncludedTagKeys and ExcludedTagKeys .
+	IncludedTagKeys []string
+
+	noSmithyDocumentSerde
+}
+
+func (v *AlarmTagsPropagation) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AlarmTagsPropagation)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AlarmTagsPropagation) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Enabled != nil {
+		s.WriteBool(schemas.AlarmTagsPropagation_Enabled, *v.Enabled)
+	}
+	serializeAlarmTagsPropagationTagKeys(s, schemas.AlarmTagsPropagation_ExcludedTagKeys, v.ExcludedTagKeys)
+	serializeAlarmTagsPropagationTagKeys(s, schemas.AlarmTagsPropagation_IncludedTagKeys, v.IncludedTagKeys)
+}
+func (v *AlarmTagsPropagation) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AlarmTagsPropagation, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AlarmTagsPropagation_Enabled:
+			v.Enabled = new(bool)
+			return d.ReadBool(schemas.AlarmTagsPropagation_Enabled, v.Enabled)
+		case schemas.AlarmTagsPropagation_ExcludedTagKeys:
+			return deserializeAlarmTagsPropagationTagKeys(d, schemas.AlarmTagsPropagation_ExcludedTagKeys, &v.ExcludedTagKeys)
+		case schemas.AlarmTagsPropagation_IncludedTagKeys:
+			return deserializeAlarmTagsPropagationTagKeys(d, schemas.AlarmTagsPropagation_IncludedTagKeys, &v.IncludedTagKeys)
+		}
+		return nil
+	})
+}
+
 // An anomaly detection model associated with a particular CloudWatch metric,
 // statistic, or metric math expression. You can use the model to display a band of
 // expected, normal values when the metric is graphed.
@@ -454,6 +560,21 @@ func (v *AnomalyDetector) Deserialize(d smithy.ShapeDeserializer) error {
 // the time zone to use for the metric.
 type AnomalyDetectorConfiguration struct {
 
+	// The speed at which the anomaly detection model adapts to sustained changes in
+	// the metric's baseline. Faster adaptation lets the model track shifting workloads
+	// sooner, but increases the chance that the model treats a real, lasting change as
+	// normal.
+	//
+	// Valid values:
+	//
+	//   - FAST - The model adapts quickly to sustained changes in the baseline.
+	//
+	//   - NORMAL - The model adapts at a moderate pace. This is the default value.
+	//
+	//   - SLOW - The model adapts slowly, reducing the risk of treating a real change
+	//   as normal.
+	AdaptationSpeed AnomalyDetectorAdaptationSpeed
+
 	// An array of time ranges to exclude from use when the anomaly detection model is
 	// trained. Use this to make sure that events that could cause unusual values for
 	// the metric, such as deployments, aren't used when CloudWatch creates the model.
@@ -469,6 +590,21 @@ type AnomalyDetectorConfiguration struct {
 	// [tz database]: https://en.wikipedia.org/wiki/Tz_database
 	MetricTimezone *string
 
+	// The aggressiveness with which CloudWatch filters outliers from the metric data
+	// that the anomaly detection model uses. Stronger filtering excludes more extreme
+	// values, which can produce a tighter band of expected values but may also
+	// suppress legitimate spikes.
+	//
+	// Valid values:
+	//
+	//   - MINIMAL - Excludes only the most extreme outliers.
+	//
+	//   - MODERATE - Excludes a moderate range of outliers. This is the default value.
+	//
+	//   - STRICT - Excludes a wider range of outliers, which can suppress legitimate
+	//   spikes.
+	OutlierFilteringStrength AnomalyDetectorOutlierFilteringStrength
+
 	noSmithyDocumentSerde
 }
 
@@ -479,19 +615,39 @@ func (v *AnomalyDetectorConfiguration) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *AnomalyDetectorConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AdaptationSpeed != "" {
+		s.WriteString(schemas.AnomalyDetectorConfiguration_AdaptationSpeed, string(v.AdaptationSpeed))
+	}
 	serializeAnomalyDetectorExcludedTimeRanges(s, schemas.AnomalyDetectorConfiguration_ExcludedTimeRanges, v.ExcludedTimeRanges)
 	if v.MetricTimezone != nil {
 		s.WriteString(schemas.AnomalyDetectorConfiguration_MetricTimezone, *v.MetricTimezone)
+	}
+	if v.OutlierFilteringStrength != "" {
+		s.WriteString(schemas.AnomalyDetectorConfiguration_OutlierFilteringStrength, string(v.OutlierFilteringStrength))
 	}
 }
 func (v *AnomalyDetectorConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.AnomalyDetectorConfiguration, func(s *smithy.Schema) error {
 		switch s {
+		case schemas.AnomalyDetectorConfiguration_AdaptationSpeed:
+			var ev string
+			if err := d.ReadString(schemas.AnomalyDetectorConfiguration_AdaptationSpeed, &ev); err != nil {
+				return err
+			}
+			v.AdaptationSpeed = AnomalyDetectorAdaptationSpeed(ev)
+			return nil
 		case schemas.AnomalyDetectorConfiguration_ExcludedTimeRanges:
 			return deserializeAnomalyDetectorExcludedTimeRanges(d, schemas.AnomalyDetectorConfiguration_ExcludedTimeRanges, &v.ExcludedTimeRanges)
 		case schemas.AnomalyDetectorConfiguration_MetricTimezone:
 			v.MetricTimezone = new(string)
 			return d.ReadString(schemas.AnomalyDetectorConfiguration_MetricTimezone, v.MetricTimezone)
+		case schemas.AnomalyDetectorConfiguration_OutlierFilteringStrength:
+			var ev string
+			if err := d.ReadString(schemas.AnomalyDetectorConfiguration_OutlierFilteringStrength, &ev); err != nil {
+				return err
+			}
+			v.OutlierFilteringStrength = AnomalyDetectorOutlierFilteringStrength(ev)
+			return nil
 		}
 		return nil
 	})
@@ -499,6 +655,11 @@ func (v *AnomalyDetectorConfiguration) Deserialize(d smithy.ShapeDeserializer) e
 
 // The details about a composite alarm.
 type CompositeAlarm struct {
+
+	// Settings that change the content of the notifications and events that the alarm
+	// sends when its state changes. These settings apply to the alarm's actions,
+	// whichever state triggers them.
+	ActionConfiguration *ActionConfiguration
 
 	// Indicates whether actions should be executed during any changes to the alarm
 	// state.
@@ -591,6 +752,11 @@ func (v *CompositeAlarm) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CompositeAlarm) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ActionConfiguration != nil {
+		s.WriteStruct(schemas.CompositeAlarm_ActionConfiguration)
+		v.ActionConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
 	if v.ActionsEnabled != nil {
 		s.WriteBool(schemas.CompositeAlarm_ActionsEnabled, *v.ActionsEnabled)
 	}
@@ -646,6 +812,9 @@ func (v *CompositeAlarm) SerializeMembers(s smithy.ShapeSerializer) {
 func (v *CompositeAlarm) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CompositeAlarm, func(s *smithy.Schema) error {
 		switch s {
+		case schemas.CompositeAlarm_ActionConfiguration:
+			v.ActionConfiguration = &ActionConfiguration{}
+			return v.ActionConfiguration.Deserialize(d)
 		case schemas.CompositeAlarm_ActionsEnabled:
 			v.ActionsEnabled = new(bool)
 			return d.ReadBool(schemas.CompositeAlarm_ActionsEnabled, v.ActionsEnabled)
@@ -1563,6 +1732,11 @@ func (v *LabelOptions) Deserialize(d smithy.ShapeDeserializer) error {
 // The details about a log alarm.
 type LogAlarm struct {
 
+	// Settings that change the content of the notifications and events that the alarm
+	// sends when its state changes. These settings apply to the alarm's actions,
+	// whichever state triggers them.
+	ActionConfiguration *ActionConfiguration
+
 	// The number of log lines from the most recent scheduled query execution that are
 	// included in alarm action notifications. Valid range is 0 through 50. A value of
 	// 0 means no log lines are included.
@@ -1674,6 +1848,11 @@ func (v *LogAlarm) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *LogAlarm) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ActionConfiguration != nil {
+		s.WriteStruct(schemas.LogAlarm_ActionConfiguration)
+		v.ActionConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
 	if v.ActionLogLineCount != nil {
 		s.WriteInt32(schemas.LogAlarm_ActionLogLineCount, *v.ActionLogLineCount)
 	}
@@ -1745,6 +1924,9 @@ func (v *LogAlarm) SerializeMembers(s smithy.ShapeSerializer) {
 func (v *LogAlarm) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.LogAlarm, func(s *smithy.Schema) error {
 		switch s {
+		case schemas.LogAlarm_ActionConfiguration:
+			v.ActionConfiguration = &ActionConfiguration{}
+			return v.ActionConfiguration.Deserialize(d)
 		case schemas.LogAlarm_ActionLogLineCount:
 			v.ActionLogLineCount = new(int32)
 			return d.ReadInt32(schemas.LogAlarm_ActionLogLineCount, v.ActionLogLineCount)
@@ -2086,6 +2268,11 @@ func (v *Metric) Deserialize(d smithy.ShapeDeserializer) error {
 // The details about a metric alarm.
 type MetricAlarm struct {
 
+	// Settings that change the content of the notifications and events that the alarm
+	// sends when its state changes. These settings apply to the alarm's actions,
+	// whichever state triggers them.
+	ActionConfiguration *ActionConfiguration
+
 	// Indicates whether actions should be executed during any changes to the alarm
 	// state.
 	ActionsEnabled *bool
@@ -2240,6 +2427,11 @@ func (v *MetricAlarm) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *MetricAlarm) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ActionConfiguration != nil {
+		s.WriteStruct(schemas.MetricAlarm_ActionConfiguration)
+		v.ActionConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
 	if v.ActionsEnabled != nil {
 		s.WriteBool(schemas.MetricAlarm_ActionsEnabled, *v.ActionsEnabled)
 	}
@@ -2331,6 +2523,9 @@ func (v *MetricAlarm) SerializeMembers(s smithy.ShapeSerializer) {
 func (v *MetricAlarm) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.MetricAlarm, func(s *smithy.Schema) error {
 		switch s {
+		case schemas.MetricAlarm_ActionConfiguration:
+			v.ActionConfiguration = &ActionConfiguration{}
+			return v.ActionConfiguration.Deserialize(d)
 		case schemas.MetricAlarm_ActionsEnabled:
 			v.ActionsEnabled = new(bool)
 			return d.ReadBool(schemas.MetricAlarm_ActionsEnabled, v.ActionsEnabled)
@@ -3287,6 +3482,57 @@ func (v *MuteTargets) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
+// Selects the metrics in one namespace, for use in the IncludeFilters or
+// ExcludeFilters parameter of [StartOTelEnrichment] or [UpdateOTelEnrichment].
+//
+// A maximum of 100 selectors is allowed across IncludeFilters and ExcludeFilters
+// combined.
+//
+// [UpdateOTelEnrichment]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_UpdateOTelEnrichment.html
+// [StartOTelEnrichment]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_StartOTelEnrichment.html
+type OTelEnrichmentMetricSelector struct {
+
+	// The namespace of the metrics to select. Namespaces are matched exactly and are
+	// case-sensitive.
+	//
+	// This member is required.
+	Namespace *string
+
+	// The names of the metrics to select within the namespace. Metric names are
+	// matched exactly and are case-sensitive. If this parameter is omitted, every
+	// metric in the namespace is selected.
+	//
+	// A maximum of 100 metric names is allowed for each selector.
+	MetricNames []string
+
+	noSmithyDocumentSerde
+}
+
+func (v *OTelEnrichmentMetricSelector) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.OTelEnrichmentMetricSelector)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *OTelEnrichmentMetricSelector) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeOTelEnrichmentMetricNameList(s, schemas.OTelEnrichmentMetricSelector_MetricNames, v.MetricNames)
+	if v.Namespace != nil {
+		s.WriteString(schemas.OTelEnrichmentMetricSelector_Namespace, *v.Namespace)
+	}
+}
+func (v *OTelEnrichmentMetricSelector) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.OTelEnrichmentMetricSelector, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.OTelEnrichmentMetricSelector_MetricNames:
+			return deserializeOTelEnrichmentMetricNameList(d, schemas.OTelEnrichmentMetricSelector_MetricNames, &v.MetricNames)
+		case schemas.OTelEnrichmentMetricSelector_Namespace:
+			v.Namespace = new(string)
+			return d.ReadString(schemas.OTelEnrichmentMetricSelector_Namespace, v.Namespace)
+		}
+		return nil
+	})
+}
+
 // This array is empty if the API operation was successful for all the rules
 // specified in the request. If the operation could not process one of the rules,
 // the following data is returned for each of those rules.
@@ -3389,6 +3635,117 @@ func (v *Range) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.Range_StartTime:
 			v.StartTime = new(time.Time)
 			return d.ReadTime(schemas.Range_StartTime, v.StartTime)
+		}
+		return nil
+	})
+}
+
+// Represents a resource metrics configuration for an Amazon Web Services
+// resource. A resource metrics configuration enables detailed metric collection
+// for the resource that is identified by its Amazon Resource Name (ARN). Each
+// Amazon Web Services resource can have only one resource metrics configuration.
+//
+// This structure is returned by the [CreateResourceMetricsConfiguration], [UpdateResourceMetricsConfiguration], and [GetResourceMetricsConfiguration] operations.
+//
+// [CreateResourceMetricsConfiguration]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_CreateResourceMetricsConfiguration.html
+// [UpdateResourceMetricsConfiguration]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_UpdateResourceMetricsConfiguration.html
+// [GetResourceMetricsConfiguration]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_GetResourceMetricsConfiguration.html
+type ResourceMetricsConfiguration struct {
+
+	// The date and time that the resource metrics configuration was created.
+	//
+	// This member is required.
+	CreatedAt *time.Time
+
+	// The Amazon Resource Name (ARN) of the Amazon Web Services resource that this
+	// configuration applies to.
+	//
+	// This member is required.
+	ResourceArn *string
+
+	// The date and time that the resource metrics configuration was last updated.
+	// When the configuration is first created, this value is the same as CreatedAt .
+	//
+	// This member is required.
+	UpdatedAt *time.Time
+
+	// The metrics that Amazon CloudWatch collects for the resource. If this field is
+	// not present, Amazon CloudWatch collects all available detailed metrics for the
+	// resource.
+	MetricSelections []ResourceMetricSelection
+
+	noSmithyDocumentSerde
+}
+
+func (v *ResourceMetricsConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ResourceMetricsConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ResourceMetricsConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.ResourceMetricsConfiguration_CreatedAt, *v.CreatedAt)
+	}
+	serializeResourceMetricSelectionList(s, schemas.ResourceMetricsConfiguration_MetricSelections, v.MetricSelections)
+	if v.ResourceArn != nil {
+		s.WriteString(schemas.ResourceMetricsConfiguration_ResourceArn, *v.ResourceArn)
+	}
+	if v.UpdatedAt != nil {
+		s.WriteTime(schemas.ResourceMetricsConfiguration_UpdatedAt, *v.UpdatedAt)
+	}
+}
+func (v *ResourceMetricsConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ResourceMetricsConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ResourceMetricsConfiguration_CreatedAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.ResourceMetricsConfiguration_CreatedAt, v.CreatedAt)
+		case schemas.ResourceMetricsConfiguration_MetricSelections:
+			return deserializeResourceMetricSelectionList(d, schemas.ResourceMetricsConfiguration_MetricSelections, &v.MetricSelections)
+		case schemas.ResourceMetricsConfiguration_ResourceArn:
+			v.ResourceArn = new(string)
+			return d.ReadString(schemas.ResourceMetricsConfiguration_ResourceArn, v.ResourceArn)
+		case schemas.ResourceMetricsConfiguration_UpdatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.ResourceMetricsConfiguration_UpdatedAt, v.UpdatedAt)
+		}
+		return nil
+	})
+}
+
+// Specifies which metrics Amazon CloudWatch collects for a resource metrics
+// configuration. Include this in a [CreateResourceMetricsConfiguration]or [UpdateResourceMetricsConfiguration] request to limit collection to a specific
+// set of metrics. If you omit metric selections, Amazon CloudWatch collects all
+// available detailed metrics for the resource.
+//
+// [CreateResourceMetricsConfiguration]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_CreateResourceMetricsConfiguration.html
+// [UpdateResourceMetricsConfiguration]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_UpdateResourceMetricsConfiguration.html
+type ResourceMetricSelection struct {
+
+	// The names of the metrics to collect for the resource. Amazon CloudWatch
+	// collects only the metrics that you list here.
+	//
+	// This member is required.
+	IncludeMetrics []string
+
+	noSmithyDocumentSerde
+}
+
+func (v *ResourceMetricSelection) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ResourceMetricSelection)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ResourceMetricSelection) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeMetricNameList(s, schemas.ResourceMetricSelection_IncludeMetrics, v.IncludeMetrics)
+}
+func (v *ResourceMetricSelection) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ResourceMetricSelection, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ResourceMetricSelection_IncludeMetrics:
+			return deserializeMetricNameList(d, schemas.ResourceMetricSelection_IncludeMetrics, &v.IncludeMetrics)
 		}
 		return nil
 	})

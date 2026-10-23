@@ -4,6 +4,8 @@ package quicksight
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/quicksight/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -52,6 +54,27 @@ type UpdateAccountSettingsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateAccountSettingsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateAccountSettingsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateAccountSettingsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AwsAccountId != nil {
+		s.WriteString(schemas.UpdateAccountSettingsRequest_AwsAccountId, *v.AwsAccountId)
+	}
+	if v.DefaultNamespace != nil {
+		s.WriteString(schemas.UpdateAccountSettingsRequest_DefaultNamespace, *v.DefaultNamespace)
+	}
+	if v.NotificationEmail != nil {
+		s.WriteString(schemas.UpdateAccountSettingsRequest_NotificationEmail, *v.NotificationEmail)
+	}
+	if v.TerminationProtectionEnabled != false {
+		s.WriteBool(schemas.UpdateAccountSettingsRequest_TerminationProtectionEnabled, v.TerminationProtectionEnabled)
+	}
+}
+
 type UpdateAccountSettingsOutput struct {
 
 	// The Amazon Web Services request ID for this operation.
@@ -66,13 +89,37 @@ type UpdateAccountSettingsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateAccountSettingsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateAccountSettingsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateAccountSettingsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RequestId != nil {
+		s.WriteString(schemas.UpdateAccountSettingsResponse_RequestId, *v.RequestId)
+	}
+	if v.Status != 0 {
+		s.WriteInt32(schemas.UpdateAccountSettingsResponse_Status, v.Status)
+	}
+}
+func (v *UpdateAccountSettingsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateAccountSettingsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateAccountSettingsResponse_RequestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.UpdateAccountSettingsResponse_RequestId, v.RequestId)
+		case schemas.UpdateAccountSettingsResponse_Status:
+			return d.ReadInt32(schemas.UpdateAccountSettingsResponse_Status, &v.Status)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateAccountSettingsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateAccountSettings{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateAccountSettings, schemas.UpdateAccountSettingsRequest, schemas.UpdateAccountSettingsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateAccountSettings{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateAccountSettings, schemas.UpdateAccountSettingsRequest, schemas.UpdateAccountSettingsResponse), output: &UpdateAccountSettingsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

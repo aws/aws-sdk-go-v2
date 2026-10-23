@@ -1210,6 +1210,9 @@ func ExampleSourceLocation_outputUsage() {
 	case *types.SourceLocationMemberS3:
 		_ = v.Value // Value is string
 
+	case *types.SourceLocationMemberS3Files:
+		_ = v.Value // Value is types.S3FilesLocation
+
 	case *types.UnknownUnionMember:
 		fmt.Println("unknown tag:", v.Tag)
 
@@ -1220,6 +1223,7 @@ func ExampleSourceLocation_outputUsage() {
 }
 
 var _ *string
+var _ *types.S3FilesLocation
 
 func ExampleSubscribedListingItem_outputUsage() {
 	var union types.SubscribedListingItem

@@ -5,6 +5,8 @@ package partnercentralaccount
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/partnercentralaccount/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -55,6 +57,30 @@ type AssociateAwsTrainingCertificationEmailDomainInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssociateAwsTrainingCertificationEmailDomainInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssociateAwsTrainingCertificationEmailDomainRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssociateAwsTrainingCertificationEmailDomainInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Catalog != nil {
+		s.WriteString(schemas.AssociateAwsTrainingCertificationEmailDomainRequest_Catalog, *v.Catalog)
+	}
+	if v.ClientToken != nil {
+		s.WriteString(schemas.AssociateAwsTrainingCertificationEmailDomainRequest_ClientToken, *v.ClientToken)
+	}
+	if v.Email != nil {
+		s.WriteString(schemas.AssociateAwsTrainingCertificationEmailDomainRequest_Email, *v.Email)
+	}
+	if v.EmailVerificationCode != nil {
+		s.WriteString(schemas.AssociateAwsTrainingCertificationEmailDomainRequest_EmailVerificationCode, *v.EmailVerificationCode)
+	}
+	if v.Identifier != nil {
+		s.WriteString(schemas.AssociateAwsTrainingCertificationEmailDomainRequest_Identifier, *v.Identifier)
+	}
+}
+
 type AssociateAwsTrainingCertificationEmailDomainOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -62,13 +88,26 @@ type AssociateAwsTrainingCertificationEmailDomainOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssociateAwsTrainingCertificationEmailDomainOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssociateAwsTrainingCertificationEmailDomainResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssociateAwsTrainingCertificationEmailDomainOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *AssociateAwsTrainingCertificationEmailDomainOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AssociateAwsTrainingCertificationEmailDomainResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationAssociateAwsTrainingCertificationEmailDomainMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpAssociateAwsTrainingCertificationEmailDomain{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociateAwsTrainingCertificationEmailDomain, schemas.AssociateAwsTrainingCertificationEmailDomainRequest, schemas.AssociateAwsTrainingCertificationEmailDomainResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpAssociateAwsTrainingCertificationEmailDomain{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociateAwsTrainingCertificationEmailDomain, schemas.AssociateAwsTrainingCertificationEmailDomainRequest, schemas.AssociateAwsTrainingCertificationEmailDomainResponse), output: &AssociateAwsTrainingCertificationEmailDomainOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

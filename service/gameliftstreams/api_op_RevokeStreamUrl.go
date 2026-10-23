@@ -4,7 +4,9 @@ package gameliftstreams
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/gameliftstreams/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/gameliftstreams/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -65,6 +67,24 @@ type RevokeStreamUrlInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RevokeStreamUrlInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RevokeStreamUrlInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RevokeStreamUrlInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Identifier != nil {
+		s.WriteString(schemas.RevokeStreamUrlInput_Identifier, *v.Identifier)
+	}
+	if v.RevocationMode != "" {
+		s.WriteString(schemas.RevokeStreamUrlInput_RevocationMode, string(v.RevocationMode))
+	}
+	if v.StreamUrlIdentifier != nil {
+		s.WriteString(schemas.RevokeStreamUrlInput_StreamUrlIdentifier, *v.StreamUrlIdentifier)
+	}
+}
+
 type RevokeStreamUrlOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -72,13 +92,26 @@ type RevokeStreamUrlOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RevokeStreamUrlOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RevokeStreamUrlOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *RevokeStreamUrlOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationRevokeStreamUrlMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpRevokeStreamUrl{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RevokeStreamUrl, schemas.RevokeStreamUrlInput, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpRevokeStreamUrl{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RevokeStreamUrl, schemas.RevokeStreamUrlInput, nil), output: &RevokeStreamUrlOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

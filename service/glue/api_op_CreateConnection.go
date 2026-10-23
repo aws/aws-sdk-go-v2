@@ -4,7 +4,9 @@ package glue
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/glue/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/glue/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -44,6 +46,24 @@ type CreateConnectionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateConnectionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateConnectionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateConnectionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CatalogId != nil {
+		s.WriteString(schemas.CreateConnectionRequest_CatalogId, *v.CatalogId)
+	}
+	if v.ConnectionInput != nil {
+		s.WriteStruct(schemas.CreateConnectionRequest_ConnectionInput)
+		v.ConnectionInput.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeTagsMap(s, schemas.CreateConnectionRequest_Tags, v.Tags)
+}
+
 type CreateConnectionOutput struct {
 
 	// The status of the connection creation request. The request can take some time
@@ -57,13 +77,36 @@ type CreateConnectionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateConnectionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateConnectionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateConnectionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreateConnectionStatus != "" {
+		s.WriteString(schemas.CreateConnectionResponse_CreateConnectionStatus, string(v.CreateConnectionStatus))
+	}
+}
+func (v *CreateConnectionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateConnectionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateConnectionResponse_CreateConnectionStatus:
+			var ev string
+			if err := d.ReadString(schemas.CreateConnectionResponse_CreateConnectionStatus, &ev); err != nil {
+				return err
+			}
+			v.CreateConnectionStatus = types.ConnectionStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateConnectionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateConnection{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateConnection, schemas.CreateConnectionRequest, schemas.CreateConnectionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateConnection{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateConnection, schemas.CreateConnectionRequest, schemas.CreateConnectionResponse), output: &CreateConnectionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,6 +4,8 @@ package kinesis
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/kinesis/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"github.com/aws/smithy-go/ptr"
 )
@@ -45,6 +47,23 @@ type UpdateMaxRecordSizeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateMaxRecordSizeInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateMaxRecordSizeInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateMaxRecordSizeInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxRecordSizeInKiB != nil {
+		s.WriteInt32(schemas.UpdateMaxRecordSizeInput_MaxRecordSizeInKiB, *v.MaxRecordSizeInKiB)
+	}
+	if v.StreamARN != nil {
+		s.WriteString(schemas.UpdateMaxRecordSizeInput_StreamARN, *v.StreamARN)
+	}
+	if v.StreamId != nil {
+		s.WriteString(schemas.UpdateMaxRecordSizeInput_StreamId, *v.StreamId)
+	}
+}
 func (in *UpdateMaxRecordSizeInput) bindEndpointParams(p *EndpointParameters) {
 
 	p.StreamARN = in.StreamARN
@@ -59,13 +78,26 @@ type UpdateMaxRecordSizeOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateMaxRecordSizeOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateMaxRecordSizeOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *UpdateMaxRecordSizeOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateMaxRecordSizeMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateMaxRecordSize{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateMaxRecordSize, schemas.UpdateMaxRecordSizeInput, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateMaxRecordSize{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateMaxRecordSize, schemas.UpdateMaxRecordSizeInput, nil), output: &UpdateMaxRecordSizeOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

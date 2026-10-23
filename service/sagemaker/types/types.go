@@ -4548,6 +4548,50 @@ func (v *AthenaDatasetDefinition) Deserialize(d smithy.ShapeDeserializer) error 
 	})
 }
 
+// The query execution identifier and the result output location for the Amazon
+// Athena query that an Athena step runs.
+type AthenaStepMetadata struct {
+
+	// The unique identifier of the Amazon Athena query execution that was run by this
+	// step execution.
+	QueryExecutionId *string
+
+	// The Amazon S3 location of the Amazon Athena query results. This is the
+	// effective output location reported by GetQueryExecution for the query. This
+	// value can be absent when the query uses Athena managed query results.
+	S3OutputLocation *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *AthenaStepMetadata) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AthenaStepMetadata)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AthenaStepMetadata) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.QueryExecutionId != nil {
+		s.WriteString(schemas.AthenaStepMetadata_QueryExecutionId, *v.QueryExecutionId)
+	}
+	if v.S3OutputLocation != nil {
+		s.WriteString(schemas.AthenaStepMetadata_S3OutputLocation, *v.S3OutputLocation)
+	}
+}
+func (v *AthenaStepMetadata) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AthenaStepMetadata, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AthenaStepMetadata_QueryExecutionId:
+			v.QueryExecutionId = new(string)
+			return d.ReadString(schemas.AthenaStepMetadata_QueryExecutionId, v.QueryExecutionId)
+		case schemas.AthenaStepMetadata_S3OutputLocation:
+			v.S3OutputLocation = new(string)
+			return d.ReadString(schemas.AthenaStepMetadata_S3OutputLocation, v.S3OutputLocation)
+		}
+		return nil
+	})
+}
+
 // Contains a presigned URL and its associated local file path for downloading hub
 // content artifacts.
 type AuthorizedUrl struct {
@@ -7592,6 +7636,55 @@ func (v *Bias) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
+// The billable token usage for a training session, broken down by operation type.
+type BillableTokenUsage struct {
+
+	// The number of prefill tokens consumed.
+	PrefillTokenCount *int64
+
+	// The number of sample tokens consumed.
+	SampleTokenCount *int64
+
+	// The number of training tokens consumed.
+	TrainingTokenCount *int64
+
+	noSmithyDocumentSerde
+}
+
+func (v *BillableTokenUsage) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BillableTokenUsage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BillableTokenUsage) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PrefillTokenCount != nil {
+		s.WriteInt64(schemas.BillableTokenUsage_PrefillTokenCount, *v.PrefillTokenCount)
+	}
+	if v.SampleTokenCount != nil {
+		s.WriteInt64(schemas.BillableTokenUsage_SampleTokenCount, *v.SampleTokenCount)
+	}
+	if v.TrainingTokenCount != nil {
+		s.WriteInt64(schemas.BillableTokenUsage_TrainingTokenCount, *v.TrainingTokenCount)
+	}
+}
+func (v *BillableTokenUsage) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BillableTokenUsage, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BillableTokenUsage_PrefillTokenCount:
+			v.PrefillTokenCount = new(int64)
+			return d.ReadInt64(schemas.BillableTokenUsage_PrefillTokenCount, v.PrefillTokenCount)
+		case schemas.BillableTokenUsage_SampleTokenCount:
+			v.SampleTokenCount = new(int64)
+			return d.ReadInt64(schemas.BillableTokenUsage_SampleTokenCount, v.SampleTokenCount)
+		case schemas.BillableTokenUsage_TrainingTokenCount:
+			v.TrainingTokenCount = new(int64)
+			return d.ReadInt64(schemas.BillableTokenUsage_TrainingTokenCount, v.TrainingTokenCount)
+		}
+		return nil
+	})
+}
+
 // Update policy for a blue/green deployment. If this update policy is specified,
 // SageMaker creates a new fleet during the deployment while maintaining the old
 // fleet. SageMaker flips traffic to the new fleet according to the specified
@@ -9538,6 +9631,180 @@ func (v *ClarifyTextConfig) Deserialize(d smithy.ShapeDeserializer) error {
 			}
 			v.Language = ClarifyTextLanguage(ev)
 			return nil
+		}
+		return nil
+	})
+}
+
+// The Amazon S3 output resources associated with an upstream step that the
+// Cleanup step could not delete.
+type CleanupFailure struct {
+
+	// The error code that identifies why the Cleanup step could not delete the output
+	// resources associated with the upstream step.
+	ErrorCode CleanupFailureErrorCode
+
+	// A message describing why the Cleanup step could not delete the output resources
+	// associated with the upstream step.
+	ErrorMessage *string
+
+	// The name of the upstream step whose Amazon S3 output resources the Cleanup step
+	// could not delete.
+	StepName *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *CleanupFailure) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CleanupFailure)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CleanupFailure) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ErrorCode != "" {
+		s.WriteString(schemas.CleanupFailure_ErrorCode, string(v.ErrorCode))
+	}
+	if v.ErrorMessage != nil {
+		s.WriteString(schemas.CleanupFailure_ErrorMessage, *v.ErrorMessage)
+	}
+	if v.StepName != nil {
+		s.WriteString(schemas.CleanupFailure_StepName, *v.StepName)
+	}
+}
+func (v *CleanupFailure) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CleanupFailure, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CleanupFailure_ErrorCode:
+			var ev string
+			if err := d.ReadString(schemas.CleanupFailure_ErrorCode, &ev); err != nil {
+				return err
+			}
+			v.ErrorCode = CleanupFailureErrorCode(ev)
+			return nil
+		case schemas.CleanupFailure_ErrorMessage:
+			v.ErrorMessage = new(string)
+			return d.ReadString(schemas.CleanupFailure_ErrorMessage, v.ErrorMessage)
+		case schemas.CleanupFailure_StepName:
+			v.StepName = new(string)
+			return d.ReadString(schemas.CleanupFailure_StepName, v.StepName)
+		}
+		return nil
+	})
+}
+
+// The cleanup outcomes for Amazon S3 output resources associated with upstream
+// steps.
+type CleanupStepMetadata struct {
+
+	// The names of upstream steps whose Amazon S3 output resources the Cleanup step
+	// deleted successfully.
+	CleanedSteps []string
+
+	// The upstream steps whose Amazon S3 output resources the Cleanup step could not
+	// delete.
+	FailedSteps []CleanupFailure
+
+	// The names of upstream steps that the Cleanup step skipped. The Cleanup step
+	// skips a step when the output properties needed to locate its resources are
+	// unavailable.
+	SkippedSteps []string
+
+	noSmithyDocumentSerde
+}
+
+func (v *CleanupStepMetadata) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CleanupStepMetadata)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CleanupStepMetadata) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeCleanupStepNameList(s, schemas.CleanupStepMetadata_CleanedSteps, v.CleanedSteps)
+	serializeCleanupFailureList(s, schemas.CleanupStepMetadata_FailedSteps, v.FailedSteps)
+	serializeCleanupStepNameList(s, schemas.CleanupStepMetadata_SkippedSteps, v.SkippedSteps)
+}
+func (v *CleanupStepMetadata) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CleanupStepMetadata, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CleanupStepMetadata_CleanedSteps:
+			return deserializeCleanupStepNameList(d, schemas.CleanupStepMetadata_CleanedSteps, &v.CleanedSteps)
+		case schemas.CleanupStepMetadata_FailedSteps:
+			return deserializeCleanupFailureList(d, schemas.CleanupStepMetadata_FailedSteps, &v.FailedSteps)
+		case schemas.CleanupStepMetadata_SkippedSteps:
+			return deserializeCleanupStepNameList(d, schemas.CleanupStepMetadata_SkippedSteps, &v.SkippedSteps)
+		}
+		return nil
+	})
+}
+
+// The external MySQL-compatible database that the Slurm accounting daemon (
+// slurmdbd ) connects to for a SageMaker HyperPod cluster. You provide the
+// database credentials in an Amazon Web Services Secrets Manager secret instead of
+// in the request.
+type ClusterAccountingDatabase struct {
+
+	// The hostname or endpoint of the accounting database, such as the endpoint of an
+	// Amazon RDS for MySQL or Aurora MySQL database. The database must be reachable
+	// from the subnets and security groups that you configure for the cluster.
+	//
+	// This member is required.
+	Endpoint *string
+
+	// The Amazon Resource Name (ARN) of the Amazon Web Services Secrets Manager
+	// secret that contains the user name and password for the accounting database. The
+	// database user must be able to create the schema and to read from and write to
+	// it.
+	//
+	// This member is required.
+	SecretArn *string
+
+	// The name of the database schema that stores the Slurm accounting data. The
+	// default is slurm_acct_db_ followed by the cluster ID from the cluster ARN, for
+	// example slurm_acct_db_a1b2c3d4e5f6 .
+	Name *string
+
+	// The port that the accounting database listens on. The default is 3306 .
+	Port *int32
+
+	noSmithyDocumentSerde
+}
+
+func (v *ClusterAccountingDatabase) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ClusterAccountingDatabase)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ClusterAccountingDatabase) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Endpoint != nil {
+		s.WriteString(schemas.ClusterAccountingDatabase_Endpoint, *v.Endpoint)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.ClusterAccountingDatabase_Name, *v.Name)
+	}
+	if v.Port != nil {
+		s.WriteInt32(schemas.ClusterAccountingDatabase_Port, *v.Port)
+	}
+	if v.SecretArn != nil {
+		s.WriteString(schemas.ClusterAccountingDatabase_SecretArn, *v.SecretArn)
+	}
+}
+func (v *ClusterAccountingDatabase) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ClusterAccountingDatabase, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ClusterAccountingDatabase_Endpoint:
+			v.Endpoint = new(string)
+			return d.ReadString(schemas.ClusterAccountingDatabase_Endpoint, v.Endpoint)
+		case schemas.ClusterAccountingDatabase_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.ClusterAccountingDatabase_Name, v.Name)
+		case schemas.ClusterAccountingDatabase_Port:
+			v.Port = new(int32)
+			return d.ReadInt32(schemas.ClusterAccountingDatabase_Port, v.Port)
+		case schemas.ClusterAccountingDatabase_SecretArn:
+			v.SecretArn = new(string)
+			return d.ReadString(schemas.ClusterAccountingDatabase_SecretArn, v.SecretArn)
 		}
 		return nil
 	})
@@ -12193,6 +12460,14 @@ func (v *ClusterOrchestratorEksConfig) Deserialize(d smithy.ShapeDeserializer) e
 // HyperPod cluster.
 type ClusterOrchestratorSlurmConfig struct {
 
+	// The external database that stores the Slurm accounting data for the cluster,
+	// such as job history, associations, and usage. When you omit this field, Slurm
+	// accounting uses a database on the cluster's controller node.
+	//
+	// This field is only supported for clusters using Continuous as the
+	// NodeProvisioningMode .
+	AccountingDatabase *ClusterAccountingDatabase
+
 	// The strategy for managing partitions for the Slurm configuration. Valid values
 	// are Managed , Overwrite , and Merge .
 	SlurmConfigStrategy ClusterSlurmConfigStrategy
@@ -12207,6 +12482,11 @@ func (v *ClusterOrchestratorSlurmConfig) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ClusterOrchestratorSlurmConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountingDatabase != nil {
+		s.WriteStruct(schemas.ClusterOrchestratorSlurmConfig_AccountingDatabase)
+		v.AccountingDatabase.SerializeMembers(s)
+		s.CloseStruct()
+	}
 	if v.SlurmConfigStrategy != "" {
 		s.WriteString(schemas.ClusterOrchestratorSlurmConfig_SlurmConfigStrategy, string(v.SlurmConfigStrategy))
 	}
@@ -12214,6 +12494,9 @@ func (v *ClusterOrchestratorSlurmConfig) SerializeMembers(s smithy.ShapeSerializ
 func (v *ClusterOrchestratorSlurmConfig) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ClusterOrchestratorSlurmConfig, func(s *smithy.Schema) error {
 		switch s {
+		case schemas.ClusterOrchestratorSlurmConfig_AccountingDatabase:
+			v.AccountingDatabase = &ClusterAccountingDatabase{}
+			return v.AccountingDatabase.Deserialize(d)
 		case schemas.ClusterOrchestratorSlurmConfig_SlurmConfigStrategy:
 			var ev string
 			if err := d.ReadString(schemas.ClusterOrchestratorSlurmConfig_SlurmConfigStrategy, &ev); err != nil {
@@ -15052,6 +15335,76 @@ func (v *CustomPosixUserConfig) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.CustomPosixUserConfig_Uid:
 			v.Uid = new(int64)
 			return d.ReadInt64(schemas.CustomPosixUserConfig_Uid, v.Uid)
+		}
+		return nil
+	})
+}
+
+// Metadata information about a change to the external Slurm accounting database
+// of a HyperPod cluster.
+type DatabaseConfigurationMetadata struct {
+
+	// Additional information about a change that succeeded, such as an action to take
+	// on the cluster.
+	Advisory *string
+
+	// An error message describing why the accounting database change failed, and how
+	// to resolve it.
+	FailureMessage *string
+
+	// Whether HyperPod restored the previous accounting database configuration after
+	// the change failed. Valid values:
+	//
+	//   - NotApplicable : The change failed before HyperPod modified the cluster, for
+	//   example because the database could not be reached or rejected the credentials,
+	//   so there was nothing to restore.
+	//
+	//   - Reverted : The change failed after it was applied, and HyperPod restored the
+	//   previous configuration. The cluster continues to use the previous accounting
+	//   database.
+	//
+	//   - RevertFailed : The change failed and HyperPod could not restore the previous
+	//   configuration, so Slurm accounting on the cluster might not be working.
+	//
+	// This field is omitted when the change succeeds.
+	RollbackStatus DatabaseConfigurationRollbackStatus
+
+	noSmithyDocumentSerde
+}
+
+func (v *DatabaseConfigurationMetadata) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DatabaseConfigurationMetadata)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DatabaseConfigurationMetadata) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Advisory != nil {
+		s.WriteString(schemas.DatabaseConfigurationMetadata_Advisory, *v.Advisory)
+	}
+	if v.FailureMessage != nil {
+		s.WriteString(schemas.DatabaseConfigurationMetadata_FailureMessage, *v.FailureMessage)
+	}
+	if v.RollbackStatus != "" {
+		s.WriteString(schemas.DatabaseConfigurationMetadata_RollbackStatus, string(v.RollbackStatus))
+	}
+}
+func (v *DatabaseConfigurationMetadata) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DatabaseConfigurationMetadata, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DatabaseConfigurationMetadata_Advisory:
+			v.Advisory = new(string)
+			return d.ReadString(schemas.DatabaseConfigurationMetadata_Advisory, v.Advisory)
+		case schemas.DatabaseConfigurationMetadata_FailureMessage:
+			v.FailureMessage = new(string)
+			return d.ReadString(schemas.DatabaseConfigurationMetadata_FailureMessage, v.FailureMessage)
+		case schemas.DatabaseConfigurationMetadata_RollbackStatus:
+			var ev string
+			if err := d.ReadString(schemas.DatabaseConfigurationMetadata_RollbackStatus, &ev); err != nil {
+				return err
+			}
+			v.RollbackStatus = DatabaseConfigurationRollbackStatus(ev)
+			return nil
 		}
 		return nil
 	})
@@ -18866,6 +19219,64 @@ func (v *EmrServerlessSettings) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
+// The configurations and outcomes of an Amazon EMR Serverless step execution.
+type EMRServerlessStepMetadata struct {
+
+	// The identifier of the Amazon EMR Serverless application.
+	ApplicationId *string
+
+	// The identifier of the Amazon EMR Serverless job run.
+	JobRunId *string
+
+	// The name of the Amazon EMR Serverless job run.
+	JobRunName *string
+
+	// The path to the log file for the Amazon EMR Serverless job run.
+	LogFilePath *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *EMRServerlessStepMetadata) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EMRServerlessStepMetadata)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EMRServerlessStepMetadata) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationId != nil {
+		s.WriteString(schemas.EMRServerlessStepMetadata_ApplicationId, *v.ApplicationId)
+	}
+	if v.JobRunId != nil {
+		s.WriteString(schemas.EMRServerlessStepMetadata_JobRunId, *v.JobRunId)
+	}
+	if v.JobRunName != nil {
+		s.WriteString(schemas.EMRServerlessStepMetadata_JobRunName, *v.JobRunName)
+	}
+	if v.LogFilePath != nil {
+		s.WriteString(schemas.EMRServerlessStepMetadata_LogFilePath, *v.LogFilePath)
+	}
+}
+func (v *EMRServerlessStepMetadata) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EMRServerlessStepMetadata, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EMRServerlessStepMetadata_ApplicationId:
+			v.ApplicationId = new(string)
+			return d.ReadString(schemas.EMRServerlessStepMetadata_ApplicationId, v.ApplicationId)
+		case schemas.EMRServerlessStepMetadata_JobRunId:
+			v.JobRunId = new(string)
+			return d.ReadString(schemas.EMRServerlessStepMetadata_JobRunId, v.JobRunId)
+		case schemas.EMRServerlessStepMetadata_JobRunName:
+			v.JobRunName = new(string)
+			return d.ReadString(schemas.EMRServerlessStepMetadata_JobRunName, v.JobRunName)
+		case schemas.EMRServerlessStepMetadata_LogFilePath:
+			v.LogFilePath = new(string)
+			return d.ReadString(schemas.EMRServerlessStepMetadata_LogFilePath, v.LogFilePath)
+		}
+		return nil
+	})
+}
+
 // The configuration parameters that specify the IAM roles assumed by the
 // execution role of SageMaker (assumable roles) and the cluster instances or job
 // execution environments (execution roles or runtime roles) to manage and access
@@ -20030,9 +20441,11 @@ func (v *EventDetails) Deserialize(d smithy.ShapeDeserializer) error {
 // The following types satisfy this interface:
 //
 //	EventMetadataMemberCluster
+//	EventMetadataMemberDatabaseConfiguration
 //	EventMetadataMemberInstance
 //	EventMetadataMemberInstanceGroup
 //	EventMetadataMemberInstanceGroupScaling
+//	EventMetadataMemberSlurmHealth
 type EventMetadata interface {
 	isEventMetadata()
 }
@@ -20051,6 +20464,24 @@ func (v *EventMetadataMemberCluster) Serialize(s smithy.ShapeSerializer) {
 	s.CloseStruct()
 }
 func (v *EventMetadataMemberCluster) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
+
+// Metadata specific to events about the external Slurm accounting database of the
+// cluster.
+type EventMetadataMemberDatabaseConfiguration struct {
+	Value DatabaseConfigurationMetadata
+
+	noSmithyDocumentSerde
+}
+
+func (*EventMetadataMemberDatabaseConfiguration) isEventMetadata() {}
+func (v *EventMetadataMemberDatabaseConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EventMetadata_DatabaseConfiguration)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *EventMetadataMemberDatabaseConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
 	return v.Value.Deserialize(d)
 }
 
@@ -20102,6 +20533,24 @@ func (v *EventMetadataMemberInstanceGroupScaling) Serialize(s smithy.ShapeSerial
 	s.CloseStruct()
 }
 func (v *EventMetadataMemberInstanceGroupScaling) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
+
+// Metadata specific to events about the health of the Slurm components on the
+// controller node of the cluster.
+type EventMetadataMemberSlurmHealth struct {
+	Value SlurmHealthMetadata
+
+	noSmithyDocumentSerde
+}
+
+func (*EventMetadataMemberSlurmHealth) isEventMetadata() {}
+func (v *EventMetadataMemberSlurmHealth) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EventMetadata_SlurmHealth)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *EventMetadataMemberSlurmHealth) Deserialize(d smithy.ShapeDeserializer) error {
 	return v.Value.Deserialize(d)
 }
 
@@ -21635,6 +22084,138 @@ func (v *FlowDefinitionSummary) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
+// The result of the selector that identifies an iteration of a ForEach step.
+type ForEachSelectorResult struct {
+
+	// The index of the iteration within the ForEach step.
+	Index *int32
+
+	// The name of the step associated with the iteration.
+	StepName *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *ForEachSelectorResult) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ForEachSelectorResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ForEachSelectorResult) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Index != nil {
+		s.WriteInt32(schemas.ForEachSelectorResult_Index, *v.Index)
+	}
+	if v.StepName != nil {
+		s.WriteString(schemas.ForEachSelectorResult_StepName, *v.StepName)
+	}
+}
+func (v *ForEachSelectorResult) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ForEachSelectorResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ForEachSelectorResult_Index:
+			v.Index = new(int32)
+			return d.ReadInt32(schemas.ForEachSelectorResult_Index, v.Index)
+		case schemas.ForEachSelectorResult_StepName:
+			v.StepName = new(string)
+			return d.ReadString(schemas.ForEachSelectorResult_StepName, v.StepName)
+		}
+		return nil
+	})
+}
+
+// The status, the iteration-step counts, and the selector information for a
+// ForEach step execution.
+type ForEachStepMetadata struct {
+
+	// The number of iteration steps that failed.
+	FailedStepCount *int32
+
+	// The number of input items that the ForEach step iterates over.
+	InputItemCount *int32
+
+	// Identifies the body step and iteration selected within the ForEach step.
+	Selector *ForEachSelectorResult
+
+	// The status of the ForEach step execution.
+	Status ForEachStatus
+
+	// The number of iteration steps that were stopped.
+	StoppedStepCount *int32
+
+	// The number of iteration steps that completed successfully.
+	SucceededStepCount *int32
+
+	// The total number of steps generated across all iterations of the ForEach step.
+	TotalStepCount *int32
+
+	noSmithyDocumentSerde
+}
+
+func (v *ForEachStepMetadata) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ForEachStepMetadata)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ForEachStepMetadata) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FailedStepCount != nil {
+		s.WriteInt32(schemas.ForEachStepMetadata_FailedStepCount, *v.FailedStepCount)
+	}
+	if v.InputItemCount != nil {
+		s.WriteInt32(schemas.ForEachStepMetadata_InputItemCount, *v.InputItemCount)
+	}
+	if v.Selector != nil {
+		s.WriteStruct(schemas.ForEachStepMetadata_Selector)
+		v.Selector.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.ForEachStepMetadata_Status, string(v.Status))
+	}
+	if v.StoppedStepCount != nil {
+		s.WriteInt32(schemas.ForEachStepMetadata_StoppedStepCount, *v.StoppedStepCount)
+	}
+	if v.SucceededStepCount != nil {
+		s.WriteInt32(schemas.ForEachStepMetadata_SucceededStepCount, *v.SucceededStepCount)
+	}
+	if v.TotalStepCount != nil {
+		s.WriteInt32(schemas.ForEachStepMetadata_TotalStepCount, *v.TotalStepCount)
+	}
+}
+func (v *ForEachStepMetadata) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ForEachStepMetadata, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ForEachStepMetadata_FailedStepCount:
+			v.FailedStepCount = new(int32)
+			return d.ReadInt32(schemas.ForEachStepMetadata_FailedStepCount, v.FailedStepCount)
+		case schemas.ForEachStepMetadata_InputItemCount:
+			v.InputItemCount = new(int32)
+			return d.ReadInt32(schemas.ForEachStepMetadata_InputItemCount, v.InputItemCount)
+		case schemas.ForEachStepMetadata_Selector:
+			v.Selector = &ForEachSelectorResult{}
+			return v.Selector.Deserialize(d)
+		case schemas.ForEachStepMetadata_Status:
+			var ev string
+			if err := d.ReadString(schemas.ForEachStepMetadata_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = ForEachStatus(ev)
+			return nil
+		case schemas.ForEachStepMetadata_StoppedStepCount:
+			v.StoppedStepCount = new(int32)
+			return d.ReadInt32(schemas.ForEachStepMetadata_StoppedStepCount, v.StoppedStepCount)
+		case schemas.ForEachStepMetadata_SucceededStepCount:
+			v.SucceededStepCount = new(int32)
+			return d.ReadInt32(schemas.ForEachStepMetadata_SucceededStepCount, v.SucceededStepCount)
+		case schemas.ForEachStepMetadata_TotalStepCount:
+			v.TotalStepCount = new(int32)
+			return d.ReadInt32(schemas.ForEachStepMetadata_TotalStepCount, v.TotalStepCount)
+		}
+		return nil
+	})
+}
+
 // Configuration settings for an Amazon FSx for Lustre file system to be used with
 // the cluster.
 type FSxLustreConfig struct {
@@ -22007,6 +22588,243 @@ func (v *HubAccessConfig) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.HubAccessConfig_HubContentArn:
 			v.HubContentArn = new(string)
 			return d.ReadString(schemas.HubAccessConfig_HubContentArn, v.HubContentArn)
+		}
+		return nil
+	})
+}
+
+// Contains information about a hub content resource, including its name, version,
+// type, associated documents, dependencies, and status, as returned by a search
+// result.
+type HubContent struct {
+
+	// The date and time that hub content was created.
+	//
+	// This member is required.
+	CreationTime *time.Time
+
+	// The document schema version for the hub content.
+	//
+	// This member is required.
+	DocumentSchemaVersion *string
+
+	// The Amazon Resource Name (ARN) of the hub that contains the content.
+	//
+	// This member is required.
+	HubArn *string
+
+	// The Amazon Resource Name (ARN) of the hub content.
+	//
+	// This member is required.
+	HubContentArn *string
+
+	// The name of the hub content.
+	//
+	// This member is required.
+	HubContentName *string
+
+	// The status of the hub content.
+	//
+	// This member is required.
+	HubContentStatus HubContentStatus
+
+	// The type of hub content.
+	//
+	// This member is required.
+	HubContentType HubContentType
+
+	// The version of the hub content.
+	//
+	// This member is required.
+	HubContentVersion *string
+
+	// The name of the hub that contains the content.
+	//
+	// This member is required.
+	HubName *string
+
+	// The failure reason if importing hub content failed.
+	FailureReason *string
+
+	// The location of any dependencies that the hub content has, such as scripts,
+	// model artifacts, datasets, or notebooks.
+	HubContentDependencies []HubContentDependency
+
+	// A description of the hub content.
+	HubContentDescription *string
+
+	// The display name of the hub content.
+	HubContentDisplayName *string
+
+	// The hub content document that describes information about the hub content such
+	// as type, associated containers, scripts, and more.
+	HubContentDocument *string
+
+	// A string that provides a description of the hub content. This string can
+	// include links, tables, and standard markdown formatting.
+	HubContentMarkdown *string
+
+	// The searchable keywords for the hub content.
+	HubContentSearchKeywords []string
+
+	// The last modified time of the hub content.
+	LastModifiedTime *time.Time
+
+	// The minimum version of the hub content.
+	ReferenceMinVersion *string
+
+	// The Amazon Resource Name (ARN) of the public hub content.
+	SageMakerPublicHubContentArn *string
+
+	// The support status of the hub content.
+	SupportStatus HubContentSupportStatus
+
+	// Any tags associated with the hub content.
+	Tags []Tag
+
+	noSmithyDocumentSerde
+}
+
+func (v *HubContent) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.HubContent)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *HubContent) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.HubContent_CreationTime, *v.CreationTime)
+	}
+	if v.DocumentSchemaVersion != nil {
+		s.WriteString(schemas.HubContent_DocumentSchemaVersion, *v.DocumentSchemaVersion)
+	}
+	if v.FailureReason != nil {
+		s.WriteString(schemas.HubContent_FailureReason, *v.FailureReason)
+	}
+	if v.HubArn != nil {
+		s.WriteString(schemas.HubContent_HubArn, *v.HubArn)
+	}
+	if v.HubContentArn != nil {
+		s.WriteString(schemas.HubContent_HubContentArn, *v.HubContentArn)
+	}
+	serializeHubContentDependencyList(s, schemas.HubContent_HubContentDependencies, v.HubContentDependencies)
+	if v.HubContentDescription != nil {
+		s.WriteString(schemas.HubContent_HubContentDescription, *v.HubContentDescription)
+	}
+	if v.HubContentDisplayName != nil {
+		s.WriteString(schemas.HubContent_HubContentDisplayName, *v.HubContentDisplayName)
+	}
+	if v.HubContentDocument != nil {
+		s.WriteString(schemas.HubContent_HubContentDocument, *v.HubContentDocument)
+	}
+	if v.HubContentMarkdown != nil {
+		s.WriteString(schemas.HubContent_HubContentMarkdown, *v.HubContentMarkdown)
+	}
+	if v.HubContentName != nil {
+		s.WriteString(schemas.HubContent_HubContentName, *v.HubContentName)
+	}
+	serializeHubContentSearchKeywordList(s, schemas.HubContent_HubContentSearchKeywords, v.HubContentSearchKeywords)
+	if v.HubContentStatus != "" {
+		s.WriteString(schemas.HubContent_HubContentStatus, string(v.HubContentStatus))
+	}
+	if v.HubContentType != "" {
+		s.WriteString(schemas.HubContent_HubContentType, string(v.HubContentType))
+	}
+	if v.HubContentVersion != nil {
+		s.WriteString(schemas.HubContent_HubContentVersion, *v.HubContentVersion)
+	}
+	if v.HubName != nil {
+		s.WriteString(schemas.HubContent_HubName, *v.HubName)
+	}
+	if v.LastModifiedTime != nil {
+		s.WriteTime(schemas.HubContent_LastModifiedTime, *v.LastModifiedTime)
+	}
+	if v.ReferenceMinVersion != nil {
+		s.WriteString(schemas.HubContent_ReferenceMinVersion, *v.ReferenceMinVersion)
+	}
+	if v.SageMakerPublicHubContentArn != nil {
+		s.WriteString(schemas.HubContent_SageMakerPublicHubContentArn, *v.SageMakerPublicHubContentArn)
+	}
+	if v.SupportStatus != "" {
+		s.WriteString(schemas.HubContent_SupportStatus, string(v.SupportStatus))
+	}
+	serializeTagList(s, schemas.HubContent_Tags, v.Tags)
+}
+func (v *HubContent) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.HubContent, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.HubContent_CreationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.HubContent_CreationTime, v.CreationTime)
+		case schemas.HubContent_DocumentSchemaVersion:
+			v.DocumentSchemaVersion = new(string)
+			return d.ReadString(schemas.HubContent_DocumentSchemaVersion, v.DocumentSchemaVersion)
+		case schemas.HubContent_FailureReason:
+			v.FailureReason = new(string)
+			return d.ReadString(schemas.HubContent_FailureReason, v.FailureReason)
+		case schemas.HubContent_HubArn:
+			v.HubArn = new(string)
+			return d.ReadString(schemas.HubContent_HubArn, v.HubArn)
+		case schemas.HubContent_HubContentArn:
+			v.HubContentArn = new(string)
+			return d.ReadString(schemas.HubContent_HubContentArn, v.HubContentArn)
+		case schemas.HubContent_HubContentDependencies:
+			return deserializeHubContentDependencyList(d, schemas.HubContent_HubContentDependencies, &v.HubContentDependencies)
+		case schemas.HubContent_HubContentDescription:
+			v.HubContentDescription = new(string)
+			return d.ReadString(schemas.HubContent_HubContentDescription, v.HubContentDescription)
+		case schemas.HubContent_HubContentDisplayName:
+			v.HubContentDisplayName = new(string)
+			return d.ReadString(schemas.HubContent_HubContentDisplayName, v.HubContentDisplayName)
+		case schemas.HubContent_HubContentDocument:
+			v.HubContentDocument = new(string)
+			return d.ReadString(schemas.HubContent_HubContentDocument, v.HubContentDocument)
+		case schemas.HubContent_HubContentMarkdown:
+			v.HubContentMarkdown = new(string)
+			return d.ReadString(schemas.HubContent_HubContentMarkdown, v.HubContentMarkdown)
+		case schemas.HubContent_HubContentName:
+			v.HubContentName = new(string)
+			return d.ReadString(schemas.HubContent_HubContentName, v.HubContentName)
+		case schemas.HubContent_HubContentSearchKeywords:
+			return deserializeHubContentSearchKeywordList(d, schemas.HubContent_HubContentSearchKeywords, &v.HubContentSearchKeywords)
+		case schemas.HubContent_HubContentStatus:
+			var ev string
+			if err := d.ReadString(schemas.HubContent_HubContentStatus, &ev); err != nil {
+				return err
+			}
+			v.HubContentStatus = HubContentStatus(ev)
+			return nil
+		case schemas.HubContent_HubContentType:
+			var ev string
+			if err := d.ReadString(schemas.HubContent_HubContentType, &ev); err != nil {
+				return err
+			}
+			v.HubContentType = HubContentType(ev)
+			return nil
+		case schemas.HubContent_HubContentVersion:
+			v.HubContentVersion = new(string)
+			return d.ReadString(schemas.HubContent_HubContentVersion, v.HubContentVersion)
+		case schemas.HubContent_HubName:
+			v.HubName = new(string)
+			return d.ReadString(schemas.HubContent_HubName, v.HubName)
+		case schemas.HubContent_LastModifiedTime:
+			v.LastModifiedTime = new(time.Time)
+			return d.ReadTime(schemas.HubContent_LastModifiedTime, v.LastModifiedTime)
+		case schemas.HubContent_ReferenceMinVersion:
+			v.ReferenceMinVersion = new(string)
+			return d.ReadString(schemas.HubContent_ReferenceMinVersion, v.ReferenceMinVersion)
+		case schemas.HubContent_SageMakerPublicHubContentArn:
+			v.SageMakerPublicHubContentArn = new(string)
+			return d.ReadString(schemas.HubContent_SageMakerPublicHubContentArn, v.SageMakerPublicHubContentArn)
+		case schemas.HubContent_SupportStatus:
+			var ev string
+			if err := d.ReadString(schemas.HubContent_SupportStatus, &ev); err != nil {
+				return err
+			}
+			v.SupportStatus = HubContentSupportStatus(ev)
+			return nil
+		case schemas.HubContent_Tags:
+			return deserializeTagList(d, schemas.HubContent_Tags, &v.Tags)
 		}
 		return nil
 	})
@@ -29117,6 +29935,55 @@ func (v *IntegerParameterRangeSpecification) Deserialize(d smithy.ShapeDeseriali
 	})
 }
 
+// The context for an iteration of a ForEach step.
+type IterationContext struct {
+
+	// The index of the iteration within the ForEach step.
+	Index *int32
+
+	// The input item that is being processed in this iteration.
+	Item *string
+
+	// The name of the ForEach step that generated this iteration.
+	ParentStepName *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *IterationContext) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.IterationContext)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *IterationContext) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Index != nil {
+		s.WriteInt32(schemas.IterationContext_Index, *v.Index)
+	}
+	if v.Item != nil {
+		s.WriteString(schemas.IterationContext_Item, *v.Item)
+	}
+	if v.ParentStepName != nil {
+		s.WriteString(schemas.IterationContext_ParentStepName, *v.ParentStepName)
+	}
+}
+func (v *IterationContext) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.IterationContext, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.IterationContext_Index:
+			v.Index = new(int32)
+			return d.ReadInt32(schemas.IterationContext_Index, v.Index)
+		case schemas.IterationContext_Item:
+			v.Item = new(string)
+			return d.ReadString(schemas.IterationContext_Item, v.Item)
+		case schemas.IterationContext_ParentStepName:
+			v.ParentStepName = new(string)
+			return d.ReadString(schemas.IterationContext_ParentStepName, v.ParentStepName)
+		}
+		return nil
+	})
+}
+
 // The properties of a job returned by the [Search] API.
 //
 // [Search]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_Search.html
@@ -30992,6 +31859,51 @@ func (v *LineageMetadata) Deserialize(d smithy.ShapeDeserializer) error {
 			return deserializeAssociationInfoList(d, schemas.LineageMetadata_Associations, &v.Associations)
 		case schemas.LineageMetadata_ContextArns:
 			return deserializeMapString2048(d, schemas.LineageMetadata_ContextArns, &v.ContextArns)
+		}
+		return nil
+	})
+}
+
+// The Low-Rank Adaptation (LoRA) configuration for a training session, including
+// the rank and alpha parameters.
+type LoraConfig struct {
+
+	// The Low-Rank Adaptation (LoRA) scaling factor.
+	//
+	// This member is required.
+	Alpha *int32
+
+	// The rank of the Low-Rank Adaptation (LoRA) adapter matrices.
+	//
+	// This member is required.
+	Rank *int32
+
+	noSmithyDocumentSerde
+}
+
+func (v *LoraConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LoraConfig)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *LoraConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Alpha != nil {
+		s.WriteInt32(schemas.LoraConfig_Alpha, *v.Alpha)
+	}
+	if v.Rank != nil {
+		s.WriteInt32(schemas.LoraConfig_Rank, *v.Rank)
+	}
+}
+func (v *LoraConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LoraConfig, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LoraConfig_Alpha:
+			v.Alpha = new(int32)
+			return d.ReadInt32(schemas.LoraConfig_Alpha, v.Alpha)
+		case schemas.LoraConfig_Rank:
+			v.Rank = new(int32)
+			return d.ReadInt32(schemas.LoraConfig_Rank, v.Rank)
 		}
 		return nil
 	})
@@ -40847,6 +41759,10 @@ type PipelineExecutionStep struct {
 	// failed its execution.
 	FailureReason *string
 
+	// The context for the iteration of a ForEach step that generated this step
+	// execution.
+	IterationContext *IterationContext
+
 	// Metadata to run the pipeline step.
 	Metadata *PipelineExecutionStepMetadata
 
@@ -40893,6 +41809,11 @@ func (v *PipelineExecutionStep) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.FailureReason != nil {
 		s.WriteString(schemas.PipelineExecutionStep_FailureReason, *v.FailureReason)
 	}
+	if v.IterationContext != nil {
+		s.WriteStruct(schemas.PipelineExecutionStep_IterationContext)
+		v.IterationContext.SerializeMembers(s)
+		s.CloseStruct()
+	}
 	if v.Metadata != nil {
 		s.WriteStruct(schemas.PipelineExecutionStep_Metadata)
 		v.Metadata.SerializeMembers(s)
@@ -40934,6 +41855,9 @@ func (v *PipelineExecutionStep) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.PipelineExecutionStep_FailureReason:
 			v.FailureReason = new(string)
 			return d.ReadString(schemas.PipelineExecutionStep_FailureReason, v.FailureReason)
+		case schemas.PipelineExecutionStep_IterationContext:
+			v.IterationContext = &IterationContext{}
+			return v.IterationContext.Deserialize(d)
 		case schemas.PipelineExecutionStep_Metadata:
 			v.Metadata = &PipelineExecutionStepMetadata{}
 			return v.Metadata.Deserialize(d)
@@ -40966,6 +41890,9 @@ func (v *PipelineExecutionStep) Deserialize(d smithy.ShapeDeserializer) error {
 
 // Metadata for a step execution.
 type PipelineExecutionStepMetadata struct {
+
+	// The metadata for the Athena step execution.
+	Athena *AthenaStepMetadata
 
 	// The Amazon Resource Name (ARN) of the AutoML job that was run by this step.
 	AutoMLJob *AutoMLJobStepMetadata
@@ -41012,11 +41939,17 @@ type PipelineExecutionStepMetadata struct {
 	//   CalculatedBaseline .
 	ClarifyCheck *ClarifyCheckStepMetadata
 
+	// The metadata for the cleanup step execution.
+	Cleanup *CleanupStepMetadata
+
 	// The outcome of the condition evaluation that was run by this step execution.
 	Condition *ConditionStepMetadata
 
 	// The configurations and outcomes of an Amazon EMR step execution.
 	EMR *EMRStepMetadata
+
+	// The configurations and outcomes of an Amazon EMR Serverless step execution.
+	EMRServerless *EMRServerlessStepMetadata
 
 	// The endpoint that was invoked during this step execution.
 	Endpoint *EndpointStepMetadata
@@ -41027,6 +41960,9 @@ type PipelineExecutionStepMetadata struct {
 
 	// The configurations and outcomes of a Fail step execution.
 	Fail *FailStepMetadata
+
+	// The metadata for the ForEach step execution.
+	ForEach *ForEachStepMetadata
 
 	//  The metadata of the inference component used in pipeline execution step.
 	InferenceComponent *InferenceComponentMetadata
@@ -41097,6 +42033,11 @@ func (v *PipelineExecutionStepMetadata) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *PipelineExecutionStepMetadata) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Athena != nil {
+		s.WriteStruct(schemas.PipelineExecutionStepMetadata_Athena)
+		v.Athena.SerializeMembers(s)
+		s.CloseStruct()
+	}
 	if v.AutoMLJob != nil {
 		s.WriteStruct(schemas.PipelineExecutionStepMetadata_AutoMLJob)
 		v.AutoMLJob.SerializeMembers(s)
@@ -41132,6 +42073,11 @@ func (v *PipelineExecutionStepMetadata) SerializeMembers(s smithy.ShapeSerialize
 		v.ClarifyCheck.SerializeMembers(s)
 		s.CloseStruct()
 	}
+	if v.Cleanup != nil {
+		s.WriteStruct(schemas.PipelineExecutionStepMetadata_Cleanup)
+		v.Cleanup.SerializeMembers(s)
+		s.CloseStruct()
+	}
 	if v.Condition != nil {
 		s.WriteStruct(schemas.PipelineExecutionStepMetadata_Condition)
 		v.Condition.SerializeMembers(s)
@@ -41140,6 +42086,11 @@ func (v *PipelineExecutionStepMetadata) SerializeMembers(s smithy.ShapeSerialize
 	if v.EMR != nil {
 		s.WriteStruct(schemas.PipelineExecutionStepMetadata_EMR)
 		v.EMR.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.EMRServerless != nil {
+		s.WriteStruct(schemas.PipelineExecutionStepMetadata_EMRServerless)
+		v.EMRServerless.SerializeMembers(s)
 		s.CloseStruct()
 	}
 	if v.Endpoint != nil {
@@ -41155,6 +42106,11 @@ func (v *PipelineExecutionStepMetadata) SerializeMembers(s smithy.ShapeSerialize
 	if v.Fail != nil {
 		s.WriteStruct(schemas.PipelineExecutionStepMetadata_Fail)
 		v.Fail.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ForEach != nil {
+		s.WriteStruct(schemas.PipelineExecutionStepMetadata_ForEach)
+		v.ForEach.SerializeMembers(s)
 		s.CloseStruct()
 	}
 	if v.InferenceComponent != nil {
@@ -41216,6 +42172,9 @@ func (v *PipelineExecutionStepMetadata) SerializeMembers(s smithy.ShapeSerialize
 func (v *PipelineExecutionStepMetadata) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.PipelineExecutionStepMetadata, func(s *smithy.Schema) error {
 		switch s {
+		case schemas.PipelineExecutionStepMetadata_Athena:
+			v.Athena = &AthenaStepMetadata{}
+			return v.Athena.Deserialize(d)
 		case schemas.PipelineExecutionStepMetadata_AutoMLJob:
 			v.AutoMLJob = &AutoMLJobStepMetadata{}
 			return v.AutoMLJob.Deserialize(d)
@@ -41237,12 +42196,18 @@ func (v *PipelineExecutionStepMetadata) Deserialize(d smithy.ShapeDeserializer) 
 		case schemas.PipelineExecutionStepMetadata_ClarifyCheck:
 			v.ClarifyCheck = &ClarifyCheckStepMetadata{}
 			return v.ClarifyCheck.Deserialize(d)
+		case schemas.PipelineExecutionStepMetadata_Cleanup:
+			v.Cleanup = &CleanupStepMetadata{}
+			return v.Cleanup.Deserialize(d)
 		case schemas.PipelineExecutionStepMetadata_Condition:
 			v.Condition = &ConditionStepMetadata{}
 			return v.Condition.Deserialize(d)
 		case schemas.PipelineExecutionStepMetadata_EMR:
 			v.EMR = &EMRStepMetadata{}
 			return v.EMR.Deserialize(d)
+		case schemas.PipelineExecutionStepMetadata_EMRServerless:
+			v.EMRServerless = &EMRServerlessStepMetadata{}
+			return v.EMRServerless.Deserialize(d)
 		case schemas.PipelineExecutionStepMetadata_Endpoint:
 			v.Endpoint = &EndpointStepMetadata{}
 			return v.Endpoint.Deserialize(d)
@@ -41252,6 +42217,9 @@ func (v *PipelineExecutionStepMetadata) Deserialize(d smithy.ShapeDeserializer) 
 		case schemas.PipelineExecutionStepMetadata_Fail:
 			v.Fail = &FailStepMetadata{}
 			return v.Fail.Deserialize(d)
+		case schemas.PipelineExecutionStepMetadata_ForEach:
+			v.ForEach = &ForEachStepMetadata{}
+			return v.ForEach.Deserialize(d)
 		case schemas.PipelineExecutionStepMetadata_InferenceComponent:
 			v.InferenceComponent = &InferenceComponentMetadata{}
 			return v.InferenceComponent.Deserialize(d)
@@ -48676,6 +49644,9 @@ type SearchRecord struct {
 	// The feature metadata used to search through the features.
 	FeatureMetadata *FeatureMetadata
 
+	// The properties of a hub content resource.
+	HubContent *HubContent
+
 	// The properties of a hyperparameter tuning job.
 	HyperParameterTuningJob *HyperParameterTuningJobSearchEntity
 
@@ -48755,6 +49726,11 @@ func (v *SearchRecord) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.FeatureMetadata != nil {
 		s.WriteStruct(schemas.SearchRecord_FeatureMetadata)
 		v.FeatureMetadata.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.HubContent != nil {
+		s.WriteStruct(schemas.SearchRecord_HubContent)
+		v.HubContent.SerializeMembers(s)
 		s.CloseStruct()
 	}
 	if v.HyperParameterTuningJob != nil {
@@ -48838,6 +49814,9 @@ func (v *SearchRecord) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.SearchRecord_FeatureMetadata:
 			v.FeatureMetadata = &FeatureMetadata{}
 			return v.FeatureMetadata.Deserialize(d)
+		case schemas.SearchRecord_HubContent:
+			v.HubContent = &HubContent{}
+			return v.HubContent.Deserialize(d)
 		case schemas.SearchRecord_HyperParameterTuningJob:
 			v.HyperParameterTuningJob = &HyperParameterTuningJobSearchEntity{}
 			return v.HyperParameterTuningJob.Deserialize(d)
@@ -49683,6 +50662,85 @@ func (v *ShuffleConfig) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.ShuffleConfig_Seed:
 			v.Seed = new(int64)
 			return d.ReadInt64(schemas.ShuffleConfig_Seed, v.Seed)
+		}
+		return nil
+	})
+}
+
+// Metadata information about the health of a Slurm component on the controller
+// node of a HyperPod cluster.
+type SlurmHealthMetadata struct {
+
+	// The Slurm component that the health information describes. The valid value is
+	// Slurmdbd , the Slurm accounting daemon.
+	//
+	// This member is required.
+	Component SlurmHealthComponent
+
+	// The health of the component. Valid values are Healthy and Unhealthy .
+	//
+	// This member is required.
+	Status SlurmHealthStatus
+
+	// The reason the component is unhealthy. Valid values:
+	//
+	//   - DaemonDown : The daemon is not running, so job accounting records are not
+	//   being written.
+	//
+	//   - DaemonDisabled : The daemon is running and its accounting database is
+	//   responding, but the daemon is not enabled to start automatically. Job accounting
+	//   stops the next time the controller node restarts.
+	//
+	//   - DbUnreachable : The daemon is running, but its accounting database did not
+	//   respond. Job accounting records might not be written.
+	//
+	// This field is omitted when the component is healthy.
+	Reason SlurmHealthReason
+
+	noSmithyDocumentSerde
+}
+
+func (v *SlurmHealthMetadata) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SlurmHealthMetadata)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SlurmHealthMetadata) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Component != "" {
+		s.WriteString(schemas.SlurmHealthMetadata_Component, string(v.Component))
+	}
+	if v.Reason != "" {
+		s.WriteString(schemas.SlurmHealthMetadata_Reason, string(v.Reason))
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.SlurmHealthMetadata_Status, string(v.Status))
+	}
+}
+func (v *SlurmHealthMetadata) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SlurmHealthMetadata, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SlurmHealthMetadata_Component:
+			var ev string
+			if err := d.ReadString(schemas.SlurmHealthMetadata_Component, &ev); err != nil {
+				return err
+			}
+			v.Component = SlurmHealthComponent(ev)
+			return nil
+		case schemas.SlurmHealthMetadata_Reason:
+			var ev string
+			if err := d.ReadString(schemas.SlurmHealthMetadata_Reason, &ev); err != nil {
+				return err
+			}
+			v.Reason = SlurmHealthReason(ev)
+			return nil
+		case schemas.SlurmHealthMetadata_Status:
+			var ev string
+			if err := d.ReadString(schemas.SlurmHealthMetadata_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = SlurmHealthStatus(ev)
+			return nil
 		}
 		return nil
 	})
@@ -54012,6 +55070,386 @@ func (v *TrainingRepositoryAuthConfig) Deserialize(d smithy.ShapeDeserializer) e
 		case schemas.TrainingRepositoryAuthConfig_TrainingRepositoryCredentialsProviderArn:
 			v.TrainingRepositoryCredentialsProviderArn = new(string)
 			return d.ReadString(schemas.TrainingRepositoryAuthConfig_TrainingRepositoryCredentialsProviderArn, v.TrainingRepositoryCredentialsProviderArn)
+		}
+		return nil
+	})
+}
+
+// Contains detailed information about a training session.
+type TrainingSessionDetail struct {
+
+	// The date and time that the training session was created.
+	//
+	// This member is required.
+	CreationTime *time.Time
+
+	// The Amazon Resource Name (ARN) of the training session.
+	//
+	// This member is required.
+	TrainingSessionArn *string
+
+	// The name of the training session.
+	//
+	// This member is required.
+	TrainingSessionName *string
+
+	// The current status of the training session.
+	//
+	// This member is required.
+	TrainingSessionStatus TrainingSessionStatus
+
+	// The billable token usage for the training session.
+	BillableTokenUsage *BillableTokenUsage
+
+	// The date and time that the training session ended.
+	EndTime *time.Time
+
+	// If the training session failed or is blocked, detailed error information.
+	ErrorDetails *string
+
+	// The date and time that the training session was last modified.
+	LastModifiedTime *time.Time
+
+	// The sequence number of the last training operation received by the session.
+	LastReceivedSequenceNumber *int32
+
+	// The Low-Rank Adaptation (LoRA) configuration for the training session.
+	LoraConfig *LoraConfig
+
+	// The configuration for the base model.
+	ModelConfig *TrainingSessionModelConfig
+
+	// The Amazon Resource Name (ARN) of the model package group where checkpoints are
+	// published.
+	ModelPackageGroupArn *string
+
+	// The output configuration for the training session.
+	OutputConfig *TrainingSessionOutputConfig
+
+	// The Amazon Resource Name (ARN) of the IAM role associated with the training
+	// session.
+	RoleArn *string
+
+	// The tags associated with the training session.
+	Tags []Tag
+
+	// The Virtual Private Cloud (VPC) configuration for the training session.
+	VpcConfig *VpcConfig
+
+	noSmithyDocumentSerde
+}
+
+func (v *TrainingSessionDetail) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TrainingSessionDetail)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TrainingSessionDetail) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BillableTokenUsage != nil {
+		s.WriteStruct(schemas.TrainingSessionDetail_BillableTokenUsage)
+		v.BillableTokenUsage.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.TrainingSessionDetail_CreationTime, *v.CreationTime)
+	}
+	if v.EndTime != nil {
+		s.WriteTime(schemas.TrainingSessionDetail_EndTime, *v.EndTime)
+	}
+	if v.ErrorDetails != nil {
+		s.WriteString(schemas.TrainingSessionDetail_ErrorDetails, *v.ErrorDetails)
+	}
+	if v.LastModifiedTime != nil {
+		s.WriteTime(schemas.TrainingSessionDetail_LastModifiedTime, *v.LastModifiedTime)
+	}
+	if v.LastReceivedSequenceNumber != nil {
+		s.WriteInt32(schemas.TrainingSessionDetail_LastReceivedSequenceNumber, *v.LastReceivedSequenceNumber)
+	}
+	if v.LoraConfig != nil {
+		s.WriteStruct(schemas.TrainingSessionDetail_LoraConfig)
+		v.LoraConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ModelConfig != nil {
+		s.WriteStruct(schemas.TrainingSessionDetail_ModelConfig)
+		v.ModelConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ModelPackageGroupArn != nil {
+		s.WriteString(schemas.TrainingSessionDetail_ModelPackageGroupArn, *v.ModelPackageGroupArn)
+	}
+	if v.OutputConfig != nil {
+		s.WriteStruct(schemas.TrainingSessionDetail_OutputConfig)
+		v.OutputConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RoleArn != nil {
+		s.WriteString(schemas.TrainingSessionDetail_RoleArn, *v.RoleArn)
+	}
+	serializeTagList(s, schemas.TrainingSessionDetail_Tags, v.Tags)
+	if v.TrainingSessionArn != nil {
+		s.WriteString(schemas.TrainingSessionDetail_TrainingSessionArn, *v.TrainingSessionArn)
+	}
+	if v.TrainingSessionName != nil {
+		s.WriteString(schemas.TrainingSessionDetail_TrainingSessionName, *v.TrainingSessionName)
+	}
+	if v.TrainingSessionStatus != "" {
+		s.WriteString(schemas.TrainingSessionDetail_TrainingSessionStatus, string(v.TrainingSessionStatus))
+	}
+	if v.VpcConfig != nil {
+		s.WriteStruct(schemas.TrainingSessionDetail_VpcConfig)
+		v.VpcConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *TrainingSessionDetail) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TrainingSessionDetail, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TrainingSessionDetail_BillableTokenUsage:
+			v.BillableTokenUsage = &BillableTokenUsage{}
+			return v.BillableTokenUsage.Deserialize(d)
+		case schemas.TrainingSessionDetail_CreationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.TrainingSessionDetail_CreationTime, v.CreationTime)
+		case schemas.TrainingSessionDetail_EndTime:
+			v.EndTime = new(time.Time)
+			return d.ReadTime(schemas.TrainingSessionDetail_EndTime, v.EndTime)
+		case schemas.TrainingSessionDetail_ErrorDetails:
+			v.ErrorDetails = new(string)
+			return d.ReadString(schemas.TrainingSessionDetail_ErrorDetails, v.ErrorDetails)
+		case schemas.TrainingSessionDetail_LastModifiedTime:
+			v.LastModifiedTime = new(time.Time)
+			return d.ReadTime(schemas.TrainingSessionDetail_LastModifiedTime, v.LastModifiedTime)
+		case schemas.TrainingSessionDetail_LastReceivedSequenceNumber:
+			v.LastReceivedSequenceNumber = new(int32)
+			return d.ReadInt32(schemas.TrainingSessionDetail_LastReceivedSequenceNumber, v.LastReceivedSequenceNumber)
+		case schemas.TrainingSessionDetail_LoraConfig:
+			v.LoraConfig = &LoraConfig{}
+			return v.LoraConfig.Deserialize(d)
+		case schemas.TrainingSessionDetail_ModelConfig:
+			v.ModelConfig = &TrainingSessionModelConfig{}
+			return v.ModelConfig.Deserialize(d)
+		case schemas.TrainingSessionDetail_ModelPackageGroupArn:
+			v.ModelPackageGroupArn = new(string)
+			return d.ReadString(schemas.TrainingSessionDetail_ModelPackageGroupArn, v.ModelPackageGroupArn)
+		case schemas.TrainingSessionDetail_OutputConfig:
+			v.OutputConfig = &TrainingSessionOutputConfig{}
+			return v.OutputConfig.Deserialize(d)
+		case schemas.TrainingSessionDetail_RoleArn:
+			v.RoleArn = new(string)
+			return d.ReadString(schemas.TrainingSessionDetail_RoleArn, v.RoleArn)
+		case schemas.TrainingSessionDetail_Tags:
+			return deserializeTagList(d, schemas.TrainingSessionDetail_Tags, &v.Tags)
+		case schemas.TrainingSessionDetail_TrainingSessionArn:
+			v.TrainingSessionArn = new(string)
+			return d.ReadString(schemas.TrainingSessionDetail_TrainingSessionArn, v.TrainingSessionArn)
+		case schemas.TrainingSessionDetail_TrainingSessionName:
+			v.TrainingSessionName = new(string)
+			return d.ReadString(schemas.TrainingSessionDetail_TrainingSessionName, v.TrainingSessionName)
+		case schemas.TrainingSessionDetail_TrainingSessionStatus:
+			var ev string
+			if err := d.ReadString(schemas.TrainingSessionDetail_TrainingSessionStatus, &ev); err != nil {
+				return err
+			}
+			v.TrainingSessionStatus = TrainingSessionStatus(ev)
+			return nil
+		case schemas.TrainingSessionDetail_VpcConfig:
+			v.VpcConfig = &VpcConfig{}
+			return v.VpcConfig.Deserialize(d)
+		}
+		return nil
+	})
+}
+
+// The configuration for the base model used in a training session.
+type TrainingSessionModelConfig struct {
+
+	// The Amazon Resource Name (ARN) of the base foundation model from SageMaker Hub.
+	//
+	// This member is required.
+	BaseModelArn *string
+
+	// Specifies whether you accept the end-user license agreement (EULA) for gated
+	// models.
+	AcceptEula *bool
+
+	noSmithyDocumentSerde
+}
+
+func (v *TrainingSessionModelConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TrainingSessionModelConfig)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TrainingSessionModelConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AcceptEula != nil {
+		s.WriteBool(schemas.TrainingSessionModelConfig_AcceptEula, *v.AcceptEula)
+	}
+	if v.BaseModelArn != nil {
+		s.WriteString(schemas.TrainingSessionModelConfig_BaseModelArn, *v.BaseModelArn)
+	}
+}
+func (v *TrainingSessionModelConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TrainingSessionModelConfig, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TrainingSessionModelConfig_AcceptEula:
+			v.AcceptEula = new(bool)
+			return d.ReadBool(schemas.TrainingSessionModelConfig_AcceptEula, v.AcceptEula)
+		case schemas.TrainingSessionModelConfig_BaseModelArn:
+			v.BaseModelArn = new(string)
+			return d.ReadString(schemas.TrainingSessionModelConfig_BaseModelArn, v.BaseModelArn)
+		}
+		return nil
+	})
+}
+
+// The output configuration for a training session, including the Amazon S3
+// location for checkpoints and model artifacts, and optional encryption settings.
+type TrainingSessionOutputConfig struct {
+
+	// The Amazon S3 location where training session outputs, including checkpoints
+	// and model artifacts, are stored.
+	//
+	// This member is required.
+	S3Location *TrainingSessionS3Location
+
+	noSmithyDocumentSerde
+}
+
+func (v *TrainingSessionOutputConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TrainingSessionOutputConfig)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TrainingSessionOutputConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.S3Location != nil {
+		s.WriteStruct(schemas.TrainingSessionOutputConfig_S3Location)
+		v.S3Location.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *TrainingSessionOutputConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TrainingSessionOutputConfig, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TrainingSessionOutputConfig_S3Location:
+			v.S3Location = &TrainingSessionS3Location{}
+			return v.S3Location.Deserialize(d)
+		}
+		return nil
+	})
+}
+
+// Specifies the Amazon S3 path and optional encryption settings for training
+// session output data, including checkpoints, model artifacts, and invocation
+// results.
+type TrainingSessionS3Location struct {
+
+	// The Amazon S3 path where training session outputs are stored.
+	//
+	// This member is required.
+	Path *string
+
+	// The Amazon Resource Name (ARN) of the KMS key used to encrypt output data. If
+	// not specified, the default Amazon S3 encryption is used.
+	KmsKeyArn *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *TrainingSessionS3Location) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TrainingSessionS3Location)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TrainingSessionS3Location) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.KmsKeyArn != nil {
+		s.WriteString(schemas.TrainingSessionS3Location_KmsKeyArn, *v.KmsKeyArn)
+	}
+	if v.Path != nil {
+		s.WriteString(schemas.TrainingSessionS3Location_Path, *v.Path)
+	}
+}
+func (v *TrainingSessionS3Location) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TrainingSessionS3Location, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TrainingSessionS3Location_KmsKeyArn:
+			v.KmsKeyArn = new(string)
+			return d.ReadString(schemas.TrainingSessionS3Location_KmsKeyArn, v.KmsKeyArn)
+		case schemas.TrainingSessionS3Location_Path:
+			v.Path = new(string)
+			return d.ReadString(schemas.TrainingSessionS3Location_Path, v.Path)
+		}
+		return nil
+	})
+}
+
+// Contains summary information about a training session.
+type TrainingSessionSummary struct {
+
+	// The date and time that the training session was created.
+	//
+	// This member is required.
+	CreationTime *time.Time
+
+	// The Amazon Resource Name (ARN) of the training session.
+	//
+	// This member is required.
+	TrainingSessionArn *string
+
+	// The current status of the training session.
+	//
+	// This member is required.
+	TrainingSessionStatus TrainingSessionStatus
+
+	// The date and time that the training session was last modified.
+	LastModifiedTime *time.Time
+
+	noSmithyDocumentSerde
+}
+
+func (v *TrainingSessionSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TrainingSessionSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TrainingSessionSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.TrainingSessionSummary_CreationTime, *v.CreationTime)
+	}
+	if v.LastModifiedTime != nil {
+		s.WriteTime(schemas.TrainingSessionSummary_LastModifiedTime, *v.LastModifiedTime)
+	}
+	if v.TrainingSessionArn != nil {
+		s.WriteString(schemas.TrainingSessionSummary_TrainingSessionArn, *v.TrainingSessionArn)
+	}
+	if v.TrainingSessionStatus != "" {
+		s.WriteString(schemas.TrainingSessionSummary_TrainingSessionStatus, string(v.TrainingSessionStatus))
+	}
+}
+func (v *TrainingSessionSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TrainingSessionSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TrainingSessionSummary_CreationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.TrainingSessionSummary_CreationTime, v.CreationTime)
+		case schemas.TrainingSessionSummary_LastModifiedTime:
+			v.LastModifiedTime = new(time.Time)
+			return d.ReadTime(schemas.TrainingSessionSummary_LastModifiedTime, v.LastModifiedTime)
+		case schemas.TrainingSessionSummary_TrainingSessionArn:
+			v.TrainingSessionArn = new(string)
+			return d.ReadString(schemas.TrainingSessionSummary_TrainingSessionArn, v.TrainingSessionArn)
+		case schemas.TrainingSessionSummary_TrainingSessionStatus:
+			var ev string
+			if err := d.ReadString(schemas.TrainingSessionSummary_TrainingSessionStatus, &ev); err != nil {
+				return err
+			}
+			v.TrainingSessionStatus = TrainingSessionStatus(ev)
+			return nil
 		}
 		return nil
 	})

@@ -4,7 +4,9 @@ package glue
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/glue/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/glue/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -35,6 +37,18 @@ type GetUsageProfileInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetUsageProfileInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetUsageProfileRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetUsageProfileInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.GetUsageProfileRequest_Name, *v.Name)
+	}
+}
+
 type GetUsageProfileOutput struct {
 
 	// A ProfileConfiguration object specifying the job and session values for the
@@ -59,13 +73,58 @@ type GetUsageProfileOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetUsageProfileOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetUsageProfileResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetUsageProfileOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Configuration != nil {
+		s.WriteStruct(schemas.GetUsageProfileResponse_Configuration)
+		v.Configuration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CreatedOn != nil {
+		s.WriteTime(schemas.GetUsageProfileResponse_CreatedOn, *v.CreatedOn)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.GetUsageProfileResponse_Description, *v.Description)
+	}
+	if v.LastModifiedOn != nil {
+		s.WriteTime(schemas.GetUsageProfileResponse_LastModifiedOn, *v.LastModifiedOn)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.GetUsageProfileResponse_Name, *v.Name)
+	}
+}
+func (v *GetUsageProfileOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetUsageProfileResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetUsageProfileResponse_Configuration:
+			v.Configuration = &types.ProfileConfiguration{}
+			return v.Configuration.Deserialize(d)
+		case schemas.GetUsageProfileResponse_CreatedOn:
+			v.CreatedOn = new(time.Time)
+			return d.ReadTime(schemas.GetUsageProfileResponse_CreatedOn, v.CreatedOn)
+		case schemas.GetUsageProfileResponse_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.GetUsageProfileResponse_Description, v.Description)
+		case schemas.GetUsageProfileResponse_LastModifiedOn:
+			v.LastModifiedOn = new(time.Time)
+			return d.ReadTime(schemas.GetUsageProfileResponse_LastModifiedOn, v.LastModifiedOn)
+		case schemas.GetUsageProfileResponse_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.GetUsageProfileResponse_Name, v.Name)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetUsageProfileMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetUsageProfile{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetUsageProfile, schemas.GetUsageProfileRequest, schemas.GetUsageProfileResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetUsageProfile{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetUsageProfile, schemas.GetUsageProfileRequest, schemas.GetUsageProfileResponse), output: &GetUsageProfileOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -376,6 +376,35 @@ func TestCheckRequestSnapshot_BatchGetVpcEndpoint(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_CancelIngestionJob(t *testing.T) {
+	input := &CancelIngestionJobInput{
+		CollectionId:   ptr.String("__CollectionId__"),
+		IngestionJobId: ptr.String("__IngestionJobId__"),
+		ClientToken:    ptr.String("__ClientToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.CancelIngestionJob(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CancelIngestionJob"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_CreateAccessPolicy(t *testing.T) {
 	input := &CreateAccessPolicyInput{
 		Type:        types.AccessPolicyType("data"),
@@ -529,6 +558,113 @@ func TestCheckRequestSnapshot_CreateIndex(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateIndex"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_CreateIngestionJob(t *testing.T) {
+	input := &CreateIngestionJobInput{
+		CollectionId:     ptr.String("__CollectionId__"),
+		IngestionJobName: ptr.String("__IngestionJobName__"),
+		IndexName:        ptr.String("__IndexName__"),
+		FailureIndexName: ptr.String("__FailureIndexName__"),
+		Source: &types.IngestionJobSource{
+			S3: &types.IngestionJobS3Source{
+				Bucket:               ptr.String("__Bucket__"),
+				BucketOwnerAccountId: ptr.String("__BucketOwnerAccountId__"),
+				KeyPrefix:            ptr.String("__KeyPrefix__"),
+			},
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.CreateIngestionJob(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateIngestionJob"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_CreateIngestionStream(t *testing.T) {
+	input := &CreateIngestionStreamInput{
+		CollectionId:        ptr.String("__CollectionId__"),
+		IngestionStreamName: ptr.String("__IngestionStreamName__"),
+		IndexName:           ptr.String("__IndexName__"),
+		FailureIndexName:    ptr.String("__FailureIndexName__"),
+		Source: &types.IngestionStreamSource{
+			S3: &types.IngestionStreamS3Source{
+				SqsArn: ptr.String("__SqsArn__"),
+				Buckets: []types.StreamBucketConfig{
+					{
+						Bucket:               ptr.String("__Bucket__"),
+						BucketOwnerAccountId: ptr.String("__BucketOwnerAccountId__"),
+						InitialScan:          types.InitialScan("ENABLED"),
+					},
+					{
+						Bucket:               ptr.String("__Bucket__"),
+						BucketOwnerAccountId: ptr.String("__BucketOwnerAccountId__"),
+						InitialScan:          types.InitialScan("ENABLED"),
+					},
+				},
+			},
+		},
+		RoleArn: ptr.String("__RoleArn__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.CreateIngestionStream(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateIngestionStream"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -791,6 +927,35 @@ func TestCheckRequestSnapshot_DeleteIndex(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_DeleteIngestionStream(t *testing.T) {
+	input := &DeleteIngestionStreamInput{
+		CollectionId:      ptr.String("__CollectionId__"),
+		IngestionStreamId: ptr.String("__IngestionStreamId__"),
+		ClientToken:       ptr.String("__ClientToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DeleteIngestionStream(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteIngestionStream"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_DeleteLifecyclePolicy(t *testing.T) {
 	input := &DeleteLifecyclePolicyInput{
 		Type:        types.LifecyclePolicyType("retention"),
@@ -986,6 +1151,62 @@ func TestCheckRequestSnapshot_GetIndex(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_GetIngestionJob(t *testing.T) {
+	input := &GetIngestionJobInput{
+		CollectionId:   ptr.String("__CollectionId__"),
+		IngestionJobId: ptr.String("__IngestionJobId__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.GetIngestionJob(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetIngestionJob"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_GetIngestionStream(t *testing.T) {
+	input := &GetIngestionStreamInput{
+		CollectionId:      ptr.String("__CollectionId__"),
+		IngestionStreamId: ptr.String("__IngestionStreamId__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.GetIngestionStream(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetIngestionStream"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_GetPoliciesStats(t *testing.T) {
 	input := &GetPoliciesStatsInput{}
 	body := &bytes.Buffer{}
@@ -1156,6 +1377,64 @@ func TestCheckRequestSnapshot_ListCollections(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListCollections"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_ListIngestionJobs(t *testing.T) {
+	input := &ListIngestionJobsInput{
+		CollectionId: ptr.String("__CollectionId__"),
+		NextToken:    ptr.String("__NextToken__"),
+		MaxResults:   ptr.Int32(1),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListIngestionJobs(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListIngestionJobs"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_ListIngestionStreams(t *testing.T) {
+	input := &ListIngestionStreamsInput{
+		CollectionId: ptr.String("__CollectionId__"),
+		NextToken:    ptr.String("__NextToken__"),
+		MaxResults:   ptr.Int32(1),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListIngestionStreams(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListIngestionStreams"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -1451,7 +1730,11 @@ func TestCheckRequestSnapshot_UpdateCollection(t *testing.T) {
 			ServerlessVectorAcceleration: types.ServerlessVectorAccelerationStatus("ENABLED"),
 		},
 		DeletionProtection: types.DeletionProtection("ENABLED"),
-		ClientToken:        ptr.String("__ClientToken__"),
+		EncryptionConfig: &types.EncryptionConfig{
+			AWSOwnedKey: ptr.Bool(true),
+			KmsKeyArn:   ptr.String("__KmsKeyArn__"),
+		},
+		ClientToken: ptr.String("__ClientToken__"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -1862,6 +2145,35 @@ func TestUpdateRequestSnapshot_BatchGetVpcEndpoint(t *testing.T) {
 	}
 }
 
+func TestUpdateRequestSnapshot_CancelIngestionJob(t *testing.T) {
+	input := &CancelIngestionJobInput{
+		CollectionId:   ptr.String("__CollectionId__"),
+		IngestionJobId: ptr.String("__IngestionJobId__"),
+		ClientToken:    ptr.String("__ClientToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.CancelIngestionJob(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CancelIngestionJob"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_CreateAccessPolicy(t *testing.T) {
 	input := &CreateAccessPolicyInput{
 		Type:        types.AccessPolicyType("data"),
@@ -2015,6 +2327,113 @@ func TestUpdateRequestSnapshot_CreateIndex(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateIndex"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_CreateIngestionJob(t *testing.T) {
+	input := &CreateIngestionJobInput{
+		CollectionId:     ptr.String("__CollectionId__"),
+		IngestionJobName: ptr.String("__IngestionJobName__"),
+		IndexName:        ptr.String("__IndexName__"),
+		FailureIndexName: ptr.String("__FailureIndexName__"),
+		Source: &types.IngestionJobSource{
+			S3: &types.IngestionJobS3Source{
+				Bucket:               ptr.String("__Bucket__"),
+				BucketOwnerAccountId: ptr.String("__BucketOwnerAccountId__"),
+				KeyPrefix:            ptr.String("__KeyPrefix__"),
+			},
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.CreateIngestionJob(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateIngestionJob"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_CreateIngestionStream(t *testing.T) {
+	input := &CreateIngestionStreamInput{
+		CollectionId:        ptr.String("__CollectionId__"),
+		IngestionStreamName: ptr.String("__IngestionStreamName__"),
+		IndexName:           ptr.String("__IndexName__"),
+		FailureIndexName:    ptr.String("__FailureIndexName__"),
+		Source: &types.IngestionStreamSource{
+			S3: &types.IngestionStreamS3Source{
+				SqsArn: ptr.String("__SqsArn__"),
+				Buckets: []types.StreamBucketConfig{
+					{
+						Bucket:               ptr.String("__Bucket__"),
+						BucketOwnerAccountId: ptr.String("__BucketOwnerAccountId__"),
+						InitialScan:          types.InitialScan("ENABLED"),
+					},
+					{
+						Bucket:               ptr.String("__Bucket__"),
+						BucketOwnerAccountId: ptr.String("__BucketOwnerAccountId__"),
+						InitialScan:          types.InitialScan("ENABLED"),
+					},
+				},
+			},
+		},
+		RoleArn: ptr.String("__RoleArn__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.CreateIngestionStream(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateIngestionStream"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -2277,6 +2696,35 @@ func TestUpdateRequestSnapshot_DeleteIndex(t *testing.T) {
 	}
 }
 
+func TestUpdateRequestSnapshot_DeleteIngestionStream(t *testing.T) {
+	input := &DeleteIngestionStreamInput{
+		CollectionId:      ptr.String("__CollectionId__"),
+		IngestionStreamId: ptr.String("__IngestionStreamId__"),
+		ClientToken:       ptr.String("__ClientToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DeleteIngestionStream(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteIngestionStream"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_DeleteLifecyclePolicy(t *testing.T) {
 	input := &DeleteLifecyclePolicyInput{
 		Type:        types.LifecyclePolicyType("retention"),
@@ -2472,6 +2920,62 @@ func TestUpdateRequestSnapshot_GetIndex(t *testing.T) {
 	}
 }
 
+func TestUpdateRequestSnapshot_GetIngestionJob(t *testing.T) {
+	input := &GetIngestionJobInput{
+		CollectionId:   ptr.String("__CollectionId__"),
+		IngestionJobId: ptr.String("__IngestionJobId__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.GetIngestionJob(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetIngestionJob"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_GetIngestionStream(t *testing.T) {
+	input := &GetIngestionStreamInput{
+		CollectionId:      ptr.String("__CollectionId__"),
+		IngestionStreamId: ptr.String("__IngestionStreamId__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.GetIngestionStream(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetIngestionStream"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_GetPoliciesStats(t *testing.T) {
 	input := &GetPoliciesStatsInput{}
 	body := &bytes.Buffer{}
@@ -2642,6 +3146,64 @@ func TestUpdateRequestSnapshot_ListCollections(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListCollections"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_ListIngestionJobs(t *testing.T) {
+	input := &ListIngestionJobsInput{
+		CollectionId: ptr.String("__CollectionId__"),
+		NextToken:    ptr.String("__NextToken__"),
+		MaxResults:   ptr.Int32(1),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListIngestionJobs(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListIngestionJobs"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_ListIngestionStreams(t *testing.T) {
+	input := &ListIngestionStreamsInput{
+		CollectionId: ptr.String("__CollectionId__"),
+		NextToken:    ptr.String("__NextToken__"),
+		MaxResults:   ptr.Int32(1),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListIngestionStreams(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListIngestionStreams"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -2937,7 +3499,11 @@ func TestUpdateRequestSnapshot_UpdateCollection(t *testing.T) {
 			ServerlessVectorAcceleration: types.ServerlessVectorAccelerationStatus("ENABLED"),
 		},
 		DeletionProtection: types.DeletionProtection("ENABLED"),
-		ClientToken:        ptr.String("__ClientToken__"),
+		EncryptionConfig: &types.EncryptionConfig{
+			AWSOwnedKey: ptr.Bool(true),
+			KmsKeyArn:   ptr.String("__KmsKeyArn__"),
+		},
+		ClientToken: ptr.String("__ClientToken__"),
 	}
 	body := &bytes.Buffer{}
 	method := ""

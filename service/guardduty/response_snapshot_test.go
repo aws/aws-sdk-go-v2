@@ -555,8 +555,9 @@ func TestCheckResponseSnapshot_CreatePublishingDestination(t *testing.T) {
 		DetectorId:      ptr.String("__DetectorId__"),
 		DestinationType: types.DestinationType("S3"),
 		DestinationProperties: &types.DestinationProperties{
-			DestinationArn: ptr.String("__DestinationArn__"),
-			KmsKeyArn:      ptr.String("__KmsKeyArn__"),
+			DestinationArn:      ptr.String("__DestinationArn__"),
+			KmsKeyArn:           ptr.String("__KmsKeyArn__"),
+			ExpectedBucketOwner: ptr.String("__ExpectedBucketOwner__"),
 		},
 		ClientToken: ptr.String("__ClientToken__"),
 		Tags: map[string]string{
@@ -1237,8 +1238,9 @@ func TestCheckResponseSnapshot_DescribePublishingDestination(t *testing.T) {
 		Status:                          types.PublishingStatus("PENDING_VERIFICATION"),
 		PublishingFailureStartTimestamp: ptr.Int64(1),
 		DestinationProperties: &types.DestinationProperties{
-			DestinationArn: ptr.String("__DestinationArn__"),
-			KmsKeyArn:      ptr.String("__KmsKeyArn__"),
+			DestinationArn:      ptr.String("__DestinationArn__"),
+			KmsKeyArn:           ptr.String("__KmsKeyArn__"),
+			ExpectedBucketOwner: ptr.String("__ExpectedBucketOwner__"),
 		},
 		Tags: map[string]string{
 			"key0": "__Value__",
@@ -1491,8 +1493,21 @@ func TestCheckResponseSnapshot_GetCustomDetectionRule(t *testing.T) {
 			Definition: &types.RuleDefinition{
 				Expression: ptr.String("__Expression__"),
 			},
-			Language:  types.RuleLanguage("SQL"),
-			Schema:    types.RuleSchema("CloudTrail"),
+			Language: types.RuleLanguage("SQL"),
+			Schema:   types.RuleSchema("CloudTrail"),
+			RuntimeMonitoringDetails: &types.DetectionRuleRuntimeMonitoringDetails{
+				Platforms: &types.DetectionRuleRuntimePlatforms{
+					Eks: &types.DetectionRuleEksRequirements{
+						MinAgentVersion: ptr.String("__MinAgentVersion__"),
+					},
+					Ec2: &types.DetectionRuleEc2Requirements{
+						MinAgentVersion: ptr.String("__MinAgentVersion__"),
+					},
+					EcsFargate: &types.DetectionRuleEcsFargateRequirements{
+						MinAgentVersion: ptr.String("__MinAgentVersion__"),
+					},
+				},
+			},
 			CreatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			UpdatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 		},
@@ -1640,13 +1655,16 @@ func TestCheckResponseSnapshot_GetDetector(t *testing.T) {
 						Name:      types.FeatureAdditionalConfiguration("EKS_ADDON_MANAGEMENT"),
 						Status:    types.FeatureStatus("ENABLED"),
 						UpdatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+						ManagedBy: types.ManagedBy("GUARDDUTY_POLICY"),
 					},
 					{
 						Name:      types.FeatureAdditionalConfiguration("EKS_ADDON_MANAGEMENT"),
 						Status:    types.FeatureStatus("ENABLED"),
 						UpdatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+						ManagedBy: types.ManagedBy("GUARDDUTY_POLICY"),
 					},
 				},
+				ManagedBy: types.ManagedBy("GUARDDUTY_POLICY"),
 			},
 			{
 				Name:      types.DetectorFeatureResult("FLOW_LOGS"),
@@ -1657,13 +1675,16 @@ func TestCheckResponseSnapshot_GetDetector(t *testing.T) {
 						Name:      types.FeatureAdditionalConfiguration("EKS_ADDON_MANAGEMENT"),
 						Status:    types.FeatureStatus("ENABLED"),
 						UpdatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+						ManagedBy: types.ManagedBy("GUARDDUTY_POLICY"),
 					},
 					{
 						Name:      types.FeatureAdditionalConfiguration("EKS_ADDON_MANAGEMENT"),
 						Status:    types.FeatureStatus("ENABLED"),
 						UpdatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+						ManagedBy: types.ManagedBy("GUARDDUTY_POLICY"),
 					},
 				},
+				ManagedBy: types.ManagedBy("GUARDDUTY_POLICY"),
 			},
 		},
 	}
@@ -2448,8 +2469,9 @@ func TestCheckResponseSnapshot_GetFindings(t *testing.T) {
 							},
 							ServiceName: ptr.String("__ServiceName__"),
 							RemoteAccountDetails: &types.RemoteAccountDetails{
-								AccountId:  ptr.String("__AccountId__"),
-								Affiliated: ptr.Bool(true),
+								AccountId:      ptr.String("__AccountId__"),
+								Affiliated:     ptr.Bool(true),
+								AwsServiceName: ptr.String("__AwsServiceName__"),
 							},
 							AffectedResources: map[string]string{
 								"key0": "__Value__",
@@ -3212,6 +3234,11 @@ func TestCheckResponseSnapshot_GetFindings(t *testing.T) {
 												"__Member__",
 											},
 										},
+										BedrockGuardrail: &types.BedrockGuardrailResource{
+											Version:         ptr.String("__Version__"),
+											GuardrailAction: types.GuardrailAction("GUARDRAIL_INTERVENED"),
+											GuardrailSource: types.GuardrailSource("INPUT"),
+										},
 									},
 								},
 								{
@@ -3397,6 +3424,11 @@ func TestCheckResponseSnapshot_GetFindings(t *testing.T) {
 												"__Member__",
 												"__Member__",
 											},
+										},
+										BedrockGuardrail: &types.BedrockGuardrailResource{
+											Version:         ptr.String("__Version__"),
+											GuardrailAction: types.GuardrailAction("GUARDRAIL_INTERVENED"),
+											GuardrailSource: types.GuardrailSource("INPUT"),
 										},
 									},
 								},
@@ -3683,6 +3715,7 @@ func TestCheckResponseSnapshot_GetFindings(t *testing.T) {
 				Type:                        ptr.String("__Type__"),
 				UpdatedAt:                   ptr.String("__UpdatedAt__"),
 				AssociatedAttackSequenceArn: ptr.String("__AssociatedAttackSequenceArn__"),
+				CustomDetectionRuleName:     ptr.String("__CustomDetectionRuleName__"),
 			},
 			{
 				AccountId:   ptr.String("__AccountId__"),
@@ -4372,8 +4405,9 @@ func TestCheckResponseSnapshot_GetFindings(t *testing.T) {
 							},
 							ServiceName: ptr.String("__ServiceName__"),
 							RemoteAccountDetails: &types.RemoteAccountDetails{
-								AccountId:  ptr.String("__AccountId__"),
-								Affiliated: ptr.Bool(true),
+								AccountId:      ptr.String("__AccountId__"),
+								Affiliated:     ptr.Bool(true),
+								AwsServiceName: ptr.String("__AwsServiceName__"),
 							},
 							AffectedResources: map[string]string{
 								"key0": "__Value__",
@@ -5136,6 +5170,11 @@ func TestCheckResponseSnapshot_GetFindings(t *testing.T) {
 												"__Member__",
 											},
 										},
+										BedrockGuardrail: &types.BedrockGuardrailResource{
+											Version:         ptr.String("__Version__"),
+											GuardrailAction: types.GuardrailAction("GUARDRAIL_INTERVENED"),
+											GuardrailSource: types.GuardrailSource("INPUT"),
+										},
 									},
 								},
 								{
@@ -5321,6 +5360,11 @@ func TestCheckResponseSnapshot_GetFindings(t *testing.T) {
 												"__Member__",
 												"__Member__",
 											},
+										},
+										BedrockGuardrail: &types.BedrockGuardrailResource{
+											Version:         ptr.String("__Version__"),
+											GuardrailAction: types.GuardrailAction("GUARDRAIL_INTERVENED"),
+											GuardrailSource: types.GuardrailSource("INPUT"),
 										},
 									},
 								},
@@ -5607,6 +5651,7 @@ func TestCheckResponseSnapshot_GetFindings(t *testing.T) {
 				Type:                        ptr.String("__Type__"),
 				UpdatedAt:                   ptr.String("__UpdatedAt__"),
 				AssociatedAttackSequenceArn: ptr.String("__AssociatedAttackSequenceArn__"),
+				CustomDetectionRuleName:     ptr.String("__CustomDetectionRuleName__"),
 			},
 		},
 	}
@@ -6212,13 +6257,16 @@ func TestCheckResponseSnapshot_GetMemberDetectors(t *testing.T) {
 								Name:      types.OrgFeatureAdditionalConfiguration("EKS_ADDON_MANAGEMENT"),
 								Status:    types.FeatureStatus("ENABLED"),
 								UpdatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+								ManagedBy: types.ManagedBy("GUARDDUTY_POLICY"),
 							},
 							{
 								Name:      types.OrgFeatureAdditionalConfiguration("EKS_ADDON_MANAGEMENT"),
 								Status:    types.FeatureStatus("ENABLED"),
 								UpdatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+								ManagedBy: types.ManagedBy("GUARDDUTY_POLICY"),
 							},
 						},
+						ManagedBy: types.ManagedBy("GUARDDUTY_POLICY"),
 					},
 					{
 						Name:      types.OrgFeature("S3_DATA_EVENTS"),
@@ -6229,13 +6277,16 @@ func TestCheckResponseSnapshot_GetMemberDetectors(t *testing.T) {
 								Name:      types.OrgFeatureAdditionalConfiguration("EKS_ADDON_MANAGEMENT"),
 								Status:    types.FeatureStatus("ENABLED"),
 								UpdatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+								ManagedBy: types.ManagedBy("GUARDDUTY_POLICY"),
 							},
 							{
 								Name:      types.OrgFeatureAdditionalConfiguration("EKS_ADDON_MANAGEMENT"),
 								Status:    types.FeatureStatus("ENABLED"),
 								UpdatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+								ManagedBy: types.ManagedBy("GUARDDUTY_POLICY"),
 							},
 						},
+						ManagedBy: types.ManagedBy("GUARDDUTY_POLICY"),
 					},
 				},
 			},
@@ -6279,13 +6330,16 @@ func TestCheckResponseSnapshot_GetMemberDetectors(t *testing.T) {
 								Name:      types.OrgFeatureAdditionalConfiguration("EKS_ADDON_MANAGEMENT"),
 								Status:    types.FeatureStatus("ENABLED"),
 								UpdatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+								ManagedBy: types.ManagedBy("GUARDDUTY_POLICY"),
 							},
 							{
 								Name:      types.OrgFeatureAdditionalConfiguration("EKS_ADDON_MANAGEMENT"),
 								Status:    types.FeatureStatus("ENABLED"),
 								UpdatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+								ManagedBy: types.ManagedBy("GUARDDUTY_POLICY"),
 							},
 						},
+						ManagedBy: types.ManagedBy("GUARDDUTY_POLICY"),
 					},
 					{
 						Name:      types.OrgFeature("S3_DATA_EVENTS"),
@@ -6296,13 +6350,16 @@ func TestCheckResponseSnapshot_GetMemberDetectors(t *testing.T) {
 								Name:      types.OrgFeatureAdditionalConfiguration("EKS_ADDON_MANAGEMENT"),
 								Status:    types.FeatureStatus("ENABLED"),
 								UpdatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+								ManagedBy: types.ManagedBy("GUARDDUTY_POLICY"),
 							},
 							{
 								Name:      types.OrgFeatureAdditionalConfiguration("EKS_ADDON_MANAGEMENT"),
 								Status:    types.FeatureStatus("ENABLED"),
 								UpdatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+								ManagedBy: types.ManagedBy("GUARDDUTY_POLICY"),
 							},
 						},
+						ManagedBy: types.ManagedBy("GUARDDUTY_POLICY"),
 					},
 				},
 			},
@@ -8467,8 +8524,9 @@ func TestCheckResponseSnapshot_UpdatePublishingDestination(t *testing.T) {
 		DetectorId:    ptr.String("__DetectorId__"),
 		DestinationId: ptr.String("__DestinationId__"),
 		DestinationProperties: &types.DestinationProperties{
-			DestinationArn: ptr.String("__DestinationArn__"),
-			KmsKeyArn:      ptr.String("__KmsKeyArn__"),
+			DestinationArn:      ptr.String("__DestinationArn__"),
+			KmsKeyArn:           ptr.String("__KmsKeyArn__"),
+			ExpectedBucketOwner: ptr.String("__ExpectedBucketOwner__"),
 		},
 	})
 	if err != nil {

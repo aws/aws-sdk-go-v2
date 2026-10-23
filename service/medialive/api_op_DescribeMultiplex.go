@@ -6,7 +6,9 @@ import (
 	"context"
 	"errors"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/medialive/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/medialive/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithytime "github.com/aws/smithy-go/time"
 	smithywaiter "github.com/aws/smithy-go/waiter"
@@ -38,6 +40,18 @@ type DescribeMultiplexInput struct {
 	MultiplexId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DescribeMultiplexInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeMultiplexRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeMultiplexInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MultiplexId != nil {
+		s.WriteString(schemas.DescribeMultiplexRequest_MultiplexId, *v.MultiplexId)
+	}
 }
 
 // Placeholder documentation for DescribeMultiplexResponse
@@ -79,13 +93,83 @@ type DescribeMultiplexOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeMultiplexOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeMultiplexResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeMultiplexOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.DescribeMultiplexResponse_Arn, *v.Arn)
+	}
+	serialize__listOf__string(s, schemas.DescribeMultiplexResponse_AvailabilityZones, v.AvailabilityZones)
+	serialize__listOfMultiplexOutputDestination(s, schemas.DescribeMultiplexResponse_Destinations, v.Destinations)
+	if v.Id != nil {
+		s.WriteString(schemas.DescribeMultiplexResponse_Id, *v.Id)
+	}
+	if v.MultiplexSettings != nil {
+		s.WriteStruct(schemas.DescribeMultiplexResponse_MultiplexSettings)
+		v.MultiplexSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.DescribeMultiplexResponse_Name, *v.Name)
+	}
+	if v.PipelinesRunningCount != nil {
+		s.WriteInt32(schemas.DescribeMultiplexResponse_PipelinesRunningCount, *v.PipelinesRunningCount)
+	}
+	if v.ProgramCount != nil {
+		s.WriteInt32(schemas.DescribeMultiplexResponse_ProgramCount, *v.ProgramCount)
+	}
+	if v.State != "" {
+		s.WriteString(schemas.DescribeMultiplexResponse_State, string(v.State))
+	}
+	serializeTags(s, schemas.DescribeMultiplexResponse_Tags, v.Tags)
+}
+func (v *DescribeMultiplexOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeMultiplexResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeMultiplexResponse_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.DescribeMultiplexResponse_Arn, v.Arn)
+		case schemas.DescribeMultiplexResponse_AvailabilityZones:
+			return deserialize__listOf__string(d, schemas.DescribeMultiplexResponse_AvailabilityZones, &v.AvailabilityZones)
+		case schemas.DescribeMultiplexResponse_Destinations:
+			return deserialize__listOfMultiplexOutputDestination(d, schemas.DescribeMultiplexResponse_Destinations, &v.Destinations)
+		case schemas.DescribeMultiplexResponse_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.DescribeMultiplexResponse_Id, v.Id)
+		case schemas.DescribeMultiplexResponse_MultiplexSettings:
+			v.MultiplexSettings = &types.MultiplexSettings{}
+			return v.MultiplexSettings.Deserialize(d)
+		case schemas.DescribeMultiplexResponse_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.DescribeMultiplexResponse_Name, v.Name)
+		case schemas.DescribeMultiplexResponse_PipelinesRunningCount:
+			v.PipelinesRunningCount = new(int32)
+			return d.ReadInt32(schemas.DescribeMultiplexResponse_PipelinesRunningCount, v.PipelinesRunningCount)
+		case schemas.DescribeMultiplexResponse_ProgramCount:
+			v.ProgramCount = new(int32)
+			return d.ReadInt32(schemas.DescribeMultiplexResponse_ProgramCount, v.ProgramCount)
+		case schemas.DescribeMultiplexResponse_State:
+			var ev string
+			if err := d.ReadString(schemas.DescribeMultiplexResponse_State, &ev); err != nil {
+				return err
+			}
+			v.State = types.MultiplexState(ev)
+			return nil
+		case schemas.DescribeMultiplexResponse_Tags:
+			return deserializeTags(d, schemas.DescribeMultiplexResponse_Tags, &v.Tags)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeMultiplexMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeMultiplex{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeMultiplex, schemas.DescribeMultiplexRequest, schemas.DescribeMultiplexResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeMultiplex{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeMultiplex, schemas.DescribeMultiplexRequest, schemas.DescribeMultiplexResponse), output: &DescribeMultiplexOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

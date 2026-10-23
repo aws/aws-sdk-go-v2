@@ -4,7 +4,9 @@ package partnercentralaccount
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/partnercentralaccount/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/partnercentralaccount/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -37,6 +39,18 @@ type GetVerificationInput struct {
 	VerificationType types.VerificationType
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetVerificationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetVerificationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetVerificationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.VerificationType != "" {
+		s.WriteString(schemas.GetVerificationRequest_VerificationType, string(v.VerificationType))
+	}
 }
 
 type GetVerificationOutput struct {
@@ -77,13 +91,67 @@ type GetVerificationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetVerificationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetVerificationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetVerificationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CompletedAt != nil {
+		s.WriteTime(schemas.GetVerificationResponse_CompletedAt, *v.CompletedAt)
+	}
+	if v.StartedAt != nil {
+		s.WriteTime(schemas.GetVerificationResponse_StartedAt, *v.StartedAt)
+	}
+	serializeVerificationResponseDetails(s, schemas.GetVerificationResponse_VerificationResponseDetails, v.VerificationResponseDetails)
+	if v.VerificationStatus != "" {
+		s.WriteString(schemas.GetVerificationResponse_VerificationStatus, string(v.VerificationStatus))
+	}
+	if v.VerificationStatusReason != nil {
+		s.WriteString(schemas.GetVerificationResponse_VerificationStatusReason, *v.VerificationStatusReason)
+	}
+	if v.VerificationType != "" {
+		s.WriteString(schemas.GetVerificationResponse_VerificationType, string(v.VerificationType))
+	}
+}
+func (v *GetVerificationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetVerificationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetVerificationResponse_CompletedAt:
+			v.CompletedAt = new(time.Time)
+			return d.ReadTime(schemas.GetVerificationResponse_CompletedAt, v.CompletedAt)
+		case schemas.GetVerificationResponse_StartedAt:
+			v.StartedAt = new(time.Time)
+			return d.ReadTime(schemas.GetVerificationResponse_StartedAt, v.StartedAt)
+		case schemas.GetVerificationResponse_VerificationResponseDetails:
+			return deserializeVerificationResponseDetails(d, schemas.GetVerificationResponse_VerificationResponseDetails, &v.VerificationResponseDetails)
+		case schemas.GetVerificationResponse_VerificationStatus:
+			var ev string
+			if err := d.ReadString(schemas.GetVerificationResponse_VerificationStatus, &ev); err != nil {
+				return err
+			}
+			v.VerificationStatus = types.VerificationStatus(ev)
+			return nil
+		case schemas.GetVerificationResponse_VerificationStatusReason:
+			v.VerificationStatusReason = new(string)
+			return d.ReadString(schemas.GetVerificationResponse_VerificationStatusReason, v.VerificationStatusReason)
+		case schemas.GetVerificationResponse_VerificationType:
+			var ev string
+			if err := d.ReadString(schemas.GetVerificationResponse_VerificationType, &ev); err != nil {
+				return err
+			}
+			v.VerificationType = types.VerificationType(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetVerificationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpGetVerification{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetVerification, schemas.GetVerificationRequest, schemas.GetVerificationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpGetVerification{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetVerification, schemas.GetVerificationRequest, schemas.GetVerificationResponse), output: &GetVerificationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

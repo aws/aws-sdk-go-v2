@@ -1,6 +1,7 @@
-POST /
+POST /service/PerformanceInsightsv20180227/operation/ListPerformanceAnalysisReports
 
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: PerformanceInsightsv20180227.ListPerformanceAnalysisReports
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"Identifier":"__Identifier__","ListTags":true,"MaxResults":1,"NextToken":"__NextToken__","ServiceType":"RDS"}
+¿jIdentifiern__Identifier__hListTagsõjMaxResultsiNextTokenm__NextToken__kServiceTypecRDSÿ

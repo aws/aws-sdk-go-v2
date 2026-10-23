@@ -589,6 +589,12 @@ func TestCheckResponseSnapshot_BatchGetDeploymentGroups(t *testing.T) {
 						ClusterName: ptr.String("__ClusterName__"),
 					},
 				},
+				Ec2DeploymentOptions: &types.EC2DeploymentOptions{
+					AutoScalingGroupProcessesToSuspend: []types.AutoScalingGroupProcess{
+						types.AutoScalingGroupProcess("Terminate"),
+						types.AutoScalingGroupProcess("Terminate"),
+					},
+				},
 				TerminationHookEnabled: true,
 			},
 			{
@@ -851,6 +857,12 @@ func TestCheckResponseSnapshot_BatchGetDeploymentGroups(t *testing.T) {
 					{
 						ServiceName: ptr.String("__ServiceName__"),
 						ClusterName: ptr.String("__ClusterName__"),
+					},
+				},
+				Ec2DeploymentOptions: &types.EC2DeploymentOptions{
+					AutoScalingGroupProcessesToSuspend: []types.AutoScalingGroupProcess{
+						types.AutoScalingGroupProcess("Terminate"),
+						types.AutoScalingGroupProcess("Terminate"),
 					},
 				},
 				TerminationHookEnabled: true,
@@ -1558,6 +1570,7 @@ func TestCheckResponseSnapshot_BatchGetDeployments(t *testing.T) {
 				},
 				AdditionalDeploymentStatusInfo: ptr.String("__AdditionalDeploymentStatusInfo__"),
 				FileExistsBehavior:             types.FileExistsBehavior("DISALLOW"),
+				DeploymentMode:                 types.DeploymentMode("STANDARD"),
 				DeploymentStatusMessages: []string{
 					"__Member__",
 					"__Member__",
@@ -1581,6 +1594,12 @@ func TestCheckResponseSnapshot_BatchGetDeployments(t *testing.T) {
 						{
 							Name: ptr.String("__Name__"),
 						},
+					},
+				},
+				Ec2DeploymentOptions: &types.EC2DeploymentOptions{
+					AutoScalingGroupProcessesToSuspend: []types.AutoScalingGroupProcess{
+						types.AutoScalingGroupProcess("Terminate"),
+						types.AutoScalingGroupProcess("Terminate"),
 					},
 				},
 			},
@@ -1795,6 +1814,7 @@ func TestCheckResponseSnapshot_BatchGetDeployments(t *testing.T) {
 				},
 				AdditionalDeploymentStatusInfo: ptr.String("__AdditionalDeploymentStatusInfo__"),
 				FileExistsBehavior:             types.FileExistsBehavior("DISALLOW"),
+				DeploymentMode:                 types.DeploymentMode("STANDARD"),
 				DeploymentStatusMessages: []string{
 					"__Member__",
 					"__Member__",
@@ -1818,6 +1838,12 @@ func TestCheckResponseSnapshot_BatchGetDeployments(t *testing.T) {
 						{
 							Name: ptr.String("__Name__"),
 						},
+					},
+				},
+				Ec2DeploymentOptions: &types.EC2DeploymentOptions{
+					AutoScalingGroupProcessesToSuspend: []types.AutoScalingGroupProcess{
+						types.AutoScalingGroupProcess("Terminate"),
+						types.AutoScalingGroupProcess("Terminate"),
 					},
 				},
 			},
@@ -2070,6 +2096,12 @@ func TestCheckResponseSnapshot_CreateDeployment(t *testing.T) {
 				{
 					Name: ptr.String("__Name__"),
 				},
+			},
+		},
+		Ec2DeploymentOptions: &types.EC2DeploymentOptions{
+			AutoScalingGroupProcessesToSuspend: []types.AutoScalingGroupProcess{
+				types.AutoScalingGroupProcess("Terminate"),
+				types.AutoScalingGroupProcess("Terminate"),
 			},
 		},
 	})
@@ -2366,6 +2398,12 @@ func TestCheckResponseSnapshot_CreateDeploymentGroup(t *testing.T) {
 			{
 				Key:   ptr.String("__Key__"),
 				Value: ptr.String("__Value__"),
+			},
+		},
+		Ec2DeploymentOptions: &types.EC2DeploymentOptions{
+			AutoScalingGroupProcessesToSuspend: []types.AutoScalingGroupProcess{
+				types.AutoScalingGroupProcess("Terminate"),
+				types.AutoScalingGroupProcess("Terminate"),
 			},
 		},
 		TerminationHookEnabled: ptr.Bool(true),
@@ -2840,6 +2878,7 @@ func TestCheckResponseSnapshot_GetDeployment(t *testing.T) {
 			},
 			AdditionalDeploymentStatusInfo: ptr.String("__AdditionalDeploymentStatusInfo__"),
 			FileExistsBehavior:             types.FileExistsBehavior("DISALLOW"),
+			DeploymentMode:                 types.DeploymentMode("STANDARD"),
 			DeploymentStatusMessages: []string{
 				"__Member__",
 				"__Member__",
@@ -2863,6 +2902,12 @@ func TestCheckResponseSnapshot_GetDeployment(t *testing.T) {
 					{
 						Name: ptr.String("__Name__"),
 					},
+				},
+			},
+			Ec2DeploymentOptions: &types.EC2DeploymentOptions{
+				AutoScalingGroupProcessesToSuspend: []types.AutoScalingGroupProcess{
+					types.AutoScalingGroupProcess("Terminate"),
+					types.AutoScalingGroupProcess("Terminate"),
 				},
 			},
 		},
@@ -3199,6 +3244,12 @@ func TestCheckResponseSnapshot_GetDeploymentGroup(t *testing.T) {
 				{
 					ServiceName: ptr.String("__ServiceName__"),
 					ClusterName: ptr.String("__ClusterName__"),
+				},
+			},
+			Ec2DeploymentOptions: &types.EC2DeploymentOptions{
+				AutoScalingGroupProcessesToSuspend: []types.AutoScalingGroupProcess{
+					types.AutoScalingGroupProcess("Terminate"),
+					types.AutoScalingGroupProcess("Terminate"),
 				},
 			},
 			TerminationHookEnabled: true,
@@ -4372,6 +4423,12 @@ func TestCheckResponseSnapshot_UpdateDeploymentGroup(t *testing.T) {
 				},
 			},
 		},
+		Ec2DeploymentOptions: &types.EC2DeploymentOptions{
+			AutoScalingGroupProcessesToSuspend: []types.AutoScalingGroupProcess{
+				types.AutoScalingGroupProcess("Terminate"),
+				types.AutoScalingGroupProcess("Terminate"),
+			},
+		},
 		TerminationHookEnabled: ptr.Bool(true),
 	})
 	if err != nil {
@@ -4488,6 +4545,12 @@ func TestCheckResponseSnapshot_Error_AlarmsLimitExceededException(t *testing.T) 
 				{
 					Name: ptr.String("__Name__"),
 				},
+			},
+		},
+		Ec2DeploymentOptions: &types.EC2DeploymentOptions{
+			AutoScalingGroupProcessesToSuspend: []types.AutoScalingGroupProcess{
+				types.AutoScalingGroupProcess("Terminate"),
+				types.AutoScalingGroupProcess("Terminate"),
 			},
 		},
 	})
@@ -5369,6 +5432,12 @@ func TestCheckResponseSnapshot_Error_DeploymentGroupAlreadyExistsException(t *te
 				Value: ptr.String("__Value__"),
 			},
 		},
+		Ec2DeploymentOptions: &types.EC2DeploymentOptions{
+			AutoScalingGroupProcessesToSuspend: []types.AutoScalingGroupProcess{
+				types.AutoScalingGroupProcess("Terminate"),
+				types.AutoScalingGroupProcess("Terminate"),
+			},
+		},
 		TerminationHookEnabled: ptr.Bool(true),
 	})
 	if opErr == nil {
@@ -5489,6 +5558,12 @@ func TestCheckResponseSnapshot_Error_DeploymentGroupDoesNotExistException(t *tes
 				{
 					Name: ptr.String("__Name__"),
 				},
+			},
+		},
+		Ec2DeploymentOptions: &types.EC2DeploymentOptions{
+			AutoScalingGroupProcessesToSuspend: []types.AutoScalingGroupProcess{
+				types.AutoScalingGroupProcess("Terminate"),
+				types.AutoScalingGroupProcess("Terminate"),
 			},
 		},
 	})
@@ -5744,6 +5819,12 @@ func TestCheckResponseSnapshot_Error_DeploymentGroupLimitExceededException(t *te
 				Value: ptr.String("__Value__"),
 			},
 		},
+		Ec2DeploymentOptions: &types.EC2DeploymentOptions{
+			AutoScalingGroupProcessesToSuspend: []types.AutoScalingGroupProcess{
+				types.AutoScalingGroupProcess("Terminate"),
+				types.AutoScalingGroupProcess("Terminate"),
+			},
+		},
 		TerminationHookEnabled: ptr.Bool(true),
 	})
 	if opErr == nil {
@@ -5954,6 +6035,12 @@ func TestCheckResponseSnapshot_Error_DeploymentLimitExceededException(t *testing
 				{
 					Name: ptr.String("__Name__"),
 				},
+			},
+		},
+		Ec2DeploymentOptions: &types.EC2DeploymentOptions{
+			AutoScalingGroupProcessesToSuspend: []types.AutoScalingGroupProcess{
+				types.AutoScalingGroupProcess("Terminate"),
+				types.AutoScalingGroupProcess("Terminate"),
 			},
 		},
 	})
@@ -6199,6 +6286,12 @@ func TestCheckResponseSnapshot_Error_DescriptionTooLongException(t *testing.T) {
 				{
 					Name: ptr.String("__Name__"),
 				},
+			},
+		},
+		Ec2DeploymentOptions: &types.EC2DeploymentOptions{
+			AutoScalingGroupProcessesToSuspend: []types.AutoScalingGroupProcess{
+				types.AutoScalingGroupProcess("Terminate"),
+				types.AutoScalingGroupProcess("Terminate"),
 			},
 		},
 	})
@@ -6452,6 +6545,12 @@ func TestCheckResponseSnapshot_Error_ECSServiceMappingLimitExceededException(t *
 			{
 				Key:   ptr.String("__Key__"),
 				Value: ptr.String("__Value__"),
+			},
+		},
+		Ec2DeploymentOptions: &types.EC2DeploymentOptions{
+			AutoScalingGroupProcessesToSuspend: []types.AutoScalingGroupProcess{
+				types.AutoScalingGroupProcess("Terminate"),
+				types.AutoScalingGroupProcess("Terminate"),
 			},
 		},
 		TerminationHookEnabled: ptr.Bool(true),
@@ -6957,6 +7056,12 @@ func TestCheckResponseSnapshot_Error_InvalidAlarmConfigException(t *testing.T) {
 				},
 			},
 		},
+		Ec2DeploymentOptions: &types.EC2DeploymentOptions{
+			AutoScalingGroupProcessesToSuspend: []types.AutoScalingGroupProcess{
+				types.AutoScalingGroupProcess("Terminate"),
+				types.AutoScalingGroupProcess("Terminate"),
+			},
+		},
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
@@ -7179,6 +7284,12 @@ func TestCheckResponseSnapshot_Error_InvalidAutoRollbackConfigException(t *testi
 				},
 			},
 		},
+		Ec2DeploymentOptions: &types.EC2DeploymentOptions{
+			AutoScalingGroupProcessesToSuspend: []types.AutoScalingGroupProcess{
+				types.AutoScalingGroupProcess("Terminate"),
+				types.AutoScalingGroupProcess("Terminate"),
+			},
+		},
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
@@ -7300,6 +7411,12 @@ func TestCheckResponseSnapshot_Error_InvalidAutoScalingGroupException(t *testing
 				},
 			},
 		},
+		Ec2DeploymentOptions: &types.EC2DeploymentOptions{
+			AutoScalingGroupProcessesToSuspend: []types.AutoScalingGroupProcess{
+				types.AutoScalingGroupProcess("Terminate"),
+				types.AutoScalingGroupProcess("Terminate"),
+			},
+		},
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
@@ -7310,6 +7427,133 @@ func TestCheckResponseSnapshot_Error_InvalidAutoScalingGroupException(t *testing
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("error response snapshot mismatch for %s: %v", "InvalidAutoScalingGroupException.error", err)
+	}
+}
+
+func TestCheckResponseSnapshot_Error_InvalidAutoScalingGroupProcessToSuspendException(t *testing.T) {
+	want := &types.InvalidAutoScalingGroupProcessToSuspendException{
+		Message: ptr.String("__Message__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("InvalidAutoScalingGroupProcessToSuspendException.error")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	_, opErr := svc.CreateDeployment(context.Background(), &CreateDeploymentInput{
+		ApplicationName:     ptr.String("__ApplicationName__"),
+		DeploymentGroupName: ptr.String("__DeploymentGroupName__"),
+		Revision: &types.RevisionLocation{
+			RevisionType: types.RevisionLocationType("S3"),
+			S3Location: &types.S3Location{
+				Bucket:     ptr.String("__Bucket__"),
+				Key:        ptr.String("__Key__"),
+				BundleType: types.BundleType("tar"),
+				Version:    ptr.String("__Version__"),
+				ETag:       ptr.String("__ETag__"),
+			},
+			GitHubLocation: &types.GitHubLocation{
+				Repository: ptr.String("__Repository__"),
+				CommitId:   ptr.String("__CommitId__"),
+			},
+			String_: &types.RawString{
+				Content: ptr.String("__Content__"),
+				Sha256:  ptr.String("__Sha256__"),
+			},
+			AppSpecContent: &types.AppSpecContent{
+				Content: ptr.String("__Content__"),
+				Sha256:  ptr.String("__Sha256__"),
+			},
+		},
+		DeploymentConfigName:          ptr.String("__DeploymentConfigName__"),
+		Description:                   ptr.String("__Description__"),
+		IgnoreApplicationStopFailures: true,
+		TargetInstances: &types.TargetInstances{
+			TagFilters: []types.EC2TagFilter{
+				{
+					Key:   ptr.String("__Key__"),
+					Value: ptr.String("__Value__"),
+					Type:  types.EC2TagFilterType("KEY_ONLY"),
+				},
+				{
+					Key:   ptr.String("__Key__"),
+					Value: ptr.String("__Value__"),
+					Type:  types.EC2TagFilterType("KEY_ONLY"),
+				},
+			},
+			AutoScalingGroups: []string{
+				"__Member__",
+				"__Member__",
+			},
+			Ec2TagSet: &types.EC2TagSet{
+				Ec2TagSetList: [][]types.EC2TagFilter{
+					{
+						{
+							Key:   ptr.String("__Key__"),
+							Value: ptr.String("__Value__"),
+							Type:  types.EC2TagFilterType("KEY_ONLY"),
+						},
+						{
+							Key:   ptr.String("__Key__"),
+							Value: ptr.String("__Value__"),
+							Type:  types.EC2TagFilterType("KEY_ONLY"),
+						},
+					},
+					{
+						{
+							Key:   ptr.String("__Key__"),
+							Value: ptr.String("__Value__"),
+							Type:  types.EC2TagFilterType("KEY_ONLY"),
+						},
+						{
+							Key:   ptr.String("__Key__"),
+							Value: ptr.String("__Value__"),
+							Type:  types.EC2TagFilterType("KEY_ONLY"),
+						},
+					},
+				},
+			},
+		},
+		AutoRollbackConfiguration: &types.AutoRollbackConfiguration{
+			Enabled: true,
+			Events: []types.AutoRollbackEvent{
+				types.AutoRollbackEvent("DEPLOYMENT_FAILURE"),
+				types.AutoRollbackEvent("DEPLOYMENT_FAILURE"),
+			},
+		},
+		UpdateOutdatedInstancesOnly: true,
+		FileExistsBehavior:          types.FileExistsBehavior("DISALLOW"),
+		DeploymentMode:              types.DeploymentMode("STANDARD"),
+		OverrideAlarmConfiguration: &types.AlarmConfiguration{
+			Enabled:                true,
+			IgnorePollAlarmFailure: true,
+			Alarms: []types.Alarm{
+				{
+					Name: ptr.String("__Name__"),
+				},
+				{
+					Name: ptr.String("__Name__"),
+				},
+			},
+		},
+		Ec2DeploymentOptions: &types.EC2DeploymentOptions{
+			AutoScalingGroupProcessesToSuspend: []types.AutoScalingGroupProcess{
+				types.AutoScalingGroupProcess("Terminate"),
+				types.AutoScalingGroupProcess("Terminate"),
+			},
+		},
+	})
+	if opErr == nil {
+		t.Fatal("expected error, got nil")
+	}
+	var got *types.InvalidAutoScalingGroupProcessToSuspendException
+	if !errors.As(opErr, &got) {
+		t.Fatalf("expected types.InvalidAutoScalingGroupProcessToSuspendException, got %v", opErr)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("error response snapshot mismatch for %s: %v", "InvalidAutoScalingGroupProcessToSuspendException.error", err)
 	}
 }
 
@@ -7553,6 +7797,12 @@ func TestCheckResponseSnapshot_Error_InvalidBlueGreenDeploymentConfigurationExce
 				Value: ptr.String("__Value__"),
 			},
 		},
+		Ec2DeploymentOptions: &types.EC2DeploymentOptions{
+			AutoScalingGroupProcessesToSuspend: []types.AutoScalingGroupProcess{
+				types.AutoScalingGroupProcess("Terminate"),
+				types.AutoScalingGroupProcess("Terminate"),
+			},
+		},
 		TerminationHookEnabled: ptr.Bool(true),
 	})
 	if opErr == nil {
@@ -7770,6 +8020,12 @@ func TestCheckResponseSnapshot_Error_InvalidDeploymentConfigNameException(t *tes
 				{
 					Name: ptr.String("__Name__"),
 				},
+			},
+		},
+		Ec2DeploymentOptions: &types.EC2DeploymentOptions{
+			AutoScalingGroupProcessesToSuspend: []types.AutoScalingGroupProcess{
+				types.AutoScalingGroupProcess("Terminate"),
+				types.AutoScalingGroupProcess("Terminate"),
 			},
 		},
 	})
@@ -8151,6 +8407,12 @@ func TestCheckResponseSnapshot_Error_InvalidDeploymentStyleException(t *testing.
 				Value: ptr.String("__Value__"),
 			},
 		},
+		Ec2DeploymentOptions: &types.EC2DeploymentOptions{
+			AutoScalingGroupProcessesToSuspend: []types.AutoScalingGroupProcess{
+				types.AutoScalingGroupProcess("Terminate"),
+				types.AutoScalingGroupProcess("Terminate"),
+			},
+		},
 		TerminationHookEnabled: ptr.Bool(true),
 	})
 	if opErr == nil {
@@ -8464,6 +8726,12 @@ func TestCheckResponseSnapshot_Error_InvalidEC2TagCombinationException(t *testin
 				Value: ptr.String("__Value__"),
 			},
 		},
+		Ec2DeploymentOptions: &types.EC2DeploymentOptions{
+			AutoScalingGroupProcessesToSuspend: []types.AutoScalingGroupProcess{
+				types.AutoScalingGroupProcess("Terminate"),
+				types.AutoScalingGroupProcess("Terminate"),
+			},
+		},
 		TerminationHookEnabled: ptr.Bool(true),
 	})
 	if opErr == nil {
@@ -8718,6 +8986,12 @@ func TestCheckResponseSnapshot_Error_InvalidEC2TagException(t *testing.T) {
 				Value: ptr.String("__Value__"),
 			},
 		},
+		Ec2DeploymentOptions: &types.EC2DeploymentOptions{
+			AutoScalingGroupProcessesToSuspend: []types.AutoScalingGroupProcess{
+				types.AutoScalingGroupProcess("Terminate"),
+				types.AutoScalingGroupProcess("Terminate"),
+			},
+		},
 		TerminationHookEnabled: ptr.Bool(true),
 	})
 	if opErr == nil {
@@ -8838,6 +9112,12 @@ func TestCheckResponseSnapshot_Error_InvalidECSServiceException(t *testing.T) {
 				{
 					Name: ptr.String("__Name__"),
 				},
+			},
+		},
+		Ec2DeploymentOptions: &types.EC2DeploymentOptions{
+			AutoScalingGroupProcessesToSuspend: []types.AutoScalingGroupProcess{
+				types.AutoScalingGroupProcess("Terminate"),
+				types.AutoScalingGroupProcess("Terminate"),
 			},
 		},
 	})
@@ -8999,6 +9279,12 @@ func TestCheckResponseSnapshot_Error_InvalidFileExistsBehaviorException(t *testi
 				},
 			},
 		},
+		Ec2DeploymentOptions: &types.EC2DeploymentOptions{
+			AutoScalingGroupProcessesToSuspend: []types.AutoScalingGroupProcess{
+				types.AutoScalingGroupProcess("Terminate"),
+				types.AutoScalingGroupProcess("Terminate"),
+			},
+		},
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
@@ -9118,6 +9404,12 @@ func TestCheckResponseSnapshot_Error_InvalidGitHubAccountTokenException(t *testi
 				{
 					Name: ptr.String("__Name__"),
 				},
+			},
+		},
+		Ec2DeploymentOptions: &types.EC2DeploymentOptions{
+			AutoScalingGroupProcessesToSuspend: []types.AutoScalingGroupProcess{
+				types.AutoScalingGroupProcess("Terminate"),
+				types.AutoScalingGroupProcess("Terminate"),
 			},
 		},
 	})
@@ -9326,6 +9618,12 @@ func TestCheckResponseSnapshot_Error_InvalidIgnoreApplicationStopFailuresValueEx
 				},
 			},
 		},
+		Ec2DeploymentOptions: &types.EC2DeploymentOptions{
+			AutoScalingGroupProcessesToSuspend: []types.AutoScalingGroupProcess{
+				types.AutoScalingGroupProcess("Terminate"),
+				types.AutoScalingGroupProcess("Terminate"),
+			},
+		},
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
@@ -9445,6 +9743,12 @@ func TestCheckResponseSnapshot_Error_InvalidInputException(t *testing.T) {
 				{
 					Name: ptr.String("__Name__"),
 				},
+			},
+		},
+		Ec2DeploymentOptions: &types.EC2DeploymentOptions{
+			AutoScalingGroupProcessesToSuspend: []types.AutoScalingGroupProcess{
+				types.AutoScalingGroupProcess("Terminate"),
+				types.AutoScalingGroupProcess("Terminate"),
 			},
 		},
 	})
@@ -9769,6 +10073,12 @@ func TestCheckResponseSnapshot_Error_InvalidLoadBalancerInfoException(t *testing
 				{
 					Name: ptr.String("__Name__"),
 				},
+			},
+		},
+		Ec2DeploymentOptions: &types.EC2DeploymentOptions{
+			AutoScalingGroupProcessesToSuspend: []types.AutoScalingGroupProcess{
+				types.AutoScalingGroupProcess("Terminate"),
+				types.AutoScalingGroupProcess("Terminate"),
 			},
 		},
 	})
@@ -10108,6 +10418,12 @@ func TestCheckResponseSnapshot_Error_InvalidOnPremisesTagCombinationException(t 
 				Value: ptr.String("__Value__"),
 			},
 		},
+		Ec2DeploymentOptions: &types.EC2DeploymentOptions{
+			AutoScalingGroupProcessesToSuspend: []types.AutoScalingGroupProcess{
+				types.AutoScalingGroupProcess("Terminate"),
+				types.AutoScalingGroupProcess("Terminate"),
+			},
+		},
 		TerminationHookEnabled: ptr.Bool(true),
 	})
 	if opErr == nil {
@@ -10368,6 +10684,12 @@ func TestCheckResponseSnapshot_Error_InvalidRoleException(t *testing.T) {
 				{
 					Name: ptr.String("__Name__"),
 				},
+			},
+		},
+		Ec2DeploymentOptions: &types.EC2DeploymentOptions{
+			AutoScalingGroupProcessesToSuspend: []types.AutoScalingGroupProcess{
+				types.AutoScalingGroupProcess("Terminate"),
+				types.AutoScalingGroupProcess("Terminate"),
 			},
 		},
 	})
@@ -10843,6 +11165,12 @@ func TestCheckResponseSnapshot_Error_InvalidTargetGroupPairException(t *testing.
 				Value: ptr.String("__Value__"),
 			},
 		},
+		Ec2DeploymentOptions: &types.EC2DeploymentOptions{
+			AutoScalingGroupProcessesToSuspend: []types.AutoScalingGroupProcess{
+				types.AutoScalingGroupProcess("Terminate"),
+				types.AutoScalingGroupProcess("Terminate"),
+			},
+		},
 		TerminationHookEnabled: ptr.Bool(true),
 	})
 	if opErr == nil {
@@ -10963,6 +11291,12 @@ func TestCheckResponseSnapshot_Error_InvalidTargetInstancesException(t *testing.
 				{
 					Name: ptr.String("__Name__"),
 				},
+			},
+		},
+		Ec2DeploymentOptions: &types.EC2DeploymentOptions{
+			AutoScalingGroupProcessesToSuspend: []types.AutoScalingGroupProcess{
+				types.AutoScalingGroupProcess("Terminate"),
+				types.AutoScalingGroupProcess("Terminate"),
 			},
 		},
 	})
@@ -11122,6 +11456,12 @@ func TestCheckResponseSnapshot_Error_InvalidTrafficRoutingConfigurationException
 				{
 					Name: ptr.String("__Name__"),
 				},
+			},
+		},
+		Ec2DeploymentOptions: &types.EC2DeploymentOptions{
+			AutoScalingGroupProcessesToSuspend: []types.AutoScalingGroupProcess{
+				types.AutoScalingGroupProcess("Terminate"),
+				types.AutoScalingGroupProcess("Terminate"),
 			},
 		},
 	})
@@ -11377,6 +11717,12 @@ func TestCheckResponseSnapshot_Error_InvalidTriggerConfigException(t *testing.T)
 				Value: ptr.String("__Value__"),
 			},
 		},
+		Ec2DeploymentOptions: &types.EC2DeploymentOptions{
+			AutoScalingGroupProcessesToSuspend: []types.AutoScalingGroupProcess{
+				types.AutoScalingGroupProcess("Terminate"),
+				types.AutoScalingGroupProcess("Terminate"),
+			},
+		},
 		TerminationHookEnabled: ptr.Bool(true),
 	})
 	if opErr == nil {
@@ -11497,6 +11843,12 @@ func TestCheckResponseSnapshot_Error_InvalidUpdateOutdatedInstancesOnlyValueExce
 				{
 					Name: ptr.String("__Name__"),
 				},
+			},
+		},
+		Ec2DeploymentOptions: &types.EC2DeploymentOptions{
+			AutoScalingGroupProcessesToSuspend: []types.AutoScalingGroupProcess{
+				types.AutoScalingGroupProcess("Terminate"),
+				types.AutoScalingGroupProcess("Terminate"),
 			},
 		},
 	})
@@ -11832,6 +12184,12 @@ func TestCheckResponseSnapshot_Error_LifecycleHookLimitExceededException(t *test
 				Value: ptr.String("__Value__"),
 			},
 		},
+		Ec2DeploymentOptions: &types.EC2DeploymentOptions{
+			AutoScalingGroupProcessesToSuspend: []types.AutoScalingGroupProcess{
+				types.AutoScalingGroupProcess("Terminate"),
+				types.AutoScalingGroupProcess("Terminate"),
+			},
+		},
 		TerminationHookEnabled: ptr.Bool(true),
 	})
 	if opErr == nil {
@@ -12063,6 +12421,12 @@ func TestCheckResponseSnapshot_Error_RevisionDoesNotExistException(t *testing.T)
 				{
 					Name: ptr.String("__Name__"),
 				},
+			},
+		},
+		Ec2DeploymentOptions: &types.EC2DeploymentOptions{
+			AutoScalingGroupProcessesToSuspend: []types.AutoScalingGroupProcess{
+				types.AutoScalingGroupProcess("Terminate"),
+				types.AutoScalingGroupProcess("Terminate"),
 			},
 		},
 	})
@@ -12389,6 +12753,12 @@ func TestCheckResponseSnapshot_Error_RoleRequiredException(t *testing.T) {
 			{
 				Key:   ptr.String("__Key__"),
 				Value: ptr.String("__Value__"),
+			},
+		},
+		Ec2DeploymentOptions: &types.EC2DeploymentOptions{
+			AutoScalingGroupProcessesToSuspend: []types.AutoScalingGroupProcess{
+				types.AutoScalingGroupProcess("Terminate"),
+				types.AutoScalingGroupProcess("Terminate"),
 			},
 		},
 		TerminationHookEnabled: ptr.Bool(true),
@@ -12725,6 +13095,12 @@ func TestCheckResponseSnapshot_Error_TagSetListLimitExceededException(t *testing
 				Value: ptr.String("__Value__"),
 			},
 		},
+		Ec2DeploymentOptions: &types.EC2DeploymentOptions{
+			AutoScalingGroupProcessesToSuspend: []types.AutoScalingGroupProcess{
+				types.AutoScalingGroupProcess("Terminate"),
+				types.AutoScalingGroupProcess("Terminate"),
+			},
+		},
 		TerminationHookEnabled: ptr.Bool(true),
 	})
 	if opErr == nil {
@@ -13015,6 +13391,12 @@ func TestCheckResponseSnapshot_Error_TriggerTargetsLimitExceededException(t *tes
 			{
 				Key:   ptr.String("__Key__"),
 				Value: ptr.String("__Value__"),
+			},
+		},
+		Ec2DeploymentOptions: &types.EC2DeploymentOptions{
+			AutoScalingGroupProcessesToSuspend: []types.AutoScalingGroupProcess{
+				types.AutoScalingGroupProcess("Terminate"),
+				types.AutoScalingGroupProcess("Terminate"),
 			},
 		},
 		TerminationHookEnabled: ptr.Bool(true),

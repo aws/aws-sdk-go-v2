@@ -8,6 +8,7 @@ import (
 	smithy "github.com/aws/smithy-go"
 )
 
+// User does not have sufficient access to perform this action.
 type AccessDeniedException struct {
 	Message *string
 
@@ -112,6 +113,7 @@ func (v *AccessDeniedException) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
+// Updating or deleting a resource can cause an inconsistent state.
 type ConflictException struct {
 	Message *string
 
@@ -216,6 +218,7 @@ func (v *ConflictException) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
+// Unexpected error during processing of request.
 type InternalServerException struct {
 	Message *string
 
@@ -320,6 +323,7 @@ func (v *InternalServerException) Deserialize(d smithy.ShapeDeserializer) error 
 	})
 }
 
+// Your account is pending verification.
 type PendingVerification struct {
 	Message *string
 
@@ -424,6 +428,7 @@ func (v *PendingVerification) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
+// Request references a resource which does not exist.
 type ResourceNotFoundException struct {
 	Message *string
 
@@ -528,6 +533,7 @@ func (v *ResourceNotFoundException) Deserialize(d smithy.ShapeDeserializer) erro
 	})
 }
 
+// Request would cause a service quota to be exceeded.
 type ServiceQuotaExceededException struct {
 	Message *string
 
@@ -632,6 +638,8 @@ func (v *ServiceQuotaExceededException) Deserialize(d smithy.ShapeDeserializer) 
 	})
 }
 
+// The input fails to satisfy the constraints specified by an Amazon Web Services
+// service.
 type ValidationException struct {
 	Message *string
 

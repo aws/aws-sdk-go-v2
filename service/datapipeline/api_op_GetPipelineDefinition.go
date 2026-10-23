@@ -4,7 +4,9 @@ package datapipeline
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/datapipeline/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/datapipeline/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -63,6 +65,21 @@ type GetPipelineDefinitionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetPipelineDefinitionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetPipelineDefinitionInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetPipelineDefinitionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PipelineId != nil {
+		s.WriteString(schemas.GetPipelineDefinitionInput_pipelineId, *v.PipelineId)
+	}
+	if v.Version != nil {
+		s.WriteString(schemas.GetPipelineDefinitionInput_version, *v.Version)
+	}
+}
+
 // Contains the output of GetPipelineDefinition.
 type GetPipelineDefinitionOutput struct {
 
@@ -81,13 +98,35 @@ type GetPipelineDefinitionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetPipelineDefinitionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetPipelineDefinitionOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetPipelineDefinitionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeParameterObjectList(s, schemas.GetPipelineDefinitionOutput_parameterObjects, v.ParameterObjects)
+	serializeParameterValueList(s, schemas.GetPipelineDefinitionOutput_parameterValues, v.ParameterValues)
+	serializePipelineObjectList(s, schemas.GetPipelineDefinitionOutput_pipelineObjects, v.PipelineObjects)
+}
+func (v *GetPipelineDefinitionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetPipelineDefinitionOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetPipelineDefinitionOutput_parameterObjects:
+			return deserializeParameterObjectList(d, schemas.GetPipelineDefinitionOutput_parameterObjects, &v.ParameterObjects)
+		case schemas.GetPipelineDefinitionOutput_parameterValues:
+			return deserializeParameterValueList(d, schemas.GetPipelineDefinitionOutput_parameterValues, &v.ParameterValues)
+		case schemas.GetPipelineDefinitionOutput_pipelineObjects:
+			return deserializePipelineObjectList(d, schemas.GetPipelineDefinitionOutput_pipelineObjects, &v.PipelineObjects)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetPipelineDefinitionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetPipelineDefinition{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetPipelineDefinition, schemas.GetPipelineDefinitionInput, schemas.GetPipelineDefinitionOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetPipelineDefinition{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetPipelineDefinition, schemas.GetPipelineDefinitionInput, schemas.GetPipelineDefinitionOutput), output: &GetPipelineDefinitionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package devicefarm
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/devicefarm/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/devicefarm/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -43,6 +45,21 @@ type RenewOfferingInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RenewOfferingInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RenewOfferingRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RenewOfferingInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.OfferingId != nil {
+		s.WriteString(schemas.RenewOfferingRequest_offeringId, *v.OfferingId)
+	}
+	if v.Quantity != nil {
+		s.WriteInt32(schemas.RenewOfferingRequest_quantity, *v.Quantity)
+	}
+}
+
 // The result of a renewal offering.
 type RenewOfferingOutput struct {
 
@@ -55,13 +72,34 @@ type RenewOfferingOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RenewOfferingOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RenewOfferingResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RenewOfferingOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.OfferingTransaction != nil {
+		s.WriteStruct(schemas.RenewOfferingResult_offeringTransaction)
+		v.OfferingTransaction.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *RenewOfferingOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RenewOfferingResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RenewOfferingResult_offeringTransaction:
+			v.OfferingTransaction = &types.OfferingTransaction{}
+			return v.OfferingTransaction.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationRenewOfferingMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpRenewOffering{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RenewOffering, schemas.RenewOfferingRequest, schemas.RenewOfferingResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpRenewOffering{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RenewOffering, schemas.RenewOfferingRequest, schemas.RenewOfferingResult), output: &RenewOfferingOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

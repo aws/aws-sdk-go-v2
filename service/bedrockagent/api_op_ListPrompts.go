@@ -5,7 +5,9 @@ package bedrockagent
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/bedrockagent/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagent/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -51,6 +53,24 @@ type ListPromptsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListPromptsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListPromptsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListPromptsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListPromptsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListPromptsRequest_nextToken, *v.NextToken)
+	}
+	if v.PromptIdentifier != nil {
+		s.WriteString(schemas.ListPromptsRequest_promptIdentifier, *v.PromptIdentifier)
+	}
+}
+
 type ListPromptsOutput struct {
 
 	// A list, each member of which contains information about a prompt using Prompt
@@ -70,13 +90,35 @@ type ListPromptsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListPromptsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListPromptsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListPromptsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListPromptsResponse_nextToken, *v.NextToken)
+	}
+	serializePromptSummaries(s, schemas.ListPromptsResponse_promptSummaries, v.PromptSummaries)
+}
+func (v *ListPromptsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListPromptsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListPromptsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListPromptsResponse_nextToken, v.NextToken)
+		case schemas.ListPromptsResponse_promptSummaries:
+			return deserializePromptSummaries(d, schemas.ListPromptsResponse_promptSummaries, &v.PromptSummaries)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListPromptsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListPrompts{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListPrompts, schemas.ListPromptsRequest, schemas.ListPromptsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListPrompts{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListPrompts, schemas.ListPromptsRequest, schemas.ListPromptsResponse), output: &ListPromptsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

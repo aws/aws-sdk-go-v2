@@ -5,7 +5,9 @@ package mediatailor
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/mediatailor/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/mediatailor/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -59,6 +61,52 @@ type GetChannelScheduleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetChannelScheduleInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetChannelScheduleRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetChannelScheduleInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Audience != nil {
+		s.WriteString(schemas.GetChannelScheduleRequest_Audience, *v.Audience)
+	}
+	if v.ChannelName != nil {
+		s.WriteString(schemas.GetChannelScheduleRequest_ChannelName, *v.ChannelName)
+	}
+	if v.DurationMinutes != nil {
+		s.WriteString(schemas.GetChannelScheduleRequest_DurationMinutes, *v.DurationMinutes)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.GetChannelScheduleRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetChannelScheduleRequest_NextToken, *v.NextToken)
+	}
+}
+func (v *GetChannelScheduleInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetChannelScheduleRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetChannelScheduleRequest_Audience:
+			v.Audience = new(string)
+			return d.ReadString(schemas.GetChannelScheduleRequest_Audience, v.Audience)
+		case schemas.GetChannelScheduleRequest_ChannelName:
+			v.ChannelName = new(string)
+			return d.ReadString(schemas.GetChannelScheduleRequest_ChannelName, v.ChannelName)
+		case schemas.GetChannelScheduleRequest_DurationMinutes:
+			v.DurationMinutes = new(string)
+			return d.ReadString(schemas.GetChannelScheduleRequest_DurationMinutes, v.DurationMinutes)
+		case schemas.GetChannelScheduleRequest_MaxResults:
+			v.MaxResults = new(int32)
+			return d.ReadInt32(schemas.GetChannelScheduleRequest_MaxResults, v.MaxResults)
+		case schemas.GetChannelScheduleRequest_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.GetChannelScheduleRequest_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
+
 type GetChannelScheduleOutput struct {
 
 	// A list of schedule entries for the channel.
@@ -74,13 +122,35 @@ type GetChannelScheduleOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetChannelScheduleOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetChannelScheduleResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetChannelScheduleOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serialize__listOfScheduleEntry(s, schemas.GetChannelScheduleResponse_Items, v.Items)
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetChannelScheduleResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *GetChannelScheduleOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetChannelScheduleResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetChannelScheduleResponse_Items:
+			return deserialize__listOfScheduleEntry(d, schemas.GetChannelScheduleResponse_Items, &v.Items)
+		case schemas.GetChannelScheduleResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.GetChannelScheduleResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetChannelScheduleMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetChannelSchedule{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetChannelSchedule, schemas.GetChannelScheduleRequest, schemas.GetChannelScheduleResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetChannelSchedule{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetChannelSchedule, schemas.GetChannelScheduleRequest, schemas.GetChannelScheduleResponse), output: &GetChannelScheduleOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

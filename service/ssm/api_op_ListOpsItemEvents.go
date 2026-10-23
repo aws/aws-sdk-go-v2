@@ -5,7 +5,9 @@ package ssm
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/ssm/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ssm/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -43,6 +45,22 @@ type ListOpsItemEventsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListOpsItemEventsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListOpsItemEventsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListOpsItemEventsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeOpsItemEventFilters(s, schemas.ListOpsItemEventsRequest_Filters, v.Filters)
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListOpsItemEventsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListOpsItemEventsRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListOpsItemEventsOutput struct {
 
 	// The token for the next set of items to return. Use this token to get the next
@@ -58,13 +76,35 @@ type ListOpsItemEventsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListOpsItemEventsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListOpsItemEventsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListOpsItemEventsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListOpsItemEventsResponse_NextToken, *v.NextToken)
+	}
+	serializeOpsItemEventSummaries(s, schemas.ListOpsItemEventsResponse_Summaries, v.Summaries)
+}
+func (v *ListOpsItemEventsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListOpsItemEventsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListOpsItemEventsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListOpsItemEventsResponse_NextToken, v.NextToken)
+		case schemas.ListOpsItemEventsResponse_Summaries:
+			return deserializeOpsItemEventSummaries(d, schemas.ListOpsItemEventsResponse_Summaries, &v.Summaries)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListOpsItemEventsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListOpsItemEvents{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListOpsItemEvents, schemas.ListOpsItemEventsRequest, schemas.ListOpsItemEventsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListOpsItemEvents{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListOpsItemEvents, schemas.ListOpsItemEventsRequest, schemas.ListOpsItemEventsResponse), output: &ListOpsItemEventsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

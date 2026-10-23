@@ -123,7 +123,8 @@ var PaymentCryptographyDataPlane = smithy.NewServiceSchema(_PaymentCryptographyD
 var AccessDeniedException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.paymentcryptographydata",
 	Name:      "AccessDeniedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 403})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 403})
 var AccessDeniedException_Message *smithy.Schema
 
 var AmexAttributes = smithy.NewSchema(smithy.ShapeID{
@@ -693,7 +694,8 @@ var _IntegerRangeBetween4And32 = smithy.NewSchema(smithy.ShapeID{
 var InternalServerException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.paymentcryptographydata",
 	Name:      "InternalServerException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 500})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
+	&smithytraits.HTTPError{Code: 500})
 var InternalServerException_Message *smithy.Schema
 
 var KekValidationRequest = smithy.NewSchema(smithy.ShapeID{
@@ -1008,15 +1010,18 @@ var RandomKeySendVariantMask_VARIANT_MASK_82 *smithy.Schema
 var ReEncryptionAttributes = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.paymentcryptographydata",
 	Name:      "ReEncryptionAttributes",
-}, smithy.ShapeTypeUnion, 2)
+}, smithy.ShapeTypeUnion, 3)
 var ReEncryptionAttributes_Symmetric *smithy.Schema
+
+var ReEncryptionAttributes_Asymmetric *smithy.Schema
 
 var ReEncryptionAttributes_Dukpt *smithy.Schema
 
 var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.paymentcryptographydata",
 	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 404})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 404})
 var ResourceNotFoundException_ResourceId *smithy.Schema
 
 var _ServiceCodeType = smithy.NewSchema(smithy.ShapeID{
@@ -1172,7 +1177,8 @@ var _SystemTraceAuditNumberType = smithy.NewSchema(smithy.ShapeID{
 var ThrottlingException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.paymentcryptographydata",
 	Name:      "ThrottlingException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 429})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 429})
 var ThrottlingException_Message *smithy.Schema
 
 var _Tr31WrappedKeyBlock = smithy.NewSchema(smithy.ShapeID{
@@ -1234,7 +1240,7 @@ var _ValidationDataType = smithy.NewSchema(smithy.ShapeID{
 var ValidationException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.paymentcryptographydata",
 	Name:      "ValidationException",
-}, smithy.ShapeTypeStructure, 2)
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"})
 var ValidationException_message *smithy.Schema
 
 var ValidationException_fieldList *smithy.Schema
@@ -1256,7 +1262,8 @@ var _ValidationExceptionFieldList_member *smithy.Schema
 var VerificationFailedException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.paymentcryptographydata",
 	Name:      "VerificationFailedException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var VerificationFailedException_Reason *smithy.Schema
 
 var VerificationFailedException_Message *smithy.Schema
@@ -2234,6 +2241,8 @@ func init() {
 	RandomKeySendVariantMask_VARIANT_MASK_82 = RandomKeySendVariantMask.AddMember("VARIANT_MASK_82", smithyprelude.Unit)
 
 	ReEncryptionAttributes_Symmetric = ReEncryptionAttributes.AddMember("Symmetric", SymmetricEncryptionAttributes)
+
+	ReEncryptionAttributes_Asymmetric = ReEncryptionAttributes.AddMember("Asymmetric", AsymmetricEncryptionAttributes)
 
 	ReEncryptionAttributes_Dukpt = ReEncryptionAttributes.AddMember("Dukpt", DukptEncryptionAttributes)
 

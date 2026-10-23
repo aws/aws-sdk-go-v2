@@ -4,6 +4,8 @@ package ecr
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/ecr/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -38,6 +40,21 @@ type ValidatePullThroughCacheRuleInput struct {
 	RegistryId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ValidatePullThroughCacheRuleInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ValidatePullThroughCacheRuleRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ValidatePullThroughCacheRuleInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EcrRepositoryPrefix != nil {
+		s.WriteString(schemas.ValidatePullThroughCacheRuleRequest_ecrRepositoryPrefix, *v.EcrRepositoryPrefix)
+	}
+	if v.RegistryId != nil {
+		s.WriteString(schemas.ValidatePullThroughCacheRuleRequest_registryId, *v.RegistryId)
+	}
 }
 
 type ValidatePullThroughCacheRuleOutput struct {
@@ -79,13 +96,73 @@ type ValidatePullThroughCacheRuleOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ValidatePullThroughCacheRuleOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ValidatePullThroughCacheRuleResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ValidatePullThroughCacheRuleOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CredentialArn != nil {
+		s.WriteString(schemas.ValidatePullThroughCacheRuleResponse_credentialArn, *v.CredentialArn)
+	}
+	if v.CustomRoleArn != nil {
+		s.WriteString(schemas.ValidatePullThroughCacheRuleResponse_customRoleArn, *v.CustomRoleArn)
+	}
+	if v.EcrRepositoryPrefix != nil {
+		s.WriteString(schemas.ValidatePullThroughCacheRuleResponse_ecrRepositoryPrefix, *v.EcrRepositoryPrefix)
+	}
+	if v.Failure != nil {
+		s.WriteString(schemas.ValidatePullThroughCacheRuleResponse_failure, *v.Failure)
+	}
+	if v.IsValid != false {
+		s.WriteBool(schemas.ValidatePullThroughCacheRuleResponse_isValid, v.IsValid)
+	}
+	if v.RegistryId != nil {
+		s.WriteString(schemas.ValidatePullThroughCacheRuleResponse_registryId, *v.RegistryId)
+	}
+	if v.UpstreamRegistryUrl != nil {
+		s.WriteString(schemas.ValidatePullThroughCacheRuleResponse_upstreamRegistryUrl, *v.UpstreamRegistryUrl)
+	}
+	if v.UpstreamRepositoryPrefix != nil {
+		s.WriteString(schemas.ValidatePullThroughCacheRuleResponse_upstreamRepositoryPrefix, *v.UpstreamRepositoryPrefix)
+	}
+}
+func (v *ValidatePullThroughCacheRuleOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ValidatePullThroughCacheRuleResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ValidatePullThroughCacheRuleResponse_credentialArn:
+			v.CredentialArn = new(string)
+			return d.ReadString(schemas.ValidatePullThroughCacheRuleResponse_credentialArn, v.CredentialArn)
+		case schemas.ValidatePullThroughCacheRuleResponse_customRoleArn:
+			v.CustomRoleArn = new(string)
+			return d.ReadString(schemas.ValidatePullThroughCacheRuleResponse_customRoleArn, v.CustomRoleArn)
+		case schemas.ValidatePullThroughCacheRuleResponse_ecrRepositoryPrefix:
+			v.EcrRepositoryPrefix = new(string)
+			return d.ReadString(schemas.ValidatePullThroughCacheRuleResponse_ecrRepositoryPrefix, v.EcrRepositoryPrefix)
+		case schemas.ValidatePullThroughCacheRuleResponse_failure:
+			v.Failure = new(string)
+			return d.ReadString(schemas.ValidatePullThroughCacheRuleResponse_failure, v.Failure)
+		case schemas.ValidatePullThroughCacheRuleResponse_isValid:
+			return d.ReadBool(schemas.ValidatePullThroughCacheRuleResponse_isValid, &v.IsValid)
+		case schemas.ValidatePullThroughCacheRuleResponse_registryId:
+			v.RegistryId = new(string)
+			return d.ReadString(schemas.ValidatePullThroughCacheRuleResponse_registryId, v.RegistryId)
+		case schemas.ValidatePullThroughCacheRuleResponse_upstreamRegistryUrl:
+			v.UpstreamRegistryUrl = new(string)
+			return d.ReadString(schemas.ValidatePullThroughCacheRuleResponse_upstreamRegistryUrl, v.UpstreamRegistryUrl)
+		case schemas.ValidatePullThroughCacheRuleResponse_upstreamRepositoryPrefix:
+			v.UpstreamRepositoryPrefix = new(string)
+			return d.ReadString(schemas.ValidatePullThroughCacheRuleResponse_upstreamRepositoryPrefix, v.UpstreamRepositoryPrefix)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationValidatePullThroughCacheRuleMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpValidatePullThroughCacheRule{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ValidatePullThroughCacheRule, schemas.ValidatePullThroughCacheRuleRequest, schemas.ValidatePullThroughCacheRuleResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpValidatePullThroughCacheRule{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ValidatePullThroughCacheRule, schemas.ValidatePullThroughCacheRuleRequest, schemas.ValidatePullThroughCacheRuleResponse), output: &ValidatePullThroughCacheRuleOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

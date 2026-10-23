@@ -239,6 +239,7 @@ const (
 	ExecutionBlockTypeAuroraProvisionedScaling    ExecutionBlockType = "AuroraProvisionedScaling"
 	ExecutionBlockTypeNeptune                     ExecutionBlockType = "NeptuneGlobalDatabase"
 	ExecutionBlockTypeRdsSwitchoverReadReplica    ExecutionBlockType = "RdsSwitchoverReadReplica"
+	ExecutionBlockTypeSsmSendCommand              ExecutionBlockType = "SSMSendCommand"
 )
 
 // Values returns all known values for ExecutionBlockType. Note that this can be
@@ -265,6 +266,7 @@ func (ExecutionBlockType) Values() []ExecutionBlockType {
 		"AuroraProvisionedScaling",
 		"NeptuneGlobalDatabase",
 		"RdsSwitchoverReadReplica",
+		"SSMSendCommand",
 	}
 }
 
@@ -638,6 +640,49 @@ func (RoutingControlStateChange) Values() []RoutingControlStateChange {
 	}
 }
 
+type ServiceQuotaWarningStatus string
+
+// Enum values for ServiceQuotaWarningStatus
+const (
+	ServiceQuotaWarningStatusPending                         ServiceQuotaWarningStatus = "pending"
+	ServiceQuotaWarningStatusDenied                          ServiceQuotaWarningStatus = "denied"
+	ServiceQuotaWarningStatusInsufficientPermissions         ServiceQuotaWarningStatus = "insufficientPermissions"
+	ServiceQuotaWarningStatusMaxRegionSwitchRequestsExceeded ServiceQuotaWarningStatus = "maxRegionSwitchRequestsExceeded"
+	ServiceQuotaWarningStatusMaxAccountRequestsExceeded      ServiceQuotaWarningStatus = "maxAccountRequestsExceeded"
+)
+
+// Values returns all known values for ServiceQuotaWarningStatus. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ServiceQuotaWarningStatus) Values() []ServiceQuotaWarningStatus {
+	return []ServiceQuotaWarningStatus{
+		"pending",
+		"denied",
+		"insufficientPermissions",
+		"maxRegionSwitchRequestsExceeded",
+		"maxAccountRequestsExceeded",
+	}
+}
+
+type SsmSendCommandUngracefulBehavior string
+
+// Enum values for SsmSendCommandUngracefulBehavior
+const (
+	SsmSendCommandUngracefulBehaviorSkip SsmSendCommandUngracefulBehavior = "skip"
+)
+
+// Values returns all known values for SsmSendCommandUngracefulBehavior. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (SsmSendCommandUngracefulBehavior) Values() []SsmSendCommandUngracefulBehavior {
+	return []SsmSendCommandUngracefulBehavior{
+		"skip",
+	}
+}
+
 type StepStatus string
 
 // Enum values for StepStatus
@@ -707,6 +752,25 @@ func (UpdatePlanExecutionStepAction) Values() []UpdatePlanExecutionStepAction {
 	return []UpdatePlanExecutionStepAction{
 		"switchToUngraceful",
 		"skip",
+	}
+}
+
+type WaitELBTargetGroupHealthy string
+
+// Enum values for WaitELBTargetGroupHealthy
+const (
+	WaitELBTargetGroupHealthyEnabled  WaitELBTargetGroupHealthy = "enabled"
+	WaitELBTargetGroupHealthyDisabled WaitELBTargetGroupHealthy = "disabled"
+)
+
+// Values returns all known values for WaitELBTargetGroupHealthy. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (WaitELBTargetGroupHealthy) Values() []WaitELBTargetGroupHealthy {
+	return []WaitELBTargetGroupHealthy{
+		"enabled",
+		"disabled",
 	}
 }
 

@@ -1,5 +1,6 @@
 200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: AWSFMS_20180101.BatchAssociateResource
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"FailedItems":[{"Reason":"NOT_VALID_ARN","URI":"__URI__"},{"Reason":"NOT_VALID_ARN","URI":"__URI__"}],"ResourceSetIdentifier":"__ResourceSetIdentifier__"}
+¿kFailedItemsŸ¿fReasonmNOT_VALID_ARNcURIg__URI__ÿ¿fReasonmNOT_VALID_ARNcURIg__URI__ÿÿuResourceSetIdentifierx__ResourceSetIdentifier__ÿ

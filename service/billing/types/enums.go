@@ -21,6 +21,25 @@ func (ApplicationType) Values() []ApplicationType {
 	}
 }
 
+type BillingDomain string
+
+// Enum values for BillingDomain
+const (
+	BillingDomainBillable BillingDomain = "BILLABLE"
+	BillingDomainProForma BillingDomain = "PRO_FORMA"
+)
+
+// Values returns all known values for BillingDomain. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (BillingDomain) Values() []BillingDomain {
+	return []BillingDomain{
+		"BILLABLE",
+		"PRO_FORMA",
+	}
+}
+
 type BillingFeature string
 
 // Enum values for BillingFeature

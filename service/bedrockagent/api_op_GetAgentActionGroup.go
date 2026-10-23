@@ -4,7 +4,9 @@ package bedrockagent
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/bedrockagent/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagent/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -44,6 +46,24 @@ type GetAgentActionGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetAgentActionGroupInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetAgentActionGroupRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetAgentActionGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ActionGroupId != nil {
+		s.WriteString(schemas.GetAgentActionGroupRequest_actionGroupId, *v.ActionGroupId)
+	}
+	if v.AgentId != nil {
+		s.WriteString(schemas.GetAgentActionGroupRequest_agentId, *v.AgentId)
+	}
+	if v.AgentVersion != nil {
+		s.WriteString(schemas.GetAgentActionGroupRequest_agentVersion, *v.AgentVersion)
+	}
+}
+
 type GetAgentActionGroupOutput struct {
 
 	// Contains details about the action group.
@@ -57,13 +77,34 @@ type GetAgentActionGroupOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetAgentActionGroupOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetAgentActionGroupResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetAgentActionGroupOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AgentActionGroup != nil {
+		s.WriteStruct(schemas.GetAgentActionGroupResponse_agentActionGroup)
+		v.AgentActionGroup.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetAgentActionGroupOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetAgentActionGroupResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetAgentActionGroupResponse_agentActionGroup:
+			v.AgentActionGroup = &types.AgentActionGroup{}
+			return v.AgentActionGroup.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetAgentActionGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetAgentActionGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAgentActionGroup, schemas.GetAgentActionGroupRequest, schemas.GetAgentActionGroupResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetAgentActionGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAgentActionGroup, schemas.GetAgentActionGroupRequest, schemas.GetAgentActionGroupResponse), output: &GetAgentActionGroupOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

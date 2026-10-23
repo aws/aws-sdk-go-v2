@@ -5,7 +5,9 @@ package securityhub
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/securityhub/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/securityhub/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -46,6 +48,24 @@ type GetRecommendedPolicyV2Input struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetRecommendedPolicyV2Input) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetRecommendedPolicyV2Request)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetRecommendedPolicyV2Input) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.GetRecommendedPolicyV2Request_MaxResults, *v.MaxResults)
+	}
+	if v.MetadataUid != nil {
+		s.WriteString(schemas.GetRecommendedPolicyV2Request_MetadataUid, *v.MetadataUid)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetRecommendedPolicyV2Request_NextToken, *v.NextToken)
+	}
+}
+
 type GetRecommendedPolicyV2Output struct {
 
 	// Detailed information for a FAILED retrieval status.
@@ -72,13 +92,69 @@ type GetRecommendedPolicyV2Output struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetRecommendedPolicyV2Output) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetRecommendedPolicyV2Response)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetRecommendedPolicyV2Output) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Error != nil {
+		s.WriteStruct(schemas.GetRecommendedPolicyV2Response_Error)
+		v.Error.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetRecommendedPolicyV2Response_NextToken, *v.NextToken)
+	}
+	serializeRecommendationSteps(s, schemas.GetRecommendedPolicyV2Response_RecommendationSteps, v.RecommendationSteps)
+	if v.RecommendationType != "" {
+		s.WriteString(schemas.GetRecommendedPolicyV2Response_RecommendationType, string(v.RecommendationType))
+	}
+	if v.ResourceArn != nil {
+		s.WriteString(schemas.GetRecommendedPolicyV2Response_ResourceArn, *v.ResourceArn)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.GetRecommendedPolicyV2Response_Status, string(v.Status))
+	}
+}
+func (v *GetRecommendedPolicyV2Output) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetRecommendedPolicyV2Response, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetRecommendedPolicyV2Response_Error:
+			v.Error = &types.RecommendationError{}
+			return v.Error.Deserialize(d)
+		case schemas.GetRecommendedPolicyV2Response_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.GetRecommendedPolicyV2Response_NextToken, v.NextToken)
+		case schemas.GetRecommendedPolicyV2Response_RecommendationSteps:
+			return deserializeRecommendationSteps(d, schemas.GetRecommendedPolicyV2Response_RecommendationSteps, &v.RecommendationSteps)
+		case schemas.GetRecommendedPolicyV2Response_RecommendationType:
+			var ev string
+			if err := d.ReadString(schemas.GetRecommendedPolicyV2Response_RecommendationType, &ev); err != nil {
+				return err
+			}
+			v.RecommendationType = types.RecommendationType(ev)
+			return nil
+		case schemas.GetRecommendedPolicyV2Response_ResourceArn:
+			v.ResourceArn = new(string)
+			return d.ReadString(schemas.GetRecommendedPolicyV2Response_ResourceArn, v.ResourceArn)
+		case schemas.GetRecommendedPolicyV2Response_Status:
+			var ev string
+			if err := d.ReadString(schemas.GetRecommendedPolicyV2Response_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.RecommendationStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetRecommendedPolicyV2Middlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetRecommendedPolicyV2{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetRecommendedPolicyV2, schemas.GetRecommendedPolicyV2Request, schemas.GetRecommendedPolicyV2Response)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetRecommendedPolicyV2{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetRecommendedPolicyV2, schemas.GetRecommendedPolicyV2Request, schemas.GetRecommendedPolicyV2Response), output: &GetRecommendedPolicyV2Output{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -1296,6 +1296,7 @@ func TestCheckResponseSnapshot_RegisterComputeNodeGroupInstance(t *testing.T) {
 			},
 			ScriptCachingPolicy: types.ScriptCachingPolicy("CACHE_ONCE"),
 		},
+		SchedulerVersion: ptr.String("__SchedulerVersion__"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("RegisterComputeNodeGroupInstance.response")
 	if errors.Is(err, fs.ErrNotExist) {

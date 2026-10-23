@@ -5,7 +5,9 @@ package quicksight
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/quicksight/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/quicksight/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -43,6 +45,24 @@ type ListAppsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAppsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAppsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAppsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AwsAccountId != nil {
+		s.WriteString(schemas.ListAppsRequest_AwsAccountId, *v.AwsAccountId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListAppsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAppsRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListAppsOutput struct {
 
 	// A list of app summaries.
@@ -62,13 +82,41 @@ type ListAppsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAppsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAppsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAppsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAppSummaryList(s, schemas.ListAppsResponse_AppSummaryList, v.AppSummaryList)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAppsResponse_NextToken, *v.NextToken)
+	}
+	if v.RequestId != nil {
+		s.WriteString(schemas.ListAppsResponse_RequestId, *v.RequestId)
+	}
+}
+func (v *ListAppsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListAppsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListAppsResponse_AppSummaryList:
+			return deserializeAppSummaryList(d, schemas.ListAppsResponse_AppSummaryList, &v.AppSummaryList)
+		case schemas.ListAppsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListAppsResponse_NextToken, v.NextToken)
+		case schemas.ListAppsResponse_RequestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.ListAppsResponse_RequestId, v.RequestId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListAppsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListApps{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListApps, schemas.ListAppsRequest, schemas.ListAppsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListApps{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListApps, schemas.ListAppsRequest, schemas.ListAppsResponse), output: &ListAppsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

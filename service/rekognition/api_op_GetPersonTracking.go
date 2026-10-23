@@ -5,7 +5,9 @@ package rekognition
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/rekognition/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/rekognition/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -91,6 +93,27 @@ type GetPersonTrackingInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetPersonTrackingInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetPersonTrackingRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetPersonTrackingInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.JobId != nil {
+		s.WriteString(schemas.GetPersonTrackingRequest_JobId, *v.JobId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.GetPersonTrackingRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetPersonTrackingRequest_NextToken, *v.NextToken)
+	}
+	if v.SortBy != "" {
+		s.WriteString(schemas.GetPersonTrackingRequest_SortBy, string(v.SortBy))
+	}
+}
+
 type GetPersonTrackingOutput struct {
 
 	// Job identifier for the person tracking operation for which you want to obtain
@@ -134,13 +157,79 @@ type GetPersonTrackingOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetPersonTrackingOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetPersonTrackingResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetPersonTrackingOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.JobId != nil {
+		s.WriteString(schemas.GetPersonTrackingResponse_JobId, *v.JobId)
+	}
+	if v.JobStatus != "" {
+		s.WriteString(schemas.GetPersonTrackingResponse_JobStatus, string(v.JobStatus))
+	}
+	if v.JobTag != nil {
+		s.WriteString(schemas.GetPersonTrackingResponse_JobTag, *v.JobTag)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetPersonTrackingResponse_NextToken, *v.NextToken)
+	}
+	serializePersonDetections(s, schemas.GetPersonTrackingResponse_Persons, v.Persons)
+	if v.StatusMessage != nil {
+		s.WriteString(schemas.GetPersonTrackingResponse_StatusMessage, *v.StatusMessage)
+	}
+	if v.Video != nil {
+		s.WriteStruct(schemas.GetPersonTrackingResponse_Video)
+		v.Video.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.VideoMetadata != nil {
+		s.WriteStruct(schemas.GetPersonTrackingResponse_VideoMetadata)
+		v.VideoMetadata.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetPersonTrackingOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetPersonTrackingResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetPersonTrackingResponse_JobId:
+			v.JobId = new(string)
+			return d.ReadString(schemas.GetPersonTrackingResponse_JobId, v.JobId)
+		case schemas.GetPersonTrackingResponse_JobStatus:
+			var ev string
+			if err := d.ReadString(schemas.GetPersonTrackingResponse_JobStatus, &ev); err != nil {
+				return err
+			}
+			v.JobStatus = types.VideoJobStatus(ev)
+			return nil
+		case schemas.GetPersonTrackingResponse_JobTag:
+			v.JobTag = new(string)
+			return d.ReadString(schemas.GetPersonTrackingResponse_JobTag, v.JobTag)
+		case schemas.GetPersonTrackingResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.GetPersonTrackingResponse_NextToken, v.NextToken)
+		case schemas.GetPersonTrackingResponse_Persons:
+			return deserializePersonDetections(d, schemas.GetPersonTrackingResponse_Persons, &v.Persons)
+		case schemas.GetPersonTrackingResponse_StatusMessage:
+			v.StatusMessage = new(string)
+			return d.ReadString(schemas.GetPersonTrackingResponse_StatusMessage, v.StatusMessage)
+		case schemas.GetPersonTrackingResponse_Video:
+			v.Video = &types.Video{}
+			return v.Video.Deserialize(d)
+		case schemas.GetPersonTrackingResponse_VideoMetadata:
+			v.VideoMetadata = &types.VideoMetadata{}
+			return v.VideoMetadata.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetPersonTrackingMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetPersonTracking{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetPersonTracking, schemas.GetPersonTrackingRequest, schemas.GetPersonTrackingResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetPersonTracking{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetPersonTracking, schemas.GetPersonTrackingRequest, schemas.GetPersonTrackingResponse), output: &GetPersonTrackingOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

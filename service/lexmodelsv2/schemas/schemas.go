@@ -1697,10 +1697,12 @@ var _AnswerField = smithy.NewSchema(smithy.ShapeID{
 var AssistedNluMode = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lexmodelsv2",
 	Name:      "AssistedNluMode",
-}, smithy.ShapeTypeEnum, 2)
+}, smithy.ShapeTypeEnum, 3)
 var AssistedNluMode_Primary *smithy.Schema
 
 var AssistedNluMode_Fallback *smithy.Schema
+
+var AssistedNluMode_DialogManager *smithy.Schema
 
 var AssociatedTranscript = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lexmodelsv2",
@@ -2212,7 +2214,7 @@ var _BotLocaleHistoryEventsList_member *smithy.Schema
 var BotLocaleImportSpecification = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lexmodelsv2",
 	Name:      "BotLocaleImportSpecification",
-}, smithy.ShapeTypeStructure, 9)
+}, smithy.ShapeTypeStructure, 10)
 var BotLocaleImportSpecification_botId *smithy.Schema
 
 var BotLocaleImportSpecification_botVersion *smithy.Schema
@@ -2230,6 +2232,8 @@ var BotLocaleImportSpecification_speechDetectionSensitivity *smithy.Schema
 var BotLocaleImportSpecification_unifiedSpeechSettings *smithy.Schema
 
 var BotLocaleImportSpecification_audioFillerSettings *smithy.Schema
+
+var BotLocaleImportSpecification_speakerDiarizationSettings *smithy.Schema
 
 var BotLocaleSortAttribute = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lexmodelsv2",
@@ -2776,7 +2780,8 @@ var _ConfidenceThreshold = smithy.NewSchema(smithy.ShapeID{
 var ConflictException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lexmodelsv2",
 	Name:      "ConflictException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 409})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 409})
 var ConflictException_message *smithy.Schema
 
 var _ContextTimeToLiveInSeconds = smithy.NewSchema(smithy.ShapeID{
@@ -3897,7 +3902,8 @@ var _IntentSummaryList_member *smithy.Schema
 var InternalServerException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lexmodelsv2",
 	Name:      "InternalServerException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 500})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
+	&smithytraits.HTTPError{Code: 500})
 var InternalServerException_message *smithy.Schema
 
 var InvokedIntentSample = smithy.NewSchema(smithy.ShapeID{
@@ -4291,7 +4297,8 @@ var PostFulfillmentStatusSpecification_timeoutConditional *smithy.Schema
 var PreconditionFailedException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lexmodelsv2",
 	Name:      "PreconditionFailedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 412})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 412})
 var PreconditionFailedException_message *smithy.Schema
 
 var _PresignedS3Url = smithy.NewSchema(smithy.ShapeID{
@@ -4493,7 +4500,8 @@ var _ResourceCount = smithy.NewSchema(smithy.ShapeID{
 var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lexmodelsv2",
 	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 404})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 404})
 var ResourceNotFoundException_message *smithy.Schema
 
 var ResponseSpecification = smithy.NewSchema(smithy.ShapeID{
@@ -4655,7 +4663,8 @@ var _ServicePrincipal = smithy.NewSchema(smithy.ShapeID{
 var ServiceQuotaExceededException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lexmodelsv2",
 	Name:      "ServiceQuotaExceededException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 402})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 402})
 var ServiceQuotaExceededException_message *smithy.Schema
 
 var SessionDataSortBy = smithy.NewSchema(smithy.ShapeID{
@@ -5111,6 +5120,12 @@ var SortOrder_Ascending *smithy.Schema
 
 var SortOrder_Descending *smithy.Schema
 
+var SpeakerDiarizationSettings = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.lexmodelsv2",
+	Name:      "SpeakerDiarizationSettings",
+}, smithy.ShapeTypeStructure, 1)
+var SpeakerDiarizationSettings_enabled *smithy.Schema
+
 var Specifications = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lexmodelsv2",
 	Name:      "Specifications",
@@ -5146,12 +5161,14 @@ var SpeechModelConfig_deepgramConfig *smithy.Schema
 var SpeechModelPreference = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lexmodelsv2",
 	Name:      "SpeechModelPreference",
-}, smithy.ShapeTypeEnum, 3)
+}, smithy.ShapeTypeEnum, 4)
 var SpeechModelPreference_Standard *smithy.Schema
 
 var SpeechModelPreference_Neural *smithy.Schema
 
 var SpeechModelPreference_Deepgram *smithy.Schema
+
+var SpeechModelPreference_Advanced *smithy.Schema
 
 var SpeechRecognitionSettings = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lexmodelsv2",
@@ -5691,7 +5708,8 @@ var _TextLogSettingsList_member *smithy.Schema
 var ThrottlingException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lexmodelsv2",
 	Name:      "ThrottlingException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.HTTPError{Code: 429})
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 429})
 var ThrottlingException_retryAfterSeconds *smithy.Schema
 
 var ThrottlingException_message *smithy.Schema
@@ -6001,7 +6019,8 @@ var _UUID = smithy.NewSchema(smithy.ShapeID{
 var ValidationException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lexmodelsv2",
 	Name:      "ValidationException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var ValidationException_message *smithy.Schema
 
 var _Value = smithy.NewSchema(smithy.ShapeID{
@@ -6226,7 +6245,7 @@ var CreateBotRequest_errorLogSettings *smithy.Schema
 var CreateBotLocaleRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lexmodelsv2",
 	Name:      "CreateBotLocaleRequest",
-}, smithy.ShapeTypeStructure, 11)
+}, smithy.ShapeTypeStructure, 12)
 var CreateBotLocaleRequest_botId *smithy.Schema
 
 var CreateBotLocaleRequest_botVersion *smithy.Schema
@@ -6249,10 +6268,12 @@ var CreateBotLocaleRequest_generativeAISettings *smithy.Schema
 
 var CreateBotLocaleRequest_speechDetectionSensitivity *smithy.Schema
 
+var CreateBotLocaleRequest_speakerDiarizationSettings *smithy.Schema
+
 var CreateBotLocaleResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lexmodelsv2",
 	Name:      "CreateBotLocaleResponse",
-}, smithy.ShapeTypeStructure, 14)
+}, smithy.ShapeTypeStructure, 15)
 var CreateBotLocaleResponse_botId *smithy.Schema
 
 var CreateBotLocaleResponse_botVersion *smithy.Schema
@@ -6280,6 +6301,8 @@ var CreateBotLocaleResponse_creationDateTime *smithy.Schema
 var CreateBotLocaleResponse_generativeAISettings *smithy.Schema
 
 var CreateBotLocaleResponse_speechDetectionSensitivity *smithy.Schema
+
+var CreateBotLocaleResponse_speakerDiarizationSettings *smithy.Schema
 
 var CreateBotResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lexmodelsv2",
@@ -6991,7 +7014,7 @@ var DescribeBotLocaleRequest_localeId *smithy.Schema
 var DescribeBotLocaleResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lexmodelsv2",
 	Name:      "DescribeBotLocaleResponse",
-}, smithy.ShapeTypeStructure, 21)
+}, smithy.ShapeTypeStructure, 22)
 var DescribeBotLocaleResponse_botId *smithy.Schema
 
 var DescribeBotLocaleResponse_botVersion *smithy.Schema
@@ -7033,6 +7056,8 @@ var DescribeBotLocaleResponse_recommendedActions *smithy.Schema
 var DescribeBotLocaleResponse_generativeAISettings *smithy.Schema
 
 var DescribeBotLocaleResponse_speechDetectionSensitivity *smithy.Schema
+
+var DescribeBotLocaleResponse_speakerDiarizationSettings *smithy.Schema
 
 var DescribeBotResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lexmodelsv2",
@@ -8825,7 +8850,7 @@ var UpdateBotRequest_errorLogSettings *smithy.Schema
 var UpdateBotLocaleRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lexmodelsv2",
 	Name:      "UpdateBotLocaleRequest",
-}, smithy.ShapeTypeStructure, 11)
+}, smithy.ShapeTypeStructure, 12)
 var UpdateBotLocaleRequest_botId *smithy.Schema
 
 var UpdateBotLocaleRequest_botVersion *smithy.Schema
@@ -8848,10 +8873,12 @@ var UpdateBotLocaleRequest_generativeAISettings *smithy.Schema
 
 var UpdateBotLocaleRequest_speechDetectionSensitivity *smithy.Schema
 
+var UpdateBotLocaleRequest_speakerDiarizationSettings *smithy.Schema
+
 var UpdateBotLocaleResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lexmodelsv2",
 	Name:      "UpdateBotLocaleResponse",
-}, smithy.ShapeTypeStructure, 17)
+}, smithy.ShapeTypeStructure, 18)
 var UpdateBotLocaleResponse_botId *smithy.Schema
 
 var UpdateBotLocaleResponse_botVersion *smithy.Schema
@@ -8885,6 +8912,8 @@ var UpdateBotLocaleResponse_recommendedActions *smithy.Schema
 var UpdateBotLocaleResponse_generativeAISettings *smithy.Schema
 
 var UpdateBotLocaleResponse_speechDetectionSensitivity *smithy.Schema
+
+var UpdateBotLocaleResponse_speakerDiarizationSettings *smithy.Schema
 
 var UpdateBotResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lexmodelsv2",
@@ -9717,6 +9746,8 @@ func init() {
 
 	AssistedNluMode_Fallback = AssistedNluMode.AddMember("Fallback", smithyprelude.Unit)
 
+	AssistedNluMode_DialogManager = AssistedNluMode.AddMember("DialogManager", smithyprelude.Unit)
+
 	AssociatedTranscript_transcript = AssociatedTranscript.AddMember("transcript", _Transcript)
 
 	AssociatedTranscriptFilterName_IntentId = AssociatedTranscriptFilterName.AddMember("IntentId", smithyprelude.Unit)
@@ -10019,6 +10050,8 @@ func init() {
 
 	SpeechModelPreference_Deepgram = SpeechModelPreference.AddMember("Deepgram", smithyprelude.Unit)
 
+	SpeechModelPreference_Advanced = SpeechModelPreference.AddMember("Advanced", smithyprelude.Unit)
+
 	DeepgramSpeechModelConfig_apiTokenSecretArn = DeepgramSpeechModelConfig.AddMember("apiTokenSecretArn", _SecretsManagerSecretArn)
 
 	DeepgramSpeechModelConfig_modelId = DeepgramSpeechModelConfig.AddMember("modelId", _DeepgramModelId)
@@ -10041,6 +10074,8 @@ func init() {
 
 	UnifiedSpeechSettings_speechFoundationModel = UnifiedSpeechSettings.AddMember("speechFoundationModel", SpeechFoundationModel)
 
+	SpeakerDiarizationSettings_enabled = SpeakerDiarizationSettings.AddMember("enabled", _Enabled)
+
 	BotLocaleImportSpecification_botId = BotLocaleImportSpecification.AddMember("botId", _Id)
 
 	BotLocaleImportSpecification_botVersion = BotLocaleImportSpecification.AddMember("botVersion", _DraftBotVersion)
@@ -10058,6 +10093,8 @@ func init() {
 	BotLocaleImportSpecification_unifiedSpeechSettings = BotLocaleImportSpecification.AddMember("unifiedSpeechSettings", UnifiedSpeechSettings)
 
 	BotLocaleImportSpecification_audioFillerSettings = BotLocaleImportSpecification.AddMember("audioFillerSettings", AudioFillerSettings)
+
+	BotLocaleImportSpecification_speakerDiarizationSettings = BotLocaleImportSpecification.AddMember("speakerDiarizationSettings", SpeakerDiarizationSettings)
 
 	BotLocaleSortAttribute_BotLocaleName = BotLocaleSortAttribute.AddMember("BotLocaleName", smithyprelude.Unit)
 
@@ -11929,6 +11966,8 @@ func init() {
 
 	CreateBotLocaleRequest_speechDetectionSensitivity = CreateBotLocaleRequest.AddMember("speechDetectionSensitivity", SpeechDetectionSensitivity)
 
+	CreateBotLocaleRequest_speakerDiarizationSettings = CreateBotLocaleRequest.AddMember("speakerDiarizationSettings", SpeakerDiarizationSettings)
+
 	CreateBotLocaleResponse_botId = CreateBotLocaleResponse.AddMember("botId", _Id)
 
 	CreateBotLocaleResponse_botVersion = CreateBotLocaleResponse.AddMember("botVersion", _DraftBotVersion)
@@ -11956,6 +11995,8 @@ func init() {
 	CreateBotLocaleResponse_generativeAISettings = CreateBotLocaleResponse.AddMember("generativeAISettings", GenerativeAISettings)
 
 	CreateBotLocaleResponse_speechDetectionSensitivity = CreateBotLocaleResponse.AddMember("speechDetectionSensitivity", SpeechDetectionSensitivity)
+
+	CreateBotLocaleResponse_speakerDiarizationSettings = CreateBotLocaleResponse.AddMember("speakerDiarizationSettings", SpeakerDiarizationSettings)
 
 	CreateBotResponse_botId = CreateBotResponse.AddMember("botId", _Id)
 
@@ -12482,6 +12523,8 @@ func init() {
 	DescribeBotLocaleResponse_generativeAISettings = DescribeBotLocaleResponse.AddMember("generativeAISettings", GenerativeAISettings)
 
 	DescribeBotLocaleResponse_speechDetectionSensitivity = DescribeBotLocaleResponse.AddMember("speechDetectionSensitivity", SpeechDetectionSensitivity)
+
+	DescribeBotLocaleResponse_speakerDiarizationSettings = DescribeBotLocaleResponse.AddMember("speakerDiarizationSettings", SpeakerDiarizationSettings)
 
 	DescribeBotResponse_botId = DescribeBotResponse.AddMember("botId", _Id)
 
@@ -13795,6 +13838,8 @@ func init() {
 
 	UpdateBotLocaleRequest_speechDetectionSensitivity = UpdateBotLocaleRequest.AddMember("speechDetectionSensitivity", SpeechDetectionSensitivity)
 
+	UpdateBotLocaleRequest_speakerDiarizationSettings = UpdateBotLocaleRequest.AddMember("speakerDiarizationSettings", SpeakerDiarizationSettings)
+
 	UpdateBotLocaleResponse_botId = UpdateBotLocaleResponse.AddMember("botId", _Id)
 
 	UpdateBotLocaleResponse_botVersion = UpdateBotLocaleResponse.AddMember("botVersion", _DraftBotVersion)
@@ -13828,6 +13873,8 @@ func init() {
 	UpdateBotLocaleResponse_generativeAISettings = UpdateBotLocaleResponse.AddMember("generativeAISettings", GenerativeAISettings)
 
 	UpdateBotLocaleResponse_speechDetectionSensitivity = UpdateBotLocaleResponse.AddMember("speechDetectionSensitivity", SpeechDetectionSensitivity)
+
+	UpdateBotLocaleResponse_speakerDiarizationSettings = UpdateBotLocaleResponse.AddMember("speakerDiarizationSettings", SpeakerDiarizationSettings)
 
 	UpdateBotResponse_botId = UpdateBotResponse.AddMember("botId", _Id)
 

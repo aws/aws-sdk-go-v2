@@ -4,7 +4,9 @@ package backup
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/backup/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/backup/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -42,6 +44,21 @@ type GetBackupSelectionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetBackupSelectionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetBackupSelectionInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetBackupSelectionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BackupPlanId != nil {
+		s.WriteString(schemas.GetBackupSelectionInput_BackupPlanId, *v.BackupPlanId)
+	}
+	if v.SelectionId != nil {
+		s.WriteString(schemas.GetBackupSelectionInput_SelectionId, *v.SelectionId)
+	}
+}
+
 type GetBackupSelectionOutput struct {
 
 	// Uniquely identifies a backup plan.
@@ -70,13 +87,58 @@ type GetBackupSelectionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetBackupSelectionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetBackupSelectionOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetBackupSelectionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BackupPlanId != nil {
+		s.WriteString(schemas.GetBackupSelectionOutput_BackupPlanId, *v.BackupPlanId)
+	}
+	if v.BackupSelection != nil {
+		s.WriteStruct(schemas.GetBackupSelectionOutput_BackupSelection)
+		v.BackupSelection.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CreationDate != nil {
+		s.WriteTime(schemas.GetBackupSelectionOutput_CreationDate, *v.CreationDate)
+	}
+	if v.CreatorRequestId != nil {
+		s.WriteString(schemas.GetBackupSelectionOutput_CreatorRequestId, *v.CreatorRequestId)
+	}
+	if v.SelectionId != nil {
+		s.WriteString(schemas.GetBackupSelectionOutput_SelectionId, *v.SelectionId)
+	}
+}
+func (v *GetBackupSelectionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetBackupSelectionOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetBackupSelectionOutput_BackupPlanId:
+			v.BackupPlanId = new(string)
+			return d.ReadString(schemas.GetBackupSelectionOutput_BackupPlanId, v.BackupPlanId)
+		case schemas.GetBackupSelectionOutput_BackupSelection:
+			v.BackupSelection = &types.BackupSelection{}
+			return v.BackupSelection.Deserialize(d)
+		case schemas.GetBackupSelectionOutput_CreationDate:
+			v.CreationDate = new(time.Time)
+			return d.ReadTime(schemas.GetBackupSelectionOutput_CreationDate, v.CreationDate)
+		case schemas.GetBackupSelectionOutput_CreatorRequestId:
+			v.CreatorRequestId = new(string)
+			return d.ReadString(schemas.GetBackupSelectionOutput_CreatorRequestId, v.CreatorRequestId)
+		case schemas.GetBackupSelectionOutput_SelectionId:
+			v.SelectionId = new(string)
+			return d.ReadString(schemas.GetBackupSelectionOutput_SelectionId, v.SelectionId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetBackupSelectionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetBackupSelection{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetBackupSelection, schemas.GetBackupSelectionInput, schemas.GetBackupSelectionOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetBackupSelection{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetBackupSelection, schemas.GetBackupSelectionInput, schemas.GetBackupSelectionOutput), output: &GetBackupSelectionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

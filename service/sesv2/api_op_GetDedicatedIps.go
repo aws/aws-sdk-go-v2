@@ -5,7 +5,9 @@ package sesv2
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/sesv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sesv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -45,6 +47,24 @@ type GetDedicatedIpsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetDedicatedIpsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetDedicatedIpsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetDedicatedIpsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetDedicatedIpsRequest_NextToken, *v.NextToken)
+	}
+	if v.PageSize != nil {
+		s.WriteInt32(schemas.GetDedicatedIpsRequest_PageSize, *v.PageSize)
+	}
+	if v.PoolName != nil {
+		s.WriteString(schemas.GetDedicatedIpsRequest_PoolName, *v.PoolName)
+	}
+}
+
 // Information about the dedicated IP addresses that are associated with your
 // Amazon Web Services account.
 type GetDedicatedIpsOutput struct {
@@ -64,13 +84,35 @@ type GetDedicatedIpsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetDedicatedIpsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetDedicatedIpsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetDedicatedIpsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDedicatedIpList(s, schemas.GetDedicatedIpsResponse_DedicatedIps, v.DedicatedIps)
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetDedicatedIpsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *GetDedicatedIpsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetDedicatedIpsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetDedicatedIpsResponse_DedicatedIps:
+			return deserializeDedicatedIpList(d, schemas.GetDedicatedIpsResponse_DedicatedIps, &v.DedicatedIps)
+		case schemas.GetDedicatedIpsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.GetDedicatedIpsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetDedicatedIpsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetDedicatedIps{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetDedicatedIps, schemas.GetDedicatedIpsRequest, schemas.GetDedicatedIpsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetDedicatedIps{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetDedicatedIps, schemas.GetDedicatedIpsRequest, schemas.GetDedicatedIpsResponse), output: &GetDedicatedIpsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

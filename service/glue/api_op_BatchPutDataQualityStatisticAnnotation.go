@@ -4,7 +4,9 @@ package glue
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/glue/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/glue/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -41,6 +43,19 @@ type BatchPutDataQualityStatisticAnnotationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchPutDataQualityStatisticAnnotationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchPutDataQualityStatisticAnnotationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchPutDataQualityStatisticAnnotationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.BatchPutDataQualityStatisticAnnotationRequest_ClientToken, *v.ClientToken)
+	}
+	serializeInclusionAnnotationList(s, schemas.BatchPutDataQualityStatisticAnnotationRequest_InclusionAnnotations, v.InclusionAnnotations)
+}
+
 type BatchPutDataQualityStatisticAnnotationOutput struct {
 
 	// A list of AnnotationError 's.
@@ -52,13 +67,29 @@ type BatchPutDataQualityStatisticAnnotationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchPutDataQualityStatisticAnnotationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchPutDataQualityStatisticAnnotationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchPutDataQualityStatisticAnnotationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAnnotationErrorList(s, schemas.BatchPutDataQualityStatisticAnnotationResponse_FailedInclusionAnnotations, v.FailedInclusionAnnotations)
+}
+func (v *BatchPutDataQualityStatisticAnnotationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchPutDataQualityStatisticAnnotationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchPutDataQualityStatisticAnnotationResponse_FailedInclusionAnnotations:
+			return deserializeAnnotationErrorList(d, schemas.BatchPutDataQualityStatisticAnnotationResponse_FailedInclusionAnnotations, &v.FailedInclusionAnnotations)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationBatchPutDataQualityStatisticAnnotationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpBatchPutDataQualityStatisticAnnotation{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchPutDataQualityStatisticAnnotation, schemas.BatchPutDataQualityStatisticAnnotationRequest, schemas.BatchPutDataQualityStatisticAnnotationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpBatchPutDataQualityStatisticAnnotation{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchPutDataQualityStatisticAnnotation, schemas.BatchPutDataQualityStatisticAnnotationRequest, schemas.BatchPutDataQualityStatisticAnnotationResponse), output: &BatchPutDataQualityStatisticAnnotationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

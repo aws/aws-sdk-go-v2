@@ -5,7 +5,9 @@ package medialive
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/medialive/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/medialive/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -43,6 +45,22 @@ type CreatePartnerInputInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreatePartnerInputInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreatePartnerInputRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreatePartnerInputInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InputId != nil {
+		s.WriteString(schemas.CreatePartnerInputRequest_InputId, *v.InputId)
+	}
+	if v.RequestId != nil {
+		s.WriteString(schemas.CreatePartnerInputRequest_RequestId, *v.RequestId)
+	}
+	serializeTags(s, schemas.CreatePartnerInputRequest_Tags, v.Tags)
+}
+
 // Placeholder documentation for CreatePartnerInputResponse
 type CreatePartnerInputOutput struct {
 
@@ -55,13 +73,34 @@ type CreatePartnerInputOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreatePartnerInputOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreatePartnerInputResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreatePartnerInputOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Input != nil {
+		s.WriteStruct(schemas.CreatePartnerInputResponse_Input)
+		v.Input.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreatePartnerInputOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreatePartnerInputResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreatePartnerInputResponse_Input:
+			v.Input = &types.Input{}
+			return v.Input.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreatePartnerInputMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreatePartnerInput{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreatePartnerInput, schemas.CreatePartnerInputRequest, schemas.CreatePartnerInputResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreatePartnerInput{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreatePartnerInput, schemas.CreatePartnerInputRequest, schemas.CreatePartnerInputResponse), output: &CreatePartnerInputOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

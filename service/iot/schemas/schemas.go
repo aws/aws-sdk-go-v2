@@ -3251,7 +3251,8 @@ var _CertificateArn = smithy.NewSchema(smithy.ShapeID{
 var CertificateConflictException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.iot",
 	Name:      "CertificateConflictException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 409})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 409})
 var CertificateConflictException_message *smithy.Schema
 
 var CertificateDescription = smithy.NewSchema(smithy.ShapeID{
@@ -3369,7 +3370,8 @@ var _CertificateSigningRequest = smithy.NewSchema(smithy.ShapeID{
 var CertificateStateException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.iot",
 	Name:      "CertificateStateException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 406})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 406})
 var CertificateStateException_message *smithy.Schema
 
 var CertificateStatus = smithy.NewSchema(smithy.ShapeID{
@@ -3391,7 +3393,8 @@ var CertificateStatus_PENDING_ACTIVATION *smithy.Schema
 var CertificateValidationException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.iot",
 	Name:      "CertificateValidationException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var CertificateValidationException_message *smithy.Schema
 
 var CertificateValidity = smithy.NewSchema(smithy.ShapeID{
@@ -3917,7 +3920,8 @@ var _ConfirmationToken = smithy.NewSchema(smithy.ShapeID{
 var ConflictException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.iot",
 	Name:      "ConflictException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.HTTPError{Code: 409})
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 409})
 var ConflictException_message *smithy.Schema
 
 var ConflictException_resourceId *smithy.Schema
@@ -3925,7 +3929,8 @@ var ConflictException_resourceId *smithy.Schema
 var ConflictingResourceUpdateException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.iot",
 	Name:      "ConflictingResourceUpdateException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 409})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 409})
 var ConflictingResourceUpdateException_message *smithy.Schema
 
 var _ConnectionAttributeName = smithy.NewSchema(smithy.ShapeID{
@@ -4084,7 +4089,8 @@ var _DeleteBehaviors = smithy.NewSchema(smithy.ShapeID{
 var DeleteConflictException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.iot",
 	Name:      "DeleteConflictException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 409})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 409})
 var DeleteConflictException_message *smithy.Schema
 
 var _DeleteMetricsExportConfig = smithy.NewSchema(smithy.ShapeID{
@@ -5157,7 +5163,8 @@ var _IndexNamesList_member *smithy.Schema
 var IndexNotReadyException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.iot",
 	Name:      "IndexNotReadyException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var IndexNotReadyException_message *smithy.Schema
 
 var _IndexSchema = smithy.NewSchema(smithy.ShapeID{
@@ -5373,49 +5380,57 @@ var _IntegerParameterValue = smithy.NewSchema(smithy.ShapeID{
 var InternalException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.iot",
 	Name:      "InternalException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 500})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
+	&smithytraits.HTTPError{Code: 500})
 var InternalException_message *smithy.Schema
 
 var InternalFailureException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.iot",
 	Name:      "InternalFailureException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 500})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
+	&smithytraits.HTTPError{Code: 500})
 var InternalFailureException_message *smithy.Schema
 
 var InternalServerException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.iot",
 	Name:      "InternalServerException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 500})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
+	&smithytraits.HTTPError{Code: 500})
 var InternalServerException_message *smithy.Schema
 
 var InvalidAggregationException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.iot",
 	Name:      "InvalidAggregationException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var InvalidAggregationException_message *smithy.Schema
 
 var InvalidQueryException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.iot",
 	Name:      "InvalidQueryException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var InvalidQueryException_message *smithy.Schema
 
 var InvalidRequestException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.iot",
 	Name:      "InvalidRequestException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var InvalidRequestException_message *smithy.Schema
 
 var InvalidResponseException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.iot",
 	Name:      "InvalidResponseException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var InvalidResponseException_message *smithy.Schema
 
 var InvalidStateTransitionException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.iot",
 	Name:      "InvalidStateTransitionException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 409})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 409})
 var InvalidStateTransitionException_message *smithy.Schema
 
 var IotAnalyticsAction = smithy.NewSchema(smithy.ShapeID{
@@ -5921,7 +5936,8 @@ var _LastUpdatedAtDate = smithy.NewSchema(smithy.ShapeID{
 var LimitExceededException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.iot",
 	Name:      "LimitExceededException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 410})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 410})
 var LimitExceededException_message *smithy.Schema
 
 var _ListSuppressedAlerts = smithy.NewSchema(smithy.ShapeID{
@@ -6080,7 +6096,8 @@ var _MaintenanceWindows_member *smithy.Schema
 var MalformedPolicyException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.iot",
 	Name:      "MalformedPolicyException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var MalformedPolicyException_message *smithy.Schema
 
 var _ManagedJobTemplateName = smithy.NewSchema(smithy.ShapeID{
@@ -6475,7 +6492,8 @@ var _NonCompliantResourcesCount = smithy.NewSchema(smithy.ShapeID{
 var NotConfiguredException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.iot",
 	Name:      "NotConfiguredException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 404})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 404})
 var NotConfiguredException_message *smithy.Schema
 
 var _NullableBoolean = smithy.NewSchema(smithy.ShapeID{
@@ -7253,7 +7271,8 @@ var _RegistrationCode = smithy.NewSchema(smithy.ShapeID{
 var RegistrationCodeValidationException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.iot",
 	Name:      "RegistrationCodeValidationException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var RegistrationCodeValidationException_message *smithy.Schema
 
 var RegistrationConfig = smithy.NewSchema(smithy.ShapeID{
@@ -7366,7 +7385,8 @@ var _Resource = smithy.NewSchema(smithy.ShapeID{
 var ResourceAlreadyExistsException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.iot",
 	Name:      "ResourceAlreadyExistsException",
-}, smithy.ShapeTypeStructure, 3, &smithytraits.HTTPError{Code: 409})
+}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 409})
 var ResourceAlreadyExistsException_message *smithy.Schema
 
 var ResourceAlreadyExistsException_resourceId *smithy.Schema
@@ -7446,13 +7466,15 @@ var _ResourceLogicalId = smithy.NewSchema(smithy.ShapeID{
 var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.iot",
 	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 404})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 404})
 var ResourceNotFoundException_message *smithy.Schema
 
 var ResourceRegistrationFailureException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.iot",
 	Name:      "ResourceRegistrationFailureException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var ResourceRegistrationFailureException_message *smithy.Schema
 
 var _Resources = smithy.NewSchema(smithy.ShapeID{
@@ -7904,7 +7926,8 @@ var _ServiceName = smithy.NewSchema(smithy.ShapeID{
 var ServiceQuotaExceededException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.iot",
 	Name:      "ServiceQuotaExceededException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 402})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 402})
 var ServiceQuotaExceededException_message *smithy.Schema
 
 var ServiceType = smithy.NewSchema(smithy.ShapeID{
@@ -7920,7 +7943,8 @@ var ServiceType_JOBS *smithy.Schema
 var ServiceUnavailableException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.iot",
 	Name:      "ServiceUnavailableException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 503})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
+	&smithytraits.HTTPError{Code: 503})
 var ServiceUnavailableException_message *smithy.Schema
 
 var _SessionExpiry = smithy.NewSchema(smithy.ShapeID{
@@ -8044,7 +8068,8 @@ var _SQL = smithy.NewSchema(smithy.ShapeID{
 var SqlParseException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.iot",
 	Name:      "SqlParseException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var SqlParseException_message *smithy.Schema
 
 var SqsAction = smithy.NewSchema(smithy.ShapeID{
@@ -8435,7 +8460,8 @@ var _TargetViolationIdsForDetectMitigationActions_member *smithy.Schema
 var TaskAlreadyExistsException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.iot",
 	Name:      "TaskAlreadyExistsException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var TaskAlreadyExistsException_message *smithy.Schema
 
 var _TaskId = smithy.NewSchema(smithy.ShapeID{
@@ -8824,7 +8850,8 @@ var ThingTypeProperties_mqtt5Configuration *smithy.Schema
 var ThrottlingException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.iot",
 	Name:      "ThrottlingException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var ThrottlingException_message *smithy.Schema
 
 var _TimedOutThings = smithy.NewSchema(smithy.ShapeID{
@@ -9113,13 +9140,15 @@ var _TotalResourcesCount = smithy.NewSchema(smithy.ShapeID{
 var TransferAlreadyCompletedException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.iot",
 	Name:      "TransferAlreadyCompletedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 410})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 410})
 var TransferAlreadyCompletedException_message *smithy.Schema
 
 var TransferConflictException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.iot",
 	Name:      "TransferConflictException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 409})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 409})
 var TransferConflictException_message *smithy.Schema
 
 var TransferData = smithy.NewSchema(smithy.ShapeID{
@@ -9139,7 +9168,8 @@ var TransferData_rejectDate *smithy.Schema
 var UnauthorizedException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.iot",
 	Name:      "UnauthorizedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 401})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 401})
 var UnauthorizedException_message *smithy.Schema
 
 var _UndoDeprecate = smithy.NewSchema(smithy.ShapeID{
@@ -9238,7 +9268,8 @@ var _ValidationErrors_member *smithy.Schema
 var ValidationException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.iot",
 	Name:      "ValidationException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var ValidationException_message *smithy.Schema
 
 var _Value = smithy.NewSchema(smithy.ShapeID{
@@ -9281,7 +9312,8 @@ var _Version = smithy.NewSchema(smithy.ShapeID{
 var VersionConflictException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.iot",
 	Name:      "VersionConflictException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 409})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 409})
 var VersionConflictException_message *smithy.Schema
 
 var _VersionName = smithy.NewSchema(smithy.ShapeID{
@@ -9297,7 +9329,8 @@ var _VersionNumber = smithy.NewSchema(smithy.ShapeID{
 var VersionsLimitExceededException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.iot",
 	Name:      "VersionsLimitExceededException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 409})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 409})
 var VersionsLimitExceededException_message *smithy.Schema
 
 var VersionUpdateByJobsConfig = smithy.NewSchema(smithy.ShapeID{

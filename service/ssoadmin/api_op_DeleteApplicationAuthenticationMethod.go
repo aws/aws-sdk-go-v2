@@ -4,7 +4,9 @@ package ssoadmin
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/ssoadmin/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ssoadmin/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,21 @@ type DeleteApplicationAuthenticationMethodInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteApplicationAuthenticationMethodInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteApplicationAuthenticationMethodRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteApplicationAuthenticationMethodInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationArn != nil {
+		s.WriteString(schemas.DeleteApplicationAuthenticationMethodRequest_ApplicationArn, *v.ApplicationArn)
+	}
+	if v.AuthenticationMethodType != "" {
+		s.WriteString(schemas.DeleteApplicationAuthenticationMethodRequest_AuthenticationMethodType, string(v.AuthenticationMethodType))
+	}
+}
+
 type DeleteApplicationAuthenticationMethodOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -46,13 +63,26 @@ type DeleteApplicationAuthenticationMethodOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteApplicationAuthenticationMethodOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteApplicationAuthenticationMethodOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteApplicationAuthenticationMethodOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteApplicationAuthenticationMethodMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteApplicationAuthenticationMethod{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteApplicationAuthenticationMethod, schemas.DeleteApplicationAuthenticationMethodRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeleteApplicationAuthenticationMethod{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteApplicationAuthenticationMethod, schemas.DeleteApplicationAuthenticationMethodRequest, nil), output: &DeleteApplicationAuthenticationMethodOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

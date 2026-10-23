@@ -27,10 +27,24 @@ func (c *Client) InitiateProviderRegistration(ctx context.Context, params *Initi
 
 type InitiateProviderRegistrationInput struct {
 
-	// The provider to initiate registration with. Currently, only GITHUB is supported.
+	// The provider to initiate registration with.
 	//
 	// This member is required.
 	Provider types.Provider
+
+	// The client ID of the OAuth application registered on your self-managed provider
+	// instance.
+	ClientId *string
+
+	// The client secret of the OAuth application registered on your self-managed
+	// provider instance.
+	ClientSecret *string
+
+	// The name of the organization to connect.
+	OrganizationName *string
+
+	// The HTTPS URL of a self-managed provider instance. Omit for SaaS providers.
+	TargetUrl *string
 
 	noSmithyDocumentSerde
 }

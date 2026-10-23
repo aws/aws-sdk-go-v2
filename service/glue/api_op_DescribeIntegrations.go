@@ -4,7 +4,9 @@ package glue
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/glue/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/glue/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -44,6 +46,25 @@ type DescribeIntegrationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeIntegrationsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeIntegrationsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeIntegrationsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeIntegrationFilterList(s, schemas.DescribeIntegrationsRequest_Filters, v.Filters)
+	if v.IntegrationIdentifier != nil {
+		s.WriteString(schemas.DescribeIntegrationsRequest_IntegrationIdentifier, *v.IntegrationIdentifier)
+	}
+	if v.Marker != nil {
+		s.WriteString(schemas.DescribeIntegrationsRequest_Marker, *v.Marker)
+	}
+	if v.MaxRecords != nil {
+		s.WriteInt32(schemas.DescribeIntegrationsRequest_MaxRecords, *v.MaxRecords)
+	}
+}
+
 type DescribeIntegrationsOutput struct {
 
 	// A list of zero-ETL integrations.
@@ -59,13 +80,35 @@ type DescribeIntegrationsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeIntegrationsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeIntegrationsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeIntegrationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeIntegrationsList(s, schemas.DescribeIntegrationsResponse_Integrations, v.Integrations)
+	if v.Marker != nil {
+		s.WriteString(schemas.DescribeIntegrationsResponse_Marker, *v.Marker)
+	}
+}
+func (v *DescribeIntegrationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeIntegrationsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeIntegrationsResponse_Integrations:
+			return deserializeIntegrationsList(d, schemas.DescribeIntegrationsResponse_Integrations, &v.Integrations)
+		case schemas.DescribeIntegrationsResponse_Marker:
+			v.Marker = new(string)
+			return d.ReadString(schemas.DescribeIntegrationsResponse_Marker, v.Marker)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeIntegrationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeIntegrations{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeIntegrations, schemas.DescribeIntegrationsRequest, schemas.DescribeIntegrationsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeIntegrations{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeIntegrations, schemas.DescribeIntegrationsRequest, schemas.DescribeIntegrationsResponse), output: &DescribeIntegrationsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

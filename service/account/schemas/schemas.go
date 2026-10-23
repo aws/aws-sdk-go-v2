@@ -113,11 +113,25 @@ var PutContactInformation = smithy.NewSchema(smithy.ShapeID{
 	URI:  "/putContactInformation",
 	Code: 200})
 
+var SendPhoneNumberVerification = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.account",
+	Name:      "SendPhoneNumberVerification",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	URI:  "/sendPhoneNumberVerification",
+	Code: 200})
+
 var StartPrimaryEmailUpdate = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.account",
 	Name:      "StartPrimaryEmailUpdate",
 }, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
 	URI:  "/startPrimaryEmailUpdate",
+	Code: 200})
+
+var VerifyPhoneNumber = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.account",
+	Name:      "VerifyPhoneNumber",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	URI:  "/verifyPhoneNumber",
 	Code: 200})
 
 var _Account = smithy.NewSchema(smithy.ShapeID{
@@ -130,7 +144,8 @@ var Account = smithy.NewServiceSchema(_Account, "2021-02-01")
 var AccessDeniedException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.account",
 	Name:      "AccessDeniedException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.HTTPError{Code: 403})
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 403})
 var AccessDeniedException_message *smithy.Schema
 
 var AccessDeniedException_errorType *smithy.Schema
@@ -197,7 +212,8 @@ var _CompanyName = smithy.NewSchema(smithy.ShapeID{
 var ConflictException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.account",
 	Name:      "ConflictException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.HTTPError{Code: 409})
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 409})
 var ConflictException_message *smithy.Schema
 
 var ConflictException_errorType *smithy.Schema
@@ -258,7 +274,8 @@ var _FullName = smithy.NewSchema(smithy.ShapeID{
 var InternalServerException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.account",
 	Name:      "InternalServerException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.HTTPError{Code: 500})
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "server"},
+	&smithytraits.HTTPError{Code: 500})
 var InternalServerException_message *smithy.Schema
 
 var InternalServerException_errorType *smithy.Schema
@@ -277,6 +294,11 @@ var _PhoneNumber = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.account",
 	Name:      "PhoneNumber",
 }, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
+
+var _PhoneNumberVerificationStatus = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.account",
+	Name:      "PhoneNumberVerificationStatus",
+}, smithy.ShapeTypeString, 0)
 
 var _PostalCode = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.account",
@@ -326,7 +348,8 @@ var _RegionOptStatusList_member *smithy.Schema
 var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.account",
 	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.HTTPError{Code: 404})
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 404})
 var ResourceNotFoundException_message *smithy.Schema
 
 var ResourceNotFoundException_errorType *smithy.Schema
@@ -334,7 +357,8 @@ var ResourceNotFoundException_errorType *smithy.Schema
 var ResourceUnavailableException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.account",
 	Name:      "ResourceUnavailableException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.HTTPError{Code: 424})
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 424})
 var ResourceUnavailableException_message *smithy.Schema
 
 var ResourceUnavailableException_errorType *smithy.Schema
@@ -357,7 +381,8 @@ var _Title = smithy.NewSchema(smithy.ShapeID{
 var TooManyRequestsException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.account",
 	Name:      "TooManyRequestsException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.HTTPError{Code: 429})
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 429})
 var TooManyRequestsException_message *smithy.Schema
 
 var TooManyRequestsException_errorType *smithy.Schema
@@ -365,7 +390,8 @@ var TooManyRequestsException_errorType *smithy.Schema
 var ValidationException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.account",
 	Name:      "ValidationException",
-}, smithy.ShapeTypeStructure, 3, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var ValidationException_message *smithy.Schema
 
 var ValidationException_reason *smithy.Schema
@@ -477,8 +503,10 @@ var GetContactInformationRequest_AccountId *smithy.Schema
 var GetContactInformationResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.account",
 	Name:      "GetContactInformationResponse",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 2)
 var GetContactInformationResponse_ContactInformation *smithy.Schema
+
+var GetContactInformationResponse_VerificationStatus *smithy.Schema
 
 var GetGovCloudAccountInformationRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.account",
@@ -588,6 +616,18 @@ var PutContactInformationRequest_ContactInformation *smithy.Schema
 
 var PutContactInformationRequest_AccountId *smithy.Schema
 
+var SendPhoneNumberVerificationRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.account",
+	Name:      "SendPhoneNumberVerificationRequest",
+}, smithy.ShapeTypeStructure, 1)
+var SendPhoneNumberVerificationRequest_AccountId *smithy.Schema
+
+var SendPhoneNumberVerificationResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.account",
+	Name:      "SendPhoneNumberVerificationResponse",
+}, smithy.ShapeTypeStructure, 1)
+var SendPhoneNumberVerificationResponse_Status *smithy.Schema
+
 var StartPrimaryEmailUpdateRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.account",
 	Name:      "StartPrimaryEmailUpdateRequest",
@@ -601,6 +641,20 @@ var StartPrimaryEmailUpdateResponse = smithy.NewSchema(smithy.ShapeID{
 	Name:      "StartPrimaryEmailUpdateResponse",
 }, smithy.ShapeTypeStructure, 1)
 var StartPrimaryEmailUpdateResponse_Status *smithy.Schema
+
+var VerifyPhoneNumberRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.account",
+	Name:      "VerifyPhoneNumberRequest",
+}, smithy.ShapeTypeStructure, 2)
+var VerifyPhoneNumberRequest_AccountId *smithy.Schema
+
+var VerifyPhoneNumberRequest_Otp *smithy.Schema
+
+var VerifyPhoneNumberResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.account",
+	Name:      "VerifyPhoneNumberResponse",
+}, smithy.ShapeTypeStructure, 1)
+var VerifyPhoneNumberResponse_Status *smithy.Schema
 
 // Initialize schema members after all schemas are declared to avoid
 // initialization cycles
@@ -723,6 +777,8 @@ func init() {
 
 	GetContactInformationResponse_ContactInformation = GetContactInformationResponse.AddMember("ContactInformation", ContactInformation)
 
+	GetContactInformationResponse_VerificationStatus = GetContactInformationResponse.AddMember("VerificationStatus", _PhoneNumberVerificationStatus)
+
 	GetGovCloudAccountInformationRequest_StandardAccountId = GetGovCloudAccountInformationRequest.AddMember("StandardAccountId", _AccountId)
 
 	GetGovCloudAccountInformationResponse_GovCloudAccountId = GetGovCloudAccountInformationResponse.AddMember("GovCloudAccountId", _AccountId)
@@ -779,10 +835,20 @@ func init() {
 
 	PutContactInformationRequest_AccountId = PutContactInformationRequest.AddMember("AccountId", _AccountId)
 
+	SendPhoneNumberVerificationRequest_AccountId = SendPhoneNumberVerificationRequest.AddMember("AccountId", _AccountId)
+
+	SendPhoneNumberVerificationResponse_Status = SendPhoneNumberVerificationResponse.AddMember("Status", _PhoneNumberVerificationStatus)
+
 	StartPrimaryEmailUpdateRequest_AccountId = StartPrimaryEmailUpdateRequest.AddMember("AccountId", _AccountId)
 
 	StartPrimaryEmailUpdateRequest_PrimaryEmail = StartPrimaryEmailUpdateRequest.AddMember("PrimaryEmail", _PrimaryEmailAddress)
 
 	StartPrimaryEmailUpdateResponse_Status = StartPrimaryEmailUpdateResponse.AddMember("Status", _PrimaryEmailUpdateStatus)
+
+	VerifyPhoneNumberRequest_AccountId = VerifyPhoneNumberRequest.AddMember("AccountId", _AccountId)
+
+	VerifyPhoneNumberRequest_Otp = VerifyPhoneNumberRequest.AddMember("Otp", _Otp)
+
+	VerifyPhoneNumberResponse_Status = VerifyPhoneNumberResponse.AddMember("Status", _PhoneNumberVerificationStatus)
 
 }

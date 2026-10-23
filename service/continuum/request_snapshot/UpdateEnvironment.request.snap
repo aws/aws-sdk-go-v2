@@ -1,0 +1,5 @@
+PATCH /environments/__EnvironmentId__
+
+Content-Type: application/json
+
+{"configuration":{"codeConfiguration":{"environmentConfiguration":{"network":{"allowedDomains":["__Member__","__Member__"]},"patchCreationPolicy":"ENABLED","scanFrequency":"__ScanFrequency__"},"sourceConfiguration":{"repositorySources":[{"defaultBranch":"__DefaultBranch__","integrationId":"__IntegrationId__","repository":"__Repository__"},{"defaultBranch":"__DefaultBranch__","integrationId":"__IntegrationId__","repository":"__Repository__"}],"s3Sources":[{"codePrefix":"__CodePrefix__","contextPrefix":"__ContextPrefix__","integrationId":"__IntegrationId__"},{"codePrefix":"__CodePrefix__","contextPrefix":"__ContextPrefix__","integrationId":"__IntegrationId__"}]}}},"name":"__Name__"}

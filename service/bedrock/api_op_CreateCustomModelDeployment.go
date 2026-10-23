@@ -5,7 +5,9 @@ package bedrock
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/bedrock/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrock/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -76,6 +78,28 @@ type CreateCustomModelDeploymentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateCustomModelDeploymentInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateCustomModelDeploymentRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateCustomModelDeploymentInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientRequestToken != nil {
+		s.WriteString(schemas.CreateCustomModelDeploymentRequest_clientRequestToken, *v.ClientRequestToken)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreateCustomModelDeploymentRequest_description, *v.Description)
+	}
+	if v.ModelArn != nil {
+		s.WriteString(schemas.CreateCustomModelDeploymentRequest_modelArn, *v.ModelArn)
+	}
+	if v.ModelDeploymentName != nil {
+		s.WriteString(schemas.CreateCustomModelDeploymentRequest_modelDeploymentName, *v.ModelDeploymentName)
+	}
+	serializeTagList(s, schemas.CreateCustomModelDeploymentRequest_tags, v.Tags)
+}
+
 type CreateCustomModelDeploymentOutput struct {
 
 	// The Amazon Resource Name (ARN) of the custom model deployment. Use this ARN as
@@ -91,13 +115,32 @@ type CreateCustomModelDeploymentOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateCustomModelDeploymentOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateCustomModelDeploymentResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateCustomModelDeploymentOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CustomModelDeploymentArn != nil {
+		s.WriteString(schemas.CreateCustomModelDeploymentResponse_customModelDeploymentArn, *v.CustomModelDeploymentArn)
+	}
+}
+func (v *CreateCustomModelDeploymentOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateCustomModelDeploymentResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateCustomModelDeploymentResponse_customModelDeploymentArn:
+			v.CustomModelDeploymentArn = new(string)
+			return d.ReadString(schemas.CreateCustomModelDeploymentResponse_customModelDeploymentArn, v.CustomModelDeploymentArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateCustomModelDeploymentMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateCustomModelDeployment{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateCustomModelDeployment, schemas.CreateCustomModelDeploymentRequest, schemas.CreateCustomModelDeploymentResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateCustomModelDeployment{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateCustomModelDeployment, schemas.CreateCustomModelDeploymentRequest, schemas.CreateCustomModelDeploymentResponse), output: &CreateCustomModelDeploymentOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

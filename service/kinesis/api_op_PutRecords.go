@@ -4,7 +4,9 @@ package kinesis
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/kinesis/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/kinesis/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"github.com/aws/smithy-go/ptr"
 )
@@ -117,6 +119,27 @@ type PutRecordsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutRecordsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutRecordsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutRecordsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DryRun != nil {
+		s.WriteBool(schemas.PutRecordsInput_DryRun, *v.DryRun)
+	}
+	serializePutRecordsRequestEntryList(s, schemas.PutRecordsInput_Records, v.Records)
+	if v.StreamARN != nil {
+		s.WriteString(schemas.PutRecordsInput_StreamARN, *v.StreamARN)
+	}
+	if v.StreamId != nil {
+		s.WriteString(schemas.PutRecordsInput_StreamId, *v.StreamId)
+	}
+	if v.StreamName != nil {
+		s.WriteString(schemas.PutRecordsInput_StreamName, *v.StreamName)
+	}
+}
 func (in *PutRecordsInput) bindEndpointParams(p *EndpointParameters) {
 
 	p.StreamARN = in.StreamARN
@@ -153,13 +176,45 @@ type PutRecordsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutRecordsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutRecordsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutRecordsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EncryptionType != "" {
+		s.WriteString(schemas.PutRecordsOutput_EncryptionType, string(v.EncryptionType))
+	}
+	if v.FailedRecordCount != nil {
+		s.WriteInt32(schemas.PutRecordsOutput_FailedRecordCount, *v.FailedRecordCount)
+	}
+	serializePutRecordsResultEntryList(s, schemas.PutRecordsOutput_Records, v.Records)
+}
+func (v *PutRecordsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PutRecordsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PutRecordsOutput_EncryptionType:
+			var ev string
+			if err := d.ReadString(schemas.PutRecordsOutput_EncryptionType, &ev); err != nil {
+				return err
+			}
+			v.EncryptionType = types.EncryptionType(ev)
+			return nil
+		case schemas.PutRecordsOutput_FailedRecordCount:
+			v.FailedRecordCount = new(int32)
+			return d.ReadInt32(schemas.PutRecordsOutput_FailedRecordCount, v.FailedRecordCount)
+		case schemas.PutRecordsOutput_Records:
+			return deserializePutRecordsResultEntryList(d, schemas.PutRecordsOutput_Records, &v.Records)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPutRecordsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpPutRecords{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutRecords, schemas.PutRecordsInput, schemas.PutRecordsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpPutRecords{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutRecords, schemas.PutRecordsInput, schemas.PutRecordsOutput), output: &PutRecordsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

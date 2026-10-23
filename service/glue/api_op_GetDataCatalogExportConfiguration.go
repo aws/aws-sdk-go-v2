@@ -4,7 +4,9 @@ package glue
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/glue/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/glue/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -28,6 +30,15 @@ func (c *Client) GetDataCatalogExportConfiguration(ctx context.Context, params *
 
 type GetDataCatalogExportConfigurationInput struct {
 	noSmithyDocumentSerde
+}
+
+func (v *GetDataCatalogExportConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetDataCatalogExportConfigurationInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetDataCatalogExportConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
 }
 
 // The export configuration returned by the GetDataCatalogExportConfiguration
@@ -59,13 +70,72 @@ type GetDataCatalogExportConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetDataCatalogExportConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetDataCatalogExportConfigurationOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetDataCatalogExportConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.GetDataCatalogExportConfigurationOutput_CreatedAt, *v.CreatedAt)
+	}
+	if v.EncryptionConfiguration != nil {
+		s.WriteStruct(schemas.GetDataCatalogExportConfigurationOutput_EncryptionConfiguration)
+		v.EncryptionConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ExportSetting != "" {
+		s.WriteString(schemas.GetDataCatalogExportConfigurationOutput_ExportSetting, string(v.ExportSetting))
+	}
+	if v.S3TableBucketArn != nil {
+		s.WriteString(schemas.GetDataCatalogExportConfigurationOutput_S3TableBucketArn, *v.S3TableBucketArn)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.GetDataCatalogExportConfigurationOutput_Status, string(v.Status))
+	}
+	if v.UpdatedAt != nil {
+		s.WriteTime(schemas.GetDataCatalogExportConfigurationOutput_UpdatedAt, *v.UpdatedAt)
+	}
+}
+func (v *GetDataCatalogExportConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetDataCatalogExportConfigurationOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetDataCatalogExportConfigurationOutput_CreatedAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.GetDataCatalogExportConfigurationOutput_CreatedAt, v.CreatedAt)
+		case schemas.GetDataCatalogExportConfigurationOutput_EncryptionConfiguration:
+			v.EncryptionConfiguration = &types.ExportEncryptionConfiguration{}
+			return v.EncryptionConfiguration.Deserialize(d)
+		case schemas.GetDataCatalogExportConfigurationOutput_ExportSetting:
+			var ev string
+			if err := d.ReadString(schemas.GetDataCatalogExportConfigurationOutput_ExportSetting, &ev); err != nil {
+				return err
+			}
+			v.ExportSetting = types.ExportSetting(ev)
+			return nil
+		case schemas.GetDataCatalogExportConfigurationOutput_S3TableBucketArn:
+			v.S3TableBucketArn = new(string)
+			return d.ReadString(schemas.GetDataCatalogExportConfigurationOutput_S3TableBucketArn, v.S3TableBucketArn)
+		case schemas.GetDataCatalogExportConfigurationOutput_Status:
+			var ev string
+			if err := d.ReadString(schemas.GetDataCatalogExportConfigurationOutput_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.ExportStatus(ev)
+			return nil
+		case schemas.GetDataCatalogExportConfigurationOutput_UpdatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.GetDataCatalogExportConfigurationOutput_UpdatedAt, v.UpdatedAt)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetDataCatalogExportConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetDataCatalogExportConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetDataCatalogExportConfiguration, schemas.GetDataCatalogExportConfigurationInput, schemas.GetDataCatalogExportConfigurationOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetDataCatalogExportConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetDataCatalogExportConfiguration, schemas.GetDataCatalogExportConfigurationInput, schemas.GetDataCatalogExportConfigurationOutput), output: &GetDataCatalogExportConfigurationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

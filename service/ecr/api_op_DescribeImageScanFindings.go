@@ -5,7 +5,9 @@ package ecr
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/ecr/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ecr/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithytime "github.com/aws/smithy-go/time"
 	smithywaiter "github.com/aws/smithy-go/waiter"
@@ -65,6 +67,32 @@ type DescribeImageScanFindingsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeImageScanFindingsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeImageScanFindingsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeImageScanFindingsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ImageId != nil {
+		s.WriteStruct(schemas.DescribeImageScanFindingsRequest_imageId)
+		v.ImageId.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.DescribeImageScanFindingsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeImageScanFindingsRequest_nextToken, *v.NextToken)
+	}
+	if v.RegistryId != nil {
+		s.WriteString(schemas.DescribeImageScanFindingsRequest_registryId, *v.RegistryId)
+	}
+	if v.RepositoryName != nil {
+		s.WriteString(schemas.DescribeImageScanFindingsRequest_repositoryName, *v.RepositoryName)
+	}
+}
+
 type DescribeImageScanFindingsOutput struct {
 
 	// An object with identifying information for an image in an Amazon ECR repository.
@@ -94,13 +122,68 @@ type DescribeImageScanFindingsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeImageScanFindingsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeImageScanFindingsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeImageScanFindingsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ImageId != nil {
+		s.WriteStruct(schemas.DescribeImageScanFindingsResponse_imageId)
+		v.ImageId.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ImageScanFindings != nil {
+		s.WriteStruct(schemas.DescribeImageScanFindingsResponse_imageScanFindings)
+		v.ImageScanFindings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ImageScanStatus != nil {
+		s.WriteStruct(schemas.DescribeImageScanFindingsResponse_imageScanStatus)
+		v.ImageScanStatus.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeImageScanFindingsResponse_nextToken, *v.NextToken)
+	}
+	if v.RegistryId != nil {
+		s.WriteString(schemas.DescribeImageScanFindingsResponse_registryId, *v.RegistryId)
+	}
+	if v.RepositoryName != nil {
+		s.WriteString(schemas.DescribeImageScanFindingsResponse_repositoryName, *v.RepositoryName)
+	}
+}
+func (v *DescribeImageScanFindingsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeImageScanFindingsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeImageScanFindingsResponse_imageId:
+			v.ImageId = &types.ImageIdentifier{}
+			return v.ImageId.Deserialize(d)
+		case schemas.DescribeImageScanFindingsResponse_imageScanFindings:
+			v.ImageScanFindings = &types.ImageScanFindings{}
+			return v.ImageScanFindings.Deserialize(d)
+		case schemas.DescribeImageScanFindingsResponse_imageScanStatus:
+			v.ImageScanStatus = &types.ImageScanStatus{}
+			return v.ImageScanStatus.Deserialize(d)
+		case schemas.DescribeImageScanFindingsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.DescribeImageScanFindingsResponse_nextToken, v.NextToken)
+		case schemas.DescribeImageScanFindingsResponse_registryId:
+			v.RegistryId = new(string)
+			return d.ReadString(schemas.DescribeImageScanFindingsResponse_registryId, v.RegistryId)
+		case schemas.DescribeImageScanFindingsResponse_repositoryName:
+			v.RepositoryName = new(string)
+			return d.ReadString(schemas.DescribeImageScanFindingsResponse_repositoryName, v.RepositoryName)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeImageScanFindingsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeImageScanFindings{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeImageScanFindings, schemas.DescribeImageScanFindingsRequest, schemas.DescribeImageScanFindingsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeImageScanFindings{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeImageScanFindings, schemas.DescribeImageScanFindingsRequest, schemas.DescribeImageScanFindingsResponse), output: &DescribeImageScanFindingsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

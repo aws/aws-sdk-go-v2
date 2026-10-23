@@ -4,7 +4,9 @@ package glue
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/glue/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/glue/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -40,6 +42,26 @@ type GetMappingInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetMappingInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetMappingRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetMappingInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Location != nil {
+		s.WriteStruct(schemas.GetMappingRequest_Location)
+		v.Location.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeCatalogEntries(s, schemas.GetMappingRequest_Sinks, v.Sinks)
+	if v.Source != nil {
+		s.WriteStruct(schemas.GetMappingRequest_Source)
+		v.Source.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type GetMappingOutput struct {
 
 	// A list of mappings to the specified targets.
@@ -53,13 +75,29 @@ type GetMappingOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetMappingOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetMappingResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetMappingOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeMappingList(s, schemas.GetMappingResponse_Mapping, v.Mapping)
+}
+func (v *GetMappingOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetMappingResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetMappingResponse_Mapping:
+			return deserializeMappingList(d, schemas.GetMappingResponse_Mapping, &v.Mapping)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetMappingMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetMapping{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetMapping, schemas.GetMappingRequest, schemas.GetMappingResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetMapping{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetMapping, schemas.GetMappingRequest, schemas.GetMappingResponse), output: &GetMappingOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

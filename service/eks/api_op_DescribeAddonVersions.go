@@ -5,7 +5,9 @@ package eks
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/eks/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/eks/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -71,6 +73,30 @@ type DescribeAddonVersionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeAddonVersionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeAddonVersionsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeAddonVersionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AddonName != nil {
+		s.WriteString(schemas.DescribeAddonVersionsRequest_addonName, *v.AddonName)
+	}
+	if v.KubernetesVersion != nil {
+		s.WriteString(schemas.DescribeAddonVersionsRequest_kubernetesVersion, *v.KubernetesVersion)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.DescribeAddonVersionsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeAddonVersionsRequest_nextToken, *v.NextToken)
+	}
+	serializeStringList(s, schemas.DescribeAddonVersionsRequest_owners, v.Owners)
+	serializeStringList(s, schemas.DescribeAddonVersionsRequest_publishers, v.Publishers)
+	serializeStringList(s, schemas.DescribeAddonVersionsRequest_types, v.Types)
+}
+
 type DescribeAddonVersionsOutput struct {
 
 	// The list of available versions with Kubernetes version compatibility and other
@@ -92,13 +118,35 @@ type DescribeAddonVersionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeAddonVersionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeAddonVersionsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeAddonVersionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAddons(s, schemas.DescribeAddonVersionsResponse_addons, v.Addons)
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeAddonVersionsResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *DescribeAddonVersionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeAddonVersionsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeAddonVersionsResponse_addons:
+			return deserializeAddons(d, schemas.DescribeAddonVersionsResponse_addons, &v.Addons)
+		case schemas.DescribeAddonVersionsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.DescribeAddonVersionsResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeAddonVersionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeAddonVersions{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeAddonVersions, schemas.DescribeAddonVersionsRequest, schemas.DescribeAddonVersionsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeAddonVersions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeAddonVersions, schemas.DescribeAddonVersionsRequest, schemas.DescribeAddonVersionsResponse), output: &DescribeAddonVersionsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

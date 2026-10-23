@@ -5,7 +5,9 @@ package secretsmanager
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/secretsmanager/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/secretsmanager/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -72,6 +74,23 @@ type BatchGetSecretValueInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchGetSecretValueInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchGetSecretValueRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchGetSecretValueInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeFiltersListType(s, schemas.BatchGetSecretValueRequest_Filters, v.Filters)
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.BatchGetSecretValueRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.BatchGetSecretValueRequest_NextToken, *v.NextToken)
+	}
+	serializeSecretIdListType(s, schemas.BatchGetSecretValueRequest_SecretIdList, v.SecretIdList)
+}
+
 type BatchGetSecretValueOutput struct {
 
 	// A list of errors Secrets Manager encountered while attempting to retrieve
@@ -93,13 +112,38 @@ type BatchGetSecretValueOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchGetSecretValueOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchGetSecretValueResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchGetSecretValueOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAPIErrorListType(s, schemas.BatchGetSecretValueResponse_Errors, v.Errors)
+	if v.NextToken != nil {
+		s.WriteString(schemas.BatchGetSecretValueResponse_NextToken, *v.NextToken)
+	}
+	serializeSecretValuesType(s, schemas.BatchGetSecretValueResponse_SecretValues, v.SecretValues)
+}
+func (v *BatchGetSecretValueOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchGetSecretValueResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchGetSecretValueResponse_Errors:
+			return deserializeAPIErrorListType(d, schemas.BatchGetSecretValueResponse_Errors, &v.Errors)
+		case schemas.BatchGetSecretValueResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.BatchGetSecretValueResponse_NextToken, v.NextToken)
+		case schemas.BatchGetSecretValueResponse_SecretValues:
+			return deserializeSecretValuesType(d, schemas.BatchGetSecretValueResponse_SecretValues, &v.SecretValues)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationBatchGetSecretValueMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpBatchGetSecretValue{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchGetSecretValue, schemas.BatchGetSecretValueRequest, schemas.BatchGetSecretValueResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpBatchGetSecretValue{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchGetSecretValue, schemas.BatchGetSecretValueRequest, schemas.BatchGetSecretValueResponse), output: &BatchGetSecretValueOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

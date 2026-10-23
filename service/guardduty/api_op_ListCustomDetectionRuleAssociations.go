@@ -5,7 +5,9 @@ package guardduty
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/guardduty/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/guardduty/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -45,6 +47,27 @@ type ListCustomDetectionRuleAssociationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListCustomDetectionRuleAssociationsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListCustomDetectionRuleAssociationsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListCustomDetectionRuleAssociationsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListCustomDetectionRuleAssociationsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.Mode != "" {
+		s.WriteString(schemas.ListCustomDetectionRuleAssociationsRequest_Mode, string(v.Mode))
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListCustomDetectionRuleAssociationsRequest_NextToken, *v.NextToken)
+	}
+	if v.RuleId != nil {
+		s.WriteString(schemas.ListCustomDetectionRuleAssociationsRequest_RuleId, *v.RuleId)
+	}
+}
+
 type ListCustomDetectionRuleAssociationsOutput struct {
 
 	// A list of custom detection rule association summaries.
@@ -62,13 +85,35 @@ type ListCustomDetectionRuleAssociationsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListCustomDetectionRuleAssociationsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListCustomDetectionRuleAssociationsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListCustomDetectionRuleAssociationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListCustomDetectionRuleAssociationsResponse_NextToken, *v.NextToken)
+	}
+	serializeAssociationSummaryList(s, schemas.ListCustomDetectionRuleAssociationsResponse_RuleAssociations, v.RuleAssociations)
+}
+func (v *ListCustomDetectionRuleAssociationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListCustomDetectionRuleAssociationsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListCustomDetectionRuleAssociationsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListCustomDetectionRuleAssociationsResponse_NextToken, v.NextToken)
+		case schemas.ListCustomDetectionRuleAssociationsResponse_RuleAssociations:
+			return deserializeAssociationSummaryList(d, schemas.ListCustomDetectionRuleAssociationsResponse_RuleAssociations, &v.RuleAssociations)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListCustomDetectionRuleAssociationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListCustomDetectionRuleAssociations{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListCustomDetectionRuleAssociations, schemas.ListCustomDetectionRuleAssociationsRequest, schemas.ListCustomDetectionRuleAssociationsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListCustomDetectionRuleAssociations{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListCustomDetectionRuleAssociations, schemas.ListCustomDetectionRuleAssociationsRequest, schemas.ListCustomDetectionRuleAssociationsResponse), output: &ListCustomDetectionRuleAssociationsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -5,7 +5,9 @@ package appsync
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/appsync/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/appsync/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -42,6 +44,24 @@ type ListSourceApiAssociationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListSourceApiAssociationsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListSourceApiAssociationsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListSourceApiAssociationsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApiId != nil {
+		s.WriteString(schemas.ListSourceApiAssociationsRequest_apiId, *v.ApiId)
+	}
+	if v.MaxResults != 0 {
+		s.WriteInt32(schemas.ListSourceApiAssociationsRequest_maxResults, v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListSourceApiAssociationsRequest_nextToken, *v.NextToken)
+	}
+}
+
 type ListSourceApiAssociationsOutput struct {
 
 	// An identifier that was returned from the previous call to this operation, which
@@ -57,13 +77,35 @@ type ListSourceApiAssociationsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListSourceApiAssociationsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListSourceApiAssociationsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListSourceApiAssociationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListSourceApiAssociationsResponse_nextToken, *v.NextToken)
+	}
+	serializeSourceApiAssociationSummaryList(s, schemas.ListSourceApiAssociationsResponse_sourceApiAssociationSummaries, v.SourceApiAssociationSummaries)
+}
+func (v *ListSourceApiAssociationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListSourceApiAssociationsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListSourceApiAssociationsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListSourceApiAssociationsResponse_nextToken, v.NextToken)
+		case schemas.ListSourceApiAssociationsResponse_sourceApiAssociationSummaries:
+			return deserializeSourceApiAssociationSummaryList(d, schemas.ListSourceApiAssociationsResponse_sourceApiAssociationSummaries, &v.SourceApiAssociationSummaries)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListSourceApiAssociationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListSourceApiAssociations{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListSourceApiAssociations, schemas.ListSourceApiAssociationsRequest, schemas.ListSourceApiAssociationsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListSourceApiAssociations{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListSourceApiAssociations, schemas.ListSourceApiAssociationsRequest, schemas.ListSourceApiAssociationsResponse), output: &ListSourceApiAssociationsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

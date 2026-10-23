@@ -4,7 +4,9 @@ package inspector2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/inspector2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/inspector2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -53,6 +55,28 @@ type CreateCisScanConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateCisScanConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateCisScanConfigurationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateCisScanConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ScanName != nil {
+		s.WriteString(schemas.CreateCisScanConfigurationRequest_scanName, *v.ScanName)
+	}
+	serializeSchedule(s, schemas.CreateCisScanConfigurationRequest_schedule, v.Schedule)
+	if v.SecurityLevel != "" {
+		s.WriteString(schemas.CreateCisScanConfigurationRequest_securityLevel, string(v.SecurityLevel))
+	}
+	serializeCisTagMap(s, schemas.CreateCisScanConfigurationRequest_tags, v.Tags)
+	if v.Targets != nil {
+		s.WriteStruct(schemas.CreateCisScanConfigurationRequest_targets)
+		v.Targets.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type CreateCisScanConfigurationOutput struct {
 
 	// The scan configuration ARN for the CIS scan configuration.
@@ -64,13 +88,32 @@ type CreateCisScanConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateCisScanConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateCisScanConfigurationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateCisScanConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ScanConfigurationArn != nil {
+		s.WriteString(schemas.CreateCisScanConfigurationResponse_scanConfigurationArn, *v.ScanConfigurationArn)
+	}
+}
+func (v *CreateCisScanConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateCisScanConfigurationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateCisScanConfigurationResponse_scanConfigurationArn:
+			v.ScanConfigurationArn = new(string)
+			return d.ReadString(schemas.CreateCisScanConfigurationResponse_scanConfigurationArn, v.ScanConfigurationArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateCisScanConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateCisScanConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateCisScanConfiguration, schemas.CreateCisScanConfigurationRequest, schemas.CreateCisScanConfigurationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateCisScanConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateCisScanConfiguration, schemas.CreateCisScanConfigurationRequest, schemas.CreateCisScanConfigurationResponse), output: &CreateCisScanConfigurationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

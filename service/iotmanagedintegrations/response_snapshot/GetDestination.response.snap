@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"CreatedAt":946684800,"DeliveryDestinationArn":"__DeliveryDestinationArn__","DeliveryDestinationType":"KINESIS","Description":"__Description__","Name":"__Name__","RoleArn":"__RoleArn__","Tags":{"key0":"__Value__"},"UpdatedAt":946684800}

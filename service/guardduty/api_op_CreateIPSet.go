@@ -5,7 +5,9 @@ package guardduty
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/guardduty/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/guardduty/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -78,6 +80,37 @@ type CreateIPSetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateIPSetInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateIPSetRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateIPSetInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Activate != nil {
+		s.WriteBool(schemas.CreateIPSetRequest_Activate, *v.Activate)
+	}
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateIPSetRequest_ClientToken, *v.ClientToken)
+	}
+	if v.DetectorId != nil {
+		s.WriteString(schemas.CreateIPSetRequest_DetectorId, *v.DetectorId)
+	}
+	if v.ExpectedBucketOwner != nil {
+		s.WriteString(schemas.CreateIPSetRequest_ExpectedBucketOwner, *v.ExpectedBucketOwner)
+	}
+	if v.Format != "" {
+		s.WriteString(schemas.CreateIPSetRequest_Format, string(v.Format))
+	}
+	if v.Location != nil {
+		s.WriteString(schemas.CreateIPSetRequest_Location, *v.Location)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateIPSetRequest_Name, *v.Name)
+	}
+	serializeTagMap(s, schemas.CreateIPSetRequest_Tags, v.Tags)
+}
+
 type CreateIPSetOutput struct {
 
 	// The ID of the IPSet resource.
@@ -91,13 +124,32 @@ type CreateIPSetOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateIPSetOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateIPSetResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateIPSetOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IpSetId != nil {
+		s.WriteString(schemas.CreateIPSetResponse_IpSetId, *v.IpSetId)
+	}
+}
+func (v *CreateIPSetOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateIPSetResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateIPSetResponse_IpSetId:
+			v.IpSetId = new(string)
+			return d.ReadString(schemas.CreateIPSetResponse_IpSetId, v.IpSetId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateIPSetMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateIPSet{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateIPSet, schemas.CreateIPSetRequest, schemas.CreateIPSetResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateIPSet{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateIPSet, schemas.CreateIPSetRequest, schemas.CreateIPSetResponse), output: &CreateIPSetOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

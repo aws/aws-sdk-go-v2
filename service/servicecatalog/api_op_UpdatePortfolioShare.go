@@ -4,7 +4,9 @@ package servicecatalog
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/servicecatalog/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/servicecatalog/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -84,6 +86,35 @@ type UpdatePortfolioShareInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdatePortfolioShareInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdatePortfolioShareInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdatePortfolioShareInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AcceptLanguage != nil {
+		s.WriteString(schemas.UpdatePortfolioShareInput_AcceptLanguage, *v.AcceptLanguage)
+	}
+	if v.AccountId != nil {
+		s.WriteString(schemas.UpdatePortfolioShareInput_AccountId, *v.AccountId)
+	}
+	if v.OrganizationNode != nil {
+		s.WriteStruct(schemas.UpdatePortfolioShareInput_OrganizationNode)
+		v.OrganizationNode.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.PortfolioId != nil {
+		s.WriteString(schemas.UpdatePortfolioShareInput_PortfolioId, *v.PortfolioId)
+	}
+	if v.SharePrincipals != nil {
+		s.WriteBool(schemas.UpdatePortfolioShareInput_SharePrincipals, *v.SharePrincipals)
+	}
+	if v.ShareTagOptions != nil {
+		s.WriteBool(schemas.UpdatePortfolioShareInput_ShareTagOptions, *v.ShareTagOptions)
+	}
+}
+
 type UpdatePortfolioShareOutput struct {
 
 	// The token that tracks the status of the UpdatePortfolioShare operation for
@@ -100,13 +131,42 @@ type UpdatePortfolioShareOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdatePortfolioShareOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdatePortfolioShareOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdatePortfolioShareOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PortfolioShareToken != nil {
+		s.WriteString(schemas.UpdatePortfolioShareOutput_PortfolioShareToken, *v.PortfolioShareToken)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.UpdatePortfolioShareOutput_Status, string(v.Status))
+	}
+}
+func (v *UpdatePortfolioShareOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdatePortfolioShareOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdatePortfolioShareOutput_PortfolioShareToken:
+			v.PortfolioShareToken = new(string)
+			return d.ReadString(schemas.UpdatePortfolioShareOutput_PortfolioShareToken, v.PortfolioShareToken)
+		case schemas.UpdatePortfolioShareOutput_Status:
+			var ev string
+			if err := d.ReadString(schemas.UpdatePortfolioShareOutput_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.ShareStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdatePortfolioShareMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdatePortfolioShare{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdatePortfolioShare, schemas.UpdatePortfolioShareInput, schemas.UpdatePortfolioShareOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdatePortfolioShare{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdatePortfolioShare, schemas.UpdatePortfolioShareInput, schemas.UpdatePortfolioShareOutput), output: &UpdatePortfolioShareOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

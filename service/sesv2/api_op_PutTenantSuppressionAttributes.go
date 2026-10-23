@@ -4,7 +4,9 @@ package sesv2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/sesv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sesv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -59,6 +61,22 @@ type PutTenantSuppressionAttributesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutTenantSuppressionAttributesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutTenantSuppressionAttributesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutTenantSuppressionAttributesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeSuppressionListReasons(s, schemas.PutTenantSuppressionAttributesRequest_SuppressedReasons, v.SuppressedReasons)
+	if v.SuppressionScope != "" {
+		s.WriteString(schemas.PutTenantSuppressionAttributesRequest_SuppressionScope, string(v.SuppressionScope))
+	}
+	if v.TenantName != nil {
+		s.WriteString(schemas.PutTenantSuppressionAttributesRequest_TenantName, *v.TenantName)
+	}
+}
+
 // If the action is successful, the service sends back an HTTP 200 response with
 // an empty HTTP body.
 type PutTenantSuppressionAttributesOutput struct {
@@ -68,13 +86,26 @@ type PutTenantSuppressionAttributesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutTenantSuppressionAttributesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutTenantSuppressionAttributesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutTenantSuppressionAttributesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *PutTenantSuppressionAttributesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PutTenantSuppressionAttributesResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPutTenantSuppressionAttributesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpPutTenantSuppressionAttributes{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutTenantSuppressionAttributes, schemas.PutTenantSuppressionAttributesRequest, schemas.PutTenantSuppressionAttributesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpPutTenantSuppressionAttributes{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutTenantSuppressionAttributes, schemas.PutTenantSuppressionAttributesRequest, schemas.PutTenantSuppressionAttributesResponse), output: &PutTenantSuppressionAttributesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

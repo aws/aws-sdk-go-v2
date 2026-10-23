@@ -5,7 +5,9 @@ package amplifyuibuilder
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/amplifyuibuilder/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/amplifyuibuilder/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -44,6 +46,40 @@ type ExportFormsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ExportFormsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ExportFormsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ExportFormsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AppId != nil {
+		s.WriteString(schemas.ExportFormsRequest_appId, *v.AppId)
+	}
+	if v.EnvironmentName != nil {
+		s.WriteString(schemas.ExportFormsRequest_environmentName, *v.EnvironmentName)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ExportFormsRequest_nextToken, *v.NextToken)
+	}
+}
+func (v *ExportFormsInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ExportFormsRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ExportFormsRequest_appId:
+			v.AppId = new(string)
+			return d.ReadString(schemas.ExportFormsRequest_appId, v.AppId)
+		case schemas.ExportFormsRequest_environmentName:
+			v.EnvironmentName = new(string)
+			return d.ReadString(schemas.ExportFormsRequest_environmentName, v.EnvironmentName)
+		case schemas.ExportFormsRequest_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ExportFormsRequest_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
+
 type ExportFormsOutput struct {
 
 	// Represents the configuration of the exported forms.
@@ -60,13 +96,35 @@ type ExportFormsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ExportFormsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ExportFormsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ExportFormsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeFormList(s, schemas.ExportFormsResponse_entities, v.Entities)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ExportFormsResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ExportFormsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ExportFormsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ExportFormsResponse_entities:
+			return deserializeFormList(d, schemas.ExportFormsResponse_entities, &v.Entities)
+		case schemas.ExportFormsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ExportFormsResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationExportFormsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpExportForms{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ExportForms, schemas.ExportFormsRequest, schemas.ExportFormsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpExportForms{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ExportForms, schemas.ExportFormsRequest, schemas.ExportFormsResponse), output: &ExportFormsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

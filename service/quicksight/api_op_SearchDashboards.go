@@ -5,7 +5,9 @@ package quicksight
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/quicksight/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/quicksight/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -53,6 +55,25 @@ type SearchDashboardsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SearchDashboardsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SearchDashboardsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SearchDashboardsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AwsAccountId != nil {
+		s.WriteString(schemas.SearchDashboardsRequest_AwsAccountId, *v.AwsAccountId)
+	}
+	serializeDashboardSearchFilterList(s, schemas.SearchDashboardsRequest_Filters, v.Filters)
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.SearchDashboardsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.SearchDashboardsRequest_NextToken, *v.NextToken)
+	}
+}
+
 type SearchDashboardsOutput struct {
 
 	// The list of dashboards owned by the user specified in Filters in your request.
@@ -73,13 +94,46 @@ type SearchDashboardsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SearchDashboardsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SearchDashboardsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SearchDashboardsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDashboardSummaryList(s, schemas.SearchDashboardsResponse_DashboardSummaryList, v.DashboardSummaryList)
+	if v.NextToken != nil {
+		s.WriteString(schemas.SearchDashboardsResponse_NextToken, *v.NextToken)
+	}
+	if v.RequestId != nil {
+		s.WriteString(schemas.SearchDashboardsResponse_RequestId, *v.RequestId)
+	}
+	if v.Status != 0 {
+		s.WriteInt32(schemas.SearchDashboardsResponse_Status, v.Status)
+	}
+}
+func (v *SearchDashboardsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SearchDashboardsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SearchDashboardsResponse_DashboardSummaryList:
+			return deserializeDashboardSummaryList(d, schemas.SearchDashboardsResponse_DashboardSummaryList, &v.DashboardSummaryList)
+		case schemas.SearchDashboardsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.SearchDashboardsResponse_NextToken, v.NextToken)
+		case schemas.SearchDashboardsResponse_RequestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.SearchDashboardsResponse_RequestId, v.RequestId)
+		case schemas.SearchDashboardsResponse_Status:
+			return d.ReadInt32(schemas.SearchDashboardsResponse_Status, &v.Status)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationSearchDashboardsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpSearchDashboards{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SearchDashboards, schemas.SearchDashboardsRequest, schemas.SearchDashboardsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpSearchDashboards{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SearchDashboards, schemas.SearchDashboardsRequest, schemas.SearchDashboardsResponse), output: &SearchDashboardsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

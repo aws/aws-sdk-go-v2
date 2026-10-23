@@ -4,6 +4,8 @@ package apigatewayv2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/apigatewayv2/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -33,6 +35,18 @@ type DeleteVpcLinkInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteVpcLinkInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteVpcLinkRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteVpcLinkInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.VpcLinkId != nil {
+		s.WriteString(schemas.DeleteVpcLinkRequest_VpcLinkId, *v.VpcLinkId)
+	}
+}
+
 type DeleteVpcLinkOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -40,13 +54,26 @@ type DeleteVpcLinkOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteVpcLinkOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteVpcLinkResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteVpcLinkOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteVpcLinkOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteVpcLinkResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteVpcLinkMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteVpcLink{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteVpcLink, schemas.DeleteVpcLinkRequest, schemas.DeleteVpcLinkResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteVpcLink{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteVpcLink, schemas.DeleteVpcLinkRequest, schemas.DeleteVpcLinkResponse), output: &DeleteVpcLinkOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

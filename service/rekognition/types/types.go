@@ -3,6 +3,8 @@
 package types
 
 import (
+	"github.com/aws/aws-sdk-go-v2/service/rekognition/schemas"
+	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
@@ -24,6 +26,34 @@ type AgeRange struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AgeRange) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AgeRange)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AgeRange) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.High != nil {
+		s.WriteInt32(schemas.AgeRange_High, *v.High)
+	}
+	if v.Low != nil {
+		s.WriteInt32(schemas.AgeRange_Low, *v.Low)
+	}
+}
+func (v *AgeRange) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AgeRange, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AgeRange_High:
+			v.High = new(int32)
+			return d.ReadInt32(schemas.AgeRange_High, v.High)
+		case schemas.AgeRange_Low:
+			v.Low = new(int32)
+			return d.ReadInt32(schemas.AgeRange_Low, v.Low)
+		}
+		return nil
+	})
+}
+
 // Assets are the images that you use to train and evaluate a model version.
 // Assets can also contain validation information that you use to debug a failed
 // model training.
@@ -36,6 +66,30 @@ type Asset struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Asset) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Asset)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Asset) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GroundTruthManifest != nil {
+		s.WriteStruct(schemas.Asset_GroundTruthManifest)
+		v.GroundTruthManifest.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *Asset) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Asset, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Asset_GroundTruthManifest:
+			v.GroundTruthManifest = &GroundTruthManifest{}
+			return v.GroundTruthManifest.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Provides face metadata for the faces that are associated to a specific UserID.
 type AssociatedFace struct {
 
@@ -43,6 +97,28 @@ type AssociatedFace struct {
 	FaceId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *AssociatedFace) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssociatedFace)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssociatedFace) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FaceId != nil {
+		s.WriteString(schemas.AssociatedFace_FaceId, *v.FaceId)
+	}
+}
+func (v *AssociatedFace) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AssociatedFace, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AssociatedFace_FaceId:
+			v.FaceId = new(string)
+			return d.ReadString(schemas.AssociatedFace_FaceId, v.FaceId)
+		}
+		return nil
+	})
 }
 
 // Metadata information about an audio stream. An array of AudioMetadata objects
@@ -62,6 +138,46 @@ type AudioMetadata struct {
 	SampleRate *int64
 
 	noSmithyDocumentSerde
+}
+
+func (v *AudioMetadata) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AudioMetadata)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AudioMetadata) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Codec != nil {
+		s.WriteString(schemas.AudioMetadata_Codec, *v.Codec)
+	}
+	if v.DurationMillis != nil {
+		s.WriteInt64(schemas.AudioMetadata_DurationMillis, *v.DurationMillis)
+	}
+	if v.NumberOfChannels != nil {
+		s.WriteInt64(schemas.AudioMetadata_NumberOfChannels, *v.NumberOfChannels)
+	}
+	if v.SampleRate != nil {
+		s.WriteInt64(schemas.AudioMetadata_SampleRate, *v.SampleRate)
+	}
+}
+func (v *AudioMetadata) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AudioMetadata, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AudioMetadata_Codec:
+			v.Codec = new(string)
+			return d.ReadString(schemas.AudioMetadata_Codec, v.Codec)
+		case schemas.AudioMetadata_DurationMillis:
+			v.DurationMillis = new(int64)
+			return d.ReadInt64(schemas.AudioMetadata_DurationMillis, v.DurationMillis)
+		case schemas.AudioMetadata_NumberOfChannels:
+			v.NumberOfChannels = new(int64)
+			return d.ReadInt64(schemas.AudioMetadata_NumberOfChannels, v.NumberOfChannels)
+		case schemas.AudioMetadata_SampleRate:
+			v.SampleRate = new(int64)
+			return d.ReadInt64(schemas.AudioMetadata_SampleRate, v.SampleRate)
+		}
+		return nil
+	})
 }
 
 // An image that is picked from the Face Liveness video and returned for audit
@@ -106,6 +222,43 @@ type AuditImage struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AuditImage) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AuditImage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AuditImage) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BoundingBox != nil {
+		s.WriteStruct(schemas.AuditImage_BoundingBox)
+		v.BoundingBox.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Bytes != nil {
+		s.WriteBlob(schemas.AuditImage_Bytes, v.Bytes)
+	}
+	if v.S3Object != nil {
+		s.WriteStruct(schemas.AuditImage_S3Object)
+		v.S3Object.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *AuditImage) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AuditImage, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AuditImage_BoundingBox:
+			v.BoundingBox = &BoundingBox{}
+			return v.BoundingBox.Deserialize(d)
+		case schemas.AuditImage_Bytes:
+			return d.ReadBlob(schemas.AuditImage_Bytes, &v.Bytes)
+		case schemas.AuditImage_S3Object:
+			v.S3Object = &S3Object{}
+			return v.S3Object.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Indicates whether or not the face has a beard, and the confidence level in the
 // determination.
 type Beard struct {
@@ -117,6 +270,33 @@ type Beard struct {
 	Value bool
 
 	noSmithyDocumentSerde
+}
+
+func (v *Beard) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Beard)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Beard) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Confidence != nil {
+		s.WriteFloat32(schemas.Beard_Confidence, *v.Confidence)
+	}
+	if v.Value != false {
+		s.WriteBool(schemas.Beard_Value, v.Value)
+	}
+}
+func (v *Beard) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Beard, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Beard_Confidence:
+			v.Confidence = new(float32)
+			return d.ReadFloat32(schemas.Beard_Confidence, v.Confidence)
+		case schemas.Beard_Value:
+			return d.ReadBool(schemas.Beard_Value, &v.Value)
+		}
+		return nil
+	})
 }
 
 //	A filter that allows you to control the black frame detection by specifying
@@ -151,6 +331,34 @@ type BlackFrame struct {
 	MinCoveragePercentage *float32
 
 	noSmithyDocumentSerde
+}
+
+func (v *BlackFrame) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BlackFrame)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BlackFrame) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxPixelThreshold != nil {
+		s.WriteFloat32(schemas.BlackFrame_MaxPixelThreshold, *v.MaxPixelThreshold)
+	}
+	if v.MinCoveragePercentage != nil {
+		s.WriteFloat32(schemas.BlackFrame_MinCoveragePercentage, *v.MinCoveragePercentage)
+	}
+}
+func (v *BlackFrame) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BlackFrame, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BlackFrame_MaxPixelThreshold:
+			v.MaxPixelThreshold = new(float32)
+			return d.ReadFloat32(schemas.BlackFrame_MaxPixelThreshold, v.MaxPixelThreshold)
+		case schemas.BlackFrame_MinCoveragePercentage:
+			v.MinCoveragePercentage = new(float32)
+			return d.ReadFloat32(schemas.BlackFrame_MinCoveragePercentage, v.MinCoveragePercentage)
+		}
+		return nil
+	})
 }
 
 // Identifies the bounding box around the label, face, text, object of interest,
@@ -189,6 +397,46 @@ type BoundingBox struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BoundingBox) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BoundingBox)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BoundingBox) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Height != nil {
+		s.WriteFloat32(schemas.BoundingBox_Height, *v.Height)
+	}
+	if v.Left != nil {
+		s.WriteFloat32(schemas.BoundingBox_Left, *v.Left)
+	}
+	if v.Top != nil {
+		s.WriteFloat32(schemas.BoundingBox_Top, *v.Top)
+	}
+	if v.Width != nil {
+		s.WriteFloat32(schemas.BoundingBox_Width, *v.Width)
+	}
+}
+func (v *BoundingBox) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BoundingBox, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BoundingBox_Height:
+			v.Height = new(float32)
+			return d.ReadFloat32(schemas.BoundingBox_Height, v.Height)
+		case schemas.BoundingBox_Left:
+			v.Left = new(float32)
+			return d.ReadFloat32(schemas.BoundingBox_Left, v.Left)
+		case schemas.BoundingBox_Top:
+			v.Top = new(float32)
+			return d.ReadFloat32(schemas.BoundingBox_Top, v.Top)
+		case schemas.BoundingBox_Width:
+			v.Width = new(float32)
+			return d.ReadFloat32(schemas.BoundingBox_Width, v.Width)
+		}
+		return nil
+	})
+}
+
 // Provides information about a celebrity recognized by the RecognizeCelebrities operation.
 type Celebrity struct {
 
@@ -215,6 +463,59 @@ type Celebrity struct {
 	Urls []string
 
 	noSmithyDocumentSerde
+}
+
+func (v *Celebrity) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Celebrity)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Celebrity) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Face != nil {
+		s.WriteStruct(schemas.Celebrity_Face)
+		v.Face.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.Celebrity_Id, *v.Id)
+	}
+	if v.KnownGender != nil {
+		s.WriteStruct(schemas.Celebrity_KnownGender)
+		v.KnownGender.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MatchConfidence != nil {
+		s.WriteFloat32(schemas.Celebrity_MatchConfidence, *v.MatchConfidence)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.Celebrity_Name, *v.Name)
+	}
+	serializeUrls(s, schemas.Celebrity_Urls, v.Urls)
+}
+func (v *Celebrity) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Celebrity, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Celebrity_Face:
+			v.Face = &ComparedFace{}
+			return v.Face.Deserialize(d)
+		case schemas.Celebrity_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.Celebrity_Id, v.Id)
+		case schemas.Celebrity_KnownGender:
+			v.KnownGender = &KnownGender{}
+			return v.KnownGender.Deserialize(d)
+		case schemas.Celebrity_MatchConfidence:
+			v.MatchConfidence = new(float32)
+			return d.ReadFloat32(schemas.Celebrity_MatchConfidence, v.MatchConfidence)
+		case schemas.Celebrity_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.Celebrity_Name, v.Name)
+		case schemas.Celebrity_Urls:
+			return deserializeUrls(d, schemas.Celebrity_Urls, &v.Urls)
+		}
+		return nil
+	})
 }
 
 // Information about a recognized celebrity.
@@ -245,6 +546,67 @@ type CelebrityDetail struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CelebrityDetail) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CelebrityDetail)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CelebrityDetail) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BoundingBox != nil {
+		s.WriteStruct(schemas.CelebrityDetail_BoundingBox)
+		v.BoundingBox.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Confidence != nil {
+		s.WriteFloat32(schemas.CelebrityDetail_Confidence, *v.Confidence)
+	}
+	if v.Face != nil {
+		s.WriteStruct(schemas.CelebrityDetail_Face)
+		v.Face.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.CelebrityDetail_Id, *v.Id)
+	}
+	if v.KnownGender != nil {
+		s.WriteStruct(schemas.CelebrityDetail_KnownGender)
+		v.KnownGender.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CelebrityDetail_Name, *v.Name)
+	}
+	serializeUrls(s, schemas.CelebrityDetail_Urls, v.Urls)
+}
+func (v *CelebrityDetail) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CelebrityDetail, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CelebrityDetail_BoundingBox:
+			v.BoundingBox = &BoundingBox{}
+			return v.BoundingBox.Deserialize(d)
+		case schemas.CelebrityDetail_Confidence:
+			v.Confidence = new(float32)
+			return d.ReadFloat32(schemas.CelebrityDetail_Confidence, v.Confidence)
+		case schemas.CelebrityDetail_Face:
+			v.Face = &FaceDetail{}
+			return v.Face.Deserialize(d)
+		case schemas.CelebrityDetail_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.CelebrityDetail_Id, v.Id)
+		case schemas.CelebrityDetail_KnownGender:
+			v.KnownGender = &KnownGender{}
+			return v.KnownGender.Deserialize(d)
+		case schemas.CelebrityDetail_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.CelebrityDetail_Name, v.Name)
+		case schemas.CelebrityDetail_Urls:
+			return deserializeUrls(d, schemas.CelebrityDetail_Urls, &v.Urls)
+		}
+		return nil
+	})
+}
+
 // Information about a detected celebrity and the time the celebrity was detected
 // in a stored video. For more information, see GetCelebrityRecognition in the
 // Amazon Rekognition Developer Guide.
@@ -259,6 +621,35 @@ type CelebrityRecognition struct {
 	Timestamp int64
 
 	noSmithyDocumentSerde
+}
+
+func (v *CelebrityRecognition) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CelebrityRecognition)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CelebrityRecognition) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Celebrity != nil {
+		s.WriteStruct(schemas.CelebrityRecognition_Celebrity)
+		v.Celebrity.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Timestamp != 0 {
+		s.WriteInt64(schemas.CelebrityRecognition_Timestamp, v.Timestamp)
+	}
+}
+func (v *CelebrityRecognition) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CelebrityRecognition, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CelebrityRecognition_Celebrity:
+			v.Celebrity = &CelebrityDetail{}
+			return v.Celebrity.Deserialize(d)
+		case schemas.CelebrityRecognition_Timestamp:
+			return d.ReadInt64(schemas.CelebrityRecognition_Timestamp, &v.Timestamp)
+		}
+		return nil
+	})
 }
 
 // Describes the type and version of the challenge being used for the Face
@@ -278,6 +669,38 @@ type Challenge struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Challenge) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Challenge)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Challenge) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Type != "" {
+		s.WriteString(schemas.Challenge_Type, string(v.Type))
+	}
+	if v.Version != nil {
+		s.WriteString(schemas.Challenge_Version, *v.Version)
+	}
+}
+func (v *Challenge) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Challenge, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Challenge_Type:
+			var ev string
+			if err := d.ReadString(schemas.Challenge_Type, &ev); err != nil {
+				return err
+			}
+			v.Type = ChallengeType(ev)
+			return nil
+		case schemas.Challenge_Version:
+			v.Version = new(string)
+			return d.ReadString(schemas.Challenge_Version, v.Version)
+		}
+		return nil
+	})
+}
+
 // An ordered list of preferred challenge type and versions.
 type ChallengePreference struct {
 
@@ -291,6 +714,40 @@ type ChallengePreference struct {
 	Versions *Versions
 
 	noSmithyDocumentSerde
+}
+
+func (v *ChallengePreference) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ChallengePreference)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ChallengePreference) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Type != "" {
+		s.WriteString(schemas.ChallengePreference_Type, string(v.Type))
+	}
+	if v.Versions != nil {
+		s.WriteStruct(schemas.ChallengePreference_Versions)
+		v.Versions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *ChallengePreference) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ChallengePreference, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ChallengePreference_Type:
+			var ev string
+			if err := d.ReadString(schemas.ChallengePreference_Type, &ev); err != nil {
+				return err
+			}
+			v.Type = ChallengeType(ev)
+			return nil
+		case schemas.ChallengePreference_Versions:
+			v.Versions = &Versions{}
+			return v.Versions.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // Provides face metadata for target image faces that are analyzed by CompareFaces
@@ -324,6 +781,66 @@ type ComparedFace struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ComparedFace) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ComparedFace)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ComparedFace) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BoundingBox != nil {
+		s.WriteStruct(schemas.ComparedFace_BoundingBox)
+		v.BoundingBox.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Confidence != nil {
+		s.WriteFloat32(schemas.ComparedFace_Confidence, *v.Confidence)
+	}
+	serializeEmotions(s, schemas.ComparedFace_Emotions, v.Emotions)
+	serializeLandmarks(s, schemas.ComparedFace_Landmarks, v.Landmarks)
+	if v.Pose != nil {
+		s.WriteStruct(schemas.ComparedFace_Pose)
+		v.Pose.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Quality != nil {
+		s.WriteStruct(schemas.ComparedFace_Quality)
+		v.Quality.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Smile != nil {
+		s.WriteStruct(schemas.ComparedFace_Smile)
+		v.Smile.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *ComparedFace) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ComparedFace, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ComparedFace_BoundingBox:
+			v.BoundingBox = &BoundingBox{}
+			return v.BoundingBox.Deserialize(d)
+		case schemas.ComparedFace_Confidence:
+			v.Confidence = new(float32)
+			return d.ReadFloat32(schemas.ComparedFace_Confidence, v.Confidence)
+		case schemas.ComparedFace_Emotions:
+			return deserializeEmotions(d, schemas.ComparedFace_Emotions, &v.Emotions)
+		case schemas.ComparedFace_Landmarks:
+			return deserializeLandmarks(d, schemas.ComparedFace_Landmarks, &v.Landmarks)
+		case schemas.ComparedFace_Pose:
+			v.Pose = &Pose{}
+			return v.Pose.Deserialize(d)
+		case schemas.ComparedFace_Quality:
+			v.Quality = &ImageQuality{}
+			return v.Quality.Deserialize(d)
+		case schemas.ComparedFace_Smile:
+			v.Smile = &Smile{}
+			return v.Smile.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Type that describes the face Amazon Rekognition chose to compare with the faces
 // in the target. This contains a bounding box for the selected face and confidence
 // level that the bounding box contains a face. Note that Amazon Rekognition
@@ -337,6 +854,36 @@ type ComparedSourceImageFace struct {
 	Confidence *float32
 
 	noSmithyDocumentSerde
+}
+
+func (v *ComparedSourceImageFace) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ComparedSourceImageFace)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ComparedSourceImageFace) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BoundingBox != nil {
+		s.WriteStruct(schemas.ComparedSourceImageFace_BoundingBox)
+		v.BoundingBox.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Confidence != nil {
+		s.WriteFloat32(schemas.ComparedSourceImageFace_Confidence, *v.Confidence)
+	}
+}
+func (v *ComparedSourceImageFace) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ComparedSourceImageFace, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ComparedSourceImageFace_BoundingBox:
+			v.BoundingBox = &BoundingBox{}
+			return v.BoundingBox.Deserialize(d)
+		case schemas.ComparedSourceImageFace_Confidence:
+			v.Confidence = new(float32)
+			return d.ReadFloat32(schemas.ComparedSourceImageFace_Confidence, v.Confidence)
+		}
+		return nil
+	})
 }
 
 // Provides information about a face in a target image that matches the source
@@ -353,6 +900,36 @@ type CompareFacesMatch struct {
 	Similarity *float32
 
 	noSmithyDocumentSerde
+}
+
+func (v *CompareFacesMatch) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CompareFacesMatch)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CompareFacesMatch) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Face != nil {
+		s.WriteStruct(schemas.CompareFacesMatch_Face)
+		v.Face.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Similarity != nil {
+		s.WriteFloat32(schemas.CompareFacesMatch_Similarity, *v.Similarity)
+	}
+}
+func (v *CompareFacesMatch) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CompareFacesMatch, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CompareFacesMatch_Face:
+			v.Face = &ComparedFace{}
+			return v.Face.Deserialize(d)
+		case schemas.CompareFacesMatch_Similarity:
+			v.Similarity = new(float32)
+			return d.ReadFloat32(schemas.CompareFacesMatch_Similarity, v.Similarity)
+		}
+		return nil
+	})
 }
 
 //	Label detection settings to use on a streaming video. Defining the settings is
@@ -380,6 +957,31 @@ type ConnectedHomeSettings struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ConnectedHomeSettings) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ConnectedHomeSettings)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ConnectedHomeSettings) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeConnectedHomeLabels(s, schemas.ConnectedHomeSettings_Labels, v.Labels)
+	if v.MinConfidence != nil {
+		s.WriteFloat32(schemas.ConnectedHomeSettings_MinConfidence, *v.MinConfidence)
+	}
+}
+func (v *ConnectedHomeSettings) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ConnectedHomeSettings, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ConnectedHomeSettings_Labels:
+			return deserializeConnectedHomeLabels(d, schemas.ConnectedHomeSettings_Labels, &v.Labels)
+		case schemas.ConnectedHomeSettings_MinConfidence:
+			v.MinConfidence = new(float32)
+			return d.ReadFloat32(schemas.ConnectedHomeSettings_MinConfidence, v.MinConfidence)
+		}
+		return nil
+	})
+}
+
 //	The label detection settings you want to use in your stream processor. This
 //
 // includes the labels you want the stream processor to detect and the minimum
@@ -395,6 +997,31 @@ type ConnectedHomeSettingsForUpdate struct {
 	MinConfidence *float32
 
 	noSmithyDocumentSerde
+}
+
+func (v *ConnectedHomeSettingsForUpdate) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ConnectedHomeSettingsForUpdate)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ConnectedHomeSettingsForUpdate) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeConnectedHomeLabels(s, schemas.ConnectedHomeSettingsForUpdate_Labels, v.Labels)
+	if v.MinConfidence != nil {
+		s.WriteFloat32(schemas.ConnectedHomeSettingsForUpdate_MinConfidence, *v.MinConfidence)
+	}
+}
+func (v *ConnectedHomeSettingsForUpdate) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ConnectedHomeSettingsForUpdate, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ConnectedHomeSettingsForUpdate_Labels:
+			return deserializeConnectedHomeLabels(d, schemas.ConnectedHomeSettingsForUpdate_Labels, &v.Labels)
+		case schemas.ConnectedHomeSettingsForUpdate_MinConfidence:
+			v.MinConfidence = new(float32)
+			return d.ReadFloat32(schemas.ConnectedHomeSettingsForUpdate_MinConfidence, v.MinConfidence)
+		}
+		return nil
+	})
 }
 
 // Information about an inappropriate, unwanted, or offensive content label
@@ -428,6 +1055,56 @@ type ContentModerationDetection struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ContentModerationDetection) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ContentModerationDetection)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ContentModerationDetection) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeContentTypes(s, schemas.ContentModerationDetection_ContentTypes, v.ContentTypes)
+	if v.DurationMillis != nil {
+		s.WriteInt64(schemas.ContentModerationDetection_DurationMillis, *v.DurationMillis)
+	}
+	if v.EndTimestampMillis != nil {
+		s.WriteInt64(schemas.ContentModerationDetection_EndTimestampMillis, *v.EndTimestampMillis)
+	}
+	if v.ModerationLabel != nil {
+		s.WriteStruct(schemas.ContentModerationDetection_ModerationLabel)
+		v.ModerationLabel.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.StartTimestampMillis != nil {
+		s.WriteInt64(schemas.ContentModerationDetection_StartTimestampMillis, *v.StartTimestampMillis)
+	}
+	if v.Timestamp != 0 {
+		s.WriteInt64(schemas.ContentModerationDetection_Timestamp, v.Timestamp)
+	}
+}
+func (v *ContentModerationDetection) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ContentModerationDetection, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ContentModerationDetection_ContentTypes:
+			return deserializeContentTypes(d, schemas.ContentModerationDetection_ContentTypes, &v.ContentTypes)
+		case schemas.ContentModerationDetection_DurationMillis:
+			v.DurationMillis = new(int64)
+			return d.ReadInt64(schemas.ContentModerationDetection_DurationMillis, v.DurationMillis)
+		case schemas.ContentModerationDetection_EndTimestampMillis:
+			v.EndTimestampMillis = new(int64)
+			return d.ReadInt64(schemas.ContentModerationDetection_EndTimestampMillis, v.EndTimestampMillis)
+		case schemas.ContentModerationDetection_ModerationLabel:
+			v.ModerationLabel = &ModerationLabel{}
+			return v.ModerationLabel.Deserialize(d)
+		case schemas.ContentModerationDetection_StartTimestampMillis:
+			v.StartTimestampMillis = new(int64)
+			return d.ReadInt64(schemas.ContentModerationDetection_StartTimestampMillis, v.StartTimestampMillis)
+		case schemas.ContentModerationDetection_Timestamp:
+			return d.ReadInt64(schemas.ContentModerationDetection_Timestamp, &v.Timestamp)
+		}
+		return nil
+	})
+}
+
 // Contains information regarding the confidence and name of a detected content
 // type.
 type ContentType struct {
@@ -441,6 +1118,34 @@ type ContentType struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ContentType) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ContentType)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ContentType) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Confidence != nil {
+		s.WriteFloat32(schemas.ContentType_Confidence, *v.Confidence)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.ContentType_Name, *v.Name)
+	}
+}
+func (v *ContentType) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ContentType, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ContentType_Confidence:
+			v.Confidence = new(float32)
+			return d.ReadFloat32(schemas.ContentType_Confidence, v.Confidence)
+		case schemas.ContentType_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.ContentType_Name, v.Name)
+		}
+		return nil
+	})
+}
+
 // Information about an item of Personal Protective Equipment covering a
 // corresponding body part. For more information, see DetectProtectiveEquipment.
 type CoversBodyPart struct {
@@ -452,6 +1157,33 @@ type CoversBodyPart struct {
 	Value bool
 
 	noSmithyDocumentSerde
+}
+
+func (v *CoversBodyPart) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CoversBodyPart)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CoversBodyPart) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Confidence != nil {
+		s.WriteFloat32(schemas.CoversBodyPart_Confidence, *v.Confidence)
+	}
+	if v.Value != false {
+		s.WriteBool(schemas.CoversBodyPart_Value, v.Value)
+	}
+}
+func (v *CoversBodyPart) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CoversBodyPart, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CoversBodyPart_Confidence:
+			v.Confidence = new(float32)
+			return d.ReadFloat32(schemas.CoversBodyPart_Confidence, v.Confidence)
+		case schemas.CoversBodyPart_Value:
+			return d.ReadBool(schemas.CoversBodyPart_Value, &v.Value)
+		}
+		return nil
+	})
 }
 
 // A session settings object. It contains settings for the operation to be
@@ -479,6 +1211,39 @@ type CreateFaceLivenessSessionRequestSettings struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateFaceLivenessSessionRequestSettings) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateFaceLivenessSessionRequestSettings)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateFaceLivenessSessionRequestSettings) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AuditImagesLimit != nil {
+		s.WriteInt32(schemas.CreateFaceLivenessSessionRequestSettings_AuditImagesLimit, *v.AuditImagesLimit)
+	}
+	serializeChallengePreferences(s, schemas.CreateFaceLivenessSessionRequestSettings_ChallengePreferences, v.ChallengePreferences)
+	if v.OutputConfig != nil {
+		s.WriteStruct(schemas.CreateFaceLivenessSessionRequestSettings_OutputConfig)
+		v.OutputConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateFaceLivenessSessionRequestSettings) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateFaceLivenessSessionRequestSettings, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateFaceLivenessSessionRequestSettings_AuditImagesLimit:
+			v.AuditImagesLimit = new(int32)
+			return d.ReadInt32(schemas.CreateFaceLivenessSessionRequestSettings_AuditImagesLimit, v.AuditImagesLimit)
+		case schemas.CreateFaceLivenessSessionRequestSettings_ChallengePreferences:
+			return deserializeChallengePreferences(d, schemas.CreateFaceLivenessSessionRequestSettings_ChallengePreferences, &v.ChallengePreferences)
+		case schemas.CreateFaceLivenessSessionRequestSettings_OutputConfig:
+			v.OutputConfig = &LivenessOutputConfig{}
+			return v.OutputConfig.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Feature specific configuration for the training job. Configuration provided for
 // the job must match the feature type parameter associated with project. If
 // configuration and feature type do not match an InvalidParameterException is
@@ -491,6 +1256,30 @@ type CustomizationFeatureConfig struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CustomizationFeatureConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CustomizationFeatureConfig)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CustomizationFeatureConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ContentModeration != nil {
+		s.WriteStruct(schemas.CustomizationFeatureConfig_ContentModeration)
+		v.ContentModeration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CustomizationFeatureConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CustomizationFeatureConfig, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CustomizationFeatureConfig_ContentModeration:
+			v.ContentModeration = &CustomizationFeatureContentModerationConfig{}
+			return v.ContentModeration.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Configuration options for Content Moderation training.
 type CustomizationFeatureContentModerationConfig struct {
 
@@ -499,6 +1288,28 @@ type CustomizationFeatureContentModerationConfig struct {
 	ConfidenceThreshold *float32
 
 	noSmithyDocumentSerde
+}
+
+func (v *CustomizationFeatureContentModerationConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CustomizationFeatureContentModerationConfig)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CustomizationFeatureContentModerationConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConfidenceThreshold != nil {
+		s.WriteFloat32(schemas.CustomizationFeatureContentModerationConfig_ConfidenceThreshold, *v.ConfidenceThreshold)
+	}
+}
+func (v *CustomizationFeatureContentModerationConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CustomizationFeatureContentModerationConfig, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CustomizationFeatureContentModerationConfig_ConfidenceThreshold:
+			v.ConfidenceThreshold = new(float32)
+			return d.ReadFloat32(schemas.CustomizationFeatureContentModerationConfig_ConfidenceThreshold, v.ConfidenceThreshold)
+		}
+		return nil
+	})
 }
 
 // A custom label detected in an image by a call to DetectCustomLabels.
@@ -517,6 +1328,42 @@ type CustomLabel struct {
 	Name *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *CustomLabel) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CustomLabel)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CustomLabel) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Confidence != nil {
+		s.WriteFloat32(schemas.CustomLabel_Confidence, *v.Confidence)
+	}
+	if v.Geometry != nil {
+		s.WriteStruct(schemas.CustomLabel_Geometry)
+		v.Geometry.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CustomLabel_Name, *v.Name)
+	}
+}
+func (v *CustomLabel) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CustomLabel, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CustomLabel_Confidence:
+			v.Confidence = new(float32)
+			return d.ReadFloat32(schemas.CustomLabel_Confidence, v.Confidence)
+		case schemas.CustomLabel_Geometry:
+			v.Geometry = &Geometry{}
+			return v.Geometry.Deserialize(d)
+		case schemas.CustomLabel_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.CustomLabel_Name, v.Name)
+		}
+		return nil
+	})
 }
 
 //	Describes updates or additions to a dataset. A Single update or addition is an
@@ -540,6 +1387,27 @@ type DatasetChanges struct {
 	GroundTruth []byte
 
 	noSmithyDocumentSerde
+}
+
+func (v *DatasetChanges) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DatasetChanges)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DatasetChanges) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GroundTruth != nil {
+		s.WriteBlob(schemas.DatasetChanges_GroundTruth, v.GroundTruth)
+	}
+}
+func (v *DatasetChanges) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DatasetChanges, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DatasetChanges_GroundTruth:
+			return d.ReadBlob(schemas.DatasetChanges_GroundTruth, &v.GroundTruth)
+		}
+		return nil
+	})
 }
 
 //	A description for a dataset. For more information, see DescribeDataset.
@@ -571,6 +1439,68 @@ type DatasetDescription struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DatasetDescription) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DatasetDescription)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DatasetDescription) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreationTimestamp != nil {
+		s.WriteTime(schemas.DatasetDescription_CreationTimestamp, *v.CreationTimestamp)
+	}
+	if v.DatasetStats != nil {
+		s.WriteStruct(schemas.DatasetDescription_DatasetStats)
+		v.DatasetStats.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.LastUpdatedTimestamp != nil {
+		s.WriteTime(schemas.DatasetDescription_LastUpdatedTimestamp, *v.LastUpdatedTimestamp)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.DatasetDescription_Status, string(v.Status))
+	}
+	if v.StatusMessage != nil {
+		s.WriteString(schemas.DatasetDescription_StatusMessage, *v.StatusMessage)
+	}
+	if v.StatusMessageCode != "" {
+		s.WriteString(schemas.DatasetDescription_StatusMessageCode, string(v.StatusMessageCode))
+	}
+}
+func (v *DatasetDescription) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DatasetDescription, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DatasetDescription_CreationTimestamp:
+			v.CreationTimestamp = new(time.Time)
+			return d.ReadTime(schemas.DatasetDescription_CreationTimestamp, v.CreationTimestamp)
+		case schemas.DatasetDescription_DatasetStats:
+			v.DatasetStats = &DatasetStats{}
+			return v.DatasetStats.Deserialize(d)
+		case schemas.DatasetDescription_LastUpdatedTimestamp:
+			v.LastUpdatedTimestamp = new(time.Time)
+			return d.ReadTime(schemas.DatasetDescription_LastUpdatedTimestamp, v.LastUpdatedTimestamp)
+		case schemas.DatasetDescription_Status:
+			var ev string
+			if err := d.ReadString(schemas.DatasetDescription_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = DatasetStatus(ev)
+			return nil
+		case schemas.DatasetDescription_StatusMessage:
+			v.StatusMessage = new(string)
+			return d.ReadString(schemas.DatasetDescription_StatusMessage, v.StatusMessage)
+		case schemas.DatasetDescription_StatusMessageCode:
+			var ev string
+			if err := d.ReadString(schemas.DatasetDescription_StatusMessageCode, &ev); err != nil {
+				return err
+			}
+			v.StatusMessageCode = DatasetStatusMessageCode(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Describes a dataset label. For more information, see ListDatasetLabels.
 type DatasetLabelDescription struct {
 
@@ -583,6 +1513,36 @@ type DatasetLabelDescription struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DatasetLabelDescription) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DatasetLabelDescription)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DatasetLabelDescription) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LabelName != nil {
+		s.WriteString(schemas.DatasetLabelDescription_LabelName, *v.LabelName)
+	}
+	if v.LabelStats != nil {
+		s.WriteStruct(schemas.DatasetLabelDescription_LabelStats)
+		v.LabelStats.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DatasetLabelDescription) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DatasetLabelDescription, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DatasetLabelDescription_LabelName:
+			v.LabelName = new(string)
+			return d.ReadString(schemas.DatasetLabelDescription_LabelName, v.LabelName)
+		case schemas.DatasetLabelDescription_LabelStats:
+			v.LabelStats = &DatasetLabelStats{}
+			return v.LabelStats.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Statistics about a label used in a dataset. For more information, see DatasetLabelDescription.
 type DatasetLabelStats struct {
 
@@ -593,6 +1553,34 @@ type DatasetLabelStats struct {
 	EntryCount *int32
 
 	noSmithyDocumentSerde
+}
+
+func (v *DatasetLabelStats) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DatasetLabelStats)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DatasetLabelStats) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BoundingBoxCount != nil {
+		s.WriteInt32(schemas.DatasetLabelStats_BoundingBoxCount, *v.BoundingBoxCount)
+	}
+	if v.EntryCount != nil {
+		s.WriteInt32(schemas.DatasetLabelStats_EntryCount, *v.EntryCount)
+	}
+}
+func (v *DatasetLabelStats) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DatasetLabelStats, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DatasetLabelStats_BoundingBoxCount:
+			v.BoundingBoxCount = new(int32)
+			return d.ReadInt32(schemas.DatasetLabelStats_BoundingBoxCount, v.BoundingBoxCount)
+		case schemas.DatasetLabelStats_EntryCount:
+			v.EntryCount = new(int32)
+			return d.ReadInt32(schemas.DatasetLabelStats_EntryCount, v.EntryCount)
+		}
+		return nil
+	})
 }
 
 //	Summary information for an Amazon Rekognition Custom Labels dataset. For more
@@ -623,6 +1611,70 @@ type DatasetMetadata struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DatasetMetadata) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DatasetMetadata)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DatasetMetadata) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreationTimestamp != nil {
+		s.WriteTime(schemas.DatasetMetadata_CreationTimestamp, *v.CreationTimestamp)
+	}
+	if v.DatasetArn != nil {
+		s.WriteString(schemas.DatasetMetadata_DatasetArn, *v.DatasetArn)
+	}
+	if v.DatasetType != "" {
+		s.WriteString(schemas.DatasetMetadata_DatasetType, string(v.DatasetType))
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.DatasetMetadata_Status, string(v.Status))
+	}
+	if v.StatusMessage != nil {
+		s.WriteString(schemas.DatasetMetadata_StatusMessage, *v.StatusMessage)
+	}
+	if v.StatusMessageCode != "" {
+		s.WriteString(schemas.DatasetMetadata_StatusMessageCode, string(v.StatusMessageCode))
+	}
+}
+func (v *DatasetMetadata) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DatasetMetadata, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DatasetMetadata_CreationTimestamp:
+			v.CreationTimestamp = new(time.Time)
+			return d.ReadTime(schemas.DatasetMetadata_CreationTimestamp, v.CreationTimestamp)
+		case schemas.DatasetMetadata_DatasetArn:
+			v.DatasetArn = new(string)
+			return d.ReadString(schemas.DatasetMetadata_DatasetArn, v.DatasetArn)
+		case schemas.DatasetMetadata_DatasetType:
+			var ev string
+			if err := d.ReadString(schemas.DatasetMetadata_DatasetType, &ev); err != nil {
+				return err
+			}
+			v.DatasetType = DatasetType(ev)
+			return nil
+		case schemas.DatasetMetadata_Status:
+			var ev string
+			if err := d.ReadString(schemas.DatasetMetadata_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = DatasetStatus(ev)
+			return nil
+		case schemas.DatasetMetadata_StatusMessage:
+			v.StatusMessage = new(string)
+			return d.ReadString(schemas.DatasetMetadata_StatusMessage, v.StatusMessage)
+		case schemas.DatasetMetadata_StatusMessageCode:
+			var ev string
+			if err := d.ReadString(schemas.DatasetMetadata_StatusMessageCode, &ev); err != nil {
+				return err
+			}
+			v.StatusMessageCode = DatasetStatusMessageCode(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 //	The source that Amazon Rekognition Custom Labels uses to create a dataset. To
 //
 // use an Amazon Sagemaker format manifest file, specify the S3 bucket location in
@@ -647,6 +1699,36 @@ type DatasetSource struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DatasetSource) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DatasetSource)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DatasetSource) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DatasetArn != nil {
+		s.WriteString(schemas.DatasetSource_DatasetArn, *v.DatasetArn)
+	}
+	if v.GroundTruthManifest != nil {
+		s.WriteStruct(schemas.DatasetSource_GroundTruthManifest)
+		v.GroundTruthManifest.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DatasetSource) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DatasetSource, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DatasetSource_DatasetArn:
+			v.DatasetArn = new(string)
+			return d.ReadString(schemas.DatasetSource_DatasetArn, v.DatasetArn)
+		case schemas.DatasetSource_GroundTruthManifest:
+			v.GroundTruthManifest = &GroundTruthManifest{}
+			return v.GroundTruthManifest.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Provides statistics about a dataset. For more information, see DescribeDataset.
 type DatasetStats struct {
 
@@ -663,6 +1745,46 @@ type DatasetStats struct {
 	TotalLabels *int32
 
 	noSmithyDocumentSerde
+}
+
+func (v *DatasetStats) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DatasetStats)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DatasetStats) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ErrorEntries != nil {
+		s.WriteInt32(schemas.DatasetStats_ErrorEntries, *v.ErrorEntries)
+	}
+	if v.LabeledEntries != nil {
+		s.WriteInt32(schemas.DatasetStats_LabeledEntries, *v.LabeledEntries)
+	}
+	if v.TotalEntries != nil {
+		s.WriteInt32(schemas.DatasetStats_TotalEntries, *v.TotalEntries)
+	}
+	if v.TotalLabels != nil {
+		s.WriteInt32(schemas.DatasetStats_TotalLabels, *v.TotalLabels)
+	}
+}
+func (v *DatasetStats) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DatasetStats, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DatasetStats_ErrorEntries:
+			v.ErrorEntries = new(int32)
+			return d.ReadInt32(schemas.DatasetStats_ErrorEntries, v.ErrorEntries)
+		case schemas.DatasetStats_LabeledEntries:
+			v.LabeledEntries = new(int32)
+			return d.ReadInt32(schemas.DatasetStats_LabeledEntries, v.LabeledEntries)
+		case schemas.DatasetStats_TotalEntries:
+			v.TotalEntries = new(int32)
+			return d.ReadInt32(schemas.DatasetStats_TotalEntries, v.TotalEntries)
+		case schemas.DatasetStats_TotalLabels:
+			v.TotalLabels = new(int32)
+			return d.ReadInt32(schemas.DatasetStats_TotalLabels, v.TotalLabels)
+		}
+		return nil
+	})
 }
 
 // A set of parameters that allow you to filter out certain results from your
@@ -687,6 +1809,40 @@ type DetectionFilter struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DetectionFilter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DetectionFilter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DetectionFilter) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MinBoundingBoxHeight != nil {
+		s.WriteFloat32(schemas.DetectionFilter_MinBoundingBoxHeight, *v.MinBoundingBoxHeight)
+	}
+	if v.MinBoundingBoxWidth != nil {
+		s.WriteFloat32(schemas.DetectionFilter_MinBoundingBoxWidth, *v.MinBoundingBoxWidth)
+	}
+	if v.MinConfidence != nil {
+		s.WriteFloat32(schemas.DetectionFilter_MinConfidence, *v.MinConfidence)
+	}
+}
+func (v *DetectionFilter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DetectionFilter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DetectionFilter_MinBoundingBoxHeight:
+			v.MinBoundingBoxHeight = new(float32)
+			return d.ReadFloat32(schemas.DetectionFilter_MinBoundingBoxHeight, v.MinBoundingBoxHeight)
+		case schemas.DetectionFilter_MinBoundingBoxWidth:
+			v.MinBoundingBoxWidth = new(float32)
+			return d.ReadFloat32(schemas.DetectionFilter_MinBoundingBoxWidth, v.MinBoundingBoxWidth)
+		case schemas.DetectionFilter_MinConfidence:
+			v.MinConfidence = new(float32)
+			return d.ReadFloat32(schemas.DetectionFilter_MinConfidence, v.MinConfidence)
+		}
+		return nil
+	})
+}
+
 // The background of the image with regard to image quality and dominant colors.
 type DetectLabelsImageBackground struct {
 
@@ -701,6 +1857,33 @@ type DetectLabelsImageBackground struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DetectLabelsImageBackground) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DetectLabelsImageBackground)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DetectLabelsImageBackground) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDominantColors(s, schemas.DetectLabelsImageBackground_DominantColors, v.DominantColors)
+	if v.Quality != nil {
+		s.WriteStruct(schemas.DetectLabelsImageBackground_Quality)
+		v.Quality.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DetectLabelsImageBackground) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DetectLabelsImageBackground, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DetectLabelsImageBackground_DominantColors:
+			return deserializeDominantColors(d, schemas.DetectLabelsImageBackground_DominantColors, &v.DominantColors)
+		case schemas.DetectLabelsImageBackground_Quality:
+			v.Quality = &DetectLabelsImageQuality{}
+			return v.Quality.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // The foreground of the image with regard to image quality and dominant colors.
 type DetectLabelsImageForeground struct {
 
@@ -713,6 +1896,33 @@ type DetectLabelsImageForeground struct {
 	Quality *DetectLabelsImageQuality
 
 	noSmithyDocumentSerde
+}
+
+func (v *DetectLabelsImageForeground) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DetectLabelsImageForeground)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DetectLabelsImageForeground) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDominantColors(s, schemas.DetectLabelsImageForeground_DominantColors, v.DominantColors)
+	if v.Quality != nil {
+		s.WriteStruct(schemas.DetectLabelsImageForeground_Quality)
+		v.Quality.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DetectLabelsImageForeground) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DetectLabelsImageForeground, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DetectLabelsImageForeground_DominantColors:
+			return deserializeDominantColors(d, schemas.DetectLabelsImageForeground_DominantColors, &v.DominantColors)
+		case schemas.DetectLabelsImageForeground_Quality:
+			v.Quality = &DetectLabelsImageQuality{}
+			return v.Quality.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // Information about the quality and dominant colors of an input image. Quality
@@ -743,6 +1953,49 @@ type DetectLabelsImageProperties struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DetectLabelsImageProperties) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DetectLabelsImageProperties)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DetectLabelsImageProperties) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Background != nil {
+		s.WriteStruct(schemas.DetectLabelsImageProperties_Background)
+		v.Background.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeDominantColors(s, schemas.DetectLabelsImageProperties_DominantColors, v.DominantColors)
+	if v.Foreground != nil {
+		s.WriteStruct(schemas.DetectLabelsImageProperties_Foreground)
+		v.Foreground.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Quality != nil {
+		s.WriteStruct(schemas.DetectLabelsImageProperties_Quality)
+		v.Quality.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DetectLabelsImageProperties) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DetectLabelsImageProperties, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DetectLabelsImageProperties_Background:
+			v.Background = &DetectLabelsImageBackground{}
+			return v.Background.Deserialize(d)
+		case schemas.DetectLabelsImageProperties_DominantColors:
+			return deserializeDominantColors(d, schemas.DetectLabelsImageProperties_DominantColors, &v.DominantColors)
+		case schemas.DetectLabelsImageProperties_Foreground:
+			v.Foreground = &DetectLabelsImageForeground{}
+			return v.Foreground.Deserialize(d)
+		case schemas.DetectLabelsImageProperties_Quality:
+			v.Quality = &DetectLabelsImageQuality{}
+			return v.Quality.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Settings for the IMAGE_PROPERTIES feature type.
 type DetectLabelsImagePropertiesSettings struct {
 
@@ -751,6 +2004,27 @@ type DetectLabelsImagePropertiesSettings struct {
 	MaxDominantColors int32
 
 	noSmithyDocumentSerde
+}
+
+func (v *DetectLabelsImagePropertiesSettings) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DetectLabelsImagePropertiesSettings)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DetectLabelsImagePropertiesSettings) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxDominantColors != 0 {
+		s.WriteInt32(schemas.DetectLabelsImagePropertiesSettings_MaxDominantColors, v.MaxDominantColors)
+	}
+}
+func (v *DetectLabelsImagePropertiesSettings) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DetectLabelsImagePropertiesSettings, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DetectLabelsImagePropertiesSettings_MaxDominantColors:
+			return d.ReadInt32(schemas.DetectLabelsImagePropertiesSettings_MaxDominantColors, &v.MaxDominantColors)
+		}
+		return nil
+	})
 }
 
 // The quality of an image provided for label detection, with regard to
@@ -769,6 +2043,40 @@ type DetectLabelsImageQuality struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DetectLabelsImageQuality) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DetectLabelsImageQuality)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DetectLabelsImageQuality) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Brightness != nil {
+		s.WriteFloat32(schemas.DetectLabelsImageQuality_Brightness, *v.Brightness)
+	}
+	if v.Contrast != nil {
+		s.WriteFloat32(schemas.DetectLabelsImageQuality_Contrast, *v.Contrast)
+	}
+	if v.Sharpness != nil {
+		s.WriteFloat32(schemas.DetectLabelsImageQuality_Sharpness, *v.Sharpness)
+	}
+}
+func (v *DetectLabelsImageQuality) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DetectLabelsImageQuality, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DetectLabelsImageQuality_Brightness:
+			v.Brightness = new(float32)
+			return d.ReadFloat32(schemas.DetectLabelsImageQuality_Brightness, v.Brightness)
+		case schemas.DetectLabelsImageQuality_Contrast:
+			v.Contrast = new(float32)
+			return d.ReadFloat32(schemas.DetectLabelsImageQuality_Contrast, v.Contrast)
+		case schemas.DetectLabelsImageQuality_Sharpness:
+			v.Sharpness = new(float32)
+			return d.ReadFloat32(schemas.DetectLabelsImageQuality_Sharpness, v.Sharpness)
+		}
+		return nil
+	})
+}
+
 // Settings for the DetectLabels request. Settings can include filters for both
 // GENERAL_LABELS and IMAGE_PROPERTIES. GENERAL_LABELS filters can be inclusive or
 // exclusive and applied to individual labels or label categories. IMAGE_PROPERTIES
@@ -782,6 +2090,38 @@ type DetectLabelsSettings struct {
 	ImageProperties *DetectLabelsImagePropertiesSettings
 
 	noSmithyDocumentSerde
+}
+
+func (v *DetectLabelsSettings) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DetectLabelsSettings)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DetectLabelsSettings) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GeneralLabels != nil {
+		s.WriteStruct(schemas.DetectLabelsSettings_GeneralLabels)
+		v.GeneralLabels.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ImageProperties != nil {
+		s.WriteStruct(schemas.DetectLabelsSettings_ImageProperties)
+		v.ImageProperties.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DetectLabelsSettings) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DetectLabelsSettings, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DetectLabelsSettings_GeneralLabels:
+			v.GeneralLabels = &GeneralLabelsSettings{}
+			return v.GeneralLabels.Deserialize(d)
+		case schemas.DetectLabelsSettings_ImageProperties:
+			v.ImageProperties = &DetectLabelsImagePropertiesSettings{}
+			return v.ImageProperties.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // A set of optional parameters that you can use to set the criteria that the text
@@ -801,6 +2141,33 @@ type DetectTextFilters struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DetectTextFilters) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DetectTextFilters)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DetectTextFilters) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeRegionsOfInterest(s, schemas.DetectTextFilters_RegionsOfInterest, v.RegionsOfInterest)
+	if v.WordFilter != nil {
+		s.WriteStruct(schemas.DetectTextFilters_WordFilter)
+		v.WordFilter.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DetectTextFilters) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DetectTextFilters, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DetectTextFilters_RegionsOfInterest:
+			return deserializeRegionsOfInterest(d, schemas.DetectTextFilters_RegionsOfInterest, &v.RegionsOfInterest)
+		case schemas.DetectTextFilters_WordFilter:
+			v.WordFilter = &DetectionFilter{}
+			return v.WordFilter.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Provides face metadata for the faces that are disassociated from a specific
 // UserID.
 type DisassociatedFace struct {
@@ -809,6 +2176,28 @@ type DisassociatedFace struct {
 	FaceId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DisassociatedFace) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DisassociatedFace)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DisassociatedFace) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FaceId != nil {
+		s.WriteString(schemas.DisassociatedFace_FaceId, *v.FaceId)
+	}
+}
+func (v *DisassociatedFace) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DisassociatedFace, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DisassociatedFace_FaceId:
+			v.FaceId = new(string)
+			return d.ReadString(schemas.DisassociatedFace_FaceId, v.FaceId)
+		}
+		return nil
+	})
 }
 
 //	A training dataset or a test dataset used in a dataset distribution operation.
@@ -822,6 +2211,28 @@ type DistributeDataset struct {
 	Arn *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DistributeDataset) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DistributeDataset)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DistributeDataset) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.DistributeDataset_Arn, *v.Arn)
+	}
+}
+func (v *DistributeDataset) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DistributeDataset, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DistributeDataset_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.DistributeDataset_Arn, v.Arn)
+		}
+		return nil
+	})
 }
 
 // A description of the dominant colors in an image.
@@ -851,6 +2262,64 @@ type DominantColor struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DominantColor) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DominantColor)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DominantColor) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Blue != nil {
+		s.WriteInt32(schemas.DominantColor_Blue, *v.Blue)
+	}
+	if v.CSSColor != nil {
+		s.WriteString(schemas.DominantColor_CSSColor, *v.CSSColor)
+	}
+	if v.Green != nil {
+		s.WriteInt32(schemas.DominantColor_Green, *v.Green)
+	}
+	if v.HexCode != nil {
+		s.WriteString(schemas.DominantColor_HexCode, *v.HexCode)
+	}
+	if v.PixelPercent != nil {
+		s.WriteFloat32(schemas.DominantColor_PixelPercent, *v.PixelPercent)
+	}
+	if v.Red != nil {
+		s.WriteInt32(schemas.DominantColor_Red, *v.Red)
+	}
+	if v.SimplifiedColor != nil {
+		s.WriteString(schemas.DominantColor_SimplifiedColor, *v.SimplifiedColor)
+	}
+}
+func (v *DominantColor) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DominantColor, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DominantColor_Blue:
+			v.Blue = new(int32)
+			return d.ReadInt32(schemas.DominantColor_Blue, v.Blue)
+		case schemas.DominantColor_CSSColor:
+			v.CSSColor = new(string)
+			return d.ReadString(schemas.DominantColor_CSSColor, v.CSSColor)
+		case schemas.DominantColor_Green:
+			v.Green = new(int32)
+			return d.ReadInt32(schemas.DominantColor_Green, v.Green)
+		case schemas.DominantColor_HexCode:
+			v.HexCode = new(string)
+			return d.ReadString(schemas.DominantColor_HexCode, v.HexCode)
+		case schemas.DominantColor_PixelPercent:
+			v.PixelPercent = new(float32)
+			return d.ReadFloat32(schemas.DominantColor_PixelPercent, v.PixelPercent)
+		case schemas.DominantColor_Red:
+			v.Red = new(int32)
+			return d.ReadInt32(schemas.DominantColor_Red, v.Red)
+		case schemas.DominantColor_SimplifiedColor:
+			v.SimplifiedColor = new(string)
+			return d.ReadString(schemas.DominantColor_SimplifiedColor, v.SimplifiedColor)
+		}
+		return nil
+	})
+}
+
 // The API returns a prediction of an emotion based on a person's facial
 // expressions, along with the confidence level for the predicted emotion. It is
 // not a determination of the person’s internal emotional state and should not be
@@ -867,6 +2336,38 @@ type Emotion struct {
 	Type EmotionName
 
 	noSmithyDocumentSerde
+}
+
+func (v *Emotion) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Emotion)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Emotion) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Confidence != nil {
+		s.WriteFloat32(schemas.Emotion_Confidence, *v.Confidence)
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.Emotion_Type, string(v.Type))
+	}
+}
+func (v *Emotion) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Emotion, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Emotion_Confidence:
+			v.Confidence = new(float32)
+			return d.ReadFloat32(schemas.Emotion_Confidence, v.Confidence)
+		case schemas.Emotion_Type:
+			var ev string
+			if err := d.ReadString(schemas.Emotion_Type, &ev); err != nil {
+				return err
+			}
+			v.Type = EmotionName(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // Information about an item of Personal Protective Equipment (PPE) detected by DetectProtectiveEquipment.
@@ -889,6 +2390,54 @@ type EquipmentDetection struct {
 	noSmithyDocumentSerde
 }
 
+func (v *EquipmentDetection) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EquipmentDetection)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EquipmentDetection) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BoundingBox != nil {
+		s.WriteStruct(schemas.EquipmentDetection_BoundingBox)
+		v.BoundingBox.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Confidence != nil {
+		s.WriteFloat32(schemas.EquipmentDetection_Confidence, *v.Confidence)
+	}
+	if v.CoversBodyPart != nil {
+		s.WriteStruct(schemas.EquipmentDetection_CoversBodyPart)
+		v.CoversBodyPart.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.EquipmentDetection_Type, string(v.Type))
+	}
+}
+func (v *EquipmentDetection) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EquipmentDetection, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EquipmentDetection_BoundingBox:
+			v.BoundingBox = &BoundingBox{}
+			return v.BoundingBox.Deserialize(d)
+		case schemas.EquipmentDetection_Confidence:
+			v.Confidence = new(float32)
+			return d.ReadFloat32(schemas.EquipmentDetection_Confidence, v.Confidence)
+		case schemas.EquipmentDetection_CoversBodyPart:
+			v.CoversBodyPart = &CoversBodyPart{}
+			return v.CoversBodyPart.Deserialize(d)
+		case schemas.EquipmentDetection_Type:
+			var ev string
+			if err := d.ReadString(schemas.EquipmentDetection_Type, &ev); err != nil {
+				return err
+			}
+			v.Type = ProtectiveEquipmentType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // The evaluation results for the training of a model.
 type EvaluationResult struct {
 
@@ -902,6 +2451,36 @@ type EvaluationResult struct {
 	Summary *Summary
 
 	noSmithyDocumentSerde
+}
+
+func (v *EvaluationResult) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EvaluationResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EvaluationResult) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.F1Score != nil {
+		s.WriteFloat32(schemas.EvaluationResult_F1Score, *v.F1Score)
+	}
+	if v.Summary != nil {
+		s.WriteStruct(schemas.EvaluationResult_Summary)
+		v.Summary.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *EvaluationResult) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EvaluationResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EvaluationResult_F1Score:
+			v.F1Score = new(float32)
+			return d.ReadFloat32(schemas.EvaluationResult_F1Score, v.F1Score)
+		case schemas.EvaluationResult_Summary:
+			v.Summary = &Summary{}
+			return v.Summary.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // Indicates the direction the eyes are gazing in (independent of the head pose)
@@ -920,6 +2499,40 @@ type EyeDirection struct {
 	noSmithyDocumentSerde
 }
 
+func (v *EyeDirection) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EyeDirection)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EyeDirection) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Confidence != nil {
+		s.WriteFloat32(schemas.EyeDirection_Confidence, *v.Confidence)
+	}
+	if v.Pitch != nil {
+		s.WriteFloat32(schemas.EyeDirection_Pitch, *v.Pitch)
+	}
+	if v.Yaw != nil {
+		s.WriteFloat32(schemas.EyeDirection_Yaw, *v.Yaw)
+	}
+}
+func (v *EyeDirection) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EyeDirection, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EyeDirection_Confidence:
+			v.Confidence = new(float32)
+			return d.ReadFloat32(schemas.EyeDirection_Confidence, v.Confidence)
+		case schemas.EyeDirection_Pitch:
+			v.Pitch = new(float32)
+			return d.ReadFloat32(schemas.EyeDirection_Pitch, v.Pitch)
+		case schemas.EyeDirection_Yaw:
+			v.Yaw = new(float32)
+			return d.ReadFloat32(schemas.EyeDirection_Yaw, v.Yaw)
+		}
+		return nil
+	})
+}
+
 // Indicates whether or not the face is wearing eye glasses, and the confidence
 // level in the determination.
 type Eyeglasses struct {
@@ -933,6 +2546,33 @@ type Eyeglasses struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Eyeglasses) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Eyeglasses)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Eyeglasses) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Confidence != nil {
+		s.WriteFloat32(schemas.Eyeglasses_Confidence, *v.Confidence)
+	}
+	if v.Value != false {
+		s.WriteBool(schemas.Eyeglasses_Value, v.Value)
+	}
+}
+func (v *Eyeglasses) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Eyeglasses, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Eyeglasses_Confidence:
+			v.Confidence = new(float32)
+			return d.ReadFloat32(schemas.Eyeglasses_Confidence, v.Confidence)
+		case schemas.Eyeglasses_Value:
+			return d.ReadBool(schemas.Eyeglasses_Value, &v.Value)
+		}
+		return nil
+	})
+}
+
 // Indicates whether or not the eyes on the face are open, and the confidence
 // level in the determination.
 type EyeOpen struct {
@@ -944,6 +2584,33 @@ type EyeOpen struct {
 	Value bool
 
 	noSmithyDocumentSerde
+}
+
+func (v *EyeOpen) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EyeOpen)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EyeOpen) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Confidence != nil {
+		s.WriteFloat32(schemas.EyeOpen_Confidence, *v.Confidence)
+	}
+	if v.Value != false {
+		s.WriteBool(schemas.EyeOpen_Value, v.Value)
+	}
+}
+func (v *EyeOpen) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EyeOpen, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EyeOpen_Confidence:
+			v.Confidence = new(float32)
+			return d.ReadFloat32(schemas.EyeOpen_Confidence, v.Confidence)
+		case schemas.EyeOpen_Value:
+			return d.ReadBool(schemas.EyeOpen_Value, &v.Value)
+		}
+		return nil
+	})
 }
 
 // Describes the face properties such as the bounding box, face ID, image ID of
@@ -974,6 +2641,66 @@ type Face struct {
 	UserId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *Face) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Face)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Face) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BoundingBox != nil {
+		s.WriteStruct(schemas.Face_BoundingBox)
+		v.BoundingBox.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Confidence != nil {
+		s.WriteFloat32(schemas.Face_Confidence, *v.Confidence)
+	}
+	if v.ExternalImageId != nil {
+		s.WriteString(schemas.Face_ExternalImageId, *v.ExternalImageId)
+	}
+	if v.FaceId != nil {
+		s.WriteString(schemas.Face_FaceId, *v.FaceId)
+	}
+	if v.ImageId != nil {
+		s.WriteString(schemas.Face_ImageId, *v.ImageId)
+	}
+	if v.IndexFacesModelVersion != nil {
+		s.WriteString(schemas.Face_IndexFacesModelVersion, *v.IndexFacesModelVersion)
+	}
+	if v.UserId != nil {
+		s.WriteString(schemas.Face_UserId, *v.UserId)
+	}
+}
+func (v *Face) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Face, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Face_BoundingBox:
+			v.BoundingBox = &BoundingBox{}
+			return v.BoundingBox.Deserialize(d)
+		case schemas.Face_Confidence:
+			v.Confidence = new(float32)
+			return d.ReadFloat32(schemas.Face_Confidence, v.Confidence)
+		case schemas.Face_ExternalImageId:
+			v.ExternalImageId = new(string)
+			return d.ReadString(schemas.Face_ExternalImageId, v.ExternalImageId)
+		case schemas.Face_FaceId:
+			v.FaceId = new(string)
+			return d.ReadString(schemas.Face_FaceId, v.FaceId)
+		case schemas.Face_ImageId:
+			v.ImageId = new(string)
+			return d.ReadString(schemas.Face_ImageId, v.ImageId)
+		case schemas.Face_IndexFacesModelVersion:
+			v.IndexFacesModelVersion = new(string)
+			return d.ReadString(schemas.Face_IndexFacesModelVersion, v.IndexFacesModelVersion)
+		case schemas.Face_UserId:
+			v.UserId = new(string)
+			return d.ReadString(schemas.Face_UserId, v.UserId)
+		}
+		return nil
+	})
 }
 
 // Structure containing attributes of the face that the algorithm detected.
@@ -1072,6 +2799,146 @@ type FaceDetail struct {
 	noSmithyDocumentSerde
 }
 
+func (v *FaceDetail) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.FaceDetail)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *FaceDetail) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AgeRange != nil {
+		s.WriteStruct(schemas.FaceDetail_AgeRange)
+		v.AgeRange.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Beard != nil {
+		s.WriteStruct(schemas.FaceDetail_Beard)
+		v.Beard.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.BoundingBox != nil {
+		s.WriteStruct(schemas.FaceDetail_BoundingBox)
+		v.BoundingBox.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Confidence != nil {
+		s.WriteFloat32(schemas.FaceDetail_Confidence, *v.Confidence)
+	}
+	serializeEmotions(s, schemas.FaceDetail_Emotions, v.Emotions)
+	if v.EyeDirection != nil {
+		s.WriteStruct(schemas.FaceDetail_EyeDirection)
+		v.EyeDirection.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Eyeglasses != nil {
+		s.WriteStruct(schemas.FaceDetail_Eyeglasses)
+		v.Eyeglasses.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.EyesOpen != nil {
+		s.WriteStruct(schemas.FaceDetail_EyesOpen)
+		v.EyesOpen.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.FaceOccluded != nil {
+		s.WriteStruct(schemas.FaceDetail_FaceOccluded)
+		v.FaceOccluded.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Gender != nil {
+		s.WriteStruct(schemas.FaceDetail_Gender)
+		v.Gender.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeLandmarks(s, schemas.FaceDetail_Landmarks, v.Landmarks)
+	if v.MouthOpen != nil {
+		s.WriteStruct(schemas.FaceDetail_MouthOpen)
+		v.MouthOpen.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Mustache != nil {
+		s.WriteStruct(schemas.FaceDetail_Mustache)
+		v.Mustache.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Pose != nil {
+		s.WriteStruct(schemas.FaceDetail_Pose)
+		v.Pose.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Quality != nil {
+		s.WriteStruct(schemas.FaceDetail_Quality)
+		v.Quality.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Smile != nil {
+		s.WriteStruct(schemas.FaceDetail_Smile)
+		v.Smile.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Sunglasses != nil {
+		s.WriteStruct(schemas.FaceDetail_Sunglasses)
+		v.Sunglasses.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *FaceDetail) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.FaceDetail, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.FaceDetail_AgeRange:
+			v.AgeRange = &AgeRange{}
+			return v.AgeRange.Deserialize(d)
+		case schemas.FaceDetail_Beard:
+			v.Beard = &Beard{}
+			return v.Beard.Deserialize(d)
+		case schemas.FaceDetail_BoundingBox:
+			v.BoundingBox = &BoundingBox{}
+			return v.BoundingBox.Deserialize(d)
+		case schemas.FaceDetail_Confidence:
+			v.Confidence = new(float32)
+			return d.ReadFloat32(schemas.FaceDetail_Confidence, v.Confidence)
+		case schemas.FaceDetail_Emotions:
+			return deserializeEmotions(d, schemas.FaceDetail_Emotions, &v.Emotions)
+		case schemas.FaceDetail_EyeDirection:
+			v.EyeDirection = &EyeDirection{}
+			return v.EyeDirection.Deserialize(d)
+		case schemas.FaceDetail_Eyeglasses:
+			v.Eyeglasses = &Eyeglasses{}
+			return v.Eyeglasses.Deserialize(d)
+		case schemas.FaceDetail_EyesOpen:
+			v.EyesOpen = &EyeOpen{}
+			return v.EyesOpen.Deserialize(d)
+		case schemas.FaceDetail_FaceOccluded:
+			v.FaceOccluded = &FaceOccluded{}
+			return v.FaceOccluded.Deserialize(d)
+		case schemas.FaceDetail_Gender:
+			v.Gender = &Gender{}
+			return v.Gender.Deserialize(d)
+		case schemas.FaceDetail_Landmarks:
+			return deserializeLandmarks(d, schemas.FaceDetail_Landmarks, &v.Landmarks)
+		case schemas.FaceDetail_MouthOpen:
+			v.MouthOpen = &MouthOpen{}
+			return v.MouthOpen.Deserialize(d)
+		case schemas.FaceDetail_Mustache:
+			v.Mustache = &Mustache{}
+			return v.Mustache.Deserialize(d)
+		case schemas.FaceDetail_Pose:
+			v.Pose = &Pose{}
+			return v.Pose.Deserialize(d)
+		case schemas.FaceDetail_Quality:
+			v.Quality = &ImageQuality{}
+			return v.Quality.Deserialize(d)
+		case schemas.FaceDetail_Smile:
+			v.Smile = &Smile{}
+			return v.Smile.Deserialize(d)
+		case schemas.FaceDetail_Sunglasses:
+			v.Sunglasses = &Sunglasses{}
+			return v.Sunglasses.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Information about a face detected in a video analysis request and the time the
 // face was detected in the video.
 type FaceDetection struct {
@@ -1087,6 +2954,35 @@ type FaceDetection struct {
 	noSmithyDocumentSerde
 }
 
+func (v *FaceDetection) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.FaceDetection)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *FaceDetection) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Face != nil {
+		s.WriteStruct(schemas.FaceDetection_Face)
+		v.Face.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Timestamp != 0 {
+		s.WriteInt64(schemas.FaceDetection_Timestamp, v.Timestamp)
+	}
+}
+func (v *FaceDetection) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.FaceDetection, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.FaceDetection_Face:
+			v.Face = &FaceDetail{}
+			return v.Face.Deserialize(d)
+		case schemas.FaceDetection_Timestamp:
+			return d.ReadInt64(schemas.FaceDetection_Timestamp, &v.Timestamp)
+		}
+		return nil
+	})
+}
+
 // Provides face metadata. In addition, it also provides the confidence in the
 // match of this face with the input face.
 type FaceMatch struct {
@@ -1099,6 +2995,36 @@ type FaceMatch struct {
 	Similarity *float32
 
 	noSmithyDocumentSerde
+}
+
+func (v *FaceMatch) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.FaceMatch)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *FaceMatch) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Face != nil {
+		s.WriteStruct(schemas.FaceMatch_Face)
+		v.Face.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Similarity != nil {
+		s.WriteFloat32(schemas.FaceMatch_Similarity, *v.Similarity)
+	}
+}
+func (v *FaceMatch) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.FaceMatch, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.FaceMatch_Face:
+			v.Face = &Face{}
+			return v.Face.Deserialize(d)
+		case schemas.FaceMatch_Similarity:
+			v.Similarity = new(float32)
+			return d.ReadFloat32(schemas.FaceMatch_Similarity, v.Similarity)
+		}
+		return nil
+	})
 }
 
 // FaceOccluded should return "true" with a high confidence score if a detected
@@ -1125,6 +3051,33 @@ type FaceOccluded struct {
 	noSmithyDocumentSerde
 }
 
+func (v *FaceOccluded) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.FaceOccluded)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *FaceOccluded) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Confidence != nil {
+		s.WriteFloat32(schemas.FaceOccluded_Confidence, *v.Confidence)
+	}
+	if v.Value != false {
+		s.WriteBool(schemas.FaceOccluded_Value, v.Value)
+	}
+}
+func (v *FaceOccluded) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.FaceOccluded, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.FaceOccluded_Confidence:
+			v.Confidence = new(float32)
+			return d.ReadFloat32(schemas.FaceOccluded_Confidence, v.Confidence)
+		case schemas.FaceOccluded_Value:
+			return d.ReadBool(schemas.FaceOccluded_Value, &v.Value)
+		}
+		return nil
+	})
+}
+
 // Object containing both the face metadata (stored in the backend database), and
 // facial attributes that are detected but aren't stored in the database.
 type FaceRecord struct {
@@ -1137,6 +3090,38 @@ type FaceRecord struct {
 	FaceDetail *FaceDetail
 
 	noSmithyDocumentSerde
+}
+
+func (v *FaceRecord) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.FaceRecord)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *FaceRecord) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Face != nil {
+		s.WriteStruct(schemas.FaceRecord_Face)
+		v.Face.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.FaceDetail != nil {
+		s.WriteStruct(schemas.FaceRecord_FaceDetail)
+		v.FaceDetail.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *FaceRecord) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.FaceRecord, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.FaceRecord_Face:
+			v.Face = &Face{}
+			return v.Face.Deserialize(d)
+		case schemas.FaceRecord_FaceDetail:
+			v.FaceDetail = &FaceDetail{}
+			return v.FaceDetail.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // Input face recognition parameters for an Amazon Rekognition stream processor.
@@ -1154,6 +3139,86 @@ type FaceSearchSettings struct {
 	FaceMatchThreshold *float32
 
 	noSmithyDocumentSerde
+}
+
+func (v *FaceSearchSettings) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.FaceSearchSettings)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *FaceSearchSettings) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CollectionId != nil {
+		s.WriteString(schemas.FaceSearchSettings_CollectionId, *v.CollectionId)
+	}
+	if v.FaceMatchThreshold != nil {
+		s.WriteFloat32(schemas.FaceSearchSettings_FaceMatchThreshold, *v.FaceMatchThreshold)
+	}
+}
+func (v *FaceSearchSettings) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.FaceSearchSettings, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.FaceSearchSettings_CollectionId:
+			v.CollectionId = new(string)
+			return d.ReadString(schemas.FaceSearchSettings_CollectionId, v.CollectionId)
+		case schemas.FaceSearchSettings_FaceMatchThreshold:
+			v.FaceMatchThreshold = new(float32)
+			return d.ReadFloat32(schemas.FaceSearchSettings_FaceMatchThreshold, v.FaceMatchThreshold)
+		}
+		return nil
+	})
+}
+
+// Describes a condition that was detected in the Face Liveness video and that
+// contributed to the confidence score returned for the session.
+type FeedbackItem struct {
+
+	// A code identifying the condition that was detected during the Face Liveness
+	// session.
+	//
+	// This member is required.
+	Code FeedbackCode
+
+	// A human-readable description of the detected condition, suitable for displaying
+	// to an end user before they retry a Face Liveness check. Use Code rather than
+	// this message for programmatic decisions, because the message text can change.
+	//
+	// This member is required.
+	Message *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *FeedbackItem) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.FeedbackItem)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *FeedbackItem) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Code != "" {
+		s.WriteString(schemas.FeedbackItem_Code, string(v.Code))
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.FeedbackItem_Message, *v.Message)
+	}
+}
+func (v *FeedbackItem) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.FeedbackItem, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.FeedbackItem_Code:
+			var ev string
+			if err := d.ReadString(schemas.FeedbackItem_Code, &ev); err != nil {
+				return err
+			}
+			v.Code = FeedbackCode(ev)
+			return nil
+		case schemas.FeedbackItem_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.FeedbackItem_Message, v.Message)
+		}
+		return nil
+	})
 }
 
 // The predicted gender of a detected face.
@@ -1182,6 +3247,38 @@ type Gender struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Gender) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Gender)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Gender) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Confidence != nil {
+		s.WriteFloat32(schemas.Gender_Confidence, *v.Confidence)
+	}
+	if v.Value != "" {
+		s.WriteString(schemas.Gender_Value, string(v.Value))
+	}
+}
+func (v *Gender) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Gender, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Gender_Confidence:
+			v.Confidence = new(float32)
+			return d.ReadFloat32(schemas.Gender_Confidence, v.Confidence)
+		case schemas.Gender_Value:
+			var ev string
+			if err := d.ReadString(schemas.Gender_Value, &ev); err != nil {
+				return err
+			}
+			v.Value = GenderType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Contains filters for the object labels returned by DetectLabels. Filters can be
 // inclusive, exclusive, or a combination of both and can be applied to individual
 // labels or entire label categories. To see a list of label categories, see [Detecting Labels].
@@ -1204,6 +3301,34 @@ type GeneralLabelsSettings struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GeneralLabelsSettings) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GeneralLabelsSettings)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GeneralLabelsSettings) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeGeneralLabelsFilterList(s, schemas.GeneralLabelsSettings_LabelCategoryExclusionFilters, v.LabelCategoryExclusionFilters)
+	serializeGeneralLabelsFilterList(s, schemas.GeneralLabelsSettings_LabelCategoryInclusionFilters, v.LabelCategoryInclusionFilters)
+	serializeGeneralLabelsFilterList(s, schemas.GeneralLabelsSettings_LabelExclusionFilters, v.LabelExclusionFilters)
+	serializeGeneralLabelsFilterList(s, schemas.GeneralLabelsSettings_LabelInclusionFilters, v.LabelInclusionFilters)
+}
+func (v *GeneralLabelsSettings) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GeneralLabelsSettings, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GeneralLabelsSettings_LabelCategoryExclusionFilters:
+			return deserializeGeneralLabelsFilterList(d, schemas.GeneralLabelsSettings_LabelCategoryExclusionFilters, &v.LabelCategoryExclusionFilters)
+		case schemas.GeneralLabelsSettings_LabelCategoryInclusionFilters:
+			return deserializeGeneralLabelsFilterList(d, schemas.GeneralLabelsSettings_LabelCategoryInclusionFilters, &v.LabelCategoryInclusionFilters)
+		case schemas.GeneralLabelsSettings_LabelExclusionFilters:
+			return deserializeGeneralLabelsFilterList(d, schemas.GeneralLabelsSettings_LabelExclusionFilters, &v.LabelExclusionFilters)
+		case schemas.GeneralLabelsSettings_LabelInclusionFilters:
+			return deserializeGeneralLabelsFilterList(d, schemas.GeneralLabelsSettings_LabelInclusionFilters, &v.LabelInclusionFilters)
+		}
+		return nil
+	})
+}
+
 // Information about where an object (DetectCustomLabels ) or text (DetectText ) is located on an image.
 type Geometry struct {
 
@@ -1215,6 +3340,33 @@ type Geometry struct {
 	Polygon []Point
 
 	noSmithyDocumentSerde
+}
+
+func (v *Geometry) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Geometry)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Geometry) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BoundingBox != nil {
+		s.WriteStruct(schemas.Geometry_BoundingBox)
+		v.BoundingBox.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializePolygon(s, schemas.Geometry_Polygon, v.Polygon)
+}
+func (v *Geometry) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Geometry, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Geometry_BoundingBox:
+			v.BoundingBox = &BoundingBox{}
+			return v.BoundingBox.Deserialize(d)
+		case schemas.Geometry_Polygon:
+			return deserializePolygon(d, schemas.Geometry_Polygon, &v.Polygon)
+		}
+		return nil
+	})
 }
 
 // Contains metadata about a content moderation request, including the SortBy and
@@ -1230,6 +3382,42 @@ type GetContentModerationRequestMetadata struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetContentModerationRequestMetadata) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetContentModerationRequestMetadata)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetContentModerationRequestMetadata) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AggregateBy != "" {
+		s.WriteString(schemas.GetContentModerationRequestMetadata_AggregateBy, string(v.AggregateBy))
+	}
+	if v.SortBy != "" {
+		s.WriteString(schemas.GetContentModerationRequestMetadata_SortBy, string(v.SortBy))
+	}
+}
+func (v *GetContentModerationRequestMetadata) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetContentModerationRequestMetadata, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetContentModerationRequestMetadata_AggregateBy:
+			var ev string
+			if err := d.ReadString(schemas.GetContentModerationRequestMetadata_AggregateBy, &ev); err != nil {
+				return err
+			}
+			v.AggregateBy = ContentModerationAggregateBy(ev)
+			return nil
+		case schemas.GetContentModerationRequestMetadata_SortBy:
+			var ev string
+			if err := d.ReadString(schemas.GetContentModerationRequestMetadata_SortBy, &ev); err != nil {
+				return err
+			}
+			v.SortBy = ContentModerationSortBy(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Contains metadata about a label detection request, including the SortBy and
 // AggregateBy options.
 type GetLabelDetectionRequestMetadata struct {
@@ -1241,6 +3429,42 @@ type GetLabelDetectionRequestMetadata struct {
 	SortBy LabelDetectionSortBy
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetLabelDetectionRequestMetadata) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetLabelDetectionRequestMetadata)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetLabelDetectionRequestMetadata) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AggregateBy != "" {
+		s.WriteString(schemas.GetLabelDetectionRequestMetadata_AggregateBy, string(v.AggregateBy))
+	}
+	if v.SortBy != "" {
+		s.WriteString(schemas.GetLabelDetectionRequestMetadata_SortBy, string(v.SortBy))
+	}
+}
+func (v *GetLabelDetectionRequestMetadata) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetLabelDetectionRequestMetadata, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetLabelDetectionRequestMetadata_AggregateBy:
+			var ev string
+			if err := d.ReadString(schemas.GetLabelDetectionRequestMetadata_AggregateBy, &ev); err != nil {
+				return err
+			}
+			v.AggregateBy = LabelDetectionAggregateBy(ev)
+			return nil
+		case schemas.GetLabelDetectionRequestMetadata_SortBy:
+			var ev string
+			if err := d.ReadString(schemas.GetLabelDetectionRequestMetadata_SortBy, &ev); err != nil {
+				return err
+			}
+			v.SortBy = LabelDetectionSortBy(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // The S3 bucket that contains an Amazon Sagemaker Ground Truth format manifest
@@ -1260,6 +3484,30 @@ type GroundTruthManifest struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GroundTruthManifest) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GroundTruthManifest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GroundTruthManifest) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.S3Object != nil {
+		s.WriteStruct(schemas.GroundTruthManifest_S3Object)
+		v.S3Object.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GroundTruthManifest) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GroundTruthManifest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GroundTruthManifest_S3Object:
+			v.S3Object = &S3Object{}
+			return v.S3Object.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Shows the results of the human in the loop evaluation. If there is no
 // HumanLoopArn, the input did not trigger human review.
 type HumanLoopActivationOutput struct {
@@ -1277,6 +3525,37 @@ type HumanLoopActivationOutput struct {
 	HumanLoopArn *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *HumanLoopActivationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.HumanLoopActivationOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *HumanLoopActivationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.HumanLoopActivationConditionsEvaluationResults != nil {
+		s.WriteString(schemas.HumanLoopActivationOutput_HumanLoopActivationConditionsEvaluationResults, *v.HumanLoopActivationConditionsEvaluationResults)
+	}
+	serializeHumanLoopActivationReasons(s, schemas.HumanLoopActivationOutput_HumanLoopActivationReasons, v.HumanLoopActivationReasons)
+	if v.HumanLoopArn != nil {
+		s.WriteString(schemas.HumanLoopActivationOutput_HumanLoopArn, *v.HumanLoopArn)
+	}
+}
+func (v *HumanLoopActivationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.HumanLoopActivationOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.HumanLoopActivationOutput_HumanLoopActivationConditionsEvaluationResults:
+			v.HumanLoopActivationConditionsEvaluationResults = new(string)
+			return d.ReadString(schemas.HumanLoopActivationOutput_HumanLoopActivationConditionsEvaluationResults, v.HumanLoopActivationConditionsEvaluationResults)
+		case schemas.HumanLoopActivationOutput_HumanLoopActivationReasons:
+			return deserializeHumanLoopActivationReasons(d, schemas.HumanLoopActivationOutput_HumanLoopActivationReasons, &v.HumanLoopActivationReasons)
+		case schemas.HumanLoopActivationOutput_HumanLoopArn:
+			v.HumanLoopArn = new(string)
+			return d.ReadString(schemas.HumanLoopActivationOutput_HumanLoopArn, v.HumanLoopArn)
+		}
+		return nil
+	})
 }
 
 // Sets up the flow definition the image will be sent to if one of the conditions
@@ -1303,6 +3582,42 @@ type HumanLoopConfig struct {
 	noSmithyDocumentSerde
 }
 
+func (v *HumanLoopConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.HumanLoopConfig)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *HumanLoopConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DataAttributes != nil {
+		s.WriteStruct(schemas.HumanLoopConfig_DataAttributes)
+		v.DataAttributes.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.FlowDefinitionArn != nil {
+		s.WriteString(schemas.HumanLoopConfig_FlowDefinitionArn, *v.FlowDefinitionArn)
+	}
+	if v.HumanLoopName != nil {
+		s.WriteString(schemas.HumanLoopConfig_HumanLoopName, *v.HumanLoopName)
+	}
+}
+func (v *HumanLoopConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.HumanLoopConfig, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.HumanLoopConfig_DataAttributes:
+			v.DataAttributes = &HumanLoopDataAttributes{}
+			return v.DataAttributes.Deserialize(d)
+		case schemas.HumanLoopConfig_FlowDefinitionArn:
+			v.FlowDefinitionArn = new(string)
+			return d.ReadString(schemas.HumanLoopConfig_FlowDefinitionArn, v.FlowDefinitionArn)
+		case schemas.HumanLoopConfig_HumanLoopName:
+			v.HumanLoopName = new(string)
+			return d.ReadString(schemas.HumanLoopConfig_HumanLoopName, v.HumanLoopName)
+		}
+		return nil
+	})
+}
+
 // Allows you to set attributes of the image. Currently, you can declare an image
 // as free of personally identifiable information.
 type HumanLoopDataAttributes struct {
@@ -1311,6 +3626,25 @@ type HumanLoopDataAttributes struct {
 	ContentClassifiers []ContentClassifier
 
 	noSmithyDocumentSerde
+}
+
+func (v *HumanLoopDataAttributes) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.HumanLoopDataAttributes)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *HumanLoopDataAttributes) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeContentClassifiers(s, schemas.HumanLoopDataAttributes_ContentClassifiers, v.ContentClassifiers)
+}
+func (v *HumanLoopDataAttributes) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.HumanLoopDataAttributes, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.HumanLoopDataAttributes_ContentClassifiers:
+			return deserializeContentClassifiers(d, schemas.HumanLoopDataAttributes_ContentClassifiers, &v.ContentClassifiers)
+		}
+		return nil
+	})
 }
 
 // Provides the input image either as bytes or an S3 object.
@@ -1350,6 +3684,35 @@ type Image struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Image) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Image)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Image) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Bytes != nil {
+		s.WriteBlob(schemas.Image_Bytes, v.Bytes)
+	}
+	if v.S3Object != nil {
+		s.WriteStruct(schemas.Image_S3Object)
+		v.S3Object.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *Image) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Image, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Image_Bytes:
+			return d.ReadBlob(schemas.Image_Bytes, &v.Bytes)
+		case schemas.Image_S3Object:
+			v.S3Object = &S3Object{}
+			return v.S3Object.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Identifies face image brightness and sharpness.
 type ImageQuality struct {
 
@@ -1362,6 +3725,34 @@ type ImageQuality struct {
 	Sharpness *float32
 
 	noSmithyDocumentSerde
+}
+
+func (v *ImageQuality) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ImageQuality)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ImageQuality) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Brightness != nil {
+		s.WriteFloat32(schemas.ImageQuality_Brightness, *v.Brightness)
+	}
+	if v.Sharpness != nil {
+		s.WriteFloat32(schemas.ImageQuality_Sharpness, *v.Sharpness)
+	}
+}
+func (v *ImageQuality) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ImageQuality, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ImageQuality_Brightness:
+			v.Brightness = new(float32)
+			return d.ReadFloat32(schemas.ImageQuality_Brightness, v.Brightness)
+		case schemas.ImageQuality_Sharpness:
+			v.Sharpness = new(float32)
+			return d.ReadFloat32(schemas.ImageQuality_Sharpness, v.Sharpness)
+		}
+		return nil
+	})
 }
 
 // An instance of a label returned by Amazon Rekognition Image (DetectLabels ) or by Amazon
@@ -1380,6 +3771,39 @@ type Instance struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Instance) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Instance)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Instance) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BoundingBox != nil {
+		s.WriteStruct(schemas.Instance_BoundingBox)
+		v.BoundingBox.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Confidence != nil {
+		s.WriteFloat32(schemas.Instance_Confidence, *v.Confidence)
+	}
+	serializeDominantColors(s, schemas.Instance_DominantColors, v.DominantColors)
+}
+func (v *Instance) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Instance, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Instance_BoundingBox:
+			v.BoundingBox = &BoundingBox{}
+			return v.BoundingBox.Deserialize(d)
+		case schemas.Instance_Confidence:
+			v.Confidence = new(float32)
+			return d.ReadFloat32(schemas.Instance_Confidence, v.Confidence)
+		case schemas.Instance_DominantColors:
+			return deserializeDominantColors(d, schemas.Instance_DominantColors, &v.DominantColors)
+		}
+		return nil
+	})
+}
+
 // The Kinesis data stream Amazon Rekognition to which the analysis results of a
 // Amazon Rekognition stream processor are streamed. For more information, see
 // CreateStreamProcessor in the Amazon Rekognition Developer Guide.
@@ -1391,6 +3815,28 @@ type KinesisDataStream struct {
 	noSmithyDocumentSerde
 }
 
+func (v *KinesisDataStream) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.KinesisDataStream)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *KinesisDataStream) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.KinesisDataStream_Arn, *v.Arn)
+	}
+}
+func (v *KinesisDataStream) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.KinesisDataStream, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.KinesisDataStream_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.KinesisDataStream_Arn, v.Arn)
+		}
+		return nil
+	})
+}
+
 // Kinesis video stream stream that provides the source streaming video for a
 // Amazon Rekognition Video stream processor. For more information, see
 // CreateStreamProcessor in the Amazon Rekognition Developer Guide.
@@ -1400,6 +3846,28 @@ type KinesisVideoStream struct {
 	Arn *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *KinesisVideoStream) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.KinesisVideoStream)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *KinesisVideoStream) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.KinesisVideoStream_Arn, *v.Arn)
+	}
+}
+func (v *KinesisVideoStream) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.KinesisVideoStream, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.KinesisVideoStream_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.KinesisVideoStream_Arn, v.Arn)
+		}
+		return nil
+	})
 }
 
 // Specifies the starting point in a Kinesis stream to start processing. You can
@@ -1422,6 +3890,34 @@ type KinesisVideoStreamStartSelector struct {
 	noSmithyDocumentSerde
 }
 
+func (v *KinesisVideoStreamStartSelector) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.KinesisVideoStreamStartSelector)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *KinesisVideoStreamStartSelector) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FragmentNumber != nil {
+		s.WriteString(schemas.KinesisVideoStreamStartSelector_FragmentNumber, *v.FragmentNumber)
+	}
+	if v.ProducerTimestamp != nil {
+		s.WriteInt64(schemas.KinesisVideoStreamStartSelector_ProducerTimestamp, *v.ProducerTimestamp)
+	}
+}
+func (v *KinesisVideoStreamStartSelector) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.KinesisVideoStreamStartSelector, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.KinesisVideoStreamStartSelector_FragmentNumber:
+			v.FragmentNumber = new(string)
+			return d.ReadString(schemas.KinesisVideoStreamStartSelector_FragmentNumber, v.FragmentNumber)
+		case schemas.KinesisVideoStreamStartSelector_ProducerTimestamp:
+			v.ProducerTimestamp = new(int64)
+			return d.ReadInt64(schemas.KinesisVideoStreamStartSelector_ProducerTimestamp, v.ProducerTimestamp)
+		}
+		return nil
+	})
+}
+
 // The known gender identity for the celebrity that matches the provided ID. The
 // known gender identity can be Male, Female, Nonbinary, or Unlisted.
 type KnownGender struct {
@@ -1430,6 +3926,32 @@ type KnownGender struct {
 	Type KnownGenderType
 
 	noSmithyDocumentSerde
+}
+
+func (v *KnownGender) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.KnownGender)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *KnownGender) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Type != "" {
+		s.WriteString(schemas.KnownGender_Type, string(v.Type))
+	}
+}
+func (v *KnownGender) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.KnownGender, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.KnownGender_Type:
+			var ev string
+			if err := d.ReadString(schemas.KnownGender_Type, &ev); err != nil {
+				return err
+			}
+			v.Type = KnownGenderType(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // Structure containing details about the detected label, including the name,
@@ -1459,6 +3981,46 @@ type Label struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Label) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Label)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Label) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeLabelAliases(s, schemas.Label_Aliases, v.Aliases)
+	serializeLabelCategories(s, schemas.Label_Categories, v.Categories)
+	if v.Confidence != nil {
+		s.WriteFloat32(schemas.Label_Confidence, *v.Confidence)
+	}
+	serializeInstances(s, schemas.Label_Instances, v.Instances)
+	if v.Name != nil {
+		s.WriteString(schemas.Label_Name, *v.Name)
+	}
+	serializeParents(s, schemas.Label_Parents, v.Parents)
+}
+func (v *Label) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Label, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Label_Aliases:
+			return deserializeLabelAliases(d, schemas.Label_Aliases, &v.Aliases)
+		case schemas.Label_Categories:
+			return deserializeLabelCategories(d, schemas.Label_Categories, &v.Categories)
+		case schemas.Label_Confidence:
+			v.Confidence = new(float32)
+			return d.ReadFloat32(schemas.Label_Confidence, v.Confidence)
+		case schemas.Label_Instances:
+			return deserializeInstances(d, schemas.Label_Instances, &v.Instances)
+		case schemas.Label_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.Label_Name, v.Name)
+		case schemas.Label_Parents:
+			return deserializeParents(d, schemas.Label_Parents, &v.Parents)
+		}
+		return nil
+	})
+}
+
 // A potential alias of for a given label.
 type LabelAlias struct {
 
@@ -1468,6 +4030,28 @@ type LabelAlias struct {
 	noSmithyDocumentSerde
 }
 
+func (v *LabelAlias) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LabelAlias)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *LabelAlias) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.LabelAlias_Name, *v.Name)
+	}
+}
+func (v *LabelAlias) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LabelAlias, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LabelAlias_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.LabelAlias_Name, v.Name)
+		}
+		return nil
+	})
+}
+
 // The category that applies to a given label.
 type LabelCategory struct {
 
@@ -1475,6 +4059,28 @@ type LabelCategory struct {
 	Name *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *LabelCategory) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LabelCategory)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *LabelCategory) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.LabelCategory_Name, *v.Name)
+	}
+}
+func (v *LabelCategory) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LabelCategory, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LabelCategory_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.LabelCategory_Name, v.Name)
+		}
+		return nil
+	})
 }
 
 // Information about a label detected in a video analysis request and the time the
@@ -1504,6 +4110,53 @@ type LabelDetection struct {
 	noSmithyDocumentSerde
 }
 
+func (v *LabelDetection) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LabelDetection)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *LabelDetection) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DurationMillis != nil {
+		s.WriteInt64(schemas.LabelDetection_DurationMillis, *v.DurationMillis)
+	}
+	if v.EndTimestampMillis != nil {
+		s.WriteInt64(schemas.LabelDetection_EndTimestampMillis, *v.EndTimestampMillis)
+	}
+	if v.Label != nil {
+		s.WriteStruct(schemas.LabelDetection_Label)
+		v.Label.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.StartTimestampMillis != nil {
+		s.WriteInt64(schemas.LabelDetection_StartTimestampMillis, *v.StartTimestampMillis)
+	}
+	if v.Timestamp != 0 {
+		s.WriteInt64(schemas.LabelDetection_Timestamp, v.Timestamp)
+	}
+}
+func (v *LabelDetection) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LabelDetection, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LabelDetection_DurationMillis:
+			v.DurationMillis = new(int64)
+			return d.ReadInt64(schemas.LabelDetection_DurationMillis, v.DurationMillis)
+		case schemas.LabelDetection_EndTimestampMillis:
+			v.EndTimestampMillis = new(int64)
+			return d.ReadInt64(schemas.LabelDetection_EndTimestampMillis, v.EndTimestampMillis)
+		case schemas.LabelDetection_Label:
+			v.Label = &Label{}
+			return v.Label.Deserialize(d)
+		case schemas.LabelDetection_StartTimestampMillis:
+			v.StartTimestampMillis = new(int64)
+			return d.ReadInt64(schemas.LabelDetection_StartTimestampMillis, v.StartTimestampMillis)
+		case schemas.LabelDetection_Timestamp:
+			return d.ReadInt64(schemas.LabelDetection_Timestamp, &v.Timestamp)
+		}
+		return nil
+	})
+}
+
 // Contains the specified filters that should be applied to a list of returned
 // GENERAL_LABELS.
 type LabelDetectionSettings struct {
@@ -1516,6 +4169,30 @@ type LabelDetectionSettings struct {
 	GeneralLabels *GeneralLabelsSettings
 
 	noSmithyDocumentSerde
+}
+
+func (v *LabelDetectionSettings) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LabelDetectionSettings)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *LabelDetectionSettings) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GeneralLabels != nil {
+		s.WriteStruct(schemas.LabelDetectionSettings_GeneralLabels)
+		v.GeneralLabels.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *LabelDetectionSettings) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LabelDetectionSettings, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LabelDetectionSettings_GeneralLabels:
+			v.GeneralLabels = &GeneralLabelsSettings{}
+			return v.GeneralLabels.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // Indicates the location of the landmark on the face.
@@ -1539,6 +4216,44 @@ type Landmark struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Landmark) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Landmark)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Landmark) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Type != "" {
+		s.WriteString(schemas.Landmark_Type, string(v.Type))
+	}
+	if v.X != nil {
+		s.WriteFloat32(schemas.Landmark_X, *v.X)
+	}
+	if v.Y != nil {
+		s.WriteFloat32(schemas.Landmark_Y, *v.Y)
+	}
+}
+func (v *Landmark) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Landmark, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Landmark_Type:
+			var ev string
+			if err := d.ReadString(schemas.Landmark_Type, &ev); err != nil {
+				return err
+			}
+			v.Type = LandmarkType(ev)
+			return nil
+		case schemas.Landmark_X:
+			v.X = new(float32)
+			return d.ReadFloat32(schemas.Landmark_X, v.X)
+		case schemas.Landmark_Y:
+			v.Y = new(float32)
+			return d.ReadFloat32(schemas.Landmark_Y, v.Y)
+		}
+		return nil
+	})
+}
+
 // Contains settings that specify the location of an Amazon S3 bucket used to
 // store the output of a Face Liveness session. Note that the S3 bucket must be
 // located in the caller's AWS account and in the same region as the Face Liveness
@@ -1557,6 +4272,34 @@ type LivenessOutputConfig struct {
 	noSmithyDocumentSerde
 }
 
+func (v *LivenessOutputConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LivenessOutputConfig)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *LivenessOutputConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.S3Bucket != nil {
+		s.WriteString(schemas.LivenessOutputConfig_S3Bucket, *v.S3Bucket)
+	}
+	if v.S3KeyPrefix != nil {
+		s.WriteString(schemas.LivenessOutputConfig_S3KeyPrefix, *v.S3KeyPrefix)
+	}
+}
+func (v *LivenessOutputConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LivenessOutputConfig, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LivenessOutputConfig_S3Bucket:
+			v.S3Bucket = new(string)
+			return d.ReadString(schemas.LivenessOutputConfig_S3Bucket, v.S3Bucket)
+		case schemas.LivenessOutputConfig_S3KeyPrefix:
+			v.S3KeyPrefix = new(string)
+			return d.ReadString(schemas.LivenessOutputConfig_S3KeyPrefix, v.S3KeyPrefix)
+		}
+		return nil
+	})
+}
+
 // Contains metadata for a UserID matched with a given face.
 type MatchedUser struct {
 
@@ -1567,6 +4310,38 @@ type MatchedUser struct {
 	UserStatus UserStatus
 
 	noSmithyDocumentSerde
+}
+
+func (v *MatchedUser) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MatchedUser)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MatchedUser) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.UserId != nil {
+		s.WriteString(schemas.MatchedUser_UserId, *v.UserId)
+	}
+	if v.UserStatus != "" {
+		s.WriteString(schemas.MatchedUser_UserStatus, string(v.UserStatus))
+	}
+}
+func (v *MatchedUser) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MatchedUser, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MatchedUser_UserId:
+			v.UserId = new(string)
+			return d.ReadString(schemas.MatchedUser_UserId, v.UserId)
+		case schemas.MatchedUser_UserStatus:
+			var ev string
+			if err := d.ReadString(schemas.MatchedUser_UserStatus, &ev); err != nil {
+				return err
+			}
+			v.UserStatus = UserStatus(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // Configuration for Moderation Labels Detection.
@@ -1582,6 +4357,34 @@ type MediaAnalysisDetectModerationLabelsConfig struct {
 	ProjectVersion *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *MediaAnalysisDetectModerationLabelsConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MediaAnalysisDetectModerationLabelsConfig)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MediaAnalysisDetectModerationLabelsConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MinConfidence != nil {
+		s.WriteFloat32(schemas.MediaAnalysisDetectModerationLabelsConfig_MinConfidence, *v.MinConfidence)
+	}
+	if v.ProjectVersion != nil {
+		s.WriteString(schemas.MediaAnalysisDetectModerationLabelsConfig_ProjectVersion, *v.ProjectVersion)
+	}
+}
+func (v *MediaAnalysisDetectModerationLabelsConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MediaAnalysisDetectModerationLabelsConfig, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MediaAnalysisDetectModerationLabelsConfig_MinConfidence:
+			v.MinConfidence = new(float32)
+			return d.ReadFloat32(schemas.MediaAnalysisDetectModerationLabelsConfig_MinConfidence, v.MinConfidence)
+		case schemas.MediaAnalysisDetectModerationLabelsConfig_ProjectVersion:
+			v.ProjectVersion = new(string)
+			return d.ReadString(schemas.MediaAnalysisDetectModerationLabelsConfig_ProjectVersion, v.ProjectVersion)
+		}
+		return nil
+	})
 }
 
 // Contains input information for a media analysis job.
@@ -1600,6 +4403,30 @@ type MediaAnalysisInput struct {
 	S3Object *S3Object
 
 	noSmithyDocumentSerde
+}
+
+func (v *MediaAnalysisInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MediaAnalysisInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MediaAnalysisInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.S3Object != nil {
+		s.WriteStruct(schemas.MediaAnalysisInput_S3Object)
+		v.S3Object.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *MediaAnalysisInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MediaAnalysisInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MediaAnalysisInput_S3Object:
+			v.S3Object = &S3Object{}
+			return v.S3Object.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // Description for a media analysis job.
@@ -1657,6 +4484,110 @@ type MediaAnalysisJobDescription struct {
 	noSmithyDocumentSerde
 }
 
+func (v *MediaAnalysisJobDescription) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MediaAnalysisJobDescription)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MediaAnalysisJobDescription) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CompletionTimestamp != nil {
+		s.WriteTime(schemas.MediaAnalysisJobDescription_CompletionTimestamp, *v.CompletionTimestamp)
+	}
+	if v.CreationTimestamp != nil {
+		s.WriteTime(schemas.MediaAnalysisJobDescription_CreationTimestamp, *v.CreationTimestamp)
+	}
+	if v.FailureDetails != nil {
+		s.WriteStruct(schemas.MediaAnalysisJobDescription_FailureDetails)
+		v.FailureDetails.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Input != nil {
+		s.WriteStruct(schemas.MediaAnalysisJobDescription_Input)
+		v.Input.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.JobId != nil {
+		s.WriteString(schemas.MediaAnalysisJobDescription_JobId, *v.JobId)
+	}
+	if v.JobName != nil {
+		s.WriteString(schemas.MediaAnalysisJobDescription_JobName, *v.JobName)
+	}
+	if v.KmsKeyId != nil {
+		s.WriteString(schemas.MediaAnalysisJobDescription_KmsKeyId, *v.KmsKeyId)
+	}
+	if v.ManifestSummary != nil {
+		s.WriteStruct(schemas.MediaAnalysisJobDescription_ManifestSummary)
+		v.ManifestSummary.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.OperationsConfig != nil {
+		s.WriteStruct(schemas.MediaAnalysisJobDescription_OperationsConfig)
+		v.OperationsConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.OutputConfig != nil {
+		s.WriteStruct(schemas.MediaAnalysisJobDescription_OutputConfig)
+		v.OutputConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Results != nil {
+		s.WriteStruct(schemas.MediaAnalysisJobDescription_Results)
+		v.Results.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.MediaAnalysisJobDescription_Status, string(v.Status))
+	}
+}
+func (v *MediaAnalysisJobDescription) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MediaAnalysisJobDescription, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MediaAnalysisJobDescription_CompletionTimestamp:
+			v.CompletionTimestamp = new(time.Time)
+			return d.ReadTime(schemas.MediaAnalysisJobDescription_CompletionTimestamp, v.CompletionTimestamp)
+		case schemas.MediaAnalysisJobDescription_CreationTimestamp:
+			v.CreationTimestamp = new(time.Time)
+			return d.ReadTime(schemas.MediaAnalysisJobDescription_CreationTimestamp, v.CreationTimestamp)
+		case schemas.MediaAnalysisJobDescription_FailureDetails:
+			v.FailureDetails = &MediaAnalysisJobFailureDetails{}
+			return v.FailureDetails.Deserialize(d)
+		case schemas.MediaAnalysisJobDescription_Input:
+			v.Input = &MediaAnalysisInput{}
+			return v.Input.Deserialize(d)
+		case schemas.MediaAnalysisJobDescription_JobId:
+			v.JobId = new(string)
+			return d.ReadString(schemas.MediaAnalysisJobDescription_JobId, v.JobId)
+		case schemas.MediaAnalysisJobDescription_JobName:
+			v.JobName = new(string)
+			return d.ReadString(schemas.MediaAnalysisJobDescription_JobName, v.JobName)
+		case schemas.MediaAnalysisJobDescription_KmsKeyId:
+			v.KmsKeyId = new(string)
+			return d.ReadString(schemas.MediaAnalysisJobDescription_KmsKeyId, v.KmsKeyId)
+		case schemas.MediaAnalysisJobDescription_ManifestSummary:
+			v.ManifestSummary = &MediaAnalysisManifestSummary{}
+			return v.ManifestSummary.Deserialize(d)
+		case schemas.MediaAnalysisJobDescription_OperationsConfig:
+			v.OperationsConfig = &MediaAnalysisOperationsConfig{}
+			return v.OperationsConfig.Deserialize(d)
+		case schemas.MediaAnalysisJobDescription_OutputConfig:
+			v.OutputConfig = &MediaAnalysisOutputConfig{}
+			return v.OutputConfig.Deserialize(d)
+		case schemas.MediaAnalysisJobDescription_Results:
+			v.Results = &MediaAnalysisResults{}
+			return v.Results.Deserialize(d)
+		case schemas.MediaAnalysisJobDescription_Status:
+			var ev string
+			if err := d.ReadString(schemas.MediaAnalysisJobDescription_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = MediaAnalysisJobStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Details about the error that resulted in failure of the job.
 type MediaAnalysisJobFailureDetails struct {
 
@@ -1667,6 +4598,38 @@ type MediaAnalysisJobFailureDetails struct {
 	Message *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *MediaAnalysisJobFailureDetails) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MediaAnalysisJobFailureDetails)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MediaAnalysisJobFailureDetails) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Code != "" {
+		s.WriteString(schemas.MediaAnalysisJobFailureDetails_Code, string(v.Code))
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.MediaAnalysisJobFailureDetails_Message, *v.Message)
+	}
+}
+func (v *MediaAnalysisJobFailureDetails) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MediaAnalysisJobFailureDetails, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MediaAnalysisJobFailureDetails_Code:
+			var ev string
+			if err := d.ReadString(schemas.MediaAnalysisJobFailureDetails_Code, &ev); err != nil {
+				return err
+			}
+			v.Code = MediaAnalysisJobFailureCode(ev)
+			return nil
+		case schemas.MediaAnalysisJobFailureDetails_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.MediaAnalysisJobFailureDetails_Message, v.Message)
+		}
+		return nil
+	})
 }
 
 // Summary that provides statistics on input manifest and errors identified in the
@@ -1686,6 +4649,30 @@ type MediaAnalysisManifestSummary struct {
 	noSmithyDocumentSerde
 }
 
+func (v *MediaAnalysisManifestSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MediaAnalysisManifestSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MediaAnalysisManifestSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.S3Object != nil {
+		s.WriteStruct(schemas.MediaAnalysisManifestSummary_S3Object)
+		v.S3Object.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *MediaAnalysisManifestSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MediaAnalysisManifestSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MediaAnalysisManifestSummary_S3Object:
+			v.S3Object = &S3Object{}
+			return v.S3Object.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Object containing information about the model versions of selected features in
 // a given job.
 type MediaAnalysisModelVersions struct {
@@ -1696,6 +4683,28 @@ type MediaAnalysisModelVersions struct {
 	noSmithyDocumentSerde
 }
 
+func (v *MediaAnalysisModelVersions) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MediaAnalysisModelVersions)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MediaAnalysisModelVersions) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Moderation != nil {
+		s.WriteString(schemas.MediaAnalysisModelVersions_Moderation, *v.Moderation)
+	}
+}
+func (v *MediaAnalysisModelVersions) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MediaAnalysisModelVersions, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MediaAnalysisModelVersions_Moderation:
+			v.Moderation = new(string)
+			return d.ReadString(schemas.MediaAnalysisModelVersions_Moderation, v.Moderation)
+		}
+		return nil
+	})
+}
+
 // Configuration options for a media analysis job. Configuration is
 // operation-specific.
 type MediaAnalysisOperationsConfig struct {
@@ -1704,6 +4713,30 @@ type MediaAnalysisOperationsConfig struct {
 	DetectModerationLabels *MediaAnalysisDetectModerationLabelsConfig
 
 	noSmithyDocumentSerde
+}
+
+func (v *MediaAnalysisOperationsConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MediaAnalysisOperationsConfig)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MediaAnalysisOperationsConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DetectModerationLabels != nil {
+		s.WriteStruct(schemas.MediaAnalysisOperationsConfig_DetectModerationLabels)
+		v.DetectModerationLabels.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *MediaAnalysisOperationsConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MediaAnalysisOperationsConfig, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MediaAnalysisOperationsConfig_DetectModerationLabels:
+			v.DetectModerationLabels = &MediaAnalysisDetectModerationLabelsConfig{}
+			return v.DetectModerationLabels.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // Output configuration provided in the job creation request.
@@ -1719,6 +4752,34 @@ type MediaAnalysisOutputConfig struct {
 	S3KeyPrefix *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *MediaAnalysisOutputConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MediaAnalysisOutputConfig)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MediaAnalysisOutputConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.S3Bucket != nil {
+		s.WriteString(schemas.MediaAnalysisOutputConfig_S3Bucket, *v.S3Bucket)
+	}
+	if v.S3KeyPrefix != nil {
+		s.WriteString(schemas.MediaAnalysisOutputConfig_S3KeyPrefix, *v.S3KeyPrefix)
+	}
+}
+func (v *MediaAnalysisOutputConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MediaAnalysisOutputConfig, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MediaAnalysisOutputConfig_S3Bucket:
+			v.S3Bucket = new(string)
+			return d.ReadString(schemas.MediaAnalysisOutputConfig_S3Bucket, v.S3Bucket)
+		case schemas.MediaAnalysisOutputConfig_S3KeyPrefix:
+			v.S3KeyPrefix = new(string)
+			return d.ReadString(schemas.MediaAnalysisOutputConfig_S3KeyPrefix, v.S3KeyPrefix)
+		}
+		return nil
+	})
 }
 
 // Contains the results for a media analysis job created with
@@ -1739,6 +4800,38 @@ type MediaAnalysisResults struct {
 	S3Object *S3Object
 
 	noSmithyDocumentSerde
+}
+
+func (v *MediaAnalysisResults) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MediaAnalysisResults)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MediaAnalysisResults) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ModelVersions != nil {
+		s.WriteStruct(schemas.MediaAnalysisResults_ModelVersions)
+		v.ModelVersions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.S3Object != nil {
+		s.WriteStruct(schemas.MediaAnalysisResults_S3Object)
+		v.S3Object.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *MediaAnalysisResults) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MediaAnalysisResults, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MediaAnalysisResults_ModelVersions:
+			v.ModelVersions = &MediaAnalysisModelVersions{}
+			return v.ModelVersions.Deserialize(d)
+		case schemas.MediaAnalysisResults_S3Object:
+			v.S3Object = &S3Object{}
+			return v.S3Object.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // Provides information about a single type of inappropriate, unwanted, or
@@ -1768,6 +4861,46 @@ type ModerationLabel struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ModerationLabel) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ModerationLabel)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ModerationLabel) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Confidence != nil {
+		s.WriteFloat32(schemas.ModerationLabel_Confidence, *v.Confidence)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.ModerationLabel_Name, *v.Name)
+	}
+	if v.ParentName != nil {
+		s.WriteString(schemas.ModerationLabel_ParentName, *v.ParentName)
+	}
+	if v.TaxonomyLevel != nil {
+		s.WriteInt32(schemas.ModerationLabel_TaxonomyLevel, *v.TaxonomyLevel)
+	}
+}
+func (v *ModerationLabel) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ModerationLabel, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ModerationLabel_Confidence:
+			v.Confidence = new(float32)
+			return d.ReadFloat32(schemas.ModerationLabel_Confidence, v.Confidence)
+		case schemas.ModerationLabel_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.ModerationLabel_Name, v.Name)
+		case schemas.ModerationLabel_ParentName:
+			v.ParentName = new(string)
+			return d.ReadString(schemas.ModerationLabel_ParentName, v.ParentName)
+		case schemas.ModerationLabel_TaxonomyLevel:
+			v.TaxonomyLevel = new(int32)
+			return d.ReadInt32(schemas.ModerationLabel_TaxonomyLevel, v.TaxonomyLevel)
+		}
+		return nil
+	})
+}
+
 // Indicates whether or not the mouth on the face is open, and the confidence
 // level in the determination.
 type MouthOpen struct {
@@ -1781,6 +4914,33 @@ type MouthOpen struct {
 	noSmithyDocumentSerde
 }
 
+func (v *MouthOpen) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MouthOpen)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MouthOpen) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Confidence != nil {
+		s.WriteFloat32(schemas.MouthOpen_Confidence, *v.Confidence)
+	}
+	if v.Value != false {
+		s.WriteBool(schemas.MouthOpen_Value, v.Value)
+	}
+}
+func (v *MouthOpen) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MouthOpen, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MouthOpen_Confidence:
+			v.Confidence = new(float32)
+			return d.ReadFloat32(schemas.MouthOpen_Confidence, v.Confidence)
+		case schemas.MouthOpen_Value:
+			return d.ReadBool(schemas.MouthOpen_Value, &v.Value)
+		}
+		return nil
+	})
+}
+
 // Indicates whether or not the face has a mustache, and the confidence level in
 // the determination.
 type Mustache struct {
@@ -1792,6 +4952,33 @@ type Mustache struct {
 	Value bool
 
 	noSmithyDocumentSerde
+}
+
+func (v *Mustache) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Mustache)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Mustache) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Confidence != nil {
+		s.WriteFloat32(schemas.Mustache_Confidence, *v.Confidence)
+	}
+	if v.Value != false {
+		s.WriteBool(schemas.Mustache_Value, v.Value)
+	}
+}
+func (v *Mustache) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Mustache, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Mustache_Confidence:
+			v.Confidence = new(float32)
+			return d.ReadFloat32(schemas.Mustache_Confidence, v.Confidence)
+		case schemas.Mustache_Value:
+			return d.ReadBool(schemas.Mustache_Value, &v.Value)
+		}
+		return nil
+	})
 }
 
 // The Amazon Simple Notification Service topic to which Amazon Rekognition
@@ -1818,6 +5005,34 @@ type NotificationChannel struct {
 	noSmithyDocumentSerde
 }
 
+func (v *NotificationChannel) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.NotificationChannel)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *NotificationChannel) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RoleArn != nil {
+		s.WriteString(schemas.NotificationChannel_RoleArn, *v.RoleArn)
+	}
+	if v.SNSTopicArn != nil {
+		s.WriteString(schemas.NotificationChannel_SNSTopicArn, *v.SNSTopicArn)
+	}
+}
+func (v *NotificationChannel) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.NotificationChannel, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.NotificationChannel_RoleArn:
+			v.RoleArn = new(string)
+			return d.ReadString(schemas.NotificationChannel_RoleArn, v.RoleArn)
+		case schemas.NotificationChannel_SNSTopicArn:
+			v.SNSTopicArn = new(string)
+			return d.ReadString(schemas.NotificationChannel_SNSTopicArn, v.SNSTopicArn)
+		}
+		return nil
+	})
+}
+
 // The S3 bucket and folder location where training output is placed.
 type OutputConfig struct {
 
@@ -1830,6 +5045,34 @@ type OutputConfig struct {
 	noSmithyDocumentSerde
 }
 
+func (v *OutputConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.OutputConfig)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *OutputConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.S3Bucket != nil {
+		s.WriteString(schemas.OutputConfig_S3Bucket, *v.S3Bucket)
+	}
+	if v.S3KeyPrefix != nil {
+		s.WriteString(schemas.OutputConfig_S3KeyPrefix, *v.S3KeyPrefix)
+	}
+}
+func (v *OutputConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.OutputConfig, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.OutputConfig_S3Bucket:
+			v.S3Bucket = new(string)
+			return d.ReadString(schemas.OutputConfig_S3Bucket, v.S3Bucket)
+		case schemas.OutputConfig_S3KeyPrefix:
+			v.S3KeyPrefix = new(string)
+			return d.ReadString(schemas.OutputConfig_S3KeyPrefix, v.S3KeyPrefix)
+		}
+		return nil
+	})
+}
+
 // A parent label for a label. A label can have 0, 1, or more parents.
 type Parent struct {
 
@@ -1837,6 +5080,28 @@ type Parent struct {
 	Name *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *Parent) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Parent)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Parent) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.Parent_Name, *v.Name)
+	}
+}
+func (v *Parent) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Parent, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Parent_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.Parent_Name, v.Name)
+		}
+		return nil
+	})
 }
 
 // Details about a person detected in a video analysis request.
@@ -1854,6 +5119,43 @@ type PersonDetail struct {
 	Index int64
 
 	noSmithyDocumentSerde
+}
+
+func (v *PersonDetail) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PersonDetail)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PersonDetail) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BoundingBox != nil {
+		s.WriteStruct(schemas.PersonDetail_BoundingBox)
+		v.BoundingBox.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Face != nil {
+		s.WriteStruct(schemas.PersonDetail_Face)
+		v.Face.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Index != 0 {
+		s.WriteInt64(schemas.PersonDetail_Index, v.Index)
+	}
+}
+func (v *PersonDetail) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PersonDetail, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PersonDetail_BoundingBox:
+			v.BoundingBox = &BoundingBox{}
+			return v.BoundingBox.Deserialize(d)
+		case schemas.PersonDetail_Face:
+			v.Face = &FaceDetail{}
+			return v.Face.Deserialize(d)
+		case schemas.PersonDetail_Index:
+			return d.ReadInt64(schemas.PersonDetail_Index, &v.Index)
+		}
+		return nil
+	})
 }
 
 // Details and path tracking information for a single time a person's path is
@@ -1874,6 +5176,35 @@ type PersonDetection struct {
 	Timestamp int64
 
 	noSmithyDocumentSerde
+}
+
+func (v *PersonDetection) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PersonDetection)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PersonDetection) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Person != nil {
+		s.WriteStruct(schemas.PersonDetection_Person)
+		v.Person.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Timestamp != 0 {
+		s.WriteInt64(schemas.PersonDetection_Timestamp, v.Timestamp)
+	}
+}
+func (v *PersonDetection) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PersonDetection, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PersonDetection_Person:
+			v.Person = &PersonDetail{}
+			return v.Person.Deserialize(d)
+		case schemas.PersonDetection_Timestamp:
+			return d.ReadInt64(schemas.PersonDetection_Timestamp, &v.Timestamp)
+		}
+		return nil
+	})
 }
 
 // Information about a person whose face matches a face(s) in an Amazon
@@ -1897,6 +5228,38 @@ type PersonMatch struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PersonMatch) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PersonMatch)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PersonMatch) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeFaceMatchList(s, schemas.PersonMatch_FaceMatches, v.FaceMatches)
+	if v.Person != nil {
+		s.WriteStruct(schemas.PersonMatch_Person)
+		v.Person.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Timestamp != 0 {
+		s.WriteInt64(schemas.PersonMatch_Timestamp, v.Timestamp)
+	}
+}
+func (v *PersonMatch) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PersonMatch, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PersonMatch_FaceMatches:
+			return deserializeFaceMatchList(d, schemas.PersonMatch_FaceMatches, &v.FaceMatches)
+		case schemas.PersonMatch_Person:
+			v.Person = &PersonDetail{}
+			return v.Person.Deserialize(d)
+		case schemas.PersonMatch_Timestamp:
+			return d.ReadInt64(schemas.PersonMatch_Timestamp, &v.Timestamp)
+		}
+		return nil
+	})
+}
+
 // The X and Y coordinates of a point on an image or video frame. The X and Y
 // values are ratios of the overall image size or video resolution. For example, if
 // an input image is 700x200 and the values are X=0.5 and Y=0.25, then the point is
@@ -1916,6 +5279,34 @@ type Point struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Point) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Point)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Point) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.X != nil {
+		s.WriteFloat32(schemas.Point_X, *v.X)
+	}
+	if v.Y != nil {
+		s.WriteFloat32(schemas.Point_Y, *v.Y)
+	}
+}
+func (v *Point) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Point, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Point_X:
+			v.X = new(float32)
+			return d.ReadFloat32(schemas.Point_X, v.X)
+		case schemas.Point_Y:
+			v.Y = new(float32)
+			return d.ReadFloat32(schemas.Point_Y, v.Y)
+		}
+		return nil
+	})
+}
+
 // Indicates the pose of the face as determined by its pitch, roll, and yaw.
 type Pose struct {
 
@@ -1929,6 +5320,40 @@ type Pose struct {
 	Yaw *float32
 
 	noSmithyDocumentSerde
+}
+
+func (v *Pose) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Pose)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Pose) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Pitch != nil {
+		s.WriteFloat32(schemas.Pose_Pitch, *v.Pitch)
+	}
+	if v.Roll != nil {
+		s.WriteFloat32(schemas.Pose_Roll, *v.Roll)
+	}
+	if v.Yaw != nil {
+		s.WriteFloat32(schemas.Pose_Yaw, *v.Yaw)
+	}
+}
+func (v *Pose) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Pose, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Pose_Pitch:
+			v.Pitch = new(float32)
+			return d.ReadFloat32(schemas.Pose_Pitch, v.Pitch)
+		case schemas.Pose_Roll:
+			v.Roll = new(float32)
+			return d.ReadFloat32(schemas.Pose_Roll, v.Roll)
+		case schemas.Pose_Yaw:
+			v.Yaw = new(float32)
+			return d.ReadFloat32(schemas.Pose_Yaw, v.Yaw)
+		}
+		return nil
+	})
 }
 
 // A description of an Amazon Rekognition Custom Labels project. For more
@@ -1957,6 +5382,67 @@ type ProjectDescription struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ProjectDescription) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ProjectDescription)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ProjectDescription) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AutoUpdate != "" {
+		s.WriteString(schemas.ProjectDescription_AutoUpdate, string(v.AutoUpdate))
+	}
+	if v.CreationTimestamp != nil {
+		s.WriteTime(schemas.ProjectDescription_CreationTimestamp, *v.CreationTimestamp)
+	}
+	serializeDatasetMetadataList(s, schemas.ProjectDescription_Datasets, v.Datasets)
+	if v.Feature != "" {
+		s.WriteString(schemas.ProjectDescription_Feature, string(v.Feature))
+	}
+	if v.ProjectArn != nil {
+		s.WriteString(schemas.ProjectDescription_ProjectArn, *v.ProjectArn)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.ProjectDescription_Status, string(v.Status))
+	}
+}
+func (v *ProjectDescription) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ProjectDescription, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ProjectDescription_AutoUpdate:
+			var ev string
+			if err := d.ReadString(schemas.ProjectDescription_AutoUpdate, &ev); err != nil {
+				return err
+			}
+			v.AutoUpdate = ProjectAutoUpdate(ev)
+			return nil
+		case schemas.ProjectDescription_CreationTimestamp:
+			v.CreationTimestamp = new(time.Time)
+			return d.ReadTime(schemas.ProjectDescription_CreationTimestamp, v.CreationTimestamp)
+		case schemas.ProjectDescription_Datasets:
+			return deserializeDatasetMetadataList(d, schemas.ProjectDescription_Datasets, &v.Datasets)
+		case schemas.ProjectDescription_Feature:
+			var ev string
+			if err := d.ReadString(schemas.ProjectDescription_Feature, &ev); err != nil {
+				return err
+			}
+			v.Feature = CustomizationFeature(ev)
+			return nil
+		case schemas.ProjectDescription_ProjectArn:
+			v.ProjectArn = new(string)
+			return d.ReadString(schemas.ProjectDescription_ProjectArn, v.ProjectArn)
+		case schemas.ProjectDescription_Status:
+			var ev string
+			if err := d.ReadString(schemas.ProjectDescription_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = ProjectStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Describes a project policy in the response from ListProjectPolicies.
 type ProjectPolicy struct {
 
@@ -1980,6 +5466,58 @@ type ProjectPolicy struct {
 	ProjectArn *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ProjectPolicy) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ProjectPolicy)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ProjectPolicy) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreationTimestamp != nil {
+		s.WriteTime(schemas.ProjectPolicy_CreationTimestamp, *v.CreationTimestamp)
+	}
+	if v.LastUpdatedTimestamp != nil {
+		s.WriteTime(schemas.ProjectPolicy_LastUpdatedTimestamp, *v.LastUpdatedTimestamp)
+	}
+	if v.PolicyDocument != nil {
+		s.WriteString(schemas.ProjectPolicy_PolicyDocument, *v.PolicyDocument)
+	}
+	if v.PolicyName != nil {
+		s.WriteString(schemas.ProjectPolicy_PolicyName, *v.PolicyName)
+	}
+	if v.PolicyRevisionId != nil {
+		s.WriteString(schemas.ProjectPolicy_PolicyRevisionId, *v.PolicyRevisionId)
+	}
+	if v.ProjectArn != nil {
+		s.WriteString(schemas.ProjectPolicy_ProjectArn, *v.ProjectArn)
+	}
+}
+func (v *ProjectPolicy) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ProjectPolicy, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ProjectPolicy_CreationTimestamp:
+			v.CreationTimestamp = new(time.Time)
+			return d.ReadTime(schemas.ProjectPolicy_CreationTimestamp, v.CreationTimestamp)
+		case schemas.ProjectPolicy_LastUpdatedTimestamp:
+			v.LastUpdatedTimestamp = new(time.Time)
+			return d.ReadTime(schemas.ProjectPolicy_LastUpdatedTimestamp, v.LastUpdatedTimestamp)
+		case schemas.ProjectPolicy_PolicyDocument:
+			v.PolicyDocument = new(string)
+			return d.ReadString(schemas.ProjectPolicy_PolicyDocument, v.PolicyDocument)
+		case schemas.ProjectPolicy_PolicyName:
+			v.PolicyName = new(string)
+			return d.ReadString(schemas.ProjectPolicy_PolicyName, v.PolicyName)
+		case schemas.ProjectPolicy_PolicyRevisionId:
+			v.PolicyRevisionId = new(string)
+			return d.ReadString(schemas.ProjectPolicy_PolicyRevisionId, v.PolicyRevisionId)
+		case schemas.ProjectPolicy_ProjectArn:
+			v.ProjectArn = new(string)
+			return d.ReadString(schemas.ProjectPolicy_ProjectArn, v.ProjectArn)
+		}
+		return nil
+	})
 }
 
 // A description of a version of a Amazon Rekognition project version.
@@ -2053,6 +5591,156 @@ type ProjectVersionDescription struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ProjectVersionDescription) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ProjectVersionDescription)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ProjectVersionDescription) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BaseModelVersion != nil {
+		s.WriteString(schemas.ProjectVersionDescription_BaseModelVersion, *v.BaseModelVersion)
+	}
+	if v.BillableTrainingTimeInSeconds != nil {
+		s.WriteInt64(schemas.ProjectVersionDescription_BillableTrainingTimeInSeconds, *v.BillableTrainingTimeInSeconds)
+	}
+	if v.CreationTimestamp != nil {
+		s.WriteTime(schemas.ProjectVersionDescription_CreationTimestamp, *v.CreationTimestamp)
+	}
+	if v.EvaluationResult != nil {
+		s.WriteStruct(schemas.ProjectVersionDescription_EvaluationResult)
+		v.EvaluationResult.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Feature != "" {
+		s.WriteString(schemas.ProjectVersionDescription_Feature, string(v.Feature))
+	}
+	if v.FeatureConfig != nil {
+		s.WriteStruct(schemas.ProjectVersionDescription_FeatureConfig)
+		v.FeatureConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.KmsKeyId != nil {
+		s.WriteString(schemas.ProjectVersionDescription_KmsKeyId, *v.KmsKeyId)
+	}
+	if v.ManifestSummary != nil {
+		s.WriteStruct(schemas.ProjectVersionDescription_ManifestSummary)
+		v.ManifestSummary.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MaxInferenceUnits != nil {
+		s.WriteInt32(schemas.ProjectVersionDescription_MaxInferenceUnits, *v.MaxInferenceUnits)
+	}
+	if v.MinInferenceUnits != nil {
+		s.WriteInt32(schemas.ProjectVersionDescription_MinInferenceUnits, *v.MinInferenceUnits)
+	}
+	if v.OutputConfig != nil {
+		s.WriteStruct(schemas.ProjectVersionDescription_OutputConfig)
+		v.OutputConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ProjectVersionArn != nil {
+		s.WriteString(schemas.ProjectVersionDescription_ProjectVersionArn, *v.ProjectVersionArn)
+	}
+	if v.SourceProjectVersionArn != nil {
+		s.WriteString(schemas.ProjectVersionDescription_SourceProjectVersionArn, *v.SourceProjectVersionArn)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.ProjectVersionDescription_Status, string(v.Status))
+	}
+	if v.StatusMessage != nil {
+		s.WriteString(schemas.ProjectVersionDescription_StatusMessage, *v.StatusMessage)
+	}
+	if v.TestingDataResult != nil {
+		s.WriteStruct(schemas.ProjectVersionDescription_TestingDataResult)
+		v.TestingDataResult.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TrainingDataResult != nil {
+		s.WriteStruct(schemas.ProjectVersionDescription_TrainingDataResult)
+		v.TrainingDataResult.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TrainingEndTimestamp != nil {
+		s.WriteTime(schemas.ProjectVersionDescription_TrainingEndTimestamp, *v.TrainingEndTimestamp)
+	}
+	if v.VersionDescription != nil {
+		s.WriteString(schemas.ProjectVersionDescription_VersionDescription, *v.VersionDescription)
+	}
+}
+func (v *ProjectVersionDescription) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ProjectVersionDescription, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ProjectVersionDescription_BaseModelVersion:
+			v.BaseModelVersion = new(string)
+			return d.ReadString(schemas.ProjectVersionDescription_BaseModelVersion, v.BaseModelVersion)
+		case schemas.ProjectVersionDescription_BillableTrainingTimeInSeconds:
+			v.BillableTrainingTimeInSeconds = new(int64)
+			return d.ReadInt64(schemas.ProjectVersionDescription_BillableTrainingTimeInSeconds, v.BillableTrainingTimeInSeconds)
+		case schemas.ProjectVersionDescription_CreationTimestamp:
+			v.CreationTimestamp = new(time.Time)
+			return d.ReadTime(schemas.ProjectVersionDescription_CreationTimestamp, v.CreationTimestamp)
+		case schemas.ProjectVersionDescription_EvaluationResult:
+			v.EvaluationResult = &EvaluationResult{}
+			return v.EvaluationResult.Deserialize(d)
+		case schemas.ProjectVersionDescription_Feature:
+			var ev string
+			if err := d.ReadString(schemas.ProjectVersionDescription_Feature, &ev); err != nil {
+				return err
+			}
+			v.Feature = CustomizationFeature(ev)
+			return nil
+		case schemas.ProjectVersionDescription_FeatureConfig:
+			v.FeatureConfig = &CustomizationFeatureConfig{}
+			return v.FeatureConfig.Deserialize(d)
+		case schemas.ProjectVersionDescription_KmsKeyId:
+			v.KmsKeyId = new(string)
+			return d.ReadString(schemas.ProjectVersionDescription_KmsKeyId, v.KmsKeyId)
+		case schemas.ProjectVersionDescription_ManifestSummary:
+			v.ManifestSummary = &GroundTruthManifest{}
+			return v.ManifestSummary.Deserialize(d)
+		case schemas.ProjectVersionDescription_MaxInferenceUnits:
+			v.MaxInferenceUnits = new(int32)
+			return d.ReadInt32(schemas.ProjectVersionDescription_MaxInferenceUnits, v.MaxInferenceUnits)
+		case schemas.ProjectVersionDescription_MinInferenceUnits:
+			v.MinInferenceUnits = new(int32)
+			return d.ReadInt32(schemas.ProjectVersionDescription_MinInferenceUnits, v.MinInferenceUnits)
+		case schemas.ProjectVersionDescription_OutputConfig:
+			v.OutputConfig = &OutputConfig{}
+			return v.OutputConfig.Deserialize(d)
+		case schemas.ProjectVersionDescription_ProjectVersionArn:
+			v.ProjectVersionArn = new(string)
+			return d.ReadString(schemas.ProjectVersionDescription_ProjectVersionArn, v.ProjectVersionArn)
+		case schemas.ProjectVersionDescription_SourceProjectVersionArn:
+			v.SourceProjectVersionArn = new(string)
+			return d.ReadString(schemas.ProjectVersionDescription_SourceProjectVersionArn, v.SourceProjectVersionArn)
+		case schemas.ProjectVersionDescription_Status:
+			var ev string
+			if err := d.ReadString(schemas.ProjectVersionDescription_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = ProjectVersionStatus(ev)
+			return nil
+		case schemas.ProjectVersionDescription_StatusMessage:
+			v.StatusMessage = new(string)
+			return d.ReadString(schemas.ProjectVersionDescription_StatusMessage, v.StatusMessage)
+		case schemas.ProjectVersionDescription_TestingDataResult:
+			v.TestingDataResult = &TestingDataResult{}
+			return v.TestingDataResult.Deserialize(d)
+		case schemas.ProjectVersionDescription_TrainingDataResult:
+			v.TrainingDataResult = &TrainingDataResult{}
+			return v.TrainingDataResult.Deserialize(d)
+		case schemas.ProjectVersionDescription_TrainingEndTimestamp:
+			v.TrainingEndTimestamp = new(time.Time)
+			return d.ReadTime(schemas.ProjectVersionDescription_TrainingEndTimestamp, v.TrainingEndTimestamp)
+		case schemas.ProjectVersionDescription_VersionDescription:
+			v.VersionDescription = new(string)
+			return d.ReadString(schemas.ProjectVersionDescription_VersionDescription, v.VersionDescription)
+		}
+		return nil
+	})
+}
+
 // Information about a body part detected by DetectProtectiveEquipment that contains PPE. An array of
 // ProtectiveEquipmentBodyPart objects is returned for each person detected by
 // DetectProtectiveEquipment .
@@ -2069,6 +5757,41 @@ type ProtectiveEquipmentBodyPart struct {
 	Name BodyPart
 
 	noSmithyDocumentSerde
+}
+
+func (v *ProtectiveEquipmentBodyPart) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ProtectiveEquipmentBodyPart)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ProtectiveEquipmentBodyPart) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Confidence != nil {
+		s.WriteFloat32(schemas.ProtectiveEquipmentBodyPart_Confidence, *v.Confidence)
+	}
+	serializeEquipmentDetections(s, schemas.ProtectiveEquipmentBodyPart_EquipmentDetections, v.EquipmentDetections)
+	if v.Name != "" {
+		s.WriteString(schemas.ProtectiveEquipmentBodyPart_Name, string(v.Name))
+	}
+}
+func (v *ProtectiveEquipmentBodyPart) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ProtectiveEquipmentBodyPart, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ProtectiveEquipmentBodyPart_Confidence:
+			v.Confidence = new(float32)
+			return d.ReadFloat32(schemas.ProtectiveEquipmentBodyPart_Confidence, v.Confidence)
+		case schemas.ProtectiveEquipmentBodyPart_EquipmentDetections:
+			return deserializeEquipmentDetections(d, schemas.ProtectiveEquipmentBodyPart_EquipmentDetections, &v.EquipmentDetections)
+		case schemas.ProtectiveEquipmentBodyPart_Name:
+			var ev string
+			if err := d.ReadString(schemas.ProtectiveEquipmentBodyPart_Name, &ev); err != nil {
+				return err
+			}
+			v.Name = BodyPart(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // A person detected by a call to DetectProtectiveEquipment. The API returns all persons detected in the
@@ -2091,6 +5814,45 @@ type ProtectiveEquipmentPerson struct {
 	Id *int32
 
 	noSmithyDocumentSerde
+}
+
+func (v *ProtectiveEquipmentPerson) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ProtectiveEquipmentPerson)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ProtectiveEquipmentPerson) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeBodyParts(s, schemas.ProtectiveEquipmentPerson_BodyParts, v.BodyParts)
+	if v.BoundingBox != nil {
+		s.WriteStruct(schemas.ProtectiveEquipmentPerson_BoundingBox)
+		v.BoundingBox.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Confidence != nil {
+		s.WriteFloat32(schemas.ProtectiveEquipmentPerson_Confidence, *v.Confidence)
+	}
+	if v.Id != nil {
+		s.WriteInt32(schemas.ProtectiveEquipmentPerson_Id, *v.Id)
+	}
+}
+func (v *ProtectiveEquipmentPerson) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ProtectiveEquipmentPerson, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ProtectiveEquipmentPerson_BodyParts:
+			return deserializeBodyParts(d, schemas.ProtectiveEquipmentPerson_BodyParts, &v.BodyParts)
+		case schemas.ProtectiveEquipmentPerson_BoundingBox:
+			v.BoundingBox = &BoundingBox{}
+			return v.BoundingBox.Deserialize(d)
+		case schemas.ProtectiveEquipmentPerson_Confidence:
+			v.Confidence = new(float32)
+			return d.ReadFloat32(schemas.ProtectiveEquipmentPerson_Confidence, v.Confidence)
+		case schemas.ProtectiveEquipmentPerson_Id:
+			v.Id = new(int32)
+			return d.ReadInt32(schemas.ProtectiveEquipmentPerson_Id, v.Id)
+		}
+		return nil
+	})
 }
 
 // Specifies summary attributes to return from a call to DetectProtectiveEquipment. You can specify which
@@ -2127,6 +5889,31 @@ type ProtectiveEquipmentSummarizationAttributes struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ProtectiveEquipmentSummarizationAttributes) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ProtectiveEquipmentSummarizationAttributes)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ProtectiveEquipmentSummarizationAttributes) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MinConfidence != nil {
+		s.WriteFloat32(schemas.ProtectiveEquipmentSummarizationAttributes_MinConfidence, *v.MinConfidence)
+	}
+	serializeProtectiveEquipmentTypes(s, schemas.ProtectiveEquipmentSummarizationAttributes_RequiredEquipmentTypes, v.RequiredEquipmentTypes)
+}
+func (v *ProtectiveEquipmentSummarizationAttributes) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ProtectiveEquipmentSummarizationAttributes, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ProtectiveEquipmentSummarizationAttributes_MinConfidence:
+			v.MinConfidence = new(float32)
+			return d.ReadFloat32(schemas.ProtectiveEquipmentSummarizationAttributes_MinConfidence, v.MinConfidence)
+		case schemas.ProtectiveEquipmentSummarizationAttributes_RequiredEquipmentTypes:
+			return deserializeProtectiveEquipmentTypes(d, schemas.ProtectiveEquipmentSummarizationAttributes_RequiredEquipmentTypes, &v.RequiredEquipmentTypes)
+		}
+		return nil
+	})
+}
+
 // Summary information for required items of personal protective equipment (PPE)
 // detected on persons by a call to DetectProtectiveEquipment. You specify the required type of PPE in the
 // SummarizationAttributes (ProtectiveEquipmentSummarizationAttributes ) input parameter. The summary includes which persons
@@ -2159,6 +5946,31 @@ type ProtectiveEquipmentSummary struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ProtectiveEquipmentSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ProtectiveEquipmentSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ProtectiveEquipmentSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeProtectiveEquipmentPersonIds(s, schemas.ProtectiveEquipmentSummary_PersonsIndeterminate, v.PersonsIndeterminate)
+	serializeProtectiveEquipmentPersonIds(s, schemas.ProtectiveEquipmentSummary_PersonsWithRequiredEquipment, v.PersonsWithRequiredEquipment)
+	serializeProtectiveEquipmentPersonIds(s, schemas.ProtectiveEquipmentSummary_PersonsWithoutRequiredEquipment, v.PersonsWithoutRequiredEquipment)
+}
+func (v *ProtectiveEquipmentSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ProtectiveEquipmentSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ProtectiveEquipmentSummary_PersonsIndeterminate:
+			return deserializeProtectiveEquipmentPersonIds(d, schemas.ProtectiveEquipmentSummary_PersonsIndeterminate, &v.PersonsIndeterminate)
+		case schemas.ProtectiveEquipmentSummary_PersonsWithRequiredEquipment:
+			return deserializeProtectiveEquipmentPersonIds(d, schemas.ProtectiveEquipmentSummary_PersonsWithRequiredEquipment, &v.PersonsWithRequiredEquipment)
+		case schemas.ProtectiveEquipmentSummary_PersonsWithoutRequiredEquipment:
+			return deserializeProtectiveEquipmentPersonIds(d, schemas.ProtectiveEquipmentSummary_PersonsWithoutRequiredEquipment, &v.PersonsWithoutRequiredEquipment)
+		}
+		return nil
+	})
+}
+
 // Specifies a location within the frame that Rekognition checks for objects of
 // interest such as text, labels, or faces. It uses a BoundingBox or Polygon to
 // set a region of the screen.
@@ -2177,6 +5989,33 @@ type RegionOfInterest struct {
 	Polygon []Point
 
 	noSmithyDocumentSerde
+}
+
+func (v *RegionOfInterest) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RegionOfInterest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RegionOfInterest) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BoundingBox != nil {
+		s.WriteStruct(schemas.RegionOfInterest_BoundingBox)
+		v.BoundingBox.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializePolygon(s, schemas.RegionOfInterest_Polygon, v.Polygon)
+}
+func (v *RegionOfInterest) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RegionOfInterest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RegionOfInterest_BoundingBox:
+			v.BoundingBox = &BoundingBox{}
+			return v.BoundingBox.Deserialize(d)
+		case schemas.RegionOfInterest_Polygon:
+			return deserializePolygon(d, schemas.RegionOfInterest_Polygon, &v.Polygon)
+		}
+		return nil
+	})
 }
 
 //	The Amazon S3 bucket location to which Amazon Rekognition publishes the
@@ -2198,6 +6037,34 @@ type S3Destination struct {
 	KeyPrefix *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *S3Destination) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.S3Destination)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *S3Destination) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Bucket != nil {
+		s.WriteString(schemas.S3Destination_Bucket, *v.Bucket)
+	}
+	if v.KeyPrefix != nil {
+		s.WriteString(schemas.S3Destination_KeyPrefix, *v.KeyPrefix)
+	}
+}
+func (v *S3Destination) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.S3Destination, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.S3Destination_Bucket:
+			v.Bucket = new(string)
+			return d.ReadString(schemas.S3Destination_Bucket, v.Bucket)
+		case schemas.S3Destination_KeyPrefix:
+			v.KeyPrefix = new(string)
+			return d.ReadString(schemas.S3Destination_KeyPrefix, v.KeyPrefix)
+		}
+		return nil
+	})
 }
 
 // Provides the S3 bucket name and object name.
@@ -2222,6 +6089,40 @@ type S3Object struct {
 	noSmithyDocumentSerde
 }
 
+func (v *S3Object) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.S3Object)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *S3Object) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Bucket != nil {
+		s.WriteString(schemas.S3Object_Bucket, *v.Bucket)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.S3Object_Name, *v.Name)
+	}
+	if v.Version != nil {
+		s.WriteString(schemas.S3Object_Version, *v.Version)
+	}
+}
+func (v *S3Object) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.S3Object, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.S3Object_Bucket:
+			v.Bucket = new(string)
+			return d.ReadString(schemas.S3Object_Bucket, v.Bucket)
+		case schemas.S3Object_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.S3Object_Name, v.Name)
+		case schemas.S3Object_Version:
+			v.Version = new(string)
+			return d.ReadString(schemas.S3Object_Version, v.Version)
+		}
+		return nil
+	})
+}
+
 // Provides face metadata such as FaceId, BoundingBox, Confidence of the input
 // face used for search.
 type SearchedFace struct {
@@ -2230,6 +6131,28 @@ type SearchedFace struct {
 	FaceId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *SearchedFace) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SearchedFace)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SearchedFace) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FaceId != nil {
+		s.WriteString(schemas.SearchedFace_FaceId, *v.FaceId)
+	}
+}
+func (v *SearchedFace) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SearchedFace, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SearchedFace_FaceId:
+			v.FaceId = new(string)
+			return d.ReadString(schemas.SearchedFace_FaceId, v.FaceId)
+		}
+		return nil
+	})
 }
 
 // Contains data regarding the input face used for a search.
@@ -2261,6 +6184,30 @@ type SearchedFaceDetails struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SearchedFaceDetails) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SearchedFaceDetails)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SearchedFaceDetails) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FaceDetail != nil {
+		s.WriteStruct(schemas.SearchedFaceDetails_FaceDetail)
+		v.FaceDetail.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *SearchedFaceDetails) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SearchedFaceDetails, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SearchedFaceDetails_FaceDetail:
+			v.FaceDetail = &FaceDetail{}
+			return v.FaceDetail.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Contains metadata about a User searched for within a collection.
 type SearchedUser struct {
 
@@ -2268,6 +6215,28 @@ type SearchedUser struct {
 	UserId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *SearchedUser) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SearchedUser)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SearchedUser) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.UserId != nil {
+		s.WriteString(schemas.SearchedUser_UserId, *v.UserId)
+	}
+}
+func (v *SearchedUser) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SearchedUser, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SearchedUser_UserId:
+			v.UserId = new(string)
+			return d.ReadString(schemas.SearchedUser_UserId, v.UserId)
+		}
+		return nil
+	})
 }
 
 // A technical cue or shot detection segment detected in a video. An array of
@@ -2324,6 +6293,100 @@ type SegmentDetection struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SegmentDetection) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SegmentDetection)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SegmentDetection) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DurationFrames != nil {
+		s.WriteInt64(schemas.SegmentDetection_DurationFrames, *v.DurationFrames)
+	}
+	if v.DurationMillis != nil {
+		s.WriteInt64(schemas.SegmentDetection_DurationMillis, *v.DurationMillis)
+	}
+	if v.DurationSMPTE != nil {
+		s.WriteString(schemas.SegmentDetection_DurationSMPTE, *v.DurationSMPTE)
+	}
+	if v.EndFrameNumber != nil {
+		s.WriteInt64(schemas.SegmentDetection_EndFrameNumber, *v.EndFrameNumber)
+	}
+	if v.EndTimecodeSMPTE != nil {
+		s.WriteString(schemas.SegmentDetection_EndTimecodeSMPTE, *v.EndTimecodeSMPTE)
+	}
+	if v.EndTimestampMillis != 0 {
+		s.WriteInt64(schemas.SegmentDetection_EndTimestampMillis, v.EndTimestampMillis)
+	}
+	if v.ShotSegment != nil {
+		s.WriteStruct(schemas.SegmentDetection_ShotSegment)
+		v.ShotSegment.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.StartFrameNumber != nil {
+		s.WriteInt64(schemas.SegmentDetection_StartFrameNumber, *v.StartFrameNumber)
+	}
+	if v.StartTimecodeSMPTE != nil {
+		s.WriteString(schemas.SegmentDetection_StartTimecodeSMPTE, *v.StartTimecodeSMPTE)
+	}
+	if v.StartTimestampMillis != 0 {
+		s.WriteInt64(schemas.SegmentDetection_StartTimestampMillis, v.StartTimestampMillis)
+	}
+	if v.TechnicalCueSegment != nil {
+		s.WriteStruct(schemas.SegmentDetection_TechnicalCueSegment)
+		v.TechnicalCueSegment.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.SegmentDetection_Type, string(v.Type))
+	}
+}
+func (v *SegmentDetection) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SegmentDetection, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SegmentDetection_DurationFrames:
+			v.DurationFrames = new(int64)
+			return d.ReadInt64(schemas.SegmentDetection_DurationFrames, v.DurationFrames)
+		case schemas.SegmentDetection_DurationMillis:
+			v.DurationMillis = new(int64)
+			return d.ReadInt64(schemas.SegmentDetection_DurationMillis, v.DurationMillis)
+		case schemas.SegmentDetection_DurationSMPTE:
+			v.DurationSMPTE = new(string)
+			return d.ReadString(schemas.SegmentDetection_DurationSMPTE, v.DurationSMPTE)
+		case schemas.SegmentDetection_EndFrameNumber:
+			v.EndFrameNumber = new(int64)
+			return d.ReadInt64(schemas.SegmentDetection_EndFrameNumber, v.EndFrameNumber)
+		case schemas.SegmentDetection_EndTimecodeSMPTE:
+			v.EndTimecodeSMPTE = new(string)
+			return d.ReadString(schemas.SegmentDetection_EndTimecodeSMPTE, v.EndTimecodeSMPTE)
+		case schemas.SegmentDetection_EndTimestampMillis:
+			return d.ReadInt64(schemas.SegmentDetection_EndTimestampMillis, &v.EndTimestampMillis)
+		case schemas.SegmentDetection_ShotSegment:
+			v.ShotSegment = &ShotSegment{}
+			return v.ShotSegment.Deserialize(d)
+		case schemas.SegmentDetection_StartFrameNumber:
+			v.StartFrameNumber = new(int64)
+			return d.ReadInt64(schemas.SegmentDetection_StartFrameNumber, v.StartFrameNumber)
+		case schemas.SegmentDetection_StartTimecodeSMPTE:
+			v.StartTimecodeSMPTE = new(string)
+			return d.ReadString(schemas.SegmentDetection_StartTimecodeSMPTE, v.StartTimecodeSMPTE)
+		case schemas.SegmentDetection_StartTimestampMillis:
+			return d.ReadInt64(schemas.SegmentDetection_StartTimestampMillis, &v.StartTimestampMillis)
+		case schemas.SegmentDetection_TechnicalCueSegment:
+			v.TechnicalCueSegment = &TechnicalCueSegment{}
+			return v.TechnicalCueSegment.Deserialize(d)
+		case schemas.SegmentDetection_Type:
+			var ev string
+			if err := d.ReadString(schemas.SegmentDetection_Type, &ev); err != nil {
+				return err
+			}
+			v.Type = SegmentType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Information about the type of a segment requested in a call to StartSegmentDetection. An array of
 // SegmentTypeInfo objects is returned by the response from GetSegmentDetection.
 type SegmentTypeInfo struct {
@@ -2335,6 +6398,76 @@ type SegmentTypeInfo struct {
 	Type SegmentType
 
 	noSmithyDocumentSerde
+}
+
+func (v *SegmentTypeInfo) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SegmentTypeInfo)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SegmentTypeInfo) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ModelVersion != nil {
+		s.WriteString(schemas.SegmentTypeInfo_ModelVersion, *v.ModelVersion)
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.SegmentTypeInfo_Type, string(v.Type))
+	}
+}
+func (v *SegmentTypeInfo) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SegmentTypeInfo, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SegmentTypeInfo_ModelVersion:
+			v.ModelVersion = new(string)
+			return d.ReadString(schemas.SegmentTypeInfo_ModelVersion, v.ModelVersion)
+		case schemas.SegmentTypeInfo_Type:
+			var ev string
+			if err := d.ReadString(schemas.SegmentTypeInfo_Type, &ev); err != nil {
+				return err
+			}
+			v.Type = SegmentType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
+// Contains metadata about the client that streamed the video for a Face Liveness
+// session.
+type SessionMetadata struct {
+
+	// The type of SDK that was used to stream the video for the Face Liveness session.
+	//
+	// This value is self-reported by the client that streamed the session, and Amazon
+	// Rekognition doesn't verify it. Don't rely on it for authentication,
+	// authorization, or any other security decision.
+	//
+	// This member is required.
+	SDKType *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *SessionMetadata) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SessionMetadata)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SessionMetadata) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SDKType != nil {
+		s.WriteString(schemas.SessionMetadata_SDKType, *v.SDKType)
+	}
+}
+func (v *SessionMetadata) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SessionMetadata, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SessionMetadata_SDKType:
+			v.SDKType = new(string)
+			return d.ReadString(schemas.SessionMetadata_SDKType, v.SDKType)
+		}
+		return nil
+	})
 }
 
 // Information about a shot detection segment detected in a video. For more
@@ -2351,6 +6484,34 @@ type ShotSegment struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ShotSegment) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ShotSegment)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ShotSegment) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Confidence != nil {
+		s.WriteFloat32(schemas.ShotSegment_Confidence, *v.Confidence)
+	}
+	if v.Index != nil {
+		s.WriteInt64(schemas.ShotSegment_Index, *v.Index)
+	}
+}
+func (v *ShotSegment) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ShotSegment, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ShotSegment_Confidence:
+			v.Confidence = new(float32)
+			return d.ReadFloat32(schemas.ShotSegment_Confidence, v.Confidence)
+		case schemas.ShotSegment_Index:
+			v.Index = new(int64)
+			return d.ReadInt64(schemas.ShotSegment_Index, v.Index)
+		}
+		return nil
+	})
+}
+
 // Indicates whether or not the face is smiling, and the confidence level in the
 // determination.
 type Smile struct {
@@ -2364,6 +6525,33 @@ type Smile struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Smile) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Smile)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Smile) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Confidence != nil {
+		s.WriteFloat32(schemas.Smile_Confidence, *v.Confidence)
+	}
+	if v.Value != false {
+		s.WriteBool(schemas.Smile_Value, v.Value)
+	}
+}
+func (v *Smile) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Smile, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Smile_Confidence:
+			v.Confidence = new(float32)
+			return d.ReadFloat32(schemas.Smile_Confidence, v.Confidence)
+		case schemas.Smile_Value:
+			return d.ReadBool(schemas.Smile_Value, &v.Value)
+		}
+		return nil
+	})
+}
+
 // Filters applied to the technical cue or shot detection segments. For more
 // information, see StartSegmentDetection.
 type StartSegmentDetectionFilters struct {
@@ -2375,6 +6563,38 @@ type StartSegmentDetectionFilters struct {
 	TechnicalCueFilter *StartTechnicalCueDetectionFilter
 
 	noSmithyDocumentSerde
+}
+
+func (v *StartSegmentDetectionFilters) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartSegmentDetectionFilters)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartSegmentDetectionFilters) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ShotFilter != nil {
+		s.WriteStruct(schemas.StartSegmentDetectionFilters_ShotFilter)
+		v.ShotFilter.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TechnicalCueFilter != nil {
+		s.WriteStruct(schemas.StartSegmentDetectionFilters_TechnicalCueFilter)
+		v.TechnicalCueFilter.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *StartSegmentDetectionFilters) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartSegmentDetectionFilters, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartSegmentDetectionFilters_ShotFilter:
+			v.ShotFilter = &StartShotDetectionFilter{}
+			return v.ShotFilter.Deserialize(d)
+		case schemas.StartSegmentDetectionFilters_TechnicalCueFilter:
+			v.TechnicalCueFilter = &StartTechnicalCueDetectionFilter{}
+			return v.TechnicalCueFilter.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // Filters for the shot detection segments returned by GetSegmentDetection . For
@@ -2392,6 +6612,28 @@ type StartShotDetectionFilter struct {
 	MinSegmentConfidence *float32
 
 	noSmithyDocumentSerde
+}
+
+func (v *StartShotDetectionFilter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartShotDetectionFilter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartShotDetectionFilter) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MinSegmentConfidence != nil {
+		s.WriteFloat32(schemas.StartShotDetectionFilter_MinSegmentConfidence, *v.MinSegmentConfidence)
+	}
+}
+func (v *StartShotDetectionFilter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartShotDetectionFilter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartShotDetectionFilter_MinSegmentConfidence:
+			v.MinSegmentConfidence = new(float32)
+			return d.ReadFloat32(schemas.StartShotDetectionFilter_MinSegmentConfidence, v.MinSegmentConfidence)
+		}
+		return nil
+	})
 }
 
 // Filters for the technical segments returned by GetSegmentDetection. For more information, see StartSegmentDetectionFilters.
@@ -2416,6 +6658,36 @@ type StartTechnicalCueDetectionFilter struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartTechnicalCueDetectionFilter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartTechnicalCueDetectionFilter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartTechnicalCueDetectionFilter) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BlackFrame != nil {
+		s.WriteStruct(schemas.StartTechnicalCueDetectionFilter_BlackFrame)
+		v.BlackFrame.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MinSegmentConfidence != nil {
+		s.WriteFloat32(schemas.StartTechnicalCueDetectionFilter_MinSegmentConfidence, *v.MinSegmentConfidence)
+	}
+}
+func (v *StartTechnicalCueDetectionFilter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartTechnicalCueDetectionFilter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartTechnicalCueDetectionFilter_BlackFrame:
+			v.BlackFrame = &BlackFrame{}
+			return v.BlackFrame.Deserialize(d)
+		case schemas.StartTechnicalCueDetectionFilter_MinSegmentConfidence:
+			v.MinSegmentConfidence = new(float32)
+			return d.ReadFloat32(schemas.StartTechnicalCueDetectionFilter_MinSegmentConfidence, v.MinSegmentConfidence)
+		}
+		return nil
+	})
+}
+
 // Set of optional parameters that let you set the criteria text must meet to be
 // included in your response. WordFilter looks at a word's height, width and
 // minimum confidence. RegionOfInterest lets you set a specific region of the
@@ -2432,6 +6704,33 @@ type StartTextDetectionFilters struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartTextDetectionFilters) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartTextDetectionFilters)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartTextDetectionFilters) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeRegionsOfInterest(s, schemas.StartTextDetectionFilters_RegionsOfInterest, v.RegionsOfInterest)
+	if v.WordFilter != nil {
+		s.WriteStruct(schemas.StartTextDetectionFilters_WordFilter)
+		v.WordFilter.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *StartTextDetectionFilters) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartTextDetectionFilters, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartTextDetectionFilters_RegionsOfInterest:
+			return deserializeRegionsOfInterest(d, schemas.StartTextDetectionFilters_RegionsOfInterest, &v.RegionsOfInterest)
+		case schemas.StartTextDetectionFilters_WordFilter:
+			v.WordFilter = &DetectionFilter{}
+			return v.WordFilter.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // This is a required parameter for label detection stream processors and should
 // not be used to start a face search stream processor.
 type StreamProcessingStartSelector struct {
@@ -2441,6 +6740,30 @@ type StreamProcessingStartSelector struct {
 	KVSStreamStartSelector *KinesisVideoStreamStartSelector
 
 	noSmithyDocumentSerde
+}
+
+func (v *StreamProcessingStartSelector) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StreamProcessingStartSelector)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StreamProcessingStartSelector) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.KVSStreamStartSelector != nil {
+		s.WriteStruct(schemas.StreamProcessingStartSelector_KVSStreamStartSelector)
+		v.KVSStreamStartSelector.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *StreamProcessingStartSelector) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StreamProcessingStartSelector, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StreamProcessingStartSelector_KVSStreamStartSelector:
+			v.KVSStreamStartSelector = &KinesisVideoStreamStartSelector{}
+			return v.KVSStreamStartSelector.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 //	Specifies when to stop processing the stream. You can specify a maximum amount
@@ -2453,6 +6776,28 @@ type StreamProcessingStopSelector struct {
 	MaxDurationInSeconds *int64
 
 	noSmithyDocumentSerde
+}
+
+func (v *StreamProcessingStopSelector) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StreamProcessingStopSelector)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StreamProcessingStopSelector) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxDurationInSeconds != nil {
+		s.WriteInt64(schemas.StreamProcessingStopSelector_MaxDurationInSeconds, *v.MaxDurationInSeconds)
+	}
+}
+func (v *StreamProcessingStopSelector) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StreamProcessingStopSelector, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StreamProcessingStopSelector_MaxDurationInSeconds:
+			v.MaxDurationInSeconds = new(int64)
+			return d.ReadInt64(schemas.StreamProcessingStopSelector_MaxDurationInSeconds, v.MaxDurationInSeconds)
+		}
+		return nil
+	})
 }
 
 // An object that recognizes faces or labels in a streaming video. An Amazon
@@ -2471,6 +6816,38 @@ type StreamProcessor struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StreamProcessor) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StreamProcessor)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StreamProcessor) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.StreamProcessor_Name, *v.Name)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.StreamProcessor_Status, string(v.Status))
+	}
+}
+func (v *StreamProcessor) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StreamProcessor, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StreamProcessor_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.StreamProcessor_Name, v.Name)
+		case schemas.StreamProcessor_Status:
+			var ev string
+			if err := d.ReadString(schemas.StreamProcessor_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = StreamProcessorStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 //	Allows you to opt in or opt out to share data with Rekognition to improve
 //
 // model performance. You can choose this option at the account level or on a
@@ -2487,6 +6864,25 @@ type StreamProcessorDataSharingPreference struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StreamProcessorDataSharingPreference) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StreamProcessorDataSharingPreference)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StreamProcessorDataSharingPreference) SerializeMembers(s smithy.ShapeSerializer) {
+	s.WriteBool(schemas.StreamProcessorDataSharingPreference_OptIn, v.OptIn)
+}
+func (v *StreamProcessorDataSharingPreference) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StreamProcessorDataSharingPreference, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StreamProcessorDataSharingPreference_OptIn:
+			return d.ReadBool(schemas.StreamProcessorDataSharingPreference_OptIn, &v.OptIn)
+		}
+		return nil
+	})
+}
+
 // Information about the source streaming video.
 type StreamProcessorInput struct {
 
@@ -2494,6 +6890,30 @@ type StreamProcessorInput struct {
 	KinesisVideoStream *KinesisVideoStream
 
 	noSmithyDocumentSerde
+}
+
+func (v *StreamProcessorInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StreamProcessorInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StreamProcessorInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.KinesisVideoStream != nil {
+		s.WriteStruct(schemas.StreamProcessorInput_KinesisVideoStream)
+		v.KinesisVideoStream.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *StreamProcessorInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StreamProcessorInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StreamProcessorInput_KinesisVideoStream:
+			v.KinesisVideoStream = &KinesisVideoStream{}
+			return v.KinesisVideoStream.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // The Amazon Simple Notification Service topic to which Amazon Rekognition
@@ -2519,6 +6939,28 @@ type StreamProcessorNotificationChannel struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StreamProcessorNotificationChannel) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StreamProcessorNotificationChannel)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StreamProcessorNotificationChannel) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SNSTopicArn != nil {
+		s.WriteString(schemas.StreamProcessorNotificationChannel_SNSTopicArn, *v.SNSTopicArn)
+	}
+}
+func (v *StreamProcessorNotificationChannel) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StreamProcessorNotificationChannel, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StreamProcessorNotificationChannel_SNSTopicArn:
+			v.SNSTopicArn = new(string)
+			return d.ReadString(schemas.StreamProcessorNotificationChannel_SNSTopicArn, v.SNSTopicArn)
+		}
+		return nil
+	})
+}
+
 // Information about the Amazon Kinesis Data Streams stream to which a Amazon
 // Rekognition Video stream processor streams the results of a video analysis. For
 // more information, see CreateStreamProcessor in the Amazon Rekognition Developer
@@ -2534,6 +6976,38 @@ type StreamProcessorOutput struct {
 	S3Destination *S3Destination
 
 	noSmithyDocumentSerde
+}
+
+func (v *StreamProcessorOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StreamProcessorOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StreamProcessorOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.KinesisDataStream != nil {
+		s.WriteStruct(schemas.StreamProcessorOutput_KinesisDataStream)
+		v.KinesisDataStream.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.S3Destination != nil {
+		s.WriteStruct(schemas.StreamProcessorOutput_S3Destination)
+		v.S3Destination.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *StreamProcessorOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StreamProcessorOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StreamProcessorOutput_KinesisDataStream:
+			v.KinesisDataStream = &KinesisDataStream{}
+			return v.KinesisDataStream.Deserialize(d)
+		case schemas.StreamProcessorOutput_S3Destination:
+			v.S3Destination = &S3Destination{}
+			return v.S3Destination.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // Input parameters used in a streaming video analyzed by a Amazon Rekognition
@@ -2558,6 +7032,38 @@ type StreamProcessorSettings struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StreamProcessorSettings) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StreamProcessorSettings)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StreamProcessorSettings) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConnectedHome != nil {
+		s.WriteStruct(schemas.StreamProcessorSettings_ConnectedHome)
+		v.ConnectedHome.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.FaceSearch != nil {
+		s.WriteStruct(schemas.StreamProcessorSettings_FaceSearch)
+		v.FaceSearch.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *StreamProcessorSettings) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StreamProcessorSettings, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StreamProcessorSettings_ConnectedHome:
+			v.ConnectedHome = &ConnectedHomeSettings{}
+			return v.ConnectedHome.Deserialize(d)
+		case schemas.StreamProcessorSettings_FaceSearch:
+			v.FaceSearch = &FaceSearchSettings{}
+			return v.FaceSearch.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 //	The stream processor settings that you want to update. ConnectedHome settings
 //
 // can be updated to detect different labels with a different minimum confidence.
@@ -2567,6 +7073,30 @@ type StreamProcessorSettingsForUpdate struct {
 	ConnectedHomeForUpdate *ConnectedHomeSettingsForUpdate
 
 	noSmithyDocumentSerde
+}
+
+func (v *StreamProcessorSettingsForUpdate) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StreamProcessorSettingsForUpdate)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StreamProcessorSettingsForUpdate) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConnectedHomeForUpdate != nil {
+		s.WriteStruct(schemas.StreamProcessorSettingsForUpdate_ConnectedHomeForUpdate)
+		v.ConnectedHomeForUpdate.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *StreamProcessorSettingsForUpdate) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StreamProcessorSettingsForUpdate, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StreamProcessorSettingsForUpdate_ConnectedHomeForUpdate:
+			v.ConnectedHomeForUpdate = &ConnectedHomeSettingsForUpdate{}
+			return v.ConnectedHomeForUpdate.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // The S3 bucket that contains the training summary. The training summary includes
@@ -2589,6 +7119,30 @@ type Summary struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Summary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Summary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Summary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.S3Object != nil {
+		s.WriteStruct(schemas.Summary_S3Object)
+		v.S3Object.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *Summary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Summary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Summary_S3Object:
+			v.S3Object = &S3Object{}
+			return v.S3Object.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Indicates whether or not the face is wearing sunglasses, and the confidence
 // level in the determination.
 type Sunglasses struct {
@@ -2600,6 +7154,33 @@ type Sunglasses struct {
 	Value bool
 
 	noSmithyDocumentSerde
+}
+
+func (v *Sunglasses) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Sunglasses)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Sunglasses) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Confidence != nil {
+		s.WriteFloat32(schemas.Sunglasses_Confidence, *v.Confidence)
+	}
+	if v.Value != false {
+		s.WriteBool(schemas.Sunglasses_Value, v.Value)
+	}
+}
+func (v *Sunglasses) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Sunglasses, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Sunglasses_Confidence:
+			v.Confidence = new(float32)
+			return d.ReadFloat32(schemas.Sunglasses_Confidence, v.Confidence)
+		case schemas.Sunglasses_Value:
+			return d.ReadBool(schemas.Sunglasses_Value, &v.Value)
+		}
+		return nil
+	})
 }
 
 // Information about a technical cue segment. For more information, see SegmentDetection.
@@ -2615,6 +7196,38 @@ type TechnicalCueSegment struct {
 	noSmithyDocumentSerde
 }
 
+func (v *TechnicalCueSegment) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TechnicalCueSegment)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TechnicalCueSegment) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Confidence != nil {
+		s.WriteFloat32(schemas.TechnicalCueSegment_Confidence, *v.Confidence)
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.TechnicalCueSegment_Type, string(v.Type))
+	}
+}
+func (v *TechnicalCueSegment) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TechnicalCueSegment, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TechnicalCueSegment_Confidence:
+			v.Confidence = new(float32)
+			return d.ReadFloat32(schemas.TechnicalCueSegment_Confidence, v.Confidence)
+		case schemas.TechnicalCueSegment_Type:
+			var ev string
+			if err := d.ReadString(schemas.TechnicalCueSegment_Type, &ev); err != nil {
+				return err
+			}
+			v.Type = TechnicalCueType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // The dataset used for testing. Optionally, if AutoCreate is set, Amazon
 // Rekognition uses the training dataset to create a test dataset with a temporary
 // split of the training dataset.
@@ -2628,6 +7241,30 @@ type TestingData struct {
 	AutoCreate bool
 
 	noSmithyDocumentSerde
+}
+
+func (v *TestingData) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TestingData)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TestingData) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAssets(s, schemas.TestingData_Assets, v.Assets)
+	if v.AutoCreate != false {
+		s.WriteBool(schemas.TestingData_AutoCreate, v.AutoCreate)
+	}
+}
+func (v *TestingData) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TestingData, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TestingData_Assets:
+			return deserializeAssets(d, schemas.TestingData_Assets, &v.Assets)
+		case schemas.TestingData_AutoCreate:
+			return d.ReadBool(schemas.TestingData_AutoCreate, &v.AutoCreate)
+		}
+		return nil
+	})
 }
 
 // Sagemaker Groundtruth format manifest files for the input, output and
@@ -2646,6 +7283,46 @@ type TestingDataResult struct {
 	Validation *ValidationData
 
 	noSmithyDocumentSerde
+}
+
+func (v *TestingDataResult) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TestingDataResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TestingDataResult) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Input != nil {
+		s.WriteStruct(schemas.TestingDataResult_Input)
+		v.Input.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Output != nil {
+		s.WriteStruct(schemas.TestingDataResult_Output)
+		v.Output.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Validation != nil {
+		s.WriteStruct(schemas.TestingDataResult_Validation)
+		v.Validation.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *TestingDataResult) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TestingDataResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TestingDataResult_Input:
+			v.Input = &TestingData{}
+			return v.Input.Deserialize(d)
+		case schemas.TestingDataResult_Output:
+			v.Output = &TestingData{}
+			return v.Output.Deserialize(d)
+		case schemas.TestingDataResult_Validation:
+			v.Validation = &ValidationData{}
+			return v.Validation.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // Information about a word or line of text detected by DetectText.
@@ -2688,6 +7365,64 @@ type TextDetection struct {
 	noSmithyDocumentSerde
 }
 
+func (v *TextDetection) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TextDetection)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TextDetection) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Confidence != nil {
+		s.WriteFloat32(schemas.TextDetection_Confidence, *v.Confidence)
+	}
+	if v.DetectedText != nil {
+		s.WriteString(schemas.TextDetection_DetectedText, *v.DetectedText)
+	}
+	if v.Geometry != nil {
+		s.WriteStruct(schemas.TextDetection_Geometry)
+		v.Geometry.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Id != nil {
+		s.WriteInt32(schemas.TextDetection_Id, *v.Id)
+	}
+	if v.ParentId != nil {
+		s.WriteInt32(schemas.TextDetection_ParentId, *v.ParentId)
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.TextDetection_Type, string(v.Type))
+	}
+}
+func (v *TextDetection) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TextDetection, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TextDetection_Confidence:
+			v.Confidence = new(float32)
+			return d.ReadFloat32(schemas.TextDetection_Confidence, v.Confidence)
+		case schemas.TextDetection_DetectedText:
+			v.DetectedText = new(string)
+			return d.ReadString(schemas.TextDetection_DetectedText, v.DetectedText)
+		case schemas.TextDetection_Geometry:
+			v.Geometry = &Geometry{}
+			return v.Geometry.Deserialize(d)
+		case schemas.TextDetection_Id:
+			v.Id = new(int32)
+			return d.ReadInt32(schemas.TextDetection_Id, v.Id)
+		case schemas.TextDetection_ParentId:
+			v.ParentId = new(int32)
+			return d.ReadInt32(schemas.TextDetection_ParentId, v.ParentId)
+		case schemas.TextDetection_Type:
+			var ev string
+			if err := d.ReadString(schemas.TextDetection_Type, &ev); err != nil {
+				return err
+			}
+			v.Type = TextTypes(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Information about text detected in a video. Incudes the detected text, the time
 // in milliseconds from the start of the video that the text was detected, and
 // where it was detected on the screen.
@@ -2704,6 +7439,35 @@ type TextDetectionResult struct {
 	noSmithyDocumentSerde
 }
 
+func (v *TextDetectionResult) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TextDetectionResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TextDetectionResult) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TextDetection != nil {
+		s.WriteStruct(schemas.TextDetectionResult_TextDetection)
+		v.TextDetection.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Timestamp != 0 {
+		s.WriteInt64(schemas.TextDetectionResult_Timestamp, v.Timestamp)
+	}
+}
+func (v *TextDetectionResult) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TextDetectionResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TextDetectionResult_TextDetection:
+			v.TextDetection = &TextDetection{}
+			return v.TextDetection.Deserialize(d)
+		case schemas.TextDetectionResult_Timestamp:
+			return d.ReadInt64(schemas.TextDetectionResult_Timestamp, &v.Timestamp)
+		}
+		return nil
+	})
+}
+
 // The dataset used for training.
 type TrainingData struct {
 
@@ -2712,6 +7476,25 @@ type TrainingData struct {
 	Assets []Asset
 
 	noSmithyDocumentSerde
+}
+
+func (v *TrainingData) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TrainingData)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TrainingData) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAssets(s, schemas.TrainingData_Assets, v.Assets)
+}
+func (v *TrainingData) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TrainingData, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TrainingData_Assets:
+			return deserializeAssets(d, schemas.TrainingData_Assets, &v.Assets)
+		}
+		return nil
+	})
 }
 
 // The data validation manifest created for the training dataset during model
@@ -2730,6 +7513,46 @@ type TrainingDataResult struct {
 	Validation *ValidationData
 
 	noSmithyDocumentSerde
+}
+
+func (v *TrainingDataResult) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TrainingDataResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TrainingDataResult) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Input != nil {
+		s.WriteStruct(schemas.TrainingDataResult_Input)
+		v.Input.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Output != nil {
+		s.WriteStruct(schemas.TrainingDataResult_Output)
+		v.Output.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Validation != nil {
+		s.WriteStruct(schemas.TrainingDataResult_Validation)
+		v.Validation.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *TrainingDataResult) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TrainingDataResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TrainingDataResult_Input:
+			v.Input = &TrainingData{}
+			return v.Input.Deserialize(d)
+		case schemas.TrainingDataResult_Output:
+			v.Output = &TrainingData{}
+			return v.Output.Deserialize(d)
+		case schemas.TrainingDataResult_Validation:
+			v.Validation = &ValidationData{}
+			return v.Validation.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // A face that IndexFaces detected, but didn't index. Use the Reasons response attribute to
@@ -2758,6 +7581,33 @@ type UnindexedFace struct {
 	Reasons []Reason
 
 	noSmithyDocumentSerde
+}
+
+func (v *UnindexedFace) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UnindexedFace)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UnindexedFace) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FaceDetail != nil {
+		s.WriteStruct(schemas.UnindexedFace_FaceDetail)
+		v.FaceDetail.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeReasons(s, schemas.UnindexedFace_Reasons, v.Reasons)
+}
+func (v *UnindexedFace) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UnindexedFace, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UnindexedFace_FaceDetail:
+			v.FaceDetail = &FaceDetail{}
+			return v.FaceDetail.Deserialize(d)
+		case schemas.UnindexedFace_Reasons:
+			return deserializeReasons(d, schemas.UnindexedFace_Reasons, &v.Reasons)
+		}
+		return nil
+	})
 }
 
 // Face details inferred from the image but not used for search. The response
@@ -2793,6 +7643,33 @@ type UnsearchedFace struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UnsearchedFace) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UnsearchedFace)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UnsearchedFace) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FaceDetails != nil {
+		s.WriteStruct(schemas.UnsearchedFace_FaceDetails)
+		v.FaceDetails.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeUnsearchedFaceReasons(s, schemas.UnsearchedFace_Reasons, v.Reasons)
+}
+func (v *UnsearchedFace) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UnsearchedFace, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UnsearchedFace_FaceDetails:
+			v.FaceDetails = &FaceDetail{}
+			return v.FaceDetails.Deserialize(d)
+		case schemas.UnsearchedFace_Reasons:
+			return deserializeUnsearchedFaceReasons(d, schemas.UnsearchedFace_Reasons, &v.Reasons)
+		}
+		return nil
+	})
+}
+
 // Contains metadata like FaceId, UserID, and Reasons, for a face that was
 // unsuccessfully associated.
 type UnsuccessfulFaceAssociation struct {
@@ -2813,6 +7690,43 @@ type UnsuccessfulFaceAssociation struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UnsuccessfulFaceAssociation) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UnsuccessfulFaceAssociation)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UnsuccessfulFaceAssociation) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Confidence != nil {
+		s.WriteFloat32(schemas.UnsuccessfulFaceAssociation_Confidence, *v.Confidence)
+	}
+	if v.FaceId != nil {
+		s.WriteString(schemas.UnsuccessfulFaceAssociation_FaceId, *v.FaceId)
+	}
+	serializeUnsuccessfulFaceAssociationReasons(s, schemas.UnsuccessfulFaceAssociation_Reasons, v.Reasons)
+	if v.UserId != nil {
+		s.WriteString(schemas.UnsuccessfulFaceAssociation_UserId, *v.UserId)
+	}
+}
+func (v *UnsuccessfulFaceAssociation) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UnsuccessfulFaceAssociation, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UnsuccessfulFaceAssociation_Confidence:
+			v.Confidence = new(float32)
+			return d.ReadFloat32(schemas.UnsuccessfulFaceAssociation_Confidence, v.Confidence)
+		case schemas.UnsuccessfulFaceAssociation_FaceId:
+			v.FaceId = new(string)
+			return d.ReadString(schemas.UnsuccessfulFaceAssociation_FaceId, v.FaceId)
+		case schemas.UnsuccessfulFaceAssociation_Reasons:
+			return deserializeUnsuccessfulFaceAssociationReasons(d, schemas.UnsuccessfulFaceAssociation_Reasons, &v.Reasons)
+		case schemas.UnsuccessfulFaceAssociation_UserId:
+			v.UserId = new(string)
+			return d.ReadString(schemas.UnsuccessfulFaceAssociation_UserId, v.UserId)
+		}
+		return nil
+	})
+}
+
 // Contains metadata like FaceId, UserID, and Reasons, for a face that was
 // unsuccessfully deleted.
 type UnsuccessfulFaceDeletion struct {
@@ -2827,6 +7741,37 @@ type UnsuccessfulFaceDeletion struct {
 	UserId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *UnsuccessfulFaceDeletion) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UnsuccessfulFaceDeletion)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UnsuccessfulFaceDeletion) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FaceId != nil {
+		s.WriteString(schemas.UnsuccessfulFaceDeletion_FaceId, *v.FaceId)
+	}
+	serializeUnsuccessfulFaceDeletionReasons(s, schemas.UnsuccessfulFaceDeletion_Reasons, v.Reasons)
+	if v.UserId != nil {
+		s.WriteString(schemas.UnsuccessfulFaceDeletion_UserId, *v.UserId)
+	}
+}
+func (v *UnsuccessfulFaceDeletion) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UnsuccessfulFaceDeletion, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UnsuccessfulFaceDeletion_FaceId:
+			v.FaceId = new(string)
+			return d.ReadString(schemas.UnsuccessfulFaceDeletion_FaceId, v.FaceId)
+		case schemas.UnsuccessfulFaceDeletion_Reasons:
+			return deserializeUnsuccessfulFaceDeletionReasons(d, schemas.UnsuccessfulFaceDeletion_Reasons, &v.Reasons)
+		case schemas.UnsuccessfulFaceDeletion_UserId:
+			v.UserId = new(string)
+			return d.ReadString(schemas.UnsuccessfulFaceDeletion_UserId, v.UserId)
+		}
+		return nil
+	})
 }
 
 // Contains metadata like FaceId, UserID, and Reasons, for a face that was
@@ -2845,6 +7790,37 @@ type UnsuccessfulFaceDisassociation struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UnsuccessfulFaceDisassociation) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UnsuccessfulFaceDisassociation)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UnsuccessfulFaceDisassociation) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FaceId != nil {
+		s.WriteString(schemas.UnsuccessfulFaceDisassociation_FaceId, *v.FaceId)
+	}
+	serializeUnsuccessfulFaceDisassociationReasons(s, schemas.UnsuccessfulFaceDisassociation_Reasons, v.Reasons)
+	if v.UserId != nil {
+		s.WriteString(schemas.UnsuccessfulFaceDisassociation_UserId, *v.UserId)
+	}
+}
+func (v *UnsuccessfulFaceDisassociation) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UnsuccessfulFaceDisassociation, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UnsuccessfulFaceDisassociation_FaceId:
+			v.FaceId = new(string)
+			return d.ReadString(schemas.UnsuccessfulFaceDisassociation_FaceId, v.FaceId)
+		case schemas.UnsuccessfulFaceDisassociation_Reasons:
+			return deserializeUnsuccessfulFaceDisassociationReasons(d, schemas.UnsuccessfulFaceDisassociation_Reasons, &v.Reasons)
+		case schemas.UnsuccessfulFaceDisassociation_UserId:
+			v.UserId = new(string)
+			return d.ReadString(schemas.UnsuccessfulFaceDisassociation_UserId, v.UserId)
+		}
+		return nil
+	})
+}
+
 // Metadata of the user stored in a collection.
 type User struct {
 
@@ -2858,6 +7834,38 @@ type User struct {
 	noSmithyDocumentSerde
 }
 
+func (v *User) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.User)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *User) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.UserId != nil {
+		s.WriteString(schemas.User_UserId, *v.UserId)
+	}
+	if v.UserStatus != "" {
+		s.WriteString(schemas.User_UserStatus, string(v.UserStatus))
+	}
+}
+func (v *User) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.User, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.User_UserId:
+			v.UserId = new(string)
+			return d.ReadString(schemas.User_UserId, v.UserId)
+		case schemas.User_UserStatus:
+			var ev string
+			if err := d.ReadString(schemas.User_UserStatus, &ev); err != nil {
+				return err
+			}
+			v.UserStatus = UserStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Provides UserID metadata along with the confidence in the match of this UserID
 // with the input face.
 type UserMatch struct {
@@ -2869,6 +7877,36 @@ type UserMatch struct {
 	User *MatchedUser
 
 	noSmithyDocumentSerde
+}
+
+func (v *UserMatch) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UserMatch)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UserMatch) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Similarity != nil {
+		s.WriteFloat32(schemas.UserMatch_Similarity, *v.Similarity)
+	}
+	if v.User != nil {
+		s.WriteStruct(schemas.UserMatch_User)
+		v.User.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UserMatch) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UserMatch, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UserMatch_Similarity:
+			v.Similarity = new(float32)
+			return d.ReadFloat32(schemas.UserMatch_Similarity, v.Similarity)
+		case schemas.UserMatch_User:
+			v.User = &MatchedUser{}
+			return v.User.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // Contains the Amazon S3 bucket location of the validation data for a model
@@ -2891,6 +7929,25 @@ type ValidationData struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ValidationData) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ValidationData)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ValidationData) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAssets(s, schemas.ValidationData_Assets, v.Assets)
+}
+func (v *ValidationData) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ValidationData, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ValidationData_Assets:
+			return deserializeAssets(d, schemas.ValidationData_Assets, &v.Assets)
+		}
+		return nil
+	})
+}
+
 // Object specifying the acceptable range of challenge versions.
 type Versions struct {
 
@@ -2903,6 +7960,34 @@ type Versions struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Versions) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Versions)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Versions) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Maximum != nil {
+		s.WriteString(schemas.Versions_Maximum, *v.Maximum)
+	}
+	if v.Minimum != nil {
+		s.WriteString(schemas.Versions_Minimum, *v.Minimum)
+	}
+}
+func (v *Versions) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Versions, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Versions_Maximum:
+			v.Maximum = new(string)
+			return d.ReadString(schemas.Versions_Maximum, v.Maximum)
+		case schemas.Versions_Minimum:
+			v.Minimum = new(string)
+			return d.ReadString(schemas.Versions_Minimum, v.Minimum)
+		}
+		return nil
+	})
+}
+
 // Video file stored in an Amazon S3 bucket. Amazon Rekognition video start
 // operations such as StartLabelDetectionuse Video to specify a video for analysis. The supported
 // file formats are .mp4, .mov and .avi.
@@ -2912,6 +7997,30 @@ type Video struct {
 	S3Object *S3Object
 
 	noSmithyDocumentSerde
+}
+
+func (v *Video) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Video)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Video) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.S3Object != nil {
+		s.WriteStruct(schemas.Video_S3Object)
+		v.S3Object.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *Video) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Video, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Video_S3Object:
+			v.S3Object = &S3Object{}
+			return v.S3Object.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // Information about a video that Amazon Rekognition analyzed. Videometadata is
@@ -2942,6 +8051,68 @@ type VideoMetadata struct {
 	FrameWidth *int64
 
 	noSmithyDocumentSerde
+}
+
+func (v *VideoMetadata) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.VideoMetadata)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *VideoMetadata) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Codec != nil {
+		s.WriteString(schemas.VideoMetadata_Codec, *v.Codec)
+	}
+	if v.ColorRange != "" {
+		s.WriteString(schemas.VideoMetadata_ColorRange, string(v.ColorRange))
+	}
+	if v.DurationMillis != nil {
+		s.WriteInt64(schemas.VideoMetadata_DurationMillis, *v.DurationMillis)
+	}
+	if v.Format != nil {
+		s.WriteString(schemas.VideoMetadata_Format, *v.Format)
+	}
+	if v.FrameHeight != nil {
+		s.WriteInt64(schemas.VideoMetadata_FrameHeight, *v.FrameHeight)
+	}
+	if v.FrameRate != nil {
+		s.WriteFloat32(schemas.VideoMetadata_FrameRate, *v.FrameRate)
+	}
+	if v.FrameWidth != nil {
+		s.WriteInt64(schemas.VideoMetadata_FrameWidth, *v.FrameWidth)
+	}
+}
+func (v *VideoMetadata) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.VideoMetadata, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.VideoMetadata_Codec:
+			v.Codec = new(string)
+			return d.ReadString(schemas.VideoMetadata_Codec, v.Codec)
+		case schemas.VideoMetadata_ColorRange:
+			var ev string
+			if err := d.ReadString(schemas.VideoMetadata_ColorRange, &ev); err != nil {
+				return err
+			}
+			v.ColorRange = VideoColorRange(ev)
+			return nil
+		case schemas.VideoMetadata_DurationMillis:
+			v.DurationMillis = new(int64)
+			return d.ReadInt64(schemas.VideoMetadata_DurationMillis, v.DurationMillis)
+		case schemas.VideoMetadata_Format:
+			v.Format = new(string)
+			return d.ReadString(schemas.VideoMetadata_Format, v.Format)
+		case schemas.VideoMetadata_FrameHeight:
+			v.FrameHeight = new(int64)
+			return d.ReadInt64(schemas.VideoMetadata_FrameHeight, v.FrameHeight)
+		case schemas.VideoMetadata_FrameRate:
+			v.FrameRate = new(float32)
+			return d.ReadFloat32(schemas.VideoMetadata_FrameRate, v.FrameRate)
+		case schemas.VideoMetadata_FrameWidth:
+			v.FrameWidth = new(int64)
+			return d.ReadInt64(schemas.VideoMetadata_FrameWidth, v.FrameWidth)
+		}
+		return nil
+	})
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde

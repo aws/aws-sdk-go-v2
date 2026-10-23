@@ -4,7 +4,9 @@ package resiliencehubv2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/resiliencehubv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/resiliencehubv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -40,6 +42,21 @@ type GetTestRunInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetTestRunInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetTestRunRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetTestRunInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ServiceArn != nil {
+		s.WriteString(schemas.GetTestRunRequest_serviceArn, *v.ServiceArn)
+	}
+	if v.TestRunId != nil {
+		s.WriteString(schemas.GetTestRunRequest_testRunId, *v.TestRunId)
+	}
+}
+
 type GetTestRunOutput struct {
 
 	// The requested test run.
@@ -53,13 +70,34 @@ type GetTestRunOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetTestRunOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetTestRunResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetTestRunOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TestRun != nil {
+		s.WriteStruct(schemas.GetTestRunResponse_testRun)
+		v.TestRun.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetTestRunOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetTestRunResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetTestRunResponse_testRun:
+			v.TestRun = &types.TestRun{}
+			return v.TestRun.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetTestRunMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetTestRun{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetTestRun, schemas.GetTestRunRequest, schemas.GetTestRunResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetTestRun{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetTestRun, schemas.GetTestRunRequest, schemas.GetTestRunResponse), output: &GetTestRunOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

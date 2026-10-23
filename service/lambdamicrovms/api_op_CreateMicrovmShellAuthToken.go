@@ -4,6 +4,8 @@ package lambdamicrovms
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/lambdamicrovms/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -40,6 +42,21 @@ type CreateMicrovmShellAuthTokenInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateMicrovmShellAuthTokenInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateMicrovmShellAuthTokenRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateMicrovmShellAuthTokenInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ExpirationInMinutes != nil {
+		s.WriteInt32(schemas.CreateMicrovmShellAuthTokenRequest_expirationInMinutes, *v.ExpirationInMinutes)
+	}
+	if v.MicrovmIdentifier != nil {
+		s.WriteString(schemas.CreateMicrovmShellAuthTokenRequest_microvmIdentifier, *v.MicrovmIdentifier)
+	}
+}
+
 type CreateMicrovmShellAuthTokenOutput struct {
 
 	// The generated shell authentication token key-value pairs for accessing the
@@ -54,13 +71,29 @@ type CreateMicrovmShellAuthTokenOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateMicrovmShellAuthTokenOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateMicrovmShellAuthTokenResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateMicrovmShellAuthTokenOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeTokenParts(s, schemas.CreateMicrovmShellAuthTokenResponse_authToken, v.AuthToken)
+}
+func (v *CreateMicrovmShellAuthTokenOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateMicrovmShellAuthTokenResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateMicrovmShellAuthTokenResponse_authToken:
+			return deserializeTokenParts(d, schemas.CreateMicrovmShellAuthTokenResponse_authToken, &v.AuthToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateMicrovmShellAuthTokenMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateMicrovmShellAuthToken{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateMicrovmShellAuthToken, schemas.CreateMicrovmShellAuthTokenRequest, schemas.CreateMicrovmShellAuthTokenResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateMicrovmShellAuthToken{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateMicrovmShellAuthToken, schemas.CreateMicrovmShellAuthTokenRequest, schemas.CreateMicrovmShellAuthTokenResponse), output: &CreateMicrovmShellAuthTokenOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

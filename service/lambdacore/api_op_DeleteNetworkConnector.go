@@ -4,7 +4,9 @@ package lambdacore
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/lambdacore/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lambdacore/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -16,7 +18,13 @@ import (
 // This operation is idempotent — calling delete on a connector that is already
 // deleting or has been deleted succeeds without error. You can delete connectors
 // in ACTIVE or FAILED states. Before deleting a connector, ensure that no Lambda
-// MicroVMs are using it, as they will lose VPC egress connectivity immediately.
+// compute resources are using it, as they will lose VPC egress connectivity
+// immediately.
+//
+// Deleting with an unqualified identifier removes the connector and all of its
+// versions. To remove a single historical version, supply its version-qualified
+// ARN; the connector and its remaining versions are unaffected. You can't delete
+// the latest version on its own — delete the connector to remove it.
 func (c *Client) DeleteNetworkConnector(ctx context.Context, params *DeleteNetworkConnectorInput, optFns ...func(*Options)) (*DeleteNetworkConnectorOutput, error) {
 	if params == nil {
 		params = &DeleteNetworkConnectorInput{}
@@ -34,12 +42,28 @@ func (c *Client) DeleteNetworkConnector(ctx context.Context, params *DeleteNetwo
 
 type DeleteNetworkConnectorInput struct {
 
-	// A flexible identifier that accepts a network connector ID, name, or ARN
+	// The identifier of the network connector to delete. Provide an unqualified ARN
+	// (or an ID or name) to delete the entire connector and all of its versions, or a
+	// version-qualified ARN — one that includes the immutable version suffix — to
+	// delete a specific historical version. You can't delete the latest version with a
+	// version-qualified identifier; delete the connector instead.
 	//
 	// This member is required.
 	Identifier *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DeleteNetworkConnectorInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteNetworkConnectorRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteNetworkConnectorInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Identifier != nil {
+		s.WriteString(schemas.DeleteNetworkConnectorRequest_Identifier, *v.Identifier)
+	}
 }
 
 type DeleteNetworkConnectorOutput struct {
@@ -49,8 +73,7 @@ type DeleteNetworkConnectorOutput struct {
 	// This member is required.
 	Arn *string
 
-	// The unique identifier for a network connector, assigned by the service at
-	// creation time
+	// The unique identifier of the network connector.
 	//
 	// This member is required.
 	Id *string
@@ -72,19 +95,88 @@ type DeleteNetworkConnectorOutput struct {
 	// DELETING after this call.
 	State types.NetworkConnectorState
 
+	// The version number of the connector version affected by this request.
+	Version *int64
+
+	// The qualified ARN of the connector version affected by this request, including
+	// the immutable version suffix.
+	VersionArn *string
+
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteNetworkConnectorOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteNetworkConnectorResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteNetworkConnectorOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.DeleteNetworkConnectorResponse_Arn, *v.Arn)
+	}
+	serializeNetworkConnectorConfiguration(s, schemas.DeleteNetworkConnectorResponse_Configuration, v.Configuration)
+	if v.Id != nil {
+		s.WriteString(schemas.DeleteNetworkConnectorResponse_Id, *v.Id)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.DeleteNetworkConnectorResponse_Name, *v.Name)
+	}
+	if v.OperatorRole != nil {
+		s.WriteString(schemas.DeleteNetworkConnectorResponse_OperatorRole, *v.OperatorRole)
+	}
+	if v.State != "" {
+		s.WriteString(schemas.DeleteNetworkConnectorResponse_State, string(v.State))
+	}
+	if v.Version != nil {
+		s.WriteInt64(schemas.DeleteNetworkConnectorResponse_Version, *v.Version)
+	}
+	if v.VersionArn != nil {
+		s.WriteString(schemas.DeleteNetworkConnectorResponse_VersionArn, *v.VersionArn)
+	}
+}
+func (v *DeleteNetworkConnectorOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteNetworkConnectorResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteNetworkConnectorResponse_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.DeleteNetworkConnectorResponse_Arn, v.Arn)
+		case schemas.DeleteNetworkConnectorResponse_Configuration:
+			return deserializeNetworkConnectorConfiguration(d, schemas.DeleteNetworkConnectorResponse_Configuration, &v.Configuration)
+		case schemas.DeleteNetworkConnectorResponse_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.DeleteNetworkConnectorResponse_Id, v.Id)
+		case schemas.DeleteNetworkConnectorResponse_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.DeleteNetworkConnectorResponse_Name, v.Name)
+		case schemas.DeleteNetworkConnectorResponse_OperatorRole:
+			v.OperatorRole = new(string)
+			return d.ReadString(schemas.DeleteNetworkConnectorResponse_OperatorRole, v.OperatorRole)
+		case schemas.DeleteNetworkConnectorResponse_State:
+			var ev string
+			if err := d.ReadString(schemas.DeleteNetworkConnectorResponse_State, &ev); err != nil {
+				return err
+			}
+			v.State = types.NetworkConnectorState(ev)
+			return nil
+		case schemas.DeleteNetworkConnectorResponse_Version:
+			v.Version = new(int64)
+			return d.ReadInt64(schemas.DeleteNetworkConnectorResponse_Version, v.Version)
+		case schemas.DeleteNetworkConnectorResponse_VersionArn:
+			v.VersionArn = new(string)
+			return d.ReadString(schemas.DeleteNetworkConnectorResponse_VersionArn, v.VersionArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteNetworkConnectorMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteNetworkConnector{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteNetworkConnector, schemas.DeleteNetworkConnectorRequest, schemas.DeleteNetworkConnectorResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteNetworkConnector{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteNetworkConnector, schemas.DeleteNetworkConnectorRequest, schemas.DeleteNetworkConnectorResponse), output: &DeleteNetworkConnectorOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

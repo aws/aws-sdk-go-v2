@@ -365,8 +365,9 @@ func TestCheckResponseSnapshot_CreateStream(t *testing.T) {
 		Tags: map[string]string{
 			"key0": "__Value__",
 		},
-		WarmThroughputMiBps: ptr.Int32(1),
-		MaxRecordSizeInKiB:  ptr.Int32(1),
+		WarmThroughputMiBps:        ptr.Int32(1),
+		MaxRecordSizeInKiB:         ptr.Int32(1),
+		RecordDistributionStrategy: types.RecordDistributionStrategy("AUTO"),
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -811,8 +812,9 @@ func TestCheckResponseSnapshot_DescribeStreamSummary(t *testing.T) {
 				TargetMiBps:  ptr.Int32(1),
 				CurrentMiBps: ptr.Int32(1),
 			},
-			MaxRecordSizeInKiB: ptr.Int32(1),
-			ChannelCount:       ptr.Int32(1),
+			MaxRecordSizeInKiB:         ptr.Int32(1),
+			ChannelCount:               ptr.Int32(1),
+			RecordDistributionStrategy: types.RecordDistributionStrategy("AUTO"),
 		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("DescribeStreamSummary.response")
@@ -1918,6 +1920,29 @@ func TestCheckResponseSnapshot_UpdateStreamMode(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "UpdateStreamMode.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_UpdateStreamRecordDistributionStrategy(t *testing.T) {
+	want := &UpdateStreamRecordDistributionStrategyOutput{}
+	status, header, body, err := serdeRespReadSnapshot("UpdateStreamRecordDistributionStrategy.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.UpdateStreamRecordDistributionStrategy(context.Background(), &UpdateStreamRecordDistributionStrategyInput{
+		StreamARN:                  ptr.String("__StreamARN__"),
+		StreamId:                   ptr.String("__StreamId__"),
+		RecordDistributionStrategy: types.RecordDistributionStrategy("AUTO"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "UpdateStreamRecordDistributionStrategy.response", err)
 	}
 }
 

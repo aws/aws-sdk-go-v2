@@ -5,7 +5,9 @@ package ram
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/ram/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ram/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -72,6 +74,27 @@ type ListPermissionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListPermissionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListPermissionsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListPermissionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListPermissionsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListPermissionsRequest_nextToken, *v.NextToken)
+	}
+	if v.PermissionType != "" {
+		s.WriteString(schemas.ListPermissionsRequest_permissionType, string(v.PermissionType))
+	}
+	if v.ResourceType != nil {
+		s.WriteString(schemas.ListPermissionsRequest_resourceType, *v.ResourceType)
+	}
+}
+
 type ListPermissionsOutput struct {
 
 	// If present, this value indicates that more output is available than is included
@@ -90,13 +113,35 @@ type ListPermissionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListPermissionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListPermissionsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListPermissionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListPermissionsResponse_nextToken, *v.NextToken)
+	}
+	serializeResourceSharePermissionList(s, schemas.ListPermissionsResponse_permissions, v.Permissions)
+}
+func (v *ListPermissionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListPermissionsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListPermissionsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListPermissionsResponse_nextToken, v.NextToken)
+		case schemas.ListPermissionsResponse_permissions:
+			return deserializeResourceSharePermissionList(d, schemas.ListPermissionsResponse_permissions, &v.Permissions)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListPermissionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListPermissions{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListPermissions, schemas.ListPermissionsRequest, schemas.ListPermissionsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListPermissions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListPermissions, schemas.ListPermissionsRequest, schemas.ListPermissionsResponse), output: &ListPermissionsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

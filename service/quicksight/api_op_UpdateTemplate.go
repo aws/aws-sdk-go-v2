@@ -4,7 +4,9 @@ package quicksight
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/quicksight/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/quicksight/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -75,6 +77,42 @@ type UpdateTemplateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateTemplateInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateTemplateRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateTemplateInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AwsAccountId != nil {
+		s.WriteString(schemas.UpdateTemplateRequest_AwsAccountId, *v.AwsAccountId)
+	}
+	if v.Definition != nil {
+		s.WriteStruct(schemas.UpdateTemplateRequest_Definition)
+		v.Definition.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateTemplateRequest_Name, *v.Name)
+	}
+	if v.SourceEntity != nil {
+		s.WriteStruct(schemas.UpdateTemplateRequest_SourceEntity)
+		v.SourceEntity.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TemplateId != nil {
+		s.WriteString(schemas.UpdateTemplateRequest_TemplateId, *v.TemplateId)
+	}
+	if v.ValidationStrategy != nil {
+		s.WriteStruct(schemas.UpdateTemplateRequest_ValidationStrategy)
+		v.ValidationStrategy.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.VersionDescription != nil {
+		s.WriteString(schemas.UpdateTemplateRequest_VersionDescription, *v.VersionDescription)
+	}
+}
+
 type UpdateTemplateOutput struct {
 
 	// The Amazon Resource Name (ARN) for the template.
@@ -102,13 +140,65 @@ type UpdateTemplateOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateTemplateOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateTemplateResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateTemplateOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.UpdateTemplateResponse_Arn, *v.Arn)
+	}
+	if v.CreationStatus != "" {
+		s.WriteString(schemas.UpdateTemplateResponse_CreationStatus, string(v.CreationStatus))
+	}
+	if v.RequestId != nil {
+		s.WriteString(schemas.UpdateTemplateResponse_RequestId, *v.RequestId)
+	}
+	if v.Status != 0 {
+		s.WriteInt32(schemas.UpdateTemplateResponse_Status, v.Status)
+	}
+	if v.TemplateId != nil {
+		s.WriteString(schemas.UpdateTemplateResponse_TemplateId, *v.TemplateId)
+	}
+	if v.VersionArn != nil {
+		s.WriteString(schemas.UpdateTemplateResponse_VersionArn, *v.VersionArn)
+	}
+}
+func (v *UpdateTemplateOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateTemplateResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateTemplateResponse_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.UpdateTemplateResponse_Arn, v.Arn)
+		case schemas.UpdateTemplateResponse_CreationStatus:
+			var ev string
+			if err := d.ReadString(schemas.UpdateTemplateResponse_CreationStatus, &ev); err != nil {
+				return err
+			}
+			v.CreationStatus = types.ResourceStatus(ev)
+			return nil
+		case schemas.UpdateTemplateResponse_RequestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.UpdateTemplateResponse_RequestId, v.RequestId)
+		case schemas.UpdateTemplateResponse_Status:
+			return d.ReadInt32(schemas.UpdateTemplateResponse_Status, &v.Status)
+		case schemas.UpdateTemplateResponse_TemplateId:
+			v.TemplateId = new(string)
+			return d.ReadString(schemas.UpdateTemplateResponse_TemplateId, v.TemplateId)
+		case schemas.UpdateTemplateResponse_VersionArn:
+			v.VersionArn = new(string)
+			return d.ReadString(schemas.UpdateTemplateResponse_VersionArn, v.VersionArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateTemplate{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateTemplate, schemas.UpdateTemplateRequest, schemas.UpdateTemplateResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateTemplate{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateTemplate, schemas.UpdateTemplateRequest, schemas.UpdateTemplateResponse), output: &UpdateTemplateOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

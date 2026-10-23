@@ -298,6 +298,7 @@ func TestCheckResponseSnapshot_ContinueUpdateRollback(t *testing.T) {
 			"__Member__",
 		},
 		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+		ForceRollback:      ptr.Bool(true),
 	})
 	if err != nil {
 		t.Fatal(err)

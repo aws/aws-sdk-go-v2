@@ -5,7 +5,9 @@ package imagebuilder
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/imagebuilder/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/imagebuilder/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -30,14 +32,30 @@ type ListInfrastructureConfigurationsInput struct {
 	// You can filter on name to streamline results.
 	Filters []types.Filter
 
-	// Specify the maximum number of items to return in a request.
+	// The maximum number of items to return in a single request.
 	MaxResults *int32
 
-	// A token to specify where to start paginating. This is the nextToken from a
+	// A token to specify where to start paginating. Use the nextToken value from a
 	// previously truncated response.
 	NextToken *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ListInfrastructureConfigurationsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListInfrastructureConfigurationsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListInfrastructureConfigurationsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeFilterList(s, schemas.ListInfrastructureConfigurationsRequest_filters, v.Filters)
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListInfrastructureConfigurationsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListInfrastructureConfigurationsRequest_nextToken, *v.NextToken)
+	}
 }
 
 type ListInfrastructureConfigurationsOutput struct {
@@ -59,13 +77,41 @@ type ListInfrastructureConfigurationsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListInfrastructureConfigurationsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListInfrastructureConfigurationsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListInfrastructureConfigurationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeInfrastructureConfigurationSummaryList(s, schemas.ListInfrastructureConfigurationsResponse_infrastructureConfigurationSummaryList, v.InfrastructureConfigurationSummaryList)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListInfrastructureConfigurationsResponse_nextToken, *v.NextToken)
+	}
+	if v.RequestId != nil {
+		s.WriteString(schemas.ListInfrastructureConfigurationsResponse_requestId, *v.RequestId)
+	}
+}
+func (v *ListInfrastructureConfigurationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListInfrastructureConfigurationsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListInfrastructureConfigurationsResponse_infrastructureConfigurationSummaryList:
+			return deserializeInfrastructureConfigurationSummaryList(d, schemas.ListInfrastructureConfigurationsResponse_infrastructureConfigurationSummaryList, &v.InfrastructureConfigurationSummaryList)
+		case schemas.ListInfrastructureConfigurationsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListInfrastructureConfigurationsResponse_nextToken, v.NextToken)
+		case schemas.ListInfrastructureConfigurationsResponse_requestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.ListInfrastructureConfigurationsResponse_requestId, v.RequestId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListInfrastructureConfigurationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListInfrastructureConfigurations{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListInfrastructureConfigurations, schemas.ListInfrastructureConfigurationsRequest, schemas.ListInfrastructureConfigurationsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListInfrastructureConfigurations{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListInfrastructureConfigurations, schemas.ListInfrastructureConfigurationsRequest, schemas.ListInfrastructureConfigurationsResponse), output: &ListInfrastructureConfigurationsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 
@@ -102,7 +148,7 @@ func (c *Client) addOperationListInfrastructureConfigurationsMiddlewares(stack *
 // ListInfrastructureConfigurationsPaginatorOptions is the paginator options for
 // ListInfrastructureConfigurations
 type ListInfrastructureConfigurationsPaginatorOptions struct {
-	// Specify the maximum number of items to return in a request.
+	// The maximum number of items to return in a single request.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

@@ -553,6 +553,43 @@
                 }
             }
         },
+        "com.amazonaws.mediapackagev2#ContentKeyPeriodConfiguration": {
+            "type": "structure",
+            "members": {
+                "ContentKeyPeriodTiming": {
+                    "target": "com.amazonaws.mediapackagev2#ContentKeyPeriodTiming",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies what timing information MediaPackage signals in the <code>ContentKeyPeriod</code> to your DRM key provider. If you don't specify a value, the default is <code>INDEX_ONLY</code>. Signaling start and end times (<code>START_END_ONLY</code> or <code>INDEX_WITH_START_END</code>) also requires key rotation to be enabled.</p> <p>The allowed values are:</p> <ul> <li> <p> <code>INDEX_ONLY</code> - Signals only the content key index. This is the default and matches the current behavior. It's supported for both SPEKE Version 2.0 and 2.1.</p> </li> <li> <p> <code>START_END_ONLY</code> - Signals only the start and end times the key is used for. Requires <code>SpekeVersion</code> <code>V2_1</code>.</p> </li> <li> <p> <code>INDEX_WITH_START_END</code> - Signals both the content key index and the start and end times the key is used for. Requires <code>SpekeVersion</code> <code>V2_1</code>.</p> </li> </ul>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The configuration that controls the content key period timing information that MediaPackage signals to your DRM key provider.</p>"
+            }
+        },
+        "com.amazonaws.mediapackagev2#ContentKeyPeriodTiming": {
+            "type": "enum",
+            "members": {
+                "INDEX_ONLY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INDEX_ONLY"
+                    }
+                },
+                "START_END_ONLY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "START_END_ONLY"
+                    }
+                },
+                "INDEX_WITH_START_END": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INDEX_WITH_START_END"
+                    }
+                }
+            }
+        },
         "com.amazonaws.mediapackagev2#CreateChannel": {
             "type": "operation",
             "input": {
@@ -3844,6 +3881,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Optionally specify the clip start time for all of your manifest egress requests. When you include clip start time, note that you cannot use clip start time query parameters for this manifest's endpoint URL.</p>"
                     }
+                },
+                "Multiview": {
+                    "target": "com.amazonaws.mediapackagev2#MultiviewFilterConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Optionally pin this manifest to a single multiview combination, so that players request it without an <code>aws.multiview</code> query parameter. When you pin a combination, note that you cannot use the <code>aws.multiview</code> query parameter for this manifest's endpoint URL, even when that parameter requests the same combination.</p> <p>This setting is valid only on an origin endpoint whose channel has an <code>InputType</code> of <code>MULTIVIEW</code>.</p>"
+                    }
                 }
             },
             "traits": {
@@ -7001,6 +7044,28 @@
                 "smithy.api#documentation": "<p>The multiview configuration for a channel. A multiview channel composites video from several source channels into a single tiled output stream. Players receive one standard HLS or DASH stream instead of several separate streams. This setting is required when <code>InputType</code> is <code>MULTIVIEW</code>, and can't be set for any other input type.</p>"
             }
         },
+        "com.amazonaws.mediapackagev2#MultiviewFilterConfiguration": {
+            "type": "structure",
+            "members": {
+                "Layout": {
+                    "target": "com.amazonaws.mediapackagev2#MultiviewLayoutType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The layout that MediaPackage uses to composite the tiles into a single output. This layout must be one of the <code>AvailableLayouts</code> of the channel that this origin endpoint is on.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Sources": {
+                    "target": "com.amazonaws.mediapackagev2#MultiviewSourceList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The source channels to composite, in tile order. Each channel must be one of the <code>AvailableSources</code> of the channel that this origin endpoint is on, and the number of channels must equal the number of tiles in <code>Layout</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The multiview combination for a pinned manifest. MediaPackage serves the manifest with this layout and these sources, so players request it without an <code>aws.multiview</code> query parameter.</p> <p>If a request for a pinned manifest also includes an <code>aws.multiview</code> query parameter, MediaPackage rejects the request, even when that parameter requests the same combination.</p>"
+            }
+        },
         "com.amazonaws.mediapackagev2#MultiviewLayoutList": {
             "type": "list",
             "member": {
@@ -7055,7 +7120,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A tile layout for a multiview channel. Each layout determines how many source tiles are composited into the output and how those tiles are arranged.</p> <p>The allowed values are:</p> <ul> <li> <p> <code>LAYOUT_SINGLE</code> – One tile at full resolution. Use this to serve a single source as a standard stream.</p> </li> <li> <p> <code>LAYOUT_2EH</code> – Two tiles of equal size, arranged horizontally.</p> </li> <li> <p> <code>LAYOUT_2PL</code> – Two tiles, with one larger primary tile.</p> </li> <li> <p> <code>LAYOUT_3EB</code> – Three tiles of equal size, with two on top and one below.</p> </li> <li> <p> <code>LAYOUT_3EL</code> – Three tiles of equal size, arranged in two columns.</p> </li> <li> <p> <code>LAYOUT_3PL</code> – Three tiles, with one larger primary tile on the left and two stacked on the right.</p> </li> <li> <p> <code>LAYOUT_4E</code> – Four tiles of equal size, arranged in a two-by-two grid.</p> </li> <li> <p> <code>LAYOUT_4PL</code> – Four tiles, with one larger primary tile on the left and three stacked on the right.</p> </li> </ul>"
+                "smithy.api#documentation": "<p>A tile layout for a multiview channel. Each layout determines how many source tiles are composited into the output and how those tiles are arranged.</p> <p>The allowed values are:</p> <ul> <li> <p> <code>LAYOUT_2EH</code> – Two tiles of equal size, arranged horizontally.</p> </li> <li> <p> <code>LAYOUT_2PL</code> – Two tiles, with one larger primary tile.</p> </li> <li> <p> <code>LAYOUT_3EL</code> – Three tiles of equal size, arranged in two columns.</p> </li> <li> <p> <code>LAYOUT_3PL</code> – Three tiles, with one larger primary tile on the left and two stacked on the right.</p> </li> <li> <p> <code>LAYOUT_4E</code> – Four tiles of equal size, arranged in a two-by-two grid.</p> </li> <li> <p> <code>LAYOUT_4PL</code> – Four tiles, with one larger primary tile on the left and three stacked on the right.</p> </li> </ul>"
             }
         },
         "com.amazonaws.mediapackagev2#MultiviewSourceList": {
@@ -7067,7 +7132,7 @@
                 "smithy.api#documentation": "<p>A list of channel names that players can use as tiles in a multiview channel's output.</p>",
                 "smithy.api#length": {
                     "min": 1,
-                    "max": 10
+                    "max": 50
                 }
             }
         },
@@ -8337,10 +8402,39 @@
                         },
                         "smithy.api#pattern": "^arn:([^:\\n]+):acm:([^:\\n]+):([0-9]+):certificate/[a-zA-Z0-9-_]+$"
                     }
+                },
+                "SpekeVersion": {
+                    "target": "com.amazonaws.mediapackagev2#SpekeVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the SPEKE version used with your DRM key provider. If you don't specify a value, the default is <code>V2_0</code>.</p> <p>The allowed values are:</p> <ul> <li> <p> <code>V2_0</code> - Follows the SPEKE Version 2.0 contract and signals only the content key index in key requests. This is the default.</p> </li> <li> <p> <code>V2_1</code> - Follows the SPEKE Version 2.1 contract and additionally supports signaling the start and end times a content key is used for, using <code>ContentKeyPeriodConfiguration</code>.</p> </li> </ul> <p>For more information, see <a href=\"https://docs.aws.amazon.com/speke/latest/documentation/standard-payload-components-v2.html\">SPEKE Version 2.0 payload</a>.</p>"
+                    }
+                },
+                "ContentKeyPeriodConfiguration": {
+                    "target": "com.amazonaws.mediapackagev2#ContentKeyPeriodConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration that controls whether MediaPackage signals the start and end times a content key is used for, in the <code>ContentKeyPeriod</code> sent to your DRM key provider. Signaling this timing is supported only when key rotation is enabled (<code>KeyRotationIntervalSeconds</code> is set to a non-zero value) and <code>SpekeVersion</code> is <code>V2_1</code>. You can update these settings on an existing origin endpoint.</p>"
+                    }
                 }
             },
             "traits": {
                 "smithy.api#documentation": "<p>The parameters for the SPEKE key provider.</p>"
+            }
+        },
+        "com.amazonaws.mediapackagev2#SpekeVersion": {
+            "type": "enum",
+            "members": {
+                "V2_0": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "V2_0"
+                    }
+                },
+                "V2_1": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "V2_1"
+                    }
+                }
             }
         },
         "com.amazonaws.mediapackagev2#StartTag": {
@@ -10422,6 +10516,54 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "MULTIVIEW_SCTE_REQUIRES_AVAILS_PERIOD_TRIGGER"
+                    }
+                },
+                "CONTENT_KEY_PERIOD_TIMING_WITHOUT_KEY_ROTATION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CONTENT_KEY_PERIOD_TIMING_WITHOUT_KEY_ROTATION"
+                    }
+                },
+                "CONTENT_KEY_PERIOD_TIMING_REQUIRES_SPEKE_V2_1": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CONTENT_KEY_PERIOD_TIMING_REQUIRES_SPEKE_V2_1"
+                    }
+                },
+                "MULTIVIEW_FILTER_CONFIGURATION_NOT_ALLOWED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MULTIVIEW_FILTER_CONFIGURATION_NOT_ALLOWED"
+                    }
+                },
+                "MULTIVIEW_FILTER_LAYOUT_NOT_AVAILABLE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MULTIVIEW_FILTER_LAYOUT_NOT_AVAILABLE"
+                    }
+                },
+                "MULTIVIEW_FILTER_SOURCE_NOT_AVAILABLE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MULTIVIEW_FILTER_SOURCE_NOT_AVAILABLE"
+                    }
+                },
+                "MULTIVIEW_FILTER_SOURCE_COUNT_MISMATCH": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MULTIVIEW_FILTER_SOURCE_COUNT_MISMATCH"
+                    }
+                },
+                "MULTIVIEW_SOURCE_CHANNEL_LIMIT_EXCEEDED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MULTIVIEW_SOURCE_CHANNEL_LIMIT_EXCEEDED"
+                    }
+                },
+                "MULTIVIEW_TS_USE_AUDIO_RENDITION_GROUP_DISABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MULTIVIEW_TS_USE_AUDIO_RENDITION_GROUP_DISABLED"
                     }
                 }
             }

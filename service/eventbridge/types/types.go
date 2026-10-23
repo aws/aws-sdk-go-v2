@@ -1995,6 +1995,11 @@ type EventBus struct {
 	// The time the event bus was last modified.
 	LastModifiedTime *time.Time
 
+	// If the event bus was created on behalf of your account by an Amazon Web
+	// Services service, this field displays the principal name of the service that
+	// created the event bus.
+	ManagedBy *string
+
 	// The name of the event bus.
 	Name *string
 
@@ -2024,6 +2029,9 @@ func (v *EventBus) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.LastModifiedTime != nil {
 		s.WriteTime(schemas.EventBus_LastModifiedTime, *v.LastModifiedTime)
 	}
+	if v.ManagedBy != nil {
+		s.WriteString(schemas.EventBus_ManagedBy, *v.ManagedBy)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.EventBus_Name, *v.Name)
 	}
@@ -2046,6 +2054,9 @@ func (v *EventBus) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.EventBus_LastModifiedTime:
 			v.LastModifiedTime = new(time.Time)
 			return d.ReadTime(schemas.EventBus_LastModifiedTime, v.LastModifiedTime)
+		case schemas.EventBus_ManagedBy:
+			v.ManagedBy = new(string)
+			return d.ReadString(schemas.EventBus_ManagedBy, v.ManagedBy)
 		case schemas.EventBus_Name:
 			v.Name = new(string)
 			return d.ReadString(schemas.EventBus_Name, v.Name)
@@ -2380,7 +2391,7 @@ func (v *KinesisParameters) Deserialize(d smithy.ShapeDeserializer) error {
 //
 // For more information, see [Configuring logs for event buses] in the EventBridge User Guide.
 //
-// [Configuring logs for event buses]: https://docs.aws.amazon.com/eb-event-bus-logs.html
+// [Configuring logs for event buses]: https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-event-bus-logs.html
 type LogConfig struct {
 
 	// Whether EventBridge include detailed event information in the records it
@@ -3878,11 +3889,11 @@ func (v *Secondary) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
-// This structure includes the custom parameter to be used when the target is an
-// SQS FIFO queue.
+// The custom parameters for EventBridge to use for a target that is an Amazon SQS
+// fair or FIFO queue.
 type SqsParameters struct {
 
-	// The FIFO message group ID to use as the target.
+	// The ID of the message group to use as the target.
 	MessageGroupId *string
 
 	noSmithyDocumentSerde
@@ -4062,10 +4073,11 @@ type Target struct {
 	// events.
 	SageMakerPipelineParameters *SageMakerPipelineParameters
 
-	// Contains the message group ID to use when the target is a FIFO queue.
+	// Contains the message group ID to use when the target is an Amazon SQS fair or
+	// FIFO queue.
 	//
-	// If you specify an SQS FIFO queue as a target, the queue must have content-based
-	// deduplication enabled.
+	// If you specify a fair or FIFO queue as a target, the queue must have
+	// content-based deduplication enabled.
 	SqsParameters *SqsParameters
 
 	noSmithyDocumentSerde

@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"NetworkConnectorVersions":[{"Arn":"__Arn__","Id":"__Id__","LastModified":"2000-01-01T00:00:00Z","Name":"__Name__","State":"PENDING","StateReason":"__StateReason__","StateReasonCode":"DisallowedByVpcEncryptionControl","Version":1,"VersionArn":"__VersionArn__"},{"Arn":"__Arn__","Id":"__Id__","LastModified":"2000-01-01T00:00:00Z","Name":"__Name__","State":"PENDING","StateReason":"__StateReason__","StateReasonCode":"DisallowedByVpcEncryptionControl","Version":1,"VersionArn":"__VersionArn__"}],"NextMarker":"__NextMarker__"}

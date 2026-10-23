@@ -113,6 +113,13 @@ var GetBillingGroupCostReport = smithy.NewSchema(smithy.ShapeID{
 	URI:  "/get-billing-group-cost-report",
 	Code: 200})
 
+var GetBillingTransferPreference = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.billingconductor",
+	Name:      "GetBillingTransferPreference",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	URI:  "/get-billing-transfer-preference",
+	Code: 200})
+
 var ListAccountAssociations = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.billingconductor",
 	Name:      "ListAccountAssociations",
@@ -211,6 +218,13 @@ var UpdateBillingGroup = smithy.NewSchema(smithy.ShapeID{
 	URI:  "/update-billing-group",
 	Code: 200})
 
+var UpdateBillingTransferPreference = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.billingconductor",
+	Name:      "UpdateBillingTransferPreference",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	URI:  "/update-billing-transfer-preference",
+	Code: 200})
+
 var UpdateCustomLineItem = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.billingconductor",
 	Name:      "UpdateCustomLineItem",
@@ -242,7 +256,8 @@ var AWSBillingConductor = smithy.NewServiceSchema(_AWSBillingConductor, "2021-07
 var AccessDeniedException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.billingconductor",
 	Name:      "AccessDeniedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 403})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 403})
 var AccessDeniedException_Message *smithy.Schema
 
 var _AccountAssociationsList = smithy.NewSchema(smithy.ShapeID{
@@ -370,6 +385,14 @@ var _AttributeValueList = smithy.NewSchema(smithy.ShapeID{
 	Name:      "AttributeValueList",
 }, smithy.ShapeTypeList, 1)
 var _AttributeValueList_member *smithy.Schema
+
+var AutoTransferBillingGroupCreationPreference = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.billingconductor",
+	Name:      "AutoTransferBillingGroupCreationPreference",
+}, smithy.ShapeTypeStructure, 2)
+var AutoTransferBillingGroupCreationPreference_Enabled *smithy.Schema
+
+var AutoTransferBillingGroupCreationPreference_PricingPlanArn *smithy.Schema
 
 var _AWSCost = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.billingconductor",
@@ -557,7 +580,8 @@ var ComputationRuleEnum_CONSOLIDATED *smithy.Schema
 var ConflictException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.billingconductor",
 	Name:      "ConflictException",
-}, smithy.ShapeTypeStructure, 4, &smithytraits.HTTPError{Code: 409})
+}, smithy.ShapeTypeStructure, 4, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 409})
 var ConflictException_Message *smithy.Schema
 
 var ConflictException_ResourceId *smithy.Schema
@@ -569,12 +593,14 @@ var ConflictException_Reason *smithy.Schema
 var ConflictExceptionReason = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.billingconductor",
 	Name:      "ConflictExceptionReason",
-}, smithy.ShapeTypeEnum, 5)
+}, smithy.ShapeTypeEnum, 6)
 var ConflictExceptionReason_RESOURCE_NAME_CONFLICT *smithy.Schema
 
 var ConflictExceptionReason_PRICING_RULE_IN_PRICING_PLAN_CONFLICT *smithy.Schema
 
 var ConflictExceptionReason_PRICING_PLAN_ATTACHED_TO_BILLING_GROUP_DELETE_CONFLICT *smithy.Schema
+
+var ConflictExceptionReason_PRICING_PLAN_REFERENCED_BY_PREFERENCE_DELETE_CONFLICT *smithy.Schema
 
 var ConflictExceptionReason_PRICING_RULE_ATTACHED_TO_PRICING_PLAN_DELETE_CONFLICT *smithy.Schema
 
@@ -589,8 +615,10 @@ var CreateFreeTierConfig_Activated *smithy.Schema
 var CreateTieringInput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.billingconductor",
 	Name:      "CreateTieringInput",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 2)
 var CreateTieringInput_FreeTier *smithy.Schema
+
+var CreateTieringInput_CustomTiers *smithy.Schema
 
 var _Currency = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.billingconductor",
@@ -798,6 +826,37 @@ var CustomLineItemVersionListElement_ComputationRule *smithy.Schema
 
 var CustomLineItemVersionListElement_PresentationDetails *smithy.Schema
 
+var CustomTier = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.billingconductor",
+	Name:      "CustomTier",
+}, smithy.ShapeTypeStructure, 3)
+var CustomTier_BeginRangeInclusive *smithy.Schema
+
+var CustomTier_EndRangeExclusive *smithy.Schema
+
+var CustomTier_RateValue *smithy.Schema
+
+var _CustomTierBeginRangeInclusive = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.billingconductor",
+	Name:      "CustomTierBeginRangeInclusive",
+}, smithy.ShapeTypeDouble, 0)
+
+var _CustomTierEndRangeExclusive = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.billingconductor",
+	Name:      "CustomTierEndRangeExclusive",
+}, smithy.ShapeTypeDouble, 0)
+
+var _CustomTierRateValue = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.billingconductor",
+	Name:      "CustomTierRateValue",
+}, smithy.ShapeTypeDouble, 0)
+
+var _CustomTiersList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.billingconductor",
+	Name:      "CustomTiersList",
+}, smithy.ShapeTypeList, 1)
+var _CustomTiersList_member *smithy.Schema
+
 var DisassociateResourceResponseElement = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.billingconductor",
 	Name:      "DisassociateResourceResponseElement",
@@ -840,7 +899,8 @@ var _Instant = smithy.NewSchema(smithy.ShapeID{
 var InternalServerException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.billingconductor",
 	Name:      "InternalServerException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.HTTPError{Code: 500})
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "server"},
+	&smithytraits.HTTPError{Code: 500})
 var InternalServerException_Message *smithy.Schema
 
 var InternalServerException_RetryAfterSeconds *smithy.Schema
@@ -1245,7 +1305,8 @@ var _ProformaCost = smithy.NewSchema(smithy.ShapeID{
 var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.billingconductor",
 	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 3, &smithytraits.HTTPError{Code: 404})
+}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 404})
 var ResourceNotFoundException_Message *smithy.Schema
 
 var ResourceNotFoundException_ResourceId *smithy.Schema
@@ -1287,7 +1348,8 @@ var _Service = smithy.NewSchema(smithy.ShapeID{
 var ServiceLimitExceededException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.billingconductor",
 	Name:      "ServiceLimitExceededException",
-}, smithy.ShapeTypeStructure, 5, &smithytraits.HTTPError{Code: 402})
+}, smithy.ShapeTypeStructure, 5, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 402})
 var ServiceLimitExceededException_Message *smithy.Schema
 
 var ServiceLimitExceededException_ResourceId *smithy.Schema
@@ -1344,7 +1406,8 @@ var _TagValue = smithy.NewSchema(smithy.ShapeID{
 var ThrottlingException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.billingconductor",
 	Name:      "ThrottlingException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.HTTPError{Code: 429})
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 429})
 var ThrottlingException_Message *smithy.Schema
 
 var ThrottlingException_RetryAfterSeconds *smithy.Schema
@@ -1352,8 +1415,10 @@ var ThrottlingException_RetryAfterSeconds *smithy.Schema
 var Tiering = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.billingconductor",
 	Name:      "Tiering",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 2)
 var Tiering_FreeTier *smithy.Schema
+
+var Tiering_CustomTiers *smithy.Schema
 
 var _TieringActivated = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.billingconductor",
@@ -1404,8 +1469,10 @@ var UpdateFreeTierConfig_Activated *smithy.Schema
 var UpdateTieringInput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.billingconductor",
 	Name:      "UpdateTieringInput",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 2)
 var UpdateTieringInput_FreeTier *smithy.Schema
+
+var UpdateTieringInput_CustomTiers *smithy.Schema
 
 var _UsageType = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.billingconductor",
@@ -1415,7 +1482,8 @@ var _UsageType = smithy.NewSchema(smithy.ShapeID{
 var ValidationException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.billingconductor",
 	Name:      "ValidationException",
-}, smithy.ShapeTypeStructure, 3, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var ValidationException_Message *smithy.Schema
 
 var ValidationException_Reason *smithy.Schema
@@ -1844,6 +1912,22 @@ var GetBillingGroupCostReportOutput_BillingGroupCostReportResults *smithy.Schema
 
 var GetBillingGroupCostReportOutput_NextToken *smithy.Schema
 
+var GetBillingTransferPreferenceInput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.billingconductor",
+	Name:      "GetBillingTransferPreferenceInput",
+}, smithy.ShapeTypeStructure, 1)
+var GetBillingTransferPreferenceInput_ResponsibilityTransferArn *smithy.Schema
+
+var GetBillingTransferPreferenceOutput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.billingconductor",
+	Name:      "GetBillingTransferPreferenceOutput",
+}, smithy.ShapeTypeStructure, 3)
+var GetBillingTransferPreferenceOutput_ResponsibilityTransferArn *smithy.Schema
+
+var GetBillingTransferPreferenceOutput_AutoBillingTransferBillingGroupCreation *smithy.Schema
+
+var GetBillingTransferPreferenceOutput_LastModifiedTime *smithy.Schema
+
 var ListAccountAssociationsInput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.billingconductor",
 	Name:      "ListAccountAssociationsInput",
@@ -2136,6 +2220,26 @@ var UpdateBillingGroupOutput_StatusReason *smithy.Schema
 
 var UpdateBillingGroupOutput_AccountGrouping *smithy.Schema
 
+var UpdateBillingTransferPreferenceInput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.billingconductor",
+	Name:      "UpdateBillingTransferPreferenceInput",
+}, smithy.ShapeTypeStructure, 3)
+var UpdateBillingTransferPreferenceInput_ClientToken *smithy.Schema
+
+var UpdateBillingTransferPreferenceInput_ResponsibilityTransferArn *smithy.Schema
+
+var UpdateBillingTransferPreferenceInput_AutoBillingTransferBillingGroupCreation *smithy.Schema
+
+var UpdateBillingTransferPreferenceOutput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.billingconductor",
+	Name:      "UpdateBillingTransferPreferenceOutput",
+}, smithy.ShapeTypeStructure, 3)
+var UpdateBillingTransferPreferenceOutput_ResponsibilityTransferArn *smithy.Schema
+
+var UpdateBillingTransferPreferenceOutput_AutoBillingTransferBillingGroupCreation *smithy.Schema
+
+var UpdateBillingTransferPreferenceOutput_LastModifiedTime *smithy.Schema
+
 var UpdateCustomLineItemInput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.billingconductor",
 	Name:      "UpdateCustomLineItemInput",
@@ -2291,6 +2395,10 @@ func init() {
 
 	_AttributeValueList_member = _AttributeValueList.AddMember("member", _AttributeValue)
 
+	AutoTransferBillingGroupCreationPreference_Enabled = AutoTransferBillingGroupCreationPreference.AddMember("Enabled", smithyprelude.Boolean)
+
+	AutoTransferBillingGroupCreationPreference_PricingPlanArn = AutoTransferBillingGroupCreationPreference.AddMember("PricingPlanArn", _PricingPlanArn)
+
 	_BillingGroupArnList_member = _BillingGroupArnList.AddMember("member", _BillingGroupArn)
 
 	BillingGroupCostReportElement_Arn = BillingGroupCostReportElement.AddMember("Arn", _BillingGroupArn)
@@ -2383,6 +2491,8 @@ func init() {
 
 	ConflictExceptionReason_PRICING_PLAN_ATTACHED_TO_BILLING_GROUP_DELETE_CONFLICT = ConflictExceptionReason.AddMember("PRICING_PLAN_ATTACHED_TO_BILLING_GROUP_DELETE_CONFLICT", smithyprelude.Unit)
 
+	ConflictExceptionReason_PRICING_PLAN_REFERENCED_BY_PREFERENCE_DELETE_CONFLICT = ConflictExceptionReason.AddMember("PRICING_PLAN_REFERENCED_BY_PREFERENCE_DELETE_CONFLICT", smithyprelude.Unit)
+
 	ConflictExceptionReason_PRICING_RULE_ATTACHED_TO_PRICING_PLAN_DELETE_CONFLICT = ConflictExceptionReason.AddMember("PRICING_RULE_ATTACHED_TO_PRICING_PLAN_DELETE_CONFLICT", smithyprelude.Unit)
 
 	ConflictExceptionReason_WRITE_CONFLICT_RETRY = ConflictExceptionReason.AddMember("WRITE_CONFLICT_RETRY", smithyprelude.Unit)
@@ -2397,7 +2507,17 @@ func init() {
 
 	CreateFreeTierConfig_Activated = CreateFreeTierConfig.AddMember("Activated", _TieringActivated)
 
+	CustomTier_BeginRangeInclusive = CustomTier.AddMember("BeginRangeInclusive", _CustomTierBeginRangeInclusive)
+
+	CustomTier_EndRangeExclusive = CustomTier.AddMember("EndRangeExclusive", _CustomTierEndRangeExclusive)
+
+	CustomTier_RateValue = CustomTier.AddMember("RateValue", _CustomTierRateValue)
+
+	_CustomTiersList_member = _CustomTiersList.AddMember("member", CustomTier)
+
 	CreateTieringInput_FreeTier = CreateTieringInput.AddMember("FreeTier", CreateFreeTierConfig)
+
+	CreateTieringInput_CustomTiers = CreateTieringInput.AddMember("CustomTiers", _CustomTiersList)
 
 	CurrencyCode_USD = CurrencyCode.AddMember("USD", smithyprelude.Unit)
 
@@ -2657,6 +2777,8 @@ func init() {
 
 	Tiering_FreeTier = Tiering.AddMember("FreeTier", FreeTierConfig)
 
+	Tiering_CustomTiers = Tiering.AddMember("CustomTiers", _CustomTiersList)
+
 	PricingRuleListElement_Name = PricingRuleListElement.AddMember("Name", _PricingRuleName)
 
 	PricingRuleListElement_Arn = PricingRuleListElement.AddMember("Arn", _PricingRuleArn)
@@ -2730,6 +2852,8 @@ func init() {
 	UpdateFreeTierConfig_Activated = UpdateFreeTierConfig.AddMember("Activated", _TieringActivated)
 
 	UpdateTieringInput_FreeTier = UpdateTieringInput.AddMember("FreeTier", UpdateFreeTierConfig)
+
+	UpdateTieringInput_CustomTiers = UpdateTieringInput.AddMember("CustomTiers", _CustomTiersList)
 
 	ValidationExceptionReason_UNKNOWN_OPERATION = ValidationExceptionReason.AddMember("UNKNOWN_OPERATION", smithyprelude.Unit)
 
@@ -3027,6 +3151,14 @@ func init() {
 
 	GetBillingGroupCostReportOutput_NextToken = GetBillingGroupCostReportOutput.AddMember("NextToken", _Token)
 
+	GetBillingTransferPreferenceInput_ResponsibilityTransferArn = GetBillingTransferPreferenceInput.AddMember("ResponsibilityTransferArn", _ResponsibilityTransferArn)
+
+	GetBillingTransferPreferenceOutput_ResponsibilityTransferArn = GetBillingTransferPreferenceOutput.AddMember("ResponsibilityTransferArn", _ResponsibilityTransferArn)
+
+	GetBillingTransferPreferenceOutput_AutoBillingTransferBillingGroupCreation = GetBillingTransferPreferenceOutput.AddMember("AutoBillingTransferBillingGroupCreation", AutoTransferBillingGroupCreationPreference)
+
+	GetBillingTransferPreferenceOutput_LastModifiedTime = GetBillingTransferPreferenceOutput.AddMember("LastModifiedTime", _Instant)
+
 	ListAccountAssociationsInput_BillingPeriod = ListAccountAssociationsInput.AddMember("BillingPeriod", _BillingPeriod)
 
 	ListAccountAssociationsInput_Filters = ListAccountAssociationsInput.AddMember("Filters", ListAccountAssociationsFilter)
@@ -3204,6 +3336,18 @@ func init() {
 	UpdateBillingGroupOutput_StatusReason = UpdateBillingGroupOutput.AddMember("StatusReason", _BillingGroupStatusReason)
 
 	UpdateBillingGroupOutput_AccountGrouping = UpdateBillingGroupOutput.AddMember("AccountGrouping", UpdateBillingGroupAccountGrouping)
+
+	UpdateBillingTransferPreferenceInput_ClientToken = UpdateBillingTransferPreferenceInput.AddMember("ClientToken", _ClientToken, &smithytraits.HTTPHeader{Name: "X-Amzn-Client-Token"})
+
+	UpdateBillingTransferPreferenceInput_ResponsibilityTransferArn = UpdateBillingTransferPreferenceInput.AddMember("ResponsibilityTransferArn", _ResponsibilityTransferArn)
+
+	UpdateBillingTransferPreferenceInput_AutoBillingTransferBillingGroupCreation = UpdateBillingTransferPreferenceInput.AddMember("AutoBillingTransferBillingGroupCreation", AutoTransferBillingGroupCreationPreference)
+
+	UpdateBillingTransferPreferenceOutput_ResponsibilityTransferArn = UpdateBillingTransferPreferenceOutput.AddMember("ResponsibilityTransferArn", _ResponsibilityTransferArn)
+
+	UpdateBillingTransferPreferenceOutput_AutoBillingTransferBillingGroupCreation = UpdateBillingTransferPreferenceOutput.AddMember("AutoBillingTransferBillingGroupCreation", AutoTransferBillingGroupCreationPreference)
+
+	UpdateBillingTransferPreferenceOutput_LastModifiedTime = UpdateBillingTransferPreferenceOutput.AddMember("LastModifiedTime", _Instant)
 
 	UpdateCustomLineItemInput_Arn = UpdateCustomLineItemInput.AddMember("Arn", _CustomLineItemArn)
 

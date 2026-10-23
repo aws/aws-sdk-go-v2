@@ -5,7 +5,9 @@ package glue
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/glue/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/glue/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,21 @@ type ListRegistriesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListRegistriesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListRegistriesInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListRegistriesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListRegistriesInput_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListRegistriesInput_NextToken, *v.NextToken)
+	}
+}
+
 type ListRegistriesOutput struct {
 
 	// A continuation token for paginating the returned list of tokens, returned if
@@ -55,13 +72,35 @@ type ListRegistriesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListRegistriesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListRegistriesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListRegistriesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListRegistriesResponse_NextToken, *v.NextToken)
+	}
+	serializeRegistryListDefinition(s, schemas.ListRegistriesResponse_Registries, v.Registries)
+}
+func (v *ListRegistriesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListRegistriesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListRegistriesResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListRegistriesResponse_NextToken, v.NextToken)
+		case schemas.ListRegistriesResponse_Registries:
+			return deserializeRegistryListDefinition(d, schemas.ListRegistriesResponse_Registries, &v.Registries)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListRegistriesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListRegistries{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListRegistries, schemas.ListRegistriesInput, schemas.ListRegistriesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListRegistries{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListRegistries, schemas.ListRegistriesInput, schemas.ListRegistriesResponse), output: &ListRegistriesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

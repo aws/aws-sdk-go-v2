@@ -4,7 +4,9 @@ package iotwireless
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/iotwireless/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotwireless/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -51,6 +53,22 @@ type UpdatePositionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdatePositionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdatePositionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdatePositionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializePositionCoordinate(s, schemas.UpdatePositionRequest_Position, v.Position)
+	if v.ResourceIdentifier != nil {
+		s.WriteString(schemas.UpdatePositionRequest_ResourceIdentifier, *v.ResourceIdentifier)
+	}
+	if v.ResourceType != "" {
+		s.WriteString(schemas.UpdatePositionRequest_ResourceType, string(v.ResourceType))
+	}
+}
+
 type UpdatePositionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -58,13 +76,26 @@ type UpdatePositionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdatePositionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdatePositionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdatePositionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *UpdatePositionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdatePositionResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdatePositionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdatePosition{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdatePosition, schemas.UpdatePositionRequest, schemas.UpdatePositionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdatePosition{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdatePosition, schemas.UpdatePositionRequest, schemas.UpdatePositionResponse), output: &UpdatePositionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

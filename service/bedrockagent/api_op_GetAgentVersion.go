@@ -4,7 +4,9 @@ package bedrockagent
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/bedrockagent/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagent/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,21 @@ type GetAgentVersionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetAgentVersionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetAgentVersionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetAgentVersionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AgentId != nil {
+		s.WriteString(schemas.GetAgentVersionRequest_agentId, *v.AgentId)
+	}
+	if v.AgentVersion != nil {
+		s.WriteString(schemas.GetAgentVersionRequest_agentVersion, *v.AgentVersion)
+	}
+}
+
 type GetAgentVersionOutput struct {
 
 	// Contains details about the version of the agent.
@@ -52,13 +69,34 @@ type GetAgentVersionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetAgentVersionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetAgentVersionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetAgentVersionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AgentVersion != nil {
+		s.WriteStruct(schemas.GetAgentVersionResponse_agentVersion)
+		v.AgentVersion.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetAgentVersionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetAgentVersionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetAgentVersionResponse_agentVersion:
+			v.AgentVersion = &types.AgentVersion{}
+			return v.AgentVersion.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetAgentVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetAgentVersion{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAgentVersion, schemas.GetAgentVersionRequest, schemas.GetAgentVersionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetAgentVersion{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAgentVersion, schemas.GetAgentVersionRequest, schemas.GetAgentVersionResponse), output: &GetAgentVersionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

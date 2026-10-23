@@ -77,6 +77,30 @@ type CreateDistributionInput struct {
 	// [GetCertificates]: https://docs.aws.amazon.com/lightsail/2016-11-28/api-reference/API_GetCertificates.html
 	CertificateName *string
 
+	// An array of objects that describe the custom error responses for the
+	// distribution. With a custom error response, you can specify the page to return
+	// when the origin responds with a given HTTP error code. You can also specify the
+	// HTTP status code to send to the viewer.
+	CustomErrorResponses []types.DistributionCustomErrorResponse
+
+	// The object (for example, index.html ) that the distribution returns when a
+	// viewer requests the root URL of the distribution ( / ) instead of a specific
+	// object. The object that you specify must be available from the origin.
+	DefaultRootObject *string
+
+	// Specifies whether to enable private origin access for the distribution. With
+	// private origin access, the distribution can serve objects that aren't publicly
+	// accessible from a Lightsail bucket.
+	//
+	// Lightsail grants the distribution permission to read the bucket's objects.
+	// Enabling private origin access doesn't change the bucket's access settings, and
+	// you can still retrieve publicly accessible objects directly from the bucket's
+	// endpoint.
+	//
+	// You can enable private origin access only when the distribution's origin is a
+	// Lightsail bucket. If the origin is another resource type, the request fails.
+	EnablePrivateOriginAccess *bool
+
 	// The IP address type for the distribution.
 	//
 	// The possible values are ipv4 for IPv4 only, and dualstack for IPv4 and IPv6.
@@ -114,13 +138,20 @@ func (v *CreateDistributionInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.CertificateName != nil {
 		s.WriteString(schemas.CreateDistributionRequest_certificateName, *v.CertificateName)
 	}
+	serializeDistributionCustomErrorResponseList(s, schemas.CreateDistributionRequest_customErrorResponses, v.CustomErrorResponses)
 	if v.DefaultCacheBehavior != nil {
 		s.WriteStruct(schemas.CreateDistributionRequest_defaultCacheBehavior)
 		v.DefaultCacheBehavior.SerializeMembers(s)
 		s.CloseStruct()
 	}
+	if v.DefaultRootObject != nil {
+		s.WriteString(schemas.CreateDistributionRequest_defaultRootObject, *v.DefaultRootObject)
+	}
 	if v.DistributionName != nil {
 		s.WriteString(schemas.CreateDistributionRequest_distributionName, *v.DistributionName)
+	}
+	if v.EnablePrivateOriginAccess != nil {
+		s.WriteBool(schemas.CreateDistributionRequest_enablePrivateOriginAccess, *v.EnablePrivateOriginAccess)
 	}
 	if v.IpAddressType != "" {
 		s.WriteString(schemas.CreateDistributionRequest_ipAddressType, string(v.IpAddressType))

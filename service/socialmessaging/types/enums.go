@@ -53,3 +53,32 @@ func (RegistrationStatus) Values() []RegistrationStatus {
 		"INCOMPLETE",
 	}
 }
+
+type WhatsAppDayOfWeek string
+
+// Enum values for WhatsAppDayOfWeek
+const (
+	WhatsAppDayOfWeekMonday    WhatsAppDayOfWeek = "MONDAY"
+	WhatsAppDayOfWeekTuesday   WhatsAppDayOfWeek = "TUESDAY"
+	WhatsAppDayOfWeekWednesday WhatsAppDayOfWeek = "WEDNESDAY"
+	WhatsAppDayOfWeekThursday  WhatsAppDayOfWeek = "THURSDAY"
+	WhatsAppDayOfWeekFriday    WhatsAppDayOfWeek = "FRIDAY"
+	WhatsAppDayOfWeekSaturday  WhatsAppDayOfWeek = "SATURDAY"
+	WhatsAppDayOfWeekSunday    WhatsAppDayOfWeek = "SUNDAY"
+)
+
+// Values returns all known values for WhatsAppDayOfWeek. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (WhatsAppDayOfWeek) Values() []WhatsAppDayOfWeek {
+	return []WhatsAppDayOfWeek{
+		"MONDAY",
+		"TUESDAY",
+		"WEDNESDAY",
+		"THURSDAY",
+		"FRIDAY",
+		"SATURDAY",
+		"SUNDAY",
+	}
+}

@@ -4,6 +4,8 @@ package sesv2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/sesv2/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -47,6 +49,18 @@ type GetEmailIdentityPoliciesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetEmailIdentityPoliciesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetEmailIdentityPoliciesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetEmailIdentityPoliciesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EmailIdentity != nil {
+		s.WriteString(schemas.GetEmailIdentityPoliciesRequest_EmailIdentity, *v.EmailIdentity)
+	}
+}
+
 // Identity policies associated with email identity.
 type GetEmailIdentityPoliciesOutput struct {
 
@@ -59,13 +73,29 @@ type GetEmailIdentityPoliciesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetEmailIdentityPoliciesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetEmailIdentityPoliciesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetEmailIdentityPoliciesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializePolicyMap(s, schemas.GetEmailIdentityPoliciesResponse_Policies, v.Policies)
+}
+func (v *GetEmailIdentityPoliciesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetEmailIdentityPoliciesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetEmailIdentityPoliciesResponse_Policies:
+			return deserializePolicyMap(d, schemas.GetEmailIdentityPoliciesResponse_Policies, &v.Policies)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetEmailIdentityPoliciesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetEmailIdentityPolicies{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetEmailIdentityPolicies, schemas.GetEmailIdentityPoliciesRequest, schemas.GetEmailIdentityPoliciesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetEmailIdentityPolicies{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetEmailIdentityPolicies, schemas.GetEmailIdentityPoliciesRequest, schemas.GetEmailIdentityPoliciesResponse), output: &GetEmailIdentityPoliciesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

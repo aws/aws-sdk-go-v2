@@ -5,7 +5,9 @@ package appconfig
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/appconfig/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/appconfig/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -42,6 +44,24 @@ type ListEnvironmentsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListEnvironmentsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListEnvironmentsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListEnvironmentsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationId != nil {
+		s.WriteString(schemas.ListEnvironmentsRequest_ApplicationId, *v.ApplicationId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListEnvironmentsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListEnvironmentsRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListEnvironmentsOutput struct {
 
 	// The elements from this collection.
@@ -57,13 +77,35 @@ type ListEnvironmentsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListEnvironmentsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Environments)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListEnvironmentsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeEnvironmentList(s, schemas.Environments_Items, v.Items)
+	if v.NextToken != nil {
+		s.WriteString(schemas.Environments_NextToken, *v.NextToken)
+	}
+}
+func (v *ListEnvironmentsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Environments, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Environments_Items:
+			return deserializeEnvironmentList(d, schemas.Environments_Items, &v.Items)
+		case schemas.Environments_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.Environments_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListEnvironmentsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListEnvironments{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListEnvironments, schemas.ListEnvironmentsRequest, schemas.Environments)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListEnvironments{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListEnvironments, schemas.ListEnvironmentsRequest, schemas.Environments), output: &ListEnvironmentsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -5,8 +5,10 @@ package dynamodb
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/dynamodb/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/dynamodb/types"
 	internalEndpointDiscovery "github.com/aws/aws-sdk-go-v2/service/internal/endpoint-discovery"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -88,6 +90,41 @@ type RestoreTableFromBackupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RestoreTableFromBackupInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RestoreTableFromBackupInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RestoreTableFromBackupInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BackupArn != nil {
+		s.WriteString(schemas.RestoreTableFromBackupInput_BackupArn, *v.BackupArn)
+	}
+	if v.BillingModeOverride != "" {
+		s.WriteString(schemas.RestoreTableFromBackupInput_BillingModeOverride, string(v.BillingModeOverride))
+	}
+	serializeGlobalSecondaryIndexList(s, schemas.RestoreTableFromBackupInput_GlobalSecondaryIndexOverride, v.GlobalSecondaryIndexOverride)
+	serializeLocalSecondaryIndexList(s, schemas.RestoreTableFromBackupInput_LocalSecondaryIndexOverride, v.LocalSecondaryIndexOverride)
+	if v.OnDemandThroughputOverride != nil {
+		s.WriteStruct(schemas.RestoreTableFromBackupInput_OnDemandThroughputOverride)
+		v.OnDemandThroughputOverride.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ProvisionedThroughputOverride != nil {
+		s.WriteStruct(schemas.RestoreTableFromBackupInput_ProvisionedThroughputOverride)
+		v.ProvisionedThroughputOverride.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SSESpecificationOverride != nil {
+		s.WriteStruct(schemas.RestoreTableFromBackupInput_SSESpecificationOverride)
+		v.SSESpecificationOverride.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TargetTableName != nil {
+		s.WriteString(schemas.RestoreTableFromBackupInput_TargetTableName, *v.TargetTableName)
+	}
+	serializeVectorIndexList(s, schemas.RestoreTableFromBackupInput_VectorIndexOverride, v.VectorIndexOverride)
+}
 func (in *RestoreTableFromBackupInput) bindEndpointParams(p *EndpointParameters) {
 
 	p.ResourceArn = in.TargetTableName
@@ -105,13 +142,34 @@ type RestoreTableFromBackupOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RestoreTableFromBackupOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RestoreTableFromBackupOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RestoreTableFromBackupOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TableDescription != nil {
+		s.WriteStruct(schemas.RestoreTableFromBackupOutput_TableDescription)
+		v.TableDescription.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *RestoreTableFromBackupOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RestoreTableFromBackupOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RestoreTableFromBackupOutput_TableDescription:
+			v.TableDescription = &types.TableDescription{}
+			return v.TableDescription.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationRestoreTableFromBackupMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpRestoreTableFromBackup{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RestoreTableFromBackup, schemas.RestoreTableFromBackupInput, schemas.RestoreTableFromBackupOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpRestoreTableFromBackup{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RestoreTableFromBackup, schemas.RestoreTableFromBackupInput, schemas.RestoreTableFromBackupOutput), output: &RestoreTableFromBackupOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

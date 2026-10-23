@@ -4,7 +4,9 @@ package databasemigrationservice
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/databasemigrationservice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/databasemigrationservice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -74,6 +76,34 @@ type ModifyDataProviderInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ModifyDataProviderInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ModifyDataProviderMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ModifyDataProviderInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DataProviderIdentifier != nil {
+		s.WriteString(schemas.ModifyDataProviderMessage_DataProviderIdentifier, *v.DataProviderIdentifier)
+	}
+	if v.DataProviderName != nil {
+		s.WriteString(schemas.ModifyDataProviderMessage_DataProviderName, *v.DataProviderName)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.ModifyDataProviderMessage_Description, *v.Description)
+	}
+	if v.Engine != nil {
+		s.WriteString(schemas.ModifyDataProviderMessage_Engine, *v.Engine)
+	}
+	if v.ExactSettings != nil {
+		s.WriteBool(schemas.ModifyDataProviderMessage_ExactSettings, *v.ExactSettings)
+	}
+	serializeDataProviderSettings(s, schemas.ModifyDataProviderMessage_Settings, v.Settings)
+	if v.Virtual != nil {
+		s.WriteBool(schemas.ModifyDataProviderMessage_Virtual, *v.Virtual)
+	}
+}
+
 type ModifyDataProviderOutput struct {
 
 	// The data provider that was modified.
@@ -85,13 +115,34 @@ type ModifyDataProviderOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ModifyDataProviderOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ModifyDataProviderResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ModifyDataProviderOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DataProvider != nil {
+		s.WriteStruct(schemas.ModifyDataProviderResponse_DataProvider)
+		v.DataProvider.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *ModifyDataProviderOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ModifyDataProviderResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ModifyDataProviderResponse_DataProvider:
+			v.DataProvider = &types.DataProvider{}
+			return v.DataProvider.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationModifyDataProviderMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpModifyDataProvider{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ModifyDataProvider, schemas.ModifyDataProviderMessage, schemas.ModifyDataProviderResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpModifyDataProvider{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ModifyDataProvider, schemas.ModifyDataProviderMessage, schemas.ModifyDataProviderResponse), output: &ModifyDataProviderOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

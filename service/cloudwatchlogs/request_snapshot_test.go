@@ -1272,6 +1272,10 @@ func TestCheckRequestSnapshot_DescribeDeliveries(t *testing.T) {
 	input := &DescribeDeliveriesInput{
 		NextToken: ptr.String("__NextToken__"),
 		Limit:     ptr.Int32(1),
+		DeliverySourceNames: []string{
+			"__Member__",
+			"__Member__",
+		},
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -1300,6 +1304,10 @@ func TestCheckRequestSnapshot_DescribeDeliveryDestinations(t *testing.T) {
 	input := &DescribeDeliveryDestinationsInput{
 		NextToken: ptr.String("__NextToken__"),
 		Limit:     ptr.Int32(1),
+		Names: []string{
+			"__Member__",
+			"__Member__",
+		},
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -1328,6 +1336,10 @@ func TestCheckRequestSnapshot_DescribeDeliverySources(t *testing.T) {
 	input := &DescribeDeliverySourcesInput{
 		NextToken: ptr.String("__NextToken__"),
 		Limit:     ptr.Int32(1),
+		ResourceArns: []string{
+			"__Member__",
+			"__Member__",
+		},
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -2837,6 +2849,7 @@ func TestCheckRequestSnapshot_PutDeliveryDestination(t *testing.T) {
 			DestinationResourceArn: ptr.String("__DestinationResourceArn__"),
 		},
 		DeliveryDestinationType: types.DeliveryDestinationType("S3"),
+		RoleArn:                 ptr.String("__RoleArn__"),
 		Tags: map[string]string{
 			"key0": "__Value__",
 		},
@@ -5677,6 +5690,10 @@ func TestUpdateRequestSnapshot_DescribeDeliveries(t *testing.T) {
 	input := &DescribeDeliveriesInput{
 		NextToken: ptr.String("__NextToken__"),
 		Limit:     ptr.Int32(1),
+		DeliverySourceNames: []string{
+			"__Member__",
+			"__Member__",
+		},
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -5705,6 +5722,10 @@ func TestUpdateRequestSnapshot_DescribeDeliveryDestinations(t *testing.T) {
 	input := &DescribeDeliveryDestinationsInput{
 		NextToken: ptr.String("__NextToken__"),
 		Limit:     ptr.Int32(1),
+		Names: []string{
+			"__Member__",
+			"__Member__",
+		},
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -5733,6 +5754,10 @@ func TestUpdateRequestSnapshot_DescribeDeliverySources(t *testing.T) {
 	input := &DescribeDeliverySourcesInput{
 		NextToken: ptr.String("__NextToken__"),
 		Limit:     ptr.Int32(1),
+		ResourceArns: []string{
+			"__Member__",
+			"__Member__",
+		},
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -7242,6 +7267,7 @@ func TestUpdateRequestSnapshot_PutDeliveryDestination(t *testing.T) {
 			DestinationResourceArn: ptr.String("__DestinationResourceArn__"),
 		},
 		DeliveryDestinationType: types.DeliveryDestinationType("S3"),
+		RoleArn:                 ptr.String("__RoleArn__"),
 		Tags: map[string]string{
 			"key0": "__Value__",
 		},

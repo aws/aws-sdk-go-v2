@@ -5,7 +5,9 @@ package efs
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/efs/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/efs/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -46,6 +48,24 @@ type DescribeReplicationConfigurationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeReplicationConfigurationsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeReplicationConfigurationsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeReplicationConfigurationsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FileSystemId != nil {
+		s.WriteString(schemas.DescribeReplicationConfigurationsRequest_FileSystemId, *v.FileSystemId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.DescribeReplicationConfigurationsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeReplicationConfigurationsRequest_NextToken, *v.NextToken)
+	}
+}
+
 type DescribeReplicationConfigurationsOutput struct {
 
 	// You can use the NextToken from the previous response in a subsequent request to
@@ -61,13 +81,35 @@ type DescribeReplicationConfigurationsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeReplicationConfigurationsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeReplicationConfigurationsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeReplicationConfigurationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeReplicationConfigurationsResponse_NextToken, *v.NextToken)
+	}
+	serializeReplicationConfigurationDescriptions(s, schemas.DescribeReplicationConfigurationsResponse_Replications, v.Replications)
+}
+func (v *DescribeReplicationConfigurationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeReplicationConfigurationsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeReplicationConfigurationsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.DescribeReplicationConfigurationsResponse_NextToken, v.NextToken)
+		case schemas.DescribeReplicationConfigurationsResponse_Replications:
+			return deserializeReplicationConfigurationDescriptions(d, schemas.DescribeReplicationConfigurationsResponse_Replications, &v.Replications)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeReplicationConfigurationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeReplicationConfigurations{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeReplicationConfigurations, schemas.DescribeReplicationConfigurationsRequest, schemas.DescribeReplicationConfigurationsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeReplicationConfigurations{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeReplicationConfigurations, schemas.DescribeReplicationConfigurationsRequest, schemas.DescribeReplicationConfigurationsResponse), output: &DescribeReplicationConfigurationsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

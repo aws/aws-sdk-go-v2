@@ -4,7 +4,9 @@ package elasticsearchservice
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/elasticsearchservice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/elasticsearchservice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -114,6 +116,92 @@ type UpdateElasticsearchDomainConfigInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateElasticsearchDomainConfigInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateElasticsearchDomainConfigRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateElasticsearchDomainConfigInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccessPolicies != nil {
+		s.WriteString(schemas.UpdateElasticsearchDomainConfigRequest_AccessPolicies, *v.AccessPolicies)
+	}
+	serializeAdvancedOptions(s, schemas.UpdateElasticsearchDomainConfigRequest_AdvancedOptions, v.AdvancedOptions)
+	if v.AdvancedSecurityOptions != nil {
+		s.WriteStruct(schemas.UpdateElasticsearchDomainConfigRequest_AdvancedSecurityOptions)
+		v.AdvancedSecurityOptions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.AutoTuneOptions != nil {
+		s.WriteStruct(schemas.UpdateElasticsearchDomainConfigRequest_AutoTuneOptions)
+		v.AutoTuneOptions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.AutomatedSnapshotPauseOptions != nil {
+		s.WriteStruct(schemas.UpdateElasticsearchDomainConfigRequest_AutomatedSnapshotPauseOptions)
+		v.AutomatedSnapshotPauseOptions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CognitoOptions != nil {
+		s.WriteStruct(schemas.UpdateElasticsearchDomainConfigRequest_CognitoOptions)
+		v.CognitoOptions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DeploymentStrategyOptions != nil {
+		s.WriteStruct(schemas.UpdateElasticsearchDomainConfigRequest_DeploymentStrategyOptions)
+		v.DeploymentStrategyOptions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DomainEndpointOptions != nil {
+		s.WriteStruct(schemas.UpdateElasticsearchDomainConfigRequest_DomainEndpointOptions)
+		v.DomainEndpointOptions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DomainName != nil {
+		s.WriteString(schemas.UpdateElasticsearchDomainConfigRequest_DomainName, *v.DomainName)
+	}
+	if v.DryRun != nil {
+		s.WriteBool(schemas.UpdateElasticsearchDomainConfigRequest_DryRun, *v.DryRun)
+	}
+	if v.EBSOptions != nil {
+		s.WriteStruct(schemas.UpdateElasticsearchDomainConfigRequest_EBSOptions)
+		v.EBSOptions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ElasticsearchClusterConfig != nil {
+		s.WriteStruct(schemas.UpdateElasticsearchDomainConfigRequest_ElasticsearchClusterConfig)
+		v.ElasticsearchClusterConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.EncryptionAtRestOptions != nil {
+		s.WriteStruct(schemas.UpdateElasticsearchDomainConfigRequest_EncryptionAtRestOptions)
+		v.EncryptionAtRestOptions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.EngineMode != "" {
+		s.WriteString(schemas.UpdateElasticsearchDomainConfigRequest_EngineMode, string(v.EngineMode))
+	}
+	serializeLogPublishingOptions(s, schemas.UpdateElasticsearchDomainConfigRequest_LogPublishingOptions, v.LogPublishingOptions)
+	if v.NodeToNodeEncryptionOptions != nil {
+		s.WriteStruct(schemas.UpdateElasticsearchDomainConfigRequest_NodeToNodeEncryptionOptions)
+		v.NodeToNodeEncryptionOptions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SnapshotOptions != nil {
+		s.WriteStruct(schemas.UpdateElasticsearchDomainConfigRequest_SnapshotOptions)
+		v.SnapshotOptions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.UseCase != "" {
+		s.WriteString(schemas.UpdateElasticsearchDomainConfigRequest_UseCase, string(v.UseCase))
+	}
+	if v.VPCOptions != nil {
+		s.WriteStruct(schemas.UpdateElasticsearchDomainConfigRequest_VPCOptions)
+		v.VPCOptions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 // The result of an UpdateElasticsearchDomain request. Contains the status of the
 // Elasticsearch domain being updated.
 type UpdateElasticsearchDomainConfigOutput struct {
@@ -132,13 +220,42 @@ type UpdateElasticsearchDomainConfigOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateElasticsearchDomainConfigOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateElasticsearchDomainConfigResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateElasticsearchDomainConfigOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DomainConfig != nil {
+		s.WriteStruct(schemas.UpdateElasticsearchDomainConfigResponse_DomainConfig)
+		v.DomainConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DryRunResults != nil {
+		s.WriteStruct(schemas.UpdateElasticsearchDomainConfigResponse_DryRunResults)
+		v.DryRunResults.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateElasticsearchDomainConfigOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateElasticsearchDomainConfigResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateElasticsearchDomainConfigResponse_DomainConfig:
+			v.DomainConfig = &types.ElasticsearchDomainConfig{}
+			return v.DomainConfig.Deserialize(d)
+		case schemas.UpdateElasticsearchDomainConfigResponse_DryRunResults:
+			v.DryRunResults = &types.DryRunResults{}
+			return v.DryRunResults.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateElasticsearchDomainConfigMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateElasticsearchDomainConfig{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateElasticsearchDomainConfig, schemas.UpdateElasticsearchDomainConfigRequest, schemas.UpdateElasticsearchDomainConfigResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateElasticsearchDomainConfig{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateElasticsearchDomainConfig, schemas.UpdateElasticsearchDomainConfigRequest, schemas.UpdateElasticsearchDomainConfigResponse), output: &UpdateElasticsearchDomainConfigOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

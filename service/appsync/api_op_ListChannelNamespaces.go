@@ -5,7 +5,9 @@ package appsync
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/appsync/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/appsync/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -45,6 +47,24 @@ type ListChannelNamespacesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListChannelNamespacesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListChannelNamespacesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListChannelNamespacesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApiId != nil {
+		s.WriteString(schemas.ListChannelNamespacesRequest_apiId, *v.ApiId)
+	}
+	if v.MaxResults != 0 {
+		s.WriteInt32(schemas.ListChannelNamespacesRequest_maxResults, v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListChannelNamespacesRequest_nextToken, *v.NextToken)
+	}
+}
+
 type ListChannelNamespacesOutput struct {
 
 	// The ChannelNamespace objects.
@@ -60,13 +80,35 @@ type ListChannelNamespacesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListChannelNamespacesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListChannelNamespacesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListChannelNamespacesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeChannelNamespaces(s, schemas.ListChannelNamespacesResponse_channelNamespaces, v.ChannelNamespaces)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListChannelNamespacesResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListChannelNamespacesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListChannelNamespacesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListChannelNamespacesResponse_channelNamespaces:
+			return deserializeChannelNamespaces(d, schemas.ListChannelNamespacesResponse_channelNamespaces, &v.ChannelNamespaces)
+		case schemas.ListChannelNamespacesResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListChannelNamespacesResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListChannelNamespacesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListChannelNamespaces{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListChannelNamespaces, schemas.ListChannelNamespacesRequest, schemas.ListChannelNamespacesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListChannelNamespaces{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListChannelNamespaces, schemas.ListChannelNamespacesRequest, schemas.ListChannelNamespacesResponse), output: &ListChannelNamespacesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package mediaconvert
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/mediaconvert/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/mediaconvert/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -68,6 +70,44 @@ type UpdateJobTemplateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateJobTemplateInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateJobTemplateRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateJobTemplateInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccelerationSettings != nil {
+		s.WriteStruct(schemas.UpdateJobTemplateRequest_AccelerationSettings)
+		v.AccelerationSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Category != nil {
+		s.WriteString(schemas.UpdateJobTemplateRequest_Category, *v.Category)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateJobTemplateRequest_Description, *v.Description)
+	}
+	serialize__listOfHopDestination(s, schemas.UpdateJobTemplateRequest_HopDestinations, v.HopDestinations)
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateJobTemplateRequest_Name, *v.Name)
+	}
+	if v.Priority != nil {
+		s.WriteInt32(schemas.UpdateJobTemplateRequest_Priority, *v.Priority)
+	}
+	if v.Queue != nil {
+		s.WriteString(schemas.UpdateJobTemplateRequest_Queue, *v.Queue)
+	}
+	if v.Settings != nil {
+		s.WriteStruct(schemas.UpdateJobTemplateRequest_Settings)
+		v.Settings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.StatusUpdateInterval != "" {
+		s.WriteString(schemas.UpdateJobTemplateRequest_StatusUpdateInterval, string(v.StatusUpdateInterval))
+	}
+}
+
 type UpdateJobTemplateOutput struct {
 
 	// A job template is a pre-made set of encoding instructions that you can use to
@@ -80,13 +120,34 @@ type UpdateJobTemplateOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateJobTemplateOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateJobTemplateResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateJobTemplateOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.JobTemplate != nil {
+		s.WriteStruct(schemas.UpdateJobTemplateResponse_JobTemplate)
+		v.JobTemplate.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateJobTemplateOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateJobTemplateResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateJobTemplateResponse_JobTemplate:
+			v.JobTemplate = &types.JobTemplate{}
+			return v.JobTemplate.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateJobTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateJobTemplate{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateJobTemplate, schemas.UpdateJobTemplateRequest, schemas.UpdateJobTemplateResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateJobTemplate{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateJobTemplate, schemas.UpdateJobTemplateRequest, schemas.UpdateJobTemplateResponse), output: &UpdateJobTemplateOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

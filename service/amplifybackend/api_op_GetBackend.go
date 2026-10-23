@@ -4,6 +4,8 @@ package amplifybackend
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/amplifybackend/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -37,6 +39,21 @@ type GetBackendInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetBackendInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetBackendRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetBackendInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AppId != nil {
+		s.WriteString(schemas.GetBackendRequest_AppId, *v.AppId)
+	}
+	if v.BackendEnvironmentName != nil {
+		s.WriteString(schemas.GetBackendRequest_BackendEnvironmentName, *v.BackendEnvironmentName)
+	}
+}
+
 type GetBackendOutput struct {
 
 	// A stringified version of the cli.json file for your Amplify project.
@@ -66,13 +83,65 @@ type GetBackendOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetBackendOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetBackendResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetBackendOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AmplifyFeatureFlags != nil {
+		s.WriteString(schemas.GetBackendResponse_AmplifyFeatureFlags, *v.AmplifyFeatureFlags)
+	}
+	if v.AmplifyMetaConfig != nil {
+		s.WriteString(schemas.GetBackendResponse_AmplifyMetaConfig, *v.AmplifyMetaConfig)
+	}
+	if v.AppId != nil {
+		s.WriteString(schemas.GetBackendResponse_AppId, *v.AppId)
+	}
+	if v.AppName != nil {
+		s.WriteString(schemas.GetBackendResponse_AppName, *v.AppName)
+	}
+	serializeListOf__string(s, schemas.GetBackendResponse_BackendEnvironmentList, v.BackendEnvironmentList)
+	if v.BackendEnvironmentName != nil {
+		s.WriteString(schemas.GetBackendResponse_BackendEnvironmentName, *v.BackendEnvironmentName)
+	}
+	if v.Error != nil {
+		s.WriteString(schemas.GetBackendResponse_Error, *v.Error)
+	}
+}
+func (v *GetBackendOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetBackendResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetBackendResponse_AmplifyFeatureFlags:
+			v.AmplifyFeatureFlags = new(string)
+			return d.ReadString(schemas.GetBackendResponse_AmplifyFeatureFlags, v.AmplifyFeatureFlags)
+		case schemas.GetBackendResponse_AmplifyMetaConfig:
+			v.AmplifyMetaConfig = new(string)
+			return d.ReadString(schemas.GetBackendResponse_AmplifyMetaConfig, v.AmplifyMetaConfig)
+		case schemas.GetBackendResponse_AppId:
+			v.AppId = new(string)
+			return d.ReadString(schemas.GetBackendResponse_AppId, v.AppId)
+		case schemas.GetBackendResponse_AppName:
+			v.AppName = new(string)
+			return d.ReadString(schemas.GetBackendResponse_AppName, v.AppName)
+		case schemas.GetBackendResponse_BackendEnvironmentList:
+			return deserializeListOf__string(d, schemas.GetBackendResponse_BackendEnvironmentList, &v.BackendEnvironmentList)
+		case schemas.GetBackendResponse_BackendEnvironmentName:
+			v.BackendEnvironmentName = new(string)
+			return d.ReadString(schemas.GetBackendResponse_BackendEnvironmentName, v.BackendEnvironmentName)
+		case schemas.GetBackendResponse_Error:
+			v.Error = new(string)
+			return d.ReadString(schemas.GetBackendResponse_Error, v.Error)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetBackendMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetBackend{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetBackend, schemas.GetBackendRequest, schemas.GetBackendResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetBackend{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetBackend, schemas.GetBackendRequest, schemas.GetBackendResponse), output: &GetBackendOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -5,7 +5,9 @@ package apigateway
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/apigateway/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/apigateway/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -38,6 +40,21 @@ type GetRestApisInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetRestApisInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetRestApisRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetRestApisInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Limit != nil {
+		s.WriteInt32(schemas.GetRestApisRequest_limit, *v.Limit)
+	}
+	if v.Position != nil {
+		s.WriteString(schemas.GetRestApisRequest_position, *v.Position)
+	}
+}
+
 // Contains references to your APIs and links that guide you in how to interact
 // with your collection. A collection offers a paginated view of your APIs.
 type GetRestApisOutput struct {
@@ -54,13 +71,35 @@ type GetRestApisOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetRestApisOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RestApis)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetRestApisOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeListOfRestApi(s, schemas.RestApis_items, v.Items)
+	if v.Position != nil {
+		s.WriteString(schemas.RestApis_position, *v.Position)
+	}
+}
+func (v *GetRestApisOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RestApis, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RestApis_items:
+			return deserializeListOfRestApi(d, schemas.RestApis_items, &v.Items)
+		case schemas.RestApis_position:
+			v.Position = new(string)
+			return d.ReadString(schemas.RestApis_position, v.Position)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetRestApisMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetRestApis{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetRestApis, schemas.GetRestApisRequest, schemas.RestApis)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetRestApis{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetRestApis, schemas.GetRestApisRequest, schemas.RestApis), output: &GetRestApisOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

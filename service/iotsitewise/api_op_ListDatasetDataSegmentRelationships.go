@@ -5,7 +5,9 @@ package iotsitewise
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/iotsitewise/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotsitewise/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -50,6 +52,27 @@ type ListDatasetDataSegmentRelationshipsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListDatasetDataSegmentRelationshipsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListDatasetDataSegmentRelationshipsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListDatasetDataSegmentRelationshipsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DatasetId != nil {
+		s.WriteString(schemas.ListDatasetDataSegmentRelationshipsRequest_datasetId, *v.DatasetId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListDatasetDataSegmentRelationshipsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListDatasetDataSegmentRelationshipsRequest_nextToken, *v.NextToken)
+	}
+	if v.WorkspaceName != nil {
+		s.WriteString(schemas.ListDatasetDataSegmentRelationshipsRequest_workspaceName, *v.WorkspaceName)
+	}
+}
+
 type ListDatasetDataSegmentRelationshipsOutput struct {
 
 	// A list that summarizes each data segment relationship.
@@ -67,13 +90,35 @@ type ListDatasetDataSegmentRelationshipsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListDatasetDataSegmentRelationshipsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListDatasetDataSegmentRelationshipsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListDatasetDataSegmentRelationshipsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDataSegmentRelationshipSummaries(s, schemas.ListDatasetDataSegmentRelationshipsResponse_dataSegmentRelationshipSummaries, v.DataSegmentRelationshipSummaries)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListDatasetDataSegmentRelationshipsResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListDatasetDataSegmentRelationshipsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListDatasetDataSegmentRelationshipsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListDatasetDataSegmentRelationshipsResponse_dataSegmentRelationshipSummaries:
+			return deserializeDataSegmentRelationshipSummaries(d, schemas.ListDatasetDataSegmentRelationshipsResponse_dataSegmentRelationshipSummaries, &v.DataSegmentRelationshipSummaries)
+		case schemas.ListDatasetDataSegmentRelationshipsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListDatasetDataSegmentRelationshipsResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListDatasetDataSegmentRelationshipsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListDatasetDataSegmentRelationships{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDatasetDataSegmentRelationships, schemas.ListDatasetDataSegmentRelationshipsRequest, schemas.ListDatasetDataSegmentRelationshipsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListDatasetDataSegmentRelationships{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDatasetDataSegmentRelationships, schemas.ListDatasetDataSegmentRelationshipsRequest, schemas.ListDatasetDataSegmentRelationshipsResponse), output: &ListDatasetDataSegmentRelationshipsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

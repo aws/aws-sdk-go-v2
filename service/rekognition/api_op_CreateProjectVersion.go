@@ -4,7 +4,9 @@ package rekognition
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/rekognition/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/rekognition/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -120,6 +122,48 @@ type CreateProjectVersionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateProjectVersionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateProjectVersionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateProjectVersionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FeatureConfig != nil {
+		s.WriteStruct(schemas.CreateProjectVersionRequest_FeatureConfig)
+		v.FeatureConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.KmsKeyId != nil {
+		s.WriteString(schemas.CreateProjectVersionRequest_KmsKeyId, *v.KmsKeyId)
+	}
+	if v.OutputConfig != nil {
+		s.WriteStruct(schemas.CreateProjectVersionRequest_OutputConfig)
+		v.OutputConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ProjectArn != nil {
+		s.WriteString(schemas.CreateProjectVersionRequest_ProjectArn, *v.ProjectArn)
+	}
+	serializeTagMap(s, schemas.CreateProjectVersionRequest_Tags, v.Tags)
+	if v.TestingData != nil {
+		s.WriteStruct(schemas.CreateProjectVersionRequest_TestingData)
+		v.TestingData.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TrainingData != nil {
+		s.WriteStruct(schemas.CreateProjectVersionRequest_TrainingData)
+		v.TrainingData.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.VersionDescription != nil {
+		s.WriteString(schemas.CreateProjectVersionRequest_VersionDescription, *v.VersionDescription)
+	}
+	if v.VersionName != nil {
+		s.WriteString(schemas.CreateProjectVersionRequest_VersionName, *v.VersionName)
+	}
+}
+
 type CreateProjectVersionOutput struct {
 
 	// The ARN of the model or the project version that was created. Use
@@ -132,13 +176,32 @@ type CreateProjectVersionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateProjectVersionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateProjectVersionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateProjectVersionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ProjectVersionArn != nil {
+		s.WriteString(schemas.CreateProjectVersionResponse_ProjectVersionArn, *v.ProjectVersionArn)
+	}
+}
+func (v *CreateProjectVersionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateProjectVersionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateProjectVersionResponse_ProjectVersionArn:
+			v.ProjectVersionArn = new(string)
+			return d.ReadString(schemas.CreateProjectVersionResponse_ProjectVersionArn, v.ProjectVersionArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateProjectVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateProjectVersion{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateProjectVersion, schemas.CreateProjectVersionRequest, schemas.CreateProjectVersionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateProjectVersion{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateProjectVersion, schemas.CreateProjectVersionRequest, schemas.CreateProjectVersionResponse), output: &CreateProjectVersionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -5,7 +5,9 @@ package auditmanager
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/auditmanager/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/auditmanager/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -43,6 +45,24 @@ type ListAssessmentFrameworksInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAssessmentFrameworksInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAssessmentFrameworksRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAssessmentFrameworksInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FrameworkType != "" {
+		s.WriteString(schemas.ListAssessmentFrameworksRequest_frameworkType, string(v.FrameworkType))
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListAssessmentFrameworksRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAssessmentFrameworksRequest_nextToken, *v.NextToken)
+	}
+}
+
 type ListAssessmentFrameworksOutput struct {
 
 	//  A list of metadata that the ListAssessmentFrameworks API returns for each
@@ -58,13 +78,35 @@ type ListAssessmentFrameworksOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAssessmentFrameworksOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAssessmentFrameworksResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAssessmentFrameworksOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeFrameworkMetadataList(s, schemas.ListAssessmentFrameworksResponse_frameworkMetadataList, v.FrameworkMetadataList)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAssessmentFrameworksResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListAssessmentFrameworksOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListAssessmentFrameworksResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListAssessmentFrameworksResponse_frameworkMetadataList:
+			return deserializeFrameworkMetadataList(d, schemas.ListAssessmentFrameworksResponse_frameworkMetadataList, &v.FrameworkMetadataList)
+		case schemas.ListAssessmentFrameworksResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListAssessmentFrameworksResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListAssessmentFrameworksMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListAssessmentFrameworks{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAssessmentFrameworks, schemas.ListAssessmentFrameworksRequest, schemas.ListAssessmentFrameworksResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListAssessmentFrameworks{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAssessmentFrameworks, schemas.ListAssessmentFrameworksRequest, schemas.ListAssessmentFrameworksResponse), output: &ListAssessmentFrameworksOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

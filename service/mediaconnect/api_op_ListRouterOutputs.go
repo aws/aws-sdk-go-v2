@@ -5,7 +5,9 @@ package mediaconnect
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/mediaconnect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/mediaconnect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,22 @@ type ListRouterOutputsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListRouterOutputsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListRouterOutputsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListRouterOutputsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeRouterOutputFilterList(s, schemas.ListRouterOutputsRequest_Filters, v.Filters)
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListRouterOutputsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListRouterOutputsRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListRouterOutputsOutput struct {
 
 	// The summary information for the retrieved router outputs.
@@ -55,13 +73,35 @@ type ListRouterOutputsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListRouterOutputsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListRouterOutputsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListRouterOutputsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListRouterOutputsResponse_NextToken, *v.NextToken)
+	}
+	serializeListedRouterOutputList(s, schemas.ListRouterOutputsResponse_RouterOutputs, v.RouterOutputs)
+}
+func (v *ListRouterOutputsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListRouterOutputsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListRouterOutputsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListRouterOutputsResponse_NextToken, v.NextToken)
+		case schemas.ListRouterOutputsResponse_RouterOutputs:
+			return deserializeListedRouterOutputList(d, schemas.ListRouterOutputsResponse_RouterOutputs, &v.RouterOutputs)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListRouterOutputsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListRouterOutputs{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListRouterOutputs, schemas.ListRouterOutputsRequest, schemas.ListRouterOutputsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListRouterOutputs{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListRouterOutputs, schemas.ListRouterOutputsRequest, schemas.ListRouterOutputsResponse), output: &ListRouterOutputsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

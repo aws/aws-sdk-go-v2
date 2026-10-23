@@ -4,12 +4,17 @@ package sesv2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/sesv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sesv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
 
 // Provides information about an export job.
+//
+// When the job status is COMPLETED , the response includes a pre-signed URL in
+// ExportDestination.S3Url that you use to download the export file.
 func (c *Client) GetExportJob(ctx context.Context, params *GetExportJobInput, optFns ...func(*Options)) (*GetExportJobOutput, error) {
 	if params == nil {
 		params = &GetExportJobInput{}
@@ -37,6 +42,18 @@ type GetExportJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetExportJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetExportJobRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetExportJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.JobId != nil {
+		s.WriteString(schemas.GetExportJobRequest_JobId, *v.JobId)
+	}
+}
+
 // An HTTP 200 response if the request succeeds, or an error message if the
 // request fails.
 type GetExportJobOutput struct {
@@ -50,7 +67,8 @@ type GetExportJobOutput struct {
 	// The data source of the export job.
 	ExportDataSource *types.ExportDataSource
 
-	// The destination of the export job.
+	// The destination of the export job. When JobStatus is COMPLETED , this object
+	// includes S3Url , a pre-signed URL that you use to download the export file.
 	ExportDestination *types.ExportDestination
 
 	// The type of source of the export job.
@@ -74,13 +92,96 @@ type GetExportJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetExportJobOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetExportJobResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetExportJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CompletedTimestamp != nil {
+		s.WriteTime(schemas.GetExportJobResponse_CompletedTimestamp, *v.CompletedTimestamp)
+	}
+	if v.CreatedTimestamp != nil {
+		s.WriteTime(schemas.GetExportJobResponse_CreatedTimestamp, *v.CreatedTimestamp)
+	}
+	if v.ExportDataSource != nil {
+		s.WriteStruct(schemas.GetExportJobResponse_ExportDataSource)
+		v.ExportDataSource.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ExportDestination != nil {
+		s.WriteStruct(schemas.GetExportJobResponse_ExportDestination)
+		v.ExportDestination.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ExportSourceType != "" {
+		s.WriteString(schemas.GetExportJobResponse_ExportSourceType, string(v.ExportSourceType))
+	}
+	if v.FailureInfo != nil {
+		s.WriteStruct(schemas.GetExportJobResponse_FailureInfo)
+		v.FailureInfo.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.JobId != nil {
+		s.WriteString(schemas.GetExportJobResponse_JobId, *v.JobId)
+	}
+	if v.JobStatus != "" {
+		s.WriteString(schemas.GetExportJobResponse_JobStatus, string(v.JobStatus))
+	}
+	if v.Statistics != nil {
+		s.WriteStruct(schemas.GetExportJobResponse_Statistics)
+		v.Statistics.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetExportJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetExportJobResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetExportJobResponse_CompletedTimestamp:
+			v.CompletedTimestamp = new(time.Time)
+			return d.ReadTime(schemas.GetExportJobResponse_CompletedTimestamp, v.CompletedTimestamp)
+		case schemas.GetExportJobResponse_CreatedTimestamp:
+			v.CreatedTimestamp = new(time.Time)
+			return d.ReadTime(schemas.GetExportJobResponse_CreatedTimestamp, v.CreatedTimestamp)
+		case schemas.GetExportJobResponse_ExportDataSource:
+			v.ExportDataSource = &types.ExportDataSource{}
+			return v.ExportDataSource.Deserialize(d)
+		case schemas.GetExportJobResponse_ExportDestination:
+			v.ExportDestination = &types.ExportDestination{}
+			return v.ExportDestination.Deserialize(d)
+		case schemas.GetExportJobResponse_ExportSourceType:
+			var ev string
+			if err := d.ReadString(schemas.GetExportJobResponse_ExportSourceType, &ev); err != nil {
+				return err
+			}
+			v.ExportSourceType = types.ExportSourceType(ev)
+			return nil
+		case schemas.GetExportJobResponse_FailureInfo:
+			v.FailureInfo = &types.FailureInfo{}
+			return v.FailureInfo.Deserialize(d)
+		case schemas.GetExportJobResponse_JobId:
+			v.JobId = new(string)
+			return d.ReadString(schemas.GetExportJobResponse_JobId, v.JobId)
+		case schemas.GetExportJobResponse_JobStatus:
+			var ev string
+			if err := d.ReadString(schemas.GetExportJobResponse_JobStatus, &ev); err != nil {
+				return err
+			}
+			v.JobStatus = types.JobStatus(ev)
+			return nil
+		case schemas.GetExportJobResponse_Statistics:
+			v.Statistics = &types.ExportStatistics{}
+			return v.Statistics.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetExportJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetExportJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetExportJob, schemas.GetExportJobRequest, schemas.GetExportJobResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetExportJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetExportJob, schemas.GetExportJobRequest, schemas.GetExportJobResponse), output: &GetExportJobOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -1,0 +1,5 @@
+POST /DeleteDatasetIntegration
+
+Content-Type: application/json
+
+{"Arn":"__Arn__"}

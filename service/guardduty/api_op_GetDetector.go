@@ -4,7 +4,9 @@ package guardduty
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/guardduty/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/guardduty/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -45,6 +47,18 @@ type GetDetectorInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetDetectorInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetDetectorRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetDetectorInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DetectorId != nil {
+		s.WriteString(schemas.GetDetectorRequest_DetectorId, *v.DetectorId)
+	}
+}
+
 type GetDetectorOutput struct {
 
 	// The GuardDuty service role.
@@ -83,13 +97,78 @@ type GetDetectorOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetDetectorOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetDetectorResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetDetectorOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreatedAt != nil {
+		s.WriteString(schemas.GetDetectorResponse_CreatedAt, *v.CreatedAt)
+	}
+	if v.DataSources != nil {
+		s.WriteStruct(schemas.GetDetectorResponse_DataSources)
+		v.DataSources.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeDetectorFeatureConfigurationsResults(s, schemas.GetDetectorResponse_Features, v.Features)
+	if v.FindingPublishingFrequency != "" {
+		s.WriteString(schemas.GetDetectorResponse_FindingPublishingFrequency, string(v.FindingPublishingFrequency))
+	}
+	if v.ServiceRole != nil {
+		s.WriteString(schemas.GetDetectorResponse_ServiceRole, *v.ServiceRole)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.GetDetectorResponse_Status, string(v.Status))
+	}
+	serializeTagMap(s, schemas.GetDetectorResponse_Tags, v.Tags)
+	if v.UpdatedAt != nil {
+		s.WriteString(schemas.GetDetectorResponse_UpdatedAt, *v.UpdatedAt)
+	}
+}
+func (v *GetDetectorOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetDetectorResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetDetectorResponse_CreatedAt:
+			v.CreatedAt = new(string)
+			return d.ReadString(schemas.GetDetectorResponse_CreatedAt, v.CreatedAt)
+		case schemas.GetDetectorResponse_DataSources:
+			v.DataSources = &types.DataSourceConfigurationsResult{}
+			return v.DataSources.Deserialize(d)
+		case schemas.GetDetectorResponse_Features:
+			return deserializeDetectorFeatureConfigurationsResults(d, schemas.GetDetectorResponse_Features, &v.Features)
+		case schemas.GetDetectorResponse_FindingPublishingFrequency:
+			var ev string
+			if err := d.ReadString(schemas.GetDetectorResponse_FindingPublishingFrequency, &ev); err != nil {
+				return err
+			}
+			v.FindingPublishingFrequency = types.FindingPublishingFrequency(ev)
+			return nil
+		case schemas.GetDetectorResponse_ServiceRole:
+			v.ServiceRole = new(string)
+			return d.ReadString(schemas.GetDetectorResponse_ServiceRole, v.ServiceRole)
+		case schemas.GetDetectorResponse_Status:
+			var ev string
+			if err := d.ReadString(schemas.GetDetectorResponse_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.DetectorStatus(ev)
+			return nil
+		case schemas.GetDetectorResponse_Tags:
+			return deserializeTagMap(d, schemas.GetDetectorResponse_Tags, &v.Tags)
+		case schemas.GetDetectorResponse_UpdatedAt:
+			v.UpdatedAt = new(string)
+			return d.ReadString(schemas.GetDetectorResponse_UpdatedAt, v.UpdatedAt)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetDetectorMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetDetector{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetDetector, schemas.GetDetectorRequest, schemas.GetDetectorResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetDetector{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetDetector, schemas.GetDetectorRequest, schemas.GetDetectorResponse), output: &GetDetectorOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

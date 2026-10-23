@@ -4,7 +4,9 @@ package ecs
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/ecs/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ecs/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -66,6 +68,24 @@ type ContinueServiceDeploymentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ContinueServiceDeploymentInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ContinueServiceDeploymentRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ContinueServiceDeploymentInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Action != "" {
+		s.WriteString(schemas.ContinueServiceDeploymentRequest_action, string(v.Action))
+	}
+	if v.HookId != nil {
+		s.WriteString(schemas.ContinueServiceDeploymentRequest_hookId, *v.HookId)
+	}
+	if v.ServiceDeploymentArn != nil {
+		s.WriteString(schemas.ContinueServiceDeploymentRequest_serviceDeploymentArn, *v.ServiceDeploymentArn)
+	}
+}
+
 type ContinueServiceDeploymentOutput struct {
 
 	// The ARN of the service deployment that was continued or rolled back.
@@ -77,13 +97,32 @@ type ContinueServiceDeploymentOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ContinueServiceDeploymentOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ContinueServiceDeploymentResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ContinueServiceDeploymentOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ServiceDeploymentArn != nil {
+		s.WriteString(schemas.ContinueServiceDeploymentResponse_serviceDeploymentArn, *v.ServiceDeploymentArn)
+	}
+}
+func (v *ContinueServiceDeploymentOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ContinueServiceDeploymentResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ContinueServiceDeploymentResponse_serviceDeploymentArn:
+			v.ServiceDeploymentArn = new(string)
+			return d.ReadString(schemas.ContinueServiceDeploymentResponse_serviceDeploymentArn, v.ServiceDeploymentArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationContinueServiceDeploymentMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpContinueServiceDeployment{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ContinueServiceDeployment, schemas.ContinueServiceDeploymentRequest, schemas.ContinueServiceDeploymentResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpContinueServiceDeployment{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ContinueServiceDeployment, schemas.ContinueServiceDeploymentRequest, schemas.ContinueServiceDeploymentResponse), output: &ContinueServiceDeploymentOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -5,7 +5,9 @@ package datazone
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/datazone/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/datazone/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -58,6 +60,33 @@ type ListProjectProfilesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListProjectProfilesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListProjectProfilesInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListProjectProfilesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DomainIdentifier != nil {
+		s.WriteString(schemas.ListProjectProfilesInput_domainIdentifier, *v.DomainIdentifier)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListProjectProfilesInput_maxResults, *v.MaxResults)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.ListProjectProfilesInput_name, *v.Name)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListProjectProfilesInput_nextToken, *v.NextToken)
+	}
+	if v.SortBy != "" {
+		s.WriteString(schemas.ListProjectProfilesInput_sortBy, string(v.SortBy))
+	}
+	if v.SortOrder != "" {
+		s.WriteString(schemas.ListProjectProfilesInput_sortOrder, string(v.SortOrder))
+	}
+}
+
 type ListProjectProfilesOutput struct {
 
 	// The results of the ListProjectProfiles action.
@@ -76,13 +105,35 @@ type ListProjectProfilesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListProjectProfilesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListProjectProfilesOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListProjectProfilesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeProjectProfileSummaries(s, schemas.ListProjectProfilesOutput_items, v.Items)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListProjectProfilesOutput_nextToken, *v.NextToken)
+	}
+}
+func (v *ListProjectProfilesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListProjectProfilesOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListProjectProfilesOutput_items:
+			return deserializeProjectProfileSummaries(d, schemas.ListProjectProfilesOutput_items, &v.Items)
+		case schemas.ListProjectProfilesOutput_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListProjectProfilesOutput_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListProjectProfilesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListProjectProfiles{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListProjectProfiles, schemas.ListProjectProfilesInput, schemas.ListProjectProfilesOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListProjectProfiles{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListProjectProfiles, schemas.ListProjectProfilesInput, schemas.ListProjectProfilesOutput), output: &ListProjectProfilesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

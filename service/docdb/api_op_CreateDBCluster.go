@@ -66,6 +66,10 @@ type CreateDBClusterInput struct {
 	//   - Must be a value from 1 to 35.
 	BackupRetentionPeriod *int32
 
+	// Specifies whether to copy all tags from the DB cluster to snapshots of the DB
+	// cluster. The default is not to copy them.
+	CopyTagsToSnapshot *bool
+
 	// The name of the cluster parameter group to associate with this cluster.
 	DBClusterParameterGroupName *string
 
@@ -87,8 +91,8 @@ type CreateDBClusterInput struct {
 	// Logs. You can enable audit logs or profiler logs. For more information, see [Auditing Amazon DocumentDB Events]and [Profiling Amazon DocumentDB Operations]
 	// .
 	//
-	// [Profiling Amazon DocumentDB Operations]: https://docs.aws.amazon.com/documentdb/latest/developerguide/profiling.html
-	// [Auditing Amazon DocumentDB Events]: https://docs.aws.amazon.com/documentdb/latest/developerguide/event-auditing.html
+	// [Profiling Amazon DocumentDB Operations]: https://docs.aws.amazon.com/documentdb/latest/devguide/profiling.html
+	// [Auditing Amazon DocumentDB Events]: https://docs.aws.amazon.com/documentdb/latest/devguide/event-auditing.html
 	EnableCloudwatchLogsExports []string
 
 	// The version number of the database engine to use. The --engine-version will
@@ -171,7 +175,7 @@ type CreateDBClusterInput struct {
 	//
 	// Valid Values: IPV4 | DUAL
 	//
-	// [DocumentDB clusters in a VPC]: https://docs.aws.amazon.com/documentdb/latest/developerguide/vpc-clusters.html
+	// [DocumentDB clusters in a VPC]: https://docs.aws.amazon.com/documentdb/latest/devguide/vpc-clusters.html
 	NetworkType *string
 
 	// The port number on which the instances in the cluster accept connections.

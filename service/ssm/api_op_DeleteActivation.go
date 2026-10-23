@@ -4,6 +4,8 @@ package ssm
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/ssm/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -36,6 +38,18 @@ type DeleteActivationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteActivationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteActivationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteActivationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ActivationId != nil {
+		s.WriteString(schemas.DeleteActivationRequest_ActivationId, *v.ActivationId)
+	}
+}
+
 type DeleteActivationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -43,13 +57,26 @@ type DeleteActivationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteActivationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteActivationResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteActivationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteActivationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteActivationResult, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteActivationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteActivation{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteActivation, schemas.DeleteActivationRequest, schemas.DeleteActivationResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeleteActivation{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteActivation, schemas.DeleteActivationRequest, schemas.DeleteActivationResult), output: &DeleteActivationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

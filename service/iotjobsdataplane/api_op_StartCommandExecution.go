@@ -5,7 +5,9 @@ package iotjobsdataplane
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/iotjobsdataplane/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotjobsdataplane/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -61,6 +63,28 @@ type StartCommandExecutionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartCommandExecutionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartCommandExecutionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartCommandExecutionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.StartCommandExecutionRequest_clientToken, *v.ClientToken)
+	}
+	if v.CommandArn != nil {
+		s.WriteString(schemas.StartCommandExecutionRequest_commandArn, *v.CommandArn)
+	}
+	if v.ExecutionTimeoutSeconds != nil {
+		s.WriteInt64(schemas.StartCommandExecutionRequest_executionTimeoutSeconds, *v.ExecutionTimeoutSeconds)
+	}
+	serializeCommandExecutionParameterMap(s, schemas.StartCommandExecutionRequest_parameters, v.Parameters)
+	if v.TargetArn != nil {
+		s.WriteString(schemas.StartCommandExecutionRequest_targetArn, *v.TargetArn)
+	}
+}
+
 type StartCommandExecutionOutput struct {
 
 	// A unique identifier for the command execution.
@@ -72,13 +96,32 @@ type StartCommandExecutionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartCommandExecutionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartCommandExecutionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartCommandExecutionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ExecutionId != nil {
+		s.WriteString(schemas.StartCommandExecutionResponse_executionId, *v.ExecutionId)
+	}
+}
+func (v *StartCommandExecutionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartCommandExecutionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartCommandExecutionResponse_executionId:
+			v.ExecutionId = new(string)
+			return d.ReadString(schemas.StartCommandExecutionResponse_executionId, v.ExecutionId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartCommandExecutionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpStartCommandExecution{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartCommandExecution, schemas.StartCommandExecutionRequest, schemas.StartCommandExecutionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStartCommandExecution{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartCommandExecution, schemas.StartCommandExecutionRequest, schemas.StartCommandExecutionResponse), output: &StartCommandExecutionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

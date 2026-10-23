@@ -206,7 +206,8 @@ var _Code = smithy.NewSchema(smithy.ShapeID{
 var CustomHealthNotFound = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.servicediscovery",
 	Name:      "CustomHealthNotFound",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 404})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 404})
 var CustomHealthNotFound_Message *smithy.Schema
 
 var CustomHealthStatus = smithy.NewSchema(smithy.ShapeID{
@@ -263,7 +264,8 @@ var _DnsRecordList_member *smithy.Schema
 var DuplicateRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.servicediscovery",
 	Name:      "DuplicateRequest",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.HTTPError{Code: 409})
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 409})
 var DuplicateRequest_Message *smithy.Schema
 
 var DuplicateRequest_DuplicateOperationId *smithy.Schema
@@ -415,7 +417,8 @@ var _InstanceIdList_member *smithy.Schema
 var InstanceNotFound = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.servicediscovery",
 	Name:      "InstanceNotFound",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 404})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 404})
 var InstanceNotFound_Message *smithy.Schema
 
 var InstanceSummary = smithy.NewSchema(smithy.ShapeID{
@@ -437,7 +440,8 @@ var _InstanceSummaryList_member *smithy.Schema
 var InvalidInput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.servicediscovery",
 	Name:      "InvalidInput",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var InvalidInput_Message *smithy.Schema
 
 var _MaxResults = smithy.NewSchema(smithy.ShapeID{
@@ -477,7 +481,8 @@ var Namespace_CreatorRequestId *smithy.Schema
 var NamespaceAlreadyExists = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.servicediscovery",
 	Name:      "NamespaceAlreadyExists",
-}, smithy.ShapeTypeStructure, 3, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var NamespaceAlreadyExists_Message *smithy.Schema
 
 var NamespaceAlreadyExists_CreatorRequestId *smithy.Schema
@@ -535,7 +540,8 @@ var _NamespaceNamePublic = smithy.NewSchema(smithy.ShapeID{
 var NamespaceNotFound = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.servicediscovery",
 	Name:      "NamespaceNotFound",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 404})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 404})
 var NamespaceNotFound_Message *smithy.Schema
 
 var NamespaceProperties = smithy.NewSchema(smithy.ShapeID{
@@ -649,7 +655,8 @@ var _OperationId = smithy.NewSchema(smithy.ShapeID{
 var OperationNotFound = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.servicediscovery",
 	Name:      "OperationNotFound",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 404})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 404})
 var OperationNotFound_Message *smithy.Schema
 
 var OperationStatus = smithy.NewSchema(smithy.ShapeID{
@@ -796,7 +803,8 @@ var RecordType_CNAME *smithy.Schema
 var RequestLimitExceeded = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.servicediscovery",
 	Name:      "RequestLimitExceeded",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 429})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 429})
 var RequestLimitExceeded_Message *smithy.Schema
 
 var _ResourceCount = smithy.NewSchema(smithy.ShapeID{
@@ -817,19 +825,22 @@ var _ResourceId = smithy.NewSchema(smithy.ShapeID{
 var ResourceInUse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.servicediscovery",
 	Name:      "ResourceInUse",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 409})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 409})
 var ResourceInUse_Message *smithy.Schema
 
 var ResourceLimitExceeded = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.servicediscovery",
 	Name:      "ResourceLimitExceeded",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var ResourceLimitExceeded_Message *smithy.Schema
 
 var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.servicediscovery",
 	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 404})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 404})
 var ResourceNotFoundException_Message *smithy.Schema
 
 var _ResourcePath = smithy.NewSchema(smithy.ShapeID{
@@ -885,7 +896,8 @@ var Service_CreatedByAccount *smithy.Schema
 var ServiceAlreadyExists = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.servicediscovery",
 	Name:      "ServiceAlreadyExists",
-}, smithy.ShapeTypeStructure, 4, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 4, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var ServiceAlreadyExists_Message *smithy.Schema
 
 var ServiceAlreadyExists_CreatorRequestId *smithy.Schema
@@ -918,7 +930,8 @@ var ServiceAttributes_Attributes *smithy.Schema
 var ServiceAttributesLimitExceededException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.servicediscovery",
 	Name:      "ServiceAttributesLimitExceededException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var ServiceAttributesLimitExceededException_Message *smithy.Schema
 
 var _ServiceAttributesMap = smithy.NewSchema(smithy.ShapeID{
@@ -976,7 +989,8 @@ var _ServiceName = smithy.NewSchema(smithy.ShapeID{
 var ServiceNotFound = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.servicediscovery",
 	Name:      "ServiceNotFound",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 404})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 404})
 var ServiceNotFound_Message *smithy.Schema
 
 var _ServiceSummariesList = smithy.NewSchema(smithy.ShapeID{
@@ -1079,7 +1093,8 @@ var _Timestamp = smithy.NewSchema(smithy.ShapeID{
 var TooManyTagsException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.servicediscovery",
 	Name:      "TooManyTagsException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var TooManyTagsException_Message *smithy.Schema
 
 var TooManyTagsException_ResourceName *smithy.Schema

@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"appArn":"__AppArn__","appVersion":"__AppVersion__","physicalResource":{"additionalInfo":{"key0":["__Member__","__Member__"]},"appComponents":[{"additionalInfo":{"key0":["__Member__","__Member__"]},"id":"__Id__","name":"__Name__","type":"__Type__"},{"additionalInfo":{"key0":["__Member__","__Member__"]},"id":"__Id__","name":"__Name__","type":"__Type__"}],"excluded":true,"logicalResourceId":{"eksSourceName":"__EksSourceName__","identifier":"__Identifier__","logicalStackName":"__LogicalStackName__","resourceGroupName":"__ResourceGroupName__","terraformSourceName":"__TerraformSourceName__"},"parentResourceName":"__ParentResourceName__","physicalResourceId":{"awsAccountId":"__AwsAccountId__","awsRegion":"__AwsRegion__","identifier":"__Identifier__","type":"Arn"},"resourceName":"__ResourceName__","resourceType":"__ResourceType__","sourceType":"AppTemplate"}}

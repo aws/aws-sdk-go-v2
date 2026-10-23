@@ -5,7 +5,9 @@ package batch
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/batch/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/batch/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -59,6 +61,22 @@ type DescribeComputeEnvironmentsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeComputeEnvironmentsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeComputeEnvironmentsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeComputeEnvironmentsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeStringList(s, schemas.DescribeComputeEnvironmentsRequest_computeEnvironments, v.ComputeEnvironments)
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.DescribeComputeEnvironmentsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeComputeEnvironmentsRequest_nextToken, *v.NextToken)
+	}
+}
+
 type DescribeComputeEnvironmentsOutput struct {
 
 	// The list of compute environments.
@@ -76,13 +94,35 @@ type DescribeComputeEnvironmentsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeComputeEnvironmentsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeComputeEnvironmentsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeComputeEnvironmentsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeComputeEnvironmentDetailList(s, schemas.DescribeComputeEnvironmentsResponse_computeEnvironments, v.ComputeEnvironments)
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeComputeEnvironmentsResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *DescribeComputeEnvironmentsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeComputeEnvironmentsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeComputeEnvironmentsResponse_computeEnvironments:
+			return deserializeComputeEnvironmentDetailList(d, schemas.DescribeComputeEnvironmentsResponse_computeEnvironments, &v.ComputeEnvironments)
+		case schemas.DescribeComputeEnvironmentsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.DescribeComputeEnvironmentsResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeComputeEnvironmentsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeComputeEnvironments{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeComputeEnvironments, schemas.DescribeComputeEnvironmentsRequest, schemas.DescribeComputeEnvironmentsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeComputeEnvironments{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeComputeEnvironments, schemas.DescribeComputeEnvironmentsRequest, schemas.DescribeComputeEnvironmentsResponse), output: &DescribeComputeEnvironmentsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

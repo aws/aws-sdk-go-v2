@@ -4,7 +4,9 @@ package inspector2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/inspector2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/inspector2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -57,6 +59,32 @@ type CreateCodeSecurityScanConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateCodeSecurityScanConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateCodeSecurityScanConfigurationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateCodeSecurityScanConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Configuration != nil {
+		s.WriteStruct(schemas.CreateCodeSecurityScanConfigurationRequest_configuration)
+		v.Configuration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Level != "" {
+		s.WriteString(schemas.CreateCodeSecurityScanConfigurationRequest_level, string(v.Level))
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateCodeSecurityScanConfigurationRequest_name, *v.Name)
+	}
+	if v.ScopeSettings != nil {
+		s.WriteStruct(schemas.CreateCodeSecurityScanConfigurationRequest_scopeSettings)
+		v.ScopeSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeTagMap(s, schemas.CreateCodeSecurityScanConfigurationRequest_tags, v.Tags)
+}
+
 type CreateCodeSecurityScanConfigurationOutput struct {
 
 	// The Amazon Resource Name (ARN) of the created scan configuration.
@@ -70,13 +98,32 @@ type CreateCodeSecurityScanConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateCodeSecurityScanConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateCodeSecurityScanConfigurationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateCodeSecurityScanConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ScanConfigurationArn != nil {
+		s.WriteString(schemas.CreateCodeSecurityScanConfigurationResponse_scanConfigurationArn, *v.ScanConfigurationArn)
+	}
+}
+func (v *CreateCodeSecurityScanConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateCodeSecurityScanConfigurationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateCodeSecurityScanConfigurationResponse_scanConfigurationArn:
+			v.ScanConfigurationArn = new(string)
+			return d.ReadString(schemas.CreateCodeSecurityScanConfigurationResponse_scanConfigurationArn, v.ScanConfigurationArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateCodeSecurityScanConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateCodeSecurityScanConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateCodeSecurityScanConfiguration, schemas.CreateCodeSecurityScanConfigurationRequest, schemas.CreateCodeSecurityScanConfigurationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateCodeSecurityScanConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateCodeSecurityScanConfiguration, schemas.CreateCodeSecurityScanConfigurationRequest, schemas.CreateCodeSecurityScanConfigurationResponse), output: &CreateCodeSecurityScanConfigurationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

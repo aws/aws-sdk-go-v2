@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: OpenSearchServerless.ListIngestionJobs
+
+{"ingestionJobSummaries":[{"arn":"__Arn__","createdAt":946684800,"indexName":"__IndexName__","ingestionJobId":"__IngestionJobId__","ingestionJobName":"__IngestionJobName__","status":"CREATING","updatedAt":946684800},{"arn":"__Arn__","createdAt":946684800,"indexName":"__IndexName__","ingestionJobId":"__IngestionJobId__","ingestionJobName":"__IngestionJobName__","status":"CREATING","updatedAt":946684800}],"nextToken":"__NextToken__"}

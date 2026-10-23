@@ -4,6 +4,8 @@ package ssm
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/ssm/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -51,6 +53,27 @@ type DeleteDocumentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteDocumentInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteDocumentRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteDocumentInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DocumentVersion != nil {
+		s.WriteString(schemas.DeleteDocumentRequest_DocumentVersion, *v.DocumentVersion)
+	}
+	if v.Force != false {
+		s.WriteBool(schemas.DeleteDocumentRequest_Force, v.Force)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.DeleteDocumentRequest_Name, *v.Name)
+	}
+	if v.VersionName != nil {
+		s.WriteString(schemas.DeleteDocumentRequest_VersionName, *v.VersionName)
+	}
+}
+
 type DeleteDocumentOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -58,13 +81,26 @@ type DeleteDocumentOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteDocumentOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteDocumentResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteDocumentOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteDocumentOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteDocumentResult, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteDocumentMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteDocument{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteDocument, schemas.DeleteDocumentRequest, schemas.DeleteDocumentResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeleteDocument{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteDocument, schemas.DeleteDocumentRequest, schemas.DeleteDocumentResult), output: &DeleteDocumentOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

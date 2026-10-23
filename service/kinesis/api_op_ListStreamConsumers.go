@@ -5,7 +5,9 @@ package kinesis
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/kinesis/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/kinesis/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"github.com/aws/smithy-go/ptr"
 	"time"
@@ -83,6 +85,29 @@ type ListStreamConsumersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListStreamConsumersInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListStreamConsumersInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListStreamConsumersInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListStreamConsumersInput_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListStreamConsumersInput_NextToken, *v.NextToken)
+	}
+	if v.StreamARN != nil {
+		s.WriteString(schemas.ListStreamConsumersInput_StreamARN, *v.StreamARN)
+	}
+	if v.StreamCreationTimestamp != nil {
+		s.WriteTime(schemas.ListStreamConsumersInput_StreamCreationTimestamp, *v.StreamCreationTimestamp)
+	}
+	if v.StreamId != nil {
+		s.WriteString(schemas.ListStreamConsumersInput_StreamId, *v.StreamId)
+	}
+}
 func (in *ListStreamConsumersInput) bindEndpointParams(p *EndpointParameters) {
 
 	p.StreamARN = in.StreamARN
@@ -115,13 +140,35 @@ type ListStreamConsumersOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListStreamConsumersOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListStreamConsumersOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListStreamConsumersOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeConsumerList(s, schemas.ListStreamConsumersOutput_Consumers, v.Consumers)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListStreamConsumersOutput_NextToken, *v.NextToken)
+	}
+}
+func (v *ListStreamConsumersOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListStreamConsumersOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListStreamConsumersOutput_Consumers:
+			return deserializeConsumerList(d, schemas.ListStreamConsumersOutput_Consumers, &v.Consumers)
+		case schemas.ListStreamConsumersOutput_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListStreamConsumersOutput_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListStreamConsumersMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListStreamConsumers{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListStreamConsumers, schemas.ListStreamConsumersInput, schemas.ListStreamConsumersOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListStreamConsumers{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListStreamConsumers, schemas.ListStreamConsumersInput, schemas.ListStreamConsumersOutput), output: &ListStreamConsumersOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

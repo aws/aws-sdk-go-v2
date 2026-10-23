@@ -4,7 +4,9 @@ package ecs
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/ecs/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ecs/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -157,6 +159,50 @@ type CreateTaskSetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateTaskSetInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateTaskSetRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateTaskSetInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeCapacityProviderStrategy(s, schemas.CreateTaskSetRequest_capacityProviderStrategy, v.CapacityProviderStrategy)
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateTaskSetRequest_clientToken, *v.ClientToken)
+	}
+	if v.Cluster != nil {
+		s.WriteString(schemas.CreateTaskSetRequest_cluster, *v.Cluster)
+	}
+	if v.ExternalId != nil {
+		s.WriteString(schemas.CreateTaskSetRequest_externalId, *v.ExternalId)
+	}
+	if v.LaunchType != "" {
+		s.WriteString(schemas.CreateTaskSetRequest_launchType, string(v.LaunchType))
+	}
+	serializeLoadBalancers(s, schemas.CreateTaskSetRequest_loadBalancers, v.LoadBalancers)
+	if v.NetworkConfiguration != nil {
+		s.WriteStruct(schemas.CreateTaskSetRequest_networkConfiguration)
+		v.NetworkConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.PlatformVersion != nil {
+		s.WriteString(schemas.CreateTaskSetRequest_platformVersion, *v.PlatformVersion)
+	}
+	if v.Scale != nil {
+		s.WriteStruct(schemas.CreateTaskSetRequest_scale)
+		v.Scale.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Service != nil {
+		s.WriteString(schemas.CreateTaskSetRequest_service, *v.Service)
+	}
+	serializeServiceRegistries(s, schemas.CreateTaskSetRequest_serviceRegistries, v.ServiceRegistries)
+	serializeTags(s, schemas.CreateTaskSetRequest_tags, v.Tags)
+	if v.TaskDefinition != nil {
+		s.WriteString(schemas.CreateTaskSetRequest_taskDefinition, *v.TaskDefinition)
+	}
+}
+
 type CreateTaskSetOutput struct {
 
 	// Information about a set of Amazon ECS tasks in either an CodeDeploy or an
@@ -171,13 +217,34 @@ type CreateTaskSetOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateTaskSetOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateTaskSetResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateTaskSetOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TaskSet != nil {
+		s.WriteStruct(schemas.CreateTaskSetResponse_taskSet)
+		v.TaskSet.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateTaskSetOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateTaskSetResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateTaskSetResponse_taskSet:
+			v.TaskSet = &types.TaskSet{}
+			return v.TaskSet.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateTaskSetMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateTaskSet{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateTaskSet, schemas.CreateTaskSetRequest, schemas.CreateTaskSetResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateTaskSet{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateTaskSet, schemas.CreateTaskSetRequest, schemas.CreateTaskSetResponse), output: &CreateTaskSetOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

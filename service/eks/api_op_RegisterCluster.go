@@ -5,7 +5,9 @@ package eks
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/eks/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/eks/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -67,6 +69,27 @@ type RegisterClusterInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RegisterClusterInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RegisterClusterRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RegisterClusterInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientRequestToken != nil {
+		s.WriteString(schemas.RegisterClusterRequest_clientRequestToken, *v.ClientRequestToken)
+	}
+	if v.ConnectorConfig != nil {
+		s.WriteStruct(schemas.RegisterClusterRequest_connectorConfig)
+		v.ConnectorConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.RegisterClusterRequest_name, *v.Name)
+	}
+	serializeTagMap(s, schemas.RegisterClusterRequest_tags, v.Tags)
+}
+
 type RegisterClusterOutput struct {
 
 	// An object representing an Amazon EKS cluster.
@@ -78,13 +101,34 @@ type RegisterClusterOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RegisterClusterOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RegisterClusterResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RegisterClusterOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Cluster != nil {
+		s.WriteStruct(schemas.RegisterClusterResponse_cluster)
+		v.Cluster.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *RegisterClusterOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RegisterClusterResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RegisterClusterResponse_cluster:
+			v.Cluster = &types.Cluster{}
+			return v.Cluster.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationRegisterClusterMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpRegisterCluster{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RegisterCluster, schemas.RegisterClusterRequest, schemas.RegisterClusterResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpRegisterCluster{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RegisterCluster, schemas.RegisterClusterRequest, schemas.RegisterClusterResponse), output: &RegisterClusterOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

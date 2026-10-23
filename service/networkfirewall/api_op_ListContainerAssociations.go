@@ -5,7 +5,9 @@ package networkfirewall
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/networkfirewall/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/networkfirewall/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -44,6 +46,21 @@ type ListContainerAssociationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListContainerAssociationsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListContainerAssociationsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListContainerAssociationsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListContainerAssociationsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListContainerAssociationsRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListContainerAssociationsOutput struct {
 
 	// The container association metadata objects for the account and Region.
@@ -62,13 +79,35 @@ type ListContainerAssociationsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListContainerAssociationsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListContainerAssociationsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListContainerAssociationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeContainerAssociations(s, schemas.ListContainerAssociationsResponse_ContainerAssociations, v.ContainerAssociations)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListContainerAssociationsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListContainerAssociationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListContainerAssociationsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListContainerAssociationsResponse_ContainerAssociations:
+			return deserializeContainerAssociations(d, schemas.ListContainerAssociationsResponse_ContainerAssociations, &v.ContainerAssociations)
+		case schemas.ListContainerAssociationsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListContainerAssociationsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListContainerAssociationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpListContainerAssociations{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListContainerAssociations, schemas.ListContainerAssociationsRequest, schemas.ListContainerAssociationsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpListContainerAssociations{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListContainerAssociations, schemas.ListContainerAssociationsRequest, schemas.ListContainerAssociationsResponse), output: &ListContainerAssociationsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

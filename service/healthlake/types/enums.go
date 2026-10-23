@@ -2,6 +2,31 @@
 
 package types
 
+type AgentErrorType string
+
+// Enum values for AgentErrorType
+const (
+	AgentErrorTypeInternalServerException   AgentErrorType = "InternalServerException"
+	AgentErrorTypeResourceNotFoundException AgentErrorType = "ResourceNotFoundException"
+	AgentErrorTypeValidationException       AgentErrorType = "ValidationException"
+	AgentErrorTypeAccessDeniedException     AgentErrorType = "AccessDeniedException"
+	AgentErrorTypeThrottlingException       AgentErrorType = "ThrottlingException"
+)
+
+// Values returns all known values for AgentErrorType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AgentErrorType) Values() []AgentErrorType {
+	return []AgentErrorType{
+		"InternalServerException",
+		"ResourceNotFoundException",
+		"ValidationException",
+		"AccessDeniedException",
+		"ThrottlingException",
+	}
+}
+
 type AgentInputMessageType string
 
 // Enum values for AgentInputMessageType
@@ -18,35 +43,6 @@ func (AgentInputMessageType) Values() []AgentInputMessageType {
 	return []AgentInputMessageType{
 		"normal",
 		"confirmation_response",
-	}
-}
-
-type AgentOutputMessageType string
-
-// Enum values for AgentOutputMessageType
-const (
-	AgentOutputMessageTypeInitialGreeting         AgentOutputMessageType = "INITIAL_GREETING"
-	AgentOutputMessageTypeNormal                  AgentOutputMessageType = "normal"
-	AgentOutputMessageTypeUserConfirmationRequest AgentOutputMessageType = "confirmation"
-	AgentOutputMessageTypeComplete                AgentOutputMessageType = "complete"
-	AgentOutputMessageTypeError                   AgentOutputMessageType = "error"
-	AgentOutputMessageTypeOptions                 AgentOutputMessageType = "options"
-	AgentOutputMessageTypeChoices                 AgentOutputMessageType = "choices"
-)
-
-// Values returns all known values for AgentOutputMessageType. Note that this can
-// be expanded in the future, and so it is only as up to date as the client.
-//
-// The ordering of this slice is not guaranteed to be stable across updates.
-func (AgentOutputMessageType) Values() []AgentOutputMessageType {
-	return []AgentOutputMessageType{
-		"INITIAL_GREETING",
-		"normal",
-		"confirmation",
-		"complete",
-		"error",
-		"options",
-		"choices",
 	}
 }
 

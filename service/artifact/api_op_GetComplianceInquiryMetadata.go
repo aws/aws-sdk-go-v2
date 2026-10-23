@@ -4,7 +4,9 @@ package artifact
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/artifact/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/artifact/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -34,6 +36,18 @@ type GetComplianceInquiryMetadataInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetComplianceInquiryMetadataInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetComplianceInquiryMetadataRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetComplianceInquiryMetadataInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ComplianceInquiryId != nil {
+		s.WriteString(schemas.GetComplianceInquiryMetadataRequest_complianceInquiryId, *v.ComplianceInquiryId)
+	}
+}
+
 type GetComplianceInquiryMetadataOutput struct {
 
 	// Detailed information about the compliance inquiry.
@@ -48,13 +62,37 @@ type GetComplianceInquiryMetadataOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetComplianceInquiryMetadataOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetComplianceInquiryMetadataResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetComplianceInquiryMetadataOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ComplianceInquiryDetail != nil {
+		s.WriteStruct(schemas.GetComplianceInquiryMetadataResponse_complianceInquiryDetail)
+		v.ComplianceInquiryDetail.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeTagsMap(s, schemas.GetComplianceInquiryMetadataResponse_tags, v.Tags)
+}
+func (v *GetComplianceInquiryMetadataOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetComplianceInquiryMetadataResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetComplianceInquiryMetadataResponse_complianceInquiryDetail:
+			v.ComplianceInquiryDetail = &types.InquiryDetail{}
+			return v.ComplianceInquiryDetail.Deserialize(d)
+		case schemas.GetComplianceInquiryMetadataResponse_tags:
+			return deserializeTagsMap(d, schemas.GetComplianceInquiryMetadataResponse_tags, &v.Tags)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetComplianceInquiryMetadataMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetComplianceInquiryMetadata{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetComplianceInquiryMetadata, schemas.GetComplianceInquiryMetadataRequest, schemas.GetComplianceInquiryMetadataResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetComplianceInquiryMetadata{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetComplianceInquiryMetadata, schemas.GetComplianceInquiryMetadataRequest, schemas.GetComplianceInquiryMetadataResponse), output: &GetComplianceInquiryMetadataOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package iotmanagedintegrations
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/iotmanagedintegrations/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotmanagedintegrations/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -34,6 +36,18 @@ type GetManagedThingStateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetManagedThingStateInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetManagedThingStateRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetManagedThingStateInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ManagedThingId != nil {
+		s.WriteString(schemas.GetManagedThingStateRequest_ManagedThingId, *v.ManagedThingId)
+	}
+}
+
 type GetManagedThingStateOutput struct {
 
 	// The device endpoint.
@@ -47,13 +61,29 @@ type GetManagedThingStateOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetManagedThingStateOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetManagedThingStateResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetManagedThingStateOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeStateEndpoints(s, schemas.GetManagedThingStateResponse_Endpoints, v.Endpoints)
+}
+func (v *GetManagedThingStateOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetManagedThingStateResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetManagedThingStateResponse_Endpoints:
+			return deserializeStateEndpoints(d, schemas.GetManagedThingStateResponse_Endpoints, &v.Endpoints)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetManagedThingStateMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetManagedThingState{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetManagedThingState, schemas.GetManagedThingStateRequest, schemas.GetManagedThingStateResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetManagedThingState{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetManagedThingState, schemas.GetManagedThingStateRequest, schemas.GetManagedThingStateResponse), output: &GetManagedThingStateOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

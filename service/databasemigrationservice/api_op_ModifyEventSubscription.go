@@ -4,7 +4,9 @@ package databasemigrationservice
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/databasemigrationservice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/databasemigrationservice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -51,6 +53,28 @@ type ModifyEventSubscriptionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ModifyEventSubscriptionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ModifyEventSubscriptionMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ModifyEventSubscriptionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Enabled != nil {
+		s.WriteBool(schemas.ModifyEventSubscriptionMessage_Enabled, *v.Enabled)
+	}
+	serializeEventCategoriesList(s, schemas.ModifyEventSubscriptionMessage_EventCategories, v.EventCategories)
+	if v.SnsTopicArn != nil {
+		s.WriteString(schemas.ModifyEventSubscriptionMessage_SnsTopicArn, *v.SnsTopicArn)
+	}
+	if v.SourceType != nil {
+		s.WriteString(schemas.ModifyEventSubscriptionMessage_SourceType, *v.SourceType)
+	}
+	if v.SubscriptionName != nil {
+		s.WriteString(schemas.ModifyEventSubscriptionMessage_SubscriptionName, *v.SubscriptionName)
+	}
+}
+
 type ModifyEventSubscriptionOutput struct {
 
 	// The modified event subscription.
@@ -62,13 +86,34 @@ type ModifyEventSubscriptionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ModifyEventSubscriptionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ModifyEventSubscriptionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ModifyEventSubscriptionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EventSubscription != nil {
+		s.WriteStruct(schemas.ModifyEventSubscriptionResponse_EventSubscription)
+		v.EventSubscription.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *ModifyEventSubscriptionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ModifyEventSubscriptionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ModifyEventSubscriptionResponse_EventSubscription:
+			v.EventSubscription = &types.EventSubscription{}
+			return v.EventSubscription.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationModifyEventSubscriptionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpModifyEventSubscription{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ModifyEventSubscription, schemas.ModifyEventSubscriptionMessage, schemas.ModifyEventSubscriptionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpModifyEventSubscription{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ModifyEventSubscription, schemas.ModifyEventSubscriptionMessage, schemas.ModifyEventSubscriptionResponse), output: &ModifyEventSubscriptionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

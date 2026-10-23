@@ -4,6 +4,8 @@ package cloudhsm
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/cloudhsm/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -55,6 +57,21 @@ type ModifyLunaClientInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ModifyLunaClientInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ModifyLunaClientRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ModifyLunaClientInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Certificate != nil {
+		s.WriteString(schemas.ModifyLunaClientRequest_Certificate, *v.Certificate)
+	}
+	if v.ClientArn != nil {
+		s.WriteString(schemas.ModifyLunaClientRequest_ClientArn, *v.ClientArn)
+	}
+}
+
 type ModifyLunaClientOutput struct {
 
 	// The ARN of the client.
@@ -66,13 +83,32 @@ type ModifyLunaClientOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ModifyLunaClientOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ModifyLunaClientResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ModifyLunaClientOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientArn != nil {
+		s.WriteString(schemas.ModifyLunaClientResponse_ClientArn, *v.ClientArn)
+	}
+}
+func (v *ModifyLunaClientOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ModifyLunaClientResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ModifyLunaClientResponse_ClientArn:
+			v.ClientArn = new(string)
+			return d.ReadString(schemas.ModifyLunaClientResponse_ClientArn, v.ClientArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationModifyLunaClientMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpModifyLunaClient{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ModifyLunaClient, schemas.ModifyLunaClientRequest, schemas.ModifyLunaClientResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpModifyLunaClient{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ModifyLunaClient, schemas.ModifyLunaClientRequest, schemas.ModifyLunaClientResponse), output: &ModifyLunaClientOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

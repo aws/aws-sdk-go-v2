@@ -130,6 +130,9 @@ type DescribeBotLocaleOutput struct {
 	// The number of slot types defined for the locale.
 	SlotTypesCount *int32
 
+	// The speaker diarization settings configured for the bot locale.
+	SpeakerDiarizationSettings *types.SpeakerDiarizationSettings
+
 	// The sensitivity level for voice activity detection (VAD) configured for the bot
 	// locale.
 	SpeechDetectionSensitivity types.SpeechDetectionSensitivity
@@ -205,6 +208,11 @@ func (v *DescribeBotLocaleOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.SlotTypesCount != nil {
 		s.WriteInt32(schemas.DescribeBotLocaleResponse_slotTypesCount, *v.SlotTypesCount)
 	}
+	if v.SpeakerDiarizationSettings != nil {
+		s.WriteStruct(schemas.DescribeBotLocaleResponse_speakerDiarizationSettings)
+		v.SpeakerDiarizationSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
 	if v.SpeechDetectionSensitivity != "" {
 		s.WriteString(schemas.DescribeBotLocaleResponse_speechDetectionSensitivity, string(v.SpeechDetectionSensitivity))
 	}
@@ -279,6 +287,9 @@ func (v *DescribeBotLocaleOutput) Deserialize(d smithy.ShapeDeserializer) error 
 		case schemas.DescribeBotLocaleResponse_slotTypesCount:
 			v.SlotTypesCount = new(int32)
 			return d.ReadInt32(schemas.DescribeBotLocaleResponse_slotTypesCount, v.SlotTypesCount)
+		case schemas.DescribeBotLocaleResponse_speakerDiarizationSettings:
+			v.SpeakerDiarizationSettings = &types.SpeakerDiarizationSettings{}
+			return v.SpeakerDiarizationSettings.Deserialize(d)
 		case schemas.DescribeBotLocaleResponse_speechDetectionSensitivity:
 			var ev string
 			if err := d.ReadString(schemas.DescribeBotLocaleResponse_speechDetectionSensitivity, &ev); err != nil {

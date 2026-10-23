@@ -966,7 +966,7 @@ func TestCheckRequestSnapshot_CreateRestoreTestingSelection(t *testing.T) {
 				"key0": "__Value__",
 			},
 			RestoreTestingSelectionName: ptr.String("__RestoreTestingSelectionName__"),
-			ValidationWindowHours:       1,
+			ValidationWindowHours:       ptr.Int32(1),
 		},
 	}
 	body := &bytes.Buffer{}
@@ -4248,7 +4248,7 @@ func TestCheckRequestSnapshot_UpdateRestoreTestingSelection(t *testing.T) {
 			RestoreMetadataOverrides: map[string]string{
 				"key0": "__Value__",
 			},
-			ValidationWindowHours: 1,
+			ValidationWindowHours: ptr.Int32(1),
 		},
 		RestoreTestingSelectionName: ptr.String("__RestoreTestingSelectionName__"),
 	}
@@ -5082,7 +5082,7 @@ func TestUpdateRequestSnapshot_CreateRestoreTestingSelection(t *testing.T) {
 				"key0": "__Value__",
 			},
 			RestoreTestingSelectionName: ptr.String("__RestoreTestingSelectionName__"),
-			ValidationWindowHours:       1,
+			ValidationWindowHours:       ptr.Int32(1),
 		},
 	}
 	body := &bytes.Buffer{}
@@ -8364,7 +8364,7 @@ func TestUpdateRequestSnapshot_UpdateRestoreTestingSelection(t *testing.T) {
 			RestoreMetadataOverrides: map[string]string{
 				"key0": "__Value__",
 			},
-			ValidationWindowHours: 1,
+			ValidationWindowHours: ptr.Int32(1),
 		},
 		RestoreTestingSelectionName: ptr.String("__RestoreTestingSelectionName__"),
 	}

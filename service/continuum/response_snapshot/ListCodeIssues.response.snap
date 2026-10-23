@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"items":[{"confidence":1,"createdAt":"2000-01-01T00:00:00Z","issueArn":"__IssueArn__","issueId":"__IssueId__","name":"__Name__","phase":"VALIDATION","severity":"LOW","status":"CREATED","statusMessage":"__StatusMessage__","statusReason":"INTERNAL_ERROR","statusUpdatedAt":"2000-01-01T00:00:00Z","updatedAt":"2000-01-01T00:00:00Z"},{"confidence":1,"createdAt":"2000-01-01T00:00:00Z","issueArn":"__IssueArn__","issueId":"__IssueId__","name":"__Name__","phase":"VALIDATION","severity":"LOW","status":"CREATED","statusMessage":"__StatusMessage__","statusReason":"INTERNAL_ERROR","statusUpdatedAt":"2000-01-01T00:00:00Z","updatedAt":"2000-01-01T00:00:00Z"}],"nextToken":"__NextToken__"}

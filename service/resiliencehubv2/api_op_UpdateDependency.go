@@ -4,7 +4,9 @@ package resiliencehubv2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/resiliencehubv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/resiliencehubv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -46,6 +48,27 @@ type UpdateDependencyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateDependencyInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateDependencyRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateDependencyInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Comment != nil {
+		s.WriteString(schemas.UpdateDependencyRequest_comment, *v.Comment)
+	}
+	if v.Criticality != "" {
+		s.WriteString(schemas.UpdateDependencyRequest_criticality, string(v.Criticality))
+	}
+	if v.DependencyId != nil {
+		s.WriteString(schemas.UpdateDependencyRequest_dependencyId, *v.DependencyId)
+	}
+	if v.ServiceArn != nil {
+		s.WriteString(schemas.UpdateDependencyRequest_serviceArn, *v.ServiceArn)
+	}
+}
+
 type UpdateDependencyOutput struct {
 
 	// The criticality level of the dependency.
@@ -85,13 +108,72 @@ type UpdateDependencyOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateDependencyOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateDependencyResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateDependencyOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Comment != nil {
+		s.WriteString(schemas.UpdateDependencyResponse_comment, *v.Comment)
+	}
+	if v.Criticality != "" {
+		s.WriteString(schemas.UpdateDependencyResponse_criticality, string(v.Criticality))
+	}
+	if v.DependencyId != nil {
+		s.WriteString(schemas.UpdateDependencyResponse_dependencyId, *v.DependencyId)
+	}
+	if v.DependencyName != nil {
+		s.WriteString(schemas.UpdateDependencyResponse_dependencyName, *v.DependencyName)
+	}
+	if v.Location != nil {
+		s.WriteString(schemas.UpdateDependencyResponse_location, *v.Location)
+	}
+	if v.Provider != nil {
+		s.WriteString(schemas.UpdateDependencyResponse_provider, *v.Provider)
+	}
+	if v.UpdatedAt != nil {
+		s.WriteTime(schemas.UpdateDependencyResponse_updatedAt, *v.UpdatedAt)
+	}
+}
+func (v *UpdateDependencyOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateDependencyResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateDependencyResponse_comment:
+			v.Comment = new(string)
+			return d.ReadString(schemas.UpdateDependencyResponse_comment, v.Comment)
+		case schemas.UpdateDependencyResponse_criticality:
+			var ev string
+			if err := d.ReadString(schemas.UpdateDependencyResponse_criticality, &ev); err != nil {
+				return err
+			}
+			v.Criticality = types.DependencyCriticality(ev)
+			return nil
+		case schemas.UpdateDependencyResponse_dependencyId:
+			v.DependencyId = new(string)
+			return d.ReadString(schemas.UpdateDependencyResponse_dependencyId, v.DependencyId)
+		case schemas.UpdateDependencyResponse_dependencyName:
+			v.DependencyName = new(string)
+			return d.ReadString(schemas.UpdateDependencyResponse_dependencyName, v.DependencyName)
+		case schemas.UpdateDependencyResponse_location:
+			v.Location = new(string)
+			return d.ReadString(schemas.UpdateDependencyResponse_location, v.Location)
+		case schemas.UpdateDependencyResponse_provider:
+			v.Provider = new(string)
+			return d.ReadString(schemas.UpdateDependencyResponse_provider, v.Provider)
+		case schemas.UpdateDependencyResponse_updatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.UpdateDependencyResponse_updatedAt, v.UpdatedAt)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateDependencyMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateDependency{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateDependency, schemas.UpdateDependencyRequest, schemas.UpdateDependencyResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateDependency{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateDependency, schemas.UpdateDependencyRequest, schemas.UpdateDependencyResponse), output: &UpdateDependencyOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

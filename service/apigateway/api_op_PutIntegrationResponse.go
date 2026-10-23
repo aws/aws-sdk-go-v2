@@ -4,7 +4,9 @@ package apigateway
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/apigateway/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/apigateway/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -77,6 +79,35 @@ type PutIntegrationResponseInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutIntegrationResponseInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutIntegrationResponseRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutIntegrationResponseInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ContentHandling != "" {
+		s.WriteString(schemas.PutIntegrationResponseRequest_contentHandling, string(v.ContentHandling))
+	}
+	if v.HttpMethod != nil {
+		s.WriteString(schemas.PutIntegrationResponseRequest_httpMethod, *v.HttpMethod)
+	}
+	if v.ResourceId != nil {
+		s.WriteString(schemas.PutIntegrationResponseRequest_resourceId, *v.ResourceId)
+	}
+	serializeMapOfStringToString(s, schemas.PutIntegrationResponseRequest_responseParameters, v.ResponseParameters)
+	serializeMapOfStringToString(s, schemas.PutIntegrationResponseRequest_responseTemplates, v.ResponseTemplates)
+	if v.RestApiId != nil {
+		s.WriteString(schemas.PutIntegrationResponseRequest_restApiId, *v.RestApiId)
+	}
+	if v.SelectionPattern != nil {
+		s.WriteString(schemas.PutIntegrationResponseRequest_selectionPattern, *v.SelectionPattern)
+	}
+	if v.StatusCode != nil {
+		s.WriteString(schemas.PutIntegrationResponseRequest_statusCode, *v.StatusCode)
+	}
+}
+
 // Represents an integration response. The status code must map to an existing
 // MethodResponse, and parameters and templates can be used to transform the
 // back-end response.
@@ -127,13 +158,54 @@ type PutIntegrationResponseOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutIntegrationResponseOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.IntegrationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutIntegrationResponseOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ContentHandling != "" {
+		s.WriteString(schemas.IntegrationResponse_contentHandling, string(v.ContentHandling))
+	}
+	serializeMapOfStringToString(s, schemas.IntegrationResponse_responseParameters, v.ResponseParameters)
+	serializeMapOfStringToString(s, schemas.IntegrationResponse_responseTemplates, v.ResponseTemplates)
+	if v.SelectionPattern != nil {
+		s.WriteString(schemas.IntegrationResponse_selectionPattern, *v.SelectionPattern)
+	}
+	if v.StatusCode != nil {
+		s.WriteString(schemas.IntegrationResponse_statusCode, *v.StatusCode)
+	}
+}
+func (v *PutIntegrationResponseOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.IntegrationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.IntegrationResponse_contentHandling:
+			var ev string
+			if err := d.ReadString(schemas.IntegrationResponse_contentHandling, &ev); err != nil {
+				return err
+			}
+			v.ContentHandling = types.ContentHandlingStrategy(ev)
+			return nil
+		case schemas.IntegrationResponse_responseParameters:
+			return deserializeMapOfStringToString(d, schemas.IntegrationResponse_responseParameters, &v.ResponseParameters)
+		case schemas.IntegrationResponse_responseTemplates:
+			return deserializeMapOfStringToString(d, schemas.IntegrationResponse_responseTemplates, &v.ResponseTemplates)
+		case schemas.IntegrationResponse_selectionPattern:
+			v.SelectionPattern = new(string)
+			return d.ReadString(schemas.IntegrationResponse_selectionPattern, v.SelectionPattern)
+		case schemas.IntegrationResponse_statusCode:
+			v.StatusCode = new(string)
+			return d.ReadString(schemas.IntegrationResponse_statusCode, v.StatusCode)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPutIntegrationResponseMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpPutIntegrationResponse{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutIntegrationResponse, schemas.PutIntegrationResponseRequest, schemas.IntegrationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpPutIntegrationResponse{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutIntegrationResponse, schemas.PutIntegrationResponseRequest, schemas.IntegrationResponse), output: &PutIntegrationResponseOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

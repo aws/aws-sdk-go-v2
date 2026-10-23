@@ -4,7 +4,9 @@ package medialive
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/medialive/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/medialive/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -29,6 +31,15 @@ type DescribeAccountConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeAccountConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeAccountConfigurationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeAccountConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+
 // Placeholder documentation for DescribeAccountConfigurationResponse
 type DescribeAccountConfigurationOutput struct {
 
@@ -41,13 +52,34 @@ type DescribeAccountConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeAccountConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeAccountConfigurationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeAccountConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountConfiguration != nil {
+		s.WriteStruct(schemas.DescribeAccountConfigurationResponse_AccountConfiguration)
+		v.AccountConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DescribeAccountConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeAccountConfigurationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeAccountConfigurationResponse_AccountConfiguration:
+			v.AccountConfiguration = &types.AccountConfiguration{}
+			return v.AccountConfiguration.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeAccountConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeAccountConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeAccountConfiguration, schemas.DescribeAccountConfigurationRequest, schemas.DescribeAccountConfigurationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeAccountConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeAccountConfiguration, schemas.DescribeAccountConfigurationRequest, schemas.DescribeAccountConfigurationResponse), output: &DescribeAccountConfigurationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

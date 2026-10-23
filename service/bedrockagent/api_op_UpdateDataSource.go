@@ -4,7 +4,9 @@ package bedrockagent
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/bedrockagent/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagent/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -64,6 +66,45 @@ type UpdateDataSourceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateDataSourceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateDataSourceRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateDataSourceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DataDeletionPolicy != "" {
+		s.WriteString(schemas.UpdateDataSourceRequest_dataDeletionPolicy, string(v.DataDeletionPolicy))
+	}
+	if v.DataSourceConfiguration != nil {
+		s.WriteStruct(schemas.UpdateDataSourceRequest_dataSourceConfiguration)
+		v.DataSourceConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DataSourceId != nil {
+		s.WriteString(schemas.UpdateDataSourceRequest_dataSourceId, *v.DataSourceId)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateDataSourceRequest_description, *v.Description)
+	}
+	if v.KnowledgeBaseId != nil {
+		s.WriteString(schemas.UpdateDataSourceRequest_knowledgeBaseId, *v.KnowledgeBaseId)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateDataSourceRequest_name, *v.Name)
+	}
+	if v.ServerSideEncryptionConfiguration != nil {
+		s.WriteStruct(schemas.UpdateDataSourceRequest_serverSideEncryptionConfiguration)
+		v.ServerSideEncryptionConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.VectorIngestionConfiguration != nil {
+		s.WriteStruct(schemas.UpdateDataSourceRequest_vectorIngestionConfiguration)
+		v.VectorIngestionConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type UpdateDataSourceOutput struct {
 
 	// Contains details about the data source.
@@ -77,13 +118,34 @@ type UpdateDataSourceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateDataSourceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateDataSourceResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateDataSourceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DataSource != nil {
+		s.WriteStruct(schemas.UpdateDataSourceResponse_dataSource)
+		v.DataSource.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateDataSourceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateDataSourceResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateDataSourceResponse_dataSource:
+			v.DataSource = &types.DataSource{}
+			return v.DataSource.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateDataSourceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateDataSource{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateDataSource, schemas.UpdateDataSourceRequest, schemas.UpdateDataSourceResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateDataSource{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateDataSource, schemas.UpdateDataSourceRequest, schemas.UpdateDataSourceResponse), output: &UpdateDataSourceOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

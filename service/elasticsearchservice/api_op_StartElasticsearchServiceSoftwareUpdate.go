@@ -4,7 +4,9 @@ package elasticsearchservice
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/elasticsearchservice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/elasticsearchservice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -36,6 +38,18 @@ type StartElasticsearchServiceSoftwareUpdateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartElasticsearchServiceSoftwareUpdateInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartElasticsearchServiceSoftwareUpdateRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartElasticsearchServiceSoftwareUpdateInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DomainName != nil {
+		s.WriteString(schemas.StartElasticsearchServiceSoftwareUpdateRequest_DomainName, *v.DomainName)
+	}
+}
+
 // The result of a StartElasticsearchServiceSoftwareUpdate operation. Contains the
 // status of the update.
 type StartElasticsearchServiceSoftwareUpdateOutput struct {
@@ -49,13 +63,34 @@ type StartElasticsearchServiceSoftwareUpdateOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartElasticsearchServiceSoftwareUpdateOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartElasticsearchServiceSoftwareUpdateResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartElasticsearchServiceSoftwareUpdateOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ServiceSoftwareOptions != nil {
+		s.WriteStruct(schemas.StartElasticsearchServiceSoftwareUpdateResponse_ServiceSoftwareOptions)
+		v.ServiceSoftwareOptions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *StartElasticsearchServiceSoftwareUpdateOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartElasticsearchServiceSoftwareUpdateResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartElasticsearchServiceSoftwareUpdateResponse_ServiceSoftwareOptions:
+			v.ServiceSoftwareOptions = &types.ServiceSoftwareOptions{}
+			return v.ServiceSoftwareOptions.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartElasticsearchServiceSoftwareUpdateMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpStartElasticsearchServiceSoftwareUpdate{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartElasticsearchServiceSoftwareUpdate, schemas.StartElasticsearchServiceSoftwareUpdateRequest, schemas.StartElasticsearchServiceSoftwareUpdateResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStartElasticsearchServiceSoftwareUpdate{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartElasticsearchServiceSoftwareUpdate, schemas.StartElasticsearchServiceSoftwareUpdateRequest, schemas.StartElasticsearchServiceSoftwareUpdateResponse), output: &StartElasticsearchServiceSoftwareUpdateOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

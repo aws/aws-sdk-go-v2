@@ -130,6 +130,46 @@ func (m *validateOpBatchDeleteThreatModels) HandleInitialize(ctx context.Context
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpBatchDisassociateFindingIssue struct {
+}
+
+func (*validateOpBatchDisassociateFindingIssue) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpBatchDisassociateFindingIssue) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*BatchDisassociateFindingIssueInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpBatchDisassociateFindingIssueInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpBatchExportFindings struct {
+}
+
+func (*validateOpBatchExportFindings) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpBatchExportFindings) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*BatchExportFindingsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpBatchExportFindingsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpBatchGetAgentSpaces struct {
 }
 
@@ -950,6 +990,26 @@ func (m *validateOpInitiateProviderRegistration) HandleInitialize(ctx context.Co
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpListActorMessages struct {
+}
+
+func (*validateOpListActorMessages) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListActorMessages) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListActorMessagesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListActorMessagesInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListArtifacts struct {
 }
 
@@ -1570,6 +1630,26 @@ func (m *validateOpUpdateIntegratedResources) HandleInitialize(ctx context.Conte
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateIntegration struct {
+}
+
+func (*validateOpUpdateIntegration) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateIntegration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateIntegrationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateIntegrationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdatePentest struct {
 }
 
@@ -1732,6 +1812,14 @@ func addOpBatchDeleteSecurityRequirementsValidationMiddleware(stack *middleware.
 
 func addOpBatchDeleteThreatModelsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpBatchDeleteThreatModels{}, middleware.After)
+}
+
+func addOpBatchDisassociateFindingIssueValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpBatchDisassociateFindingIssue{}, middleware.After)
+}
+
+func addOpBatchExportFindingsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpBatchExportFindings{}, middleware.After)
 }
 
 func addOpBatchGetAgentSpacesValidationMiddleware(stack *middleware.Stack) error {
@@ -1898,6 +1986,10 @@ func addOpInitiateProviderRegistrationValidationMiddleware(stack *middleware.Sta
 	return stack.Initialize.Add(&validateOpInitiateProviderRegistration{}, middleware.After)
 }
 
+func addOpListActorMessagesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListActorMessages{}, middleware.After)
+}
+
 func addOpListArtifactsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListArtifacts{}, middleware.After)
 }
@@ -2022,6 +2114,10 @@ func addOpUpdateIntegratedResourcesValidationMiddleware(stack *middleware.Stack)
 	return stack.Initialize.Add(&validateOpUpdateIntegratedResources{}, middleware.After)
 }
 
+func addOpUpdateIntegrationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateIntegration{}, middleware.After)
+}
+
 func addOpUpdatePentestValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdatePentest{}, middleware.After)
 }
@@ -2077,6 +2173,83 @@ func validateAssets(v *types.Assets) error {
 	}
 }
 
+func validateAzureDevOpsIntegrationInput(v *types.AzureDevOpsIntegrationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AzureDevOpsIntegrationInput"}
+	if v.Code == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Code"))
+	}
+	if v.State == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("State"))
+	}
+	if v.OrganizationName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("OrganizationName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAzureDevOpsRepositoryResource(v *types.AzureDevOpsRepositoryResource) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AzureDevOpsRepositoryResource"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Organization == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Organization"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAzureDevOpsResourceCapabilities(v *types.AzureDevOpsResourceCapabilities) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AzureDevOpsResourceCapabilities"}
+	if v.TriggerFilterGroups != nil {
+		if err := validateTriggerFilterGroups(v.TriggerFilterGroups); err != nil {
+			invalidParams.AddNested("TriggerFilterGroups", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateBitbucketDataCenterIntegrationInput(v *types.BitbucketDataCenterIntegrationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "BitbucketDataCenterIntegrationInput"}
+	if v.TargetUrl == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TargetUrl"))
+	}
+	if v.Code == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Code"))
+	}
+	if v.State == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("State"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateBitbucketIntegrationInput(v *types.BitbucketIntegrationInput) error {
 	if v == nil {
 		return nil
@@ -2111,6 +2284,23 @@ func validateBitbucketRepositoryResource(v *types.BitbucketRepositoryResource) e
 	}
 	if v.Workspace == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Workspace"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateBitbucketResourceCapabilities(v *types.BitbucketResourceCapabilities) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "BitbucketResourceCapabilities"}
+	if v.TriggerFilterGroups != nil {
+		if err := validateTriggerFilterGroups(v.TriggerFilterGroups); err != nil {
+			invalidParams.AddNested("TriggerFilterGroups", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2293,6 +2483,23 @@ func validateGitHubRepositoryResource(v *types.GitHubRepositoryResource) error {
 	}
 }
 
+func validateGitHubResourceCapabilities(v *types.GitHubResourceCapabilities) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GitHubResourceCapabilities"}
+	if v.TriggerFilterGroups != nil {
+		if err := validateTriggerFilterGroups(v.TriggerFilterGroups); err != nil {
+			invalidParams.AddNested("TriggerFilterGroups", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateGitLabIntegrationInput(v *types.GitLabIntegrationInput) error {
 	if v == nil {
 		return nil
@@ -2321,6 +2528,23 @@ func validateGitLabRepositoryResource(v *types.GitLabRepositoryResource) error {
 	}
 	if v.Namespace == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Namespace"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateGitLabResourceCapabilities(v *types.GitLabResourceCapabilities) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GitLabResourceCapabilities"}
+	if v.TriggerFilterGroups != nil {
+		if err := validateTriggerFilterGroups(v.TriggerFilterGroups); err != nil {
+			invalidParams.AddNested("TriggerFilterGroups", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2407,6 +2631,11 @@ func validateIntegratedResource(v types.IntegratedResource) error {
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "IntegratedResource"}
 	switch uv := v.(type) {
+	case *types.IntegratedResourceMemberAzureDevOpsRepository:
+		if err := validateAzureDevOpsRepositoryResource(&uv.Value); err != nil {
+			invalidParams.AddNested("[azureDevOpsRepository]", err.(smithy.InvalidParamsError))
+		}
+
 	case *types.IntegratedResourceMemberBitbucketRepository:
 		if err := validateBitbucketRepositoryResource(&uv.Value); err != nil {
 			invalidParams.AddNested("[bitbucketRepository]", err.(smithy.InvalidParamsError))
@@ -2425,6 +2654,11 @@ func validateIntegratedResource(v types.IntegratedResource) error {
 	case *types.IntegratedResourceMemberGitlabRepository:
 		if err := validateGitLabRepositoryResource(&uv.Value); err != nil {
 			invalidParams.AddNested("[gitlabRepository]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.IntegratedResourceMemberJiraProject:
+		if err := validateJiraProjectResource(&uv.Value); err != nil {
+			invalidParams.AddNested("[jiraProject]", err.(smithy.InvalidParamsError))
 		}
 
 	}
@@ -2447,6 +2681,11 @@ func validateIntegratedResourceInputItem(v *types.IntegratedResourceInputItem) e
 			invalidParams.AddNested("Resource", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.Capabilities != nil {
+		if err := validateProviderResourceCapabilities(v.Capabilities); err != nil {
+			invalidParams.AddNested("Capabilities", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -2463,6 +2702,69 @@ func validateIntegratedResourceInputItemList(v []types.IntegratedResourceInputIt
 		if err := validateIntegratedResourceInputItem(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateIssueDestination(v *types.IssueDestination) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "IssueDestination"}
+	if v.IntegrationId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IntegrationId"))
+	}
+	if v.ProjectKey == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ProjectKey"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateJiraIntegrationInput(v *types.JiraIntegrationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "JiraIntegrationInput"}
+	if v.InstallationId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstallationId"))
+	}
+	if v.Code == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Code"))
+	}
+	if v.State == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("State"))
+	}
+	if v.SiteUrl == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SiteUrl"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateJiraProjectResource(v *types.JiraProjectResource) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "JiraProjectResource"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.ProjectKey == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ProjectKey"))
+	}
+	if v.ProjectId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ProjectId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2501,9 +2803,19 @@ func validateProviderInput(v types.ProviderInput) error {
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ProviderInput"}
 	switch uv := v.(type) {
+	case *types.ProviderInputMemberAzureDevOps:
+		if err := validateAzureDevOpsIntegrationInput(&uv.Value); err != nil {
+			invalidParams.AddNested("[azureDevOps]", err.(smithy.InvalidParamsError))
+		}
+
 	case *types.ProviderInputMemberBitbucket:
 		if err := validateBitbucketIntegrationInput(&uv.Value); err != nil {
 			invalidParams.AddNested("[bitbucket]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.ProviderInputMemberBitbucketDataCenter:
+		if err := validateBitbucketDataCenterIntegrationInput(&uv.Value); err != nil {
+			invalidParams.AddNested("[bitbucketDataCenter]", err.(smithy.InvalidParamsError))
 		}
 
 	case *types.ProviderInputMemberConfluence:
@@ -2518,6 +2830,45 @@ func validateProviderInput(v types.ProviderInput) error {
 
 	case *types.ProviderInputMemberGitlab:
 		if err := validateGitLabIntegrationInput(&uv.Value); err != nil {
+			invalidParams.AddNested("[gitlab]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.ProviderInputMemberJira:
+		if err := validateJiraIntegrationInput(&uv.Value); err != nil {
+			invalidParams.AddNested("[jira]", err.(smithy.InvalidParamsError))
+		}
+
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateProviderResourceCapabilities(v types.ProviderResourceCapabilities) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ProviderResourceCapabilities"}
+	switch uv := v.(type) {
+	case *types.ProviderResourceCapabilitiesMemberAzureDevOps:
+		if err := validateAzureDevOpsResourceCapabilities(&uv.Value); err != nil {
+			invalidParams.AddNested("[azureDevOps]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.ProviderResourceCapabilitiesMemberBitbucket:
+		if err := validateBitbucketResourceCapabilities(&uv.Value); err != nil {
+			invalidParams.AddNested("[bitbucket]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.ProviderResourceCapabilitiesMemberGithub:
+		if err := validateGitHubResourceCapabilities(&uv.Value); err != nil {
+			invalidParams.AddNested("[github]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.ProviderResourceCapabilitiesMemberGitlab:
+		if err := validateGitLabResourceCapabilities(&uv.Value); err != nil {
 			invalidParams.AddNested("[gitlab]", err.(smithy.InvalidParamsError))
 		}
 
@@ -2539,6 +2890,44 @@ func validateReportDestination(v *types.ReportDestination) error {
 	}
 	if v.ContainerId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ContainerId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateScopeChange(v *types.ScopeChange) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ScopeChange"}
+	if v.IntegrationId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IntegrationId"))
+	}
+	if v.ProviderResourceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ProviderResourceId"))
+	}
+	if v.HeadCommitSha == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("HeadCommitSha"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateScopeChangeList(v []types.ScopeChange) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ScopeChangeList"}
+	for i := range v {
+		if err := validateScopeChange(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2613,6 +3002,90 @@ func validateServiceManagedInput(v *types.ServiceManagedInput) error {
 	}
 	if v.SubnetIds == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SubnetIds"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateTestScope(v *types.TestScope) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TestScope"}
+	if len(v.Type) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Type"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateTriggerFilter(v *types.TriggerFilter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TriggerFilter"}
+	if len(v.Type) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Type"))
+	}
+	if v.Patterns == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Patterns"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateTriggerFilterGroup(v *types.TriggerFilterGroup) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TriggerFilterGroup"}
+	if v.Filters != nil {
+		if err := validateTriggerFilterList(v.Filters); err != nil {
+			invalidParams.AddNested("Filters", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateTriggerFilterGroups(v []types.TriggerFilterGroup) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TriggerFilterGroups"}
+	for i := range v {
+		if err := validateTriggerFilterGroup(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateTriggerFilterList(v []types.TriggerFilter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TriggerFilterList"}
+	for i := range v {
+		if err := validateTriggerFilter(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2795,6 +3268,49 @@ func validateOpBatchDeleteThreatModelsInput(v *BatchDeleteThreatModelsInput) err
 	}
 	if v.AgentSpaceId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AgentSpaceId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpBatchDisassociateFindingIssueInput(v *BatchDisassociateFindingIssueInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "BatchDisassociateFindingIssueInput"}
+	if v.AgentSpaceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AgentSpaceId"))
+	}
+	if v.FindingIds == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FindingIds"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpBatchExportFindingsInput(v *BatchExportFindingsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "BatchExportFindingsInput"}
+	if v.AgentSpaceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AgentSpaceId"))
+	}
+	if v.IssueDestination == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IssueDestination"))
+	} else if v.IssueDestination != nil {
+		if err := validateIssueDestination(v.IssueDestination); err != nil {
+			invalidParams.AddNested("IssueDestination", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.FindingIds == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FindingIds"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3127,6 +3643,11 @@ func validateOpCreateCodeReviewInput(v *CreateCodeReviewInput) error {
 			invalidParams.AddNested("Assets", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.ReportDestination != nil {
+		if err := validateReportDestination(v.ReportDestination); err != nil {
+			invalidParams.AddNested("ReportDestination", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -3197,6 +3718,16 @@ func validateOpCreatePentestInput(v *CreatePentestInput) error {
 	if v.Assets != nil {
 		if err := validateAssets(v.Assets); err != nil {
 			invalidParams.AddNested("Assets", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ReportDestination != nil {
+		if err := validateReportDestination(v.ReportDestination); err != nil {
+			invalidParams.AddNested("ReportDestination", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.TestScope != nil {
+		if err := validateTestScope(v.TestScope); err != nil {
+			invalidParams.AddNested("TestScope", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -3559,6 +4090,27 @@ func validateOpInitiateProviderRegistrationInput(v *InitiateProviderRegistration
 	}
 }
 
+func validateOpListActorMessagesInput(v *ListActorMessagesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListActorMessagesInput"}
+	if v.AgentSpaceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AgentSpaceId"))
+	}
+	if v.PentestId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PentestId"))
+	}
+	if v.ActorIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ActorIdentifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpListArtifactsInput(v *ListArtifactsInput) error {
 	if v == nil {
 		return nil
@@ -3882,6 +4434,11 @@ func validateOpStartPentestJobInput(v *StartPentestJobInput) error {
 	if v.PentestId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("PentestId"))
 	}
+	if v.ScopeChanges != nil {
+		if err := validateScopeChangeList(v.ScopeChanges); err != nil {
+			invalidParams.AddNested("ScopeChanges", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -4048,6 +4605,11 @@ func validateOpUpdateCodeReviewInput(v *UpdateCodeReviewInput) error {
 			invalidParams.AddNested("Assets", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.ReportDestination != nil {
+		if err := validateReportDestination(v.ReportDestination); err != nil {
+			invalidParams.AddNested("ReportDestination", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -4098,6 +4660,24 @@ func validateOpUpdateIntegratedResourcesInput(v *UpdateIntegratedResourcesInput)
 	}
 }
 
+func validateOpUpdateIntegrationInput(v *UpdateIntegrationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateIntegrationInput"}
+	if v.IntegrationId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IntegrationId"))
+	}
+	if len(v.WebhookAction) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("WebhookAction"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpUpdatePentestInput(v *UpdatePentestInput) error {
 	if v == nil {
 		return nil
@@ -4112,6 +4692,16 @@ func validateOpUpdatePentestInput(v *UpdatePentestInput) error {
 	if v.Assets != nil {
 		if err := validateAssets(v.Assets); err != nil {
 			invalidParams.AddNested("Assets", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ReportDestination != nil {
+		if err := validateReportDestination(v.ReportDestination); err != nil {
+			invalidParams.AddNested("ReportDestination", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.TestScope != nil {
+		if err := validateTestScope(v.TestScope); err != nil {
+			invalidParams.AddNested("TestScope", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -4209,6 +4799,11 @@ func validateOpUpdateThreatModelInput(v *UpdateThreatModelInput) error {
 	if v.ScopeDocs != nil {
 		if err := validateDocumentList(v.ScopeDocs); err != nil {
 			invalidParams.AddNested("ScopeDocs", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ReportDestination != nil {
+		if err := validateReportDestination(v.ReportDestination); err != nil {
+			invalidParams.AddNested("ReportDestination", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

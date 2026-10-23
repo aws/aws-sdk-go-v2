@@ -5,7 +5,9 @@ package rekognition
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/rekognition/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/rekognition/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -54,6 +56,28 @@ type ListFacesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListFacesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListFacesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListFacesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CollectionId != nil {
+		s.WriteString(schemas.ListFacesRequest_CollectionId, *v.CollectionId)
+	}
+	serializeFaceIdList(s, schemas.ListFacesRequest_FaceIds, v.FaceIds)
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListFacesRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListFacesRequest_NextToken, *v.NextToken)
+	}
+	if v.UserId != nil {
+		s.WriteString(schemas.ListFacesRequest_UserId, *v.UserId)
+	}
+}
+
 type ListFacesOutput struct {
 
 	// Version number of the face detection model associated with the input collection
@@ -73,13 +97,41 @@ type ListFacesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListFacesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListFacesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListFacesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FaceModelVersion != nil {
+		s.WriteString(schemas.ListFacesResponse_FaceModelVersion, *v.FaceModelVersion)
+	}
+	serializeFaceList(s, schemas.ListFacesResponse_Faces, v.Faces)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListFacesResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListFacesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListFacesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListFacesResponse_FaceModelVersion:
+			v.FaceModelVersion = new(string)
+			return d.ReadString(schemas.ListFacesResponse_FaceModelVersion, v.FaceModelVersion)
+		case schemas.ListFacesResponse_Faces:
+			return deserializeFaceList(d, schemas.ListFacesResponse_Faces, &v.Faces)
+		case schemas.ListFacesResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListFacesResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListFacesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListFaces{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListFaces, schemas.ListFacesRequest, schemas.ListFacesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListFaces{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListFaces, schemas.ListFacesRequest, schemas.ListFacesResponse), output: &ListFacesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

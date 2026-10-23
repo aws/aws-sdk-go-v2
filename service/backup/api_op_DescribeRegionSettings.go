@@ -4,6 +4,8 @@ package backup
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/backup/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -29,6 +31,15 @@ func (c *Client) DescribeRegionSettings(ctx context.Context, params *DescribeReg
 
 type DescribeRegionSettingsInput struct {
 	noSmithyDocumentSerde
+}
+
+func (v *DescribeRegionSettingsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeRegionSettingsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeRegionSettingsInput) SerializeMembers(s smithy.ShapeSerializer) {
 }
 
 type DescribeRegionSettingsOutput struct {
@@ -57,13 +68,32 @@ type DescribeRegionSettingsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeRegionSettingsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeRegionSettingsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeRegionSettingsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeResourceTypeManagementPreference(s, schemas.DescribeRegionSettingsOutput_ResourceTypeManagementPreference, v.ResourceTypeManagementPreference)
+	serializeResourceTypeOptInPreference(s, schemas.DescribeRegionSettingsOutput_ResourceTypeOptInPreference, v.ResourceTypeOptInPreference)
+}
+func (v *DescribeRegionSettingsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeRegionSettingsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeRegionSettingsOutput_ResourceTypeManagementPreference:
+			return deserializeResourceTypeManagementPreference(d, schemas.DescribeRegionSettingsOutput_ResourceTypeManagementPreference, &v.ResourceTypeManagementPreference)
+		case schemas.DescribeRegionSettingsOutput_ResourceTypeOptInPreference:
+			return deserializeResourceTypeOptInPreference(d, schemas.DescribeRegionSettingsOutput_ResourceTypeOptInPreference, &v.ResourceTypeOptInPreference)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeRegionSettingsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeRegionSettings{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeRegionSettings, schemas.DescribeRegionSettingsInput, schemas.DescribeRegionSettingsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeRegionSettings{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeRegionSettings, schemas.DescribeRegionSettingsInput, schemas.DescribeRegionSettingsOutput), output: &DescribeRegionSettingsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

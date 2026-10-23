@@ -158,7 +158,8 @@ var ComputeOptimizerService = smithy.NewServiceSchema(_ComputeOptimizerService, 
 var AccessDeniedException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.computeoptimizer",
 	Name:      "AccessDeniedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 403})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 403})
 var AccessDeniedException_message *smithy.Schema
 
 var AccountEnrollmentStatus = smithy.NewSchema(smithy.ShapeID{
@@ -2540,13 +2541,15 @@ var _InstanceType = smithy.NewSchema(smithy.ShapeID{
 var InternalServerException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.computeoptimizer",
 	Name:      "InternalServerException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 500})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
+	&smithytraits.HTTPError{Code: 500})
 var InternalServerException_message *smithy.Schema
 
 var InvalidParameterValueException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.computeoptimizer",
 	Name:      "InvalidParameterValueException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var InvalidParameterValueException_message *smithy.Schema
 
 var JobFilter = smithy.NewSchema(smithy.ShapeID{
@@ -2968,7 +2971,8 @@ var _LicenseVersion = smithy.NewSchema(smithy.ShapeID{
 var LimitExceededException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.computeoptimizer",
 	Name:      "LimitExceededException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var LimitExceededException_message *smithy.Schema
 
 var _LookBackPeriodInDays = smithy.NewSchema(smithy.ShapeID{
@@ -3139,7 +3143,8 @@ var _MinSize = smithy.NewSchema(smithy.ShapeID{
 var MissingAuthenticationToken = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.computeoptimizer",
 	Name:      "MissingAuthenticationToken",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 403})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 403})
 var MissingAuthenticationToken_message *smithy.Schema
 
 var _MixedInstanceType = smithy.NewSchema(smithy.ShapeID{
@@ -3221,7 +3226,8 @@ var _OperatingSystem = smithy.NewSchema(smithy.ShapeID{
 var OptInRequiredException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.computeoptimizer",
 	Name:      "OptInRequiredException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 403})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 403})
 var OptInRequiredException_message *smithy.Schema
 
 var Order = smithy.NewSchema(smithy.ShapeID{
@@ -3967,7 +3973,8 @@ var _ResourceId = smithy.NewSchema(smithy.ShapeID{
 var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.computeoptimizer",
 	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 404})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 404})
 var ResourceNotFoundException_message *smithy.Schema
 
 var ResourceType = smithy.NewSchema(smithy.ShapeID{
@@ -4089,7 +4096,8 @@ var ServiceConfiguration_taskDefinitionArn *smithy.Schema
 var ServiceUnavailableException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.computeoptimizer",
 	Name:      "ServiceUnavailableException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 503})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
+	&smithytraits.HTTPError{Code: 503})
 var ServiceUnavailableException_message *smithy.Schema
 
 var Status = smithy.NewSchema(smithy.ShapeID{
@@ -4167,7 +4175,8 @@ var _TaskDefinitionArn = smithy.NewSchema(smithy.ShapeID{
 var ThrottlingException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.computeoptimizer",
 	Name:      "ThrottlingException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 429})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 429})
 var ThrottlingException_message *smithy.Schema
 
 var _Timestamp = smithy.NewSchema(smithy.ShapeID{

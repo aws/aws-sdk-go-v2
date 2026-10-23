@@ -5,7 +5,9 @@ package bedrockagentcorecontrol
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -54,6 +56,27 @@ type ListPoliciesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListPoliciesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListPoliciesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListPoliciesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListPoliciesRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListPoliciesRequest_nextToken, *v.NextToken)
+	}
+	if v.PolicyEngineId != nil {
+		s.WriteString(schemas.ListPoliciesRequest_policyEngineId, *v.PolicyEngineId)
+	}
+	if v.TargetResourceScope != nil {
+		s.WriteString(schemas.ListPoliciesRequest_targetResourceScope, *v.TargetResourceScope)
+	}
+}
+
 type ListPoliciesOutput struct {
 
 	// An array of policy objects that match the specified criteria. Each policy
@@ -74,13 +97,35 @@ type ListPoliciesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListPoliciesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListPoliciesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListPoliciesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListPoliciesResponse_nextToken, *v.NextToken)
+	}
+	serializePolicies(s, schemas.ListPoliciesResponse_policies, v.Policies)
+}
+func (v *ListPoliciesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListPoliciesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListPoliciesResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListPoliciesResponse_nextToken, v.NextToken)
+		case schemas.ListPoliciesResponse_policies:
+			return deserializePolicies(d, schemas.ListPoliciesResponse_policies, &v.Policies)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListPoliciesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListPolicies{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListPolicies, schemas.ListPoliciesRequest, schemas.ListPoliciesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListPolicies{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListPolicies, schemas.ListPoliciesRequest, schemas.ListPoliciesResponse), output: &ListPoliciesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

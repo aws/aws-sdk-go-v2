@@ -4,7 +4,9 @@ package databasemigrationservice
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/databasemigrationservice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/databasemigrationservice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -42,6 +44,22 @@ type ModifyReplicationSubnetGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ModifyReplicationSubnetGroupInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ModifyReplicationSubnetGroupMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ModifyReplicationSubnetGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ReplicationSubnetGroupDescription != nil {
+		s.WriteString(schemas.ModifyReplicationSubnetGroupMessage_ReplicationSubnetGroupDescription, *v.ReplicationSubnetGroupDescription)
+	}
+	if v.ReplicationSubnetGroupIdentifier != nil {
+		s.WriteString(schemas.ModifyReplicationSubnetGroupMessage_ReplicationSubnetGroupIdentifier, *v.ReplicationSubnetGroupIdentifier)
+	}
+	serializeSubnetIdentifierList(s, schemas.ModifyReplicationSubnetGroupMessage_SubnetIds, v.SubnetIds)
+}
+
 type ModifyReplicationSubnetGroupOutput struct {
 
 	// The modified replication subnet group.
@@ -53,13 +71,34 @@ type ModifyReplicationSubnetGroupOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ModifyReplicationSubnetGroupOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ModifyReplicationSubnetGroupResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ModifyReplicationSubnetGroupOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ReplicationSubnetGroup != nil {
+		s.WriteStruct(schemas.ModifyReplicationSubnetGroupResponse_ReplicationSubnetGroup)
+		v.ReplicationSubnetGroup.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *ModifyReplicationSubnetGroupOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ModifyReplicationSubnetGroupResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ModifyReplicationSubnetGroupResponse_ReplicationSubnetGroup:
+			v.ReplicationSubnetGroup = &types.ReplicationSubnetGroup{}
+			return v.ReplicationSubnetGroup.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationModifyReplicationSubnetGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpModifyReplicationSubnetGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ModifyReplicationSubnetGroup, schemas.ModifyReplicationSubnetGroupMessage, schemas.ModifyReplicationSubnetGroupResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpModifyReplicationSubnetGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ModifyReplicationSubnetGroup, schemas.ModifyReplicationSubnetGroupMessage, schemas.ModifyReplicationSubnetGroupResponse), output: &ModifyReplicationSubnetGroupOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

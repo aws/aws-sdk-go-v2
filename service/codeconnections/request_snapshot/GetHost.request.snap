@@ -1,6 +1,7 @@
-POST /
+POST /service/CodeConnections_20231201/operation/GetHost
 
-Content-Type: application/x-amz-json-1.0
-X-Amz-Target: CodeConnections_20231201.GetHost
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"HostArn":"__HostArn__"}
+¿gHostArnk__HostArn__ÿ

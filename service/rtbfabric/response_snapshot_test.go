@@ -668,6 +668,7 @@ func TestCheckResponseSnapshot_CreateResponderGateway(t *testing.T) {
 			},
 		},
 		ExternalInboundEndpoint: ptr.String("__ExternalInboundEndpoint__"),
+		ClientRoutingPolicy:     types.ClientRoutingPolicy("AVAILABILITY_ZONE_AFFINITY"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("CreateResponderGateway.response")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -726,7 +727,8 @@ func TestCheckResponseSnapshot_CreateResponderGateway(t *testing.T) {
 		Tags: map[string]string{
 			"key0": "__Value__",
 		},
-		GatewayType: types.GatewayType("EXTERNAL"),
+		GatewayType:         types.GatewayType("EXTERNAL"),
+		ClientRoutingPolicy: types.ClientRoutingPolicy("AVAILABILITY_ZONE_AFFINITY"),
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -1471,6 +1473,7 @@ func TestCheckResponseSnapshot_GetResponderGateway(t *testing.T) {
 		LinksRequestedCount:     ptr.Int32(1),
 		GatewayType:             types.GatewayType("EXTERNAL"),
 		ExternalInboundEndpoint: ptr.String("__ExternalInboundEndpoint__"),
+		ClientRoutingPolicy:     types.ClientRoutingPolicy("AVAILABILITY_ZONE_AFFINITY"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("GetResponderGateway.response")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -2255,8 +2258,9 @@ func TestCheckResponseSnapshot_UpdateRequesterGateway(t *testing.T) {
 
 func TestCheckResponseSnapshot_UpdateResponderGateway(t *testing.T) {
 	want := &UpdateResponderGatewayOutput{
-		GatewayId: ptr.String("__GatewayId__"),
-		Status:    types.ResponderGatewayStatus("PENDING_CREATION"),
+		GatewayId:           ptr.String("__GatewayId__"),
+		Status:              types.ResponderGatewayStatus("PENDING_CREATION"),
+		ClientRoutingPolicy: types.ClientRoutingPolicy("AVAILABILITY_ZONE_AFFINITY"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("UpdateResponderGateway.response")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -2301,9 +2305,10 @@ func TestCheckResponseSnapshot_UpdateResponderGateway(t *testing.T) {
 				},
 			},
 		},
-		ClientToken: ptr.String("__ClientToken__"),
-		GatewayId:   ptr.String("__GatewayId__"),
-		Description: ptr.String("__Description__"),
+		ClientToken:         ptr.String("__ClientToken__"),
+		GatewayId:           ptr.String("__GatewayId__"),
+		Description:         ptr.String("__Description__"),
+		ClientRoutingPolicy: types.ClientRoutingPolicy("AVAILABILITY_ZONE_AFFINITY"),
 	})
 	if err != nil {
 		t.Fatal(err)

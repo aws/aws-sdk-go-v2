@@ -886,6 +886,10 @@ func TestUpdateResponseSnapshot_AdminRespondToAuthChallenge(t *testing.T) {
 				DeviceGroupKey: ptr.String("__DeviceGroupKey__"),
 			},
 		},
+		AvailableChallenges: []types.ChallengeNameType{
+			types.ChallengeNameType("SMS_MFA"),
+			types.ChallengeNameType("SMS_MFA"),
+		},
 	}
 	proto := awsjson.New11(schemas.AWSCognitoIdentityProviderService)
 	opSchema := smithy.NewOperationSchema(schemas.AdminRespondToAuthChallenge, schemas.AdminRespondToAuthChallengeResponse, schemas.AdminRespondToAuthChallengeResponse)
@@ -1247,6 +1251,9 @@ func TestUpdateResponseSnapshot_CreateIdentityProvider(t *testing.T) {
 			IdpIdentifiers: []string{
 				"__Member__",
 				"__Member__",
+			},
+			AcrMapping: map[string]string{
+				"key0": "__Value__",
 			},
 			LastModifiedDate: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			CreationDate:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
@@ -1621,6 +1628,11 @@ func TestUpdateResponseSnapshot_CreateUserPool(t *testing.T) {
 			},
 			IssuerConfiguration: &types.IssuerConfigurationType{
 				Type: types.IssuerType("ORIGINAL"),
+			},
+			AcrConfiguration: map[string]types.AcrLevelConfigType{
+				"key0": {
+					AcrValue: ptr.String("__AcrValue__"),
+				},
 			},
 		},
 	}
@@ -2100,6 +2112,9 @@ func TestUpdateResponseSnapshot_DescribeIdentityProvider(t *testing.T) {
 			IdpIdentifiers: []string{
 				"__Member__",
 				"__Member__",
+			},
+			AcrMapping: map[string]string{
+				"key0": "__Value__",
 			},
 			LastModifiedDate: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			CreationDate:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
@@ -2641,6 +2656,11 @@ func TestUpdateResponseSnapshot_DescribeUserPool(t *testing.T) {
 			IssuerConfiguration: &types.IssuerConfigurationType{
 				Type: types.IssuerType("ORIGINAL"),
 			},
+			AcrConfiguration: map[string]types.AcrLevelConfigType{
+				"key0": {
+					AcrValue: ptr.String("__AcrValue__"),
+				},
+			},
 		},
 	}
 	proto := awsjson.New11(schemas.AWSCognitoIdentityProviderService)
@@ -2986,6 +3006,9 @@ func TestUpdateResponseSnapshot_GetIdentityProviderByIdentifier(t *testing.T) {
 			IdpIdentifiers: []string{
 				"__Member__",
 				"__Member__",
+			},
+			AcrMapping: map[string]string{
+				"key0": "__Value__",
 			},
 			LastModifiedDate: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			CreationDate:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
@@ -4206,6 +4229,10 @@ func TestUpdateResponseSnapshot_RespondToAuthChallenge(t *testing.T) {
 				DeviceGroupKey: ptr.String("__DeviceGroupKey__"),
 			},
 		},
+		AvailableChallenges: []types.ChallengeNameType{
+			types.ChallengeNameType("SMS_MFA"),
+			types.ChallengeNameType("SMS_MFA"),
+		},
 	}
 	proto := awsjson.New11(schemas.AWSCognitoIdentityProviderService)
 	opSchema := smithy.NewOperationSchema(schemas.RespondToAuthChallenge, schemas.RespondToAuthChallengeResponse, schemas.RespondToAuthChallengeResponse)
@@ -4783,6 +4810,9 @@ func TestUpdateResponseSnapshot_UpdateIdentityProvider(t *testing.T) {
 			IdpIdentifiers: []string{
 				"__Member__",
 				"__Member__",
+			},
+			AcrMapping: map[string]string{
+				"key0": "__Value__",
 			},
 			LastModifiedDate: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			CreationDate:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
@@ -5444,7 +5474,7 @@ func TestUpdateResponseSnapshot_Error_FeatureUnavailableInTierException(t *testi
 		Message: ptr.String("__Message__"),
 	}
 	proto := awsjson.New11(schemas.AWSCognitoIdentityProviderService)
-	opSchema := smithy.NewOperationSchema(schemas.CreateUserPool, schemas.FeatureUnavailableInTierException, schemas.FeatureUnavailableInTierException)
+	opSchema := smithy.NewOperationSchema(schemas.AdminInitiateAuth, schemas.FeatureUnavailableInTierException, schemas.FeatureUnavailableInTierException)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
 		t.Fatal(err)

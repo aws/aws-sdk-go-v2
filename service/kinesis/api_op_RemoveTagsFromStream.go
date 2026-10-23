@@ -4,6 +4,8 @@ package kinesis
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/kinesis/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"github.com/aws/smithy-go/ptr"
 )
@@ -53,6 +55,24 @@ type RemoveTagsFromStreamInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RemoveTagsFromStreamInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RemoveTagsFromStreamInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RemoveTagsFromStreamInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.StreamARN != nil {
+		s.WriteString(schemas.RemoveTagsFromStreamInput_StreamARN, *v.StreamARN)
+	}
+	if v.StreamId != nil {
+		s.WriteString(schemas.RemoveTagsFromStreamInput_StreamId, *v.StreamId)
+	}
+	if v.StreamName != nil {
+		s.WriteString(schemas.RemoveTagsFromStreamInput_StreamName, *v.StreamName)
+	}
+	serializeTagKeyList(s, schemas.RemoveTagsFromStreamInput_TagKeys, v.TagKeys)
+}
 func (in *RemoveTagsFromStreamInput) bindEndpointParams(p *EndpointParameters) {
 
 	p.StreamARN = in.StreamARN
@@ -67,13 +87,26 @@ type RemoveTagsFromStreamOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RemoveTagsFromStreamOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RemoveTagsFromStreamOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *RemoveTagsFromStreamOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationRemoveTagsFromStreamMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpRemoveTagsFromStream{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RemoveTagsFromStream, schemas.RemoveTagsFromStreamInput, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpRemoveTagsFromStream{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RemoveTagsFromStream, schemas.RemoveTagsFromStreamInput, nil), output: &RemoveTagsFromStreamOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

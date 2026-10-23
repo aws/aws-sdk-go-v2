@@ -262,6 +262,46 @@ func (EFSTransitEncryption) Values() []EFSTransitEncryption {
 	}
 }
 
+type EksAccessEntryDesiredState string
+
+// Enum values for EksAccessEntryDesiredState
+const (
+	EksAccessEntryDesiredStateEnabled            EksAccessEntryDesiredState = "ENABLED"
+	EksAccessEntryDesiredStateDisabled           EksAccessEntryDesiredState = "DISABLED"
+	EksAccessEntryDesiredStateInheritFromCluster EksAccessEntryDesiredState = "INHERIT_FROM_CLUSTER"
+)
+
+// Values returns all known values for EksAccessEntryDesiredState. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (EksAccessEntryDesiredState) Values() []EksAccessEntryDesiredState {
+	return []EksAccessEntryDesiredState{
+		"ENABLED",
+		"DISABLED",
+		"INHERIT_FROM_CLUSTER",
+	}
+}
+
+type EksAccessEntryStatus string
+
+// Enum values for EksAccessEntryStatus
+const (
+	EksAccessEntryStatusActive   EksAccessEntryStatus = "ACTIVE"
+	EksAccessEntryStatusInactive EksAccessEntryStatus = "INACTIVE"
+)
+
+// Values returns all known values for EksAccessEntryStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (EksAccessEntryStatus) Values() []EksAccessEntryStatus {
+	return []EksAccessEntryStatus{
+		"ACTIVE",
+		"INACTIVE",
+	}
+}
+
 type FirelensConfigurationType string
 
 // Enum values for FirelensConfigurationType

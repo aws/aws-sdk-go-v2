@@ -3,4 +3,4 @@ POST /create-pricing-rule
 Content-Type: application/json
 X-Amzn-Client-Token: __ClientToken__
 
-{"BillingEntity":"__BillingEntity__","Description":"__Description__","ModifierPercentage":1,"Name":"__Name__","Operation":"__Operation__","Scope":"GLOBAL","Service":"__Service__","Tags":{"key0":"__Value__"},"Tiering":{"FreeTier":{"Activated":true}},"Type":"MARKUP","UsageType":"__UsageType__"}
+{"BillingEntity":"__BillingEntity__","Description":"__Description__","ModifierPercentage":1,"Name":"__Name__","Operation":"__Operation__","Scope":"GLOBAL","Service":"__Service__","Tags":{"key0":"__Value__"},"Tiering":{"CustomTiers":[{"BeginRangeInclusive":1,"EndRangeExclusive":1,"RateValue":1},{"BeginRangeInclusive":1,"EndRangeExclusive":1,"RateValue":1}],"FreeTier":{"Activated":true}},"Type":"MARKUP","UsageType":"__UsageType__"}

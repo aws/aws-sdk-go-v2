@@ -41,7 +41,7 @@ type AssociateCertificateInput struct {
 	// If you don't provide this value, then Amazon Web Services generates a random
 	// one for you.
 	//
-	// If you retry the operation with the same ClientToken , but with different
+	// If you retry the operation with the same clientToken , but with different
 	// parameters, the retry fails with an IdempotentParameterMismatch error.
 	//
 	// [UUID type of value]: https://wikipedia.org/wiki/Universally_unique_identifier

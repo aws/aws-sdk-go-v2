@@ -76,6 +76,10 @@ type RestoreDBClusterFromSnapshotInput struct {
 	// restored DB cluster can be created in.
 	AvailabilityZones []string
 
+	// Specifies whether to copy all tags from the restored DB cluster to snapshots of
+	// the restored DB cluster. The default is not to copy them.
+	CopyTagsToSnapshot *bool
+
 	// The name of the DB cluster parameter group to associate with this DB cluster.
 	//
 	// Type: String. Required: No.
@@ -136,7 +140,7 @@ type RestoreDBClusterFromSnapshotInput struct {
 	//
 	// Valid Values: IPV4 | DUAL
 	//
-	// [DocumentDB clusters in a VPC]: https://docs.aws.amazon.com/documentdb/latest/developerguide/vpc-clusters.html
+	// [DocumentDB clusters in a VPC]: https://docs.aws.amazon.com/documentdb/latest/devguide/vpc-clusters.html
 	NetworkType *string
 
 	// The port number on which the new cluster accepts connections.

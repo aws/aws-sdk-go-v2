@@ -4959,7 +4959,8 @@ type WorkspaceProperties struct {
 	//   (formerly WSP).
 	//
 	//   - Unavailable for Windows 7 WorkSpaces and WorkSpaces using GPU-based bundles
-	//   (Graphics, GraphicsPro, Graphics.g4dn, GraphicsPro.g4dn, and Graphics.g6).
+	//   (Graphics, GraphicsPro, Graphics.g4dn, GraphicsPro.g4dn, Graphics.g6, and
+	//   Graphics.g7).
 	//
 	// [Protocols for Amazon WorkSpaces]: https://docs.aws.amazon.com/workspaces/latest/adminguide/amazon-workspaces-protocols.html
 	Protocols []Protocol

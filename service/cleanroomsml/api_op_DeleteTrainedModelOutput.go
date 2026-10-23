@@ -4,6 +4,8 @@ package cleanroomsml
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/cleanroomsml/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -44,6 +46,24 @@ type DeleteTrainedModelOutputInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteTrainedModelOutputInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteTrainedModelOutputRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteTrainedModelOutputInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MembershipIdentifier != nil {
+		s.WriteString(schemas.DeleteTrainedModelOutputRequest_membershipIdentifier, *v.MembershipIdentifier)
+	}
+	if v.TrainedModelArn != nil {
+		s.WriteString(schemas.DeleteTrainedModelOutputRequest_trainedModelArn, *v.TrainedModelArn)
+	}
+	if v.VersionIdentifier != nil {
+		s.WriteString(schemas.DeleteTrainedModelOutputRequest_versionIdentifier, *v.VersionIdentifier)
+	}
+}
+
 type DeleteTrainedModelOutputOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -51,13 +71,26 @@ type DeleteTrainedModelOutputOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteTrainedModelOutputOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteTrainedModelOutputOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteTrainedModelOutputOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteTrainedModelOutputMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteTrainedModelOutput{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteTrainedModelOutput, schemas.DeleteTrainedModelOutputRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteTrainedModelOutput{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteTrainedModelOutput, schemas.DeleteTrainedModelOutputRequest, nil), output: &DeleteTrainedModelOutputOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

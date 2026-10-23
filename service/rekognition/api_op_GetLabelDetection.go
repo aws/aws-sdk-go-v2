@@ -5,7 +5,9 @@ package rekognition
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/rekognition/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/rekognition/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -127,6 +129,30 @@ type GetLabelDetectionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetLabelDetectionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetLabelDetectionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetLabelDetectionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AggregateBy != "" {
+		s.WriteString(schemas.GetLabelDetectionRequest_AggregateBy, string(v.AggregateBy))
+	}
+	if v.JobId != nil {
+		s.WriteString(schemas.GetLabelDetectionRequest_JobId, *v.JobId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.GetLabelDetectionRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetLabelDetectionRequest_NextToken, *v.NextToken)
+	}
+	if v.SortBy != "" {
+		s.WriteString(schemas.GetLabelDetectionRequest_SortBy, string(v.SortBy))
+	}
+}
+
 type GetLabelDetectionOutput struct {
 
 	// Information about the paramters used when getting a response. Includes
@@ -177,13 +203,93 @@ type GetLabelDetectionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetLabelDetectionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetLabelDetectionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetLabelDetectionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GetRequestMetadata != nil {
+		s.WriteStruct(schemas.GetLabelDetectionResponse_GetRequestMetadata)
+		v.GetRequestMetadata.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.JobId != nil {
+		s.WriteString(schemas.GetLabelDetectionResponse_JobId, *v.JobId)
+	}
+	if v.JobStatus != "" {
+		s.WriteString(schemas.GetLabelDetectionResponse_JobStatus, string(v.JobStatus))
+	}
+	if v.JobTag != nil {
+		s.WriteString(schemas.GetLabelDetectionResponse_JobTag, *v.JobTag)
+	}
+	if v.LabelModelVersion != nil {
+		s.WriteString(schemas.GetLabelDetectionResponse_LabelModelVersion, *v.LabelModelVersion)
+	}
+	serializeLabelDetections(s, schemas.GetLabelDetectionResponse_Labels, v.Labels)
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetLabelDetectionResponse_NextToken, *v.NextToken)
+	}
+	if v.StatusMessage != nil {
+		s.WriteString(schemas.GetLabelDetectionResponse_StatusMessage, *v.StatusMessage)
+	}
+	if v.Video != nil {
+		s.WriteStruct(schemas.GetLabelDetectionResponse_Video)
+		v.Video.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.VideoMetadata != nil {
+		s.WriteStruct(schemas.GetLabelDetectionResponse_VideoMetadata)
+		v.VideoMetadata.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetLabelDetectionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetLabelDetectionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetLabelDetectionResponse_GetRequestMetadata:
+			v.GetRequestMetadata = &types.GetLabelDetectionRequestMetadata{}
+			return v.GetRequestMetadata.Deserialize(d)
+		case schemas.GetLabelDetectionResponse_JobId:
+			v.JobId = new(string)
+			return d.ReadString(schemas.GetLabelDetectionResponse_JobId, v.JobId)
+		case schemas.GetLabelDetectionResponse_JobStatus:
+			var ev string
+			if err := d.ReadString(schemas.GetLabelDetectionResponse_JobStatus, &ev); err != nil {
+				return err
+			}
+			v.JobStatus = types.VideoJobStatus(ev)
+			return nil
+		case schemas.GetLabelDetectionResponse_JobTag:
+			v.JobTag = new(string)
+			return d.ReadString(schemas.GetLabelDetectionResponse_JobTag, v.JobTag)
+		case schemas.GetLabelDetectionResponse_LabelModelVersion:
+			v.LabelModelVersion = new(string)
+			return d.ReadString(schemas.GetLabelDetectionResponse_LabelModelVersion, v.LabelModelVersion)
+		case schemas.GetLabelDetectionResponse_Labels:
+			return deserializeLabelDetections(d, schemas.GetLabelDetectionResponse_Labels, &v.Labels)
+		case schemas.GetLabelDetectionResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.GetLabelDetectionResponse_NextToken, v.NextToken)
+		case schemas.GetLabelDetectionResponse_StatusMessage:
+			v.StatusMessage = new(string)
+			return d.ReadString(schemas.GetLabelDetectionResponse_StatusMessage, v.StatusMessage)
+		case schemas.GetLabelDetectionResponse_Video:
+			v.Video = &types.Video{}
+			return v.Video.Deserialize(d)
+		case schemas.GetLabelDetectionResponse_VideoMetadata:
+			v.VideoMetadata = &types.VideoMetadata{}
+			return v.VideoMetadata.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetLabelDetectionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetLabelDetection{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetLabelDetection, schemas.GetLabelDetectionRequest, schemas.GetLabelDetectionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetLabelDetection{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetLabelDetection, schemas.GetLabelDetectionRequest, schemas.GetLabelDetectionResponse), output: &GetLabelDetectionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

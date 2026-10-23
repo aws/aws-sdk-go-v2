@@ -5,7 +5,9 @@ package batch
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/batch/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/batch/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -54,6 +56,22 @@ type DescribeJobQueuesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeJobQueuesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeJobQueuesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeJobQueuesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeStringList(s, schemas.DescribeJobQueuesRequest_jobQueues, v.JobQueues)
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.DescribeJobQueuesRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeJobQueuesRequest_nextToken, *v.NextToken)
+	}
+}
+
 type DescribeJobQueuesOutput struct {
 
 	// The list of job queues.
@@ -71,13 +89,35 @@ type DescribeJobQueuesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeJobQueuesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeJobQueuesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeJobQueuesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeJobQueueDetailList(s, schemas.DescribeJobQueuesResponse_jobQueues, v.JobQueues)
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeJobQueuesResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *DescribeJobQueuesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeJobQueuesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeJobQueuesResponse_jobQueues:
+			return deserializeJobQueueDetailList(d, schemas.DescribeJobQueuesResponse_jobQueues, &v.JobQueues)
+		case schemas.DescribeJobQueuesResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.DescribeJobQueuesResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeJobQueuesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeJobQueues{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeJobQueues, schemas.DescribeJobQueuesRequest, schemas.DescribeJobQueuesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeJobQueues{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeJobQueues, schemas.DescribeJobQueuesRequest, schemas.DescribeJobQueuesResponse), output: &DescribeJobQueuesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

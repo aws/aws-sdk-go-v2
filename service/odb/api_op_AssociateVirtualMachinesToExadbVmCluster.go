@@ -4,7 +4,9 @@ package odb
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/odb/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/odb/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,21 @@ type AssociateVirtualMachinesToExadbVmClusterInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssociateVirtualMachinesToExadbVmClusterInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssociateVirtualMachinesToExadbVmClusterInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssociateVirtualMachinesToExadbVmClusterInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DesiredNodeCount != nil {
+		s.WriteInt32(schemas.AssociateVirtualMachinesToExadbVmClusterInput_desiredNodeCount, *v.DesiredNodeCount)
+	}
+	if v.ExadbVmClusterId != nil {
+		s.WriteString(schemas.AssociateVirtualMachinesToExadbVmClusterInput_exadbVmClusterId, *v.ExadbVmClusterId)
+	}
+}
+
 type AssociateVirtualMachinesToExadbVmClusterOutput struct {
 
 	// The unique identifier of the Exascale VM cluster.
@@ -61,13 +78,54 @@ type AssociateVirtualMachinesToExadbVmClusterOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssociateVirtualMachinesToExadbVmClusterOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssociateVirtualMachinesToExadbVmClusterOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssociateVirtualMachinesToExadbVmClusterOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DisplayName != nil {
+		s.WriteString(schemas.AssociateVirtualMachinesToExadbVmClusterOutput_displayName, *v.DisplayName)
+	}
+	if v.ExadbVmClusterId != nil {
+		s.WriteString(schemas.AssociateVirtualMachinesToExadbVmClusterOutput_exadbVmClusterId, *v.ExadbVmClusterId)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.AssociateVirtualMachinesToExadbVmClusterOutput_status, string(v.Status))
+	}
+	if v.StatusReason != nil {
+		s.WriteString(schemas.AssociateVirtualMachinesToExadbVmClusterOutput_statusReason, *v.StatusReason)
+	}
+}
+func (v *AssociateVirtualMachinesToExadbVmClusterOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AssociateVirtualMachinesToExadbVmClusterOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AssociateVirtualMachinesToExadbVmClusterOutput_displayName:
+			v.DisplayName = new(string)
+			return d.ReadString(schemas.AssociateVirtualMachinesToExadbVmClusterOutput_displayName, v.DisplayName)
+		case schemas.AssociateVirtualMachinesToExadbVmClusterOutput_exadbVmClusterId:
+			v.ExadbVmClusterId = new(string)
+			return d.ReadString(schemas.AssociateVirtualMachinesToExadbVmClusterOutput_exadbVmClusterId, v.ExadbVmClusterId)
+		case schemas.AssociateVirtualMachinesToExadbVmClusterOutput_status:
+			var ev string
+			if err := d.ReadString(schemas.AssociateVirtualMachinesToExadbVmClusterOutput_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.ResourceStatus(ev)
+			return nil
+		case schemas.AssociateVirtualMachinesToExadbVmClusterOutput_statusReason:
+			v.StatusReason = new(string)
+			return d.ReadString(schemas.AssociateVirtualMachinesToExadbVmClusterOutput_statusReason, v.StatusReason)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationAssociateVirtualMachinesToExadbVmClusterMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpAssociateVirtualMachinesToExadbVmCluster{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociateVirtualMachinesToExadbVmCluster, schemas.AssociateVirtualMachinesToExadbVmClusterInput, schemas.AssociateVirtualMachinesToExadbVmClusterOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpAssociateVirtualMachinesToExadbVmCluster{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociateVirtualMachinesToExadbVmCluster, schemas.AssociateVirtualMachinesToExadbVmClusterInput, schemas.AssociateVirtualMachinesToExadbVmClusterOutput), output: &AssociateVirtualMachinesToExadbVmClusterOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

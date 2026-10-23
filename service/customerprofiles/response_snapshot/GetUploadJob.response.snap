@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"CompletedAt":946684800,"CreatedAt":946684800,"DataExpiry":1,"DisplayName":"__DisplayName__","Fields":{"key0":{"ContentType":"STRING","Source":"__Source__","Target":"__Target__"}},"JobId":"__JobId__","ResultsSummary":{"CreatedRecords":1,"FailedRecords":1,"UpdatedRecords":1},"Status":"CREATED","StatusReason":"VALIDATION_FAILURE","UniqueKey":"__UniqueKey__"}

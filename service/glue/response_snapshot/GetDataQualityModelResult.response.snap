@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSGlue.GetDataQualityModelResult
+
+{"CompletedOn":946684800,"Model":[{"ActualValue":1,"Date":946684800,"InclusionAnnotation":"INCLUDE","LowerBound":1,"PredictedValue":1,"UpperBound":1},{"ActualValue":1,"Date":946684800,"InclusionAnnotation":"INCLUDE","LowerBound":1,"PredictedValue":1,"UpperBound":1}]}

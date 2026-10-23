@@ -4,7 +4,9 @@ package appsync
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/appsync/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/appsync/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,21 @@ type GetFunctionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetFunctionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetFunctionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetFunctionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApiId != nil {
+		s.WriteString(schemas.GetFunctionRequest_apiId, *v.ApiId)
+	}
+	if v.FunctionId != nil {
+		s.WriteString(schemas.GetFunctionRequest_functionId, *v.FunctionId)
+	}
+}
+
 type GetFunctionOutput struct {
 
 	// The Function object.
@@ -50,13 +67,34 @@ type GetFunctionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetFunctionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetFunctionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetFunctionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FunctionConfiguration != nil {
+		s.WriteStruct(schemas.GetFunctionResponse_functionConfiguration)
+		v.FunctionConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetFunctionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetFunctionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetFunctionResponse_functionConfiguration:
+			v.FunctionConfiguration = &types.FunctionConfiguration{}
+			return v.FunctionConfiguration.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetFunctionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetFunction{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetFunction, schemas.GetFunctionRequest, schemas.GetFunctionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetFunction{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetFunction, schemas.GetFunctionRequest, schemas.GetFunctionResponse), output: &GetFunctionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

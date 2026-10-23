@@ -4,6 +4,8 @@ package sesv2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/sesv2/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -36,6 +38,18 @@ type PutAccountSendingAttributesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutAccountSendingAttributesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutAccountSendingAttributesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutAccountSendingAttributesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SendingEnabled != false {
+		s.WriteBool(schemas.PutAccountSendingAttributesRequest_SendingEnabled, v.SendingEnabled)
+	}
+}
+
 // An HTTP 200 response if the request succeeds, or an error message if the
 // request fails.
 type PutAccountSendingAttributesOutput struct {
@@ -45,13 +59,26 @@ type PutAccountSendingAttributesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutAccountSendingAttributesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutAccountSendingAttributesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutAccountSendingAttributesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *PutAccountSendingAttributesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PutAccountSendingAttributesResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPutAccountSendingAttributesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpPutAccountSendingAttributes{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutAccountSendingAttributes, schemas.PutAccountSendingAttributesRequest, schemas.PutAccountSendingAttributesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpPutAccountSendingAttributes{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutAccountSendingAttributes, schemas.PutAccountSendingAttributesRequest, schemas.PutAccountSendingAttributesResponse), output: &PutAccountSendingAttributesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

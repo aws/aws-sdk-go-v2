@@ -4,6 +4,8 @@ package ecr
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/ecr/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -27,6 +29,15 @@ type GetRegistryPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetRegistryPolicyInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetRegistryPolicyRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetRegistryPolicyInput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+
 type GetRegistryPolicyOutput struct {
 
 	// The JSON text of the permissions policy for a registry.
@@ -41,13 +52,38 @@ type GetRegistryPolicyOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetRegistryPolicyOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetRegistryPolicyResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetRegistryPolicyOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PolicyText != nil {
+		s.WriteString(schemas.GetRegistryPolicyResponse_policyText, *v.PolicyText)
+	}
+	if v.RegistryId != nil {
+		s.WriteString(schemas.GetRegistryPolicyResponse_registryId, *v.RegistryId)
+	}
+}
+func (v *GetRegistryPolicyOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetRegistryPolicyResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetRegistryPolicyResponse_policyText:
+			v.PolicyText = new(string)
+			return d.ReadString(schemas.GetRegistryPolicyResponse_policyText, v.PolicyText)
+		case schemas.GetRegistryPolicyResponse_registryId:
+			v.RegistryId = new(string)
+			return d.ReadString(schemas.GetRegistryPolicyResponse_registryId, v.RegistryId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetRegistryPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetRegistryPolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetRegistryPolicy, schemas.GetRegistryPolicyRequest, schemas.GetRegistryPolicyResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetRegistryPolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetRegistryPolicy, schemas.GetRegistryPolicyRequest, schemas.GetRegistryPolicyResponse), output: &GetRegistryPolicyOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -5,7 +5,9 @@ package bedrock
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/bedrock/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrock/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -73,6 +75,45 @@ type ListModelCopyJobsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListModelCopyJobsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListModelCopyJobsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListModelCopyJobsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreationTimeAfter != nil {
+		s.WriteTime(schemas.ListModelCopyJobsRequest_creationTimeAfter, *v.CreationTimeAfter)
+	}
+	if v.CreationTimeBefore != nil {
+		s.WriteTime(schemas.ListModelCopyJobsRequest_creationTimeBefore, *v.CreationTimeBefore)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListModelCopyJobsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListModelCopyJobsRequest_nextToken, *v.NextToken)
+	}
+	if v.SortBy != "" {
+		s.WriteString(schemas.ListModelCopyJobsRequest_sortBy, string(v.SortBy))
+	}
+	if v.SortOrder != "" {
+		s.WriteString(schemas.ListModelCopyJobsRequest_sortOrder, string(v.SortOrder))
+	}
+	if v.SourceAccountEquals != nil {
+		s.WriteString(schemas.ListModelCopyJobsRequest_sourceAccountEquals, *v.SourceAccountEquals)
+	}
+	if v.SourceModelArnEquals != nil {
+		s.WriteString(schemas.ListModelCopyJobsRequest_sourceModelArnEquals, *v.SourceModelArnEquals)
+	}
+	if v.StatusEquals != "" {
+		s.WriteString(schemas.ListModelCopyJobsRequest_statusEquals, string(v.StatusEquals))
+	}
+	if v.TargetModelNameContains != nil {
+		s.WriteString(schemas.ListModelCopyJobsRequest_targetModelNameContains, *v.TargetModelNameContains)
+	}
+}
+
 type ListModelCopyJobsOutput struct {
 
 	// A list of information about each model copy job.
@@ -89,13 +130,35 @@ type ListModelCopyJobsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListModelCopyJobsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListModelCopyJobsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListModelCopyJobsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeModelCopyJobSummaries(s, schemas.ListModelCopyJobsResponse_modelCopyJobSummaries, v.ModelCopyJobSummaries)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListModelCopyJobsResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListModelCopyJobsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListModelCopyJobsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListModelCopyJobsResponse_modelCopyJobSummaries:
+			return deserializeModelCopyJobSummaries(d, schemas.ListModelCopyJobsResponse_modelCopyJobSummaries, &v.ModelCopyJobSummaries)
+		case schemas.ListModelCopyJobsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListModelCopyJobsResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListModelCopyJobsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListModelCopyJobs{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListModelCopyJobs, schemas.ListModelCopyJobsRequest, schemas.ListModelCopyJobsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListModelCopyJobs{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListModelCopyJobs, schemas.ListModelCopyJobsRequest, schemas.ListModelCopyJobsResponse), output: &ListModelCopyJobsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

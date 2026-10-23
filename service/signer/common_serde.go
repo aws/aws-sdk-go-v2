@@ -140,6 +140,13 @@ func deserializeCertificateHashes(d smithy.ShapeDeserializer, s *smithy.Schema, 
 	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			*v = append(*v, zero)
+			return nil
+		}
 
 		if err := d.ReadString(s.ListMember(), &vv); err != nil {
 			return err
@@ -154,6 +161,13 @@ func deserializeEncryptionAlgorithms(d smithy.ShapeDeserializer, s *smithy.Schem
 	*v = make([]types.EncryptionAlgorithm, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.EncryptionAlgorithm
+			*v = append(*v, zero)
+			return nil
+		}
 
 		if err := d.ReadString(s.ListMember(), &vv); err != nil {
 			return err
@@ -168,6 +182,13 @@ func deserializeHashAlgorithms(d smithy.ShapeDeserializer, s *smithy.Schema, v *
 	*v = make([]types.HashAlgorithm, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.HashAlgorithm
+			*v = append(*v, zero)
+			return nil
+		}
 
 		if err := d.ReadString(s.ListMember(), &vv); err != nil {
 			return err
@@ -182,6 +203,13 @@ func deserializeImageFormats(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]
 	*v = make([]types.ImageFormat, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.ImageFormat
+			*v = append(*v, zero)
+			return nil
+		}
 
 		if err := d.ReadString(s.ListMember(), &vv); err != nil {
 			return err
@@ -196,6 +224,14 @@ func deserializePermissions(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]t
 	*v = make([]types.Permission, 0)
 	var vv types.Permission
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.Permission
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = types.Permission{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -210,6 +246,13 @@ func deserializeRevokedEntities(d smithy.ShapeDeserializer, s *smithy.Schema, v 
 	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			*v = append(*v, zero)
+			return nil
+		}
 
 		if err := d.ReadString(s.ListMember(), &vv); err != nil {
 			return err
@@ -224,6 +267,14 @@ func deserializeSigningJobs(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]t
 	*v = make([]types.SigningJob, 0)
 	var vv types.SigningJob
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.SigningJob
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = types.SigningJob{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -238,6 +289,14 @@ func deserializeSigningPlatforms(d smithy.ShapeDeserializer, s *smithy.Schema, v
 	*v = make([]types.SigningPlatform, 0)
 	var vv types.SigningPlatform
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.SigningPlatform
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = types.SigningPlatform{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -252,6 +311,14 @@ func deserializeSigningProfiles(d smithy.ShapeDeserializer, s *smithy.Schema, v 
 	*v = make([]types.SigningProfile, 0)
 	var vv types.SigningProfile
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.SigningProfile
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = types.SigningProfile{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -266,6 +333,13 @@ func deserializeStatuses(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]type
 	*v = make([]types.SigningProfileStatus, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.SigningProfileStatus
+			*v = append(*v, zero)
+			return nil
+		}
 
 		if err := d.ReadString(s.ListMember(), &vv); err != nil {
 			return err
@@ -280,6 +354,13 @@ func deserializeTagKeyList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]st
 	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			*v = append(*v, zero)
+			return nil
+		}
 
 		if err := d.ReadString(s.ListMember(), &vv); err != nil {
 			return err
@@ -330,6 +411,13 @@ func deserializeMetadata(d smithy.ShapeDeserializer, s *smithy.Schema, v *map[st
 	*v = make(map[string]string)
 	var vv string
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			(*v)[k] = zero
+			return nil
+		}
 
 		if err := d.ReadString(s.MapValue(), &vv); err != nil {
 			return err
@@ -344,6 +432,13 @@ func deserializeSigningParameters(d smithy.ShapeDeserializer, s *smithy.Schema, 
 	*v = make(map[string]string)
 	var vv string
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			(*v)[k] = zero
+			return nil
+		}
 
 		if err := d.ReadString(s.MapValue(), &vv); err != nil {
 			return err
@@ -358,6 +453,13 @@ func deserializeTagMap(d smithy.ShapeDeserializer, s *smithy.Schema, v *map[stri
 	*v = make(map[string]string)
 	var vv string
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			(*v)[k] = zero
+			return nil
+		}
 
 		if err := d.ReadString(s.MapValue(), &vv); err != nil {
 			return err

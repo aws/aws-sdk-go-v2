@@ -937,6 +937,25 @@ func (AudioSelectorType) Values() []AudioSelectorType {
 	}
 }
 
+type AudioSmpte337Passthrough string
+
+// Enum values for AudioSmpte337Passthrough
+const (
+	AudioSmpte337PassthroughEnabled  AudioSmpte337Passthrough = "ENABLED"
+	AudioSmpte337PassthroughDisabled AudioSmpte337Passthrough = "DISABLED"
+)
+
+// Values returns all known values for AudioSmpte337Passthrough. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AudioSmpte337Passthrough) Values() []AudioSmpte337Passthrough {
+	return []AudioSmpte337Passthrough{
+		"ENABLED",
+		"DISABLED",
+	}
+}
+
 type AudioTypeControl string
 
 // Enum values for AudioTypeControl
@@ -1068,6 +1087,7 @@ type Av1RateControlMode string
 
 // Enum values for Av1RateControlMode
 const (
+	Av1RateControlModeCbr  Av1RateControlMode = "CBR"
 	Av1RateControlModeQvbr Av1RateControlMode = "QVBR"
 )
 
@@ -1077,7 +1097,29 @@ const (
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (Av1RateControlMode) Values() []Av1RateControlMode {
 	return []Av1RateControlMode{
+		"CBR",
 		"QVBR",
+	}
+}
+
+type Av1SceneChangeDetect string
+
+// Enum values for Av1SceneChangeDetect
+const (
+	Av1SceneChangeDetectDisabled            Av1SceneChangeDetect = "DISABLED"
+	Av1SceneChangeDetectEnabled             Av1SceneChangeDetect = "ENABLED"
+	Av1SceneChangeDetectTransitionDetection Av1SceneChangeDetect = "TRANSITION_DETECTION"
+)
+
+// Values returns all known values for Av1SceneChangeDetect. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (Av1SceneChangeDetect) Values() []Av1SceneChangeDetect {
+	return []Av1SceneChangeDetect{
+		"DISABLED",
+		"ENABLED",
+		"TRANSITION_DETECTION",
 	}
 }
 
@@ -2647,6 +2689,23 @@ func (CopyProtectionAction) Values() []CopyProtectionAction {
 	}
 }
 
+type DashAdaptationSetGrouping string
+
+// Enum values for DashAdaptationSetGrouping
+const (
+	DashAdaptationSetGroupingCodec DashAdaptationSetGrouping = "CODEC"
+)
+
+// Values returns all known values for DashAdaptationSetGrouping. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (DashAdaptationSetGrouping) Values() []DashAdaptationSetGrouping {
+	return []DashAdaptationSetGrouping{
+		"CODEC",
+	}
+}
+
 type DashIsoGroupAudioChannelConfigSchemeIdUri string
 
 // Enum values for DashIsoGroupAudioChannelConfigSchemeIdUri
@@ -3077,6 +3136,25 @@ func (DolbyVisionMapping) Values() []DolbyVisionMapping {
 	return []DolbyVisionMapping{
 		"HDR10_NOMAP",
 		"HDR10_1000",
+	}
+}
+
+type DolbyVisionPresence string
+
+// Enum values for DolbyVisionPresence
+const (
+	DolbyVisionPresencePresent DolbyVisionPresence = "PRESENT"
+	DolbyVisionPresenceAbsent  DolbyVisionPresence = "ABSENT"
+)
+
+// Values returns all known values for DolbyVisionPresence. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (DolbyVisionPresence) Values() []DolbyVisionPresence {
+	return []DolbyVisionPresence{
+		"PRESENT",
+		"ABSENT",
 	}
 }
 
@@ -4109,6 +4187,11 @@ const (
 	FormatFlac      Format = "flac"
 	FormatAsf       Format = "asf"
 	FormatOgg       Format = "ogg"
+	FormatThreeGp   Format = "three_gp"
+	FormatThreeG2   Format = "three_g2"
+	FormatAac       Format = "aac"
+	FormatAc3       Format = "ac3"
+	FormatEac3      Format = "eac3"
 )
 
 // Values returns all known values for Format. Note that this can be expanded in
@@ -4130,6 +4213,11 @@ func (Format) Values() []Format {
 		"flac",
 		"asf",
 		"ogg",
+		"three_gp",
+		"three_g2",
+		"aac",
+		"ac3",
+		"eac3",
 	}
 }
 
@@ -8351,14 +8439,16 @@ type NoiseReducerFilter string
 
 // Enum values for NoiseReducerFilter
 const (
-	NoiseReducerFilterBilateral NoiseReducerFilter = "BILATERAL"
-	NoiseReducerFilterMean      NoiseReducerFilter = "MEAN"
-	NoiseReducerFilterGaussian  NoiseReducerFilter = "GAUSSIAN"
-	NoiseReducerFilterLanczos   NoiseReducerFilter = "LANCZOS"
-	NoiseReducerFilterSharpen   NoiseReducerFilter = "SHARPEN"
-	NoiseReducerFilterConserve  NoiseReducerFilter = "CONSERVE"
-	NoiseReducerFilterSpatial   NoiseReducerFilter = "SPATIAL"
-	NoiseReducerFilterTemporal  NoiseReducerFilter = "TEMPORAL"
+	NoiseReducerFilterBilateral  NoiseReducerFilter = "BILATERAL"
+	NoiseReducerFilterMean       NoiseReducerFilter = "MEAN"
+	NoiseReducerFilterGaussian   NoiseReducerFilter = "GAUSSIAN"
+	NoiseReducerFilterLanczos    NoiseReducerFilter = "LANCZOS"
+	NoiseReducerFilterSharpen    NoiseReducerFilter = "SHARPEN"
+	NoiseReducerFilterConserve   NoiseReducerFilter = "CONSERVE"
+	NoiseReducerFilterSpatial    NoiseReducerFilter = "SPATIAL"
+	NoiseReducerFilterTemporal   NoiseReducerFilter = "TEMPORAL"
+	NoiseReducerFilterPerceptual NoiseReducerFilter = "PERCEPTUAL"
+	NoiseReducerFilterNone       NoiseReducerFilter = "NONE"
 )
 
 // Values returns all known values for NoiseReducerFilter. Note that this can be
@@ -8375,6 +8465,8 @@ func (NoiseReducerFilter) Values() []NoiseReducerFilter {
 		"CONSERVE",
 		"SPATIAL",
 		"TEMPORAL",
+		"PERCEPTUAL",
+		"NONE",
 	}
 }
 
@@ -8461,6 +8553,27 @@ func (PadVideo) Values() []PadVideo {
 	return []PadVideo{
 		"DISABLED",
 		"BLACK",
+	}
+}
+
+type PassthroughSegmentationMode string
+
+// Enum values for PassthroughSegmentationMode
+const (
+	PassthroughSegmentationModeAuto          PassthroughSegmentationMode = "AUTO"
+	PassthroughSegmentationModeDurationBased PassthroughSegmentationMode = "DURATION_BASED"
+	PassthroughSegmentationModeGopCount      PassthroughSegmentationMode = "GOP_COUNT"
+)
+
+// Values returns all known values for PassthroughSegmentationMode. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (PassthroughSegmentationMode) Values() []PassthroughSegmentationMode {
+	return []PassthroughSegmentationMode{
+		"AUTO",
+		"DURATION_BASED",
+		"GOP_COUNT",
 	}
 }
 

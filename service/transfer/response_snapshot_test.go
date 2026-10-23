@@ -368,9 +368,22 @@ func TestCheckResponseSnapshot_CreateServer(t *testing.T) {
 			PassiveIp:                ptr.String("__PassiveIp__"),
 			TlsSessionResumptionMode: types.TlsSessionResumptionMode("DISABLED"),
 			SetStatOption:            types.SetStatOption("DEFAULT"),
+			SftpPorts: []types.SftpPortWithOptions{
+				{
+					SftpPort:          ptr.Int32(1),
+					CommunicationMode: types.CommunicationMode("CLIENT_TALK_FIRST"),
+				},
+				{
+					SftpPort:          ptr.Int32(1),
+					CommunicationMode: types.CommunicationMode("CLIENT_TALK_FIRST"),
+				},
+			},
 			As2Transports: []types.As2Transport{
 				types.As2Transport("HTTP"),
 				types.As2Transport("HTTP"),
+			},
+			ProxyConfig: &types.ProxyConfig{
+				SftpMode: types.ProxyMode("NONE"),
 			},
 		},
 		SecurityPolicyName: ptr.String("__SecurityPolicyName__"),
@@ -413,7 +426,8 @@ func TestCheckResponseSnapshot_CreateServer(t *testing.T) {
 		S3StorageOptions: &types.S3StorageOptions{
 			DirectoryListingOptimization: types.DirectoryListingOptimization("ENABLED"),
 		},
-		IpAddressType: types.IpAddressType("IPV4"),
+		IpAddressType:      types.IpAddressType("IPV4"),
+		HostKeyStorageType: types.HostKeyStorageType("SERVICE_MANAGED"),
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -799,6 +813,10 @@ func TestCheckResponseSnapshot_CreateWorkflow(t *testing.T) {
 				Key:   ptr.String("__Key__"),
 				Value: ptr.String("__Value__"),
 			},
+		},
+		StructuredLogDestinations: []string{
+			"__Member__",
+			"__Member__",
 		},
 	})
 	if err != nil {
@@ -1420,6 +1438,8 @@ func TestCheckResponseSnapshot_DescribeHostKey(t *testing.T) {
 					Value: ptr.String("__Value__"),
 				},
 			},
+			StorageType: types.HostKeyStorageType("SERVICE_MANAGED"),
+			SecretId:    ptr.String("__SecretId__"),
 		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("DescribeHostKey.response")
@@ -1544,9 +1564,22 @@ func TestCheckResponseSnapshot_DescribeServer(t *testing.T) {
 				PassiveIp:                ptr.String("__PassiveIp__"),
 				TlsSessionResumptionMode: types.TlsSessionResumptionMode("DISABLED"),
 				SetStatOption:            types.SetStatOption("DEFAULT"),
+				SftpPorts: []types.SftpPortWithOptions{
+					{
+						SftpPort:          ptr.Int32(1),
+						CommunicationMode: types.CommunicationMode("CLIENT_TALK_FIRST"),
+					},
+					{
+						SftpPort:          ptr.Int32(1),
+						CommunicationMode: types.CommunicationMode("CLIENT_TALK_FIRST"),
+					},
+				},
 				As2Transports: []types.As2Transport{
 					types.As2Transport("HTTP"),
 					types.As2Transport("HTTP"),
+				},
+				ProxyConfig: &types.ProxyConfig{
+					SftpMode: types.ProxyMode("NONE"),
 				},
 			},
 			Domain: types.Domain("S3"),
@@ -2067,6 +2100,10 @@ func TestCheckResponseSnapshot_DescribeWorkflow(t *testing.T) {
 					Value: ptr.String("__Value__"),
 				},
 			},
+			StructuredLogDestinations: []string{
+				"__Member__",
+				"__Member__",
+			},
 		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("DescribeWorkflow.response")
@@ -2154,6 +2191,8 @@ func TestCheckResponseSnapshot_ImportHostKey(t *testing.T) {
 				Value: ptr.String("__Value__"),
 			},
 		},
+		StorageType: types.HostKeyStorageType("SERVICE_MANAGED"),
+		KmsKey:      ptr.String("__KmsKey__"),
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -2483,6 +2522,8 @@ func TestCheckResponseSnapshot_ListHostKeys(t *testing.T) {
 				Description:  ptr.String("__Description__"),
 				Type:         ptr.String("__Type__"),
 				DateImported: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				StorageType:  types.HostKeyStorageType("SERVICE_MANAGED"),
+				SecretId:     ptr.String("__SecretId__"),
 			},
 			{
 				Arn:          ptr.String("__Arn__"),
@@ -2491,6 +2532,8 @@ func TestCheckResponseSnapshot_ListHostKeys(t *testing.T) {
 				Description:  ptr.String("__Description__"),
 				Type:         ptr.String("__Type__"),
 				DateImported: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				StorageType:  types.HostKeyStorageType("SERVICE_MANAGED"),
+				SecretId:     ptr.String("__SecretId__"),
 			},
 		},
 	}
@@ -3279,6 +3322,8 @@ func TestCheckResponseSnapshot_UpdateHostKey(t *testing.T) {
 		ServerId:    ptr.String("__ServerId__"),
 		HostKeyId:   ptr.String("__HostKeyId__"),
 		Description: ptr.String("__Description__"),
+		StorageType: types.HostKeyStorageType("SERVICE_MANAGED"),
+		KmsKey:      ptr.String("__KmsKey__"),
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -3333,9 +3378,22 @@ func TestCheckResponseSnapshot_UpdateServer(t *testing.T) {
 			PassiveIp:                ptr.String("__PassiveIp__"),
 			TlsSessionResumptionMode: types.TlsSessionResumptionMode("DISABLED"),
 			SetStatOption:            types.SetStatOption("DEFAULT"),
+			SftpPorts: []types.SftpPortWithOptions{
+				{
+					SftpPort:          ptr.Int32(1),
+					CommunicationMode: types.CommunicationMode("CLIENT_TALK_FIRST"),
+				},
+				{
+					SftpPort:          ptr.Int32(1),
+					CommunicationMode: types.CommunicationMode("CLIENT_TALK_FIRST"),
+				},
+			},
 			As2Transports: []types.As2Transport{
 				types.As2Transport("HTTP"),
 				types.As2Transport("HTTP"),
+			},
+			ProxyConfig: &types.ProxyConfig{
+				SftpMode: types.ProxyMode("NONE"),
 			},
 		},
 		EndpointDetails: &types.EndpointDetails{
@@ -3580,9 +3638,22 @@ func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 			PassiveIp:                ptr.String("__PassiveIp__"),
 			TlsSessionResumptionMode: types.TlsSessionResumptionMode("DISABLED"),
 			SetStatOption:            types.SetStatOption("DEFAULT"),
+			SftpPorts: []types.SftpPortWithOptions{
+				{
+					SftpPort:          ptr.Int32(1),
+					CommunicationMode: types.CommunicationMode("CLIENT_TALK_FIRST"),
+				},
+				{
+					SftpPort:          ptr.Int32(1),
+					CommunicationMode: types.CommunicationMode("CLIENT_TALK_FIRST"),
+				},
+			},
 			As2Transports: []types.As2Transport{
 				types.As2Transport("HTTP"),
 				types.As2Transport("HTTP"),
+			},
+			ProxyConfig: &types.ProxyConfig{
+				SftpMode: types.ProxyMode("NONE"),
 			},
 		},
 		SecurityPolicyName: ptr.String("__SecurityPolicyName__"),
@@ -3625,7 +3696,8 @@ func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 		S3StorageOptions: &types.S3StorageOptions{
 			DirectoryListingOptimization: types.DirectoryListingOptimization("ENABLED"),
 		},
-		IpAddressType: types.IpAddressType("IPV4"),
+		IpAddressType:      types.IpAddressType("IPV4"),
+		HostKeyStorageType: types.HostKeyStorageType("SERVICE_MANAGED"),
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")

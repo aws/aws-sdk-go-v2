@@ -5,7 +5,9 @@ package databasemigrationservice
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/databasemigrationservice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/databasemigrationservice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithytime "github.com/aws/smithy-go/time"
 	smithywaiter "github.com/aws/smithy-go/waiter"
@@ -70,6 +72,25 @@ type DescribeMetadataModelAssessmentsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeMetadataModelAssessmentsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeMetadataModelAssessmentsMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeMetadataModelAssessmentsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeFilterList(s, schemas.DescribeMetadataModelAssessmentsMessage_Filters, v.Filters)
+	if v.Marker != nil {
+		s.WriteString(schemas.DescribeMetadataModelAssessmentsMessage_Marker, *v.Marker)
+	}
+	if v.MaxRecords != nil {
+		s.WriteInt32(schemas.DescribeMetadataModelAssessmentsMessage_MaxRecords, *v.MaxRecords)
+	}
+	if v.MigrationProjectIdentifier != nil {
+		s.WriteString(schemas.DescribeMetadataModelAssessmentsMessage_MigrationProjectIdentifier, *v.MigrationProjectIdentifier)
+	}
+}
+
 type DescribeMetadataModelAssessmentsOutput struct {
 
 	// Specifies the unique pagination token that makes it possible to display the
@@ -93,13 +114,35 @@ type DescribeMetadataModelAssessmentsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeMetadataModelAssessmentsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeMetadataModelAssessmentsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeMetadataModelAssessmentsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Marker != nil {
+		s.WriteString(schemas.DescribeMetadataModelAssessmentsResponse_Marker, *v.Marker)
+	}
+	serializeSchemaConversionRequestList(s, schemas.DescribeMetadataModelAssessmentsResponse_Requests, v.Requests)
+}
+func (v *DescribeMetadataModelAssessmentsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeMetadataModelAssessmentsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeMetadataModelAssessmentsResponse_Marker:
+			v.Marker = new(string)
+			return d.ReadString(schemas.DescribeMetadataModelAssessmentsResponse_Marker, v.Marker)
+		case schemas.DescribeMetadataModelAssessmentsResponse_Requests:
+			return deserializeSchemaConversionRequestList(d, schemas.DescribeMetadataModelAssessmentsResponse_Requests, &v.Requests)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeMetadataModelAssessmentsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeMetadataModelAssessments{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeMetadataModelAssessments, schemas.DescribeMetadataModelAssessmentsMessage, schemas.DescribeMetadataModelAssessmentsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeMetadataModelAssessments{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeMetadataModelAssessments, schemas.DescribeMetadataModelAssessmentsMessage, schemas.DescribeMetadataModelAssessmentsResponse), output: &DescribeMetadataModelAssessmentsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

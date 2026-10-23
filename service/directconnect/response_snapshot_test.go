@@ -225,6 +225,7 @@ func TestCheckResponseSnapshot_AllocateConnectionOnInterconnect(t *testing.T) {
 		PrefixPoolSizeIpv6:               ptr.Int32(1),
 		PrefixPoolUnallocatedCountIpv4:   ptr.Int32(1),
 		PrefixPoolUnallocatedCountIpv6:   ptr.Int32(1),
+		BillingMode:                      types.BillingMode("PayAsYouGo"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("AllocateConnectionOnInterconnect.response")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -306,6 +307,7 @@ func TestCheckResponseSnapshot_AllocateHostedConnection(t *testing.T) {
 		PrefixPoolSizeIpv6:               ptr.Int32(1),
 		PrefixPoolUnallocatedCountIpv4:   ptr.Int32(1),
 		PrefixPoolUnallocatedCountIpv6:   ptr.Int32(1),
+		BillingMode:                      types.BillingMode("PayAsYouGo"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("AllocateHostedConnection.response")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -760,6 +762,7 @@ func TestCheckResponseSnapshot_AssociateConnectionWithLag(t *testing.T) {
 		PrefixPoolSizeIpv6:               ptr.Int32(1),
 		PrefixPoolUnallocatedCountIpv4:   ptr.Int32(1),
 		PrefixPoolUnallocatedCountIpv6:   ptr.Int32(1),
+		BillingMode:                      types.BillingMode("PayAsYouGo"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("AssociateConnectionWithLag.response")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -778,6 +781,45 @@ func TestCheckResponseSnapshot_AssociateConnectionWithLag(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "AssociateConnectionWithLag.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_AssociateConnectionsToResiliencyGroup(t *testing.T) {
+	want := &AssociateConnectionsToResiliencyGroupOutput{
+		ResiliencyGroupAssociations: []types.ResiliencyGroupAssociation{
+			{
+				ResiliencyGroupId: ptr.String("__ResiliencyGroupId__"),
+				ConnectionArn:     ptr.String("__ConnectionArn__"),
+				State:             types.ResiliencyGroupAssociationState("associating"),
+			},
+			{
+				ResiliencyGroupId: ptr.String("__ResiliencyGroupId__"),
+				ConnectionArn:     ptr.String("__ConnectionArn__"),
+				State:             types.ResiliencyGroupAssociationState("associating"),
+			},
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("AssociateConnectionsToResiliencyGroup.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.AssociateConnectionsToResiliencyGroup(context.Background(), &AssociateConnectionsToResiliencyGroupInput{
+		ConnectionIdentifiers: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ResiliencyGroupId: ptr.String("__ResiliencyGroupId__"),
+		ClientToken:       ptr.String("__ClientToken__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "AssociateConnectionsToResiliencyGroup.response", err)
 	}
 }
 
@@ -838,6 +880,7 @@ func TestCheckResponseSnapshot_AssociateHostedConnection(t *testing.T) {
 		PrefixPoolSizeIpv6:               ptr.Int32(1),
 		PrefixPoolUnallocatedCountIpv4:   ptr.Int32(1),
 		PrefixPoolUnallocatedCountIpv6:   ptr.Int32(1),
+		BillingMode:                      types.BillingMode("PayAsYouGo"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("AssociateHostedConnection.response")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -1275,6 +1318,7 @@ func TestCheckResponseSnapshot_CreateConnection(t *testing.T) {
 		PrefixPoolSizeIpv6:               ptr.Int32(1),
 		PrefixPoolUnallocatedCountIpv4:   ptr.Int32(1),
 		PrefixPoolUnallocatedCountIpv6:   ptr.Int32(1),
+		BillingMode:                      types.BillingMode("PayAsYouGo"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("CreateConnection.response")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -1301,6 +1345,7 @@ func TestCheckResponseSnapshot_CreateConnection(t *testing.T) {
 		},
 		ProviderName:  ptr.String("__ProviderName__"),
 		RequestMACSec: ptr.Bool(true),
+		BillingMode:   types.RequestBillingMode("PayAsYouGo"),
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -1640,6 +1685,7 @@ func TestCheckResponseSnapshot_CreateLag(t *testing.T) {
 				PrefixPoolSizeIpv6:               ptr.Int32(1),
 				PrefixPoolUnallocatedCountIpv4:   ptr.Int32(1),
 				PrefixPoolUnallocatedCountIpv6:   ptr.Int32(1),
+				BillingMode:                      types.BillingMode("PayAsYouGo"),
 			},
 			{
 				OwnerAccount:         ptr.String("__OwnerAccount__"),
@@ -1697,6 +1743,7 @@ func TestCheckResponseSnapshot_CreateLag(t *testing.T) {
 				PrefixPoolSizeIpv6:               ptr.Int32(1),
 				PrefixPoolUnallocatedCountIpv4:   ptr.Int32(1),
 				PrefixPoolUnallocatedCountIpv6:   ptr.Int32(1),
+				BillingMode:                      types.BillingMode("PayAsYouGo"),
 			},
 		},
 		AllowsHostedConnections: true,
@@ -1739,6 +1786,7 @@ func TestCheckResponseSnapshot_CreateLag(t *testing.T) {
 			Remaining:      1,
 			TotalBandwidth: ptr.String("__TotalBandwidth__"),
 		},
+		BillingMode: types.BillingMode("PayAsYouGo"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("CreateLag.response")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -1776,6 +1824,7 @@ func TestCheckResponseSnapshot_CreateLag(t *testing.T) {
 		},
 		ProviderName:  ptr.String("__ProviderName__"),
 		RequestMACSec: ptr.Bool(true),
+		BillingMode:   types.RequestBillingMode("PayAsYouGo"),
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -2028,6 +2077,58 @@ func TestCheckResponseSnapshot_CreatePublicVirtualInterface(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "CreatePublicVirtualInterface.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_CreateResiliencyGroup(t *testing.T) {
+	want := &CreateResiliencyGroupOutput{
+		ResiliencyGroup: &types.ResiliencyGroup{
+			ResiliencyGroupId:   ptr.String("__ResiliencyGroupId__"),
+			ResiliencyGroupArn:  ptr.String("__ResiliencyGroupArn__"),
+			ResiliencyGroupName: ptr.String("__ResiliencyGroupName__"),
+			ResiliencyGroupType: types.ResiliencyGroupType("Managed"),
+			OwnerAccount:        ptr.String("__OwnerAccount__"),
+			State:               types.ResiliencyGroupState("pending"),
+			Tags: []types.Tag{
+				{
+					Key:   ptr.String("__Key__"),
+					Value: ptr.String("__Value__"),
+				},
+				{
+					Key:   ptr.String("__Key__"),
+					Value: ptr.String("__Value__"),
+				},
+			},
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("CreateResiliencyGroup.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.CreateResiliencyGroup(context.Background(), &CreateResiliencyGroupInput{
+		ResiliencyGroupName:     ptr.String("__ResiliencyGroupName__"),
+		IntendedResiliencyModel: types.ResiliencyModel("maximum-resiliency"),
+		ClientToken:             ptr.String("__ClientToken__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "CreateResiliencyGroup.response", err)
 	}
 }
 
@@ -2312,6 +2413,7 @@ func TestCheckResponseSnapshot_DeleteConnection(t *testing.T) {
 		PrefixPoolSizeIpv6:               ptr.Int32(1),
 		PrefixPoolUnallocatedCountIpv4:   ptr.Int32(1),
 		PrefixPoolUnallocatedCountIpv6:   ptr.Int32(1),
+		BillingMode:                      types.BillingMode("PayAsYouGo"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("DeleteConnection.response")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -2570,6 +2672,7 @@ func TestCheckResponseSnapshot_DeleteLag(t *testing.T) {
 				PrefixPoolSizeIpv6:               ptr.Int32(1),
 				PrefixPoolUnallocatedCountIpv4:   ptr.Int32(1),
 				PrefixPoolUnallocatedCountIpv6:   ptr.Int32(1),
+				BillingMode:                      types.BillingMode("PayAsYouGo"),
 			},
 			{
 				OwnerAccount:         ptr.String("__OwnerAccount__"),
@@ -2627,6 +2730,7 @@ func TestCheckResponseSnapshot_DeleteLag(t *testing.T) {
 				PrefixPoolSizeIpv6:               ptr.Int32(1),
 				PrefixPoolUnallocatedCountIpv4:   ptr.Int32(1),
 				PrefixPoolUnallocatedCountIpv6:   ptr.Int32(1),
+				BillingMode:                      types.BillingMode("PayAsYouGo"),
 			},
 		},
 		AllowsHostedConnections: true,
@@ -2669,6 +2773,7 @@ func TestCheckResponseSnapshot_DeleteLag(t *testing.T) {
 			Remaining:      1,
 			TotalBandwidth: ptr.String("__TotalBandwidth__"),
 		},
+		BillingMode: types.BillingMode("PayAsYouGo"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("DeleteLag.response")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -2686,6 +2791,46 @@ func TestCheckResponseSnapshot_DeleteLag(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "DeleteLag.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_DeleteResiliencyGroup(t *testing.T) {
+	want := &DeleteResiliencyGroupOutput{
+		ResiliencyGroup: &types.ResiliencyGroup{
+			ResiliencyGroupId:   ptr.String("__ResiliencyGroupId__"),
+			ResiliencyGroupArn:  ptr.String("__ResiliencyGroupArn__"),
+			ResiliencyGroupName: ptr.String("__ResiliencyGroupName__"),
+			ResiliencyGroupType: types.ResiliencyGroupType("Managed"),
+			OwnerAccount:        ptr.String("__OwnerAccount__"),
+			State:               types.ResiliencyGroupState("pending"),
+			Tags: []types.Tag{
+				{
+					Key:   ptr.String("__Key__"),
+					Value: ptr.String("__Value__"),
+				},
+				{
+					Key:   ptr.String("__Key__"),
+					Value: ptr.String("__Value__"),
+				},
+			},
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("DeleteResiliencyGroup.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.DeleteResiliencyGroup(context.Background(), &DeleteResiliencyGroupInput{
+		ResiliencyGroupId: ptr.String("__ResiliencyGroupId__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "DeleteResiliencyGroup.response", err)
 	}
 }
 
@@ -2799,6 +2944,7 @@ func TestCheckResponseSnapshot_DescribeConnections(t *testing.T) {
 				PrefixPoolSizeIpv6:               ptr.Int32(1),
 				PrefixPoolUnallocatedCountIpv4:   ptr.Int32(1),
 				PrefixPoolUnallocatedCountIpv6:   ptr.Int32(1),
+				BillingMode:                      types.BillingMode("PayAsYouGo"),
 			},
 			{
 				OwnerAccount:         ptr.String("__OwnerAccount__"),
@@ -2856,6 +3002,7 @@ func TestCheckResponseSnapshot_DescribeConnections(t *testing.T) {
 				PrefixPoolSizeIpv6:               ptr.Int32(1),
 				PrefixPoolUnallocatedCountIpv4:   ptr.Int32(1),
 				PrefixPoolUnallocatedCountIpv6:   ptr.Int32(1),
+				BillingMode:                      types.BillingMode("PayAsYouGo"),
 			},
 		},
 		NextToken: ptr.String("__NextToken__"),
@@ -2940,6 +3087,7 @@ func TestCheckResponseSnapshot_DescribeConnectionsOnInterconnect(t *testing.T) {
 				PrefixPoolSizeIpv6:               ptr.Int32(1),
 				PrefixPoolUnallocatedCountIpv4:   ptr.Int32(1),
 				PrefixPoolUnallocatedCountIpv6:   ptr.Int32(1),
+				BillingMode:                      types.BillingMode("PayAsYouGo"),
 			},
 			{
 				OwnerAccount:         ptr.String("__OwnerAccount__"),
@@ -2997,6 +3145,7 @@ func TestCheckResponseSnapshot_DescribeConnectionsOnInterconnect(t *testing.T) {
 				PrefixPoolSizeIpv6:               ptr.Int32(1),
 				PrefixPoolUnallocatedCountIpv4:   ptr.Int32(1),
 				PrefixPoolUnallocatedCountIpv6:   ptr.Int32(1),
+				BillingMode:                      types.BillingMode("PayAsYouGo"),
 			},
 		},
 		NextToken: ptr.String("__NextToken__"),
@@ -3394,6 +3543,7 @@ func TestCheckResponseSnapshot_DescribeHostedConnections(t *testing.T) {
 				PrefixPoolSizeIpv6:               ptr.Int32(1),
 				PrefixPoolUnallocatedCountIpv4:   ptr.Int32(1),
 				PrefixPoolUnallocatedCountIpv6:   ptr.Int32(1),
+				BillingMode:                      types.BillingMode("PayAsYouGo"),
 			},
 			{
 				OwnerAccount:         ptr.String("__OwnerAccount__"),
@@ -3451,6 +3601,7 @@ func TestCheckResponseSnapshot_DescribeHostedConnections(t *testing.T) {
 				PrefixPoolSizeIpv6:               ptr.Int32(1),
 				PrefixPoolUnallocatedCountIpv4:   ptr.Int32(1),
 				PrefixPoolUnallocatedCountIpv6:   ptr.Int32(1),
+				BillingMode:                      types.BillingMode("PayAsYouGo"),
 			},
 		},
 		NextToken: ptr.String("__NextToken__"),
@@ -3690,6 +3841,7 @@ func TestCheckResponseSnapshot_DescribeLags(t *testing.T) {
 						PrefixPoolSizeIpv6:               ptr.Int32(1),
 						PrefixPoolUnallocatedCountIpv4:   ptr.Int32(1),
 						PrefixPoolUnallocatedCountIpv6:   ptr.Int32(1),
+						BillingMode:                      types.BillingMode("PayAsYouGo"),
 					},
 					{
 						OwnerAccount:         ptr.String("__OwnerAccount__"),
@@ -3747,6 +3899,7 @@ func TestCheckResponseSnapshot_DescribeLags(t *testing.T) {
 						PrefixPoolSizeIpv6:               ptr.Int32(1),
 						PrefixPoolUnallocatedCountIpv4:   ptr.Int32(1),
 						PrefixPoolUnallocatedCountIpv6:   ptr.Int32(1),
+						BillingMode:                      types.BillingMode("PayAsYouGo"),
 					},
 				},
 				AllowsHostedConnections: true,
@@ -3789,6 +3942,7 @@ func TestCheckResponseSnapshot_DescribeLags(t *testing.T) {
 					Remaining:      1,
 					TotalBandwidth: ptr.String("__TotalBandwidth__"),
 				},
+				BillingMode: types.BillingMode("PayAsYouGo"),
 			},
 			{
 				ConnectionsBandwidth: ptr.String("__ConnectionsBandwidth__"),
@@ -3860,6 +4014,7 @@ func TestCheckResponseSnapshot_DescribeLags(t *testing.T) {
 						PrefixPoolSizeIpv6:               ptr.Int32(1),
 						PrefixPoolUnallocatedCountIpv4:   ptr.Int32(1),
 						PrefixPoolUnallocatedCountIpv6:   ptr.Int32(1),
+						BillingMode:                      types.BillingMode("PayAsYouGo"),
 					},
 					{
 						OwnerAccount:         ptr.String("__OwnerAccount__"),
@@ -3917,6 +4072,7 @@ func TestCheckResponseSnapshot_DescribeLags(t *testing.T) {
 						PrefixPoolSizeIpv6:               ptr.Int32(1),
 						PrefixPoolUnallocatedCountIpv4:   ptr.Int32(1),
 						PrefixPoolUnallocatedCountIpv6:   ptr.Int32(1),
+						BillingMode:                      types.BillingMode("PayAsYouGo"),
 					},
 				},
 				AllowsHostedConnections: true,
@@ -3959,6 +4115,7 @@ func TestCheckResponseSnapshot_DescribeLags(t *testing.T) {
 					Remaining:      1,
 					TotalBandwidth: ptr.String("__TotalBandwidth__"),
 				},
+				BillingMode: types.BillingMode("PayAsYouGo"),
 			},
 		},
 		NextToken: ptr.String("__NextToken__"),
@@ -4029,6 +4186,30 @@ func TestCheckResponseSnapshot_DescribeLocations(t *testing.T) {
 					"__Member__",
 					"__Member__",
 				},
+				AvailableBillingModes: []types.AvailableBillingMode{
+					{
+						BillingMode: types.BillingMode("PayAsYouGo"),
+						AvailablePortSpeeds: []string{
+							"__Member__",
+							"__Member__",
+						},
+						IncludedRegions: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					{
+						BillingMode: types.BillingMode("PayAsYouGo"),
+						AvailablePortSpeeds: []string{
+							"__Member__",
+							"__Member__",
+						},
+						IncludedRegions: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
 			},
 			{
 				LocationCode: ptr.String("__LocationCode__"),
@@ -4045,6 +4226,30 @@ func TestCheckResponseSnapshot_DescribeLocations(t *testing.T) {
 				AvailableMacSecPortSpeeds: []string{
 					"__Member__",
 					"__Member__",
+				},
+				AvailableBillingModes: []types.AvailableBillingMode{
+					{
+						BillingMode: types.BillingMode("PayAsYouGo"),
+						AvailablePortSpeeds: []string{
+							"__Member__",
+							"__Member__",
+						},
+						IncludedRegions: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					{
+						BillingMode: types.BillingMode("PayAsYouGo"),
+						AvailablePortSpeeds: []string{
+							"__Member__",
+							"__Member__",
+						},
+						IncludedRegions: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
 				},
 			},
 		},
@@ -4418,6 +4623,7 @@ func TestCheckResponseSnapshot_DisassociateConnectionFromLag(t *testing.T) {
 		PrefixPoolSizeIpv6:               ptr.Int32(1),
 		PrefixPoolUnallocatedCountIpv4:   ptr.Int32(1),
 		PrefixPoolUnallocatedCountIpv6:   ptr.Int32(1),
+		BillingMode:                      types.BillingMode("PayAsYouGo"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("DisassociateConnectionFromLag.response")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -4436,6 +4642,45 @@ func TestCheckResponseSnapshot_DisassociateConnectionFromLag(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "DisassociateConnectionFromLag.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_DisassociateConnectionsFromResiliencyGroup(t *testing.T) {
+	want := &DisassociateConnectionsFromResiliencyGroupOutput{
+		ResiliencyGroupAssociations: []types.ResiliencyGroupAssociation{
+			{
+				ResiliencyGroupId: ptr.String("__ResiliencyGroupId__"),
+				ConnectionArn:     ptr.String("__ConnectionArn__"),
+				State:             types.ResiliencyGroupAssociationState("associating"),
+			},
+			{
+				ResiliencyGroupId: ptr.String("__ResiliencyGroupId__"),
+				ConnectionArn:     ptr.String("__ConnectionArn__"),
+				State:             types.ResiliencyGroupAssociationState("associating"),
+			},
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("DisassociateConnectionsFromResiliencyGroup.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.DisassociateConnectionsFromResiliencyGroup(context.Background(), &DisassociateConnectionsFromResiliencyGroupInput{
+		ConnectionIdentifiers: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ResiliencyGroupId: ptr.String("__ResiliencyGroupId__"),
+		ClientToken:       ptr.String("__ClientToken__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "DisassociateConnectionsFromResiliencyGroup.response", err)
 	}
 }
 
@@ -4474,6 +4719,125 @@ func TestCheckResponseSnapshot_DisassociateMacSecKey(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "DisassociateMacSecKey.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_GetResiliencyGroup(t *testing.T) {
+	want := &GetResiliencyGroupOutput{
+		ResiliencyGroup: &types.ResiliencyGroup{
+			ResiliencyGroupId:   ptr.String("__ResiliencyGroupId__"),
+			ResiliencyGroupArn:  ptr.String("__ResiliencyGroupArn__"),
+			ResiliencyGroupName: ptr.String("__ResiliencyGroupName__"),
+			ResiliencyGroupType: types.ResiliencyGroupType("Managed"),
+			OwnerAccount:        ptr.String("__OwnerAccount__"),
+			State:               types.ResiliencyGroupState("pending"),
+			Tags: []types.Tag{
+				{
+					Key:   ptr.String("__Key__"),
+					Value: ptr.String("__Value__"),
+				},
+				{
+					Key:   ptr.String("__Key__"),
+					Value: ptr.String("__Value__"),
+				},
+			},
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("GetResiliencyGroup.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.GetResiliencyGroup(context.Background(), &GetResiliencyGroupInput{
+		ResiliencyGroupId: ptr.String("__ResiliencyGroupId__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "GetResiliencyGroup.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_ListResiliencyGroupAssociations(t *testing.T) {
+	want := &ListResiliencyGroupAssociationsOutput{
+		Items: []types.ResiliencyGroupAssociation{
+			{
+				ResiliencyGroupId: ptr.String("__ResiliencyGroupId__"),
+				ConnectionArn:     ptr.String("__ConnectionArn__"),
+				State:             types.ResiliencyGroupAssociationState("associating"),
+			},
+			{
+				ResiliencyGroupId: ptr.String("__ResiliencyGroupId__"),
+				ConnectionArn:     ptr.String("__ConnectionArn__"),
+				State:             types.ResiliencyGroupAssociationState("associating"),
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("ListResiliencyGroupAssociations.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.ListResiliencyGroupAssociations(context.Background(), &ListResiliencyGroupAssociationsInput{
+		ResiliencyGroupId: ptr.String("__ResiliencyGroupId__"),
+		MaxResults:        ptr.Int32(1),
+		NextToken:         ptr.String("__NextToken__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "ListResiliencyGroupAssociations.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_ListResiliencyGroups(t *testing.T) {
+	want := &ListResiliencyGroupsOutput{
+		Items: []types.ResiliencyGroupSummary{
+			{
+				ResiliencyGroupId:   ptr.String("__ResiliencyGroupId__"),
+				ResiliencyGroupArn:  ptr.String("__ResiliencyGroupArn__"),
+				ResiliencyGroupName: ptr.String("__ResiliencyGroupName__"),
+				ResiliencyGroupType: types.ResiliencyGroupType("Managed"),
+				OwnerAccount:        ptr.String("__OwnerAccount__"),
+				State:               types.ResiliencyGroupState("pending"),
+			},
+			{
+				ResiliencyGroupId:   ptr.String("__ResiliencyGroupId__"),
+				ResiliencyGroupArn:  ptr.String("__ResiliencyGroupArn__"),
+				ResiliencyGroupName: ptr.String("__ResiliencyGroupName__"),
+				ResiliencyGroupType: types.ResiliencyGroupType("Managed"),
+				OwnerAccount:        ptr.String("__OwnerAccount__"),
+				State:               types.ResiliencyGroupState("pending"),
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("ListResiliencyGroups.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.ListResiliencyGroups(context.Background(), &ListResiliencyGroupsInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "ListResiliencyGroups.response", err)
 	}
 }
 
@@ -4822,6 +5186,7 @@ func TestCheckResponseSnapshot_UpdateConnection(t *testing.T) {
 		PrefixPoolSizeIpv6:               ptr.Int32(1),
 		PrefixPoolUnallocatedCountIpv4:   ptr.Int32(1),
 		PrefixPoolUnallocatedCountIpv6:   ptr.Int32(1),
+		BillingMode:                      types.BillingMode("PayAsYouGo"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("UpdateConnection.response")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -4841,6 +5206,151 @@ func TestCheckResponseSnapshot_UpdateConnection(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "UpdateConnection.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_UpdateConnectionsBillingMode(t *testing.T) {
+	want := &UpdateConnectionsBillingModeOutput{
+		BillingMode: types.BillingMode("PayAsYouGo"),
+		Connections: []types.Connection{
+			{
+				OwnerAccount:         ptr.String("__OwnerAccount__"),
+				ConnectionId:         ptr.String("__ConnectionId__"),
+				ConnectionName:       ptr.String("__ConnectionName__"),
+				ConnectionState:      types.ConnectionState("ordering"),
+				Region:               ptr.String("__Region__"),
+				Location:             ptr.String("__Location__"),
+				Bandwidth:            ptr.String("__Bandwidth__"),
+				Vlan:                 1,
+				PartnerName:          ptr.String("__PartnerName__"),
+				LoaIssueTime:         ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				LagId:                ptr.String("__LagId__"),
+				AwsDevice:            ptr.String("__AwsDevice__"),
+				JumboFrameCapable:    ptr.Bool(true),
+				AwsDeviceV2:          ptr.String("__AwsDeviceV2__"),
+				AwsLogicalDeviceId:   ptr.String("__AwsLogicalDeviceId__"),
+				HasLogicalRedundancy: types.HasLogicalRedundancy("unknown"),
+				Tags: []types.Tag{
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+				},
+				ProviderName:         ptr.String("__ProviderName__"),
+				MacSecCapable:        ptr.Bool(true),
+				PortEncryptionStatus: ptr.String("__PortEncryptionStatus__"),
+				EncryptionMode:       ptr.String("__EncryptionMode__"),
+				MacSecKeys: []types.MacSecKey{
+					{
+						SecretARN: ptr.String("__SecretARN__"),
+						Ckn:       ptr.String("__Ckn__"),
+						State:     ptr.String("__State__"),
+						StartOn:   ptr.String("__StartOn__"),
+					},
+					{
+						SecretARN: ptr.String("__SecretARN__"),
+						Ckn:       ptr.String("__Ckn__"),
+						State:     ptr.String("__State__"),
+						StartOn:   ptr.String("__StartOn__"),
+					},
+				},
+				RateLimiterStatus: &types.RateLimiterStatus{
+					MaxAllowed:     1,
+					InUse:          1,
+					Remaining:      1,
+					TotalBandwidth: ptr.String("__TotalBandwidth__"),
+				},
+				PartnerInterconnectMacSecCapable: ptr.Bool(true),
+				PrefixPoolSizeIpv4:               ptr.Int32(1),
+				PrefixPoolSizeIpv6:               ptr.Int32(1),
+				PrefixPoolUnallocatedCountIpv4:   ptr.Int32(1),
+				PrefixPoolUnallocatedCountIpv6:   ptr.Int32(1),
+				BillingMode:                      types.BillingMode("PayAsYouGo"),
+			},
+			{
+				OwnerAccount:         ptr.String("__OwnerAccount__"),
+				ConnectionId:         ptr.String("__ConnectionId__"),
+				ConnectionName:       ptr.String("__ConnectionName__"),
+				ConnectionState:      types.ConnectionState("ordering"),
+				Region:               ptr.String("__Region__"),
+				Location:             ptr.String("__Location__"),
+				Bandwidth:            ptr.String("__Bandwidth__"),
+				Vlan:                 1,
+				PartnerName:          ptr.String("__PartnerName__"),
+				LoaIssueTime:         ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				LagId:                ptr.String("__LagId__"),
+				AwsDevice:            ptr.String("__AwsDevice__"),
+				JumboFrameCapable:    ptr.Bool(true),
+				AwsDeviceV2:          ptr.String("__AwsDeviceV2__"),
+				AwsLogicalDeviceId:   ptr.String("__AwsLogicalDeviceId__"),
+				HasLogicalRedundancy: types.HasLogicalRedundancy("unknown"),
+				Tags: []types.Tag{
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+				},
+				ProviderName:         ptr.String("__ProviderName__"),
+				MacSecCapable:        ptr.Bool(true),
+				PortEncryptionStatus: ptr.String("__PortEncryptionStatus__"),
+				EncryptionMode:       ptr.String("__EncryptionMode__"),
+				MacSecKeys: []types.MacSecKey{
+					{
+						SecretARN: ptr.String("__SecretARN__"),
+						Ckn:       ptr.String("__Ckn__"),
+						State:     ptr.String("__State__"),
+						StartOn:   ptr.String("__StartOn__"),
+					},
+					{
+						SecretARN: ptr.String("__SecretARN__"),
+						Ckn:       ptr.String("__Ckn__"),
+						State:     ptr.String("__State__"),
+						StartOn:   ptr.String("__StartOn__"),
+					},
+				},
+				RateLimiterStatus: &types.RateLimiterStatus{
+					MaxAllowed:     1,
+					InUse:          1,
+					Remaining:      1,
+					TotalBandwidth: ptr.String("__TotalBandwidth__"),
+				},
+				PartnerInterconnectMacSecCapable: ptr.Bool(true),
+				PrefixPoolSizeIpv4:               ptr.Int32(1),
+				PrefixPoolSizeIpv6:               ptr.Int32(1),
+				PrefixPoolUnallocatedCountIpv4:   ptr.Int32(1),
+				PrefixPoolUnallocatedCountIpv6:   ptr.Int32(1),
+				BillingMode:                      types.BillingMode("PayAsYouGo"),
+			},
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("UpdateConnectionsBillingMode.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.UpdateConnectionsBillingMode(context.Background(), &UpdateConnectionsBillingModeInput{
+		ConnectionIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		BillingMode: types.RequestBillingMode("PayAsYouGo"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "UpdateConnectionsBillingMode.response", err)
 	}
 }
 
@@ -5024,6 +5534,7 @@ func TestCheckResponseSnapshot_UpdateLag(t *testing.T) {
 				PrefixPoolSizeIpv6:               ptr.Int32(1),
 				PrefixPoolUnallocatedCountIpv4:   ptr.Int32(1),
 				PrefixPoolUnallocatedCountIpv6:   ptr.Int32(1),
+				BillingMode:                      types.BillingMode("PayAsYouGo"),
 			},
 			{
 				OwnerAccount:         ptr.String("__OwnerAccount__"),
@@ -5081,6 +5592,7 @@ func TestCheckResponseSnapshot_UpdateLag(t *testing.T) {
 				PrefixPoolSizeIpv6:               ptr.Int32(1),
 				PrefixPoolUnallocatedCountIpv4:   ptr.Int32(1),
 				PrefixPoolUnallocatedCountIpv6:   ptr.Int32(1),
+				BillingMode:                      types.BillingMode("PayAsYouGo"),
 			},
 		},
 		AllowsHostedConnections: true,
@@ -5123,6 +5635,7 @@ func TestCheckResponseSnapshot_UpdateLag(t *testing.T) {
 			Remaining:      1,
 			TotalBandwidth: ptr.String("__TotalBandwidth__"),
 		},
+		BillingMode: types.BillingMode("PayAsYouGo"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("UpdateLag.response")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -5143,6 +5656,48 @@ func TestCheckResponseSnapshot_UpdateLag(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "UpdateLag.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_UpdateResiliencyGroup(t *testing.T) {
+	want := &UpdateResiliencyGroupOutput{
+		ResiliencyGroup: &types.ResiliencyGroup{
+			ResiliencyGroupId:   ptr.String("__ResiliencyGroupId__"),
+			ResiliencyGroupArn:  ptr.String("__ResiliencyGroupArn__"),
+			ResiliencyGroupName: ptr.String("__ResiliencyGroupName__"),
+			ResiliencyGroupType: types.ResiliencyGroupType("Managed"),
+			OwnerAccount:        ptr.String("__OwnerAccount__"),
+			State:               types.ResiliencyGroupState("pending"),
+			Tags: []types.Tag{
+				{
+					Key:   ptr.String("__Key__"),
+					Value: ptr.String("__Value__"),
+				},
+				{
+					Key:   ptr.String("__Key__"),
+					Value: ptr.String("__Value__"),
+				},
+			},
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("UpdateResiliencyGroup.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.UpdateResiliencyGroup(context.Background(), &UpdateResiliencyGroupInput{
+		ResiliencyGroupId:   ptr.String("__ResiliencyGroupId__"),
+		ResiliencyGroupName: ptr.String("__ResiliencyGroupName__"),
+		ClientToken:         ptr.String("__ClientToken__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "UpdateResiliencyGroup.response", err)
 	}
 }
 

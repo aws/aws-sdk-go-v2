@@ -471,9 +471,22 @@ func TestCheckRequestSnapshot_CreateServer(t *testing.T) {
 			PassiveIp:                ptr.String("__PassiveIp__"),
 			TlsSessionResumptionMode: types.TlsSessionResumptionMode("DISABLED"),
 			SetStatOption:            types.SetStatOption("DEFAULT"),
+			SftpPorts: []types.SftpPortWithOptions{
+				{
+					SftpPort:          ptr.Int32(1),
+					CommunicationMode: types.CommunicationMode("CLIENT_TALK_FIRST"),
+				},
+				{
+					SftpPort:          ptr.Int32(1),
+					CommunicationMode: types.CommunicationMode("CLIENT_TALK_FIRST"),
+				},
+			},
 			As2Transports: []types.As2Transport{
 				types.As2Transport("HTTP"),
 				types.As2Transport("HTTP"),
+			},
+			ProxyConfig: &types.ProxyConfig{
+				SftpMode: types.ProxyMode("NONE"),
 			},
 		},
 		SecurityPolicyName: ptr.String("__SecurityPolicyName__"),
@@ -516,7 +529,8 @@ func TestCheckRequestSnapshot_CreateServer(t *testing.T) {
 		S3StorageOptions: &types.S3StorageOptions{
 			DirectoryListingOptimization: types.DirectoryListingOptimization("ENABLED"),
 		},
-		IpAddressType: types.IpAddressType("IPV4"),
+		IpAddressType:      types.IpAddressType("IPV4"),
+		HostKeyStorageType: types.HostKeyStorageType("SERVICE_MANAGED"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -913,6 +927,10 @@ func TestCheckRequestSnapshot_CreateWorkflow(t *testing.T) {
 				Key:   ptr.String("__Key__"),
 				Value: ptr.String("__Value__"),
 			},
+		},
+		StructuredLogDestinations: []string{
+			"__Member__",
+			"__Member__",
 		},
 	}
 	body := &bytes.Buffer{}
@@ -1682,6 +1700,8 @@ func TestCheckRequestSnapshot_ImportHostKey(t *testing.T) {
 				Value: ptr.String("__Value__"),
 			},
 		},
+		StorageType: types.HostKeyStorageType("SERVICE_MANAGED"),
+		KmsKey:      ptr.String("__KmsKey__"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -2679,6 +2699,8 @@ func TestCheckRequestSnapshot_UpdateHostKey(t *testing.T) {
 		ServerId:    ptr.String("__ServerId__"),
 		HostKeyId:   ptr.String("__HostKeyId__"),
 		Description: ptr.String("__Description__"),
+		StorageType: types.HostKeyStorageType("SERVICE_MANAGED"),
+		KmsKey:      ptr.String("__KmsKey__"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -2741,9 +2763,22 @@ func TestCheckRequestSnapshot_UpdateServer(t *testing.T) {
 			PassiveIp:                ptr.String("__PassiveIp__"),
 			TlsSessionResumptionMode: types.TlsSessionResumptionMode("DISABLED"),
 			SetStatOption:            types.SetStatOption("DEFAULT"),
+			SftpPorts: []types.SftpPortWithOptions{
+				{
+					SftpPort:          ptr.Int32(1),
+					CommunicationMode: types.CommunicationMode("CLIENT_TALK_FIRST"),
+				},
+				{
+					SftpPort:          ptr.Int32(1),
+					CommunicationMode: types.CommunicationMode("CLIENT_TALK_FIRST"),
+				},
+			},
 			As2Transports: []types.As2Transport{
 				types.As2Transport("HTTP"),
 				types.As2Transport("HTTP"),
+			},
+			ProxyConfig: &types.ProxyConfig{
+				SftpMode: types.ProxyMode("NONE"),
 			},
 		},
 		EndpointDetails: &types.EndpointDetails{
@@ -3226,9 +3261,22 @@ func TestUpdateRequestSnapshot_CreateServer(t *testing.T) {
 			PassiveIp:                ptr.String("__PassiveIp__"),
 			TlsSessionResumptionMode: types.TlsSessionResumptionMode("DISABLED"),
 			SetStatOption:            types.SetStatOption("DEFAULT"),
+			SftpPorts: []types.SftpPortWithOptions{
+				{
+					SftpPort:          ptr.Int32(1),
+					CommunicationMode: types.CommunicationMode("CLIENT_TALK_FIRST"),
+				},
+				{
+					SftpPort:          ptr.Int32(1),
+					CommunicationMode: types.CommunicationMode("CLIENT_TALK_FIRST"),
+				},
+			},
 			As2Transports: []types.As2Transport{
 				types.As2Transport("HTTP"),
 				types.As2Transport("HTTP"),
+			},
+			ProxyConfig: &types.ProxyConfig{
+				SftpMode: types.ProxyMode("NONE"),
 			},
 		},
 		SecurityPolicyName: ptr.String("__SecurityPolicyName__"),
@@ -3271,7 +3319,8 @@ func TestUpdateRequestSnapshot_CreateServer(t *testing.T) {
 		S3StorageOptions: &types.S3StorageOptions{
 			DirectoryListingOptimization: types.DirectoryListingOptimization("ENABLED"),
 		},
-		IpAddressType: types.IpAddressType("IPV4"),
+		IpAddressType:      types.IpAddressType("IPV4"),
+		HostKeyStorageType: types.HostKeyStorageType("SERVICE_MANAGED"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -3668,6 +3717,10 @@ func TestUpdateRequestSnapshot_CreateWorkflow(t *testing.T) {
 				Key:   ptr.String("__Key__"),
 				Value: ptr.String("__Value__"),
 			},
+		},
+		StructuredLogDestinations: []string{
+			"__Member__",
+			"__Member__",
 		},
 	}
 	body := &bytes.Buffer{}
@@ -4437,6 +4490,8 @@ func TestUpdateRequestSnapshot_ImportHostKey(t *testing.T) {
 				Value: ptr.String("__Value__"),
 			},
 		},
+		StorageType: types.HostKeyStorageType("SERVICE_MANAGED"),
+		KmsKey:      ptr.String("__KmsKey__"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -5434,6 +5489,8 @@ func TestUpdateRequestSnapshot_UpdateHostKey(t *testing.T) {
 		ServerId:    ptr.String("__ServerId__"),
 		HostKeyId:   ptr.String("__HostKeyId__"),
 		Description: ptr.String("__Description__"),
+		StorageType: types.HostKeyStorageType("SERVICE_MANAGED"),
+		KmsKey:      ptr.String("__KmsKey__"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -5496,9 +5553,22 @@ func TestUpdateRequestSnapshot_UpdateServer(t *testing.T) {
 			PassiveIp:                ptr.String("__PassiveIp__"),
 			TlsSessionResumptionMode: types.TlsSessionResumptionMode("DISABLED"),
 			SetStatOption:            types.SetStatOption("DEFAULT"),
+			SftpPorts: []types.SftpPortWithOptions{
+				{
+					SftpPort:          ptr.Int32(1),
+					CommunicationMode: types.CommunicationMode("CLIENT_TALK_FIRST"),
+				},
+				{
+					SftpPort:          ptr.Int32(1),
+					CommunicationMode: types.CommunicationMode("CLIENT_TALK_FIRST"),
+				},
+			},
 			As2Transports: []types.As2Transport{
 				types.As2Transport("HTTP"),
 				types.As2Transport("HTTP"),
+			},
+			ProxyConfig: &types.ProxyConfig{
+				SftpMode: types.ProxyMode("NONE"),
 			},
 		},
 		EndpointDetails: &types.EndpointDetails{

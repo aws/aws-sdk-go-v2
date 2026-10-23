@@ -4,7 +4,9 @@ package datapipeline
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/datapipeline/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/datapipeline/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -65,6 +67,19 @@ type ReportTaskProgressInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ReportTaskProgressInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ReportTaskProgressInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ReportTaskProgressInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializefieldList(s, schemas.ReportTaskProgressInput_fields, v.Fields)
+	if v.TaskId != nil {
+		s.WriteString(schemas.ReportTaskProgressInput_taskId, *v.TaskId)
+	}
+}
+
 // Contains the output of ReportTaskProgress.
 type ReportTaskProgressOutput struct {
 
@@ -80,13 +95,29 @@ type ReportTaskProgressOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ReportTaskProgressOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ReportTaskProgressOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ReportTaskProgressOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	s.WriteBool(schemas.ReportTaskProgressOutput_canceled, v.Canceled)
+}
+func (v *ReportTaskProgressOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ReportTaskProgressOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ReportTaskProgressOutput_canceled:
+			return d.ReadBool(schemas.ReportTaskProgressOutput_canceled, &v.Canceled)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationReportTaskProgressMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpReportTaskProgress{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ReportTaskProgress, schemas.ReportTaskProgressInput, schemas.ReportTaskProgressOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpReportTaskProgress{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ReportTaskProgress, schemas.ReportTaskProgressInput, schemas.ReportTaskProgressOutput), output: &ReportTaskProgressOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

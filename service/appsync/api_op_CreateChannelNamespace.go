@@ -4,7 +4,9 @@ package appsync
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/appsync/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/appsync/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -58,6 +60,32 @@ type CreateChannelNamespaceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateChannelNamespaceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateChannelNamespaceRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateChannelNamespaceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApiId != nil {
+		s.WriteString(schemas.CreateChannelNamespaceRequest_apiId, *v.ApiId)
+	}
+	if v.CodeHandlers != nil {
+		s.WriteString(schemas.CreateChannelNamespaceRequest_codeHandlers, *v.CodeHandlers)
+	}
+	if v.HandlerConfigs != nil {
+		s.WriteStruct(schemas.CreateChannelNamespaceRequest_handlerConfigs)
+		v.HandlerConfigs.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateChannelNamespaceRequest_name, *v.Name)
+	}
+	serializeAuthModes(s, schemas.CreateChannelNamespaceRequest_publishAuthModes, v.PublishAuthModes)
+	serializeAuthModes(s, schemas.CreateChannelNamespaceRequest_subscribeAuthModes, v.SubscribeAuthModes)
+	serializeTagMap(s, schemas.CreateChannelNamespaceRequest_tags, v.Tags)
+}
+
 type CreateChannelNamespaceOutput struct {
 
 	// The ChannelNamespace object.
@@ -69,13 +97,34 @@ type CreateChannelNamespaceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateChannelNamespaceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateChannelNamespaceResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateChannelNamespaceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ChannelNamespace != nil {
+		s.WriteStruct(schemas.CreateChannelNamespaceResponse_channelNamespace)
+		v.ChannelNamespace.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateChannelNamespaceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateChannelNamespaceResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateChannelNamespaceResponse_channelNamespace:
+			v.ChannelNamespace = &types.ChannelNamespace{}
+			return v.ChannelNamespace.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateChannelNamespaceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateChannelNamespace{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateChannelNamespace, schemas.CreateChannelNamespaceRequest, schemas.CreateChannelNamespaceResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateChannelNamespace{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateChannelNamespace, schemas.CreateChannelNamespaceRequest, schemas.CreateChannelNamespaceResponse), output: &CreateChannelNamespaceOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

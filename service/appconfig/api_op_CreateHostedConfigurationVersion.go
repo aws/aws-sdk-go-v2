@@ -4,6 +4,8 @@ package appconfig
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/appconfig/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -76,6 +78,36 @@ type CreateHostedConfigurationVersionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateHostedConfigurationVersionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateHostedConfigurationVersionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateHostedConfigurationVersionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationId != nil {
+		s.WriteString(schemas.CreateHostedConfigurationVersionRequest_ApplicationId, *v.ApplicationId)
+	}
+	if v.ConfigurationProfileId != nil {
+		s.WriteString(schemas.CreateHostedConfigurationVersionRequest_ConfigurationProfileId, *v.ConfigurationProfileId)
+	}
+	if v.Content != nil {
+		s.WriteBlob(schemas.CreateHostedConfigurationVersionRequest_Content, v.Content)
+	}
+	if v.ContentType != nil {
+		s.WriteString(schemas.CreateHostedConfigurationVersionRequest_ContentType, *v.ContentType)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreateHostedConfigurationVersionRequest_Description, *v.Description)
+	}
+	if v.LatestVersionNumber != nil {
+		s.WriteInt32(schemas.CreateHostedConfigurationVersionRequest_LatestVersionNumber, *v.LatestVersionNumber)
+	}
+	if v.VersionLabel != nil {
+		s.WriteString(schemas.CreateHostedConfigurationVersionRequest_VersionLabel, *v.VersionLabel)
+	}
+}
+
 type CreateHostedConfigurationVersionOutput struct {
 
 	// The application ID.
@@ -113,13 +145,72 @@ type CreateHostedConfigurationVersionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateHostedConfigurationVersionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.HostedConfigurationVersion)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateHostedConfigurationVersionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationId != nil {
+		s.WriteString(schemas.HostedConfigurationVersion_ApplicationId, *v.ApplicationId)
+	}
+	if v.ConfigurationProfileId != nil {
+		s.WriteString(schemas.HostedConfigurationVersion_ConfigurationProfileId, *v.ConfigurationProfileId)
+	}
+	if v.Content != nil {
+		s.WriteBlob(schemas.HostedConfigurationVersion_Content, v.Content)
+	}
+	if v.ContentType != nil {
+		s.WriteString(schemas.HostedConfigurationVersion_ContentType, *v.ContentType)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.HostedConfigurationVersion_Description, *v.Description)
+	}
+	if v.KmsKeyArn != nil {
+		s.WriteString(schemas.HostedConfigurationVersion_KmsKeyArn, *v.KmsKeyArn)
+	}
+	if v.VersionLabel != nil {
+		s.WriteString(schemas.HostedConfigurationVersion_VersionLabel, *v.VersionLabel)
+	}
+	if v.VersionNumber != 0 {
+		s.WriteInt32(schemas.HostedConfigurationVersion_VersionNumber, v.VersionNumber)
+	}
+}
+func (v *CreateHostedConfigurationVersionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.HostedConfigurationVersion, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.HostedConfigurationVersion_ApplicationId:
+			v.ApplicationId = new(string)
+			return d.ReadString(schemas.HostedConfigurationVersion_ApplicationId, v.ApplicationId)
+		case schemas.HostedConfigurationVersion_ConfigurationProfileId:
+			v.ConfigurationProfileId = new(string)
+			return d.ReadString(schemas.HostedConfigurationVersion_ConfigurationProfileId, v.ConfigurationProfileId)
+		case schemas.HostedConfigurationVersion_Content:
+			return d.ReadBlob(schemas.HostedConfigurationVersion_Content, &v.Content)
+		case schemas.HostedConfigurationVersion_ContentType:
+			v.ContentType = new(string)
+			return d.ReadString(schemas.HostedConfigurationVersion_ContentType, v.ContentType)
+		case schemas.HostedConfigurationVersion_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.HostedConfigurationVersion_Description, v.Description)
+		case schemas.HostedConfigurationVersion_KmsKeyArn:
+			v.KmsKeyArn = new(string)
+			return d.ReadString(schemas.HostedConfigurationVersion_KmsKeyArn, v.KmsKeyArn)
+		case schemas.HostedConfigurationVersion_VersionLabel:
+			v.VersionLabel = new(string)
+			return d.ReadString(schemas.HostedConfigurationVersion_VersionLabel, v.VersionLabel)
+		case schemas.HostedConfigurationVersion_VersionNumber:
+			return d.ReadInt32(schemas.HostedConfigurationVersion_VersionNumber, &v.VersionNumber)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateHostedConfigurationVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateHostedConfigurationVersion{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateHostedConfigurationVersion, schemas.CreateHostedConfigurationVersionRequest, schemas.HostedConfigurationVersion)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateHostedConfigurationVersion{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateHostedConfigurationVersion, schemas.CreateHostedConfigurationVersionRequest, schemas.HostedConfigurationVersion), output: &CreateHostedConfigurationVersionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

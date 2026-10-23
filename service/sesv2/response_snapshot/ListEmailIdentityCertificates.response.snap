@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"Certificates":[{"CertificateArn":"__CertificateArn__","CertificateExpiryTime":946684800,"FromAddress":"__FromAddress__","Status":"PROVISIONING"},{"CertificateArn":"__CertificateArn__","CertificateExpiryTime":946684800,"FromAddress":"__FromAddress__","Status":"PROVISIONING"}],"NextToken":"__NextToken__"}

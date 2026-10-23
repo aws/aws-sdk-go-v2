@@ -4,7 +4,9 @@ package quicksight
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/quicksight/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/quicksight/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -49,6 +51,22 @@ type UpdateIdentityPropagationConfigInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateIdentityPropagationConfigInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateIdentityPropagationConfigRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateIdentityPropagationConfigInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAuthorizedTargetsList(s, schemas.UpdateIdentityPropagationConfigRequest_AuthorizedTargets, v.AuthorizedTargets)
+	if v.AwsAccountId != nil {
+		s.WriteString(schemas.UpdateIdentityPropagationConfigRequest_AwsAccountId, *v.AwsAccountId)
+	}
+	if v.Service != "" {
+		s.WriteString(schemas.UpdateIdentityPropagationConfigRequest_Service, string(v.Service))
+	}
+}
+
 type UpdateIdentityPropagationConfigOutput struct {
 
 	// The Amazon Web Services request ID for this operation.
@@ -63,13 +81,37 @@ type UpdateIdentityPropagationConfigOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateIdentityPropagationConfigOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateIdentityPropagationConfigResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateIdentityPropagationConfigOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RequestId != nil {
+		s.WriteString(schemas.UpdateIdentityPropagationConfigResponse_RequestId, *v.RequestId)
+	}
+	if v.Status != 0 {
+		s.WriteInt32(schemas.UpdateIdentityPropagationConfigResponse_Status, v.Status)
+	}
+}
+func (v *UpdateIdentityPropagationConfigOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateIdentityPropagationConfigResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateIdentityPropagationConfigResponse_RequestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.UpdateIdentityPropagationConfigResponse_RequestId, v.RequestId)
+		case schemas.UpdateIdentityPropagationConfigResponse_Status:
+			return d.ReadInt32(schemas.UpdateIdentityPropagationConfigResponse_Status, &v.Status)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateIdentityPropagationConfigMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateIdentityPropagationConfig{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateIdentityPropagationConfig, schemas.UpdateIdentityPropagationConfigRequest, schemas.UpdateIdentityPropagationConfigResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateIdentityPropagationConfig{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateIdentityPropagationConfig, schemas.UpdateIdentityPropagationConfigRequest, schemas.UpdateIdentityPropagationConfigResponse), output: &UpdateIdentityPropagationConfigOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

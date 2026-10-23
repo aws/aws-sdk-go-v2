@@ -1809,6 +1809,14 @@ type DescribedHostKey struct {
 	// A unique identifier for the host key.
 	HostKeyId *string
 
+	// The ARN of the Secrets Manager secret that stores the host key material, when
+	// StorageType is SECRETS_MANAGER .
+	SecretId *string
+
+	// Specifies whether the host key is stored by Transfer Family ( SERVICE_MANAGED )
+	// or in Secrets Manager ( SECRETS_MANAGER ).
+	StorageType HostKeyStorageType
+
 	// Key-value pairs that can be used to group and search for host keys.
 	Tags []Tag
 
@@ -1851,6 +1859,12 @@ func (v *DescribedHostKey) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.HostKeyId != nil {
 		s.WriteString(schemas.DescribedHostKey_HostKeyId, *v.HostKeyId)
 	}
+	if v.SecretId != nil {
+		s.WriteString(schemas.DescribedHostKey_SecretId, *v.SecretId)
+	}
+	if v.StorageType != "" {
+		s.WriteString(schemas.DescribedHostKey_StorageType, string(v.StorageType))
+	}
 	serializeTags(s, schemas.DescribedHostKey_Tags, v.Tags)
 	if v.Type != nil {
 		s.WriteString(schemas.DescribedHostKey_Type, *v.Type)
@@ -1874,6 +1888,16 @@ func (v *DescribedHostKey) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.DescribedHostKey_HostKeyId:
 			v.HostKeyId = new(string)
 			return d.ReadString(schemas.DescribedHostKey_HostKeyId, v.HostKeyId)
+		case schemas.DescribedHostKey_SecretId:
+			v.SecretId = new(string)
+			return d.ReadString(schemas.DescribedHostKey_SecretId, v.SecretId)
+		case schemas.DescribedHostKey_StorageType:
+			var ev string
+			if err := d.ReadString(schemas.DescribedHostKey_StorageType, &ev); err != nil {
+				return err
+			}
+			v.StorageType = HostKeyStorageType(ev)
+			return nil
 		case schemas.DescribedHostKey_Tags:
 			return deserializeTags(d, schemas.DescribedHostKey_Tags, &v.Tags)
 		case schemas.DescribedHostKey_Type:
@@ -2253,6 +2277,9 @@ type DescribedServer struct {
 	//   CloudWatch Logs, so that you can determine when the client is making a SETSTAT
 	//   call.
 	//
+	//   - To specify which ports your Transfer Family server listens to, use the
+	//   SftpPorts parameter.
+	//
 	//   - To determine whether your Transfer Family server resumes recent, negotiated
 	//   sessions through a unique session ID, use the TlsSessionResumptionMode
 	//   parameter.
@@ -2327,7 +2354,7 @@ type DescribedServer struct {
 	// To specify a log group, you must provide the ARN for an existing log group. In
 	// this case, the format of the log group is as follows:
 	//
-	//     arn:aws:logs:region-name:amazon-account-id:log-group:log-group-name:*
+	//     arn:partition:logs:region-name:amazon-account-id:log-group:log-group-name:*
 	//
 	// For example, arn:aws:logs:us-east-1:111122223333:log-group:mytestgroup:*
 	//
@@ -3012,6 +3039,16 @@ type DescribedWorkflow struct {
 	// Specifies the details for the steps that are in the specified workflow.
 	Steps []WorkflowStep
 
+	// Specifies the log groups to which your workflow logs are sent.
+	//
+	// To specify a log group, you must provide the ARN for an existing log group. In
+	// this case, the format of the log group is as follows:
+	//
+	//     arn:partition:logs:region-name:amazon-account-id:log-group:log-group-name:*
+	//
+	// For example, arn:aws:logs:us-east-1:111122223333:log-group:mytestgroup:*
+	StructuredLogDestinations []string
+
 	// Key-value pairs that can be used to group and search for workflows. Tags are
 	// metadata attached to workflows for any purpose.
 	Tags []Tag
@@ -3037,6 +3074,7 @@ func (v *DescribedWorkflow) SerializeMembers(s smithy.ShapeSerializer) {
 	}
 	serializeWorkflowSteps(s, schemas.DescribedWorkflow_OnExceptionSteps, v.OnExceptionSteps)
 	serializeWorkflowSteps(s, schemas.DescribedWorkflow_Steps, v.Steps)
+	serializeStructuredLogDestinations(s, schemas.DescribedWorkflow_StructuredLogDestinations, v.StructuredLogDestinations)
 	serializeTags(s, schemas.DescribedWorkflow_Tags, v.Tags)
 	if v.WorkflowId != nil {
 		s.WriteString(schemas.DescribedWorkflow_WorkflowId, *v.WorkflowId)
@@ -3055,6 +3093,8 @@ func (v *DescribedWorkflow) Deserialize(d smithy.ShapeDeserializer) error {
 			return deserializeWorkflowSteps(d, schemas.DescribedWorkflow_OnExceptionSteps, &v.OnExceptionSteps)
 		case schemas.DescribedWorkflow_Steps:
 			return deserializeWorkflowSteps(d, schemas.DescribedWorkflow_Steps, &v.Steps)
+		case schemas.DescribedWorkflow_StructuredLogDestinations:
+			return deserializeStructuredLogDestinations(d, schemas.DescribedWorkflow_StructuredLogDestinations, &v.StructuredLogDestinations)
 		case schemas.DescribedWorkflow_Tags:
 			return deserializeTags(d, schemas.DescribedWorkflow_Tags, &v.Tags)
 		case schemas.DescribedWorkflow_WorkflowId:
@@ -4165,6 +4205,14 @@ type ListedHostKey struct {
 	// A unique identifier for the host key.
 	HostKeyId *string
 
+	// The ARN of the Secrets Manager secret that stores the host key material, when
+	// StorageType is SECRETS_MANAGER .
+	SecretId *string
+
+	// Specifies whether the host key is stored by Transfer Family ( SERVICE_MANAGED )
+	// or in Secrets Manager ( SECRETS_MANAGER ).
+	StorageType HostKeyStorageType
+
 	// The encryption algorithm that is used for the host key. The Type parameter is
 	// specified by using one of the following values:
 	//
@@ -4204,6 +4252,12 @@ func (v *ListedHostKey) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.HostKeyId != nil {
 		s.WriteString(schemas.ListedHostKey_HostKeyId, *v.HostKeyId)
 	}
+	if v.SecretId != nil {
+		s.WriteString(schemas.ListedHostKey_SecretId, *v.SecretId)
+	}
+	if v.StorageType != "" {
+		s.WriteString(schemas.ListedHostKey_StorageType, string(v.StorageType))
+	}
 	if v.Type != nil {
 		s.WriteString(schemas.ListedHostKey_Type, *v.Type)
 	}
@@ -4226,6 +4280,16 @@ func (v *ListedHostKey) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.ListedHostKey_HostKeyId:
 			v.HostKeyId = new(string)
 			return d.ReadString(schemas.ListedHostKey_HostKeyId, v.HostKeyId)
+		case schemas.ListedHostKey_SecretId:
+			v.SecretId = new(string)
+			return d.ReadString(schemas.ListedHostKey_SecretId, v.SecretId)
+		case schemas.ListedHostKey_StorageType:
+			var ev string
+			if err := d.ReadString(schemas.ListedHostKey_StorageType, &ev); err != nil {
+				return err
+			}
+			v.StorageType = HostKeyStorageType(ev)
+			return nil
 		case schemas.ListedHostKey_Type:
 			v.Type = new(string)
 			return d.ReadString(schemas.ListedHostKey_Type, v.Type)
@@ -4835,6 +4899,12 @@ type ProtocolDetails struct {
 	// [Avoid placing NLBs and NATs in front of Transfer Family]: https://docs.aws.amazon.com/transfer/latest/userguide/infrastructure-security.html#nlb-considerations
 	PassiveIp *string
 
+	// The configuration for PROXY protocol version 2 (PPv2) support on the Transfer
+	// Family server. For more information, see [Working with Network Load Balancers].
+	//
+	// [Working with Network Load Balancers]: https://docs.aws.amazon.com/transfer/latest/userguide/working-with-nlb.html
+	ProxyConfig *ProxyConfig
+
 	// Use the SetStatOption to ignore the error that is generated when the client
 	// attempts to use SETSTAT on a file you are uploading to an S3 bucket.
 	//
@@ -4855,6 +4925,32 @@ type ProtocolDetails struct {
 	// file attributes using SETSTAT , you can use Amazon EFS as backend storage with
 	// Transfer Family.
 	SetStatOption SetStatOption
+
+	// A property used with Transfer Family servers that use the SFTP protocol and
+	// have PUBLIC endpoints. This property accepts a list of up to three port
+	// configurations that the service opens on the server endpoint.
+	//
+	// Each entry in the list consists of two parameters, the SftpPort and the
+	// CommunicationMode . The SftpPort takes any integer from 2000 to 65535, or 22.
+	// CommunicationMode can be one of the following options:
+	//
+	//   - SERVER_TALK_FIRST : The server responds to initial TCP connections first.
+	//   Many older clients expect that an SFTP server responds with its server string
+	//   before starting SSH negotiations.
+	//
+	//   - CLIENT_TALK_FIRST : The server responds to the initial TCP connection only
+	//   after receiving a data packet. Most modern clients support this behavior and
+	//   send their client string along with the initial data packets for SSH
+	//   negotiation. Additionally, this mode is more resilient to TCP retransmissions
+	//   that can occur during the initial TCP connection.
+	//
+	// The following is an SftpPorts example for port 2222 with CLIENT_TALK_FIRST .
+	//
+	//     [ { "SftpPort": 2222, "CommunicationMode": "CLIENT_TALK_FIRST" } ]
+	//
+	// If you don't specify any configurations during CreateServer , the service uses
+	// port 22 with SERVER_TALK_FIRST by default.
+	SftpPorts []SftpPortWithOptions
 
 	// A property used with Transfer Family servers that use the FTPS protocol. TLS
 	// Session Resumption provides a mechanism to resume or share a negotiated secret
@@ -4896,9 +4992,15 @@ func (v *ProtocolDetails) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.PassiveIp != nil {
 		s.WriteString(schemas.ProtocolDetails_PassiveIp, *v.PassiveIp)
 	}
+	if v.ProxyConfig != nil {
+		s.WriteStruct(schemas.ProtocolDetails_ProxyConfig)
+		v.ProxyConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
 	if v.SetStatOption != "" {
 		s.WriteString(schemas.ProtocolDetails_SetStatOption, string(v.SetStatOption))
 	}
+	serializeSftpPorts(s, schemas.ProtocolDetails_SftpPorts, v.SftpPorts)
 	if v.TlsSessionResumptionMode != "" {
 		s.WriteString(schemas.ProtocolDetails_TlsSessionResumptionMode, string(v.TlsSessionResumptionMode))
 	}
@@ -4911,6 +5013,9 @@ func (v *ProtocolDetails) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.ProtocolDetails_PassiveIp:
 			v.PassiveIp = new(string)
 			return d.ReadString(schemas.ProtocolDetails_PassiveIp, v.PassiveIp)
+		case schemas.ProtocolDetails_ProxyConfig:
+			v.ProxyConfig = &ProxyConfig{}
+			return v.ProxyConfig.Deserialize(d)
 		case schemas.ProtocolDetails_SetStatOption:
 			var ev string
 			if err := d.ReadString(schemas.ProtocolDetails_SetStatOption, &ev); err != nil {
@@ -4918,12 +5023,77 @@ func (v *ProtocolDetails) Deserialize(d smithy.ShapeDeserializer) error {
 			}
 			v.SetStatOption = SetStatOption(ev)
 			return nil
+		case schemas.ProtocolDetails_SftpPorts:
+			return deserializeSftpPorts(d, schemas.ProtocolDetails_SftpPorts, &v.SftpPorts)
 		case schemas.ProtocolDetails_TlsSessionResumptionMode:
 			var ev string
 			if err := d.ReadString(schemas.ProtocolDetails_TlsSessionResumptionMode, &ev); err != nil {
 				return err
 			}
 			v.TlsSessionResumptionMode = TlsSessionResumptionMode(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
+// Contains configuration for PROXY protocol version 2 (PPv2) support on an
+// Transfer Family server. When enabled, Transfer Family reads the added PPv2
+// header from incoming connections to extract the client's source IP address. This
+// address is then available in Amazon CloudWatch Logs entries and is passed to
+// custom identity providers during authentication, enabling IP-based access
+// policies. For more information, see [Working with Network Load Balancers].
+//
+// [Working with Network Load Balancers]: https://docs.aws.amazon.com/transfer/latest/userguide/working-with-nlb.html
+type ProxyConfig struct {
+
+	// Specifies whether the Transfer Family server requires or ignores a PPv2 header
+	// containing the client's source IP address on incoming SFTP connections. If you
+	// don't specify a value, the default is NONE
+	//
+	//   - NONE : the server reads and ignores any PPv2 header on incoming SFTP
+	//   connections. This is the default value. Use this value when your SFTP server is
+	//   not behind an NLB, or when you do not need to preserve the client's source IP
+	//   address through an NLB.
+	//
+	//   - PROXY_PROTOCOL_V2_ENFORCED : the server requires a valid PPv2 header on
+	//   every incoming SFTP connection. When a valid header is present, the server
+	//   applies it and uses the source IP address from the header. If a connection
+	//   arrives without a PPv2 header, the server refuses the connection and logs an
+	//   error to Amazon CloudWatch Logs indicating that the expected PPv2 header was
+	//   missing. Use this value when your SFTP server is behind an NLB with PPv2 enabled
+	//   on the target group.
+	//
+	// With PROXY_PROTOCOL_V2_ENFORCED you must restrict the server's VPC endpoint
+	//   security group to allow inbound traffic only via the trusted NLB. For more
+	//   information, see [Working with Network Load Balancers].
+	//
+	// [Working with Network Load Balancers]: https://docs.aws.amazon.com/transfer/latest/userguide/working-with-nlb.html
+	SftpMode ProxyMode
+
+	noSmithyDocumentSerde
+}
+
+func (v *ProxyConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ProxyConfig)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ProxyConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SftpMode != "" {
+		s.WriteString(schemas.ProxyConfig_SftpMode, string(v.SftpMode))
+	}
+}
+func (v *ProxyConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ProxyConfig, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ProxyConfig_SftpMode:
+			var ev string
+			if err := d.ReadString(schemas.ProxyConfig_SftpMode, &ev); err != nil {
+				return err
+			}
+			v.SftpMode = ProxyMode(ev)
 			return nil
 		}
 		return nil
@@ -5311,6 +5481,60 @@ func (v *SftpConnectorConnectionDetails) Deserialize(d smithy.ShapeDeserializer)
 		case schemas.SftpConnectorConnectionDetails_HostKey:
 			v.HostKey = new(string)
 			return d.ReadString(schemas.SftpConnectorConnectionDetails_HostKey, v.HostKey)
+		}
+		return nil
+	})
+}
+
+// Specifies the configuration for a single SFTP port on a Transfer Family server
+// that uses the SFTP protocol and has a PUBLIC endpoint. Each entry in the
+// SftpPorts list is an SftpPortWithOptions object that pairs a port number with a
+// communication mode.
+type SftpPortWithOptions struct {
+
+	// The port on which the Transfer Family server listens for SFTP connections.
+	// Specify any integer from 2000 to 65535, or 22. This value is required for each
+	// entry in the SftpPorts list.
+	//
+	// This member is required.
+	SftpPort *int32
+
+	// Determines whether the server or the client sends data first when a client
+	// establishes an SFTP connection on this port. Valid values are SERVER_TALK_FIRST
+	// and CLIENT_TALK_FIRST . For a description of each mode, see the SftpPorts
+	// property. This value is optional.
+	CommunicationMode CommunicationMode
+
+	noSmithyDocumentSerde
+}
+
+func (v *SftpPortWithOptions) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SftpPortWithOptions)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SftpPortWithOptions) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CommunicationMode != "" {
+		s.WriteString(schemas.SftpPortWithOptions_CommunicationMode, string(v.CommunicationMode))
+	}
+	if v.SftpPort != nil {
+		s.WriteInt32(schemas.SftpPortWithOptions_SftpPort, *v.SftpPort)
+	}
+}
+func (v *SftpPortWithOptions) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SftpPortWithOptions, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SftpPortWithOptions_CommunicationMode:
+			var ev string
+			if err := d.ReadString(schemas.SftpPortWithOptions_CommunicationMode, &ev); err != nil {
+				return err
+			}
+			v.CommunicationMode = CommunicationMode(ev)
+			return nil
+		case schemas.SftpPortWithOptions_SftpPort:
+			v.SftpPort = new(int32)
+			return d.ReadInt32(schemas.SftpPortWithOptions_SftpPort, v.SftpPort)
 		}
 		return nil
 	})

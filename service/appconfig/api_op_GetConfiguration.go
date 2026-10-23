@@ -4,6 +4,8 @@ package appconfig
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/appconfig/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -90,6 +92,30 @@ type GetConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetConfigurationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Application != nil {
+		s.WriteString(schemas.GetConfigurationRequest_Application, *v.Application)
+	}
+	if v.ClientConfigurationVersion != nil {
+		s.WriteString(schemas.GetConfigurationRequest_ClientConfigurationVersion, *v.ClientConfigurationVersion)
+	}
+	if v.ClientId != nil {
+		s.WriteString(schemas.GetConfigurationRequest_ClientId, *v.ClientId)
+	}
+	if v.Configuration != nil {
+		s.WriteString(schemas.GetConfigurationRequest_Configuration, *v.Configuration)
+	}
+	if v.Environment != nil {
+		s.WriteString(schemas.GetConfigurationRequest_Environment, *v.Environment)
+	}
+}
+
 type GetConfigurationOutput struct {
 
 	// The configuration version.
@@ -116,13 +142,43 @@ type GetConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Configuration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConfigurationVersion != nil {
+		s.WriteString(schemas.Configuration_ConfigurationVersion, *v.ConfigurationVersion)
+	}
+	if v.Content != nil {
+		s.WriteBlob(schemas.Configuration_Content, v.Content)
+	}
+	if v.ContentType != nil {
+		s.WriteString(schemas.Configuration_ContentType, *v.ContentType)
+	}
+}
+func (v *GetConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Configuration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Configuration_ConfigurationVersion:
+			v.ConfigurationVersion = new(string)
+			return d.ReadString(schemas.Configuration_ConfigurationVersion, v.ConfigurationVersion)
+		case schemas.Configuration_Content:
+			return d.ReadBlob(schemas.Configuration_Content, &v.Content)
+		case schemas.Configuration_ContentType:
+			v.ContentType = new(string)
+			return d.ReadString(schemas.Configuration_ContentType, v.ContentType)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetConfiguration, schemas.GetConfigurationRequest, schemas.Configuration)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetConfiguration, schemas.GetConfigurationRequest, schemas.Configuration), output: &GetConfigurationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

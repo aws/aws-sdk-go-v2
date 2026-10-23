@@ -4,7 +4,9 @@ package databasemigrationservice
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/databasemigrationservice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/databasemigrationservice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -48,6 +50,22 @@ type ReloadReplicationTablesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ReloadReplicationTablesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ReloadReplicationTablesMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ReloadReplicationTablesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ReloadOption != "" {
+		s.WriteString(schemas.ReloadReplicationTablesMessage_ReloadOption, string(v.ReloadOption))
+	}
+	if v.ReplicationConfigArn != nil {
+		s.WriteString(schemas.ReloadReplicationTablesMessage_ReplicationConfigArn, *v.ReplicationConfigArn)
+	}
+	serializeTableListToReload(s, schemas.ReloadReplicationTablesMessage_TablesToReload, v.TablesToReload)
+}
+
 type ReloadReplicationTablesOutput struct {
 
 	// The Amazon Resource Name of the replication config for which to reload tables.
@@ -59,13 +77,32 @@ type ReloadReplicationTablesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ReloadReplicationTablesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ReloadReplicationTablesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ReloadReplicationTablesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ReplicationConfigArn != nil {
+		s.WriteString(schemas.ReloadReplicationTablesResponse_ReplicationConfigArn, *v.ReplicationConfigArn)
+	}
+}
+func (v *ReloadReplicationTablesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ReloadReplicationTablesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ReloadReplicationTablesResponse_ReplicationConfigArn:
+			v.ReplicationConfigArn = new(string)
+			return d.ReadString(schemas.ReloadReplicationTablesResponse_ReplicationConfigArn, v.ReplicationConfigArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationReloadReplicationTablesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpReloadReplicationTables{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ReloadReplicationTables, schemas.ReloadReplicationTablesMessage, schemas.ReloadReplicationTablesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpReloadReplicationTables{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ReloadReplicationTables, schemas.ReloadReplicationTablesMessage, schemas.ReloadReplicationTablesResponse), output: &ReloadReplicationTablesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

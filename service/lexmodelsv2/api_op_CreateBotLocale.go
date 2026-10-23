@@ -87,6 +87,11 @@ type CreateBotLocaleInput struct {
 	// Bedrock that you can turn on for your bot.
 	GenerativeAISettings *types.GenerativeAISettings
 
+	// The speaker diarization settings to configure for the new bot locale. When
+	// enabled, Amazon Lex restricts speech detection to the primary (loudest) speaker
+	// during streaming audio conversations.
+	SpeakerDiarizationSettings *types.SpeakerDiarizationSettings
+
 	// The sensitivity level for voice activity detection (VAD) in the bot locale.
 	// This setting helps optimize speech recognition accuracy by adjusting how the
 	// system responds to background noise during voice interactions.
@@ -136,6 +141,11 @@ func (v *CreateBotLocaleInput) SerializeMembers(s smithy.ShapeSerializer) {
 	}
 	if v.NluIntentConfidenceThreshold != nil {
 		s.WriteFloat64(schemas.CreateBotLocaleRequest_nluIntentConfidenceThreshold, *v.NluIntentConfidenceThreshold)
+	}
+	if v.SpeakerDiarizationSettings != nil {
+		s.WriteStruct(schemas.CreateBotLocaleRequest_speakerDiarizationSettings)
+		v.SpeakerDiarizationSettings.SerializeMembers(s)
+		s.CloseStruct()
 	}
 	if v.SpeechDetectionSensitivity != "" {
 		s.WriteString(schemas.CreateBotLocaleRequest_speechDetectionSensitivity, string(v.SpeechDetectionSensitivity))
@@ -201,6 +211,9 @@ type CreateBotLocaleOutput struct {
 	// AMAZON.KendraSearchIntent intents.
 	NluIntentConfidenceThreshold *float64
 
+	// The speaker diarization settings configured for the created bot locale.
+	SpeakerDiarizationSettings *types.SpeakerDiarizationSettings
+
 	// The sensitivity level for voice activity detection (VAD) that was specified for
 	// the bot locale.
 	SpeechDetectionSensitivity types.SpeechDetectionSensitivity
@@ -262,6 +275,11 @@ func (v *CreateBotLocaleOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NluIntentConfidenceThreshold != nil {
 		s.WriteFloat64(schemas.CreateBotLocaleResponse_nluIntentConfidenceThreshold, *v.NluIntentConfidenceThreshold)
 	}
+	if v.SpeakerDiarizationSettings != nil {
+		s.WriteStruct(schemas.CreateBotLocaleResponse_speakerDiarizationSettings)
+		v.SpeakerDiarizationSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
 	if v.SpeechDetectionSensitivity != "" {
 		s.WriteString(schemas.CreateBotLocaleResponse_speechDetectionSensitivity, string(v.SpeechDetectionSensitivity))
 	}
@@ -318,6 +336,9 @@ func (v *CreateBotLocaleOutput) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.CreateBotLocaleResponse_nluIntentConfidenceThreshold:
 			v.NluIntentConfidenceThreshold = new(float64)
 			return d.ReadFloat64(schemas.CreateBotLocaleResponse_nluIntentConfidenceThreshold, v.NluIntentConfidenceThreshold)
+		case schemas.CreateBotLocaleResponse_speakerDiarizationSettings:
+			v.SpeakerDiarizationSettings = &types.SpeakerDiarizationSettings{}
+			return v.SpeakerDiarizationSettings.Deserialize(d)
 		case schemas.CreateBotLocaleResponse_speechDetectionSensitivity:
 			var ev string
 			if err := d.ReadString(schemas.CreateBotLocaleResponse_speechDetectionSensitivity, &ev); err != nil {

@@ -4,7 +4,9 @@ package directconnect
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/directconnect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/directconnect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -32,6 +34,18 @@ type DeleteVirtualInterfaceInput struct {
 	VirtualInterfaceId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DeleteVirtualInterfaceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteVirtualInterfaceRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteVirtualInterfaceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.VirtualInterfaceId != nil {
+		s.WriteString(schemas.DeleteVirtualInterfaceRequest_virtualInterfaceId, *v.VirtualInterfaceId)
+	}
 }
 
 type DeleteVirtualInterfaceOutput struct {
@@ -76,13 +90,36 @@ type DeleteVirtualInterfaceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteVirtualInterfaceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteVirtualInterfaceResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteVirtualInterfaceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.VirtualInterfaceState != "" {
+		s.WriteString(schemas.DeleteVirtualInterfaceResponse_virtualInterfaceState, string(v.VirtualInterfaceState))
+	}
+}
+func (v *DeleteVirtualInterfaceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteVirtualInterfaceResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteVirtualInterfaceResponse_virtualInterfaceState:
+			var ev string
+			if err := d.ReadString(schemas.DeleteVirtualInterfaceResponse_virtualInterfaceState, &ev); err != nil {
+				return err
+			}
+			v.VirtualInterfaceState = types.VirtualInterfaceState(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteVirtualInterfaceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteVirtualInterface{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteVirtualInterface, schemas.DeleteVirtualInterfaceRequest, schemas.DeleteVirtualInterfaceResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeleteVirtualInterface{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteVirtualInterface, schemas.DeleteVirtualInterfaceRequest, schemas.DeleteVirtualInterfaceResponse), output: &DeleteVirtualInterfaceOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

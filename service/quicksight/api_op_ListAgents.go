@@ -4,7 +4,9 @@ package quicksight
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/quicksight/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/quicksight/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -40,6 +42,24 @@ type ListAgentsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAgentsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAgentsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAgentsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AwsAccountId != nil {
+		s.WriteString(schemas.ListAgentsRequest_AwsAccountId, *v.AwsAccountId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListAgentsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAgentsRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListAgentsOutput struct {
 
 	// A list of agent summaries.
@@ -59,13 +79,41 @@ type ListAgentsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAgentsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAgentsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAgentsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAgentSummaries(s, schemas.ListAgentsResponse_AgentSummaries, v.AgentSummaries)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAgentsResponse_NextToken, *v.NextToken)
+	}
+	if v.RequestId != nil {
+		s.WriteString(schemas.ListAgentsResponse_RequestId, *v.RequestId)
+	}
+}
+func (v *ListAgentsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListAgentsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListAgentsResponse_AgentSummaries:
+			return deserializeAgentSummaries(d, schemas.ListAgentsResponse_AgentSummaries, &v.AgentSummaries)
+		case schemas.ListAgentsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListAgentsResponse_NextToken, v.NextToken)
+		case schemas.ListAgentsResponse_RequestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.ListAgentsResponse_RequestId, v.RequestId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListAgentsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListAgents{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAgents, schemas.ListAgentsRequest, schemas.ListAgentsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListAgents{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAgents, schemas.ListAgentsRequest, schemas.ListAgentsResponse), output: &ListAgentsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

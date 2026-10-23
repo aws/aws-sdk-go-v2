@@ -4,7 +4,9 @@ package b2bi
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/b2bi/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/b2bi/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -34,6 +36,18 @@ type GetProfileInput struct {
 	ProfileId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetProfileInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetProfileRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetProfileInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ProfileId != nil {
+		s.WriteString(schemas.GetProfileRequest_profileId, *v.ProfileId)
+	}
 }
 
 type GetProfileOutput struct {
@@ -87,13 +101,90 @@ type GetProfileOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetProfileOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetProfileResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetProfileOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BusinessName != nil {
+		s.WriteString(schemas.GetProfileResponse_businessName, *v.BusinessName)
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.GetProfileResponse_createdAt, *v.CreatedAt)
+	}
+	if v.Email != nil {
+		s.WriteString(schemas.GetProfileResponse_email, *v.Email)
+	}
+	if v.LogGroupName != nil {
+		s.WriteString(schemas.GetProfileResponse_logGroupName, *v.LogGroupName)
+	}
+	if v.Logging != "" {
+		s.WriteString(schemas.GetProfileResponse_logging, string(v.Logging))
+	}
+	if v.ModifiedAt != nil {
+		s.WriteTime(schemas.GetProfileResponse_modifiedAt, *v.ModifiedAt)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.GetProfileResponse_name, *v.Name)
+	}
+	if v.Phone != nil {
+		s.WriteString(schemas.GetProfileResponse_phone, *v.Phone)
+	}
+	if v.ProfileArn != nil {
+		s.WriteString(schemas.GetProfileResponse_profileArn, *v.ProfileArn)
+	}
+	if v.ProfileId != nil {
+		s.WriteString(schemas.GetProfileResponse_profileId, *v.ProfileId)
+	}
+}
+func (v *GetProfileOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetProfileResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetProfileResponse_businessName:
+			v.BusinessName = new(string)
+			return d.ReadString(schemas.GetProfileResponse_businessName, v.BusinessName)
+		case schemas.GetProfileResponse_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.GetProfileResponse_createdAt, v.CreatedAt)
+		case schemas.GetProfileResponse_email:
+			v.Email = new(string)
+			return d.ReadString(schemas.GetProfileResponse_email, v.Email)
+		case schemas.GetProfileResponse_logGroupName:
+			v.LogGroupName = new(string)
+			return d.ReadString(schemas.GetProfileResponse_logGroupName, v.LogGroupName)
+		case schemas.GetProfileResponse_logging:
+			var ev string
+			if err := d.ReadString(schemas.GetProfileResponse_logging, &ev); err != nil {
+				return err
+			}
+			v.Logging = types.Logging(ev)
+			return nil
+		case schemas.GetProfileResponse_modifiedAt:
+			v.ModifiedAt = new(time.Time)
+			return d.ReadTime(schemas.GetProfileResponse_modifiedAt, v.ModifiedAt)
+		case schemas.GetProfileResponse_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.GetProfileResponse_name, v.Name)
+		case schemas.GetProfileResponse_phone:
+			v.Phone = new(string)
+			return d.ReadString(schemas.GetProfileResponse_phone, v.Phone)
+		case schemas.GetProfileResponse_profileArn:
+			v.ProfileArn = new(string)
+			return d.ReadString(schemas.GetProfileResponse_profileArn, v.ProfileArn)
+		case schemas.GetProfileResponse_profileId:
+			v.ProfileId = new(string)
+			return d.ReadString(schemas.GetProfileResponse_profileId, v.ProfileId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetProfileMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpGetProfile{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetProfile, schemas.GetProfileRequest, schemas.GetProfileResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpGetProfile{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetProfile, schemas.GetProfileRequest, schemas.GetProfileResponse), output: &GetProfileOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

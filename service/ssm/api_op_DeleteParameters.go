@@ -4,6 +4,8 @@ package ssm
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/ssm/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -38,6 +40,16 @@ type DeleteParametersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteParametersInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteParametersRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteParametersInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeParameterNameList(s, schemas.DeleteParametersRequest_Names, v.Names)
+}
+
 type DeleteParametersOutput struct {
 
 	// The names of the deleted parameters.
@@ -53,13 +65,32 @@ type DeleteParametersOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteParametersOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteParametersResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteParametersOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeParameterNameList(s, schemas.DeleteParametersResult_DeletedParameters, v.DeletedParameters)
+	serializeParameterNameList(s, schemas.DeleteParametersResult_InvalidParameters, v.InvalidParameters)
+}
+func (v *DeleteParametersOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteParametersResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteParametersResult_DeletedParameters:
+			return deserializeParameterNameList(d, schemas.DeleteParametersResult_DeletedParameters, &v.DeletedParameters)
+		case schemas.DeleteParametersResult_InvalidParameters:
+			return deserializeParameterNameList(d, schemas.DeleteParametersResult_InvalidParameters, &v.InvalidParameters)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteParametersMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteParameters{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteParameters, schemas.DeleteParametersRequest, schemas.DeleteParametersResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeleteParameters{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteParameters, schemas.DeleteParametersRequest, schemas.DeleteParametersResult), output: &DeleteParametersOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

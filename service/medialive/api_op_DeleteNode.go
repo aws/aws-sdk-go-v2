@@ -4,7 +4,9 @@ package medialive
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/medialive/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/medialive/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -38,6 +40,21 @@ type DeleteNodeInput struct {
 	NodeId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DeleteNodeInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteNodeRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteNodeInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClusterId != nil {
+		s.WriteString(schemas.DeleteNodeRequest_ClusterId, *v.ClusterId)
+	}
+	if v.NodeId != nil {
+		s.WriteString(schemas.DeleteNodeRequest_NodeId, *v.NodeId)
+	}
 }
 
 // Placeholder documentation for DeleteNodeResponse
@@ -87,13 +104,95 @@ type DeleteNodeOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteNodeOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteNodeResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteNodeOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.DeleteNodeResponse_Arn, *v.Arn)
+	}
+	serialize__listOf__string(s, schemas.DeleteNodeResponse_ChannelPlacementGroups, v.ChannelPlacementGroups)
+	if v.ClusterId != nil {
+		s.WriteString(schemas.DeleteNodeResponse_ClusterId, *v.ClusterId)
+	}
+	if v.ConnectionState != "" {
+		s.WriteString(schemas.DeleteNodeResponse_ConnectionState, string(v.ConnectionState))
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.DeleteNodeResponse_Id, *v.Id)
+	}
+	if v.InstanceArn != nil {
+		s.WriteString(schemas.DeleteNodeResponse_InstanceArn, *v.InstanceArn)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.DeleteNodeResponse_Name, *v.Name)
+	}
+	serialize__listOfNodeInterfaceMapping(s, schemas.DeleteNodeResponse_NodeInterfaceMappings, v.NodeInterfaceMappings)
+	if v.Role != "" {
+		s.WriteString(schemas.DeleteNodeResponse_Role, string(v.Role))
+	}
+	serializeSdiSourceMappings(s, schemas.DeleteNodeResponse_SdiSourceMappings, v.SdiSourceMappings)
+	if v.State != "" {
+		s.WriteString(schemas.DeleteNodeResponse_State, string(v.State))
+	}
+}
+func (v *DeleteNodeOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteNodeResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteNodeResponse_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.DeleteNodeResponse_Arn, v.Arn)
+		case schemas.DeleteNodeResponse_ChannelPlacementGroups:
+			return deserialize__listOf__string(d, schemas.DeleteNodeResponse_ChannelPlacementGroups, &v.ChannelPlacementGroups)
+		case schemas.DeleteNodeResponse_ClusterId:
+			v.ClusterId = new(string)
+			return d.ReadString(schemas.DeleteNodeResponse_ClusterId, v.ClusterId)
+		case schemas.DeleteNodeResponse_ConnectionState:
+			var ev string
+			if err := d.ReadString(schemas.DeleteNodeResponse_ConnectionState, &ev); err != nil {
+				return err
+			}
+			v.ConnectionState = types.NodeConnectionState(ev)
+			return nil
+		case schemas.DeleteNodeResponse_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.DeleteNodeResponse_Id, v.Id)
+		case schemas.DeleteNodeResponse_InstanceArn:
+			v.InstanceArn = new(string)
+			return d.ReadString(schemas.DeleteNodeResponse_InstanceArn, v.InstanceArn)
+		case schemas.DeleteNodeResponse_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.DeleteNodeResponse_Name, v.Name)
+		case schemas.DeleteNodeResponse_NodeInterfaceMappings:
+			return deserialize__listOfNodeInterfaceMapping(d, schemas.DeleteNodeResponse_NodeInterfaceMappings, &v.NodeInterfaceMappings)
+		case schemas.DeleteNodeResponse_Role:
+			var ev string
+			if err := d.ReadString(schemas.DeleteNodeResponse_Role, &ev); err != nil {
+				return err
+			}
+			v.Role = types.NodeRole(ev)
+			return nil
+		case schemas.DeleteNodeResponse_SdiSourceMappings:
+			return deserializeSdiSourceMappings(d, schemas.DeleteNodeResponse_SdiSourceMappings, &v.SdiSourceMappings)
+		case schemas.DeleteNodeResponse_State:
+			var ev string
+			if err := d.ReadString(schemas.DeleteNodeResponse_State, &ev); err != nil {
+				return err
+			}
+			v.State = types.NodeState(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteNodeMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteNode{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteNode, schemas.DeleteNodeRequest, schemas.DeleteNodeResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteNode{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteNode, schemas.DeleteNodeRequest, schemas.DeleteNodeResponse), output: &DeleteNodeOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

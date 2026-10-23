@@ -4,7 +4,9 @@ package entityresolution
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/entityresolution/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/entityresolution/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -39,6 +41,21 @@ type GetIdMappingJobInput struct {
 	WorkflowName *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetIdMappingJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetIdMappingJobInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetIdMappingJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.JobId != nil {
+		s.WriteString(schemas.GetIdMappingJobInput_jobId, *v.JobId)
+	}
+	if v.WorkflowName != nil {
+		s.WriteString(schemas.GetIdMappingJobInput_workflowName, *v.WorkflowName)
+	}
 }
 
 type GetIdMappingJobOutput struct {
@@ -91,13 +108,83 @@ type GetIdMappingJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetIdMappingJobOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetIdMappingJobOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetIdMappingJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EndTime != nil {
+		s.WriteTime(schemas.GetIdMappingJobOutput_endTime, *v.EndTime)
+	}
+	if v.ErrorDetails != nil {
+		s.WriteStruct(schemas.GetIdMappingJobOutput_errorDetails)
+		v.ErrorDetails.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.JobId != nil {
+		s.WriteString(schemas.GetIdMappingJobOutput_jobId, *v.JobId)
+	}
+	if v.JobType != "" {
+		s.WriteString(schemas.GetIdMappingJobOutput_jobType, string(v.JobType))
+	}
+	if v.Metrics != nil {
+		s.WriteStruct(schemas.GetIdMappingJobOutput_metrics)
+		v.Metrics.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeIdMappingJobOutputSourceConfig(s, schemas.GetIdMappingJobOutput_outputSourceConfig, v.OutputSourceConfig)
+	if v.StartTime != nil {
+		s.WriteTime(schemas.GetIdMappingJobOutput_startTime, *v.StartTime)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.GetIdMappingJobOutput_status, string(v.Status))
+	}
+}
+func (v *GetIdMappingJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetIdMappingJobOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetIdMappingJobOutput_endTime:
+			v.EndTime = new(time.Time)
+			return d.ReadTime(schemas.GetIdMappingJobOutput_endTime, v.EndTime)
+		case schemas.GetIdMappingJobOutput_errorDetails:
+			v.ErrorDetails = &types.ErrorDetails{}
+			return v.ErrorDetails.Deserialize(d)
+		case schemas.GetIdMappingJobOutput_jobId:
+			v.JobId = new(string)
+			return d.ReadString(schemas.GetIdMappingJobOutput_jobId, v.JobId)
+		case schemas.GetIdMappingJobOutput_jobType:
+			var ev string
+			if err := d.ReadString(schemas.GetIdMappingJobOutput_jobType, &ev); err != nil {
+				return err
+			}
+			v.JobType = types.JobType(ev)
+			return nil
+		case schemas.GetIdMappingJobOutput_metrics:
+			v.Metrics = &types.IdMappingJobMetrics{}
+			return v.Metrics.Deserialize(d)
+		case schemas.GetIdMappingJobOutput_outputSourceConfig:
+			return deserializeIdMappingJobOutputSourceConfig(d, schemas.GetIdMappingJobOutput_outputSourceConfig, &v.OutputSourceConfig)
+		case schemas.GetIdMappingJobOutput_startTime:
+			v.StartTime = new(time.Time)
+			return d.ReadTime(schemas.GetIdMappingJobOutput_startTime, v.StartTime)
+		case schemas.GetIdMappingJobOutput_status:
+			var ev string
+			if err := d.ReadString(schemas.GetIdMappingJobOutput_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.JobStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetIdMappingJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetIdMappingJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetIdMappingJob, schemas.GetIdMappingJobInput, schemas.GetIdMappingJobOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetIdMappingJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetIdMappingJob, schemas.GetIdMappingJobInput, schemas.GetIdMappingJobOutput), output: &GetIdMappingJobOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package iotdeviceadvisor
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/iotdeviceadvisor/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotdeviceadvisor/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -50,6 +52,27 @@ type StartSuiteRunInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartSuiteRunInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartSuiteRunRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartSuiteRunInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SuiteDefinitionId != nil {
+		s.WriteString(schemas.StartSuiteRunRequest_suiteDefinitionId, *v.SuiteDefinitionId)
+	}
+	if v.SuiteDefinitionVersion != nil {
+		s.WriteString(schemas.StartSuiteRunRequest_suiteDefinitionVersion, *v.SuiteDefinitionVersion)
+	}
+	if v.SuiteRunConfiguration != nil {
+		s.WriteStruct(schemas.StartSuiteRunRequest_suiteRunConfiguration)
+		v.SuiteRunConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeTagMap(s, schemas.StartSuiteRunRequest_tags, v.Tags)
+}
+
 type StartSuiteRunOutput struct {
 
 	// Starts a Device Advisor test suite run based on suite create time.
@@ -70,13 +93,50 @@ type StartSuiteRunOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartSuiteRunOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartSuiteRunResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartSuiteRunOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.StartSuiteRunResponse_createdAt, *v.CreatedAt)
+	}
+	if v.Endpoint != nil {
+		s.WriteString(schemas.StartSuiteRunResponse_endpoint, *v.Endpoint)
+	}
+	if v.SuiteRunArn != nil {
+		s.WriteString(schemas.StartSuiteRunResponse_suiteRunArn, *v.SuiteRunArn)
+	}
+	if v.SuiteRunId != nil {
+		s.WriteString(schemas.StartSuiteRunResponse_suiteRunId, *v.SuiteRunId)
+	}
+}
+func (v *StartSuiteRunOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartSuiteRunResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartSuiteRunResponse_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.StartSuiteRunResponse_createdAt, v.CreatedAt)
+		case schemas.StartSuiteRunResponse_endpoint:
+			v.Endpoint = new(string)
+			return d.ReadString(schemas.StartSuiteRunResponse_endpoint, v.Endpoint)
+		case schemas.StartSuiteRunResponse_suiteRunArn:
+			v.SuiteRunArn = new(string)
+			return d.ReadString(schemas.StartSuiteRunResponse_suiteRunArn, v.SuiteRunArn)
+		case schemas.StartSuiteRunResponse_suiteRunId:
+			v.SuiteRunId = new(string)
+			return d.ReadString(schemas.StartSuiteRunResponse_suiteRunId, v.SuiteRunId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartSuiteRunMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpStartSuiteRun{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartSuiteRun, schemas.StartSuiteRunRequest, schemas.StartSuiteRunResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStartSuiteRun{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartSuiteRun, schemas.StartSuiteRunRequest, schemas.StartSuiteRunResponse), output: &StartSuiteRunOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

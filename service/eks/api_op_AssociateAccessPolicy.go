@@ -4,7 +4,9 @@ package eks
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/eks/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/eks/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -55,6 +57,29 @@ type AssociateAccessPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssociateAccessPolicyInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssociateAccessPolicyRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssociateAccessPolicyInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccessScope != nil {
+		s.WriteStruct(schemas.AssociateAccessPolicyRequest_accessScope)
+		v.AccessScope.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ClusterName != nil {
+		s.WriteString(schemas.AssociateAccessPolicyRequest_clusterName, *v.ClusterName)
+	}
+	if v.PolicyArn != nil {
+		s.WriteString(schemas.AssociateAccessPolicyRequest_policyArn, *v.PolicyArn)
+	}
+	if v.PrincipalArn != nil {
+		s.WriteString(schemas.AssociateAccessPolicyRequest_principalArn, *v.PrincipalArn)
+	}
+}
+
 type AssociateAccessPolicyOutput struct {
 
 	// The AccessPolicy and scope associated to the AccessEntry .
@@ -72,13 +97,46 @@ type AssociateAccessPolicyOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssociateAccessPolicyOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssociateAccessPolicyResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssociateAccessPolicyOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AssociatedAccessPolicy != nil {
+		s.WriteStruct(schemas.AssociateAccessPolicyResponse_associatedAccessPolicy)
+		v.AssociatedAccessPolicy.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ClusterName != nil {
+		s.WriteString(schemas.AssociateAccessPolicyResponse_clusterName, *v.ClusterName)
+	}
+	if v.PrincipalArn != nil {
+		s.WriteString(schemas.AssociateAccessPolicyResponse_principalArn, *v.PrincipalArn)
+	}
+}
+func (v *AssociateAccessPolicyOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AssociateAccessPolicyResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AssociateAccessPolicyResponse_associatedAccessPolicy:
+			v.AssociatedAccessPolicy = &types.AssociatedAccessPolicy{}
+			return v.AssociatedAccessPolicy.Deserialize(d)
+		case schemas.AssociateAccessPolicyResponse_clusterName:
+			v.ClusterName = new(string)
+			return d.ReadString(schemas.AssociateAccessPolicyResponse_clusterName, v.ClusterName)
+		case schemas.AssociateAccessPolicyResponse_principalArn:
+			v.PrincipalArn = new(string)
+			return d.ReadString(schemas.AssociateAccessPolicyResponse_principalArn, v.PrincipalArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationAssociateAccessPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpAssociateAccessPolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociateAccessPolicy, schemas.AssociateAccessPolicyRequest, schemas.AssociateAccessPolicyResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpAssociateAccessPolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociateAccessPolicy, schemas.AssociateAccessPolicyRequest, schemas.AssociateAccessPolicyResponse), output: &AssociateAccessPolicyOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

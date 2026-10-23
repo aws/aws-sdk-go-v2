@@ -304,6 +304,7 @@ func TestUpdateResponseSnapshot_GetContactInformation(t *testing.T) {
 			CompanyName:      ptr.String("__CompanyName__"),
 			WebsiteUrl:       ptr.String("__WebsiteUrl__"),
 		},
+		VerificationStatus: types.PhoneNumberVerificationStatus("PENDING"),
 	}
 	proto := restjson1.New(schemas.Account)
 	opSchema := smithy.NewOperationSchema(schemas.GetContactInformation, schemas.GetContactInformationResponse, schemas.GetContactInformationResponse)
@@ -524,6 +525,30 @@ func TestUpdateResponseSnapshot_PutContactInformation(t *testing.T) {
 	}
 }
 
+func TestUpdateResponseSnapshot_SendPhoneNumberVerification(t *testing.T) {
+	want := &SendPhoneNumberVerificationOutput{
+		Status: types.PhoneNumberVerificationStatus("PENDING"),
+	}
+	proto := restjson1.New(schemas.Account)
+	opSchema := smithy.NewOperationSchema(schemas.SendPhoneNumberVerification, schemas.SendPhoneNumberVerificationResponse, schemas.SendPhoneNumberVerificationResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("SendPhoneNumberVerification.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateResponseSnapshot_StartPrimaryEmailUpdate(t *testing.T) {
 	want := &StartPrimaryEmailUpdateOutput{
 		Status: types.PrimaryEmailUpdateStatus("PENDING"),
@@ -544,6 +569,30 @@ func TestUpdateResponseSnapshot_StartPrimaryEmailUpdate(t *testing.T) {
 		body = b
 	}
 	if err := serdeRespWriteSnapshot("StartPrimaryEmailUpdate.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_VerifyPhoneNumber(t *testing.T) {
+	want := &VerifyPhoneNumberOutput{
+		Status: types.PhoneNumberVerificationStatus("PENDING"),
+	}
+	proto := restjson1.New(schemas.Account)
+	opSchema := smithy.NewOperationSchema(schemas.VerifyPhoneNumber, schemas.VerifyPhoneNumberResponse, schemas.VerifyPhoneNumberResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("VerifyPhoneNumber.response", 200, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
 }

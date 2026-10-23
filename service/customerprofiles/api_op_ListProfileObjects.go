@@ -4,7 +4,9 @@ package customerprofiles
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/customerprofiles/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/customerprofiles/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -55,6 +57,35 @@ type ListProfileObjectsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListProfileObjectsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListProfileObjectsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListProfileObjectsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DomainName != nil {
+		s.WriteString(schemas.ListProfileObjectsRequest_DomainName, *v.DomainName)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListProfileObjectsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListProfileObjectsRequest_NextToken, *v.NextToken)
+	}
+	if v.ObjectFilter != nil {
+		s.WriteStruct(schemas.ListProfileObjectsRequest_ObjectFilter)
+		v.ObjectFilter.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ObjectTypeName != nil {
+		s.WriteString(schemas.ListProfileObjectsRequest_ObjectTypeName, *v.ObjectTypeName)
+	}
+	if v.ProfileId != nil {
+		s.WriteString(schemas.ListProfileObjectsRequest_ProfileId, *v.ProfileId)
+	}
+}
+
 type ListProfileObjectsOutput struct {
 
 	// The list of ListProfileObject instances.
@@ -69,13 +100,35 @@ type ListProfileObjectsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListProfileObjectsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListProfileObjectsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListProfileObjectsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeProfileObjectList(s, schemas.ListProfileObjectsResponse_Items, v.Items)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListProfileObjectsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListProfileObjectsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListProfileObjectsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListProfileObjectsResponse_Items:
+			return deserializeProfileObjectList(d, schemas.ListProfileObjectsResponse_Items, &v.Items)
+		case schemas.ListProfileObjectsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListProfileObjectsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListProfileObjectsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListProfileObjects{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListProfileObjects, schemas.ListProfileObjectsRequest, schemas.ListProfileObjectsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListProfileObjects{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListProfileObjects, schemas.ListProfileObjectsRequest, schemas.ListProfileObjectsResponse), output: &ListProfileObjectsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

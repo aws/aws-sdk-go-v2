@@ -4,7 +4,9 @@ package glue
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/glue/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/glue/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -39,6 +41,21 @@ type GetDataQualityModelInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetDataQualityModelInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetDataQualityModelRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetDataQualityModelInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ProfileId != nil {
+		s.WriteString(schemas.GetDataQualityModelRequest_ProfileId, *v.ProfileId)
+	}
+	if v.StatisticId != nil {
+		s.WriteString(schemas.GetDataQualityModelRequest_StatisticId, *v.StatisticId)
+	}
+}
+
 type GetDataQualityModelOutput struct {
 
 	// The timestamp when the data quality model training completed.
@@ -59,13 +76,54 @@ type GetDataQualityModelOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetDataQualityModelOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetDataQualityModelResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetDataQualityModelOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CompletedOn != nil {
+		s.WriteTime(schemas.GetDataQualityModelResponse_CompletedOn, *v.CompletedOn)
+	}
+	if v.FailureReason != nil {
+		s.WriteString(schemas.GetDataQualityModelResponse_FailureReason, *v.FailureReason)
+	}
+	if v.StartedOn != nil {
+		s.WriteTime(schemas.GetDataQualityModelResponse_StartedOn, *v.StartedOn)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.GetDataQualityModelResponse_Status, string(v.Status))
+	}
+}
+func (v *GetDataQualityModelOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetDataQualityModelResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetDataQualityModelResponse_CompletedOn:
+			v.CompletedOn = new(time.Time)
+			return d.ReadTime(schemas.GetDataQualityModelResponse_CompletedOn, v.CompletedOn)
+		case schemas.GetDataQualityModelResponse_FailureReason:
+			v.FailureReason = new(string)
+			return d.ReadString(schemas.GetDataQualityModelResponse_FailureReason, v.FailureReason)
+		case schemas.GetDataQualityModelResponse_StartedOn:
+			v.StartedOn = new(time.Time)
+			return d.ReadTime(schemas.GetDataQualityModelResponse_StartedOn, v.StartedOn)
+		case schemas.GetDataQualityModelResponse_Status:
+			var ev string
+			if err := d.ReadString(schemas.GetDataQualityModelResponse_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.DataQualityModelStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetDataQualityModelMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetDataQualityModel{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetDataQualityModel, schemas.GetDataQualityModelRequest, schemas.GetDataQualityModelResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetDataQualityModel{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetDataQualityModel, schemas.GetDataQualityModelRequest, schemas.GetDataQualityModelResponse), output: &GetDataQualityModelOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

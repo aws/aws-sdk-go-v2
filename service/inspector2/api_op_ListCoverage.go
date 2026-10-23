@@ -5,7 +5,9 @@ package inspector2
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/inspector2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/inspector2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -47,6 +49,42 @@ type ListCoverageInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListCoverageInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListCoverageRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListCoverageInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FilterCriteria != nil {
+		s.WriteStruct(schemas.ListCoverageRequest_filterCriteria)
+		v.FilterCriteria.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListCoverageRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListCoverageRequest_nextToken, *v.NextToken)
+	}
+}
+func (v *ListCoverageInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListCoverageRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListCoverageRequest_filterCriteria:
+			v.FilterCriteria = &types.CoverageFilterCriteria{}
+			return v.FilterCriteria.Deserialize(d)
+		case schemas.ListCoverageRequest_maxResults:
+			v.MaxResults = new(int32)
+			return d.ReadInt32(schemas.ListCoverageRequest_maxResults, v.MaxResults)
+		case schemas.ListCoverageRequest_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListCoverageRequest_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
+
 type ListCoverageOutput struct {
 
 	// An object that contains details on the covered resources in your environment.
@@ -64,13 +102,35 @@ type ListCoverageOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListCoverageOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListCoverageResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListCoverageOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeCoveredResources(s, schemas.ListCoverageResponse_coveredResources, v.CoveredResources)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListCoverageResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListCoverageOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListCoverageResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListCoverageResponse_coveredResources:
+			return deserializeCoveredResources(d, schemas.ListCoverageResponse_coveredResources, &v.CoveredResources)
+		case schemas.ListCoverageResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListCoverageResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListCoverageMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListCoverage{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListCoverage, schemas.ListCoverageRequest, schemas.ListCoverageResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListCoverage{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListCoverage, schemas.ListCoverageRequest, schemas.ListCoverageResponse), output: &ListCoverageOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

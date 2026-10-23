@@ -4,7 +4,9 @@ package ssoadmin
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/ssoadmin/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ssoadmin/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -41,6 +43,21 @@ type DescribeAccountAssignmentCreationStatusInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeAccountAssignmentCreationStatusInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeAccountAssignmentCreationStatusRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeAccountAssignmentCreationStatusInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountAssignmentCreationRequestId != nil {
+		s.WriteString(schemas.DescribeAccountAssignmentCreationStatusRequest_AccountAssignmentCreationRequestId, *v.AccountAssignmentCreationRequestId)
+	}
+	if v.InstanceArn != nil {
+		s.WriteString(schemas.DescribeAccountAssignmentCreationStatusRequest_InstanceArn, *v.InstanceArn)
+	}
+}
+
 type DescribeAccountAssignmentCreationStatusOutput struct {
 
 	// The status object for the account assignment creation operation.
@@ -52,13 +69,34 @@ type DescribeAccountAssignmentCreationStatusOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeAccountAssignmentCreationStatusOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeAccountAssignmentCreationStatusResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeAccountAssignmentCreationStatusOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountAssignmentCreationStatus != nil {
+		s.WriteStruct(schemas.DescribeAccountAssignmentCreationStatusResponse_AccountAssignmentCreationStatus)
+		v.AccountAssignmentCreationStatus.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DescribeAccountAssignmentCreationStatusOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeAccountAssignmentCreationStatusResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeAccountAssignmentCreationStatusResponse_AccountAssignmentCreationStatus:
+			v.AccountAssignmentCreationStatus = &types.AccountAssignmentOperationStatus{}
+			return v.AccountAssignmentCreationStatus.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeAccountAssignmentCreationStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeAccountAssignmentCreationStatus{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeAccountAssignmentCreationStatus, schemas.DescribeAccountAssignmentCreationStatusRequest, schemas.DescribeAccountAssignmentCreationStatusResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeAccountAssignmentCreationStatus{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeAccountAssignmentCreationStatus, schemas.DescribeAccountAssignmentCreationStatusRequest, schemas.DescribeAccountAssignmentCreationStatusResponse), output: &DescribeAccountAssignmentCreationStatusOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

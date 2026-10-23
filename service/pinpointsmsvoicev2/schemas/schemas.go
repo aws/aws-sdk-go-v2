@@ -5,6 +5,7 @@ package schemas
 import (
 	smithy "github.com/aws/smithy-go"
 	smithyprelude "github.com/aws/smithy-go/prelude"
+	smithytraits "github.com/aws/smithy-go/traits"
 )
 
 var AssociateOriginationIdentity = smithy.NewSchema(smithy.ShapeID{
@@ -567,7 +568,7 @@ var PinpointSMSVoiceV2 = smithy.NewServiceSchema(_PinpointSMSVoiceV2, "2022-03-3
 var AccessDeniedException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.pinpointsmsvoicev2",
 	Name:      "AccessDeniedException",
-}, smithy.ShapeTypeStructure, 2)
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"})
 var AccessDeniedException_Message *smithy.Schema
 
 var AccessDeniedException_Reason *smithy.Schema
@@ -806,7 +807,7 @@ var _ConfigurationSetNameOrArn = smithy.NewSchema(smithy.ShapeID{
 var ConflictException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.pinpointsmsvoicev2",
 	Name:      "ConflictException",
-}, smithy.ShapeTypeStructure, 4)
+}, smithy.ShapeTypeStructure, 4, &smithytraits.Error{Type: "client"})
 var ConflictException_Message *smithy.Schema
 
 var ConflictException_Reason *smithy.Schema
@@ -1020,7 +1021,7 @@ var _IamRoleArnOrUnset = smithy.NewSchema(smithy.ShapeID{
 var InternalServerException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.pinpointsmsvoicev2",
 	Name:      "InternalServerException",
-}, smithy.ShapeTypeStructure, 2)
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "server"})
 var InternalServerException_Message *smithy.Schema
 
 var InternalServerException_RequestId *smithy.Schema
@@ -1625,7 +1626,7 @@ var _PhoneNumberIdOrArn = smithy.NewSchema(smithy.ShapeID{
 var PhoneNumberInformation = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.pinpointsmsvoicev2",
 	Name:      "PhoneNumberInformation",
-}, smithy.ShapeTypeStructure, 20)
+}, smithy.ShapeTypeStructure, 21)
 var PhoneNumberInformation_PhoneNumberArn *smithy.Schema
 
 var PhoneNumberInformation_PhoneNumberId *smithy.Schema
@@ -1663,6 +1664,8 @@ var PhoneNumberInformation_PoolId *smithy.Schema
 var PhoneNumberInformation_RegistrationId *smithy.Schema
 
 var PhoneNumberInformation_MessagingLimits *smithy.Schema
+
+var PhoneNumberInformation_PricingTier *smithy.Schema
 
 var PhoneNumberInformation_CreatedTimestamp *smithy.Schema
 
@@ -2717,7 +2720,7 @@ var _ResourceIdOrArn = smithy.NewSchema(smithy.ShapeID{
 var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.pinpointsmsvoicev2",
 	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 3)
+}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "client"})
 var ResourceNotFoundException_Message *smithy.Schema
 
 var ResourceNotFoundException_ResourceType *smithy.Schema
@@ -2822,7 +2825,7 @@ var _SenderIdFilterName = smithy.NewSchema(smithy.ShapeID{
 var SenderIdInformation = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.pinpointsmsvoicev2",
 	Name:      "SenderIdInformation",
-}, smithy.ShapeTypeStructure, 9)
+}, smithy.ShapeTypeStructure, 10)
 var SenderIdInformation_SenderIdArn *smithy.Schema
 
 var SenderIdInformation_SenderId *smithy.Schema
@@ -2840,6 +2843,8 @@ var SenderIdInformation_Registered *smithy.Schema
 var SenderIdInformation_RegistrationId *smithy.Schema
 
 var SenderIdInformation_MessagingLimits *smithy.Schema
+
+var SenderIdInformation_PricingTier *smithy.Schema
 
 var _SenderIdInformationList = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.pinpointsmsvoicev2",
@@ -2861,7 +2866,7 @@ var _SenderIdOrArn = smithy.NewSchema(smithy.ShapeID{
 var ServiceQuotaExceededException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.pinpointsmsvoicev2",
 	Name:      "ServiceQuotaExceededException",
-}, smithy.ShapeTypeStructure, 2)
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"})
 var ServiceQuotaExceededException_Message *smithy.Schema
 
 var ServiceQuotaExceededException_Reason *smithy.Schema
@@ -3075,7 +3080,7 @@ var _TextValue = smithy.NewSchema(smithy.ShapeID{
 var ThrottlingException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.pinpointsmsvoicev2",
 	Name:      "ThrottlingException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var ThrottlingException_Message *smithy.Schema
 
 var _TierUpgradeStatus = smithy.NewSchema(smithy.ShapeID{
@@ -3111,7 +3116,7 @@ var _TwoWayMediaS3KeyPrefix = smithy.NewSchema(smithy.ShapeID{
 var ValidationException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.pinpointsmsvoicev2",
 	Name:      "ValidationException",
-}, smithy.ShapeTypeStructure, 3)
+}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "client"})
 var ValidationException_Message *smithy.Schema
 
 var ValidationException_Reason *smithy.Schema
@@ -3284,13 +3289,15 @@ var AssociateProtectConfigurationResult_ProtectConfigurationId *smithy.Schema
 var CarrierLookupRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.pinpointsmsvoicev2",
 	Name:      "CarrierLookupRequest",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 2)
 var CarrierLookupRequest_PhoneNumber *smithy.Schema
+
+var CarrierLookupRequest_EnableCleansing *smithy.Schema
 
 var CarrierLookupResult = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.pinpointsmsvoicev2",
 	Name:      "CarrierLookupResult",
-}, smithy.ShapeTypeStructure, 8)
+}, smithy.ShapeTypeStructure, 9)
 var CarrierLookupResult_E164PhoneNumber *smithy.Schema
 
 var CarrierLookupResult_DialingCountryCode *smithy.Schema
@@ -3306,6 +3313,8 @@ var CarrierLookupResult_MNC *smithy.Schema
 var CarrierLookupResult_Carrier *smithy.Schema
 
 var CarrierLookupResult_PhoneNumberType *smithy.Schema
+
+var CarrierLookupResult_OriginalPhoneNumber *smithy.Schema
 
 var CreateConfigurationSetRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.pinpointsmsvoicev2",
@@ -6360,6 +6369,8 @@ func init() {
 
 	PhoneNumberInformation_MessagingLimits = PhoneNumberInformation.AddMember("MessagingLimits", MessagingLimits)
 
+	PhoneNumberInformation_PricingTier = PhoneNumberInformation.AddMember("PricingTier", smithyprelude.String)
+
 	PhoneNumberInformation_CreatedTimestamp = PhoneNumberInformation.AddMember("CreatedTimestamp", smithyprelude.Timestamp)
 
 	_PhoneNumberInformationList_member = _PhoneNumberInformationList.AddMember("member", PhoneNumberInformation)
@@ -6904,6 +6915,8 @@ func init() {
 
 	SenderIdInformation_MessagingLimits = SenderIdInformation.AddMember("MessagingLimits", MessagingLimits)
 
+	SenderIdInformation_PricingTier = SenderIdInformation.AddMember("PricingTier", smithyprelude.String)
+
 	_SenderIdInformationList_member = _SenderIdInformationList.AddMember("member", SenderIdInformation)
 
 	_SenderIdList_member = _SenderIdList.AddMember("member", SenderIdAndCountry)
@@ -6998,6 +7011,8 @@ func init() {
 
 	CarrierLookupRequest_PhoneNumber = CarrierLookupRequest.AddMember("PhoneNumber", _CarrierLookupInputPhoneNumberType)
 
+	CarrierLookupRequest_EnableCleansing = CarrierLookupRequest.AddMember("EnableCleansing", smithyprelude.Boolean)
+
 	CarrierLookupResult_E164PhoneNumber = CarrierLookupResult.AddMember("E164PhoneNumber", _E164PhoneNumberType)
 
 	CarrierLookupResult_DialingCountryCode = CarrierLookupResult.AddMember("DialingCountryCode", _DialingCountryCodeType)
@@ -7013,6 +7028,8 @@ func init() {
 	CarrierLookupResult_Carrier = CarrierLookupResult.AddMember("Carrier", smithyprelude.String)
 
 	CarrierLookupResult_PhoneNumberType = CarrierLookupResult.AddMember("PhoneNumberType", _PhoneNumberType)
+
+	CarrierLookupResult_OriginalPhoneNumber = CarrierLookupResult.AddMember("OriginalPhoneNumber", _CarrierLookupInputPhoneNumberType)
 
 	CreateConfigurationSetRequest_ConfigurationSetName = CreateConfigurationSetRequest.AddMember("ConfigurationSetName", _ConfigurationSetName)
 

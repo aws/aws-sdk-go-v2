@@ -4,7 +4,9 @@ package glue
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/glue/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/glue/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,20 @@ type DeleteRegistryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteRegistryInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteRegistryInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteRegistryInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RegistryId != nil {
+		s.WriteStruct(schemas.DeleteRegistryInput_RegistryId)
+		v.RegistryId.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type DeleteRegistryOutput struct {
 
 	// The Amazon Resource Name (ARN) of the registry being deleted.
@@ -57,13 +73,48 @@ type DeleteRegistryOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteRegistryOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteRegistryResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteRegistryOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RegistryArn != nil {
+		s.WriteString(schemas.DeleteRegistryResponse_RegistryArn, *v.RegistryArn)
+	}
+	if v.RegistryName != nil {
+		s.WriteString(schemas.DeleteRegistryResponse_RegistryName, *v.RegistryName)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.DeleteRegistryResponse_Status, string(v.Status))
+	}
+}
+func (v *DeleteRegistryOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteRegistryResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteRegistryResponse_RegistryArn:
+			v.RegistryArn = new(string)
+			return d.ReadString(schemas.DeleteRegistryResponse_RegistryArn, v.RegistryArn)
+		case schemas.DeleteRegistryResponse_RegistryName:
+			v.RegistryName = new(string)
+			return d.ReadString(schemas.DeleteRegistryResponse_RegistryName, v.RegistryName)
+		case schemas.DeleteRegistryResponse_Status:
+			var ev string
+			if err := d.ReadString(schemas.DeleteRegistryResponse_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.RegistryStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteRegistryMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteRegistry{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteRegistry, schemas.DeleteRegistryInput, schemas.DeleteRegistryResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeleteRegistry{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteRegistry, schemas.DeleteRegistryInput, schemas.DeleteRegistryResponse), output: &DeleteRegistryOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

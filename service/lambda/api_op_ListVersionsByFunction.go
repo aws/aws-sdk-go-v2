@@ -5,7 +5,9 @@ package lambda
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/lambda/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lambda/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -58,6 +60,24 @@ type ListVersionsByFunctionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListVersionsByFunctionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListVersionsByFunctionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListVersionsByFunctionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FunctionName != nil {
+		s.WriteString(schemas.ListVersionsByFunctionRequest_FunctionName, *v.FunctionName)
+	}
+	if v.Marker != nil {
+		s.WriteString(schemas.ListVersionsByFunctionRequest_Marker, *v.Marker)
+	}
+	if v.MaxItems != nil {
+		s.WriteInt32(schemas.ListVersionsByFunctionRequest_MaxItems, *v.MaxItems)
+	}
+}
+
 type ListVersionsByFunctionOutput struct {
 
 	// The pagination token that's included if more results are available.
@@ -72,13 +92,35 @@ type ListVersionsByFunctionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListVersionsByFunctionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListVersionsByFunctionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListVersionsByFunctionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextMarker != nil {
+		s.WriteString(schemas.ListVersionsByFunctionResponse_NextMarker, *v.NextMarker)
+	}
+	serializeFunctionList(s, schemas.ListVersionsByFunctionResponse_Versions, v.Versions)
+}
+func (v *ListVersionsByFunctionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListVersionsByFunctionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListVersionsByFunctionResponse_NextMarker:
+			v.NextMarker = new(string)
+			return d.ReadString(schemas.ListVersionsByFunctionResponse_NextMarker, v.NextMarker)
+		case schemas.ListVersionsByFunctionResponse_Versions:
+			return deserializeFunctionList(d, schemas.ListVersionsByFunctionResponse_Versions, &v.Versions)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListVersionsByFunctionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListVersionsByFunction{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListVersionsByFunction, schemas.ListVersionsByFunctionRequest, schemas.ListVersionsByFunctionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListVersionsByFunction{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListVersionsByFunction, schemas.ListVersionsByFunctionRequest, schemas.ListVersionsByFunctionResponse), output: &ListVersionsByFunctionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

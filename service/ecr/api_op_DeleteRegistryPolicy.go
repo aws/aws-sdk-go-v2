@@ -4,6 +4,8 @@ package ecr
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/ecr/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -27,6 +29,15 @@ type DeleteRegistryPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteRegistryPolicyInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteRegistryPolicyRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteRegistryPolicyInput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+
 type DeleteRegistryPolicyOutput struct {
 
 	// The contents of the registry permissions policy that was deleted.
@@ -41,13 +52,38 @@ type DeleteRegistryPolicyOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteRegistryPolicyOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteRegistryPolicyResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteRegistryPolicyOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PolicyText != nil {
+		s.WriteString(schemas.DeleteRegistryPolicyResponse_policyText, *v.PolicyText)
+	}
+	if v.RegistryId != nil {
+		s.WriteString(schemas.DeleteRegistryPolicyResponse_registryId, *v.RegistryId)
+	}
+}
+func (v *DeleteRegistryPolicyOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteRegistryPolicyResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteRegistryPolicyResponse_policyText:
+			v.PolicyText = new(string)
+			return d.ReadString(schemas.DeleteRegistryPolicyResponse_policyText, v.PolicyText)
+		case schemas.DeleteRegistryPolicyResponse_registryId:
+			v.RegistryId = new(string)
+			return d.ReadString(schemas.DeleteRegistryPolicyResponse_registryId, v.RegistryId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteRegistryPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteRegistryPolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteRegistryPolicy, schemas.DeleteRegistryPolicyRequest, schemas.DeleteRegistryPolicyResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeleteRegistryPolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteRegistryPolicy, schemas.DeleteRegistryPolicyRequest, schemas.DeleteRegistryPolicyResponse), output: &DeleteRegistryPolicyOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

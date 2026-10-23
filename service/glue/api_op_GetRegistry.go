@@ -4,7 +4,9 @@ package glue
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/glue/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/glue/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -35,6 +37,20 @@ type GetRegistryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetRegistryInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetRegistryInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetRegistryInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RegistryId != nil {
+		s.WriteStruct(schemas.GetRegistryInput_RegistryId)
+		v.RegistryId.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type GetRegistryOutput struct {
 
 	// The date and time the registry was created.
@@ -61,13 +77,66 @@ type GetRegistryOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetRegistryOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetRegistryResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetRegistryOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreatedTime != nil {
+		s.WriteString(schemas.GetRegistryResponse_CreatedTime, *v.CreatedTime)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.GetRegistryResponse_Description, *v.Description)
+	}
+	if v.RegistryArn != nil {
+		s.WriteString(schemas.GetRegistryResponse_RegistryArn, *v.RegistryArn)
+	}
+	if v.RegistryName != nil {
+		s.WriteString(schemas.GetRegistryResponse_RegistryName, *v.RegistryName)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.GetRegistryResponse_Status, string(v.Status))
+	}
+	if v.UpdatedTime != nil {
+		s.WriteString(schemas.GetRegistryResponse_UpdatedTime, *v.UpdatedTime)
+	}
+}
+func (v *GetRegistryOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetRegistryResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetRegistryResponse_CreatedTime:
+			v.CreatedTime = new(string)
+			return d.ReadString(schemas.GetRegistryResponse_CreatedTime, v.CreatedTime)
+		case schemas.GetRegistryResponse_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.GetRegistryResponse_Description, v.Description)
+		case schemas.GetRegistryResponse_RegistryArn:
+			v.RegistryArn = new(string)
+			return d.ReadString(schemas.GetRegistryResponse_RegistryArn, v.RegistryArn)
+		case schemas.GetRegistryResponse_RegistryName:
+			v.RegistryName = new(string)
+			return d.ReadString(schemas.GetRegistryResponse_RegistryName, v.RegistryName)
+		case schemas.GetRegistryResponse_Status:
+			var ev string
+			if err := d.ReadString(schemas.GetRegistryResponse_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.RegistryStatus(ev)
+			return nil
+		case schemas.GetRegistryResponse_UpdatedTime:
+			v.UpdatedTime = new(string)
+			return d.ReadString(schemas.GetRegistryResponse_UpdatedTime, v.UpdatedTime)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetRegistryMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetRegistry{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetRegistry, schemas.GetRegistryInput, schemas.GetRegistryResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetRegistry{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetRegistry, schemas.GetRegistryInput, schemas.GetRegistryResponse), output: &GetRegistryOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

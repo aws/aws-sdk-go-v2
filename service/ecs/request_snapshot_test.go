@@ -207,6 +207,34 @@ func serdeDecodeJSON(b []byte) (any, bool) {
 	}
 	return v, true
 }
+func TestCheckRequestSnapshot_AssociateGatewayWithCluster(t *testing.T) {
+	input := &AssociateGatewayWithClusterInput{
+		Gateway: ptr.String("__Gateway__"),
+		Cluster: ptr.String("__Cluster__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.AssociateGatewayWithCluster(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "AssociateGatewayWithCluster"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_ContinueServiceDeployment(t *testing.T) {
 	input := &ContinueServiceDeploymentInput{
 		ServiceDeploymentArn: ptr.String("__ServiceDeploymentArn__"),
@@ -595,8 +623,9 @@ func TestCheckRequestSnapshot_CreateExpressGatewayService(t *testing.T) {
 				"__Member__",
 			},
 		},
-		Cpu:    ptr.String("__Cpu__"),
-		Memory: ptr.String("__Memory__"),
+		Cpu:             ptr.String("__Cpu__"),
+		Memory:          ptr.String("__Memory__"),
+		CpuArchitecture: types.ExpressCpuArchitecture("X86_64"),
 		ScalingTarget: &types.ExpressGatewayScalingTarget{
 			MinTaskCount:           ptr.Int32(1),
 			MaxTaskCount:           ptr.Int32(1),
@@ -634,6 +663,82 @@ func TestCheckRequestSnapshot_CreateExpressGatewayService(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateExpressGatewayService"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_CreateGateway(t *testing.T) {
+	input := &CreateGatewayInput{
+		Name:                  ptr.String("__Name__"),
+		InfrastructureRoleArn: ptr.String("__InfrastructureRoleArn__"),
+		ClientToken:           ptr.String("__ClientToken__"),
+		DeletionProtection:    ptr.Bool(true),
+		Configuration: &types.GatewayConfigurationMemberHostSharedAlb{
+			Value: types.HostSharedAlbConfiguration{
+				NetworkConfiguration: &types.GatewayElbNetworkConfiguration{
+					InboundSecurityGroup: ptr.String("__InboundSecurityGroup__"),
+					Subnets: []string{
+						"__Member__",
+						"__Member__",
+					},
+					IpAddressType: types.GatewayElbIpAddressType("ipv4"),
+				},
+				Scheme:    types.GatewayElbScheme("internet-facing"),
+				WebACLArn: ptr.String("__WebACLArn__"),
+				AccessLogs: &types.GatewayElbAccessLogConfiguration{
+					Destination: &types.GatewayElbAccessLogDestinationMemberS3{
+						Value: types.GatewayElbAccessLogS3Destination{
+							Bucket: ptr.String("__Bucket__"),
+							Prefix: ptr.String("__Prefix__"),
+						},
+					},
+				},
+				Port:        ptr.Int32(1),
+				Protocol:    types.GatewayAlbProtocol("HTTP"),
+				MaxAlbCount: ptr.Int32(1),
+				HttpDesync:  types.GatewayAlbDesyncMitigationMode("monitor"),
+				TestTrafficRules: &types.GatewayAlbTestTrafficRules{
+					Header: &types.GatewayTestTrafficHeader{
+						Name: ptr.String("__Name__"),
+						Values: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+			},
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		PropagateTags: types.PropagateGatewayTags("NONE"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.CreateGateway(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateGateway"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -927,6 +1032,14 @@ func TestCheckRequestSnapshot_CreateService(t *testing.T) {
 				Format:                 types.ServiceConnectAccessLoggingFormat("TEXT"),
 				IncludeQueryParameters: types.ServiceConnectIncludeQueryParameters("DISABLED"),
 			},
+			ContainerConfigurations: []types.ServiceConnectContainerConfiguration{
+				&types.ServiceConnectContainerConfigurationMemberLogLevel{
+					Value: types.ServiceConnectContainerLogLevel("debug"),
+				},
+				&types.ServiceConnectContainerConfigurationMemberLogLevel{
+					Value: types.ServiceConnectContainerLogLevel("debug"),
+				},
+			},
 		},
 		VolumeConfigurations: []types.ServiceVolumeConfiguration{
 			{
@@ -1025,11 +1138,67 @@ func TestCheckRequestSnapshot_CreateService(t *testing.T) {
 				RoleArn:        ptr.String("__RoleArn__"),
 				TargetGroupArn: ptr.String("__TargetGroupArn__"),
 				PortName:       ptr.String("__PortName__"),
+				AdvancedConfiguration: &types.VpcLatticeAdvancedConfiguration{
+					AlternateTargetGroupArn: ptr.String("__AlternateTargetGroupArn__"),
+					ProductionListenerRule:  ptr.String("__ProductionListenerRule__"),
+					TestListenerRule:        ptr.String("__TestListenerRule__"),
+				},
 			},
 			{
 				RoleArn:        ptr.String("__RoleArn__"),
 				TargetGroupArn: ptr.String("__TargetGroupArn__"),
 				PortName:       ptr.String("__PortName__"),
+				AdvancedConfiguration: &types.VpcLatticeAdvancedConfiguration{
+					AlternateTargetGroupArn: ptr.String("__AlternateTargetGroupArn__"),
+					ProductionListenerRule:  ptr.String("__ProductionListenerRule__"),
+					TestListenerRule:        ptr.String("__TestListenerRule__"),
+				},
+			},
+		},
+		GatewayConnectors: []types.GatewayConnector{
+			{
+				PortName: ptr.String("__PortName__"),
+				HealthCheck: &types.GatewayConnectorHealthCheck{
+					HealthCheckProtocol:        types.GatewayConnectorHealthCheckProtocol("HTTP"),
+					HealthCheckPort:            ptr.Int32(1),
+					HealthCheckPath:            ptr.String("__HealthCheckPath__"),
+					HealthCheckTimeoutSeconds:  ptr.Int32(1),
+					HealthCheckIntervalSeconds: ptr.Int32(1),
+					HealthyThresholdCount:      ptr.Int32(1),
+					UnhealthyThresholdCount:    ptr.Int32(1),
+					Matcher: &types.GatewayConnectorHealthCheckMatcher{
+						HttpCode: ptr.String("__HttpCode__"),
+						GrpcCode: ptr.String("__GrpcCode__"),
+					},
+				},
+				Filters: &types.GatewayConnectorFilters{
+					AccessTypes: []types.AccessType{
+						types.AccessType("PUBLIC"),
+						types.AccessType("PUBLIC"),
+					},
+				},
+			},
+			{
+				PortName: ptr.String("__PortName__"),
+				HealthCheck: &types.GatewayConnectorHealthCheck{
+					HealthCheckProtocol:        types.GatewayConnectorHealthCheckProtocol("HTTP"),
+					HealthCheckPort:            ptr.Int32(1),
+					HealthCheckPath:            ptr.String("__HealthCheckPath__"),
+					HealthCheckTimeoutSeconds:  ptr.Int32(1),
+					HealthCheckIntervalSeconds: ptr.Int32(1),
+					HealthyThresholdCount:      ptr.Int32(1),
+					UnhealthyThresholdCount:    ptr.Int32(1),
+					Matcher: &types.GatewayConnectorHealthCheckMatcher{
+						HttpCode: ptr.String("__HttpCode__"),
+						GrpcCode: ptr.String("__GrpcCode__"),
+					},
+				},
+				Filters: &types.GatewayConnectorFilters{
+					AccessTypes: []types.AccessType{
+						types.AccessType("PUBLIC"),
+						types.AccessType("PUBLIC"),
+					},
+				},
 			},
 		},
 		Monitoring: &types.MonitoringConfiguration{
@@ -1387,6 +1556,33 @@ func TestCheckRequestSnapshot_DeleteExpressGatewayService(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteExpressGatewayService"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_DeleteGateway(t *testing.T) {
+	input := &DeleteGatewayInput{
+		Gateway: ptr.String("__Gateway__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DeleteGateway(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteGateway"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -1787,6 +1983,89 @@ func TestCheckRequestSnapshot_DescribeExpressGatewayService(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_DescribeGateway(t *testing.T) {
+	input := &DescribeGatewayInput{
+		Gateway: ptr.String("__Gateway__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DescribeGateway(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DescribeGateway"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_DescribeGatewayResources(t *testing.T) {
+	input := &DescribeGatewayResourcesInput{
+		Gateway:    ptr.String("__Gateway__"),
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DescribeGatewayResources(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DescribeGatewayResources"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_DescribeGatewayRoute(t *testing.T) {
+	input := &DescribeGatewayRouteInput{
+		GatewayRouteArn: ptr.String("__GatewayRouteArn__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DescribeGatewayRoute(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DescribeGatewayRoute"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_DescribeServiceDeployments(t *testing.T) {
 	input := &DescribeServiceDeploymentsInput{
 		ServiceDeploymentArns: []string{
@@ -1980,6 +2259,34 @@ func TestCheckRequestSnapshot_DescribeTaskSets(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DescribeTaskSets"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_DisassociateGatewayFromCluster(t *testing.T) {
+	input := &DisassociateGatewayFromClusterInput{
+		Gateway: ptr.String("__Gateway__"),
+		Cluster: ptr.String("__Cluster__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DisassociateGatewayFromCluster(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DisassociateGatewayFromCluster"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -2296,6 +2603,112 @@ func TestCheckRequestSnapshot_ListDaemonTaskDefinitions(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListDaemonTaskDefinitions"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_ListGatewayClusterAssociations(t *testing.T) {
+	input := &ListGatewayClusterAssociationsInput{
+		Gateway: ptr.String("__Gateway__"),
+		Cluster: ptr.String("__Cluster__"),
+		Status: []types.GatewayClusterAssociationStatus{
+			types.GatewayClusterAssociationStatus("ACTIVE"),
+			types.GatewayClusterAssociationStatus("ACTIVE"),
+		},
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListGatewayClusterAssociations(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListGatewayClusterAssociations"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_ListGatewayRoutes(t *testing.T) {
+	input := &ListGatewayRoutesInput{
+		Gateway:                  ptr.String("__Gateway__"),
+		Cluster:                  ptr.String("__Cluster__"),
+		Service:                  ptr.String("__Service__"),
+		ServiceContainerPortName: ptr.String("__ServiceContainerPortName__"),
+		Status: []types.GatewayRouteStatus{
+			types.GatewayRouteStatus("ACTIVE"),
+			types.GatewayRouteStatus("ACTIVE"),
+		},
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListGatewayRoutes(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListGatewayRoutes"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_ListGateways(t *testing.T) {
+	input := &ListGatewaysInput{
+		Names: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Status: []types.GatewayStatus{
+			types.GatewayStatus("ACTIVE"),
+			types.GatewayStatus("ACTIVE"),
+		},
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListGateways(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListGateways"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -5187,8 +5600,9 @@ func TestCheckRequestSnapshot_UpdateExpressGatewayService(t *testing.T) {
 				"__Member__",
 			},
 		},
-		Cpu:    ptr.String("__Cpu__"),
-		Memory: ptr.String("__Memory__"),
+		Cpu:             ptr.String("__Cpu__"),
+		Memory:          ptr.String("__Memory__"),
+		CpuArchitecture: types.ExpressCpuArchitecture("X86_64"),
 		ScalingTarget: &types.ExpressGatewayScalingTarget{
 			MinTaskCount:           ptr.Int32(1),
 			MaxTaskCount:           ptr.Int32(1),
@@ -5216,6 +5630,63 @@ func TestCheckRequestSnapshot_UpdateExpressGatewayService(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateExpressGatewayService"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_UpdateGateway(t *testing.T) {
+	input := &UpdateGatewayInput{
+		Gateway:               ptr.String("__Gateway__"),
+		InfrastructureRoleArn: ptr.String("__InfrastructureRoleArn__"),
+		DeletionProtection:    ptr.Bool(true),
+		Configuration: &types.UpdateGatewayConfigurationMemberHostSharedAlb{
+			Value: types.UpdateGatewayAlbConfiguration{
+				NetworkConfiguration: &types.UpdateGatewayNetworkConfiguration{
+					InboundSecurityGroup: ptr.String("__InboundSecurityGroup__"),
+				},
+				MaxAlbCount: ptr.Int32(1),
+				WebACLArn:   ptr.String("__WebACLArn__"),
+				AccessLogs: &types.GatewayElbAccessLogConfiguration{
+					Destination: &types.GatewayElbAccessLogDestinationMemberS3{
+						Value: types.GatewayElbAccessLogS3Destination{
+							Bucket: ptr.String("__Bucket__"),
+							Prefix: ptr.String("__Prefix__"),
+						},
+					},
+				},
+				HttpDesync: types.GatewayAlbDesyncMitigationMode("monitor"),
+				TestTrafficRules: &types.GatewayAlbTestTrafficRules{
+					Header: &types.GatewayTestTrafficHeader{
+						Name: ptr.String("__Name__"),
+						Values: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+			},
+		},
+		PropagateTags: types.PropagateGatewayTags("NONE"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.UpdateGateway(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateGateway"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -5496,6 +5967,14 @@ func TestCheckRequestSnapshot_UpdateService(t *testing.T) {
 				Format:                 types.ServiceConnectAccessLoggingFormat("TEXT"),
 				IncludeQueryParameters: types.ServiceConnectIncludeQueryParameters("DISABLED"),
 			},
+			ContainerConfigurations: []types.ServiceConnectContainerConfiguration{
+				&types.ServiceConnectContainerConfigurationMemberLogLevel{
+					Value: types.ServiceConnectContainerLogLevel("debug"),
+				},
+				&types.ServiceConnectContainerConfigurationMemberLogLevel{
+					Value: types.ServiceConnectContainerLogLevel("debug"),
+				},
+			},
 		},
 		VolumeConfigurations: []types.ServiceVolumeConfiguration{
 			{
@@ -5594,11 +6073,67 @@ func TestCheckRequestSnapshot_UpdateService(t *testing.T) {
 				RoleArn:        ptr.String("__RoleArn__"),
 				TargetGroupArn: ptr.String("__TargetGroupArn__"),
 				PortName:       ptr.String("__PortName__"),
+				AdvancedConfiguration: &types.VpcLatticeAdvancedConfiguration{
+					AlternateTargetGroupArn: ptr.String("__AlternateTargetGroupArn__"),
+					ProductionListenerRule:  ptr.String("__ProductionListenerRule__"),
+					TestListenerRule:        ptr.String("__TestListenerRule__"),
+				},
 			},
 			{
 				RoleArn:        ptr.String("__RoleArn__"),
 				TargetGroupArn: ptr.String("__TargetGroupArn__"),
 				PortName:       ptr.String("__PortName__"),
+				AdvancedConfiguration: &types.VpcLatticeAdvancedConfiguration{
+					AlternateTargetGroupArn: ptr.String("__AlternateTargetGroupArn__"),
+					ProductionListenerRule:  ptr.String("__ProductionListenerRule__"),
+					TestListenerRule:        ptr.String("__TestListenerRule__"),
+				},
+			},
+		},
+		GatewayConnectors: []types.GatewayConnector{
+			{
+				PortName: ptr.String("__PortName__"),
+				HealthCheck: &types.GatewayConnectorHealthCheck{
+					HealthCheckProtocol:        types.GatewayConnectorHealthCheckProtocol("HTTP"),
+					HealthCheckPort:            ptr.Int32(1),
+					HealthCheckPath:            ptr.String("__HealthCheckPath__"),
+					HealthCheckTimeoutSeconds:  ptr.Int32(1),
+					HealthCheckIntervalSeconds: ptr.Int32(1),
+					HealthyThresholdCount:      ptr.Int32(1),
+					UnhealthyThresholdCount:    ptr.Int32(1),
+					Matcher: &types.GatewayConnectorHealthCheckMatcher{
+						HttpCode: ptr.String("__HttpCode__"),
+						GrpcCode: ptr.String("__GrpcCode__"),
+					},
+				},
+				Filters: &types.GatewayConnectorFilters{
+					AccessTypes: []types.AccessType{
+						types.AccessType("PUBLIC"),
+						types.AccessType("PUBLIC"),
+					},
+				},
+			},
+			{
+				PortName: ptr.String("__PortName__"),
+				HealthCheck: &types.GatewayConnectorHealthCheck{
+					HealthCheckProtocol:        types.GatewayConnectorHealthCheckProtocol("HTTP"),
+					HealthCheckPort:            ptr.Int32(1),
+					HealthCheckPath:            ptr.String("__HealthCheckPath__"),
+					HealthCheckTimeoutSeconds:  ptr.Int32(1),
+					HealthCheckIntervalSeconds: ptr.Int32(1),
+					HealthyThresholdCount:      ptr.Int32(1),
+					UnhealthyThresholdCount:    ptr.Int32(1),
+					Matcher: &types.GatewayConnectorHealthCheckMatcher{
+						HttpCode: ptr.String("__HttpCode__"),
+						GrpcCode: ptr.String("__GrpcCode__"),
+					},
+				},
+				Filters: &types.GatewayConnectorFilters{
+					AccessTypes: []types.AccessType{
+						types.AccessType("PUBLIC"),
+						types.AccessType("PUBLIC"),
+					},
+				},
 			},
 		},
 		Monitoring: &types.MonitoringConfiguration{
@@ -5737,6 +6272,34 @@ func TestCheckRequestSnapshot_UpdateTaskSet(t *testing.T) {
 		t.Fatal(err)
 	}
 }
+func TestUpdateRequestSnapshot_AssociateGatewayWithCluster(t *testing.T) {
+	input := &AssociateGatewayWithClusterInput{
+		Gateway: ptr.String("__Gateway__"),
+		Cluster: ptr.String("__Cluster__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.AssociateGatewayWithCluster(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "AssociateGatewayWithCluster"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_ContinueServiceDeployment(t *testing.T) {
 	input := &ContinueServiceDeploymentInput{
 		ServiceDeploymentArn: ptr.String("__ServiceDeploymentArn__"),
@@ -6125,8 +6688,9 @@ func TestUpdateRequestSnapshot_CreateExpressGatewayService(t *testing.T) {
 				"__Member__",
 			},
 		},
-		Cpu:    ptr.String("__Cpu__"),
-		Memory: ptr.String("__Memory__"),
+		Cpu:             ptr.String("__Cpu__"),
+		Memory:          ptr.String("__Memory__"),
+		CpuArchitecture: types.ExpressCpuArchitecture("X86_64"),
 		ScalingTarget: &types.ExpressGatewayScalingTarget{
 			MinTaskCount:           ptr.Int32(1),
 			MaxTaskCount:           ptr.Int32(1),
@@ -6164,6 +6728,82 @@ func TestUpdateRequestSnapshot_CreateExpressGatewayService(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateExpressGatewayService"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_CreateGateway(t *testing.T) {
+	input := &CreateGatewayInput{
+		Name:                  ptr.String("__Name__"),
+		InfrastructureRoleArn: ptr.String("__InfrastructureRoleArn__"),
+		ClientToken:           ptr.String("__ClientToken__"),
+		DeletionProtection:    ptr.Bool(true),
+		Configuration: &types.GatewayConfigurationMemberHostSharedAlb{
+			Value: types.HostSharedAlbConfiguration{
+				NetworkConfiguration: &types.GatewayElbNetworkConfiguration{
+					InboundSecurityGroup: ptr.String("__InboundSecurityGroup__"),
+					Subnets: []string{
+						"__Member__",
+						"__Member__",
+					},
+					IpAddressType: types.GatewayElbIpAddressType("ipv4"),
+				},
+				Scheme:    types.GatewayElbScheme("internet-facing"),
+				WebACLArn: ptr.String("__WebACLArn__"),
+				AccessLogs: &types.GatewayElbAccessLogConfiguration{
+					Destination: &types.GatewayElbAccessLogDestinationMemberS3{
+						Value: types.GatewayElbAccessLogS3Destination{
+							Bucket: ptr.String("__Bucket__"),
+							Prefix: ptr.String("__Prefix__"),
+						},
+					},
+				},
+				Port:        ptr.Int32(1),
+				Protocol:    types.GatewayAlbProtocol("HTTP"),
+				MaxAlbCount: ptr.Int32(1),
+				HttpDesync:  types.GatewayAlbDesyncMitigationMode("monitor"),
+				TestTrafficRules: &types.GatewayAlbTestTrafficRules{
+					Header: &types.GatewayTestTrafficHeader{
+						Name: ptr.String("__Name__"),
+						Values: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+			},
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		PropagateTags: types.PropagateGatewayTags("NONE"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.CreateGateway(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateGateway"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -6457,6 +7097,14 @@ func TestUpdateRequestSnapshot_CreateService(t *testing.T) {
 				Format:                 types.ServiceConnectAccessLoggingFormat("TEXT"),
 				IncludeQueryParameters: types.ServiceConnectIncludeQueryParameters("DISABLED"),
 			},
+			ContainerConfigurations: []types.ServiceConnectContainerConfiguration{
+				&types.ServiceConnectContainerConfigurationMemberLogLevel{
+					Value: types.ServiceConnectContainerLogLevel("debug"),
+				},
+				&types.ServiceConnectContainerConfigurationMemberLogLevel{
+					Value: types.ServiceConnectContainerLogLevel("debug"),
+				},
+			},
 		},
 		VolumeConfigurations: []types.ServiceVolumeConfiguration{
 			{
@@ -6555,11 +7203,67 @@ func TestUpdateRequestSnapshot_CreateService(t *testing.T) {
 				RoleArn:        ptr.String("__RoleArn__"),
 				TargetGroupArn: ptr.String("__TargetGroupArn__"),
 				PortName:       ptr.String("__PortName__"),
+				AdvancedConfiguration: &types.VpcLatticeAdvancedConfiguration{
+					AlternateTargetGroupArn: ptr.String("__AlternateTargetGroupArn__"),
+					ProductionListenerRule:  ptr.String("__ProductionListenerRule__"),
+					TestListenerRule:        ptr.String("__TestListenerRule__"),
+				},
 			},
 			{
 				RoleArn:        ptr.String("__RoleArn__"),
 				TargetGroupArn: ptr.String("__TargetGroupArn__"),
 				PortName:       ptr.String("__PortName__"),
+				AdvancedConfiguration: &types.VpcLatticeAdvancedConfiguration{
+					AlternateTargetGroupArn: ptr.String("__AlternateTargetGroupArn__"),
+					ProductionListenerRule:  ptr.String("__ProductionListenerRule__"),
+					TestListenerRule:        ptr.String("__TestListenerRule__"),
+				},
+			},
+		},
+		GatewayConnectors: []types.GatewayConnector{
+			{
+				PortName: ptr.String("__PortName__"),
+				HealthCheck: &types.GatewayConnectorHealthCheck{
+					HealthCheckProtocol:        types.GatewayConnectorHealthCheckProtocol("HTTP"),
+					HealthCheckPort:            ptr.Int32(1),
+					HealthCheckPath:            ptr.String("__HealthCheckPath__"),
+					HealthCheckTimeoutSeconds:  ptr.Int32(1),
+					HealthCheckIntervalSeconds: ptr.Int32(1),
+					HealthyThresholdCount:      ptr.Int32(1),
+					UnhealthyThresholdCount:    ptr.Int32(1),
+					Matcher: &types.GatewayConnectorHealthCheckMatcher{
+						HttpCode: ptr.String("__HttpCode__"),
+						GrpcCode: ptr.String("__GrpcCode__"),
+					},
+				},
+				Filters: &types.GatewayConnectorFilters{
+					AccessTypes: []types.AccessType{
+						types.AccessType("PUBLIC"),
+						types.AccessType("PUBLIC"),
+					},
+				},
+			},
+			{
+				PortName: ptr.String("__PortName__"),
+				HealthCheck: &types.GatewayConnectorHealthCheck{
+					HealthCheckProtocol:        types.GatewayConnectorHealthCheckProtocol("HTTP"),
+					HealthCheckPort:            ptr.Int32(1),
+					HealthCheckPath:            ptr.String("__HealthCheckPath__"),
+					HealthCheckTimeoutSeconds:  ptr.Int32(1),
+					HealthCheckIntervalSeconds: ptr.Int32(1),
+					HealthyThresholdCount:      ptr.Int32(1),
+					UnhealthyThresholdCount:    ptr.Int32(1),
+					Matcher: &types.GatewayConnectorHealthCheckMatcher{
+						HttpCode: ptr.String("__HttpCode__"),
+						GrpcCode: ptr.String("__GrpcCode__"),
+					},
+				},
+				Filters: &types.GatewayConnectorFilters{
+					AccessTypes: []types.AccessType{
+						types.AccessType("PUBLIC"),
+						types.AccessType("PUBLIC"),
+					},
+				},
 			},
 		},
 		Monitoring: &types.MonitoringConfiguration{
@@ -6917,6 +7621,33 @@ func TestUpdateRequestSnapshot_DeleteExpressGatewayService(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteExpressGatewayService"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_DeleteGateway(t *testing.T) {
+	input := &DeleteGatewayInput{
+		Gateway: ptr.String("__Gateway__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DeleteGateway(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteGateway"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -7317,6 +8048,89 @@ func TestUpdateRequestSnapshot_DescribeExpressGatewayService(t *testing.T) {
 	}
 }
 
+func TestUpdateRequestSnapshot_DescribeGateway(t *testing.T) {
+	input := &DescribeGatewayInput{
+		Gateway: ptr.String("__Gateway__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DescribeGateway(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DescribeGateway"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_DescribeGatewayResources(t *testing.T) {
+	input := &DescribeGatewayResourcesInput{
+		Gateway:    ptr.String("__Gateway__"),
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DescribeGatewayResources(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DescribeGatewayResources"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_DescribeGatewayRoute(t *testing.T) {
+	input := &DescribeGatewayRouteInput{
+		GatewayRouteArn: ptr.String("__GatewayRouteArn__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DescribeGatewayRoute(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DescribeGatewayRoute"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_DescribeServiceDeployments(t *testing.T) {
 	input := &DescribeServiceDeploymentsInput{
 		ServiceDeploymentArns: []string{
@@ -7510,6 +8324,34 @@ func TestUpdateRequestSnapshot_DescribeTaskSets(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DescribeTaskSets"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_DisassociateGatewayFromCluster(t *testing.T) {
+	input := &DisassociateGatewayFromClusterInput{
+		Gateway: ptr.String("__Gateway__"),
+		Cluster: ptr.String("__Cluster__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DisassociateGatewayFromCluster(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DisassociateGatewayFromCluster"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -7826,6 +8668,112 @@ func TestUpdateRequestSnapshot_ListDaemonTaskDefinitions(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListDaemonTaskDefinitions"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_ListGatewayClusterAssociations(t *testing.T) {
+	input := &ListGatewayClusterAssociationsInput{
+		Gateway: ptr.String("__Gateway__"),
+		Cluster: ptr.String("__Cluster__"),
+		Status: []types.GatewayClusterAssociationStatus{
+			types.GatewayClusterAssociationStatus("ACTIVE"),
+			types.GatewayClusterAssociationStatus("ACTIVE"),
+		},
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListGatewayClusterAssociations(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListGatewayClusterAssociations"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_ListGatewayRoutes(t *testing.T) {
+	input := &ListGatewayRoutesInput{
+		Gateway:                  ptr.String("__Gateway__"),
+		Cluster:                  ptr.String("__Cluster__"),
+		Service:                  ptr.String("__Service__"),
+		ServiceContainerPortName: ptr.String("__ServiceContainerPortName__"),
+		Status: []types.GatewayRouteStatus{
+			types.GatewayRouteStatus("ACTIVE"),
+			types.GatewayRouteStatus("ACTIVE"),
+		},
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListGatewayRoutes(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListGatewayRoutes"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_ListGateways(t *testing.T) {
+	input := &ListGatewaysInput{
+		Names: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Status: []types.GatewayStatus{
+			types.GatewayStatus("ACTIVE"),
+			types.GatewayStatus("ACTIVE"),
+		},
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListGateways(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListGateways"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -10717,8 +11665,9 @@ func TestUpdateRequestSnapshot_UpdateExpressGatewayService(t *testing.T) {
 				"__Member__",
 			},
 		},
-		Cpu:    ptr.String("__Cpu__"),
-		Memory: ptr.String("__Memory__"),
+		Cpu:             ptr.String("__Cpu__"),
+		Memory:          ptr.String("__Memory__"),
+		CpuArchitecture: types.ExpressCpuArchitecture("X86_64"),
 		ScalingTarget: &types.ExpressGatewayScalingTarget{
 			MinTaskCount:           ptr.Int32(1),
 			MaxTaskCount:           ptr.Int32(1),
@@ -10746,6 +11695,63 @@ func TestUpdateRequestSnapshot_UpdateExpressGatewayService(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateExpressGatewayService"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_UpdateGateway(t *testing.T) {
+	input := &UpdateGatewayInput{
+		Gateway:               ptr.String("__Gateway__"),
+		InfrastructureRoleArn: ptr.String("__InfrastructureRoleArn__"),
+		DeletionProtection:    ptr.Bool(true),
+		Configuration: &types.UpdateGatewayConfigurationMemberHostSharedAlb{
+			Value: types.UpdateGatewayAlbConfiguration{
+				NetworkConfiguration: &types.UpdateGatewayNetworkConfiguration{
+					InboundSecurityGroup: ptr.String("__InboundSecurityGroup__"),
+				},
+				MaxAlbCount: ptr.Int32(1),
+				WebACLArn:   ptr.String("__WebACLArn__"),
+				AccessLogs: &types.GatewayElbAccessLogConfiguration{
+					Destination: &types.GatewayElbAccessLogDestinationMemberS3{
+						Value: types.GatewayElbAccessLogS3Destination{
+							Bucket: ptr.String("__Bucket__"),
+							Prefix: ptr.String("__Prefix__"),
+						},
+					},
+				},
+				HttpDesync: types.GatewayAlbDesyncMitigationMode("monitor"),
+				TestTrafficRules: &types.GatewayAlbTestTrafficRules{
+					Header: &types.GatewayTestTrafficHeader{
+						Name: ptr.String("__Name__"),
+						Values: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+			},
+		},
+		PropagateTags: types.PropagateGatewayTags("NONE"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.UpdateGateway(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateGateway"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -11026,6 +12032,14 @@ func TestUpdateRequestSnapshot_UpdateService(t *testing.T) {
 				Format:                 types.ServiceConnectAccessLoggingFormat("TEXT"),
 				IncludeQueryParameters: types.ServiceConnectIncludeQueryParameters("DISABLED"),
 			},
+			ContainerConfigurations: []types.ServiceConnectContainerConfiguration{
+				&types.ServiceConnectContainerConfigurationMemberLogLevel{
+					Value: types.ServiceConnectContainerLogLevel("debug"),
+				},
+				&types.ServiceConnectContainerConfigurationMemberLogLevel{
+					Value: types.ServiceConnectContainerLogLevel("debug"),
+				},
+			},
 		},
 		VolumeConfigurations: []types.ServiceVolumeConfiguration{
 			{
@@ -11124,11 +12138,67 @@ func TestUpdateRequestSnapshot_UpdateService(t *testing.T) {
 				RoleArn:        ptr.String("__RoleArn__"),
 				TargetGroupArn: ptr.String("__TargetGroupArn__"),
 				PortName:       ptr.String("__PortName__"),
+				AdvancedConfiguration: &types.VpcLatticeAdvancedConfiguration{
+					AlternateTargetGroupArn: ptr.String("__AlternateTargetGroupArn__"),
+					ProductionListenerRule:  ptr.String("__ProductionListenerRule__"),
+					TestListenerRule:        ptr.String("__TestListenerRule__"),
+				},
 			},
 			{
 				RoleArn:        ptr.String("__RoleArn__"),
 				TargetGroupArn: ptr.String("__TargetGroupArn__"),
 				PortName:       ptr.String("__PortName__"),
+				AdvancedConfiguration: &types.VpcLatticeAdvancedConfiguration{
+					AlternateTargetGroupArn: ptr.String("__AlternateTargetGroupArn__"),
+					ProductionListenerRule:  ptr.String("__ProductionListenerRule__"),
+					TestListenerRule:        ptr.String("__TestListenerRule__"),
+				},
+			},
+		},
+		GatewayConnectors: []types.GatewayConnector{
+			{
+				PortName: ptr.String("__PortName__"),
+				HealthCheck: &types.GatewayConnectorHealthCheck{
+					HealthCheckProtocol:        types.GatewayConnectorHealthCheckProtocol("HTTP"),
+					HealthCheckPort:            ptr.Int32(1),
+					HealthCheckPath:            ptr.String("__HealthCheckPath__"),
+					HealthCheckTimeoutSeconds:  ptr.Int32(1),
+					HealthCheckIntervalSeconds: ptr.Int32(1),
+					HealthyThresholdCount:      ptr.Int32(1),
+					UnhealthyThresholdCount:    ptr.Int32(1),
+					Matcher: &types.GatewayConnectorHealthCheckMatcher{
+						HttpCode: ptr.String("__HttpCode__"),
+						GrpcCode: ptr.String("__GrpcCode__"),
+					},
+				},
+				Filters: &types.GatewayConnectorFilters{
+					AccessTypes: []types.AccessType{
+						types.AccessType("PUBLIC"),
+						types.AccessType("PUBLIC"),
+					},
+				},
+			},
+			{
+				PortName: ptr.String("__PortName__"),
+				HealthCheck: &types.GatewayConnectorHealthCheck{
+					HealthCheckProtocol:        types.GatewayConnectorHealthCheckProtocol("HTTP"),
+					HealthCheckPort:            ptr.Int32(1),
+					HealthCheckPath:            ptr.String("__HealthCheckPath__"),
+					HealthCheckTimeoutSeconds:  ptr.Int32(1),
+					HealthCheckIntervalSeconds: ptr.Int32(1),
+					HealthyThresholdCount:      ptr.Int32(1),
+					UnhealthyThresholdCount:    ptr.Int32(1),
+					Matcher: &types.GatewayConnectorHealthCheckMatcher{
+						HttpCode: ptr.String("__HttpCode__"),
+						GrpcCode: ptr.String("__GrpcCode__"),
+					},
+				},
+				Filters: &types.GatewayConnectorFilters{
+					AccessTypes: []types.AccessType{
+						types.AccessType("PUBLIC"),
+						types.AccessType("PUBLIC"),
+					},
+				},
 			},
 		},
 		Monitoring: &types.MonitoringConfiguration{

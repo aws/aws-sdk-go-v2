@@ -7,12 +7,12 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
+// The operations role feature of Elastic Beanstalk is in beta release and is
+// subject to change.
+//
 // Disassociate the operations role from an environment. After this call is made,
 // Elastic Beanstalk uses the caller's permissions for permissions to downstream
-// services during subsequent calls acting on this environment. For more
-// information, see [Operations roles]in the AWS Elastic Beanstalk Developer Guide.
-//
-// [Operations roles]: https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/iam-operationsrole.html
+// services during subsequent calls acting on this environment.
 func (c *Client) DisassociateEnvironmentOperationsRole(ctx context.Context, params *DisassociateEnvironmentOperationsRoleInput, optFns ...func(*Options)) (*DisassociateEnvironmentOperationsRoleOutput, error) {
 	if params == nil {
 		params = &DisassociateEnvironmentOperationsRoleInput{}

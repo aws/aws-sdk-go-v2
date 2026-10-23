@@ -1,6 +1,7 @@
-POST /
+POST /service/PerformanceInsightsv20180227/operation/GetResourceMetadata
 
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: PerformanceInsightsv20180227.GetResourceMetadata
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"Identifier":"__Identifier__","ServiceType":"RDS"}
+¿jIdentifiern__Identifier__kServiceTypecRDSÿ

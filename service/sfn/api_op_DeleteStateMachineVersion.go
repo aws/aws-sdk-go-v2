@@ -4,6 +4,8 @@ package sfn
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/sfn/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -49,6 +51,18 @@ type DeleteStateMachineVersionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteStateMachineVersionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteStateMachineVersionInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteStateMachineVersionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.StateMachineVersionArn != nil {
+		s.WriteString(schemas.DeleteStateMachineVersionInput_stateMachineVersionArn, *v.StateMachineVersionArn)
+	}
+}
+
 type DeleteStateMachineVersionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -56,13 +70,26 @@ type DeleteStateMachineVersionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteStateMachineVersionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteStateMachineVersionOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteStateMachineVersionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteStateMachineVersionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteStateMachineVersionOutput, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteStateMachineVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpDeleteStateMachineVersion{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteStateMachineVersion, schemas.DeleteStateMachineVersionInput, schemas.DeleteStateMachineVersionOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpDeleteStateMachineVersion{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteStateMachineVersion, schemas.DeleteStateMachineVersionInput, schemas.DeleteStateMachineVersionOutput), output: &DeleteStateMachineVersionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

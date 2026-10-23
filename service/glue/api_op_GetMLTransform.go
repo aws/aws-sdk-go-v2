@@ -4,7 +4,9 @@ package glue
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/glue/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/glue/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -38,6 +40,18 @@ type GetMLTransformInput struct {
 	TransformId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetMLTransformInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetMLTransformRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetMLTransformInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TransformId != nil {
+		s.WriteString(schemas.GetMLTransformRequest_TransformId, *v.TransformId)
+	}
 }
 
 type GetMLTransformOutput struct {
@@ -138,13 +152,147 @@ type GetMLTransformOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetMLTransformOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetMLTransformResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetMLTransformOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreatedOn != nil {
+		s.WriteTime(schemas.GetMLTransformResponse_CreatedOn, *v.CreatedOn)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.GetMLTransformResponse_Description, *v.Description)
+	}
+	if v.EvaluationMetrics != nil {
+		s.WriteStruct(schemas.GetMLTransformResponse_EvaluationMetrics)
+		v.EvaluationMetrics.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.GlueVersion != nil {
+		s.WriteString(schemas.GetMLTransformResponse_GlueVersion, *v.GlueVersion)
+	}
+	serializeGlueTables(s, schemas.GetMLTransformResponse_InputRecordTables, v.InputRecordTables)
+	if v.LabelCount != 0 {
+		s.WriteInt32(schemas.GetMLTransformResponse_LabelCount, v.LabelCount)
+	}
+	if v.LastModifiedOn != nil {
+		s.WriteTime(schemas.GetMLTransformResponse_LastModifiedOn, *v.LastModifiedOn)
+	}
+	if v.MaxCapacity != nil {
+		s.WriteFloat64(schemas.GetMLTransformResponse_MaxCapacity, *v.MaxCapacity)
+	}
+	if v.MaxRetries != nil {
+		s.WriteInt32(schemas.GetMLTransformResponse_MaxRetries, *v.MaxRetries)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.GetMLTransformResponse_Name, *v.Name)
+	}
+	if v.NumberOfWorkers != nil {
+		s.WriteInt32(schemas.GetMLTransformResponse_NumberOfWorkers, *v.NumberOfWorkers)
+	}
+	if v.Parameters != nil {
+		s.WriteStruct(schemas.GetMLTransformResponse_Parameters)
+		v.Parameters.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Role != nil {
+		s.WriteString(schemas.GetMLTransformResponse_Role, *v.Role)
+	}
+	serializeTransformSchema(s, schemas.GetMLTransformResponse_Schema, v.Schema)
+	if v.Status != "" {
+		s.WriteString(schemas.GetMLTransformResponse_Status, string(v.Status))
+	}
+	if v.Timeout != nil {
+		s.WriteInt32(schemas.GetMLTransformResponse_Timeout, *v.Timeout)
+	}
+	if v.TransformEncryption != nil {
+		s.WriteStruct(schemas.GetMLTransformResponse_TransformEncryption)
+		v.TransformEncryption.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TransformId != nil {
+		s.WriteString(schemas.GetMLTransformResponse_TransformId, *v.TransformId)
+	}
+	if v.WorkerType != "" {
+		s.WriteString(schemas.GetMLTransformResponse_WorkerType, string(v.WorkerType))
+	}
+}
+func (v *GetMLTransformOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetMLTransformResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetMLTransformResponse_CreatedOn:
+			v.CreatedOn = new(time.Time)
+			return d.ReadTime(schemas.GetMLTransformResponse_CreatedOn, v.CreatedOn)
+		case schemas.GetMLTransformResponse_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.GetMLTransformResponse_Description, v.Description)
+		case schemas.GetMLTransformResponse_EvaluationMetrics:
+			v.EvaluationMetrics = &types.EvaluationMetrics{}
+			return v.EvaluationMetrics.Deserialize(d)
+		case schemas.GetMLTransformResponse_GlueVersion:
+			v.GlueVersion = new(string)
+			return d.ReadString(schemas.GetMLTransformResponse_GlueVersion, v.GlueVersion)
+		case schemas.GetMLTransformResponse_InputRecordTables:
+			return deserializeGlueTables(d, schemas.GetMLTransformResponse_InputRecordTables, &v.InputRecordTables)
+		case schemas.GetMLTransformResponse_LabelCount:
+			return d.ReadInt32(schemas.GetMLTransformResponse_LabelCount, &v.LabelCount)
+		case schemas.GetMLTransformResponse_LastModifiedOn:
+			v.LastModifiedOn = new(time.Time)
+			return d.ReadTime(schemas.GetMLTransformResponse_LastModifiedOn, v.LastModifiedOn)
+		case schemas.GetMLTransformResponse_MaxCapacity:
+			v.MaxCapacity = new(float64)
+			return d.ReadFloat64(schemas.GetMLTransformResponse_MaxCapacity, v.MaxCapacity)
+		case schemas.GetMLTransformResponse_MaxRetries:
+			v.MaxRetries = new(int32)
+			return d.ReadInt32(schemas.GetMLTransformResponse_MaxRetries, v.MaxRetries)
+		case schemas.GetMLTransformResponse_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.GetMLTransformResponse_Name, v.Name)
+		case schemas.GetMLTransformResponse_NumberOfWorkers:
+			v.NumberOfWorkers = new(int32)
+			return d.ReadInt32(schemas.GetMLTransformResponse_NumberOfWorkers, v.NumberOfWorkers)
+		case schemas.GetMLTransformResponse_Parameters:
+			v.Parameters = &types.TransformParameters{}
+			return v.Parameters.Deserialize(d)
+		case schemas.GetMLTransformResponse_Role:
+			v.Role = new(string)
+			return d.ReadString(schemas.GetMLTransformResponse_Role, v.Role)
+		case schemas.GetMLTransformResponse_Schema:
+			return deserializeTransformSchema(d, schemas.GetMLTransformResponse_Schema, &v.Schema)
+		case schemas.GetMLTransformResponse_Status:
+			var ev string
+			if err := d.ReadString(schemas.GetMLTransformResponse_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.TransformStatusType(ev)
+			return nil
+		case schemas.GetMLTransformResponse_Timeout:
+			v.Timeout = new(int32)
+			return d.ReadInt32(schemas.GetMLTransformResponse_Timeout, v.Timeout)
+		case schemas.GetMLTransformResponse_TransformEncryption:
+			v.TransformEncryption = &types.TransformEncryption{}
+			return v.TransformEncryption.Deserialize(d)
+		case schemas.GetMLTransformResponse_TransformId:
+			v.TransformId = new(string)
+			return d.ReadString(schemas.GetMLTransformResponse_TransformId, v.TransformId)
+		case schemas.GetMLTransformResponse_WorkerType:
+			var ev string
+			if err := d.ReadString(schemas.GetMLTransformResponse_WorkerType, &ev); err != nil {
+				return err
+			}
+			v.WorkerType = types.WorkerType(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetMLTransformMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetMLTransform{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetMLTransform, schemas.GetMLTransformRequest, schemas.GetMLTransformResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetMLTransform{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetMLTransform, schemas.GetMLTransformRequest, schemas.GetMLTransformResponse), output: &GetMLTransformOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

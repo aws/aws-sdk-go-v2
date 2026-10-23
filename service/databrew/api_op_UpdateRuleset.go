@@ -4,7 +4,9 @@ package databrew
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/databrew/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/databrew/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -43,6 +45,22 @@ type UpdateRulesetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateRulesetInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateRulesetRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateRulesetInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateRulesetRequest_Description, *v.Description)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateRulesetRequest_Name, *v.Name)
+	}
+	serializeRuleList(s, schemas.UpdateRulesetRequest_Rules, v.Rules)
+}
+
 type UpdateRulesetOutput struct {
 
 	// The name of the updated ruleset.
@@ -56,13 +74,32 @@ type UpdateRulesetOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateRulesetOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateRulesetResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateRulesetOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateRulesetResponse_Name, *v.Name)
+	}
+}
+func (v *UpdateRulesetOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateRulesetResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateRulesetResponse_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.UpdateRulesetResponse_Name, v.Name)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateRulesetMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateRuleset{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateRuleset, schemas.UpdateRulesetRequest, schemas.UpdateRulesetResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateRuleset{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateRuleset, schemas.UpdateRulesetRequest, schemas.UpdateRulesetResponse), output: &UpdateRulesetOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

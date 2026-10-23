@@ -4,7 +4,9 @@ package kafka
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/kafka/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/kafka/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -47,6 +49,29 @@ type UpdateClusterKafkaVersionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateClusterKafkaVersionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateClusterKafkaVersionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateClusterKafkaVersionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClusterArn != nil {
+		s.WriteString(schemas.UpdateClusterKafkaVersionRequest_ClusterArn, *v.ClusterArn)
+	}
+	if v.ConfigurationInfo != nil {
+		s.WriteStruct(schemas.UpdateClusterKafkaVersionRequest_ConfigurationInfo)
+		v.ConfigurationInfo.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CurrentVersion != nil {
+		s.WriteString(schemas.UpdateClusterKafkaVersionRequest_CurrentVersion, *v.CurrentVersion)
+	}
+	if v.TargetKafkaVersion != nil {
+		s.WriteString(schemas.UpdateClusterKafkaVersionRequest_TargetKafkaVersion, *v.TargetKafkaVersion)
+	}
+}
+
 type UpdateClusterKafkaVersionOutput struct {
 
 	// The Amazon Resource Name (ARN) of the cluster.
@@ -61,13 +86,38 @@ type UpdateClusterKafkaVersionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateClusterKafkaVersionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateClusterKafkaVersionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateClusterKafkaVersionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClusterArn != nil {
+		s.WriteString(schemas.UpdateClusterKafkaVersionResponse_ClusterArn, *v.ClusterArn)
+	}
+	if v.ClusterOperationArn != nil {
+		s.WriteString(schemas.UpdateClusterKafkaVersionResponse_ClusterOperationArn, *v.ClusterOperationArn)
+	}
+}
+func (v *UpdateClusterKafkaVersionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateClusterKafkaVersionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateClusterKafkaVersionResponse_ClusterArn:
+			v.ClusterArn = new(string)
+			return d.ReadString(schemas.UpdateClusterKafkaVersionResponse_ClusterArn, v.ClusterArn)
+		case schemas.UpdateClusterKafkaVersionResponse_ClusterOperationArn:
+			v.ClusterOperationArn = new(string)
+			return d.ReadString(schemas.UpdateClusterKafkaVersionResponse_ClusterOperationArn, v.ClusterOperationArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateClusterKafkaVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateClusterKafkaVersion{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateClusterKafkaVersion, schemas.UpdateClusterKafkaVersionRequest, schemas.UpdateClusterKafkaVersionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateClusterKafkaVersion{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateClusterKafkaVersion, schemas.UpdateClusterKafkaVersionRequest, schemas.UpdateClusterKafkaVersionResponse), output: &UpdateClusterKafkaVersionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

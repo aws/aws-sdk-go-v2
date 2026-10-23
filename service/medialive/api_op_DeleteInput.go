@@ -4,6 +4,8 @@ package medialive
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/medialive/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -34,6 +36,18 @@ type DeleteInputInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteInputInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteInputRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteInputInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InputId != nil {
+		s.WriteString(schemas.DeleteInputRequest_InputId, *v.InputId)
+	}
+}
+
 // Placeholder documentation for DeleteInputResponse
 type DeleteInputOutput struct {
 	// Metadata pertaining to the operation's result.
@@ -42,13 +56,26 @@ type DeleteInputOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteInputOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteInputResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteInputOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteInputOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteInputResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteInputMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteInput{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteInput, schemas.DeleteInputRequest, schemas.DeleteInputResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteInput{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteInput, schemas.DeleteInputRequest, schemas.DeleteInputResponse), output: &DeleteInputOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

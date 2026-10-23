@@ -137,8 +137,9 @@ type AutomationRulesActionTypeV2 string
 
 // Enum values for AutomationRulesActionTypeV2
 const (
-	AutomationRulesActionTypeV2FindingFieldsUpdate AutomationRulesActionTypeV2 = "FINDING_FIELDS_UPDATE"
-	AutomationRulesActionTypeV2ExternalIntegration AutomationRulesActionTypeV2 = "EXTERNAL_INTEGRATION"
+	AutomationRulesActionTypeV2FindingFieldsUpdate  AutomationRulesActionTypeV2 = "FINDING_FIELDS_UPDATE"
+	AutomationRulesActionTypeV2ExternalIntegration  AutomationRulesActionTypeV2 = "EXTERNAL_INTEGRATION"
+	AutomationRulesActionTypeV2ResourceFieldsUpdate AutomationRulesActionTypeV2 = "RESOURCE_FIELDS_UPDATE"
 )
 
 // Values returns all known values for AutomationRulesActionTypeV2. Note that this
@@ -149,6 +150,7 @@ func (AutomationRulesActionTypeV2) Values() []AutomationRulesActionTypeV2 {
 	return []AutomationRulesActionTypeV2{
 		"FINDING_FIELDS_UPDATE",
 		"EXTERNAL_INTEGRATION",
+		"RESOURCE_FIELDS_UPDATE",
 	}
 }
 
@@ -403,6 +405,27 @@ func (ControlStatus) Values() []ControlStatus {
 	}
 }
 
+type CriticalitySourceType string
+
+// Enum values for CriticalitySourceType
+const (
+	CriticalitySourceTypeAutomationRule CriticalitySourceType = "AutomationRule"
+	CriticalitySourceTypeResourceName   CriticalitySourceType = "ResourceName"
+	CriticalitySourceTypeTagInference   CriticalitySourceType = "TagInference"
+)
+
+// Values returns all known values for CriticalitySourceType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (CriticalitySourceType) Values() []CriticalitySourceType {
+	return []CriticalitySourceType{
+		"AutomationRule",
+		"ResourceName",
+		"TagInference",
+	}
+}
+
 type CspmConnectorProviderName string
 
 // Enum values for CspmConnectorProviderName
@@ -550,6 +573,113 @@ func (EnablementStatus) Values() []EnablementStatus {
 	}
 }
 
+type ExportDataType string
+
+// Enum values for ExportDataType
+const (
+	ExportDataTypeFindings ExportDataType = "FINDINGS"
+)
+
+// Values returns all known values for ExportDataType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ExportDataType) Values() []ExportDataType {
+	return []ExportDataType{
+		"FINDINGS",
+	}
+}
+
+type ExportFailureCode string
+
+// Enum values for ExportFailureCode
+const (
+	ExportFailureCodeAccessDenied     ExportFailureCode = "ACCESS_DENIED"
+	ExportFailureCodeResourceNotFound ExportFailureCode = "RESOURCE_NOT_FOUND"
+	ExportFailureCodeInternalError    ExportFailureCode = "INTERNAL_ERROR"
+)
+
+// Values returns all known values for ExportFailureCode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ExportFailureCode) Values() []ExportFailureCode {
+	return []ExportFailureCode{
+		"ACCESS_DENIED",
+		"RESOURCE_NOT_FOUND",
+		"INTERNAL_ERROR",
+	}
+}
+
+type ExportStatus string
+
+// Enum values for ExportStatus
+const (
+	ExportStatusRunning   ExportStatus = "RUNNING"
+	ExportStatusSucceeded ExportStatus = "SUCCEEDED"
+	ExportStatusFailed    ExportStatus = "FAILED"
+	ExportStatusCancelled ExportStatus = "CANCELLED"
+)
+
+// Values returns all known values for ExportStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ExportStatus) Values() []ExportStatus {
+	return []ExportStatus{
+		"RUNNING",
+		"SUCCEEDED",
+		"FAILED",
+		"CANCELLED",
+	}
+}
+
+type ExposureImpact string
+
+// Enum values for ExposureImpact
+const (
+	ExposureImpactReduces   ExposureImpact = "Reduces"
+	ExposureImpactResolves  ExposureImpact = "Resolves"
+	ExposureImpactUnchanged ExposureImpact = "Unchanged"
+)
+
+// Values returns all known values for ExposureImpact. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ExposureImpact) Values() []ExposureImpact {
+	return []ExposureImpact{
+		"Reduces",
+		"Resolves",
+		"Unchanged",
+	}
+}
+
+type ExposureSeverity string
+
+// Enum values for ExposureSeverity
+const (
+	ExposureSeverityInformational ExposureSeverity = "Informational"
+	ExposureSeverityLow           ExposureSeverity = "Low"
+	ExposureSeverityMedium        ExposureSeverity = "Medium"
+	ExposureSeverityHigh          ExposureSeverity = "High"
+	ExposureSeverityCritical      ExposureSeverity = "Critical"
+)
+
+// Values returns all known values for ExposureSeverity. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ExposureSeverity) Values() []ExposureSeverity {
+	return []ExposureSeverity{
+		"Informational",
+		"Low",
+		"Medium",
+		"High",
+		"Critical",
+	}
+}
+
 type FeatureName string
 
 // Enum values for FeatureName
@@ -603,6 +733,258 @@ func (FindingHistoryUpdateSourceType) Values() []FindingHistoryUpdateSourceType 
 	return []FindingHistoryUpdateSourceType{
 		"BATCH_UPDATE_FINDINGS",
 		"BATCH_IMPORT_FINDINGS",
+	}
+}
+
+type FindingsExportFormat string
+
+// Enum values for FindingsExportFormat
+const (
+	FindingsExportFormatCsv      FindingsExportFormat = "CSV"
+	FindingsExportFormatOcsfJson FindingsExportFormat = "OCSF_JSON"
+)
+
+// Values returns all known values for FindingsExportFormat. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (FindingsExportFormat) Values() []FindingsExportFormat {
+	return []FindingsExportFormat{
+		"CSV",
+		"OCSF_JSON",
+	}
+}
+
+type FindingsSelectableField string
+
+// Enum values for FindingsSelectableField
+const (
+	FindingsSelectableFieldMetadataUid                                            FindingsSelectableField = "metadata.uid"
+	FindingsSelectableFieldActivityName                                           FindingsSelectableField = "activity_name"
+	FindingsSelectableFieldCloudAccountName                                       FindingsSelectableField = "cloud.account.name"
+	FindingsSelectableFieldCloudAccountUid                                        FindingsSelectableField = "cloud.account.uid"
+	FindingsSelectableFieldCloudProvider                                          FindingsSelectableField = "cloud.provider"
+	FindingsSelectableFieldCloudRegion                                            FindingsSelectableField = "cloud.region"
+	FindingsSelectableFieldComplianceAssessmentsCategory                          FindingsSelectableField = "compliance.assessments.category"
+	FindingsSelectableFieldComplianceAssessmentsName                              FindingsSelectableField = "compliance.assessments.name"
+	FindingsSelectableFieldComplianceControl                                      FindingsSelectableField = "compliance.control"
+	FindingsSelectableFieldComplianceStatus                                       FindingsSelectableField = "compliance.status"
+	FindingsSelectableFieldComplianceStandards                                    FindingsSelectableField = "compliance.standards"
+	FindingsSelectableFieldFindingInfoDesc                                        FindingsSelectableField = "finding_info.desc"
+	FindingsSelectableFieldFindingInfoSrcUrl                                      FindingsSelectableField = "finding_info.src_url"
+	FindingsSelectableFieldFindingInfoTitle                                       FindingsSelectableField = "finding_info.title"
+	FindingsSelectableFieldFindingInfoTypes                                       FindingsSelectableField = "finding_info.types"
+	FindingsSelectableFieldFindingInfoUid                                         FindingsSelectableField = "finding_info.uid"
+	FindingsSelectableFieldFindingInfoRelatedEventsTraitsCategory                 FindingsSelectableField = "finding_info.related_events.traits.category"
+	FindingsSelectableFieldFindingInfoRelatedEventsUid                            FindingsSelectableField = "finding_info.related_events.uid"
+	FindingsSelectableFieldFindingInfoRelatedEventsProductUid                     FindingsSelectableField = "finding_info.related_events.product.uid"
+	FindingsSelectableFieldFindingInfoRelatedEventsTitle                          FindingsSelectableField = "finding_info.related_events.title"
+	FindingsSelectableFieldMetadataProductFeatureUid                              FindingsSelectableField = "metadata.product.feature.uid"
+	FindingsSelectableFieldMetadataProductName                                    FindingsSelectableField = "metadata.product.name"
+	FindingsSelectableFieldMetadataProductUid                                     FindingsSelectableField = "metadata.product.uid"
+	FindingsSelectableFieldMetadataProductVendorName                              FindingsSelectableField = "metadata.product.vendor_name"
+	FindingsSelectableFieldRemediationDesc                                        FindingsSelectableField = "remediation.desc"
+	FindingsSelectableFieldRemediationReferences                                  FindingsSelectableField = "remediation.references"
+	FindingsSelectableFieldResourcesCloudPartition                                FindingsSelectableField = "resources.cloud_partition"
+	FindingsSelectableFieldResourcesName                                          FindingsSelectableField = "resources.name"
+	FindingsSelectableFieldResourcesOwnerAccountUid                               FindingsSelectableField = "resources.owner.account.uid"
+	FindingsSelectableFieldResourcesOwnerOrgUid                                   FindingsSelectableField = "resources.owner.org.uid"
+	FindingsSelectableFieldResourcesOwnerAccountName                              FindingsSelectableField = "resources.owner.account.name"
+	FindingsSelectableFieldResourcesProvider                                      FindingsSelectableField = "resources.provider"
+	FindingsSelectableFieldResourcesRegion                                        FindingsSelectableField = "resources.region"
+	FindingsSelectableFieldResourcesType                                          FindingsSelectableField = "resources.type"
+	FindingsSelectableFieldResourcesUid                                           FindingsSelectableField = "resources.uid"
+	FindingsSelectableFieldSeverity                                               FindingsSelectableField = "severity"
+	FindingsSelectableFieldStatus                                                 FindingsSelectableField = "status"
+	FindingsSelectableFieldComment                                                FindingsSelectableField = "comment"
+	FindingsSelectableFieldVulnerabilitiesFixCoverage                             FindingsSelectableField = "vulnerabilities.fix_coverage"
+	FindingsSelectableFieldClassName                                              FindingsSelectableField = "class_name"
+	FindingsSelectableFieldDatabucketEncryptionDetailsAlgorithm                   FindingsSelectableField = "databucket.encryption_details.algorithm"
+	FindingsSelectableFieldDatabucketEncryptionDetailsKeyUid                      FindingsSelectableField = "databucket.encryption_details.key_uid"
+	FindingsSelectableFieldDatabucketFileDataClassificationsClassifierDetailsType FindingsSelectableField = "databucket.file.data_classifications.classifier_details.type"
+	FindingsSelectableFieldEvidencesActorUserAccountUid                           FindingsSelectableField = "evidences.actor.user.account.uid"
+	FindingsSelectableFieldEvidencesApiOperation                                  FindingsSelectableField = "evidences.api.operation"
+	FindingsSelectableFieldEvidencesApiResponseErrorMessage                       FindingsSelectableField = "evidences.api.response.error_message"
+	FindingsSelectableFieldEvidencesApiServiceName                                FindingsSelectableField = "evidences.api.service.name"
+	FindingsSelectableFieldEvidencesConnectionInfoDirection                       FindingsSelectableField = "evidences.connection_info.direction"
+	FindingsSelectableFieldEvidencesConnectionInfoProtocolName                    FindingsSelectableField = "evidences.connection_info.protocol_name"
+	FindingsSelectableFieldEvidencesDstEndpointAutonomousSystemName               FindingsSelectableField = "evidences.dst_endpoint.autonomous_system.name"
+	FindingsSelectableFieldEvidencesDstEndpointLocationCity                       FindingsSelectableField = "evidences.dst_endpoint.location.city"
+	FindingsSelectableFieldEvidencesDstEndpointLocationCountry                    FindingsSelectableField = "evidences.dst_endpoint.location.country"
+	FindingsSelectableFieldEvidencesSrcEndpointAutonomousSystemName               FindingsSelectableField = "evidences.src_endpoint.autonomous_system.name"
+	FindingsSelectableFieldEvidencesSrcEndpointHostname                           FindingsSelectableField = "evidences.src_endpoint.hostname"
+	FindingsSelectableFieldEvidencesSrcEndpointLocationCity                       FindingsSelectableField = "evidences.src_endpoint.location.city"
+	FindingsSelectableFieldEvidencesSrcEndpointLocationCountry                    FindingsSelectableField = "evidences.src_endpoint.location.country"
+	FindingsSelectableFieldFindingInfoAnalyticName                                FindingsSelectableField = "finding_info.analytic.name"
+	FindingsSelectableFieldMalwareName                                            FindingsSelectableField = "malware.name"
+	FindingsSelectableFieldMalwareScanInfoUid                                     FindingsSelectableField = "malware_scan_info.uid"
+	FindingsSelectableFieldMalwareSeverity                                        FindingsSelectableField = "malware.severity"
+	FindingsSelectableFieldResourcesCloudFunctionLayersUidAlt                     FindingsSelectableField = "resources.cloud_function.layers.uid_alt"
+	FindingsSelectableFieldResourcesCloudFunctionRuntime                          FindingsSelectableField = "resources.cloud_function.runtime"
+	FindingsSelectableFieldResourcesCloudFunctionUserUid                          FindingsSelectableField = "resources.cloud_function.user.uid"
+	FindingsSelectableFieldResourcesDeviceEncryptionDetailsKeyUid                 FindingsSelectableField = "resources.device.encryption_details.key_uid"
+	FindingsSelectableFieldResourcesDeviceImageUid                                FindingsSelectableField = "resources.device.image.uid"
+	FindingsSelectableFieldResourcesImageArchitecture                             FindingsSelectableField = "resources.image.architecture"
+	FindingsSelectableFieldResourcesImageRegistryUid                              FindingsSelectableField = "resources.image.registry_uid"
+	FindingsSelectableFieldResourcesImageRepositoryName                           FindingsSelectableField = "resources.image.repository_name"
+	FindingsSelectableFieldResourcesImageUid                                      FindingsSelectableField = "resources.image.uid"
+	FindingsSelectableFieldResourcesSubnetInfoUid                                 FindingsSelectableField = "resources.subnet_info.uid"
+	FindingsSelectableFieldResourcesVpcUid                                        FindingsSelectableField = "resources.vpc_uid"
+	FindingsSelectableFieldVulnerabilitiesAffectedCodeFilePath                    FindingsSelectableField = "vulnerabilities.affected_code.file.path"
+	FindingsSelectableFieldVulnerabilitiesAffectedPackagesName                    FindingsSelectableField = "vulnerabilities.affected_packages.name"
+	FindingsSelectableFieldVulnerabilitiesCveCvssVendorName                       FindingsSelectableField = "vulnerabilities.cve.cvss.vendor_name"
+	FindingsSelectableFieldVulnerabilitiesCveCvssVersion                          FindingsSelectableField = "vulnerabilities.cve.cvss.version"
+	FindingsSelectableFieldVulnerabilitiesCveEpssScore                            FindingsSelectableField = "vulnerabilities.cve.epss.score"
+	FindingsSelectableFieldVulnerabilitiesCveUid                                  FindingsSelectableField = "vulnerabilities.cve.uid"
+	FindingsSelectableFieldVulnerabilitiesRelatedVulnerabilities                  FindingsSelectableField = "vulnerabilities.related_vulnerabilities"
+	FindingsSelectableFieldVendorAttributesSeverity                               FindingsSelectableField = "vendor_attributes.severity"
+	FindingsSelectableFieldActivityId                                             FindingsSelectableField = "activity_id"
+	FindingsSelectableFieldComplianceStatusId                                     FindingsSelectableField = "compliance.status_id"
+	FindingsSelectableFieldConfidenceScore                                        FindingsSelectableField = "confidence_score"
+	FindingsSelectableFieldSeverityId                                             FindingsSelectableField = "severity_id"
+	FindingsSelectableFieldStatusId                                               FindingsSelectableField = "status_id"
+	FindingsSelectableFieldFindingInfoRelatedEventsCount                          FindingsSelectableField = "finding_info.related_events_count"
+	FindingsSelectableFieldEvidencesApiResponseCode                               FindingsSelectableField = "evidences.api.response.code"
+	FindingsSelectableFieldEvidencesDstEndpointAutonomousSystemNumber             FindingsSelectableField = "evidences.dst_endpoint.autonomous_system.number"
+	FindingsSelectableFieldEvidencesDstEndpointPort                               FindingsSelectableField = "evidences.dst_endpoint.port"
+	FindingsSelectableFieldEvidencesSrcEndpointAutonomousSystemNumber             FindingsSelectableField = "evidences.src_endpoint.autonomous_system.number"
+	FindingsSelectableFieldEvidencesSrcEndpointPort                               FindingsSelectableField = "evidences.src_endpoint.port"
+	FindingsSelectableFieldResourcesImageInUseCount                               FindingsSelectableField = "resources.image.in_use_count"
+	FindingsSelectableFieldVulnerabilitiesCveCvssBaseScore                        FindingsSelectableField = "vulnerabilities.cve.cvss.base_score"
+	FindingsSelectableFieldVendorAttributesSeverityId                             FindingsSelectableField = "vendor_attributes.severity_id"
+	FindingsSelectableFieldFindingInfoCreatedTimeDt                               FindingsSelectableField = "finding_info.created_time_dt"
+	FindingsSelectableFieldFindingInfoFirstSeenTimeDt                             FindingsSelectableField = "finding_info.first_seen_time_dt"
+	FindingsSelectableFieldFindingInfoLastSeenTimeDt                              FindingsSelectableField = "finding_info.last_seen_time_dt"
+	FindingsSelectableFieldFindingInfoModifiedTimeDt                              FindingsSelectableField = "finding_info.modified_time_dt"
+	FindingsSelectableFieldResourcesImageCreatedTimeDt                            FindingsSelectableField = "resources.image.created_time_dt"
+	FindingsSelectableFieldResourcesImageLastUsedTimeDt                           FindingsSelectableField = "resources.image.last_used_time_dt"
+	FindingsSelectableFieldResourcesModifiedTimeDt                                FindingsSelectableField = "resources.modified_time_dt"
+	FindingsSelectableFieldComplianceAssessmentsMeetsCriteria                     FindingsSelectableField = "compliance.assessments.meets_criteria"
+	FindingsSelectableFieldVulnerabilitiesIsExploitAvailable                      FindingsSelectableField = "vulnerabilities.is_exploit_available"
+	FindingsSelectableFieldVulnerabilitiesIsFixAvailable                          FindingsSelectableField = "vulnerabilities.is_fix_available"
+	FindingsSelectableFieldResourcesTags                                          FindingsSelectableField = "resources.tags"
+	FindingsSelectableFieldComplianceControlParameters                            FindingsSelectableField = "compliance.control_parameters"
+	FindingsSelectableFieldDatabucketTags                                         FindingsSelectableField = "databucket.tags"
+	FindingsSelectableFieldFindingInfoTags                                        FindingsSelectableField = "finding_info.tags"
+	FindingsSelectableFieldEvidencesDstEndpointIp                                 FindingsSelectableField = "evidences.dst_endpoint.ip"
+	FindingsSelectableFieldEvidencesSrcEndpointIp                                 FindingsSelectableField = "evidences.src_endpoint.ip"
+)
+
+// Values returns all known values for FindingsSelectableField. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (FindingsSelectableField) Values() []FindingsSelectableField {
+	return []FindingsSelectableField{
+		"metadata.uid",
+		"activity_name",
+		"cloud.account.name",
+		"cloud.account.uid",
+		"cloud.provider",
+		"cloud.region",
+		"compliance.assessments.category",
+		"compliance.assessments.name",
+		"compliance.control",
+		"compliance.status",
+		"compliance.standards",
+		"finding_info.desc",
+		"finding_info.src_url",
+		"finding_info.title",
+		"finding_info.types",
+		"finding_info.uid",
+		"finding_info.related_events.traits.category",
+		"finding_info.related_events.uid",
+		"finding_info.related_events.product.uid",
+		"finding_info.related_events.title",
+		"metadata.product.feature.uid",
+		"metadata.product.name",
+		"metadata.product.uid",
+		"metadata.product.vendor_name",
+		"remediation.desc",
+		"remediation.references",
+		"resources.cloud_partition",
+		"resources.name",
+		"resources.owner.account.uid",
+		"resources.owner.org.uid",
+		"resources.owner.account.name",
+		"resources.provider",
+		"resources.region",
+		"resources.type",
+		"resources.uid",
+		"severity",
+		"status",
+		"comment",
+		"vulnerabilities.fix_coverage",
+		"class_name",
+		"databucket.encryption_details.algorithm",
+		"databucket.encryption_details.key_uid",
+		"databucket.file.data_classifications.classifier_details.type",
+		"evidences.actor.user.account.uid",
+		"evidences.api.operation",
+		"evidences.api.response.error_message",
+		"evidences.api.service.name",
+		"evidences.connection_info.direction",
+		"evidences.connection_info.protocol_name",
+		"evidences.dst_endpoint.autonomous_system.name",
+		"evidences.dst_endpoint.location.city",
+		"evidences.dst_endpoint.location.country",
+		"evidences.src_endpoint.autonomous_system.name",
+		"evidences.src_endpoint.hostname",
+		"evidences.src_endpoint.location.city",
+		"evidences.src_endpoint.location.country",
+		"finding_info.analytic.name",
+		"malware.name",
+		"malware_scan_info.uid",
+		"malware.severity",
+		"resources.cloud_function.layers.uid_alt",
+		"resources.cloud_function.runtime",
+		"resources.cloud_function.user.uid",
+		"resources.device.encryption_details.key_uid",
+		"resources.device.image.uid",
+		"resources.image.architecture",
+		"resources.image.registry_uid",
+		"resources.image.repository_name",
+		"resources.image.uid",
+		"resources.subnet_info.uid",
+		"resources.vpc_uid",
+		"vulnerabilities.affected_code.file.path",
+		"vulnerabilities.affected_packages.name",
+		"vulnerabilities.cve.cvss.vendor_name",
+		"vulnerabilities.cve.cvss.version",
+		"vulnerabilities.cve.epss.score",
+		"vulnerabilities.cve.uid",
+		"vulnerabilities.related_vulnerabilities",
+		"vendor_attributes.severity",
+		"activity_id",
+		"compliance.status_id",
+		"confidence_score",
+		"severity_id",
+		"status_id",
+		"finding_info.related_events_count",
+		"evidences.api.response.code",
+		"evidences.dst_endpoint.autonomous_system.number",
+		"evidences.dst_endpoint.port",
+		"evidences.src_endpoint.autonomous_system.number",
+		"evidences.src_endpoint.port",
+		"resources.image.in_use_count",
+		"vulnerabilities.cve.cvss.base_score",
+		"vendor_attributes.severity_id",
+		"finding_info.created_time_dt",
+		"finding_info.first_seen_time_dt",
+		"finding_info.last_seen_time_dt",
+		"finding_info.modified_time_dt",
+		"resources.image.created_time_dt",
+		"resources.image.last_used_time_dt",
+		"resources.modified_time_dt",
+		"compliance.assessments.meets_criteria",
+		"vulnerabilities.is_exploit_available",
+		"vulnerabilities.is_fix_available",
+		"resources.tags",
+		"compliance.control_parameters",
+		"databucket.tags",
+		"finding_info.tags",
+		"evidences.dst_endpoint.ip",
+		"evidences.src_endpoint.ip",
 	}
 }
 
@@ -722,10 +1104,13 @@ const (
 	GroupByFieldFindingInfoTitle                       GroupByField = "finding_info.title"
 	GroupByFieldFindingInfoRelatedEventsTraitsCategory GroupByField = "finding_info.related_events.traits.category"
 	GroupByFieldFindingInfoTypes                       GroupByField = "finding_info.types"
+	GroupByFieldImpact                                 GroupByField = "impact"
+	GroupByFieldLikelihood                             GroupByField = "likelihood"
 	GroupByFieldMetadataProductName                    GroupByField = "metadata.product.name"
 	GroupByFieldMetadataProductUid                     GroupByField = "metadata.product.uid"
 	GroupByFieldResourcesType                          GroupByField = "resources.type"
 	GroupByFieldResourcesCloudPartition                GroupByField = "resources.cloud_partition"
+	GroupByFieldResourcesCriticality                   GroupByField = "resources.criticality"
 	GroupByFieldResourcesName                          GroupByField = "resources.name"
 	GroupByFieldResourcesOwnerAccountUid               GroupByField = "resources.owner.account.uid"
 	GroupByFieldResourcesOwnerOrgUid                   GroupByField = "resources.owner.org.uid"
@@ -761,10 +1146,13 @@ func (GroupByField) Values() []GroupByField {
 		"finding_info.title",
 		"finding_info.related_events.traits.category",
 		"finding_info.types",
+		"impact",
+		"likelihood",
 		"metadata.product.name",
 		"metadata.product.uid",
 		"resources.type",
 		"resources.cloud_partition",
+		"resources.criticality",
 		"resources.name",
 		"resources.owner.account.uid",
 		"resources.owner.org.uid",
@@ -782,6 +1170,39 @@ func (GroupByField) Values() []GroupByField {
 		"cloud.account.name",
 		"vendor_attributes.severity",
 		"metadata.product.vendor_name",
+	}
+}
+
+type GuidanceFormat string
+
+// Enum values for GuidanceFormat
+const (
+	GuidanceFormatAll            GuidanceFormat = "All"
+	GuidanceFormatAwsCli         GuidanceFormat = "AwsCli"
+	GuidanceFormatCli            GuidanceFormat = "Cli"
+	GuidanceFormatPython         GuidanceFormat = "Python"
+	GuidanceFormatTerraform      GuidanceFormat = "Terraform"
+	GuidanceFormatCdk            GuidanceFormat = "Cdk"
+	GuidanceFormatCloudformation GuidanceFormat = "CloudFormation"
+	GuidanceFormatIac            GuidanceFormat = "IaC"
+	GuidanceFormatTemplate       GuidanceFormat = "Template"
+)
+
+// Values returns all known values for GuidanceFormat. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (GuidanceFormat) Values() []GuidanceFormat {
+	return []GuidanceFormat{
+		"All",
+		"AwsCli",
+		"Cli",
+		"Python",
+		"Terraform",
+		"Cdk",
+		"CloudFormation",
+		"IaC",
+		"Template",
 	}
 }
 
@@ -1124,12 +1545,15 @@ const (
 	OcsfStringFieldFindingInfoRelatedEventsUid                            OcsfStringField = "finding_info.related_events.uid"
 	OcsfStringFieldFindingInfoRelatedEventsProductUid                     OcsfStringField = "finding_info.related_events.product.uid"
 	OcsfStringFieldFindingInfoRelatedEventsTitle                          OcsfStringField = "finding_info.related_events.title"
+	OcsfStringFieldImpact                                                 OcsfStringField = "impact"
+	OcsfStringFieldLikelihood                                             OcsfStringField = "likelihood"
 	OcsfStringFieldMetadataProductName                                    OcsfStringField = "metadata.product.name"
 	OcsfStringFieldMetadataProductUid                                     OcsfStringField = "metadata.product.uid"
 	OcsfStringFieldMetadataProductVendorName                              OcsfStringField = "metadata.product.vendor_name"
 	OcsfStringFieldRemediationDesc                                        OcsfStringField = "remediation.desc"
 	OcsfStringFieldRemediationReferences                                  OcsfStringField = "remediation.references"
 	OcsfStringFieldResourcesCloudPartition                                OcsfStringField = "resources.cloud_partition"
+	OcsfStringFieldResourcesCriticality                                   OcsfStringField = "resources.criticality"
 	OcsfStringFieldResourcesName                                          OcsfStringField = "resources.name"
 	OcsfStringFieldResourcesOwnerAccountUid                               OcsfStringField = "resources.owner.account.uid"
 	OcsfStringFieldResourcesOwnerOrgUid                                   OcsfStringField = "resources.owner.org.uid"
@@ -1208,12 +1632,15 @@ func (OcsfStringField) Values() []OcsfStringField {
 		"finding_info.related_events.uid",
 		"finding_info.related_events.product.uid",
 		"finding_info.related_events.title",
+		"impact",
+		"likelihood",
 		"metadata.product.name",
 		"metadata.product.uid",
 		"metadata.product.vendor_name",
 		"remediation.desc",
 		"remediation.references",
 		"resources.cloud_partition",
+		"resources.criticality",
 		"resources.name",
 		"resources.owner.account.uid",
 		"resources.owner.org.uid",
@@ -1432,6 +1859,77 @@ func (RegionAvailabilityStatus) Values() []RegionAvailabilityStatus {
 	}
 }
 
+type RemediationPriority string
+
+// Enum values for RemediationPriority
+const (
+	RemediationPriorityCritical RemediationPriority = "Critical"
+	RemediationPriorityHigh     RemediationPriority = "High"
+	RemediationPriorityMedium   RemediationPriority = "Medium"
+	RemediationPriorityLow      RemediationPriority = "Low"
+)
+
+// Values returns all known values for RemediationPriority. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (RemediationPriority) Values() []RemediationPriority {
+	return []RemediationPriority{
+		"Critical",
+		"High",
+		"Medium",
+		"Low",
+	}
+}
+
+type RemediationStatus string
+
+// Enum values for RemediationStatus
+const (
+	RemediationStatusNew      RemediationStatus = "New"
+	RemediationStatusUpdated  RemediationStatus = "Updated"
+	RemediationStatusResolved RemediationStatus = "Resolved"
+)
+
+// Values returns all known values for RemediationStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (RemediationStatus) Values() []RemediationStatus {
+	return []RemediationStatus{
+		"New",
+		"Updated",
+		"Resolved",
+	}
+}
+
+type RemediationStringField string
+
+// Enum values for RemediationStringField
+const (
+	RemediationStringFieldResourceType           RemediationStringField = "Resource.Type"
+	RemediationStringFieldPriority               RemediationStringField = "Priority"
+	RemediationStringFieldStatus                 RemediationStringField = "Status"
+	RemediationStringFieldResourceId             RemediationStringField = "Resource.Id"
+	RemediationStringFieldResourceOwnerAccountId RemediationStringField = "Resource.ResourceOwnerAccountId"
+	RemediationStringFieldResourceCloudProvider  RemediationStringField = "Resource.CloudProvider"
+)
+
+// Values returns all known values for RemediationStringField. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (RemediationStringField) Values() []RemediationStringField {
+	return []RemediationStringField{
+		"Resource.Type",
+		"Priority",
+		"Status",
+		"Resource.Id",
+		"Resource.ResourceOwnerAccountId",
+		"Resource.CloudProvider",
+	}
+}
+
 type ResourceCategory string
 
 // Enum values for ResourceCategory
@@ -1465,6 +1963,31 @@ func (ResourceCategory) Values() []ResourceCategory {
 	}
 }
 
+type ResourceCriticality string
+
+// Enum values for ResourceCriticality
+const (
+	ResourceCriticalityVeryHigh ResourceCriticality = "Very High"
+	ResourceCriticalityHigh     ResourceCriticality = "High"
+	ResourceCriticalityMedium   ResourceCriticality = "Medium"
+	ResourceCriticalityLow      ResourceCriticality = "Low"
+	ResourceCriticalityUnknown  ResourceCriticality = "Unknown"
+)
+
+// Values returns all known values for ResourceCriticality. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ResourceCriticality) Values() []ResourceCriticality {
+	return []ResourceCriticality{
+		"Very High",
+		"High",
+		"Medium",
+		"Low",
+		"Unknown",
+	}
+}
+
 type ResourceGroupByField string
 
 // Enum values for ResourceGroupByField
@@ -1485,6 +2008,7 @@ const (
 	ResourceGroupByFieldDiscoveryType          ResourceGroupByField = "DiscoveryType"
 	ResourceGroupByFieldHostResourceType       ResourceGroupByField = "ResourceInfo.AIDetails.HostResourceType"
 	ResourceGroupByFieldCanonicalId            ResourceGroupByField = "ResourceInfo.AIDetails.CanonicalId"
+	ResourceGroupByFieldResourceCriticality    ResourceGroupByField = "ResourceCriticality"
 )
 
 // Values returns all known values for ResourceGroupByField. Note that this can be
@@ -1509,6 +2033,7 @@ func (ResourceGroupByField) Values() []ResourceGroupByField {
 		"DiscoveryType",
 		"ResourceInfo.AIDetails.HostResourceType",
 		"ResourceInfo.AIDetails.CanonicalId",
+		"ResourceCriticality",
 	}
 }
 
@@ -1621,6 +2146,7 @@ const (
 	ResourcesStringFieldHostResourceGuid       ResourcesStringField = "ResourceInfo.AIDetails.HostResourceGuid"
 	ResourcesStringFieldHostResourceType       ResourcesStringField = "ResourceInfo.AIDetails.HostResourceType"
 	ResourcesStringFieldCanonicalId            ResourcesStringField = "ResourceInfo.AIDetails.CanonicalId"
+	ResourcesStringFieldResourceCriticality    ResourcesStringField = "ResourceCriticality"
 )
 
 // Values returns all known values for ResourcesStringField. Note that this can be
@@ -1649,6 +2175,7 @@ func (ResourcesStringField) Values() []ResourcesStringField {
 		"ResourceInfo.AIDetails.HostResourceGuid",
 		"ResourceInfo.AIDetails.HostResourceType",
 		"ResourceInfo.AIDetails.CanonicalId",
+		"ResourceCriticality",
 	}
 }
 

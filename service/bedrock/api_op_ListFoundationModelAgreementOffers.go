@@ -4,7 +4,9 @@ package bedrock
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/bedrock/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrock/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -37,6 +39,21 @@ type ListFoundationModelAgreementOffersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListFoundationModelAgreementOffersInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListFoundationModelAgreementOffersRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListFoundationModelAgreementOffersInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ModelId != nil {
+		s.WriteString(schemas.ListFoundationModelAgreementOffersRequest_modelId, *v.ModelId)
+	}
+	if v.OfferType != "" {
+		s.WriteString(schemas.ListFoundationModelAgreementOffersRequest_offerType, string(v.OfferType))
+	}
+}
+
 type ListFoundationModelAgreementOffersOutput struct {
 
 	// Model Id of the foundation model.
@@ -55,13 +72,35 @@ type ListFoundationModelAgreementOffersOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListFoundationModelAgreementOffersOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListFoundationModelAgreementOffersResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListFoundationModelAgreementOffersOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ModelId != nil {
+		s.WriteString(schemas.ListFoundationModelAgreementOffersResponse_modelId, *v.ModelId)
+	}
+	serializeOffers(s, schemas.ListFoundationModelAgreementOffersResponse_offers, v.Offers)
+}
+func (v *ListFoundationModelAgreementOffersOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListFoundationModelAgreementOffersResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListFoundationModelAgreementOffersResponse_modelId:
+			v.ModelId = new(string)
+			return d.ReadString(schemas.ListFoundationModelAgreementOffersResponse_modelId, v.ModelId)
+		case schemas.ListFoundationModelAgreementOffersResponse_offers:
+			return deserializeOffers(d, schemas.ListFoundationModelAgreementOffersResponse_offers, &v.Offers)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListFoundationModelAgreementOffersMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListFoundationModelAgreementOffers{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListFoundationModelAgreementOffers, schemas.ListFoundationModelAgreementOffersRequest, schemas.ListFoundationModelAgreementOffersResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListFoundationModelAgreementOffers{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListFoundationModelAgreementOffers, schemas.ListFoundationModelAgreementOffersRequest, schemas.ListFoundationModelAgreementOffersResponse), output: &ListFoundationModelAgreementOffersOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -5,7 +5,9 @@ package resiliencehubv2
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/resiliencehubv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/resiliencehubv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -53,6 +55,33 @@ type ListTestRunEventsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListTestRunEventsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListTestRunEventsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListTestRunEventsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EndedAt != nil {
+		s.WriteTime(schemas.ListTestRunEventsRequest_endedAt, *v.EndedAt)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListTestRunEventsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListTestRunEventsRequest_nextToken, *v.NextToken)
+	}
+	if v.ServiceArn != nil {
+		s.WriteString(schemas.ListTestRunEventsRequest_serviceArn, *v.ServiceArn)
+	}
+	if v.StartedAt != nil {
+		s.WriteTime(schemas.ListTestRunEventsRequest_startedAt, *v.StartedAt)
+	}
+	if v.TestRunId != nil {
+		s.WriteString(schemas.ListTestRunEventsRequest_testRunId, *v.TestRunId)
+	}
+}
+
 type ListTestRunEventsOutput struct {
 
 	// The list of test run events.
@@ -69,13 +98,35 @@ type ListTestRunEventsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListTestRunEventsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListTestRunEventsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListTestRunEventsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeTestRunEventList(s, schemas.ListTestRunEventsResponse_events, v.Events)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListTestRunEventsResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListTestRunEventsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListTestRunEventsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListTestRunEventsResponse_events:
+			return deserializeTestRunEventList(d, schemas.ListTestRunEventsResponse_events, &v.Events)
+		case schemas.ListTestRunEventsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListTestRunEventsResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListTestRunEventsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListTestRunEvents{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListTestRunEvents, schemas.ListTestRunEventsRequest, schemas.ListTestRunEventsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListTestRunEvents{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListTestRunEvents, schemas.ListTestRunEventsRequest, schemas.ListTestRunEventsResponse), output: &ListTestRunEventsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

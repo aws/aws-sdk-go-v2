@@ -4,6 +4,8 @@ package bcmdashboards
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/bcmdashboards/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -33,6 +35,18 @@ type DeleteDashboardInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteDashboardInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteDashboardRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteDashboardInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.DeleteDashboardRequest_arn, *v.Arn)
+	}
+}
+
 type DeleteDashboardOutput struct {
 
 	// The ARN of the dashboard that was deleted.
@@ -46,13 +60,32 @@ type DeleteDashboardOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteDashboardOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteDashboardResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteDashboardOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.DeleteDashboardResponse_arn, *v.Arn)
+	}
+}
+func (v *DeleteDashboardOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteDashboardResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteDashboardResponse_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.DeleteDashboardResponse_arn, v.Arn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteDashboardMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpDeleteDashboard{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteDashboard, schemas.DeleteDashboardRequest, schemas.DeleteDashboardResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpDeleteDashboard{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteDashboard, schemas.DeleteDashboardRequest, schemas.DeleteDashboardResponse), output: &DeleteDashboardOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

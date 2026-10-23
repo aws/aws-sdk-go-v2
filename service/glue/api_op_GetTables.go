@@ -5,7 +5,9 @@ package glue
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/glue/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/glue/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -72,10 +74,62 @@ type GetTablesInput struct {
 	// TransactionId .
 	QueryAsOfTime *time.Time
 
+	// Specifies which tables the GetTables call returns. The allowable values are
+	// FEDERATED or ALL .
+	//
+	//   - If set to FEDERATED , returns only federated tables, which reference an
+	//   entity outside the Glue Data Catalog.
+	//
+	//   - If set to ALL , returns all tables in the database, both federated and
+	//   non-federated.
+	ResourceShareType types.TableResourceShareType
+
 	// The transaction ID at which to read the table contents.
 	TransactionId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetTablesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetTablesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetTablesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeTableAttributesList(s, schemas.GetTablesRequest_AttributesToGet, v.AttributesToGet)
+	if v.AuditContext != nil {
+		s.WriteStruct(schemas.GetTablesRequest_AuditContext)
+		v.AuditContext.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CatalogId != nil {
+		s.WriteString(schemas.GetTablesRequest_CatalogId, *v.CatalogId)
+	}
+	if v.DatabaseName != nil {
+		s.WriteString(schemas.GetTablesRequest_DatabaseName, *v.DatabaseName)
+	}
+	if v.Expression != nil {
+		s.WriteString(schemas.GetTablesRequest_Expression, *v.Expression)
+	}
+	if v.IncludeStatusDetails != nil {
+		s.WriteBool(schemas.GetTablesRequest_IncludeStatusDetails, *v.IncludeStatusDetails)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.GetTablesRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetTablesRequest_NextToken, *v.NextToken)
+	}
+	if v.QueryAsOfTime != nil {
+		s.WriteTime(schemas.GetTablesRequest_QueryAsOfTime, *v.QueryAsOfTime)
+	}
+	if v.ResourceShareType != "" {
+		s.WriteString(schemas.GetTablesRequest_ResourceShareType, string(v.ResourceShareType))
+	}
+	if v.TransactionId != nil {
+		s.WriteString(schemas.GetTablesRequest_TransactionId, *v.TransactionId)
+	}
 }
 
 type GetTablesOutput struct {
@@ -92,13 +146,35 @@ type GetTablesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetTablesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetTablesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetTablesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetTablesResponse_NextToken, *v.NextToken)
+	}
+	serializeTableList(s, schemas.GetTablesResponse_TableList, v.TableList)
+}
+func (v *GetTablesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetTablesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetTablesResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.GetTablesResponse_NextToken, v.NextToken)
+		case schemas.GetTablesResponse_TableList:
+			return deserializeTableList(d, schemas.GetTablesResponse_TableList, &v.TableList)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetTablesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetTables{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetTables, schemas.GetTablesRequest, schemas.GetTablesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetTables{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetTables, schemas.GetTablesRequest, schemas.GetTablesResponse), output: &GetTablesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

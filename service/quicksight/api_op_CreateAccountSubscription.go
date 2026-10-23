@@ -4,7 +4,9 @@ package quicksight
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/quicksight/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/quicksight/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -205,6 +207,60 @@ type CreateAccountSubscriptionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateAccountSubscriptionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateAccountSubscriptionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateAccountSubscriptionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountName != nil {
+		s.WriteString(schemas.CreateAccountSubscriptionRequest_AccountName, *v.AccountName)
+	}
+	if v.ActiveDirectoryName != nil {
+		s.WriteString(schemas.CreateAccountSubscriptionRequest_ActiveDirectoryName, *v.ActiveDirectoryName)
+	}
+	serializeGroupsList(s, schemas.CreateAccountSubscriptionRequest_AdminGroup, v.AdminGroup)
+	serializeGroupsList(s, schemas.CreateAccountSubscriptionRequest_AdminProGroup, v.AdminProGroup)
+	if v.AuthenticationMethod != "" {
+		s.WriteString(schemas.CreateAccountSubscriptionRequest_AuthenticationMethod, string(v.AuthenticationMethod))
+	}
+	serializeGroupsList(s, schemas.CreateAccountSubscriptionRequest_AuthorGroup, v.AuthorGroup)
+	serializeGroupsList(s, schemas.CreateAccountSubscriptionRequest_AuthorProGroup, v.AuthorProGroup)
+	if v.AwsAccountId != nil {
+		s.WriteString(schemas.CreateAccountSubscriptionRequest_AwsAccountId, *v.AwsAccountId)
+	}
+	if v.ContactNumber != nil {
+		s.WriteString(schemas.CreateAccountSubscriptionRequest_ContactNumber, *v.ContactNumber)
+	}
+	if v.DirectoryId != nil {
+		s.WriteString(schemas.CreateAccountSubscriptionRequest_DirectoryId, *v.DirectoryId)
+	}
+	if v.Edition != "" {
+		s.WriteString(schemas.CreateAccountSubscriptionRequest_Edition, string(v.Edition))
+	}
+	if v.EmailAddress != nil {
+		s.WriteString(schemas.CreateAccountSubscriptionRequest_EmailAddress, *v.EmailAddress)
+	}
+	if v.FirstName != nil {
+		s.WriteString(schemas.CreateAccountSubscriptionRequest_FirstName, *v.FirstName)
+	}
+	if v.IAMIdentityCenterInstanceArn != nil {
+		s.WriteString(schemas.CreateAccountSubscriptionRequest_IAMIdentityCenterInstanceArn, *v.IAMIdentityCenterInstanceArn)
+	}
+	if v.LastName != nil {
+		s.WriteString(schemas.CreateAccountSubscriptionRequest_LastName, *v.LastName)
+	}
+	if v.NotificationEmail != nil {
+		s.WriteString(schemas.CreateAccountSubscriptionRequest_NotificationEmail, *v.NotificationEmail)
+	}
+	serializeGroupsList(s, schemas.CreateAccountSubscriptionRequest_ReaderGroup, v.ReaderGroup)
+	serializeGroupsList(s, schemas.CreateAccountSubscriptionRequest_ReaderProGroup, v.ReaderProGroup)
+	if v.Realm != nil {
+		s.WriteString(schemas.CreateAccountSubscriptionRequest_Realm, *v.Realm)
+	}
+}
+
 type CreateAccountSubscriptionOutput struct {
 
 	// The Amazon Web Services request ID for this operation.
@@ -223,13 +279,45 @@ type CreateAccountSubscriptionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateAccountSubscriptionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateAccountSubscriptionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateAccountSubscriptionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RequestId != nil {
+		s.WriteString(schemas.CreateAccountSubscriptionResponse_RequestId, *v.RequestId)
+	}
+	if v.SignupResponse != nil {
+		s.WriteStruct(schemas.CreateAccountSubscriptionResponse_SignupResponse)
+		v.SignupResponse.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Status != 0 {
+		s.WriteInt32(schemas.CreateAccountSubscriptionResponse_Status, v.Status)
+	}
+}
+func (v *CreateAccountSubscriptionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateAccountSubscriptionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateAccountSubscriptionResponse_RequestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.CreateAccountSubscriptionResponse_RequestId, v.RequestId)
+		case schemas.CreateAccountSubscriptionResponse_SignupResponse:
+			v.SignupResponse = &types.SignupResponse{}
+			return v.SignupResponse.Deserialize(d)
+		case schemas.CreateAccountSubscriptionResponse_Status:
+			return d.ReadInt32(schemas.CreateAccountSubscriptionResponse_Status, &v.Status)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateAccountSubscriptionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateAccountSubscription{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateAccountSubscription, schemas.CreateAccountSubscriptionRequest, schemas.CreateAccountSubscriptionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateAccountSubscription{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateAccountSubscription, schemas.CreateAccountSubscriptionRequest, schemas.CreateAccountSubscriptionResponse), output: &CreateAccountSubscriptionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

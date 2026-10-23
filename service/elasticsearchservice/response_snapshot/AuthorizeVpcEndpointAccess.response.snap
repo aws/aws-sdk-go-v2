@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"AuthorizedPrincipal":{"Principal":"__Principal__","PrincipalType":"AWS_ACCOUNT"}}

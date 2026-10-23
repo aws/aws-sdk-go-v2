@@ -58,7 +58,9 @@ var MessageEvent_body *smithy.Schema
 var ResourceNotFound = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "aws.kitchensinktestrestjson",
 	Name:      "ResourceNotFound",
-}, smithy.ShapeTypeStructure, 0, &smithytraits.HTTPError{Code: 404})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 404})
+var ResourceNotFound_message *smithy.Schema
 
 var _StreamingPayload = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "aws.kitchensinktestrestjson",
@@ -118,6 +120,8 @@ func init() {
 	MessageEvent_body = MessageEvent.AddMember("body", smithyprelude.String)
 
 	Events_message = Events.AddMember("message", MessageEvent)
+
+	ResourceNotFound_message = ResourceNotFound.AddMember("message", smithyprelude.String)
 
 	GetResourceInput_id = GetResourceInput.AddMember("id", smithyprelude.String, &smithytraits.HTTPLabel{})
 

@@ -5,7 +5,9 @@ package bedrock
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/bedrock/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrock/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -88,6 +90,48 @@ type ListCustomModelsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListCustomModelsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListCustomModelsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListCustomModelsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BaseModelArnEquals != nil {
+		s.WriteString(schemas.ListCustomModelsRequest_baseModelArnEquals, *v.BaseModelArnEquals)
+	}
+	if v.CreationTimeAfter != nil {
+		s.WriteTime(schemas.ListCustomModelsRequest_creationTimeAfter, *v.CreationTimeAfter)
+	}
+	if v.CreationTimeBefore != nil {
+		s.WriteTime(schemas.ListCustomModelsRequest_creationTimeBefore, *v.CreationTimeBefore)
+	}
+	if v.FoundationModelArnEquals != nil {
+		s.WriteString(schemas.ListCustomModelsRequest_foundationModelArnEquals, *v.FoundationModelArnEquals)
+	}
+	if v.IsOwned != nil {
+		s.WriteBool(schemas.ListCustomModelsRequest_isOwned, *v.IsOwned)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListCustomModelsRequest_maxResults, *v.MaxResults)
+	}
+	if v.ModelStatus != "" {
+		s.WriteString(schemas.ListCustomModelsRequest_modelStatus, string(v.ModelStatus))
+	}
+	if v.NameContains != nil {
+		s.WriteString(schemas.ListCustomModelsRequest_nameContains, *v.NameContains)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListCustomModelsRequest_nextToken, *v.NextToken)
+	}
+	if v.SortBy != "" {
+		s.WriteString(schemas.ListCustomModelsRequest_sortBy, string(v.SortBy))
+	}
+	if v.SortOrder != "" {
+		s.WriteString(schemas.ListCustomModelsRequest_sortOrder, string(v.SortOrder))
+	}
+}
+
 type ListCustomModelsOutput struct {
 
 	// Model summaries.
@@ -104,13 +148,35 @@ type ListCustomModelsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListCustomModelsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListCustomModelsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListCustomModelsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeCustomModelSummaryList(s, schemas.ListCustomModelsResponse_modelSummaries, v.ModelSummaries)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListCustomModelsResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListCustomModelsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListCustomModelsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListCustomModelsResponse_modelSummaries:
+			return deserializeCustomModelSummaryList(d, schemas.ListCustomModelsResponse_modelSummaries, &v.ModelSummaries)
+		case schemas.ListCustomModelsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListCustomModelsResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListCustomModelsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListCustomModels{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListCustomModels, schemas.ListCustomModelsRequest, schemas.ListCustomModelsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListCustomModels{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListCustomModels, schemas.ListCustomModelsRequest, schemas.ListCustomModelsResponse), output: &ListCustomModelsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

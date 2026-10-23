@@ -224,6 +224,33 @@ func TestUpdateResponseSnapshot_AssociateTrialComponent(t *testing.T) {
 	}
 }
 
+func TestUpdateResponseSnapshot_AttachClusterNodeNetworkInterface(t *testing.T) {
+	want := &AttachClusterNodeNetworkInterfaceOutput{
+		ClusterArn:         ptr.String("__ClusterArn__"),
+		NodeId:             ptr.String("__NodeId__"),
+		NetworkInterfaceId: ptr.String("__NetworkInterfaceId__"),
+		AttachmentId:       ptr.String("__AttachmentId__"),
+	}
+	proto := awsjson.New11(schemas.SageMaker)
+	opSchema := smithy.NewOperationSchema(schemas.AttachClusterNodeNetworkInterface, schemas.AttachClusterNodeNetworkInterfaceResponse, schemas.AttachClusterNodeNetworkInterfaceResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("AttachClusterNodeNetworkInterface.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateResponseSnapshot_AttachClusterNodeVolume(t *testing.T) {
 	want := &AttachClusterNodeVolumeOutput{
 		ClusterArn: ptr.String("__ClusterArn__"),
@@ -2316,6 +2343,30 @@ func TestUpdateResponseSnapshot_CreateTrainingPlan(t *testing.T) {
 	}
 }
 
+func TestUpdateResponseSnapshot_CreateTrainingSession(t *testing.T) {
+	want := &CreateTrainingSessionOutput{
+		TrainingSessionArn: ptr.String("__TrainingSessionArn__"),
+	}
+	proto := awsjson.New11(schemas.SageMaker)
+	opSchema := smithy.NewOperationSchema(schemas.CreateTrainingSession, schemas.CreateTrainingSessionResponse, schemas.CreateTrainingSessionResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("CreateTrainingSession.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateResponseSnapshot_CreateTransformJob(t *testing.T) {
 	want := &CreateTransformJobOutput{
 		TransformJobArn: ptr.String("__TransformJobArn__"),
@@ -3739,6 +3790,28 @@ func TestUpdateResponseSnapshot_DeleteTrainingJob(t *testing.T) {
 		body = b
 	}
 	if err := serdeRespWriteSnapshot("DeleteTrainingJob.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_DeleteTrainingSession(t *testing.T) {
+	want := &DeleteTrainingSessionOutput{}
+	proto := awsjson.New11(schemas.SageMaker)
+	opSchema := smithy.NewOperationSchema(schemas.DeleteTrainingSession, schemas.DeleteTrainingSessionResponse, schemas.DeleteTrainingSessionResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("DeleteTrainingSession.response", 200, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -6323,6 +6396,12 @@ func TestUpdateResponseSnapshot_DescribeCluster(t *testing.T) {
 			},
 			Slurm: &types.ClusterOrchestratorSlurmConfig{
 				SlurmConfigStrategy: types.ClusterSlurmConfigStrategy("Overwrite"),
+				AccountingDatabase: &types.ClusterAccountingDatabase{
+					Endpoint:  ptr.String("__Endpoint__"),
+					Port:      ptr.Int32(1),
+					Name:      ptr.String("__Name__"),
+					SecretArn: ptr.String("__SecretArn__"),
+				},
 			},
 		},
 		TieredStorageConfig: &types.ClusterTieredStorageConfig{
@@ -14752,6 +14831,80 @@ func TestUpdateResponseSnapshot_DescribeTrainingPlanExtensionHistory(t *testing.
 	}
 }
 
+func TestUpdateResponseSnapshot_DescribeTrainingSession(t *testing.T) {
+	want := &DescribeTrainingSessionOutput{
+		TrainingSessionDetail: &types.TrainingSessionDetail{
+			TrainingSessionArn:         ptr.String("__TrainingSessionArn__"),
+			TrainingSessionName:        ptr.String("__TrainingSessionName__"),
+			TrainingSessionStatus:      types.TrainingSessionStatus("Created"),
+			ModelPackageGroupArn:       ptr.String("__ModelPackageGroupArn__"),
+			CreationTime:               ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			LastModifiedTime:           ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			EndTime:                    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			ErrorDetails:               ptr.String("__ErrorDetails__"),
+			LastReceivedSequenceNumber: ptr.Int32(1),
+			BillableTokenUsage: &types.BillableTokenUsage{
+				PrefillTokenCount:  ptr.Int64(1),
+				SampleTokenCount:   ptr.Int64(1),
+				TrainingTokenCount: ptr.Int64(1),
+			},
+			VpcConfig: &types.VpcConfig{
+				SecurityGroupIds: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Subnets: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			RoleArn: ptr.String("__RoleArn__"),
+			LoraConfig: &types.LoraConfig{
+				Rank:  ptr.Int32(1),
+				Alpha: ptr.Int32(1),
+			},
+			ModelConfig: &types.TrainingSessionModelConfig{
+				BaseModelArn: ptr.String("__BaseModelArn__"),
+				AcceptEula:   ptr.Bool(true),
+			},
+			OutputConfig: &types.TrainingSessionOutputConfig{
+				S3Location: &types.TrainingSessionS3Location{
+					Path:      ptr.String("__Path__"),
+					KmsKeyArn: ptr.String("__KmsKeyArn__"),
+				},
+			},
+			Tags: []types.Tag{
+				{
+					Key:   ptr.String("__Key__"),
+					Value: ptr.String("__Value__"),
+				},
+				{
+					Key:   ptr.String("__Key__"),
+					Value: ptr.String("__Value__"),
+				},
+			},
+		},
+	}
+	proto := awsjson.New11(schemas.SageMaker)
+	opSchema := smithy.NewOperationSchema(schemas.DescribeTrainingSession, schemas.DescribeTrainingSessionResponse, schemas.DescribeTrainingSessionResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("DescribeTrainingSession.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateResponseSnapshot_DescribeTransformJob(t *testing.T) {
 	want := &DescribeTransformJobOutput{
 		TransformJobName:        ptr.String("__TransformJobName__"),
@@ -19601,6 +19754,12 @@ func TestUpdateResponseSnapshot_ListPipelineExecutionSteps(t *testing.T) {
 						StepName:    ptr.String("__StepName__"),
 						LogFilePath: ptr.String("__LogFilePath__"),
 					},
+					EMRServerless: &types.EMRServerlessStepMetadata{
+						ApplicationId: ptr.String("__ApplicationId__"),
+						JobRunId:      ptr.String("__JobRunId__"),
+						JobRunName:    ptr.String("__JobRunName__"),
+						LogFilePath:   ptr.String("__LogFilePath__"),
+					},
 					QualityCheck: &types.QualityCheckStepMetadata{
 						CheckType:                            ptr.String("__CheckType__"),
 						BaselineUsedForDriftCheckStatistics:  ptr.String("__BaselineUsedForDriftCheckStatistics__"),
@@ -19674,10 +19833,53 @@ func TestUpdateResponseSnapshot_ListPipelineExecutionSteps(t *testing.T) {
 					Job: &types.JobStepMetadata{
 						Arn: ptr.String("__Arn__"),
 					},
+					Athena: &types.AthenaStepMetadata{
+						QueryExecutionId: ptr.String("__QueryExecutionId__"),
+						S3OutputLocation: ptr.String("__S3OutputLocation__"),
+					},
+					Cleanup: &types.CleanupStepMetadata{
+						CleanedSteps: []string{
+							"__Member__",
+							"__Member__",
+						},
+						FailedSteps: []types.CleanupFailure{
+							{
+								StepName:     ptr.String("__StepName__"),
+								ErrorCode:    types.CleanupFailureErrorCode("ClientError"),
+								ErrorMessage: ptr.String("__ErrorMessage__"),
+							},
+							{
+								StepName:     ptr.String("__StepName__"),
+								ErrorCode:    types.CleanupFailureErrorCode("ClientError"),
+								ErrorMessage: ptr.String("__ErrorMessage__"),
+							},
+						},
+						SkippedSteps: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					ForEach: &types.ForEachStepMetadata{
+						Status:             types.ForEachStatus("Succeeded"),
+						InputItemCount:     ptr.Int32(1),
+						TotalStepCount:     ptr.Int32(1),
+						SucceededStepCount: ptr.Int32(1),
+						FailedStepCount:    ptr.Int32(1),
+						StoppedStepCount:   ptr.Int32(1),
+						Selector: &types.ForEachSelectorResult{
+							StepName: ptr.String("__StepName__"),
+							Index:    ptr.Int32(1),
+						},
+					},
 				},
 				AttemptCount: ptr.Int32(1),
 				SelectiveExecutionResult: &types.SelectiveExecutionResult{
 					SourcePipelineExecutionArn: ptr.String("__SourcePipelineExecutionArn__"),
+				},
+				IterationContext: &types.IterationContext{
+					ParentStepName: ptr.String("__ParentStepName__"),
+					Index:          ptr.Int32(1),
+					Item:           ptr.String("__Item__"),
 				},
 			},
 			{
@@ -19746,6 +19948,12 @@ func TestUpdateResponseSnapshot_ListPipelineExecutionSteps(t *testing.T) {
 						StepName:    ptr.String("__StepName__"),
 						LogFilePath: ptr.String("__LogFilePath__"),
 					},
+					EMRServerless: &types.EMRServerlessStepMetadata{
+						ApplicationId: ptr.String("__ApplicationId__"),
+						JobRunId:      ptr.String("__JobRunId__"),
+						JobRunName:    ptr.String("__JobRunName__"),
+						LogFilePath:   ptr.String("__LogFilePath__"),
+					},
 					QualityCheck: &types.QualityCheckStepMetadata{
 						CheckType:                            ptr.String("__CheckType__"),
 						BaselineUsedForDriftCheckStatistics:  ptr.String("__BaselineUsedForDriftCheckStatistics__"),
@@ -19819,10 +20027,53 @@ func TestUpdateResponseSnapshot_ListPipelineExecutionSteps(t *testing.T) {
 					Job: &types.JobStepMetadata{
 						Arn: ptr.String("__Arn__"),
 					},
+					Athena: &types.AthenaStepMetadata{
+						QueryExecutionId: ptr.String("__QueryExecutionId__"),
+						S3OutputLocation: ptr.String("__S3OutputLocation__"),
+					},
+					Cleanup: &types.CleanupStepMetadata{
+						CleanedSteps: []string{
+							"__Member__",
+							"__Member__",
+						},
+						FailedSteps: []types.CleanupFailure{
+							{
+								StepName:     ptr.String("__StepName__"),
+								ErrorCode:    types.CleanupFailureErrorCode("ClientError"),
+								ErrorMessage: ptr.String("__ErrorMessage__"),
+							},
+							{
+								StepName:     ptr.String("__StepName__"),
+								ErrorCode:    types.CleanupFailureErrorCode("ClientError"),
+								ErrorMessage: ptr.String("__ErrorMessage__"),
+							},
+						},
+						SkippedSteps: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					ForEach: &types.ForEachStepMetadata{
+						Status:             types.ForEachStatus("Succeeded"),
+						InputItemCount:     ptr.Int32(1),
+						TotalStepCount:     ptr.Int32(1),
+						SucceededStepCount: ptr.Int32(1),
+						FailedStepCount:    ptr.Int32(1),
+						StoppedStepCount:   ptr.Int32(1),
+						Selector: &types.ForEachSelectorResult{
+							StepName: ptr.String("__StepName__"),
+							Index:    ptr.Int32(1),
+						},
+					},
 				},
 				AttemptCount: ptr.Int32(1),
 				SelectiveExecutionResult: &types.SelectiveExecutionResult{
 					SourcePipelineExecutionArn: ptr.String("__SourcePipelineExecutionArn__"),
+				},
+				IterationContext: &types.IterationContext{
+					ParentStepName: ptr.String("__ParentStepName__"),
+					Index:          ptr.Int32(1),
+					Item:           ptr.String("__Item__"),
 				},
 			},
 		},
@@ -20624,6 +20875,44 @@ func TestUpdateResponseSnapshot_ListTrainingPlans(t *testing.T) {
 		body = b
 	}
 	if err := serdeRespWriteSnapshot("ListTrainingPlans.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_ListTrainingSessions(t *testing.T) {
+	want := &ListTrainingSessionsOutput{
+		NextToken: ptr.String("__NextToken__"),
+		TrainingSessionSummaries: []types.TrainingSessionSummary{
+			{
+				TrainingSessionArn:    ptr.String("__TrainingSessionArn__"),
+				TrainingSessionStatus: types.TrainingSessionStatus("Created"),
+				CreationTime:          ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				LastModifiedTime:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+			{
+				TrainingSessionArn:    ptr.String("__TrainingSessionArn__"),
+				TrainingSessionStatus: types.TrainingSessionStatus("Created"),
+				CreationTime:          ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				LastModifiedTime:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+		},
+	}
+	proto := awsjson.New11(schemas.SageMaker)
+	opSchema := smithy.NewOperationSchema(schemas.ListTrainingSessions, schemas.ListTrainingSessionsResponse, schemas.ListTrainingSessionsResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("ListTrainingSessions.response", 200, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -26466,6 +26755,50 @@ func TestUpdateResponseSnapshot_Search(t *testing.T) {
 						},
 					},
 				},
+				HubContent: &types.HubContent{
+					HubContentName:               ptr.String("__HubContentName__"),
+					HubContentArn:                ptr.String("__HubContentArn__"),
+					HubContentVersion:            ptr.String("__HubContentVersion__"),
+					HubContentType:               types.HubContentType("Model"),
+					DocumentSchemaVersion:        ptr.String("__DocumentSchemaVersion__"),
+					HubName:                      ptr.String("__HubName__"),
+					HubArn:                       ptr.String("__HubArn__"),
+					HubContentDisplayName:        ptr.String("__HubContentDisplayName__"),
+					HubContentDescription:        ptr.String("__HubContentDescription__"),
+					HubContentMarkdown:           ptr.String("__HubContentMarkdown__"),
+					HubContentDocument:           ptr.String("__HubContentDocument__"),
+					SageMakerPublicHubContentArn: ptr.String("__SageMakerPublicHubContentArn__"),
+					ReferenceMinVersion:          ptr.String("__ReferenceMinVersion__"),
+					SupportStatus:                types.HubContentSupportStatus("Supported"),
+					HubContentSearchKeywords: []string{
+						"__Member__",
+						"__Member__",
+					},
+					HubContentDependencies: []types.HubContentDependency{
+						{
+							DependencyOriginPath: ptr.String("__DependencyOriginPath__"),
+							DependencyCopyPath:   ptr.String("__DependencyCopyPath__"),
+						},
+						{
+							DependencyOriginPath: ptr.String("__DependencyOriginPath__"),
+							DependencyCopyPath:   ptr.String("__DependencyCopyPath__"),
+						},
+					},
+					HubContentStatus: types.HubContentStatus("Available"),
+					FailureReason:    ptr.String("__FailureReason__"),
+					CreationTime:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					LastModifiedTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					Tags: []types.Tag{
+						{
+							Key:   ptr.String("__Key__"),
+							Value: ptr.String("__Value__"),
+						},
+						{
+							Key:   ptr.String("__Key__"),
+							Value: ptr.String("__Value__"),
+						},
+					},
+				},
 			},
 			{
 				TrainingJob: &types.TrainingJob{
@@ -31620,6 +31953,50 @@ func TestUpdateResponseSnapshot_Search(t *testing.T) {
 						},
 					},
 				},
+				HubContent: &types.HubContent{
+					HubContentName:               ptr.String("__HubContentName__"),
+					HubContentArn:                ptr.String("__HubContentArn__"),
+					HubContentVersion:            ptr.String("__HubContentVersion__"),
+					HubContentType:               types.HubContentType("Model"),
+					DocumentSchemaVersion:        ptr.String("__DocumentSchemaVersion__"),
+					HubName:                      ptr.String("__HubName__"),
+					HubArn:                       ptr.String("__HubArn__"),
+					HubContentDisplayName:        ptr.String("__HubContentDisplayName__"),
+					HubContentDescription:        ptr.String("__HubContentDescription__"),
+					HubContentMarkdown:           ptr.String("__HubContentMarkdown__"),
+					HubContentDocument:           ptr.String("__HubContentDocument__"),
+					SageMakerPublicHubContentArn: ptr.String("__SageMakerPublicHubContentArn__"),
+					ReferenceMinVersion:          ptr.String("__ReferenceMinVersion__"),
+					SupportStatus:                types.HubContentSupportStatus("Supported"),
+					HubContentSearchKeywords: []string{
+						"__Member__",
+						"__Member__",
+					},
+					HubContentDependencies: []types.HubContentDependency{
+						{
+							DependencyOriginPath: ptr.String("__DependencyOriginPath__"),
+							DependencyCopyPath:   ptr.String("__DependencyCopyPath__"),
+						},
+						{
+							DependencyOriginPath: ptr.String("__DependencyOriginPath__"),
+							DependencyCopyPath:   ptr.String("__DependencyCopyPath__"),
+						},
+					},
+					HubContentStatus: types.HubContentStatus("Available"),
+					FailureReason:    ptr.String("__FailureReason__"),
+					CreationTime:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					LastModifiedTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					Tags: []types.Tag{
+						{
+							Key:   ptr.String("__Key__"),
+							Value: ptr.String("__Value__"),
+						},
+						{
+							Key:   ptr.String("__Key__"),
+							Value: ptr.String("__Value__"),
+						},
+					},
+				},
 			},
 		},
 		NextToken: ptr.String("__NextToken__"),
@@ -32417,6 +32794,28 @@ func TestUpdateResponseSnapshot_StopTrainingJob(t *testing.T) {
 		body = b
 	}
 	if err := serdeRespWriteSnapshot("StopTrainingJob.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_StopTrainingSession(t *testing.T) {
+	want := &StopTrainingSessionOutput{}
+	proto := awsjson.New11(schemas.SageMaker)
+	opSchema := smithy.NewOperationSchema(schemas.StopTrainingSession, schemas.StopTrainingSessionResponse, schemas.StopTrainingSessionResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("StopTrainingSession.response", 200, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
 }

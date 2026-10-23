@@ -4,6 +4,8 @@ package sesv2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/sesv2/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -44,6 +46,21 @@ type DeleteSuppressedDestinationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteSuppressedDestinationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteSuppressedDestinationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteSuppressedDestinationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EmailAddress != nil {
+		s.WriteString(schemas.DeleteSuppressedDestinationRequest_EmailAddress, *v.EmailAddress)
+	}
+	if v.TenantName != nil {
+		s.WriteString(schemas.DeleteSuppressedDestinationRequest_TenantName, *v.TenantName)
+	}
+}
+
 // An HTTP 200 response if the request succeeds, or an error message if the
 // request fails.
 type DeleteSuppressedDestinationOutput struct {
@@ -53,13 +70,26 @@ type DeleteSuppressedDestinationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteSuppressedDestinationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteSuppressedDestinationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteSuppressedDestinationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteSuppressedDestinationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteSuppressedDestinationResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteSuppressedDestinationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteSuppressedDestination{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteSuppressedDestination, schemas.DeleteSuppressedDestinationRequest, schemas.DeleteSuppressedDestinationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteSuppressedDestination{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteSuppressedDestination, schemas.DeleteSuppressedDestinationRequest, schemas.DeleteSuppressedDestinationResponse), output: &DeleteSuppressedDestinationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

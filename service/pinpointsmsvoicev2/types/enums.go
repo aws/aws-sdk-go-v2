@@ -903,6 +903,8 @@ type PhoneNumberType string
 const (
 	PhoneNumberTypeMobile   PhoneNumberType = "MOBILE"
 	PhoneNumberTypeLandline PhoneNumberType = "LANDLINE"
+	PhoneNumberTypeVoip     PhoneNumberType = "VOIP"
+	PhoneNumberTypePrepaid  PhoneNumberType = "PREPAID"
 	PhoneNumberTypeOther    PhoneNumberType = "OTHER"
 	PhoneNumberTypeInvalid  PhoneNumberType = "INVALID"
 )
@@ -915,6 +917,8 @@ func (PhoneNumberType) Values() []PhoneNumberType {
 	return []PhoneNumberType{
 		"MOBILE",
 		"LANDLINE",
+		"VOIP",
+		"PREPAID",
 		"OTHER",
 		"INVALID",
 	}

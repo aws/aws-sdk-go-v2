@@ -4,7 +4,9 @@ package elementalinference
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/elementalinference/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/elementalinference/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -56,6 +58,23 @@ type CreateFeedInput struct {
 	Tags map[string]string
 
 	noSmithyDocumentSerde
+}
+
+func (v *CreateFeedInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateFeedRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateFeedInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccessRoleArn != nil {
+		s.WriteString(schemas.CreateFeedRequest_accessRoleArn, *v.AccessRoleArn)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateFeedRequest_name, *v.Name)
+	}
+	serializeCreateOutputList(s, schemas.CreateFeedRequest_outputs, v.Outputs)
+	serializeTagMap(s, schemas.CreateFeedRequest_tags, v.Tags)
 }
 
 type CreateFeedOutput struct {
@@ -113,13 +132,77 @@ type CreateFeedOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateFeedOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateFeedResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateFeedOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccessRoleArn != nil {
+		s.WriteString(schemas.CreateFeedResponse_accessRoleArn, *v.AccessRoleArn)
+	}
+	if v.Arn != nil {
+		s.WriteString(schemas.CreateFeedResponse_arn, *v.Arn)
+	}
+	if v.Association != nil {
+		s.WriteStruct(schemas.CreateFeedResponse_association)
+		v.Association.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeStringList(s, schemas.CreateFeedResponse_dataEndpoints, v.DataEndpoints)
+	if v.Id != nil {
+		s.WriteString(schemas.CreateFeedResponse_id, *v.Id)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateFeedResponse_name, *v.Name)
+	}
+	serializeGetOutputList(s, schemas.CreateFeedResponse_outputs, v.Outputs)
+	if v.Status != "" {
+		s.WriteString(schemas.CreateFeedResponse_status, string(v.Status))
+	}
+	serializeTagMap(s, schemas.CreateFeedResponse_tags, v.Tags)
+}
+func (v *CreateFeedOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateFeedResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateFeedResponse_accessRoleArn:
+			v.AccessRoleArn = new(string)
+			return d.ReadString(schemas.CreateFeedResponse_accessRoleArn, v.AccessRoleArn)
+		case schemas.CreateFeedResponse_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.CreateFeedResponse_arn, v.Arn)
+		case schemas.CreateFeedResponse_association:
+			v.Association = &types.FeedAssociation{}
+			return v.Association.Deserialize(d)
+		case schemas.CreateFeedResponse_dataEndpoints:
+			return deserializeStringList(d, schemas.CreateFeedResponse_dataEndpoints, &v.DataEndpoints)
+		case schemas.CreateFeedResponse_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.CreateFeedResponse_id, v.Id)
+		case schemas.CreateFeedResponse_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.CreateFeedResponse_name, v.Name)
+		case schemas.CreateFeedResponse_outputs:
+			return deserializeGetOutputList(d, schemas.CreateFeedResponse_outputs, &v.Outputs)
+		case schemas.CreateFeedResponse_status:
+			var ev string
+			if err := d.ReadString(schemas.CreateFeedResponse_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.FeedStatus(ev)
+			return nil
+		case schemas.CreateFeedResponse_tags:
+			return deserializeTagMap(d, schemas.CreateFeedResponse_tags, &v.Tags)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateFeedMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateFeed{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateFeed, schemas.CreateFeedRequest, schemas.CreateFeedResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateFeed{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateFeed, schemas.CreateFeedRequest, schemas.CreateFeedResponse), output: &CreateFeedOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

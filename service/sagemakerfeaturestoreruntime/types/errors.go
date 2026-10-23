@@ -4,6 +4,7 @@ package types
 
 import (
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/sagemakerfeaturestoreruntime/schemas"
 	smithy "github.com/aws/smithy-go"
 )
 
@@ -32,6 +33,27 @@ func (e *AccessForbidden) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *AccessForbidden) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *AccessForbidden) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AccessForbidden)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AccessForbidden) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.AccessForbidden_Message, *v.Message)
+	}
+}
+func (v *AccessForbidden) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AccessForbidden, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AccessForbidden_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.AccessForbidden_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The service rejected the update because the provided EventTime is older than
 // the record's current EventTime . To persist the update, retrieve the record's
@@ -61,6 +83,27 @@ func (e *ConflictException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ConflictException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *ConflictException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ConflictException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ConflictException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.ConflictException_Message, *v.Message)
+	}
+}
+func (v *ConflictException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ConflictException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ConflictException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ConflictException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // An internal failure occurred. Try your request again. If the problem persists,
 // contact Amazon Web Services customer support.
@@ -88,6 +131,27 @@ func (e *InternalFailure) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InternalFailure) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
+func (v *InternalFailure) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InternalFailure)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InternalFailure) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.InternalFailure_Message, *v.Message)
+	}
+}
+func (v *InternalFailure) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InternalFailure, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InternalFailure_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.InternalFailure_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // A resource that is required to perform an action was not found.
 type ResourceNotFound struct {
@@ -114,6 +178,27 @@ func (e *ResourceNotFound) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ResourceNotFound) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *ResourceNotFound) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ResourceNotFound)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ResourceNotFound) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.ResourceNotFound_Message, *v.Message)
+	}
+}
+func (v *ResourceNotFound) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ResourceNotFound, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ResourceNotFound_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ResourceNotFound_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The service is currently unavailable.
 type ServiceUnavailable struct {
@@ -140,6 +225,27 @@ func (e *ServiceUnavailable) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ServiceUnavailable) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
+func (v *ServiceUnavailable) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ServiceUnavailable)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ServiceUnavailable) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.ServiceUnavailable_Message, *v.Message)
+	}
+}
+func (v *ServiceUnavailable) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ServiceUnavailable, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ServiceUnavailable_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ServiceUnavailable_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // There was an error validating your request.
 type ValidationError struct {
@@ -166,3 +272,24 @@ func (e *ValidationError) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ValidationError) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *ValidationError) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ValidationError)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ValidationError) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.ValidationError_Message, *v.Message)
+	}
+}
+func (v *ValidationError) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ValidationError, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ValidationError_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ValidationError_Message, v.Message)
+		}
+		return nil
+	})
+}

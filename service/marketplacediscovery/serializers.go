@@ -93,6 +93,11 @@ func awsRestjson1_serializeOpDocumentGetListingInput(v *GetListingInput, value s
 		ok.String(*v.ListingId)
 	}
 
+	if v.Locale != nil {
+		ok := object.Key("locale")
+		ok.String(*v.Locale)
+	}
+
 	return nil
 }
 
@@ -168,6 +173,11 @@ func awsRestjson1_serializeOpHttpBindingsGetOfferInput(v *GetOfferInput, encoder
 func awsRestjson1_serializeOpDocumentGetOfferInput(v *GetOfferInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.Locale != nil {
+		ok := object.Key("locale")
+		ok.String(*v.Locale)
+	}
 
 	if v.OfferId != nil {
 		ok := object.Key("offerId")
@@ -250,6 +260,11 @@ func awsRestjson1_serializeOpDocumentGetOfferSetInput(v *GetOfferSetInput, value
 	object := value.Object()
 	defer object.Close()
 
+	if v.Locale != nil {
+		ok := object.Key("locale")
+		ok.String(*v.Locale)
+	}
+
 	if v.OfferSetId != nil {
 		ok := object.Key("offerSetId")
 		ok.String(*v.OfferSetId)
@@ -330,6 +345,11 @@ func awsRestjson1_serializeOpHttpBindingsGetOfferTermsInput(v *GetOfferTermsInpu
 func awsRestjson1_serializeOpDocumentGetOfferTermsInput(v *GetOfferTermsInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.Locale != nil {
+		ok := object.Key("locale")
+		ok.String(*v.Locale)
+	}
 
 	if v.MaxResults != nil {
 		ok := object.Key("maxResults")
@@ -422,6 +442,11 @@ func awsRestjson1_serializeOpDocumentGetProductInput(v *GetProductInput, value s
 	object := value.Object()
 	defer object.Close()
 
+	if v.Locale != nil {
+		ok := object.Key("locale")
+		ok.String(*v.Locale)
+	}
+
 	if v.ProductId != nil {
 		ok := object.Key("productId")
 		ok.String(*v.ProductId)
@@ -502,6 +527,11 @@ func awsRestjson1_serializeOpHttpBindingsListFulfillmentOptionsInput(v *ListFulf
 func awsRestjson1_serializeOpDocumentListFulfillmentOptionsInput(v *ListFulfillmentOptionsInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.Locale != nil {
+		ok := object.Key("locale")
+		ok.String(*v.Locale)
+	}
 
 	if v.MaxResults != nil {
 		ok := object.Key("maxResults")
@@ -599,6 +629,11 @@ func awsRestjson1_serializeOpDocumentListPurchaseOptionsInput(v *ListPurchaseOpt
 		if err := awsRestjson1_serializeDocumentPurchaseOptionFilterList(v.Filters, ok); err != nil {
 			return err
 		}
+	}
+
+	if v.Locale != nil {
+		ok := object.Key("locale")
+		ok.String(*v.Locale)
 	}
 
 	if v.MaxResults != nil {
@@ -701,6 +736,11 @@ func awsRestjson1_serializeOpDocumentSearchFacetsInput(v *SearchFacetsInput, val
 		}
 	}
 
+	if v.Locale != nil {
+		ok := object.Key("locale")
+		ok.String(*v.Locale)
+	}
+
 	if v.NextToken != nil {
 		ok := object.Key("nextToken")
 		ok.String(*v.NextToken)
@@ -792,6 +832,11 @@ func awsRestjson1_serializeOpDocumentSearchListingsInput(v *SearchListingsInput,
 		if err := awsRestjson1_serializeDocumentSearchFilterList(v.Filters, ok); err != nil {
 			return err
 		}
+	}
+
+	if v.Locale != nil {
+		ok := object.Key("locale")
+		ok.String(*v.Locale)
 	}
 
 	if v.MaxResults != nil {

@@ -5,7 +5,9 @@ package sesv2
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/sesv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sesv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -45,6 +47,21 @@ type ListMultiRegionEndpointsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListMultiRegionEndpointsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListMultiRegionEndpointsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListMultiRegionEndpointsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListMultiRegionEndpointsRequest_NextToken, *v.NextToken)
+	}
+	if v.PageSize != nil {
+		s.WriteInt32(schemas.ListMultiRegionEndpointsRequest_PageSize, *v.PageSize)
+	}
+}
+
 // The following elements are returned by the service.
 type ListMultiRegionEndpointsOutput struct {
 
@@ -62,13 +79,35 @@ type ListMultiRegionEndpointsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListMultiRegionEndpointsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListMultiRegionEndpointsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListMultiRegionEndpointsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeMultiRegionEndpoints(s, schemas.ListMultiRegionEndpointsResponse_MultiRegionEndpoints, v.MultiRegionEndpoints)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListMultiRegionEndpointsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListMultiRegionEndpointsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListMultiRegionEndpointsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListMultiRegionEndpointsResponse_MultiRegionEndpoints:
+			return deserializeMultiRegionEndpoints(d, schemas.ListMultiRegionEndpointsResponse_MultiRegionEndpoints, &v.MultiRegionEndpoints)
+		case schemas.ListMultiRegionEndpointsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListMultiRegionEndpointsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListMultiRegionEndpointsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListMultiRegionEndpoints{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListMultiRegionEndpoints, schemas.ListMultiRegionEndpointsRequest, schemas.ListMultiRegionEndpointsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListMultiRegionEndpoints{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListMultiRegionEndpoints, schemas.ListMultiRegionEndpointsRequest, schemas.ListMultiRegionEndpointsResponse), output: &ListMultiRegionEndpointsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

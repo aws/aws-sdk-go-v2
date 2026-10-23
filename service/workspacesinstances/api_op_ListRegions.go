@@ -5,7 +5,9 @@ package workspacesinstances
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/workspacesinstances/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/workspacesinstances/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,21 @@ type ListRegionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListRegionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListRegionsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListRegionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListRegionsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListRegionsRequest_NextToken, *v.NextToken)
+	}
+}
+
 // Contains the list of supported AWS regions for WorkSpaces Instances.
 type ListRegionsOutput struct {
 
@@ -56,13 +73,35 @@ type ListRegionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListRegionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListRegionsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListRegionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListRegionsResponse_NextToken, *v.NextToken)
+	}
+	serializeRegionList(s, schemas.ListRegionsResponse_Regions, v.Regions)
+}
+func (v *ListRegionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListRegionsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListRegionsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListRegionsResponse_NextToken, v.NextToken)
+		case schemas.ListRegionsResponse_Regions:
+			return deserializeRegionList(d, schemas.ListRegionsResponse_Regions, &v.Regions)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListRegionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpListRegions{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListRegions, schemas.ListRegionsRequest, schemas.ListRegionsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpListRegions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListRegions, schemas.ListRegionsRequest, schemas.ListRegionsResponse), output: &ListRegionsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

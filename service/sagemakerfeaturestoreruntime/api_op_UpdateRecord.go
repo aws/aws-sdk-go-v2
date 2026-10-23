@@ -4,7 +4,9 @@ package sagemakerfeaturestoreruntime
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/sagemakerfeaturestoreruntime/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemakerfeaturestoreruntime/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -80,6 +82,28 @@ type UpdateRecordInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateRecordInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateRecordRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateRecordInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FeatureGroupName != nil {
+		s.WriteString(schemas.UpdateRecordRequest_FeatureGroupName, *v.FeatureGroupName)
+	}
+	serializeRecord(s, schemas.UpdateRecordRequest_Features, v.Features)
+	if v.RecordIdentifierValueAsString != nil {
+		s.WriteString(schemas.UpdateRecordRequest_RecordIdentifierValueAsString, *v.RecordIdentifierValueAsString)
+	}
+	serializeTargetStores(s, schemas.UpdateRecordRequest_TargetStores, v.TargetStores)
+	if v.TtlDuration != nil {
+		s.WriteStruct(schemas.UpdateRecordRequest_TtlDuration)
+		v.TtlDuration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type UpdateRecordOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -87,13 +111,26 @@ type UpdateRecordOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateRecordOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateRecordOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *UpdateRecordOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateRecordMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateRecord{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateRecord, schemas.UpdateRecordRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateRecord{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateRecord, schemas.UpdateRecordRequest, nil), output: &UpdateRecordOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

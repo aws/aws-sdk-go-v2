@@ -4,7 +4,9 @@ package glue
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/glue/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/glue/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -34,6 +36,16 @@ type BatchGetDataQualityRulesetEvaluationRunInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchGetDataQualityRulesetEvaluationRunInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchGetDataQualityRulesetEvaluationRunRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchGetDataQualityRulesetEvaluationRunInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDataQualityRulesetEvaluationRunIdList(s, schemas.BatchGetDataQualityRulesetEvaluationRunRequest_RunIds, v.RunIds)
+}
+
 type BatchGetDataQualityRulesetEvaluationRunOutput struct {
 
 	// A list of evaluation run details for the requested run IDs.
@@ -48,13 +60,32 @@ type BatchGetDataQualityRulesetEvaluationRunOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchGetDataQualityRulesetEvaluationRunOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchGetDataQualityRulesetEvaluationRunResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchGetDataQualityRulesetEvaluationRunOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDataQualityRulesetEvaluationRunsList(s, schemas.BatchGetDataQualityRulesetEvaluationRunResponse_Runs, v.Runs)
+	serializeDataQualityRulesetEvaluationRunIdList(s, schemas.BatchGetDataQualityRulesetEvaluationRunResponse_RunsNotFound, v.RunsNotFound)
+}
+func (v *BatchGetDataQualityRulesetEvaluationRunOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchGetDataQualityRulesetEvaluationRunResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchGetDataQualityRulesetEvaluationRunResponse_Runs:
+			return deserializeDataQualityRulesetEvaluationRunsList(d, schemas.BatchGetDataQualityRulesetEvaluationRunResponse_Runs, &v.Runs)
+		case schemas.BatchGetDataQualityRulesetEvaluationRunResponse_RunsNotFound:
+			return deserializeDataQualityRulesetEvaluationRunIdList(d, schemas.BatchGetDataQualityRulesetEvaluationRunResponse_RunsNotFound, &v.RunsNotFound)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationBatchGetDataQualityRulesetEvaluationRunMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpBatchGetDataQualityRulesetEvaluationRun{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchGetDataQualityRulesetEvaluationRun, schemas.BatchGetDataQualityRulesetEvaluationRunRequest, schemas.BatchGetDataQualityRulesetEvaluationRunResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpBatchGetDataQualityRulesetEvaluationRun{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchGetDataQualityRulesetEvaluationRun, schemas.BatchGetDataQualityRulesetEvaluationRunRequest, schemas.BatchGetDataQualityRulesetEvaluationRunResponse), output: &BatchGetDataQualityRulesetEvaluationRunOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package elasticsearchservice
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/elasticsearchservice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/elasticsearchservice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -36,6 +38,16 @@ type DescribeVpcEndpointsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeVpcEndpointsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeVpcEndpointsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeVpcEndpointsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeVpcEndpointIdList(s, schemas.DescribeVpcEndpointsRequest_VpcEndpointIds, v.VpcEndpointIds)
+}
+
 // Container for response parameters to the DescribeVpcEndpoints operation. Returns a list containing
 // configuration details and status of the VPC Endpoints as well as a list
 // containing error responses of the endpoints that could not be described
@@ -57,13 +69,32 @@ type DescribeVpcEndpointsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeVpcEndpointsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeVpcEndpointsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeVpcEndpointsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeVpcEndpointErrorList(s, schemas.DescribeVpcEndpointsResponse_VpcEndpointErrors, v.VpcEndpointErrors)
+	serializeVpcEndpoints(s, schemas.DescribeVpcEndpointsResponse_VpcEndpoints, v.VpcEndpoints)
+}
+func (v *DescribeVpcEndpointsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeVpcEndpointsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeVpcEndpointsResponse_VpcEndpointErrors:
+			return deserializeVpcEndpointErrorList(d, schemas.DescribeVpcEndpointsResponse_VpcEndpointErrors, &v.VpcEndpointErrors)
+		case schemas.DescribeVpcEndpointsResponse_VpcEndpoints:
+			return deserializeVpcEndpoints(d, schemas.DescribeVpcEndpointsResponse_VpcEndpoints, &v.VpcEndpoints)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeVpcEndpointsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeVpcEndpoints{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeVpcEndpoints, schemas.DescribeVpcEndpointsRequest, schemas.DescribeVpcEndpointsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeVpcEndpoints{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeVpcEndpoints, schemas.DescribeVpcEndpointsRequest, schemas.DescribeVpcEndpointsResponse), output: &DescribeVpcEndpointsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -5,7 +5,9 @@ package ram
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/ram/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ram/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -61,6 +63,24 @@ type ListPermissionVersionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListPermissionVersionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListPermissionVersionsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListPermissionVersionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListPermissionVersionsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListPermissionVersionsRequest_nextToken, *v.NextToken)
+	}
+	if v.PermissionArn != nil {
+		s.WriteString(schemas.ListPermissionVersionsRequest_permissionArn, *v.PermissionArn)
+	}
+}
+
 type ListPermissionVersionsOutput struct {
 
 	// If present, this value indicates that more output is available than is included
@@ -79,13 +99,35 @@ type ListPermissionVersionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListPermissionVersionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListPermissionVersionsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListPermissionVersionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListPermissionVersionsResponse_nextToken, *v.NextToken)
+	}
+	serializeResourceSharePermissionList(s, schemas.ListPermissionVersionsResponse_permissions, v.Permissions)
+}
+func (v *ListPermissionVersionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListPermissionVersionsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListPermissionVersionsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListPermissionVersionsResponse_nextToken, v.NextToken)
+		case schemas.ListPermissionVersionsResponse_permissions:
+			return deserializeResourceSharePermissionList(d, schemas.ListPermissionVersionsResponse_permissions, &v.Permissions)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListPermissionVersionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListPermissionVersions{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListPermissionVersions, schemas.ListPermissionVersionsRequest, schemas.ListPermissionVersionsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListPermissionVersions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListPermissionVersions, schemas.ListPermissionVersionsRequest, schemas.ListPermissionVersionsResponse), output: &ListPermissionVersionsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

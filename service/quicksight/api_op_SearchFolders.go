@@ -5,7 +5,9 @@ package quicksight
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/quicksight/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/quicksight/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -49,6 +51,25 @@ type SearchFoldersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SearchFoldersInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SearchFoldersRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SearchFoldersInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AwsAccountId != nil {
+		s.WriteString(schemas.SearchFoldersRequest_AwsAccountId, *v.AwsAccountId)
+	}
+	serializeFolderSearchFilterList(s, schemas.SearchFoldersRequest_Filters, v.Filters)
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.SearchFoldersRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.SearchFoldersRequest_NextToken, *v.NextToken)
+	}
+}
+
 type SearchFoldersOutput struct {
 
 	// A structure that contains all of the folders in the Amazon Web Services
@@ -70,13 +91,46 @@ type SearchFoldersOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SearchFoldersOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SearchFoldersResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SearchFoldersOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeFolderSummaryList(s, schemas.SearchFoldersResponse_FolderSummaryList, v.FolderSummaryList)
+	if v.NextToken != nil {
+		s.WriteString(schemas.SearchFoldersResponse_NextToken, *v.NextToken)
+	}
+	if v.RequestId != nil {
+		s.WriteString(schemas.SearchFoldersResponse_RequestId, *v.RequestId)
+	}
+	if v.Status != 0 {
+		s.WriteInt32(schemas.SearchFoldersResponse_Status, v.Status)
+	}
+}
+func (v *SearchFoldersOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SearchFoldersResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SearchFoldersResponse_FolderSummaryList:
+			return deserializeFolderSummaryList(d, schemas.SearchFoldersResponse_FolderSummaryList, &v.FolderSummaryList)
+		case schemas.SearchFoldersResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.SearchFoldersResponse_NextToken, v.NextToken)
+		case schemas.SearchFoldersResponse_RequestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.SearchFoldersResponse_RequestId, v.RequestId)
+		case schemas.SearchFoldersResponse_Status:
+			return d.ReadInt32(schemas.SearchFoldersResponse_Status, &v.Status)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationSearchFoldersMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpSearchFolders{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SearchFolders, schemas.SearchFoldersRequest, schemas.SearchFoldersResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpSearchFolders{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SearchFolders, schemas.SearchFoldersRequest, schemas.SearchFoldersResponse), output: &SearchFoldersOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

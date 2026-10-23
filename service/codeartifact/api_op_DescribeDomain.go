@@ -4,7 +4,9 @@ package codeartifact
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/codeartifact/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/codeartifact/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -40,6 +42,21 @@ type DescribeDomainInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeDomainInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeDomainRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeDomainInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Domain != nil {
+		s.WriteString(schemas.DescribeDomainRequest_domain, *v.Domain)
+	}
+	if v.DomainOwner != nil {
+		s.WriteString(schemas.DescribeDomainRequest_domainOwner, *v.DomainOwner)
+	}
+}
+
 type DescribeDomainOutput struct {
 
 	//  Information about a domain. A domain is a container for repositories. When you
@@ -52,13 +69,34 @@ type DescribeDomainOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeDomainOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeDomainResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeDomainOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Domain != nil {
+		s.WriteStruct(schemas.DescribeDomainResult_domain)
+		v.Domain.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DescribeDomainOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeDomainResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeDomainResult_domain:
+			v.Domain = &types.DomainDescription{}
+			return v.Domain.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeDomainMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeDomain{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeDomain, schemas.DescribeDomainRequest, schemas.DescribeDomainResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeDomain{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeDomain, schemas.DescribeDomainRequest, schemas.DescribeDomainResult), output: &DescribeDomainOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

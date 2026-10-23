@@ -5,6 +5,8 @@ package invoicing
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/invoicing/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,21 @@ type DeleteInvoiceUnitInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteInvoiceUnitInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteInvoiceUnitRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteInvoiceUnitInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.DeleteInvoiceUnitRequest_ClientToken, *v.ClientToken)
+	}
+	if v.InvoiceUnitArn != nil {
+		s.WriteString(schemas.DeleteInvoiceUnitRequest_InvoiceUnitArn, *v.InvoiceUnitArn)
+	}
+}
+
 type DeleteInvoiceUnitOutput struct {
 
 	//  The ARN to identify an invoice unit. This information can't be modified or
@@ -51,13 +68,32 @@ type DeleteInvoiceUnitOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteInvoiceUnitOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteInvoiceUnitResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteInvoiceUnitOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InvoiceUnitArn != nil {
+		s.WriteString(schemas.DeleteInvoiceUnitResponse_InvoiceUnitArn, *v.InvoiceUnitArn)
+	}
+}
+func (v *DeleteInvoiceUnitOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteInvoiceUnitResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteInvoiceUnitResponse_InvoiceUnitArn:
+			v.InvoiceUnitArn = new(string)
+			return d.ReadString(schemas.DeleteInvoiceUnitResponse_InvoiceUnitArn, v.InvoiceUnitArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteInvoiceUnitMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpDeleteInvoiceUnit{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteInvoiceUnit, schemas.DeleteInvoiceUnitRequest, schemas.DeleteInvoiceUnitResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpDeleteInvoiceUnit{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteInvoiceUnit, schemas.DeleteInvoiceUnitRequest, schemas.DeleteInvoiceUnitResponse), output: &DeleteInvoiceUnitOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

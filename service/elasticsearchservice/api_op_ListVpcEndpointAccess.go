@@ -4,7 +4,9 @@ package elasticsearchservice
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/elasticsearchservice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/elasticsearchservice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -40,6 +42,21 @@ type ListVpcEndpointAccessInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListVpcEndpointAccessInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListVpcEndpointAccessRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListVpcEndpointAccessInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DomainName != nil {
+		s.WriteString(schemas.ListVpcEndpointAccessRequest_DomainName, *v.DomainName)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListVpcEndpointAccessRequest_NextToken, *v.NextToken)
+	}
+}
+
 // Container for response parameters to the ListVpcEndpointAccess operation. Returns a list of accounts
 // id and account type authorized to manage VPC endpoints.
 type ListVpcEndpointAccessOutput struct {
@@ -61,13 +78,35 @@ type ListVpcEndpointAccessOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListVpcEndpointAccessOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListVpcEndpointAccessResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListVpcEndpointAccessOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAuthorizedPrincipalList(s, schemas.ListVpcEndpointAccessResponse_AuthorizedPrincipalList, v.AuthorizedPrincipalList)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListVpcEndpointAccessResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListVpcEndpointAccessOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListVpcEndpointAccessResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListVpcEndpointAccessResponse_AuthorizedPrincipalList:
+			return deserializeAuthorizedPrincipalList(d, schemas.ListVpcEndpointAccessResponse_AuthorizedPrincipalList, &v.AuthorizedPrincipalList)
+		case schemas.ListVpcEndpointAccessResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListVpcEndpointAccessResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListVpcEndpointAccessMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListVpcEndpointAccess{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListVpcEndpointAccess, schemas.ListVpcEndpointAccessRequest, schemas.ListVpcEndpointAccessResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListVpcEndpointAccess{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListVpcEndpointAccess, schemas.ListVpcEndpointAccessRequest, schemas.ListVpcEndpointAccessResponse), output: &ListVpcEndpointAccessOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

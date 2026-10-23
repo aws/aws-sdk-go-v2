@@ -1286,6 +1286,18 @@ func TestCheckSnapshot_SearchProfiles(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_SearchRecommendations(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.SearchRecommendations(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "SearchRecommendations")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_StartRecommender(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.StartRecommender(context.Background(), nil, func(o *Options) {
@@ -2646,6 +2658,18 @@ func TestUpdateSnapshot_SearchProfiles(t *testing.T) {
 	_, err := svc.SearchProfiles(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "SearchProfiles")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_SearchRecommendations(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.SearchRecommendations(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "SearchRecommendations")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

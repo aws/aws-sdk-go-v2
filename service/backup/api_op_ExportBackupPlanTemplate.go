@@ -4,6 +4,8 @@ package backup
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/backup/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -33,6 +35,18 @@ type ExportBackupPlanTemplateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ExportBackupPlanTemplateInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ExportBackupPlanTemplateInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ExportBackupPlanTemplateInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BackupPlanId != nil {
+		s.WriteString(schemas.ExportBackupPlanTemplateInput_BackupPlanId, *v.BackupPlanId)
+	}
+}
+
 type ExportBackupPlanTemplateOutput struct {
 
 	// The body of a backup plan template in JSON format.
@@ -47,13 +61,32 @@ type ExportBackupPlanTemplateOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ExportBackupPlanTemplateOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ExportBackupPlanTemplateOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ExportBackupPlanTemplateOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BackupPlanTemplateJson != nil {
+		s.WriteString(schemas.ExportBackupPlanTemplateOutput_BackupPlanTemplateJson, *v.BackupPlanTemplateJson)
+	}
+}
+func (v *ExportBackupPlanTemplateOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ExportBackupPlanTemplateOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ExportBackupPlanTemplateOutput_BackupPlanTemplateJson:
+			v.BackupPlanTemplateJson = new(string)
+			return d.ReadString(schemas.ExportBackupPlanTemplateOutput_BackupPlanTemplateJson, v.BackupPlanTemplateJson)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationExportBackupPlanTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpExportBackupPlanTemplate{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ExportBackupPlanTemplate, schemas.ExportBackupPlanTemplateInput, schemas.ExportBackupPlanTemplateOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpExportBackupPlanTemplate{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ExportBackupPlanTemplate, schemas.ExportBackupPlanTemplateInput, schemas.ExportBackupPlanTemplateOutput), output: &ExportBackupPlanTemplateOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

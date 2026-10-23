@@ -43,7 +43,7 @@ import (
 //
 //   - PlayerLatencies . Include a set of latency values for destinations in the
 //     queue. When a request includes latency data, Amazon GameLift Servers
-//     automatically reorder the queue's locations priority list based on lowest
+//     automatically reorders the queue's locations priority list based on lowest
 //     available latency values. If a request includes latency data for multiple
 //     players, Amazon GameLift Servers calculates each location's average latency for
 //     all players and reorders to find the lowest latency across all players.
@@ -59,7 +59,7 @@ import (
 //     to use in the event that Amazon GameLift Servers fails to place the game session
 //     in any of the locations on the override list.
 //
-//   - Request a placement and prioritized based on a custom list of locations.
+//   - Request a placement and prioritize based on a custom list of locations.
 //
 //   - You can request new player sessions for a group of players. Include the
 //     DesiredPlayerSessions parameter and include at minimum a unique player ID for

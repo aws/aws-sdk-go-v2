@@ -8,6 +8,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/wellarchitected/types"
 	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
+	"github.com/aws/smithy-go/ptr"
 )
 
 // Submits user feedback on a recommendation to help improve future optimization
@@ -67,6 +68,10 @@ func (v *PutAgentRecommendationFeedbackInput) SerializeMembers(s smithy.ShapeSer
 	if v.Type != "" {
 		s.WriteString(schemas.PutAgentRecommendationFeedbackRequest_type, string(v.Type))
 	}
+}
+func (in *PutAgentRecommendationFeedbackInput) bindEndpointParams(p *EndpointParameters) {
+
+	p.SubServiceType = ptr.String("AGENT")
 }
 
 type PutAgentRecommendationFeedbackOutput struct {

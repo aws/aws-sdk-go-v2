@@ -899,6 +899,11 @@ func awsRestjson1_serializeOpDocumentCreateResponderGatewayInput(v *CreateRespon
 	object := value.Object()
 	defer object.Close()
 
+	if len(v.ClientRoutingPolicy) > 0 {
+		ok := object.Key("clientRoutingPolicy")
+		ok.String(string(v.ClientRoutingPolicy))
+	}
+
 	if v.ClientToken != nil {
 		ok := object.Key("clientToken")
 		ok.String(*v.ClientToken)
@@ -3304,6 +3309,11 @@ func awsRestjson1_serializeOpHttpBindingsUpdateResponderGatewayInput(v *UpdateRe
 func awsRestjson1_serializeOpDocumentUpdateResponderGatewayInput(v *UpdateResponderGatewayInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if len(v.ClientRoutingPolicy) > 0 {
+		ok := object.Key("clientRoutingPolicy")
+		ok.String(string(v.ClientRoutingPolicy))
+	}
 
 	if v.ClientToken != nil {
 		ok := object.Key("clientToken")

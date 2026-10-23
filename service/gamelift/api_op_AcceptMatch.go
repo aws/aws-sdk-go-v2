@@ -33,7 +33,7 @@ import (
 // failed match is handled as follows:
 //
 //   - If the ticket has one or more players who rejected the match or failed to
-//     respond, the ticket status is set CANCELLED and processing is terminated.
+//     respond, the ticket status is set to CANCELLED and processing is terminated.
 //
 //   - If all players in the ticket accepted the match, the ticket status is
 //     returned to SEARCHING to find a new match.

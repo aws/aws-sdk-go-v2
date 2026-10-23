@@ -1439,7 +1439,7 @@ var _ConfigurationStateId = smithy.NewSchema(smithy.ShapeID{
 var ConflictException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.configservice",
 	Name:      "ConflictException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var ConflictException_message *smithy.Schema
 
 var _ConformancePackArn = smithy.NewSchema(smithy.ShapeID{
@@ -1679,7 +1679,7 @@ var _ConformancePackStatusReason = smithy.NewSchema(smithy.ShapeID{
 var ConformancePackTemplateValidationException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.configservice",
 	Name:      "ConformancePackTemplateValidationException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var ConformancePackTemplateValidationException_message *smithy.Schema
 
 var Connector = smithy.NewSchema(smithy.ShapeID{
@@ -2130,7 +2130,8 @@ var _GroupedResourceCountList_member *smithy.Schema
 var IdempotentParameterMismatch = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.configservice",
 	Name:      "IdempotentParameterMismatch",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var IdempotentParameterMismatch_message *smithy.Schema
 
 var _IncludedRegions = smithy.NewSchema(smithy.ShapeID{
@@ -2147,13 +2148,13 @@ var _IncludeGlobalResourceTypes = smithy.NewSchema(smithy.ShapeID{
 var InsufficientDeliveryPolicyException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.configservice",
 	Name:      "InsufficientDeliveryPolicyException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var InsufficientDeliveryPolicyException_message *smithy.Schema
 
 var InsufficientPermissionsException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.configservice",
 	Name:      "InsufficientPermissionsException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var InsufficientPermissionsException_message *smithy.Schema
 
 var _Integer = smithy.NewSchema(smithy.ShapeID{
@@ -2164,85 +2165,85 @@ var _Integer = smithy.NewSchema(smithy.ShapeID{
 var InvalidConfigurationRecorderNameException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.configservice",
 	Name:      "InvalidConfigurationRecorderNameException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var InvalidConfigurationRecorderNameException_message *smithy.Schema
 
 var InvalidDeliveryChannelNameException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.configservice",
 	Name:      "InvalidDeliveryChannelNameException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var InvalidDeliveryChannelNameException_message *smithy.Schema
 
 var InvalidExpressionException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.configservice",
 	Name:      "InvalidExpressionException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var InvalidExpressionException_message *smithy.Schema
 
 var InvalidLimitException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.configservice",
 	Name:      "InvalidLimitException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var InvalidLimitException_message *smithy.Schema
 
 var InvalidNextTokenException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.configservice",
 	Name:      "InvalidNextTokenException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var InvalidNextTokenException_message *smithy.Schema
 
 var InvalidParameterValueException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.configservice",
 	Name:      "InvalidParameterValueException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var InvalidParameterValueException_message *smithy.Schema
 
 var InvalidRecordingGroupException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.configservice",
 	Name:      "InvalidRecordingGroupException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var InvalidRecordingGroupException_message *smithy.Schema
 
 var InvalidResultTokenException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.configservice",
 	Name:      "InvalidResultTokenException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var InvalidResultTokenException_message *smithy.Schema
 
 var InvalidRoleException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.configservice",
 	Name:      "InvalidRoleException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var InvalidRoleException_message *smithy.Schema
 
 var InvalidS3KeyPrefixException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.configservice",
 	Name:      "InvalidS3KeyPrefixException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var InvalidS3KeyPrefixException_message *smithy.Schema
 
 var InvalidS3KmsKeyArnException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.configservice",
 	Name:      "InvalidS3KmsKeyArnException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var InvalidS3KmsKeyArnException_message *smithy.Schema
 
 var InvalidSNSTopicARNException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.configservice",
 	Name:      "InvalidSNSTopicARNException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var InvalidSNSTopicARNException_message *smithy.Schema
 
 var InvalidTimeRangeException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.configservice",
 	Name:      "InvalidTimeRangeException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var InvalidTimeRangeException_message *smithy.Schema
 
 var LastDeliveryChannelDeleteFailedException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.configservice",
 	Name:      "LastDeliveryChannelDeleteFailedException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var LastDeliveryChannelDeleteFailedException_message *smithy.Schema
 
 var _LastUpdatedTime = smithy.NewSchema(smithy.ShapeID{
@@ -2263,7 +2264,7 @@ var _Limit = smithy.NewSchema(smithy.ShapeID{
 var LimitExceededException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.configservice",
 	Name:      "LimitExceededException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var LimitExceededException_message *smithy.Schema
 
 var _ListConnectorsMaxResults = smithy.NewSchema(smithy.ShapeID{
@@ -2284,7 +2285,7 @@ var _Long = smithy.NewSchema(smithy.ShapeID{
 var MaxActiveResourcesExceededException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.configservice",
 	Name:      "MaxActiveResourcesExceededException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var MaxActiveResourcesExceededException_message *smithy.Schema
 
 var MaximumExecutionFrequency = smithy.NewSchema(smithy.ShapeID{
@@ -2304,49 +2305,49 @@ var MaximumExecutionFrequency_TwentyFour_Hours *smithy.Schema
 var MaxNumberOfConfigRulesExceededException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.configservice",
 	Name:      "MaxNumberOfConfigRulesExceededException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var MaxNumberOfConfigRulesExceededException_message *smithy.Schema
 
 var MaxNumberOfConfigurationRecordersExceededException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.configservice",
 	Name:      "MaxNumberOfConfigurationRecordersExceededException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var MaxNumberOfConfigurationRecordersExceededException_message *smithy.Schema
 
 var MaxNumberOfConformancePacksExceededException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.configservice",
 	Name:      "MaxNumberOfConformancePacksExceededException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var MaxNumberOfConformancePacksExceededException_message *smithy.Schema
 
 var MaxNumberOfConnectorsExceededException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.configservice",
 	Name:      "MaxNumberOfConnectorsExceededException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var MaxNumberOfConnectorsExceededException_message *smithy.Schema
 
 var MaxNumberOfDeliveryChannelsExceededException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.configservice",
 	Name:      "MaxNumberOfDeliveryChannelsExceededException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var MaxNumberOfDeliveryChannelsExceededException_message *smithy.Schema
 
 var MaxNumberOfOrganizationConfigRulesExceededException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.configservice",
 	Name:      "MaxNumberOfOrganizationConfigRulesExceededException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var MaxNumberOfOrganizationConfigRulesExceededException_message *smithy.Schema
 
 var MaxNumberOfOrganizationConformancePacksExceededException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.configservice",
 	Name:      "MaxNumberOfOrganizationConformancePacksExceededException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var MaxNumberOfOrganizationConformancePacksExceededException_message *smithy.Schema
 
 var MaxNumberOfRetentionConfigurationsExceededException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.configservice",
 	Name:      "MaxNumberOfRetentionConfigurationsExceededException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var MaxNumberOfRetentionConfigurationsExceededException_message *smithy.Schema
 
 var _MaxResults = smithy.NewSchema(smithy.ShapeID{
@@ -2417,97 +2418,97 @@ var _NextToken = smithy.NewSchema(smithy.ShapeID{
 var NoAvailableConfigurationRecorderException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.configservice",
 	Name:      "NoAvailableConfigurationRecorderException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var NoAvailableConfigurationRecorderException_message *smithy.Schema
 
 var NoAvailableDeliveryChannelException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.configservice",
 	Name:      "NoAvailableDeliveryChannelException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var NoAvailableDeliveryChannelException_message *smithy.Schema
 
 var NoAvailableOrganizationException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.configservice",
 	Name:      "NoAvailableOrganizationException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var NoAvailableOrganizationException_message *smithy.Schema
 
 var NoRunningConfigurationRecorderException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.configservice",
 	Name:      "NoRunningConfigurationRecorderException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var NoRunningConfigurationRecorderException_message *smithy.Schema
 
 var NoSuchBucketException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.configservice",
 	Name:      "NoSuchBucketException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var NoSuchBucketException_message *smithy.Schema
 
 var NoSuchConfigRuleException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.configservice",
 	Name:      "NoSuchConfigRuleException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var NoSuchConfigRuleException_message *smithy.Schema
 
 var NoSuchConfigRuleInConformancePackException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.configservice",
 	Name:      "NoSuchConfigRuleInConformancePackException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var NoSuchConfigRuleInConformancePackException_message *smithy.Schema
 
 var NoSuchConfigurationAggregatorException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.configservice",
 	Name:      "NoSuchConfigurationAggregatorException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var NoSuchConfigurationAggregatorException_message *smithy.Schema
 
 var NoSuchConfigurationRecorderException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.configservice",
 	Name:      "NoSuchConfigurationRecorderException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var NoSuchConfigurationRecorderException_message *smithy.Schema
 
 var NoSuchConformancePackException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.configservice",
 	Name:      "NoSuchConformancePackException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var NoSuchConformancePackException_message *smithy.Schema
 
 var NoSuchDeliveryChannelException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.configservice",
 	Name:      "NoSuchDeliveryChannelException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var NoSuchDeliveryChannelException_message *smithy.Schema
 
 var NoSuchOrganizationConfigRuleException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.configservice",
 	Name:      "NoSuchOrganizationConfigRuleException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var NoSuchOrganizationConfigRuleException_message *smithy.Schema
 
 var NoSuchOrganizationConformancePackException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.configservice",
 	Name:      "NoSuchOrganizationConformancePackException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var NoSuchOrganizationConformancePackException_message *smithy.Schema
 
 var NoSuchRemediationConfigurationException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.configservice",
 	Name:      "NoSuchRemediationConfigurationException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var NoSuchRemediationConfigurationException_message *smithy.Schema
 
 var NoSuchRemediationExceptionException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.configservice",
 	Name:      "NoSuchRemediationExceptionException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var NoSuchRemediationExceptionException_message *smithy.Schema
 
 var NoSuchRetentionConfigurationException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.configservice",
 	Name:      "NoSuchRetentionConfigurationException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var NoSuchRetentionConfigurationException_message *smithy.Schema
 
 var _OrderingTimestamp = smithy.NewSchema(smithy.ShapeID{
@@ -2518,7 +2519,7 @@ var _OrderingTimestamp = smithy.NewSchema(smithy.ShapeID{
 var OrganizationAccessDeniedException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.configservice",
 	Name:      "OrganizationAccessDeniedException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var OrganizationAccessDeniedException_message *smithy.Schema
 
 var OrganizationAggregationSource = smithy.NewSchema(smithy.ShapeID{
@@ -2534,7 +2535,7 @@ var OrganizationAggregationSource_AllAwsRegions *smithy.Schema
 var OrganizationAllFeaturesNotEnabledException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.configservice",
 	Name:      "OrganizationAllFeaturesNotEnabledException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var OrganizationAllFeaturesNotEnabledException_message *smithy.Schema
 
 var OrganizationConfigRule = smithy.NewSchema(smithy.ShapeID{
@@ -2708,7 +2709,7 @@ var _OrganizationConformancePackStatuses_member *smithy.Schema
 var OrganizationConformancePackTemplateValidationException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.configservice",
 	Name:      "OrganizationConformancePackTemplateValidationException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var OrganizationConformancePackTemplateValidationException_message *smithy.Schema
 
 var OrganizationCustomPolicyRuleMetadata = smithy.NewSchema(smithy.ShapeID{
@@ -2880,7 +2881,7 @@ var OrganizationRuleStatus_UPDATE_FAILED *smithy.Schema
 var OversizedConfigurationItemException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.configservice",
 	Name:      "OversizedConfigurationItemException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var OversizedConfigurationItemException_message *smithy.Schema
 
 var Owner = smithy.NewSchema(smithy.ShapeID{
@@ -3248,7 +3249,7 @@ var RemediationExecutionStepState_UNKNOWN *smithy.Schema
 var RemediationInProgressException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.configservice",
 	Name:      "RemediationInProgressException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var RemediationInProgressException_message *smithy.Schema
 
 var _RemediationParameters = smithy.NewSchema(smithy.ShapeID{
@@ -3276,7 +3277,7 @@ var RemediationTargetType_SSM_DOCUMENT *smithy.Schema
 var ResourceConcurrentModificationException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.configservice",
 	Name:      "ResourceConcurrentModificationException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var ResourceConcurrentModificationException_message *smithy.Schema
 
 var _ResourceConfiguration = smithy.NewSchema(smithy.ShapeID{
@@ -3437,7 +3438,7 @@ var _ResourceIdList_member *smithy.Schema
 var ResourceInUseException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.configservice",
 	Name:      "ResourceInUseException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var ResourceInUseException_message *smithy.Schema
 
 var ResourceKey = smithy.NewSchema(smithy.ShapeID{
@@ -3462,13 +3463,13 @@ var _ResourceName = smithy.NewSchema(smithy.ShapeID{
 var ResourceNotDiscoveredException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.configservice",
 	Name:      "ResourceNotDiscoveredException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var ResourceNotDiscoveredException_message *smithy.Schema
 
 var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.configservice",
 	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var ResourceNotFoundException_message *smithy.Schema
 
 var ResourceType = smithy.NewSchema(smithy.ShapeID{
@@ -4953,13 +4954,13 @@ var TimeWindow_EndTime *smithy.Schema
 var TooManyTagsException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.configservice",
 	Name:      "TooManyTagsException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var TooManyTagsException_message *smithy.Schema
 
 var UnmodifiableEntityException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.configservice",
 	Name:      "UnmodifiableEntityException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var UnmodifiableEntityException_message *smithy.Schema
 
 var _UnprocessedResourceIdentifierList = smithy.NewSchema(smithy.ShapeID{
@@ -4971,7 +4972,7 @@ var _UnprocessedResourceIdentifierList_member *smithy.Schema
 var ValidationException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.configservice",
 	Name:      "ValidationException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var ValidationException_message *smithy.Schema
 
 var _Value = smithy.NewSchema(smithy.ShapeID{

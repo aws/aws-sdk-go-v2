@@ -5,7 +5,9 @@ package glue
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/glue/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/glue/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -49,6 +51,30 @@ type SearchAssetsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SearchAssetsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SearchAssetsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SearchAssetsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeSearchFilterClause(s, schemas.SearchAssetsInput_FilterClause, v.FilterClause)
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.SearchAssetsInput_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.SearchAssetsInput_NextToken, *v.NextToken)
+	}
+	if v.SearchText != nil {
+		s.WriteString(schemas.SearchAssetsInput_SearchText, *v.SearchText)
+	}
+	if v.Sort != nil {
+		s.WriteStruct(schemas.SearchAssetsInput_Sort)
+		v.Sort.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 // The search results returned by the SearchAssets operation.
 type SearchAssetsOutput struct {
 
@@ -64,13 +90,35 @@ type SearchAssetsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SearchAssetsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SearchAssetsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SearchAssetsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeSearchResultItemList(s, schemas.SearchAssetsOutput_Items, v.Items)
+	if v.NextToken != nil {
+		s.WriteString(schemas.SearchAssetsOutput_NextToken, *v.NextToken)
+	}
+}
+func (v *SearchAssetsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SearchAssetsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SearchAssetsOutput_Items:
+			return deserializeSearchResultItemList(d, schemas.SearchAssetsOutput_Items, &v.Items)
+		case schemas.SearchAssetsOutput_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.SearchAssetsOutput_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationSearchAssetsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpSearchAssets{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SearchAssets, schemas.SearchAssetsInput, schemas.SearchAssetsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpSearchAssets{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SearchAssets, schemas.SearchAssetsInput, schemas.SearchAssetsOutput), output: &SearchAssetsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

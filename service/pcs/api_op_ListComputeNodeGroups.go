@@ -5,7 +5,9 @@ package pcs
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/pcs/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/pcs/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -47,6 +49,24 @@ type ListComputeNodeGroupsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListComputeNodeGroupsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListComputeNodeGroupsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListComputeNodeGroupsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClusterIdentifier != nil {
+		s.WriteString(schemas.ListComputeNodeGroupsRequest_clusterIdentifier, *v.ClusterIdentifier)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListComputeNodeGroupsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListComputeNodeGroupsRequest_nextToken, *v.NextToken)
+	}
+}
+
 type ListComputeNodeGroupsOutput struct {
 
 	// The list of compute node groups for the cluster.
@@ -67,13 +87,35 @@ type ListComputeNodeGroupsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListComputeNodeGroupsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListComputeNodeGroupsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListComputeNodeGroupsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeComputeNodeGroupList(s, schemas.ListComputeNodeGroupsResponse_computeNodeGroups, v.ComputeNodeGroups)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListComputeNodeGroupsResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListComputeNodeGroupsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListComputeNodeGroupsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListComputeNodeGroupsResponse_computeNodeGroups:
+			return deserializeComputeNodeGroupList(d, schemas.ListComputeNodeGroupsResponse_computeNodeGroups, &v.ComputeNodeGroups)
+		case schemas.ListComputeNodeGroupsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListComputeNodeGroupsResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListComputeNodeGroupsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpListComputeNodeGroups{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListComputeNodeGroups, schemas.ListComputeNodeGroupsRequest, schemas.ListComputeNodeGroupsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpListComputeNodeGroups{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListComputeNodeGroups, schemas.ListComputeNodeGroupsRequest, schemas.ListComputeNodeGroupsResponse), output: &ListComputeNodeGroupsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -5,7 +5,9 @@ package bedrockagentcore
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcore/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcore/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -50,6 +52,29 @@ type ListMemoryExtractionJobsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListMemoryExtractionJobsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListMemoryExtractionJobsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListMemoryExtractionJobsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Filter != nil {
+		s.WriteStruct(schemas.ListMemoryExtractionJobsInput_filter)
+		v.Filter.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListMemoryExtractionJobsInput_maxResults, *v.MaxResults)
+	}
+	if v.MemoryId != nil {
+		s.WriteString(schemas.ListMemoryExtractionJobsInput_memoryId, *v.MemoryId)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListMemoryExtractionJobsInput_nextToken, *v.NextToken)
+	}
+}
+
 type ListMemoryExtractionJobsOutput struct {
 
 	// List of extraction job metadata matching the specified criteria.
@@ -66,13 +91,35 @@ type ListMemoryExtractionJobsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListMemoryExtractionJobsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListMemoryExtractionJobsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListMemoryExtractionJobsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeExtractionJobMetadataList(s, schemas.ListMemoryExtractionJobsOutput_jobs, v.Jobs)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListMemoryExtractionJobsOutput_nextToken, *v.NextToken)
+	}
+}
+func (v *ListMemoryExtractionJobsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListMemoryExtractionJobsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListMemoryExtractionJobsOutput_jobs:
+			return deserializeExtractionJobMetadataList(d, schemas.ListMemoryExtractionJobsOutput_jobs, &v.Jobs)
+		case schemas.ListMemoryExtractionJobsOutput_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListMemoryExtractionJobsOutput_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListMemoryExtractionJobsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListMemoryExtractionJobs{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListMemoryExtractionJobs, schemas.ListMemoryExtractionJobsInput, schemas.ListMemoryExtractionJobsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListMemoryExtractionJobs{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListMemoryExtractionJobs, schemas.ListMemoryExtractionJobsInput, schemas.ListMemoryExtractionJobsOutput), output: &ListMemoryExtractionJobsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

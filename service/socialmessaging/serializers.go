@@ -1129,6 +1129,97 @@ func awsRestjson1_serializeOpHttpBindingsGetWhatsAppBusinessPublicKeyInput(v *Ge
 	return nil
 }
 
+type awsRestjson1_serializeOpGetWhatsAppCallPermission struct {
+}
+
+func (*awsRestjson1_serializeOpGetWhatsAppCallPermission) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpGetWhatsAppCallPermission) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*GetWhatsAppCallPermissionInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/v1/whatsapp/call/permission/get")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "POST"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentGetWhatsAppCallPermissionInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsGetWhatsAppCallPermissionInput(v *GetWhatsAppCallPermissionInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentGetWhatsAppCallPermissionInput(v *GetWhatsAppCallPermissionInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.DestinationPhoneNumber != nil {
+		ok := object.Key("destinationPhoneNumber")
+		ok.String(*v.DestinationPhoneNumber)
+	}
+
+	if v.EndUserBsuid != nil {
+		ok := object.Key("endUserBsuid")
+		ok.String(*v.EndUserBsuid)
+	}
+
+	if v.OriginationPhoneNumberId != nil {
+		ok := object.Key("originationPhoneNumberId")
+		ok.String(*v.OriginationPhoneNumberId)
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpGetWhatsAppFlow struct {
 }
 
@@ -2279,6 +2370,97 @@ func awsRestjson1_serializeOpDocumentPutWhatsAppBusinessPublicKeyInput(v *PutWha
 	return nil
 }
 
+type awsRestjson1_serializeOpSendWhatsAppCallEvent struct {
+}
+
+func (*awsRestjson1_serializeOpSendWhatsAppCallEvent) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpSendWhatsAppCallEvent) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*SendWhatsAppCallEventInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/v1/whatsapp/call/event")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "POST"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentSendWhatsAppCallEventInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsSendWhatsAppCallEventInput(v *SendWhatsAppCallEventInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentSendWhatsAppCallEventInput(v *SendWhatsAppCallEventInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.CallEvent != nil {
+		ok := object.Key("callEvent")
+		ok.Base64EncodeBytes(v.CallEvent)
+	}
+
+	if v.MetaApiVersion != nil {
+		ok := object.Key("metaApiVersion")
+		ok.String(*v.MetaApiVersion)
+	}
+
+	if v.OriginationPhoneNumberId != nil {
+		ok := object.Key("originationPhoneNumberId")
+		ok.String(*v.OriginationPhoneNumberId)
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpSendWhatsAppConversionEvent struct {
 }
 
@@ -2630,6 +2812,97 @@ func awsRestjson1_serializeOpDocumentUntagResourceInput(v *UntagResourceInput, v
 	if v.TagKeys != nil {
 		ok := object.Key("tagKeys")
 		if err := awsRestjson1_serializeDocumentStringList(v.TagKeys, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpUpdateLinkedWhatsAppBusinessAccountPhoneNumber struct {
+}
+
+func (*awsRestjson1_serializeOpUpdateLinkedWhatsAppBusinessAccountPhoneNumber) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpUpdateLinkedWhatsAppBusinessAccountPhoneNumber) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*UpdateLinkedWhatsAppBusinessAccountPhoneNumberInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/v1/whatsapp/waba/phone")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "PUT"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsUpdateLinkedWhatsAppBusinessAccountPhoneNumberInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentUpdateLinkedWhatsAppBusinessAccountPhoneNumberInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsUpdateLinkedWhatsAppBusinessAccountPhoneNumberInput(v *UpdateLinkedWhatsAppBusinessAccountPhoneNumberInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.Id != nil {
+		encoder.SetQuery("id").String(*v.Id)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentUpdateLinkedWhatsAppBusinessAccountPhoneNumberInput(v *UpdateLinkedWhatsAppBusinessAccountPhoneNumberInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.CallSettings != nil {
+		ok := object.Key("callSettings")
+		if err := awsRestjson1_serializeDocumentWhatsAppCallSettings(v.CallSettings, ok); err != nil {
 			return err
 		}
 	}
@@ -3325,6 +3598,105 @@ func awsRestjson1_serializeDocumentWhatsAppBusinessAccountEventDestinations(v []
 	return nil
 }
 
+func awsRestjson1_serializeDocumentWhatsAppCallHours(v *types.WhatsAppCallHours, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Enabled != nil {
+		ok := object.Key("enabled")
+		ok.Boolean(*v.Enabled)
+	}
+
+	if v.HolidaySchedule != nil {
+		ok := object.Key("holidaySchedule")
+		if err := awsRestjson1_serializeDocumentWhatsAppHolidayScheduleList(v.HolidaySchedule, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Timezone != nil {
+		ok := object.Key("timezone")
+		ok.String(*v.Timezone)
+	}
+
+	if v.WeeklyOperatingHours != nil {
+		ok := object.Key("weeklyOperatingHours")
+		if err := awsRestjson1_serializeDocumentWhatsAppWeeklyOperatingHoursList(v.WeeklyOperatingHours, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentWhatsAppCallSettings(v *types.WhatsAppCallSettings, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.CallbackPermissionStatus != nil {
+		ok := object.Key("callbackPermissionStatus")
+		ok.String(*v.CallbackPermissionStatus)
+	}
+
+	if v.CallEnabled != nil {
+		ok := object.Key("callEnabled")
+		ok.Boolean(*v.CallEnabled)
+	}
+
+	if v.CallHours != nil {
+		ok := object.Key("callHours")
+		if err := awsRestjson1_serializeDocumentWhatsAppCallHours(v.CallHours, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.CallIconVisibility != nil {
+		ok := object.Key("callIconVisibility")
+		ok.String(*v.CallIconVisibility)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentWhatsAppHolidayScheduleEntry(v *types.WhatsAppHolidayScheduleEntry, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Date != nil {
+		ok := object.Key("date")
+		ok.String(*v.Date)
+	}
+
+	if v.EndTime != nil {
+		ok := object.Key("endTime")
+		if err := awsRestjson1_serializeDocumentWhatsAppTimeOfDay(v.EndTime, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.StartTime != nil {
+		ok := object.Key("startTime")
+		if err := awsRestjson1_serializeDocumentWhatsAppTimeOfDay(v.StartTime, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentWhatsAppHolidayScheduleList(v []types.WhatsAppHolidayScheduleEntry, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentWhatsAppHolidayScheduleEntry(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
 func awsRestjson1_serializeDocumentWhatsAppSetupFinalization(v *types.WhatsAppSetupFinalization, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -3370,5 +3742,61 @@ func awsRestjson1_serializeDocumentWhatsAppSignupCallback(v *types.WhatsAppSignu
 		ok.String(*v.CallbackUrl)
 	}
 
+	return nil
+}
+
+func awsRestjson1_serializeDocumentWhatsAppTimeOfDay(v *types.WhatsAppTimeOfDay, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Hours != nil {
+		ok := object.Key("hours")
+		ok.Integer(*v.Hours)
+	}
+
+	if v.Minutes != nil {
+		ok := object.Key("minutes")
+		ok.Integer(*v.Minutes)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentWhatsAppWeeklyOperatingHoursEntry(v *types.WhatsAppWeeklyOperatingHoursEntry, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.CloseTime != nil {
+		ok := object.Key("closeTime")
+		if err := awsRestjson1_serializeDocumentWhatsAppTimeOfDay(v.CloseTime, ok); err != nil {
+			return err
+		}
+	}
+
+	if len(v.DayOfWeek) > 0 {
+		ok := object.Key("dayOfWeek")
+		ok.String(string(v.DayOfWeek))
+	}
+
+	if v.OpenTime != nil {
+		ok := object.Key("openTime")
+		if err := awsRestjson1_serializeDocumentWhatsAppTimeOfDay(v.OpenTime, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentWhatsAppWeeklyOperatingHoursList(v []types.WhatsAppWeeklyOperatingHoursEntry, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentWhatsAppWeeklyOperatingHoursEntry(&v[i], av); err != nil {
+			return err
+		}
+	}
 	return nil
 }

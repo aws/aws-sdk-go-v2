@@ -4,7 +4,9 @@ package dynamodb
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/dynamodb/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/dynamodb/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -47,6 +49,24 @@ type UpdateTableReplicaAutoScalingInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateTableReplicaAutoScalingInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateTableReplicaAutoScalingInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateTableReplicaAutoScalingInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeGlobalSecondaryIndexAutoScalingUpdateList(s, schemas.UpdateTableReplicaAutoScalingInput_GlobalSecondaryIndexUpdates, v.GlobalSecondaryIndexUpdates)
+	if v.ProvisionedWriteCapacityAutoScalingUpdate != nil {
+		s.WriteStruct(schemas.UpdateTableReplicaAutoScalingInput_ProvisionedWriteCapacityAutoScalingUpdate)
+		v.ProvisionedWriteCapacityAutoScalingUpdate.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeReplicaAutoScalingUpdateList(s, schemas.UpdateTableReplicaAutoScalingInput_ReplicaUpdates, v.ReplicaUpdates)
+	if v.TableName != nil {
+		s.WriteString(schemas.UpdateTableReplicaAutoScalingInput_TableName, *v.TableName)
+	}
+}
 func (in *UpdateTableReplicaAutoScalingInput) bindEndpointParams(p *EndpointParameters) {
 
 	p.ResourceArn = in.TableName
@@ -64,13 +84,34 @@ type UpdateTableReplicaAutoScalingOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateTableReplicaAutoScalingOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateTableReplicaAutoScalingOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateTableReplicaAutoScalingOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TableAutoScalingDescription != nil {
+		s.WriteStruct(schemas.UpdateTableReplicaAutoScalingOutput_TableAutoScalingDescription)
+		v.TableAutoScalingDescription.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateTableReplicaAutoScalingOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateTableReplicaAutoScalingOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateTableReplicaAutoScalingOutput_TableAutoScalingDescription:
+			v.TableAutoScalingDescription = &types.TableAutoScalingDescription{}
+			return v.TableAutoScalingDescription.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateTableReplicaAutoScalingMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpUpdateTableReplicaAutoScaling{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateTableReplicaAutoScaling, schemas.UpdateTableReplicaAutoScalingInput, schemas.UpdateTableReplicaAutoScalingOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpUpdateTableReplicaAutoScaling{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateTableReplicaAutoScaling, schemas.UpdateTableReplicaAutoScalingInput, schemas.UpdateTableReplicaAutoScalingOutput), output: &UpdateTableReplicaAutoScalingOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,6 +4,8 @@ package bedrock
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/bedrock/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -27,6 +29,15 @@ type GetUseCaseForModelAccessInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetUseCaseForModelAccessInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetUseCaseForModelAccessRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetUseCaseForModelAccessInput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+
 type GetUseCaseForModelAccessOutput struct {
 
 	// Get customer profile Response.
@@ -40,13 +51,31 @@ type GetUseCaseForModelAccessOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetUseCaseForModelAccessOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetUseCaseForModelAccessResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetUseCaseForModelAccessOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FormData != nil {
+		s.WriteBlob(schemas.GetUseCaseForModelAccessResponse_formData, v.FormData)
+	}
+}
+func (v *GetUseCaseForModelAccessOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetUseCaseForModelAccessResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetUseCaseForModelAccessResponse_formData:
+			return d.ReadBlob(schemas.GetUseCaseForModelAccessResponse_formData, &v.FormData)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetUseCaseForModelAccessMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetUseCaseForModelAccess{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetUseCaseForModelAccess, schemas.GetUseCaseForModelAccessRequest, schemas.GetUseCaseForModelAccessResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetUseCaseForModelAccess{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetUseCaseForModelAccess, schemas.GetUseCaseForModelAccessRequest, schemas.GetUseCaseForModelAccessResponse), output: &GetUseCaseForModelAccessOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

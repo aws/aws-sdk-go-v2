@@ -4,7 +4,9 @@ package identitystore
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/identitystore/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/identitystore/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -34,6 +36,10 @@ type DescribeGroupInput struct {
 
 	// The identifier for a group in the identity store.
 	//
+	// You can specify the group by ID or by Amazon Resource Name (ARN). For example,
+	// group ID a1b2c3d4-5678-90ab-cdef-EXAMPLE22222 or group ARN
+	// arn:aws:identitystore:::group/a1b2c3d4-5678-90ab-cdef-EXAMPLE22222 .
+	//
 	// This member is required.
 	GroupId *string
 
@@ -42,13 +48,38 @@ type DescribeGroupInput struct {
 	// string that contains numbers and lower case letters. This value is generated at
 	// the time that a new identity store is created.
 	//
+	// You can specify the identity store by ID or by Amazon Resource Name (ARN). For
+	// example, identity store ID d-1234567890 or identity store ARN
+	// arn:aws:identitystore::111122223333:identitystore/d-1234567890 .
+	//
 	// This member is required.
 	IdentityStoreId *string
 
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeGroupInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeGroupRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GroupId != nil {
+		s.WriteString(schemas.DescribeGroupRequest_GroupId, *v.GroupId)
+	}
+	if v.IdentityStoreId != nil {
+		s.WriteString(schemas.DescribeGroupRequest_IdentityStoreId, *v.IdentityStoreId)
+	}
+}
+
 type DescribeGroupOutput struct {
+
+	// The Amazon Resource Name (ARN) of the group in the identity store. For example,
+	// arn:aws:identitystore:::group/a1b2c3d4-5678-90ab-cdef-EXAMPLE22222 .
+	//
+	// This member is required.
+	GroupArn *string
 
 	// The identifier for a group in the identity store.
 	//
@@ -59,6 +90,12 @@ type DescribeGroupOutput struct {
 	//
 	// This member is required.
 	IdentityStoreId *string
+
+	// The current revision of the group in the identity store. This value changes
+	// each time the group is modified.
+	//
+	// This member is required.
+	Revision *string
 
 	// The date and time the group was created.
 	CreatedAt *time.Time
@@ -92,13 +129,89 @@ type DescribeGroupOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeGroupOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeGroupResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeGroupOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.DescribeGroupResponse_CreatedAt, *v.CreatedAt)
+	}
+	if v.CreatedBy != nil {
+		s.WriteString(schemas.DescribeGroupResponse_CreatedBy, *v.CreatedBy)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.DescribeGroupResponse_Description, *v.Description)
+	}
+	if v.DisplayName != nil {
+		s.WriteString(schemas.DescribeGroupResponse_DisplayName, *v.DisplayName)
+	}
+	serializeExternalIds(s, schemas.DescribeGroupResponse_ExternalIds, v.ExternalIds)
+	if v.GroupArn != nil {
+		s.WriteString(schemas.DescribeGroupResponse_GroupArn, *v.GroupArn)
+	}
+	if v.GroupId != nil {
+		s.WriteString(schemas.DescribeGroupResponse_GroupId, *v.GroupId)
+	}
+	if v.IdentityStoreId != nil {
+		s.WriteString(schemas.DescribeGroupResponse_IdentityStoreId, *v.IdentityStoreId)
+	}
+	if v.Revision != nil {
+		s.WriteString(schemas.DescribeGroupResponse_Revision, *v.Revision)
+	}
+	if v.UpdatedAt != nil {
+		s.WriteTime(schemas.DescribeGroupResponse_UpdatedAt, *v.UpdatedAt)
+	}
+	if v.UpdatedBy != nil {
+		s.WriteString(schemas.DescribeGroupResponse_UpdatedBy, *v.UpdatedBy)
+	}
+}
+func (v *DescribeGroupOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeGroupResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeGroupResponse_CreatedAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.DescribeGroupResponse_CreatedAt, v.CreatedAt)
+		case schemas.DescribeGroupResponse_CreatedBy:
+			v.CreatedBy = new(string)
+			return d.ReadString(schemas.DescribeGroupResponse_CreatedBy, v.CreatedBy)
+		case schemas.DescribeGroupResponse_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.DescribeGroupResponse_Description, v.Description)
+		case schemas.DescribeGroupResponse_DisplayName:
+			v.DisplayName = new(string)
+			return d.ReadString(schemas.DescribeGroupResponse_DisplayName, v.DisplayName)
+		case schemas.DescribeGroupResponse_ExternalIds:
+			return deserializeExternalIds(d, schemas.DescribeGroupResponse_ExternalIds, &v.ExternalIds)
+		case schemas.DescribeGroupResponse_GroupArn:
+			v.GroupArn = new(string)
+			return d.ReadString(schemas.DescribeGroupResponse_GroupArn, v.GroupArn)
+		case schemas.DescribeGroupResponse_GroupId:
+			v.GroupId = new(string)
+			return d.ReadString(schemas.DescribeGroupResponse_GroupId, v.GroupId)
+		case schemas.DescribeGroupResponse_IdentityStoreId:
+			v.IdentityStoreId = new(string)
+			return d.ReadString(schemas.DescribeGroupResponse_IdentityStoreId, v.IdentityStoreId)
+		case schemas.DescribeGroupResponse_Revision:
+			v.Revision = new(string)
+			return d.ReadString(schemas.DescribeGroupResponse_Revision, v.Revision)
+		case schemas.DescribeGroupResponse_UpdatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.DescribeGroupResponse_UpdatedAt, v.UpdatedAt)
+		case schemas.DescribeGroupResponse_UpdatedBy:
+			v.UpdatedBy = new(string)
+			return d.ReadString(schemas.DescribeGroupResponse_UpdatedBy, v.UpdatedBy)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeGroup, schemas.DescribeGroupRequest, schemas.DescribeGroupResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeGroup, schemas.DescribeGroupRequest, schemas.DescribeGroupResponse), output: &DescribeGroupOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

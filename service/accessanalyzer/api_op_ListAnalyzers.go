@@ -5,7 +5,9 @@ package accessanalyzer
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/accessanalyzer/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/accessanalyzer/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -40,6 +42,44 @@ type ListAnalyzersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAnalyzersInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAnalyzersRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAnalyzersInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListAnalyzersRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAnalyzersRequest_nextToken, *v.NextToken)
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.ListAnalyzersRequest_type, string(v.Type))
+	}
+}
+func (v *ListAnalyzersInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListAnalyzersRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListAnalyzersRequest_maxResults:
+			v.MaxResults = new(int32)
+			return d.ReadInt32(schemas.ListAnalyzersRequest_maxResults, v.MaxResults)
+		case schemas.ListAnalyzersRequest_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListAnalyzersRequest_nextToken, v.NextToken)
+		case schemas.ListAnalyzersRequest_type:
+			var ev string
+			if err := d.ReadString(schemas.ListAnalyzersRequest_type, &ev); err != nil {
+				return err
+			}
+			v.Type = types.Type(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // The response to the request.
 type ListAnalyzersOutput struct {
 
@@ -57,13 +97,35 @@ type ListAnalyzersOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAnalyzersOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAnalyzersResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAnalyzersOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAnalyzersList(s, schemas.ListAnalyzersResponse_analyzers, v.Analyzers)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAnalyzersResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListAnalyzersOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListAnalyzersResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListAnalyzersResponse_analyzers:
+			return deserializeAnalyzersList(d, schemas.ListAnalyzersResponse_analyzers, &v.Analyzers)
+		case schemas.ListAnalyzersResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListAnalyzersResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListAnalyzersMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListAnalyzers{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAnalyzers, schemas.ListAnalyzersRequest, schemas.ListAnalyzersResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListAnalyzers{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAnalyzers, schemas.ListAnalyzersRequest, schemas.ListAnalyzersResponse), output: &ListAnalyzersOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

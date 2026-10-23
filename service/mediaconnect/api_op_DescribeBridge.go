@@ -4,7 +4,9 @@ package mediaconnect
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/mediaconnect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/mediaconnect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -34,6 +36,18 @@ type DescribeBridgeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeBridgeInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeBridgeRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeBridgeInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BridgeArn != nil {
+		s.WriteString(schemas.DescribeBridgeRequest_BridgeArn, *v.BridgeArn)
+	}
+}
+
 type DescribeBridgeOutput struct {
 
 	// The bridge that you requested a description of.
@@ -45,13 +59,34 @@ type DescribeBridgeOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeBridgeOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeBridgeResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeBridgeOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Bridge != nil {
+		s.WriteStruct(schemas.DescribeBridgeResponse_Bridge)
+		v.Bridge.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DescribeBridgeOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeBridgeResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeBridgeResponse_Bridge:
+			v.Bridge = &types.Bridge{}
+			return v.Bridge.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeBridgeMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeBridge{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeBridge, schemas.DescribeBridgeRequest, schemas.DescribeBridgeResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeBridge{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeBridge, schemas.DescribeBridgeRequest, schemas.DescribeBridgeResponse), output: &DescribeBridgeOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

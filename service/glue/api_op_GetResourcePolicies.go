@@ -5,7 +5,9 @@ package glue
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/glue/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/glue/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -42,6 +44,21 @@ type GetResourcePoliciesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetResourcePoliciesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetResourcePoliciesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetResourcePoliciesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.GetResourcePoliciesRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetResourcePoliciesRequest_NextToken, *v.NextToken)
+	}
+}
+
 type GetResourcePoliciesOutput struct {
 
 	// A list of the individual resource policies and the account-level resource
@@ -58,13 +75,35 @@ type GetResourcePoliciesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetResourcePoliciesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetResourcePoliciesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetResourcePoliciesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeGetResourcePoliciesResponseList(s, schemas.GetResourcePoliciesResponse_GetResourcePoliciesResponseList, v.GetResourcePoliciesResponseList)
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetResourcePoliciesResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *GetResourcePoliciesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetResourcePoliciesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetResourcePoliciesResponse_GetResourcePoliciesResponseList:
+			return deserializeGetResourcePoliciesResponseList(d, schemas.GetResourcePoliciesResponse_GetResourcePoliciesResponseList, &v.GetResourcePoliciesResponseList)
+		case schemas.GetResourcePoliciesResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.GetResourcePoliciesResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetResourcePoliciesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetResourcePolicies{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetResourcePolicies, schemas.GetResourcePoliciesRequest, schemas.GetResourcePoliciesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetResourcePolicies{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetResourcePolicies, schemas.GetResourcePoliciesRequest, schemas.GetResourcePoliciesResponse), output: &GetResourcePoliciesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

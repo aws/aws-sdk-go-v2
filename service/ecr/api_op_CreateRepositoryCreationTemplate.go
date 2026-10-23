@@ -4,7 +4,9 @@ package ecr
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/ecr/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ecr/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -95,6 +97,41 @@ type CreateRepositoryCreationTemplateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateRepositoryCreationTemplateInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateRepositoryCreationTemplateRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateRepositoryCreationTemplateInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeRCTAppliedForList(s, schemas.CreateRepositoryCreationTemplateRequest_appliedFor, v.AppliedFor)
+	if v.CustomRoleArn != nil {
+		s.WriteString(schemas.CreateRepositoryCreationTemplateRequest_customRoleArn, *v.CustomRoleArn)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreateRepositoryCreationTemplateRequest_description, *v.Description)
+	}
+	if v.EncryptionConfiguration != nil {
+		s.WriteStruct(schemas.CreateRepositoryCreationTemplateRequest_encryptionConfiguration)
+		v.EncryptionConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ImageTagMutability != "" {
+		s.WriteString(schemas.CreateRepositoryCreationTemplateRequest_imageTagMutability, string(v.ImageTagMutability))
+	}
+	serializeImageTagMutabilityExclusionFilters(s, schemas.CreateRepositoryCreationTemplateRequest_imageTagMutabilityExclusionFilters, v.ImageTagMutabilityExclusionFilters)
+	if v.LifecyclePolicy != nil {
+		s.WriteString(schemas.CreateRepositoryCreationTemplateRequest_lifecyclePolicy, *v.LifecyclePolicy)
+	}
+	if v.Prefix != nil {
+		s.WriteString(schemas.CreateRepositoryCreationTemplateRequest_prefix, *v.Prefix)
+	}
+	if v.RepositoryPolicy != nil {
+		s.WriteString(schemas.CreateRepositoryCreationTemplateRequest_repositoryPolicy, *v.RepositoryPolicy)
+	}
+	serializeTagList(s, schemas.CreateRepositoryCreationTemplateRequest_resourceTags, v.ResourceTags)
+}
+
 type CreateRepositoryCreationTemplateOutput struct {
 
 	// The registry ID associated with the request.
@@ -109,13 +146,40 @@ type CreateRepositoryCreationTemplateOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateRepositoryCreationTemplateOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateRepositoryCreationTemplateResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateRepositoryCreationTemplateOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RegistryId != nil {
+		s.WriteString(schemas.CreateRepositoryCreationTemplateResponse_registryId, *v.RegistryId)
+	}
+	if v.RepositoryCreationTemplate != nil {
+		s.WriteStruct(schemas.CreateRepositoryCreationTemplateResponse_repositoryCreationTemplate)
+		v.RepositoryCreationTemplate.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateRepositoryCreationTemplateOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateRepositoryCreationTemplateResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateRepositoryCreationTemplateResponse_registryId:
+			v.RegistryId = new(string)
+			return d.ReadString(schemas.CreateRepositoryCreationTemplateResponse_registryId, v.RegistryId)
+		case schemas.CreateRepositoryCreationTemplateResponse_repositoryCreationTemplate:
+			v.RepositoryCreationTemplate = &types.RepositoryCreationTemplate{}
+			return v.RepositoryCreationTemplate.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateRepositoryCreationTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateRepositoryCreationTemplate{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateRepositoryCreationTemplate, schemas.CreateRepositoryCreationTemplateRequest, schemas.CreateRepositoryCreationTemplateResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateRepositoryCreationTemplate{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateRepositoryCreationTemplate, schemas.CreateRepositoryCreationTemplateRequest, schemas.CreateRepositoryCreationTemplateResponse), output: &CreateRepositoryCreationTemplateOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

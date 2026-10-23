@@ -206,6 +206,42 @@ func TestCheckSnapshot_ListBillingViews(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_ListBillingViewSegments(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListBillingViewSegments(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListBillingViewSegments")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListBusinessSupportAccountCharges(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListBusinessSupportAccountCharges(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListBusinessSupportAccountCharges")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListBusinessSupportSubscriptionHistory(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListBusinessSupportSubscriptionHistory(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListBusinessSupportSubscriptionHistory")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_ListEnterpriseSupportLinkedAccountCharges(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListEnterpriseSupportLinkedAccountCharges(context.Background(), nil, func(o *Options) {
@@ -438,6 +474,42 @@ func TestUpdateSnapshot_ListBillingViews(t *testing.T) {
 	_, err := svc.ListBillingViews(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ListBillingViews")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListBillingViewSegments(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListBillingViewSegments(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListBillingViewSegments")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListBusinessSupportAccountCharges(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListBusinessSupportAccountCharges(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListBusinessSupportAccountCharges")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListBusinessSupportSubscriptionHistory(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListBusinessSupportSubscriptionHistory(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListBusinessSupportSubscriptionHistory")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

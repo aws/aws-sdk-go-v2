@@ -942,6 +942,11 @@ type Ec2AsgCapacityIncreaseConfiguration struct {
 	// The settings for ungraceful execution.
 	Ungraceful *Ec2Ungraceful
 
+	// If enabled, the step completes only after each attached ELB target group
+	// reports a healthy target count that matches the group's new desired capacity
+	// calculated in the step.
+	WaitELBTargetGroupHealthy WaitELBTargetGroupHealthy
+
 	noSmithyDocumentSerde
 }
 
@@ -967,6 +972,9 @@ func (v *Ec2AsgCapacityIncreaseConfiguration) SerializeMembers(s smithy.ShapeSer
 		v.Ungraceful.SerializeMembers(s)
 		s.CloseStruct()
 	}
+	if v.WaitELBTargetGroupHealthy != "" {
+		s.WriteString(schemas.Ec2AsgCapacityIncreaseConfiguration_waitELBTargetGroupHealthy, string(v.WaitELBTargetGroupHealthy))
+	}
 }
 func (v *Ec2AsgCapacityIncreaseConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.Ec2AsgCapacityIncreaseConfiguration, func(s *smithy.Schema) error {
@@ -989,6 +997,13 @@ func (v *Ec2AsgCapacityIncreaseConfiguration) Deserialize(d smithy.ShapeDeserial
 		case schemas.Ec2AsgCapacityIncreaseConfiguration_ungraceful:
 			v.Ungraceful = &Ec2Ungraceful{}
 			return v.Ungraceful.Deserialize(d)
+		case schemas.Ec2AsgCapacityIncreaseConfiguration_waitELBTargetGroupHealthy:
+			var ev string
+			if err := d.ReadString(schemas.Ec2AsgCapacityIncreaseConfiguration_waitELBTargetGroupHealthy, &ev); err != nil {
+				return err
+			}
+			v.WaitELBTargetGroupHealthy = WaitELBTargetGroupHealthy(ev)
+			return nil
 		}
 		return nil
 	})
@@ -1048,6 +1063,11 @@ type EcsCapacityIncreaseConfiguration struct {
 	// The settings for ungraceful execution.
 	Ungraceful *EcsUngraceful
 
+	// If enabled, the step completes only after each attached ELB target group
+	// reports a healthy target count that matches the service's new desired task count
+	// calculated in the step.
+	WaitELBTargetGroupHealthy WaitELBTargetGroupHealthy
+
 	noSmithyDocumentSerde
 }
 
@@ -1073,6 +1093,9 @@ func (v *EcsCapacityIncreaseConfiguration) SerializeMembers(s smithy.ShapeSerial
 		v.Ungraceful.SerializeMembers(s)
 		s.CloseStruct()
 	}
+	if v.WaitELBTargetGroupHealthy != "" {
+		s.WriteString(schemas.EcsCapacityIncreaseConfiguration_waitELBTargetGroupHealthy, string(v.WaitELBTargetGroupHealthy))
+	}
 }
 func (v *EcsCapacityIncreaseConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.EcsCapacityIncreaseConfiguration, func(s *smithy.Schema) error {
@@ -1095,6 +1118,13 @@ func (v *EcsCapacityIncreaseConfiguration) Deserialize(d smithy.ShapeDeserialize
 		case schemas.EcsCapacityIncreaseConfiguration_ungraceful:
 			v.Ungraceful = &EcsUngraceful{}
 			return v.Ungraceful.Deserialize(d)
+		case schemas.EcsCapacityIncreaseConfiguration_waitELBTargetGroupHealthy:
+			var ev string
+			if err := d.ReadString(schemas.EcsCapacityIncreaseConfiguration_waitELBTargetGroupHealthy, &ev); err != nil {
+				return err
+			}
+			v.WaitELBTargetGroupHealthy = WaitELBTargetGroupHealthy(ev)
+			return nil
 		}
 		return nil
 	})
@@ -1426,6 +1456,7 @@ func (v *ExecutionApprovalConfiguration) Deserialize(d smithy.ShapeDeserializer)
 //	ExecutionBlockConfigurationMemberRdsSwitchoverReadReplicaConfig
 //	ExecutionBlockConfigurationMemberRegionSwitchPlanConfig
 //	ExecutionBlockConfigurationMemberRoute53HealthCheckConfig
+//	ExecutionBlockConfigurationMemberSsmSendCommandConfig
 type ExecutionBlockConfiguration interface {
 	isExecutionBlockConfiguration()
 }
@@ -1745,6 +1776,23 @@ func (v *ExecutionBlockConfigurationMemberRoute53HealthCheckConfig) Deserialize(
 	return v.Value.Deserialize(d)
 }
 
+// Specifies an AWS Systems Manager SendCommand execution block.
+type ExecutionBlockConfigurationMemberSsmSendCommandConfig struct {
+	Value SsmSendCommandConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (*ExecutionBlockConfigurationMemberSsmSendCommandConfig) isExecutionBlockConfiguration() {}
+func (v *ExecutionBlockConfigurationMemberSsmSendCommandConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ExecutionBlockConfiguration_ssmSendCommandConfig)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *ExecutionBlockConfigurationMemberSsmSendCommandConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
+
 // Represents an event that occurred during a plan execution. These events provide
 // a detailed timeline of the execution process.
 type ExecutionEvent struct {
@@ -1940,8 +1988,14 @@ func (v *GeneratedReport) Deserialize(d smithy.ShapeDeserializer) error {
 // Configuration for Amazon Aurora global databases used in a Region switch plan.
 type GlobalAuroraConfiguration struct {
 
-	// The behavior for a global database, that is, only allow switchover or also
-	// allow failover.
+	// The default behavior for the Aurora global database execution block. Valid
+	// values:
+	//
+	//   - switchoverOnly - Calls SwitchoverGlobalCluster for a zero-data-loss
+	//   switchover during graceful execution.
+	//
+	//   - failover - Calls FailoverGlobalCluster with AllowDataLoss set to true . This
+	//   operation might cause data loss, including during graceful execution.
 	//
 	// This member is required.
 	Behavior GlobalAuroraDefaultBehavior
@@ -1965,7 +2019,8 @@ type GlobalAuroraConfiguration struct {
 	// The timeout value specified for the configuration.
 	TimeoutMinutes *int32
 
-	// The settings for ungraceful execution.
+	// The behavior to use when the plan runs in ungraceful mode. If you omit this
+	// value, Region switch uses the value of behavior .
 	Ungraceful *GlobalAuroraUngraceful
 
 	noSmithyDocumentSerde
@@ -2032,11 +2087,11 @@ func (v *GlobalAuroraConfiguration) Deserialize(d smithy.ShapeDeserializer) erro
 	})
 }
 
-// Configuration for handling failures when performing operations on Aurora global
-// databases.
+// Configuration for an Aurora global database execution block in ungraceful mode.
 type GlobalAuroraUngraceful struct {
 
-	// The settings for ungraceful execution.
+	// The ungraceful behavior. The only valid value is failover , which calls
+	// FailoverGlobalCluster with AllowDataLoss set to true and might cause data loss.
 	Ungraceful GlobalAuroraUngracefulBehavior
 
 	noSmithyDocumentSerde
@@ -2282,6 +2337,18 @@ type Lambdas struct {
 	// The external ID (secret key) for the configuration.
 	ExternalId *string
 
+	// The JSON payload to send to the Lambda function invocation. If you don't
+	// specify a payload, Region switch invokes the function with only the execution
+	// metadata.
+	//
+	// If you provide a JSON object, Region switch merges execution metadata keys (
+	// InvokedBy , PlanArn , ExecutionId , StepName ) into the top level. If one of
+	// your keys has the same name as a metadata key, your key takes precedence.
+	//
+	// If you provide any other JSON type (string, number, boolean, or array), Region
+	// switch forwards it to the Lambda function unchanged, without adding metadata.
+	Payload *string
+
 	noSmithyDocumentSerde
 }
 
@@ -2301,6 +2368,9 @@ func (v *Lambdas) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ExternalId != nil {
 		s.WriteString(schemas.Lambdas_externalId, *v.ExternalId)
 	}
+	if v.Payload != nil {
+		s.WriteString(schemas.Lambdas_payload, *v.Payload)
+	}
 }
 func (v *Lambdas) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.Lambdas, func(s *smithy.Schema) error {
@@ -2314,6 +2384,9 @@ func (v *Lambdas) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.Lambdas_externalId:
 			v.ExternalId = new(string)
 			return d.ReadString(schemas.Lambdas_externalId, v.ExternalId)
+		case schemas.Lambdas_payload:
+			v.Payload = new(string)
+			return d.ReadString(schemas.Lambdas_payload, v.Payload)
 		}
 		return nil
 	})
@@ -2615,6 +2688,14 @@ type Plan struct {
 	// The report configuration for a plan.
 	ReportConfiguration *ReportConfiguration
 
+	// Indicates whether service quota checks are enabled for the Region switch plan.
+	// When enabled, Region switch compares the applied service quota values across the
+	// plan's Amazon Web Services Regions and creates a warning when a quota in one
+	// Region is lower than the value required for the matching resource in another
+	// Region. Service quota checks are advisory and don't prevent you from creating,
+	// evaluating, or executing a plan.
+	ServiceQuotaChecksEnabled *bool
+
 	// The triggers for a plan.
 	Triggers []Trigger
 
@@ -2665,6 +2746,9 @@ func (v *Plan) SerializeMembers(s smithy.ShapeSerializer) {
 		v.ReportConfiguration.SerializeMembers(s)
 		s.CloseStruct()
 	}
+	if v.ServiceQuotaChecksEnabled != nil {
+		s.WriteBool(schemas.Plan_serviceQuotaChecksEnabled, *v.ServiceQuotaChecksEnabled)
+	}
 	serializeTriggerList(s, schemas.Plan_triggers, v.Triggers)
 	if v.UpdatedAt != nil {
 		s.WriteTime(schemas.Plan_updatedAt, *v.UpdatedAt)
@@ -2712,6 +2796,9 @@ func (v *Plan) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.Plan_reportConfiguration:
 			v.ReportConfiguration = &ReportConfiguration{}
 			return v.ReportConfiguration.Deserialize(d)
+		case schemas.Plan_serviceQuotaChecksEnabled:
+			v.ServiceQuotaChecksEnabled = new(bool)
+			return d.ReadBool(schemas.Plan_serviceQuotaChecksEnabled, v.ServiceQuotaChecksEnabled)
 		case schemas.Plan_triggers:
 			return deserializeTriggerList(d, schemas.Plan_triggers, &v.Triggers)
 		case schemas.Plan_updatedAt:
@@ -3520,6 +3607,383 @@ func (v *Service) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.Service_serviceArn:
 			v.ServiceArn = new(string)
 			return d.ReadString(schemas.Service_serviceArn, v.ServiceArn)
+		}
+		return nil
+	})
+}
+
+// A service quota warning for a plan. Region switch creates a warning when the
+// applied quota value in one Region of a plan is lower than the value for the
+// matching resource in another Region or account in the plan, or when it can't
+// complete a service quota check.
+type ServiceQuotaWarningSummary struct {
+
+	// The Amazon Web Services account ID that owns the plan that the warning applies
+	// to.
+	//
+	// This member is required.
+	AccountId *string
+
+	// The Amazon Resource Name (ARN) of the plan that the warning applies to.
+	//
+	// This member is required.
+	PlanArn *string
+
+	// The Amazon Web Services Region that the quota applies to.
+	//
+	// This member is required.
+	QuotaRegion *string
+
+	// The status of the service quota warning.
+	//
+	// This member is required.
+	Status ServiceQuotaWarningStatus
+
+	// The ID of the support case associated with the quota increase request, if
+	// Region switch submitted one for this quota.
+	CaseId *string
+
+	// The time (UTC) when Region switch last checked this quota.
+	LastCheckedAt *time.Time
+
+	// The quota code of the quota that the warning applies to, as defined in Service
+	// Quotas.
+	QuotaCode *string
+
+	// The name of the quota that the warning applies to, as defined in Service Quotas.
+	QuotaName *string
+
+	// The ID of the quota increase request that Region switch submitted, if it
+	// submitted one for this quota.
+	RequestId *string
+
+	// The service code of the service that the quota belongs to, as defined in
+	// Service Quotas. For example, ec2 .
+	ServiceCode *string
+
+	// The time (UTC) when Region switch created this warning.
+	WarningCreatedAt *time.Time
+
+	// A message that describes the service quota warning.
+	WarningMessage *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *ServiceQuotaWarningSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ServiceQuotaWarningSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ServiceQuotaWarningSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountId != nil {
+		s.WriteString(schemas.ServiceQuotaWarningSummary_accountId, *v.AccountId)
+	}
+	if v.CaseId != nil {
+		s.WriteString(schemas.ServiceQuotaWarningSummary_caseId, *v.CaseId)
+	}
+	if v.LastCheckedAt != nil {
+		s.WriteTime(schemas.ServiceQuotaWarningSummary_lastCheckedAt, *v.LastCheckedAt)
+	}
+	if v.PlanArn != nil {
+		s.WriteString(schemas.ServiceQuotaWarningSummary_planArn, *v.PlanArn)
+	}
+	if v.QuotaCode != nil {
+		s.WriteString(schemas.ServiceQuotaWarningSummary_quotaCode, *v.QuotaCode)
+	}
+	if v.QuotaName != nil {
+		s.WriteString(schemas.ServiceQuotaWarningSummary_quotaName, *v.QuotaName)
+	}
+	if v.QuotaRegion != nil {
+		s.WriteString(schemas.ServiceQuotaWarningSummary_quotaRegion, *v.QuotaRegion)
+	}
+	if v.RequestId != nil {
+		s.WriteString(schemas.ServiceQuotaWarningSummary_requestId, *v.RequestId)
+	}
+	if v.ServiceCode != nil {
+		s.WriteString(schemas.ServiceQuotaWarningSummary_serviceCode, *v.ServiceCode)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.ServiceQuotaWarningSummary_status, string(v.Status))
+	}
+	if v.WarningCreatedAt != nil {
+		s.WriteTime(schemas.ServiceQuotaWarningSummary_warningCreatedAt, *v.WarningCreatedAt)
+	}
+	if v.WarningMessage != nil {
+		s.WriteString(schemas.ServiceQuotaWarningSummary_warningMessage, *v.WarningMessage)
+	}
+}
+func (v *ServiceQuotaWarningSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ServiceQuotaWarningSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ServiceQuotaWarningSummary_accountId:
+			v.AccountId = new(string)
+			return d.ReadString(schemas.ServiceQuotaWarningSummary_accountId, v.AccountId)
+		case schemas.ServiceQuotaWarningSummary_caseId:
+			v.CaseId = new(string)
+			return d.ReadString(schemas.ServiceQuotaWarningSummary_caseId, v.CaseId)
+		case schemas.ServiceQuotaWarningSummary_lastCheckedAt:
+			v.LastCheckedAt = new(time.Time)
+			return d.ReadTime(schemas.ServiceQuotaWarningSummary_lastCheckedAt, v.LastCheckedAt)
+		case schemas.ServiceQuotaWarningSummary_planArn:
+			v.PlanArn = new(string)
+			return d.ReadString(schemas.ServiceQuotaWarningSummary_planArn, v.PlanArn)
+		case schemas.ServiceQuotaWarningSummary_quotaCode:
+			v.QuotaCode = new(string)
+			return d.ReadString(schemas.ServiceQuotaWarningSummary_quotaCode, v.QuotaCode)
+		case schemas.ServiceQuotaWarningSummary_quotaName:
+			v.QuotaName = new(string)
+			return d.ReadString(schemas.ServiceQuotaWarningSummary_quotaName, v.QuotaName)
+		case schemas.ServiceQuotaWarningSummary_quotaRegion:
+			v.QuotaRegion = new(string)
+			return d.ReadString(schemas.ServiceQuotaWarningSummary_quotaRegion, v.QuotaRegion)
+		case schemas.ServiceQuotaWarningSummary_requestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.ServiceQuotaWarningSummary_requestId, v.RequestId)
+		case schemas.ServiceQuotaWarningSummary_serviceCode:
+			v.ServiceCode = new(string)
+			return d.ReadString(schemas.ServiceQuotaWarningSummary_serviceCode, v.ServiceCode)
+		case schemas.ServiceQuotaWarningSummary_status:
+			var ev string
+			if err := d.ReadString(schemas.ServiceQuotaWarningSummary_status, &ev); err != nil {
+				return err
+			}
+			v.Status = ServiceQuotaWarningStatus(ev)
+			return nil
+		case schemas.ServiceQuotaWarningSummary_warningCreatedAt:
+			v.WarningCreatedAt = new(time.Time)
+			return d.ReadTime(schemas.ServiceQuotaWarningSummary_warningCreatedAt, v.WarningCreatedAt)
+		case schemas.ServiceQuotaWarningSummary_warningMessage:
+			v.WarningMessage = new(string)
+			return d.ReadString(schemas.ServiceQuotaWarningSummary_warningMessage, v.WarningMessage)
+		}
+		return nil
+	})
+}
+
+// The Systems Manager document to run and the managed nodes to target for a
+// single Amazon Web Services Region.
+type SsmDocumentConfig struct {
+
+	// The Amazon Resource Name (ARN) of the Systems Manager document to run.
+	//
+	// This member is required.
+	DocumentArn *string
+
+	// The target filters that Systems Manager resolves to managed nodes when the
+	// command runs. To target specific managed nodes, use the InstanceIds key. You
+	// can specify up to five target filters.
+	//
+	// This member is required.
+	Targets []SsmTarget
+
+	// The cross-account role for the configuration.
+	CrossAccountRole *string
+
+	// The version of the Systems Manager document to run for this Region. When you
+	// omit it, Systems Manager runs the document's default version.
+	DocumentVersion *string
+
+	// The external ID (secret key) for the configuration.
+	ExternalId *string
+
+	// The parameters that are passed to this Region's Systems Manager document. You
+	// set parameters for each document, so each Region can run its document with its
+	// own parameters.
+	Parameters map[string][]string
+
+	noSmithyDocumentSerde
+}
+
+func (v *SsmDocumentConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SsmDocumentConfig)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SsmDocumentConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CrossAccountRole != nil {
+		s.WriteString(schemas.SsmDocumentConfig_crossAccountRole, *v.CrossAccountRole)
+	}
+	if v.DocumentArn != nil {
+		s.WriteString(schemas.SsmDocumentConfig_documentArn, *v.DocumentArn)
+	}
+	if v.DocumentVersion != nil {
+		s.WriteString(schemas.SsmDocumentConfig_documentVersion, *v.DocumentVersion)
+	}
+	if v.ExternalId != nil {
+		s.WriteString(schemas.SsmDocumentConfig_externalId, *v.ExternalId)
+	}
+	serializeSsmDocumentParameters(s, schemas.SsmDocumentConfig_parameters, v.Parameters)
+	serializeSsmTargetList(s, schemas.SsmDocumentConfig_targets, v.Targets)
+}
+func (v *SsmDocumentConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SsmDocumentConfig, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SsmDocumentConfig_crossAccountRole:
+			v.CrossAccountRole = new(string)
+			return d.ReadString(schemas.SsmDocumentConfig_crossAccountRole, v.CrossAccountRole)
+		case schemas.SsmDocumentConfig_documentArn:
+			v.DocumentArn = new(string)
+			return d.ReadString(schemas.SsmDocumentConfig_documentArn, v.DocumentArn)
+		case schemas.SsmDocumentConfig_documentVersion:
+			v.DocumentVersion = new(string)
+			return d.ReadString(schemas.SsmDocumentConfig_documentVersion, v.DocumentVersion)
+		case schemas.SsmDocumentConfig_externalId:
+			v.ExternalId = new(string)
+			return d.ReadString(schemas.SsmDocumentConfig_externalId, v.ExternalId)
+		case schemas.SsmDocumentConfig_parameters:
+			return deserializeSsmDocumentParameters(d, schemas.SsmDocumentConfig_parameters, &v.Parameters)
+		case schemas.SsmDocumentConfig_targets:
+			return deserializeSsmTargetList(d, schemas.SsmDocumentConfig_targets, &v.Targets)
+		}
+		return nil
+	})
+}
+
+// Configuration for an AWS Systems Manager SendCommand execution block in a
+// Region switch plan. This execution block runs a Systems Manager document on the
+// managed nodes that you target in each Amazon Web Services Region of the plan.
+type SsmSendCommandConfiguration struct {
+
+	// The Systems Manager document and target configuration for each Amazon Web
+	// Services Region in the plan. Provide an entry for each Amazon Web Services
+	// Region that you want the command to run in.
+	//
+	// This member is required.
+	RegionDocuments map[string]SsmDocumentConfig
+
+	// How often, in minutes, Region switch retries the command if it returns a
+	// failure.
+	//
+	// This member is required.
+	RetryIntervalMinutes *float32
+
+	// The timeout value specified for the configuration.
+	TimeoutMinutes *int32
+
+	// Specifies the settings that determine how the execution block behaves when the
+	// plan runs ungracefully, such as whether to skip the command.
+	Ungraceful *SsmSendCommandUngraceful
+
+	noSmithyDocumentSerde
+}
+
+func (v *SsmSendCommandConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SsmSendCommandConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SsmSendCommandConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeRegionSsmDocumentMap(s, schemas.SsmSendCommandConfiguration_regionDocuments, v.RegionDocuments)
+	if v.RetryIntervalMinutes != nil {
+		s.WriteFloat32(schemas.SsmSendCommandConfiguration_retryIntervalMinutes, *v.RetryIntervalMinutes)
+	}
+	if v.TimeoutMinutes != nil {
+		s.WriteInt32(schemas.SsmSendCommandConfiguration_timeoutMinutes, *v.TimeoutMinutes)
+	}
+	if v.Ungraceful != nil {
+		s.WriteStruct(schemas.SsmSendCommandConfiguration_ungraceful)
+		v.Ungraceful.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *SsmSendCommandConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SsmSendCommandConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SsmSendCommandConfiguration_regionDocuments:
+			return deserializeRegionSsmDocumentMap(d, schemas.SsmSendCommandConfiguration_regionDocuments, &v.RegionDocuments)
+		case schemas.SsmSendCommandConfiguration_retryIntervalMinutes:
+			v.RetryIntervalMinutes = new(float32)
+			return d.ReadFloat32(schemas.SsmSendCommandConfiguration_retryIntervalMinutes, v.RetryIntervalMinutes)
+		case schemas.SsmSendCommandConfiguration_timeoutMinutes:
+			v.TimeoutMinutes = new(int32)
+			return d.ReadInt32(schemas.SsmSendCommandConfiguration_timeoutMinutes, v.TimeoutMinutes)
+		case schemas.SsmSendCommandConfiguration_ungraceful:
+			v.Ungraceful = &SsmSendCommandUngraceful{}
+			return v.Ungraceful.Deserialize(d)
+		}
+		return nil
+	})
+}
+
+// The ungraceful execution settings for an AWS Systems Manager SendCommand
+// execution block.
+type SsmSendCommandUngraceful struct {
+
+	// Specifies whether to skip running this command during an ungraceful execution.
+	// Set to skip to skip the command.
+	Behavior SsmSendCommandUngracefulBehavior
+
+	noSmithyDocumentSerde
+}
+
+func (v *SsmSendCommandUngraceful) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SsmSendCommandUngraceful)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SsmSendCommandUngraceful) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Behavior != "" {
+		s.WriteString(schemas.SsmSendCommandUngraceful_behavior, string(v.Behavior))
+	}
+}
+func (v *SsmSendCommandUngraceful) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SsmSendCommandUngraceful, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SsmSendCommandUngraceful_behavior:
+			var ev string
+			if err := d.ReadString(schemas.SsmSendCommandUngraceful_behavior, &ev); err != nil {
+				return err
+			}
+			v.Behavior = SsmSendCommandUngracefulBehavior(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
+// A single SendCommand target filter, consisting of a target key and the values
+// matched by that key.
+type SsmTarget struct {
+
+	// The target key, such as tag:Environment or InstanceIds .
+	//
+	// This member is required.
+	Key *string
+
+	// The values matched by this target key. Multiple values combine with a logical
+	// OR.
+	//
+	// This member is required.
+	Values []string
+
+	noSmithyDocumentSerde
+}
+
+func (v *SsmTarget) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SsmTarget)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SsmTarget) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Key != nil {
+		s.WriteString(schemas.SsmTarget_key, *v.Key)
+	}
+	serializeSsmTargetValueList(s, schemas.SsmTarget_values, v.Values)
+}
+func (v *SsmTarget) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SsmTarget, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SsmTarget_key:
+			v.Key = new(string)
+			return d.ReadString(schemas.SsmTarget_key, v.Key)
+		case schemas.SsmTarget_values:
+			return deserializeSsmTargetValueList(d, schemas.SsmTarget_values, &v.Values)
 		}
 		return nil
 	})

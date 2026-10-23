@@ -5,6 +5,8 @@ package eks
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/eks/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -61,6 +63,33 @@ type ListUpdatesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListUpdatesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListUpdatesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListUpdatesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AddonName != nil {
+		s.WriteString(schemas.ListUpdatesRequest_addonName, *v.AddonName)
+	}
+	if v.CapabilityName != nil {
+		s.WriteString(schemas.ListUpdatesRequest_capabilityName, *v.CapabilityName)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListUpdatesRequest_maxResults, *v.MaxResults)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.ListUpdatesRequest_name, *v.Name)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListUpdatesRequest_nextToken, *v.NextToken)
+	}
+	if v.NodegroupName != nil {
+		s.WriteString(schemas.ListUpdatesRequest_nodegroupName, *v.NodegroupName)
+	}
+}
+
 type ListUpdatesOutput struct {
 
 	// The nextToken value returned from a previous paginated request, where maxResults
@@ -81,13 +110,35 @@ type ListUpdatesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListUpdatesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListUpdatesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListUpdatesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListUpdatesResponse_nextToken, *v.NextToken)
+	}
+	serializeStringList(s, schemas.ListUpdatesResponse_updateIds, v.UpdateIds)
+}
+func (v *ListUpdatesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListUpdatesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListUpdatesResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListUpdatesResponse_nextToken, v.NextToken)
+		case schemas.ListUpdatesResponse_updateIds:
+			return deserializeStringList(d, schemas.ListUpdatesResponse_updateIds, &v.UpdateIds)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListUpdatesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListUpdates{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListUpdates, schemas.ListUpdatesRequest, schemas.ListUpdatesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListUpdates{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListUpdates, schemas.ListUpdatesRequest, schemas.ListUpdatesResponse), output: &ListUpdatesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

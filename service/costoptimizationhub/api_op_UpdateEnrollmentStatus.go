@@ -4,7 +4,9 @@ package costoptimizationhub
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/costoptimizationhub/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/costoptimizationhub/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -46,6 +48,21 @@ type UpdateEnrollmentStatusInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateEnrollmentStatusInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateEnrollmentStatusRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateEnrollmentStatusInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IncludeMemberAccounts != nil {
+		s.WriteBool(schemas.UpdateEnrollmentStatusRequest_includeMemberAccounts, *v.IncludeMemberAccounts)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.UpdateEnrollmentStatusRequest_status, string(v.Status))
+	}
+}
+
 type UpdateEnrollmentStatusOutput struct {
 
 	// The enrollment status of the account.
@@ -57,13 +74,32 @@ type UpdateEnrollmentStatusOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateEnrollmentStatusOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateEnrollmentStatusResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateEnrollmentStatusOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Status != nil {
+		s.WriteString(schemas.UpdateEnrollmentStatusResponse_status, *v.Status)
+	}
+}
+func (v *UpdateEnrollmentStatusOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateEnrollmentStatusResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateEnrollmentStatusResponse_status:
+			v.Status = new(string)
+			return d.ReadString(schemas.UpdateEnrollmentStatusResponse_status, v.Status)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateEnrollmentStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpUpdateEnrollmentStatus{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateEnrollmentStatus, schemas.UpdateEnrollmentStatusRequest, schemas.UpdateEnrollmentStatusResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpUpdateEnrollmentStatus{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateEnrollmentStatus, schemas.UpdateEnrollmentStatusRequest, schemas.UpdateEnrollmentStatusResponse), output: &UpdateEnrollmentStatusOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package bedrockruntime
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/bedrockruntime/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockruntime/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithysync "github.com/aws/smithy-go/sync"
 	"sync"
@@ -138,6 +140,45 @@ type InvokeModelWithResponseStreamInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *InvokeModelWithResponseStreamInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InvokeModelWithResponseStreamRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InvokeModelWithResponseStreamInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Accept != nil {
+		s.WriteString(schemas.InvokeModelWithResponseStreamRequest_accept, *v.Accept)
+	}
+	if v.Body != nil {
+		s.WriteBlob(schemas.InvokeModelWithResponseStreamRequest_body, v.Body)
+	}
+	if v.ContentType != nil {
+		s.WriteString(schemas.InvokeModelWithResponseStreamRequest_contentType, *v.ContentType)
+	}
+	if v.GuardrailIdentifier != nil {
+		s.WriteString(schemas.InvokeModelWithResponseStreamRequest_guardrailIdentifier, *v.GuardrailIdentifier)
+	}
+	if v.GuardrailVersion != nil {
+		s.WriteString(schemas.InvokeModelWithResponseStreamRequest_guardrailVersion, *v.GuardrailVersion)
+	}
+	if v.ModelId != nil {
+		s.WriteString(schemas.InvokeModelWithResponseStreamRequest_modelId, *v.ModelId)
+	}
+	if v.PerformanceConfigLatency != "" {
+		s.WriteString(schemas.InvokeModelWithResponseStreamRequest_performanceConfigLatency, string(v.PerformanceConfigLatency))
+	}
+	if v.RequestMetadata != nil {
+		s.WriteString(schemas.InvokeModelWithResponseStreamRequest_requestMetadata, *v.RequestMetadata)
+	}
+	if v.ServiceTier != "" {
+		s.WriteString(schemas.InvokeModelWithResponseStreamRequest_serviceTier, string(v.ServiceTier))
+	}
+	if v.Trace != "" {
+		s.WriteString(schemas.InvokeModelWithResponseStreamRequest_trace, string(v.Trace))
+	}
+}
+
 type InvokeModelWithResponseStreamOutput struct {
 
 	// The MIME type of the inference result.
@@ -159,24 +200,64 @@ type InvokeModelWithResponseStreamOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *InvokeModelWithResponseStreamOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InvokeModelWithResponseStreamResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InvokeModelWithResponseStreamOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ContentType != nil {
+		s.WriteString(schemas.InvokeModelWithResponseStreamResponse_contentType, *v.ContentType)
+	}
+	if v.PerformanceConfigLatency != "" {
+		s.WriteString(schemas.InvokeModelWithResponseStreamResponse_performanceConfigLatency, string(v.PerformanceConfigLatency))
+	}
+	if v.ServiceTier != "" {
+		s.WriteString(schemas.InvokeModelWithResponseStreamResponse_serviceTier, string(v.ServiceTier))
+	}
+}
+func (v *InvokeModelWithResponseStreamOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InvokeModelWithResponseStreamResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InvokeModelWithResponseStreamResponse_contentType:
+			v.ContentType = new(string)
+			return d.ReadString(schemas.InvokeModelWithResponseStreamResponse_contentType, v.ContentType)
+		case schemas.InvokeModelWithResponseStreamResponse_performanceConfigLatency:
+			var ev string
+			if err := d.ReadString(schemas.InvokeModelWithResponseStreamResponse_performanceConfigLatency, &ev); err != nil {
+				return err
+			}
+			v.PerformanceConfigLatency = types.PerformanceConfigLatency(ev)
+			return nil
+		case schemas.InvokeModelWithResponseStreamResponse_serviceTier:
+			var ev string
+			if err := d.ReadString(schemas.InvokeModelWithResponseStreamResponse_serviceTier, &ev); err != nil {
+				return err
+			}
+			v.ServiceTier = types.ServiceTierType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // GetStream returns the type to interact with the event stream.
 func (o *InvokeModelWithResponseStreamOutput) GetStream() *InvokeModelWithResponseStreamEventStream {
 	return o.eventStream
 }
 
 func (c *Client) addOperationInvokeModelWithResponseStreamMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpInvokeModelWithResponseStream{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.InvokeModelWithResponseStream, schemas.InvokeModelWithResponseStreamRequest, schemas.InvokeModelWithResponseStreamResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpInvokeModelWithResponseStream{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.InvokeModelWithResponseStream, schemas.InvokeModelWithResponseStreamRequest, schemas.InvokeModelWithResponseStreamResponse), output: &InvokeModelWithResponseStreamOutput{}}, middleware.After); err != nil {
+		return err
+	}
+	if err := stack.Deserialize.Insert(&deserializeOpEventStreamInvokeModelWithResponseStream{options: &options}, "OperationDeserializer", middleware.Before); err != nil {
 		return err
 	}
 
-	if err = addEventStreamInvokeModelWithResponseStreamMiddleware(stack, options); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}

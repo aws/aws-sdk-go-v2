@@ -4,7 +4,9 @@ package costandusagereportservice
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/costandusagereportservice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/costandusagereportservice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,21 @@ type PutReportDefinitionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutReportDefinitionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutReportDefinitionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutReportDefinitionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ReportDefinition != nil {
+		s.WriteStruct(schemas.PutReportDefinitionRequest_ReportDefinition)
+		v.ReportDefinition.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeTagList(s, schemas.PutReportDefinitionRequest_Tags, v.Tags)
+}
+
 // If the action is successful, the service sends back an HTTP 200 response with
 // an empty HTTP body.
 type PutReportDefinitionOutput struct {
@@ -48,13 +65,26 @@ type PutReportDefinitionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutReportDefinitionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutReportDefinitionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutReportDefinitionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *PutReportDefinitionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PutReportDefinitionResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPutReportDefinitionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpPutReportDefinition{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutReportDefinition, schemas.PutReportDefinitionRequest, schemas.PutReportDefinitionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpPutReportDefinition{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutReportDefinition, schemas.PutReportDefinitionRequest, schemas.PutReportDefinitionResponse), output: &PutReportDefinitionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

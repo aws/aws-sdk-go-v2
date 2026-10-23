@@ -929,6 +929,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The encryption configuration for a vector index. By default, if you don't specify, all new vectors in the vector index will use the encryption configuration of the vector bucket.</p>"
                     }
+                },
+                "indexMode": {
+                    "target": "com.amazonaws.s3vectors#IndexMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The mode that determines how the vector index processes queries.</p> <p>Valid values:</p> <ul> <li> <p> <code>CLASSIC</code> - Applies metadata filters during the vector search.</p> </li> <li> <p> <code>ENHANCED</code> - Applies metadata filters before the vector search.</p> </li> </ul>"
+                    }
                 }
             },
             "traits": {
@@ -940,6 +946,23 @@
             "traits": {
                 "aws.api#arnReference": {},
                 "smithy.api#pattern": "^arn:aws[-a-z0-9]*:s3vectors:[a-z0-9-]+:[0-9]{12}:bucket/[a-z0-9][a-z0-9-.]{1,61}[a-z0-9]/index/[a-z0-9][a-z0-9-.]{1,61}[a-z0-9]$"
+            }
+        },
+        "com.amazonaws.s3vectors#IndexMode": {
+            "type": "enum",
+            "members": {
+                "CLASSIC": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CLASSIC"
+                    }
+                },
+                "ENHANCED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ENHANCED"
+                    }
+                }
             }
         },
         "com.amazonaws.s3vectors#IndexName": {
@@ -965,6 +988,9 @@
                 },
                 {
                     "target": "com.amazonaws.s3vectors#ListIndexes"
+                },
+                {
+                    "target": "com.amazonaws.s3vectors#UpdateIndexMode"
                 }
             ],
             "resources": [
@@ -1659,6 +1685,65 @@
                 "smithy.api#documentation": "<p>The attributes of a vector to add to a vector index.</p>"
             }
         },
+        "com.amazonaws.s3vectors#PutVectorBucketDefaultIndexMode": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.s3vectors#PutVectorBucketDefaultIndexModeInput"
+            },
+            "output": {
+                "target": "com.amazonaws.s3vectors#PutVectorBucketDefaultIndexModeOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.s3vectors#NotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.s3vectors#ServiceUnavailableException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates the default index mode for a vector bucket. The updated default applies to vector indexes that you create after the request succeeds. The operation doesn't change existing vector indexes. To specify the vector bucket, you must use either the vector bucket name or the vector bucket Amazon Resource Name (ARN).</p> <dl> <dt>Permissions</dt> <dd> <p>You must have the <code>s3vectors:PutVectorBucketDefaultIndexMode</code> permission to use this operation.</p> </dd> </dl>",
+                "smithy.api#http": {
+                    "uri": "/PutVectorBucketDefaultIndexMode",
+                    "method": "POST"
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.s3vectors#PutVectorBucketDefaultIndexModeInput": {
+            "type": "structure",
+            "members": {
+                "vectorBucketName": {
+                    "target": "com.amazonaws.s3vectors#VectorBucketName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the vector bucket to update.</p>"
+                    }
+                },
+                "vectorBucketArn": {
+                    "target": "com.amazonaws.s3vectors#VectorBucketArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the vector bucket to update.</p>"
+                    }
+                },
+                "defaultIndexMode": {
+                    "target": "com.amazonaws.s3vectors#IndexMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The default mode to assign to new vector indexes in the vector bucket. This change doesn't affect existing vector indexes.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.s3vectors#PutVectorBucketDefaultIndexModeOutput": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.s3vectors#PutVectorBucketPolicy": {
             "type": "operation",
             "input": {
@@ -1921,6 +2006,12 @@
                     "target": "smithy.api#Document",
                     "traits": {
                         "smithy.api#documentation": "<p>Metadata filter to apply during the query. For more information about metadata keys, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-vectors-metadata-filtering.html\">Metadata filtering</a> in the <i>Amazon S3 User Guide</i>. </p>"
+                    }
+                },
+                "queryMode": {
+                    "target": "com.amazonaws.s3vectors#IndexMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The mode to use to process the query. If you don't specify a query mode, the operation uses the mode that's currently configured for the vector index.</p> <p>Valid values:</p> <ul> <li> <p> <code>CLASSIC</code> - Applies metadata filters during the vector search. You can't specify <code>CLASSIC</code> for an <code>ENHANCED</code> index.</p> </li> <li> <p> <code>ENHANCED</code> - Applies metadata filters before the vector search.</p> </li> </ul>"
                     }
                 },
                 "returnMetadata": {
@@ -2645,6 +2736,71 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.s3vectors#UpdateIndexMode": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.s3vectors#UpdateIndexModeInput"
+            },
+            "output": {
+                "target": "com.amazonaws.s3vectors#UpdateIndexModeOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.s3vectors#NotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.s3vectors#ServiceUnavailableException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates the mode for an existing vector index. You can set the mode to <code>ENHANCED</code> for any vector index. You can set the mode to <code>CLASSIC</code> only for a vector index in a vector bucket created before September 30, 2026. This operation doesn't change the default index mode of the vector bucket or the mode of other vector indexes. Specify the vector index by using its Amazon Resource Name (ARN) or both the vector bucket name and vector index name.</p> <dl> <dt>Permissions</dt> <dd> <p>You must have the <code>s3vectors:UpdateIndexMode</code> permission to use this operation.</p> </dd> </dl>",
+                "smithy.api#http": {
+                    "uri": "/UpdateIndexMode",
+                    "method": "POST"
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.s3vectors#UpdateIndexModeInput": {
+            "type": "structure",
+            "members": {
+                "vectorBucketName": {
+                    "target": "com.amazonaws.s3vectors#VectorBucketName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the vector bucket that contains the vector index.</p>"
+                    }
+                },
+                "indexName": {
+                    "target": "com.amazonaws.s3vectors#IndexName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the vector index to update.</p>"
+                    }
+                },
+                "indexArn": {
+                    "target": "com.amazonaws.s3vectors#IndexArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the vector index to update.</p>"
+                    }
+                },
+                "indexMode": {
+                    "target": "com.amazonaws.s3vectors#IndexMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The new mode for the vector index.</p> <p>Valid values:</p> <ul> <li> <p> <code>CLASSIC</code> - Applies metadata filters during the vector search. You can specify <code>CLASSIC</code> only for a vector index in a vector bucket created before September 30, 2026.</p> </li> <li> <p> <code>ENHANCED</code> - Applies metadata filters before the vector search.</p> </li> </ul>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.s3vectors#UpdateIndexModeOutput": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.s3vectors#ValidationException": {
             "type": "structure",
             "members": {
@@ -2723,6 +2879,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The encryption configuration for the vector bucket.</p>"
                     }
+                },
+                "defaultIndexMode": {
+                    "target": "com.amazonaws.s3vectors#IndexMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The mode that is automatically assigned to new vector indexes in the vector bucket. Changing the default index mode doesn't affect existing vector indexes.</p>"
+                    }
                 }
             },
             "traits": {
@@ -2768,6 +2930,9 @@
                 },
                 {
                     "target": "com.amazonaws.s3vectors#ListVectorBuckets"
+                },
+                {
+                    "target": "com.amazonaws.s3vectors#PutVectorBucketDefaultIndexMode"
                 },
                 {
                     "target": "com.amazonaws.s3vectors#PutVectorBucketPolicy"

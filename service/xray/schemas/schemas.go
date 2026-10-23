@@ -403,6 +403,12 @@ var _ClientID = smithy.NewSchema(smithy.ShapeID{
 	Name:      "ClientID",
 }, smithy.ShapeTypeString, 0)
 
+var CloudWatchLogsConfiguration = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.xray",
+	Name:      "CloudWatchLogsConfiguration",
+}, smithy.ShapeTypeStructure, 1)
+var CloudWatchLogsConfiguration_SpansLogGroupKmsKeyId *smithy.Schema
+
 var _CooldownWindowMinutes = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.xray",
 	Name:      "CooldownWindowMinutes",
@@ -956,14 +962,20 @@ var _Integer = smithy.NewSchema(smithy.ShapeID{
 var InvalidPolicyRevisionIdException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.xray",
 	Name:      "InvalidPolicyRevisionIdException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var InvalidPolicyRevisionIdException_Message *smithy.Schema
 
 var InvalidRequestException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.xray",
 	Name:      "InvalidRequestException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var InvalidRequestException_Message *smithy.Schema
+
+var _KmsKeyId = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.xray",
+	Name:      "KmsKeyId",
+}, smithy.ShapeTypeString, 0)
 
 var _LinksList = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.xray",
@@ -974,13 +986,15 @@ var _LinksList_member *smithy.Schema
 var LockoutPreventionException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.xray",
 	Name:      "LockoutPreventionException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var LockoutPreventionException_Message *smithy.Schema
 
 var MalformedPolicyDocumentException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.xray",
 	Name:      "MalformedPolicyDocumentException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var MalformedPolicyDocumentException_Message *smithy.Schema
 
 var _MaxRate = smithy.NewSchema(smithy.ShapeID{
@@ -1011,7 +1025,8 @@ var _NullableLong = smithy.NewSchema(smithy.ShapeID{
 var PolicyCountLimitExceededException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.xray",
 	Name:      "PolicyCountLimitExceededException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var PolicyCountLimitExceededException_Message *smithy.Schema
 
 var _PolicyDocument = smithy.NewSchema(smithy.ShapeID{
@@ -1032,7 +1047,8 @@ var _PolicyRevisionId = smithy.NewSchema(smithy.ShapeID{
 var PolicySizeLimitExceededException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.xray",
 	Name:      "PolicySizeLimitExceededException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var PolicySizeLimitExceededException_Message *smithy.Schema
 
 var _Priority = smithy.NewSchema(smithy.ShapeID{
@@ -1088,7 +1104,8 @@ var ResourceARNDetail_ARN *smithy.Schema
 var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.xray",
 	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.HTTPError{Code: 404})
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 404})
 var ResourceNotFoundException_Message *smithy.Schema
 
 var ResourceNotFoundException_ResourceName *smithy.Schema
@@ -1230,7 +1247,7 @@ var _RootCauseExceptions_member *smithy.Schema
 var RuleLimitExceededException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.xray",
 	Name:      "RuleLimitExceededException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var RuleLimitExceededException_Message *smithy.Schema
 
 var _RuleName = smithy.NewSchema(smithy.ShapeID{
@@ -1636,7 +1653,8 @@ var _TelemetryRecordList_member *smithy.Schema
 var ThrottledException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.xray",
 	Name:      "ThrottledException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 429})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 429})
 var ThrottledException_Message *smithy.Schema
 
 var TimeRangeType = smithy.NewSchema(smithy.ShapeID{
@@ -1682,7 +1700,8 @@ var _Token = smithy.NewSchema(smithy.ShapeID{
 var TooManyTagsException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.xray",
 	Name:      "TooManyTagsException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var TooManyTagsException_Message *smithy.Schema
 
 var TooManyTagsException_ResourceName *smithy.Schema
@@ -2539,8 +2558,10 @@ var UpdateSamplingRuleResult_SamplingRuleRecord *smithy.Schema
 var UpdateTraceSegmentDestinationRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.xray",
 	Name:      "UpdateTraceSegmentDestinationRequest",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 2)
 var UpdateTraceSegmentDestinationRequest_Destination *smithy.Schema
+
+var UpdateTraceSegmentDestinationRequest_CloudWatchLogsConfiguration *smithy.Schema
 
 var UpdateTraceSegmentDestinationResult = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.xray",
@@ -2612,6 +2633,8 @@ func init() {
 	BackendConnectionErrors_UnknownHostCount = BackendConnectionErrors.AddMember("UnknownHostCount", _NullableInteger)
 
 	BackendConnectionErrors_OtherCount = BackendConnectionErrors.AddMember("OtherCount", _NullableInteger)
+
+	CloudWatchLogsConfiguration_SpansLogGroupKmsKeyId = CloudWatchLogsConfiguration.AddMember("SpansLogGroupKmsKeyId", _KmsKeyId)
 
 	ErrorStatistics_ThrottleCount = ErrorStatistics.AddMember("ThrottleCount", _NullableLong)
 
@@ -3628,6 +3651,8 @@ func init() {
 	UpdateSamplingRuleResult_SamplingRuleRecord = UpdateSamplingRuleResult.AddMember("SamplingRuleRecord", SamplingRuleRecord)
 
 	UpdateTraceSegmentDestinationRequest_Destination = UpdateTraceSegmentDestinationRequest.AddMember("Destination", TraceSegmentDestination)
+
+	UpdateTraceSegmentDestinationRequest_CloudWatchLogsConfiguration = UpdateTraceSegmentDestinationRequest.AddMember("CloudWatchLogsConfiguration", CloudWatchLogsConfiguration)
 
 	UpdateTraceSegmentDestinationResult_Destination = UpdateTraceSegmentDestinationResult.AddMember("Destination", TraceSegmentDestination)
 

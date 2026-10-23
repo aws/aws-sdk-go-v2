@@ -260,6 +260,42 @@ type AvailableAdditionalStorageVolumesOption struct {
 	noSmithyDocumentSerde
 }
 
+// Contains the unused capacity of a DB capacity reservation in one Availability
+// Zone.
+//
+// This data type is used as a response element in the following operations:
+//
+//   - CancelDBCapacityReservation
+//
+//   - CreateDBCapacityReservation
+//
+//   - DescribeDBCapacityReservations
+//
+//   - ModifyDBCapacityReservation
+type AvailableCapacityPerAvailabilityZone struct {
+
+	// The name of the Availability Zone.
+	AvailabilityZone *string
+
+	// The number of DB instances that remain available in this Availability Zone.
+	// Amazon RDS decreases this value when a DB instance takes a unit of reserved
+	// capacity in this Availability Zone, and it increases this value when a DB
+	// instance releases that unit.
+	//
+	// A DB instance with a pending modification also holds a unit of reserved
+	// capacity. A DB instance has a pending modification when Amazon RDS accepts a
+	// change to the DB instance and applies that change later, during the maintenance
+	// window. Amazon RDS holds the unit from the time that it accepts the request. To
+	// find a DB instance with a pending modification, check PendingModifiedValues in
+	// the response of DescribeDBInstances .
+	//
+	// Amazon RDS reports available capacity only for a reservation that is in the
+	// active state and not past its end date. Otherwise, this value is 0 .
+	AvailableCapacity *int32
+
+	noSmithyDocumentSerde
+}
+
 // Contains the available processor feature information for the DB instance class
 // of a DB instance.
 //
@@ -697,6 +733,181 @@ type CustomDBEngineVersionAMI struct {
 
 	// A value that indicates the status of a custom engine version (CEV).
 	Status *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains the details of a DB capacity reservation.
+//
+// This data type is used as a response element in the following operations:
+//
+//   - CancelDBCapacityReservation
+//
+//   - CreateDBCapacityReservation
+//
+//   - DescribeDBCapacityReservations
+//
+//   - ModifyDBCapacityReservation
+type DBCapacityReservation struct {
+
+	// The unused capacity of the reservation, reported for each Availability Zone of
+	// the reservation. Each entry names one Availability Zone, and it reports the
+	// number of DB instances that remain available in that Availability Zone.
+	//
+	// Amazon RDS reports available capacity only for a reservation that is in the
+	// active state and not past its end date. Otherwise, each entry reports an
+	// available capacity of 0 . A future-dated reservation that hasn't started reports
+	// 0 , and a reservation that Amazon RDS is modifying reports 0 .
+	//
+	// A reservation reports the pending state while Amazon RDS modifies it.
+	// Therefore, a reservation in the active state that reports no available capacity
+	// has no unused capacity.
+	AvailableCapacityPerAvailabilityZoneList []AvailableCapacityPerAvailabilityZone
+
+	// The capacity commitment of the reservation. Amazon RDS returns this object only
+	// for a future-dated reservation.
+	CommitmentInfo *DBCapacityReservationCommitmentInfo
+
+	// The date and time when the reservation was created, in Universal Coordinated
+	// Time (UTC).
+	CreateDate *time.Time
+
+	// The Amazon Resource Name (ARN) of the DB capacity reservation.
+	DBCapacityReservationArn *string
+
+	// The unique identifier of the DB capacity reservation. The identifier has the
+	// prefix dbcr- . Every other DB capacity reservation operation takes this
+	// identifier.
+	DBCapacityReservationIdentifier *string
+
+	// The name that you specified for the DB capacity reservation.
+	DBCapacityReservationName *string
+
+	// The DB instance class for the reserved capacity. You specify this value when
+	// you create the reservation, and you can't change it afterward.
+	DBInstanceClass *string
+
+	// The date and time when the reservation expires, in Universal Coordinated Time
+	// (UTC). Amazon RDS doesn't return this value if the reservation doesn't expire.
+	//
+	// A DB instance that uses the reservation keeps running after the reservation
+	// expires. It continues on unreserved capacity, and Amazon RDS doesn't stop it or
+	// modify it. However, Amazon RDS no longer reserves capacity for the DB instance.
+	// Amazon RDS might later move the DB instance to different hardware, for example
+	// during hardware maintenance. That move can fail when the Amazon Web Services
+	// Region has insufficient capacity for the DB instance class.
+	EndDate *time.Time
+
+	// The database engine for the reserved capacity. You specify this value when you
+	// create the reservation, and you can't change it afterward.
+	Engine *string
+
+	// The license model for the reserved capacity. Amazon RDS returns this value only
+	// for a reservation that reserves capacity for a specific license model. Amazon
+	// RDS doesn't return this value for a reservation whose database engine doesn't
+	// support a license model.
+	//
+	// A DB instance launches into the reservation only when the license model of the
+	// DB instance matches this value. For a reservation that holds no license model,
+	// Amazon RDS applies no license model check at launch.
+	//
+	// Valid Values:
+	//
+	//   - RDS for Microsoft SQL Server Enterprise Edition and Standard Edition -
+	//   license-included | bring-your-own-media
+	//
+	//   - RDS for Microsoft SQL Server Developer Edition - bring-your-own-license
+	//
+	//   - RDS for Oracle - bring-your-own-license | license-included
+	//
+	//   - RDS for Db2 Standard Edition and Advanced Edition - bring-your-own-license
+	//   | marketplace-license
+	//
+	// For RDS for Db2 Standard Edition and Advanced Edition, a reservation created
+	// without a license model holds bring-your-own-license .
+	LicenseModel *string
+
+	// The number of DB instances that Amazon RDS reserves in each Availability Zone
+	// of the reservation. This value matches the CapacityPerAvailabilityZone
+	// parameter of the request. The total reserved capacity is this value multiplied
+	// by the number of Availability Zones of the reservation.
+	ReservedCapacityPerAvailabilityZone *int32
+
+	// The date and time when a future-dated reservation starts, in Universal
+	// Coordinated Time (UTC). Amazon RDS doesn't return this value for a reservation
+	// that started immediately.
+	StartDate *time.Time
+
+	// The current state of the DB capacity reservation. A DB instance can use the
+	// reservation in the active state only.
+	//
+	// Valid Values:
+	//
+	//   - active - Amazon RDS holds the reserved capacity, and a DB instance can use
+	//   it.
+	//
+	//   - pending - The reservation isn't ready to use yet. Amazon RDS is creating the
+	//   reserved capacity, or it is applying a requested modification.
+	//
+	//   - assessing - Amazon RDS is evaluating the request for a future-dated
+	//   reservation.
+	//
+	//   - scheduled - Amazon RDS accepted a future-dated reservation, and the
+	//   reservation is waiting for its start date.
+	//
+	//   - delayed - Amazon RDS couldn't provide the reserved capacity of a
+	//   future-dated reservation by its start date.
+	//
+	//   - unsupported - Amazon RDS can't fulfill the future-dated reservation as
+	//   requested.
+	//
+	//   - expired - The reservation passed its end date. Amazon RDS releases the
+	//   reserved capacity.
+	//
+	//   - cancelled - You cancelled the reservation, and Amazon RDS released the
+	//   reserved capacity.
+	//
+	//   - failed - Amazon RDS couldn't reserve the capacity.
+	//
+	// The values assessing , scheduled , delayed , and unsupported apply to a
+	// future-dated reservation only.
+	State DBCapacityReservationState
+
+	// The tags associated with the DB capacity reservation.
+	TagList []Tag
+
+	noSmithyDocumentSerde
+}
+
+// Contains the capacity commitment details of a DB capacity reservation,
+// including the number of committed DB instances in each Availability Zone and the
+// end date of the commitment period. Amazon RDS holds the committed capacity until
+// the commitment ends. Amazon RDS rejects a request to cancel a reservation in the
+// active state, and a request to reduce the reserved capacity below the
+// commitment.
+//
+// This data type is used as a response element in the following operations:
+//
+//   - CancelDBCapacityReservation
+//
+//   - CreateDBCapacityReservation
+//
+//   - DescribeDBCapacityReservations
+//
+//   - ModifyDBCapacityReservation
+type DBCapacityReservationCommitmentInfo struct {
+
+	// The date and time when the commitment ends, in Universal Coordinated Time
+	// (UTC). This date reports the capacity commitment that Amazon RDS granted.
+	//
+	// Amazon RDS can grant a shorter capacity commitment than you request in
+	// CommitmentDuration . Therefore, this date can fall earlier than StartDate plus
+	// CommitmentDuration .
+	CommitmentEndDate *time.Time
+
+	// The number of DB instances that Amazon RDS holds in each Availability Zone of
+	// the reservation for the length of the commitment.
+	CommittedCapacityPerAvailabilityZone *int32
 
 	noSmithyDocumentSerde
 }
@@ -1148,7 +1359,13 @@ type DBCluster struct {
 	// Reserved for future use.
 	StatusInfos []DBClusterStatusInfo
 
-	// Indicates whether the DB cluster is encrypted.
+	// Specifies whether the DB cluster is encrypted with an Amazon Web Services
+	// managed key or a customer managed key.
+	//
+	// If the DB cluster is encrypted with an Amazon Web Services owned key, this
+	// value is false and StorageEncryptionType is sse-rds . In that case, the data at
+	// rest is still encrypted. To determine how the data at rest is protected, use
+	// StorageEncryptionType .
 	StorageEncrypted *bool
 
 	// The type of encryption used to protect data at rest in the DB cluster. Possible
@@ -1627,7 +1844,13 @@ type DBClusterSnapshot struct {
 	//   - creating
 	Status *string
 
-	// Indicates whether the DB cluster snapshot is encrypted.
+	// Specifies whether the DB cluster snapshot is encrypted with an Amazon Web
+	// Services managed key or a customer managed key.
+	//
+	// If the DB cluster snapshot is encrypted with an Amazon Web Services owned key,
+	// this value is false and StorageEncryptionType is sse-rds . In that case, the
+	// data at rest is still encrypted. To determine how the data at rest is protected,
+	// use StorageEncryptionType .
 	StorageEncrypted *bool
 
 	// The type of encryption used to protect data at rest in the DB cluster snapshot.
@@ -2043,6 +2266,11 @@ type DBInstance struct {
 	// [Working with Amazon RDS on Amazon Web Services Outposts]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-on-outposts.html
 	// [Customer-owned IP addresses]: https://docs.aws.amazon.com/outposts/latest/userguide/routing.html#ip-addressing
 	CustomerOwnedIpEnabled *bool
+
+	// The identifier of the DB capacity reservation associated with this DB instance.
+	// Amazon RDS doesn't return this value if the DB instance doesn't use a DB
+	// capacity reservation.
+	DBCapacityReservationIdentifier *string
 
 	// If the DB instance is a member of a DB cluster, indicates the name of the DB
 	// cluster that the DB instance is a member of.
@@ -3906,6 +4134,8 @@ type FailoverState struct {
 //
 // The following actions can be filtered:
 //
+//   - DescribeDBCapacityReservations
+//
 //   - DescribeDBClusterBacktracks
 //
 //   - DescribeDBClusterEndpoints
@@ -4853,6 +5083,12 @@ type PendingModifiedValues struct {
 	// [Using SSL/TLS to encrypt a connection to a DB instance]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.SSL.html
 	CACertificateIdentifier *string
 
+	// The identifier of the DB capacity reservation that the DB instance uses after a
+	// pending modification completes. Amazon RDS returns this value when a
+	// ModifyDBInstance request changes the DB capacity reservation, and the change
+	// hasn't been applied yet.
+	DBCapacityReservationIdentifier *string
+
 	// The name of the compute and memory capacity class for the DB instance.
 	DBInstanceClass *string
 
@@ -5774,6 +6010,47 @@ type TargetHealth struct {
 	//
 	// registering > unavailable > available > unavailable > available
 	State TargetState
+
+	noSmithyDocumentSerde
+}
+
+// The configuration for a single resource in the green environment of a
+// blue/green deployment.
+//
+// Use SourceArn to identify a resource in the blue environment. Amazon RDS
+// creates the corresponding resource in the green environment using this
+// configuration.
+//
+// This data type is a request parameter of the CreateBlueGreenDeployment
+// operation.
+type TargetResourceConfiguration struct {
+
+	// The Amazon Resource Name (ARN) of the DB cluster or DB instance in the blue
+	// environment to which this configuration applies.
+	//
+	// This member is required.
+	SourceArn *string
+
+	// The Amazon Web Services KMS key identifier for encryption of the corresponding
+	// resource in the green environment.
+	//
+	// The Amazon Web Services KMS key identifier is the key ARN, key ID, alias ARN,
+	// or alias name for the KMS key.
+	//
+	// Specify this setting in either of the following cases:
+	//
+	//   - You want the green resource to use a different KMS key than the blue
+	//   resource.
+	//
+	//   - The blue resource is unencrypted and you want to encrypt the green resource.
+	//
+	// For Aurora, encryption applies at the DB cluster level. Specify a DB cluster
+	// ARN in SourceArn . All DB instances in that cluster use the same KMS key.
+	//
+	// For RDS, encryption applies at the DB instance level. Specify a DB instance ARN
+	// in SourceArn . To encrypt read replicas, include a separate entry for each one.
+	// Each entry can specify a different KMS key.
+	TargetKmsKeyId *string
 
 	noSmithyDocumentSerde
 }

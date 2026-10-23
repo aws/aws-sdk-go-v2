@@ -4,7 +4,9 @@ package accessanalyzer
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/accessanalyzer/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/accessanalyzer/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -40,6 +42,19 @@ type UpdateAnalyzerInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateAnalyzerInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateAnalyzerRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateAnalyzerInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AnalyzerName != nil {
+		s.WriteString(schemas.UpdateAnalyzerRequest_analyzerName, *v.AnalyzerName)
+	}
+	serializeAnalyzerConfiguration(s, schemas.UpdateAnalyzerRequest_configuration, v.Configuration)
+}
+
 type UpdateAnalyzerOutput struct {
 
 	// Contains information about the configuration of an analyzer for an Amazon Web
@@ -52,13 +67,29 @@ type UpdateAnalyzerOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateAnalyzerOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateAnalyzerResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateAnalyzerOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAnalyzerConfiguration(s, schemas.UpdateAnalyzerResponse_configuration, v.Configuration)
+}
+func (v *UpdateAnalyzerOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateAnalyzerResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateAnalyzerResponse_configuration:
+			return deserializeAnalyzerConfiguration(d, schemas.UpdateAnalyzerResponse_configuration, &v.Configuration)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateAnalyzerMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateAnalyzer{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateAnalyzer, schemas.UpdateAnalyzerRequest, schemas.UpdateAnalyzerResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateAnalyzer{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateAnalyzer, schemas.UpdateAnalyzerRequest, schemas.UpdateAnalyzerResponse), output: &UpdateAnalyzerOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

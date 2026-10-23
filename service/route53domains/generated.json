@@ -22,6 +22,7 @@
         "api_op_EnableDomainTransferLock.go",
         "api_op_GetContactReachabilityStatus.go",
         "api_op_GetDomainDetail.go",
+        "api_op_GetDomainPrices.go",
         "api_op_GetDomainSuggestions.go",
         "api_op_GetOperationDetail.go",
         "api_op_ListDomains.go",

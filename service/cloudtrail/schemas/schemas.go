@@ -318,7 +318,8 @@ var CloudTrail_20131101 = smithy.NewServiceSchema(_CloudTrail_20131101, "2013-11
 var AccessDeniedException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloudtrail",
 	Name:      "AccessDeniedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 403},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 403},
 	&smithytraits.AWSQueryError{ErrorCode: "ResourceAccessDenied",
 		StatusCode: 403})
 var AccessDeniedException_Message *smithy.Schema
@@ -326,7 +327,8 @@ var AccessDeniedException_Message *smithy.Schema
 var AccountHasOngoingImportException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloudtrail",
 	Name:      "AccountHasOngoingImportException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400},
 	&smithytraits.AWSQueryError{ErrorCode: "AccountHasOngoingImport",
 		StatusCode: 400})
 var AccountHasOngoingImportException_Message *smithy.Schema
@@ -339,7 +341,8 @@ var _AccountId = smithy.NewSchema(smithy.ShapeID{
 var AccountNotFoundException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloudtrail",
 	Name:      "AccountNotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 404},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 404},
 	&smithytraits.AWSQueryError{ErrorCode: "AccountNotFound",
 		StatusCode: 404})
 var AccountNotFoundException_Message *smithy.Schema
@@ -347,7 +350,8 @@ var AccountNotFoundException_Message *smithy.Schema
 var AccountNotRegisteredException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloudtrail",
 	Name:      "AccountNotRegisteredException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400},
 	&smithytraits.AWSQueryError{ErrorCode: "AccountNotRegistered",
 		StatusCode: 400})
 var AccountNotRegisteredException_Message *smithy.Schema
@@ -355,7 +359,8 @@ var AccountNotRegisteredException_Message *smithy.Schema
 var AccountRegisteredException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloudtrail",
 	Name:      "AccountRegisteredException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400},
 	&smithytraits.AWSQueryError{ErrorCode: "AccountRegistered",
 		StatusCode: 400})
 var AccountRegisteredException_Message *smithy.Schema
@@ -433,7 +438,8 @@ var _ByteBuffer = smithy.NewSchema(smithy.ShapeID{
 var CannotDelegateManagementAccountException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloudtrail",
 	Name:      "CannotDelegateManagementAccountException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400},
 	&smithytraits.AWSQueryError{ErrorCode: "CannotDelegateManagementAccount",
 		StatusCode: 400})
 var CannotDelegateManagementAccountException_Message *smithy.Schema
@@ -449,7 +455,8 @@ var Channel_Name *smithy.Schema
 var ChannelAlreadyExistsException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloudtrail",
 	Name:      "ChannelAlreadyExistsException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400},
 	&smithytraits.AWSQueryError{ErrorCode: "ChannelAlreadyExists",
 		StatusCode: 400})
 var ChannelAlreadyExistsException_Message *smithy.Schema
@@ -462,7 +469,8 @@ var _ChannelArn = smithy.NewSchema(smithy.ShapeID{
 var ChannelARNInvalidException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloudtrail",
 	Name:      "ChannelARNInvalidException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400},
 	&smithytraits.AWSQueryError{ErrorCode: "ChannelARNInvalid",
 		StatusCode: 400})
 var ChannelARNInvalidException_Message *smithy.Schema
@@ -470,7 +478,8 @@ var ChannelARNInvalidException_Message *smithy.Schema
 var ChannelExistsForEDSException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloudtrail",
 	Name:      "ChannelExistsForEDSException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400},
 	&smithytraits.AWSQueryError{ErrorCode: "ChannelExistsForEDS",
 		StatusCode: 400})
 var ChannelExistsForEDSException_Message *smithy.Schema
@@ -478,7 +487,8 @@ var ChannelExistsForEDSException_Message *smithy.Schema
 var ChannelMaxLimitExceededException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloudtrail",
 	Name:      "ChannelMaxLimitExceededException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400},
 	&smithytraits.AWSQueryError{ErrorCode: "ChannelMaxLimitExceeded",
 		StatusCode: 400})
 var ChannelMaxLimitExceededException_Message *smithy.Schema
@@ -491,7 +501,8 @@ var _ChannelName = smithy.NewSchema(smithy.ShapeID{
 var ChannelNotFoundException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloudtrail",
 	Name:      "ChannelNotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 404},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 404},
 	&smithytraits.AWSQueryError{ErrorCode: "ChannelNotFound",
 		StatusCode: 404})
 var ChannelNotFoundException_Message *smithy.Schema
@@ -505,7 +516,8 @@ var _Channels_member *smithy.Schema
 var CloudTrailAccessNotEnabledException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloudtrail",
 	Name:      "CloudTrailAccessNotEnabledException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400},
 	&smithytraits.AWSQueryError{ErrorCode: "CloudTrailAccessNotEnabled",
 		StatusCode: 400})
 var CloudTrailAccessNotEnabledException_Message *smithy.Schema
@@ -513,7 +525,8 @@ var CloudTrailAccessNotEnabledException_Message *smithy.Schema
 var CloudTrailARNInvalidException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloudtrail",
 	Name:      "CloudTrailARNInvalidException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400},
 	&smithytraits.AWSQueryError{ErrorCode: "CloudTrailARNInvalid",
 		StatusCode: 400})
 var CloudTrailARNInvalidException_Message *smithy.Schema
@@ -521,7 +534,8 @@ var CloudTrailARNInvalidException_Message *smithy.Schema
 var CloudTrailInvalidClientTokenIdException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloudtrail",
 	Name:      "CloudTrailInvalidClientTokenIdException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400},
 	&smithytraits.AWSQueryError{ErrorCode: "CloudTrailInvalidClientTokenId",
 		StatusCode: 400})
 var CloudTrailInvalidClientTokenIdException_Message *smithy.Schema
@@ -529,7 +543,8 @@ var CloudTrailInvalidClientTokenIdException_Message *smithy.Schema
 var CloudWatchLogsDeliveryUnavailableException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloudtrail",
 	Name:      "CloudWatchLogsDeliveryUnavailableException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400},
 	&smithytraits.AWSQueryError{ErrorCode: "CloudWatchLogsDeliveryUnavailable",
 		StatusCode: 400})
 var CloudWatchLogsDeliveryUnavailableException_Message *smithy.Schema
@@ -537,7 +552,8 @@ var CloudWatchLogsDeliveryUnavailableException_Message *smithy.Schema
 var ConcurrentModificationException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloudtrail",
 	Name:      "ConcurrentModificationException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400},
 	&smithytraits.AWSQueryError{ErrorCode: "ConcurrentModification",
 		StatusCode: 400})
 var ConcurrentModificationException_Message *smithy.Schema
@@ -545,7 +561,8 @@ var ConcurrentModificationException_Message *smithy.Schema
 var ConflictException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloudtrail",
 	Name:      "ConflictException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 409},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 409},
 	&smithytraits.AWSQueryError{ErrorCode: "ConflictException",
 		StatusCode: 409})
 var ConflictException_Message *smithy.Schema
@@ -638,7 +655,8 @@ var _Date = smithy.NewSchema(smithy.ShapeID{
 var DelegatedAdminAccountLimitExceededException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloudtrail",
 	Name:      "DelegatedAdminAccountLimitExceededException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400},
 	&smithytraits.AWSQueryError{ErrorCode: "DelegatedAdminAccountLimitExceeded",
 		StatusCode: 400})
 var DelegatedAdminAccountLimitExceededException_Message *smithy.Schema
@@ -768,7 +786,8 @@ var EventDataStore_UpdatedTimestamp *smithy.Schema
 var EventDataStoreAlreadyExistsException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloudtrail",
 	Name:      "EventDataStoreAlreadyExistsException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400},
 	&smithytraits.AWSQueryError{ErrorCode: "EventDataStoreAlreadyExists",
 		StatusCode: 400})
 var EventDataStoreAlreadyExistsException_Message *smithy.Schema
@@ -781,7 +800,8 @@ var _EventDataStoreArn = smithy.NewSchema(smithy.ShapeID{
 var EventDataStoreARNInvalidException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloudtrail",
 	Name:      "EventDataStoreARNInvalidException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400},
 	&smithytraits.AWSQueryError{ErrorCode: "EventDataStoreARNInvalid",
 		StatusCode: 400})
 var EventDataStoreARNInvalidException_Message *smithy.Schema
@@ -789,7 +809,8 @@ var EventDataStoreARNInvalidException_Message *smithy.Schema
 var EventDataStoreFederationEnabledException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloudtrail",
 	Name:      "EventDataStoreFederationEnabledException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400},
 	&smithytraits.AWSQueryError{ErrorCode: "EventDataStoreFederationEnabled",
 		StatusCode: 400})
 var EventDataStoreFederationEnabledException_Message *smithy.Schema
@@ -797,7 +818,8 @@ var EventDataStoreFederationEnabledException_Message *smithy.Schema
 var EventDataStoreHasOngoingImportException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloudtrail",
 	Name:      "EventDataStoreHasOngoingImportException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400},
 	&smithytraits.AWSQueryError{ErrorCode: "EventDataStoreHasOngoingImport",
 		StatusCode: 400})
 var EventDataStoreHasOngoingImportException_Message *smithy.Schema
@@ -816,7 +838,8 @@ var _EventDataStoreList_member *smithy.Schema
 var EventDataStoreMaxLimitExceededException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloudtrail",
 	Name:      "EventDataStoreMaxLimitExceededException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400},
 	&smithytraits.AWSQueryError{ErrorCode: "EventDataStoreMaxLimitExceeded",
 		StatusCode: 400})
 var EventDataStoreMaxLimitExceededException_Message *smithy.Schema
@@ -829,7 +852,8 @@ var _EventDataStoreName = smithy.NewSchema(smithy.ShapeID{
 var EventDataStoreNotFoundException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloudtrail",
 	Name:      "EventDataStoreNotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 404},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 404},
 	&smithytraits.AWSQueryError{ErrorCode: "EventDataStoreNotFound",
 		StatusCode: 404})
 var EventDataStoreNotFoundException_Message *smithy.Schema
@@ -859,7 +883,8 @@ var EventDataStoreStatus_STOPPED_INGESTION *smithy.Schema
 var EventDataStoreTerminationProtectedException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloudtrail",
 	Name:      "EventDataStoreTerminationProtectedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400},
 	&smithytraits.AWSQueryError{ErrorCode: "EventDataStoreTerminationProtectedException",
 		StatusCode: 400})
 var EventDataStoreTerminationProtectedException_Message *smithy.Schema
@@ -924,7 +949,8 @@ var FederationStatus_DISABLED *smithy.Schema
 var GenerateResponseException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloudtrail",
 	Name:      "GenerateResponseException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400},
 	&smithytraits.AWSQueryError{ErrorCode: "GenerateResponse",
 		StatusCode: 400})
 var GenerateResponseException_Message *smithy.Schema
@@ -968,7 +994,8 @@ var ImportFailureStatus_SUCCEEDED *smithy.Schema
 var ImportNotFoundException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloudtrail",
 	Name:      "ImportNotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 404},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 404},
 	&smithytraits.AWSQueryError{ErrorCode: "ImportNotFound",
 		StatusCode: 404})
 var ImportNotFoundException_Message *smithy.Schema
@@ -1030,7 +1057,8 @@ var ImportStatus_COMPLETED *smithy.Schema
 var InactiveEventDataStoreException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloudtrail",
 	Name:      "InactiveEventDataStoreException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400},
 	&smithytraits.AWSQueryError{ErrorCode: "InactiveEventDataStore",
 		StatusCode: 400})
 var InactiveEventDataStoreException_Message *smithy.Schema
@@ -1038,7 +1066,8 @@ var InactiveEventDataStoreException_Message *smithy.Schema
 var InactiveQueryException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloudtrail",
 	Name:      "InactiveQueryException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400},
 	&smithytraits.AWSQueryError{ErrorCode: "InactiveQuery",
 		StatusCode: 400})
 var InactiveQueryException_Message *smithy.Schema
@@ -1060,7 +1089,8 @@ var IngestionStatus_LatestIngestionAttemptEventID *smithy.Schema
 var InsightNotEnabledException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloudtrail",
 	Name:      "InsightNotEnabledException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400},
 	&smithytraits.AWSQueryError{ErrorCode: "InsightNotEnabled",
 		StatusCode: 400})
 var InsightNotEnabledException_Message *smithy.Schema
@@ -1119,7 +1149,8 @@ var InsightType_ApiErrorRateInsight *smithy.Schema
 var InsufficientDependencyServiceAccessPermissionException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloudtrail",
 	Name:      "InsufficientDependencyServiceAccessPermissionException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400},
 	&smithytraits.AWSQueryError{ErrorCode: "InsufficientDependencyServiceAccessPermission",
 		StatusCode: 400})
 var InsufficientDependencyServiceAccessPermissionException_Message *smithy.Schema
@@ -1127,7 +1158,8 @@ var InsufficientDependencyServiceAccessPermissionException_Message *smithy.Schem
 var InsufficientEncryptionPolicyException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloudtrail",
 	Name:      "InsufficientEncryptionPolicyException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400},
 	&smithytraits.AWSQueryError{ErrorCode: "InsufficientEncryptionPolicy",
 		StatusCode: 400})
 var InsufficientEncryptionPolicyException_Message *smithy.Schema
@@ -1135,7 +1167,8 @@ var InsufficientEncryptionPolicyException_Message *smithy.Schema
 var InsufficientIAMAccessPermissionException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloudtrail",
 	Name:      "InsufficientIAMAccessPermissionException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400},
 	&smithytraits.AWSQueryError{ErrorCode: "InsufficientIAMAccessPermission",
 		StatusCode: 400})
 var InsufficientIAMAccessPermissionException_Message *smithy.Schema
@@ -1143,7 +1176,8 @@ var InsufficientIAMAccessPermissionException_Message *smithy.Schema
 var InsufficientS3BucketPolicyException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloudtrail",
 	Name:      "InsufficientS3BucketPolicyException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 403},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 403},
 	&smithytraits.AWSQueryError{ErrorCode: "InsufficientS3BucketPolicy",
 		StatusCode: 403})
 var InsufficientS3BucketPolicyException_Message *smithy.Schema
@@ -1151,7 +1185,8 @@ var InsufficientS3BucketPolicyException_Message *smithy.Schema
 var InsufficientSnsTopicPolicyException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloudtrail",
 	Name:      "InsufficientSnsTopicPolicyException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 403},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 403},
 	&smithytraits.AWSQueryError{ErrorCode: "InsufficientSnsTopicPolicy",
 		StatusCode: 403})
 var InsufficientSnsTopicPolicyException_Message *smithy.Schema
@@ -1164,7 +1199,8 @@ var _Integer = smithy.NewSchema(smithy.ShapeID{
 var InvalidCloudWatchLogsLogGroupArnException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloudtrail",
 	Name:      "InvalidCloudWatchLogsLogGroupArnException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400},
 	&smithytraits.AWSQueryError{ErrorCode: "InvalidCloudWatchLogsLogGroupArn",
 		StatusCode: 400})
 var InvalidCloudWatchLogsLogGroupArnException_Message *smithy.Schema
@@ -1172,7 +1208,8 @@ var InvalidCloudWatchLogsLogGroupArnException_Message *smithy.Schema
 var InvalidCloudWatchLogsRoleArnException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloudtrail",
 	Name:      "InvalidCloudWatchLogsRoleArnException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400},
 	&smithytraits.AWSQueryError{ErrorCode: "InvalidCloudWatchLogsRoleArn",
 		StatusCode: 400})
 var InvalidCloudWatchLogsRoleArnException_Message *smithy.Schema
@@ -1180,7 +1217,8 @@ var InvalidCloudWatchLogsRoleArnException_Message *smithy.Schema
 var InvalidDateRangeException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloudtrail",
 	Name:      "InvalidDateRangeException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400},
 	&smithytraits.AWSQueryError{ErrorCode: "InvalidDateRange",
 		StatusCode: 400})
 var InvalidDateRangeException_Message *smithy.Schema
@@ -1188,7 +1226,8 @@ var InvalidDateRangeException_Message *smithy.Schema
 var InvalidEventCategoryException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloudtrail",
 	Name:      "InvalidEventCategoryException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400},
 	&smithytraits.AWSQueryError{ErrorCode: "InvalidEventCategory",
 		StatusCode: 400})
 var InvalidEventCategoryException_Message *smithy.Schema
@@ -1196,7 +1235,8 @@ var InvalidEventCategoryException_Message *smithy.Schema
 var InvalidEventDataStoreCategoryException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloudtrail",
 	Name:      "InvalidEventDataStoreCategoryException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400},
 	&smithytraits.AWSQueryError{ErrorCode: "InvalidEventDataStoreCategory",
 		StatusCode: 400})
 var InvalidEventDataStoreCategoryException_Message *smithy.Schema
@@ -1204,7 +1244,8 @@ var InvalidEventDataStoreCategoryException_Message *smithy.Schema
 var InvalidEventDataStoreStatusException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloudtrail",
 	Name:      "InvalidEventDataStoreStatusException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400},
 	&smithytraits.AWSQueryError{ErrorCode: "InvalidEventDataStoreStatus",
 		StatusCode: 400})
 var InvalidEventDataStoreStatusException_Message *smithy.Schema
@@ -1212,7 +1253,8 @@ var InvalidEventDataStoreStatusException_Message *smithy.Schema
 var InvalidEventSelectorsException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloudtrail",
 	Name:      "InvalidEventSelectorsException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400},
 	&smithytraits.AWSQueryError{ErrorCode: "InvalidEventSelectors",
 		StatusCode: 400})
 var InvalidEventSelectorsException_Message *smithy.Schema
@@ -1220,7 +1262,8 @@ var InvalidEventSelectorsException_Message *smithy.Schema
 var InvalidHomeRegionException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloudtrail",
 	Name:      "InvalidHomeRegionException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400},
 	&smithytraits.AWSQueryError{ErrorCode: "InvalidHomeRegion",
 		StatusCode: 400})
 var InvalidHomeRegionException_Message *smithy.Schema
@@ -1228,7 +1271,8 @@ var InvalidHomeRegionException_Message *smithy.Schema
 var InvalidImportSourceException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloudtrail",
 	Name:      "InvalidImportSourceException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400},
 	&smithytraits.AWSQueryError{ErrorCode: "InvalidImportSource",
 		StatusCode: 400})
 var InvalidImportSourceException_Message *smithy.Schema
@@ -1236,7 +1280,8 @@ var InvalidImportSourceException_Message *smithy.Schema
 var InvalidInsightSelectorsException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloudtrail",
 	Name:      "InvalidInsightSelectorsException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400},
 	&smithytraits.AWSQueryError{ErrorCode: "InvalidInsightSelectors",
 		StatusCode: 400})
 var InvalidInsightSelectorsException_Message *smithy.Schema
@@ -1244,7 +1289,8 @@ var InvalidInsightSelectorsException_Message *smithy.Schema
 var InvalidKmsKeyIdException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloudtrail",
 	Name:      "InvalidKmsKeyIdException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400},
 	&smithytraits.AWSQueryError{ErrorCode: "InvalidKmsKeyId",
 		StatusCode: 400})
 var InvalidKmsKeyIdException_Message *smithy.Schema
@@ -1252,7 +1298,8 @@ var InvalidKmsKeyIdException_Message *smithy.Schema
 var InvalidLookupAttributesException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloudtrail",
 	Name:      "InvalidLookupAttributesException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400},
 	&smithytraits.AWSQueryError{ErrorCode: "InvalidLookupAttributes",
 		StatusCode: 400})
 var InvalidLookupAttributesException_Message *smithy.Schema
@@ -1260,7 +1307,8 @@ var InvalidLookupAttributesException_Message *smithy.Schema
 var InvalidMaxResultsException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloudtrail",
 	Name:      "InvalidMaxResultsException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400},
 	&smithytraits.AWSQueryError{ErrorCode: "InvalidMaxResults",
 		StatusCode: 400})
 var InvalidMaxResultsException_Message *smithy.Schema
@@ -1268,7 +1316,8 @@ var InvalidMaxResultsException_Message *smithy.Schema
 var InvalidNextTokenException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloudtrail",
 	Name:      "InvalidNextTokenException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400},
 	&smithytraits.AWSQueryError{ErrorCode: "InvalidNextToken",
 		StatusCode: 400})
 var InvalidNextTokenException_Message *smithy.Schema
@@ -1276,7 +1325,8 @@ var InvalidNextTokenException_Message *smithy.Schema
 var InvalidParameterCombinationException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloudtrail",
 	Name:      "InvalidParameterCombinationException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400},
 	&smithytraits.AWSQueryError{ErrorCode: "InvalidParameterCombinationError",
 		StatusCode: 400})
 var InvalidParameterCombinationException_Message *smithy.Schema
@@ -1284,7 +1334,8 @@ var InvalidParameterCombinationException_Message *smithy.Schema
 var InvalidParameterException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloudtrail",
 	Name:      "InvalidParameterException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400},
 	&smithytraits.AWSQueryError{ErrorCode: "InvalidParameter",
 		StatusCode: 400})
 var InvalidParameterException_Message *smithy.Schema
@@ -1292,7 +1343,8 @@ var InvalidParameterException_Message *smithy.Schema
 var InvalidQueryStatementException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloudtrail",
 	Name:      "InvalidQueryStatementException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400},
 	&smithytraits.AWSQueryError{ErrorCode: "InvalidQueryStatement",
 		StatusCode: 400})
 var InvalidQueryStatementException_Message *smithy.Schema
@@ -1300,7 +1352,8 @@ var InvalidQueryStatementException_Message *smithy.Schema
 var InvalidQueryStatusException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloudtrail",
 	Name:      "InvalidQueryStatusException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400},
 	&smithytraits.AWSQueryError{ErrorCode: "InvalidQueryStatus",
 		StatusCode: 400})
 var InvalidQueryStatusException_Message *smithy.Schema
@@ -1308,7 +1361,8 @@ var InvalidQueryStatusException_Message *smithy.Schema
 var InvalidS3BucketNameException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloudtrail",
 	Name:      "InvalidS3BucketNameException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400},
 	&smithytraits.AWSQueryError{ErrorCode: "InvalidS3BucketName",
 		StatusCode: 400})
 var InvalidS3BucketNameException_Message *smithy.Schema
@@ -1316,7 +1370,8 @@ var InvalidS3BucketNameException_Message *smithy.Schema
 var InvalidS3PrefixException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloudtrail",
 	Name:      "InvalidS3PrefixException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400},
 	&smithytraits.AWSQueryError{ErrorCode: "InvalidS3Prefix",
 		StatusCode: 400})
 var InvalidS3PrefixException_Message *smithy.Schema
@@ -1324,7 +1379,8 @@ var InvalidS3PrefixException_Message *smithy.Schema
 var InvalidSnsTopicNameException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloudtrail",
 	Name:      "InvalidSnsTopicNameException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400},
 	&smithytraits.AWSQueryError{ErrorCode: "InvalidSnsTopicName",
 		StatusCode: 400})
 var InvalidSnsTopicNameException_Message *smithy.Schema
@@ -1332,7 +1388,8 @@ var InvalidSnsTopicNameException_Message *smithy.Schema
 var InvalidSourceException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloudtrail",
 	Name:      "InvalidSourceException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400},
 	&smithytraits.AWSQueryError{ErrorCode: "InvalidSource",
 		StatusCode: 400})
 var InvalidSourceException_Message *smithy.Schema
@@ -1340,7 +1397,8 @@ var InvalidSourceException_Message *smithy.Schema
 var InvalidTagParameterException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloudtrail",
 	Name:      "InvalidTagParameterException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400},
 	&smithytraits.AWSQueryError{ErrorCode: "InvalidTagParameter",
 		StatusCode: 400})
 var InvalidTagParameterException_Message *smithy.Schema
@@ -1348,7 +1406,8 @@ var InvalidTagParameterException_Message *smithy.Schema
 var InvalidTimeRangeException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloudtrail",
 	Name:      "InvalidTimeRangeException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400},
 	&smithytraits.AWSQueryError{ErrorCode: "InvalidTimeRange",
 		StatusCode: 400})
 var InvalidTimeRangeException_Message *smithy.Schema
@@ -1356,7 +1415,8 @@ var InvalidTimeRangeException_Message *smithy.Schema
 var InvalidTokenException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloudtrail",
 	Name:      "InvalidTokenException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400},
 	&smithytraits.AWSQueryError{ErrorCode: "InvalidToken",
 		StatusCode: 400})
 var InvalidTokenException_Message *smithy.Schema
@@ -1364,7 +1424,8 @@ var InvalidTokenException_Message *smithy.Schema
 var InvalidTrailNameException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloudtrail",
 	Name:      "InvalidTrailNameException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400},
 	&smithytraits.AWSQueryError{ErrorCode: "InvalidTrailName",
 		StatusCode: 400})
 var InvalidTrailNameException_Message *smithy.Schema
@@ -1372,7 +1433,8 @@ var InvalidTrailNameException_Message *smithy.Schema
 var KmsException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloudtrail",
 	Name:      "KmsException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400},
 	&smithytraits.AWSQueryError{ErrorCode: "KmsException",
 		StatusCode: 400})
 var KmsException_Message *smithy.Schema
@@ -1380,7 +1442,8 @@ var KmsException_Message *smithy.Schema
 var KmsKeyDisabledException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloudtrail",
 	Name:      "KmsKeyDisabledException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400},
 	&smithytraits.AWSQueryError{ErrorCode: "KmsKeyDisabled",
 		StatusCode: 400})
 var KmsKeyDisabledException_Message *smithy.Schema
@@ -1388,7 +1451,8 @@ var KmsKeyDisabledException_Message *smithy.Schema
 var KmsKeyNotFoundException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloudtrail",
 	Name:      "KmsKeyNotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400},
 	&smithytraits.AWSQueryError{ErrorCode: "KmsKeyNotFound",
 		StatusCode: 400})
 var KmsKeyNotFoundException_Message *smithy.Schema
@@ -1509,7 +1573,8 @@ var _LookupAttributeValue = smithy.NewSchema(smithy.ShapeID{
 var MaxConcurrentQueriesException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloudtrail",
 	Name:      "MaxConcurrentQueriesException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 429},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 429},
 	&smithytraits.AWSQueryError{ErrorCode: "MaxConcurrentQueries",
 		StatusCode: 429})
 var MaxConcurrentQueriesException_Message *smithy.Schema
@@ -1525,7 +1590,8 @@ var MaxEventSize_Large *smithy.Schema
 var MaximumNumberOfTrailsExceededException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloudtrail",
 	Name:      "MaximumNumberOfTrailsExceededException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 403},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 403},
 	&smithytraits.AWSQueryError{ErrorCode: "MaximumNumberOfTrailsExceeded",
 		StatusCode: 403})
 var MaximumNumberOfTrailsExceededException_Message *smithy.Schema
@@ -1548,7 +1614,8 @@ var _NextToken = smithy.NewSchema(smithy.ShapeID{
 var NoManagementAccountSLRExistsException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloudtrail",
 	Name:      "NoManagementAccountSLRExistsException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 403},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 403},
 	&smithytraits.AWSQueryError{ErrorCode: "NoManagementAccountSLRExists",
 		StatusCode: 403})
 var NoManagementAccountSLRExistsException_Message *smithy.Schema
@@ -1556,7 +1623,8 @@ var NoManagementAccountSLRExistsException_Message *smithy.Schema
 var NotOrganizationManagementAccountException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloudtrail",
 	Name:      "NotOrganizationManagementAccountException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 403},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 403},
 	&smithytraits.AWSQueryError{ErrorCode: "NotOrganizationManagementAccount",
 		StatusCode: 403})
 var NotOrganizationManagementAccountException_Message *smithy.Schema
@@ -1564,7 +1632,8 @@ var NotOrganizationManagementAccountException_Message *smithy.Schema
 var NotOrganizationMasterAccountException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloudtrail",
 	Name:      "NotOrganizationMasterAccountException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400},
 	&smithytraits.AWSQueryError{ErrorCode: "NotOrganizationMasterAccount",
 		StatusCode: 400})
 var NotOrganizationMasterAccountException_Message *smithy.Schema
@@ -1572,7 +1641,8 @@ var NotOrganizationMasterAccountException_Message *smithy.Schema
 var OperationNotPermittedException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloudtrail",
 	Name:      "OperationNotPermittedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400},
 	&smithytraits.AWSQueryError{ErrorCode: "OperationNotPermitted",
 		StatusCode: 400})
 var OperationNotPermittedException_Message *smithy.Schema
@@ -1602,7 +1672,8 @@ var _OperatorValue = smithy.NewSchema(smithy.ShapeID{
 var OrganizationNotInAllFeaturesModeException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloudtrail",
 	Name:      "OrganizationNotInAllFeaturesModeException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400},
 	&smithytraits.AWSQueryError{ErrorCode: "OrganizationNotInAllFeaturesMode",
 		StatusCode: 400})
 var OrganizationNotInAllFeaturesModeException_Message *smithy.Schema
@@ -1610,7 +1681,8 @@ var OrganizationNotInAllFeaturesModeException_Message *smithy.Schema
 var OrganizationsNotInUseException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloudtrail",
 	Name:      "OrganizationsNotInUseException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 404},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 404},
 	&smithytraits.AWSQueryError{ErrorCode: "OrganizationsNotInUse",
 		StatusCode: 404})
 var OrganizationsNotInUseException_Message *smithy.Schema
@@ -1691,7 +1763,8 @@ var _QueryAlias = smithy.NewSchema(smithy.ShapeID{
 var QueryIdNotFoundException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloudtrail",
 	Name:      "QueryIdNotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 404},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 404},
 	&smithytraits.AWSQueryError{ErrorCode: "QueryIdNotFound",
 		StatusCode: 404})
 var QueryIdNotFoundException_Message *smithy.Schema
@@ -1886,7 +1959,8 @@ var _ResourceArn = smithy.NewSchema(smithy.ShapeID{
 var ResourceARNNotValidException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloudtrail",
 	Name:      "ResourceARNNotValidException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400},
 	&smithytraits.AWSQueryError{ErrorCode: "ResourceARNNotValid",
 		StatusCode: 400})
 var ResourceARNNotValidException_Message *smithy.Schema
@@ -1906,7 +1980,8 @@ var _ResourceList_member *smithy.Schema
 var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloudtrail",
 	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400},
 	&smithytraits.AWSQueryError{ErrorCode: "ResourceNotFound",
 		StatusCode: 400})
 var ResourceNotFoundException_Message *smithy.Schema
@@ -1919,7 +1994,8 @@ var _ResourcePolicy = smithy.NewSchema(smithy.ShapeID{
 var ResourcePolicyNotFoundException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloudtrail",
 	Name:      "ResourcePolicyNotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 404},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 404},
 	&smithytraits.AWSQueryError{ErrorCode: "ResourcePolicyNotFound",
 		StatusCode: 404})
 var ResourcePolicyNotFoundException_Message *smithy.Schema
@@ -1927,7 +2003,8 @@ var ResourcePolicyNotFoundException_Message *smithy.Schema
 var ResourcePolicyNotValidException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloudtrail",
 	Name:      "ResourcePolicyNotValidException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400},
 	&smithytraits.AWSQueryError{ErrorCode: "ResourcePolicyNotValid",
 		StatusCode: 400})
 var ResourcePolicyNotValidException_Message *smithy.Schema
@@ -1949,7 +2026,8 @@ var _ResourceTagList_member *smithy.Schema
 var ResourceTypeNotSupportedException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloudtrail",
 	Name:      "ResourceTypeNotSupportedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400},
 	&smithytraits.AWSQueryError{ErrorCode: "ResourceTypeNotSupported",
 		StatusCode: 400})
 var ResourceTypeNotSupportedException_Message *smithy.Schema
@@ -1962,7 +2040,8 @@ var _RetentionPeriod = smithy.NewSchema(smithy.ShapeID{
 var S3BucketDoesNotExistException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloudtrail",
 	Name:      "S3BucketDoesNotExistException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 404},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 404},
 	&smithytraits.AWSQueryError{ErrorCode: "S3BucketDoesNotExist",
 		StatusCode: 404})
 var S3BucketDoesNotExistException_Message *smithy.Schema
@@ -2038,7 +2117,8 @@ var _SelectorName = smithy.NewSchema(smithy.ShapeID{
 var ServiceQuotaExceededException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloudtrail",
 	Name:      "ServiceQuotaExceededException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400},
 	&smithytraits.AWSQueryError{ErrorCode: "ServiceQuotaExceeded",
 		StatusCode: 400})
 var ServiceQuotaExceededException_Message *smithy.Schema
@@ -2091,7 +2171,8 @@ var _TagKey = smithy.NewSchema(smithy.ShapeID{
 var TagsLimitExceededException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloudtrail",
 	Name:      "TagsLimitExceededException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400},
 	&smithytraits.AWSQueryError{ErrorCode: "TagsLimitExceeded",
 		StatusCode: 400})
 var TagsLimitExceededException_Message *smithy.Schema
@@ -2131,7 +2212,8 @@ var _TerminationProtectionEnabled = smithy.NewSchema(smithy.ShapeID{
 var ThrottlingException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloudtrail",
 	Name:      "ThrottlingException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 429},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 429},
 	&smithytraits.AWSQueryError{ErrorCode: "ThrottlingException",
 		StatusCode: 429})
 var ThrottlingException_Message *smithy.Schema
@@ -2188,7 +2270,8 @@ var Trail_RecursiveLogging *smithy.Schema
 var TrailAlreadyExistsException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloudtrail",
 	Name:      "TrailAlreadyExistsException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400},
 	&smithytraits.AWSQueryError{ErrorCode: "TrailAlreadyExists",
 		StatusCode: 400})
 var TrailAlreadyExistsException_Message *smithy.Schema
@@ -2218,7 +2301,8 @@ var _TrailNameList_member *smithy.Schema
 var TrailNotFoundException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloudtrail",
 	Name:      "TrailNotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 404},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 404},
 	&smithytraits.AWSQueryError{ErrorCode: "TrailNotFound",
 		StatusCode: 404})
 var TrailNotFoundException_Message *smithy.Schema
@@ -2226,7 +2310,8 @@ var TrailNotFoundException_Message *smithy.Schema
 var TrailNotProvidedException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloudtrail",
 	Name:      "TrailNotProvidedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 404},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 404},
 	&smithytraits.AWSQueryError{ErrorCode: "TrailNotProvided",
 		StatusCode: 404})
 var TrailNotProvidedException_Message *smithy.Schema
@@ -2248,7 +2333,8 @@ var Type_RequestContext *smithy.Schema
 var UnsupportedOperationException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloudtrail",
 	Name:      "UnsupportedOperationException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400},
 	&smithytraits.AWSQueryError{ErrorCode: "UnsupportedOperation",
 		StatusCode: 400})
 var UnsupportedOperationException_Message *smithy.Schema

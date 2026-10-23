@@ -137,7 +137,8 @@ var AWSCognitoSyncService = smithy.NewServiceSchema(_AWSCognitoSyncService, "201
 var AlreadyStreamedException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cognitosync",
 	Name:      "AlreadyStreamedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400},
 	&smithytraits.AWSQueryError{ErrorCode: "AlreadyStreamed",
 		StatusCode: 400})
 var AlreadyStreamedException_message *smithy.Schema
@@ -198,7 +199,8 @@ var CognitoStreams_StreamingStatus *smithy.Schema
 var ConcurrentModificationException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cognitosync",
 	Name:      "ConcurrentModificationException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400},
 	&smithytraits.AWSQueryError{ErrorCode: "ConcurrentModification",
 		StatusCode: 400})
 var ConcurrentModificationException_message *smithy.Schema
@@ -245,7 +247,8 @@ var _DeviceId = smithy.NewSchema(smithy.ShapeID{
 var DuplicateRequestException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cognitosync",
 	Name:      "DuplicateRequestException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400},
 	&smithytraits.AWSQueryError{ErrorCode: "DuplicateRequest",
 		StatusCode: 400})
 var DuplicateRequestException_message *smithy.Schema
@@ -318,7 +321,8 @@ var _IntegerString = smithy.NewSchema(smithy.ShapeID{
 var InternalErrorException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cognitosync",
 	Name:      "InternalErrorException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 500},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
+	&smithytraits.HTTPError{Code: 500},
 	&smithytraits.AWSQueryError{ErrorCode: "InternalError",
 		StatusCode: 500})
 var InternalErrorException_message *smithy.Schema
@@ -326,7 +330,8 @@ var InternalErrorException_message *smithy.Schema
 var InvalidConfigurationException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cognitosync",
 	Name:      "InvalidConfigurationException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400},
 	&smithytraits.AWSQueryError{ErrorCode: "InvalidConfiguration",
 		StatusCode: 400})
 var InvalidConfigurationException_message *smithy.Schema
@@ -334,7 +339,8 @@ var InvalidConfigurationException_message *smithy.Schema
 var InvalidLambdaFunctionOutputException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cognitosync",
 	Name:      "InvalidLambdaFunctionOutputException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400},
 	&smithytraits.AWSQueryError{ErrorCode: "InvalidLambdaFunctionOutput",
 		StatusCode: 400})
 var InvalidLambdaFunctionOutputException_message *smithy.Schema
@@ -342,7 +348,8 @@ var InvalidLambdaFunctionOutputException_message *smithy.Schema
 var InvalidParameterException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cognitosync",
 	Name:      "InvalidParameterException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400},
 	&smithytraits.AWSQueryError{ErrorCode: "InvalidParameter",
 		StatusCode: 400})
 var InvalidParameterException_message *smithy.Schema
@@ -355,7 +362,8 @@ var _LambdaFunctionArn = smithy.NewSchema(smithy.ShapeID{
 var LambdaThrottledException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cognitosync",
 	Name:      "LambdaThrottledException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 429},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 429},
 	&smithytraits.AWSQueryError{ErrorCode: "LambdaThrottled",
 		StatusCode: 429})
 var LambdaThrottledException_message *smithy.Schema
@@ -363,7 +371,8 @@ var LambdaThrottledException_message *smithy.Schema
 var LimitExceededException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cognitosync",
 	Name:      "LimitExceededException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400},
 	&smithytraits.AWSQueryError{ErrorCode: "LimitExceeded",
 		StatusCode: 400})
 var LimitExceededException_message *smithy.Schema
@@ -382,7 +391,8 @@ var _MergedDatasetNameList_member *smithy.Schema
 var NotAuthorizedException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cognitosync",
 	Name:      "NotAuthorizedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 403},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 403},
 	&smithytraits.AWSQueryError{ErrorCode: "NotAuthorizedError",
 		StatusCode: 403})
 var NotAuthorizedException_message *smithy.Schema
@@ -475,7 +485,8 @@ var _RecordValue = smithy.NewSchema(smithy.ShapeID{
 var ResourceConflictException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cognitosync",
 	Name:      "ResourceConflictException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 409},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 409},
 	&smithytraits.AWSQueryError{ErrorCode: "ResourceConflict",
 		StatusCode: 409})
 var ResourceConflictException_message *smithy.Schema
@@ -483,7 +494,8 @@ var ResourceConflictException_message *smithy.Schema
 var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cognitosync",
 	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 404},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 404},
 	&smithytraits.AWSQueryError{ErrorCode: "ResourceNotFound",
 		StatusCode: 404})
 var ResourceNotFoundException_message *smithy.Schema
@@ -514,7 +526,8 @@ var _SyncSessionToken = smithy.NewSchema(smithy.ShapeID{
 var TooManyRequestsException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cognitosync",
 	Name:      "TooManyRequestsException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 429},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 429},
 	&smithytraits.AWSQueryError{ErrorCode: "TooManyRequests",
 		StatusCode: 429})
 var TooManyRequestsException_message *smithy.Schema

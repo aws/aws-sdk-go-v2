@@ -4,7 +4,9 @@ package ram
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/ram/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ram/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -58,6 +60,27 @@ type UpdateResourceShareInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateResourceShareInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateResourceShareRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateResourceShareInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AllowExternalPrincipals != nil {
+		s.WriteBool(schemas.UpdateResourceShareRequest_allowExternalPrincipals, *v.AllowExternalPrincipals)
+	}
+	if v.ClientToken != nil {
+		s.WriteString(schemas.UpdateResourceShareRequest_clientToken, *v.ClientToken)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateResourceShareRequest_name, *v.Name)
+	}
+	if v.ResourceShareArn != nil {
+		s.WriteString(schemas.UpdateResourceShareRequest_resourceShareArn, *v.ResourceShareArn)
+	}
+}
+
 type UpdateResourceShareOutput struct {
 
 	// The idempotency identifier associated with this request. If you want to repeat
@@ -75,13 +98,40 @@ type UpdateResourceShareOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateResourceShareOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateResourceShareResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateResourceShareOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.UpdateResourceShareResponse_clientToken, *v.ClientToken)
+	}
+	if v.ResourceShare != nil {
+		s.WriteStruct(schemas.UpdateResourceShareResponse_resourceShare)
+		v.ResourceShare.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateResourceShareOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateResourceShareResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateResourceShareResponse_clientToken:
+			v.ClientToken = new(string)
+			return d.ReadString(schemas.UpdateResourceShareResponse_clientToken, v.ClientToken)
+		case schemas.UpdateResourceShareResponse_resourceShare:
+			v.ResourceShare = &types.ResourceShare{}
+			return v.ResourceShare.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateResourceShareMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateResourceShare{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateResourceShare, schemas.UpdateResourceShareRequest, schemas.UpdateResourceShareResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateResourceShare{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateResourceShare, schemas.UpdateResourceShareRequest, schemas.UpdateResourceShareResponse), output: &UpdateResourceShareOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -5,7 +5,9 @@ package backup
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/backup/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/backup/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -132,6 +134,46 @@ type StartBackupJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartBackupJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartBackupJobInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartBackupJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeBackupOptions(s, schemas.StartBackupJobInput_BackupOptions, v.BackupOptions)
+	if v.BackupVaultName != nil {
+		s.WriteString(schemas.StartBackupJobInput_BackupVaultName, *v.BackupVaultName)
+	}
+	if v.CompleteWindowMinutes != nil {
+		s.WriteInt64(schemas.StartBackupJobInput_CompleteWindowMinutes, *v.CompleteWindowMinutes)
+	}
+	if v.IamRoleArn != nil {
+		s.WriteString(schemas.StartBackupJobInput_IamRoleArn, *v.IamRoleArn)
+	}
+	if v.IdempotencyToken != nil {
+		s.WriteString(schemas.StartBackupJobInput_IdempotencyToken, *v.IdempotencyToken)
+	}
+	if v.Index != "" {
+		s.WriteString(schemas.StartBackupJobInput_Index, string(v.Index))
+	}
+	if v.Lifecycle != nil {
+		s.WriteStruct(schemas.StartBackupJobInput_Lifecycle)
+		v.Lifecycle.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.LogicallyAirGappedBackupVaultArn != nil {
+		s.WriteString(schemas.StartBackupJobInput_LogicallyAirGappedBackupVaultArn, *v.LogicallyAirGappedBackupVaultArn)
+	}
+	serializeTags(s, schemas.StartBackupJobInput_RecoveryPointTags, v.RecoveryPointTags)
+	if v.ResourceArn != nil {
+		s.WriteString(schemas.StartBackupJobInput_ResourceArn, *v.ResourceArn)
+	}
+	if v.StartWindowMinutes != nil {
+		s.WriteInt64(schemas.StartBackupJobInput_StartWindowMinutes, *v.StartWindowMinutes)
+	}
+}
+
 type StartBackupJobOutput struct {
 
 	// Uniquely identifies a request to Backup to back up a resource.
@@ -161,13 +203,49 @@ type StartBackupJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartBackupJobOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartBackupJobOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartBackupJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BackupJobId != nil {
+		s.WriteString(schemas.StartBackupJobOutput_BackupJobId, *v.BackupJobId)
+	}
+	if v.CreationDate != nil {
+		s.WriteTime(schemas.StartBackupJobOutput_CreationDate, *v.CreationDate)
+	}
+	if v.IsParent != false {
+		s.WriteBool(schemas.StartBackupJobOutput_IsParent, v.IsParent)
+	}
+	if v.RecoveryPointArn != nil {
+		s.WriteString(schemas.StartBackupJobOutput_RecoveryPointArn, *v.RecoveryPointArn)
+	}
+}
+func (v *StartBackupJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartBackupJobOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartBackupJobOutput_BackupJobId:
+			v.BackupJobId = new(string)
+			return d.ReadString(schemas.StartBackupJobOutput_BackupJobId, v.BackupJobId)
+		case schemas.StartBackupJobOutput_CreationDate:
+			v.CreationDate = new(time.Time)
+			return d.ReadTime(schemas.StartBackupJobOutput_CreationDate, v.CreationDate)
+		case schemas.StartBackupJobOutput_IsParent:
+			return d.ReadBool(schemas.StartBackupJobOutput_IsParent, &v.IsParent)
+		case schemas.StartBackupJobOutput_RecoveryPointArn:
+			v.RecoveryPointArn = new(string)
+			return d.ReadString(schemas.StartBackupJobOutput_RecoveryPointArn, v.RecoveryPointArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartBackupJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpStartBackupJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartBackupJob, schemas.StartBackupJobInput, schemas.StartBackupJobOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStartBackupJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartBackupJob, schemas.StartBackupJobInput, schemas.StartBackupJobOutput), output: &StartBackupJobOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

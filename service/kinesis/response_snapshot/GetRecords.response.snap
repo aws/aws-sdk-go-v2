@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: Kinesis_20131202.GetRecords
+
+{"ChildShards":[{"HashKeyRange":{"EndingHashKey":"__EndingHashKey__","StartingHashKey":"__StartingHashKey__"},"ParentShards":["__Member__","__Member__"],"ShardId":"__ShardId__"},{"HashKeyRange":{"EndingHashKey":"__EndingHashKey__","StartingHashKey":"__StartingHashKey__"},"ParentShards":["__Member__","__Member__"],"ShardId":"__ShardId__"}],"MillisBehindLatest":1,"NextShardIterator":"__NextShardIterator__","Records":[{"ApproximateArrivalTimestamp":946684800,"Data":"YmxvYg==","EncryptionType":"NONE","PartitionKey":"__PartitionKey__","SequenceNumber":"__SequenceNumber__"},{"ApproximateArrivalTimestamp":946684800,"Data":"YmxvYg==","EncryptionType":"NONE","PartitionKey":"__PartitionKey__","SequenceNumber":"__SequenceNumber__"}]}

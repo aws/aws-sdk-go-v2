@@ -5,7 +5,9 @@ package rekognition
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/rekognition/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/rekognition/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -70,6 +72,24 @@ type GetTextDetectionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetTextDetectionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetTextDetectionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetTextDetectionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.JobId != nil {
+		s.WriteString(schemas.GetTextDetectionRequest_JobId, *v.JobId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.GetTextDetectionRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetTextDetectionRequest_NextToken, *v.NextToken)
+	}
+}
+
 type GetTextDetectionOutput struct {
 
 	// Job identifier for the text detection operation for which you want to obtain
@@ -115,13 +135,85 @@ type GetTextDetectionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetTextDetectionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetTextDetectionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetTextDetectionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.JobId != nil {
+		s.WriteString(schemas.GetTextDetectionResponse_JobId, *v.JobId)
+	}
+	if v.JobStatus != "" {
+		s.WriteString(schemas.GetTextDetectionResponse_JobStatus, string(v.JobStatus))
+	}
+	if v.JobTag != nil {
+		s.WriteString(schemas.GetTextDetectionResponse_JobTag, *v.JobTag)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetTextDetectionResponse_NextToken, *v.NextToken)
+	}
+	if v.StatusMessage != nil {
+		s.WriteString(schemas.GetTextDetectionResponse_StatusMessage, *v.StatusMessage)
+	}
+	serializeTextDetectionResults(s, schemas.GetTextDetectionResponse_TextDetections, v.TextDetections)
+	if v.TextModelVersion != nil {
+		s.WriteString(schemas.GetTextDetectionResponse_TextModelVersion, *v.TextModelVersion)
+	}
+	if v.Video != nil {
+		s.WriteStruct(schemas.GetTextDetectionResponse_Video)
+		v.Video.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.VideoMetadata != nil {
+		s.WriteStruct(schemas.GetTextDetectionResponse_VideoMetadata)
+		v.VideoMetadata.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetTextDetectionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetTextDetectionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetTextDetectionResponse_JobId:
+			v.JobId = new(string)
+			return d.ReadString(schemas.GetTextDetectionResponse_JobId, v.JobId)
+		case schemas.GetTextDetectionResponse_JobStatus:
+			var ev string
+			if err := d.ReadString(schemas.GetTextDetectionResponse_JobStatus, &ev); err != nil {
+				return err
+			}
+			v.JobStatus = types.VideoJobStatus(ev)
+			return nil
+		case schemas.GetTextDetectionResponse_JobTag:
+			v.JobTag = new(string)
+			return d.ReadString(schemas.GetTextDetectionResponse_JobTag, v.JobTag)
+		case schemas.GetTextDetectionResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.GetTextDetectionResponse_NextToken, v.NextToken)
+		case schemas.GetTextDetectionResponse_StatusMessage:
+			v.StatusMessage = new(string)
+			return d.ReadString(schemas.GetTextDetectionResponse_StatusMessage, v.StatusMessage)
+		case schemas.GetTextDetectionResponse_TextDetections:
+			return deserializeTextDetectionResults(d, schemas.GetTextDetectionResponse_TextDetections, &v.TextDetections)
+		case schemas.GetTextDetectionResponse_TextModelVersion:
+			v.TextModelVersion = new(string)
+			return d.ReadString(schemas.GetTextDetectionResponse_TextModelVersion, v.TextModelVersion)
+		case schemas.GetTextDetectionResponse_Video:
+			v.Video = &types.Video{}
+			return v.Video.Deserialize(d)
+		case schemas.GetTextDetectionResponse_VideoMetadata:
+			v.VideoMetadata = &types.VideoMetadata{}
+			return v.VideoMetadata.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetTextDetectionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetTextDetection{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetTextDetection, schemas.GetTextDetectionRequest, schemas.GetTextDetectionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetTextDetection{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetTextDetection, schemas.GetTextDetectionRequest, schemas.GetTextDetectionResponse), output: &GetTextDetectionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package securityhub
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/securityhub/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/securityhub/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -138,6 +140,43 @@ type BatchUpdateFindingsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchUpdateFindingsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchUpdateFindingsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchUpdateFindingsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Confidence != nil {
+		s.WriteInt32(schemas.BatchUpdateFindingsRequest_Confidence, *v.Confidence)
+	}
+	if v.Criticality != nil {
+		s.WriteInt32(schemas.BatchUpdateFindingsRequest_Criticality, *v.Criticality)
+	}
+	serializeAwsSecurityFindingIdentifierList(s, schemas.BatchUpdateFindingsRequest_FindingIdentifiers, v.FindingIdentifiers)
+	if v.Note != nil {
+		s.WriteStruct(schemas.BatchUpdateFindingsRequest_Note)
+		v.Note.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeRelatedFindingList(s, schemas.BatchUpdateFindingsRequest_RelatedFindings, v.RelatedFindings)
+	if v.Severity != nil {
+		s.WriteStruct(schemas.BatchUpdateFindingsRequest_Severity)
+		v.Severity.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeTypeList(s, schemas.BatchUpdateFindingsRequest_Types, v.Types)
+	serializeFieldMap(s, schemas.BatchUpdateFindingsRequest_UserDefinedFields, v.UserDefinedFields)
+	if v.VerificationState != "" {
+		s.WriteString(schemas.BatchUpdateFindingsRequest_VerificationState, string(v.VerificationState))
+	}
+	if v.Workflow != nil {
+		s.WriteStruct(schemas.BatchUpdateFindingsRequest_Workflow)
+		v.Workflow.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type BatchUpdateFindingsOutput struct {
 
 	// The list of findings that were updated successfully.
@@ -156,13 +195,32 @@ type BatchUpdateFindingsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchUpdateFindingsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchUpdateFindingsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchUpdateFindingsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAwsSecurityFindingIdentifierList(s, schemas.BatchUpdateFindingsResponse_ProcessedFindings, v.ProcessedFindings)
+	serializeBatchUpdateFindingsUnprocessedFindingsList(s, schemas.BatchUpdateFindingsResponse_UnprocessedFindings, v.UnprocessedFindings)
+}
+func (v *BatchUpdateFindingsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchUpdateFindingsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchUpdateFindingsResponse_ProcessedFindings:
+			return deserializeAwsSecurityFindingIdentifierList(d, schemas.BatchUpdateFindingsResponse_ProcessedFindings, &v.ProcessedFindings)
+		case schemas.BatchUpdateFindingsResponse_UnprocessedFindings:
+			return deserializeBatchUpdateFindingsUnprocessedFindingsList(d, schemas.BatchUpdateFindingsResponse_UnprocessedFindings, &v.UnprocessedFindings)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationBatchUpdateFindingsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpBatchUpdateFindings{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchUpdateFindings, schemas.BatchUpdateFindingsRequest, schemas.BatchUpdateFindingsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpBatchUpdateFindings{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchUpdateFindings, schemas.BatchUpdateFindingsRequest, schemas.BatchUpdateFindingsResponse), output: &BatchUpdateFindingsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

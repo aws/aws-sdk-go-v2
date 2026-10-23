@@ -5,7 +5,9 @@ package appintegrations
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/appintegrations/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/appintegrations/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -37,6 +39,21 @@ type ListEventIntegrationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListEventIntegrationsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListEventIntegrationsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListEventIntegrationsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListEventIntegrationsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListEventIntegrationsRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListEventIntegrationsOutput struct {
 
 	// The event integrations.
@@ -51,13 +68,35 @@ type ListEventIntegrationsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListEventIntegrationsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListEventIntegrationsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListEventIntegrationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeEventIntegrationsList(s, schemas.ListEventIntegrationsResponse_EventIntegrations, v.EventIntegrations)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListEventIntegrationsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListEventIntegrationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListEventIntegrationsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListEventIntegrationsResponse_EventIntegrations:
+			return deserializeEventIntegrationsList(d, schemas.ListEventIntegrationsResponse_EventIntegrations, &v.EventIntegrations)
+		case schemas.ListEventIntegrationsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListEventIntegrationsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListEventIntegrationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListEventIntegrations{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListEventIntegrations, schemas.ListEventIntegrationsRequest, schemas.ListEventIntegrationsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListEventIntegrations{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListEventIntegrations, schemas.ListEventIntegrationsRequest, schemas.ListEventIntegrationsResponse), output: &ListEventIntegrationsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

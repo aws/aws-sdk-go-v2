@@ -1,3 +1,5 @@
-GET /v2/email/configuration-sets?NextToken=__NextToken__&PageSize=1
+POST /v2/email/list-configuration-sets
 
+Content-Type: application/json
 
+{"Filter":{"key0":"__Value__"},"NextToken":"__NextToken__","PageSize":1}

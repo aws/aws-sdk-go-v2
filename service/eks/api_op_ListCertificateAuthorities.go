@@ -5,7 +5,9 @@ package eks
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/eks/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/eks/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -51,6 +53,24 @@ type ListCertificateAuthoritiesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListCertificateAuthoritiesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListCertificateAuthoritiesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListCertificateAuthoritiesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClusterName != nil {
+		s.WriteString(schemas.ListCertificateAuthoritiesRequest_clusterName, *v.ClusterName)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListCertificateAuthoritiesRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListCertificateAuthoritiesRequest_nextToken, *v.NextToken)
+	}
+}
+
 type ListCertificateAuthoritiesOutput struct {
 
 	// A list of certificate authority summary objects, each containing basic
@@ -73,13 +93,35 @@ type ListCertificateAuthoritiesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListCertificateAuthoritiesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListCertificateAuthoritiesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListCertificateAuthoritiesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeCertificateAuthoritySummaryList(s, schemas.ListCertificateAuthoritiesResponse_certificateAuthorities, v.CertificateAuthorities)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListCertificateAuthoritiesResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListCertificateAuthoritiesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListCertificateAuthoritiesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListCertificateAuthoritiesResponse_certificateAuthorities:
+			return deserializeCertificateAuthoritySummaryList(d, schemas.ListCertificateAuthoritiesResponse_certificateAuthorities, &v.CertificateAuthorities)
+		case schemas.ListCertificateAuthoritiesResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListCertificateAuthoritiesResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListCertificateAuthoritiesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListCertificateAuthorities{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListCertificateAuthorities, schemas.ListCertificateAuthoritiesRequest, schemas.ListCertificateAuthoritiesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListCertificateAuthorities{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListCertificateAuthorities, schemas.ListCertificateAuthoritiesRequest, schemas.ListCertificateAuthoritiesResponse), output: &ListCertificateAuthoritiesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

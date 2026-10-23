@@ -4,7 +4,9 @@ package quicksight
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/quicksight/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/quicksight/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -38,6 +40,21 @@ type DescribeKeyRegistrationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeKeyRegistrationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeKeyRegistrationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeKeyRegistrationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AwsAccountId != nil {
+		s.WriteString(schemas.DescribeKeyRegistrationRequest_AwsAccountId, *v.AwsAccountId)
+	}
+	if v.DefaultKeyOnly != false {
+		s.WriteBool(schemas.DescribeKeyRegistrationRequest_DefaultKeyOnly, v.DefaultKeyOnly)
+	}
+}
+
 type DescribeKeyRegistrationOutput struct {
 
 	// The ID of the Amazon Web Services account that contains the customer managed
@@ -62,13 +79,54 @@ type DescribeKeyRegistrationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeKeyRegistrationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeKeyRegistrationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeKeyRegistrationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AwsAccountId != nil {
+		s.WriteString(schemas.DescribeKeyRegistrationResponse_AwsAccountId, *v.AwsAccountId)
+	}
+	serializeKeyRegistration(s, schemas.DescribeKeyRegistrationResponse_KeyRegistration, v.KeyRegistration)
+	if v.QDataKey != nil {
+		s.WriteStruct(schemas.DescribeKeyRegistrationResponse_QDataKey)
+		v.QDataKey.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RequestId != nil {
+		s.WriteString(schemas.DescribeKeyRegistrationResponse_RequestId, *v.RequestId)
+	}
+	if v.Status != 0 {
+		s.WriteInt32(schemas.DescribeKeyRegistrationResponse_Status, v.Status)
+	}
+}
+func (v *DescribeKeyRegistrationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeKeyRegistrationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeKeyRegistrationResponse_AwsAccountId:
+			v.AwsAccountId = new(string)
+			return d.ReadString(schemas.DescribeKeyRegistrationResponse_AwsAccountId, v.AwsAccountId)
+		case schemas.DescribeKeyRegistrationResponse_KeyRegistration:
+			return deserializeKeyRegistration(d, schemas.DescribeKeyRegistrationResponse_KeyRegistration, &v.KeyRegistration)
+		case schemas.DescribeKeyRegistrationResponse_QDataKey:
+			v.QDataKey = &types.QDataKey{}
+			return v.QDataKey.Deserialize(d)
+		case schemas.DescribeKeyRegistrationResponse_RequestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.DescribeKeyRegistrationResponse_RequestId, v.RequestId)
+		case schemas.DescribeKeyRegistrationResponse_Status:
+			return d.ReadInt32(schemas.DescribeKeyRegistrationResponse_Status, &v.Status)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeKeyRegistrationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeKeyRegistration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeKeyRegistration, schemas.DescribeKeyRegistrationRequest, schemas.DescribeKeyRegistrationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeKeyRegistration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeKeyRegistration, schemas.DescribeKeyRegistrationRequest, schemas.DescribeKeyRegistrationResponse), output: &DescribeKeyRegistrationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

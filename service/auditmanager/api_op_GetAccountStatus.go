@@ -4,7 +4,9 @@ package auditmanager
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/auditmanager/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/auditmanager/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -28,6 +30,15 @@ type GetAccountStatusInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetAccountStatusInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetAccountStatusRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetAccountStatusInput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+
 type GetAccountStatusOutput struct {
 
 	//  The status of the Amazon Web Services account.
@@ -39,13 +50,36 @@ type GetAccountStatusOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetAccountStatusOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetAccountStatusResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetAccountStatusOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Status != "" {
+		s.WriteString(schemas.GetAccountStatusResponse_status, string(v.Status))
+	}
+}
+func (v *GetAccountStatusOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetAccountStatusResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetAccountStatusResponse_status:
+			var ev string
+			if err := d.ReadString(schemas.GetAccountStatusResponse_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.AccountStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetAccountStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetAccountStatus{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAccountStatus, schemas.GetAccountStatusRequest, schemas.GetAccountStatusResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetAccountStatus{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAccountStatus, schemas.GetAccountStatusRequest, schemas.GetAccountStatusResponse), output: &GetAccountStatusOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package applicationsignals
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/applicationsignals/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/applicationsignals/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -51,6 +53,22 @@ type ReportInstrumentationConfigurationStatusInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ReportInstrumentationConfigurationStatusInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ReportInstrumentationConfigurationStatusRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ReportInstrumentationConfigurationStatusInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeInstrumentationConfigurationStatusList(s, schemas.ReportInstrumentationConfigurationStatusRequest_Configurations, v.Configurations)
+	if v.Environment != nil {
+		s.WriteString(schemas.ReportInstrumentationConfigurationStatusRequest_Environment, *v.Environment)
+	}
+	if v.Service != nil {
+		s.WriteString(schemas.ReportInstrumentationConfigurationStatusRequest_Service, *v.Service)
+	}
+}
+
 type ReportInstrumentationConfigurationStatusOutput struct {
 
 	// The environment echoed from the request.
@@ -75,13 +93,41 @@ type ReportInstrumentationConfigurationStatusOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ReportInstrumentationConfigurationStatusOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ReportInstrumentationConfigurationStatusResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ReportInstrumentationConfigurationStatusOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Environment != nil {
+		s.WriteString(schemas.ReportInstrumentationConfigurationStatusResponse_Environment, *v.Environment)
+	}
+	if v.Service != nil {
+		s.WriteString(schemas.ReportInstrumentationConfigurationStatusResponse_Service, *v.Service)
+	}
+	serializeUnprocessedStatusEventList(s, schemas.ReportInstrumentationConfigurationStatusResponse_UnprocessedStatusEvents, v.UnprocessedStatusEvents)
+}
+func (v *ReportInstrumentationConfigurationStatusOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ReportInstrumentationConfigurationStatusResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ReportInstrumentationConfigurationStatusResponse_Environment:
+			v.Environment = new(string)
+			return d.ReadString(schemas.ReportInstrumentationConfigurationStatusResponse_Environment, v.Environment)
+		case schemas.ReportInstrumentationConfigurationStatusResponse_Service:
+			v.Service = new(string)
+			return d.ReadString(schemas.ReportInstrumentationConfigurationStatusResponse_Service, v.Service)
+		case schemas.ReportInstrumentationConfigurationStatusResponse_UnprocessedStatusEvents:
+			return deserializeUnprocessedStatusEventList(d, schemas.ReportInstrumentationConfigurationStatusResponse_UnprocessedStatusEvents, &v.UnprocessedStatusEvents)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationReportInstrumentationConfigurationStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpReportInstrumentationConfigurationStatus{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ReportInstrumentationConfigurationStatus, schemas.ReportInstrumentationConfigurationStatusRequest, schemas.ReportInstrumentationConfigurationStatusResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpReportInstrumentationConfigurationStatus{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ReportInstrumentationConfigurationStatus, schemas.ReportInstrumentationConfigurationStatusRequest, schemas.ReportInstrumentationConfigurationStatusResponse), output: &ReportInstrumentationConfigurationStatusOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

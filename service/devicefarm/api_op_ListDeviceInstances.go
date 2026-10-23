@@ -4,7 +4,9 @@ package devicefarm
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/devicefarm/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/devicefarm/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -38,6 +40,21 @@ type ListDeviceInstancesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListDeviceInstancesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListDeviceInstancesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListDeviceInstancesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListDeviceInstancesRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListDeviceInstancesRequest_nextToken, *v.NextToken)
+	}
+}
+
 type ListDeviceInstancesOutput struct {
 
 	// An object that contains information about your device instances.
@@ -53,13 +70,35 @@ type ListDeviceInstancesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListDeviceInstancesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListDeviceInstancesResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListDeviceInstancesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDeviceInstances(s, schemas.ListDeviceInstancesResult_deviceInstances, v.DeviceInstances)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListDeviceInstancesResult_nextToken, *v.NextToken)
+	}
+}
+func (v *ListDeviceInstancesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListDeviceInstancesResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListDeviceInstancesResult_deviceInstances:
+			return deserializeDeviceInstances(d, schemas.ListDeviceInstancesResult_deviceInstances, &v.DeviceInstances)
+		case schemas.ListDeviceInstancesResult_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListDeviceInstancesResult_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListDeviceInstancesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListDeviceInstances{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDeviceInstances, schemas.ListDeviceInstancesRequest, schemas.ListDeviceInstancesResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListDeviceInstances{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDeviceInstances, schemas.ListDeviceInstancesRequest, schemas.ListDeviceInstancesResult), output: &ListDeviceInstancesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

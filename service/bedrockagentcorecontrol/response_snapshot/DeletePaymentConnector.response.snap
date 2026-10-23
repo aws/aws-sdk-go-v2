@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"paymentConnectorId":"__PaymentConnectorId__","status":"CREATING"}

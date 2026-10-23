@@ -4,6 +4,8 @@ package apigateway
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/apigateway/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -44,6 +46,24 @@ type DeleteMethodInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteMethodInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteMethodRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteMethodInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.HttpMethod != nil {
+		s.WriteString(schemas.DeleteMethodRequest_httpMethod, *v.HttpMethod)
+	}
+	if v.ResourceId != nil {
+		s.WriteString(schemas.DeleteMethodRequest_resourceId, *v.ResourceId)
+	}
+	if v.RestApiId != nil {
+		s.WriteString(schemas.DeleteMethodRequest_restApiId, *v.RestApiId)
+	}
+}
+
 type DeleteMethodOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -51,13 +71,26 @@ type DeleteMethodOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteMethodOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteMethodOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteMethodOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteMethodMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteMethod{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteMethod, schemas.DeleteMethodRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteMethod{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteMethod, schemas.DeleteMethodRequest, nil), output: &DeleteMethodOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

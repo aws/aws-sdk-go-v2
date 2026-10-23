@@ -821,7 +821,9 @@ var ClientOptionalDefaults_member *smithy.Schema
 var ComplexError = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "aws.protocoltests.restjson",
 	Name:      "ComplexError",
-}, smithy.ShapeTypeStructure, 3, &smithytraits.HTTPError{Code: 403})
+}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "client"},
+
+	&smithytraits.HTTPError{Code: 403})
 var ComplexError_Header *smithy.Schema
 
 var ComplexError_TopLevel *smithy.Schema
@@ -974,7 +976,7 @@ var _DocumentValuedMap_value *smithy.Schema
 var ErrorEvent = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "aws.protocoltests.restjson",
 	Name:      "ErrorEvent",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var ErrorEvent_message *smithy.Schema
 
 var EventStream = smithy.NewSchema(smithy.ShapeID{
@@ -1011,7 +1013,9 @@ var _FiniteStreamingBlob = smithy.NewSchema(smithy.ShapeID{
 var FooError = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "aws.protocoltests.restjson",
 	Name:      "FooError",
-}, smithy.ShapeTypeStructure, 0, &smithytraits.HTTPError{Code: 500})
+}, smithy.ShapeTypeStructure, 0, &smithytraits.Error{Type: "server"},
+
+	&smithytraits.HTTPError{Code: 500})
 
 var HeadersAndExplicitPayloadEvent = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "aws.protocoltests.restjson",
@@ -1052,7 +1056,9 @@ var HeadersEvent_timestampHeader *smithy.Schema
 var InvalidGreeting = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "aws.protocoltests.restjson",
 	Name:      "InvalidGreeting",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+
+	&smithytraits.HTTPError{Code: 400})
 var InvalidGreeting_Message *smithy.Schema
 
 var _JsonHeaderString = smithy.NewSchema(smithy.ShapeID{
@@ -1156,7 +1162,8 @@ var RecursiveShapesInputOutputNested2_recursiveMember *smithy.Schema
 var ServiceUnavailableError = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "aws.protocoltests.restjson",
 	Name:      "ServiceUnavailableError",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 500})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
+	&smithytraits.HTTPError{Code: 500})
 var ServiceUnavailableError_message *smithy.Schema
 
 var _SimpleList = smithy.NewSchema(smithy.ShapeID{

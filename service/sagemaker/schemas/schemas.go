@@ -23,6 +23,11 @@ var AssociateTrialComponent = smithy.NewSchema(smithy.ShapeID{
 	Name:      "AssociateTrialComponent",
 }, smithy.ShapeTypeOperation, 0)
 
+var AttachClusterNodeNetworkInterface = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "AttachClusterNodeNetworkInterface",
+}, smithy.ShapeTypeOperation, 0)
+
 var AttachClusterNodeVolume = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemaker",
 	Name:      "AttachClusterNodeVolume",
@@ -383,6 +388,11 @@ var CreateTrainingPlan = smithy.NewSchema(smithy.ShapeID{
 	Name:      "CreateTrainingPlan",
 }, smithy.ShapeTypeOperation, 0)
 
+var CreateTrainingSession = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "CreateTrainingSession",
+}, smithy.ShapeTypeOperation, 0)
+
 var CreateTransformJob = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemaker",
 	Name:      "CreateTransformJob",
@@ -696,6 +706,11 @@ var DeleteTags = smithy.NewSchema(smithy.ShapeID{
 var DeleteTrainingJob = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemaker",
 	Name:      "DeleteTrainingJob",
+}, smithy.ShapeTypeOperation, 0)
+
+var DeleteTrainingSession = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "DeleteTrainingSession",
 }, smithy.ShapeTypeOperation, 0)
 
 var DeleteTrial = smithy.NewSchema(smithy.ShapeID{
@@ -1076,6 +1091,11 @@ var DescribeTrainingPlan = smithy.NewSchema(smithy.ShapeID{
 var DescribeTrainingPlanExtensionHistory = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemaker",
 	Name:      "DescribeTrainingPlanExtensionHistory",
+}, smithy.ShapeTypeOperation, 0)
+
+var DescribeTrainingSession = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "DescribeTrainingSession",
 }, smithy.ShapeTypeOperation, 0)
 
 var DescribeTransformJob = smithy.NewSchema(smithy.ShapeID{
@@ -1583,6 +1603,11 @@ var ListTrainingPlans = smithy.NewSchema(smithy.ShapeID{
 	Name:      "ListTrainingPlans",
 }, smithy.ShapeTypeOperation, 0)
 
+var ListTrainingSessions = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "ListTrainingSessions",
+}, smithy.ShapeTypeOperation, 0)
+
 var ListTransformJobs = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemaker",
 	Name:      "ListTransformJobs",
@@ -1791,6 +1816,11 @@ var StopProcessingJob = smithy.NewSchema(smithy.ShapeID{
 var StopTrainingJob = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemaker",
 	Name:      "StopTrainingJob",
+}, smithy.ShapeTypeOperation, 0)
+
+var StopTrainingSession = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "StopTrainingSession",
 }, smithy.ShapeTypeOperation, 0)
 
 var StopTransformJob = smithy.NewSchema(smithy.ShapeID{
@@ -3891,6 +3921,14 @@ var AthenaResultFormat_JSON *smithy.Schema
 
 var AthenaResultFormat_TEXTFILE *smithy.Schema
 
+var AthenaStepMetadata = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "AthenaStepMetadata",
+}, smithy.ShapeTypeStructure, 2)
+var AthenaStepMetadata_QueryExecutionId *smithy.Schema
+
+var AthenaStepMetadata_S3OutputLocation *smithy.Schema
+
 var _AthenaWorkGroup = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemaker",
 	Name:      "AthenaWorkGroup",
@@ -4646,6 +4684,11 @@ var BaseModel_HubContentVersion *smithy.Schema
 
 var BaseModel_RecipeName *smithy.Schema
 
+var _BaseModelArn = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "BaseModelArn",
+}, smithy.ShapeTypeString, 0)
+
 var _BaseModelName = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemaker",
 	Name:      "BaseModelName",
@@ -4958,6 +5001,16 @@ var _BillableTokenCount = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemaker",
 	Name:      "BillableTokenCount",
 }, smithy.ShapeTypeLong, 0)
+
+var BillableTokenUsage = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "BillableTokenUsage",
+}, smithy.ShapeTypeStructure, 3)
+var BillableTokenUsage_PrefillTokenCount *smithy.Schema
+
+var BillableTokenUsage_SampleTokenCount *smithy.Schema
+
+var BillableTokenUsage_TrainingTokenCount *smithy.Schema
 
 var _BlockedReason = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemaker",
@@ -5788,6 +5841,46 @@ var ClarifyTextLanguage_LIGURIAN *smithy.Schema
 
 var ClarifyTextLanguage_MULTI_LANGUAGE *smithy.Schema
 
+var CleanupFailure = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "CleanupFailure",
+}, smithy.ShapeTypeStructure, 3)
+var CleanupFailure_StepName *smithy.Schema
+
+var CleanupFailure_ErrorCode *smithy.Schema
+
+var CleanupFailure_ErrorMessage *smithy.Schema
+
+var CleanupFailureErrorCode = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "CleanupFailureErrorCode",
+}, smithy.ShapeTypeEnum, 2)
+var CleanupFailureErrorCode_CLIENT_ERROR *smithy.Schema
+
+var CleanupFailureErrorCode_INTERNAL_FAILURE *smithy.Schema
+
+var _CleanupFailureList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "CleanupFailureList",
+}, smithy.ShapeTypeList, 1)
+var _CleanupFailureList_member *smithy.Schema
+
+var CleanupStepMetadata = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "CleanupStepMetadata",
+}, smithy.ShapeTypeStructure, 3)
+var CleanupStepMetadata_CleanedSteps *smithy.Schema
+
+var CleanupStepMetadata_FailedSteps *smithy.Schema
+
+var CleanupStepMetadata_SkippedSteps *smithy.Schema
+
+var _CleanupStepNameList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "CleanupStepNameList",
+}, smithy.ShapeTypeList, 1)
+var _CleanupStepNameList_member *smithy.Schema
+
 var _ClientId = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemaker",
 	Name:      "ClientId",
@@ -5801,6 +5894,38 @@ var _ClientSecret = smithy.NewSchema(smithy.ShapeID{
 var _ClientToken = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemaker",
 	Name:      "ClientToken",
+}, smithy.ShapeTypeString, 0)
+
+var ClusterAccountingDatabase = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "ClusterAccountingDatabase",
+}, smithy.ShapeTypeStructure, 4)
+var ClusterAccountingDatabase_Endpoint *smithy.Schema
+
+var ClusterAccountingDatabase_Port *smithy.Schema
+
+var ClusterAccountingDatabase_Name *smithy.Schema
+
+var ClusterAccountingDatabase_SecretArn *smithy.Schema
+
+var _ClusterAccountingDatabaseEndpoint = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "ClusterAccountingDatabaseEndpoint",
+}, smithy.ShapeTypeString, 0)
+
+var _ClusterAccountingDatabaseName = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "ClusterAccountingDatabaseName",
+}, smithy.ShapeTypeString, 0)
+
+var _ClusterAccountingDatabasePort = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "ClusterAccountingDatabasePort",
+}, smithy.ShapeTypeInteger, 0)
+
+var _ClusterAccountingDatabaseSecretArn = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "ClusterAccountingDatabaseSecretArn",
 }, smithy.ShapeTypeString, 0)
 
 var _ClusterArn = smithy.NewSchema(smithy.ShapeID{
@@ -6266,7 +6391,7 @@ var _ClusterInstanceStorageConfigs_member *smithy.Schema
 var ClusterInstanceType = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemaker",
 	Name:      "ClusterInstanceType",
-}, smithy.ShapeTypeEnum, 207)
+}, smithy.ShapeTypeEnum, 209)
 var ClusterInstanceType_ML_P4D_24XLARGE *smithy.Schema
 
 var ClusterInstanceType_ML_P4DE_24XLARGE *smithy.Schema
@@ -6681,6 +6806,10 @@ var ClusterInstanceType_ML_G7_24XLARGE *smithy.Schema
 
 var ClusterInstanceType_ML_G7_48XLARGE *smithy.Schema
 
+var ClusterInstanceType_ML_C8A_16XLARGE *smithy.Schema
+
+var ClusterInstanceType_ML_M8A_16XLARGE *smithy.Schema
+
 var ClusterInstanceTypeDetail = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemaker",
 	Name:      "ClusterInstanceTypeDetail",
@@ -6843,11 +6972,21 @@ var ClusterNetworkInterface = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeStructure, 1)
 var ClusterNetworkInterface_InterfaceType *smithy.Schema
 
+var _ClusterNetworkInterfaceAttachmentId = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "ClusterNetworkInterfaceAttachmentId",
+}, smithy.ShapeTypeString, 0)
+
 var ClusterNetworkInterfaceDetails = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemaker",
 	Name:      "ClusterNetworkInterfaceDetails",
 }, smithy.ShapeTypeStructure, 1)
 var ClusterNetworkInterfaceDetails_InterfaceType *smithy.Schema
+
+var _ClusterNetworkInterfaceId = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "ClusterNetworkInterfaceId",
+}, smithy.ShapeTypeString, 0)
 
 var ClusterNodeDetails = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemaker",
@@ -6996,8 +7135,10 @@ var ClusterOrchestratorEksConfig_ClusterArn *smithy.Schema
 var ClusterOrchestratorSlurmConfig = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemaker",
 	Name:      "ClusterOrchestratorSlurmConfig",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 2)
 var ClusterOrchestratorSlurmConfig_SlurmConfigStrategy *smithy.Schema
+
+var ClusterOrchestratorSlurmConfig_AccountingDatabase *smithy.Schema
 
 var _ClusterPartitionName = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemaker",
@@ -7652,7 +7793,7 @@ var _ConfigValue = smithy.NewSchema(smithy.ShapeID{
 var ConflictException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemaker",
 	Name:      "ConflictException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var ConflictException_Message *smithy.Schema
 
 var _ContainerArgument = smithy.NewSchema(smithy.ShapeID{
@@ -7910,6 +8051,11 @@ var _CurrencyCode = smithy.NewSchema(smithy.ShapeID{
 	Name:      "CurrencyCode",
 }, smithy.ShapeTypeString, 0)
 
+var _CustomerKmsKeyArn = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "CustomerKmsKeyArn",
+}, smithy.ShapeTypeString, 0)
+
 var _CustomerMetadataKey = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemaker",
 	Name:      "CustomerMetadataKey",
@@ -8036,6 +8182,26 @@ var _Database = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemaker",
 	Name:      "Database",
 }, smithy.ShapeTypeString, 0)
+
+var DatabaseConfigurationMetadata = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "DatabaseConfigurationMetadata",
+}, smithy.ShapeTypeStructure, 3)
+var DatabaseConfigurationMetadata_RollbackStatus *smithy.Schema
+
+var DatabaseConfigurationMetadata_Advisory *smithy.Schema
+
+var DatabaseConfigurationMetadata_FailureMessage *smithy.Schema
+
+var DatabaseConfigurationRollbackStatus = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "DatabaseConfigurationRollbackStatus",
+}, smithy.ShapeTypeEnum, 3)
+var DatabaseConfigurationRollbackStatus_NOT_APPLICABLE *smithy.Schema
+
+var DatabaseConfigurationRollbackStatus_REVERTED *smithy.Schema
+
+var DatabaseConfigurationRollbackStatus_REVERT_FAILED *smithy.Schema
 
 var DataCaptureConfig = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemaker",
@@ -9174,11 +9340,21 @@ var _EksRoleAccessEntries = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeList, 1)
 var _EksRoleAccessEntries_member *smithy.Schema
 
+var _EMRServerlessApplicationId = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "EMRServerlessApplicationId",
+}, smithy.ShapeTypeString, 0)
+
 var EmrServerlessComputeConfig = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemaker",
 	Name:      "EmrServerlessComputeConfig",
 }, smithy.ShapeTypeStructure, 1)
 var EmrServerlessComputeConfig_ExecutionRoleARN *smithy.Schema
+
+var _EMRServerlessJobRunId = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "EMRServerlessJobRunId",
+}, smithy.ShapeTypeString, 0)
 
 var EmrServerlessSettings = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemaker",
@@ -9187,6 +9363,18 @@ var EmrServerlessSettings = smithy.NewSchema(smithy.ShapeID{
 var EmrServerlessSettings_ExecutionRoleArn *smithy.Schema
 
 var EmrServerlessSettings_Status *smithy.Schema
+
+var EMRServerlessStepMetadata = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "EMRServerlessStepMetadata",
+}, smithy.ShapeTypeStructure, 4)
+var EMRServerlessStepMetadata_ApplicationId *smithy.Schema
+
+var EMRServerlessStepMetadata_JobRunId *smithy.Schema
+
+var EMRServerlessStepMetadata_JobRunName *smithy.Schema
+
+var EMRServerlessStepMetadata_LogFilePath *smithy.Schema
 
 var EmrSettings = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemaker",
@@ -9599,7 +9787,7 @@ var _EventId = smithy.NewSchema(smithy.ShapeID{
 var EventMetadata = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemaker",
 	Name:      "EventMetadata",
-}, smithy.ShapeTypeUnion, 4)
+}, smithy.ShapeTypeUnion, 6)
 var EventMetadata_Cluster *smithy.Schema
 
 var EventMetadata_InstanceGroup *smithy.Schema
@@ -9607,6 +9795,10 @@ var EventMetadata_InstanceGroup *smithy.Schema
 var EventMetadata_InstanceGroupScaling *smithy.Schema
 
 var EventMetadata_Instance *smithy.Schema
+
+var EventMetadata_DatabaseConfiguration *smithy.Schema
+
+var EventMetadata_SlurmHealth *smithy.Schema
 
 var EventSortBy = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemaker",
@@ -10285,6 +10477,42 @@ var _FlowDefinitionTaskTitle = smithy.NewSchema(smithy.ShapeID{
 	Name:      "FlowDefinitionTaskTitle",
 }, smithy.ShapeTypeString, 0)
 
+var ForEachSelectorResult = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "ForEachSelectorResult",
+}, smithy.ShapeTypeStructure, 2)
+var ForEachSelectorResult_StepName *smithy.Schema
+
+var ForEachSelectorResult_Index *smithy.Schema
+
+var ForEachStatus = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "ForEachStatus",
+}, smithy.ShapeTypeEnum, 3)
+var ForEachStatus_SUCCEEDED *smithy.Schema
+
+var ForEachStatus_FAILED *smithy.Schema
+
+var ForEachStatus_STOPPED *smithy.Schema
+
+var ForEachStepMetadata = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "ForEachStepMetadata",
+}, smithy.ShapeTypeStructure, 7)
+var ForEachStepMetadata_Status *smithy.Schema
+
+var ForEachStepMetadata_InputItemCount *smithy.Schema
+
+var ForEachStepMetadata_TotalStepCount *smithy.Schema
+
+var ForEachStepMetadata_SucceededStepCount *smithy.Schema
+
+var ForEachStepMetadata_FailedStepCount *smithy.Schema
+
+var ForEachStepMetadata_StoppedStepCount *smithy.Schema
+
+var ForEachStepMetadata_Selector *smithy.Schema
+
 var _ForecastFrequency = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemaker",
 	Name:      "ForecastFrequency",
@@ -10510,6 +10738,52 @@ var _HubArn = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemaker",
 	Name:      "HubArn",
 }, smithy.ShapeTypeString, 0)
+
+var HubContent = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "HubContent",
+}, smithy.ShapeTypeStructure, 21)
+var HubContent_HubContentName *smithy.Schema
+
+var HubContent_HubContentArn *smithy.Schema
+
+var HubContent_HubContentVersion *smithy.Schema
+
+var HubContent_HubContentType *smithy.Schema
+
+var HubContent_DocumentSchemaVersion *smithy.Schema
+
+var HubContent_HubName *smithy.Schema
+
+var HubContent_HubArn *smithy.Schema
+
+var HubContent_HubContentDisplayName *smithy.Schema
+
+var HubContent_HubContentDescription *smithy.Schema
+
+var HubContent_HubContentMarkdown *smithy.Schema
+
+var HubContent_HubContentDocument *smithy.Schema
+
+var HubContent_SageMakerPublicHubContentArn *smithy.Schema
+
+var HubContent_ReferenceMinVersion *smithy.Schema
+
+var HubContent_SupportStatus *smithy.Schema
+
+var HubContent_HubContentSearchKeywords *smithy.Schema
+
+var HubContent_HubContentDependencies *smithy.Schema
+
+var HubContent_HubContentStatus *smithy.Schema
+
+var HubContent_FailureReason *smithy.Schema
+
+var HubContent_CreationTime *smithy.Schema
+
+var HubContent_LastModifiedTime *smithy.Schema
+
+var HubContent_Tags *smithy.Schema
 
 var _HubContentArn = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemaker",
@@ -12823,6 +13097,31 @@ var _ItemIdentifierAttributeName = smithy.NewSchema(smithy.ShapeID{
 	Name:      "ItemIdentifierAttributeName",
 }, smithy.ShapeTypeString, 0)
 
+var IterationContext = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "IterationContext",
+}, smithy.ShapeTypeStructure, 3)
+var IterationContext_ParentStepName *smithy.Schema
+
+var IterationContext_Index *smithy.Schema
+
+var IterationContext_Item *smithy.Schema
+
+var _JavaBoolean = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "JavaBoolean",
+}, smithy.ShapeTypeBoolean, 0)
+
+var _JavaInteger = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "JavaInteger",
+}, smithy.ShapeTypeInteger, 0)
+
+var _JavaLong = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "JavaLong",
+}, smithy.ShapeTypeLong, 0)
+
 var Job = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemaker",
 	Name:      "Job",
@@ -13613,6 +13912,19 @@ var _LongS3Uri = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemaker",
 	Name:      "LongS3Uri",
 }, smithy.ShapeTypeString, 0)
+
+var _LoraAlpha = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "LoraAlpha",
+}, smithy.ShapeTypeInteger, 0)
+
+var LoraConfig = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "LoraConfig",
+}, smithy.ShapeTypeStructure, 2)
+var LoraConfig_Rank *smithy.Schema
+
+var LoraConfig_Alpha *smithy.Schema
 
 var MaintenanceStatus = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemaker",
@@ -16754,6 +17066,11 @@ var _OutputParameterList = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeList, 1)
 var _OutputParameterList_member *smithy.Schema
 
+var _OutputS3Path = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "OutputS3Path",
+}, smithy.ShapeTypeString, 0)
+
 var OwnershipSettings = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemaker",
 	Name:      "OwnershipSettings",
@@ -17163,7 +17480,7 @@ var _PipelineExecutionName = smithy.NewSchema(smithy.ShapeID{
 var PipelineExecutionStatus = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemaker",
 	Name:      "PipelineExecutionStatus",
-}, smithy.ShapeTypeEnum, 5)
+}, smithy.ShapeTypeEnum, 6)
 var PipelineExecutionStatus_EXECUTING *smithy.Schema
 
 var PipelineExecutionStatus_STOPPING *smithy.Schema
@@ -17174,10 +17491,12 @@ var PipelineExecutionStatus_FAILED *smithy.Schema
 
 var PipelineExecutionStatus_SUCCEEDED *smithy.Schema
 
+var PipelineExecutionStatus_COMPLETED_WITH_FAILURES *smithy.Schema
+
 var PipelineExecutionStep = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemaker",
 	Name:      "PipelineExecutionStep",
-}, smithy.ShapeTypeStructure, 11)
+}, smithy.ShapeTypeStructure, 12)
 var PipelineExecutionStep_StepName *smithy.Schema
 
 var PipelineExecutionStep_StepDisplayName *smithy.Schema
@@ -17200,6 +17519,8 @@ var PipelineExecutionStep_AttemptCount *smithy.Schema
 
 var PipelineExecutionStep_SelectiveExecutionResult *smithy.Schema
 
+var PipelineExecutionStep_IterationContext *smithy.Schema
+
 var _PipelineExecutionStepList = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemaker",
 	Name:      "PipelineExecutionStepList",
@@ -17209,7 +17530,7 @@ var _PipelineExecutionStepList_member *smithy.Schema
 var PipelineExecutionStepMetadata = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemaker",
 	Name:      "PipelineExecutionStepMetadata",
-}, smithy.ShapeTypeStructure, 23)
+}, smithy.ShapeTypeStructure, 27)
 var PipelineExecutionStepMetadata_TrainingJob *smithy.Schema
 
 var PipelineExecutionStepMetadata_ProcessingJob *smithy.Schema
@@ -17229,6 +17550,8 @@ var PipelineExecutionStepMetadata_Callback *smithy.Schema
 var PipelineExecutionStepMetadata_Lambda *smithy.Schema
 
 var PipelineExecutionStepMetadata_EMR *smithy.Schema
+
+var PipelineExecutionStepMetadata_EMRServerless *smithy.Schema
 
 var PipelineExecutionStepMetadata_QualityCheck *smithy.Schema
 
@@ -17255,6 +17578,12 @@ var PipelineExecutionStepMetadata_InferenceComponent *smithy.Schema
 var PipelineExecutionStepMetadata_Lineage *smithy.Schema
 
 var PipelineExecutionStepMetadata_Job *smithy.Schema
+
+var PipelineExecutionStepMetadata_Athena *smithy.Schema
+
+var PipelineExecutionStepMetadata_Cleanup *smithy.Schema
+
+var PipelineExecutionStepMetadata_ForEach *smithy.Schema
 
 var PipelineExecutionSummary = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemaker",
@@ -17583,7 +17912,7 @@ var _ProcessingInstancePreferenceList_member *smithy.Schema
 var ProcessingInstanceType = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemaker",
 	Name:      "ProcessingInstanceType",
-}, smithy.ShapeTypeEnum, 133)
+}, smithy.ShapeTypeEnum, 207)
 var ProcessingInstanceType_ML_T3_MEDIUM *smithy.Schema
 
 var ProcessingInstanceType_ML_T3_LARGE *smithy.Schema
@@ -17849,6 +18178,154 @@ var ProcessingInstanceType_ML_G7_12XLARGE *smithy.Schema
 var ProcessingInstanceType_ML_G7_24XLARGE *smithy.Schema
 
 var ProcessingInstanceType_ML_G7_48XLARGE *smithy.Schema
+
+var ProcessingInstanceType_ML_R6I_LARGE *smithy.Schema
+
+var ProcessingInstanceType_ML_R6I_XLARGE *smithy.Schema
+
+var ProcessingInstanceType_ML_R6I_2XLARGE *smithy.Schema
+
+var ProcessingInstanceType_ML_R6I_4XLARGE *smithy.Schema
+
+var ProcessingInstanceType_ML_R6I_8XLARGE *smithy.Schema
+
+var ProcessingInstanceType_ML_R6I_12XLARGE *smithy.Schema
+
+var ProcessingInstanceType_ML_R6I_16XLARGE *smithy.Schema
+
+var ProcessingInstanceType_ML_R6I_24XLARGE *smithy.Schema
+
+var ProcessingInstanceType_ML_R6I_32XLARGE *smithy.Schema
+
+var ProcessingInstanceType_ML_M8I_LARGE *smithy.Schema
+
+var ProcessingInstanceType_ML_M8I_XLARGE *smithy.Schema
+
+var ProcessingInstanceType_ML_M8I_2XLARGE *smithy.Schema
+
+var ProcessingInstanceType_ML_M8I_4XLARGE *smithy.Schema
+
+var ProcessingInstanceType_ML_M8I_8XLARGE *smithy.Schema
+
+var ProcessingInstanceType_ML_M8I_12XLARGE *smithy.Schema
+
+var ProcessingInstanceType_ML_M8I_16XLARGE *smithy.Schema
+
+var ProcessingInstanceType_ML_M8I_24XLARGE *smithy.Schema
+
+var ProcessingInstanceType_ML_M8I_32XLARGE *smithy.Schema
+
+var ProcessingInstanceType_ML_M8I_48XLARGE *smithy.Schema
+
+var ProcessingInstanceType_ML_M8I_96XLARGE *smithy.Schema
+
+var ProcessingInstanceType_ML_C8I_XLARGE *smithy.Schema
+
+var ProcessingInstanceType_ML_C8I_2XLARGE *smithy.Schema
+
+var ProcessingInstanceType_ML_C8I_4XLARGE *smithy.Schema
+
+var ProcessingInstanceType_ML_C8I_8XLARGE *smithy.Schema
+
+var ProcessingInstanceType_ML_C8I_12XLARGE *smithy.Schema
+
+var ProcessingInstanceType_ML_C8I_16XLARGE *smithy.Schema
+
+var ProcessingInstanceType_ML_C8I_24XLARGE *smithy.Schema
+
+var ProcessingInstanceType_ML_C8I_32XLARGE *smithy.Schema
+
+var ProcessingInstanceType_ML_C8I_48XLARGE *smithy.Schema
+
+var ProcessingInstanceType_ML_C8I_96XLARGE *smithy.Schema
+
+var ProcessingInstanceType_ML_R8I_LARGE *smithy.Schema
+
+var ProcessingInstanceType_ML_R8I_XLARGE *smithy.Schema
+
+var ProcessingInstanceType_ML_R8I_2XLARGE *smithy.Schema
+
+var ProcessingInstanceType_ML_R8I_4XLARGE *smithy.Schema
+
+var ProcessingInstanceType_ML_R8I_8XLARGE *smithy.Schema
+
+var ProcessingInstanceType_ML_R8I_12XLARGE *smithy.Schema
+
+var ProcessingInstanceType_ML_R8I_16XLARGE *smithy.Schema
+
+var ProcessingInstanceType_ML_R8I_24XLARGE *smithy.Schema
+
+var ProcessingInstanceType_ML_R8I_32XLARGE *smithy.Schema
+
+var ProcessingInstanceType_ML_R8I_48XLARGE *smithy.Schema
+
+var ProcessingInstanceType_ML_R8I_96XLARGE *smithy.Schema
+
+var ProcessingInstanceType_ML_M7I_FLEX_LARGE *smithy.Schema
+
+var ProcessingInstanceType_ML_M7I_FLEX_XLARGE *smithy.Schema
+
+var ProcessingInstanceType_ML_M7I_FLEX_2XLARGE *smithy.Schema
+
+var ProcessingInstanceType_ML_M7I_FLEX_4XLARGE *smithy.Schema
+
+var ProcessingInstanceType_ML_M7I_FLEX_8XLARGE *smithy.Schema
+
+var ProcessingInstanceType_ML_M7I_FLEX_12XLARGE *smithy.Schema
+
+var ProcessingInstanceType_ML_M7I_FLEX_16XLARGE *smithy.Schema
+
+var ProcessingInstanceType_ML_C7I_FLEX_XLARGE *smithy.Schema
+
+var ProcessingInstanceType_ML_C7I_FLEX_2XLARGE *smithy.Schema
+
+var ProcessingInstanceType_ML_C7I_FLEX_4XLARGE *smithy.Schema
+
+var ProcessingInstanceType_ML_C7I_FLEX_8XLARGE *smithy.Schema
+
+var ProcessingInstanceType_ML_C7I_FLEX_12XLARGE *smithy.Schema
+
+var ProcessingInstanceType_ML_C7I_FLEX_16XLARGE *smithy.Schema
+
+var ProcessingInstanceType_ML_M8I_FLEX_LARGE *smithy.Schema
+
+var ProcessingInstanceType_ML_M8I_FLEX_XLARGE *smithy.Schema
+
+var ProcessingInstanceType_ML_M8I_FLEX_2XLARGE *smithy.Schema
+
+var ProcessingInstanceType_ML_M8I_FLEX_4XLARGE *smithy.Schema
+
+var ProcessingInstanceType_ML_M8I_FLEX_8XLARGE *smithy.Schema
+
+var ProcessingInstanceType_ML_M8I_FLEX_12XLARGE *smithy.Schema
+
+var ProcessingInstanceType_ML_M8I_FLEX_16XLARGE *smithy.Schema
+
+var ProcessingInstanceType_ML_C8I_FLEX_XLARGE *smithy.Schema
+
+var ProcessingInstanceType_ML_C8I_FLEX_2XLARGE *smithy.Schema
+
+var ProcessingInstanceType_ML_C8I_FLEX_4XLARGE *smithy.Schema
+
+var ProcessingInstanceType_ML_C8I_FLEX_8XLARGE *smithy.Schema
+
+var ProcessingInstanceType_ML_C8I_FLEX_12XLARGE *smithy.Schema
+
+var ProcessingInstanceType_ML_C8I_FLEX_16XLARGE *smithy.Schema
+
+var ProcessingInstanceType_ML_R8I_FLEX_LARGE *smithy.Schema
+
+var ProcessingInstanceType_ML_R8I_FLEX_XLARGE *smithy.Schema
+
+var ProcessingInstanceType_ML_R8I_FLEX_2XLARGE *smithy.Schema
+
+var ProcessingInstanceType_ML_R8I_FLEX_4XLARGE *smithy.Schema
+
+var ProcessingInstanceType_ML_R8I_FLEX_8XLARGE *smithy.Schema
+
+var ProcessingInstanceType_ML_R8I_FLEX_12XLARGE *smithy.Schema
+
+var ProcessingInstanceType_ML_R8I_FLEX_16XLARGE *smithy.Schema
 
 var ProcessingJob = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemaker",
@@ -19225,6 +19702,11 @@ var _RandomSeed = smithy.NewSchema(smithy.ShapeID{
 	Name:      "RandomSeed",
 }, smithy.ShapeTypeInteger, 0)
 
+var _Rank = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "Rank",
+}, smithy.ShapeTypeInteger, 0)
+
 var RealTimeInferenceConfig = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemaker",
 	Name:      "RealTimeInferenceConfig",
@@ -19939,13 +20421,13 @@ var _ResourceIdentifier = smithy.NewSchema(smithy.ShapeID{
 var ResourceInUse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemaker",
 	Name:      "ResourceInUse",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var ResourceInUse_Message *smithy.Schema
 
 var ResourceLimitExceeded = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemaker",
 	Name:      "ResourceLimitExceeded",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var ResourceLimitExceeded_Message *smithy.Schema
 
 var ResourceLimits = smithy.NewSchema(smithy.ShapeID{
@@ -19961,7 +20443,7 @@ var ResourceLimits_MaxRuntimeInSeconds *smithy.Schema
 var ResourceNotFound = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemaker",
 	Name:      "ResourceNotFound",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var ResourceNotFound_Message *smithy.Schema
 
 var _ResourcePolicyString = smithy.NewSchema(smithy.ShapeID{
@@ -20018,7 +20500,7 @@ var ResourceSpec_TrainingPlanArn *smithy.Schema
 var ResourceType = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemaker",
 	Name:      "ResourceType",
-}, smithy.ShapeTypeEnum, 19)
+}, smithy.ShapeTypeEnum, 20)
 var ResourceType_TRAINING_JOB *smithy.Schema
 
 var ResourceType_EXPERIMENT *smithy.Schema
@@ -20056,6 +20538,8 @@ var ResourceType_MODEL_CARD *smithy.Schema
 var ResourceType_PIPELINE_VERSION *smithy.Schema
 
 var ResourceType_JOB *smithy.Schema
+
+var ResourceType_HUB_CONTENT *smithy.Schema
 
 var _ResponseMIMEType = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemaker",
@@ -20541,7 +21025,7 @@ var _SearchExpressionList_member *smithy.Schema
 var SearchRecord = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemaker",
 	Name:      "SearchRecord",
-}, smithy.ShapeTypeStructure, 17)
+}, smithy.ShapeTypeStructure, 18)
 var SearchRecord_TrainingJob *smithy.Schema
 
 var SearchRecord_Experiment *smithy.Schema
@@ -20575,6 +21059,8 @@ var SearchRecord_ModelCard *smithy.Schema
 var SearchRecord_Model *smithy.Schema
 
 var SearchRecord_Job *smithy.Schema
+
+var SearchRecord_HubContent *smithy.Schema
 
 var _SearchResultsList = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemaker",
@@ -20858,6 +21344,40 @@ var SkipModelValidation = smithy.NewSchema(smithy.ShapeID{
 var SkipModelValidation_ALL *smithy.Schema
 
 var SkipModelValidation_NONE *smithy.Schema
+
+var SlurmHealthComponent = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "SlurmHealthComponent",
+}, smithy.ShapeTypeEnum, 1)
+var SlurmHealthComponent_SLURMDBD *smithy.Schema
+
+var SlurmHealthMetadata = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "SlurmHealthMetadata",
+}, smithy.ShapeTypeStructure, 3)
+var SlurmHealthMetadata_Component *smithy.Schema
+
+var SlurmHealthMetadata_Status *smithy.Schema
+
+var SlurmHealthMetadata_Reason *smithy.Schema
+
+var SlurmHealthReason = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "SlurmHealthReason",
+}, smithy.ShapeTypeEnum, 3)
+var SlurmHealthReason_DAEMON_DOWN *smithy.Schema
+
+var SlurmHealthReason_DAEMON_DISABLED *smithy.Schema
+
+var SlurmHealthReason_DB_UNREACHABLE *smithy.Schema
+
+var SlurmHealthStatus = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "SlurmHealthStatus",
+}, smithy.ShapeTypeEnum, 2)
+var SlurmHealthStatus_HEALTHY *smithy.Schema
+
+var SlurmHealthStatus_UNHEALTHY *smithy.Schema
 
 var _SnsTopicArn = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemaker",
@@ -21381,6 +21901,11 @@ var _String1024 = smithy.NewSchema(smithy.ShapeID{
 var _String128 = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemaker",
 	Name:      "String128",
+}, smithy.ShapeTypeString, 0)
+
+var _String12800 = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "String12800",
 }, smithy.ShapeTypeString, 0)
 
 var _String200 = smithy.NewSchema(smithy.ShapeID{
@@ -22260,7 +22785,7 @@ var _TrainingInstanceCount = smithy.NewSchema(smithy.ShapeID{
 var TrainingInstanceType = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemaker",
 	Name:      "TrainingInstanceType",
-}, smithy.ShapeTypeEnum, 151)
+}, smithy.ShapeTypeEnum, 225)
 var TrainingInstanceType_ML_M4_XLARGE *smithy.Schema
 
 var TrainingInstanceType_ML_M4_2XLARGE *smithy.Schema
@@ -22562,6 +23087,154 @@ var TrainingInstanceType_ML_G7_12XLARGE *smithy.Schema
 var TrainingInstanceType_ML_G7_24XLARGE *smithy.Schema
 
 var TrainingInstanceType_ML_G7_48XLARGE *smithy.Schema
+
+var TrainingInstanceType_ML_R6I_LARGE *smithy.Schema
+
+var TrainingInstanceType_ML_R6I_XLARGE *smithy.Schema
+
+var TrainingInstanceType_ML_R6I_2XLARGE *smithy.Schema
+
+var TrainingInstanceType_ML_R6I_4XLARGE *smithy.Schema
+
+var TrainingInstanceType_ML_R6I_8XLARGE *smithy.Schema
+
+var TrainingInstanceType_ML_R6I_12XLARGE *smithy.Schema
+
+var TrainingInstanceType_ML_R6I_16XLARGE *smithy.Schema
+
+var TrainingInstanceType_ML_R6I_24XLARGE *smithy.Schema
+
+var TrainingInstanceType_ML_R6I_32XLARGE *smithy.Schema
+
+var TrainingInstanceType_ML_M8I_LARGE *smithy.Schema
+
+var TrainingInstanceType_ML_M8I_XLARGE *smithy.Schema
+
+var TrainingInstanceType_ML_M8I_2XLARGE *smithy.Schema
+
+var TrainingInstanceType_ML_M8I_4XLARGE *smithy.Schema
+
+var TrainingInstanceType_ML_M8I_8XLARGE *smithy.Schema
+
+var TrainingInstanceType_ML_M8I_12XLARGE *smithy.Schema
+
+var TrainingInstanceType_ML_M8I_16XLARGE *smithy.Schema
+
+var TrainingInstanceType_ML_M8I_24XLARGE *smithy.Schema
+
+var TrainingInstanceType_ML_M8I_32XLARGE *smithy.Schema
+
+var TrainingInstanceType_ML_M8I_48XLARGE *smithy.Schema
+
+var TrainingInstanceType_ML_M8I_96XLARGE *smithy.Schema
+
+var TrainingInstanceType_ML_C8I_XLARGE *smithy.Schema
+
+var TrainingInstanceType_ML_C8I_2XLARGE *smithy.Schema
+
+var TrainingInstanceType_ML_C8I_4XLARGE *smithy.Schema
+
+var TrainingInstanceType_ML_C8I_8XLARGE *smithy.Schema
+
+var TrainingInstanceType_ML_C8I_12XLARGE *smithy.Schema
+
+var TrainingInstanceType_ML_C8I_16XLARGE *smithy.Schema
+
+var TrainingInstanceType_ML_C8I_24XLARGE *smithy.Schema
+
+var TrainingInstanceType_ML_C8I_32XLARGE *smithy.Schema
+
+var TrainingInstanceType_ML_C8I_48XLARGE *smithy.Schema
+
+var TrainingInstanceType_ML_C8I_96XLARGE *smithy.Schema
+
+var TrainingInstanceType_ML_R8I_LARGE *smithy.Schema
+
+var TrainingInstanceType_ML_R8I_XLARGE *smithy.Schema
+
+var TrainingInstanceType_ML_R8I_2XLARGE *smithy.Schema
+
+var TrainingInstanceType_ML_R8I_4XLARGE *smithy.Schema
+
+var TrainingInstanceType_ML_R8I_8XLARGE *smithy.Schema
+
+var TrainingInstanceType_ML_R8I_12XLARGE *smithy.Schema
+
+var TrainingInstanceType_ML_R8I_16XLARGE *smithy.Schema
+
+var TrainingInstanceType_ML_R8I_24XLARGE *smithy.Schema
+
+var TrainingInstanceType_ML_R8I_32XLARGE *smithy.Schema
+
+var TrainingInstanceType_ML_R8I_48XLARGE *smithy.Schema
+
+var TrainingInstanceType_ML_R8I_96XLARGE *smithy.Schema
+
+var TrainingInstanceType_ML_M7I_FLEX_LARGE *smithy.Schema
+
+var TrainingInstanceType_ML_M7I_FLEX_XLARGE *smithy.Schema
+
+var TrainingInstanceType_ML_M7I_FLEX_2XLARGE *smithy.Schema
+
+var TrainingInstanceType_ML_M7I_FLEX_4XLARGE *smithy.Schema
+
+var TrainingInstanceType_ML_M7I_FLEX_8XLARGE *smithy.Schema
+
+var TrainingInstanceType_ML_M7I_FLEX_12XLARGE *smithy.Schema
+
+var TrainingInstanceType_ML_M7I_FLEX_16XLARGE *smithy.Schema
+
+var TrainingInstanceType_ML_C7I_FLEX_XLARGE *smithy.Schema
+
+var TrainingInstanceType_ML_C7I_FLEX_2XLARGE *smithy.Schema
+
+var TrainingInstanceType_ML_C7I_FLEX_4XLARGE *smithy.Schema
+
+var TrainingInstanceType_ML_C7I_FLEX_8XLARGE *smithy.Schema
+
+var TrainingInstanceType_ML_C7I_FLEX_12XLARGE *smithy.Schema
+
+var TrainingInstanceType_ML_C7I_FLEX_16XLARGE *smithy.Schema
+
+var TrainingInstanceType_ML_M8I_FLEX_LARGE *smithy.Schema
+
+var TrainingInstanceType_ML_M8I_FLEX_XLARGE *smithy.Schema
+
+var TrainingInstanceType_ML_M8I_FLEX_2XLARGE *smithy.Schema
+
+var TrainingInstanceType_ML_M8I_FLEX_4XLARGE *smithy.Schema
+
+var TrainingInstanceType_ML_M8I_FLEX_8XLARGE *smithy.Schema
+
+var TrainingInstanceType_ML_M8I_FLEX_12XLARGE *smithy.Schema
+
+var TrainingInstanceType_ML_M8I_FLEX_16XLARGE *smithy.Schema
+
+var TrainingInstanceType_ML_C8I_FLEX_XLARGE *smithy.Schema
+
+var TrainingInstanceType_ML_C8I_FLEX_2XLARGE *smithy.Schema
+
+var TrainingInstanceType_ML_C8I_FLEX_4XLARGE *smithy.Schema
+
+var TrainingInstanceType_ML_C8I_FLEX_8XLARGE *smithy.Schema
+
+var TrainingInstanceType_ML_C8I_FLEX_12XLARGE *smithy.Schema
+
+var TrainingInstanceType_ML_C8I_FLEX_16XLARGE *smithy.Schema
+
+var TrainingInstanceType_ML_R8I_FLEX_LARGE *smithy.Schema
+
+var TrainingInstanceType_ML_R8I_FLEX_XLARGE *smithy.Schema
+
+var TrainingInstanceType_ML_R8I_FLEX_2XLARGE *smithy.Schema
+
+var TrainingInstanceType_ML_R8I_FLEX_4XLARGE *smithy.Schema
+
+var TrainingInstanceType_ML_R8I_FLEX_8XLARGE *smithy.Schema
+
+var TrainingInstanceType_ML_R8I_FLEX_12XLARGE *smithy.Schema
+
+var TrainingInstanceType_ML_R8I_FLEX_16XLARGE *smithy.Schema
 
 var _TrainingInstanceTypes = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemaker",
@@ -22893,6 +23566,11 @@ var _TrainingPlanName = smithy.NewSchema(smithy.ShapeID{
 	Name:      "TrainingPlanName",
 }, smithy.ShapeTypeString, 0)
 
+var _TrainingPlanNameOrArn = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "TrainingPlanNameOrArn",
+}, smithy.ShapeTypeString, 0)
+
 var TrainingPlanOffering = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemaker",
 	Name:      "TrainingPlanOffering",
@@ -23035,6 +23713,116 @@ var _TrainingRepositoryCredentialsProviderArn = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemaker",
 	Name:      "TrainingRepositoryCredentialsProviderArn",
 }, smithy.ShapeTypeString, 0)
+
+var _TrainingSessionArn = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "TrainingSessionArn",
+}, smithy.ShapeTypeString, 0)
+
+var TrainingSessionDetail = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "TrainingSessionDetail",
+}, smithy.ShapeTypeStructure, 16)
+var TrainingSessionDetail_TrainingSessionArn *smithy.Schema
+
+var TrainingSessionDetail_TrainingSessionName *smithy.Schema
+
+var TrainingSessionDetail_TrainingSessionStatus *smithy.Schema
+
+var TrainingSessionDetail_ModelPackageGroupArn *smithy.Schema
+
+var TrainingSessionDetail_CreationTime *smithy.Schema
+
+var TrainingSessionDetail_LastModifiedTime *smithy.Schema
+
+var TrainingSessionDetail_EndTime *smithy.Schema
+
+var TrainingSessionDetail_ErrorDetails *smithy.Schema
+
+var TrainingSessionDetail_LastReceivedSequenceNumber *smithy.Schema
+
+var TrainingSessionDetail_BillableTokenUsage *smithy.Schema
+
+var TrainingSessionDetail_VpcConfig *smithy.Schema
+
+var TrainingSessionDetail_RoleArn *smithy.Schema
+
+var TrainingSessionDetail_LoraConfig *smithy.Schema
+
+var TrainingSessionDetail_ModelConfig *smithy.Schema
+
+var TrainingSessionDetail_OutputConfig *smithy.Schema
+
+var TrainingSessionDetail_Tags *smithy.Schema
+
+var TrainingSessionModelConfig = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "TrainingSessionModelConfig",
+}, smithy.ShapeTypeStructure, 2)
+var TrainingSessionModelConfig_BaseModelArn *smithy.Schema
+
+var TrainingSessionModelConfig_AcceptEula *smithy.Schema
+
+var _TrainingSessionName = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "TrainingSessionName",
+}, smithy.ShapeTypeString, 0)
+
+var TrainingSessionOutputConfig = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "TrainingSessionOutputConfig",
+}, smithy.ShapeTypeStructure, 1)
+var TrainingSessionOutputConfig_S3Location *smithy.Schema
+
+var TrainingSessionS3Location = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "TrainingSessionS3Location",
+}, smithy.ShapeTypeStructure, 2)
+var TrainingSessionS3Location_Path *smithy.Schema
+
+var TrainingSessionS3Location_KmsKeyArn *smithy.Schema
+
+var TrainingSessionStatus = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "TrainingSessionStatus",
+}, smithy.ShapeTypeEnum, 10)
+var TrainingSessionStatus_CREATED *smithy.Schema
+
+var TrainingSessionStatus_BLOCKED *smithy.Schema
+
+var TrainingSessionStatus_RUNNING *smithy.Schema
+
+var TrainingSessionStatus_FAILED *smithy.Schema
+
+var TrainingSessionStatus_SCHEDULED *smithy.Schema
+
+var TrainingSessionStatus_STOPPING *smithy.Schema
+
+var TrainingSessionStatus_STOPPED *smithy.Schema
+
+var TrainingSessionStatus_EXPIRED *smithy.Schema
+
+var TrainingSessionStatus_DELETING *smithy.Schema
+
+var TrainingSessionStatus_DELETION_FAILED *smithy.Schema
+
+var _TrainingSessionSummaries = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "TrainingSessionSummaries",
+}, smithy.ShapeTypeList, 1)
+var _TrainingSessionSummaries_member *smithy.Schema
+
+var TrainingSessionSummary = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "TrainingSessionSummary",
+}, smithy.ShapeTypeStructure, 4)
+var TrainingSessionSummary_TrainingSessionArn *smithy.Schema
+
+var TrainingSessionSummary_TrainingSessionStatus *smithy.Schema
+
+var TrainingSessionSummary_CreationTime *smithy.Schema
+
+var TrainingSessionSummary_LastModifiedTime *smithy.Schema
 
 var TrainingSpecification = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemaker",
@@ -24646,6 +25434,28 @@ var AssociateTrialComponentResponse = smithy.NewSchema(smithy.ShapeID{
 var AssociateTrialComponentResponse_TrialComponentArn *smithy.Schema
 
 var AssociateTrialComponentResponse_TrialArn *smithy.Schema
+
+var AttachClusterNodeNetworkInterfaceRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "AttachClusterNodeNetworkInterfaceRequest",
+}, smithy.ShapeTypeStructure, 3)
+var AttachClusterNodeNetworkInterfaceRequest_ClusterName *smithy.Schema
+
+var AttachClusterNodeNetworkInterfaceRequest_NodeId *smithy.Schema
+
+var AttachClusterNodeNetworkInterfaceRequest_NetworkInterfaceId *smithy.Schema
+
+var AttachClusterNodeNetworkInterfaceResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "AttachClusterNodeNetworkInterfaceResponse",
+}, smithy.ShapeTypeStructure, 4)
+var AttachClusterNodeNetworkInterfaceResponse_ClusterArn *smithy.Schema
+
+var AttachClusterNodeNetworkInterfaceResponse_NodeId *smithy.Schema
+
+var AttachClusterNodeNetworkInterfaceResponse_NetworkInterfaceId *smithy.Schema
+
+var AttachClusterNodeNetworkInterfaceResponse_AttachmentId *smithy.Schema
 
 var AttachClusterNodeVolumeRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemaker",
@@ -26457,6 +27267,32 @@ var CreateTrainingPlanResponse = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeStructure, 1)
 var CreateTrainingPlanResponse_TrainingPlanArn *smithy.Schema
 
+var CreateTrainingSessionRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "CreateTrainingSessionRequest",
+}, smithy.ShapeTypeStructure, 8)
+var CreateTrainingSessionRequest_TrainingSessionName *smithy.Schema
+
+var CreateTrainingSessionRequest_ModelPackageGroupArn *smithy.Schema
+
+var CreateTrainingSessionRequest_LoraConfig *smithy.Schema
+
+var CreateTrainingSessionRequest_RoleArn *smithy.Schema
+
+var CreateTrainingSessionRequest_VpcConfig *smithy.Schema
+
+var CreateTrainingSessionRequest_ModelConfig *smithy.Schema
+
+var CreateTrainingSessionRequest_OutputConfig *smithy.Schema
+
+var CreateTrainingSessionRequest_Tags *smithy.Schema
+
+var CreateTrainingSessionResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "CreateTrainingSessionResponse",
+}, smithy.ShapeTypeStructure, 1)
+var CreateTrainingSessionResponse_TrainingSessionArn *smithy.Schema
+
 var CreateTransformJobRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemaker",
 	Name:      "CreateTransformJobRequest",
@@ -27112,6 +27948,17 @@ var DeleteTrainingJobRequest = smithy.NewSchema(smithy.ShapeID{
 	Name:      "DeleteTrainingJobRequest",
 }, smithy.ShapeTypeStructure, 1)
 var DeleteTrainingJobRequest_TrainingJobName *smithy.Schema
+
+var DeleteTrainingSessionRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "DeleteTrainingSessionRequest",
+}, smithy.ShapeTypeStructure, 1)
+var DeleteTrainingSessionRequest_TrainingSessionName *smithy.Schema
+
+var DeleteTrainingSessionResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "DeleteTrainingSessionResponse",
+}, smithy.ShapeTypeStructure, 0)
 
 var DeleteTrialComponentRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemaker",
@@ -29771,6 +30618,18 @@ var DescribeTrainingPlanResponse_TotalUltraServerCount *smithy.Schema
 var DescribeTrainingPlanResponse_TargetResources *smithy.Schema
 
 var DescribeTrainingPlanResponse_ReservedCapacitySummaries *smithy.Schema
+
+var DescribeTrainingSessionRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "DescribeTrainingSessionRequest",
+}, smithy.ShapeTypeStructure, 1)
+var DescribeTrainingSessionRequest_TrainingSessionName *smithy.Schema
+
+var DescribeTrainingSessionResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "DescribeTrainingSessionResponse",
+}, smithy.ShapeTypeStructure, 1)
+var DescribeTrainingSessionResponse_TrainingSessionDetail *smithy.Schema
 
 var DescribeTransformJobRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemaker",
@@ -32501,6 +33360,30 @@ var ListTrainingPlansResponse_NextToken *smithy.Schema
 
 var ListTrainingPlansResponse_TrainingPlanSummaries *smithy.Schema
 
+var ListTrainingSessionsRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "ListTrainingSessionsRequest",
+}, smithy.ShapeTypeStructure, 6)
+var ListTrainingSessionsRequest_NextToken *smithy.Schema
+
+var ListTrainingSessionsRequest_MaxResults *smithy.Schema
+
+var ListTrainingSessionsRequest_CreationTimeAfter *smithy.Schema
+
+var ListTrainingSessionsRequest_CreationTimeBefore *smithy.Schema
+
+var ListTrainingSessionsRequest_NameContains *smithy.Schema
+
+var ListTrainingSessionsRequest_StatusEquals *smithy.Schema
+
+var ListTrainingSessionsResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "ListTrainingSessionsResponse",
+}, smithy.ShapeTypeStructure, 2)
+var ListTrainingSessionsResponse_NextToken *smithy.Schema
+
+var ListTrainingSessionsResponse_TrainingSessionSummaries *smithy.Schema
+
 var ListTransformJobsRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemaker",
 	Name:      "ListTransformJobsRequest",
@@ -33115,6 +33998,17 @@ var StopTrainingJobRequest = smithy.NewSchema(smithy.ShapeID{
 	Name:      "StopTrainingJobRequest",
 }, smithy.ShapeTypeStructure, 1)
 var StopTrainingJobRequest_TrainingJobName *smithy.Schema
+
+var StopTrainingSessionRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "StopTrainingSessionRequest",
+}, smithy.ShapeTypeStructure, 1)
+var StopTrainingSessionRequest_TrainingSessionName *smithy.Schema
+
+var StopTrainingSessionResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "StopTrainingSessionResponse",
+}, smithy.ShapeTypeStructure, 0)
 
 var StopTransformJobRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemaker",
@@ -34478,6 +35372,10 @@ func init() {
 	ClusterInstanceType_ML_G7_24XLARGE = ClusterInstanceType.AddMember("ML_G7_24XLARGE", smithyprelude.Unit)
 
 	ClusterInstanceType_ML_G7_48XLARGE = ClusterInstanceType.AddMember("ML_G7_48XLARGE", smithyprelude.Unit)
+
+	ClusterInstanceType_ML_C8A_16XLARGE = ClusterInstanceType.AddMember("ML_C8A_16XLARGE", smithyprelude.Unit)
+
+	ClusterInstanceType_ML_M8A_16XLARGE = ClusterInstanceType.AddMember("ML_M8A_16XLARGE", smithyprelude.Unit)
 
 	MIGProfileType_MIG_1G_5GB = MIGProfileType.AddMember("MIG_1G_5GB", smithyprelude.Unit)
 
@@ -36385,6 +37283,154 @@ func init() {
 
 	TrainingInstanceType_ML_G7_48XLARGE = TrainingInstanceType.AddMember("ML_G7_48XLARGE", smithyprelude.Unit)
 
+	TrainingInstanceType_ML_R6I_LARGE = TrainingInstanceType.AddMember("ML_R6I_LARGE", smithyprelude.Unit)
+
+	TrainingInstanceType_ML_R6I_XLARGE = TrainingInstanceType.AddMember("ML_R6I_XLARGE", smithyprelude.Unit)
+
+	TrainingInstanceType_ML_R6I_2XLARGE = TrainingInstanceType.AddMember("ML_R6I_2XLARGE", smithyprelude.Unit)
+
+	TrainingInstanceType_ML_R6I_4XLARGE = TrainingInstanceType.AddMember("ML_R6I_4XLARGE", smithyprelude.Unit)
+
+	TrainingInstanceType_ML_R6I_8XLARGE = TrainingInstanceType.AddMember("ML_R6I_8XLARGE", smithyprelude.Unit)
+
+	TrainingInstanceType_ML_R6I_12XLARGE = TrainingInstanceType.AddMember("ML_R6I_12XLARGE", smithyprelude.Unit)
+
+	TrainingInstanceType_ML_R6I_16XLARGE = TrainingInstanceType.AddMember("ML_R6I_16XLARGE", smithyprelude.Unit)
+
+	TrainingInstanceType_ML_R6I_24XLARGE = TrainingInstanceType.AddMember("ML_R6I_24XLARGE", smithyprelude.Unit)
+
+	TrainingInstanceType_ML_R6I_32XLARGE = TrainingInstanceType.AddMember("ML_R6I_32XLARGE", smithyprelude.Unit)
+
+	TrainingInstanceType_ML_M8I_LARGE = TrainingInstanceType.AddMember("ML_M8I_LARGE", smithyprelude.Unit)
+
+	TrainingInstanceType_ML_M8I_XLARGE = TrainingInstanceType.AddMember("ML_M8I_XLARGE", smithyprelude.Unit)
+
+	TrainingInstanceType_ML_M8I_2XLARGE = TrainingInstanceType.AddMember("ML_M8I_2XLARGE", smithyprelude.Unit)
+
+	TrainingInstanceType_ML_M8I_4XLARGE = TrainingInstanceType.AddMember("ML_M8I_4XLARGE", smithyprelude.Unit)
+
+	TrainingInstanceType_ML_M8I_8XLARGE = TrainingInstanceType.AddMember("ML_M8I_8XLARGE", smithyprelude.Unit)
+
+	TrainingInstanceType_ML_M8I_12XLARGE = TrainingInstanceType.AddMember("ML_M8I_12XLARGE", smithyprelude.Unit)
+
+	TrainingInstanceType_ML_M8I_16XLARGE = TrainingInstanceType.AddMember("ML_M8I_16XLARGE", smithyprelude.Unit)
+
+	TrainingInstanceType_ML_M8I_24XLARGE = TrainingInstanceType.AddMember("ML_M8I_24XLARGE", smithyprelude.Unit)
+
+	TrainingInstanceType_ML_M8I_32XLARGE = TrainingInstanceType.AddMember("ML_M8I_32XLARGE", smithyprelude.Unit)
+
+	TrainingInstanceType_ML_M8I_48XLARGE = TrainingInstanceType.AddMember("ML_M8I_48XLARGE", smithyprelude.Unit)
+
+	TrainingInstanceType_ML_M8I_96XLARGE = TrainingInstanceType.AddMember("ML_M8I_96XLARGE", smithyprelude.Unit)
+
+	TrainingInstanceType_ML_C8I_XLARGE = TrainingInstanceType.AddMember("ML_C8I_XLARGE", smithyprelude.Unit)
+
+	TrainingInstanceType_ML_C8I_2XLARGE = TrainingInstanceType.AddMember("ML_C8I_2XLARGE", smithyprelude.Unit)
+
+	TrainingInstanceType_ML_C8I_4XLARGE = TrainingInstanceType.AddMember("ML_C8I_4XLARGE", smithyprelude.Unit)
+
+	TrainingInstanceType_ML_C8I_8XLARGE = TrainingInstanceType.AddMember("ML_C8I_8XLARGE", smithyprelude.Unit)
+
+	TrainingInstanceType_ML_C8I_12XLARGE = TrainingInstanceType.AddMember("ML_C8I_12XLARGE", smithyprelude.Unit)
+
+	TrainingInstanceType_ML_C8I_16XLARGE = TrainingInstanceType.AddMember("ML_C8I_16XLARGE", smithyprelude.Unit)
+
+	TrainingInstanceType_ML_C8I_24XLARGE = TrainingInstanceType.AddMember("ML_C8I_24XLARGE", smithyprelude.Unit)
+
+	TrainingInstanceType_ML_C8I_32XLARGE = TrainingInstanceType.AddMember("ML_C8I_32XLARGE", smithyprelude.Unit)
+
+	TrainingInstanceType_ML_C8I_48XLARGE = TrainingInstanceType.AddMember("ML_C8I_48XLARGE", smithyprelude.Unit)
+
+	TrainingInstanceType_ML_C8I_96XLARGE = TrainingInstanceType.AddMember("ML_C8I_96XLARGE", smithyprelude.Unit)
+
+	TrainingInstanceType_ML_R8I_LARGE = TrainingInstanceType.AddMember("ML_R8I_LARGE", smithyprelude.Unit)
+
+	TrainingInstanceType_ML_R8I_XLARGE = TrainingInstanceType.AddMember("ML_R8I_XLARGE", smithyprelude.Unit)
+
+	TrainingInstanceType_ML_R8I_2XLARGE = TrainingInstanceType.AddMember("ML_R8I_2XLARGE", smithyprelude.Unit)
+
+	TrainingInstanceType_ML_R8I_4XLARGE = TrainingInstanceType.AddMember("ML_R8I_4XLARGE", smithyprelude.Unit)
+
+	TrainingInstanceType_ML_R8I_8XLARGE = TrainingInstanceType.AddMember("ML_R8I_8XLARGE", smithyprelude.Unit)
+
+	TrainingInstanceType_ML_R8I_12XLARGE = TrainingInstanceType.AddMember("ML_R8I_12XLARGE", smithyprelude.Unit)
+
+	TrainingInstanceType_ML_R8I_16XLARGE = TrainingInstanceType.AddMember("ML_R8I_16XLARGE", smithyprelude.Unit)
+
+	TrainingInstanceType_ML_R8I_24XLARGE = TrainingInstanceType.AddMember("ML_R8I_24XLARGE", smithyprelude.Unit)
+
+	TrainingInstanceType_ML_R8I_32XLARGE = TrainingInstanceType.AddMember("ML_R8I_32XLARGE", smithyprelude.Unit)
+
+	TrainingInstanceType_ML_R8I_48XLARGE = TrainingInstanceType.AddMember("ML_R8I_48XLARGE", smithyprelude.Unit)
+
+	TrainingInstanceType_ML_R8I_96XLARGE = TrainingInstanceType.AddMember("ML_R8I_96XLARGE", smithyprelude.Unit)
+
+	TrainingInstanceType_ML_M7I_FLEX_LARGE = TrainingInstanceType.AddMember("ML_M7I_FLEX_LARGE", smithyprelude.Unit)
+
+	TrainingInstanceType_ML_M7I_FLEX_XLARGE = TrainingInstanceType.AddMember("ML_M7I_FLEX_XLARGE", smithyprelude.Unit)
+
+	TrainingInstanceType_ML_M7I_FLEX_2XLARGE = TrainingInstanceType.AddMember("ML_M7I_FLEX_2XLARGE", smithyprelude.Unit)
+
+	TrainingInstanceType_ML_M7I_FLEX_4XLARGE = TrainingInstanceType.AddMember("ML_M7I_FLEX_4XLARGE", smithyprelude.Unit)
+
+	TrainingInstanceType_ML_M7I_FLEX_8XLARGE = TrainingInstanceType.AddMember("ML_M7I_FLEX_8XLARGE", smithyprelude.Unit)
+
+	TrainingInstanceType_ML_M7I_FLEX_12XLARGE = TrainingInstanceType.AddMember("ML_M7I_FLEX_12XLARGE", smithyprelude.Unit)
+
+	TrainingInstanceType_ML_M7I_FLEX_16XLARGE = TrainingInstanceType.AddMember("ML_M7I_FLEX_16XLARGE", smithyprelude.Unit)
+
+	TrainingInstanceType_ML_C7I_FLEX_XLARGE = TrainingInstanceType.AddMember("ML_C7I_FLEX_XLARGE", smithyprelude.Unit)
+
+	TrainingInstanceType_ML_C7I_FLEX_2XLARGE = TrainingInstanceType.AddMember("ML_C7I_FLEX_2XLARGE", smithyprelude.Unit)
+
+	TrainingInstanceType_ML_C7I_FLEX_4XLARGE = TrainingInstanceType.AddMember("ML_C7I_FLEX_4XLARGE", smithyprelude.Unit)
+
+	TrainingInstanceType_ML_C7I_FLEX_8XLARGE = TrainingInstanceType.AddMember("ML_C7I_FLEX_8XLARGE", smithyprelude.Unit)
+
+	TrainingInstanceType_ML_C7I_FLEX_12XLARGE = TrainingInstanceType.AddMember("ML_C7I_FLEX_12XLARGE", smithyprelude.Unit)
+
+	TrainingInstanceType_ML_C7I_FLEX_16XLARGE = TrainingInstanceType.AddMember("ML_C7I_FLEX_16XLARGE", smithyprelude.Unit)
+
+	TrainingInstanceType_ML_M8I_FLEX_LARGE = TrainingInstanceType.AddMember("ML_M8I_FLEX_LARGE", smithyprelude.Unit)
+
+	TrainingInstanceType_ML_M8I_FLEX_XLARGE = TrainingInstanceType.AddMember("ML_M8I_FLEX_XLARGE", smithyprelude.Unit)
+
+	TrainingInstanceType_ML_M8I_FLEX_2XLARGE = TrainingInstanceType.AddMember("ML_M8I_FLEX_2XLARGE", smithyprelude.Unit)
+
+	TrainingInstanceType_ML_M8I_FLEX_4XLARGE = TrainingInstanceType.AddMember("ML_M8I_FLEX_4XLARGE", smithyprelude.Unit)
+
+	TrainingInstanceType_ML_M8I_FLEX_8XLARGE = TrainingInstanceType.AddMember("ML_M8I_FLEX_8XLARGE", smithyprelude.Unit)
+
+	TrainingInstanceType_ML_M8I_FLEX_12XLARGE = TrainingInstanceType.AddMember("ML_M8I_FLEX_12XLARGE", smithyprelude.Unit)
+
+	TrainingInstanceType_ML_M8I_FLEX_16XLARGE = TrainingInstanceType.AddMember("ML_M8I_FLEX_16XLARGE", smithyprelude.Unit)
+
+	TrainingInstanceType_ML_C8I_FLEX_XLARGE = TrainingInstanceType.AddMember("ML_C8I_FLEX_XLARGE", smithyprelude.Unit)
+
+	TrainingInstanceType_ML_C8I_FLEX_2XLARGE = TrainingInstanceType.AddMember("ML_C8I_FLEX_2XLARGE", smithyprelude.Unit)
+
+	TrainingInstanceType_ML_C8I_FLEX_4XLARGE = TrainingInstanceType.AddMember("ML_C8I_FLEX_4XLARGE", smithyprelude.Unit)
+
+	TrainingInstanceType_ML_C8I_FLEX_8XLARGE = TrainingInstanceType.AddMember("ML_C8I_FLEX_8XLARGE", smithyprelude.Unit)
+
+	TrainingInstanceType_ML_C8I_FLEX_12XLARGE = TrainingInstanceType.AddMember("ML_C8I_FLEX_12XLARGE", smithyprelude.Unit)
+
+	TrainingInstanceType_ML_C8I_FLEX_16XLARGE = TrainingInstanceType.AddMember("ML_C8I_FLEX_16XLARGE", smithyprelude.Unit)
+
+	TrainingInstanceType_ML_R8I_FLEX_LARGE = TrainingInstanceType.AddMember("ML_R8I_FLEX_LARGE", smithyprelude.Unit)
+
+	TrainingInstanceType_ML_R8I_FLEX_XLARGE = TrainingInstanceType.AddMember("ML_R8I_FLEX_XLARGE", smithyprelude.Unit)
+
+	TrainingInstanceType_ML_R8I_FLEX_2XLARGE = TrainingInstanceType.AddMember("ML_R8I_FLEX_2XLARGE", smithyprelude.Unit)
+
+	TrainingInstanceType_ML_R8I_FLEX_4XLARGE = TrainingInstanceType.AddMember("ML_R8I_FLEX_4XLARGE", smithyprelude.Unit)
+
+	TrainingInstanceType_ML_R8I_FLEX_8XLARGE = TrainingInstanceType.AddMember("ML_R8I_FLEX_8XLARGE", smithyprelude.Unit)
+
+	TrainingInstanceType_ML_R8I_FLEX_12XLARGE = TrainingInstanceType.AddMember("ML_R8I_FLEX_12XLARGE", smithyprelude.Unit)
+
+	TrainingInstanceType_ML_R8I_FLEX_16XLARGE = TrainingInstanceType.AddMember("ML_R8I_FLEX_16XLARGE", smithyprelude.Unit)
+
 	InstanceGroup_InstanceType = InstanceGroup.AddMember("InstanceType", TrainingInstanceType)
 
 	InstanceGroup_InstanceCount = InstanceGroup.AddMember("InstanceCount", _TrainingInstanceCount)
@@ -37190,6 +38236,10 @@ func init() {
 	AthenaDatasetDefinition_OutputFormat = AthenaDatasetDefinition.AddMember("OutputFormat", AthenaResultFormat)
 
 	AthenaDatasetDefinition_OutputCompression = AthenaDatasetDefinition.AddMember("OutputCompression", AthenaResultCompressionType)
+
+	AthenaStepMetadata_QueryExecutionId = AthenaStepMetadata.AddMember("QueryExecutionId", _String256)
+
+	AthenaStepMetadata_S3OutputLocation = AthenaStepMetadata.AddMember("S3OutputLocation", _String1024)
 
 	_AuthenticationRequestExtraParams_key = _AuthenticationRequestExtraParams.AddMember("key", _AuthenticationRequestExtraParamsKey)
 
@@ -37999,6 +39049,12 @@ func init() {
 
 	Bias_PostTrainingReport = Bias.AddMember("PostTrainingReport", MetricsSource)
 
+	BillableTokenUsage_PrefillTokenCount = BillableTokenUsage.AddMember("PrefillTokenCount", _JavaLong)
+
+	BillableTokenUsage_SampleTokenCount = BillableTokenUsage.AddMember("SampleTokenCount", _JavaLong)
+
+	BillableTokenUsage_TrainingTokenCount = BillableTokenUsage.AddMember("TrainingTokenCount", _JavaLong)
+
 	TrafficRoutingConfigType_ALL_AT_ONCE = TrafficRoutingConfigType.AddMember("ALL_AT_ONCE", smithyprelude.Unit)
 
 	TrafficRoutingConfigType_CANARY = TrafficRoutingConfigType.AddMember("CANARY", smithyprelude.Unit)
@@ -38433,6 +39489,34 @@ func init() {
 
 	ClarifyExplainerConfig_ShapConfig = ClarifyExplainerConfig.AddMember("ShapConfig", ClarifyShapConfig)
 
+	CleanupFailureErrorCode_CLIENT_ERROR = CleanupFailureErrorCode.AddMember("CLIENT_ERROR", smithyprelude.Unit)
+
+	CleanupFailureErrorCode_INTERNAL_FAILURE = CleanupFailureErrorCode.AddMember("INTERNAL_FAILURE", smithyprelude.Unit)
+
+	CleanupFailure_StepName = CleanupFailure.AddMember("StepName", _String256)
+
+	CleanupFailure_ErrorCode = CleanupFailure.AddMember("ErrorCode", CleanupFailureErrorCode)
+
+	CleanupFailure_ErrorMessage = CleanupFailure.AddMember("ErrorMessage", _String2048)
+
+	_CleanupFailureList_member = _CleanupFailureList.AddMember("member", CleanupFailure)
+
+	_CleanupStepNameList_member = _CleanupStepNameList.AddMember("member", _String256)
+
+	CleanupStepMetadata_CleanedSteps = CleanupStepMetadata.AddMember("CleanedSteps", _CleanupStepNameList)
+
+	CleanupStepMetadata_FailedSteps = CleanupStepMetadata.AddMember("FailedSteps", _CleanupFailureList)
+
+	CleanupStepMetadata_SkippedSteps = CleanupStepMetadata.AddMember("SkippedSteps", _CleanupStepNameList)
+
+	ClusterAccountingDatabase_Endpoint = ClusterAccountingDatabase.AddMember("Endpoint", _ClusterAccountingDatabaseEndpoint)
+
+	ClusterAccountingDatabase_Port = ClusterAccountingDatabase.AddMember("Port", _ClusterAccountingDatabasePort)
+
+	ClusterAccountingDatabase_Name = ClusterAccountingDatabase.AddMember("Name", _ClusterAccountingDatabaseName)
+
+	ClusterAccountingDatabase_SecretArn = ClusterAccountingDatabase.AddMember("SecretArn", _ClusterAccountingDatabaseSecretArn)
+
 	ClusterPatchingStrategy_WHEN_IDLE = ClusterPatchingStrategy.AddMember("WHEN_IDLE", smithyprelude.Unit)
 
 	ClusterPatchingStrategy_WHEN_ALL_IDLE = ClusterPatchingStrategy.AddMember("WHEN_ALL_IDLE", smithyprelude.Unit)
@@ -38565,6 +39649,36 @@ func init() {
 
 	InstanceMetadata_NodeLogicalId = InstanceMetadata.AddMember("NodeLogicalId", _ClusterNodeLogicalId)
 
+	DatabaseConfigurationRollbackStatus_NOT_APPLICABLE = DatabaseConfigurationRollbackStatus.AddMember("NOT_APPLICABLE", smithyprelude.Unit)
+
+	DatabaseConfigurationRollbackStatus_REVERTED = DatabaseConfigurationRollbackStatus.AddMember("REVERTED", smithyprelude.Unit)
+
+	DatabaseConfigurationRollbackStatus_REVERT_FAILED = DatabaseConfigurationRollbackStatus.AddMember("REVERT_FAILED", smithyprelude.Unit)
+
+	DatabaseConfigurationMetadata_RollbackStatus = DatabaseConfigurationMetadata.AddMember("RollbackStatus", DatabaseConfigurationRollbackStatus)
+
+	DatabaseConfigurationMetadata_Advisory = DatabaseConfigurationMetadata.AddMember("Advisory", smithyprelude.String)
+
+	DatabaseConfigurationMetadata_FailureMessage = DatabaseConfigurationMetadata.AddMember("FailureMessage", smithyprelude.String)
+
+	SlurmHealthComponent_SLURMDBD = SlurmHealthComponent.AddMember("SLURMDBD", smithyprelude.Unit)
+
+	SlurmHealthStatus_HEALTHY = SlurmHealthStatus.AddMember("HEALTHY", smithyprelude.Unit)
+
+	SlurmHealthStatus_UNHEALTHY = SlurmHealthStatus.AddMember("UNHEALTHY", smithyprelude.Unit)
+
+	SlurmHealthReason_DAEMON_DOWN = SlurmHealthReason.AddMember("DAEMON_DOWN", smithyprelude.Unit)
+
+	SlurmHealthReason_DAEMON_DISABLED = SlurmHealthReason.AddMember("DAEMON_DISABLED", smithyprelude.Unit)
+
+	SlurmHealthReason_DB_UNREACHABLE = SlurmHealthReason.AddMember("DB_UNREACHABLE", smithyprelude.Unit)
+
+	SlurmHealthMetadata_Component = SlurmHealthMetadata.AddMember("Component", SlurmHealthComponent)
+
+	SlurmHealthMetadata_Status = SlurmHealthMetadata.AddMember("Status", SlurmHealthStatus)
+
+	SlurmHealthMetadata_Reason = SlurmHealthMetadata.AddMember("Reason", SlurmHealthReason)
+
 	EventMetadata_Cluster = EventMetadata.AddMember("Cluster", ClusterMetadata)
 
 	EventMetadata_InstanceGroup = EventMetadata.AddMember("InstanceGroup", InstanceGroupMetadata)
@@ -38572,6 +39686,10 @@ func init() {
 	EventMetadata_InstanceGroupScaling = EventMetadata.AddMember("InstanceGroupScaling", InstanceGroupScalingMetadata)
 
 	EventMetadata_Instance = EventMetadata.AddMember("Instance", InstanceMetadata)
+
+	EventMetadata_DatabaseConfiguration = EventMetadata.AddMember("DatabaseConfiguration", DatabaseConfigurationMetadata)
+
+	EventMetadata_SlurmHealth = EventMetadata.AddMember("SlurmHealth", SlurmHealthMetadata)
 
 	EventDetails_EventMetadata = EventDetails.AddMember("EventMetadata", EventMetadata)
 
@@ -38994,6 +40112,8 @@ func init() {
 	ClusterSlurmConfigStrategy_MERGE = ClusterSlurmConfigStrategy.AddMember("MERGE", smithyprelude.Unit)
 
 	ClusterOrchestratorSlurmConfig_SlurmConfigStrategy = ClusterOrchestratorSlurmConfig.AddMember("SlurmConfigStrategy", ClusterSlurmConfigStrategy)
+
+	ClusterOrchestratorSlurmConfig_AccountingDatabase = ClusterOrchestratorSlurmConfig.AddMember("AccountingDatabase", ClusterAccountingDatabase)
 
 	ClusterOrchestrator_Eks = ClusterOrchestrator.AddMember("Eks", ClusterOrchestratorEksConfig)
 
@@ -40051,6 +41171,154 @@ func init() {
 
 	ProcessingInstanceType_ML_G7_48XLARGE = ProcessingInstanceType.AddMember("ML_G7_48XLARGE", smithyprelude.Unit)
 
+	ProcessingInstanceType_ML_R6I_LARGE = ProcessingInstanceType.AddMember("ML_R6I_LARGE", smithyprelude.Unit)
+
+	ProcessingInstanceType_ML_R6I_XLARGE = ProcessingInstanceType.AddMember("ML_R6I_XLARGE", smithyprelude.Unit)
+
+	ProcessingInstanceType_ML_R6I_2XLARGE = ProcessingInstanceType.AddMember("ML_R6I_2XLARGE", smithyprelude.Unit)
+
+	ProcessingInstanceType_ML_R6I_4XLARGE = ProcessingInstanceType.AddMember("ML_R6I_4XLARGE", smithyprelude.Unit)
+
+	ProcessingInstanceType_ML_R6I_8XLARGE = ProcessingInstanceType.AddMember("ML_R6I_8XLARGE", smithyprelude.Unit)
+
+	ProcessingInstanceType_ML_R6I_12XLARGE = ProcessingInstanceType.AddMember("ML_R6I_12XLARGE", smithyprelude.Unit)
+
+	ProcessingInstanceType_ML_R6I_16XLARGE = ProcessingInstanceType.AddMember("ML_R6I_16XLARGE", smithyprelude.Unit)
+
+	ProcessingInstanceType_ML_R6I_24XLARGE = ProcessingInstanceType.AddMember("ML_R6I_24XLARGE", smithyprelude.Unit)
+
+	ProcessingInstanceType_ML_R6I_32XLARGE = ProcessingInstanceType.AddMember("ML_R6I_32XLARGE", smithyprelude.Unit)
+
+	ProcessingInstanceType_ML_M8I_LARGE = ProcessingInstanceType.AddMember("ML_M8I_LARGE", smithyprelude.Unit)
+
+	ProcessingInstanceType_ML_M8I_XLARGE = ProcessingInstanceType.AddMember("ML_M8I_XLARGE", smithyprelude.Unit)
+
+	ProcessingInstanceType_ML_M8I_2XLARGE = ProcessingInstanceType.AddMember("ML_M8I_2XLARGE", smithyprelude.Unit)
+
+	ProcessingInstanceType_ML_M8I_4XLARGE = ProcessingInstanceType.AddMember("ML_M8I_4XLARGE", smithyprelude.Unit)
+
+	ProcessingInstanceType_ML_M8I_8XLARGE = ProcessingInstanceType.AddMember("ML_M8I_8XLARGE", smithyprelude.Unit)
+
+	ProcessingInstanceType_ML_M8I_12XLARGE = ProcessingInstanceType.AddMember("ML_M8I_12XLARGE", smithyprelude.Unit)
+
+	ProcessingInstanceType_ML_M8I_16XLARGE = ProcessingInstanceType.AddMember("ML_M8I_16XLARGE", smithyprelude.Unit)
+
+	ProcessingInstanceType_ML_M8I_24XLARGE = ProcessingInstanceType.AddMember("ML_M8I_24XLARGE", smithyprelude.Unit)
+
+	ProcessingInstanceType_ML_M8I_32XLARGE = ProcessingInstanceType.AddMember("ML_M8I_32XLARGE", smithyprelude.Unit)
+
+	ProcessingInstanceType_ML_M8I_48XLARGE = ProcessingInstanceType.AddMember("ML_M8I_48XLARGE", smithyprelude.Unit)
+
+	ProcessingInstanceType_ML_M8I_96XLARGE = ProcessingInstanceType.AddMember("ML_M8I_96XLARGE", smithyprelude.Unit)
+
+	ProcessingInstanceType_ML_C8I_XLARGE = ProcessingInstanceType.AddMember("ML_C8I_XLARGE", smithyprelude.Unit)
+
+	ProcessingInstanceType_ML_C8I_2XLARGE = ProcessingInstanceType.AddMember("ML_C8I_2XLARGE", smithyprelude.Unit)
+
+	ProcessingInstanceType_ML_C8I_4XLARGE = ProcessingInstanceType.AddMember("ML_C8I_4XLARGE", smithyprelude.Unit)
+
+	ProcessingInstanceType_ML_C8I_8XLARGE = ProcessingInstanceType.AddMember("ML_C8I_8XLARGE", smithyprelude.Unit)
+
+	ProcessingInstanceType_ML_C8I_12XLARGE = ProcessingInstanceType.AddMember("ML_C8I_12XLARGE", smithyprelude.Unit)
+
+	ProcessingInstanceType_ML_C8I_16XLARGE = ProcessingInstanceType.AddMember("ML_C8I_16XLARGE", smithyprelude.Unit)
+
+	ProcessingInstanceType_ML_C8I_24XLARGE = ProcessingInstanceType.AddMember("ML_C8I_24XLARGE", smithyprelude.Unit)
+
+	ProcessingInstanceType_ML_C8I_32XLARGE = ProcessingInstanceType.AddMember("ML_C8I_32XLARGE", smithyprelude.Unit)
+
+	ProcessingInstanceType_ML_C8I_48XLARGE = ProcessingInstanceType.AddMember("ML_C8I_48XLARGE", smithyprelude.Unit)
+
+	ProcessingInstanceType_ML_C8I_96XLARGE = ProcessingInstanceType.AddMember("ML_C8I_96XLARGE", smithyprelude.Unit)
+
+	ProcessingInstanceType_ML_R8I_LARGE = ProcessingInstanceType.AddMember("ML_R8I_LARGE", smithyprelude.Unit)
+
+	ProcessingInstanceType_ML_R8I_XLARGE = ProcessingInstanceType.AddMember("ML_R8I_XLARGE", smithyprelude.Unit)
+
+	ProcessingInstanceType_ML_R8I_2XLARGE = ProcessingInstanceType.AddMember("ML_R8I_2XLARGE", smithyprelude.Unit)
+
+	ProcessingInstanceType_ML_R8I_4XLARGE = ProcessingInstanceType.AddMember("ML_R8I_4XLARGE", smithyprelude.Unit)
+
+	ProcessingInstanceType_ML_R8I_8XLARGE = ProcessingInstanceType.AddMember("ML_R8I_8XLARGE", smithyprelude.Unit)
+
+	ProcessingInstanceType_ML_R8I_12XLARGE = ProcessingInstanceType.AddMember("ML_R8I_12XLARGE", smithyprelude.Unit)
+
+	ProcessingInstanceType_ML_R8I_16XLARGE = ProcessingInstanceType.AddMember("ML_R8I_16XLARGE", smithyprelude.Unit)
+
+	ProcessingInstanceType_ML_R8I_24XLARGE = ProcessingInstanceType.AddMember("ML_R8I_24XLARGE", smithyprelude.Unit)
+
+	ProcessingInstanceType_ML_R8I_32XLARGE = ProcessingInstanceType.AddMember("ML_R8I_32XLARGE", smithyprelude.Unit)
+
+	ProcessingInstanceType_ML_R8I_48XLARGE = ProcessingInstanceType.AddMember("ML_R8I_48XLARGE", smithyprelude.Unit)
+
+	ProcessingInstanceType_ML_R8I_96XLARGE = ProcessingInstanceType.AddMember("ML_R8I_96XLARGE", smithyprelude.Unit)
+
+	ProcessingInstanceType_ML_M7I_FLEX_LARGE = ProcessingInstanceType.AddMember("ML_M7I_FLEX_LARGE", smithyprelude.Unit)
+
+	ProcessingInstanceType_ML_M7I_FLEX_XLARGE = ProcessingInstanceType.AddMember("ML_M7I_FLEX_XLARGE", smithyprelude.Unit)
+
+	ProcessingInstanceType_ML_M7I_FLEX_2XLARGE = ProcessingInstanceType.AddMember("ML_M7I_FLEX_2XLARGE", smithyprelude.Unit)
+
+	ProcessingInstanceType_ML_M7I_FLEX_4XLARGE = ProcessingInstanceType.AddMember("ML_M7I_FLEX_4XLARGE", smithyprelude.Unit)
+
+	ProcessingInstanceType_ML_M7I_FLEX_8XLARGE = ProcessingInstanceType.AddMember("ML_M7I_FLEX_8XLARGE", smithyprelude.Unit)
+
+	ProcessingInstanceType_ML_M7I_FLEX_12XLARGE = ProcessingInstanceType.AddMember("ML_M7I_FLEX_12XLARGE", smithyprelude.Unit)
+
+	ProcessingInstanceType_ML_M7I_FLEX_16XLARGE = ProcessingInstanceType.AddMember("ML_M7I_FLEX_16XLARGE", smithyprelude.Unit)
+
+	ProcessingInstanceType_ML_C7I_FLEX_XLARGE = ProcessingInstanceType.AddMember("ML_C7I_FLEX_XLARGE", smithyprelude.Unit)
+
+	ProcessingInstanceType_ML_C7I_FLEX_2XLARGE = ProcessingInstanceType.AddMember("ML_C7I_FLEX_2XLARGE", smithyprelude.Unit)
+
+	ProcessingInstanceType_ML_C7I_FLEX_4XLARGE = ProcessingInstanceType.AddMember("ML_C7I_FLEX_4XLARGE", smithyprelude.Unit)
+
+	ProcessingInstanceType_ML_C7I_FLEX_8XLARGE = ProcessingInstanceType.AddMember("ML_C7I_FLEX_8XLARGE", smithyprelude.Unit)
+
+	ProcessingInstanceType_ML_C7I_FLEX_12XLARGE = ProcessingInstanceType.AddMember("ML_C7I_FLEX_12XLARGE", smithyprelude.Unit)
+
+	ProcessingInstanceType_ML_C7I_FLEX_16XLARGE = ProcessingInstanceType.AddMember("ML_C7I_FLEX_16XLARGE", smithyprelude.Unit)
+
+	ProcessingInstanceType_ML_M8I_FLEX_LARGE = ProcessingInstanceType.AddMember("ML_M8I_FLEX_LARGE", smithyprelude.Unit)
+
+	ProcessingInstanceType_ML_M8I_FLEX_XLARGE = ProcessingInstanceType.AddMember("ML_M8I_FLEX_XLARGE", smithyprelude.Unit)
+
+	ProcessingInstanceType_ML_M8I_FLEX_2XLARGE = ProcessingInstanceType.AddMember("ML_M8I_FLEX_2XLARGE", smithyprelude.Unit)
+
+	ProcessingInstanceType_ML_M8I_FLEX_4XLARGE = ProcessingInstanceType.AddMember("ML_M8I_FLEX_4XLARGE", smithyprelude.Unit)
+
+	ProcessingInstanceType_ML_M8I_FLEX_8XLARGE = ProcessingInstanceType.AddMember("ML_M8I_FLEX_8XLARGE", smithyprelude.Unit)
+
+	ProcessingInstanceType_ML_M8I_FLEX_12XLARGE = ProcessingInstanceType.AddMember("ML_M8I_FLEX_12XLARGE", smithyprelude.Unit)
+
+	ProcessingInstanceType_ML_M8I_FLEX_16XLARGE = ProcessingInstanceType.AddMember("ML_M8I_FLEX_16XLARGE", smithyprelude.Unit)
+
+	ProcessingInstanceType_ML_C8I_FLEX_XLARGE = ProcessingInstanceType.AddMember("ML_C8I_FLEX_XLARGE", smithyprelude.Unit)
+
+	ProcessingInstanceType_ML_C8I_FLEX_2XLARGE = ProcessingInstanceType.AddMember("ML_C8I_FLEX_2XLARGE", smithyprelude.Unit)
+
+	ProcessingInstanceType_ML_C8I_FLEX_4XLARGE = ProcessingInstanceType.AddMember("ML_C8I_FLEX_4XLARGE", smithyprelude.Unit)
+
+	ProcessingInstanceType_ML_C8I_FLEX_8XLARGE = ProcessingInstanceType.AddMember("ML_C8I_FLEX_8XLARGE", smithyprelude.Unit)
+
+	ProcessingInstanceType_ML_C8I_FLEX_12XLARGE = ProcessingInstanceType.AddMember("ML_C8I_FLEX_12XLARGE", smithyprelude.Unit)
+
+	ProcessingInstanceType_ML_C8I_FLEX_16XLARGE = ProcessingInstanceType.AddMember("ML_C8I_FLEX_16XLARGE", smithyprelude.Unit)
+
+	ProcessingInstanceType_ML_R8I_FLEX_LARGE = ProcessingInstanceType.AddMember("ML_R8I_FLEX_LARGE", smithyprelude.Unit)
+
+	ProcessingInstanceType_ML_R8I_FLEX_XLARGE = ProcessingInstanceType.AddMember("ML_R8I_FLEX_XLARGE", smithyprelude.Unit)
+
+	ProcessingInstanceType_ML_R8I_FLEX_2XLARGE = ProcessingInstanceType.AddMember("ML_R8I_FLEX_2XLARGE", smithyprelude.Unit)
+
+	ProcessingInstanceType_ML_R8I_FLEX_4XLARGE = ProcessingInstanceType.AddMember("ML_R8I_FLEX_4XLARGE", smithyprelude.Unit)
+
+	ProcessingInstanceType_ML_R8I_FLEX_8XLARGE = ProcessingInstanceType.AddMember("ML_R8I_FLEX_8XLARGE", smithyprelude.Unit)
+
+	ProcessingInstanceType_ML_R8I_FLEX_12XLARGE = ProcessingInstanceType.AddMember("ML_R8I_FLEX_12XLARGE", smithyprelude.Unit)
+
+	ProcessingInstanceType_ML_R8I_FLEX_16XLARGE = ProcessingInstanceType.AddMember("ML_R8I_FLEX_16XLARGE", smithyprelude.Unit)
+
 	_RuleParameters_key = _RuleParameters.AddMember("key", _ConfigKey)
 
 	_RuleParameters_value = _RuleParameters.AddMember("value", _ConfigValue)
@@ -40680,6 +41948,14 @@ func init() {
 	EdgePresetDeploymentOutput_StatusMessage = EdgePresetDeploymentOutput.AddMember("StatusMessage", _String)
 
 	_Edges_member = _Edges.AddMember("member", Edge)
+
+	EMRServerlessStepMetadata_ApplicationId = EMRServerlessStepMetadata.AddMember("ApplicationId", _EMRServerlessApplicationId)
+
+	EMRServerlessStepMetadata_JobRunId = EMRServerlessStepMetadata.AddMember("JobRunId", _EMRServerlessJobRunId)
+
+	EMRServerlessStepMetadata_JobRunName = EMRServerlessStepMetadata.AddMember("JobRunName", _String256)
+
+	EMRServerlessStepMetadata_LogFilePath = EMRServerlessStepMetadata.AddMember("LogFilePath", _String1024)
 
 	EMRStepMetadata_ClusterId = EMRStepMetadata.AddMember("ClusterId", _String256)
 
@@ -41425,6 +42701,30 @@ func init() {
 
 	_FlowDefinitionTaskKeywords_member = _FlowDefinitionTaskKeywords.AddMember("member", _FlowDefinitionTaskKeyword)
 
+	ForEachSelectorResult_StepName = ForEachSelectorResult.AddMember("StepName", _String256)
+
+	ForEachSelectorResult_Index = ForEachSelectorResult.AddMember("Index", _Integer)
+
+	ForEachStatus_SUCCEEDED = ForEachStatus.AddMember("SUCCEEDED", smithyprelude.Unit)
+
+	ForEachStatus_FAILED = ForEachStatus.AddMember("FAILED", smithyprelude.Unit)
+
+	ForEachStatus_STOPPED = ForEachStatus.AddMember("STOPPED", smithyprelude.Unit)
+
+	ForEachStepMetadata_Status = ForEachStepMetadata.AddMember("Status", ForEachStatus)
+
+	ForEachStepMetadata_InputItemCount = ForEachStepMetadata.AddMember("InputItemCount", _Integer)
+
+	ForEachStepMetadata_TotalStepCount = ForEachStepMetadata.AddMember("TotalStepCount", _Integer)
+
+	ForEachStepMetadata_SucceededStepCount = ForEachStepMetadata.AddMember("SucceededStepCount", _Integer)
+
+	ForEachStepMetadata_FailedStepCount = ForEachStepMetadata.AddMember("FailedStepCount", _Integer)
+
+	ForEachStepMetadata_StoppedStepCount = ForEachStepMetadata.AddMember("StoppedStepCount", _Integer)
+
+	ForEachStepMetadata_Selector = ForEachStepMetadata.AddMember("Selector", ForEachSelectorResult)
+
 	Framework_TENSORFLOW = Framework.AddMember("TENSORFLOW", smithyprelude.Unit)
 
 	Framework_KERAS = Framework.AddMember("KERAS", smithyprelude.Unit)
@@ -41515,12 +42815,6 @@ func init() {
 
 	HomeEfsFileSystemCreation_Disabled = HomeEfsFileSystemCreation.AddMember("Disabled", smithyprelude.Unit)
 
-	HubContentDependency_DependencyOriginPath = HubContentDependency.AddMember("DependencyOriginPath", _DependencyOriginPath)
-
-	HubContentDependency_DependencyCopyPath = HubContentDependency.AddMember("DependencyCopyPath", _DependencyCopyPath)
-
-	_HubContentDependencyList_member = _HubContentDependencyList.AddMember("member", HubContentDependency)
-
 	HubContentType_MODEL = HubContentType.AddMember("MODEL", smithyprelude.Unit)
 
 	HubContentType_NOTEBOOK = HubContentType.AddMember("NOTEBOOK", smithyprelude.Unit)
@@ -41539,6 +42833,12 @@ func init() {
 
 	_HubContentSearchKeywordList_member = _HubContentSearchKeywordList.AddMember("member", _HubContentSearchKeyword)
 
+	HubContentDependency_DependencyOriginPath = HubContentDependency.AddMember("DependencyOriginPath", _DependencyOriginPath)
+
+	HubContentDependency_DependencyCopyPath = HubContentDependency.AddMember("DependencyCopyPath", _DependencyCopyPath)
+
+	_HubContentDependencyList_member = _HubContentDependencyList.AddMember("member", HubContentDependency)
+
 	HubContentStatus_AVAILABLE = HubContentStatus.AddMember("AVAILABLE", smithyprelude.Unit)
 
 	HubContentStatus_IMPORTING = HubContentStatus.AddMember("IMPORTING", smithyprelude.Unit)
@@ -41552,6 +42852,48 @@ func init() {
 	HubContentStatus_PENDING_IMPORT = HubContentStatus.AddMember("PENDING_IMPORT", smithyprelude.Unit)
 
 	HubContentStatus_PENDING_DELETE = HubContentStatus.AddMember("PENDING_DELETE", smithyprelude.Unit)
+
+	HubContent_HubContentName = HubContent.AddMember("HubContentName", _HubContentName)
+
+	HubContent_HubContentArn = HubContent.AddMember("HubContentArn", _HubContentArn)
+
+	HubContent_HubContentVersion = HubContent.AddMember("HubContentVersion", _HubContentVersion)
+
+	HubContent_HubContentType = HubContent.AddMember("HubContentType", HubContentType)
+
+	HubContent_DocumentSchemaVersion = HubContent.AddMember("DocumentSchemaVersion", _DocumentSchemaVersion)
+
+	HubContent_HubName = HubContent.AddMember("HubName", _HubName)
+
+	HubContent_HubArn = HubContent.AddMember("HubArn", _HubArn)
+
+	HubContent_HubContentDisplayName = HubContent.AddMember("HubContentDisplayName", _HubContentDisplayName)
+
+	HubContent_HubContentDescription = HubContent.AddMember("HubContentDescription", _HubContentDescription)
+
+	HubContent_HubContentMarkdown = HubContent.AddMember("HubContentMarkdown", _HubContentMarkdown)
+
+	HubContent_HubContentDocument = HubContent.AddMember("HubContentDocument", _HubContentDocument)
+
+	HubContent_SageMakerPublicHubContentArn = HubContent.AddMember("SageMakerPublicHubContentArn", _SageMakerPublicHubContentArn)
+
+	HubContent_ReferenceMinVersion = HubContent.AddMember("ReferenceMinVersion", _ReferenceMinVersion)
+
+	HubContent_SupportStatus = HubContent.AddMember("SupportStatus", HubContentSupportStatus)
+
+	HubContent_HubContentSearchKeywords = HubContent.AddMember("HubContentSearchKeywords", _HubContentSearchKeywordList)
+
+	HubContent_HubContentDependencies = HubContent.AddMember("HubContentDependencies", _HubContentDependencyList)
+
+	HubContent_HubContentStatus = HubContent.AddMember("HubContentStatus", HubContentStatus)
+
+	HubContent_FailureReason = HubContent.AddMember("FailureReason", _FailureReason)
+
+	HubContent_CreationTime = HubContent.AddMember("CreationTime", _Timestamp)
+
+	HubContent_LastModifiedTime = HubContent.AddMember("LastModifiedTime", _Timestamp)
+
+	HubContent_Tags = HubContent.AddMember("Tags", _TagList)
 
 	HubContentInfo_HubContentName = HubContentInfo.AddMember("HubContentName", _HubContentName)
 
@@ -42851,6 +44193,12 @@ func init() {
 
 	IsTrackingServerActive_INACTIVE = IsTrackingServerActive.AddMember("INACTIVE", smithyprelude.Unit)
 
+	IterationContext_ParentStepName = IterationContext.AddMember("ParentStepName", _String256)
+
+	IterationContext_Index = IterationContext.AddMember("Index", _Integer)
+
+	IterationContext_Item = IterationContext.AddMember("Item", _String12800)
+
 	JobCategory_AGENT_RFT = JobCategory.AddMember("AGENT_RFT", smithyprelude.Unit)
 
 	JobCategory_AGENT_RFT_EVALUATION = JobCategory.AddMember("AGENT_RFT_EVALUATION", smithyprelude.Unit)
@@ -43184,6 +44532,10 @@ func init() {
 	ListWorkteamsSortByOptions_Name = ListWorkteamsSortByOptions.AddMember("Name", smithyprelude.Unit)
 
 	ListWorkteamsSortByOptions_CreateDate = ListWorkteamsSortByOptions.AddMember("CreateDate", smithyprelude.Unit)
+
+	LoraConfig_Rank = LoraConfig.AddMember("Rank", _Rank)
+
+	LoraConfig_Alpha = LoraConfig.AddMember("Alpha", _LoraAlpha)
 
 	MaintenanceStatus_MAINTENANCE_IN_PROGRESS = MaintenanceStatus.AddMember("MAINTENANCE_IN_PROGRESS", smithyprelude.Unit)
 
@@ -44597,6 +45949,8 @@ func init() {
 
 	PipelineExecutionStatus_SUCCEEDED = PipelineExecutionStatus.AddMember("SUCCEEDED", smithyprelude.Unit)
 
+	PipelineExecutionStatus_COMPLETED_WITH_FAILURES = PipelineExecutionStatus.AddMember("COMPLETED_WITH_FAILURES", smithyprelude.Unit)
+
 	PipelineExperimentConfig_ExperimentName = PipelineExperimentConfig.AddMember("ExperimentName", _ExperimentEntityName)
 
 	PipelineExperimentConfig_TrialName = PipelineExperimentConfig.AddMember("TrialName", _ExperimentEntityName)
@@ -44703,6 +46057,8 @@ func init() {
 
 	PipelineExecutionStepMetadata_EMR = PipelineExecutionStepMetadata.AddMember("EMR", EMRStepMetadata)
 
+	PipelineExecutionStepMetadata_EMRServerless = PipelineExecutionStepMetadata.AddMember("EMRServerless", EMRServerlessStepMetadata)
+
 	PipelineExecutionStepMetadata_QualityCheck = PipelineExecutionStepMetadata.AddMember("QualityCheck", QualityCheckStepMetadata)
 
 	PipelineExecutionStepMetadata_ClarifyCheck = PipelineExecutionStepMetadata.AddMember("ClarifyCheck", ClarifyCheckStepMetadata)
@@ -44729,6 +46085,12 @@ func init() {
 
 	PipelineExecutionStepMetadata_Job = PipelineExecutionStepMetadata.AddMember("Job", JobStepMetadata)
 
+	PipelineExecutionStepMetadata_Athena = PipelineExecutionStepMetadata.AddMember("Athena", AthenaStepMetadata)
+
+	PipelineExecutionStepMetadata_Cleanup = PipelineExecutionStepMetadata.AddMember("Cleanup", CleanupStepMetadata)
+
+	PipelineExecutionStepMetadata_ForEach = PipelineExecutionStepMetadata.AddMember("ForEach", ForEachStepMetadata)
+
 	SelectiveExecutionResult_SourcePipelineExecutionArn = SelectiveExecutionResult.AddMember("SourcePipelineExecutionArn", _PipelineExecutionArn)
 
 	PipelineExecutionStep_StepName = PipelineExecutionStep.AddMember("StepName", _StepName)
@@ -44752,6 +46114,8 @@ func init() {
 	PipelineExecutionStep_AttemptCount = PipelineExecutionStep.AddMember("AttemptCount", _Integer)
 
 	PipelineExecutionStep_SelectiveExecutionResult = PipelineExecutionStep.AddMember("SelectiveExecutionResult", SelectiveExecutionResult)
+
+	PipelineExecutionStep_IterationContext = PipelineExecutionStep.AddMember("IterationContext", IterationContext)
 
 	_PipelineExecutionStepList_member = _PipelineExecutionStepList.AddMember("member", PipelineExecutionStep)
 
@@ -45487,6 +46851,8 @@ func init() {
 
 	ResourceType_JOB = ResourceType.AddMember("JOB", smithyprelude.Unit)
 
+	ResourceType_HUB_CONTENT = ResourceType.AddMember("HUB_CONTENT", smithyprelude.Unit)
+
 	RetentionType_Retain = RetentionType.AddMember("Retain", smithyprelude.Unit)
 
 	RetentionType_Delete = RetentionType.AddMember("Delete", smithyprelude.Unit)
@@ -45886,6 +47252,8 @@ func init() {
 	SearchRecord_Model = SearchRecord.AddMember("Model", ModelDashboardModel)
 
 	SearchRecord_Job = SearchRecord.AddMember("Job", Job)
+
+	SearchRecord_HubContent = SearchRecord.AddMember("HubContent", HubContent)
 
 	_SearchResultsList_member = _SearchResultsList.AddMember("member", SearchRecord)
 
@@ -46423,6 +47791,78 @@ func init() {
 
 	TrainingProgressInfo_MaxEpoch = TrainingProgressInfo.AddMember("MaxEpoch", _TrainingEpochCount)
 
+	TrainingSessionStatus_CREATED = TrainingSessionStatus.AddMember("CREATED", smithyprelude.Unit)
+
+	TrainingSessionStatus_BLOCKED = TrainingSessionStatus.AddMember("BLOCKED", smithyprelude.Unit)
+
+	TrainingSessionStatus_RUNNING = TrainingSessionStatus.AddMember("RUNNING", smithyprelude.Unit)
+
+	TrainingSessionStatus_FAILED = TrainingSessionStatus.AddMember("FAILED", smithyprelude.Unit)
+
+	TrainingSessionStatus_SCHEDULED = TrainingSessionStatus.AddMember("SCHEDULED", smithyprelude.Unit)
+
+	TrainingSessionStatus_STOPPING = TrainingSessionStatus.AddMember("STOPPING", smithyprelude.Unit)
+
+	TrainingSessionStatus_STOPPED = TrainingSessionStatus.AddMember("STOPPED", smithyprelude.Unit)
+
+	TrainingSessionStatus_EXPIRED = TrainingSessionStatus.AddMember("EXPIRED", smithyprelude.Unit)
+
+	TrainingSessionStatus_DELETING = TrainingSessionStatus.AddMember("DELETING", smithyprelude.Unit)
+
+	TrainingSessionStatus_DELETION_FAILED = TrainingSessionStatus.AddMember("DELETION_FAILED", smithyprelude.Unit)
+
+	TrainingSessionModelConfig_BaseModelArn = TrainingSessionModelConfig.AddMember("BaseModelArn", _BaseModelArn)
+
+	TrainingSessionModelConfig_AcceptEula = TrainingSessionModelConfig.AddMember("AcceptEula", _JavaBoolean)
+
+	TrainingSessionS3Location_Path = TrainingSessionS3Location.AddMember("Path", _OutputS3Path)
+
+	TrainingSessionS3Location_KmsKeyArn = TrainingSessionS3Location.AddMember("KmsKeyArn", _CustomerKmsKeyArn)
+
+	TrainingSessionOutputConfig_S3Location = TrainingSessionOutputConfig.AddMember("S3Location", TrainingSessionS3Location)
+
+	TrainingSessionDetail_TrainingSessionArn = TrainingSessionDetail.AddMember("TrainingSessionArn", _TrainingSessionArn)
+
+	TrainingSessionDetail_TrainingSessionName = TrainingSessionDetail.AddMember("TrainingSessionName", _TrainingSessionName)
+
+	TrainingSessionDetail_TrainingSessionStatus = TrainingSessionDetail.AddMember("TrainingSessionStatus", TrainingSessionStatus)
+
+	TrainingSessionDetail_ModelPackageGroupArn = TrainingSessionDetail.AddMember("ModelPackageGroupArn", _ModelPackageGroupArn)
+
+	TrainingSessionDetail_CreationTime = TrainingSessionDetail.AddMember("CreationTime", _Timestamp)
+
+	TrainingSessionDetail_LastModifiedTime = TrainingSessionDetail.AddMember("LastModifiedTime", _Timestamp)
+
+	TrainingSessionDetail_EndTime = TrainingSessionDetail.AddMember("EndTime", _Timestamp)
+
+	TrainingSessionDetail_ErrorDetails = TrainingSessionDetail.AddMember("ErrorDetails", _FailureReason)
+
+	TrainingSessionDetail_LastReceivedSequenceNumber = TrainingSessionDetail.AddMember("LastReceivedSequenceNumber", _JavaInteger)
+
+	TrainingSessionDetail_BillableTokenUsage = TrainingSessionDetail.AddMember("BillableTokenUsage", BillableTokenUsage)
+
+	TrainingSessionDetail_VpcConfig = TrainingSessionDetail.AddMember("VpcConfig", VpcConfig)
+
+	TrainingSessionDetail_RoleArn = TrainingSessionDetail.AddMember("RoleArn", _RoleArn)
+
+	TrainingSessionDetail_LoraConfig = TrainingSessionDetail.AddMember("LoraConfig", LoraConfig)
+
+	TrainingSessionDetail_ModelConfig = TrainingSessionDetail.AddMember("ModelConfig", TrainingSessionModelConfig)
+
+	TrainingSessionDetail_OutputConfig = TrainingSessionDetail.AddMember("OutputConfig", TrainingSessionOutputConfig)
+
+	TrainingSessionDetail_Tags = TrainingSessionDetail.AddMember("Tags", _TagList)
+
+	TrainingSessionSummary_TrainingSessionArn = TrainingSessionSummary.AddMember("TrainingSessionArn", _TrainingSessionArn)
+
+	TrainingSessionSummary_TrainingSessionStatus = TrainingSessionSummary.AddMember("TrainingSessionStatus", TrainingSessionStatus)
+
+	TrainingSessionSummary_CreationTime = TrainingSessionSummary.AddMember("CreationTime", _Timestamp)
+
+	TrainingSessionSummary_LastModifiedTime = TrainingSessionSummary.AddMember("LastModifiedTime", _Timestamp)
+
+	_TrainingSessionSummaries_member = _TrainingSessionSummaries.AddMember("member", TrainingSessionSummary)
+
 	TrainingSpecification_TrainingImage = TrainingSpecification.AddMember("TrainingImage", _ContainerImage)
 
 	TrainingSpecification_TrainingImageDigest = TrainingSpecification.AddMember("TrainingImageDigest", _ImageDigest)
@@ -46768,6 +48208,20 @@ func init() {
 	AssociateTrialComponentResponse_TrialComponentArn = AssociateTrialComponentResponse.AddMember("TrialComponentArn", _TrialComponentArn)
 
 	AssociateTrialComponentResponse_TrialArn = AssociateTrialComponentResponse.AddMember("TrialArn", _TrialArn)
+
+	AttachClusterNodeNetworkInterfaceRequest_ClusterName = AttachClusterNodeNetworkInterfaceRequest.AddMember("ClusterName", _ClusterNameOrArn)
+
+	AttachClusterNodeNetworkInterfaceRequest_NodeId = AttachClusterNodeNetworkInterfaceRequest.AddMember("NodeId", _ClusterNodeId)
+
+	AttachClusterNodeNetworkInterfaceRequest_NetworkInterfaceId = AttachClusterNodeNetworkInterfaceRequest.AddMember("NetworkInterfaceId", _ClusterNetworkInterfaceId)
+
+	AttachClusterNodeNetworkInterfaceResponse_ClusterArn = AttachClusterNodeNetworkInterfaceResponse.AddMember("ClusterArn", _ClusterArn)
+
+	AttachClusterNodeNetworkInterfaceResponse_NodeId = AttachClusterNodeNetworkInterfaceResponse.AddMember("NodeId", _ClusterNodeId)
+
+	AttachClusterNodeNetworkInterfaceResponse_NetworkInterfaceId = AttachClusterNodeNetworkInterfaceResponse.AddMember("NetworkInterfaceId", _ClusterNetworkInterfaceId)
+
+	AttachClusterNodeNetworkInterfaceResponse_AttachmentId = AttachClusterNodeNetworkInterfaceResponse.AddMember("AttachmentId", _ClusterNetworkInterfaceAttachmentId)
 
 	AttachClusterNodeVolumeRequest_ClusterArn = AttachClusterNodeVolumeRequest.AddMember("ClusterArn", _ClusterArn)
 
@@ -48015,6 +49469,24 @@ func init() {
 
 	CreateTrainingPlanResponse_TrainingPlanArn = CreateTrainingPlanResponse.AddMember("TrainingPlanArn", _TrainingPlanArn)
 
+	CreateTrainingSessionRequest_TrainingSessionName = CreateTrainingSessionRequest.AddMember("TrainingSessionName", _TrainingSessionName)
+
+	CreateTrainingSessionRequest_ModelPackageGroupArn = CreateTrainingSessionRequest.AddMember("ModelPackageGroupArn", _ModelPackageGroupArn)
+
+	CreateTrainingSessionRequest_LoraConfig = CreateTrainingSessionRequest.AddMember("LoraConfig", LoraConfig)
+
+	CreateTrainingSessionRequest_RoleArn = CreateTrainingSessionRequest.AddMember("RoleArn", _RoleArn)
+
+	CreateTrainingSessionRequest_VpcConfig = CreateTrainingSessionRequest.AddMember("VpcConfig", VpcConfig)
+
+	CreateTrainingSessionRequest_ModelConfig = CreateTrainingSessionRequest.AddMember("ModelConfig", TrainingSessionModelConfig)
+
+	CreateTrainingSessionRequest_OutputConfig = CreateTrainingSessionRequest.AddMember("OutputConfig", TrainingSessionOutputConfig)
+
+	CreateTrainingSessionRequest_Tags = CreateTrainingSessionRequest.AddMember("Tags", _TagList)
+
+	CreateTrainingSessionResponse_TrainingSessionArn = CreateTrainingSessionResponse.AddMember("TrainingSessionArn", _TrainingSessionArn)
+
 	CreateTransformJobRequest_TransformJobName = CreateTransformJobRequest.AddMember("TransformJobName", _TransformJobName)
 
 	CreateTransformJobRequest_ModelName = CreateTransformJobRequest.AddMember("ModelName", _ModelName)
@@ -48308,6 +49780,8 @@ func init() {
 	DeleteTagsInput_TagKeys = DeleteTagsInput.AddMember("TagKeys", _TagKeyList)
 
 	DeleteTrainingJobRequest_TrainingJobName = DeleteTrainingJobRequest.AddMember("TrainingJobName", _TrainingJobName)
+
+	DeleteTrainingSessionRequest_TrainingSessionName = DeleteTrainingSessionRequest.AddMember("TrainingSessionName", _TrainingSessionName)
 
 	DeleteTrialComponentRequest_TrialComponentName = DeleteTrialComponentRequest.AddMember("TrialComponentName", _ExperimentEntityName)
 
@@ -50329,7 +51803,7 @@ func init() {
 
 	DescribeTrainingPlanExtensionHistoryResponse_NextToken = DescribeTrainingPlanExtensionHistoryResponse.AddMember("NextToken", _NextToken)
 
-	DescribeTrainingPlanRequest_TrainingPlanName = DescribeTrainingPlanRequest.AddMember("TrainingPlanName", _TrainingPlanName)
+	DescribeTrainingPlanRequest_TrainingPlanName = DescribeTrainingPlanRequest.AddMember("TrainingPlanName", _TrainingPlanNameOrArn)
 
 	DescribeTrainingPlanResponse_TrainingPlanArn = DescribeTrainingPlanResponse.AddMember("TrainingPlanArn", _TrainingPlanArn)
 
@@ -50366,6 +51840,10 @@ func init() {
 	DescribeTrainingPlanResponse_TargetResources = DescribeTrainingPlanResponse.AddMember("TargetResources", _SageMakerResourceNames)
 
 	DescribeTrainingPlanResponse_ReservedCapacitySummaries = DescribeTrainingPlanResponse.AddMember("ReservedCapacitySummaries", _ReservedCapacitySummaries)
+
+	DescribeTrainingSessionRequest_TrainingSessionName = DescribeTrainingSessionRequest.AddMember("TrainingSessionName", _TrainingSessionName)
+
+	DescribeTrainingSessionResponse_TrainingSessionDetail = DescribeTrainingSessionResponse.AddMember("TrainingSessionDetail", TrainingSessionDetail)
 
 	DescribeTransformJobRequest_TransformJobName = DescribeTransformJobRequest.AddMember("TransformJobName", _TransformJobName)
 
@@ -52283,6 +53761,22 @@ func init() {
 
 	ListTrainingPlansResponse_TrainingPlanSummaries = ListTrainingPlansResponse.AddMember("TrainingPlanSummaries", _TrainingPlanSummaries)
 
+	ListTrainingSessionsRequest_NextToken = ListTrainingSessionsRequest.AddMember("NextToken", _NextToken)
+
+	ListTrainingSessionsRequest_MaxResults = ListTrainingSessionsRequest.AddMember("MaxResults", _MaxResults)
+
+	ListTrainingSessionsRequest_CreationTimeAfter = ListTrainingSessionsRequest.AddMember("CreationTimeAfter", _Timestamp)
+
+	ListTrainingSessionsRequest_CreationTimeBefore = ListTrainingSessionsRequest.AddMember("CreationTimeBefore", _Timestamp)
+
+	ListTrainingSessionsRequest_NameContains = ListTrainingSessionsRequest.AddMember("NameContains", _NameContains)
+
+	ListTrainingSessionsRequest_StatusEquals = ListTrainingSessionsRequest.AddMember("StatusEquals", TrainingSessionStatus)
+
+	ListTrainingSessionsResponse_NextToken = ListTrainingSessionsResponse.AddMember("NextToken", _NextToken)
+
+	ListTrainingSessionsResponse_TrainingSessionSummaries = ListTrainingSessionsResponse.AddMember("TrainingSessionSummaries", _TrainingSessionSummaries)
+
 	ListTransformJobsRequest_CreationTimeAfter = ListTransformJobsRequest.AddMember("CreationTimeAfter", _Timestamp)
 
 	ListTransformJobsRequest_CreationTimeBefore = ListTransformJobsRequest.AddMember("CreationTimeBefore", _Timestamp)
@@ -52624,6 +54118,8 @@ func init() {
 	StopProcessingJobRequest_ProcessingJobName = StopProcessingJobRequest.AddMember("ProcessingJobName", _ProcessingJobName)
 
 	StopTrainingJobRequest_TrainingJobName = StopTrainingJobRequest.AddMember("TrainingJobName", _TrainingJobName)
+
+	StopTrainingSessionRequest_TrainingSessionName = StopTrainingSessionRequest.AddMember("TrainingSessionName", _TrainingSessionName)
 
 	StopTransformJobRequest_TransformJobName = StopTransformJobRequest.AddMember("TransformJobName", _TransformJobName)
 

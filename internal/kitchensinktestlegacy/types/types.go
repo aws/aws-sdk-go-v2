@@ -25,6 +25,18 @@ type Item struct {
 	noSmithyDocumentSerde
 }
 
+type ListValueStruct struct {
+	Name *string
+
+	noSmithyDocumentSerde
+}
+
+type MapValueStruct struct {
+	Name *string
+
+	noSmithyDocumentSerde
+}
+
 type MessageEvent struct {
 	Body *string
 

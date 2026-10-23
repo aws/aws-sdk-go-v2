@@ -5,7 +5,9 @@ package lookoutequipment
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/lookoutequipment/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lookoutequipment/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -56,6 +58,33 @@ type ListInferenceExecutionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListInferenceExecutionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListInferenceExecutionsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListInferenceExecutionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DataEndTimeBefore != nil {
+		s.WriteTime(schemas.ListInferenceExecutionsRequest_DataEndTimeBefore, *v.DataEndTimeBefore)
+	}
+	if v.DataStartTimeAfter != nil {
+		s.WriteTime(schemas.ListInferenceExecutionsRequest_DataStartTimeAfter, *v.DataStartTimeAfter)
+	}
+	if v.InferenceSchedulerName != nil {
+		s.WriteString(schemas.ListInferenceExecutionsRequest_InferenceSchedulerName, *v.InferenceSchedulerName)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListInferenceExecutionsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListInferenceExecutionsRequest_NextToken, *v.NextToken)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.ListInferenceExecutionsRequest_Status, string(v.Status))
+	}
+}
+
 type ListInferenceExecutionsOutput struct {
 
 	// Provides an array of information about the individual inference executions
@@ -77,13 +106,35 @@ type ListInferenceExecutionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListInferenceExecutionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListInferenceExecutionsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListInferenceExecutionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeInferenceExecutionSummaries(s, schemas.ListInferenceExecutionsResponse_InferenceExecutionSummaries, v.InferenceExecutionSummaries)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListInferenceExecutionsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListInferenceExecutionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListInferenceExecutionsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListInferenceExecutionsResponse_InferenceExecutionSummaries:
+			return deserializeInferenceExecutionSummaries(d, schemas.ListInferenceExecutionsResponse_InferenceExecutionSummaries, &v.InferenceExecutionSummaries)
+		case schemas.ListInferenceExecutionsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListInferenceExecutionsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListInferenceExecutionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpListInferenceExecutions{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListInferenceExecutions, schemas.ListInferenceExecutionsRequest, schemas.ListInferenceExecutionsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpListInferenceExecutions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListInferenceExecutions, schemas.ListInferenceExecutionsRequest, schemas.ListInferenceExecutionsResponse), output: &ListInferenceExecutionsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

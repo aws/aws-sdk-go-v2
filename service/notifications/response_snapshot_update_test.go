@@ -544,6 +544,7 @@ func TestUpdateResponseSnapshot_GetManagedNotificationChildEvent(t *testing.T) {
 				Headline:            ptr.String("__Headline__"),
 				ParagraphSummary:    ptr.String("__ParagraphSummary__"),
 				CompleteDescription: ptr.String("__CompleteDescription__"),
+				MarkupDescription:   ptr.String("__MarkupDescription__"),
 				Dimensions: []types.Dimension{
 					{
 						Name:  ptr.String("__Name__"),
@@ -647,6 +648,7 @@ func TestUpdateResponseSnapshot_GetManagedNotificationEvent(t *testing.T) {
 				Headline:            ptr.String("__Headline__"),
 				ParagraphSummary:    ptr.String("__ParagraphSummary__"),
 				CompleteDescription: ptr.String("__CompleteDescription__"),
+				MarkupDescription:   ptr.String("__MarkupDescription__"),
 				Dimensions: []types.Dimension{
 					{
 						Name:  ptr.String("__Name__"),
@@ -731,6 +733,18 @@ func TestUpdateResponseSnapshot_GetManagedNotificationEvent(t *testing.T) {
 				},
 			},
 			OrganizationalUnitId: ptr.String("__OrganizationalUnitId__"),
+			Attachments: []types.NotificationEventAttachment{
+				{
+					DisplayName:           ptr.String("__DisplayName__"),
+					AttachmentDownloadUrl: ptr.String("__AttachmentDownloadUrl__"),
+					ContentType:           ptr.String("__ContentType__"),
+				},
+				{
+					DisplayName:           ptr.String("__DisplayName__"),
+					AttachmentDownloadUrl: ptr.String("__AttachmentDownloadUrl__"),
+					ContentType:           ptr.String("__ContentType__"),
+				},
+			},
 		},
 	}
 	proto := restjson1.New(schemas.Notifications)
@@ -824,6 +838,7 @@ func TestUpdateResponseSnapshot_GetNotificationEvent(t *testing.T) {
 				Headline:            ptr.String("__Headline__"),
 				ParagraphSummary:    ptr.String("__ParagraphSummary__"),
 				CompleteDescription: ptr.String("__CompleteDescription__"),
+				MarkupDescription:   ptr.String("__MarkupDescription__"),
 				Dimensions: []types.Dimension{
 					{
 						Name:  ptr.String("__Name__"),
@@ -1074,14 +1089,16 @@ func TestUpdateResponseSnapshot_ListManagedNotificationChannelAssociations(t *te
 		NextToken: ptr.String("__NextToken__"),
 		ChannelAssociations: []types.ManagedNotificationChannelAssociationSummary{
 			{
-				ChannelIdentifier: ptr.String("__ChannelIdentifier__"),
-				ChannelType:       types.ChannelType("MOBILE"),
-				OverrideOption:    types.ChannelAssociationOverrideOption("ENABLED"),
+				ChannelIdentifier:           ptr.String("__ChannelIdentifier__"),
+				ChannelType:                 types.ChannelType("MOBILE"),
+				OverrideOption:              types.ChannelAssociationOverrideOption("ENABLED"),
+				IsSensitiveEventsSubscribed: ptr.Bool(true),
 			},
 			{
-				ChannelIdentifier: ptr.String("__ChannelIdentifier__"),
-				ChannelType:       types.ChannelType("MOBILE"),
-				OverrideOption:    types.ChannelAssociationOverrideOption("ENABLED"),
+				ChannelIdentifier:           ptr.String("__ChannelIdentifier__"),
+				ChannelType:                 types.ChannelType("MOBILE"),
+				OverrideOption:              types.ChannelAssociationOverrideOption("ENABLED"),
+				IsSensitiveEventsSubscribed: ptr.Bool(true),
 			},
 		},
 	}
@@ -1882,6 +1899,28 @@ func TestUpdateResponseSnapshot_UpdateEventRule(t *testing.T) {
 		body = b
 	}
 	if err := serdeRespWriteSnapshot("UpdateEventRule.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_UpdateManagedNotificationChannelAssociation(t *testing.T) {
+	want := &UpdateManagedNotificationChannelAssociationOutput{}
+	proto := restjson1.New(schemas.Notifications)
+	opSchema := smithy.NewOperationSchema(schemas.UpdateManagedNotificationChannelAssociation, schemas.UpdateManagedNotificationChannelAssociationResponse, schemas.UpdateManagedNotificationChannelAssociationResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("UpdateManagedNotificationChannelAssociation.response", 200, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
 }

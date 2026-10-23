@@ -5,7 +5,9 @@ package medialive
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/medialive/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/medialive/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -47,6 +49,27 @@ type ListClusterAlertsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListClusterAlertsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListClusterAlertsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListClusterAlertsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClusterId != nil {
+		s.WriteString(schemas.ListClusterAlertsRequest_ClusterId, *v.ClusterId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListClusterAlertsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListClusterAlertsRequest_NextToken, *v.NextToken)
+	}
+	if v.StateFilter != nil {
+		s.WriteString(schemas.ListClusterAlertsRequest_StateFilter, *v.StateFilter)
+	}
+}
+
 // Placeholder documentation for ListClusterAlertsResponse
 type ListClusterAlertsOutput struct {
 
@@ -62,13 +85,35 @@ type ListClusterAlertsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListClusterAlertsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListClusterAlertsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListClusterAlertsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serialize__listOfClusterAlert(s, schemas.ListClusterAlertsResponse_Alerts, v.Alerts)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListClusterAlertsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListClusterAlertsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListClusterAlertsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListClusterAlertsResponse_Alerts:
+			return deserialize__listOfClusterAlert(d, schemas.ListClusterAlertsResponse_Alerts, &v.Alerts)
+		case schemas.ListClusterAlertsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListClusterAlertsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListClusterAlertsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListClusterAlerts{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListClusterAlerts, schemas.ListClusterAlertsRequest, schemas.ListClusterAlertsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListClusterAlerts{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListClusterAlerts, schemas.ListClusterAlertsRequest, schemas.ListClusterAlertsResponse), output: &ListClusterAlertsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

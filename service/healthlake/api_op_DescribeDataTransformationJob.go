@@ -6,7 +6,9 @@ import (
 	"context"
 	"errors"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/healthlake/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/healthlake/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithytime "github.com/aws/smithy-go/time"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -42,6 +44,18 @@ type DescribeDataTransformationJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeDataTransformationJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeDataTransformationJobRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeDataTransformationJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.JobId != nil {
+		s.WriteString(schemas.DescribeDataTransformationJobRequest_JobId, *v.JobId)
+	}
+}
+
 // The response from the DescribeDataTransformationJob operation.
 type DescribeDataTransformationJobOutput struct {
 
@@ -57,13 +71,34 @@ type DescribeDataTransformationJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeDataTransformationJobOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeDataTransformationJobResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeDataTransformationJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TransformationJobProperties != nil {
+		s.WriteStruct(schemas.DescribeDataTransformationJobResponse_TransformationJobProperties)
+		v.TransformationJobProperties.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DescribeDataTransformationJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeDataTransformationJobResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeDataTransformationJobResponse_TransformationJobProperties:
+			v.TransformationJobProperties = &types.TransformationJobProperties{}
+			return v.TransformationJobProperties.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeDataTransformationJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpDescribeDataTransformationJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeDataTransformationJob, schemas.DescribeDataTransformationJobRequest, schemas.DescribeDataTransformationJobResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpDescribeDataTransformationJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeDataTransformationJob, schemas.DescribeDataTransformationJobRequest, schemas.DescribeDataTransformationJobResponse), output: &DescribeDataTransformationJobOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

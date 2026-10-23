@@ -4,7 +4,9 @@ package glue
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/glue/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/glue/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -69,6 +71,49 @@ type UpdateTableInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateTableInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateTableRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateTableInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CatalogId != nil {
+		s.WriteString(schemas.UpdateTableRequest_CatalogId, *v.CatalogId)
+	}
+	if v.DatabaseName != nil {
+		s.WriteString(schemas.UpdateTableRequest_DatabaseName, *v.DatabaseName)
+	}
+	if v.Force != false {
+		s.WriteBool(schemas.UpdateTableRequest_Force, v.Force)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateTableRequest_Name, *v.Name)
+	}
+	if v.SkipArchive != nil {
+		s.WriteBool(schemas.UpdateTableRequest_SkipArchive, *v.SkipArchive)
+	}
+	if v.TableInput != nil {
+		s.WriteStruct(schemas.UpdateTableRequest_TableInput)
+		v.TableInput.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TransactionId != nil {
+		s.WriteString(schemas.UpdateTableRequest_TransactionId, *v.TransactionId)
+	}
+	if v.UpdateOpenTableFormatInput != nil {
+		s.WriteStruct(schemas.UpdateTableRequest_UpdateOpenTableFormatInput)
+		v.UpdateOpenTableFormatInput.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.VersionId != nil {
+		s.WriteString(schemas.UpdateTableRequest_VersionId, *v.VersionId)
+	}
+	if v.ViewUpdateAction != "" {
+		s.WriteString(schemas.UpdateTableRequest_ViewUpdateAction, string(v.ViewUpdateAction))
+	}
+}
+
 type UpdateTableOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -76,13 +121,26 @@ type UpdateTableOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateTableOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateTableResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateTableOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *UpdateTableOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateTableResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateTableMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateTable{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateTable, schemas.UpdateTableRequest, schemas.UpdateTableResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateTable{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateTable, schemas.UpdateTableRequest, schemas.UpdateTableResponse), output: &UpdateTableOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

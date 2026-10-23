@@ -1,6 +1,7 @@
-POST /
+POST /service/AWSShineFrontendService_20170701/operation/StartTextTranslationJob
 
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: AWSShineFrontendService_20170701.StartTextTranslationJob
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"ClientToken":"__ClientToken__","DataAccessRoleArn":"__DataAccessRoleArn__","InputDataConfig":{"ContentType":"__ContentType__","S3Uri":"__S3Uri__"},"JobName":"__JobName__","OutputDataConfig":{"EncryptionKey":{"Id":"__Id__","Type":"KMS"},"S3Uri":"__S3Uri__"},"ParallelDataNames":["__Member__","__Member__"],"Settings":{"Brevity":"ON","Formality":"FORMAL","Profanity":"MASK"},"SourceLanguageCode":"__SourceLanguageCode__","TargetLanguageCodes":["__Member__","__Member__"],"TerminologyNames":["__Member__","__Member__"]}
+¿kClientTokeno__ClientToken__qDataAccessRoleArnu__DataAccessRoleArn__oInputDataConfig¿kContentTypeo__ContentType__eS3Urii__S3Uri__ÿgJobNamek__JobName__pOutputDataConfig¿mEncryptionKey¿bIdf__Id__dTypecKMSÿeS3Urii__S3Uri__ÿqParallelDataNamesŸj__Member__j__Member__ÿhSettings¿gBrevitybONiFormalityfFORMALiProfanitydMASKÿrSourceLanguageCodev__SourceLanguageCode__sTargetLanguageCodesŸj__Member__j__Member__ÿpTerminologyNamesŸj__Member__j__Member__ÿÿ

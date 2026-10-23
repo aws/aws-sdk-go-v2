@@ -5,7 +5,9 @@ package datazone
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/datazone/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/datazone/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -73,6 +75,39 @@ type ListLineageNodeHistoryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListLineageNodeHistoryInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListLineageNodeHistoryInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListLineageNodeHistoryInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Direction != "" {
+		s.WriteString(schemas.ListLineageNodeHistoryInput_direction, string(v.Direction))
+	}
+	if v.DomainIdentifier != nil {
+		s.WriteString(schemas.ListLineageNodeHistoryInput_domainIdentifier, *v.DomainIdentifier)
+	}
+	if v.EventTimestampGTE != nil {
+		s.WriteTime(schemas.ListLineageNodeHistoryInput_eventTimestampGTE, *v.EventTimestampGTE)
+	}
+	if v.EventTimestampLTE != nil {
+		s.WriteTime(schemas.ListLineageNodeHistoryInput_eventTimestampLTE, *v.EventTimestampLTE)
+	}
+	if v.Identifier != nil {
+		s.WriteString(schemas.ListLineageNodeHistoryInput_identifier, *v.Identifier)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListLineageNodeHistoryInput_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListLineageNodeHistoryInput_nextToken, *v.NextToken)
+	}
+	if v.SortOrder != "" {
+		s.WriteString(schemas.ListLineageNodeHistoryInput_sortOrder, string(v.SortOrder))
+	}
+}
+
 type ListLineageNodeHistoryOutput struct {
 
 	// When the number of history items is greater than the default value for the
@@ -91,13 +126,35 @@ type ListLineageNodeHistoryOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListLineageNodeHistoryOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListLineageNodeHistoryOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListLineageNodeHistoryOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListLineageNodeHistoryOutput_nextToken, *v.NextToken)
+	}
+	serializeLineageNodeSummaries(s, schemas.ListLineageNodeHistoryOutput_nodes, v.Nodes)
+}
+func (v *ListLineageNodeHistoryOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListLineageNodeHistoryOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListLineageNodeHistoryOutput_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListLineageNodeHistoryOutput_nextToken, v.NextToken)
+		case schemas.ListLineageNodeHistoryOutput_nodes:
+			return deserializeLineageNodeSummaries(d, schemas.ListLineageNodeHistoryOutput_nodes, &v.Nodes)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListLineageNodeHistoryMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListLineageNodeHistory{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListLineageNodeHistory, schemas.ListLineageNodeHistoryInput, schemas.ListLineageNodeHistoryOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListLineageNodeHistory{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListLineageNodeHistory, schemas.ListLineageNodeHistoryInput, schemas.ListLineageNodeHistoryOutput), output: &ListLineageNodeHistoryOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package glue
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/glue/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/glue/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -36,7 +38,29 @@ type GetColumnStatisticsTaskSettingsInput struct {
 	// This member is required.
 	TableName *string
 
+	// The ID of the Data Catalog where the table resides. If none is supplied, the
+	// Amazon Web Services account ID is used by default.
+	CatalogID *string
+
 	noSmithyDocumentSerde
+}
+
+func (v *GetColumnStatisticsTaskSettingsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetColumnStatisticsTaskSettingsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetColumnStatisticsTaskSettingsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CatalogID != nil {
+		s.WriteString(schemas.GetColumnStatisticsTaskSettingsRequest_CatalogID, *v.CatalogID)
+	}
+	if v.DatabaseName != nil {
+		s.WriteString(schemas.GetColumnStatisticsTaskSettingsRequest_DatabaseName, *v.DatabaseName)
+	}
+	if v.TableName != nil {
+		s.WriteString(schemas.GetColumnStatisticsTaskSettingsRequest_TableName, *v.TableName)
+	}
 }
 
 type GetColumnStatisticsTaskSettingsOutput struct {
@@ -51,13 +75,34 @@ type GetColumnStatisticsTaskSettingsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetColumnStatisticsTaskSettingsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetColumnStatisticsTaskSettingsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetColumnStatisticsTaskSettingsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ColumnStatisticsTaskSettings != nil {
+		s.WriteStruct(schemas.GetColumnStatisticsTaskSettingsResponse_ColumnStatisticsTaskSettings)
+		v.ColumnStatisticsTaskSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetColumnStatisticsTaskSettingsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetColumnStatisticsTaskSettingsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetColumnStatisticsTaskSettingsResponse_ColumnStatisticsTaskSettings:
+			v.ColumnStatisticsTaskSettings = &types.ColumnStatisticsTaskSettings{}
+			return v.ColumnStatisticsTaskSettings.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetColumnStatisticsTaskSettingsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetColumnStatisticsTaskSettings{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetColumnStatisticsTaskSettings, schemas.GetColumnStatisticsTaskSettingsRequest, schemas.GetColumnStatisticsTaskSettingsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetColumnStatisticsTaskSettings{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetColumnStatisticsTaskSettings, schemas.GetColumnStatisticsTaskSettingsRequest, schemas.GetColumnStatisticsTaskSettingsResponse), output: &GetColumnStatisticsTaskSettingsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

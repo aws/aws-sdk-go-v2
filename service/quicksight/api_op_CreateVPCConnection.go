@@ -4,7 +4,9 @@ package quicksight
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/quicksight/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/quicksight/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -69,6 +71,31 @@ type CreateVPCConnectionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateVPCConnectionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateVPCConnectionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateVPCConnectionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AwsAccountId != nil {
+		s.WriteString(schemas.CreateVPCConnectionRequest_AwsAccountId, *v.AwsAccountId)
+	}
+	serializeDnsResolverList(s, schemas.CreateVPCConnectionRequest_DnsResolvers, v.DnsResolvers)
+	if v.Name != nil {
+		s.WriteString(schemas.CreateVPCConnectionRequest_Name, *v.Name)
+	}
+	if v.RoleArn != nil {
+		s.WriteString(schemas.CreateVPCConnectionRequest_RoleArn, *v.RoleArn)
+	}
+	serializeSecurityGroupIdList(s, schemas.CreateVPCConnectionRequest_SecurityGroupIds, v.SecurityGroupIds)
+	serializeSubnetIdList(s, schemas.CreateVPCConnectionRequest_SubnetIds, v.SubnetIds)
+	serializeTagList(s, schemas.CreateVPCConnectionRequest_Tags, v.Tags)
+	if v.VPCConnectionId != nil {
+		s.WriteString(schemas.CreateVPCConnectionRequest_VPCConnectionId, *v.VPCConnectionId)
+	}
+}
+
 type CreateVPCConnectionOutput struct {
 
 	// The Amazon Resource Name (ARN) of the VPC connection.
@@ -96,13 +123,69 @@ type CreateVPCConnectionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateVPCConnectionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateVPCConnectionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateVPCConnectionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.CreateVPCConnectionResponse_Arn, *v.Arn)
+	}
+	if v.AvailabilityStatus != "" {
+		s.WriteString(schemas.CreateVPCConnectionResponse_AvailabilityStatus, string(v.AvailabilityStatus))
+	}
+	if v.CreationStatus != "" {
+		s.WriteString(schemas.CreateVPCConnectionResponse_CreationStatus, string(v.CreationStatus))
+	}
+	if v.RequestId != nil {
+		s.WriteString(schemas.CreateVPCConnectionResponse_RequestId, *v.RequestId)
+	}
+	if v.Status != 0 {
+		s.WriteInt32(schemas.CreateVPCConnectionResponse_Status, v.Status)
+	}
+	if v.VPCConnectionId != nil {
+		s.WriteString(schemas.CreateVPCConnectionResponse_VPCConnectionId, *v.VPCConnectionId)
+	}
+}
+func (v *CreateVPCConnectionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateVPCConnectionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateVPCConnectionResponse_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.CreateVPCConnectionResponse_Arn, v.Arn)
+		case schemas.CreateVPCConnectionResponse_AvailabilityStatus:
+			var ev string
+			if err := d.ReadString(schemas.CreateVPCConnectionResponse_AvailabilityStatus, &ev); err != nil {
+				return err
+			}
+			v.AvailabilityStatus = types.VPCConnectionAvailabilityStatus(ev)
+			return nil
+		case schemas.CreateVPCConnectionResponse_CreationStatus:
+			var ev string
+			if err := d.ReadString(schemas.CreateVPCConnectionResponse_CreationStatus, &ev); err != nil {
+				return err
+			}
+			v.CreationStatus = types.VPCConnectionResourceStatus(ev)
+			return nil
+		case schemas.CreateVPCConnectionResponse_RequestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.CreateVPCConnectionResponse_RequestId, v.RequestId)
+		case schemas.CreateVPCConnectionResponse_Status:
+			return d.ReadInt32(schemas.CreateVPCConnectionResponse_Status, &v.Status)
+		case schemas.CreateVPCConnectionResponse_VPCConnectionId:
+			v.VPCConnectionId = new(string)
+			return d.ReadString(schemas.CreateVPCConnectionResponse_VPCConnectionId, v.VPCConnectionId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateVPCConnectionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateVPCConnection{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateVPCConnection, schemas.CreateVPCConnectionRequest, schemas.CreateVPCConnectionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateVPCConnection{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateVPCConnection, schemas.CreateVPCConnectionRequest, schemas.CreateVPCConnectionResponse), output: &CreateVPCConnectionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

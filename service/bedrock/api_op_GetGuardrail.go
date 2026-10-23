@@ -4,7 +4,9 @@ package bedrock
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/bedrock/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrock/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -39,6 +41,21 @@ type GetGuardrailInput struct {
 	GuardrailVersion *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetGuardrailInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetGuardrailRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetGuardrailInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GuardrailIdentifier != nil {
+		s.WriteString(schemas.GetGuardrailRequest_guardrailIdentifier, *v.GuardrailIdentifier)
+	}
+	if v.GuardrailVersion != nil {
+		s.WriteString(schemas.GetGuardrailRequest_guardrailVersion, *v.GuardrailVersion)
+	}
 }
 
 type GetGuardrailOutput struct {
@@ -131,13 +148,158 @@ type GetGuardrailOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetGuardrailOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetGuardrailResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetGuardrailOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AutomatedReasoningPolicy != nil {
+		s.WriteStruct(schemas.GetGuardrailResponse_automatedReasoningPolicy)
+		v.AutomatedReasoningPolicy.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.BlockedInputMessaging != nil {
+		s.WriteString(schemas.GetGuardrailResponse_blockedInputMessaging, *v.BlockedInputMessaging)
+	}
+	if v.BlockedOutputsMessaging != nil {
+		s.WriteString(schemas.GetGuardrailResponse_blockedOutputsMessaging, *v.BlockedOutputsMessaging)
+	}
+	if v.ContentPolicy != nil {
+		s.WriteStruct(schemas.GetGuardrailResponse_contentPolicy)
+		v.ContentPolicy.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ContextualGroundingPolicy != nil {
+		s.WriteStruct(schemas.GetGuardrailResponse_contextualGroundingPolicy)
+		v.ContextualGroundingPolicy.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.GetGuardrailResponse_createdAt, *v.CreatedAt)
+	}
+	if v.CrossRegionDetails != nil {
+		s.WriteStruct(schemas.GetGuardrailResponse_crossRegionDetails)
+		v.CrossRegionDetails.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.GetGuardrailResponse_description, *v.Description)
+	}
+	serializeGuardrailFailureRecommendations(s, schemas.GetGuardrailResponse_failureRecommendations, v.FailureRecommendations)
+	if v.GuardrailArn != nil {
+		s.WriteString(schemas.GetGuardrailResponse_guardrailArn, *v.GuardrailArn)
+	}
+	if v.GuardrailId != nil {
+		s.WriteString(schemas.GetGuardrailResponse_guardrailId, *v.GuardrailId)
+	}
+	if v.KmsKeyArn != nil {
+		s.WriteString(schemas.GetGuardrailResponse_kmsKeyArn, *v.KmsKeyArn)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.GetGuardrailResponse_name, *v.Name)
+	}
+	if v.SensitiveInformationPolicy != nil {
+		s.WriteStruct(schemas.GetGuardrailResponse_sensitiveInformationPolicy)
+		v.SensitiveInformationPolicy.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.GetGuardrailResponse_status, string(v.Status))
+	}
+	serializeGuardrailStatusReasons(s, schemas.GetGuardrailResponse_statusReasons, v.StatusReasons)
+	if v.TopicPolicy != nil {
+		s.WriteStruct(schemas.GetGuardrailResponse_topicPolicy)
+		v.TopicPolicy.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.UpdatedAt != nil {
+		s.WriteTime(schemas.GetGuardrailResponse_updatedAt, *v.UpdatedAt)
+	}
+	if v.Version != nil {
+		s.WriteString(schemas.GetGuardrailResponse_version, *v.Version)
+	}
+	if v.WordPolicy != nil {
+		s.WriteStruct(schemas.GetGuardrailResponse_wordPolicy)
+		v.WordPolicy.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetGuardrailOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetGuardrailResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetGuardrailResponse_automatedReasoningPolicy:
+			v.AutomatedReasoningPolicy = &types.GuardrailAutomatedReasoningPolicy{}
+			return v.AutomatedReasoningPolicy.Deserialize(d)
+		case schemas.GetGuardrailResponse_blockedInputMessaging:
+			v.BlockedInputMessaging = new(string)
+			return d.ReadString(schemas.GetGuardrailResponse_blockedInputMessaging, v.BlockedInputMessaging)
+		case schemas.GetGuardrailResponse_blockedOutputsMessaging:
+			v.BlockedOutputsMessaging = new(string)
+			return d.ReadString(schemas.GetGuardrailResponse_blockedOutputsMessaging, v.BlockedOutputsMessaging)
+		case schemas.GetGuardrailResponse_contentPolicy:
+			v.ContentPolicy = &types.GuardrailContentPolicy{}
+			return v.ContentPolicy.Deserialize(d)
+		case schemas.GetGuardrailResponse_contextualGroundingPolicy:
+			v.ContextualGroundingPolicy = &types.GuardrailContextualGroundingPolicy{}
+			return v.ContextualGroundingPolicy.Deserialize(d)
+		case schemas.GetGuardrailResponse_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.GetGuardrailResponse_createdAt, v.CreatedAt)
+		case schemas.GetGuardrailResponse_crossRegionDetails:
+			v.CrossRegionDetails = &types.GuardrailCrossRegionDetails{}
+			return v.CrossRegionDetails.Deserialize(d)
+		case schemas.GetGuardrailResponse_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.GetGuardrailResponse_description, v.Description)
+		case schemas.GetGuardrailResponse_failureRecommendations:
+			return deserializeGuardrailFailureRecommendations(d, schemas.GetGuardrailResponse_failureRecommendations, &v.FailureRecommendations)
+		case schemas.GetGuardrailResponse_guardrailArn:
+			v.GuardrailArn = new(string)
+			return d.ReadString(schemas.GetGuardrailResponse_guardrailArn, v.GuardrailArn)
+		case schemas.GetGuardrailResponse_guardrailId:
+			v.GuardrailId = new(string)
+			return d.ReadString(schemas.GetGuardrailResponse_guardrailId, v.GuardrailId)
+		case schemas.GetGuardrailResponse_kmsKeyArn:
+			v.KmsKeyArn = new(string)
+			return d.ReadString(schemas.GetGuardrailResponse_kmsKeyArn, v.KmsKeyArn)
+		case schemas.GetGuardrailResponse_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.GetGuardrailResponse_name, v.Name)
+		case schemas.GetGuardrailResponse_sensitiveInformationPolicy:
+			v.SensitiveInformationPolicy = &types.GuardrailSensitiveInformationPolicy{}
+			return v.SensitiveInformationPolicy.Deserialize(d)
+		case schemas.GetGuardrailResponse_status:
+			var ev string
+			if err := d.ReadString(schemas.GetGuardrailResponse_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.GuardrailStatus(ev)
+			return nil
+		case schemas.GetGuardrailResponse_statusReasons:
+			return deserializeGuardrailStatusReasons(d, schemas.GetGuardrailResponse_statusReasons, &v.StatusReasons)
+		case schemas.GetGuardrailResponse_topicPolicy:
+			v.TopicPolicy = &types.GuardrailTopicPolicy{}
+			return v.TopicPolicy.Deserialize(d)
+		case schemas.GetGuardrailResponse_updatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.GetGuardrailResponse_updatedAt, v.UpdatedAt)
+		case schemas.GetGuardrailResponse_version:
+			v.Version = new(string)
+			return d.ReadString(schemas.GetGuardrailResponse_version, v.Version)
+		case schemas.GetGuardrailResponse_wordPolicy:
+			v.WordPolicy = &types.GuardrailWordPolicy{}
+			return v.WordPolicy.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetGuardrailMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetGuardrail{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetGuardrail, schemas.GetGuardrailRequest, schemas.GetGuardrailResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetGuardrail{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetGuardrail, schemas.GetGuardrailRequest, schemas.GetGuardrailResponse), output: &GetGuardrailOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

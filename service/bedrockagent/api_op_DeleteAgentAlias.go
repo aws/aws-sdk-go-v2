@@ -4,7 +4,9 @@ package bedrockagent
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/bedrockagent/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagent/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,21 @@ type DeleteAgentAliasInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteAgentAliasInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteAgentAliasRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteAgentAliasInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AgentAliasId != nil {
+		s.WriteString(schemas.DeleteAgentAliasRequest_agentAliasId, *v.AgentAliasId)
+	}
+	if v.AgentId != nil {
+		s.WriteString(schemas.DeleteAgentAliasRequest_agentId, *v.AgentId)
+	}
+}
+
 type DeleteAgentAliasOutput struct {
 
 	// The unique identifier of the alias that was deleted.
@@ -62,13 +79,48 @@ type DeleteAgentAliasOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteAgentAliasOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteAgentAliasResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteAgentAliasOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AgentAliasId != nil {
+		s.WriteString(schemas.DeleteAgentAliasResponse_agentAliasId, *v.AgentAliasId)
+	}
+	if v.AgentAliasStatus != "" {
+		s.WriteString(schemas.DeleteAgentAliasResponse_agentAliasStatus, string(v.AgentAliasStatus))
+	}
+	if v.AgentId != nil {
+		s.WriteString(schemas.DeleteAgentAliasResponse_agentId, *v.AgentId)
+	}
+}
+func (v *DeleteAgentAliasOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteAgentAliasResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteAgentAliasResponse_agentAliasId:
+			v.AgentAliasId = new(string)
+			return d.ReadString(schemas.DeleteAgentAliasResponse_agentAliasId, v.AgentAliasId)
+		case schemas.DeleteAgentAliasResponse_agentAliasStatus:
+			var ev string
+			if err := d.ReadString(schemas.DeleteAgentAliasResponse_agentAliasStatus, &ev); err != nil {
+				return err
+			}
+			v.AgentAliasStatus = types.AgentAliasStatus(ev)
+			return nil
+		case schemas.DeleteAgentAliasResponse_agentId:
+			v.AgentId = new(string)
+			return d.ReadString(schemas.DeleteAgentAliasResponse_agentId, v.AgentId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteAgentAliasMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteAgentAlias{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteAgentAlias, schemas.DeleteAgentAliasRequest, schemas.DeleteAgentAliasResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteAgentAlias{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteAgentAlias, schemas.DeleteAgentAliasRequest, schemas.DeleteAgentAliasResponse), output: &DeleteAgentAliasOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

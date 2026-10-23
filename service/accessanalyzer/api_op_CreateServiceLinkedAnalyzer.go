@@ -5,7 +5,9 @@ package accessanalyzer
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/accessanalyzer/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/accessanalyzer/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -54,6 +56,23 @@ type CreateServiceLinkedAnalyzerInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateServiceLinkedAnalyzerInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateServiceLinkedAnalyzerRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateServiceLinkedAnalyzerInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeInlineArchiveRulesList(s, schemas.CreateServiceLinkedAnalyzerRequest_archiveRules, v.ArchiveRules)
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateServiceLinkedAnalyzerRequest_clientToken, *v.ClientToken)
+	}
+	serializeAnalyzerConfiguration(s, schemas.CreateServiceLinkedAnalyzerRequest_configuration, v.Configuration)
+	if v.Type != "" {
+		s.WriteString(schemas.CreateServiceLinkedAnalyzerRequest_type, string(v.Type))
+	}
+}
+
 // The response to the request to create a service-linked analyzer.
 type CreateServiceLinkedAnalyzerOutput struct {
 
@@ -68,13 +87,32 @@ type CreateServiceLinkedAnalyzerOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateServiceLinkedAnalyzerOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateServiceLinkedAnalyzerResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateServiceLinkedAnalyzerOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.CreateServiceLinkedAnalyzerResponse_arn, *v.Arn)
+	}
+}
+func (v *CreateServiceLinkedAnalyzerOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateServiceLinkedAnalyzerResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateServiceLinkedAnalyzerResponse_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.CreateServiceLinkedAnalyzerResponse_arn, v.Arn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateServiceLinkedAnalyzerMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateServiceLinkedAnalyzer{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateServiceLinkedAnalyzer, schemas.CreateServiceLinkedAnalyzerRequest, schemas.CreateServiceLinkedAnalyzerResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateServiceLinkedAnalyzer{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateServiceLinkedAnalyzer, schemas.CreateServiceLinkedAnalyzerRequest, schemas.CreateServiceLinkedAnalyzerResponse), output: &CreateServiceLinkedAnalyzerOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

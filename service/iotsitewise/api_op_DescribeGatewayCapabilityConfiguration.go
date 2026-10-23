@@ -5,7 +5,9 @@ package iotsitewise
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/iotsitewise/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotsitewise/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -62,6 +64,21 @@ type DescribeGatewayCapabilityConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeGatewayCapabilityConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeGatewayCapabilityConfigurationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeGatewayCapabilityConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CapabilityNamespace != nil {
+		s.WriteString(schemas.DescribeGatewayCapabilityConfigurationRequest_capabilityNamespace, *v.CapabilityNamespace)
+	}
+	if v.GatewayId != nil {
+		s.WriteString(schemas.DescribeGatewayCapabilityConfigurationRequest_gatewayId, *v.GatewayId)
+	}
+}
+
 type DescribeGatewayCapabilityConfigurationOutput struct {
 
 	// The JSON document that defines the gateway capability's configuration. For more
@@ -106,13 +123,54 @@ type DescribeGatewayCapabilityConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeGatewayCapabilityConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeGatewayCapabilityConfigurationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeGatewayCapabilityConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CapabilityConfiguration != nil {
+		s.WriteString(schemas.DescribeGatewayCapabilityConfigurationResponse_capabilityConfiguration, *v.CapabilityConfiguration)
+	}
+	if v.CapabilityNamespace != nil {
+		s.WriteString(schemas.DescribeGatewayCapabilityConfigurationResponse_capabilityNamespace, *v.CapabilityNamespace)
+	}
+	if v.CapabilitySyncStatus != "" {
+		s.WriteString(schemas.DescribeGatewayCapabilityConfigurationResponse_capabilitySyncStatus, string(v.CapabilitySyncStatus))
+	}
+	if v.GatewayId != nil {
+		s.WriteString(schemas.DescribeGatewayCapabilityConfigurationResponse_gatewayId, *v.GatewayId)
+	}
+}
+func (v *DescribeGatewayCapabilityConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeGatewayCapabilityConfigurationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeGatewayCapabilityConfigurationResponse_capabilityConfiguration:
+			v.CapabilityConfiguration = new(string)
+			return d.ReadString(schemas.DescribeGatewayCapabilityConfigurationResponse_capabilityConfiguration, v.CapabilityConfiguration)
+		case schemas.DescribeGatewayCapabilityConfigurationResponse_capabilityNamespace:
+			v.CapabilityNamespace = new(string)
+			return d.ReadString(schemas.DescribeGatewayCapabilityConfigurationResponse_capabilityNamespace, v.CapabilityNamespace)
+		case schemas.DescribeGatewayCapabilityConfigurationResponse_capabilitySyncStatus:
+			var ev string
+			if err := d.ReadString(schemas.DescribeGatewayCapabilityConfigurationResponse_capabilitySyncStatus, &ev); err != nil {
+				return err
+			}
+			v.CapabilitySyncStatus = types.CapabilitySyncStatus(ev)
+			return nil
+		case schemas.DescribeGatewayCapabilityConfigurationResponse_gatewayId:
+			v.GatewayId = new(string)
+			return d.ReadString(schemas.DescribeGatewayCapabilityConfigurationResponse_gatewayId, v.GatewayId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeGatewayCapabilityConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeGatewayCapabilityConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeGatewayCapabilityConfiguration, schemas.DescribeGatewayCapabilityConfigurationRequest, schemas.DescribeGatewayCapabilityConfigurationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeGatewayCapabilityConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeGatewayCapabilityConfiguration, schemas.DescribeGatewayCapabilityConfigurationRequest, schemas.DescribeGatewayCapabilityConfigurationResponse), output: &DescribeGatewayCapabilityConfigurationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,6 +4,8 @@ package backup
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/backup/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -42,6 +44,24 @@ type AssociateBackupVaultMpaApprovalTeamInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssociateBackupVaultMpaApprovalTeamInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssociateBackupVaultMpaApprovalTeamInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssociateBackupVaultMpaApprovalTeamInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BackupVaultName != nil {
+		s.WriteString(schemas.AssociateBackupVaultMpaApprovalTeamInput_BackupVaultName, *v.BackupVaultName)
+	}
+	if v.MpaApprovalTeamArn != nil {
+		s.WriteString(schemas.AssociateBackupVaultMpaApprovalTeamInput_MpaApprovalTeamArn, *v.MpaApprovalTeamArn)
+	}
+	if v.RequesterComment != nil {
+		s.WriteString(schemas.AssociateBackupVaultMpaApprovalTeamInput_RequesterComment, *v.RequesterComment)
+	}
+}
+
 type AssociateBackupVaultMpaApprovalTeamOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -49,13 +69,26 @@ type AssociateBackupVaultMpaApprovalTeamOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssociateBackupVaultMpaApprovalTeamOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssociateBackupVaultMpaApprovalTeamOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *AssociateBackupVaultMpaApprovalTeamOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationAssociateBackupVaultMpaApprovalTeamMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpAssociateBackupVaultMpaApprovalTeam{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociateBackupVaultMpaApprovalTeam, schemas.AssociateBackupVaultMpaApprovalTeamInput, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpAssociateBackupVaultMpaApprovalTeam{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociateBackupVaultMpaApprovalTeam, schemas.AssociateBackupVaultMpaApprovalTeamInput, nil), output: &AssociateBackupVaultMpaApprovalTeamOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

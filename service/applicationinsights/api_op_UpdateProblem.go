@@ -4,7 +4,9 @@ package applicationinsights
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/applicationinsights/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/applicationinsights/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -43,6 +45,24 @@ type UpdateProblemInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateProblemInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateProblemRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateProblemInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ProblemId != nil {
+		s.WriteString(schemas.UpdateProblemRequest_ProblemId, *v.ProblemId)
+	}
+	if v.UpdateStatus != "" {
+		s.WriteString(schemas.UpdateProblemRequest_UpdateStatus, string(v.UpdateStatus))
+	}
+	if v.Visibility != "" {
+		s.WriteString(schemas.UpdateProblemRequest_Visibility, string(v.Visibility))
+	}
+}
+
 type UpdateProblemOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -50,13 +70,26 @@ type UpdateProblemOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateProblemOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateProblemResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateProblemOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *UpdateProblemOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateProblemResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateProblemMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpUpdateProblem{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateProblem, schemas.UpdateProblemRequest, schemas.UpdateProblemResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpUpdateProblem{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateProblem, schemas.UpdateProblemRequest, schemas.UpdateProblemResponse), output: &UpdateProblemOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package lambda
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/lambda/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lambda/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -34,6 +36,18 @@ type GetCodeSigningConfigInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetCodeSigningConfigInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetCodeSigningConfigRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetCodeSigningConfigInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CodeSigningConfigArn != nil {
+		s.WriteString(schemas.GetCodeSigningConfigRequest_CodeSigningConfigArn, *v.CodeSigningConfigArn)
+	}
+}
+
 type GetCodeSigningConfigOutput struct {
 
 	// The code signing configuration
@@ -47,13 +61,34 @@ type GetCodeSigningConfigOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetCodeSigningConfigOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetCodeSigningConfigResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetCodeSigningConfigOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CodeSigningConfig != nil {
+		s.WriteStruct(schemas.GetCodeSigningConfigResponse_CodeSigningConfig)
+		v.CodeSigningConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetCodeSigningConfigOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetCodeSigningConfigResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetCodeSigningConfigResponse_CodeSigningConfig:
+			v.CodeSigningConfig = &types.CodeSigningConfig{}
+			return v.CodeSigningConfig.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetCodeSigningConfigMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetCodeSigningConfig{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetCodeSigningConfig, schemas.GetCodeSigningConfigRequest, schemas.GetCodeSigningConfigResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetCodeSigningConfig{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetCodeSigningConfig, schemas.GetCodeSigningConfigRequest, schemas.GetCodeSigningConfigResponse), output: &GetCodeSigningConfigOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

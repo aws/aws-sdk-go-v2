@@ -4,7 +4,9 @@ package apigateway
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/apigateway/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/apigateway/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -52,6 +54,22 @@ type GetDeploymentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetDeploymentInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetDeploymentRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetDeploymentInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DeploymentId != nil {
+		s.WriteString(schemas.GetDeploymentRequest_deploymentId, *v.DeploymentId)
+	}
+	serializeListOfString(s, schemas.GetDeploymentRequest_embed, v.Embed)
+	if v.RestApiId != nil {
+		s.WriteString(schemas.GetDeploymentRequest_restApiId, *v.RestApiId)
+	}
+}
+
 // An immutable representation of a RestApi resource that can be called by users
 // using Stages. A deployment must be associated with a Stage for it to be callable
 // over the Internet.
@@ -76,13 +94,47 @@ type GetDeploymentOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetDeploymentOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Deployment)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetDeploymentOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializePathToMapOfMethodSnapshot(s, schemas.Deployment_apiSummary, v.ApiSummary)
+	if v.CreatedDate != nil {
+		s.WriteTime(schemas.Deployment_createdDate, *v.CreatedDate)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.Deployment_description, *v.Description)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.Deployment_id, *v.Id)
+	}
+}
+func (v *GetDeploymentOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Deployment, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Deployment_apiSummary:
+			return deserializePathToMapOfMethodSnapshot(d, schemas.Deployment_apiSummary, &v.ApiSummary)
+		case schemas.Deployment_createdDate:
+			v.CreatedDate = new(time.Time)
+			return d.ReadTime(schemas.Deployment_createdDate, v.CreatedDate)
+		case schemas.Deployment_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.Deployment_description, v.Description)
+		case schemas.Deployment_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.Deployment_id, v.Id)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetDeploymentMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetDeployment{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetDeployment, schemas.GetDeploymentRequest, schemas.Deployment)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetDeployment{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetDeployment, schemas.GetDeploymentRequest, schemas.Deployment), output: &GetDeploymentOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

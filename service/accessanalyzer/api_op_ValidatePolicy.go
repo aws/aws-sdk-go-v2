@@ -5,7 +5,9 @@ package accessanalyzer
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/accessanalyzer/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/accessanalyzer/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -74,6 +76,70 @@ type ValidatePolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ValidatePolicyInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ValidatePolicyRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ValidatePolicyInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Locale != "" {
+		s.WriteString(schemas.ValidatePolicyRequest_locale, string(v.Locale))
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ValidatePolicyRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ValidatePolicyRequest_nextToken, *v.NextToken)
+	}
+	if v.PolicyDocument != nil {
+		s.WriteString(schemas.ValidatePolicyRequest_policyDocument, *v.PolicyDocument)
+	}
+	if v.PolicyType != "" {
+		s.WriteString(schemas.ValidatePolicyRequest_policyType, string(v.PolicyType))
+	}
+	if v.ValidatePolicyResourceType != "" {
+		s.WriteString(schemas.ValidatePolicyRequest_validatePolicyResourceType, string(v.ValidatePolicyResourceType))
+	}
+}
+func (v *ValidatePolicyInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ValidatePolicyRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ValidatePolicyRequest_locale:
+			var ev string
+			if err := d.ReadString(schemas.ValidatePolicyRequest_locale, &ev); err != nil {
+				return err
+			}
+			v.Locale = types.Locale(ev)
+			return nil
+		case schemas.ValidatePolicyRequest_maxResults:
+			v.MaxResults = new(int32)
+			return d.ReadInt32(schemas.ValidatePolicyRequest_maxResults, v.MaxResults)
+		case schemas.ValidatePolicyRequest_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ValidatePolicyRequest_nextToken, v.NextToken)
+		case schemas.ValidatePolicyRequest_policyDocument:
+			v.PolicyDocument = new(string)
+			return d.ReadString(schemas.ValidatePolicyRequest_policyDocument, v.PolicyDocument)
+		case schemas.ValidatePolicyRequest_policyType:
+			var ev string
+			if err := d.ReadString(schemas.ValidatePolicyRequest_policyType, &ev); err != nil {
+				return err
+			}
+			v.PolicyType = types.PolicyType(ev)
+			return nil
+		case schemas.ValidatePolicyRequest_validatePolicyResourceType:
+			var ev string
+			if err := d.ReadString(schemas.ValidatePolicyRequest_validatePolicyResourceType, &ev); err != nil {
+				return err
+			}
+			v.ValidatePolicyResourceType = types.ValidatePolicyResourceType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 type ValidatePolicyOutput struct {
 
 	// The list of findings in a policy returned by IAM Access Analyzer based on its
@@ -91,13 +157,35 @@ type ValidatePolicyOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ValidatePolicyOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ValidatePolicyResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ValidatePolicyOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeValidatePolicyFindingList(s, schemas.ValidatePolicyResponse_findings, v.Findings)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ValidatePolicyResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ValidatePolicyOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ValidatePolicyResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ValidatePolicyResponse_findings:
+			return deserializeValidatePolicyFindingList(d, schemas.ValidatePolicyResponse_findings, &v.Findings)
+		case schemas.ValidatePolicyResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ValidatePolicyResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationValidatePolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpValidatePolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ValidatePolicy, schemas.ValidatePolicyRequest, schemas.ValidatePolicyResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpValidatePolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ValidatePolicy, schemas.ValidatePolicyRequest, schemas.ValidatePolicyResponse), output: &ValidatePolicyOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

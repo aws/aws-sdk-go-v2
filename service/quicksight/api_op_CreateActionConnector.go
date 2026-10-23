@@ -4,7 +4,9 @@ package quicksight
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/quicksight/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/quicksight/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -76,6 +78,40 @@ type CreateActionConnectorInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateActionConnectorInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateActionConnectorRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateActionConnectorInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ActionConnectorId != nil {
+		s.WriteString(schemas.CreateActionConnectorRequest_ActionConnectorId, *v.ActionConnectorId)
+	}
+	if v.AuthenticationConfig != nil {
+		s.WriteStruct(schemas.CreateActionConnectorRequest_AuthenticationConfig)
+		v.AuthenticationConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.AwsAccountId != nil {
+		s.WriteString(schemas.CreateActionConnectorRequest_AwsAccountId, *v.AwsAccountId)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreateActionConnectorRequest_Description, *v.Description)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateActionConnectorRequest_Name, *v.Name)
+	}
+	serializeResourcePermissionList(s, schemas.CreateActionConnectorRequest_Permissions, v.Permissions)
+	serializeTagList(s, schemas.CreateActionConnectorRequest_Tags, v.Tags)
+	if v.Type != "" {
+		s.WriteString(schemas.CreateActionConnectorRequest_Type, string(v.Type))
+	}
+	if v.VpcConnectionArn != nil {
+		s.WriteString(schemas.CreateActionConnectorRequest_VpcConnectionArn, *v.VpcConnectionArn)
+	}
+}
+
 type CreateActionConnectorOutput struct {
 
 	// The unique identifier of the created action connector.
@@ -99,13 +135,59 @@ type CreateActionConnectorOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateActionConnectorOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateActionConnectorResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateActionConnectorOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ActionConnectorId != nil {
+		s.WriteString(schemas.CreateActionConnectorResponse_ActionConnectorId, *v.ActionConnectorId)
+	}
+	if v.Arn != nil {
+		s.WriteString(schemas.CreateActionConnectorResponse_Arn, *v.Arn)
+	}
+	if v.CreationStatus != "" {
+		s.WriteString(schemas.CreateActionConnectorResponse_CreationStatus, string(v.CreationStatus))
+	}
+	if v.RequestId != nil {
+		s.WriteString(schemas.CreateActionConnectorResponse_RequestId, *v.RequestId)
+	}
+	if v.Status != 0 {
+		s.WriteInt32(schemas.CreateActionConnectorResponse_Status, v.Status)
+	}
+}
+func (v *CreateActionConnectorOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateActionConnectorResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateActionConnectorResponse_ActionConnectorId:
+			v.ActionConnectorId = new(string)
+			return d.ReadString(schemas.CreateActionConnectorResponse_ActionConnectorId, v.ActionConnectorId)
+		case schemas.CreateActionConnectorResponse_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.CreateActionConnectorResponse_Arn, v.Arn)
+		case schemas.CreateActionConnectorResponse_CreationStatus:
+			var ev string
+			if err := d.ReadString(schemas.CreateActionConnectorResponse_CreationStatus, &ev); err != nil {
+				return err
+			}
+			v.CreationStatus = types.ResourceStatus(ev)
+			return nil
+		case schemas.CreateActionConnectorResponse_RequestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.CreateActionConnectorResponse_RequestId, v.RequestId)
+		case schemas.CreateActionConnectorResponse_Status:
+			return d.ReadInt32(schemas.CreateActionConnectorResponse_Status, &v.Status)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateActionConnectorMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateActionConnector{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateActionConnector, schemas.CreateActionConnectorRequest, schemas.CreateActionConnectorResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateActionConnector{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateActionConnector, schemas.CreateActionConnectorRequest, schemas.CreateActionConnectorResponse), output: &CreateActionConnectorOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

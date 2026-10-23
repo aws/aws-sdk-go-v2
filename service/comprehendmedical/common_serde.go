@@ -232,6 +232,14 @@ func deserializeAttributeList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[
 	*v = make([]types.Attribute, 0)
 	var vv types.Attribute
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.Attribute
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = types.Attribute{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -246,6 +254,14 @@ func deserializeComprehendMedicalAsyncJobPropertiesList(d smithy.ShapeDeserializ
 	*v = make([]types.ComprehendMedicalAsyncJobProperties, 0)
 	var vv types.ComprehendMedicalAsyncJobProperties
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.ComprehendMedicalAsyncJobProperties
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = types.ComprehendMedicalAsyncJobProperties{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -260,6 +276,14 @@ func deserializeEntityList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]ty
 	*v = make([]types.Entity, 0)
 	var vv types.Entity
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.Entity
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = types.Entity{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -274,6 +298,14 @@ func deserializeICD10CMAttributeList(d smithy.ShapeDeserializer, s *smithy.Schem
 	*v = make([]types.ICD10CMAttribute, 0)
 	var vv types.ICD10CMAttribute
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.ICD10CMAttribute
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = types.ICD10CMAttribute{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -288,6 +320,14 @@ func deserializeICD10CMConceptList(d smithy.ShapeDeserializer, s *smithy.Schema,
 	*v = make([]types.ICD10CMConcept, 0)
 	var vv types.ICD10CMConcept
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.ICD10CMConcept
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = types.ICD10CMConcept{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -302,6 +342,14 @@ func deserializeICD10CMEntityList(d smithy.ShapeDeserializer, s *smithy.Schema, 
 	*v = make([]types.ICD10CMEntity, 0)
 	var vv types.ICD10CMEntity
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.ICD10CMEntity
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = types.ICD10CMEntity{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -316,6 +364,14 @@ func deserializeICD10CMTraitList(d smithy.ShapeDeserializer, s *smithy.Schema, v
 	*v = make([]types.ICD10CMTrait, 0)
 	var vv types.ICD10CMTrait
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.ICD10CMTrait
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = types.ICD10CMTrait{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -330,6 +386,14 @@ func deserializeRxNormAttributeList(d smithy.ShapeDeserializer, s *smithy.Schema
 	*v = make([]types.RxNormAttribute, 0)
 	var vv types.RxNormAttribute
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.RxNormAttribute
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = types.RxNormAttribute{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -344,6 +408,14 @@ func deserializeRxNormConceptList(d smithy.ShapeDeserializer, s *smithy.Schema, 
 	*v = make([]types.RxNormConcept, 0)
 	var vv types.RxNormConcept
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.RxNormConcept
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = types.RxNormConcept{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -358,6 +430,14 @@ func deserializeRxNormEntityList(d smithy.ShapeDeserializer, s *smithy.Schema, v
 	*v = make([]types.RxNormEntity, 0)
 	var vv types.RxNormEntity
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.RxNormEntity
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = types.RxNormEntity{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -372,6 +452,14 @@ func deserializeRxNormTraitList(d smithy.ShapeDeserializer, s *smithy.Schema, v 
 	*v = make([]types.RxNormTrait, 0)
 	var vv types.RxNormTrait
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.RxNormTrait
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = types.RxNormTrait{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -386,6 +474,14 @@ func deserializeSNOMEDCTAttributeList(d smithy.ShapeDeserializer, s *smithy.Sche
 	*v = make([]types.SNOMEDCTAttribute, 0)
 	var vv types.SNOMEDCTAttribute
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.SNOMEDCTAttribute
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = types.SNOMEDCTAttribute{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -400,6 +496,14 @@ func deserializeSNOMEDCTConceptList(d smithy.ShapeDeserializer, s *smithy.Schema
 	*v = make([]types.SNOMEDCTConcept, 0)
 	var vv types.SNOMEDCTConcept
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.SNOMEDCTConcept
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = types.SNOMEDCTConcept{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -414,6 +518,14 @@ func deserializeSNOMEDCTEntityList(d smithy.ShapeDeserializer, s *smithy.Schema,
 	*v = make([]types.SNOMEDCTEntity, 0)
 	var vv types.SNOMEDCTEntity
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.SNOMEDCTEntity
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = types.SNOMEDCTEntity{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -428,6 +540,14 @@ func deserializeSNOMEDCTTraitList(d smithy.ShapeDeserializer, s *smithy.Schema, 
 	*v = make([]types.SNOMEDCTTrait, 0)
 	var vv types.SNOMEDCTTrait
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.SNOMEDCTTrait
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = types.SNOMEDCTTrait{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -442,6 +562,14 @@ func deserializeTraitList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]typ
 	*v = make([]types.Trait, 0)
 	var vv types.Trait
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.Trait
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = types.Trait{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -456,6 +584,14 @@ func deserializeUnmappedAttributeList(d smithy.ShapeDeserializer, s *smithy.Sche
 	*v = make([]types.UnmappedAttribute, 0)
 	var vv types.UnmappedAttribute
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.UnmappedAttribute
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = types.UnmappedAttribute{}
 		if err := vv.Deserialize(d); err != nil {
 			return err

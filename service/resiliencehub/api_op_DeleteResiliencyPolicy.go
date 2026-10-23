@@ -5,6 +5,8 @@ package resiliencehub
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/resiliencehub/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -44,6 +46,34 @@ type DeleteResiliencyPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteResiliencyPolicyInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteResiliencyPolicyRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteResiliencyPolicyInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.DeleteResiliencyPolicyRequest_clientToken, *v.ClientToken)
+	}
+	if v.PolicyArn != nil {
+		s.WriteString(schemas.DeleteResiliencyPolicyRequest_policyArn, *v.PolicyArn)
+	}
+}
+func (v *DeleteResiliencyPolicyInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteResiliencyPolicyRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteResiliencyPolicyRequest_clientToken:
+			v.ClientToken = new(string)
+			return d.ReadString(schemas.DeleteResiliencyPolicyRequest_clientToken, v.ClientToken)
+		case schemas.DeleteResiliencyPolicyRequest_policyArn:
+			v.PolicyArn = new(string)
+			return d.ReadString(schemas.DeleteResiliencyPolicyRequest_policyArn, v.PolicyArn)
+		}
+		return nil
+	})
+}
+
 type DeleteResiliencyPolicyOutput struct {
 
 	// Amazon Resource Name (ARN) of the resiliency policy. The format for this ARN
@@ -62,13 +92,32 @@ type DeleteResiliencyPolicyOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteResiliencyPolicyOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteResiliencyPolicyResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteResiliencyPolicyOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PolicyArn != nil {
+		s.WriteString(schemas.DeleteResiliencyPolicyResponse_policyArn, *v.PolicyArn)
+	}
+}
+func (v *DeleteResiliencyPolicyOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteResiliencyPolicyResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteResiliencyPolicyResponse_policyArn:
+			v.PolicyArn = new(string)
+			return d.ReadString(schemas.DeleteResiliencyPolicyResponse_policyArn, v.PolicyArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteResiliencyPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteResiliencyPolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteResiliencyPolicy, schemas.DeleteResiliencyPolicyRequest, schemas.DeleteResiliencyPolicyResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteResiliencyPolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteResiliencyPolicy, schemas.DeleteResiliencyPolicyRequest, schemas.DeleteResiliencyPolicyResponse), output: &DeleteResiliencyPolicyOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

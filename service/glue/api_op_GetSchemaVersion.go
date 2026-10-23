@@ -4,7 +4,9 @@ package glue
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/glue/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/glue/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -48,6 +50,28 @@ type GetSchemaVersionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetSchemaVersionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetSchemaVersionInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetSchemaVersionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SchemaId != nil {
+		s.WriteStruct(schemas.GetSchemaVersionInput_SchemaId)
+		v.SchemaId.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SchemaVersionId != nil {
+		s.WriteString(schemas.GetSchemaVersionInput_SchemaVersionId, *v.SchemaVersionId)
+	}
+	if v.SchemaVersionNumber != nil {
+		s.WriteStruct(schemas.GetSchemaVersionInput_SchemaVersionNumber)
+		v.SchemaVersionNumber.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type GetSchemaVersionOutput struct {
 
 	// The date and time the schema version was created.
@@ -78,13 +102,76 @@ type GetSchemaVersionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetSchemaVersionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetSchemaVersionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetSchemaVersionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreatedTime != nil {
+		s.WriteString(schemas.GetSchemaVersionResponse_CreatedTime, *v.CreatedTime)
+	}
+	if v.DataFormat != "" {
+		s.WriteString(schemas.GetSchemaVersionResponse_DataFormat, string(v.DataFormat))
+	}
+	if v.SchemaArn != nil {
+		s.WriteString(schemas.GetSchemaVersionResponse_SchemaArn, *v.SchemaArn)
+	}
+	if v.SchemaDefinition != nil {
+		s.WriteString(schemas.GetSchemaVersionResponse_SchemaDefinition, *v.SchemaDefinition)
+	}
+	if v.SchemaVersionId != nil {
+		s.WriteString(schemas.GetSchemaVersionResponse_SchemaVersionId, *v.SchemaVersionId)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.GetSchemaVersionResponse_Status, string(v.Status))
+	}
+	if v.VersionNumber != nil {
+		s.WriteInt64(schemas.GetSchemaVersionResponse_VersionNumber, *v.VersionNumber)
+	}
+}
+func (v *GetSchemaVersionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetSchemaVersionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetSchemaVersionResponse_CreatedTime:
+			v.CreatedTime = new(string)
+			return d.ReadString(schemas.GetSchemaVersionResponse_CreatedTime, v.CreatedTime)
+		case schemas.GetSchemaVersionResponse_DataFormat:
+			var ev string
+			if err := d.ReadString(schemas.GetSchemaVersionResponse_DataFormat, &ev); err != nil {
+				return err
+			}
+			v.DataFormat = types.DataFormat(ev)
+			return nil
+		case schemas.GetSchemaVersionResponse_SchemaArn:
+			v.SchemaArn = new(string)
+			return d.ReadString(schemas.GetSchemaVersionResponse_SchemaArn, v.SchemaArn)
+		case schemas.GetSchemaVersionResponse_SchemaDefinition:
+			v.SchemaDefinition = new(string)
+			return d.ReadString(schemas.GetSchemaVersionResponse_SchemaDefinition, v.SchemaDefinition)
+		case schemas.GetSchemaVersionResponse_SchemaVersionId:
+			v.SchemaVersionId = new(string)
+			return d.ReadString(schemas.GetSchemaVersionResponse_SchemaVersionId, v.SchemaVersionId)
+		case schemas.GetSchemaVersionResponse_Status:
+			var ev string
+			if err := d.ReadString(schemas.GetSchemaVersionResponse_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.SchemaVersionStatus(ev)
+			return nil
+		case schemas.GetSchemaVersionResponse_VersionNumber:
+			v.VersionNumber = new(int64)
+			return d.ReadInt64(schemas.GetSchemaVersionResponse_VersionNumber, v.VersionNumber)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetSchemaVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetSchemaVersion{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetSchemaVersion, schemas.GetSchemaVersionInput, schemas.GetSchemaVersionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetSchemaVersion{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetSchemaVersion, schemas.GetSchemaVersionInput, schemas.GetSchemaVersionResponse), output: &GetSchemaVersionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

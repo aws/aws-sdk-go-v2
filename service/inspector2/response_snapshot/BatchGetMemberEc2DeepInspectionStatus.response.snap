@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"accountIds":[{"accountId":"__AccountId__","errorMessage":"__ErrorMessage__","status":"ACTIVATED"},{"accountId":"__AccountId__","errorMessage":"__ErrorMessage__","status":"ACTIVATED"}],"failedAccountIds":[{"accountId":"__AccountId__","ec2ScanStatus":"ENABLING","errorMessage":"__ErrorMessage__"},{"accountId":"__AccountId__","ec2ScanStatus":"ENABLING","errorMessage":"__ErrorMessage__"}]}

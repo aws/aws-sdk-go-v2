@@ -18096,6 +18096,30 @@
                     {
                         "value": "JAVA_25",
                         "name": "JAVA_25"
+                    },
+                    {
+                        "value": "PYTHON_3_12",
+                        "name": "PYTHON_3_12"
+                    },
+                    {
+                        "value": "PYTHON_3_13",
+                        "name": "PYTHON_3_13"
+                    },
+                    {
+                        "value": "PYTHON_3_14",
+                        "name": "PYTHON_3_14"
+                    },
+                    {
+                        "value": "RUBY_3_3",
+                        "name": "RUBY_3_3"
+                    },
+                    {
+                        "value": "DOTNET_8",
+                        "name": "DOTNET_8"
+                    },
+                    {
+                        "value": "NODEJS_20_X",
+                        "name": "NODEJS_20_X"
                     }
                 ]
             }
@@ -19205,6 +19229,24 @@
                     "target": "smithy.api#Long",
                     "traits": {
                         "smithy.api#documentation": "<p>The total count of critical severity findings.</p>"
+                    }
+                },
+                "low": {
+                    "target": "smithy.api#Long",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The total count of low severity findings.</p>"
+                    }
+                },
+                "informational": {
+                    "target": "smithy.api#Long",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The total count of informational severity findings.</p>"
+                    }
+                },
+                "untriaged": {
+                    "target": "smithy.api#Long",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The total count of untriaged findings.</p>"
                     }
                 }
             },
@@ -21798,7 +21840,7 @@
         "com.amazonaws.inspector2#Version": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "^\\$LATEST|[0-9]+$"
+                "smithy.api#pattern": "^(\\$LATEST|[0-9]+)$"
             }
         },
         "com.amazonaws.inspector2#Vm": {

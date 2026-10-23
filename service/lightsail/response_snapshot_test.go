@@ -1769,12 +1769,13 @@ func TestCheckResponseSnapshot_CreateDistribution(t *testing.T) {
 			BundleId:        ptr.String("__BundleId__"),
 			CertificateName: ptr.String("__CertificateName__"),
 			Origin: &types.Origin{
-				Name:            ptr.String("__Name__"),
-				ResourceType:    types.ResourceType("ContainerService"),
-				RegionName:      types.RegionName("us-east-1"),
-				ProtocolPolicy:  types.OriginProtocolPolicyEnum("http-only"),
-				ResponseTimeout: ptr.Int32(1),
-				IpAddressType:   types.OriginIpAddressTypeEnum("ipv4"),
+				Name:                         ptr.String("__Name__"),
+				ResourceType:                 types.ResourceType("ContainerService"),
+				RegionName:                   types.RegionName("us-east-1"),
+				ProtocolPolicy:               types.OriginProtocolPolicyEnum("http-only"),
+				ResponseTimeout:              ptr.Int32(1),
+				IpAddressType:                types.OriginIpAddressTypeEnum("ipv4"),
+				IsPrivateOriginAccessEnabled: ptr.Bool(true),
 			},
 			OriginPublicDNS: ptr.String("__OriginPublicDNS__"),
 			DefaultCacheBehavior: &types.CacheBehavior{
@@ -1831,6 +1832,21 @@ func TestCheckResponseSnapshot_CreateDistribution(t *testing.T) {
 				},
 			},
 			ViewerMinimumTlsProtocolVersion: ptr.String("__ViewerMinimumTlsProtocolVersion__"),
+			DefaultRootObject:               ptr.String("__DefaultRootObject__"),
+			CustomErrorResponses: []types.DistributionCustomErrorResponse{
+				{
+					ErrorCode:          ptr.Int32(1),
+					ResponseCode:       ptr.String("__ResponseCode__"),
+					ResponsePagePath:   ptr.String("__ResponsePagePath__"),
+					ErrorCachingMinTTL: ptr.Int64(1),
+				},
+				{
+					ErrorCode:          ptr.Int32(1),
+					ResponseCode:       ptr.String("__ResponseCode__"),
+					ResponsePagePath:   ptr.String("__ResponsePagePath__"),
+					ErrorCachingMinTTL: ptr.Int64(1),
+				},
+			},
 		},
 		Operation: &types.Operation{
 			Id:           ptr.String("__Id__"),
@@ -1922,6 +1938,22 @@ func TestCheckResponseSnapshot_CreateDistribution(t *testing.T) {
 		},
 		CertificateName:                 ptr.String("__CertificateName__"),
 		ViewerMinimumTlsProtocolVersion: types.ViewerMinimumTlsProtocolVersionEnum("TLSv1.1_2016"),
+		EnablePrivateOriginAccess:       ptr.Bool(true),
+		DefaultRootObject:               ptr.String("__DefaultRootObject__"),
+		CustomErrorResponses: []types.DistributionCustomErrorResponse{
+			{
+				ErrorCode:          ptr.Int32(1),
+				ResponseCode:       ptr.String("__ResponseCode__"),
+				ResponsePagePath:   ptr.String("__ResponsePagePath__"),
+				ErrorCachingMinTTL: ptr.Int64(1),
+			},
+			{
+				ErrorCode:          ptr.Int32(1),
+				ResponseCode:       ptr.String("__ResponseCode__"),
+				ResponsePagePath:   ptr.String("__ResponsePagePath__"),
+				ErrorCachingMinTTL: ptr.Int64(1),
+			},
+		},
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -6525,12 +6557,13 @@ func TestCheckResponseSnapshot_GetDistributions(t *testing.T) {
 				BundleId:        ptr.String("__BundleId__"),
 				CertificateName: ptr.String("__CertificateName__"),
 				Origin: &types.Origin{
-					Name:            ptr.String("__Name__"),
-					ResourceType:    types.ResourceType("ContainerService"),
-					RegionName:      types.RegionName("us-east-1"),
-					ProtocolPolicy:  types.OriginProtocolPolicyEnum("http-only"),
-					ResponseTimeout: ptr.Int32(1),
-					IpAddressType:   types.OriginIpAddressTypeEnum("ipv4"),
+					Name:                         ptr.String("__Name__"),
+					ResourceType:                 types.ResourceType("ContainerService"),
+					RegionName:                   types.RegionName("us-east-1"),
+					ProtocolPolicy:               types.OriginProtocolPolicyEnum("http-only"),
+					ResponseTimeout:              ptr.Int32(1),
+					IpAddressType:                types.OriginIpAddressTypeEnum("ipv4"),
+					IsPrivateOriginAccessEnabled: ptr.Bool(true),
 				},
 				OriginPublicDNS: ptr.String("__OriginPublicDNS__"),
 				DefaultCacheBehavior: &types.CacheBehavior{
@@ -6587,6 +6620,21 @@ func TestCheckResponseSnapshot_GetDistributions(t *testing.T) {
 					},
 				},
 				ViewerMinimumTlsProtocolVersion: ptr.String("__ViewerMinimumTlsProtocolVersion__"),
+				DefaultRootObject:               ptr.String("__DefaultRootObject__"),
+				CustomErrorResponses: []types.DistributionCustomErrorResponse{
+					{
+						ErrorCode:          ptr.Int32(1),
+						ResponseCode:       ptr.String("__ResponseCode__"),
+						ResponsePagePath:   ptr.String("__ResponsePagePath__"),
+						ErrorCachingMinTTL: ptr.Int64(1),
+					},
+					{
+						ErrorCode:          ptr.Int32(1),
+						ResponseCode:       ptr.String("__ResponseCode__"),
+						ResponsePagePath:   ptr.String("__ResponsePagePath__"),
+						ErrorCachingMinTTL: ptr.Int64(1),
+					},
+				},
 			},
 			{
 				Name:        ptr.String("__Name__"),
@@ -6608,12 +6656,13 @@ func TestCheckResponseSnapshot_GetDistributions(t *testing.T) {
 				BundleId:        ptr.String("__BundleId__"),
 				CertificateName: ptr.String("__CertificateName__"),
 				Origin: &types.Origin{
-					Name:            ptr.String("__Name__"),
-					ResourceType:    types.ResourceType("ContainerService"),
-					RegionName:      types.RegionName("us-east-1"),
-					ProtocolPolicy:  types.OriginProtocolPolicyEnum("http-only"),
-					ResponseTimeout: ptr.Int32(1),
-					IpAddressType:   types.OriginIpAddressTypeEnum("ipv4"),
+					Name:                         ptr.String("__Name__"),
+					ResourceType:                 types.ResourceType("ContainerService"),
+					RegionName:                   types.RegionName("us-east-1"),
+					ProtocolPolicy:               types.OriginProtocolPolicyEnum("http-only"),
+					ResponseTimeout:              ptr.Int32(1),
+					IpAddressType:                types.OriginIpAddressTypeEnum("ipv4"),
+					IsPrivateOriginAccessEnabled: ptr.Bool(true),
 				},
 				OriginPublicDNS: ptr.String("__OriginPublicDNS__"),
 				DefaultCacheBehavior: &types.CacheBehavior{
@@ -6670,6 +6719,21 @@ func TestCheckResponseSnapshot_GetDistributions(t *testing.T) {
 					},
 				},
 				ViewerMinimumTlsProtocolVersion: ptr.String("__ViewerMinimumTlsProtocolVersion__"),
+				DefaultRootObject:               ptr.String("__DefaultRootObject__"),
+				CustomErrorResponses: []types.DistributionCustomErrorResponse{
+					{
+						ErrorCode:          ptr.Int32(1),
+						ResponseCode:       ptr.String("__ResponseCode__"),
+						ResponsePagePath:   ptr.String("__ResponsePagePath__"),
+						ErrorCachingMinTTL: ptr.Int64(1),
+					},
+					{
+						ErrorCode:          ptr.Int32(1),
+						ResponseCode:       ptr.String("__ResponseCode__"),
+						ResponsePagePath:   ptr.String("__ResponsePagePath__"),
+						ErrorCachingMinTTL: ptr.Int64(1),
+					},
+				},
 			},
 		},
 		NextPageToken: ptr.String("__NextPageToken__"),
@@ -11982,6 +12046,22 @@ func TestCheckResponseSnapshot_UpdateDistribution(t *testing.T) {
 		ViewerMinimumTlsProtocolVersion: types.ViewerMinimumTlsProtocolVersionEnum("TLSv1.1_2016"),
 		CertificateName:                 ptr.String("__CertificateName__"),
 		UseDefaultCertificate:           ptr.Bool(true),
+		EnablePrivateOriginAccess:       ptr.Bool(true),
+		DefaultRootObject:               ptr.String("__DefaultRootObject__"),
+		CustomErrorResponses: []types.DistributionCustomErrorResponse{
+			{
+				ErrorCode:          ptr.Int32(1),
+				ResponseCode:       ptr.String("__ResponseCode__"),
+				ResponsePagePath:   ptr.String("__ResponsePagePath__"),
+				ErrorCachingMinTTL: ptr.Int64(1),
+			},
+			{
+				ErrorCode:          ptr.Int32(1),
+				ResponseCode:       ptr.String("__ResponseCode__"),
+				ResponsePagePath:   ptr.String("__ResponsePagePath__"),
+				ErrorCachingMinTTL: ptr.Int64(1),
+			},
+		},
 	})
 	if err != nil {
 		t.Fatal(err)

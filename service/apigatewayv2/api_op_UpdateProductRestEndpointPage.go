@@ -4,7 +4,9 @@ package apigatewayv2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/apigatewayv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/apigatewayv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -47,6 +49,29 @@ type UpdateProductRestEndpointPageInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateProductRestEndpointPageInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateProductRestEndpointPageRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateProductRestEndpointPageInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DisplayContent != nil {
+		s.WriteStruct(schemas.UpdateProductRestEndpointPageRequest_DisplayContent)
+		v.DisplayContent.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.PortalProductId != nil {
+		s.WriteString(schemas.UpdateProductRestEndpointPageRequest_PortalProductId, *v.PortalProductId)
+	}
+	if v.ProductRestEndpointPageId != nil {
+		s.WriteString(schemas.UpdateProductRestEndpointPageRequest_ProductRestEndpointPageId, *v.ProductRestEndpointPageId)
+	}
+	if v.TryItState != "" {
+		s.WriteString(schemas.UpdateProductRestEndpointPageRequest_TryItState, string(v.TryItState))
+	}
+}
+
 type UpdateProductRestEndpointPageOutput struct {
 
 	// The content of the product REST endpoint page.
@@ -79,13 +104,88 @@ type UpdateProductRestEndpointPageOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateProductRestEndpointPageOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateProductRestEndpointPageResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateProductRestEndpointPageOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DisplayContent != nil {
+		s.WriteStruct(schemas.UpdateProductRestEndpointPageResponse_DisplayContent)
+		v.DisplayContent.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.LastModified != nil {
+		s.WriteTime(schemas.UpdateProductRestEndpointPageResponse_LastModified, *v.LastModified)
+	}
+	if v.ProductRestEndpointPageArn != nil {
+		s.WriteString(schemas.UpdateProductRestEndpointPageResponse_ProductRestEndpointPageArn, *v.ProductRestEndpointPageArn)
+	}
+	if v.ProductRestEndpointPageId != nil {
+		s.WriteString(schemas.UpdateProductRestEndpointPageResponse_ProductRestEndpointPageId, *v.ProductRestEndpointPageId)
+	}
+	if v.RestEndpointIdentifier != nil {
+		s.WriteStruct(schemas.UpdateProductRestEndpointPageResponse_RestEndpointIdentifier)
+		v.RestEndpointIdentifier.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.UpdateProductRestEndpointPageResponse_Status, string(v.Status))
+	}
+	if v.StatusException != nil {
+		s.WriteStruct(schemas.UpdateProductRestEndpointPageResponse_StatusException)
+		v.StatusException.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TryItState != "" {
+		s.WriteString(schemas.UpdateProductRestEndpointPageResponse_TryItState, string(v.TryItState))
+	}
+}
+func (v *UpdateProductRestEndpointPageOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateProductRestEndpointPageResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateProductRestEndpointPageResponse_DisplayContent:
+			v.DisplayContent = &types.EndpointDisplayContentResponse{}
+			return v.DisplayContent.Deserialize(d)
+		case schemas.UpdateProductRestEndpointPageResponse_LastModified:
+			v.LastModified = new(time.Time)
+			return d.ReadTime(schemas.UpdateProductRestEndpointPageResponse_LastModified, v.LastModified)
+		case schemas.UpdateProductRestEndpointPageResponse_ProductRestEndpointPageArn:
+			v.ProductRestEndpointPageArn = new(string)
+			return d.ReadString(schemas.UpdateProductRestEndpointPageResponse_ProductRestEndpointPageArn, v.ProductRestEndpointPageArn)
+		case schemas.UpdateProductRestEndpointPageResponse_ProductRestEndpointPageId:
+			v.ProductRestEndpointPageId = new(string)
+			return d.ReadString(schemas.UpdateProductRestEndpointPageResponse_ProductRestEndpointPageId, v.ProductRestEndpointPageId)
+		case schemas.UpdateProductRestEndpointPageResponse_RestEndpointIdentifier:
+			v.RestEndpointIdentifier = &types.RestEndpointIdentifier{}
+			return v.RestEndpointIdentifier.Deserialize(d)
+		case schemas.UpdateProductRestEndpointPageResponse_Status:
+			var ev string
+			if err := d.ReadString(schemas.UpdateProductRestEndpointPageResponse_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.Status(ev)
+			return nil
+		case schemas.UpdateProductRestEndpointPageResponse_StatusException:
+			v.StatusException = &types.StatusException{}
+			return v.StatusException.Deserialize(d)
+		case schemas.UpdateProductRestEndpointPageResponse_TryItState:
+			var ev string
+			if err := d.ReadString(schemas.UpdateProductRestEndpointPageResponse_TryItState, &ev); err != nil {
+				return err
+			}
+			v.TryItState = types.TryItState(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateProductRestEndpointPageMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateProductRestEndpointPage{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateProductRestEndpointPage, schemas.UpdateProductRestEndpointPageRequest, schemas.UpdateProductRestEndpointPageResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateProductRestEndpointPage{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateProductRestEndpointPage, schemas.UpdateProductRestEndpointPageRequest, schemas.UpdateProductRestEndpointPageResponse), output: &UpdateProductRestEndpointPageOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

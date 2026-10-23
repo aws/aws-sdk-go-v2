@@ -4,7 +4,9 @@ package applicationinsights
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/applicationinsights/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/applicationinsights/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -48,6 +50,29 @@ type UpdateWorkloadInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateWorkloadInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateWorkloadRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateWorkloadInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ComponentName != nil {
+		s.WriteString(schemas.UpdateWorkloadRequest_ComponentName, *v.ComponentName)
+	}
+	if v.ResourceGroupName != nil {
+		s.WriteString(schemas.UpdateWorkloadRequest_ResourceGroupName, *v.ResourceGroupName)
+	}
+	if v.WorkloadConfiguration != nil {
+		s.WriteStruct(schemas.UpdateWorkloadRequest_WorkloadConfiguration)
+		v.WorkloadConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.WorkloadId != nil {
+		s.WriteString(schemas.UpdateWorkloadRequest_WorkloadId, *v.WorkloadId)
+	}
+}
+
 type UpdateWorkloadOutput struct {
 
 	// The configuration settings of the workload. The value is the escaped JSON of
@@ -63,13 +88,40 @@ type UpdateWorkloadOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateWorkloadOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateWorkloadResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateWorkloadOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.WorkloadConfiguration != nil {
+		s.WriteStruct(schemas.UpdateWorkloadResponse_WorkloadConfiguration)
+		v.WorkloadConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.WorkloadId != nil {
+		s.WriteString(schemas.UpdateWorkloadResponse_WorkloadId, *v.WorkloadId)
+	}
+}
+func (v *UpdateWorkloadOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateWorkloadResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateWorkloadResponse_WorkloadConfiguration:
+			v.WorkloadConfiguration = &types.WorkloadConfiguration{}
+			return v.WorkloadConfiguration.Deserialize(d)
+		case schemas.UpdateWorkloadResponse_WorkloadId:
+			v.WorkloadId = new(string)
+			return d.ReadString(schemas.UpdateWorkloadResponse_WorkloadId, v.WorkloadId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateWorkloadMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpUpdateWorkload{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateWorkload, schemas.UpdateWorkloadRequest, schemas.UpdateWorkloadResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpUpdateWorkload{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateWorkload, schemas.UpdateWorkloadRequest, schemas.UpdateWorkloadResponse), output: &UpdateWorkloadOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

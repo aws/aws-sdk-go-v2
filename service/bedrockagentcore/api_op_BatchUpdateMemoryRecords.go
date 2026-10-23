@@ -4,7 +4,9 @@ package bedrockagentcore
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcore/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcore/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -37,7 +39,40 @@ type BatchUpdateMemoryRecordsInput struct {
 	// This member is required.
 	Records []types.MemoryRecordUpdateInput
 
+	// The record expiry (long-term memory time-to-live) applied to every record
+	// updated by this request. Set recordExpiryDurationDays to configure or overwrite
+	// the number of days after which the records expire, or set action to REMOVE to
+	// clear a previously configured expiry so that the records no longer expire.
+	//
+	// When you do not provide this value, the service determines each record's expiry
+	// from its current state:
+	//
+	//   - If the record already has an expiry configured, the service resets and
+	//   reapplies the expiry based on the last applied recordExpiryDurationDays .
+	//
+	//   - If the record does not have an expiry configured, no expiry is applied and
+	//   the record remains non-expiring. This is the outcome regardless of whether the
+	//   record's strategy configures an expiry.
+	//
+	// Providing an explicit recordExpiryDurationDays always takes precedence: it
+	// overwrites an existing expiry, or sets one on a record that previously had none.
+	RecordExpirySpecification types.RecordExpirySpecification
+
 	noSmithyDocumentSerde
+}
+
+func (v *BatchUpdateMemoryRecordsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchUpdateMemoryRecordsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchUpdateMemoryRecordsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MemoryId != nil {
+		s.WriteString(schemas.BatchUpdateMemoryRecordsInput_memoryId, *v.MemoryId)
+	}
+	serializeRecordExpirySpecification(s, schemas.BatchUpdateMemoryRecordsInput_recordExpirySpecification, v.RecordExpirySpecification)
+	serializeMemoryRecordsUpdateInputList(s, schemas.BatchUpdateMemoryRecordsInput_records, v.Records)
 }
 
 type BatchUpdateMemoryRecordsOutput struct {
@@ -60,13 +95,32 @@ type BatchUpdateMemoryRecordsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchUpdateMemoryRecordsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchUpdateMemoryRecordsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchUpdateMemoryRecordsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeMemoryRecordsOutputList(s, schemas.BatchUpdateMemoryRecordsOutput_failedRecords, v.FailedRecords)
+	serializeMemoryRecordsOutputList(s, schemas.BatchUpdateMemoryRecordsOutput_successfulRecords, v.SuccessfulRecords)
+}
+func (v *BatchUpdateMemoryRecordsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchUpdateMemoryRecordsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchUpdateMemoryRecordsOutput_failedRecords:
+			return deserializeMemoryRecordsOutputList(d, schemas.BatchUpdateMemoryRecordsOutput_failedRecords, &v.FailedRecords)
+		case schemas.BatchUpdateMemoryRecordsOutput_successfulRecords:
+			return deserializeMemoryRecordsOutputList(d, schemas.BatchUpdateMemoryRecordsOutput_successfulRecords, &v.SuccessfulRecords)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationBatchUpdateMemoryRecordsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpBatchUpdateMemoryRecords{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchUpdateMemoryRecords, schemas.BatchUpdateMemoryRecordsInput, schemas.BatchUpdateMemoryRecordsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpBatchUpdateMemoryRecords{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchUpdateMemoryRecords, schemas.BatchUpdateMemoryRecordsInput, schemas.BatchUpdateMemoryRecordsOutput), output: &BatchUpdateMemoryRecordsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

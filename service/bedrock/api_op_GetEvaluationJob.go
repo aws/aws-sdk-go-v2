@@ -4,7 +4,9 @@ package bedrock
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/bedrock/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrock/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -34,6 +36,18 @@ type GetEvaluationJobInput struct {
 	JobIdentifier *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetEvaluationJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetEvaluationJobRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetEvaluationJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.JobIdentifier != nil {
+		s.WriteString(schemas.GetEvaluationJobRequest_jobIdentifier, *v.JobIdentifier)
+	}
 }
 
 type GetEvaluationJobOutput struct {
@@ -110,13 +124,115 @@ type GetEvaluationJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetEvaluationJobOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetEvaluationJobResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetEvaluationJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationType != "" {
+		s.WriteString(schemas.GetEvaluationJobResponse_applicationType, string(v.ApplicationType))
+	}
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.GetEvaluationJobResponse_creationTime, *v.CreationTime)
+	}
+	if v.CustomerEncryptionKeyId != nil {
+		s.WriteString(schemas.GetEvaluationJobResponse_customerEncryptionKeyId, *v.CustomerEncryptionKeyId)
+	}
+	serializeEvaluationConfig(s, schemas.GetEvaluationJobResponse_evaluationConfig, v.EvaluationConfig)
+	serializeErrorMessages(s, schemas.GetEvaluationJobResponse_failureMessages, v.FailureMessages)
+	serializeEvaluationInferenceConfig(s, schemas.GetEvaluationJobResponse_inferenceConfig, v.InferenceConfig)
+	if v.JobArn != nil {
+		s.WriteString(schemas.GetEvaluationJobResponse_jobArn, *v.JobArn)
+	}
+	if v.JobDescription != nil {
+		s.WriteString(schemas.GetEvaluationJobResponse_jobDescription, *v.JobDescription)
+	}
+	if v.JobName != nil {
+		s.WriteString(schemas.GetEvaluationJobResponse_jobName, *v.JobName)
+	}
+	if v.JobType != "" {
+		s.WriteString(schemas.GetEvaluationJobResponse_jobType, string(v.JobType))
+	}
+	if v.LastModifiedTime != nil {
+		s.WriteTime(schemas.GetEvaluationJobResponse_lastModifiedTime, *v.LastModifiedTime)
+	}
+	if v.OutputDataConfig != nil {
+		s.WriteStruct(schemas.GetEvaluationJobResponse_outputDataConfig)
+		v.OutputDataConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RoleArn != nil {
+		s.WriteString(schemas.GetEvaluationJobResponse_roleArn, *v.RoleArn)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.GetEvaluationJobResponse_status, string(v.Status))
+	}
+}
+func (v *GetEvaluationJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetEvaluationJobResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetEvaluationJobResponse_applicationType:
+			var ev string
+			if err := d.ReadString(schemas.GetEvaluationJobResponse_applicationType, &ev); err != nil {
+				return err
+			}
+			v.ApplicationType = types.ApplicationType(ev)
+			return nil
+		case schemas.GetEvaluationJobResponse_creationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.GetEvaluationJobResponse_creationTime, v.CreationTime)
+		case schemas.GetEvaluationJobResponse_customerEncryptionKeyId:
+			v.CustomerEncryptionKeyId = new(string)
+			return d.ReadString(schemas.GetEvaluationJobResponse_customerEncryptionKeyId, v.CustomerEncryptionKeyId)
+		case schemas.GetEvaluationJobResponse_evaluationConfig:
+			return deserializeEvaluationConfig(d, schemas.GetEvaluationJobResponse_evaluationConfig, &v.EvaluationConfig)
+		case schemas.GetEvaluationJobResponse_failureMessages:
+			return deserializeErrorMessages(d, schemas.GetEvaluationJobResponse_failureMessages, &v.FailureMessages)
+		case schemas.GetEvaluationJobResponse_inferenceConfig:
+			return deserializeEvaluationInferenceConfig(d, schemas.GetEvaluationJobResponse_inferenceConfig, &v.InferenceConfig)
+		case schemas.GetEvaluationJobResponse_jobArn:
+			v.JobArn = new(string)
+			return d.ReadString(schemas.GetEvaluationJobResponse_jobArn, v.JobArn)
+		case schemas.GetEvaluationJobResponse_jobDescription:
+			v.JobDescription = new(string)
+			return d.ReadString(schemas.GetEvaluationJobResponse_jobDescription, v.JobDescription)
+		case schemas.GetEvaluationJobResponse_jobName:
+			v.JobName = new(string)
+			return d.ReadString(schemas.GetEvaluationJobResponse_jobName, v.JobName)
+		case schemas.GetEvaluationJobResponse_jobType:
+			var ev string
+			if err := d.ReadString(schemas.GetEvaluationJobResponse_jobType, &ev); err != nil {
+				return err
+			}
+			v.JobType = types.EvaluationJobType(ev)
+			return nil
+		case schemas.GetEvaluationJobResponse_lastModifiedTime:
+			v.LastModifiedTime = new(time.Time)
+			return d.ReadTime(schemas.GetEvaluationJobResponse_lastModifiedTime, v.LastModifiedTime)
+		case schemas.GetEvaluationJobResponse_outputDataConfig:
+			v.OutputDataConfig = &types.EvaluationOutputDataConfig{}
+			return v.OutputDataConfig.Deserialize(d)
+		case schemas.GetEvaluationJobResponse_roleArn:
+			v.RoleArn = new(string)
+			return d.ReadString(schemas.GetEvaluationJobResponse_roleArn, v.RoleArn)
+		case schemas.GetEvaluationJobResponse_status:
+			var ev string
+			if err := d.ReadString(schemas.GetEvaluationJobResponse_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.EvaluationJobStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetEvaluationJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetEvaluationJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetEvaluationJob, schemas.GetEvaluationJobRequest, schemas.GetEvaluationJobResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetEvaluationJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetEvaluationJob, schemas.GetEvaluationJobRequest, schemas.GetEvaluationJobResponse), output: &GetEvaluationJobOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

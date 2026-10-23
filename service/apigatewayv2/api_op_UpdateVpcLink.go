@@ -4,7 +4,9 @@ package apigatewayv2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/apigatewayv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/apigatewayv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -37,6 +39,21 @@ type UpdateVpcLinkInput struct {
 	Name *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *UpdateVpcLinkInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateVpcLinkRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateVpcLinkInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateVpcLinkRequest_Name, *v.Name)
+	}
+	if v.VpcLinkId != nil {
+		s.WriteString(schemas.UpdateVpcLinkRequest_VpcLinkId, *v.VpcLinkId)
+	}
 }
 
 type UpdateVpcLinkOutput struct {
@@ -74,13 +91,79 @@ type UpdateVpcLinkOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateVpcLinkOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateVpcLinkResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateVpcLinkOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreatedDate != nil {
+		s.WriteTime(schemas.UpdateVpcLinkResponse_CreatedDate, *v.CreatedDate)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateVpcLinkResponse_Name, *v.Name)
+	}
+	serializeSecurityGroupIdList(s, schemas.UpdateVpcLinkResponse_SecurityGroupIds, v.SecurityGroupIds)
+	serializeSubnetIdList(s, schemas.UpdateVpcLinkResponse_SubnetIds, v.SubnetIds)
+	serializeTags(s, schemas.UpdateVpcLinkResponse_Tags, v.Tags)
+	if v.VpcLinkId != nil {
+		s.WriteString(schemas.UpdateVpcLinkResponse_VpcLinkId, *v.VpcLinkId)
+	}
+	if v.VpcLinkStatus != "" {
+		s.WriteString(schemas.UpdateVpcLinkResponse_VpcLinkStatus, string(v.VpcLinkStatus))
+	}
+	if v.VpcLinkStatusMessage != nil {
+		s.WriteString(schemas.UpdateVpcLinkResponse_VpcLinkStatusMessage, *v.VpcLinkStatusMessage)
+	}
+	if v.VpcLinkVersion != "" {
+		s.WriteString(schemas.UpdateVpcLinkResponse_VpcLinkVersion, string(v.VpcLinkVersion))
+	}
+}
+func (v *UpdateVpcLinkOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateVpcLinkResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateVpcLinkResponse_CreatedDate:
+			v.CreatedDate = new(time.Time)
+			return d.ReadTime(schemas.UpdateVpcLinkResponse_CreatedDate, v.CreatedDate)
+		case schemas.UpdateVpcLinkResponse_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.UpdateVpcLinkResponse_Name, v.Name)
+		case schemas.UpdateVpcLinkResponse_SecurityGroupIds:
+			return deserializeSecurityGroupIdList(d, schemas.UpdateVpcLinkResponse_SecurityGroupIds, &v.SecurityGroupIds)
+		case schemas.UpdateVpcLinkResponse_SubnetIds:
+			return deserializeSubnetIdList(d, schemas.UpdateVpcLinkResponse_SubnetIds, &v.SubnetIds)
+		case schemas.UpdateVpcLinkResponse_Tags:
+			return deserializeTags(d, schemas.UpdateVpcLinkResponse_Tags, &v.Tags)
+		case schemas.UpdateVpcLinkResponse_VpcLinkId:
+			v.VpcLinkId = new(string)
+			return d.ReadString(schemas.UpdateVpcLinkResponse_VpcLinkId, v.VpcLinkId)
+		case schemas.UpdateVpcLinkResponse_VpcLinkStatus:
+			var ev string
+			if err := d.ReadString(schemas.UpdateVpcLinkResponse_VpcLinkStatus, &ev); err != nil {
+				return err
+			}
+			v.VpcLinkStatus = types.VpcLinkStatus(ev)
+			return nil
+		case schemas.UpdateVpcLinkResponse_VpcLinkStatusMessage:
+			v.VpcLinkStatusMessage = new(string)
+			return d.ReadString(schemas.UpdateVpcLinkResponse_VpcLinkStatusMessage, v.VpcLinkStatusMessage)
+		case schemas.UpdateVpcLinkResponse_VpcLinkVersion:
+			var ev string
+			if err := d.ReadString(schemas.UpdateVpcLinkResponse_VpcLinkVersion, &ev); err != nil {
+				return err
+			}
+			v.VpcLinkVersion = types.VpcLinkVersion(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateVpcLinkMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateVpcLink{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateVpcLink, schemas.UpdateVpcLinkRequest, schemas.UpdateVpcLinkResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateVpcLink{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateVpcLink, schemas.UpdateVpcLinkRequest, schemas.UpdateVpcLinkResponse), output: &UpdateVpcLinkOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

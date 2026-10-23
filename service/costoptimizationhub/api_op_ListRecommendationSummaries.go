@@ -5,7 +5,9 @@ package costoptimizationhub
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/costoptimizationhub/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/costoptimizationhub/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -53,6 +55,30 @@ type ListRecommendationSummariesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListRecommendationSummariesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListRecommendationSummariesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListRecommendationSummariesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Filter != nil {
+		s.WriteStruct(schemas.ListRecommendationSummariesRequest_filter)
+		v.Filter.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.GroupBy != nil {
+		s.WriteString(schemas.ListRecommendationSummariesRequest_groupBy, *v.GroupBy)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListRecommendationSummariesRequest_maxResults, *v.MaxResults)
+	}
+	serializeSummaryMetricsList(s, schemas.ListRecommendationSummariesRequest_metrics, v.Metrics)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListRecommendationSummariesRequest_nextToken, *v.NextToken)
+	}
+}
+
 type ListRecommendationSummariesOutput struct {
 
 	// The currency code used for the recommendation.
@@ -80,13 +106,61 @@ type ListRecommendationSummariesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListRecommendationSummariesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListRecommendationSummariesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListRecommendationSummariesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CurrencyCode != nil {
+		s.WriteString(schemas.ListRecommendationSummariesResponse_currencyCode, *v.CurrencyCode)
+	}
+	if v.EstimatedTotalDedupedSavings != nil {
+		s.WriteFloat64(schemas.ListRecommendationSummariesResponse_estimatedTotalDedupedSavings, *v.EstimatedTotalDedupedSavings)
+	}
+	if v.GroupBy != nil {
+		s.WriteString(schemas.ListRecommendationSummariesResponse_groupBy, *v.GroupBy)
+	}
+	serializeRecommendationSummariesList(s, schemas.ListRecommendationSummariesResponse_items, v.Items)
+	if v.Metrics != nil {
+		s.WriteStruct(schemas.ListRecommendationSummariesResponse_metrics)
+		v.Metrics.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListRecommendationSummariesResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListRecommendationSummariesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListRecommendationSummariesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListRecommendationSummariesResponse_currencyCode:
+			v.CurrencyCode = new(string)
+			return d.ReadString(schemas.ListRecommendationSummariesResponse_currencyCode, v.CurrencyCode)
+		case schemas.ListRecommendationSummariesResponse_estimatedTotalDedupedSavings:
+			v.EstimatedTotalDedupedSavings = new(float64)
+			return d.ReadFloat64(schemas.ListRecommendationSummariesResponse_estimatedTotalDedupedSavings, v.EstimatedTotalDedupedSavings)
+		case schemas.ListRecommendationSummariesResponse_groupBy:
+			v.GroupBy = new(string)
+			return d.ReadString(schemas.ListRecommendationSummariesResponse_groupBy, v.GroupBy)
+		case schemas.ListRecommendationSummariesResponse_items:
+			return deserializeRecommendationSummariesList(d, schemas.ListRecommendationSummariesResponse_items, &v.Items)
+		case schemas.ListRecommendationSummariesResponse_metrics:
+			v.Metrics = &types.SummaryMetricsResult{}
+			return v.Metrics.Deserialize(d)
+		case schemas.ListRecommendationSummariesResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListRecommendationSummariesResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListRecommendationSummariesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpListRecommendationSummaries{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListRecommendationSummaries, schemas.ListRecommendationSummariesRequest, schemas.ListRecommendationSummariesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpListRecommendationSummaries{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListRecommendationSummaries, schemas.ListRecommendationSummariesRequest, schemas.ListRecommendationSummariesResponse), output: &ListRecommendationSummariesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

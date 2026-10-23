@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"Arn":"__Arn__","AutoCreateTasks":true,"Name":"__Name__","Update":{"LoRaWAN":{"CurrentVersion":{"Model":"__Model__","PackageVersion":"__PackageVersion__","Station":"__Station__"},"SigKeyCrc":1,"UpdateSignature":"__UpdateSignature__","UpdateVersion":{"Model":"__Model__","PackageVersion":"__PackageVersion__","Station":"__Station__"}},"UpdateDataRole":"__UpdateDataRole__","UpdateDataSource":"__UpdateDataSource__"}}

@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	internalEndpointDiscovery "github.com/aws/aws-sdk-go-v2/service/internal/endpoint-discovery"
+	"github.com/aws/aws-sdk-go-v2/service/timestreamwrite/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/timestreamwrite/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -40,6 +42,18 @@ type DescribeBatchLoadTaskInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeBatchLoadTaskInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeBatchLoadTaskRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeBatchLoadTaskInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TaskId != nil {
+		s.WriteString(schemas.DescribeBatchLoadTaskRequest_TaskId, *v.TaskId)
+	}
+}
+
 type DescribeBatchLoadTaskOutput struct {
 
 	// Description of the batch load task.
@@ -53,13 +67,34 @@ type DescribeBatchLoadTaskOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeBatchLoadTaskOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeBatchLoadTaskResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeBatchLoadTaskOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BatchLoadTaskDescription != nil {
+		s.WriteStruct(schemas.DescribeBatchLoadTaskResponse_BatchLoadTaskDescription)
+		v.BatchLoadTaskDescription.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DescribeBatchLoadTaskOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeBatchLoadTaskResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeBatchLoadTaskResponse_BatchLoadTaskDescription:
+			v.BatchLoadTaskDescription = &types.BatchLoadTaskDescription{}
+			return v.BatchLoadTaskDescription.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeBatchLoadTaskMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpDescribeBatchLoadTask{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeBatchLoadTask, schemas.DescribeBatchLoadTaskRequest, schemas.DescribeBatchLoadTaskResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpDescribeBatchLoadTask{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeBatchLoadTask, schemas.DescribeBatchLoadTaskRequest, schemas.DescribeBatchLoadTaskResponse), output: &DescribeBatchLoadTaskOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

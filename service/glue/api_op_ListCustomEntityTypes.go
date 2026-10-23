@@ -5,7 +5,9 @@ package glue
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/glue/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/glue/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,22 @@ type ListCustomEntityTypesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListCustomEntityTypesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListCustomEntityTypesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListCustomEntityTypesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListCustomEntityTypesRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListCustomEntityTypesRequest_NextToken, *v.NextToken)
+	}
+	serializeTagsMap(s, schemas.ListCustomEntityTypesRequest_Tags, v.Tags)
+}
+
 type ListCustomEntityTypesOutput struct {
 
 	// A list of CustomEntityType objects representing custom patterns.
@@ -53,13 +71,35 @@ type ListCustomEntityTypesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListCustomEntityTypesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListCustomEntityTypesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListCustomEntityTypesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeCustomEntityTypes(s, schemas.ListCustomEntityTypesResponse_CustomEntityTypes, v.CustomEntityTypes)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListCustomEntityTypesResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListCustomEntityTypesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListCustomEntityTypesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListCustomEntityTypesResponse_CustomEntityTypes:
+			return deserializeCustomEntityTypes(d, schemas.ListCustomEntityTypesResponse_CustomEntityTypes, &v.CustomEntityTypes)
+		case schemas.ListCustomEntityTypesResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListCustomEntityTypesResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListCustomEntityTypesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListCustomEntityTypes{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListCustomEntityTypes, schemas.ListCustomEntityTypesRequest, schemas.ListCustomEntityTypesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListCustomEntityTypes{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListCustomEntityTypes, schemas.ListCustomEntityTypesRequest, schemas.ListCustomEntityTypesResponse), output: &ListCustomEntityTypesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -5,7 +5,9 @@ package resiliencehub
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/resiliencehub/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/resiliencehub/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -41,6 +43,34 @@ type DeleteRecommendationTemplateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteRecommendationTemplateInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteRecommendationTemplateRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteRecommendationTemplateInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.DeleteRecommendationTemplateRequest_clientToken, *v.ClientToken)
+	}
+	if v.RecommendationTemplateArn != nil {
+		s.WriteString(schemas.DeleteRecommendationTemplateRequest_recommendationTemplateArn, *v.RecommendationTemplateArn)
+	}
+}
+func (v *DeleteRecommendationTemplateInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteRecommendationTemplateRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteRecommendationTemplateRequest_clientToken:
+			v.ClientToken = new(string)
+			return d.ReadString(schemas.DeleteRecommendationTemplateRequest_clientToken, v.ClientToken)
+		case schemas.DeleteRecommendationTemplateRequest_recommendationTemplateArn:
+			v.RecommendationTemplateArn = new(string)
+			return d.ReadString(schemas.DeleteRecommendationTemplateRequest_recommendationTemplateArn, v.RecommendationTemplateArn)
+		}
+		return nil
+	})
+}
+
 type DeleteRecommendationTemplateOutput struct {
 
 	// The Amazon Resource Name (ARN) for a recommendation template.
@@ -59,13 +89,42 @@ type DeleteRecommendationTemplateOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteRecommendationTemplateOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteRecommendationTemplateResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteRecommendationTemplateOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RecommendationTemplateArn != nil {
+		s.WriteString(schemas.DeleteRecommendationTemplateResponse_recommendationTemplateArn, *v.RecommendationTemplateArn)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.DeleteRecommendationTemplateResponse_status, string(v.Status))
+	}
+}
+func (v *DeleteRecommendationTemplateOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteRecommendationTemplateResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteRecommendationTemplateResponse_recommendationTemplateArn:
+			v.RecommendationTemplateArn = new(string)
+			return d.ReadString(schemas.DeleteRecommendationTemplateResponse_recommendationTemplateArn, v.RecommendationTemplateArn)
+		case schemas.DeleteRecommendationTemplateResponse_status:
+			var ev string
+			if err := d.ReadString(schemas.DeleteRecommendationTemplateResponse_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.RecommendationTemplateStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteRecommendationTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteRecommendationTemplate{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteRecommendationTemplate, schemas.DeleteRecommendationTemplateRequest, schemas.DeleteRecommendationTemplateResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteRecommendationTemplate{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteRecommendationTemplate, schemas.DeleteRecommendationTemplateRequest, schemas.DeleteRecommendationTemplateResponse), output: &DeleteRecommendationTemplateOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

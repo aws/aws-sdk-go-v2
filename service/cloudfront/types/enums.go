@@ -624,9 +624,10 @@ type OriginAccessControlSigningBehaviors string
 
 // Enum values for OriginAccessControlSigningBehaviors
 const (
-	OriginAccessControlSigningBehaviorsNever      OriginAccessControlSigningBehaviors = "never"
-	OriginAccessControlSigningBehaviorsAlways     OriginAccessControlSigningBehaviors = "always"
-	OriginAccessControlSigningBehaviorsNoOverride OriginAccessControlSigningBehaviors = "no-override"
+	OriginAccessControlSigningBehaviorsNever         OriginAccessControlSigningBehaviors = "never"
+	OriginAccessControlSigningBehaviorsAlways        OriginAccessControlSigningBehaviors = "always"
+	OriginAccessControlSigningBehaviorsNoOverride    OriginAccessControlSigningBehaviors = "no-override"
+	OriginAccessControlSigningBehaviorsAlwaysAmzAuth OriginAccessControlSigningBehaviors = "always-amz-auth"
 )
 
 // Values returns all known values for OriginAccessControlSigningBehaviors. Note
@@ -639,6 +640,7 @@ func (OriginAccessControlSigningBehaviors) Values() []OriginAccessControlSigning
 		"never",
 		"always",
 		"no-override",
+		"always-amz-auth",
 	}
 }
 
@@ -1044,5 +1046,24 @@ func (ViewerProtocolPolicy) Values() []ViewerProtocolPolicy {
 		"allow-all",
 		"https-only",
 		"redirect-to-https",
+	}
+}
+
+type VpcIpAddressType string
+
+// Enum values for VpcIpAddressType
+const (
+	VpcIpAddressTypeIpv4      VpcIpAddressType = "ipv4"
+	VpcIpAddressTypeDualStack VpcIpAddressType = "dualstack"
+)
+
+// Values returns all known values for VpcIpAddressType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (VpcIpAddressType) Values() []VpcIpAddressType {
+	return []VpcIpAddressType{
+		"ipv4",
+		"dualstack",
 	}
 }

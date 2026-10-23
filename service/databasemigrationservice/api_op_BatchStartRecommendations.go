@@ -4,7 +4,9 @@ package databasemigrationservice
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/databasemigrationservice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/databasemigrationservice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -48,6 +50,16 @@ type BatchStartRecommendationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchStartRecommendationsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchStartRecommendationsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchStartRecommendationsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeStartRecommendationsRequestEntryList(s, schemas.BatchStartRecommendationsRequest_Data, v.Data)
+}
+
 type BatchStartRecommendationsOutput struct {
 
 	// A list with error details about the analysis of each source database.
@@ -59,13 +71,29 @@ type BatchStartRecommendationsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchStartRecommendationsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchStartRecommendationsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchStartRecommendationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeBatchStartRecommendationsErrorEntryList(s, schemas.BatchStartRecommendationsResponse_ErrorEntries, v.ErrorEntries)
+}
+func (v *BatchStartRecommendationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchStartRecommendationsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchStartRecommendationsResponse_ErrorEntries:
+			return deserializeBatchStartRecommendationsErrorEntryList(d, schemas.BatchStartRecommendationsResponse_ErrorEntries, &v.ErrorEntries)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationBatchStartRecommendationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpBatchStartRecommendations{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchStartRecommendations, schemas.BatchStartRecommendationsRequest, schemas.BatchStartRecommendationsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpBatchStartRecommendations{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchStartRecommendations, schemas.BatchStartRecommendationsRequest, schemas.BatchStartRecommendationsResponse), output: &BatchStartRecommendationsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

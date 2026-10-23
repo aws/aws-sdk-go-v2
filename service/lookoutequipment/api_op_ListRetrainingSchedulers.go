@@ -5,7 +5,9 @@ package lookoutequipment
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/lookoutequipment/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lookoutequipment/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -46,6 +48,27 @@ type ListRetrainingSchedulersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListRetrainingSchedulersInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListRetrainingSchedulersRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListRetrainingSchedulersInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListRetrainingSchedulersRequest_MaxResults, *v.MaxResults)
+	}
+	if v.ModelNameBeginsWith != nil {
+		s.WriteString(schemas.ListRetrainingSchedulersRequest_ModelNameBeginsWith, *v.ModelNameBeginsWith)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListRetrainingSchedulersRequest_NextToken, *v.NextToken)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.ListRetrainingSchedulersRequest_Status, string(v.Status))
+	}
+}
+
 type ListRetrainingSchedulersOutput struct {
 
 	// If the number of results exceeds the maximum, this pagination token is
@@ -63,13 +86,35 @@ type ListRetrainingSchedulersOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListRetrainingSchedulersOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListRetrainingSchedulersResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListRetrainingSchedulersOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListRetrainingSchedulersResponse_NextToken, *v.NextToken)
+	}
+	serializeRetrainingSchedulerSummaries(s, schemas.ListRetrainingSchedulersResponse_RetrainingSchedulerSummaries, v.RetrainingSchedulerSummaries)
+}
+func (v *ListRetrainingSchedulersOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListRetrainingSchedulersResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListRetrainingSchedulersResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListRetrainingSchedulersResponse_NextToken, v.NextToken)
+		case schemas.ListRetrainingSchedulersResponse_RetrainingSchedulerSummaries:
+			return deserializeRetrainingSchedulerSummaries(d, schemas.ListRetrainingSchedulersResponse_RetrainingSchedulerSummaries, &v.RetrainingSchedulerSummaries)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListRetrainingSchedulersMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpListRetrainingSchedulers{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListRetrainingSchedulers, schemas.ListRetrainingSchedulersRequest, schemas.ListRetrainingSchedulersResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpListRetrainingSchedulers{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListRetrainingSchedulers, schemas.ListRetrainingSchedulersRequest, schemas.ListRetrainingSchedulersResponse), output: &ListRetrainingSchedulersOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

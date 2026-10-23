@@ -78,6 +78,11 @@ var GetDomainDetail = smithy.NewSchema(smithy.ShapeID{
 	Name:      "GetDomainDetail",
 }, smithy.ShapeTypeOperation, 0)
 
+var GetDomainPrices = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.route53domains",
+	Name:      "GetDomainPrices",
+}, smithy.ShapeTypeOperation, 0)
+
 var GetDomainSuggestions = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.route53domains",
 	Name:      "GetDomainSuggestions",
@@ -232,6 +237,11 @@ var Consent = smithy.NewSchema(smithy.ShapeID{
 var Consent_MaxPrice *smithy.Schema
 
 var Consent_Currency *smithy.Schema
+
+var _ConsentPrice = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.route53domains",
+	Name:      "ConsentPrice",
+}, smithy.ShapeTypeDouble, 0)
 
 var ContactDetail = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.route53domains",
@@ -837,7 +847,8 @@ var _DnssecKeyList_member *smithy.Schema
 var DnssecLimitExceeded = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.route53domains",
 	Name:      "DnssecLimitExceeded",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var DnssecLimitExceeded_message *smithy.Schema
 
 var _DnssecPublicKey = smithy.NewSchema(smithy.ShapeID{
@@ -887,7 +898,8 @@ var DomainAvailability_PENDING *smithy.Schema
 var DomainLimitExceeded = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.route53domains",
 	Name:      "DomainLimitExceeded",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var DomainLimitExceeded_message *smithy.Schema
 
 var _DomainName = smithy.NewSchema(smithy.ShapeID{
@@ -936,10 +948,12 @@ var _DomainStatusList_member *smithy.Schema
 var DomainSuggestion = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.route53domains",
 	Name:      "DomainSuggestion",
-}, smithy.ShapeTypeStructure, 2)
+}, smithy.ShapeTypeStructure, 3)
 var DomainSuggestion_DomainName *smithy.Schema
 
 var DomainSuggestion_Availability *smithy.Schema
+
+var DomainSuggestion_Price *smithy.Schema
 
 var _DomainSuggestionsList = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.route53domains",
@@ -974,7 +988,8 @@ var DomainTransferability_Transferable *smithy.Schema
 var DuplicateRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.route53domains",
 	Name:      "DuplicateRequest",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var DuplicateRequest_requestId *smithy.Schema
 
 var DuplicateRequest_message *smithy.Schema
@@ -1130,7 +1145,8 @@ var _Integer = smithy.NewSchema(smithy.ShapeID{
 var InvalidInput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.route53domains",
 	Name:      "InvalidInput",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var InvalidInput_message *smithy.Schema
 
 var _InvoiceId = smithy.NewSchema(smithy.ShapeID{
@@ -1199,7 +1215,8 @@ var _OperationId = smithy.NewSchema(smithy.ShapeID{
 var OperationLimitExceeded = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.route53domains",
 	Name:      "OperationLimitExceeded",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var OperationLimitExceeded_message *smithy.Schema
 
 var OperationStatus = smithy.NewSchema(smithy.ShapeID{
@@ -1330,13 +1347,23 @@ var _Price = smithy.NewSchema(smithy.ShapeID{
 	Name:      "Price",
 }, smithy.ShapeTypeDouble, 0)
 
+var PriceType = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.route53domains",
+	Name:      "PriceType",
+}, smithy.ShapeTypeEnum, 2)
+var PriceType_STANDARD *smithy.Schema
+
+var PriceType_REGISTRY_PREMIUM *smithy.Schema
+
 var PriceWithCurrency = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.route53domains",
 	Name:      "PriceWithCurrency",
-}, smithy.ShapeTypeStructure, 2)
+}, smithy.ShapeTypeStructure, 3)
 var PriceWithCurrency_Price *smithy.Schema
 
 var PriceWithCurrency_Currency *smithy.Schema
+
+var PriceWithCurrency_PriceType *smithy.Schema
 
 var ReachabilityStatus = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.route53domains",
@@ -1456,7 +1483,8 @@ var _Timestamp = smithy.NewSchema(smithy.ShapeID{
 var TLDInMaintenance = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.route53domains",
 	Name:      "TLDInMaintenance",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var TLDInMaintenance_message *smithy.Schema
 
 var TLDInMaintenance_tld *smithy.Schema
@@ -1469,13 +1497,14 @@ var _TldName = smithy.NewSchema(smithy.ShapeID{
 var TLDRulesViolation = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.route53domains",
 	Name:      "TLDRulesViolation",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var TLDRulesViolation_message *smithy.Schema
 
 var Transferable = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.route53domains",
 	Name:      "Transferable",
-}, smithy.ShapeTypeEnum, 6)
+}, smithy.ShapeTypeEnum, 7)
 var Transferable_TRANSFERABLE *smithy.Schema
 
 var Transferable_UNTRANSFERABLE *smithy.Schema
@@ -1488,10 +1517,13 @@ var Transferable_DOMAIN_IN_ANOTHER_ACCOUNT *smithy.Schema
 
 var Transferable_PREMIUM_DOMAIN *smithy.Schema
 
+var Transferable_PENDING *smithy.Schema
+
 var UnsupportedTLD = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.route53domains",
 	Name:      "UnsupportedTLD",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var UnsupportedTLD_message *smithy.Schema
 
 var _Value = smithy.NewSchema(smithy.ShapeID{
@@ -1561,8 +1593,10 @@ var CheckDomainAvailabilityRequest_IdnLangCode *smithy.Schema
 var CheckDomainAvailabilityResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.route53domains",
 	Name:      "CheckDomainAvailabilityResponse",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 2)
 var CheckDomainAvailabilityResponse_Availability *smithy.Schema
+
+var CheckDomainAvailabilityResponse_Price *smithy.Schema
 
 var CheckDomainTransferabilityRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.route53domains",
@@ -1575,10 +1609,12 @@ var CheckDomainTransferabilityRequest_AuthCode *smithy.Schema
 var CheckDomainTransferabilityResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.route53domains",
 	Name:      "CheckDomainTransferabilityResponse",
-}, smithy.ShapeTypeStructure, 2)
+}, smithy.ShapeTypeStructure, 3)
 var CheckDomainTransferabilityResponse_Transferability *smithy.Schema
 
 var CheckDomainTransferabilityResponse_Message *smithy.Schema
+
+var CheckDomainTransferabilityResponse_Price *smithy.Schema
 
 var DeleteDomainRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.route53domains",
@@ -1737,15 +1773,29 @@ var GetDomainDetailResponse_BillingContact *smithy.Schema
 
 var GetDomainDetailResponse_BillingPrivacy *smithy.Schema
 
+var GetDomainPricesRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.route53domains",
+	Name:      "GetDomainPricesRequest",
+}, smithy.ShapeTypeStructure, 1)
+var GetDomainPricesRequest_DomainName *smithy.Schema
+
+var GetDomainPricesResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.route53domains",
+	Name:      "GetDomainPricesResponse",
+}, smithy.ShapeTypeStructure, 1)
+var GetDomainPricesResponse_DomainPrice *smithy.Schema
+
 var GetDomainSuggestionsRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.route53domains",
 	Name:      "GetDomainSuggestionsRequest",
-}, smithy.ShapeTypeStructure, 3)
+}, smithy.ShapeTypeStructure, 4)
 var GetDomainSuggestionsRequest_DomainName *smithy.Schema
 
 var GetDomainSuggestionsRequest_SuggestionCount *smithy.Schema
 
 var GetDomainSuggestionsRequest_OnlyAvailable *smithy.Schema
+
+var GetDomainSuggestionsRequest_OnlyStandardPrices *smithy.Schema
 
 var GetDomainSuggestionsResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.route53domains",
@@ -1866,7 +1916,7 @@ var PushDomainRequest_Target *smithy.Schema
 var RegisterDomainRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.route53domains",
 	Name:      "RegisterDomainRequest",
-}, smithy.ShapeTypeStructure, 12)
+}, smithy.ShapeTypeStructure, 13)
 var RegisterDomainRequest_DomainName *smithy.Schema
 
 var RegisterDomainRequest_IdnLangCode *smithy.Schema
@@ -1891,6 +1941,8 @@ var RegisterDomainRequest_BillingContact *smithy.Schema
 
 var RegisterDomainRequest_PrivacyProtectBillingContact *smithy.Schema
 
+var RegisterDomainRequest_Consent *smithy.Schema
+
 var RegisterDomainResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.route53domains",
 	Name:      "RegisterDomainResponse",
@@ -1912,12 +1964,14 @@ var RejectDomainTransferFromAnotherAwsAccountResponse_OperationId *smithy.Schema
 var RenewDomainRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.route53domains",
 	Name:      "RenewDomainRequest",
-}, smithy.ShapeTypeStructure, 3)
+}, smithy.ShapeTypeStructure, 4)
 var RenewDomainRequest_DomainName *smithy.Schema
 
 var RenewDomainRequest_DurationInYears *smithy.Schema
 
 var RenewDomainRequest_CurrentExpiryYear *smithy.Schema
+
+var RenewDomainRequest_Consent *smithy.Schema
 
 var RenewDomainResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.route53domains",
@@ -1962,7 +2016,7 @@ var RetrieveDomainAuthCodeResponse_AuthCode *smithy.Schema
 var TransferDomainRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.route53domains",
 	Name:      "TransferDomainRequest",
-}, smithy.ShapeTypeStructure, 14)
+}, smithy.ShapeTypeStructure, 15)
 var TransferDomainRequest_DomainName *smithy.Schema
 
 var TransferDomainRequest_IdnLangCode *smithy.Schema
@@ -1990,6 +2044,8 @@ var TransferDomainRequest_PrivacyProtectTechContact *smithy.Schema
 var TransferDomainRequest_BillingContact *smithy.Schema
 
 var TransferDomainRequest_PrivacyProtectBillingContact *smithy.Schema
+
+var TransferDomainRequest_Consent *smithy.Schema
 
 var TransferDomainResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.route53domains",
@@ -2161,7 +2217,7 @@ func init() {
 
 	_BillingRecords_member = _BillingRecords.AddMember("member", BillingRecord)
 
-	Consent_MaxPrice = Consent.AddMember("MaxPrice", _Price)
+	Consent_MaxPrice = Consent.AddMember("MaxPrice", _ConsentPrice)
 
 	Consent_Currency = Consent.AddMember("Currency", _Currency)
 
@@ -2825,9 +2881,15 @@ func init() {
 
 	DomainLimitExceeded_message = DomainLimitExceeded.AddMember("message", _ErrorMessage)
 
+	PriceType_STANDARD = PriceType.AddMember("STANDARD", smithyprelude.Unit)
+
+	PriceType_REGISTRY_PREMIUM = PriceType.AddMember("REGISTRY_PREMIUM", smithyprelude.Unit)
+
 	PriceWithCurrency_Price = PriceWithCurrency.AddMember("Price", _Price)
 
 	PriceWithCurrency_Currency = PriceWithCurrency.AddMember("Currency", _Currency)
+
+	PriceWithCurrency_PriceType = PriceWithCurrency.AddMember("PriceType", PriceType)
 
 	DomainPrice_Name = DomainPrice.AddMember("Name", _DomainPriceName)
 
@@ -2848,6 +2910,8 @@ func init() {
 	DomainSuggestion_DomainName = DomainSuggestion.AddMember("DomainName", _DomainName)
 
 	DomainSuggestion_Availability = DomainSuggestion.AddMember("Availability", _String)
+
+	DomainSuggestion_Price = DomainSuggestion.AddMember("Price", PriceWithCurrency)
 
 	_DomainSuggestionsList_member = _DomainSuggestionsList.AddMember("member", DomainSuggestion)
 
@@ -2872,6 +2936,8 @@ func init() {
 	Transferable_DOMAIN_IN_ANOTHER_ACCOUNT = Transferable.AddMember("DOMAIN_IN_ANOTHER_ACCOUNT", smithyprelude.Unit)
 
 	Transferable_PREMIUM_DOMAIN = Transferable.AddMember("PREMIUM_DOMAIN", smithyprelude.Unit)
+
+	Transferable_PENDING = Transferable.AddMember("PENDING", smithyprelude.Unit)
 
 	DomainTransferability_Transferable = DomainTransferability.AddMember("Transferable", Transferable)
 
@@ -3007,6 +3073,8 @@ func init() {
 
 	CheckDomainAvailabilityResponse_Availability = CheckDomainAvailabilityResponse.AddMember("Availability", DomainAvailability)
 
+	CheckDomainAvailabilityResponse_Price = CheckDomainAvailabilityResponse.AddMember("Price", PriceWithCurrency)
+
 	CheckDomainTransferabilityRequest_DomainName = CheckDomainTransferabilityRequest.AddMember("DomainName", _DomainName)
 
 	CheckDomainTransferabilityRequest_AuthCode = CheckDomainTransferabilityRequest.AddMember("AuthCode", _DomainAuthCode)
@@ -3014,6 +3082,8 @@ func init() {
 	CheckDomainTransferabilityResponse_Transferability = CheckDomainTransferabilityResponse.AddMember("Transferability", DomainTransferability)
 
 	CheckDomainTransferabilityResponse_Message = CheckDomainTransferabilityResponse.AddMember("Message", _Message)
+
+	CheckDomainTransferabilityResponse_Price = CheckDomainTransferabilityResponse.AddMember("Price", PriceWithCurrency)
 
 	DeleteDomainRequest_DomainName = DeleteDomainRequest.AddMember("DomainName", _DomainName)
 
@@ -3097,11 +3167,17 @@ func init() {
 
 	GetDomainDetailResponse_BillingPrivacy = GetDomainDetailResponse.AddMember("BillingPrivacy", _Boolean)
 
+	GetDomainPricesRequest_DomainName = GetDomainPricesRequest.AddMember("DomainName", _DomainName)
+
+	GetDomainPricesResponse_DomainPrice = GetDomainPricesResponse.AddMember("DomainPrice", DomainPrice)
+
 	GetDomainSuggestionsRequest_DomainName = GetDomainSuggestionsRequest.AddMember("DomainName", _DomainName)
 
 	GetDomainSuggestionsRequest_SuggestionCount = GetDomainSuggestionsRequest.AddMember("SuggestionCount", _Integer)
 
 	GetDomainSuggestionsRequest_OnlyAvailable = GetDomainSuggestionsRequest.AddMember("OnlyAvailable", _Boolean)
+
+	GetDomainSuggestionsRequest_OnlyStandardPrices = GetDomainSuggestionsRequest.AddMember("OnlyStandardPrices", _Boolean)
 
 	GetDomainSuggestionsResponse_SuggestionsList = GetDomainSuggestionsResponse.AddMember("SuggestionsList", _DomainSuggestionsList)
 
@@ -3195,6 +3271,8 @@ func init() {
 
 	RegisterDomainRequest_PrivacyProtectBillingContact = RegisterDomainRequest.AddMember("PrivacyProtectBillingContact", _Boolean)
 
+	RegisterDomainRequest_Consent = RegisterDomainRequest.AddMember("Consent", Consent)
+
 	RegisterDomainResponse_OperationId = RegisterDomainResponse.AddMember("OperationId", _OperationId)
 
 	RejectDomainTransferFromAnotherAwsAccountRequest_DomainName = RejectDomainTransferFromAnotherAwsAccountRequest.AddMember("DomainName", _DomainName)
@@ -3206,6 +3284,8 @@ func init() {
 	RenewDomainRequest_DurationInYears = RenewDomainRequest.AddMember("DurationInYears", _DurationInYears)
 
 	RenewDomainRequest_CurrentExpiryYear = RenewDomainRequest.AddMember("CurrentExpiryYear", _CurrentExpiryYear)
+
+	RenewDomainRequest_Consent = RenewDomainRequest.AddMember("Consent", Consent)
 
 	RenewDomainResponse_OperationId = RenewDomainResponse.AddMember("OperationId", _OperationId)
 
@@ -3250,6 +3330,8 @@ func init() {
 	TransferDomainRequest_BillingContact = TransferDomainRequest.AddMember("BillingContact", ContactDetail)
 
 	TransferDomainRequest_PrivacyProtectBillingContact = TransferDomainRequest.AddMember("PrivacyProtectBillingContact", _Boolean)
+
+	TransferDomainRequest_Consent = TransferDomainRequest.AddMember("Consent", Consent)
 
 	TransferDomainResponse_OperationId = TransferDomainResponse.AddMember("OperationId", _OperationId)
 

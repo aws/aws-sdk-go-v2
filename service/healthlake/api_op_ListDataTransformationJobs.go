@@ -5,7 +5,9 @@ package healthlake
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/healthlake/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/healthlake/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -55,6 +57,33 @@ type ListDataTransformationJobsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListDataTransformationJobsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListDataTransformationJobsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListDataTransformationJobsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.JobName != nil {
+		s.WriteString(schemas.ListDataTransformationJobsRequest_JobName, *v.JobName)
+	}
+	if v.JobStatus != "" {
+		s.WriteString(schemas.ListDataTransformationJobsRequest_JobStatus, string(v.JobStatus))
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListDataTransformationJobsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListDataTransformationJobsRequest_NextToken, *v.NextToken)
+	}
+	if v.SubmittedAfter != nil {
+		s.WriteTime(schemas.ListDataTransformationJobsRequest_SubmittedAfter, *v.SubmittedAfter)
+	}
+	if v.SubmittedBefore != nil {
+		s.WriteTime(schemas.ListDataTransformationJobsRequest_SubmittedBefore, *v.SubmittedBefore)
+	}
+}
+
 // The response from the ListDataTransformationJobs operation.
 type ListDataTransformationJobsOutput struct {
 
@@ -73,13 +102,35 @@ type ListDataTransformationJobsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListDataTransformationJobsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListDataTransformationJobsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListDataTransformationJobsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeTransformationJobSummaryList(s, schemas.ListDataTransformationJobsResponse_Items, v.Items)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListDataTransformationJobsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListDataTransformationJobsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListDataTransformationJobsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListDataTransformationJobsResponse_Items:
+			return deserializeTransformationJobSummaryList(d, schemas.ListDataTransformationJobsResponse_Items, &v.Items)
+		case schemas.ListDataTransformationJobsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListDataTransformationJobsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListDataTransformationJobsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpListDataTransformationJobs{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDataTransformationJobs, schemas.ListDataTransformationJobsRequest, schemas.ListDataTransformationJobsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpListDataTransformationJobs{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDataTransformationJobs, schemas.ListDataTransformationJobsRequest, schemas.ListDataTransformationJobsResponse), output: &ListDataTransformationJobsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

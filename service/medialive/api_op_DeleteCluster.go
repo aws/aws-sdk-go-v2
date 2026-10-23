@@ -4,7 +4,9 @@ package medialive
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/medialive/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/medialive/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -33,6 +35,18 @@ type DeleteClusterInput struct {
 	ClusterId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DeleteClusterInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteClusterRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteClusterInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClusterId != nil {
+		s.WriteString(schemas.DeleteClusterRequest_ClusterId, *v.ClusterId)
+	}
 }
 
 // Placeholder documentation for DeleteClusterResponse
@@ -73,13 +87,81 @@ type DeleteClusterOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteClusterOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteClusterResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteClusterOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.DeleteClusterResponse_Arn, *v.Arn)
+	}
+	serialize__listOf__string(s, schemas.DeleteClusterResponse_ChannelIds, v.ChannelIds)
+	if v.ClusterType != "" {
+		s.WriteString(schemas.DeleteClusterResponse_ClusterType, string(v.ClusterType))
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.DeleteClusterResponse_Id, *v.Id)
+	}
+	if v.InstanceRoleArn != nil {
+		s.WriteString(schemas.DeleteClusterResponse_InstanceRoleArn, *v.InstanceRoleArn)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.DeleteClusterResponse_Name, *v.Name)
+	}
+	if v.NetworkSettings != nil {
+		s.WriteStruct(schemas.DeleteClusterResponse_NetworkSettings)
+		v.NetworkSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.State != "" {
+		s.WriteString(schemas.DeleteClusterResponse_State, string(v.State))
+	}
+}
+func (v *DeleteClusterOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteClusterResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteClusterResponse_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.DeleteClusterResponse_Arn, v.Arn)
+		case schemas.DeleteClusterResponse_ChannelIds:
+			return deserialize__listOf__string(d, schemas.DeleteClusterResponse_ChannelIds, &v.ChannelIds)
+		case schemas.DeleteClusterResponse_ClusterType:
+			var ev string
+			if err := d.ReadString(schemas.DeleteClusterResponse_ClusterType, &ev); err != nil {
+				return err
+			}
+			v.ClusterType = types.ClusterType(ev)
+			return nil
+		case schemas.DeleteClusterResponse_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.DeleteClusterResponse_Id, v.Id)
+		case schemas.DeleteClusterResponse_InstanceRoleArn:
+			v.InstanceRoleArn = new(string)
+			return d.ReadString(schemas.DeleteClusterResponse_InstanceRoleArn, v.InstanceRoleArn)
+		case schemas.DeleteClusterResponse_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.DeleteClusterResponse_Name, v.Name)
+		case schemas.DeleteClusterResponse_NetworkSettings:
+			v.NetworkSettings = &types.ClusterNetworkSettings{}
+			return v.NetworkSettings.Deserialize(d)
+		case schemas.DeleteClusterResponse_State:
+			var ev string
+			if err := d.ReadString(schemas.DeleteClusterResponse_State, &ev); err != nil {
+				return err
+			}
+			v.State = types.ClusterState(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteClusterMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteCluster{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteCluster, schemas.DeleteClusterRequest, schemas.DeleteClusterResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteCluster{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteCluster, schemas.DeleteClusterRequest, schemas.DeleteClusterResponse), output: &DeleteClusterOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

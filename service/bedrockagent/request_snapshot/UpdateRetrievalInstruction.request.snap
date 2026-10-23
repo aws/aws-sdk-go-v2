@@ -1,0 +1,5 @@
+PUT /retrievalinstructions/__RetrievalInstructionId__
+
+Content-Type: application/json
+
+{"description":"__Description__","instruction":{"answerFormat":"__AnswerFormat__","answerPolicy":"__AnswerPolicy__","persona":"__Persona__","retrievalGuidance":"__RetrievalGuidance__"}}

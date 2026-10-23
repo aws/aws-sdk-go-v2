@@ -4,6 +4,8 @@ package workspacesinstances
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/workspacesinstances/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -44,6 +46,24 @@ type AssociateVolumeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssociateVolumeInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssociateVolumeRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssociateVolumeInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Device != nil {
+		s.WriteString(schemas.AssociateVolumeRequest_Device, *v.Device)
+	}
+	if v.VolumeId != nil {
+		s.WriteString(schemas.AssociateVolumeRequest_VolumeId, *v.VolumeId)
+	}
+	if v.WorkspaceInstanceId != nil {
+		s.WriteString(schemas.AssociateVolumeRequest_WorkspaceInstanceId, *v.WorkspaceInstanceId)
+	}
+}
+
 // Confirms volume attachment.
 type AssociateVolumeOutput struct {
 	// Metadata pertaining to the operation's result.
@@ -52,13 +72,26 @@ type AssociateVolumeOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssociateVolumeOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssociateVolumeResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssociateVolumeOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *AssociateVolumeOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AssociateVolumeResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationAssociateVolumeMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpAssociateVolume{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociateVolume, schemas.AssociateVolumeRequest, schemas.AssociateVolumeResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpAssociateVolume{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociateVolume, schemas.AssociateVolumeRequest, schemas.AssociateVolumeResponse), output: &AssociateVolumeOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

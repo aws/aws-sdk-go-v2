@@ -1252,11 +1252,48 @@ func validateAwsServiceRequestConfiguration(v *types.AwsServiceRequestConfigurat
 	if v.Url == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Url"))
 	}
+	if v.Cache != nil {
+		if err := validateHttpRequestCacheConfiguration(v.Cache); err != nil {
+			invalidParams.AddNested("Cache", err.(smithy.InvalidParamsError))
+		}
+	}
 	if v.TargetService == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TargetService"))
 	}
 	if v.TargetRegion == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TargetRegion"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateBeaconingConfiguration(v *types.BeaconingConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "BeaconingConfiguration"}
+	if v.ClientSide != nil {
+		if err := validateClientSideBeaconingConfiguration(v.ClientSide); err != nil {
+			invalidParams.AddNested("ClientSide", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateClientSideBeaconingConfiguration(v *types.ClientSideBeaconingConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ClientSideBeaconingConfiguration"}
+	if len(v.ReportingMode) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("ReportingMode"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1360,6 +1397,24 @@ func validateHttpPackageConfigurations(v []types.HttpPackageConfiguration) error
 	}
 }
 
+func validateHttpRequestCacheConfiguration(v *types.HttpRequestCacheConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "HttpRequestCacheConfiguration"}
+	if v.TtlMinimumSeconds == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TtlMinimumSeconds"))
+	}
+	if v.TtlMaximumSeconds == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TtlMaximumSeconds"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateHttpRequestConfiguration(v *types.HttpRequestConfiguration) error {
 	if v == nil {
 		return nil
@@ -1376,6 +1431,11 @@ func validateHttpRequestConfiguration(v *types.HttpRequestConfiguration) error {
 	}
 	if v.Url == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Url"))
+	}
+	if v.Cache != nil {
+		if err := validateHttpRequestCacheConfiguration(v.Cache); err != nil {
+			invalidParams.AddNested("Cache", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1603,6 +1663,11 @@ func validateVastRequestConfiguration(v *types.VastRequestConfiguration) error {
 	}
 	if v.Url == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Url"))
+	}
+	if v.Cache != nil {
+		if err := validateHttpRequestCacheConfiguration(v.Cache); err != nil {
+			invalidParams.AddNested("Cache", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2307,6 +2372,11 @@ func validateOpPutPlaybackConfigurationInput(v *PutPlaybackConfigurationInput) e
 	if v.YieldOptimizationConfiguration != nil {
 		if err := validateYieldOptimizationConfiguration(v.YieldOptimizationConfiguration); err != nil {
 			invalidParams.AddNested("YieldOptimizationConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.BeaconingConfiguration != nil {
+		if err := validateBeaconingConfiguration(v.BeaconingConfiguration); err != nil {
+			invalidParams.AddNested("BeaconingConfiguration", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

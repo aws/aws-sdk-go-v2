@@ -5,7 +5,9 @@ package devopsagent
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/devopsagent/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/devopsagent/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -46,6 +48,24 @@ type GetAssetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetAssetInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetAssetRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetAssetInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AgentSpaceId != nil {
+		s.WriteString(schemas.GetAssetRequest_agentSpaceId, *v.AgentSpaceId)
+	}
+	if v.AssetId != nil {
+		s.WriteString(schemas.GetAssetRequest_assetId, *v.AssetId)
+	}
+	if v.AssetVersion != nil {
+		s.WriteInt32(schemas.GetAssetRequest_assetVersion, *v.AssetVersion)
+	}
+}
+
 // Response structure for getting an asset
 type GetAssetOutput struct {
 
@@ -60,13 +80,34 @@ type GetAssetOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetAssetOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetAssetResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetAssetOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Asset != nil {
+		s.WriteStruct(schemas.GetAssetResponse_asset)
+		v.Asset.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetAssetOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetAssetResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetAssetResponse_asset:
+			v.Asset = &types.Asset{}
+			return v.Asset.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetAssetMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetAsset{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAsset, schemas.GetAssetRequest, schemas.GetAssetResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetAsset{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAsset, schemas.GetAssetRequest, schemas.GetAssetResponse), output: &GetAssetOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

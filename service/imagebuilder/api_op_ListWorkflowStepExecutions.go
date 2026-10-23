@@ -5,7 +5,9 @@ package imagebuilder
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/imagebuilder/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/imagebuilder/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -34,14 +36,32 @@ type ListWorkflowStepExecutionsInput struct {
 	// This member is required.
 	WorkflowExecutionId *string
 
-	// Specify the maximum number of items to return in a request.
+	// The maximum number of items to return in a single request.
 	MaxResults *int32
 
-	// A token to specify where to start paginating. This is the nextToken from a
+	// A token to specify where to start paginating. Use the nextToken value from a
 	// previously truncated response.
 	NextToken *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ListWorkflowStepExecutionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListWorkflowStepExecutionsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListWorkflowStepExecutionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListWorkflowStepExecutionsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListWorkflowStepExecutionsRequest_nextToken, *v.NextToken)
+	}
+	if v.WorkflowExecutionId != nil {
+		s.WriteString(schemas.ListWorkflowStepExecutionsRequest_workflowExecutionId, *v.WorkflowExecutionId)
+	}
 }
 
 type ListWorkflowStepExecutionsOutput struct {
@@ -79,13 +99,65 @@ type ListWorkflowStepExecutionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListWorkflowStepExecutionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListWorkflowStepExecutionsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListWorkflowStepExecutionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ImageBuildVersionArn != nil {
+		s.WriteString(schemas.ListWorkflowStepExecutionsResponse_imageBuildVersionArn, *v.ImageBuildVersionArn)
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.ListWorkflowStepExecutionsResponse_message, *v.Message)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListWorkflowStepExecutionsResponse_nextToken, *v.NextToken)
+	}
+	if v.RequestId != nil {
+		s.WriteString(schemas.ListWorkflowStepExecutionsResponse_requestId, *v.RequestId)
+	}
+	serializeWorkflowStepExecutionsList(s, schemas.ListWorkflowStepExecutionsResponse_steps, v.Steps)
+	if v.WorkflowBuildVersionArn != nil {
+		s.WriteString(schemas.ListWorkflowStepExecutionsResponse_workflowBuildVersionArn, *v.WorkflowBuildVersionArn)
+	}
+	if v.WorkflowExecutionId != nil {
+		s.WriteString(schemas.ListWorkflowStepExecutionsResponse_workflowExecutionId, *v.WorkflowExecutionId)
+	}
+}
+func (v *ListWorkflowStepExecutionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListWorkflowStepExecutionsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListWorkflowStepExecutionsResponse_imageBuildVersionArn:
+			v.ImageBuildVersionArn = new(string)
+			return d.ReadString(schemas.ListWorkflowStepExecutionsResponse_imageBuildVersionArn, v.ImageBuildVersionArn)
+		case schemas.ListWorkflowStepExecutionsResponse_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ListWorkflowStepExecutionsResponse_message, v.Message)
+		case schemas.ListWorkflowStepExecutionsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListWorkflowStepExecutionsResponse_nextToken, v.NextToken)
+		case schemas.ListWorkflowStepExecutionsResponse_requestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.ListWorkflowStepExecutionsResponse_requestId, v.RequestId)
+		case schemas.ListWorkflowStepExecutionsResponse_steps:
+			return deserializeWorkflowStepExecutionsList(d, schemas.ListWorkflowStepExecutionsResponse_steps, &v.Steps)
+		case schemas.ListWorkflowStepExecutionsResponse_workflowBuildVersionArn:
+			v.WorkflowBuildVersionArn = new(string)
+			return d.ReadString(schemas.ListWorkflowStepExecutionsResponse_workflowBuildVersionArn, v.WorkflowBuildVersionArn)
+		case schemas.ListWorkflowStepExecutionsResponse_workflowExecutionId:
+			v.WorkflowExecutionId = new(string)
+			return d.ReadString(schemas.ListWorkflowStepExecutionsResponse_workflowExecutionId, v.WorkflowExecutionId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListWorkflowStepExecutionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListWorkflowStepExecutions{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListWorkflowStepExecutions, schemas.ListWorkflowStepExecutionsRequest, schemas.ListWorkflowStepExecutionsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListWorkflowStepExecutions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListWorkflowStepExecutions, schemas.ListWorkflowStepExecutionsRequest, schemas.ListWorkflowStepExecutionsResponse), output: &ListWorkflowStepExecutionsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 
@@ -125,7 +197,7 @@ func (c *Client) addOperationListWorkflowStepExecutionsMiddlewares(stack *middle
 // ListWorkflowStepExecutionsPaginatorOptions is the paginator options for
 // ListWorkflowStepExecutions
 type ListWorkflowStepExecutionsPaginatorOptions struct {
-	// Specify the maximum number of items to return in a request.
+	// The maximum number of items to return in a single request.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

@@ -222,6 +222,10 @@ func TestCheckResponseSnapshot_AddLFTagsToResource(t *testing.T) {
 				CatalogId: ptr.String("__CatalogId__"),
 				Name:      ptr.String("__Name__"),
 			},
+			RLSPolicy: &types.RLSPolicyResource{
+				CatalogId: ptr.String("__CatalogId__"),
+				Name:      ptr.String("__Name__"),
+			},
 		},
 		LFTags: []types.LFTagPair{
 			{
@@ -276,6 +280,111 @@ func TestCheckResponseSnapshot_AssumeDecoratedRoleWithSAML(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "AssumeDecoratedRoleWithSAML.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_AttachRLSPolicy(t *testing.T) {
+	want := &AttachRLSPolicyOutput{}
+	status, header, body, err := serdeRespReadSnapshot("AttachRLSPolicy.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.AttachRLSPolicy(context.Background(), &AttachRLSPolicyInput{
+		Name: ptr.String("__Name__"),
+		Resource: &types.Resource{
+			Catalog: &types.CatalogResource{
+				Id: ptr.String("__Id__"),
+			},
+			Database: &types.DatabaseResource{
+				CatalogId: ptr.String("__CatalogId__"),
+				Name:      ptr.String("__Name__"),
+			},
+			Table: &types.TableResource{
+				CatalogId:     ptr.String("__CatalogId__"),
+				DatabaseName:  ptr.String("__DatabaseName__"),
+				Name:          ptr.String("__Name__"),
+				TableWildcard: &types.TableWildcard{},
+			},
+			TableWithColumns: &types.TableWithColumnsResource{
+				CatalogId:    ptr.String("__CatalogId__"),
+				DatabaseName: ptr.String("__DatabaseName__"),
+				Name:         ptr.String("__Name__"),
+				ColumnNames: []string{
+					"__Member__",
+					"__Member__",
+				},
+				ColumnWildcard: &types.ColumnWildcard{
+					ExcludedColumnNames: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+			DataLocation: &types.DataLocationResource{
+				CatalogId:   ptr.String("__CatalogId__"),
+				ResourceArn: ptr.String("__ResourceArn__"),
+			},
+			DataCellsFilter: &types.DataCellsFilterResource{
+				TableCatalogId: ptr.String("__TableCatalogId__"),
+				DatabaseName:   ptr.String("__DatabaseName__"),
+				TableName:      ptr.String("__TableName__"),
+				Name:           ptr.String("__Name__"),
+			},
+			LFTag: &types.LFTagKeyResource{
+				CatalogId: ptr.String("__CatalogId__"),
+				TagKey:    ptr.String("__TagKey__"),
+				TagValues: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			LFTagPolicy: &types.LFTagPolicyResource{
+				CatalogId:    ptr.String("__CatalogId__"),
+				ResourceType: types.ResourceType("DATABASE"),
+				Expression: []types.LFTag{
+					{
+						TagKey: ptr.String("__TagKey__"),
+						TagValues: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					{
+						TagKey: ptr.String("__TagKey__"),
+						TagValues: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+				ExpressionName: ptr.String("__ExpressionName__"),
+			},
+			LFTagExpression: &types.LFTagExpressionResource{
+				CatalogId: ptr.String("__CatalogId__"),
+				Name:      ptr.String("__Name__"),
+			},
+			RLSPolicy: &types.RLSPolicyResource{
+				CatalogId: ptr.String("__CatalogId__"),
+				Name:      ptr.String("__Name__"),
+			},
+		},
+		Principal: &types.DataLakePrincipal{
+			DataLakePrincipalIdentifier: ptr.String("__DataLakePrincipalIdentifier__"),
+		},
+		Condition: &types.Condition{
+			Expression: ptr.String("__Expression__"),
+		},
+		SetDefault: ptr.Bool(true),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "AttachRLSPolicy.response", err)
 	}
 }
 
@@ -357,6 +466,10 @@ func TestCheckResponseSnapshot_BatchGrantPermissions(t *testing.T) {
 							ExpressionName: ptr.String("__ExpressionName__"),
 						},
 						LFTagExpression: &types.LFTagExpressionResource{
+							CatalogId: ptr.String("__CatalogId__"),
+							Name:      ptr.String("__Name__"),
+						},
+						RLSPolicy: &types.RLSPolicyResource{
 							CatalogId: ptr.String("__CatalogId__"),
 							Name:      ptr.String("__Name__"),
 						},
@@ -453,6 +566,10 @@ func TestCheckResponseSnapshot_BatchGrantPermissions(t *testing.T) {
 							ExpressionName: ptr.String("__ExpressionName__"),
 						},
 						LFTagExpression: &types.LFTagExpressionResource{
+							CatalogId: ptr.String("__CatalogId__"),
+							Name:      ptr.String("__Name__"),
+						},
+						RLSPolicy: &types.RLSPolicyResource{
 							CatalogId: ptr.String("__CatalogId__"),
 							Name:      ptr.String("__Name__"),
 						},
@@ -564,6 +681,10 @@ func TestCheckResponseSnapshot_BatchGrantPermissions(t *testing.T) {
 						CatalogId: ptr.String("__CatalogId__"),
 						Name:      ptr.String("__Name__"),
 					},
+					RLSPolicy: &types.RLSPolicyResource{
+						CatalogId: ptr.String("__CatalogId__"),
+						Name:      ptr.String("__Name__"),
+					},
 				},
 				Permissions: []types.Permission{
 					types.Permission("ALL"),
@@ -651,6 +772,10 @@ func TestCheckResponseSnapshot_BatchGrantPermissions(t *testing.T) {
 						ExpressionName: ptr.String("__ExpressionName__"),
 					},
 					LFTagExpression: &types.LFTagExpressionResource{
+						CatalogId: ptr.String("__CatalogId__"),
+						Name:      ptr.String("__Name__"),
+					},
+					RLSPolicy: &types.RLSPolicyResource{
 						CatalogId: ptr.String("__CatalogId__"),
 						Name:      ptr.String("__Name__"),
 					},
@@ -758,6 +883,10 @@ func TestCheckResponseSnapshot_BatchRevokePermissions(t *testing.T) {
 							CatalogId: ptr.String("__CatalogId__"),
 							Name:      ptr.String("__Name__"),
 						},
+						RLSPolicy: &types.RLSPolicyResource{
+							CatalogId: ptr.String("__CatalogId__"),
+							Name:      ptr.String("__Name__"),
+						},
 					},
 					Permissions: []types.Permission{
 						types.Permission("ALL"),
@@ -851,6 +980,10 @@ func TestCheckResponseSnapshot_BatchRevokePermissions(t *testing.T) {
 							ExpressionName: ptr.String("__ExpressionName__"),
 						},
 						LFTagExpression: &types.LFTagExpressionResource{
+							CatalogId: ptr.String("__CatalogId__"),
+							Name:      ptr.String("__Name__"),
+						},
+						RLSPolicy: &types.RLSPolicyResource{
 							CatalogId: ptr.String("__CatalogId__"),
 							Name:      ptr.String("__Name__"),
 						},
@@ -962,6 +1095,10 @@ func TestCheckResponseSnapshot_BatchRevokePermissions(t *testing.T) {
 						CatalogId: ptr.String("__CatalogId__"),
 						Name:      ptr.String("__Name__"),
 					},
+					RLSPolicy: &types.RLSPolicyResource{
+						CatalogId: ptr.String("__CatalogId__"),
+						Name:      ptr.String("__Name__"),
+					},
 				},
 				Permissions: []types.Permission{
 					types.Permission("ALL"),
@@ -1049,6 +1186,10 @@ func TestCheckResponseSnapshot_BatchRevokePermissions(t *testing.T) {
 						ExpressionName: ptr.String("__ExpressionName__"),
 					},
 					LFTagExpression: &types.LFTagExpressionResource{
+						CatalogId: ptr.String("__CatalogId__"),
+						Name:      ptr.String("__Name__"),
+					},
+					RLSPolicy: &types.RLSPolicyResource{
 						CatalogId: ptr.String("__CatalogId__"),
 						Name:      ptr.String("__Name__"),
 					},
@@ -1380,6 +1521,10 @@ func TestCheckResponseSnapshot_CreateLakeFormationOptIn(t *testing.T) {
 				CatalogId: ptr.String("__CatalogId__"),
 				Name:      ptr.String("__Name__"),
 			},
+			RLSPolicy: &types.RLSPolicyResource{
+				CatalogId: ptr.String("__CatalogId__"),
+				Name:      ptr.String("__Name__"),
+			},
 		},
 		Condition: &types.Condition{
 			Expression: ptr.String("__Expression__"),
@@ -1390,6 +1535,38 @@ func TestCheckResponseSnapshot_CreateLakeFormationOptIn(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "CreateLakeFormationOptIn.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_CreateRLSPolicy(t *testing.T) {
+	want := &CreateRLSPolicyOutput{}
+	status, header, body, err := serdeRespReadSnapshot("CreateRLSPolicy.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.CreateRLSPolicy(context.Background(), &CreateRLSPolicyInput{
+		Name: ptr.String("__Name__"),
+		AttachmentColumns: []types.Column{
+			{
+				Name: ptr.String("__Name__"),
+				Type: ptr.String("__Type__"),
+			},
+			{
+				Name: ptr.String("__Name__"),
+				Type: ptr.String("__Type__"),
+			},
+		},
+		FilterExpression: ptr.String("__FilterExpression__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "CreateRLSPolicy.response", err)
 	}
 }
 
@@ -1568,6 +1745,10 @@ func TestCheckResponseSnapshot_DeleteLakeFormationOptIn(t *testing.T) {
 				CatalogId: ptr.String("__CatalogId__"),
 				Name:      ptr.String("__Name__"),
 			},
+			RLSPolicy: &types.RLSPolicyResource{
+				CatalogId: ptr.String("__CatalogId__"),
+				Name:      ptr.String("__Name__"),
+			},
 		},
 		Condition: &types.Condition{
 			Expression: ptr.String("__Expression__"),
@@ -1612,6 +1793,27 @@ func TestCheckResponseSnapshot_DeleteObjectsOnCancel(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "DeleteObjectsOnCancel.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_DeleteRLSPolicy(t *testing.T) {
+	want := &DeleteRLSPolicyOutput{}
+	status, header, body, err := serdeRespReadSnapshot("DeleteRLSPolicy.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.DeleteRLSPolicy(context.Background(), &DeleteRLSPolicyInput{
+		Name: ptr.String("__Name__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "DeleteRLSPolicy.response", err)
 	}
 }
 
@@ -1764,6 +1966,111 @@ func TestCheckResponseSnapshot_DescribeTransaction(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "DescribeTransaction.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_DetachRLSPolicy(t *testing.T) {
+	want := &DetachRLSPolicyOutput{}
+	status, header, body, err := serdeRespReadSnapshot("DetachRLSPolicy.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.DetachRLSPolicy(context.Background(), &DetachRLSPolicyInput{
+		Name: ptr.String("__Name__"),
+		Resource: &types.Resource{
+			Catalog: &types.CatalogResource{
+				Id: ptr.String("__Id__"),
+			},
+			Database: &types.DatabaseResource{
+				CatalogId: ptr.String("__CatalogId__"),
+				Name:      ptr.String("__Name__"),
+			},
+			Table: &types.TableResource{
+				CatalogId:     ptr.String("__CatalogId__"),
+				DatabaseName:  ptr.String("__DatabaseName__"),
+				Name:          ptr.String("__Name__"),
+				TableWildcard: &types.TableWildcard{},
+			},
+			TableWithColumns: &types.TableWithColumnsResource{
+				CatalogId:    ptr.String("__CatalogId__"),
+				DatabaseName: ptr.String("__DatabaseName__"),
+				Name:         ptr.String("__Name__"),
+				ColumnNames: []string{
+					"__Member__",
+					"__Member__",
+				},
+				ColumnWildcard: &types.ColumnWildcard{
+					ExcludedColumnNames: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+			DataLocation: &types.DataLocationResource{
+				CatalogId:   ptr.String("__CatalogId__"),
+				ResourceArn: ptr.String("__ResourceArn__"),
+			},
+			DataCellsFilter: &types.DataCellsFilterResource{
+				TableCatalogId: ptr.String("__TableCatalogId__"),
+				DatabaseName:   ptr.String("__DatabaseName__"),
+				TableName:      ptr.String("__TableName__"),
+				Name:           ptr.String("__Name__"),
+			},
+			LFTag: &types.LFTagKeyResource{
+				CatalogId: ptr.String("__CatalogId__"),
+				TagKey:    ptr.String("__TagKey__"),
+				TagValues: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			LFTagPolicy: &types.LFTagPolicyResource{
+				CatalogId:    ptr.String("__CatalogId__"),
+				ResourceType: types.ResourceType("DATABASE"),
+				Expression: []types.LFTag{
+					{
+						TagKey: ptr.String("__TagKey__"),
+						TagValues: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					{
+						TagKey: ptr.String("__TagKey__"),
+						TagValues: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+				ExpressionName: ptr.String("__ExpressionName__"),
+			},
+			LFTagExpression: &types.LFTagExpressionResource{
+				CatalogId: ptr.String("__CatalogId__"),
+				Name:      ptr.String("__Name__"),
+			},
+			RLSPolicy: &types.RLSPolicyResource{
+				CatalogId: ptr.String("__CatalogId__"),
+				Name:      ptr.String("__Name__"),
+			},
+		},
+		Principal: &types.DataLakePrincipal{
+			DataLakePrincipalIdentifier: ptr.String("__DataLakePrincipalIdentifier__"),
+		},
+		Condition: &types.Condition{
+			Expression: ptr.String("__Expression__"),
+		},
+		RemoveDefault: ptr.Bool(true),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "DetachRLSPolicy.response", err)
 	}
 }
 
@@ -2035,6 +2342,10 @@ func TestCheckResponseSnapshot_GetEffectivePermissionsForPath(t *testing.T) {
 						CatalogId: ptr.String("__CatalogId__"),
 						Name:      ptr.String("__Name__"),
 					},
+					RLSPolicy: &types.RLSPolicyResource{
+						CatalogId: ptr.String("__CatalogId__"),
+						Name:      ptr.String("__Name__"),
+					},
 				},
 				Condition: &types.Condition{
 					Expression: ptr.String("__Expression__"),
@@ -2129,6 +2440,10 @@ func TestCheckResponseSnapshot_GetEffectivePermissionsForPath(t *testing.T) {
 						ExpressionName: ptr.String("__ExpressionName__"),
 					},
 					LFTagExpression: &types.LFTagExpressionResource{
+						CatalogId: ptr.String("__CatalogId__"),
+						Name:      ptr.String("__Name__"),
+					},
+					RLSPolicy: &types.RLSPolicyResource{
 						CatalogId: ptr.String("__CatalogId__"),
 						Name:      ptr.String("__Name__"),
 					},
@@ -2307,6 +2622,43 @@ func TestCheckResponseSnapshot_GetQueryStatistics(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_GetRLSPolicy(t *testing.T) {
+	want := &GetRLSPolicyOutput{
+		RLSPolicy: &types.RLSPolicy{
+			CatalogId: ptr.String("__CatalogId__"),
+			Name:      ptr.String("__Name__"),
+			AttachmentColumns: []types.Column{
+				{
+					Name: ptr.String("__Name__"),
+					Type: ptr.String("__Type__"),
+				},
+				{
+					Name: ptr.String("__Name__"),
+					Type: ptr.String("__Type__"),
+				},
+			},
+			FilterExpression: ptr.String("__FilterExpression__"),
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("GetRLSPolicy.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.GetRLSPolicy(context.Background(), &GetRLSPolicyInput{
+		Name: ptr.String("__Name__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "GetRLSPolicy.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_GetResourceLFTags(t *testing.T) {
 	want := &GetResourceLFTagsOutput{
 		LFTagOnDatabase: []types.LFTagPair{
@@ -2469,6 +2821,10 @@ func TestCheckResponseSnapshot_GetResourceLFTags(t *testing.T) {
 				ExpressionName: ptr.String("__ExpressionName__"),
 			},
 			LFTagExpression: &types.LFTagExpressionResource{
+				CatalogId: ptr.String("__CatalogId__"),
+				Name:      ptr.String("__Name__"),
+			},
+			RLSPolicy: &types.RLSPolicyResource{
 				CatalogId: ptr.String("__CatalogId__"),
 				Name:      ptr.String("__Name__"),
 			},
@@ -2838,6 +3194,10 @@ func TestCheckResponseSnapshot_GrantPermissions(t *testing.T) {
 				CatalogId: ptr.String("__CatalogId__"),
 				Name:      ptr.String("__Name__"),
 			},
+			RLSPolicy: &types.RLSPolicyResource{
+				CatalogId: ptr.String("__CatalogId__"),
+				Name:      ptr.String("__Name__"),
+			},
 		},
 		Permissions: []types.Permission{
 			types.Permission("ALL"),
@@ -3122,6 +3482,10 @@ func TestCheckResponseSnapshot_ListLakeFormationOptIns(t *testing.T) {
 						CatalogId: ptr.String("__CatalogId__"),
 						Name:      ptr.String("__Name__"),
 					},
+					RLSPolicy: &types.RLSPolicyResource{
+						CatalogId: ptr.String("__CatalogId__"),
+						Name:      ptr.String("__Name__"),
+					},
 				},
 				Principal: &types.DataLakePrincipal{
 					DataLakePrincipalIdentifier: ptr.String("__DataLakePrincipalIdentifier__"),
@@ -3202,6 +3566,10 @@ func TestCheckResponseSnapshot_ListLakeFormationOptIns(t *testing.T) {
 						ExpressionName: ptr.String("__ExpressionName__"),
 					},
 					LFTagExpression: &types.LFTagExpressionResource{
+						CatalogId: ptr.String("__CatalogId__"),
+						Name:      ptr.String("__Name__"),
+					},
+					RLSPolicy: &types.RLSPolicyResource{
 						CatalogId: ptr.String("__CatalogId__"),
 						Name:      ptr.String("__Name__"),
 					},
@@ -3302,6 +3670,10 @@ func TestCheckResponseSnapshot_ListLakeFormationOptIns(t *testing.T) {
 				CatalogId: ptr.String("__CatalogId__"),
 				Name:      ptr.String("__Name__"),
 			},
+			RLSPolicy: &types.RLSPolicyResource{
+				CatalogId: ptr.String("__CatalogId__"),
+				Name:      ptr.String("__Name__"),
+			},
 		},
 		MaxResults: ptr.Int32(1),
 		NextToken:  ptr.String("__NextToken__"),
@@ -3390,6 +3762,10 @@ func TestCheckResponseSnapshot_ListPermissions(t *testing.T) {
 						ExpressionName: ptr.String("__ExpressionName__"),
 					},
 					LFTagExpression: &types.LFTagExpressionResource{
+						CatalogId: ptr.String("__CatalogId__"),
+						Name:      ptr.String("__Name__"),
+					},
+					RLSPolicy: &types.RLSPolicyResource{
 						CatalogId: ptr.String("__CatalogId__"),
 						Name:      ptr.String("__Name__"),
 					},
@@ -3487,6 +3863,10 @@ func TestCheckResponseSnapshot_ListPermissions(t *testing.T) {
 						ExpressionName: ptr.String("__ExpressionName__"),
 					},
 					LFTagExpression: &types.LFTagExpressionResource{
+						CatalogId: ptr.String("__CatalogId__"),
+						Name:      ptr.String("__Name__"),
+					},
+					RLSPolicy: &types.RLSPolicyResource{
 						CatalogId: ptr.String("__CatalogId__"),
 						Name:      ptr.String("__Name__"),
 					},
@@ -3600,6 +3980,10 @@ func TestCheckResponseSnapshot_ListPermissions(t *testing.T) {
 				CatalogId: ptr.String("__CatalogId__"),
 				Name:      ptr.String("__Name__"),
 			},
+			RLSPolicy: &types.RLSPolicyResource{
+				CatalogId: ptr.String("__CatalogId__"),
+				Name:      ptr.String("__Name__"),
+			},
 		},
 		NextToken:      ptr.String("__NextToken__"),
 		MaxResults:     ptr.Int32(1),
@@ -3610,6 +3994,345 @@ func TestCheckResponseSnapshot_ListPermissions(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "ListPermissions.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_ListRLSPolicies(t *testing.T) {
+	want := &ListRLSPoliciesOutput{
+		RLSPolicies: []types.RLSPolicy{
+			{
+				CatalogId: ptr.String("__CatalogId__"),
+				Name:      ptr.String("__Name__"),
+				AttachmentColumns: []types.Column{
+					{
+						Name: ptr.String("__Name__"),
+						Type: ptr.String("__Type__"),
+					},
+					{
+						Name: ptr.String("__Name__"),
+						Type: ptr.String("__Type__"),
+					},
+				},
+				FilterExpression: ptr.String("__FilterExpression__"),
+			},
+			{
+				CatalogId: ptr.String("__CatalogId__"),
+				Name:      ptr.String("__Name__"),
+				AttachmentColumns: []types.Column{
+					{
+						Name: ptr.String("__Name__"),
+						Type: ptr.String("__Type__"),
+					},
+					{
+						Name: ptr.String("__Name__"),
+						Type: ptr.String("__Type__"),
+					},
+				},
+				FilterExpression: ptr.String("__FilterExpression__"),
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("ListRLSPolicies.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.ListRLSPolicies(context.Background(), &ListRLSPoliciesInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "ListRLSPolicies.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_ListRLSPolicyAttachments(t *testing.T) {
+	want := &ListRLSPolicyAttachmentsOutput{
+		RLSPolicyAttachments: []types.RLSPolicyAttachment{
+			{
+				CatalogId:  ptr.String("__CatalogId__"),
+				PolicyName: ptr.String("__PolicyName__"),
+				Principal: &types.DataLakePrincipal{
+					DataLakePrincipalIdentifier: ptr.String("__DataLakePrincipalIdentifier__"),
+				},
+				Resource: &types.Resource{
+					Catalog: &types.CatalogResource{
+						Id: ptr.String("__Id__"),
+					},
+					Database: &types.DatabaseResource{
+						CatalogId: ptr.String("__CatalogId__"),
+						Name:      ptr.String("__Name__"),
+					},
+					Table: &types.TableResource{
+						CatalogId:     ptr.String("__CatalogId__"),
+						DatabaseName:  ptr.String("__DatabaseName__"),
+						Name:          ptr.String("__Name__"),
+						TableWildcard: &types.TableWildcard{},
+					},
+					TableWithColumns: &types.TableWithColumnsResource{
+						CatalogId:    ptr.String("__CatalogId__"),
+						DatabaseName: ptr.String("__DatabaseName__"),
+						Name:         ptr.String("__Name__"),
+						ColumnNames: []string{
+							"__Member__",
+							"__Member__",
+						},
+						ColumnWildcard: &types.ColumnWildcard{
+							ExcludedColumnNames: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+					},
+					DataLocation: &types.DataLocationResource{
+						CatalogId:   ptr.String("__CatalogId__"),
+						ResourceArn: ptr.String("__ResourceArn__"),
+					},
+					DataCellsFilter: &types.DataCellsFilterResource{
+						TableCatalogId: ptr.String("__TableCatalogId__"),
+						DatabaseName:   ptr.String("__DatabaseName__"),
+						TableName:      ptr.String("__TableName__"),
+						Name:           ptr.String("__Name__"),
+					},
+					LFTag: &types.LFTagKeyResource{
+						CatalogId: ptr.String("__CatalogId__"),
+						TagKey:    ptr.String("__TagKey__"),
+						TagValues: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					LFTagPolicy: &types.LFTagPolicyResource{
+						CatalogId:    ptr.String("__CatalogId__"),
+						ResourceType: types.ResourceType("DATABASE"),
+						Expression: []types.LFTag{
+							{
+								TagKey: ptr.String("__TagKey__"),
+								TagValues: []string{
+									"__Member__",
+									"__Member__",
+								},
+							},
+							{
+								TagKey: ptr.String("__TagKey__"),
+								TagValues: []string{
+									"__Member__",
+									"__Member__",
+								},
+							},
+						},
+						ExpressionName: ptr.String("__ExpressionName__"),
+					},
+					LFTagExpression: &types.LFTagExpressionResource{
+						CatalogId: ptr.String("__CatalogId__"),
+						Name:      ptr.String("__Name__"),
+					},
+					RLSPolicy: &types.RLSPolicyResource{
+						CatalogId: ptr.String("__CatalogId__"),
+						Name:      ptr.String("__Name__"),
+					},
+				},
+				Condition: &types.Condition{
+					Expression: ptr.String("__Expression__"),
+				},
+				DefaultRLSPolicy: ptr.Bool(true),
+			},
+			{
+				CatalogId:  ptr.String("__CatalogId__"),
+				PolicyName: ptr.String("__PolicyName__"),
+				Principal: &types.DataLakePrincipal{
+					DataLakePrincipalIdentifier: ptr.String("__DataLakePrincipalIdentifier__"),
+				},
+				Resource: &types.Resource{
+					Catalog: &types.CatalogResource{
+						Id: ptr.String("__Id__"),
+					},
+					Database: &types.DatabaseResource{
+						CatalogId: ptr.String("__CatalogId__"),
+						Name:      ptr.String("__Name__"),
+					},
+					Table: &types.TableResource{
+						CatalogId:     ptr.String("__CatalogId__"),
+						DatabaseName:  ptr.String("__DatabaseName__"),
+						Name:          ptr.String("__Name__"),
+						TableWildcard: &types.TableWildcard{},
+					},
+					TableWithColumns: &types.TableWithColumnsResource{
+						CatalogId:    ptr.String("__CatalogId__"),
+						DatabaseName: ptr.String("__DatabaseName__"),
+						Name:         ptr.String("__Name__"),
+						ColumnNames: []string{
+							"__Member__",
+							"__Member__",
+						},
+						ColumnWildcard: &types.ColumnWildcard{
+							ExcludedColumnNames: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+					},
+					DataLocation: &types.DataLocationResource{
+						CatalogId:   ptr.String("__CatalogId__"),
+						ResourceArn: ptr.String("__ResourceArn__"),
+					},
+					DataCellsFilter: &types.DataCellsFilterResource{
+						TableCatalogId: ptr.String("__TableCatalogId__"),
+						DatabaseName:   ptr.String("__DatabaseName__"),
+						TableName:      ptr.String("__TableName__"),
+						Name:           ptr.String("__Name__"),
+					},
+					LFTag: &types.LFTagKeyResource{
+						CatalogId: ptr.String("__CatalogId__"),
+						TagKey:    ptr.String("__TagKey__"),
+						TagValues: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					LFTagPolicy: &types.LFTagPolicyResource{
+						CatalogId:    ptr.String("__CatalogId__"),
+						ResourceType: types.ResourceType("DATABASE"),
+						Expression: []types.LFTag{
+							{
+								TagKey: ptr.String("__TagKey__"),
+								TagValues: []string{
+									"__Member__",
+									"__Member__",
+								},
+							},
+							{
+								TagKey: ptr.String("__TagKey__"),
+								TagValues: []string{
+									"__Member__",
+									"__Member__",
+								},
+							},
+						},
+						ExpressionName: ptr.String("__ExpressionName__"),
+					},
+					LFTagExpression: &types.LFTagExpressionResource{
+						CatalogId: ptr.String("__CatalogId__"),
+						Name:      ptr.String("__Name__"),
+					},
+					RLSPolicy: &types.RLSPolicyResource{
+						CatalogId: ptr.String("__CatalogId__"),
+						Name:      ptr.String("__Name__"),
+					},
+				},
+				Condition: &types.Condition{
+					Expression: ptr.String("__Expression__"),
+				},
+				DefaultRLSPolicy: ptr.Bool(true),
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("ListRLSPolicyAttachments.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.ListRLSPolicyAttachments(context.Background(), &ListRLSPolicyAttachmentsInput{
+		Resource: &types.Resource{
+			Catalog: &types.CatalogResource{
+				Id: ptr.String("__Id__"),
+			},
+			Database: &types.DatabaseResource{
+				CatalogId: ptr.String("__CatalogId__"),
+				Name:      ptr.String("__Name__"),
+			},
+			Table: &types.TableResource{
+				CatalogId:     ptr.String("__CatalogId__"),
+				DatabaseName:  ptr.String("__DatabaseName__"),
+				Name:          ptr.String("__Name__"),
+				TableWildcard: &types.TableWildcard{},
+			},
+			TableWithColumns: &types.TableWithColumnsResource{
+				CatalogId:    ptr.String("__CatalogId__"),
+				DatabaseName: ptr.String("__DatabaseName__"),
+				Name:         ptr.String("__Name__"),
+				ColumnNames: []string{
+					"__Member__",
+					"__Member__",
+				},
+				ColumnWildcard: &types.ColumnWildcard{
+					ExcludedColumnNames: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+			DataLocation: &types.DataLocationResource{
+				CatalogId:   ptr.String("__CatalogId__"),
+				ResourceArn: ptr.String("__ResourceArn__"),
+			},
+			DataCellsFilter: &types.DataCellsFilterResource{
+				TableCatalogId: ptr.String("__TableCatalogId__"),
+				DatabaseName:   ptr.String("__DatabaseName__"),
+				TableName:      ptr.String("__TableName__"),
+				Name:           ptr.String("__Name__"),
+			},
+			LFTag: &types.LFTagKeyResource{
+				CatalogId: ptr.String("__CatalogId__"),
+				TagKey:    ptr.String("__TagKey__"),
+				TagValues: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			LFTagPolicy: &types.LFTagPolicyResource{
+				CatalogId:    ptr.String("__CatalogId__"),
+				ResourceType: types.ResourceType("DATABASE"),
+				Expression: []types.LFTag{
+					{
+						TagKey: ptr.String("__TagKey__"),
+						TagValues: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					{
+						TagKey: ptr.String("__TagKey__"),
+						TagValues: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+				ExpressionName: ptr.String("__ExpressionName__"),
+			},
+			LFTagExpression: &types.LFTagExpressionResource{
+				CatalogId: ptr.String("__CatalogId__"),
+				Name:      ptr.String("__Name__"),
+			},
+			RLSPolicy: &types.RLSPolicyResource{
+				CatalogId: ptr.String("__CatalogId__"),
+				Name:      ptr.String("__Name__"),
+			},
+		},
+		Principal: &types.DataLakePrincipal{
+			DataLakePrincipalIdentifier: ptr.String("__DataLakePrincipalIdentifier__"),
+		},
+		PolicyName: ptr.String("__PolicyName__"),
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "ListRLSPolicyAttachments.response", err)
 	}
 }
 
@@ -4007,6 +4730,10 @@ func TestCheckResponseSnapshot_RemoveLFTagsFromResource(t *testing.T) {
 				CatalogId: ptr.String("__CatalogId__"),
 				Name:      ptr.String("__Name__"),
 			},
+			RLSPolicy: &types.RLSPolicyResource{
+				CatalogId: ptr.String("__CatalogId__"),
+				Name:      ptr.String("__Name__"),
+			},
 		},
 		LFTags: []types.LFTagPair{
 			{
@@ -4119,6 +4846,10 @@ func TestCheckResponseSnapshot_RevokePermissions(t *testing.T) {
 				ExpressionName: ptr.String("__ExpressionName__"),
 			},
 			LFTagExpression: &types.LFTagExpressionResource{
+				CatalogId: ptr.String("__CatalogId__"),
+				Name:      ptr.String("__Name__"),
+			},
+			RLSPolicy: &types.RLSPolicyResource{
 				CatalogId: ptr.String("__CatalogId__"),
 				Name:      ptr.String("__Name__"),
 			},
@@ -4685,6 +5416,28 @@ func TestCheckResponseSnapshot_UpdateLakeFormationIdentityCenterConfiguration(t 
 	}
 }
 
+func TestCheckResponseSnapshot_UpdateRLSPolicy(t *testing.T) {
+	want := &UpdateRLSPolicyOutput{}
+	status, header, body, err := serdeRespReadSnapshot("UpdateRLSPolicy.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.UpdateRLSPolicy(context.Background(), &UpdateRLSPolicyInput{
+		Name:             ptr.String("__Name__"),
+		FilterExpression: ptr.String("__FilterExpression__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "UpdateRLSPolicy.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_UpdateResource(t *testing.T) {
 	want := &UpdateResourceOutput{}
 	status, header, body, err := serdeRespReadSnapshot("UpdateResource.response")
@@ -4890,6 +5643,10 @@ func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 				CatalogId: ptr.String("__CatalogId__"),
 				Name:      ptr.String("__Name__"),
 			},
+			RLSPolicy: &types.RLSPolicyResource{
+				CatalogId: ptr.String("__CatalogId__"),
+				Name:      ptr.String("__Name__"),
+			},
 		},
 		LFTags: []types.LFTagPair{
 			{
@@ -4934,28 +5691,92 @@ func TestCheckResponseSnapshot_Error_AlreadyExistsException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateDataCellsFilter(context.Background(), &CreateDataCellsFilterInput{
-		TableData: &types.DataCellsFilter{
-			TableCatalogId: ptr.String("__TableCatalogId__"),
-			DatabaseName:   ptr.String("__DatabaseName__"),
-			TableName:      ptr.String("__TableName__"),
-			Name:           ptr.String("__Name__"),
-			RowFilter: &types.RowFilter{
-				FilterExpression: ptr.String("__FilterExpression__"),
-				AllRowsWildcard:  &types.AllRowsWildcard{},
+	_, opErr := svc.AttachRLSPolicy(context.Background(), &AttachRLSPolicyInput{
+		Name: ptr.String("__Name__"),
+		Resource: &types.Resource{
+			Catalog: &types.CatalogResource{
+				Id: ptr.String("__Id__"),
 			},
-			ColumnNames: []string{
-				"__Member__",
-				"__Member__",
+			Database: &types.DatabaseResource{
+				CatalogId: ptr.String("__CatalogId__"),
+				Name:      ptr.String("__Name__"),
 			},
-			ColumnWildcard: &types.ColumnWildcard{
-				ExcludedColumnNames: []string{
+			Table: &types.TableResource{
+				CatalogId:     ptr.String("__CatalogId__"),
+				DatabaseName:  ptr.String("__DatabaseName__"),
+				Name:          ptr.String("__Name__"),
+				TableWildcard: &types.TableWildcard{},
+			},
+			TableWithColumns: &types.TableWithColumnsResource{
+				CatalogId:    ptr.String("__CatalogId__"),
+				DatabaseName: ptr.String("__DatabaseName__"),
+				Name:         ptr.String("__Name__"),
+				ColumnNames: []string{
+					"__Member__",
+					"__Member__",
+				},
+				ColumnWildcard: &types.ColumnWildcard{
+					ExcludedColumnNames: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+			DataLocation: &types.DataLocationResource{
+				CatalogId:   ptr.String("__CatalogId__"),
+				ResourceArn: ptr.String("__ResourceArn__"),
+			},
+			DataCellsFilter: &types.DataCellsFilterResource{
+				TableCatalogId: ptr.String("__TableCatalogId__"),
+				DatabaseName:   ptr.String("__DatabaseName__"),
+				TableName:      ptr.String("__TableName__"),
+				Name:           ptr.String("__Name__"),
+			},
+			LFTag: &types.LFTagKeyResource{
+				CatalogId: ptr.String("__CatalogId__"),
+				TagKey:    ptr.String("__TagKey__"),
+				TagValues: []string{
 					"__Member__",
 					"__Member__",
 				},
 			},
-			VersionId: ptr.String("__VersionId__"),
+			LFTagPolicy: &types.LFTagPolicyResource{
+				CatalogId:    ptr.String("__CatalogId__"),
+				ResourceType: types.ResourceType("DATABASE"),
+				Expression: []types.LFTag{
+					{
+						TagKey: ptr.String("__TagKey__"),
+						TagValues: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					{
+						TagKey: ptr.String("__TagKey__"),
+						TagValues: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+				ExpressionName: ptr.String("__ExpressionName__"),
+			},
+			LFTagExpression: &types.LFTagExpressionResource{
+				CatalogId: ptr.String("__CatalogId__"),
+				Name:      ptr.String("__Name__"),
+			},
+			RLSPolicy: &types.RLSPolicyResource{
+				CatalogId: ptr.String("__CatalogId__"),
+				Name:      ptr.String("__Name__"),
+			},
 		},
+		Principal: &types.DataLakePrincipal{
+			DataLakePrincipalIdentifier: ptr.String("__DataLakePrincipalIdentifier__"),
+		},
+		Condition: &types.Condition{
+			Expression: ptr.String("__Expression__"),
+		},
+		SetDefault: ptr.Bool(true),
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
@@ -5052,6 +5873,10 @@ func TestCheckResponseSnapshot_Error_ConcurrentModificationException(t *testing.
 				ExpressionName: ptr.String("__ExpressionName__"),
 			},
 			LFTagExpression: &types.LFTagExpressionResource{
+				CatalogId: ptr.String("__CatalogId__"),
+				Name:      ptr.String("__Name__"),
+			},
+			RLSPolicy: &types.RLSPolicyResource{
 				CatalogId: ptr.String("__CatalogId__"),
 				Name:      ptr.String("__Name__"),
 			},
@@ -5208,6 +6033,10 @@ func TestCheckResponseSnapshot_Error_EntityNotFoundException(t *testing.T) {
 				CatalogId: ptr.String("__CatalogId__"),
 				Name:      ptr.String("__Name__"),
 			},
+			RLSPolicy: &types.RLSPolicyResource{
+				CatalogId: ptr.String("__CatalogId__"),
+				Name:      ptr.String("__Name__"),
+			},
 		},
 		LFTags: []types.LFTagPair{
 			{
@@ -5353,6 +6182,10 @@ func TestCheckResponseSnapshot_Error_GlueEncryptionException(t *testing.T) {
 				CatalogId: ptr.String("__CatalogId__"),
 				Name:      ptr.String("__Name__"),
 			},
+			RLSPolicy: &types.RLSPolicyResource{
+				CatalogId: ptr.String("__CatalogId__"),
+				Name:      ptr.String("__Name__"),
+			},
 		},
 		ShowAssignedLFTags: ptr.Bool(true),
 	})
@@ -5451,6 +6284,10 @@ func TestCheckResponseSnapshot_Error_InternalServiceException(t *testing.T) {
 				ExpressionName: ptr.String("__ExpressionName__"),
 			},
 			LFTagExpression: &types.LFTagExpressionResource{
+				CatalogId: ptr.String("__CatalogId__"),
+				Name:      ptr.String("__Name__"),
+			},
+			RLSPolicy: &types.RLSPolicyResource{
 				CatalogId: ptr.String("__CatalogId__"),
 				Name:      ptr.String("__Name__"),
 			},
@@ -5572,6 +6409,10 @@ func TestCheckResponseSnapshot_Error_InvalidInputException(t *testing.T) {
 				CatalogId: ptr.String("__CatalogId__"),
 				Name:      ptr.String("__Name__"),
 			},
+			RLSPolicy: &types.RLSPolicyResource{
+				CatalogId: ptr.String("__CatalogId__"),
+				Name:      ptr.String("__Name__"),
+			},
 		},
 		LFTags: []types.LFTagPair{
 			{
@@ -5687,6 +6528,10 @@ func TestCheckResponseSnapshot_Error_OperationTimeoutException(t *testing.T) {
 				ExpressionName: ptr.String("__ExpressionName__"),
 			},
 			LFTagExpression: &types.LFTagExpressionResource{
+				CatalogId: ptr.String("__CatalogId__"),
+				Name:      ptr.String("__Name__"),
+			},
+			RLSPolicy: &types.RLSPolicyResource{
 				CatalogId: ptr.String("__CatalogId__"),
 				Name:      ptr.String("__Name__"),
 			},
@@ -5819,28 +6664,92 @@ func TestCheckResponseSnapshot_Error_ResourceNumberLimitExceededException(t *tes
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateDataCellsFilter(context.Background(), &CreateDataCellsFilterInput{
-		TableData: &types.DataCellsFilter{
-			TableCatalogId: ptr.String("__TableCatalogId__"),
-			DatabaseName:   ptr.String("__DatabaseName__"),
-			TableName:      ptr.String("__TableName__"),
-			Name:           ptr.String("__Name__"),
-			RowFilter: &types.RowFilter{
-				FilterExpression: ptr.String("__FilterExpression__"),
-				AllRowsWildcard:  &types.AllRowsWildcard{},
+	_, opErr := svc.AttachRLSPolicy(context.Background(), &AttachRLSPolicyInput{
+		Name: ptr.String("__Name__"),
+		Resource: &types.Resource{
+			Catalog: &types.CatalogResource{
+				Id: ptr.String("__Id__"),
 			},
-			ColumnNames: []string{
-				"__Member__",
-				"__Member__",
+			Database: &types.DatabaseResource{
+				CatalogId: ptr.String("__CatalogId__"),
+				Name:      ptr.String("__Name__"),
 			},
-			ColumnWildcard: &types.ColumnWildcard{
-				ExcludedColumnNames: []string{
+			Table: &types.TableResource{
+				CatalogId:     ptr.String("__CatalogId__"),
+				DatabaseName:  ptr.String("__DatabaseName__"),
+				Name:          ptr.String("__Name__"),
+				TableWildcard: &types.TableWildcard{},
+			},
+			TableWithColumns: &types.TableWithColumnsResource{
+				CatalogId:    ptr.String("__CatalogId__"),
+				DatabaseName: ptr.String("__DatabaseName__"),
+				Name:         ptr.String("__Name__"),
+				ColumnNames: []string{
+					"__Member__",
+					"__Member__",
+				},
+				ColumnWildcard: &types.ColumnWildcard{
+					ExcludedColumnNames: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+			DataLocation: &types.DataLocationResource{
+				CatalogId:   ptr.String("__CatalogId__"),
+				ResourceArn: ptr.String("__ResourceArn__"),
+			},
+			DataCellsFilter: &types.DataCellsFilterResource{
+				TableCatalogId: ptr.String("__TableCatalogId__"),
+				DatabaseName:   ptr.String("__DatabaseName__"),
+				TableName:      ptr.String("__TableName__"),
+				Name:           ptr.String("__Name__"),
+			},
+			LFTag: &types.LFTagKeyResource{
+				CatalogId: ptr.String("__CatalogId__"),
+				TagKey:    ptr.String("__TagKey__"),
+				TagValues: []string{
 					"__Member__",
 					"__Member__",
 				},
 			},
-			VersionId: ptr.String("__VersionId__"),
+			LFTagPolicy: &types.LFTagPolicyResource{
+				CatalogId:    ptr.String("__CatalogId__"),
+				ResourceType: types.ResourceType("DATABASE"),
+				Expression: []types.LFTag{
+					{
+						TagKey: ptr.String("__TagKey__"),
+						TagValues: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					{
+						TagKey: ptr.String("__TagKey__"),
+						TagValues: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+				ExpressionName: ptr.String("__ExpressionName__"),
+			},
+			LFTagExpression: &types.LFTagExpressionResource{
+				CatalogId: ptr.String("__CatalogId__"),
+				Name:      ptr.String("__Name__"),
+			},
+			RLSPolicy: &types.RLSPolicyResource{
+				CatalogId: ptr.String("__CatalogId__"),
+				Name:      ptr.String("__Name__"),
+			},
 		},
+		Principal: &types.DataLakePrincipal{
+			DataLakePrincipalIdentifier: ptr.String("__DataLakePrincipalIdentifier__"),
+		},
+		Condition: &types.Condition{
+			Expression: ptr.String("__Expression__"),
+		},
+		SetDefault: ptr.Bool(true),
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")

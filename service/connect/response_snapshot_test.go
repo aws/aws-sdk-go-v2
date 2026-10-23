@@ -1853,6 +1853,34 @@ func TestCheckResponseSnapshot_CreateContactFlow(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_CreateContactFlowAlias(t *testing.T) {
+	want := &CreateContactFlowAliasOutput{
+		ContactFlowArn: ptr.String("__ContactFlowArn__"),
+		Id:             ptr.String("__Id__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("CreateContactFlowAlias.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.CreateContactFlowAlias(context.Background(), &CreateContactFlowAliasInput{
+		InstanceId:         ptr.String("__InstanceId__"),
+		Description:        ptr.String("__Description__"),
+		ContactFlowId:      ptr.String("__ContactFlowId__"),
+		ContactFlowVersion: ptr.Int64(1),
+		AliasName:          ptr.String("__AliasName__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "CreateContactFlowAlias.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_CreateContactFlowModule(t *testing.T) {
 	want := &CreateContactFlowModuleOutput{
 		Id:  ptr.String("__Id__"),
@@ -3625,6 +3653,30 @@ func TestCheckResponseSnapshot_CreateRule(t *testing.T) {
 						},
 					},
 				},
+				SendInAppNotificationAction: &types.SendInAppNotificationActionDefinition{
+					Content: map[string]string{
+						"key0": "__Value__",
+					},
+					Recipient: &types.NotificationRecipientType{
+						UserTags: map[string]string{
+							"key0": "__Value__",
+						},
+						UserIds: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					Exclusion: &types.NotificationRecipientType{
+						UserTags: map[string]string{
+							"key0": "__Value__",
+						},
+						UserIds: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					Priority: types.ConfigurableNotificationPriority("HIGH"),
+				},
 			},
 			{
 				ActionType: types.ActionType("CREATE_TASK"),
@@ -3752,6 +3804,30 @@ func TestCheckResponseSnapshot_CreateRule(t *testing.T) {
 						},
 					},
 				},
+				SendInAppNotificationAction: &types.SendInAppNotificationActionDefinition{
+					Content: map[string]string{
+						"key0": "__Value__",
+					},
+					Recipient: &types.NotificationRecipientType{
+						UserTags: map[string]string{
+							"key0": "__Value__",
+						},
+						UserIds: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					Exclusion: &types.NotificationRecipientType{
+						UserTags: map[string]string{
+							"key0": "__Value__",
+						},
+						UserIds: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					Priority: types.ConfigurableNotificationPriority("HIGH"),
+				},
 			},
 		},
 		PublishStatus: types.RulePublishStatus("DRAFT"),
@@ -3848,6 +3924,16 @@ func TestCheckResponseSnapshot_CreateSecurityProfile(t *testing.T) {
 			{
 				Type:         types.FlowModuleType("MCP"),
 				FlowModuleId: ptr.String("__FlowModuleId__"),
+			},
+		},
+		AllowedAIAgents: []types.AIAgent{
+			{
+				Arn:  ptr.String("__Arn__"),
+				Type: types.AIAgentType("THIRD_PARTY"),
+			},
+			{
+				Arn:  ptr.String("__Arn__"),
+				Type: types.AIAgentType("THIRD_PARTY"),
 			},
 		},
 		GranularAccessControlConfiguration: &types.GranularAccessControlConfiguration{
@@ -4635,6 +4721,29 @@ func TestCheckResponseSnapshot_DeleteContactFlow(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "DeleteContactFlow.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_DeleteContactFlowAlias(t *testing.T) {
+	want := &DeleteContactFlowAliasOutput{}
+	status, header, body, err := serdeRespReadSnapshot("DeleteContactFlowAlias.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.DeleteContactFlowAlias(context.Background(), &DeleteContactFlowAliasInput{
+		InstanceId:    ptr.String("__InstanceId__"),
+		ContactFlowId: ptr.String("__ContactFlowId__"),
+		AliasId:       ptr.String("__AliasId__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "DeleteContactFlowAlias.response", err)
 	}
 }
 
@@ -6812,6 +6921,40 @@ func TestCheckResponseSnapshot_DescribeContactFlow(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_DescribeContactFlowAlias(t *testing.T) {
+	want := &DescribeContactFlowAliasOutput{
+		ContactFlowAlias: &types.ContactFlowAliasInfo{
+			ContactFlowId:      ptr.String("__ContactFlowId__"),
+			ContactFlowArn:     ptr.String("__ContactFlowArn__"),
+			AliasId:            ptr.String("__AliasId__"),
+			Version:            ptr.Int64(1),
+			Name:               ptr.String("__Name__"),
+			Description:        ptr.String("__Description__"),
+			LastModifiedRegion: ptr.String("__LastModifiedRegion__"),
+			LastModifiedTime:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("DescribeContactFlowAlias.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.DescribeContactFlowAlias(context.Background(), &DescribeContactFlowAliasInput{
+		InstanceId:    ptr.String("__InstanceId__"),
+		ContactFlowId: ptr.String("__ContactFlowId__"),
+		AliasId:       ptr.String("__AliasId__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "DescribeContactFlowAlias.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_DescribeContactFlowModule(t *testing.T) {
 	want := &DescribeContactFlowModuleOutput{
 		ContactFlowModule: &types.ContactFlowModule{
@@ -8641,6 +8784,30 @@ func TestCheckResponseSnapshot_DescribeRule(t *testing.T) {
 							},
 						},
 					},
+					SendInAppNotificationAction: &types.SendInAppNotificationActionDefinition{
+						Content: map[string]string{
+							"key0": "__Value__",
+						},
+						Recipient: &types.NotificationRecipientType{
+							UserTags: map[string]string{
+								"key0": "__Value__",
+							},
+							UserIds: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+						Exclusion: &types.NotificationRecipientType{
+							UserTags: map[string]string{
+								"key0": "__Value__",
+							},
+							UserIds: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+						Priority: types.ConfigurableNotificationPriority("HIGH"),
+					},
 				},
 				{
 					ActionType: types.ActionType("CREATE_TASK"),
@@ -8768,6 +8935,30 @@ func TestCheckResponseSnapshot_DescribeRule(t *testing.T) {
 							},
 						},
 					},
+					SendInAppNotificationAction: &types.SendInAppNotificationActionDefinition{
+						Content: map[string]string{
+							"key0": "__Value__",
+						},
+						Recipient: &types.NotificationRecipientType{
+							UserTags: map[string]string{
+								"key0": "__Value__",
+							},
+							UserIds: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+						Exclusion: &types.NotificationRecipientType{
+							UserTags: map[string]string{
+								"key0": "__Value__",
+							},
+							UserIds: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+						Priority: types.ConfigurableNotificationPriority("HIGH"),
+					},
 				},
 			},
 			PublishStatus: types.RulePublishStatus("DRAFT"),
@@ -8866,6 +9057,7 @@ func TestCheckResponseSnapshot_DescribeSecurityProfile(t *testing.T) {
 					},
 				},
 			},
+			Type: types.SecurityProfileType("AWS_MANAGED"),
 		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("DescribeSecurityProfile.response")
@@ -10071,6 +10263,7 @@ func TestCheckResponseSnapshot_GetAttachedFile(t *testing.T) {
 		FileId:                ptr.String("__FileId__"),
 		UrlExpiryInSeconds:    ptr.Int32(1),
 		AssociatedResourceArn: ptr.String("__AssociatedResourceArn__"),
+		UrlContentDisposition: types.ContentDisposition("INLINE"),
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -11474,6 +11667,7 @@ func TestCheckResponseSnapshot_GetTrafficDistribution(t *testing.T) {
 				},
 			},
 		},
+		LastFailoverTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 	}
 	status, header, body, err := serdeRespReadSnapshot("GetTrafficDistribution.response")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -12028,6 +12222,52 @@ func TestCheckResponseSnapshot_ListContactEvaluations(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_ListContactFlowAliases(t *testing.T) {
+	want := &ListContactFlowAliasesOutput{
+		ContactFlowAliasSummaryList: []types.ContactFlowAliasSummary{
+			{
+				Arn:                ptr.String("__Arn__"),
+				AliasId:            ptr.String("__AliasId__"),
+				Version:            ptr.Int64(1),
+				AliasName:          ptr.String("__AliasName__"),
+				AliasDescription:   ptr.String("__AliasDescription__"),
+				LastModifiedTime:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				LastModifiedRegion: ptr.String("__LastModifiedRegion__"),
+			},
+			{
+				Arn:                ptr.String("__Arn__"),
+				AliasId:            ptr.String("__AliasId__"),
+				Version:            ptr.Int64(1),
+				AliasName:          ptr.String("__AliasName__"),
+				AliasDescription:   ptr.String("__AliasDescription__"),
+				LastModifiedTime:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				LastModifiedRegion: ptr.String("__LastModifiedRegion__"),
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("ListContactFlowAliases.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.ListContactFlowAliases(context.Background(), &ListContactFlowAliasesInput{
+		InstanceId:    ptr.String("__InstanceId__"),
+		ContactFlowId: ptr.String("__ContactFlowId__"),
+		NextToken:     ptr.String("__NextToken__"),
+		MaxResults:    ptr.Int32(1),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "ListContactFlowAliases.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_ListContactFlowModuleAliases(t *testing.T) {
 	want := &ListContactFlowModuleAliasesOutput{
 		ContactFlowModuleAliasSummaryList: []types.ContactFlowModuleAliasSummary{
@@ -12157,11 +12397,15 @@ func TestCheckResponseSnapshot_ListContactFlowVersions(t *testing.T) {
 				Arn:                ptr.String("__Arn__"),
 				VersionDescription: ptr.String("__VersionDescription__"),
 				Version:            ptr.Int64(1),
+				LastModifiedTime:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				LastModifiedRegion: ptr.String("__LastModifiedRegion__"),
 			},
 			{
 				Arn:                ptr.String("__Arn__"),
 				VersionDescription: ptr.String("__VersionDescription__"),
 				Version:            ptr.Int64(1),
+				LastModifiedTime:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				LastModifiedRegion: ptr.String("__LastModifiedRegion__"),
 			},
 		},
 		NextToken: ptr.String("__NextToken__"),
@@ -13929,6 +14173,76 @@ func TestCheckResponseSnapshot_ListRealtimeContactAnalysisSegmentsV2(t *testing.
 	}
 }
 
+func TestCheckResponseSnapshot_ListReplicationFindings(t *testing.T) {
+	want := &ListReplicationFindingsOutput{
+		ReplicationFindingsList: []types.ReplicationFinding{
+			{
+				Arn:           ptr.String("__Arn__"),
+				Id:            ptr.String("__Id__"),
+				Region:        ptr.String("__Region__"),
+				ResourceType:  ptr.String("__ResourceType__"),
+				Name:          ptr.String("__Name__"),
+				Operation:     ptr.String("__Operation__"),
+				ReferenceCode: ptr.String("__ReferenceCode__"),
+				Message:       ptr.String("__Message__"),
+			},
+			{
+				Arn:           ptr.String("__Arn__"),
+				Id:            ptr.String("__Id__"),
+				Region:        ptr.String("__Region__"),
+				ResourceType:  ptr.String("__ResourceType__"),
+				Name:          ptr.String("__Name__"),
+				Operation:     ptr.String("__Operation__"),
+				ReferenceCode: ptr.String("__ReferenceCode__"),
+				Message:       ptr.String("__Message__"),
+			},
+		},
+		ApproximateDriftedResourceCounts: []types.ApproximateDriftedResourceCount{
+			{
+				Region:    ptr.String("__Region__"),
+				Count:     ptr.Int64(1),
+				Timestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+			{
+				Region:    ptr.String("__Region__"),
+				Count:     ptr.Int64(1),
+				Timestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+		ResourceReplicationStatuses: []types.ResourceReplicationStatus{
+			{
+				Region: ptr.String("__Region__"),
+				Status: ptr.String("__Status__"),
+			},
+			{
+				Region: ptr.String("__Region__"),
+				Status: ptr.String("__Status__"),
+			},
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("ListReplicationFindings.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.ListReplicationFindings(context.Background(), &ListReplicationFindingsInput{
+		InstanceId:   ptr.String("__InstanceId__"),
+		ResourceType: ptr.String("__ResourceType__"),
+		MaxResults:   ptr.Int32(1),
+		NextToken:    ptr.String("__NextToken__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "ListReplicationFindings.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_ListRoutingProfileManualAssignmentQueues(t *testing.T) {
 	want := &ListRoutingProfileManualAssignmentQueuesOutput{
 		NextToken: ptr.String("__NextToken__"),
@@ -14166,6 +14480,44 @@ func TestCheckResponseSnapshot_ListSecurityKeys(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_ListSecurityProfileAIAgents(t *testing.T) {
+	want := &ListSecurityProfileAIAgentsOutput{
+		AllowedAIAgents: []types.AIAgent{
+			{
+				Arn:  ptr.String("__Arn__"),
+				Type: types.AIAgentType("THIRD_PARTY"),
+			},
+			{
+				Arn:  ptr.String("__Arn__"),
+				Type: types.AIAgentType("THIRD_PARTY"),
+			},
+		},
+		NextToken:          ptr.String("__NextToken__"),
+		LastModifiedTime:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		LastModifiedRegion: ptr.String("__LastModifiedRegion__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("ListSecurityProfileAIAgents.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.ListSecurityProfileAIAgents(context.Background(), &ListSecurityProfileAIAgentsInput{
+		SecurityProfileId: ptr.String("__SecurityProfileId__"),
+		InstanceId:        ptr.String("__InstanceId__"),
+		NextToken:         ptr.String("__NextToken__"),
+		MaxResults:        ptr.Int32(1),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "ListSecurityProfileAIAgents.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_ListSecurityProfileApplications(t *testing.T) {
 	want := &ListSecurityProfileApplicationsOutput{
 		Applications: []types.Application{
@@ -14291,6 +14643,7 @@ func TestCheckResponseSnapshot_ListSecurityProfiles(t *testing.T) {
 				Name:               ptr.String("__Name__"),
 				LastModifiedTime:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 				LastModifiedRegion: ptr.String("__LastModifiedRegion__"),
+				Type:               types.SecurityProfileType("AWS_MANAGED"),
 			},
 			{
 				Id:                 ptr.String("__Id__"),
@@ -14298,6 +14651,7 @@ func TestCheckResponseSnapshot_ListSecurityProfiles(t *testing.T) {
 				Name:               ptr.String("__Name__"),
 				LastModifiedTime:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 				LastModifiedRegion: ptr.String("__LastModifiedRegion__"),
+				Type:               types.SecurityProfileType("AWS_MANAGED"),
 			},
 		},
 		NextToken: ptr.String("__NextToken__"),
@@ -18744,6 +19098,7 @@ func TestCheckResponseSnapshot_SearchSecurityProfiles(t *testing.T) {
 				Tags: map[string]string{
 					"key0": "__Value__",
 				},
+				Type: types.SecurityProfileType("AWS_MANAGED"),
 			},
 			{
 				Id:                     ptr.String("__Id__"),
@@ -18754,6 +19109,7 @@ func TestCheckResponseSnapshot_SearchSecurityProfiles(t *testing.T) {
 				Tags: map[string]string{
 					"key0": "__Value__",
 				},
+				Type: types.SecurityProfileType("AWS_MANAGED"),
 			},
 		},
 		NextToken:             ptr.String("__NextToken__"),
@@ -20177,6 +20533,15 @@ func TestCheckResponseSnapshot_StartChatContact(t *testing.T) {
 		ParticipantId:          ptr.String("__ParticipantId__"),
 		ParticipantToken:       ptr.String("__ParticipantToken__"),
 		ContinuedFromContactId: ptr.String("__ContinuedFromContactId__"),
+		ConnectionCredentials: &types.ConnectionCredentials{
+			ConnectionToken: ptr.String("__ConnectionToken__"),
+			Expiry:          ptr.String("__Expiry__"),
+		},
+		Websocket: &types.Websocket{
+			Url:              ptr.String("__Url__"),
+			ConnectionExpiry: ptr.String("__ConnectionExpiry__"),
+		},
+		StreamingId: ptr.String("__StreamingId__"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("StartChatContact.response")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -20231,6 +20596,13 @@ func TestCheckResponseSnapshot_StartChatContact(t *testing.T) {
 		DisconnectOnCustomerExit: []types.DisconnectOnCustomerExitParticipantType{
 			types.DisconnectOnCustomerExitParticipantType("AGENT"),
 			types.DisconnectOnCustomerExitParticipantType("AGENT"),
+		},
+		ConnectionTypes: []types.ConnectionType{
+			types.ConnectionType("WEBSOCKET"),
+			types.ConnectionType("WEBSOCKET"),
+		},
+		ChatStreamingConfiguration: &types.ChatStreamingConfiguration{
+			StreamingEndpointArn: ptr.String("__StreamingEndpointArn__"),
 		},
 	})
 	if err != nil {
@@ -21492,6 +21864,32 @@ func TestCheckResponseSnapshot_UpdateContactEvaluation(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "UpdateContactEvaluation.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_UpdateContactFlowAlias(t *testing.T) {
+	want := &UpdateContactFlowAliasOutput{}
+	status, header, body, err := serdeRespReadSnapshot("UpdateContactFlowAlias.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.UpdateContactFlowAlias(context.Background(), &UpdateContactFlowAliasInput{
+		InstanceId:         ptr.String("__InstanceId__"),
+		ContactFlowId:      ptr.String("__ContactFlowId__"),
+		AliasId:            ptr.String("__AliasId__"),
+		Name:               ptr.String("__Name__"),
+		Description:        ptr.String("__Description__"),
+		ContactFlowVersion: ptr.Int64(1),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "UpdateContactFlowAlias.response", err)
 	}
 }
 
@@ -23726,6 +24124,30 @@ func TestCheckResponseSnapshot_UpdateRule(t *testing.T) {
 						},
 					},
 				},
+				SendInAppNotificationAction: &types.SendInAppNotificationActionDefinition{
+					Content: map[string]string{
+						"key0": "__Value__",
+					},
+					Recipient: &types.NotificationRecipientType{
+						UserTags: map[string]string{
+							"key0": "__Value__",
+						},
+						UserIds: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					Exclusion: &types.NotificationRecipientType{
+						UserTags: map[string]string{
+							"key0": "__Value__",
+						},
+						UserIds: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					Priority: types.ConfigurableNotificationPriority("HIGH"),
+				},
 			},
 			{
 				ActionType: types.ActionType("CREATE_TASK"),
@@ -23853,6 +24275,30 @@ func TestCheckResponseSnapshot_UpdateRule(t *testing.T) {
 						},
 					},
 				},
+				SendInAppNotificationAction: &types.SendInAppNotificationActionDefinition{
+					Content: map[string]string{
+						"key0": "__Value__",
+					},
+					Recipient: &types.NotificationRecipientType{
+						UserTags: map[string]string{
+							"key0": "__Value__",
+						},
+						UserIds: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					Exclusion: &types.NotificationRecipientType{
+						UserTags: map[string]string{
+							"key0": "__Value__",
+						},
+						UserIds: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					Priority: types.ConfigurableNotificationPriority("HIGH"),
+				},
 			},
 		},
 		PublishStatus: types.RulePublishStatus("DRAFT"),
@@ -23939,6 +24385,16 @@ func TestCheckResponseSnapshot_UpdateSecurityProfile(t *testing.T) {
 			{
 				Type:         types.FlowModuleType("MCP"),
 				FlowModuleId: ptr.String("__FlowModuleId__"),
+			},
+		},
+		AllowedAIAgents: []types.AIAgent{
+			{
+				Arn:  ptr.String("__Arn__"),
+				Type: types.AIAgentType("THIRD_PARTY"),
+			},
+			{
+				Arn:  ptr.String("__Arn__"),
+				Type: types.AIAgentType("THIRD_PARTY"),
 			},
 		},
 		GranularAccessControlConfiguration: &types.GranularAccessControlConfiguration{

@@ -5,7 +5,9 @@ package bedrock
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/bedrock/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrock/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -71,6 +73,39 @@ type UpdateAutomatedReasoningPolicyTestCaseInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateAutomatedReasoningPolicyTestCaseInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateAutomatedReasoningPolicyTestCaseRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateAutomatedReasoningPolicyTestCaseInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientRequestToken != nil {
+		s.WriteString(schemas.UpdateAutomatedReasoningPolicyTestCaseRequest_clientRequestToken, *v.ClientRequestToken)
+	}
+	if v.ConfidenceThreshold != nil {
+		s.WriteFloat64(schemas.UpdateAutomatedReasoningPolicyTestCaseRequest_confidenceThreshold, *v.ConfidenceThreshold)
+	}
+	if v.ExpectedAggregatedFindingsResult != "" {
+		s.WriteString(schemas.UpdateAutomatedReasoningPolicyTestCaseRequest_expectedAggregatedFindingsResult, string(v.ExpectedAggregatedFindingsResult))
+	}
+	if v.GuardContent != nil {
+		s.WriteString(schemas.UpdateAutomatedReasoningPolicyTestCaseRequest_guardContent, *v.GuardContent)
+	}
+	if v.LastUpdatedAt != nil {
+		s.WriteTime(schemas.UpdateAutomatedReasoningPolicyTestCaseRequest_lastUpdatedAt, *v.LastUpdatedAt)
+	}
+	if v.PolicyArn != nil {
+		s.WriteString(schemas.UpdateAutomatedReasoningPolicyTestCaseRequest_policyArn, *v.PolicyArn)
+	}
+	if v.QueryContent != nil {
+		s.WriteString(schemas.UpdateAutomatedReasoningPolicyTestCaseRequest_queryContent, *v.QueryContent)
+	}
+	if v.TestCaseId != nil {
+		s.WriteString(schemas.UpdateAutomatedReasoningPolicyTestCaseRequest_testCaseId, *v.TestCaseId)
+	}
+}
+
 type UpdateAutomatedReasoningPolicyTestCaseOutput struct {
 
 	// The Amazon Resource Name (ARN) of the policy that contains the updated test.
@@ -89,13 +124,38 @@ type UpdateAutomatedReasoningPolicyTestCaseOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateAutomatedReasoningPolicyTestCaseOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateAutomatedReasoningPolicyTestCaseResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateAutomatedReasoningPolicyTestCaseOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PolicyArn != nil {
+		s.WriteString(schemas.UpdateAutomatedReasoningPolicyTestCaseResponse_policyArn, *v.PolicyArn)
+	}
+	if v.TestCaseId != nil {
+		s.WriteString(schemas.UpdateAutomatedReasoningPolicyTestCaseResponse_testCaseId, *v.TestCaseId)
+	}
+}
+func (v *UpdateAutomatedReasoningPolicyTestCaseOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateAutomatedReasoningPolicyTestCaseResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateAutomatedReasoningPolicyTestCaseResponse_policyArn:
+			v.PolicyArn = new(string)
+			return d.ReadString(schemas.UpdateAutomatedReasoningPolicyTestCaseResponse_policyArn, v.PolicyArn)
+		case schemas.UpdateAutomatedReasoningPolicyTestCaseResponse_testCaseId:
+			v.TestCaseId = new(string)
+			return d.ReadString(schemas.UpdateAutomatedReasoningPolicyTestCaseResponse_testCaseId, v.TestCaseId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateAutomatedReasoningPolicyTestCaseMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateAutomatedReasoningPolicyTestCase{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateAutomatedReasoningPolicyTestCase, schemas.UpdateAutomatedReasoningPolicyTestCaseRequest, schemas.UpdateAutomatedReasoningPolicyTestCaseResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateAutomatedReasoningPolicyTestCase{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateAutomatedReasoningPolicyTestCase, schemas.UpdateAutomatedReasoningPolicyTestCaseRequest, schemas.UpdateAutomatedReasoningPolicyTestCaseResponse), output: &UpdateAutomatedReasoningPolicyTestCaseOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

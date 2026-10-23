@@ -117,7 +117,7 @@ type PutScalingPolicyInput struct {
 	//   - ActiveInstances -- Fleet instances that are currently running at least one
 	//   game session.
 	//
-	//   - AvailableGameSessions -- Additional game sessions that fleet could host
+	//   - AvailableGameSessions -- Additional game sessions that a fleet could host
 	//   simultaneously, given current capacity.
 	//
 	//   - AvailablePlayerSessions -- Empty player slots in currently active game

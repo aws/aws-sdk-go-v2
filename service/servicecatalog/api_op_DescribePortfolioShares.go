@@ -5,7 +5,9 @@ package servicecatalog
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/servicecatalog/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/servicecatalog/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -65,6 +67,27 @@ type DescribePortfolioSharesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribePortfolioSharesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribePortfolioSharesInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribePortfolioSharesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PageSize != 0 {
+		s.WriteInt32(schemas.DescribePortfolioSharesInput_PageSize, v.PageSize)
+	}
+	if v.PageToken != nil {
+		s.WriteString(schemas.DescribePortfolioSharesInput_PageToken, *v.PageToken)
+	}
+	if v.PortfolioId != nil {
+		s.WriteString(schemas.DescribePortfolioSharesInput_PortfolioId, *v.PortfolioId)
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.DescribePortfolioSharesInput_Type, string(v.Type))
+	}
+}
+
 type DescribePortfolioSharesOutput struct {
 
 	// The page token to use to retrieve the next set of results. If there are no
@@ -80,13 +103,35 @@ type DescribePortfolioSharesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribePortfolioSharesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribePortfolioSharesOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribePortfolioSharesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextPageToken != nil {
+		s.WriteString(schemas.DescribePortfolioSharesOutput_NextPageToken, *v.NextPageToken)
+	}
+	serializePortfolioShareDetails(s, schemas.DescribePortfolioSharesOutput_PortfolioShareDetails, v.PortfolioShareDetails)
+}
+func (v *DescribePortfolioSharesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribePortfolioSharesOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribePortfolioSharesOutput_NextPageToken:
+			v.NextPageToken = new(string)
+			return d.ReadString(schemas.DescribePortfolioSharesOutput_NextPageToken, v.NextPageToken)
+		case schemas.DescribePortfolioSharesOutput_PortfolioShareDetails:
+			return deserializePortfolioShareDetails(d, schemas.DescribePortfolioSharesOutput_PortfolioShareDetails, &v.PortfolioShareDetails)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribePortfolioSharesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribePortfolioShares{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribePortfolioShares, schemas.DescribePortfolioSharesInput, schemas.DescribePortfolioSharesOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribePortfolioShares{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribePortfolioShares, schemas.DescribePortfolioSharesInput, schemas.DescribePortfolioSharesOutput), output: &DescribePortfolioSharesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

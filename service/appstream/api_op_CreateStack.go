@@ -71,6 +71,13 @@ type CreateStackInput struct {
 	// The URL that users are redirected to after their streaming session ends.
 	RedirectURL *string
 
+	// Specifies whether users' cloud storage authentication persists across streaming
+	// sessions. When you specify FORCE_REAUTHENTICATION, WorkSpaces Applications
+	// removes the stored authentication for the stack's OneDrive and Google Drive
+	// connectors when a user's session ends. The user links their cloud storage again
+	// on their next session. The default is REUSE_CREDENTIALS.
+	StorageConnectorAuthentication types.StorageConnectorAuthentication
+
 	// The storage connectors to enable.
 	StorageConnectors []types.StorageConnector
 
@@ -140,6 +147,9 @@ func (v *CreateStackInput) SerializeMembers(s smithy.ShapeSerializer) {
 	}
 	if v.RedirectURL != nil {
 		s.WriteString(schemas.CreateStackRequest_RedirectURL, *v.RedirectURL)
+	}
+	if v.StorageConnectorAuthentication != "" {
+		s.WriteString(schemas.CreateStackRequest_StorageConnectorAuthentication, string(v.StorageConnectorAuthentication))
 	}
 	serializeStorageConnectorList(s, schemas.CreateStackRequest_StorageConnectors, v.StorageConnectors)
 	if v.StreamingExperienceSettings != nil {

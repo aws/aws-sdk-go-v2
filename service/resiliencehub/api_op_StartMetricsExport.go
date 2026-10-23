@@ -5,7 +5,9 @@ package resiliencehub
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/resiliencehub/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/resiliencehub/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,21 @@ type StartMetricsExportInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartMetricsExportInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartMetricsExportRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartMetricsExportInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BucketName != nil {
+		s.WriteString(schemas.StartMetricsExportRequest_bucketName, *v.BucketName)
+	}
+	if v.ClientToken != nil {
+		s.WriteString(schemas.StartMetricsExportRequest_clientToken, *v.ClientToken)
+	}
+}
+
 type StartMetricsExportOutput struct {
 
 	// Identifier of the metrics export task.
@@ -57,13 +74,42 @@ type StartMetricsExportOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartMetricsExportOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartMetricsExportResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartMetricsExportOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MetricsExportId != nil {
+		s.WriteString(schemas.StartMetricsExportResponse_metricsExportId, *v.MetricsExportId)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.StartMetricsExportResponse_status, string(v.Status))
+	}
+}
+func (v *StartMetricsExportOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartMetricsExportResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartMetricsExportResponse_metricsExportId:
+			v.MetricsExportId = new(string)
+			return d.ReadString(schemas.StartMetricsExportResponse_metricsExportId, v.MetricsExportId)
+		case schemas.StartMetricsExportResponse_status:
+			var ev string
+			if err := d.ReadString(schemas.StartMetricsExportResponse_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.MetricsExportStatusType(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartMetricsExportMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpStartMetricsExport{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartMetricsExport, schemas.StartMetricsExportRequest, schemas.StartMetricsExportResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStartMetricsExport{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartMetricsExport, schemas.StartMetricsExportRequest, schemas.StartMetricsExportResponse), output: &StartMetricsExportOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

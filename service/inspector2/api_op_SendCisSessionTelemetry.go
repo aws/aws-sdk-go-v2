@@ -4,7 +4,9 @@ package inspector2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/inspector2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/inspector2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -48,6 +50,22 @@ type SendCisSessionTelemetryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SendCisSessionTelemetryInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SendCisSessionTelemetryRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SendCisSessionTelemetryInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeCisSessionMessages(s, schemas.SendCisSessionTelemetryRequest_messages, v.Messages)
+	if v.ScanJobId != nil {
+		s.WriteString(schemas.SendCisSessionTelemetryRequest_scanJobId, *v.ScanJobId)
+	}
+	if v.SessionToken != nil {
+		s.WriteString(schemas.SendCisSessionTelemetryRequest_sessionToken, *v.SessionToken)
+	}
+}
+
 type SendCisSessionTelemetryOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -55,13 +73,26 @@ type SendCisSessionTelemetryOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SendCisSessionTelemetryOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SendCisSessionTelemetryResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SendCisSessionTelemetryOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *SendCisSessionTelemetryOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SendCisSessionTelemetryResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationSendCisSessionTelemetryMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpSendCisSessionTelemetry{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SendCisSessionTelemetry, schemas.SendCisSessionTelemetryRequest, schemas.SendCisSessionTelemetryResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpSendCisSessionTelemetry{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SendCisSessionTelemetry, schemas.SendCisSessionTelemetryRequest, schemas.SendCisSessionTelemetryResponse), output: &SendCisSessionTelemetryOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

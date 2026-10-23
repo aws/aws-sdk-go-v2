@@ -95,6 +95,11 @@ type PutLogAlarmInput struct {
 	// This member is required.
 	Threshold *float64
 
+	// Settings that change the content of the notifications and events that the alarm
+	// sends when its state changes. These settings apply to the alarm's actions,
+	// whichever state triggers them.
+	ActionConfiguration *types.ActionConfiguration
+
 	// The number of log lines from the most recent scheduled query execution to
 	// include in alarm action notifications. Valid range is 0 through 50. The default
 	// is 0, which means no log lines are included.
@@ -209,6 +214,11 @@ func (v *PutLogAlarmInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *PutLogAlarmInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ActionConfiguration != nil {
+		s.WriteStruct(schemas.PutLogAlarmInput_ActionConfiguration)
+		v.ActionConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
 	if v.ActionLogLineCount != nil {
 		s.WriteInt32(schemas.PutLogAlarmInput_ActionLogLineCount, *v.ActionLogLineCount)
 	}

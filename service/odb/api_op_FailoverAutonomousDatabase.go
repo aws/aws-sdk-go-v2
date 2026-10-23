@@ -4,7 +4,9 @@ package odb
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/odb/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/odb/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -38,6 +40,21 @@ type FailoverAutonomousDatabaseInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *FailoverAutonomousDatabaseInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.FailoverAutonomousDatabaseInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *FailoverAutonomousDatabaseInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AutonomousDatabaseId != nil {
+		s.WriteString(schemas.FailoverAutonomousDatabaseInput_autonomousDatabaseId, *v.AutonomousDatabaseId)
+	}
+	if v.PeerDbArn != nil {
+		s.WriteString(schemas.FailoverAutonomousDatabaseInput_peerDbArn, *v.PeerDbArn)
+	}
+}
+
 type FailoverAutonomousDatabaseOutput struct {
 
 	// The unique identifier of the Autonomous Database that was failed over.
@@ -61,13 +78,54 @@ type FailoverAutonomousDatabaseOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *FailoverAutonomousDatabaseOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.FailoverAutonomousDatabaseOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *FailoverAutonomousDatabaseOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AutonomousDatabaseId != nil {
+		s.WriteString(schemas.FailoverAutonomousDatabaseOutput_autonomousDatabaseId, *v.AutonomousDatabaseId)
+	}
+	if v.DisplayName != nil {
+		s.WriteString(schemas.FailoverAutonomousDatabaseOutput_displayName, *v.DisplayName)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.FailoverAutonomousDatabaseOutput_status, string(v.Status))
+	}
+	if v.StatusReason != nil {
+		s.WriteString(schemas.FailoverAutonomousDatabaseOutput_statusReason, *v.StatusReason)
+	}
+}
+func (v *FailoverAutonomousDatabaseOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.FailoverAutonomousDatabaseOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.FailoverAutonomousDatabaseOutput_autonomousDatabaseId:
+			v.AutonomousDatabaseId = new(string)
+			return d.ReadString(schemas.FailoverAutonomousDatabaseOutput_autonomousDatabaseId, v.AutonomousDatabaseId)
+		case schemas.FailoverAutonomousDatabaseOutput_displayName:
+			v.DisplayName = new(string)
+			return d.ReadString(schemas.FailoverAutonomousDatabaseOutput_displayName, v.DisplayName)
+		case schemas.FailoverAutonomousDatabaseOutput_status:
+			var ev string
+			if err := d.ReadString(schemas.FailoverAutonomousDatabaseOutput_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.AutonomousDatabaseResourceStatus(ev)
+			return nil
+		case schemas.FailoverAutonomousDatabaseOutput_statusReason:
+			v.StatusReason = new(string)
+			return d.ReadString(schemas.FailoverAutonomousDatabaseOutput_statusReason, v.StatusReason)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationFailoverAutonomousDatabaseMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpFailoverAutonomousDatabase{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.FailoverAutonomousDatabase, schemas.FailoverAutonomousDatabaseInput, schemas.FailoverAutonomousDatabaseOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpFailoverAutonomousDatabase{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.FailoverAutonomousDatabase, schemas.FailoverAutonomousDatabaseInput, schemas.FailoverAutonomousDatabaseOutput), output: &FailoverAutonomousDatabaseOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,6 +4,8 @@ package guardduty
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/guardduty/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -43,6 +45,19 @@ type CreateSampleFindingsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateSampleFindingsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateSampleFindingsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateSampleFindingsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DetectorId != nil {
+		s.WriteString(schemas.CreateSampleFindingsRequest_DetectorId, *v.DetectorId)
+	}
+	serializeFindingTypes(s, schemas.CreateSampleFindingsRequest_FindingTypes, v.FindingTypes)
+}
+
 type CreateSampleFindingsOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -50,13 +65,26 @@ type CreateSampleFindingsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateSampleFindingsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateSampleFindingsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateSampleFindingsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *CreateSampleFindingsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateSampleFindingsResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateSampleFindingsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateSampleFindings{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateSampleFindings, schemas.CreateSampleFindingsRequest, schemas.CreateSampleFindingsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateSampleFindings{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateSampleFindings, schemas.CreateSampleFindingsRequest, schemas.CreateSampleFindingsResponse), output: &CreateSampleFindingsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

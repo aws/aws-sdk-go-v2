@@ -4,6 +4,8 @@ package redshiftserverless
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/redshiftserverless/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -54,6 +56,16 @@ type GetIdentityCenterAuthTokenInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetIdentityCenterAuthTokenInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetIdentityCenterAuthTokenRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetIdentityCenterAuthTokenInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeWorkgroupNameList(s, schemas.GetIdentityCenterAuthTokenRequest_workgroupNames, v.WorkgroupNames)
+}
+
 type GetIdentityCenterAuthTokenOutput struct {
 
 	// The date and time when the Identity Center authentication token expires.
@@ -74,13 +86,38 @@ type GetIdentityCenterAuthTokenOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetIdentityCenterAuthTokenOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetIdentityCenterAuthTokenResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetIdentityCenterAuthTokenOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ExpirationTime != nil {
+		s.WriteTime(schemas.GetIdentityCenterAuthTokenResponse_expirationTime, *v.ExpirationTime)
+	}
+	if v.Token != nil {
+		s.WriteString(schemas.GetIdentityCenterAuthTokenResponse_token, *v.Token)
+	}
+}
+func (v *GetIdentityCenterAuthTokenOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetIdentityCenterAuthTokenResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetIdentityCenterAuthTokenResponse_expirationTime:
+			v.ExpirationTime = new(time.Time)
+			return d.ReadTime(schemas.GetIdentityCenterAuthTokenResponse_expirationTime, v.ExpirationTime)
+		case schemas.GetIdentityCenterAuthTokenResponse_token:
+			v.Token = new(string)
+			return d.ReadString(schemas.GetIdentityCenterAuthTokenResponse_token, v.Token)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetIdentityCenterAuthTokenMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetIdentityCenterAuthToken{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetIdentityCenterAuthToken, schemas.GetIdentityCenterAuthTokenRequest, schemas.GetIdentityCenterAuthTokenResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetIdentityCenterAuthToken{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetIdentityCenterAuthToken, schemas.GetIdentityCenterAuthTokenRequest, schemas.GetIdentityCenterAuthTokenResponse), output: &GetIdentityCenterAuthTokenOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

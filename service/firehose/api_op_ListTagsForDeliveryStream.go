@@ -4,7 +4,9 @@ package firehose
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/firehose/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/firehose/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -46,6 +48,24 @@ type ListTagsForDeliveryStreamInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListTagsForDeliveryStreamInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListTagsForDeliveryStreamInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListTagsForDeliveryStreamInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DeliveryStreamName != nil {
+		s.WriteString(schemas.ListTagsForDeliveryStreamInput_DeliveryStreamName, *v.DeliveryStreamName)
+	}
+	if v.ExclusiveStartTagKey != nil {
+		s.WriteString(schemas.ListTagsForDeliveryStreamInput_ExclusiveStartTagKey, *v.ExclusiveStartTagKey)
+	}
+	if v.Limit != nil {
+		s.WriteInt32(schemas.ListTagsForDeliveryStreamInput_Limit, *v.Limit)
+	}
+}
+
 type ListTagsForDeliveryStreamOutput struct {
 
 	// If this is true in the response, more tags are available. To list the remaining
@@ -67,13 +87,35 @@ type ListTagsForDeliveryStreamOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListTagsForDeliveryStreamOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListTagsForDeliveryStreamOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListTagsForDeliveryStreamOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.HasMoreTags != nil {
+		s.WriteBool(schemas.ListTagsForDeliveryStreamOutput_HasMoreTags, *v.HasMoreTags)
+	}
+	serializeListTagsForDeliveryStreamOutputTagList(s, schemas.ListTagsForDeliveryStreamOutput_Tags, v.Tags)
+}
+func (v *ListTagsForDeliveryStreamOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListTagsForDeliveryStreamOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListTagsForDeliveryStreamOutput_HasMoreTags:
+			v.HasMoreTags = new(bool)
+			return d.ReadBool(schemas.ListTagsForDeliveryStreamOutput_HasMoreTags, v.HasMoreTags)
+		case schemas.ListTagsForDeliveryStreamOutput_Tags:
+			return deserializeListTagsForDeliveryStreamOutputTagList(d, schemas.ListTagsForDeliveryStreamOutput_Tags, &v.Tags)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListTagsForDeliveryStreamMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListTagsForDeliveryStream{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListTagsForDeliveryStream, schemas.ListTagsForDeliveryStreamInput, schemas.ListTagsForDeliveryStreamOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListTagsForDeliveryStream{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListTagsForDeliveryStream, schemas.ListTagsForDeliveryStreamInput, schemas.ListTagsForDeliveryStreamOutput), output: &ListTagsForDeliveryStreamOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

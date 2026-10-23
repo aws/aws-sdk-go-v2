@@ -4,7 +4,9 @@ package resiliencehubv2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/resiliencehubv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/resiliencehubv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,21 @@ type GetUserJourneyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetUserJourneyInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetUserJourneyRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetUserJourneyInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SystemArn != nil {
+		s.WriteString(schemas.GetUserJourneyRequest_systemArn, *v.SystemArn)
+	}
+	if v.UserJourneyId != nil {
+		s.WriteString(schemas.GetUserJourneyRequest_userJourneyId, *v.UserJourneyId)
+	}
+}
+
 type GetUserJourneyOutput struct {
 
 	// The requested user journey.
@@ -52,13 +69,34 @@ type GetUserJourneyOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetUserJourneyOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetUserJourneyResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetUserJourneyOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.UserJourney != nil {
+		s.WriteStruct(schemas.GetUserJourneyResponse_userJourney)
+		v.UserJourney.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetUserJourneyOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetUserJourneyResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetUserJourneyResponse_userJourney:
+			v.UserJourney = &types.UserJourney{}
+			return v.UserJourney.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetUserJourneyMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetUserJourney{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetUserJourney, schemas.GetUserJourneyRequest, schemas.GetUserJourneyResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetUserJourney{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetUserJourney, schemas.GetUserJourneyRequest, schemas.GetUserJourneyResponse), output: &GetUserJourneyOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

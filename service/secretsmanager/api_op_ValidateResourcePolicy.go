@@ -4,7 +4,9 @@ package secretsmanager
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/secretsmanager/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/secretsmanager/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -65,6 +67,21 @@ type ValidateResourcePolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ValidateResourcePolicyInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ValidateResourcePolicyRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ValidateResourcePolicyInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ResourcePolicy != nil {
+		s.WriteString(schemas.ValidateResourcePolicyRequest_ResourcePolicy, *v.ResourcePolicy)
+	}
+	if v.SecretId != nil {
+		s.WriteString(schemas.ValidateResourcePolicyRequest_SecretId, *v.SecretId)
+	}
+}
+
 type ValidateResourcePolicyOutput struct {
 
 	// True if your policy passes validation, otherwise false.
@@ -79,13 +96,34 @@ type ValidateResourcePolicyOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ValidateResourcePolicyOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ValidateResourcePolicyResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ValidateResourcePolicyOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PolicyValidationPassed != false {
+		s.WriteBool(schemas.ValidateResourcePolicyResponse_PolicyValidationPassed, v.PolicyValidationPassed)
+	}
+	serializeValidationErrorsType(s, schemas.ValidateResourcePolicyResponse_ValidationErrors, v.ValidationErrors)
+}
+func (v *ValidateResourcePolicyOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ValidateResourcePolicyResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ValidateResourcePolicyResponse_PolicyValidationPassed:
+			return d.ReadBool(schemas.ValidateResourcePolicyResponse_PolicyValidationPassed, &v.PolicyValidationPassed)
+		case schemas.ValidateResourcePolicyResponse_ValidationErrors:
+			return deserializeValidationErrorsType(d, schemas.ValidateResourcePolicyResponse_ValidationErrors, &v.ValidationErrors)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationValidateResourcePolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpValidateResourcePolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ValidateResourcePolicy, schemas.ValidateResourcePolicyRequest, schemas.ValidateResourcePolicyResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpValidateResourcePolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ValidateResourcePolicy, schemas.ValidateResourcePolicyRequest, schemas.ValidateResourcePolicyResponse), output: &ValidateResourcePolicyOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

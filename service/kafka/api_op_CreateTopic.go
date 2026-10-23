@@ -4,7 +4,9 @@ package kafka
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/kafka/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/kafka/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -52,6 +54,30 @@ type CreateTopicInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateTopicInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateTopicRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateTopicInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClusterArn != nil {
+		s.WriteString(schemas.CreateTopicRequest_ClusterArn, *v.ClusterArn)
+	}
+	if v.Configs != nil {
+		s.WriteString(schemas.CreateTopicRequest_Configs, *v.Configs)
+	}
+	if v.PartitionCount != nil {
+		s.WriteInt32(schemas.CreateTopicRequest_PartitionCount, *v.PartitionCount)
+	}
+	if v.ReplicationFactor != nil {
+		s.WriteInt32(schemas.CreateTopicRequest_ReplicationFactor, *v.ReplicationFactor)
+	}
+	if v.TopicName != nil {
+		s.WriteString(schemas.CreateTopicRequest_TopicName, *v.TopicName)
+	}
+}
+
 type CreateTopicOutput struct {
 
 	// The status of the topic creation.
@@ -69,13 +95,48 @@ type CreateTopicOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateTopicOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateTopicResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateTopicOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Status != "" {
+		s.WriteString(schemas.CreateTopicResponse_Status, string(v.Status))
+	}
+	if v.TopicArn != nil {
+		s.WriteString(schemas.CreateTopicResponse_TopicArn, *v.TopicArn)
+	}
+	if v.TopicName != nil {
+		s.WriteString(schemas.CreateTopicResponse_TopicName, *v.TopicName)
+	}
+}
+func (v *CreateTopicOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateTopicResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateTopicResponse_Status:
+			var ev string
+			if err := d.ReadString(schemas.CreateTopicResponse_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.TopicState(ev)
+			return nil
+		case schemas.CreateTopicResponse_TopicArn:
+			v.TopicArn = new(string)
+			return d.ReadString(schemas.CreateTopicResponse_TopicArn, v.TopicArn)
+		case schemas.CreateTopicResponse_TopicName:
+			v.TopicName = new(string)
+			return d.ReadString(schemas.CreateTopicResponse_TopicName, v.TopicName)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateTopicMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateTopic{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateTopic, schemas.CreateTopicRequest, schemas.CreateTopicResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateTopic{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateTopic, schemas.CreateTopicRequest, schemas.CreateTopicResponse), output: &CreateTopicOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

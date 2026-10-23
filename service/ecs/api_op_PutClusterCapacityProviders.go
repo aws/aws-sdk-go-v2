@@ -4,7 +4,9 @@ package ecs
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/ecs/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ecs/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -98,6 +100,20 @@ type PutClusterCapacityProvidersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutClusterCapacityProvidersInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutClusterCapacityProvidersRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutClusterCapacityProvidersInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeStringList(s, schemas.PutClusterCapacityProvidersRequest_capacityProviders, v.CapacityProviders)
+	if v.Cluster != nil {
+		s.WriteString(schemas.PutClusterCapacityProvidersRequest_cluster, *v.Cluster)
+	}
+	serializeCapacityProviderStrategy(s, schemas.PutClusterCapacityProvidersRequest_defaultCapacityProviderStrategy, v.DefaultCapacityProviderStrategy)
+}
+
 type PutClusterCapacityProvidersOutput struct {
 
 	// Details about the cluster.
@@ -109,13 +125,34 @@ type PutClusterCapacityProvidersOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutClusterCapacityProvidersOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutClusterCapacityProvidersResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutClusterCapacityProvidersOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Cluster != nil {
+		s.WriteStruct(schemas.PutClusterCapacityProvidersResponse_cluster)
+		v.Cluster.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *PutClusterCapacityProvidersOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PutClusterCapacityProvidersResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PutClusterCapacityProvidersResponse_cluster:
+			v.Cluster = &types.Cluster{}
+			return v.Cluster.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPutClusterCapacityProvidersMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpPutClusterCapacityProviders{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutClusterCapacityProviders, schemas.PutClusterCapacityProvidersRequest, schemas.PutClusterCapacityProvidersResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpPutClusterCapacityProviders{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutClusterCapacityProviders, schemas.PutClusterCapacityProvidersRequest, schemas.PutClusterCapacityProvidersResponse), output: &PutClusterCapacityProvidersOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

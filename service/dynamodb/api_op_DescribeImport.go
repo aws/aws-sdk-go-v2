@@ -5,7 +5,9 @@ package dynamodb
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/dynamodb/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/dynamodb/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithytime "github.com/aws/smithy-go/time"
 	smithywaiter "github.com/aws/smithy-go/waiter"
@@ -38,6 +40,17 @@ type DescribeImportInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeImportInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeImportInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeImportInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ImportArn != nil {
+		s.WriteString(schemas.DescribeImportInput_ImportArn, *v.ImportArn)
+	}
+}
 func (in *DescribeImportInput) bindEndpointParams(p *EndpointParameters) {
 
 	p.ResourceArn = in.ImportArn
@@ -59,13 +72,34 @@ type DescribeImportOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeImportOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeImportOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeImportOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ImportTableDescription != nil {
+		s.WriteStruct(schemas.DescribeImportOutput_ImportTableDescription)
+		v.ImportTableDescription.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DescribeImportOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeImportOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeImportOutput_ImportTableDescription:
+			v.ImportTableDescription = &types.ImportTableDescription{}
+			return v.ImportTableDescription.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeImportMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpDescribeImport{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeImport, schemas.DescribeImportInput, schemas.DescribeImportOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpDescribeImport{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeImport, schemas.DescribeImportInput, schemas.DescribeImportOutput), output: &DescribeImportOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

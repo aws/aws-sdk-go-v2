@@ -4,7 +4,9 @@ package glue
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/glue/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/glue/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -43,6 +45,24 @@ type GetUserDefinedFunctionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetUserDefinedFunctionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetUserDefinedFunctionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetUserDefinedFunctionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CatalogId != nil {
+		s.WriteString(schemas.GetUserDefinedFunctionRequest_CatalogId, *v.CatalogId)
+	}
+	if v.DatabaseName != nil {
+		s.WriteString(schemas.GetUserDefinedFunctionRequest_DatabaseName, *v.DatabaseName)
+	}
+	if v.FunctionName != nil {
+		s.WriteString(schemas.GetUserDefinedFunctionRequest_FunctionName, *v.FunctionName)
+	}
+}
+
 type GetUserDefinedFunctionOutput struct {
 
 	// The requested function definition.
@@ -54,13 +74,34 @@ type GetUserDefinedFunctionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetUserDefinedFunctionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetUserDefinedFunctionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetUserDefinedFunctionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.UserDefinedFunction != nil {
+		s.WriteStruct(schemas.GetUserDefinedFunctionResponse_UserDefinedFunction)
+		v.UserDefinedFunction.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetUserDefinedFunctionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetUserDefinedFunctionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetUserDefinedFunctionResponse_UserDefinedFunction:
+			v.UserDefinedFunction = &types.UserDefinedFunction{}
+			return v.UserDefinedFunction.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetUserDefinedFunctionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetUserDefinedFunction{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetUserDefinedFunction, schemas.GetUserDefinedFunctionRequest, schemas.GetUserDefinedFunctionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetUserDefinedFunction{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetUserDefinedFunction, schemas.GetUserDefinedFunctionRequest, schemas.GetUserDefinedFunctionResponse), output: &GetUserDefinedFunctionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

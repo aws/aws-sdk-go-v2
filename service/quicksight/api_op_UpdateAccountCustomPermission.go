@@ -4,6 +4,8 @@ package quicksight
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/quicksight/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,21 @@ type UpdateAccountCustomPermissionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateAccountCustomPermissionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateAccountCustomPermissionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateAccountCustomPermissionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AwsAccountId != nil {
+		s.WriteString(schemas.UpdateAccountCustomPermissionRequest_AwsAccountId, *v.AwsAccountId)
+	}
+	if v.CustomPermissionsName != nil {
+		s.WriteString(schemas.UpdateAccountCustomPermissionRequest_CustomPermissionsName, *v.CustomPermissionsName)
+	}
+}
+
 type UpdateAccountCustomPermissionOutput struct {
 
 	// The Amazon Web Services request ID for this operation.
@@ -53,13 +70,37 @@ type UpdateAccountCustomPermissionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateAccountCustomPermissionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateAccountCustomPermissionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateAccountCustomPermissionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RequestId != nil {
+		s.WriteString(schemas.UpdateAccountCustomPermissionResponse_RequestId, *v.RequestId)
+	}
+	if v.Status != 0 {
+		s.WriteInt32(schemas.UpdateAccountCustomPermissionResponse_Status, v.Status)
+	}
+}
+func (v *UpdateAccountCustomPermissionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateAccountCustomPermissionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateAccountCustomPermissionResponse_RequestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.UpdateAccountCustomPermissionResponse_RequestId, v.RequestId)
+		case schemas.UpdateAccountCustomPermissionResponse_Status:
+			return d.ReadInt32(schemas.UpdateAccountCustomPermissionResponse_Status, &v.Status)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateAccountCustomPermissionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateAccountCustomPermission{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateAccountCustomPermission, schemas.UpdateAccountCustomPermissionRequest, schemas.UpdateAccountCustomPermissionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateAccountCustomPermission{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateAccountCustomPermission, schemas.UpdateAccountCustomPermissionRequest, schemas.UpdateAccountCustomPermissionResponse), output: &UpdateAccountCustomPermissionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

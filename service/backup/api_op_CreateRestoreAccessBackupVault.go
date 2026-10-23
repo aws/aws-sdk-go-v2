@@ -5,7 +5,9 @@ package backup
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/backup/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/backup/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -52,6 +54,28 @@ type CreateRestoreAccessBackupVaultInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateRestoreAccessBackupVaultInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateRestoreAccessBackupVaultInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateRestoreAccessBackupVaultInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BackupVaultName != nil {
+		s.WriteString(schemas.CreateRestoreAccessBackupVaultInput_BackupVaultName, *v.BackupVaultName)
+	}
+	serializeTags(s, schemas.CreateRestoreAccessBackupVaultInput_BackupVaultTags, v.BackupVaultTags)
+	if v.CreatorRequestId != nil {
+		s.WriteString(schemas.CreateRestoreAccessBackupVaultInput_CreatorRequestId, *v.CreatorRequestId)
+	}
+	if v.RequesterComment != nil {
+		s.WriteString(schemas.CreateRestoreAccessBackupVaultInput_RequesterComment, *v.RequesterComment)
+	}
+	if v.SourceBackupVaultArn != nil {
+		s.WriteString(schemas.CreateRestoreAccessBackupVaultInput_SourceBackupVaultArn, *v.SourceBackupVaultArn)
+	}
+}
+
 type CreateRestoreAccessBackupVaultOutput struct {
 
 	// >The date and time when the restore access backup vault was created, in Unix
@@ -73,13 +97,54 @@ type CreateRestoreAccessBackupVaultOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateRestoreAccessBackupVaultOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateRestoreAccessBackupVaultOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateRestoreAccessBackupVaultOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreationDate != nil {
+		s.WriteTime(schemas.CreateRestoreAccessBackupVaultOutput_CreationDate, *v.CreationDate)
+	}
+	if v.RestoreAccessBackupVaultArn != nil {
+		s.WriteString(schemas.CreateRestoreAccessBackupVaultOutput_RestoreAccessBackupVaultArn, *v.RestoreAccessBackupVaultArn)
+	}
+	if v.RestoreAccessBackupVaultName != nil {
+		s.WriteString(schemas.CreateRestoreAccessBackupVaultOutput_RestoreAccessBackupVaultName, *v.RestoreAccessBackupVaultName)
+	}
+	if v.VaultState != "" {
+		s.WriteString(schemas.CreateRestoreAccessBackupVaultOutput_VaultState, string(v.VaultState))
+	}
+}
+func (v *CreateRestoreAccessBackupVaultOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateRestoreAccessBackupVaultOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateRestoreAccessBackupVaultOutput_CreationDate:
+			v.CreationDate = new(time.Time)
+			return d.ReadTime(schemas.CreateRestoreAccessBackupVaultOutput_CreationDate, v.CreationDate)
+		case schemas.CreateRestoreAccessBackupVaultOutput_RestoreAccessBackupVaultArn:
+			v.RestoreAccessBackupVaultArn = new(string)
+			return d.ReadString(schemas.CreateRestoreAccessBackupVaultOutput_RestoreAccessBackupVaultArn, v.RestoreAccessBackupVaultArn)
+		case schemas.CreateRestoreAccessBackupVaultOutput_RestoreAccessBackupVaultName:
+			v.RestoreAccessBackupVaultName = new(string)
+			return d.ReadString(schemas.CreateRestoreAccessBackupVaultOutput_RestoreAccessBackupVaultName, v.RestoreAccessBackupVaultName)
+		case schemas.CreateRestoreAccessBackupVaultOutput_VaultState:
+			var ev string
+			if err := d.ReadString(schemas.CreateRestoreAccessBackupVaultOutput_VaultState, &ev); err != nil {
+				return err
+			}
+			v.VaultState = types.VaultState(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateRestoreAccessBackupVaultMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateRestoreAccessBackupVault{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateRestoreAccessBackupVault, schemas.CreateRestoreAccessBackupVaultInput, schemas.CreateRestoreAccessBackupVaultOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateRestoreAccessBackupVault{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateRestoreAccessBackupVault, schemas.CreateRestoreAccessBackupVaultInput, schemas.CreateRestoreAccessBackupVaultOutput), output: &CreateRestoreAccessBackupVaultOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

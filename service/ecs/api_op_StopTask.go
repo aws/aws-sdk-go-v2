@@ -4,7 +4,9 @@ package ecs
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/ecs/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ecs/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -65,6 +67,24 @@ type StopTaskInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StopTaskInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StopTaskRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StopTaskInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Cluster != nil {
+		s.WriteString(schemas.StopTaskRequest_cluster, *v.Cluster)
+	}
+	if v.Reason != nil {
+		s.WriteString(schemas.StopTaskRequest_reason, *v.Reason)
+	}
+	if v.Task != nil {
+		s.WriteString(schemas.StopTaskRequest_task, *v.Task)
+	}
+}
+
 type StopTaskOutput struct {
 
 	// The task that was stopped.
@@ -76,13 +96,34 @@ type StopTaskOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StopTaskOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StopTaskResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StopTaskOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Task != nil {
+		s.WriteStruct(schemas.StopTaskResponse_task)
+		v.Task.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *StopTaskOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StopTaskResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StopTaskResponse_task:
+			v.Task = &types.Task{}
+			return v.Task.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStopTaskMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStopTask{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StopTask, schemas.StopTaskRequest, schemas.StopTaskResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpStopTask{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StopTask, schemas.StopTaskRequest, schemas.StopTaskResponse), output: &StopTaskOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

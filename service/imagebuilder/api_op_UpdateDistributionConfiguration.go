@@ -5,12 +5,18 @@ package imagebuilder
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/imagebuilder/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/imagebuilder/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
-// Updates a new distribution configuration. Distribution configurations define
-// and configure the outputs of your pipeline.
+// Updates a distribution configuration. Distribution configurations define and
+// configure the outputs for your images, including the target Regions, accounts,
+// and settings for each Region.
+//
+// This operation doesn't support selective updates. The request replaces the
+// stored configuration, so include every setting that you want to keep.
 func (c *Client) UpdateDistributionConfiguration(ctx context.Context, params *UpdateDistributionConfigurationInput, optFns ...func(*Options)) (*UpdateDistributionConfigurationOutput, error) {
 	if params == nil {
 		params = &UpdateDistributionConfigurationInput{}
@@ -28,8 +34,10 @@ func (c *Client) UpdateDistributionConfiguration(ctx context.Context, params *Up
 
 type UpdateDistributionConfigurationInput struct {
 
-	// Unique, case-sensitive identifier you provide to ensure idempotency of the
-	// request. For more information, see [Ensuring idempotency]in the Amazon EC2 API Reference.
+	// A unique, case-sensitive identifier you provide to ensure that the operation
+	// runs no more than one time. If you retry a request with the same client token,
+	// Image Builder returns the original response without running the operation again.
+	// For more information, see [Ensuring idempotency]in the Amazon EC2 API Reference.
 	//
 	// [Ensuring idempotency]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
 	//
@@ -42,7 +50,10 @@ type UpdateDistributionConfigurationInput struct {
 	// This member is required.
 	DistributionConfigurationArn *string
 
-	// The distributions of the distribution configuration.
+	// The distribution settings for the configuration. Each entry defines how output
+	// images are distributed in one target Amazon Web Services Region. A Region can
+	// appear at most once in the list. This list replaces the configuration's existing
+	// distributions entirely.
 	//
 	// This member is required.
 	Distributions []types.Distribution
@@ -51,6 +62,25 @@ type UpdateDistributionConfigurationInput struct {
 	Description *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *UpdateDistributionConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateDistributionConfigurationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateDistributionConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.UpdateDistributionConfigurationRequest_clientToken, *v.ClientToken)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateDistributionConfigurationRequest_description, *v.Description)
+	}
+	if v.DistributionConfigurationArn != nil {
+		s.WriteString(schemas.UpdateDistributionConfigurationRequest_distributionConfigurationArn, *v.DistributionConfigurationArn)
+	}
+	serializeDistributionList(s, schemas.UpdateDistributionConfigurationRequest_distributions, v.Distributions)
 }
 
 type UpdateDistributionConfigurationOutput struct {
@@ -71,13 +101,44 @@ type UpdateDistributionConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateDistributionConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateDistributionConfigurationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateDistributionConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.UpdateDistributionConfigurationResponse_clientToken, *v.ClientToken)
+	}
+	if v.DistributionConfigurationArn != nil {
+		s.WriteString(schemas.UpdateDistributionConfigurationResponse_distributionConfigurationArn, *v.DistributionConfigurationArn)
+	}
+	if v.RequestId != nil {
+		s.WriteString(schemas.UpdateDistributionConfigurationResponse_requestId, *v.RequestId)
+	}
+}
+func (v *UpdateDistributionConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateDistributionConfigurationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateDistributionConfigurationResponse_clientToken:
+			v.ClientToken = new(string)
+			return d.ReadString(schemas.UpdateDistributionConfigurationResponse_clientToken, v.ClientToken)
+		case schemas.UpdateDistributionConfigurationResponse_distributionConfigurationArn:
+			v.DistributionConfigurationArn = new(string)
+			return d.ReadString(schemas.UpdateDistributionConfigurationResponse_distributionConfigurationArn, v.DistributionConfigurationArn)
+		case schemas.UpdateDistributionConfigurationResponse_requestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.UpdateDistributionConfigurationResponse_requestId, v.RequestId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateDistributionConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateDistributionConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateDistributionConfiguration, schemas.UpdateDistributionConfigurationRequest, schemas.UpdateDistributionConfigurationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateDistributionConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateDistributionConfiguration, schemas.UpdateDistributionConfigurationRequest, schemas.UpdateDistributionConfigurationResponse), output: &UpdateDistributionConfigurationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

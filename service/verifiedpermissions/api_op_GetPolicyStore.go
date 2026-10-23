@@ -4,7 +4,9 @@ package verifiedpermissions
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/verifiedpermissions/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/verifiedpermissions/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -52,6 +54,21 @@ type GetPolicyStoreInput struct {
 	Tags bool
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetPolicyStoreInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetPolicyStoreInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetPolicyStoreInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PolicyStoreId != nil {
+		s.WriteString(schemas.GetPolicyStoreInput_policyStoreId, *v.PolicyStoreId)
+	}
+	if v.Tags != false {
+		s.WriteBool(schemas.GetPolicyStoreInput_tags, v.Tags)
+	}
 }
 
 type GetPolicyStoreOutput struct {
@@ -109,13 +126,90 @@ type GetPolicyStoreOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetPolicyStoreOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetPolicyStoreOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetPolicyStoreOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.GetPolicyStoreOutput_arn, *v.Arn)
+	}
+	if v.CedarVersion != "" {
+		s.WriteString(schemas.GetPolicyStoreOutput_cedarVersion, string(v.CedarVersion))
+	}
+	if v.CreatedDate != nil {
+		s.WriteTime(schemas.GetPolicyStoreOutput_createdDate, *v.CreatedDate)
+	}
+	if v.DeletionProtection != "" {
+		s.WriteString(schemas.GetPolicyStoreOutput_deletionProtection, string(v.DeletionProtection))
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.GetPolicyStoreOutput_description, *v.Description)
+	}
+	serializeEncryptionState(s, schemas.GetPolicyStoreOutput_encryptionState, v.EncryptionState)
+	if v.LastUpdatedDate != nil {
+		s.WriteTime(schemas.GetPolicyStoreOutput_lastUpdatedDate, *v.LastUpdatedDate)
+	}
+	if v.PolicyStoreId != nil {
+		s.WriteString(schemas.GetPolicyStoreOutput_policyStoreId, *v.PolicyStoreId)
+	}
+	serializeTagMap(s, schemas.GetPolicyStoreOutput_tags, v.Tags)
+	if v.ValidationSettings != nil {
+		s.WriteStruct(schemas.GetPolicyStoreOutput_validationSettings)
+		v.ValidationSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetPolicyStoreOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetPolicyStoreOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetPolicyStoreOutput_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.GetPolicyStoreOutput_arn, v.Arn)
+		case schemas.GetPolicyStoreOutput_cedarVersion:
+			var ev string
+			if err := d.ReadString(schemas.GetPolicyStoreOutput_cedarVersion, &ev); err != nil {
+				return err
+			}
+			v.CedarVersion = types.CedarVersion(ev)
+			return nil
+		case schemas.GetPolicyStoreOutput_createdDate:
+			v.CreatedDate = new(time.Time)
+			return d.ReadTime(schemas.GetPolicyStoreOutput_createdDate, v.CreatedDate)
+		case schemas.GetPolicyStoreOutput_deletionProtection:
+			var ev string
+			if err := d.ReadString(schemas.GetPolicyStoreOutput_deletionProtection, &ev); err != nil {
+				return err
+			}
+			v.DeletionProtection = types.DeletionProtection(ev)
+			return nil
+		case schemas.GetPolicyStoreOutput_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.GetPolicyStoreOutput_description, v.Description)
+		case schemas.GetPolicyStoreOutput_encryptionState:
+			return deserializeEncryptionState(d, schemas.GetPolicyStoreOutput_encryptionState, &v.EncryptionState)
+		case schemas.GetPolicyStoreOutput_lastUpdatedDate:
+			v.LastUpdatedDate = new(time.Time)
+			return d.ReadTime(schemas.GetPolicyStoreOutput_lastUpdatedDate, v.LastUpdatedDate)
+		case schemas.GetPolicyStoreOutput_policyStoreId:
+			v.PolicyStoreId = new(string)
+			return d.ReadString(schemas.GetPolicyStoreOutput_policyStoreId, v.PolicyStoreId)
+		case schemas.GetPolicyStoreOutput_tags:
+			return deserializeTagMap(d, schemas.GetPolicyStoreOutput_tags, &v.Tags)
+		case schemas.GetPolicyStoreOutput_validationSettings:
+			v.ValidationSettings = &types.ValidationSettings{}
+			return v.ValidationSettings.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetPolicyStoreMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpGetPolicyStore{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetPolicyStore, schemas.GetPolicyStoreInput, schemas.GetPolicyStoreOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpGetPolicyStore{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetPolicyStore, schemas.GetPolicyStoreInput, schemas.GetPolicyStoreOutput), output: &GetPolicyStoreOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

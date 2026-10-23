@@ -1,3 +1,50 @@
+# v1.113.3 (2026-10-22)
+
+* **Bug Fix**: Update smithy-go to v1.28.6
+* **Documentation**: AWS Lambda durable functions now supports payloads up to 1 MB for checkpoints, callback completion, and error details.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.113.2 (2026-10-21)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.113.1 (2026-10-19)
+
+* **Bug Fix**: Allow lists with null values to deserialize into its zero value instead of failing
+
+# v1.113.0 (2026-10-14)
+
+* **Feature**: AWS Lambda now supports an optional X-Ray trace header for chained invocations in durable executions, enabling child invocations to be linked to the initiating span.
+
+# v1.112.2 (2026-10-12)
+
+* **Documentation**: Doc updates to reposition Lambda Functions as Lambda Event Functions
+
+# v1.112.1 (2026-10-09.2)
+
+* **Dependency Update**: Update to smithy-go v1.28.5.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.112.0 (2026-10-08)
+
+* **Feature**: AWS Lambda now supports OAuth 2.0 (OAUTHBEARER), IAM, and IAM with OAUTHBEARER authentication for self-managed Apache Kafka event source mappings, including optional OAuth scope, audience, logical cluster, and identity pool parameters. OAuth 2.0 is also available for Confluent Schema Registry.
+* **Feature**: Enable schema-based (de)serialization for this service.
+* **Dependency Update**: Update to smithy-go v1.28.4.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.111.0 (2026-10-06)
+
+* **Feature**: Enable schema-based (de)serialization for this service.
+
+# v1.110.0 (2026-09-24)
+
+* **Feature**: Enable schema-based (de)serialization for this service.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.109.0 (2026-09-21)
+
+* **Feature**: Enable schema-based (de)serialization for this service.
+
 # v1.108.0 (2026-09-09)
 
 * **Feature**: Stop registering the `retry.MetricsHeader` middleware in generated clients. The `Amz-Sdk-Request` header is now set by the retry middleware itself.

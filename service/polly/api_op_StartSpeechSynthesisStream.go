@@ -23,7 +23,7 @@ import (
 //
 // [SynthesizeSpeech]
 //
-// [SynthesizeSpeech]: https://docs.aws.amazon.com/polly/latest/API/API_SynthesizeSpeech.html
+// [SynthesizeSpeech]: https://docs.aws.amazon.com/polly/latest/dg/API_SynthesizeSpeech.html
 func (c *Client) StartSpeechSynthesisStream(ctx context.Context, params *StartSpeechSynthesisStreamInput, optFns ...func(*Options)) (*StartSpeechSynthesisStreamOutput, error) {
 	if params == nil {
 		params = &StartSpeechSynthesisStreamInput{}
@@ -58,7 +58,7 @@ type StartSpeechSynthesisStreamInput struct {
 	// The voice to use in synthesis. To get a list of available voice IDs, use the [DescribeVoices]
 	// operation.
 	//
-	// [DescribeVoices]: https://docs.aws.amazon.com/polly/latest/API/API_DescribeVoices.html
+	// [DescribeVoices]: https://docs.aws.amazon.com/polly/latest/dg/API_DescribeVoices.html
 	//
 	// This member is required.
 	VoiceId types.VoiceId

@@ -4,7 +4,9 @@ package glue
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/glue/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/glue/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,22 @@ type ListIntegrationResourcePropertiesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListIntegrationResourcePropertiesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListIntegrationResourcePropertiesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListIntegrationResourcePropertiesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeIntegrationResourcePropertyFilterList(s, schemas.ListIntegrationResourcePropertiesRequest_Filters, v.Filters)
+	if v.Marker != nil {
+		s.WriteString(schemas.ListIntegrationResourcePropertiesRequest_Marker, *v.Marker)
+	}
+	if v.MaxRecords != nil {
+		s.WriteInt32(schemas.ListIntegrationResourcePropertiesRequest_MaxRecords, *v.MaxRecords)
+	}
+}
+
 type ListIntegrationResourcePropertiesOutput struct {
 
 	// A list of integration resource property meeting the filter criteria.
@@ -53,13 +71,35 @@ type ListIntegrationResourcePropertiesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListIntegrationResourcePropertiesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListIntegrationResourcePropertiesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListIntegrationResourcePropertiesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeIntegrationResourcePropertyList(s, schemas.ListIntegrationResourcePropertiesResponse_IntegrationResourcePropertyList, v.IntegrationResourcePropertyList)
+	if v.Marker != nil {
+		s.WriteString(schemas.ListIntegrationResourcePropertiesResponse_Marker, *v.Marker)
+	}
+}
+func (v *ListIntegrationResourcePropertiesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListIntegrationResourcePropertiesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListIntegrationResourcePropertiesResponse_IntegrationResourcePropertyList:
+			return deserializeIntegrationResourcePropertyList(d, schemas.ListIntegrationResourcePropertiesResponse_IntegrationResourcePropertyList, &v.IntegrationResourcePropertyList)
+		case schemas.ListIntegrationResourcePropertiesResponse_Marker:
+			v.Marker = new(string)
+			return d.ReadString(schemas.ListIntegrationResourcePropertiesResponse_Marker, v.Marker)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListIntegrationResourcePropertiesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListIntegrationResourceProperties{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListIntegrationResourceProperties, schemas.ListIntegrationResourcePropertiesRequest, schemas.ListIntegrationResourcePropertiesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListIntegrationResourceProperties{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListIntegrationResourceProperties, schemas.ListIntegrationResourcePropertiesRequest, schemas.ListIntegrationResourcePropertiesResponse), output: &ListIntegrationResourcePropertiesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

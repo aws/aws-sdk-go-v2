@@ -5,7 +5,9 @@ package rekognition
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/rekognition/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/rekognition/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -88,6 +90,28 @@ type AssociateFacesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssociateFacesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssociateFacesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssociateFacesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientRequestToken != nil {
+		s.WriteString(schemas.AssociateFacesRequest_ClientRequestToken, *v.ClientRequestToken)
+	}
+	if v.CollectionId != nil {
+		s.WriteString(schemas.AssociateFacesRequest_CollectionId, *v.CollectionId)
+	}
+	serializeUserFaceIdList(s, schemas.AssociateFacesRequest_FaceIds, v.FaceIds)
+	if v.UserId != nil {
+		s.WriteString(schemas.AssociateFacesRequest_UserId, *v.UserId)
+	}
+	if v.UserMatchThreshold != nil {
+		s.WriteFloat32(schemas.AssociateFacesRequest_UserMatchThreshold, *v.UserMatchThreshold)
+	}
+}
+
 type AssociateFacesOutput struct {
 
 	// An array of AssociatedFace objects containing FaceIDs that have been
@@ -110,13 +134,42 @@ type AssociateFacesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssociateFacesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssociateFacesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssociateFacesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAssociatedFacesList(s, schemas.AssociateFacesResponse_AssociatedFaces, v.AssociatedFaces)
+	serializeUnsuccessfulFaceAssociationList(s, schemas.AssociateFacesResponse_UnsuccessfulFaceAssociations, v.UnsuccessfulFaceAssociations)
+	if v.UserStatus != "" {
+		s.WriteString(schemas.AssociateFacesResponse_UserStatus, string(v.UserStatus))
+	}
+}
+func (v *AssociateFacesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AssociateFacesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AssociateFacesResponse_AssociatedFaces:
+			return deserializeAssociatedFacesList(d, schemas.AssociateFacesResponse_AssociatedFaces, &v.AssociatedFaces)
+		case schemas.AssociateFacesResponse_UnsuccessfulFaceAssociations:
+			return deserializeUnsuccessfulFaceAssociationList(d, schemas.AssociateFacesResponse_UnsuccessfulFaceAssociations, &v.UnsuccessfulFaceAssociations)
+		case schemas.AssociateFacesResponse_UserStatus:
+			var ev string
+			if err := d.ReadString(schemas.AssociateFacesResponse_UserStatus, &ev); err != nil {
+				return err
+			}
+			v.UserStatus = types.UserStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationAssociateFacesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpAssociateFaces{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociateFaces, schemas.AssociateFacesRequest, schemas.AssociateFacesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpAssociateFaces{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociateFaces, schemas.AssociateFacesRequest, schemas.AssociateFacesResponse), output: &AssociateFacesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

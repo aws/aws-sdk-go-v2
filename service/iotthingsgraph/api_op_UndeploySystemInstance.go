@@ -4,7 +4,9 @@ package iotthingsgraph
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/iotthingsgraph/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotthingsgraph/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -34,6 +36,18 @@ type UndeploySystemInstanceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UndeploySystemInstanceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UndeploySystemInstanceRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UndeploySystemInstanceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Id != nil {
+		s.WriteString(schemas.UndeploySystemInstanceRequest_id, *v.Id)
+	}
+}
+
 type UndeploySystemInstanceOutput struct {
 
 	// An object that contains summary information about the system instance that was
@@ -46,13 +60,34 @@ type UndeploySystemInstanceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UndeploySystemInstanceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UndeploySystemInstanceResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UndeploySystemInstanceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Summary != nil {
+		s.WriteStruct(schemas.UndeploySystemInstanceResponse_summary)
+		v.Summary.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UndeploySystemInstanceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UndeploySystemInstanceResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UndeploySystemInstanceResponse_summary:
+			v.Summary = &types.SystemInstanceSummary{}
+			return v.Summary.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUndeploySystemInstanceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUndeploySystemInstance{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UndeploySystemInstance, schemas.UndeploySystemInstanceRequest, schemas.UndeploySystemInstanceResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUndeploySystemInstance{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UndeploySystemInstance, schemas.UndeploySystemInstanceRequest, schemas.UndeploySystemInstanceResponse), output: &UndeploySystemInstanceOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

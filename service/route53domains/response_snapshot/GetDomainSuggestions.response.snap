@@ -2,4 +2,4 @@
 Content-Type: application/x-amz-json-1.1
 X-Amz-Target: Route53Domains_v20140515.GetDomainSuggestions
 
-{"SuggestionsList":[{"Availability":"__Availability__","DomainName":"__DomainName__"},{"Availability":"__Availability__","DomainName":"__DomainName__"}]}
+{"SuggestionsList":[{"Availability":"__Availability__","DomainName":"__DomainName__","Price":{"Currency":"__Currency__","Price":1,"PriceType":"STANDARD"}},{"Availability":"__Availability__","DomainName":"__DomainName__","Price":{"Currency":"__Currency__","Price":1,"PriceType":"STANDARD"}}]}

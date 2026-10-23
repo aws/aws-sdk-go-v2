@@ -5,6 +5,8 @@ package securityhub
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/securityhub/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -40,6 +42,21 @@ type ListEnabledProductsForImportInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListEnabledProductsForImportInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListEnabledProductsForImportRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListEnabledProductsForImportInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListEnabledProductsForImportRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListEnabledProductsForImportRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListEnabledProductsForImportOutput struct {
 
 	// The pagination token to use to request the next page of results.
@@ -55,13 +72,35 @@ type ListEnabledProductsForImportOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListEnabledProductsForImportOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListEnabledProductsForImportResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListEnabledProductsForImportOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListEnabledProductsForImportResponse_NextToken, *v.NextToken)
+	}
+	serializeProductSubscriptionArnList(s, schemas.ListEnabledProductsForImportResponse_ProductSubscriptions, v.ProductSubscriptions)
+}
+func (v *ListEnabledProductsForImportOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListEnabledProductsForImportResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListEnabledProductsForImportResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListEnabledProductsForImportResponse_NextToken, v.NextToken)
+		case schemas.ListEnabledProductsForImportResponse_ProductSubscriptions:
+			return deserializeProductSubscriptionArnList(d, schemas.ListEnabledProductsForImportResponse_ProductSubscriptions, &v.ProductSubscriptions)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListEnabledProductsForImportMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListEnabledProductsForImport{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListEnabledProductsForImport, schemas.ListEnabledProductsForImportRequest, schemas.ListEnabledProductsForImportResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListEnabledProductsForImport{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListEnabledProductsForImport, schemas.ListEnabledProductsForImportRequest, schemas.ListEnabledProductsForImportResponse), output: &ListEnabledProductsForImportOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

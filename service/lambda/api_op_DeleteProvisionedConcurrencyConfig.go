@@ -4,6 +4,8 @@ package lambda
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/lambda/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -49,6 +51,21 @@ type DeleteProvisionedConcurrencyConfigInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteProvisionedConcurrencyConfigInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteProvisionedConcurrencyConfigRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteProvisionedConcurrencyConfigInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FunctionName != nil {
+		s.WriteString(schemas.DeleteProvisionedConcurrencyConfigRequest_FunctionName, *v.FunctionName)
+	}
+	if v.Qualifier != nil {
+		s.WriteString(schemas.DeleteProvisionedConcurrencyConfigRequest_Qualifier, *v.Qualifier)
+	}
+}
+
 type DeleteProvisionedConcurrencyConfigOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -56,13 +73,26 @@ type DeleteProvisionedConcurrencyConfigOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteProvisionedConcurrencyConfigOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteProvisionedConcurrencyConfigOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteProvisionedConcurrencyConfigOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteProvisionedConcurrencyConfigMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteProvisionedConcurrencyConfig{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteProvisionedConcurrencyConfig, schemas.DeleteProvisionedConcurrencyConfigRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteProvisionedConcurrencyConfig{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteProvisionedConcurrencyConfig, schemas.DeleteProvisionedConcurrencyConfigRequest, nil), output: &DeleteProvisionedConcurrencyConfigOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

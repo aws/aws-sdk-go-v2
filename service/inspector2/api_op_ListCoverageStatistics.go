@@ -5,7 +5,9 @@ package inspector2
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/inspector2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/inspector2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -43,6 +45,46 @@ type ListCoverageStatisticsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListCoverageStatisticsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListCoverageStatisticsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListCoverageStatisticsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FilterCriteria != nil {
+		s.WriteStruct(schemas.ListCoverageStatisticsRequest_filterCriteria)
+		v.FilterCriteria.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.GroupBy != "" {
+		s.WriteString(schemas.ListCoverageStatisticsRequest_groupBy, string(v.GroupBy))
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListCoverageStatisticsRequest_nextToken, *v.NextToken)
+	}
+}
+func (v *ListCoverageStatisticsInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListCoverageStatisticsRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListCoverageStatisticsRequest_filterCriteria:
+			v.FilterCriteria = &types.CoverageFilterCriteria{}
+			return v.FilterCriteria.Deserialize(d)
+		case schemas.ListCoverageStatisticsRequest_groupBy:
+			var ev string
+			if err := d.ReadString(schemas.ListCoverageStatisticsRequest_groupBy, &ev); err != nil {
+				return err
+			}
+			v.GroupBy = types.GroupKey(ev)
+			return nil
+		case schemas.ListCoverageStatisticsRequest_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListCoverageStatisticsRequest_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
+
 type ListCoverageStatisticsOutput struct {
 
 	// The total number for all groups.
@@ -65,13 +107,41 @@ type ListCoverageStatisticsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListCoverageStatisticsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListCoverageStatisticsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListCoverageStatisticsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeCountsList(s, schemas.ListCoverageStatisticsResponse_countsByGroup, v.CountsByGroup)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListCoverageStatisticsResponse_nextToken, *v.NextToken)
+	}
+	if v.TotalCounts != nil {
+		s.WriteInt64(schemas.ListCoverageStatisticsResponse_totalCounts, *v.TotalCounts)
+	}
+}
+func (v *ListCoverageStatisticsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListCoverageStatisticsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListCoverageStatisticsResponse_countsByGroup:
+			return deserializeCountsList(d, schemas.ListCoverageStatisticsResponse_countsByGroup, &v.CountsByGroup)
+		case schemas.ListCoverageStatisticsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListCoverageStatisticsResponse_nextToken, v.NextToken)
+		case schemas.ListCoverageStatisticsResponse_totalCounts:
+			v.TotalCounts = new(int64)
+			return d.ReadInt64(schemas.ListCoverageStatisticsResponse_totalCounts, v.TotalCounts)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListCoverageStatisticsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListCoverageStatistics{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListCoverageStatistics, schemas.ListCoverageStatisticsRequest, schemas.ListCoverageStatisticsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListCoverageStatistics{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListCoverageStatistics, schemas.ListCoverageStatisticsRequest, schemas.ListCoverageStatisticsResponse), output: &ListCoverageStatisticsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

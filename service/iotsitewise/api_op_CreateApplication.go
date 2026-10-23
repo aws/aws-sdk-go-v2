@@ -5,7 +5,9 @@ package iotsitewise
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/iotsitewise/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotsitewise/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -55,6 +57,31 @@ type CreateApplicationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateApplicationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateApplicationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateApplicationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateApplicationRequest_clientToken, *v.ClientToken)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreateApplicationRequest_description, *v.Description)
+	}
+	if v.IdcInstanceArn != nil {
+		s.WriteString(schemas.CreateApplicationRequest_idcInstanceArn, *v.IdcInstanceArn)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateApplicationRequest_name, *v.Name)
+	}
+	serializeTagMap(s, schemas.CreateApplicationRequest_tags, v.Tags)
+	if v.WorkspaceName != nil {
+		s.WriteString(schemas.CreateApplicationRequest_workspaceName, *v.WorkspaceName)
+	}
+}
+
 type CreateApplicationOutput struct {
 
 	// ARN of the application
@@ -88,13 +115,60 @@ type CreateApplicationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateApplicationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateApplicationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateApplicationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.CreateApplicationResponse_arn, *v.Arn)
+	}
+	if v.DnsSubdomain != nil {
+		s.WriteString(schemas.CreateApplicationResponse_dnsSubdomain, *v.DnsSubdomain)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.CreateApplicationResponse_id, *v.Id)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateApplicationResponse_name, *v.Name)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.CreateApplicationResponse_status, string(v.Status))
+	}
+}
+func (v *CreateApplicationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateApplicationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateApplicationResponse_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.CreateApplicationResponse_arn, v.Arn)
+		case schemas.CreateApplicationResponse_dnsSubdomain:
+			v.DnsSubdomain = new(string)
+			return d.ReadString(schemas.CreateApplicationResponse_dnsSubdomain, v.DnsSubdomain)
+		case schemas.CreateApplicationResponse_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.CreateApplicationResponse_id, v.Id)
+		case schemas.CreateApplicationResponse_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.CreateApplicationResponse_name, v.Name)
+		case schemas.CreateApplicationResponse_status:
+			var ev string
+			if err := d.ReadString(schemas.CreateApplicationResponse_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.ApplicationStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateApplicationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateApplication{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateApplication, schemas.CreateApplicationRequest, schemas.CreateApplicationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateApplication{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateApplication, schemas.CreateApplicationRequest, schemas.CreateApplicationResponse), output: &CreateApplicationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -5,8 +5,10 @@ package dynamodb
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/dynamodb/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/dynamodb/types"
 	internalEndpointDiscovery "github.com/aws/aws-sdk-go-v2/service/internal/endpoint-discovery"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -76,6 +78,30 @@ type UpdateGlobalTableSettingsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateGlobalTableSettingsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateGlobalTableSettingsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateGlobalTableSettingsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GlobalTableBillingMode != "" {
+		s.WriteString(schemas.UpdateGlobalTableSettingsInput_GlobalTableBillingMode, string(v.GlobalTableBillingMode))
+	}
+	serializeGlobalTableGlobalSecondaryIndexSettingsUpdateList(s, schemas.UpdateGlobalTableSettingsInput_GlobalTableGlobalSecondaryIndexSettingsUpdate, v.GlobalTableGlobalSecondaryIndexSettingsUpdate)
+	if v.GlobalTableName != nil {
+		s.WriteString(schemas.UpdateGlobalTableSettingsInput_GlobalTableName, *v.GlobalTableName)
+	}
+	if v.GlobalTableProvisionedWriteCapacityAutoScalingSettingsUpdate != nil {
+		s.WriteStruct(schemas.UpdateGlobalTableSettingsInput_GlobalTableProvisionedWriteCapacityAutoScalingSettingsUpdate)
+		v.GlobalTableProvisionedWriteCapacityAutoScalingSettingsUpdate.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.GlobalTableProvisionedWriteCapacityUnits != nil {
+		s.WriteInt64(schemas.UpdateGlobalTableSettingsInput_GlobalTableProvisionedWriteCapacityUnits, *v.GlobalTableProvisionedWriteCapacityUnits)
+	}
+	serializeReplicaSettingsUpdateList(s, schemas.UpdateGlobalTableSettingsInput_ReplicaSettingsUpdate, v.ReplicaSettingsUpdate)
+}
 func (in *UpdateGlobalTableSettingsInput) bindEndpointParams(p *EndpointParameters) {
 
 	p.ResourceArn = in.GlobalTableName
@@ -96,13 +122,35 @@ type UpdateGlobalTableSettingsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateGlobalTableSettingsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateGlobalTableSettingsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateGlobalTableSettingsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GlobalTableName != nil {
+		s.WriteString(schemas.UpdateGlobalTableSettingsOutput_GlobalTableName, *v.GlobalTableName)
+	}
+	serializeReplicaSettingsDescriptionList(s, schemas.UpdateGlobalTableSettingsOutput_ReplicaSettings, v.ReplicaSettings)
+}
+func (v *UpdateGlobalTableSettingsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateGlobalTableSettingsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateGlobalTableSettingsOutput_GlobalTableName:
+			v.GlobalTableName = new(string)
+			return d.ReadString(schemas.UpdateGlobalTableSettingsOutput_GlobalTableName, v.GlobalTableName)
+		case schemas.UpdateGlobalTableSettingsOutput_ReplicaSettings:
+			return deserializeReplicaSettingsDescriptionList(d, schemas.UpdateGlobalTableSettingsOutput_ReplicaSettings, &v.ReplicaSettings)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateGlobalTableSettingsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpUpdateGlobalTableSettings{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateGlobalTableSettings, schemas.UpdateGlobalTableSettingsInput, schemas.UpdateGlobalTableSettingsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpUpdateGlobalTableSettings{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateGlobalTableSettings, schemas.UpdateGlobalTableSettingsInput, schemas.UpdateGlobalTableSettingsOutput), output: &UpdateGlobalTableSettingsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

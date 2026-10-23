@@ -5,7 +5,9 @@ package ssm
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/ssm/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ssm/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -42,6 +44,22 @@ type ListOpsMetadataInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListOpsMetadataInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListOpsMetadataRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListOpsMetadataInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeOpsMetadataFilterList(s, schemas.ListOpsMetadataRequest_Filters, v.Filters)
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListOpsMetadataRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListOpsMetadataRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListOpsMetadataOutput struct {
 
 	// The token for the next set of items to return. Use this token to get the next
@@ -57,13 +75,35 @@ type ListOpsMetadataOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListOpsMetadataOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListOpsMetadataResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListOpsMetadataOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListOpsMetadataResult_NextToken, *v.NextToken)
+	}
+	serializeOpsMetadataList(s, schemas.ListOpsMetadataResult_OpsMetadataList, v.OpsMetadataList)
+}
+func (v *ListOpsMetadataOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListOpsMetadataResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListOpsMetadataResult_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListOpsMetadataResult_NextToken, v.NextToken)
+		case schemas.ListOpsMetadataResult_OpsMetadataList:
+			return deserializeOpsMetadataList(d, schemas.ListOpsMetadataResult_OpsMetadataList, &v.OpsMetadataList)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListOpsMetadataMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListOpsMetadata{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListOpsMetadata, schemas.ListOpsMetadataRequest, schemas.ListOpsMetadataResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListOpsMetadata{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListOpsMetadata, schemas.ListOpsMetadataRequest, schemas.ListOpsMetadataResult), output: &ListOpsMetadataOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

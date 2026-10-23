@@ -4,7 +4,9 @@ package kinesis
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/kinesis/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/kinesis/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"github.com/aws/smithy-go/ptr"
 )
@@ -76,6 +78,24 @@ type RegisterStreamConsumerInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RegisterStreamConsumerInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RegisterStreamConsumerInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RegisterStreamConsumerInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConsumerName != nil {
+		s.WriteString(schemas.RegisterStreamConsumerInput_ConsumerName, *v.ConsumerName)
+	}
+	if v.StreamARN != nil {
+		s.WriteString(schemas.RegisterStreamConsumerInput_StreamARN, *v.StreamARN)
+	}
+	if v.StreamId != nil {
+		s.WriteString(schemas.RegisterStreamConsumerInput_StreamId, *v.StreamId)
+	}
+	serializeTagMap(s, schemas.RegisterStreamConsumerInput_Tags, v.Tags)
+}
 func (in *RegisterStreamConsumerInput) bindEndpointParams(p *EndpointParameters) {
 
 	p.StreamARN = in.StreamARN
@@ -97,13 +117,34 @@ type RegisterStreamConsumerOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RegisterStreamConsumerOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RegisterStreamConsumerOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RegisterStreamConsumerOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Consumer != nil {
+		s.WriteStruct(schemas.RegisterStreamConsumerOutput_Consumer)
+		v.Consumer.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *RegisterStreamConsumerOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RegisterStreamConsumerOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RegisterStreamConsumerOutput_Consumer:
+			v.Consumer = &types.Consumer{}
+			return v.Consumer.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationRegisterStreamConsumerMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpRegisterStreamConsumer{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RegisterStreamConsumer, schemas.RegisterStreamConsumerInput, schemas.RegisterStreamConsumerOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpRegisterStreamConsumer{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RegisterStreamConsumer, schemas.RegisterStreamConsumerInput, schemas.RegisterStreamConsumerOutput), output: &RegisterStreamConsumerOutput{}}, middleware.After); err != nil {
 		return err
 	}
 
