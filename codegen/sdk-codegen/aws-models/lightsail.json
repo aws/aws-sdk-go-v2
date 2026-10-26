@@ -4543,6 +4543,18 @@
                     "traits": {
                         "smithy.api#documentation": "<p>An array of objects that describe the custom error responses for the distribution. With a\n      custom error response, you can specify the page to return when the origin responds with a\n      given HTTP error code. You can also specify the HTTP status code to send to the viewer.</p>"
                     }
+                },
+                "enableWaf": {
+                    "target": "com.amazonaws.lightsail#boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether to enable Web Application Firewall (WAF) for the distribution. WAF\n      inspects viewer requests and blocks requests that match the WAF rule groups that you\n      enable.</p>\n         <p>When you enable WAF without specifying the <code>wafRules</code> parameter, the\n      distribution has no WAF rule groups enabled and doesn't block any requests.</p>\n         <note>\n            <p>WAF is available only for distributions that use the <code>medium_1_0</code> or\n          <code>large_1_0</code> bundle.</p>\n         </note>"
+                    }
+                },
+                "wafRules": {
+                    "target": "com.amazonaws.lightsail#WafRuleList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of objects that describe the WAF rule groups to enable for the\n      distribution.</p>\n         <p>The WAF rule groups that you can specify depend on the bundle of the\n      distribution:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>medium_1_0</code> – Supports the <code>AWSManagedRulesCommonRuleSet</code>,\n            <code>AWSManagedRulesKnownBadInputsRuleSet</code>, and\n            <code>AWSManagedRulesAnonymousIpList</code> rule groups.</p>\n            </li>\n            <li>\n               <p>\n                  <code>large_1_0</code> – Supports the rule groups for <code>medium_1_0</code>, plus\n            <code>AWSManagedRulesAdminProtectionRuleSet</code>,\n            <code>AWSManagedRulesSQLiRuleSet</code>, <code>AWSManagedRulesLinuxRuleSet</code>,\n            <code>AWSManagedRulesUnixRuleSet</code>, <code>AWSManagedRulesWindowsRuleSet</code>,\n            <code>AWSManagedRulesPHPRuleSet</code>, <code>AWSManagedRulesWordPressRuleSet</code>,\n            <code>AWSManagedRulesAmazonIpReputationList</code>,\n            <code>AWSManagedRulesATPRuleSet</code>, <code>AWSManagedRulesACFPRuleSet</code>, and\n            <code>AWSManagedRulesBotControlRuleSet</code> rule groups.</p>\n            </li>\n         </ul>"
+                    }
                 }
             },
             "traits": {
@@ -8259,6 +8271,18 @@
                     "traits": {
                         "smithy.api#enumValue": "Http5xxErrorRate"
                     }
+                },
+                "WafAllowedRequests": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "WafAllowedRequests"
+                    }
+                },
+                "WafBlockedRequests": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "WafBlockedRequests"
+                    }
                 }
             }
         },
@@ -11049,7 +11073,7 @@
                 "metricName": {
                     "target": "com.amazonaws.lightsail#DistributionMetricName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The metric for which you want to return information.</p>\n         <p>Valid distribution metric names are listed below, along with the most useful\n        <code>statistics</code> to include in your request, and the published <code>unit</code>\n      value.</p>\n         <ul>\n            <li>\n               <p>\n                  <b>\n                     <code>Requests</code>\n                  </b> - The total number of viewer\n          requests received by your Lightsail distribution, for all HTTP methods, and for both\n          HTTP and HTTPS requests.</p>\n               <p>\n                  <code>Statistics</code>: The most useful statistic is <code>Sum</code>.</p>\n               <p>\n                  <code>Unit</code>: The published unit is <code>None</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>BytesDownloaded</code>\n                  </b> - The number of bytes\n          downloaded by viewers for GET, HEAD, and OPTIONS requests.</p>\n               <p>\n                  <code>Statistics</code>: The most useful statistic is <code>Sum</code>.</p>\n               <p>\n                  <code>Unit</code>: The published unit is <code>None</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>BytesUploaded </code>\n                  </b> - The number of bytes\n          uploaded to your origin by your Lightsail distribution, using POST and PUT\n          requests.</p>\n               <p>\n                  <code>Statistics</code>: The most useful statistic is <code>Sum</code>.</p>\n               <p>\n                  <code>Unit</code>: The published unit is <code>None</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>TotalErrorRate</code>\n                  </b> - The percentage of all\n          viewer requests for which the response's HTTP status code was 4xx or 5xx.</p>\n               <p>\n                  <code>Statistics</code>: The most useful statistic is <code>Average</code>.</p>\n               <p>\n                  <code>Unit</code>: The published unit is <code>Percent</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>4xxErrorRate</code>\n                  </b> - The percentage of all\n          viewer requests for which the response's HTTP status cod was 4xx. In these cases, the\n          client or client viewer may have made an error. For example, a status code of 404 (Not\n          Found) means that the client requested an object that could not be found.</p>\n               <p>\n                  <code>Statistics</code>: The most useful statistic is <code>Average</code>.</p>\n               <p>\n                  <code>Unit</code>: The published unit is <code>Percent</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>5xxErrorRate</code>\n                  </b> - The percentage of all\n          viewer requests for which the response's HTTP status code was 5xx. In these cases, the\n          origin server did not satisfy the requests. For example, a status code of 503 (Service\n          Unavailable) means that the origin server is currently unavailable.</p>\n               <p>\n                  <code>Statistics</code>: The most useful statistic is <code>Average</code>.</p>\n               <p>\n                  <code>Unit</code>: The published unit is <code>Percent</code>.</p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The metric for which you want to return information.</p>\n         <p>Valid distribution metric names are listed below, along with the most useful\n        <code>statistics</code> to include in your request, and the published <code>unit</code>\n      value.</p>\n         <ul>\n            <li>\n               <p>\n                  <b>\n                     <code>Requests</code>\n                  </b> - The total number of viewer\n          requests received by your Lightsail distribution, for all HTTP methods, and for both\n          HTTP and HTTPS requests.</p>\n               <p>\n                  <code>Statistics</code>: The most useful statistic is <code>Sum</code>.</p>\n               <p>\n                  <code>Unit</code>: The published unit is <code>None</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>BytesDownloaded</code>\n                  </b> - The number of bytes\n          downloaded by viewers for GET, HEAD, and OPTIONS requests.</p>\n               <p>\n                  <code>Statistics</code>: The most useful statistic is <code>Sum</code>.</p>\n               <p>\n                  <code>Unit</code>: The published unit is <code>None</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>BytesUploaded </code>\n                  </b> - The number of bytes\n          uploaded to your origin by your Lightsail distribution, using POST and PUT\n          requests.</p>\n               <p>\n                  <code>Statistics</code>: The most useful statistic is <code>Sum</code>.</p>\n               <p>\n                  <code>Unit</code>: The published unit is <code>None</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>TotalErrorRate</code>\n                  </b> - The percentage of all\n          viewer requests for which the response's HTTP status code was 4xx or 5xx.</p>\n               <p>\n                  <code>Statistics</code>: The most useful statistic is <code>Average</code>.</p>\n               <p>\n                  <code>Unit</code>: The published unit is <code>Percent</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>4xxErrorRate</code>\n                  </b> - The percentage of all\n          viewer requests for which the response's HTTP status cod was 4xx. In these cases, the\n          client or client viewer may have made an error. For example, a status code of 404 (Not\n          Found) means that the client requested an object that could not be found.</p>\n               <p>\n                  <code>Statistics</code>: The most useful statistic is <code>Average</code>.</p>\n               <p>\n                  <code>Unit</code>: The published unit is <code>Percent</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>5xxErrorRate</code>\n                  </b> - The percentage of all\n          viewer requests for which the response's HTTP status code was 5xx. In these cases, the\n          origin server did not satisfy the requests. For example, a status code of 503 (Service\n          Unavailable) means that the origin server is currently unavailable.</p>\n               <p>\n                  <code>Statistics</code>: The most useful statistic is <code>Average</code>.</p>\n               <p>\n                  <code>Unit</code>: The published unit is <code>Percent</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>WafAllowedRequests</code>\n                  </b> - The number of\n          viewer requests that Web Application Firewall (WAF) allowed. This metric is available only\n          when WAF is enabled for the distribution.</p>\n               <p>\n                  <code>Statistics</code>: The most useful statistic is <code>Sum</code>.</p>\n               <p>\n                  <code>Unit</code>: The published unit is <code>None</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>WafBlockedRequests</code>\n                  </b> - The number of\n          viewer requests that WAF blocked. This metric is available only when WAF is enabled for\n          the distribution.</p>\n               <p>\n                  <code>Statistics</code>: The most useful statistic is <code>Sum</code>.</p>\n               <p>\n                  <code>Unit</code>: The published unit is <code>None</code>.</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -15924,6 +15948,12 @@
                     "target": "com.amazonaws.lightsail#DistributionCustomErrorResponseList",
                     "traits": {
                         "smithy.api#documentation": "<p>An array of objects that describe the custom error responses configured for the\n      distribution.</p>"
+                    }
+                },
+                "waf": {
+                    "target": "com.amazonaws.lightsail#WafConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An object that describes the Web Application Firewall (WAF) configuration of the\n      distribution.</p>"
                     }
                 }
             },
@@ -24179,6 +24209,18 @@
                     "traits": {
                         "smithy.api#documentation": "<p>An array of objects that describe the custom error responses for the distribution. With a\n      custom error response, you can specify the page to return when the origin responds with a\n      given HTTP error code. You can also specify the HTTP status code to send to the viewer.</p>"
                     }
+                },
+                "enableWaf": {
+                    "target": "com.amazonaws.lightsail#boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether to enable Web Application Firewall (WAF) for the distribution. WAF\n      inspects viewer requests and blocks requests that match the WAF rule groups that you\n      enable.</p>\n         <p>When you enable WAF without specifying the <code>wafRules</code> parameter, the\n      distribution has no WAF rule groups enabled and doesn't block any requests.</p>\n         <note>\n            <p>WAF is available only for distributions that use the <code>medium_1_0</code> or\n          <code>large_1_0</code> bundle.</p>\n            <p>Setting this parameter to <code>false</code> disables WAF for the distribution and\n        removes its WAF rule groups. You must enable the WAF rule groups again if you enable WAF\n        again.</p>\n         </note>"
+                    }
+                },
+                "wafRules": {
+                    "target": "com.amazonaws.lightsail#WafRuleList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of objects that describe the WAF rule groups to enable for the\n      distribution.</p>\n         <p>The array that you specify replaces the existing WAF rule groups of the distribution.\n      To keep a WAF rule group enabled, include it in the array. To disable all WAF rule groups,\n      specify an empty array.</p>\n         <p>You can specify this parameter only when WAF is enabled for the distribution.</p>\n         <p>The WAF rule groups that you can specify depend on the bundle of the\n      distribution:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>medium_1_0</code> – Supports the <code>AWSManagedRulesCommonRuleSet</code>,\n            <code>AWSManagedRulesKnownBadInputsRuleSet</code>, and\n            <code>AWSManagedRulesAnonymousIpList</code> rule groups.</p>\n            </li>\n            <li>\n               <p>\n                  <code>large_1_0</code> – Supports the rule groups for <code>medium_1_0</code>, plus\n            <code>AWSManagedRulesAdminProtectionRuleSet</code>,\n            <code>AWSManagedRulesSQLiRuleSet</code>, <code>AWSManagedRulesLinuxRuleSet</code>,\n            <code>AWSManagedRulesUnixRuleSet</code>, <code>AWSManagedRulesWindowsRuleSet</code>,\n            <code>AWSManagedRulesPHPRuleSet</code>, <code>AWSManagedRulesWordPressRuleSet</code>,\n            <code>AWSManagedRulesAmazonIpReputationList</code>,\n            <code>AWSManagedRulesATPRuleSet</code>, <code>AWSManagedRulesACFPRuleSet</code>, and\n            <code>AWSManagedRulesBotControlRuleSet</code> rule groups.</p>\n            </li>\n         </ul>"
+                    }
                 }
             },
             "traits": {
@@ -24698,6 +24740,209 @@
                         "smithy.api#enumValue": "TLSv1.2_2021"
                     }
                 }
+            }
+        },
+        "com.amazonaws.lightsail#WafAcfpConfig": {
+            "type": "structure",
+            "members": {
+                "payloadType": {
+                    "target": "com.amazonaws.lightsail#WafPayloadTypeEnum",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The content type of the request body of account creation requests.</p>\n         <p>The following content types are possible:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>JSON</code> – The request body is in JSON format.</p>\n            </li>\n            <li>\n               <p>\n                  <code>FORM_ENCODED</code> – The request body is form encoded.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "creationPath": {
+                    "target": "com.amazonaws.lightsail#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The path of the endpoint that accepts completed account creation forms (for example,\n        <code>/signup/submit</code>). This endpoint must accept <code>POST</code> requests.</p>\n         <p>Constraints:</p>\n         <ul>\n            <li>\n               <p>Must start with a forward slash (<code>/</code>).</p>\n            </li>\n            <li>\n               <p>Must contain from 1 to 256 characters.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "registrationPagePath": {
+                    "target": "com.amazonaws.lightsail#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The path of the page that displays the account creation form (for example,\n        <code>/signup</code>).</p>\n         <p>Constraints:</p>\n         <ul>\n            <li>\n               <p>Must start with a forward slash (<code>/</code>).</p>\n            </li>\n            <li>\n               <p>Must contain from 1 to 256 characters.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "responseInspection": {
+                    "target": "com.amazonaws.lightsail#WafResponseInspection",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An object that describes the HTTP status codes that your application returns for\n      successful and failed account creation attempts.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes the configuration of the account creation fraud prevention Web Application\n      Firewall (WAF) rule group. The rule group inspects account creation requests to your\n      application.</p>"
+            }
+        },
+        "com.amazonaws.lightsail#WafAtpConfig": {
+            "type": "structure",
+            "members": {
+                "loginPath": {
+                    "target": "com.amazonaws.lightsail#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The path of the login endpoint of your application (for example,\n      <code>/login</code>). Login paths that start with the path that you specify are a\n      match.</p>\n         <p>Constraints:</p>\n         <ul>\n            <li>\n               <p>Must start with a forward slash (<code>/</code>).</p>\n            </li>\n            <li>\n               <p>Must contain from 1 to 256 characters.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "payloadType": {
+                    "target": "com.amazonaws.lightsail#WafPayloadTypeEnum",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The content type of the request body of login requests.</p>\n         <p>The following content types are possible:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>JSON</code> – The request body is in JSON format.</p>\n            </li>\n            <li>\n               <p>\n                  <code>FORM_ENCODED</code> – The request body is form encoded.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "usernameField": {
+                    "target": "com.amazonaws.lightsail#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the field in the request body that contains the username (for example,\n        <code>/username</code> for <code>JSON</code> or <code>username</code> for\n        <code>FORM_ENCODED</code>).</p>\n         <p>Constraints:</p>\n         <ul>\n            <li>\n               <p>For a <code>JSON</code> payload, must be a JSON pointer that starts with a forward\n          slash (<code>/</code>).</p>\n            </li>\n            <li>\n               <p>Must contain from 1 to 512 characters.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "passwordField": {
+                    "target": "com.amazonaws.lightsail#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the field in the request body that contains the password (for example,\n        <code>/password</code> for <code>JSON</code> or <code>password</code> for\n        <code>FORM_ENCODED</code>).</p>\n         <p>Constraints:</p>\n         <ul>\n            <li>\n               <p>For a <code>JSON</code> payload, must be a JSON pointer that starts with a forward\n          slash (<code>/</code>).</p>\n            </li>\n            <li>\n               <p>Must contain from 1 to 512 characters.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "responseInspection": {
+                    "target": "com.amazonaws.lightsail#WafResponseInspection",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An object that describes the HTTP status codes that your application returns for\n      successful and failed login attempts.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes the configuration of the account takeover prevention Web Application Firewall\n      (WAF) rule group. The rule group inspects login requests to the login path of your\n      application.</p>"
+            }
+        },
+        "com.amazonaws.lightsail#WafBotControlConfig": {
+            "type": "structure",
+            "members": {
+                "inspectionLevel": {
+                    "target": "com.amazonaws.lightsail#WafInspectionLevelEnum",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The inspection level of the bot control rule group.</p>\n         <p>The following inspection levels are possible:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>COMMON</code> – Detects a variety of bots that identify themselves, such as\n          web scraping frameworks, search engines, and automated browsers.</p>\n            </li>\n            <li>\n               <p>\n                  <code>TARGETED</code> – Includes the <code>COMMON</code> protections, and adds\n          detection for sophisticated bots that don't identify themselves. This level uses rate\n          limiting, CAPTCHA, and background browser challenges.</p>\n            </li>\n         </ul>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes the configuration of the bot control Web Application Firewall (WAF) rule\n      group.</p>"
+            }
+        },
+        "com.amazonaws.lightsail#WafConfig": {
+            "type": "structure",
+            "members": {
+                "isWafEnabled": {
+                    "target": "com.amazonaws.lightsail#boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether WAF is enabled for the distribution.</p>"
+                    }
+                },
+                "wafRules": {
+                    "target": "com.amazonaws.lightsail#WafRuleList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of objects that describe the WAF rule groups enabled for the\n      distribution.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes the Web Application Firewall (WAF) configuration of a Lightsail\n      distribution.</p>"
+            }
+        },
+        "com.amazonaws.lightsail#WafInspectionLevelEnum": {
+            "type": "enum",
+            "members": {
+                "COMMON": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "COMMON"
+                    }
+                },
+                "TARGETED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TARGETED"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.lightsail#WafPayloadTypeEnum": {
+            "type": "enum",
+            "members": {
+                "JSON": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "JSON"
+                    }
+                },
+                "FORM_ENCODED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FORM_ENCODED"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.lightsail#WafResponseInspection": {
+            "type": "structure",
+            "members": {
+                "successCodes": {
+                    "target": "com.amazonaws.lightsail#WafStatusCodeList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The HTTP status codes that indicate a successful attempt (for example,\n      <code>200</code>).</p>\n         <p>Constraints:</p>\n         <ul>\n            <li>\n               <p>Must contain from 1 to 10 status codes.</p>\n            </li>\n            <li>\n               <p>Each status code must be from <code>0</code> to <code>999</code>.</p>\n            </li>\n            <li>\n               <p>Can't contain a status code that is also in\n          <code>failureCodes</code>.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "failureCodes": {
+                    "target": "com.amazonaws.lightsail#WafStatusCodeList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The HTTP status codes that indicate a failed attempt (for example,\n      <code>401</code>).</p>\n         <p>Constraints:</p>\n         <ul>\n            <li>\n               <p>Must contain from 1 to 10 status codes.</p>\n            </li>\n            <li>\n               <p>Each status code must be from <code>0</code> to <code>999</code>.</p>\n            </li>\n            <li>\n               <p>Can't contain a status code that is also in\n          <code>successCodes</code>.</p>\n            </li>\n         </ul>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes the HTTP status codes that your application returns to indicate successful and\n      failed attempts. The Web Application Firewall (WAF) rule group uses these status codes to\n      track successful and failed attempts.</p>"
+            }
+        },
+        "com.amazonaws.lightsail#WafRule": {
+            "type": "structure",
+            "members": {
+                "name": {
+                    "target": "com.amazonaws.lightsail#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the WAF rule group (for example,\n      <code>AWSManagedRulesCommonRuleSet</code>).</p>\n         <p>For the WAF rule groups that you can specify for each bundle, see the\n        <code>wafRules</code> parameter of the <code>CreateDistribution</code> action.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "atpConfig": {
+                    "target": "com.amazonaws.lightsail#WafAtpConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An object that describes the configuration of the account takeover prevention rule\n      group.</p>\n         <p>Constraints:</p>\n         <ul>\n            <li>\n               <p>Define this parameter only when the <code>name</code> is\n            <code>AWSManagedRulesATPRuleSet</code>.</p>\n            </li>\n            <li>\n               <p>This parameter is required when the <code>name</code> is\n            <code>AWSManagedRulesATPRuleSet</code>.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "acfpConfig": {
+                    "target": "com.amazonaws.lightsail#WafAcfpConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An object that describes the configuration of the account creation fraud prevention\n      rule group.</p>\n         <p>Constraints:</p>\n         <ul>\n            <li>\n               <p>Define this parameter only when the <code>name</code> is\n            <code>AWSManagedRulesACFPRuleSet</code>.</p>\n            </li>\n            <li>\n               <p>This parameter is required when the <code>name</code> is\n            <code>AWSManagedRulesACFPRuleSet</code>.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "botControlConfig": {
+                    "target": "com.amazonaws.lightsail#WafBotControlConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An object that describes the configuration of the bot control rule group.</p>\n         <p>Constraints:</p>\n         <ul>\n            <li>\n               <p>Define this parameter only when the <code>name</code> is\n            <code>AWSManagedRulesBotControlRuleSet</code>.</p>\n            </li>\n            <li>\n               <p>This parameter is required when the <code>name</code> is\n            <code>AWSManagedRulesBotControlRuleSet</code>.</p>\n            </li>\n         </ul>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes a Web Application Firewall (WAF) rule group for a Lightsail distribution. A\n      WAF rule group is a set of rules managed by AWS. The rules inspect viewer requests and block\n      requests that match them.</p>"
+            }
+        },
+        "com.amazonaws.lightsail#WafRuleList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.lightsail#WafRule"
+            }
+        },
+        "com.amazonaws.lightsail#WafStatusCodeList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.lightsail#integer"
             }
         },
         "com.amazonaws.lightsail#boolean": {

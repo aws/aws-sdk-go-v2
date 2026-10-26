@@ -3220,6 +3220,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>An object that contains summary information about the express private offer configuration.</p>"
                     }
+                },
+                "SubsidiaryAuthorizationSummary": {
+                    "target": "com.amazonaws.marketplacecatalog#SubsidiaryAuthorizationSummary",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An object that contains summary information about the subsidiary authorization, such as its\n           status and authorized resource, when the entity type is\n           <code>SubsidiaryAuthorization</code>.</p>"
+                    }
                 }
             },
             "traits": {
@@ -3295,6 +3301,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>A filter for express private offer configurations.</p>"
                     }
+                },
+                "SubsidiaryAuthorizationFilters": {
+                    "target": "com.amazonaws.marketplacecatalog#SubsidiaryAuthorizationFilters",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A filter for subsidiary authorizations.</p>"
+                    }
                 }
             },
             "traits": {
@@ -3353,6 +3365,12 @@
                     "target": "com.amazonaws.marketplacecatalog#ExpressPrivateOfferConfigurationSort",
                     "traits": {
                         "smithy.api#documentation": "<p>A sort for express private offer configurations.</p>"
+                    }
+                },
+                "SubsidiaryAuthorizationSort": {
+                    "target": "com.amazonaws.marketplacecatalog#SubsidiaryAuthorizationSort",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A sort for subsidiary authorizations.</p>"
                     }
                 }
             },
@@ -4195,7 +4213,7 @@
                 "EntityType": {
                     "target": "com.amazonaws.marketplacecatalog#EntityType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of entities to\n            retrieve. Valid\n            values are: <code>AmiProduct</code>, <code>ContainerProduct</code>,\n                <code>DataProduct</code>, <code>SaaSProduct</code>, <code>ProcurementPolicy</code>,\n                <code>Experience</code>, <code>Audience</code>, <code>BrandingSettings</code>,\n                <code>Offer</code>, <code>OfferSet</code>, <code>Seller</code>,\n            <code>ResaleAuthorization</code>, <code>Solution</code>.</p>",
+                        "smithy.api#documentation": "<p>The type of entities to\n            retrieve. Valid\n            values are: <code>AmiProduct</code>, <code>ContainerProduct</code>,\n                <code>DataProduct</code>, <code>SaaSProduct</code>, <code>ProcurementPolicy</code>,\n                <code>Experience</code>, <code>Audience</code>, <code>BrandingSettings</code>,\n                <code>Offer</code>, <code>OfferSet</code>, <code>Seller</code>,\n            <code>ResaleAuthorization</code>, <code>Solution</code>,\n                <code>SubsidiaryAuthorization</code>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -7560,6 +7578,548 @@
             },
             "traits": {
                 "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.marketplacecatalog#SubsidiaryAuthorizationCreatedDateFilter": {
+            "type": "structure",
+            "members": {
+                "DateRange": {
+                    "target": "com.amazonaws.marketplacecatalog#SubsidiaryAuthorizationCreatedDateFilterDateRange",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A date range to filter by. The operation returns subsidiary authorizations with creation dates\n            that fall within this range.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The filter for the date a subsidiary authorization was created.</p>"
+            }
+        },
+        "com.amazonaws.marketplacecatalog#SubsidiaryAuthorizationCreatedDateFilterDateRange": {
+            "type": "structure",
+            "members": {
+                "AfterValue": {
+                    "target": "com.amazonaws.marketplacecatalog#DateTimeISO8601",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The start date (inclusive) of the date range. The operation returns subsidiary authorizations\n            created on or after this date.</p>"
+                    }
+                },
+                "BeforeValue": {
+                    "target": "com.amazonaws.marketplacecatalog#DateTimeISO8601",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The end date (inclusive) of the date range. The operation returns subsidiary authorizations\n            created on or before this date.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A date range for filtering subsidiary authorizations by creation date.</p>"
+            }
+        },
+        "com.amazonaws.marketplacecatalog#SubsidiaryAuthorizationEntityIdFilter": {
+            "type": "structure",
+            "members": {
+                "ValueList": {
+                    "target": "com.amazonaws.marketplacecatalog#SubsidiaryAuthorizationEntityIdFilterValueList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of entity IDs to filter by. The operation returns subsidiary authorizations with an\n            entity ID that matches any value in this list. You can include up to 10 entity IDs in\n            this list.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The filter for subsidiary authorization entity IDs. Each ID begins with <code>subauthz-</code>\n            followed by 13 alphanumeric characters.</p>"
+            }
+        },
+        "com.amazonaws.marketplacecatalog#SubsidiaryAuthorizationEntityIdFilterValueList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.marketplacecatalog#SubsidiaryAuthorizationEntityIdString"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 10
+                }
+            }
+        },
+        "com.amazonaws.marketplacecatalog#SubsidiaryAuthorizationEntityIdString": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 255
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9][.a-zA-Z0-9/-]+[a-zA-Z0-9]$"
+            }
+        },
+        "com.amazonaws.marketplacecatalog#SubsidiaryAuthorizationFilters": {
+            "type": "structure",
+            "members": {
+                "EntityId": {
+                    "target": "com.amazonaws.marketplacecatalog#SubsidiaryAuthorizationEntityIdFilter",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A filter that matches subsidiary authorizations by entity ID.</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.marketplacecatalog#SubsidiaryAuthorizationStatusFilter",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A filter that matches subsidiary authorizations by status.</p>"
+                    }
+                },
+                "ResourceId": {
+                    "target": "com.amazonaws.marketplacecatalog#SubsidiaryAuthorizationResourceIdFilter",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A filter that matches subsidiary authorizations by the ID of the authorized resource.</p>"
+                    }
+                },
+                "ResourceName": {
+                    "target": "com.amazonaws.marketplacecatalog#SubsidiaryAuthorizationResourceNameFilter",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A filter that matches subsidiary authorizations by the name of the authorized resource.</p>"
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.marketplacecatalog#SubsidiaryAuthorizationNameFilter",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A filter that matches subsidiary authorizations by name.</p>"
+                    }
+                },
+                "SubsidiaryAccountId": {
+                    "target": "com.amazonaws.marketplacecatalog#SubsidiaryAuthorizationSubsidiaryAccountIdFilter",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A filter that matches subsidiary authorizations by the AWS account ID of the subsidiary\n            account.</p>"
+                    }
+                },
+                "CreatedDate": {
+                    "target": "com.amazonaws.marketplacecatalog#SubsidiaryAuthorizationCreatedDateFilter",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A filter that matches subsidiary authorizations by creation date.</p>"
+                    }
+                },
+                "LastModifiedDate": {
+                    "target": "com.amazonaws.marketplacecatalog#SubsidiaryAuthorizationLastModifiedDateFilter",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A filter that matches subsidiary authorizations by last modified date.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The filters that you can use with the <code>ListEntities</code> operation to filter subsidiary\n            authorizations. You can filter by <code>EntityId</code>, <code>Status</code>,\n            <code>ResourceId</code>, <code>ResourceName</code>, <code>Name</code>,\n            <code>SubsidiaryAccountId</code>, <code>CreatedDate</code>, and\n            <code>LastModifiedDate</code>. You can add only one wildcard filter in a single\n            <code>ListEntities</code> request.</p>"
+            }
+        },
+        "com.amazonaws.marketplacecatalog#SubsidiaryAuthorizationLastModifiedDateFilter": {
+            "type": "structure",
+            "members": {
+                "DateRange": {
+                    "target": "com.amazonaws.marketplacecatalog#SubsidiaryAuthorizationLastModifiedDateFilterDateRange",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A date range to filter by. The operation returns subsidiary authorizations with last modified\n            dates that fall within this range.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The filter for the date a subsidiary authorization was last modified.</p>"
+            }
+        },
+        "com.amazonaws.marketplacecatalog#SubsidiaryAuthorizationLastModifiedDateFilterDateRange": {
+            "type": "structure",
+            "members": {
+                "AfterValue": {
+                    "target": "com.amazonaws.marketplacecatalog#DateTimeISO8601",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The start date (inclusive) of the date range. The operation returns subsidiary authorizations\n            last modified on or after this date.</p>"
+                    }
+                },
+                "BeforeValue": {
+                    "target": "com.amazonaws.marketplacecatalog#DateTimeISO8601",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The end date (inclusive) of the date range. The operation returns subsidiary authorizations\n            last modified on or before this date.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A date range for filtering subsidiary authorizations by last modified date.</p>"
+            }
+        },
+        "com.amazonaws.marketplacecatalog#SubsidiaryAuthorizationNameFilter": {
+            "type": "structure",
+            "members": {
+                "ValueList": {
+                    "target": "com.amazonaws.marketplacecatalog#SubsidiaryAuthorizationNameFilterValueList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of names to filter by. The operation returns subsidiary authorizations with a name that\n            matches any value in this list. You can include up to 10 names in this list.</p>"
+                    }
+                },
+                "WildCardValue": {
+                    "target": "com.amazonaws.marketplacecatalog#SubsidiaryAuthorizationNameFilterWildcard",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A partial name to filter by. The operation returns subsidiary authorizations whose\n            name contains this value. The value must be at least 3 characters.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The filter for subsidiary authorization names.</p>"
+            }
+        },
+        "com.amazonaws.marketplacecatalog#SubsidiaryAuthorizationNameFilterValueList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.marketplacecatalog#SubsidiaryAuthorizationNameString"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 10
+                }
+            }
+        },
+        "com.amazonaws.marketplacecatalog#SubsidiaryAuthorizationNameFilterWildcard": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 3,
+                    "max": 255
+                },
+                "smithy.api#pattern": "^(.)+$"
+            }
+        },
+        "com.amazonaws.marketplacecatalog#SubsidiaryAuthorizationNameString": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 255
+                },
+                "smithy.api#pattern": "^(.)+$"
+            }
+        },
+        "com.amazonaws.marketplacecatalog#SubsidiaryAuthorizationResourceIdFilter": {
+            "type": "structure",
+            "members": {
+                "ValueList": {
+                    "target": "com.amazonaws.marketplacecatalog#SubsidiaryAuthorizationResourceIdFilterValueList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of resource IDs to filter by. The operation returns subsidiary authorizations for\n            resources with an ID that matches any value in this list. You can include up to 10\n            resource IDs in this list.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The filter for the IDs of resources that subsidiary authorizations apply to.</p>"
+            }
+        },
+        "com.amazonaws.marketplacecatalog#SubsidiaryAuthorizationResourceIdFilterValueList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.marketplacecatalog#SubsidiaryAuthorizationResourceIdString"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 10
+                }
+            }
+        },
+        "com.amazonaws.marketplacecatalog#SubsidiaryAuthorizationResourceIdString": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 255
+                },
+                "smithy.api#pattern": "^(.)+$"
+            }
+        },
+        "com.amazonaws.marketplacecatalog#SubsidiaryAuthorizationResourceNameFilter": {
+            "type": "structure",
+            "members": {
+                "ValueList": {
+                    "target": "com.amazonaws.marketplacecatalog#SubsidiaryAuthorizationResourceNameFilterValueList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of resource names to filter by. The operation returns subsidiary authorizations for\n            resources with a name that matches any value in this list. You can include up to 10\n            resource names in this list.</p>"
+                    }
+                },
+                "WildCardValue": {
+                    "target": "com.amazonaws.marketplacecatalog#SubsidiaryAuthorizationResourceNameFilterWildcard",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A partial resource name to filter by. The operation returns subsidiary authorizations\n            for resources whose name contains this value. The value must be at least 3\n            characters.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The filter for the names of resources that subsidiary authorizations apply to.</p>"
+            }
+        },
+        "com.amazonaws.marketplacecatalog#SubsidiaryAuthorizationResourceNameFilterValueList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.marketplacecatalog#SubsidiaryAuthorizationResourceNameString"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 10
+                }
+            }
+        },
+        "com.amazonaws.marketplacecatalog#SubsidiaryAuthorizationResourceNameFilterWildcard": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 3,
+                    "max": 255
+                },
+                "smithy.api#pattern": "^(.)+$"
+            }
+        },
+        "com.amazonaws.marketplacecatalog#SubsidiaryAuthorizationResourceNameString": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 255
+                },
+                "smithy.api#pattern": "^(.)+$"
+            }
+        },
+        "com.amazonaws.marketplacecatalog#SubsidiaryAuthorizationSort": {
+            "type": "structure",
+            "members": {
+                "SortBy": {
+                    "target": "com.amazonaws.marketplacecatalog#SubsidiaryAuthorizationSortBy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The field to sort subsidiary authorizations by. Valid values are <code>EntityId</code>,\n            <code>Status</code>, <code>ResourceId</code>, <code>SubsidiaryAccountId</code>,\n            <code>CreatedDate</code>, and <code>LastModifiedDate</code>.</p>"
+                    }
+                },
+                "SortOrder": {
+                    "target": "com.amazonaws.marketplacecatalog#SortOrder",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The sorting order. Can be <code>ASCENDING</code> or <code>DESCENDING</code>. The\n            default value is <code>DESCENDING</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies the field to sort subsidiary authorizations by and the order (ascending or\n            descending) to apply.</p>"
+            }
+        },
+        "com.amazonaws.marketplacecatalog#SubsidiaryAuthorizationSortBy": {
+            "type": "enum",
+            "members": {
+                "EntityId": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EntityId"
+                    }
+                },
+                "Status": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Status"
+                    }
+                },
+                "ResourceId": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ResourceId"
+                    }
+                },
+                "SubsidiaryAccountId": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SubsidiaryAccountId"
+                    }
+                },
+                "CreatedDate": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CreatedDate"
+                    }
+                },
+                "LastModifiedDate": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LastModifiedDate"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.marketplacecatalog#SubsidiaryAuthorizationStatusFilter": {
+            "type": "structure",
+            "members": {
+                "ValueList": {
+                    "target": "com.amazonaws.marketplacecatalog#SubsidiaryAuthorizationStatusFilterValueList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of statuses to filter by. The operation returns subsidiary authorizations with a status\n    that matches a value in this list. Valid values are:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>Draft</code> - The subsidiary authorization was created but not yet released.\n                    The subsidiary account can't see it.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Active</code> - The subsidiary account can use the subsidiary authorization to\n                    create offers for the authorized product.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Restricted</code> - The subsidiary authorization was discarded while in\n                    <code>Draft</code> or revoked while <code>Active</code>. It can't be used to create new\n                    offers. This status is final.</p>\n            </li>\n         </ul>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The filter for subsidiary authorization statuses.</p>"
+            }
+        },
+        "com.amazonaws.marketplacecatalog#SubsidiaryAuthorizationStatusFilterValueList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.marketplacecatalog#SubsidiaryAuthorizationStatusString"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 10
+                }
+            }
+        },
+        "com.amazonaws.marketplacecatalog#SubsidiaryAuthorizationStatusString": {
+            "type": "enum",
+            "members": {
+                "Draft": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Draft"
+                    }
+                },
+                "Active": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Active"
+                    }
+                },
+                "Restricted": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Restricted"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 64
+                }
+            }
+        },
+        "com.amazonaws.marketplacecatalog#SubsidiaryAuthorizationSubsidiaryAccountIdFilter": {
+            "type": "structure",
+            "members": {
+                "ValueList": {
+                    "target": "com.amazonaws.marketplacecatalog#SubsidiaryAuthorizationSubsidiaryAccountIdFilterValueList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of AWS account IDs to filter by. The operation returns subsidiary authorizations whose\n            subsidiary account ID matches any value in this list. You can include up to 10 account\n            IDs in this list.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The filter for the AWS account IDs of subsidiary accounts.</p>"
+            }
+        },
+        "com.amazonaws.marketplacecatalog#SubsidiaryAuthorizationSubsidiaryAccountIdFilterValueList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.marketplacecatalog#SubsidiaryAuthorizationSubsidiaryAccountIdString"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 10
+                }
+            }
+        },
+        "com.amazonaws.marketplacecatalog#SubsidiaryAuthorizationSubsidiaryAccountIdString": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 12,
+                    "max": 12
+                },
+                "smithy.api#pattern": "^[0-9]{12}$"
+            }
+        },
+        "com.amazonaws.marketplacecatalog#SubsidiaryAuthorizationSummary": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.marketplacecatalog#SubsidiaryAuthorizationSummaryNameString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the subsidiary authorization.</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.marketplacecatalog#SubsidiaryAuthorizationSummaryStatusString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the subsidiary authorization. Valid values are:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>Draft</code> - The subsidiary authorization was created but not yet released.\n                    The subsidiary account can't see it.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Active</code> - The subsidiary account can use the subsidiary authorization to\n                    create offers for the authorized product.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Restricted</code> - The subsidiary authorization was discarded while in\n                    <code>Draft</code> or revoked while <code>Active</code>. It can't be used to create new\n                    offers. This status is final.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "ResourceId": {
+                    "target": "com.amazonaws.marketplacecatalog#SubsidiaryAuthorizationSummaryResourceIdString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the resource that the subsidiary authorization applies to. Currently, this is always\n            a product ID, such as <code>prod-example123</code>.</p>"
+                    }
+                },
+                "ResourceName": {
+                    "target": "com.amazonaws.marketplacecatalog#SubsidiaryAuthorizationSummaryResourceNameString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the resource that the subsidiary authorization applies to. Currently, this is\n            always a product name.</p>"
+                    }
+                },
+                "SubsidiaryAccountId": {
+                    "target": "com.amazonaws.marketplacecatalog#SubsidiaryAuthorizationSummarySubsidiaryAccountIdString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The 12-digit AWS account ID of the subsidiary account.</p>"
+                    }
+                },
+                "CreatedDate": {
+                    "target": "com.amazonaws.marketplacecatalog#DateTimeISO8601",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date the subsidiary authorization was created.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An object that contains summary information about a subsidiary authorization, including its\n            name, status, authorized resource, subsidiary account, and creation date. A subsidiary\n            authorization lets a seller authorize one of its subsidiary accounts to create offers\n            for one of its products.</p>"
+            }
+        },
+        "com.amazonaws.marketplacecatalog#SubsidiaryAuthorizationSummaryNameString": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 255
+                }
+            }
+        },
+        "com.amazonaws.marketplacecatalog#SubsidiaryAuthorizationSummaryResourceIdString": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 255
+                }
+            }
+        },
+        "com.amazonaws.marketplacecatalog#SubsidiaryAuthorizationSummaryResourceNameString": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 255
+                }
+            }
+        },
+        "com.amazonaws.marketplacecatalog#SubsidiaryAuthorizationSummaryStatusString": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 64
+                }
+            }
+        },
+        "com.amazonaws.marketplacecatalog#SubsidiaryAuthorizationSummarySubsidiaryAccountIdString": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 12,
+                    "max": 12
+                },
+                "smithy.api#pattern": "^[0-9]{12}$"
             }
         },
         "com.amazonaws.marketplacecatalog#Tag": {

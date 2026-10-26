@@ -300,7 +300,7 @@
             "type": "structure",
             "members": {
                 "EmbeddingFrequency": {
-                    "target": "com.amazonaws.medialive#__doubleMin250Max5000",
+                    "target": "com.amazonaws.medialive#__double",
                     "traits": {
                         "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "The frequency with which watermarks will be embedded, in milliseconds.",
@@ -1769,6 +1769,13 @@
                 "smithy.api#documentation": "Authentication Scheme"
             }
         },
+        "com.amazonaws.medialive#AutoFilterSettings": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#documentation": "System-managed filter selection. Resolves to the perceptual filter at strength 1 where the codec\nis eligible (AV1 and H.265 unconditionally; H.264 only at enhanced_quality), and to no filter\notherwise. An empty / undefined filter_settings_choice is treated as \"auto\".\n\nCarries no body (extends EmptySettings, which sets additionalProperties: false), mirroring the\nColorSpacePassthroughSettings empty-settings pattern."
+            }
+        },
         "com.amazonaws.medialive#AutomaticInputFailoverSettings": {
             "type": "structure",
             "members": {
@@ -1863,6 +1870,32 @@
             },
             "traits": {
                 "smithy.api#documentation": "Av1 Color Space Settings"
+            }
+        },
+        "com.amazonaws.medialive#Av1FilterSettings": {
+            "type": "structure",
+            "members": {
+                "AutoFilterSettings": {
+                    "target": "com.amazonaws.medialive#AutoFilterSettings",
+                    "traits": {
+                        "smithy.api#jsonName": "autoFilterSettings"
+                    }
+                },
+                "NoneFilterSettings": {
+                    "target": "com.amazonaws.medialive#NoneFilterSettings",
+                    "traits": {
+                        "smithy.api#jsonName": "noneFilterSettings"
+                    }
+                },
+                "PerceptualFilterSettings": {
+                    "target": "com.amazonaws.medialive#PerceptualFilterSettings",
+                    "traits": {
+                        "smithy.api#jsonName": "perceptualFilterSettings"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Av1 Filter Settings"
             }
         },
         "com.amazonaws.medialive#Av1GopSizeUnits": {
@@ -2222,6 +2255,13 @@
                     "traits": {
                         "smithy.api#documentation": "Specifies the bit depth for the output encode. Choose a value. Or leave the field empty to use the default, which is 8 bit.",
                         "smithy.api#jsonName": "bitDepth"
+                    }
+                },
+                "FilterSettings": {
+                    "target": "com.amazonaws.medialive#Av1FilterSettings",
+                    "traits": {
+                        "smithy.api#documentation": "Optional filters that you can apply to an encode.",
+                        "smithy.api#jsonName": "filterSettings"
                     }
                 }
             },
@@ -17282,6 +17322,26 @@
                 "smithy.api#documentation": "H264 Adaptive Quantization"
             }
         },
+        "com.amazonaws.medialive#H264AllowExplicitWeightedPrediction": {
+            "type": "enum",
+            "members": {
+                "DISABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DISABLED"
+                    }
+                },
+                "ENABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ENABLED"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "H264 Allow Explicit Weighted Prediction"
+            }
+        },
         "com.amazonaws.medialive#H264ColorMetadata": {
             "type": "enum",
             "members": {
@@ -17361,6 +17421,24 @@
                     "target": "com.amazonaws.medialive#BandwidthReductionFilterSettings",
                     "traits": {
                         "smithy.api#jsonName": "bandwidthReductionFilterSettings"
+                    }
+                },
+                "AutoFilterSettings": {
+                    "target": "com.amazonaws.medialive#AutoFilterSettings",
+                    "traits": {
+                        "smithy.api#jsonName": "autoFilterSettings"
+                    }
+                },
+                "NoneFilterSettings": {
+                    "target": "com.amazonaws.medialive#NoneFilterSettings",
+                    "traits": {
+                        "smithy.api#jsonName": "noneFilterSettings"
+                    }
+                },
+                "PerceptualFilterSettings": {
+                    "target": "com.amazonaws.medialive#PerceptualFilterSettings",
+                    "traits": {
+                        "smithy.api#jsonName": "perceptualFilterSettings"
                     }
                 }
             },
@@ -18070,6 +18148,13 @@
                         "smithy.api#documentation": "Used for QVBR rate control mode only.\nOptional.\nEnter a minimum bitrate if you want to keep the output bitrate about a threshold, in order to prevent the downstream system from de-allocating network bandwidth for this output.",
                         "smithy.api#jsonName": "minBitrate"
                     }
+                },
+                "AllowExplicitWeightedPrediction": {
+                    "target": "com.amazonaws.medialive#H264AllowExplicitWeightedPrediction",
+                    "traits": {
+                        "smithy.api#documentation": "Specifies whether the encoder may apply explicit weighted prediction (EWP), an H.264 coding tool that can improve compression. EWP applies a scaling factor and offset to reference frames, which helps when brightness changes between frames, such as during a fade. When this setting is enabled, the encoder decides whether to apply EWP based on the output's other codec settings, such as profile and quality level. We recommend that you keep the default, enabled. When disabled, the encoder never applies EWP.",
+                        "smithy.api#jsonName": "allowExplicitWeightedPrediction"
+                    }
                 }
             },
             "traits": {
@@ -18343,6 +18428,24 @@
                     "target": "com.amazonaws.medialive#BandwidthReductionFilterSettings",
                     "traits": {
                         "smithy.api#jsonName": "bandwidthReductionFilterSettings"
+                    }
+                },
+                "AutoFilterSettings": {
+                    "target": "com.amazonaws.medialive#AutoFilterSettings",
+                    "traits": {
+                        "smithy.api#jsonName": "autoFilterSettings"
+                    }
+                },
+                "NoneFilterSettings": {
+                    "target": "com.amazonaws.medialive#NoneFilterSettings",
+                    "traits": {
+                        "smithy.api#jsonName": "noneFilterSettings"
+                    }
+                },
+                "PerceptualFilterSettings": {
+                    "target": "com.amazonaws.medialive#PerceptualFilterSettings",
+                    "traits": {
+                        "smithy.api#jsonName": "perceptualFilterSettings"
                     }
                 }
             },
@@ -30705,6 +30808,13 @@
                 "smithy.api#documentation": "Used in DescribeNodeSummary."
             }
         },
+        "com.amazonaws.medialive#NoneFilterSettings": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#documentation": "Explicitly disables the video filter. This is the customer opt-out: a video description set to\n\"none\" never has a filter applied and is never overridden by the system-managed \"auto\" default.\n\nCarries no body (extends EmptySettings, which sets additionalProperties: false), mirroring the\nColorSpacePassthroughSettings empty-settings pattern."
+            }
+        },
         "com.amazonaws.medialive#NotFoundException": {
             "type": "structure",
             "members": {
@@ -31244,6 +31354,43 @@
             },
             "traits": {
                 "smithy.api#documentation": "Settings for the action to set pause state of a channel."
+            }
+        },
+        "com.amazonaws.medialive#PerceptualFilterSettings": {
+            "type": "structure",
+            "members": {
+                "Strength": {
+                    "target": "com.amazonaws.medialive#PerceptualFilterStrength",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "Selects the perceptual noise filter strength. Strength 1 (perceptual lite) is the recommended default and adds\napproximately 30% of an AVC encode of compute on the highest rendition. Strength 2 adds approximately 60% of an\nAVC encode of compute and can introduce slight softening on noisy content.",
+                        "smithy.api#jsonName": "strength",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Perceptual Filter Settings"
+            }
+        },
+        "com.amazonaws.medialive#PerceptualFilterStrength": {
+            "type": "enum",
+            "members": {
+                "STRENGTH_1": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "STRENGTH_1"
+                    }
+                },
+                "STRENGTH_2": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "STRENGTH_2"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Perceptual Filter Strength"
             }
         },
         "com.amazonaws.medialive#PipelineDetail": {
@@ -40866,12 +41013,6 @@
             "type": "double",
             "traits": {
                 "smithy.api#documentation": "Placeholder documentation for __doubleMin1Max65535"
-            }
-        },
-        "com.amazonaws.medialive#__doubleMin250Max5000": {
-            "type": "double",
-            "traits": {
-                "smithy.api#documentation": "Placeholder documentation for __doubleMin250Max5000"
             }
         },
         "com.amazonaws.medialive#__doubleMin32Max46": {

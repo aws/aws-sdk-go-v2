@@ -112,6 +112,9 @@
                     "target": "com.amazonaws.ecr#DescribeRegistry"
                 },
                 {
+                    "target": "com.amazonaws.ecr#DescribeReplicationBackfillResults"
+                },
+                {
                     "target": "com.amazonaws.ecr#DescribeRepositories"
                 },
                 {
@@ -157,6 +160,9 @@
                     "target": "com.amazonaws.ecr#ListPullTimeUpdateExclusions"
                 },
                 {
+                    "target": "com.amazonaws.ecr#ListReplicationBackfills"
+                },
+                {
                     "target": "com.amazonaws.ecr#ListTagsForResource"
                 },
                 {
@@ -197,6 +203,12 @@
                 },
                 {
                     "target": "com.amazonaws.ecr#StartLifecyclePolicyPreview"
+                },
+                {
+                    "target": "com.amazonaws.ecr#StartReplicationBackfill"
+                },
+                {
+                    "target": "com.amazonaws.ecr#StopReplicationBackfill"
                 },
                 {
                     "target": "com.amazonaws.ecr#TagResource"
@@ -5013,6 +5025,145 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.ecr#DescribeReplicationBackfillResults": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ecr#DescribeReplicationBackfillResultsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.ecr#DescribeReplicationBackfillResultsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.ecr#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.ecr#ReplicationBackfillNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.ecr#ServerException"
+                },
+                {
+                    "target": "com.amazonaws.ecr#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns the status, progress, and per-image results for a replication backfill. The\n            backfill to describe is identified by the <code>replicationBackfillId</code> returned by\n            the <a>StartReplicationBackfill</a> operation.</p>\n         <note>\n            <p>The per-image results are available only after the replication backfill reaches a\n                terminal status.</p>\n         </note>",
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "items": "results",
+                    "pageSize": "maxResults"
+                }
+            }
+        },
+        "com.amazonaws.ecr#DescribeReplicationBackfillResultsRequest": {
+            "type": "structure",
+            "members": {
+                "registryId": {
+                    "target": "com.amazonaws.ecr#RegistryId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services account ID associated with the registry that contains the replication\n            backfill to describe. If you do not specify a registry, the default registry is assumed.</p>"
+                    }
+                },
+                "replicationBackfillId": {
+                    "target": "com.amazonaws.ecr#ReplicationBackfillId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the replication backfill to describe.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "resultStatusFilter": {
+                    "target": "com.amazonaws.ecr#ReplicationBackfillResultStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status used to filter the returned results. Each result has a status of\n                <code>COMPLETE</code> or <code>FAILED</code>. If you omit this parameter, results\n            with both statuses are returned.</p>"
+                    }
+                },
+                "maxResults": {
+                    "target": "com.amazonaws.ecr#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of replication backfill results returned by\n                <code>DescribeReplicationBackfillResults</code> in paginated output. When this\n            parameter is used, <code>DescribeReplicationBackfillResults</code> only returns\n                <code>maxResults</code> results in a single page along with a <code>nextToken</code>\n            response element. The remaining results of the initial request can be seen by sending\n            another <code>DescribeReplicationBackfillResults</code> request with the returned\n                <code>nextToken</code> value. This value can be between 1 and\n                1000. If this parameter is not used, then\n                <code>DescribeReplicationBackfillResults</code> returns up to 100\n            results and a <code>nextToken</code> value, if applicable.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.ecr#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The <code>nextToken</code> value returned from a previous paginated\n                <code>DescribeReplicationBackfillResults</code> request where <code>maxResults</code>\n            was used and the results exceeded the value of that parameter. Pagination continues from\n            the end of the previous results that returned the <code>nextToken</code> value. This\n            value is <code>null</code> when there are no more results to return.</p>\n         <note>\n            <p>This token should be treated as an opaque identifier that is only used to\n                retrieve the next items in a list and not for other programmatic purposes.</p>\n         </note>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.ecr#DescribeReplicationBackfillResultsResponse": {
+            "type": "structure",
+            "members": {
+                "registryId": {
+                    "target": "com.amazonaws.ecr#RegistryId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The registry ID associated with the request.</p>"
+                    }
+                },
+                "replicationBackfillId": {
+                    "target": "com.amazonaws.ecr#ReplicationBackfillId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the replication backfill.</p>"
+                    }
+                },
+                "destination": {
+                    "target": "com.amazonaws.ecr#ReplicationDestination",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The destination Region and registry to which the images are replicated.</p>"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.ecr#ReplicationBackfillStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of the replication backfill.</p>"
+                    }
+                },
+                "failureCode": {
+                    "target": "com.amazonaws.ecr#ReplicationBackfillError",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The failure code for a replication backfill that has failed.</p>"
+                    }
+                },
+                "progress": {
+                    "target": "com.amazonaws.ecr#ReplicationBackfillProgress",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The progress of the replication backfill, including the total, completed, and failed\n            replication counts. This value is <code>null</code> until the replication backfill\n            finishes preparing the set of images to replicate. It is therefore <code>null</code>\n            while the replication backfill is <code>PREPARING</code>, and remains <code>null</code>\n            if the replication backfill is stopped before preparation completes.</p>"
+                    }
+                },
+                "results": {
+                    "target": "com.amazonaws.ecr#ReplicationBackfillResultList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The per-image results for the replication backfill. Results are available only after\n            the replication backfill reaches a terminal status.</p>"
+                    }
+                },
+                "startedAt": {
+                    "target": "com.amazonaws.ecr#Date",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time, in JavaScript date format, when the replication backfill was\n            started.</p>"
+                    }
+                },
+                "endedAt": {
+                    "target": "com.amazonaws.ecr#Date",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time, in JavaScript date format, when the replication backfill ended.\n            This value is <code>null</code> while the replication backfill is still in\n            progress.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.ecr#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The <code>nextToken</code> value to include in a future\n                <code>DescribeReplicationBackfillResults</code> request. When the results of a\n                <code>DescribeReplicationBackfillResults</code> request exceed\n                <code>maxResults</code>, this value can be used to retrieve the next page of results.\n            This value is <code>null</code> when there are no more results to return.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.ecr#DescribeRepositories": {
             "type": "operation",
             "input": {
@@ -8144,6 +8295,87 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.ecr#ListReplicationBackfills": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ecr#ListReplicationBackfillsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.ecr#ListReplicationBackfillsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.ecr#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.ecr#ServerException"
+                },
+                {
+                    "target": "com.amazonaws.ecr#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists the replication backfills for a registry, including their status and\n            progress.</p>\n         <note>\n            <p>Replication backfills that have reached a terminal status are retained for 90 days\n                after they end, after which they are no longer returned.</p>\n         </note>",
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "items": "backfills",
+                    "pageSize": "maxResults"
+                }
+            }
+        },
+        "com.amazonaws.ecr#ListReplicationBackfillsRequest": {
+            "type": "structure",
+            "members": {
+                "registryId": {
+                    "target": "com.amazonaws.ecr#RegistryId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services account ID associated with the registry for which to list replication\n            backfills. If you do not specify a registry, the default registry is assumed.</p>"
+                    }
+                },
+                "maxResults": {
+                    "target": "com.amazonaws.ecr#FiftyMaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of replication backfill results returned by\n                <code>ListReplicationBackfills</code> in paginated output. When this parameter is\n            used, <code>ListReplicationBackfills</code> only returns <code>maxResults</code> results\n            in a single page along with a <code>nextToken</code> response element. The remaining\n            results of the initial request can be seen by sending another\n                <code>ListReplicationBackfills</code> request with the returned\n                <code>nextToken</code> value. This value can be between 1 and 50. If this parameter\n            is not used, then <code>ListReplicationBackfills</code> returns up to 25 results and a\n                <code>nextToken</code> value, if applicable.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.ecr#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The <code>nextToken</code> value returned from a previous paginated\n                <code>ListReplicationBackfills</code> request where <code>maxResults</code> was used\n            and the results exceeded the value of that parameter. Pagination continues from the end\n            of the previous results that returned the <code>nextToken</code> value. This value is\n                <code>null</code> when there are no more results to return.</p>\n         <note>\n            <p>This token should be treated as an opaque identifier that is only used to\n                retrieve the next items in a list and not for other programmatic purposes.</p>\n         </note>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.ecr#ListReplicationBackfillsResponse": {
+            "type": "structure",
+            "members": {
+                "registryId": {
+                    "target": "com.amazonaws.ecr#RegistryId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The registry ID associated with the request.</p>"
+                    }
+                },
+                "backfills": {
+                    "target": "com.amazonaws.ecr#ReplicationBackfillSummaryList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of the replication backfills for the registry.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.ecr#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The <code>nextToken</code> value to include in a future\n                <code>ListReplicationBackfills</code> request. When the results of a\n                <code>ListReplicationBackfills</code> request exceed <code>maxResults</code>, this\n            value can be used to retrieve the next page of results. This value is <code>null</code>\n            when there are no more results to return.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.ecr#ListTagsForResource": {
             "type": "operation",
             "input": {
@@ -8225,6 +8457,14 @@
         },
         "com.amazonaws.ecr#NextToken": {
             "type": "string"
+        },
+        "com.amazonaws.ecr#NonNegativeInteger": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 0
+                }
+            }
         },
         "com.amazonaws.ecr#PTCValidateFailure": {
             "type": "string"
@@ -9369,6 +9609,261 @@
                 "smithy.api#documentation": "<p>Information on how to remediate a finding.</p>"
             }
         },
+        "com.amazonaws.ecr#ReplicationBackfillError": {
+            "type": "string"
+        },
+        "com.amazonaws.ecr#ReplicationBackfillId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
+            }
+        },
+        "com.amazonaws.ecr#ReplicationBackfillInProgressException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.ecr#ExceptionMessage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The error message associated with the exception.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A replication backfill is already in progress for the specified destination Region.\n            This occurs because only one replication backfill can be in progress for a given\n            destination Region at a time. Wait for the in progress backfill to reach a terminal\n            status, or stop it with the <a>StopReplicationBackfill</a> operation, before\n            starting another one.</p>",
+                "smithy.api#error": "client"
+            }
+        },
+        "com.amazonaws.ecr#ReplicationBackfillInvalidStatusException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.ecr#ExceptionMessage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The error message associated with the exception.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The requested operation can't be performed on the replication backfill because it is\n            not in a valid status for that operation. For example, you can't stop a replication\n            backfill that has already reached a terminal status. Use the <a>DescribeReplicationBackfillResults</a> operation to check the current status\n            before retrying.</p>",
+                "smithy.api#error": "client"
+            }
+        },
+        "com.amazonaws.ecr#ReplicationBackfillNotFoundException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.ecr#ExceptionMessage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The error message associated with the exception.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The specified replication backfill could not be found. Check the specified replication\n            backfill ID and ensure that you are operating on the correct registry.</p>",
+                "smithy.api#error": "client"
+            }
+        },
+        "com.amazonaws.ecr#ReplicationBackfillProgress": {
+            "type": "structure",
+            "members": {
+                "totalReplicationCount": {
+                    "target": "com.amazonaws.ecr#NonNegativeInteger",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The total number of replications that the backfill will perform. Each image and tag\n            combination is counted as a single replication.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "completedReplicationCount": {
+                    "target": "com.amazonaws.ecr#NonNegativeInteger",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of replications that have completed successfully.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "failedReplicationCount": {
+                    "target": "com.amazonaws.ecr#NonNegativeInteger",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of replications that have failed.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "failureCodes": {
+                    "target": "com.amazonaws.ecr#ReplicationErrorList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The distinct failure codes for the replications that have failed. Each failure code\n            appears at most once, regardless of how many replications failed with that code.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An object representing the progress of a replication backfill, including the total,\n            completed, and failed replication counts.</p>"
+            }
+        },
+        "com.amazonaws.ecr#ReplicationBackfillResult": {
+            "type": "structure",
+            "members": {
+                "repositoryName": {
+                    "target": "com.amazonaws.ecr#RepositoryName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the repository that contains the image.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "imageId": {
+                    "target": "com.amazonaws.ecr#ImageIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An object with identifying information for the image.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.ecr#ReplicationBackfillResultStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The replication status of the image.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "failureCode": {
+                    "target": "com.amazonaws.ecr#ReplicationError",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The failure code for a replication that has failed.</p>"
+                    }
+                },
+                "subImageFailureCodes": {
+                    "target": "com.amazonaws.ecr#ReplicationErrorList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The distinct failure codes for the images referenced by a manifest list that failed to\n            replicate. Each failure code appears at most once, regardless of how many referenced\n            images failed with that code. This field is present only when the image is a manifest\n            list.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An object representing the result of a single replication during a replication\n            backfill. Each image and tag combination is replicated as a single replication.</p>"
+            }
+        },
+        "com.amazonaws.ecr#ReplicationBackfillResultList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ecr#ReplicationBackfillResult"
+            }
+        },
+        "com.amazonaws.ecr#ReplicationBackfillResultStatus": {
+            "type": "enum",
+            "members": {
+                "COMPLETE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "COMPLETE"
+                    }
+                },
+                "FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FAILED"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ecr#ReplicationBackfillStatus": {
+            "type": "enum",
+            "members": {
+                "PREPARING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PREPARING"
+                    }
+                },
+                "IN_PROGRESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IN_PROGRESS"
+                    }
+                },
+                "COMPLETE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "COMPLETE"
+                    }
+                },
+                "FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FAILED"
+                    }
+                },
+                "STOPPING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "STOPPING"
+                    }
+                },
+                "STOPPED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "STOPPED"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ecr#ReplicationBackfillSummary": {
+            "type": "structure",
+            "members": {
+                "replicationBackfillId": {
+                    "target": "com.amazonaws.ecr#ReplicationBackfillId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the replication backfill.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "destination": {
+                    "target": "com.amazonaws.ecr#ReplicationDestination",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The destination Region and registry to which the images are replicated.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.ecr#ReplicationBackfillStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of the replication backfill.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "failureCode": {
+                    "target": "com.amazonaws.ecr#ReplicationBackfillError",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The failure code for a replication backfill that has failed.</p>"
+                    }
+                },
+                "progress": {
+                    "target": "com.amazonaws.ecr#ReplicationBackfillProgress",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The progress of the replication backfill, including the total, completed, and failed\n            replication counts. This value is <code>null</code> until the replication backfill\n            finishes preparing the set of images to replicate. It is therefore <code>null</code>\n            while the replication backfill is <code>PREPARING</code>, and remains <code>null</code>\n            if the replication backfill is stopped before preparation completes.</p>"
+                    }
+                },
+                "startedAt": {
+                    "target": "com.amazonaws.ecr#Date",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time, in JavaScript date format, when the replication backfill was\n            started.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "endedAt": {
+                    "target": "com.amazonaws.ecr#Date",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time, in JavaScript date format, when the replication backfill ended.\n            This value is <code>null</code> while the replication backfill is still in\n            progress.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An object representing a summary of a replication backfill, including its status,\n            destination, progress, and start and end times.</p>"
+            }
+        },
+        "com.amazonaws.ecr#ReplicationBackfillSummaryList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ecr#ReplicationBackfillSummary"
+            }
+        },
         "com.amazonaws.ecr#ReplicationConfiguration": {
             "type": "structure",
             "members": {
@@ -9420,6 +9915,12 @@
         },
         "com.amazonaws.ecr#ReplicationError": {
             "type": "string"
+        },
+        "com.amazonaws.ecr#ReplicationErrorList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ecr#ReplicationError"
+            }
         },
         "com.amazonaws.ecr#ReplicationRule": {
             "type": "structure",
@@ -9483,7 +9984,7 @@
                 "repositoryArn": {
                     "target": "com.amazonaws.ecr#Arn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) that identifies the repository. The ARN contains the <code>arn:aws:ecr</code> namespace, followed by the region of the\n    repository, Amazon Web Services account ID of the repository owner, repository namespace, and repository name.\n    For example, <code>arn:aws:ecr:region:012345678910:repository-namespace/repository-name</code>.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) that identifies the repository. The ARN contains the <code>arn:aws:ecr</code> namespace, followed by the region of the\n    repository, Amazon Web Services account ID of the repository owner, and repository name.\n    For example, <code>arn:aws:ecr:region:012345678910:repository/repository-name</code>.</p>"
                     }
                 },
                 "registryId": {
@@ -10625,8 +11126,184 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.ecr#StartReplicationBackfill": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ecr#StartReplicationBackfillRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.ecr#StartReplicationBackfillResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.ecr#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.ecr#LimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.ecr#ReplicationBackfillInProgressException"
+                },
+                {
+                    "target": "com.amazonaws.ecr#ServerException"
+                },
+                {
+                    "target": "com.amazonaws.ecr#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Starts a replication backfill for a registry. A replication backfill replicates a\n            registry's existing images that match its replication configuration to the specified\n            destination. Use the <a>DescribeReplicationBackfillResults</a> operation to\n            monitor the progress of a replication backfill, and to retrieve its per-image results\n            after it reaches a terminal status.</p>\n         <note>\n            <p>The destination must already be configured in the registry's replication\n                configuration.</p>\n         </note>\n         <note>\n            <p>Only one replication backfill can be in progress for a given destination Region at\n                a time. Starting a replication backfill for a destination Region that already has one\n                in progress fails with a <code>ReplicationBackfillInProgressException</code>. In\n                addition, a registry can have at most 10 replication backfills in progress at once.\n                Starting a replication backfill that would exceed this limit fails with a\n                <code>LimitExceededException</code>.</p>\n         </note>"
+            }
+        },
+        "com.amazonaws.ecr#StartReplicationBackfillRequest": {
+            "type": "structure",
+            "members": {
+                "registryId": {
+                    "target": "com.amazonaws.ecr#RegistryId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services account ID associated with the registry from which to start the replication\n            backfill. If you do not specify a registry, the default registry is assumed.</p>"
+                    }
+                },
+                "destination": {
+                    "target": "com.amazonaws.ecr#ReplicationDestination",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The destination Region and registry to which the images are replicated.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.ecr#StartReplicationBackfillResponse": {
+            "type": "structure",
+            "members": {
+                "replicationBackfillId": {
+                    "target": "com.amazonaws.ecr#ReplicationBackfillId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the replication backfill that was started. Use this value to describe or\n            stop the backfill.</p>"
+                    }
+                },
+                "registryId": {
+                    "target": "com.amazonaws.ecr#RegistryId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The registry ID associated with the request.</p>"
+                    }
+                },
+                "destination": {
+                    "target": "com.amazonaws.ecr#ReplicationDestination",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The destination Region and registry to which the images are replicated.</p>"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.ecr#ReplicationBackfillStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of the replication backfill. A newly started replication backfill\n            is returned with a status of <code>PREPARING</code>.</p>"
+                    }
+                },
+                "startedAt": {
+                    "target": "com.amazonaws.ecr#Date",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time, in JavaScript date format, when the replication backfill was\n            started.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.ecr#Status": {
             "type": "string"
+        },
+        "com.amazonaws.ecr#StopReplicationBackfill": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ecr#StopReplicationBackfillRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.ecr#StopReplicationBackfillResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.ecr#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.ecr#ReplicationBackfillInvalidStatusException"
+                },
+                {
+                    "target": "com.amazonaws.ecr#ReplicationBackfillNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.ecr#ServerException"
+                },
+                {
+                    "target": "com.amazonaws.ecr#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Stops an in progress replication backfill for a registry. The backfill to stop is\n            identified by the <code>replicationBackfillId</code> returned by the <a>StartReplicationBackfill</a> operation.</p>\n         <note>\n            <p>Images that have already been replicated are not affected, and replications that\n                are already in progress continue to completion.</p>\n         </note>"
+            }
+        },
+        "com.amazonaws.ecr#StopReplicationBackfillRequest": {
+            "type": "structure",
+            "members": {
+                "registryId": {
+                    "target": "com.amazonaws.ecr#RegistryId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services account ID associated with the registry that contains the replication\n            backfill to stop. If you do not specify a registry, the default registry is assumed.</p>"
+                    }
+                },
+                "replicationBackfillId": {
+                    "target": "com.amazonaws.ecr#ReplicationBackfillId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the replication backfill to stop.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.ecr#StopReplicationBackfillResponse": {
+            "type": "structure",
+            "members": {
+                "registryId": {
+                    "target": "com.amazonaws.ecr#RegistryId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The registry ID associated with the request.</p>"
+                    }
+                },
+                "replicationBackfillId": {
+                    "target": "com.amazonaws.ecr#ReplicationBackfillId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the replication backfill.</p>"
+                    }
+                },
+                "destination": {
+                    "target": "com.amazonaws.ecr#ReplicationDestination",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The destination Region and registry to which the images are replicated.</p>"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.ecr#ReplicationBackfillStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of the replication backfill. When you stop a replication backfill,\n            its status is <code>STOPPED</code> if the backfill is stopped immediately, or\n            <code>STOPPING</code> if there are replications still in progress that must complete\n            before the backfill stops.</p>"
+                    }
+                },
+                "startedAt": {
+                    "target": "com.amazonaws.ecr#Date",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time, in JavaScript date format, when the replication backfill was\n            started.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.ecr#String": {
             "type": "string"

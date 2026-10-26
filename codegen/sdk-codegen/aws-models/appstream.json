@@ -9860,6 +9860,12 @@
                         "smithy.api#enumValue": "WINDOWS_SERVER_2025"
                     }
                 },
+                "WINDOWS_11": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "WINDOWS_11"
+                    }
+                },
                 "AMAZON_LINUX2": {
                     "target": "smithy.api#Unit",
                     "traits": {
