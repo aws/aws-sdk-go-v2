@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"settings":[{"optionName":"__OptionName__","type":"__Type__","value":"__Value__"},{"optionName":"__OptionName__","type":"__Type__","value":"__Value__"}]}

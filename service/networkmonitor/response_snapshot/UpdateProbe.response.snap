@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"addressFamily":"IPV4","createdAt":946684800,"destination":"__Destination__","destinationPort":1,"modifiedAt":946684800,"packetSize":1,"probeArn":"__ProbeArn__","probeId":"__ProbeId__","protocol":"TCP","sourceArn":"__SourceArn__","state":"PENDING","tags":{"key0":"__Value__"},"vpcId":"__VpcId__"}

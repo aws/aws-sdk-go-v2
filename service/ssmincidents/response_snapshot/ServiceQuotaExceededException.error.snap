@@ -1,0 +1,4 @@
+402
+Content-Type: application/json
+
+{"__type":"ServiceQuotaExceededException","message":"__Message__","quotaCode":"__QuotaCode__","resourceIdentifier":"__ResourceIdentifier__","resourceType":"RESPONSE_PLAN","serviceCode":"ssm-incidents"}

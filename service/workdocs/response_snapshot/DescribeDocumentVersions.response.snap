@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"DocumentVersions":[{"ContentCreatedTimestamp":946684800,"ContentModifiedTimestamp":946684800,"ContentType":"__ContentType__","CreatedTimestamp":946684800,"CreatorId":"__CreatorId__","Id":"__Id__","ModifiedTimestamp":946684800,"Name":"__Name__","Signature":"__Signature__","Size":1,"Source":{"key0":"__Value__"},"Status":"INITIALIZED","Thumbnail":{"key0":"__Value__"}},{"ContentCreatedTimestamp":946684800,"ContentModifiedTimestamp":946684800,"ContentType":"__ContentType__","CreatedTimestamp":946684800,"CreatorId":"__CreatorId__","Id":"__Id__","ModifiedTimestamp":946684800,"Name":"__Name__","Signature":"__Signature__","Size":1,"Source":{"key0":"__Value__"},"Status":"INITIALIZED","Thumbnail":{"key0":"__Value__"}}],"Marker":"__Marker__"}

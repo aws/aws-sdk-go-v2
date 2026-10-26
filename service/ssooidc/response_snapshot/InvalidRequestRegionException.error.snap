@@ -1,0 +1,4 @@
+400
+Content-Type: application/json
+
+{"__type":"InvalidRequestRegionException","endpoint":"__Endpoint__","error":"__Error___","error_description":"__Error_description__","region":"__Region__"}

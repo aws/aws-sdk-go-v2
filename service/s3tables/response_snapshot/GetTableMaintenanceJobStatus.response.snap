@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"status":{"key0":{"failureMessage":"__FailureMessage__","lastRunTimestamp":"2000-01-01T00:00:00Z","status":"Not_Yet_Run"}},"tableARN":"__TableARN__"}

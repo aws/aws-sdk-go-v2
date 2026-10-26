@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"bots":[{"botId":"__BotId__","displayName":"__DisplayName__","groupId":"__GroupId__","hasChallenge":true,"lastLogin":"__LastLogin__","pubkey":"__Pubkey__","status":1,"suspended":true,"uname":"__Uname__","username":"__Username__"},{"botId":"__BotId__","displayName":"__DisplayName__","groupId":"__GroupId__","hasChallenge":true,"lastLogin":"__LastLogin__","pubkey":"__Pubkey__","status":1,"suspended":true,"uname":"__Uname__","username":"__Username__"}],"nextToken":"__NextToken__"}

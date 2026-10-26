@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"exportStatus":"IN_PROGRESS","exportType":"ALEXA_SKILLS_KIT","failureReason":"__FailureReason__","name":"__Name__","resourceType":"BOT","url":"__Url__","version":"__Version__"}

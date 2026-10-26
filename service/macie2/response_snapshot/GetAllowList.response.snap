@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"arn":"__Arn__","createdAt":"2000-01-01T00:00:00Z","criteria":{"regex":"__Regex__","s3WordsList":{"bucketName":"__BucketName__","objectKey":"__ObjectKey__"}},"description":"__Description__","id":"__Id__","name":"__Name__","status":{"code":"OK","description":"__Description__"},"tags":{"key0":"__Value__"},"updatedAt":"2000-01-01T00:00:00Z"}

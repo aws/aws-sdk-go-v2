@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"shareId":"__ShareId__","shareName":"__ShareName__","status":"PENDING"}

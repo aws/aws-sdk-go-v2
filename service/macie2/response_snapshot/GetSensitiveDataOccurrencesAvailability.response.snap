@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"code":"AVAILABLE","reasons":["OBJECT_EXCEEDS_SIZE_QUOTA","OBJECT_EXCEEDS_SIZE_QUOTA"]}

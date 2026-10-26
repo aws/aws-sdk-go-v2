@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"readinessCheckArn":"__ReadinessCheckArn__","readinessCheckName":"__ReadinessCheckName__","resourceSet":"__ResourceSet__","tags":{"key0":"__Value__"}}

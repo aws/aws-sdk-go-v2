@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"mountTargets":[{"availabilityZoneId":"__AvailabilityZoneId__","fileSystemId":"__FileSystemId__","ipv4Address":"__Ipv4Address__","ipv6Address":"__Ipv6Address__","mountTargetId":"__MountTargetId__","networkInterfaceId":"__NetworkInterfaceId__","ownerId":"__OwnerId__","status":"available","statusMessage":"__StatusMessage__","subnetId":"__SubnetId__","vpcId":"__VpcId__"},{"availabilityZoneId":"__AvailabilityZoneId__","fileSystemId":"__FileSystemId__","ipv4Address":"__Ipv4Address__","ipv6Address":"__Ipv6Address__","mountTargetId":"__MountTargetId__","networkInterfaceId":"__NetworkInterfaceId__","ownerId":"__OwnerId__","status":"available","statusMessage":"__StatusMessage__","subnetId":"__SubnetId__","vpcId":"__VpcId__"}],"nextToken":"__NextToken__"}

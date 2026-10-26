@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"applications":[{"applicationId":"__ApplicationId__","createdAt":946684800,"displayName":"__DisplayName__","identityType":"AWS_IAM_IDP_SAML","quickSightConfiguration":{"clientNamespace":"__ClientNamespace__"},"status":"CREATING","updatedAt":946684800},{"applicationId":"__ApplicationId__","createdAt":946684800,"displayName":"__DisplayName__","identityType":"AWS_IAM_IDP_SAML","quickSightConfiguration":{"clientNamespace":"__ClientNamespace__"},"status":"CREATING","updatedAt":946684800}],"nextToken":"__NextToken__"}

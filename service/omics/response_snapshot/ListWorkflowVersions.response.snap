@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"items":[{"arn":"__Arn__","creationTime":"2000-01-01T00:00:00Z","description":"__Description__","digest":"__Digest__","metadata":{"key0":"__Value__"},"status":"CREATING","type":"PRIVATE","versionName":"__VersionName__","workflowId":"__WorkflowId__"},{"arn":"__Arn__","creationTime":"2000-01-01T00:00:00Z","description":"__Description__","digest":"__Digest__","metadata":{"key0":"__Value__"},"status":"CREATING","type":"PRIVATE","versionName":"__VersionName__","workflowId":"__WorkflowId__"}],"nextToken":"__NextToken__"}

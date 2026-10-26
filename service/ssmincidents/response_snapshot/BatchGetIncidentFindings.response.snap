@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"errors":[{"code":"__Code__","findingId":"__FindingId__","message":"__Message__"},{"code":"__Code__","findingId":"__FindingId__","message":"__Message__"}],"findings":[{"creationTime":946684800,"details":{"codeDeployDeployment":{"deploymentGroupArn":"__DeploymentGroupArn__","deploymentId":"__DeploymentId__","endTime":946684800,"startTime":946684800}},"id":"__Id__","lastModifiedTime":946684800},{"creationTime":946684800,"details":{"codeDeployDeployment":{"deploymentGroupArn":"__DeploymentGroupArn__","deploymentId":"__DeploymentId__","endTime":946684800,"startTime":946684800}},"id":"__Id__","lastModifiedTime":946684800}]}

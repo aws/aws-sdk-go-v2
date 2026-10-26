@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"instance":{"awsAccountId":"__AwsAccountId__","createdTime":946684800,"errorMessage":"__ErrorMessage__","instanceDescription":"__InstanceDescription__","instanceId":"__InstanceId__","instanceName":"__InstanceName__","kmsKeyArn":"__KmsKeyArn__","lastModifiedTime":946684800,"state":"Initializing","versionNumber":1,"webAppDnsDomain":"__WebAppDnsDomain__"}}

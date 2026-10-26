@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"createdAt":946684800,"datastoreId":"__DatastoreId__","deletedAt":946684800,"imageSetArn":"__ImageSetArn__","imageSetId":"__ImageSetId__","imageSetState":"ACTIVE","imageSetWorkflowStatus":"CREATED","isPrimary":true,"lastAccessedAt":946684800,"message":"__Message__","overrides":{"forced":true},"storageTier":"FREQUENT_ACCESS","updatedAt":946684800,"versionId":"__VersionId__"}

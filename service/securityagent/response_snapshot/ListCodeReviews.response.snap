@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"codeReviewSummaries":[{"agentSpaceId":"__AgentSpaceId__","codeReviewId":"__CodeReviewId__","createdAt":"2000-01-01T00:00:00Z","title":"__Title__","updatedAt":"2000-01-01T00:00:00Z"},{"agentSpaceId":"__AgentSpaceId__","codeReviewId":"__CodeReviewId__","createdAt":"2000-01-01T00:00:00Z","title":"__Title__","updatedAt":"2000-01-01T00:00:00Z"}],"nextToken":"__NextToken__"}

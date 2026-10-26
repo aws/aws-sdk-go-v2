@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"category":"__Category__","metaTemplateId":"__MetaTemplateId__","templateStatus":"__TemplateStatus__"}

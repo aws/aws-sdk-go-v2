@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"nextToken":"__NextToken__","taskInfos":[{"completionTime":946684800,"id":"__Id__","importName":"__ImportName__","inputS3Bucket":"__InputS3Bucket__","inputS3Key":"__InputS3Key__","numberOfRecordsFailed":1,"numberOfRecordsSuccess":1,"startTime":946684800,"status":"ImportInProgress","statusReportS3Bucket":"__StatusReportS3Bucket__","statusReportS3Key":"__StatusReportS3Key__"},{"completionTime":946684800,"id":"__Id__","importName":"__ImportName__","inputS3Bucket":"__InputS3Bucket__","inputS3Key":"__InputS3Key__","numberOfRecordsFailed":1,"numberOfRecordsSuccess":1,"startTime":946684800,"status":"ImportInProgress","statusReportS3Bucket":"__StatusReportS3Bucket__","statusReportS3Key":"__StatusReportS3Key__"}]}

@@ -1,0 +1,4 @@
+400
+Content-Type: application/json
+
+{"__type":"InvalidScopeException","error":"TOKEN_EXPIRED","message":"__Message__"}

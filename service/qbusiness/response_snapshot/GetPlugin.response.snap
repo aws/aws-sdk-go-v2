@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"applicationId":"__ApplicationId__","authConfiguration":{"basicAuthConfiguration":{"roleArn":"__RoleArn__","secretArn":"__SecretArn__"}},"buildStatus":"READY","createdAt":946684800,"customPluginConfiguration":{"apiSchema":{"payload":"__APISchemaMemberPayload__"},"apiSchemaType":"OPEN_API_V3","description":"__Description__"},"displayName":"__DisplayName__","pluginArn":"__PluginArn__","pluginId":"__PluginId__","serverUrl":"__ServerUrl__","state":"ENABLED","type":"SERVICE_NOW","updatedAt":946684800}

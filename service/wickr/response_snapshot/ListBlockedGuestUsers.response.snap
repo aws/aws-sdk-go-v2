@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"blocklist":[{"admin":"__Admin__","modified":"__Modified__","username":"__Username__","usernameHash":"__UsernameHash__"},{"admin":"__Admin__","modified":"__Modified__","username":"__Username__","usernameHash":"__UsernameHash__"}],"nextToken":"__NextToken__"}

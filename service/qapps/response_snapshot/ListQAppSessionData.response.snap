@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"nextToken":"__NextToken__","sessionArn":"__SessionArn__","sessionData":[{"cardId":"__CardId__","submissionId":"__SubmissionId__","timestamp":"2000-01-01T00:00:00Z","user":{"userId":"__UserId__"},"value":"__Document__"},{"cardId":"__CardId__","submissionId":"__SubmissionId__","timestamp":"2000-01-01T00:00:00Z","user":{"userId":"__UserId__"},"value":"__Document__"}],"sessionId":"__SessionId__"}

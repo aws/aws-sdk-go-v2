@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"authorizationEndpoint":"__AuthorizationEndpoint__","clientId":"__ClientId__","clientIdIssuedAt":1,"clientSecret":"__ClientSecret__","clientSecretExpiresAt":1,"tokenEndpoint":"__TokenEndpoint__"}

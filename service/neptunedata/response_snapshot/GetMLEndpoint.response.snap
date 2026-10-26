@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"endpoint":{"arn":"__Arn__","cloudwatchLogUrl":"__CloudwatchLogUrl__","failureReason":"__FailureReason__","name":"__Name__","outputLocation":"__OutputLocation__","status":"__Status__"},"endpointConfig":{"arn":"__Arn__","name":"__Name__"},"id":"__Id__","status":"__Status__"}

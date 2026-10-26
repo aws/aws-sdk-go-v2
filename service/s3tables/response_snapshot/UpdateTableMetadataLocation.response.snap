@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"metadataLocation":"__MetadataLocation__","name":"__Name__","namespace":["__Member__","__Member__"],"tableARN":"__TableARN__","versionToken":"__VersionToken__"}

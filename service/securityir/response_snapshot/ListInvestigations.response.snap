@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"investigationActions":[{"actionType":"Evidence","content":"__Content__","feedback":{"comment":"__Comment__","submittedAt":946684800,"usefulness":"USEFUL"},"investigationId":"__InvestigationId__","lastUpdated":946684800,"status":"Pending","title":"__Title__"},{"actionType":"Evidence","content":"__Content__","feedback":{"comment":"__Comment__","submittedAt":946684800,"usefulness":"USEFUL"},"investigationId":"__InvestigationId__","lastUpdated":946684800,"status":"Pending","title":"__Title__"}],"nextToken":"__NextToken__"}

@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"clientToken":"__ClientToken__","domainName":"__DomainName__","exportArn":"__ExportArn__","exportDataCutoffTime":946684800,"exportManifest":"__ExportManifest__","exportStatus":"PENDING","failureCode":"__FailureCode__","failureMessage":"__FailureMessage__","itemsCount":1,"requestedAt":946684800,"s3Bucket":"__S3Bucket__","s3BucketOwner":"__S3BucketOwner__","s3KeyPrefix":"__S3KeyPrefix__","s3SseAlgorithm":"AES256","s3SseKmsKeyId":"__S3SseKmsKeyId__"}
