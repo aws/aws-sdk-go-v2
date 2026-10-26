@@ -57,7 +57,10 @@ func (c *sessionCredsCache) Put(key cacheKey, creds *aws.Credentials) {
 // for cached credentials within an expiry window (1 minute, currently
 // non-configurable).
 type defaultS3ExpressCredentialsProvider struct {
-	sf singleflight.Group
+	// sf is shared by every clone of the provider so that concurrent
+	// CreateSession calls for the same cache key are deduplicated across
+	// operations, not only within a single one.
+	sf *singleflight.Group
 
 	client        createSessionAPIClient
 	cache         *sessionCredsCache
@@ -71,6 +74,7 @@ type createSessionAPIClient interface {
 
 func newDefaultS3ExpressCredentialsProvider() *defaultS3ExpressCredentialsProvider {
 	return &defaultS3ExpressCredentialsProvider{
+		sf: &singleflight.Group{},
 		cache: &sessionCredsCache{
 			cache: lru.New(s3ExpressCacheCap),
 		},
@@ -82,6 +86,7 @@ func newDefaultS3ExpressCredentialsProvider() *defaultS3ExpressCredentialsProvid
 // config mutations change the credentials provider
 func (p *defaultS3ExpressCredentialsProvider) CloneWithBaseCredentials(v4creds aws.CredentialsProvider) *defaultS3ExpressCredentialsProvider {
 	return &defaultS3ExpressCredentialsProvider{
+		sf:            p.sf,
 		client:        p.client,
 		cache:         p.cache,
 		refreshWindow: p.refreshWindow,
@@ -112,6 +117,11 @@ func (p *defaultS3ExpressCredentialsProvider) Retrieve(ctx context.Context, buck
 }
 
 func (p *defaultS3ExpressCredentialsProvider) doChanRetrieve(ctx context.Context, key cacheKey) <-chan singleflight.Result {
+	// The in-flight CreateSession is shared with every caller waiting on the
+	// same key, and an async refresh has no caller waiting on it at all, so it
+	// must not be canceled when the request that started it returns or gives
+	// up. Callers that stop waiting are handled in awaitDoChanRetrieve.
+	ctx = context.WithoutCancel(ctx)
 	return p.sf.DoChan(key.Slug(), func() (any, error) {
 		return p.retrieve(ctx, key)
 	})

@@ -9,6 +9,7 @@ import (
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/internal/sdk"
+	"github.com/aws/aws-sdk-go-v2/internal/sync/singleflight"
 	"github.com/aws/aws-sdk-go-v2/service/s3/types"
 	"github.com/aws/smithy-go/middleware"
 )
@@ -307,4 +308,202 @@ func TestS3Express_OperationCredentialOverride(t *testing.T) {
 	}
 
 	createSessionClient.expectCalled(t, 2)
+}
+
+// blockingCreateSession blocks every CreateSession call until release is
+// closed or the call's context is canceled, and records what happened.
+type blockingCreateSession struct {
+	started chan struct{}
+	release chan struct{}
+
+	mu       sync.Mutex
+	calls    int
+	canceled int
+}
+
+func newBlockingCreateSession() *blockingCreateSession {
+	return &blockingCreateSession{
+		started: make(chan struct{}, 100),
+		release: make(chan struct{}),
+	}
+}
+
+func (m *blockingCreateSession) CreateSession(ctx context.Context, _ *CreateSessionInput, _ ...func(*Options)) (*CreateSessionOutput, error) {
+	m.mu.Lock()
+	m.calls++
+	m.mu.Unlock()
+	m.started <- struct{}{}
+
+	select {
+	case <-m.release:
+	case <-ctx.Done():
+		m.mu.Lock()
+		m.canceled++
+		m.mu.Unlock()
+		return nil, ctx.Err()
+	}
+
+	return &CreateSessionOutput{
+		Credentials: &types.SessionCredentials{
+			AccessKeyId:     aws.String("AccessKeyId-1"),
+			Expiration:      aws.Time(time.Unix(3600, 0).UTC()),
+			SecretAccessKey: aws.String("SecretAccessKey-1"),
+			SessionToken:    aws.String("SessionToken-1"),
+		},
+	}, nil
+}
+
+func (m *blockingCreateSession) counts() (calls, canceled int) {
+	m.mu.Lock()
+	defer m.mu.Unlock()
+	return m.calls, m.canceled
+}
+
+func TestS3Express_CloneSharesSingleflight(t *testing.T) {
+	sdk.NowTime = func() time.Time {
+		return time.Unix(0, 0)
+	}
+	mockClient := newBlockingCreateSession()
+
+	base := newDefaultS3ExpressCredentialsProvider()
+	base.client = mockClient
+	v4creds := newMockCreds("AKID", "SECRET", "SESSION")
+	base.v4creds = v4creds
+
+	key := cacheKey{
+		CredentialsHash: gethmac("AKID", "SECRET"),
+		Bucket:          "bucket-0",
+	}
+
+	// Every operation clones the provider (finalizeOperationExpressCredentials).
+	// Start one cold-cache retrieve and wait for its CreateSession to be in
+	// flight.
+	first := base.CloneWithBaseCredentials(v4creds).doChanRetrieve(context.Background(), key)
+	<-mockClient.started
+
+	// Retrieves on other clones for the same key must join that call instead
+	// of starting their own.
+	var chans []<-chan singleflight.Result
+	for i := 0; i < 10; i++ {
+		chans = append(chans, base.CloneWithBaseCredentials(v4creds).doChanRetrieve(context.Background(), key))
+	}
+
+	close(mockClient.release)
+	for _, ch := range append(chans, first) {
+		if r := <-ch; r.Err != nil {
+			t.Fatalf("expected no error, got %v", r.Err)
+		}
+	}
+
+	if calls, _ := mockClient.counts(); calls != 1 {
+		t.Errorf("expected 1 call to CreateSession across clones, got %d", calls)
+	}
+}
+
+func TestS3Express_AsyncRefreshNotCanceledByCaller(t *testing.T) {
+	sdk.NowTime = func() time.Time {
+		return time.Unix(0, 0)
+	}
+	mockClient := newBlockingCreateSession()
+
+	c := newDefaultS3ExpressCredentialsProvider()
+	c.client = mockClient
+	c.v4creds = newMockCreds("AKID", "SECRET", "SESSION")
+
+	// Seed the cache with a session that is valid but inside the refresh
+	// window, so Retrieve returns it and starts an async refresh.
+	key := cacheKey{
+		CredentialsHash: gethmac("AKID", "SECRET"),
+		Bucket:          "bucket-0",
+	}
+	c.cache.Put(key, &aws.Credentials{
+		AccessKeyID:     "AccessKeyId-0",
+		SecretAccessKey: "SecretAccessKey-0",
+		SessionToken:    "SessionToken-0",
+		CanExpire:       true,
+		Expires:         time.Unix(30, 0).UTC(),
+	})
+
+	ctx, cancel := context.WithCancel(context.Background())
+	creds, err := c.Retrieve(ctx, "bucket-0")
+	if err != nil {
+		t.Fatalf("expected no error, got %v", err)
+	}
+	if creds.AccessKeyID != "AccessKeyId-0" {
+		t.Errorf("expected cached credentials, got %v", creds.AccessKeyID)
+	}
+
+	// The operation that triggered the refresh finishes and cancels its
+	// context before CreateSession returns.
+	<-mockClient.started
+	cancel()
+	close(mockClient.release)
+
+	// Wait for the refresh to finish by joining it.
+	r := <-c.doChanRetrieve(context.Background(), key)
+	if r.Err != nil {
+		t.Fatalf("expected refresh to succeed, got %v", r.Err)
+	}
+
+	calls, canceled := mockClient.counts()
+	if canceled != 0 {
+		t.Errorf("expected async refresh not to be canceled, got %d canceled", canceled)
+	}
+	if calls != 1 {
+		t.Errorf("expected 1 call to CreateSession, got %d", calls)
+	}
+	if cached, _ := c.cache.Get(key); cached.AccessKeyID != "AccessKeyId-1" {
+		t.Errorf("expected refreshed credentials in cache, got %v", cached.AccessKeyID)
+	}
+}
+
+func TestS3Express_CanceledWaiterDoesNotCancelSharedRetrieve(t *testing.T) {
+	sdk.NowTime = func() time.Time {
+		return time.Unix(0, 0)
+	}
+	mockClient := newBlockingCreateSession()
+
+	base := newDefaultS3ExpressCredentialsProvider()
+	base.client = mockClient
+	v4creds := newMockCreds("AKID", "SECRET", "SESSION")
+	base.v4creds = v4creds
+
+	// The first operation starts the cold-cache CreateSession and then gives
+	// up (for example its timeout fires).
+	ctx, cancel := context.WithCancel(context.Background())
+	errCh := make(chan error, 1)
+	go func() {
+		_, err := base.CloneWithBaseCredentials(v4creds).Retrieve(ctx, "bucket-0")
+		errCh <- err
+	}()
+	<-mockClient.started
+
+	// A second operation joins the same in-flight call.
+	key := cacheKey{
+		CredentialsHash: gethmac("AKID", "SECRET"),
+		Bucket:          "bucket-0",
+	}
+	second := base.CloneWithBaseCredentials(v4creds).doChanRetrieve(context.Background(), key)
+
+	cancel()
+	if err := <-errCh; err == nil {
+		t.Errorf("expected canceled caller to get an error")
+	}
+
+	close(mockClient.release)
+	r := <-second
+	if r.Err != nil {
+		t.Fatalf("expected the other caller to get credentials, got %v", r.Err)
+	}
+	if got := r.Val.(aws.Credentials).AccessKeyID; got != "AccessKeyId-1" {
+		t.Errorf("expected AccessKeyId-1, got %v", got)
+	}
+
+	calls, canceled := mockClient.counts()
+	if canceled != 0 {
+		t.Errorf("expected shared CreateSession not to be canceled, got %d canceled", canceled)
+	}
+	if calls != 1 {
+		t.Errorf("expected 1 call to CreateSession, got %d", calls)
+	}
 }
