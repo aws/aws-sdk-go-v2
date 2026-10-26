@@ -1,8 +1,0 @@
-{
-    "id": "8bd708a3-403e-4b09-bee6-650719e14116",
-    "type": "feature",
-    "description": "AWS Elemental MediaLive now lets you control whether explicit weighted prediction is applied to H.264 outputs. It also introduces Perceptual Filter, a new noise reduction filter designed to improve video quality by increasing VMAF scores, now with Auto, None, and strength options.",
-    "modules": [
-        "service/medialive"
-    ]
-}

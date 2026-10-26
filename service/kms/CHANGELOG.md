@@ -1,3 +1,7 @@
+# v1.62.0 (2026-10-26)
+
+* **Feature**: This release adds support for ML-KEM (Module-Lattice-Based Key-Encapsulation Mechanism) keys in AWS KMS. ML-KEM, as specified in NIST FIPS 203, is a post-quantum key encapsulation mechanism that can be used to establish a shared secret between two parties.
+
 # v1.61.6 (2026-10-22)
 
 * **Bug Fix**: Update smithy-go to v1.28.6

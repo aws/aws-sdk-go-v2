@@ -1,8 +1,0 @@
-{
-    "id": "806b9750-66ab-46fa-ab2a-ca95fd51eed5",
-    "type": "feature",
-    "description": "Improve DownloadDirectory throughput and memory usage by downloading objects with DownloadObject, and only replace an existing file once its download succeeds.",
-    "modules": [
-        "feature/s3/transfermanager"
-    ]
-}

@@ -1,3 +1,7 @@
+# v1.68.0 (2026-10-26)
+
+* **Feature**: This release adds Web Application Firewall (WAF) support for Lightsail distribution.
+
 # v1.67.1 (2026-10-22)
 
 * **Bug Fix**: Update smithy-go to v1.28.6

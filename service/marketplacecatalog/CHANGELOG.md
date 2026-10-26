@@ -1,3 +1,7 @@
+# v1.54.0 (2026-10-26)
+
+* **Feature**: This release adds support for the SubsidiaryAuthorization entity type in the ListEntities operation, including entity-type filters with partial name search, sort options, and a summary returned for each subsidiary authorization.
+
 # v1.53.1 (2026-10-22)
 
 * **Bug Fix**: Update smithy-go to v1.28.6

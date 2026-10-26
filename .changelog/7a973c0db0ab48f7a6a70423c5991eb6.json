@@ -1,8 +1,0 @@
-{
-    "id": "7a973c0d-b0ab-48f7-a6a7-0423c5991eb6",
-    "type": "feature",
-    "description": "Adds support for Exascale storage with Oracle Exadata Database Service on Dedicated Infrastructure",
-    "modules": [
-        "service/odb"
-    ]
-}

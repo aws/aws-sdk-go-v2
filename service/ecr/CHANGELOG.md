@@ -1,3 +1,7 @@
+# v1.67.0 (2026-10-26)
+
+* **Feature**: Add support for ECR replication backfill
+
 # v1.66.6 (2026-10-22)
 
 * **Bug Fix**: Update smithy-go to v1.28.6

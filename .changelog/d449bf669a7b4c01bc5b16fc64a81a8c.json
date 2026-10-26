@@ -1,8 +1,0 @@
-{
-    "id": "d449bf66-9a7b-4c01-bc5b-16fc64a81a8c",
-    "type": "feature",
-    "description": "Add Windows 11 to PlatformType enum",
-    "modules": [
-        "service/appstream"
-    ]
-}

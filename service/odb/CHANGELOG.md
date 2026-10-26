@@ -1,3 +1,7 @@
+# v1.27.0 (2026-10-26)
+
+* **Feature**: Adds support for Exascale storage with Oracle Exadata Database Service on Dedicated Infrastructure
+
 # v1.26.3 (2026-10-22)
 
 * **Bug Fix**: Update smithy-go to v1.28.6

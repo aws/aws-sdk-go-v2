@@ -1,3 +1,7 @@
+# v1.44.4 (2026-10-26)
+
+* **Documentation**: fix the sdk documenation issue only
+
 # v1.44.3 (2026-10-22)
 
 * **Bug Fix**: Update smithy-go to v1.28.6

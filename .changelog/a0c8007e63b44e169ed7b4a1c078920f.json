@@ -1,8 +1,0 @@
-{
-    "id": "a0c8007e-63b4-4e16-9ed7-b4a1c078920f",
-    "type": "feature",
-    "description": "Add support for ECR replication backfill",
-    "modules": [
-        "service/ecr"
-    ]
-}

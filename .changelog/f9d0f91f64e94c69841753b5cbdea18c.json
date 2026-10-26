@@ -1,8 +1,0 @@
-{
-    "id": "f9d0f91f-64e9-4c69-8417-53b5cbdea18c",
-    "type": "feature",
-    "description": "Add Mexico Additional Info changes",
-    "modules": [
-        "service/taxsettings"
-    ]
-}

@@ -1,3 +1,7 @@
+# v1.63.0 (2026-10-26)
+
+* **Feature**: This release adds support for managing and sharing endpoint across accounts in AWS Elemental MediaConnect. You can now register endpoints to represent external or service-managed sources and destinations, and share them across AWS accounts.
+
 # v1.62.2 (2026-10-22)
 
 * **Bug Fix**: Update smithy-go to v1.28.6

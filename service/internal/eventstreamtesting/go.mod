@@ -5,7 +5,7 @@ go 1.24
 require (
 	github.com/aws/aws-sdk-go-v2 v1.47.4
 	github.com/aws/aws-sdk-go-v2/aws/protocol/eventstream v1.7.24
-	github.com/aws/aws-sdk-go-v2/credentials v1.20.10
+	github.com/aws/aws-sdk-go-v2/credentials v1.20.11
 )
 
 require github.com/aws/smithy-go v1.28.6 // indirect

@@ -1,8 +1,0 @@
-{
-    "id": "547768a7-7750-47b4-8eec-88f0ec835f7d",
-    "type": "feature",
-    "description": "Added support for the RegionScope parameter on ListInstances, allowing you to list IAM Identity Center instances in the current Region or across all Regions.",
-    "modules": [
-        "service/ssoadmin"
-    ]
-}

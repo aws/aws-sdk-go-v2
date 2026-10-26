@@ -1,3 +1,7 @@
+# v1.62.0 (2026-10-26)
+
+* **Feature**: The release adds failover slate configurations, which show viewers a slate during temporary broadcaster network disruptions to reduce viewer drop-off and refresh storms.
+
 # v1.61.6 (2026-10-22)
 
 * **Bug Fix**: Update smithy-go to v1.28.6

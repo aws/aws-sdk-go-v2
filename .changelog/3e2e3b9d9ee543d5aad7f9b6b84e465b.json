@@ -1,8 +1,0 @@
-{
-    "id": "3e2e3b9d-9ee5-43d5-aad7-f9b6b84e465b",
-    "type": "feature",
-    "description": "The release adds failover slate configurations, which show viewers a slate during temporary broadcaster network disruptions to reduce viewer drop-off and refresh storms.",
-    "modules": [
-        "service/ivs"
-    ]
-}

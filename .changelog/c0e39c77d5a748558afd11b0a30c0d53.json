@@ -1,8 +1,0 @@
-{
-    "id": "c0e39c77-d5a7-4855-8afd-11b0a30c0d53",
-    "type": "feature",
-    "description": "Adds support for managing private pricing contracts and contractual investments including listing and associating contracts, retrieving contractual investments and their summaries, and creating, listing, and canceling contractual investment attestations",
-    "modules": [
-        "service/billing"
-    ]
-}

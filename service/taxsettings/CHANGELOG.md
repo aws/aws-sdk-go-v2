@@ -1,3 +1,7 @@
+# v1.28.0 (2026-10-26)
+
+* **Feature**: Add Mexico Additional Info changes
+
 # v1.27.6 (2026-10-22)
 
 * **Bug Fix**: Update smithy-go to v1.28.6

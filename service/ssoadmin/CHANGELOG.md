@@ -1,3 +1,8 @@
+# v1.52.0 (2026-10-26)
+
+* **Feature**: Added support for the RegionScope parameter on ListInstances, allowing you to list IAM Identity Center instances in the current Region or across all Regions.
+* **Feature**: Enable schema-based (de)serialization for this service.
+
 # v1.51.0 (2026-10-22)
 
 * **Feature**: Enable schema-based (de)serialization for this service.

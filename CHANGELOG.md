@@ -1,3 +1,47 @@
+# Release (2026-10-26)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/feature/s3/transfermanager`: [v0.5.0](feature/s3/transfermanager/CHANGELOG.md#v050-2026-10-26)
+  * **Feature**: Improve DownloadDirectory throughput and memory usage by downloading objects with DownloadObject, and only replace an existing file once its download succeeds.
+* `github.com/aws/aws-sdk-go-v2/service/appstream`: [v1.73.0](service/appstream/CHANGELOG.md#v1730-2026-10-26)
+  * **Feature**: Add Windows 11 to PlatformType enum
+* `github.com/aws/aws-sdk-go-v2/service/billing`: [v1.23.0](service/billing/CHANGELOG.md#v1230-2026-10-26)
+  * **Feature**: Adds support for managing private pricing contracts and contractual investments including listing and associating contracts, retrieving contractual investments and their summaries, and creating, listing, and canceling contractual investment attestations
+* `github.com/aws/aws-sdk-go-v2/service/connect`: [v1.209.0](service/connect/CHANGELOG.md#v12090-2026-10-26)
+  * **Feature**: Amazon Connect now automatically saves agents' in-progress email drafts preserving the message, recipients, and subject during browser or network interruptions so agents can return to the mail and continue instead of starting over.
+* `github.com/aws/aws-sdk-go-v2/service/deadline`: [v1.44.4](service/deadline/CHANGELOG.md#v1444-2026-10-26)
+  * **Documentation**: fix the sdk documenation issue only
+* `github.com/aws/aws-sdk-go-v2/service/ecr`: [v1.67.0](service/ecr/CHANGELOG.md#v1670-2026-10-26)
+  * **Feature**: Add support for ECR replication backfill
+* `github.com/aws/aws-sdk-go-v2/service/eks`: [v1.105.0](service/eks/CHANGELOG.md#v11050-2026-10-26)
+  * **Feature**: This release adds support for EKS management of Gateway API CRDs (Custom Resource Definitions)
+* `github.com/aws/aws-sdk-go-v2/service/ivs`: [v1.62.0](service/ivs/CHANGELOG.md#v1620-2026-10-26)
+  * **Feature**: The release adds failover slate configurations, which show viewers a slate during temporary broadcaster network disruptions to reduce viewer drop-off and refresh storms.
+* `github.com/aws/aws-sdk-go-v2/service/kms`: [v1.62.0](service/kms/CHANGELOG.md#v1620-2026-10-26)
+  * **Feature**: This release adds support for ML-KEM (Module-Lattice-Based Key-Encapsulation Mechanism) keys in AWS KMS. ML-KEM, as specified in NIST FIPS 203, is a post-quantum key encapsulation mechanism that can be used to establish a shared secret between two parties.
+* `github.com/aws/aws-sdk-go-v2/service/lightsail`: [v1.68.0](service/lightsail/CHANGELOG.md#v1680-2026-10-26)
+  * **Feature**: This release adds Web Application Firewall (WAF) support for Lightsail distribution.
+* `github.com/aws/aws-sdk-go-v2/service/marketplacecatalog`: [v1.54.0](service/marketplacecatalog/CHANGELOG.md#v1540-2026-10-26)
+  * **Feature**: This release adds support for the SubsidiaryAuthorization entity type in the ListEntities operation, including entity-type filters with partial name search, sort options, and a summary returned for each subsidiary authorization.
+* `github.com/aws/aws-sdk-go-v2/service/mediaconnect`: [v1.63.0](service/mediaconnect/CHANGELOG.md#v1630-2026-10-26)
+  * **Feature**: This release adds support for managing and sharing endpoint across accounts in AWS Elemental MediaConnect. You can now register endpoints to represent external or service-managed sources and destinations, and share them across AWS accounts.
+* `github.com/aws/aws-sdk-go-v2/service/medialive`: [v1.113.0](service/medialive/CHANGELOG.md#v11130-2026-10-26)
+  * **Feature**: AWS Elemental MediaLive now lets you control whether explicit weighted prediction is applied to H.264 outputs. It also introduces Perceptual Filter, a new noise reduction filter designed to improve video quality by increasing VMAF scores, now with Auto, None, and strength options.
+* `github.com/aws/aws-sdk-go-v2/service/odb`: [v1.27.0](service/odb/CHANGELOG.md#v1270-2026-10-26)
+  * **Feature**: Adds support for Exascale storage with Oracle Exadata Database Service on Dedicated Infrastructure
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.285.0](service/sagemaker/CHANGELOG.md#v12850-2026-10-26)
+  * **Feature**: Amazon SageMaker HyperPod adds the MultiNodeTrainingValidation deep health check for clusters orchestrated by Amazon EKS. It validates NVIDIA GPU instances by running a short multi-node training workload and flags instances that produce numerical errors or fall behind expected training time.
+* `github.com/aws/aws-sdk-go-v2/service/signin`: [v1.11.0](service/signin/CHANGELOG.md#v1110-2026-10-26)
+  * **Feature**: Adds support for the OAuth 2.0 Token Exchange grant (RFC 8693), enabling applications to exchange identity provider issued JSON Web Tokens (JWTs) for short-lived OAuth access tokens to access supported AWS services without managing separate AWS credentials.
+* `github.com/aws/aws-sdk-go-v2/service/ssoadmin`: [v1.52.0](service/ssoadmin/CHANGELOG.md#v1520-2026-10-26)
+  * **Feature**: Added support for the RegionScope parameter on ListInstances, allowing you to list IAM Identity Center instances in the current Region or across all Regions.
+  * **Feature**: Enable schema-based (de)serialization for this service.
+* `github.com/aws/aws-sdk-go-v2/service/taxsettings`: [v1.28.0](service/taxsettings/CHANGELOG.md#v1280-2026-10-26)
+  * **Feature**: Add Mexico Additional Info changes
+
 # Release (2026-10-22)
 
 ## General Highlights

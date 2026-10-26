@@ -1,3 +1,7 @@
+# v1.49.7 (2026-10-26)
+
+* No change notes available for this release.
+
 # v1.49.6 (2026-10-22)
 
 * **Bug Fix**: Update smithy-go to v1.28.6
