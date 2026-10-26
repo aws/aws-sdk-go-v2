@@ -2,6 +2,7 @@ package stscreds
 
 import (
 	"context"
+	"errors"
 	"fmt"
 	"os"
 	"strconv"
@@ -139,6 +140,9 @@ func (p *WebIdentityRoleProvider) Retrieve(ctx context.Context) (aws.Credentials
 	if err != nil {
 		return aws.Credentials{}, fmt.Errorf("failed to retrieve credentials, %w", err)
 	}
+	if err := validateCredentials(resp.Credentials); err != nil {
+		return aws.Credentials{}, fmt.Errorf("validate credentials, %w", err)
+	}
 
 	var accountID string
 	if resp.AssumedRoleUser != nil {
@@ -149,15 +153,35 @@ func (p *WebIdentityRoleProvider) Retrieve(ctx context.Context) (aws.Credentials
 	// when assuming an Role with a JWT web identity token.
 
 	value := aws.Credentials{
-		AccessKeyID:     aws.ToString(resp.Credentials.AccessKeyId),
-		SecretAccessKey: aws.ToString(resp.Credentials.SecretAccessKey),
-		SessionToken:    aws.ToString(resp.Credentials.SessionToken),
+		AccessKeyID:     *resp.Credentials.AccessKeyId,
+		SecretAccessKey: *resp.Credentials.SecretAccessKey,
+		SessionToken:    *resp.Credentials.SessionToken,
 		Source:          WebIdentityProviderName,
 		CanExpire:       true,
 		Expires:         *resp.Credentials.Expiration,
 		AccountID:       accountID,
 	}
 	return value, nil
+}
+
+func validateCredentials(c *types.Credentials) error {
+	if c == nil {
+		return errors.New("response did not contain credentials")
+	}
+	if c.AccessKeyId == nil {
+		return errors.New("response credentials did not contain AccessKeyId")
+	}
+	if c.SecretAccessKey == nil {
+		return errors.New("response credentials did not contain SecretAccessKey")
+	}
+	if c.SessionToken == nil {
+		return errors.New("response credentials did not contain SessionToken")
+	}
+	if c.Expiration == nil {
+		return errors.New("response credentials did not contain Expiration")
+	}
+
+	return nil
 }
 
 // extract accountID from arn with format "arn:partition:service:region:account-id:[resource-section]"

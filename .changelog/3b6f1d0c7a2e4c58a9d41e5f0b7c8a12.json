@@ -1,0 +1,8 @@
+{
+    "id": "3b6f1d0c-7a2e-4c58-a9d4-1e5f0b7c8a12",
+    "type": "bugfix",
+    "description": "Return an error instead of panicking when an STS AssumeRole or AssumeRoleWithWebIdentity response is missing credentials.",
+    "modules": [
+        "credentials"
+    ]
+}

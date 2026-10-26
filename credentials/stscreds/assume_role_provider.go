@@ -311,6 +311,9 @@ func (p *AssumeRoleProvider) Retrieve(ctx context.Context) (aws.Credentials, err
 	if err != nil {
 		return aws.Credentials{Source: ProviderName}, err
 	}
+	if err := validateCredentials(resp.Credentials); err != nil {
+		return aws.Credentials{Source: ProviderName}, fmt.Errorf("validate credentials, %w", err)
+	}
 
 	var accountID string
 	if resp.AssumedRoleUser != nil {
