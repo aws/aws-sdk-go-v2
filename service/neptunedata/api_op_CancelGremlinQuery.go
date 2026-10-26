@@ -4,6 +4,8 @@ package neptunedata
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/neptunedata/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -40,6 +42,18 @@ type CancelGremlinQueryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CancelGremlinQueryInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CancelGremlinQueryInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CancelGremlinQueryInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.QueryId != nil {
+		s.WriteString(schemas.CancelGremlinQueryInput_queryId, *v.QueryId)
+	}
+}
+
 type CancelGremlinQueryOutput struct {
 
 	// The status of the cancelation
@@ -51,13 +65,32 @@ type CancelGremlinQueryOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CancelGremlinQueryOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CancelGremlinQueryOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CancelGremlinQueryOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Status != nil {
+		s.WriteString(schemas.CancelGremlinQueryOutput_status, *v.Status)
+	}
+}
+func (v *CancelGremlinQueryOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CancelGremlinQueryOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CancelGremlinQueryOutput_status:
+			v.Status = new(string)
+			return d.ReadString(schemas.CancelGremlinQueryOutput_status, v.Status)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCancelGremlinQueryMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCancelGremlinQuery{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CancelGremlinQuery, schemas.CancelGremlinQueryInput, schemas.CancelGremlinQueryOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCancelGremlinQuery{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CancelGremlinQuery, schemas.CancelGremlinQueryInput, schemas.CancelGremlinQueryOutput), output: &CancelGremlinQueryOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

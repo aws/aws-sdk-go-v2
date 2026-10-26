@@ -5,7 +5,9 @@ package lakeformation
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/lakeformation/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lakeformation/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -54,6 +56,33 @@ type ListTableStorageOptimizersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListTableStorageOptimizersInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListTableStorageOptimizersRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListTableStorageOptimizersInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CatalogId != nil {
+		s.WriteString(schemas.ListTableStorageOptimizersRequest_CatalogId, *v.CatalogId)
+	}
+	if v.DatabaseName != nil {
+		s.WriteString(schemas.ListTableStorageOptimizersRequest_DatabaseName, *v.DatabaseName)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListTableStorageOptimizersRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListTableStorageOptimizersRequest_NextToken, *v.NextToken)
+	}
+	if v.StorageOptimizerType != "" {
+		s.WriteString(schemas.ListTableStorageOptimizersRequest_StorageOptimizerType, string(v.StorageOptimizerType))
+	}
+	if v.TableName != nil {
+		s.WriteString(schemas.ListTableStorageOptimizersRequest_TableName, *v.TableName)
+	}
+}
+
 type ListTableStorageOptimizersOutput struct {
 
 	// A continuation token for paginating the returned list of tokens, returned if
@@ -69,13 +98,35 @@ type ListTableStorageOptimizersOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListTableStorageOptimizersOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListTableStorageOptimizersResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListTableStorageOptimizersOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListTableStorageOptimizersResponse_NextToken, *v.NextToken)
+	}
+	serializeStorageOptimizerList(s, schemas.ListTableStorageOptimizersResponse_StorageOptimizerList, v.StorageOptimizerList)
+}
+func (v *ListTableStorageOptimizersOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListTableStorageOptimizersResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListTableStorageOptimizersResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListTableStorageOptimizersResponse_NextToken, v.NextToken)
+		case schemas.ListTableStorageOptimizersResponse_StorageOptimizerList:
+			return deserializeStorageOptimizerList(d, schemas.ListTableStorageOptimizersResponse_StorageOptimizerList, &v.StorageOptimizerList)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListTableStorageOptimizersMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListTableStorageOptimizers{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListTableStorageOptimizers, schemas.ListTableStorageOptimizersRequest, schemas.ListTableStorageOptimizersResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListTableStorageOptimizers{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListTableStorageOptimizers, schemas.ListTableStorageOptimizersRequest, schemas.ListTableStorageOptimizersResponse), output: &ListTableStorageOptimizersOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

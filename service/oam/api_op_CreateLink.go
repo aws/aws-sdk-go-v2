@@ -4,7 +4,9 @@ package oam
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/oam/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/oam/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -100,6 +102,28 @@ type CreateLinkInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateLinkInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateLinkInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateLinkInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LabelTemplate != nil {
+		s.WriteString(schemas.CreateLinkInput_LabelTemplate, *v.LabelTemplate)
+	}
+	if v.LinkConfiguration != nil {
+		s.WriteStruct(schemas.CreateLinkInput_LinkConfiguration)
+		v.LinkConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeResourceTypesInput(s, schemas.CreateLinkInput_ResourceTypes, v.ResourceTypes)
+	if v.SinkIdentifier != nil {
+		s.WriteString(schemas.CreateLinkInput_SinkIdentifier, *v.SinkIdentifier)
+	}
+	serializeTagMapInput(s, schemas.CreateLinkInput_Tags, v.Tags)
+}
+
 type CreateLinkOutput struct {
 
 	// The ARN of the link that is newly created.
@@ -134,13 +158,70 @@ type CreateLinkOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateLinkOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateLinkOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateLinkOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.CreateLinkOutput_Arn, *v.Arn)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.CreateLinkOutput_Id, *v.Id)
+	}
+	if v.Label != nil {
+		s.WriteString(schemas.CreateLinkOutput_Label, *v.Label)
+	}
+	if v.LabelTemplate != nil {
+		s.WriteString(schemas.CreateLinkOutput_LabelTemplate, *v.LabelTemplate)
+	}
+	if v.LinkConfiguration != nil {
+		s.WriteStruct(schemas.CreateLinkOutput_LinkConfiguration)
+		v.LinkConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeResourceTypesOutput(s, schemas.CreateLinkOutput_ResourceTypes, v.ResourceTypes)
+	if v.SinkArn != nil {
+		s.WriteString(schemas.CreateLinkOutput_SinkArn, *v.SinkArn)
+	}
+	serializeTagMapOutput(s, schemas.CreateLinkOutput_Tags, v.Tags)
+}
+func (v *CreateLinkOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateLinkOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateLinkOutput_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.CreateLinkOutput_Arn, v.Arn)
+		case schemas.CreateLinkOutput_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.CreateLinkOutput_Id, v.Id)
+		case schemas.CreateLinkOutput_Label:
+			v.Label = new(string)
+			return d.ReadString(schemas.CreateLinkOutput_Label, v.Label)
+		case schemas.CreateLinkOutput_LabelTemplate:
+			v.LabelTemplate = new(string)
+			return d.ReadString(schemas.CreateLinkOutput_LabelTemplate, v.LabelTemplate)
+		case schemas.CreateLinkOutput_LinkConfiguration:
+			v.LinkConfiguration = &types.LinkConfiguration{}
+			return v.LinkConfiguration.Deserialize(d)
+		case schemas.CreateLinkOutput_ResourceTypes:
+			return deserializeResourceTypesOutput(d, schemas.CreateLinkOutput_ResourceTypes, &v.ResourceTypes)
+		case schemas.CreateLinkOutput_SinkArn:
+			v.SinkArn = new(string)
+			return d.ReadString(schemas.CreateLinkOutput_SinkArn, v.SinkArn)
+		case schemas.CreateLinkOutput_Tags:
+			return deserializeTagMapOutput(d, schemas.CreateLinkOutput_Tags, &v.Tags)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateLinkMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateLink{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateLink, schemas.CreateLinkInput, schemas.CreateLinkOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateLink{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateLink, schemas.CreateLinkInput, schemas.CreateLinkOutput), output: &CreateLinkOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

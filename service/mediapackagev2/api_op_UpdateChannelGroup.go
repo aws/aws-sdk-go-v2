@@ -4,6 +4,8 @@ package mediapackagev2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/mediapackagev2/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -47,6 +49,24 @@ type UpdateChannelGroupInput struct {
 	ETag *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *UpdateChannelGroupInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateChannelGroupRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateChannelGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ChannelGroupName != nil {
+		s.WriteString(schemas.UpdateChannelGroupRequest_ChannelGroupName, *v.ChannelGroupName)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateChannelGroupRequest_Description, *v.Description)
+	}
+	if v.ETag != nil {
+		s.WriteString(schemas.UpdateChannelGroupRequest_ETag, *v.ETag)
+	}
 }
 
 type UpdateChannelGroupOutput struct {
@@ -94,13 +114,71 @@ type UpdateChannelGroupOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateChannelGroupOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateChannelGroupResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateChannelGroupOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.UpdateChannelGroupResponse_Arn, *v.Arn)
+	}
+	if v.ChannelGroupName != nil {
+		s.WriteString(schemas.UpdateChannelGroupResponse_ChannelGroupName, *v.ChannelGroupName)
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.UpdateChannelGroupResponse_CreatedAt, *v.CreatedAt)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateChannelGroupResponse_Description, *v.Description)
+	}
+	if v.ETag != nil {
+		s.WriteString(schemas.UpdateChannelGroupResponse_ETag, *v.ETag)
+	}
+	if v.EgressDomain != nil {
+		s.WriteString(schemas.UpdateChannelGroupResponse_EgressDomain, *v.EgressDomain)
+	}
+	if v.ModifiedAt != nil {
+		s.WriteTime(schemas.UpdateChannelGroupResponse_ModifiedAt, *v.ModifiedAt)
+	}
+	serializeTagMap(s, schemas.UpdateChannelGroupResponse_Tags, v.Tags)
+}
+func (v *UpdateChannelGroupOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateChannelGroupResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateChannelGroupResponse_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.UpdateChannelGroupResponse_Arn, v.Arn)
+		case schemas.UpdateChannelGroupResponse_ChannelGroupName:
+			v.ChannelGroupName = new(string)
+			return d.ReadString(schemas.UpdateChannelGroupResponse_ChannelGroupName, v.ChannelGroupName)
+		case schemas.UpdateChannelGroupResponse_CreatedAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.UpdateChannelGroupResponse_CreatedAt, v.CreatedAt)
+		case schemas.UpdateChannelGroupResponse_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.UpdateChannelGroupResponse_Description, v.Description)
+		case schemas.UpdateChannelGroupResponse_ETag:
+			v.ETag = new(string)
+			return d.ReadString(schemas.UpdateChannelGroupResponse_ETag, v.ETag)
+		case schemas.UpdateChannelGroupResponse_EgressDomain:
+			v.EgressDomain = new(string)
+			return d.ReadString(schemas.UpdateChannelGroupResponse_EgressDomain, v.EgressDomain)
+		case schemas.UpdateChannelGroupResponse_ModifiedAt:
+			v.ModifiedAt = new(time.Time)
+			return d.ReadTime(schemas.UpdateChannelGroupResponse_ModifiedAt, v.ModifiedAt)
+		case schemas.UpdateChannelGroupResponse_Tags:
+			return deserializeTagMap(d, schemas.UpdateChannelGroupResponse_Tags, &v.Tags)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateChannelGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateChannelGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateChannelGroup, schemas.UpdateChannelGroupRequest, schemas.UpdateChannelGroupResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateChannelGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateChannelGroup, schemas.UpdateChannelGroupRequest, schemas.UpdateChannelGroupResponse), output: &UpdateChannelGroupOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

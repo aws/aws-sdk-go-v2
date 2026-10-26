@@ -6,7 +6,9 @@ import (
 	"context"
 	"errors"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/repostspace/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/repostspace/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithytime "github.com/aws/smithy-go/time"
 	smithywaiter "github.com/aws/smithy-go/waiter"
@@ -37,6 +39,18 @@ type GetSpaceInput struct {
 	SpaceId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetSpaceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetSpaceInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetSpaceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SpaceId != nil {
+		s.WriteString(schemas.GetSpaceInput_spaceId, *v.SpaceId)
+	}
 }
 
 type GetSpaceOutput struct {
@@ -151,13 +165,175 @@ type GetSpaceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetSpaceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetSpaceOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetSpaceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationArn != nil {
+		s.WriteString(schemas.GetSpaceOutput_applicationArn, *v.ApplicationArn)
+	}
+	if v.Arn != nil {
+		s.WriteString(schemas.GetSpaceOutput_arn, *v.Arn)
+	}
+	if v.ClientId != nil {
+		s.WriteString(schemas.GetSpaceOutput_clientId, *v.ClientId)
+	}
+	if v.ConfigurationStatus != "" {
+		s.WriteString(schemas.GetSpaceOutput_configurationStatus, string(v.ConfigurationStatus))
+	}
+	if v.ContentSize != nil {
+		s.WriteInt64(schemas.GetSpaceOutput_contentSize, *v.ContentSize)
+	}
+	if v.CreateDateTime != nil {
+		s.WriteTime(schemas.GetSpaceOutput_createDateTime, *v.CreateDateTime)
+	}
+	if v.CustomerRoleArn != nil {
+		s.WriteString(schemas.GetSpaceOutput_customerRoleArn, *v.CustomerRoleArn)
+	}
+	if v.DeleteDateTime != nil {
+		s.WriteTime(schemas.GetSpaceOutput_deleteDateTime, *v.DeleteDateTime)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.GetSpaceOutput_description, *v.Description)
+	}
+	serializeGroupAdmins(s, schemas.GetSpaceOutput_groupAdmins, v.GroupAdmins)
+	if v.IdentityStoreId != nil {
+		s.WriteString(schemas.GetSpaceOutput_identityStoreId, *v.IdentityStoreId)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.GetSpaceOutput_name, *v.Name)
+	}
+	if v.RandomDomain != nil {
+		s.WriteString(schemas.GetSpaceOutput_randomDomain, *v.RandomDomain)
+	}
+	serializeRoles(s, schemas.GetSpaceOutput_roles, v.Roles)
+	if v.SpaceId != nil {
+		s.WriteString(schemas.GetSpaceOutput_spaceId, *v.SpaceId)
+	}
+	if v.Status != nil {
+		s.WriteString(schemas.GetSpaceOutput_status, *v.Status)
+	}
+	if v.StorageLimit != nil {
+		s.WriteInt64(schemas.GetSpaceOutput_storageLimit, *v.StorageLimit)
+	}
+	if v.SupportedEmailDomains != nil {
+		s.WriteStruct(schemas.GetSpaceOutput_supportedEmailDomains)
+		v.SupportedEmailDomains.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Tier != "" {
+		s.WriteString(schemas.GetSpaceOutput_tier, string(v.Tier))
+	}
+	serializeUserAdmins(s, schemas.GetSpaceOutput_userAdmins, v.UserAdmins)
+	if v.UserCount != nil {
+		s.WriteInt32(schemas.GetSpaceOutput_userCount, *v.UserCount)
+	}
+	if v.UserKMSKey != nil {
+		s.WriteString(schemas.GetSpaceOutput_userKMSKey, *v.UserKMSKey)
+	}
+	if v.VanityDomain != nil {
+		s.WriteString(schemas.GetSpaceOutput_vanityDomain, *v.VanityDomain)
+	}
+	if v.VanityDomainStatus != "" {
+		s.WriteString(schemas.GetSpaceOutput_vanityDomainStatus, string(v.VanityDomainStatus))
+	}
+}
+func (v *GetSpaceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetSpaceOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetSpaceOutput_applicationArn:
+			v.ApplicationArn = new(string)
+			return d.ReadString(schemas.GetSpaceOutput_applicationArn, v.ApplicationArn)
+		case schemas.GetSpaceOutput_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.GetSpaceOutput_arn, v.Arn)
+		case schemas.GetSpaceOutput_clientId:
+			v.ClientId = new(string)
+			return d.ReadString(schemas.GetSpaceOutput_clientId, v.ClientId)
+		case schemas.GetSpaceOutput_configurationStatus:
+			var ev string
+			if err := d.ReadString(schemas.GetSpaceOutput_configurationStatus, &ev); err != nil {
+				return err
+			}
+			v.ConfigurationStatus = types.ConfigurationStatus(ev)
+			return nil
+		case schemas.GetSpaceOutput_contentSize:
+			v.ContentSize = new(int64)
+			return d.ReadInt64(schemas.GetSpaceOutput_contentSize, v.ContentSize)
+		case schemas.GetSpaceOutput_createDateTime:
+			v.CreateDateTime = new(time.Time)
+			return d.ReadTime(schemas.GetSpaceOutput_createDateTime, v.CreateDateTime)
+		case schemas.GetSpaceOutput_customerRoleArn:
+			v.CustomerRoleArn = new(string)
+			return d.ReadString(schemas.GetSpaceOutput_customerRoleArn, v.CustomerRoleArn)
+		case schemas.GetSpaceOutput_deleteDateTime:
+			v.DeleteDateTime = new(time.Time)
+			return d.ReadTime(schemas.GetSpaceOutput_deleteDateTime, v.DeleteDateTime)
+		case schemas.GetSpaceOutput_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.GetSpaceOutput_description, v.Description)
+		case schemas.GetSpaceOutput_groupAdmins:
+			return deserializeGroupAdmins(d, schemas.GetSpaceOutput_groupAdmins, &v.GroupAdmins)
+		case schemas.GetSpaceOutput_identityStoreId:
+			v.IdentityStoreId = new(string)
+			return d.ReadString(schemas.GetSpaceOutput_identityStoreId, v.IdentityStoreId)
+		case schemas.GetSpaceOutput_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.GetSpaceOutput_name, v.Name)
+		case schemas.GetSpaceOutput_randomDomain:
+			v.RandomDomain = new(string)
+			return d.ReadString(schemas.GetSpaceOutput_randomDomain, v.RandomDomain)
+		case schemas.GetSpaceOutput_roles:
+			return deserializeRoles(d, schemas.GetSpaceOutput_roles, &v.Roles)
+		case schemas.GetSpaceOutput_spaceId:
+			v.SpaceId = new(string)
+			return d.ReadString(schemas.GetSpaceOutput_spaceId, v.SpaceId)
+		case schemas.GetSpaceOutput_status:
+			v.Status = new(string)
+			return d.ReadString(schemas.GetSpaceOutput_status, v.Status)
+		case schemas.GetSpaceOutput_storageLimit:
+			v.StorageLimit = new(int64)
+			return d.ReadInt64(schemas.GetSpaceOutput_storageLimit, v.StorageLimit)
+		case schemas.GetSpaceOutput_supportedEmailDomains:
+			v.SupportedEmailDomains = &types.SupportedEmailDomainsStatus{}
+			return v.SupportedEmailDomains.Deserialize(d)
+		case schemas.GetSpaceOutput_tier:
+			var ev string
+			if err := d.ReadString(schemas.GetSpaceOutput_tier, &ev); err != nil {
+				return err
+			}
+			v.Tier = types.TierLevel(ev)
+			return nil
+		case schemas.GetSpaceOutput_userAdmins:
+			return deserializeUserAdmins(d, schemas.GetSpaceOutput_userAdmins, &v.UserAdmins)
+		case schemas.GetSpaceOutput_userCount:
+			v.UserCount = new(int32)
+			return d.ReadInt32(schemas.GetSpaceOutput_userCount, v.UserCount)
+		case schemas.GetSpaceOutput_userKMSKey:
+			v.UserKMSKey = new(string)
+			return d.ReadString(schemas.GetSpaceOutput_userKMSKey, v.UserKMSKey)
+		case schemas.GetSpaceOutput_vanityDomain:
+			v.VanityDomain = new(string)
+			return d.ReadString(schemas.GetSpaceOutput_vanityDomain, v.VanityDomain)
+		case schemas.GetSpaceOutput_vanityDomainStatus:
+			var ev string
+			if err := d.ReadString(schemas.GetSpaceOutput_vanityDomainStatus, &ev); err != nil {
+				return err
+			}
+			v.VanityDomainStatus = types.VanityDomainStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetSpaceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetSpace{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetSpace, schemas.GetSpaceInput, schemas.GetSpaceOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetSpace{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetSpace, schemas.GetSpaceInput, schemas.GetSpaceOutput), output: &GetSpaceOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

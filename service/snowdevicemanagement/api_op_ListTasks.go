@@ -5,7 +5,9 @@ package snowdevicemanagement
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/snowdevicemanagement/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/snowdevicemanagement/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,44 @@ type ListTasksInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListTasksInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListTasksInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListTasksInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListTasksInput_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListTasksInput_nextToken, *v.NextToken)
+	}
+	if v.State != "" {
+		s.WriteString(schemas.ListTasksInput_state, string(v.State))
+	}
+}
+func (v *ListTasksInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListTasksInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListTasksInput_maxResults:
+			v.MaxResults = new(int32)
+			return d.ReadInt32(schemas.ListTasksInput_maxResults, v.MaxResults)
+		case schemas.ListTasksInput_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListTasksInput_nextToken, v.NextToken)
+		case schemas.ListTasksInput_state:
+			var ev string
+			if err := d.ReadString(schemas.ListTasksInput_state, &ev); err != nil {
+				return err
+			}
+			v.State = types.TaskState(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 type ListTasksOutput struct {
 
 	// A pagination token to continue to the next page of tasks.
@@ -53,13 +93,35 @@ type ListTasksOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListTasksOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListTasksOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListTasksOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListTasksOutput_nextToken, *v.NextToken)
+	}
+	serializeTaskSummaryList(s, schemas.ListTasksOutput_tasks, v.Tasks)
+}
+func (v *ListTasksOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListTasksOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListTasksOutput_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListTasksOutput_nextToken, v.NextToken)
+		case schemas.ListTasksOutput_tasks:
+			return deserializeTaskSummaryList(d, schemas.ListTasksOutput_tasks, &v.Tasks)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListTasksMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListTasks{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListTasks, schemas.ListTasksInput, schemas.ListTasksOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListTasks{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListTasks, schemas.ListTasksInput, schemas.ListTasksOutput), output: &ListTasksOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

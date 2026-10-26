@@ -5,7 +5,9 @@ package omics
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/omics/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/omics/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithytime "github.com/aws/smithy-go/time"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -43,6 +45,18 @@ type GetVariantImportJobInput struct {
 	JobId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetVariantImportJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetVariantImportRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetVariantImportJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.JobId != nil {
+		s.WriteString(schemas.GetVariantImportRequest_jobId, *v.JobId)
+	}
 }
 
 type GetVariantImportJobOutput struct {
@@ -104,13 +118,87 @@ type GetVariantImportJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetVariantImportJobOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetVariantImportResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetVariantImportJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAnnotationFieldMap(s, schemas.GetVariantImportResponse_annotationFields, v.AnnotationFields)
+	if v.CompletionTime != nil {
+		s.WriteTime(schemas.GetVariantImportResponse_completionTime, *v.CompletionTime)
+	}
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.GetVariantImportResponse_creationTime, *v.CreationTime)
+	}
+	if v.DestinationName != nil {
+		s.WriteString(schemas.GetVariantImportResponse_destinationName, *v.DestinationName)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.GetVariantImportResponse_id, *v.Id)
+	}
+	serializeVariantImportItemDetails(s, schemas.GetVariantImportResponse_items, v.Items)
+	if v.RoleArn != nil {
+		s.WriteString(schemas.GetVariantImportResponse_roleArn, *v.RoleArn)
+	}
+	s.WriteBool(schemas.GetVariantImportResponse_runLeftNormalization, v.RunLeftNormalization)
+	if v.Status != "" {
+		s.WriteString(schemas.GetVariantImportResponse_status, string(v.Status))
+	}
+	if v.StatusMessage != nil {
+		s.WriteString(schemas.GetVariantImportResponse_statusMessage, *v.StatusMessage)
+	}
+	if v.UpdateTime != nil {
+		s.WriteTime(schemas.GetVariantImportResponse_updateTime, *v.UpdateTime)
+	}
+}
+func (v *GetVariantImportJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetVariantImportResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetVariantImportResponse_annotationFields:
+			return deserializeAnnotationFieldMap(d, schemas.GetVariantImportResponse_annotationFields, &v.AnnotationFields)
+		case schemas.GetVariantImportResponse_completionTime:
+			v.CompletionTime = new(time.Time)
+			return d.ReadTime(schemas.GetVariantImportResponse_completionTime, v.CompletionTime)
+		case schemas.GetVariantImportResponse_creationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.GetVariantImportResponse_creationTime, v.CreationTime)
+		case schemas.GetVariantImportResponse_destinationName:
+			v.DestinationName = new(string)
+			return d.ReadString(schemas.GetVariantImportResponse_destinationName, v.DestinationName)
+		case schemas.GetVariantImportResponse_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.GetVariantImportResponse_id, v.Id)
+		case schemas.GetVariantImportResponse_items:
+			return deserializeVariantImportItemDetails(d, schemas.GetVariantImportResponse_items, &v.Items)
+		case schemas.GetVariantImportResponse_roleArn:
+			v.RoleArn = new(string)
+			return d.ReadString(schemas.GetVariantImportResponse_roleArn, v.RoleArn)
+		case schemas.GetVariantImportResponse_runLeftNormalization:
+			return d.ReadBool(schemas.GetVariantImportResponse_runLeftNormalization, &v.RunLeftNormalization)
+		case schemas.GetVariantImportResponse_status:
+			var ev string
+			if err := d.ReadString(schemas.GetVariantImportResponse_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.JobStatus(ev)
+			return nil
+		case schemas.GetVariantImportResponse_statusMessage:
+			v.StatusMessage = new(string)
+			return d.ReadString(schemas.GetVariantImportResponse_statusMessage, v.StatusMessage)
+		case schemas.GetVariantImportResponse_updateTime:
+			v.UpdateTime = new(time.Time)
+			return d.ReadTime(schemas.GetVariantImportResponse_updateTime, v.UpdateTime)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetVariantImportJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetVariantImportJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetVariantImportJob, schemas.GetVariantImportRequest, schemas.GetVariantImportResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetVariantImportJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetVariantImportJob, schemas.GetVariantImportRequest, schemas.GetVariantImportResponse), output: &GetVariantImportJobOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

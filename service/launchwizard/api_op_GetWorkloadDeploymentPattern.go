@@ -4,7 +4,9 @@ package launchwizard
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/launchwizard/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/launchwizard/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -45,6 +47,21 @@ type GetWorkloadDeploymentPatternInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetWorkloadDeploymentPatternInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetWorkloadDeploymentPatternInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetWorkloadDeploymentPatternInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DeploymentPatternName != nil {
+		s.WriteString(schemas.GetWorkloadDeploymentPatternInput_deploymentPatternName, *v.DeploymentPatternName)
+	}
+	if v.WorkloadName != nil {
+		s.WriteString(schemas.GetWorkloadDeploymentPatternInput_workloadName, *v.WorkloadName)
+	}
+}
+
 type GetWorkloadDeploymentPatternOutput struct {
 
 	// Details about the workload deployment pattern.
@@ -56,13 +73,34 @@ type GetWorkloadDeploymentPatternOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetWorkloadDeploymentPatternOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetWorkloadDeploymentPatternOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetWorkloadDeploymentPatternOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.WorkloadDeploymentPattern != nil {
+		s.WriteStruct(schemas.GetWorkloadDeploymentPatternOutput_workloadDeploymentPattern)
+		v.WorkloadDeploymentPattern.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetWorkloadDeploymentPatternOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetWorkloadDeploymentPatternOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetWorkloadDeploymentPatternOutput_workloadDeploymentPattern:
+			v.WorkloadDeploymentPattern = &types.WorkloadDeploymentPatternData{}
+			return v.WorkloadDeploymentPattern.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetWorkloadDeploymentPatternMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetWorkloadDeploymentPattern{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetWorkloadDeploymentPattern, schemas.GetWorkloadDeploymentPatternInput, schemas.GetWorkloadDeploymentPatternOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetWorkloadDeploymentPattern{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetWorkloadDeploymentPattern, schemas.GetWorkloadDeploymentPatternInput, schemas.GetWorkloadDeploymentPatternOutput), output: &GetWorkloadDeploymentPatternOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

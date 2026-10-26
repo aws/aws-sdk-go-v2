@@ -4,7 +4,9 @@ package migrationhuborchestrator
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/migrationhuborchestrator/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/migrationhuborchestrator/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -33,6 +35,28 @@ type GetTemplateInput struct {
 	Id *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetTemplateInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetMigrationWorkflowTemplateRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetTemplateInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Id != nil {
+		s.WriteString(schemas.GetMigrationWorkflowTemplateRequest_id, *v.Id)
+	}
+}
+func (v *GetTemplateInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetMigrationWorkflowTemplateRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetMigrationWorkflowTemplateRequest_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.GetMigrationWorkflowTemplateRequest_id, v.Id)
+		}
+		return nil
+	})
 }
 
 type GetTemplateOutput struct {
@@ -97,13 +121,93 @@ type GetTemplateOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetTemplateOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetMigrationWorkflowTemplateResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetTemplateOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.GetMigrationWorkflowTemplateResponse_creationTime, *v.CreationTime)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.GetMigrationWorkflowTemplateResponse_description, *v.Description)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.GetMigrationWorkflowTemplateResponse_id, *v.Id)
+	}
+	serializeTemplateInputList(s, schemas.GetMigrationWorkflowTemplateResponse_inputs, v.Inputs)
+	if v.Name != nil {
+		s.WriteString(schemas.GetMigrationWorkflowTemplateResponse_name, *v.Name)
+	}
+	if v.Owner != nil {
+		s.WriteString(schemas.GetMigrationWorkflowTemplateResponse_owner, *v.Owner)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.GetMigrationWorkflowTemplateResponse_status, string(v.Status))
+	}
+	if v.StatusMessage != nil {
+		s.WriteString(schemas.GetMigrationWorkflowTemplateResponse_statusMessage, *v.StatusMessage)
+	}
+	serializeStringMap(s, schemas.GetMigrationWorkflowTemplateResponse_tags, v.Tags)
+	if v.TemplateArn != nil {
+		s.WriteString(schemas.GetMigrationWorkflowTemplateResponse_templateArn, *v.TemplateArn)
+	}
+	if v.TemplateClass != nil {
+		s.WriteString(schemas.GetMigrationWorkflowTemplateResponse_templateClass, *v.TemplateClass)
+	}
+	serializeToolsList(s, schemas.GetMigrationWorkflowTemplateResponse_tools, v.Tools)
+}
+func (v *GetTemplateOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetMigrationWorkflowTemplateResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetMigrationWorkflowTemplateResponse_creationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.GetMigrationWorkflowTemplateResponse_creationTime, v.CreationTime)
+		case schemas.GetMigrationWorkflowTemplateResponse_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.GetMigrationWorkflowTemplateResponse_description, v.Description)
+		case schemas.GetMigrationWorkflowTemplateResponse_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.GetMigrationWorkflowTemplateResponse_id, v.Id)
+		case schemas.GetMigrationWorkflowTemplateResponse_inputs:
+			return deserializeTemplateInputList(d, schemas.GetMigrationWorkflowTemplateResponse_inputs, &v.Inputs)
+		case schemas.GetMigrationWorkflowTemplateResponse_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.GetMigrationWorkflowTemplateResponse_name, v.Name)
+		case schemas.GetMigrationWorkflowTemplateResponse_owner:
+			v.Owner = new(string)
+			return d.ReadString(schemas.GetMigrationWorkflowTemplateResponse_owner, v.Owner)
+		case schemas.GetMigrationWorkflowTemplateResponse_status:
+			var ev string
+			if err := d.ReadString(schemas.GetMigrationWorkflowTemplateResponse_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.TemplateStatus(ev)
+			return nil
+		case schemas.GetMigrationWorkflowTemplateResponse_statusMessage:
+			v.StatusMessage = new(string)
+			return d.ReadString(schemas.GetMigrationWorkflowTemplateResponse_statusMessage, v.StatusMessage)
+		case schemas.GetMigrationWorkflowTemplateResponse_tags:
+			return deserializeStringMap(d, schemas.GetMigrationWorkflowTemplateResponse_tags, &v.Tags)
+		case schemas.GetMigrationWorkflowTemplateResponse_templateArn:
+			v.TemplateArn = new(string)
+			return d.ReadString(schemas.GetMigrationWorkflowTemplateResponse_templateArn, v.TemplateArn)
+		case schemas.GetMigrationWorkflowTemplateResponse_templateClass:
+			v.TemplateClass = new(string)
+			return d.ReadString(schemas.GetMigrationWorkflowTemplateResponse_templateClass, v.TemplateClass)
+		case schemas.GetMigrationWorkflowTemplateResponse_tools:
+			return deserializeToolsList(d, schemas.GetMigrationWorkflowTemplateResponse_tools, &v.Tools)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetTemplate{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetTemplate, schemas.GetMigrationWorkflowTemplateRequest, schemas.GetMigrationWorkflowTemplateResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetTemplate{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetTemplate, schemas.GetMigrationWorkflowTemplateRequest, schemas.GetMigrationWorkflowTemplateResponse), output: &GetTemplateOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

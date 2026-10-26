@@ -4,7 +4,9 @@ package neptunedata
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/neptunedata/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/neptunedata/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -45,6 +47,18 @@ type GetOpenCypherQueryStatusInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetOpenCypherQueryStatusInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetOpenCypherQueryStatusInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetOpenCypherQueryStatusInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.QueryId != nil {
+		s.WriteString(schemas.GetOpenCypherQueryStatusInput_queryId, *v.QueryId)
+	}
+}
+
 type GetOpenCypherQueryStatusOutput struct {
 
 	// The openCypher query evaluation status.
@@ -62,13 +76,46 @@ type GetOpenCypherQueryStatusOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetOpenCypherQueryStatusOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetOpenCypherQueryStatusOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetOpenCypherQueryStatusOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.QueryEvalStats != nil {
+		s.WriteStruct(schemas.GetOpenCypherQueryStatusOutput_queryEvalStats)
+		v.QueryEvalStats.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.QueryId != nil {
+		s.WriteString(schemas.GetOpenCypherQueryStatusOutput_queryId, *v.QueryId)
+	}
+	if v.QueryString != nil {
+		s.WriteString(schemas.GetOpenCypherQueryStatusOutput_queryString, *v.QueryString)
+	}
+}
+func (v *GetOpenCypherQueryStatusOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetOpenCypherQueryStatusOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetOpenCypherQueryStatusOutput_queryEvalStats:
+			v.QueryEvalStats = &types.QueryEvalStats{}
+			return v.QueryEvalStats.Deserialize(d)
+		case schemas.GetOpenCypherQueryStatusOutput_queryId:
+			v.QueryId = new(string)
+			return d.ReadString(schemas.GetOpenCypherQueryStatusOutput_queryId, v.QueryId)
+		case schemas.GetOpenCypherQueryStatusOutput_queryString:
+			v.QueryString = new(string)
+			return d.ReadString(schemas.GetOpenCypherQueryStatusOutput_queryString, v.QueryString)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetOpenCypherQueryStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetOpenCypherQueryStatus{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetOpenCypherQueryStatus, schemas.GetOpenCypherQueryStatusInput, schemas.GetOpenCypherQueryStatusOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetOpenCypherQueryStatus{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetOpenCypherQueryStatus, schemas.GetOpenCypherQueryStatusInput, schemas.GetOpenCypherQueryStatusOutput), output: &GetOpenCypherQueryStatusOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

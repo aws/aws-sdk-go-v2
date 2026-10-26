@@ -4,7 +4,9 @@ package novaact
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/novaact/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/novaact/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -35,6 +37,18 @@ type ListModelsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListModelsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListModelsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListModelsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientCompatibilityVersion != nil {
+		s.WriteInt32(schemas.ListModelsRequest_clientCompatibilityVersion, *v.ClientCompatibilityVersion)
+	}
+}
+
 type ListModelsOutput struct {
 
 	// Information about client compatibility and supported models.
@@ -58,13 +72,40 @@ type ListModelsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListModelsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListModelsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListModelsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CompatibilityInformation != nil {
+		s.WriteStruct(schemas.ListModelsResponse_compatibilityInformation)
+		v.CompatibilityInformation.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeModelAliases(s, schemas.ListModelsResponse_modelAliases, v.ModelAliases)
+	serializeModelSummaries(s, schemas.ListModelsResponse_modelSummaries, v.ModelSummaries)
+}
+func (v *ListModelsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListModelsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListModelsResponse_compatibilityInformation:
+			v.CompatibilityInformation = &types.CompatibilityInformation{}
+			return v.CompatibilityInformation.Deserialize(d)
+		case schemas.ListModelsResponse_modelAliases:
+			return deserializeModelAliases(d, schemas.ListModelsResponse_modelAliases, &v.ModelAliases)
+		case schemas.ListModelsResponse_modelSummaries:
+			return deserializeModelSummaries(d, schemas.ListModelsResponse_modelSummaries, &v.ModelSummaries)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListModelsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListModels{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListModels, schemas.ListModelsRequest, schemas.ListModelsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListModels{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListModels, schemas.ListModelsRequest, schemas.ListModelsResponse), output: &ListModelsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

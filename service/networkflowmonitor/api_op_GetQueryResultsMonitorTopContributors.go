@@ -5,7 +5,9 @@ package networkflowmonitor
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/networkflowmonitor/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/networkflowmonitor/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -60,6 +62,27 @@ type GetQueryResultsMonitorTopContributorsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetQueryResultsMonitorTopContributorsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetQueryResultsMonitorTopContributorsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetQueryResultsMonitorTopContributorsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.GetQueryResultsMonitorTopContributorsInput_maxResults, *v.MaxResults)
+	}
+	if v.MonitorName != nil {
+		s.WriteString(schemas.GetQueryResultsMonitorTopContributorsInput_monitorName, *v.MonitorName)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetQueryResultsMonitorTopContributorsInput_nextToken, *v.NextToken)
+	}
+	if v.QueryId != nil {
+		s.WriteString(schemas.GetQueryResultsMonitorTopContributorsInput_queryId, *v.QueryId)
+	}
+}
+
 type GetQueryResultsMonitorTopContributorsOutput struct {
 
 	// The token for the next set of results. You receive this token from a previous
@@ -79,13 +102,45 @@ type GetQueryResultsMonitorTopContributorsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetQueryResultsMonitorTopContributorsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetQueryResultsMonitorTopContributorsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetQueryResultsMonitorTopContributorsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetQueryResultsMonitorTopContributorsOutput_nextToken, *v.NextToken)
+	}
+	serializeMonitorTopContributorsRowList(s, schemas.GetQueryResultsMonitorTopContributorsOutput_topContributors, v.TopContributors)
+	if v.Unit != "" {
+		s.WriteString(schemas.GetQueryResultsMonitorTopContributorsOutput_unit, string(v.Unit))
+	}
+}
+func (v *GetQueryResultsMonitorTopContributorsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetQueryResultsMonitorTopContributorsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetQueryResultsMonitorTopContributorsOutput_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.GetQueryResultsMonitorTopContributorsOutput_nextToken, v.NextToken)
+		case schemas.GetQueryResultsMonitorTopContributorsOutput_topContributors:
+			return deserializeMonitorTopContributorsRowList(d, schemas.GetQueryResultsMonitorTopContributorsOutput_topContributors, &v.TopContributors)
+		case schemas.GetQueryResultsMonitorTopContributorsOutput_unit:
+			var ev string
+			if err := d.ReadString(schemas.GetQueryResultsMonitorTopContributorsOutput_unit, &ev); err != nil {
+				return err
+			}
+			v.Unit = types.MetricUnit(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetQueryResultsMonitorTopContributorsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetQueryResultsMonitorTopContributors{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetQueryResultsMonitorTopContributors, schemas.GetQueryResultsMonitorTopContributorsInput, schemas.GetQueryResultsMonitorTopContributorsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetQueryResultsMonitorTopContributors{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetQueryResultsMonitorTopContributors, schemas.GetQueryResultsMonitorTopContributorsInput, schemas.GetQueryResultsMonitorTopContributorsOutput), output: &GetQueryResultsMonitorTopContributorsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

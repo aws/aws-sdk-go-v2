@@ -4,7 +4,9 @@ package neptunedata
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/neptunedata/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/neptunedata/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -45,6 +47,18 @@ type ListOpenCypherQueriesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListOpenCypherQueriesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListOpenCypherQueriesInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListOpenCypherQueriesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IncludeWaiting != nil {
+		s.WriteBool(schemas.ListOpenCypherQueriesInput_includeWaiting, *v.IncludeWaiting)
+	}
+}
+
 type ListOpenCypherQueriesOutput struct {
 
 	// The number of queries that have been accepted but not yet completed, including
@@ -63,13 +77,41 @@ type ListOpenCypherQueriesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListOpenCypherQueriesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListOpenCypherQueriesOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListOpenCypherQueriesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AcceptedQueryCount != nil {
+		s.WriteInt32(schemas.ListOpenCypherQueriesOutput_acceptedQueryCount, *v.AcceptedQueryCount)
+	}
+	serializeOpenCypherQueries(s, schemas.ListOpenCypherQueriesOutput_queries, v.Queries)
+	if v.RunningQueryCount != nil {
+		s.WriteInt32(schemas.ListOpenCypherQueriesOutput_runningQueryCount, *v.RunningQueryCount)
+	}
+}
+func (v *ListOpenCypherQueriesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListOpenCypherQueriesOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListOpenCypherQueriesOutput_acceptedQueryCount:
+			v.AcceptedQueryCount = new(int32)
+			return d.ReadInt32(schemas.ListOpenCypherQueriesOutput_acceptedQueryCount, v.AcceptedQueryCount)
+		case schemas.ListOpenCypherQueriesOutput_queries:
+			return deserializeOpenCypherQueries(d, schemas.ListOpenCypherQueriesOutput_queries, &v.Queries)
+		case schemas.ListOpenCypherQueriesOutput_runningQueryCount:
+			v.RunningQueryCount = new(int32)
+			return d.ReadInt32(schemas.ListOpenCypherQueriesOutput_runningQueryCount, v.RunningQueryCount)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListOpenCypherQueriesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListOpenCypherQueries{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListOpenCypherQueries, schemas.ListOpenCypherQueriesInput, schemas.ListOpenCypherQueriesOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListOpenCypherQueries{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListOpenCypherQueries, schemas.ListOpenCypherQueriesInput, schemas.ListOpenCypherQueriesOutput), output: &ListOpenCypherQueriesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

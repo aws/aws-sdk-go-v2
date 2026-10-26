@@ -5,7 +5,9 @@ package omics
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/omics/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/omics/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -44,6 +46,21 @@ type UpdateVariantStoreInput struct {
 	Description *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *UpdateVariantStoreInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateVariantStoreRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateVariantStoreInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateVariantStoreRequest_description, *v.Description)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateVariantStoreRequest_name, *v.Name)
+	}
 }
 
 type UpdateVariantStoreOutput struct {
@@ -89,13 +106,69 @@ type UpdateVariantStoreOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateVariantStoreOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateVariantStoreResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateVariantStoreOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.UpdateVariantStoreResponse_creationTime, *v.CreationTime)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateVariantStoreResponse_description, *v.Description)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.UpdateVariantStoreResponse_id, *v.Id)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateVariantStoreResponse_name, *v.Name)
+	}
+	serializeReferenceItem(s, schemas.UpdateVariantStoreResponse_reference, v.Reference)
+	if v.Status != "" {
+		s.WriteString(schemas.UpdateVariantStoreResponse_status, string(v.Status))
+	}
+	if v.UpdateTime != nil {
+		s.WriteTime(schemas.UpdateVariantStoreResponse_updateTime, *v.UpdateTime)
+	}
+}
+func (v *UpdateVariantStoreOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateVariantStoreResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateVariantStoreResponse_creationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.UpdateVariantStoreResponse_creationTime, v.CreationTime)
+		case schemas.UpdateVariantStoreResponse_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.UpdateVariantStoreResponse_description, v.Description)
+		case schemas.UpdateVariantStoreResponse_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.UpdateVariantStoreResponse_id, v.Id)
+		case schemas.UpdateVariantStoreResponse_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.UpdateVariantStoreResponse_name, v.Name)
+		case schemas.UpdateVariantStoreResponse_reference:
+			return deserializeReferenceItem(d, schemas.UpdateVariantStoreResponse_reference, &v.Reference)
+		case schemas.UpdateVariantStoreResponse_status:
+			var ev string
+			if err := d.ReadString(schemas.UpdateVariantStoreResponse_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.StoreStatus(ev)
+			return nil
+		case schemas.UpdateVariantStoreResponse_updateTime:
+			v.UpdateTime = new(time.Time)
+			return d.ReadTime(schemas.UpdateVariantStoreResponse_updateTime, v.UpdateTime)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateVariantStoreMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateVariantStore{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateVariantStore, schemas.UpdateVariantStoreRequest, schemas.UpdateVariantStoreResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateVariantStore{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateVariantStore, schemas.UpdateVariantStoreRequest, schemas.UpdateVariantStoreResponse), output: &UpdateVariantStoreOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

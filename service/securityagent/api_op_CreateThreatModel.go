@@ -4,7 +4,9 @@ package securityagent
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/securityagent/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/securityagent/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -62,6 +64,43 @@ type CreateThreatModelInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateThreatModelInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateThreatModelInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateThreatModelInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AgentSpaceId != nil {
+		s.WriteString(schemas.CreateThreatModelInput_agentSpaceId, *v.AgentSpaceId)
+	}
+	if v.Assets != nil {
+		s.WriteStruct(schemas.CreateThreatModelInput_assets)
+		v.Assets.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreateThreatModelInput_description, *v.Description)
+	}
+	if v.LogConfig != nil {
+		s.WriteStruct(schemas.CreateThreatModelInput_logConfig)
+		v.LogConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ReportDestination != nil {
+		s.WriteStruct(schemas.CreateThreatModelInput_reportDestination)
+		v.ReportDestination.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeDocumentList(s, schemas.CreateThreatModelInput_scopeDocs, v.ScopeDocs)
+	if v.ServiceRole != nil {
+		s.WriteString(schemas.CreateThreatModelInput_serviceRole, *v.ServiceRole)
+	}
+	if v.Title != nil {
+		s.WriteString(schemas.CreateThreatModelInput_title, *v.Title)
+	}
+}
+
 // Output for the CreateThreatModel operation.
 type CreateThreatModelOutput struct {
 
@@ -106,13 +145,95 @@ type CreateThreatModelOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateThreatModelOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateThreatModelOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateThreatModelOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AgentSpaceId != nil {
+		s.WriteString(schemas.CreateThreatModelOutput_agentSpaceId, *v.AgentSpaceId)
+	}
+	if v.Assets != nil {
+		s.WriteStruct(schemas.CreateThreatModelOutput_assets)
+		v.Assets.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.CreateThreatModelOutput_createdAt, *v.CreatedAt)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreateThreatModelOutput_description, *v.Description)
+	}
+	if v.LogConfig != nil {
+		s.WriteStruct(schemas.CreateThreatModelOutput_logConfig)
+		v.LogConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ReportDestination != nil {
+		s.WriteStruct(schemas.CreateThreatModelOutput_reportDestination)
+		v.ReportDestination.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeDocumentList(s, schemas.CreateThreatModelOutput_scopeDocs, v.ScopeDocs)
+	if v.ServiceRole != nil {
+		s.WriteString(schemas.CreateThreatModelOutput_serviceRole, *v.ServiceRole)
+	}
+	if v.ThreatModelId != nil {
+		s.WriteString(schemas.CreateThreatModelOutput_threatModelId, *v.ThreatModelId)
+	}
+	if v.Title != nil {
+		s.WriteString(schemas.CreateThreatModelOutput_title, *v.Title)
+	}
+	if v.UpdatedAt != nil {
+		s.WriteTime(schemas.CreateThreatModelOutput_updatedAt, *v.UpdatedAt)
+	}
+}
+func (v *CreateThreatModelOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateThreatModelOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateThreatModelOutput_agentSpaceId:
+			v.AgentSpaceId = new(string)
+			return d.ReadString(schemas.CreateThreatModelOutput_agentSpaceId, v.AgentSpaceId)
+		case schemas.CreateThreatModelOutput_assets:
+			v.Assets = &types.Assets{}
+			return v.Assets.Deserialize(d)
+		case schemas.CreateThreatModelOutput_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.CreateThreatModelOutput_createdAt, v.CreatedAt)
+		case schemas.CreateThreatModelOutput_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.CreateThreatModelOutput_description, v.Description)
+		case schemas.CreateThreatModelOutput_logConfig:
+			v.LogConfig = &types.CloudWatchLog{}
+			return v.LogConfig.Deserialize(d)
+		case schemas.CreateThreatModelOutput_reportDestination:
+			v.ReportDestination = &types.ReportDestination{}
+			return v.ReportDestination.Deserialize(d)
+		case schemas.CreateThreatModelOutput_scopeDocs:
+			return deserializeDocumentList(d, schemas.CreateThreatModelOutput_scopeDocs, &v.ScopeDocs)
+		case schemas.CreateThreatModelOutput_serviceRole:
+			v.ServiceRole = new(string)
+			return d.ReadString(schemas.CreateThreatModelOutput_serviceRole, v.ServiceRole)
+		case schemas.CreateThreatModelOutput_threatModelId:
+			v.ThreatModelId = new(string)
+			return d.ReadString(schemas.CreateThreatModelOutput_threatModelId, v.ThreatModelId)
+		case schemas.CreateThreatModelOutput_title:
+			v.Title = new(string)
+			return d.ReadString(schemas.CreateThreatModelOutput_title, v.Title)
+		case schemas.CreateThreatModelOutput_updatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.CreateThreatModelOutput_updatedAt, v.UpdatedAt)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateThreatModelMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateThreatModel{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateThreatModel, schemas.CreateThreatModelInput, schemas.CreateThreatModelOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateThreatModel{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateThreatModel, schemas.CreateThreatModelInput, schemas.CreateThreatModelOutput), output: &CreateThreatModelOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

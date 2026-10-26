@@ -4,7 +4,9 @@ package uxc
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/uxc/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/uxc/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -35,6 +37,15 @@ type GetAccountCustomizationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetAccountCustomizationsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetAccountCustomizationsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetAccountCustomizationsInput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+
 type GetAccountCustomizationsOutput struct {
 
 	// The account color preference. A value of none indicates that you have not set a
@@ -63,13 +74,42 @@ type GetAccountCustomizationsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetAccountCustomizationsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetAccountCustomizationsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetAccountCustomizationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountColor != "" {
+		s.WriteString(schemas.GetAccountCustomizationsOutput_accountColor, string(v.AccountColor))
+	}
+	serializeRegionsList(s, schemas.GetAccountCustomizationsOutput_visibleRegions, v.VisibleRegions)
+	serializeServiceList(s, schemas.GetAccountCustomizationsOutput_visibleServices, v.VisibleServices)
+}
+func (v *GetAccountCustomizationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetAccountCustomizationsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetAccountCustomizationsOutput_accountColor:
+			var ev string
+			if err := d.ReadString(schemas.GetAccountCustomizationsOutput_accountColor, &ev); err != nil {
+				return err
+			}
+			v.AccountColor = types.AccountColor(ev)
+			return nil
+		case schemas.GetAccountCustomizationsOutput_visibleRegions:
+			return deserializeRegionsList(d, schemas.GetAccountCustomizationsOutput_visibleRegions, &v.VisibleRegions)
+		case schemas.GetAccountCustomizationsOutput_visibleServices:
+			return deserializeServiceList(d, schemas.GetAccountCustomizationsOutput_visibleServices, &v.VisibleServices)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetAccountCustomizationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetAccountCustomizations{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAccountCustomizations, schemas.GetAccountCustomizationsInput, schemas.GetAccountCustomizationsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetAccountCustomizations{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAccountCustomizations, schemas.GetAccountCustomizationsInput, schemas.GetAccountCustomizationsOutput), output: &GetAccountCustomizationsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

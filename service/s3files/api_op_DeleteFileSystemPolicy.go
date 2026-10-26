@@ -4,6 +4,8 @@ package s3files
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/s3files/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -34,6 +36,18 @@ type DeleteFileSystemPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteFileSystemPolicyInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteFileSystemPolicyRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteFileSystemPolicyInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FileSystemId != nil {
+		s.WriteString(schemas.DeleteFileSystemPolicyRequest_fileSystemId, *v.FileSystemId)
+	}
+}
+
 type DeleteFileSystemPolicyOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -41,13 +55,26 @@ type DeleteFileSystemPolicyOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteFileSystemPolicyOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteFileSystemPolicyOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteFileSystemPolicyOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteFileSystemPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteFileSystemPolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteFileSystemPolicy, schemas.DeleteFileSystemPolicyRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteFileSystemPolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteFileSystemPolicy, schemas.DeleteFileSystemPolicyRequest, nil), output: &DeleteFileSystemPolicyOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

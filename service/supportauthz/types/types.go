@@ -3,7 +3,10 @@
 package types
 
 import (
+	"github.com/aws/aws-sdk-go-v2/service/supportauthz/schemas"
+	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
+	smithyprelude "github.com/aws/smithy-go/prelude"
 	"time"
 )
 
@@ -26,6 +29,12 @@ type ActionSetMemberActions struct {
 }
 
 func (*ActionSetMemberActions) isActionSet() {}
+func (v *ActionSetMemberActions) Serialize(s smithy.ShapeSerializer) {
+	serializeActions(s, schemas.ActionSet_actions, v.Value)
+}
+func (v *ActionSetMemberActions) Deserialize(d smithy.ShapeDeserializer) error {
+	return deserializeActions(d, schemas.ActionSet_actions, &v.Value)
+}
 
 // Authorizes all available support actions.
 type ActionSetMemberAllActions struct {
@@ -35,6 +44,14 @@ type ActionSetMemberAllActions struct {
 }
 
 func (*ActionSetMemberAllActions) isActionSet() {}
+func (v *ActionSetMemberAllActions) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ActionSet_allActions)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *ActionSetMemberAllActions) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // A summary of a support action.
 type ActionSummary struct {
@@ -57,6 +74,40 @@ type ActionSummary struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ActionSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ActionSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ActionSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Action != nil {
+		s.WriteString(schemas.ActionSummary_action, *v.Action)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.ActionSummary_description, *v.Description)
+	}
+	if v.Service != nil {
+		s.WriteString(schemas.ActionSummary_service, *v.Service)
+	}
+}
+func (v *ActionSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ActionSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ActionSummary_action:
+			v.Action = new(string)
+			return d.ReadString(schemas.ActionSummary_action, v.Action)
+		case schemas.ActionSummary_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.ActionSummary_description, v.Description)
+		case schemas.ActionSummary_service:
+			v.Service = new(string)
+			return d.ReadString(schemas.ActionSummary_service, v.Service)
+		}
+		return nil
+	})
+}
+
 // A time-window condition that constrains when a support permit is valid.
 //
 // The following types satisfy this interface:
@@ -75,6 +126,12 @@ type ConditionMemberAllowAfter struct {
 }
 
 func (*ConditionMemberAllowAfter) isCondition() {}
+func (v *ConditionMemberAllowAfter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteTime(schemas.Condition_allowAfter, v.Value)
+}
+func (v *ConditionMemberAllowAfter) Deserialize(d smithy.ShapeDeserializer) error {
+	return d.ReadTime(schemas.Condition_allowAfter, &v.Value)
+}
 
 // The latest time at which the permit remains valid.
 type ConditionMemberAllowBefore struct {
@@ -84,6 +141,12 @@ type ConditionMemberAllowBefore struct {
 }
 
 func (*ConditionMemberAllowBefore) isCondition() {}
+func (v *ConditionMemberAllowBefore) Serialize(s smithy.ShapeSerializer) {
+	s.WriteTime(schemas.Condition_allowBefore, v.Value)
+}
+func (v *ConditionMemberAllowBefore) Deserialize(d smithy.ShapeDeserializer) error {
+	return d.ReadTime(schemas.Condition_allowBefore, &v.Value)
+}
 
 // The permit definition specifying the authorized actions, resources, and
 // time-window conditions for a support operator.
@@ -106,6 +169,31 @@ type Permit struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Permit) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Permit)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Permit) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeActionSet(s, schemas.Permit_actions, v.Actions)
+	serializeConditions(s, schemas.Permit_conditions, v.Conditions)
+	serializeResourceSet(s, schemas.Permit_resources, v.Resources)
+}
+func (v *Permit) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Permit, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Permit_actions:
+			return deserializeActionSet(d, schemas.Permit_actions, &v.Actions)
+		case schemas.Permit_conditions:
+			return deserializeConditions(d, schemas.Permit_conditions, &v.Conditions)
+		case schemas.Permit_resources:
+			return deserializeResourceSet(d, schemas.Permit_resources, &v.Resources)
+		}
+		return nil
+	})
+}
+
 // The set of resources authorized by a permit. Specify either all resources in
 // the Region or a list of specific resources.
 //
@@ -125,6 +213,14 @@ type ResourceSetMemberAllResourcesInRegion struct {
 }
 
 func (*ResourceSetMemberAllResourcesInRegion) isResourceSet() {}
+func (v *ResourceSetMemberAllResourcesInRegion) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ResourceSet_allResourcesInRegion)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *ResourceSetMemberAllResourcesInRegion) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // A list of specific resource identifiers that the support operator is authorized
 // to act upon. Maximum of 5 resources.
@@ -135,6 +231,12 @@ type ResourceSetMemberResources struct {
 }
 
 func (*ResourceSetMemberResources) isResourceSet() {}
+func (v *ResourceSetMemberResources) Serialize(s smithy.ShapeSerializer) {
+	serializeResources(s, schemas.ResourceSet_resources, v.Value)
+}
+func (v *ResourceSetMemberResources) Deserialize(d smithy.ShapeDeserializer) error {
+	return deserializeResources(d, schemas.ResourceSet_resources, &v.Value)
+}
 
 // The signing key used to cryptographically sign a support permit.
 //
@@ -154,6 +256,12 @@ type SigningKeyInfoMemberKmsKey struct {
 }
 
 func (*SigningKeyInfoMemberKmsKey) isSigningKeyInfo() {}
+func (v *SigningKeyInfoMemberKmsKey) Serialize(s smithy.ShapeSerializer) {
+	s.WriteString(schemas.SigningKeyInfo_kmsKey, v.Value)
+}
+func (v *SigningKeyInfoMemberKmsKey) Deserialize(d smithy.ShapeDeserializer) error {
+	return d.ReadString(schemas.SigningKeyInfo_kmsKey, &v.Value)
+}
 
 // A permit request from an AWS support operator.
 type SupportPermitRequest struct {
@@ -189,6 +297,64 @@ type SupportPermitRequest struct {
 	UpdatedAt *time.Time
 
 	noSmithyDocumentSerde
+}
+
+func (v *SupportPermitRequest) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SupportPermitRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SupportPermitRequest) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.SupportPermitRequest_createdAt, *v.CreatedAt)
+	}
+	if v.Permit != nil {
+		s.WriteStruct(schemas.SupportPermitRequest_permit)
+		v.Permit.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RequestArn != nil {
+		s.WriteString(schemas.SupportPermitRequest_requestArn, *v.RequestArn)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.SupportPermitRequest_status, string(v.Status))
+	}
+	if v.SupportCaseDisplayId != nil {
+		s.WriteString(schemas.SupportPermitRequest_supportCaseDisplayId, *v.SupportCaseDisplayId)
+	}
+	if v.UpdatedAt != nil {
+		s.WriteTime(schemas.SupportPermitRequest_updatedAt, *v.UpdatedAt)
+	}
+}
+func (v *SupportPermitRequest) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SupportPermitRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SupportPermitRequest_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.SupportPermitRequest_createdAt, v.CreatedAt)
+		case schemas.SupportPermitRequest_permit:
+			v.Permit = &Permit{}
+			return v.Permit.Deserialize(d)
+		case schemas.SupportPermitRequest_requestArn:
+			v.RequestArn = new(string)
+			return d.ReadString(schemas.SupportPermitRequest_requestArn, v.RequestArn)
+		case schemas.SupportPermitRequest_status:
+			var ev string
+			if err := d.ReadString(schemas.SupportPermitRequest_status, &ev); err != nil {
+				return err
+			}
+			v.Status = SupportPermitRequestStatus(ev)
+			return nil
+		case schemas.SupportPermitRequest_supportCaseDisplayId:
+			v.SupportCaseDisplayId = new(string)
+			return d.ReadString(schemas.SupportPermitRequest_supportCaseDisplayId, v.SupportCaseDisplayId)
+		case schemas.SupportPermitRequest_updatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.SupportPermitRequest_updatedAt, v.UpdatedAt)
+		}
+		return nil
+	})
 }
 
 // A summary of a support permit.
@@ -230,6 +396,67 @@ type SupportPermitSummary struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SupportPermitSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SupportPermitSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SupportPermitSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.SupportPermitSummary_arn, *v.Arn)
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.SupportPermitSummary_createdAt, *v.CreatedAt)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.SupportPermitSummary_name, *v.Name)
+	}
+	if v.Permit != nil {
+		s.WriteStruct(schemas.SupportPermitSummary_permit)
+		v.Permit.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeSigningKeyInfo(s, schemas.SupportPermitSummary_signingKeyInfo, v.SigningKeyInfo)
+	if v.Status != "" {
+		s.WriteString(schemas.SupportPermitSummary_status, string(v.Status))
+	}
+	if v.SupportCaseDisplayId != nil {
+		s.WriteString(schemas.SupportPermitSummary_supportCaseDisplayId, *v.SupportCaseDisplayId)
+	}
+}
+func (v *SupportPermitSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SupportPermitSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SupportPermitSummary_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.SupportPermitSummary_arn, v.Arn)
+		case schemas.SupportPermitSummary_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.SupportPermitSummary_createdAt, v.CreatedAt)
+		case schemas.SupportPermitSummary_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.SupportPermitSummary_name, v.Name)
+		case schemas.SupportPermitSummary_permit:
+			v.Permit = &Permit{}
+			return v.Permit.Deserialize(d)
+		case schemas.SupportPermitSummary_signingKeyInfo:
+			return deserializeSigningKeyInfo(d, schemas.SupportPermitSummary_signingKeyInfo, &v.SigningKeyInfo)
+		case schemas.SupportPermitSummary_status:
+			var ev string
+			if err := d.ReadString(schemas.SupportPermitSummary_status, &ev); err != nil {
+				return err
+			}
+			v.Status = SupportPermitStatus(ev)
+			return nil
+		case schemas.SupportPermitSummary_supportCaseDisplayId:
+			v.SupportCaseDisplayId = new(string)
+			return d.ReadString(schemas.SupportPermitSummary_supportCaseDisplayId, v.SupportCaseDisplayId)
+		}
+		return nil
+	})
+}
+
 // Describes one specific validation failure for an input member.
 type ValidationExceptionField struct {
 
@@ -247,8 +474,52 @@ type ValidationExceptionField struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ValidationExceptionField) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ValidationExceptionField)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ValidationExceptionField) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.ValidationExceptionField_message, *v.Message)
+	}
+	if v.Path != nil {
+		s.WriteString(schemas.ValidationExceptionField_path, *v.Path)
+	}
+}
+func (v *ValidationExceptionField) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ValidationExceptionField, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ValidationExceptionField_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ValidationExceptionField_message, v.Message)
+		case schemas.ValidationExceptionField_path:
+			v.Path = new(string)
+			return d.ReadString(schemas.ValidationExceptionField_path, v.Path)
+		}
+		return nil
+	})
+}
+
 type Unit struct {
 	noSmithyDocumentSerde
+}
+
+func (v *Unit) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(smithyprelude.Unit)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Unit) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *Unit) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, smithyprelude.Unit, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde

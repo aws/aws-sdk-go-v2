@@ -4,7 +4,9 @@ package s3tables
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/s3tables/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/s3tables/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -46,6 +48,23 @@ type PutTableRecordExpirationConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutTableRecordExpirationConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutTableRecordExpirationConfigurationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutTableRecordExpirationConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TableArn != nil {
+		s.WriteString(schemas.PutTableRecordExpirationConfigurationRequest_tableArn, *v.TableArn)
+	}
+	if v.Value != nil {
+		s.WriteStruct(schemas.PutTableRecordExpirationConfigurationRequest_value)
+		v.Value.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type PutTableRecordExpirationConfigurationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -53,13 +72,26 @@ type PutTableRecordExpirationConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutTableRecordExpirationConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutTableRecordExpirationConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *PutTableRecordExpirationConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPutTableRecordExpirationConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpPutTableRecordExpirationConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutTableRecordExpirationConfiguration, schemas.PutTableRecordExpirationConfigurationRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpPutTableRecordExpirationConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutTableRecordExpirationConfiguration, schemas.PutTableRecordExpirationConfigurationRequest, nil), output: &PutTableRecordExpirationConfigurationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

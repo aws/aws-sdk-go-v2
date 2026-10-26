@@ -4,6 +4,8 @@ package snowdevicemanagement
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/snowdevicemanagement/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -38,6 +40,28 @@ type CancelTaskInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CancelTaskInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CancelTaskInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CancelTaskInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TaskId != nil {
+		s.WriteString(schemas.CancelTaskInput_taskId, *v.TaskId)
+	}
+}
+func (v *CancelTaskInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CancelTaskInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CancelTaskInput_taskId:
+			v.TaskId = new(string)
+			return d.ReadString(schemas.CancelTaskInput_taskId, v.TaskId)
+		}
+		return nil
+	})
+}
+
 type CancelTaskOutput struct {
 
 	// The ID of the task that you are attempting to cancel.
@@ -49,13 +73,32 @@ type CancelTaskOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CancelTaskOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CancelTaskOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CancelTaskOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TaskId != nil {
+		s.WriteString(schemas.CancelTaskOutput_taskId, *v.TaskId)
+	}
+}
+func (v *CancelTaskOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CancelTaskOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CancelTaskOutput_taskId:
+			v.TaskId = new(string)
+			return d.ReadString(schemas.CancelTaskOutput_taskId, v.TaskId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCancelTaskMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCancelTask{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CancelTask, schemas.CancelTaskInput, schemas.CancelTaskOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCancelTask{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CancelTask, schemas.CancelTaskInput, schemas.CancelTaskOutput), output: &CancelTaskOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

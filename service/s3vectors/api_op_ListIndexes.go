@@ -5,7 +5,9 @@ package s3vectors
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/s3vectors/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/s3vectors/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -50,6 +52,30 @@ type ListIndexesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListIndexesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListIndexesInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListIndexesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListIndexesInput_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListIndexesInput_nextToken, *v.NextToken)
+	}
+	if v.Prefix != nil {
+		s.WriteString(schemas.ListIndexesInput_prefix, *v.Prefix)
+	}
+	if v.VectorBucketArn != nil {
+		s.WriteString(schemas.ListIndexesInput_vectorBucketArn, *v.VectorBucketArn)
+	}
+	if v.VectorBucketName != nil {
+		s.WriteString(schemas.ListIndexesInput_vectorBucketName, *v.VectorBucketName)
+	}
+}
+
 type ListIndexesOutput struct {
 
 	// The attributes of the vector indexes
@@ -66,13 +92,35 @@ type ListIndexesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListIndexesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListIndexesOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListIndexesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeListIndexesOutputList(s, schemas.ListIndexesOutput_indexes, v.Indexes)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListIndexesOutput_nextToken, *v.NextToken)
+	}
+}
+func (v *ListIndexesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListIndexesOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListIndexesOutput_indexes:
+			return deserializeListIndexesOutputList(d, schemas.ListIndexesOutput_indexes, &v.Indexes)
+		case schemas.ListIndexesOutput_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListIndexesOutput_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListIndexesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListIndexes{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListIndexes, schemas.ListIndexesInput, schemas.ListIndexesOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListIndexes{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListIndexes, schemas.ListIndexesInput, schemas.ListIndexesOutput), output: &ListIndexesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

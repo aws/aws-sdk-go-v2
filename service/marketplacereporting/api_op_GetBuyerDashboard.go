@@ -4,6 +4,8 @@ package marketplacereporting
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/marketplacereporting/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -55,6 +57,19 @@ type GetBuyerDashboardInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetBuyerDashboardInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetBuyerDashboardInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetBuyerDashboardInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DashboardIdentifier != nil {
+		s.WriteString(schemas.GetBuyerDashboardInput_dashboardIdentifier, *v.DashboardIdentifier)
+	}
+	serializeEmbeddingDomains(s, schemas.GetBuyerDashboardInput_embeddingDomains, v.EmbeddingDomains)
+}
+
 type GetBuyerDashboardOutput struct {
 
 	// The ARN of the returned dashboard.
@@ -82,13 +97,41 @@ type GetBuyerDashboardOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetBuyerDashboardOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetBuyerDashboardOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetBuyerDashboardOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DashboardIdentifier != nil {
+		s.WriteString(schemas.GetBuyerDashboardOutput_dashboardIdentifier, *v.DashboardIdentifier)
+	}
+	if v.EmbedUrl != nil {
+		s.WriteString(schemas.GetBuyerDashboardOutput_embedUrl, *v.EmbedUrl)
+	}
+	serializeEmbeddingDomains(s, schemas.GetBuyerDashboardOutput_embeddingDomains, v.EmbeddingDomains)
+}
+func (v *GetBuyerDashboardOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetBuyerDashboardOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetBuyerDashboardOutput_dashboardIdentifier:
+			v.DashboardIdentifier = new(string)
+			return d.ReadString(schemas.GetBuyerDashboardOutput_dashboardIdentifier, v.DashboardIdentifier)
+		case schemas.GetBuyerDashboardOutput_embedUrl:
+			v.EmbedUrl = new(string)
+			return d.ReadString(schemas.GetBuyerDashboardOutput_embedUrl, v.EmbedUrl)
+		case schemas.GetBuyerDashboardOutput_embeddingDomains:
+			return deserializeEmbeddingDomains(d, schemas.GetBuyerDashboardOutput_embeddingDomains, &v.EmbeddingDomains)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetBuyerDashboardMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetBuyerDashboard{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetBuyerDashboard, schemas.GetBuyerDashboardInput, schemas.GetBuyerDashboardOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetBuyerDashboard{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetBuyerDashboard, schemas.GetBuyerDashboardInput, schemas.GetBuyerDashboardOutput), output: &GetBuyerDashboardOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

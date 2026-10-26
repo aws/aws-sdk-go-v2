@@ -5,7 +5,9 @@ package securityagent
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/securityagent/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/securityagent/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,21 @@ type ListAgentSpacesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAgentSpacesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAgentSpacesInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAgentSpacesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListAgentSpacesInput_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAgentSpacesInput_nextToken, *v.NextToken)
+	}
+}
+
 // Output for the ListAgentSpaces operation.
 type ListAgentSpacesOutput struct {
 
@@ -56,13 +73,35 @@ type ListAgentSpacesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAgentSpacesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAgentSpacesOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAgentSpacesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAgentSpaceSummaryList(s, schemas.ListAgentSpacesOutput_agentSpaceSummaries, v.AgentSpaceSummaries)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAgentSpacesOutput_nextToken, *v.NextToken)
+	}
+}
+func (v *ListAgentSpacesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListAgentSpacesOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListAgentSpacesOutput_agentSpaceSummaries:
+			return deserializeAgentSpaceSummaryList(d, schemas.ListAgentSpacesOutput_agentSpaceSummaries, &v.AgentSpaceSummaries)
+		case schemas.ListAgentSpacesOutput_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListAgentSpacesOutput_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListAgentSpacesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListAgentSpaces{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAgentSpaces, schemas.ListAgentSpacesInput, schemas.ListAgentSpacesOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListAgentSpaces{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAgentSpaces, schemas.ListAgentSpacesInput, schemas.ListAgentSpacesOutput), output: &ListAgentSpacesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package s3tables
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/s3tables/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/s3tables/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -52,6 +54,26 @@ type PutTableBucketMaintenanceConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutTableBucketMaintenanceConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutTableBucketMaintenanceConfigurationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutTableBucketMaintenanceConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TableBucketARN != nil {
+		s.WriteString(schemas.PutTableBucketMaintenanceConfigurationRequest_tableBucketARN, *v.TableBucketARN)
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.PutTableBucketMaintenanceConfigurationRequest_type, string(v.Type))
+	}
+	if v.Value != nil {
+		s.WriteStruct(schemas.PutTableBucketMaintenanceConfigurationRequest_value)
+		v.Value.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type PutTableBucketMaintenanceConfigurationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -59,13 +81,26 @@ type PutTableBucketMaintenanceConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutTableBucketMaintenanceConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutTableBucketMaintenanceConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *PutTableBucketMaintenanceConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPutTableBucketMaintenanceConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpPutTableBucketMaintenanceConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutTableBucketMaintenanceConfiguration, schemas.PutTableBucketMaintenanceConfigurationRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpPutTableBucketMaintenanceConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutTableBucketMaintenanceConfiguration, schemas.PutTableBucketMaintenanceConfigurationRequest, nil), output: &PutTableBucketMaintenanceConfigurationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

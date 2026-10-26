@@ -4,6 +4,8 @@ package lakeformation
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/lakeformation/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -34,6 +36,18 @@ type CancelTransactionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CancelTransactionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CancelTransactionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CancelTransactionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TransactionId != nil {
+		s.WriteString(schemas.CancelTransactionRequest_TransactionId, *v.TransactionId)
+	}
+}
+
 type CancelTransactionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -41,13 +55,26 @@ type CancelTransactionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CancelTransactionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CancelTransactionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CancelTransactionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *CancelTransactionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CancelTransactionResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCancelTransactionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCancelTransaction{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CancelTransaction, schemas.CancelTransactionRequest, schemas.CancelTransactionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCancelTransaction{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CancelTransaction, schemas.CancelTransactionRequest, schemas.CancelTransactionResponse), output: &CancelTransactionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

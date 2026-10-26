@@ -5,7 +5,9 @@ package workdocs
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/workdocs/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/workdocs/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -71,6 +73,45 @@ type DescribeActivitiesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeActivitiesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeActivitiesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeActivitiesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ActivityTypes != nil {
+		s.WriteString(schemas.DescribeActivitiesRequest_ActivityTypes, *v.ActivityTypes)
+	}
+	if v.AuthenticationToken != nil {
+		s.WriteString(schemas.DescribeActivitiesRequest_AuthenticationToken, *v.AuthenticationToken)
+	}
+	if v.EndTime != nil {
+		s.WriteTime(schemas.DescribeActivitiesRequest_EndTime, *v.EndTime)
+	}
+	if v.IncludeIndirectActivities != false {
+		s.WriteBool(schemas.DescribeActivitiesRequest_IncludeIndirectActivities, v.IncludeIndirectActivities)
+	}
+	if v.Limit != nil {
+		s.WriteInt32(schemas.DescribeActivitiesRequest_Limit, *v.Limit)
+	}
+	if v.Marker != nil {
+		s.WriteString(schemas.DescribeActivitiesRequest_Marker, *v.Marker)
+	}
+	if v.OrganizationId != nil {
+		s.WriteString(schemas.DescribeActivitiesRequest_OrganizationId, *v.OrganizationId)
+	}
+	if v.ResourceId != nil {
+		s.WriteString(schemas.DescribeActivitiesRequest_ResourceId, *v.ResourceId)
+	}
+	if v.StartTime != nil {
+		s.WriteTime(schemas.DescribeActivitiesRequest_StartTime, *v.StartTime)
+	}
+	if v.UserId != nil {
+		s.WriteString(schemas.DescribeActivitiesRequest_UserId, *v.UserId)
+	}
+}
+
 type DescribeActivitiesOutput struct {
 
 	// The marker for the next set of results.
@@ -85,13 +126,35 @@ type DescribeActivitiesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeActivitiesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeActivitiesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeActivitiesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Marker != nil {
+		s.WriteString(schemas.DescribeActivitiesResponse_Marker, *v.Marker)
+	}
+	serializeUserActivities(s, schemas.DescribeActivitiesResponse_UserActivities, v.UserActivities)
+}
+func (v *DescribeActivitiesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeActivitiesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeActivitiesResponse_Marker:
+			v.Marker = new(string)
+			return d.ReadString(schemas.DescribeActivitiesResponse_Marker, v.Marker)
+		case schemas.DescribeActivitiesResponse_UserActivities:
+			return deserializeUserActivities(d, schemas.DescribeActivitiesResponse_UserActivities, &v.UserActivities)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeActivitiesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeActivities{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeActivities, schemas.DescribeActivitiesRequest, schemas.DescribeActivitiesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeActivities{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeActivities, schemas.DescribeActivitiesRequest, schemas.DescribeActivitiesResponse), output: &DescribeActivitiesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

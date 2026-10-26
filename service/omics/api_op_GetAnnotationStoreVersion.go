@@ -6,7 +6,9 @@ import (
 	"context"
 	"errors"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/omics/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/omics/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithytime "github.com/aws/smithy-go/time"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -43,6 +45,21 @@ type GetAnnotationStoreVersionInput struct {
 	VersionName *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetAnnotationStoreVersionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetAnnotationStoreVersionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetAnnotationStoreVersionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.GetAnnotationStoreVersionRequest_name, *v.Name)
+	}
+	if v.VersionName != nil {
+		s.WriteString(schemas.GetAnnotationStoreVersionRequest_versionName, *v.VersionName)
+	}
 }
 
 type GetAnnotationStoreVersionOutput struct {
@@ -116,13 +133,102 @@ type GetAnnotationStoreVersionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetAnnotationStoreVersionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetAnnotationStoreVersionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetAnnotationStoreVersionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.GetAnnotationStoreVersionResponse_creationTime, *v.CreationTime)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.GetAnnotationStoreVersionResponse_description, *v.Description)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.GetAnnotationStoreVersionResponse_id, *v.Id)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.GetAnnotationStoreVersionResponse_name, *v.Name)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.GetAnnotationStoreVersionResponse_status, string(v.Status))
+	}
+	if v.StatusMessage != nil {
+		s.WriteString(schemas.GetAnnotationStoreVersionResponse_statusMessage, *v.StatusMessage)
+	}
+	if v.StoreId != nil {
+		s.WriteString(schemas.GetAnnotationStoreVersionResponse_storeId, *v.StoreId)
+	}
+	serializeTagMap(s, schemas.GetAnnotationStoreVersionResponse_tags, v.Tags)
+	if v.UpdateTime != nil {
+		s.WriteTime(schemas.GetAnnotationStoreVersionResponse_updateTime, *v.UpdateTime)
+	}
+	if v.VersionArn != nil {
+		s.WriteString(schemas.GetAnnotationStoreVersionResponse_versionArn, *v.VersionArn)
+	}
+	if v.VersionName != nil {
+		s.WriteString(schemas.GetAnnotationStoreVersionResponse_versionName, *v.VersionName)
+	}
+	serializeVersionOptions(s, schemas.GetAnnotationStoreVersionResponse_versionOptions, v.VersionOptions)
+	if v.VersionSizeBytes != nil {
+		s.WriteInt64(schemas.GetAnnotationStoreVersionResponse_versionSizeBytes, *v.VersionSizeBytes)
+	}
+}
+func (v *GetAnnotationStoreVersionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetAnnotationStoreVersionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetAnnotationStoreVersionResponse_creationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.GetAnnotationStoreVersionResponse_creationTime, v.CreationTime)
+		case schemas.GetAnnotationStoreVersionResponse_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.GetAnnotationStoreVersionResponse_description, v.Description)
+		case schemas.GetAnnotationStoreVersionResponse_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.GetAnnotationStoreVersionResponse_id, v.Id)
+		case schemas.GetAnnotationStoreVersionResponse_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.GetAnnotationStoreVersionResponse_name, v.Name)
+		case schemas.GetAnnotationStoreVersionResponse_status:
+			var ev string
+			if err := d.ReadString(schemas.GetAnnotationStoreVersionResponse_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.VersionStatus(ev)
+			return nil
+		case schemas.GetAnnotationStoreVersionResponse_statusMessage:
+			v.StatusMessage = new(string)
+			return d.ReadString(schemas.GetAnnotationStoreVersionResponse_statusMessage, v.StatusMessage)
+		case schemas.GetAnnotationStoreVersionResponse_storeId:
+			v.StoreId = new(string)
+			return d.ReadString(schemas.GetAnnotationStoreVersionResponse_storeId, v.StoreId)
+		case schemas.GetAnnotationStoreVersionResponse_tags:
+			return deserializeTagMap(d, schemas.GetAnnotationStoreVersionResponse_tags, &v.Tags)
+		case schemas.GetAnnotationStoreVersionResponse_updateTime:
+			v.UpdateTime = new(time.Time)
+			return d.ReadTime(schemas.GetAnnotationStoreVersionResponse_updateTime, v.UpdateTime)
+		case schemas.GetAnnotationStoreVersionResponse_versionArn:
+			v.VersionArn = new(string)
+			return d.ReadString(schemas.GetAnnotationStoreVersionResponse_versionArn, v.VersionArn)
+		case schemas.GetAnnotationStoreVersionResponse_versionName:
+			v.VersionName = new(string)
+			return d.ReadString(schemas.GetAnnotationStoreVersionResponse_versionName, v.VersionName)
+		case schemas.GetAnnotationStoreVersionResponse_versionOptions:
+			return deserializeVersionOptions(d, schemas.GetAnnotationStoreVersionResponse_versionOptions, &v.VersionOptions)
+		case schemas.GetAnnotationStoreVersionResponse_versionSizeBytes:
+			v.VersionSizeBytes = new(int64)
+			return d.ReadInt64(schemas.GetAnnotationStoreVersionResponse_versionSizeBytes, v.VersionSizeBytes)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetAnnotationStoreVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetAnnotationStoreVersion{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAnnotationStoreVersion, schemas.GetAnnotationStoreVersionRequest, schemas.GetAnnotationStoreVersionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetAnnotationStoreVersion{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAnnotationStoreVersion, schemas.GetAnnotationStoreVersionRequest, schemas.GetAnnotationStoreVersionResponse), output: &GetAnnotationStoreVersionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

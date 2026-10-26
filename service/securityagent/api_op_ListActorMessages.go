@@ -5,7 +5,9 @@ package securityagent
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/securityagent/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/securityagent/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -55,6 +57,30 @@ type ListActorMessagesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListActorMessagesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListActorMessagesInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListActorMessagesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ActorIdentifier != nil {
+		s.WriteString(schemas.ListActorMessagesInput_actorIdentifier, *v.ActorIdentifier)
+	}
+	if v.AgentSpaceId != nil {
+		s.WriteString(schemas.ListActorMessagesInput_agentSpaceId, *v.AgentSpaceId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListActorMessagesInput_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListActorMessagesInput_nextToken, *v.NextToken)
+	}
+	if v.PentestId != nil {
+		s.WriteString(schemas.ListActorMessagesInput_pentestId, *v.PentestId)
+	}
+}
+
 type ListActorMessagesOutput struct {
 
 	// The list of messages received for the actor, most recent first.
@@ -71,13 +97,35 @@ type ListActorMessagesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListActorMessagesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListActorMessagesOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListActorMessagesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeActorMessageList(s, schemas.ListActorMessagesOutput_messages, v.Messages)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListActorMessagesOutput_nextToken, *v.NextToken)
+	}
+}
+func (v *ListActorMessagesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListActorMessagesOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListActorMessagesOutput_messages:
+			return deserializeActorMessageList(d, schemas.ListActorMessagesOutput_messages, &v.Messages)
+		case schemas.ListActorMessagesOutput_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListActorMessagesOutput_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListActorMessagesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListActorMessages{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListActorMessages, schemas.ListActorMessagesInput, schemas.ListActorMessagesOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListActorMessages{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListActorMessages, schemas.ListActorMessagesInput, schemas.ListActorMessagesOutput), output: &ListActorMessagesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

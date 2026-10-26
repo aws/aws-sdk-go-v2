@@ -5,6 +5,8 @@ package synthetics
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/synthetics/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -45,6 +47,24 @@ type ListGroupResourcesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListGroupResourcesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListGroupResourcesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListGroupResourcesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GroupIdentifier != nil {
+		s.WriteString(schemas.ListGroupResourcesRequest_GroupIdentifier, *v.GroupIdentifier)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListGroupResourcesRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListGroupResourcesRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListGroupResourcesOutput struct {
 
 	// A token that indicates that there is more data available. You can use this
@@ -62,13 +82,35 @@ type ListGroupResourcesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListGroupResourcesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListGroupResourcesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListGroupResourcesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListGroupResourcesResponse_NextToken, *v.NextToken)
+	}
+	serializeStringList(s, schemas.ListGroupResourcesResponse_Resources, v.Resources)
+}
+func (v *ListGroupResourcesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListGroupResourcesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListGroupResourcesResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListGroupResourcesResponse_NextToken, v.NextToken)
+		case schemas.ListGroupResourcesResponse_Resources:
+			return deserializeStringList(d, schemas.ListGroupResourcesResponse_Resources, &v.Resources)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListGroupResourcesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListGroupResources{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListGroupResources, schemas.ListGroupResourcesRequest, schemas.ListGroupResourcesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListGroupResources{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListGroupResources, schemas.ListGroupResourcesRequest, schemas.ListGroupResourcesResponse), output: &ListGroupResourcesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

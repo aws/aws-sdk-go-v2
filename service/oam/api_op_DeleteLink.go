@@ -4,6 +4,8 @@ package oam
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/oam/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -34,6 +36,18 @@ type DeleteLinkInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteLinkInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteLinkInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteLinkInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Identifier != nil {
+		s.WriteString(schemas.DeleteLinkInput_Identifier, *v.Identifier)
+	}
+}
+
 type DeleteLinkOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -41,13 +55,26 @@ type DeleteLinkOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteLinkOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteLinkOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteLinkOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteLinkOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteLinkOutput, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteLinkMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteLink{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteLink, schemas.DeleteLinkInput, schemas.DeleteLinkOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteLink{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteLink, schemas.DeleteLinkInput, schemas.DeleteLinkOutput), output: &DeleteLinkOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

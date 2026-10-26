@@ -4,7 +4,9 @@ package licensemanagerlinuxsubscriptions
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/licensemanagerlinuxsubscriptions/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/licensemanagerlinuxsubscriptions/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -47,6 +49,22 @@ type RegisterSubscriptionProviderInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RegisterSubscriptionProviderInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RegisterSubscriptionProviderRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RegisterSubscriptionProviderInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SecretArn != nil {
+		s.WriteString(schemas.RegisterSubscriptionProviderRequest_SecretArn, *v.SecretArn)
+	}
+	if v.SubscriptionProviderSource != "" {
+		s.WriteString(schemas.RegisterSubscriptionProviderRequest_SubscriptionProviderSource, string(v.SubscriptionProviderSource))
+	}
+	serializeTags(s, schemas.RegisterSubscriptionProviderRequest_Tags, v.Tags)
+}
+
 type RegisterSubscriptionProviderOutput struct {
 
 	// The Amazon Resource Name (ARN) of the Linux subscription provider resource that
@@ -66,13 +84,52 @@ type RegisterSubscriptionProviderOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RegisterSubscriptionProviderOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RegisterSubscriptionProviderResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RegisterSubscriptionProviderOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SubscriptionProviderArn != nil {
+		s.WriteString(schemas.RegisterSubscriptionProviderResponse_SubscriptionProviderArn, *v.SubscriptionProviderArn)
+	}
+	if v.SubscriptionProviderSource != "" {
+		s.WriteString(schemas.RegisterSubscriptionProviderResponse_SubscriptionProviderSource, string(v.SubscriptionProviderSource))
+	}
+	if v.SubscriptionProviderStatus != "" {
+		s.WriteString(schemas.RegisterSubscriptionProviderResponse_SubscriptionProviderStatus, string(v.SubscriptionProviderStatus))
+	}
+}
+func (v *RegisterSubscriptionProviderOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RegisterSubscriptionProviderResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RegisterSubscriptionProviderResponse_SubscriptionProviderArn:
+			v.SubscriptionProviderArn = new(string)
+			return d.ReadString(schemas.RegisterSubscriptionProviderResponse_SubscriptionProviderArn, v.SubscriptionProviderArn)
+		case schemas.RegisterSubscriptionProviderResponse_SubscriptionProviderSource:
+			var ev string
+			if err := d.ReadString(schemas.RegisterSubscriptionProviderResponse_SubscriptionProviderSource, &ev); err != nil {
+				return err
+			}
+			v.SubscriptionProviderSource = types.SubscriptionProviderSource(ev)
+			return nil
+		case schemas.RegisterSubscriptionProviderResponse_SubscriptionProviderStatus:
+			var ev string
+			if err := d.ReadString(schemas.RegisterSubscriptionProviderResponse_SubscriptionProviderStatus, &ev); err != nil {
+				return err
+			}
+			v.SubscriptionProviderStatus = types.SubscriptionProviderStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationRegisterSubscriptionProviderMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpRegisterSubscriptionProvider{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RegisterSubscriptionProvider, schemas.RegisterSubscriptionProviderRequest, schemas.RegisterSubscriptionProviderResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpRegisterSubscriptionProvider{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RegisterSubscriptionProvider, schemas.RegisterSubscriptionProviderRequest, schemas.RegisterSubscriptionProviderResponse), output: &RegisterSubscriptionProviderOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

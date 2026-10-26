@@ -5,7 +5,9 @@ package wickr
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/wickr/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/wickr/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -47,6 +49,22 @@ type BatchDeleteUserInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchDeleteUserInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchDeleteUserRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchDeleteUserInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.BatchDeleteUserRequest_clientToken, *v.ClientToken)
+	}
+	if v.NetworkId != nil {
+		s.WriteString(schemas.BatchDeleteUserRequest_networkId, *v.NetworkId)
+	}
+	serializeUserIds(s, schemas.BatchDeleteUserRequest_userIds, v.UserIds)
+}
+
 type BatchDeleteUserOutput struct {
 
 	// A list of user deletion attempts that failed, including error details
@@ -65,13 +83,38 @@ type BatchDeleteUserOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchDeleteUserOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchDeleteUserResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchDeleteUserOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeBatchUserErrorResponseItems(s, schemas.BatchDeleteUserResponse_failed, v.Failed)
+	if v.Message != nil {
+		s.WriteString(schemas.BatchDeleteUserResponse_message, *v.Message)
+	}
+	serializeBatchUserSuccessResponseItems(s, schemas.BatchDeleteUserResponse_successful, v.Successful)
+}
+func (v *BatchDeleteUserOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchDeleteUserResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchDeleteUserResponse_failed:
+			return deserializeBatchUserErrorResponseItems(d, schemas.BatchDeleteUserResponse_failed, &v.Failed)
+		case schemas.BatchDeleteUserResponse_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.BatchDeleteUserResponse_message, v.Message)
+		case schemas.BatchDeleteUserResponse_successful:
+			return deserializeBatchUserSuccessResponseItems(d, schemas.BatchDeleteUserResponse_successful, &v.Successful)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationBatchDeleteUserMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpBatchDeleteUser{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchDeleteUser, schemas.BatchDeleteUserRequest, schemas.BatchDeleteUserResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpBatchDeleteUser{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchDeleteUser, schemas.BatchDeleteUserRequest, schemas.BatchDeleteUserResponse), output: &BatchDeleteUserOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

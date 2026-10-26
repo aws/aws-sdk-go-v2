@@ -4,7 +4,9 @@ package qapps
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/qapps/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/qapps/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -57,6 +59,29 @@ type StartQAppSessionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartQAppSessionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartQAppSessionInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartQAppSessionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AppId != nil {
+		s.WriteString(schemas.StartQAppSessionInput_appId, *v.AppId)
+	}
+	if v.AppVersion != nil {
+		s.WriteInt32(schemas.StartQAppSessionInput_appVersion, *v.AppVersion)
+	}
+	serializeCardValueList(s, schemas.StartQAppSessionInput_initialValues, v.InitialValues)
+	if v.InstanceId != nil {
+		s.WriteString(schemas.StartQAppSessionInput_instanceId, *v.InstanceId)
+	}
+	if v.SessionId != nil {
+		s.WriteString(schemas.StartQAppSessionInput_sessionId, *v.SessionId)
+	}
+	serializeTagMap(s, schemas.StartQAppSessionInput_tags, v.Tags)
+}
+
 type StartQAppSessionOutput struct {
 
 	// The Amazon Resource Name (ARN) of the new Q App session.
@@ -75,13 +100,38 @@ type StartQAppSessionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartQAppSessionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartQAppSessionOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartQAppSessionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SessionArn != nil {
+		s.WriteString(schemas.StartQAppSessionOutput_sessionArn, *v.SessionArn)
+	}
+	if v.SessionId != nil {
+		s.WriteString(schemas.StartQAppSessionOutput_sessionId, *v.SessionId)
+	}
+}
+func (v *StartQAppSessionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartQAppSessionOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartQAppSessionOutput_sessionArn:
+			v.SessionArn = new(string)
+			return d.ReadString(schemas.StartQAppSessionOutput_sessionArn, v.SessionArn)
+		case schemas.StartQAppSessionOutput_sessionId:
+			v.SessionId = new(string)
+			return d.ReadString(schemas.StartQAppSessionOutput_sessionId, v.SessionId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartQAppSessionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpStartQAppSession{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartQAppSession, schemas.StartQAppSessionInput, schemas.StartQAppSessionOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStartQAppSession{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartQAppSession, schemas.StartQAppSessionInput, schemas.StartQAppSessionOutput), output: &StartQAppSessionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

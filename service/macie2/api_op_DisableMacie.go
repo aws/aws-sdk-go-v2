@@ -4,6 +4,8 @@ package macie2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/macie2/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -28,6 +30,15 @@ type DisableMacieInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DisableMacieInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DisableMacieRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DisableMacieInput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+
 type DisableMacieOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -35,13 +46,26 @@ type DisableMacieOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DisableMacieOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DisableMacieResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DisableMacieOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DisableMacieOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DisableMacieResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDisableMacieMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDisableMacie{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisableMacie, schemas.DisableMacieRequest, schemas.DisableMacieResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDisableMacie{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisableMacie, schemas.DisableMacieRequest, schemas.DisableMacieResponse), output: &DisableMacieOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -5,6 +5,8 @@ package omics
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/omics/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -42,6 +44,18 @@ type DeleteRunBatchInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteRunBatchInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteRunBatchRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteRunBatchInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BatchId != nil {
+		s.WriteString(schemas.DeleteRunBatchRequest_batchId, *v.BatchId)
+	}
+}
+
 type DeleteRunBatchOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -49,13 +63,26 @@ type DeleteRunBatchOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteRunBatchOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteRunBatchResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteRunBatchOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteRunBatchOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteRunBatchResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteRunBatchMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteRunBatch{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteRunBatch, schemas.DeleteRunBatchRequest, schemas.DeleteRunBatchResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteRunBatch{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteRunBatch, schemas.DeleteRunBatchRequest, schemas.DeleteRunBatchResponse), output: &DeleteRunBatchOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,6 +4,8 @@ package qapps
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/qapps/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -42,6 +44,19 @@ type BatchDeleteCategoryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchDeleteCategoryInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchDeleteCategoryInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchDeleteCategoryInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDeleteCategoryInputList(s, schemas.BatchDeleteCategoryInput_categories, v.Categories)
+	if v.InstanceId != nil {
+		s.WriteString(schemas.BatchDeleteCategoryInput_instanceId, *v.InstanceId)
+	}
+}
+
 type BatchDeleteCategoryOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -49,13 +64,26 @@ type BatchDeleteCategoryOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchDeleteCategoryOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchDeleteCategoryOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *BatchDeleteCategoryOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationBatchDeleteCategoryMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpBatchDeleteCategory{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchDeleteCategory, schemas.BatchDeleteCategoryInput, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpBatchDeleteCategory{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchDeleteCategory, schemas.BatchDeleteCategoryInput, nil), output: &BatchDeleteCategoryOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

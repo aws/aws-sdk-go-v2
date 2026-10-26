@@ -5,7 +5,9 @@ package route53globalresolver
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/route53globalresolver/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/route53globalresolver/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -45,6 +47,21 @@ type ListSharedDNSViewsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListSharedDNSViewsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListSharedDNSViewsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListSharedDNSViewsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListSharedDNSViewsInput_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListSharedDNSViewsInput_nextToken, *v.NextToken)
+	}
+}
+
 type ListSharedDNSViewsOutput struct {
 
 	// An array of information about the DNS views shared with your Amazon Web
@@ -65,13 +82,35 @@ type ListSharedDNSViewsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListSharedDNSViewsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListSharedDNSViewsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListSharedDNSViewsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeSharedDNSViews(s, schemas.ListSharedDNSViewsOutput_dnsViews, v.DnsViews)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListSharedDNSViewsOutput_nextToken, *v.NextToken)
+	}
+}
+func (v *ListSharedDNSViewsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListSharedDNSViewsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListSharedDNSViewsOutput_dnsViews:
+			return deserializeSharedDNSViews(d, schemas.ListSharedDNSViewsOutput_dnsViews, &v.DnsViews)
+		case schemas.ListSharedDNSViewsOutput_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListSharedDNSViewsOutput_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListSharedDNSViewsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListSharedDNSViews{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListSharedDNSViews, schemas.ListSharedDNSViewsInput, schemas.ListSharedDNSViewsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListSharedDNSViews{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListSharedDNSViews, schemas.ListSharedDNSViewsInput, schemas.ListSharedDNSViewsOutput), output: &ListSharedDNSViewsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

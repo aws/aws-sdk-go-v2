@@ -5,7 +5,9 @@ package omics
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/omics/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/omics/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -54,6 +56,30 @@ type ListWorkflowVersionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListWorkflowVersionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListWorkflowVersionsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListWorkflowVersionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListWorkflowVersionsRequest_maxResults, *v.MaxResults)
+	}
+	if v.StartingToken != nil {
+		s.WriteString(schemas.ListWorkflowVersionsRequest_startingToken, *v.StartingToken)
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.ListWorkflowVersionsRequest_type, string(v.Type))
+	}
+	if v.WorkflowId != nil {
+		s.WriteString(schemas.ListWorkflowVersionsRequest_workflowId, *v.WorkflowId)
+	}
+	if v.WorkflowOwnerId != nil {
+		s.WriteString(schemas.ListWorkflowVersionsRequest_workflowOwnerId, *v.WorkflowOwnerId)
+	}
+}
+
 type ListWorkflowVersionsOutput struct {
 
 	// A list of workflow version items.
@@ -68,13 +94,35 @@ type ListWorkflowVersionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListWorkflowVersionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListWorkflowVersionsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListWorkflowVersionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeWorkflowVersionList(s, schemas.ListWorkflowVersionsResponse_items, v.Items)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListWorkflowVersionsResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListWorkflowVersionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListWorkflowVersionsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListWorkflowVersionsResponse_items:
+			return deserializeWorkflowVersionList(d, schemas.ListWorkflowVersionsResponse_items, &v.Items)
+		case schemas.ListWorkflowVersionsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListWorkflowVersionsResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListWorkflowVersionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListWorkflowVersions{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListWorkflowVersions, schemas.ListWorkflowVersionsRequest, schemas.ListWorkflowVersionsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListWorkflowVersions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListWorkflowVersions, schemas.ListWorkflowVersionsRequest, schemas.ListWorkflowVersionsResponse), output: &ListWorkflowVersionsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

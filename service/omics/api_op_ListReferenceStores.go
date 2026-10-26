@@ -5,7 +5,9 @@ package omics
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/omics/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/omics/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -46,6 +48,26 @@ type ListReferenceStoresInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListReferenceStoresInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListReferenceStoresRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListReferenceStoresInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Filter != nil {
+		s.WriteStruct(schemas.ListReferenceStoresRequest_filter)
+		v.Filter.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListReferenceStoresRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListReferenceStoresRequest_nextToken, *v.NextToken)
+	}
+}
+
 type ListReferenceStoresOutput struct {
 
 	// A list of reference stores.
@@ -62,13 +84,35 @@ type ListReferenceStoresOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListReferenceStoresOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListReferenceStoresResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListReferenceStoresOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListReferenceStoresResponse_nextToken, *v.NextToken)
+	}
+	serializeReferenceStoreDetailList(s, schemas.ListReferenceStoresResponse_referenceStores, v.ReferenceStores)
+}
+func (v *ListReferenceStoresOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListReferenceStoresResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListReferenceStoresResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListReferenceStoresResponse_nextToken, v.NextToken)
+		case schemas.ListReferenceStoresResponse_referenceStores:
+			return deserializeReferenceStoreDetailList(d, schemas.ListReferenceStoresResponse_referenceStores, &v.ReferenceStores)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListReferenceStoresMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListReferenceStores{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListReferenceStores, schemas.ListReferenceStoresRequest, schemas.ListReferenceStoresResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListReferenceStores{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListReferenceStores, schemas.ListReferenceStoresRequest, schemas.ListReferenceStoresResponse), output: &ListReferenceStoresOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

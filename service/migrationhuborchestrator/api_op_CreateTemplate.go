@@ -5,7 +5,9 @@ package migrationhuborchestrator
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/migrationhuborchestrator/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/migrationhuborchestrator/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -52,6 +54,26 @@ type CreateTemplateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateTemplateInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateTemplateRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateTemplateInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateTemplateRequest_clientToken, *v.ClientToken)
+	}
+	serializeTagMap(s, schemas.CreateTemplateRequest_tags, v.Tags)
+	if v.TemplateDescription != nil {
+		s.WriteString(schemas.CreateTemplateRequest_templateDescription, *v.TemplateDescription)
+	}
+	if v.TemplateName != nil {
+		s.WriteString(schemas.CreateTemplateRequest_templateName, *v.TemplateName)
+	}
+	serializeTemplateSource(s, schemas.CreateTemplateRequest_templateSource, v.TemplateSource)
+}
+
 type CreateTemplateOutput struct {
 
 	// The tags added to the migration workflow template.
@@ -74,13 +96,41 @@ type CreateTemplateOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateTemplateOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateTemplateResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateTemplateOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeStringMap(s, schemas.CreateTemplateResponse_tags, v.Tags)
+	if v.TemplateArn != nil {
+		s.WriteString(schemas.CreateTemplateResponse_templateArn, *v.TemplateArn)
+	}
+	if v.TemplateId != nil {
+		s.WriteString(schemas.CreateTemplateResponse_templateId, *v.TemplateId)
+	}
+}
+func (v *CreateTemplateOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateTemplateResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateTemplateResponse_tags:
+			return deserializeStringMap(d, schemas.CreateTemplateResponse_tags, &v.Tags)
+		case schemas.CreateTemplateResponse_templateArn:
+			v.TemplateArn = new(string)
+			return d.ReadString(schemas.CreateTemplateResponse_templateArn, v.TemplateArn)
+		case schemas.CreateTemplateResponse_templateId:
+			v.TemplateId = new(string)
+			return d.ReadString(schemas.CreateTemplateResponse_templateId, v.TemplateId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateTemplate{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateTemplate, schemas.CreateTemplateRequest, schemas.CreateTemplateResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateTemplate{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateTemplate, schemas.CreateTemplateRequest, schemas.CreateTemplateResponse), output: &CreateTemplateOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

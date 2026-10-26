@@ -5,7 +5,9 @@ package pcaconnectorscep
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/pcaconnectorscep/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/pcaconnectorscep/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -60,6 +62,22 @@ type CreateChallengeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateChallengeInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateChallengeRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateChallengeInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateChallengeRequest_ClientToken, *v.ClientToken)
+	}
+	if v.ConnectorArn != nil {
+		s.WriteString(schemas.CreateChallengeRequest_ConnectorArn, *v.ConnectorArn)
+	}
+	serializeTags(s, schemas.CreateChallengeRequest_Tags, v.Tags)
+}
+
 type CreateChallengeOutput struct {
 
 	// Returns the challenge details for the specified connector.
@@ -71,13 +89,34 @@ type CreateChallengeOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateChallengeOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateChallengeResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateChallengeOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Challenge != nil {
+		s.WriteStruct(schemas.CreateChallengeResponse_Challenge)
+		v.Challenge.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateChallengeOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateChallengeResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateChallengeResponse_Challenge:
+			v.Challenge = &types.Challenge{}
+			return v.Challenge.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateChallengeMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateChallenge{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateChallenge, schemas.CreateChallengeRequest, schemas.CreateChallengeResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateChallenge{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateChallenge, schemas.CreateChallengeRequest, schemas.CreateChallengeResponse), output: &CreateChallengeOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

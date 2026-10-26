@@ -5,7 +5,9 @@ package managedblockchainquery
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/managedblockchainquery/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/managedblockchainquery/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -77,6 +79,49 @@ type ListFilteredTransactionEventsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListFilteredTransactionEventsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListFilteredTransactionEventsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListFilteredTransactionEventsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AddressIdentifierFilter != nil {
+		s.WriteStruct(schemas.ListFilteredTransactionEventsInput_addressIdentifierFilter)
+		v.AddressIdentifierFilter.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ConfirmationStatusFilter != nil {
+		s.WriteStruct(schemas.ListFilteredTransactionEventsInput_confirmationStatusFilter)
+		v.ConfirmationStatusFilter.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListFilteredTransactionEventsInput_maxResults, *v.MaxResults)
+	}
+	if v.Network != nil {
+		s.WriteString(schemas.ListFilteredTransactionEventsInput_network, *v.Network)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListFilteredTransactionEventsInput_nextToken, *v.NextToken)
+	}
+	if v.Sort != nil {
+		s.WriteStruct(schemas.ListFilteredTransactionEventsInput_sort)
+		v.Sort.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TimeFilter != nil {
+		s.WriteStruct(schemas.ListFilteredTransactionEventsInput_timeFilter)
+		v.TimeFilter.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.VoutFilter != nil {
+		s.WriteStruct(schemas.ListFilteredTransactionEventsInput_voutFilter)
+		v.VoutFilter.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type ListFilteredTransactionEventsOutput struct {
 
 	// The transaction events returned by the request.
@@ -93,13 +138,35 @@ type ListFilteredTransactionEventsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListFilteredTransactionEventsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListFilteredTransactionEventsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListFilteredTransactionEventsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeTransactionEventList(s, schemas.ListFilteredTransactionEventsOutput_events, v.Events)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListFilteredTransactionEventsOutput_nextToken, *v.NextToken)
+	}
+}
+func (v *ListFilteredTransactionEventsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListFilteredTransactionEventsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListFilteredTransactionEventsOutput_events:
+			return deserializeTransactionEventList(d, schemas.ListFilteredTransactionEventsOutput_events, &v.Events)
+		case schemas.ListFilteredTransactionEventsOutput_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListFilteredTransactionEventsOutput_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListFilteredTransactionEventsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListFilteredTransactionEvents{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListFilteredTransactionEvents, schemas.ListFilteredTransactionEventsInput, schemas.ListFilteredTransactionEventsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListFilteredTransactionEvents{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListFilteredTransactionEvents, schemas.ListFilteredTransactionEventsInput, schemas.ListFilteredTransactionEventsOutput), output: &ListFilteredTransactionEventsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

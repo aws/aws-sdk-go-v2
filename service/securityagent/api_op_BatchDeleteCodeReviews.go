@@ -4,7 +4,9 @@ package securityagent
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/securityagent/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/securityagent/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -41,6 +43,19 @@ type BatchDeleteCodeReviewsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchDeleteCodeReviewsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchDeleteCodeReviewsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchDeleteCodeReviewsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AgentSpaceId != nil {
+		s.WriteString(schemas.BatchDeleteCodeReviewsInput_agentSpaceId, *v.AgentSpaceId)
+	}
+	serializeCodeReviewIdList(s, schemas.BatchDeleteCodeReviewsInput_codeReviewIds, v.CodeReviewIds)
+}
+
 // Output for the BatchDeleteCodeReviews operation.
 type BatchDeleteCodeReviewsOutput struct {
 
@@ -57,13 +72,32 @@ type BatchDeleteCodeReviewsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchDeleteCodeReviewsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchDeleteCodeReviewsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchDeleteCodeReviewsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeCodeReviewIdList(s, schemas.BatchDeleteCodeReviewsOutput_deleted, v.Deleted)
+	serializeDeleteCodeReviewFailureList(s, schemas.BatchDeleteCodeReviewsOutput_failed, v.Failed)
+}
+func (v *BatchDeleteCodeReviewsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchDeleteCodeReviewsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchDeleteCodeReviewsOutput_deleted:
+			return deserializeCodeReviewIdList(d, schemas.BatchDeleteCodeReviewsOutput_deleted, &v.Deleted)
+		case schemas.BatchDeleteCodeReviewsOutput_failed:
+			return deserializeDeleteCodeReviewFailureList(d, schemas.BatchDeleteCodeReviewsOutput_failed, &v.Failed)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationBatchDeleteCodeReviewsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpBatchDeleteCodeReviews{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchDeleteCodeReviews, schemas.BatchDeleteCodeReviewsInput, schemas.BatchDeleteCodeReviewsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpBatchDeleteCodeReviews{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchDeleteCodeReviews, schemas.BatchDeleteCodeReviewsInput, schemas.BatchDeleteCodeReviewsOutput), output: &BatchDeleteCodeReviewsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

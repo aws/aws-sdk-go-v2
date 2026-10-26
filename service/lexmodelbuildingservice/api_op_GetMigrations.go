@@ -5,7 +5,9 @@ package lexmodelbuildingservice
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/lexmodelbuildingservice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lexmodelbuildingservice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -55,6 +57,33 @@ type GetMigrationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetMigrationsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetMigrationsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetMigrationsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.GetMigrationsRequest_maxResults, *v.MaxResults)
+	}
+	if v.MigrationStatusEquals != "" {
+		s.WriteString(schemas.GetMigrationsRequest_migrationStatusEquals, string(v.MigrationStatusEquals))
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetMigrationsRequest_nextToken, *v.NextToken)
+	}
+	if v.SortByAttribute != "" {
+		s.WriteString(schemas.GetMigrationsRequest_sortByAttribute, string(v.SortByAttribute))
+	}
+	if v.SortByOrder != "" {
+		s.WriteString(schemas.GetMigrationsRequest_sortByOrder, string(v.SortByOrder))
+	}
+	if v.V1BotNameContains != nil {
+		s.WriteString(schemas.GetMigrationsRequest_v1BotNameContains, *v.V1BotNameContains)
+	}
+}
+
 type GetMigrationsOutput struct {
 
 	// An array of summaries for migrations from Amazon Lex V1 to Amazon Lex V2. To
@@ -72,13 +101,35 @@ type GetMigrationsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetMigrationsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetMigrationsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetMigrationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeMigrationSummaryList(s, schemas.GetMigrationsResponse_migrationSummaries, v.MigrationSummaries)
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetMigrationsResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *GetMigrationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetMigrationsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetMigrationsResponse_migrationSummaries:
+			return deserializeMigrationSummaryList(d, schemas.GetMigrationsResponse_migrationSummaries, &v.MigrationSummaries)
+		case schemas.GetMigrationsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.GetMigrationsResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetMigrationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetMigrations{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetMigrations, schemas.GetMigrationsRequest, schemas.GetMigrationsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetMigrations{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetMigrations, schemas.GetMigrationsRequest, schemas.GetMigrationsResponse), output: &GetMigrationsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

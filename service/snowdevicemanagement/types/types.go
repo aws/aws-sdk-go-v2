@@ -3,6 +3,8 @@
 package types
 
 import (
+	"github.com/aws/aws-sdk-go-v2/service/snowdevicemanagement/schemas"
+	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
@@ -28,6 +30,52 @@ type Capacity struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Capacity) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Capacity)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Capacity) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Available != nil {
+		s.WriteInt64(schemas.Capacity_available, *v.Available)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.Capacity_name, *v.Name)
+	}
+	if v.Total != nil {
+		s.WriteInt64(schemas.Capacity_total, *v.Total)
+	}
+	if v.Unit != nil {
+		s.WriteString(schemas.Capacity_unit, *v.Unit)
+	}
+	if v.Used != nil {
+		s.WriteInt64(schemas.Capacity_used, *v.Used)
+	}
+}
+func (v *Capacity) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Capacity, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Capacity_available:
+			v.Available = new(int64)
+			return d.ReadInt64(schemas.Capacity_available, v.Available)
+		case schemas.Capacity_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.Capacity_name, v.Name)
+		case schemas.Capacity_total:
+			v.Total = new(int64)
+			return d.ReadInt64(schemas.Capacity_total, v.Total)
+		case schemas.Capacity_unit:
+			v.Unit = new(string)
+			return d.ReadString(schemas.Capacity_unit, v.Unit)
+		case schemas.Capacity_used:
+			v.Used = new(int64)
+			return d.ReadInt64(schemas.Capacity_used, v.Used)
+		}
+		return nil
+	})
+}
+
 // The command given to the device to execute.
 //
 // The following types satisfy this interface:
@@ -46,6 +94,14 @@ type CommandMemberReboot struct {
 }
 
 func (*CommandMemberReboot) isCommand() {}
+func (v *CommandMemberReboot) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Command_reboot)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *CommandMemberReboot) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // Unlocks the device.
 type CommandMemberUnlock struct {
@@ -55,6 +111,14 @@ type CommandMemberUnlock struct {
 }
 
 func (*CommandMemberUnlock) isCommand() {}
+func (v *CommandMemberUnlock) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Command_unlock)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *CommandMemberUnlock) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // The options for how a device's CPU is configured.
 type CpuOptions struct {
@@ -66,6 +130,34 @@ type CpuOptions struct {
 	ThreadsPerCore *int32
 
 	noSmithyDocumentSerde
+}
+
+func (v *CpuOptions) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CpuOptions)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CpuOptions) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CoreCount != nil {
+		s.WriteInt32(schemas.CpuOptions_coreCount, *v.CoreCount)
+	}
+	if v.ThreadsPerCore != nil {
+		s.WriteInt32(schemas.CpuOptions_threadsPerCore, *v.ThreadsPerCore)
+	}
+}
+func (v *CpuOptions) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CpuOptions, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CpuOptions_coreCount:
+			v.CoreCount = new(int32)
+			return d.ReadInt32(schemas.CpuOptions_coreCount, v.CoreCount)
+		case schemas.CpuOptions_threadsPerCore:
+			v.ThreadsPerCore = new(int32)
+			return d.ReadInt32(schemas.CpuOptions_threadsPerCore, v.ThreadsPerCore)
+		}
+		return nil
+	})
 }
 
 // Identifying information about the device.
@@ -87,6 +179,43 @@ type DeviceSummary struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeviceSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeviceSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeviceSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AssociatedWithJob != nil {
+		s.WriteString(schemas.DeviceSummary_associatedWithJob, *v.AssociatedWithJob)
+	}
+	if v.ManagedDeviceArn != nil {
+		s.WriteString(schemas.DeviceSummary_managedDeviceArn, *v.ManagedDeviceArn)
+	}
+	if v.ManagedDeviceId != nil {
+		s.WriteString(schemas.DeviceSummary_managedDeviceId, *v.ManagedDeviceId)
+	}
+	serializeTagMap(s, schemas.DeviceSummary_tags, v.Tags)
+}
+func (v *DeviceSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeviceSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeviceSummary_associatedWithJob:
+			v.AssociatedWithJob = new(string)
+			return d.ReadString(schemas.DeviceSummary_associatedWithJob, v.AssociatedWithJob)
+		case schemas.DeviceSummary_managedDeviceArn:
+			v.ManagedDeviceArn = new(string)
+			return d.ReadString(schemas.DeviceSummary_managedDeviceArn, v.ManagedDeviceArn)
+		case schemas.DeviceSummary_managedDeviceId:
+			v.ManagedDeviceId = new(string)
+			return d.ReadString(schemas.DeviceSummary_managedDeviceId, v.ManagedDeviceId)
+		case schemas.DeviceSummary_tags:
+			return deserializeTagMap(d, schemas.DeviceSummary_tags, &v.Tags)
+		}
+		return nil
+	})
+}
+
 // Describes a parameter used to set up an Amazon Elastic Block Store (Amazon EBS)
 // volume in a block device mapping.
 type EbsInstanceBlockDevice struct {
@@ -106,6 +235,50 @@ type EbsInstanceBlockDevice struct {
 	noSmithyDocumentSerde
 }
 
+func (v *EbsInstanceBlockDevice) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EbsInstanceBlockDevice)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EbsInstanceBlockDevice) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AttachTime != nil {
+		s.WriteTime(schemas.EbsInstanceBlockDevice_attachTime, *v.AttachTime)
+	}
+	if v.DeleteOnTermination != nil {
+		s.WriteBool(schemas.EbsInstanceBlockDevice_deleteOnTermination, *v.DeleteOnTermination)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.EbsInstanceBlockDevice_status, string(v.Status))
+	}
+	if v.VolumeId != nil {
+		s.WriteString(schemas.EbsInstanceBlockDevice_volumeId, *v.VolumeId)
+	}
+}
+func (v *EbsInstanceBlockDevice) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EbsInstanceBlockDevice, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EbsInstanceBlockDevice_attachTime:
+			v.AttachTime = new(time.Time)
+			return d.ReadTime(schemas.EbsInstanceBlockDevice_attachTime, v.AttachTime)
+		case schemas.EbsInstanceBlockDevice_deleteOnTermination:
+			v.DeleteOnTermination = new(bool)
+			return d.ReadBool(schemas.EbsInstanceBlockDevice_deleteOnTermination, v.DeleteOnTermination)
+		case schemas.EbsInstanceBlockDevice_status:
+			var ev string
+			if err := d.ReadString(schemas.EbsInstanceBlockDevice_status, &ev); err != nil {
+				return err
+			}
+			v.Status = AttachmentStatus(ev)
+			return nil
+		case schemas.EbsInstanceBlockDevice_volumeId:
+			v.VolumeId = new(string)
+			return d.ReadString(schemas.EbsInstanceBlockDevice_volumeId, v.VolumeId)
+		}
+		return nil
+	})
+}
+
 // The summary of a task execution on a specified device.
 type ExecutionSummary struct {
 
@@ -122,6 +295,50 @@ type ExecutionSummary struct {
 	TaskId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ExecutionSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ExecutionSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ExecutionSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ExecutionId != nil {
+		s.WriteString(schemas.ExecutionSummary_executionId, *v.ExecutionId)
+	}
+	if v.ManagedDeviceId != nil {
+		s.WriteString(schemas.ExecutionSummary_managedDeviceId, *v.ManagedDeviceId)
+	}
+	if v.State != "" {
+		s.WriteString(schemas.ExecutionSummary_state, string(v.State))
+	}
+	if v.TaskId != nil {
+		s.WriteString(schemas.ExecutionSummary_taskId, *v.TaskId)
+	}
+}
+func (v *ExecutionSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ExecutionSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ExecutionSummary_executionId:
+			v.ExecutionId = new(string)
+			return d.ReadString(schemas.ExecutionSummary_executionId, v.ExecutionId)
+		case schemas.ExecutionSummary_managedDeviceId:
+			v.ManagedDeviceId = new(string)
+			return d.ReadString(schemas.ExecutionSummary_managedDeviceId, v.ManagedDeviceId)
+		case schemas.ExecutionSummary_state:
+			var ev string
+			if err := d.ReadString(schemas.ExecutionSummary_state, &ev); err != nil {
+				return err
+			}
+			v.State = ExecutionState(ev)
+			return nil
+		case schemas.ExecutionSummary_taskId:
+			v.TaskId = new(string)
+			return d.ReadString(schemas.ExecutionSummary_taskId, v.TaskId)
+		}
+		return nil
+	})
 }
 
 // The description of an instance. Currently, Amazon EC2 instances are the only
@@ -171,6 +388,98 @@ type Instance struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Instance) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Instance)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Instance) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AmiLaunchIndex != nil {
+		s.WriteInt32(schemas.Instance_amiLaunchIndex, *v.AmiLaunchIndex)
+	}
+	serializeInstanceBlockDeviceMappingList(s, schemas.Instance_blockDeviceMappings, v.BlockDeviceMappings)
+	if v.CpuOptions != nil {
+		s.WriteStruct(schemas.Instance_cpuOptions)
+		v.CpuOptions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.Instance_createdAt, *v.CreatedAt)
+	}
+	if v.ImageId != nil {
+		s.WriteString(schemas.Instance_imageId, *v.ImageId)
+	}
+	if v.InstanceId != nil {
+		s.WriteString(schemas.Instance_instanceId, *v.InstanceId)
+	}
+	if v.InstanceType != nil {
+		s.WriteString(schemas.Instance_instanceType, *v.InstanceType)
+	}
+	if v.PrivateIpAddress != nil {
+		s.WriteString(schemas.Instance_privateIpAddress, *v.PrivateIpAddress)
+	}
+	if v.PublicIpAddress != nil {
+		s.WriteString(schemas.Instance_publicIpAddress, *v.PublicIpAddress)
+	}
+	if v.RootDeviceName != nil {
+		s.WriteString(schemas.Instance_rootDeviceName, *v.RootDeviceName)
+	}
+	serializeSecurityGroupIdentifierList(s, schemas.Instance_securityGroups, v.SecurityGroups)
+	if v.State != nil {
+		s.WriteStruct(schemas.Instance_state)
+		v.State.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.UpdatedAt != nil {
+		s.WriteTime(schemas.Instance_updatedAt, *v.UpdatedAt)
+	}
+}
+func (v *Instance) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Instance, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Instance_amiLaunchIndex:
+			v.AmiLaunchIndex = new(int32)
+			return d.ReadInt32(schemas.Instance_amiLaunchIndex, v.AmiLaunchIndex)
+		case schemas.Instance_blockDeviceMappings:
+			return deserializeInstanceBlockDeviceMappingList(d, schemas.Instance_blockDeviceMappings, &v.BlockDeviceMappings)
+		case schemas.Instance_cpuOptions:
+			v.CpuOptions = &CpuOptions{}
+			return v.CpuOptions.Deserialize(d)
+		case schemas.Instance_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.Instance_createdAt, v.CreatedAt)
+		case schemas.Instance_imageId:
+			v.ImageId = new(string)
+			return d.ReadString(schemas.Instance_imageId, v.ImageId)
+		case schemas.Instance_instanceId:
+			v.InstanceId = new(string)
+			return d.ReadString(schemas.Instance_instanceId, v.InstanceId)
+		case schemas.Instance_instanceType:
+			v.InstanceType = new(string)
+			return d.ReadString(schemas.Instance_instanceType, v.InstanceType)
+		case schemas.Instance_privateIpAddress:
+			v.PrivateIpAddress = new(string)
+			return d.ReadString(schemas.Instance_privateIpAddress, v.PrivateIpAddress)
+		case schemas.Instance_publicIpAddress:
+			v.PublicIpAddress = new(string)
+			return d.ReadString(schemas.Instance_publicIpAddress, v.PublicIpAddress)
+		case schemas.Instance_rootDeviceName:
+			v.RootDeviceName = new(string)
+			return d.ReadString(schemas.Instance_rootDeviceName, v.RootDeviceName)
+		case schemas.Instance_securityGroups:
+			return deserializeSecurityGroupIdentifierList(d, schemas.Instance_securityGroups, &v.SecurityGroups)
+		case schemas.Instance_state:
+			v.State = &InstanceState{}
+			return v.State.Deserialize(d)
+		case schemas.Instance_updatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.Instance_updatedAt, v.UpdatedAt)
+		}
+		return nil
+	})
+}
+
 // The description of a block device mapping.
 type InstanceBlockDeviceMapping struct {
 
@@ -182,6 +491,36 @@ type InstanceBlockDeviceMapping struct {
 	Ebs *EbsInstanceBlockDevice
 
 	noSmithyDocumentSerde
+}
+
+func (v *InstanceBlockDeviceMapping) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InstanceBlockDeviceMapping)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InstanceBlockDeviceMapping) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DeviceName != nil {
+		s.WriteString(schemas.InstanceBlockDeviceMapping_deviceName, *v.DeviceName)
+	}
+	if v.Ebs != nil {
+		s.WriteStruct(schemas.InstanceBlockDeviceMapping_ebs)
+		v.Ebs.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *InstanceBlockDeviceMapping) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InstanceBlockDeviceMapping, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InstanceBlockDeviceMapping_deviceName:
+			v.DeviceName = new(string)
+			return d.ReadString(schemas.InstanceBlockDeviceMapping_deviceName, v.DeviceName)
+		case schemas.InstanceBlockDeviceMapping_ebs:
+			v.Ebs = &EbsInstanceBlockDevice{}
+			return v.Ebs.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // The description of the current state of an instance.
@@ -221,6 +560,38 @@ type InstanceState struct {
 	noSmithyDocumentSerde
 }
 
+func (v *InstanceState) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InstanceState)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InstanceState) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Code != nil {
+		s.WriteInt32(schemas.InstanceState_code, *v.Code)
+	}
+	if v.Name != "" {
+		s.WriteString(schemas.InstanceState_name, string(v.Name))
+	}
+}
+func (v *InstanceState) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InstanceState, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InstanceState_code:
+			v.Code = new(int32)
+			return d.ReadInt32(schemas.InstanceState_code, v.Code)
+		case schemas.InstanceState_name:
+			var ev string
+			if err := d.ReadString(schemas.InstanceState_name, &ev); err != nil {
+				return err
+			}
+			v.Name = InstanceStateName(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // The details about the instance.
 type InstanceSummary struct {
 
@@ -231,6 +602,36 @@ type InstanceSummary struct {
 	LastUpdatedAt *time.Time
 
 	noSmithyDocumentSerde
+}
+
+func (v *InstanceSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InstanceSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InstanceSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Instance != nil {
+		s.WriteStruct(schemas.InstanceSummary_instance)
+		v.Instance.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.LastUpdatedAt != nil {
+		s.WriteTime(schemas.InstanceSummary_lastUpdatedAt, *v.LastUpdatedAt)
+	}
+}
+func (v *InstanceSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InstanceSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InstanceSummary_instance:
+			v.Instance = &Instance{}
+			return v.Instance.Deserialize(d)
+		case schemas.InstanceSummary_lastUpdatedAt:
+			v.LastUpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.InstanceSummary_lastUpdatedAt, v.LastUpdatedAt)
+		}
+		return nil
+	})
 }
 
 // The details about the physical network interface for the device.
@@ -260,9 +661,91 @@ type PhysicalNetworkInterface struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PhysicalNetworkInterface) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PhysicalNetworkInterface)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PhysicalNetworkInterface) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DefaultGateway != nil {
+		s.WriteString(schemas.PhysicalNetworkInterface_defaultGateway, *v.DefaultGateway)
+	}
+	if v.IpAddress != nil {
+		s.WriteString(schemas.PhysicalNetworkInterface_ipAddress, *v.IpAddress)
+	}
+	if v.IpAddressAssignment != "" {
+		s.WriteString(schemas.PhysicalNetworkInterface_ipAddressAssignment, string(v.IpAddressAssignment))
+	}
+	if v.MacAddress != nil {
+		s.WriteString(schemas.PhysicalNetworkInterface_macAddress, *v.MacAddress)
+	}
+	if v.Netmask != nil {
+		s.WriteString(schemas.PhysicalNetworkInterface_netmask, *v.Netmask)
+	}
+	if v.PhysicalConnectorType != "" {
+		s.WriteString(schemas.PhysicalNetworkInterface_physicalConnectorType, string(v.PhysicalConnectorType))
+	}
+	if v.PhysicalNetworkInterfaceId != nil {
+		s.WriteString(schemas.PhysicalNetworkInterface_physicalNetworkInterfaceId, *v.PhysicalNetworkInterfaceId)
+	}
+}
+func (v *PhysicalNetworkInterface) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PhysicalNetworkInterface, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PhysicalNetworkInterface_defaultGateway:
+			v.DefaultGateway = new(string)
+			return d.ReadString(schemas.PhysicalNetworkInterface_defaultGateway, v.DefaultGateway)
+		case schemas.PhysicalNetworkInterface_ipAddress:
+			v.IpAddress = new(string)
+			return d.ReadString(schemas.PhysicalNetworkInterface_ipAddress, v.IpAddress)
+		case schemas.PhysicalNetworkInterface_ipAddressAssignment:
+			var ev string
+			if err := d.ReadString(schemas.PhysicalNetworkInterface_ipAddressAssignment, &ev); err != nil {
+				return err
+			}
+			v.IpAddressAssignment = IpAddressAssignment(ev)
+			return nil
+		case schemas.PhysicalNetworkInterface_macAddress:
+			v.MacAddress = new(string)
+			return d.ReadString(schemas.PhysicalNetworkInterface_macAddress, v.MacAddress)
+		case schemas.PhysicalNetworkInterface_netmask:
+			v.Netmask = new(string)
+			return d.ReadString(schemas.PhysicalNetworkInterface_netmask, v.Netmask)
+		case schemas.PhysicalNetworkInterface_physicalConnectorType:
+			var ev string
+			if err := d.ReadString(schemas.PhysicalNetworkInterface_physicalConnectorType, &ev); err != nil {
+				return err
+			}
+			v.PhysicalConnectorType = PhysicalConnectorType(ev)
+			return nil
+		case schemas.PhysicalNetworkInterface_physicalNetworkInterfaceId:
+			v.PhysicalNetworkInterfaceId = new(string)
+			return d.ReadString(schemas.PhysicalNetworkInterface_physicalNetworkInterfaceId, v.PhysicalNetworkInterfaceId)
+		}
+		return nil
+	})
+}
+
 // A structure used to reboot the device.
 type Reboot struct {
 	noSmithyDocumentSerde
+}
+
+func (v *Reboot) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Reboot)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Reboot) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *Reboot) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Reboot, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
 }
 
 // A summary of a resource available on the device.
@@ -282,6 +765,40 @@ type ResourceSummary struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ResourceSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ResourceSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ResourceSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.ResourceSummary_arn, *v.Arn)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.ResourceSummary_id, *v.Id)
+	}
+	if v.ResourceType != nil {
+		s.WriteString(schemas.ResourceSummary_resourceType, *v.ResourceType)
+	}
+}
+func (v *ResourceSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ResourceSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ResourceSummary_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.ResourceSummary_arn, v.Arn)
+		case schemas.ResourceSummary_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.ResourceSummary_id, v.Id)
+		case schemas.ResourceSummary_resourceType:
+			v.ResourceType = new(string)
+			return d.ReadString(schemas.ResourceSummary_resourceType, v.ResourceType)
+		}
+		return nil
+	})
+}
+
 // Information about the device's security group.
 type SecurityGroupIdentifier struct {
 
@@ -292,6 +809,34 @@ type SecurityGroupIdentifier struct {
 	GroupName *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *SecurityGroupIdentifier) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SecurityGroupIdentifier)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SecurityGroupIdentifier) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GroupId != nil {
+		s.WriteString(schemas.SecurityGroupIdentifier_groupId, *v.GroupId)
+	}
+	if v.GroupName != nil {
+		s.WriteString(schemas.SecurityGroupIdentifier_groupName, *v.GroupName)
+	}
+}
+func (v *SecurityGroupIdentifier) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SecurityGroupIdentifier, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SecurityGroupIdentifier_groupId:
+			v.GroupId = new(string)
+			return d.ReadString(schemas.SecurityGroupIdentifier_groupId, v.GroupId)
+		case schemas.SecurityGroupIdentifier_groupName:
+			v.GroupName = new(string)
+			return d.ReadString(schemas.SecurityGroupIdentifier_groupName, v.GroupName)
+		}
+		return nil
+	})
 }
 
 // Information about the software on the device.
@@ -308,6 +853,40 @@ type SoftwareInformation struct {
 	InstallingVersion *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *SoftwareInformation) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SoftwareInformation)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SoftwareInformation) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InstallState != nil {
+		s.WriteString(schemas.SoftwareInformation_installState, *v.InstallState)
+	}
+	if v.InstalledVersion != nil {
+		s.WriteString(schemas.SoftwareInformation_installedVersion, *v.InstalledVersion)
+	}
+	if v.InstallingVersion != nil {
+		s.WriteString(schemas.SoftwareInformation_installingVersion, *v.InstallingVersion)
+	}
+}
+func (v *SoftwareInformation) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SoftwareInformation, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SoftwareInformation_installState:
+			v.InstallState = new(string)
+			return d.ReadString(schemas.SoftwareInformation_installState, v.InstallState)
+		case schemas.SoftwareInformation_installedVersion:
+			v.InstalledVersion = new(string)
+			return d.ReadString(schemas.SoftwareInformation_installedVersion, v.InstalledVersion)
+		case schemas.SoftwareInformation_installingVersion:
+			v.InstallingVersion = new(string)
+			return d.ReadString(schemas.SoftwareInformation_installingVersion, v.InstallingVersion)
+		}
+		return nil
+	})
 }
 
 // Information about the task assigned to one or many devices.
@@ -331,9 +910,66 @@ type TaskSummary struct {
 	noSmithyDocumentSerde
 }
 
+func (v *TaskSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TaskSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TaskSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.State != "" {
+		s.WriteString(schemas.TaskSummary_state, string(v.State))
+	}
+	serializeTagMap(s, schemas.TaskSummary_tags, v.Tags)
+	if v.TaskArn != nil {
+		s.WriteString(schemas.TaskSummary_taskArn, *v.TaskArn)
+	}
+	if v.TaskId != nil {
+		s.WriteString(schemas.TaskSummary_taskId, *v.TaskId)
+	}
+}
+func (v *TaskSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TaskSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TaskSummary_state:
+			var ev string
+			if err := d.ReadString(schemas.TaskSummary_state, &ev); err != nil {
+				return err
+			}
+			v.State = TaskState(ev)
+			return nil
+		case schemas.TaskSummary_tags:
+			return deserializeTagMap(d, schemas.TaskSummary_tags, &v.Tags)
+		case schemas.TaskSummary_taskArn:
+			v.TaskArn = new(string)
+			return d.ReadString(schemas.TaskSummary_taskArn, v.TaskArn)
+		case schemas.TaskSummary_taskId:
+			v.TaskId = new(string)
+			return d.ReadString(schemas.TaskSummary_taskId, v.TaskId)
+		}
+		return nil
+	})
+}
+
 // A structure used to unlock a device.
 type Unlock struct {
 	noSmithyDocumentSerde
+}
+
+func (v *Unlock) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Unlock)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Unlock) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *Unlock) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Unlock, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde

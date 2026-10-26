@@ -5,7 +5,9 @@ package lexmodelbuildingservice
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/lexmodelbuildingservice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lexmodelbuildingservice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -62,6 +64,30 @@ type GetBotChannelAssociationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetBotChannelAssociationsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetBotChannelAssociationsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetBotChannelAssociationsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BotAlias != nil {
+		s.WriteString(schemas.GetBotChannelAssociationsRequest_botAlias, *v.BotAlias)
+	}
+	if v.BotName != nil {
+		s.WriteString(schemas.GetBotChannelAssociationsRequest_botName, *v.BotName)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.GetBotChannelAssociationsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NameContains != nil {
+		s.WriteString(schemas.GetBotChannelAssociationsRequest_nameContains, *v.NameContains)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetBotChannelAssociationsRequest_nextToken, *v.NextToken)
+	}
+}
+
 type GetBotChannelAssociationsOutput struct {
 
 	// An array of objects, one for each association, that provides information about
@@ -80,13 +106,35 @@ type GetBotChannelAssociationsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetBotChannelAssociationsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetBotChannelAssociationsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetBotChannelAssociationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeBotChannelAssociationList(s, schemas.GetBotChannelAssociationsResponse_botChannelAssociations, v.BotChannelAssociations)
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetBotChannelAssociationsResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *GetBotChannelAssociationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetBotChannelAssociationsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetBotChannelAssociationsResponse_botChannelAssociations:
+			return deserializeBotChannelAssociationList(d, schemas.GetBotChannelAssociationsResponse_botChannelAssociations, &v.BotChannelAssociations)
+		case schemas.GetBotChannelAssociationsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.GetBotChannelAssociationsResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetBotChannelAssociationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetBotChannelAssociations{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetBotChannelAssociations, schemas.GetBotChannelAssociationsRequest, schemas.GetBotChannelAssociationsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetBotChannelAssociations{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetBotChannelAssociations, schemas.GetBotChannelAssociationsRequest, schemas.GetBotChannelAssociationsResponse), output: &GetBotChannelAssociationsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

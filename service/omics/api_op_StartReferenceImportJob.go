@@ -5,7 +5,9 @@ package omics
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/omics/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/omics/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -54,6 +56,25 @@ type StartReferenceImportJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartReferenceImportJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartReferenceImportJobRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartReferenceImportJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.StartReferenceImportJobRequest_clientToken, *v.ClientToken)
+	}
+	if v.ReferenceStoreId != nil {
+		s.WriteString(schemas.StartReferenceImportJobRequest_referenceStoreId, *v.ReferenceStoreId)
+	}
+	if v.RoleArn != nil {
+		s.WriteString(schemas.StartReferenceImportJobRequest_roleArn, *v.RoleArn)
+	}
+	serializeStartReferenceImportJobSourceList(s, schemas.StartReferenceImportJobRequest_sources, v.Sources)
+}
+
 type StartReferenceImportJobOutput struct {
 
 	// When the job was created.
@@ -87,13 +108,60 @@ type StartReferenceImportJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartReferenceImportJobOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartReferenceImportJobResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartReferenceImportJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.StartReferenceImportJobResponse_creationTime, *v.CreationTime)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.StartReferenceImportJobResponse_id, *v.Id)
+	}
+	if v.ReferenceStoreId != nil {
+		s.WriteString(schemas.StartReferenceImportJobResponse_referenceStoreId, *v.ReferenceStoreId)
+	}
+	if v.RoleArn != nil {
+		s.WriteString(schemas.StartReferenceImportJobResponse_roleArn, *v.RoleArn)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.StartReferenceImportJobResponse_status, string(v.Status))
+	}
+}
+func (v *StartReferenceImportJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartReferenceImportJobResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartReferenceImportJobResponse_creationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.StartReferenceImportJobResponse_creationTime, v.CreationTime)
+		case schemas.StartReferenceImportJobResponse_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.StartReferenceImportJobResponse_id, v.Id)
+		case schemas.StartReferenceImportJobResponse_referenceStoreId:
+			v.ReferenceStoreId = new(string)
+			return d.ReadString(schemas.StartReferenceImportJobResponse_referenceStoreId, v.ReferenceStoreId)
+		case schemas.StartReferenceImportJobResponse_roleArn:
+			v.RoleArn = new(string)
+			return d.ReadString(schemas.StartReferenceImportJobResponse_roleArn, v.RoleArn)
+		case schemas.StartReferenceImportJobResponse_status:
+			var ev string
+			if err := d.ReadString(schemas.StartReferenceImportJobResponse_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.ReferenceImportJobStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartReferenceImportJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpStartReferenceImportJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartReferenceImportJob, schemas.StartReferenceImportJobRequest, schemas.StartReferenceImportJobResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStartReferenceImportJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartReferenceImportJob, schemas.StartReferenceImportJobRequest, schemas.StartReferenceImportJobResponse), output: &StartReferenceImportJobOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

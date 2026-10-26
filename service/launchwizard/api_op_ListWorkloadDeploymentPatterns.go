@@ -5,7 +5,9 @@ package launchwizard
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/launchwizard/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/launchwizard/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -46,6 +48,24 @@ type ListWorkloadDeploymentPatternsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListWorkloadDeploymentPatternsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListWorkloadDeploymentPatternsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListWorkloadDeploymentPatternsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListWorkloadDeploymentPatternsInput_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListWorkloadDeploymentPatternsInput_nextToken, *v.NextToken)
+	}
+	if v.WorkloadName != nil {
+		s.WriteString(schemas.ListWorkloadDeploymentPatternsInput_workloadName, *v.WorkloadName)
+	}
+}
+
 type ListWorkloadDeploymentPatternsOutput struct {
 
 	// The token to include in another request to get the next page of items. This
@@ -61,13 +81,35 @@ type ListWorkloadDeploymentPatternsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListWorkloadDeploymentPatternsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListWorkloadDeploymentPatternsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListWorkloadDeploymentPatternsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListWorkloadDeploymentPatternsOutput_nextToken, *v.NextToken)
+	}
+	serializeWorkloadDeploymentPatternDataSummaryList(s, schemas.ListWorkloadDeploymentPatternsOutput_workloadDeploymentPatterns, v.WorkloadDeploymentPatterns)
+}
+func (v *ListWorkloadDeploymentPatternsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListWorkloadDeploymentPatternsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListWorkloadDeploymentPatternsOutput_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListWorkloadDeploymentPatternsOutput_nextToken, v.NextToken)
+		case schemas.ListWorkloadDeploymentPatternsOutput_workloadDeploymentPatterns:
+			return deserializeWorkloadDeploymentPatternDataSummaryList(d, schemas.ListWorkloadDeploymentPatternsOutput_workloadDeploymentPatterns, &v.WorkloadDeploymentPatterns)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListWorkloadDeploymentPatternsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListWorkloadDeploymentPatterns{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListWorkloadDeploymentPatterns, schemas.ListWorkloadDeploymentPatternsInput, schemas.ListWorkloadDeploymentPatternsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListWorkloadDeploymentPatterns{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListWorkloadDeploymentPatterns, schemas.ListWorkloadDeploymentPatternsInput, schemas.ListWorkloadDeploymentPatternsOutput), output: &ListWorkloadDeploymentPatternsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

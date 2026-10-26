@@ -4,7 +4,9 @@ package s3tables
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/s3tables/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/s3tables/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -40,6 +42,18 @@ type GetTableRecordExpirationConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetTableRecordExpirationConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetTableRecordExpirationConfigurationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetTableRecordExpirationConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TableArn != nil {
+		s.WriteString(schemas.GetTableRecordExpirationConfigurationRequest_tableArn, *v.TableArn)
+	}
+}
+
 type GetTableRecordExpirationConfigurationOutput struct {
 
 	// The record expiration configuration for the table, including the status and
@@ -54,13 +68,34 @@ type GetTableRecordExpirationConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetTableRecordExpirationConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetTableRecordExpirationConfigurationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetTableRecordExpirationConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Configuration != nil {
+		s.WriteStruct(schemas.GetTableRecordExpirationConfigurationResponse_configuration)
+		v.Configuration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetTableRecordExpirationConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetTableRecordExpirationConfigurationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetTableRecordExpirationConfigurationResponse_configuration:
+			v.Configuration = &types.TableRecordExpirationConfigurationValue{}
+			return v.Configuration.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetTableRecordExpirationConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetTableRecordExpirationConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetTableRecordExpirationConfiguration, schemas.GetTableRecordExpirationConfigurationRequest, schemas.GetTableRecordExpirationConfigurationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetTableRecordExpirationConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetTableRecordExpirationConfiguration, schemas.GetTableRecordExpirationConfigurationRequest, schemas.GetTableRecordExpirationConfigurationResponse), output: &GetTableRecordExpirationConfigurationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

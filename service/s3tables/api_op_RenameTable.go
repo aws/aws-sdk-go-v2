@@ -4,6 +4,8 @@ package s3tables
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/s3tables/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -58,6 +60,33 @@ type RenameTableInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RenameTableInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RenameTableRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RenameTableInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.RenameTableRequest_name, *v.Name)
+	}
+	if v.Namespace != nil {
+		s.WriteString(schemas.RenameTableRequest_namespace, *v.Namespace)
+	}
+	if v.NewName != nil {
+		s.WriteString(schemas.RenameTableRequest_newName, *v.NewName)
+	}
+	if v.NewNamespaceName != nil {
+		s.WriteString(schemas.RenameTableRequest_newNamespaceName, *v.NewNamespaceName)
+	}
+	if v.TableBucketARN != nil {
+		s.WriteString(schemas.RenameTableRequest_tableBucketARN, *v.TableBucketARN)
+	}
+	if v.VersionToken != nil {
+		s.WriteString(schemas.RenameTableRequest_versionToken, *v.VersionToken)
+	}
+}
+
 type RenameTableOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -65,13 +94,26 @@ type RenameTableOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RenameTableOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RenameTableOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *RenameTableOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationRenameTableMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpRenameTable{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RenameTable, schemas.RenameTableRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpRenameTable{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RenameTable, schemas.RenameTableRequest, nil), output: &RenameTableOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

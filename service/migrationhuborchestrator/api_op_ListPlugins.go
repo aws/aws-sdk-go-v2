@@ -5,7 +5,9 @@ package migrationhuborchestrator
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/migrationhuborchestrator/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/migrationhuborchestrator/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -36,6 +38,33 @@ type ListPluginsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListPluginsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListPluginsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListPluginsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != 0 {
+		s.WriteInt32(schemas.ListPluginsRequest_maxResults, v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListPluginsRequest_nextToken, *v.NextToken)
+	}
+}
+func (v *ListPluginsInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListPluginsRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListPluginsRequest_maxResults:
+			return d.ReadInt32(schemas.ListPluginsRequest_maxResults, &v.MaxResults)
+		case schemas.ListPluginsRequest_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListPluginsRequest_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
+
 type ListPluginsOutput struct {
 
 	// The pagination token.
@@ -50,13 +79,35 @@ type ListPluginsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListPluginsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListPluginsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListPluginsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListPluginsResponse_nextToken, *v.NextToken)
+	}
+	serializePluginSummaries(s, schemas.ListPluginsResponse_plugins, v.Plugins)
+}
+func (v *ListPluginsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListPluginsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListPluginsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListPluginsResponse_nextToken, v.NextToken)
+		case schemas.ListPluginsResponse_plugins:
+			return deserializePluginSummaries(d, schemas.ListPluginsResponse_plugins, &v.Plugins)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListPluginsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListPlugins{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListPlugins, schemas.ListPluginsRequest, schemas.ListPluginsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListPlugins{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListPlugins, schemas.ListPluginsRequest, schemas.ListPluginsResponse), output: &ListPluginsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

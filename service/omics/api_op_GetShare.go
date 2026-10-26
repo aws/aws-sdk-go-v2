@@ -5,7 +5,9 @@ package omics
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/omics/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/omics/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -36,6 +38,18 @@ type GetShareInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetShareInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetShareRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetShareInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ShareId != nil {
+		s.WriteString(schemas.GetShareRequest_shareId, *v.ShareId)
+	}
+}
+
 type GetShareOutput struct {
 
 	// A resource share details object. The object includes the status, the
@@ -48,13 +62,34 @@ type GetShareOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetShareOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetShareResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetShareOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Share != nil {
+		s.WriteStruct(schemas.GetShareResponse_share)
+		v.Share.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetShareOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetShareResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetShareResponse_share:
+			v.Share = &types.ShareDetails{}
+			return v.Share.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetShareMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetShare{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetShare, schemas.GetShareRequest, schemas.GetShareResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetShare{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetShare, schemas.GetShareRequest, schemas.GetShareResponse), output: &GetShareOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

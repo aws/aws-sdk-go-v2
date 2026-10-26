@@ -4,6 +4,8 @@ package route53recoveryreadiness
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/route53recoveryreadiness/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -35,6 +37,18 @@ type GetCellInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetCellInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetCellRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetCellInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CellName != nil {
+		s.WriteString(schemas.GetCellRequest_CellName, *v.CellName)
+	}
+}
+
 type GetCellOutput struct {
 
 	// The Amazon Resource Name (ARN) for the cell.
@@ -60,13 +74,47 @@ type GetCellOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetCellOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetCellResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetCellOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CellArn != nil {
+		s.WriteString(schemas.GetCellResponse_CellArn, *v.CellArn)
+	}
+	if v.CellName != nil {
+		s.WriteString(schemas.GetCellResponse_CellName, *v.CellName)
+	}
+	serialize__listOf__string(s, schemas.GetCellResponse_Cells, v.Cells)
+	serialize__listOf__string(s, schemas.GetCellResponse_ParentReadinessScopes, v.ParentReadinessScopes)
+	serializeTags(s, schemas.GetCellResponse_Tags, v.Tags)
+}
+func (v *GetCellOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetCellResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetCellResponse_CellArn:
+			v.CellArn = new(string)
+			return d.ReadString(schemas.GetCellResponse_CellArn, v.CellArn)
+		case schemas.GetCellResponse_CellName:
+			v.CellName = new(string)
+			return d.ReadString(schemas.GetCellResponse_CellName, v.CellName)
+		case schemas.GetCellResponse_Cells:
+			return deserialize__listOf__string(d, schemas.GetCellResponse_Cells, &v.Cells)
+		case schemas.GetCellResponse_ParentReadinessScopes:
+			return deserialize__listOf__string(d, schemas.GetCellResponse_ParentReadinessScopes, &v.ParentReadinessScopes)
+		case schemas.GetCellResponse_Tags:
+			return deserializeTags(d, schemas.GetCellResponse_Tags, &v.Tags)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetCellMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetCell{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetCell, schemas.GetCellRequest, schemas.GetCellResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetCell{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetCell, schemas.GetCellRequest, schemas.GetCellResponse), output: &GetCellOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package migrationhuborchestrator
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/migrationhuborchestrator/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/migrationhuborchestrator/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -35,6 +37,28 @@ type StopWorkflowInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StopWorkflowInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StopMigrationWorkflowRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StopWorkflowInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Id != nil {
+		s.WriteString(schemas.StopMigrationWorkflowRequest_id, *v.Id)
+	}
+}
+func (v *StopWorkflowInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StopMigrationWorkflowRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StopMigrationWorkflowRequest_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.StopMigrationWorkflowRequest_id, v.Id)
+		}
+		return nil
+	})
+}
+
 type StopWorkflowOutput struct {
 
 	// The Amazon Resource Name (ARN) of the migration workflow.
@@ -58,13 +82,60 @@ type StopWorkflowOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StopWorkflowOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StopMigrationWorkflowResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StopWorkflowOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.StopMigrationWorkflowResponse_arn, *v.Arn)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.StopMigrationWorkflowResponse_id, *v.Id)
+	}
+	if v.LastStopTime != nil {
+		s.WriteTime(schemas.StopMigrationWorkflowResponse_lastStopTime, *v.LastStopTime)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.StopMigrationWorkflowResponse_status, string(v.Status))
+	}
+	if v.StatusMessage != nil {
+		s.WriteString(schemas.StopMigrationWorkflowResponse_statusMessage, *v.StatusMessage)
+	}
+}
+func (v *StopWorkflowOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StopMigrationWorkflowResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StopMigrationWorkflowResponse_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.StopMigrationWorkflowResponse_arn, v.Arn)
+		case schemas.StopMigrationWorkflowResponse_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.StopMigrationWorkflowResponse_id, v.Id)
+		case schemas.StopMigrationWorkflowResponse_lastStopTime:
+			v.LastStopTime = new(time.Time)
+			return d.ReadTime(schemas.StopMigrationWorkflowResponse_lastStopTime, v.LastStopTime)
+		case schemas.StopMigrationWorkflowResponse_status:
+			var ev string
+			if err := d.ReadString(schemas.StopMigrationWorkflowResponse_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.MigrationWorkflowStatusEnum(ev)
+			return nil
+		case schemas.StopMigrationWorkflowResponse_statusMessage:
+			v.StatusMessage = new(string)
+			return d.ReadString(schemas.StopMigrationWorkflowResponse_statusMessage, v.StatusMessage)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStopWorkflowMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpStopWorkflow{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StopWorkflow, schemas.StopMigrationWorkflowRequest, schemas.StopMigrationWorkflowResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStopWorkflow{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StopWorkflow, schemas.StopMigrationWorkflowRequest, schemas.StopMigrationWorkflowResponse), output: &StopWorkflowOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

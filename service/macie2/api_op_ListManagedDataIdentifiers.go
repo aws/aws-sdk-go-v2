@@ -5,7 +5,9 @@ package macie2
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/macie2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/macie2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -35,6 +37,18 @@ type ListManagedDataIdentifiersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListManagedDataIdentifiersInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListManagedDataIdentifiersRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListManagedDataIdentifiersInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListManagedDataIdentifiersRequest_nextToken, *v.NextToken)
+	}
+}
+
 type ListManagedDataIdentifiersOutput struct {
 
 	// An array of objects, one for each managed data identifier.
@@ -50,13 +64,35 @@ type ListManagedDataIdentifiersOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListManagedDataIdentifiersOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListManagedDataIdentifiersResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListManagedDataIdentifiersOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serialize__listOfManagedDataIdentifierSummary(s, schemas.ListManagedDataIdentifiersResponse_items, v.Items)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListManagedDataIdentifiersResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListManagedDataIdentifiersOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListManagedDataIdentifiersResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListManagedDataIdentifiersResponse_items:
+			return deserialize__listOfManagedDataIdentifierSummary(d, schemas.ListManagedDataIdentifiersResponse_items, &v.Items)
+		case schemas.ListManagedDataIdentifiersResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListManagedDataIdentifiersResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListManagedDataIdentifiersMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListManagedDataIdentifiers{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListManagedDataIdentifiers, schemas.ListManagedDataIdentifiersRequest, schemas.ListManagedDataIdentifiersResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListManagedDataIdentifiers{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListManagedDataIdentifiers, schemas.ListManagedDataIdentifiersRequest, schemas.ListManagedDataIdentifiersResponse), output: &ListManagedDataIdentifiersOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

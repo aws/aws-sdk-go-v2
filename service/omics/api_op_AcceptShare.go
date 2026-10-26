@@ -5,7 +5,9 @@ package omics
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/omics/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/omics/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -36,6 +38,18 @@ type AcceptShareInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AcceptShareInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AcceptShareRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AcceptShareInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ShareId != nil {
+		s.WriteString(schemas.AcceptShareRequest_shareId, *v.ShareId)
+	}
+}
+
 type AcceptShareOutput struct {
 
 	// The status of the resource share.
@@ -47,13 +61,36 @@ type AcceptShareOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AcceptShareOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AcceptShareResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AcceptShareOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Status != "" {
+		s.WriteString(schemas.AcceptShareResponse_status, string(v.Status))
+	}
+}
+func (v *AcceptShareOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AcceptShareResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AcceptShareResponse_status:
+			var ev string
+			if err := d.ReadString(schemas.AcceptShareResponse_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.ShareStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationAcceptShareMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpAcceptShare{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AcceptShare, schemas.AcceptShareRequest, schemas.AcceptShareResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpAcceptShare{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AcceptShare, schemas.AcceptShareRequest, schemas.AcceptShareResponse), output: &AcceptShareOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

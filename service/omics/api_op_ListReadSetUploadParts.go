@@ -5,7 +5,9 @@ package omics
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/omics/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/omics/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -57,6 +59,35 @@ type ListReadSetUploadPartsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListReadSetUploadPartsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListReadSetUploadPartsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListReadSetUploadPartsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Filter != nil {
+		s.WriteStruct(schemas.ListReadSetUploadPartsRequest_filter)
+		v.Filter.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListReadSetUploadPartsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListReadSetUploadPartsRequest_nextToken, *v.NextToken)
+	}
+	if v.PartSource != "" {
+		s.WriteString(schemas.ListReadSetUploadPartsRequest_partSource, string(v.PartSource))
+	}
+	if v.SequenceStoreId != nil {
+		s.WriteString(schemas.ListReadSetUploadPartsRequest_sequenceStoreId, *v.SequenceStoreId)
+	}
+	if v.UploadId != nil {
+		s.WriteString(schemas.ListReadSetUploadPartsRequest_uploadId, *v.UploadId)
+	}
+}
+
 type ListReadSetUploadPartsOutput struct {
 
 	// Next token returned in the response of a previous ListReadSetUploadParts call.
@@ -72,13 +103,35 @@ type ListReadSetUploadPartsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListReadSetUploadPartsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListReadSetUploadPartsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListReadSetUploadPartsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListReadSetUploadPartsResponse_nextToken, *v.NextToken)
+	}
+	serializeReadSetUploadPartList(s, schemas.ListReadSetUploadPartsResponse_parts, v.Parts)
+}
+func (v *ListReadSetUploadPartsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListReadSetUploadPartsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListReadSetUploadPartsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListReadSetUploadPartsResponse_nextToken, v.NextToken)
+		case schemas.ListReadSetUploadPartsResponse_parts:
+			return deserializeReadSetUploadPartList(d, schemas.ListReadSetUploadPartsResponse_parts, &v.Parts)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListReadSetUploadPartsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListReadSetUploadParts{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListReadSetUploadParts, schemas.ListReadSetUploadPartsRequest, schemas.ListReadSetUploadPartsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListReadSetUploadParts{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListReadSetUploadParts, schemas.ListReadSetUploadPartsRequest, schemas.ListReadSetUploadPartsResponse), output: &ListReadSetUploadPartsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

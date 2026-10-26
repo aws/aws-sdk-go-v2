@@ -5,7 +5,9 @@ package route53recoverycontrolconfig
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/route53recoverycontrolconfig/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/route53recoverycontrolconfig/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,24 @@ type ListControlPanelsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListControlPanelsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListControlPanelsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListControlPanelsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClusterArn != nil {
+		s.WriteString(schemas.ListControlPanelsRequest_ClusterArn, *v.ClusterArn)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListControlPanelsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListControlPanelsRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListControlPanelsOutput struct {
 
 	// The result of a successful ListControlPanel request.
@@ -53,13 +73,35 @@ type ListControlPanelsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListControlPanelsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListControlPanelsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListControlPanelsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serialize__listOfControlPanel(s, schemas.ListControlPanelsResponse_ControlPanels, v.ControlPanels)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListControlPanelsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListControlPanelsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListControlPanelsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListControlPanelsResponse_ControlPanels:
+			return deserialize__listOfControlPanel(d, schemas.ListControlPanelsResponse_ControlPanels, &v.ControlPanels)
+		case schemas.ListControlPanelsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListControlPanelsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListControlPanelsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListControlPanels{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListControlPanels, schemas.ListControlPanelsRequest, schemas.ListControlPanelsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListControlPanels{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListControlPanels, schemas.ListControlPanelsRequest, schemas.ListControlPanelsResponse), output: &ListControlPanelsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

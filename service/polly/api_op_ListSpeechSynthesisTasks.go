@@ -5,7 +5,9 @@ package polly
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/polly/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/polly/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -42,6 +44,24 @@ type ListSpeechSynthesisTasksInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListSpeechSynthesisTasksInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListSpeechSynthesisTasksInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListSpeechSynthesisTasksInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListSpeechSynthesisTasksInput_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListSpeechSynthesisTasksInput_NextToken, *v.NextToken)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.ListSpeechSynthesisTasksInput_Status, string(v.Status))
+	}
+}
+
 type ListSpeechSynthesisTasksOutput struct {
 
 	// An opaque pagination token returned from the previous List operation in this
@@ -59,13 +79,35 @@ type ListSpeechSynthesisTasksOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListSpeechSynthesisTasksOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListSpeechSynthesisTasksOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListSpeechSynthesisTasksOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListSpeechSynthesisTasksOutput_NextToken, *v.NextToken)
+	}
+	serializeSynthesisTasks(s, schemas.ListSpeechSynthesisTasksOutput_SynthesisTasks, v.SynthesisTasks)
+}
+func (v *ListSpeechSynthesisTasksOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListSpeechSynthesisTasksOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListSpeechSynthesisTasksOutput_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListSpeechSynthesisTasksOutput_NextToken, v.NextToken)
+		case schemas.ListSpeechSynthesisTasksOutput_SynthesisTasks:
+			return deserializeSynthesisTasks(d, schemas.ListSpeechSynthesisTasksOutput_SynthesisTasks, &v.SynthesisTasks)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListSpeechSynthesisTasksMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListSpeechSynthesisTasks{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListSpeechSynthesisTasks, schemas.ListSpeechSynthesisTasksInput, schemas.ListSpeechSynthesisTasksOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListSpeechSynthesisTasks{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListSpeechSynthesisTasks, schemas.ListSpeechSynthesisTasksInput, schemas.ListSpeechSynthesisTasksOutput), output: &ListSpeechSynthesisTasksOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

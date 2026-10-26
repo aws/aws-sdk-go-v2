@@ -4,6 +4,8 @@ package lakeformation
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/lakeformation/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -38,6 +40,21 @@ type UpdateRLSPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateRLSPolicyInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateRLSPolicyRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateRLSPolicyInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FilterExpression != nil {
+		s.WriteString(schemas.UpdateRLSPolicyRequest_FilterExpression, *v.FilterExpression)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateRLSPolicyRequest_Name, *v.Name)
+	}
+}
+
 type UpdateRLSPolicyOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -45,13 +62,26 @@ type UpdateRLSPolicyOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateRLSPolicyOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateRLSPolicyResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateRLSPolicyOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *UpdateRLSPolicyOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateRLSPolicyResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateRLSPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateRLSPolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateRLSPolicy, schemas.UpdateRLSPolicyRequest, schemas.UpdateRLSPolicyResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateRLSPolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateRLSPolicy, schemas.UpdateRLSPolicyRequest, schemas.UpdateRLSPolicyResponse), output: &UpdateRLSPolicyOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -5,7 +5,9 @@ package omics
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/omics/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/omics/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -50,6 +52,27 @@ type ListAnnotationStoresInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAnnotationStoresInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAnnotationStoresRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAnnotationStoresInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Filter != nil {
+		s.WriteStruct(schemas.ListAnnotationStoresRequest_filter)
+		v.Filter.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeIdList(s, schemas.ListAnnotationStoresRequest_ids, v.Ids)
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListAnnotationStoresRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAnnotationStoresRequest_nextToken, *v.NextToken)
+	}
+}
+
 type ListAnnotationStoresOutput struct {
 
 	// A list of stores.
@@ -64,13 +87,35 @@ type ListAnnotationStoresOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAnnotationStoresOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAnnotationStoresResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAnnotationStoresOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAnnotationStoreItems(s, schemas.ListAnnotationStoresResponse_annotationStores, v.AnnotationStores)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAnnotationStoresResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListAnnotationStoresOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListAnnotationStoresResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListAnnotationStoresResponse_annotationStores:
+			return deserializeAnnotationStoreItems(d, schemas.ListAnnotationStoresResponse_annotationStores, &v.AnnotationStores)
+		case schemas.ListAnnotationStoresResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListAnnotationStoresResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListAnnotationStoresMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListAnnotationStores{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAnnotationStores, schemas.ListAnnotationStoresRequest, schemas.ListAnnotationStoresResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListAnnotationStores{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAnnotationStores, schemas.ListAnnotationStoresRequest, schemas.ListAnnotationStoresResponse), output: &ListAnnotationStoresOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

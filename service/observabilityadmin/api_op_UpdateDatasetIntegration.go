@@ -4,6 +4,8 @@ package observabilityadmin
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/observabilityadmin/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -42,6 +44,21 @@ type UpdateDatasetIntegrationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateDatasetIntegrationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateDatasetIntegrationInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateDatasetIntegrationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.UpdateDatasetIntegrationInput_Arn, *v.Arn)
+	}
+	if v.RoleArn != nil {
+		s.WriteString(schemas.UpdateDatasetIntegrationInput_RoleArn, *v.RoleArn)
+	}
+}
+
 type UpdateDatasetIntegrationOutput struct {
 
 	// The Amazon Resource Name (ARN) of the updated dataset integration.
@@ -71,13 +88,50 @@ type UpdateDatasetIntegrationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateDatasetIntegrationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateDatasetIntegrationOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateDatasetIntegrationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.UpdateDatasetIntegrationOutput_Arn, *v.Arn)
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.UpdateDatasetIntegrationOutput_CreatedAt, *v.CreatedAt)
+	}
+	if v.RoleArn != nil {
+		s.WriteString(schemas.UpdateDatasetIntegrationOutput_RoleArn, *v.RoleArn)
+	}
+	if v.UpdatedAt != nil {
+		s.WriteTime(schemas.UpdateDatasetIntegrationOutput_UpdatedAt, *v.UpdatedAt)
+	}
+}
+func (v *UpdateDatasetIntegrationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateDatasetIntegrationOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateDatasetIntegrationOutput_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.UpdateDatasetIntegrationOutput_Arn, v.Arn)
+		case schemas.UpdateDatasetIntegrationOutput_CreatedAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.UpdateDatasetIntegrationOutput_CreatedAt, v.CreatedAt)
+		case schemas.UpdateDatasetIntegrationOutput_RoleArn:
+			v.RoleArn = new(string)
+			return d.ReadString(schemas.UpdateDatasetIntegrationOutput_RoleArn, v.RoleArn)
+		case schemas.UpdateDatasetIntegrationOutput_UpdatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.UpdateDatasetIntegrationOutput_UpdatedAt, v.UpdatedAt)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateDatasetIntegrationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateDatasetIntegration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateDatasetIntegration, schemas.UpdateDatasetIntegrationInput, schemas.UpdateDatasetIntegrationOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateDatasetIntegration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateDatasetIntegration, schemas.UpdateDatasetIntegrationInput, schemas.UpdateDatasetIntegrationOutput), output: &UpdateDatasetIntegrationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

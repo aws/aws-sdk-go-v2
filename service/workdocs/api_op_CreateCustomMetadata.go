@@ -4,6 +4,8 @@ package workdocs
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/workdocs/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -47,6 +49,25 @@ type CreateCustomMetadataInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateCustomMetadataInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateCustomMetadataRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateCustomMetadataInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AuthenticationToken != nil {
+		s.WriteString(schemas.CreateCustomMetadataRequest_AuthenticationToken, *v.AuthenticationToken)
+	}
+	serializeCustomMetadataMap(s, schemas.CreateCustomMetadataRequest_CustomMetadata, v.CustomMetadata)
+	if v.ResourceId != nil {
+		s.WriteString(schemas.CreateCustomMetadataRequest_ResourceId, *v.ResourceId)
+	}
+	if v.VersionId != nil {
+		s.WriteString(schemas.CreateCustomMetadataRequest_VersionId, *v.VersionId)
+	}
+}
+
 type CreateCustomMetadataOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -54,13 +75,26 @@ type CreateCustomMetadataOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateCustomMetadataOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateCustomMetadataResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateCustomMetadataOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *CreateCustomMetadataOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateCustomMetadataResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateCustomMetadataMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateCustomMetadata{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateCustomMetadata, schemas.CreateCustomMetadataRequest, schemas.CreateCustomMetadataResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateCustomMetadata{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateCustomMetadata, schemas.CreateCustomMetadataRequest, schemas.CreateCustomMetadataResponse), output: &CreateCustomMetadataOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

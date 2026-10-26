@@ -3,6 +3,8 @@
 package types
 
 import (
+	"github.com/aws/aws-sdk-go-v2/service/rolesanywhere/schemas"
+	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
@@ -17,6 +19,35 @@ type AttributeMapping struct {
 	MappingRules []MappingRule
 
 	noSmithyDocumentSerde
+}
+
+func (v *AttributeMapping) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AttributeMapping)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AttributeMapping) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CertificateField != "" {
+		s.WriteString(schemas.AttributeMapping_certificateField, string(v.CertificateField))
+	}
+	serializeMappingRules(s, schemas.AttributeMapping_mappingRules, v.MappingRules)
+}
+func (v *AttributeMapping) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AttributeMapping, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AttributeMapping_certificateField:
+			var ev string
+			if err := d.ReadString(schemas.AttributeMapping_certificateField, &ev); err != nil {
+				return err
+			}
+			v.CertificateField = CertificateField(ev)
+			return nil
+		case schemas.AttributeMapping_mappingRules:
+			return deserializeMappingRules(d, schemas.AttributeMapping_mappingRules, &v.MappingRules)
+		}
+		return nil
+	})
 }
 
 // A record of a presented X509 credential from a temporary credential request.
@@ -43,6 +74,58 @@ type CredentialSummary struct {
 	X509CertificateData *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *CredentialSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CredentialSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CredentialSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Enabled != nil {
+		s.WriteBool(schemas.CredentialSummary_enabled, *v.Enabled)
+	}
+	if v.Failed != nil {
+		s.WriteBool(schemas.CredentialSummary_failed, *v.Failed)
+	}
+	if v.Issuer != nil {
+		s.WriteString(schemas.CredentialSummary_issuer, *v.Issuer)
+	}
+	if v.SeenAt != nil {
+		s.WriteTime(schemas.CredentialSummary_seenAt, *v.SeenAt)
+	}
+	if v.SerialNumber != nil {
+		s.WriteString(schemas.CredentialSummary_serialNumber, *v.SerialNumber)
+	}
+	if v.X509CertificateData != nil {
+		s.WriteString(schemas.CredentialSummary_x509CertificateData, *v.X509CertificateData)
+	}
+}
+func (v *CredentialSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CredentialSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CredentialSummary_enabled:
+			v.Enabled = new(bool)
+			return d.ReadBool(schemas.CredentialSummary_enabled, v.Enabled)
+		case schemas.CredentialSummary_failed:
+			v.Failed = new(bool)
+			return d.ReadBool(schemas.CredentialSummary_failed, v.Failed)
+		case schemas.CredentialSummary_issuer:
+			v.Issuer = new(string)
+			return d.ReadString(schemas.CredentialSummary_issuer, v.Issuer)
+		case schemas.CredentialSummary_seenAt:
+			v.SeenAt = new(time.Time)
+			return d.ReadTime(schemas.CredentialSummary_seenAt, v.SeenAt)
+		case schemas.CredentialSummary_serialNumber:
+			v.SerialNumber = new(string)
+			return d.ReadString(schemas.CredentialSummary_serialNumber, v.SerialNumber)
+		case schemas.CredentialSummary_x509CertificateData:
+			v.X509CertificateData = new(string)
+			return d.ReadString(schemas.CredentialSummary_x509CertificateData, v.X509CertificateData)
+		}
+		return nil
+	})
 }
 
 // The state of the certificate revocation list (CRL) after a read or write
@@ -79,6 +162,69 @@ type CrlDetail struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CrlDetail) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CrlDetail)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CrlDetail) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.CrlDetail_createdAt, *v.CreatedAt)
+	}
+	if v.CrlArn != nil {
+		s.WriteString(schemas.CrlDetail_crlArn, *v.CrlArn)
+	}
+	if v.CrlData != nil {
+		s.WriteBlob(schemas.CrlDetail_crlData, v.CrlData)
+	}
+	if v.CrlId != nil {
+		s.WriteString(schemas.CrlDetail_crlId, *v.CrlId)
+	}
+	if v.Enabled != nil {
+		s.WriteBool(schemas.CrlDetail_enabled, *v.Enabled)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CrlDetail_name, *v.Name)
+	}
+	if v.TrustAnchorArn != nil {
+		s.WriteString(schemas.CrlDetail_trustAnchorArn, *v.TrustAnchorArn)
+	}
+	if v.UpdatedAt != nil {
+		s.WriteTime(schemas.CrlDetail_updatedAt, *v.UpdatedAt)
+	}
+}
+func (v *CrlDetail) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CrlDetail, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CrlDetail_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.CrlDetail_createdAt, v.CreatedAt)
+		case schemas.CrlDetail_crlArn:
+			v.CrlArn = new(string)
+			return d.ReadString(schemas.CrlDetail_crlArn, v.CrlArn)
+		case schemas.CrlDetail_crlData:
+			return d.ReadBlob(schemas.CrlDetail_crlData, &v.CrlData)
+		case schemas.CrlDetail_crlId:
+			v.CrlId = new(string)
+			return d.ReadString(schemas.CrlDetail_crlId, v.CrlId)
+		case schemas.CrlDetail_enabled:
+			v.Enabled = new(bool)
+			return d.ReadBool(schemas.CrlDetail_enabled, v.Enabled)
+		case schemas.CrlDetail_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.CrlDetail_name, v.Name)
+		case schemas.CrlDetail_trustAnchorArn:
+			v.TrustAnchorArn = new(string)
+			return d.ReadString(schemas.CrlDetail_trustAnchorArn, v.TrustAnchorArn)
+		case schemas.CrlDetail_updatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.CrlDetail_updatedAt, v.UpdatedAt)
+		}
+		return nil
+	})
+}
+
 // A key-value pair you set that identifies a property of the authenticating
 // instance.
 type InstanceProperty struct {
@@ -96,6 +242,37 @@ type InstanceProperty struct {
 	noSmithyDocumentSerde
 }
 
+func (v *InstanceProperty) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InstanceProperty)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InstanceProperty) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Failed != nil {
+		s.WriteBool(schemas.InstanceProperty_failed, *v.Failed)
+	}
+	serializeInstancePropertyMap(s, schemas.InstanceProperty_properties, v.Properties)
+	if v.SeenAt != nil {
+		s.WriteTime(schemas.InstanceProperty_seenAt, *v.SeenAt)
+	}
+}
+func (v *InstanceProperty) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InstanceProperty, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InstanceProperty_failed:
+			v.Failed = new(bool)
+			return d.ReadBool(schemas.InstanceProperty_failed, v.Failed)
+		case schemas.InstanceProperty_properties:
+			return deserializeInstancePropertyMap(d, schemas.InstanceProperty_properties, &v.Properties)
+		case schemas.InstanceProperty_seenAt:
+			v.SeenAt = new(time.Time)
+			return d.ReadTime(schemas.InstanceProperty_seenAt, v.SeenAt)
+		}
+		return nil
+	})
+}
+
 // A single mapping entry for each supported specifier or sub-field.
 type MappingRule struct {
 
@@ -106,6 +283,28 @@ type MappingRule struct {
 	Specifier *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *MappingRule) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MappingRule)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MappingRule) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Specifier != nil {
+		s.WriteString(schemas.MappingRule_specifier, *v.Specifier)
+	}
+}
+func (v *MappingRule) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MappingRule, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MappingRule_specifier:
+			v.Specifier = new(string)
+			return d.ReadString(schemas.MappingRule_specifier, v.Specifier)
+		}
+		return nil
+	})
 }
 
 //	Customizable notification settings that will be applied to notification
@@ -136,6 +335,54 @@ type NotificationSetting struct {
 	Threshold *int32
 
 	noSmithyDocumentSerde
+}
+
+func (v *NotificationSetting) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.NotificationSetting)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *NotificationSetting) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Channel != "" {
+		s.WriteString(schemas.NotificationSetting_channel, string(v.Channel))
+	}
+	if v.Enabled != nil {
+		s.WriteBool(schemas.NotificationSetting_enabled, *v.Enabled)
+	}
+	if v.Event != "" {
+		s.WriteString(schemas.NotificationSetting_event, string(v.Event))
+	}
+	if v.Threshold != nil {
+		s.WriteInt32(schemas.NotificationSetting_threshold, *v.Threshold)
+	}
+}
+func (v *NotificationSetting) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.NotificationSetting, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.NotificationSetting_channel:
+			var ev string
+			if err := d.ReadString(schemas.NotificationSetting_channel, &ev); err != nil {
+				return err
+			}
+			v.Channel = NotificationChannel(ev)
+			return nil
+		case schemas.NotificationSetting_enabled:
+			v.Enabled = new(bool)
+			return d.ReadBool(schemas.NotificationSetting_enabled, v.Enabled)
+		case schemas.NotificationSetting_event:
+			var ev string
+			if err := d.ReadString(schemas.NotificationSetting_event, &ev); err != nil {
+				return err
+			}
+			v.Event = NotificationEvent(ev)
+			return nil
+		case schemas.NotificationSetting_threshold:
+			v.Threshold = new(int32)
+			return d.ReadInt32(schemas.NotificationSetting_threshold, v.Threshold)
+		}
+		return nil
+	})
 }
 
 // The state of a notification setting.
@@ -172,6 +419,60 @@ type NotificationSettingDetail struct {
 	noSmithyDocumentSerde
 }
 
+func (v *NotificationSettingDetail) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.NotificationSettingDetail)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *NotificationSettingDetail) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Channel != "" {
+		s.WriteString(schemas.NotificationSettingDetail_channel, string(v.Channel))
+	}
+	if v.ConfiguredBy != nil {
+		s.WriteString(schemas.NotificationSettingDetail_configuredBy, *v.ConfiguredBy)
+	}
+	if v.Enabled != nil {
+		s.WriteBool(schemas.NotificationSettingDetail_enabled, *v.Enabled)
+	}
+	if v.Event != "" {
+		s.WriteString(schemas.NotificationSettingDetail_event, string(v.Event))
+	}
+	if v.Threshold != nil {
+		s.WriteInt32(schemas.NotificationSettingDetail_threshold, *v.Threshold)
+	}
+}
+func (v *NotificationSettingDetail) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.NotificationSettingDetail, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.NotificationSettingDetail_channel:
+			var ev string
+			if err := d.ReadString(schemas.NotificationSettingDetail_channel, &ev); err != nil {
+				return err
+			}
+			v.Channel = NotificationChannel(ev)
+			return nil
+		case schemas.NotificationSettingDetail_configuredBy:
+			v.ConfiguredBy = new(string)
+			return d.ReadString(schemas.NotificationSettingDetail_configuredBy, v.ConfiguredBy)
+		case schemas.NotificationSettingDetail_enabled:
+			v.Enabled = new(bool)
+			return d.ReadBool(schemas.NotificationSettingDetail_enabled, v.Enabled)
+		case schemas.NotificationSettingDetail_event:
+			var ev string
+			if err := d.ReadString(schemas.NotificationSettingDetail_event, &ev); err != nil {
+				return err
+			}
+			v.Event = NotificationEvent(ev)
+			return nil
+		case schemas.NotificationSettingDetail_threshold:
+			v.Threshold = new(int32)
+			return d.ReadInt32(schemas.NotificationSettingDetail_threshold, v.Threshold)
+		}
+		return nil
+	})
+}
+
 // A notification setting key to reset. A notification setting key includes the
 // event and the channel.
 type NotificationSettingKey struct {
@@ -185,6 +486,42 @@ type NotificationSettingKey struct {
 	Channel NotificationChannel
 
 	noSmithyDocumentSerde
+}
+
+func (v *NotificationSettingKey) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.NotificationSettingKey)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *NotificationSettingKey) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Channel != "" {
+		s.WriteString(schemas.NotificationSettingKey_channel, string(v.Channel))
+	}
+	if v.Event != "" {
+		s.WriteString(schemas.NotificationSettingKey_event, string(v.Event))
+	}
+}
+func (v *NotificationSettingKey) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.NotificationSettingKey, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.NotificationSettingKey_channel:
+			var ev string
+			if err := d.ReadString(schemas.NotificationSettingKey_channel, &ev); err != nil {
+				return err
+			}
+			v.Channel = NotificationChannel(ev)
+			return nil
+		case schemas.NotificationSettingKey_event:
+			var ev string
+			if err := d.ReadString(schemas.NotificationSettingKey_event, &ev); err != nil {
+				return err
+			}
+			v.Event = NotificationEvent(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // The state of the profile after a read or write operation.
@@ -243,6 +580,97 @@ type ProfileDetail struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ProfileDetail) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ProfileDetail)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ProfileDetail) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AcceptRoleSessionName != nil {
+		s.WriteBool(schemas.ProfileDetail_acceptRoleSessionName, *v.AcceptRoleSessionName)
+	}
+	serializeAttributeMappings(s, schemas.ProfileDetail_attributeMappings, v.AttributeMappings)
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.ProfileDetail_createdAt, *v.CreatedAt)
+	}
+	if v.CreatedBy != nil {
+		s.WriteString(schemas.ProfileDetail_createdBy, *v.CreatedBy)
+	}
+	if v.DurationSeconds != nil {
+		s.WriteInt32(schemas.ProfileDetail_durationSeconds, *v.DurationSeconds)
+	}
+	if v.Enabled != nil {
+		s.WriteBool(schemas.ProfileDetail_enabled, *v.Enabled)
+	}
+	serializeManagedPolicyList(s, schemas.ProfileDetail_managedPolicyArns, v.ManagedPolicyArns)
+	if v.Name != nil {
+		s.WriteString(schemas.ProfileDetail_name, *v.Name)
+	}
+	if v.ProfileArn != nil {
+		s.WriteString(schemas.ProfileDetail_profileArn, *v.ProfileArn)
+	}
+	if v.ProfileId != nil {
+		s.WriteString(schemas.ProfileDetail_profileId, *v.ProfileId)
+	}
+	if v.RequireInstanceProperties != nil {
+		s.WriteBool(schemas.ProfileDetail_requireInstanceProperties, *v.RequireInstanceProperties)
+	}
+	serializeRoleArnList(s, schemas.ProfileDetail_roleArns, v.RoleArns)
+	if v.SessionPolicy != nil {
+		s.WriteString(schemas.ProfileDetail_sessionPolicy, *v.SessionPolicy)
+	}
+	if v.UpdatedAt != nil {
+		s.WriteTime(schemas.ProfileDetail_updatedAt, *v.UpdatedAt)
+	}
+}
+func (v *ProfileDetail) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ProfileDetail, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ProfileDetail_acceptRoleSessionName:
+			v.AcceptRoleSessionName = new(bool)
+			return d.ReadBool(schemas.ProfileDetail_acceptRoleSessionName, v.AcceptRoleSessionName)
+		case schemas.ProfileDetail_attributeMappings:
+			return deserializeAttributeMappings(d, schemas.ProfileDetail_attributeMappings, &v.AttributeMappings)
+		case schemas.ProfileDetail_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.ProfileDetail_createdAt, v.CreatedAt)
+		case schemas.ProfileDetail_createdBy:
+			v.CreatedBy = new(string)
+			return d.ReadString(schemas.ProfileDetail_createdBy, v.CreatedBy)
+		case schemas.ProfileDetail_durationSeconds:
+			v.DurationSeconds = new(int32)
+			return d.ReadInt32(schemas.ProfileDetail_durationSeconds, v.DurationSeconds)
+		case schemas.ProfileDetail_enabled:
+			v.Enabled = new(bool)
+			return d.ReadBool(schemas.ProfileDetail_enabled, v.Enabled)
+		case schemas.ProfileDetail_managedPolicyArns:
+			return deserializeManagedPolicyList(d, schemas.ProfileDetail_managedPolicyArns, &v.ManagedPolicyArns)
+		case schemas.ProfileDetail_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.ProfileDetail_name, v.Name)
+		case schemas.ProfileDetail_profileArn:
+			v.ProfileArn = new(string)
+			return d.ReadString(schemas.ProfileDetail_profileArn, v.ProfileArn)
+		case schemas.ProfileDetail_profileId:
+			v.ProfileId = new(string)
+			return d.ReadString(schemas.ProfileDetail_profileId, v.ProfileId)
+		case schemas.ProfileDetail_requireInstanceProperties:
+			v.RequireInstanceProperties = new(bool)
+			return d.ReadBool(schemas.ProfileDetail_requireInstanceProperties, v.RequireInstanceProperties)
+		case schemas.ProfileDetail_roleArns:
+			return deserializeRoleArnList(d, schemas.ProfileDetail_roleArns, &v.RoleArns)
+		case schemas.ProfileDetail_sessionPolicy:
+			v.SessionPolicy = new(string)
+			return d.ReadString(schemas.ProfileDetail_sessionPolicy, v.SessionPolicy)
+		case schemas.ProfileDetail_updatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.ProfileDetail_updatedAt, v.UpdatedAt)
+		}
+		return nil
+	})
+}
+
 // The trust anchor type and its related certificate data.
 type Source struct {
 
@@ -253,6 +681,35 @@ type Source struct {
 	SourceType TrustAnchorType
 
 	noSmithyDocumentSerde
+}
+
+func (v *Source) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Source)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Source) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeSourceData(s, schemas.Source_sourceData, v.SourceData)
+	if v.SourceType != "" {
+		s.WriteString(schemas.Source_sourceType, string(v.SourceType))
+	}
+}
+func (v *Source) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Source, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Source_sourceData:
+			return deserializeSourceData(d, schemas.Source_sourceData, &v.SourceData)
+		case schemas.Source_sourceType:
+			var ev string
+			if err := d.ReadString(schemas.Source_sourceType, &ev); err != nil {
+				return err
+			}
+			v.SourceType = TrustAnchorType(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // The data field of the trust anchor depending on its type.
@@ -276,6 +733,12 @@ type SourceDataMemberAcmPcaArn struct {
 }
 
 func (*SourceDataMemberAcmPcaArn) isSourceData() {}
+func (v *SourceDataMemberAcmPcaArn) Serialize(s smithy.ShapeSerializer) {
+	s.WriteString(schemas.SourceData_acmPcaArn, v.Value)
+}
+func (v *SourceDataMemberAcmPcaArn) Deserialize(d smithy.ShapeDeserializer) error {
+	return d.ReadString(schemas.SourceData_acmPcaArn, &v.Value)
+}
 
 // The PEM-encoded data for the certificate anchor. Included for trust anchors of
 // type CERTIFICATE_BUNDLE .
@@ -286,6 +749,12 @@ type SourceDataMemberX509CertificateData struct {
 }
 
 func (*SourceDataMemberX509CertificateData) isSourceData() {}
+func (v *SourceDataMemberX509CertificateData) Serialize(s smithy.ShapeSerializer) {
+	s.WriteString(schemas.SourceData_x509CertificateData, v.Value)
+}
+func (v *SourceDataMemberX509CertificateData) Deserialize(d smithy.ShapeDeserializer) error {
+	return d.ReadString(schemas.SourceData_x509CertificateData, &v.Value)
+}
 
 // The state of the subject after a read or write operation.
 type SubjectDetail struct {
@@ -322,6 +791,70 @@ type SubjectDetail struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SubjectDetail) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SubjectDetail)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SubjectDetail) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.SubjectDetail_createdAt, *v.CreatedAt)
+	}
+	serializeCredentialSummaries(s, schemas.SubjectDetail_credentials, v.Credentials)
+	if v.Enabled != nil {
+		s.WriteBool(schemas.SubjectDetail_enabled, *v.Enabled)
+	}
+	serializeInstanceProperties(s, schemas.SubjectDetail_instanceProperties, v.InstanceProperties)
+	if v.LastSeenAt != nil {
+		s.WriteTime(schemas.SubjectDetail_lastSeenAt, *v.LastSeenAt)
+	}
+	if v.SubjectArn != nil {
+		s.WriteString(schemas.SubjectDetail_subjectArn, *v.SubjectArn)
+	}
+	if v.SubjectId != nil {
+		s.WriteString(schemas.SubjectDetail_subjectId, *v.SubjectId)
+	}
+	if v.UpdatedAt != nil {
+		s.WriteTime(schemas.SubjectDetail_updatedAt, *v.UpdatedAt)
+	}
+	if v.X509Subject != nil {
+		s.WriteString(schemas.SubjectDetail_x509Subject, *v.X509Subject)
+	}
+}
+func (v *SubjectDetail) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SubjectDetail, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SubjectDetail_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.SubjectDetail_createdAt, v.CreatedAt)
+		case schemas.SubjectDetail_credentials:
+			return deserializeCredentialSummaries(d, schemas.SubjectDetail_credentials, &v.Credentials)
+		case schemas.SubjectDetail_enabled:
+			v.Enabled = new(bool)
+			return d.ReadBool(schemas.SubjectDetail_enabled, v.Enabled)
+		case schemas.SubjectDetail_instanceProperties:
+			return deserializeInstanceProperties(d, schemas.SubjectDetail_instanceProperties, &v.InstanceProperties)
+		case schemas.SubjectDetail_lastSeenAt:
+			v.LastSeenAt = new(time.Time)
+			return d.ReadTime(schemas.SubjectDetail_lastSeenAt, v.LastSeenAt)
+		case schemas.SubjectDetail_subjectArn:
+			v.SubjectArn = new(string)
+			return d.ReadString(schemas.SubjectDetail_subjectArn, v.SubjectArn)
+		case schemas.SubjectDetail_subjectId:
+			v.SubjectId = new(string)
+			return d.ReadString(schemas.SubjectDetail_subjectId, v.SubjectId)
+		case schemas.SubjectDetail_updatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.SubjectDetail_updatedAt, v.UpdatedAt)
+		case schemas.SubjectDetail_x509Subject:
+			v.X509Subject = new(string)
+			return d.ReadString(schemas.SubjectDetail_x509Subject, v.X509Subject)
+		}
+		return nil
+	})
+}
+
 // A summary representation of subjects.
 type SubjectSummary struct {
 
@@ -351,6 +884,64 @@ type SubjectSummary struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SubjectSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SubjectSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SubjectSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.SubjectSummary_createdAt, *v.CreatedAt)
+	}
+	if v.Enabled != nil {
+		s.WriteBool(schemas.SubjectSummary_enabled, *v.Enabled)
+	}
+	if v.LastSeenAt != nil {
+		s.WriteTime(schemas.SubjectSummary_lastSeenAt, *v.LastSeenAt)
+	}
+	if v.SubjectArn != nil {
+		s.WriteString(schemas.SubjectSummary_subjectArn, *v.SubjectArn)
+	}
+	if v.SubjectId != nil {
+		s.WriteString(schemas.SubjectSummary_subjectId, *v.SubjectId)
+	}
+	if v.UpdatedAt != nil {
+		s.WriteTime(schemas.SubjectSummary_updatedAt, *v.UpdatedAt)
+	}
+	if v.X509Subject != nil {
+		s.WriteString(schemas.SubjectSummary_x509Subject, *v.X509Subject)
+	}
+}
+func (v *SubjectSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SubjectSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SubjectSummary_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.SubjectSummary_createdAt, v.CreatedAt)
+		case schemas.SubjectSummary_enabled:
+			v.Enabled = new(bool)
+			return d.ReadBool(schemas.SubjectSummary_enabled, v.Enabled)
+		case schemas.SubjectSummary_lastSeenAt:
+			v.LastSeenAt = new(time.Time)
+			return d.ReadTime(schemas.SubjectSummary_lastSeenAt, v.LastSeenAt)
+		case schemas.SubjectSummary_subjectArn:
+			v.SubjectArn = new(string)
+			return d.ReadString(schemas.SubjectSummary_subjectArn, v.SubjectArn)
+		case schemas.SubjectSummary_subjectId:
+			v.SubjectId = new(string)
+			return d.ReadString(schemas.SubjectSummary_subjectId, v.SubjectId)
+		case schemas.SubjectSummary_updatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.SubjectSummary_updatedAt, v.UpdatedAt)
+		case schemas.SubjectSummary_x509Subject:
+			v.X509Subject = new(string)
+			return d.ReadString(schemas.SubjectSummary_x509Subject, v.X509Subject)
+		}
+		return nil
+	})
+}
+
 // A label that consists of a key and value you define.
 type Tag struct {
 
@@ -365,6 +956,34 @@ type Tag struct {
 	Value *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *Tag) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Tag)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Tag) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Key != nil {
+		s.WriteString(schemas.Tag_key, *v.Key)
+	}
+	if v.Value != nil {
+		s.WriteString(schemas.Tag_value, *v.Value)
+	}
+}
+func (v *Tag) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Tag, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Tag_key:
+			v.Key = new(string)
+			return d.ReadString(schemas.Tag_key, v.Key)
+		case schemas.Tag_value:
+			v.Value = new(string)
+			return d.ReadString(schemas.Tag_value, v.Value)
+		}
+		return nil
+	})
 }
 
 // The state of the trust anchor after a read or write operation.
@@ -395,6 +1014,69 @@ type TrustAnchorDetail struct {
 	UpdatedAt *time.Time
 
 	noSmithyDocumentSerde
+}
+
+func (v *TrustAnchorDetail) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TrustAnchorDetail)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TrustAnchorDetail) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.TrustAnchorDetail_createdAt, *v.CreatedAt)
+	}
+	if v.Enabled != nil {
+		s.WriteBool(schemas.TrustAnchorDetail_enabled, *v.Enabled)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.TrustAnchorDetail_name, *v.Name)
+	}
+	serializeNotificationSettingDetails(s, schemas.TrustAnchorDetail_notificationSettings, v.NotificationSettings)
+	if v.Source != nil {
+		s.WriteStruct(schemas.TrustAnchorDetail_source)
+		v.Source.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TrustAnchorArn != nil {
+		s.WriteString(schemas.TrustAnchorDetail_trustAnchorArn, *v.TrustAnchorArn)
+	}
+	if v.TrustAnchorId != nil {
+		s.WriteString(schemas.TrustAnchorDetail_trustAnchorId, *v.TrustAnchorId)
+	}
+	if v.UpdatedAt != nil {
+		s.WriteTime(schemas.TrustAnchorDetail_updatedAt, *v.UpdatedAt)
+	}
+}
+func (v *TrustAnchorDetail) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TrustAnchorDetail, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TrustAnchorDetail_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.TrustAnchorDetail_createdAt, v.CreatedAt)
+		case schemas.TrustAnchorDetail_enabled:
+			v.Enabled = new(bool)
+			return d.ReadBool(schemas.TrustAnchorDetail_enabled, v.Enabled)
+		case schemas.TrustAnchorDetail_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.TrustAnchorDetail_name, v.Name)
+		case schemas.TrustAnchorDetail_notificationSettings:
+			return deserializeNotificationSettingDetails(d, schemas.TrustAnchorDetail_notificationSettings, &v.NotificationSettings)
+		case schemas.TrustAnchorDetail_source:
+			v.Source = &Source{}
+			return v.Source.Deserialize(d)
+		case schemas.TrustAnchorDetail_trustAnchorArn:
+			v.TrustAnchorArn = new(string)
+			return d.ReadString(schemas.TrustAnchorDetail_trustAnchorArn, v.TrustAnchorArn)
+		case schemas.TrustAnchorDetail_trustAnchorId:
+			v.TrustAnchorId = new(string)
+			return d.ReadString(schemas.TrustAnchorDetail_trustAnchorId, v.TrustAnchorId)
+		case schemas.TrustAnchorDetail_updatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.TrustAnchorDetail_updatedAt, v.UpdatedAt)
+		}
+		return nil
+	})
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde

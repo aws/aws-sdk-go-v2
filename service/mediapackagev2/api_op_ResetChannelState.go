@@ -4,6 +4,8 @@ package mediapackagev2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/mediapackagev2/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -43,6 +45,21 @@ type ResetChannelStateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ResetChannelStateInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ResetChannelStateRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ResetChannelStateInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ChannelGroupName != nil {
+		s.WriteString(schemas.ResetChannelStateRequest_ChannelGroupName, *v.ChannelGroupName)
+	}
+	if v.ChannelName != nil {
+		s.WriteString(schemas.ResetChannelStateRequest_ChannelName, *v.ChannelName)
+	}
+}
+
 type ResetChannelStateOutput struct {
 
 	// The Amazon Resource Name (ARN) associated with the channel that you just reset.
@@ -71,13 +88,50 @@ type ResetChannelStateOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ResetChannelStateOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ResetChannelStateResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ResetChannelStateOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.ResetChannelStateResponse_Arn, *v.Arn)
+	}
+	if v.ChannelGroupName != nil {
+		s.WriteString(schemas.ResetChannelStateResponse_ChannelGroupName, *v.ChannelGroupName)
+	}
+	if v.ChannelName != nil {
+		s.WriteString(schemas.ResetChannelStateResponse_ChannelName, *v.ChannelName)
+	}
+	if v.ResetAt != nil {
+		s.WriteTime(schemas.ResetChannelStateResponse_ResetAt, *v.ResetAt)
+	}
+}
+func (v *ResetChannelStateOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ResetChannelStateResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ResetChannelStateResponse_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.ResetChannelStateResponse_Arn, v.Arn)
+		case schemas.ResetChannelStateResponse_ChannelGroupName:
+			v.ChannelGroupName = new(string)
+			return d.ReadString(schemas.ResetChannelStateResponse_ChannelGroupName, v.ChannelGroupName)
+		case schemas.ResetChannelStateResponse_ChannelName:
+			v.ChannelName = new(string)
+			return d.ReadString(schemas.ResetChannelStateResponse_ChannelName, v.ChannelName)
+		case schemas.ResetChannelStateResponse_ResetAt:
+			v.ResetAt = new(time.Time)
+			return d.ReadTime(schemas.ResetChannelStateResponse_ResetAt, v.ResetAt)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationResetChannelStateMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpResetChannelState{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ResetChannelState, schemas.ResetChannelStateRequest, schemas.ResetChannelStateResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpResetChannelState{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ResetChannelState, schemas.ResetChannelStateRequest, schemas.ResetChannelStateResponse), output: &ResetChannelStateOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

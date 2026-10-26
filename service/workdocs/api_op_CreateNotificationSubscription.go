@@ -4,7 +4,9 @@ package workdocs
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/workdocs/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/workdocs/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -56,6 +58,27 @@ type CreateNotificationSubscriptionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateNotificationSubscriptionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateNotificationSubscriptionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateNotificationSubscriptionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Endpoint != nil {
+		s.WriteString(schemas.CreateNotificationSubscriptionRequest_Endpoint, *v.Endpoint)
+	}
+	if v.OrganizationId != nil {
+		s.WriteString(schemas.CreateNotificationSubscriptionRequest_OrganizationId, *v.OrganizationId)
+	}
+	if v.Protocol != "" {
+		s.WriteString(schemas.CreateNotificationSubscriptionRequest_Protocol, string(v.Protocol))
+	}
+	if v.SubscriptionType != "" {
+		s.WriteString(schemas.CreateNotificationSubscriptionRequest_SubscriptionType, string(v.SubscriptionType))
+	}
+}
+
 type CreateNotificationSubscriptionOutput struct {
 
 	// The subscription.
@@ -67,13 +90,34 @@ type CreateNotificationSubscriptionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateNotificationSubscriptionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateNotificationSubscriptionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateNotificationSubscriptionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Subscription != nil {
+		s.WriteStruct(schemas.CreateNotificationSubscriptionResponse_Subscription)
+		v.Subscription.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateNotificationSubscriptionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateNotificationSubscriptionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateNotificationSubscriptionResponse_Subscription:
+			v.Subscription = &types.Subscription{}
+			return v.Subscription.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateNotificationSubscriptionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateNotificationSubscription{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateNotificationSubscription, schemas.CreateNotificationSubscriptionRequest, schemas.CreateNotificationSubscriptionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateNotificationSubscription{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateNotificationSubscription, schemas.CreateNotificationSubscriptionRequest, schemas.CreateNotificationSubscriptionResponse), output: &CreateNotificationSubscriptionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

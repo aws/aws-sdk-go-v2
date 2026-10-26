@@ -4,6 +4,8 @@ package s3tables
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/s3tables/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -46,6 +48,24 @@ type GetTableMetadataLocationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetTableMetadataLocationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetTableMetadataLocationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetTableMetadataLocationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.GetTableMetadataLocationRequest_name, *v.Name)
+	}
+	if v.Namespace != nil {
+		s.WriteString(schemas.GetTableMetadataLocationRequest_namespace, *v.Namespace)
+	}
+	if v.TableBucketARN != nil {
+		s.WriteString(schemas.GetTableMetadataLocationRequest_tableBucketARN, *v.TableBucketARN)
+	}
+}
+
 type GetTableMetadataLocationOutput struct {
 
 	// The version token.
@@ -67,13 +87,44 @@ type GetTableMetadataLocationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetTableMetadataLocationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetTableMetadataLocationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetTableMetadataLocationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MetadataLocation != nil {
+		s.WriteString(schemas.GetTableMetadataLocationResponse_metadataLocation, *v.MetadataLocation)
+	}
+	if v.VersionToken != nil {
+		s.WriteString(schemas.GetTableMetadataLocationResponse_versionToken, *v.VersionToken)
+	}
+	if v.WarehouseLocation != nil {
+		s.WriteString(schemas.GetTableMetadataLocationResponse_warehouseLocation, *v.WarehouseLocation)
+	}
+}
+func (v *GetTableMetadataLocationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetTableMetadataLocationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetTableMetadataLocationResponse_metadataLocation:
+			v.MetadataLocation = new(string)
+			return d.ReadString(schemas.GetTableMetadataLocationResponse_metadataLocation, v.MetadataLocation)
+		case schemas.GetTableMetadataLocationResponse_versionToken:
+			v.VersionToken = new(string)
+			return d.ReadString(schemas.GetTableMetadataLocationResponse_versionToken, v.VersionToken)
+		case schemas.GetTableMetadataLocationResponse_warehouseLocation:
+			v.WarehouseLocation = new(string)
+			return d.ReadString(schemas.GetTableMetadataLocationResponse_warehouseLocation, v.WarehouseLocation)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetTableMetadataLocationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetTableMetadataLocation{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetTableMetadataLocation, schemas.GetTableMetadataLocationRequest, schemas.GetTableMetadataLocationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetTableMetadataLocation{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetTableMetadataLocation, schemas.GetTableMetadataLocationRequest, schemas.GetTableMetadataLocationResponse), output: &GetTableMetadataLocationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

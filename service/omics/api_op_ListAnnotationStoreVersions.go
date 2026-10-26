@@ -5,7 +5,9 @@ package omics
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/omics/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/omics/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -47,6 +49,29 @@ type ListAnnotationStoreVersionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAnnotationStoreVersionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAnnotationStoreVersionsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAnnotationStoreVersionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Filter != nil {
+		s.WriteStruct(schemas.ListAnnotationStoreVersionsRequest_filter)
+		v.Filter.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListAnnotationStoreVersionsRequest_maxResults, *v.MaxResults)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.ListAnnotationStoreVersionsRequest_name, *v.Name)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAnnotationStoreVersionsRequest_nextToken, *v.NextToken)
+	}
+}
+
 type ListAnnotationStoreVersionsOutput struct {
 
 	//  Lists all versions of an annotation store.
@@ -62,13 +87,35 @@ type ListAnnotationStoreVersionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAnnotationStoreVersionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAnnotationStoreVersionsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAnnotationStoreVersionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAnnotationStoreVersionItems(s, schemas.ListAnnotationStoreVersionsResponse_annotationStoreVersions, v.AnnotationStoreVersions)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAnnotationStoreVersionsResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListAnnotationStoreVersionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListAnnotationStoreVersionsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListAnnotationStoreVersionsResponse_annotationStoreVersions:
+			return deserializeAnnotationStoreVersionItems(d, schemas.ListAnnotationStoreVersionsResponse_annotationStoreVersions, &v.AnnotationStoreVersions)
+		case schemas.ListAnnotationStoreVersionsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListAnnotationStoreVersionsResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListAnnotationStoreVersionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListAnnotationStoreVersions{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAnnotationStoreVersions, schemas.ListAnnotationStoreVersionsRequest, schemas.ListAnnotationStoreVersionsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListAnnotationStoreVersions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAnnotationStoreVersions, schemas.ListAnnotationStoreVersionsRequest, schemas.ListAnnotationStoreVersionsResponse), output: &ListAnnotationStoreVersionsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

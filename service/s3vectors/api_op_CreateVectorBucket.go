@@ -4,7 +4,9 @@ package s3vectors
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/s3vectors/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/s3vectors/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -57,6 +59,24 @@ type CreateVectorBucketInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateVectorBucketInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateVectorBucketInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateVectorBucketInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EncryptionConfiguration != nil {
+		s.WriteStruct(schemas.CreateVectorBucketInput_encryptionConfiguration)
+		v.EncryptionConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeTagsMap(s, schemas.CreateVectorBucketInput_tags, v.Tags)
+	if v.VectorBucketName != nil {
+		s.WriteString(schemas.CreateVectorBucketInput_vectorBucketName, *v.VectorBucketName)
+	}
+}
+
 type CreateVectorBucketOutput struct {
 
 	// The Amazon Resource Name (ARN) of the newly created vector bucket.
@@ -70,13 +90,32 @@ type CreateVectorBucketOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateVectorBucketOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateVectorBucketOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateVectorBucketOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.VectorBucketArn != nil {
+		s.WriteString(schemas.CreateVectorBucketOutput_vectorBucketArn, *v.VectorBucketArn)
+	}
+}
+func (v *CreateVectorBucketOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateVectorBucketOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateVectorBucketOutput_vectorBucketArn:
+			v.VectorBucketArn = new(string)
+			return d.ReadString(schemas.CreateVectorBucketOutput_vectorBucketArn, v.VectorBucketArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateVectorBucketMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateVectorBucket{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateVectorBucket, schemas.CreateVectorBucketInput, schemas.CreateVectorBucketOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateVectorBucket{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateVectorBucket, schemas.CreateVectorBucketInput, schemas.CreateVectorBucketOutput), output: &CreateVectorBucketOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

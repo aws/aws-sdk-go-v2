@@ -5,7 +5,9 @@ package omics
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/omics/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/omics/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -54,6 +56,22 @@ type CompleteMultipartReadSetUploadInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CompleteMultipartReadSetUploadInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CompleteMultipartReadSetUploadRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CompleteMultipartReadSetUploadInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeCompleteReadSetUploadPartList(s, schemas.CompleteMultipartReadSetUploadRequest_parts, v.Parts)
+	if v.SequenceStoreId != nil {
+		s.WriteString(schemas.CompleteMultipartReadSetUploadRequest_sequenceStoreId, *v.SequenceStoreId)
+	}
+	if v.UploadId != nil {
+		s.WriteString(schemas.CompleteMultipartReadSetUploadRequest_uploadId, *v.UploadId)
+	}
+}
+
 type CompleteMultipartReadSetUploadOutput struct {
 
 	// The read set ID created for an uploaded read set.
@@ -67,13 +85,32 @@ type CompleteMultipartReadSetUploadOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CompleteMultipartReadSetUploadOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CompleteMultipartReadSetUploadResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CompleteMultipartReadSetUploadOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ReadSetId != nil {
+		s.WriteString(schemas.CompleteMultipartReadSetUploadResponse_readSetId, *v.ReadSetId)
+	}
+}
+func (v *CompleteMultipartReadSetUploadOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CompleteMultipartReadSetUploadResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CompleteMultipartReadSetUploadResponse_readSetId:
+			v.ReadSetId = new(string)
+			return d.ReadString(schemas.CompleteMultipartReadSetUploadResponse_readSetId, v.ReadSetId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCompleteMultipartReadSetUploadMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCompleteMultipartReadSetUpload{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CompleteMultipartReadSetUpload, schemas.CompleteMultipartReadSetUploadRequest, schemas.CompleteMultipartReadSetUploadResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCompleteMultipartReadSetUpload{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CompleteMultipartReadSetUpload, schemas.CompleteMultipartReadSetUploadRequest, schemas.CompleteMultipartReadSetUploadResponse), output: &CompleteMultipartReadSetUploadOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

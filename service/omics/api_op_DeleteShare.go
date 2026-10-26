@@ -5,7 +5,9 @@ package omics
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/omics/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/omics/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -38,6 +40,18 @@ type DeleteShareInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteShareInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteShareRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteShareInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ShareId != nil {
+		s.WriteString(schemas.DeleteShareRequest_shareId, *v.ShareId)
+	}
+}
+
 type DeleteShareOutput struct {
 
 	// The status of the share being deleted.
@@ -49,13 +63,36 @@ type DeleteShareOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteShareOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteShareResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteShareOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Status != "" {
+		s.WriteString(schemas.DeleteShareResponse_status, string(v.Status))
+	}
+}
+func (v *DeleteShareOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteShareResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteShareResponse_status:
+			var ev string
+			if err := d.ReadString(schemas.DeleteShareResponse_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.ShareStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteShareMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteShare{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteShare, schemas.DeleteShareRequest, schemas.DeleteShareResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteShare{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteShare, schemas.DeleteShareRequest, schemas.DeleteShareResponse), output: &DeleteShareOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,6 +4,8 @@ package osis
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/osis/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,19 @@ type RevokePipelineEndpointConnectionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RevokePipelineEndpointConnectionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RevokePipelineEndpointConnectionsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RevokePipelineEndpointConnectionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializePipelineEndpointIdsList(s, schemas.RevokePipelineEndpointConnectionsRequest_EndpointIds, v.EndpointIds)
+	if v.PipelineArn != nil {
+		s.WriteString(schemas.RevokePipelineEndpointConnectionsRequest_PipelineArn, *v.PipelineArn)
+	}
+}
+
 type RevokePipelineEndpointConnectionsOutput struct {
 
 	// The Amazon Resource Name (ARN) of the pipeline from which endpoint connections
@@ -51,13 +66,32 @@ type RevokePipelineEndpointConnectionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RevokePipelineEndpointConnectionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RevokePipelineEndpointConnectionsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RevokePipelineEndpointConnectionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PipelineArn != nil {
+		s.WriteString(schemas.RevokePipelineEndpointConnectionsResponse_PipelineArn, *v.PipelineArn)
+	}
+}
+func (v *RevokePipelineEndpointConnectionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RevokePipelineEndpointConnectionsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RevokePipelineEndpointConnectionsResponse_PipelineArn:
+			v.PipelineArn = new(string)
+			return d.ReadString(schemas.RevokePipelineEndpointConnectionsResponse_PipelineArn, v.PipelineArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationRevokePipelineEndpointConnectionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpRevokePipelineEndpointConnections{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RevokePipelineEndpointConnections, schemas.RevokePipelineEndpointConnectionsRequest, schemas.RevokePipelineEndpointConnectionsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpRevokePipelineEndpointConnections{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RevokePipelineEndpointConnections, schemas.RevokePipelineEndpointConnectionsRequest, schemas.RevokePipelineEndpointConnectionsResponse), output: &RevokePipelineEndpointConnectionsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

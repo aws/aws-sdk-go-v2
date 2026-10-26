@@ -4,7 +4,9 @@ package macie2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/macie2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/macie2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,25 @@ type UpdateRevealConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateRevealConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateRevealConfigurationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateRevealConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Configuration != nil {
+		s.WriteStruct(schemas.UpdateRevealConfigurationRequest_configuration)
+		v.Configuration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RetrievalConfiguration != nil {
+		s.WriteStruct(schemas.UpdateRevealConfigurationRequest_retrievalConfiguration)
+		v.RetrievalConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type UpdateRevealConfigurationOutput struct {
 
 	// The KMS key to use to encrypt the sensitive data, and the status of the
@@ -54,13 +75,42 @@ type UpdateRevealConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateRevealConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateRevealConfigurationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateRevealConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Configuration != nil {
+		s.WriteStruct(schemas.UpdateRevealConfigurationResponse_configuration)
+		v.Configuration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RetrievalConfiguration != nil {
+		s.WriteStruct(schemas.UpdateRevealConfigurationResponse_retrievalConfiguration)
+		v.RetrievalConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateRevealConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateRevealConfigurationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateRevealConfigurationResponse_configuration:
+			v.Configuration = &types.RevealConfiguration{}
+			return v.Configuration.Deserialize(d)
+		case schemas.UpdateRevealConfigurationResponse_retrievalConfiguration:
+			v.RetrievalConfiguration = &types.RetrievalConfiguration{}
+			return v.RetrievalConfiguration.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateRevealConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateRevealConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateRevealConfiguration, schemas.UpdateRevealConfigurationRequest, schemas.UpdateRevealConfigurationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateRevealConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateRevealConfiguration, schemas.UpdateRevealConfigurationRequest, schemas.UpdateRevealConfigurationResponse), output: &UpdateRevealConfigurationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package marketplacediscovery
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/marketplacediscovery/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/marketplacediscovery/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -40,6 +42,21 @@ type GetOfferInput struct {
 	Locale *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetOfferInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetOfferInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetOfferInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Locale != nil {
+		s.WriteString(schemas.GetOfferInput_locale, *v.Locale)
+	}
+	if v.OfferId != nil {
+		s.WriteString(schemas.GetOfferInput_offerId, *v.OfferId)
+	}
 }
 
 type GetOfferOutput struct {
@@ -107,13 +124,96 @@ type GetOfferOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetOfferOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetOfferOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetOfferOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AgreementProposalId != nil {
+		s.WriteString(schemas.GetOfferOutput_agreementProposalId, *v.AgreementProposalId)
+	}
+	serializeOfferAssociatedEntityList(s, schemas.GetOfferOutput_associatedEntities, v.AssociatedEntities)
+	if v.AvailableFromTime != nil {
+		s.WriteTime(schemas.GetOfferOutput_availableFromTime, *v.AvailableFromTime)
+	}
+	serializePurchaseOptionBadgeList(s, schemas.GetOfferOutput_badges, v.Badges)
+	if v.Catalog != nil {
+		s.WriteString(schemas.GetOfferOutput_catalog, *v.Catalog)
+	}
+	if v.ExpirationTime != nil {
+		s.WriteTime(schemas.GetOfferOutput_expirationTime, *v.ExpirationTime)
+	}
+	if v.Locale != nil {
+		s.WriteString(schemas.GetOfferOutput_locale, *v.Locale)
+	}
+	if v.OfferId != nil {
+		s.WriteString(schemas.GetOfferOutput_offerId, *v.OfferId)
+	}
+	if v.OfferName != nil {
+		s.WriteString(schemas.GetOfferOutput_offerName, *v.OfferName)
+	}
+	if v.PricingModel != nil {
+		s.WriteStruct(schemas.GetOfferOutput_pricingModel)
+		v.PricingModel.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ReplacementAgreementId != nil {
+		s.WriteString(schemas.GetOfferOutput_replacementAgreementId, *v.ReplacementAgreementId)
+	}
+	if v.SellerOfRecord != nil {
+		s.WriteStruct(schemas.GetOfferOutput_sellerOfRecord)
+		v.SellerOfRecord.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetOfferOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetOfferOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetOfferOutput_agreementProposalId:
+			v.AgreementProposalId = new(string)
+			return d.ReadString(schemas.GetOfferOutput_agreementProposalId, v.AgreementProposalId)
+		case schemas.GetOfferOutput_associatedEntities:
+			return deserializeOfferAssociatedEntityList(d, schemas.GetOfferOutput_associatedEntities, &v.AssociatedEntities)
+		case schemas.GetOfferOutput_availableFromTime:
+			v.AvailableFromTime = new(time.Time)
+			return d.ReadTime(schemas.GetOfferOutput_availableFromTime, v.AvailableFromTime)
+		case schemas.GetOfferOutput_badges:
+			return deserializePurchaseOptionBadgeList(d, schemas.GetOfferOutput_badges, &v.Badges)
+		case schemas.GetOfferOutput_catalog:
+			v.Catalog = new(string)
+			return d.ReadString(schemas.GetOfferOutput_catalog, v.Catalog)
+		case schemas.GetOfferOutput_expirationTime:
+			v.ExpirationTime = new(time.Time)
+			return d.ReadTime(schemas.GetOfferOutput_expirationTime, v.ExpirationTime)
+		case schemas.GetOfferOutput_locale:
+			v.Locale = new(string)
+			return d.ReadString(schemas.GetOfferOutput_locale, v.Locale)
+		case schemas.GetOfferOutput_offerId:
+			v.OfferId = new(string)
+			return d.ReadString(schemas.GetOfferOutput_offerId, v.OfferId)
+		case schemas.GetOfferOutput_offerName:
+			v.OfferName = new(string)
+			return d.ReadString(schemas.GetOfferOutput_offerName, v.OfferName)
+		case schemas.GetOfferOutput_pricingModel:
+			v.PricingModel = &types.PricingModel{}
+			return v.PricingModel.Deserialize(d)
+		case schemas.GetOfferOutput_replacementAgreementId:
+			v.ReplacementAgreementId = new(string)
+			return d.ReadString(schemas.GetOfferOutput_replacementAgreementId, v.ReplacementAgreementId)
+		case schemas.GetOfferOutput_sellerOfRecord:
+			v.SellerOfRecord = &types.SellerInformation{}
+			return v.SellerOfRecord.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetOfferMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetOffer{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetOffer, schemas.GetOfferInput, schemas.GetOfferOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetOffer{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetOffer, schemas.GetOfferInput, schemas.GetOfferOutput), output: &GetOfferOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

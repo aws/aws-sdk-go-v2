@@ -4,7 +4,9 @@ package osis
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/osis/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/osis/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -40,6 +42,18 @@ type GetPipelineChangeProgressInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetPipelineChangeProgressInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetPipelineChangeProgressRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetPipelineChangeProgressInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PipelineName != nil {
+		s.WriteString(schemas.GetPipelineChangeProgressRequest_PipelineName, *v.PipelineName)
+	}
+}
+
 type GetPipelineChangeProgressOutput struct {
 
 	// The current status of the change happening on the pipeline.
@@ -51,13 +65,29 @@ type GetPipelineChangeProgressOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetPipelineChangeProgressOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetPipelineChangeProgressResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetPipelineChangeProgressOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeChangeProgressStatusList(s, schemas.GetPipelineChangeProgressResponse_ChangeProgressStatuses, v.ChangeProgressStatuses)
+}
+func (v *GetPipelineChangeProgressOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetPipelineChangeProgressResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetPipelineChangeProgressResponse_ChangeProgressStatuses:
+			return deserializeChangeProgressStatusList(d, schemas.GetPipelineChangeProgressResponse_ChangeProgressStatuses, &v.ChangeProgressStatuses)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetPipelineChangeProgressMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetPipelineChangeProgress{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetPipelineChangeProgress, schemas.GetPipelineChangeProgressRequest, schemas.GetPipelineChangeProgressResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetPipelineChangeProgress{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetPipelineChangeProgress, schemas.GetPipelineChangeProgressRequest, schemas.GetPipelineChangeProgressResponse), output: &GetPipelineChangeProgressOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

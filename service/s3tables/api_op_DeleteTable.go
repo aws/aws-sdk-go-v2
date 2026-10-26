@@ -4,6 +4,8 @@ package s3tables
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/s3tables/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -52,6 +54,27 @@ type DeleteTableInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteTableInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteTableRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteTableInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.DeleteTableRequest_name, *v.Name)
+	}
+	if v.Namespace != nil {
+		s.WriteString(schemas.DeleteTableRequest_namespace, *v.Namespace)
+	}
+	if v.TableBucketARN != nil {
+		s.WriteString(schemas.DeleteTableRequest_tableBucketARN, *v.TableBucketARN)
+	}
+	if v.VersionToken != nil {
+		s.WriteString(schemas.DeleteTableRequest_versionToken, *v.VersionToken)
+	}
+}
+
 type DeleteTableOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -59,13 +82,26 @@ type DeleteTableOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteTableOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteTableOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteTableOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteTableMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteTable{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteTable, schemas.DeleteTableRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteTable{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteTable, schemas.DeleteTableRequest, nil), output: &DeleteTableOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

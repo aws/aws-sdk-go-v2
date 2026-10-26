@@ -5,7 +5,9 @@ package omics
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/omics/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/omics/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -46,6 +48,19 @@ type BatchDeleteReadSetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchDeleteReadSetInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchDeleteReadSetRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchDeleteReadSetInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeReadSetIdList(s, schemas.BatchDeleteReadSetRequest_ids, v.Ids)
+	if v.SequenceStoreId != nil {
+		s.WriteString(schemas.BatchDeleteReadSetRequest_sequenceStoreId, *v.SequenceStoreId)
+	}
+}
+
 type BatchDeleteReadSetOutput struct {
 
 	// Errors returned by individual delete operations.
@@ -57,13 +72,29 @@ type BatchDeleteReadSetOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchDeleteReadSetOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchDeleteReadSetResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchDeleteReadSetOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeReadSetBatchErrorList(s, schemas.BatchDeleteReadSetResponse_errors, v.Errors)
+}
+func (v *BatchDeleteReadSetOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchDeleteReadSetResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchDeleteReadSetResponse_errors:
+			return deserializeReadSetBatchErrorList(d, schemas.BatchDeleteReadSetResponse_errors, &v.Errors)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationBatchDeleteReadSetMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpBatchDeleteReadSet{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchDeleteReadSet, schemas.BatchDeleteReadSetRequest, schemas.BatchDeleteReadSetResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpBatchDeleteReadSet{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchDeleteReadSet, schemas.BatchDeleteReadSetRequest, schemas.BatchDeleteReadSetResponse), output: &BatchDeleteReadSetOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

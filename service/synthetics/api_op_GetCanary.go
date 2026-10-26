@@ -4,7 +4,9 @@ package synthetics
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/synthetics/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/synthetics/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -41,6 +43,21 @@ type GetCanaryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetCanaryInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetCanaryRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetCanaryInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DryRunId != nil {
+		s.WriteString(schemas.GetCanaryRequest_DryRunId, *v.DryRunId)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.GetCanaryRequest_Name, *v.Name)
+	}
+}
+
 type GetCanaryOutput struct {
 
 	// A structure that contains the full information about the canary.
@@ -52,13 +69,34 @@ type GetCanaryOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetCanaryOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetCanaryResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetCanaryOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Canary != nil {
+		s.WriteStruct(schemas.GetCanaryResponse_Canary)
+		v.Canary.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetCanaryOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetCanaryResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetCanaryResponse_Canary:
+			v.Canary = &types.Canary{}
+			return v.Canary.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetCanaryMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetCanary{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetCanary, schemas.GetCanaryRequest, schemas.GetCanaryResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetCanary{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetCanary, schemas.GetCanaryRequest, schemas.GetCanaryResponse), output: &GetCanaryOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

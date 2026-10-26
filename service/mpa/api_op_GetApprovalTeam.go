@@ -4,7 +4,9 @@ package mpa
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/mpa/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/mpa/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -33,6 +35,18 @@ type GetApprovalTeamInput struct {
 	Arn *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetApprovalTeamInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetApprovalTeamRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetApprovalTeamInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.GetApprovalTeamRequest_Arn, *v.Arn)
+	}
 }
 
 type GetApprovalTeamOutput struct {
@@ -98,13 +112,117 @@ type GetApprovalTeamOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetApprovalTeamOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetApprovalTeamResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetApprovalTeamOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeApprovalStrategyResponse(s, schemas.GetApprovalTeamResponse_ApprovalStrategy, v.ApprovalStrategy)
+	serializeGetApprovalTeamResponseApprovers(s, schemas.GetApprovalTeamResponse_Approvers, v.Approvers)
+	if v.Arn != nil {
+		s.WriteString(schemas.GetApprovalTeamResponse_Arn, *v.Arn)
+	}
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.GetApprovalTeamResponse_CreationTime, *v.CreationTime)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.GetApprovalTeamResponse_Description, *v.Description)
+	}
+	if v.LastUpdateTime != nil {
+		s.WriteTime(schemas.GetApprovalTeamResponse_LastUpdateTime, *v.LastUpdateTime)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.GetApprovalTeamResponse_Name, *v.Name)
+	}
+	if v.NumberOfApprovers != nil {
+		s.WriteInt32(schemas.GetApprovalTeamResponse_NumberOfApprovers, *v.NumberOfApprovers)
+	}
+	if v.PendingUpdate != nil {
+		s.WriteStruct(schemas.GetApprovalTeamResponse_PendingUpdate)
+		v.PendingUpdate.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializePoliciesReferences(s, schemas.GetApprovalTeamResponse_Policies, v.Policies)
+	if v.Status != "" {
+		s.WriteString(schemas.GetApprovalTeamResponse_Status, string(v.Status))
+	}
+	if v.StatusCode != "" {
+		s.WriteString(schemas.GetApprovalTeamResponse_StatusCode, string(v.StatusCode))
+	}
+	if v.StatusMessage != nil {
+		s.WriteString(schemas.GetApprovalTeamResponse_StatusMessage, *v.StatusMessage)
+	}
+	if v.UpdateSessionArn != nil {
+		s.WriteString(schemas.GetApprovalTeamResponse_UpdateSessionArn, *v.UpdateSessionArn)
+	}
+	if v.VersionId != nil {
+		s.WriteString(schemas.GetApprovalTeamResponse_VersionId, *v.VersionId)
+	}
+}
+func (v *GetApprovalTeamOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetApprovalTeamResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetApprovalTeamResponse_ApprovalStrategy:
+			return deserializeApprovalStrategyResponse(d, schemas.GetApprovalTeamResponse_ApprovalStrategy, &v.ApprovalStrategy)
+		case schemas.GetApprovalTeamResponse_Approvers:
+			return deserializeGetApprovalTeamResponseApprovers(d, schemas.GetApprovalTeamResponse_Approvers, &v.Approvers)
+		case schemas.GetApprovalTeamResponse_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.GetApprovalTeamResponse_Arn, v.Arn)
+		case schemas.GetApprovalTeamResponse_CreationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.GetApprovalTeamResponse_CreationTime, v.CreationTime)
+		case schemas.GetApprovalTeamResponse_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.GetApprovalTeamResponse_Description, v.Description)
+		case schemas.GetApprovalTeamResponse_LastUpdateTime:
+			v.LastUpdateTime = new(time.Time)
+			return d.ReadTime(schemas.GetApprovalTeamResponse_LastUpdateTime, v.LastUpdateTime)
+		case schemas.GetApprovalTeamResponse_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.GetApprovalTeamResponse_Name, v.Name)
+		case schemas.GetApprovalTeamResponse_NumberOfApprovers:
+			v.NumberOfApprovers = new(int32)
+			return d.ReadInt32(schemas.GetApprovalTeamResponse_NumberOfApprovers, v.NumberOfApprovers)
+		case schemas.GetApprovalTeamResponse_PendingUpdate:
+			v.PendingUpdate = &types.PendingUpdate{}
+			return v.PendingUpdate.Deserialize(d)
+		case schemas.GetApprovalTeamResponse_Policies:
+			return deserializePoliciesReferences(d, schemas.GetApprovalTeamResponse_Policies, &v.Policies)
+		case schemas.GetApprovalTeamResponse_Status:
+			var ev string
+			if err := d.ReadString(schemas.GetApprovalTeamResponse_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.ApprovalTeamStatus(ev)
+			return nil
+		case schemas.GetApprovalTeamResponse_StatusCode:
+			var ev string
+			if err := d.ReadString(schemas.GetApprovalTeamResponse_StatusCode, &ev); err != nil {
+				return err
+			}
+			v.StatusCode = types.ApprovalTeamStatusCode(ev)
+			return nil
+		case schemas.GetApprovalTeamResponse_StatusMessage:
+			v.StatusMessage = new(string)
+			return d.ReadString(schemas.GetApprovalTeamResponse_StatusMessage, v.StatusMessage)
+		case schemas.GetApprovalTeamResponse_UpdateSessionArn:
+			v.UpdateSessionArn = new(string)
+			return d.ReadString(schemas.GetApprovalTeamResponse_UpdateSessionArn, v.UpdateSessionArn)
+		case schemas.GetApprovalTeamResponse_VersionId:
+			v.VersionId = new(string)
+			return d.ReadString(schemas.GetApprovalTeamResponse_VersionId, v.VersionId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetApprovalTeamMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetApprovalTeam{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetApprovalTeam, schemas.GetApprovalTeamRequest, schemas.GetApprovalTeamResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetApprovalTeam{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetApprovalTeam, schemas.GetApprovalTeamRequest, schemas.GetApprovalTeamResponse), output: &GetApprovalTeamOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

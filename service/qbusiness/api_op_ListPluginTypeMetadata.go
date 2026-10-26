@@ -5,7 +5,9 @@ package qbusiness
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/qbusiness/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/qbusiness/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -37,6 +39,21 @@ type ListPluginTypeMetadataInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListPluginTypeMetadataInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListPluginTypeMetadataRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListPluginTypeMetadataInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListPluginTypeMetadataRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListPluginTypeMetadataRequest_nextToken, *v.NextToken)
+	}
+}
+
 type ListPluginTypeMetadataOutput struct {
 
 	// An array of information on plugin metadata.
@@ -52,13 +69,35 @@ type ListPluginTypeMetadataOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListPluginTypeMetadataOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListPluginTypeMetadataResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListPluginTypeMetadataOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeListPluginTypeMetadataSummaries(s, schemas.ListPluginTypeMetadataResponse_items, v.Items)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListPluginTypeMetadataResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListPluginTypeMetadataOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListPluginTypeMetadataResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListPluginTypeMetadataResponse_items:
+			return deserializeListPluginTypeMetadataSummaries(d, schemas.ListPluginTypeMetadataResponse_items, &v.Items)
+		case schemas.ListPluginTypeMetadataResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListPluginTypeMetadataResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListPluginTypeMetadataMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListPluginTypeMetadata{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListPluginTypeMetadata, schemas.ListPluginTypeMetadataRequest, schemas.ListPluginTypeMetadataResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListPluginTypeMetadata{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListPluginTypeMetadata, schemas.ListPluginTypeMetadataRequest, schemas.ListPluginTypeMetadataResponse), output: &ListPluginTypeMetadataOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

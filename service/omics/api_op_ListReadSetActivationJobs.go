@@ -5,7 +5,9 @@ package omics
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/omics/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/omics/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -48,6 +50,29 @@ type ListReadSetActivationJobsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListReadSetActivationJobsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListReadSetActivationJobsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListReadSetActivationJobsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Filter != nil {
+		s.WriteStruct(schemas.ListReadSetActivationJobsRequest_filter)
+		v.Filter.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListReadSetActivationJobsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListReadSetActivationJobsRequest_nextToken, *v.NextToken)
+	}
+	if v.SequenceStoreId != nil {
+		s.WriteString(schemas.ListReadSetActivationJobsRequest_sequenceStoreId, *v.SequenceStoreId)
+	}
+}
+
 type ListReadSetActivationJobsOutput struct {
 
 	// A list of jobs.
@@ -62,13 +87,35 @@ type ListReadSetActivationJobsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListReadSetActivationJobsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListReadSetActivationJobsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListReadSetActivationJobsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeActivateReadSetJobList(s, schemas.ListReadSetActivationJobsResponse_activationJobs, v.ActivationJobs)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListReadSetActivationJobsResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListReadSetActivationJobsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListReadSetActivationJobsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListReadSetActivationJobsResponse_activationJobs:
+			return deserializeActivateReadSetJobList(d, schemas.ListReadSetActivationJobsResponse_activationJobs, &v.ActivationJobs)
+		case schemas.ListReadSetActivationJobsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListReadSetActivationJobsResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListReadSetActivationJobsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListReadSetActivationJobs{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListReadSetActivationJobs, schemas.ListReadSetActivationJobsRequest, schemas.ListReadSetActivationJobsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListReadSetActivationJobs{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListReadSetActivationJobs, schemas.ListReadSetActivationJobsRequest, schemas.ListReadSetActivationJobsResponse), output: &ListReadSetActivationJobsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

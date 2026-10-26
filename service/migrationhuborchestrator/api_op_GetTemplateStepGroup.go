@@ -4,7 +4,9 @@ package migrationhuborchestrator
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/migrationhuborchestrator/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/migrationhuborchestrator/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -38,6 +40,34 @@ type GetTemplateStepGroupInput struct {
 	TemplateId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetTemplateStepGroupInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetTemplateStepGroupRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetTemplateStepGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Id != nil {
+		s.WriteString(schemas.GetTemplateStepGroupRequest_id, *v.Id)
+	}
+	if v.TemplateId != nil {
+		s.WriteString(schemas.GetTemplateStepGroupRequest_templateId, *v.TemplateId)
+	}
+}
+func (v *GetTemplateStepGroupInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetTemplateStepGroupRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetTemplateStepGroupRequest_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.GetTemplateStepGroupRequest_id, v.Id)
+		case schemas.GetTemplateStepGroupRequest_templateId:
+			v.TemplateId = new(string)
+			return d.ReadString(schemas.GetTemplateStepGroupRequest_templateId, v.TemplateId)
+		}
+		return nil
+	})
 }
 
 type GetTemplateStepGroupOutput struct {
@@ -78,13 +108,81 @@ type GetTemplateStepGroupOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetTemplateStepGroupOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetTemplateStepGroupResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetTemplateStepGroupOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.GetTemplateStepGroupResponse_creationTime, *v.CreationTime)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.GetTemplateStepGroupResponse_description, *v.Description)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.GetTemplateStepGroupResponse_id, *v.Id)
+	}
+	if v.LastModifiedTime != nil {
+		s.WriteTime(schemas.GetTemplateStepGroupResponse_lastModifiedTime, *v.LastModifiedTime)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.GetTemplateStepGroupResponse_name, *v.Name)
+	}
+	serializeStringList(s, schemas.GetTemplateStepGroupResponse_next, v.Next)
+	serializeStringList(s, schemas.GetTemplateStepGroupResponse_previous, v.Previous)
+	if v.Status != "" {
+		s.WriteString(schemas.GetTemplateStepGroupResponse_status, string(v.Status))
+	}
+	if v.TemplateId != nil {
+		s.WriteString(schemas.GetTemplateStepGroupResponse_templateId, *v.TemplateId)
+	}
+	serializeToolsList(s, schemas.GetTemplateStepGroupResponse_tools, v.Tools)
+}
+func (v *GetTemplateStepGroupOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetTemplateStepGroupResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetTemplateStepGroupResponse_creationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.GetTemplateStepGroupResponse_creationTime, v.CreationTime)
+		case schemas.GetTemplateStepGroupResponse_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.GetTemplateStepGroupResponse_description, v.Description)
+		case schemas.GetTemplateStepGroupResponse_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.GetTemplateStepGroupResponse_id, v.Id)
+		case schemas.GetTemplateStepGroupResponse_lastModifiedTime:
+			v.LastModifiedTime = new(time.Time)
+			return d.ReadTime(schemas.GetTemplateStepGroupResponse_lastModifiedTime, v.LastModifiedTime)
+		case schemas.GetTemplateStepGroupResponse_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.GetTemplateStepGroupResponse_name, v.Name)
+		case schemas.GetTemplateStepGroupResponse_next:
+			return deserializeStringList(d, schemas.GetTemplateStepGroupResponse_next, &v.Next)
+		case schemas.GetTemplateStepGroupResponse_previous:
+			return deserializeStringList(d, schemas.GetTemplateStepGroupResponse_previous, &v.Previous)
+		case schemas.GetTemplateStepGroupResponse_status:
+			var ev string
+			if err := d.ReadString(schemas.GetTemplateStepGroupResponse_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.StepGroupStatus(ev)
+			return nil
+		case schemas.GetTemplateStepGroupResponse_templateId:
+			v.TemplateId = new(string)
+			return d.ReadString(schemas.GetTemplateStepGroupResponse_templateId, v.TemplateId)
+		case schemas.GetTemplateStepGroupResponse_tools:
+			return deserializeToolsList(d, schemas.GetTemplateStepGroupResponse_tools, &v.Tools)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetTemplateStepGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetTemplateStepGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetTemplateStepGroup, schemas.GetTemplateStepGroupRequest, schemas.GetTemplateStepGroupResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetTemplateStepGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetTemplateStepGroup, schemas.GetTemplateStepGroupRequest, schemas.GetTemplateStepGroupResponse), output: &GetTemplateStepGroupOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

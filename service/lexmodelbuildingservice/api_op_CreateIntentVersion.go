@@ -4,7 +4,9 @@ package lexmodelbuildingservice
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/lexmodelbuildingservice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lexmodelbuildingservice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -55,6 +57,21 @@ type CreateIntentVersionInput struct {
 	Checksum *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *CreateIntentVersionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateIntentVersionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateIntentVersionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Checksum != nil {
+		s.WriteString(schemas.CreateIntentVersionRequest_checksum, *v.Checksum)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateIntentVersionRequest_name, *v.Name)
+	}
 }
 
 type CreateIntentVersionOutput struct {
@@ -127,13 +144,136 @@ type CreateIntentVersionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateIntentVersionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateIntentVersionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateIntentVersionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Checksum != nil {
+		s.WriteString(schemas.CreateIntentVersionResponse_checksum, *v.Checksum)
+	}
+	if v.ConclusionStatement != nil {
+		s.WriteStruct(schemas.CreateIntentVersionResponse_conclusionStatement)
+		v.ConclusionStatement.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ConfirmationPrompt != nil {
+		s.WriteStruct(schemas.CreateIntentVersionResponse_confirmationPrompt)
+		v.ConfirmationPrompt.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CreatedDate != nil {
+		s.WriteTime(schemas.CreateIntentVersionResponse_createdDate, *v.CreatedDate)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreateIntentVersionResponse_description, *v.Description)
+	}
+	if v.DialogCodeHook != nil {
+		s.WriteStruct(schemas.CreateIntentVersionResponse_dialogCodeHook)
+		v.DialogCodeHook.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.FollowUpPrompt != nil {
+		s.WriteStruct(schemas.CreateIntentVersionResponse_followUpPrompt)
+		v.FollowUpPrompt.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.FulfillmentActivity != nil {
+		s.WriteStruct(schemas.CreateIntentVersionResponse_fulfillmentActivity)
+		v.FulfillmentActivity.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeInputContextList(s, schemas.CreateIntentVersionResponse_inputContexts, v.InputContexts)
+	if v.KendraConfiguration != nil {
+		s.WriteStruct(schemas.CreateIntentVersionResponse_kendraConfiguration)
+		v.KendraConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.LastUpdatedDate != nil {
+		s.WriteTime(schemas.CreateIntentVersionResponse_lastUpdatedDate, *v.LastUpdatedDate)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateIntentVersionResponse_name, *v.Name)
+	}
+	serializeOutputContextList(s, schemas.CreateIntentVersionResponse_outputContexts, v.OutputContexts)
+	if v.ParentIntentSignature != nil {
+		s.WriteString(schemas.CreateIntentVersionResponse_parentIntentSignature, *v.ParentIntentSignature)
+	}
+	if v.RejectionStatement != nil {
+		s.WriteStruct(schemas.CreateIntentVersionResponse_rejectionStatement)
+		v.RejectionStatement.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeIntentUtteranceList(s, schemas.CreateIntentVersionResponse_sampleUtterances, v.SampleUtterances)
+	serializeSlotList(s, schemas.CreateIntentVersionResponse_slots, v.Slots)
+	if v.Version != nil {
+		s.WriteString(schemas.CreateIntentVersionResponse_version, *v.Version)
+	}
+}
+func (v *CreateIntentVersionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateIntentVersionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateIntentVersionResponse_checksum:
+			v.Checksum = new(string)
+			return d.ReadString(schemas.CreateIntentVersionResponse_checksum, v.Checksum)
+		case schemas.CreateIntentVersionResponse_conclusionStatement:
+			v.ConclusionStatement = &types.Statement{}
+			return v.ConclusionStatement.Deserialize(d)
+		case schemas.CreateIntentVersionResponse_confirmationPrompt:
+			v.ConfirmationPrompt = &types.Prompt{}
+			return v.ConfirmationPrompt.Deserialize(d)
+		case schemas.CreateIntentVersionResponse_createdDate:
+			v.CreatedDate = new(time.Time)
+			return d.ReadTime(schemas.CreateIntentVersionResponse_createdDate, v.CreatedDate)
+		case schemas.CreateIntentVersionResponse_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.CreateIntentVersionResponse_description, v.Description)
+		case schemas.CreateIntentVersionResponse_dialogCodeHook:
+			v.DialogCodeHook = &types.CodeHook{}
+			return v.DialogCodeHook.Deserialize(d)
+		case schemas.CreateIntentVersionResponse_followUpPrompt:
+			v.FollowUpPrompt = &types.FollowUpPrompt{}
+			return v.FollowUpPrompt.Deserialize(d)
+		case schemas.CreateIntentVersionResponse_fulfillmentActivity:
+			v.FulfillmentActivity = &types.FulfillmentActivity{}
+			return v.FulfillmentActivity.Deserialize(d)
+		case schemas.CreateIntentVersionResponse_inputContexts:
+			return deserializeInputContextList(d, schemas.CreateIntentVersionResponse_inputContexts, &v.InputContexts)
+		case schemas.CreateIntentVersionResponse_kendraConfiguration:
+			v.KendraConfiguration = &types.KendraConfiguration{}
+			return v.KendraConfiguration.Deserialize(d)
+		case schemas.CreateIntentVersionResponse_lastUpdatedDate:
+			v.LastUpdatedDate = new(time.Time)
+			return d.ReadTime(schemas.CreateIntentVersionResponse_lastUpdatedDate, v.LastUpdatedDate)
+		case schemas.CreateIntentVersionResponse_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.CreateIntentVersionResponse_name, v.Name)
+		case schemas.CreateIntentVersionResponse_outputContexts:
+			return deserializeOutputContextList(d, schemas.CreateIntentVersionResponse_outputContexts, &v.OutputContexts)
+		case schemas.CreateIntentVersionResponse_parentIntentSignature:
+			v.ParentIntentSignature = new(string)
+			return d.ReadString(schemas.CreateIntentVersionResponse_parentIntentSignature, v.ParentIntentSignature)
+		case schemas.CreateIntentVersionResponse_rejectionStatement:
+			v.RejectionStatement = &types.Statement{}
+			return v.RejectionStatement.Deserialize(d)
+		case schemas.CreateIntentVersionResponse_sampleUtterances:
+			return deserializeIntentUtteranceList(d, schemas.CreateIntentVersionResponse_sampleUtterances, &v.SampleUtterances)
+		case schemas.CreateIntentVersionResponse_slots:
+			return deserializeSlotList(d, schemas.CreateIntentVersionResponse_slots, &v.Slots)
+		case schemas.CreateIntentVersionResponse_version:
+			v.Version = new(string)
+			return d.ReadString(schemas.CreateIntentVersionResponse_version, v.Version)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateIntentVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateIntentVersion{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateIntentVersion, schemas.CreateIntentVersionRequest, schemas.CreateIntentVersionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateIntentVersion{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateIntentVersion, schemas.CreateIntentVersionRequest, schemas.CreateIntentVersionResponse), output: &CreateIntentVersionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

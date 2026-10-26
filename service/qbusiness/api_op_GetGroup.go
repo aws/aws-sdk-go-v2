@@ -4,7 +4,9 @@ package qbusiness
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/qbusiness/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/qbusiness/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -47,6 +49,27 @@ type GetGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetGroupInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetGroupRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationId != nil {
+		s.WriteString(schemas.GetGroupRequest_applicationId, *v.ApplicationId)
+	}
+	if v.DataSourceId != nil {
+		s.WriteString(schemas.GetGroupRequest_dataSourceId, *v.DataSourceId)
+	}
+	if v.GroupName != nil {
+		s.WriteString(schemas.GetGroupRequest_groupName, *v.GroupName)
+	}
+	if v.IndexId != nil {
+		s.WriteString(schemas.GetGroupRequest_indexId, *v.IndexId)
+	}
+}
+
 type GetGroupOutput struct {
 
 	// The current status of the group.
@@ -61,13 +84,37 @@ type GetGroupOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetGroupOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetGroupResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetGroupOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Status != nil {
+		s.WriteStruct(schemas.GetGroupResponse_status)
+		v.Status.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeGroupStatusDetails(s, schemas.GetGroupResponse_statusHistory, v.StatusHistory)
+}
+func (v *GetGroupOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetGroupResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetGroupResponse_status:
+			v.Status = &types.GroupStatusDetail{}
+			return v.Status.Deserialize(d)
+		case schemas.GetGroupResponse_statusHistory:
+			return deserializeGroupStatusDetails(d, schemas.GetGroupResponse_statusHistory, &v.StatusHistory)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetGroup, schemas.GetGroupRequest, schemas.GetGroupResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetGroup, schemas.GetGroupRequest, schemas.GetGroupResponse), output: &GetGroupOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

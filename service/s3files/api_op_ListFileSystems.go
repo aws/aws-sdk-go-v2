@@ -5,7 +5,9 @@ package s3files
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/s3files/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/s3files/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -44,6 +46,24 @@ type ListFileSystemsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListFileSystemsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListFileSystemsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListFileSystemsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Bucket != nil {
+		s.WriteString(schemas.ListFileSystemsRequest_bucket, *v.Bucket)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListFileSystemsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListFileSystemsRequest_nextToken, *v.NextToken)
+	}
+}
+
 type ListFileSystemsOutput struct {
 
 	// An array of file system descriptions.
@@ -60,13 +80,35 @@ type ListFileSystemsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListFileSystemsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListFileSystemsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListFileSystemsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeFileSystems(s, schemas.ListFileSystemsResponse_fileSystems, v.FileSystems)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListFileSystemsResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListFileSystemsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListFileSystemsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListFileSystemsResponse_fileSystems:
+			return deserializeFileSystems(d, schemas.ListFileSystemsResponse_fileSystems, &v.FileSystems)
+		case schemas.ListFileSystemsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListFileSystemsResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListFileSystemsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListFileSystems{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListFileSystems, schemas.ListFileSystemsRequest, schemas.ListFileSystemsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListFileSystems{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListFileSystems, schemas.ListFileSystemsRequest, schemas.ListFileSystemsResponse), output: &ListFileSystemsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -5,6 +5,8 @@ package medicalimaging
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/medicalimaging/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"io"
@@ -44,6 +46,24 @@ type GetImageSetMetadataInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetImageSetMetadataInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetImageSetMetadataRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetImageSetMetadataInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DatastoreId != nil {
+		s.WriteString(schemas.GetImageSetMetadataRequest_datastoreId, *v.DatastoreId)
+	}
+	if v.ImageSetId != nil {
+		s.WriteString(schemas.GetImageSetMetadataRequest_imageSetId, *v.ImageSetId)
+	}
+	if v.VersionId != nil {
+		s.WriteString(schemas.GetImageSetMetadataRequest_versionId, *v.VersionId)
+	}
+}
+
 type GetImageSetMetadataOutput struct {
 
 	// The blob containing the aggregated metadata information for the image set.
@@ -64,13 +84,46 @@ type GetImageSetMetadataOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetImageSetMetadataOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetImageSetMetadataResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetImageSetMetadataOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ContentEncoding != nil {
+		s.WriteString(schemas.GetImageSetMetadataResponse_contentEncoding, *v.ContentEncoding)
+	}
+	if v.ContentType != nil {
+		s.WriteString(schemas.GetImageSetMetadataResponse_contentType, *v.ContentType)
+	}
+}
+func (v *GetImageSetMetadataOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetImageSetMetadataResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetImageSetMetadataResponse_contentEncoding:
+			v.ContentEncoding = new(string)
+			return d.ReadString(schemas.GetImageSetMetadataResponse_contentEncoding, v.ContentEncoding)
+		case schemas.GetImageSetMetadataResponse_contentType:
+			v.ContentType = new(string)
+			return d.ReadString(schemas.GetImageSetMetadataResponse_contentType, v.ContentType)
+		}
+		return nil
+	})
+}
+func (v *GetImageSetMetadataOutput) GetPayloadStream() io.Reader { return v.ImageSetMetadataBlob }
+
+var _ smithy.StreamingInput = (*GetImageSetMetadataOutput)(nil)
+
+func (v *GetImageSetMetadataOutput) SetPayloadStream(r io.ReadCloser) { v.ImageSetMetadataBlob = r }
+
+var _ smithy.StreamingOutput = (*GetImageSetMetadataOutput)(nil)
+
 func (c *Client) addOperationGetImageSetMetadataMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetImageSetMetadata{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetImageSetMetadata, schemas.GetImageSetMetadataRequest, schemas.GetImageSetMetadataResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetImageSetMetadata{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetImageSetMetadata, schemas.GetImageSetMetadataRequest, schemas.GetImageSetMetadataResponse), output: &GetImageSetMetadataOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

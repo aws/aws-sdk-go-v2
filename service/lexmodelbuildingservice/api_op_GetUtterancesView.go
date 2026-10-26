@@ -4,7 +4,9 @@ package lexmodelbuildingservice
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/lexmodelbuildingservice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lexmodelbuildingservice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -73,6 +75,22 @@ type GetUtterancesViewInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetUtterancesViewInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetUtterancesViewRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetUtterancesViewInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BotName != nil {
+		s.WriteString(schemas.GetUtterancesViewRequest_botName, *v.BotName)
+	}
+	serializeBotVersions(s, schemas.GetUtterancesViewRequest_botVersions, v.BotVersions)
+	if v.StatusType != "" {
+		s.WriteString(schemas.GetUtterancesViewRequest_statusType, string(v.StatusType))
+	}
+}
+
 type GetUtterancesViewOutput struct {
 
 	// The name of the bot for which utterance information was returned.
@@ -90,13 +108,35 @@ type GetUtterancesViewOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetUtterancesViewOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetUtterancesViewResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetUtterancesViewOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BotName != nil {
+		s.WriteString(schemas.GetUtterancesViewResponse_botName, *v.BotName)
+	}
+	serializeListsOfUtterances(s, schemas.GetUtterancesViewResponse_utterances, v.Utterances)
+}
+func (v *GetUtterancesViewOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetUtterancesViewResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetUtterancesViewResponse_botName:
+			v.BotName = new(string)
+			return d.ReadString(schemas.GetUtterancesViewResponse_botName, v.BotName)
+		case schemas.GetUtterancesViewResponse_utterances:
+			return deserializeListsOfUtterances(d, schemas.GetUtterancesViewResponse_utterances, &v.Utterances)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetUtterancesViewMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetUtterancesView{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetUtterancesView, schemas.GetUtterancesViewRequest, schemas.GetUtterancesViewResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetUtterancesView{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetUtterancesView, schemas.GetUtterancesViewRequest, schemas.GetUtterancesViewResponse), output: &GetUtterancesViewOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

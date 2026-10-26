@@ -4,6 +4,8 @@ package observabilityadmin
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/observabilityadmin/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -29,6 +31,22 @@ type StopTelemetryEvaluationForOrganizationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StopTelemetryEvaluationForOrganizationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StopTelemetryEvaluationForOrganizationInput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *StopTelemetryEvaluationForOrganizationInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
+
 type StopTelemetryEvaluationForOrganizationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -36,13 +54,26 @@ type StopTelemetryEvaluationForOrganizationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StopTelemetryEvaluationForOrganizationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StopTelemetryEvaluationForOrganizationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *StopTelemetryEvaluationForOrganizationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStopTelemetryEvaluationForOrganizationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpStopTelemetryEvaluationForOrganization{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StopTelemetryEvaluationForOrganization, nil, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStopTelemetryEvaluationForOrganization{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StopTelemetryEvaluationForOrganization, nil, nil), output: &StopTelemetryEvaluationForOrganizationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

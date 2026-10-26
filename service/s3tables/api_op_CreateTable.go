@@ -4,7 +4,9 @@ package s3tables
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/s3tables/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/s3tables/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -101,6 +103,39 @@ type CreateTableInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateTableInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateTableRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateTableInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EncryptionConfiguration != nil {
+		s.WriteStruct(schemas.CreateTableRequest_encryptionConfiguration)
+		v.EncryptionConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Format != "" {
+		s.WriteString(schemas.CreateTableRequest_format, string(v.Format))
+	}
+	serializeTableMetadata(s, schemas.CreateTableRequest_metadata, v.Metadata)
+	if v.Name != nil {
+		s.WriteString(schemas.CreateTableRequest_name, *v.Name)
+	}
+	if v.Namespace != nil {
+		s.WriteString(schemas.CreateTableRequest_namespace, *v.Namespace)
+	}
+	if v.StorageClassConfiguration != nil {
+		s.WriteStruct(schemas.CreateTableRequest_storageClassConfiguration)
+		v.StorageClassConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TableBucketARN != nil {
+		s.WriteString(schemas.CreateTableRequest_tableBucketARN, *v.TableBucketARN)
+	}
+	serializeTags(s, schemas.CreateTableRequest_tags, v.Tags)
+}
+
 type CreateTableOutput struct {
 
 	// The Amazon Resource Name (ARN) of the table.
@@ -119,13 +154,38 @@ type CreateTableOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateTableOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateTableResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateTableOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TableARN != nil {
+		s.WriteString(schemas.CreateTableResponse_tableARN, *v.TableARN)
+	}
+	if v.VersionToken != nil {
+		s.WriteString(schemas.CreateTableResponse_versionToken, *v.VersionToken)
+	}
+}
+func (v *CreateTableOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateTableResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateTableResponse_tableARN:
+			v.TableARN = new(string)
+			return d.ReadString(schemas.CreateTableResponse_tableARN, v.TableARN)
+		case schemas.CreateTableResponse_versionToken:
+			v.VersionToken = new(string)
+			return d.ReadString(schemas.CreateTableResponse_versionToken, v.VersionToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateTableMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateTable{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateTable, schemas.CreateTableRequest, schemas.CreateTableResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateTable{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateTable, schemas.CreateTableRequest, schemas.CreateTableResponse), output: &CreateTableOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

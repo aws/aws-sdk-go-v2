@@ -4,6 +4,8 @@ package s3tables
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/s3tables/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -45,6 +47,21 @@ type GetNamespaceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetNamespaceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetNamespaceRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetNamespaceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Namespace != nil {
+		s.WriteString(schemas.GetNamespaceRequest_namespace, *v.Namespace)
+	}
+	if v.TableBucketARN != nil {
+		s.WriteString(schemas.GetNamespaceRequest_tableBucketARN, *v.TableBucketARN)
+	}
+}
+
 type GetNamespaceOutput struct {
 
 	// The date and time the namespace was created at.
@@ -79,13 +96,59 @@ type GetNamespaceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetNamespaceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetNamespaceResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetNamespaceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.GetNamespaceResponse_createdAt, *v.CreatedAt)
+	}
+	if v.CreatedBy != nil {
+		s.WriteString(schemas.GetNamespaceResponse_createdBy, *v.CreatedBy)
+	}
+	serializeNamespaceList(s, schemas.GetNamespaceResponse_namespace, v.Namespace)
+	if v.NamespaceId != nil {
+		s.WriteString(schemas.GetNamespaceResponse_namespaceId, *v.NamespaceId)
+	}
+	if v.OwnerAccountId != nil {
+		s.WriteString(schemas.GetNamespaceResponse_ownerAccountId, *v.OwnerAccountId)
+	}
+	if v.TableBucketId != nil {
+		s.WriteString(schemas.GetNamespaceResponse_tableBucketId, *v.TableBucketId)
+	}
+}
+func (v *GetNamespaceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetNamespaceResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetNamespaceResponse_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.GetNamespaceResponse_createdAt, v.CreatedAt)
+		case schemas.GetNamespaceResponse_createdBy:
+			v.CreatedBy = new(string)
+			return d.ReadString(schemas.GetNamespaceResponse_createdBy, v.CreatedBy)
+		case schemas.GetNamespaceResponse_namespace:
+			return deserializeNamespaceList(d, schemas.GetNamespaceResponse_namespace, &v.Namespace)
+		case schemas.GetNamespaceResponse_namespaceId:
+			v.NamespaceId = new(string)
+			return d.ReadString(schemas.GetNamespaceResponse_namespaceId, v.NamespaceId)
+		case schemas.GetNamespaceResponse_ownerAccountId:
+			v.OwnerAccountId = new(string)
+			return d.ReadString(schemas.GetNamespaceResponse_ownerAccountId, v.OwnerAccountId)
+		case schemas.GetNamespaceResponse_tableBucketId:
+			v.TableBucketId = new(string)
+			return d.ReadString(schemas.GetNamespaceResponse_tableBucketId, v.TableBucketId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetNamespaceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetNamespace{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetNamespace, schemas.GetNamespaceRequest, schemas.GetNamespaceResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetNamespace{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetNamespace, schemas.GetNamespaceRequest, schemas.GetNamespaceResponse), output: &GetNamespaceOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

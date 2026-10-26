@@ -4,7 +4,9 @@ package polly
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/polly/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/polly/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -110,6 +112,47 @@ type StartSpeechSynthesisTaskInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartSpeechSynthesisTaskInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartSpeechSynthesisTaskInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartSpeechSynthesisTaskInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Engine != "" {
+		s.WriteString(schemas.StartSpeechSynthesisTaskInput_Engine, string(v.Engine))
+	}
+	if v.LanguageCode != "" {
+		s.WriteString(schemas.StartSpeechSynthesisTaskInput_LanguageCode, string(v.LanguageCode))
+	}
+	serializeLexiconNameList(s, schemas.StartSpeechSynthesisTaskInput_LexiconNames, v.LexiconNames)
+	if v.OutputFormat != "" {
+		s.WriteString(schemas.StartSpeechSynthesisTaskInput_OutputFormat, string(v.OutputFormat))
+	}
+	if v.OutputS3BucketName != nil {
+		s.WriteString(schemas.StartSpeechSynthesisTaskInput_OutputS3BucketName, *v.OutputS3BucketName)
+	}
+	if v.OutputS3KeyPrefix != nil {
+		s.WriteString(schemas.StartSpeechSynthesisTaskInput_OutputS3KeyPrefix, *v.OutputS3KeyPrefix)
+	}
+	if v.SampleRate != nil {
+		s.WriteString(schemas.StartSpeechSynthesisTaskInput_SampleRate, *v.SampleRate)
+	}
+	if v.SnsTopicArn != nil {
+		s.WriteString(schemas.StartSpeechSynthesisTaskInput_SnsTopicArn, *v.SnsTopicArn)
+	}
+	serializeSpeechMarkTypeList(s, schemas.StartSpeechSynthesisTaskInput_SpeechMarkTypes, v.SpeechMarkTypes)
+	if v.Text != nil {
+		s.WriteString(schemas.StartSpeechSynthesisTaskInput_Text, *v.Text)
+	}
+	if v.TextType != "" {
+		s.WriteString(schemas.StartSpeechSynthesisTaskInput_TextType, string(v.TextType))
+	}
+	if v.VoiceId != "" {
+		s.WriteString(schemas.StartSpeechSynthesisTaskInput_VoiceId, string(v.VoiceId))
+	}
+}
+
 type StartSpeechSynthesisTaskOutput struct {
 
 	// SynthesisTask object that provides information and attributes about a newly
@@ -122,13 +165,34 @@ type StartSpeechSynthesisTaskOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartSpeechSynthesisTaskOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartSpeechSynthesisTaskOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartSpeechSynthesisTaskOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SynthesisTask != nil {
+		s.WriteStruct(schemas.StartSpeechSynthesisTaskOutput_SynthesisTask)
+		v.SynthesisTask.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *StartSpeechSynthesisTaskOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartSpeechSynthesisTaskOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartSpeechSynthesisTaskOutput_SynthesisTask:
+			v.SynthesisTask = &types.SynthesisTask{}
+			return v.SynthesisTask.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartSpeechSynthesisTaskMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpStartSpeechSynthesisTask{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartSpeechSynthesisTask, schemas.StartSpeechSynthesisTaskInput, schemas.StartSpeechSynthesisTaskOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStartSpeechSynthesisTask{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartSpeechSynthesisTask, schemas.StartSpeechSynthesisTaskInput, schemas.StartSpeechSynthesisTaskOutput), output: &StartSpeechSynthesisTaskOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

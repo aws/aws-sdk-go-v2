@@ -4,6 +4,8 @@ package rum
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/rum/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -35,6 +37,18 @@ type GetResourcePolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetResourcePolicyInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetResourcePolicyRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetResourcePolicyInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.GetResourcePolicyRequest_Name, *v.Name)
+	}
+}
+
 type GetResourcePolicyOutput struct {
 
 	// The JSON policy document that you requested.
@@ -50,13 +64,38 @@ type GetResourcePolicyOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetResourcePolicyOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetResourcePolicyResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetResourcePolicyOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PolicyDocument != nil {
+		s.WriteString(schemas.GetResourcePolicyResponse_PolicyDocument, *v.PolicyDocument)
+	}
+	if v.PolicyRevisionId != nil {
+		s.WriteString(schemas.GetResourcePolicyResponse_PolicyRevisionId, *v.PolicyRevisionId)
+	}
+}
+func (v *GetResourcePolicyOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetResourcePolicyResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetResourcePolicyResponse_PolicyDocument:
+			v.PolicyDocument = new(string)
+			return d.ReadString(schemas.GetResourcePolicyResponse_PolicyDocument, v.PolicyDocument)
+		case schemas.GetResourcePolicyResponse_PolicyRevisionId:
+			v.PolicyRevisionId = new(string)
+			return d.ReadString(schemas.GetResourcePolicyResponse_PolicyRevisionId, v.PolicyRevisionId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetResourcePolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetResourcePolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetResourcePolicy, schemas.GetResourcePolicyRequest, schemas.GetResourcePolicyResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetResourcePolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetResourcePolicy, schemas.GetResourcePolicyRequest, schemas.GetResourcePolicyResponse), output: &GetResourcePolicyOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

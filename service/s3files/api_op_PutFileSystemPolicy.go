@@ -4,6 +4,8 @@ package s3files
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/s3files/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -42,6 +44,21 @@ type PutFileSystemPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutFileSystemPolicyInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutFileSystemPolicyRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutFileSystemPolicyInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FileSystemId != nil {
+		s.WriteString(schemas.PutFileSystemPolicyRequest_fileSystemId, *v.FileSystemId)
+	}
+	if v.Policy != nil {
+		s.WriteString(schemas.PutFileSystemPolicyRequest_policy, *v.Policy)
+	}
+}
+
 type PutFileSystemPolicyOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -49,13 +66,26 @@ type PutFileSystemPolicyOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutFileSystemPolicyOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutFileSystemPolicyResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutFileSystemPolicyOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *PutFileSystemPolicyOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PutFileSystemPolicyResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPutFileSystemPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpPutFileSystemPolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutFileSystemPolicy, schemas.PutFileSystemPolicyRequest, schemas.PutFileSystemPolicyResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpPutFileSystemPolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutFileSystemPolicy, schemas.PutFileSystemPolicyRequest, schemas.PutFileSystemPolicyResponse), output: &PutFileSystemPolicyOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

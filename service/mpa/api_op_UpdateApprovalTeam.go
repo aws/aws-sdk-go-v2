@@ -4,7 +4,9 @@ package mpa
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/mpa/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/mpa/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -52,6 +54,24 @@ type UpdateApprovalTeamInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateApprovalTeamInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateApprovalTeamRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateApprovalTeamInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeApprovalStrategy(s, schemas.UpdateApprovalTeamRequest_ApprovalStrategy, v.ApprovalStrategy)
+	serializeApprovalTeamRequestApprovers(s, schemas.UpdateApprovalTeamRequest_Approvers, v.Approvers)
+	if v.Arn != nil {
+		s.WriteString(schemas.UpdateApprovalTeamRequest_Arn, *v.Arn)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateApprovalTeamRequest_Description, *v.Description)
+	}
+	serializeUpdateActions(s, schemas.UpdateApprovalTeamRequest_UpdateActions, v.UpdateActions)
+}
+
 type UpdateApprovalTeamOutput struct {
 
 	// Version ID for the team that was created. When an approval team is updated, the
@@ -64,13 +84,32 @@ type UpdateApprovalTeamOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateApprovalTeamOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateApprovalTeamResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateApprovalTeamOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.VersionId != nil {
+		s.WriteString(schemas.UpdateApprovalTeamResponse_VersionId, *v.VersionId)
+	}
+}
+func (v *UpdateApprovalTeamOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateApprovalTeamResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateApprovalTeamResponse_VersionId:
+			v.VersionId = new(string)
+			return d.ReadString(schemas.UpdateApprovalTeamResponse_VersionId, v.VersionId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateApprovalTeamMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateApprovalTeam{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateApprovalTeam, schemas.UpdateApprovalTeamRequest, schemas.UpdateApprovalTeamResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateApprovalTeam{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateApprovalTeam, schemas.UpdateApprovalTeamRequest, schemas.UpdateApprovalTeamResponse), output: &UpdateApprovalTeamOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

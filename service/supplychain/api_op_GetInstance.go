@@ -4,7 +4,9 @@ package supplychain
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/supplychain/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/supplychain/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -36,6 +38,18 @@ type GetInstanceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetInstanceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetInstanceRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetInstanceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InstanceId != nil {
+		s.WriteString(schemas.GetInstanceRequest_instanceId, *v.InstanceId)
+	}
+}
+
 // The response parameters for GetInstance.
 type GetInstanceOutput struct {
 
@@ -50,13 +64,34 @@ type GetInstanceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetInstanceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetInstanceResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetInstanceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Instance != nil {
+		s.WriteStruct(schemas.GetInstanceResponse_instance)
+		v.Instance.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetInstanceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetInstanceResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetInstanceResponse_instance:
+			v.Instance = &types.Instance{}
+			return v.Instance.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetInstanceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetInstance{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetInstance, schemas.GetInstanceRequest, schemas.GetInstanceResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetInstance{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetInstance, schemas.GetInstanceRequest, schemas.GetInstanceResponse), output: &GetInstanceOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

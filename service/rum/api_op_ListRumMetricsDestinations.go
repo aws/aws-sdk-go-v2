@@ -5,7 +5,9 @@ package rum
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/rum/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/rum/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -52,6 +54,40 @@ type ListRumMetricsDestinationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListRumMetricsDestinationsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListRumMetricsDestinationsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListRumMetricsDestinationsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AppMonitorName != nil {
+		s.WriteString(schemas.ListRumMetricsDestinationsRequest_AppMonitorName, *v.AppMonitorName)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListRumMetricsDestinationsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListRumMetricsDestinationsRequest_NextToken, *v.NextToken)
+	}
+}
+func (v *ListRumMetricsDestinationsInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListRumMetricsDestinationsRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListRumMetricsDestinationsRequest_AppMonitorName:
+			v.AppMonitorName = new(string)
+			return d.ReadString(schemas.ListRumMetricsDestinationsRequest_AppMonitorName, v.AppMonitorName)
+		case schemas.ListRumMetricsDestinationsRequest_MaxResults:
+			v.MaxResults = new(int32)
+			return d.ReadInt32(schemas.ListRumMetricsDestinationsRequest_MaxResults, v.MaxResults)
+		case schemas.ListRumMetricsDestinationsRequest_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListRumMetricsDestinationsRequest_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
+
 type ListRumMetricsDestinationsOutput struct {
 
 	// The list of CloudWatch RUM extended metrics destinations associated with the
@@ -68,13 +104,35 @@ type ListRumMetricsDestinationsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListRumMetricsDestinationsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListRumMetricsDestinationsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListRumMetricsDestinationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeMetricDestinationSummaryList(s, schemas.ListRumMetricsDestinationsResponse_Destinations, v.Destinations)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListRumMetricsDestinationsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListRumMetricsDestinationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListRumMetricsDestinationsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListRumMetricsDestinationsResponse_Destinations:
+			return deserializeMetricDestinationSummaryList(d, schemas.ListRumMetricsDestinationsResponse_Destinations, &v.Destinations)
+		case schemas.ListRumMetricsDestinationsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListRumMetricsDestinationsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListRumMetricsDestinationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListRumMetricsDestinations{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListRumMetricsDestinations, schemas.ListRumMetricsDestinationsRequest, schemas.ListRumMetricsDestinationsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListRumMetricsDestinations{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListRumMetricsDestinations, schemas.ListRumMetricsDestinationsRequest, schemas.ListRumMetricsDestinationsResponse), output: &ListRumMetricsDestinationsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

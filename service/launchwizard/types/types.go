@@ -3,6 +3,8 @@
 package types
 
 import (
+	"github.com/aws/aws-sdk-go-v2/service/launchwizard/schemas"
+	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
@@ -27,6 +29,14 @@ type AccountConstraintMemberDelegatedAdmin struct {
 }
 
 func (*AccountConstraintMemberDelegatedAdmin) isAccountConstraint() {}
+func (v *AccountConstraintMemberDelegatedAdmin) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AccountConstraint_delegatedAdmin)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *AccountConstraintMemberDelegatedAdmin) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // The deployment must be initiated from the AWS Organizations management account.
 type AccountConstraintMemberManagementAccount struct {
@@ -36,6 +46,14 @@ type AccountConstraintMemberManagementAccount struct {
 }
 
 func (*AccountConstraintMemberManagementAccount) isAccountConstraint() {}
+func (v *AccountConstraintMemberManagementAccount) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AccountConstraint_managementAccount)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *AccountConstraintMemberManagementAccount) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // The deployment must be initiated from a delegated administrator account for the
 // specified service principal.
@@ -48,6 +66,28 @@ type DelegatedAdminConstraint struct {
 	ServicePrincipal *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DelegatedAdminConstraint) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DelegatedAdminConstraint)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DelegatedAdminConstraint) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ServicePrincipal != nil {
+		s.WriteString(schemas.DelegatedAdminConstraint_servicePrincipal, *v.ServicePrincipal)
+	}
+}
+func (v *DelegatedAdminConstraint) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DelegatedAdminConstraint, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DelegatedAdminConstraint_servicePrincipal:
+			v.ServicePrincipal = new(string)
+			return d.ReadString(schemas.DelegatedAdminConstraint_servicePrincipal, v.ServicePrincipal)
+		}
+		return nil
+	})
 }
 
 // A field that details a condition of the specifications for a deployment.
@@ -65,6 +105,40 @@ type DeploymentConditionalField struct {
 	Value *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DeploymentConditionalField) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeploymentConditionalField)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeploymentConditionalField) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Comparator != nil {
+		s.WriteString(schemas.DeploymentConditionalField_comparator, *v.Comparator)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.DeploymentConditionalField_name, *v.Name)
+	}
+	if v.Value != nil {
+		s.WriteString(schemas.DeploymentConditionalField_value, *v.Value)
+	}
+}
+func (v *DeploymentConditionalField) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeploymentConditionalField, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeploymentConditionalField_comparator:
+			v.Comparator = new(string)
+			return d.ReadString(schemas.DeploymentConditionalField_comparator, v.Comparator)
+		case schemas.DeploymentConditionalField_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.DeploymentConditionalField_name, v.Name)
+		case schemas.DeploymentConditionalField_value:
+			v.Value = new(string)
+			return d.ReadString(schemas.DeploymentConditionalField_value, v.Value)
+		}
+		return nil
+	})
 }
 
 // The data associated with a deployment.
@@ -116,6 +190,92 @@ type DeploymentData struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeploymentData) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeploymentData)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeploymentData) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.DeploymentData_createdAt, *v.CreatedAt)
+	}
+	if v.DeletedAt != nil {
+		s.WriteTime(schemas.DeploymentData_deletedAt, *v.DeletedAt)
+	}
+	if v.DeploymentArn != nil {
+		s.WriteString(schemas.DeploymentData_deploymentArn, *v.DeploymentArn)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.DeploymentData_id, *v.Id)
+	}
+	if v.ModifiedAt != nil {
+		s.WriteTime(schemas.DeploymentData_modifiedAt, *v.ModifiedAt)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.DeploymentData_name, *v.Name)
+	}
+	if v.PatternName != nil {
+		s.WriteString(schemas.DeploymentData_patternName, *v.PatternName)
+	}
+	if v.ResourceGroup != nil {
+		s.WriteString(schemas.DeploymentData_resourceGroup, *v.ResourceGroup)
+	}
+	serializeDeploymentSpecifications(s, schemas.DeploymentData_specifications, v.Specifications)
+	if v.Status != "" {
+		s.WriteString(schemas.DeploymentData_status, string(v.Status))
+	}
+	serializeTags(s, schemas.DeploymentData_tags, v.Tags)
+	if v.WorkloadName != nil {
+		s.WriteString(schemas.DeploymentData_workloadName, *v.WorkloadName)
+	}
+}
+func (v *DeploymentData) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeploymentData, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeploymentData_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.DeploymentData_createdAt, v.CreatedAt)
+		case schemas.DeploymentData_deletedAt:
+			v.DeletedAt = new(time.Time)
+			return d.ReadTime(schemas.DeploymentData_deletedAt, v.DeletedAt)
+		case schemas.DeploymentData_deploymentArn:
+			v.DeploymentArn = new(string)
+			return d.ReadString(schemas.DeploymentData_deploymentArn, v.DeploymentArn)
+		case schemas.DeploymentData_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.DeploymentData_id, v.Id)
+		case schemas.DeploymentData_modifiedAt:
+			v.ModifiedAt = new(time.Time)
+			return d.ReadTime(schemas.DeploymentData_modifiedAt, v.ModifiedAt)
+		case schemas.DeploymentData_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.DeploymentData_name, v.Name)
+		case schemas.DeploymentData_patternName:
+			v.PatternName = new(string)
+			return d.ReadString(schemas.DeploymentData_patternName, v.PatternName)
+		case schemas.DeploymentData_resourceGroup:
+			v.ResourceGroup = new(string)
+			return d.ReadString(schemas.DeploymentData_resourceGroup, v.ResourceGroup)
+		case schemas.DeploymentData_specifications:
+			return deserializeDeploymentSpecifications(d, schemas.DeploymentData_specifications, &v.Specifications)
+		case schemas.DeploymentData_status:
+			var ev string
+			if err := d.ReadString(schemas.DeploymentData_status, &ev); err != nil {
+				return err
+			}
+			v.Status = DeploymentStatus(ev)
+			return nil
+		case schemas.DeploymentData_tags:
+			return deserializeTags(d, schemas.DeploymentData_tags, &v.Tags)
+		case schemas.DeploymentData_workloadName:
+			v.WorkloadName = new(string)
+			return d.ReadString(schemas.DeploymentData_workloadName, v.WorkloadName)
+		}
+		return nil
+	})
+}
+
 // A summary of the deployment data.
 type DeploymentDataSummary struct {
 
@@ -141,6 +301,68 @@ type DeploymentDataSummary struct {
 	WorkloadName *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DeploymentDataSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeploymentDataSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeploymentDataSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.DeploymentDataSummary_createdAt, *v.CreatedAt)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.DeploymentDataSummary_id, *v.Id)
+	}
+	if v.ModifiedAt != nil {
+		s.WriteTime(schemas.DeploymentDataSummary_modifiedAt, *v.ModifiedAt)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.DeploymentDataSummary_name, *v.Name)
+	}
+	if v.PatternName != nil {
+		s.WriteString(schemas.DeploymentDataSummary_patternName, *v.PatternName)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.DeploymentDataSummary_status, string(v.Status))
+	}
+	if v.WorkloadName != nil {
+		s.WriteString(schemas.DeploymentDataSummary_workloadName, *v.WorkloadName)
+	}
+}
+func (v *DeploymentDataSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeploymentDataSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeploymentDataSummary_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.DeploymentDataSummary_createdAt, v.CreatedAt)
+		case schemas.DeploymentDataSummary_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.DeploymentDataSummary_id, v.Id)
+		case schemas.DeploymentDataSummary_modifiedAt:
+			v.ModifiedAt = new(time.Time)
+			return d.ReadTime(schemas.DeploymentDataSummary_modifiedAt, v.ModifiedAt)
+		case schemas.DeploymentDataSummary_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.DeploymentDataSummary_name, v.Name)
+		case schemas.DeploymentDataSummary_patternName:
+			v.PatternName = new(string)
+			return d.ReadString(schemas.DeploymentDataSummary_patternName, v.PatternName)
+		case schemas.DeploymentDataSummary_status:
+			var ev string
+			if err := d.ReadString(schemas.DeploymentDataSummary_status, &ev); err != nil {
+				return err
+			}
+			v.Status = DeploymentStatus(ev)
+			return nil
+		case schemas.DeploymentDataSummary_workloadName:
+			v.WorkloadName = new(string)
+			return d.ReadString(schemas.DeploymentDataSummary_workloadName, v.WorkloadName)
+		}
+		return nil
+	})
 }
 
 // A summary of the deployment event data.
@@ -169,6 +391,59 @@ type DeploymentEventDataSummary struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeploymentEventDataSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeploymentEventDataSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeploymentEventDataSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.DeploymentEventDataSummary_description, *v.Description)
+	}
+	serializeDeploymentEventMetadata(s, schemas.DeploymentEventDataSummary_metadata, v.Metadata)
+	if v.Name != nil {
+		s.WriteString(schemas.DeploymentEventDataSummary_name, *v.Name)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.DeploymentEventDataSummary_status, string(v.Status))
+	}
+	if v.StatusReason != nil {
+		s.WriteString(schemas.DeploymentEventDataSummary_statusReason, *v.StatusReason)
+	}
+	if v.Timestamp != nil {
+		s.WriteTime(schemas.DeploymentEventDataSummary_timestamp, *v.Timestamp)
+	}
+}
+func (v *DeploymentEventDataSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeploymentEventDataSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeploymentEventDataSummary_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.DeploymentEventDataSummary_description, v.Description)
+		case schemas.DeploymentEventDataSummary_metadata:
+			return deserializeDeploymentEventMetadata(d, schemas.DeploymentEventDataSummary_metadata, &v.Metadata)
+		case schemas.DeploymentEventDataSummary_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.DeploymentEventDataSummary_name, v.Name)
+		case schemas.DeploymentEventDataSummary_status:
+			var ev string
+			if err := d.ReadString(schemas.DeploymentEventDataSummary_status, &ev); err != nil {
+				return err
+			}
+			v.Status = EventStatus(ev)
+			return nil
+		case schemas.DeploymentEventDataSummary_statusReason:
+			v.StatusReason = new(string)
+			return d.ReadString(schemas.DeploymentEventDataSummary_statusReason, v.StatusReason)
+		case schemas.DeploymentEventDataSummary_timestamp:
+			v.Timestamp = new(time.Time)
+			return d.ReadTime(schemas.DeploymentEventDataSummary_timestamp, v.Timestamp)
+		}
+		return nil
+	})
+}
+
 // A filter name and value pair that is used to return more specific results from
 // a describe operation. Filters can be used to match a set of resources by
 // specific criteria.
@@ -183,6 +458,35 @@ type DeploymentFilter struct {
 	Values []string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DeploymentFilter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeploymentFilter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeploymentFilter) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != "" {
+		s.WriteString(schemas.DeploymentFilter_name, string(v.Name))
+	}
+	serializeDeploymentFilterValues(s, schemas.DeploymentFilter_values, v.Values)
+}
+func (v *DeploymentFilter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeploymentFilter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeploymentFilter_name:
+			var ev string
+			if err := d.ReadString(schemas.DeploymentFilter_name, &ev); err != nil {
+				return err
+			}
+			v.Name = DeploymentFilterKey(ev)
+			return nil
+		case schemas.DeploymentFilter_values:
+			return deserializeDeploymentFilterValues(d, schemas.DeploymentFilter_values, &v.Values)
+		}
+		return nil
+	})
 }
 
 // Describes a deployment pattern version summary.
@@ -206,6 +510,52 @@ type DeploymentPatternVersionDataSummary struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeploymentPatternVersionDataSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeploymentPatternVersionDataSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeploymentPatternVersionDataSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DeploymentPatternName != nil {
+		s.WriteString(schemas.DeploymentPatternVersionDataSummary_deploymentPatternName, *v.DeploymentPatternName)
+	}
+	if v.DeploymentPatternVersionName != nil {
+		s.WriteString(schemas.DeploymentPatternVersionDataSummary_deploymentPatternVersionName, *v.DeploymentPatternVersionName)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.DeploymentPatternVersionDataSummary_description, *v.Description)
+	}
+	if v.DocumentationUrl != nil {
+		s.WriteString(schemas.DeploymentPatternVersionDataSummary_documentationUrl, *v.DocumentationUrl)
+	}
+	if v.WorkloadName != nil {
+		s.WriteString(schemas.DeploymentPatternVersionDataSummary_workloadName, *v.WorkloadName)
+	}
+}
+func (v *DeploymentPatternVersionDataSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeploymentPatternVersionDataSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeploymentPatternVersionDataSummary_deploymentPatternName:
+			v.DeploymentPatternName = new(string)
+			return d.ReadString(schemas.DeploymentPatternVersionDataSummary_deploymentPatternName, v.DeploymentPatternName)
+		case schemas.DeploymentPatternVersionDataSummary_deploymentPatternVersionName:
+			v.DeploymentPatternVersionName = new(string)
+			return d.ReadString(schemas.DeploymentPatternVersionDataSummary_deploymentPatternVersionName, v.DeploymentPatternVersionName)
+		case schemas.DeploymentPatternVersionDataSummary_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.DeploymentPatternVersionDataSummary_description, v.Description)
+		case schemas.DeploymentPatternVersionDataSummary_documentationUrl:
+			v.DocumentationUrl = new(string)
+			return d.ReadString(schemas.DeploymentPatternVersionDataSummary_documentationUrl, v.DocumentationUrl)
+		case schemas.DeploymentPatternVersionDataSummary_workloadName:
+			v.WorkloadName = new(string)
+			return d.ReadString(schemas.DeploymentPatternVersionDataSummary_workloadName, v.WorkloadName)
+		}
+		return nil
+	})
+}
+
 // A filter for deployment pattern versions. Use this filter to specify criteria
 // for querying deployment pattern versions in Launch Wizard.
 type DeploymentPatternVersionFilter struct {
@@ -223,6 +573,35 @@ type DeploymentPatternVersionFilter struct {
 	Values []string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DeploymentPatternVersionFilter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeploymentPatternVersionFilter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeploymentPatternVersionFilter) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != "" {
+		s.WriteString(schemas.DeploymentPatternVersionFilter_name, string(v.Name))
+	}
+	serializeDeploymentPatternVersionFilterValues(s, schemas.DeploymentPatternVersionFilter_values, v.Values)
+}
+func (v *DeploymentPatternVersionFilter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeploymentPatternVersionFilter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeploymentPatternVersionFilter_name:
+			var ev string
+			if err := d.ReadString(schemas.DeploymentPatternVersionFilter_name, &ev); err != nil {
+				return err
+			}
+			v.Name = DeploymentPatternVersionFilterKey(ev)
+			return nil
+		case schemas.DeploymentPatternVersionFilter_values:
+			return deserializeDeploymentPatternVersionFilterValues(d, schemas.DeploymentPatternVersionFilter_values, &v.Values)
+		}
+		return nil
+	})
 }
 
 // A field that details a specification of a deployment pattern.
@@ -246,9 +625,65 @@ type DeploymentSpecificationsField struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeploymentSpecificationsField) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeploymentSpecificationsField)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeploymentSpecificationsField) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAllowedValues(s, schemas.DeploymentSpecificationsField_allowedValues, v.AllowedValues)
+	serializeSpecificationsConditionalData(s, schemas.DeploymentSpecificationsField_conditionals, v.Conditionals)
+	if v.Description != nil {
+		s.WriteString(schemas.DeploymentSpecificationsField_description, *v.Description)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.DeploymentSpecificationsField_name, *v.Name)
+	}
+	if v.Required != nil {
+		s.WriteString(schemas.DeploymentSpecificationsField_required, *v.Required)
+	}
+}
+func (v *DeploymentSpecificationsField) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeploymentSpecificationsField, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeploymentSpecificationsField_allowedValues:
+			return deserializeAllowedValues(d, schemas.DeploymentSpecificationsField_allowedValues, &v.AllowedValues)
+		case schemas.DeploymentSpecificationsField_conditionals:
+			return deserializeSpecificationsConditionalData(d, schemas.DeploymentSpecificationsField_conditionals, &v.Conditionals)
+		case schemas.DeploymentSpecificationsField_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.DeploymentSpecificationsField_description, v.Description)
+		case schemas.DeploymentSpecificationsField_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.DeploymentSpecificationsField_name, v.Name)
+		case schemas.DeploymentSpecificationsField_required:
+			v.Required = new(string)
+			return d.ReadString(schemas.DeploymentSpecificationsField_required, v.Required)
+		}
+		return nil
+	})
+}
+
 // The deployment must be initiated from the AWS Organizations management account.
 type ManagementAccountConstraint struct {
 	noSmithyDocumentSerde
+}
+
+func (v *ManagementAccountConstraint) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ManagementAccountConstraint)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ManagementAccountConstraint) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *ManagementAccountConstraint) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ManagementAccountConstraint, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
 }
 
 // Describes a workload.
@@ -287,6 +722,71 @@ type WorkloadData struct {
 	noSmithyDocumentSerde
 }
 
+func (v *WorkloadData) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.WorkloadData)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *WorkloadData) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAccountConstraintsList(s, schemas.WorkloadData_accountConstraints, v.AccountConstraints)
+	if v.Description != nil {
+		s.WriteString(schemas.WorkloadData_description, *v.Description)
+	}
+	if v.DisplayName != nil {
+		s.WriteString(schemas.WorkloadData_displayName, *v.DisplayName)
+	}
+	if v.DocumentationUrl != nil {
+		s.WriteString(schemas.WorkloadData_documentationUrl, *v.DocumentationUrl)
+	}
+	if v.IconUrl != nil {
+		s.WriteString(schemas.WorkloadData_iconUrl, *v.IconUrl)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.WorkloadData_status, string(v.Status))
+	}
+	if v.StatusMessage != nil {
+		s.WriteString(schemas.WorkloadData_statusMessage, *v.StatusMessage)
+	}
+	if v.WorkloadName != nil {
+		s.WriteString(schemas.WorkloadData_workloadName, *v.WorkloadName)
+	}
+}
+func (v *WorkloadData) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.WorkloadData, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.WorkloadData_accountConstraints:
+			return deserializeAccountConstraintsList(d, schemas.WorkloadData_accountConstraints, &v.AccountConstraints)
+		case schemas.WorkloadData_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.WorkloadData_description, v.Description)
+		case schemas.WorkloadData_displayName:
+			v.DisplayName = new(string)
+			return d.ReadString(schemas.WorkloadData_displayName, v.DisplayName)
+		case schemas.WorkloadData_documentationUrl:
+			v.DocumentationUrl = new(string)
+			return d.ReadString(schemas.WorkloadData_documentationUrl, v.DocumentationUrl)
+		case schemas.WorkloadData_iconUrl:
+			v.IconUrl = new(string)
+			return d.ReadString(schemas.WorkloadData_iconUrl, v.IconUrl)
+		case schemas.WorkloadData_status:
+			var ev string
+			if err := d.ReadString(schemas.WorkloadData_status, &ev); err != nil {
+				return err
+			}
+			v.Status = WorkloadStatus(ev)
+			return nil
+		case schemas.WorkloadData_statusMessage:
+			v.StatusMessage = new(string)
+			return d.ReadString(schemas.WorkloadData_statusMessage, v.StatusMessage)
+		case schemas.WorkloadData_workloadName:
+			v.WorkloadName = new(string)
+			return d.ReadString(schemas.WorkloadData_workloadName, v.WorkloadName)
+		}
+		return nil
+	})
+}
+
 // Describes workload data.
 type WorkloadDataSummary struct {
 
@@ -307,6 +807,47 @@ type WorkloadDataSummary struct {
 	WorkloadName *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *WorkloadDataSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.WorkloadDataSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *WorkloadDataSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAccountConstraintsList(s, schemas.WorkloadDataSummary_accountConstraints, v.AccountConstraints)
+	if v.DisplayName != nil {
+		s.WriteString(schemas.WorkloadDataSummary_displayName, *v.DisplayName)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.WorkloadDataSummary_status, string(v.Status))
+	}
+	if v.WorkloadName != nil {
+		s.WriteString(schemas.WorkloadDataSummary_workloadName, *v.WorkloadName)
+	}
+}
+func (v *WorkloadDataSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.WorkloadDataSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.WorkloadDataSummary_accountConstraints:
+			return deserializeAccountConstraintsList(d, schemas.WorkloadDataSummary_accountConstraints, &v.AccountConstraints)
+		case schemas.WorkloadDataSummary_displayName:
+			v.DisplayName = new(string)
+			return d.ReadString(schemas.WorkloadDataSummary_displayName, v.DisplayName)
+		case schemas.WorkloadDataSummary_status:
+			var ev string
+			if err := d.ReadString(schemas.WorkloadDataSummary_status, &ev); err != nil {
+				return err
+			}
+			v.Status = WorkloadStatus(ev)
+			return nil
+		case schemas.WorkloadDataSummary_workloadName:
+			v.WorkloadName = new(string)
+			return d.ReadString(schemas.WorkloadDataSummary_workloadName, v.WorkloadName)
+		}
+		return nil
+	})
 }
 
 // The data that details a workload deployment pattern.
@@ -356,6 +897,80 @@ type WorkloadDeploymentPatternData struct {
 	noSmithyDocumentSerde
 }
 
+func (v *WorkloadDeploymentPatternData) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.WorkloadDeploymentPatternData)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *WorkloadDeploymentPatternData) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAccountConstraintsList(s, schemas.WorkloadDeploymentPatternData_accountConstraints, v.AccountConstraints)
+	if v.DeploymentPatternName != nil {
+		s.WriteString(schemas.WorkloadDeploymentPatternData_deploymentPatternName, *v.DeploymentPatternName)
+	}
+	if v.DeploymentPatternVersionName != nil {
+		s.WriteString(schemas.WorkloadDeploymentPatternData_deploymentPatternVersionName, *v.DeploymentPatternVersionName)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.WorkloadDeploymentPatternData_description, *v.Description)
+	}
+	if v.DisplayName != nil {
+		s.WriteString(schemas.WorkloadDeploymentPatternData_displayName, *v.DisplayName)
+	}
+	serializeDeploymentSpecificationsData(s, schemas.WorkloadDeploymentPatternData_specifications, v.Specifications)
+	if v.Status != "" {
+		s.WriteString(schemas.WorkloadDeploymentPatternData_status, string(v.Status))
+	}
+	if v.StatusMessage != nil {
+		s.WriteString(schemas.WorkloadDeploymentPatternData_statusMessage, *v.StatusMessage)
+	}
+	if v.WorkloadName != nil {
+		s.WriteString(schemas.WorkloadDeploymentPatternData_workloadName, *v.WorkloadName)
+	}
+	if v.WorkloadVersionName != nil {
+		s.WriteString(schemas.WorkloadDeploymentPatternData_workloadVersionName, *v.WorkloadVersionName)
+	}
+}
+func (v *WorkloadDeploymentPatternData) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.WorkloadDeploymentPatternData, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.WorkloadDeploymentPatternData_accountConstraints:
+			return deserializeAccountConstraintsList(d, schemas.WorkloadDeploymentPatternData_accountConstraints, &v.AccountConstraints)
+		case schemas.WorkloadDeploymentPatternData_deploymentPatternName:
+			v.DeploymentPatternName = new(string)
+			return d.ReadString(schemas.WorkloadDeploymentPatternData_deploymentPatternName, v.DeploymentPatternName)
+		case schemas.WorkloadDeploymentPatternData_deploymentPatternVersionName:
+			v.DeploymentPatternVersionName = new(string)
+			return d.ReadString(schemas.WorkloadDeploymentPatternData_deploymentPatternVersionName, v.DeploymentPatternVersionName)
+		case schemas.WorkloadDeploymentPatternData_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.WorkloadDeploymentPatternData_description, v.Description)
+		case schemas.WorkloadDeploymentPatternData_displayName:
+			v.DisplayName = new(string)
+			return d.ReadString(schemas.WorkloadDeploymentPatternData_displayName, v.DisplayName)
+		case schemas.WorkloadDeploymentPatternData_specifications:
+			return deserializeDeploymentSpecificationsData(d, schemas.WorkloadDeploymentPatternData_specifications, &v.Specifications)
+		case schemas.WorkloadDeploymentPatternData_status:
+			var ev string
+			if err := d.ReadString(schemas.WorkloadDeploymentPatternData_status, &ev); err != nil {
+				return err
+			}
+			v.Status = WorkloadDeploymentPatternStatus(ev)
+			return nil
+		case schemas.WorkloadDeploymentPatternData_statusMessage:
+			v.StatusMessage = new(string)
+			return d.ReadString(schemas.WorkloadDeploymentPatternData_statusMessage, v.StatusMessage)
+		case schemas.WorkloadDeploymentPatternData_workloadName:
+			v.WorkloadName = new(string)
+			return d.ReadString(schemas.WorkloadDeploymentPatternData_workloadName, v.WorkloadName)
+		case schemas.WorkloadDeploymentPatternData_workloadVersionName:
+			v.WorkloadVersionName = new(string)
+			return d.ReadString(schemas.WorkloadDeploymentPatternData_workloadVersionName, v.WorkloadVersionName)
+		}
+		return nil
+	})
+}
+
 // Describes a workload deployment pattern.
 type WorkloadDeploymentPatternDataSummary struct {
 
@@ -391,6 +1006,77 @@ type WorkloadDeploymentPatternDataSummary struct {
 	WorkloadVersionName *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *WorkloadDeploymentPatternDataSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.WorkloadDeploymentPatternDataSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *WorkloadDeploymentPatternDataSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAccountConstraintsList(s, schemas.WorkloadDeploymentPatternDataSummary_accountConstraints, v.AccountConstraints)
+	if v.DeploymentPatternName != nil {
+		s.WriteString(schemas.WorkloadDeploymentPatternDataSummary_deploymentPatternName, *v.DeploymentPatternName)
+	}
+	if v.DeploymentPatternVersionName != nil {
+		s.WriteString(schemas.WorkloadDeploymentPatternDataSummary_deploymentPatternVersionName, *v.DeploymentPatternVersionName)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.WorkloadDeploymentPatternDataSummary_description, *v.Description)
+	}
+	if v.DisplayName != nil {
+		s.WriteString(schemas.WorkloadDeploymentPatternDataSummary_displayName, *v.DisplayName)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.WorkloadDeploymentPatternDataSummary_status, string(v.Status))
+	}
+	if v.StatusMessage != nil {
+		s.WriteString(schemas.WorkloadDeploymentPatternDataSummary_statusMessage, *v.StatusMessage)
+	}
+	if v.WorkloadName != nil {
+		s.WriteString(schemas.WorkloadDeploymentPatternDataSummary_workloadName, *v.WorkloadName)
+	}
+	if v.WorkloadVersionName != nil {
+		s.WriteString(schemas.WorkloadDeploymentPatternDataSummary_workloadVersionName, *v.WorkloadVersionName)
+	}
+}
+func (v *WorkloadDeploymentPatternDataSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.WorkloadDeploymentPatternDataSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.WorkloadDeploymentPatternDataSummary_accountConstraints:
+			return deserializeAccountConstraintsList(d, schemas.WorkloadDeploymentPatternDataSummary_accountConstraints, &v.AccountConstraints)
+		case schemas.WorkloadDeploymentPatternDataSummary_deploymentPatternName:
+			v.DeploymentPatternName = new(string)
+			return d.ReadString(schemas.WorkloadDeploymentPatternDataSummary_deploymentPatternName, v.DeploymentPatternName)
+		case schemas.WorkloadDeploymentPatternDataSummary_deploymentPatternVersionName:
+			v.DeploymentPatternVersionName = new(string)
+			return d.ReadString(schemas.WorkloadDeploymentPatternDataSummary_deploymentPatternVersionName, v.DeploymentPatternVersionName)
+		case schemas.WorkloadDeploymentPatternDataSummary_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.WorkloadDeploymentPatternDataSummary_description, v.Description)
+		case schemas.WorkloadDeploymentPatternDataSummary_displayName:
+			v.DisplayName = new(string)
+			return d.ReadString(schemas.WorkloadDeploymentPatternDataSummary_displayName, v.DisplayName)
+		case schemas.WorkloadDeploymentPatternDataSummary_status:
+			var ev string
+			if err := d.ReadString(schemas.WorkloadDeploymentPatternDataSummary_status, &ev); err != nil {
+				return err
+			}
+			v.Status = WorkloadDeploymentPatternStatus(ev)
+			return nil
+		case schemas.WorkloadDeploymentPatternDataSummary_statusMessage:
+			v.StatusMessage = new(string)
+			return d.ReadString(schemas.WorkloadDeploymentPatternDataSummary_statusMessage, v.StatusMessage)
+		case schemas.WorkloadDeploymentPatternDataSummary_workloadName:
+			v.WorkloadName = new(string)
+			return d.ReadString(schemas.WorkloadDeploymentPatternDataSummary_workloadName, v.WorkloadName)
+		case schemas.WorkloadDeploymentPatternDataSummary_workloadVersionName:
+			v.WorkloadVersionName = new(string)
+			return d.ReadString(schemas.WorkloadDeploymentPatternDataSummary_workloadVersionName, v.WorkloadVersionName)
+		}
+		return nil
+	})
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde

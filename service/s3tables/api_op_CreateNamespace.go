@@ -4,6 +4,8 @@ package s3tables
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/s3tables/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -45,6 +47,19 @@ type CreateNamespaceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateNamespaceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateNamespaceRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateNamespaceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeNamespaceList(s, schemas.CreateNamespaceRequest_namespace, v.Namespace)
+	if v.TableBucketARN != nil {
+		s.WriteString(schemas.CreateNamespaceRequest_tableBucketARN, *v.TableBucketARN)
+	}
+}
+
 type CreateNamespaceOutput struct {
 
 	// The name of the namespace.
@@ -63,13 +78,35 @@ type CreateNamespaceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateNamespaceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateNamespaceResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateNamespaceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeNamespaceList(s, schemas.CreateNamespaceResponse_namespace, v.Namespace)
+	if v.TableBucketARN != nil {
+		s.WriteString(schemas.CreateNamespaceResponse_tableBucketARN, *v.TableBucketARN)
+	}
+}
+func (v *CreateNamespaceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateNamespaceResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateNamespaceResponse_namespace:
+			return deserializeNamespaceList(d, schemas.CreateNamespaceResponse_namespace, &v.Namespace)
+		case schemas.CreateNamespaceResponse_tableBucketARN:
+			v.TableBucketARN = new(string)
+			return d.ReadString(schemas.CreateNamespaceResponse_tableBucketARN, v.TableBucketARN)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateNamespaceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateNamespace{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateNamespace, schemas.CreateNamespaceRequest, schemas.CreateNamespaceResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateNamespace{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateNamespace, schemas.CreateNamespaceRequest, schemas.CreateNamespaceResponse), output: &CreateNamespaceOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

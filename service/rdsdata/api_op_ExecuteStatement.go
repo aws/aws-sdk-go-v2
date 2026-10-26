@@ -4,7 +4,9 @@ package rdsdata
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/rdsdata/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/rdsdata/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -113,6 +115,89 @@ type ExecuteStatementInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ExecuteStatementInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ExecuteStatementRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ExecuteStatementInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ContinueAfterTimeout != false {
+		s.WriteBool(schemas.ExecuteStatementRequest_continueAfterTimeout, v.ContinueAfterTimeout)
+	}
+	if v.Database != nil {
+		s.WriteString(schemas.ExecuteStatementRequest_database, *v.Database)
+	}
+	if v.FormatRecordsAs != "" {
+		s.WriteString(schemas.ExecuteStatementRequest_formatRecordsAs, string(v.FormatRecordsAs))
+	}
+	if v.IncludeResultMetadata != false {
+		s.WriteBool(schemas.ExecuteStatementRequest_includeResultMetadata, v.IncludeResultMetadata)
+	}
+	serializeSqlParametersList(s, schemas.ExecuteStatementRequest_parameters, v.Parameters)
+	if v.ResourceArn != nil {
+		s.WriteString(schemas.ExecuteStatementRequest_resourceArn, *v.ResourceArn)
+	}
+	if v.ResultSetOptions != nil {
+		s.WriteStruct(schemas.ExecuteStatementRequest_resultSetOptions)
+		v.ResultSetOptions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Schema != nil {
+		s.WriteString(schemas.ExecuteStatementRequest_schema, *v.Schema)
+	}
+	if v.SecretArn != nil {
+		s.WriteString(schemas.ExecuteStatementRequest_secretArn, *v.SecretArn)
+	}
+	if v.Sql != nil {
+		s.WriteString(schemas.ExecuteStatementRequest_sql, *v.Sql)
+	}
+	if v.TransactionId != nil {
+		s.WriteString(schemas.ExecuteStatementRequest_transactionId, *v.TransactionId)
+	}
+}
+func (v *ExecuteStatementInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ExecuteStatementRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ExecuteStatementRequest_continueAfterTimeout:
+			return d.ReadBool(schemas.ExecuteStatementRequest_continueAfterTimeout, &v.ContinueAfterTimeout)
+		case schemas.ExecuteStatementRequest_database:
+			v.Database = new(string)
+			return d.ReadString(schemas.ExecuteStatementRequest_database, v.Database)
+		case schemas.ExecuteStatementRequest_formatRecordsAs:
+			var ev string
+			if err := d.ReadString(schemas.ExecuteStatementRequest_formatRecordsAs, &ev); err != nil {
+				return err
+			}
+			v.FormatRecordsAs = types.RecordsFormatType(ev)
+			return nil
+		case schemas.ExecuteStatementRequest_includeResultMetadata:
+			return d.ReadBool(schemas.ExecuteStatementRequest_includeResultMetadata, &v.IncludeResultMetadata)
+		case schemas.ExecuteStatementRequest_parameters:
+			return deserializeSqlParametersList(d, schemas.ExecuteStatementRequest_parameters, &v.Parameters)
+		case schemas.ExecuteStatementRequest_resourceArn:
+			v.ResourceArn = new(string)
+			return d.ReadString(schemas.ExecuteStatementRequest_resourceArn, v.ResourceArn)
+		case schemas.ExecuteStatementRequest_resultSetOptions:
+			v.ResultSetOptions = &types.ResultSetOptions{}
+			return v.ResultSetOptions.Deserialize(d)
+		case schemas.ExecuteStatementRequest_schema:
+			v.Schema = new(string)
+			return d.ReadString(schemas.ExecuteStatementRequest_schema, v.Schema)
+		case schemas.ExecuteStatementRequest_secretArn:
+			v.SecretArn = new(string)
+			return d.ReadString(schemas.ExecuteStatementRequest_secretArn, v.SecretArn)
+		case schemas.ExecuteStatementRequest_sql:
+			v.Sql = new(string)
+			return d.ReadString(schemas.ExecuteStatementRequest_sql, v.Sql)
+		case schemas.ExecuteStatementRequest_transactionId:
+			v.TransactionId = new(string)
+			return d.ReadString(schemas.ExecuteStatementRequest_transactionId, v.TransactionId)
+		}
+		return nil
+	})
+}
+
 // The response elements represent the output of a request to run a SQL statement
 // against a database.
 type ExecuteStatementOutput struct {
@@ -151,13 +236,46 @@ type ExecuteStatementOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ExecuteStatementOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ExecuteStatementResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ExecuteStatementOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeMetadata(s, schemas.ExecuteStatementResponse_columnMetadata, v.ColumnMetadata)
+	if v.FormattedRecords != nil {
+		s.WriteString(schemas.ExecuteStatementResponse_formattedRecords, *v.FormattedRecords)
+	}
+	serializeFieldList(s, schemas.ExecuteStatementResponse_generatedFields, v.GeneratedFields)
+	if v.NumberOfRecordsUpdated != 0 {
+		s.WriteInt64(schemas.ExecuteStatementResponse_numberOfRecordsUpdated, v.NumberOfRecordsUpdated)
+	}
+	serializeSqlRecords(s, schemas.ExecuteStatementResponse_records, v.Records)
+}
+func (v *ExecuteStatementOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ExecuteStatementResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ExecuteStatementResponse_columnMetadata:
+			return deserializeMetadata(d, schemas.ExecuteStatementResponse_columnMetadata, &v.ColumnMetadata)
+		case schemas.ExecuteStatementResponse_formattedRecords:
+			v.FormattedRecords = new(string)
+			return d.ReadString(schemas.ExecuteStatementResponse_formattedRecords, v.FormattedRecords)
+		case schemas.ExecuteStatementResponse_generatedFields:
+			return deserializeFieldList(d, schemas.ExecuteStatementResponse_generatedFields, &v.GeneratedFields)
+		case schemas.ExecuteStatementResponse_numberOfRecordsUpdated:
+			return d.ReadInt64(schemas.ExecuteStatementResponse_numberOfRecordsUpdated, &v.NumberOfRecordsUpdated)
+		case schemas.ExecuteStatementResponse_records:
+			return deserializeSqlRecords(d, schemas.ExecuteStatementResponse_records, &v.Records)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationExecuteStatementMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpExecuteStatement{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ExecuteStatement, schemas.ExecuteStatementRequest, schemas.ExecuteStatementResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpExecuteStatement{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ExecuteStatement, schemas.ExecuteStatementRequest, schemas.ExecuteStatementResponse), output: &ExecuteStatementOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

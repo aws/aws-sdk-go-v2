@@ -4,7 +4,9 @@ package rdsdata
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/rdsdata/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/rdsdata/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -101,6 +103,61 @@ type BatchExecuteStatementInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchExecuteStatementInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchExecuteStatementRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchExecuteStatementInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Database != nil {
+		s.WriteString(schemas.BatchExecuteStatementRequest_database, *v.Database)
+	}
+	serializeSqlParameterSets(s, schemas.BatchExecuteStatementRequest_parameterSets, v.ParameterSets)
+	if v.ResourceArn != nil {
+		s.WriteString(schemas.BatchExecuteStatementRequest_resourceArn, *v.ResourceArn)
+	}
+	if v.Schema != nil {
+		s.WriteString(schemas.BatchExecuteStatementRequest_schema, *v.Schema)
+	}
+	if v.SecretArn != nil {
+		s.WriteString(schemas.BatchExecuteStatementRequest_secretArn, *v.SecretArn)
+	}
+	if v.Sql != nil {
+		s.WriteString(schemas.BatchExecuteStatementRequest_sql, *v.Sql)
+	}
+	if v.TransactionId != nil {
+		s.WriteString(schemas.BatchExecuteStatementRequest_transactionId, *v.TransactionId)
+	}
+}
+func (v *BatchExecuteStatementInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchExecuteStatementRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchExecuteStatementRequest_database:
+			v.Database = new(string)
+			return d.ReadString(schemas.BatchExecuteStatementRequest_database, v.Database)
+		case schemas.BatchExecuteStatementRequest_parameterSets:
+			return deserializeSqlParameterSets(d, schemas.BatchExecuteStatementRequest_parameterSets, &v.ParameterSets)
+		case schemas.BatchExecuteStatementRequest_resourceArn:
+			v.ResourceArn = new(string)
+			return d.ReadString(schemas.BatchExecuteStatementRequest_resourceArn, v.ResourceArn)
+		case schemas.BatchExecuteStatementRequest_schema:
+			v.Schema = new(string)
+			return d.ReadString(schemas.BatchExecuteStatementRequest_schema, v.Schema)
+		case schemas.BatchExecuteStatementRequest_secretArn:
+			v.SecretArn = new(string)
+			return d.ReadString(schemas.BatchExecuteStatementRequest_secretArn, v.SecretArn)
+		case schemas.BatchExecuteStatementRequest_sql:
+			v.Sql = new(string)
+			return d.ReadString(schemas.BatchExecuteStatementRequest_sql, v.Sql)
+		case schemas.BatchExecuteStatementRequest_transactionId:
+			v.TransactionId = new(string)
+			return d.ReadString(schemas.BatchExecuteStatementRequest_transactionId, v.TransactionId)
+		}
+		return nil
+	})
+}
+
 // The response elements represent the output of a SQL statement over an array of
 // data.
 type BatchExecuteStatementOutput struct {
@@ -114,13 +171,29 @@ type BatchExecuteStatementOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchExecuteStatementOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchExecuteStatementResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchExecuteStatementOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeUpdateResults(s, schemas.BatchExecuteStatementResponse_updateResults, v.UpdateResults)
+}
+func (v *BatchExecuteStatementOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchExecuteStatementResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchExecuteStatementResponse_updateResults:
+			return deserializeUpdateResults(d, schemas.BatchExecuteStatementResponse_updateResults, &v.UpdateResults)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationBatchExecuteStatementMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpBatchExecuteStatement{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchExecuteStatement, schemas.BatchExecuteStatementRequest, schemas.BatchExecuteStatementResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpBatchExecuteStatement{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchExecuteStatement, schemas.BatchExecuteStatementRequest, schemas.BatchExecuteStatementResponse), output: &BatchExecuteStatementOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

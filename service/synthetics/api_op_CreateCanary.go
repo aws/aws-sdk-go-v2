@@ -4,7 +4,9 @@ package synthetics
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/synthetics/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/synthetics/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -200,6 +202,68 @@ type CreateCanaryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateCanaryInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateCanaryRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateCanaryInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAddReplicaLocations(s, schemas.CreateCanaryRequest_AddReplicaLocations, v.AddReplicaLocations)
+	if v.ArtifactConfig != nil {
+		s.WriteStruct(schemas.CreateCanaryRequest_ArtifactConfig)
+		v.ArtifactConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ArtifactS3Location != nil {
+		s.WriteString(schemas.CreateCanaryRequest_ArtifactS3Location, *v.ArtifactS3Location)
+	}
+	serializeBrowserConfigs(s, schemas.CreateCanaryRequest_BrowserConfigs, v.BrowserConfigs)
+	if v.Code != nil {
+		s.WriteStruct(schemas.CreateCanaryRequest_Code)
+		v.Code.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ExecutionRoleArn != nil {
+		s.WriteString(schemas.CreateCanaryRequest_ExecutionRoleArn, *v.ExecutionRoleArn)
+	}
+	if v.FailureRetentionPeriodInDays != nil {
+		s.WriteInt32(schemas.CreateCanaryRequest_FailureRetentionPeriodInDays, *v.FailureRetentionPeriodInDays)
+	}
+	if v.KmsKeyArn != nil {
+		s.WriteString(schemas.CreateCanaryRequest_KmsKeyArn, *v.KmsKeyArn)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateCanaryRequest_Name, *v.Name)
+	}
+	if v.ProvisionedResourceCleanup != "" {
+		s.WriteString(schemas.CreateCanaryRequest_ProvisionedResourceCleanup, string(v.ProvisionedResourceCleanup))
+	}
+	serializeResourceList(s, schemas.CreateCanaryRequest_ResourcesToReplicateTags, v.ResourcesToReplicateTags)
+	if v.RunConfig != nil {
+		s.WriteStruct(schemas.CreateCanaryRequest_RunConfig)
+		v.RunConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RuntimeVersion != nil {
+		s.WriteString(schemas.CreateCanaryRequest_RuntimeVersion, *v.RuntimeVersion)
+	}
+	if v.Schedule != nil {
+		s.WriteStruct(schemas.CreateCanaryRequest_Schedule)
+		v.Schedule.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SuccessRetentionPeriodInDays != nil {
+		s.WriteInt32(schemas.CreateCanaryRequest_SuccessRetentionPeriodInDays, *v.SuccessRetentionPeriodInDays)
+	}
+	serializeTagMap(s, schemas.CreateCanaryRequest_Tags, v.Tags)
+	if v.VpcConfig != nil {
+		s.WriteStruct(schemas.CreateCanaryRequest_VpcConfig)
+		v.VpcConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type CreateCanaryOutput struct {
 
 	// The full details about the canary you have created.
@@ -211,13 +275,34 @@ type CreateCanaryOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateCanaryOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateCanaryResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateCanaryOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Canary != nil {
+		s.WriteStruct(schemas.CreateCanaryResponse_Canary)
+		v.Canary.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateCanaryOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateCanaryResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateCanaryResponse_Canary:
+			v.Canary = &types.Canary{}
+			return v.Canary.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateCanaryMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateCanary{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateCanary, schemas.CreateCanaryRequest, schemas.CreateCanaryResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateCanary{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateCanary, schemas.CreateCanaryRequest, schemas.CreateCanaryResponse), output: &CreateCanaryOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

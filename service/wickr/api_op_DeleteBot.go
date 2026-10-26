@@ -4,6 +4,8 @@ package wickr
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/wickr/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,21 @@ type DeleteBotInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteBotInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteBotRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteBotInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BotId != nil {
+		s.WriteString(schemas.DeleteBotRequest_botId, *v.BotId)
+	}
+	if v.NetworkId != nil {
+		s.WriteString(schemas.DeleteBotRequest_networkId, *v.NetworkId)
+	}
+}
+
 type DeleteBotOutput struct {
 
 	// A message indicating the result of the bot deletion operation.
@@ -50,13 +67,32 @@ type DeleteBotOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteBotOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteBotResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteBotOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.DeleteBotResponse_message, *v.Message)
+	}
+}
+func (v *DeleteBotOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteBotResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteBotResponse_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.DeleteBotResponse_message, v.Message)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteBotMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteBot{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteBot, schemas.DeleteBotRequest, schemas.DeleteBotResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteBot{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteBot, schemas.DeleteBotRequest, schemas.DeleteBotResponse), output: &DeleteBotOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -5,7 +5,9 @@ package lexmodelbuildingservice
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/lexmodelbuildingservice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lexmodelbuildingservice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -53,6 +55,27 @@ type GetBotAliasesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetBotAliasesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetBotAliasesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetBotAliasesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BotName != nil {
+		s.WriteString(schemas.GetBotAliasesRequest_botName, *v.BotName)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.GetBotAliasesRequest_maxResults, *v.MaxResults)
+	}
+	if v.NameContains != nil {
+		s.WriteString(schemas.GetBotAliasesRequest_nameContains, *v.NameContains)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetBotAliasesRequest_nextToken, *v.NextToken)
+	}
+}
+
 type GetBotAliasesOutput struct {
 
 	// An array of BotAliasMetadata objects, each describing a bot alias.
@@ -70,13 +93,35 @@ type GetBotAliasesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetBotAliasesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetBotAliasesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetBotAliasesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeBotAliasMetadataList(s, schemas.GetBotAliasesResponse_BotAliases, v.BotAliases)
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetBotAliasesResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *GetBotAliasesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetBotAliasesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetBotAliasesResponse_BotAliases:
+			return deserializeBotAliasMetadataList(d, schemas.GetBotAliasesResponse_BotAliases, &v.BotAliases)
+		case schemas.GetBotAliasesResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.GetBotAliasesResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetBotAliasesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetBotAliases{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetBotAliases, schemas.GetBotAliasesRequest, schemas.GetBotAliasesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetBotAliases{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetBotAliases, schemas.GetBotAliasesRequest, schemas.GetBotAliasesResponse), output: &GetBotAliasesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

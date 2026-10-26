@@ -4,7 +4,9 @@ package s3files
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/s3files/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/s3files/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -36,6 +38,18 @@ type GetSynchronizationConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetSynchronizationConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetSynchronizationConfigurationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetSynchronizationConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FileSystemId != nil {
+		s.WriteString(schemas.GetSynchronizationConfigurationRequest_fileSystemId, *v.FileSystemId)
+	}
+}
+
 type GetSynchronizationConfigurationOutput struct {
 
 	// An array of expiration data rules that control when cached data expires from
@@ -60,13 +74,38 @@ type GetSynchronizationConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetSynchronizationConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetSynchronizationConfigurationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetSynchronizationConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeExpirationDataRuleList(s, schemas.GetSynchronizationConfigurationResponse_expirationDataRules, v.ExpirationDataRules)
+	serializeImportDataRuleList(s, schemas.GetSynchronizationConfigurationResponse_importDataRules, v.ImportDataRules)
+	if v.LatestVersionNumber != nil {
+		s.WriteInt32(schemas.GetSynchronizationConfigurationResponse_latestVersionNumber, *v.LatestVersionNumber)
+	}
+}
+func (v *GetSynchronizationConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetSynchronizationConfigurationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetSynchronizationConfigurationResponse_expirationDataRules:
+			return deserializeExpirationDataRuleList(d, schemas.GetSynchronizationConfigurationResponse_expirationDataRules, &v.ExpirationDataRules)
+		case schemas.GetSynchronizationConfigurationResponse_importDataRules:
+			return deserializeImportDataRuleList(d, schemas.GetSynchronizationConfigurationResponse_importDataRules, &v.ImportDataRules)
+		case schemas.GetSynchronizationConfigurationResponse_latestVersionNumber:
+			v.LatestVersionNumber = new(int32)
+			return d.ReadInt32(schemas.GetSynchronizationConfigurationResponse_latestVersionNumber, v.LatestVersionNumber)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetSynchronizationConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetSynchronizationConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetSynchronizationConfiguration, schemas.GetSynchronizationConfigurationRequest, schemas.GetSynchronizationConfigurationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetSynchronizationConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetSynchronizationConfiguration, schemas.GetSynchronizationConfigurationRequest, schemas.GetSynchronizationConfigurationResponse), output: &GetSynchronizationConfigurationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

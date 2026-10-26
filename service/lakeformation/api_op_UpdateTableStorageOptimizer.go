@@ -4,6 +4,8 @@ package lakeformation
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/lakeformation/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -46,6 +48,25 @@ type UpdateTableStorageOptimizerInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateTableStorageOptimizerInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateTableStorageOptimizerRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateTableStorageOptimizerInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CatalogId != nil {
+		s.WriteString(schemas.UpdateTableStorageOptimizerRequest_CatalogId, *v.CatalogId)
+	}
+	if v.DatabaseName != nil {
+		s.WriteString(schemas.UpdateTableStorageOptimizerRequest_DatabaseName, *v.DatabaseName)
+	}
+	serializeStorageOptimizerConfigMap(s, schemas.UpdateTableStorageOptimizerRequest_StorageOptimizerConfig, v.StorageOptimizerConfig)
+	if v.TableName != nil {
+		s.WriteString(schemas.UpdateTableStorageOptimizerRequest_TableName, *v.TableName)
+	}
+}
+
 type UpdateTableStorageOptimizerOutput struct {
 
 	// A response indicating the success of failure of the operation.
@@ -57,13 +78,32 @@ type UpdateTableStorageOptimizerOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateTableStorageOptimizerOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateTableStorageOptimizerResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateTableStorageOptimizerOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Result != nil {
+		s.WriteString(schemas.UpdateTableStorageOptimizerResponse_Result, *v.Result)
+	}
+}
+func (v *UpdateTableStorageOptimizerOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateTableStorageOptimizerResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateTableStorageOptimizerResponse_Result:
+			v.Result = new(string)
+			return d.ReadString(schemas.UpdateTableStorageOptimizerResponse_Result, v.Result)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateTableStorageOptimizerMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateTableStorageOptimizer{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateTableStorageOptimizer, schemas.UpdateTableStorageOptimizerRequest, schemas.UpdateTableStorageOptimizerResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateTableStorageOptimizer{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateTableStorageOptimizer, schemas.UpdateTableStorageOptimizerRequest, schemas.UpdateTableStorageOptimizerResponse), output: &UpdateTableStorageOptimizerOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

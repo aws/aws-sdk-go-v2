@@ -4,7 +4,9 @@ package supplychain
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/supplychain/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/supplychain/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -43,6 +45,18 @@ type DeleteInstanceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteInstanceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteInstanceRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteInstanceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InstanceId != nil {
+		s.WriteString(schemas.DeleteInstanceRequest_instanceId, *v.InstanceId)
+	}
+}
+
 // The response parameters for DeleteInstance.
 type DeleteInstanceOutput struct {
 
@@ -57,13 +71,34 @@ type DeleteInstanceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteInstanceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteInstanceResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteInstanceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Instance != nil {
+		s.WriteStruct(schemas.DeleteInstanceResponse_instance)
+		v.Instance.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DeleteInstanceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteInstanceResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteInstanceResponse_instance:
+			v.Instance = &types.Instance{}
+			return v.Instance.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteInstanceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteInstance{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteInstance, schemas.DeleteInstanceRequest, schemas.DeleteInstanceResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteInstance{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteInstance, schemas.DeleteInstanceRequest, schemas.DeleteInstanceResponse), output: &DeleteInstanceOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

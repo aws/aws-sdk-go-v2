@@ -4,6 +4,8 @@ package neptunedata
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/neptunedata/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -43,6 +45,21 @@ type ListMLDataProcessingJobsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListMLDataProcessingJobsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListMLDataProcessingJobsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListMLDataProcessingJobsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxItems != nil {
+		s.WriteInt32(schemas.ListMLDataProcessingJobsInput_maxItems, *v.MaxItems)
+	}
+	if v.NeptuneIamRoleArn != nil {
+		s.WriteString(schemas.ListMLDataProcessingJobsInput_neptuneIamRoleArn, *v.NeptuneIamRoleArn)
+	}
+}
+
 type ListMLDataProcessingJobsOutput struct {
 
 	// A page listing data processing job IDs.
@@ -54,13 +71,29 @@ type ListMLDataProcessingJobsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListMLDataProcessingJobsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListMLDataProcessingJobsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListMLDataProcessingJobsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeStringList(s, schemas.ListMLDataProcessingJobsOutput_ids, v.Ids)
+}
+func (v *ListMLDataProcessingJobsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListMLDataProcessingJobsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListMLDataProcessingJobsOutput_ids:
+			return deserializeStringList(d, schemas.ListMLDataProcessingJobsOutput_ids, &v.Ids)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListMLDataProcessingJobsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListMLDataProcessingJobs{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListMLDataProcessingJobs, schemas.ListMLDataProcessingJobsInput, schemas.ListMLDataProcessingJobsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListMLDataProcessingJobs{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListMLDataProcessingJobs, schemas.ListMLDataProcessingJobsInput, schemas.ListMLDataProcessingJobsOutput), output: &ListMLDataProcessingJobsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

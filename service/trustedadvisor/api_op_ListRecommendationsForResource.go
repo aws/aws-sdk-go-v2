@@ -5,7 +5,9 @@ package trustedadvisor
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/trustedadvisor/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/trustedadvisor/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -55,6 +57,36 @@ type ListRecommendationsForResourceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListRecommendationsForResourceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListRecommendationsForResourceRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListRecommendationsForResourceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AwsResourceArn != nil {
+		s.WriteString(schemas.ListRecommendationsForResourceRequest_awsResourceArn, *v.AwsResourceArn)
+	}
+	if v.CheckArn != nil {
+		s.WriteString(schemas.ListRecommendationsForResourceRequest_checkArn, *v.CheckArn)
+	}
+	if v.Language != "" {
+		s.WriteString(schemas.ListRecommendationsForResourceRequest_language, string(v.Language))
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListRecommendationsForResourceRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListRecommendationsForResourceRequest_nextToken, *v.NextToken)
+	}
+	if v.Pillar != "" {
+		s.WriteString(schemas.ListRecommendationsForResourceRequest_pillar, string(v.Pillar))
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.ListRecommendationsForResourceRequest_status, string(v.Status))
+	}
+}
+
 type ListRecommendationsForResourceOutput struct {
 
 	// List of Trusted Advisor recommendations associated with the given AWS resource
@@ -72,13 +104,35 @@ type ListRecommendationsForResourceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListRecommendationsForResourceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListRecommendationsForResourceResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListRecommendationsForResourceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListRecommendationsForResourceResponse_nextToken, *v.NextToken)
+	}
+	serializeRecommendationForResourceSummaryList(s, schemas.ListRecommendationsForResourceResponse_recommendationForResourceSummaries, v.RecommendationForResourceSummaries)
+}
+func (v *ListRecommendationsForResourceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListRecommendationsForResourceResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListRecommendationsForResourceResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListRecommendationsForResourceResponse_nextToken, v.NextToken)
+		case schemas.ListRecommendationsForResourceResponse_recommendationForResourceSummaries:
+			return deserializeRecommendationForResourceSummaryList(d, schemas.ListRecommendationsForResourceResponse_recommendationForResourceSummaries, &v.RecommendationForResourceSummaries)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListRecommendationsForResourceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListRecommendationsForResource{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListRecommendationsForResource, schemas.ListRecommendationsForResourceRequest, schemas.ListRecommendationsForResourceResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListRecommendationsForResource{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListRecommendationsForResource, schemas.ListRecommendationsForResourceRequest, schemas.ListRecommendationsForResourceResponse), output: &ListRecommendationsForResourceOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

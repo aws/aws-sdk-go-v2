@@ -4,6 +4,8 @@ package lakeformation
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/lakeformation/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -50,6 +52,23 @@ type UpdateLFTagInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateLFTagInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateLFTagRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateLFTagInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CatalogId != nil {
+		s.WriteString(schemas.UpdateLFTagRequest_CatalogId, *v.CatalogId)
+	}
+	if v.TagKey != nil {
+		s.WriteString(schemas.UpdateLFTagRequest_TagKey, *v.TagKey)
+	}
+	serializeTagValueList(s, schemas.UpdateLFTagRequest_TagValuesToAdd, v.TagValuesToAdd)
+	serializeTagValueList(s, schemas.UpdateLFTagRequest_TagValuesToDelete, v.TagValuesToDelete)
+}
+
 type UpdateLFTagOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -57,13 +76,26 @@ type UpdateLFTagOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateLFTagOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateLFTagResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateLFTagOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *UpdateLFTagOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateLFTagResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateLFTagMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateLFTag{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateLFTag, schemas.UpdateLFTagRequest, schemas.UpdateLFTagResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateLFTag{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateLFTag, schemas.UpdateLFTagRequest, schemas.UpdateLFTagResponse), output: &UpdateLFTagOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

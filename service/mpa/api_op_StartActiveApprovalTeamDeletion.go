@@ -4,6 +4,8 @@ package mpa
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/mpa/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -42,6 +44,21 @@ type StartActiveApprovalTeamDeletionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartActiveApprovalTeamDeletionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartActiveApprovalTeamDeletionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartActiveApprovalTeamDeletionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.StartActiveApprovalTeamDeletionRequest_Arn, *v.Arn)
+	}
+	if v.PendingWindowDays != nil {
+		s.WriteInt32(schemas.StartActiveApprovalTeamDeletionRequest_PendingWindowDays, *v.PendingWindowDays)
+	}
+}
+
 type StartActiveApprovalTeamDeletionOutput struct {
 
 	// Timestamp when the deletion process is scheduled to complete.
@@ -56,13 +73,38 @@ type StartActiveApprovalTeamDeletionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartActiveApprovalTeamDeletionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartActiveApprovalTeamDeletionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartActiveApprovalTeamDeletionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DeletionCompletionTime != nil {
+		s.WriteTime(schemas.StartActiveApprovalTeamDeletionResponse_DeletionCompletionTime, *v.DeletionCompletionTime)
+	}
+	if v.DeletionStartTime != nil {
+		s.WriteTime(schemas.StartActiveApprovalTeamDeletionResponse_DeletionStartTime, *v.DeletionStartTime)
+	}
+}
+func (v *StartActiveApprovalTeamDeletionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartActiveApprovalTeamDeletionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartActiveApprovalTeamDeletionResponse_DeletionCompletionTime:
+			v.DeletionCompletionTime = new(time.Time)
+			return d.ReadTime(schemas.StartActiveApprovalTeamDeletionResponse_DeletionCompletionTime, v.DeletionCompletionTime)
+		case schemas.StartActiveApprovalTeamDeletionResponse_DeletionStartTime:
+			v.DeletionStartTime = new(time.Time)
+			return d.ReadTime(schemas.StartActiveApprovalTeamDeletionResponse_DeletionStartTime, v.DeletionStartTime)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartActiveApprovalTeamDeletionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpStartActiveApprovalTeamDeletion{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartActiveApprovalTeamDeletion, schemas.StartActiveApprovalTeamDeletionRequest, schemas.StartActiveApprovalTeamDeletionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStartActiveApprovalTeamDeletion{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartActiveApprovalTeamDeletion, schemas.StartActiveApprovalTeamDeletionRequest, schemas.StartActiveApprovalTeamDeletionResponse), output: &StartActiveApprovalTeamDeletionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

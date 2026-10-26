@@ -4,7 +4,9 @@ package securityagent
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/securityagent/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/securityagent/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,19 @@ type BatchGetArtifactMetadataInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchGetArtifactMetadataInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchGetArtifactMetadataInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchGetArtifactMetadataInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AgentSpaceId != nil {
+		s.WriteString(schemas.BatchGetArtifactMetadataInput_agentSpaceId, *v.AgentSpaceId)
+	}
+	serializeArtifactIds(s, schemas.BatchGetArtifactMetadataInput_artifactIds, v.ArtifactIds)
+}
+
 type BatchGetArtifactMetadataOutput struct {
 
 	// The list of artifact metadata items that were found.
@@ -52,13 +67,29 @@ type BatchGetArtifactMetadataOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchGetArtifactMetadataOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchGetArtifactMetadataOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchGetArtifactMetadataOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeArtifactMetadataList(s, schemas.BatchGetArtifactMetadataOutput_artifactMetadataList, v.ArtifactMetadataList)
+}
+func (v *BatchGetArtifactMetadataOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchGetArtifactMetadataOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchGetArtifactMetadataOutput_artifactMetadataList:
+			return deserializeArtifactMetadataList(d, schemas.BatchGetArtifactMetadataOutput_artifactMetadataList, &v.ArtifactMetadataList)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationBatchGetArtifactMetadataMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpBatchGetArtifactMetadata{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchGetArtifactMetadata, schemas.BatchGetArtifactMetadataInput, schemas.BatchGetArtifactMetadataOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpBatchGetArtifactMetadata{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchGetArtifactMetadata, schemas.BatchGetArtifactMetadataInput, schemas.BatchGetArtifactMetadataOutput), output: &BatchGetArtifactMetadataOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

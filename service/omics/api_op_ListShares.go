@@ -5,7 +5,9 @@ package omics
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/omics/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/omics/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -47,6 +49,29 @@ type ListSharesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListSharesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListSharesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListSharesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Filter != nil {
+		s.WriteStruct(schemas.ListSharesRequest_filter)
+		v.Filter.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListSharesRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListSharesRequest_nextToken, *v.NextToken)
+	}
+	if v.ResourceOwner != "" {
+		s.WriteString(schemas.ListSharesRequest_resourceOwner, string(v.ResourceOwner))
+	}
+}
+
 type ListSharesOutput struct {
 
 	// The shares available and their metadata details.
@@ -64,13 +89,35 @@ type ListSharesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListSharesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListSharesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListSharesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListSharesResponse_nextToken, *v.NextToken)
+	}
+	serializeShareDetailsList(s, schemas.ListSharesResponse_shares, v.Shares)
+}
+func (v *ListSharesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListSharesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListSharesResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListSharesResponse_nextToken, v.NextToken)
+		case schemas.ListSharesResponse_shares:
+			return deserializeShareDetailsList(d, schemas.ListSharesResponse_shares, &v.Shares)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListSharesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListShares{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListShares, schemas.ListSharesRequest, schemas.ListSharesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListShares{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListShares, schemas.ListSharesRequest, schemas.ListSharesResponse), output: &ListSharesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

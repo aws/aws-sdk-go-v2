@@ -5,7 +5,9 @@ package macie2
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/macie2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/macie2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -38,6 +40,21 @@ type ListSensitivityInspectionTemplatesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListSensitivityInspectionTemplatesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListSensitivityInspectionTemplatesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListSensitivityInspectionTemplatesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListSensitivityInspectionTemplatesRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListSensitivityInspectionTemplatesRequest_nextToken, *v.NextToken)
+	}
+}
+
 type ListSensitivityInspectionTemplatesOutput struct {
 
 	// The string to use in a subsequent request to get the next page of results in a
@@ -54,13 +71,35 @@ type ListSensitivityInspectionTemplatesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListSensitivityInspectionTemplatesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListSensitivityInspectionTemplatesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListSensitivityInspectionTemplatesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListSensitivityInspectionTemplatesResponse_nextToken, *v.NextToken)
+	}
+	serialize__listOfSensitivityInspectionTemplatesEntry(s, schemas.ListSensitivityInspectionTemplatesResponse_sensitivityInspectionTemplates, v.SensitivityInspectionTemplates)
+}
+func (v *ListSensitivityInspectionTemplatesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListSensitivityInspectionTemplatesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListSensitivityInspectionTemplatesResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListSensitivityInspectionTemplatesResponse_nextToken, v.NextToken)
+		case schemas.ListSensitivityInspectionTemplatesResponse_sensitivityInspectionTemplates:
+			return deserialize__listOfSensitivityInspectionTemplatesEntry(d, schemas.ListSensitivityInspectionTemplatesResponse_sensitivityInspectionTemplates, &v.SensitivityInspectionTemplates)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListSensitivityInspectionTemplatesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListSensitivityInspectionTemplates{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListSensitivityInspectionTemplates, schemas.ListSensitivityInspectionTemplatesRequest, schemas.ListSensitivityInspectionTemplatesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListSensitivityInspectionTemplates{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListSensitivityInspectionTemplates, schemas.ListSensitivityInspectionTemplatesRequest, schemas.ListSensitivityInspectionTemplatesResponse), output: &ListSensitivityInspectionTemplatesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

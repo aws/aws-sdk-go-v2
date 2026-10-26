@@ -4,7 +4,9 @@ package rum
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/rum/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/rum/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -34,6 +36,28 @@ type GetAppMonitorInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetAppMonitorInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetAppMonitorRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetAppMonitorInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.GetAppMonitorRequest_Name, *v.Name)
+	}
+}
+func (v *GetAppMonitorInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetAppMonitorRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetAppMonitorRequest_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.GetAppMonitorRequest_Name, v.Name)
+		}
+		return nil
+	})
+}
+
 type GetAppMonitorOutput struct {
 
 	// A structure containing all the configuration information for the app monitor.
@@ -45,13 +69,34 @@ type GetAppMonitorOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetAppMonitorOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetAppMonitorResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetAppMonitorOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AppMonitor != nil {
+		s.WriteStruct(schemas.GetAppMonitorResponse_AppMonitor)
+		v.AppMonitor.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetAppMonitorOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetAppMonitorResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetAppMonitorResponse_AppMonitor:
+			v.AppMonitor = &types.AppMonitor{}
+			return v.AppMonitor.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetAppMonitorMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetAppMonitor{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAppMonitor, schemas.GetAppMonitorRequest, schemas.GetAppMonitorResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetAppMonitor{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAppMonitor, schemas.GetAppMonitorRequest, schemas.GetAppMonitorResponse), output: &GetAppMonitorOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

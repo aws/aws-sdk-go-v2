@@ -5,7 +5,9 @@ package omics
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/omics/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/omics/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -64,6 +66,30 @@ type StartAnnotationImportJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartAnnotationImportJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartAnnotationImportRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartAnnotationImportJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAnnotationFieldMap(s, schemas.StartAnnotationImportRequest_annotationFields, v.AnnotationFields)
+	if v.DestinationName != nil {
+		s.WriteString(schemas.StartAnnotationImportRequest_destinationName, *v.DestinationName)
+	}
+	serializeFormatOptions(s, schemas.StartAnnotationImportRequest_formatOptions, v.FormatOptions)
+	serializeAnnotationImportItemSources(s, schemas.StartAnnotationImportRequest_items, v.Items)
+	if v.RoleArn != nil {
+		s.WriteString(schemas.StartAnnotationImportRequest_roleArn, *v.RoleArn)
+	}
+	if v.RunLeftNormalization != false {
+		s.WriteBool(schemas.StartAnnotationImportRequest_runLeftNormalization, v.RunLeftNormalization)
+	}
+	if v.VersionName != nil {
+		s.WriteString(schemas.StartAnnotationImportRequest_versionName, *v.VersionName)
+	}
+}
+
 type StartAnnotationImportJobOutput struct {
 
 	// The job's ID.
@@ -77,13 +103,32 @@ type StartAnnotationImportJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartAnnotationImportJobOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartAnnotationImportResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartAnnotationImportJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.JobId != nil {
+		s.WriteString(schemas.StartAnnotationImportResponse_jobId, *v.JobId)
+	}
+}
+func (v *StartAnnotationImportJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartAnnotationImportResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartAnnotationImportResponse_jobId:
+			v.JobId = new(string)
+			return d.ReadString(schemas.StartAnnotationImportResponse_jobId, v.JobId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartAnnotationImportJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpStartAnnotationImportJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartAnnotationImportJob, schemas.StartAnnotationImportRequest, schemas.StartAnnotationImportResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStartAnnotationImportJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartAnnotationImportJob, schemas.StartAnnotationImportRequest, schemas.StartAnnotationImportResponse), output: &StartAnnotationImportJobOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

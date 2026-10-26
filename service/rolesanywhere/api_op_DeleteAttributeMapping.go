@@ -4,7 +4,9 @@ package rolesanywhere
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/rolesanywhere/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/rolesanywhere/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -43,6 +45,22 @@ type DeleteAttributeMappingInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteAttributeMappingInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteAttributeMappingRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteAttributeMappingInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CertificateField != "" {
+		s.WriteString(schemas.DeleteAttributeMappingRequest_certificateField, string(v.CertificateField))
+	}
+	if v.ProfileId != nil {
+		s.WriteString(schemas.DeleteAttributeMappingRequest_profileId, *v.ProfileId)
+	}
+	serializeSpecifierList(s, schemas.DeleteAttributeMappingRequest_specifiers, v.Specifiers)
+}
+
 type DeleteAttributeMappingOutput struct {
 
 	// The state of the profile after a read or write operation.
@@ -56,13 +74,34 @@ type DeleteAttributeMappingOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteAttributeMappingOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteAttributeMappingResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteAttributeMappingOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Profile != nil {
+		s.WriteStruct(schemas.DeleteAttributeMappingResponse_profile)
+		v.Profile.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DeleteAttributeMappingOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteAttributeMappingResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteAttributeMappingResponse_profile:
+			v.Profile = &types.ProfileDetail{}
+			return v.Profile.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteAttributeMappingMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteAttributeMapping{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteAttributeMapping, schemas.DeleteAttributeMappingRequest, schemas.DeleteAttributeMappingResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteAttributeMapping{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteAttributeMapping, schemas.DeleteAttributeMappingRequest, schemas.DeleteAttributeMappingResponse), output: &DeleteAttributeMappingOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

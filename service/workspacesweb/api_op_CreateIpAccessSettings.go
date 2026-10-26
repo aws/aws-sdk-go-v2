@@ -5,7 +5,9 @@ package workspacesweb
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/workspacesweb/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/workspacesweb/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -60,6 +62,30 @@ type CreateIpAccessSettingsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateIpAccessSettingsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateIpAccessSettingsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateIpAccessSettingsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeEncryptionContextMap(s, schemas.CreateIpAccessSettingsRequest_additionalEncryptionContext, v.AdditionalEncryptionContext)
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateIpAccessSettingsRequest_clientToken, *v.ClientToken)
+	}
+	if v.CustomerManagedKey != nil {
+		s.WriteString(schemas.CreateIpAccessSettingsRequest_customerManagedKey, *v.CustomerManagedKey)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreateIpAccessSettingsRequest_description, *v.Description)
+	}
+	if v.DisplayName != nil {
+		s.WriteString(schemas.CreateIpAccessSettingsRequest_displayName, *v.DisplayName)
+	}
+	serializeIpRuleList(s, schemas.CreateIpAccessSettingsRequest_ipRules, v.IpRules)
+	serializeTagList(s, schemas.CreateIpAccessSettingsRequest_tags, v.Tags)
+}
+
 type CreateIpAccessSettingsOutput struct {
 
 	// The ARN of the IP access settings resource.
@@ -73,13 +99,32 @@ type CreateIpAccessSettingsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateIpAccessSettingsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateIpAccessSettingsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateIpAccessSettingsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IpAccessSettingsArn != nil {
+		s.WriteString(schemas.CreateIpAccessSettingsResponse_ipAccessSettingsArn, *v.IpAccessSettingsArn)
+	}
+}
+func (v *CreateIpAccessSettingsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateIpAccessSettingsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateIpAccessSettingsResponse_ipAccessSettingsArn:
+			v.IpAccessSettingsArn = new(string)
+			return d.ReadString(schemas.CreateIpAccessSettingsResponse_ipAccessSettingsArn, v.IpAccessSettingsArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateIpAccessSettingsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateIpAccessSettings{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateIpAccessSettings, schemas.CreateIpAccessSettingsRequest, schemas.CreateIpAccessSettingsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateIpAccessSettings{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateIpAccessSettings, schemas.CreateIpAccessSettingsRequest, schemas.CreateIpAccessSettingsResponse), output: &CreateIpAccessSettingsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

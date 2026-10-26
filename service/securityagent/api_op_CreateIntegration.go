@@ -4,7 +4,9 @@ package securityagent
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/securityagent/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/securityagent/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -57,6 +59,29 @@ type CreateIntegrationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateIntegrationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateIntegrationInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateIntegrationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeProviderInput(s, schemas.CreateIntegrationInput_input, v.Input)
+	if v.IntegrationDisplayName != nil {
+		s.WriteString(schemas.CreateIntegrationInput_integrationDisplayName, *v.IntegrationDisplayName)
+	}
+	if v.KmsKeyId != nil {
+		s.WriteString(schemas.CreateIntegrationInput_kmsKeyId, *v.KmsKeyId)
+	}
+	if v.PrivateConnectionName != nil {
+		s.WriteString(schemas.CreateIntegrationInput_privateConnectionName, *v.PrivateConnectionName)
+	}
+	if v.Provider != "" {
+		s.WriteString(schemas.CreateIntegrationInput_provider, string(v.Provider))
+	}
+	serializeTagMap(s, schemas.CreateIntegrationInput_tags, v.Tags)
+}
+
 type CreateIntegrationOutput struct {
 
 	// The unique identifier of the created integration.
@@ -70,13 +95,32 @@ type CreateIntegrationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateIntegrationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateIntegrationOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateIntegrationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IntegrationId != nil {
+		s.WriteString(schemas.CreateIntegrationOutput_integrationId, *v.IntegrationId)
+	}
+}
+func (v *CreateIntegrationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateIntegrationOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateIntegrationOutput_integrationId:
+			v.IntegrationId = new(string)
+			return d.ReadString(schemas.CreateIntegrationOutput_integrationId, v.IntegrationId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateIntegrationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateIntegration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateIntegration, schemas.CreateIntegrationInput, schemas.CreateIntegrationOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateIntegration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateIntegration, schemas.CreateIntegrationInput, schemas.CreateIntegrationOutput), output: &CreateIntegrationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

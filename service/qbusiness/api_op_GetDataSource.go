@@ -5,7 +5,11 @@ package qbusiness
 import (
 	"context"
 	"github.com/aws/aws-sdk-go-v2/service/qbusiness/document"
+	internaldocument "github.com/aws/aws-sdk-go-v2/service/qbusiness/internal/document"
+	"github.com/aws/aws-sdk-go-v2/service/qbusiness/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/qbusiness/types"
+	smithy "github.com/aws/smithy-go"
+	smithydocument "github.com/aws/smithy-go/document"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -44,6 +48,24 @@ type GetDataSourceInput struct {
 	IndexId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetDataSourceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetDataSourceRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetDataSourceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationId != nil {
+		s.WriteString(schemas.GetDataSourceRequest_applicationId, *v.ApplicationId)
+	}
+	if v.DataSourceId != nil {
+		s.WriteString(schemas.GetDataSourceRequest_dataSourceId, *v.DataSourceId)
+	}
+	if v.IndexId != nil {
+		s.WriteString(schemas.GetDataSourceRequest_indexId, *v.IndexId)
+	}
 }
 
 type GetDataSourceOutput struct {
@@ -116,13 +138,146 @@ type GetDataSourceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetDataSourceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetDataSourceResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetDataSourceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationId != nil {
+		s.WriteString(schemas.GetDataSourceResponse_applicationId, *v.ApplicationId)
+	}
+	if v.Configuration != nil {
+		s.WriteDocument(schemas.GetDataSourceResponse_configuration, &smithydocument.Opaque{Value: v.Configuration})
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.GetDataSourceResponse_createdAt, *v.CreatedAt)
+	}
+	if v.DataSourceArn != nil {
+		s.WriteString(schemas.GetDataSourceResponse_dataSourceArn, *v.DataSourceArn)
+	}
+	if v.DataSourceId != nil {
+		s.WriteString(schemas.GetDataSourceResponse_dataSourceId, *v.DataSourceId)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.GetDataSourceResponse_description, *v.Description)
+	}
+	if v.DisplayName != nil {
+		s.WriteString(schemas.GetDataSourceResponse_displayName, *v.DisplayName)
+	}
+	if v.DocumentEnrichmentConfiguration != nil {
+		s.WriteStruct(schemas.GetDataSourceResponse_documentEnrichmentConfiguration)
+		v.DocumentEnrichmentConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Error != nil {
+		s.WriteStruct(schemas.GetDataSourceResponse_error)
+		v.Error.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.IndexId != nil {
+		s.WriteString(schemas.GetDataSourceResponse_indexId, *v.IndexId)
+	}
+	if v.MediaExtractionConfiguration != nil {
+		s.WriteStruct(schemas.GetDataSourceResponse_mediaExtractionConfiguration)
+		v.MediaExtractionConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RoleArn != nil {
+		s.WriteString(schemas.GetDataSourceResponse_roleArn, *v.RoleArn)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.GetDataSourceResponse_status, string(v.Status))
+	}
+	if v.SyncSchedule != nil {
+		s.WriteString(schemas.GetDataSourceResponse_syncSchedule, *v.SyncSchedule)
+	}
+	if v.Type != nil {
+		s.WriteString(schemas.GetDataSourceResponse_type, *v.Type)
+	}
+	if v.UpdatedAt != nil {
+		s.WriteTime(schemas.GetDataSourceResponse_updatedAt, *v.UpdatedAt)
+	}
+	if v.VpcConfiguration != nil {
+		s.WriteStruct(schemas.GetDataSourceResponse_vpcConfiguration)
+		v.VpcConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetDataSourceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetDataSourceResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetDataSourceResponse_applicationId:
+			v.ApplicationId = new(string)
+			return d.ReadString(schemas.GetDataSourceResponse_applicationId, v.ApplicationId)
+		case schemas.GetDataSourceResponse_configuration:
+			var dv smithydocument.Value
+			if err := d.ReadDocument(schemas.GetDataSourceResponse_configuration, &dv); err != nil {
+				return err
+			}
+			if ov, ok := dv.(smithydocument.Opaque); ok {
+				v.Configuration = internaldocument.NewDocumentUnmarshaler(ov.Value)
+			}
+			return nil
+		case schemas.GetDataSourceResponse_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.GetDataSourceResponse_createdAt, v.CreatedAt)
+		case schemas.GetDataSourceResponse_dataSourceArn:
+			v.DataSourceArn = new(string)
+			return d.ReadString(schemas.GetDataSourceResponse_dataSourceArn, v.DataSourceArn)
+		case schemas.GetDataSourceResponse_dataSourceId:
+			v.DataSourceId = new(string)
+			return d.ReadString(schemas.GetDataSourceResponse_dataSourceId, v.DataSourceId)
+		case schemas.GetDataSourceResponse_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.GetDataSourceResponse_description, v.Description)
+		case schemas.GetDataSourceResponse_displayName:
+			v.DisplayName = new(string)
+			return d.ReadString(schemas.GetDataSourceResponse_displayName, v.DisplayName)
+		case schemas.GetDataSourceResponse_documentEnrichmentConfiguration:
+			v.DocumentEnrichmentConfiguration = &types.DocumentEnrichmentConfiguration{}
+			return v.DocumentEnrichmentConfiguration.Deserialize(d)
+		case schemas.GetDataSourceResponse_error:
+			v.Error = &types.ErrorDetail{}
+			return v.Error.Deserialize(d)
+		case schemas.GetDataSourceResponse_indexId:
+			v.IndexId = new(string)
+			return d.ReadString(schemas.GetDataSourceResponse_indexId, v.IndexId)
+		case schemas.GetDataSourceResponse_mediaExtractionConfiguration:
+			v.MediaExtractionConfiguration = &types.MediaExtractionConfiguration{}
+			return v.MediaExtractionConfiguration.Deserialize(d)
+		case schemas.GetDataSourceResponse_roleArn:
+			v.RoleArn = new(string)
+			return d.ReadString(schemas.GetDataSourceResponse_roleArn, v.RoleArn)
+		case schemas.GetDataSourceResponse_status:
+			var ev string
+			if err := d.ReadString(schemas.GetDataSourceResponse_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.DataSourceStatus(ev)
+			return nil
+		case schemas.GetDataSourceResponse_syncSchedule:
+			v.SyncSchedule = new(string)
+			return d.ReadString(schemas.GetDataSourceResponse_syncSchedule, v.SyncSchedule)
+		case schemas.GetDataSourceResponse_type:
+			v.Type = new(string)
+			return d.ReadString(schemas.GetDataSourceResponse_type, v.Type)
+		case schemas.GetDataSourceResponse_updatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.GetDataSourceResponse_updatedAt, v.UpdatedAt)
+		case schemas.GetDataSourceResponse_vpcConfiguration:
+			v.VpcConfiguration = &types.DataSourceVpcConfiguration{}
+			return v.VpcConfiguration.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetDataSourceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetDataSource{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetDataSource, schemas.GetDataSourceRequest, schemas.GetDataSourceResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetDataSource{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetDataSource, schemas.GetDataSourceRequest, schemas.GetDataSourceResponse), output: &GetDataSourceOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

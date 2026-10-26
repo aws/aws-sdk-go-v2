@@ -5,7 +5,9 @@ package location
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/location/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/location/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -43,6 +45,34 @@ type GetGeofenceInput struct {
 	GeofenceId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetGeofenceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetGeofenceRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetGeofenceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CollectionName != nil {
+		s.WriteString(schemas.GetGeofenceRequest_CollectionName, *v.CollectionName)
+	}
+	if v.GeofenceId != nil {
+		s.WriteString(schemas.GetGeofenceRequest_GeofenceId, *v.GeofenceId)
+	}
+}
+func (v *GetGeofenceInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetGeofenceRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetGeofenceRequest_CollectionName:
+			v.CollectionName = new(string)
+			return d.ReadString(schemas.GetGeofenceRequest_CollectionName, v.CollectionName)
+		case schemas.GetGeofenceRequest_GeofenceId:
+			v.GeofenceId = new(string)
+			return d.ReadString(schemas.GetGeofenceRequest_GeofenceId, v.GeofenceId)
+		}
+		return nil
+	})
 }
 
 type GetGeofenceOutput struct {
@@ -102,13 +132,61 @@ type GetGeofenceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetGeofenceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetGeofenceResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetGeofenceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreateTime != nil {
+		s.WriteTime(schemas.GetGeofenceResponse_CreateTime, *v.CreateTime)
+	}
+	if v.GeofenceId != nil {
+		s.WriteString(schemas.GetGeofenceResponse_GeofenceId, *v.GeofenceId)
+	}
+	serializePropertyMap(s, schemas.GetGeofenceResponse_GeofenceProperties, v.GeofenceProperties)
+	if v.Geometry != nil {
+		s.WriteStruct(schemas.GetGeofenceResponse_Geometry)
+		v.Geometry.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Status != nil {
+		s.WriteString(schemas.GetGeofenceResponse_Status, *v.Status)
+	}
+	if v.UpdateTime != nil {
+		s.WriteTime(schemas.GetGeofenceResponse_UpdateTime, *v.UpdateTime)
+	}
+}
+func (v *GetGeofenceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetGeofenceResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetGeofenceResponse_CreateTime:
+			v.CreateTime = new(time.Time)
+			return d.ReadTime(schemas.GetGeofenceResponse_CreateTime, v.CreateTime)
+		case schemas.GetGeofenceResponse_GeofenceId:
+			v.GeofenceId = new(string)
+			return d.ReadString(schemas.GetGeofenceResponse_GeofenceId, v.GeofenceId)
+		case schemas.GetGeofenceResponse_GeofenceProperties:
+			return deserializePropertyMap(d, schemas.GetGeofenceResponse_GeofenceProperties, &v.GeofenceProperties)
+		case schemas.GetGeofenceResponse_Geometry:
+			v.Geometry = &types.GeofenceGeometry{}
+			return v.Geometry.Deserialize(d)
+		case schemas.GetGeofenceResponse_Status:
+			v.Status = new(string)
+			return d.ReadString(schemas.GetGeofenceResponse_Status, v.Status)
+		case schemas.GetGeofenceResponse_UpdateTime:
+			v.UpdateTime = new(time.Time)
+			return d.ReadTime(schemas.GetGeofenceResponse_UpdateTime, v.UpdateTime)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetGeofenceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetGeofence{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetGeofence, schemas.GetGeofenceRequest, schemas.GetGeofenceResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetGeofence{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetGeofence, schemas.GetGeofenceRequest, schemas.GetGeofenceResponse), output: &GetGeofenceOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

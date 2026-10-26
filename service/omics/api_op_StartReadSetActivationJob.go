@@ -5,7 +5,9 @@ package omics
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/omics/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/omics/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -53,6 +55,22 @@ type StartReadSetActivationJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartReadSetActivationJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartReadSetActivationJobRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartReadSetActivationJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.StartReadSetActivationJobRequest_clientToken, *v.ClientToken)
+	}
+	if v.SequenceStoreId != nil {
+		s.WriteString(schemas.StartReadSetActivationJobRequest_sequenceStoreId, *v.SequenceStoreId)
+	}
+	serializeStartReadSetActivationJobSourceList(s, schemas.StartReadSetActivationJobRequest_sources, v.Sources)
+}
+
 type StartReadSetActivationJobOutput struct {
 
 	// When the job was created.
@@ -81,13 +99,54 @@ type StartReadSetActivationJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartReadSetActivationJobOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartReadSetActivationJobResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartReadSetActivationJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.StartReadSetActivationJobResponse_creationTime, *v.CreationTime)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.StartReadSetActivationJobResponse_id, *v.Id)
+	}
+	if v.SequenceStoreId != nil {
+		s.WriteString(schemas.StartReadSetActivationJobResponse_sequenceStoreId, *v.SequenceStoreId)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.StartReadSetActivationJobResponse_status, string(v.Status))
+	}
+}
+func (v *StartReadSetActivationJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartReadSetActivationJobResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartReadSetActivationJobResponse_creationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.StartReadSetActivationJobResponse_creationTime, v.CreationTime)
+		case schemas.StartReadSetActivationJobResponse_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.StartReadSetActivationJobResponse_id, v.Id)
+		case schemas.StartReadSetActivationJobResponse_sequenceStoreId:
+			v.SequenceStoreId = new(string)
+			return d.ReadString(schemas.StartReadSetActivationJobResponse_sequenceStoreId, v.SequenceStoreId)
+		case schemas.StartReadSetActivationJobResponse_status:
+			var ev string
+			if err := d.ReadString(schemas.StartReadSetActivationJobResponse_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.ReadSetActivationJobStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartReadSetActivationJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpStartReadSetActivationJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartReadSetActivationJob, schemas.StartReadSetActivationJobRequest, schemas.StartReadSetActivationJobResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStartReadSetActivationJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartReadSetActivationJob, schemas.StartReadSetActivationJobRequest, schemas.StartReadSetActivationJobResponse), output: &StartReadSetActivationJobOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

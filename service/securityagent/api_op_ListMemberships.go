@@ -5,7 +5,9 @@ package securityagent
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/securityagent/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/securityagent/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -53,6 +55,30 @@ type ListMembershipsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListMembershipsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListMembershipsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListMembershipsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AgentSpaceId != nil {
+		s.WriteString(schemas.ListMembershipsRequest_agentSpaceId, *v.AgentSpaceId)
+	}
+	if v.ApplicationId != nil {
+		s.WriteString(schemas.ListMembershipsRequest_applicationId, *v.ApplicationId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListMembershipsRequest_maxResults, *v.MaxResults)
+	}
+	if v.MemberType != "" {
+		s.WriteString(schemas.ListMembershipsRequest_memberType, string(v.MemberType))
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListMembershipsRequest_nextToken, *v.NextToken)
+	}
+}
+
 // Response structure for listing members associated to an agent space.
 type ListMembershipsOutput struct {
 
@@ -72,13 +98,35 @@ type ListMembershipsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListMembershipsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListMembershipsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListMembershipsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeMembershipSummaryList(s, schemas.ListMembershipsResponse_membershipSummaries, v.MembershipSummaries)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListMembershipsResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListMembershipsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListMembershipsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListMembershipsResponse_membershipSummaries:
+			return deserializeMembershipSummaryList(d, schemas.ListMembershipsResponse_membershipSummaries, &v.MembershipSummaries)
+		case schemas.ListMembershipsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListMembershipsResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListMembershipsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListMemberships{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListMemberships, schemas.ListMembershipsRequest, schemas.ListMembershipsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListMemberships{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListMemberships, schemas.ListMembershipsRequest, schemas.ListMembershipsResponse), output: &ListMembershipsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

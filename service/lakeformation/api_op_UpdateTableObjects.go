@@ -4,7 +4,9 @@ package lakeformation
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/lakeformation/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lakeformation/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -53,6 +55,28 @@ type UpdateTableObjectsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateTableObjectsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateTableObjectsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateTableObjectsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CatalogId != nil {
+		s.WriteString(schemas.UpdateTableObjectsRequest_CatalogId, *v.CatalogId)
+	}
+	if v.DatabaseName != nil {
+		s.WriteString(schemas.UpdateTableObjectsRequest_DatabaseName, *v.DatabaseName)
+	}
+	if v.TableName != nil {
+		s.WriteString(schemas.UpdateTableObjectsRequest_TableName, *v.TableName)
+	}
+	if v.TransactionId != nil {
+		s.WriteString(schemas.UpdateTableObjectsRequest_TransactionId, *v.TransactionId)
+	}
+	serializeWriteOperationList(s, schemas.UpdateTableObjectsRequest_WriteOperations, v.WriteOperations)
+}
+
 type UpdateTableObjectsOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -60,13 +84,26 @@ type UpdateTableObjectsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateTableObjectsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateTableObjectsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateTableObjectsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *UpdateTableObjectsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateTableObjectsResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateTableObjectsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateTableObjects{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateTableObjects, schemas.UpdateTableObjectsRequest, schemas.UpdateTableObjectsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateTableObjects{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateTableObjects, schemas.UpdateTableObjectsRequest, schemas.UpdateTableObjectsResponse), output: &UpdateTableObjectsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

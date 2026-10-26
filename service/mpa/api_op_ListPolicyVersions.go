@@ -5,7 +5,9 @@ package mpa
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/mpa/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/mpa/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -47,6 +49,24 @@ type ListPolicyVersionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListPolicyVersionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListPolicyVersionsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListPolicyVersionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListPolicyVersionsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListPolicyVersionsRequest_NextToken, *v.NextToken)
+	}
+	if v.PolicyArn != nil {
+		s.WriteString(schemas.ListPolicyVersionsRequest_PolicyArn, *v.PolicyArn)
+	}
+}
+
 type ListPolicyVersionsOutput struct {
 
 	// If present, indicates that more output is available than is included in the
@@ -65,13 +85,35 @@ type ListPolicyVersionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListPolicyVersionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListPolicyVersionsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListPolicyVersionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListPolicyVersionsResponse_NextToken, *v.NextToken)
+	}
+	serializePolicyVersions(s, schemas.ListPolicyVersionsResponse_PolicyVersions, v.PolicyVersions)
+}
+func (v *ListPolicyVersionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListPolicyVersionsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListPolicyVersionsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListPolicyVersionsResponse_NextToken, v.NextToken)
+		case schemas.ListPolicyVersionsResponse_PolicyVersions:
+			return deserializePolicyVersions(d, schemas.ListPolicyVersionsResponse_PolicyVersions, &v.PolicyVersions)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListPolicyVersionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListPolicyVersions{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListPolicyVersions, schemas.ListPolicyVersionsRequest, schemas.ListPolicyVersionsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListPolicyVersions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListPolicyVersions, schemas.ListPolicyVersionsRequest, schemas.ListPolicyVersionsResponse), output: &ListPolicyVersionsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package s3files
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/s3files/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/s3files/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,19 @@ type UpdateMountTargetInput struct {
 	SecurityGroups []string
 
 	noSmithyDocumentSerde
+}
+
+func (v *UpdateMountTargetInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateMountTargetRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateMountTargetInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MountTargetId != nil {
+		s.WriteString(schemas.UpdateMountTargetRequest_mountTargetId, *v.MountTargetId)
+	}
+	serializeSecurityGroups(s, schemas.UpdateMountTargetRequest_securityGroups, v.SecurityGroups)
 }
 
 type UpdateMountTargetOutput struct {
@@ -91,13 +106,99 @@ type UpdateMountTargetOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateMountTargetOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateMountTargetResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateMountTargetOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AvailabilityZoneId != nil {
+		s.WriteString(schemas.UpdateMountTargetResponse_availabilityZoneId, *v.AvailabilityZoneId)
+	}
+	if v.FileSystemId != nil {
+		s.WriteString(schemas.UpdateMountTargetResponse_fileSystemId, *v.FileSystemId)
+	}
+	if v.Ipv4Address != nil {
+		s.WriteString(schemas.UpdateMountTargetResponse_ipv4Address, *v.Ipv4Address)
+	}
+	if v.Ipv6Address != nil {
+		s.WriteString(schemas.UpdateMountTargetResponse_ipv6Address, *v.Ipv6Address)
+	}
+	if v.MountTargetId != nil {
+		s.WriteString(schemas.UpdateMountTargetResponse_mountTargetId, *v.MountTargetId)
+	}
+	if v.NetworkInterfaceId != nil {
+		s.WriteString(schemas.UpdateMountTargetResponse_networkInterfaceId, *v.NetworkInterfaceId)
+	}
+	if v.OwnerId != nil {
+		s.WriteString(schemas.UpdateMountTargetResponse_ownerId, *v.OwnerId)
+	}
+	serializeSecurityGroups(s, schemas.UpdateMountTargetResponse_securityGroups, v.SecurityGroups)
+	if v.Status != "" {
+		s.WriteString(schemas.UpdateMountTargetResponse_status, string(v.Status))
+	}
+	if v.StatusMessage != nil {
+		s.WriteString(schemas.UpdateMountTargetResponse_statusMessage, *v.StatusMessage)
+	}
+	if v.SubnetId != nil {
+		s.WriteString(schemas.UpdateMountTargetResponse_subnetId, *v.SubnetId)
+	}
+	if v.VpcId != nil {
+		s.WriteString(schemas.UpdateMountTargetResponse_vpcId, *v.VpcId)
+	}
+}
+func (v *UpdateMountTargetOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateMountTargetResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateMountTargetResponse_availabilityZoneId:
+			v.AvailabilityZoneId = new(string)
+			return d.ReadString(schemas.UpdateMountTargetResponse_availabilityZoneId, v.AvailabilityZoneId)
+		case schemas.UpdateMountTargetResponse_fileSystemId:
+			v.FileSystemId = new(string)
+			return d.ReadString(schemas.UpdateMountTargetResponse_fileSystemId, v.FileSystemId)
+		case schemas.UpdateMountTargetResponse_ipv4Address:
+			v.Ipv4Address = new(string)
+			return d.ReadString(schemas.UpdateMountTargetResponse_ipv4Address, v.Ipv4Address)
+		case schemas.UpdateMountTargetResponse_ipv6Address:
+			v.Ipv6Address = new(string)
+			return d.ReadString(schemas.UpdateMountTargetResponse_ipv6Address, v.Ipv6Address)
+		case schemas.UpdateMountTargetResponse_mountTargetId:
+			v.MountTargetId = new(string)
+			return d.ReadString(schemas.UpdateMountTargetResponse_mountTargetId, v.MountTargetId)
+		case schemas.UpdateMountTargetResponse_networkInterfaceId:
+			v.NetworkInterfaceId = new(string)
+			return d.ReadString(schemas.UpdateMountTargetResponse_networkInterfaceId, v.NetworkInterfaceId)
+		case schemas.UpdateMountTargetResponse_ownerId:
+			v.OwnerId = new(string)
+			return d.ReadString(schemas.UpdateMountTargetResponse_ownerId, v.OwnerId)
+		case schemas.UpdateMountTargetResponse_securityGroups:
+			return deserializeSecurityGroups(d, schemas.UpdateMountTargetResponse_securityGroups, &v.SecurityGroups)
+		case schemas.UpdateMountTargetResponse_status:
+			var ev string
+			if err := d.ReadString(schemas.UpdateMountTargetResponse_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.LifeCycleState(ev)
+			return nil
+		case schemas.UpdateMountTargetResponse_statusMessage:
+			v.StatusMessage = new(string)
+			return d.ReadString(schemas.UpdateMountTargetResponse_statusMessage, v.StatusMessage)
+		case schemas.UpdateMountTargetResponse_subnetId:
+			v.SubnetId = new(string)
+			return d.ReadString(schemas.UpdateMountTargetResponse_subnetId, v.SubnetId)
+		case schemas.UpdateMountTargetResponse_vpcId:
+			v.VpcId = new(string)
+			return d.ReadString(schemas.UpdateMountTargetResponse_vpcId, v.VpcId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateMountTargetMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateMountTarget{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateMountTarget, schemas.UpdateMountTargetRequest, schemas.UpdateMountTargetResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateMountTarget{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateMountTarget, schemas.UpdateMountTargetRequest, schemas.UpdateMountTargetResponse), output: &UpdateMountTargetOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,6 +4,8 @@ package macie2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/macie2/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -61,6 +63,26 @@ type TestCustomDataIdentifierInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *TestCustomDataIdentifierInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TestCustomDataIdentifierRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TestCustomDataIdentifierInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serialize__listOf__string(s, schemas.TestCustomDataIdentifierRequest_ignoreWords, v.IgnoreWords)
+	serialize__listOf__string(s, schemas.TestCustomDataIdentifierRequest_keywords, v.Keywords)
+	if v.MaximumMatchDistance != nil {
+		s.WriteInt32(schemas.TestCustomDataIdentifierRequest_maximumMatchDistance, *v.MaximumMatchDistance)
+	}
+	if v.Regex != nil {
+		s.WriteString(schemas.TestCustomDataIdentifierRequest_regex, *v.Regex)
+	}
+	if v.SampleText != nil {
+		s.WriteString(schemas.TestCustomDataIdentifierRequest_sampleText, *v.SampleText)
+	}
+}
+
 type TestCustomDataIdentifierOutput struct {
 
 	// The number of occurrences of sample text that matched the criteria specified by
@@ -73,13 +95,32 @@ type TestCustomDataIdentifierOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *TestCustomDataIdentifierOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TestCustomDataIdentifierResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TestCustomDataIdentifierOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MatchCount != nil {
+		s.WriteInt32(schemas.TestCustomDataIdentifierResponse_matchCount, *v.MatchCount)
+	}
+}
+func (v *TestCustomDataIdentifierOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TestCustomDataIdentifierResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TestCustomDataIdentifierResponse_matchCount:
+			v.MatchCount = new(int32)
+			return d.ReadInt32(schemas.TestCustomDataIdentifierResponse_matchCount, v.MatchCount)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationTestCustomDataIdentifierMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpTestCustomDataIdentifier{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.TestCustomDataIdentifier, schemas.TestCustomDataIdentifierRequest, schemas.TestCustomDataIdentifierResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpTestCustomDataIdentifier{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.TestCustomDataIdentifier, schemas.TestCustomDataIdentifierRequest, schemas.TestCustomDataIdentifierResponse), output: &TestCustomDataIdentifierOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package lexruntimeservice
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/lexruntimeservice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lexruntimeservice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -144,6 +146,30 @@ type PostTextInput struct {
 	SessionAttributes map[string]string
 
 	noSmithyDocumentSerde
+}
+
+func (v *PostTextInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PostTextRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PostTextInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeActiveContextsList(s, schemas.PostTextRequest_activeContexts, v.ActiveContexts)
+	if v.BotAlias != nil {
+		s.WriteString(schemas.PostTextRequest_botAlias, *v.BotAlias)
+	}
+	if v.BotName != nil {
+		s.WriteString(schemas.PostTextRequest_botName, *v.BotName)
+	}
+	if v.InputText != nil {
+		s.WriteString(schemas.PostTextRequest_inputText, *v.InputText)
+	}
+	serializeStringMap(s, schemas.PostTextRequest_requestAttributes, v.RequestAttributes)
+	serializeStringMap(s, schemas.PostTextRequest_sessionAttributes, v.SessionAttributes)
+	if v.UserId != nil {
+		s.WriteString(schemas.PostTextRequest_userId, *v.UserId)
+	}
 }
 
 type PostTextOutput struct {
@@ -295,13 +321,112 @@ type PostTextOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PostTextOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PostTextResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PostTextOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeActiveContextsList(s, schemas.PostTextResponse_activeContexts, v.ActiveContexts)
+	serializeIntentList(s, schemas.PostTextResponse_alternativeIntents, v.AlternativeIntents)
+	if v.BotVersion != nil {
+		s.WriteString(schemas.PostTextResponse_botVersion, *v.BotVersion)
+	}
+	if v.DialogState != "" {
+		s.WriteString(schemas.PostTextResponse_dialogState, string(v.DialogState))
+	}
+	if v.IntentName != nil {
+		s.WriteString(schemas.PostTextResponse_intentName, *v.IntentName)
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.PostTextResponse_message, *v.Message)
+	}
+	if v.MessageFormat != "" {
+		s.WriteString(schemas.PostTextResponse_messageFormat, string(v.MessageFormat))
+	}
+	if v.NluIntentConfidence != nil {
+		s.WriteStruct(schemas.PostTextResponse_nluIntentConfidence)
+		v.NluIntentConfidence.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ResponseCard != nil {
+		s.WriteStruct(schemas.PostTextResponse_responseCard)
+		v.ResponseCard.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SentimentResponse != nil {
+		s.WriteStruct(schemas.PostTextResponse_sentimentResponse)
+		v.SentimentResponse.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeStringMap(s, schemas.PostTextResponse_sessionAttributes, v.SessionAttributes)
+	if v.SessionId != nil {
+		s.WriteString(schemas.PostTextResponse_sessionId, *v.SessionId)
+	}
+	if v.SlotToElicit != nil {
+		s.WriteString(schemas.PostTextResponse_slotToElicit, *v.SlotToElicit)
+	}
+	serializeStringMap(s, schemas.PostTextResponse_slots, v.Slots)
+}
+func (v *PostTextOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PostTextResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PostTextResponse_activeContexts:
+			return deserializeActiveContextsList(d, schemas.PostTextResponse_activeContexts, &v.ActiveContexts)
+		case schemas.PostTextResponse_alternativeIntents:
+			return deserializeIntentList(d, schemas.PostTextResponse_alternativeIntents, &v.AlternativeIntents)
+		case schemas.PostTextResponse_botVersion:
+			v.BotVersion = new(string)
+			return d.ReadString(schemas.PostTextResponse_botVersion, v.BotVersion)
+		case schemas.PostTextResponse_dialogState:
+			var ev string
+			if err := d.ReadString(schemas.PostTextResponse_dialogState, &ev); err != nil {
+				return err
+			}
+			v.DialogState = types.DialogState(ev)
+			return nil
+		case schemas.PostTextResponse_intentName:
+			v.IntentName = new(string)
+			return d.ReadString(schemas.PostTextResponse_intentName, v.IntentName)
+		case schemas.PostTextResponse_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.PostTextResponse_message, v.Message)
+		case schemas.PostTextResponse_messageFormat:
+			var ev string
+			if err := d.ReadString(schemas.PostTextResponse_messageFormat, &ev); err != nil {
+				return err
+			}
+			v.MessageFormat = types.MessageFormatType(ev)
+			return nil
+		case schemas.PostTextResponse_nluIntentConfidence:
+			v.NluIntentConfidence = &types.IntentConfidence{}
+			return v.NluIntentConfidence.Deserialize(d)
+		case schemas.PostTextResponse_responseCard:
+			v.ResponseCard = &types.ResponseCard{}
+			return v.ResponseCard.Deserialize(d)
+		case schemas.PostTextResponse_sentimentResponse:
+			v.SentimentResponse = &types.SentimentResponse{}
+			return v.SentimentResponse.Deserialize(d)
+		case schemas.PostTextResponse_sessionAttributes:
+			return deserializeStringMap(d, schemas.PostTextResponse_sessionAttributes, &v.SessionAttributes)
+		case schemas.PostTextResponse_sessionId:
+			v.SessionId = new(string)
+			return d.ReadString(schemas.PostTextResponse_sessionId, v.SessionId)
+		case schemas.PostTextResponse_slotToElicit:
+			v.SlotToElicit = new(string)
+			return d.ReadString(schemas.PostTextResponse_slotToElicit, v.SlotToElicit)
+		case schemas.PostTextResponse_slots:
+			return deserializeStringMap(d, schemas.PostTextResponse_slots, &v.Slots)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPostTextMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpPostText{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PostText, schemas.PostTextRequest, schemas.PostTextResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpPostText{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PostText, schemas.PostTextRequest, schemas.PostTextResponse), output: &PostTextOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

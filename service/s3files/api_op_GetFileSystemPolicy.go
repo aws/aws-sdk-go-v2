@@ -4,6 +4,8 @@ package s3files
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/s3files/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -34,6 +36,18 @@ type GetFileSystemPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetFileSystemPolicyInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetFileSystemPolicyRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetFileSystemPolicyInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FileSystemId != nil {
+		s.WriteString(schemas.GetFileSystemPolicyRequest_fileSystemId, *v.FileSystemId)
+	}
+}
+
 type GetFileSystemPolicyOutput struct {
 
 	// The ID of the file system.
@@ -52,13 +66,38 @@ type GetFileSystemPolicyOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetFileSystemPolicyOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetFileSystemPolicyResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetFileSystemPolicyOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FileSystemId != nil {
+		s.WriteString(schemas.GetFileSystemPolicyResponse_fileSystemId, *v.FileSystemId)
+	}
+	if v.Policy != nil {
+		s.WriteString(schemas.GetFileSystemPolicyResponse_policy, *v.Policy)
+	}
+}
+func (v *GetFileSystemPolicyOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetFileSystemPolicyResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetFileSystemPolicyResponse_fileSystemId:
+			v.FileSystemId = new(string)
+			return d.ReadString(schemas.GetFileSystemPolicyResponse_fileSystemId, v.FileSystemId)
+		case schemas.GetFileSystemPolicyResponse_policy:
+			v.Policy = new(string)
+			return d.ReadString(schemas.GetFileSystemPolicyResponse_policy, v.Policy)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetFileSystemPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetFileSystemPolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetFileSystemPolicy, schemas.GetFileSystemPolicyRequest, schemas.GetFileSystemPolicyResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetFileSystemPolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetFileSystemPolicy, schemas.GetFileSystemPolicyRequest, schemas.GetFileSystemPolicyResponse), output: &GetFileSystemPolicyOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

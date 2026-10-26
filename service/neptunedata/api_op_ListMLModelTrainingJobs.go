@@ -4,6 +4,8 @@ package neptunedata
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/neptunedata/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -43,6 +45,21 @@ type ListMLModelTrainingJobsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListMLModelTrainingJobsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListMLModelTrainingJobsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListMLModelTrainingJobsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxItems != nil {
+		s.WriteInt32(schemas.ListMLModelTrainingJobsInput_maxItems, *v.MaxItems)
+	}
+	if v.NeptuneIamRoleArn != nil {
+		s.WriteString(schemas.ListMLModelTrainingJobsInput_neptuneIamRoleArn, *v.NeptuneIamRoleArn)
+	}
+}
+
 type ListMLModelTrainingJobsOutput struct {
 
 	// A page of the list of model training job IDs.
@@ -54,13 +71,29 @@ type ListMLModelTrainingJobsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListMLModelTrainingJobsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListMLModelTrainingJobsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListMLModelTrainingJobsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeStringList(s, schemas.ListMLModelTrainingJobsOutput_ids, v.Ids)
+}
+func (v *ListMLModelTrainingJobsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListMLModelTrainingJobsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListMLModelTrainingJobsOutput_ids:
+			return deserializeStringList(d, schemas.ListMLModelTrainingJobsOutput_ids, &v.Ids)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListMLModelTrainingJobsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListMLModelTrainingJobs{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListMLModelTrainingJobs, schemas.ListMLModelTrainingJobsInput, schemas.ListMLModelTrainingJobsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListMLModelTrainingJobs{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListMLModelTrainingJobs, schemas.ListMLModelTrainingJobsInput, schemas.ListMLModelTrainingJobsOutput), output: &ListMLModelTrainingJobsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

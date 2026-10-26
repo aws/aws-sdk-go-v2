@@ -4,7 +4,9 @@ package rolesanywhere
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/rolesanywhere/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/rolesanywhere/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -42,6 +44,19 @@ type ResetNotificationSettingsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ResetNotificationSettingsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ResetNotificationSettingsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ResetNotificationSettingsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeNotificationSettingKeys(s, schemas.ResetNotificationSettingsRequest_notificationSettingKeys, v.NotificationSettingKeys)
+	if v.TrustAnchorId != nil {
+		s.WriteString(schemas.ResetNotificationSettingsRequest_trustAnchorId, *v.TrustAnchorId)
+	}
+}
+
 type ResetNotificationSettingsOutput struct {
 
 	// The state of the trust anchor after a read or write operation.
@@ -55,13 +70,34 @@ type ResetNotificationSettingsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ResetNotificationSettingsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ResetNotificationSettingsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ResetNotificationSettingsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TrustAnchor != nil {
+		s.WriteStruct(schemas.ResetNotificationSettingsResponse_trustAnchor)
+		v.TrustAnchor.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *ResetNotificationSettingsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ResetNotificationSettingsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ResetNotificationSettingsResponse_trustAnchor:
+			v.TrustAnchor = &types.TrustAnchorDetail{}
+			return v.TrustAnchor.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationResetNotificationSettingsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpResetNotificationSettings{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ResetNotificationSettings, schemas.ResetNotificationSettingsRequest, schemas.ResetNotificationSettingsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpResetNotificationSettings{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ResetNotificationSettings, schemas.ResetNotificationSettingsRequest, schemas.ResetNotificationSettingsResponse), output: &ResetNotificationSettingsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

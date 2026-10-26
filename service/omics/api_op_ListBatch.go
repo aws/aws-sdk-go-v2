@@ -5,7 +5,9 @@ package omics
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/omics/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/omics/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -48,6 +50,30 @@ type ListBatchInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListBatchInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListBatchRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListBatchInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxItems != nil {
+		s.WriteInt32(schemas.ListBatchRequest_maxItems, *v.MaxItems)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.ListBatchRequest_name, *v.Name)
+	}
+	if v.RunGroupId != nil {
+		s.WriteString(schemas.ListBatchRequest_runGroupId, *v.RunGroupId)
+	}
+	if v.StartingToken != nil {
+		s.WriteString(schemas.ListBatchRequest_startingToken, *v.StartingToken)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.ListBatchRequest_status, string(v.Status))
+	}
+}
+
 type ListBatchOutput struct {
 
 	// A list of batch summary objects. See BatchListItem .
@@ -63,13 +89,35 @@ type ListBatchOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListBatchOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListBatchResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListBatchOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeBatchList(s, schemas.ListBatchResponse_items, v.Items)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListBatchResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListBatchOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListBatchResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListBatchResponse_items:
+			return deserializeBatchList(d, schemas.ListBatchResponse_items, &v.Items)
+		case schemas.ListBatchResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListBatchResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListBatchMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListBatch{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListBatch, schemas.ListBatchRequest, schemas.ListBatchResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListBatch{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListBatch, schemas.ListBatchRequest, schemas.ListBatchResponse), output: &ListBatchOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

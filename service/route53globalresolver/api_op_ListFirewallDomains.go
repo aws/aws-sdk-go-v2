@@ -5,6 +5,8 @@ package route53globalresolver
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/route53globalresolver/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -47,6 +49,24 @@ type ListFirewallDomainsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListFirewallDomainsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListFirewallDomainsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListFirewallDomainsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FirewallDomainListId != nil {
+		s.WriteString(schemas.ListFirewallDomainsInput_firewallDomainListId, *v.FirewallDomainListId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListFirewallDomainsInput_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListFirewallDomainsInput_nextToken, *v.NextToken)
+	}
+}
+
 type ListFirewallDomainsOutput struct {
 
 	// List of domains in the specified domain list.
@@ -65,13 +85,35 @@ type ListFirewallDomainsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListFirewallDomainsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListFirewallDomainsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListFirewallDomainsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDomains(s, schemas.ListFirewallDomainsOutput_domains, v.Domains)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListFirewallDomainsOutput_nextToken, *v.NextToken)
+	}
+}
+func (v *ListFirewallDomainsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListFirewallDomainsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListFirewallDomainsOutput_domains:
+			return deserializeDomains(d, schemas.ListFirewallDomainsOutput_domains, &v.Domains)
+		case schemas.ListFirewallDomainsOutput_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListFirewallDomainsOutput_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListFirewallDomainsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListFirewallDomains{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListFirewallDomains, schemas.ListFirewallDomainsInput, schemas.ListFirewallDomainsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListFirewallDomains{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListFirewallDomains, schemas.ListFirewallDomainsInput, schemas.ListFirewallDomainsOutput), output: &ListFirewallDomainsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

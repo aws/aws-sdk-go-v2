@@ -4,6 +4,8 @@ package wickr
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/wickr/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -32,6 +34,18 @@ type GetUsersCountInput struct {
 	NetworkId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetUsersCountInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetUsersCountRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetUsersCountInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NetworkId != nil {
+		s.WriteString(schemas.GetUsersCountRequest_networkId, *v.NetworkId)
+	}
 }
 
 type GetUsersCountOutput struct {
@@ -68,13 +82,56 @@ type GetUsersCountOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetUsersCountOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetUsersCountResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetUsersCountOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Active != nil {
+		s.WriteInt32(schemas.GetUsersCountResponse_active, *v.Active)
+	}
+	if v.Pending != nil {
+		s.WriteInt32(schemas.GetUsersCountResponse_pending, *v.Pending)
+	}
+	if v.Rejected != nil {
+		s.WriteInt32(schemas.GetUsersCountResponse_rejected, *v.Rejected)
+	}
+	if v.Remaining != nil {
+		s.WriteInt32(schemas.GetUsersCountResponse_remaining, *v.Remaining)
+	}
+	if v.Total != nil {
+		s.WriteInt32(schemas.GetUsersCountResponse_total, *v.Total)
+	}
+}
+func (v *GetUsersCountOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetUsersCountResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetUsersCountResponse_active:
+			v.Active = new(int32)
+			return d.ReadInt32(schemas.GetUsersCountResponse_active, v.Active)
+		case schemas.GetUsersCountResponse_pending:
+			v.Pending = new(int32)
+			return d.ReadInt32(schemas.GetUsersCountResponse_pending, v.Pending)
+		case schemas.GetUsersCountResponse_rejected:
+			v.Rejected = new(int32)
+			return d.ReadInt32(schemas.GetUsersCountResponse_rejected, v.Rejected)
+		case schemas.GetUsersCountResponse_remaining:
+			v.Remaining = new(int32)
+			return d.ReadInt32(schemas.GetUsersCountResponse_remaining, v.Remaining)
+		case schemas.GetUsersCountResponse_total:
+			v.Total = new(int32)
+			return d.ReadInt32(schemas.GetUsersCountResponse_total, v.Total)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetUsersCountMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetUsersCount{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetUsersCount, schemas.GetUsersCountRequest, schemas.GetUsersCountResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetUsersCount{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetUsersCount, schemas.GetUsersCountRequest, schemas.GetUsersCountResponse), output: &GetUsersCountOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -5,7 +5,9 @@ package workspacesweb
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/workspacesweb/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/workspacesweb/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -37,6 +39,21 @@ type ListTrustStoresInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListTrustStoresInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListTrustStoresRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListTrustStoresInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListTrustStoresRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListTrustStoresRequest_nextToken, *v.NextToken)
+	}
+}
+
 type ListTrustStoresOutput struct {
 
 	// The pagination token used to retrieve the next page of results for this
@@ -52,13 +69,35 @@ type ListTrustStoresOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListTrustStoresOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListTrustStoresResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListTrustStoresOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListTrustStoresResponse_nextToken, *v.NextToken)
+	}
+	serializeTrustStoreSummaryList(s, schemas.ListTrustStoresResponse_trustStores, v.TrustStores)
+}
+func (v *ListTrustStoresOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListTrustStoresResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListTrustStoresResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListTrustStoresResponse_nextToken, v.NextToken)
+		case schemas.ListTrustStoresResponse_trustStores:
+			return deserializeTrustStoreSummaryList(d, schemas.ListTrustStoresResponse_trustStores, &v.TrustStores)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListTrustStoresMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListTrustStores{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListTrustStores, schemas.ListTrustStoresRequest, schemas.ListTrustStoresResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListTrustStores{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListTrustStores, schemas.ListTrustStoresRequest, schemas.ListTrustStoresResponse), output: &ListTrustStoresOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

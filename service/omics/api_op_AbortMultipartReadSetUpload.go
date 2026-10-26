@@ -5,6 +5,8 @@ package omics
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/omics/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -43,6 +45,21 @@ type AbortMultipartReadSetUploadInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AbortMultipartReadSetUploadInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AbortMultipartReadSetUploadRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AbortMultipartReadSetUploadInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SequenceStoreId != nil {
+		s.WriteString(schemas.AbortMultipartReadSetUploadRequest_sequenceStoreId, *v.SequenceStoreId)
+	}
+	if v.UploadId != nil {
+		s.WriteString(schemas.AbortMultipartReadSetUploadRequest_uploadId, *v.UploadId)
+	}
+}
+
 type AbortMultipartReadSetUploadOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -50,13 +67,26 @@ type AbortMultipartReadSetUploadOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AbortMultipartReadSetUploadOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AbortMultipartReadSetUploadResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AbortMultipartReadSetUploadOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *AbortMultipartReadSetUploadOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AbortMultipartReadSetUploadResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationAbortMultipartReadSetUploadMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpAbortMultipartReadSetUpload{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AbortMultipartReadSetUpload, schemas.AbortMultipartReadSetUploadRequest, schemas.AbortMultipartReadSetUploadResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpAbortMultipartReadSetUpload{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AbortMultipartReadSetUpload, schemas.AbortMultipartReadSetUploadRequest, schemas.AbortMultipartReadSetUploadResponse), output: &AbortMultipartReadSetUploadOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

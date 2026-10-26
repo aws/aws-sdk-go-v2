@@ -4,7 +4,9 @@ package mediapackagev2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/mediapackagev2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/mediapackagev2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -72,6 +74,42 @@ type UpdateChannelInput struct {
 	OutputHeaderConfiguration *types.OutputHeaderConfiguration
 
 	noSmithyDocumentSerde
+}
+
+func (v *UpdateChannelInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateChannelRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateChannelInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ChannelGroupName != nil {
+		s.WriteString(schemas.UpdateChannelRequest_ChannelGroupName, *v.ChannelGroupName)
+	}
+	if v.ChannelName != nil {
+		s.WriteString(schemas.UpdateChannelRequest_ChannelName, *v.ChannelName)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateChannelRequest_Description, *v.Description)
+	}
+	if v.ETag != nil {
+		s.WriteString(schemas.UpdateChannelRequest_ETag, *v.ETag)
+	}
+	if v.InputSwitchConfiguration != nil {
+		s.WriteStruct(schemas.UpdateChannelRequest_InputSwitchConfiguration)
+		v.InputSwitchConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MultiviewConfiguration != nil {
+		s.WriteStruct(schemas.UpdateChannelRequest_MultiviewConfiguration)
+		v.MultiviewConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.OutputHeaderConfiguration != nil {
+		s.WriteStruct(schemas.UpdateChannelRequest_OutputHeaderConfiguration)
+		v.OutputHeaderConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
 }
 
 type UpdateChannelOutput struct {
@@ -173,13 +211,121 @@ type UpdateChannelOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateChannelOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateChannelResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateChannelOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.UpdateChannelResponse_Arn, *v.Arn)
+	}
+	serializeAttachedMultiviewChannelList(s, schemas.UpdateChannelResponse_AttachedMultiviewChannels, v.AttachedMultiviewChannels)
+	if v.ChannelGroupName != nil {
+		s.WriteString(schemas.UpdateChannelResponse_ChannelGroupName, *v.ChannelGroupName)
+	}
+	if v.ChannelName != nil {
+		s.WriteString(schemas.UpdateChannelResponse_ChannelName, *v.ChannelName)
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.UpdateChannelResponse_CreatedAt, *v.CreatedAt)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateChannelResponse_Description, *v.Description)
+	}
+	if v.ETag != nil {
+		s.WriteString(schemas.UpdateChannelResponse_ETag, *v.ETag)
+	}
+	serializeIngestEndpointList(s, schemas.UpdateChannelResponse_IngestEndpoints, v.IngestEndpoints)
+	if v.InputSwitchConfiguration != nil {
+		s.WriteStruct(schemas.UpdateChannelResponse_InputSwitchConfiguration)
+		v.InputSwitchConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.InputType != "" {
+		s.WriteString(schemas.UpdateChannelResponse_InputType, string(v.InputType))
+	}
+	if v.ModifiedAt != nil {
+		s.WriteTime(schemas.UpdateChannelResponse_ModifiedAt, *v.ModifiedAt)
+	}
+	if v.MultiviewConfiguration != nil {
+		s.WriteStruct(schemas.UpdateChannelResponse_MultiviewConfiguration)
+		v.MultiviewConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.OutputHeaderConfiguration != nil {
+		s.WriteStruct(schemas.UpdateChannelResponse_OutputHeaderConfiguration)
+		v.OutputHeaderConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.OutputLockingMode != "" {
+		s.WriteString(schemas.UpdateChannelResponse_OutputLockingMode, string(v.OutputLockingMode))
+	}
+	serializeTagMap(s, schemas.UpdateChannelResponse_Tags, v.Tags)
+}
+func (v *UpdateChannelOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateChannelResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateChannelResponse_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.UpdateChannelResponse_Arn, v.Arn)
+		case schemas.UpdateChannelResponse_AttachedMultiviewChannels:
+			return deserializeAttachedMultiviewChannelList(d, schemas.UpdateChannelResponse_AttachedMultiviewChannels, &v.AttachedMultiviewChannels)
+		case schemas.UpdateChannelResponse_ChannelGroupName:
+			v.ChannelGroupName = new(string)
+			return d.ReadString(schemas.UpdateChannelResponse_ChannelGroupName, v.ChannelGroupName)
+		case schemas.UpdateChannelResponse_ChannelName:
+			v.ChannelName = new(string)
+			return d.ReadString(schemas.UpdateChannelResponse_ChannelName, v.ChannelName)
+		case schemas.UpdateChannelResponse_CreatedAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.UpdateChannelResponse_CreatedAt, v.CreatedAt)
+		case schemas.UpdateChannelResponse_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.UpdateChannelResponse_Description, v.Description)
+		case schemas.UpdateChannelResponse_ETag:
+			v.ETag = new(string)
+			return d.ReadString(schemas.UpdateChannelResponse_ETag, v.ETag)
+		case schemas.UpdateChannelResponse_IngestEndpoints:
+			return deserializeIngestEndpointList(d, schemas.UpdateChannelResponse_IngestEndpoints, &v.IngestEndpoints)
+		case schemas.UpdateChannelResponse_InputSwitchConfiguration:
+			v.InputSwitchConfiguration = &types.InputSwitchConfiguration{}
+			return v.InputSwitchConfiguration.Deserialize(d)
+		case schemas.UpdateChannelResponse_InputType:
+			var ev string
+			if err := d.ReadString(schemas.UpdateChannelResponse_InputType, &ev); err != nil {
+				return err
+			}
+			v.InputType = types.InputType(ev)
+			return nil
+		case schemas.UpdateChannelResponse_ModifiedAt:
+			v.ModifiedAt = new(time.Time)
+			return d.ReadTime(schemas.UpdateChannelResponse_ModifiedAt, v.ModifiedAt)
+		case schemas.UpdateChannelResponse_MultiviewConfiguration:
+			v.MultiviewConfiguration = &types.MultiviewConfiguration{}
+			return v.MultiviewConfiguration.Deserialize(d)
+		case schemas.UpdateChannelResponse_OutputHeaderConfiguration:
+			v.OutputHeaderConfiguration = &types.OutputHeaderConfiguration{}
+			return v.OutputHeaderConfiguration.Deserialize(d)
+		case schemas.UpdateChannelResponse_OutputLockingMode:
+			var ev string
+			if err := d.ReadString(schemas.UpdateChannelResponse_OutputLockingMode, &ev); err != nil {
+				return err
+			}
+			v.OutputLockingMode = types.OutputLockingMode(ev)
+			return nil
+		case schemas.UpdateChannelResponse_Tags:
+			return deserializeTagMap(d, schemas.UpdateChannelResponse_Tags, &v.Tags)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateChannelMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateChannel{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateChannel, schemas.UpdateChannelRequest, schemas.UpdateChannelResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateChannel{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateChannel, schemas.UpdateChannelRequest, schemas.UpdateChannelResponse), output: &UpdateChannelOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

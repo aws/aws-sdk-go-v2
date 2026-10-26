@@ -5,7 +5,9 @@ package lakeformation
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/lakeformation/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lakeformation/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -73,6 +75,40 @@ type ListPermissionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListPermissionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListPermissionsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListPermissionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CatalogId != nil {
+		s.WriteString(schemas.ListPermissionsRequest_CatalogId, *v.CatalogId)
+	}
+	if v.IncludeRelated != nil {
+		s.WriteString(schemas.ListPermissionsRequest_IncludeRelated, *v.IncludeRelated)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListPermissionsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListPermissionsRequest_NextToken, *v.NextToken)
+	}
+	if v.Principal != nil {
+		s.WriteStruct(schemas.ListPermissionsRequest_Principal)
+		v.Principal.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Resource != nil {
+		s.WriteStruct(schemas.ListPermissionsRequest_Resource)
+		v.Resource.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ResourceType != "" {
+		s.WriteString(schemas.ListPermissionsRequest_ResourceType, string(v.ResourceType))
+	}
+}
+
 type ListPermissionsOutput struct {
 
 	// A continuation token, if this is not the first call to retrieve this list.
@@ -88,13 +124,35 @@ type ListPermissionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListPermissionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListPermissionsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListPermissionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListPermissionsResponse_NextToken, *v.NextToken)
+	}
+	serializePrincipalResourcePermissionsList(s, schemas.ListPermissionsResponse_PrincipalResourcePermissions, v.PrincipalResourcePermissions)
+}
+func (v *ListPermissionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListPermissionsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListPermissionsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListPermissionsResponse_NextToken, v.NextToken)
+		case schemas.ListPermissionsResponse_PrincipalResourcePermissions:
+			return deserializePrincipalResourcePermissionsList(d, schemas.ListPermissionsResponse_PrincipalResourcePermissions, &v.PrincipalResourcePermissions)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListPermissionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListPermissions{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListPermissions, schemas.ListPermissionsRequest, schemas.ListPermissionsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListPermissions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListPermissions, schemas.ListPermissionsRequest, schemas.ListPermissionsResponse), output: &ListPermissionsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

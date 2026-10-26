@@ -4,6 +4,8 @@ package securityagent
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/securityagent/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -34,6 +36,18 @@ type DeleteSecurityRequirementPackInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteSecurityRequirementPackInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteSecurityRequirementPackInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteSecurityRequirementPackInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PackId != nil {
+		s.WriteString(schemas.DeleteSecurityRequirementPackInput_packId, *v.PackId)
+	}
+}
+
 type DeleteSecurityRequirementPackOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -41,13 +55,26 @@ type DeleteSecurityRequirementPackOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteSecurityRequirementPackOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteSecurityRequirementPackOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteSecurityRequirementPackOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteSecurityRequirementPackOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteSecurityRequirementPackOutput, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteSecurityRequirementPackMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteSecurityRequirementPack{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteSecurityRequirementPack, schemas.DeleteSecurityRequirementPackInput, schemas.DeleteSecurityRequirementPackOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteSecurityRequirementPack{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteSecurityRequirementPack, schemas.DeleteSecurityRequirementPackInput, schemas.DeleteSecurityRequirementPackOutput), output: &DeleteSecurityRequirementPackOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

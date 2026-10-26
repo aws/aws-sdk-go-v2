@@ -4,6 +4,8 @@ package s3vectors
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/s3vectors/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -47,6 +49,25 @@ type DeleteVectorsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteVectorsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteVectorsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteVectorsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IndexArn != nil {
+		s.WriteString(schemas.DeleteVectorsInput_indexArn, *v.IndexArn)
+	}
+	if v.IndexName != nil {
+		s.WriteString(schemas.DeleteVectorsInput_indexName, *v.IndexName)
+	}
+	serializeDeleteVectorsInputList(s, schemas.DeleteVectorsInput_keys, v.Keys)
+	if v.VectorBucketName != nil {
+		s.WriteString(schemas.DeleteVectorsInput_vectorBucketName, *v.VectorBucketName)
+	}
+}
+
 type DeleteVectorsOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -54,13 +75,26 @@ type DeleteVectorsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteVectorsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteVectorsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteVectorsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteVectorsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteVectorsOutput, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteVectorsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteVectors{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteVectors, schemas.DeleteVectorsInput, schemas.DeleteVectorsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteVectors{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteVectors, schemas.DeleteVectorsInput, schemas.DeleteVectorsOutput), output: &DeleteVectorsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

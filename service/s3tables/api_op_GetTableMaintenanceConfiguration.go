@@ -4,7 +4,9 @@ package s3tables
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/s3tables/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/s3tables/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -55,6 +57,24 @@ type GetTableMaintenanceConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetTableMaintenanceConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetTableMaintenanceConfigurationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetTableMaintenanceConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.GetTableMaintenanceConfigurationRequest_name, *v.Name)
+	}
+	if v.Namespace != nil {
+		s.WriteString(schemas.GetTableMaintenanceConfigurationRequest_namespace, *v.Namespace)
+	}
+	if v.TableBucketARN != nil {
+		s.WriteString(schemas.GetTableMaintenanceConfigurationRequest_tableBucketARN, *v.TableBucketARN)
+	}
+}
+
 type GetTableMaintenanceConfigurationOutput struct {
 
 	// Details about the maintenance configuration for the table bucket.
@@ -73,13 +93,35 @@ type GetTableMaintenanceConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetTableMaintenanceConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetTableMaintenanceConfigurationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetTableMaintenanceConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeTableMaintenanceConfiguration(s, schemas.GetTableMaintenanceConfigurationResponse_configuration, v.Configuration)
+	if v.TableARN != nil {
+		s.WriteString(schemas.GetTableMaintenanceConfigurationResponse_tableARN, *v.TableARN)
+	}
+}
+func (v *GetTableMaintenanceConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetTableMaintenanceConfigurationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetTableMaintenanceConfigurationResponse_configuration:
+			return deserializeTableMaintenanceConfiguration(d, schemas.GetTableMaintenanceConfigurationResponse_configuration, &v.Configuration)
+		case schemas.GetTableMaintenanceConfigurationResponse_tableARN:
+			v.TableARN = new(string)
+			return d.ReadString(schemas.GetTableMaintenanceConfigurationResponse_tableARN, v.TableARN)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetTableMaintenanceConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetTableMaintenanceConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetTableMaintenanceConfiguration, schemas.GetTableMaintenanceConfigurationRequest, schemas.GetTableMaintenanceConfigurationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetTableMaintenanceConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetTableMaintenanceConfiguration, schemas.GetTableMaintenanceConfigurationRequest, schemas.GetTableMaintenanceConfigurationResponse), output: &GetTableMaintenanceConfigurationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

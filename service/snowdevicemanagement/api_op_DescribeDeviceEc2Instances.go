@@ -4,7 +4,9 @@ package snowdevicemanagement
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/snowdevicemanagement/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/snowdevicemanagement/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -41,6 +43,31 @@ type DescribeDeviceEc2InstancesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeDeviceEc2InstancesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeDeviceEc2Input)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeDeviceEc2InstancesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeInstanceIdsList(s, schemas.DescribeDeviceEc2Input_instanceIds, v.InstanceIds)
+	if v.ManagedDeviceId != nil {
+		s.WriteString(schemas.DescribeDeviceEc2Input_managedDeviceId, *v.ManagedDeviceId)
+	}
+}
+func (v *DescribeDeviceEc2InstancesInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeDeviceEc2Input, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeDeviceEc2Input_instanceIds:
+			return deserializeInstanceIdsList(d, schemas.DescribeDeviceEc2Input_instanceIds, &v.InstanceIds)
+		case schemas.DescribeDeviceEc2Input_managedDeviceId:
+			v.ManagedDeviceId = new(string)
+			return d.ReadString(schemas.DescribeDeviceEc2Input_managedDeviceId, v.ManagedDeviceId)
+		}
+		return nil
+	})
+}
+
 type DescribeDeviceEc2InstancesOutput struct {
 
 	// A list of structures containing information about each instance.
@@ -52,13 +79,29 @@ type DescribeDeviceEc2InstancesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeDeviceEc2InstancesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeDeviceEc2Output)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeDeviceEc2InstancesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeInstanceSummaryList(s, schemas.DescribeDeviceEc2Output_instances, v.Instances)
+}
+func (v *DescribeDeviceEc2InstancesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeDeviceEc2Output, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeDeviceEc2Output_instances:
+			return deserializeInstanceSummaryList(d, schemas.DescribeDeviceEc2Output_instances, &v.Instances)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeDeviceEc2InstancesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeDeviceEc2Instances{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeDeviceEc2Instances, schemas.DescribeDeviceEc2Input, schemas.DescribeDeviceEc2Output)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeDeviceEc2Instances{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeDeviceEc2Instances, schemas.DescribeDeviceEc2Input, schemas.DescribeDeviceEc2Output), output: &DescribeDeviceEc2InstancesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

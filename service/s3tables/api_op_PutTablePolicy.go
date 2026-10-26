@@ -4,6 +4,8 @@ package s3tables
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/s3tables/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -54,6 +56,27 @@ type PutTablePolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutTablePolicyInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutTablePolicyRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutTablePolicyInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.PutTablePolicyRequest_name, *v.Name)
+	}
+	if v.Namespace != nil {
+		s.WriteString(schemas.PutTablePolicyRequest_namespace, *v.Namespace)
+	}
+	if v.ResourcePolicy != nil {
+		s.WriteString(schemas.PutTablePolicyRequest_resourcePolicy, *v.ResourcePolicy)
+	}
+	if v.TableBucketARN != nil {
+		s.WriteString(schemas.PutTablePolicyRequest_tableBucketARN, *v.TableBucketARN)
+	}
+}
+
 type PutTablePolicyOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -61,13 +84,26 @@ type PutTablePolicyOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutTablePolicyOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutTablePolicyOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *PutTablePolicyOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPutTablePolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpPutTablePolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutTablePolicy, schemas.PutTablePolicyRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpPutTablePolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutTablePolicy, schemas.PutTablePolicyRequest, nil), output: &PutTablePolicyOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package rbin
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/rbin/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/rbin/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -98,6 +100,34 @@ type CreateRuleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateRuleInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateRuleRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateRuleInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.CreateRuleRequest_Description, *v.Description)
+	}
+	serializeExcludeResourceTags(s, schemas.CreateRuleRequest_ExcludeResourceTags, v.ExcludeResourceTags)
+	if v.LockConfiguration != nil {
+		s.WriteStruct(schemas.CreateRuleRequest_LockConfiguration)
+		v.LockConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeResourceTags(s, schemas.CreateRuleRequest_ResourceTags, v.ResourceTags)
+	if v.ResourceType != "" {
+		s.WriteString(schemas.CreateRuleRequest_ResourceType, string(v.ResourceType))
+	}
+	if v.RetentionPeriod != nil {
+		s.WriteStruct(schemas.CreateRuleRequest_RetentionPeriod)
+		v.RetentionPeriod.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeTagList(s, schemas.CreateRuleRequest_Tags, v.Tags)
+}
+
 type CreateRuleOutput struct {
 
 	// The retention rule description.
@@ -157,13 +187,99 @@ type CreateRuleOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateRuleOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateRuleResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateRuleOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.CreateRuleResponse_Description, *v.Description)
+	}
+	serializeExcludeResourceTags(s, schemas.CreateRuleResponse_ExcludeResourceTags, v.ExcludeResourceTags)
+	if v.Identifier != nil {
+		s.WriteString(schemas.CreateRuleResponse_Identifier, *v.Identifier)
+	}
+	if v.LockConfiguration != nil {
+		s.WriteStruct(schemas.CreateRuleResponse_LockConfiguration)
+		v.LockConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.LockState != "" {
+		s.WriteString(schemas.CreateRuleResponse_LockState, string(v.LockState))
+	}
+	serializeResourceTags(s, schemas.CreateRuleResponse_ResourceTags, v.ResourceTags)
+	if v.ResourceType != "" {
+		s.WriteString(schemas.CreateRuleResponse_ResourceType, string(v.ResourceType))
+	}
+	if v.RetentionPeriod != nil {
+		s.WriteStruct(schemas.CreateRuleResponse_RetentionPeriod)
+		v.RetentionPeriod.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RuleArn != nil {
+		s.WriteString(schemas.CreateRuleResponse_RuleArn, *v.RuleArn)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.CreateRuleResponse_Status, string(v.Status))
+	}
+	serializeTagList(s, schemas.CreateRuleResponse_Tags, v.Tags)
+}
+func (v *CreateRuleOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateRuleResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateRuleResponse_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.CreateRuleResponse_Description, v.Description)
+		case schemas.CreateRuleResponse_ExcludeResourceTags:
+			return deserializeExcludeResourceTags(d, schemas.CreateRuleResponse_ExcludeResourceTags, &v.ExcludeResourceTags)
+		case schemas.CreateRuleResponse_Identifier:
+			v.Identifier = new(string)
+			return d.ReadString(schemas.CreateRuleResponse_Identifier, v.Identifier)
+		case schemas.CreateRuleResponse_LockConfiguration:
+			v.LockConfiguration = &types.LockConfiguration{}
+			return v.LockConfiguration.Deserialize(d)
+		case schemas.CreateRuleResponse_LockState:
+			var ev string
+			if err := d.ReadString(schemas.CreateRuleResponse_LockState, &ev); err != nil {
+				return err
+			}
+			v.LockState = types.LockState(ev)
+			return nil
+		case schemas.CreateRuleResponse_ResourceTags:
+			return deserializeResourceTags(d, schemas.CreateRuleResponse_ResourceTags, &v.ResourceTags)
+		case schemas.CreateRuleResponse_ResourceType:
+			var ev string
+			if err := d.ReadString(schemas.CreateRuleResponse_ResourceType, &ev); err != nil {
+				return err
+			}
+			v.ResourceType = types.ResourceType(ev)
+			return nil
+		case schemas.CreateRuleResponse_RetentionPeriod:
+			v.RetentionPeriod = &types.RetentionPeriod{}
+			return v.RetentionPeriod.Deserialize(d)
+		case schemas.CreateRuleResponse_RuleArn:
+			v.RuleArn = new(string)
+			return d.ReadString(schemas.CreateRuleResponse_RuleArn, v.RuleArn)
+		case schemas.CreateRuleResponse_Status:
+			var ev string
+			if err := d.ReadString(schemas.CreateRuleResponse_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.RuleStatus(ev)
+			return nil
+		case schemas.CreateRuleResponse_Tags:
+			return deserializeTagList(d, schemas.CreateRuleResponse_Tags, &v.Tags)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateRuleMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateRule{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateRule, schemas.CreateRuleRequest, schemas.CreateRuleResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateRule{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateRule, schemas.CreateRuleRequest, schemas.CreateRuleResponse), output: &CreateRuleOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

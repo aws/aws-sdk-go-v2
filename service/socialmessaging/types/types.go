@@ -3,6 +3,8 @@
 package types
 
 import (
+	"github.com/aws/aws-sdk-go-v2/service/socialmessaging/schemas"
+	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
@@ -29,6 +31,52 @@ type LibraryTemplateBodyInputs struct {
 	noSmithyDocumentSerde
 }
 
+func (v *LibraryTemplateBodyInputs) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LibraryTemplateBodyInputs)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *LibraryTemplateBodyInputs) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AddContactNumber != nil {
+		s.WriteBool(schemas.LibraryTemplateBodyInputs_addContactNumber, *v.AddContactNumber)
+	}
+	if v.AddLearnMoreLink != nil {
+		s.WriteBool(schemas.LibraryTemplateBodyInputs_addLearnMoreLink, *v.AddLearnMoreLink)
+	}
+	if v.AddSecurityRecommendation != nil {
+		s.WriteBool(schemas.LibraryTemplateBodyInputs_addSecurityRecommendation, *v.AddSecurityRecommendation)
+	}
+	if v.AddTrackPackageLink != nil {
+		s.WriteBool(schemas.LibraryTemplateBodyInputs_addTrackPackageLink, *v.AddTrackPackageLink)
+	}
+	if v.CodeExpirationMinutes != nil {
+		s.WriteInt32(schemas.LibraryTemplateBodyInputs_codeExpirationMinutes, *v.CodeExpirationMinutes)
+	}
+}
+func (v *LibraryTemplateBodyInputs) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LibraryTemplateBodyInputs, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LibraryTemplateBodyInputs_addContactNumber:
+			v.AddContactNumber = new(bool)
+			return d.ReadBool(schemas.LibraryTemplateBodyInputs_addContactNumber, v.AddContactNumber)
+		case schemas.LibraryTemplateBodyInputs_addLearnMoreLink:
+			v.AddLearnMoreLink = new(bool)
+			return d.ReadBool(schemas.LibraryTemplateBodyInputs_addLearnMoreLink, v.AddLearnMoreLink)
+		case schemas.LibraryTemplateBodyInputs_addSecurityRecommendation:
+			v.AddSecurityRecommendation = new(bool)
+			return d.ReadBool(schemas.LibraryTemplateBodyInputs_addSecurityRecommendation, v.AddSecurityRecommendation)
+		case schemas.LibraryTemplateBodyInputs_addTrackPackageLink:
+			v.AddTrackPackageLink = new(bool)
+			return d.ReadBool(schemas.LibraryTemplateBodyInputs_addTrackPackageLink, v.AddTrackPackageLink)
+		case schemas.LibraryTemplateBodyInputs_codeExpirationMinutes:
+			v.CodeExpirationMinutes = new(int32)
+			return d.ReadInt32(schemas.LibraryTemplateBodyInputs_codeExpirationMinutes, v.CodeExpirationMinutes)
+		}
+		return nil
+	})
+}
+
 // Configuration options for customizing buttons in a template from Meta's library.
 type LibraryTemplateButtonInput struct {
 
@@ -51,6 +99,52 @@ type LibraryTemplateButtonInput struct {
 	ZeroTapTermsAccepted *bool
 
 	noSmithyDocumentSerde
+}
+
+func (v *LibraryTemplateButtonInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LibraryTemplateButtonInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *LibraryTemplateButtonInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.OtpType != nil {
+		s.WriteString(schemas.LibraryTemplateButtonInput_otpType, *v.OtpType)
+	}
+	if v.PhoneNumber != nil {
+		s.WriteString(schemas.LibraryTemplateButtonInput_phoneNumber, *v.PhoneNumber)
+	}
+	serializeSupportedApps(s, schemas.LibraryTemplateButtonInput_supportedApps, v.SupportedApps)
+	if v.Type != nil {
+		s.WriteString(schemas.LibraryTemplateButtonInput_type, *v.Type)
+	}
+	serializeMetaUrlWithSuffixExample(s, schemas.LibraryTemplateButtonInput_url, v.Url)
+	if v.ZeroTapTermsAccepted != nil {
+		s.WriteBool(schemas.LibraryTemplateButtonInput_zeroTapTermsAccepted, *v.ZeroTapTermsAccepted)
+	}
+}
+func (v *LibraryTemplateButtonInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LibraryTemplateButtonInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LibraryTemplateButtonInput_otpType:
+			v.OtpType = new(string)
+			return d.ReadString(schemas.LibraryTemplateButtonInput_otpType, v.OtpType)
+		case schemas.LibraryTemplateButtonInput_phoneNumber:
+			v.PhoneNumber = new(string)
+			return d.ReadString(schemas.LibraryTemplateButtonInput_phoneNumber, v.PhoneNumber)
+		case schemas.LibraryTemplateButtonInput_supportedApps:
+			return deserializeSupportedApps(d, schemas.LibraryTemplateButtonInput_supportedApps, &v.SupportedApps)
+		case schemas.LibraryTemplateButtonInput_type:
+			v.Type = new(string)
+			return d.ReadString(schemas.LibraryTemplateButtonInput_type, v.Type)
+		case schemas.LibraryTemplateButtonInput_url:
+			return deserializeMetaUrlWithSuffixExample(d, schemas.LibraryTemplateButtonInput_url, &v.Url)
+		case schemas.LibraryTemplateButtonInput_zeroTapTermsAccepted:
+			v.ZeroTapTermsAccepted = new(bool)
+			return d.ReadBool(schemas.LibraryTemplateButtonInput_zeroTapTermsAccepted, v.ZeroTapTermsAccepted)
+		}
+		return nil
+	})
 }
 
 // Defines a button in a template from Meta's library.
@@ -78,6 +172,61 @@ type LibraryTemplateButtonList struct {
 	ZeroTapTermsAccepted *bool
 
 	noSmithyDocumentSerde
+}
+
+func (v *LibraryTemplateButtonList) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LibraryTemplateButtonList)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *LibraryTemplateButtonList) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.OtpType != nil {
+		s.WriteString(schemas.LibraryTemplateButtonList_otpType, *v.OtpType)
+	}
+	if v.PhoneNumber != nil {
+		s.WriteString(schemas.LibraryTemplateButtonList_phoneNumber, *v.PhoneNumber)
+	}
+	serializeSupportedApps(s, schemas.LibraryTemplateButtonList_supportedApps, v.SupportedApps)
+	if v.Text != nil {
+		s.WriteString(schemas.LibraryTemplateButtonList_text, *v.Text)
+	}
+	if v.Type != nil {
+		s.WriteString(schemas.LibraryTemplateButtonList_type, *v.Type)
+	}
+	if v.Url != nil {
+		s.WriteString(schemas.LibraryTemplateButtonList_url, *v.Url)
+	}
+	if v.ZeroTapTermsAccepted != nil {
+		s.WriteBool(schemas.LibraryTemplateButtonList_zeroTapTermsAccepted, *v.ZeroTapTermsAccepted)
+	}
+}
+func (v *LibraryTemplateButtonList) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LibraryTemplateButtonList, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LibraryTemplateButtonList_otpType:
+			v.OtpType = new(string)
+			return d.ReadString(schemas.LibraryTemplateButtonList_otpType, v.OtpType)
+		case schemas.LibraryTemplateButtonList_phoneNumber:
+			v.PhoneNumber = new(string)
+			return d.ReadString(schemas.LibraryTemplateButtonList_phoneNumber, v.PhoneNumber)
+		case schemas.LibraryTemplateButtonList_supportedApps:
+			return deserializeSupportedApps(d, schemas.LibraryTemplateButtonList_supportedApps, &v.SupportedApps)
+		case schemas.LibraryTemplateButtonList_text:
+			v.Text = new(string)
+			return d.ReadString(schemas.LibraryTemplateButtonList_text, v.Text)
+		case schemas.LibraryTemplateButtonList_type:
+			v.Type = new(string)
+			return d.ReadString(schemas.LibraryTemplateButtonList_type, v.Type)
+		case schemas.LibraryTemplateButtonList_url:
+			v.Url = new(string)
+			return d.ReadString(schemas.LibraryTemplateButtonList_url, v.Url)
+		case schemas.LibraryTemplateButtonList_zeroTapTermsAccepted:
+			v.ZeroTapTermsAccepted = new(bool)
+			return d.ReadBool(schemas.LibraryTemplateButtonList_zeroTapTermsAccepted, v.ZeroTapTermsAccepted)
+		}
+		return nil
+	})
 }
 
 // The details of your linked WhatsApp Business Account.
@@ -147,6 +296,92 @@ type LinkedWhatsAppBusinessAccount struct {
 	noSmithyDocumentSerde
 }
 
+func (v *LinkedWhatsAppBusinessAccount) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LinkedWhatsAppBusinessAccount)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *LinkedWhatsAppBusinessAccount) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.LinkedWhatsAppBusinessAccount_arn, *v.Arn)
+	}
+	if v.DatasetId != nil {
+		s.WriteString(schemas.LinkedWhatsAppBusinessAccount_datasetId, *v.DatasetId)
+	}
+	if v.DirectSendEnforcementStatus != nil {
+		s.WriteString(schemas.LinkedWhatsAppBusinessAccount_directSendEnforcementStatus, *v.DirectSendEnforcementStatus)
+	}
+	if v.DirectSendEnforcementStatusExpiresAt != nil {
+		s.WriteTime(schemas.LinkedWhatsAppBusinessAccount_directSendEnforcementStatusExpiresAt, *v.DirectSendEnforcementStatusExpiresAt)
+	}
+	serializeWhatsAppBusinessAccountEventDestinations(s, schemas.LinkedWhatsAppBusinessAccount_eventDestinations, v.EventDestinations)
+	if v.Id != nil {
+		s.WriteString(schemas.LinkedWhatsAppBusinessAccount_id, *v.Id)
+	}
+	if v.LinkDate != nil {
+		s.WriteTime(schemas.LinkedWhatsAppBusinessAccount_linkDate, *v.LinkDate)
+	}
+	if v.MarketingMessagesOnboardingStatus != nil {
+		s.WriteString(schemas.LinkedWhatsAppBusinessAccount_marketingMessagesOnboardingStatus, *v.MarketingMessagesOnboardingStatus)
+	}
+	serializeWhatsAppPhoneNumberSummaryList(s, schemas.LinkedWhatsAppBusinessAccount_phoneNumbers, v.PhoneNumbers)
+	if v.RegistrationStatus != "" {
+		s.WriteString(schemas.LinkedWhatsAppBusinessAccount_registrationStatus, string(v.RegistrationStatus))
+	}
+	if v.WabaId != nil {
+		s.WriteString(schemas.LinkedWhatsAppBusinessAccount_wabaId, *v.WabaId)
+	}
+	if v.WabaName != nil {
+		s.WriteString(schemas.LinkedWhatsAppBusinessAccount_wabaName, *v.WabaName)
+	}
+}
+func (v *LinkedWhatsAppBusinessAccount) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LinkedWhatsAppBusinessAccount, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LinkedWhatsAppBusinessAccount_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.LinkedWhatsAppBusinessAccount_arn, v.Arn)
+		case schemas.LinkedWhatsAppBusinessAccount_datasetId:
+			v.DatasetId = new(string)
+			return d.ReadString(schemas.LinkedWhatsAppBusinessAccount_datasetId, v.DatasetId)
+		case schemas.LinkedWhatsAppBusinessAccount_directSendEnforcementStatus:
+			v.DirectSendEnforcementStatus = new(string)
+			return d.ReadString(schemas.LinkedWhatsAppBusinessAccount_directSendEnforcementStatus, v.DirectSendEnforcementStatus)
+		case schemas.LinkedWhatsAppBusinessAccount_directSendEnforcementStatusExpiresAt:
+			v.DirectSendEnforcementStatusExpiresAt = new(time.Time)
+			return d.ReadTime(schemas.LinkedWhatsAppBusinessAccount_directSendEnforcementStatusExpiresAt, v.DirectSendEnforcementStatusExpiresAt)
+		case schemas.LinkedWhatsAppBusinessAccount_eventDestinations:
+			return deserializeWhatsAppBusinessAccountEventDestinations(d, schemas.LinkedWhatsAppBusinessAccount_eventDestinations, &v.EventDestinations)
+		case schemas.LinkedWhatsAppBusinessAccount_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.LinkedWhatsAppBusinessAccount_id, v.Id)
+		case schemas.LinkedWhatsAppBusinessAccount_linkDate:
+			v.LinkDate = new(time.Time)
+			return d.ReadTime(schemas.LinkedWhatsAppBusinessAccount_linkDate, v.LinkDate)
+		case schemas.LinkedWhatsAppBusinessAccount_marketingMessagesOnboardingStatus:
+			v.MarketingMessagesOnboardingStatus = new(string)
+			return d.ReadString(schemas.LinkedWhatsAppBusinessAccount_marketingMessagesOnboardingStatus, v.MarketingMessagesOnboardingStatus)
+		case schemas.LinkedWhatsAppBusinessAccount_phoneNumbers:
+			return deserializeWhatsAppPhoneNumberSummaryList(d, schemas.LinkedWhatsAppBusinessAccount_phoneNumbers, &v.PhoneNumbers)
+		case schemas.LinkedWhatsAppBusinessAccount_registrationStatus:
+			var ev string
+			if err := d.ReadString(schemas.LinkedWhatsAppBusinessAccount_registrationStatus, &ev); err != nil {
+				return err
+			}
+			v.RegistrationStatus = RegistrationStatus(ev)
+			return nil
+		case schemas.LinkedWhatsAppBusinessAccount_wabaId:
+			v.WabaId = new(string)
+			return d.ReadString(schemas.LinkedWhatsAppBusinessAccount_wabaId, v.WabaId)
+		case schemas.LinkedWhatsAppBusinessAccount_wabaName:
+			v.WabaName = new(string)
+			return d.ReadString(schemas.LinkedWhatsAppBusinessAccount_wabaName, v.WabaName)
+		}
+		return nil
+	})
+}
+
 // Contains your WhatsApp registration status and details of any unregistered
 // WhatsApp phone number.
 type LinkedWhatsAppBusinessAccountIdMetaData struct {
@@ -164,6 +399,47 @@ type LinkedWhatsAppBusinessAccountIdMetaData struct {
 	WabaId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *LinkedWhatsAppBusinessAccountIdMetaData) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LinkedWhatsAppBusinessAccountIdMetaData)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *LinkedWhatsAppBusinessAccountIdMetaData) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountName != nil {
+		s.WriteString(schemas.LinkedWhatsAppBusinessAccountIdMetaData_accountName, *v.AccountName)
+	}
+	if v.RegistrationStatus != "" {
+		s.WriteString(schemas.LinkedWhatsAppBusinessAccountIdMetaData_registrationStatus, string(v.RegistrationStatus))
+	}
+	serializeWhatsAppPhoneNumberDetailList(s, schemas.LinkedWhatsAppBusinessAccountIdMetaData_unregisteredWhatsAppPhoneNumbers, v.UnregisteredWhatsAppPhoneNumbers)
+	if v.WabaId != nil {
+		s.WriteString(schemas.LinkedWhatsAppBusinessAccountIdMetaData_wabaId, *v.WabaId)
+	}
+}
+func (v *LinkedWhatsAppBusinessAccountIdMetaData) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LinkedWhatsAppBusinessAccountIdMetaData, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LinkedWhatsAppBusinessAccountIdMetaData_accountName:
+			v.AccountName = new(string)
+			return d.ReadString(schemas.LinkedWhatsAppBusinessAccountIdMetaData_accountName, v.AccountName)
+		case schemas.LinkedWhatsAppBusinessAccountIdMetaData_registrationStatus:
+			var ev string
+			if err := d.ReadString(schemas.LinkedWhatsAppBusinessAccountIdMetaData_registrationStatus, &ev); err != nil {
+				return err
+			}
+			v.RegistrationStatus = RegistrationStatus(ev)
+			return nil
+		case schemas.LinkedWhatsAppBusinessAccountIdMetaData_unregisteredWhatsAppPhoneNumbers:
+			return deserializeWhatsAppPhoneNumberDetailList(d, schemas.LinkedWhatsAppBusinessAccountIdMetaData_unregisteredWhatsAppPhoneNumbers, &v.UnregisteredWhatsAppPhoneNumbers)
+		case schemas.LinkedWhatsAppBusinessAccountIdMetaData_wabaId:
+			v.WabaId = new(string)
+			return d.ReadString(schemas.LinkedWhatsAppBusinessAccountIdMetaData_wabaId, v.WabaId)
+		}
+		return nil
+	})
 }
 
 // The details of a linked WhatsApp Business Account.
@@ -228,6 +504,89 @@ type LinkedWhatsAppBusinessAccountSummary struct {
 	noSmithyDocumentSerde
 }
 
+func (v *LinkedWhatsAppBusinessAccountSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LinkedWhatsAppBusinessAccountSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *LinkedWhatsAppBusinessAccountSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.LinkedWhatsAppBusinessAccountSummary_arn, *v.Arn)
+	}
+	if v.DatasetId != nil {
+		s.WriteString(schemas.LinkedWhatsAppBusinessAccountSummary_datasetId, *v.DatasetId)
+	}
+	if v.DirectSendEnforcementStatus != nil {
+		s.WriteString(schemas.LinkedWhatsAppBusinessAccountSummary_directSendEnforcementStatus, *v.DirectSendEnforcementStatus)
+	}
+	if v.DirectSendEnforcementStatusExpiresAt != nil {
+		s.WriteTime(schemas.LinkedWhatsAppBusinessAccountSummary_directSendEnforcementStatusExpiresAt, *v.DirectSendEnforcementStatusExpiresAt)
+	}
+	serializeWhatsAppBusinessAccountEventDestinations(s, schemas.LinkedWhatsAppBusinessAccountSummary_eventDestinations, v.EventDestinations)
+	if v.Id != nil {
+		s.WriteString(schemas.LinkedWhatsAppBusinessAccountSummary_id, *v.Id)
+	}
+	if v.LinkDate != nil {
+		s.WriteTime(schemas.LinkedWhatsAppBusinessAccountSummary_linkDate, *v.LinkDate)
+	}
+	if v.MarketingMessagesOnboardingStatus != nil {
+		s.WriteString(schemas.LinkedWhatsAppBusinessAccountSummary_marketingMessagesOnboardingStatus, *v.MarketingMessagesOnboardingStatus)
+	}
+	if v.RegistrationStatus != "" {
+		s.WriteString(schemas.LinkedWhatsAppBusinessAccountSummary_registrationStatus, string(v.RegistrationStatus))
+	}
+	if v.WabaId != nil {
+		s.WriteString(schemas.LinkedWhatsAppBusinessAccountSummary_wabaId, *v.WabaId)
+	}
+	if v.WabaName != nil {
+		s.WriteString(schemas.LinkedWhatsAppBusinessAccountSummary_wabaName, *v.WabaName)
+	}
+}
+func (v *LinkedWhatsAppBusinessAccountSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LinkedWhatsAppBusinessAccountSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LinkedWhatsAppBusinessAccountSummary_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.LinkedWhatsAppBusinessAccountSummary_arn, v.Arn)
+		case schemas.LinkedWhatsAppBusinessAccountSummary_datasetId:
+			v.DatasetId = new(string)
+			return d.ReadString(schemas.LinkedWhatsAppBusinessAccountSummary_datasetId, v.DatasetId)
+		case schemas.LinkedWhatsAppBusinessAccountSummary_directSendEnforcementStatus:
+			v.DirectSendEnforcementStatus = new(string)
+			return d.ReadString(schemas.LinkedWhatsAppBusinessAccountSummary_directSendEnforcementStatus, v.DirectSendEnforcementStatus)
+		case schemas.LinkedWhatsAppBusinessAccountSummary_directSendEnforcementStatusExpiresAt:
+			v.DirectSendEnforcementStatusExpiresAt = new(time.Time)
+			return d.ReadTime(schemas.LinkedWhatsAppBusinessAccountSummary_directSendEnforcementStatusExpiresAt, v.DirectSendEnforcementStatusExpiresAt)
+		case schemas.LinkedWhatsAppBusinessAccountSummary_eventDestinations:
+			return deserializeWhatsAppBusinessAccountEventDestinations(d, schemas.LinkedWhatsAppBusinessAccountSummary_eventDestinations, &v.EventDestinations)
+		case schemas.LinkedWhatsAppBusinessAccountSummary_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.LinkedWhatsAppBusinessAccountSummary_id, v.Id)
+		case schemas.LinkedWhatsAppBusinessAccountSummary_linkDate:
+			v.LinkDate = new(time.Time)
+			return d.ReadTime(schemas.LinkedWhatsAppBusinessAccountSummary_linkDate, v.LinkDate)
+		case schemas.LinkedWhatsAppBusinessAccountSummary_marketingMessagesOnboardingStatus:
+			v.MarketingMessagesOnboardingStatus = new(string)
+			return d.ReadString(schemas.LinkedWhatsAppBusinessAccountSummary_marketingMessagesOnboardingStatus, v.MarketingMessagesOnboardingStatus)
+		case schemas.LinkedWhatsAppBusinessAccountSummary_registrationStatus:
+			var ev string
+			if err := d.ReadString(schemas.LinkedWhatsAppBusinessAccountSummary_registrationStatus, &ev); err != nil {
+				return err
+			}
+			v.RegistrationStatus = RegistrationStatus(ev)
+			return nil
+		case schemas.LinkedWhatsAppBusinessAccountSummary_wabaId:
+			v.WabaId = new(string)
+			return d.ReadString(schemas.LinkedWhatsAppBusinessAccountSummary_wabaId, v.WabaId)
+		case schemas.LinkedWhatsAppBusinessAccountSummary_wabaName:
+			v.WabaName = new(string)
+			return d.ReadString(schemas.LinkedWhatsAppBusinessAccountSummary_wabaName, v.WabaName)
+		}
+		return nil
+	})
+}
+
 // Contains the Meta application metadata associated with a WhatsApp Flow.
 type MetaFlowApplicationInfo struct {
 
@@ -245,6 +604,40 @@ type MetaFlowApplicationInfo struct {
 	Link *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *MetaFlowApplicationInfo) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MetaFlowApplicationInfo)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MetaFlowApplicationInfo) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Id != nil {
+		s.WriteString(schemas.MetaFlowApplicationInfo_id, *v.Id)
+	}
+	if v.Link != nil {
+		s.WriteString(schemas.MetaFlowApplicationInfo_link, *v.Link)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.MetaFlowApplicationInfo_name, *v.Name)
+	}
+}
+func (v *MetaFlowApplicationInfo) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MetaFlowApplicationInfo, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MetaFlowApplicationInfo_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.MetaFlowApplicationInfo_id, v.Id)
+		case schemas.MetaFlowApplicationInfo_link:
+			v.Link = new(string)
+			return d.ReadString(schemas.MetaFlowApplicationInfo_link, v.Link)
+		case schemas.MetaFlowApplicationInfo_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.MetaFlowApplicationInfo_name, v.Name)
+		}
+		return nil
+	})
 }
 
 // Represents a single asset file associated with a WhatsApp Flow, including a
@@ -270,6 +663,40 @@ type MetaFlowAsset struct {
 	noSmithyDocumentSerde
 }
 
+func (v *MetaFlowAsset) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MetaFlowAsset)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MetaFlowAsset) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AssetType != nil {
+		s.WriteString(schemas.MetaFlowAsset_assetType, *v.AssetType)
+	}
+	if v.DownloadUrl != nil {
+		s.WriteString(schemas.MetaFlowAsset_downloadUrl, *v.DownloadUrl)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.MetaFlowAsset_name, *v.Name)
+	}
+}
+func (v *MetaFlowAsset) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MetaFlowAsset, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MetaFlowAsset_assetType:
+			v.AssetType = new(string)
+			return d.ReadString(schemas.MetaFlowAsset_assetType, v.AssetType)
+		case schemas.MetaFlowAsset_downloadUrl:
+			v.DownloadUrl = new(string)
+			return d.ReadString(schemas.MetaFlowAsset_downloadUrl, v.DownloadUrl)
+		case schemas.MetaFlowAsset_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.MetaFlowAsset_name, v.Name)
+		}
+		return nil
+	})
+}
+
 // Represents a single entity in the health status check for a WhatsApp Flow.
 type MetaFlowHealthEntity struct {
 
@@ -292,6 +719,40 @@ type MetaFlowHealthEntity struct {
 	noSmithyDocumentSerde
 }
 
+func (v *MetaFlowHealthEntity) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MetaFlowHealthEntity)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MetaFlowHealthEntity) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CanSendMessage != nil {
+		s.WriteString(schemas.MetaFlowHealthEntity_canSendMessage, *v.CanSendMessage)
+	}
+	if v.EntityType != nil {
+		s.WriteString(schemas.MetaFlowHealthEntity_entityType, *v.EntityType)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.MetaFlowHealthEntity_id, *v.Id)
+	}
+}
+func (v *MetaFlowHealthEntity) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MetaFlowHealthEntity, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MetaFlowHealthEntity_canSendMessage:
+			v.CanSendMessage = new(string)
+			return d.ReadString(schemas.MetaFlowHealthEntity_canSendMessage, v.CanSendMessage)
+		case schemas.MetaFlowHealthEntity_entityType:
+			v.EntityType = new(string)
+			return d.ReadString(schemas.MetaFlowHealthEntity_entityType, v.EntityType)
+		case schemas.MetaFlowHealthEntity_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.MetaFlowHealthEntity_id, v.Id)
+		}
+		return nil
+	})
+}
+
 // Contains the overall health status and per-entity breakdown for a WhatsApp Flow.
 type MetaFlowHealthStatus struct {
 
@@ -305,6 +766,31 @@ type MetaFlowHealthStatus struct {
 	Entities []MetaFlowHealthEntity
 
 	noSmithyDocumentSerde
+}
+
+func (v *MetaFlowHealthStatus) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MetaFlowHealthStatus)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MetaFlowHealthStatus) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CanSendMessage != nil {
+		s.WriteString(schemas.MetaFlowHealthStatus_canSendMessage, *v.CanSendMessage)
+	}
+	serializeMetaFlowHealthEntityList(s, schemas.MetaFlowHealthStatus_entities, v.Entities)
+}
+func (v *MetaFlowHealthStatus) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MetaFlowHealthStatus, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MetaFlowHealthStatus_canSendMessage:
+			v.CanSendMessage = new(string)
+			return d.ReadString(schemas.MetaFlowHealthStatus_canSendMessage, v.CanSendMessage)
+		case schemas.MetaFlowHealthStatus_entities:
+			return deserializeMetaFlowHealthEntityList(d, schemas.MetaFlowHealthStatus_entities, &v.Entities)
+		}
+		return nil
+	})
 }
 
 // Contains the preview URL for testing a WhatsApp Flow and its expiration
@@ -322,6 +808,34 @@ type MetaFlowPreviewInfo struct {
 	PreviewUrl *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *MetaFlowPreviewInfo) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MetaFlowPreviewInfo)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MetaFlowPreviewInfo) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ExpiresAt != nil {
+		s.WriteString(schemas.MetaFlowPreviewInfo_expiresAt, *v.ExpiresAt)
+	}
+	if v.PreviewUrl != nil {
+		s.WriteString(schemas.MetaFlowPreviewInfo_previewUrl, *v.PreviewUrl)
+	}
+}
+func (v *MetaFlowPreviewInfo) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MetaFlowPreviewInfo, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MetaFlowPreviewInfo_expiresAt:
+			v.ExpiresAt = new(string)
+			return d.ReadString(schemas.MetaFlowPreviewInfo_expiresAt, v.ExpiresAt)
+		case schemas.MetaFlowPreviewInfo_previewUrl:
+			v.PreviewUrl = new(string)
+			return d.ReadString(schemas.MetaFlowPreviewInfo_previewUrl, v.PreviewUrl)
+		}
+		return nil
+	})
 }
 
 // Contains summary information about a WhatsApp Flow, including its ID, name,
@@ -357,6 +871,46 @@ type MetaFlowSummary struct {
 	noSmithyDocumentSerde
 }
 
+func (v *MetaFlowSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MetaFlowSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MetaFlowSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeMetaFlowCategoryList(s, schemas.MetaFlowSummary_flowCategories, v.FlowCategories)
+	if v.FlowId != nil {
+		s.WriteString(schemas.MetaFlowSummary_flowId, *v.FlowId)
+	}
+	if v.FlowName != nil {
+		s.WriteString(schemas.MetaFlowSummary_flowName, *v.FlowName)
+	}
+	if v.FlowStatus != nil {
+		s.WriteString(schemas.MetaFlowSummary_flowStatus, *v.FlowStatus)
+	}
+	serializeValidationErrorList(s, schemas.MetaFlowSummary_validationErrors, v.ValidationErrors)
+}
+func (v *MetaFlowSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MetaFlowSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MetaFlowSummary_flowCategories:
+			return deserializeMetaFlowCategoryList(d, schemas.MetaFlowSummary_flowCategories, &v.FlowCategories)
+		case schemas.MetaFlowSummary_flowId:
+			v.FlowId = new(string)
+			return d.ReadString(schemas.MetaFlowSummary_flowId, v.FlowId)
+		case schemas.MetaFlowSummary_flowName:
+			v.FlowName = new(string)
+			return d.ReadString(schemas.MetaFlowSummary_flowName, v.FlowName)
+		case schemas.MetaFlowSummary_flowStatus:
+			v.FlowStatus = new(string)
+			return d.ReadString(schemas.MetaFlowSummary_flowStatus, v.FlowStatus)
+		case schemas.MetaFlowSummary_validationErrors:
+			return deserializeValidationErrorList(d, schemas.MetaFlowSummary_validationErrors, &v.ValidationErrors)
+		}
+		return nil
+	})
+}
+
 // Contains WhatsApp Business Account metadata associated with a Flow, as returned
 // by Meta.
 type MetaFlowWhatsAppBusinessAccountInfo struct {
@@ -381,6 +935,52 @@ type MetaFlowWhatsAppBusinessAccountInfo struct {
 	TimezoneId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *MetaFlowWhatsAppBusinessAccountInfo) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MetaFlowWhatsAppBusinessAccountInfo)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MetaFlowWhatsAppBusinessAccountInfo) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Currency != nil {
+		s.WriteString(schemas.MetaFlowWhatsAppBusinessAccountInfo_currency, *v.Currency)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.MetaFlowWhatsAppBusinessAccountInfo_id, *v.Id)
+	}
+	if v.MessageTemplateNamespace != nil {
+		s.WriteString(schemas.MetaFlowWhatsAppBusinessAccountInfo_messageTemplateNamespace, *v.MessageTemplateNamespace)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.MetaFlowWhatsAppBusinessAccountInfo_name, *v.Name)
+	}
+	if v.TimezoneId != nil {
+		s.WriteString(schemas.MetaFlowWhatsAppBusinessAccountInfo_timezoneId, *v.TimezoneId)
+	}
+}
+func (v *MetaFlowWhatsAppBusinessAccountInfo) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MetaFlowWhatsAppBusinessAccountInfo, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MetaFlowWhatsAppBusinessAccountInfo_currency:
+			v.Currency = new(string)
+			return d.ReadString(schemas.MetaFlowWhatsAppBusinessAccountInfo_currency, v.Currency)
+		case schemas.MetaFlowWhatsAppBusinessAccountInfo_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.MetaFlowWhatsAppBusinessAccountInfo_id, v.Id)
+		case schemas.MetaFlowWhatsAppBusinessAccountInfo_messageTemplateNamespace:
+			v.MessageTemplateNamespace = new(string)
+			return d.ReadString(schemas.MetaFlowWhatsAppBusinessAccountInfo_messageTemplateNamespace, v.MessageTemplateNamespace)
+		case schemas.MetaFlowWhatsAppBusinessAccountInfo_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.MetaFlowWhatsAppBusinessAccountInfo_name, v.Name)
+		case schemas.MetaFlowWhatsAppBusinessAccountInfo_timezoneId:
+			v.TimezoneId = new(string)
+			return d.ReadString(schemas.MetaFlowWhatsAppBusinessAccountInfo_timezoneId, v.TimezoneId)
+		}
+		return nil
+	})
 }
 
 // Represents a template from Meta's library with customization options.
@@ -413,6 +1013,57 @@ type MetaLibraryTemplate struct {
 	LibraryTemplateButtonInputs []LibraryTemplateButtonInput
 
 	noSmithyDocumentSerde
+}
+
+func (v *MetaLibraryTemplate) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MetaLibraryTemplate)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MetaLibraryTemplate) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LibraryTemplateBodyInputs != nil {
+		s.WriteStruct(schemas.MetaLibraryTemplate_libraryTemplateBodyInputs)
+		v.LibraryTemplateBodyInputs.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeMetaLibraryTemplateButtonInputs(s, schemas.MetaLibraryTemplate_libraryTemplateButtonInputs, v.LibraryTemplateButtonInputs)
+	if v.LibraryTemplateName != nil {
+		s.WriteString(schemas.MetaLibraryTemplate_libraryTemplateName, *v.LibraryTemplateName)
+	}
+	if v.TemplateCategory != nil {
+		s.WriteString(schemas.MetaLibraryTemplate_templateCategory, *v.TemplateCategory)
+	}
+	if v.TemplateLanguage != nil {
+		s.WriteString(schemas.MetaLibraryTemplate_templateLanguage, *v.TemplateLanguage)
+	}
+	if v.TemplateName != nil {
+		s.WriteString(schemas.MetaLibraryTemplate_templateName, *v.TemplateName)
+	}
+}
+func (v *MetaLibraryTemplate) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MetaLibraryTemplate, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MetaLibraryTemplate_libraryTemplateBodyInputs:
+			v.LibraryTemplateBodyInputs = &LibraryTemplateBodyInputs{}
+			return v.LibraryTemplateBodyInputs.Deserialize(d)
+		case schemas.MetaLibraryTemplate_libraryTemplateButtonInputs:
+			return deserializeMetaLibraryTemplateButtonInputs(d, schemas.MetaLibraryTemplate_libraryTemplateButtonInputs, &v.LibraryTemplateButtonInputs)
+		case schemas.MetaLibraryTemplate_libraryTemplateName:
+			v.LibraryTemplateName = new(string)
+			return d.ReadString(schemas.MetaLibraryTemplate_libraryTemplateName, v.LibraryTemplateName)
+		case schemas.MetaLibraryTemplate_templateCategory:
+			v.TemplateCategory = new(string)
+			return d.ReadString(schemas.MetaLibraryTemplate_templateCategory, v.TemplateCategory)
+		case schemas.MetaLibraryTemplate_templateLanguage:
+			v.TemplateLanguage = new(string)
+			return d.ReadString(schemas.MetaLibraryTemplate_templateLanguage, v.TemplateLanguage)
+		case schemas.MetaLibraryTemplate_templateName:
+			v.TemplateName = new(string)
+			return d.ReadString(schemas.MetaLibraryTemplate_templateName, v.TemplateName)
+		}
+		return nil
+	})
 }
 
 // Defines the complete structure and content of a template in Meta's library.
@@ -455,6 +1106,79 @@ type MetaLibraryTemplateDefinition struct {
 	noSmithyDocumentSerde
 }
 
+func (v *MetaLibraryTemplateDefinition) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MetaLibraryTemplateDefinition)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MetaLibraryTemplateDefinition) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TemplateBody != nil {
+		s.WriteString(schemas.MetaLibraryTemplateDefinition_templateBody, *v.TemplateBody)
+	}
+	serializeMetaTemplateBodyExampleParams(s, schemas.MetaLibraryTemplateDefinition_templateBodyExampleParams, v.TemplateBodyExampleParams)
+	serializeMetaLibraryTemplateButtonList(s, schemas.MetaLibraryTemplateDefinition_templateButtons, v.TemplateButtons)
+	if v.TemplateCategory != nil {
+		s.WriteString(schemas.MetaLibraryTemplateDefinition_templateCategory, *v.TemplateCategory)
+	}
+	if v.TemplateHeader != nil {
+		s.WriteString(schemas.MetaLibraryTemplateDefinition_templateHeader, *v.TemplateHeader)
+	}
+	if v.TemplateId != nil {
+		s.WriteString(schemas.MetaLibraryTemplateDefinition_templateId, *v.TemplateId)
+	}
+	serializeMetaIndustries(s, schemas.MetaLibraryTemplateDefinition_templateIndustry, v.TemplateIndustry)
+	if v.TemplateLanguage != nil {
+		s.WriteString(schemas.MetaLibraryTemplateDefinition_templateLanguage, *v.TemplateLanguage)
+	}
+	if v.TemplateName != nil {
+		s.WriteString(schemas.MetaLibraryTemplateDefinition_templateName, *v.TemplateName)
+	}
+	if v.TemplateTopic != nil {
+		s.WriteString(schemas.MetaLibraryTemplateDefinition_templateTopic, *v.TemplateTopic)
+	}
+	if v.TemplateUseCase != nil {
+		s.WriteString(schemas.MetaLibraryTemplateDefinition_templateUseCase, *v.TemplateUseCase)
+	}
+}
+func (v *MetaLibraryTemplateDefinition) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MetaLibraryTemplateDefinition, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MetaLibraryTemplateDefinition_templateBody:
+			v.TemplateBody = new(string)
+			return d.ReadString(schemas.MetaLibraryTemplateDefinition_templateBody, v.TemplateBody)
+		case schemas.MetaLibraryTemplateDefinition_templateBodyExampleParams:
+			return deserializeMetaTemplateBodyExampleParams(d, schemas.MetaLibraryTemplateDefinition_templateBodyExampleParams, &v.TemplateBodyExampleParams)
+		case schemas.MetaLibraryTemplateDefinition_templateButtons:
+			return deserializeMetaLibraryTemplateButtonList(d, schemas.MetaLibraryTemplateDefinition_templateButtons, &v.TemplateButtons)
+		case schemas.MetaLibraryTemplateDefinition_templateCategory:
+			v.TemplateCategory = new(string)
+			return d.ReadString(schemas.MetaLibraryTemplateDefinition_templateCategory, v.TemplateCategory)
+		case schemas.MetaLibraryTemplateDefinition_templateHeader:
+			v.TemplateHeader = new(string)
+			return d.ReadString(schemas.MetaLibraryTemplateDefinition_templateHeader, v.TemplateHeader)
+		case schemas.MetaLibraryTemplateDefinition_templateId:
+			v.TemplateId = new(string)
+			return d.ReadString(schemas.MetaLibraryTemplateDefinition_templateId, v.TemplateId)
+		case schemas.MetaLibraryTemplateDefinition_templateIndustry:
+			return deserializeMetaIndustries(d, schemas.MetaLibraryTemplateDefinition_templateIndustry, &v.TemplateIndustry)
+		case schemas.MetaLibraryTemplateDefinition_templateLanguage:
+			v.TemplateLanguage = new(string)
+			return d.ReadString(schemas.MetaLibraryTemplateDefinition_templateLanguage, v.TemplateLanguage)
+		case schemas.MetaLibraryTemplateDefinition_templateName:
+			v.TemplateName = new(string)
+			return d.ReadString(schemas.MetaLibraryTemplateDefinition_templateName, v.TemplateName)
+		case schemas.MetaLibraryTemplateDefinition_templateTopic:
+			v.TemplateTopic = new(string)
+			return d.ReadString(schemas.MetaLibraryTemplateDefinition_templateTopic, v.TemplateTopic)
+		case schemas.MetaLibraryTemplateDefinition_templateUseCase:
+			v.TemplateUseCase = new(string)
+			return d.ReadString(schemas.MetaLibraryTemplateDefinition_templateUseCase, v.TemplateUseCase)
+		}
+		return nil
+	})
+}
+
 // Contains information for the S3 bucket that contains media files.
 type S3File struct {
 
@@ -476,6 +1200,34 @@ type S3File struct {
 	Key *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *S3File) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.S3File)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *S3File) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BucketName != nil {
+		s.WriteString(schemas.S3File_bucketName, *v.BucketName)
+	}
+	if v.Key != nil {
+		s.WriteString(schemas.S3File_key, *v.Key)
+	}
+}
+func (v *S3File) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.S3File, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.S3File_bucketName:
+			v.BucketName = new(string)
+			return d.ReadString(schemas.S3File_bucketName, v.BucketName)
+		case schemas.S3File_key:
+			v.Key = new(string)
+			return d.ReadString(schemas.S3File_key, v.Key)
+		}
+		return nil
+	})
 }
 
 // You can use presigned URLs to grant time-limited access to objects in Amazon S3
@@ -502,6 +1254,31 @@ type S3PresignedUrl struct {
 	noSmithyDocumentSerde
 }
 
+func (v *S3PresignedUrl) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.S3PresignedUrl)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *S3PresignedUrl) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeHeaders(s, schemas.S3PresignedUrl_headers, v.Headers)
+	if v.Url != nil {
+		s.WriteString(schemas.S3PresignedUrl_url, *v.Url)
+	}
+}
+func (v *S3PresignedUrl) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.S3PresignedUrl, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.S3PresignedUrl_headers:
+			return deserializeHeaders(d, schemas.S3PresignedUrl_headers, &v.Headers)
+		case schemas.S3PresignedUrl_url:
+			v.Url = new(string)
+			return d.ReadString(schemas.S3PresignedUrl_url, v.Url)
+		}
+		return nil
+	})
+}
+
 // The tag for a resource.
 type Tag struct {
 
@@ -514,6 +1291,34 @@ type Tag struct {
 	Value *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *Tag) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Tag)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Tag) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Key != nil {
+		s.WriteString(schemas.Tag_key, *v.Key)
+	}
+	if v.Value != nil {
+		s.WriteString(schemas.Tag_value, *v.Value)
+	}
+}
+func (v *Tag) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Tag, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Tag_key:
+			v.Key = new(string)
+			return d.ReadString(schemas.Tag_key, v.Key)
+		case schemas.Tag_value:
+			v.Value = new(string)
+			return d.ReadString(schemas.Tag_value, v.Value)
+		}
+		return nil
+	})
 }
 
 // Provides a summary of a WhatsApp message template's key attributes.
@@ -549,6 +1354,70 @@ type TemplateSummary struct {
 	TemplateStatus *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *TemplateSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TemplateSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TemplateSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CorrectCategory != nil {
+		s.WriteString(schemas.TemplateSummary_correctCategory, *v.CorrectCategory)
+	}
+	if v.MetaTemplateId != nil {
+		s.WriteString(schemas.TemplateSummary_metaTemplateId, *v.MetaTemplateId)
+	}
+	if v.TemplateCategory != nil {
+		s.WriteString(schemas.TemplateSummary_templateCategory, *v.TemplateCategory)
+	}
+	if v.TemplateLanguage != nil {
+		s.WriteString(schemas.TemplateSummary_templateLanguage, *v.TemplateLanguage)
+	}
+	if v.TemplateName != nil {
+		s.WriteString(schemas.TemplateSummary_templateName, *v.TemplateName)
+	}
+	if v.TemplateQualityScore != nil {
+		s.WriteString(schemas.TemplateSummary_templateQualityScore, *v.TemplateQualityScore)
+	}
+	if v.TemplateSource != nil {
+		s.WriteString(schemas.TemplateSummary_templateSource, *v.TemplateSource)
+	}
+	if v.TemplateStatus != nil {
+		s.WriteString(schemas.TemplateSummary_templateStatus, *v.TemplateStatus)
+	}
+}
+func (v *TemplateSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TemplateSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TemplateSummary_correctCategory:
+			v.CorrectCategory = new(string)
+			return d.ReadString(schemas.TemplateSummary_correctCategory, v.CorrectCategory)
+		case schemas.TemplateSummary_metaTemplateId:
+			v.MetaTemplateId = new(string)
+			return d.ReadString(schemas.TemplateSummary_metaTemplateId, v.MetaTemplateId)
+		case schemas.TemplateSummary_templateCategory:
+			v.TemplateCategory = new(string)
+			return d.ReadString(schemas.TemplateSummary_templateCategory, v.TemplateCategory)
+		case schemas.TemplateSummary_templateLanguage:
+			v.TemplateLanguage = new(string)
+			return d.ReadString(schemas.TemplateSummary_templateLanguage, v.TemplateLanguage)
+		case schemas.TemplateSummary_templateName:
+			v.TemplateName = new(string)
+			return d.ReadString(schemas.TemplateSummary_templateName, v.TemplateName)
+		case schemas.TemplateSummary_templateQualityScore:
+			v.TemplateQualityScore = new(string)
+			return d.ReadString(schemas.TemplateSummary_templateQualityScore, v.TemplateQualityScore)
+		case schemas.TemplateSummary_templateSource:
+			v.TemplateSource = new(string)
+			return d.ReadString(schemas.TemplateSummary_templateSource, v.TemplateSource)
+		case schemas.TemplateSummary_templateStatus:
+			v.TemplateStatus = new(string)
+			return d.ReadString(schemas.TemplateSummary_templateStatus, v.TemplateStatus)
+		}
+		return nil
+	})
 }
 
 // The registration details for a linked phone number.
@@ -619,6 +1488,43 @@ type WabaPhoneNumberSetupFinalization struct {
 	noSmithyDocumentSerde
 }
 
+func (v *WabaPhoneNumberSetupFinalization) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.WabaPhoneNumberSetupFinalization)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *WabaPhoneNumberSetupFinalization) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DataLocalizationRegion != nil {
+		s.WriteString(schemas.WabaPhoneNumberSetupFinalization_dataLocalizationRegion, *v.DataLocalizationRegion)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.WabaPhoneNumberSetupFinalization_id, *v.Id)
+	}
+	serializeTagList(s, schemas.WabaPhoneNumberSetupFinalization_tags, v.Tags)
+	if v.TwoFactorPin != nil {
+		s.WriteString(schemas.WabaPhoneNumberSetupFinalization_twoFactorPin, *v.TwoFactorPin)
+	}
+}
+func (v *WabaPhoneNumberSetupFinalization) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.WabaPhoneNumberSetupFinalization, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.WabaPhoneNumberSetupFinalization_dataLocalizationRegion:
+			v.DataLocalizationRegion = new(string)
+			return d.ReadString(schemas.WabaPhoneNumberSetupFinalization_dataLocalizationRegion, v.DataLocalizationRegion)
+		case schemas.WabaPhoneNumberSetupFinalization_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.WabaPhoneNumberSetupFinalization_id, v.Id)
+		case schemas.WabaPhoneNumberSetupFinalization_tags:
+			return deserializeTagList(d, schemas.WabaPhoneNumberSetupFinalization_tags, &v.Tags)
+		case schemas.WabaPhoneNumberSetupFinalization_twoFactorPin:
+			v.TwoFactorPin = new(string)
+			return d.ReadString(schemas.WabaPhoneNumberSetupFinalization_twoFactorPin, v.TwoFactorPin)
+		}
+		return nil
+	})
+}
+
 // The registration details for a linked WhatsApp Business Account.
 type WabaSetupFinalization struct {
 
@@ -635,6 +1541,34 @@ type WabaSetupFinalization struct {
 	noSmithyDocumentSerde
 }
 
+func (v *WabaSetupFinalization) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.WabaSetupFinalization)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *WabaSetupFinalization) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeWhatsAppBusinessAccountEventDestinations(s, schemas.WabaSetupFinalization_eventDestinations, v.EventDestinations)
+	if v.Id != nil {
+		s.WriteString(schemas.WabaSetupFinalization_id, *v.Id)
+	}
+	serializeTagList(s, schemas.WabaSetupFinalization_tags, v.Tags)
+}
+func (v *WabaSetupFinalization) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.WabaSetupFinalization, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.WabaSetupFinalization_eventDestinations:
+			return deserializeWhatsAppBusinessAccountEventDestinations(d, schemas.WabaSetupFinalization_eventDestinations, &v.EventDestinations)
+		case schemas.WabaSetupFinalization_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.WabaSetupFinalization_id, v.Id)
+		case schemas.WabaSetupFinalization_tags:
+			return deserializeTagList(d, schemas.WabaSetupFinalization_tags, &v.Tags)
+		}
+		return nil
+	})
+}
+
 // Contains information on the event destination.
 type WhatsAppBusinessAccountEventDestination struct {
 
@@ -648,6 +1582,34 @@ type WhatsAppBusinessAccountEventDestination struct {
 	RoleArn *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *WhatsAppBusinessAccountEventDestination) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.WhatsAppBusinessAccountEventDestination)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *WhatsAppBusinessAccountEventDestination) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EventDestinationArn != nil {
+		s.WriteString(schemas.WhatsAppBusinessAccountEventDestination_eventDestinationArn, *v.EventDestinationArn)
+	}
+	if v.RoleArn != nil {
+		s.WriteString(schemas.WhatsAppBusinessAccountEventDestination_roleArn, *v.RoleArn)
+	}
+}
+func (v *WhatsAppBusinessAccountEventDestination) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.WhatsAppBusinessAccountEventDestination, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.WhatsAppBusinessAccountEventDestination_eventDestinationArn:
+			v.EventDestinationArn = new(string)
+			return d.ReadString(schemas.WhatsAppBusinessAccountEventDestination_eventDestinationArn, v.EventDestinationArn)
+		case schemas.WhatsAppBusinessAccountEventDestination_roleArn:
+			v.RoleArn = new(string)
+			return d.ReadString(schemas.WhatsAppBusinessAccountEventDestination_roleArn, v.RoleArn)
+		}
+		return nil
+	})
 }
 
 // The operating hours during which a business phone number accepts WhatsApp
@@ -677,6 +1639,40 @@ type WhatsAppCallHours struct {
 	noSmithyDocumentSerde
 }
 
+func (v *WhatsAppCallHours) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.WhatsAppCallHours)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *WhatsAppCallHours) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Enabled != nil {
+		s.WriteBool(schemas.WhatsAppCallHours_enabled, *v.Enabled)
+	}
+	serializeWhatsAppHolidayScheduleList(s, schemas.WhatsAppCallHours_holidaySchedule, v.HolidaySchedule)
+	if v.Timezone != nil {
+		s.WriteString(schemas.WhatsAppCallHours_timezone, *v.Timezone)
+	}
+	serializeWhatsAppWeeklyOperatingHoursList(s, schemas.WhatsAppCallHours_weeklyOperatingHours, v.WeeklyOperatingHours)
+}
+func (v *WhatsAppCallHours) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.WhatsAppCallHours, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.WhatsAppCallHours_enabled:
+			v.Enabled = new(bool)
+			return d.ReadBool(schemas.WhatsAppCallHours_enabled, v.Enabled)
+		case schemas.WhatsAppCallHours_holidaySchedule:
+			return deserializeWhatsAppHolidayScheduleList(d, schemas.WhatsAppCallHours_holidaySchedule, &v.HolidaySchedule)
+		case schemas.WhatsAppCallHours_timezone:
+			v.Timezone = new(string)
+			return d.ReadString(schemas.WhatsAppCallHours_timezone, v.Timezone)
+		case schemas.WhatsAppCallHours_weeklyOperatingHours:
+			return deserializeWhatsAppWeeklyOperatingHoursList(d, schemas.WhatsAppCallHours_weeklyOperatingHours, &v.WeeklyOperatingHours)
+		}
+		return nil
+	})
+}
+
 // The current calling permission state for a business phone number and a specific
 // WhatsApp end user.
 type WhatsAppCallPermission struct {
@@ -691,6 +1687,34 @@ type WhatsAppCallPermission struct {
 	ExpirationTime *time.Time
 
 	noSmithyDocumentSerde
+}
+
+func (v *WhatsAppCallPermission) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.WhatsAppCallPermission)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *WhatsAppCallPermission) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ExpirationTime != nil {
+		s.WriteTime(schemas.WhatsAppCallPermission_expirationTime, *v.ExpirationTime)
+	}
+	if v.Status != nil {
+		s.WriteString(schemas.WhatsAppCallPermission_status, *v.Status)
+	}
+}
+func (v *WhatsAppCallPermission) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.WhatsAppCallPermission, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.WhatsAppCallPermission_expirationTime:
+			v.ExpirationTime = new(time.Time)
+			return d.ReadTime(schemas.WhatsAppCallPermission_expirationTime, v.ExpirationTime)
+		case schemas.WhatsAppCallPermission_status:
+			v.Status = new(string)
+			return d.ReadString(schemas.WhatsAppCallPermission_status, v.Status)
+		}
+		return nil
+	})
 }
 
 // Describes a single calling action the business can take with an end user,
@@ -714,6 +1738,37 @@ type WhatsAppCallPermissionAction struct {
 	Limits []WhatsAppCallPermissionLimit
 
 	noSmithyDocumentSerde
+}
+
+func (v *WhatsAppCallPermissionAction) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.WhatsAppCallPermissionAction)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *WhatsAppCallPermissionAction) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ActionName != nil {
+		s.WriteString(schemas.WhatsAppCallPermissionAction_actionName, *v.ActionName)
+	}
+	if v.CanPerformAction != nil {
+		s.WriteBool(schemas.WhatsAppCallPermissionAction_canPerformAction, *v.CanPerformAction)
+	}
+	serializeWhatsAppCallPermissionLimitList(s, schemas.WhatsAppCallPermissionAction_limits, v.Limits)
+}
+func (v *WhatsAppCallPermissionAction) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.WhatsAppCallPermissionAction, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.WhatsAppCallPermissionAction_actionName:
+			v.ActionName = new(string)
+			return d.ReadString(schemas.WhatsAppCallPermissionAction_actionName, v.ActionName)
+		case schemas.WhatsAppCallPermissionAction_canPerformAction:
+			v.CanPerformAction = new(bool)
+			return d.ReadBool(schemas.WhatsAppCallPermissionAction_canPerformAction, v.CanPerformAction)
+		case schemas.WhatsAppCallPermissionAction_limits:
+			return deserializeWhatsAppCallPermissionLimitList(d, schemas.WhatsAppCallPermissionAction_limits, &v.Limits)
+		}
+		return nil
+	})
 }
 
 // A time-bound restriction on a calling action, such as the number of calls
@@ -742,6 +1797,46 @@ type WhatsAppCallPermissionLimit struct {
 	noSmithyDocumentSerde
 }
 
+func (v *WhatsAppCallPermissionLimit) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.WhatsAppCallPermissionLimit)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *WhatsAppCallPermissionLimit) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CurrentUsage != nil {
+		s.WriteInt32(schemas.WhatsAppCallPermissionLimit_currentUsage, *v.CurrentUsage)
+	}
+	if v.LimitExpirationTime != nil {
+		s.WriteTime(schemas.WhatsAppCallPermissionLimit_limitExpirationTime, *v.LimitExpirationTime)
+	}
+	if v.MaxAllowed != nil {
+		s.WriteInt32(schemas.WhatsAppCallPermissionLimit_maxAllowed, *v.MaxAllowed)
+	}
+	if v.TimePeriod != nil {
+		s.WriteString(schemas.WhatsAppCallPermissionLimit_timePeriod, *v.TimePeriod)
+	}
+}
+func (v *WhatsAppCallPermissionLimit) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.WhatsAppCallPermissionLimit, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.WhatsAppCallPermissionLimit_currentUsage:
+			v.CurrentUsage = new(int32)
+			return d.ReadInt32(schemas.WhatsAppCallPermissionLimit_currentUsage, v.CurrentUsage)
+		case schemas.WhatsAppCallPermissionLimit_limitExpirationTime:
+			v.LimitExpirationTime = new(time.Time)
+			return d.ReadTime(schemas.WhatsAppCallPermissionLimit_limitExpirationTime, v.LimitExpirationTime)
+		case schemas.WhatsAppCallPermissionLimit_maxAllowed:
+			v.MaxAllowed = new(int32)
+			return d.ReadInt32(schemas.WhatsAppCallPermissionLimit_maxAllowed, v.MaxAllowed)
+		case schemas.WhatsAppCallPermissionLimit_timePeriod:
+			v.TimePeriod = new(string)
+			return d.ReadString(schemas.WhatsAppCallPermissionLimit_timePeriod, v.TimePeriod)
+		}
+		return nil
+	})
+}
+
 // The calling configuration for a WhatsApp business phone number.
 type WhatsAppCallSettings struct {
 
@@ -760,6 +1855,48 @@ type WhatsAppCallSettings struct {
 	CallbackPermissionStatus *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *WhatsAppCallSettings) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.WhatsAppCallSettings)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *WhatsAppCallSettings) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CallEnabled != nil {
+		s.WriteBool(schemas.WhatsAppCallSettings_callEnabled, *v.CallEnabled)
+	}
+	if v.CallHours != nil {
+		s.WriteStruct(schemas.WhatsAppCallSettings_callHours)
+		v.CallHours.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CallIconVisibility != nil {
+		s.WriteString(schemas.WhatsAppCallSettings_callIconVisibility, *v.CallIconVisibility)
+	}
+	if v.CallbackPermissionStatus != nil {
+		s.WriteString(schemas.WhatsAppCallSettings_callbackPermissionStatus, *v.CallbackPermissionStatus)
+	}
+}
+func (v *WhatsAppCallSettings) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.WhatsAppCallSettings, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.WhatsAppCallSettings_callEnabled:
+			v.CallEnabled = new(bool)
+			return d.ReadBool(schemas.WhatsAppCallSettings_callEnabled, v.CallEnabled)
+		case schemas.WhatsAppCallSettings_callHours:
+			v.CallHours = &WhatsAppCallHours{}
+			return v.CallHours.Deserialize(d)
+		case schemas.WhatsAppCallSettings_callIconVisibility:
+			v.CallIconVisibility = new(string)
+			return d.ReadString(schemas.WhatsAppCallSettings_callIconVisibility, v.CallIconVisibility)
+		case schemas.WhatsAppCallSettings_callbackPermissionStatus:
+			v.CallbackPermissionStatus = new(string)
+			return d.ReadString(schemas.WhatsAppCallSettings_callbackPermissionStatus, v.CallbackPermissionStatus)
+		}
+		return nil
+	})
 }
 
 // A date-specific override to the weekly operating hours, such as a holiday.
@@ -781,6 +1918,44 @@ type WhatsAppHolidayScheduleEntry struct {
 	StartTime *WhatsAppTimeOfDay
 
 	noSmithyDocumentSerde
+}
+
+func (v *WhatsAppHolidayScheduleEntry) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.WhatsAppHolidayScheduleEntry)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *WhatsAppHolidayScheduleEntry) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Date != nil {
+		s.WriteString(schemas.WhatsAppHolidayScheduleEntry_date, *v.Date)
+	}
+	if v.EndTime != nil {
+		s.WriteStruct(schemas.WhatsAppHolidayScheduleEntry_endTime)
+		v.EndTime.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.StartTime != nil {
+		s.WriteStruct(schemas.WhatsAppHolidayScheduleEntry_startTime)
+		v.StartTime.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *WhatsAppHolidayScheduleEntry) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.WhatsAppHolidayScheduleEntry, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.WhatsAppHolidayScheduleEntry_date:
+			v.Date = new(string)
+			return d.ReadString(schemas.WhatsAppHolidayScheduleEntry_date, v.Date)
+		case schemas.WhatsAppHolidayScheduleEntry_endTime:
+			v.EndTime = &WhatsAppTimeOfDay{}
+			return v.EndTime.Deserialize(d)
+		case schemas.WhatsAppHolidayScheduleEntry_startTime:
+			v.StartTime = &WhatsAppTimeOfDay{}
+			return v.StartTime.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // The details of your WhatsApp phone number.
@@ -829,6 +2004,70 @@ type WhatsAppPhoneNumberDetail struct {
 	noSmithyDocumentSerde
 }
 
+func (v *WhatsAppPhoneNumberDetail) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.WhatsAppPhoneNumberDetail)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *WhatsAppPhoneNumberDetail) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.WhatsAppPhoneNumberDetail_arn, *v.Arn)
+	}
+	if v.DataLocalizationRegion != nil {
+		s.WriteString(schemas.WhatsAppPhoneNumberDetail_dataLocalizationRegion, *v.DataLocalizationRegion)
+	}
+	if v.DisplayPhoneNumber != nil {
+		s.WriteString(schemas.WhatsAppPhoneNumberDetail_displayPhoneNumber, *v.DisplayPhoneNumber)
+	}
+	if v.DisplayPhoneNumberName != nil {
+		s.WriteString(schemas.WhatsAppPhoneNumberDetail_displayPhoneNumberName, *v.DisplayPhoneNumberName)
+	}
+	if v.MetaPhoneNumberId != nil {
+		s.WriteString(schemas.WhatsAppPhoneNumberDetail_metaPhoneNumberId, *v.MetaPhoneNumberId)
+	}
+	if v.PhoneNumber != nil {
+		s.WriteString(schemas.WhatsAppPhoneNumberDetail_phoneNumber, *v.PhoneNumber)
+	}
+	if v.PhoneNumberId != nil {
+		s.WriteString(schemas.WhatsAppPhoneNumberDetail_phoneNumberId, *v.PhoneNumberId)
+	}
+	if v.QualityRating != nil {
+		s.WriteString(schemas.WhatsAppPhoneNumberDetail_qualityRating, *v.QualityRating)
+	}
+}
+func (v *WhatsAppPhoneNumberDetail) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.WhatsAppPhoneNumberDetail, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.WhatsAppPhoneNumberDetail_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.WhatsAppPhoneNumberDetail_arn, v.Arn)
+		case schemas.WhatsAppPhoneNumberDetail_dataLocalizationRegion:
+			v.DataLocalizationRegion = new(string)
+			return d.ReadString(schemas.WhatsAppPhoneNumberDetail_dataLocalizationRegion, v.DataLocalizationRegion)
+		case schemas.WhatsAppPhoneNumberDetail_displayPhoneNumber:
+			v.DisplayPhoneNumber = new(string)
+			return d.ReadString(schemas.WhatsAppPhoneNumberDetail_displayPhoneNumber, v.DisplayPhoneNumber)
+		case schemas.WhatsAppPhoneNumberDetail_displayPhoneNumberName:
+			v.DisplayPhoneNumberName = new(string)
+			return d.ReadString(schemas.WhatsAppPhoneNumberDetail_displayPhoneNumberName, v.DisplayPhoneNumberName)
+		case schemas.WhatsAppPhoneNumberDetail_metaPhoneNumberId:
+			v.MetaPhoneNumberId = new(string)
+			return d.ReadString(schemas.WhatsAppPhoneNumberDetail_metaPhoneNumberId, v.MetaPhoneNumberId)
+		case schemas.WhatsAppPhoneNumberDetail_phoneNumber:
+			v.PhoneNumber = new(string)
+			return d.ReadString(schemas.WhatsAppPhoneNumberDetail_phoneNumber, v.PhoneNumber)
+		case schemas.WhatsAppPhoneNumberDetail_phoneNumberId:
+			v.PhoneNumberId = new(string)
+			return d.ReadString(schemas.WhatsAppPhoneNumberDetail_phoneNumberId, v.PhoneNumberId)
+		case schemas.WhatsAppPhoneNumberDetail_qualityRating:
+			v.QualityRating = new(string)
+			return d.ReadString(schemas.WhatsAppPhoneNumberDetail_qualityRating, v.QualityRating)
+		}
+		return nil
+	})
+}
+
 // The details of a linked phone number.
 type WhatsAppPhoneNumberSummary struct {
 
@@ -875,6 +2114,70 @@ type WhatsAppPhoneNumberSummary struct {
 	noSmithyDocumentSerde
 }
 
+func (v *WhatsAppPhoneNumberSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.WhatsAppPhoneNumberSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *WhatsAppPhoneNumberSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.WhatsAppPhoneNumberSummary_arn, *v.Arn)
+	}
+	if v.DataLocalizationRegion != nil {
+		s.WriteString(schemas.WhatsAppPhoneNumberSummary_dataLocalizationRegion, *v.DataLocalizationRegion)
+	}
+	if v.DisplayPhoneNumber != nil {
+		s.WriteString(schemas.WhatsAppPhoneNumberSummary_displayPhoneNumber, *v.DisplayPhoneNumber)
+	}
+	if v.DisplayPhoneNumberName != nil {
+		s.WriteString(schemas.WhatsAppPhoneNumberSummary_displayPhoneNumberName, *v.DisplayPhoneNumberName)
+	}
+	if v.MetaPhoneNumberId != nil {
+		s.WriteString(schemas.WhatsAppPhoneNumberSummary_metaPhoneNumberId, *v.MetaPhoneNumberId)
+	}
+	if v.PhoneNumber != nil {
+		s.WriteString(schemas.WhatsAppPhoneNumberSummary_phoneNumber, *v.PhoneNumber)
+	}
+	if v.PhoneNumberId != nil {
+		s.WriteString(schemas.WhatsAppPhoneNumberSummary_phoneNumberId, *v.PhoneNumberId)
+	}
+	if v.QualityRating != nil {
+		s.WriteString(schemas.WhatsAppPhoneNumberSummary_qualityRating, *v.QualityRating)
+	}
+}
+func (v *WhatsAppPhoneNumberSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.WhatsAppPhoneNumberSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.WhatsAppPhoneNumberSummary_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.WhatsAppPhoneNumberSummary_arn, v.Arn)
+		case schemas.WhatsAppPhoneNumberSummary_dataLocalizationRegion:
+			v.DataLocalizationRegion = new(string)
+			return d.ReadString(schemas.WhatsAppPhoneNumberSummary_dataLocalizationRegion, v.DataLocalizationRegion)
+		case schemas.WhatsAppPhoneNumberSummary_displayPhoneNumber:
+			v.DisplayPhoneNumber = new(string)
+			return d.ReadString(schemas.WhatsAppPhoneNumberSummary_displayPhoneNumber, v.DisplayPhoneNumber)
+		case schemas.WhatsAppPhoneNumberSummary_displayPhoneNumberName:
+			v.DisplayPhoneNumberName = new(string)
+			return d.ReadString(schemas.WhatsAppPhoneNumberSummary_displayPhoneNumberName, v.DisplayPhoneNumberName)
+		case schemas.WhatsAppPhoneNumberSummary_metaPhoneNumberId:
+			v.MetaPhoneNumberId = new(string)
+			return d.ReadString(schemas.WhatsAppPhoneNumberSummary_metaPhoneNumberId, v.MetaPhoneNumberId)
+		case schemas.WhatsAppPhoneNumberSummary_phoneNumber:
+			v.PhoneNumber = new(string)
+			return d.ReadString(schemas.WhatsAppPhoneNumberSummary_phoneNumber, v.PhoneNumber)
+		case schemas.WhatsAppPhoneNumberSummary_phoneNumberId:
+			v.PhoneNumberId = new(string)
+			return d.ReadString(schemas.WhatsAppPhoneNumberSummary_phoneNumberId, v.PhoneNumberId)
+		case schemas.WhatsAppPhoneNumberSummary_qualityRating:
+			v.QualityRating = new(string)
+			return d.ReadString(schemas.WhatsAppPhoneNumberSummary_qualityRating, v.QualityRating)
+		}
+		return nil
+	})
+}
+
 // The details of linking a WhatsApp Business Account to your Amazon Web Services
 // account.
 type WhatsAppSetupFinalization struct {
@@ -902,6 +2205,45 @@ type WhatsAppSetupFinalization struct {
 	noSmithyDocumentSerde
 }
 
+func (v *WhatsAppSetupFinalization) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.WhatsAppSetupFinalization)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *WhatsAppSetupFinalization) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AssociateInProgressToken != nil {
+		s.WriteString(schemas.WhatsAppSetupFinalization_associateInProgressToken, *v.AssociateInProgressToken)
+	}
+	if v.PhoneNumberParent != nil {
+		s.WriteString(schemas.WhatsAppSetupFinalization_phoneNumberParent, *v.PhoneNumberParent)
+	}
+	serializeWabaPhoneNumberSetupFinalizationList(s, schemas.WhatsAppSetupFinalization_phoneNumbers, v.PhoneNumbers)
+	if v.Waba != nil {
+		s.WriteStruct(schemas.WhatsAppSetupFinalization_waba)
+		v.Waba.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *WhatsAppSetupFinalization) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.WhatsAppSetupFinalization, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.WhatsAppSetupFinalization_associateInProgressToken:
+			v.AssociateInProgressToken = new(string)
+			return d.ReadString(schemas.WhatsAppSetupFinalization_associateInProgressToken, v.AssociateInProgressToken)
+		case schemas.WhatsAppSetupFinalization_phoneNumberParent:
+			v.PhoneNumberParent = new(string)
+			return d.ReadString(schemas.WhatsAppSetupFinalization_phoneNumberParent, v.PhoneNumberParent)
+		case schemas.WhatsAppSetupFinalization_phoneNumbers:
+			return deserializeWabaPhoneNumberSetupFinalizationList(d, schemas.WhatsAppSetupFinalization_phoneNumbers, &v.PhoneNumbers)
+		case schemas.WhatsAppSetupFinalization_waba:
+			v.Waba = &WabaSetupFinalization{}
+			return v.Waba.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Contains the accessToken provided by Meta during signup.
 type WhatsAppSignupCallback struct {
 
@@ -915,6 +2257,34 @@ type WhatsAppSignupCallback struct {
 	CallbackUrl *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *WhatsAppSignupCallback) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.WhatsAppSignupCallback)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *WhatsAppSignupCallback) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccessToken != nil {
+		s.WriteString(schemas.WhatsAppSignupCallback_accessToken, *v.AccessToken)
+	}
+	if v.CallbackUrl != nil {
+		s.WriteString(schemas.WhatsAppSignupCallback_callbackUrl, *v.CallbackUrl)
+	}
+}
+func (v *WhatsAppSignupCallback) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.WhatsAppSignupCallback, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.WhatsAppSignupCallback_accessToken:
+			v.AccessToken = new(string)
+			return d.ReadString(schemas.WhatsAppSignupCallback_accessToken, v.AccessToken)
+		case schemas.WhatsAppSignupCallback_callbackUrl:
+			v.CallbackUrl = new(string)
+			return d.ReadString(schemas.WhatsAppSignupCallback_callbackUrl, v.CallbackUrl)
+		}
+		return nil
+	})
 }
 
 // Contains the results of WhatsAppSignupCallback.
@@ -931,6 +2301,31 @@ type WhatsAppSignupCallbackResult struct {
 	noSmithyDocumentSerde
 }
 
+func (v *WhatsAppSignupCallbackResult) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.WhatsAppSignupCallbackResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *WhatsAppSignupCallbackResult) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AssociateInProgressToken != nil {
+		s.WriteString(schemas.WhatsAppSignupCallbackResult_associateInProgressToken, *v.AssociateInProgressToken)
+	}
+	serializeLinkedAccountWithIncompleteSetup(s, schemas.WhatsAppSignupCallbackResult_linkedAccountsWithIncompleteSetup, v.LinkedAccountsWithIncompleteSetup)
+}
+func (v *WhatsAppSignupCallbackResult) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.WhatsAppSignupCallbackResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.WhatsAppSignupCallbackResult_associateInProgressToken:
+			v.AssociateInProgressToken = new(string)
+			return d.ReadString(schemas.WhatsAppSignupCallbackResult_associateInProgressToken, v.AssociateInProgressToken)
+		case schemas.WhatsAppSignupCallbackResult_linkedAccountsWithIncompleteSetup:
+			return deserializeLinkedAccountWithIncompleteSetup(d, schemas.WhatsAppSignupCallbackResult_linkedAccountsWithIncompleteSetup, &v.LinkedAccountsWithIncompleteSetup)
+		}
+		return nil
+	})
+}
+
 // A time of day, expressed as an hour and minute.
 type WhatsAppTimeOfDay struct {
 
@@ -945,6 +2340,34 @@ type WhatsAppTimeOfDay struct {
 	Minutes *int32
 
 	noSmithyDocumentSerde
+}
+
+func (v *WhatsAppTimeOfDay) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.WhatsAppTimeOfDay)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *WhatsAppTimeOfDay) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Hours != nil {
+		s.WriteInt32(schemas.WhatsAppTimeOfDay_hours, *v.Hours)
+	}
+	if v.Minutes != nil {
+		s.WriteInt32(schemas.WhatsAppTimeOfDay_minutes, *v.Minutes)
+	}
+}
+func (v *WhatsAppTimeOfDay) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.WhatsAppTimeOfDay, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.WhatsAppTimeOfDay_hours:
+			v.Hours = new(int32)
+			return d.ReadInt32(schemas.WhatsAppTimeOfDay_hours, v.Hours)
+		case schemas.WhatsAppTimeOfDay_minutes:
+			v.Minutes = new(int32)
+			return d.ReadInt32(schemas.WhatsAppTimeOfDay_minutes, v.Minutes)
+		}
+		return nil
+	})
 }
 
 // A single entry in a weekly calling schedule, defining the open and close times
@@ -967,6 +2390,48 @@ type WhatsAppWeeklyOperatingHoursEntry struct {
 	OpenTime *WhatsAppTimeOfDay
 
 	noSmithyDocumentSerde
+}
+
+func (v *WhatsAppWeeklyOperatingHoursEntry) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.WhatsAppWeeklyOperatingHoursEntry)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *WhatsAppWeeklyOperatingHoursEntry) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CloseTime != nil {
+		s.WriteStruct(schemas.WhatsAppWeeklyOperatingHoursEntry_closeTime)
+		v.CloseTime.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DayOfWeek != "" {
+		s.WriteString(schemas.WhatsAppWeeklyOperatingHoursEntry_dayOfWeek, string(v.DayOfWeek))
+	}
+	if v.OpenTime != nil {
+		s.WriteStruct(schemas.WhatsAppWeeklyOperatingHoursEntry_openTime)
+		v.OpenTime.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *WhatsAppWeeklyOperatingHoursEntry) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.WhatsAppWeeklyOperatingHoursEntry, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.WhatsAppWeeklyOperatingHoursEntry_closeTime:
+			v.CloseTime = &WhatsAppTimeOfDay{}
+			return v.CloseTime.Deserialize(d)
+		case schemas.WhatsAppWeeklyOperatingHoursEntry_dayOfWeek:
+			var ev string
+			if err := d.ReadString(schemas.WhatsAppWeeklyOperatingHoursEntry_dayOfWeek, &ev); err != nil {
+				return err
+			}
+			v.DayOfWeek = WhatsAppDayOfWeek(ev)
+			return nil
+		case schemas.WhatsAppWeeklyOperatingHoursEntry_openTime:
+			v.OpenTime = &WhatsAppTimeOfDay{}
+			return v.OpenTime.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde

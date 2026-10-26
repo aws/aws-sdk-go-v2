@@ -4,7 +4,9 @@ package securityagent
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/securityagent/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/securityagent/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -33,6 +35,18 @@ type GetSecurityRequirementPackInput struct {
 	PackId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetSecurityRequirementPackInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetSecurityRequirementPackInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetSecurityRequirementPackInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PackId != nil {
+		s.WriteString(schemas.GetSecurityRequirementPackInput_packId, *v.PackId)
+	}
 }
 
 type GetSecurityRequirementPackOutput struct {
@@ -86,13 +100,98 @@ type GetSecurityRequirementPackOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetSecurityRequirementPackOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetSecurityRequirementPackOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetSecurityRequirementPackOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.GetSecurityRequirementPackOutput_createdAt, *v.CreatedAt)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.GetSecurityRequirementPackOutput_description, *v.Description)
+	}
+	if v.ImportStatus != "" {
+		s.WriteString(schemas.GetSecurityRequirementPackOutput_importStatus, string(v.ImportStatus))
+	}
+	if v.KmsKeyId != nil {
+		s.WriteString(schemas.GetSecurityRequirementPackOutput_kmsKeyId, *v.KmsKeyId)
+	}
+	if v.ManagementType != "" {
+		s.WriteString(schemas.GetSecurityRequirementPackOutput_managementType, string(v.ManagementType))
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.GetSecurityRequirementPackOutput_name, *v.Name)
+	}
+	if v.PackId != nil {
+		s.WriteString(schemas.GetSecurityRequirementPackOutput_packId, *v.PackId)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.GetSecurityRequirementPackOutput_status, string(v.Status))
+	}
+	if v.UpdatedAt != nil {
+		s.WriteTime(schemas.GetSecurityRequirementPackOutput_updatedAt, *v.UpdatedAt)
+	}
+	if v.VendorName != nil {
+		s.WriteString(schemas.GetSecurityRequirementPackOutput_vendorName, *v.VendorName)
+	}
+}
+func (v *GetSecurityRequirementPackOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetSecurityRequirementPackOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetSecurityRequirementPackOutput_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.GetSecurityRequirementPackOutput_createdAt, v.CreatedAt)
+		case schemas.GetSecurityRequirementPackOutput_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.GetSecurityRequirementPackOutput_description, v.Description)
+		case schemas.GetSecurityRequirementPackOutput_importStatus:
+			var ev string
+			if err := d.ReadString(schemas.GetSecurityRequirementPackOutput_importStatus, &ev); err != nil {
+				return err
+			}
+			v.ImportStatus = types.SecurityRequirementPackImportStatus(ev)
+			return nil
+		case schemas.GetSecurityRequirementPackOutput_kmsKeyId:
+			v.KmsKeyId = new(string)
+			return d.ReadString(schemas.GetSecurityRequirementPackOutput_kmsKeyId, v.KmsKeyId)
+		case schemas.GetSecurityRequirementPackOutput_managementType:
+			var ev string
+			if err := d.ReadString(schemas.GetSecurityRequirementPackOutput_managementType, &ev); err != nil {
+				return err
+			}
+			v.ManagementType = types.ManagementType(ev)
+			return nil
+		case schemas.GetSecurityRequirementPackOutput_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.GetSecurityRequirementPackOutput_name, v.Name)
+		case schemas.GetSecurityRequirementPackOutput_packId:
+			v.PackId = new(string)
+			return d.ReadString(schemas.GetSecurityRequirementPackOutput_packId, v.PackId)
+		case schemas.GetSecurityRequirementPackOutput_status:
+			var ev string
+			if err := d.ReadString(schemas.GetSecurityRequirementPackOutput_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.SecurityRequirementPackStatus(ev)
+			return nil
+		case schemas.GetSecurityRequirementPackOutput_updatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.GetSecurityRequirementPackOutput_updatedAt, v.UpdatedAt)
+		case schemas.GetSecurityRequirementPackOutput_vendorName:
+			v.VendorName = new(string)
+			return d.ReadString(schemas.GetSecurityRequirementPackOutput_vendorName, v.VendorName)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetSecurityRequirementPackMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetSecurityRequirementPack{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetSecurityRequirementPack, schemas.GetSecurityRequirementPackInput, schemas.GetSecurityRequirementPackOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetSecurityRequirementPack{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetSecurityRequirementPack, schemas.GetSecurityRequirementPackInput, schemas.GetSecurityRequirementPackOutput), output: &GetSecurityRequirementPackOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

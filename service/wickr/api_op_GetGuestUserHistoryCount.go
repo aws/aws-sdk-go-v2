@@ -4,7 +4,9 @@ package wickr
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/wickr/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/wickr/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -35,6 +37,18 @@ type GetGuestUserHistoryCountInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetGuestUserHistoryCountInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetGuestUserHistoryCountRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetGuestUserHistoryCountInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NetworkId != nil {
+		s.WriteString(schemas.GetGuestUserHistoryCountRequest_networkId, *v.NetworkId)
+	}
+}
+
 type GetGuestUserHistoryCountOutput struct {
 
 	// A list of historical guest user counts, organized by month and billing period.
@@ -48,13 +62,29 @@ type GetGuestUserHistoryCountOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetGuestUserHistoryCountOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetGuestUserHistoryCountResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetGuestUserHistoryCountOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeGuestUserHistoryCountList(s, schemas.GetGuestUserHistoryCountResponse_history, v.History)
+}
+func (v *GetGuestUserHistoryCountOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetGuestUserHistoryCountResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetGuestUserHistoryCountResponse_history:
+			return deserializeGuestUserHistoryCountList(d, schemas.GetGuestUserHistoryCountResponse_history, &v.History)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetGuestUserHistoryCountMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetGuestUserHistoryCount{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetGuestUserHistoryCount, schemas.GetGuestUserHistoryCountRequest, schemas.GetGuestUserHistoryCountResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetGuestUserHistoryCount{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetGuestUserHistoryCount, schemas.GetGuestUserHistoryCountRequest, schemas.GetGuestUserHistoryCountResponse), output: &GetGuestUserHistoryCountOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

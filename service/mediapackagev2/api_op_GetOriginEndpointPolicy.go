@@ -4,7 +4,9 @@ package mediapackagev2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/mediapackagev2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/mediapackagev2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -50,6 +52,24 @@ type GetOriginEndpointPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetOriginEndpointPolicyInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetOriginEndpointPolicyRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetOriginEndpointPolicyInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ChannelGroupName != nil {
+		s.WriteString(schemas.GetOriginEndpointPolicyRequest_ChannelGroupName, *v.ChannelGroupName)
+	}
+	if v.ChannelName != nil {
+		s.WriteString(schemas.GetOriginEndpointPolicyRequest_ChannelName, *v.ChannelName)
+	}
+	if v.OriginEndpointName != nil {
+		s.WriteString(schemas.GetOriginEndpointPolicyRequest_OriginEndpointName, *v.OriginEndpointName)
+	}
+}
+
 type GetOriginEndpointPolicyOutput struct {
 
 	// The name that describes the channel group. The name is the primary identifier
@@ -91,13 +111,58 @@ type GetOriginEndpointPolicyOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetOriginEndpointPolicyOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetOriginEndpointPolicyResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetOriginEndpointPolicyOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CdnAuthConfiguration != nil {
+		s.WriteStruct(schemas.GetOriginEndpointPolicyResponse_CdnAuthConfiguration)
+		v.CdnAuthConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ChannelGroupName != nil {
+		s.WriteString(schemas.GetOriginEndpointPolicyResponse_ChannelGroupName, *v.ChannelGroupName)
+	}
+	if v.ChannelName != nil {
+		s.WriteString(schemas.GetOriginEndpointPolicyResponse_ChannelName, *v.ChannelName)
+	}
+	if v.OriginEndpointName != nil {
+		s.WriteString(schemas.GetOriginEndpointPolicyResponse_OriginEndpointName, *v.OriginEndpointName)
+	}
+	if v.Policy != nil {
+		s.WriteString(schemas.GetOriginEndpointPolicyResponse_Policy, *v.Policy)
+	}
+}
+func (v *GetOriginEndpointPolicyOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetOriginEndpointPolicyResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetOriginEndpointPolicyResponse_CdnAuthConfiguration:
+			v.CdnAuthConfiguration = &types.CdnAuthConfiguration{}
+			return v.CdnAuthConfiguration.Deserialize(d)
+		case schemas.GetOriginEndpointPolicyResponse_ChannelGroupName:
+			v.ChannelGroupName = new(string)
+			return d.ReadString(schemas.GetOriginEndpointPolicyResponse_ChannelGroupName, v.ChannelGroupName)
+		case schemas.GetOriginEndpointPolicyResponse_ChannelName:
+			v.ChannelName = new(string)
+			return d.ReadString(schemas.GetOriginEndpointPolicyResponse_ChannelName, v.ChannelName)
+		case schemas.GetOriginEndpointPolicyResponse_OriginEndpointName:
+			v.OriginEndpointName = new(string)
+			return d.ReadString(schemas.GetOriginEndpointPolicyResponse_OriginEndpointName, v.OriginEndpointName)
+		case schemas.GetOriginEndpointPolicyResponse_Policy:
+			v.Policy = new(string)
+			return d.ReadString(schemas.GetOriginEndpointPolicyResponse_Policy, v.Policy)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetOriginEndpointPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetOriginEndpointPolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetOriginEndpointPolicy, schemas.GetOriginEndpointPolicyRequest, schemas.GetOriginEndpointPolicyResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetOriginEndpointPolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetOriginEndpointPolicy, schemas.GetOriginEndpointPolicyRequest, schemas.GetOriginEndpointPolicyResponse), output: &GetOriginEndpointPolicyOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package sagemakerruntime
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/sagemakerruntime/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemakerruntime/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithysync "github.com/aws/smithy-go/sync"
 	"sync"
@@ -142,6 +144,48 @@ type InvokeEndpointWithResponseStreamInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *InvokeEndpointWithResponseStreamInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InvokeEndpointWithResponseStreamInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InvokeEndpointWithResponseStreamInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Accept != nil {
+		s.WriteString(schemas.InvokeEndpointWithResponseStreamInput_Accept, *v.Accept)
+	}
+	if v.Body != nil {
+		s.WriteBlob(schemas.InvokeEndpointWithResponseStreamInput_Body, v.Body)
+	}
+	if v.ContentType != nil {
+		s.WriteString(schemas.InvokeEndpointWithResponseStreamInput_ContentType, *v.ContentType)
+	}
+	if v.CustomAttributes != nil {
+		s.WriteString(schemas.InvokeEndpointWithResponseStreamInput_CustomAttributes, *v.CustomAttributes)
+	}
+	if v.EndpointName != nil {
+		s.WriteString(schemas.InvokeEndpointWithResponseStreamInput_EndpointName, *v.EndpointName)
+	}
+	if v.InferenceComponentName != nil {
+		s.WriteString(schemas.InvokeEndpointWithResponseStreamInput_InferenceComponentName, *v.InferenceComponentName)
+	}
+	if v.InferenceId != nil {
+		s.WriteString(schemas.InvokeEndpointWithResponseStreamInput_InferenceId, *v.InferenceId)
+	}
+	if v.PrefixAwareId != nil {
+		s.WriteString(schemas.InvokeEndpointWithResponseStreamInput_PrefixAwareId, *v.PrefixAwareId)
+	}
+	if v.SessionId != nil {
+		s.WriteString(schemas.InvokeEndpointWithResponseStreamInput_SessionId, *v.SessionId)
+	}
+	if v.TargetContainerHostname != nil {
+		s.WriteString(schemas.InvokeEndpointWithResponseStreamInput_TargetContainerHostname, *v.TargetContainerHostname)
+	}
+	if v.TargetVariant != nil {
+		s.WriteString(schemas.InvokeEndpointWithResponseStreamInput_TargetVariant, *v.TargetVariant)
+	}
+}
+
 type InvokeEndpointWithResponseStreamOutput struct {
 
 	// The MIME type of the inference returned from the model container.
@@ -180,24 +224,56 @@ type InvokeEndpointWithResponseStreamOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *InvokeEndpointWithResponseStreamOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InvokeEndpointWithResponseStreamOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InvokeEndpointWithResponseStreamOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ContentType != nil {
+		s.WriteString(schemas.InvokeEndpointWithResponseStreamOutput_ContentType, *v.ContentType)
+	}
+	if v.CustomAttributes != nil {
+		s.WriteString(schemas.InvokeEndpointWithResponseStreamOutput_CustomAttributes, *v.CustomAttributes)
+	}
+	if v.InvokedProductionVariant != nil {
+		s.WriteString(schemas.InvokeEndpointWithResponseStreamOutput_InvokedProductionVariant, *v.InvokedProductionVariant)
+	}
+}
+func (v *InvokeEndpointWithResponseStreamOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InvokeEndpointWithResponseStreamOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InvokeEndpointWithResponseStreamOutput_ContentType:
+			v.ContentType = new(string)
+			return d.ReadString(schemas.InvokeEndpointWithResponseStreamOutput_ContentType, v.ContentType)
+		case schemas.InvokeEndpointWithResponseStreamOutput_CustomAttributes:
+			v.CustomAttributes = new(string)
+			return d.ReadString(schemas.InvokeEndpointWithResponseStreamOutput_CustomAttributes, v.CustomAttributes)
+		case schemas.InvokeEndpointWithResponseStreamOutput_InvokedProductionVariant:
+			v.InvokedProductionVariant = new(string)
+			return d.ReadString(schemas.InvokeEndpointWithResponseStreamOutput_InvokedProductionVariant, v.InvokedProductionVariant)
+		}
+		return nil
+	})
+}
+
 // GetStream returns the type to interact with the event stream.
 func (o *InvokeEndpointWithResponseStreamOutput) GetStream() *InvokeEndpointWithResponseStreamEventStream {
 	return o.eventStream
 }
 
 func (c *Client) addOperationInvokeEndpointWithResponseStreamMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpInvokeEndpointWithResponseStream{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.InvokeEndpointWithResponseStream, schemas.InvokeEndpointWithResponseStreamInput, schemas.InvokeEndpointWithResponseStreamOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpInvokeEndpointWithResponseStream{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.InvokeEndpointWithResponseStream, schemas.InvokeEndpointWithResponseStreamInput, schemas.InvokeEndpointWithResponseStreamOutput), output: &InvokeEndpointWithResponseStreamOutput{}}, middleware.After); err != nil {
+		return err
+	}
+	if err := stack.Deserialize.Insert(&deserializeOpEventStreamInvokeEndpointWithResponseStream{options: &options}, "OperationDeserializer", middleware.Before); err != nil {
 		return err
 	}
 
-	if err = addEventStreamInvokeEndpointWithResponseStreamMiddleware(stack, options); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}

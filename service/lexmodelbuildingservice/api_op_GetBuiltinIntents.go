@@ -5,7 +5,9 @@ package lexmodelbuildingservice
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/lexmodelbuildingservice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lexmodelbuildingservice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -53,6 +55,27 @@ type GetBuiltinIntentsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetBuiltinIntentsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetBuiltinIntentsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetBuiltinIntentsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Locale != "" {
+		s.WriteString(schemas.GetBuiltinIntentsRequest_locale, string(v.Locale))
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.GetBuiltinIntentsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetBuiltinIntentsRequest_nextToken, *v.NextToken)
+	}
+	if v.SignatureContains != nil {
+		s.WriteString(schemas.GetBuiltinIntentsRequest_signatureContains, *v.SignatureContains)
+	}
+}
+
 type GetBuiltinIntentsOutput struct {
 
 	// An array of builtinIntentMetadata objects, one for each intent in the response.
@@ -70,13 +93,35 @@ type GetBuiltinIntentsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetBuiltinIntentsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetBuiltinIntentsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetBuiltinIntentsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeBuiltinIntentMetadataList(s, schemas.GetBuiltinIntentsResponse_intents, v.Intents)
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetBuiltinIntentsResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *GetBuiltinIntentsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetBuiltinIntentsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetBuiltinIntentsResponse_intents:
+			return deserializeBuiltinIntentMetadataList(d, schemas.GetBuiltinIntentsResponse_intents, &v.Intents)
+		case schemas.GetBuiltinIntentsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.GetBuiltinIntentsResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetBuiltinIntentsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetBuiltinIntents{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetBuiltinIntents, schemas.GetBuiltinIntentsRequest, schemas.GetBuiltinIntentsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetBuiltinIntents{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetBuiltinIntents, schemas.GetBuiltinIntentsRequest, schemas.GetBuiltinIntentsResponse), output: &GetBuiltinIntentsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package securityagent
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/securityagent/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/securityagent/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -33,6 +35,18 @@ type DeletePrivateConnectionInput struct {
 	PrivateConnectionName *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DeletePrivateConnectionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeletePrivateConnectionInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeletePrivateConnectionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PrivateConnectionName != nil {
+		s.WriteString(schemas.DeletePrivateConnectionInput_privateConnectionName, *v.PrivateConnectionName)
+	}
 }
 
 type DeletePrivateConnectionOutput struct {
@@ -84,13 +98,101 @@ type DeletePrivateConnectionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeletePrivateConnectionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeletePrivateConnectionOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeletePrivateConnectionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CertificateExpiryTime != nil {
+		s.WriteTime(schemas.DeletePrivateConnectionOutput_certificateExpiryTime, *v.CertificateExpiryTime)
+	}
+	if v.DnsResolution != "" {
+		s.WriteString(schemas.DeletePrivateConnectionOutput_dnsResolution, string(v.DnsResolution))
+	}
+	if v.FailureMessage != nil {
+		s.WriteString(schemas.DeletePrivateConnectionOutput_failureMessage, *v.FailureMessage)
+	}
+	if v.HostAddress != nil {
+		s.WriteString(schemas.DeletePrivateConnectionOutput_hostAddress, *v.HostAddress)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.DeletePrivateConnectionOutput_name, *v.Name)
+	}
+	if v.ResourceConfigurationId != nil {
+		s.WriteString(schemas.DeletePrivateConnectionOutput_resourceConfigurationId, *v.ResourceConfigurationId)
+	}
+	if v.ResourceGatewayId != nil {
+		s.WriteString(schemas.DeletePrivateConnectionOutput_resourceGatewayId, *v.ResourceGatewayId)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.DeletePrivateConnectionOutput_status, string(v.Status))
+	}
+	serializeTagMap(s, schemas.DeletePrivateConnectionOutput_tags, v.Tags)
+	if v.Type != "" {
+		s.WriteString(schemas.DeletePrivateConnectionOutput_type, string(v.Type))
+	}
+	if v.VpcId != nil {
+		s.WriteString(schemas.DeletePrivateConnectionOutput_vpcId, *v.VpcId)
+	}
+}
+func (v *DeletePrivateConnectionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeletePrivateConnectionOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeletePrivateConnectionOutput_certificateExpiryTime:
+			v.CertificateExpiryTime = new(time.Time)
+			return d.ReadTime(schemas.DeletePrivateConnectionOutput_certificateExpiryTime, v.CertificateExpiryTime)
+		case schemas.DeletePrivateConnectionOutput_dnsResolution:
+			var ev string
+			if err := d.ReadString(schemas.DeletePrivateConnectionOutput_dnsResolution, &ev); err != nil {
+				return err
+			}
+			v.DnsResolution = types.ResourceConfigDnsResolution(ev)
+			return nil
+		case schemas.DeletePrivateConnectionOutput_failureMessage:
+			v.FailureMessage = new(string)
+			return d.ReadString(schemas.DeletePrivateConnectionOutput_failureMessage, v.FailureMessage)
+		case schemas.DeletePrivateConnectionOutput_hostAddress:
+			v.HostAddress = new(string)
+			return d.ReadString(schemas.DeletePrivateConnectionOutput_hostAddress, v.HostAddress)
+		case schemas.DeletePrivateConnectionOutput_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.DeletePrivateConnectionOutput_name, v.Name)
+		case schemas.DeletePrivateConnectionOutput_resourceConfigurationId:
+			v.ResourceConfigurationId = new(string)
+			return d.ReadString(schemas.DeletePrivateConnectionOutput_resourceConfigurationId, v.ResourceConfigurationId)
+		case schemas.DeletePrivateConnectionOutput_resourceGatewayId:
+			v.ResourceGatewayId = new(string)
+			return d.ReadString(schemas.DeletePrivateConnectionOutput_resourceGatewayId, v.ResourceGatewayId)
+		case schemas.DeletePrivateConnectionOutput_status:
+			var ev string
+			if err := d.ReadString(schemas.DeletePrivateConnectionOutput_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.PrivateConnectionStatus(ev)
+			return nil
+		case schemas.DeletePrivateConnectionOutput_tags:
+			return deserializeTagMap(d, schemas.DeletePrivateConnectionOutput_tags, &v.Tags)
+		case schemas.DeletePrivateConnectionOutput_type:
+			var ev string
+			if err := d.ReadString(schemas.DeletePrivateConnectionOutput_type, &ev); err != nil {
+				return err
+			}
+			v.Type = types.PrivateConnectionType(ev)
+			return nil
+		case schemas.DeletePrivateConnectionOutput_vpcId:
+			v.VpcId = new(string)
+			return d.ReadString(schemas.DeletePrivateConnectionOutput_vpcId, v.VpcId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeletePrivateConnectionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeletePrivateConnection{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeletePrivateConnection, schemas.DeletePrivateConnectionInput, schemas.DeletePrivateConnectionOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeletePrivateConnection{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeletePrivateConnection, schemas.DeletePrivateConnectionInput, schemas.DeletePrivateConnectionOutput), output: &DeletePrivateConnectionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 
