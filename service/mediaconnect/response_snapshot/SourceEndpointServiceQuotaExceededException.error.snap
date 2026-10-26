@@ -1,0 +1,4 @@
+420
+Content-Type: application/json
+
+{"__type":"SourceEndpointServiceQuotaExceededException","message":"__Message__"}

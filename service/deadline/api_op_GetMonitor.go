@@ -51,8 +51,6 @@ func (v *GetMonitorInput) SerializeMembers(s smithy.ShapeSerializer) {
 	}
 }
 
-// Mixin that adds an optional ARN field to response structures. Apply to
-// SummaryMixins (flows into Get, Summary, and BatchGet) and Create outputs.
 type GetMonitorOutput struct {
 
 	// The UNIX timestamp of the date and time that the monitor was created.

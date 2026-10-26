@@ -88,6 +88,21 @@ type UpdateDistributionInput struct {
 	// Lightsail bucket. If the origin is another resource type, the request fails.
 	EnablePrivateOriginAccess *bool
 
+	// Specifies whether to enable Web Application Firewall (WAF) for the
+	// distribution. WAF inspects viewer requests and blocks requests that match the
+	// WAF rule groups that you enable.
+	//
+	// When you enable WAF without specifying the wafRules parameter, the distribution
+	// has no WAF rule groups enabled and doesn't block any requests.
+	//
+	// WAF is available only for distributions that use the medium_1_0 or large_1_0
+	// bundle.
+	//
+	// Setting this parameter to false disables WAF for the distribution and removes
+	// its WAF rule groups. You must enable the WAF rule groups again if you enable WAF
+	// again.
+	EnableWaf *bool
+
 	// Indicates whether to enable the distribution.
 	IsEnabled *bool
 
@@ -107,6 +122,31 @@ type UpdateDistributionInput struct {
 	// Use this parameter to update the minimum TLS protocol version for the SSL/TLS
 	// certificate that's attached to the distribution.
 	ViewerMinimumTlsProtocolVersion types.ViewerMinimumTlsProtocolVersionEnum
+
+	// An array of objects that describe the WAF rule groups to enable for the
+	// distribution.
+	//
+	// The array that you specify replaces the existing WAF rule groups of the
+	// distribution. To keep a WAF rule group enabled, include it in the array. To
+	// disable all WAF rule groups, specify an empty array.
+	//
+	// You can specify this parameter only when WAF is enabled for the distribution.
+	//
+	// The WAF rule groups that you can specify depend on the bundle of the
+	// distribution:
+	//
+	//   - medium_1_0 – Supports the AWSManagedRulesCommonRuleSet ,
+	//   AWSManagedRulesKnownBadInputsRuleSet , and AWSManagedRulesAnonymousIpList rule
+	//   groups.
+	//
+	//   - large_1_0 – Supports the rule groups for medium_1_0 , plus
+	//   AWSManagedRulesAdminProtectionRuleSet , AWSManagedRulesSQLiRuleSet ,
+	//   AWSManagedRulesLinuxRuleSet , AWSManagedRulesUnixRuleSet ,
+	//   AWSManagedRulesWindowsRuleSet , AWSManagedRulesPHPRuleSet ,
+	//   AWSManagedRulesWordPressRuleSet , AWSManagedRulesAmazonIpReputationList ,
+	//   AWSManagedRulesATPRuleSet , AWSManagedRulesACFPRuleSet , and
+	//   AWSManagedRulesBotControlRuleSet rule groups.
+	WafRules []types.WafRule
 
 	noSmithyDocumentSerde
 }
@@ -142,6 +182,9 @@ func (v *UpdateDistributionInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.EnablePrivateOriginAccess != nil {
 		s.WriteBool(schemas.UpdateDistributionRequest_enablePrivateOriginAccess, *v.EnablePrivateOriginAccess)
 	}
+	if v.EnableWaf != nil {
+		s.WriteBool(schemas.UpdateDistributionRequest_enableWaf, *v.EnableWaf)
+	}
 	if v.IsEnabled != nil {
 		s.WriteBool(schemas.UpdateDistributionRequest_isEnabled, *v.IsEnabled)
 	}
@@ -156,6 +199,7 @@ func (v *UpdateDistributionInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ViewerMinimumTlsProtocolVersion != "" {
 		s.WriteString(schemas.UpdateDistributionRequest_viewerMinimumTlsProtocolVersion, string(v.ViewerMinimumTlsProtocolVersion))
 	}
+	serializeWafRuleList(s, schemas.UpdateDistributionRequest_wafRules, v.WafRules)
 }
 
 type UpdateDistributionOutput struct {

@@ -1,0 +1,5 @@
+POST /v1/sourceEndpoint
+
+Content-Type: application/json
+
+{"clientToken":"__ClientToken__","configuration":{"standard":{"name":"__Name__","protocol":"RTP","protocolConfiguration":{"rist":{"destinationIngestPort":1,"recoveryLatencyMilliseconds":1}},"sourceNetworkingConfiguration":{"public":{"sourceAllowRules":[{"cidr":"__Cidr__"},{"cidr":"__Cidr__"}]}},"sourceNetworkingType":"PUBLIC"}},"description":"__Description__","regionName":"__RegionName__","tags":{"key0":"__Value__"}}

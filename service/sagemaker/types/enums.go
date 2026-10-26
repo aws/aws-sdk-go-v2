@@ -3152,8 +3152,9 @@ type DeepHealthCheckType string
 
 // Enum values for DeepHealthCheckType
 const (
-	DeepHealthCheckTypeInstanceStress       DeepHealthCheckType = "InstanceStress"
-	DeepHealthCheckTypeInstanceConnectivity DeepHealthCheckType = "InstanceConnectivity"
+	DeepHealthCheckTypeInstanceStress              DeepHealthCheckType = "InstanceStress"
+	DeepHealthCheckTypeInstanceConnectivity        DeepHealthCheckType = "InstanceConnectivity"
+	DeepHealthCheckTypeMultiNodeTrainingValidation DeepHealthCheckType = "MultiNodeTrainingValidation"
 )
 
 // Values returns all known values for DeepHealthCheckType. Note that this can be
@@ -3164,6 +3165,7 @@ func (DeepHealthCheckType) Values() []DeepHealthCheckType {
 	return []DeepHealthCheckType{
 		"InstanceStress",
 		"InstanceConnectivity",
+		"MultiNodeTrainingValidation",
 	}
 }
 

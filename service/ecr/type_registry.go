@@ -119,6 +119,18 @@ var TypeRegistry = &smithy.TypeRegistry{
 			Schema: schemas.RegistryPolicyNotFoundException,
 			New:    func() any { return &types.RegistryPolicyNotFoundException{} },
 		},
+		"com.amazonaws.ecr#ReplicationBackfillInProgressException": {
+			Schema: schemas.ReplicationBackfillInProgressException,
+			New:    func() any { return &types.ReplicationBackfillInProgressException{} },
+		},
+		"com.amazonaws.ecr#ReplicationBackfillInvalidStatusException": {
+			Schema: schemas.ReplicationBackfillInvalidStatusException,
+			New:    func() any { return &types.ReplicationBackfillInvalidStatusException{} },
+		},
+		"com.amazonaws.ecr#ReplicationBackfillNotFoundException": {
+			Schema: schemas.ReplicationBackfillNotFoundException,
+			New:    func() any { return &types.ReplicationBackfillNotFoundException{} },
+		},
 		"com.amazonaws.ecr#RepositoryAlreadyExistsException": {
 			Schema: schemas.RepositoryAlreadyExistsException,
 			New:    func() any { return &types.RepositoryAlreadyExistsException{} },

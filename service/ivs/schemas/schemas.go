@@ -43,6 +43,13 @@ var CreateChannel = smithy.NewSchema(smithy.ShapeID{
 	URI:  "/CreateChannel",
 	Code: 200})
 
+var CreateFailoverSlateConfiguration = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.ivs",
+	Name:      "CreateFailoverSlateConfiguration",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	URI:  "/CreateFailoverSlateConfiguration",
+	Code: 200})
+
 var CreatePlaybackRestrictionPolicy = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ivs",
 	Name:      "CreatePlaybackRestrictionPolicy",
@@ -76,6 +83,13 @@ var DeleteChannel = smithy.NewSchema(smithy.ShapeID{
 	Name:      "DeleteChannel",
 }, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
 	URI:  "/DeleteChannel",
+	Code: 204})
+
+var DeleteFailoverSlateConfiguration = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.ivs",
+	Name:      "DeleteFailoverSlateConfiguration",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	URI:  "/DeleteFailoverSlateConfiguration",
 	Code: 204})
 
 var DeletePlaybackKeyPair = smithy.NewSchema(smithy.ShapeID{
@@ -118,6 +132,13 @@ var GetChannel = smithy.NewSchema(smithy.ShapeID{
 	Name:      "GetChannel",
 }, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
 	URI:  "/GetChannel",
+	Code: 200})
+
+var GetFailoverSlateConfiguration = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.ivs",
+	Name:      "GetFailoverSlateConfiguration",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	URI:  "/GetFailoverSlateConfiguration",
 	Code: 200})
 
 var GetPlaybackKeyPair = smithy.NewSchema(smithy.ShapeID{
@@ -188,6 +209,13 @@ var ListChannels = smithy.NewSchema(smithy.ShapeID{
 	Name:      "ListChannels",
 }, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
 	URI:  "/ListChannels",
+	Code: 200})
+
+var ListFailoverSlateConfigurations = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.ivs",
+	Name:      "ListFailoverSlateConfigurations",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	URI:  "/ListFailoverSlateConfigurations",
 	Code: 200})
 
 var ListPlaybackKeyPairs = smithy.NewSchema(smithy.ShapeID{
@@ -286,6 +314,13 @@ var UpdateChannel = smithy.NewSchema(smithy.ShapeID{
 	Name:      "UpdateChannel",
 }, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
 	URI:  "/UpdateChannel",
+	Code: 200})
+
+var UpdateFailoverSlateConfiguration = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.ivs",
+	Name:      "UpdateFailoverSlateConfiguration",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	URI:  "/UpdateFailoverSlateConfiguration",
 	Code: 200})
 
 var UpdatePlaybackRestrictionPolicy = smithy.NewSchema(smithy.ShapeID{
@@ -457,7 +492,7 @@ var _Boolean = smithy.NewSchema(smithy.ShapeID{
 var Channel = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ivs",
 	Name:      "Channel",
-}, smithy.ShapeTypeStructure, 16)
+}, smithy.ShapeTypeStructure, 17)
 var Channel_arn *smithy.Schema
 
 var Channel_name *smithy.Schema
@@ -490,6 +525,8 @@ var Channel_containerFormat *smithy.Schema
 
 var Channel_adConfigurationArn *smithy.Schema
 
+var Channel_failoverSlateConfigurationArn *smithy.Schema
+
 var _ChannelAdConfigurationArn = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ivs",
 	Name:      "ChannelAdConfigurationArn",
@@ -505,6 +542,11 @@ var _ChannelArnList = smithy.NewSchema(smithy.ShapeID{
 	Name:      "ChannelArnList",
 }, smithy.ShapeTypeList, 1)
 var _ChannelArnList_member *smithy.Schema
+
+var _ChannelFailoverSlateConfigurationArn = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.ivs",
+	Name:      "ChannelFailoverSlateConfigurationArn",
+}, smithy.ShapeTypeString, 0)
 
 var _ChannelLatencyMode = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ivs",
@@ -564,7 +606,7 @@ var _Channels_member *smithy.Schema
 var ChannelSummary = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ivs",
 	Name:      "ChannelSummary",
-}, smithy.ShapeTypeStructure, 11)
+}, smithy.ShapeTypeStructure, 12)
 var ChannelSummary_arn *smithy.Schema
 
 var ChannelSummary_name *smithy.Schema
@@ -586,6 +628,8 @@ var ChannelSummary_preset *smithy.Schema
 var ChannelSummary_playbackRestrictionPolicyArn *smithy.Schema
 
 var ChannelSummary_adConfigurationArn *smithy.Schema
+
+var ChannelSummary_failoverSlateConfigurationArn *smithy.Schema
 
 var ChannelType = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ivs",
@@ -642,6 +686,78 @@ var _errorMessage = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ivs",
 	Name:      "errorMessage",
 }, smithy.ShapeTypeString, 0)
+
+var _FailoverSlateActivationThresholdSeconds = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.ivs",
+	Name:      "FailoverSlateActivationThresholdSeconds",
+}, smithy.ShapeTypeInteger, 0)
+
+var FailoverSlateConfiguration = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.ivs",
+	Name:      "FailoverSlateConfiguration",
+}, smithy.ShapeTypeStructure, 7)
+var FailoverSlateConfiguration_arn *smithy.Schema
+
+var FailoverSlateConfiguration_name *smithy.Schema
+
+var FailoverSlateConfiguration_activationThresholdSeconds *smithy.Schema
+
+var FailoverSlateConfiguration_minSlateDisplaySeconds *smithy.Schema
+
+var FailoverSlateConfiguration_maxSlateDisplaySeconds *smithy.Schema
+
+var FailoverSlateConfiguration_state *smithy.Schema
+
+var FailoverSlateConfiguration_tags *smithy.Schema
+
+var _FailoverSlateConfigurationArn = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.ivs",
+	Name:      "FailoverSlateConfigurationArn",
+}, smithy.ShapeTypeString, 0)
+
+var _FailoverSlateConfigurationList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.ivs",
+	Name:      "FailoverSlateConfigurationList",
+}, smithy.ShapeTypeList, 1)
+var _FailoverSlateConfigurationList_member *smithy.Schema
+
+var _FailoverSlateConfigurationName = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.ivs",
+	Name:      "FailoverSlateConfigurationName",
+}, smithy.ShapeTypeString, 0)
+
+var _FailoverSlateConfigurationState = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.ivs",
+	Name:      "FailoverSlateConfigurationState",
+}, smithy.ShapeTypeString, 0)
+
+var FailoverSlateConfigurationSummary = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.ivs",
+	Name:      "FailoverSlateConfigurationSummary",
+}, smithy.ShapeTypeStructure, 7)
+var FailoverSlateConfigurationSummary_arn *smithy.Schema
+
+var FailoverSlateConfigurationSummary_name *smithy.Schema
+
+var FailoverSlateConfigurationSummary_activationThresholdSeconds *smithy.Schema
+
+var FailoverSlateConfigurationSummary_minSlateDisplaySeconds *smithy.Schema
+
+var FailoverSlateConfigurationSummary_maxSlateDisplaySeconds *smithy.Schema
+
+var FailoverSlateConfigurationSummary_state *smithy.Schema
+
+var FailoverSlateConfigurationSummary_tags *smithy.Schema
+
+var _FailoverSlateMaxDisplaySeconds = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.ivs",
+	Name:      "FailoverSlateMaxDisplaySeconds",
+}, smithy.ShapeTypeInteger, 0)
+
+var _FailoverSlateMinDisplaySeconds = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.ivs",
+	Name:      "FailoverSlateMinDisplaySeconds",
+}, smithy.ShapeTypeInteger, 0)
 
 var IngestConfiguration = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ivs",
@@ -715,6 +831,11 @@ var _MaxAdConfigurationResults = smithy.NewSchema(smithy.ShapeID{
 var _MaxChannelResults = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ivs",
 	Name:      "MaxChannelResults",
+}, smithy.ShapeTypeInteger, 0)
+
+var _MaxFailoverSlateConfigurationResults = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.ivs",
+	Name:      "MaxFailoverSlateConfigurationResults",
 }, smithy.ShapeTypeInteger, 0)
 
 var _MaxPlaybackKeyPairResults = smithy.NewSchema(smithy.ShapeID{
@@ -1266,7 +1387,7 @@ var _StreamMetadata = smithy.NewSchema(smithy.ShapeID{
 var StreamSession = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ivs",
 	Name:      "StreamSession",
-}, smithy.ShapeTypeStructure, 8)
+}, smithy.ShapeTypeStructure, 9)
 var StreamSession_streamId *smithy.Schema
 
 var StreamSession_startTime *smithy.Schema
@@ -1282,6 +1403,8 @@ var StreamSession_ingestConfigurations *smithy.Schema
 var StreamSession_recordingConfiguration *smithy.Schema
 
 var StreamSession_truncatedEvents *smithy.Schema
+
+var StreamSession_failoverSlateConfiguration *smithy.Schema
 
 var _StreamSessionList = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ivs",
@@ -1628,7 +1751,7 @@ var CreateAdConfigurationResponse_adConfiguration *smithy.Schema
 var CreateChannelRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ivs",
 	Name:      "CreateChannelRequest",
-}, smithy.ShapeTypeStructure, 12)
+}, smithy.ShapeTypeStructure, 13)
 var CreateChannelRequest_name *smithy.Schema
 
 var CreateChannelRequest_latencyMode *smithy.Schema
@@ -1653,6 +1776,8 @@ var CreateChannelRequest_containerFormat *smithy.Schema
 
 var CreateChannelRequest_adConfigurationArn *smithy.Schema
 
+var CreateChannelRequest_failoverSlateConfigurationArn *smithy.Schema
+
 var CreateChannelResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ivs",
 	Name:      "CreateChannelResponse",
@@ -1660,6 +1785,26 @@ var CreateChannelResponse = smithy.NewSchema(smithy.ShapeID{
 var CreateChannelResponse_channel *smithy.Schema
 
 var CreateChannelResponse_streamKey *smithy.Schema
+
+var CreateFailoverSlateConfigurationRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.ivs",
+	Name:      "CreateFailoverSlateConfigurationRequest",
+}, smithy.ShapeTypeStructure, 5)
+var CreateFailoverSlateConfigurationRequest_name *smithy.Schema
+
+var CreateFailoverSlateConfigurationRequest_activationThresholdSeconds *smithy.Schema
+
+var CreateFailoverSlateConfigurationRequest_minSlateDisplaySeconds *smithy.Schema
+
+var CreateFailoverSlateConfigurationRequest_maxSlateDisplaySeconds *smithy.Schema
+
+var CreateFailoverSlateConfigurationRequest_tags *smithy.Schema
+
+var CreateFailoverSlateConfigurationResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.ivs",
+	Name:      "CreateFailoverSlateConfigurationResponse",
+}, smithy.ShapeTypeStructure, 1)
+var CreateFailoverSlateConfigurationResponse_failoverSlateConfiguration *smithy.Schema
 
 var CreatePlaybackRestrictionPolicyRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ivs",
@@ -1729,6 +1874,12 @@ var DeleteChannelRequest = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeStructure, 1)
 var DeleteChannelRequest_arn *smithy.Schema
 
+var DeleteFailoverSlateConfigurationRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.ivs",
+	Name:      "DeleteFailoverSlateConfigurationRequest",
+}, smithy.ShapeTypeStructure, 1)
+var DeleteFailoverSlateConfigurationRequest_arn *smithy.Schema
+
 var DeletePlaybackKeyPairRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ivs",
 	Name:      "DeletePlaybackKeyPairRequest",
@@ -1781,6 +1932,18 @@ var GetChannelResponse = smithy.NewSchema(smithy.ShapeID{
 	Name:      "GetChannelResponse",
 }, smithy.ShapeTypeStructure, 1)
 var GetChannelResponse_channel *smithy.Schema
+
+var GetFailoverSlateConfigurationRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.ivs",
+	Name:      "GetFailoverSlateConfigurationRequest",
+}, smithy.ShapeTypeStructure, 1)
+var GetFailoverSlateConfigurationRequest_arn *smithy.Schema
+
+var GetFailoverSlateConfigurationResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.ivs",
+	Name:      "GetFailoverSlateConfigurationResponse",
+}, smithy.ShapeTypeStructure, 1)
+var GetFailoverSlateConfigurationResponse_failoverSlateConfiguration *smithy.Schema
 
 var GetPlaybackKeyPairRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ivs",
@@ -1905,7 +2068,7 @@ var ListAdConfigurationsResponse_nextToken *smithy.Schema
 var ListChannelsRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ivs",
 	Name:      "ListChannelsRequest",
-}, smithy.ShapeTypeStructure, 6)
+}, smithy.ShapeTypeStructure, 7)
 var ListChannelsRequest_filterByName *smithy.Schema
 
 var ListChannelsRequest_filterByRecordingConfigurationArn *smithy.Schema
@@ -1913,6 +2076,8 @@ var ListChannelsRequest_filterByRecordingConfigurationArn *smithy.Schema
 var ListChannelsRequest_filterByPlaybackRestrictionPolicyArn *smithy.Schema
 
 var ListChannelsRequest_filterByAdConfigurationArn *smithy.Schema
+
+var ListChannelsRequest_filterByFailoverSlateConfigurationArn *smithy.Schema
 
 var ListChannelsRequest_nextToken *smithy.Schema
 
@@ -1925,6 +2090,22 @@ var ListChannelsResponse = smithy.NewSchema(smithy.ShapeID{
 var ListChannelsResponse_channels *smithy.Schema
 
 var ListChannelsResponse_nextToken *smithy.Schema
+
+var ListFailoverSlateConfigurationsRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.ivs",
+	Name:      "ListFailoverSlateConfigurationsRequest",
+}, smithy.ShapeTypeStructure, 2)
+var ListFailoverSlateConfigurationsRequest_nextToken *smithy.Schema
+
+var ListFailoverSlateConfigurationsRequest_maxResults *smithy.Schema
+
+var ListFailoverSlateConfigurationsResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.ivs",
+	Name:      "ListFailoverSlateConfigurationsResponse",
+}, smithy.ShapeTypeStructure, 2)
+var ListFailoverSlateConfigurationsResponse_failoverSlateConfigurations *smithy.Schema
+
+var ListFailoverSlateConfigurationsResponse_nextToken *smithy.Schema
 
 var ListPlaybackKeyPairsRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ivs",
@@ -2121,7 +2302,7 @@ var UpdateAdConfigurationResponse_adConfiguration *smithy.Schema
 var UpdateChannelRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ivs",
 	Name:      "UpdateChannelRequest",
-}, smithy.ShapeTypeStructure, 12)
+}, smithy.ShapeTypeStructure, 13)
 var UpdateChannelRequest_arn *smithy.Schema
 
 var UpdateChannelRequest_name *smithy.Schema
@@ -2146,11 +2327,33 @@ var UpdateChannelRequest_containerFormat *smithy.Schema
 
 var UpdateChannelRequest_adConfigurationArn *smithy.Schema
 
+var UpdateChannelRequest_failoverSlateConfigurationArn *smithy.Schema
+
 var UpdateChannelResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ivs",
 	Name:      "UpdateChannelResponse",
 }, smithy.ShapeTypeStructure, 1)
 var UpdateChannelResponse_channel *smithy.Schema
+
+var UpdateFailoverSlateConfigurationRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.ivs",
+	Name:      "UpdateFailoverSlateConfigurationRequest",
+}, smithy.ShapeTypeStructure, 5)
+var UpdateFailoverSlateConfigurationRequest_arn *smithy.Schema
+
+var UpdateFailoverSlateConfigurationRequest_name *smithy.Schema
+
+var UpdateFailoverSlateConfigurationRequest_activationThresholdSeconds *smithy.Schema
+
+var UpdateFailoverSlateConfigurationRequest_minSlateDisplaySeconds *smithy.Schema
+
+var UpdateFailoverSlateConfigurationRequest_maxSlateDisplaySeconds *smithy.Schema
+
+var UpdateFailoverSlateConfigurationResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.ivs",
+	Name:      "UpdateFailoverSlateConfigurationResponse",
+}, smithy.ShapeTypeStructure, 1)
+var UpdateFailoverSlateConfigurationResponse_failoverSlateConfiguration *smithy.Schema
 
 var UpdatePlaybackRestrictionPolicyRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ivs",
@@ -2329,6 +2532,8 @@ func init() {
 
 	Channel_adConfigurationArn = Channel.AddMember("adConfigurationArn", _ChannelAdConfigurationArn)
 
+	Channel_failoverSlateConfigurationArn = Channel.AddMember("failoverSlateConfigurationArn", _ChannelFailoverSlateConfigurationArn)
+
 	_ChannelArnList_member = _ChannelArnList.AddMember("member", _ChannelArn)
 
 	ChannelSummary_arn = ChannelSummary.AddMember("arn", _ChannelArn)
@@ -2352,6 +2557,8 @@ func init() {
 	ChannelSummary_playbackRestrictionPolicyArn = ChannelSummary.AddMember("playbackRestrictionPolicyArn", _ChannelPlaybackRestrictionPolicyArn)
 
 	ChannelSummary_adConfigurationArn = ChannelSummary.AddMember("adConfigurationArn", _ChannelAdConfigurationArn)
+
+	ChannelSummary_failoverSlateConfigurationArn = ChannelSummary.AddMember("failoverSlateConfigurationArn", _ChannelFailoverSlateConfigurationArn)
 
 	_ChannelList_member = _ChannelList.AddMember("member", ChannelSummary)
 
@@ -2396,6 +2603,36 @@ func init() {
 	S3DestinationConfiguration_bucketName = S3DestinationConfiguration.AddMember("bucketName", _S3DestinationBucketName)
 
 	DestinationConfiguration_s3 = DestinationConfiguration.AddMember("s3", S3DestinationConfiguration)
+
+	FailoverSlateConfiguration_arn = FailoverSlateConfiguration.AddMember("arn", _FailoverSlateConfigurationArn)
+
+	FailoverSlateConfiguration_name = FailoverSlateConfiguration.AddMember("name", _FailoverSlateConfigurationName)
+
+	FailoverSlateConfiguration_activationThresholdSeconds = FailoverSlateConfiguration.AddMember("activationThresholdSeconds", _FailoverSlateActivationThresholdSeconds)
+
+	FailoverSlateConfiguration_minSlateDisplaySeconds = FailoverSlateConfiguration.AddMember("minSlateDisplaySeconds", _FailoverSlateMinDisplaySeconds)
+
+	FailoverSlateConfiguration_maxSlateDisplaySeconds = FailoverSlateConfiguration.AddMember("maxSlateDisplaySeconds", _FailoverSlateMaxDisplaySeconds)
+
+	FailoverSlateConfiguration_state = FailoverSlateConfiguration.AddMember("state", _FailoverSlateConfigurationState)
+
+	FailoverSlateConfiguration_tags = FailoverSlateConfiguration.AddMember("tags", _Tags)
+
+	FailoverSlateConfigurationSummary_arn = FailoverSlateConfigurationSummary.AddMember("arn", _FailoverSlateConfigurationArn)
+
+	FailoverSlateConfigurationSummary_name = FailoverSlateConfigurationSummary.AddMember("name", _FailoverSlateConfigurationName)
+
+	FailoverSlateConfigurationSummary_activationThresholdSeconds = FailoverSlateConfigurationSummary.AddMember("activationThresholdSeconds", _FailoverSlateActivationThresholdSeconds)
+
+	FailoverSlateConfigurationSummary_minSlateDisplaySeconds = FailoverSlateConfigurationSummary.AddMember("minSlateDisplaySeconds", _FailoverSlateMinDisplaySeconds)
+
+	FailoverSlateConfigurationSummary_maxSlateDisplaySeconds = FailoverSlateConfigurationSummary.AddMember("maxSlateDisplaySeconds", _FailoverSlateMaxDisplaySeconds)
+
+	FailoverSlateConfigurationSummary_state = FailoverSlateConfigurationSummary.AddMember("state", _FailoverSlateConfigurationState)
+
+	FailoverSlateConfigurationSummary_tags = FailoverSlateConfigurationSummary.AddMember("tags", _Tags)
+
+	_FailoverSlateConfigurationList_member = _FailoverSlateConfigurationList.AddMember("member", FailoverSlateConfigurationSummary)
 
 	VideoConfiguration_avcProfile = VideoConfiguration.AddMember("avcProfile", _String)
 
@@ -2701,6 +2938,8 @@ func init() {
 
 	StreamSession_truncatedEvents = StreamSession.AddMember("truncatedEvents", _StreamEvents)
 
+	StreamSession_failoverSlateConfiguration = StreamSession.AddMember("failoverSlateConfiguration", FailoverSlateConfiguration)
+
 	StreamSessionSummary_streamId = StreamSessionSummary.AddMember("streamId", _StreamId)
 
 	StreamSessionSummary_startTime = StreamSessionSummary.AddMember("startTime", _Time)
@@ -2859,9 +3098,23 @@ func init() {
 
 	CreateChannelRequest_adConfigurationArn = CreateChannelRequest.AddMember("adConfigurationArn", _ChannelAdConfigurationArn)
 
+	CreateChannelRequest_failoverSlateConfigurationArn = CreateChannelRequest.AddMember("failoverSlateConfigurationArn", _ChannelFailoverSlateConfigurationArn)
+
 	CreateChannelResponse_channel = CreateChannelResponse.AddMember("channel", Channel)
 
 	CreateChannelResponse_streamKey = CreateChannelResponse.AddMember("streamKey", StreamKey)
+
+	CreateFailoverSlateConfigurationRequest_name = CreateFailoverSlateConfigurationRequest.AddMember("name", _FailoverSlateConfigurationName)
+
+	CreateFailoverSlateConfigurationRequest_activationThresholdSeconds = CreateFailoverSlateConfigurationRequest.AddMember("activationThresholdSeconds", _FailoverSlateActivationThresholdSeconds)
+
+	CreateFailoverSlateConfigurationRequest_minSlateDisplaySeconds = CreateFailoverSlateConfigurationRequest.AddMember("minSlateDisplaySeconds", _FailoverSlateMinDisplaySeconds)
+
+	CreateFailoverSlateConfigurationRequest_maxSlateDisplaySeconds = CreateFailoverSlateConfigurationRequest.AddMember("maxSlateDisplaySeconds", _FailoverSlateMaxDisplaySeconds)
+
+	CreateFailoverSlateConfigurationRequest_tags = CreateFailoverSlateConfigurationRequest.AddMember("tags", _Tags)
+
+	CreateFailoverSlateConfigurationResponse_failoverSlateConfiguration = CreateFailoverSlateConfigurationResponse.AddMember("failoverSlateConfiguration", FailoverSlateConfiguration)
 
 	CreatePlaybackRestrictionPolicyRequest_allowedCountries = CreatePlaybackRestrictionPolicyRequest.AddMember("allowedCountries", _PlaybackRestrictionPolicyAllowedCountryList)
 
@@ -2899,6 +3152,8 @@ func init() {
 
 	DeleteChannelRequest_arn = DeleteChannelRequest.AddMember("arn", _ChannelArn)
 
+	DeleteFailoverSlateConfigurationRequest_arn = DeleteFailoverSlateConfigurationRequest.AddMember("arn", _FailoverSlateConfigurationArn)
+
 	DeletePlaybackKeyPairRequest_arn = DeletePlaybackKeyPairRequest.AddMember("arn", _PlaybackKeyPairArn)
 
 	DeletePlaybackRestrictionPolicyRequest_arn = DeletePlaybackRestrictionPolicyRequest.AddMember("arn", _PlaybackRestrictionPolicyArn)
@@ -2914,6 +3169,10 @@ func init() {
 	GetChannelRequest_arn = GetChannelRequest.AddMember("arn", _ChannelArn)
 
 	GetChannelResponse_channel = GetChannelResponse.AddMember("channel", Channel)
+
+	GetFailoverSlateConfigurationRequest_arn = GetFailoverSlateConfigurationRequest.AddMember("arn", _FailoverSlateConfigurationArn)
+
+	GetFailoverSlateConfigurationResponse_failoverSlateConfiguration = GetFailoverSlateConfigurationResponse.AddMember("failoverSlateConfiguration", FailoverSlateConfiguration)
 
 	GetPlaybackKeyPairRequest_arn = GetPlaybackKeyPairRequest.AddMember("arn", _PlaybackKeyPairArn)
 
@@ -2971,6 +3230,8 @@ func init() {
 
 	ListChannelsRequest_filterByAdConfigurationArn = ListChannelsRequest.AddMember("filterByAdConfigurationArn", _ChannelAdConfigurationArn)
 
+	ListChannelsRequest_filterByFailoverSlateConfigurationArn = ListChannelsRequest.AddMember("filterByFailoverSlateConfigurationArn", _ChannelFailoverSlateConfigurationArn)
+
 	ListChannelsRequest_nextToken = ListChannelsRequest.AddMember("nextToken", _PaginationToken)
 
 	ListChannelsRequest_maxResults = ListChannelsRequest.AddMember("maxResults", _MaxChannelResults)
@@ -2978,6 +3239,14 @@ func init() {
 	ListChannelsResponse_channels = ListChannelsResponse.AddMember("channels", _ChannelList)
 
 	ListChannelsResponse_nextToken = ListChannelsResponse.AddMember("nextToken", _PaginationToken)
+
+	ListFailoverSlateConfigurationsRequest_nextToken = ListFailoverSlateConfigurationsRequest.AddMember("nextToken", _PaginationToken)
+
+	ListFailoverSlateConfigurationsRequest_maxResults = ListFailoverSlateConfigurationsRequest.AddMember("maxResults", _MaxFailoverSlateConfigurationResults)
+
+	ListFailoverSlateConfigurationsResponse_failoverSlateConfigurations = ListFailoverSlateConfigurationsResponse.AddMember("failoverSlateConfigurations", _FailoverSlateConfigurationList)
+
+	ListFailoverSlateConfigurationsResponse_nextToken = ListFailoverSlateConfigurationsResponse.AddMember("nextToken", _PaginationToken)
 
 	ListPlaybackKeyPairsRequest_nextToken = ListPlaybackKeyPairsRequest.AddMember("nextToken", _PaginationToken)
 
@@ -3091,7 +3360,21 @@ func init() {
 
 	UpdateChannelRequest_adConfigurationArn = UpdateChannelRequest.AddMember("adConfigurationArn", _ChannelAdConfigurationArn)
 
+	UpdateChannelRequest_failoverSlateConfigurationArn = UpdateChannelRequest.AddMember("failoverSlateConfigurationArn", _ChannelFailoverSlateConfigurationArn)
+
 	UpdateChannelResponse_channel = UpdateChannelResponse.AddMember("channel", Channel)
+
+	UpdateFailoverSlateConfigurationRequest_arn = UpdateFailoverSlateConfigurationRequest.AddMember("arn", _FailoverSlateConfigurationArn)
+
+	UpdateFailoverSlateConfigurationRequest_name = UpdateFailoverSlateConfigurationRequest.AddMember("name", _FailoverSlateConfigurationName)
+
+	UpdateFailoverSlateConfigurationRequest_activationThresholdSeconds = UpdateFailoverSlateConfigurationRequest.AddMember("activationThresholdSeconds", _FailoverSlateActivationThresholdSeconds)
+
+	UpdateFailoverSlateConfigurationRequest_minSlateDisplaySeconds = UpdateFailoverSlateConfigurationRequest.AddMember("minSlateDisplaySeconds", _FailoverSlateMinDisplaySeconds)
+
+	UpdateFailoverSlateConfigurationRequest_maxSlateDisplaySeconds = UpdateFailoverSlateConfigurationRequest.AddMember("maxSlateDisplaySeconds", _FailoverSlateMaxDisplaySeconds)
+
+	UpdateFailoverSlateConfigurationResponse_failoverSlateConfiguration = UpdateFailoverSlateConfigurationResponse.AddMember("failoverSlateConfiguration", FailoverSlateConfiguration)
 
 	UpdatePlaybackRestrictionPolicyRequest_arn = UpdatePlaybackRestrictionPolicyRequest.AddMember("arn", _PlaybackRestrictionPolicyArn)
 

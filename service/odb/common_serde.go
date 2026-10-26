@@ -512,6 +512,19 @@ func serializeExascaleDbStorageVaultList(s smithy.ShapeSerializer, schema *smith
 	s.CloseList()
 }
 
+func serializeFileSystemConfigurationDetailsList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.FileSystemConfigurationDetails) {
+	if v == nil {
+		return
+	}
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
 func serializeFlexComponentList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.FlexComponentSummary) {
 	if v == nil {
 		return
@@ -1255,6 +1268,28 @@ func deserializeExascaleDbStorageVaultList(d smithy.ShapeDeserializer, s *smithy
 		}
 
 		vv = types.ExascaleDbStorageVaultSummary{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeFileSystemConfigurationDetailsList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.FileSystemConfigurationDetails) error {
+	*v = make([]types.FileSystemConfigurationDetails, 0)
+	var vv types.FileSystemConfigurationDetails
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.FileSystemConfigurationDetails
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = types.FileSystemConfigurationDetails{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
 		}

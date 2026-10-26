@@ -7216,6 +7216,10 @@ type LightsailDistribution struct {
 	// with viewers.
 	ViewerMinimumTlsProtocolVersion *string
 
+	// An object that describes the Web Application Firewall (WAF) configuration of
+	// the distribution.
+	Waf *WafConfig
+
 	noSmithyDocumentSerde
 }
 
@@ -7295,6 +7299,11 @@ func (v *LightsailDistribution) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ViewerMinimumTlsProtocolVersion != nil {
 		s.WriteString(schemas.LightsailDistribution_viewerMinimumTlsProtocolVersion, *v.ViewerMinimumTlsProtocolVersion)
 	}
+	if v.Waf != nil {
+		s.WriteStruct(schemas.LightsailDistribution_waf)
+		v.Waf.SerializeMembers(s)
+		s.CloseStruct()
+	}
 }
 func (v *LightsailDistribution) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.LightsailDistribution, func(s *smithy.Schema) error {
@@ -7372,6 +7381,9 @@ func (v *LightsailDistribution) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.LightsailDistribution_viewerMinimumTlsProtocolVersion:
 			v.ViewerMinimumTlsProtocolVersion = new(string)
 			return d.ReadString(schemas.LightsailDistribution_viewerMinimumTlsProtocolVersion, v.ViewerMinimumTlsProtocolVersion)
+		case schemas.LightsailDistribution_waf:
+			v.Waf = &WafConfig{}
+			return v.Waf.Deserialize(d)
 		}
 		return nil
 	})
@@ -11310,6 +11322,427 @@ func (v *TimePeriod) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.TimePeriod_start:
 			v.Start = new(time.Time)
 			return d.ReadTime(schemas.TimePeriod_start, v.Start)
+		}
+		return nil
+	})
+}
+
+// Describes the configuration of the account creation fraud prevention Web
+// Application Firewall (WAF) rule group. The rule group inspects account creation
+// requests to your application.
+type WafAcfpConfig struct {
+
+	// The path of the endpoint that accepts completed account creation forms (for
+	// example, /signup/submit ). This endpoint must accept POST requests.
+	//
+	// Constraints:
+	//
+	//   - Must start with a forward slash ( / ).
+	//
+	//   - Must contain from 1 to 256 characters.
+	CreationPath *string
+
+	// The content type of the request body of account creation requests.
+	//
+	// The following content types are possible:
+	//
+	//   - JSON – The request body is in JSON format.
+	//
+	//   - FORM_ENCODED – The request body is form encoded.
+	PayloadType WafPayloadTypeEnum
+
+	// The path of the page that displays the account creation form (for example,
+	// /signup ).
+	//
+	// Constraints:
+	//
+	//   - Must start with a forward slash ( / ).
+	//
+	//   - Must contain from 1 to 256 characters.
+	RegistrationPagePath *string
+
+	// An object that describes the HTTP status codes that your application returns
+	// for successful and failed account creation attempts.
+	ResponseInspection *WafResponseInspection
+
+	noSmithyDocumentSerde
+}
+
+func (v *WafAcfpConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.WafAcfpConfig)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *WafAcfpConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreationPath != nil {
+		s.WriteString(schemas.WafAcfpConfig_creationPath, *v.CreationPath)
+	}
+	if v.PayloadType != "" {
+		s.WriteString(schemas.WafAcfpConfig_payloadType, string(v.PayloadType))
+	}
+	if v.RegistrationPagePath != nil {
+		s.WriteString(schemas.WafAcfpConfig_registrationPagePath, *v.RegistrationPagePath)
+	}
+	if v.ResponseInspection != nil {
+		s.WriteStruct(schemas.WafAcfpConfig_responseInspection)
+		v.ResponseInspection.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *WafAcfpConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.WafAcfpConfig, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.WafAcfpConfig_creationPath:
+			v.CreationPath = new(string)
+			return d.ReadString(schemas.WafAcfpConfig_creationPath, v.CreationPath)
+		case schemas.WafAcfpConfig_payloadType:
+			var ev string
+			if err := d.ReadString(schemas.WafAcfpConfig_payloadType, &ev); err != nil {
+				return err
+			}
+			v.PayloadType = WafPayloadTypeEnum(ev)
+			return nil
+		case schemas.WafAcfpConfig_registrationPagePath:
+			v.RegistrationPagePath = new(string)
+			return d.ReadString(schemas.WafAcfpConfig_registrationPagePath, v.RegistrationPagePath)
+		case schemas.WafAcfpConfig_responseInspection:
+			v.ResponseInspection = &WafResponseInspection{}
+			return v.ResponseInspection.Deserialize(d)
+		}
+		return nil
+	})
+}
+
+// Describes the configuration of the account takeover prevention Web Application
+// Firewall (WAF) rule group. The rule group inspects login requests to the login
+// path of your application.
+type WafAtpConfig struct {
+
+	// The path of the login endpoint of your application (for example, /login ). Login
+	// paths that start with the path that you specify are a match.
+	//
+	// Constraints:
+	//
+	//   - Must start with a forward slash ( / ).
+	//
+	//   - Must contain from 1 to 256 characters.
+	LoginPath *string
+
+	// The name of the field in the request body that contains the password (for
+	// example, /password for JSON or password for FORM_ENCODED ).
+	//
+	// Constraints:
+	//
+	//   - For a JSON payload, must be a JSON pointer that starts with a forward slash (
+	//   / ).
+	//
+	//   - Must contain from 1 to 512 characters.
+	PasswordField *string
+
+	// The content type of the request body of login requests.
+	//
+	// The following content types are possible:
+	//
+	//   - JSON – The request body is in JSON format.
+	//
+	//   - FORM_ENCODED – The request body is form encoded.
+	PayloadType WafPayloadTypeEnum
+
+	// An object that describes the HTTP status codes that your application returns
+	// for successful and failed login attempts.
+	ResponseInspection *WafResponseInspection
+
+	// The name of the field in the request body that contains the username (for
+	// example, /username for JSON or username for FORM_ENCODED ).
+	//
+	// Constraints:
+	//
+	//   - For a JSON payload, must be a JSON pointer that starts with a forward slash (
+	//   / ).
+	//
+	//   - Must contain from 1 to 512 characters.
+	UsernameField *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *WafAtpConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.WafAtpConfig)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *WafAtpConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LoginPath != nil {
+		s.WriteString(schemas.WafAtpConfig_loginPath, *v.LoginPath)
+	}
+	if v.PasswordField != nil {
+		s.WriteString(schemas.WafAtpConfig_passwordField, *v.PasswordField)
+	}
+	if v.PayloadType != "" {
+		s.WriteString(schemas.WafAtpConfig_payloadType, string(v.PayloadType))
+	}
+	if v.ResponseInspection != nil {
+		s.WriteStruct(schemas.WafAtpConfig_responseInspection)
+		v.ResponseInspection.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.UsernameField != nil {
+		s.WriteString(schemas.WafAtpConfig_usernameField, *v.UsernameField)
+	}
+}
+func (v *WafAtpConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.WafAtpConfig, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.WafAtpConfig_loginPath:
+			v.LoginPath = new(string)
+			return d.ReadString(schemas.WafAtpConfig_loginPath, v.LoginPath)
+		case schemas.WafAtpConfig_passwordField:
+			v.PasswordField = new(string)
+			return d.ReadString(schemas.WafAtpConfig_passwordField, v.PasswordField)
+		case schemas.WafAtpConfig_payloadType:
+			var ev string
+			if err := d.ReadString(schemas.WafAtpConfig_payloadType, &ev); err != nil {
+				return err
+			}
+			v.PayloadType = WafPayloadTypeEnum(ev)
+			return nil
+		case schemas.WafAtpConfig_responseInspection:
+			v.ResponseInspection = &WafResponseInspection{}
+			return v.ResponseInspection.Deserialize(d)
+		case schemas.WafAtpConfig_usernameField:
+			v.UsernameField = new(string)
+			return d.ReadString(schemas.WafAtpConfig_usernameField, v.UsernameField)
+		}
+		return nil
+	})
+}
+
+// Describes the configuration of the bot control Web Application Firewall (WAF)
+// rule group.
+type WafBotControlConfig struct {
+
+	// The inspection level of the bot control rule group.
+	//
+	// The following inspection levels are possible:
+	//
+	//   - COMMON – Detects a variety of bots that identify themselves, such as web
+	//   scraping frameworks, search engines, and automated browsers.
+	//
+	//   - TARGETED – Includes the COMMON protections, and adds detection for
+	//   sophisticated bots that don't identify themselves. This level uses rate
+	//   limiting, CAPTCHA, and background browser challenges.
+	InspectionLevel WafInspectionLevelEnum
+
+	noSmithyDocumentSerde
+}
+
+func (v *WafBotControlConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.WafBotControlConfig)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *WafBotControlConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InspectionLevel != "" {
+		s.WriteString(schemas.WafBotControlConfig_inspectionLevel, string(v.InspectionLevel))
+	}
+}
+func (v *WafBotControlConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.WafBotControlConfig, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.WafBotControlConfig_inspectionLevel:
+			var ev string
+			if err := d.ReadString(schemas.WafBotControlConfig_inspectionLevel, &ev); err != nil {
+				return err
+			}
+			v.InspectionLevel = WafInspectionLevelEnum(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
+// Describes the Web Application Firewall (WAF) configuration of a Lightsail
+// distribution.
+type WafConfig struct {
+
+	// Specifies whether WAF is enabled for the distribution.
+	IsWafEnabled *bool
+
+	// An array of objects that describe the WAF rule groups enabled for the
+	// distribution.
+	WafRules []WafRule
+
+	noSmithyDocumentSerde
+}
+
+func (v *WafConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.WafConfig)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *WafConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IsWafEnabled != nil {
+		s.WriteBool(schemas.WafConfig_isWafEnabled, *v.IsWafEnabled)
+	}
+	serializeWafRuleList(s, schemas.WafConfig_wafRules, v.WafRules)
+}
+func (v *WafConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.WafConfig, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.WafConfig_isWafEnabled:
+			v.IsWafEnabled = new(bool)
+			return d.ReadBool(schemas.WafConfig_isWafEnabled, v.IsWafEnabled)
+		case schemas.WafConfig_wafRules:
+			return deserializeWafRuleList(d, schemas.WafConfig_wafRules, &v.WafRules)
+		}
+		return nil
+	})
+}
+
+// Describes the HTTP status codes that your application returns to indicate
+// successful and failed attempts. The Web Application Firewall (WAF) rule group
+// uses these status codes to track successful and failed attempts.
+type WafResponseInspection struct {
+
+	// The HTTP status codes that indicate a failed attempt (for example, 401 ).
+	//
+	// Constraints:
+	//
+	//   - Must contain from 1 to 10 status codes.
+	//
+	//   - Each status code must be from 0 to 999 .
+	//
+	//   - Can't contain a status code that is also in successCodes .
+	FailureCodes []int32
+
+	// The HTTP status codes that indicate a successful attempt (for example, 200 ).
+	//
+	// Constraints:
+	//
+	//   - Must contain from 1 to 10 status codes.
+	//
+	//   - Each status code must be from 0 to 999 .
+	//
+	//   - Can't contain a status code that is also in failureCodes .
+	SuccessCodes []int32
+
+	noSmithyDocumentSerde
+}
+
+func (v *WafResponseInspection) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.WafResponseInspection)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *WafResponseInspection) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeWafStatusCodeList(s, schemas.WafResponseInspection_failureCodes, v.FailureCodes)
+	serializeWafStatusCodeList(s, schemas.WafResponseInspection_successCodes, v.SuccessCodes)
+}
+func (v *WafResponseInspection) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.WafResponseInspection, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.WafResponseInspection_failureCodes:
+			return deserializeWafStatusCodeList(d, schemas.WafResponseInspection_failureCodes, &v.FailureCodes)
+		case schemas.WafResponseInspection_successCodes:
+			return deserializeWafStatusCodeList(d, schemas.WafResponseInspection_successCodes, &v.SuccessCodes)
+		}
+		return nil
+	})
+}
+
+// Describes a Web Application Firewall (WAF) rule group for a Lightsail
+// distribution. A WAF rule group is a set of rules managed by AWS. The rules
+// inspect viewer requests and block requests that match them.
+type WafRule struct {
+
+	// The name of the WAF rule group (for example, AWSManagedRulesCommonRuleSet ).
+	//
+	// For the WAF rule groups that you can specify for each bundle, see the wafRules
+	// parameter of the CreateDistribution action.
+	//
+	// This member is required.
+	Name *string
+
+	// An object that describes the configuration of the account creation fraud
+	// prevention rule group.
+	//
+	// Constraints:
+	//
+	//   - Define this parameter only when the name is AWSManagedRulesACFPRuleSet .
+	//
+	//   - This parameter is required when the name is AWSManagedRulesACFPRuleSet .
+	AcfpConfig *WafAcfpConfig
+
+	// An object that describes the configuration of the account takeover prevention
+	// rule group.
+	//
+	// Constraints:
+	//
+	//   - Define this parameter only when the name is AWSManagedRulesATPRuleSet .
+	//
+	//   - This parameter is required when the name is AWSManagedRulesATPRuleSet .
+	AtpConfig *WafAtpConfig
+
+	// An object that describes the configuration of the bot control rule group.
+	//
+	// Constraints:
+	//
+	//   - Define this parameter only when the name is AWSManagedRulesBotControlRuleSet
+	//   .
+	//
+	//   - This parameter is required when the name is AWSManagedRulesBotControlRuleSet
+	//   .
+	BotControlConfig *WafBotControlConfig
+
+	noSmithyDocumentSerde
+}
+
+func (v *WafRule) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.WafRule)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *WafRule) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AcfpConfig != nil {
+		s.WriteStruct(schemas.WafRule_acfpConfig)
+		v.AcfpConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.AtpConfig != nil {
+		s.WriteStruct(schemas.WafRule_atpConfig)
+		v.AtpConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.BotControlConfig != nil {
+		s.WriteStruct(schemas.WafRule_botControlConfig)
+		v.BotControlConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.WafRule_name, *v.Name)
+	}
+}
+func (v *WafRule) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.WafRule, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.WafRule_acfpConfig:
+			v.AcfpConfig = &WafAcfpConfig{}
+			return v.AcfpConfig.Deserialize(d)
+		case schemas.WafRule_atpConfig:
+			v.AtpConfig = &WafAtpConfig{}
+			return v.AtpConfig.Deserialize(d)
+		case schemas.WafRule_botControlConfig:
+			v.BotControlConfig = &WafBotControlConfig{}
+			return v.BotControlConfig.Deserialize(d)
+		case schemas.WafRule_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.WafRule_name, v.Name)
 		}
 		return nil
 	})

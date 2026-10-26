@@ -7170,6 +7170,26 @@ func (m *validateOpUpdateNotificationContent) HandleInitialize(ctx context.Conte
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateOutboundEmailContactMessage struct {
+}
+
+func (*validateOpUpdateOutboundEmailContactMessage) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateOutboundEmailContactMessage) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateOutboundEmailContactMessageInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateOutboundEmailContactMessageInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateParticipantAuthentication struct {
 }
 
@@ -9400,6 +9420,10 @@ func addOpUpdateMetricMetadataValidationMiddleware(stack *middleware.Stack) erro
 
 func addOpUpdateNotificationContentValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateNotificationContent{}, middleware.After)
+}
+
+func addOpUpdateOutboundEmailContactMessageValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateOutboundEmailContactMessage{}, middleware.After)
 }
 
 func addOpUpdateParticipantAuthenticationValidationMiddleware(stack *middleware.Stack) error {
@@ -11943,6 +11967,23 @@ func validateNewSessionDetails(v *types.NewSessionDetails) error {
 	}
 }
 
+func validateNullableAdditionalRecipients(v *types.NullableAdditionalRecipients) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "NullableAdditionalRecipients"}
+	if v.CcEmailAddresses != nil {
+		if err := validateOptionalEmailAddressRecipientList(v.CcEmailAddresses); err != nil {
+			invalidParams.AddNested("CcEmailAddresses", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateNumericQuestionPropertyValueAutomation(v *types.NumericQuestionPropertyValueAutomation) error {
 	if v == nil {
 		return nil
@@ -11950,6 +11991,23 @@ func validateNumericQuestionPropertyValueAutomation(v *types.NumericQuestionProp
 	invalidParams := smithy.InvalidParamsError{Context: "NumericQuestionPropertyValueAutomation"}
 	if len(v.Label) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("Label"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOptionalEmailAddressRecipientList(v []types.EmailAddressInfo) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "OptionalEmailAddressRecipientList"}
+	for i := range v {
+		if err := validateEmailAddressInfo(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -13415,6 +13473,46 @@ func validateUpdateCaseActionDefinition(v *types.UpdateCaseActionDefinition) err
 		if err := validateFieldValues(v.Fields); err != nil {
 			invalidParams.AddNested("Fields", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateUpdateOutboundEmailContent(v *types.UpdateOutboundEmailContent) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateOutboundEmailContent"}
+	if len(v.MessageSourceType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("MessageSourceType"))
+	}
+	if v.RawMessage == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RawMessage"))
+	} else if v.RawMessage != nil {
+		if err := validateUpdateOutboundRawMessage(v.RawMessage); err != nil {
+			invalidParams.AddNested("RawMessage", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateUpdateOutboundRawMessage(v *types.UpdateOutboundRawMessage) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateOutboundRawMessage"}
+	if v.Body == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Body"))
+	}
+	if v.ContentType == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ContentType"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -20478,6 +20576,11 @@ func validateOpUpdateContactInput(v *UpdateContactInput) error {
 			invalidParams.AddNested("References", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.AdditionalRecipients != nil {
+		if err := validateNullableAdditionalRecipients(v.AdditionalRecipients); err != nil {
+			invalidParams.AddNested("AdditionalRecipients", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -20900,6 +21003,31 @@ func validateOpUpdateNotificationContentInput(v *UpdateNotificationContentInput)
 	}
 	if v.Content == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Content"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateOutboundEmailContactMessageInput(v *UpdateOutboundEmailContactMessageInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateOutboundEmailContactMessageInput"}
+	if v.InstanceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
+	}
+	if v.ContactId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ContactId"))
+	}
+	if v.EmailMessage == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EmailMessage"))
+	} else if v.EmailMessage != nil {
+		if err := validateUpdateOutboundEmailContent(v.EmailMessage); err != nil {
+			invalidParams.AddNested("EmailMessage", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

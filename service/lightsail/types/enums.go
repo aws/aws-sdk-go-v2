@@ -638,12 +638,14 @@ type DistributionMetricName string
 
 // Enum values for DistributionMetricName
 const (
-	DistributionMetricNameRequests         DistributionMetricName = "Requests"
-	DistributionMetricNameBytesDownloaded  DistributionMetricName = "BytesDownloaded"
-	DistributionMetricNameBytesUploaded    DistributionMetricName = "BytesUploaded"
-	DistributionMetricNameTotalErrorRate   DistributionMetricName = "TotalErrorRate"
-	DistributionMetricNameHttp4xxErrorRate DistributionMetricName = "Http4xxErrorRate"
-	DistributionMetricNameHttp5xxErrorRate DistributionMetricName = "Http5xxErrorRate"
+	DistributionMetricNameRequests           DistributionMetricName = "Requests"
+	DistributionMetricNameBytesDownloaded    DistributionMetricName = "BytesDownloaded"
+	DistributionMetricNameBytesUploaded      DistributionMetricName = "BytesUploaded"
+	DistributionMetricNameTotalErrorRate     DistributionMetricName = "TotalErrorRate"
+	DistributionMetricNameHttp4xxErrorRate   DistributionMetricName = "Http4xxErrorRate"
+	DistributionMetricNameHttp5xxErrorRate   DistributionMetricName = "Http5xxErrorRate"
+	DistributionMetricNameWafAllowedRequests DistributionMetricName = "WafAllowedRequests"
+	DistributionMetricNameWafBlockedRequests DistributionMetricName = "WafBlockedRequests"
 )
 
 // Values returns all known values for DistributionMetricName. Note that this can
@@ -658,6 +660,8 @@ func (DistributionMetricName) Values() []DistributionMetricName {
 		"TotalErrorRate",
 		"Http4xxErrorRate",
 		"Http5xxErrorRate",
+		"WafAllowedRequests",
+		"WafBlockedRequests",
 	}
 }
 
@@ -2312,5 +2316,43 @@ func (ViewerMinimumTlsProtocolVersionEnum) Values() []ViewerMinimumTlsProtocolVe
 		"TLSv1.2_2018",
 		"TLSv1.2_2019",
 		"TLSv1.2_2021",
+	}
+}
+
+type WafInspectionLevelEnum string
+
+// Enum values for WafInspectionLevelEnum
+const (
+	WafInspectionLevelEnumCommon   WafInspectionLevelEnum = "COMMON"
+	WafInspectionLevelEnumTargeted WafInspectionLevelEnum = "TARGETED"
+)
+
+// Values returns all known values for WafInspectionLevelEnum. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (WafInspectionLevelEnum) Values() []WafInspectionLevelEnum {
+	return []WafInspectionLevelEnum{
+		"COMMON",
+		"TARGETED",
+	}
+}
+
+type WafPayloadTypeEnum string
+
+// Enum values for WafPayloadTypeEnum
+const (
+	WafPayloadTypeEnumJson        WafPayloadTypeEnum = "JSON"
+	WafPayloadTypeEnumFormEncoded WafPayloadTypeEnum = "FORM_ENCODED"
+)
+
+// Values returns all known values for WafPayloadTypeEnum. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (WafPayloadTypeEnum) Values() []WafPayloadTypeEnum {
+	return []WafPayloadTypeEnum{
+		"JSON",
+		"FORM_ENCODED",
 	}
 }

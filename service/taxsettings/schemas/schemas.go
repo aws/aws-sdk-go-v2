@@ -185,7 +185,7 @@ var _AccountName = smithy.NewSchema(smithy.ShapeID{
 var AdditionalInfoRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.taxsettings",
 	Name:      "AdditionalInfoRequest",
-}, smithy.ShapeTypeStructure, 24)
+}, smithy.ShapeTypeStructure, 26)
 var AdditionalInfoRequest_malaysiaAdditionalInfo *smithy.Schema
 
 var AdditionalInfoRequest_israelAdditionalInfo *smithy.Schema
@@ -234,10 +234,14 @@ var AdditionalInfoRequest_franceAdditionalInfo *smithy.Schema
 
 var AdditionalInfoRequest_monacoAdditionalInfo *smithy.Schema
 
+var AdditionalInfoRequest_germanyAdditionalInfo *smithy.Schema
+
+var AdditionalInfoRequest_mexicoAdditionalInfo *smithy.Schema
+
 var AdditionalInfoResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.taxsettings",
 	Name:      "AdditionalInfoResponse",
-}, smithy.ShapeTypeStructure, 26)
+}, smithy.ShapeTypeStructure, 28)
 var AdditionalInfoResponse_malaysiaAdditionalInfo *smithy.Schema
 
 var AdditionalInfoResponse_israelAdditionalInfo *smithy.Schema
@@ -289,6 +293,10 @@ var AdditionalInfoResponse_chileAdditionalInfo *smithy.Schema
 var AdditionalInfoResponse_franceAdditionalInfo *smithy.Schema
 
 var AdditionalInfoResponse_monacoAdditionalInfo *smithy.Schema
+
+var AdditionalInfoResponse_germanyAdditionalInfo *smithy.Schema
+
+var AdditionalInfoResponse_mexicoAdditionalInfo *smithy.Schema
 
 var Address = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.taxsettings",
@@ -567,6 +575,11 @@ var _District = smithy.NewSchema(smithy.ShapeID{
 	Name:      "District",
 }, smithy.ShapeTypeString, 0)
 
+var _EconomicIdentificationNumber = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.taxsettings",
+	Name:      "EconomicIdentificationNumber",
+}, smithy.ShapeTypeString, 0)
+
 var EgyptAdditionalInfo = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.taxsettings",
 	Name:      "EgyptAdditionalInfo",
@@ -659,6 +672,14 @@ var GeorgiaAdditionalInfo = smithy.NewSchema(smithy.ShapeID{
 	Name:      "GeorgiaAdditionalInfo",
 }, smithy.ShapeTypeStructure, 1)
 var GeorgiaAdditionalInfo_personType *smithy.Schema
+
+var GermanyAdditionalInfo = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.taxsettings",
+	Name:      "GermanyAdditionalInfo",
+}, smithy.ShapeTypeStructure, 2)
+var GermanyAdditionalInfo_economicIdentificationNumber *smithy.Schema
+
+var GermanyAdditionalInfo_steuernummer *smithy.Schema
 
 var GreeceAdditionalInfo = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.taxsettings",
@@ -846,6 +867,31 @@ var _MaxResults = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.taxsettings",
 	Name:      "MaxResults",
 }, smithy.ShapeTypeInteger, 0)
+
+var MexicoAdditionalInfo = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.taxsettings",
+	Name:      "MexicoAdditionalInfo",
+}, smithy.ShapeTypeStructure, 3)
+var MexicoAdditionalInfo_taxRegime *smithy.Schema
+
+var MexicoAdditionalInfo_taxRegimeFullName *smithy.Schema
+
+var MexicoAdditionalInfo_cfdiUsageCode *smithy.Schema
+
+var _MexicoCfdiUsageCode = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.taxsettings",
+	Name:      "MexicoCfdiUsageCode",
+}, smithy.ShapeTypeString, 0)
+
+var _MexicoTaxRegimeCode = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.taxsettings",
+	Name:      "MexicoTaxRegimeCode",
+}, smithy.ShapeTypeString, 0)
+
+var _MexicoTaxRegimeFullName = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.taxsettings",
+	Name:      "MexicoTaxRegimeFullName",
+}, smithy.ShapeTypeString, 0)
 
 var MonacoAdditionalInfo = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.taxsettings",
@@ -1040,6 +1086,11 @@ var SpainAdditionalInfo_registrationType *smithy.Schema
 var _State = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.taxsettings",
 	Name:      "State",
+}, smithy.ShapeTypeString, 0)
+
+var _Steuernummer = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.taxsettings",
+	Name:      "Steuernummer",
 }, smithy.ShapeTypeString, 0)
 
 var SupplementalTaxRegistration = smithy.NewSchema(smithy.ShapeID{
@@ -1883,6 +1934,16 @@ func init() {
 
 	MonacoAdditionalInfo_businessNumber = MonacoAdditionalInfo.AddMember("businessNumber", _BusinessNumber)
 
+	GermanyAdditionalInfo_economicIdentificationNumber = GermanyAdditionalInfo.AddMember("economicIdentificationNumber", _EconomicIdentificationNumber)
+
+	GermanyAdditionalInfo_steuernummer = GermanyAdditionalInfo.AddMember("steuernummer", _Steuernummer)
+
+	MexicoAdditionalInfo_taxRegime = MexicoAdditionalInfo.AddMember("taxRegime", _MexicoTaxRegimeCode)
+
+	MexicoAdditionalInfo_taxRegimeFullName = MexicoAdditionalInfo.AddMember("taxRegimeFullName", _MexicoTaxRegimeFullName)
+
+	MexicoAdditionalInfo_cfdiUsageCode = MexicoAdditionalInfo.AddMember("cfdiUsageCode", _MexicoCfdiUsageCode)
+
 	AdditionalInfoResponse_malaysiaAdditionalInfo = AdditionalInfoResponse.AddMember("malaysiaAdditionalInfo", MalaysiaAdditionalInfo)
 
 	AdditionalInfoResponse_israelAdditionalInfo = AdditionalInfoResponse.AddMember("israelAdditionalInfo", IsraelAdditionalInfo)
@@ -1934,6 +1995,10 @@ func init() {
 	AdditionalInfoResponse_franceAdditionalInfo = AdditionalInfoResponse.AddMember("franceAdditionalInfo", FranceAdditionalInfo)
 
 	AdditionalInfoResponse_monacoAdditionalInfo = AdditionalInfoResponse.AddMember("monacoAdditionalInfo", MonacoAdditionalInfo)
+
+	AdditionalInfoResponse_germanyAdditionalInfo = AdditionalInfoResponse.AddMember("germanyAdditionalInfo", GermanyAdditionalInfo)
+
+	AdditionalInfoResponse_mexicoAdditionalInfo = AdditionalInfoResponse.AddMember("mexicoAdditionalInfo", MexicoAdditionalInfo)
 
 	Jurisdiction_stateOrRegion = Jurisdiction.AddMember("stateOrRegion", _State)
 
@@ -2056,6 +2121,10 @@ func init() {
 	AdditionalInfoRequest_franceAdditionalInfo = AdditionalInfoRequest.AddMember("franceAdditionalInfo", FranceAdditionalInfo)
 
 	AdditionalInfoRequest_monacoAdditionalInfo = AdditionalInfoRequest.AddMember("monacoAdditionalInfo", MonacoAdditionalInfo)
+
+	AdditionalInfoRequest_germanyAdditionalInfo = AdditionalInfoRequest.AddMember("germanyAdditionalInfo", GermanyAdditionalInfo)
+
+	AdditionalInfoRequest_mexicoAdditionalInfo = AdditionalInfoRequest.AddMember("mexicoAdditionalInfo", MexicoAdditionalInfo)
 
 	AttachmentUploadException_message = AttachmentUploadException.AddMember("message", _ErrorMessage)
 

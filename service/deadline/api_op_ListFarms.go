@@ -28,7 +28,6 @@ func (c *Client) ListFarms(ctx context.Context, params *ListFarmsInput, optFns .
 	return out, nil
 }
 
-// Shared pagination fields for List operation inputs (nextToken + maxResults).
 type ListFarmsInput struct {
 
 	// The maximum number of results to return. Use this parameter with NextToken to
@@ -62,7 +61,6 @@ func (v *ListFarmsInput) SerializeMembers(s smithy.ShapeSerializer) {
 	}
 }
 
-// Shared pagination field for List operation outputs (nextToken).
 type ListFarmsOutput struct {
 
 	// Farms on the list.

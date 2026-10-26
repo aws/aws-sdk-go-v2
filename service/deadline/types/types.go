@@ -160,22 +160,12 @@ type AcceleratorSelection struct {
 	//
 	//   - grid:r580 - [NVIDIA vGPU software 19]
 	//
-	//   - grid:r570 - [NVIDIA vGPU software 18]
-	//
-	//   - grid:r535 - [NVIDIA vGPU software 16]
-	//
 	// If you don't specify a runtime, Amazon Web Services Deadline Cloud uses latest
 	// as the default. However, if you have multiple accelerators and specify latest
 	// for some and leave others blank, Amazon Web Services Deadline Cloud raises an
 	// exception.
 	//
-	// Not all runtimes are compatible with all accelerator types:
-	//
-	//   - t4 and a10g : Support all runtimes ( grid:r580 , grid:r570 , grid:r535 )
-	//
-	//   - l4 and l40s : Only support grid:r570 and newer
-	//
-	//   - rtx-pro-server-6000 : Only supports grid:r580
+	// All accelerator types support grid:r580 .
 	//
 	// All accelerators in a fleet must use the same runtime version. You cannot mix
 	// different runtime versions within a single fleet.
@@ -184,8 +174,6 @@ type AcceleratorSelection struct {
 	// accelerators.
 	//
 	// [NVIDIA vGPU software 19]: https://docs.nvidia.com/vgpu/19.0/index.html
-	// [NVIDIA vGPU software 16]: https://docs.nvidia.com/vgpu/16.0/index.html
-	// [NVIDIA vGPU software 18]: https://docs.nvidia.com/vgpu/18.0/index.html
 	Runtime *string
 
 	noSmithyDocumentSerde
@@ -7841,7 +7829,7 @@ type PersistentVolumeConfiguration struct {
 	Iops *int32
 
 	// The number of hours a persistent volume can remain unused before it is deleted.
-	// The default is 168 (7 days).
+	// The default is 12.
 	LastUsedTtlHours *int32
 
 	// The persistent volume size in GiB. The default is 250.
@@ -9233,6 +9221,8 @@ type ServiceManagedEc2InstanceCapabilities struct {
 	AcceleratorCapabilities *AcceleratorCapabilities
 
 	// The allowable Amazon EC2 instance types.
+	//
+	// If you specify allowedInstanceTypes , you can't specify excludedInstanceTypes .
 	AllowedInstanceTypes []string
 
 	// The custom capability amounts to require for instances in this fleet.
@@ -9242,6 +9232,8 @@ type ServiceManagedEc2InstanceCapabilities struct {
 	CustomAttributes []FleetAttributeCapability
 
 	// The instance types to exclude from the fleet.
+	//
+	// If you specify excludedInstanceTypes , you can't specify allowedInstanceTypes .
 	ExcludedInstanceTypes []string
 
 	// The root EBS volume.

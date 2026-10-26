@@ -28,7 +28,6 @@ func (c *Client) ListJobParameterDefinitions(ctx context.Context, params *ListJo
 	return out, nil
 }
 
-// Shared pagination fields for List operation inputs (nextToken + maxResults).
 type ListJobParameterDefinitionsInput struct {
 
 	// The farm ID of the job to list.
@@ -80,7 +79,6 @@ func (v *ListJobParameterDefinitionsInput) SerializeMembers(s smithy.ShapeSerial
 	}
 }
 
-// Shared pagination field for List operation outputs (nextToken).
 type ListJobParameterDefinitionsOutput struct {
 
 	// Lists parameter definitions of a job.

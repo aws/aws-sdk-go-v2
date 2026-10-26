@@ -1,0 +1,8 @@
+{
+    "id": "8b5013e5-d359-411f-aaab-d411eb65d757",
+    "type": "feature",
+    "description": "This release adds support for ML-KEM (Module-Lattice-Based Key-Encapsulation Mechanism) keys in AWS KMS. ML-KEM, as specified in NIST FIPS 203, is a post-quantum key encapsulation mechanism that can be used to establish a shared secret between two parties.",
+    "modules": [
+        "service/kms"
+    ]
+}

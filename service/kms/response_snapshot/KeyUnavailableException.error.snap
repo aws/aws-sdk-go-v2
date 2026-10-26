@@ -1,5 +1,5 @@
 500
 Content-Type: application/x-amz-json-1.1
-X-Amz-Target: TrentService.Decrypt
+X-Amz-Target: TrentService.Decapsulate
 
 {"__type":"KeyUnavailableException","message":"__Message__"}

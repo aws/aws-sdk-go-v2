@@ -108,6 +108,19 @@ func serializeChannels(s smithy.ShapeSerializer, schema *smithy.Schema, v []Chan
 	s.CloseList()
 }
 
+func serializeFailoverSlateConfigurationList(s smithy.ShapeSerializer, schema *smithy.Schema, v []FailoverSlateConfigurationSummary) {
+	if v == nil {
+		return
+	}
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
 func serializeMediaTailorPlaybackConfigurationsList(s smithy.ShapeSerializer, schema *smithy.Schema, v []MediaTailorPlaybackConfiguration) {
 	if v == nil {
 		return
@@ -470,6 +483,28 @@ func deserializeChannels(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]Chan
 		}
 
 		vv = Channel{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeFailoverSlateConfigurationList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]FailoverSlateConfigurationSummary) error {
+	*v = make([]FailoverSlateConfigurationSummary, 0)
+	var vv FailoverSlateConfigurationSummary
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero FailoverSlateConfigurationSummary
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = FailoverSlateConfigurationSummary{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
 		}

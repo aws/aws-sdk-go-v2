@@ -1,0 +1,5 @@
+POST /UpdateFailoverSlateConfiguration
+
+Content-Type: application/json
+
+{"activationThresholdSeconds":1,"arn":"__Arn__","maxSlateDisplaySeconds":1,"minSlateDisplaySeconds":1,"name":"__Name__"}

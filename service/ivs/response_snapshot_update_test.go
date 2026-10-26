@@ -175,8 +175,9 @@ func TestUpdateResponseSnapshot_BatchGetChannel(t *testing.T) {
 					Policy:            types.MultitrackPolicy("ALLOW"),
 					MaximumResolution: types.MultitrackMaximumResolution("SD"),
 				},
-				ContainerFormat:    types.ContainerFormat("TS"),
-				AdConfigurationArn: ptr.String("__AdConfigurationArn__"),
+				ContainerFormat:               types.ContainerFormat("TS"),
+				AdConfigurationArn:            ptr.String("__AdConfigurationArn__"),
+				FailoverSlateConfigurationArn: ptr.String("__FailoverSlateConfigurationArn__"),
 			},
 			{
 				Arn:                       ptr.String("__Arn__"),
@@ -202,8 +203,9 @@ func TestUpdateResponseSnapshot_BatchGetChannel(t *testing.T) {
 					Policy:            types.MultitrackPolicy("ALLOW"),
 					MaximumResolution: types.MultitrackMaximumResolution("SD"),
 				},
-				ContainerFormat:    types.ContainerFormat("TS"),
-				AdConfigurationArn: ptr.String("__AdConfigurationArn__"),
+				ContainerFormat:               types.ContainerFormat("TS"),
+				AdConfigurationArn:            ptr.String("__AdConfigurationArn__"),
+				FailoverSlateConfigurationArn: ptr.String("__FailoverSlateConfigurationArn__"),
 			},
 		},
 		Errors: []types.BatchError{
@@ -411,8 +413,9 @@ func TestUpdateResponseSnapshot_CreateChannel(t *testing.T) {
 				Policy:            types.MultitrackPolicy("ALLOW"),
 				MaximumResolution: types.MultitrackMaximumResolution("SD"),
 			},
-			ContainerFormat:    types.ContainerFormat("TS"),
-			AdConfigurationArn: ptr.String("__AdConfigurationArn__"),
+			ContainerFormat:               types.ContainerFormat("TS"),
+			AdConfigurationArn:            ptr.String("__AdConfigurationArn__"),
+			FailoverSlateConfigurationArn: ptr.String("__FailoverSlateConfigurationArn__"),
 		},
 		StreamKey: &types.StreamKey{
 			Arn:        ptr.String("__Arn__"),
@@ -439,6 +442,40 @@ func TestUpdateResponseSnapshot_CreateChannel(t *testing.T) {
 		body = b
 	}
 	if err := serdeRespWriteSnapshot("CreateChannel.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_CreateFailoverSlateConfiguration(t *testing.T) {
+	want := &CreateFailoverSlateConfigurationOutput{
+		FailoverSlateConfiguration: &types.FailoverSlateConfiguration{
+			Arn:                        ptr.String("__Arn__"),
+			Name:                       ptr.String("__Name__"),
+			ActivationThresholdSeconds: ptr.Int32(1),
+			MinSlateDisplaySeconds:     ptr.Int32(1),
+			MaxSlateDisplaySeconds:     ptr.Int32(1),
+			State:                      types.FailoverSlateConfigurationState("CREATING"),
+			Tags: map[string]string{
+				"key0": "__Value__",
+			},
+		},
+	}
+	proto := restjson1.New(schemas.AmazonInteractiveVideoService)
+	opSchema := smithy.NewOperationSchema(schemas.CreateFailoverSlateConfiguration, schemas.CreateFailoverSlateConfigurationResponse, schemas.CreateFailoverSlateConfigurationResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("CreateFailoverSlateConfiguration.response", 200, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -610,6 +647,28 @@ func TestUpdateResponseSnapshot_DeleteChannel(t *testing.T) {
 	}
 }
 
+func TestUpdateResponseSnapshot_DeleteFailoverSlateConfiguration(t *testing.T) {
+	want := &DeleteFailoverSlateConfigurationOutput{}
+	proto := restjson1.New(schemas.AmazonInteractiveVideoService)
+	opSchema := smithy.NewOperationSchema(schemas.DeleteFailoverSlateConfiguration, nil, nil)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("DeleteFailoverSlateConfiguration.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateResponseSnapshot_DeletePlaybackKeyPair(t *testing.T) {
 	want := &DeletePlaybackKeyPairOutput{}
 	proto := restjson1.New(schemas.AmazonInteractiveVideoService)
@@ -766,8 +825,9 @@ func TestUpdateResponseSnapshot_GetChannel(t *testing.T) {
 				Policy:            types.MultitrackPolicy("ALLOW"),
 				MaximumResolution: types.MultitrackMaximumResolution("SD"),
 			},
-			ContainerFormat:    types.ContainerFormat("TS"),
-			AdConfigurationArn: ptr.String("__AdConfigurationArn__"),
+			ContainerFormat:               types.ContainerFormat("TS"),
+			AdConfigurationArn:            ptr.String("__AdConfigurationArn__"),
+			FailoverSlateConfigurationArn: ptr.String("__FailoverSlateConfigurationArn__"),
 		},
 	}
 	proto := restjson1.New(schemas.AmazonInteractiveVideoService)
@@ -786,6 +846,40 @@ func TestUpdateResponseSnapshot_GetChannel(t *testing.T) {
 		body = b
 	}
 	if err := serdeRespWriteSnapshot("GetChannel.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_GetFailoverSlateConfiguration(t *testing.T) {
+	want := &GetFailoverSlateConfigurationOutput{
+		FailoverSlateConfiguration: &types.FailoverSlateConfiguration{
+			Arn:                        ptr.String("__Arn__"),
+			Name:                       ptr.String("__Name__"),
+			ActivationThresholdSeconds: ptr.Int32(1),
+			MinSlateDisplaySeconds:     ptr.Int32(1),
+			MaxSlateDisplaySeconds:     ptr.Int32(1),
+			State:                      types.FailoverSlateConfigurationState("CREATING"),
+			Tags: map[string]string{
+				"key0": "__Value__",
+			},
+		},
+	}
+	proto := restjson1.New(schemas.AmazonInteractiveVideoService)
+	opSchema := smithy.NewOperationSchema(schemas.GetFailoverSlateConfiguration, schemas.GetFailoverSlateConfigurationResponse, schemas.GetFailoverSlateConfigurationResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("GetFailoverSlateConfiguration.response", 200, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -1006,8 +1100,9 @@ func TestUpdateResponseSnapshot_GetStreamSession(t *testing.T) {
 					Policy:            types.MultitrackPolicy("ALLOW"),
 					MaximumResolution: types.MultitrackMaximumResolution("SD"),
 				},
-				ContainerFormat:    types.ContainerFormat("TS"),
-				AdConfigurationArn: ptr.String("__AdConfigurationArn__"),
+				ContainerFormat:               types.ContainerFormat("TS"),
+				AdConfigurationArn:            ptr.String("__AdConfigurationArn__"),
+				FailoverSlateConfigurationArn: ptr.String("__FailoverSlateConfigurationArn__"),
 			},
 			IngestConfiguration: &types.IngestConfiguration{
 				Video: &types.VideoConfiguration{
@@ -1119,6 +1214,17 @@ func TestUpdateResponseSnapshot_GetStreamSession(t *testing.T) {
 					Type:      ptr.String("__Type__"),
 					EventTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 					Code:      ptr.String("__Code__"),
+				},
+			},
+			FailoverSlateConfiguration: &types.FailoverSlateConfiguration{
+				Arn:                        ptr.String("__Arn__"),
+				Name:                       ptr.String("__Name__"),
+				ActivationThresholdSeconds: ptr.Int32(1),
+				MinSlateDisplaySeconds:     ptr.Int32(1),
+				MaxSlateDisplaySeconds:     ptr.Int32(1),
+				State:                      types.FailoverSlateConfigurationState("CREATING"),
+				Tags: map[string]string{
+					"key0": "__Value__",
 				},
 			},
 		},
@@ -1274,11 +1380,12 @@ func TestUpdateResponseSnapshot_ListChannels(t *testing.T) {
 				Tags: map[string]string{
 					"key0": "__Value__",
 				},
-				InsecureIngest:               true,
-				Type:                         types.ChannelType("BASIC"),
-				Preset:                       types.TranscodePreset("HIGHER_BANDWIDTH_DELIVERY"),
-				PlaybackRestrictionPolicyArn: ptr.String("__PlaybackRestrictionPolicyArn__"),
-				AdConfigurationArn:           ptr.String("__AdConfigurationArn__"),
+				InsecureIngest:                true,
+				Type:                          types.ChannelType("BASIC"),
+				Preset:                        types.TranscodePreset("HIGHER_BANDWIDTH_DELIVERY"),
+				PlaybackRestrictionPolicyArn:  ptr.String("__PlaybackRestrictionPolicyArn__"),
+				AdConfigurationArn:            ptr.String("__AdConfigurationArn__"),
+				FailoverSlateConfigurationArn: ptr.String("__FailoverSlateConfigurationArn__"),
 			},
 			{
 				Arn:                       ptr.String("__Arn__"),
@@ -1289,11 +1396,12 @@ func TestUpdateResponseSnapshot_ListChannels(t *testing.T) {
 				Tags: map[string]string{
 					"key0": "__Value__",
 				},
-				InsecureIngest:               true,
-				Type:                         types.ChannelType("BASIC"),
-				Preset:                       types.TranscodePreset("HIGHER_BANDWIDTH_DELIVERY"),
-				PlaybackRestrictionPolicyArn: ptr.String("__PlaybackRestrictionPolicyArn__"),
-				AdConfigurationArn:           ptr.String("__AdConfigurationArn__"),
+				InsecureIngest:                true,
+				Type:                          types.ChannelType("BASIC"),
+				Preset:                        types.TranscodePreset("HIGHER_BANDWIDTH_DELIVERY"),
+				PlaybackRestrictionPolicyArn:  ptr.String("__PlaybackRestrictionPolicyArn__"),
+				AdConfigurationArn:            ptr.String("__AdConfigurationArn__"),
+				FailoverSlateConfigurationArn: ptr.String("__FailoverSlateConfigurationArn__"),
 			},
 		},
 		NextToken: ptr.String("__NextToken__"),
@@ -1314,6 +1422,54 @@ func TestUpdateResponseSnapshot_ListChannels(t *testing.T) {
 		body = b
 	}
 	if err := serdeRespWriteSnapshot("ListChannels.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_ListFailoverSlateConfigurations(t *testing.T) {
+	want := &ListFailoverSlateConfigurationsOutput{
+		FailoverSlateConfigurations: []types.FailoverSlateConfigurationSummary{
+			{
+				Arn:                        ptr.String("__Arn__"),
+				Name:                       ptr.String("__Name__"),
+				ActivationThresholdSeconds: ptr.Int32(1),
+				MinSlateDisplaySeconds:     ptr.Int32(1),
+				MaxSlateDisplaySeconds:     ptr.Int32(1),
+				State:                      types.FailoverSlateConfigurationState("CREATING"),
+				Tags: map[string]string{
+					"key0": "__Value__",
+				},
+			},
+			{
+				Arn:                        ptr.String("__Arn__"),
+				Name:                       ptr.String("__Name__"),
+				ActivationThresholdSeconds: ptr.Int32(1),
+				MinSlateDisplaySeconds:     ptr.Int32(1),
+				MaxSlateDisplaySeconds:     ptr.Int32(1),
+				State:                      types.FailoverSlateConfigurationState("CREATING"),
+				Tags: map[string]string{
+					"key0": "__Value__",
+				},
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	proto := restjson1.New(schemas.AmazonInteractiveVideoService)
+	opSchema := smithy.NewOperationSchema(schemas.ListFailoverSlateConfigurations, schemas.ListFailoverSlateConfigurationsResponse, schemas.ListFailoverSlateConfigurationsResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("ListFailoverSlateConfigurations.response", 200, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -1792,8 +1948,9 @@ func TestUpdateResponseSnapshot_UpdateChannel(t *testing.T) {
 				Policy:            types.MultitrackPolicy("ALLOW"),
 				MaximumResolution: types.MultitrackMaximumResolution("SD"),
 			},
-			ContainerFormat:    types.ContainerFormat("TS"),
-			AdConfigurationArn: ptr.String("__AdConfigurationArn__"),
+			ContainerFormat:               types.ContainerFormat("TS"),
+			AdConfigurationArn:            ptr.String("__AdConfigurationArn__"),
+			FailoverSlateConfigurationArn: ptr.String("__FailoverSlateConfigurationArn__"),
 		},
 	}
 	proto := restjson1.New(schemas.AmazonInteractiveVideoService)
@@ -1812,6 +1969,40 @@ func TestUpdateResponseSnapshot_UpdateChannel(t *testing.T) {
 		body = b
 	}
 	if err := serdeRespWriteSnapshot("UpdateChannel.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_UpdateFailoverSlateConfiguration(t *testing.T) {
+	want := &UpdateFailoverSlateConfigurationOutput{
+		FailoverSlateConfiguration: &types.FailoverSlateConfiguration{
+			Arn:                        ptr.String("__Arn__"),
+			Name:                       ptr.String("__Name__"),
+			ActivationThresholdSeconds: ptr.Int32(1),
+			MinSlateDisplaySeconds:     ptr.Int32(1),
+			MaxSlateDisplaySeconds:     ptr.Int32(1),
+			State:                      types.FailoverSlateConfigurationState("CREATING"),
+			Tags: map[string]string{
+				"key0": "__Value__",
+			},
+		},
+	}
+	proto := restjson1.New(schemas.AmazonInteractiveVideoService)
+	opSchema := smithy.NewOperationSchema(schemas.UpdateFailoverSlateConfiguration, schemas.UpdateFailoverSlateConfigurationResponse, schemas.UpdateFailoverSlateConfigurationResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("UpdateFailoverSlateConfiguration.response", 200, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
 }

@@ -776,6 +776,10 @@ type KeyMetadata struct {
 	// is true, otherwise it is false.
 	Enabled bool
 
+	// The key encapsulation algorithm that the KMS key supports. This field appears
+	// only for KMS keys with a KeyUsage value of ENCAPSULATE_DECAPSULATE .
+	EncapsulationAlgorithms []EncapsulationAlgorithmSpec
+
 	// The encryption algorithms that the KMS key supports. You cannot use the KMS key
 	// with other encryption algorithms within KMS.
 	//
@@ -926,6 +930,7 @@ func (v *KeyMetadata) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Enabled != false {
 		s.WriteBool(schemas.KeyMetadata_Enabled, v.Enabled)
 	}
+	serializeEncapsulationAlgorithmSpecList(s, schemas.KeyMetadata_EncapsulationAlgorithms, v.EncapsulationAlgorithms)
 	serializeEncryptionAlgorithmSpecList(s, schemas.KeyMetadata_EncryptionAlgorithms, v.EncryptionAlgorithms)
 	if v.ExpirationModel != "" {
 		s.WriteString(schemas.KeyMetadata_ExpirationModel, string(v.ExpirationModel))
@@ -1007,6 +1012,8 @@ func (v *KeyMetadata) Deserialize(d smithy.ShapeDeserializer) error {
 			return d.ReadString(schemas.KeyMetadata_Description, v.Description)
 		case schemas.KeyMetadata_Enabled:
 			return d.ReadBool(schemas.KeyMetadata_Enabled, &v.Enabled)
+		case schemas.KeyMetadata_EncapsulationAlgorithms:
+			return deserializeEncapsulationAlgorithmSpecList(d, schemas.KeyMetadata_EncapsulationAlgorithms, &v.EncapsulationAlgorithms)
 		case schemas.KeyMetadata_EncryptionAlgorithms:
 			return deserializeEncryptionAlgorithmSpecList(d, schemas.KeyMetadata_EncryptionAlgorithms, &v.EncryptionAlgorithms)
 		case schemas.KeyMetadata_ExpirationModel:

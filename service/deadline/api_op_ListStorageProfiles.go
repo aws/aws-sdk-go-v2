@@ -28,7 +28,6 @@ func (c *Client) ListStorageProfiles(ctx context.Context, params *ListStoragePro
 	return out, nil
 }
 
-// Shared pagination fields for List operation inputs (nextToken + maxResults).
 type ListStorageProfilesInput struct {
 
 	// The farm ID of the storage profile.
@@ -64,7 +63,6 @@ func (v *ListStorageProfilesInput) SerializeMembers(s smithy.ShapeSerializer) {
 	}
 }
 
-// Shared pagination field for List operation outputs (nextToken).
 type ListStorageProfilesOutput struct {
 
 	// The storage profiles.

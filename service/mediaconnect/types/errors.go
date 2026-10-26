@@ -301,6 +301,57 @@ func (v *CreateGateway420Exception) Deserialize(d smithy.ShapeDeserializer) erro
 	})
 }
 
+// The request would cause you to exceed a service quota for destination
+// endpoints. Delete unused destination endpoints or request a quota increase, then
+// try your request again.
+type DestinationEndpointServiceQuotaExceededException struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *DestinationEndpointServiceQuotaExceededException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *DestinationEndpointServiceQuotaExceededException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *DestinationEndpointServiceQuotaExceededException) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "DestinationEndpointServiceQuotaExceededException"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *DestinationEndpointServiceQuotaExceededException) ErrorFault() smithy.ErrorFault {
+	return smithy.FaultClient
+}
+func (v *DestinationEndpointServiceQuotaExceededException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DestinationEndpointServiceQuotaExceededException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DestinationEndpointServiceQuotaExceededException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.DestinationEndpointServiceQuotaExceededException_Message, *v.Message)
+	}
+}
+func (v *DestinationEndpointServiceQuotaExceededException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DestinationEndpointServiceQuotaExceededException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DestinationEndpointServiceQuotaExceededException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.DestinationEndpointServiceQuotaExceededException_Message, v.Message)
+		}
+		return nil
+	})
+}
+
 // You do not have sufficient access to perform this action.
 type ForbiddenException struct {
 	Message *string
@@ -683,6 +734,57 @@ func (v *ServiceUnavailableException) Deserialize(d smithy.ShapeDeserializer) er
 		case schemas.ServiceUnavailableException_Message:
 			v.Message = new(string)
 			return d.ReadString(schemas.ServiceUnavailableException_Message, v.Message)
+		}
+		return nil
+	})
+}
+
+// The request would cause you to exceed a service quota for source endpoints.
+// Delete unused source endpoints or request a quota increase, then try your
+// request again.
+type SourceEndpointServiceQuotaExceededException struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *SourceEndpointServiceQuotaExceededException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *SourceEndpointServiceQuotaExceededException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *SourceEndpointServiceQuotaExceededException) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "SourceEndpointServiceQuotaExceededException"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *SourceEndpointServiceQuotaExceededException) ErrorFault() smithy.ErrorFault {
+	return smithy.FaultClient
+}
+func (v *SourceEndpointServiceQuotaExceededException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SourceEndpointServiceQuotaExceededException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SourceEndpointServiceQuotaExceededException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.SourceEndpointServiceQuotaExceededException_Message, *v.Message)
+	}
+}
+func (v *SourceEndpointServiceQuotaExceededException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SourceEndpointServiceQuotaExceededException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SourceEndpointServiceQuotaExceededException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.SourceEndpointServiceQuotaExceededException_Message, v.Message)
 		}
 		return nil
 	})

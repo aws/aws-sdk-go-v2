@@ -172,6 +172,36 @@ func TestCheckResponseSnapshot_CreateOAuth2TokenWithIAM(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_CreateOAuth2TokenWithTokenExchange(t *testing.T) {
+	want := &CreateOAuth2TokenWithTokenExchangeOutput{
+		AccessToken:     ptr.String("__AccessToken__"),
+		IssuedTokenType: ptr.String("__IssuedTokenType__"),
+		TokenType:       ptr.String("__TokenType__"),
+		ExpiresIn:       ptr.Int32(1),
+	}
+	status, header, body, err := serdeRespReadSnapshot("CreateOAuth2TokenWithTokenExchange.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.CreateOAuth2TokenWithTokenExchange(context.Background(), &CreateOAuth2TokenWithTokenExchangeInput{
+		GrantType:        ptr.String("__GrantType__"),
+		SubjectToken:     ptr.String("__SubjectToken__"),
+		SubjectTokenType: ptr.String("__SubjectTokenType__"),
+		Resource:         ptr.String("__Resource__"),
+		Scope:            ptr.String("__Scope__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "CreateOAuth2TokenWithTokenExchange.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_DeleteConsoleAuthorizationConfiguration(t *testing.T) {
 	want := &DeleteConsoleAuthorizationConfigurationOutput{
 		TargetId:                    ptr.String("__TargetId__"),
@@ -566,6 +596,70 @@ func TestCheckResponseSnapshot_Error_InternalServerException(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_Error_InvalidGrantException(t *testing.T) {
+	want := &types.InvalidGrantException{
+		Error_:  types.OAuth2ErrorCode("TOKEN_EXPIRED"),
+		Message: ptr.String("__Message__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("InvalidGrantException.error")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	_, opErr := svc.CreateOAuth2TokenWithTokenExchange(context.Background(), &CreateOAuth2TokenWithTokenExchangeInput{
+		GrantType:        ptr.String("__GrantType__"),
+		SubjectToken:     ptr.String("__SubjectToken__"),
+		SubjectTokenType: ptr.String("__SubjectTokenType__"),
+		Resource:         ptr.String("__Resource__"),
+		Scope:            ptr.String("__Scope__"),
+	})
+	if opErr == nil {
+		t.Fatal("expected error, got nil")
+	}
+	var got *types.InvalidGrantException
+	if !errors.As(opErr, &got) {
+		t.Fatalf("expected types.InvalidGrantException, got %v", opErr)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("error response snapshot mismatch for %s: %v", "InvalidGrantException.error", err)
+	}
+}
+
+func TestCheckResponseSnapshot_Error_InvalidScopeException(t *testing.T) {
+	want := &types.InvalidScopeException{
+		Error_:  types.OAuth2ErrorCode("TOKEN_EXPIRED"),
+		Message: ptr.String("__Message__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("InvalidScopeException.error")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	_, opErr := svc.CreateOAuth2TokenWithTokenExchange(context.Background(), &CreateOAuth2TokenWithTokenExchangeInput{
+		GrantType:        ptr.String("__GrantType__"),
+		SubjectToken:     ptr.String("__SubjectToken__"),
+		SubjectTokenType: ptr.String("__SubjectTokenType__"),
+		Resource:         ptr.String("__Resource__"),
+		Scope:            ptr.String("__Scope__"),
+	})
+	if opErr == nil {
+		t.Fatal("expected error, got nil")
+	}
+	var got *types.InvalidScopeException
+	if !errors.As(opErr, &got) {
+		t.Fatalf("expected types.InvalidScopeException, got %v", opErr)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("error response snapshot mismatch for %s: %v", "InvalidScopeException.error", err)
+	}
+}
+
 func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 	want := &types.ResourceNotFoundException{
 		Error_:  types.OAuth2ErrorCode("TOKEN_EXPIRED"),
@@ -626,6 +720,38 @@ func TestCheckResponseSnapshot_Error_ServiceQuotaExceededException(t *testing.T)
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("error response snapshot mismatch for %s: %v", "ServiceQuotaExceededException.error", err)
+	}
+}
+
+func TestCheckResponseSnapshot_Error_ServiceUnavailableException(t *testing.T) {
+	want := &types.ServiceUnavailableException{
+		Error_:  types.OAuth2ErrorCode("TOKEN_EXPIRED"),
+		Message: ptr.String("__Message__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("ServiceUnavailableException.error")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	_, opErr := svc.CreateOAuth2TokenWithTokenExchange(context.Background(), &CreateOAuth2TokenWithTokenExchangeInput{
+		GrantType:        ptr.String("__GrantType__"),
+		SubjectToken:     ptr.String("__SubjectToken__"),
+		SubjectTokenType: ptr.String("__SubjectTokenType__"),
+		Resource:         ptr.String("__Resource__"),
+		Scope:            ptr.String("__Scope__"),
+	})
+	if opErr == nil {
+		t.Fatal("expected error, got nil")
+	}
+	var got *types.ServiceUnavailableException
+	if !errors.As(opErr, &got) {
+		t.Fatalf("expected types.ServiceUnavailableException, got %v", opErr)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("error response snapshot mismatch for %s: %v", "ServiceUnavailableException.error", err)
 	}
 }
 

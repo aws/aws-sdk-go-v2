@@ -3070,6 +3070,19 @@ func serializeOperationalHours(s smithy.ShapeSerializer, schema *smithy.Schema, 
 	s.CloseList()
 }
 
+func serializeOptionalEmailAddressRecipientList(s smithy.ShapeSerializer, schema *smithy.Schema, v []EmailAddressInfo) {
+	if v == nil {
+		return
+	}
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
 func serializeOriginsList(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
 	if v == nil {
 		return
@@ -9065,6 +9078,28 @@ func deserializeOperationalHours(d smithy.ShapeDeserializer, s *smithy.Schema, v
 		}
 
 		vv = OperationalHour{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeOptionalEmailAddressRecipientList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]EmailAddressInfo) error {
+	*v = make([]EmailAddressInfo, 0)
+	var vv EmailAddressInfo
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero EmailAddressInfo
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = EmailAddressInfo{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
 		}

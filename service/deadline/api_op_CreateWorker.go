@@ -88,8 +88,6 @@ func (v *CreateWorkerInput) SerializeMembers(s smithy.ShapeSerializer) {
 	serializeTags(s, schemas.CreateWorkerRequest_tags, v.Tags)
 }
 
-// Mixin that adds an optional ARN field to response structures. Apply to
-// SummaryMixins (flows into Get, Summary, and BatchGet) and Create outputs.
 type CreateWorkerOutput struct {
 
 	// The worker ID.

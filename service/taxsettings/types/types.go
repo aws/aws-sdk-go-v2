@@ -178,6 +178,10 @@ type AdditionalInfoRequest struct {
 	//  Additional tax information to specify for a TRN in Georgia.
 	GeorgiaAdditionalInfo *GeorgiaAdditionalInfo
 
+	// Additional tax information to specify for a Tax Registration Number (TRN) in
+	// Germany.
+	GermanyAdditionalInfo *GermanyAdditionalInfo
+
 	// Additional tax information to specify for a TRN in Greece.
 	GreeceAdditionalInfo *GreeceAdditionalInfo
 
@@ -195,6 +199,10 @@ type AdditionalInfoRequest struct {
 
 	//  Additional tax information to specify for a TRN in Malaysia.
 	MalaysiaAdditionalInfo *MalaysiaAdditionalInfo
+
+	// Additional tax information to specify for a Tax Registration Number (TRN) in
+	// Mexico.
+	MexicoAdditionalInfo *MexicoAdditionalInfo
 
 	// Additional tax information to specify for a TRN in Monaco.
 	MonacoAdditionalInfo *MonacoAdditionalInfo
@@ -274,6 +282,11 @@ func (v *AdditionalInfoRequest) SerializeMembers(s smithy.ShapeSerializer) {
 		v.GeorgiaAdditionalInfo.SerializeMembers(s)
 		s.CloseStruct()
 	}
+	if v.GermanyAdditionalInfo != nil {
+		s.WriteStruct(schemas.AdditionalInfoRequest_germanyAdditionalInfo)
+		v.GermanyAdditionalInfo.SerializeMembers(s)
+		s.CloseStruct()
+	}
 	if v.GreeceAdditionalInfo != nil {
 		s.WriteStruct(schemas.AdditionalInfoRequest_greeceAdditionalInfo)
 		v.GreeceAdditionalInfo.SerializeMembers(s)
@@ -302,6 +315,11 @@ func (v *AdditionalInfoRequest) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.MalaysiaAdditionalInfo != nil {
 		s.WriteStruct(schemas.AdditionalInfoRequest_malaysiaAdditionalInfo)
 		v.MalaysiaAdditionalInfo.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MexicoAdditionalInfo != nil {
+		s.WriteStruct(schemas.AdditionalInfoRequest_mexicoAdditionalInfo)
+		v.MexicoAdditionalInfo.SerializeMembers(s)
 		s.CloseStruct()
 	}
 	if v.MonacoAdditionalInfo != nil {
@@ -384,6 +402,9 @@ func (v *AdditionalInfoRequest) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.AdditionalInfoRequest_georgiaAdditionalInfo:
 			v.GeorgiaAdditionalInfo = &GeorgiaAdditionalInfo{}
 			return v.GeorgiaAdditionalInfo.Deserialize(d)
+		case schemas.AdditionalInfoRequest_germanyAdditionalInfo:
+			v.GermanyAdditionalInfo = &GermanyAdditionalInfo{}
+			return v.GermanyAdditionalInfo.Deserialize(d)
 		case schemas.AdditionalInfoRequest_greeceAdditionalInfo:
 			v.GreeceAdditionalInfo = &GreeceAdditionalInfo{}
 			return v.GreeceAdditionalInfo.Deserialize(d)
@@ -402,6 +423,9 @@ func (v *AdditionalInfoRequest) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.AdditionalInfoRequest_malaysiaAdditionalInfo:
 			v.MalaysiaAdditionalInfo = &MalaysiaAdditionalInfo{}
 			return v.MalaysiaAdditionalInfo.Deserialize(d)
+		case schemas.AdditionalInfoRequest_mexicoAdditionalInfo:
+			v.MexicoAdditionalInfo = &MexicoAdditionalInfo{}
+			return v.MexicoAdditionalInfo.Deserialize(d)
 		case schemas.AdditionalInfoRequest_monacoAdditionalInfo:
 			v.MonacoAdditionalInfo = &MonacoAdditionalInfo{}
 			return v.MonacoAdditionalInfo.Deserialize(d)
@@ -472,6 +496,10 @@ type AdditionalInfoResponse struct {
 	//  Additional tax information associated with your TRN in Georgia.
 	GeorgiaAdditionalInfo *GeorgiaAdditionalInfo
 
+	// Additional tax information associated with your Tax Registration Number (TRN)
+	// in Germany.
+	GermanyAdditionalInfo *GermanyAdditionalInfo
+
 	// Additional tax information to specify for a TRN in Greece.
 	GreeceAdditionalInfo *GreeceAdditionalInfo
 
@@ -492,6 +520,10 @@ type AdditionalInfoResponse struct {
 
 	//  Additional tax information associated with your TRN in Malaysia.
 	MalaysiaAdditionalInfo *MalaysiaAdditionalInfo
+
+	// Additional tax information associated with your Tax Registration Number (TRN)
+	// in Mexico.
+	MexicoAdditionalInfo *MexicoAdditionalInfo
 
 	// Additional tax information associated with your TRN in Monaco.
 	MonacoAdditionalInfo *MonacoAdditionalInfo
@@ -576,6 +608,11 @@ func (v *AdditionalInfoResponse) SerializeMembers(s smithy.ShapeSerializer) {
 		v.GeorgiaAdditionalInfo.SerializeMembers(s)
 		s.CloseStruct()
 	}
+	if v.GermanyAdditionalInfo != nil {
+		s.WriteStruct(schemas.AdditionalInfoResponse_germanyAdditionalInfo)
+		v.GermanyAdditionalInfo.SerializeMembers(s)
+		s.CloseStruct()
+	}
 	if v.GreeceAdditionalInfo != nil {
 		s.WriteStruct(schemas.AdditionalInfoResponse_greeceAdditionalInfo)
 		v.GreeceAdditionalInfo.SerializeMembers(s)
@@ -609,6 +646,11 @@ func (v *AdditionalInfoResponse) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.MalaysiaAdditionalInfo != nil {
 		s.WriteStruct(schemas.AdditionalInfoResponse_malaysiaAdditionalInfo)
 		v.MalaysiaAdditionalInfo.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MexicoAdditionalInfo != nil {
+		s.WriteStruct(schemas.AdditionalInfoResponse_mexicoAdditionalInfo)
+		v.MexicoAdditionalInfo.SerializeMembers(s)
 		s.CloseStruct()
 	}
 	if v.MonacoAdditionalInfo != nil {
@@ -694,6 +736,9 @@ func (v *AdditionalInfoResponse) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.AdditionalInfoResponse_georgiaAdditionalInfo:
 			v.GeorgiaAdditionalInfo = &GeorgiaAdditionalInfo{}
 			return v.GeorgiaAdditionalInfo.Deserialize(d)
+		case schemas.AdditionalInfoResponse_germanyAdditionalInfo:
+			v.GermanyAdditionalInfo = &GermanyAdditionalInfo{}
+			return v.GermanyAdditionalInfo.Deserialize(d)
 		case schemas.AdditionalInfoResponse_greeceAdditionalInfo:
 			v.GreeceAdditionalInfo = &GreeceAdditionalInfo{}
 			return v.GreeceAdditionalInfo.Deserialize(d)
@@ -715,6 +760,9 @@ func (v *AdditionalInfoResponse) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.AdditionalInfoResponse_malaysiaAdditionalInfo:
 			v.MalaysiaAdditionalInfo = &MalaysiaAdditionalInfo{}
 			return v.MalaysiaAdditionalInfo.Deserialize(d)
+		case schemas.AdditionalInfoResponse_mexicoAdditionalInfo:
+			v.MexicoAdditionalInfo = &MexicoAdditionalInfo{}
+			return v.MexicoAdditionalInfo.Deserialize(d)
 		case schemas.AdditionalInfoResponse_monacoAdditionalInfo:
 			v.MonacoAdditionalInfo = &MonacoAdditionalInfo{}
 			return v.MonacoAdditionalInfo.Deserialize(d)
@@ -1473,6 +1521,49 @@ func (v *GeorgiaAdditionalInfo) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
+// Contains additional tax information associated with your Tax Registration
+// Number (TRN) in Germany, such as the economic identification number and
+// Steuernummer.
+type GermanyAdditionalInfo struct {
+
+	// The economic identification number (Wirtschafts-Identifikationsnummer, or
+	// W-IdNr) in Germany.
+	EconomicIdentificationNumber *string
+
+	// The Steuernummer (tax number issued by the local tax office) in Germany.
+	Steuernummer *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *GermanyAdditionalInfo) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GermanyAdditionalInfo)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GermanyAdditionalInfo) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EconomicIdentificationNumber != nil {
+		s.WriteString(schemas.GermanyAdditionalInfo_economicIdentificationNumber, *v.EconomicIdentificationNumber)
+	}
+	if v.Steuernummer != nil {
+		s.WriteString(schemas.GermanyAdditionalInfo_steuernummer, *v.Steuernummer)
+	}
+}
+func (v *GermanyAdditionalInfo) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GermanyAdditionalInfo, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GermanyAdditionalInfo_economicIdentificationNumber:
+			v.EconomicIdentificationNumber = new(string)
+			return d.ReadString(schemas.GermanyAdditionalInfo_economicIdentificationNumber, v.EconomicIdentificationNumber)
+		case schemas.GermanyAdditionalInfo_steuernummer:
+			v.Steuernummer = new(string)
+			return d.ReadString(schemas.GermanyAdditionalInfo_steuernummer, v.Steuernummer)
+		}
+		return nil
+	})
+}
+
 // Additional tax information to specify for a TRN in Greece.
 type GreeceAdditionalInfo struct {
 
@@ -1873,6 +1964,58 @@ func (v *MalaysiaAdditionalInfo) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.MalaysiaAdditionalInfo_taxInformationNumber:
 			v.TaxInformationNumber = new(string)
 			return d.ReadString(schemas.MalaysiaAdditionalInfo_taxInformationNumber, v.TaxInformationNumber)
+		}
+		return nil
+	})
+}
+
+// Contains additional tax information associated with your Tax Registration
+// Number (TRN) in Mexico, such as the SAT tax regime and CFDI usage code.
+type MexicoAdditionalInfo struct {
+
+	// The SAT CFDI usage code that identifies the purpose of the invoice in Mexico
+	// (for example, G01 for goods acquisition, S01 for no tax effects).
+	CfdiUsageCode *string
+
+	// The SAT-assigned tax regime code for your business in Mexico. Must be a 3-digit
+	// number (for example, 601 for General de Ley Personas Morales).
+	TaxRegime *string
+
+	// The full name of the SAT tax regime associated with your business in Mexico.
+	TaxRegimeFullName *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *MexicoAdditionalInfo) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MexicoAdditionalInfo)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MexicoAdditionalInfo) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CfdiUsageCode != nil {
+		s.WriteString(schemas.MexicoAdditionalInfo_cfdiUsageCode, *v.CfdiUsageCode)
+	}
+	if v.TaxRegime != nil {
+		s.WriteString(schemas.MexicoAdditionalInfo_taxRegime, *v.TaxRegime)
+	}
+	if v.TaxRegimeFullName != nil {
+		s.WriteString(schemas.MexicoAdditionalInfo_taxRegimeFullName, *v.TaxRegimeFullName)
+	}
+}
+func (v *MexicoAdditionalInfo) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MexicoAdditionalInfo, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MexicoAdditionalInfo_cfdiUsageCode:
+			v.CfdiUsageCode = new(string)
+			return d.ReadString(schemas.MexicoAdditionalInfo_cfdiUsageCode, v.CfdiUsageCode)
+		case schemas.MexicoAdditionalInfo_taxRegime:
+			v.TaxRegime = new(string)
+			return d.ReadString(schemas.MexicoAdditionalInfo_taxRegime, v.TaxRegime)
+		case schemas.MexicoAdditionalInfo_taxRegimeFullName:
+			v.TaxRegimeFullName = new(string)
+			return d.ReadString(schemas.MexicoAdditionalInfo_taxRegimeFullName, v.TaxRegimeFullName)
 		}
 		return nil
 	})

@@ -1253,6 +1253,14 @@ var _RegionName = smithy.NewSchema(smithy.ShapeID{
 	Name:      "RegionName",
 }, smithy.ShapeTypeString, 0)
 
+var RegionScope = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.ssoadmin",
+	Name:      "RegionScope",
+}, smithy.ShapeTypeEnum, 2)
+var RegionScope_CURRENT_REGION *smithy.Schema
+
+var RegionScope_ALL_REGIONS *smithy.Schema
+
 var RegionStatus = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ssoadmin",
 	Name:      "RegionStatus",
@@ -2494,10 +2502,12 @@ var ListCustomerManagedPolicyReferencesInPermissionSetResponse_NextToken *smithy
 var ListInstancesRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ssoadmin",
 	Name:      "ListInstancesRequest",
-}, smithy.ShapeTypeStructure, 2)
+}, smithy.ShapeTypeStructure, 3)
 var ListInstancesRequest_MaxResults *smithy.Schema
 
 var ListInstancesRequest_NextToken *smithy.Schema
+
+var ListInstancesRequest_RegionScope *smithy.Schema
 
 var ListInstancesResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ssoadmin",
@@ -3253,6 +3263,10 @@ func init() {
 
 	ProvisionTargetType_ALL_PROVISIONED_ACCOUNTS = ProvisionTargetType.AddMember("ALL_PROVISIONED_ACCOUNTS", smithyprelude.Unit)
 
+	RegionScope_CURRENT_REGION = RegionScope.AddMember("CURRENT_REGION", smithyprelude.Unit)
+
+	RegionScope_ALL_REGIONS = RegionScope.AddMember("ALL_REGIONS", smithyprelude.Unit)
+
 	ResourceNotFoundExceptionReason_KMS_NOT_FOUND_EXCEPTION = ResourceNotFoundExceptionReason.AddMember("KMS_NOT_FOUND_EXCEPTION", smithyprelude.Unit)
 
 	ResourceNotFoundException_Message = ResourceNotFoundException.AddMember("Message", _ResourceNotFoundMessage)
@@ -3798,6 +3812,8 @@ func init() {
 	ListInstancesRequest_MaxResults = ListInstancesRequest.AddMember("MaxResults", _MaxResults)
 
 	ListInstancesRequest_NextToken = ListInstancesRequest.AddMember("NextToken", _Token)
+
+	ListInstancesRequest_RegionScope = ListInstancesRequest.AddMember("RegionScope", RegionScope)
 
 	ListInstancesResponse_Instances = ListInstancesResponse.AddMember("Instances", _InstanceList)
 

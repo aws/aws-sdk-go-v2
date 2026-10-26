@@ -38,6 +38,10 @@ import (
 // used to encrypt the private key. The public key is a DER-encoded X.509
 // SubjectPublicKeyInfo, as specified in [RFC 5280].
 //
+// For ML-KEM data key pairs, the DER-encoded PKCS8 PrivateKeyInfo contains the
+// private key in seed format. As a result, the length of the private key is the
+// same for all ML-KEM key pair specs.
+//
 // You can use an optional encryption context to add additional security to the
 // encryption operation. If you specify an EncryptionContext , you must specify the
 // same encryption context (a case-sensitive exact match) when decrypting the
@@ -123,7 +127,7 @@ type GenerateDataKeyPairWithoutPlaintextInput struct {
 	// you to use ECC KMS keys only to sign and verify, and the rule that permits you
 	// to use ML-DSA key pairs to sign and verify only are not effective on data key
 	// pairs, which are used outside of KMS. The SM2 key spec is only available in
-	// China Regions.
+	// China Regions. The ML-KEM key specs are not available in China Regions.
 	//
 	// This member is required.
 	KeyPairSpec types.DataKeyPairSpec

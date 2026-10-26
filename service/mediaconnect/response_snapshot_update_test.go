@@ -903,6 +903,219 @@ func TestUpdateResponseSnapshot_AddFlowVpcInterfaces(t *testing.T) {
 	}
 }
 
+func TestUpdateResponseSnapshot_BatchGetDestinationEndpoint(t *testing.T) {
+	want := &BatchGetDestinationEndpointOutput{
+		DestinationEndpoints: []types.DestinationEndpoint{
+			{
+				Name:                ptr.String("__Name__"),
+				Arn:                 ptr.String("__Arn__"),
+				Id:                  ptr.String("__Id__"),
+				Description:         ptr.String("__Description__"),
+				RegionName:          ptr.String("__RegionName__"),
+				AvailabilityZone:    ptr.String("__AvailabilityZone__"),
+				AvailabilityZoneId:  ptr.String("__AvailabilityZoneId__"),
+				CreatedAt:           ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				UpdatedAt:           ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				LifecycleManagement: types.EndpointLifecycle("MANAGED"),
+				Messages: []types.DestinationEndpointMessage{
+					{
+						Code:    ptr.String("__Code__"),
+						Message: ptr.String("__Message__"),
+					},
+					{
+						Code:    ptr.String("__Code__"),
+						Message: ptr.String("__Message__"),
+					},
+				},
+				DestinationType: types.DestinationEndpointType("STANDARD"),
+				Configuration: &types.DestinationEndpointConfigurationMemberStandard{
+					Value: types.StandardDestinationEndpointConfiguration{
+						Name: ptr.String("__Name__"),
+						DestinationNetworkingConfiguration: &types.StandardDestinationEndpointNetworkingConfigurationMemberPublic{
+							Value: types.PublicDestinationEndpointNetworkingConfiguration{
+								DestinationAllowRules: []types.PublicDestinationEndpointNetworkingConfigurationAllowRule{
+									{
+										Cidr: ptr.String("__Cidr__"),
+									},
+									{
+										Cidr: ptr.String("__Cidr__"),
+									},
+								},
+							},
+						},
+						ProtocolConfiguration: &types.StandardDestinationEndpointProtocolConfigurationMemberRist{
+							Value: types.RistStandardDestinationEndpointConfiguration{
+								DestinationAddress:    ptr.String("__DestinationAddress__"),
+								DestinationIngestPort: ptr.Int32(1),
+							},
+						},
+						DestinationNetworkingType: types.DestinationEndpointNetworkingType("PUBLIC"),
+						Protocol:                  types.DestinationEndpointProtocol("RTP"),
+					},
+				},
+				ResourceShareOwnership: types.ResourceShareOwnership("OWNED"),
+				ResourceShareDetails: &types.ResourceShareDetailsMemberOwned{
+					Value: types.OwnedResourceShareDetails{
+						ShareState: types.ResourceShareState("SHARED"),
+					},
+				},
+				RegistrationState: types.DestinationEndpointRegistrationState("REGISTERED"),
+				ConnectionDetails: &types.DestinationEndpointConnectionDetailsMemberStandard{
+					Value: types.StandardDestinationEndpointConnectionDetails{
+						SourceIpAddress:      ptr.String("__SourceIpAddress__"),
+						SourceListenerPort:   ptr.Int32(1),
+						SourceEncryptionType: types.EndpointEncryptionType("SECRETS_MANAGER"),
+						SourceEncryptionConfiguration: &types.EndpointEncryptionConfigurationMemberSecretsManager{
+							Value: types.SecretsManagerEndpointEncryptionConfiguration{
+								EncryptionSecretType: types.EndpointEncryptionSecretType("AES_128_KEY"),
+								EncryptionSecret: &types.EndpointEncryptionSecretConfiguration{
+									SecretArn: ptr.String("__SecretArn__"),
+								},
+							},
+						},
+						SourceEndpointType: types.SourceEndpointType("STANDARD"),
+					},
+				},
+				ConnectionState: types.DestinationEndpointConnectionState("CONNECTED"),
+				ConnectedSource: ptr.String("__ConnectedSource__"),
+				DecryptionType:  types.EndpointEncryptionType("SECRETS_MANAGER"),
+				DecryptionConfiguration: &types.EndpointEncryptionConfigurationMemberSecretsManager{
+					Value: types.SecretsManagerEndpointEncryptionConfiguration{
+						EncryptionSecretType: types.EndpointEncryptionSecretType("AES_128_KEY"),
+						EncryptionSecret: &types.EndpointEncryptionSecretConfiguration{
+							SecretArn: ptr.String("__SecretArn__"),
+						},
+					},
+				},
+				AssociatedResourceDetails: &types.DestinationEndpointAssociatedResourceDetailsMemberStandard{
+					Value: types.StandardDestinationEndpointAssociatedResourceDetails{},
+				},
+				Tags: map[string]string{
+					"key0": "__Value__",
+				},
+			},
+			{
+				Name:                ptr.String("__Name__"),
+				Arn:                 ptr.String("__Arn__"),
+				Id:                  ptr.String("__Id__"),
+				Description:         ptr.String("__Description__"),
+				RegionName:          ptr.String("__RegionName__"),
+				AvailabilityZone:    ptr.String("__AvailabilityZone__"),
+				AvailabilityZoneId:  ptr.String("__AvailabilityZoneId__"),
+				CreatedAt:           ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				UpdatedAt:           ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				LifecycleManagement: types.EndpointLifecycle("MANAGED"),
+				Messages: []types.DestinationEndpointMessage{
+					{
+						Code:    ptr.String("__Code__"),
+						Message: ptr.String("__Message__"),
+					},
+					{
+						Code:    ptr.String("__Code__"),
+						Message: ptr.String("__Message__"),
+					},
+				},
+				DestinationType: types.DestinationEndpointType("STANDARD"),
+				Configuration: &types.DestinationEndpointConfigurationMemberStandard{
+					Value: types.StandardDestinationEndpointConfiguration{
+						Name: ptr.String("__Name__"),
+						DestinationNetworkingConfiguration: &types.StandardDestinationEndpointNetworkingConfigurationMemberPublic{
+							Value: types.PublicDestinationEndpointNetworkingConfiguration{
+								DestinationAllowRules: []types.PublicDestinationEndpointNetworkingConfigurationAllowRule{
+									{
+										Cidr: ptr.String("__Cidr__"),
+									},
+									{
+										Cidr: ptr.String("__Cidr__"),
+									},
+								},
+							},
+						},
+						ProtocolConfiguration: &types.StandardDestinationEndpointProtocolConfigurationMemberRist{
+							Value: types.RistStandardDestinationEndpointConfiguration{
+								DestinationAddress:    ptr.String("__DestinationAddress__"),
+								DestinationIngestPort: ptr.Int32(1),
+							},
+						},
+						DestinationNetworkingType: types.DestinationEndpointNetworkingType("PUBLIC"),
+						Protocol:                  types.DestinationEndpointProtocol("RTP"),
+					},
+				},
+				ResourceShareOwnership: types.ResourceShareOwnership("OWNED"),
+				ResourceShareDetails: &types.ResourceShareDetailsMemberOwned{
+					Value: types.OwnedResourceShareDetails{
+						ShareState: types.ResourceShareState("SHARED"),
+					},
+				},
+				RegistrationState: types.DestinationEndpointRegistrationState("REGISTERED"),
+				ConnectionDetails: &types.DestinationEndpointConnectionDetailsMemberStandard{
+					Value: types.StandardDestinationEndpointConnectionDetails{
+						SourceIpAddress:      ptr.String("__SourceIpAddress__"),
+						SourceListenerPort:   ptr.Int32(1),
+						SourceEncryptionType: types.EndpointEncryptionType("SECRETS_MANAGER"),
+						SourceEncryptionConfiguration: &types.EndpointEncryptionConfigurationMemberSecretsManager{
+							Value: types.SecretsManagerEndpointEncryptionConfiguration{
+								EncryptionSecretType: types.EndpointEncryptionSecretType("AES_128_KEY"),
+								EncryptionSecret: &types.EndpointEncryptionSecretConfiguration{
+									SecretArn: ptr.String("__SecretArn__"),
+								},
+							},
+						},
+						SourceEndpointType: types.SourceEndpointType("STANDARD"),
+					},
+				},
+				ConnectionState: types.DestinationEndpointConnectionState("CONNECTED"),
+				ConnectedSource: ptr.String("__ConnectedSource__"),
+				DecryptionType:  types.EndpointEncryptionType("SECRETS_MANAGER"),
+				DecryptionConfiguration: &types.EndpointEncryptionConfigurationMemberSecretsManager{
+					Value: types.SecretsManagerEndpointEncryptionConfiguration{
+						EncryptionSecretType: types.EndpointEncryptionSecretType("AES_128_KEY"),
+						EncryptionSecret: &types.EndpointEncryptionSecretConfiguration{
+							SecretArn: ptr.String("__SecretArn__"),
+						},
+					},
+				},
+				AssociatedResourceDetails: &types.DestinationEndpointAssociatedResourceDetailsMemberStandard{
+					Value: types.StandardDestinationEndpointAssociatedResourceDetails{},
+				},
+				Tags: map[string]string{
+					"key0": "__Value__",
+				},
+			},
+		},
+		Errors: []types.BatchGetDestinationEndpointError{
+			{
+				Arn:     ptr.String("__Arn__"),
+				Code:    ptr.String("__Code__"),
+				Message: ptr.String("__Message__"),
+			},
+			{
+				Arn:     ptr.String("__Arn__"),
+				Code:    ptr.String("__Code__"),
+				Message: ptr.String("__Message__"),
+			},
+		},
+	}
+	proto := restjson1.New(schemas.MediaConnect)
+	opSchema := smithy.NewOperationSchema(schemas.BatchGetDestinationEndpoint, schemas.BatchGetDestinationEndpointResponse, schemas.BatchGetDestinationEndpointResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("BatchGetDestinationEndpoint.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateResponseSnapshot_BatchGetRouterInput(t *testing.T) {
 	want := &BatchGetRouterInputOutput{
 		RouterInputs: []types.RouterInput{
@@ -912,16 +1125,18 @@ func TestUpdateResponseSnapshot_BatchGetRouterInput(t *testing.T) {
 				Id:        ptr.String("__Id__"),
 				State:     types.RouterInputState("CREATING"),
 				InputType: types.RouterInputType("STANDARD"),
-				Configuration: &types.RouterInputConfigurationMemberStandard{
-					Value: types.StandardRouterInputConfiguration{
-						NetworkInterfaceArn: ptr.String("__NetworkInterfaceArn__"),
-						ProtocolConfiguration: &types.RouterInputProtocolConfigurationMemberRist{
-							Value: types.RistRouterInputConfiguration{
-								Port:                        ptr.Int32(1),
-								RecoveryLatencyMilliseconds: ptr.Int64(1),
+				Configuration: &types.RouterInputConfigurationMemberDestinationEndpoint{
+					Value: types.DestinationEndpointRouterInputConfiguration{
+						EndpointLifecycleManagement: types.EndpointLifecycle("MANAGED"),
+						SourceTransitDecryptionType: types.EndpointEncryptionType("SECRETS_MANAGER"),
+						SourceTransitDecryption: &types.EndpointEncryptionConfigurationMemberSecretsManager{
+							Value: types.SecretsManagerEndpointEncryptionConfiguration{
+								EncryptionSecretType: types.EndpointEncryptionSecretType("AES_128_KEY"),
+								EncryptionSecret: &types.EndpointEncryptionSecretConfiguration{
+									SecretArn: ptr.String("__SecretArn__"),
+								},
 							},
 						},
-						Protocol: types.RouterInputProtocol("RTP"),
 					},
 				},
 				RoutedOutputs:        ptr.Int32(1),
@@ -955,10 +1170,8 @@ func TestUpdateResponseSnapshot_BatchGetRouterInput(t *testing.T) {
 				Tags: map[string]string{
 					"key0": "__Value__",
 				},
-				StreamDetails: &types.RouterInputStreamDetailsMemberStandard{
-					Value: types.StandardRouterInputStreamDetails{
-						SourceIpAddress: ptr.String("__SourceIpAddress__"),
-					},
+				StreamDetails: &types.RouterInputStreamDetailsMemberDestinationEndpoint{
+					Value: types.DestinationEndpointRouterInputStreamDetails{},
 				},
 				IpAddress:       ptr.String("__IpAddress__"),
 				MaintenanceType: types.MaintenanceType("PREFERRED_DAY_TIME"),
@@ -992,6 +1205,10 @@ func TestUpdateResponseSnapshot_BatchGetRouterInput(t *testing.T) {
 							ThresholdSeconds: ptr.Int32(1),
 						},
 					},
+				},
+				AssociatedDestinationEndpointArns: []string{
+					"__Member__",
+					"__Member__",
 				},
 			},
 			{
@@ -1000,16 +1217,18 @@ func TestUpdateResponseSnapshot_BatchGetRouterInput(t *testing.T) {
 				Id:        ptr.String("__Id__"),
 				State:     types.RouterInputState("CREATING"),
 				InputType: types.RouterInputType("STANDARD"),
-				Configuration: &types.RouterInputConfigurationMemberStandard{
-					Value: types.StandardRouterInputConfiguration{
-						NetworkInterfaceArn: ptr.String("__NetworkInterfaceArn__"),
-						ProtocolConfiguration: &types.RouterInputProtocolConfigurationMemberRist{
-							Value: types.RistRouterInputConfiguration{
-								Port:                        ptr.Int32(1),
-								RecoveryLatencyMilliseconds: ptr.Int64(1),
+				Configuration: &types.RouterInputConfigurationMemberDestinationEndpoint{
+					Value: types.DestinationEndpointRouterInputConfiguration{
+						EndpointLifecycleManagement: types.EndpointLifecycle("MANAGED"),
+						SourceTransitDecryptionType: types.EndpointEncryptionType("SECRETS_MANAGER"),
+						SourceTransitDecryption: &types.EndpointEncryptionConfigurationMemberSecretsManager{
+							Value: types.SecretsManagerEndpointEncryptionConfiguration{
+								EncryptionSecretType: types.EndpointEncryptionSecretType("AES_128_KEY"),
+								EncryptionSecret: &types.EndpointEncryptionSecretConfiguration{
+									SecretArn: ptr.String("__SecretArn__"),
+								},
 							},
 						},
-						Protocol: types.RouterInputProtocol("RTP"),
 					},
 				},
 				RoutedOutputs:        ptr.Int32(1),
@@ -1043,10 +1262,8 @@ func TestUpdateResponseSnapshot_BatchGetRouterInput(t *testing.T) {
 				Tags: map[string]string{
 					"key0": "__Value__",
 				},
-				StreamDetails: &types.RouterInputStreamDetailsMemberStandard{
-					Value: types.StandardRouterInputStreamDetails{
-						SourceIpAddress: ptr.String("__SourceIpAddress__"),
-					},
+				StreamDetails: &types.RouterInputStreamDetailsMemberDestinationEndpoint{
+					Value: types.DestinationEndpointRouterInputStreamDetails{},
 				},
 				IpAddress:       ptr.String("__IpAddress__"),
 				MaintenanceType: types.MaintenanceType("PREFERRED_DAY_TIME"),
@@ -1080,6 +1297,10 @@ func TestUpdateResponseSnapshot_BatchGetRouterInput(t *testing.T) {
 							ThresholdSeconds: ptr.Int32(1),
 						},
 					},
+				},
+				AssociatedDestinationEndpointArns: []string{
+					"__Member__",
+					"__Member__",
 				},
 			},
 		},
@@ -1274,6 +1495,10 @@ func TestUpdateResponseSnapshot_BatchGetRouterOutput(t *testing.T) {
 				FabricConfiguration: &types.FabricConfiguration{
 					RecoveryLatencyMode: types.FabricLatencyMode("BALANCED"),
 				},
+				AssociatedSourceEndpointArns: []string{
+					"__Member__",
+					"__Member__",
+				},
 			},
 			{
 				Name:       ptr.String("__Name__"),
@@ -1339,6 +1564,10 @@ func TestUpdateResponseSnapshot_BatchGetRouterOutput(t *testing.T) {
 				FabricConfiguration: &types.FabricConfiguration{
 					RecoveryLatencyMode: types.FabricLatencyMode("BALANCED"),
 				},
+				AssociatedSourceEndpointArns: []string{
+					"__Member__",
+					"__Member__",
+				},
 			},
 		},
 		Errors: []types.BatchGetRouterOutputError{
@@ -1370,6 +1599,252 @@ func TestUpdateResponseSnapshot_BatchGetRouterOutput(t *testing.T) {
 		body = b
 	}
 	if err := serdeRespWriteSnapshot("BatchGetRouterOutput.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_BatchGetSourceEndpoint(t *testing.T) {
+	want := &BatchGetSourceEndpointOutput{
+		SourceEndpoints: []types.SourceEndpoint{
+			{
+				Name:                ptr.String("__Name__"),
+				Arn:                 ptr.String("__Arn__"),
+				Id:                  ptr.String("__Id__"),
+				Description:         ptr.String("__Description__"),
+				RegionName:          ptr.String("__RegionName__"),
+				AvailabilityZone:    ptr.String("__AvailabilityZone__"),
+				AvailabilityZoneId:  ptr.String("__AvailabilityZoneId__"),
+				CreatedAt:           ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				UpdatedAt:           ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				LifecycleManagement: types.EndpointLifecycle("MANAGED"),
+				Messages: []types.SourceEndpointMessage{
+					{
+						Code:    ptr.String("__Code__"),
+						Message: ptr.String("__Message__"),
+					},
+					{
+						Code:    ptr.String("__Code__"),
+						Message: ptr.String("__Message__"),
+					},
+				},
+				SourceType: types.SourceEndpointType("STANDARD"),
+				Configuration: &types.SourceEndpointConfigurationMemberStandard{
+					Value: types.StandardSourceEndpointConfiguration{
+						Name: ptr.String("__Name__"),
+						SourceNetworkingConfiguration: &types.StandardSourceEndpointNetworkingConfigurationMemberPublic{
+							Value: types.PublicSourceEndpointNetworkingConfiguration{
+								SourceAllowRules: []types.PublicSourceEndpointNetworkingConfigurationAllowRule{
+									{
+										Cidr: ptr.String("__Cidr__"),
+									},
+									{
+										Cidr: ptr.String("__Cidr__"),
+									},
+								},
+							},
+						},
+						ProtocolConfiguration: &types.StandardSourceEndpointProtocolConfigurationMemberRist{
+							Value: types.RistStandardSourceEndpointConfiguration{
+								DestinationIngestPort:       ptr.Int32(1),
+								RecoveryLatencyMilliseconds: ptr.Int64(1),
+							},
+						},
+						SourceNetworkingType: types.SourceEndpointNetworkingType("PUBLIC"),
+						Protocol:             types.SourceEndpointProtocol("RTP"),
+					},
+				},
+				ResourceShareOwnership: types.ResourceShareOwnership("OWNED"),
+				ResourceShareDetails: &types.ResourceShareDetailsMemberOwned{
+					Value: types.OwnedResourceShareDetails{
+						ShareState: types.ResourceShareState("SHARED"),
+					},
+				},
+				RegistrationState: types.SourceEndpointRegistrationState("REGISTERED"),
+				ConnectionState:   types.SourceEndpointConnectionState("CONNECTED"),
+				ConnectionDetails: &types.SourceEndpointConnectionDetailsMemberStandard{
+					Value: types.StandardSourceEndpointConnectionDetails{
+						DestinationIpAddress:      ptr.String("__DestinationIpAddress__"),
+						DestinationIngestPort:     ptr.Int32(1),
+						DestinationDecryptionType: types.EndpointEncryptionType("SECRETS_MANAGER"),
+						DestinationDecryptionConfiguration: &types.EndpointEncryptionConfigurationMemberSecretsManager{
+							Value: types.SecretsManagerEndpointEncryptionConfiguration{
+								EncryptionSecretType: types.EndpointEncryptionSecretType("AES_128_KEY"),
+								EncryptionSecret: &types.EndpointEncryptionSecretConfiguration{
+									SecretArn: ptr.String("__SecretArn__"),
+								},
+							},
+						},
+						DestinationEndpointType: types.DestinationEndpointType("STANDARD"),
+					},
+				},
+				ConnectedDestinations: []string{
+					"__Member__",
+					"__Member__",
+				},
+				EncryptionType: types.EndpointEncryptionType("SECRETS_MANAGER"),
+				EncryptionConfiguration: &types.EndpointEncryptionConfigurationMemberSecretsManager{
+					Value: types.SecretsManagerEndpointEncryptionConfiguration{
+						EncryptionSecretType: types.EndpointEncryptionSecretType("AES_128_KEY"),
+						EncryptionSecret: &types.EndpointEncryptionSecretConfiguration{
+							SecretArn: ptr.String("__SecretArn__"),
+						},
+					},
+				},
+				AssociatedResourceDetails: &types.SourceEndpointAssociatedResourceDetailsMemberStandard{
+					Value: types.StandardSourceEndpointAssociatedResourceDetails{},
+				},
+				Tags: map[string]string{
+					"key0": "__Value__",
+				},
+			},
+			{
+				Name:                ptr.String("__Name__"),
+				Arn:                 ptr.String("__Arn__"),
+				Id:                  ptr.String("__Id__"),
+				Description:         ptr.String("__Description__"),
+				RegionName:          ptr.String("__RegionName__"),
+				AvailabilityZone:    ptr.String("__AvailabilityZone__"),
+				AvailabilityZoneId:  ptr.String("__AvailabilityZoneId__"),
+				CreatedAt:           ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				UpdatedAt:           ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				LifecycleManagement: types.EndpointLifecycle("MANAGED"),
+				Messages: []types.SourceEndpointMessage{
+					{
+						Code:    ptr.String("__Code__"),
+						Message: ptr.String("__Message__"),
+					},
+					{
+						Code:    ptr.String("__Code__"),
+						Message: ptr.String("__Message__"),
+					},
+				},
+				SourceType: types.SourceEndpointType("STANDARD"),
+				Configuration: &types.SourceEndpointConfigurationMemberStandard{
+					Value: types.StandardSourceEndpointConfiguration{
+						Name: ptr.String("__Name__"),
+						SourceNetworkingConfiguration: &types.StandardSourceEndpointNetworkingConfigurationMemberPublic{
+							Value: types.PublicSourceEndpointNetworkingConfiguration{
+								SourceAllowRules: []types.PublicSourceEndpointNetworkingConfigurationAllowRule{
+									{
+										Cidr: ptr.String("__Cidr__"),
+									},
+									{
+										Cidr: ptr.String("__Cidr__"),
+									},
+								},
+							},
+						},
+						ProtocolConfiguration: &types.StandardSourceEndpointProtocolConfigurationMemberRist{
+							Value: types.RistStandardSourceEndpointConfiguration{
+								DestinationIngestPort:       ptr.Int32(1),
+								RecoveryLatencyMilliseconds: ptr.Int64(1),
+							},
+						},
+						SourceNetworkingType: types.SourceEndpointNetworkingType("PUBLIC"),
+						Protocol:             types.SourceEndpointProtocol("RTP"),
+					},
+				},
+				ResourceShareOwnership: types.ResourceShareOwnership("OWNED"),
+				ResourceShareDetails: &types.ResourceShareDetailsMemberOwned{
+					Value: types.OwnedResourceShareDetails{
+						ShareState: types.ResourceShareState("SHARED"),
+					},
+				},
+				RegistrationState: types.SourceEndpointRegistrationState("REGISTERED"),
+				ConnectionState:   types.SourceEndpointConnectionState("CONNECTED"),
+				ConnectionDetails: &types.SourceEndpointConnectionDetailsMemberStandard{
+					Value: types.StandardSourceEndpointConnectionDetails{
+						DestinationIpAddress:      ptr.String("__DestinationIpAddress__"),
+						DestinationIngestPort:     ptr.Int32(1),
+						DestinationDecryptionType: types.EndpointEncryptionType("SECRETS_MANAGER"),
+						DestinationDecryptionConfiguration: &types.EndpointEncryptionConfigurationMemberSecretsManager{
+							Value: types.SecretsManagerEndpointEncryptionConfiguration{
+								EncryptionSecretType: types.EndpointEncryptionSecretType("AES_128_KEY"),
+								EncryptionSecret: &types.EndpointEncryptionSecretConfiguration{
+									SecretArn: ptr.String("__SecretArn__"),
+								},
+							},
+						},
+						DestinationEndpointType: types.DestinationEndpointType("STANDARD"),
+					},
+				},
+				ConnectedDestinations: []string{
+					"__Member__",
+					"__Member__",
+				},
+				EncryptionType: types.EndpointEncryptionType("SECRETS_MANAGER"),
+				EncryptionConfiguration: &types.EndpointEncryptionConfigurationMemberSecretsManager{
+					Value: types.SecretsManagerEndpointEncryptionConfiguration{
+						EncryptionSecretType: types.EndpointEncryptionSecretType("AES_128_KEY"),
+						EncryptionSecret: &types.EndpointEncryptionSecretConfiguration{
+							SecretArn: ptr.String("__SecretArn__"),
+						},
+					},
+				},
+				AssociatedResourceDetails: &types.SourceEndpointAssociatedResourceDetailsMemberStandard{
+					Value: types.StandardSourceEndpointAssociatedResourceDetails{},
+				},
+				Tags: map[string]string{
+					"key0": "__Value__",
+				},
+			},
+		},
+		Errors: []types.BatchGetSourceEndpointError{
+			{
+				Arn:     ptr.String("__Arn__"),
+				Code:    ptr.String("__Code__"),
+				Message: ptr.String("__Message__"),
+			},
+			{
+				Arn:     ptr.String("__Arn__"),
+				Code:    ptr.String("__Code__"),
+				Message: ptr.String("__Message__"),
+			},
+		},
+	}
+	proto := restjson1.New(schemas.MediaConnect)
+	opSchema := smithy.NewOperationSchema(schemas.BatchGetSourceEndpoint, schemas.BatchGetSourceEndpointResponse, schemas.BatchGetSourceEndpointResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("BatchGetSourceEndpoint.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_ConnectEndpoints(t *testing.T) {
+	want := &ConnectEndpointsOutput{
+		DestinationEndpointArn:  ptr.String("__DestinationEndpointArn__"),
+		DestinationEndpointName: ptr.String("__DestinationEndpointName__"),
+		SourceEndpointArn:       ptr.String("__SourceEndpointArn__"),
+		SourceEndpointName:      ptr.String("__SourceEndpointName__"),
+	}
+	proto := restjson1.New(schemas.MediaConnect)
+	opSchema := smithy.NewOperationSchema(schemas.ConnectEndpoints, schemas.ConnectEndpointsResponse, schemas.ConnectEndpointsResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("ConnectEndpoints.response", 200, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -2374,16 +2849,18 @@ func TestUpdateResponseSnapshot_CreateRouterInput(t *testing.T) {
 			Id:        ptr.String("__Id__"),
 			State:     types.RouterInputState("CREATING"),
 			InputType: types.RouterInputType("STANDARD"),
-			Configuration: &types.RouterInputConfigurationMemberStandard{
-				Value: types.StandardRouterInputConfiguration{
-					NetworkInterfaceArn: ptr.String("__NetworkInterfaceArn__"),
-					ProtocolConfiguration: &types.RouterInputProtocolConfigurationMemberRist{
-						Value: types.RistRouterInputConfiguration{
-							Port:                        ptr.Int32(1),
-							RecoveryLatencyMilliseconds: ptr.Int64(1),
+			Configuration: &types.RouterInputConfigurationMemberDestinationEndpoint{
+				Value: types.DestinationEndpointRouterInputConfiguration{
+					EndpointLifecycleManagement: types.EndpointLifecycle("MANAGED"),
+					SourceTransitDecryptionType: types.EndpointEncryptionType("SECRETS_MANAGER"),
+					SourceTransitDecryption: &types.EndpointEncryptionConfigurationMemberSecretsManager{
+						Value: types.SecretsManagerEndpointEncryptionConfiguration{
+							EncryptionSecretType: types.EndpointEncryptionSecretType("AES_128_KEY"),
+							EncryptionSecret: &types.EndpointEncryptionSecretConfiguration{
+								SecretArn: ptr.String("__SecretArn__"),
+							},
 						},
 					},
-					Protocol: types.RouterInputProtocol("RTP"),
 				},
 			},
 			RoutedOutputs:        ptr.Int32(1),
@@ -2417,10 +2894,8 @@ func TestUpdateResponseSnapshot_CreateRouterInput(t *testing.T) {
 			Tags: map[string]string{
 				"key0": "__Value__",
 			},
-			StreamDetails: &types.RouterInputStreamDetailsMemberStandard{
-				Value: types.StandardRouterInputStreamDetails{
-					SourceIpAddress: ptr.String("__SourceIpAddress__"),
-				},
+			StreamDetails: &types.RouterInputStreamDetailsMemberDestinationEndpoint{
+				Value: types.DestinationEndpointRouterInputStreamDetails{},
 			},
 			IpAddress:       ptr.String("__IpAddress__"),
 			MaintenanceType: types.MaintenanceType("PREFERRED_DAY_TIME"),
@@ -2454,6 +2929,10 @@ func TestUpdateResponseSnapshot_CreateRouterInput(t *testing.T) {
 						ThresholdSeconds: ptr.Int32(1),
 					},
 				},
+			},
+			AssociatedDestinationEndpointArns: []string{
+				"__Member__",
+				"__Member__",
 			},
 		},
 	}
@@ -2592,6 +3071,10 @@ func TestUpdateResponseSnapshot_CreateRouterOutput(t *testing.T) {
 			},
 			FabricConfiguration: &types.FabricConfiguration{
 				RecoveryLatencyMode: types.FabricLatencyMode("BALANCED"),
+			},
+			AssociatedSourceEndpointArns: []string{
+				"__Member__",
+				"__Member__",
 			},
 		},
 	}
@@ -2766,6 +3249,31 @@ func TestUpdateResponseSnapshot_DeleteRouterOutput(t *testing.T) {
 	}
 }
 
+func TestUpdateResponseSnapshot_DeregisterDestinationEndpoint(t *testing.T) {
+	want := &DeregisterDestinationEndpointOutput{
+		Arn:  ptr.String("__Arn__"),
+		Name: ptr.String("__Name__"),
+	}
+	proto := restjson1.New(schemas.MediaConnect)
+	opSchema := smithy.NewOperationSchema(schemas.DeregisterDestinationEndpoint, schemas.DeregisterDestinationEndpointResponse, schemas.DeregisterDestinationEndpointResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("DeregisterDestinationEndpoint.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateResponseSnapshot_DeregisterGatewayInstance(t *testing.T) {
 	want := &DeregisterGatewayInstanceOutput{
 		GatewayInstanceArn: ptr.String("__GatewayInstanceArn__"),
@@ -2787,6 +3295,31 @@ func TestUpdateResponseSnapshot_DeregisterGatewayInstance(t *testing.T) {
 		body = b
 	}
 	if err := serdeRespWriteSnapshot("DeregisterGatewayInstance.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_DeregisterSourceEndpoint(t *testing.T) {
+	want := &DeregisterSourceEndpointOutput{
+		Arn:  ptr.String("__Arn__"),
+		Name: ptr.String("__Name__"),
+	}
+	proto := restjson1.New(schemas.MediaConnect)
+	opSchema := smithy.NewOperationSchema(schemas.DeregisterSourceEndpoint, schemas.DeregisterSourceEndpointResponse, schemas.DeregisterSourceEndpointResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("DeregisterSourceEndpoint.response", 200, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -4146,6 +4679,144 @@ func TestUpdateResponseSnapshot_DescribeReservation(t *testing.T) {
 	}
 }
 
+func TestUpdateResponseSnapshot_DisconnectEndpoints(t *testing.T) {
+	want := &DisconnectEndpointsOutput{
+		DestinationEndpointArn:  ptr.String("__DestinationEndpointArn__"),
+		DestinationEndpointName: ptr.String("__DestinationEndpointName__"),
+		SourceEndpointArn:       ptr.String("__SourceEndpointArn__"),
+		SourceEndpointName:      ptr.String("__SourceEndpointName__"),
+	}
+	proto := restjson1.New(schemas.MediaConnect)
+	opSchema := smithy.NewOperationSchema(schemas.DisconnectEndpoints, schemas.DisconnectEndpointsResponse, schemas.DisconnectEndpointsResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("DisconnectEndpoints.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_GetDestinationEndpoint(t *testing.T) {
+	want := &GetDestinationEndpointOutput{
+		DestinationEndpoint: &types.DestinationEndpoint{
+			Name:                ptr.String("__Name__"),
+			Arn:                 ptr.String("__Arn__"),
+			Id:                  ptr.String("__Id__"),
+			Description:         ptr.String("__Description__"),
+			RegionName:          ptr.String("__RegionName__"),
+			AvailabilityZone:    ptr.String("__AvailabilityZone__"),
+			AvailabilityZoneId:  ptr.String("__AvailabilityZoneId__"),
+			CreatedAt:           ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			UpdatedAt:           ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			LifecycleManagement: types.EndpointLifecycle("MANAGED"),
+			Messages: []types.DestinationEndpointMessage{
+				{
+					Code:    ptr.String("__Code__"),
+					Message: ptr.String("__Message__"),
+				},
+				{
+					Code:    ptr.String("__Code__"),
+					Message: ptr.String("__Message__"),
+				},
+			},
+			DestinationType: types.DestinationEndpointType("STANDARD"),
+			Configuration: &types.DestinationEndpointConfigurationMemberStandard{
+				Value: types.StandardDestinationEndpointConfiguration{
+					Name: ptr.String("__Name__"),
+					DestinationNetworkingConfiguration: &types.StandardDestinationEndpointNetworkingConfigurationMemberPublic{
+						Value: types.PublicDestinationEndpointNetworkingConfiguration{
+							DestinationAllowRules: []types.PublicDestinationEndpointNetworkingConfigurationAllowRule{
+								{
+									Cidr: ptr.String("__Cidr__"),
+								},
+								{
+									Cidr: ptr.String("__Cidr__"),
+								},
+							},
+						},
+					},
+					ProtocolConfiguration: &types.StandardDestinationEndpointProtocolConfigurationMemberRist{
+						Value: types.RistStandardDestinationEndpointConfiguration{
+							DestinationAddress:    ptr.String("__DestinationAddress__"),
+							DestinationIngestPort: ptr.Int32(1),
+						},
+					},
+					DestinationNetworkingType: types.DestinationEndpointNetworkingType("PUBLIC"),
+					Protocol:                  types.DestinationEndpointProtocol("RTP"),
+				},
+			},
+			ResourceShareOwnership: types.ResourceShareOwnership("OWNED"),
+			ResourceShareDetails: &types.ResourceShareDetailsMemberOwned{
+				Value: types.OwnedResourceShareDetails{
+					ShareState: types.ResourceShareState("SHARED"),
+				},
+			},
+			RegistrationState: types.DestinationEndpointRegistrationState("REGISTERED"),
+			ConnectionDetails: &types.DestinationEndpointConnectionDetailsMemberStandard{
+				Value: types.StandardDestinationEndpointConnectionDetails{
+					SourceIpAddress:      ptr.String("__SourceIpAddress__"),
+					SourceListenerPort:   ptr.Int32(1),
+					SourceEncryptionType: types.EndpointEncryptionType("SECRETS_MANAGER"),
+					SourceEncryptionConfiguration: &types.EndpointEncryptionConfigurationMemberSecretsManager{
+						Value: types.SecretsManagerEndpointEncryptionConfiguration{
+							EncryptionSecretType: types.EndpointEncryptionSecretType("AES_128_KEY"),
+							EncryptionSecret: &types.EndpointEncryptionSecretConfiguration{
+								SecretArn: ptr.String("__SecretArn__"),
+							},
+						},
+					},
+					SourceEndpointType: types.SourceEndpointType("STANDARD"),
+				},
+			},
+			ConnectionState: types.DestinationEndpointConnectionState("CONNECTED"),
+			ConnectedSource: ptr.String("__ConnectedSource__"),
+			DecryptionType:  types.EndpointEncryptionType("SECRETS_MANAGER"),
+			DecryptionConfiguration: &types.EndpointEncryptionConfigurationMemberSecretsManager{
+				Value: types.SecretsManagerEndpointEncryptionConfiguration{
+					EncryptionSecretType: types.EndpointEncryptionSecretType("AES_128_KEY"),
+					EncryptionSecret: &types.EndpointEncryptionSecretConfiguration{
+						SecretArn: ptr.String("__SecretArn__"),
+					},
+				},
+			},
+			AssociatedResourceDetails: &types.DestinationEndpointAssociatedResourceDetailsMemberStandard{
+				Value: types.StandardDestinationEndpointAssociatedResourceDetails{},
+			},
+			Tags: map[string]string{
+				"key0": "__Value__",
+			},
+		},
+	}
+	proto := restjson1.New(schemas.MediaConnect)
+	opSchema := smithy.NewOperationSchema(schemas.GetDestinationEndpoint, schemas.GetDestinationEndpointResponse, schemas.GetDestinationEndpointResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("GetDestinationEndpoint.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateResponseSnapshot_GetRouterInput(t *testing.T) {
 	want := &GetRouterInputOutput{
 		RouterInput: &types.RouterInput{
@@ -4154,16 +4825,18 @@ func TestUpdateResponseSnapshot_GetRouterInput(t *testing.T) {
 			Id:        ptr.String("__Id__"),
 			State:     types.RouterInputState("CREATING"),
 			InputType: types.RouterInputType("STANDARD"),
-			Configuration: &types.RouterInputConfigurationMemberStandard{
-				Value: types.StandardRouterInputConfiguration{
-					NetworkInterfaceArn: ptr.String("__NetworkInterfaceArn__"),
-					ProtocolConfiguration: &types.RouterInputProtocolConfigurationMemberRist{
-						Value: types.RistRouterInputConfiguration{
-							Port:                        ptr.Int32(1),
-							RecoveryLatencyMilliseconds: ptr.Int64(1),
+			Configuration: &types.RouterInputConfigurationMemberDestinationEndpoint{
+				Value: types.DestinationEndpointRouterInputConfiguration{
+					EndpointLifecycleManagement: types.EndpointLifecycle("MANAGED"),
+					SourceTransitDecryptionType: types.EndpointEncryptionType("SECRETS_MANAGER"),
+					SourceTransitDecryption: &types.EndpointEncryptionConfigurationMemberSecretsManager{
+						Value: types.SecretsManagerEndpointEncryptionConfiguration{
+							EncryptionSecretType: types.EndpointEncryptionSecretType("AES_128_KEY"),
+							EncryptionSecret: &types.EndpointEncryptionSecretConfiguration{
+								SecretArn: ptr.String("__SecretArn__"),
+							},
 						},
 					},
-					Protocol: types.RouterInputProtocol("RTP"),
 				},
 			},
 			RoutedOutputs:        ptr.Int32(1),
@@ -4197,10 +4870,8 @@ func TestUpdateResponseSnapshot_GetRouterInput(t *testing.T) {
 			Tags: map[string]string{
 				"key0": "__Value__",
 			},
-			StreamDetails: &types.RouterInputStreamDetailsMemberStandard{
-				Value: types.StandardRouterInputStreamDetails{
-					SourceIpAddress: ptr.String("__SourceIpAddress__"),
-				},
+			StreamDetails: &types.RouterInputStreamDetailsMemberDestinationEndpoint{
+				Value: types.DestinationEndpointRouterInputStreamDetails{},
 			},
 			IpAddress:       ptr.String("__IpAddress__"),
 			MaintenanceType: types.MaintenanceType("PREFERRED_DAY_TIME"),
@@ -4234,6 +4905,10 @@ func TestUpdateResponseSnapshot_GetRouterInput(t *testing.T) {
 						ThresholdSeconds: ptr.Int32(1),
 					},
 				},
+			},
+			AssociatedDestinationEndpointArns: []string{
+				"__Member__",
+				"__Member__",
 			},
 		},
 	}
@@ -4546,6 +5221,10 @@ func TestUpdateResponseSnapshot_GetRouterOutput(t *testing.T) {
 			FabricConfiguration: &types.FabricConfiguration{
 				RecoveryLatencyMode: types.FabricLatencyMode("BALANCED"),
 			},
+			AssociatedSourceEndpointArns: []string{
+				"__Member__",
+				"__Member__",
+			},
 		},
 	}
 	proto := restjson1.New(schemas.MediaConnect)
@@ -4564,6 +5243,120 @@ func TestUpdateResponseSnapshot_GetRouterOutput(t *testing.T) {
 		body = b
 	}
 	if err := serdeRespWriteSnapshot("GetRouterOutput.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_GetSourceEndpoint(t *testing.T) {
+	want := &GetSourceEndpointOutput{
+		SourceEndpoint: &types.SourceEndpoint{
+			Name:                ptr.String("__Name__"),
+			Arn:                 ptr.String("__Arn__"),
+			Id:                  ptr.String("__Id__"),
+			Description:         ptr.String("__Description__"),
+			RegionName:          ptr.String("__RegionName__"),
+			AvailabilityZone:    ptr.String("__AvailabilityZone__"),
+			AvailabilityZoneId:  ptr.String("__AvailabilityZoneId__"),
+			CreatedAt:           ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			UpdatedAt:           ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			LifecycleManagement: types.EndpointLifecycle("MANAGED"),
+			Messages: []types.SourceEndpointMessage{
+				{
+					Code:    ptr.String("__Code__"),
+					Message: ptr.String("__Message__"),
+				},
+				{
+					Code:    ptr.String("__Code__"),
+					Message: ptr.String("__Message__"),
+				},
+			},
+			SourceType: types.SourceEndpointType("STANDARD"),
+			Configuration: &types.SourceEndpointConfigurationMemberStandard{
+				Value: types.StandardSourceEndpointConfiguration{
+					Name: ptr.String("__Name__"),
+					SourceNetworkingConfiguration: &types.StandardSourceEndpointNetworkingConfigurationMemberPublic{
+						Value: types.PublicSourceEndpointNetworkingConfiguration{
+							SourceAllowRules: []types.PublicSourceEndpointNetworkingConfigurationAllowRule{
+								{
+									Cidr: ptr.String("__Cidr__"),
+								},
+								{
+									Cidr: ptr.String("__Cidr__"),
+								},
+							},
+						},
+					},
+					ProtocolConfiguration: &types.StandardSourceEndpointProtocolConfigurationMemberRist{
+						Value: types.RistStandardSourceEndpointConfiguration{
+							DestinationIngestPort:       ptr.Int32(1),
+							RecoveryLatencyMilliseconds: ptr.Int64(1),
+						},
+					},
+					SourceNetworkingType: types.SourceEndpointNetworkingType("PUBLIC"),
+					Protocol:             types.SourceEndpointProtocol("RTP"),
+				},
+			},
+			ResourceShareOwnership: types.ResourceShareOwnership("OWNED"),
+			ResourceShareDetails: &types.ResourceShareDetailsMemberOwned{
+				Value: types.OwnedResourceShareDetails{
+					ShareState: types.ResourceShareState("SHARED"),
+				},
+			},
+			RegistrationState: types.SourceEndpointRegistrationState("REGISTERED"),
+			ConnectionState:   types.SourceEndpointConnectionState("CONNECTED"),
+			ConnectionDetails: &types.SourceEndpointConnectionDetailsMemberStandard{
+				Value: types.StandardSourceEndpointConnectionDetails{
+					DestinationIpAddress:      ptr.String("__DestinationIpAddress__"),
+					DestinationIngestPort:     ptr.Int32(1),
+					DestinationDecryptionType: types.EndpointEncryptionType("SECRETS_MANAGER"),
+					DestinationDecryptionConfiguration: &types.EndpointEncryptionConfigurationMemberSecretsManager{
+						Value: types.SecretsManagerEndpointEncryptionConfiguration{
+							EncryptionSecretType: types.EndpointEncryptionSecretType("AES_128_KEY"),
+							EncryptionSecret: &types.EndpointEncryptionSecretConfiguration{
+								SecretArn: ptr.String("__SecretArn__"),
+							},
+						},
+					},
+					DestinationEndpointType: types.DestinationEndpointType("STANDARD"),
+				},
+			},
+			ConnectedDestinations: []string{
+				"__Member__",
+				"__Member__",
+			},
+			EncryptionType: types.EndpointEncryptionType("SECRETS_MANAGER"),
+			EncryptionConfiguration: &types.EndpointEncryptionConfigurationMemberSecretsManager{
+				Value: types.SecretsManagerEndpointEncryptionConfiguration{
+					EncryptionSecretType: types.EndpointEncryptionSecretType("AES_128_KEY"),
+					EncryptionSecret: &types.EndpointEncryptionSecretConfiguration{
+						SecretArn: ptr.String("__SecretArn__"),
+					},
+				},
+			},
+			AssociatedResourceDetails: &types.SourceEndpointAssociatedResourceDetailsMemberStandard{
+				Value: types.StandardSourceEndpointAssociatedResourceDetails{},
+			},
+			Tags: map[string]string{
+				"key0": "__Value__",
+			},
+		},
+	}
+	proto := restjson1.New(schemas.MediaConnect)
+	opSchema := smithy.NewOperationSchema(schemas.GetSourceEndpoint, schemas.GetSourceEndpointResponse, schemas.GetSourceEndpointResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("GetSourceEndpoint.response", 200, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -4674,6 +5467,72 @@ func TestUpdateResponseSnapshot_ListBridges(t *testing.T) {
 		body = b
 	}
 	if err := serdeRespWriteSnapshot("ListBridges.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_ListDestinationEndpoints(t *testing.T) {
+	want := &ListDestinationEndpointsOutput{
+		DestinationEndpoints: []types.ListedDestinationEndpoint{
+			{
+				Name:                   ptr.String("__Name__"),
+				Arn:                    ptr.String("__Arn__"),
+				Id:                     ptr.String("__Id__"),
+				DestinationType:        types.DestinationEndpointType("STANDARD"),
+				RegionName:             ptr.String("__RegionName__"),
+				AvailabilityZone:       ptr.String("__AvailabilityZone__"),
+				AvailabilityZoneId:     ptr.String("__AvailabilityZoneId__"),
+				CreatedAt:              ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				UpdatedAt:              ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				LifecycleManagement:    types.EndpointLifecycle("MANAGED"),
+				MessageCount:           ptr.Int32(1),
+				ResourceShareOwnership: types.ResourceShareOwnership("OWNED"),
+				ResourceShareState:     types.ResourceShareState("SHARED"),
+				RegistrationState:      types.DestinationEndpointRegistrationState("REGISTERED"),
+				ConnectionState:        types.DestinationEndpointConnectionState("CONNECTED"),
+				DecryptionType:         types.EndpointEncryptionType("SECRETS_MANAGER"),
+				ConnectedSource:        ptr.String("__ConnectedSource__"),
+				AssociatedResourceArn:  ptr.String("__AssociatedResourceArn__"),
+			},
+			{
+				Name:                   ptr.String("__Name__"),
+				Arn:                    ptr.String("__Arn__"),
+				Id:                     ptr.String("__Id__"),
+				DestinationType:        types.DestinationEndpointType("STANDARD"),
+				RegionName:             ptr.String("__RegionName__"),
+				AvailabilityZone:       ptr.String("__AvailabilityZone__"),
+				AvailabilityZoneId:     ptr.String("__AvailabilityZoneId__"),
+				CreatedAt:              ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				UpdatedAt:              ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				LifecycleManagement:    types.EndpointLifecycle("MANAGED"),
+				MessageCount:           ptr.Int32(1),
+				ResourceShareOwnership: types.ResourceShareOwnership("OWNED"),
+				ResourceShareState:     types.ResourceShareState("SHARED"),
+				RegistrationState:      types.DestinationEndpointRegistrationState("REGISTERED"),
+				ConnectionState:        types.DestinationEndpointConnectionState("CONNECTED"),
+				DecryptionType:         types.EndpointEncryptionType("SECRETS_MANAGER"),
+				ConnectedSource:        ptr.String("__ConnectedSource__"),
+				AssociatedResourceArn:  ptr.String("__AssociatedResourceArn__"),
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	proto := restjson1.New(schemas.MediaConnect)
+	opSchema := smithy.NewOperationSchema(schemas.ListDestinationEndpoints, schemas.ListDestinationEndpointsResponse, schemas.ListDestinationEndpointsResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("ListDestinationEndpoints.response", 200, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -5156,6 +6015,72 @@ func TestUpdateResponseSnapshot_ListRouterOutputs(t *testing.T) {
 	}
 }
 
+func TestUpdateResponseSnapshot_ListSourceEndpoints(t *testing.T) {
+	want := &ListSourceEndpointsOutput{
+		SourceEndpoints: []types.ListedSourceEndpoint{
+			{
+				Name:                      ptr.String("__Name__"),
+				Arn:                       ptr.String("__Arn__"),
+				Id:                        ptr.String("__Id__"),
+				SourceType:                types.SourceEndpointType("STANDARD"),
+				RegionName:                ptr.String("__RegionName__"),
+				AvailabilityZone:          ptr.String("__AvailabilityZone__"),
+				AvailabilityZoneId:        ptr.String("__AvailabilityZoneId__"),
+				CreatedAt:                 ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				UpdatedAt:                 ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				LifecycleManagement:       types.EndpointLifecycle("MANAGED"),
+				MessageCount:              ptr.Int32(1),
+				ResourceShareOwnership:    types.ResourceShareOwnership("OWNED"),
+				ResourceShareState:        types.ResourceShareState("SHARED"),
+				RegistrationState:         types.SourceEndpointRegistrationState("REGISTERED"),
+				ConnectionState:           types.SourceEndpointConnectionState("CONNECTED"),
+				EncryptionType:            types.EndpointEncryptionType("SECRETS_MANAGER"),
+				ConnectedDestinationCount: ptr.Int32(1),
+				AssociatedResourceArn:     ptr.String("__AssociatedResourceArn__"),
+			},
+			{
+				Name:                      ptr.String("__Name__"),
+				Arn:                       ptr.String("__Arn__"),
+				Id:                        ptr.String("__Id__"),
+				SourceType:                types.SourceEndpointType("STANDARD"),
+				RegionName:                ptr.String("__RegionName__"),
+				AvailabilityZone:          ptr.String("__AvailabilityZone__"),
+				AvailabilityZoneId:        ptr.String("__AvailabilityZoneId__"),
+				CreatedAt:                 ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				UpdatedAt:                 ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				LifecycleManagement:       types.EndpointLifecycle("MANAGED"),
+				MessageCount:              ptr.Int32(1),
+				ResourceShareOwnership:    types.ResourceShareOwnership("OWNED"),
+				ResourceShareState:        types.ResourceShareState("SHARED"),
+				RegistrationState:         types.SourceEndpointRegistrationState("REGISTERED"),
+				ConnectionState:           types.SourceEndpointConnectionState("CONNECTED"),
+				EncryptionType:            types.EndpointEncryptionType("SECRETS_MANAGER"),
+				ConnectedDestinationCount: ptr.Int32(1),
+				AssociatedResourceArn:     ptr.String("__AssociatedResourceArn__"),
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	proto := restjson1.New(schemas.MediaConnect)
+	opSchema := smithy.NewOperationSchema(schemas.ListSourceEndpoints, schemas.ListSourceEndpointsResponse, schemas.ListSourceEndpointsResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("ListSourceEndpoints.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateResponseSnapshot_ListTagsForGlobalResource(t *testing.T) {
 	want := &ListTagsForGlobalResourceOutput{
 		Tags: map[string]string{
@@ -5245,6 +6170,231 @@ func TestUpdateResponseSnapshot_PurchaseOffering(t *testing.T) {
 		body = b
 	}
 	if err := serdeRespWriteSnapshot("PurchaseOffering.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_RegisterDestinationEndpoint(t *testing.T) {
+	want := &RegisterDestinationEndpointOutput{
+		DestinationEndpoint: &types.DestinationEndpoint{
+			Name:                ptr.String("__Name__"),
+			Arn:                 ptr.String("__Arn__"),
+			Id:                  ptr.String("__Id__"),
+			Description:         ptr.String("__Description__"),
+			RegionName:          ptr.String("__RegionName__"),
+			AvailabilityZone:    ptr.String("__AvailabilityZone__"),
+			AvailabilityZoneId:  ptr.String("__AvailabilityZoneId__"),
+			CreatedAt:           ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			UpdatedAt:           ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			LifecycleManagement: types.EndpointLifecycle("MANAGED"),
+			Messages: []types.DestinationEndpointMessage{
+				{
+					Code:    ptr.String("__Code__"),
+					Message: ptr.String("__Message__"),
+				},
+				{
+					Code:    ptr.String("__Code__"),
+					Message: ptr.String("__Message__"),
+				},
+			},
+			DestinationType: types.DestinationEndpointType("STANDARD"),
+			Configuration: &types.DestinationEndpointConfigurationMemberStandard{
+				Value: types.StandardDestinationEndpointConfiguration{
+					Name: ptr.String("__Name__"),
+					DestinationNetworkingConfiguration: &types.StandardDestinationEndpointNetworkingConfigurationMemberPublic{
+						Value: types.PublicDestinationEndpointNetworkingConfiguration{
+							DestinationAllowRules: []types.PublicDestinationEndpointNetworkingConfigurationAllowRule{
+								{
+									Cidr: ptr.String("__Cidr__"),
+								},
+								{
+									Cidr: ptr.String("__Cidr__"),
+								},
+							},
+						},
+					},
+					ProtocolConfiguration: &types.StandardDestinationEndpointProtocolConfigurationMemberRist{
+						Value: types.RistStandardDestinationEndpointConfiguration{
+							DestinationAddress:    ptr.String("__DestinationAddress__"),
+							DestinationIngestPort: ptr.Int32(1),
+						},
+					},
+					DestinationNetworkingType: types.DestinationEndpointNetworkingType("PUBLIC"),
+					Protocol:                  types.DestinationEndpointProtocol("RTP"),
+				},
+			},
+			ResourceShareOwnership: types.ResourceShareOwnership("OWNED"),
+			ResourceShareDetails: &types.ResourceShareDetailsMemberOwned{
+				Value: types.OwnedResourceShareDetails{
+					ShareState: types.ResourceShareState("SHARED"),
+				},
+			},
+			RegistrationState: types.DestinationEndpointRegistrationState("REGISTERED"),
+			ConnectionDetails: &types.DestinationEndpointConnectionDetailsMemberStandard{
+				Value: types.StandardDestinationEndpointConnectionDetails{
+					SourceIpAddress:      ptr.String("__SourceIpAddress__"),
+					SourceListenerPort:   ptr.Int32(1),
+					SourceEncryptionType: types.EndpointEncryptionType("SECRETS_MANAGER"),
+					SourceEncryptionConfiguration: &types.EndpointEncryptionConfigurationMemberSecretsManager{
+						Value: types.SecretsManagerEndpointEncryptionConfiguration{
+							EncryptionSecretType: types.EndpointEncryptionSecretType("AES_128_KEY"),
+							EncryptionSecret: &types.EndpointEncryptionSecretConfiguration{
+								SecretArn: ptr.String("__SecretArn__"),
+							},
+						},
+					},
+					SourceEndpointType: types.SourceEndpointType("STANDARD"),
+				},
+			},
+			ConnectionState: types.DestinationEndpointConnectionState("CONNECTED"),
+			ConnectedSource: ptr.String("__ConnectedSource__"),
+			DecryptionType:  types.EndpointEncryptionType("SECRETS_MANAGER"),
+			DecryptionConfiguration: &types.EndpointEncryptionConfigurationMemberSecretsManager{
+				Value: types.SecretsManagerEndpointEncryptionConfiguration{
+					EncryptionSecretType: types.EndpointEncryptionSecretType("AES_128_KEY"),
+					EncryptionSecret: &types.EndpointEncryptionSecretConfiguration{
+						SecretArn: ptr.String("__SecretArn__"),
+					},
+				},
+			},
+			AssociatedResourceDetails: &types.DestinationEndpointAssociatedResourceDetailsMemberStandard{
+				Value: types.StandardDestinationEndpointAssociatedResourceDetails{},
+			},
+			Tags: map[string]string{
+				"key0": "__Value__",
+			},
+		},
+	}
+	proto := restjson1.New(schemas.MediaConnect)
+	opSchema := smithy.NewOperationSchema(schemas.RegisterDestinationEndpoint, schemas.RegisterDestinationEndpointResponse, schemas.RegisterDestinationEndpointResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("RegisterDestinationEndpoint.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_RegisterSourceEndpoint(t *testing.T) {
+	want := &RegisterSourceEndpointOutput{
+		SourceEndpoint: &types.SourceEndpoint{
+			Name:                ptr.String("__Name__"),
+			Arn:                 ptr.String("__Arn__"),
+			Id:                  ptr.String("__Id__"),
+			Description:         ptr.String("__Description__"),
+			RegionName:          ptr.String("__RegionName__"),
+			AvailabilityZone:    ptr.String("__AvailabilityZone__"),
+			AvailabilityZoneId:  ptr.String("__AvailabilityZoneId__"),
+			CreatedAt:           ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			UpdatedAt:           ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			LifecycleManagement: types.EndpointLifecycle("MANAGED"),
+			Messages: []types.SourceEndpointMessage{
+				{
+					Code:    ptr.String("__Code__"),
+					Message: ptr.String("__Message__"),
+				},
+				{
+					Code:    ptr.String("__Code__"),
+					Message: ptr.String("__Message__"),
+				},
+			},
+			SourceType: types.SourceEndpointType("STANDARD"),
+			Configuration: &types.SourceEndpointConfigurationMemberStandard{
+				Value: types.StandardSourceEndpointConfiguration{
+					Name: ptr.String("__Name__"),
+					SourceNetworkingConfiguration: &types.StandardSourceEndpointNetworkingConfigurationMemberPublic{
+						Value: types.PublicSourceEndpointNetworkingConfiguration{
+							SourceAllowRules: []types.PublicSourceEndpointNetworkingConfigurationAllowRule{
+								{
+									Cidr: ptr.String("__Cidr__"),
+								},
+								{
+									Cidr: ptr.String("__Cidr__"),
+								},
+							},
+						},
+					},
+					ProtocolConfiguration: &types.StandardSourceEndpointProtocolConfigurationMemberRist{
+						Value: types.RistStandardSourceEndpointConfiguration{
+							DestinationIngestPort:       ptr.Int32(1),
+							RecoveryLatencyMilliseconds: ptr.Int64(1),
+						},
+					},
+					SourceNetworkingType: types.SourceEndpointNetworkingType("PUBLIC"),
+					Protocol:             types.SourceEndpointProtocol("RTP"),
+				},
+			},
+			ResourceShareOwnership: types.ResourceShareOwnership("OWNED"),
+			ResourceShareDetails: &types.ResourceShareDetailsMemberOwned{
+				Value: types.OwnedResourceShareDetails{
+					ShareState: types.ResourceShareState("SHARED"),
+				},
+			},
+			RegistrationState: types.SourceEndpointRegistrationState("REGISTERED"),
+			ConnectionState:   types.SourceEndpointConnectionState("CONNECTED"),
+			ConnectionDetails: &types.SourceEndpointConnectionDetailsMemberStandard{
+				Value: types.StandardSourceEndpointConnectionDetails{
+					DestinationIpAddress:      ptr.String("__DestinationIpAddress__"),
+					DestinationIngestPort:     ptr.Int32(1),
+					DestinationDecryptionType: types.EndpointEncryptionType("SECRETS_MANAGER"),
+					DestinationDecryptionConfiguration: &types.EndpointEncryptionConfigurationMemberSecretsManager{
+						Value: types.SecretsManagerEndpointEncryptionConfiguration{
+							EncryptionSecretType: types.EndpointEncryptionSecretType("AES_128_KEY"),
+							EncryptionSecret: &types.EndpointEncryptionSecretConfiguration{
+								SecretArn: ptr.String("__SecretArn__"),
+							},
+						},
+					},
+					DestinationEndpointType: types.DestinationEndpointType("STANDARD"),
+				},
+			},
+			ConnectedDestinations: []string{
+				"__Member__",
+				"__Member__",
+			},
+			EncryptionType: types.EndpointEncryptionType("SECRETS_MANAGER"),
+			EncryptionConfiguration: &types.EndpointEncryptionConfigurationMemberSecretsManager{
+				Value: types.SecretsManagerEndpointEncryptionConfiguration{
+					EncryptionSecretType: types.EndpointEncryptionSecretType("AES_128_KEY"),
+					EncryptionSecret: &types.EndpointEncryptionSecretConfiguration{
+						SecretArn: ptr.String("__SecretArn__"),
+					},
+				},
+			},
+			AssociatedResourceDetails: &types.SourceEndpointAssociatedResourceDetailsMemberStandard{
+				Value: types.StandardSourceEndpointAssociatedResourceDetails{},
+			},
+			Tags: map[string]string{
+				"key0": "__Value__",
+			},
+		},
+	}
+	proto := restjson1.New(schemas.MediaConnect)
+	opSchema := smithy.NewOperationSchema(schemas.RegisterSourceEndpoint, schemas.RegisterSourceEndpointResponse, schemas.RegisterSourceEndpointResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("RegisterSourceEndpoint.response", 200, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -6002,6 +7152,117 @@ func TestUpdateResponseSnapshot_UpdateBridgeState(t *testing.T) {
 		body = b
 	}
 	if err := serdeRespWriteSnapshot("UpdateBridgeState.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_UpdateDestinationEndpoint(t *testing.T) {
+	want := &UpdateDestinationEndpointOutput{
+		DestinationEndpoint: &types.DestinationEndpoint{
+			Name:                ptr.String("__Name__"),
+			Arn:                 ptr.String("__Arn__"),
+			Id:                  ptr.String("__Id__"),
+			Description:         ptr.String("__Description__"),
+			RegionName:          ptr.String("__RegionName__"),
+			AvailabilityZone:    ptr.String("__AvailabilityZone__"),
+			AvailabilityZoneId:  ptr.String("__AvailabilityZoneId__"),
+			CreatedAt:           ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			UpdatedAt:           ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			LifecycleManagement: types.EndpointLifecycle("MANAGED"),
+			Messages: []types.DestinationEndpointMessage{
+				{
+					Code:    ptr.String("__Code__"),
+					Message: ptr.String("__Message__"),
+				},
+				{
+					Code:    ptr.String("__Code__"),
+					Message: ptr.String("__Message__"),
+				},
+			},
+			DestinationType: types.DestinationEndpointType("STANDARD"),
+			Configuration: &types.DestinationEndpointConfigurationMemberStandard{
+				Value: types.StandardDestinationEndpointConfiguration{
+					Name: ptr.String("__Name__"),
+					DestinationNetworkingConfiguration: &types.StandardDestinationEndpointNetworkingConfigurationMemberPublic{
+						Value: types.PublicDestinationEndpointNetworkingConfiguration{
+							DestinationAllowRules: []types.PublicDestinationEndpointNetworkingConfigurationAllowRule{
+								{
+									Cidr: ptr.String("__Cidr__"),
+								},
+								{
+									Cidr: ptr.String("__Cidr__"),
+								},
+							},
+						},
+					},
+					ProtocolConfiguration: &types.StandardDestinationEndpointProtocolConfigurationMemberRist{
+						Value: types.RistStandardDestinationEndpointConfiguration{
+							DestinationAddress:    ptr.String("__DestinationAddress__"),
+							DestinationIngestPort: ptr.Int32(1),
+						},
+					},
+					DestinationNetworkingType: types.DestinationEndpointNetworkingType("PUBLIC"),
+					Protocol:                  types.DestinationEndpointProtocol("RTP"),
+				},
+			},
+			ResourceShareOwnership: types.ResourceShareOwnership("OWNED"),
+			ResourceShareDetails: &types.ResourceShareDetailsMemberOwned{
+				Value: types.OwnedResourceShareDetails{
+					ShareState: types.ResourceShareState("SHARED"),
+				},
+			},
+			RegistrationState: types.DestinationEndpointRegistrationState("REGISTERED"),
+			ConnectionDetails: &types.DestinationEndpointConnectionDetailsMemberStandard{
+				Value: types.StandardDestinationEndpointConnectionDetails{
+					SourceIpAddress:      ptr.String("__SourceIpAddress__"),
+					SourceListenerPort:   ptr.Int32(1),
+					SourceEncryptionType: types.EndpointEncryptionType("SECRETS_MANAGER"),
+					SourceEncryptionConfiguration: &types.EndpointEncryptionConfigurationMemberSecretsManager{
+						Value: types.SecretsManagerEndpointEncryptionConfiguration{
+							EncryptionSecretType: types.EndpointEncryptionSecretType("AES_128_KEY"),
+							EncryptionSecret: &types.EndpointEncryptionSecretConfiguration{
+								SecretArn: ptr.String("__SecretArn__"),
+							},
+						},
+					},
+					SourceEndpointType: types.SourceEndpointType("STANDARD"),
+				},
+			},
+			ConnectionState: types.DestinationEndpointConnectionState("CONNECTED"),
+			ConnectedSource: ptr.String("__ConnectedSource__"),
+			DecryptionType:  types.EndpointEncryptionType("SECRETS_MANAGER"),
+			DecryptionConfiguration: &types.EndpointEncryptionConfigurationMemberSecretsManager{
+				Value: types.SecretsManagerEndpointEncryptionConfiguration{
+					EncryptionSecretType: types.EndpointEncryptionSecretType("AES_128_KEY"),
+					EncryptionSecret: &types.EndpointEncryptionSecretConfiguration{
+						SecretArn: ptr.String("__SecretArn__"),
+					},
+				},
+			},
+			AssociatedResourceDetails: &types.DestinationEndpointAssociatedResourceDetailsMemberStandard{
+				Value: types.StandardDestinationEndpointAssociatedResourceDetails{},
+			},
+			Tags: map[string]string{
+				"key0": "__Value__",
+			},
+		},
+	}
+	proto := restjson1.New(schemas.MediaConnect)
+	opSchema := smithy.NewOperationSchema(schemas.UpdateDestinationEndpoint, schemas.UpdateDestinationEndpointResponse, schemas.UpdateDestinationEndpointResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("UpdateDestinationEndpoint.response", 200, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -7217,16 +8478,18 @@ func TestUpdateResponseSnapshot_UpdateRouterInput(t *testing.T) {
 			Id:        ptr.String("__Id__"),
 			State:     types.RouterInputState("CREATING"),
 			InputType: types.RouterInputType("STANDARD"),
-			Configuration: &types.RouterInputConfigurationMemberStandard{
-				Value: types.StandardRouterInputConfiguration{
-					NetworkInterfaceArn: ptr.String("__NetworkInterfaceArn__"),
-					ProtocolConfiguration: &types.RouterInputProtocolConfigurationMemberRist{
-						Value: types.RistRouterInputConfiguration{
-							Port:                        ptr.Int32(1),
-							RecoveryLatencyMilliseconds: ptr.Int64(1),
+			Configuration: &types.RouterInputConfigurationMemberDestinationEndpoint{
+				Value: types.DestinationEndpointRouterInputConfiguration{
+					EndpointLifecycleManagement: types.EndpointLifecycle("MANAGED"),
+					SourceTransitDecryptionType: types.EndpointEncryptionType("SECRETS_MANAGER"),
+					SourceTransitDecryption: &types.EndpointEncryptionConfigurationMemberSecretsManager{
+						Value: types.SecretsManagerEndpointEncryptionConfiguration{
+							EncryptionSecretType: types.EndpointEncryptionSecretType("AES_128_KEY"),
+							EncryptionSecret: &types.EndpointEncryptionSecretConfiguration{
+								SecretArn: ptr.String("__SecretArn__"),
+							},
 						},
 					},
-					Protocol: types.RouterInputProtocol("RTP"),
 				},
 			},
 			RoutedOutputs:        ptr.Int32(1),
@@ -7260,10 +8523,8 @@ func TestUpdateResponseSnapshot_UpdateRouterInput(t *testing.T) {
 			Tags: map[string]string{
 				"key0": "__Value__",
 			},
-			StreamDetails: &types.RouterInputStreamDetailsMemberStandard{
-				Value: types.StandardRouterInputStreamDetails{
-					SourceIpAddress: ptr.String("__SourceIpAddress__"),
-				},
+			StreamDetails: &types.RouterInputStreamDetailsMemberDestinationEndpoint{
+				Value: types.DestinationEndpointRouterInputStreamDetails{},
 			},
 			IpAddress:       ptr.String("__IpAddress__"),
 			MaintenanceType: types.MaintenanceType("PREFERRED_DAY_TIME"),
@@ -7297,6 +8558,10 @@ func TestUpdateResponseSnapshot_UpdateRouterInput(t *testing.T) {
 						ThresholdSeconds: ptr.Int32(1),
 					},
 				},
+			},
+			AssociatedDestinationEndpointArns: []string{
+				"__Member__",
+				"__Member__",
 			},
 		},
 	}
@@ -7436,6 +8701,10 @@ func TestUpdateResponseSnapshot_UpdateRouterOutput(t *testing.T) {
 			FabricConfiguration: &types.FabricConfiguration{
 				RecoveryLatencyMode: types.FabricLatencyMode("BALANCED"),
 			},
+			AssociatedSourceEndpointArns: []string{
+				"__Member__",
+				"__Member__",
+			},
 		},
 	}
 	proto := restjson1.New(schemas.MediaConnect)
@@ -7454,6 +8723,120 @@ func TestUpdateResponseSnapshot_UpdateRouterOutput(t *testing.T) {
 		body = b
 	}
 	if err := serdeRespWriteSnapshot("UpdateRouterOutput.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_UpdateSourceEndpoint(t *testing.T) {
+	want := &UpdateSourceEndpointOutput{
+		SourceEndpoint: &types.SourceEndpoint{
+			Name:                ptr.String("__Name__"),
+			Arn:                 ptr.String("__Arn__"),
+			Id:                  ptr.String("__Id__"),
+			Description:         ptr.String("__Description__"),
+			RegionName:          ptr.String("__RegionName__"),
+			AvailabilityZone:    ptr.String("__AvailabilityZone__"),
+			AvailabilityZoneId:  ptr.String("__AvailabilityZoneId__"),
+			CreatedAt:           ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			UpdatedAt:           ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			LifecycleManagement: types.EndpointLifecycle("MANAGED"),
+			Messages: []types.SourceEndpointMessage{
+				{
+					Code:    ptr.String("__Code__"),
+					Message: ptr.String("__Message__"),
+				},
+				{
+					Code:    ptr.String("__Code__"),
+					Message: ptr.String("__Message__"),
+				},
+			},
+			SourceType: types.SourceEndpointType("STANDARD"),
+			Configuration: &types.SourceEndpointConfigurationMemberStandard{
+				Value: types.StandardSourceEndpointConfiguration{
+					Name: ptr.String("__Name__"),
+					SourceNetworkingConfiguration: &types.StandardSourceEndpointNetworkingConfigurationMemberPublic{
+						Value: types.PublicSourceEndpointNetworkingConfiguration{
+							SourceAllowRules: []types.PublicSourceEndpointNetworkingConfigurationAllowRule{
+								{
+									Cidr: ptr.String("__Cidr__"),
+								},
+								{
+									Cidr: ptr.String("__Cidr__"),
+								},
+							},
+						},
+					},
+					ProtocolConfiguration: &types.StandardSourceEndpointProtocolConfigurationMemberRist{
+						Value: types.RistStandardSourceEndpointConfiguration{
+							DestinationIngestPort:       ptr.Int32(1),
+							RecoveryLatencyMilliseconds: ptr.Int64(1),
+						},
+					},
+					SourceNetworkingType: types.SourceEndpointNetworkingType("PUBLIC"),
+					Protocol:             types.SourceEndpointProtocol("RTP"),
+				},
+			},
+			ResourceShareOwnership: types.ResourceShareOwnership("OWNED"),
+			ResourceShareDetails: &types.ResourceShareDetailsMemberOwned{
+				Value: types.OwnedResourceShareDetails{
+					ShareState: types.ResourceShareState("SHARED"),
+				},
+			},
+			RegistrationState: types.SourceEndpointRegistrationState("REGISTERED"),
+			ConnectionState:   types.SourceEndpointConnectionState("CONNECTED"),
+			ConnectionDetails: &types.SourceEndpointConnectionDetailsMemberStandard{
+				Value: types.StandardSourceEndpointConnectionDetails{
+					DestinationIpAddress:      ptr.String("__DestinationIpAddress__"),
+					DestinationIngestPort:     ptr.Int32(1),
+					DestinationDecryptionType: types.EndpointEncryptionType("SECRETS_MANAGER"),
+					DestinationDecryptionConfiguration: &types.EndpointEncryptionConfigurationMemberSecretsManager{
+						Value: types.SecretsManagerEndpointEncryptionConfiguration{
+							EncryptionSecretType: types.EndpointEncryptionSecretType("AES_128_KEY"),
+							EncryptionSecret: &types.EndpointEncryptionSecretConfiguration{
+								SecretArn: ptr.String("__SecretArn__"),
+							},
+						},
+					},
+					DestinationEndpointType: types.DestinationEndpointType("STANDARD"),
+				},
+			},
+			ConnectedDestinations: []string{
+				"__Member__",
+				"__Member__",
+			},
+			EncryptionType: types.EndpointEncryptionType("SECRETS_MANAGER"),
+			EncryptionConfiguration: &types.EndpointEncryptionConfigurationMemberSecretsManager{
+				Value: types.SecretsManagerEndpointEncryptionConfiguration{
+					EncryptionSecretType: types.EndpointEncryptionSecretType("AES_128_KEY"),
+					EncryptionSecret: &types.EndpointEncryptionSecretConfiguration{
+						SecretArn: ptr.String("__SecretArn__"),
+					},
+				},
+			},
+			AssociatedResourceDetails: &types.SourceEndpointAssociatedResourceDetailsMemberStandard{
+				Value: types.StandardSourceEndpointAssociatedResourceDetails{},
+			},
+			Tags: map[string]string{
+				"key0": "__Value__",
+			},
+		},
+	}
+	proto := restjson1.New(schemas.MediaConnect)
+	opSchema := smithy.NewOperationSchema(schemas.UpdateSourceEndpoint, schemas.UpdateSourceEndpointResponse, schemas.UpdateSourceEndpointResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("UpdateSourceEndpoint.response", 200, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -7604,6 +8987,31 @@ func TestUpdateResponseSnapshot_Error_CreateGateway420Exception(t *testing.T) {
 	}
 	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("CreateGateway420Exception.error", 420, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_Error_DestinationEndpointServiceQuotaExceededException(t *testing.T) {
+	want := &types.DestinationEndpointServiceQuotaExceededException{
+		Message: ptr.String("__Message__"),
+	}
+	proto := restjson1.New(schemas.MediaConnect)
+	opSchema := smithy.NewOperationSchema(schemas.RegisterDestinationEndpoint, schemas.DestinationEndpointServiceQuotaExceededException, schemas.DestinationEndpointServiceQuotaExceededException)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
+	if err := serdeRespWriteSnapshot("DestinationEndpointServiceQuotaExceededException.error", 420, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -7804,6 +9212,31 @@ func TestUpdateResponseSnapshot_Error_ServiceUnavailableException(t *testing.T) 
 	}
 	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("ServiceUnavailableException.error", 503, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_Error_SourceEndpointServiceQuotaExceededException(t *testing.T) {
+	want := &types.SourceEndpointServiceQuotaExceededException{
+		Message: ptr.String("__Message__"),
+	}
+	proto := restjson1.New(schemas.MediaConnect)
+	opSchema := smithy.NewOperationSchema(schemas.RegisterSourceEndpoint, schemas.SourceEndpointServiceQuotaExceededException, schemas.SourceEndpointServiceQuotaExceededException)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
+	if err := serdeRespWriteSnapshot("SourceEndpointServiceQuotaExceededException.error", 420, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
 }

@@ -3175,6 +3175,23 @@ func validateAutomaticInputFailoverSettings(v *types.AutomaticInputFailoverSetti
 	}
 }
 
+func validateAv1FilterSettings(v *types.Av1FilterSettings) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "Av1FilterSettings"}
+	if v.PerceptualFilterSettings != nil {
+		if err := validatePerceptualFilterSettings(v.PerceptualFilterSettings); err != nil {
+			invalidParams.AddNested("PerceptualFilterSettings", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateAv1Settings(v *types.Av1Settings) error {
 	if v == nil {
 		return nil
@@ -3189,6 +3206,11 @@ func validateAv1Settings(v *types.Av1Settings) error {
 	if v.TimecodeBurninSettings != nil {
 		if err := validateTimecodeBurninSettings(v.TimecodeBurninSettings); err != nil {
 			invalidParams.AddNested("TimecodeBurninSettings", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.FilterSettings != nil {
+		if err := validateAv1FilterSettings(v.FilterSettings); err != nil {
+			invalidParams.AddNested("FilterSettings", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -3844,14 +3866,53 @@ func validateGlobalConfiguration(v *types.GlobalConfiguration) error {
 	}
 }
 
+func validateH264FilterSettings(v *types.H264FilterSettings) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "H264FilterSettings"}
+	if v.PerceptualFilterSettings != nil {
+		if err := validatePerceptualFilterSettings(v.PerceptualFilterSettings); err != nil {
+			invalidParams.AddNested("PerceptualFilterSettings", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateH264Settings(v *types.H264Settings) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "H264Settings"}
+	if v.FilterSettings != nil {
+		if err := validateH264FilterSettings(v.FilterSettings); err != nil {
+			invalidParams.AddNested("FilterSettings", err.(smithy.InvalidParamsError))
+		}
+	}
 	if v.TimecodeBurninSettings != nil {
 		if err := validateTimecodeBurninSettings(v.TimecodeBurninSettings); err != nil {
 			invalidParams.AddNested("TimecodeBurninSettings", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateH265FilterSettings(v *types.H265FilterSettings) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "H265FilterSettings"}
+	if v.PerceptualFilterSettings != nil {
+		if err := validatePerceptualFilterSettings(v.PerceptualFilterSettings); err != nil {
+			invalidParams.AddNested("PerceptualFilterSettings", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -3866,6 +3927,11 @@ func validateH265Settings(v *types.H265Settings) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "H265Settings"}
+	if v.FilterSettings != nil {
+		if err := validateH265FilterSettings(v.FilterSettings); err != nil {
+			invalidParams.AddNested("FilterSettings", err.(smithy.InvalidParamsError))
+		}
+	}
 	if v.FramerateDenominator == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("FramerateDenominator"))
 	}
@@ -4719,6 +4785,21 @@ func validatePauseStateScheduleActionSettings(v *types.PauseStateScheduleActionS
 		if err := validate__listOfPipelinePauseStateSettings(v.Pipelines); err != nil {
 			invalidParams.AddNested("Pipelines", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validatePerceptualFilterSettings(v *types.PerceptualFilterSettings) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PerceptualFilterSettings"}
+	if len(v.Strength) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Strength"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

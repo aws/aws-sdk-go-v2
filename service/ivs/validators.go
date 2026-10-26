@@ -170,6 +170,26 @@ func (m *validateOpDeleteChannel) HandleInitialize(ctx context.Context, in middl
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDeleteFailoverSlateConfiguration struct {
+}
+
+func (*validateOpDeleteFailoverSlateConfiguration) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteFailoverSlateConfiguration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteFailoverSlateConfigurationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteFailoverSlateConfigurationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeletePlaybackKeyPair struct {
 }
 
@@ -285,6 +305,26 @@ func (m *validateOpGetChannel) HandleInitialize(ctx context.Context, in middlewa
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpGetChannelInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetFailoverSlateConfiguration struct {
+}
+
+func (*validateOpGetFailoverSlateConfiguration) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetFailoverSlateConfiguration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetFailoverSlateConfigurationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetFailoverSlateConfigurationInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -650,6 +690,26 @@ func (m *validateOpUpdateChannel) HandleInitialize(ctx context.Context, in middl
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateFailoverSlateConfiguration struct {
+}
+
+func (*validateOpUpdateFailoverSlateConfiguration) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateFailoverSlateConfiguration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateFailoverSlateConfigurationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateFailoverSlateConfigurationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdatePlaybackRestrictionPolicy struct {
 }
 
@@ -702,6 +762,10 @@ func addOpDeleteChannelValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteChannel{}, middleware.After)
 }
 
+func addOpDeleteFailoverSlateConfigurationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteFailoverSlateConfiguration{}, middleware.After)
+}
+
 func addOpDeletePlaybackKeyPairValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeletePlaybackKeyPair{}, middleware.After)
 }
@@ -724,6 +788,10 @@ func addOpGetAdConfigurationValidationMiddleware(stack *middleware.Stack) error 
 
 func addOpGetChannelValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetChannel{}, middleware.After)
+}
+
+func addOpGetFailoverSlateConfigurationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetFailoverSlateConfiguration{}, middleware.After)
 }
 
 func addOpGetPlaybackKeyPairValidationMiddleware(stack *middleware.Stack) error {
@@ -796,6 +864,10 @@ func addOpUpdateAdConfigurationValidationMiddleware(stack *middleware.Stack) err
 
 func addOpUpdateChannelValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateChannel{}, middleware.After)
+}
+
+func addOpUpdateFailoverSlateConfigurationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateFailoverSlateConfiguration{}, middleware.After)
 }
 
 func addOpUpdatePlaybackRestrictionPolicyValidationMiddleware(stack *middleware.Stack) error {
@@ -1017,6 +1089,21 @@ func validateOpDeleteChannelInput(v *DeleteChannelInput) error {
 	}
 }
 
+func validateOpDeleteFailoverSlateConfigurationInput(v *DeleteFailoverSlateConfigurationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteFailoverSlateConfigurationInput"}
+	if v.Arn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Arn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDeletePlaybackKeyPairInput(v *DeletePlaybackKeyPairInput) error {
 	if v == nil {
 		return nil
@@ -1097,6 +1184,21 @@ func validateOpGetChannelInput(v *GetChannelInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "GetChannelInput"}
+	if v.Arn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Arn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetFailoverSlateConfigurationInput(v *GetFailoverSlateConfigurationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetFailoverSlateConfigurationInput"}
 	if v.Arn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Arn"))
 	}
@@ -1387,6 +1489,21 @@ func validateOpUpdateChannelInput(v *UpdateChannelInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateChannelInput"}
+	if v.Arn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Arn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateFailoverSlateConfigurationInput(v *UpdateFailoverSlateConfigurationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateFailoverSlateConfigurationInput"}
 	if v.Arn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Arn"))
 	}

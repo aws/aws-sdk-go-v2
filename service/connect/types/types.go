@@ -21665,6 +21665,36 @@ func (v *NotificationSearchSummary) Deserialize(d smithy.ShapeDeserializer) erro
 	})
 }
 
+// Additional recipients for UpdateContact, allowing an empty list to clear CC
+// recipients.
+type NullableAdditionalRecipients struct {
+
+	// The additional CC email address recipients. You can specify up to 50 addresses.
+	// Provide an empty list to clear the existing CC recipients.
+	CcEmailAddresses []EmailAddressInfo
+
+	noSmithyDocumentSerde
+}
+
+func (v *NullableAdditionalRecipients) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.NullableAdditionalRecipients)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *NullableAdditionalRecipients) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeOptionalEmailAddressRecipientList(s, schemas.NullableAdditionalRecipients_CcEmailAddresses, v.CcEmailAddresses)
+}
+func (v *NullableAdditionalRecipients) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.NullableAdditionalRecipients, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.NullableAdditionalRecipients_CcEmailAddresses:
+			return deserializeOptionalEmailAddressRecipientList(d, schemas.NullableAdditionalRecipients_CcEmailAddresses, &v.CcEmailAddresses)
+		}
+		return nil
+	})
+}
+
 // A leaf node condition which can be used to specify a numeric condition.
 //
 // The currently supported value for FieldName is limit .
@@ -33093,6 +33123,104 @@ func (v *UpdateCaseActionDefinition) Deserialize(d smithy.ShapeDeserializer) err
 		switch s {
 		case schemas.UpdateCaseActionDefinition_Fields:
 			return deserializeFieldValues(d, schemas.UpdateCaseActionDefinition_Fields, &v.Fields)
+		}
+		return nil
+	})
+}
+
+// Contains the updated body content for an outbound email draft.
+type UpdateOutboundEmailContent struct {
+
+	// The message source type. The only supported value is RAW .
+	//
+	// This member is required.
+	MessageSourceType UpdateOutboundEmailMessageSourceType
+
+	// The raw email body content.
+	//
+	// This member is required.
+	RawMessage *UpdateOutboundRawMessage
+
+	noSmithyDocumentSerde
+}
+
+func (v *UpdateOutboundEmailContent) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateOutboundEmailContent)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateOutboundEmailContent) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MessageSourceType != "" {
+		s.WriteString(schemas.UpdateOutboundEmailContent_MessageSourceType, string(v.MessageSourceType))
+	}
+	if v.RawMessage != nil {
+		s.WriteStruct(schemas.UpdateOutboundEmailContent_RawMessage)
+		v.RawMessage.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateOutboundEmailContent) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateOutboundEmailContent, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateOutboundEmailContent_MessageSourceType:
+			var ev string
+			if err := d.ReadString(schemas.UpdateOutboundEmailContent_MessageSourceType, &ev); err != nil {
+				return err
+			}
+			v.MessageSourceType = UpdateOutboundEmailMessageSourceType(ev)
+			return nil
+		case schemas.UpdateOutboundEmailContent_RawMessage:
+			v.RawMessage = &UpdateOutboundRawMessage{}
+			return v.RawMessage.Deserialize(d)
+		}
+		return nil
+	})
+}
+
+// Contains the raw body content of an outbound email draft.
+type UpdateOutboundRawMessage struct {
+
+	// The email message body.
+	//
+	// This member is required.
+	Body *string
+
+	// The content type of the email body. Valid values:
+	//
+	//   - text/plain – Plain text content.
+	//
+	//   - text/html – HTML-formatted content.
+	//
+	// This member is required.
+	ContentType *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *UpdateOutboundRawMessage) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateOutboundRawMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateOutboundRawMessage) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Body != nil {
+		s.WriteString(schemas.UpdateOutboundRawMessage_Body, *v.Body)
+	}
+	if v.ContentType != nil {
+		s.WriteString(schemas.UpdateOutboundRawMessage_ContentType, *v.ContentType)
+	}
+}
+func (v *UpdateOutboundRawMessage) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateOutboundRawMessage, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateOutboundRawMessage_Body:
+			v.Body = new(string)
+			return d.ReadString(schemas.UpdateOutboundRawMessage_Body, v.Body)
+		case schemas.UpdateOutboundRawMessage_ContentType:
+			v.ContentType = new(string)
+			return d.ReadString(schemas.UpdateOutboundRawMessage_ContentType, v.ContentType)
 		}
 		return nil
 	})

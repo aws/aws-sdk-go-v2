@@ -21793,6 +21793,18 @@ func TestCheckResponseSnapshot_UpdateContact(t *testing.T) {
 			Type:    types.EndpointType("TELEPHONE_NUMBER"),
 			Address: ptr.String("__Address__"),
 		},
+		AdditionalRecipients: &types.NullableAdditionalRecipients{
+			CcEmailAddresses: []types.EmailAddressInfo{
+				{
+					EmailAddress: ptr.String("__EmailAddress__"),
+					DisplayName:  ptr.String("__DisplayName__"),
+				},
+				{
+					EmailAddress: ptr.String("__EmailAddress__"),
+					DisplayName:  ptr.String("__DisplayName__"),
+				},
+			},
+		},
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -23411,6 +23423,37 @@ func TestCheckResponseSnapshot_UpdateNotificationContent(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "UpdateNotificationContent.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_UpdateOutboundEmailContactMessage(t *testing.T) {
+	want := &UpdateOutboundEmailContactMessageOutput{
+		ContactId: ptr.String("__ContactId__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("UpdateOutboundEmailContactMessage.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.UpdateOutboundEmailContactMessage(context.Background(), &UpdateOutboundEmailContactMessageInput{
+		InstanceId: ptr.String("__InstanceId__"),
+		ContactId:  ptr.String("__ContactId__"),
+		EmailMessage: &types.UpdateOutboundEmailContent{
+			MessageSourceType: types.UpdateOutboundEmailMessageSourceType("RAW"),
+			RawMessage: &types.UpdateOutboundRawMessage{
+				Body:        ptr.String("__Body__"),
+				ContentType: ptr.String("__ContentType__"),
+			},
+		},
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "UpdateOutboundEmailContactMessage.response", err)
 	}
 }
 

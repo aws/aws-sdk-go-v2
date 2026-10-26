@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AmazonEC2ContainerRegistry_V20150921.StopReplicationBackfill
+
+{"destination":{"region":"__Region__","registryId":"__RegistryId__"},"registryId":"__RegistryId__","replicationBackfillId":"__ReplicationBackfillId__","startedAt":946684800,"status":"PREPARING"}

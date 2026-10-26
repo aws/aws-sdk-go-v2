@@ -1881,6 +1881,33 @@ func (v *AudioWatermarkSettings) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
+// System-managed filter selection. Resolves to the perceptual filter at strength
+// 1 where the codec is eligible (AV1 and H.265 unconditionally; H.264 only at
+// enhanced_quality), and to no filter otherwise. An empty / undefined
+// filter_settings_choice is treated as "auto".
+//
+// Carries no body (extends EmptySettings, which sets additionalProperties:
+// false), mirroring the ColorSpacePassthroughSettings empty-settings pattern.
+type AutoFilterSettings struct {
+	noSmithyDocumentSerde
+}
+
+func (v *AutoFilterSettings) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AutoFilterSettings)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AutoFilterSettings) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *AutoFilterSettings) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AutoFilterSettings, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
+
 // The settings for Automatic Input Failover.
 type AutomaticInputFailoverSettings struct {
 
@@ -2025,6 +2052,72 @@ func (v *Av1ColorSpaceSettings) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
+// Av1 Filter Settings
+type Av1FilterSettings struct {
+
+	// System-managed filter selection. Resolves to the perceptual filter at strength
+	// 1 where the codec is eligible (AV1 and H.265 unconditionally; H.264 only at
+	// enhanced_quality), and to no filter otherwise. An empty / undefined
+	// filter_settings_choice is treated as "auto".
+	//
+	// Carries no body (extends EmptySettings, which sets additionalProperties:
+	// false), mirroring the ColorSpacePassthroughSettings empty-settings pattern.
+	AutoFilterSettings *AutoFilterSettings
+
+	// Explicitly disables the video filter. This is the customer opt-out: a video
+	// description set to "none" never has a filter applied and is never overridden by
+	// the system-managed "auto" default.
+	//
+	// Carries no body (extends EmptySettings, which sets additionalProperties:
+	// false), mirroring the ColorSpacePassthroughSettings empty-settings pattern.
+	NoneFilterSettings *NoneFilterSettings
+
+	// Perceptual Filter Settings
+	PerceptualFilterSettings *PerceptualFilterSettings
+
+	noSmithyDocumentSerde
+}
+
+func (v *Av1FilterSettings) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Av1FilterSettings)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Av1FilterSettings) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AutoFilterSettings != nil {
+		s.WriteStruct(schemas.Av1FilterSettings_AutoFilterSettings)
+		v.AutoFilterSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.NoneFilterSettings != nil {
+		s.WriteStruct(schemas.Av1FilterSettings_NoneFilterSettings)
+		v.NoneFilterSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.PerceptualFilterSettings != nil {
+		s.WriteStruct(schemas.Av1FilterSettings_PerceptualFilterSettings)
+		v.PerceptualFilterSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *Av1FilterSettings) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Av1FilterSettings, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Av1FilterSettings_AutoFilterSettings:
+			v.AutoFilterSettings = &AutoFilterSettings{}
+			return v.AutoFilterSettings.Deserialize(d)
+		case schemas.Av1FilterSettings_NoneFilterSettings:
+			v.NoneFilterSettings = &NoneFilterSettings{}
+			return v.NoneFilterSettings.Deserialize(d)
+		case schemas.Av1FilterSettings_PerceptualFilterSettings:
+			v.PerceptualFilterSettings = &PerceptualFilterSettings{}
+			return v.PerceptualFilterSettings.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Av1 Settings
 type Av1Settings struct {
 
@@ -2060,6 +2153,9 @@ type Av1Settings struct {
 	// Specify the type of color space to apply or choose to pass through. The default
 	// is to pass through the color space that is in the source.
 	ColorSpaceSettings *Av1ColorSpaceSettings
+
+	// Optional filters that you can apply to an encode.
+	FilterSettings *Av1FilterSettings
 
 	// Complete this property only if you set the afdSignaling property to FIXED.
 	// Choose the AFD value (4 bits) to write on all frames of the video encode.
@@ -2187,6 +2283,11 @@ func (v *Av1Settings) SerializeMembers(s smithy.ShapeSerializer) {
 		v.ColorSpaceSettings.SerializeMembers(s)
 		s.CloseStruct()
 	}
+	if v.FilterSettings != nil {
+		s.WriteStruct(schemas.Av1Settings_FilterSettings)
+		v.FilterSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
 	if v.FixedAfd != "" {
 		s.WriteString(schemas.Av1Settings_FixedAfd, string(v.FixedAfd))
 	}
@@ -2273,6 +2374,9 @@ func (v *Av1Settings) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.Av1Settings_ColorSpaceSettings:
 			v.ColorSpaceSettings = &Av1ColorSpaceSettings{}
 			return v.ColorSpaceSettings.Deserialize(d)
+		case schemas.Av1Settings_FilterSettings:
+			v.FilterSettings = &Av1FilterSettings{}
+			return v.FilterSettings.Deserialize(d)
 		case schemas.Av1Settings_FixedAfd:
 			var ev string
 			if err := d.ReadString(schemas.Av1Settings_FixedAfd, &ev); err != nil {
@@ -8827,8 +8931,28 @@ func (v *H264ColorSpaceSettings) Deserialize(d smithy.ShapeDeserializer) error {
 // H264 Filter Settings
 type H264FilterSettings struct {
 
+	// System-managed filter selection. Resolves to the perceptual filter at strength
+	// 1 where the codec is eligible (AV1 and H.265 unconditionally; H.264 only at
+	// enhanced_quality), and to no filter otherwise. An empty / undefined
+	// filter_settings_choice is treated as "auto".
+	//
+	// Carries no body (extends EmptySettings, which sets additionalProperties:
+	// false), mirroring the ColorSpacePassthroughSettings empty-settings pattern.
+	AutoFilterSettings *AutoFilterSettings
+
 	// Bandwidth Reduction Filter Settings
 	BandwidthReductionFilterSettings *BandwidthReductionFilterSettings
+
+	// Explicitly disables the video filter. This is the customer opt-out: a video
+	// description set to "none" never has a filter applied and is never overridden by
+	// the system-managed "auto" default.
+	//
+	// Carries no body (extends EmptySettings, which sets additionalProperties:
+	// false), mirroring the ColorSpacePassthroughSettings empty-settings pattern.
+	NoneFilterSettings *NoneFilterSettings
+
+	// Perceptual Filter Settings
+	PerceptualFilterSettings *PerceptualFilterSettings
 
 	// Temporal Filter Settings
 	TemporalFilterSettings *TemporalFilterSettings
@@ -8843,9 +8967,24 @@ func (v *H264FilterSettings) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *H264FilterSettings) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AutoFilterSettings != nil {
+		s.WriteStruct(schemas.H264FilterSettings_AutoFilterSettings)
+		v.AutoFilterSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
 	if v.BandwidthReductionFilterSettings != nil {
 		s.WriteStruct(schemas.H264FilterSettings_BandwidthReductionFilterSettings)
 		v.BandwidthReductionFilterSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.NoneFilterSettings != nil {
+		s.WriteStruct(schemas.H264FilterSettings_NoneFilterSettings)
+		v.NoneFilterSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.PerceptualFilterSettings != nil {
+		s.WriteStruct(schemas.H264FilterSettings_PerceptualFilterSettings)
+		v.PerceptualFilterSettings.SerializeMembers(s)
 		s.CloseStruct()
 	}
 	if v.TemporalFilterSettings != nil {
@@ -8857,9 +8996,18 @@ func (v *H264FilterSettings) SerializeMembers(s smithy.ShapeSerializer) {
 func (v *H264FilterSettings) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.H264FilterSettings, func(s *smithy.Schema) error {
 		switch s {
+		case schemas.H264FilterSettings_AutoFilterSettings:
+			v.AutoFilterSettings = &AutoFilterSettings{}
+			return v.AutoFilterSettings.Deserialize(d)
 		case schemas.H264FilterSettings_BandwidthReductionFilterSettings:
 			v.BandwidthReductionFilterSettings = &BandwidthReductionFilterSettings{}
 			return v.BandwidthReductionFilterSettings.Deserialize(d)
+		case schemas.H264FilterSettings_NoneFilterSettings:
+			v.NoneFilterSettings = &NoneFilterSettings{}
+			return v.NoneFilterSettings.Deserialize(d)
+		case schemas.H264FilterSettings_PerceptualFilterSettings:
+			v.PerceptualFilterSettings = &PerceptualFilterSettings{}
+			return v.PerceptualFilterSettings.Deserialize(d)
 		case schemas.H264FilterSettings_TemporalFilterSettings:
 			v.TemporalFilterSettings = &TemporalFilterSettings{}
 			return v.TemporalFilterSettings.Deserialize(d)
@@ -8884,6 +9032,15 @@ type H264Settings struct {
 	// cases where multiple AFD values are valid). If set to "fixed", the AFD value
 	// will be the value configured in the fixedAfd parameter.
 	AfdSignaling AfdSignaling
+
+	// Specifies whether the encoder may apply explicit weighted prediction (EWP), an
+	// H.264 coding tool that can improve compression. EWP applies a scaling factor and
+	// offset to reference frames, which helps when brightness changes between frames,
+	// such as during a fade. When this setting is enabled, the encoder decides whether
+	// to apply EWP based on the output's other codec settings, such as profile and
+	// quality level. We recommend that you keep the default, enabled. When disabled,
+	// the encoder never applies EWP.
+	AllowExplicitWeightedPrediction H264AllowExplicitWeightedPrediction
 
 	// Average bitrate in bits/second. Required when the rate control mode is VBR or
 	// CBR. Not used for QVBR. In an MS Smooth output group, each output must have a
@@ -9131,6 +9288,9 @@ func (v *H264Settings) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AfdSignaling != "" {
 		s.WriteString(schemas.H264Settings_AfdSignaling, string(v.AfdSignaling))
 	}
+	if v.AllowExplicitWeightedPrediction != "" {
+		s.WriteString(schemas.H264Settings_AllowExplicitWeightedPrediction, string(v.AllowExplicitWeightedPrediction))
+	}
 	if v.Bitrate != nil {
 		s.WriteInt32(schemas.H264Settings_Bitrate, *v.Bitrate)
 	}
@@ -9280,6 +9440,13 @@ func (v *H264Settings) Deserialize(d smithy.ShapeDeserializer) error {
 				return err
 			}
 			v.AfdSignaling = AfdSignaling(ev)
+			return nil
+		case schemas.H264Settings_AllowExplicitWeightedPrediction:
+			var ev string
+			if err := d.ReadString(schemas.H264Settings_AllowExplicitWeightedPrediction, &ev); err != nil {
+				return err
+			}
+			v.AllowExplicitWeightedPrediction = H264AllowExplicitWeightedPrediction(ev)
 			return nil
 		case schemas.H264Settings_Bitrate:
 			v.Bitrate = new(int32)
@@ -9587,8 +9754,28 @@ func (v *H265ColorSpaceSettings) Deserialize(d smithy.ShapeDeserializer) error {
 // H265 Filter Settings
 type H265FilterSettings struct {
 
+	// System-managed filter selection. Resolves to the perceptual filter at strength
+	// 1 where the codec is eligible (AV1 and H.265 unconditionally; H.264 only at
+	// enhanced_quality), and to no filter otherwise. An empty / undefined
+	// filter_settings_choice is treated as "auto".
+	//
+	// Carries no body (extends EmptySettings, which sets additionalProperties:
+	// false), mirroring the ColorSpacePassthroughSettings empty-settings pattern.
+	AutoFilterSettings *AutoFilterSettings
+
 	// Bandwidth Reduction Filter Settings
 	BandwidthReductionFilterSettings *BandwidthReductionFilterSettings
+
+	// Explicitly disables the video filter. This is the customer opt-out: a video
+	// description set to "none" never has a filter applied and is never overridden by
+	// the system-managed "auto" default.
+	//
+	// Carries no body (extends EmptySettings, which sets additionalProperties:
+	// false), mirroring the ColorSpacePassthroughSettings empty-settings pattern.
+	NoneFilterSettings *NoneFilterSettings
+
+	// Perceptual Filter Settings
+	PerceptualFilterSettings *PerceptualFilterSettings
 
 	// Temporal Filter Settings
 	TemporalFilterSettings *TemporalFilterSettings
@@ -9603,9 +9790,24 @@ func (v *H265FilterSettings) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *H265FilterSettings) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AutoFilterSettings != nil {
+		s.WriteStruct(schemas.H265FilterSettings_AutoFilterSettings)
+		v.AutoFilterSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
 	if v.BandwidthReductionFilterSettings != nil {
 		s.WriteStruct(schemas.H265FilterSettings_BandwidthReductionFilterSettings)
 		v.BandwidthReductionFilterSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.NoneFilterSettings != nil {
+		s.WriteStruct(schemas.H265FilterSettings_NoneFilterSettings)
+		v.NoneFilterSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.PerceptualFilterSettings != nil {
+		s.WriteStruct(schemas.H265FilterSettings_PerceptualFilterSettings)
+		v.PerceptualFilterSettings.SerializeMembers(s)
 		s.CloseStruct()
 	}
 	if v.TemporalFilterSettings != nil {
@@ -9617,9 +9819,18 @@ func (v *H265FilterSettings) SerializeMembers(s smithy.ShapeSerializer) {
 func (v *H265FilterSettings) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.H265FilterSettings, func(s *smithy.Schema) error {
 		switch s {
+		case schemas.H265FilterSettings_AutoFilterSettings:
+			v.AutoFilterSettings = &AutoFilterSettings{}
+			return v.AutoFilterSettings.Deserialize(d)
 		case schemas.H265FilterSettings_BandwidthReductionFilterSettings:
 			v.BandwidthReductionFilterSettings = &BandwidthReductionFilterSettings{}
 			return v.BandwidthReductionFilterSettings.Deserialize(d)
+		case schemas.H265FilterSettings_NoneFilterSettings:
+			v.NoneFilterSettings = &NoneFilterSettings{}
+			return v.NoneFilterSettings.Deserialize(d)
+		case schemas.H265FilterSettings_PerceptualFilterSettings:
+			v.PerceptualFilterSettings = &PerceptualFilterSettings{}
+			return v.PerceptualFilterSettings.Deserialize(d)
 		case schemas.H265FilterSettings_TemporalFilterSettings:
 			v.TemporalFilterSettings = &TemporalFilterSettings{}
 			return v.TemporalFilterSettings.Deserialize(d)
@@ -19466,6 +19677,32 @@ func (v *NodeInterfaceMappingCreateRequest) Deserialize(d smithy.ShapeDeserializ
 	})
 }
 
+// Explicitly disables the video filter. This is the customer opt-out: a video
+// description set to "none" never has a filter applied and is never overridden by
+// the system-managed "auto" default.
+//
+// Carries no body (extends EmptySettings, which sets additionalProperties:
+// false), mirroring the ColorSpacePassthroughSettings empty-settings pattern.
+type NoneFilterSettings struct {
+	noSmithyDocumentSerde
+}
+
+func (v *NoneFilterSettings) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.NoneFilterSettings)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *NoneFilterSettings) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *NoneFilterSettings) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.NoneFilterSettings, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
+
 // Reserved resources available for purchase
 type Offering struct {
 
@@ -20276,6 +20513,46 @@ func (v *PauseStateScheduleActionSettings) Deserialize(d smithy.ShapeDeserialize
 		switch s {
 		case schemas.PauseStateScheduleActionSettings_Pipelines:
 			return deserialize__listOfPipelinePauseStateSettings(d, schemas.PauseStateScheduleActionSettings_Pipelines, &v.Pipelines)
+		}
+		return nil
+	})
+}
+
+// Perceptual Filter Settings
+type PerceptualFilterSettings struct {
+
+	// Selects the perceptual noise filter strength. Strength 1 (perceptual lite) is
+	// the recommended default and adds approximately 30% of an AVC encode of compute
+	// on the highest rendition. Strength 2 adds approximately 60% of an AVC encode of
+	// compute and can introduce slight softening on noisy content.
+	//
+	// This member is required.
+	Strength PerceptualFilterStrength
+
+	noSmithyDocumentSerde
+}
+
+func (v *PerceptualFilterSettings) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PerceptualFilterSettings)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PerceptualFilterSettings) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Strength != "" {
+		s.WriteString(schemas.PerceptualFilterSettings_Strength, string(v.Strength))
+	}
+}
+func (v *PerceptualFilterSettings) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PerceptualFilterSettings, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PerceptualFilterSettings_Strength:
+			var ev string
+			if err := d.ReadString(schemas.PerceptualFilterSettings_Strength, &ev); err != nil {
+				return err
+			}
+			v.Strength = PerceptualFilterStrength(ev)
+			return nil
 		}
 		return nil
 	})

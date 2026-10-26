@@ -396,6 +396,32 @@ func serializeRelatedVulnerabilitiesList(s smithy.ShapeSerializer, schema *smith
 	s.CloseList()
 }
 
+func serializeReplicationBackfillResultList(s smithy.ShapeSerializer, schema *smithy.Schema, v []ReplicationBackfillResult) {
+	if v == nil {
+		return
+	}
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializeReplicationBackfillSummaryList(s smithy.ShapeSerializer, schema *smithy.Schema, v []ReplicationBackfillSummary) {
+	if v == nil {
+		return
+	}
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
 func serializeReplicationDestinationList(s smithy.ShapeSerializer, schema *smithy.Schema, v []ReplicationDestination) {
 	if v == nil {
 		return
@@ -405,6 +431,17 @@ func serializeReplicationDestinationList(s smithy.ShapeSerializer, schema *smith
 		s.WriteStruct(schema.ListMember())
 		vv.SerializeMembers(s)
 		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializeReplicationErrorList(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
+	if v == nil {
+		return
+	}
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteString(schema.ListMember(), string(vv))
 	}
 	s.CloseList()
 }
@@ -1302,6 +1339,50 @@ func deserializeRelatedVulnerabilitiesList(d smithy.ShapeDeserializer, s *smithy
 	})
 }
 
+func deserializeReplicationBackfillResultList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]ReplicationBackfillResult) error {
+	*v = make([]ReplicationBackfillResult, 0)
+	var vv ReplicationBackfillResult
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero ReplicationBackfillResult
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = ReplicationBackfillResult{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeReplicationBackfillSummaryList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]ReplicationBackfillSummary) error {
+	*v = make([]ReplicationBackfillSummary, 0)
+	var vv ReplicationBackfillSummary
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero ReplicationBackfillSummary
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = ReplicationBackfillSummary{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
 func deserializeReplicationDestinationList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]ReplicationDestination) error {
 	*v = make([]ReplicationDestination, 0)
 	var vv ReplicationDestination
@@ -1316,6 +1397,27 @@ func deserializeReplicationDestinationList(d smithy.ShapeDeserializer, s *smithy
 
 		vv = ReplicationDestination{}
 		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeReplicationErrorList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
+	var vv string
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			*v = append(*v, zero)
+			return nil
+		}
+
+		if err := d.ReadString(s.ListMember(), &vv); err != nil {
 			return err
 		}
 

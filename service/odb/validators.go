@@ -1230,6 +1230,26 @@ func (m *validateOpUpdateExadbVmCluster) HandleInitialize(ctx context.Context, i
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateExascaleCloudExadataInfrastructure struct {
+}
+
+func (*validateOpUpdateExascaleCloudExadataInfrastructure) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateExascaleCloudExadataInfrastructure) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateExascaleCloudExadataInfrastructureInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateExascaleCloudExadataInfrastructureInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateExascaleDbStorageVault struct {
 }
 
@@ -1532,6 +1552,10 @@ func addOpUpdateCloudExadataInfrastructureValidationMiddleware(stack *middleware
 
 func addOpUpdateExadbVmClusterValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateExadbVmCluster{}, middleware.After)
+}
+
+func addOpUpdateExascaleCloudExadataInfrastructureValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateExascaleCloudExadataInfrastructure{}, middleware.After)
 }
 
 func addOpUpdateExascaleDbStorageVaultValidationMiddleware(stack *middleware.Stack) error {
@@ -2763,6 +2787,24 @@ func validateOpUpdateExadbVmClusterInput(v *UpdateExadbVmClusterInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateExadbVmClusterInput"}
 	if v.ExadbVmClusterId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ExadbVmClusterId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateExascaleCloudExadataInfrastructureInput(v *UpdateExascaleCloudExadataInfrastructureInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateExascaleCloudExadataInfrastructureInput"}
+	if v.CloudExadataInfrastructureId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CloudExadataInfrastructureId"))
+	}
+	if v.TotalStorageSizeInGBs == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TotalStorageSizeInGBs"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

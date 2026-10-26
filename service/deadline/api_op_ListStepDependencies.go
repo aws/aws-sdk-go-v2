@@ -87,7 +87,6 @@ func (v *ListStepDependenciesInput) SerializeMembers(s smithy.ShapeSerializer) {
 	}
 }
 
-// Shared pagination field for List operation outputs (nextToken).
 type ListStepDependenciesOutput struct {
 
 	// The dependencies on the list.

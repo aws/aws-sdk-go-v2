@@ -73,8 +73,6 @@ func (v *CreateLicenseEndpointInput) SerializeMembers(s smithy.ShapeSerializer) 
 	}
 }
 
-// Mixin that adds an optional ARN field to response structures. Apply to
-// SummaryMixins (flows into Get, Summary, and BatchGet) and Create outputs.
 type CreateLicenseEndpointOutput struct {
 
 	// The license endpoint ID.

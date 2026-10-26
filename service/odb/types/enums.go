@@ -573,6 +573,27 @@ func (EncryptionKeyProviderInput) Values() []EncryptionKeyProviderInput {
 	}
 }
 
+type ExascaleDbStorageVaultType string
+
+// Enum values for ExascaleDbStorageVaultType
+const (
+	// An Exascale storage vault for Exascale VM clusters.
+	ExascaleDbStorageVaultTypeExascaleInfrastructure ExascaleDbStorageVaultType = "EXASCALE_INFRASTRUCTURE"
+	// An Exascale storage vault on dedicated Exadata infrastructure for VM clusters.
+	ExascaleDbStorageVaultTypeDedicatedInfrastructure ExascaleDbStorageVaultType = "DEDICATED_INFRASTRUCTURE"
+)
+
+// Values returns all known values for ExascaleDbStorageVaultType. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ExascaleDbStorageVaultType) Values() []ExascaleDbStorageVaultType {
+	return []ExascaleDbStorageVaultType{
+		"EXASCALE_INFRASTRUCTURE",
+		"DEDICATED_INFRASTRUCTURE",
+	}
+}
+
 type ExternalIdType string
 
 // Enum values for ExternalIdType
@@ -1183,6 +1204,27 @@ func (StandbyAllowlistedIpsSource) Values() []StandbyAllowlistedIpsSource {
 	}
 }
 
+type StorageManagementType string
+
+// Enum values for StorageManagementType
+const (
+	// Oracle Automatic Storage Management (ASM).
+	StorageManagementTypeAsm StorageManagementType = "ASM"
+	// Exascale storage.
+	StorageManagementTypeExascale StorageManagementType = "EXASCALE"
+)
+
+// Values returns all known values for StorageManagementType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (StorageManagementType) Values() []StorageManagementType {
+	return []StorageManagementType{
+		"ASM",
+		"EXASCALE",
+	}
+}
+
 type SupportedAwsIntegration string
 
 // Enum values for SupportedAwsIntegration
@@ -1243,6 +1285,27 @@ func (ValidationExceptionReason) Values() []ValidationExceptionReason {
 		"cannotParse",
 		"fieldValidationFailed",
 		"other",
+	}
+}
+
+type VmStorageType string
+
+// Enum values for VmStorageType
+const (
+	// Local storage on the database servers.
+	VmStorageTypeLocal VmStorageType = "LOCAL"
+	// Exascale storage on the storage servers.
+	VmStorageTypeExascale VmStorageType = "EXASCALE"
+)
+
+// Values returns all known values for VmStorageType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (VmStorageType) Values() []VmStorageType {
+	return []VmStorageType{
+		"LOCAL",
+		"EXASCALE",
 	}
 }
 

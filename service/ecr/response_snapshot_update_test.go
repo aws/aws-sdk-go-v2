@@ -1489,6 +1489,77 @@ func TestUpdateResponseSnapshot_DescribeRegistry(t *testing.T) {
 	}
 }
 
+func TestUpdateResponseSnapshot_DescribeReplicationBackfillResults(t *testing.T) {
+	want := &DescribeReplicationBackfillResultsOutput{
+		RegistryId:            ptr.String("__RegistryId__"),
+		ReplicationBackfillId: ptr.String("__ReplicationBackfillId__"),
+		Destination: &types.ReplicationDestination{
+			Region:     ptr.String("__Region__"),
+			RegistryId: ptr.String("__RegistryId__"),
+		},
+		Status:      types.ReplicationBackfillStatus("PREPARING"),
+		FailureCode: ptr.String("__FailureCode__"),
+		Progress: &types.ReplicationBackfillProgress{
+			TotalReplicationCount:     ptr.Int32(1),
+			CompletedReplicationCount: ptr.Int32(1),
+			FailedReplicationCount:    ptr.Int32(1),
+			FailureCodes: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+		Results: []types.ReplicationBackfillResult{
+			{
+				RepositoryName: ptr.String("__RepositoryName__"),
+				ImageId: &types.ImageIdentifier{
+					ImageDigest: ptr.String("__ImageDigest__"),
+					ImageTag:    ptr.String("__ImageTag__"),
+				},
+				Status:      types.ReplicationBackfillResultStatus("COMPLETE"),
+				FailureCode: ptr.String("__FailureCode__"),
+				SubImageFailureCodes: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				RepositoryName: ptr.String("__RepositoryName__"),
+				ImageId: &types.ImageIdentifier{
+					ImageDigest: ptr.String("__ImageDigest__"),
+					ImageTag:    ptr.String("__ImageTag__"),
+				},
+				Status:      types.ReplicationBackfillResultStatus("COMPLETE"),
+				FailureCode: ptr.String("__FailureCode__"),
+				SubImageFailureCodes: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		StartedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		EndedAt:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		NextToken: ptr.String("__NextToken__"),
+	}
+	proto := awsjson.New11(schemas.AmazonEC2ContainerRegistry_V20150921)
+	opSchema := smithy.NewOperationSchema(schemas.DescribeReplicationBackfillResults, schemas.DescribeReplicationBackfillResultsResponse, schemas.DescribeReplicationBackfillResultsResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("DescribeReplicationBackfillResults.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateResponseSnapshot_DescribeRepositories(t *testing.T) {
 	want := &DescribeRepositoriesOutput{
 		Repositories: []types.Repository{
@@ -2144,6 +2215,73 @@ func TestUpdateResponseSnapshot_ListPullTimeUpdateExclusions(t *testing.T) {
 	}
 }
 
+func TestUpdateResponseSnapshot_ListReplicationBackfills(t *testing.T) {
+	want := &ListReplicationBackfillsOutput{
+		RegistryId: ptr.String("__RegistryId__"),
+		Backfills: []types.ReplicationBackfillSummary{
+			{
+				ReplicationBackfillId: ptr.String("__ReplicationBackfillId__"),
+				Destination: &types.ReplicationDestination{
+					Region:     ptr.String("__Region__"),
+					RegistryId: ptr.String("__RegistryId__"),
+				},
+				Status:      types.ReplicationBackfillStatus("PREPARING"),
+				FailureCode: ptr.String("__FailureCode__"),
+				Progress: &types.ReplicationBackfillProgress{
+					TotalReplicationCount:     ptr.Int32(1),
+					CompletedReplicationCount: ptr.Int32(1),
+					FailedReplicationCount:    ptr.Int32(1),
+					FailureCodes: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				StartedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				EndedAt:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+			{
+				ReplicationBackfillId: ptr.String("__ReplicationBackfillId__"),
+				Destination: &types.ReplicationDestination{
+					Region:     ptr.String("__Region__"),
+					RegistryId: ptr.String("__RegistryId__"),
+				},
+				Status:      types.ReplicationBackfillStatus("PREPARING"),
+				FailureCode: ptr.String("__FailureCode__"),
+				Progress: &types.ReplicationBackfillProgress{
+					TotalReplicationCount:     ptr.Int32(1),
+					CompletedReplicationCount: ptr.Int32(1),
+					FailedReplicationCount:    ptr.Int32(1),
+					FailureCodes: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				StartedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				EndedAt:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	proto := awsjson.New11(schemas.AmazonEC2ContainerRegistry_V20150921)
+	opSchema := smithy.NewOperationSchema(schemas.ListReplicationBackfills, schemas.ListReplicationBackfillsResponse, schemas.ListReplicationBackfillsResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("ListReplicationBackfills.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateResponseSnapshot_ListTagsForResource(t *testing.T) {
 	want := &ListTagsForResourceOutput{
 		Tags: []types.Tag{
@@ -2635,6 +2773,68 @@ func TestUpdateResponseSnapshot_StartLifecyclePolicyPreview(t *testing.T) {
 		body = b
 	}
 	if err := serdeRespWriteSnapshot("StartLifecyclePolicyPreview.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_StartReplicationBackfill(t *testing.T) {
+	want := &StartReplicationBackfillOutput{
+		ReplicationBackfillId: ptr.String("__ReplicationBackfillId__"),
+		RegistryId:            ptr.String("__RegistryId__"),
+		Destination: &types.ReplicationDestination{
+			Region:     ptr.String("__Region__"),
+			RegistryId: ptr.String("__RegistryId__"),
+		},
+		Status:    types.ReplicationBackfillStatus("PREPARING"),
+		StartedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+	}
+	proto := awsjson.New11(schemas.AmazonEC2ContainerRegistry_V20150921)
+	opSchema := smithy.NewOperationSchema(schemas.StartReplicationBackfill, schemas.StartReplicationBackfillResponse, schemas.StartReplicationBackfillResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("StartReplicationBackfill.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_StopReplicationBackfill(t *testing.T) {
+	want := &StopReplicationBackfillOutput{
+		RegistryId:            ptr.String("__RegistryId__"),
+		ReplicationBackfillId: ptr.String("__ReplicationBackfillId__"),
+		Destination: &types.ReplicationDestination{
+			Region:     ptr.String("__Region__"),
+			RegistryId: ptr.String("__RegistryId__"),
+		},
+		Status:    types.ReplicationBackfillStatus("PREPARING"),
+		StartedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+	}
+	proto := awsjson.New11(schemas.AmazonEC2ContainerRegistry_V20150921)
+	opSchema := smithy.NewOperationSchema(schemas.StopReplicationBackfill, schemas.StopReplicationBackfillResponse, schemas.StopReplicationBackfillResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("StopReplicationBackfill.response", 200, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -3538,6 +3738,81 @@ func TestUpdateResponseSnapshot_Error_RegistryPolicyNotFoundException(t *testing
 	}
 	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("RegistryPolicyNotFoundException.error", 400, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_Error_ReplicationBackfillInProgressException(t *testing.T) {
+	want := &types.ReplicationBackfillInProgressException{
+		Message: ptr.String("__Message__"),
+	}
+	proto := awsjson.New11(schemas.AmazonEC2ContainerRegistry_V20150921)
+	opSchema := smithy.NewOperationSchema(schemas.StartReplicationBackfill, schemas.ReplicationBackfillInProgressException, schemas.ReplicationBackfillInProgressException)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
+	if err := serdeRespWriteSnapshot("ReplicationBackfillInProgressException.error", 400, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_Error_ReplicationBackfillInvalidStatusException(t *testing.T) {
+	want := &types.ReplicationBackfillInvalidStatusException{
+		Message: ptr.String("__Message__"),
+	}
+	proto := awsjson.New11(schemas.AmazonEC2ContainerRegistry_V20150921)
+	opSchema := smithy.NewOperationSchema(schemas.StopReplicationBackfill, schemas.ReplicationBackfillInvalidStatusException, schemas.ReplicationBackfillInvalidStatusException)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
+	if err := serdeRespWriteSnapshot("ReplicationBackfillInvalidStatusException.error", 400, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_Error_ReplicationBackfillNotFoundException(t *testing.T) {
+	want := &types.ReplicationBackfillNotFoundException{
+		Message: ptr.String("__Message__"),
+	}
+	proto := awsjson.New11(schemas.AmazonEC2ContainerRegistry_V20150921)
+	opSchema := smithy.NewOperationSchema(schemas.DescribeReplicationBackfillResults, schemas.ReplicationBackfillNotFoundException, schemas.ReplicationBackfillNotFoundException)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
+	if err := serdeRespWriteSnapshot("ReplicationBackfillNotFoundException.error", 400, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
 }

@@ -104,6 +104,41 @@ func (v *AdditionalCharge) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
+// A recipient copied as a viewer on the executive approval request, in addition
+// to the approver.
+type AdditionalRecipient struct {
+
+	// The email address of the recipient. This value is 3–256 characters and must be
+	// a valid email address.
+	//
+	// This member is required.
+	Email *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *AdditionalRecipient) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AdditionalRecipient)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AdditionalRecipient) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Email != nil {
+		s.WriteString(schemas.AdditionalRecipient_email, *v.Email)
+	}
+}
+func (v *AdditionalRecipient) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AdditionalRecipient, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AdditionalRecipient_email:
+			v.Email = new(string)
+			return d.ReadString(schemas.AdditionalRecipient_email, v.Email)
+		}
+		return nil
+	})
+}
+
 // A monetary amount with a currency code. Used throughout the Billing API to
 // represent credit balances, allocations, and adjustments.
 type Amount struct {
@@ -148,6 +183,204 @@ func (v *Amount) Deserialize(d smithy.ShapeDeserializer) error {
 		}
 		return nil
 	})
+}
+
+// Information about the executive approver who signs off on an investment
+// attestation.
+type ApproverDetails struct {
+
+	// The email address of the approver. This value is 3–256 characters and must be a
+	// valid email address.
+	//
+	// This member is required.
+	Email *string
+
+	// The name of the approver as it appears on the contract. This value can be up to
+	// 256 characters.
+	//
+	// This member is required.
+	Name *string
+
+	// The title of the approver, such as Chief Financial Officer . This value can be
+	// up to 256 characters.
+	//
+	// This member is required.
+	Title *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *ApproverDetails) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ApproverDetails)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ApproverDetails) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Email != nil {
+		s.WriteString(schemas.ApproverDetails_email, *v.Email)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.ApproverDetails_name, *v.Name)
+	}
+	if v.Title != nil {
+		s.WriteString(schemas.ApproverDetails_title, *v.Title)
+	}
+}
+func (v *ApproverDetails) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ApproverDetails, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ApproverDetails_email:
+			v.Email = new(string)
+			return d.ReadString(schemas.ApproverDetails_email, v.Email)
+		case schemas.ApproverDetails_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.ApproverDetails_name, v.Name)
+		case schemas.ApproverDetails_title:
+			v.Title = new(string)
+			return d.ReadString(schemas.ApproverDetails_title, v.Title)
+		}
+		return nil
+	})
+}
+
+// The details of an investment attestation submission, including the value being
+// attested and how the resulting investment is distributed.
+type AttestationDetails struct {
+
+	// The value being attested, expressed as either a monetary amount or one or more
+	// quantities. Exactly one form is set.
+	//
+	// This member is required.
+	AttestationValue AttestationValue
+
+	// The distribution of the resulting investment across the eligible investment
+	// accounts on the contract. If you omit this value, the full investment is
+	// allocated to the single eligible investment account on the contract. This value
+	// is required when multiple investment accounts are eligible. When you provide
+	// this value, the sum of all distributions must equal the resulting monetary
+	// investment value (the attested amount, or the value computed from the attested
+	// quantities using the investment multipliers). The list contains at most 200
+	// distributions.
+	InvestmentDistributions []InvestmentDistribution
+
+	noSmithyDocumentSerde
+}
+
+func (v *AttestationDetails) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AttestationDetails)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AttestationDetails) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAttestationValue(s, schemas.AttestationDetails_attestationValue, v.AttestationValue)
+	serializeInvestmentDistributions(s, schemas.AttestationDetails_investmentDistributions, v.InvestmentDistributions)
+}
+func (v *AttestationDetails) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AttestationDetails, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AttestationDetails_attestationValue:
+			return deserializeAttestationValue(d, schemas.AttestationDetails_attestationValue, &v.AttestationValue)
+		case schemas.AttestationDetails_investmentDistributions:
+			return deserializeInvestmentDistributions(d, schemas.AttestationDetails_investmentDistributions, &v.InvestmentDistributions)
+		}
+		return nil
+	})
+}
+
+// A quantity-based attestation value, such as a count of workloads migrated.
+type AttestationQuantity struct {
+
+	// The unit of the attestation, such as workloads migrated . This value is 1–1000
+	// characters.
+	//
+	// This member is required.
+	AttestationUnit *string
+
+	// The number of units being attested, expressed as a decimal string to preserve
+	// precision. The value is digits with an optional decimal point and is 1–1000
+	// characters.
+	//
+	// This member is required.
+	AttestationVolume *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *AttestationQuantity) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AttestationQuantity)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AttestationQuantity) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AttestationUnit != nil {
+		s.WriteString(schemas.AttestationQuantity_attestationUnit, *v.AttestationUnit)
+	}
+	if v.AttestationVolume != nil {
+		s.WriteString(schemas.AttestationQuantity_attestationVolume, *v.AttestationVolume)
+	}
+}
+func (v *AttestationQuantity) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AttestationQuantity, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AttestationQuantity_attestationUnit:
+			v.AttestationUnit = new(string)
+			return d.ReadString(schemas.AttestationQuantity_attestationUnit, v.AttestationUnit)
+		case schemas.AttestationQuantity_attestationVolume:
+			v.AttestationVolume = new(string)
+			return d.ReadString(schemas.AttestationQuantity_attestationVolume, v.AttestationVolume)
+		}
+		return nil
+	})
+}
+
+// The value being attested. This is a union in which exactly one member is set.
+// Set attestationAmount to attest a monetary amount directly, or set
+// attestationQuantities to attest one or more quantities that are converted to a
+// value using the investment's multipliers.
+//
+// The following types satisfy this interface:
+//
+//	AttestationValueMemberAttestationAmount
+//	AttestationValueMemberAttestationQuantities
+type AttestationValue interface {
+	isAttestationValue()
+}
+
+// The value attested as a monetary amount. This form is valid only when the
+// investment has no multiplier.
+type AttestationValueMemberAttestationAmount struct {
+	Value Amount
+
+	noSmithyDocumentSerde
+}
+
+func (*AttestationValueMemberAttestationAmount) isAttestationValue() {}
+func (v *AttestationValueMemberAttestationAmount) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AttestationValue_attestationAmount)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *AttestationValueMemberAttestationAmount) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
+
+// The value attested as one or more quantities, each with its own unit. The list
+// contains at most 50 quantities.
+type AttestationValueMemberAttestationQuantities struct {
+	Value []AttestationQuantity
+
+	noSmithyDocumentSerde
+}
+
+func (*AttestationValueMemberAttestationQuantities) isAttestationValue() {}
+func (v *AttestationValueMemberAttestationQuantities) Serialize(s smithy.ShapeSerializer) {
+	serializeAttestationQuantities(s, schemas.AttestationValue_attestationQuantities, v.Value)
+}
+func (v *AttestationValueMemberAttestationQuantities) Deserialize(d smithy.ShapeDeserializer) error {
+	return deserializeAttestationQuantities(d, schemas.AttestationValue_attestationQuantities, &v.Value)
 }
 
 // A filter that narrows the set of preferences returned by GetBillingPreferences .
@@ -1272,6 +1505,129 @@ func (v *ContractAccount) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
+// The details of a contract returned by GetContractInformation . This is a union
+// in which exactly one member is set, corresponding to the contract type. For a
+// private pricing addendum, the privatePricingAddendum member is set. Check which
+// member is present to determine the contract type.
+//
+// The following types satisfy this interface:
+//
+//	ContractDetailsMemberPrivatePricingAddendum
+type ContractDetails interface {
+	isContractDetails()
+}
+
+// The details of a private pricing addendum contract. This member is set when the
+// contract is a private pricing addendum.
+type ContractDetailsMemberPrivatePricingAddendum struct {
+	Value PrivatePricingAddendum
+
+	noSmithyDocumentSerde
+}
+
+func (*ContractDetailsMemberPrivatePricingAddendum) isContractDetails() {}
+func (v *ContractDetailsMemberPrivatePricingAddendum) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ContractDetails_privatePricingAddendum)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *ContractDetailsMemberPrivatePricingAddendum) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
+
+// A summary of a private pricing contract visible to your account. ListContracts
+// returns these summaries.
+type ContractSummary struct {
+
+	// Indicates whether the contract is currently associated with your account. Valid
+	// values are ASSOCIATED and NOT_ASSOCIATED . ASSOCIATED means the contract is
+	// associated with your account. NOT_ASSOCIATED means the contract is not
+	// associated with your account.
+	//
+	// This member is required.
+	AssociationStatus AssociationStatus
+
+	// The Amazon Resource Name (ARN) of the contract. Pass this value to operations
+	// such as GetContractInformation , ListContractualInvestmentSummaries , and
+	// AssociateContract .
+	//
+	// This member is required.
+	ContractArn *string
+
+	// The contract term period of the contract, expressed as an interval with an
+	// inclusive start date and an inclusive end date.
+	//
+	// This member is required.
+	ContractTerm *Interval
+
+	// The classification of the contract. Valid values are Cross-Service ,
+	// Service-Specific , and Other . Cross-Service applies across multiple Amazon Web
+	// Services services. Service-Specific applies to a specific Amazon Web Services
+	// service. Other applies to other arrangements.
+	ContractType ContractType
+
+	// The time when the contract was last associated with your account.
+	LastUpdatedAt *time.Time
+
+	noSmithyDocumentSerde
+}
+
+func (v *ContractSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ContractSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ContractSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AssociationStatus != "" {
+		s.WriteString(schemas.ContractSummary_associationStatus, string(v.AssociationStatus))
+	}
+	if v.ContractArn != nil {
+		s.WriteString(schemas.ContractSummary_contractArn, *v.ContractArn)
+	}
+	if v.ContractTerm != nil {
+		s.WriteStruct(schemas.ContractSummary_contractTerm)
+		v.ContractTerm.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ContractType != "" {
+		s.WriteString(schemas.ContractSummary_contractType, string(v.ContractType))
+	}
+	if v.LastUpdatedAt != nil {
+		s.WriteTime(schemas.ContractSummary_lastUpdatedAt, *v.LastUpdatedAt)
+	}
+}
+func (v *ContractSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ContractSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ContractSummary_associationStatus:
+			var ev string
+			if err := d.ReadString(schemas.ContractSummary_associationStatus, &ev); err != nil {
+				return err
+			}
+			v.AssociationStatus = AssociationStatus(ev)
+			return nil
+		case schemas.ContractSummary_contractArn:
+			v.ContractArn = new(string)
+			return d.ReadString(schemas.ContractSummary_contractArn, v.ContractArn)
+		case schemas.ContractSummary_contractTerm:
+			v.ContractTerm = &Interval{}
+			return v.ContractTerm.Deserialize(d)
+		case schemas.ContractSummary_contractType:
+			var ev string
+			if err := d.ReadString(schemas.ContractSummary_contractType, &ev); err != nil {
+				return err
+			}
+			v.ContractType = ContractType(ev)
+			return nil
+		case schemas.ContractSummary_lastUpdatedAt:
+			v.LastUpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.ContractSummary_lastUpdatedAt, v.LastUpdatedAt)
+		}
+		return nil
+	})
+}
+
 // The Cost Categories values used for filtering the costs.
 type CostCategoryValues struct {
 
@@ -1806,6 +2162,536 @@ func (v *Expression) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
+// A time period bounded by an inclusive start date and an inclusive end date.
+type Interval struct {
+
+	// The end date of the interval. This date is included in the interval.
+	//
+	// This member is required.
+	EndDateInclusive *time.Time
+
+	// The start date of the interval. This date is included in the interval.
+	//
+	// This member is required.
+	StartDateInclusive *time.Time
+
+	noSmithyDocumentSerde
+}
+
+func (v *Interval) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Interval)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Interval) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EndDateInclusive != nil {
+		s.WriteTime(schemas.Interval_endDateInclusive, *v.EndDateInclusive)
+	}
+	if v.StartDateInclusive != nil {
+		s.WriteTime(schemas.Interval_startDateInclusive, *v.StartDateInclusive)
+	}
+}
+func (v *Interval) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Interval, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Interval_endDateInclusive:
+			v.EndDateInclusive = new(time.Time)
+			return d.ReadTime(schemas.Interval_endDateInclusive, v.EndDateInclusive)
+		case schemas.Interval_startDateInclusive:
+			v.StartDateInclusive = new(time.Time)
+			return d.ReadTime(schemas.Interval_startDateInclusive, v.StartDateInclusive)
+		}
+		return nil
+	})
+}
+
+// An investment within an investment summary. This is a union in which exactly
+// one member is set. The milestoneBasedInvestment member represents a fixed,
+// scheduled investment. The outcomeBasedInvestment member represents an
+// attestable investment awarded upon completion of a defined outcome. Check which
+// member is present to determine the investment type.
+//
+// The following types satisfy this interface:
+//
+//	InvestmentMemberMilestoneBasedInvestment
+//	InvestmentMemberOutcomeBasedInvestment
+type Investment interface {
+	isInvestment()
+}
+
+// An investment with a fixed value that is disbursed on a schedule. This member
+// is set for a milestone-based investment and corresponds to the MILESTONE_BASED
+// investment type.
+type InvestmentMemberMilestoneBasedInvestment struct {
+	Value MilestoneBasedInvestment
+
+	noSmithyDocumentSerde
+}
+
+func (*InvestmentMemberMilestoneBasedInvestment) isInvestment() {}
+func (v *InvestmentMemberMilestoneBasedInvestment) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Investment_milestoneBasedInvestment)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *InvestmentMemberMilestoneBasedInvestment) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
+
+// An investment that is awarded upon completion of a defined outcome. This member
+// is set for an outcome-based (attestable) investment and corresponds to the
+// OUTCOME_BASED investment type.
+type InvestmentMemberOutcomeBasedInvestment struct {
+	Value OutcomeBasedInvestment
+
+	noSmithyDocumentSerde
+}
+
+func (*InvestmentMemberOutcomeBasedInvestment) isInvestment() {}
+func (v *InvestmentMemberOutcomeBasedInvestment) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Investment_outcomeBasedInvestment)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *InvestmentMemberOutcomeBasedInvestment) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
+
+// A summary of a submitted investment attestation, as returned by
+// ListContractualInvestmentAttestations .
+type InvestmentAttestation struct {
+
+	// The identifier of the attestation. This value is returned by
+	// CreateContractualInvestmentAttestation and is used to cancel the attestation
+	// with CancelContractualInvestmentAttestation . This value is 1–36 characters.
+	//
+	// This member is required.
+	AttestationId *string
+
+	// The current status of the attestation. Valid values are PENDING_REVIEW ,
+	// PENDING_C_LEVEL_APPROVAL , PENDING_CANCELLATION , REJECTED , CANCELLED , and
+	// DISBURSED . The values DISBURSED , REJECTED , and CANCELLED are terminal. The
+	// other values indicate the attestation is still in progress.
+	//
+	// This member is required.
+	AttestationStatus InvestmentAttestationStatus
+
+	// The date on which the attestation was submitted.
+	//
+	// This member is required.
+	AttestedAt *time.Time
+
+	// The identifier of the investment that was attested, as returned by
+	// ListContractualInvestments .
+	//
+	// This member is required.
+	InvestmentId *string
+
+	// The name of the investment summary that contains the attested outcome. This
+	// value is 1–400 characters.
+	//
+	// This member is required.
+	InvestmentName *string
+
+	// The identifier of the investment summary that was attested, as returned by
+	// ListContractualInvestmentSummaries .
+	//
+	// This member is required.
+	InvestmentSummaryId *string
+
+	// The description of the attested outcome. This value is 1–2048 characters.
+	//
+	// This member is required.
+	OutcomeDescription *string
+
+	// The date on which the attestation was last updated.
+	//
+	// This member is required.
+	UpdatedAt *time.Time
+
+	// The monetary value attested.
+	AttestedValue *Amount
+
+	// The start date on which the investment is disbursed to the investment accounts.
+	// This is not the same as the time of disbursement, but reflects the date you
+	// submitted with the attestation.
+	InvestmentDisbursedAt *time.Time
+
+	// The distribution of the attested investment across the eligible investment
+	// accounts. The list contains at most 200 distributions.
+	InvestmentDistributions []InvestmentDistribution
+
+	// Indicates whether the attestation can be canceled with
+	// CancelContractualInvestmentAttestation .
+	IsCancellable *bool
+
+	// The reasons the attestation was rejected. This value is present only when
+	// attestationStatus is REJECTED . The list contains at most 30 reasons.
+	RejectionReasons []string
+
+	noSmithyDocumentSerde
+}
+
+func (v *InvestmentAttestation) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InvestmentAttestation)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InvestmentAttestation) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AttestationId != nil {
+		s.WriteString(schemas.InvestmentAttestation_attestationId, *v.AttestationId)
+	}
+	if v.AttestationStatus != "" {
+		s.WriteString(schemas.InvestmentAttestation_attestationStatus, string(v.AttestationStatus))
+	}
+	if v.AttestedAt != nil {
+		s.WriteTime(schemas.InvestmentAttestation_attestedAt, *v.AttestedAt)
+	}
+	if v.AttestedValue != nil {
+		s.WriteStruct(schemas.InvestmentAttestation_attestedValue)
+		v.AttestedValue.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.InvestmentDisbursedAt != nil {
+		s.WriteTime(schemas.InvestmentAttestation_investmentDisbursedAt, *v.InvestmentDisbursedAt)
+	}
+	serializeInvestmentDistributions(s, schemas.InvestmentAttestation_investmentDistributions, v.InvestmentDistributions)
+	if v.InvestmentId != nil {
+		s.WriteString(schemas.InvestmentAttestation_investmentId, *v.InvestmentId)
+	}
+	if v.InvestmentName != nil {
+		s.WriteString(schemas.InvestmentAttestation_investmentName, *v.InvestmentName)
+	}
+	if v.InvestmentSummaryId != nil {
+		s.WriteString(schemas.InvestmentAttestation_investmentSummaryId, *v.InvestmentSummaryId)
+	}
+	if v.IsCancellable != nil {
+		s.WriteBool(schemas.InvestmentAttestation_isCancellable, *v.IsCancellable)
+	}
+	if v.OutcomeDescription != nil {
+		s.WriteString(schemas.InvestmentAttestation_outcomeDescription, *v.OutcomeDescription)
+	}
+	serializeRejectionReasons(s, schemas.InvestmentAttestation_rejectionReasons, v.RejectionReasons)
+	if v.UpdatedAt != nil {
+		s.WriteTime(schemas.InvestmentAttestation_updatedAt, *v.UpdatedAt)
+	}
+}
+func (v *InvestmentAttestation) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InvestmentAttestation, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InvestmentAttestation_attestationId:
+			v.AttestationId = new(string)
+			return d.ReadString(schemas.InvestmentAttestation_attestationId, v.AttestationId)
+		case schemas.InvestmentAttestation_attestationStatus:
+			var ev string
+			if err := d.ReadString(schemas.InvestmentAttestation_attestationStatus, &ev); err != nil {
+				return err
+			}
+			v.AttestationStatus = InvestmentAttestationStatus(ev)
+			return nil
+		case schemas.InvestmentAttestation_attestedAt:
+			v.AttestedAt = new(time.Time)
+			return d.ReadTime(schemas.InvestmentAttestation_attestedAt, v.AttestedAt)
+		case schemas.InvestmentAttestation_attestedValue:
+			v.AttestedValue = &Amount{}
+			return v.AttestedValue.Deserialize(d)
+		case schemas.InvestmentAttestation_investmentDisbursedAt:
+			v.InvestmentDisbursedAt = new(time.Time)
+			return d.ReadTime(schemas.InvestmentAttestation_investmentDisbursedAt, v.InvestmentDisbursedAt)
+		case schemas.InvestmentAttestation_investmentDistributions:
+			return deserializeInvestmentDistributions(d, schemas.InvestmentAttestation_investmentDistributions, &v.InvestmentDistributions)
+		case schemas.InvestmentAttestation_investmentId:
+			v.InvestmentId = new(string)
+			return d.ReadString(schemas.InvestmentAttestation_investmentId, v.InvestmentId)
+		case schemas.InvestmentAttestation_investmentName:
+			v.InvestmentName = new(string)
+			return d.ReadString(schemas.InvestmentAttestation_investmentName, v.InvestmentName)
+		case schemas.InvestmentAttestation_investmentSummaryId:
+			v.InvestmentSummaryId = new(string)
+			return d.ReadString(schemas.InvestmentAttestation_investmentSummaryId, v.InvestmentSummaryId)
+		case schemas.InvestmentAttestation_isCancellable:
+			v.IsCancellable = new(bool)
+			return d.ReadBool(schemas.InvestmentAttestation_isCancellable, v.IsCancellable)
+		case schemas.InvestmentAttestation_outcomeDescription:
+			v.OutcomeDescription = new(string)
+			return d.ReadString(schemas.InvestmentAttestation_outcomeDescription, v.OutcomeDescription)
+		case schemas.InvestmentAttestation_rejectionReasons:
+			return deserializeRejectionReasons(d, schemas.InvestmentAttestation_rejectionReasons, &v.RejectionReasons)
+		case schemas.InvestmentAttestation_updatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.InvestmentAttestation_updatedAt, v.UpdatedAt)
+		}
+		return nil
+	})
+}
+
+// An allocation of an investment disbursement to a specific recipient account.
+// The account is the target account that receives the investment, not your
+// account.
+type InvestmentDistribution struct {
+
+	// The recipient Amazon Web Services account ID that receives this portion of the
+	// investment. This must be one of the eligible investment accounts on the
+	// contract.
+	//
+	// This member is required.
+	AccountId *string
+
+	// The monetary value allocated to the recipient account.
+	//
+	// This member is required.
+	InvestmentAmount *Amount
+
+	noSmithyDocumentSerde
+}
+
+func (v *InvestmentDistribution) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InvestmentDistribution)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InvestmentDistribution) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountId != nil {
+		s.WriteString(schemas.InvestmentDistribution_accountId, *v.AccountId)
+	}
+	if v.InvestmentAmount != nil {
+		s.WriteStruct(schemas.InvestmentDistribution_investmentAmount)
+		v.InvestmentAmount.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *InvestmentDistribution) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InvestmentDistribution, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InvestmentDistribution_accountId:
+			v.AccountId = new(string)
+			return d.ReadString(schemas.InvestmentDistribution_accountId, v.AccountId)
+		case schemas.InvestmentDistribution_investmentAmount:
+			v.InvestmentAmount = &Amount{}
+			return v.InvestmentAmount.Deserialize(d)
+		}
+		return nil
+	})
+}
+
+// A multiplier used to convert attestation input into an investment value.
+type InvestmentMultiplier struct {
+
+	// The unit of the attestation input that the multiplier applies to, such as
+	// workloads migrated . This value is 1–1000 characters. The terms of the contract
+	// define this value.
+	//
+	// This member is required.
+	InvestmentAttestationInputUnit *string
+
+	// The type of the multiplier. A value of PERCENTAGE applies a percentage of a
+	// value. A value of CURRENCY_AMOUNT applies a currency amount per unit of
+	// attestation input. The terms of the contract define this value.
+	//
+	// This member is required.
+	MultiplierType MultiplierType
+
+	// The multiplier value, expressed as a decimal string to preserve precision. The
+	// value is digits with an optional decimal point and is 1–1000 characters. The
+	// terms of the contract define this value.
+	//
+	// This member is required.
+	Value *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *InvestmentMultiplier) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InvestmentMultiplier)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InvestmentMultiplier) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InvestmentAttestationInputUnit != nil {
+		s.WriteString(schemas.InvestmentMultiplier_investmentAttestationInputUnit, *v.InvestmentAttestationInputUnit)
+	}
+	if v.MultiplierType != "" {
+		s.WriteString(schemas.InvestmentMultiplier_multiplierType, string(v.MultiplierType))
+	}
+	if v.Value != nil {
+		s.WriteString(schemas.InvestmentMultiplier_value, *v.Value)
+	}
+}
+func (v *InvestmentMultiplier) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InvestmentMultiplier, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InvestmentMultiplier_investmentAttestationInputUnit:
+			v.InvestmentAttestationInputUnit = new(string)
+			return d.ReadString(schemas.InvestmentMultiplier_investmentAttestationInputUnit, v.InvestmentAttestationInputUnit)
+		case schemas.InvestmentMultiplier_multiplierType:
+			var ev string
+			if err := d.ReadString(schemas.InvestmentMultiplier_multiplierType, &ev); err != nil {
+				return err
+			}
+			v.MultiplierType = MultiplierType(ev)
+			return nil
+		case schemas.InvestmentMultiplier_value:
+			v.Value = new(string)
+			return d.ReadString(schemas.InvestmentMultiplier_value, v.Value)
+		}
+		return nil
+	})
+}
+
+// A restriction that caps the value that can be disbursed for an investment. The
+// cap applies for each attestation window.
+type InvestmentRestriction struct {
+
+	// The maximum monetary amount allowed under the restriction.
+	//
+	// This member is required.
+	Amount *Amount
+
+	noSmithyDocumentSerde
+}
+
+func (v *InvestmentRestriction) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InvestmentRestriction)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InvestmentRestriction) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Amount != nil {
+		s.WriteStruct(schemas.InvestmentRestriction_amount)
+		v.Amount.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *InvestmentRestriction) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InvestmentRestriction, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InvestmentRestriction_amount:
+			v.Amount = &Amount{}
+			return v.Amount.Deserialize(d)
+		}
+		return nil
+	})
+}
+
+// Detailed information about an investment summary within a contract or a private
+// pricing addendum.
+type InvestmentSummary struct {
+
+	// The name of the investment summary, used to reference the investment against a
+	// term in the physical contract. This value is 1–400 characters.
+	//
+	// This member is required.
+	InvestmentName *string
+
+	// The identifier of the investment summary. Pass this value to
+	// ListContractualInvestments to list the investments within the summary, and to
+	// CreateContractualInvestmentAttestation to attest an investment. This value is
+	// 1–36 characters.
+	//
+	// This member is required.
+	InvestmentSummaryId *string
+
+	// The type of the investment summary. Valid values are MILESTONE_BASED and
+	// OUTCOME_BASED . OUTCOME_BASED investments can be attested to, upon completion
+	// of outcomes. MILESTONE_BASED are automatically triggered by Amazon Web
+	// Services, based on the time schedule in the contract.
+	//
+	// This member is required.
+	InvestmentType InvestmentType
+
+	// The maximum monetary value that can be disbursed against the investment
+	// summary, inclusive of all outcomes combined under the summary.
+	MaxAllowedInvestmentDisbursementValue *Amount
+
+	noSmithyDocumentSerde
+}
+
+func (v *InvestmentSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InvestmentSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InvestmentSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InvestmentName != nil {
+		s.WriteString(schemas.InvestmentSummary_investmentName, *v.InvestmentName)
+	}
+	if v.InvestmentSummaryId != nil {
+		s.WriteString(schemas.InvestmentSummary_investmentSummaryId, *v.InvestmentSummaryId)
+	}
+	if v.InvestmentType != "" {
+		s.WriteString(schemas.InvestmentSummary_investmentType, string(v.InvestmentType))
+	}
+	if v.MaxAllowedInvestmentDisbursementValue != nil {
+		s.WriteStruct(schemas.InvestmentSummary_maxAllowedInvestmentDisbursementValue)
+		v.MaxAllowedInvestmentDisbursementValue.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *InvestmentSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InvestmentSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InvestmentSummary_investmentName:
+			v.InvestmentName = new(string)
+			return d.ReadString(schemas.InvestmentSummary_investmentName, v.InvestmentName)
+		case schemas.InvestmentSummary_investmentSummaryId:
+			v.InvestmentSummaryId = new(string)
+			return d.ReadString(schemas.InvestmentSummary_investmentSummaryId, v.InvestmentSummaryId)
+		case schemas.InvestmentSummary_investmentType:
+			var ev string
+			if err := d.ReadString(schemas.InvestmentSummary_investmentType, &ev); err != nil {
+				return err
+			}
+			v.InvestmentType = InvestmentType(ev)
+			return nil
+		case schemas.InvestmentSummary_maxAllowedInvestmentDisbursementValue:
+			v.MaxAllowedInvestmentDisbursementValue = &Amount{}
+			return v.MaxAllowedInvestmentDisbursementValue.Deserialize(d)
+		}
+		return nil
+	})
+}
+
+// A legal entity on a private pricing contract. It can be found on your
+// contract's signature page.
+type LegalEntity struct {
+
+	// The name of the legal entity as it appears on the contract document. This value
+	// can be up to 256 characters.
+	//
+	// This member is required.
+	LegalEntityName *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *LegalEntity) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LegalEntity)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *LegalEntity) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LegalEntityName != nil {
+		s.WriteString(schemas.LegalEntity_legalEntityName, *v.LegalEntityName)
+	}
+}
+func (v *LegalEntity) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LegalEntity, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LegalEntity_legalEntityName:
+			v.LegalEntityName = new(string)
+			return d.ReadString(schemas.LegalEntity_legalEntityName, v.LegalEntityName)
+		}
+		return nil
+	})
+}
+
 // Enterprise Support charges for a linked account.
 type LinkedAccountCharge struct {
 
@@ -1937,6 +2823,156 @@ func (v *LinkedAccountCharge) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.LinkedAccountCharge_totalSupportEligibleSpend:
 			v.TotalSupportEligibleSpend = new(string)
 			return d.ReadString(schemas.LinkedAccountCharge_totalSupportEligibleSpend, v.TotalSupportEligibleSpend)
+		}
+		return nil
+	})
+}
+
+// An investment with a fixed value that is disbursed on a schedule. This
+// corresponds to the MILESTONE_BASED investment type.
+type MilestoneBasedInvestment struct {
+
+	// The date on which the investment is disbursed to the investment accounts.
+	//
+	// This member is required.
+	InvestmentDisbursedAt *time.Time
+
+	// The identifier of the investment, as returned by ListContractualInvestments .
+	// This value is 1–36 characters.
+	//
+	// This member is required.
+	InvestmentId *string
+
+	// The total value of the investment, including its currency and amount.
+	//
+	// This member is required.
+	InvestmentValue *Amount
+
+	noSmithyDocumentSerde
+}
+
+func (v *MilestoneBasedInvestment) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MilestoneBasedInvestment)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MilestoneBasedInvestment) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InvestmentDisbursedAt != nil {
+		s.WriteTime(schemas.MilestoneBasedInvestment_investmentDisbursedAt, *v.InvestmentDisbursedAt)
+	}
+	if v.InvestmentId != nil {
+		s.WriteString(schemas.MilestoneBasedInvestment_investmentId, *v.InvestmentId)
+	}
+	if v.InvestmentValue != nil {
+		s.WriteStruct(schemas.MilestoneBasedInvestment_investmentValue)
+		v.InvestmentValue.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *MilestoneBasedInvestment) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MilestoneBasedInvestment, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MilestoneBasedInvestment_investmentDisbursedAt:
+			v.InvestmentDisbursedAt = new(time.Time)
+			return d.ReadTime(schemas.MilestoneBasedInvestment_investmentDisbursedAt, v.InvestmentDisbursedAt)
+		case schemas.MilestoneBasedInvestment_investmentId:
+			v.InvestmentId = new(string)
+			return d.ReadString(schemas.MilestoneBasedInvestment_investmentId, v.InvestmentId)
+		case schemas.MilestoneBasedInvestment_investmentValue:
+			v.InvestmentValue = &Amount{}
+			return v.InvestmentValue.Deserialize(d)
+		}
+		return nil
+	})
+}
+
+// An investment that is awarded upon completion of a defined outcome. This
+// corresponds to the OUTCOME_BASED investment type and is claimed through
+// CreateContractualInvestmentAttestation .
+type OutcomeBasedInvestment struct {
+
+	// The time window, expressed as an interval with inclusive start and end dates,
+	// during which outcomes can be attested to.
+	//
+	// This member is required.
+	AttestationWindow *Interval
+
+	// The total value already disbursed against the investment. This value can be
+	// distributed among the investment accounts distribution.
+	//
+	// This member is required.
+	DisbursedValue *Amount
+
+	// The identifier of the investment, as returned by ListContractualInvestments .
+	// This value is 1–36 characters.
+	//
+	// This member is required.
+	InvestmentId *string
+
+	// The description of what must be completed to attest the outcome. This value is
+	// 1–2048 characters.
+	//
+	// This member is required.
+	OutcomeDescription *string
+
+	// The multipliers used to compute the investment value from the attestation
+	// input. The list contains at most 200 multipliers. Multipliers are derived from
+	// the terms of the private pricing contract.
+	InvestmentMultipliers []InvestmentMultiplier
+
+	// The restrictions that cap the value that can be disbursed for the investment.
+	// The list contains at most 10 restrictions.
+	InvestmentRestrictions []InvestmentRestriction
+
+	noSmithyDocumentSerde
+}
+
+func (v *OutcomeBasedInvestment) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.OutcomeBasedInvestment)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *OutcomeBasedInvestment) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AttestationWindow != nil {
+		s.WriteStruct(schemas.OutcomeBasedInvestment_attestationWindow)
+		v.AttestationWindow.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DisbursedValue != nil {
+		s.WriteStruct(schemas.OutcomeBasedInvestment_disbursedValue)
+		v.DisbursedValue.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.InvestmentId != nil {
+		s.WriteString(schemas.OutcomeBasedInvestment_investmentId, *v.InvestmentId)
+	}
+	serializeInvestmentMultipliers(s, schemas.OutcomeBasedInvestment_investmentMultipliers, v.InvestmentMultipliers)
+	serializeInvestmentRestrictions(s, schemas.OutcomeBasedInvestment_investmentRestrictions, v.InvestmentRestrictions)
+	if v.OutcomeDescription != nil {
+		s.WriteString(schemas.OutcomeBasedInvestment_outcomeDescription, *v.OutcomeDescription)
+	}
+}
+func (v *OutcomeBasedInvestment) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.OutcomeBasedInvestment, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.OutcomeBasedInvestment_attestationWindow:
+			v.AttestationWindow = &Interval{}
+			return v.AttestationWindow.Deserialize(d)
+		case schemas.OutcomeBasedInvestment_disbursedValue:
+			v.DisbursedValue = &Amount{}
+			return v.DisbursedValue.Deserialize(d)
+		case schemas.OutcomeBasedInvestment_investmentId:
+			v.InvestmentId = new(string)
+			return d.ReadString(schemas.OutcomeBasedInvestment_investmentId, v.InvestmentId)
+		case schemas.OutcomeBasedInvestment_investmentMultipliers:
+			return deserializeInvestmentMultipliers(d, schemas.OutcomeBasedInvestment_investmentMultipliers, &v.InvestmentMultipliers)
+		case schemas.OutcomeBasedInvestment_investmentRestrictions:
+			return deserializeInvestmentRestrictions(d, schemas.OutcomeBasedInvestment_investmentRestrictions, &v.InvestmentRestrictions)
+		case schemas.OutcomeBasedInvestment_outcomeDescription:
+			v.OutcomeDescription = new(string)
+			return d.ReadString(schemas.OutcomeBasedInvestment_outcomeDescription, v.OutcomeDescription)
 		}
 		return nil
 	})
@@ -2152,6 +3188,89 @@ func (v *PricingPlanTier) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.PricingPlanTier_tierMinimum:
 			v.TierMinimum = new(string)
 			return d.ReadString(schemas.PricingPlanTier_tierMinimum, v.TierMinimum)
+		}
+		return nil
+	})
+}
+
+// The details of a private pricing addendum contract.
+type PrivatePricingAddendum struct {
+
+	// The Amazon Resource Name (ARN) of the private pricing addendum.
+	//
+	// This member is required.
+	ContractArn *string
+
+	// The contract term period of the private pricing addendum, expressed as an
+	// interval with an inclusive start date and an inclusive end date.
+	//
+	// This member is required.
+	ContractTerm *Interval
+
+	// The payer accounts that are eligible under the private pricing addendum. The
+	// list contains at most 100 account IDs.
+	//
+	// This member is required.
+	EligiblePayerAccounts []string
+
+	// The accounts that are eligible to receive investments under the private pricing
+	// addendum. An InvestmentDistribution must target one of these accounts. The list
+	// contains at most 100 account IDs.
+	//
+	// This member is required.
+	InvestmentAccounts []string
+
+	// The legal entities on the private pricing addendum. The list contains at most
+	// 10 legal entities.
+	//
+	// This member is required.
+	LegalEntities []LegalEntity
+
+	// The restrictions that limit the self-service actions you can take on the
+	// private pricing addendum. An empty or absent value indicates that no
+	// restrictions apply. The list contains at most 10 restrictions.
+	ContractRestrictions []ContractRestriction
+
+	noSmithyDocumentSerde
+}
+
+func (v *PrivatePricingAddendum) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PrivatePricingAddendum)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PrivatePricingAddendum) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ContractArn != nil {
+		s.WriteString(schemas.PrivatePricingAddendum_contractArn, *v.ContractArn)
+	}
+	serializeContractRestrictions(s, schemas.PrivatePricingAddendum_contractRestrictions, v.ContractRestrictions)
+	if v.ContractTerm != nil {
+		s.WriteStruct(schemas.PrivatePricingAddendum_contractTerm)
+		v.ContractTerm.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeAccountList(s, schemas.PrivatePricingAddendum_eligiblePayerAccounts, v.EligiblePayerAccounts)
+	serializeAccountList(s, schemas.PrivatePricingAddendum_investmentAccounts, v.InvestmentAccounts)
+	serializeLegalEntities(s, schemas.PrivatePricingAddendum_legalEntities, v.LegalEntities)
+}
+func (v *PrivatePricingAddendum) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PrivatePricingAddendum, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PrivatePricingAddendum_contractArn:
+			v.ContractArn = new(string)
+			return d.ReadString(schemas.PrivatePricingAddendum_contractArn, v.ContractArn)
+		case schemas.PrivatePricingAddendum_contractRestrictions:
+			return deserializeContractRestrictions(d, schemas.PrivatePricingAddendum_contractRestrictions, &v.ContractRestrictions)
+		case schemas.PrivatePricingAddendum_contractTerm:
+			v.ContractTerm = &Interval{}
+			return v.ContractTerm.Deserialize(d)
+		case schemas.PrivatePricingAddendum_eligiblePayerAccounts:
+			return deserializeAccountList(d, schemas.PrivatePricingAddendum_eligiblePayerAccounts, &v.EligiblePayerAccounts)
+		case schemas.PrivatePricingAddendum_investmentAccounts:
+			return deserializeAccountList(d, schemas.PrivatePricingAddendum_investmentAccounts, &v.InvestmentAccounts)
+		case schemas.PrivatePricingAddendum_legalEntities:
+			return deserializeLegalEntities(d, schemas.PrivatePricingAddendum_legalEntities, &v.LegalEntities)
 		}
 		return nil
 	})
@@ -2417,3 +3536,16 @@ func (v *ValidationExceptionField) Deserialize(d smithy.ShapeDeserializer) error
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde
+
+// UnknownUnionMember is returned when a union member is returned over the wire,
+// but has an unknown tag.
+type UnknownUnionMember struct {
+	Tag   string
+	Value []byte
+
+	noSmithyDocumentSerde
+}
+
+func (*UnknownUnionMember) isAttestationValue() {}
+func (*UnknownUnionMember) isContractDetails()  {}
+func (*UnknownUnionMember) isInvestment()       {}

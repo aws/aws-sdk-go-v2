@@ -357,6 +357,53 @@ func (RCTAppliedFor) Values() []RCTAppliedFor {
 	}
 }
 
+type ReplicationBackfillResultStatus string
+
+// Enum values for ReplicationBackfillResultStatus
+const (
+	ReplicationBackfillResultStatusComplete ReplicationBackfillResultStatus = "COMPLETE"
+	ReplicationBackfillResultStatusFailed   ReplicationBackfillResultStatus = "FAILED"
+)
+
+// Values returns all known values for ReplicationBackfillResultStatus. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ReplicationBackfillResultStatus) Values() []ReplicationBackfillResultStatus {
+	return []ReplicationBackfillResultStatus{
+		"COMPLETE",
+		"FAILED",
+	}
+}
+
+type ReplicationBackfillStatus string
+
+// Enum values for ReplicationBackfillStatus
+const (
+	ReplicationBackfillStatusPreparing  ReplicationBackfillStatus = "PREPARING"
+	ReplicationBackfillStatusInProgress ReplicationBackfillStatus = "IN_PROGRESS"
+	ReplicationBackfillStatusComplete   ReplicationBackfillStatus = "COMPLETE"
+	ReplicationBackfillStatusFailed     ReplicationBackfillStatus = "FAILED"
+	ReplicationBackfillStatusStopping   ReplicationBackfillStatus = "STOPPING"
+	ReplicationBackfillStatusStopped    ReplicationBackfillStatus = "STOPPED"
+)
+
+// Values returns all known values for ReplicationBackfillStatus. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ReplicationBackfillStatus) Values() []ReplicationBackfillStatus {
+	return []ReplicationBackfillStatus{
+		"PREPARING",
+		"IN_PROGRESS",
+		"COMPLETE",
+		"FAILED",
+		"STOPPING",
+		"STOPPED",
+	}
+}
+
 type ReplicationStatus string
 
 // Enum values for ReplicationStatus

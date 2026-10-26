@@ -10,6 +10,26 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
+type validateOpAssociateContract struct {
+}
+
+func (*validateOpAssociateContract) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpAssociateContract) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*AssociateContractInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpAssociateContractInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpAssociateSourceViews struct {
 }
 
@@ -25,6 +45,26 @@ func (m *validateOpAssociateSourceViews) HandleInitialize(ctx context.Context, i
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpAssociateSourceViewsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpCancelContractualInvestmentAttestation struct {
+}
+
+func (*validateOpCancelContractualInvestmentAttestation) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCancelContractualInvestmentAttestation) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CancelContractualInvestmentAttestationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCancelContractualInvestmentAttestationInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -50,6 +90,26 @@ func (m *validateOpCreateBillingView) HandleInitialize(ctx context.Context, in m
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateContractualInvestmentAttestation struct {
+}
+
+func (*validateOpCreateContractualInvestmentAttestation) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateContractualInvestmentAttestation) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateContractualInvestmentAttestationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateContractualInvestmentAttestationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeleteBillingView struct {
 }
 
@@ -65,6 +125,26 @@ func (m *validateOpDeleteBillingView) HandleInitialize(ctx context.Context, in m
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeleteBillingViewInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDisassociateContract struct {
+}
+
+func (*validateOpDisassociateContract) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDisassociateContract) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DisassociateContractInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDisassociateContractInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -125,6 +205,26 @@ func (m *validateOpGetBillingView) HandleInitialize(ctx context.Context, in midd
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpGetBillingViewInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetContractInformation struct {
+}
+
+func (*validateOpGetContractInformation) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetContractInformation) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetContractInformationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetContractInformationInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -265,6 +365,66 @@ func (m *validateOpListBusinessSupportAccountCharges) HandleInitialize(ctx conte
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpListBusinessSupportAccountChargesInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListContractualInvestmentAttestations struct {
+}
+
+func (*validateOpListContractualInvestmentAttestations) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListContractualInvestmentAttestations) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListContractualInvestmentAttestationsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListContractualInvestmentAttestationsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListContractualInvestments struct {
+}
+
+func (*validateOpListContractualInvestments) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListContractualInvestments) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListContractualInvestmentsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListContractualInvestmentsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListContractualInvestmentSummaries struct {
+}
+
+func (*validateOpListContractualInvestmentSummaries) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListContractualInvestmentSummaries) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListContractualInvestmentSummariesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListContractualInvestmentSummariesInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -430,16 +590,32 @@ func (m *validateOpUpdateBillingView) HandleInitialize(ctx context.Context, in m
 	return next.HandleInitialize(ctx, in)
 }
 
+func addOpAssociateContractValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpAssociateContract{}, middleware.After)
+}
+
 func addOpAssociateSourceViewsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpAssociateSourceViews{}, middleware.After)
+}
+
+func addOpCancelContractualInvestmentAttestationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCancelContractualInvestmentAttestation{}, middleware.After)
 }
 
 func addOpCreateBillingViewValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateBillingView{}, middleware.After)
 }
 
+func addOpCreateContractualInvestmentAttestationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateContractualInvestmentAttestation{}, middleware.After)
+}
+
 func addOpDeleteBillingViewValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteBillingView{}, middleware.After)
+}
+
+func addOpDisassociateContractValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDisassociateContract{}, middleware.After)
 }
 
 func addOpDisassociateSourceViewsValidationMiddleware(stack *middleware.Stack) error {
@@ -452,6 +628,10 @@ func addOpGetBillingPreferencesValidationMiddleware(stack *middleware.Stack) err
 
 func addOpGetBillingViewValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetBillingView{}, middleware.After)
+}
+
+func addOpGetContractInformationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetContractInformation{}, middleware.After)
 }
 
 func addOpGetCreditAllocationHistoryValidationMiddleware(stack *middleware.Stack) error {
@@ -480,6 +660,18 @@ func addOpListBillingViewsValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpListBusinessSupportAccountChargesValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListBusinessSupportAccountCharges{}, middleware.After)
+}
+
+func addOpListContractualInvestmentAttestationsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListContractualInvestmentAttestations{}, middleware.After)
+}
+
+func addOpListContractualInvestmentsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListContractualInvestments{}, middleware.After)
+}
+
+func addOpListContractualInvestmentSummariesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListContractualInvestmentSummaries{}, middleware.After)
 }
 
 func addOpListEnterpriseSupportLinkedAccountChargesValidationMiddleware(stack *middleware.Stack) error {
@@ -524,6 +716,160 @@ func validateActiveTimeRange(v *types.ActiveTimeRange) error {
 	}
 	if v.ActiveBeforeInclusive == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ActiveBeforeInclusive"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAdditionalRecipient(v *types.AdditionalRecipient) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AdditionalRecipient"}
+	if v.Email == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Email"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAdditionalRecipients(v []types.AdditionalRecipient) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AdditionalRecipients"}
+	for i := range v {
+		if err := validateAdditionalRecipient(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAmount(v *types.Amount) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "Amount"}
+	if v.CurrencyCode == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CurrencyCode"))
+	}
+	if v.CurrencyAmount == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CurrencyAmount"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateApproverDetails(v *types.ApproverDetails) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ApproverDetails"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Title == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Title"))
+	}
+	if v.Email == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Email"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAttestationDetails(v *types.AttestationDetails) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AttestationDetails"}
+	if v.AttestationValue == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AttestationValue"))
+	} else if v.AttestationValue != nil {
+		if err := validateAttestationValue(v.AttestationValue); err != nil {
+			invalidParams.AddNested("AttestationValue", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.InvestmentDistributions != nil {
+		if err := validateInvestmentDistributions(v.InvestmentDistributions); err != nil {
+			invalidParams.AddNested("InvestmentDistributions", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAttestationQuantities(v []types.AttestationQuantity) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AttestationQuantities"}
+	for i := range v {
+		if err := validateAttestationQuantity(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAttestationQuantity(v *types.AttestationQuantity) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AttestationQuantity"}
+	if v.AttestationVolume == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AttestationVolume"))
+	}
+	if v.AttestationUnit == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AttestationUnit"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAttestationValue(v types.AttestationValue) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AttestationValue"}
+	switch uv := v.(type) {
+	case *types.AttestationValueMemberAttestationAmount:
+		if err := validateAmount(&uv.Value); err != nil {
+			invalidParams.AddNested("[attestationAmount]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.AttestationValueMemberAttestationQuantities:
+		if err := validateAttestationQuantities(uv.Value); err != nil {
+			invalidParams.AddNested("[attestationQuantities]", err.(smithy.InvalidParamsError))
+		}
+
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -630,6 +976,45 @@ func validateExpression(v *types.Expression) error {
 	}
 }
 
+func validateInvestmentDistribution(v *types.InvestmentDistribution) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "InvestmentDistribution"}
+	if v.AccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AccountId"))
+	}
+	if v.InvestmentAmount == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InvestmentAmount"))
+	} else if v.InvestmentAmount != nil {
+		if err := validateAmount(v.InvestmentAmount); err != nil {
+			invalidParams.AddNested("InvestmentAmount", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateInvestmentDistributions(v []types.InvestmentDistribution) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "InvestmentDistributions"}
+	for i := range v {
+		if err := validateInvestmentDistribution(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateResourceTag(v *types.ResourceTag) error {
 	if v == nil {
 		return nil
@@ -715,6 +1100,24 @@ func validateTagValues(v *types.TagValues) error {
 	}
 }
 
+func validateOpAssociateContractInput(v *AssociateContractInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AssociateContractInput"}
+	if v.ContractArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ContractArn"))
+	}
+	if v.ContractDocumentId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ContractDocumentId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpAssociateSourceViewsInput(v *AssociateSourceViewsInput) error {
 	if v == nil {
 		return nil
@@ -725,6 +1128,27 @@ func validateOpAssociateSourceViewsInput(v *AssociateSourceViewsInput) error {
 	}
 	if v.SourceViews == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SourceViews"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCancelContractualInvestmentAttestationInput(v *CancelContractualInvestmentAttestationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CancelContractualInvestmentAttestationInput"}
+	if v.AttestationId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AttestationId"))
+	}
+	if v.ContractArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ContractArn"))
+	}
+	if v.Reason == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Reason"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -761,6 +1185,49 @@ func validateOpCreateBillingViewInput(v *CreateBillingViewInput) error {
 	}
 }
 
+func validateOpCreateContractualInvestmentAttestationInput(v *CreateContractualInvestmentAttestationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateContractualInvestmentAttestationInput"}
+	if v.ContractArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ContractArn"))
+	}
+	if v.InvestmentSummaryId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InvestmentSummaryId"))
+	}
+	if v.InvestmentId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InvestmentId"))
+	}
+	if v.ContractDocumentId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ContractDocumentId"))
+	}
+	if v.ApproverDetails == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ApproverDetails"))
+	} else if v.ApproverDetails != nil {
+		if err := validateApproverDetails(v.ApproverDetails); err != nil {
+			invalidParams.AddNested("ApproverDetails", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.AttestationDetails == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AttestationDetails"))
+	} else if v.AttestationDetails != nil {
+		if err := validateAttestationDetails(v.AttestationDetails); err != nil {
+			invalidParams.AddNested("AttestationDetails", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.AdditionalRecipients != nil {
+		if err := validateAdditionalRecipients(v.AdditionalRecipients); err != nil {
+			invalidParams.AddNested("AdditionalRecipients", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDeleteBillingViewInput(v *DeleteBillingViewInput) error {
 	if v == nil {
 		return nil
@@ -768,6 +1235,21 @@ func validateOpDeleteBillingViewInput(v *DeleteBillingViewInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteBillingViewInput"}
 	if v.Arn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Arn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDisassociateContractInput(v *DisassociateContractInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DisassociateContractInput"}
+	if v.ContractArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ContractArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -816,6 +1298,21 @@ func validateOpGetBillingViewInput(v *GetBillingViewInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "GetBillingViewInput"}
 	if v.Arn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Arn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetContractInformationInput(v *GetContractInformationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetContractInformationInput"}
+	if v.ContractArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ContractArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -937,6 +1434,54 @@ func validateOpListBusinessSupportAccountChargesInput(v *ListBusinessSupportAcco
 	invalidParams := smithy.InvalidParamsError{Context: "ListBusinessSupportAccountChargesInput"}
 	if v.BillingMonth == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("BillingMonth"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListContractualInvestmentAttestationsInput(v *ListContractualInvestmentAttestationsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListContractualInvestmentAttestationsInput"}
+	if v.ContractArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ContractArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListContractualInvestmentsInput(v *ListContractualInvestmentsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListContractualInvestmentsInput"}
+	if v.ContractArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ContractArn"))
+	}
+	if v.InvestmentSummaryId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InvestmentSummaryId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListContractualInvestmentSummariesInput(v *ListContractualInvestmentSummariesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListContractualInvestmentSummariesInput"}
+	if v.ContractArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ContractArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

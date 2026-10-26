@@ -122,6 +122,18 @@ func TestCheckSnapshot_CreateChannel(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_CreateFailoverSlateConfiguration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateFailoverSlateConfiguration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateFailoverSlateConfiguration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_CreatePlaybackRestrictionPolicy(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreatePlaybackRestrictionPolicy(context.Background(), nil, func(o *Options) {
@@ -175,6 +187,18 @@ func TestCheckSnapshot_DeleteChannel(t *testing.T) {
 	_, err := svc.DeleteChannel(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DeleteChannel")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DeleteFailoverSlateConfiguration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteFailoverSlateConfiguration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteFailoverSlateConfiguration")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -247,6 +271,18 @@ func TestCheckSnapshot_GetChannel(t *testing.T) {
 	_, err := svc.GetChannel(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "GetChannel")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetFailoverSlateConfiguration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetFailoverSlateConfiguration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetFailoverSlateConfiguration")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -367,6 +403,18 @@ func TestCheckSnapshot_ListChannels(t *testing.T) {
 	_, err := svc.ListChannels(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "ListChannels")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListFailoverSlateConfigurations(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListFailoverSlateConfigurations(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListFailoverSlateConfigurations")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -542,6 +590,18 @@ func TestCheckSnapshot_UpdateChannel(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_UpdateFailoverSlateConfiguration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateFailoverSlateConfiguration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateFailoverSlateConfiguration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_UpdatePlaybackRestrictionPolicy(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.UpdatePlaybackRestrictionPolicy(context.Background(), nil, func(o *Options) {
@@ -613,6 +673,18 @@ func TestUpdateSnapshot_CreateChannel(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_CreateFailoverSlateConfiguration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateFailoverSlateConfiguration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateFailoverSlateConfiguration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_CreatePlaybackRestrictionPolicy(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreatePlaybackRestrictionPolicy(context.Background(), nil, func(o *Options) {
@@ -666,6 +738,18 @@ func TestUpdateSnapshot_DeleteChannel(t *testing.T) {
 	_, err := svc.DeleteChannel(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DeleteChannel")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DeleteFailoverSlateConfiguration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteFailoverSlateConfiguration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteFailoverSlateConfiguration")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -738,6 +822,18 @@ func TestUpdateSnapshot_GetChannel(t *testing.T) {
 	_, err := svc.GetChannel(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "GetChannel")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetFailoverSlateConfiguration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetFailoverSlateConfiguration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetFailoverSlateConfiguration")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -858,6 +954,18 @@ func TestUpdateSnapshot_ListChannels(t *testing.T) {
 	_, err := svc.ListChannels(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ListChannels")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListFailoverSlateConfigurations(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListFailoverSlateConfigurations(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListFailoverSlateConfigurations")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1026,6 +1134,18 @@ func TestUpdateSnapshot_UpdateChannel(t *testing.T) {
 	_, err := svc.UpdateChannel(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "UpdateChannel")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateFailoverSlateConfiguration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateFailoverSlateConfiguration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateFailoverSlateConfiguration")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

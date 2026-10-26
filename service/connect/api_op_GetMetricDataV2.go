@@ -97,10 +97,11 @@ type GetMetricDataV2Input struct {
 	// FLOWS_NEXT_RESOURCE_QUEUE_ID | FLOWS_OUTCOME_TYPE | FLOWS_RESOURCE_ID |
 	// FORM_VERSION | INITIATING_FLOW | INITIATION_METHOD |
 	// INVOKING_RESOURCE_PUBLISHED_TIMESTAMP | INVOKING_RESOURCE_TYPE |
-	// KNOWLEDGE_BASE_NAME | PARENT_FLOWS_RESOURCE_ID | Q_CONNECT_ENABLED | QUEUE |
-	// RESOURCE_PUBLISHED_TIMESTAMP | ROUTING_PROFILE | ROUTING_STEP_EXPRESSION |
-	// SESSION_ID | TEST_CASE | TEST_CASE_EXECUTION_FAILURE_REASON |
-	// TEST_CASE_EXECUTION_RESULT | TEST_CASE_EXECUTION_STATE | WEB_NOTIFICATION_TYPE
+	// KNOWLEDGE_BASE_NAME | LIFETIME_VALUE | PARENT_FLOWS_RESOURCE_ID |
+	// Q_CONNECT_ENABLED | QUEUE | REPEAT_CALLER | RESOURCE_PUBLISHED_TIMESTAMP |
+	// ROUTING_PROFILE | ROUTING_STEP_EXPRESSION | SESSION_ID | TEST_CASE |
+	// TEST_CASE_EXECUTION_FAILURE_REASON | TEST_CASE_EXECUTION_RESULT |
+	// TEST_CASE_EXECUTION_STATE | WEB_NOTIFICATION_TYPE
 	//
 	// The following filter keys correspond to Connect Customer resources and are used
 	// for authorizing requests. A GetMetricDataV2 request requires at least one of
@@ -151,8 +152,26 @@ type GetMetricDataV2Input struct {
 	//
 	//   - To filter by phone number, see [Create a historical metrics report]in the Connect Customer Administrator Guide.
 	//
+	//   - LIFETIME_VALUE filters and groups by customer lifetime value segment (High
+	//   lifetime value, Medium lifetime value, Low lifetime value). For more information
+	//   about the calculated attributes that drive these segments, see [Default calculated attributes]in the Connect
+	//   Customer Administrator Guide.
+	//
+	//   - REPEAT_CALLER filters and groups by repeat caller status.
+	//
+	//   - The LIFETIME_VALUE and REPEAT_CALLER filters and groupings use customer
+	//   segment data from Customer Profiles. For more information, see [Default segments]in the Connect
+	//   Customer Administrator Guide.
+	//
+	// To use the LIFETIME_VALUE and REPEAT_CALLER filters and groupings, users must
+	// have the Customer segments - View permission enabled in their security profile.
+	// For more information, see [List of security profile permissions]in the Connect Customer Administrator Guide.
+	//
 	// [Create a historical metrics report]: https://docs.aws.amazon.com/connect/latest/adminguide/create-historical-metrics-report.html
 	// [Campaign]: https://docs.aws.amazon.com/connect/latest/APIReference/API_connect-outbound-campaigns_Campaign.html
+	// [Default calculated attributes]: https://docs.aws.amazon.com/connect/latest/adminguide/customerprofiles-default-calculated-attributes.html
+	// [Default segments]: https://docs.aws.amazon.com/connect/latest/adminguide/customerprofiles-default-segments.html
+	// [List of security profile permissions]: https://docs.aws.amazon.com/connect/latest/adminguide/security-profile-list.html#customerprofiles-permissions-list
 	//
 	// This member is required.
 	Filters []types.FilterV2
@@ -1156,6 +1175,166 @@ type GetMetricDataV2Input struct {
 	// Routing Profile, Answering Machine Detection Status and Disconnect Reason are
 	// only available for agent assisted voice and automated voice delivery modes.
 	//
+	// EVALUATED_CHURN_PROPENSITY_RATE This metric requires an evaluation form with
+	// business outcome questions. For more information, see [Create an evaluation form]in the Connect Customer
+	// Administrator Guide.
+	//
+	// Unit: Percent
+	//
+	// Valid groupings and filters: Agent, Agent Hierarchy Level One, Agent Hierarchy
+	// Level Two, Agent Hierarchy Level Three, Agent Hierarchy Level Four, Agent
+	// Hierarchy Level Five, AI Agent ID, AI Agent Name, AI Agent Name Version, AI
+	// Agent Type, AI Use Case, Bot ID, Bot Intent Name, Bot Locale, Campaign, Campaign
+	// Delivery Event Type, Channel, Contact Category, Disconnect Reason, Email
+	// Address, Evaluation Form, Evaluation Question, Evaluation Section, Evaluation
+	// Source, Evaluator, Feature, Flow Type, Flows Module Resource ID, Flows Next
+	// Resource ID, Flows Next Resource Queue ID, Flows Next Resource Type, Flows
+	// Outcome Type, Flows Resource Alias, Flows Resource ID, Flows Resource Type,
+	// Flows Resource Version, Initiation Method, Lifetime Value, Proficiency, Q
+	// Connect Enabled, Queue, Queue Agent Group Name, Queue Agent Group Type, Queue
+	// Type, Repeat Caller, Resource Published Timestamp, Routing Profile, Routing Step
+	// Expression, Session ID, Subtype, Telephone Number
+	//
+	// UI name: [Evaluated churn propensity rate]
+	//
+	// Feature, Flows Next Resource ID, Flows Next Resource Queue ID, Flows Next
+	// Resource Type, Flows Outcome Type, Flows Resource Type, Proficiency, Resource
+	// Published Timestamp, and Session ID are valid filters but not valid groupings.
+	// AI Agent Name Version, Campaign Delivery Event Type, and Queue Agent Group Name
+	// are valid groupings but not valid filters.
+	//
+	// When requesting business outcome metrics, the filters and groupings used in a
+	// single request must belong to the same metric scope. Filters and groupings from
+	// different metric scopes cannot be combined in one request.
+	//
+	// EVALUATED_CSAT_PERCENT This metric requires an evaluation form with business
+	// outcome questions. For more information, see [Create an evaluation form]in the Connect Customer
+	// Administrator Guide.
+	//
+	// Unit: Percent
+	//
+	// Valid groupings and filters: Agent, Agent Hierarchy Level One, Agent Hierarchy
+	// Level Two, Agent Hierarchy Level Three, Agent Hierarchy Level Four, Agent
+	// Hierarchy Level Five, AI Agent ID, AI Agent Name, AI Agent Name Version, AI
+	// Agent Type, AI Use Case, Bot ID, Bot Intent Name, Bot Locale, Campaign, Campaign
+	// Delivery Event Type, Channel, Contact Category, Disconnect Reason, Email
+	// Address, Evaluation Form, Evaluation Question, Evaluation Section, Evaluation
+	// Source, Evaluator, Feature, Flow Type, Flows Module Resource ID, Flows Next
+	// Resource ID, Flows Next Resource Queue ID, Flows Next Resource Type, Flows
+	// Outcome Type, Flows Resource Alias, Flows Resource ID, Flows Resource Type,
+	// Flows Resource Version, Initiation Method, Lifetime Value, Proficiency, Q
+	// Connect Enabled, Queue, Queue Agent Group Name, Queue Agent Group Type, Queue
+	// Type, Repeat Caller, Resource Published Timestamp, Routing Profile, Routing Step
+	// Expression, Session ID, Subtype, Telephone Number
+	//
+	// UI name: [Evaluated CSAT percent]
+	//
+	// Feature, Flows Next Resource ID, Flows Next Resource Queue ID, Flows Next
+	// Resource Type, Flows Outcome Type, Flows Resource Type, Proficiency, Resource
+	// Published Timestamp, and Session ID are valid filters but not valid groupings.
+	// AI Agent Name Version, Campaign Delivery Event Type, and Queue Agent Group Name
+	// are valid groupings but not valid filters.
+	//
+	// When requesting business outcome metrics, the filters and groupings used in a
+	// single request must belong to the same metric scope. Filters and groupings from
+	// different metric scopes cannot be combined in one request.
+	//
+	// EVALUATED_PARTIAL_SELF_SERVICE_SUCCESS_RATE This metric requires an evaluation
+	// form with business outcome questions. For more information, see [Create an evaluation form]in the Connect
+	// Customer Administrator Guide.
+	//
+	// Unit: Percent
+	//
+	// Valid groupings and filters: Agent, Agent Hierarchy Level One, Agent Hierarchy
+	// Level Two, Agent Hierarchy Level Three, Agent Hierarchy Level Four, Agent
+	// Hierarchy Level Five, AI Agent ID, AI Agent Name, AI Agent Name Version, AI
+	// Agent Type, AI Use Case, Bot ID, Bot Intent Name, Bot Locale, Campaign, Campaign
+	// Delivery Event Type, Channel, Contact Category, Disconnect Reason, Email
+	// Address, Evaluation Form, Evaluation Question, Evaluation Section, Evaluation
+	// Source, Evaluator, Feature, Flow Type, Flows Module Resource ID, Flows Next
+	// Resource ID, Flows Next Resource Queue ID, Flows Next Resource Type, Flows
+	// Outcome Type, Flows Resource Alias, Flows Resource ID, Flows Resource Type,
+	// Flows Resource Version, Initiation Method, Lifetime Value, Proficiency, Q
+	// Connect Enabled, Queue, Queue Agent Group Name, Queue Agent Group Type, Queue
+	// Type, Repeat Caller, Resource Published Timestamp, Routing Profile, Routing Step
+	// Expression, Session ID, Subtype, Telephone Number
+	//
+	// UI name: [Evaluated partial self-service resolution rate]
+	//
+	// Feature, Flows Next Resource ID, Flows Next Resource Queue ID, Flows Next
+	// Resource Type, Flows Outcome Type, Flows Resource Type, Proficiency, Resource
+	// Published Timestamp, and Session ID are valid filters but not valid groupings.
+	// AI Agent Name Version, Campaign Delivery Event Type, and Queue Agent Group Name
+	// are valid groupings but not valid filters.
+	//
+	// When requesting business outcome metrics, the filters and groupings used in a
+	// single request must belong to the same metric scope. Filters and groupings from
+	// different metric scopes cannot be combined in one request.
+	//
+	// EVALUATED_SELF_SERVICE_SUCCESS_RATE This metric requires an evaluation form
+	// with business outcome questions. For more information, see [Create an evaluation form]in the Connect
+	// Customer Administrator Guide.
+	//
+	// Unit: Percent
+	//
+	// Valid groupings and filters: Agent, Agent Hierarchy Level One, Agent Hierarchy
+	// Level Two, Agent Hierarchy Level Three, Agent Hierarchy Level Four, Agent
+	// Hierarchy Level Five, AI Agent ID, AI Agent Name, AI Agent Name Version, AI
+	// Agent Type, AI Use Case, Bot ID, Bot Intent Name, Bot Locale, Campaign, Campaign
+	// Delivery Event Type, Channel, Contact Category, Disconnect Reason, Email
+	// Address, Evaluation Form, Evaluation Question, Evaluation Section, Evaluation
+	// Source, Evaluator, Feature, Flow Type, Flows Module Resource ID, Flows Next
+	// Resource ID, Flows Next Resource Queue ID, Flows Next Resource Type, Flows
+	// Outcome Type, Flows Resource Alias, Flows Resource ID, Flows Resource Type,
+	// Flows Resource Version, Initiation Method, Lifetime Value, Proficiency, Q
+	// Connect Enabled, Queue, Queue Agent Group Name, Queue Agent Group Type, Queue
+	// Type, Repeat Caller, Resource Published Timestamp, Routing Profile, Routing Step
+	// Expression, Session ID, Subtype, Telephone Number
+	//
+	// UI name: [Evaluated self-service resolution rate]
+	//
+	// Feature, Flows Next Resource ID, Flows Next Resource Queue ID, Flows Next
+	// Resource Type, Flows Outcome Type, Flows Resource Type, Proficiency, Resource
+	// Published Timestamp, and Session ID are valid filters but not valid groupings.
+	// AI Agent Name Version, Campaign Delivery Event Type, and Queue Agent Group Name
+	// are valid groupings but not valid filters.
+	//
+	// When requesting business outcome metrics, the filters and groupings used in a
+	// single request must belong to the same metric scope. Filters and groupings from
+	// different metric scopes cannot be combined in one request.
+	//
+	// EVALUATED_SUCCESSFUL_SALE_RATE This metric requires an evaluation form with
+	// business outcome questions. For more information, see [Create an evaluation form]in the Connect Customer
+	// Administrator Guide.
+	//
+	// Unit: Percent
+	//
+	// Valid groupings and filters: Agent, Agent Hierarchy Level One, Agent Hierarchy
+	// Level Two, Agent Hierarchy Level Three, Agent Hierarchy Level Four, Agent
+	// Hierarchy Level Five, AI Agent ID, AI Agent Name, AI Agent Name Version, AI
+	// Agent Type, AI Use Case, Bot ID, Bot Intent Name, Bot Locale, Campaign, Campaign
+	// Delivery Event Type, Channel, Contact Category, Disconnect Reason, Email
+	// Address, Evaluation Form, Evaluation Question, Evaluation Section, Evaluation
+	// Source, Evaluator, Feature, Flow Type, Flows Module Resource ID, Flows Next
+	// Resource ID, Flows Next Resource Queue ID, Flows Next Resource Type, Flows
+	// Outcome Type, Flows Resource Alias, Flows Resource ID, Flows Resource Type,
+	// Flows Resource Version, Initiation Method, Lifetime Value, Proficiency, Q
+	// Connect Enabled, Queue, Queue Agent Group Name, Queue Agent Group Type, Queue
+	// Type, Repeat Caller, Resource Published Timestamp, Routing Profile, Routing Step
+	// Expression, Session ID, Subtype, Telephone Number
+	//
+	// UI name: [Evaluated successful sale rate]
+	//
+	// Feature, Flows Next Resource ID, Flows Next Resource Queue ID, Flows Next
+	// Resource Type, Flows Outcome Type, Flows Resource Type, Proficiency, Resource
+	// Published Timestamp, and Session ID are valid filters but not valid groupings.
+	// AI Agent Name Version, Campaign Delivery Event Type, and Queue Agent Group Name
+	// are valid groupings but not valid filters.
+	//
+	// When requesting business outcome metrics, the filters and groupings used in a
+	// single request must belong to the same metric scope. Filters and groupings from
+	// different metric scopes cannot be combined in one request.
+	//
 	// EVALUATIONS_PERFORMED Unit: Count
 	//
 	// Valid groupings and filters: Agent, Agent Hierarchy, Channel, Evaluation Form
@@ -1585,6 +1764,7 @@ type GetMetricDataV2Input struct {
 	// [Average case resolution time]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#average-case-resolution-time
 	// [Average agent message length]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#average-agent-message-length
 	// [Agent API connecting time]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#agent-api-connecting-time
+	// [Evaluated CSAT percent]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#evaluated-csat-percent
 	// [Talk time percent]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#talk-time-percent
 	// [Campaign progress rate]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#campaign-progress-rate
 	// [Active AI Agents]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#active-ai-agents
@@ -1605,6 +1785,7 @@ type GetMetricDataV2Input struct {
 	// [AI Tool Invocation Success Rate]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#ai-tool-invocation-success-rate
 	// [Average holds]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#average-holds
 	// [Bot conversations completed]: https://docs.aws.amazon.com/connect/latest/adminguide/bot-metrics.html#bot-conversations-completed
+	// [Evaluated successful sale rate]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#evaluated-successful-sale-rate
 	// [Agent non-response without customer abandons]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#agent-non-response-without-customer-abandons
 	// [Service level X]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#service-level
 	// [Recipients interacted]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#recipients-interacted
@@ -1612,6 +1793,7 @@ type GetMetricDataV2Input struct {
 	// [Average messages]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#average-messages
 	// [Agent idle time]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#agent-idle-time
 	// [Average customer message length]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#average-customer-message-length
+	// [Evaluated churn propensity rate]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#evaluated-churn-propensity-rate
 	// [Adherent time]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#adherent-time
 	// [Average talk time]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#average-talk-time
 	// [Average after contact work time]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#after-contact-work-time
@@ -1666,6 +1848,7 @@ type GetMetricDataV2Input struct {
 	// [Proactive Intent Response Rate]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#proactive-intents-response-rate
 	// [Average non-talk time]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#average-non-talk-time
 	// [Conversations abandoned]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#conversations-abandoned
+	// [Create an evaluation form]: https://docs.aws.amazon.com/connect/latest/adminguide/create-evaluation-forms.html
 	// [Average agent messages]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#average-agent-messages
 	// [Flows started]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#flows-started
 	// [Average contacts per case]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#average-contacts-per-case
@@ -1682,10 +1865,12 @@ type GetMetricDataV2Input struct {
 	// [Agent average contact first response wait time]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#agent-average-contact-first-response-wait-time
 	// [Online time]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#online-time
 	// [Knowledge Content References]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#knowledge-content-references
+	// [Evaluated self-service resolution rate]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#evaluated-self-service-resolution-rate
 	// [Agent interaction time]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#agent-interaction-time
 	// [Recipients targeted]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#recipients-targeted
 	// [Average agent interruptions]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#average-agent-interruptions
 	// [Average AI Tool Invocation Latency]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#average-ai-tool-invocation-latency
+	// [Evaluated partial self-service resolution rate]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#evaluated-partial-self-service-resolution-rate
 	// [Average dials per minute]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#average-dials-per-minute
 	// [Delivery attempt disposition rate]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#delivery-attempt-disposition-rate
 	// [Contact disconnected]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#contact-disconnected
@@ -1766,10 +1951,11 @@ type GetMetricDataV2Input struct {
 	// FLOWS_MODULE_RESOURCE_ID | FLOW_ACTION_ID | FLOW_TYPE | FLOWS_OUTCOME_TYPE |
 	// FORM_VERSION | INITIATION_METHOD | INVOKING_RESOURCE_PUBLISHED_TIMESTAMP |
 	// INVOKING_RESOURCE_TYPE | KNOWLEDGE_ARTICLE_NAME | KNOWLEDGE_BASE_NAME |
-	// PARENT_FLOWS_RESOURCE_ID | Q_CONNECT_ENABLED | QUEUE |
-	// RESOURCE_PUBLISHED_TIMESTAMP | ROUTING_PROFILE | ROUTING_STEP_EXPRESSION |
-	// SESSION_ID | TEST_CASE | TEST_CASE_EXECUTION_FAILURE_REASON |
-	// TEST_CASE_INVOCATION_METHOD | WEB_NOTIFICATION_TYPE
+	// LIFETIME_VALUE | PARENT_FLOWS_RESOURCE_ID | Q_CONNECT_ENABLED | QUEUE |
+	// REPEAT_CALLER | RESOURCE_PUBLISHED_TIMESTAMP | ROUTING_PROFILE |
+	// ROUTING_STEP_EXPRESSION | SESSION_ID | TEST_CASE |
+	// TEST_CASE_EXECUTION_FAILURE_REASON | TEST_CASE_INVOCATION_METHOD |
+	// WEB_NOTIFICATION_TYPE
 	//
 	// AI_PROMPT_NAME_VERSION and KNOWLEDGE_ARTICLE_NAME are valid groupings but not
 	// valid filters.

@@ -1133,6 +1133,30 @@ func serializeTagList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types
 	s.CloseList()
 }
 
+func serializeWafRuleList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.WafRule) {
+	if v == nil {
+		return
+	}
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializeWafStatusCodeList(s smithy.ShapeSerializer, schema *smithy.Schema, v []int32) {
+	if v == nil {
+		return
+	}
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteInt32(schema.ListMember(), int32(vv))
+	}
+	s.CloseList()
+}
+
 func deserializeAccessKeyList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.AccessKey) error {
 	*v = make([]types.AccessKey, 0)
 	var vv types.AccessKey
@@ -3084,6 +3108,49 @@ func deserializeTagList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types
 
 		vv = types.Tag{}
 		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeWafRuleList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.WafRule) error {
+	*v = make([]types.WafRule, 0)
+	var vv types.WafRule
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.WafRule
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = types.WafRule{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeWafStatusCodeList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]int32) error {
+	*v = make([]int32, 0)
+	var vv int32
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero int32
+			*v = append(*v, zero)
+			return nil
+		}
+
+		if err := d.ReadInt32(s.ListMember(), &vv); err != nil {
 			return err
 		}
 

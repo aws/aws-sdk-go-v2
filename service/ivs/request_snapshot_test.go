@@ -363,8 +363,9 @@ func TestCheckRequestSnapshot_CreateChannel(t *testing.T) {
 			Policy:            types.MultitrackPolicy("ALLOW"),
 			MaximumResolution: types.MultitrackMaximumResolution("SD"),
 		},
-		ContainerFormat:    types.ContainerFormat("TS"),
-		AdConfigurationArn: ptr.String("__AdConfigurationArn__"),
+		ContainerFormat:               types.ContainerFormat("TS"),
+		AdConfigurationArn:            ptr.String("__AdConfigurationArn__"),
+		FailoverSlateConfigurationArn: ptr.String("__FailoverSlateConfigurationArn__"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -385,6 +386,39 @@ func TestCheckRequestSnapshot_CreateChannel(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateChannel"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_CreateFailoverSlateConfiguration(t *testing.T) {
+	input := &CreateFailoverSlateConfigurationInput{
+		Name:                       ptr.String("__Name__"),
+		ActivationThresholdSeconds: ptr.Int32(1),
+		MinSlateDisplaySeconds:     ptr.Int32(1),
+		MaxSlateDisplaySeconds:     ptr.Int32(1),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.CreateFailoverSlateConfiguration(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateFailoverSlateConfiguration"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -564,6 +598,33 @@ func TestCheckRequestSnapshot_DeleteChannel(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_DeleteFailoverSlateConfiguration(t *testing.T) {
+	input := &DeleteFailoverSlateConfigurationInput{
+		Arn: ptr.String("__Arn__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DeleteFailoverSlateConfiguration(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteFailoverSlateConfiguration"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_DeletePlaybackKeyPair(t *testing.T) {
 	input := &DeletePlaybackKeyPairInput{
 		Arn: ptr.String("__Arn__"),
@@ -722,6 +783,33 @@ func TestCheckRequestSnapshot_GetChannel(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetChannel"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_GetFailoverSlateConfiguration(t *testing.T) {
+	input := &GetFailoverSlateConfigurationInput{
+		Arn: ptr.String("__Arn__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.GetFailoverSlateConfiguration(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetFailoverSlateConfiguration"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -978,12 +1066,13 @@ func TestCheckRequestSnapshot_ListAdConfigurations(t *testing.T) {
 
 func TestCheckRequestSnapshot_ListChannels(t *testing.T) {
 	input := &ListChannelsInput{
-		FilterByName:                         ptr.String("__FilterByName__"),
-		FilterByRecordingConfigurationArn:    ptr.String("__FilterByRecordingConfigurationArn__"),
-		FilterByPlaybackRestrictionPolicyArn: ptr.String("__FilterByPlaybackRestrictionPolicyArn__"),
-		FilterByAdConfigurationArn:           ptr.String("__FilterByAdConfigurationArn__"),
-		NextToken:                            ptr.String("__NextToken__"),
-		MaxResults:                           ptr.Int32(1),
+		FilterByName:                          ptr.String("__FilterByName__"),
+		FilterByRecordingConfigurationArn:     ptr.String("__FilterByRecordingConfigurationArn__"),
+		FilterByPlaybackRestrictionPolicyArn:  ptr.String("__FilterByPlaybackRestrictionPolicyArn__"),
+		FilterByAdConfigurationArn:            ptr.String("__FilterByAdConfigurationArn__"),
+		FilterByFailoverSlateConfigurationArn: ptr.String("__FilterByFailoverSlateConfigurationArn__"),
+		NextToken:                             ptr.String("__NextToken__"),
+		MaxResults:                            ptr.Int32(1),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -1004,6 +1093,34 @@ func TestCheckRequestSnapshot_ListChannels(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListChannels"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_ListFailoverSlateConfigurations(t *testing.T) {
+	input := &ListFailoverSlateConfigurationsInput{
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListFailoverSlateConfigurations(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListFailoverSlateConfigurations"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -1409,8 +1526,9 @@ func TestCheckRequestSnapshot_UpdateChannel(t *testing.T) {
 			Policy:            types.MultitrackPolicy("ALLOW"),
 			MaximumResolution: types.MultitrackMaximumResolution("SD"),
 		},
-		ContainerFormat:    types.ContainerFormat("TS"),
-		AdConfigurationArn: ptr.String("__AdConfigurationArn__"),
+		ContainerFormat:               types.ContainerFormat("TS"),
+		AdConfigurationArn:            ptr.String("__AdConfigurationArn__"),
+		FailoverSlateConfigurationArn: ptr.String("__FailoverSlateConfigurationArn__"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -1431,6 +1549,37 @@ func TestCheckRequestSnapshot_UpdateChannel(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateChannel"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_UpdateFailoverSlateConfiguration(t *testing.T) {
+	input := &UpdateFailoverSlateConfigurationInput{
+		Arn:                        ptr.String("__Arn__"),
+		Name:                       ptr.String("__Name__"),
+		ActivationThresholdSeconds: ptr.Int32(1),
+		MinSlateDisplaySeconds:     ptr.Int32(1),
+		MaxSlateDisplaySeconds:     ptr.Int32(1),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.UpdateFailoverSlateConfiguration(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateFailoverSlateConfiguration"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -1629,8 +1778,9 @@ func TestUpdateRequestSnapshot_CreateChannel(t *testing.T) {
 			Policy:            types.MultitrackPolicy("ALLOW"),
 			MaximumResolution: types.MultitrackMaximumResolution("SD"),
 		},
-		ContainerFormat:    types.ContainerFormat("TS"),
-		AdConfigurationArn: ptr.String("__AdConfigurationArn__"),
+		ContainerFormat:               types.ContainerFormat("TS"),
+		AdConfigurationArn:            ptr.String("__AdConfigurationArn__"),
+		FailoverSlateConfigurationArn: ptr.String("__FailoverSlateConfigurationArn__"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -1651,6 +1801,39 @@ func TestUpdateRequestSnapshot_CreateChannel(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateChannel"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_CreateFailoverSlateConfiguration(t *testing.T) {
+	input := &CreateFailoverSlateConfigurationInput{
+		Name:                       ptr.String("__Name__"),
+		ActivationThresholdSeconds: ptr.Int32(1),
+		MinSlateDisplaySeconds:     ptr.Int32(1),
+		MaxSlateDisplaySeconds:     ptr.Int32(1),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.CreateFailoverSlateConfiguration(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateFailoverSlateConfiguration"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -1830,6 +2013,33 @@ func TestUpdateRequestSnapshot_DeleteChannel(t *testing.T) {
 	}
 }
 
+func TestUpdateRequestSnapshot_DeleteFailoverSlateConfiguration(t *testing.T) {
+	input := &DeleteFailoverSlateConfigurationInput{
+		Arn: ptr.String("__Arn__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DeleteFailoverSlateConfiguration(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteFailoverSlateConfiguration"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_DeletePlaybackKeyPair(t *testing.T) {
 	input := &DeletePlaybackKeyPairInput{
 		Arn: ptr.String("__Arn__"),
@@ -1988,6 +2198,33 @@ func TestUpdateRequestSnapshot_GetChannel(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetChannel"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_GetFailoverSlateConfiguration(t *testing.T) {
+	input := &GetFailoverSlateConfigurationInput{
+		Arn: ptr.String("__Arn__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.GetFailoverSlateConfiguration(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetFailoverSlateConfiguration"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -2244,12 +2481,13 @@ func TestUpdateRequestSnapshot_ListAdConfigurations(t *testing.T) {
 
 func TestUpdateRequestSnapshot_ListChannels(t *testing.T) {
 	input := &ListChannelsInput{
-		FilterByName:                         ptr.String("__FilterByName__"),
-		FilterByRecordingConfigurationArn:    ptr.String("__FilterByRecordingConfigurationArn__"),
-		FilterByPlaybackRestrictionPolicyArn: ptr.String("__FilterByPlaybackRestrictionPolicyArn__"),
-		FilterByAdConfigurationArn:           ptr.String("__FilterByAdConfigurationArn__"),
-		NextToken:                            ptr.String("__NextToken__"),
-		MaxResults:                           ptr.Int32(1),
+		FilterByName:                          ptr.String("__FilterByName__"),
+		FilterByRecordingConfigurationArn:     ptr.String("__FilterByRecordingConfigurationArn__"),
+		FilterByPlaybackRestrictionPolicyArn:  ptr.String("__FilterByPlaybackRestrictionPolicyArn__"),
+		FilterByAdConfigurationArn:            ptr.String("__FilterByAdConfigurationArn__"),
+		FilterByFailoverSlateConfigurationArn: ptr.String("__FilterByFailoverSlateConfigurationArn__"),
+		NextToken:                             ptr.String("__NextToken__"),
+		MaxResults:                            ptr.Int32(1),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -2270,6 +2508,34 @@ func TestUpdateRequestSnapshot_ListChannels(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListChannels"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_ListFailoverSlateConfigurations(t *testing.T) {
+	input := &ListFailoverSlateConfigurationsInput{
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListFailoverSlateConfigurations(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListFailoverSlateConfigurations"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -2675,8 +2941,9 @@ func TestUpdateRequestSnapshot_UpdateChannel(t *testing.T) {
 			Policy:            types.MultitrackPolicy("ALLOW"),
 			MaximumResolution: types.MultitrackMaximumResolution("SD"),
 		},
-		ContainerFormat:    types.ContainerFormat("TS"),
-		AdConfigurationArn: ptr.String("__AdConfigurationArn__"),
+		ContainerFormat:               types.ContainerFormat("TS"),
+		AdConfigurationArn:            ptr.String("__AdConfigurationArn__"),
+		FailoverSlateConfigurationArn: ptr.String("__FailoverSlateConfigurationArn__"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -2697,6 +2964,37 @@ func TestUpdateRequestSnapshot_UpdateChannel(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateChannel"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_UpdateFailoverSlateConfiguration(t *testing.T) {
+	input := &UpdateFailoverSlateConfigurationInput{
+		Arn:                        ptr.String("__Arn__"),
+		Name:                       ptr.String("__Name__"),
+		ActivationThresholdSeconds: ptr.Int32(1),
+		MinSlateDisplaySeconds:     ptr.Int32(1),
+		MaxSlateDisplaySeconds:     ptr.Int32(1),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.UpdateFailoverSlateConfiguration(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateFailoverSlateConfiguration"); err != nil {
 		t.Fatal(err)
 	}
 }

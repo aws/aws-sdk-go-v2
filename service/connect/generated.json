@@ -371,6 +371,7 @@
         "api_op_UpdateMetricContent.go",
         "api_op_UpdateMetricMetadata.go",
         "api_op_UpdateNotificationContent.go",
+        "api_op_UpdateOutboundEmailContactMessage.go",
         "api_op_UpdateParticipantAuthentication.go",
         "api_op_UpdateParticipantRoleConfig.go",
         "api_op_UpdatePhoneNumber.go",

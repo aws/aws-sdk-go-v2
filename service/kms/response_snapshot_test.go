@@ -288,6 +288,10 @@ func TestCheckResponseSnapshot_CreateKey(t *testing.T) {
 				types.KeyAgreementAlgorithmSpec("ECDH"),
 				types.KeyAgreementAlgorithmSpec("ECDH"),
 			},
+			EncapsulationAlgorithms: []types.EncapsulationAlgorithmSpec{
+				types.EncapsulationAlgorithmSpec("ML_KEM"),
+				types.EncapsulationAlgorithmSpec("ML_KEM"),
+			},
 			MultiRegion: ptr.Bool(true),
 			MultiRegionConfiguration: &types.MultiRegionConfiguration{
 				MultiRegionKeyType: types.MultiRegionKeyType("PRIMARY"),
@@ -352,6 +356,38 @@ func TestCheckResponseSnapshot_CreateKey(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "CreateKey.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_Decapsulate(t *testing.T) {
+	want := &DecapsulateOutput{
+		KeyId:                  ptr.String("__KeyId__"),
+		SharedSecret:           []byte("blob"),
+		EncapsulationAlgorithm: types.EncapsulationAlgorithmSpec("ML_KEM"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("Decapsulate.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.Decapsulate(context.Background(), &DecapsulateInput{
+		KeyId:                      ptr.String("__KeyId__"),
+		SharedSecretCiphertextBlob: []byte("blob"),
+		EncapsulationAlgorithm:     types.EncapsulationAlgorithmSpec("ML_KEM"),
+		GrantTokens: []string{
+			"__Member__",
+			"__Member__",
+		},
+		DryRun: ptr.Bool(true),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "Decapsulate.response", err)
 	}
 }
 
@@ -602,6 +638,10 @@ func TestCheckResponseSnapshot_DescribeKey(t *testing.T) {
 				types.KeyAgreementAlgorithmSpec("ECDH"),
 				types.KeyAgreementAlgorithmSpec("ECDH"),
 			},
+			EncapsulationAlgorithms: []types.EncapsulationAlgorithmSpec{
+				types.EncapsulationAlgorithmSpec("ML_KEM"),
+				types.EncapsulationAlgorithmSpec("ML_KEM"),
+			},
 			MultiRegion: ptr.Bool(true),
 			MultiRegionConfiguration: &types.MultiRegionConfiguration{
 				MultiRegionKeyType: types.MultiRegionKeyType("PRIMARY"),
@@ -757,6 +797,38 @@ func TestCheckResponseSnapshot_EnableKeyRotation(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "EnableKeyRotation.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_Encapsulate(t *testing.T) {
+	want := &EncapsulateOutput{
+		KeyId:                      ptr.String("__KeyId__"),
+		SharedSecret:               []byte("blob"),
+		SharedSecretCiphertextBlob: []byte("blob"),
+		EncapsulationAlgorithm:     types.EncapsulationAlgorithmSpec("ML_KEM"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("Encapsulate.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.Encapsulate(context.Background(), &EncapsulateInput{
+		KeyId:                  ptr.String("__KeyId__"),
+		EncapsulationAlgorithm: types.EncapsulationAlgorithmSpec("ML_KEM"),
+		GrantTokens: []string{
+			"__Member__",
+			"__Member__",
+		},
+		DryRun: ptr.Bool(true),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "Encapsulate.response", err)
 	}
 }
 
@@ -1139,6 +1211,10 @@ func TestCheckResponseSnapshot_GetPublicKey(t *testing.T) {
 		KeyAgreementAlgorithms: []types.KeyAgreementAlgorithmSpec{
 			types.KeyAgreementAlgorithmSpec("ECDH"),
 			types.KeyAgreementAlgorithmSpec("ECDH"),
+		},
+		EncapsulationAlgorithms: []types.EncapsulationAlgorithmSpec{
+			types.EncapsulationAlgorithmSpec("ML_KEM"),
+			types.EncapsulationAlgorithmSpec("ML_KEM"),
 		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("GetPublicKey.response")
@@ -1648,6 +1724,10 @@ func TestCheckResponseSnapshot_ReplicateKey(t *testing.T) {
 			KeyAgreementAlgorithms: []types.KeyAgreementAlgorithmSpec{
 				types.KeyAgreementAlgorithmSpec("ECDH"),
 				types.KeyAgreementAlgorithmSpec("ECDH"),
+			},
+			EncapsulationAlgorithms: []types.EncapsulationAlgorithmSpec{
+				types.EncapsulationAlgorithmSpec("ML_KEM"),
+				types.EncapsulationAlgorithmSpec("ML_KEM"),
 			},
 			MultiRegion: ptr.Bool(true),
 			MultiRegionConfiguration: &types.MultiRegionConfiguration{
@@ -2770,26 +2850,15 @@ func TestCheckResponseSnapshot_Error_InvalidCiphertextException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.Decrypt(context.Background(), &DecryptInput{
-		CiphertextBlob: []byte("blob"),
-		EncryptionContext: map[string]string{
-			"key0": "__Value__",
-		},
+	_, opErr := svc.Decapsulate(context.Background(), &DecapsulateInput{
+		KeyId:                      ptr.String("__KeyId__"),
+		SharedSecretCiphertextBlob: []byte("blob"),
+		EncapsulationAlgorithm:     types.EncapsulationAlgorithmSpec("ML_KEM"),
 		GrantTokens: []string{
 			"__Member__",
 			"__Member__",
 		},
-		KeyId:               ptr.String("__KeyId__"),
-		EncryptionAlgorithm: types.EncryptionAlgorithmSpec("SYMMETRIC_DEFAULT"),
-		Recipient: &types.RecipientInfo{
-			KeyEncryptionAlgorithm: types.KeyEncryptionMechanism("RSAES_OAEP_SHA_256"),
-			AttestationDocument:    []byte("blob"),
-		},
 		DryRun: ptr.Bool(true),
-		DryRunModifiers: []types.DryRunModifierType{
-			types.DryRunModifierType("IGNORE_CIPHERTEXT"),
-			types.DryRunModifierType("IGNORE_CIPHERTEXT"),
-		},
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
@@ -2931,26 +3000,15 @@ func TestCheckResponseSnapshot_Error_InvalidKeyUsageException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.Decrypt(context.Background(), &DecryptInput{
-		CiphertextBlob: []byte("blob"),
-		EncryptionContext: map[string]string{
-			"key0": "__Value__",
-		},
+	_, opErr := svc.Decapsulate(context.Background(), &DecapsulateInput{
+		KeyId:                      ptr.String("__KeyId__"),
+		SharedSecretCiphertextBlob: []byte("blob"),
+		EncapsulationAlgorithm:     types.EncapsulationAlgorithmSpec("ML_KEM"),
 		GrantTokens: []string{
 			"__Member__",
 			"__Member__",
 		},
-		KeyId:               ptr.String("__KeyId__"),
-		EncryptionAlgorithm: types.EncryptionAlgorithmSpec("SYMMETRIC_DEFAULT"),
-		Recipient: &types.RecipientInfo{
-			KeyEncryptionAlgorithm: types.KeyEncryptionMechanism("RSAES_OAEP_SHA_256"),
-			AttestationDocument:    []byte("blob"),
-		},
 		DryRun: ptr.Bool(true),
-		DryRunModifiers: []types.DryRunModifierType{
-			types.DryRunModifierType("IGNORE_CIPHERTEXT"),
-			types.DryRunModifierType("IGNORE_CIPHERTEXT"),
-		},
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
@@ -3131,26 +3189,15 @@ func TestCheckResponseSnapshot_Error_KeyUnavailableException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.Decrypt(context.Background(), &DecryptInput{
-		CiphertextBlob: []byte("blob"),
-		EncryptionContext: map[string]string{
-			"key0": "__Value__",
-		},
+	_, opErr := svc.Decapsulate(context.Background(), &DecapsulateInput{
+		KeyId:                      ptr.String("__KeyId__"),
+		SharedSecretCiphertextBlob: []byte("blob"),
+		EncapsulationAlgorithm:     types.EncapsulationAlgorithmSpec("ML_KEM"),
 		GrantTokens: []string{
 			"__Member__",
 			"__Member__",
 		},
-		KeyId:               ptr.String("__KeyId__"),
-		EncryptionAlgorithm: types.EncryptionAlgorithmSpec("SYMMETRIC_DEFAULT"),
-		Recipient: &types.RecipientInfo{
-			KeyEncryptionAlgorithm: types.KeyEncryptionMechanism("RSAES_OAEP_SHA_256"),
-			AttestationDocument:    []byte("blob"),
-		},
 		DryRun: ptr.Bool(true),
-		DryRunModifiers: []types.DryRunModifierType{
-			types.DryRunModifierType("IGNORE_CIPHERTEXT"),
-			types.DryRunModifierType("IGNORE_CIPHERTEXT"),
-		},
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")

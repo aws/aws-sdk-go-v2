@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"destinationEndpointArn":"__DestinationEndpointArn__","destinationEndpointName":"__DestinationEndpointName__","sourceEndpointArn":"__SourceEndpointArn__","sourceEndpointName":"__SourceEndpointName__"}

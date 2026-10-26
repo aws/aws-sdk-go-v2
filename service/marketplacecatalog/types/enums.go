@@ -685,6 +685,56 @@ func (SortOrder) Values() []SortOrder {
 	}
 }
 
+type SubsidiaryAuthorizationSortBy string
+
+// Enum values for SubsidiaryAuthorizationSortBy
+const (
+	SubsidiaryAuthorizationSortByEntityId            SubsidiaryAuthorizationSortBy = "EntityId"
+	SubsidiaryAuthorizationSortByStatus              SubsidiaryAuthorizationSortBy = "Status"
+	SubsidiaryAuthorizationSortByResourceId          SubsidiaryAuthorizationSortBy = "ResourceId"
+	SubsidiaryAuthorizationSortBySubsidiaryAccountId SubsidiaryAuthorizationSortBy = "SubsidiaryAccountId"
+	SubsidiaryAuthorizationSortByCreatedDate         SubsidiaryAuthorizationSortBy = "CreatedDate"
+	SubsidiaryAuthorizationSortByLastModifiedDate    SubsidiaryAuthorizationSortBy = "LastModifiedDate"
+)
+
+// Values returns all known values for SubsidiaryAuthorizationSortBy. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (SubsidiaryAuthorizationSortBy) Values() []SubsidiaryAuthorizationSortBy {
+	return []SubsidiaryAuthorizationSortBy{
+		"EntityId",
+		"Status",
+		"ResourceId",
+		"SubsidiaryAccountId",
+		"CreatedDate",
+		"LastModifiedDate",
+	}
+}
+
+type SubsidiaryAuthorizationStatusString string
+
+// Enum values for SubsidiaryAuthorizationStatusString
+const (
+	SubsidiaryAuthorizationStatusStringDraft      SubsidiaryAuthorizationStatusString = "Draft"
+	SubsidiaryAuthorizationStatusStringActive     SubsidiaryAuthorizationStatusString = "Active"
+	SubsidiaryAuthorizationStatusStringRestricted SubsidiaryAuthorizationStatusString = "Restricted"
+)
+
+// Values returns all known values for SubsidiaryAuthorizationStatusString. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (SubsidiaryAuthorizationStatusString) Values() []SubsidiaryAuthorizationStatusString {
+	return []SubsidiaryAuthorizationStatusString{
+		"Draft",
+		"Active",
+		"Restricted",
+	}
+}
+
 type ValidationExceptionReason string
 
 // Enum values for ValidationExceptionReason

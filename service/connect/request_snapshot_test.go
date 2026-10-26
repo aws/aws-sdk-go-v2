@@ -15001,6 +15001,18 @@ func TestCheckRequestSnapshot_UpdateContact(t *testing.T) {
 			Type:    types.EndpointType("TELEPHONE_NUMBER"),
 			Address: ptr.String("__Address__"),
 		},
+		AdditionalRecipients: &types.NullableAdditionalRecipients{
+			CcEmailAddresses: []types.EmailAddressInfo{
+				{
+					EmailAddress: ptr.String("__EmailAddress__"),
+					DisplayName:  ptr.String("__DisplayName__"),
+				},
+				{
+					EmailAddress: ptr.String("__EmailAddress__"),
+					DisplayName:  ptr.String("__DisplayName__"),
+				},
+			},
+		},
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -16757,6 +16769,41 @@ func TestCheckRequestSnapshot_UpdateNotificationContent(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateNotificationContent"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_UpdateOutboundEmailContactMessage(t *testing.T) {
+	input := &UpdateOutboundEmailContactMessageInput{
+		InstanceId: ptr.String("__InstanceId__"),
+		ContactId:  ptr.String("__ContactId__"),
+		EmailMessage: &types.UpdateOutboundEmailContent{
+			MessageSourceType: types.UpdateOutboundEmailMessageSourceType("RAW"),
+			RawMessage: &types.UpdateOutboundRawMessage{
+				Body:        ptr.String("__Body__"),
+				ContentType: ptr.String("__ContentType__"),
+			},
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.UpdateOutboundEmailContactMessage(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateOutboundEmailContactMessage"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -33577,6 +33624,18 @@ func TestUpdateRequestSnapshot_UpdateContact(t *testing.T) {
 			Type:    types.EndpointType("TELEPHONE_NUMBER"),
 			Address: ptr.String("__Address__"),
 		},
+		AdditionalRecipients: &types.NullableAdditionalRecipients{
+			CcEmailAddresses: []types.EmailAddressInfo{
+				{
+					EmailAddress: ptr.String("__EmailAddress__"),
+					DisplayName:  ptr.String("__DisplayName__"),
+				},
+				{
+					EmailAddress: ptr.String("__EmailAddress__"),
+					DisplayName:  ptr.String("__DisplayName__"),
+				},
+			},
+		},
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -35333,6 +35392,41 @@ func TestUpdateRequestSnapshot_UpdateNotificationContent(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateNotificationContent"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_UpdateOutboundEmailContactMessage(t *testing.T) {
+	input := &UpdateOutboundEmailContactMessageInput{
+		InstanceId: ptr.String("__InstanceId__"),
+		ContactId:  ptr.String("__ContactId__"),
+		EmailMessage: &types.UpdateOutboundEmailContent{
+			MessageSourceType: types.UpdateOutboundEmailMessageSourceType("RAW"),
+			RawMessage: &types.UpdateOutboundRawMessage{
+				Body:        ptr.String("__Body__"),
+				ContentType: ptr.String("__ContentType__"),
+			},
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.UpdateOutboundEmailContactMessage(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateOutboundEmailContactMessage"); err != nil {
 		t.Fatal(err)
 	}
 }

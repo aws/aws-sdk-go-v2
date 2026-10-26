@@ -28,7 +28,6 @@ func (c *Client) ListSessionsForWorker(ctx context.Context, params *ListSessions
 	return out, nil
 }
 
-// Shared pagination fields for List operation inputs (nextToken + maxResults).
 type ListSessionsForWorkerInput struct {
 
 	// The farm ID for the session.
@@ -80,7 +79,6 @@ func (v *ListSessionsForWorkerInput) SerializeMembers(s smithy.ShapeSerializer) 
 	}
 }
 
-// Shared pagination field for List operation outputs (nextToken).
 type ListSessionsForWorkerOutput struct {
 
 	// The sessions in the response.

@@ -47,6 +47,11 @@ type UpdateChannelInput struct {
 	// containerFormat may be set to TS or FRAGMENTED_MP4 . Default: TS .
 	ContainerFormat types.ContainerFormat
 
+	// Failover-slate-configuration ARN. A valid ARN value here both specifies the ARN
+	// and enables failover slate. If this is set to an empty string, failover slate
+	// configuration is disabled.
+	FailoverSlateConfigurationArn *string
+
 	// Whether the channel allows insecure RTMP and SRT ingest. Default: false .
 	InsecureIngest bool
 
@@ -105,6 +110,9 @@ func (v *UpdateChannelInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ContainerFormat != "" {
 		s.WriteString(schemas.UpdateChannelRequest_containerFormat, string(v.ContainerFormat))
 	}
+	if v.FailoverSlateConfigurationArn != nil {
+		s.WriteString(schemas.UpdateChannelRequest_failoverSlateConfigurationArn, *v.FailoverSlateConfigurationArn)
+	}
 	if v.InsecureIngest != false {
 		s.WriteBool(schemas.UpdateChannelRequest_insecureIngest, v.InsecureIngest)
 	}
@@ -150,6 +158,9 @@ func (v *UpdateChannelInput) Deserialize(d smithy.ShapeDeserializer) error {
 			}
 			v.ContainerFormat = types.ContainerFormat(ev)
 			return nil
+		case schemas.UpdateChannelRequest_failoverSlateConfigurationArn:
+			v.FailoverSlateConfigurationArn = new(string)
+			return d.ReadString(schemas.UpdateChannelRequest_failoverSlateConfigurationArn, v.FailoverSlateConfigurationArn)
 		case schemas.UpdateChannelRequest_insecureIngest:
 			return d.ReadBool(schemas.UpdateChannelRequest_insecureIngest, &v.InsecureIngest)
 		case schemas.UpdateChannelRequest_latencyMode:

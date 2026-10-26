@@ -916,11 +916,6 @@ var ___doubleMin1Max65535 = smithy.NewSchema(smithy.ShapeID{
 	Name:      "__doubleMin1Max65535",
 }, smithy.ShapeTypeDouble, 0)
 
-var ___doubleMin250Max5000 = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.medialive",
-	Name:      "__doubleMin250Max5000",
-}, smithy.ShapeTypeDouble, 0)
-
 var ___doubleMin32Max46 = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.medialive",
 	Name:      "__doubleMin32Max46",
@@ -2738,6 +2733,11 @@ var AuthenticationScheme_AKAMAI *smithy.Schema
 
 var AuthenticationScheme_COMMON *smithy.Schema
 
+var AutoFilterSettings = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.medialive",
+	Name:      "AutoFilterSettings",
+}, smithy.ShapeTypeStructure, 0)
+
 var AutomaticInputFailoverSettings = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.medialive",
 	Name:      "AutomaticInputFailoverSettings",
@@ -2771,6 +2771,16 @@ var Av1ColorSpaceSettings_Rec601Settings *smithy.Schema
 var Av1ColorSpaceSettings_Rec709Settings *smithy.Schema
 
 var Av1ColorSpaceSettings_Hlg2020Settings *smithy.Schema
+
+var Av1FilterSettings = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.medialive",
+	Name:      "Av1FilterSettings",
+}, smithy.ShapeTypeStructure, 3)
+var Av1FilterSettings_AutoFilterSettings *smithy.Schema
+
+var Av1FilterSettings_NoneFilterSettings *smithy.Schema
+
+var Av1FilterSettings_PerceptualFilterSettings *smithy.Schema
 
 var Av1GopSizeUnits = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.medialive",
@@ -2843,7 +2853,7 @@ var Av1SceneChangeDetect_ENABLED *smithy.Schema
 var Av1Settings = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.medialive",
 	Name:      "Av1Settings",
-}, smithy.ShapeTypeStructure, 24)
+}, smithy.ShapeTypeStructure, 25)
 var Av1Settings_AfdSignaling *smithy.Schema
 
 var Av1Settings_BufSize *smithy.Schema
@@ -2891,6 +2901,8 @@ var Av1Settings_TemporalAq *smithy.Schema
 var Av1Settings_TimecodeInsertion *smithy.Schema
 
 var Av1Settings_BitDepth *smithy.Schema
+
+var Av1Settings_FilterSettings *smithy.Schema
 
 var Av1SpatialAq = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.medialive",
@@ -5093,6 +5105,14 @@ var H264AdaptiveQuantization_MEDIUM *smithy.Schema
 
 var H264AdaptiveQuantization_OFF *smithy.Schema
 
+var H264AllowExplicitWeightedPrediction = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.medialive",
+	Name:      "H264AllowExplicitWeightedPrediction",
+}, smithy.ShapeTypeEnum, 2)
+var H264AllowExplicitWeightedPrediction_DISABLED *smithy.Schema
+
+var H264AllowExplicitWeightedPrediction_ENABLED *smithy.Schema
+
 var H264ColorMetadata = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.medialive",
 	Name:      "H264ColorMetadata",
@@ -5122,10 +5142,16 @@ var H264EntropyEncoding_CAVLC *smithy.Schema
 var H264FilterSettings = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.medialive",
 	Name:      "H264FilterSettings",
-}, smithy.ShapeTypeStructure, 2)
+}, smithy.ShapeTypeStructure, 5)
 var H264FilterSettings_TemporalFilterSettings *smithy.Schema
 
 var H264FilterSettings_BandwidthReductionFilterSettings *smithy.Schema
+
+var H264FilterSettings_AutoFilterSettings *smithy.Schema
+
+var H264FilterSettings_NoneFilterSettings *smithy.Schema
+
+var H264FilterSettings_PerceptualFilterSettings *smithy.Schema
 
 var H264FlickerAq = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.medialive",
@@ -5278,7 +5304,7 @@ var H264SceneChangeDetect_ENABLED *smithy.Schema
 var H264Settings = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.medialive",
 	Name:      "H264Settings",
-}, smithy.ShapeTypeStructure, 44)
+}, smithy.ShapeTypeStructure, 45)
 var H264Settings_AdaptiveQuantization *smithy.Schema
 
 var H264Settings_AfdSignaling *smithy.Schema
@@ -5366,6 +5392,8 @@ var H264Settings_TimecodeBurninSettings *smithy.Schema
 var H264Settings_MinQp *smithy.Schema
 
 var H264Settings_MinBitrate *smithy.Schema
+
+var H264Settings_AllowExplicitWeightedPrediction *smithy.Schema
 
 var H264SpatialAq = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.medialive",
@@ -5468,10 +5496,16 @@ var H265Deblocking_ENABLED *smithy.Schema
 var H265FilterSettings = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.medialive",
 	Name:      "H265FilterSettings",
-}, smithy.ShapeTypeStructure, 2)
+}, smithy.ShapeTypeStructure, 5)
 var H265FilterSettings_TemporalFilterSettings *smithy.Schema
 
 var H265FilterSettings_BandwidthReductionFilterSettings *smithy.Schema
+
+var H265FilterSettings_AutoFilterSettings *smithy.Schema
+
+var H265FilterSettings_NoneFilterSettings *smithy.Schema
+
+var H265FilterSettings_PerceptualFilterSettings *smithy.Schema
 
 var H265FlickerAq = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.medialive",
@@ -8523,6 +8557,11 @@ var NodeState_DEREGISTRATION_FAILED *smithy.Schema
 
 var NodeState_DEREGISTERED *smithy.Schema
 
+var NoneFilterSettings = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.medialive",
+	Name:      "NoneFilterSettings",
+}, smithy.ShapeTypeStructure, 0)
+
 var NotFoundException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.medialive",
 	Name:      "NotFoundException",
@@ -8712,6 +8751,20 @@ var PauseStateScheduleActionSettings = smithy.NewSchema(smithy.ShapeID{
 	Name:      "PauseStateScheduleActionSettings",
 }, smithy.ShapeTypeStructure, 1)
 var PauseStateScheduleActionSettings_Pipelines *smithy.Schema
+
+var PerceptualFilterSettings = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.medialive",
+	Name:      "PerceptualFilterSettings",
+}, smithy.ShapeTypeStructure, 1)
+var PerceptualFilterSettings_Strength *smithy.Schema
+
+var PerceptualFilterStrength = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.medialive",
+	Name:      "PerceptualFilterStrength",
+}, smithy.ShapeTypeEnum, 2)
+var PerceptualFilterStrength_STRENGTH_1 *smithy.Schema
+
+var PerceptualFilterStrength_STRENGTH_2 *smithy.Schema
 
 var PipelineDetail = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.medialive",
@@ -17074,7 +17127,7 @@ func init() {
 
 	___listOfOutputLocationRef_member = ___listOfOutputLocationRef.AddMember("member", OutputLocationRef)
 
-	AbWatermarkingCustomProfile_EmbeddingFrequency = AbWatermarkingCustomProfile.AddMember("EmbeddingFrequency", ___doubleMin250Max5000, &smithytraits.JSONName{Name: "embeddingFrequency"})
+	AbWatermarkingCustomProfile_EmbeddingFrequency = AbWatermarkingCustomProfile.AddMember("EmbeddingFrequency", ___double, &smithytraits.JSONName{Name: "embeddingFrequency"})
 
 	AbWatermarkingCustomProfile_SceneCut = AbWatermarkingCustomProfile.AddMember("SceneCut", ___doubleMinNegative1Max5, &smithytraits.JSONName{Name: "sceneCut"})
 
@@ -18000,9 +18053,21 @@ func init() {
 
 	BandwidthReductionFilterSettings_Strength = BandwidthReductionFilterSettings.AddMember("Strength", BandwidthReductionFilterStrength, &smithytraits.JSONName{Name: "strength"})
 
+	PerceptualFilterStrength_STRENGTH_1 = PerceptualFilterStrength.AddMember("STRENGTH_1", smithyprelude.Unit)
+
+	PerceptualFilterStrength_STRENGTH_2 = PerceptualFilterStrength.AddMember("STRENGTH_2", smithyprelude.Unit)
+
+	PerceptualFilterSettings_Strength = PerceptualFilterSettings.AddMember("Strength", PerceptualFilterStrength, &smithytraits.JSONName{Name: "strength"})
+
 	H264FilterSettings_TemporalFilterSettings = H264FilterSettings.AddMember("TemporalFilterSettings", TemporalFilterSettings, &smithytraits.JSONName{Name: "temporalFilterSettings"})
 
 	H264FilterSettings_BandwidthReductionFilterSettings = H264FilterSettings.AddMember("BandwidthReductionFilterSettings", BandwidthReductionFilterSettings, &smithytraits.JSONName{Name: "bandwidthReductionFilterSettings"})
+
+	H264FilterSettings_AutoFilterSettings = H264FilterSettings.AddMember("AutoFilterSettings", AutoFilterSettings, &smithytraits.JSONName{Name: "autoFilterSettings"})
+
+	H264FilterSettings_NoneFilterSettings = H264FilterSettings.AddMember("NoneFilterSettings", NoneFilterSettings, &smithytraits.JSONName{Name: "noneFilterSettings"})
+
+	H264FilterSettings_PerceptualFilterSettings = H264FilterSettings.AddMember("PerceptualFilterSettings", PerceptualFilterSettings, &smithytraits.JSONName{Name: "perceptualFilterSettings"})
 
 	FixedAfd_AFD_0000 = FixedAfd.AddMember("AFD_0000", smithyprelude.Unit)
 
@@ -18142,6 +18207,10 @@ func init() {
 
 	H264TimecodeInsertionBehavior_PIC_TIMING_SEI = H264TimecodeInsertionBehavior.AddMember("PIC_TIMING_SEI", smithyprelude.Unit)
 
+	H264AllowExplicitWeightedPrediction_DISABLED = H264AllowExplicitWeightedPrediction.AddMember("DISABLED", smithyprelude.Unit)
+
+	H264AllowExplicitWeightedPrediction_ENABLED = H264AllowExplicitWeightedPrediction.AddMember("ENABLED", smithyprelude.Unit)
+
 	H264Settings_AdaptiveQuantization = H264Settings.AddMember("AdaptiveQuantization", H264AdaptiveQuantization, &smithytraits.JSONName{Name: "adaptiveQuantization"})
 
 	H264Settings_AfdSignaling = H264Settings.AddMember("AfdSignaling", AfdSignaling, &smithytraits.JSONName{Name: "afdSignaling"})
@@ -18230,6 +18299,8 @@ func init() {
 
 	H264Settings_MinBitrate = H264Settings.AddMember("MinBitrate", ___integerMin0, &smithytraits.JSONName{Name: "minBitrate"})
 
+	H264Settings_AllowExplicitWeightedPrediction = H264Settings.AddMember("AllowExplicitWeightedPrediction", H264AllowExplicitWeightedPrediction, &smithytraits.JSONName{Name: "allowExplicitWeightedPrediction"})
+
 	H265AdaptiveQuantization_AUTO = H265AdaptiveQuantization.AddMember("AUTO", smithyprelude.Unit)
 
 	H265AdaptiveQuantization_HIGH = H265AdaptiveQuantization.AddMember("HIGH", smithyprelude.Unit)
@@ -18267,6 +18338,12 @@ func init() {
 	H265FilterSettings_TemporalFilterSettings = H265FilterSettings.AddMember("TemporalFilterSettings", TemporalFilterSettings, &smithytraits.JSONName{Name: "temporalFilterSettings"})
 
 	H265FilterSettings_BandwidthReductionFilterSettings = H265FilterSettings.AddMember("BandwidthReductionFilterSettings", BandwidthReductionFilterSettings, &smithytraits.JSONName{Name: "bandwidthReductionFilterSettings"})
+
+	H265FilterSettings_AutoFilterSettings = H265FilterSettings.AddMember("AutoFilterSettings", AutoFilterSettings, &smithytraits.JSONName{Name: "autoFilterSettings"})
+
+	H265FilterSettings_NoneFilterSettings = H265FilterSettings.AddMember("NoneFilterSettings", NoneFilterSettings, &smithytraits.JSONName{Name: "noneFilterSettings"})
+
+	H265FilterSettings_PerceptualFilterSettings = H265FilterSettings.AddMember("PerceptualFilterSettings", PerceptualFilterSettings, &smithytraits.JSONName{Name: "perceptualFilterSettings"})
 
 	H265FlickerAq_DISABLED = H265FlickerAq.AddMember("DISABLED", smithyprelude.Unit)
 
@@ -18596,6 +18673,12 @@ func init() {
 
 	Av1BitDepth_DEPTH_8 = Av1BitDepth.AddMember("DEPTH_8", smithyprelude.Unit)
 
+	Av1FilterSettings_AutoFilterSettings = Av1FilterSettings.AddMember("AutoFilterSettings", AutoFilterSettings, &smithytraits.JSONName{Name: "autoFilterSettings"})
+
+	Av1FilterSettings_NoneFilterSettings = Av1FilterSettings.AddMember("NoneFilterSettings", NoneFilterSettings, &smithytraits.JSONName{Name: "noneFilterSettings"})
+
+	Av1FilterSettings_PerceptualFilterSettings = Av1FilterSettings.AddMember("PerceptualFilterSettings", PerceptualFilterSettings, &smithytraits.JSONName{Name: "perceptualFilterSettings"})
+
 	Av1Settings_AfdSignaling = Av1Settings.AddMember("AfdSignaling", AfdSignaling, &smithytraits.JSONName{Name: "afdSignaling"})
 
 	Av1Settings_BufSize = Av1Settings.AddMember("BufSize", ___integerMin50000Max24000000, &smithytraits.JSONName{Name: "bufSize"})
@@ -18643,6 +18726,8 @@ func init() {
 	Av1Settings_TimecodeInsertion = Av1Settings.AddMember("TimecodeInsertion", Av1TimecodeInsertionBehavior, &smithytraits.JSONName{Name: "timecodeInsertion"})
 
 	Av1Settings_BitDepth = Av1Settings.AddMember("BitDepth", Av1BitDepth, &smithytraits.JSONName{Name: "bitDepth"})
+
+	Av1Settings_FilterSettings = Av1Settings.AddMember("FilterSettings", Av1FilterSettings, &smithytraits.JSONName{Name: "filterSettings"})
 
 	VideoCodecSettings_FrameCaptureSettings = VideoCodecSettings.AddMember("FrameCaptureSettings", FrameCaptureSettings, &smithytraits.JSONName{Name: "frameCaptureSettings"})
 

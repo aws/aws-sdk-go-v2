@@ -546,6 +546,15 @@ func TestUpdateResponseSnapshot_GetTaxRegistration(t *testing.T) {
 				MonacoAdditionalInfo: &types.MonacoAdditionalInfo{
 					BusinessNumber: ptr.String("__BusinessNumber__"),
 				},
+				GermanyAdditionalInfo: &types.GermanyAdditionalInfo{
+					EconomicIdentificationNumber: ptr.String("__EconomicIdentificationNumber__"),
+					Steuernummer:                 ptr.String("__Steuernummer__"),
+				},
+				MexicoAdditionalInfo: &types.MexicoAdditionalInfo{
+					TaxRegime:         ptr.String("__TaxRegime__"),
+					TaxRegimeFullName: ptr.String("__TaxRegimeFullName__"),
+					CfdiUsageCode:     ptr.String("__CfdiUsageCode__"),
+				},
 			},
 			LegalAddress: &types.Address{
 				AddressLine1:     ptr.String("__AddressLine1__"),
@@ -877,6 +886,15 @@ func TestUpdateResponseSnapshot_ListTaxRegistrations(t *testing.T) {
 						MonacoAdditionalInfo: &types.MonacoAdditionalInfo{
 							BusinessNumber: ptr.String("__BusinessNumber__"),
 						},
+						GermanyAdditionalInfo: &types.GermanyAdditionalInfo{
+							EconomicIdentificationNumber: ptr.String("__EconomicIdentificationNumber__"),
+							Steuernummer:                 ptr.String("__Steuernummer__"),
+						},
+						MexicoAdditionalInfo: &types.MexicoAdditionalInfo{
+							TaxRegime:         ptr.String("__TaxRegime__"),
+							TaxRegimeFullName: ptr.String("__TaxRegimeFullName__"),
+							CfdiUsageCode:     ptr.String("__CfdiUsageCode__"),
+						},
 					},
 					Jurisdiction: &types.Jurisdiction{
 						StateOrRegion: ptr.String("__StateOrRegion__"),
@@ -1037,6 +1055,15 @@ func TestUpdateResponseSnapshot_ListTaxRegistrations(t *testing.T) {
 						},
 						MonacoAdditionalInfo: &types.MonacoAdditionalInfo{
 							BusinessNumber: ptr.String("__BusinessNumber__"),
+						},
+						GermanyAdditionalInfo: &types.GermanyAdditionalInfo{
+							EconomicIdentificationNumber: ptr.String("__EconomicIdentificationNumber__"),
+							Steuernummer:                 ptr.String("__Steuernummer__"),
+						},
+						MexicoAdditionalInfo: &types.MexicoAdditionalInfo{
+							TaxRegime:         ptr.String("__TaxRegime__"),
+							TaxRegimeFullName: ptr.String("__TaxRegimeFullName__"),
+							CfdiUsageCode:     ptr.String("__CfdiUsageCode__"),
 						},
 					},
 					Jurisdiction: &types.Jurisdiction{

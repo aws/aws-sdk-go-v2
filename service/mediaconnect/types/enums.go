@@ -198,6 +198,116 @@ func (DesiredState) Values() []DesiredState {
 	}
 }
 
+type DestinationEndpointConnectionState string
+
+// Enum values for DestinationEndpointConnectionState
+const (
+	DestinationEndpointConnectionStateConnected     DestinationEndpointConnectionState = "CONNECTED"
+	DestinationEndpointConnectionStateDisconnected  DestinationEndpointConnectionState = "DISCONNECTED"
+	DestinationEndpointConnectionStateConnecting    DestinationEndpointConnectionState = "CONNECTING"
+	DestinationEndpointConnectionStateDisconnecting DestinationEndpointConnectionState = "DISCONNECTING"
+)
+
+// Values returns all known values for DestinationEndpointConnectionState. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (DestinationEndpointConnectionState) Values() []DestinationEndpointConnectionState {
+	return []DestinationEndpointConnectionState{
+		"CONNECTED",
+		"DISCONNECTED",
+		"CONNECTING",
+		"DISCONNECTING",
+	}
+}
+
+type DestinationEndpointNetworkingType string
+
+// Enum values for DestinationEndpointNetworkingType
+const (
+	DestinationEndpointNetworkingTypePublic DestinationEndpointNetworkingType = "PUBLIC"
+	DestinationEndpointNetworkingTypeVpc    DestinationEndpointNetworkingType = "VPC"
+)
+
+// Values returns all known values for DestinationEndpointNetworkingType. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (DestinationEndpointNetworkingType) Values() []DestinationEndpointNetworkingType {
+	return []DestinationEndpointNetworkingType{
+		"PUBLIC",
+		"VPC",
+	}
+}
+
+type DestinationEndpointProtocol string
+
+// Enum values for DestinationEndpointProtocol
+const (
+	DestinationEndpointProtocolRtp         DestinationEndpointProtocol = "RTP"
+	DestinationEndpointProtocolRist        DestinationEndpointProtocol = "RIST"
+	DestinationEndpointProtocolSrtCaller   DestinationEndpointProtocol = "SRT_CALLER"
+	DestinationEndpointProtocolSrtListener DestinationEndpointProtocol = "SRT_LISTENER"
+)
+
+// Values returns all known values for DestinationEndpointProtocol. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (DestinationEndpointProtocol) Values() []DestinationEndpointProtocol {
+	return []DestinationEndpointProtocol{
+		"RTP",
+		"RIST",
+		"SRT_CALLER",
+		"SRT_LISTENER",
+	}
+}
+
+type DestinationEndpointRegistrationState string
+
+// Enum values for DestinationEndpointRegistrationState
+const (
+	DestinationEndpointRegistrationStateRegistered         DestinationEndpointRegistrationState = "REGISTERED"
+	DestinationEndpointRegistrationStateRegistering        DestinationEndpointRegistrationState = "REGISTERING"
+	DestinationEndpointRegistrationStateDeregistering      DestinationEndpointRegistrationState = "DEREGISTERING"
+	DestinationEndpointRegistrationStateRegistrationFailed DestinationEndpointRegistrationState = "REGISTRATION_FAILED"
+)
+
+// Values returns all known values for DestinationEndpointRegistrationState. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (DestinationEndpointRegistrationState) Values() []DestinationEndpointRegistrationState {
+	return []DestinationEndpointRegistrationState{
+		"REGISTERED",
+		"REGISTERING",
+		"DEREGISTERING",
+		"REGISTRATION_FAILED",
+	}
+}
+
+type DestinationEndpointType string
+
+// Enum values for DestinationEndpointType
+const (
+	DestinationEndpointTypeStandard    DestinationEndpointType = "STANDARD"
+	DestinationEndpointTypeRouterInput DestinationEndpointType = "ROUTER_INPUT"
+)
+
+// Values returns all known values for DestinationEndpointType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (DestinationEndpointType) Values() []DestinationEndpointType {
+	return []DestinationEndpointType{
+		"STANDARD",
+		"ROUTER_INPUT",
+	}
+}
+
 type DurationUnits string
 
 // Enum values for DurationUnits
@@ -273,6 +383,68 @@ func (EncodingProfile) Values() []EncodingProfile {
 	return []EncodingProfile{
 		"DISTRIBUTION_H264_DEFAULT",
 		"CONTRIBUTION_H264_DEFAULT",
+	}
+}
+
+type EndpointEncryptionSecretType string
+
+// Enum values for EndpointEncryptionSecretType
+const (
+	EndpointEncryptionSecretTypeAes128Key     EndpointEncryptionSecretType = "AES_128_KEY"
+	EndpointEncryptionSecretTypeAes192Key     EndpointEncryptionSecretType = "AES_192_KEY"
+	EndpointEncryptionSecretTypeAes256Key     EndpointEncryptionSecretType = "AES_256_KEY"
+	EndpointEncryptionSecretTypeSrtPassphrase EndpointEncryptionSecretType = "SRT_PASSPHRASE"
+)
+
+// Values returns all known values for EndpointEncryptionSecretType. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (EndpointEncryptionSecretType) Values() []EndpointEncryptionSecretType {
+	return []EndpointEncryptionSecretType{
+		"AES_128_KEY",
+		"AES_192_KEY",
+		"AES_256_KEY",
+		"SRT_PASSPHRASE",
+	}
+}
+
+type EndpointEncryptionType string
+
+// Enum values for EndpointEncryptionType
+const (
+	EndpointEncryptionTypeSecretsManager EndpointEncryptionType = "SECRETS_MANAGER"
+	EndpointEncryptionTypeAutomatic      EndpointEncryptionType = "AUTOMATIC"
+)
+
+// Values returns all known values for EndpointEncryptionType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (EndpointEncryptionType) Values() []EndpointEncryptionType {
+	return []EndpointEncryptionType{
+		"SECRETS_MANAGER",
+		"AUTOMATIC",
+	}
+}
+
+type EndpointLifecycle string
+
+// Enum values for EndpointLifecycle
+const (
+	EndpointLifecycleManaged   EndpointLifecycle = "MANAGED"
+	EndpointLifecycleUnmanaged EndpointLifecycle = "UNMANAGED"
+)
+
+// Values returns all known values for EndpointLifecycle. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (EndpointLifecycle) Values() []EndpointLifecycle {
+	return []EndpointLifecycle{
+		"MANAGED",
+		"UNMANAGED",
 	}
 }
 
@@ -808,6 +980,44 @@ func (ReservationState) Values() []ReservationState {
 	}
 }
 
+type ResourceShareOwnership string
+
+// Enum values for ResourceShareOwnership
+const (
+	ResourceShareOwnershipOwned    ResourceShareOwnership = "OWNED"
+	ResourceShareOwnershipConsumed ResourceShareOwnership = "CONSUMED"
+)
+
+// Values returns all known values for ResourceShareOwnership. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ResourceShareOwnership) Values() []ResourceShareOwnership {
+	return []ResourceShareOwnership{
+		"OWNED",
+		"CONSUMED",
+	}
+}
+
+type ResourceShareState string
+
+// Enum values for ResourceShareState
+const (
+	ResourceShareStateShared   ResourceShareState = "SHARED"
+	ResourceShareStateUnshared ResourceShareState = "UNSHARED"
+)
+
+// Values returns all known values for ResourceShareState. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ResourceShareState) Values() []ResourceShareState {
+	return []ResourceShareState{
+		"SHARED",
+		"UNSHARED",
+	}
+}
+
 type ResourceType string
 
 // Enum values for ResourceType
@@ -950,11 +1160,12 @@ type RouterInputType string
 
 // Enum values for RouterInputType
 const (
-	RouterInputTypeStandard         RouterInputType = "STANDARD"
-	RouterInputTypeFailover         RouterInputType = "FAILOVER"
-	RouterInputTypeMerge            RouterInputType = "MERGE"
-	RouterInputTypeMediaconnectFlow RouterInputType = "MEDIACONNECT_FLOW"
-	RouterInputTypeMedialiveChannel RouterInputType = "MEDIALIVE_CHANNEL"
+	RouterInputTypeStandard            RouterInputType = "STANDARD"
+	RouterInputTypeFailover            RouterInputType = "FAILOVER"
+	RouterInputTypeMerge               RouterInputType = "MERGE"
+	RouterInputTypeMediaconnectFlow    RouterInputType = "MEDIACONNECT_FLOW"
+	RouterInputTypeMedialiveChannel    RouterInputType = "MEDIALIVE_CHANNEL"
+	RouterInputTypeDestinationEndpoint RouterInputType = "DESTINATION_ENDPOINT"
 )
 
 // Values returns all known values for RouterInputType. Note that this can be
@@ -968,6 +1179,7 @@ func (RouterInputType) Values() []RouterInputType {
 		"MERGE",
 		"MEDIACONNECT_FLOW",
 		"MEDIALIVE_CHANNEL",
+		"DESTINATION_ENDPOINT",
 	}
 }
 
@@ -1130,6 +1342,7 @@ const (
 	RouterOutputTypeStandard         RouterOutputType = "STANDARD"
 	RouterOutputTypeMediaconnectFlow RouterOutputType = "MEDIACONNECT_FLOW"
 	RouterOutputTypeMedialiveInput   RouterOutputType = "MEDIALIVE_INPUT"
+	RouterOutputTypeSourceEndpoint   RouterOutputType = "SOURCE_ENDPOINT"
 )
 
 // Values returns all known values for RouterOutputType. Note that this can be
@@ -1141,6 +1354,7 @@ func (RouterOutputType) Values() []RouterOutputType {
 		"STANDARD",
 		"MEDIACONNECT_FLOW",
 		"MEDIALIVE_INPUT",
+		"SOURCE_ENDPOINT",
 	}
 }
 
@@ -1181,6 +1395,116 @@ func (ScanMode) Values() []ScanMode {
 		"progressive",
 		"interlace",
 		"progressive-segmented-frame",
+	}
+}
+
+type SourceEndpointConnectionState string
+
+// Enum values for SourceEndpointConnectionState
+const (
+	SourceEndpointConnectionStateConnected     SourceEndpointConnectionState = "CONNECTED"
+	SourceEndpointConnectionStateDisconnected  SourceEndpointConnectionState = "DISCONNECTED"
+	SourceEndpointConnectionStateConnecting    SourceEndpointConnectionState = "CONNECTING"
+	SourceEndpointConnectionStateDisconnecting SourceEndpointConnectionState = "DISCONNECTING"
+)
+
+// Values returns all known values for SourceEndpointConnectionState. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (SourceEndpointConnectionState) Values() []SourceEndpointConnectionState {
+	return []SourceEndpointConnectionState{
+		"CONNECTED",
+		"DISCONNECTED",
+		"CONNECTING",
+		"DISCONNECTING",
+	}
+}
+
+type SourceEndpointNetworkingType string
+
+// Enum values for SourceEndpointNetworkingType
+const (
+	SourceEndpointNetworkingTypePublic SourceEndpointNetworkingType = "PUBLIC"
+	SourceEndpointNetworkingTypeVpc    SourceEndpointNetworkingType = "VPC"
+)
+
+// Values returns all known values for SourceEndpointNetworkingType. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (SourceEndpointNetworkingType) Values() []SourceEndpointNetworkingType {
+	return []SourceEndpointNetworkingType{
+		"PUBLIC",
+		"VPC",
+	}
+}
+
+type SourceEndpointProtocol string
+
+// Enum values for SourceEndpointProtocol
+const (
+	SourceEndpointProtocolRtp         SourceEndpointProtocol = "RTP"
+	SourceEndpointProtocolRist        SourceEndpointProtocol = "RIST"
+	SourceEndpointProtocolSrtCaller   SourceEndpointProtocol = "SRT_CALLER"
+	SourceEndpointProtocolSrtListener SourceEndpointProtocol = "SRT_LISTENER"
+)
+
+// Values returns all known values for SourceEndpointProtocol. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (SourceEndpointProtocol) Values() []SourceEndpointProtocol {
+	return []SourceEndpointProtocol{
+		"RTP",
+		"RIST",
+		"SRT_CALLER",
+		"SRT_LISTENER",
+	}
+}
+
+type SourceEndpointRegistrationState string
+
+// Enum values for SourceEndpointRegistrationState
+const (
+	SourceEndpointRegistrationStateRegistered         SourceEndpointRegistrationState = "REGISTERED"
+	SourceEndpointRegistrationStateRegistering        SourceEndpointRegistrationState = "REGISTERING"
+	SourceEndpointRegistrationStateDeregistering      SourceEndpointRegistrationState = "DEREGISTERING"
+	SourceEndpointRegistrationStateRegistrationFailed SourceEndpointRegistrationState = "REGISTRATION_FAILED"
+)
+
+// Values returns all known values for SourceEndpointRegistrationState. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (SourceEndpointRegistrationState) Values() []SourceEndpointRegistrationState {
+	return []SourceEndpointRegistrationState{
+		"REGISTERED",
+		"REGISTERING",
+		"DEREGISTERING",
+		"REGISTRATION_FAILED",
+	}
+}
+
+type SourceEndpointType string
+
+// Enum values for SourceEndpointType
+const (
+	SourceEndpointTypeStandard     SourceEndpointType = "STANDARD"
+	SourceEndpointTypeRouterOutput SourceEndpointType = "ROUTER_OUTPUT"
+)
+
+// Values returns all known values for SourceEndpointType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (SourceEndpointType) Values() []SourceEndpointType {
+	return []SourceEndpointType{
+		"STANDARD",
+		"ROUTER_OUTPUT",
 	}
 }
 

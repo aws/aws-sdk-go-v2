@@ -2407,6 +2407,261 @@ func (v *Remediation) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
+// An object representing the progress of a replication backfill, including the
+// total, completed, and failed replication counts.
+type ReplicationBackfillProgress struct {
+
+	// The number of replications that have completed successfully.
+	//
+	// This member is required.
+	CompletedReplicationCount *int32
+
+	// The number of replications that have failed.
+	//
+	// This member is required.
+	FailedReplicationCount *int32
+
+	// The distinct failure codes for the replications that have failed. Each failure
+	// code appears at most once, regardless of how many replications failed with that
+	// code.
+	//
+	// This member is required.
+	FailureCodes []string
+
+	// The total number of replications that the backfill will perform. Each image and
+	// tag combination is counted as a single replication.
+	//
+	// This member is required.
+	TotalReplicationCount *int32
+
+	noSmithyDocumentSerde
+}
+
+func (v *ReplicationBackfillProgress) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ReplicationBackfillProgress)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ReplicationBackfillProgress) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CompletedReplicationCount != nil {
+		s.WriteInt32(schemas.ReplicationBackfillProgress_completedReplicationCount, *v.CompletedReplicationCount)
+	}
+	if v.FailedReplicationCount != nil {
+		s.WriteInt32(schemas.ReplicationBackfillProgress_failedReplicationCount, *v.FailedReplicationCount)
+	}
+	serializeReplicationErrorList(s, schemas.ReplicationBackfillProgress_failureCodes, v.FailureCodes)
+	if v.TotalReplicationCount != nil {
+		s.WriteInt32(schemas.ReplicationBackfillProgress_totalReplicationCount, *v.TotalReplicationCount)
+	}
+}
+func (v *ReplicationBackfillProgress) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ReplicationBackfillProgress, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ReplicationBackfillProgress_completedReplicationCount:
+			v.CompletedReplicationCount = new(int32)
+			return d.ReadInt32(schemas.ReplicationBackfillProgress_completedReplicationCount, v.CompletedReplicationCount)
+		case schemas.ReplicationBackfillProgress_failedReplicationCount:
+			v.FailedReplicationCount = new(int32)
+			return d.ReadInt32(schemas.ReplicationBackfillProgress_failedReplicationCount, v.FailedReplicationCount)
+		case schemas.ReplicationBackfillProgress_failureCodes:
+			return deserializeReplicationErrorList(d, schemas.ReplicationBackfillProgress_failureCodes, &v.FailureCodes)
+		case schemas.ReplicationBackfillProgress_totalReplicationCount:
+			v.TotalReplicationCount = new(int32)
+			return d.ReadInt32(schemas.ReplicationBackfillProgress_totalReplicationCount, v.TotalReplicationCount)
+		}
+		return nil
+	})
+}
+
+// An object representing the result of a single replication during a replication
+// backfill. Each image and tag combination is replicated as a single replication.
+type ReplicationBackfillResult struct {
+
+	// An object with identifying information for the image.
+	//
+	// This member is required.
+	ImageId *ImageIdentifier
+
+	// The name of the repository that contains the image.
+	//
+	// This member is required.
+	RepositoryName *string
+
+	// The replication status of the image.
+	//
+	// This member is required.
+	Status ReplicationBackfillResultStatus
+
+	// The failure code for a replication that has failed.
+	FailureCode *string
+
+	// The distinct failure codes for the images referenced by a manifest list that
+	// failed to replicate. Each failure code appears at most once, regardless of how
+	// many referenced images failed with that code. This field is present only when
+	// the image is a manifest list.
+	SubImageFailureCodes []string
+
+	noSmithyDocumentSerde
+}
+
+func (v *ReplicationBackfillResult) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ReplicationBackfillResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ReplicationBackfillResult) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FailureCode != nil {
+		s.WriteString(schemas.ReplicationBackfillResult_failureCode, *v.FailureCode)
+	}
+	if v.ImageId != nil {
+		s.WriteStruct(schemas.ReplicationBackfillResult_imageId)
+		v.ImageId.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RepositoryName != nil {
+		s.WriteString(schemas.ReplicationBackfillResult_repositoryName, *v.RepositoryName)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.ReplicationBackfillResult_status, string(v.Status))
+	}
+	serializeReplicationErrorList(s, schemas.ReplicationBackfillResult_subImageFailureCodes, v.SubImageFailureCodes)
+}
+func (v *ReplicationBackfillResult) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ReplicationBackfillResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ReplicationBackfillResult_failureCode:
+			v.FailureCode = new(string)
+			return d.ReadString(schemas.ReplicationBackfillResult_failureCode, v.FailureCode)
+		case schemas.ReplicationBackfillResult_imageId:
+			v.ImageId = &ImageIdentifier{}
+			return v.ImageId.Deserialize(d)
+		case schemas.ReplicationBackfillResult_repositoryName:
+			v.RepositoryName = new(string)
+			return d.ReadString(schemas.ReplicationBackfillResult_repositoryName, v.RepositoryName)
+		case schemas.ReplicationBackfillResult_status:
+			var ev string
+			if err := d.ReadString(schemas.ReplicationBackfillResult_status, &ev); err != nil {
+				return err
+			}
+			v.Status = ReplicationBackfillResultStatus(ev)
+			return nil
+		case schemas.ReplicationBackfillResult_subImageFailureCodes:
+			return deserializeReplicationErrorList(d, schemas.ReplicationBackfillResult_subImageFailureCodes, &v.SubImageFailureCodes)
+		}
+		return nil
+	})
+}
+
+// An object representing a summary of a replication backfill, including its
+// status, destination, progress, and start and end times.
+type ReplicationBackfillSummary struct {
+
+	// The destination Region and registry to which the images are replicated.
+	//
+	// This member is required.
+	Destination *ReplicationDestination
+
+	// The ID of the replication backfill.
+	//
+	// This member is required.
+	ReplicationBackfillId *string
+
+	// The date and time, in JavaScript date format, when the replication backfill was
+	// started.
+	//
+	// This member is required.
+	StartedAt *time.Time
+
+	// The current status of the replication backfill.
+	//
+	// This member is required.
+	Status ReplicationBackfillStatus
+
+	// The date and time, in JavaScript date format, when the replication backfill
+	// ended. This value is null while the replication backfill is still in progress.
+	EndedAt *time.Time
+
+	// The failure code for a replication backfill that has failed.
+	FailureCode *string
+
+	// The progress of the replication backfill, including the total, completed, and
+	// failed replication counts. This value is null until the replication backfill
+	// finishes preparing the set of images to replicate. It is therefore null while
+	// the replication backfill is PREPARING , and remains null if the replication
+	// backfill is stopped before preparation completes.
+	Progress *ReplicationBackfillProgress
+
+	noSmithyDocumentSerde
+}
+
+func (v *ReplicationBackfillSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ReplicationBackfillSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ReplicationBackfillSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Destination != nil {
+		s.WriteStruct(schemas.ReplicationBackfillSummary_destination)
+		v.Destination.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.EndedAt != nil {
+		s.WriteTime(schemas.ReplicationBackfillSummary_endedAt, *v.EndedAt)
+	}
+	if v.FailureCode != nil {
+		s.WriteString(schemas.ReplicationBackfillSummary_failureCode, *v.FailureCode)
+	}
+	if v.Progress != nil {
+		s.WriteStruct(schemas.ReplicationBackfillSummary_progress)
+		v.Progress.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ReplicationBackfillId != nil {
+		s.WriteString(schemas.ReplicationBackfillSummary_replicationBackfillId, *v.ReplicationBackfillId)
+	}
+	if v.StartedAt != nil {
+		s.WriteTime(schemas.ReplicationBackfillSummary_startedAt, *v.StartedAt)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.ReplicationBackfillSummary_status, string(v.Status))
+	}
+}
+func (v *ReplicationBackfillSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ReplicationBackfillSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ReplicationBackfillSummary_destination:
+			v.Destination = &ReplicationDestination{}
+			return v.Destination.Deserialize(d)
+		case schemas.ReplicationBackfillSummary_endedAt:
+			v.EndedAt = new(time.Time)
+			return d.ReadTime(schemas.ReplicationBackfillSummary_endedAt, v.EndedAt)
+		case schemas.ReplicationBackfillSummary_failureCode:
+			v.FailureCode = new(string)
+			return d.ReadString(schemas.ReplicationBackfillSummary_failureCode, v.FailureCode)
+		case schemas.ReplicationBackfillSummary_progress:
+			v.Progress = &ReplicationBackfillProgress{}
+			return v.Progress.Deserialize(d)
+		case schemas.ReplicationBackfillSummary_replicationBackfillId:
+			v.ReplicationBackfillId = new(string)
+			return d.ReadString(schemas.ReplicationBackfillSummary_replicationBackfillId, v.ReplicationBackfillId)
+		case schemas.ReplicationBackfillSummary_startedAt:
+			v.StartedAt = new(time.Time)
+			return d.ReadTime(schemas.ReplicationBackfillSummary_startedAt, v.StartedAt)
+		case schemas.ReplicationBackfillSummary_status:
+			var ev string
+			if err := d.ReadString(schemas.ReplicationBackfillSummary_status, &ev); err != nil {
+				return err
+			}
+			v.Status = ReplicationBackfillStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // The replication configuration for a registry.
 type ReplicationConfiguration struct {
 
@@ -2549,9 +2804,8 @@ type Repository struct {
 
 	// The Amazon Resource Name (ARN) that identifies the repository. The ARN contains
 	// the arn:aws:ecr namespace, followed by the region of the repository, Amazon Web
-	// Services account ID of the repository owner, repository namespace, and
-	// repository name. For example,
-	// arn:aws:ecr:region:012345678910:repository-namespace/repository-name .
+	// Services account ID of the repository owner, and repository name. For example,
+	// arn:aws:ecr:region:012345678910:repository/repository-name .
 	RepositoryArn *string
 
 	// The name of the repository.

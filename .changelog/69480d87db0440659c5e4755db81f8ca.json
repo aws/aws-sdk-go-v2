@@ -1,0 +1,8 @@
+{
+    "id": "69480d87-db04-4065-9c5e-4755db81f8ca",
+    "type": "feature",
+    "description": "Amazon SageMaker HyperPod adds the MultiNodeTrainingValidation deep health check for clusters orchestrated by Amazon EKS. It validates NVIDIA GPU instances by running a short multi-node training workload and flags instances that produce numerical errors or fall behind expected training time.",
+    "modules": [
+        "service/sagemaker"
+    ]
+}

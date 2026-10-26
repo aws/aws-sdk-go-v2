@@ -1046,6 +1046,83 @@ func TestCheckRequestSnapshot_CreateDistribution(t *testing.T) {
 				ErrorCachingMinTTL: ptr.Int64(1),
 			},
 		},
+		EnableWaf: ptr.Bool(true),
+		WafRules: []types.WafRule{
+			{
+				Name: ptr.String("__Name__"),
+				AtpConfig: &types.WafAtpConfig{
+					LoginPath:     ptr.String("__LoginPath__"),
+					PayloadType:   types.WafPayloadTypeEnum("JSON"),
+					UsernameField: ptr.String("__UsernameField__"),
+					PasswordField: ptr.String("__PasswordField__"),
+					ResponseInspection: &types.WafResponseInspection{
+						SuccessCodes: []int32{
+							1,
+							1,
+						},
+						FailureCodes: []int32{
+							1,
+							1,
+						},
+					},
+				},
+				AcfpConfig: &types.WafAcfpConfig{
+					PayloadType:          types.WafPayloadTypeEnum("JSON"),
+					CreationPath:         ptr.String("__CreationPath__"),
+					RegistrationPagePath: ptr.String("__RegistrationPagePath__"),
+					ResponseInspection: &types.WafResponseInspection{
+						SuccessCodes: []int32{
+							1,
+							1,
+						},
+						FailureCodes: []int32{
+							1,
+							1,
+						},
+					},
+				},
+				BotControlConfig: &types.WafBotControlConfig{
+					InspectionLevel: types.WafInspectionLevelEnum("COMMON"),
+				},
+			},
+			{
+				Name: ptr.String("__Name__"),
+				AtpConfig: &types.WafAtpConfig{
+					LoginPath:     ptr.String("__LoginPath__"),
+					PayloadType:   types.WafPayloadTypeEnum("JSON"),
+					UsernameField: ptr.String("__UsernameField__"),
+					PasswordField: ptr.String("__PasswordField__"),
+					ResponseInspection: &types.WafResponseInspection{
+						SuccessCodes: []int32{
+							1,
+							1,
+						},
+						FailureCodes: []int32{
+							1,
+							1,
+						},
+					},
+				},
+				AcfpConfig: &types.WafAcfpConfig{
+					PayloadType:          types.WafPayloadTypeEnum("JSON"),
+					CreationPath:         ptr.String("__CreationPath__"),
+					RegistrationPagePath: ptr.String("__RegistrationPagePath__"),
+					ResponseInspection: &types.WafResponseInspection{
+						SuccessCodes: []int32{
+							1,
+							1,
+						},
+						FailureCodes: []int32{
+							1,
+							1,
+						},
+					},
+				},
+				BotControlConfig: &types.WafBotControlConfig{
+					InspectionLevel: types.WafInspectionLevelEnum("COMMON"),
+				},
+			},
+		},
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -5307,6 +5384,83 @@ func TestCheckRequestSnapshot_UpdateDistribution(t *testing.T) {
 				ErrorCachingMinTTL: ptr.Int64(1),
 			},
 		},
+		EnableWaf: ptr.Bool(true),
+		WafRules: []types.WafRule{
+			{
+				Name: ptr.String("__Name__"),
+				AtpConfig: &types.WafAtpConfig{
+					LoginPath:     ptr.String("__LoginPath__"),
+					PayloadType:   types.WafPayloadTypeEnum("JSON"),
+					UsernameField: ptr.String("__UsernameField__"),
+					PasswordField: ptr.String("__PasswordField__"),
+					ResponseInspection: &types.WafResponseInspection{
+						SuccessCodes: []int32{
+							1,
+							1,
+						},
+						FailureCodes: []int32{
+							1,
+							1,
+						},
+					},
+				},
+				AcfpConfig: &types.WafAcfpConfig{
+					PayloadType:          types.WafPayloadTypeEnum("JSON"),
+					CreationPath:         ptr.String("__CreationPath__"),
+					RegistrationPagePath: ptr.String("__RegistrationPagePath__"),
+					ResponseInspection: &types.WafResponseInspection{
+						SuccessCodes: []int32{
+							1,
+							1,
+						},
+						FailureCodes: []int32{
+							1,
+							1,
+						},
+					},
+				},
+				BotControlConfig: &types.WafBotControlConfig{
+					InspectionLevel: types.WafInspectionLevelEnum("COMMON"),
+				},
+			},
+			{
+				Name: ptr.String("__Name__"),
+				AtpConfig: &types.WafAtpConfig{
+					LoginPath:     ptr.String("__LoginPath__"),
+					PayloadType:   types.WafPayloadTypeEnum("JSON"),
+					UsernameField: ptr.String("__UsernameField__"),
+					PasswordField: ptr.String("__PasswordField__"),
+					ResponseInspection: &types.WafResponseInspection{
+						SuccessCodes: []int32{
+							1,
+							1,
+						},
+						FailureCodes: []int32{
+							1,
+							1,
+						},
+					},
+				},
+				AcfpConfig: &types.WafAcfpConfig{
+					PayloadType:          types.WafPayloadTypeEnum("JSON"),
+					CreationPath:         ptr.String("__CreationPath__"),
+					RegistrationPagePath: ptr.String("__RegistrationPagePath__"),
+					ResponseInspection: &types.WafResponseInspection{
+						SuccessCodes: []int32{
+							1,
+							1,
+						},
+						FailureCodes: []int32{
+							1,
+							1,
+						},
+					},
+				},
+				BotControlConfig: &types.WafBotControlConfig{
+					InspectionLevel: types.WafInspectionLevelEnum("COMMON"),
+				},
+			},
+		},
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -6379,6 +6533,83 @@ func TestUpdateRequestSnapshot_CreateDistribution(t *testing.T) {
 				ResponseCode:       ptr.String("__ResponseCode__"),
 				ResponsePagePath:   ptr.String("__ResponsePagePath__"),
 				ErrorCachingMinTTL: ptr.Int64(1),
+			},
+		},
+		EnableWaf: ptr.Bool(true),
+		WafRules: []types.WafRule{
+			{
+				Name: ptr.String("__Name__"),
+				AtpConfig: &types.WafAtpConfig{
+					LoginPath:     ptr.String("__LoginPath__"),
+					PayloadType:   types.WafPayloadTypeEnum("JSON"),
+					UsernameField: ptr.String("__UsernameField__"),
+					PasswordField: ptr.String("__PasswordField__"),
+					ResponseInspection: &types.WafResponseInspection{
+						SuccessCodes: []int32{
+							1,
+							1,
+						},
+						FailureCodes: []int32{
+							1,
+							1,
+						},
+					},
+				},
+				AcfpConfig: &types.WafAcfpConfig{
+					PayloadType:          types.WafPayloadTypeEnum("JSON"),
+					CreationPath:         ptr.String("__CreationPath__"),
+					RegistrationPagePath: ptr.String("__RegistrationPagePath__"),
+					ResponseInspection: &types.WafResponseInspection{
+						SuccessCodes: []int32{
+							1,
+							1,
+						},
+						FailureCodes: []int32{
+							1,
+							1,
+						},
+					},
+				},
+				BotControlConfig: &types.WafBotControlConfig{
+					InspectionLevel: types.WafInspectionLevelEnum("COMMON"),
+				},
+			},
+			{
+				Name: ptr.String("__Name__"),
+				AtpConfig: &types.WafAtpConfig{
+					LoginPath:     ptr.String("__LoginPath__"),
+					PayloadType:   types.WafPayloadTypeEnum("JSON"),
+					UsernameField: ptr.String("__UsernameField__"),
+					PasswordField: ptr.String("__PasswordField__"),
+					ResponseInspection: &types.WafResponseInspection{
+						SuccessCodes: []int32{
+							1,
+							1,
+						},
+						FailureCodes: []int32{
+							1,
+							1,
+						},
+					},
+				},
+				AcfpConfig: &types.WafAcfpConfig{
+					PayloadType:          types.WafPayloadTypeEnum("JSON"),
+					CreationPath:         ptr.String("__CreationPath__"),
+					RegistrationPagePath: ptr.String("__RegistrationPagePath__"),
+					ResponseInspection: &types.WafResponseInspection{
+						SuccessCodes: []int32{
+							1,
+							1,
+						},
+						FailureCodes: []int32{
+							1,
+							1,
+						},
+					},
+				},
+				BotControlConfig: &types.WafBotControlConfig{
+					InspectionLevel: types.WafInspectionLevelEnum("COMMON"),
+				},
 			},
 		},
 	}
@@ -10640,6 +10871,83 @@ func TestUpdateRequestSnapshot_UpdateDistribution(t *testing.T) {
 				ResponseCode:       ptr.String("__ResponseCode__"),
 				ResponsePagePath:   ptr.String("__ResponsePagePath__"),
 				ErrorCachingMinTTL: ptr.Int64(1),
+			},
+		},
+		EnableWaf: ptr.Bool(true),
+		WafRules: []types.WafRule{
+			{
+				Name: ptr.String("__Name__"),
+				AtpConfig: &types.WafAtpConfig{
+					LoginPath:     ptr.String("__LoginPath__"),
+					PayloadType:   types.WafPayloadTypeEnum("JSON"),
+					UsernameField: ptr.String("__UsernameField__"),
+					PasswordField: ptr.String("__PasswordField__"),
+					ResponseInspection: &types.WafResponseInspection{
+						SuccessCodes: []int32{
+							1,
+							1,
+						},
+						FailureCodes: []int32{
+							1,
+							1,
+						},
+					},
+				},
+				AcfpConfig: &types.WafAcfpConfig{
+					PayloadType:          types.WafPayloadTypeEnum("JSON"),
+					CreationPath:         ptr.String("__CreationPath__"),
+					RegistrationPagePath: ptr.String("__RegistrationPagePath__"),
+					ResponseInspection: &types.WafResponseInspection{
+						SuccessCodes: []int32{
+							1,
+							1,
+						},
+						FailureCodes: []int32{
+							1,
+							1,
+						},
+					},
+				},
+				BotControlConfig: &types.WafBotControlConfig{
+					InspectionLevel: types.WafInspectionLevelEnum("COMMON"),
+				},
+			},
+			{
+				Name: ptr.String("__Name__"),
+				AtpConfig: &types.WafAtpConfig{
+					LoginPath:     ptr.String("__LoginPath__"),
+					PayloadType:   types.WafPayloadTypeEnum("JSON"),
+					UsernameField: ptr.String("__UsernameField__"),
+					PasswordField: ptr.String("__PasswordField__"),
+					ResponseInspection: &types.WafResponseInspection{
+						SuccessCodes: []int32{
+							1,
+							1,
+						},
+						FailureCodes: []int32{
+							1,
+							1,
+						},
+					},
+				},
+				AcfpConfig: &types.WafAcfpConfig{
+					PayloadType:          types.WafPayloadTypeEnum("JSON"),
+					CreationPath:         ptr.String("__CreationPath__"),
+					RegistrationPagePath: ptr.String("__RegistrationPagePath__"),
+					ResponseInspection: &types.WafResponseInspection{
+						SuccessCodes: []int32{
+							1,
+							1,
+						},
+						FailureCodes: []int32{
+							1,
+							1,
+						},
+					},
+				},
+				BotControlConfig: &types.WafBotControlConfig{
+					InspectionLevel: types.WafInspectionLevelEnum("COMMON"),
+				},
 			},
 		},
 	}

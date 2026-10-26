@@ -30,9 +30,6 @@ func (c *Client) CreateFarm(ctx context.Context, params *CreateFarmInput, optFns
 	return out, nil
 }
 
-// Shared displayName + description for Create operations where both are present.
-// displayName is @required here - this mixin is Create-only by design (Update has
-// optional displayName).
 type CreateFarmInput struct {
 
 	// The display name of the farm.
@@ -95,8 +92,6 @@ func (v *CreateFarmInput) SerializeMembers(s smithy.ShapeSerializer) {
 	serializeTags(s, schemas.CreateFarmRequest_tags, v.Tags)
 }
 
-// Mixin that adds an optional ARN field to response structures. Apply to
-// SummaryMixins (flows into Get, Summary, and BatchGet) and Create outputs.
 type CreateFarmOutput struct {
 
 	// The farm ID.

@@ -1344,6 +1344,161 @@ func (v *RegistryPolicyNotFoundException) Deserialize(d smithy.ShapeDeserializer
 	})
 }
 
+// A replication backfill is already in progress for the specified destination
+// Region. This occurs because only one replication backfill can be in progress for
+// a given destination Region at a time. Wait for the in progress backfill to reach
+// a terminal status, or stop it with the StopReplicationBackfilloperation, before starting another one.
+type ReplicationBackfillInProgressException struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *ReplicationBackfillInProgressException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *ReplicationBackfillInProgressException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *ReplicationBackfillInProgressException) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "ReplicationBackfillInProgressException"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *ReplicationBackfillInProgressException) ErrorFault() smithy.ErrorFault {
+	return smithy.FaultClient
+}
+func (v *ReplicationBackfillInProgressException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ReplicationBackfillInProgressException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ReplicationBackfillInProgressException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.ReplicationBackfillInProgressException_message, *v.Message)
+	}
+}
+func (v *ReplicationBackfillInProgressException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ReplicationBackfillInProgressException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ReplicationBackfillInProgressException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ReplicationBackfillInProgressException_message, v.Message)
+		}
+		return nil
+	})
+}
+
+// The requested operation can't be performed on the replication backfill because
+// it is not in a valid status for that operation. For example, you can't stop a
+// replication backfill that has already reached a terminal status. Use the DescribeReplicationBackfillResults
+// operation to check the current status before retrying.
+type ReplicationBackfillInvalidStatusException struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *ReplicationBackfillInvalidStatusException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *ReplicationBackfillInvalidStatusException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *ReplicationBackfillInvalidStatusException) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "ReplicationBackfillInvalidStatusException"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *ReplicationBackfillInvalidStatusException) ErrorFault() smithy.ErrorFault {
+	return smithy.FaultClient
+}
+func (v *ReplicationBackfillInvalidStatusException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ReplicationBackfillInvalidStatusException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ReplicationBackfillInvalidStatusException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.ReplicationBackfillInvalidStatusException_message, *v.Message)
+	}
+}
+func (v *ReplicationBackfillInvalidStatusException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ReplicationBackfillInvalidStatusException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ReplicationBackfillInvalidStatusException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ReplicationBackfillInvalidStatusException_message, v.Message)
+		}
+		return nil
+	})
+}
+
+// The specified replication backfill could not be found. Check the specified
+// replication backfill ID and ensure that you are operating on the correct
+// registry.
+type ReplicationBackfillNotFoundException struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *ReplicationBackfillNotFoundException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *ReplicationBackfillNotFoundException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *ReplicationBackfillNotFoundException) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "ReplicationBackfillNotFoundException"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *ReplicationBackfillNotFoundException) ErrorFault() smithy.ErrorFault {
+	return smithy.FaultClient
+}
+func (v *ReplicationBackfillNotFoundException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ReplicationBackfillNotFoundException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ReplicationBackfillNotFoundException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.ReplicationBackfillNotFoundException_message, *v.Message)
+	}
+}
+func (v *ReplicationBackfillNotFoundException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ReplicationBackfillNotFoundException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ReplicationBackfillNotFoundException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ReplicationBackfillNotFoundException_message, v.Message)
+		}
+		return nil
+	})
+}
+
 // The specified repository already exists in the specified registry.
 type RepositoryAlreadyExistsException struct {
 	Message *string

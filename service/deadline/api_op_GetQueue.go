@@ -61,8 +61,6 @@ func (v *GetQueueInput) SerializeMembers(s smithy.ShapeSerializer) {
 	}
 }
 
-// Mixin that adds an optional ARN field to response structures. Apply to
-// SummaryMixins (flows into Get, Summary, and BatchGet) and Create outputs.
 type GetQueueOutput struct {
 
 	// The date and time the resource was created.

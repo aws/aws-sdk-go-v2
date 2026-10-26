@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AmazonEC2ContainerRegistry_V20150921.DescribeReplicationBackfillResults
+
+{"destination":{"region":"__Region__","registryId":"__RegistryId__"},"endedAt":946684800,"failureCode":"__FailureCode__","nextToken":"__NextToken__","progress":{"completedReplicationCount":1,"failedReplicationCount":1,"failureCodes":["__Member__","__Member__"],"totalReplicationCount":1},"registryId":"__RegistryId__","replicationBackfillId":"__ReplicationBackfillId__","results":[{"failureCode":"__FailureCode__","imageId":{"imageDigest":"__ImageDigest__","imageTag":"__ImageTag__"},"repositoryName":"__RepositoryName__","status":"COMPLETE","subImageFailureCodes":["__Member__","__Member__"]},{"failureCode":"__FailureCode__","imageId":{"imageDigest":"__ImageDigest__","imageTag":"__ImageTag__"},"repositoryName":"__RepositoryName__","status":"COMPLETE","subImageFailureCodes":["__Member__","__Member__"]}],"startedAt":946684800,"status":"PREPARING"}

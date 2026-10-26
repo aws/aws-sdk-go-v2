@@ -1,0 +1,8 @@
+{
+    "id": "393fdff3-e286-4222-a052-ac804b4ad7d7",
+    "type": "feature",
+    "description": "This release adds Web Application Firewall (WAF) support for Lightsail distribution.",
+    "modules": [
+        "service/lightsail"
+    ]
+}

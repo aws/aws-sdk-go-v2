@@ -657,10 +657,23 @@ func TestCheckRequestSnapshot_CreateCloudExadataInfrastructure(t *testing.T) {
 func TestCheckRequestSnapshot_CreateCloudVmCluster(t *testing.T) {
 	input := &CreateCloudVmClusterInput{
 		CloudExadataInfrastructureId: ptr.String("__CloudExadataInfrastructureId__"),
-		CpuCoreCount:                 ptr.Int32(1),
-		DisplayName:                  ptr.String("__DisplayName__"),
-		GiVersion:                    ptr.String("__GiVersion__"),
-		Hostname:                     ptr.String("__Hostname__"),
+		ExascaleDbStorageVaultId:     ptr.String("__ExascaleDbStorageVaultId__"),
+		VmFileSystemStorageType:      types.VmStorageType("LOCAL"),
+		VmBackupStorageType:          types.VmStorageType("LOCAL"),
+		FileSystemConfigurationDetails: []types.FileSystemConfigurationDetails{
+			{
+				MountPoint:          ptr.String("__MountPoint__"),
+				FileSystemSizeInGBs: ptr.Int32(1),
+			},
+			{
+				MountPoint:          ptr.String("__MountPoint__"),
+				FileSystemSizeInGBs: ptr.Int32(1),
+			},
+		},
+		CpuCoreCount: ptr.Int32(1),
+		DisplayName:  ptr.String("__DisplayName__"),
+		GiVersion:    ptr.String("__GiVersion__"),
+		Hostname:     ptr.String("__Hostname__"),
 		SshPublicKeys: []string{
 			"__Member__",
 			"__Member__",
@@ -775,6 +788,7 @@ func TestCheckRequestSnapshot_CreateExascaleDbStorageVault(t *testing.T) {
 		HighCapacityDatabaseStorageTotalSizeInGBs: ptr.Int32(1),
 		AdditionalFlashCacheInPercent:             ptr.Int32(1),
 		AutoscaleLimitInGBs:                       ptr.Int32(1),
+		CloudExadataInfrastructureId:              ptr.String("__CloudExadataInfrastructureId__"),
 		AvailabilityZoneId:                        ptr.String("__AvailabilityZoneId__"),
 		AvailabilityZone:                          ptr.String("__AvailabilityZone__"),
 		Description:                               ptr.String("__Description__"),
@@ -2051,8 +2065,10 @@ func TestCheckRequestSnapshot_ListExadbVmClusters(t *testing.T) {
 
 func TestCheckRequestSnapshot_ListExascaleDbStorageVaults(t *testing.T) {
 	input := &ListExascaleDbStorageVaultsInput{
-		MaxResults: ptr.Int32(1),
-		NextToken:  ptr.String("__NextToken__"),
+		MaxResults:                   ptr.Int32(1),
+		NextToken:                    ptr.String("__NextToken__"),
+		CloudExadataInfrastructureId: ptr.String("__CloudExadataInfrastructureId__"),
+		VaultType:                    types.ExascaleDbStorageVaultType("EXASCALE_INFRASTRUCTURE"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -2861,6 +2877,35 @@ func TestCheckRequestSnapshot_UpdateExadbVmCluster(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_UpdateExascaleCloudExadataInfrastructure(t *testing.T) {
+	input := &UpdateExascaleCloudExadataInfrastructureInput{
+		CloudExadataInfrastructureId: ptr.String("__CloudExadataInfrastructureId__"),
+		TotalStorageSizeInGBs:        ptr.Int32(1),
+		TotalVmStorageSizeInGBs:      ptr.Int32(1),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.UpdateExascaleCloudExadataInfrastructure(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateExascaleCloudExadataInfrastructure"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_UpdateExascaleDbStorageVault(t *testing.T) {
 	input := &UpdateExascaleDbStorageVaultInput{
 		ExascaleDbStorageVaultId:                  ptr.String("__ExascaleDbStorageVaultId__"),
@@ -3431,10 +3476,23 @@ func TestUpdateRequestSnapshot_CreateCloudExadataInfrastructure(t *testing.T) {
 func TestUpdateRequestSnapshot_CreateCloudVmCluster(t *testing.T) {
 	input := &CreateCloudVmClusterInput{
 		CloudExadataInfrastructureId: ptr.String("__CloudExadataInfrastructureId__"),
-		CpuCoreCount:                 ptr.Int32(1),
-		DisplayName:                  ptr.String("__DisplayName__"),
-		GiVersion:                    ptr.String("__GiVersion__"),
-		Hostname:                     ptr.String("__Hostname__"),
+		ExascaleDbStorageVaultId:     ptr.String("__ExascaleDbStorageVaultId__"),
+		VmFileSystemStorageType:      types.VmStorageType("LOCAL"),
+		VmBackupStorageType:          types.VmStorageType("LOCAL"),
+		FileSystemConfigurationDetails: []types.FileSystemConfigurationDetails{
+			{
+				MountPoint:          ptr.String("__MountPoint__"),
+				FileSystemSizeInGBs: ptr.Int32(1),
+			},
+			{
+				MountPoint:          ptr.String("__MountPoint__"),
+				FileSystemSizeInGBs: ptr.Int32(1),
+			},
+		},
+		CpuCoreCount: ptr.Int32(1),
+		DisplayName:  ptr.String("__DisplayName__"),
+		GiVersion:    ptr.String("__GiVersion__"),
+		Hostname:     ptr.String("__Hostname__"),
 		SshPublicKeys: []string{
 			"__Member__",
 			"__Member__",
@@ -3549,6 +3607,7 @@ func TestUpdateRequestSnapshot_CreateExascaleDbStorageVault(t *testing.T) {
 		HighCapacityDatabaseStorageTotalSizeInGBs: ptr.Int32(1),
 		AdditionalFlashCacheInPercent:             ptr.Int32(1),
 		AutoscaleLimitInGBs:                       ptr.Int32(1),
+		CloudExadataInfrastructureId:              ptr.String("__CloudExadataInfrastructureId__"),
 		AvailabilityZoneId:                        ptr.String("__AvailabilityZoneId__"),
 		AvailabilityZone:                          ptr.String("__AvailabilityZone__"),
 		Description:                               ptr.String("__Description__"),
@@ -4825,8 +4884,10 @@ func TestUpdateRequestSnapshot_ListExadbVmClusters(t *testing.T) {
 
 func TestUpdateRequestSnapshot_ListExascaleDbStorageVaults(t *testing.T) {
 	input := &ListExascaleDbStorageVaultsInput{
-		MaxResults: ptr.Int32(1),
-		NextToken:  ptr.String("__NextToken__"),
+		MaxResults:                   ptr.Int32(1),
+		NextToken:                    ptr.String("__NextToken__"),
+		CloudExadataInfrastructureId: ptr.String("__CloudExadataInfrastructureId__"),
+		VaultType:                    types.ExascaleDbStorageVaultType("EXASCALE_INFRASTRUCTURE"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -5631,6 +5692,35 @@ func TestUpdateRequestSnapshot_UpdateExadbVmCluster(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateExadbVmCluster"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_UpdateExascaleCloudExadataInfrastructure(t *testing.T) {
+	input := &UpdateExascaleCloudExadataInfrastructureInput{
+		CloudExadataInfrastructureId: ptr.String("__CloudExadataInfrastructureId__"),
+		TotalStorageSizeInGBs:        ptr.Int32(1),
+		TotalVmStorageSizeInGBs:      ptr.Int32(1),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.UpdateExascaleCloudExadataInfrastructure(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateExascaleCloudExadataInfrastructure"); err != nil {
 		t.Fatal(err)
 	}
 }

@@ -29,7 +29,6 @@ func (c *Client) ListMemberships(ctx context.Context, params *ListMembershipsInp
 	return out, nil
 }
 
-// Shared pagination fields for List operation inputs (nextToken + maxResults).
 type ListMembershipsInput struct {
 
 	// The ID of the IAM Identity Center principal whose Deadline Cloud resource
@@ -85,7 +84,6 @@ func (v *ListMembershipsInput) SerializeMembers(s smithy.ShapeSerializer) {
 	serializeMembershipResourceTypes(s, schemas.ListMembershipsRequest_resourceTypes, v.ResourceTypes)
 }
 
-// Shared pagination field for List operation outputs (nextToken).
 type ListMembershipsOutput struct {
 
 	// The memberships associated with the specified principal.
