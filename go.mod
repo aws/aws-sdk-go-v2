@@ -1,5 +1,5 @@
 module github.com/aws/aws-sdk-go-v2
 
-require github.com/aws/smithy-go v1.28.6
+require github.com/aws/smithy-go v1.28.7
 
 go 1.24
