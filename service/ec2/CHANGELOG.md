@@ -1,3 +1,9 @@
+# v1.342.0 (2026-10-27)
+
+* **Feature**: EC2 AMIs can now show vulnerability data and be targeted directly for scanning.
+* **Dependency Update**: Update to smithy-go v1.28.7.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.341.0 (2026-10-22)
 
 * **Feature**: AWS Transit Gateway now provides managed one-to-one NAT directly on its attachments, through integration with Regional Private NAT Gateway. Use ModifyTransitGatewayAttachmentNatConfiguration to enable NAT and configure NAT rules, and GetTransitGatewayAttachmentNatConfiguration to view them.

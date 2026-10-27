@@ -1,8 +1,0 @@
-{
-    "id": "0f62bb61-68b2-4d59-9861-15a7f76c4d1e",
-    "type": "feature",
-    "description": "ECS now supports GPU sharing via NVIDIA Multi-Process Service (MPS) on ECS Managed Instances and ECS EC2, allowing multiple ECS tasks to share a single Nvidia GPU for improved utilization.",
-    "modules": [
-        "service/ecs"
-    ]
-}

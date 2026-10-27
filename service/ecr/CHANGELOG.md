@@ -1,3 +1,8 @@
+# v1.67.1 (2026-10-27)
+
+* **Dependency Update**: Update to smithy-go v1.28.7.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.67.0 (2026-10-26)
 
 * **Feature**: Add support for ECR replication backfill

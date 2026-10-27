@@ -1,8 +1,0 @@
-{
-    "id": "e338b881-62b1-489c-82bf-ecaa8a1cbede",
-    "type": "feature",
-    "description": "EC2 AMIs can now show vulnerability data and be targeted directly for scanning.",
-    "modules": [
-        "service/ec2"
-    ]
-}

@@ -3,14 +3,14 @@ module github.com/aws/aws-sdk-go-v2/service/internal/serdebenchmark/restxmldatap
 go 1.24
 
 require (
-	github.com/aws/aws-sdk-go-v2 v1.47.4
-	github.com/aws/aws-sdk-go-v2/internal/configsources v1.5.7
-	github.com/aws/aws-sdk-go-v2/internal/endpoints/v2 v2.8.7
-	github.com/aws/aws-sdk-go-v2/service/internal/checksum v1.11.8
+	github.com/aws/aws-sdk-go-v2 v1.47.5
+	github.com/aws/aws-sdk-go-v2/internal/configsources v1.5.8
+	github.com/aws/aws-sdk-go-v2/internal/endpoints/v2 v2.8.8
+	github.com/aws/aws-sdk-go-v2/service/internal/checksum v1.11.9
 	github.com/aws/smithy-go v1.28.7
 )
 
-require github.com/aws/aws-sdk-go-v2/service/internal/presigned-url v1.14.7 // indirect
+require github.com/aws/aws-sdk-go-v2/service/internal/presigned-url v1.14.8 // indirect
 
 replace github.com/aws/aws-sdk-go-v2 => ../../../../
 

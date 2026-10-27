@@ -1,3 +1,9 @@
+# v1.69.0 (2026-10-27)
+
+* **Feature**: Added the attributeUpdates parameter to the Lightsail StartInstance API, which allows customers to update the attributes of a stopped instance when starting it.
+* **Dependency Update**: Update to smithy-go v1.28.7.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.68.0 (2026-10-26)
 
 * **Feature**: This release adds Web Application Firewall (WAF) support for Lightsail distribution.

@@ -1,3 +1,8 @@
+# v1.15.1 (2026-10-27)
+
+* **Dependency Update**: Update to smithy-go v1.28.7.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.15.0 (2026-10-22)
 
 * **Feature**: Elemental Inference now supports feed scheduling, letting you apply feed configuration changes at a time you choose instead of building your own automation.

@@ -1,3 +1,9 @@
+# v1.103.0 (2026-10-27)
+
+* **Feature**: ECS now supports GPU sharing via NVIDIA Multi-Process Service (MPS) on ECS Managed Instances and ECS EC2, allowing multiple ECS tasks to share a single Nvidia GPU for improved utilization.
+* **Dependency Update**: Update to smithy-go v1.28.7.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.102.1 (2026-10-22)
 
 * **Bug Fix**: Update smithy-go to v1.28.6
