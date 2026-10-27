@@ -14875,6 +14875,20 @@
                 }
             }
         },
+        "com.amazonaws.lightsail#InstanceAttributeUpdates": {
+            "type": "structure",
+            "members": {
+                "bundleId": {
+                    "target": "com.amazonaws.lightsail#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the bundle to update the instance to.</p>\n         <p>Specify one of the following values for the bundle ID:</p>\n         <ul>\n            <li>\n               <p>\n                  <b>\n                     <code>auto</code>\n                  </b> – Updates an instance that\n          runs on a previous-generation bundle to the newer-generation equivalent of that\n          bundle. For example, specify <code>auto</code> to update an instance that runs on\n            <code>small_2_0</code> to <code>small_3_0</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Newer-generation bundle ID</b> – Updates an\n          instance that runs on a previous-generation bundle to the specified bundle. For example,\n          specify <code>small_3_0</code> to update an instance that runs on <code>small_2_0</code>\n          to <code>small_3_0</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Original bundle ID</b> – Updates an instance to\n          the previous-generation bundle that it ran on before an earlier update. For example,\n          specify <code>small_2_0</code> to return an instance that runs on <code>small_3_0</code>\n          to <code>small_2_0</code>.</p>\n            </li>\n         </ul>\n         <note>\n            <p>The instance must be in the <code>stopped</code> state to update its bundle.</p>\n            <p>There is no additional cost to update an instance to a newer-generation bundle.</p>\n         </note>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes the attributes to update on a Lightsail instance when it starts.</p>"
+            }
+        },
         "com.amazonaws.lightsail#InstanceEntry": {
             "type": "structure",
             "members": {
@@ -22792,6 +22806,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The name of the instance (a virtual private server) to start.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "attributeUpdates": {
+                    "target": "com.amazonaws.lightsail#InstanceAttributeUpdates",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An object that describes the attributes to update on the instance before it starts.</p>"
                     }
                 }
             },

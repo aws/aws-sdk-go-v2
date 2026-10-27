@@ -3262,6 +3262,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The IDs of each Neuron device assigned to the container.</p>"
                     }
+                },
+                "gpuSharingStrategy": {
+                    "target": "com.amazonaws.ecs#SharingStrategy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The GPU sharing strategy that the task definition specifies for the container. This field is present only for containers whose resource requirements include <code>sharingStrategy</code>.</p>"
+                    }
                 }
             },
             "traits": {
@@ -3737,6 +3743,12 @@
                     "target": "com.amazonaws.ecs#ContainerInstanceHealthStatus",
                     "traits": {
                         "smithy.api#documentation": "<p>An object representing the health status of the container instance.</p>"
+                    }
+                },
+                "gpuDevices": {
+                    "target": "com.amazonaws.ecs#GpuDevices",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The state of each GPU on the container instance, including its sharing mode and available memory. This field is present only for container instances that support GPU sharing.</p>"
                     }
                 }
             },
@@ -14905,10 +14917,83 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.ecs#GpuDevice": {
+            "type": "structure",
+            "members": {
+                "gpuId": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the GPU. This ID matches the GPU IDs in the <code>gpuIds</code> of the containers that Amazon ECS assigned to the GPU.</p>"
+                    }
+                },
+                "sharingMode": {
+                    "target": "com.amazonaws.ecs#GpuSharingMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>How the GPU is shared between containers.</p> <p>Valid values:</p> <ul> <li> <p> <code>IDLE</code> - No containers are assigned to the GPU, and all of its memory is available.</p> </li> <li> <p> <code>NVIDIA_MPS</code> - One or more containers share the GPU by using NVIDIA Multi-Process Service (MPS).</p> </li> <li> <p> <code>DEDICATED</code> - One container has exclusive use of the GPU.</p> </li> </ul>"
+                    }
+                },
+                "totalMemoryInMiB": {
+                    "target": "com.amazonaws.ecs#BoxedInteger",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The total amount of GPU memory, in MiB, that the Amazon ECS container agent reported for the GPU. This is the memory that's available to containers, and it can be less than the nominal memory of the GPU.</p>"
+                    }
+                },
+                "remainingMemoryInMiB": {
+                    "target": "com.amazonaws.ecs#BoxedInteger",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The amount of GPU memory, in MiB, that's available to allocate to new containers that use the <code>nvidiaMps</code> sharing strategy. Amazon ECS calculates this value from the memory that it allocated to containers on the GPU, not from the memory that the containers use.</p>"
+                    }
+                },
+                "containerCount": {
+                    "target": "com.amazonaws.ecs#BoxedInteger",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of containers that Amazon ECS assigned to the GPU. This value is <code>0</code> when the sharing mode is <code>IDLE</code> and <code>1</code> when the sharing mode is <code>DEDICATED</code>. Amazon ECS counts the containers that it assigned to the GPU, not the processes that are running on it.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The state of a GPU on a container instance, including its sharing mode and the memory that's available for new containers.</p>"
+            }
+        },
+        "com.amazonaws.ecs#GpuDevices": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ecs#GpuDevice"
+            }
+        },
         "com.amazonaws.ecs#GpuIds": {
             "type": "list",
             "member": {
                 "target": "com.amazonaws.ecs#String"
+            }
+        },
+        "com.amazonaws.ecs#GpuSharingMode": {
+            "type": "enum",
+            "members": {
+                "IDLE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>No containers are assigned to the GPU, and all of its memory is available.</p>",
+                        "smithy.api#enumValue": "IDLE"
+                    }
+                },
+                "NVIDIA_MPS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>One or more containers share the GPU by using NVIDIA Multi-Process Service (MPS). While the GPU is in this mode, Amazon ECS assigns it only to containers that use the <code>nvidiaMps</code> sharing strategy.</p>",
+                        "smithy.api#enumValue": "NVIDIA_MPS"
+                    }
+                },
+                "DEDICATED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>One container has exclusive use of the GPU. Amazon ECS assigns GPUs this way to containers that specify <code>value</code> instead of <code>sharingStrategy</code> for the <code>GPU</code> resource type.</p>",
+                        "smithy.api#enumValue": "DEDICATED"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes how a GPU on a container instance is shared between containers.</p>"
             }
         },
         "com.amazonaws.ecs#HealthCheck": {
@@ -19500,6 +19585,34 @@
                 "smithy.api#error": "client"
             }
         },
+        "com.amazonaws.ecs#NvidiaMpsAllocation": {
+            "type": "structure",
+            "members": {
+                "memory": {
+                    "target": "com.amazonaws.ecs#BoxedInteger",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The amount of GPU memory, in MiB, to allocate to the container. Amazon ECS assigns the container a GPU that has at least the specified amount of memory available, and sets the <code>CUDA_MPS_PINNED_DEVICE_MEM_LIMIT</code> environment variable in the container to limit its memory to this amount. The memory must be available on a single GPU. If more than one container in a task uses <code>nvidiaMps</code>, Amazon ECS assigns them the same GPU, which must have enough memory available for all of them.</p>",
+                        "smithy.api#range": {
+                            "min": 1
+                        },
+                        "smithy.api#required": {}
+                    }
+                },
+                "maxComputePercent": {
+                    "target": "com.amazonaws.ecs#BoxedInteger",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum percentage of the GPU's compute capacity that the container can use. Amazon ECS sets the <code>CUDA_MPS_ACTIVE_THREAD_PERCENTAGE</code> environment variable in the container to this value. This value is a limit, not a reservation.</p> <p>If you don't specify this parameter, Amazon ECS doesn't set <code>CUDA_MPS_ACTIVE_THREAD_PERCENTAGE</code>, and the active thread percentage of the MPS server on the container instance applies. By default, this is 100 percent.</p>",
+                        "smithy.api#range": {
+                            "min": 1,
+                            "max": 100
+                        }
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The GPU memory and compute limits for a container that shares a GPU by using NVIDIA Multi-Process Service (MPS). Amazon ECS assigns the container a single GPU that has enough memory available. Other containers that use MPS can share the same GPU.</p>"
+            }
+        },
         "com.amazonaws.ecs#OSFamily": {
             "type": "enum",
             "members": {
@@ -21280,8 +21393,9 @@
                 "value": {
                     "target": "com.amazonaws.ecs#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The value for the specified resource type.</p> <p>When the type is <code>GPU</code>, the value is the number of physical <code>GPUs</code> the Amazon ECS container agent reserves for the container. The number of GPUs that's reserved for all containers in a task can't exceed the number of available GPUs on the container instance that the task is launched on. You can also specify <code>ALL</code> to allocate all available GPUs on the instance to the container.</p> <p>When the type is <code>NeuronDevice</code>, the value must be <code>ALL</code>. This allocates all available Neuron devices on the instance to the container. Only one container in a task can specify <code>NeuronDevice</code> resources. This resource type is only supported on Managed Instances.</p> <p>When the type is <code>InferenceAccelerator</code>, the <code>value</code> matches the <code>deviceName</code> for an <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_InferenceAccelerator.html\">InferenceAccelerator</a> specified in a task definition.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#addedDefault": {},
+                        "smithy.api#default": "",
+                        "smithy.api#documentation": "<p>The value for the specified resource type.</p> <p>You must specify this parameter unless the type is <code>GPU</code> and you specify <code>sharingStrategy</code>.</p> <p>When the type is <code>GPU</code>, the value is the number of physical <code>GPUs</code> the Amazon ECS container agent reserves for the container. The number of GPUs that's reserved for all containers in a task can't exceed the number of available GPUs on the container instance that the task is launched on. You can also specify <code>ALL</code> to allocate all available GPUs on the instance to the container.</p> <p>When the type is <code>NeuronDevice</code>, the value must be <code>ALL</code>. This allocates all available Neuron devices on the instance to the container. Only one container in a task can specify <code>NeuronDevice</code> resources. This resource type is only supported on Managed Instances.</p> <p>When the type is <code>InferenceAccelerator</code>, the <code>value</code> matches the <code>deviceName</code> for an <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_InferenceAccelerator.html\">InferenceAccelerator</a> specified in a task definition.</p>"
                     }
                 },
                 "type": {
@@ -21289,6 +21403,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The type of resource to assign to a container. </p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "sharingStrategy": {
+                    "target": "com.amazonaws.ecs#SharingStrategy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The strategy that the container uses to share a GPU with other containers. Specify a sharing strategy only when the type is <code>GPU</code>. For a GPU resource requirement, specify either <code>value</code> or <code>sharingStrategy</code>, but not both. If you don't specify a sharing strategy, the container has exclusive use of each GPU that Amazon ECS assigns to it. The containers in a task that request GPUs must all use the same option.</p> <p>You can use GPU sharing with tasks that run on Amazon EC2 instances or Amazon ECS Managed Instances. Task definitions that require <code>EXTERNAL</code> compatibility don't support GPU sharing.</p>"
                     }
                 }
             },
@@ -23623,6 +23743,20 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.ecs#Setting"
+            }
+        },
+        "com.amazonaws.ecs#SharingStrategy": {
+            "type": "union",
+            "members": {
+                "nvidiaMps": {
+                    "target": "com.amazonaws.ecs#NvidiaMpsAllocation",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Shares a GPU between containers by using NVIDIA Multi-Process Service (MPS). You specify the GPU memory to allocate to the container and, optionally, the maximum percentage of the GPU's compute capacity that the container can use.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The strategy that a container uses to share a GPU with other containers. Specify exactly one member.</p>"
             }
         },
         "com.amazonaws.ecs#SortOrder": {

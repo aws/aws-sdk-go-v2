@@ -915,6 +915,9 @@
                     "target": "com.amazonaws.bedrockagentcorecontrol#PutResourcePolicy"
                 },
                 {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#ResetTokenVaultKeyMaterial"
+                },
+                {
                     "target": "com.amazonaws.bedrockagentcorecontrol#SetTokenVaultCMK"
                 },
                 {
@@ -9255,6 +9258,9 @@
                     "target": "com.amazonaws.bedrockagentcorecontrol#AccessDeniedException"
                 },
                 {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#ConflictException"
+                },
+                {
                     "target": "com.amazonaws.bedrockagentcorecontrol#InternalServerException"
                 },
                 {
@@ -14283,7 +14289,7 @@
                 "target": "com.amazonaws.bedrockagentcorecontrol#EvaluationDimension"
             },
             "traits": {
-                "smithy.api#documentation": "<p> The list of dimensions for an LLM-as-a-judge evaluator that uses a multi-dimensional rating scale. The service enforces a lower limit than the model's maximum; see the AgentCore Evaluation quotas for the current effective limit. </p>",
+                "smithy.api#documentation": "<p> The list of dimensions for an LLM-as-a-judge evaluator that uses a multi-dimensional rating scale. An evaluator can have up to 50 dimensions. </p>",
                 "smithy.api#length": {
                     "min": 1,
                     "max": 50
@@ -30194,6 +30200,32 @@
                 "smithy.api#documentation": "<p>Contains the output configuration for an OAuth2 provider.</p>"
             }
         },
+        "com.amazonaws.bedrockagentcorecontrol#OnBehalfOfAuthenticationConfig": {
+            "type": "structure",
+            "members": {
+                "clientAuthenticationMethod": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#OnBehalfOfClientAuthenticationMethod",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The client authentication method to use during the on-behalf-of token exchange. The <code>NO_CLIENT</code> option omits the <code>clientId</code> and <code>clientSecret</code> during the on-behalf-of token exchange with the identity provider.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies the client authentication method to use for the on-behalf-of token exchange.</p>"
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#OnBehalfOfClientAuthenticationMethod": {
+            "type": "enum",
+            "members": {
+                "NO_CLIENT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NO_CLIENT"
+                    }
+                }
+            }
+        },
         "com.amazonaws.bedrockagentcorecontrol#OnBehalfOfTokenExchangeConfigType": {
             "type": "structure",
             "members": {
@@ -30208,6 +30240,12 @@
                     "target": "com.amazonaws.bedrockagentcorecontrol#TokenExchangeGrantTypeConfigType",
                     "traits": {
                         "smithy.api#documentation": "<p>Configuration specific to the TOKEN_EXCHANGE grant type (RFC 8693).</p>"
+                    }
+                },
+                "onBehalfOfAuthenticationConfig": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#OnBehalfOfAuthenticationConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specify the client authentication configuration to use for the on-behalf-of token exchange. With this configuration, you override the provider level client authentication method for the on-behalf-of exchange with the identity provider. If you don't specify this configuration, we use the provider level client authentication method.</p>"
                     }
                 }
             },
@@ -33305,6 +33343,90 @@
                 "target": "smithy.api#String"
             }
         },
+        "com.amazonaws.bedrockagentcorecontrol#ResetTokenVaultKeyMaterial": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.bedrockagentcorecontrol#ResetTokenVaultKeyMaterialRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.bedrockagentcorecontrol#ResetTokenVaultKeyMaterialResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#UnauthorizedException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#ValidationException"
+                }
+            ],
+            "traits": {
+                "aws.api#controlPlane": {},
+                "smithy.api#documentation": "<p>Resets the key material for a token vault whose customer managed KMS key has been deleted, and re-encrypts the token vault with an Amazon Web Services managed key so that you can use the token vault again.</p> <important> <p>This operation can't be undone. The reset permanently deletes the OAuth2 access tokens and refresh tokens stored in the token vault, including tokens obtained through all supported flows. After the reset, your agents must complete these flows again to get new tokens, and for user-delegated flows your users must authorize access again. The reset doesn't delete your credential providers or their configuration.</p> </important> <p>You can reset a token vault only if its customer managed key has been deleted. If the key still exists, including when it's disabled or scheduled for deletion, this operation returns a <code>ValidationException</code>. To use the token vault again, enable the key or cancel its scheduled deletion in KMS. To switch to a different key, use <code>SetTokenVaultCMK</code>.</p>",
+                "smithy.api#http": {
+                    "uri": "/identities/reset-token-vault-key-material",
+                    "method": "POST"
+                }
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#ResetTokenVaultKeyMaterialRequest": {
+            "type": "structure",
+            "members": {
+                "tokenVaultId": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#TokenVaultIdType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the token vault to reset. To reset your account's default token vault, specify <code>default</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#ResetTokenVaultKeyMaterialResponse": {
+            "type": "structure",
+            "members": {
+                "tokenVaultId": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#TokenVaultIdType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the token vault.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "kmsConfiguration": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#KmsConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The KMS configuration for the token vault after the reset. The token vault uses an Amazon Web Services managed key.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "lastModifiedDate": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when the token vault was last modified.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.bedrockagentcorecontrol#Resource": {
             "type": "union",
             "members": {
@@ -34785,6 +34907,9 @@
                 },
                 {
                     "target": "com.amazonaws.bedrockagentcorecontrol#ConcurrentModificationException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#ConflictException"
                 },
                 {
                     "target": "com.amazonaws.bedrockagentcorecontrol#InternalServerException"
@@ -41170,6 +41295,9 @@
             "errors": [
                 {
                     "target": "com.amazonaws.bedrockagentcorecontrol#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#ConflictException"
                 },
                 {
                     "target": "com.amazonaws.bedrockagentcorecontrol#InternalServerException"
